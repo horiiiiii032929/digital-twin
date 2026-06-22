@@ -10,3 +10,7 @@ Use this folder for concise weekly research summaries.
 - Risks:
 - Decisions needed:
 - Next week:
+
+## Reports
+
+- [Week 01 Interim Report](week-01-interim.md)
