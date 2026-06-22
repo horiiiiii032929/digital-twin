@@ -1,0 +1,36 @@
+.DS_Store
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local dependency folders
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Notebook runtime state
+.ipynb_checkpoints/
+
+# Sensitive or bulky research data
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+research/03_data/consent/*
+!research/03_data/consent/README.md
+
+# Generated artifacts
+experiments/runs/*
+!experiments/runs/.gitkeep
+models/*
+!models/.gitkeep
+reports/generated/*
+!reports/generated/.gitkeep

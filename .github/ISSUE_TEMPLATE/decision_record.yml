@@ -1,0 +1,64 @@
+name: Decision Record
+description: Record a research or architecture decision for project tracking.
+title: "[Decision]: "
+projects: ["horiiiiii032929/1"]
+body:
+  - type: dropdown
+    id: decision
+    attributes:
+      label: Decision
+      options:
+        - Pending
+        - Keep
+        - Refine
+        - Go Deeper
+        - Drop
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Instructor
+        - Student
+        - AI Agent
+        - RAG
+        - Analytics
+        - Architecture
+        - Documentation
+        - Evaluation
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What problem, constraint, or observation led to this decision?
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options Considered
+      description: Summarize alternatives and tradeoffs.
+      placeholder: |
+        - Option A:
+        - Option B:
+        - Option C:
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link or summarize the evidence behind the decision.
+    validations:
+      required: true
+  - type: textarea
+    id: follow-up
+    attributes:
+      label: Follow-up
+      description: What must happen next?
+    validations:
+      required: false

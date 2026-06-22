@@ -1,0 +1,82 @@
+name: Research Task
+description: Track research, design, prototype, evaluation, or documentation work.
+title: "[Research]: "
+projects: ["horiiiiii032929/1"]
+body:
+  - type: dropdown
+    id: iteration
+    attributes:
+      label: Iteration
+      options:
+        - I1 Instructor Onboarding
+        - I2 Student Active Tutoring
+        - I3 Proactive Interaction
+        - I4 Learning Gap Report
+        - I5 Evaluation and Refinement
+    validations:
+      required: true
+  - type: dropdown
+    id: work-type
+    attributes:
+      label: Work Type
+      options:
+        - Research
+        - Design
+        - Prototype
+        - Feature
+        - Documentation
+        - Evaluation
+        - Bug
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Instructor
+        - Student
+        - AI Agent
+        - RAG
+        - Analytics
+        - Architecture
+        - Documentation
+        - Evaluation
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What outcome should this task produce?
+      placeholder: Define the smallest useful research or implementation outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: What source, experiment, user feedback, or artifact will prove progress?
+      placeholder: Link to docs, datasets, prototypes, test results, or evaluation notes.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: List concrete checks that make this task complete.
+      placeholder: |
+        - ...
+        - ...
+    validations:
+      required: true
