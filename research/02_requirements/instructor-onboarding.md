@@ -214,17 +214,6 @@ as CSRF tokens and SameSite cookies.
 - Full adaptive interview engine
 - Polished multi-page onboarding dashboard
 
-## Questions For Professor Review
-
-- Is an AI-led interview a better onboarding method than a static configuration
-  form?
-- Are the five interview questions sufficient for a first prototype?
-- Which course materials are approved for the first prototype?
-- Are lecture transcripts available and permitted for use?
-- Should the default teaching approach be balanced, more direct, or more guided?
-- Which homework-help behavior is acceptable for graded assignments?
-- Would the CSRF test cases be representative of the course's assessment risks?
-
 ## References
 
 - Shulman, L. S. (1986). Those Who Understand: Knowledge Growth in Teaching.
