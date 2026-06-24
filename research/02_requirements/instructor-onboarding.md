@@ -35,6 +35,9 @@ Supporting notes:
 - [Chat-led instructor setup flow](chat-led-instructor-setup-flow.md)
   connects Course Digital Twin setup, local source upload, AI interview,
   policy review, preview, revision, and professor-approved deployment.
+- [Chat-led response preview behavior](chat-led-response-preview-behavior.md)
+  defines how sample tutor responses are compared, reviewed, revised, and used
+  as approval evidence.
 
 ## Sprint 1 Claim
 
@@ -146,12 +149,12 @@ first prototype.
 
 ### 4. Academic Integrity Policy
 
-Default: attempt-first support.
+Default while unresolved: strict no full answers.
 
-When a student asks for direct homework or assignment answers, the tutor should
-first ask what the student has tried. It may then provide hints, guiding
-questions, or conceptual clarification. It should not complete graded work for
-the student.
+When a student asks for direct homework or assignment answers before the
+professor has configured an integrity policy, the tutor should not provide a
+complete graded-work answer. The professor can configure a less strict policy,
+such as attempt-first support, during onboarding.
 
 Later versions may let the professor configure this policy per assignment,
 topic, or assessment context.
