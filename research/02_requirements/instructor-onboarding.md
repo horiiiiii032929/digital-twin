@@ -26,6 +26,13 @@ research-backed ideas:
 - Academic boundaries: clear rules for permitted help, refusal, and redirection,
   aligned with academic-integrity and responsible GenAI guidance.
 
+Supporting notes:
+
+- [Pedagogical profile research foundations](../01_literature/pedagogical-profile-foundations.md)
+  records the implementation-facing literature notes behind these dimensions.
+- [Chat-led tutor policy extraction](chat-led-tutor-policy-extraction.md)
+  defines the Sprint 1 policy extraction contract.
+
 ## Sprint 1 Claim
 
 Generic AI tutors are not grounded in a specific instructor's pedagogical
