@@ -32,6 +32,9 @@ Supporting notes:
   records the implementation-facing literature notes behind these dimensions.
 - [Chat-led tutor policy extraction](chat-led-tutor-policy-extraction.md)
   defines the Sprint 1 policy extraction contract.
+- [Chat-led instructor setup flow](chat-led-instructor-setup-flow.md)
+  connects Course Digital Twin setup, local source upload, AI interview,
+  policy review, preview, revision, and professor-approved deployment.
 
 ## Sprint 1 Claim
 
