@@ -196,6 +196,10 @@ generic-vs-configured comparison is useful evidence, but the required outcome
 is that the professor can judge whether the AI tutor follows the generated
 policy before the Course Digital Twin is deployed.
 
+The detailed behavior contract for preview cases, policy signals, source
+limitations, and chat-based revision is defined in
+`chat-led-response-preview-behavior.md`.
+
 Decision point:
 
 - If preview behavior is acceptable, continue to final approval.
@@ -254,7 +258,7 @@ be deployed for student-facing use until:
 1. approved source permissions are resolved,
 2. private and sensitive source exclusions are resolved,
 3. knowledge source behavior is confirmed,
-4. academic-integrity behavior is confirmed,
+4. academic-integrity warnings are configured or acknowledged,
 5. sensitive data handling is confirmed,
 6. the professor has reviewed preview behavior, and
 7. the professor explicitly approves deployment.
@@ -298,5 +302,6 @@ production ingestion, backend state management, or a polished dashboard.
 
 - `research/02_requirements/instructor-onboarding.md`
 - `research/02_requirements/chat-led-tutor-policy-extraction.md`
+- `research/02_requirements/chat-led-response-preview-behavior.md`
 - `docs/privacy-and-ethics.md`
 - `docs/architecture.md`
