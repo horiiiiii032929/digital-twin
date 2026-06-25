@@ -62,22 +62,25 @@ Each field should carry one of three statuses:
 | Status | Meaning | Release impact |
 | --- | --- | --- |
 | `resolved` | The professor gave a usable answer. | Does not block release. |
-| `needs_review` | A usable default or partial answer exists, but the professor should confirm or refine it. | Does not block release. |
-| `blocks_release` | The missing or unsafe answer affects permissions, privacy, academic integrity, or final approval. | Tutor cannot be approved for student use. |
+| `needs_review` | A usable default or partial answer exists, but the professor should confirm or refine it. | Shows a warning; does not block release by itself. |
+| `blocks_release` | The missing or unsafe answer affects release-critical source behavior, permissions, privacy, or final approval. | Tutor cannot be approved for student use. |
 
 This keeps the chat productive without pretending the AI knows missing
 professor intent.
 
-## Release Blockers
+## Release Blockers And Warnings
 
-Only safety and compliance fields block approval in Sprint 1.
+Only release-critical source, safety, privacy, and approval fields block approval
+in Sprint 1. Academic-integrity behavior is still important, but unresolved
+integrity policy uses a strict safe default and shows a warning rather than
+blocking release.
 
 | Field | What the chat must learn | Safe default while unresolved | Blocks release |
 | --- | --- | --- | --- |
 | `approved_source_permissions` | Which course materials the tutor may use. | No uploaded, private, transcript, or course-owned material may be used until approved. | Yes |
 | `disallowed_private_sources` | Which materials must not be used. | Exclude private student data, consent records, raw transcripts, private forum exports, and unapproved instructor material. | Yes |
-| `knowledge_source_policy` | Whether the tutor may use only course materials, general model knowledge, or internet search. | Course-approved materials only; model knowledge and internet search disabled. | Yes |
-| `academic_integrity_policy` | What help is allowed for graded work and assessments. | Do not provide full graded-work answers; ask what the student has tried and provide only conceptual hints if allowed. | Yes |
+| `knowledge_source_policy` | Which release source strictness mode the tutor should use. | Preview may demonstrate `any_source_with_labels`, but no release mode is approved until the professor confirms it. | Yes |
+| `academic_integrity_policy` | What help is allowed for graded work and assessments. | Strict no-full-answers behavior until the professor configures a different policy. | No; warning until confirmed |
 | `sensitive_data_handling` | How student data, transcripts, consent records, and private course artifacts are handled. | Do not ingest or expose sensitive data unless explicit permission and consent are documented. | Yes |
 | `professor_release_approval` | Whether the professor explicitly approves the tutor for student-facing use. | Draft only; not released. | Yes |
 
@@ -87,22 +90,42 @@ the source and integrity rules are already clear.
 
 ## Knowledge Source Policy
 
-The default source policy is course-approved materials only.
+The tutor policy should represent source strictness as a professor-confirmed
+release choice. `any_source_with_labels` is the recommended release mode, but it
+does not become release-approved until the professor confirms it.
 
 ```yaml
 knowledge_source_policy:
-  course_materials: allowed
-  model_knowledge: not_allowed_by_default
-  internet_search: not_allowed_by_default
-  citation_required_for_external_sources: true
+  source_strictness:
+    status: blocks_release
+    value: unresolved
+    recommended_value: any_source_with_labels
+    allowed_values:
+      - course_only
+      - trusted_only
+      - any_source_with_labels
+  preview_source_mode:
+    value: any_source_with_labels
+    note: used during preview while release source strictness is unresolved
+  source_labels:
+    - course-approved
+    - professor-approved-external
+    - system-suggested-trusted
+    - unapproved-external
+  trusted_source_allowlist:
+    professor_defined: []
+    derived_from_course_materials: []
+  system_trusted_source_categories:
+    - official_documentation
+    - standards_or_security_bodies
+    - university_pages
+  external_sources_require_visible_labels: true
   policy_level: course
-  status: blocks_release_until_confirmed
 ```
 
-If the professor later allows general model knowledge or internet search, tutor
-responses must distinguish external knowledge from professor-approved course
-material. Internet search or other external source use must include visible
-source attribution. Actual search implementation is out of scope for Sprint 1.
+During preview, live web/search can be used to show the professor what external
+source behavior looks like. Released tutor behavior must follow the confirmed
+source strictness mode and label sources visibly.
 
 ## Reviewable Pedagogy Fields
 
@@ -132,8 +155,8 @@ Core interview areas:
 
 1. Source permissions: "Which materials may the tutor rely on for this course?"
 2. External knowledge: "Should the tutor use only approved course materials, or
-   may it use general knowledge or internet sources when course material is
-   silent?"
+   should it use trusted external sources or any external source with visible
+   labels?"
 3. Academic integrity: "If a student asks for the full answer to graded work,
    what should the tutor do?"
 4. Sensitive data: "Are transcripts, forum posts, student questions, or consent
@@ -179,23 +202,28 @@ tutor_policy:
   release_status: blocked
   blockers:
     - approved_source_permissions
-    - academic_integrity_policy
+    - knowledge_source_policy.source_strictness
   safety_compliance:
     approved_source_permissions:
       status: blocks_release
       value: unresolved
       safe_default: no private or course-owned material used until approved
     knowledge_source_policy:
-      status: resolved
-      value:
-        course_materials: allowed
-        model_knowledge: not_allowed
-        internet_search: not_allowed
-        citation_required_for_external_sources: true
-    academic_integrity_policy:
       status: blocks_release
+      value:
+        source_strictness: unresolved
+        recommended_value: any_source_with_labels
+        preview_source_mode: any_source_with_labels
+        source_labels:
+          - course-approved
+          - professor-approved-external
+          - system-suggested-trusted
+          - unapproved-external
+    academic_integrity_policy:
+      status: needs_review
       value: unresolved
-      safe_default: no full graded-work answers
+      warning: professor has not configured graded-work help
+      safe_default: strict no full graded-work answers
   pedagogy:
     teaching_approach:
       status: needs_review
@@ -219,10 +247,11 @@ tutor_policy:
 The tutor may be previewed while the policy is still in draft status. It cannot
 be released to students until:
 
-1. all safety/compliance blockers are resolved,
-2. external knowledge behavior is explicitly confirmed,
-3. the professor has reviewed the generated policy, and
-4. the professor gives an explicit approve decision.
+1. all release blockers are resolved,
+2. source strictness is explicitly confirmed,
+3. unresolved academic-integrity warnings are configured or acknowledged,
+4. the professor has reviewed the generated policy and response preview, and
+5. the professor gives an explicit approve decision.
 
 ## Sprint 1 Evidence
 
