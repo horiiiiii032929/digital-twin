@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import TypedDict
+from typing import Literal, TypedDict
 from uuid import uuid4
 
 from langgraph.graph import END, START, StateGraph
@@ -73,6 +73,17 @@ VAGUE_PHRASES = (
     "use common sense",
 )
 
+ACADEMIC_INTEGRITY_OPERATIONAL_SIGNALS = (
+    "ask what",
+    "tried",
+    "hints",
+    "refuse",
+    "similar example",
+    "partial structure",
+    "no full",
+    "full graded answers",
+)
+
 
 def create_session(session_id: str | None = None) -> OnboardingSession:
     session = OnboardingSession(
@@ -82,13 +93,12 @@ def create_session(session_id: str | None = None) -> OnboardingSession:
     session.messages.append(
         ChatMessage(role="assistant", content=QUESTION_BY_STEP["source_permissions"])
     )
-    session.trace.append(
-        WorkflowTraceItem(
-            id="session-created",
-            title="Started instructor onboarding",
-            detail="The prototype opened the source-permission interview step.",
-            status="complete",
-        )
+    _append_trace(
+        session,
+        base_id="session-created",
+        title="Started instructor onboarding",
+        detail="The prototype opened the source-permission interview step.",
+        status="complete",
     )
     return session
 
@@ -124,16 +134,15 @@ def _process_turn(state: GraphState) -> GraphState:
                 ),
             )
         )
-        session.trace.append(
-            WorkflowTraceItem(
-                id="professor-approval-message-received",
-                title="Kept draft policy in professor review",
-                detail=(
-                    "The instructor sent another message after draft generation; "
-                    "the generated review artifacts were preserved."
-                ),
-                status="blocked",
-            )
+        _append_trace(
+            session,
+            base_id="professor-approval-message-received",
+            title="Kept draft policy in professor review",
+            detail=(
+                "The instructor sent another message after draft generation; "
+                "the generated review artifacts were preserved."
+            ),
+            status="blocked",
         )
         return {"session": session, "user_message": user_message}
 
@@ -144,44 +153,41 @@ def _process_turn(state: GraphState) -> GraphState:
                 content=_empty_answer_follow_up(session.current_step),
             )
         )
-        session.trace.append(
-            WorkflowTraceItem(
-                id=f"{session.current_step}-empty-answer",
-                title="Asked for concrete answer",
-                detail=(
-                    "The instructor submitted an empty answer, so no policy "
-                    "field was captured."
-                ),
-                status="warning",
-            )
+        _append_trace(
+            session,
+            base_id=f"{session.current_step}-empty-answer",
+            title="Asked for concrete answer",
+            detail=(
+                "The instructor submitted an empty answer, so no policy "
+                "field was captured."
+            ),
+            status="warning",
         )
         return {"session": session, "user_message": user_message}
 
-    if _needs_follow_up(user_message):
+    if _needs_follow_up(session.current_step, user_message):
         session.messages.append(
             ChatMessage(
                 role="assistant",
                 content=_follow_up_for(session.current_step),
             )
         )
-        session.trace.append(
-            WorkflowTraceItem(
-                id=f"{session.current_step}-follow-up",
-                title="Asked follow-up question",
-                detail="The instructor answer was too broad to encode safely.",
-                status="warning",
-            )
+        _append_trace(
+            session,
+            base_id=f"{session.current_step}-follow-up",
+            title="Asked follow-up question",
+            detail="The instructor answer was too broad to encode safely.",
+            status="warning",
         )
         return {"session": session, "user_message": user_message}
 
     session.answers[session.current_step] = user_message
-    session.trace.append(
-        WorkflowTraceItem(
-            id=f"{session.current_step}-captured",
-            title=f"Captured {session.current_step.replace('_', ' ')}",
-            detail=user_message,
-            status="complete",
-        )
+    _append_trace(
+        session,
+        base_id=f"{session.current_step}-captured",
+        title=f"Captured {session.current_step.replace('_', ' ')}",
+        detail=user_message,
+        status="complete",
     )
 
     next_step = _next_step(session.current_step)
@@ -190,16 +196,15 @@ def _process_turn(state: GraphState) -> GraphState:
         session.policy = _build_policy(session.answers)
         session.preview_cases = _build_preview_cases()
         session.approval_checklist = _build_approval_checklist()
-        session.trace.append(
-            WorkflowTraceItem(
-                id="draft-policy-generated",
-                title="Generated draft tutor policy",
-                detail=(
-                    "The prototype converted interview answers into reviewable "
-                    "policy fields."
-                ),
-                status="blocked",
-            )
+        _append_trace(
+            session,
+            base_id="draft-policy-generated",
+            title="Generated draft tutor policy",
+            detail=(
+                "The prototype converted interview answers into reviewable "
+                "policy fields."
+            ),
+            status="blocked",
         )
         session.messages.append(
             ChatMessage(
@@ -220,9 +225,51 @@ def _process_turn(state: GraphState) -> GraphState:
     return {"session": session, "user_message": user_message}
 
 
-def _needs_follow_up(message: str) -> bool:
-    lower_message = message.lower()
-    return any(phrase in lower_message for phrase in VAGUE_PHRASES)
+def _append_trace(
+    session: OnboardingSession,
+    *,
+    base_id: str,
+    title: str,
+    detail: str,
+    status: Literal["complete", "warning", "blocked"],
+) -> None:
+    session.trace.append(
+        WorkflowTraceItem(
+            id=f"{base_id}-{len(session.trace) + 1}",
+            title=title,
+            detail=detail,
+            status=status,
+        )
+    )
+
+
+def _needs_follow_up(step: str, message: str) -> bool:
+    normalized_message = _normalize_for_vague_detection(message)
+    if step == "academic_integrity" and _has_operational_signal(normalized_message):
+        return False
+    return any(
+        _is_exact_or_short_vague_answer(normalized_message, phrase)
+        for phrase in VAGUE_PHRASES
+    )
+
+
+def _normalize_for_vague_detection(message: str) -> str:
+    return " ".join(message.lower().replace("’", "'").strip(" .!?:;").split())
+
+
+def _has_operational_signal(normalized_message: str) -> bool:
+    return any(
+        signal in normalized_message
+        for signal in ACADEMIC_INTEGRITY_OPERATIONAL_SIGNALS
+    )
+
+
+def _is_exact_or_short_vague_answer(message: str, phrase: str) -> bool:
+    if message == phrase:
+        return True
+    if phrase not in message:
+        return False
+    return len(message.split()) <= len(phrase.split()) + 3
 
 
 def _empty_answer_follow_up(step: str) -> str:
