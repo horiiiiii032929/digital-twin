@@ -36,7 +36,7 @@ GitHub Project: https://github.com/users/horiiiiii032929/projects/1
 
 ## Development Commands
 
-- `python3 -m pip install -e ".[dev]"`: install the Python API and test dependencies.
+- `uv sync --dev`: install the Python API and test dependencies into `.venv`.
 - `npm install`: install the frontend workspace dependencies after `apps/web` exists.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
