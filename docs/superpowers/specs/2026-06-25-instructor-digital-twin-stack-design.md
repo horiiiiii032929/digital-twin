@@ -11,7 +11,9 @@ Use a Python-backed web prototype with a model-independent workflow layer:
 - Backend API: FastAPI on Python 3.11 or 3.12.
 - Workflow orchestration: LangGraph v1.
 - LLM portability: a small local adapter backed by LiteLLM.
-- Styling: plain CSS with project design tokens; no UI framework yet.
+- UI system: shadcn/ui with project design tokens.
+- AI chat UI primitives: Prompt Kit components installed through the shadcn
+  registry flow.
 - Storage for Sprint 1: in-memory or fixture-backed state only.
 - RAG for Sprint 1: out of scope; prepare interfaces but do not implement it.
 
@@ -50,6 +52,8 @@ The prototype should use this shape:
 ```text
 apps/web
   React + Vite frontend
+  shadcn/ui component system
+  Prompt Kit chat primitives
   Chat-led onboarding UI
   Policy review/editor
   Preview comparison
@@ -71,6 +75,51 @@ src/digital_twin
 The frontend should call the backend through a small API boundary rather than
 embedding workflow rules in React. The backend should expose onboarding session
 operations, policy review operations, preview generation, and approval state.
+
+## UI component system
+
+The frontend should use shadcn/ui as the application component system. This
+keeps the prototype visually consistent while still giving the repository local
+ownership of component source code.
+
+Use shadcn components for:
+
+- buttons and icon buttons
+- cards and review panels
+- tabs or segmented controls
+- forms, fields, checkboxes, and toggles
+- dialogs or sheets if a review flow needs them
+- alerts, badges, separators, skeletons, and toasts
+
+Use Prompt Kit for AI-interface primitives that map directly to the onboarding
+experience:
+
+- chat container
+- message rendering
+- prompt input
+- prompt suggestions
+- file upload placeholder
+- source display
+- reasoning or workflow trace display
+
+Prompt Kit components should be added through the shadcn CLI registry flow. For
+the Chain of Thought component, use:
+
+```bash
+npx shadcn@latest add "https://prompt-kit.com/c/chain-of-thought.json"
+```
+
+The Chain of Thought component should not expose raw hidden model reasoning.
+Use it for professor-facing workflow transparency, such as:
+
+- "Collected source permissions"
+- "Detected unresolved academic-integrity warning"
+- "Generated draft tutor policy"
+- "Prepared preview comparison"
+- "Approval blocked until source permissions are confirmed"
+
+This gives reviewers an understandable audit trail without displaying private
+model reasoning tokens.
 
 ## LangGraph role
 
