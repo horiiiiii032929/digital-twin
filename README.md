@@ -34,5 +34,15 @@ GitHub Project: https://github.com/users/horiiiiii032929/projects/1
 └── tests/                  # Automated and manual verification notes
 ```
 
+## Development Commands
+
+- `python -m pip install -e ".[dev]"`: install the Python API and test dependencies.
+- `npm install`: install the frontend workspace dependencies after `apps/web` exists.
+- `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
+- `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
+- `npm run test:api`: run Python domain and API tests.
+- `npm run test:web`: run frontend tests.
+- `npm run build:web`: build the frontend.
+
 See [docs/github-project.md](docs/github-project.md) for how repository issues
 map to the linked GitHub Project fields.
