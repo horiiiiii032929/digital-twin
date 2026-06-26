@@ -53,8 +53,8 @@ Create `package.json`:
   "scripts": {
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "python3 -m uvicorn services.api.app.main:app --reload --port 8000",
-    "test": "python3 -m pytest tests && npm --workspace apps/web run test -- --run",
-    "test:api": "python3 -m pytest tests/digital_twin tests/api",
+    "test": "python3 -m pytest tests",
+    "test:api": "python3 -m pytest tests",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"
@@ -103,7 +103,7 @@ Add this section to `README.md` after the repository layout:
 - `npm install`: install the frontend workspace dependencies after `apps/web` exists.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
-- `npm run test:api`: run Python domain and API tests.
+- `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
 - `npm run build:web`: build the frontend.
 ```

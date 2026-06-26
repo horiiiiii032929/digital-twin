@@ -40,7 +40,7 @@ GitHub Project: https://github.com/users/horiiiiii032929/projects/1
 - `npm install`: install the frontend workspace dependencies after `apps/web` exists.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
-- `npm run test:api`: run Python domain and API tests.
+- `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
 - `npm run build:web`: build the frontend.
 

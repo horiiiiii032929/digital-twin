@@ -7,8 +7,8 @@
   "scripts": {
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "python3 -m uvicorn services.api.app.main:app --reload --port 8000",
-    "test": "python3 -m pytest tests && npm --workspace apps/web run test -- --run",
-    "test:api": "python3 -m pytest tests/digital_twin tests/api",
+    "test": "python3 -m pytest tests",
+    "test:api": "python3 -m pytest tests",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"
