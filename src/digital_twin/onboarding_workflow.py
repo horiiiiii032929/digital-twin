@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from typing import TypedDict
 from uuid import uuid4
 
@@ -98,6 +99,7 @@ def submit_message(session: OnboardingSession, user_message: str) -> OnboardingS
     return result["session"]
 
 
+@lru_cache(maxsize=1)
 def _build_graph():
     graph = StateGraph(GraphState)
     graph.add_node("process_turn", _process_turn)
@@ -110,6 +112,50 @@ def _process_turn(state: GraphState) -> GraphState:
     session = state["session"].model_copy(deep=True)
     user_message = state["user_message"].strip()
     session.messages.append(ChatMessage(role="instructor", content=user_message))
+
+    if session.current_step == "professor_approval":
+        session.messages.append(
+            ChatMessage(
+                role="assistant",
+                content=(
+                    "The draft tutor policy is ready for policy review and "
+                    "approval. Review the policy fields, preview cases, and "
+                    "approval checklist before releasing it to students."
+                ),
+            )
+        )
+        session.trace.append(
+            WorkflowTraceItem(
+                id="professor-approval-message-received",
+                title="Kept draft policy in professor review",
+                detail=(
+                    "The instructor sent another message after draft generation; "
+                    "the generated review artifacts were preserved."
+                ),
+                status="blocked",
+            )
+        )
+        return {"session": session, "user_message": user_message}
+
+    if not user_message:
+        session.messages.append(
+            ChatMessage(
+                role="assistant",
+                content=_empty_answer_follow_up(session.current_step),
+            )
+        )
+        session.trace.append(
+            WorkflowTraceItem(
+                id=f"{session.current_step}-empty-answer",
+                title="Asked for concrete answer",
+                detail=(
+                    "The instructor submitted an empty answer, so no policy "
+                    "field was captured."
+                ),
+                status="warning",
+            )
+        )
+        return {"session": session, "user_message": user_message}
 
     if _needs_follow_up(user_message):
         session.messages.append(
@@ -177,6 +223,13 @@ def _process_turn(state: GraphState) -> GraphState:
 def _needs_follow_up(message: str) -> bool:
     lower_message = message.lower()
     return any(phrase in lower_message for phrase in VAGUE_PHRASES)
+
+
+def _empty_answer_follow_up(step: str) -> str:
+    question = QUESTION_BY_STEP.get(step)
+    if question is None:
+        return "Please provide a concrete answer before we continue."
+    return f"Please provide a concrete answer before we continue. {question}"
 
 
 def _follow_up_for(step: str) -> str:
