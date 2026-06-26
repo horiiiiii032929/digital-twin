@@ -52,9 +52,9 @@ Create `package.json`:
   ],
   "scripts": {
     "dev:web": "npm --workspace apps/web run dev",
-    "dev:api": "python -m uvicorn services.api.app.main:app --reload --port 8000",
-    "test": "python -m pytest tests && npm --workspace apps/web run test -- --run",
-    "test:api": "python -m pytest tests/digital_twin tests/api",
+    "dev:api": "python3 -m uvicorn services.api.app.main:app --reload --port 8000",
+    "test": "python3 -m pytest tests && npm --workspace apps/web run test -- --run",
+    "test:api": "python3 -m pytest tests/digital_twin tests/api",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"
@@ -99,7 +99,7 @@ Add this section to `README.md` after the repository layout:
 ```markdown
 ## Development Commands
 
-- `python -m pip install -e ".[dev]"`: install the Python API and test dependencies.
+- `python3 -m pip install -e ".[dev]"`: install the Python API and test dependencies.
 - `npm install`: install the frontend workspace dependencies after `apps/web` exists.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
@@ -113,10 +113,10 @@ Add this section to `README.md` after the repository layout:
 Run:
 
 ```bash
-python -m pip install -e ".[dev]"
+python3 -m pip install -e ".[dev]"
 ```
 
-Expected: package installs successfully and `python -m pytest tests` can run even if no new tests are present yet.
+Expected: package installs successfully and `python3 -m pytest tests` can run even if no new tests are present yet.
 
 - [ ] **Step 5: Commit the manifest changes**
 
@@ -182,7 +182,7 @@ def test_checked_blocking_approval_item_is_complete():
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_tutor_policy.py -v
+python3 -m pytest tests/digital_twin/test_tutor_policy.py -v
 ```
 
 Expected: FAIL with `ModuleNotFoundError` for `src.digital_twin.tutor_policy`.
@@ -350,7 +350,7 @@ def build_initial_policy() -> TutorPolicy:
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_tutor_policy.py -v
+python3 -m pytest tests/digital_twin/test_tutor_policy.py -v
 ```
 
 Expected: PASS.
@@ -396,7 +396,7 @@ async def test_fixture_llm_returns_task_specific_response():
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_llm.py -v
+python3 -m pytest tests/digital_twin/test_llm.py -v
 ```
 
 Expected: FAIL with `ModuleNotFoundError` for `src.digital_twin.llm`.
@@ -435,7 +435,7 @@ class FixtureLlmClient:
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_llm.py -v
+python3 -m pytest tests/digital_twin/test_llm.py -v
 ```
 
 Expected: PASS.
@@ -500,7 +500,7 @@ def test_completed_interview_generates_policy_preview_and_approval_items():
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_onboarding_workflow.py -v
+python3 -m pytest tests/digital_twin/test_onboarding_workflow.py -v
 ```
 
 Expected: FAIL with `ModuleNotFoundError` for `src.digital_twin.onboarding_workflow`.
@@ -783,7 +783,7 @@ def _build_approval_checklist() -> list[ApprovalItem]:
 Run:
 
 ```bash
-python -m pytest tests/digital_twin/test_onboarding_workflow.py -v
+python3 -m pytest tests/digital_twin/test_onboarding_workflow.py -v
 ```
 
 Expected: PASS.
@@ -852,7 +852,7 @@ def test_unknown_session_returns_404():
 Run:
 
 ```bash
-python -m pytest tests/api/test_onboarding_api.py -v
+python3 -m pytest tests/api/test_onboarding_api.py -v
 ```
 
 Expected: FAIL with `ModuleNotFoundError` for `services.api.app.main`.
@@ -999,7 +999,7 @@ def update_policy_field(session_id: str, field_id: str, request: PolicyFieldUpda
 Run:
 
 ```bash
-python -m pytest tests/api/test_onboarding_api.py -v
+python3 -m pytest tests/api/test_onboarding_api.py -v
 ```
 
 Expected: PASS.
@@ -1009,7 +1009,7 @@ Expected: PASS.
 Run:
 
 ```bash
-python -m pytest tests/digital_twin tests/api -v
+python3 -m pytest tests/digital_twin tests/api -v
 ```
 
 Expected: PASS.
