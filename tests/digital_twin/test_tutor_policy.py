@@ -1,8 +1,11 @@
 from src.digital_twin.tutor_policy import (
     ApprovalItem,
     FieldStatus,
+    SourceInventoryItem,
+    SourcePermissionStatus,
     PolicyField,
     ReleaseStatus,
+    SourceLabel,
     TutorPolicy,
     build_initial_policy,
 )
@@ -14,6 +17,7 @@ def test_initial_policy_blocks_release_until_source_and_approval_are_resolved():
     assert policy.release_status == ReleaseStatus.BLOCKED
     assert set(policy.blocker_ids) == {
         "approved_source_permissions",
+        "disallowed_private_sources",
         "knowledge_source_policy",
         "sensitive_data_handling",
         "professor_release_approval",
@@ -62,3 +66,17 @@ def test_unchecked_non_blocking_approval_item_is_complete():
     )
 
     assert item.is_blocking_incomplete is False
+
+
+def test_source_inventory_flags_sensitive_names_as_excluded_by_default():
+    item = SourceInventoryItem(
+        id="source-1",
+        name="student-transcripts.csv",
+        mime_type="text/csv",
+        size_bytes=2048,
+    )
+
+    assert item.sensitive is True
+    assert item.excluded is True
+    assert item.permission_status == SourcePermissionStatus.EXCLUDED
+    assert item.source_label == SourceLabel.COURSE_APPROVED

@@ -90,7 +90,7 @@ export function OnboardingChat({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <ChatContainerRoot className="min-h-[420px] flex-1 px-4">
+      <ChatContainerRoot className="min-h-[260px] flex-1 px-4 sm:min-h-[420px]">
         <ChatContainerContent className="gap-4 py-4">
           {isLoading ? (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -117,7 +117,7 @@ export function OnboardingChat({
                 key={suggestion}
                 type="button"
                 size="sm"
-                className="max-w-full rounded-lg text-left"
+                className="h-auto max-w-full justify-start whitespace-normal rounded-lg text-left leading-5"
                 disabled={isSubmitting || isLoading}
                 onClick={() => void submitSuggestion(suggestion)}
               >

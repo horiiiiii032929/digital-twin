@@ -12,7 +12,7 @@ type PolicyReviewProps = {
   updatingFieldId: string | null
   onUpdateField: (
     fieldId: string,
-    value: string | string[],
+    value: string | string[] | Record<string, unknown>,
     status: FieldStatus,
   ) => Promise<void>
 }
@@ -220,20 +220,37 @@ function StatusLabel({ status }: { status: FieldStatus }) {
   )
 }
 
-function fieldValueToText(value: string | string[]): string {
-  return Array.isArray(value) ? value.join("\n") : value
+function fieldValueToText(
+  value: string | string[] | Record<string, unknown>,
+): string {
+  if (Array.isArray(value)) {
+    return value.join("\n")
+  }
+  if (typeof value === "object") {
+    return JSON.stringify(value, null, 2)
+  }
+  return value
 }
 
 function textToFieldValue(
-  originalValue: string | string[],
+  originalValue: string | string[] | Record<string, unknown>,
   draft: string,
-): string | string[] {
-  if (!Array.isArray(originalValue)) {
+): string | string[] | Record<string, unknown> {
+  if (Array.isArray(originalValue)) {
     return draft
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean)
+  }
+
+  if (typeof originalValue === "object") {
+    try {
+      const parsed = JSON.parse(draft) as Record<string, unknown>
+      return parsed
+    } catch {
+      return originalValue
+    }
   }
 
   return draft
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
 }

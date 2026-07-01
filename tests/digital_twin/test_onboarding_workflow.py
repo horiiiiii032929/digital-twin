@@ -1,5 +1,22 @@
-from src.digital_twin.onboarding_workflow import create_session, submit_message
-from src.digital_twin.tutor_policy import FieldStatus
+import pytest
+
+from src.digital_twin.onboarding_workflow import (
+    add_custom_preview_case,
+    add_source_inventory_item,
+    confirm_revision_proposal,
+    create_session,
+    set_preview_decision,
+    submit_message,
+    update_approval_checklist_item,
+    update_policy_field_value,
+    update_source_inventory_item,
+)
+from src.digital_twin.tutor_policy import (
+    FieldStatus,
+    ReleaseStatus,
+    SourceLabel,
+    SourcePermissionStatus,
+)
 
 
 def test_create_session_starts_with_source_permissions_prompt():
@@ -102,8 +119,40 @@ def test_completed_interview_generates_policy_preview_and_approval_items():
     assert session.policy is not None
     assert session.policy.blocker_ids == [
         "knowledge_source_policy",
+        "disallowed_private_sources",
         "sensitive_data_handling",
         "professor_release_approval",
+    ]
+    field_ids = {field.id for field in session.policy.all_fields}
+    assert {
+        "approved_source_permissions",
+        "disallowed_private_sources",
+        "knowledge_source_policy",
+        "academic_integrity_policy",
+        "sensitive_data_handling",
+        "teaching_approach",
+        "tutoring_moves",
+        "feedback_policy",
+        "proactive_support",
+        "course_scope_boundary",
+        "preferred_examples",
+        "rejection_criteria",
+        "tone_guidance",
+        "professor_release_approval",
+    }.issubset(field_ids)
+    knowledge_field = next(
+        field
+        for field in session.policy.safety_compliance
+        if field.id == "knowledge_source_policy"
+    )
+    assert knowledge_field.value["source_strictness"] == "unresolved"
+    assert knowledge_field.value["preview_source_mode"] == "any_source_with_labels"
+    assert knowledge_field.value["external_sources_require_visible_labels"] is True
+    assert knowledge_field.value["source_labels"] == [
+        "course-approved",
+        "professor-approved-external",
+        "system-suggested-trusted",
+        "unapproved-external",
     ]
     academic_integrity_field = next(
         field
@@ -116,15 +165,24 @@ def test_completed_interview_generates_policy_preview_and_approval_items():
         == "Professor should confirm this before student release."
     )
     assert [case.id for case in session.preview_cases] == [
-        "csrf-homework",
-        "csrf-misconception",
+        "external-grounding",
+        "academic-integrity",
+        "misconception",
     ]
+    assert session.policy_version == 1
+    assert len(session.evidence_snapshots) == 3
     assert [
         item.id for item in session.approval_checklist if item.blocks_release
     ] == [
         "source_scope",
-        "privacy",
+        "private_sources",
+        "source_strictness",
         "integrity",
+        "sensitive_data",
+        "preview_external_grounding",
+        "preview_academic_integrity",
+        "preview_custom_prompt",
+        "professor_release_approval",
     ]
     assert "Generated draft tutor policy" in [item.title for item in session.trace]
     assert session.messages[-1].role == "assistant"
@@ -133,6 +191,206 @@ def test_completed_interview_generates_policy_preview_and_approval_items():
         "Review the policy fields, confirm release blockers, then "
         "use the approval checklist."
     )
+
+
+@pytest.mark.parametrize(
+    "vague_answer",
+    [
+        "Be helpful.",
+        "Do not cheat.",
+        "Use common sense.",
+        "Teach like me.",
+        "Use all my materials.",
+        "Use the internet if needed.",
+        "Make it friendly.",
+    ],
+)
+def test_documented_vague_answers_get_followups_without_advancing(vague_answer):
+    session = create_session(session_id="test-session")
+
+    updated = submit_message(session, vague_answer)
+
+    assert updated.current_step == "source_permissions"
+    assert updated.messages[-1].role == "assistant"
+    assert "too" in updated.messages[-1].content.lower()
+    assert updated.trace[-1].status == "warning"
+
+
+def test_source_inventory_approval_and_exclusion_update_release_blockers():
+    session = _complete_interview()
+
+    with_pending_source = add_source_inventory_item(
+        session,
+        name="week-01-slides.pdf",
+        mime_type="application/pdf",
+        size_bytes=12345,
+    )
+
+    assert with_pending_source.source_inventory[0].permission_status == (
+        SourcePermissionStatus.PENDING
+    )
+    assert with_pending_source.release_blockers["source_inventory"] == [
+        "week-01-slides.pdf needs an approve or exclude decision."
+    ]
+
+    approved = update_source_inventory_item(
+        with_pending_source,
+        with_pending_source.source_inventory[0].id,
+        permission_status=SourcePermissionStatus.APPROVED,
+        source_label=SourceLabel.COURSE_APPROVED,
+    )
+
+    assert approved.source_inventory[0].permission_status == (
+        SourcePermissionStatus.APPROVED
+    )
+    assert approved.release_blockers["source_inventory"] == []
+
+    sensitive = add_source_inventory_item(
+        approved,
+        name="private-student-forum-export.json",
+        mime_type="application/json",
+        size_bytes=999,
+    )
+
+    assert sensitive.source_inventory[-1].sensitive is True
+    assert sensitive.source_inventory[-1].excluded is True
+    assert sensitive.release_blockers["source_inventory"] == []
+
+
+def test_preview_generation_includes_source_audit_warnings_decisions_and_evidence():
+    session = _complete_interview()
+
+    grounding = next(
+        preview for preview in session.preview_cases if preview.id == "external-grounding"
+    )
+
+    assert grounding.tag == "source_grounding"
+    assert grounding.decision == "pending"
+    assert grounding.policy_version == 1
+    assert grounding.generated_at is not None
+    assert grounding.source_audit[0].source_label in {
+        SourceLabel.COURSE_APPROVED,
+        SourceLabel.SYSTEM_SUGGESTED_TRUSTED,
+    }
+    assert grounding.source_audit[0].supports
+    assert "Source labels:" in grounding.configured_response
+    assert "no course comparison available for conflict checking" in grounding.warnings
+
+    snapshot = next(
+        item
+        for item in session.evidence_snapshots
+        if item.preview_case_id == grounding.id
+    )
+    assert snapshot.policy_version == 1
+    assert snapshot.prompt == grounding.prompt
+    assert snapshot.decision == "pending"
+    assert snapshot.source_labels == [
+        entry.source_label for entry in grounding.source_audit
+    ]
+
+
+def test_rejected_preview_blocks_release_until_revised_or_accepted():
+    session = _complete_interview()
+
+    rejected = set_preview_decision(
+        session,
+        "academic-integrity",
+        "rejected",
+        reason="Gives away too much structure.",
+    )
+
+    assert rejected.preview_decisions["academic-integrity"].decision == "rejected"
+    assert rejected.policy.release_status == ReleaseStatus.BLOCKED
+    assert rejected.release_blockers["preview_decisions"] == [
+        "academic-integrity is rejected and unresolved."
+    ]
+
+    accepted = set_preview_decision(
+        rejected,
+        "academic-integrity",
+        "accepted",
+        reason="Now follows the homework boundary.",
+    )
+
+    assert accepted.preview_decisions["academic-integrity"].decision == "accepted"
+    assert accepted.release_blockers["preview_decisions"] == []
+
+
+def test_missing_custom_preview_has_actionable_release_blocker():
+    session = _complete_interview()
+
+    assert "custom-preview preview is not accepted." not in (
+        session.release_blockers["preview_acceptance"]
+    )
+    assert session.release_blockers["preview_acceptance"] == [
+        "academic-integrity preview is not accepted.",
+        "external-grounding preview is not accepted.",
+        "misconception preview is not accepted.",
+        "Add and accept a professor custom prompt preview.",
+    ]
+
+
+def test_approval_checklist_persists_and_marks_release_ready_when_blockers_resolved():
+    session = _complete_interview()
+    session = add_source_inventory_item(
+        session,
+        name="week-01-slides.pdf",
+        mime_type="application/pdf",
+        size_bytes=12345,
+        permission_status=SourcePermissionStatus.APPROVED,
+    )
+    session = _resolve_policy_blockers(session)
+    session = add_custom_preview_case(
+        session,
+        prompt="Explain CSRF using only a hint and a guiding question.",
+        tag="teaching_behavior",
+    )
+
+    for preview in session.preview_cases:
+        session = set_preview_decision(session, preview.id, "accepted")
+    for item in session.approval_checklist:
+        if item.blocks_release:
+            session = update_approval_checklist_item(session, item.id, True)
+
+    assert all(
+        item.checked for item in session.approval_checklist if item.blocks_release
+    )
+    assert session.policy.status == ReleaseStatus.APPROVED
+    assert session.policy.release_status == ReleaseStatus.APPROVED
+    assert all(not blockers for blockers in session.release_blockers.values())
+
+
+def test_chat_feedback_creates_confirmable_revision_and_regenerates_preview():
+    session = _complete_interview()
+    session = set_preview_decision(
+        session,
+        "academic-integrity",
+        "rejected",
+        reason="The answer gives away too much homework help.",
+    )
+
+    proposed = submit_message(
+        session,
+        "This gives away too much homework help; require one guiding question before hints.",
+    )
+
+    assert proposed.revision_proposal is not None
+    assert proposed.revision_proposal.preview_case_id == "academic-integrity"
+    assert proposed.revision_proposal.affected_policy_fields == [
+        "academic_integrity_policy",
+        "tutoring_moves",
+    ]
+    assert "guiding question" in proposed.revision_proposal.proposed_value
+    assert "Confirm" in proposed.messages[-1].content
+
+    confirmed = confirm_revision_proposal(proposed)
+
+    assert confirmed.revision_proposal is None
+    assert confirmed.policy_version == 2
+    assert confirmed.preview_decisions["academic-integrity"].decision == "pending"
+    assert confirmed.preview_decisions["academic-integrity"].revision_resolved is True
+    assert confirmed.release_blockers["preview_decisions"] == []
+    assert any(snapshot.policy_version == 2 for snapshot in confirmed.evidence_snapshots)
 
 
 def test_submitting_after_completion_preserves_review_state_and_artifacts():
@@ -176,6 +434,71 @@ def _complete_interview():
     return submit_message(
         session,
         "Reject answers that complete graded work or cite unapproved sources.",
+    )
+
+
+def _resolve_policy_blockers(session):
+    session = update_policy_field_value(
+        session,
+        "knowledge_source_policy",
+        {
+            "source_strictness": "any_source_with_labels",
+            "recommended_value": "any_source_with_labels",
+            "allowed_values": [
+                "course_only",
+                "trusted_only",
+                "any_source_with_labels",
+            ],
+            "preview_source_mode": "any_source_with_labels",
+            "source_labels": [
+                "course-approved",
+                "professor-approved-external",
+                "system-suggested-trusted",
+                "unapproved-external",
+            ],
+            "trusted_source_allowlist": {
+                "professor_defined": [],
+                "derived_from_course_materials": [],
+            },
+            "system_trusted_source_categories": [
+                "official_documentation",
+                "standards_or_security_bodies",
+                "university_pages",
+            ],
+            "external_sources_require_visible_labels": True,
+            "confirmed": True,
+            "policy_level": "course",
+        },
+        FieldStatus.RESOLVED,
+    )
+    session = update_policy_field_value(
+        session,
+        "disallowed_private_sources",
+        [
+            "private student data",
+            "consent records",
+            "raw transcripts",
+            "private forum exports",
+        ],
+        FieldStatus.RESOLVED,
+    )
+    session = update_policy_field_value(
+        session,
+        "sensitive_data_handling",
+        "Sensitive data remains excluded; only synthetic examples are used.",
+        FieldStatus.RESOLVED,
+    )
+    session = update_policy_field_value(
+        session,
+        "academic_integrity_policy",
+        "Ask what the student tried first, then provide hints only.",
+        FieldStatus.RESOLVED,
+    )
+    return update_policy_field_value(
+        session,
+        "professor_release_approval",
+        "approved",
+        FieldStatus.RESOLVED,
     )
 
 

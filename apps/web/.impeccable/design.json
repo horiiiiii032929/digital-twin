@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-01T00:00:00+09:00",
+  "title": "Design System: Course Digital Twin Onboarding",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Console Ink",
+        "canonical": "#27272a",
+        "tonalRamp": ["#18181b", "#27272a", "#3f3f46"]
+      },
+      "workspace": {
+        "role": "neutral",
+        "displayName": "Workspace Canvas",
+        "canonical": "#f7f7f4",
+        "tonalRamp": ["#ffffff", "#f7f7f4", "#e4e4e7"]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Release Warning",
+        "canonical": "#92400e",
+        "tonalRamp": ["#fffbeb", "#fef3c7", "#92400e"]
+      },
+      "info": {
+        "role": "semantic",
+        "displayName": "Review Info",
+        "canonical": "#075985",
+        "tonalRamp": ["#f0f9ff", "#bae6fd", "#075985"]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page title and primary workspace headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Review copy, messages, source notes, and policy explanations."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "150ms ease-out",
+        "purpose": "Button, disclosure, and selected-state feedback."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action for the next release-affecting step.",
+      "html": "<button class=\"rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white\">Continue</button>",
+      "css": ".rounded-md { border-radius: 8px; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "status-chip",
+      "description": "Compact text-and-icon status for draft, blocker, source, and approval states.",
+      "html": "<span class=\"rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-900\">draft only</span>",
+      "css": ".rounded-md { border-radius: 8px; }"
+    }
+  ]
+}
