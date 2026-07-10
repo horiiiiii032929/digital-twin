@@ -2,18 +2,21 @@
 
 ## Project Structure & Module Organization
 
-This repository is a research and prototype workspace for a Digital Twin teaching system. Keep implementation code in `src/`, repeatable utilities in `scripts/`, tests and manual verification notes in `tests/`, and implementation-facing documentation in `docs/`. Research process material belongs in `research/`, with experiment plans under `research/04_experiments/` and evaluation material under `research/05_evaluation/`. Use `data/raw/`, `data/interim/`, `data/processed/`, and `data/external/` for local datasets only; these buckets are ignored by default. Generated reports go in `reports/generated/`, while long-lived report assets belong in `reports/`.
+This repository is a research and prototype workspace for a Digital Twin teaching system. Keep domain code in `src/`, API transport code in `services/`, frontend applications in `apps/`, repeatable utilities in `scripts/`, tests and manual verification notes in `tests/`, and implementation-facing documentation in `docs/`. Research process material belongs in `research/`, with experiment plans under `research/04_experiments/` and evaluation material under `research/05_evaluation/`. Use `data/raw/`, `data/interim/`, `data/processed/`, and `data/external/` for local datasets only; these buckets are ignored by default. Generated reports go in `reports/generated/`, while long-lived report assets belong in `reports/`.
 
 ## Build, Test, and Development Commands
 
-No project-level build tool or dependency manifest is defined yet. Use these commands for the current scaffold:
+The repository uses uv for Python and npm workspaces for the frontend:
 
+- `uv sync --locked --dev`: install the locked Python API and test dependencies.
+- `npm ci`: install the locked frontend dependencies.
+- `npm run dev:api`: start the FastAPI service on port 8000.
+- `npm run dev:web`: start the Vite frontend on port 5173.
+- `npm run check`: run Python tests, frontend tests, lint, and the production build.
 - `rg --files`: inspect tracked repository files quickly.
 - `git status --short`: confirm changed files before opening a PR.
-- `python -m pytest tests`: run automated tests once Python tests are added.
-- `jupyter lab notebooks/`: work with exploratory notebooks locally, if Jupyter is installed.
 
-Document any new build, evaluation, or ingestion command in the relevant `README.md` when adding tooling.
+Document any new build, evaluation, or ingestion command in the relevant `README.md` when adding tooling, and keep `npm run check` aligned with required CI checks.
 
 ## Coding Style & Naming Conventions
 

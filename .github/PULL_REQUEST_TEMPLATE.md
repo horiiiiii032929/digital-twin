@@ -14,6 +14,7 @@
 
 ## Verification
 
+- [ ] `npm run check` passes
 - [ ] Documentation updated
 - [ ] Tests or manual checks completed
 - [ ] Sensitive data excluded from committed files

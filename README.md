@@ -39,14 +39,19 @@ AI agent contracts that sit under these pillars.
 
 ## Development Commands
 
-- `uv sync --dev`: install the Python API and test dependencies into `.venv`.
-- `npm install`: install the frontend workspace dependencies.
+- `uv sync --locked --dev`: install the locked Python API and test dependencies into `.venv`.
+- `npm ci`: install the locked frontend workspace dependencies.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
+- `npm run check`: run the complete local and CI verification suite.
+- `npm run check:docs`: validate repository-local Markdown links.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
 - `npm run lint:web`: run frontend lint checks.
 - `npm run build:web`: build the frontend.
+
+Use Python from `.python-version` and Node.js from `.node-version`. GitHub
+Actions runs `npm run check` for pushes to `main` and for pull requests.
 
 ## Current Implementation Status
 
@@ -65,6 +70,10 @@ Still planned:
 - Real source ingestion, retrieval, citation, and source-conflict checks.
 - Provider-backed tutor response generation.
 - Student-facing tutoring and learning-gap analytics.
+
+Active Sprint 2 work is tracked in GitHub issue #7: local approved-document
+ingestion, retrieval, provider-backed generation, tutor-policy enforcement, and
+visible source evidence. Canvas remains an optional future connector.
 
 ## Sprint 1 Onboarding Prototype
 

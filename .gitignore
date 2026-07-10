@@ -12,6 +12,15 @@ venv/
 __pycache__/
 *.py[cod]
 *.egg-info/
+.coverage
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+
+# Editor and tool state
+.idea/
+.vscode/
+*.tsbuildinfo
 
 # Notebook runtime state
 .ipynb_checkpoints/
@@ -35,3 +44,8 @@ models/*
 !models/.gitkeep
 reports/generated/*
 !reports/generated/.gitkeep
+output/
+
+# Logs
+logs/
+*.log
