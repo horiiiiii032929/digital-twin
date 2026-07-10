@@ -10,7 +10,7 @@ described in the research artifacts while staying provider-neutral.
   contents are not read, parsed, stored, or committed.
 - Preview grounding uses a deterministic local trusted-source catalog. It does
   not call live search or a provider SDK.
-- State remains in the in-memory FastAPI session store.
+- State uses a repository protocol with an in-memory FastAPI implementation.
 - Source labels are auditable: `course-approved`,
   `professor-approved-external`, `system-suggested-trusted`, and
   `unapproved-external`.

@@ -3,6 +3,10 @@ description: Record a research or architecture decision for project tracking.
 title: "[Decision]: "
 projects: ["horiiiiii032929/1"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Use Decision Records only for evaluated product, research, or architecture choices. Use a Research Task for implementation work.
   - type: dropdown
     id: decision
     attributes:

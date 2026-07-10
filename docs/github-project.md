@@ -1,4 +1,4 @@
-# GitHub Project Link
+# Digital Twin Delivery
 
 Project board: https://github.com/users/horiiiiii032929/projects/1
 
@@ -24,11 +24,18 @@ The project currently exposes these planning fields:
 
 ## Local Workflow
 
-1. Create work through the `Research Task` or `Decision Record` issue form.
-2. Fill in Iteration, Work Type, Area, Risk, and Evidence in the issue body.
-3. After the issue appears on the project board, mirror those values into the
-   matching project fields.
-4. Link pull requests back to the issue and include verification evidence.
+1. Keep #1-#13 as roadmap deliverables and use their project status for sprint
+   progress.
+2. When a sprint becomes active, create bounded execution issues with the
+   `Research Task` form and attach them as sub-issues of the roadmap item.
+3. Fill in Iteration, Work Type, Area, Risk, Sprint, and Target Date on each
+   execution item.
+4. Leave `Evidence` empty during planning. Add a document, test run, demo, or
+   merged pull request only after that artifact exists.
+5. Use the `Decision Record` form only for evaluated product or research choices.
+   Implementation tasks do not receive a placeholder decision.
+6. Link pull requests to the execution sub-issue and update evidence immediately
+   after merging.
 
 Note: GitHub requires the person opening the issue to have write access to the
 target project for automatic project assignment from issue forms.
@@ -43,6 +50,20 @@ target project for automatic project assignment from issue forms.
   live LLM generation, and visible source evidence.
 - Canvas is an optional future connector. It should not block or define the core
   ingestion and retrieval architecture.
+
+### Active Sprint 2 execution
+
+Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
+
+| Target | Execution sub-issue |
+| --- | --- |
+| 2026-07-11 | #19 Refactor onboarding domain boundaries |
+| 2026-07-12 | #20 Refactor API and frontend adapters |
+| 2026-07-13 | #21 Define grounding contracts and synthetic fixtures |
+| 2026-07-14 | #22 Implement local document parsing and chunking |
+| 2026-07-16 | #23 Implement retrieval and source evidence |
+| 2026-07-18 | #24 Integrate live generation and tutor-policy enforcement |
+| 2026-07-19 | #25 Produce the grounded tutoring smoke demo |
 
 ## Timeline Through Presentation
 
@@ -63,10 +84,12 @@ project board. The current presentation milestone is tracked through
 
 ## Board Maintenance
 
-- Keep one primary project item per major deliverable unless a card becomes too
-  large to review.
-- Move only the active sprint cards to `In Progress`.
-- Add artifact links to `Evidence` when work is ready for review.
+- Keep parent issues for roadmap progress and sub-issues for active execution.
+- Retain the three-status workflow: Todo, In Progress, and Done.
+- Move only the active execution item to `In Progress`; completed sub-issues are
+  `Done`, and future work remains `Todo`.
+- Add artifact links to `Evidence` only when the artifact exists.
+- Use `Decision` only after a product or research choice has been evaluated.
 - Update `Target Date` before changing scope so timeline drift is visible.
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.

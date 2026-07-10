@@ -3,6 +3,18 @@ description: Track research, design, prototype, evaluation, or documentation wor
 title: "[Research]: "
 projects: ["horiiiiii032929/1"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for execution work. When a roadmap sprint is active, attach the issue as a sub-issue of its #1-#13 parent. Leave Evidence empty until a real artifact exists.
+  - type: input
+    id: parent-issue
+    attributes:
+      label: Parent Roadmap Issue
+      description: Link the active #1-#13 roadmap deliverable, if applicable.
+      placeholder: "#7"
+    validations:
+      required: false
   - type: dropdown
     id: iteration
     attributes:
@@ -66,10 +78,10 @@ body:
     id: evidence
     attributes:
       label: Evidence
-      description: What source, experiment, user feedback, or artifact will prove progress?
-      placeholder: Link to docs, datasets, prototypes, test results, or evaluation notes.
+      description: Add a source, experiment, user feedback item, or artifact only when it exists.
+      placeholder: Leave blank during planning; add a real document, PR, demo, or test result later.
     validations:
-      required: true
+      required: false
   - type: textarea
     id: acceptance
     attributes:
