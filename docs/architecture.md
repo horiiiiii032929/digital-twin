@@ -8,8 +8,8 @@
 - Normalize transcripts, slides, forum replies, assignments, rubrics, and FAQs.
 - Track source metadata, permissions, and retrieval quality.
 - Build a baseline RAG pipeline before adding specialized agent behavior.
-- Current Sprint 1 coverage is limited to metadata-only source inventory and
-  deterministic source labels.
+- Implemented onboarding coverage is limited to metadata-only source inventory
+  and deterministic source labels.
 
 ### Pedagogical Alignment Agent
 
@@ -17,8 +17,8 @@
 - Capture tone, preferred analogies, refusal behavior, and assessment style.
 - Use examples to calibrate how direct or Socratic the agent should be.
 - Evaluate responses against instructor rubrics.
-- Current Sprint 1 coverage includes tutor policy generation, preview evidence,
-  professor feedback revisions, and release blockers.
+- Implemented onboarding coverage includes tutor policy generation, preview
+  evidence, professor feedback revisions, and release blockers.
 
 ### Student Interface and Instructor Dashboard
 
@@ -45,6 +45,14 @@ testable contracts:
 
 Sprint 1 implements the first five through deterministic workflow code. The
 student and analytics agents remain planned.
+
+## Active grounding work
+
+Sprint 2 should prove one provider-backed path without coupling the architecture
+to an LMS: approved local or synthetic document ingestion, retrieval, policy
+application, live generation, and visible source evidence. Canvas can be added
+later as an optional source adapter if a safe guest course contains useful
+material.
 
 ## Open Design Decisions
 
