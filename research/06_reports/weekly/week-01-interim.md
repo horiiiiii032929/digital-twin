@@ -26,8 +26,8 @@ issues, experiment plans, or decision records.
 | Period | Project Focus | GitHub Project Items | Target Evidence |
 | --- | --- | --- | --- |
 | 2026-06-22 to 2026-06-28 | I1 Instructor Onboarding | #1-#6 | Scope, setup flow, policy fields, prototype notes, professor feedback |
-| 2026-06-29 to 2026-07-12 | I2 Course Grounding | #7 | Ingestion notes, source schema, RAG baseline smoke test |
-| 2026-07-13 to 2026-07-26 | I2 Student Active Tutoring | #8 | Student tutoring prototype, sample conversations, boundary checks |
+| 2026-06-29 to 2026-07-19 | I2 Course Grounding | #7 | Local ingestion, live LLM, source evidence, and RAG baseline smoke test |
+| 2026-07-20 to 2026-07-26 | I2 Student Active Tutoring | #8 | Student tutoring prototype, sample conversations, boundary checks |
 | 2026-07-27 to 2026-07-31 | I3 Proactive Interaction | #9 | Proactive prompt demo and interaction policy notes |
 | 2026-08-03 to 2026-08-15 | I4 Learning Gap Report | #10 | Instructor-facing learning-gap report prototype |
 | 2026-08-17 to 2026-08-23 | I5 Evaluation Setup | #11 | Evaluation dataset, rubric, and baseline criteria |

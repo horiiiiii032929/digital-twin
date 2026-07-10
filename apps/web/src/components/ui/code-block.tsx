@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils"
-import React, { useEffect, useState } from "react"
-import { codeToHtml } from "shiki"
+import React from "react"
 
 export type CodeBlockProps = {
   children?: React.ReactNode
@@ -25,48 +24,24 @@ function CodeBlock({ children, className, ...props }: CodeBlockProps) {
 export type CodeBlockCodeProps = {
   code: string
   language?: string
-  theme?: string
   className?: string
 } & React.HTMLProps<HTMLDivElement>
 
 function CodeBlockCode({
   code,
   language = "tsx",
-  theme = "github-light",
   className,
   ...props
 }: CodeBlockCodeProps) {
-  const [highlightedHtml, setHighlightedHtml] = useState<string | null>(null)
-
-  useEffect(() => {
-    async function highlight() {
-      if (!code) {
-        setHighlightedHtml("<pre><code></code></pre>")
-        return
-      }
-
-      const html = await codeToHtml(code, { lang: language, theme })
-      setHighlightedHtml(html)
-    }
-    highlight()
-  }, [code, language, theme])
-
   const classNames = cn(
-    "w-full overflow-x-auto text-[13px] [&>pre]:px-4 [&>pre]:py-4",
+    "w-full overflow-x-auto text-[13px]",
     className
   )
 
-  // SSR fallback: render plain code if not hydrated yet
-  return highlightedHtml ? (
-    <div
-      className={classNames}
-      dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-      {...props}
-    />
-  ) : (
-    <div className={classNames} {...props}>
-      <pre>
-        <code>{code}</code>
+  return (
+    <div className={classNames} data-language={language} {...props}>
+      <pre className="m-0 px-4 py-4 font-mono whitespace-pre">
+        <code className="font-mono">{code}</code>
       </pre>
     </div>
   )

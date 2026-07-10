@@ -1,10 +1,17 @@
 {
   "name": "digital-twin",
   "private": true,
+  "packageManager": "npm@11.12.1",
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
+  },
   "workspaces": [
     "apps/web"
   ],
   "scripts": {
+    "check": "npm run check:docs && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check:docs": "uv run python scripts/validate_markdown_links.py",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
     "test": "uv run pytest tests",
