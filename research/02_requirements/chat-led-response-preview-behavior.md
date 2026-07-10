@@ -8,10 +8,10 @@ Issue: #4 `[S1 06/28] Chat-led response preview behavior`
 This artifact defines how a professor previews sample tutor behavior after the
 onboarding chat generates a draft tutor policy.
 
-The preview is a release-confidence gate. Its main job is to show whether the
-tutor can answer with inspectable grounding, visible source labels, and enough
-professor control before students see it. It does not try to prove tutoring
-effectiveness or replace a full evaluation study.
+The preview is a Course Digital Twin release-approval gate. Its main job is to
+show whether the tutor can answer with inspectable grounding, visible source
+labels, and enough professor control before students see it. It does not try to
+prove tutoring effectiveness or replace a full evaluation study.
 
 ## Research claim
 
@@ -31,7 +31,7 @@ use, reject bad behavior, and revise policy through chat before release.
 - Source labels and expandable source audit.
 - Core preview cases for external grounding, academic integrity, and one
   professor-authored custom prompt.
-- Chat-based revision after rejected preview behavior.
+- Chat-based policy patch review after rejected preview behavior.
 - Release checks tied to preview decisions.
 
 ### Out of scope
@@ -45,6 +45,8 @@ use, reject bad behavior, and revise policy through chat before release.
 
 ## Preview principles
 
+- Preview supports professor approval of the Course Digital Twin, not only
+  isolated response review.
 - Preview validates behavior, not only fields.
 - Preview remains inside the chat-led onboarding loop.
 - The configured tutor response is the release candidate. Generic output is
@@ -197,7 +199,7 @@ Each core preview case has two primary decisions:
 | Decision | Meaning | Release impact |
 | --- | --- | --- |
 | Accept | The professor accepts this response as evidence for release review. | Case is marked accepted for the current policy version. |
-| Reject | The professor does not accept this response. | Release is blocked until the professor revises, accepts a later response, or explicitly changes the decision. |
+| Reject | The professor does not accept this response. | Release is blocked until the professor confirms a policy or source change, reruns the affected required preview case, and accepts the new result. |
 
 Reject can be one click. A reason is not required to block release.
 
@@ -213,15 +215,32 @@ for one reason category:
 - other.
 
 The onboarding chat then maps that category and any optional explanation to a
-candidate policy change. The professor must confirm the policy change before it
-updates the tutor policy.
+candidate policy patch. The professor may edit the patch in natural language,
+but the system should still display the affected structured policy fields before
+the professor confirms the change.
+
+Policy patches can update:
+
+- source permissions or source strictness;
+- trusted or disallowed source lists;
+- academic-integrity rules;
+- teaching approach or tutoring moves;
+- tone guidance;
+- professor rejection criteria.
+
+The professor must confirm the policy patch before it updates the tutor policy.
+After confirmation, the system creates a new tutor policy version and marks any
+preview evidence from earlier policy versions as historical, not current release
+evidence.
 
 ## Rerun behavior
 
-After a policy revision, the system should recommend rerunning the affected
-preview case and any case touched by the changed policy field. The professor may
-override the rerun recommendation, but the preview evidence should record that
-the revised behavior was not rerun.
+After a policy patch, the affected required preview case must be rerun and
+accepted before Course Digital Twin release can be unblocked. Any other required
+preview case touched by the changed policy field should also be rerun before
+release approval. The professor can continue previewing the draft Digital Twin,
+but cannot approve it for student-facing release while a required rerun is
+unresolved.
 
 ## Evidence snapshot
 
@@ -234,6 +253,8 @@ Each preview result should save:
 - timestamp,
 - tutor policy version,
 - professor decision.
+- whether the result is current release evidence or historical evidence from a
+  superseded policy version.
 
 The evidence snapshot is intentionally lighter than a full search log. It is
 enough for Sprint 1 professor review and later implementation planning.
@@ -247,6 +268,7 @@ Before deployment approval, the setup flow should show:
 - academic-integrity preview accepted or warning acknowledged,
 - professor custom prompt accepted,
 - no rejected preview response remains unresolved,
+- no required rerun remains unresolved after a policy patch,
 - source labels and audit were visible,
 - final professor release approval recorded.
 
@@ -267,7 +289,7 @@ reject unacceptable outputs, and revise the tutor policy before release.
 | --- | --- |
 | Preview supports professor validation before release. | Defines required core cases, professor accept/reject decisions, source strictness confirmation, and release checklist signals. |
 | Preview can reveal teaching style, grounding, and policy problems. | Emphasizes grounded behavior, source labels, expandable audit, warnings, custom prompt tags, and conflict handling. |
-| Revision loop routes back through chat or generated-policy correction. | Reject-to-revision flow maps reason categories to policy changes that the professor confirms through chat. |
+| Revision loop routes back through chat or generated-policy correction. | Reject-to-revision flow maps reason categories to structured policy patches that the professor can edit, confirm, rerun, and accept before release is unblocked. |
 | Preview behavior supports the minimal onboarding prototype. | Specifies the minimum generated-response, source-label, audit, decision, and evidence behavior needed for Issue #5. |
 
 ## Related artifacts
