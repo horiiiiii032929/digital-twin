@@ -5,7 +5,7 @@ goal is to capture an educator's course knowledge, tone, and teaching approach
 so students can get contextual tutoring support while instructors get actionable
 learning-gap summaries.
 
-GitHub Project: https://github.com/users/horiiiiii032929/projects/1
+GitHub Project: [Digital Twin Delivery](https://github.com/users/horiiiiii032929/projects/1)
 
 ## Project Pillars
 
@@ -33,7 +33,8 @@ AI agent contracts that sit under these pillars.
 ├── reports/                # Generated figures and final report assets
 ├── research/               # Research workflow notes and templates
 ├── scripts/                # Repeatable project utilities
-├── src/                    # Application and prototype source code
+├── services/               # FastAPI transport and application factory
+├── src/                    # Domain, policy, and grounding contracts
 └── tests/                  # Automated and manual verification notes
 ```
 
@@ -63,6 +64,14 @@ Implemented in the Sprint 1 prototype:
 - Preview evidence cases with source audit, decisions, and custom prompt review.
 - Confirm/discard revision loop for professor feedback.
 - Approval checklist that gates draft release status.
+- Modular onboarding domain, API factory/routes, and frontend adapters with
+  compatibility facades for the original imports.
+
+Implemented as Sprint 2 foundations:
+
+- Provider-neutral document, chunk, retrieval, citation, and tutor-answer models.
+- Chunker, retriever, and asynchronous tutor-generator protocols.
+- Synthetic, network-free fixtures used only by tests.
 
 Still planned:
 
@@ -71,9 +80,10 @@ Still planned:
 - Provider-backed tutor response generation.
 - Student-facing tutoring and learning-gap analytics.
 
-Active Sprint 2 work is tracked in GitHub issue #7: local approved-document
-ingestion, retrieval, provider-backed generation, tutor-policy enforcement, and
-visible source evidence. Canvas remains an optional future connector.
+Active Sprint 2 work is tracked by roadmap issue #7 and execution sub-issues
+#19-#25. Real parsing, retrieval, provider-backed generation, tutor-policy
+enforcement, and visible source evidence remain delivery work. Canvas remains
+an optional future connector.
 
 ## Sprint 1 Onboarding Prototype
 

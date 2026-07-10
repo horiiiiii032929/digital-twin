@@ -29,3 +29,11 @@ policy.
 - I3 Proactive Interaction
 - I4 Learning Gap Report
 - I5 Evaluation and Refinement
+
+## Current Phase
+
+I1 instructor onboarding is complete and approved. I2 is active under roadmap
+issue #7, with execution split into sub-issues #19-#25. The repository now has
+modular onboarding, API, and frontend boundaries plus provider-neutral grounding
+contracts. Real parsing, retrieval, and live generation remain Sprint 2 delivery
+work; Canvas remains an optional future source adapter.
