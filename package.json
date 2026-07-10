@@ -1,0 +1,16 @@
+{
+  "name": "digital-twin",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
+    "test": "uv run pytest tests",
+    "test:api": "uv run pytest tests",
+    "test:web": "npm --workspace apps/web run test -- --run",
+    "build:web": "npm --workspace apps/web run build",
+    "lint:web": "npm --workspace apps/web run lint"
+  }
+}

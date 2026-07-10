@@ -9,3 +9,7 @@ Testing should cover:
 - Prompt and policy configuration
 - Evaluation scoring
 - Privacy and data exclusion checks
+
+Manual verification notes:
+
+- [onboarding-prototype.md](manual/onboarding-prototype.md)
