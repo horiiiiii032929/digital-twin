@@ -77,9 +77,17 @@ Sprint 1 keeps uploads metadata-only and uses a deterministic source catalog for
 preview grounding. It does not read local file contents or call a live search
 provider.
 
+Prof. Lek reviewed the onboarding direction and approved continuing with the
+chat-led approach. Canvas should remain an optional source connector rather than
+a required dependency; approved local or synthetic documents are the baseline
+for the next grounding prototype.
+
 See [docs/onboarding-prototype.md](docs/onboarding-prototype.md) for the reviewer
 flow and [tests/manual/onboarding-prototype.md](tests/manual/onboarding-prototype.md)
 for manual verification steps.
+
+See [reports/issue-6-professor-feedback.md](reports/issue-6-professor-feedback.md)
+for the Sprint 1 review decision and its implementation implications.
 
 See [docs/github-project.md](docs/github-project.md) for how repository issues
 map to the linked GitHub Project fields.
