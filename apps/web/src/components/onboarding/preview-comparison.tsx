@@ -23,7 +23,7 @@ import type {
   PreviewDecisionValue,
   PromptTag,
   SourceLabel,
-} from "@/lib/api"
+} from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
 type PreviewComparisonProps = {

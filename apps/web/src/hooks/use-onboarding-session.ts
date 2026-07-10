@@ -1,35 +1,33 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useReducer } from "react"
 
+import {
+  initialSessionState,
+  errorMessage,
+  sessionReducer,
+  type SessionOperation,
+  type SessionState,
+} from "@/hooks/onboarding/session-state"
 import {
   addCustomPreviewCase,
   addSourceInventoryItem,
   confirmRevisionProposal,
   createOnboardingSession,
   discardRevisionProposal,
-  type FieldStatus,
-  type OnboardingSession,
-  type PreviewDecisionValue,
-  type PromptTag,
-  type SourceInventoryItem,
   setPreviewDecision,
   submitOnboardingMessage,
   updateApprovalChecklistItem,
   updatePolicyField,
   updateSourceInventoryItem,
-} from "@/lib/api"
+} from "@/lib/api/onboarding"
+import type {
+  FieldStatus,
+  OnboardingSession,
+  PreviewDecisionValue,
+  PromptTag,
+  SourceInventoryItem,
+} from "@/lib/api/types"
 
-type OnboardingState = {
-  session: OnboardingSession | null
-  error: string | null
-  isStarting: boolean
-  isSubmitting: boolean
-  isAddingSource: boolean
-  updatingSourceId: string | null
-  updatingFieldId: string | null
-  updatingApprovalItemId: string | null
-  updatingPreviewId: string | null
-  isAddingCustomPreview: boolean
-  isResolvingRevision: boolean
+export type OnboardingController = SessionState & {
   restart: () => Promise<void>
   sendMessage: (content: string) => Promise<void>
   addSource: (item: {
@@ -67,31 +65,19 @@ type OnboardingState = {
   discardRevision: () => Promise<void>
 }
 
-export function useOnboardingSession(): OnboardingState {
-  const [session, setSession] = useState<OnboardingSession | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [isStarting, setIsStarting] = useState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isAddingSource, setIsAddingSource] = useState(false)
-  const [updatingSourceId, setUpdatingSourceId] = useState<string | null>(null)
-  const [updatingFieldId, setUpdatingFieldId] = useState<string | null>(null)
-  const [updatingApprovalItemId, setUpdatingApprovalItemId] = useState<
-    string | null
-  >(null)
-  const [updatingPreviewId, setUpdatingPreviewId] = useState<string | null>(null)
-  const [isAddingCustomPreview, setIsAddingCustomPreview] = useState(false)
-  const [isResolvingRevision, setIsResolvingRevision] = useState(false)
+export function useOnboardingSession(): OnboardingController {
+  const [state, dispatch] = useReducer(sessionReducer, initialSessionState)
 
   const startSession = useCallback(async () => {
-    setIsStarting(true)
-    setError(null)
+    dispatch({ type: "start/pending" })
 
     try {
-      setSession(await createOnboardingSession())
+      dispatch({
+        type: "start/succeeded",
+        session: await createOnboardingSession(),
+      })
     } catch (caught) {
-      setError(errorMessage(caught))
-    } finally {
-      setIsStarting(false)
+      dispatch({ type: "start/failed", error: errorMessage(caught) })
     }
   }, [])
 
@@ -99,26 +85,45 @@ export function useOnboardingSession(): OnboardingState {
     void startSession()
   }, [startSession])
 
+  const runOperation = useCallback(
+    async (
+      operation: SessionOperation,
+      command: () => Promise<OnboardingSession>,
+      id?: string,
+    ) => {
+      dispatch({ type: "operation/pending", operation, id })
+
+      try {
+        dispatch({
+          type: "operation/succeeded",
+          operation,
+          session: await command(),
+        })
+      } catch (caught) {
+        dispatch({
+          type: "operation/failed",
+          operation,
+          error: errorMessage(caught),
+        })
+      } finally {
+        dispatch({ type: "operation/finished", operation })
+      }
+    },
+    [],
+  )
+
   const sendMessage = useCallback(
     async (content: string) => {
       const trimmed = content.trim()
-
-      if (!trimmed || !session || isSubmitting) {
+      if (!trimmed || !state.session || state.isSubmitting) {
         return
       }
 
-      setIsSubmitting(true)
-      setError(null)
-
-      try {
-        setSession(await submitOnboardingMessage(session.session_id, trimmed))
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setIsSubmitting(false)
-      }
+      await runOperation("message", () =>
+        submitOnboardingMessage(state.session!.session_id, trimmed),
+      )
     },
-    [isSubmitting, session],
+    [runOperation, state.isSubmitting, state.session],
   )
 
   const editPolicyField = useCallback(
@@ -127,24 +132,17 @@ export function useOnboardingSession(): OnboardingState {
       value: string | string[] | Record<string, unknown>,
       status: FieldStatus,
     ) => {
-      if (!session || updatingFieldId) {
+      if (!state.session || state.updatingFieldId) {
         return
       }
 
-      setUpdatingFieldId(fieldId)
-      setError(null)
-
-      try {
-        setSession(
-          await updatePolicyField(session.session_id, fieldId, value, status),
-        )
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setUpdatingFieldId(null)
-      }
+      await runOperation(
+        "policy-update",
+        () => updatePolicyField(state.session!.session_id, fieldId, value, status),
+        fieldId,
+      )
     },
-    [session, updatingFieldId],
+    [runOperation, state.session, state.updatingFieldId],
   )
 
   const addSource = useCallback(
@@ -154,22 +152,15 @@ export function useOnboardingSession(): OnboardingState {
       size_bytes: number
       notes?: string
     }) => {
-      if (!session || isAddingSource) {
+      if (!state.session || state.isAddingSource) {
         return
       }
 
-      setIsAddingSource(true)
-      setError(null)
-
-      try {
-        setSession(await addSourceInventoryItem(session.session_id, item))
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setIsAddingSource(false)
-      }
+      await runOperation("source-add", () =>
+        addSourceInventoryItem(state.session!.session_id, item),
+      )
     },
-    [isAddingSource, session],
+    [runOperation, state.isAddingSource, state.session],
   )
 
   const editSource = useCallback(
@@ -186,46 +177,38 @@ export function useOnboardingSession(): OnboardingState {
         >
       >,
     ) => {
-      if (!session || updatingSourceId) {
+      if (!state.session || state.updatingSourceId) {
         return
       }
 
-      setUpdatingSourceId(sourceId)
-      setError(null)
-
-      try {
-        setSession(
-          await updateSourceInventoryItem(session.session_id, sourceId, updates),
-        )
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setUpdatingSourceId(null)
-      }
+      await runOperation(
+        "source-update",
+        () =>
+          updateSourceInventoryItem(
+            state.session!.session_id,
+            sourceId,
+            updates,
+          ),
+        sourceId,
+      )
     },
-    [session, updatingSourceId],
+    [runOperation, state.session, state.updatingSourceId],
   )
 
   const updateApprovalItem = useCallback(
     async (itemId: string, checked: boolean) => {
-      if (!session || updatingApprovalItemId) {
+      if (!state.session || state.updatingApprovalItemId) {
         return
       }
 
-      setUpdatingApprovalItemId(itemId)
-      setError(null)
-
-      try {
-        setSession(
-          await updateApprovalChecklistItem(session.session_id, itemId, checked),
-        )
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setUpdatingApprovalItemId(null)
-      }
+      await runOperation(
+        "approval-update",
+        () =>
+          updateApprovalChecklistItem(state.session!.session_id, itemId, checked),
+        itemId,
+      )
     },
-    [session, updatingApprovalItemId],
+    [runOperation, state.session, state.updatingApprovalItemId],
   )
 
   const decidePreview = useCallback(
@@ -234,103 +217,64 @@ export function useOnboardingSession(): OnboardingState {
       decision: PreviewDecisionValue,
       reason?: string,
     ) => {
-      if (!session || updatingPreviewId) {
+      if (!state.session || state.updatingPreviewId) {
         return
       }
 
-      setUpdatingPreviewId(previewCaseId)
-      setError(null)
-
-      try {
-        setSession(
-          await setPreviewDecision(
-            session.session_id,
+      await runOperation(
+        "preview-update",
+        () =>
+          setPreviewDecision(
+            state.session!.session_id,
             previewCaseId,
             decision,
             reason,
           ),
-        )
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setUpdatingPreviewId(null)
-      }
+        previewCaseId,
+      )
     },
-    [session, updatingPreviewId],
+    [runOperation, state.session, state.updatingPreviewId],
   )
 
   const addCustomPreview = useCallback(
     async (prompt: string, tag: PromptTag) => {
       const trimmed = prompt.trim()
-      if (!session || isAddingCustomPreview || !trimmed) {
+      if (!state.session || state.isAddingCustomPreview || !trimmed) {
         return
       }
 
-      setIsAddingCustomPreview(true)
-      setError(null)
-
-      try {
-        setSession(
-          await addCustomPreviewCase(session.session_id, {
-            prompt: trimmed,
-            tag,
-          }),
-        )
-      } catch (caught) {
-        setError(errorMessage(caught))
-      } finally {
-        setIsAddingCustomPreview(false)
-      }
+      await runOperation("preview-add", () =>
+        addCustomPreviewCase(state.session!.session_id, {
+          prompt: trimmed,
+          tag,
+        }),
+      )
     },
-    [isAddingCustomPreview, session],
+    [runOperation, state.isAddingCustomPreview, state.session],
   )
 
   const confirmRevision = useCallback(async () => {
-    if (!session || isResolvingRevision) {
+    if (!state.session || state.isResolvingRevision) {
       return
     }
 
-    setIsResolvingRevision(true)
-    setError(null)
-
-    try {
-      setSession(await confirmRevisionProposal(session.session_id))
-    } catch (caught) {
-      setError(errorMessage(caught))
-    } finally {
-      setIsResolvingRevision(false)
-    }
-  }, [isResolvingRevision, session])
+    await runOperation("revision-resolve", () =>
+      confirmRevisionProposal(state.session!.session_id),
+    )
+  }, [runOperation, state.isResolvingRevision, state.session])
 
   const discardRevision = useCallback(async () => {
-    if (!session || isResolvingRevision) {
+    if (!state.session || state.isResolvingRevision) {
       return
     }
 
-    setIsResolvingRevision(true)
-    setError(null)
-
-    try {
-      setSession(await discardRevisionProposal(session.session_id))
-    } catch (caught) {
-      setError(errorMessage(caught))
-    } finally {
-      setIsResolvingRevision(false)
-    }
-  }, [isResolvingRevision, session])
+    await runOperation("revision-resolve", () =>
+      discardRevisionProposal(state.session!.session_id),
+    )
+  }, [runOperation, state.isResolvingRevision, state.session])
 
   return {
-    session,
-    error,
-    isStarting,
-    isSubmitting,
-    isAddingSource,
-    updatingSourceId,
-    updatingFieldId,
-    updatingApprovalItemId,
-    updatingPreviewId,
-    isAddingCustomPreview,
-    isResolvingRevision,
+    ...state,
     restart: startSession,
     sendMessage,
     addSource,
@@ -342,12 +286,4 @@ export function useOnboardingSession(): OnboardingState {
     confirmRevision,
     discardRevision,
   }
-}
-
-function errorMessage(caught: unknown): string {
-  if (caught instanceof Error) {
-    return caught.message
-  }
-
-  return "Unexpected onboarding error."
 }

@@ -3,7 +3,7 @@ import { CheckCircle2, Loader2, LockKeyhole } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
-import type { ApprovalItem } from "@/lib/api"
+import type { ApprovalItem } from "@/lib/api/types"
 
 type ApprovalChecklistProps = {
   items: ApprovalItem[]

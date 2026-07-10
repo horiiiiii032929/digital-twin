@@ -13,7 +13,7 @@ import {
   ChainOfThoughtStep,
   ChainOfThoughtTrigger,
 } from "@/components/ui/chain-of-thought"
-import type { TraceStatus, WorkflowTraceItem } from "@/lib/api"
+import type { TraceStatus, WorkflowTraceItem } from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
 type WorkflowTraceProps = {

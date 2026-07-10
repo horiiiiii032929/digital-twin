@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/prompt-input"
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion"
 import { Button } from "@/components/ui/button"
-import type { ChatMessage } from "@/lib/api"
+import type { ChatMessage } from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
 type OnboardingChatProps = {

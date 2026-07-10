@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from services.api.app.factory import create_app
 from services.api.app.main import app
 from services.api.app.store import store
 
@@ -53,6 +54,20 @@ def test_cors_allows_vite_fallback_localhost_port():
     assert response.headers["access-control-allow-origin"] == (
         "http://localhost:5174"
     )
+
+
+def test_application_factory_isolates_default_session_repositories():
+    first_client = TestClient(create_app())
+    second_client = TestClient(create_app())
+
+    created = first_client.post("/api/onboarding/sessions").json()
+
+    assert first_client.get(
+        f"/api/onboarding/sessions/{created['session_id']}"
+    ).status_code == 200
+    assert second_client.get(
+        f"/api/onboarding/sessions/{created['session_id']}"
+    ).status_code == 404
 
 
 def test_source_inventory_routes_create_and_update_metadata_only_items():
