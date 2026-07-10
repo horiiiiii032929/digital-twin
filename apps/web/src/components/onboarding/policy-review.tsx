@@ -4,7 +4,7 @@ import { Loader2, Save, ShieldAlert } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import type { FieldStatus, PolicyField, TutorPolicy } from "@/lib/api"
+import type { FieldStatus, PolicyField, TutorPolicy } from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
 type PolicyReviewProps = {

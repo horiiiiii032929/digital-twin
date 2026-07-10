@@ -8,7 +8,7 @@ import type {
   SourceInventoryItem,
   SourceLabel,
   SourcePermissionStatus,
-} from "@/lib/api"
+} from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
 type SourceInventoryProps = {

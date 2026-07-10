@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import {
+  ApiError,
   addCustomPreviewCase,
   addSourceInventoryItem,
   confirmRevisionProposal,
@@ -49,6 +50,19 @@ describe("onboarding API client", () => {
     expect(fetchMock).toHaveBeenCalledWith(
       "http://localhost:8000/api/onboarding/sessions",
       expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("preserves structured API error messages through the compatibility barrel", async () => {
+    stubFetch(
+      { detail: { message: "Complete the interview before editing policy fields." } },
+      409,
+    )
+
+    await expect(
+      updatePolicyField("session-1", "field-1", "value", "resolved"),
+    ).rejects.toEqual(
+      new ApiError("Complete the interview before editing policy fields.", 409),
     )
   })
 
