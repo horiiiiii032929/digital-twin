@@ -47,4 +47,3 @@ flag, and notes. It does not read file contents.
 - Define a permission record before ingesting real materials.
 - Add source versioning and deletion behavior.
 - Add retrieval-quality checks once real ingestion exists.
-

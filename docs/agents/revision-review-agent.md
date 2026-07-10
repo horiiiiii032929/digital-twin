@@ -43,4 +43,3 @@ integrity, source/citation, and tone revisions.
 - Add structured reason categories for rejection.
 - Track revision history beyond the current in-memory session.
 - Add conflict detection when feedback maps to multiple policy fields.
-

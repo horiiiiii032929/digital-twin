@@ -45,4 +45,3 @@ session routes, and rendered by the web onboarding chat.
   after the schema and red-team tests are stable.
 - Add explicit session persistence before multi-user testing.
 - Add richer trace reasons for professor-facing explainability.
-

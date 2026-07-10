@@ -27,4 +27,3 @@ status, and open work.
   preview decisions, source inventory, or approval checklist entries.
 - Keep agent boundaries narrow enough that each agent can be evaluated
   independently.
-

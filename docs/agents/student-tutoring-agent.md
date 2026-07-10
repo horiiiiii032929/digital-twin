@@ -44,4 +44,3 @@ Planned. No student-facing tutoring implementation exists in Sprint 1.
 - Add conversation storage and retention policy.
 - Add student privacy and consent checks.
 - Build a minimal active tutoring UI.
-

@@ -24,4 +24,3 @@ const badgeVariants = cva(
 )
 
 export { badgeVariants }
-

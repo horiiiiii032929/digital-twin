@@ -48,4 +48,3 @@ catalog. No live search, RAG, or model provider is called in Sprint 1.
   tests define expected behavior.
 - Add source-conflict checks once retrieval is available.
 - Add richer preview tags for assignment-specific evaluation.
-
