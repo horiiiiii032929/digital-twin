@@ -50,6 +50,8 @@ target project for automatic project assignment from issue forms.
   live LLM generation, and visible source evidence.
 - Canvas is an optional future connector. It should not block or define the core
   ingestion and retrieval architecture.
+- The [quality and learning plan](quality-and-learning-plan.md) is the acceptance
+  standard for technical depth, evaluation evidence, and student understanding.
 
 ### Active Sprint 2 execution
 
@@ -93,3 +95,6 @@ project board. The current presentation milestone is tracked through
 - Update `Target Date` before changing scope so timeline drift is visible.
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.
+- Do not close a technical execution issue until its design note, tests,
+  experiment evidence, limitations, and learning log satisfy the shared
+  definition of done.

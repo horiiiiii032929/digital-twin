@@ -19,6 +19,10 @@ GitHub Project: [Digital Twin Delivery](https://github.com/users/horiiiiii032929
 See [docs/agents/README.md](docs/agents/README.md) for the implementation-facing
 AI agent contracts that sit under these pillars.
 
+The project's technical standard, learning commitments, and strengthened Sprint
+2 acceptance criteria are defined in
+[docs/quality-and-learning-plan.md](docs/quality-and-learning-plan.md).
+
 ## Repository Layout
 
 ```text
