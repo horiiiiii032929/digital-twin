@@ -13,3 +13,7 @@ Testing should cover:
 Manual verification notes:
 
 - [onboarding-prototype.md](manual/onboarding-prototype.md)
+
+Local ingestion verification uses the committed synthetic corpus under
+`fixtures/course_corpus/` plus a generated synthetic PDF. Run
+`npm run verify:ingestion`; no real course material is required or committed.

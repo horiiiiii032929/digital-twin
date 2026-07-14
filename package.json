@@ -16,6 +16,7 @@
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
     "test": "uv run pytest tests",
     "test:api": "uv run pytest tests",
+    "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"

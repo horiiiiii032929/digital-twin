@@ -13,6 +13,7 @@ src/digital_twin/
 └── llm.py                  # Existing provider-neutral LLM client boundary
 ```
 
-Production grounding code contains contracts only. Synthetic implementations
-belong in `tests/fixtures/`; provider selection, parsing, embeddings, Canvas,
-persistence, and live generation are separate delivery tasks.
+Production grounding code contains provider-neutral contracts plus the approved
+local TXT, Markdown, and PDF parser and deterministic chunker. Synthetic corpus
+material belongs in `tests/fixtures/`; provider selection, retrieval, embeddings,
+Canvas, persistence, and live generation remain separate delivery tasks.

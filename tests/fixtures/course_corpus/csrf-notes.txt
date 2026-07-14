@@ -1,0 +1,5 @@
+Cross-site request forgery abuses a browser that already has an authenticated
+session with a target site.
+
+Common defenses include anti-CSRF tokens, SameSite cookie settings, and origin
+validation. Password complexity alone does not prevent CSRF.

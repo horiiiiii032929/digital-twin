@@ -76,11 +76,14 @@ Implemented as Sprint 2 foundations:
 - Provider-neutral document, chunk, retrieval, citation, and tutor-answer models.
 - Chunker, retriever, and asynchronous tutor-generator protocols.
 - Synthetic, network-free fixtures used only by tests.
+- Permission-gated local UTF-8 text, Markdown, and selectable-text PDF parsing.
+- Stable source-version, content-hash, page, locator, and figure provenance.
+- Deterministic heading/paragraph chunking with inherited tutoring permission.
 
 Still planned:
 
 - Persistent storage, authentication, and multi-user sessions.
-- Real source ingestion, retrieval, citation, and source-conflict checks.
+- Retrieval, citation, and source-conflict checks.
 - Provider-backed tutor response generation.
 - Student-facing tutoring and learning-gap analytics.
 

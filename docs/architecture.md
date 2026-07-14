@@ -72,31 +72,32 @@ TutorPolicy ──────────────────────�
                                                              └─ warnings
 ```
 
-`CourseDocument` carries an approved source label. Chunks preserve document
-identity and locators in metadata. Retrieval returns scored chunks, while the
-asynchronous generator returns answer content, explicit citations, and warnings.
-The protocols do not select a parser, embedding model, vector store, or LLM.
+`SourceArtifact` and `ApprovalRecord` now gate local parsing. `CourseDocument`
+carries the approved source version, permission snapshot, content hash, ordered
+segments, and an opaque source locator. Chunks preserve this lineage in explicit
+fields and metadata. Retrieval returns scored chunks, while the asynchronous
+generator returns answer content, explicit citations, and warnings. See
+[local-ingestion.md](local-ingestion.md) for the parser, figure, and deterministic
+chunking design.
 
 Synthetic chunker, retriever, and generator implementations live under
 `tests/fixtures/` and make the contracts executable without network calls.
 
 ### Sprint 2 implementation boundary
 
-This refactor includes contracts and test fixtures only. The following remain
-separate execution sub-issues under roadmap issue #7:
+The provider-neutral contracts and local ingestion baseline are implemented.
+The following remain separate execution sub-issues under roadmap issue #7:
 
-- Local document parsing and deterministic chunking (#22)
 - Retrieval and visible source evidence (#23)
 - Live generation and tutor-policy enforcement (#24)
 - Grounded tutoring smoke demonstration (#25)
 
-Provider selection, embeddings, Canvas, persistence, real document parsing, and
-live RAG are not implemented in this refactor. Canvas can be added later as an
-optional source adapter if a safe guest course contains useful material.
+Provider selection, embeddings, Canvas, persistence, and live RAG are not
+implemented. Canvas can be added later as an optional source adapter if a safe
+guest course contains useful material.
 
 ## Open Design Decisions
 
-- Identity source format and versioning
 - Retrieval ranking and production citation locators
 - Prompt and policy configuration schema
 - Agent prompt boundaries and model/provider selection

@@ -14,6 +14,11 @@ class DocumentChunker(Protocol):
         """Split one approved document while preserving source identity."""
 
 
+class FigureStore(Protocol):
+    def store(self, figure_id: str, extension: str, content: bytes) -> str:
+        """Persist extracted bytes outside domain models and return an opaque ref."""
+
+
 class Retriever(Protocol):
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         """Return ranked chunks for a question without choosing a provider."""
