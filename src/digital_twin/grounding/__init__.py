@@ -50,6 +50,10 @@ from src.digital_twin.grounding.retrieval_evaluation import (
     evaluate_retriever,
     load_retrieval_evaluation_set,
 )
+from src.digital_twin.grounding.retrieval_factory import (
+    UnsupportedRetrieverSelectionError,
+    build_selected_retriever,
+)
 
 
 __all__ = [
@@ -91,6 +95,8 @@ __all__ = [
     "TutorGenerator",
     "TermOverlapRetriever",
     "UnsupportedSourceError",
+    "UnsupportedRetrieverSelectionError",
+    "build_selected_retriever",
     "evaluate_retriever",
     "lexical_tokens",
     "load_retrieval_evaluation_set",

@@ -16,3 +16,6 @@ Current utilities:
   and enforces regression thresholds; run it with `npm run verify:retrieval`.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
+- `validate_component_profile.py`: validates the complete component inventory,
+  selection status, evidence paths, and linked evaluation decisions; run it
+  with `npm run verify:profile`.

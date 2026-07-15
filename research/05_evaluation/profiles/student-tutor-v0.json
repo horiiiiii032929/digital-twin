@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "profile_id": "student-tutor",
+  "profile_version": "v0",
+  "stage": "experimental",
+  "components": [
+    {
+      "component": "source-adapter",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "local-files",
+        "version": "v1",
+        "configuration": {
+          "supported_formats": "txt,md,pdf"
+        }
+      },
+      "decision": "keep",
+      "evidence_paths": [
+        "docs/local-ingestion.md"
+      ],
+      "hard_gates": [
+        "professor-approval",
+        "sensitive-data-excluded",
+        "source-version-integrity"
+      ],
+      "candidate_ids": [
+        "canvas-adapter"
+      ],
+      "notes": "Local files remain the approved MVP source boundary; Canvas is optional and unevaluated."
+    },
+    {
+      "component": "parser",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "pymupdf-document-parser",
+        "version": "v1",
+        "configuration": {
+          "selectable_text_only": true,
+          "extract_embedded_raster_figures": true
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "synthetic-ingestion-v1",
+      "evidence_paths": [
+        "docs/local-ingestion.md",
+        "research/04_experiments/2026-07-14-local-ingestion-learning-log.md"
+      ],
+      "hard_gates": [
+        "permission-before-processing",
+        "checksum-match",
+        "provenance-preserved"
+      ],
+      "candidate_ids": [
+        "layout-aware-parser",
+        "ocr-parser"
+      ],
+      "notes": "The baseline supports selectable-text PDF, Markdown, and UTF-8 text; OCR and layout reconstruction remain pending evidence."
+    },
+    {
+      "component": "chunker",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "heading-paragraph-chunker",
+        "version": "v1",
+        "configuration": {
+          "max_chars": 1200,
+          "overlap_chars": 160
+        }
+      },
+      "decision": "refine",
+      "evidence_paths": [
+        "docs/local-ingestion.md",
+        "docs/local-retrieval.md"
+      ],
+      "hard_gates": [
+        "stable-identifiers",
+        "source-provenance",
+        "retrieval-permission-inherited"
+      ],
+      "candidate_ids": [
+        "fixed-token-chunker",
+        "semantic-chunker"
+      ],
+      "notes": "The algorithm is selected, but size and overlap require a larger approved-corpus comparison."
+    },
+    {
+      "component": "retriever",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "bm25",
+        "version": "v1",
+        "configuration": {
+          "k1": 1.2,
+          "b": 0.75,
+          "tokenizer": "lowercase-alphanumeric"
+        }
+      },
+      "control": {
+        "implementation_id": "term-overlap",
+        "version": "v1",
+        "configuration": {
+          "tokenizer": "lowercase-alphanumeric"
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "retrieval-v1",
+      "evaluation_record_path": "research/05_evaluation/records/retrieval-v1.json",
+      "evidence_paths": [
+        "docs/local-retrieval.md",
+        "research/05_evaluation/retrieval-v1-results.md"
+      ],
+      "hard_gates": [
+        "permission-filter",
+        "active-version-filter",
+        "source-evidence",
+        "sensitive-data-excluded"
+      ],
+      "candidate_ids": [
+        "embedding-retriever",
+        "hybrid-retriever"
+      ],
+      "notes": "BM25 is the measured Sprint 2 baseline; term overlap remains the regression control."
+    },
+    {
+      "component": "reranker",
+      "status": "pending",
+      "hard_gates": [
+        "source-evidence-preserved",
+        "latency-budget"
+      ],
+      "candidate_ids": [
+        "no-reranker",
+        "cross-encoder-reranker",
+        "llm-reranker"
+      ],
+      "notes": "No reranker will be selected until retrieval failures justify its cost."
+    },
+    {
+      "component": "figure-description",
+      "status": "pending",
+      "hard_gates": [
+        "figure-source-lineage",
+        "human-review-status",
+        "display-permission"
+      ],
+      "candidate_ids": [
+        "caption-context-description",
+        "vision-model-description"
+      ],
+      "notes": "Figure bytes and captions exist, but semantic description has not been evaluated."
+    },
+    {
+      "component": "generator",
+      "status": "pending",
+      "hard_gates": [
+        "grounded-evidence-only",
+        "provider-secret-isolation",
+        "explicit-provider-failure"
+      ],
+      "candidate_ids": [
+        "deterministic-generator-control",
+        "live-provider-generator"
+      ],
+      "notes": "Issue #24 must compare a deterministic control with at least one live provider candidate."
+    },
+    {
+      "component": "prompt",
+      "status": "pending",
+      "hard_gates": [
+        "policy-included",
+        "evidence-included",
+        "prompt-version-recorded"
+      ],
+      "candidate_ids": [
+        "direct-grounded-prompt",
+        "guided-grounded-prompt"
+      ],
+      "notes": "Prompt variants must use the same questions, evidence, policy, and generator conditions."
+    },
+    {
+      "component": "tutor-policy",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "structured-professor-policy",
+        "version": "v1",
+        "configuration": {
+          "approval_required": true
+        }
+      },
+      "decision": "keep",
+      "evidence_paths": [
+        "docs/onboarding-prototype.md",
+        "research/02_requirements/chat-led-tutor-policy-extraction.md"
+      ],
+      "hard_gates": [
+        "professor-approval",
+        "privacy-boundaries-explicit",
+        "integrity-boundaries-explicit"
+      ],
+      "candidate_ids": [
+        "versioned-professor-policy-v2"
+      ],
+      "notes": "The structured policy is selected; live enforcement quality remains a separate pending component."
+    },
+    {
+      "component": "policy-enforcement",
+      "status": "pending",
+      "hard_gates": [
+        "graded-work-boundary",
+        "no-evidence-response",
+        "policy-version-traceability"
+      ],
+      "candidate_ids": [
+        "deterministic-policy-rules",
+        "model-assisted-policy-check"
+      ],
+      "notes": "Issue #24 must measure refusal precision, safe redirection, and policy compliance."
+    },
+    {
+      "component": "citation-validation",
+      "status": "pending",
+      "hard_gates": [
+        "citation-maps-to-retrieved-hit",
+        "locator-present",
+        "source-version-active"
+      ],
+      "candidate_ids": [
+        "deterministic-citation-validator"
+      ],
+      "notes": "Citation validation is a hard gate and must remain deterministic even if generation is model-based."
+    },
+    {
+      "component": "conversation-orchestration",
+      "status": "pending",
+      "hard_gates": [
+        "state-traceability",
+        "failure-recovery",
+        "student-data-minimization"
+      ],
+      "candidate_ids": [
+        "deterministic-turn-state",
+        "graph-orchestrator"
+      ],
+      "notes": "Student conversation state belongs to issue #8 after the grounded vertical slice."
+    },
+    {
+      "component": "proactive-trigger",
+      "status": "pending",
+      "hard_gates": [
+        "student-control",
+        "suppression-rules",
+        "privacy-safe-signals"
+      ],
+      "candidate_ids": [
+        "rule-based-trigger",
+        "classifier-trigger"
+      ],
+      "notes": "Trigger precision, recall, and interruption cost belong to iteration 3."
+    },
+    {
+      "component": "learning-gap-analytics",
+      "status": "pending",
+      "hard_gates": [
+        "minimum-group-size",
+        "student-deidentification",
+        "uncertainty-visible"
+      ],
+      "candidate_ids": [
+        "rule-based-aggregation",
+        "clustered-gap-summary"
+      ],
+      "notes": "Aggregation accuracy, privacy thresholds, and instructor actionability belong to iteration 4."
+    }
+  ]
+}
