@@ -328,7 +328,11 @@ def _ranked_hits(
         key=lambda item: (-raw_by_chunk[item[1].id], *_chunk_tie_breaker(item[1])),
     )
     return [
-        RetrievalHit(chunk=chunk, relevance_score=score)
+        RetrievalHit(
+            chunk=chunk,
+            relevance_score=score,
+            raw_score=raw_by_chunk[chunk.id],
+        )
         for score, chunk in ranked[:limit]
     ]
 

@@ -54,6 +54,10 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run verify:retrieval`: run the network-free retrieval v1 regression set.
 - `npm run benchmark:retrieval`: compare BM25, local BGE-small, and RRF on
   retrieval v2; this optional command may download ignored local model files.
+- `npm run calibrate:evidence-sufficiency`: select evidence-gate configurations
+  on calibration data without evaluating the frozen held-out set.
+- `npm run benchmark:evidence-sufficiency`: compare any-hit, BM25-score,
+  lexical-coverage, and semantic-agreement evidence gates.
 - `npm run verify:evaluation-results`: validate the durable evaluation-result
   registry and its referenced artifacts.
 - `npm run verify:profile`: validate the versioned component profile.
@@ -92,12 +96,14 @@ Implemented as Sprint 2 foundations:
   reciprocal-rank fusion. The result is `Refine`, with no v2 replacement.
 - A versioned component profile, evaluation records, result registry, and CI
   validators that prevent undocumented implementation replacement.
+- An explicit, swappable evidence-sufficiency boundary and a 50-case held-out
+  comparison. The result is `Refine`, with no safe gate selected.
 
 Still planned:
 
 - Persistent storage, authentication, and multi-user sessions.
-- Retrieval evidence-sufficiency, production citation validation, and
-  source-conflict checks.
+- A successor retrieval answerability/evidence-sufficiency classifier,
+  production citation validation, and source-conflict checks.
 - Provider-backed tutor response generation.
 - Student-facing tutoring and learning-gap analytics.
 
@@ -105,8 +111,10 @@ Active Sprint 2 work is tracked by roadmap issue #7 and execution sub-issues
 #19-#25, #34, and #37. Parsing, chunking, retrieval v1/v2, evaluation
 architecture, and durable result governance are complete. Draft PR #36 contains
 a deterministic generation/policy preflight; live model and prompt selection,
-the evidence-sufficiency gate, tutor-policy enforcement, and the smoke demo
-remain delivery work. Canvas remains an optional future connector.
+the successor evidence-sufficiency gate, tutor-policy enforcement, and the smoke
+demo remain delivery work. Evidence-sufficiency v1 selected no implementation,
+so end-to-end grounding claims remain blocked. Canvas remains an optional future
+connector.
 
 ## Sprint 1 Onboarding Prototype
 

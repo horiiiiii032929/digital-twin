@@ -1,0 +1,43 @@
+{
+  "version": "evidence-sufficiency-v1-calibration",
+  "corpus_version": "synthetic-web-security-v2",
+  "description": "Thirty synthetic development queries used only to calibrate evidence-sufficiency candidates, including vocabulary-sharing out-of-domain negatives.",
+  "cases": [
+    {"id":"es-cal-exact-01","category":"exact","query":"issue fresh session identifier after privilege change","relevant":[{"source_artifact_id":"sessions","text_contains":"issuing a fresh identifier immediately after login"}],"rationale":"Exact session-fixation terminology."},
+    {"id":"es-cal-exact-02","category":"exact","query":"context specific output encoding HTML attributes CSS URLs","relevant":[{"source_artifact_id":"xss","text_contains":"context-specific output encoding"}],"rationale":"Exact output-encoding terminology."},
+    {"id":"es-cal-exact-03","category":"exact","query":"private grading accommodation confidential course channel","relevant":[{"source_artifact_id":"course-support","text_contains":"private grading or accommodation matters"}],"rationale":"Exact course-support fact."},
+
+    {"id":"es-cal-para-01","category":"paraphrase","query":"What should the service do to every device already signed in after a password change?","relevant":[{"source_artifact_id":"sessions","text_contains":"revoke every existing authentication token"}],"rationale":"Session revocation paraphrase."},
+    {"id":"es-cal-para-02","category":"paraphrase","query":"Which value links a third-party login callback to the browser that started it?","relevant":[{"source_artifact_id":"oauth","text_contains":"state value correlates the authorization response"}],"rationale":"OAuth state paraphrase."},
+    {"id":"es-cal-para-03","category":"paraphrase","query":"Why can recorded encrypted traffic remain safe when a permanent server secret leaks later?","relevant":[{"source_artifact_id":"tls","text_contains":"Ephemeral key exchange provides forward secrecy"}],"rationale":"Forward-secrecy paraphrase."},
+    {"id":"es-cal-para-04","category":"paraphrase","query":"How should code insert user text without treating the string as browser markup?","relevant":[{"source_artifact_id":"xss","text_contains":"Prefer textContent"}],"rationale":"Safe DOM API paraphrase."},
+    {"id":"es-cal-para-05","category":"paraphrase","query":"May tutoring produce a finished submission while that work is still assessed?","relevant":[{"source_artifact_id":"assessment-policy","text_contains":"must not produce the final submission"}],"rationale":"Academic-integrity paraphrase."},
+
+    {"id":"es-cal-multi-01","category":"multi-evidence","query":"Which cookie flags protect HTTPS transport and JavaScript readability?","relevant":[{"source_artifact_id":"cookies","text_contains":"only over HTTPS"},{"source_artifact_id":"cookies","text_contains":"prevents JavaScript from reading"}],"rationale":"Two cookie controls are required."},
+    {"id":"es-cal-multi-02","category":"multi-evidence","query":"What are the containment and recovery stages after credential theft?","relevant":[{"source_artifact_id":"incident-response","text_contains":"Contain a stolen credential"},{"source_artifact_id":"incident-response","text_contains":"Recovery restores trusted service"}],"rationale":"Two incident-response stages are required."},
+    {"id":"es-cal-multi-03","category":"multi-evidence","query":"What planning evidence and negative verification belong in the security project?","relevant":[{"source_artifact_id":"project-guide","text_contains":"identify protected assets"},{"source_artifact_id":"project-guide","text_contains":"negative tests demonstrating"}],"rationale":"Threat model and verification evidence are both required."},
+
+    {"id":"es-cal-dist-01","category":"distractor","query":"personal browser response storage but not a shared proxy cache","relevant":[{"source_artifact_id":"browser-cache","text_contains":"prevents storage by shared intermediary caches"}],"rationale":"Personal-data vocabulary distracts from cache policy."},
+    {"id":"es-cal-dist-02","category":"distractor","query":"all database changes succeed together or undo the operation","relevant":[{"source_artifact_id":"database-transactions","text_contains":"commits all of its changes together or rolls them back"}],"rationale":"Operation vocabulary distracts from atomicity."},
+
+    {"id":"es-cal-amb-01","category":"ambiguous","query":"cookie script access","relevant":[{"source_artifact_id":"cookies","text_contains":"prevents JavaScript from reading"}],"rationale":"Short in-scope query."},
+    {"id":"es-cal-amb-02","category":"ambiguous","query":"private grading question","relevant":[{"source_artifact_id":"course-support","text_contains":"private grading or accommodation matters"}],"rationale":"Short course-policy query."},
+    {"id":"es-cal-amb-03","category":"ambiguous","query":"authorization for requested object","relevant":[{"source_artifact_id":"access-control","text_contains":"specific requested record"}],"rationale":"Short access-control query."},
+
+    {"id":"es-cal-perm-01","category":"permission-version","query":"Which password-reset session rule is current for already logged-in devices?","relevant":[{"source_artifact_id":"sessions","text_contains":"revoke every existing authentication token"}],"rationale":"The current version must outrank a superseded rule."},
+    {"id":"es-cal-perm-02","category":"permission-version","query":"Can a student request the hidden marking string as a final submission?","relevant":[{"source_artifact_id":"assessment-policy","text_contains":"must not produce the final submission"}],"rationale":"A prohibited answer-key chunk shares stronger vocabulary."},
+
+    {"id":"es-cal-none-01","category":"no-evidence","query":"monetary policy interest rate inflation central bank","relevant":[],"rationale":"Economics shares the generic term policy."},
+    {"id":"es-cal-none-02","category":"no-evidence","query":"browser cache CPU coherence memory replacement policy","relevant":[],"rationale":"Computer architecture shares browser-cache and policy terms."},
+    {"id":"es-cal-none-03","category":"no-evidence","query":"transaction isolation apartment property sale escrow","relevant":[],"rationale":"Real estate shares transaction and isolation vocabulary."},
+    {"id":"es-cal-none-04","category":"no-evidence","query":"secure cookie recipe baking temperature ingredients","relevant":[],"rationale":"Cooking shares secure and cookie vocabulary."},
+    {"id":"es-cal-none-05","category":"no-evidence","query":"Ohio state authorization code tax return","relevant":[],"rationale":"Government administration shares state and authorization code."},
+    {"id":"es-cal-none-06","category":"no-evidence","query":"hospital incident response emergency triage patient recovery","relevant":[],"rationale":"Medicine shares incident response and recovery vocabulary."},
+    {"id":"es-cal-none-07","category":"no-evidence","query":"construction project deadline contractor materials schedule","relevant":[],"rationale":"Construction shares project and deadline vocabulary."},
+    {"id":"es-cal-none-08","category":"no-evidence","query":"forest logging permit timber harvest environmental record","relevant":[],"rationale":"Forestry shares logging and record vocabulary."},
+    {"id":"es-cal-none-09","category":"no-evidence","query":"university certificate validation diploma transcript registrar","relevant":[],"rationale":"Education administration shares certificate validation."},
+    {"id":"es-cal-none-10","category":"no-evidence","query":"building access control badge door elevator privilege","relevant":[],"rationale":"Physical security shares access-control vocabulary."},
+    {"id":"es-cal-none-11","category":"no-evidence","query":"studio session musician recording identifier track","relevant":[],"rationale":"Music production shares session and identifier vocabulary."},
+    {"id":"es-cal-none-12","category":"no-evidence","query":"theater script injection casting rehearsal performance","relevant":[],"rationale":"Theater shares script and injection vocabulary."}
+  ]
+}

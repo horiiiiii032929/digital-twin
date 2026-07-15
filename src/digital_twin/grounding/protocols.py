@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Protocol
+from typing import TYPE_CHECKING, Protocol
 
 from src.digital_twin.grounding.models import (
     CourseDocument,
@@ -8,6 +8,12 @@ from src.digital_twin.grounding.models import (
     TutorAnswer,
 )
 from src.digital_twin.tutor_policy import TutorPolicy
+
+
+if TYPE_CHECKING:
+    from src.digital_twin.grounding.evidence_sufficiency import (
+        EvidenceSufficiencyDecision,
+    )
 
 
 class DocumentChunker(Protocol):
@@ -23,6 +29,15 @@ class FigureStore(Protocol):
 class Retriever(Protocol):
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         """Return ranked chunks for a question without choosing a provider."""
+
+
+class EvidenceSufficiencyGate(Protocol):
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> "EvidenceSufficiencyDecision":
+        """Decide whether retrieved evidence is strong enough for generation."""
 
 
 class TextEmbedder(Protocol):

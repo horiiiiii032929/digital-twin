@@ -21,6 +21,14 @@ BM25 profile selection remains only a provisional baseline. See
 and the broader
 [`RAG and LLM benchmarking`](rag-and-llm-benchmarking.md) framework.
 
+Evidence-sufficiency v1 made the next boundary explicit and compared the
+current any-hit behavior with calibrated BM25 raw score, lexical coverage, and
+BGE-small semantic agreement. No candidate passed calibration or held-out hard
+gates. Semantic agreement was best, but still accepted 5/18 unrelated questions
+and rejected 8/32 answerable ones. The decision remains **Refine, no
+selection**; see
+[`evidence-sufficiency-v1-results.md`](../research/05_evaluation/evidence-sufficiency-v1-results.md).
+
 ## Source boundary
 
 The reproducible evaluation uses five approved synthetic sources: four
@@ -44,7 +52,10 @@ DocumentChunk[]
   -> deterministic lexical tokenization
   -> rank with term overlap or BM25
   -> deterministic source/document/ordinal tie-break
-  -> RetrievalHit(chunk + normalized score)
+  -> RetrievalHit(chunk + normalized and raw ranker score)
+  -> swappable evidence-sufficiency gate
+       |- insufficient: return no evidence for generation
+       `- sufficient: retain ranked approved hits
 ```
 
 An explicit active-version map can be supplied by the caller. Without one, the
@@ -133,6 +144,21 @@ The optional benchmark dependency and approximately 134 MB model cache are not
 required by the normal test suite. The model cache is stored under ignored
 `data/external/`; no paid provider is called.
 
+The evidence-sufficiency comparison uses a separate 30-case calibration set and
+50-case held-out set. Run calibration without touching held-out results, then
+the frozen benchmark, with:
+
+```bash
+npm run calibrate:evidence-sufficiency
+npm run benchmark:evidence-sufficiency
+```
+
+The gate evaluator reports answerable recall, no-evidence accuracy, balanced
+accuracy, false-answer and false-abstention counts, unconditional and
+conditional ranking metrics, permission/version violations, slices, and added
+gate latency. Conditional ranking is diagnostic only because abstention can
+remove hard cases and inflate it.
+
 ## Limitations
 
 - Token matching is lexical: synonyms, spelling variants, multilingual queries,
@@ -145,5 +171,6 @@ required by the normal test suite. The model cache is stored under ignored
   pixels are not semantically ranked.
 - The local IT5002 bundle still needs an explicit source inventory and professor
   permission before it can be used for private evaluation.
-- Embedding, hybrid, reranking, and layout-aware retrieval remain candidates
-  until a newly held-out experiment passes both abstention and ranking gates.
+- Cross-encoder verification, calibrated answerability classification,
+  reranking, and layout-aware retrieval remain candidates until a newly held-out
+  experiment passes both abstention and ranking gates.
