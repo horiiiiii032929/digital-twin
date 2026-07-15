@@ -5,15 +5,42 @@ import pytest
 from scripts.synthetic_course_corpus import build_retrieval_evaluation_chunks
 from src.digital_twin.grounding import (
     BM25Retriever,
+    DenseRetriever,
     DocumentChunk,
     EmptyQueryError,
     InvalidRetrievalLimitError,
     RelevantChunkReference,
     RetrievalFailureCause,
+    ReciprocalRankFusionRetriever,
     TermOverlapRetriever,
     evaluate_retriever,
+    load_retrieval_benchmark_corpus,
     load_retrieval_evaluation_set,
 )
+
+
+class KeywordEmbedder:
+    """Small deterministic vector fixture; not a semantic-model substitute."""
+
+    dimensions = ("credentials", "browser", "assignment")
+
+    def embed_documents(self, texts):
+        return [self._embed(text) for text in texts]
+
+    def embed_query(self, text):
+        return self._embed(text)
+
+    def _embed(self, text):
+        lowered = text.lower()
+        aliases = {
+            "credentials": ("credentials", "password", "logged-in"),
+            "browser": ("browser", "cookie", "session"),
+            "assignment": ("assignment", "graded", "submission"),
+        }
+        return [
+            float(sum(term in lowered for term in aliases[dimension]))
+            for dimension in self.dimensions
+        ]
 
 
 def chunk(
@@ -83,6 +110,13 @@ def test_bm25_uses_term_rarity_to_break_overlap_baseline_tie():
     assert bm25[0].relevance_score == 1
 
 
+def test_bm25_can_suppress_weak_raw_scores_after_calibration():
+    chunks = [chunk("policy", "course policy applies")]
+
+    assert BM25Retriever(chunks).retrieve("monetary policy")
+    assert BM25Retriever(chunks, minimum_score=2).retrieve("monetary policy") == []
+
+
 def test_bm25_ranking_is_deterministic_and_exposes_source_evidence():
     chunks = [
         chunk("second", "cache mapping", source="source-b", ordinal=1),
@@ -96,6 +130,35 @@ def test_bm25_ranking_is_deterministic_and_exposes_source_evidence():
     assert first == second
     assert first[0].chunk.source_artifact_id == "source-a"
     assert first[0].chunk.locator == "section 1"
+
+
+def test_dense_retriever_uses_injected_embeddings_and_similarity_threshold():
+    chunks = [
+        chunk("credential", "Resetting a password revokes authentication tokens"),
+        chunk("browser", "A cookie maintains browser session state"),
+    ]
+    retriever = DenseRetriever(chunks, KeywordEmbedder(), minimum_similarity=0.5)
+
+    hits = retriever.retrieve("What happens to logged-in devices?")
+
+    assert [hit.chunk.id for hit in hits] == ["credential"]
+    assert retriever.retrieve("unrelated astronomy") == []
+
+
+def test_reciprocal_rank_fusion_combines_ranks_and_preserves_no_match():
+    chunks = [
+        chunk("a", "browser authentication token"),
+        chunk("b", "password credentials"),
+        chunk("c", "graded assignment submission"),
+    ]
+    lexical = BM25Retriever(chunks)
+    dense = DenseRetriever(chunks, KeywordEmbedder(), minimum_similarity=0.5)
+    hybrid = ReciprocalRankFusionRetriever(
+        [lexical, dense], rank_constant=60, candidate_limit=3
+    )
+
+    assert hybrid.retrieve("password for logged-in browser")[0].chunk.id in {"a", "b"}
+    assert hybrid.retrieve("unrelated astronomy") == []
 
 
 def test_versioned_evaluation_set_reports_metrics_and_failure_causes(
@@ -128,10 +191,13 @@ def test_versioned_evaluation_set_reports_metrics_and_failure_causes(
     assert overlap.recall_at_5 == 1
     assert overlap.mean_reciprocal_rank == 0.975
     assert bm25.recall_at_5 == 1
+    assert bm25.recall_at_3 > 0.95
+    assert bm25.ndcg_at_3 > 0.95
     assert bm25.mean_reciprocal_rank == 1
     assert bm25.recall_at_1 > overlap.recall_at_1
     assert overlap.no_evidence_accuracy == bm25.no_evidence_accuracy == 1
     assert overlap.failures_by_cause == bm25.failures_by_cause == {}
+    assert overlap.safety_violation_count == bm25.safety_violation_count == 0
     assert all(
         hit.source_artifact_id and hit.locator
         for result in bm25.cases
@@ -218,3 +284,30 @@ def test_evaluator_distinguishes_source_chunking_query_and_ranking_failures():
         )
         == RetrievalFailureCause.RANKING
     )
+
+
+def test_v2_benchmark_data_is_synthetic_resolvable_and_materially_larger():
+    root = Path(__file__).resolve().parents[2]
+    corpus = load_retrieval_benchmark_corpus(
+        root / "research" / "05_evaluation" / "retrieval_corpus_v2.json"
+    )
+    calibration = load_retrieval_evaluation_set(
+        root / "research" / "05_evaluation" / "retrieval_v2_calibration.json"
+    )
+    test = load_retrieval_evaluation_set(
+        root / "research" / "05_evaluation" / "retrieval_v2_test.json"
+    )
+
+    assert corpus.synthetic_only is True
+    assert len(corpus.chunks) == 40
+    assert len(calibration.cases) == 20
+    assert len(test.cases) == 40
+    for evaluation_set in (calibration, test):
+        summary = evaluate_retriever(
+            "data-validation",
+            BM25Retriever(corpus.chunks),
+            corpus.chunks,
+            evaluation_set,
+        )
+        assert summary.failures_by_cause.get("source", 0) == 0
+        assert summary.failures_by_cause.get("chunking", 0) == 0

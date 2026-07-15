@@ -1,0 +1,31 @@
+{
+  "version": "retrieval-v2-calibration",
+  "corpus_version": "synthetic-web-security-v2",
+  "description": "Twenty synthetic development queries used only to choose the dense similarity threshold before the held-out test run.",
+  "cases": [
+    {"id":"cal-exact-01","category":"exact","query":"session fixation fresh identifier after login","relevant":[{"source_artifact_id":"sessions","text_contains":"Prevent session fixation"}],"rationale":"Exact security terminology."},
+    {"id":"cal-exact-02","category":"exact","query":"SameSite cookie request tokens complement","relevant":[{"source_artifact_id":"csrf","text_contains":"complement rather than replace request tokens"}],"rationale":"Exact defense relationship."},
+    {"id":"cal-exact-03","category":"exact","query":"OAuth exact redirect URIs wildcard attacker","relevant":[{"source_artifact_id":"oauth","text_contains":"Register exact redirect URIs"}],"rationale":"Exact protocol terms."},
+    {"id":"cal-exact-04","category":"exact","query":"Tuesday office hours computing lab","relevant":[{"source_artifact_id":"course-support","text_contains":"Tuesday from 14:00 to 16:00"}],"rationale":"Exact course fact."},
+
+    {"id":"cal-para-01","category":"paraphrase","query":"What should happen to devices already signed in when a user changes their credentials?","relevant":[{"source_artifact_id":"sessions","text_contains":"revoke every existing authentication token"}],"rationale":"Credential and device paraphrase."},
+    {"id":"cal-para-02","category":"paraphrase","query":"How can a program avoid placing user-controlled markup into an unsafe page API?","relevant":[{"source_artifact_id":"xss","text_contains":"Prefer textContent"}],"rationale":"DOM-XSS paraphrase with limited lexical overlap."},
+    {"id":"cal-para-03","category":"paraphrase","query":"Why does a temporary handshake key protect old captured traffic after a permanent secret leaks?","relevant":[{"source_artifact_id":"tls","text_contains":"Ephemeral key exchange provides forward secrecy"}],"rationale":"Forward-secrecy paraphrase."},
+    {"id":"cal-para-04","category":"paraphrase","query":"Can the teaching assistant write the finished response for work that is still being marked?","relevant":[{"source_artifact_id":"assessment-policy","text_contains":"must not produce the final submission"}],"rationale":"Integrity policy paraphrase."},
+    {"id":"cal-para-05","category":"paraphrase","query":"What information should be captured before choosing safeguards for a system?","relevant":[{"source_artifact_id":"project-guide","text_contains":"identify protected assets"}],"rationale":"Threat-model paraphrase."},
+
+    {"id":"cal-multi-01","category":"multi-evidence","query":"Which cookie controls protect transport and script access?","relevant":[{"source_artifact_id":"cookies","text_contains":"only over HTTPS"},{"source_artifact_id":"cookies","text_contains":"prevents JavaScript from reading"}],"rationale":"Two independently required attributes."},
+    {"id":"cal-multi-02","category":"multi-evidence","query":"Give one anti-CSRF form defense and one OAuth response-correlation defense.","relevant":[{"source_artifact_id":"csrf","text_contains":"unpredictable synchronizer token"},{"source_artifact_id":"oauth","text_contains":"state value correlates"}],"rationale":"Two related but distinct mechanisms."},
+    {"id":"cal-multi-03","category":"multi-evidence","query":"What should happen first and later after a credential is stolen?","relevant":[{"source_artifact_id":"incident-response","text_contains":"Contain a stolen credential"},{"source_artifact_id":"incident-response","text_contains":"Recovery restores trusted service"}],"rationale":"Containment and recovery evidence."},
+
+    {"id":"cal-dist-01","category":"distractor","query":"server authorization for a specific record not a hidden browser link","relevant":[{"source_artifact_id":"access-control","text_contains":"specific requested record"}],"rationale":"Browser vocabulary distracts from authorization."},
+    {"id":"cal-perm-01","category":"permission-version","query":"Do login tokens stay active after password reset?","relevant":[{"source_artifact_id":"sessions","text_contains":"revoke every existing authentication token"}],"rationale":"Current version contradicts a superseded chunk."},
+    {"id":"cal-perm-02","category":"permission-version","query":"What hidden marking string should I submit?","relevant":[{"source_artifact_id":"assessment-policy","text_contains":"must not produce the final submission"}],"rationale":"A prohibited chunk contains the lexical answer; policy is the only eligible evidence."},
+
+    {"id":"cal-none-01","category":"no-evidence","query":"mitochondrial electron transport oxidative phosphorylation ATP synthase","relevant":[],"rationale":"Biology is absent."},
+    {"id":"cal-none-02","category":"no-evidence","query":"Fourier transform convolution frequency spectrum signal processing","relevant":[],"rationale":"Signal processing is absent."},
+    {"id":"cal-none-03","category":"no-evidence","query":"French Revolution Jacobins monarchy Bastille","relevant":[],"rationale":"History is absent."},
+    {"id":"cal-none-04","category":"no-evidence","query":"stellar nucleosynthesis red giant supernova elements","relevant":[],"rationale":"Astronomy is absent."},
+    {"id":"cal-none-05","category":"no-evidence","query":"supply chain inventory warehouse demand forecasting","relevant":[],"rationale":"Operations management is absent."}
+  ]
+}
