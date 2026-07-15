@@ -45,6 +45,28 @@ async def test_litellm_adapter_records_usage_cost_and_keeps_credentials_external
 
 
 @pytest.mark.asyncio
+async def test_litellm_adapter_requests_json_mode_only_when_configured():
+    captured = {}
+
+    async def completion(**kwargs):
+        captured.update(kwargs)
+        return {
+            "model": "local/model",
+            "choices": [{"message": {"content": '{"answer":"ok"}'}}],
+        }
+
+    client = LiteLlmClient(
+        "local/model",
+        response_format={"type": "json_object"},
+        completion=completion,
+    )
+
+    await client.chat([LlmMessage(role="user", content="test")], task="test")
+
+    assert captured["response_format"] == {"type": "json_object"}
+
+
+@pytest.mark.asyncio
 async def test_litellm_adapter_rejects_empty_provider_content():
     async def completion(**kwargs):
         return {"model": "provider/model-v1", "choices": []}

@@ -18,6 +18,7 @@
     "test:api": "uv run pytest tests",
     "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
     "verify:generation": "uv run python -m scripts.evaluate_generation",
+    "benchmark:generation-local": "uv run python -m scripts.evaluate_generation --model ollama/gemma3:4b --json-mode --timeout-seconds 60 --max-output-tokens 600 --output reports/generated/generation-v1-gemma3-4b.json",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",

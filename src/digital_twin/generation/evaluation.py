@@ -56,6 +56,8 @@ class GenerationCaseResult(BaseModel):
     category: GenerationCaseCategory
     expected_action: PolicyAction
     actual_action: str
+    answer_content: str
+    provider_model: str
     policy_action_correct: bool
     citation_valid: bool
     provider_suppressed_when_required: bool
@@ -122,6 +124,12 @@ async def evaluate_generator(
                 category=case.category,
                 expected_action=case.expected_action,
                 actual_action=actual_action,
+                answer_content=answer.content,
+                provider_model=(
+                    answer.trace.provider_model
+                    if answer.trace is not None
+                    else "not-recorded"
+                ),
                 policy_action_correct=actual_action == case.expected_action.value,
                 citation_valid=citation_valid,
                 provider_suppressed_when_required=provider_suppressed,

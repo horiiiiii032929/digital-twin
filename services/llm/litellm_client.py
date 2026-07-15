@@ -28,6 +28,7 @@ class LiteLlmClient:
         *,
         timeout_seconds: float = 30,
         max_output_tokens: int = 600,
+        response_format: dict[str, str] | None = None,
         completion: _Completion = litellm.acompletion,
         cost_calculator: _CostCalculator = litellm.completion_cost,
     ) -> None:
@@ -40,18 +41,26 @@ class LiteLlmClient:
         self.model = model
         self.timeout_seconds = timeout_seconds
         self.max_output_tokens = max_output_tokens
+        self.response_format = response_format
         self.completion = completion
         self.cost_calculator = cost_calculator
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
         try:
+            completion_arguments = {
+                "model": self.model,
+                "messages": [
+                    message.model_dump(mode="json") for message in messages
+                ],
+                "timeout": self.timeout_seconds,
+                "temperature": 0,
+                "max_tokens": self.max_output_tokens,
+                "metadata": {"task": task},
+            }
+            if self.response_format is not None:
+                completion_arguments["response_format"] = self.response_format
             response = await self.completion(
-                model=self.model,
-                messages=[message.model_dump(mode="json") for message in messages],
-                timeout=self.timeout_seconds,
-                temperature=0,
-                max_tokens=self.max_output_tokens,
-                metadata={"task": task},
+                **completion_arguments,
             )
         except litellm.AuthenticationError as error:
             raise LlmAuthenticationError() from error
