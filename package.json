@@ -19,6 +19,7 @@
     "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",
+    "benchmark:retrieval": "uv run --extra retrieval-benchmark python -m scripts.benchmark_retrieval --output reports/generated/retrieval-v2.json",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"

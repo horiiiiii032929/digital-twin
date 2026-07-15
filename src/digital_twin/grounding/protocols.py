@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from typing import Protocol
 
 from src.digital_twin.grounding.models import (
@@ -22,6 +23,14 @@ class FigureStore(Protocol):
 class Retriever(Protocol):
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         """Return ranked chunks for a question without choosing a provider."""
+
+
+class TextEmbedder(Protocol):
+    def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
+        """Encode passages once for a dense retrieval index."""
+
+    def embed_query(self, text: str) -> list[float]:
+        """Encode one search query in the model's query representation."""
 
 
 class TutorGenerator(Protocol):

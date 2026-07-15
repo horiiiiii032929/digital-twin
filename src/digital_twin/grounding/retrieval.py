@@ -4,6 +4,7 @@ from collections import Counter
 from collections.abc import Mapping, Sequence
 
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
+from src.digital_twin.grounding.protocols import Retriever, TextEmbedder
 
 
 _TOKEN_PATTERN = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
@@ -64,15 +65,19 @@ class BM25Retriever:
         *,
         k1: float = 1.2,
         b: float = 0.75,
+        minimum_score: float = 0.0,
         active_source_versions: Mapping[str, int] | None = None,
     ) -> None:
         if k1 <= 0:
             raise ValueError("k1 must be positive")
         if not 0 <= b <= 1:
             raise ValueError("b must be between 0 and 1")
+        if minimum_score < 0:
+            raise ValueError("minimum_score cannot be negative")
 
         self.k1 = k1
         self.b = b
+        self.minimum_score = minimum_score
         self.chunks = _eligible_chunks(chunks, active_source_versions)
         self._term_frequencies = {
             chunk.id: Counter(lexical_tokens(chunk.text)) for chunk in self.chunks
@@ -99,7 +104,7 @@ class BM25Retriever:
         raw_scores = []
         for chunk in self.chunks:
             score = self._score(chunk, query_terms)
-            if score > 0:
+            if score > 0 and score >= self.minimum_score:
                 raw_scores.append((score, chunk))
         if not raw_scores:
             return []
@@ -138,6 +143,142 @@ class BM25Retriever:
                 frequency * (self.k1 + 1) / denominator
             )
         return score
+
+
+class DenseRetriever:
+    """Rank approved chunks by cosine similarity from an injected embedder."""
+
+    def __init__(
+        self,
+        chunks: Sequence[DocumentChunk],
+        embedder: TextEmbedder,
+        *,
+        minimum_similarity: float = -1.0,
+        active_source_versions: Mapping[str, int] | None = None,
+    ) -> None:
+        if not -1 <= minimum_similarity <= 1:
+            raise ValueError("minimum_similarity must be between -1 and 1")
+        self.chunks = _eligible_chunks(chunks, active_source_versions)
+        self.embedder = embedder
+        self.minimum_similarity = minimum_similarity
+        vectors = embedder.embed_documents([chunk.text for chunk in self.chunks])
+        if len(vectors) != len(self.chunks):
+            raise ValueError("embedder returned the wrong number of document vectors")
+        self._vectors = {
+            chunk.id: _normalized_vector(vector)
+            for chunk, vector in zip(self.chunks, vectors, strict=True)
+        }
+
+    def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
+        _validate_limit(limit)
+        if not lexical_tokens(query):
+            raise EmptyQueryError("query must contain at least one lexical token")
+        if not self.chunks:
+            return []
+        raw_query_vector = self.embedder.embed_query(query)
+        if not raw_query_vector or not any(float(value) for value in raw_query_vector):
+            return []
+        query_vector = _normalized_vector(raw_query_vector)
+        scored: list[tuple[float, DocumentChunk]] = []
+        for chunk in self.chunks:
+            similarity = sum(
+                left * right
+                for left, right in zip(
+                    query_vector,
+                    self._vectors[chunk.id],
+                    strict=True,
+                )
+            )
+            if similarity >= self.minimum_similarity:
+                normalized_similarity = min(1.0, max(0.0, (similarity + 1) / 2))
+                scored.append((normalized_similarity, chunk))
+        return _ranked_hits(scored, limit=limit)
+
+
+class ReciprocalRankFusionRetriever:
+    """Fuse candidate ranks without assuming comparable relevance scores."""
+
+    def __init__(
+        self,
+        retrievers: Sequence[Retriever],
+        *,
+        rank_constant: int = 60,
+        candidate_limit: int = 20,
+    ) -> None:
+        if len(retrievers) < 2:
+            raise ValueError("reciprocal rank fusion requires at least two retrievers")
+        if rank_constant < 1:
+            raise ValueError("rank_constant must be at least 1")
+        if candidate_limit < 1:
+            raise ValueError("candidate_limit must be at least 1")
+        self.retrievers = list(retrievers)
+        self.rank_constant = rank_constant
+        self.candidate_limit = candidate_limit
+
+    def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
+        _validate_limit(limit)
+        fused_scores: dict[str, float] = {}
+        chunks: dict[str, DocumentChunk] = {}
+        for retriever in self.retrievers:
+            hits = retriever.retrieve(query, limit=max(limit, self.candidate_limit))
+            for rank, hit in enumerate(hits, start=1):
+                identifier = hit.chunk.id
+                chunks[identifier] = hit.chunk
+                fused_scores[identifier] = fused_scores.get(identifier, 0.0) + 1 / (
+                    self.rank_constant + rank
+                )
+        if not fused_scores:
+            return []
+        maximum = max(fused_scores.values())
+        normalized = [
+            (score / maximum, chunks[identifier])
+            for identifier, score in fused_scores.items()
+        ]
+        raw = [
+            (score, chunks[identifier]) for identifier, score in fused_scores.items()
+        ]
+        return _ranked_hits(normalized, limit=limit, raw_scores=raw)
+
+
+class RelevanceThresholdRetriever:
+    """Suppress low-confidence hits without coupling calibration to a ranker."""
+
+    def __init__(
+        self,
+        retriever: Retriever,
+        *,
+        minimum_relevance_score: float,
+        candidate_limit: int = 100,
+    ) -> None:
+        if not 0 <= minimum_relevance_score <= 1:
+            raise ValueError("minimum_relevance_score must be between 0 and 1")
+        if candidate_limit < 1:
+            raise ValueError("candidate_limit must be at least 1")
+        self.retriever = retriever
+        self.minimum_relevance_score = minimum_relevance_score
+        self.candidate_limit = candidate_limit
+
+    def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
+        _validate_limit(limit)
+        hits = self.retriever.retrieve(
+            query,
+            limit=max(limit, self.candidate_limit),
+        )
+        return [
+            hit
+            for hit in hits
+            if hit.relevance_score >= self.minimum_relevance_score
+        ][:limit]
+
+
+def _normalized_vector(vector: Sequence[float]) -> list[float]:
+    values = [float(value) for value in vector]
+    if not values:
+        raise ValueError("embedding vectors cannot be empty")
+    magnitude = math.sqrt(sum(value * value for value in values))
+    if magnitude == 0:
+        raise ValueError("embedding vectors cannot have zero magnitude")
+    return [value / magnitude for value in values]
 
 
 def _eligible_chunks(

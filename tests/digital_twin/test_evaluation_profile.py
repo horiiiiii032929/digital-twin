@@ -8,6 +8,8 @@ from src.digital_twin.evaluation import (
     ComponentEvaluationRecord,
     ComponentKind,
     ComponentStatus,
+    DecisionOutcome,
+    EvaluationDecision,
     ImplementationRef,
     SystemReleaseProfile,
     load_evaluation_record,
@@ -28,6 +30,9 @@ PROFILE_PATH = (
 )
 RETRIEVAL_RECORD_PATH = (
     ROOT / "research" / "05_evaluation" / "records" / "retrieval-v1.json"
+)
+RETRIEVAL_V2_RECORD_PATH = (
+    ROOT / "research" / "05_evaluation" / "records" / "retrieval-v2.json"
 )
 
 
@@ -75,6 +80,20 @@ def test_evaluation_record_prevents_selecting_a_failed_hard_gate():
 
     with pytest.raises(ValidationError, match="failed a hard gate"):
         ComponentEvaluationRecord.model_validate(payload)
+
+
+def test_refine_decision_can_record_an_inconclusive_comparison():
+    decision = EvaluationDecision(
+        outcome=DecisionOutcome.REFINE,
+        rationale="No candidate passed both quality metrics and hard gates.",
+        limitations=["The benchmark needs a new held-out set."],
+    )
+
+    assert decision.selected_implementation_id is None
+
+    record = load_evaluation_record(RETRIEVAL_V2_RECORD_PATH)
+    assert record.decision.outcome == DecisionOutcome.REFINE
+    assert record.decision.selected_implementation_id is None
 
 
 def test_metric_pass_state_cannot_disagree_with_threshold():
