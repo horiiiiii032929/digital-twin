@@ -26,6 +26,52 @@ Prefer small, explicit modules and scripts with descriptive snake_case names, fo
 
 Place automated tests, fixtures, and manual verification notes under `tests/`. Cover source normalization, retrieval behavior, prompt and policy configuration, evaluation scoring, and privacy/data exclusion checks. Name Python tests `test_<behavior>.py` and test functions `test_<expected_outcome>`. Prefer synthetic or anonymized fixtures over real course, instructor, or student data.
 
+## Evaluation-First Engineering
+
+Treat evaluability as a system property for the entire repository. Every new
+algorithm, model, prompt, parser, ranking method, agent behavior, or architecture
+boundary must be easy to compare, replace, and reproduce. Build the simplest
+inspectable baseline first, then adopt a more complex alternative only when
+project-specific evidence demonstrates a useful improvement.
+
+Before implementation, define the decision question, prediction, baseline,
+candidate alternatives, evaluation dataset, metrics, and important failure
+cases. Keep algorithms and providers behind explicit interfaces so the same
+inputs can be run through multiple implementations. Version the dataset,
+configuration, model or provider name, prompt, random seed where applicable,
+and code revision used for every recorded evaluation.
+
+Every measurable component must include:
+
+- a deterministic or seeded baseline and at least one explicit comparison when
+  a replacement is proposed;
+- a versioned synthetic or explicitly approved evaluation set that covers
+  normal, boundary, adversarial, no-evidence, privacy, and failure cases where
+  relevant;
+- quality metrics chosen before the run, plus relevant latency, memory, token,
+  and cost measurements;
+- a reproducible command that emits inspectable per-case results and an aggregate
+  summary;
+- regression tests for accepted behavior and thresholds;
+- failed-case classification that distinguishes data, parsing, chunking, query,
+  ranking, model, policy, integration, and operational causes as applicable;
+- a decision record stating whether to keep, refine, go deeper, or drop the
+  candidate, with links to evidence and known limitations.
+
+Architecture decisions must be evaluated too. Record the alternatives and
+tradeoffs for deployment topology, data flow, trust and privacy boundaries,
+failure recovery, observability, scaling, portability, operational complexity,
+and rollback. A successful demo is not sufficient evidence for an architecture
+choice. Do not describe a method as state of the art based only on a paper,
+benchmark leaderboard, or vendor claim; evaluate it against the repository's
+baseline and representative course use cases first.
+
+Store experiment plans and learning logs under `research/04_experiments/`,
+evaluation datasets and rubrics under `research/05_evaluation/`, repeatable
+evaluation code under `scripts/`, and durable evidence summaries under
+`reports/` or the relevant research documentation. Follow
+`docs/quality-and-learning-plan.md` as the shared definition of done.
+
 ## Commit & Pull Request Guidelines
 
 Recent commits use short, imperative summaries such as `Scaffold research workspace`; keep that style and make the first line specific. Pull requests should follow `.github/PULL_REQUEST_TEMPLATE.md`: include a summary, linked GitHub Project item or issue, iteration, area, evidence, verification steps, documentation updates, and confirmation that sensitive data is excluded.
