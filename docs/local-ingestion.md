@@ -73,9 +73,12 @@ word boundaries, with a hard character fallback for unusually long tokens.
 
 Chunk IDs are SHA-256-derived from the versioned document ID, ordinal, locator,
 and content hash. Repeated runs over identical inputs therefore produce the
-same document, figure, and chunk identifiers. Issue #23 should evaluate whether
-the current size and overlap are suitable using Recall@5, Mean Reciprocal Rank,
-and failed-query analysis rather than changing them by intuition.
+same document, figure, and chunk identifiers. The issue #23 evaluation keeps
+the algorithm unchanged and tests a smaller 220-character, 60-character-overlap
+configuration over the compact synthetic corpus. See
+[local-retrieval.md](local-retrieval.md) for its measured retrieval behavior;
+chunk settings for a larger corpus must still be selected by evaluation rather
+than intuition.
 
 ## Verification
 
@@ -108,6 +111,7 @@ npm run check
   dense layouts; figure descriptions remain a separate, reviewable model.
 - TXT, Markdown, and PDF are the only supported formats. Word, PowerPoint,
   audio, video, Canvas, and Obsidian integration remain out of scope.
-- The local store intentionally does not provide lifecycle cleanup or durable
-  artifact registration. Production persistence must revoke derived artifacts
-  when source permissions or versions change.
+- Retrieval filters non-tutoring and superseded chunks. The local store still
+  does not provide lifecycle cleanup or durable artifact registration, so
+  production persistence must revoke derived artifacts when source permissions
+  or versions change.

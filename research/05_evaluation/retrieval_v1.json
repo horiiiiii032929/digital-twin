@@ -1,0 +1,322 @@
+{
+  "version": "retrieval-v1",
+  "corpus_version": "synthetic-browser-security-v1",
+  "description": "Synthetic retrieval judgments for the approved Sprint 2 browser-security corpus.",
+  "cases": [
+    {
+      "id": "direct-01",
+      "category": "direct",
+      "query": "How does cross-site request forgery use an authenticated browser session?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "Cross-site request forgery abuses a browser"
+        }
+      ],
+      "rationale": "Direct definition of the CSRF mechanism."
+    },
+    {
+      "id": "direct-02",
+      "category": "direct",
+      "query": "Which defenses include anti-CSRF tokens SameSite cookies and origin validation?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "Common defenses include anti-CSRF tokens"
+        }
+      ],
+      "rationale": "Direct lookup of the listed CSRF defenses."
+    },
+    {
+      "id": "direct-03",
+      "category": "direct",
+      "query": "How should session identifiers be protected and rotated after authentication?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "Session identifiers should be unpredictable"
+        }
+      ],
+      "rationale": "Direct lookup of session identifier guidance."
+    },
+    {
+      "id": "direct-04",
+      "category": "direct",
+      "query": "Which topics are in the synthetic course scope?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "browser security, authentication, and secure software design"
+        }
+      ],
+      "rationale": "Direct lookup of the course scope."
+    },
+    {
+      "id": "direct-05",
+      "category": "direct",
+      "query": "What does the synthetic request flow figure say the browser sends?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-figure-notes",
+          "text_contains": "The browser sends an authenticated request"
+        }
+      ],
+      "rationale": "Direct lookup of selectable text surrounding the PDF figure."
+    },
+    {
+      "id": "misconception-01",
+      "category": "misconception",
+      "query": "CSRF only happens when an attacker steals the user's password, right?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "Cross-site request forgery abuses a browser"
+        },
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "Password complexity alone does not prevent CSRF"
+        }
+      ],
+      "rationale": "The answer needs both the actual mechanism and the password misconception boundary."
+    },
+    {
+      "id": "misconception-02",
+      "category": "misconception",
+      "query": "Strong password complexity prevents CSRF by itself, correct?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "Password complexity alone does not prevent CSRF"
+        }
+      ],
+      "rationale": "The source explicitly rejects this misconception."
+    },
+    {
+      "id": "misconception-03",
+      "category": "misconception",
+      "query": "A session cookie is exactly the same as a password, isn't it?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "A session cookie is not the same thing as a password"
+        }
+      ],
+      "rationale": "The misconception section distinguishes the mechanisms."
+    },
+    {
+      "id": "misconception-04",
+      "category": "misconception",
+      "query": "Session identifiers can be predictable and never rotated after authentication, right?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "Session identifiers should be unpredictable"
+        }
+      ],
+      "rationale": "The source gives the opposite security requirements."
+    },
+    {
+      "id": "misconception-05",
+      "category": "misconception",
+      "query": "If approved course sources are missing, should the tutor guess?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-faq",
+          "text_contains": "approved evidence is unavailable instead of guessing"
+        }
+      ],
+      "rationale": "The FAQ requires an explicit no-evidence response."
+    },
+    {
+      "id": "integrity-01",
+      "category": "integrity-boundary",
+      "query": "Can the tutor write the full answer to my graded assignment?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-faq",
+          "text_contains": "Can the tutor solve my assignment"
+        },
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "It must not complete graded work"
+        }
+      ],
+      "rationale": "Both the FAQ and syllabus define the graded-work boundary."
+    },
+    {
+      "id": "integrity-02",
+      "category": "integrity-boundary",
+      "query": "May the tutor complete graded work for a student?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "It must not complete graded work"
+        }
+      ],
+      "rationale": "Direct academic-integrity boundary in the syllabus."
+    },
+    {
+      "id": "integrity-03",
+      "category": "integrity-boundary",
+      "query": "What can the tutor do after asking what the student already tried?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-faq",
+          "text_contains": "provide a bounded hint or a similar ungraded example"
+        }
+      ],
+      "rationale": "The FAQ describes permitted attempt-first support."
+    },
+    {
+      "id": "integrity-04",
+      "category": "integrity-boundary",
+      "query": "Can the tutor invent course requirements when the syllabus is unclear?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "must not complete graded work or invent course requirements"
+        }
+      ],
+      "rationale": "The syllabus forbids invented requirements."
+    },
+    {
+      "id": "integrity-05",
+      "category": "integrity-boundary",
+      "query": "Is a bounded hint or similar ungraded example allowed?",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-faq",
+          "text_contains": "a bounded hint or a similar ungraded example"
+        }
+      ],
+      "rationale": "The FAQ explicitly allows bounded assistance."
+    },
+    {
+      "id": "ambiguous-01",
+      "category": "ambiguous",
+      "query": "authenticated browser session",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "authenticated session with a target site"
+        },
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "An authenticated session lets a server"
+        },
+        {
+          "source_artifact_id": "synthetic-figure-notes",
+          "text_contains": "browser sends an authenticated request"
+        }
+      ],
+      "rationale": "The terse query legitimately maps to mechanism, session, and figure evidence."
+    },
+    {
+      "id": "ambiguous-02",
+      "category": "ambiguous",
+      "query": "tutor support boundary for student work",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-faq",
+          "text_contains": "provide a bounded hint"
+        },
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "The tutor may explain concepts and offer hints"
+        }
+      ],
+      "rationale": "Both policy sources contribute to the support boundary."
+    },
+    {
+      "id": "ambiguous-03",
+      "category": "ambiguous",
+      "query": "browser security authentication",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-syllabus",
+          "text_contains": "browser security, authentication"
+        },
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "rotated after authentication"
+        },
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "browser that already has an authenticated session"
+        }
+      ],
+      "rationale": "The broad phrase spans the course scope and two technical sources."
+    },
+    {
+      "id": "ambiguous-04",
+      "category": "ambiguous",
+      "query": "password cookie security mechanisms",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "session cookie is not the same thing as a password"
+        },
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "SameSite cookie settings"
+        }
+      ],
+      "rationale": "The query can refer to both session distinctions and CSRF cookie defense."
+    },
+    {
+      "id": "ambiguous-05",
+      "category": "ambiguous",
+      "query": "authenticated request flow",
+      "relevant": [
+        {
+          "source_artifact_id": "synthetic-figure-notes",
+          "text_contains": "authenticated request"
+        },
+        {
+          "source_artifact_id": "synthetic-csrf-notes",
+          "text_contains": "authenticated session with a target site"
+        },
+        {
+          "source_artifact_id": "synthetic-session-security",
+          "text_contains": "associate later requests with a user"
+        }
+      ],
+      "rationale": "The short query has several defensible evidence targets."
+    },
+    {
+      "id": "no-evidence-01",
+      "category": "no-evidence",
+      "query": "quantum entanglement Bell inequality photons",
+      "relevant": [],
+      "rationale": "Physics content is absent from the approved corpus."
+    },
+    {
+      "id": "no-evidence-02",
+      "category": "no-evidence",
+      "query": "photosynthesis chloroplast thylakoid reaction",
+      "relevant": [],
+      "rationale": "Biology content is absent from the approved corpus."
+    },
+    {
+      "id": "no-evidence-03",
+      "category": "no-evidence",
+      "query": "database sharding replication consensus quorum",
+      "relevant": [],
+      "rationale": "Distributed database content is absent from the approved corpus."
+    },
+    {
+      "id": "no-evidence-04",
+      "category": "no-evidence",
+      "query": "calculus derivative integral polynomial limit",
+      "relevant": [],
+      "rationale": "Calculus content is absent from the approved corpus."
+    },
+    {
+      "id": "no-evidence-05",
+      "category": "no-evidence",
+      "query": "Hamlet Shakespeare soliloquy Denmark tragedy",
+      "relevant": [],
+      "rationale": "Literature content is absent from the approved corpus."
+    }
+  ]
+}
