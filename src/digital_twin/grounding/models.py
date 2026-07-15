@@ -201,6 +201,7 @@ class ParsedDocumentBundle(BaseModel):
 class RetrievalHit(BaseModel):
     chunk: DocumentChunk
     relevance_score: float = Field(ge=0, le=1)
+    raw_score: float | None = Field(default=None, ge=0)
 
 
 class SourceCitation(BaseModel):

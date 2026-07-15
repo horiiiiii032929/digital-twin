@@ -1,4 +1,15 @@
 from src.digital_twin.grounding.chunking import HeadingParagraphChunker
+from src.digital_twin.grounding.evidence_sufficiency import (
+    AnyHitEvidenceGate,
+    EvidenceGatedRetriever,
+    EvidenceSufficiencyCaseResult,
+    EvidenceSufficiencyDecision,
+    EvidenceSufficiencyEvaluationSummary,
+    LexicalCoverageEvidenceGate,
+    MinimumRawScoreEvidenceGate,
+    SecondaryRetrieverAgreementGate,
+    evaluate_evidence_sufficiency,
+)
 from src.digital_twin.grounding.ingestion import (
     EmptySourceError,
     IngestionError,
@@ -27,6 +38,7 @@ from src.digital_twin.grounding.models import (
 )
 from src.digital_twin.grounding.protocols import (
     DocumentChunker,
+    EvidenceSufficiencyGate,
     FigureStore,
     Retriever,
     TextEmbedder,
@@ -63,6 +75,7 @@ from src.digital_twin.grounding.retrieval_factory import (
 
 
 __all__ = [
+    "AnyHitEvidenceGate",
     "ApprovalDecision",
     "ApprovalRecord",
     "BM25Retriever",
@@ -72,6 +85,11 @@ __all__ = [
     "DocumentSegment",
     "DenseRetriever",
     "EmptyQueryError",
+    "EvidenceGatedRetriever",
+    "EvidenceSufficiencyCaseResult",
+    "EvidenceSufficiencyDecision",
+    "EvidenceSufficiencyEvaluationSummary",
+    "EvidenceSufficiencyGate",
     "FigureAsset",
     "FigureDescription",
     "FigureStore",
@@ -80,6 +98,9 @@ __all__ = [
     "IngestionError",
     "LocalDocumentParser",
     "LocalFigureStore",
+    "LexicalCoverageEvidenceGate",
+    "MinimumRawScoreEvidenceGate",
+    "SecondaryRetrieverAgreementGate",
     "ParsedDocumentBundle",
     "InvalidRetrievalLimitError",
     "RelevantChunkReference",
@@ -109,6 +130,7 @@ __all__ = [
     "UnsupportedRetrieverSelectionError",
     "build_selected_retriever",
     "evaluate_retriever",
+    "evaluate_evidence_sufficiency",
     "lexical_tokens",
     "load_retrieval_evaluation_set",
     "load_retrieval_benchmark_corpus",
