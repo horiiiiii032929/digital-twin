@@ -6,11 +6,19 @@ Issue #24 is in progress. The repository now has a deterministic grounded
 generator control, direct grounded prompt candidate, deterministic policy
 enforcer, deterministic citation validator, and a LiteLLM service adapter. No
 live provider or prompt is selected, no API credential is stored, and no paid
-call has been made.
+call has been made. A local Ollama Gemma 3 4B candidate has been exercised with
+zero monetary cost, but no generator or prompt is selected.
 
 The 25-case synthetic preflight establishes that the control path is safe enough
 to compare with a live candidate. It is not evidence that the control produces
 high-quality tutoring explanations, nor that any model is best.
+
+The exploratory local run passed all structural checks and produced strict JSON
+for 18 model-called cases. A post-run single-reviewer audit found only 15/18
+answers fully supported by their cited evidence. Because that rubric was not
+frozen before the run, the result is diagnostic and the decision is `Refine`.
+See
+[`generation-v1-gemma3-4b-results.md`](../research/05_evaluation/generation-v1-gemma3-4b-results.md).
 
 ## Runtime flow
 
@@ -124,8 +132,9 @@ per-case output is local and ignored under `reports/generated/`.
 
 ## Remaining live decision
 
-To complete #24, freeze one provider/model and a spending cap, then run the same
-cases through the live generator. The live comparison must additionally score
+To complete #24, freeze a prospective quality rubric, prompt variants, at least
+one fit-for-purpose comparison model, and any spending cap, then run the same
+conditions through the live generator. The comparison must score
 factual grounding, pedagogy, misconception correction, policy compliance,
 citation validity, latency, token use, cost, and diagnosed failures. Only then
 may generator, prompt, policy-enforcement, and citation-validation profile

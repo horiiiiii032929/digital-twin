@@ -79,7 +79,7 @@ carries the approved source version, permission snapshot, content hash, ordered
 segments, and an opaque source locator. Chunks preserve this lineage in explicit
 fields and metadata. Deterministic term-overlap and BM25 retrieval filter
 non-tutoring and superseded chunks before returning scored source evidence. The
-The generation path filters evidence permissions again, applies deterministic
+generation path filters evidence permissions again, applies deterministic
 policy rules before any provider call, builds a versioned prompt, parses a
 structured answer, validates citations against retrieved hits, and records
 latency, tokens, and approximate cost. See
@@ -106,11 +106,14 @@ preflight, system-wide component profile, durable result registry, and a
 swappable evidence-sufficiency boundary are implemented. Retrieval v2 and
 evidence-sufficiency v1 both produced `Refine` decisions with no replacement,
 so BM25 v1 with explicit any-hit behavior remains only the provisional
-rollback/control path. A LiteLLM adapter exists but is not wired to an API
-route, provider model, credential, or paid evaluation.
+rollback/control path. A LiteLLM adapter and local Ollama benchmark mode exist,
+but neither is wired to an API route or selected provider model. The first
+Gemma 3 4B exploratory run passed structure and policy checks but found three
+support failures in 18 model answers under a post-run diagnostic rubric; it
+therefore selected nothing.
 The following remain separate execution sub-issues under roadmap issue #7:
 
-- Live provider and prompt comparison completing #24
+- Prospective prompt/model comparison completing #24
 - A successor open-set answerability/evidence verifier before end-to-end claims
 - Grounded tutoring smoke demonstration (#25)
 

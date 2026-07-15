@@ -22,6 +22,13 @@ no-evidence, and provider-suppression behavior. It does not measure live answer
 quality and cannot select a model or prompt by itself. Its clean deterministic
 control run is summarized in `generation-v1-preflight-results.md`.
 
+The first local live use of that set is recorded in
+`generation-v1-gemma3-4b-results.md`. It proves the Ollama/LiteLLM transport and
+structural controls, but its post-run grounding review is diagnostic rather
+than selection evidence. Three of 18 model answers added unsupported content or
+used mismatched evidence, so the durable decision is `Refine` with no selected
+generator or prompt.
+
 The retrieval v2 artifacts demonstrate an inconclusive comparison: a `refine`
 decision may intentionally select no implementation when every candidate fails
 a required gate or metric. In that case, preserve the previous profile entry,

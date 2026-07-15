@@ -13,8 +13,8 @@ disagree.
 | Retriever | Returns ranked approved chunks and an explicit sufficiency decision | Selected / Refine | BM25 v1 plus any-hit only as rollback/control; no safe gate selected | Cross-encoder relevance verifier vs calibrated answerability classifier | Recall@K, MRR/nDCG, false answer/abstention, permission filtering, latency |
 | Reranker | Reorders retrieved candidates | Pending | No selected implementation | No reranker vs cross-encoder or LLM | Ranking gain, latency, cost, evidence preservation |
 | Figure description | Produces reviewable semantic figure text | Pending | Caption/context is metadata, not selected description | Caption/context vs vision model | Factuality, figure lineage, review and display permission |
-| Generator | Produces a grounded answer | Pending | Deterministic control passes preflight but is not selected | One paid live provider candidate in #24 | Grounding, failure handling, latency, tokens, cost |
-| Prompt | Packages question, evidence, and policy | Pending | Direct grounded prompt implemented but not selected | Direct vs guided grounded prompt with the live candidate | Pedagogy, consistency, prompt traceability |
+| Generator | Produces a grounded answer | Pending | Deterministic control passes preflight; local Gemma 3 4B is an unselected live control candidate | Prospectively scored prompt/model comparison in #24 | Grounding, failure handling, latency, tokens, cost |
+| Prompt | Packages question, evidence, and policy | Pending | Direct grounded prompt implemented but not selected | Direct vs guided grounded prompt across fit-for-purpose candidates | Pedagogy, consistency, prompt traceability |
 | Tutor policy | Stores professor-approved behavior | Selected | Structured professor policy v1 | Versioned policy refinements | Professor approval, privacy, integrity boundaries |
 | Policy enforcement | Applies policy to a tutoring turn | Pending | Deterministic rules pass synthetic preflight but are not selected | Challenge with paraphrased and adversarial requests | Refusal precision, safe redirection, no-evidence behavior |
 | Citation validation | Confirms answer citations map to hits | Pending | Deterministic validator implemented but not selected | Test against live malformed and invented citations | Hit relationship, locator, active version |
@@ -31,9 +31,12 @@ pending. Pending does not mean unimportant; it prevents the roadmap from
 pretending a technical decision exists before its evaluation.
 
 Issue #24 now has implemented candidates for generator, prompt, policy
-enforcement, and citation validation. They intentionally remain pending because
-only the deterministic 25-case preflight has run. No provider/model, paid live
-comparison, prompt variant, or standard selection record exists yet.
+enforcement, and citation validation. They intentionally remain pending. A
+local Gemma 3 4B run passed all structural checks at zero monetary cost, but a
+post-run diagnostic found three unsupported or citation-mismatched answers in
+18 model calls. The quality rubric was not frozen prospectively, and no prompt
+variant or fit-for-purpose comparison model has been evaluated, so the result
+selects nothing.
 
 The chunker is selected with a `Refine` decision because the algorithm works
 and preserves provenance, but size and overlap still need comparison on a
@@ -52,7 +55,8 @@ was selected and #25 remains blocked from making an end-to-end grounding claim.
 
 ## Roadmap integration
 
-- #24 resolves generator, prompt, policy enforcement, and citation validation.
+- #24 resolves generator, prompt, policy enforcement, and citation validation;
+  its first local live result is `Refine` with no selection.
 - #41 records the failed evidence-sufficiency v1 comparison. A successor
   open-set verifier must pass before #25 makes end-to-end grounding claims.
 - #25 validates the first complete end-to-end experimental profile.

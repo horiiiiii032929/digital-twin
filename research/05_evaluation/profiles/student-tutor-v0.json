@@ -164,9 +164,10 @@
       ],
       "candidate_ids": [
         "deterministic-grounded-generator",
-        "live-provider-generator"
+        "live-provider-generator",
+        "ollama-gemma3-4b"
       ],
-      "notes": "The deterministic control passes synthetic preflight, but selection waits for one paid live provider comparison and a standard record."
+      "notes": "The deterministic control passes synthetic preflight. Local Gemma 3 4B passed structural checks but a post-run diagnostic found 3/18 unsupported or citation-mismatched answers; no generator or prompt is selected. A prospective quality rubric and fit-for-purpose comparison remain required."
     },
     {
       "component": "prompt",

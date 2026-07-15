@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "run_id": "generation-v1-gemma3-4b-exploratory",
+  "component": "generator",
+  "dataset_id": "generation-v1",
+  "corpus_id": "synthetic-browser-security-v1",
+  "code_revision": "7ddf00a2882a0090574f00611219929ed8090f85",
+  "candidates": [
+    {
+      "implementation": {"implementation_id":"deterministic-grounded-generator","version":"v1","configuration":{"prompt":"direct-grounded-prompt-v1","model_calls":0}},
+      "role": "control",
+      "metrics": [
+        {"name":"policy-action-accuracy","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"citation-relationship-validity","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"provider-suppression-accuracy","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"diagnostic-grounded-support","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"reported-cost","value":0.0,"unit":"usd","direction":"lower-is-better","threshold":0.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"synthetic-approved-evidence-only","passed":true,"evidence":"No private course or student data was used."},
+        {"name":"policy-short-circuit","passed":true,"evidence":"All seven required cases stopped before generation."},
+        {"name":"prospective-quality-rubric","passed":false,"evidence":"No answer-quality rubric or review protocol was frozen before this exploratory run."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {"implementation_id":"ollama-gemma3-4b","version":"local-2026-07-15","configuration":{"provider":"ollama","model":"gemma3:4b","prompt":"direct-grounded-prompt-v1","temperature":0,"json_mode":true,"timeout_seconds":60,"max_output_tokens":600}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"policy-action-accuracy","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"citation-relationship-validity","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"provider-suppression-accuracy","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"diagnostic-grounded-support","value":0.8333333333333334,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":false},
+        {"name":"reported-cost","value":0.0,"unit":"usd","direction":"lower-is-better","threshold":0.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"synthetic-approved-evidence-only","passed":true,"evidence":"No private course or student data was used."},
+        {"name":"policy-short-circuit","passed":true,"evidence":"All seven required cases stopped before Ollama."},
+        {"name":"prospective-quality-rubric","passed":false,"evidence":"The 15/18 support audit was defined after output inspection and has one reviewer."}
+      ],
+      "failures_by_category": {"grounded-support":3}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Local Gemma 3 4B passed structural transport, policy, and citation-relationship checks but failed three of 18 diagnostic sentence-support reviews. The quality rubric was post-run and cannot select a model or prompt.",
+    "limitations": [
+      "The evaluation used one small synthetic corpus and an easy evidence set.",
+      "The factual-support rubric was defined after the run and reviewed once.",
+      "No prompt variant, repeated trial, tail latency, cold start, or fit-for-purpose comparison model was evaluated.",
+      "The harder retrieval evidence-sufficiency boundary remains unresolved."
+    ]
+  }
+}
