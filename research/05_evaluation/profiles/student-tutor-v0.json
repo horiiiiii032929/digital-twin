@@ -107,7 +107,8 @@
       "evaluation_record_path": "research/05_evaluation/records/retrieval-v1.json",
       "evidence_paths": [
         "docs/local-retrieval.md",
-        "research/05_evaluation/retrieval-v1-results.md"
+        "research/05_evaluation/retrieval-v1-results.md",
+        "research/05_evaluation/retrieval-v2-results.md"
       ],
       "hard_gates": [
         "permission-filter",
@@ -119,7 +120,7 @@
         "embedding-retriever",
         "hybrid-retriever"
       ],
-      "notes": "BM25 is the measured Sprint 2 baseline; term overlap remains the regression control."
+      "notes": "BM25 remains the provisional v1 baseline and term overlap remains the regression control. The harder v2 comparison selected no replacement: BM25 and RRF failed held-out no-evidence behavior, while dense retrieval missed required ranking metrics."
     },
     {
       "component": "reranker",

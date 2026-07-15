@@ -14,6 +14,11 @@ Current utilities:
   over the versioned synthetic retrieval set, emits per-question evidence plus
   aggregate Recall@1, Recall@5, MRR, no-evidence accuracy, latency, and memory,
   and enforces regression thresholds; run it with `npm run verify:retrieval`.
+- `benchmark_retrieval.py`: calibrates and compares BM25, local BGE-small dense
+  retrieval, and BM25+dense RRF on the harder synthetic v2 corpus, emitting
+  held-out metrics, category slices, hard gates, latency, memory, and model
+  cache evidence; run it with `npm run benchmark:retrieval`. This optional
+  command downloads model files only to ignored `data/external/` storage.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

@@ -31,6 +31,9 @@ PROFILE_PATH = (
 RETRIEVAL_RECORD_PATH = (
     ROOT / "research" / "05_evaluation" / "records" / "retrieval-v1.json"
 )
+RETRIEVAL_V2_RECORD_PATH = (
+    ROOT / "research" / "05_evaluation" / "records" / "retrieval-v2.json"
+)
 
 
 def test_experimental_profile_covers_every_component_and_validates_evidence():
@@ -87,6 +90,10 @@ def test_refine_decision_can_record_an_inconclusive_comparison():
     )
 
     assert decision.selected_implementation_id is None
+
+    record = load_evaluation_record(RETRIEVAL_V2_RECORD_PATH)
+    assert record.decision.outcome == DecisionOutcome.REFINE
+    assert record.decision.selected_implementation_id is None
 
 
 def test_metric_pass_state_cannot_disagree_with_threshold():

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "run_id": "retrieval-v2-clean",
+  "component": "retriever",
+  "dataset_id": "retrieval-v2-test",
+  "corpus_id": "synthetic-web-security-v2",
+  "code_revision": "444fcbade92e9f18db21da5975e64921b00c7df4",
+  "candidates": [
+    {
+      "implementation": {"implementation_id":"bm25-calibrated","version":"v2","configuration":{"k1":1.2,"b":0.75,"minimum_score":0.0}},
+      "role": "control",
+      "metrics": [
+        {"name":"recall-at-3","value":0.7107843137254902,"unit":"ratio","direction":"higher-is-better","threshold":0.7107843137254902,"passed":true},
+        {"name":"recall-at-5","value":0.7990196078431373,"unit":"ratio","direction":"higher-is-better","threshold":0.7990196078431373,"passed":true},
+        {"name":"ndcg-at-3","value":0.6815967476735872,"unit":"ratio","direction":"higher-is-better","threshold":0.6815967476735872,"passed":true},
+        {"name":"mean-latency","value":0.2714969508815557,"unit":"milliseconds","direction":"lower-is-better","threshold":15.0,"passed":true},
+        {"name":"p95-latency","value":0.4746250342577696,"unit":"milliseconds","direction":"lower-is-better","threshold":25.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"permission-active-version-filter","passed":true,"evidence":"No prohibited or superseded chunk was returned."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"Five of six held-out no-evidence cases returned no hit; one shared the term policy."},
+        {"name":"source-judgments-resolved","passed":true,"evidence":"All source and passage judgments resolve against the committed corpus."},
+        {"name":"sensitive-data-excluded","passed":true,"evidence":"The corpus and queries are synthetic."}
+      ],
+      "failures_by_category": {"query":2,"ranking":9}
+    },
+    {
+      "implementation": {"implementation_id":"bge-small-dense","version":"v1","configuration":{"model":"BAAI/bge-small-en-v1.5","fastembed":"0.8.0","minimum_relevance_score":0.775}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"recall-at-3","value":0.6764705882352942,"unit":"ratio","direction":"higher-is-better","threshold":0.7107843137254902,"passed":false},
+        {"name":"recall-at-5","value":0.8284313725490197,"unit":"ratio","direction":"higher-is-better","threshold":0.7990196078431373,"passed":true},
+        {"name":"ndcg-at-3","value":0.6334942480998081,"unit":"ratio","direction":"higher-is-better","threshold":0.6815967476735872,"passed":false},
+        {"name":"mean-latency","value":7.237093776348047,"unit":"milliseconds","direction":"lower-is-better","threshold":15.0,"passed":true},
+        {"name":"p95-latency","value":9.224041015841067,"unit":"milliseconds","direction":"lower-is-better","threshold":25.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"permission-active-version-filter","passed":true,"evidence":"No prohibited or superseded chunk was returned."},
+        {"name":"no-evidence-accuracy","passed":true,"evidence":"All six held-out no-evidence cases returned no hit."},
+        {"name":"source-judgments-resolved","passed":true,"evidence":"All source and passage judgments resolve against the committed corpus."},
+        {"name":"sensitive-data-excluded","passed":true,"evidence":"The corpus and queries are synthetic."}
+      ],
+      "failures_by_category": {"ranking":9}
+    },
+    {
+      "implementation": {"implementation_id":"bm25-bge-rrf","version":"v1","configuration":{"rank_constant":60,"bm25_minimum_score":0.0,"dense_minimum_relevance_score":0.775}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"recall-at-3","value":0.7549019607843137,"unit":"ratio","direction":"higher-is-better","threshold":0.7107843137254902,"passed":true},
+        {"name":"recall-at-5","value":0.9019607843137255,"unit":"ratio","direction":"higher-is-better","threshold":0.7990196078431373,"passed":true},
+        {"name":"ndcg-at-3","value":0.6799099099502613,"unit":"ratio","direction":"higher-is-better","threshold":0.6815967476735872,"passed":false},
+        {"name":"mean-latency","value":10.900629311800003,"unit":"milliseconds","direction":"lower-is-better","threshold":15.0,"passed":true},
+        {"name":"p95-latency","value":21.933625102974474,"unit":"milliseconds","direction":"lower-is-better","threshold":25.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"permission-active-version-filter","passed":true,"evidence":"No prohibited or superseded chunk was returned."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"Five of six held-out no-evidence cases returned no hit; fusion inherited one weak BM25 match."},
+        {"name":"source-judgments-resolved","passed":true,"evidence":"All source and passage judgments resolve against the committed corpus."},
+        {"name":"sensitive-data-excluded","passed":true,"evidence":"The corpus and queries are synthetic."}
+      ],
+      "failures_by_category": {"query":1,"ranking":6}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Dense retrieval passed hard gates but regressed against BM25 on Recall@3 and nDCG@3; RRF improved coverage but failed no-evidence behavior and slightly regressed nDCG@3. No replacement is selected.",
+    "limitations": [
+      "The synthetic corpus has forty chunks and one evaluator's judgments.",
+      "Only one English dense model and one RRF configuration were tested.",
+      "The calibration no-evidence slice did not include vocabulary-sharing out-of-domain questions.",
+      "ONNX native resident memory was not measured."
+    ]
+  }
+}

@@ -15,3 +15,9 @@ records, release profiles, and readable result summaries.
 Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
+
+The retrieval v2 artifacts demonstrate an inconclusive comparison: a `refine`
+decision may intentionally select no implementation when every candidate fails
+a required gate or metric. In that case, preserve the previous profile entry,
+record the failed evidence, and use a new frozen held-out set for the next
+candidate iteration.

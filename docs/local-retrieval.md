@@ -12,6 +12,15 @@ No embedding model, vector database, hosted search service, live web source, or
 LMS connector is required. This keeps the first retrieval decision inspectable
 and makes a later semantic retriever prove its value against recorded evidence.
 
+The harder v2 comparison has now tested that replacement. BM25+dense RRF
+improved Recall@3 and Recall@5, while local BGE-small dense retrieval was the
+only candidate to pass held-out no-evidence behavior. No candidate passed every
+hard gate and required ranking metric, so the decision is **Refine** and the v1
+BM25 profile selection remains only a provisional baseline. See
+[`retrieval-v2-results.md`](../research/05_evaluation/retrieval-v2-results.md)
+and the broader
+[`RAG and LLM benchmarking`](rag-and-llm-benchmarking.md) framework.
+
 ## Source boundary
 
 The reproducible evaluation uses five approved synthetic sources: four
@@ -111,6 +120,19 @@ uv run python -m scripts.evaluate_retrieval \
 Generated run files remain ignored; the durable result and decision summary is
 stored alongside the evaluation set.
 
+The v2 benchmark adds a 40-chunk synthetic corpus, separate 20-query
+calibration and 40-query held-out sets, Recall/Precision at k=1/3/5, nDCG@3,
+category slices, safety violations, p95 latency, a local dense adapter, and RRF.
+Run it with:
+
+```bash
+npm run benchmark:retrieval
+```
+
+The optional benchmark dependency and approximately 134 MB model cache are not
+required by the normal test suite. The model cache is stored under ignored
+`data/external/`; no paid provider is called.
+
 ## Limitations
 
 - Token matching is lexical: synonyms, spelling variants, multilingual queries,
@@ -124,4 +146,4 @@ stored alongside the evaluation set.
 - The local IT5002 bundle still needs an explicit source inventory and professor
   permission before it can be used for private evaluation.
 - Embedding, hybrid, reranking, and layout-aware retrieval remain candidates
-  only after a larger approved corpus exposes lexical failures.
+  until a newly held-out experiment passes both abstention and ranking gates.
