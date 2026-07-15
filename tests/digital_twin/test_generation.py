@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+from scripts.evaluate_generation import _paid_provider_called
 from src.digital_twin.generation import (
     DeterministicCitationValidator,
     DeterministicGroundedGenerator,
@@ -299,6 +300,26 @@ async def test_malformed_or_invented_live_output_fails_closed(response):
     assert answer.citations == []
     assert answer.warnings == ["The tutor model returned an invalid grounded answer."]
     assert "not-json" not in answer.content
+
+
+@pytest.mark.asyncio
+async def test_blank_live_answer_fails_closed():
+    answer = await LiveGroundedGenerator(
+        RecordingClient(live_response(answer="   "))
+    ).generate(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.citations == []
+    assert answer.warnings == ["The tutor model returned an invalid grounded answer."]
+
+
+def test_generation_evaluator_does_not_understate_external_provider_use():
+    assert not _paid_provider_called(None)
+    assert not _paid_provider_called("ollama/gemma3:4b")
+    assert _paid_provider_called("provider/model-v1")
 
 
 @pytest.mark.asyncio

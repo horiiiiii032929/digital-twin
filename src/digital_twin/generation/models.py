@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.llm import LlmMessage
@@ -40,3 +40,11 @@ class ModelTutorOutput(BaseModel):
 
     answer: str = Field(min_length=1)
     citation_ids: list[str]
+
+    @field_validator("answer")
+    @classmethod
+    def answer_must_not_be_blank(cls, value: str) -> str:
+        answer = value.strip()
+        if not answer:
+            raise ValueError("answer must not be blank")
+        return answer

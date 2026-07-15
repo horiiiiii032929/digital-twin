@@ -35,7 +35,7 @@ def main() -> None:
         "dataset": str(arguments.dataset.relative_to(ROOT)),
         "code_revision": _code_revision(),
         "working_tree_dirty": _working_tree_dirty(),
-        "paid_provider_called": False,
+        "paid_provider_called": _paid_provider_called(arguments.model),
         "provider_selection": (
             arguments.model
             if live
@@ -157,6 +157,11 @@ def _working_tree_dirty() -> bool:
             text=True,
         ).stdout.strip()
     )
+
+
+def _paid_provider_called(model: str | None) -> bool:
+    """Conservatively classify non-Ollama live calls as potentially billable."""
+    return model is not None and not model.startswith("ollama/")
 
 
 if __name__ == "__main__":
