@@ -1,10 +1,16 @@
 import json
+import sys
 from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
 
-from scripts.evaluate_generation import _paid_provider_called
+from scripts.evaluate_generation import (
+    _arguments,
+    _evaluation_mode,
+    _external_provider_requires_acknowledgment,
+    _paid_provider_called,
+)
 from src.digital_twin.generation import (
     DeterministicCitationValidator,
     DeterministicGroundedGenerator,
@@ -320,6 +326,41 @@ def test_generation_evaluator_does_not_understate_external_provider_use():
     assert not _paid_provider_called(None)
     assert not _paid_provider_called("ollama/gemma3:4b")
     assert _paid_provider_called("provider/model-v1")
+    assert _evaluation_mode(None) == "deterministic-control"
+    assert _evaluation_mode("ollama/gemma3:4b") == "live-local-candidate"
+    assert _evaluation_mode("provider/model-v1") == "live-external-candidate"
+
+
+def test_generation_evaluator_requires_external_provider_acknowledgment(
+    monkeypatch,
+):
+    assert _external_provider_requires_acknowledgment("provider/model-v1", False)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["evaluate_generation", "--model", "provider/model-v1"],
+    )
+
+    with pytest.raises(SystemExit, match="2"):
+        _arguments()
+
+
+def test_generation_evaluator_accepts_explicit_external_provider_scope(monkeypatch):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "evaluate_generation",
+            "--model",
+            "provider/model-v1",
+            "--allow-external-provider",
+        ],
+    )
+
+    arguments = _arguments()
+
+    assert arguments.model == "provider/model-v1"
+    assert arguments.allow_external_provider
 
 
 @pytest.mark.asyncio

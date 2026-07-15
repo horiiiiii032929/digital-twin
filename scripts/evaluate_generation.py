@@ -1,4 +1,4 @@
-"""Evaluate the deterministic grounded-generation control without paid calls."""
+"""Evaluate deterministic or explicitly authorized grounded-generation candidates."""
 
 import argparse
 import asyncio
@@ -37,11 +37,11 @@ def main() -> None:
         "working_tree_dirty": _working_tree_dirty(),
         "paid_provider_called": _paid_provider_called(arguments.model),
         "provider_selection": (
-            arguments.model
+            f"unselected candidate: {arguments.model}"
             if live
             else "pending provider/model and budget decision"
         ),
-        "evaluation_mode": "live-local-candidate" if live else "deterministic-control",
+        "evaluation_mode": _evaluation_mode(arguments.model),
         "result": summary.model_dump(mode="json"),
     }
     rendered = json.dumps(payload, indent=2, sort_keys=True)
@@ -132,9 +132,26 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--model")
     parser.add_argument("--json-mode", action="store_true")
+    parser.add_argument(
+        "--allow-external-provider",
+        action="store_true",
+        help=(
+            "Acknowledge that a non-Ollama model can make an external, "
+            "potentially billable provider call."
+        ),
+    )
     parser.add_argument("--timeout-seconds", type=float, default=60)
     parser.add_argument("--max-output-tokens", type=int, default=600)
-    return parser.parse_args()
+    arguments = parser.parse_args()
+    if _external_provider_requires_acknowledgment(
+        arguments.model,
+        arguments.allow_external_provider,
+    ):
+        parser.error(
+            "a non-Ollama model requires --allow-external-provider and a "
+            "separately recorded budget decision"
+        )
+    return arguments
 
 
 def _code_revision() -> str:
@@ -162,6 +179,21 @@ def _working_tree_dirty() -> bool:
 def _paid_provider_called(model: str | None) -> bool:
     """Conservatively classify non-Ollama live calls as potentially billable."""
     return model is not None and not model.startswith("ollama/")
+
+
+def _external_provider_requires_acknowledgment(
+    model: str | None,
+    allowed: bool,
+) -> bool:
+    return _paid_provider_called(model) and not allowed
+
+
+def _evaluation_mode(model: str | None) -> str:
+    if model is None:
+        return "deterministic-control"
+    if model.startswith("ollama/"):
+        return "live-local-candidate"
+    return "live-external-candidate"
 
 
 if __name__ == "__main__":

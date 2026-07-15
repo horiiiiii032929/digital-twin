@@ -58,6 +58,11 @@ The project's technical standard, learning commitments, and strengthened Sprint
   on calibration data without evaluating the frozen held-out set.
 - `npm run benchmark:evidence-sufficiency`: compare any-hit, BM25-score,
   lexical-coverage, and semantic-agreement evidence gates.
+- `npm run verify:generation`: run the deterministic generation, policy,
+  citation, no-evidence, and provider-suppression regression set.
+- `npm run benchmark:generation-local`: run the unselected local Ollama Gemma 3
+  4B candidate in strict JSON mode and write ignored per-case output under
+  `reports/generated/`.
 - `npm run verify:evaluation-results`: validate the durable evaluation-result
   registry and its referenced artifacts.
 - `npm run verify:profile`: validate the versioned component profile.
@@ -98,23 +103,31 @@ Implemented as Sprint 2 foundations:
   validators that prevent undocumented implementation replacement.
 - An explicit, swappable evidence-sufficiency boundary and a 50-case held-out
   comparison. The result is `Refine`, with no safe gate selected.
+- Deterministic grounded-generation, tutor-policy, citation-validation, and
+  provider-failure controls behind replaceable interfaces.
+- A LiteLLM adapter and local Ollama benchmark path with latency, token, model,
+  and reported-cost traces.
+- A registered local Gemma 3 4B exploratory result: structural checks passed,
+  but factual-support review passed only 15/18 model answers, so no generator or
+  prompt was selected.
 
 Still planned:
 
 - Persistent storage, authentication, and multi-user sessions.
-- A successor retrieval answerability/evidence-sufficiency classifier,
-  production citation validation, and source-conflict checks.
-- Provider-backed tutor response generation.
+- The #24 prospective 100-case generator/prompt comparison and selection
+  decision.
+- The #43 open-set evidence-verifier comparison using new calibration and
+  150-case held-out data.
+- The #25 untouched 100-case end-to-end integration evaluation.
 - Student-facing tutoring and learning-gap analytics.
 
-Active Sprint 2 work is tracked by roadmap issue #7 and execution sub-issues
-#19-#25, #34, and #37. Parsing, chunking, retrieval v1/v2, evaluation
-architecture, and durable result governance are complete. Draft PR #36 contains
-a deterministic generation/policy preflight; live model and prompt selection,
-the successor evidence-sufficiency gate, tutor-policy enforcement, and the smoke
-demo remain delivery work. Evidence-sufficiency v1 selected no implementation,
-so end-to-end grounding claims remain blocked. Canvas remains an optional future
-connector.
+Active Sprint 2 work is tracked by roadmap issue #7. Completed sub-issues cover
+the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
+evaluation architecture, result governance, and the first failed
+evidence-sufficiency comparison. Draft PR #36 contains the generation controls,
+local benchmark path, and registered exploratory result. Current execution is
+#24 by 2026-07-20, #43 by 2026-07-23, then the blocked #25 integration evaluation
+by 2026-07-25. Canvas remains an optional future connector.
 
 ## Sprint 1 Onboarding Prototype
 

@@ -114,8 +114,8 @@ therefore selected nothing.
 The following remain separate execution sub-issues under roadmap issue #7:
 
 - Prospective prompt/model comparison completing #24
-- A successor open-set answerability/evidence verifier before end-to-end claims
-- Grounded tutoring smoke demonstration (#25)
+- Open-set answerability/evidence-verifier comparison in #43
+- Untouched end-to-end grounded-tutoring evaluation in #25
 
 Provider/model selection, production embedding selection, Canvas, persistence,
 and live evaluation remain pending. Local BGE-small embeddings have been

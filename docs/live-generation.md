@@ -132,13 +132,15 @@ per-case output is local and ignored under `reports/generated/`.
 
 ## Remaining live decision
 
-To complete #24, freeze a prospective quality rubric, prompt variants, at least
-one fit-for-purpose comparison model, and any spending cap, then run the same
-conditions through the live generator. The comparison must score
-factual grounding, pedagogy, misconception correction, policy compliance,
-citation validity, latency, token use, cost, and diagnosed failures. Only then
-may generator, prompt, policy-enforcement, and citation-validation profile
-entries become selected or receive standard component decision records.
+To complete #24, freeze the quality rubric, thresholds, review protocol, prompt
+variants, at least one fit-for-purpose comparison model, and any spending cap
+before inspecting held-out outputs. The revised issue requires at least 40
+development/calibration cases and 100 held-out cases, three repeats on a
+stability subset, and double review of at least 30 percent of answer cases. The
+comparison scores claim support, citations, pedagogy, misconception correction,
+policy behavior, latency, tokens, cost, footprint, and diagnosed failures. Only
+a candidate that passes every prospective hard gate may update the generator,
+prompt, policy-enforcement, or citation-validation profile entries.
 
 IT5002 files remain outside this flow until an explicit professor approval
 grants processing and tutoring permission.

@@ -18,7 +18,10 @@ Current utilities:
   and no-evidence preflight over 25 synthetic cases without a provider, tokens,
   or cost; run it with `npm run verify:generation`. An explicit `--model` plus
   optional `--json-mode` runs a benchmark-only live candidate; the repository's
-  local zero-cost command is `npm run benchmark:generation-local`.
+  local zero-cost command is `npm run benchmark:generation-local`. A non-Ollama
+  model is rejected unless `--allow-external-provider` explicitly acknowledges
+  the potentially billable external call; such a run also requires the
+  separately recorded budget decision defined by issue #24.
 - `benchmark_retrieval.py`: calibrates and compares BM25, local BGE-small dense
   retrieval, and BM25+dense RRF on the harder synthetic v2 corpus, emitting
   held-out metrics, category slices, hard gates, latency, memory, and model

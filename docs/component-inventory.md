@@ -57,8 +57,9 @@ was selected and #25 remains blocked from making an end-to-end grounding claim.
 
 - #24 resolves generator, prompt, policy enforcement, and citation validation;
   its first local live result is `Refine` with no selection.
-- #41 records the failed evidence-sufficiency v1 comparison. A successor
-  open-set verifier must pass before #25 makes end-to-end grounding claims.
+- #41 records the failed evidence-sufficiency v1 comparison. #43 evaluates the
+  successor open-set verifier required before #25 makes end-to-end grounding
+  claims.
 - #25 validates the first complete end-to-end experimental profile.
 - #8 resolves conversation orchestration.
 - #9 resolves proactive triggering.

@@ -34,8 +34,8 @@ The project currently exposes these planning fields:
    merged pull request only after that artifact exists.
 5. Use the `Decision Record` form only for evaluated product or research choices.
    Implementation tasks do not receive a placeholder decision.
-6. Link pull requests to the execution sub-issue and update evidence immediately
-   after merging.
+6. Link pull requests to the execution sub-issue. Update evidence when a real
+   result or check exists and again after merging.
 
 Note: GitHub requires the person opening the issue to have write access to the
 target project for automatic project assignment from issue forms.
@@ -43,22 +43,24 @@ target project for automatic project assignment from issue forms.
 ## Current delivery status
 
 - Sprint 1 onboarding was approved by Prof. Lek with a `Keep` decision.
-- The system remains provider-neutral and does not yet use a live LLM; approved
-  local ingestion, evaluated BM25 retrieval, the harder retrieval v2 benchmark,
-  and durable evaluation-result governance are implemented.
+- Approved local ingestion, evaluated BM25 retrieval, the harder retrieval v2
+  benchmark, replaceable generation controls, and durable evaluation-result
+  governance are implemented.
 - Retrieval v2 produced a `Refine` decision with no replacement. BM25 v1
   remains the provisional rollback baseline while evidence sufficiency is
   addressed.
-- Draft PR #36 passes a deterministic 25-case generation/policy preflight with
-  no provider calls; live provider, model, and prompt selection remain pending.
+- Draft PR #36 passes the deterministic 25-case generation/policy preflight and
+  contains the local Ollama benchmark path. The exploratory Gemma 3 4B run
+  passed structural checks but only 15/18 model answers passed a post-run
+  support audit, so no generator or prompt is selected.
 - #41 evaluated any-hit, BM25-score, lexical-coverage, and semantic-agreement
   evidence gates on 30 calibration and 50 held-out cases. The decision is
-  `Refine` with no selection, so the smoke demo remains blocked from claiming
-  end-to-end grounding.
-- Sprint 2 is active and targets the smallest grounded tutoring path using
-  approved local or synthetic documents, retrieval, tutor-policy enforcement,
-  live LLM generation, visible source evidence, and an explicit
-  evidence-sufficiency gate.
+  `Refine` with no selection.
+- #24 now requires a prospective prompt/model comparison with at least 40
+  development cases and 100 held-out cases. #43 requires a new 60-case
+  calibration set and 150-case held-out open-set verifier comparison.
+- #25 is blocked by both #24 and #43. Its four illustrative demo cases cannot
+  substitute for the required untouched 100-case end-to-end evaluation.
 - Canvas is an optional future connector. It should not block or define the core
   ingestion and retrieval architecture.
 - The [quality and learning plan](quality-and-learning-plan.md) is the acceptance
@@ -78,14 +80,33 @@ Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
 | 2026-07-16 | #23 Implement retrieval and source evidence |
 | 2026-07-17 | #37 Benchmark RAG retrieval candidates |
 | 2026-07-18 | #41 Evaluate retrieval evidence sufficiency |
-| 2026-07-18 | #24 Integrate live generation and tutor-policy enforcement |
-| 2026-07-19 | #25 Produce the grounded tutoring smoke demo |
+| 2026-07-20 | #24 Evaluate grounded generator and prompt candidates |
+| 2026-07-23 | #43 Evaluate the open-set evidence verifier |
+| 2026-07-25 | #25 Evaluate the grounded tutoring vertical slice |
 
 Follow-up PR #39 makes every named decision-bearing evaluation result durable
 through a registry, reusable template, and CI validator. Attach this evidence to
 #34 and the parent #7 rather than creating a retrospective execution issue.
 
-## Timeline Through Presentation
+## Evaluation contract
+
+Every decision-bearing component must expose a stable runtime contract and a
+rollback control, compare plausible alternatives under shared conditions, and
+separate development, calibration, and untouched held-out data. Metrics,
+thresholds, reviewer protocol, and analysis must be declared before held-out
+inspection.
+
+Safety, privacy, permission, provenance, and integrity gates run before relative
+quality. Results must include raw counts, failure slices, uncertainty, latency,
+tokens, cost, and footprint where applicable. Successful, failed, invalid, and
+inconclusive named runs remain registered. A profile changes only after every
+required gate passes; no selection is a valid outcome.
+
+Minimum sample sizes in issue bodies are floors. If important slices remain
+underpowered or uncertainty is too wide, record `Refine` and collect more
+evidence rather than treating the minimum as proof.
+
+## Timeline through presentation
 
 Use this schedule to keep `Sprint` and `Target Date` fields consistent on the
 project board. The current presentation milestone is tracked through
@@ -94,13 +115,13 @@ project board. The current presentation milestone is tracked through
 | Sprint | Dates | Focus | Items | Target Date |
 | --- | --- | --- | --- | --- |
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
-| S2 Grounding | 2026-06-29 to 2026-07-19 | I2 local source ingestion, evaluated RAG, live LLM, and grounding gate | #7 | 2026-07-19 |
-| S3 Tutoring | 2026-07-20 to 2026-07-26 | I2 active tutoring flow and sample conversations | #8 | 2026-07-26 |
-| S4 Proactive | 2026-07-27 to 2026-07-31 | I3 proactive prompt behavior and prototype stabilization | #9 | 2026-07-31 |
-| S5 Gap Report | 2026-08-03 to 2026-08-15 | I4 instructor dashboard and learning-gap summary | #10 | 2026-08-15 |
-| S6 Eval Setup | 2026-08-17 to 2026-08-23 | I5 evaluation dataset and rubric | #11 | 2026-08-23 |
-| S7 Refinement | 2026-08-24 to 2026-09-01 | I5 baseline comparison and prototype refinements | #12 | 2026-09-01 |
-| S8 Presentation | 2026-09-02 to 2026-09-13 | Final report, demo evidence, slides, and rehearsal | #13 | 2026-09-13 |
+| S2 Grounding | 2026-06-29 to 2026-07-25 | Evaluated local-course RAG vertical slice | #7 | 2026-07-25 |
+| S3 Tutoring | 2026-07-26 to 2026-08-01 | Selected student tutoring orchestration and interface | #8 | 2026-08-01 |
+| S4 Proactive | 2026-08-02 to 2026-08-08 | Selected or rejected proactive trigger strategy | #9 | 2026-08-08 |
+| S5 Gap Report | 2026-08-09 to 2026-08-16 | Selected privacy-preserving learning-gap analytics | #10 | 2026-08-16 |
+| S6 Eval Setup | 2026-08-17 to 2026-08-25 | Validated dataset, rubric, and reviewer protocol | #11 | 2026-08-25 |
+| S7 Refinement | 2026-08-26 to 2026-09-04 | Blinded baselines and confirmed refinements | #12 | 2026-09-04 |
+| S8 Presentation | 2026-09-05 to 2026-09-13 | Frozen evidence, reproducible report, and demonstration | #13 | 2026-09-13 |
 
 ## Board Maintenance
 
