@@ -14,6 +14,7 @@ from src.digital_twin.grounding import (
     LexicalCoverageEvidenceGate,
     MinimumRawScoreEvidenceGate,
     RelevantChunkReference,
+    RetrievalHit,
     RetrievalFailureCause,
     SecondaryRetrieverAgreementGate,
     ReciprocalRankFusionRetriever,
@@ -193,6 +194,27 @@ def test_secondary_retriever_gate_can_require_source_level_agreement():
 
     assert EvidenceGatedRetriever(primary, gate).retrieve("logged-in browser")
     assert EvidenceGatedRetriever(primary, gate).retrieve("monetary policy") == []
+
+    class DifferentSourceRetriever:
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [
+                RetrievalHit(
+                    chunk=chunks[1],
+                    relevance_score=1,
+                    raw_score=1,
+                )
+            ]
+
+    mismatch = SecondaryRetrieverAgreementGate(
+        DifferentSourceRetriever(),
+        minimum_relevance_score=0.75,
+        require_source_overlap=True,
+    ).assess(
+        "browser session",
+        [RetrievalHit(chunk=chunks[0], relevance_score=1, raw_score=1)],
+    )
+    assert mismatch.sufficient is False
 
 
 def test_evidence_sufficiency_evaluator_keeps_abstention_and_ranking_visible(

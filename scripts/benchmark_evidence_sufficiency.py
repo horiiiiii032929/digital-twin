@@ -265,10 +265,20 @@ def _select(rows: list[dict]) -> dict:
             row["balanced_accuracy"],
             row["unconditional_recall_at_3"],
             row["unconditional_ndcg_at_3"],
-            -row["mean_gate_latency_ms"],
+            _configuration_tie_break(row["configuration"]),
         ),
     )
     return {**selected["configuration"], "calibration_eligible": bool(eligible)}
+
+
+def _configuration_tie_break(configuration: dict) -> tuple:
+    """Prefer the less restrictive portable config when quality metrics tie."""
+
+    return tuple(
+        -float(value)
+        for _, value in sorted(configuration.items())
+        if isinstance(value, (int, float, bool))
+    )
 
 
 def _evaluate_frozen_candidates(

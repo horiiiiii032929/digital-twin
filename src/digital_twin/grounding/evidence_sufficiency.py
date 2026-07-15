@@ -248,7 +248,8 @@ class SecondaryRetrieverAgreementGate:
         agreeing = [
             hit
             for hit in supported
-            if hit.chunk.source_artifact_id or hit.chunk.document_id in primary_sources
+            if (hit.chunk.source_artifact_id or hit.chunk.document_id)
+            in primary_sources
         ]
         evidence = agreeing if self.require_source_overlap else supported
         score = max((hit.relevance_score for hit in evidence), default=0.0)

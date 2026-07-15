@@ -129,7 +129,11 @@ valid paraphrases with deliberately different wording.
 - Retrieval-v2 held-out set used for tuning: no
 - Threshold changed after held-out inspection: no
 - Source judgments unresolved: none
-- Data or evaluator defect found: none
+- Data or evaluator defect found: post-run review found an operator-precedence
+  bug in the optional `require_source_overlap=true` predicate. The clean test
+  candidate used `false`, so its metrics and decision are unaffected; only the
+  unused overlap-true calibration rows are invalid. Commit after the result adds
+  a regression test and fixes the predicate.
 - Run invalidated: no
 - Synthetic/private boundary violated: no
 
@@ -142,8 +146,9 @@ Some calibration configurations tied on every quality metric, leaving a single
 micro-latency measurement as the final tie-break. Repeated calibration can pick
 a behaviorally equivalent tied configuration because micro-timing is noisy.
 The clean artifact freezes the exact evaluated choices, all tied families were
-ineligible, and no selection depends on the tie. A successor must use a
-deterministic configuration tie-break before repeated latency measurement.
+ineligible, and no selection depends on the tie. The post-run implementation
+uses a deterministic configuration tie-break; a successor should measure
+latency through repeated trials rather than use it to break a quality tie.
 
 ## Decision
 

@@ -86,7 +86,8 @@
       "The synthetic corpus has forty chunks and one evaluator's judgments.",
       "The dataset is English-only and text-only.",
       "Only one embedding model and no cross-encoder or trained answerability classifier was tested.",
-      "The predeclared one-millisecond semantic gate budget was too strict, although quality gates also failed."
+      "The predeclared one-millisecond semantic gate budget was too strict, although quality gates also failed.",
+      "The unused require_source_overlap=true calibration rows had a predicate bug; the recorded false configuration and no-selection decision are unaffected."
     ]
   }
 }
