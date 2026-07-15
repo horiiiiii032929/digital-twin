@@ -50,6 +50,13 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
 - `npm run check`: run the complete local and CI verification suite.
 - `npm run check:docs`: validate repository-local Markdown links.
+- `npm run verify:ingestion`: verify the local parsing and chunking baseline.
+- `npm run verify:retrieval`: run the network-free retrieval v1 regression set.
+- `npm run benchmark:retrieval`: compare BM25, local BGE-small, and RRF on
+  retrieval v2; this optional command may download ignored local model files.
+- `npm run verify:evaluation-results`: validate the durable evaluation-result
+  registry and its referenced artifacts.
+- `npm run verify:profile`: validate the versioned component profile.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
 - `npm run lint:web`: run frontend lint checks.
@@ -79,18 +86,27 @@ Implemented as Sprint 2 foundations:
 - Permission-gated local UTF-8 text, Markdown, and selectable-text PDF parsing.
 - Stable source-version, content-hash, page, locator, and figure provenance.
 - Deterministic heading/paragraph chunking with inherited tutoring permission.
+- Evaluated BM25 retrieval with permission and active-version filtering plus
+  explicit source evidence.
+- Retrieval v2 comparison of BM25, local BGE-small dense retrieval, and
+  reciprocal-rank fusion. The result is `Refine`, with no v2 replacement.
+- A versioned component profile, evaluation records, result registry, and CI
+  validators that prevent undocumented implementation replacement.
 
 Still planned:
 
 - Persistent storage, authentication, and multi-user sessions.
-- Retrieval, citation, and source-conflict checks.
+- Retrieval evidence-sufficiency, production citation validation, and
+  source-conflict checks.
 - Provider-backed tutor response generation.
 - Student-facing tutoring and learning-gap analytics.
 
 Active Sprint 2 work is tracked by roadmap issue #7 and execution sub-issues
-#19-#25. Real parsing, retrieval, provider-backed generation, tutor-policy
-enforcement, and visible source evidence remain delivery work. Canvas remains
-an optional future connector.
+#19-#25, #34, and #37. Parsing, chunking, retrieval v1/v2, evaluation
+architecture, and durable result governance are complete. Draft PR #36 contains
+a deterministic generation/policy preflight; live model and prompt selection,
+the evidence-sufficiency gate, tutor-policy enforcement, and the smoke demo
+remain delivery work. Canvas remains an optional future connector.
 
 ## Sprint 1 Onboarding Prototype
 

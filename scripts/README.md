@@ -17,8 +17,17 @@ Current utilities:
 - `evaluate_generation.py`: runs the deterministic generator, policy, citation,
   and no-evidence preflight over 25 synthetic cases without a provider, tokens,
   or cost; run it with `npm run verify:generation`.
+- `benchmark_retrieval.py`: calibrates and compares BM25, local BGE-small dense
+  retrieval, and BM25+dense RRF on the harder synthetic v2 corpus, emitting
+  held-out metrics, category slices, hard gates, latency, memory, and model
+  cache evidence; run it with `npm run benchmark:retrieval`. This optional
+  command downloads model files only to ignored `data/external/` storage.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,
   selection status, evidence paths, and linked evaluation decisions; run it
   with `npm run verify:profile`.
+- `validate_evaluation_results.py`: requires every durable `*-results.md`
+  summary and machine-readable component record to appear in the result
+  registry, validates record schemas and unique run IDs, and runs as part of
+  `npm run check`; run it directly with `npm run verify:evaluation-results`.

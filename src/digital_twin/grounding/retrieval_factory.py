@@ -43,12 +43,15 @@ def build_selected_retriever(
     if implementation.implementation_id == "bm25":
         _validate_configuration(
             implementation.configuration,
-            allowed={"tokenizer", "k1", "b"},
+            allowed={"tokenizer", "k1", "b", "minimum_score"},
         )
         return BM25Retriever(
             chunks,
             k1=_numeric_configuration(implementation.configuration, "k1", 1.2),
             b=_numeric_configuration(implementation.configuration, "b", 0.75),
+            minimum_score=_numeric_configuration(
+                implementation.configuration, "minimum_score", 0.0
+            ),
             active_source_versions=active_source_versions,
         )
     raise UnsupportedRetrieverSelectionError(

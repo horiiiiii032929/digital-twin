@@ -58,6 +58,21 @@ Every measurable component must include:
 - a decision record stating whether to keep, refine, go deeper, or drop the
   candidate, with links to evidence and known limitations.
 
+Every named evaluation run that informs a decision must be documented whether
+it succeeds, fails a gate, is inconclusive, or is later declared invalid. Do
+not overwrite or omit an unfavorable result. Give each run a stable identifier
+and add it to `research/05_evaluation/result-registry.md`. Commit a readable
+result summary using the evaluation-result template and, for component
+comparisons, a machine-readable record under `research/05_evaluation/records/`.
+The result must identify the code revision and dirty state, dataset and split,
+corpus and permissions, exact candidate configuration, sample-size rationale,
+aggregate and slice metrics, uncertainty where meaningful, hard gates,
+operational measurements, representative failures, limitations, and the
+resulting Keep / Refine / Go Deeper / Drop decision. Generated per-case output
+may remain ignored when it is bulky or sensitive, but its location and the
+durable sanitized evidence must be recorded. Group repeated seeds or trials in
+one result only when every repeat and the aggregation method remain traceable.
+
 Architecture decisions must be evaluated too. Record the alternatives and
 tradeoffs for deployment topology, data flow, trust and privacy boundaries,
 failure recovery, observability, scaling, portability, operational complexity,

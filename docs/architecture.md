@@ -8,8 +8,9 @@
 - Normalize transcripts, slides, forum replies, assignments, rubrics, and FAQs.
 - Track source metadata, permissions, and retrieval quality.
 - Build a baseline RAG pipeline before adding specialized agent behavior.
-- Implemented onboarding coverage is limited to metadata-only source inventory
-  and deterministic source labels.
+- The onboarding flow deliberately remains metadata-only. The grounding layer
+  separately parses approved local sources and preserves their permission and
+  version lineage.
 
 ### Pedagogical Alignment Agent
 
@@ -48,7 +49,7 @@ student and analytics agents remain planned.
 
 ## Active grounding work
 
-Sprint 2 will prove one provider-backed path without coupling the architecture
+Sprint 2 is proving one provider-backed path without coupling the architecture
 to an LMS. The refactor establishes these stable layers first:
 
 ```text
@@ -100,17 +101,22 @@ Synthetic chunker, retriever, and generator implementations live under
 ### Sprint 2 implementation boundary
 
 The provider-neutral contracts, local ingestion baseline, evaluated BM25
-retrieval baseline, deterministic generation preflight, and system-wide
-component profile are implemented. A LiteLLM adapter exists but is not wired to
-an API route, provider model, credential, or paid evaluation.
+retrieval baseline, harder BM25/dense/RRF comparison, deterministic generation
+preflight, system-wide component profile, and durable result registry are
+implemented. Retrieval v2 produced a `Refine` decision with no replacement, so
+BM25 v1 remains the provisional rollback baseline rather than an unqualified
+final choice. A LiteLLM adapter exists but is not wired to an API route,
+provider model, credential, or paid evaluation.
 The following remain separate execution sub-issues under roadmap issue #7:
 
 - Live provider and prompt comparison completing #24
+- Retrieval evidence-sufficiency gating before end-to-end claims
 - Grounded tutoring smoke demonstration (#25)
 
-Provider/model selection, embeddings, Canvas, persistence, and live evaluation
-remain pending. Canvas can be added later as an optional source adapter if a
-safe guest course contains useful material.
+Provider/model selection, production embedding selection, Canvas, persistence,
+and live evaluation remain pending. Local BGE-small embeddings have been
+benchmarked as a candidate but were not selected. Canvas can be added later as
+an optional source adapter if a safe guest course contains useful material.
 
 ## Open Design Decisions
 
@@ -118,4 +124,4 @@ safe guest course contains useful material.
 - Live prompt variant selection
 - Agent prompt boundaries and model/provider selection
 - Student privacy and consent model
-- Evaluation baseline and scoring rubric
+- End-to-end answer-quality rubric and evidence-sufficiency threshold

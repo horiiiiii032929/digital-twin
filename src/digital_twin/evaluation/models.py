@@ -119,8 +119,10 @@ class EvaluationDecision(BaseModel):
     def selected_implementation_matches_outcome(self) -> "EvaluationDecision":
         if self.outcome == DecisionOutcome.DROP and self.selected_implementation_id:
             raise ValueError("drop decisions cannot select an implementation")
-        if self.outcome != DecisionOutcome.DROP and not self.selected_implementation_id:
-            raise ValueError("non-drop decisions require a selected implementation")
+        if self.outcome in {DecisionOutcome.KEEP, DecisionOutcome.GO_DEEPER} and not (
+            self.selected_implementation_id
+        ):
+            raise ValueError("keep and go-deeper decisions require a selection")
         return self
 
 

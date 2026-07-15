@@ -10,7 +10,7 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
@@ -19,7 +19,9 @@
     "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
     "verify:generation": "uv run python -m scripts.evaluate_generation",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
+    "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",
+    "benchmark:retrieval": "uv run --extra retrieval-benchmark python -m scripts.benchmark_retrieval --output reports/generated/retrieval-v2.json",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"
