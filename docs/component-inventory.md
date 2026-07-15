@@ -10,7 +10,7 @@ disagree.
 | Source adapter | Provides an approved source artifact | Selected | Local files v1 | Optional Canvas adapter | Approval, sensitivity, version integrity |
 | Parser | Produces normalized document segments and figures | Selected | PyMuPDF document parser v1 | Layout-aware parser; OCR only if justified | Extraction, reading order, provenance |
 | Chunker | Produces stable retrieval units | Selected / Refine | Heading-paragraph chunker v1 | Fixed-token and semantic chunking | Retrieval quality, duplication, boundary loss |
-| Retriever | Returns ranked approved chunks | Selected | BM25 v1; term overlap control | Embedding or hybrid only after lexical failures | Recall@K, MRR, no-evidence, permission filtering |
+| Retriever | Returns ranked approved chunks | Selected / Refine | BM25 v1 provisional rollback baseline; term overlap control | Evidence-sufficiency gate, then targeted lexical, dense, or hybrid refinement | Recall@K, MRR/nDCG, no-evidence, permission filtering, latency |
 | Reranker | Reorders retrieved candidates | Pending | No selected implementation | No reranker vs cross-encoder or LLM | Ranking gain, latency, cost, evidence preservation |
 | Figure description | Produces reviewable semantic figure text | Pending | Caption/context is metadata, not selected description | Caption/context vs vision model | Factuality, figure lineage, review and display permission |
 | Generator | Produces a grounded answer | Pending | Deterministic control planned | One live provider candidate in #24 | Grounding, failure handling, latency, tokens, cost |
@@ -32,12 +32,17 @@ pretending a technical decision exists before its evaluation.
 
 The chunker is selected with a `Refine` decision because the algorithm works
 and preserves provenance, but size and overlap still need comparison on a
-larger approved corpus. BM25 is the only selected component currently backed by
-the standard candidate evaluation record.
+larger approved corpus. Retrieval v2 evaluated BM25, local BGE-small dense
+retrieval, and reciprocal-rank fusion on a harder held-out set. None satisfied
+all gates, so no candidate replaced BM25 v1 and the next comparison must target
+the observed evidence-sufficiency and ranking failures. Both retrieval runs and
+the ingestion result are indexed by the durable evaluation-result registry.
 
 ## Roadmap integration
 
 - #24 resolves generator, prompt, policy enforcement, and citation validation.
+- A bounded evidence-sufficiency task must pass before #25 makes end-to-end
+  grounding claims.
 - #25 validates the first complete end-to-end experimental profile.
 - #8 resolves conversation orchestration.
 - #9 resolves proactive triggering.

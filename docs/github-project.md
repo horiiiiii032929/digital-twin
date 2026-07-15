@@ -44,10 +44,17 @@ target project for automatic project assignment from issue forms.
 
 - Sprint 1 onboarding was approved by Prof. Lek with a `Keep` decision.
 - The system remains provider-neutral and does not yet use a live LLM; approved
-  local ingestion and evaluated BM25 retrieval are implemented.
+  local ingestion, evaluated BM25 retrieval, the harder retrieval v2 benchmark,
+  and durable evaluation-result governance are implemented.
+- Retrieval v2 produced a `Refine` decision with no replacement. BM25 v1
+  remains the provisional rollback baseline while evidence sufficiency is
+  addressed.
+- Draft PR #36 passes a deterministic 25-case generation/policy preflight with
+  no provider calls; live provider, model, and prompt selection remain pending.
 - Sprint 2 is active and targets the smallest grounded tutoring path using
   approved local or synthetic documents, retrieval, tutor-policy enforcement,
-  live LLM generation, and visible source evidence.
+  live LLM generation, visible source evidence, and an explicit
+  evidence-sufficiency gate.
 - Canvas is an optional future connector. It should not block or define the core
   ingestion and retrieval architecture.
 - The [quality and learning plan](quality-and-learning-plan.md) is the acceptance
@@ -65,8 +72,13 @@ Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
 | 2026-07-14 | #22 Implement local document parsing and chunking |
 | 2026-07-15 | #34 Define evaluation architecture and component profiles |
 | 2026-07-16 | #23 Implement retrieval and source evidence |
+| 2026-07-17 | #37 Benchmark RAG retrieval candidates |
 | 2026-07-18 | #24 Integrate live generation and tutor-policy enforcement |
 | 2026-07-19 | #25 Produce the grounded tutoring smoke demo |
+
+Follow-up PR #39 makes every named decision-bearing evaluation result durable
+through a registry, reusable template, and CI validator. Attach this evidence to
+#34 and the parent #7 rather than creating a retrospective execution issue.
 
 ## Timeline Through Presentation
 
@@ -77,7 +89,7 @@ project board. The current presentation milestone is tracked through
 | Sprint | Dates | Focus | Items | Target Date |
 | --- | --- | --- | --- | --- |
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
-| S2 Grounding | 2026-06-29 to 2026-07-19 | I2 local source ingestion, live LLM, and RAG baseline | #7 | 2026-07-19 |
+| S2 Grounding | 2026-06-29 to 2026-07-19 | I2 local source ingestion, evaluated RAG, live LLM, and grounding gate | #7 | 2026-07-19 |
 | S3 Tutoring | 2026-07-20 to 2026-07-26 | I2 active tutoring flow and sample conversations | #8 | 2026-07-26 |
 | S4 Proactive | 2026-07-27 to 2026-07-31 | I3 proactive prompt behavior and prototype stabilization | #9 | 2026-07-31 |
 | S5 Gap Report | 2026-08-03 to 2026-08-15 | I4 instructor dashboard and learning-gap summary | #10 | 2026-08-15 |
@@ -93,6 +105,8 @@ project board. The current presentation milestone is tracked through
   `Done`, and future work remains `Todo`.
 - Add artifact links to `Evidence` only when the artifact exists.
 - Use `Decision` only after a product or research choice has been evaluated.
+- Register every named decision-bearing result; retain failed, invalid, and
+  inconclusive runs rather than silently replacing them.
 - Update `Target Date` before changing scope so timeline drift is visible.
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.
