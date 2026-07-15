@@ -10,7 +10,7 @@ disagree.
 | Source adapter | Provides an approved source artifact | Selected | Local files v1 | Optional Canvas adapter | Approval, sensitivity, version integrity |
 | Parser | Produces normalized document segments and figures | Selected | PyMuPDF document parser v1 | Layout-aware parser; OCR only if justified | Extraction, reading order, provenance |
 | Chunker | Produces stable retrieval units | Selected / Refine | Heading-paragraph chunker v1 | Fixed-token and semantic chunking | Retrieval quality, duplication, boundary loss |
-| Retriever | Returns ranked approved chunks | Selected / Refine | BM25 v1 provisional rollback baseline; term overlap control | Evidence-sufficiency gate, then targeted lexical, dense, or hybrid refinement | Recall@K, MRR/nDCG, no-evidence, permission filtering, latency |
+| Retriever | Returns ranked approved chunks and an explicit sufficiency decision | Selected / Refine | BM25 v1 plus any-hit only as rollback/control; no safe gate selected | Cross-encoder relevance verifier vs calibrated answerability classifier | Recall@K, MRR/nDCG, false answer/abstention, permission filtering, latency |
 | Reranker | Reorders retrieved candidates | Pending | No selected implementation | No reranker vs cross-encoder or LLM | Ranking gain, latency, cost, evidence preservation |
 | Figure description | Produces reviewable semantic figure text | Pending | Caption/context is metadata, not selected description | Caption/context vs vision model | Factuality, figure lineage, review and display permission |
 | Generator | Produces a grounded answer | Pending | Deterministic control planned | One live provider candidate in #24 | Grounding, failure handling, latency, tokens, cost |
@@ -38,11 +38,18 @@ all gates, so no candidate replaced BM25 v1 and the next comparison must target
 the observed evidence-sufficiency and ranking failures. Both retrieval runs and
 the ingestion result are indexed by the durable evaluation-result registry.
 
+Evidence-sufficiency v1 then compared any-hit, calibrated BM25 raw score,
+lexical coverage, and BGE-small semantic agreement on 30 calibration and 50
+held-out cases. Every learned candidate failed calibration and held-out gates.
+Semantic agreement was strongest but still produced 5/18 false answers and
+8/32 false abstentions while regressing unconditional ranking quality. No gate
+was selected and #25 remains blocked from making an end-to-end grounding claim.
+
 ## Roadmap integration
 
 - #24 resolves generator, prompt, policy enforcement, and citation validation.
-- A bounded evidence-sufficiency task must pass before #25 makes end-to-end
-  grounding claims.
+- #41 records the failed evidence-sufficiency v1 comparison. A successor
+  open-set verifier must pass before #25 makes end-to-end grounding claims.
 - #25 validates the first complete end-to-end experimental profile.
 - #8 resolves conversation orchestration.
 - #9 resolves proactive triggering.
