@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "run_id": "retrieval-v1-clean",
+  "component": "retriever",
+  "dataset_id": "retrieval-v1",
+  "corpus_id": "synthetic-browser-security-v1",
+  "code_revision": "eabfee109b9e88ba19999052e1a0b9b5baf1f3db",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "term-overlap",
+        "version": "v1",
+        "configuration": {
+          "tokenizer": "lowercase-alphanumeric"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "recall-at-1",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7,
+          "passed": true
+        },
+        {
+          "name": "recall-at-5",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "mean-reciprocal-rank",
+          "value": 0.975,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.6,
+          "passed": true
+        },
+        {
+          "name": "no-evidence-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "mean-latency",
+          "value": 0.038,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "peak-memory",
+          "value": 157012,
+          "unit": "bytes",
+          "direction": "lower-is-better",
+          "threshold": 5000000,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "permission-filter",
+          "passed": true,
+          "evidence": "Non-tutoring chunks are excluded by automated tests."
+        },
+        {
+          "name": "active-version-filter",
+          "passed": true,
+          "evidence": "Superseded source versions are excluded by automated tests."
+        },
+        {
+          "name": "source-evidence",
+          "passed": true,
+          "evidence": "Every hit exposes source identity, version, locator, text, and score."
+        },
+        {
+          "name": "sensitive-data-excluded",
+          "passed": true,
+          "evidence": "The committed evaluation uses synthetic sources only."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "bm25",
+        "version": "v1",
+        "configuration": {
+          "tokenizer": "lowercase-alphanumeric",
+          "k1": 1.2,
+          "b": 0.75
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "recall-at-1",
+          "value": 0.8,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7,
+          "passed": true
+        },
+        {
+          "name": "recall-at-5",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "mean-reciprocal-rank",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.6,
+          "passed": true
+        },
+        {
+          "name": "no-evidence-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "mean-latency",
+          "value": 0.098,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "peak-memory",
+          "value": 160508,
+          "unit": "bytes",
+          "direction": "lower-is-better",
+          "threshold": 5000000,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "permission-filter",
+          "passed": true,
+          "evidence": "Non-tutoring chunks are excluded by automated tests."
+        },
+        {
+          "name": "active-version-filter",
+          "passed": true,
+          "evidence": "Superseded source versions are excluded by automated tests."
+        },
+        {
+          "name": "source-evidence",
+          "passed": true,
+          "evidence": "Every hit exposes source identity, version, locator, text, and score."
+        },
+        {
+          "name": "sensitive-data-excluded",
+          "passed": true,
+          "evidence": "The committed evaluation uses synthetic sources only."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "bm25",
+    "rationale": "BM25 improved first-result coverage and MRR while retaining complete Recall@5 and no-evidence accuracy at negligible absolute cost.",
+    "limitations": [
+      "The synthetic corpus contains only nine chunks.",
+      "Lexical retrieval does not resolve synonyms or conceptual paraphrases.",
+      "Recall@5 is weakly discriminating at this corpus size."
+    ]
+  }
+}

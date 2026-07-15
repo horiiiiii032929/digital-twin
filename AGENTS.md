@@ -66,6 +66,13 @@ choice. Do not describe a method as state of the art based only on a paper,
 benchmark leaderboard, or vendor claim; evaluate it against the repository's
 baseline and representative course use cases first.
 
+Record accepted component implementations in the versioned experimental or
+release profile under `research/05_evaluation/profiles/`. A profile selection
+must link to evidence, name the implementation and configuration version, and
+retain a control or fallback when applicable. Do not silently replace a selected
+component in orchestration code; evaluate it, record the decision, update the
+profile, and run component plus end-to-end regression checks.
+
 Store experiment plans and learning logs under `research/04_experiments/`,
 evaluation datasets and rubrics under `research/05_evaluation/`, repeatable
 evaluation code under `scripts/`, and durable evidence summaries under

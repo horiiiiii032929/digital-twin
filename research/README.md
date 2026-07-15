@@ -10,5 +10,6 @@ system is designed a certain way.
 - `02_requirements/`: user research, onboarding assumptions, and workflows
 - `03_data/`: dataset descriptions, schemas, consent, and provenance
 - `04_experiments/`: experiment plans and research logs
-- `05_evaluation/`: rubrics, datasets, and evaluation results
+- `05_evaluation/`: rubrics, datasets, validated component records, release
+  profiles, and evaluation results
 - `06_reports/`: weekly summaries and final deliverables

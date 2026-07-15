@@ -82,13 +82,20 @@ asynchronous generator returns answer content, explicit citations, and warnings.
 chunking design and [local-retrieval.md](local-retrieval.md) for ranking and
 evaluation.
 
+Cross-cutting implementation selection is separate from these runtime
+contracts. The [evaluation architecture](evaluation-architecture.md) defines
+shared candidate records and the complete versioned system profile, while the
+[component inventory](component-inventory.md) shows which boundaries are
+selected, pending, or disabled. This preserves typed domain interfaces while
+making algorithms, models, prompts, and policies measurable and replaceable.
+
 Synthetic chunker, retriever, and generator implementations live under
 `tests/fixtures/` and make the contracts executable without network calls.
 
 ### Sprint 2 implementation boundary
 
-The provider-neutral contracts, local ingestion baseline, and evaluated BM25
-retrieval baseline are implemented.
+The provider-neutral contracts, local ingestion baseline, evaluated BM25
+retrieval baseline, and system-wide component profile are implemented.
 The following remain separate execution sub-issues under roadmap issue #7:
 
 - Live generation and tutor-policy enforcement (#24)

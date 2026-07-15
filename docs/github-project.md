@@ -43,8 +43,8 @@ target project for automatic project assignment from issue forms.
 ## Current delivery status
 
 - Sprint 1 onboarding was approved by Prof. Lek with a `Keep` decision.
-- The onboarding implementation remains deterministic and provider-neutral; it
-  does not yet use a live LLM or real retrieval.
+- The system remains provider-neutral and does not yet use a live LLM; approved
+  local ingestion and evaluated BM25 retrieval are implemented.
 - Sprint 2 is active and targets the smallest grounded tutoring path using
   approved local or synthetic documents, retrieval, tutor-policy enforcement,
   live LLM generation, and visible source evidence.
@@ -63,6 +63,7 @@ Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
 | 2026-07-12 | #20 Refactor API and frontend adapters |
 | 2026-07-13 | #21 Define grounding contracts and synthetic fixtures |
 | 2026-07-14 | #22 Implement local document parsing and chunking |
+| 2026-07-15 | #34 Define evaluation architecture and component profiles |
 | 2026-07-16 | #23 Implement retrieval and source evidence |
 | 2026-07-18 | #24 Integrate live generation and tutor-policy enforcement |
 | 2026-07-19 | #25 Produce the grounded tutoring smoke demo |

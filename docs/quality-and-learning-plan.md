@@ -1,6 +1,6 @@
 # Quality and Learning Plan
 
-Last reviewed: 2026-07-10
+Last reviewed: 2026-07-15
 
 ## Purpose
 
@@ -20,6 +20,8 @@ the complete digital-twin system.
 - Build an inspectable baseline before adding opaque infrastructure.
 - Evaluate behavior instead of accepting a convincing demonstration alone.
 - Preserve source provenance, policy decisions, warnings, and failure states.
+- Keep decision-bearing components replaceable behind typed contracts and select
+  their versions through recorded evaluation evidence.
 - Keep Canvas optional; LMS integration is not a substitute for research depth.
 - Do not claim learning effectiveness without an evaluation design that supports
   that claim.
@@ -100,6 +102,26 @@ Every implementation issue must provide:
 6. Updated architecture or usage documentation.
 7. A learning log written in the student's own words.
 8. A merged pull request with passing CI and no sensitive data.
+
+When the issue proposes or replaces an algorithm, model, prompt, parser,
+ranking method, policy mechanism, or agent behavior, definition of done also
+requires a control, shared evaluation conditions, hard gates, required metric
+thresholds, a machine-readable component record, and an updated experimental
+profile. See [evaluation-architecture.md](evaluation-architecture.md).
+
+## Component selection and release profiles
+
+The system is assembled from versioned component selections rather than one
+permanent stack. Every decision-bearing boundary appears in the
+[component inventory](component-inventory.md) and current experimental profile.
+Only experimental profiles may contain unresolved components. Before a profile
+becomes a release candidate, every component must be selected or explicitly
+disabled with evidence.
+
+Selection follows hard gates first, quality and operational thresholds second,
+relative performance third, and implementation complexity last. Privacy,
+permission, academic-integrity, provenance, and citation failures cannot be
+traded against a higher aggregate score.
 
 ## Learning contract
 
