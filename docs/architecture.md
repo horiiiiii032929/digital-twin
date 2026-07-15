@@ -97,19 +97,22 @@ Synthetic chunker, retriever, and generator implementations live under
 
 The provider-neutral contracts, local ingestion baseline, evaluated BM25
 retrieval baseline, harder BM25/dense/RRF comparison, system-wide component
-profile, and durable result registry are implemented. Retrieval v2 produced a
-`Refine` decision with no replacement, so BM25 v1 remains the provisional
-rollback baseline rather than an unqualified final choice.
+profile, durable result registry, and a swappable evidence-sufficiency boundary
+are implemented. Retrieval v2 and evidence-sufficiency v1 both produced
+`Refine` decisions with no replacement, so BM25 v1 with explicit any-hit
+behavior remains only the provisional rollback/control path.
 The following remain separate execution sub-issues under roadmap issue #7:
 
 - Live generation and tutor-policy enforcement (#24)
-- Retrieval evidence-sufficiency gating before end-to-end claims
+- A successor open-set answerability/evidence verifier before end-to-end claims
 - Grounded tutoring smoke demonstration (#25)
 
 Provider selection, production embedding selection, Canvas, persistence, and
 live generation are not implemented. Local BGE-small embeddings have been
-benchmarked as a candidate but were not selected. Canvas can be added later as
-an optional source adapter if a safe guest course contains useful material.
+benchmarked for ranking and semantic evidence agreement but were not selected.
+The current any-hit control must not feed an end-to-end grounding claim. Canvas
+can be added later as an optional source adapter if a safe guest course contains
+useful material.
 
 ## Open Design Decisions
 

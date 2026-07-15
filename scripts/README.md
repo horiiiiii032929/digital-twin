@@ -19,6 +19,11 @@ Current utilities:
   held-out metrics, category slices, hard gates, latency, memory, and model
   cache evidence; run it with `npm run benchmark:retrieval`. This optional
   command downloads model files only to ignored `data/external/` storage.
+- `benchmark_evidence_sufficiency.py`: calibrates absolute-score and lexical-
+  coverage gates against the explicit any-hit control, then evaluates the
+  frozen choices on a separate held-out set; run calibration without touching
+  held-out results using `npm run calibrate:evidence-sufficiency`, and run the
+  recorded comparison with `npm run benchmark:evidence-sufficiency`.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

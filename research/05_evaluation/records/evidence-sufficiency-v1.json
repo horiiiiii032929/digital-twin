@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v1-clean",
+  "component": "retriever",
+  "dataset_id": "evidence-sufficiency-v1-test",
+  "corpus_id": "synthetic-web-security-v2",
+  "code_revision": "edee299607910b781cbbbdfa3cec6621289b48cb",
+  "candidates": [
+    {
+      "implementation": {"implementation_id":"any-hit-evidence-gate","version":"v1","configuration":{"ranker":"bm25-v1","k1":1.2,"b":0.75}},
+      "role": "control",
+      "metrics": [
+        {"name":"answerable-recall","value":0.96875,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":true},
+        {"name":"balanced-accuracy","value":0.484375,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"unconditional-recall-at-3","value":0.8125,"unit":"ratio","direction":"higher-is-better","threshold":0.771875,"passed":true},
+        {"name":"unconditional-ndcg-at-3","value":0.7757611299121477,"unit":"ratio","direction":"higher-is-better","threshold":0.7369730734165403,"passed":true},
+        {"name":"mean-gate-latency","value":0.0013258890248835087,"unit":"milliseconds","direction":"lower-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"calibration-requirements","passed":true,"evidence":"The explicit control is not threshold-calibrated."},
+        {"name":"permission-active-version-filter","passed":true,"evidence":"Zero prohibited or superseded chunks were returned."},
+        {"name":"zero-false-answers","passed":false,"evidence":"All 18 held-out no-evidence cases returned at least one hit."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"No-evidence accuracy was 0/18."}
+      ],
+      "failures_by_category": {"false-answer":18,"false-abstention":1}
+    },
+    {
+      "implementation": {"implementation_id":"semantic-agreement-evidence-gate","version":"v1","configuration":{"ranker":"bm25-v1","model":"BAAI/bge-small-en-v1.5","minimum_relevance_score":0.85,"secondary_limit":5,"require_source_overlap":false}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"answerable-recall","value":0.75,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":false},
+        {"name":"balanced-accuracy","value":0.7361111111111112,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"unconditional-recall-at-3","value":0.640625,"unit":"ratio","direction":"higher-is-better","threshold":0.771875,"passed":false},
+        {"name":"unconditional-ndcg-at-3","value":0.6345804248869603,"unit":"ratio","direction":"higher-is-better","threshold":0.7369730734165403,"passed":false},
+        {"name":"mean-gate-latency","value":5.745138262864202,"unit":"milliseconds","direction":"lower-is-better","threshold":1.0,"passed":false}
+      ],
+      "hard_gates": [
+        {"name":"calibration-requirements","passed":false,"evidence":"Calibration had one false answer and one false abstention."},
+        {"name":"permission-active-version-filter","passed":true,"evidence":"Zero prohibited or superseded chunks were returned."},
+        {"name":"zero-false-answers","passed":false,"evidence":"Five of 18 held-out no-evidence cases were accepted."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"No-evidence accuracy was 13/18."}
+      ],
+      "failures_by_category": {"false-answer":5,"false-abstention":8,"calibration":1}
+    },
+    {
+      "implementation": {"implementation_id":"minimum-raw-score-evidence-gate","version":"v1","configuration":{"ranker":"bm25-v1","minimum_raw_score":5.0}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"answerable-recall","value":0.84375,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":false},
+        {"name":"balanced-accuracy","value":0.5607638888888888,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"unconditional-recall-at-3","value":0.71875,"unit":"ratio","direction":"higher-is-better","threshold":0.771875,"passed":false},
+        {"name":"unconditional-ndcg-at-3","value":0.7091695751130397,"unit":"ratio","direction":"higher-is-better","threshold":0.7369730734165403,"passed":false},
+        {"name":"mean-gate-latency","value":0.001852449495345354,"unit":"milliseconds","direction":"lower-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"calibration-requirements","passed":false,"evidence":"Calibration produced seven false answers."},
+        {"name":"permission-active-version-filter","passed":true,"evidence":"Zero prohibited or superseded chunks were returned."},
+        {"name":"zero-false-answers","passed":false,"evidence":"Thirteen of 18 held-out no-evidence cases were accepted."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"No-evidence accuracy was 5/18."}
+      ],
+      "failures_by_category": {"false-answer":13,"false-abstention":5,"calibration":7}
+    },
+    {
+      "implementation": {"implementation_id":"lexical-coverage-evidence-gate","version":"v1","configuration":{"ranker":"bm25-v1","minimum_query_coverage":0.4,"minimum_matching_terms":1,"evidence_limit":3}},
+      "role": "candidate",
+      "metrics": [
+        {"name":"answerable-recall","value":0.78125,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":false},
+        {"name":"balanced-accuracy","value":0.5017361111111112,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"unconditional-recall-at-3","value":0.65625,"unit":"ratio","direction":"higher-is-better","threshold":0.771875,"passed":false},
+        {"name":"unconditional-ndcg-at-3","value":0.6422078294599889,"unit":"ratio","direction":"higher-is-better","threshold":0.7369730734165403,"passed":false},
+        {"name":"mean-gate-latency","value":0.01565914135426283,"unit":"milliseconds","direction":"lower-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"calibration-requirements","passed":false,"evidence":"Calibration produced three false answers."},
+        {"name":"permission-active-version-filter","passed":true,"evidence":"Zero prohibited or superseded chunks were returned."},
+        {"name":"zero-false-answers","passed":false,"evidence":"Fourteen of 18 held-out no-evidence cases were accepted."},
+        {"name":"no-evidence-accuracy","passed":false,"evidence":"No-evidence accuracy was 4/18."}
+      ],
+      "failures_by_category": {"false-answer":14,"false-abstention":7,"calibration":3}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Every candidate failed calibration and held-out answerability, abstention, or ranking requirements. Semantic agreement was strongest but still returned five false answers, refused eight answerable questions, and regressed unconditional ranking quality. No evidence gate is selected.",
+    "limitations": [
+      "The synthetic corpus has forty chunks and one evaluator's judgments.",
+      "The dataset is English-only and text-only.",
+      "Only one embedding model and no cross-encoder or trained answerability classifier was tested.",
+      "The predeclared one-millisecond semantic gate budget was too strict, although quality gates also failed.",
+      "The unused require_source_overlap=true calibration rows had a predicate bug; the recorded false configuration and no-selection decision are unaffected."
+    ]
+  }
+}

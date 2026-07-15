@@ -87,6 +87,7 @@ class RetrievalEvaluationHit(BaseModel):
     source_version: int
     locator: str
     relevance_score: float
+    raw_score: float | None = Field(default=None, ge=0)
 
 
 class RetrievalCaseResult(BaseModel):
@@ -344,6 +345,7 @@ def _serialize_hit(rank: int, hit: RetrievalHit) -> RetrievalEvaluationHit:
         source_version=chunk.source_version,
         locator=chunk.locator or f"chunk {chunk.ordinal + 1}",
         relevance_score=hit.relevance_score,
+        raw_score=hit.raw_score,
     )
 
 

@@ -23,6 +23,11 @@ a required gate or metric. In that case, preserve the previous profile entry,
 record the failed evidence, and use a new frozen held-out set for the next
 candidate iteration.
 
+Evidence-sufficiency v1 demonstrates the same rule at a separate runtime
+boundary. Ranking score, lexical overlap, and embedding similarity did not act
+as calibrated answerability probabilities. The failed calibration and held-out
+results remain registered, and no gate was added to the selected profile.
+
 ## Recording every result
 
 Every named run that informs a configuration or product decision must have a

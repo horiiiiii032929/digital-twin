@@ -33,13 +33,15 @@ policy.
 ## Current Phase
 
 I1 instructor onboarding is complete and approved. I2 is active under roadmap
-issue #7, with execution split into sub-issues #19-#25, #34, and #37. The
+issue #7, with execution split into sub-issues #19-#25, #34, #37, and #41. The
 repository now has modular onboarding, API, and frontend boundaries plus
-provider-neutral grounding
-contracts, approved local parsing, deterministic chunking, evaluated BM25
-retrieval, a harder BM25/dense/RRF comparison, a versioned experimental
-component profile, and durable evaluation-result governance. Retrieval v2
-resulted in `Refine` with no replacement; BM25 v1 remains provisional while an
-evidence-sufficiency gate is developed. Live generation, policy enforcement,
-citation validation, and the end-to-end demonstration remain Sprint 2 work;
-Canvas remains an optional future source adapter.
+provider-neutral grounding contracts, approved local parsing, deterministic
+chunking, evaluated BM25 retrieval, a harder BM25/dense/RRF comparison, a
+versioned experimental component profile, and durable evaluation-result
+governance. Retrieval v2
+and evidence-sufficiency v1 both resulted in `Refine` with no replacement or
+gate selected. BM25 v1 remains a provisional rollback baseline, and a successor
+open-set answerability verifier is required before the smoke demo can claim
+end-to-end grounding. Live generation, policy enforcement, citation validation,
+and the demonstration remain Sprint 2 work. Canvas remains an optional future
+source adapter.

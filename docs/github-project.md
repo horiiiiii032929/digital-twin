@@ -51,6 +51,10 @@ target project for automatic project assignment from issue forms.
   addressed.
 - Draft PR #36 passes a deterministic 25-case generation/policy preflight with
   no provider calls; live provider, model, and prompt selection remain pending.
+- #41 evaluated any-hit, BM25-score, lexical-coverage, and semantic-agreement
+  evidence gates on 30 calibration and 50 held-out cases. The decision is
+  `Refine` with no selection, so the smoke demo remains blocked from claiming
+  end-to-end grounding.
 - Sprint 2 is active and targets the smallest grounded tutoring path using
   approved local or synthetic documents, retrieval, tutor-policy enforcement,
   live LLM generation, visible source evidence, and an explicit
@@ -73,6 +77,7 @@ Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
 | 2026-07-15 | #34 Define evaluation architecture and component profiles |
 | 2026-07-16 | #23 Implement retrieval and source evidence |
 | 2026-07-17 | #37 Benchmark RAG retrieval candidates |
+| 2026-07-18 | #41 Evaluate retrieval evidence sufficiency |
 | 2026-07-18 | #24 Integrate live generation and tutor-policy enforcement |
 | 2026-07-19 | #25 Produce the grounded tutoring smoke demo |
 

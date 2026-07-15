@@ -4,15 +4,22 @@ import pytest
 
 from scripts.synthetic_course_corpus import build_retrieval_evaluation_chunks
 from src.digital_twin.grounding import (
+    AnyHitEvidenceGate,
     BM25Retriever,
     DenseRetriever,
     DocumentChunk,
     EmptyQueryError,
+    EvidenceGatedRetriever,
     InvalidRetrievalLimitError,
+    LexicalCoverageEvidenceGate,
+    MinimumRawScoreEvidenceGate,
     RelevantChunkReference,
+    RetrievalHit,
     RetrievalFailureCause,
+    SecondaryRetrieverAgreementGate,
     ReciprocalRankFusionRetriever,
     TermOverlapRetriever,
+    evaluate_evidence_sufficiency,
     evaluate_retriever,
     load_retrieval_benchmark_corpus,
     load_retrieval_evaluation_set,
@@ -115,6 +122,128 @@ def test_bm25_can_suppress_weak_raw_scores_after_calibration():
 
     assert BM25Retriever(chunks).retrieve("monetary policy")
     assert BM25Retriever(chunks, minimum_score=2).retrieve("monetary policy") == []
+
+
+def test_bm25_exposes_absolute_score_without_changing_normalized_ranking():
+    chunks = [
+        chunk("policy", "course policy applies"),
+        chunk("other", "course schedule applies"),
+    ]
+
+    hits = BM25Retriever(chunks).retrieve("monetary policy")
+
+    assert hits[0].relevance_score == 1
+    assert hits[0].raw_score is not None
+    assert hits[0].raw_score > 0
+
+
+def test_evidence_gates_are_swappable_and_keep_the_control_explicit():
+    chunks = [chunk("policy", "course policy applies to graded work")]
+    retriever = BM25Retriever(chunks)
+
+    assert EvidenceGatedRetriever(
+        retriever,
+        AnyHitEvidenceGate(),
+    ).retrieve("monetary policy")
+    assert EvidenceGatedRetriever(
+        retriever,
+        MinimumRawScoreEvidenceGate(minimum_raw_score=10),
+    ).retrieve("monetary policy") == []
+
+    lexical_gate = LexicalCoverageEvidenceGate(
+        minimum_query_coverage=0.5,
+        minimum_matching_terms=2,
+    )
+    gated = EvidenceGatedRetriever(retriever, lexical_gate)
+    assert gated.retrieve("monetary policy") == []
+    assert gated.retrieve("course policy for graded work")
+
+
+def test_evidence_gate_configuration_rejects_invalid_thresholds():
+    with pytest.raises(ValueError, match="between 0 and 1"):
+        LexicalCoverageEvidenceGate(
+            minimum_query_coverage=1.1,
+            minimum_matching_terms=1,
+        )
+    with pytest.raises(ValueError, match="at least 1"):
+        LexicalCoverageEvidenceGate(
+            minimum_query_coverage=0.5,
+            minimum_matching_terms=0,
+        )
+    with pytest.raises(ValueError, match="negative"):
+        MinimumRawScoreEvidenceGate(-0.1)
+    with pytest.raises(ValueError, match="between 0 and 1"):
+        SecondaryRetrieverAgreementGate(
+            BM25Retriever([]),
+            minimum_relevance_score=1.1,
+        )
+
+
+def test_secondary_retriever_gate_can_require_source_level_agreement():
+    chunks = [
+        chunk("session", "browser session cookie", source="sessions"),
+        chunk("policy", "course policy graded work", source="policy"),
+    ]
+    primary = BM25Retriever(chunks)
+    secondary = DenseRetriever(chunks, KeywordEmbedder(), minimum_similarity=0.5)
+    gate = SecondaryRetrieverAgreementGate(
+        secondary,
+        minimum_relevance_score=0.75,
+        require_source_overlap=True,
+    )
+
+    assert EvidenceGatedRetriever(primary, gate).retrieve("logged-in browser")
+    assert EvidenceGatedRetriever(primary, gate).retrieve("monetary policy") == []
+
+    class DifferentSourceRetriever:
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [
+                RetrievalHit(
+                    chunk=chunks[1],
+                    relevance_score=1,
+                    raw_score=1,
+                )
+            ]
+
+    mismatch = SecondaryRetrieverAgreementGate(
+        DifferentSourceRetriever(),
+        minimum_relevance_score=0.75,
+        require_source_overlap=True,
+    ).assess(
+        "browser session",
+        [RetrievalHit(chunk=chunks[0], relevance_score=1, raw_score=1)],
+    )
+    assert mismatch.sufficient is False
+
+
+def test_evidence_sufficiency_evaluator_keeps_abstention_and_ranking_visible(
+    tmp_path: Path,
+):
+    evaluation_path = (
+        Path(__file__).resolve().parents[2]
+        / "research"
+        / "05_evaluation"
+        / "retrieval_v1.json"
+    )
+    evaluation_set = load_retrieval_evaluation_set(evaluation_path)
+    chunks = build_retrieval_evaluation_chunks(tmp_path)
+
+    summary = evaluate_evidence_sufficiency(
+        "any-hit-control",
+        BM25Retriever(chunks),
+        AnyHitEvidenceGate(),
+        chunks,
+        evaluation_set,
+    )
+
+    assert summary.answerable_recall == 1
+    assert summary.no_evidence_accuracy == 1
+    assert summary.balanced_accuracy == 1
+    assert summary.false_answer_count == 0
+    assert summary.false_abstention_count == 0
+    assert summary.conditional_recall_at_3 == summary.unconditional_recall_at_3
+    assert summary.answerability_by_category["no-evidence"]["accuracy"] == 1
 
 
 def test_bm25_ranking_is_deterministic_and_exposes_source_evidence():
