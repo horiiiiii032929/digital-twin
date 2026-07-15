@@ -103,6 +103,49 @@ required metric. The retrieval comparison at
 [`retrieval-v1.json`](../research/05_evaluation/records/retrieval-v1.json) is the
 first standard record.
 
+## Result documentation lifecycle
+
+Every named evaluation run produces a durable result even when it does not
+produce a new selection. Use
+[`evaluation-result.md`](../research/05_evaluation/templates/evaluation-result.md)
+for the readable account and register it in
+[`result-registry.md`](../research/05_evaluation/result-registry.md).
+
+A result moves through these states:
+
+1. `planned`: the decision, data split, size rationale, metrics, and gates are
+   frozen before candidate results are inspected;
+2. `completed`: the run is reproducible and its measurements are valid;
+3. `failed`: the run is valid but a candidate, gate, or operational condition
+   failed;
+4. `inconclusive`: the run is valid but does not justify a selection;
+5. `invalid`: a data leak, broken judgment, implementation defect, or changed
+   condition prevents the measurements from supporting a decision.
+
+Failed, inconclusive, and invalid results stay in the registry. An invalid run
+must state what invalidated it and link to the corrected successor rather than
+being deleted. Routine CI reruns are verification, not separate research runs,
+unless their measurements are used as decision evidence.
+
+Each result must preserve:
+
+- stable result ID, date, owner, component, and status;
+- exact code revision, dirty state, command, runtime, and dependency/model
+  versions;
+- dataset, calibration/test split, corpus, permissions, sample sizes, slice
+  distribution, and size rationale;
+- control and candidate configuration, including seeds and repeated trials;
+- aggregate, slice, confidence interval or bootstrap uncertainty where useful,
+  and raw numerator/denominator for safety proportions;
+- hard gates, operational measurements, failure cases, validity threats, and
+  limitations;
+- decision, profile effect, retained fallback, and concrete follow-up.
+
+Bulky per-case artifacts belong in ignored `reports/generated/`; private
+evaluation output remains ignored and only sanitized non-identifying evidence
+may be committed. The readable result and decision record are durable and must
+never be silently overwritten by a later run.
+
 ## System release profile
 
 The profile at
@@ -169,6 +212,7 @@ src/digital_twin/<domain>/                 component contracts and implementatio
 src/digital_twin/evaluation/               shared evidence/profile models
 research/04_experiments/                   predictions and learning logs
 research/05_evaluation/templates/          reusable plans and decision records
+research/05_evaluation/result-registry.md  index of every named evaluation run
 research/05_evaluation/records/            machine-readable evaluation records
 research/05_evaluation/profiles/           selected experimental/release profiles
 scripts/evaluate_<component>.py             reproducible evaluation commands

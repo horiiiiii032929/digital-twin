@@ -24,3 +24,7 @@ Current utilities:
 - `validate_component_profile.py`: validates the complete component inventory,
   selection status, evidence paths, and linked evaluation decisions; run it
   with `npm run verify:profile`.
+- `validate_evaluation_results.py`: requires every durable `*-results.md`
+  summary and machine-readable component record to appear in the result
+  registry, validates record schemas and unique run IDs, and runs as part of
+  `npm run check`; run it directly with `npm run verify:evaluation-results`.
