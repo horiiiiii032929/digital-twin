@@ -92,6 +92,9 @@ chunking, query, or ranking problems. Aggregate metrics are:
 - No-evidence accuracy: the fraction of no-evidence questions returning no hit.
 - Mean retrieval latency and per-ranker peak index/evaluation memory.
 
+The clean-revision measurements, interpretation, and decision are recorded in
+[`retrieval-v1-results.md`](../research/05_evaluation/retrieval-v1-results.md).
+
 Run the reproducible comparison with:
 
 ```bash
