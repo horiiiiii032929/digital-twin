@@ -209,10 +209,31 @@ class SourceCitation(BaseModel):
     locator: str = Field(min_length=1)
 
 
+class GenerationUsage(BaseModel):
+    input_tokens: int = Field(default=0, ge=0)
+    output_tokens: int = Field(default=0, ge=0)
+    total_tokens: int = Field(default=0, ge=0)
+    approximate_cost_usd: float | None = Field(
+        default=None,
+        ge=0,
+        allow_inf_nan=False,
+    )
+
+
+class GenerationTrace(BaseModel):
+    generator_id: str = Field(min_length=1)
+    provider_model: str = Field(min_length=1)
+    prompt_version: str = Field(min_length=1)
+    policy_action: str = Field(min_length=1)
+    latency_ms: float = Field(ge=0, allow_inf_nan=False)
+    usage: GenerationUsage = Field(default_factory=GenerationUsage)
+
+
 class TutorAnswer(BaseModel):
     content: str = Field(min_length=1)
     citations: list[SourceCitation] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
+    trace: GenerationTrace | None = None
 
     @field_validator("citations")
     @classmethod

@@ -14,6 +14,9 @@ Current utilities:
   over the versioned synthetic retrieval set, emits per-question evidence plus
   aggregate Recall@1, Recall@5, MRR, no-evidence accuracy, latency, and memory,
   and enforces regression thresholds; run it with `npm run verify:retrieval`.
+- `evaluate_generation.py`: runs the deterministic generator, policy, citation,
+  and no-evidence preflight over 25 synthetic cases without a provider, tokens,
+  or cost; run it with `npm run verify:generation`.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

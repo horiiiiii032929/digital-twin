@@ -10,13 +10,14 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:profile && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
     "test": "uv run pytest tests",
     "test:api": "uv run pytest tests",
     "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
+    "verify:generation": "uv run python -m scripts.evaluate_generation",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",
     "test:web": "npm --workspace apps/web run test -- --run",

@@ -69,7 +69,8 @@ CourseDocument → DocumentChunker → DocumentChunk → Retriever → Retrieval
                                                                ↓
 TutorPolicy ───────────────────────────────→ TutorGenerator → TutorAnswer
                                                              ├─ citations
-                                                             └─ warnings
+                                                             ├─ warnings
+                                                             └─ usage trace
 ```
 
 `SourceArtifact` and `ApprovalRecord` now gate local parsing. `CourseDocument`
@@ -77,10 +78,14 @@ carries the approved source version, permission snapshot, content hash, ordered
 segments, and an opaque source locator. Chunks preserve this lineage in explicit
 fields and metadata. Deterministic term-overlap and BM25 retrieval filter
 non-tutoring and superseded chunks before returning scored source evidence. The
-asynchronous generator returns answer content, explicit citations, and warnings. See
-[local-ingestion.md](local-ingestion.md) for the parser, figure, and deterministic
-chunking design and [local-retrieval.md](local-retrieval.md) for ranking and
-evaluation.
+The generation path filters evidence permissions again, applies deterministic
+policy rules before any provider call, builds a versioned prompt, parses a
+structured answer, validates citations against retrieved hits, and records
+latency, tokens, and approximate cost. See
+[local-ingestion.md](local-ingestion.md) for parsing and chunking,
+[local-retrieval.md](local-retrieval.md) for ranking, and
+[live-generation.md](live-generation.md) for the generation control and live
+adapter boundary.
 
 Cross-cutting implementation selection is separate from these runtime
 contracts. The [evaluation architecture](evaluation-architecture.md) defines
@@ -95,20 +100,22 @@ Synthetic chunker, retriever, and generator implementations live under
 ### Sprint 2 implementation boundary
 
 The provider-neutral contracts, local ingestion baseline, evaluated BM25
-retrieval baseline, and system-wide component profile are implemented.
+retrieval baseline, deterministic generation preflight, and system-wide
+component profile are implemented. A LiteLLM adapter exists but is not wired to
+an API route, provider model, credential, or paid evaluation.
 The following remain separate execution sub-issues under roadmap issue #7:
 
-- Live generation and tutor-policy enforcement (#24)
+- Live provider and prompt comparison completing #24
 - Grounded tutoring smoke demonstration (#25)
 
-Provider selection, embeddings, Canvas, persistence, and live generation are not
-implemented. Canvas can be added later as an optional source adapter if a safe
-guest course contains useful material.
+Provider/model selection, embeddings, Canvas, persistence, and live evaluation
+remain pending. Canvas can be added later as an optional source adapter if a
+safe guest course contains useful material.
 
 ## Open Design Decisions
 
 - Production citation rendering and locator navigation
-- Prompt and policy configuration schema
+- Live prompt variant selection
 - Agent prompt boundaries and model/provider selection
 - Student privacy and consent model
 - Evaluation baseline and scoring rubric

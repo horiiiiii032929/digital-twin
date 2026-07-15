@@ -158,10 +158,10 @@
         "explicit-provider-failure"
       ],
       "candidate_ids": [
-        "deterministic-generator-control",
+        "deterministic-grounded-generator",
         "live-provider-generator"
       ],
-      "notes": "Issue #24 must compare a deterministic control with at least one live provider candidate."
+      "notes": "The deterministic control passes synthetic preflight, but selection waits for one paid live provider comparison and a standard record."
     },
     {
       "component": "prompt",
@@ -175,7 +175,7 @@
         "direct-grounded-prompt",
         "guided-grounded-prompt"
       ],
-      "notes": "Prompt variants must use the same questions, evidence, policy, and generator conditions."
+      "notes": "Direct grounded prompt v1 is implemented but unselected; variants must use the same questions, evidence, policy, and generator conditions."
     },
     {
       "component": "tutor-policy",
@@ -214,7 +214,7 @@
         "deterministic-policy-rules",
         "model-assisted-policy-check"
       ],
-      "notes": "Issue #24 must measure refusal precision, safe redirection, and policy compliance."
+      "notes": "Deterministic rules pass the synthetic preflight but remain unselected until adversarial and live-path evidence is recorded."
     },
     {
       "component": "citation-validation",
@@ -227,7 +227,7 @@
       "candidate_ids": [
         "deterministic-citation-validator"
       ],
-      "notes": "Citation validation is a hard gate and must remain deterministic even if generation is model-based."
+      "notes": "The deterministic validator is implemented; live malformed-output evidence is still required before selection."
     },
     {
       "component": "conversation-orchestration",
