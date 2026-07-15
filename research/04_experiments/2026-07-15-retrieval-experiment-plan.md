@@ -34,7 +34,8 @@ changes.
 - Operational metrics selected before the run: mean per-query latency and peak
   per-ranker index/evaluation memory.
 - Regression thresholds: Recall@5 at least 0.80, MRR at least 0.60,
-  no-evidence accuracy 1.00, and no unresolved source or chunk judgments.
+  no-evidence accuracy 1.00, mean latency below 5 ms, peak memory below 5 MB,
+  and no unresolved source or chunk judgments.
 - Failure taxonomy: source, chunking, query, or ranking.
 - Reproduction: `npm run verify:retrieval`.
 

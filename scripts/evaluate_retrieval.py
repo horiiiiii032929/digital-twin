@@ -95,6 +95,10 @@ def _check_regressions(summaries: list[RetrievalEvaluationSummary]) -> None:
             failures.append(f"{summary.retriever} MRR below 0.6")
         if summary.no_evidence_accuracy < 1.0:
             failures.append(f"{summary.retriever} no-evidence accuracy below 1.0")
+        if summary.mean_latency_ms >= 5.0:
+            failures.append(f"{summary.retriever} mean latency reached 5 ms")
+        if summary.peak_memory_bytes is None or summary.peak_memory_bytes >= 5_000_000:
+            failures.append(f"{summary.retriever} peak memory reached 5 MB")
         if summary.failures_by_cause.get("source", 0):
             failures.append(f"{summary.retriever} has unresolved sources")
         if summary.failures_by_cause.get("chunking", 0):
