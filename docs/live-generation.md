@@ -114,6 +114,8 @@ The versioned `generation-v1` set contains 25 cases: direct grounding,
 misconceptions, integrity boundaries, ambiguous questions, and no-evidence
 questions. `npm run verify:generation` rebuilds the approved synthetic corpus,
 retrieves with selected BM25, and evaluates the deterministic control.
+The clean-revision measurements are recorded in
+[`generation-v1-preflight-results.md`](../research/05_evaluation/generation-v1-preflight-results.md).
 
 The regression gate requires 1.00 for policy-action accuracy, citation validity,
 graded-work redirection, no-evidence behavior, and required provider

@@ -18,4 +18,5 @@ experimental profile with `npm run verify:profile`.
 
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer
-quality and cannot select a model or prompt by itself.
+quality and cannot select a model or prompt by itself. Its clean deterministic
+control run is summarized in `generation-v1-preflight-results.md`.
