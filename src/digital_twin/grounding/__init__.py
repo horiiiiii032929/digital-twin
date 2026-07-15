@@ -31,15 +31,36 @@ from src.digital_twin.grounding.protocols import (
     Retriever,
     TutorGenerator,
 )
+from src.digital_twin.grounding.retrieval import (
+    BM25Retriever,
+    EmptyQueryError,
+    InvalidRetrievalLimitError,
+    RetrievalError,
+    TermOverlapRetriever,
+    lexical_tokens,
+)
+from src.digital_twin.grounding.retrieval_evaluation import (
+    RelevantChunkReference,
+    RetrievalCaseCategory,
+    RetrievalCaseResult,
+    RetrievalEvaluationCase,
+    RetrievalEvaluationSet,
+    RetrievalEvaluationSummary,
+    RetrievalFailureCause,
+    evaluate_retriever,
+    load_retrieval_evaluation_set,
+)
 
 
 __all__ = [
     "ApprovalDecision",
     "ApprovalRecord",
+    "BM25Retriever",
     "CourseDocument",
     "DocumentChunk",
     "DocumentChunker",
     "DocumentSegment",
+    "EmptyQueryError",
     "FigureAsset",
     "FigureDescription",
     "FigureStore",
@@ -49,6 +70,15 @@ __all__ = [
     "LocalDocumentParser",
     "LocalFigureStore",
     "ParsedDocumentBundle",
+    "InvalidRetrievalLimitError",
+    "RelevantChunkReference",
+    "RetrievalCaseCategory",
+    "RetrievalCaseResult",
+    "RetrievalError",
+    "RetrievalEvaluationCase",
+    "RetrievalEvaluationSet",
+    "RetrievalEvaluationSummary",
+    "RetrievalFailureCause",
     "RetrievalHit",
     "Retriever",
     "SourceArtifact",
@@ -59,6 +89,10 @@ __all__ = [
     "SourceSensitivity",
     "TutorAnswer",
     "TutorGenerator",
+    "TermOverlapRetriever",
     "UnsupportedSourceError",
+    "evaluate_retriever",
+    "lexical_tokens",
+    "load_retrieval_evaluation_set",
     "source_artifact_from_path",
 ]

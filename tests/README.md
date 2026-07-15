@@ -17,3 +17,8 @@ Manual verification notes:
 Local ingestion verification uses the committed synthetic corpus under
 `fixtures/course_corpus/` plus a generated synthetic PDF. Run
 `npm run verify:ingestion`; no real course material is required or committed.
+
+Retrieval regression coverage loads the 25-case versioned set at
+`../research/05_evaluation/retrieval_v1.json` and compares term overlap with
+BM25 over the same approved chunks. Run `npm run verify:retrieval` for the full
+per-case result artifact.

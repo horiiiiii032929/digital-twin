@@ -10,3 +10,9 @@ Current utilities:
 - `verify_local_ingestion.py`: parses and chunks five approved synthetic TXT,
   Markdown, and PDF sources twice, then reports stable identifiers, provenance,
   and figure counts; run it with `npm run verify:ingestion`.
+- `evaluate_retrieval.py`: compares deterministic term-overlap and BM25 ranking
+  over the versioned synthetic retrieval set, emits per-question evidence plus
+  aggregate Recall@1, Recall@5, MRR, no-evidence accuracy, latency, and memory,
+  and enforces regression thresholds; run it with `npm run verify:retrieval`.
+- `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
+  chunk builders used by ingestion and retrieval verification.

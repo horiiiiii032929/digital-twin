@@ -14,6 +14,7 @@ src/digital_twin/
 ```
 
 Production grounding code contains provider-neutral contracts plus the approved
-local TXT, Markdown, and PDF parser and deterministic chunker. Synthetic corpus
-material belongs in `tests/fixtures/`; provider selection, retrieval, embeddings,
-Canvas, persistence, and live generation remain separate delivery tasks.
+local TXT, Markdown, and PDF parser, deterministic chunker, term-overlap control,
+BM25 retriever, and retrieval evaluator. Synthetic corpus material belongs in
+`tests/fixtures/`; provider selection, embeddings, Canvas, persistence, and live
+generation remain separate delivery tasks.

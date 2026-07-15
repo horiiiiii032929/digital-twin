@@ -17,6 +17,7 @@
     "test": "uv run pytest tests",
     "test:api": "uv run pytest tests",
     "verify:ingestion": "uv run python -m scripts.verify_local_ingestion",
+    "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",
     "test:web": "npm --workspace apps/web run test -- --run",
     "build:web": "npm --workspace apps/web run build",
     "lint:web": "npm --workspace apps/web run lint"
