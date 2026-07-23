@@ -3,6 +3,56 @@
   "freeze_id": "it5002-retrieval-v3-candidate-freeze-2026-07-23",
   "status": "candidate_set_frozen",
   "heldout_access_allowed": false,
+  "rapid_checkpoint": {
+    "checkpoint_id": "it5002-retrieval-rapid-v1",
+    "status": "prospectively_frozen",
+    "deadline": "2026-07-24",
+    "purpose": "Screen whether R5 merits immediate confirmatory study and provisional end-to-end integration; it cannot make the final retriever selection.",
+    "conditions": [
+      "R1",
+      "R5"
+    ],
+    "development": {
+      "answerable_cases": 13,
+      "no_evidence_cases": 13,
+      "total_cases": 26
+    },
+    "heldout": {
+      "access_allowed": false,
+      "answerable_cases": 39,
+      "no_evidence_cases": 20,
+      "total_cases": 59,
+      "answerable_cases_per_lecture": 3,
+      "scenario_counts": {
+        "exact_or_terminology": 13,
+        "paraphrase_or_misconception": 13,
+        "reasoning_or_multi_evidence": 13
+      },
+      "minimum_open_set_cases_per_category": 3,
+      "case_manifest_hash_required": true,
+      "disjoint_from_full_v3": true
+    },
+    "primary_metrics": [
+      "complete_evidence_success_at_3",
+      "gold_claim_context_coverage_at_3",
+      "no_evidence_accuracy"
+    ],
+    "decision": {
+      "keep_available": false,
+      "allowed_outcomes": [
+        "go_deeper",
+        "refine",
+        "drop",
+        "invalid"
+      ],
+      "no_evidence_minimum_passes": 19,
+      "no_evidence_denominator": 20,
+      "maximum_answerable_regressions": 2,
+      "minimum_net_complete_evidence_wins_for_go_deeper": 4,
+      "claim_coverage_regression_allowed": false,
+      "rollback_condition": "R1"
+    }
+  },
   "research_question": "Does deterministic contextual hybrid retrieval with a learned reranker retrieve all essential IT5002 evidence more reliably than heading-aware BM25 while preserving no-evidence behavior and a practical local resource budget?",
   "corpus": {
     "corpus_id": "it5002-lectures-v1",
@@ -377,6 +427,7 @@
   "artifact_paths": {
     "literature": "research/01_literature/2026-07-23-modern-course-rag-retrieval.md",
     "experiment_plan": "research/04_experiments/2026-07-23-it5002-retrieval-v3-plan.md",
+    "rapid_checkpoint_plan": "research/04_experiments/2026-07-23-it5002-retrieval-rapid-checkpoint.md",
     "course_case_schema": "research/05_evaluation/course_tutor_v1.schema.json",
     "open_set_schema": "research/05_evaluation/it5002_retrieval_open_set_v1.schema.json",
     "open_set_example": "research/05_evaluation/it5002_retrieval_open_set_v1_synthetic_example.json",

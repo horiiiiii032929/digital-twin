@@ -6,6 +6,18 @@ Status: candidate set and analysis contract frozen; implementation, private
 dataset completion, feasibility preflight, calibration, and held-out run are
 pending
 
+## Twenty-four-hour checkpoint amendment
+
+Before the full confirmatory study, run the prospectively frozen
+[`IT5002 retrieval rapid checkpoint`](2026-07-23-it5002-retrieval-rapid-checkpoint.md).
+It compares only R1 and R5 on a separate 59-case sealed set and produces the
+first professor-facing result by 2026-07-24. Those cases remain disjoint from
+the full retrieval-v3 splits.
+
+The rapid result can decide `Go Deeper`, `Refine`, `Drop`, or `Invalid`. It
+cannot select `Keep` or support a final SOTA claim. The larger experiment below
+remains the component-selection study.
+
 ## Decision question
 
 On the complete approved IT5002 lecture corpus, does deterministic contextual
@@ -288,7 +300,8 @@ The professor receives a result, not a planning update:
 7. Keep / Refine / Go Deeper / Drop plus the retained rollback.
 
 Do not contact the professor merely to announce this plan. The first checkpoint
-follows a valid decision-bearing course-specific result.
+is the valid rapid screening result due 2026-07-24; the expanded confirmatory
+result follows as an addendum when complete.
 
 ## Stop rules
 

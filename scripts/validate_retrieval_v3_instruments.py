@@ -101,6 +101,58 @@ def validate_freeze(freeze: dict[str, Any]) -> dict[str, int]:
         freeze["heldout_access_allowed"] is False,
         "held-out access must remain disabled before runtime freeze",
     )
+    rapid = freeze["rapid_checkpoint"]
+    require(
+        rapid["checkpoint_id"] == "it5002-retrieval-rapid-v1"
+        and rapid["status"] == "prospectively_frozen",
+        "unexpected retrieval rapid checkpoint",
+    )
+    require(
+        rapid["deadline"] == "2026-07-24",
+        "retrieval rapid checkpoint deadline must remain 2026-07-24",
+    )
+    require(
+        rapid["conditions"] == ["R1", "R5"],
+        "retrieval rapid checkpoint must compare only R1 and R5",
+    )
+    require(
+        rapid["development"]
+        == {
+            "answerable_cases": 13,
+            "no_evidence_cases": 13,
+            "total_cases": 26,
+        },
+        "retrieval rapid development counts differ from the freeze",
+    )
+    require(
+        rapid["heldout"]["access_allowed"] is False,
+        "rapid held-out access must remain disabled",
+    )
+    require(
+        rapid["heldout"]["answerable_cases"] == 39
+        and rapid["heldout"]["no_evidence_cases"] == 20
+        and rapid["heldout"]["total_cases"] == 59,
+        "retrieval rapid held-out counts differ from the freeze",
+    )
+    require(
+        rapid["heldout"]["answerable_cases_per_lecture"] == 3
+        and sum(rapid["heldout"]["scenario_counts"].values()) == 39,
+        "retrieval rapid answerable coverage differs from the freeze",
+    )
+    require(
+        rapid["heldout"]["disjoint_from_full_v3"] is True,
+        "rapid cases must remain disjoint from full retrieval-v3",
+    )
+    require(
+        rapid["decision"]["keep_available"] is False
+        and rapid["decision"]["rollback_condition"] == "R1",
+        "rapid checkpoint cannot make a final selection",
+    )
+    require(
+        rapid["decision"]["no_evidence_minimum_passes"] == 19
+        and rapid["decision"]["no_evidence_denominator"] == 20,
+        "rapid no-evidence decision gate differs from the freeze",
+    )
     require(
         freeze["corpus"]["document_count"] == 13,
         "retrieval-v3 corpus must contain 13 documents",
@@ -252,6 +304,7 @@ def validate_freeze(freeze: dict[str, Any]) -> dict[str, int]:
         "datasets": len(datasets),
         "primary_metrics": len(primary_metrics),
         "hard_gates": len(hard_gates),
+        "rapid_heldout_cases": rapid["heldout"]["total_cases"],
     }
 
 
@@ -276,6 +329,7 @@ def main() -> int:
         f"{result['conditions']} conditions, {result['datasets']} datasets, "
         f"{result['primary_metrics']} primary metrics, "
         f"{result['hard_gates']} hard gates, "
+        f"{result['rapid_heldout_cases']} rapid held-out cases, "
         f"{result['example_cases']} public example case"
     )
     return 0

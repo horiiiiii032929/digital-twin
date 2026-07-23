@@ -37,14 +37,12 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-22 to 2026-07-26 | Evaluation and retrieval-v3 freeze | Researcher-selected question, modern retrieval literature, course/open-set data contracts, candidates, metrics, gates, held-out lock, and professor result-reporting rule |
-| 2026-07-27 to 2026-07-30 | Course retrieval benchmark construction | Private development and held-out cases, claim/evidence judgments, split checks, exact runtime bindings, and synthetic resource preflight |
-| 2026-07-31 to 2026-08-05 | Course retrieval-v3 comparison | BM25, Qwen3 dense, hybrid, deterministic contextual, reranked, and bounded-decomposition ablations plus one held-out decision and professor result package |
-| 2026-08-06 to 2026-08-11 | Returned-context sufficiency | Complete/partial/none classification, threshold calibration, false-answer/false-abstention analysis, and safe-abstention decision |
-| 2026-08-12 to 2026-08-15 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
-| 2026-08-16 to 2026-08-21 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
-| 2026-08-22 to 2026-08-26 | Hardening, simulated evaluation, and evidence freeze | Privacy, reliability, recovery, calibrated judging, synthetic-account acceptance, blinded comparison, failure analysis, uncertainty, and frozen evidence |
-| 2026-08-27 to 2026-09-03 | Full report draft and figures | Complete argument, claim-to-evidence matrix, main plots, limitations, and professor review |
+| 2026-07-23 to 2026-07-24 | Rapid retrieval result | Prospectively frozen 59-case R1-versus-R5 screen, exact runtime binding, one sealed run, data QA, decision, figures, and professor result package |
+| 2026-07-25 to 2026-07-28 | Confirmatory retrieval and returned-context sufficiency | Expanded private course/open-set benchmark, full retrieval-v3 ablations, complete/partial/none classification, and safe-abstention decision |
+| 2026-07-29 to 2026-07-31 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
+| 2026-08-01 to 2026-08-04 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
+| 2026-08-05 to 2026-08-08 | Hardening, simulated evaluation, and evidence freeze | Privacy, reliability, recovery, calibrated judging, synthetic-account acceptance, blinded comparison, failure analysis, uncertainty, and frozen evidence |
+| 2026-08-09 to 2026-09-03 | Full report, figures, and bounded product continuation | Complete argument, claim-to-evidence matrix, main plots, limitations, professor review, demo stabilization, and only evidence-backed improvements |
 | 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
 | 2026-09-10 to 2026-09-12 | Contingency buffer | Correct blocking defects, package the submission, and protect frozen claims from late scope growth |
 | 2026-09-13 | Final presentation and submission | Deliver the report, deployed demonstration, presentation, and reproducibility package |

@@ -22,6 +22,7 @@ def test_retrieval_v3_instruments_validate() -> None:
         "datasets": 2,
         "primary_metrics": 3,
         "hard_gates": 6,
+        "rapid_heldout_cases": 59,
     }
 
 
@@ -49,4 +50,13 @@ def test_retrieval_v3_rejects_duplicate_conditions() -> None:
     changed["conditions"].append(copy.deepcopy(changed["conditions"][0]))
 
     with pytest.raises(ValueError, match="duplicate condition ID"):
+        validate_freeze(changed)
+
+
+def test_rapid_checkpoint_cannot_select_keep() -> None:
+    freeze = load_json(FREEZE_PATH)
+    changed = copy.deepcopy(freeze)
+    changed["rapid_checkpoint"]["decision"]["keep_available"] = True
+
+    with pytest.raises(ValueError, match="cannot make a final selection"):
         validate_freeze(changed)

@@ -46,9 +46,14 @@ this final tutor evaluation; they do not replace it.
    hard-negative no-evidence cases. It supplements `course-tutor-v1` for
    retrieval threshold and abstention evaluation; it is excluded from
    Recall@K, nDCG, and MRR denominators.
-6. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-
+6. `it5002-retrieval-rapid-v1` is a separate screening dataset due
+   2026-07-24: 26 development cases plus 39 answerable and 20 no-evidence
+   sealed cases. It can decide Go Deeper / Refine / Drop / Invalid but cannot
+   select the final retriever. Its case families are excluded from the larger
+   retrieval-v3 splits.
+7. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-
    student trajectories for multi-turn stress testing.
-7. Scripted synthetic-account records provide deployment and operational
+8. Scripted synthetic-account records provide deployment and operational
    acceptance evidence only; they do not establish human usability or learning.
 
 Component held-out records are not reused for tuning or for the final system
@@ -72,6 +77,8 @@ The exact retrieval-v3 ablation, model candidates, deterministic contextual
 representation, metrics, gates, NotebookLM boundary, analysis, and professor
 result package are frozen in the
 [`IT5002 retrieval-v3 plan`](../04_experiments/2026-07-23-it5002-retrieval-v3-plan.md).
+The disjoint 24-hour screening study is frozen in the
+[`IT5002 retrieval rapid checkpoint`](../04_experiments/2026-07-23-it5002-retrieval-rapid-checkpoint.md).
 NotebookLM is an exploratory black-box product reference and cannot select the
 internal retriever or contribute hidden Recall@K or nDCG values.
 

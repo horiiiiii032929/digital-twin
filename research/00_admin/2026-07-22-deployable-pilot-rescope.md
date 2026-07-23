@@ -171,14 +171,12 @@ unmeasured.
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-26 | #11 and #7 | Retrieval-v3 question, candidates, data contract, metrics, gates, and held-out lock frozen | Internal freeze only; no professor message |
-| 2026-07-30 | #7 | Private development and sealed IT5002 retrieval cases validated; exact model revisions bound by a synthetic feasibility preflight | No report before a result |
-| 2026-08-02 | #7 | Development/calibration ablations complete; R5 and thresholds frozen | Internal decision record |
-| 2026-08-05 | #7 | One held-out course retrieval-v3 run completed with failures, uncertainty, latency, and selection or no-selection decision | P1 retrieval experiment result |
-| 2026-08-11 | #43 | Returned-context sufficiency and safe-abstention candidate qualified or rejected using the selected retriever or BM25 rollback | Include only if it changes P1 |
-| 2026-08-15 | #24 and #25 | Exact generator/prompt and frozen end-to-end RAG profile qualified or rejected | P2 end-to-end experiment result |
-| 2026-08-21 | #8 | Authenticated, persistent professor/student application deployed to staging around the selected or rollback profile | Demonstration link |
-| 2026-08-26 | #9, #10, and #12 | Security, reliability, simulated-user, synthetic-account, final comparison, and evidence freeze completed | P3 final evidence and claim boundary |
+| 2026-07-23 | #11 and #46 | Separate 59-case rapid R1-versus-R5 screen, metrics, gates, and access lock frozen | Internal freeze only |
+| 2026-07-24 | #46 | One rapid sealed run completed with raw counts, uncertainty, failures, latency, memory, and Go Deeper / Refine / Drop decision | P1 rapid retrieval result |
+| 2026-07-28 | #7 and #43 | Expanded retrieval-v3 and returned-context sufficiency candidates qualified or rejected | Decision addendum if material |
+| 2026-07-31 | #24 and #25 | Exact generator/prompt and frozen end-to-end RAG profile qualified or rejected | P2 end-to-end experiment result |
+| 2026-08-04 | #8 | Authenticated, persistent professor/student application deployed to staging around the selected or rollback profile | Demonstration link |
+| 2026-08-08 | #9, #10, and #12 | Security, reliability, simulated-user, synthetic-account, final comparison, and evidence freeze completed | P3 final evidence and claim boundary |
 | 2026-09-03 | #13 | Full report draft, figures, and claim-to-evidence matrix | P5 report review |
 | 2026-09-09 | Professor checkpoint issue | Timed demo and failure-recovery rehearsal completed | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | #13 | Contingency only: blocking corrections, packaging, and final checks without new claims | No routine checkpoint; escalate only a blocker |
@@ -222,10 +220,12 @@ conditions are frozen in the
   can be used.
 - Human-participant recruitment, human usability, and learning-effectiveness
   claims are out of scope rather than contingency items.
-- No new architecture, model, metric, or feature begins after the 2026-08-26
-  evidence freeze.
-- Reserve 2026-08-27 through 2026-09-13 for report writing, figures,
-  presentation work, demo stabilization, rehearsal, and contingency. Do not use
-  this runway to recover deferred feature scope.
+- No new architecture, model, metric, or feature begins after the 2026-08-08
+  evidence freeze unless a frozen result explicitly justifies one bounded
+  product improvement.
+- Reserve 2026-08-09 through 2026-09-13 primarily for report writing, figures,
+  presentation work, demo stabilization, rehearsal, contingency, and
+  evidence-backed product continuation. Do not use this runway to recover
+  deferred feature scope.
 - Proactive triggers, full analytics, Canvas, multimodality, and learning-outcome
   claims are cut before any core deployability or evidence requirement.

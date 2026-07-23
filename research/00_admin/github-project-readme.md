@@ -55,37 +55,37 @@ usability and learning-effectiveness claims are excluded.
 
 1. #11 freezes the method, data-governance, rubric, threshold, and reporting
    protocol. The instrument-contract portion is complete.
-2. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
+2. #46 runs the separate 59-case R1-versus-R5 rapid checkpoint and produces
+   the first professor result within 24 hours.
+3. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
    dense, hybrid, deterministic contextual, reranked, and bounded-decomposition
    conditions.
-3. #43 qualifies or rejects the returned-context sufficiency verifier using the
+4. #43 qualifies or rejects the returned-context sufficiency verifier using the
    selected retriever or BM25 rollback.
-4. #24 qualifies the exact generator/prompt; #25 records the frozen end-to-end
+5. #24 qualifies the exact generator/prompt; #25 records the frozen end-to-end
    RAG decision and #7 closes from that evidence.
-5. #8 adds evaluated authentication, authorization, persistence, storage,
+6. #8 adds evaluated authentication, authorization, persistence, storage,
    professor/student journeys, and staging deployment.
-6. #9 hardens security/reliability and records the researcher evaluation-release
+7. #9 hardens security/reliability and records the researcher evaluation-release
    Go / Refine / No-Go; real student release authorization remains separate.
-7. #10 runs calibrated LLM-judge, simulated-student, and deployed
+8. #10 runs calibrated LLM-judge, simulated-student, and deployed
    synthetic-account evaluation.
-8. #12 runs the blinded final comparison and freezes evidence.
-9. #13 delivers the final report, deployed demo, reproducibility package, and
+9. #12 runs the blinded final comparison and freezes evidence.
+10. #13 delivers the final report, deployed demo, reproducibility package, and
    presentation.
-10. #44 records every researcher checkpoint, professor critique, and genuine
+11. #44 records every researcher checkpoint, professor critique, and genuine
    release decision separately.
 
 ## Tight roadmap
 
 | Date | Required outcome | Professor checkpoint |
 | --- | --- | --- |
-| 2026-07-26 | #11/#7 retrieval-v3 candidate, data, and analysis freeze | Internal freeze; no professor update |
-| 2026-07-30 | Private IT5002 development and held-out sets validate; runtime feasibility bound | No report before a result |
-| 2026-08-02 | Development ablations and thresholds frozen | Internal selection record |
-| 2026-08-05 | #7 held-out retrieval-v3 decision | P1 experiment result package |
-| 2026-08-11 | #43 context-sufficiency decision | Report only if decision-bearing |
-| 2026-08-15 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |
-| 2026-08-21 | #8 authenticated persistent staging deployment | Demonstration link |
-| 2026-08-26 | #9/#10/#12 final evaluation and evidence freeze | P3 final evidence package |
+| 2026-07-23 | #11/#46 freeze a separate 59-case R1-versus-R5 rapid screen | Internal freeze |
+| 2026-07-24 | #46 execute one rapid sealed run and validate the result | P1 rapid experiment result |
+| 2026-07-28 | #7/#43 complete expanded retrieval-v3 and context sufficiency | Decision addendum if material |
+| 2026-07-31 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |
+| 2026-08-04 | #8 authenticated persistent staging deployment | Demonstration link |
+| 2026-08-08 | #9/#10/#12 final evaluation and evidence freeze | P3 final evidence package |
 | 2026-09-03 | Full report draft and figures | P5 report review |
 | 2026-09-09 | Timed demo and recovery rehearsal | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | Contingency only; no new scope or claims | Escalate blockers only |
@@ -122,9 +122,11 @@ trajectory completion, and reliable turn completion.
 - Do not tune on sealed data or rerun until a favorable result appears.
 - Reserve professor contact for a decision-bearing result package or a genuine
   permission/deadline blocker, not ordinary progress reporting.
-- Stop new architecture, model, metric, and feature work after 2026-08-26.
-- Protect 2026-08-27 through 2026-09-13 for report writing, figures, slides,
-  demo stabilization, rehearsal, and contingency.
+- Stop new architecture, model, metric, and feature work after 2026-08-08
+  unless a frozen result explicitly justifies a bounded product improvement.
+- Protect 2026-08-09 through 2026-09-13 primarily for report writing, figures,
+  slides, demo stabilization, rehearsal, contingency, and evidence-backed
+  product continuation.
 - A working demo without security, operations, simulated interaction evidence,
   evaluator calibration, and aggregate evidence is not a deployable-system
   result.

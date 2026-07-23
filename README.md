@@ -127,21 +127,23 @@ Still planned:
   private storage, and student tutoring.
 - Staging deployment with secret isolation, redacted logs, health checks,
   rate limits, backup/restore, rollback, and visible provider failures.
-- Professor UAT and a supervised invited-student pilot or explicit
-  synthetic-user fallback.
+- Scripted professor/student synthetic-account acceptance and optional
+  professor review; no invited-student pilot or human usability claim.
 - Blinded final comparison, evidence freeze, report, deployed demonstration,
   and reproducibility package.
 
-Active Sprint 2 work is tracked by roadmap issue #7. Completed sub-issues cover
+Active Sprint 2 work is tracked by execution issue #46 under roadmap issue #7.
+Completed sub-issues cover
 the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
 evaluation architecture, result governance, and the first failed
 evidence-sufficiency comparison. The retrieval-v3 candidate contract is now
-the active research gate: complete development data and feasibility by
-2026-07-30, run the frozen course comparison by 2026-08-05, and report the
-result rather than the plan. Generator and end-to-end qualification follows,
-with the hosted vertical slice targeted by 2026-08-21 and final evidence frozen
-by 2026-08-26. The remaining 18 days are reserved for
-report writing, figures, presentation preparation, rehearsal, and contingency.
+the active research gate: run a separate 59-case R1-versus-R5 rapid screen and
+send its result by 2026-07-24, then complete the expanded confirmatory
+retrieval and context-sufficiency work by 2026-07-28. Generator and end-to-end
+qualification follows by 2026-07-31, with the hosted vertical slice targeted
+by 2026-08-04 and final evidence frozen by 2026-08-08. The remaining five
+weeks are reserved for the report, figures, presentation, demo stabilization,
+rehearsal, and bounded product continuation.
 DeepSeek is a research constraint, not a
 best-model claim, and real-user provider processing requires separate approval.
 Proactive triggers, full learning-gap analytics, Canvas, multimodality, and
