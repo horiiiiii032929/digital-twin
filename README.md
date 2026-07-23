@@ -113,21 +113,32 @@ Implemented as Sprint 2 foundations:
 
 Still planned:
 
-- Persistent storage, authentication, and multi-user sessions.
-- The #24 prospective 100-case generator/prompt comparison and selection
-  decision.
-- The #43 open-set evidence-verifier comparison using new calibration and
-  150-case held-out data.
-- The #25 untouched 100-case end-to-end integration evaluation.
-- Student-facing tutoring and learning-gap analytics.
+- #11 pilot evaluation, privacy, data-governance, rubric, and reporting freeze.
+- #24, #43, and #25 generator/prompt, actual returned-context sufficiency, and
+  end-to-end RAG qualification.
+- Authenticated professor/student roles, course membership, durable persistence,
+  private storage, and student tutoring.
+- Staging deployment with secret isolation, redacted logs, health checks,
+  rate limits, backup/restore, rollback, and visible provider failures.
+- Professor UAT and a supervised invited-student pilot or explicit
+  synthetic-user fallback.
+- Blinded final comparison, evidence freeze, report, deployed demonstration,
+  and reproducibility package.
 
 Active Sprint 2 work is tracked by roadmap issue #7. Completed sub-issues cover
 the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
 evaluation architecture, result governance, and the first failed
 evidence-sufficiency comparison. Draft PR #36 contains the generation controls,
-local benchmark path, and registered exploratory result. Current execution is
-#24 by 2026-07-20, #43 by 2026-07-23, then the blocked #25 integration evaluation
-by 2026-07-25. Canvas remains an optional future connector.
+local benchmark path, and registered exploratory result. The rescope makes #11
+the immediate gate before implementation continues: freeze the method and data
+protocol by 2026-07-25, qualify RAG by 2026-07-31, deploy staging by 2026-08-10,
+complete professor UAT by 2026-08-15, run the approved pilot by 2026-08-22, and
+freeze final evidence by 2026-08-26. The remaining 18 days are reserved for
+report writing, figures, presentation preparation, rehearsal, and contingency.
+DeepSeek is a research constraint, not a
+best-model claim, and real-user provider processing requires separate approval.
+Proactive triggers, full learning-gap analytics, Canvas, multimodality, and
+learning-effectiveness claims are deferred.
 
 ## Sprint 1 Onboarding Prototype
 

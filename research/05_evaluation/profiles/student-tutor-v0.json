@@ -164,10 +164,11 @@
       ],
       "candidate_ids": [
         "deterministic-grounded-generator",
+        "deepseek-api-primary",
         "live-provider-generator",
         "ollama-gemma3-4b"
       ],
-      "notes": "The deterministic control passes synthetic preflight. Local Gemma 3 4B passed structural checks but a post-run diagnostic found 3/18 unsupported or citation-mismatched answers; no generator or prompt is selected. A prospective quality rubric and fit-for-purpose comparison remain required."
+      "notes": "DeepSeek API is the fixed primary product constraint for RAG studies, limited to synthetic evaluation data and a cumulative USD 10 #24 cap, but it is not evidence-selected or qualified. The deterministic control passes synthetic preflight. Local Gemma 3 4B passed structural checks but a post-run diagnostic found 3/18 unsupported or citation-mismatched answers. A prospective DeepSeek and prompt qualification with sufficient evidence remains required."
     },
     {
       "component": "prompt",

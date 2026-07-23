@@ -14,7 +14,9 @@ The project currently exposes these planning fields:
 - Decision: Pending, Keep, Refine, Go Deeper, Drop
 - Work Type: Feature, Research, Design, Prototype, Documentation, Evaluation, Bug
 - Iteration: I1 Instructor Onboarding, I2 Student Active Tutoring, I3 Proactive
-  Interaction, I4 Learning Gap Report, I5 Evaluation and Refinement
+  Interaction, I4 Learning Gap Report, I5 Evaluation and Refinement. I3 and I4
+  remain historical options; their original scopes are deferred from the final
+  critical path.
 - Area: Instructor, Student, AI Agent, RAG, Analytics, Architecture,
   Documentation, Evaluation
 - Risk: Low, Medium, High
@@ -24,8 +26,8 @@ The project currently exposes these planning fields:
 
 ## Local Workflow
 
-1. Keep #1-#13 as roadmap deliverables and use their project status for sprint
-   progress.
+1. Keep #1-#13 as roadmap/history items, use #44 for professor gates, and use
+   their project status for delivery progress.
 2. When a sprint becomes active, create bounded execution issues with the
    `Research Task` form and attach them as sub-issues of the roadmap item.
 3. Fill in Iteration, Work Type, Area, Risk, Sprint, and Target Date on each
@@ -56,33 +58,44 @@ target project for automatic project assignment from issue forms.
 - #41 evaluated any-hit, BM25-score, lexical-coverage, and semantic-agreement
   evidence gates on 30 calibration and 50 held-out cases. The decision is
   `Refine` with no selection.
-- #24 now requires a prospective prompt/model comparison with at least 40
-  development cases and 100 held-out cases. #43 requires a new 60-case
-  calibration set and 150-case held-out open-set verifier comparison.
-- #25 is blocked by both #24 and #43. Its four illustrative demo cases cannot
-  substitute for the required untouched 100-case end-to-end evaluation.
-- Canvas is an optional future connector. It should not block or define the core
-  ingestion and retrieval architecture.
+- The system is not deployable yet: authentication, authorization, persistence,
+  private storage, student tutoring, staging, monitoring, backup/restore,
+  rollback, UAT, and pilot evidence are absent.
+- #11 is the immediate active execution item. It freezes the deployable-pilot
+  evaluation and data-governance protocol before new implementation, provider
+  calls, or held-out inspection.
+- #24 and #43 then qualify or reject the exact DeepSeek/prompt and actual
+  returned-context sufficiency methods. #25 and parent #7 record the frozen RAG
+  decision by 2026-07-31.
+- #8 delivers authenticated persistent professor/student staging by 2026-08-10;
+  #9 hardens it and records professor UAT Go / Refine / No-Go by 2026-08-15.
+- #10 runs the approved supervised pilot by 2026-08-22, or the explicit
+  synthetic-user fallback when real-student approval is unavailable.
+- #44 tracks seven professor decisions from scope approval through rehearsal.
+- Proactive triggers, full learning-gap analytics, Canvas, multimodality,
+  institution-wide SSO, public signup, and learning-effectiveness claims are
+  deferred.
 - The [quality and learning plan](quality-and-learning-plan.md) is the acceptance
   standard for technical depth, evaluation evidence, and student understanding.
 
-### Active Sprint 2 execution
+### Active critical path
 
-Roadmap issue #7 stays `In Progress` while these sub-issues drive delivery:
+Roadmap issue #7 stays `In Progress`; #11 is the current bounded execution gate.
 
-| Target | Execution sub-issue |
+| Target | Issue and required outcome |
 | --- | --- |
-| 2026-07-11 | #19 Refactor onboarding domain boundaries |
-| 2026-07-12 | #20 Refactor API and frontend adapters |
-| 2026-07-13 | #21 Define grounding contracts and synthetic fixtures |
-| 2026-07-14 | #22 Implement local document parsing and chunking |
-| 2026-07-15 | #34 Define evaluation architecture and component profiles |
-| 2026-07-16 | #23 Implement retrieval and source evidence |
-| 2026-07-17 | #37 Benchmark RAG retrieval candidates |
-| 2026-07-18 | #41 Evaluate retrieval evidence sufficiency |
-| 2026-07-20 | #24 Evaluate grounded generator and prompt candidates |
-| 2026-07-23 | #43 Evaluate the open-set evidence verifier |
-| 2026-07-25 | #25 Evaluate the grounded tutoring vertical slice |
+| 2026-07-24 | #44 P0 professor scope and governance decision |
+| 2026-07-25 | #11 freeze pilot evaluation and data governance |
+| 2026-07-29 | #24 and #43 qualify or reject generator/prompt and returned-context verifier |
+| 2026-07-31 | #25 and #7 record the end-to-end RAG decision |
+| 2026-08-10 | #8 deploy authenticated persistent professor/student staging |
+| 2026-08-15 | #9 pass hardening and professor UAT, or record No-Go |
+| 2026-08-22 | #10 complete supervised pilot or synthetic-user fallback |
+| 2026-08-26 | #12 complete final evaluation and freeze evidence |
+| 2026-09-03 | #44 P5 professor report-draft review |
+| 2026-09-09 | #44 P6 professor rehearsal |
+| 2026-09-10 to 2026-09-12 | Contingency only: correct blocking defects, package submission, and preserve frozen claims |
+| 2026-09-13 | #13 final report, deployed demo, and reproducibility package |
 
 Follow-up PR #39 makes every named decision-bearing evaluation result durable
 through a registry, reusable template, and CI validator. Attach this evidence to
@@ -102,6 +115,12 @@ tokens, cost, and footprint where applicable. Successful, failed, invalid, and
 inconclusive named runs remain registered. A profile changes only after every
 required gate passes; no selection is a valid outcome.
 
+The contract also applies to authentication, authorization, persistence,
+storage, conversation state, deployment, backup/restore, rollback, professor
+UAT, and student usability. A local algorithm score cannot compensate for a
+privacy, authorization, integrity, or reliability failure in the deployed
+system.
+
 Minimum sample sizes in issue bodies are floors. If important slices remain
 underpowered or uncertainty is too wide, record `Refine` and collect more
 evidence rather than treating the minimum as proof.
@@ -115,13 +134,12 @@ project board. The current presentation milestone is tracked through
 | Sprint | Dates | Focus | Items | Target Date |
 | --- | --- | --- | --- | --- |
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
-| S2 Grounding | 2026-06-29 to 2026-07-25 | Evaluated local-course RAG vertical slice | #7 | 2026-07-25 |
-| S3 Tutoring | 2026-07-26 to 2026-08-01 | Selected student tutoring orchestration and interface | #8 | 2026-08-01 |
-| S4 Proactive | 2026-08-02 to 2026-08-08 | Selected or rejected proactive trigger strategy | #9 | 2026-08-08 |
-| S5 Gap Report | 2026-08-09 to 2026-08-16 | Selected privacy-preserving learning-gap analytics | #10 | 2026-08-16 |
-| S6 Eval Setup | 2026-08-17 to 2026-08-25 | Validated dataset, rubric, and reviewer protocol | #11 | 2026-08-25 |
-| S7 Refinement | 2026-08-26 to 2026-09-04 | Blinded baselines and confirmed refinements | #12 | 2026-09-04 |
-| S8 Presentation | 2026-09-05 to 2026-09-13 | Frozen evidence, reproducible report, and demonstration | #13 | 2026-09-13 |
+| S2 Protocol and RAG | 2026-07-22 to 2026-07-31 | Frozen protocol and qualified/rejected grounded RAG profile | #7, #11, #24, #25, #43 | 2026-07-31 |
+| S3 Deployable App | 2026-08-01 to 2026-08-10 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-10 |
+| S4 Hardening and UAT | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, and professor release decision | #9 | 2026-08-15 |
+| S5 Supervised Pilot | 2026-08-16 to 2026-08-22 | Approved real-user pilot or explicit synthetic-user fallback | #10 | 2026-08-22 |
+| S6 Evidence Freeze | 2026-08-23 to 2026-08-26 | Blinded comparison, bounded refinement, and frozen claims | #12 | 2026-08-26 |
+| S7 Report and Presentation | 2026-08-27 to 2026-09-13 | Report, figures, deployed demo, reproducibility, slides, rehearsal, and three-day contingency | #13, #44 | 2026-09-13 |
 
 ## Board Maintenance
 
@@ -136,6 +154,8 @@ project board. The current presentation milestone is tracked through
 - Update `Target Date` before changing scope so timeline drift is visible.
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.
+- Record each professor checkpoint in #44 and copy the decision to the local
+  decision log; general encouragement does not approve real-user data.
 - Do not close a technical execution issue until its design note, tests,
   experiment evidence, limitations, and learning log satisfy the shared
   definition of done.

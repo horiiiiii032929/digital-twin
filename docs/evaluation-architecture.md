@@ -3,10 +3,12 @@
 ## Purpose
 
 The Digital Twin is an experimental product: parsers, chunkers, retrieval
-methods, models, prompts, policies, agent behavior, and analytics will change as
-evidence improves. Runtime code therefore depends on component-specific
-contracts, while a shared evaluation system records how implementations are
-compared and which version is selected for a system profile.
+methods, models, prompts, policies, agent behavior, authentication,
+authorization, persistence, storage, deployment, operations, and usability will
+change as evidence improves. Runtime code therefore depends on
+component-specific contracts, while a shared evaluation system records how
+implementations are compared and which version is selected for a system or
+release profile.
 
 "Best" means the best eligible implementation for a named profile, dataset,
 policy, and operational budget. It does not mean universally best or state of
@@ -32,8 +34,9 @@ Evidence layer
 ```
 
 Runtime contracts stay specific. A retriever returns ranked chunks, a generator
-returns an answer, and a proactive trigger returns a trigger decision. The
-project must not replace these useful types with a generic
+returns an answer, an identity boundary returns an authenticated principal, and
+a repository persists a scoped record. The project must not replace these
+useful types with a generic
 `execute(any) -> any` abstraction.
 
 Component-specific factories resolve selected profile entries outside business
@@ -70,9 +73,9 @@ entry may name candidates, but it has no selected implementation or decision.
 
 Selection is lexicographic rather than one weighted score:
 
-1. **Hard gates:** source permission, privacy, integrity, citation validity,
-   provenance, and required failure behavior. A failed gate disqualifies the
-   candidate.
+1. **Hard gates:** source permission, privacy, authorization, integrity,
+   citation validity, provenance, deletion/retention, and required failure and
+   recovery behavior. A failed gate disqualifies the candidate.
 2. **Required quality thresholds:** component-specific minimum acceptable
    behavior. A candidate below a required threshold cannot be selected.
 3. **Operational constraints:** maximum latency, memory, tokens, cost, and
@@ -83,7 +86,24 @@ Selection is lexicographic rather than one weighted score:
    simpler component with lower operational burden and easier rollback.
 
 This prevents a fluent model or high aggregate score from compensating for a
-privacy violation, invented citation, or academic-integrity failure.
+privacy or authorization violation, invented citation, academic-integrity
+failure, or unrecoverable deployment state.
+
+## Architecture and release boundaries
+
+The lifecycle applies to architecture choices as well as algorithms. For the
+deployable pilot, #11 must pre-register decision records for identity,
+role/course authorization, database and object storage, migrations, hosting,
+environment separation, secrets, logs, rate limits, monitoring,
+backup/restore, rollback, and incident response.
+
+An architecture record compares the current local/in-memory control with a
+bounded candidate under the same required user journeys. It reports threat and
+failure cases, role isolation, durability, deployment success, p50/p95 latency,
+error rate, cost, restore and rollback time, operational complexity,
+portability, and known lock-in. Professor UAT and the supervised pilot then
+validate the integrated release boundary; a passing component benchmark alone
+cannot make the deployment eligible.
 
 ## Evaluation record
 
@@ -226,10 +246,14 @@ Live generation and tutor-policy enforcement must not be implemented as one
 inseparable model call. Issue #24 should preserve separate generator, prompt,
 policy-enforcement, and citation-validation boundaries.
 
-The first generation evaluation should compare a deterministic generator
-control with one live provider candidate using the same questions, retrieved
-evidence, tutor policy, and prompt version. Hard gates are grounded-evidence
-use, valid citations, graded-work behavior, no-evidence behavior, secret
-isolation, and explicit provider failures. Quality metrics should cover
-grounding, pedagogy, policy compliance, and citation validity; operational
-metrics should cover latency, tokens, and approximate cost.
+The first generation evaluation should qualify the fixed DeepSeek API product
+constraint against the deterministic generator control while retaining local
+Gemma as an offline fallback. Use the same questions, sufficient gold evidence,
+tutor policy, and predeclared prompt conditions so retrieval misses do not
+confound the generator result. Only synthetic inputs are permitted and the
+cumulative #24 external spend is capped at USD 10. Hard gates are
+grounded-evidence use, valid citations, graded-work behavior, no-evidence
+behavior, secret isolation, private-data exclusion, explicit provider failures,
+and budget enforcement. Quality metrics should cover grounding, pedagogy,
+policy compliance, and citation validity, correctness, and completeness;
+operational metrics should cover latency, tokens, and cost.

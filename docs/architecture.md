@@ -27,8 +27,10 @@
 - Capture anonymized interaction summaries where allowed.
 - Surface recurring knowledge gaps to instructors.
 - Keep instructor review and override workflows explicit.
-- Student tutoring and analytics are planned after the professor approval loop
-  is stable.
+- Deliver authenticated professor/student workflows, durable state, private
+  storage, and staging deployment for the controlled pilot.
+- Proactive interaction and full learning-gap analytics are deferred until the
+  grounded deployed pilot is evaluated.
 
 ## Agent Contracts
 
@@ -113,21 +115,48 @@ support failures in 18 model answers under a post-run diagnostic rubric; it
 therefore selected nothing.
 The following remain separate execution sub-issues under roadmap issue #7:
 
-- Prospective prompt/model comparison completing #24
+- Prospective fixed-DeepSeek and prompt qualification completing #24
 - Open-set answerability/evidence-verifier comparison in #43
 - Untouched end-to-end grounded-tutoring evaluation in #25
 
-Provider/model selection, production embedding selection, Canvas, persistence,
-and live evaluation remain pending. Local BGE-small embeddings have been
+The DeepSeek API is the primary generator product constraint, with synthetic
+evaluation only and a cumulative USD 10 #24 cap, but its exact configuration
+and prompt selection remain pending. Production embedding selection, Canvas,
+persistence, and live evaluation remain pending. Local BGE-small embeddings have been
 benchmarked for ranking and semantic evidence agreement but were not selected.
 The current any-hit control must not feed an end-to-end grounding claim. Canvas
 can be added later as an optional source adapter if a safe guest course contains
 useful material.
 
+### Deployable-pilot planning boundary
+
+The 2026-07-22 rescope makes a real staging deployment and supervised pilot part
+of the final outcome. The current FastAPI/Vite and in-memory onboarding stack is
+not deployable as-is. Before implementation resumes, #11 must freeze the
+alternatives, metrics, privacy rules, and hard gates for:
+
+- invited-user authentication and session revocation;
+- professor/student roles and course membership;
+- transactional persistence and private source storage;
+- persistent conversation state and duplicate/stale response handling;
+- provider data processing, consent, retention, deletion, and log redaction;
+- staging/production separation, TLS, secrets, health checks, rate limits,
+  backup/restore, rollback, monitoring, and incident response; and
+- professor UAT plus supervised student usability and reliability evidence.
+
+No hosting, identity, database, or storage vendor is selected by this rescope.
+Each is an architecture decision requiring a control, bounded candidates,
+operational evidence, failure cases, and rollback. See the
+[deployable pilot rescope](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).
+
 ## Open Design Decisions
 
 - Production citation rendering and locator navigation
-- Live prompt variant selection
-- Agent prompt boundaries and model/provider selection
+- Live prompt variant selection and exact DeepSeek model/configuration freeze
+- Agent prompt boundaries and provider-failure behavior
 - Student privacy and consent model
 - End-to-end answer-quality rubric and evidence-sufficiency threshold
+- Identity provider, role/course authorization model, and session lifecycle
+- Database, private object storage, migrations, retention, and deletion
+- Hosting topology, environments, monitoring, backup/restore, and rollback
+- Real-student provider approval and synthetic-user fallback

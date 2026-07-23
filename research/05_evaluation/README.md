@@ -17,6 +17,12 @@ Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
 
+The existing committed datasets are regression and development assets, not the
+sole final-project benchmark. The selected successor design is documented in
+the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
+professor-reviewed course-specific gold benchmark, and keep supervised-pilot
+evidence separate from offline component selection.
+
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer
 quality and cannot select a model or prompt by itself. Its clean deterministic

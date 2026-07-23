@@ -9,6 +9,13 @@ live provider or prompt is selected, no API credential is stored, and no paid
 call has been made. A local Ollama Gemma 3 4B candidate has been exercised with
 zero monetary cost, but no generator or prompt is selected.
 
+On 2026-07-16, the project fixed the DeepSeek API as a product constraint for
+the primary generator rather than opening a broad LLM competition. This is not
+evidence that DeepSeek is universally best. It remains pending until an exact
+model identifier and configuration pass the prospective #24 qualification.
+Only synthetic evaluation data is permitted, and the complete #24 external API
+run has a cumulative USD 10 cap. Private course material remains prohibited.
+
 The 25-case synthetic preflight establishes that the control path is safe enough
 to compare with a live candidate. It is not evidence that the control produces
 high-quality tutoring explanations, nor that any model is best.
@@ -132,15 +139,27 @@ per-case output is local and ignored under `reports/generated/`.
 
 ## Remaining live decision
 
-To complete #24, freeze the quality rubric, thresholds, review protocol, prompt
-variants, at least one fit-for-purpose comparison model, and any spending cap
-before inspecting held-out outputs. The revised issue requires at least 40
-development/calibration cases and 100 held-out cases, three repeats on a
-stability subset, and double review of at least 30 percent of answer cases. The
-comparison scores claim support, citations, pedagogy, misconception correction,
-policy behavior, latency, tokens, cost, footprint, and diagnosed failures. Only
-a candidate that passes every prospective hard gate may update the generator,
-prompt, policy-enforcement, or citation-validation profile entries.
+To complete #24, freeze the exact DeepSeek model identifier and parameters,
+quality rubric, thresholds, review protocol, and prompt variants before
+inspecting held-out outputs. Use sufficient gold evidence for answer cases so
+the generator qualification is not confounded by a retrieval miss. Compare
+DeepSeek with the deterministic structural control and retain local Gemma as an
+offline fallback; do not turn this issue into a broad model leaderboard.
+
+The issue requires at least 40 development/calibration cases and 100 held-out
+cases, three repeats on a stability subset, and double review of at least 30
+percent of answer cases. Record per-case and cumulative cost, stop before the
+approved USD 10 cap can be exceeded, and make no call with private course
+material. The comparison scores claim support, citations, pedagogy,
+misconception correction, policy behavior, latency, tokens, cost, footprint,
+and diagnosed failures. Only a configuration that passes every prospective
+hard gate may update the generator, prompt, policy-enforcement, or
+citation-validation profile entries.
+
+After qualification, freeze the selected DeepSeek and prompt configuration
+while comparing full-document context, BM25, dense, hybrid, and justified
+reranked RAG strategies. That later experiment answers the primary research
+question without confusing model variation with retrieval variation.
 
 IT5002 files remain outside this flow until an explicit professor approval
 grants processing and tutoring permission.

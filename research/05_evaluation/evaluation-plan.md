@@ -1,32 +1,59 @@
-# Evaluation Plan
+# Evaluation plan
+
+The selected project-wide protocol is
+[`2026-07-22-deployable-tutor-evaluation-protocol.md`](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md).
+This file is the compact evaluation index; component plans and named result
+records provide the exact frozen configuration for each run.
 
 Use the repository-wide
 [evaluation architecture](../../docs/evaluation-architecture.md) for component
 comparisons and system-profile decisions. Component-specific records supplement
 this final tutor evaluation; they do not replace it.
 
-## Goals
+## Research questions
 
-- Compare Digital Twin answers against a generic assistant baseline.
-- Measure factual grounding in instructor-approved source material.
-- Measure alignment with the instructor's teaching style.
-- Identify student confusion patterns that the dashboard should summarize.
+- Does approved oracle evidence improve safe grounded task success over a
+  generic assistant using the same generator?
+- Does the professor-approved policy measurably change pedagogical behavior
+  when evidence and generator settings are held constant?
+- What loss is introduced when retrieved context replaces oracle evidence?
+- When all approved documents fit in context, is RAG better than the full-
+  document control under quality, latency, token, and cost constraints?
+- Can invited professor and student roles complete the deployed pilot tasks
+  safely, reliably, and without cross-role or cross-course exposure?
 
-## Candidate Evaluation Sets
+## Dataset portfolio
 
-- Course-bound factual questions
-- Socratic tutoring prompts
-- Out-of-scope questions
-- Assignment policy questions
-- Misconception diagnosis questions
+1. Existing synthetic web-security data remains the public regression suite.
+2. `course-tutor-v1` contains 12 professor-anchor, 48 development/calibration,
+   and 72 sealed held-out cases over eight predeclared scenario types.
+3. Supervised pilot records provide usability and operational evidence only;
+   they do not select the RAG method or establish learning improvement.
 
-## Evidence To Capture
+Public RAG and tutoring benchmarks supply constructs and instrument checks.
+They are not substitutes for the versioned course-specific benchmark.
 
-- Prompt and source bundle version
-- Model and retrieval settings
-- Answer citations
-- Rubric scores
-- Instructor review notes
+## Frozen conditions
+
+- C0: generic assistant, no course context;
+- C1: oracle evidence plus generic tutoring policy;
+- C2: the same oracle evidence plus professor policy;
+- C3: retrieved evidence plus professor policy; and
+- C4: all approved documents plus professor policy when they fit safely.
+
+Hold question, generator, decoding, token budget, and output schema constant.
+
+## Primary outcomes and gates
+
+- unconditional safe grounded task success;
+- complete-evidence success@k; and
+- professor-policy pedagogical success plus blinded policy-condition
+  preference.
+
+Permission, privacy, authorization, assessed-work, citation identity, source
+version, unsupported high-severity claims, provider failure, and approved cost
+and data boundaries are hard gates. A higher quality average cannot compensate
+for a gate failure.
 
 ## Component evaluation contract
 
@@ -54,3 +81,8 @@ and documented conditions. Report grounding, pedagogy, policy compliance,
 citation validity, no-evidence behavior, latency, tokens, cost, uncertainty,
 and limitations without hiding component hard-gate failures inside an aggregate
 score.
+
+Use paired inputs and report raw counts, 95% intervals, paired differences,
+predeclared confirmatory tests where useful, reviewer agreement, slice results,
+operational measurements, and representative failures. An automated evaluator
+is diagnostic until validated against the in-domain blinded human labels.
