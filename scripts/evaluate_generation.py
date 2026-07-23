@@ -39,7 +39,10 @@ def main() -> None:
         "provider_selection": (
             f"unselected candidate: {arguments.model}"
             if live
-            else "pending provider/model and budget decision"
+            else (
+                "DeepSeek API constrained but unqualified; synthetic-only "
+                "budget approved at USD 10"
+            )
         ),
         "evaluation_mode": _evaluation_mode(arguments.model),
         "result": summary.model_dump(mode="json"),
