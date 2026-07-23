@@ -101,9 +101,10 @@ An architecture record compares the current local/in-memory control with a
 bounded candidate under the same required user journeys. It reports threat and
 failure cases, role isolation, durability, deployment success, p50/p95 latency,
 error rate, cost, restore and rollback time, operational complexity,
-portability, and known lock-in. Professor UAT and the supervised pilot then
-validate the integrated release boundary; a passing component benchmark alone
-cannot make the deployment eligible.
+portability, and known lock-in. Professor review, scripted synthetic-account
+acceptance, and frozen simulated-student evaluation then validate the integrated
+release boundary; a passing component benchmark alone cannot make the
+deployment eligible.
 
 ## Evaluation record
 

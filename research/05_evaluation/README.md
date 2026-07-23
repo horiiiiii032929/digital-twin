@@ -20,8 +20,11 @@ experimental profile with `npm run verify:profile`.
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in
 the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
-professor-reviewed course-specific gold benchmark, and keep supervised-pilot
-evidence separate from offline component selection.
+professor-reviewed course-specific gold benchmark, and keep deployed
+synthetic-account evidence separate from offline component selection. The
+2026-07-23 amendment removes participant recruitment and uses calibrated LLM
+judging, frozen simulated-student trajectories, and scripted synthetic-account
+acceptance.
 
 The `course-tutor-v1` design is defined by:
 
@@ -46,9 +49,9 @@ The selected full-course candidate corpus is inventoried in
 scope rationale and source hierarchy in the
 [`IT5002 corpus decision`](../00_admin/2026-07-23-it5002-full-course-corpus-decision.md).
 
-Private course text, derived passages, real student content, and consent records
-must not be committed. The anchor is an instrument-calibration set, not a system
-performance result.
+Private course text, derived passages, or any accidentally encountered real
+student content must not be committed. The anchor is an
+instrument-calibration set, not a system performance result.
 
 Private anchor cases, companion conditions, and extracted evidence passages
 live under ignored `data/processed/course_tutor_v1/` and

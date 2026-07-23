@@ -162,5 +162,5 @@ At the end, ask three cross-case questions:
 Do not scale to development or held-out authoring until all 12 records validate,
 every required claim resolves to approved evidence, disagreements are preserved,
 and the professor has approved or explicitly revised each expected action. This
-approval does not authorize DeepSeek or real-student data use; those remain
-separate issue #11 governance decisions.
+approval does not authorize DeepSeek or other external-provider use of private
+course content; that remains a separate issue #11 governance decision.

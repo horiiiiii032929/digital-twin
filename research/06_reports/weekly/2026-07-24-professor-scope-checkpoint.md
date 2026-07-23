@@ -1,4 +1,4 @@
-# Professor checkpoint: deployable pilot scope
+# Professor checkpoint: deployable tutor and evaluation scope
 
 Date: 2026-07-24
 
@@ -6,17 +6,17 @@ GitHub checkpoint: #44 / P0
 
 ## Decision requested
 
-Please `Keep` or `Refine` the rescope to a deployable, evaluated tutoring pilot
-for one course, one professor, and a provisional cohort of 5-15 invited adult
-students. Approval here authorizes planning; it does not yet authorize real
-course or student data.
+Please `Keep` or `Refine` the rescope to a deployable, evaluated tutoring system
+for one course and one professor, without student recruitment. Approval here
+authorizes planning and instrument design; it does not yet authorize tutoring
+use of the private course corpus or external-provider processing.
 
 ## Status
 
 Amber. Instructor onboarding and the RAG/evaluation foundations exist, but the
 system is not deployable. No safe returned-context verifier, exact live
 generator/prompt, end-to-end RAG profile, authentication, persistent database,
-private storage, student flow, staging environment, or pilot approval is
+private storage, student flow, staging environment, or evaluation release is
 selected.
 
 ## What is already supported
@@ -41,21 +41,27 @@ comparison uses the same generator for:
 3. the same evidence plus professor policy; and
 4. retrieved evidence plus professor policy.
 
-The deployed-pilot evaluation adds professor/student task completion, role and
-course isolation, persistence, privacy, reliability, latency, cost, recovery,
-and rollback.
+The additional evaluation uses deterministic hard gates, a professor-reviewed
+course benchmark, calibrated LLM judges for subjective pedagogy, frozen
+simulated-student trajectories for multi-turn stress, and scripted synthetic
+accounts for role isolation, persistence, privacy, reliability, latency, cost,
+recovery, and rollback.
+
+This can support claims about the tested tutor and deployment revision. It
+cannot support claims about human usability, student satisfaction, engagement,
+learning gains, or classroom effectiveness.
 
 ## Decisions needed from the professor
 
 1. May all 13 inventoried official IT5002 lectures be processed and used for
    tutor grounding, with notes and assessed/answer material excluded?
-2. Is a cohort of 5-15 invited adult students appropriate, and what institutional
-   approval or consent process is required?
-3. May any approved course or student text be sent to an external DeepSeek API?
+2. Do you approve a no-participant evaluation using simulated students and
+   synthetic accounts, with no human-usability or learning-effectiveness claim?
+3. May any approved course text be sent to an external DeepSeek API?
    If not, should the live pilot use an institution-approved provider, a local
-   model, or synthetic users only?
-4. What student-content retention period is acceptable, and who may inspect raw
-   conversations?
+   model, or synthetic-only external qualification?
+4. Can you approve the 12 anchor expected actions and review 8-12 calibration
+   outputs so the LLM judge can be checked against expert labels?
 5. Can the professor attend or asynchronously answer the P1-P6 checkpoints on
    2026-07-31, 08-10, 08-15, 08-22, 09-03, and 09-09?
 6. Are proactive prompts, full learning-gap analytics, Canvas, multimodality,
@@ -63,14 +69,15 @@ and rollback.
 
 ## Proposed decision and consequence
 
-- Proposed decision: `Keep` the deployable-pilot direction and `Refine` the
-  exact data/provider boundary through #11.
+- Proposed decision: `Keep` the deployable-system direction and `Refine` the
+  evaluation to professor-reviewed offline cases, simulated students, calibrated
+  LLM judges, and synthetic-account deployment tests.
 - If approved: freeze the evaluation, privacy, dataset, rubric, thresholds, and
   architecture decision protocol by 2026-07-25 before implementation resumes.
-- If refined: update the cohort, course, provider, data retention, or critical
+- If refined: update the corpus, provider, evaluator calibration, or critical
   path before any code or model call.
-- If rejected: fall back to a deployed synthetic-user research demonstration and
-  remove real-user usability claims.
+- If professor output review is unavailable: keep LLM-judge results diagnostic
+  and narrow the pedagogical claim.
 
 ## Next checkpoint
 
@@ -84,6 +91,6 @@ and rollback.
 
 - Decision:
 - Conditions:
-- Approved course/data/provider boundary:
+- Approved course/provider/evaluator boundary:
 - Rationale:
 - Follow-up owner and date:

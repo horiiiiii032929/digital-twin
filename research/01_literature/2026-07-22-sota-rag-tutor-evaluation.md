@@ -1,6 +1,6 @@
 # State-of-the-art references for grounded tutor evaluation
 
-Date reviewed: 2026-07-22
+Date reviewed: 2026-07-23
 
 ## Decision question
 
@@ -182,6 +182,49 @@ or delayed retention. Until such a study exists, the report must use terms such
 as `pedagogical quality`, `professor alignment`, and `grounded task success`, not
 `learning improvement`.
 
+## LLM judges and simulated students
+
+[G-Eval](https://arxiv.org/abs/2303.16634) and
+[MT-Bench](https://arxiv.org/abs/2306.05685) support structured LLM judging as
+a scalable approximation for subjective response evaluation, but neither makes
+an LLM judge ground truth. MT-Bench explicitly studies position, verbosity,
+self-enhancement, and reasoning limitations.
+
+[Judging the Judges](https://arxiv.org/abs/2406.07791) demonstrates systematic
+position effects and motivates swapped answer order plus position-consistency
+reporting.
+[Self-Preference Bias in LLM-as-a-Judge](https://arxiv.org/abs/2410.21819)
+finds that judges can prefer outputs familiar to their own model family.
+[Replacing Judges with Juries](https://arxiv.org/abs/2404.18796) reports that a
+panel of diverse smaller judges can reduce intra-model bias and cost relative
+to one large judge in its evaluated settings.
+
+The local implication is conservative:
+
+- exact permissions, citations, expected actions, latency, cost, and hard gates
+  remain deterministic or expert-authored;
+- subjective pedagogy uses blinded structured judgments only after expert-anchor
+  calibration;
+- pairwise judgments run in both answer orders;
+- a stratified subset is repeated and checked by a distinct model family; and
+- automated results become diagnostic when agreement, stability, or false-pass
+  thresholds fail.
+
+[Simulated Students in Tutoring Dialogues](https://aclanthology.org/2026.acl-long.1960/)
+finds that simple prompted student simulations perform poorly across linguistic,
+behavioral, and cognitive measures, even though simulation is increasingly used
+for tutor evaluation. Earlier work on
+[simulated feedback for conversational search](https://arxiv.org/abs/2304.13874)
+shows that LLMs can produce coherent multi-turn interaction, but coherence does
+not establish learner fidelity.
+
+Therefore, this project uses simulated students as frozen stress-test actors,
+not estimates of real learners. Each simulator receives a state card with
+allowed knowledge, misconception, attempt status, transitions, and stop
+conditions. Simulator validity is audited separately, and the simulator never
+judges tutor success. No simulated result supports human usability,
+satisfaction, engagement, adoption, or learning-effectiveness claims.
+
 ## Reproducible reporting
 
 [ReproEvalCard](https://aclanthology.org/2026.acl-short.22/) (Pattnayak and
@@ -207,8 +250,9 @@ preserve:
    final-answer correctness as separate fields and metrics.
 3. Add required atomic claims and claim-to-evidence mappings to generation
    cases before the held-out outputs are inspected.
-4. Pilot the rubric on professor-reviewed course scenarios and measure reviewer
-   agreement before scaling an LLM judge.
+4. Pilot the rubric on professor-reviewed course scenarios and measure
+   expert-anchor agreement, answer-order consistency, repeat consistency, and
+   distinct-family sensitivity before scaling an LLM judge.
 5. Compare generic, grounded, and professor-configured conditions using the
    same DeepSeek model and questions; add the long-context control where
    feasible.
@@ -230,5 +274,6 @@ answerability label cannot validate context sufficiency and that citation-ID
 integrity cannot validate factual support.
 
 No component profile changes follow from this review. The next evidence target
-is a professor-reviewed pilot that validates the research question, conditions,
-context labels, atomic claims, and rubric before the DeepSeek held-out run.
+is a professor-reviewed no-participant protocol that validates the research
+question, conditions, context labels, atomic claims, judge calibration, and
+simulator validity before the DeepSeek held-out run.

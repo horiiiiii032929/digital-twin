@@ -1,6 +1,6 @@
 # Quality and Learning Plan
 
-Last reviewed: 2026-07-22
+Last reviewed: 2026-07-23
 
 ## Purpose
 
@@ -26,7 +26,7 @@ the complete digital-twin system.
 - Do not claim learning effectiveness without an evaluation design that supports
   that claim.
 - Treat deployability as an evaluated system property: authentication,
-  authorization, persistence, privacy, reliability, usability, monitoring,
+  authorization, persistence, privacy, reliability, synthetic acceptance, monitoring,
   backup/restore, and rollback require the same control-and-evidence discipline
   as retrieval and generation.
 
@@ -37,11 +37,11 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-22 to 2026-07-25 | Pilot protocol and data governance | Research question, users, data flow, privacy, method controls, rubrics, gates, and professor approval |
+| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Research question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and professor approval |
 | 2026-07-26 to 2026-07-31 | Grounded RAG qualification | Generator/prompt, returned-context sufficiency, claim/citation evidence, and end-to-end decision |
 | 2026-08-01 to 2026-08-10 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
 | 2026-08-11 to 2026-08-15 | Hardening and professor UAT | Threat modeling, privacy, reliability, load, backup/restore, recovery, and release decision |
-| 2026-08-16 to 2026-08-22 | Supervised pilot | Role-specific usability, safe grounded task success, reliable turns, incident handling, and claim boundaries |
+| 2026-08-16 to 2026-08-22 | Simulated-user evaluation | Calibrated LLM judging, multi-turn safe completion, synthetic-account acceptance, reliable turns, and claim boundaries |
 | 2026-08-23 to 2026-08-26 | Final evaluation and evidence freeze | Blinded comparison, bounded refinement, failure analysis, uncertainty, and frozen evidence |
 | 2026-08-27 to 2026-09-03 | Full report draft and figures | Complete argument, claim-to-evidence matrix, main plots, limitations, and professor review |
 | 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
@@ -169,10 +169,15 @@ By 2026-09-13, the project should defend six evidence-backed claims:
 3. Evaluation artifacts support the reported strengths and limitations.
 4. Permissions, privacy, academic integrity, and professor approval are explicit
    system controls.
-5. Invited professor and student roles can use the deployed pilot without
-   cross-role or cross-course access, with durable state and visible recovery.
-6. Security, reliability, usability, latency, cost, rollback, and pilot
-   limitations are measured rather than inferred from a local demonstration.
+5. Scripted professor and student accounts complete deployed acceptance
+   journeys without cross-role or cross-course access, with durable state and
+   visible recovery.
+6. Security, reliability, synthetic interaction behavior, latency, cost,
+   rollback, judge validity, and deployment limitations are measured rather
+   than inferred from a local demonstration.
 
 If evidence does not support a claim, the report must narrow or reject the claim
 rather than presenting the demonstration as proof.
+
+Human usability, satisfaction, engagement, adoption, and learning outcomes are
+not evaluated and must not appear as supported claims.

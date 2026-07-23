@@ -60,7 +60,8 @@ target project for automatic project assignment from issue forms.
   `Refine` with no selection.
 - The system is not deployable yet: authentication, authorization, persistence,
   private storage, student tutoring, staging, monitoring, backup/restore,
-  rollback, UAT, and pilot evidence are absent.
+  rollback, professor release review, and simulated evaluation evidence are
+  absent.
 - #11 is the immediate active execution item. It freezes the deployable-pilot
   evaluation and data-governance protocol before new implementation, provider
   calls, or held-out inspection.
@@ -68,9 +69,10 @@ target project for automatic project assignment from issue forms.
   returned-context sufficiency methods. #25 and parent #7 record the frozen RAG
   decision by 2026-07-31.
 - #8 delivers authenticated persistent professor/student staging by 2026-08-10;
-  #9 hardens it and records professor UAT Go / Refine / No-Go by 2026-08-15.
-- #10 runs the approved supervised pilot by 2026-08-22, or the explicit
-  synthetic-user fallback when real-student approval is unavailable.
+  #9 hardens it and records professor evaluation-release Go / Refine / No-Go by
+  2026-08-15.
+- #10 runs the simulated-student, LLM-judge, and deployed synthetic-account
+  evaluation by 2026-08-22.
 - #44 tracks seven professor decisions from scope approval through rehearsal.
 - Proactive triggers, full learning-gap analytics, Canvas, multimodality,
   institution-wide SSO, public signup, and learning-effectiveness claims are
@@ -84,13 +86,13 @@ Roadmap issue #7 stays `In Progress`; #11 is the current bounded execution gate.
 
 | Target | Issue and required outcome |
 | --- | --- |
-| 2026-07-24 | #44 P0 professor scope and governance decision |
+| 2026-07-24 | #44 P0 professor scope and evaluator-governance decision |
 | 2026-07-25 | #11 freeze pilot evaluation and data governance |
 | 2026-07-29 | #24 and #43 qualify or reject generator/prompt and returned-context verifier |
 | 2026-07-31 | #25 and #7 record the end-to-end RAG decision |
 | 2026-08-10 | #8 deploy authenticated persistent professor/student staging |
-| 2026-08-15 | #9 pass hardening and professor UAT, or record No-Go |
-| 2026-08-22 | #10 complete supervised pilot or synthetic-user fallback |
+| 2026-08-15 | #9 pass hardening and professor evaluation-release review, or record No-Go |
+| 2026-08-22 | #10 complete simulated-student, LLM-judge, and synthetic-account evaluation |
 | 2026-08-26 | #12 complete final evaluation and freeze evidence |
 | 2026-09-03 | #44 P5 professor report-draft review |
 | 2026-09-09 | #44 P6 professor rehearsal |
@@ -116,10 +118,10 @@ inconclusive named runs remain registered. A profile changes only after every
 required gate passes; no selection is a valid outcome.
 
 The contract also applies to authentication, authorization, persistence,
-storage, conversation state, deployment, backup/restore, rollback, professor
-UAT, and student usability. A local algorithm score cannot compensate for a
-privacy, authorization, integrity, or reliability failure in the deployed
-system.
+storage, conversation state, deployment, backup/restore, rollback, judge
+calibration, simulator validity, and synthetic-account acceptance. A local
+algorithm score cannot compensate for a privacy, authorization, integrity, or
+reliability failure in the deployed system.
 
 Minimum sample sizes in issue bodies are floors. If important slices remain
 underpowered or uncertainty is too wide, record `Refine` and collect more
@@ -136,8 +138,8 @@ project board. The current presentation milestone is tracked through
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
 | S2 Protocol and RAG | 2026-07-22 to 2026-07-31 | Frozen protocol and qualified/rejected grounded RAG profile | #7, #11, #24, #25, #43 | 2026-07-31 |
 | S3 Deployable App | 2026-08-01 to 2026-08-10 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-10 |
-| S4 Hardening and UAT | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, and professor release decision | #9 | 2026-08-15 |
-| S5 Supervised Pilot | 2026-08-16 to 2026-08-22 | Approved real-user pilot or explicit synthetic-user fallback | #10 | 2026-08-22 |
+| S4 Hardening and Review | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, and professor evaluation-release decision | #9 | 2026-08-15 |
+| S5 Simulated Evaluation | 2026-08-16 to 2026-08-22 | Calibrated LLM judge, simulated-student trajectories, and deployed synthetic-account acceptance | #10 | 2026-08-22 |
 | S6 Evidence Freeze | 2026-08-23 to 2026-08-26 | Blinded comparison, bounded refinement, and frozen claims | #12 | 2026-08-26 |
 | S7 Report and Presentation | 2026-08-27 to 2026-09-13 | Report, figures, deployed demo, reproducibility, slides, rehearsal, and three-day contingency | #13, #44 | 2026-09-13 |
 
@@ -155,7 +157,8 @@ project board. The current presentation milestone is tracked through
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.
 - Record each professor checkpoint in #44 and copy the decision to the local
-  decision log; general encouragement does not approve real-user data.
+  decision log; general encouragement does not approve private-course provider
+  use or evaluator calibration.
 - Do not close a technical execution issue until its design note, tests,
   experiment evidence, limitations, and learning log satisfy the shared
   definition of done.

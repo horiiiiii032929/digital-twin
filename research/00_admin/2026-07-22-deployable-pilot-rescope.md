@@ -8,17 +8,18 @@ rescope.
 ## Scope decision
 
 The final project will deliver and evaluate a small, deployable Digital Twin
-tutoring pilot that a professor and an invited group of students can use through
-authenticated web accounts. The project is no longer scoped as only a local RAG
-demonstration. Authentication, durable storage, student and professor roles,
-deployment, privacy controls, monitoring, recovery, and supervised pilot use are
+tutoring system for one professor and one course. The project is no longer
+scoped as only a local RAG demonstration. Authentication, durable storage,
+student and professor roles, deployment, privacy controls, monitoring, recovery,
+simulated-student evaluation, and scripted synthetic-account acceptance are
 part of the required outcome.
 
-The target is a controlled one-course pilot, not an institution-wide production
-service. The provisional pilot size is one professor and 5-15 invited adult
-students. The professor and institution must approve the actual cohort, course
-materials, consent language, retention period, and model-provider data boundary
-before real use.
+The target is a controlled one-course research deployment, not an
+institution-wide production service. Student recruitment is out of scope.
+Professor review is used to approve course truth and evaluation instruments;
+frozen simulated students and synthetic accounts provide multi-turn and
+deployment stress tests. The professor and institution must still approve
+course-material tutoring use and the model-provider data boundary.
 
 ## Research contribution
 
@@ -27,7 +28,7 @@ state of the art. It will make a stronger and more defensible contribution:
 
 > Build a deployable professor-configurable, course-grounded tutor and evaluate
 > every replaceable method and architecture boundary under shared data, safety,
-> usability, reliability, latency, and cost criteria.
+> grounding, pedagogy, reliability, latency, and cost criteria.
 
 The final system comparison will hold the generator constant and separate the
 effects of approved evidence and professor policy:
@@ -40,7 +41,7 @@ effects of approved evidence and professor policy:
 This design distinguishes generator, policy, and retrieval effects. It also
 keeps unfavorable or no-selection outcomes publishable.
 
-## Required real-world user journeys
+## Required deployed user journeys
 
 ### Professor
 
@@ -50,8 +51,8 @@ keeps unfavorable or no-selection outcomes publishable.
 3. Configure the tutor through the existing chat-led policy workflow.
 4. Preview grounded responses, inspect sources, revise policy, and explicitly
    approve or withdraw student release.
-5. Review a minimized audit of failures and student feedback without exposing
-   unnecessary student content.
+5. Review a minimized audit of failures and synthetic feedback without exposing
+   private course content unnecessarily.
 
 ### Student
 
@@ -61,12 +62,12 @@ keeps unfavorable or no-selection outcomes publishable.
    clear refusal or insufficient-evidence response.
 4. Open a source locator and understand why the tutor answered, redirected, or
    abstained.
-5. Submit lightweight feedback and request deletion or correction through the
-   documented pilot process.
+5. Submit lightweight synthetic feedback and exercise deletion or correction
+   through the documented acceptance flow.
 
 ## Required product boundaries
 
-- One course and one professor for the evaluated pilot.
+- One course and one professor for the evaluated research deployment.
 - English text, Markdown, and selectable-text PDF sources.
 - Invited accounts only; no public signup.
 - Professor and student role separation plus explicit course membership.
@@ -77,7 +78,7 @@ keeps unfavorable or no-selection outcomes publishable.
   application logs.
 - Health checks, structured redacted logs, rate limits, timeouts, backup and
   restore evidence, rollback instructions, and a visible provider-failure path.
-- A staging environment before any approved pilot environment.
+- A staging environment for synthetic-account acceptance and professor review.
 
 ## Deferred scope
 
@@ -98,21 +99,19 @@ are removed from the critical path rather than recorded as completed.
 ## Provider and data-governance gate
 
 DeepSeek remains the fixed generator family for synthetic qualification, but it
-is not automatically approved for real student or private course data. Before a
-live pilot, the project must record:
+is not automatically approved for private course data. Before any
+course-specific provider call, the project must record:
 
 - the exact model and API endpoint;
 - the applicable privacy policy, terms, retention, training-use, location, and
   subprocessors;
 - the institution's approval or rejection;
-- student disclosure and consent or another valid institutional basis;
 - fields removed or pseudonymized before provider calls;
-- deletion and data-subject request handling; and
+- deletion and incident handling; and
 - an approved fallback when the external provider is unavailable or prohibited.
 
-If this gate is not approved, the deployed application may still be evaluated
-with synthetic invited testers, but it must not be represented as a real-student
-pilot.
+If this gate is not approved, all course-specific tutoring, simulation, and
+judging run locally. No real student or participant data is required.
 
 ## Evaluation contract for every method
 
@@ -133,14 +132,15 @@ implementation or held-out inspection. Each plan names:
 | Parsing and chunking | Current heading/paragraph parser and chunker | One fixed-token or layout-aware alternative only if representative course failures justify it | Extraction completeness, boundary loss, required-claim coverage, latency | Approved source and provenance retained; unsupported input rejected |
 | Retrieval | Term overlap regression control and selected BM25 v1 baseline | Existing dense/RRF result or one targeted successor; no broad model search | Complete-evidence success@3/5, gold-evidence recall, nDCG, no-evidence behavior, latency and footprint | Zero prohibited or superseded evidence |
 | Context sufficiency | Any-hit rollback control | One prospectively selected verifier family | Complete/partial/none classification, answerability precision/recall, false answers and abstentions, calibration | Actual returned context is labeled; no corpus-category proxy; safety threshold frozen |
-| Generator | Deterministic structural control and local fallback | One exact DeepSeek configuration | Required-claim recall, claim support, contradiction count, stability, latency, tokens and cost | Zero private pilot data before approval; zero high-severity unsupported claims |
+| Generator | Deterministic structural control and local fallback | One exact DeepSeek configuration | Required-claim recall, claim support, contradiction count, stability, latency, tokens and cost | Zero private course data before approval; zero high-severity unsupported claims |
 | Prompt and professor policy | Generic prompt/policy condition | Grounded generic and professor-policy conditions with the same model and evidence | Blinded pedagogy, misconception repair, integrity action, citation correctness and completeness | Same questions, model, decoding, and evidence across paired comparisons |
 | Conversation orchestration | Stateless single-turn control | Deterministic persisted state machine; graph orchestration only after a recorded failure | State consistency, duplicate handling, recovery success, multi-turn grounded success | Zero cross-user or stale-response leakage |
 | Authentication and authorization | Current unauthenticated local prototype as a negative control | One managed or standards-based identity design selected before implementation | Role-matrix tests, invite completion, session expiry/revocation, auth latency and recovery | Zero professor/student or cross-course authorization bypass |
 | Persistence and storage | Current in-memory repository as a negative durability control | Transactional database plus private object storage | Restart survival, migration and rollback success, backup/restore time, query latency | Zero cross-course access; deletion and retention rules enforced |
 | Deployment | Local development run | One managed deployment architecture compatible with FastAPI and Vite | Deployment success, p50/p95 latency, error rate, cost, rollback and recovery time | TLS, secret isolation, health checks, staging, backup, and incident runbook |
-| Professor usability | Existing deterministic onboarding walkthrough | Deployed professor workflow | Task completion, time, errors, source/policy comprehension, release confidence | Professor can block release and inspect evidence |
-| Student usability | Scripted synthetic conversation | Supervised deployed student workflow | Task completion, citation and abstention comprehension, ease rating, feedback, failed-turn rate | Consent and withdrawal path; zero privacy or integrity violation |
+| LLM judge | Authored/deterministic rubric labels | Calibrated fixed judge plus distinct-family sensitivity judge | Expert agreement, exact agreement, order/repeat consistency, false passes | No hard-gate override; diagnostic only if calibration fails |
+| Multi-turn tutoring | Authored scripted turns | Frozen simulated-student trajectories | Safe trajectory completion, checkpoint actions, recovery, policy drift, simulator validity | Simulator never judges success; no human-outcome claim |
+| Deployed acceptance | Local API/UI checks | Scripted professor/student synthetic accounts | Journey completion, role isolation, persistence, recovery, latency | Operational evidence only; no human-usability claim |
 
 ## Pilot-level outcome measures
 
@@ -149,29 +149,34 @@ The final evaluation will emphasize three decision metrics:
 1. **Unconditional safe grounded task success:** proportion of all evaluation
    cases that receive a correct supported answer when answerable or the correct
    refusal/abstention when not, with correct citations and policy action.
-2. **Professor and student task completion:** proportion of required deployed
-   tasks completed without researcher intervention, reported separately by role.
-3. **Reliable turn completion:** proportion of authorized tutoring turns that
+2. **Professor-policy pedagogical success:** proportion of applicable cases
+   passing every required pedagogy dimension after the LLM judge passes frozen
+   expert-anchor calibration.
+3. **Multi-turn safe trajectory completion:** proportion of valid frozen
+   simulated-student trajectories that pass every expected-action checkpoint
+   and reach the stop state without leakage, policy drift, unsupported claims,
+   or operational failure.
+4. **Reliable turn completion:** proportion of authorized tutoring turns that
    complete within the frozen latency limit without timeout, malformed output,
    duplicate state, or unrecovered provider failure.
 
 Guardrails are privacy/authorization violations, unsupported high-severity
 claims, assessed-work violations, citation failures, p95 latency, cost per turn,
-and deletion/retention failures. Numeric usability and latency targets remain
-provisional until the protocol issue records pilot baseline evidence and the
-professor approves them.
+and judge/simulator validity. Pedagogical scores are diagnostic unless the
+judge passes calibration. Human usability and learning are explicitly
+unmeasured.
 
 ## Revised GitHub roadmap
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-24 | Professor checkpoint issue | Scope, users, data boundary, provider gate, and critical path approved | P0 scope and governance decision |
+| 2026-07-24 | Professor checkpoint issue | No-participant scope, course boundary, evaluator design, provider gate, and critical path approved | P0 scope and evaluation decision |
 | 2026-07-25 | #11 | Method matrix, datasets, rubrics, thresholds, privacy protocol, and reporting plan frozen | Incorporated into P0 follow-up; written approval required before held-out runs |
 | 2026-07-29 | #24 and #43 | Exact generator/prompt and context-sufficiency candidates qualified or rejected | Development evidence included in P1 |
 | 2026-07-31 | #25 and #7 | Frozen end-to-end RAG result and selected or rejected grounded profile | P1 RAG method decision |
 | 2026-08-10 | #8 | Authenticated, persistent professor/student application deployed to staging | P2 staging demonstration and architecture decision |
-| 2026-08-15 | #9 | Security, privacy, reliability, rollback, and professor UAT gates passed or failed | P3 pilot go/no-go |
-| 2026-08-22 | #10 | Approved supervised pilot completed and analyzed, or synthetic-user fallback explicitly reported | P4 pilot evidence and supported-claim decision |
+| 2026-08-15 | #9 | Security, privacy, reliability, rollback, professor review, and synthetic release gates passed or failed | P3 evaluation-release go/no-go |
+| 2026-08-22 | #10 | Simulated-student, calibrated LLM-judge, and deployed synthetic-account evaluation completed | P4 evaluation evidence and supported-claim decision |
 | 2026-08-26 | #12 | Blinded comparison, failure analysis, limited refinement, and evidence freeze | Written evidence-freeze confirmation |
 | 2026-09-03 | #13 | Full report draft, figures, and claim-to-evidence matrix | P5 report review |
 | 2026-09-09 | Professor checkpoint issue | Timed demo and failure-recovery rehearsal completed | P6 final rehearsal |
@@ -194,19 +199,23 @@ Professor decisions are copied into `research/00_admin/decision-log.md` and the
 corresponding GitHub issue. A meeting or polished demonstration without a
 recorded decision is not a passed gate.
 
+Evaluator data classes, trust boundaries, role separation, threats, and stop
+conditions are frozen in the
+[evaluation data-flow and threat model](../../docs/evaluation-data-flow-and-threat-model.md).
+
 ## Stop and fallback rules
 
 - No product implementation starts until #11 freezes the evaluation and data
   governance protocol.
-- No real professor or student data enters staging until permission, retention,
-  and provider processing are approved.
-- No student pilot begins until #9 passes authorization, privacy, recovery, and
-  professor UAT hard gates.
+- No private professor or course data enters an external provider until
+  permission and provider processing are approved.
+- No sealed simulated-student or synthetic-account evaluation begins until #9
+  passes authorization, privacy, recovery, and professor review hard gates.
 - A failed RAG candidate produces a documented no-selection result; it does not
   delay authentication, persistence, and staging work if a safe rollback control
   can be used.
-- If real-student approval is unavailable by 2026-08-15, run the deployed pilot
-  with synthetic accounts and explicitly narrow the usability claim.
+- Human-participant recruitment, human usability, and learning-effectiveness
+  claims are out of scope rather than contingency items.
 - No new architecture, model, metric, or feature begins after the 2026-08-26
   evidence freeze.
 - Reserve 2026-08-27 through 2026-09-13 for report writing, figures,

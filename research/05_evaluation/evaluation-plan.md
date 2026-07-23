@@ -19,8 +19,10 @@ this final tutor evaluation; they do not replace it.
 - What loss is introduced when retrieved context replaces oracle evidence?
 - When all approved documents fit in context, is RAG better than the full-
   document control under quality, latency, token, and cost constraints?
-- Can invited professor and student roles complete the deployed pilot tasks
-  safely, reliably, and without cross-role or cross-course exposure?
+- Does the system preserve expected safe tutoring behavior across frozen
+  simulated-student trajectories?
+- Can synthetic professor and student accounts complete deployed acceptance
+  journeys reliably and without cross-role or cross-course exposure?
 
 ## Dataset portfolio
 
@@ -34,8 +36,10 @@ this final tutor evaluation; they do not replace it.
    IT5002 topic strata. Its candidate authoritative corpus is all 13 official
    lectures in
    [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json).
-5. Supervised pilot records provide usability and operational evidence only;
-   they do not select the RAG method or establish learning improvement.
+5. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-
+   student trajectories for multi-turn stress testing.
+6. Scripted synthetic-account records provide deployment and operational
+   acceptance evidence only; they do not establish human usability or learning.
 
 Component held-out records are not reused for tuning or for the final system
 claim. The 104 final cases give 13 cases per scenario type and an aggregate
@@ -70,7 +74,8 @@ Hold question, generator, decoding, token budget, and output schema constant.
 - unconditional safe grounded task success;
 - complete-evidence success@k; and
 - professor-policy pedagogical success plus blinded policy-condition
-  preference.
+  preference; and
+- multi-turn safe trajectory completion.
 
 Permission, privacy, authorization, assessed-work, citation identity, source
 version, unsupported high-severity claims, provider failure, and approved cost
@@ -79,11 +84,12 @@ for a gate failure.
 
 After hard gates, the final decision floors are 80% unconditional safe grounded
 task success, 80% complete-evidence success@3, 85% complete-evidence success@5,
-80% professor-policy pedagogical success on applicable cases, at least a
-10-point C3-over-C0 gain, no more than a 10-point C3-below-C2 retrieval loss,
-at least 95% reliable turn completion, and p95 latency no greater than 10
-seconds. These are bounded-pilot decision margins, not universal benchmark
-claims; paired intervals and raw denominators remain mandatory.
+80% calibrated professor-policy pedagogical success on applicable cases, 80%
+multi-turn safe trajectory completion, at least a 10-point C3-over-C0 gain, no
+more than a 10-point C3-below-C2 retrieval loss, at least 95% reliable turn
+completion, and p95 latency no greater than 10 seconds. These are bounded
+project decision margins, not universal benchmark claims; paired intervals and
+raw denominators remain mandatory.
 
 ## Component evaluation contract
 
@@ -113,6 +119,9 @@ and limitations without hiding component hard-gate failures inside an aggregate
 score.
 
 Use paired inputs and report raw counts, 95% intervals, paired differences,
-predeclared confirmatory tests where useful, reviewer agreement, slice results,
-operational measurements, and representative failures. An automated evaluator
-is diagnostic until validated against the in-domain blinded human labels.
+predeclared confirmatory tests where useful, judge calibration, slice results,
+operational measurements, invalid simulations, and representative failures.
+An automated evaluator is diagnostic until validated against the in-domain
+blinded expert anchor. The detailed instrument and claim boundaries are frozen
+in the
+[`simulated-student and LLM-judge protocol`](../04_experiments/2026-07-23-simulated-student-llm-judge-protocol.md).

@@ -68,9 +68,11 @@ was selected and #25 remains blocked from making an end-to-end grounding claim.
 - #25 validates the first complete end-to-end experimental RAG profile.
 - #8 evaluates conversation state plus authentication, authorization,
   persistence, storage, student/professor journeys, and staging deployment.
-- #9 evaluates security, privacy, reliability, rollback, and professor UAT.
-- #10 evaluates the supervised student pilot or explicit synthetic-user
-  fallback. Proactive triggers and full analytics remain deferred.
+- #9 evaluates security, privacy, reliability, rollback, and professor
+  evaluation-release review.
+- #10 evaluates calibrated LLM judging, frozen simulated-student trajectories,
+  and deployed synthetic accounts. Proactive triggers and full analytics remain
+  deferred.
 - #12 runs the final blinded comparison and evidence freeze.
 
 Each issue may refine the inventory, but it must not silently select an
@@ -90,5 +92,7 @@ or a linked release checklist before #8 implementation begins.
 | Private storage | Local fixtures | Access-controlled object storage | Upload/download isolation, deletion, provenance |
 | Deployment | Local development | One managed FastAPI/Vite architecture | TLS, secrets, health, cost, deploy/rollback, recovery |
 | Operations | Test-time failures only | Redacted logs, rate limits, backups, monitoring, runbooks | Error rate, p50/p95, restore time, incident handling |
-| Professor UAT | Deterministic walkthrough | Deployed professor workflow | Task completion, evidence comprehension, release control |
-| Student pilot | Synthetic conversations | Invited supervised use | Safe grounded success, task completion, reliable turns, privacy |
+| Professor review | Deterministic walkthrough | Deployed professor workflow | Evidence comprehension, release control, anchor approval |
+| LLM judge | Authored rubric labels | Fixed calibrated judge plus distinct-family sensitivity judge | Expert agreement, order/repeat consistency, false passes |
+| Simulated student | Authored scripted turns | Frozen state-card trajectories | Safe completion, checkpoint actions, recovery, simulator validity |
+| Synthetic accounts | Local API/UI checks | Scripted deployed journeys | Role isolation, persistence, reliable turns, privacy, recovery |

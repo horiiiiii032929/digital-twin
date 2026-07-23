@@ -9,18 +9,21 @@ style.
 
 ## Product Direction
 
-Build and evaluate a deployable Digital Twin tutoring pilot for one professor,
-one course, and a small invited student cohort. The system should use approved
-course material, preserve a configurable teaching policy, give students
-grounded tutoring with inspectable citations, and give the professor release
-and audit control.
+Build and evaluate a deployable Digital Twin tutoring system for one professor
+and one course. The system should use approved course material, preserve a
+configurable teaching policy, give student-role accounts grounded tutoring with
+inspectable citations, and give the professor release and audit control.
+Student recruitment is out of scope; evaluation uses professor-reviewed
+anchors, calibrated LLM judges, frozen simulated students, and scripted
+synthetic accounts.
 
 ## Focused research question
 
 For one course and a fixed generator, how do approved course evidence and a
 professor-configured tutoring policy affect safe grounded task success,
-citation completeness, boundary compliance, professor/student task completion,
-reliable turn completion, latency, and cost relative to a generic assistant?
+citation completeness, boundary compliance, calibrated pedagogical success,
+multi-turn safe trajectory completion, reliable turn completion, latency, and
+cost relative to a generic assistant?
 
 Every replaceable method and architecture boundary must be evaluated against a
 control. This includes parsing/chunking, retrieval, returned-context
@@ -34,8 +37,9 @@ authorization, persistence, storage, deployment, and usability.
   verifier, and end-to-end RAG profile.
 - Deployable application: authenticated professor/student roles, persistence,
   private storage, staging, and visible failures.
-- Pilot qualification: security, privacy, reliability, professor UAT, and a
-  supervised student pilot or explicit synthetic-user fallback.
+- Evaluation qualification: security, privacy, reliability, professor review,
+  LLM-judge calibration, simulated-student stress tests, and synthetic-account
+  deployment acceptance.
 - Final evaluation and reporting: blinded comparisons, evidence freeze,
   deployed demonstration, and reproducibility package.
 

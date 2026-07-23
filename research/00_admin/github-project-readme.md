@@ -1,9 +1,9 @@
 # Digital Twin Delivery
 
 This Project tracks an evaluation-first path to a deployable, controlled
-professor/student tutoring pilot. Code is not complete until its method,
-privacy, security, usability, reliability, cost, and rollback evidence is
-recorded.
+professor-configurable tutoring system. Code is not complete until its method,
+privacy, security, grounding, pedagogy, reliability, cost, evaluator validity,
+and rollback evidence is recorded.
 
 ## Current position
 
@@ -19,8 +19,8 @@ recorded.
 
 ## Final-project scope
 
-Deliver and evaluate one authenticated web pilot for one professor, one course,
-and a provisional cohort of 5-15 invited adult students. The pilot requires:
+Deliver and evaluate one authenticated web deployment for one professor and one
+course, without student recruitment. The project requires:
 
 - professor and student roles plus course membership;
 - approved private course sources and professor release control;
@@ -28,13 +28,14 @@ and a provisional cohort of 5-15 invited adult students. The pilot requires:
 - explicit returned-context sufficiency and safe refusal/abstention;
 - staging, TLS, secret isolation, redacted logs, health checks, rate limits,
   backup/restore, rollback, and incident handling;
-- a supervised usability/reliability pilot; and
+- calibrated LLM judging, frozen simulated-student trajectories, and scripted
+  synthetic-account acceptance; and
 - reproducible offline comparisons and a deployed demonstration.
 
-Real-user scope is conditional on professor/institutional approval of course
-permissions, consent or other institutional basis, retention/deletion, and the
-model-provider data boundary. Without that approval, the deployed pilot uses
-invited synthetic accounts and the final claim is narrowed.
+Course-specific evaluation is conditional on professor approval of course
+permissions and the model-provider data boundary. Private course material and
+outputs remain local unless external processing is explicitly approved. Human
+usability and learning-effectiveness claims are excluded.
 
 ## Deferred from the critical path
 
@@ -55,10 +56,10 @@ invited synthetic accounts and the final claim is narrowed.
 3. #25 records the frozen end-to-end RAG decision; #7 closes from that evidence.
 4. #8 adds evaluated authentication, authorization, persistence, storage,
    professor/student journeys, and staging deployment.
-5. #9 hardens security/reliability and obtains professor pilot Go / Refine /
-   No-Go.
-6. #10 runs the approved supervised pilot or the explicit synthetic-user
-   fallback.
+5. #9 hardens security/reliability and obtains professor evaluation-release Go
+   / Refine / No-Go.
+6. #10 runs calibrated LLM-judge, simulated-student, and deployed
+   synthetic-account evaluation.
 7. #12 runs the blinded final comparison and freezes evidence.
 8. #13 delivers the final report, deployed demo, reproducibility package, and
    presentation.
@@ -73,8 +74,8 @@ invited synthetic accounts and the final claim is narrowed.
 | 2026-07-29 | #24 and #43 qualified or rejected | Included in P1 |
 | 2026-07-31 | #25 and #7 end-to-end RAG decision | P1 RAG method decision |
 | 2026-08-10 | #8 authenticated persistent staging deployment | P2 staging and architecture review |
-| 2026-08-15 | #9 hardening and professor UAT | P3 pilot Go / Refine / No-Go |
-| 2026-08-22 | #10 supervised pilot or synthetic-user fallback | P4 evidence and claim decision |
+| 2026-08-15 | #9 hardening and professor review | P3 evaluation Go / Refine / No-Go |
+| 2026-08-22 | #10 simulated-student, LLM-judge, and synthetic-account evaluation | P4 evidence and claim decision |
 | 2026-08-26 | #12 final evaluation and evidence freeze | Written freeze confirmation |
 | 2026-09-03 | Full report draft and figures | P5 report review |
 | 2026-09-09 | Timed demo and recovery rehearsal | P6 final rehearsal |
@@ -98,7 +99,8 @@ Every replaceable method and architecture boundary must:
 - update the selected profile only when every required gate passes.
 
 The primary complete-system outcomes are unconditional safe grounded task
-success, professor/student task completion, and reliable turn completion.
+success, calibrated professor-policy pedagogical success, multi-turn safe
+trajectory completion, and reliable turn completion.
 
 ## Operating rules
 
@@ -106,13 +108,15 @@ success, professor/student task completion, and reliable turn completion.
   is active.
 - Evidence fields link only to artifacts that exist.
 - Do not send real professor, course, or student data to an unapproved provider.
-- Do not infer real-student permission from general encouragement.
+- Do not infer private-course external-provider permission or evaluator
+  validity from general encouragement.
 - Do not tune on sealed data or rerun until a favorable result appears.
 - Stop new architecture, model, metric, and feature work after 2026-08-26.
 - Protect 2026-08-27 through 2026-09-13 for report writing, figures, slides,
   demo stabilization, rehearsal, and contingency.
-- A working demo without security, usability, operations, and aggregate evidence
-  is not a deployable-pilot result.
+- A working demo without security, operations, simulated interaction evidence,
+  evaluator calibration, and aggregate evidence is not a deployable-system
+  result.
 
 The durable rescope is maintained at
 `research/00_admin/2026-07-22-deployable-pilot-rescope.md`.

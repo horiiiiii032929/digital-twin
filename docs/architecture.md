@@ -128,35 +128,40 @@ The current any-hit control must not feed an end-to-end grounding claim. Canvas
 can be added later as an optional source adapter if a safe guest course contains
 useful material.
 
-### Deployable-pilot planning boundary
+### Deployable-system planning boundary
 
-The 2026-07-22 rescope makes a real staging deployment and supervised pilot part
-of the final outcome. The current FastAPI/Vite and in-memory onboarding stack is
-not deployable as-is. Before implementation resumes, #11 must freeze the
-alternatives, metrics, privacy rules, and hard gates for:
+The 2026-07-23 evaluation rescope makes a real staging deployment, calibrated
+LLM judging, simulated-student stress testing, and scripted synthetic-account
+acceptance part of the final outcome. The current FastAPI/Vite and in-memory
+onboarding stack is not deployable as-is. Before implementation resumes, #11
+must freeze the alternatives, metrics, privacy rules, and hard gates for:
 
 - invited-user authentication and session revocation;
 - professor/student roles and course membership;
 - transactional persistence and private source storage;
 - persistent conversation state and duplicate/stale response handling;
-- provider data processing, consent, retention, deletion, and log redaction;
+- provider data processing, course permission, retention, deletion, and log
+  redaction;
 - staging/production separation, TLS, secrets, health checks, rate limits,
   backup/restore, rollback, monitoring, and incident response; and
-- professor UAT plus supervised student usability and reliability evidence.
+- professor anchor/release review, evaluator calibration, simulator validity,
+  and synthetic-account reliability evidence.
 
 No hosting, identity, database, or storage vendor is selected by this rescope.
 Each is an architecture decision requiring a control, bounded candidates,
 operational evidence, failure cases, and rollback. See the
 [deployable pilot rescope](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).
+The evaluator and private-course trust boundaries are detailed in the
+[evaluation data-flow and threat model](evaluation-data-flow-and-threat-model.md).
 
 ## Open Design Decisions
 
 - Production citation rendering and locator navigation
 - Live prompt variant selection and exact DeepSeek model/configuration freeze
 - Agent prompt boundaries and provider-failure behavior
-- Student privacy and consent model
+- Future human-use privacy and consent model
 - End-to-end answer-quality rubric and evidence-sufficiency threshold
 - Identity provider, role/course authorization model, and session lifecycle
 - Database, private object storage, migrations, retention, and deletion
 - Hosting topology, environments, monitoring, backup/restore, and rollback
-- Real-student provider approval and synthetic-user fallback
+- Private-course provider approval and local evaluator fallback

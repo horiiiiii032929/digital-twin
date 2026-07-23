@@ -2,8 +2,8 @@
 
 Date: 2026-07-23
 
-Status: selected local corpus boundary; professor tutoring permission, student-
-pilot permission, and external-provider permission remain pending
+Status: selected local corpus boundary; professor tutoring permission and
+external-provider permission remain pending
 
 ## Decision
 
@@ -13,7 +13,7 @@ subset as the final course scope. Retain the subset only as historical local
 preparation evidence.
 
 This is a corpus-selection and local-inventory decision. It does not authorize
-DeepSeek calls, student access, or a held-out evaluation.
+DeepSeek calls, a human deployment, or a held-out evaluation.
 
 ## Why the full lecture set
 
@@ -87,8 +87,7 @@ uniform, but the allocation is frozen before case authoring.
 1. Professor confirms that all 13 lectures may be processed and used for tutor
    grounding.
 2. Professor approves the source hierarchy and assessed-work boundary.
-3. Data governance approves student-pilot handling and retention.
-4. External-provider review separately decides whether any lecture text may
+3. External-provider review separately decides whether any lecture text may
    leave the local environment.
-5. The 12-case anchor is instantiated and approved before development or held-
+4. The 12-case anchor is instantiated and approved before development or held-
    out authoring.

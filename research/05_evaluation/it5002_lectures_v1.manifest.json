@@ -24,7 +24,7 @@
   "permissions": {
     "local_inventory": "user_authorized_2026-07-23",
     "professor_tutoring_use": "pending",
-    "student_pilot_use": "pending",
+    "human_participant_use": "out_of_scope",
     "external_provider_use": "prohibited_until_separately_approved"
   },
   "profile": {

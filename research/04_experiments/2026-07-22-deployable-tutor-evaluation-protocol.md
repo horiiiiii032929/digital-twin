@@ -2,8 +2,8 @@
 
 Date: 2026-07-22
 
-Status: internally selected protocol candidate v1.1; professor and
-data-governance approval remain required under issue #11 before
+Status: internally selected protocol candidate v1.2; professor and
+course-data/provider approval remain required under issue #11 before
 implementation, provider calls, or held-out inspection
 
 ## Decision
@@ -25,8 +25,9 @@ fixed and separates four controlled contribution questions:
 These paired conditions identify differences under the frozen evaluation setup;
 they do not by themselves establish general causal effects. This is a pilot
 evaluation. It can support claims about the named course, corpus, model,
-prompt, participants, and deployment revision. It cannot support universal
-SOTA, institution-wide readiness, or improved learning outcomes.
+prompt, simulated interaction protocol, and deployment revision. It cannot
+support universal SOTA, institution-wide readiness, human usability, or
+improved learning outcomes.
 
 ## Why the existing datasets are insufficient for the final claim
 
@@ -177,17 +178,18 @@ to the model, human context-sufficiency label (`complete`, `partial`, or
 `none`), answer, atomic answer claims, citations, policy action, tokens,
 latency, cost, errors, and failure category.
 
-### Layer C: deployed-pilot evidence
+### Layer C: simulated dialogue and deployed synthetic-account evidence
 
-Use the supervised pilot only for usability, reliability, operational, and
-ecological-validity evidence. Keep method selection on the frozen offline data.
-Record participant role, task, completion, time, assistance, failed turns,
-clarifications, citation use, feedback, incidents, withdrawal, and data
-retention status without committing identifying content.
+Do not recruit student participants for the final-project evaluation. Use the
+frozen
+[`simulated-student and LLM-judge protocol`](2026-07-23-simulated-student-llm-judge-protocol.md)
+for multi-turn stress testing and automated pedagogical judgment. Use scripted
+synthetic accounts against staging for authentication, authorization,
+persistence, failure recovery, latency, and rollback evidence.
 
-With 5-15 invited users, report raw counts and participant-level distributions.
-Do not present averages from this pilot as evidence of learning improvement or
-as population-level usability estimates.
+Simulated students generate controlled follow-up pressure; they do not judge
+success or estimate real student behavior. Deployed synthetic-account
+completion is an operational acceptance result, not a human-usability result.
 
 ## Frozen comparison conditions
 
@@ -242,7 +244,12 @@ quality into one weighted score.
    contains every essential gold-evidence unit required by the case.
 3. **Professor-policy pedagogical success**: applicable cases meeting every
    predeclared required pedagogy dimension without revealing prohibited work,
-   supplemented by blinded C1-versus-C2 win/tie/loss judgments.
+   supplemented by blinded C1-versus-C2 win/tie/loss judgments. Automated
+   scores are primary only after the frozen LLM judge passes calibration.
+4. **Multi-turn safe trajectory completion**: valid frozen simulated-student
+   trajectories that pass every expected-action checkpoint and reach the stop
+   state without leakage, unsupported claims, policy drift, or operational
+   failure.
 
 Freeze denominators with the dataset: safe grounded task success uses all
 cases; complete-evidence success uses corpus-answerable cases with at least one
@@ -261,7 +268,7 @@ These floors are evaluated only after every applicable hard gate passes:
 | --- | --- |
 | Generator/prompt qualification (#24) | At least 80% unconditional safe grounded task success, at least 90% required-claim recall on answer cases, and at least 95% citation correctness and completeness |
 | Returned-context verifier (#43) | At least 0.80 three-class macro F1, zero false answers on `none` cases, at least 90% correct answer eligibility on `complete` cases, and at least 90% correct safe action on `partial` plus `none` cases |
-| Final course system (#25) | At least 80% unconditional safe grounded task success, at least 80% complete-evidence success@3, at least 85% complete-evidence success@5, at least 80% professor-policy pedagogical success on applicable cases, and H1-H3 within their decision margins |
+| Final course system (#25) | At least 80% unconditional safe grounded task success, at least 80% complete-evidence success@3, at least 85% complete-evidence success@5, at least 80% calibrated professor-policy pedagogical success on applicable cases, at least 80% multi-turn safe trajectory completion, and H1-H3 within their decision margins |
 
 The verifier's zero observed false-answer gate is intentionally strict for the
 tested set but does not imply a zero deployment error rate. Reliable turn
@@ -281,8 +288,9 @@ USD 10 provider-call cap. Report per-turn cost even when the cap passes.
 - expected-action accuracy and separate pedagogy-dimension distributions;
 - p50/p95 latency, timeout/error rate, input/output/context tokens, per-turn and
   cumulative cost, recovery time, memory/model footprint, and index build time;
-- usability task completion, completion time, errors, researcher intervention,
-  failed-turn rate, citation comprehension, and role-specific feedback; and
+- simulated-trajectory checkpoint completion, clarification recovery, policy
+  drift, simulator validity, synthetic-account acceptance, and failed-turn
+  rate; and
 - failures classified as data, parsing, chunking, query, ranking, sufficiency,
   generation, citation, policy, integration, evaluator, privacy, or operations.
 
@@ -302,24 +310,28 @@ A zero count in a small pilot is not proof of population safety. Always report
 the denominator and interval or upper bound, and limit the claim to the tested
 cases.
 
-## Human judgment and automated evaluation
+## Expert anchors and automated evaluation
 
 - Randomize condition order and hide condition identity from reviewers.
 - The professor reviews the 12-case anchor and adjudicates ambiguous policy or
   course-content judgments.
-- Two independent reviewers label the complete anchor and a stratified 25% of
-  final C0-C3 responses, covering every condition and scenario type. Double-
-  review every observed hard-gate failure. Report agreement by dimension using
-  weighted Cohen's kappa or Krippendorff's alpha as appropriate.
+- The researcher labels the complete anchor. The professor reviews at least
+  8-12 deliberately selected calibration outputs covering every policy boundary
+  and rubric dimension if available. This is expert instrument calibration, not
+  a participant study.
 - Preserve disagreements and adjudication; do not silently replace labels.
 - Use deterministic rules for IDs, permissions, exact actions, tokens, latency,
   and cost.
-- RAGAS, RAGChecker, ARES, or an LLM judge may provide development diagnostics.
-  No automated judge selects a model or prompt until its agreement and failure
-  modes are measured against the in-domain human labels. Automate a dimension
-  only when agreement is at least 0.67 and it produces no false pass on a
-  human-labeled hard-gate failure; otherwise retain human judgment for that
-  dimension.
+- Use blinded system IDs, swap pairwise answer order, repeat a stratified 20%,
+  and run a distinct-family sensitivity judge on the anchor plus 25% of sealed
+  outputs.
+- No automated judge selects a model or prompt until its agreement and failure
+  modes are measured against the in-domain expert labels. Automate a dimension
+  only when agreement is at least 0.67, exact agreement is at least 80%,
+  position and repeat consistency are each at least 90%, and it produces no
+  false pass on an expert-labeled hard-gate failure.
+- If professor output review is unavailable or a calibration threshold fails,
+  automated judgments remain diagnostic and the pedagogical claim is narrowed.
 - If reviewer agreement is inadequate, refine the rubric and repeat rubric
   calibration without opening the sealed test outputs.
 
@@ -352,10 +364,11 @@ Every named run produces:
 7. a learning log and decision record; and
 8. figures generated from the machine-readable record by a committed script.
 
-The final report should use four main figure families: paired outcome
-comparisons with intervals, retrieval-to-generation failure flow, failure-type
-distribution, and latency/cost versus grounded success. The deployed-pilot
-section adds role-specific task completion and failed-turn plots.
+The final report should use paired outcome comparisons with intervals,
+retrieval-to-generation failure flow, simulated-trajectory checkpoint and
+recovery flow, failure-type distribution, judge calibration, and latency/cost
+versus grounded success. Deployed synthetic-account results are reported as
+acceptance and reliability tests.
 
 ## Stop rules
 
@@ -365,6 +378,8 @@ section adds role-specific task completion and failed-turn plots.
 - Do not use the public benchmark result as a substitute for course evidence.
 - Do not use the synthetic regression distribution as an estimate of real
   student-query frequency.
+- Do not describe simulated-student or synthetic-account outcomes as human
+  usability, satisfaction, learning, engagement, or adoption.
 - Drop optional models, rerankers, or analytics before reducing evidence,
   privacy, or reproducibility requirements.
 - If evidence is inconclusive, retain the simplest safe control and report
