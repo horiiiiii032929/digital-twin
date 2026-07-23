@@ -10,7 +10,8 @@ decisions require professor approval
 | Anchor | Local state | Evidence state | Professor state |
 | --- | --- | --- | --- |
 | `ctv1-anchor-001` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 5, page 6; source identity, extracted-passage hash, and claim-evidence graph resolve | Pending review and tutoring permission |
-| `ctv1-anchor-002` to `ctv1-anchor-012` | Blueprint only | Not yet instantiated | Pending |
+| `ctv1-anchor-002` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 2, page 18; source identity, extracted-passage hash, topic stratum, and claim-evidence graph resolve | Pending review and tutoring permission |
+| `ctv1-anchor-003` to `ctv1-anchor-012` | Blueprint only | Not yet instantiated | Pending |
 
 The private draft is stored under ignored
 `data/processed/course_tutor_v1/anchor/`; course wording and gold claims are not
