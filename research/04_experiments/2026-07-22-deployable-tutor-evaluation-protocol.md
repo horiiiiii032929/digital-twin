@@ -129,6 +129,13 @@ estimate. The 48 development cases may be used for course-specific integration
 decisions. Open the 104-case final set once, only after the protocol, component
 profile, prompts, thresholds, and analysis code are frozen.
 
+The versioned case contract is
+[`course_tutor_v1.schema.json`](../05_evaluation/course_tutor_v1.schema.json),
+with semantic rules in the
+[`annotation guide`](../05_evaluation/course-tutor-v1-annotation-guide.md) and
+the planned 12-case coverage in the
+[`professor-anchor blueprint`](../05_evaluation/course-tutor-v1-professor-anchor.md).
+
 No held-out record from component qualification may be used to tune the final
 system. No `course-tutor-v1` final record may be inspected during component
 selection. If leakage occurs, register the run as invalid and create a new

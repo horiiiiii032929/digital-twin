@@ -23,6 +23,22 @@ the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployab
 professor-reviewed course-specific gold benchmark, and keep supervised-pilot
 evidence separate from offline component selection.
 
+The `course-tutor-v1` design is defined by:
+
+- [`course_tutor_v1.schema.json`](course_tutor_v1.schema.json), the strict gold-
+  case JSON Schema;
+- [`course_tutor_v1_synthetic_example.json`](course_tutor_v1_synthetic_example.json),
+  a public one-case example that contains no real course or student data;
+- [`course-tutor-v1-annotation-guide.md`](course-tutor-v1-annotation-guide.md),
+  the semantic rules, split discipline, privacy boundary, and annotation
+  workflow; and
+- [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
+  the 12-case professor-review blueprint.
+
+Private course text, derived passages, real student content, and consent records
+must not be committed. The anchor is an instrument-calibration set, not a system
+performance result.
+
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer
 quality and cannot select a model or prompt by itself. Its clean deterministic

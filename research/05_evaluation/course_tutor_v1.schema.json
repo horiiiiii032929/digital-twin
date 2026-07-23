@@ -1,0 +1,872 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/course_tutor_v1.schema.json",
+  "title": "course-tutor-v1 evaluation dataset",
+  "description": "Gold-case schema for the professor anchor, development, and sealed final course-tutor evaluation splits. Retrieved contexts and model outputs are recorded separately.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "dataset_status",
+    "split",
+    "language",
+    "course_id",
+    "corpus_version",
+    "policy_version",
+    "rubric_version",
+    "permission_record_ref",
+    "data_boundary",
+    "full_context_control",
+    "created_at",
+    "sealed_at",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "dataset_id": {
+      "const": "course-tutor-v1"
+    },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^course-tutor-v1\\.[0-9]+\\.[0-9]+-(anchor|development|heldout|example)$"
+    },
+    "dataset_status": {
+      "enum": [
+        "draft",
+        "professor_review",
+        "approved",
+        "sealed",
+        "opened",
+        "example",
+        "invalid"
+      ]
+    },
+    "split": {
+      "$ref": "#/$defs/split"
+    },
+    "language": {
+      "const": "en"
+    },
+    "course_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pseudonymous course identifier; never a student or professor name."
+    },
+    "corpus_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "permission_record_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the approved permission record; the private record itself is not committed."
+    },
+    "data_boundary": {
+      "$ref": "#/$defs/data_boundary"
+    },
+    "full_context_control": {
+      "$ref": "#/$defs/full_context_control"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sealed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "split": {
+      "enum": [
+        "anchor",
+        "development",
+        "heldout"
+      ]
+    },
+    "scenario_type": {
+      "enum": [
+        "direct",
+        "paraphrase",
+        "misconception",
+        "multi_evidence",
+        "ambiguity",
+        "no_evidence",
+        "assessed_work",
+        "permission_version"
+      ]
+    },
+    "full_context_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "approved_corpus_tokens",
+        "frozen_context_limit",
+        "rationale"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "eligible",
+            "ineligible"
+          ]
+        },
+        "approved_corpus_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "frozen_context_limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "action": {
+      "enum": [
+        "answer",
+        "scaffold",
+        "clarify",
+        "redirect",
+        "abstain"
+      ]
+    },
+    "data_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_class",
+        "contains_direct_identifiers",
+        "source_text_committed_to_git",
+        "provider_use",
+        "permission_status"
+      ],
+      "properties": {
+        "content_class": {
+          "enum": [
+            "synthetic_public",
+            "approved_course_private"
+          ]
+        },
+        "contains_direct_identifiers": {
+          "const": false
+        },
+        "source_text_committed_to_git": {
+          "type": "boolean",
+          "description": "May be true only for intentionally public synthetic source text."
+        },
+        "provider_use": {
+          "enum": [
+            "local_only",
+            "synthetic_external_allowed",
+            "approved_external_allowed"
+          ]
+        },
+        "permission_status": {
+          "enum": [
+            "pending",
+            "approved",
+            "synthetic_only"
+          ]
+        },
+        "private_storage_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "content_class": {
+                "const": "approved_course_private"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_text_committed_to_git": {
+                "const": false
+              },
+              "permission_status": {
+                "const": "approved"
+              },
+              "private_storage_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "private_storage_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "split",
+        "scenario_type",
+        "difficulty",
+        "difficulty_rationale",
+        "lineage",
+        "student_input",
+        "ground_truth",
+        "rubric",
+        "stressors",
+        "annotation"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^ctv1-(anchor|dev|test)-[0-9]{3}$"
+        },
+        "split": {
+          "$ref": "#/$defs/split"
+        },
+        "scenario_type": {
+          "$ref": "#/$defs/scenario_type"
+        },
+        "difficulty": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "difficulty_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lineage": {
+          "$ref": "#/$defs/lineage"
+        },
+        "student_input": {
+          "$ref": "#/$defs/student_input"
+        },
+        "ground_truth": {
+          "$ref": "#/$defs/ground_truth"
+        },
+        "rubric": {
+          "$ref": "#/$defs/rubric"
+        },
+        "stressors": {
+          "$ref": "#/$defs/stressors"
+        },
+        "annotation": {
+          "$ref": "#/$defs/annotation"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_family_id",
+        "authoring_method",
+        "parent_case_id",
+        "transformation"
+      ],
+      "properties": {
+        "case_family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authoring_method": {
+          "enum": [
+            "professor_authored",
+            "researcher_authored",
+            "synthetic_transformation",
+            "jointly_authored"
+          ]
+        },
+        "parent_case_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transformation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "student_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "dialogue_history",
+        "student_state"
+      ],
+      "properties": {
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dialogue_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialogue_turn"
+          }
+        },
+        "student_state": {
+          "$ref": "#/$defs/student_state"
+        }
+      }
+    },
+    "dialogue_turn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "content"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "student",
+            "tutor"
+          ]
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "student_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prior_knowledge",
+        "attempt_status",
+        "intent",
+        "assessment_context",
+        "basis"
+      ],
+      "properties": {
+        "prior_knowledge": {
+          "enum": [
+            "novice",
+            "intermediate",
+            "advanced",
+            "unknown"
+          ]
+        },
+        "attempt_status": {
+          "enum": [
+            "none",
+            "partial",
+            "complete",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "intent": {
+          "enum": [
+            "learn_concept",
+            "check_understanding",
+            "debug_attempt",
+            "complete_assessed_work",
+            "course_administration",
+            "unknown"
+          ]
+        },
+        "assessment_context": {
+          "enum": [
+            "unassessed",
+            "formative",
+            "summative",
+            "unknown"
+          ]
+        },
+        "basis": {
+          "enum": [
+            "declared",
+            "dialogue_evidence",
+            "scenario_assumption"
+          ]
+        },
+        "misconception_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "ground_truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpus_answerability",
+        "expected_behavior",
+        "required_claims",
+        "optional_claims",
+        "evidence_units",
+        "policy_rule_ids",
+        "reference_rationale"
+      ],
+      "properties": {
+        "corpus_answerability": {
+          "enum": [
+            "answerable",
+            "partially_answerable",
+            "not_answerable"
+          ]
+        },
+        "expected_behavior": {
+          "$ref": "#/$defs/expected_behavior"
+        },
+        "required_claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "optional_claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "evidence_units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_unit"
+          }
+        },
+        "policy_rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reference_rationale": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Explains valid content and behavior without prescribing one exact answer wording."
+        }
+      }
+    },
+    "expected_behavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_action",
+        "acceptable_alternatives",
+        "forbidden_actions",
+        "allowed_support_level",
+        "required_tutoring_moves",
+        "citation_requirement",
+        "rationale"
+      ],
+      "properties": {
+        "primary_action": {
+          "$ref": "#/$defs/action"
+        },
+        "acceptable_alternatives": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "allowed_support_level": {
+          "enum": [
+            "full_explanation",
+            "conceptual_only",
+            "hints_only",
+            "critique_only",
+            "similar_example_only",
+            "no_answer"
+          ]
+        },
+        "required_tutoring_moves": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "direct_explanation",
+              "hint",
+              "guiding_question",
+              "misconception_correction",
+              "critique",
+              "analogous_example",
+              "check_understanding"
+            ]
+          }
+        },
+        "citation_requirement": {
+          "enum": [
+            "required",
+            "not_required",
+            "conditional"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "claim_text",
+        "severity",
+        "evidence_unit_ids",
+        "must_be_cited"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^clm-[0-9]{2}$"
+        },
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "evidence_unit_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^ev-[0-9]{2}$"
+          }
+        },
+        "must_be_cited": {
+          "type": "boolean"
+        }
+      }
+    },
+    "evidence_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_unit_id",
+        "source_artifact_id",
+        "source_version",
+        "passage_id",
+        "locator",
+        "content_sha256",
+        "role",
+        "permission_status",
+        "supports_claim_ids"
+      ],
+      "properties": {
+        "evidence_unit_id": {
+          "type": "string",
+          "pattern": "^ev-[0-9]{2}$"
+        },
+        "source_artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_version": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "passage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "role": {
+          "enum": [
+            "essential",
+            "helpful",
+            "distractor",
+            "prohibited",
+            "superseded"
+          ]
+        },
+        "permission_status": {
+          "enum": [
+            "approved",
+            "prohibited",
+            "superseded",
+            "unapproved"
+          ]
+        },
+        "supports_claim_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^clm-[0-9]{2}$"
+          }
+        },
+        "replacement_passage_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rubric_version",
+        "required_pedagogy_dimensions",
+        "hard_gate_focus",
+        "pairwise_policy_eligible"
+      ],
+      "properties": {
+        "rubric_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_pedagogy_dimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "student_state_recognition",
+              "mistake_localization",
+              "guidance_and_scaffolding",
+              "actionability",
+              "answer_revelation_control",
+              "professor_policy_alignment",
+              "clarity_and_coherence",
+              "tone_and_respect"
+            ]
+          }
+        },
+        "hard_gate_focus": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "permission_and_version",
+              "privacy_and_authorization",
+              "assessed_work_boundary",
+              "expected_action",
+              "high_severity_factual_support",
+              "citation_identity",
+              "failure_behavior"
+            ]
+          }
+        },
+        "pairwise_policy_eligible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stressors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retrieval",
+        "safety",
+        "operational"
+      ],
+      "properties": {
+        "retrieval": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "paraphrase",
+              "multi_evidence",
+              "near_domain_distractor",
+              "vocabulary_collision",
+              "conflicting_source",
+              "superseded_source",
+              "prohibited_source"
+            ]
+          }
+        },
+        "safety": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "assessed_work",
+              "privacy",
+              "authorization",
+              "cross_course",
+              "prompt_injection"
+            ]
+          }
+        },
+        "operational": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "empty_context",
+              "partial_context",
+              "timeout",
+              "malformed_provider_output",
+              "provider_outage"
+            ]
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "annotator_ids",
+        "reviewer_ids",
+        "professor_decision",
+        "revision",
+        "created_at",
+        "updated_at",
+        "change_summary"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "single_review",
+            "double_review",
+            "adjudicated",
+            "professor_approved"
+          ]
+        },
+        "annotator_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reviewer_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "professor_decision": {
+          "enum": [
+            "pending",
+            "approved",
+            "revise"
+          ]
+        },
+        "disagreement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "change_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

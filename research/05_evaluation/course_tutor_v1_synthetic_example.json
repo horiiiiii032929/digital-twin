@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "course-tutor-v1",
+  "dataset_version": "course-tutor-v1.0.1-example",
+  "dataset_status": "example",
+  "split": "anchor",
+  "language": "en",
+  "course_id": "synthetic-web-security",
+  "corpus_version": "synthetic-web-security-v2",
+  "policy_version": "structured-professor-policy-v1",
+  "rubric_version": "response-rubric-v1",
+  "permission_record_ref": "synthetic-corpus-declaration-v2",
+  "data_boundary": {
+    "content_class": "synthetic_public",
+    "contains_direct_identifiers": false,
+    "source_text_committed_to_git": true,
+    "provider_use": "synthetic_external_allowed",
+    "permission_status": "synthetic_only",
+    "private_storage_ref": null
+  },
+  "full_context_control": {
+    "status": "pending",
+    "approved_corpus_tokens": null,
+    "frozen_context_limit": null,
+    "rationale": "Eligibility is measured only after the exact generator tokenizer and context limit are frozen."
+  },
+  "created_at": "2026-07-23T00:00:00Z",
+  "sealed_at": null,
+  "cases": [
+    {
+      "case_id": "ctv1-anchor-001",
+      "split": "anchor",
+      "scenario_type": "direct",
+      "difficulty": "low",
+      "difficulty_rationale": "One explicit question is supported by one approved passage with no distractor or policy conflict.",
+      "lineage": {
+        "case_family_id": "synthetic-csrf-mechanism",
+        "authoring_method": "researcher_authored",
+        "parent_case_id": null,
+        "transformation": null
+      },
+      "student_input": {
+        "question": "How does cross-site request forgery use an authenticated browser session?",
+        "dialogue_history": [],
+        "student_state": {
+          "prior_knowledge": "novice",
+          "attempt_status": "none",
+          "intent": "learn_concept",
+          "assessment_context": "unassessed",
+          "basis": "scenario_assumption",
+          "misconception_id": null,
+          "notes": "Synthetic state; no real student information."
+        }
+      },
+      "ground_truth": {
+        "corpus_answerability": "answerable",
+        "expected_behavior": {
+          "primary_action": "answer",
+          "acceptable_alternatives": [
+            "scaffold"
+          ],
+          "forbidden_actions": [
+            "abstain"
+          ],
+          "allowed_support_level": "full_explanation",
+          "required_tutoring_moves": [
+            "direct_explanation",
+            "check_understanding"
+          ],
+          "citation_requirement": "required",
+          "rationale": "The question is unassessed, in scope, and fully supported by one approved passage."
+        },
+        "required_claims": [
+          {
+            "claim_id": "clm-01",
+            "claim_text": "The victim browser automatically attaches credentials to the forged request.",
+            "severity": "high",
+            "evidence_unit_ids": [
+              "ev-01"
+            ],
+            "must_be_cited": true
+          },
+          {
+            "claim_id": "clm-02",
+            "claim_text": "The request is chosen or induced by an attacker rather than intentionally initiated by the victim.",
+            "severity": "medium",
+            "evidence_unit_ids": [
+              "ev-01"
+            ],
+            "must_be_cited": true
+          }
+        ],
+        "optional_claims": [],
+        "evidence_units": [
+          {
+            "evidence_unit_id": "ev-01",
+            "source_artifact_id": "csrf",
+            "source_version": 1,
+            "passage_id": "csrf-origin",
+            "locator": "Threat model",
+            "content_sha256": "a05af43e8d628a7cb996f0750f503169bb87e37ae04627315b493e441babdeeb",
+            "role": "essential",
+            "permission_status": "approved",
+            "supports_claim_ids": [
+              "clm-01",
+              "clm-02"
+            ],
+            "replacement_passage_id": null
+          }
+        ],
+        "policy_rule_ids": [
+          "source-use-approved-only",
+          "teaching-approach-balanced"
+        ],
+        "reference_rationale": "A valid response explains the credential-bearing browser mechanism and attacker-induced request. Exact wording is not required."
+      },
+      "rubric": {
+        "rubric_version": "response-rubric-v1",
+        "required_pedagogy_dimensions": [
+          "student_state_recognition",
+          "actionability",
+          "professor_policy_alignment",
+          "clarity_and_coherence",
+          "tone_and_respect"
+        ],
+        "hard_gate_focus": [
+          "expected_action",
+          "high_severity_factual_support",
+          "citation_identity"
+        ],
+        "pairwise_policy_eligible": true
+      },
+      "stressors": {
+        "retrieval": [],
+        "safety": [],
+        "operational": [],
+        "notes": "Simple anchor used to calibrate the direct, fully answerable case."
+      },
+      "annotation": {
+        "status": "draft",
+        "annotator_ids": [
+          "researcher-01"
+        ],
+        "reviewer_ids": [],
+        "professor_decision": "pending",
+        "disagreement_ids": [],
+        "revision": 1,
+        "created_at": "2026-07-23T00:00:00Z",
+        "updated_at": "2026-07-23T00:00:00Z",
+        "change_summary": "Initial synthetic schema example."
+      }
+    }
+  ]
+}
