@@ -36,12 +36,15 @@ committed TXT or Markdown files and one generated selectable-text PDF with an
 embedded figure. Parsing and chunking produce nine chunks with stable source
 identity, version, locator, and permission state.
 
-The locally provided IT5002 lecture PDFs 5-9 and corresponding notes are copied
-under the Git-ignored `data/raw/course_materials/it5002_selected/` directory.
-They are private validation inputs, not part of the committed evaluation set.
-They must not enter parsing or retrieval until an explicit professor approval
-record grants both processing and tutoring permission. Assignments, exams,
-quizzes, solutions, and answer files remain excluded.
+All 13 official IT5002 lecture PDFs are copied under the Git-ignored
+`data/raw/course_materials/it5002_full/lecture/` directory. Their sanitized
+inventory is committed in
+[`it5002_lectures_v1.manifest.json`](../research/05_evaluation/it5002_lectures_v1.manifest.json).
+The earlier lectures 5-9 subset remains historical local preparation evidence.
+The full snapshot must not enter tutor retrieval until an explicit professor
+approval record grants tutoring permission. Personal notes are non-
+authoritative question-design material only. Tutorials, assignments, exams,
+quizzes, solutions, answer files, secrets, and student records remain excluded.
 
 ## Retrieval flow
 
@@ -169,8 +172,9 @@ remove hard cases and inflate it.
   different queries.
 - Figure captions and surrounding selectable text can be retrieved, but image
   pixels are not semantically ranked.
-- The local IT5002 bundle still needs an explicit source inventory and professor
-  permission before it can be used for private evaluation.
+- The local IT5002 bundle has a sanitized source inventory and is selected for
+  local research evaluation. This does not authorize external processing or a
+  real student-facing release.
 - Cross-encoder verification, calibrated answerability classification,
   reranking, and layout-aware retrieval remain candidates until a newly held-out
   experiment passes both abstention and ranking gates.

@@ -27,8 +27,10 @@
 - Capture anonymized interaction summaries where allowed.
 - Surface recurring knowledge gaps to instructors.
 - Keep instructor review and override workflows explicit.
-- Student tutoring and analytics are planned after the professor approval loop
-  is stable.
+- Deliver authenticated professor/student workflows, durable state, private
+  storage, and staging deployment for the controlled pilot.
+- Proactive interaction and full learning-gap analytics are deferred until the
+  grounded deployed pilot is evaluated.
 
 ## Agent Contracts
 
@@ -70,7 +72,8 @@ CourseDocument → DocumentChunker → DocumentChunk → Retriever → Retrieval
                                                                ↓
 TutorPolicy ───────────────────────────────→ TutorGenerator → TutorAnswer
                                                              ├─ citations
-                                                             └─ warnings
+                                                             ├─ warnings
+                                                             └─ usage trace
 ```
 
 `SourceArtifact` and `ApprovalRecord` now gate local parsing. `CourseDocument`
@@ -78,10 +81,14 @@ carries the approved source version, permission snapshot, content hash, ordered
 segments, and an opaque source locator. Chunks preserve this lineage in explicit
 fields and metadata. Deterministic term-overlap and BM25 retrieval filter
 non-tutoring and superseded chunks before returning scored source evidence. The
-asynchronous generator returns answer content, explicit citations, and warnings. See
-[local-ingestion.md](local-ingestion.md) for the parser, figure, and deterministic
-chunking design and [local-retrieval.md](local-retrieval.md) for ranking and
-evaluation.
+generation path filters evidence permissions again, applies deterministic
+policy rules before any provider call, builds a versioned prompt, parses a
+structured answer, validates citations against retrieved hits, and records
+latency, tokens, and approximate cost. See
+[local-ingestion.md](local-ingestion.md) for parsing and chunking,
+[local-retrieval.md](local-retrieval.md) for ranking, and
+[live-generation.md](live-generation.md) for the generation control and live
+adapter boundary.
 
 Cross-cutting implementation selection is separate from these runtime
 contracts. The [evaluation architecture](evaluation-architecture.md) defines
@@ -96,28 +103,65 @@ Synthetic chunker, retriever, and generator implementations live under
 ### Sprint 2 implementation boundary
 
 The provider-neutral contracts, local ingestion baseline, evaluated BM25
-retrieval baseline, harder BM25/dense/RRF comparison, system-wide component
-profile, durable result registry, and a swappable evidence-sufficiency boundary
-are implemented. Retrieval v2 and evidence-sufficiency v1 both produced
-`Refine` decisions with no replacement, so BM25 v1 with explicit any-hit
-behavior remains only the provisional rollback/control path.
+retrieval baseline, harder BM25/dense/RRF comparison, deterministic generation
+preflight, system-wide component profile, durable result registry, and a
+swappable evidence-sufficiency boundary are implemented. Retrieval v2 and
+evidence-sufficiency v1 both produced `Refine` decisions with no replacement,
+so BM25 v1 with explicit any-hit behavior remains only the provisional
+rollback/control path. A LiteLLM adapter and local Ollama benchmark mode exist,
+but neither is wired to an API route or selected provider model. The first
+Gemma 3 4B exploratory run passed structure and policy checks but found three
+support failures in 18 model answers under a post-run diagnostic rubric; it
+therefore selected nothing.
 The following remain separate execution sub-issues under roadmap issue #7:
 
-- Live generation and tutor-policy enforcement (#24)
-- A successor open-set answerability/evidence verifier before end-to-end claims
-- Grounded tutoring smoke demonstration (#25)
+- Prospective fixed-DeepSeek and prompt qualification completing #24
+- Open-set answerability/evidence-verifier comparison in #43
+- Untouched end-to-end grounded-tutoring evaluation in #25
 
-Provider selection, production embedding selection, Canvas, persistence, and
-live generation are not implemented. Local BGE-small embeddings have been
+The DeepSeek API is the primary generator product constraint, with synthetic
+evaluation only and a cumulative USD 10 #24 cap, but its exact configuration
+and prompt selection remain pending. Production embedding selection, Canvas,
+persistence, and live evaluation remain pending. Local BGE-small embeddings have been
 benchmarked for ranking and semantic evidence agreement but were not selected.
 The current any-hit control must not feed an end-to-end grounding claim. Canvas
 can be added later as an optional source adapter if a safe guest course contains
 useful material.
 
+### Deployable-system planning boundary
+
+The 2026-07-23 evaluation rescope makes a real staging deployment, calibrated
+LLM judging, simulated-student stress testing, and scripted synthetic-account
+acceptance part of the final outcome. The current FastAPI/Vite and in-memory
+onboarding stack is not deployable as-is. Before implementation resumes, #11
+must freeze the alternatives, metrics, privacy rules, and hard gates for:
+
+- invited-user authentication and session revocation;
+- professor/student roles and course membership;
+- transactional persistence and private source storage;
+- persistent conversation state and duplicate/stale response handling;
+- provider data processing, course permission, retention, deletion, and log
+  redaction;
+- staging/production separation, TLS, secrets, health checks, rate limits,
+  backup/restore, rollback, monitoring, and incident response; and
+- professor anchor/release review, evaluator calibration, simulator validity,
+  and synthetic-account reliability evidence.
+
+No hosting, identity, database, or storage vendor is selected by this rescope.
+Each is an architecture decision requiring a control, bounded candidates,
+operational evidence, failure cases, and rollback. See the
+[deployable pilot rescope](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).
+The evaluator and private-course trust boundaries are detailed in the
+[evaluation data-flow and threat model](evaluation-data-flow-and-threat-model.md).
+
 ## Open Design Decisions
 
 - Production citation rendering and locator navigation
-- Prompt and policy configuration schema
-- Agent prompt boundaries and model/provider selection
-- Student privacy and consent model
+- Live prompt variant selection and exact DeepSeek model/configuration freeze
+- Agent prompt boundaries and provider-failure behavior
+- Future human-use privacy and consent model
 - End-to-end answer-quality rubric and evidence-sufficiency threshold
+- Identity provider, role/course authorization model, and session lifecycle
+- Database, private object storage, migrations, retention, and deletion
+- Hosting topology, environments, monitoring, backup/restore, and rollback
+- Private-course provider approval and local evaluator fallback

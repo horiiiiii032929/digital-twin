@@ -1,0 +1,211 @@
+{
+  "corpus_id": "it5002-lectures-v1",
+  "course_id": "IT5002",
+  "course_label": "Computer Systems and Applications",
+  "version": "1.0.0",
+  "snapshot_date": "2026-07-23",
+  "status": "researcher_selected_local_evaluation_boundary",
+  "source_root": "academia_vault/semester_1/IT5002_computer_architesture/lecture",
+  "local_snapshot_root": "data/raw/course_materials/it5002_full/lecture",
+  "content_boundary": {
+    "included": "All 13 official lecture PDFs",
+    "notes": "Question and misconception design only; not authoritative evidence",
+    "excluded": [
+      "tutorials",
+      "assignments",
+      "midterms",
+      "final exams",
+      "quizzes",
+      "solutions and answer files",
+      "student records",
+      "secrets and environment files"
+    ]
+  },
+  "permissions": {
+    "local_inventory": "user_authorized_2026-07-23",
+    "local_research_evaluation": "researcher_selected_2026-07-23",
+    "student_facing_release": "professor_or_institutional_authorization_required",
+    "human_participant_use": "out_of_scope",
+    "external_provider_use": "prohibited"
+  },
+  "profile": {
+    "document_count": 13,
+    "page_count": 508,
+    "byte_count": 15738973,
+    "pdftotext_character_count": 175474,
+    "source_copy_hash_mismatches": 0,
+    "selectable_text_failures": 0
+  },
+  "topic_strata": [
+    {
+      "id": "foundations",
+      "documents": [
+        "it5002-lecture-01",
+        "it5002-lecture-02"
+      ]
+    },
+    {
+      "id": "mips-isa",
+      "documents": [
+        "it5002-lecture-03",
+        "it5002-lecture-04",
+        "it5002-lecture-05"
+      ]
+    },
+    {
+      "id": "datapath-control",
+      "documents": [
+        "it5002-lecture-06",
+        "it5002-lecture-07",
+        "it5002-lecture-08"
+      ]
+    },
+    {
+      "id": "memory-hierarchy",
+      "documents": [
+        "it5002-lecture-09"
+      ]
+    },
+    {
+      "id": "operating-systems",
+      "documents": [
+        "it5002-lecture-10",
+        "it5002-lecture-11",
+        "it5002-lecture-12",
+        "it5002-lecture-13"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "it5002-lecture-01",
+      "filename": "1_introduction.pdf",
+      "sha256": "cf667b2389166a05d2e48e722841d591152b53273871bb6d6892c46d3f9f1688",
+      "bytes": 1481498,
+      "pages": 17,
+      "pdftotext_characters": 5001,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-02",
+      "filename": "2_number_systems.pdf",
+      "sha256": "f0fe69de99e6139afa0c8ce540c80435616d2e939f6df4f4d1e2355762d843a8",
+      "bytes": 572350,
+      "pages": 51,
+      "pdftotext_characters": 18896,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-03",
+      "filename": "3_MIPS_1.pdf",
+      "sha256": "c347650e0c736e766e247ee3bb8c044def9d3681d54b63d92090e315b1de29d2",
+      "bytes": 986333,
+      "pages": 49,
+      "pdftotext_characters": 19523,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-04",
+      "filename": "4_MIPS_2.pdf",
+      "sha256": "66c15d675ba15d9e5e8e78247797a1b280c47204735ab40cdbb3fa7f6e4477de",
+      "bytes": 717613,
+      "pages": 43,
+      "pdftotext_characters": 14872,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-05",
+      "filename": "5_MIPS_format.pdf",
+      "sha256": "02443efa0a3d80169094e5e22b769a905876286eb4961835c42ce79eb9856fe5",
+      "bytes": 781747,
+      "pages": 44,
+      "pdftotext_characters": 15329,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-06",
+      "filename": "6_datapath_design.pdf",
+      "sha256": "0b29307569785d84db97ba3701e2c94a05975b8b322781f9d1721d610c29371f",
+      "bytes": 1061571,
+      "pages": 43,
+      "pdftotext_characters": 19139,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-07",
+      "filename": "7_control.pdf",
+      "sha256": "b8e7e57ce322f8b69ef909fe4ac730e1c27eda1cd4d1748af37a8c8c62eaaf17",
+      "bytes": 986891,
+      "pages": 48,
+      "pdftotext_characters": 14169,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-08",
+      "filename": "8_datapath.pdf",
+      "sha256": "c592b008a58068ca17cb9a2088744992e682a28b50c6b8e6e7339bbbc57130d9",
+      "bytes": 2705420,
+      "pages": 40,
+      "pdftotext_characters": 14646,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-09",
+      "filename": "9_caches.pdf",
+      "sha256": "ca1f75f8be19c72681b5bb4b021867e999eb44ec632460339de099ef562489a1",
+      "bytes": 3304126,
+      "pages": 84,
+      "pdftotext_characters": 28751,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-10",
+      "filename": "10_intro_to_OS.pdf",
+      "sha256": "a8f48a7f011d90120fc06c9a09686e792f4bcc6e8e13cb27361944e04dad93b9",
+      "bytes": 763365,
+      "pages": 16,
+      "pdftotext_characters": 3298,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-11",
+      "filename": "11_process_management.pdf",
+      "sha256": "52c55a7e15fd17d62b0863ec3c6fc26f649ae35b3484ed61915a9109b3f7268a",
+      "bytes": 852853,
+      "pages": 22,
+      "pdftotext_characters": 6323,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-12",
+      "filename": "12_processing.pdf",
+      "sha256": "2f26d084be0b59040f9082cd4604d92f98c23d318575ad663796853cea4dc20c",
+      "bytes": 419509,
+      "pages": 23,
+      "pdftotext_characters": 7328,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    },
+    {
+      "document_id": "it5002-lecture-13",
+      "filename": "13_inter_process_communication.pdf",
+      "sha256": "f2b6a59445f58c5645ca1d3462830a692d6793b031fe21d7ec230d273df7b28e",
+      "bytes": 1105697,
+      "pages": 28,
+      "pdftotext_characters": 8199,
+      "source_role": "official_lecture",
+      "tutoring_permission": "pending"
+    }
+  ]
+}

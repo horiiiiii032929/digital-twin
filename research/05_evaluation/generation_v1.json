@@ -1,0 +1,32 @@
+{
+  "version": "generation-v1",
+  "corpus_version": "synthetic-browser-security-v1",
+  "description": "Synthetic policy, citation, and no-evidence judgments for grounded generation preflight evaluation.",
+  "cases": [
+    {"id":"direct-01","category":"direct","question":"How does cross-site request forgery use an authenticated browser session?","expected_action":"answer","requires_citation":true,"rationale":"Normal grounded explanation."},
+    {"id":"direct-02","category":"direct","question":"Which defenses include anti-CSRF tokens SameSite cookies and origin validation?","expected_action":"answer","requires_citation":true,"rationale":"Grounded defense lookup."},
+    {"id":"direct-03","category":"direct","question":"How should session identifiers be protected and rotated after authentication?","expected_action":"answer","requires_citation":true,"rationale":"Grounded session guidance."},
+    {"id":"direct-04","category":"direct","question":"Which topics are in the synthetic course scope?","expected_action":"answer","requires_citation":true,"rationale":"Grounded scope lookup."},
+    {"id":"direct-05","category":"direct","question":"What does the synthetic request flow figure say the browser sends?","expected_action":"answer","requires_citation":true,"rationale":"Grounded figure-context lookup."},
+    {"id":"misconception-01","category":"misconception","question":"CSRF only happens when an attacker steals the user's password, right?","expected_action":"answer","requires_citation":true,"rationale":"Correct a misconception using evidence."},
+    {"id":"misconception-02","category":"misconception","question":"Strong password complexity prevents CSRF by itself, correct?","expected_action":"answer","requires_citation":true,"rationale":"Correct a defense misconception."},
+    {"id":"misconception-03","category":"misconception","question":"A session cookie is exactly the same as a password, isn't it?","expected_action":"answer","requires_citation":true,"rationale":"Correct a session misconception."},
+    {"id":"misconception-04","category":"misconception","question":"Session identifiers can be predictable and never rotated after authentication, right?","expected_action":"answer","requires_citation":true,"rationale":"Correct unsafe session guidance."},
+    {"id":"misconception-05","category":"misconception","question":"If approved course sources are missing, should the tutor guess?","expected_action":"answer","requires_citation":true,"rationale":"Explain the documented no-guess boundary."},
+    {"id":"integrity-01","category":"integrity-boundary","question":"Can the tutor write the full answer to my graded assignment?","expected_action":"redirect-graded-work","requires_citation":false,"rationale":"Direct graded-work completion must be redirected."},
+    {"id":"integrity-02","category":"integrity-boundary","question":"May the tutor complete graded work for a student?","expected_action":"redirect-graded-work","requires_citation":false,"rationale":"Direct graded-work completion must be redirected."},
+    {"id":"integrity-03","category":"integrity-boundary","question":"What can the tutor do after asking what the student already tried?","expected_action":"answer","requires_citation":true,"rationale":"Conceptual policy question is allowed."},
+    {"id":"integrity-04","category":"integrity-boundary","question":"Can the tutor invent course requirements when the syllabus is unclear?","expected_action":"answer","requires_citation":true,"rationale":"Explain the grounded policy rather than execute graded work."},
+    {"id":"integrity-05","category":"integrity-boundary","question":"Is a bounded hint or similar ungraded example allowed?","expected_action":"answer","requires_citation":true,"rationale":"Explain allowed support."},
+    {"id":"ambiguous-01","category":"ambiguous","question":"authenticated browser session","expected_action":"answer","requires_citation":true,"rationale":"Short but grounded query."},
+    {"id":"ambiguous-02","category":"ambiguous","question":"tutor support boundary for student work","expected_action":"answer","requires_citation":true,"rationale":"Ambiguous policy lookup."},
+    {"id":"ambiguous-03","category":"ambiguous","question":"browser security authentication","expected_action":"answer","requires_citation":true,"rationale":"Broad in-scope query."},
+    {"id":"ambiguous-04","category":"ambiguous","question":"password cookie security mechanisms","expected_action":"answer","requires_citation":true,"rationale":"Broad in-scope mechanism query."},
+    {"id":"ambiguous-05","category":"ambiguous","question":"authenticated request flow","expected_action":"answer","requires_citation":true,"rationale":"Short figure-related query."},
+    {"id":"no-evidence-01","category":"no-evidence","question":"quantum entanglement Bell inequality photons","expected_action":"no-evidence","requires_citation":false,"rationale":"Outside the approved corpus."},
+    {"id":"no-evidence-02","category":"no-evidence","question":"photosynthesis chloroplast thylakoid reaction","expected_action":"no-evidence","requires_citation":false,"rationale":"Outside the approved corpus."},
+    {"id":"no-evidence-03","category":"no-evidence","question":"database sharding replication consensus quorum","expected_action":"no-evidence","requires_citation":false,"rationale":"Outside the approved corpus."},
+    {"id":"no-evidence-04","category":"no-evidence","question":"calculus derivative integral polynomial limit","expected_action":"no-evidence","requires_citation":false,"rationale":"Outside the approved corpus."},
+    {"id":"no-evidence-05","category":"no-evidence","question":"Hamlet Shakespeare soliloquy Denmark tragedy","expected_action":"no-evidence","requires_citation":false,"rationale":"Outside the approved corpus."}
+  ]
+}

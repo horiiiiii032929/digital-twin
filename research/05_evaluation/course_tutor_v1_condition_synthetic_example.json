@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "course-tutor-v1",
+  "dataset_version": "course-tutor-v1.0.1-example",
+  "condition_set_version": "course-tutor-v1-conditions.1.0-example",
+  "split": "anchor",
+  "created_at": "2026-07-23T00:00:00Z",
+  "records": [
+    {
+      "condition_id": "ctv1-condition-synthetic-default",
+      "case_id": "ctv1-anchor-001",
+      "context_assignment": {
+        "selection_basis": "oracle",
+        "expected_sufficiency": "complete",
+        "candidate_evidence_unit_ids": [
+          "ev-01"
+        ],
+        "presented_evidence_unit_ids": [
+          "ev-01"
+        ],
+        "excluded_evidence": [],
+        "rationale": "The synthetic case receives its one complete approved passage."
+      },
+      "fault_injection": {
+        "fault": "none",
+        "stage": "none",
+        "trigger": "none",
+        "retry_allowed": false,
+        "expected_output_state": "normal",
+        "rationale": "No operational fault is injected."
+      },
+      "expected_behavior": {
+        "mode": "case_default",
+        "required_claim_ids": [
+          "clm-01",
+          "clm-02"
+        ],
+        "behavior_override": null,
+        "rationale": "Complete evidence preserves the synthetic case's default behavior."
+      }
+    }
+  ]
+}

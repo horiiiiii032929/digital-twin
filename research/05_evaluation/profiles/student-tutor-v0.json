@@ -163,10 +163,12 @@
         "explicit-provider-failure"
       ],
       "candidate_ids": [
-        "deterministic-generator-control",
-        "live-provider-generator"
+        "deterministic-grounded-generator",
+        "deepseek-api-primary",
+        "live-provider-generator",
+        "ollama-gemma3-4b"
       ],
-      "notes": "Issue #24 must compare a deterministic control with at least one live provider candidate."
+      "notes": "DeepSeek API is the fixed primary product constraint for RAG studies, limited to synthetic evaluation data and a cumulative USD 10 #24 cap, but it is not evidence-selected or qualified. The deterministic control passes synthetic preflight. Local Gemma 3 4B passed structural checks but a post-run diagnostic found 3/18 unsupported or citation-mismatched answers. A prospective DeepSeek and prompt qualification with sufficient evidence remains required."
     },
     {
       "component": "prompt",
@@ -180,7 +182,7 @@
         "direct-grounded-prompt",
         "guided-grounded-prompt"
       ],
-      "notes": "Prompt variants must use the same questions, evidence, policy, and generator conditions."
+      "notes": "Direct grounded prompt v1 is implemented but unselected; variants must use the same questions, evidence, policy, and generator conditions."
     },
     {
       "component": "tutor-policy",
@@ -219,7 +221,7 @@
         "deterministic-policy-rules",
         "model-assisted-policy-check"
       ],
-      "notes": "Issue #24 must measure refusal precision, safe redirection, and policy compliance."
+      "notes": "Deterministic rules pass the synthetic preflight but remain unselected until adversarial and live-path evidence is recorded."
     },
     {
       "component": "citation-validation",
@@ -232,7 +234,7 @@
       "candidate_ids": [
         "deterministic-citation-validator"
       ],
-      "notes": "Citation validation is a hard gate and must remain deterministic even if generation is model-based."
+      "notes": "The deterministic validator is implemented; live malformed-output evidence is still required before selection."
     },
     {
       "component": "conversation-orchestration",

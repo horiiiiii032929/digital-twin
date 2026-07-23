@@ -9,39 +9,57 @@ style.
 
 ## Product Direction
 
-Build a Digital Twin System that gives students contextual tutoring support and
-gives instructors visibility into common confusion patterns. The system should
-use instructor-approved course material and preserve a configurable teaching
-policy.
+Build and evaluate a deployable Digital Twin tutoring system for one professor
+and one course. The system should use approved course material, preserve a
+configurable teaching policy, give student-role accounts grounded tutoring with
+inspectable citations, and give the professor release and audit control.
+Student recruitment is out of scope; evaluation uses researcher-frozen course
+anchors, calibrated LLM judges, frozen simulated students, and scripted
+synthetic accounts. Optional professor review is an expert-validity check, not
+a prerequisite for local experiments.
 
-## Research Questions
+## Focused research question
 
-- What source material is required to create a useful instructor knowledge base?
-- Which response controls make the tutor feel aligned with the instructor?
-- How should the system refuse or redirect requests outside course boundaries?
-- Which learning-gap signals are useful enough for instructors to act on?
-- How should the system be evaluated against a generic assistant baseline?
+For one course and a fixed generator, how do approved course evidence and a
+professor-configured tutoring policy affect safe grounded task success,
+citation completeness, boundary compliance, calibrated pedagogical success,
+multi-turn safe trajectory completion, reliable turn completion, latency, and
+cost relative to a generic assistant?
 
-## Initial Iterations
+Every replaceable method and architecture boundary must be evaluated against a
+control. This includes parsing/chunking, retrieval, returned-context
+sufficiency, generation, prompts/policy, conversation state, authentication,
+authorization, persistence, storage, deployment, and usability.
 
-- I1 Instructor Onboarding
-- I2 Student Active Tutoring
-- I3 Proactive Interaction
-- I4 Learning Gap Report
-- I5 Evaluation and Refinement
+## Revised delivery phases
+
+- Instructor onboarding: complete and professor-approved.
+- Grounded RAG qualification: freeze the protocol and qualify the generator,
+  verifier, and end-to-end RAG profile.
+- Deployable application: authenticated professor/student roles, persistence,
+  private storage, staging, and visible failures.
+- Evaluation qualification: security, privacy, reliability, professor review,
+  LLM-judge calibration, simulated-student stress tests, and synthetic-account
+  deployment acceptance.
+- Final evaluation and reporting: blinded comparisons, evidence freeze,
+  deployed demonstration, and reproducibility package.
+
+Proactive intervention and a full learning-gap analytics product are deferred
+from the final critical path.
 
 ## Current Phase
 
-I1 instructor onboarding is complete and approved. I2 is active under roadmap
-issue #7, with execution split into sub-issues #19-#25, #34, #37, and #41. The
-repository now has modular onboarding, API, and frontend boundaries plus
-provider-neutral grounding contracts, approved local parsing, deterministic
-chunking, evaluated BM25 retrieval, a harder BM25/dense/RRF comparison, a
-versioned experimental component profile, and durable evaluation-result
-governance. Retrieval v2
-and evidence-sufficiency v1 both resulted in `Refine` with no replacement or
-gate selected. BM25 v1 remains a provisional rollback baseline, and a successor
-open-set answerability verifier is required before the smoke demo can claim
-end-to-end grounding. Live generation, policy enforcement, citation validation,
-and the demonstration remain Sprint 2 work. Canvas remains an optional future
-source adapter.
+Instructor onboarding is complete and approved. Grounding foundations include
+provider-neutral contracts, approved local parsing, deterministic chunking,
+BM25 retrieval, dense/RRF comparisons, component profiles, and result
+governance. Retrieval v2, evidence-sufficiency v1, and exploratory local
+generation all produced `Refine` or no-selection results.
+
+The project is not yet deployable: it has no selected returned-context verifier
+or live generator/prompt, no end-to-end RAG decision, no authentication or
+durable persistence, no student release flow, and no staging environment. Issue
+#11 is therefore the immediate gate: freeze the method, data-governance,
+privacy, dataset, rubric, and reporting protocol before implementation
+continues. This is a researcher-controlled reproducibility gate, not a request
+for the professor to select the method. The full rescope is recorded in the
+[deployable pilot plan](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).

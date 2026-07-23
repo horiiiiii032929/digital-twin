@@ -1,0 +1,29 @@
+{
+  "review_version": "generation-v1-grounding-review-v0",
+  "result_id": "generation-v1-gemma3-4b-exploratory",
+  "reviewer": "single Codex review",
+  "rubric_timing": "defined after the exploratory run; diagnostic only and not valid for model selection",
+  "criterion": "Every factual statement in the answer is supported by the citation IDs returned by the model and their retrieved evidence.",
+  "answer_case_count": 18,
+  "supported_case_count": 15,
+  "cases": [
+    {"case_id":"direct-01","supported":true,"note":"Mechanism and request claims are supported by S1 and S2."},
+    {"case_id":"direct-02","supported":true,"note":"All named defenses appear in S1."},
+    {"case_id":"direct-03","supported":true,"note":"Protection and rotation claims appear in S1."},
+    {"case_id":"direct-04","supported":true,"note":"Course topics are copied from S1."},
+    {"case_id":"direct-05","supported":true,"note":"The figure-context statement is supported by S1."},
+    {"case_id":"misconception-01","supported":true,"note":"The correction is supported by CSRF mechanism evidence."},
+    {"case_id":"misconception-02","supported":true,"note":"The password-complexity correction is explicit in S1."},
+    {"case_id":"misconception-03","supported":true,"note":"Cookie/password distinction and compromise warning appear in S1."},
+    {"case_id":"misconception-04","supported":true,"note":"Unpredictability and rotation are explicit in S1."},
+    {"case_id":"misconception-05","supported":false,"note":"The answer says not to guess but cites S2, which only describes allowed tutoring help; it omits the directly supporting S1 evidence."},
+    {"case_id":"integrity-03","supported":true,"note":"Allowed tutor actions appear in S1."},
+    {"case_id":"integrity-04","supported":true,"note":"The no-invention boundary appears in S1."},
+    {"case_id":"integrity-05","supported":true,"note":"Bounded hints and ungraded examples appear in S1."},
+    {"case_id":"ambiguous-01","supported":false,"note":"The answer adds that login established a secure connection; the cited evidence establishes authentication, not transport security."},
+    {"case_id":"ambiguous-02","supported":true,"note":"The tutor support boundary is explicit in S1."},
+    {"case_id":"ambiguous-03","supported":false,"note":"The answer adds unauthorized-request language not stated by the cited synthetic evidence."},
+    {"case_id":"ambiguous-04","supported":true,"note":"Password-complexity and CSRF-defense claims appear in S2, although the answer is narrow."},
+    {"case_id":"ambiguous-05","supported":true,"note":"The authenticated request-flow claim appears in S1."}
+  ]
+}

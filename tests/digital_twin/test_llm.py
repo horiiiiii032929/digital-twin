@@ -12,7 +12,12 @@ async def test_fixture_llm_returns_task_specific_response():
         task="policy_extraction",
     )
 
-    assert response == "fixture response for policy_extraction: Extract a tutor policy."
+    assert (
+        response.content
+        == "fixture response for policy_extraction: Extract a tutor policy."
+    )
+    assert response.provider_model == "fixture/v1"
+    assert response.usage.total_tokens == 0
 
 
 @pytest.mark.asyncio
@@ -28,6 +33,6 @@ async def test_fixture_llm_joins_messages_in_order():
     )
 
     assert (
-        response
+        response.content
         == "fixture response for policy_extraction: Use policy notes. Extract a tutor policy."
     )

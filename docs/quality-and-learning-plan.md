@@ -1,6 +1,6 @@
 # Quality and Learning Plan
 
-Last reviewed: 2026-07-15
+Last reviewed: 2026-07-23
 
 ## Purpose
 
@@ -25,6 +25,10 @@ the complete digital-twin system.
 - Keep Canvas optional; LMS integration is not a substitute for research depth.
 - Do not claim learning effectiveness without an evaluation design that supports
   that claim.
+- Treat deployability as an evaluated system property: authentication,
+  authorization, persistence, privacy, reliability, synthetic acceptance, monitoring,
+  backup/restore, and rollback require the same control-and-evidence discipline
+  as retrieval and generation.
 
 ## Delivery timeline
 
@@ -33,14 +37,16 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-17 to 2026-07-18 | Live generation and policy enforcement | Prompt construction, provider adapters, policy controls, latency, and cost |
-| 2026-07-19 | Grounded tutoring evaluation and demonstration | Integration, baseline comparison, failure cases, and technical explanation |
-| 2026-07-20 to 2026-07-26 | Student tutoring prototype | Conversation state, student UX, safety, and operational failures |
-| 2026-07-27 to 2026-07-31 | Proactive learning prompts | Explainable triggers, suppression, and student control |
-| 2026-08-03 to 2026-08-15 | Learning-gap report | Aggregation, privacy thresholds, uncertainty, and instructor actionability |
-| 2026-08-17 to 2026-08-23 | Evaluation dataset and rubric | Experimental design, annotation guidance, and reproducibility |
-| 2026-08-24 to 2026-09-01 | Baseline comparison and refinement | Quantitative comparison, regression analysis, and evidence-backed decisions |
-| 2026-09-02 to 2026-09-13 | Final report and presentation | Defensible claims, limitations, reproducibility, and research communication |
+| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Researcher-selected question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and critique plan |
+| 2026-07-26 to 2026-07-31 | Grounded RAG qualification | Generator/prompt, returned-context sufficiency, claim/citation evidence, and end-to-end decision |
+| 2026-08-01 to 2026-08-10 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
+| 2026-08-11 to 2026-08-15 | Hardening and professor UAT | Threat modeling, privacy, reliability, load, backup/restore, recovery, and release decision |
+| 2026-08-16 to 2026-08-22 | Simulated-user evaluation | Calibrated LLM judging, multi-turn safe completion, synthetic-account acceptance, reliable turns, and claim boundaries |
+| 2026-08-23 to 2026-08-26 | Final evaluation and evidence freeze | Blinded comparison, bounded refinement, failure analysis, uncertainty, and frozen evidence |
+| 2026-08-27 to 2026-09-03 | Full report draft and figures | Complete argument, claim-to-evidence matrix, main plots, limitations, and professor review |
+| 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
+| 2026-09-10 to 2026-09-12 | Contingency buffer | Correct blocking defects, package the submission, and protect frozen claims from late scope growth |
+| 2026-09-13 | Final presentation and submission | Deliver the report, deployed demonstration, presentation, and reproducibility package |
 
 ## Strengthened Sprint 2 bar
 
@@ -49,7 +55,8 @@ produce an inspectable, evaluated vertical slice.
 
 ### Course corpus
 
-- Use 4-8 synthetic or explicitly approved course documents.
+- Use the 13 inventoried official IT5002 lecture PDFs for the local full-course
+  evaluation; keep private content local and prohibit external-provider use.
 - Support UTF-8 text, Markdown, and selectable-text PDF input.
 - Preserve document ID, title, source label, content hash, and a human-readable
   locator through normalization and chunking.
@@ -65,7 +72,9 @@ produce an inspectable, evaluated vertical slice.
 - Build a versioned evaluation set with at least 20 questions across direct
   grounding, misconception, integrity-boundary, ambiguous, and no-evidence
   cases.
-- Report Recall@5 and Mean Reciprocal Rank for retrieval.
+- Report gold-evidence Recall@3/5, complete-evidence success@3, and nDCG@3 as
+  the primary retrieval views; report Mean Reciprocal Rank as a first-useful-
+  evidence diagnostic rather than a complete RAG score.
 - Record failed queries and explain whether the source, chunking, query, or
   ranking caused each failure.
 
@@ -109,6 +118,11 @@ requires a control, shared evaluation conditions, hard gates, required metric
 thresholds, a machine-readable component record, and an updated experimental
 profile. See [evaluation-architecture.md](evaluation-architecture.md).
 
+Architecture choices follow the same rule. Authentication, authorization,
+persistence, object storage, deployment, monitoring, backup/restore, and
+rollback require alternatives, tradeoffs, threat and failure cases, operational
+measurements, a decision record, and a reversal path.
+
 ## Component selection and release profiles
 
 The system is assembled from versioned component selections rather than one
@@ -146,7 +160,7 @@ the student's ability to reproduce and defend the work.
 
 ## Final project standard
 
-By 2026-09-13, the project should defend four evidence-backed claims:
+By 2026-09-13, the project should defend six evidence-backed claims:
 
 1. The end-to-end system works from approved source ingestion through cited
    tutoring output.
@@ -155,6 +169,15 @@ By 2026-09-13, the project should defend four evidence-backed claims:
 3. Evaluation artifacts support the reported strengths and limitations.
 4. Permissions, privacy, academic integrity, and professor approval are explicit
    system controls.
+5. Scripted professor and student accounts complete deployed acceptance
+   journeys without cross-role or cross-course access, with durable state and
+   visible recovery.
+6. Security, reliability, synthetic interaction behavior, latency, cost,
+   rollback, judge validity, and deployment limitations are measured rather
+   than inferred from a local demonstration.
 
 If evidence does not support a claim, the report must narrow or reject the claim
 rather than presenting the demonstration as proof.
+
+Human usability, satisfaction, engagement, adoption, and learning outcomes are
+not evaluated and must not appear as supported claims.

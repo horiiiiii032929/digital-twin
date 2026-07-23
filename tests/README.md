@@ -23,6 +23,12 @@ Retrieval regression coverage loads the 25-case versioned set at
 BM25 over the same approved chunks. Run `npm run verify:retrieval` for the full
 per-case result artifact.
 
+Generation coverage checks professor release approval, graded-work redirection,
+approved-evidence filtering, prompt boundaries, structured provider output,
+invented citations, provider failures, token/cost traces, and sanitized warnings.
+`npm run verify:generation` runs the 25-case deterministic preflight with no
+network or paid model calls.
+
 Component-profile tests ensure the experimental profile covers every
 decision-bearing component, evidence links resolve, and a candidate cannot be
 selected after failing a hard gate or required metric. Run

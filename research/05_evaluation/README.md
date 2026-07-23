@@ -17,6 +17,71 @@ Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
 
+The existing committed datasets are regression and development assets, not the
+sole final-project benchmark. The selected successor design is documented in
+the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
+researcher-frozen course-specific gold benchmark, and keep deployed
+synthetic-account evidence separate from offline component selection. The
+2026-07-23 amendment removes participant recruitment and uses calibrated LLM
+judging, frozen simulated-student trajectories, and scripted synthetic-account
+acceptance. Professor review, when available, is recorded as an optional
+expert-validity check rather than an experiment-start gate.
+
+The `course-tutor-v1` design is defined by:
+
+- [`course_tutor_v1.schema.json`](course_tutor_v1.schema.json), the strict gold-
+  case JSON Schema;
+- [`course_tutor_v1_synthetic_example.json`](course_tutor_v1_synthetic_example.json),
+  a public one-case example that contains no real course or student data;
+- [`course_tutor_v1_condition.schema.json`](course_tutor_v1_condition.schema.json)
+  and its
+  [`synthetic example`](course_tutor_v1_condition_synthetic_example.json),
+  which freeze candidate/presented evidence, exclusions, faults, and justified
+  condition-specific behavior without changing corpus answerability;
+- [`course-tutor-v1-annotation-guide.md`](course-tutor-v1-annotation-guide.md),
+  the semantic rules, split discipline, privacy boundary, and annotation
+  workflow; and
+- [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
+  the construction state and review questions for the 12-case researcher
+  anchor.
+
+The selected full-course candidate corpus is inventoried in
+[`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the
+scope rationale and source hierarchy in the
+[`IT5002 corpus decision`](../00_admin/2026-07-23-it5002-full-course-corpus-decision.md).
+
+Private course text, derived passages, or any accidentally encountered real
+student content must not be committed. The anchor is an
+instrument-calibration set, not a system performance result.
+
+Private anchor cases, companion conditions, and extracted evidence passages
+live under ignored `data/processed/course_tutor_v1/` and
+`data/interim/course_tutor_v1/`. The committed professor-anchor document
+records construction and instrument state without exposing course wording or
+gold claims.
+
+Validate the local 12-case researcher draft without running a model:
+
+```bash
+uv run python scripts/validate_course_tutor_dataset.py --expected-cases 12
+```
+
+This checks both JSON Schemas plus IDs, claim-evidence links, corpus and topic
+identity, passage hashes, candidate/presented evidence partitions, permission
+filters, condition-specific claim sets, and fault contracts.
+
+`generation_v1.json` is the public preflight set for policy action, citation,
+no-evidence, and provider-suppression behavior. It does not measure live answer
+quality and cannot select a model or prompt by itself. Its clean deterministic
+control run is summarized in `generation-v1-preflight-results.md`.
+
+The first local live use of that set is recorded in
+`generation-v1-gemma3-4b-results.md`. It proves the Ollama/LiteLLM transport and
+structural controls, but its post-run grounding review is diagnostic rather
+than selection evidence. Three of 18 model answers added unsupported content or
+used mismatched evidence, so the durable decision is `Refine` with no selected
+generator or prompt.
+
 The retrieval v2 artifacts demonstrate an inconclusive comparison: a `refine`
 decision may intentionally select no implementation when every candidate fails
 a required gate or metric. In that case, preserve the previous profile entry,
