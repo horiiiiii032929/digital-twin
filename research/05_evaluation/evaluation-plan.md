@@ -48,7 +48,9 @@ this final tutor evaluation; they do not replace it.
    Recall@K, nDCG, and MRR denominators.
 6. `it5002-retrieval-rapid-v1` is a separate screening dataset due
    2026-07-24: 26 development cases plus 39 answerable and 20 no-evidence
-   sealed cases. It can decide Go Deeper / Refine / Drop / Invalid but cannot
+   sealed cases. It runs R0-R5 on every case, R6 on the multi-evidence slice,
+   and O1 as the answerable-case ceiling, with R5 versus R1 as the primary
+   contrast. It can decide Go Deeper / Refine / Drop / Invalid but cannot
    select the final retriever. Its case families are excluded from the larger
    retrieval-v3 splits.
 7. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-

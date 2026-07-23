@@ -65,9 +65,9 @@ target project for automatic project assignment from issue forms.
 - #11 is the immediate active execution item. Its instrument-contract portion
   is complete; exact runtime bindings and private split validation remain
   before any development scoring or held-out inspection.
-- #46 produces a separate sealed R1-versus-R5 rapid result by 2026-07-24. #7
-  then completes expanded retrieval-v3 with #43 context-sufficiency by
-  2026-07-28.
+- #46 produces a separate sealed full-ladder R0-R6 rapid result by
+  2026-07-24, with R5 versus R1 primary. #7 then completes expanded
+  retrieval-v3 with #43 context-sufficiency by 2026-07-28.
 - #24 and #25 qualify or reject the generator/prompt and frozen end-to-end RAG
   profile by 2026-07-31.
 - #8 delivers authenticated persistent professor/student staging by
@@ -89,7 +89,7 @@ item under the #11 freeze.
 
 | Target | Issue and required outcome |
 | --- | --- |
-| 2026-07-23 | #11/#46 freeze the separate 59-case rapid R1-versus-R5 screen |
+| 2026-07-23 | #11/#46 freeze the separate 59-case rapid R0-R6 ablation |
 | 2026-07-24 | #46 execute one rapid sealed run and send the first result package |
 | 2026-07-28 | #7/#43 complete expanded retrieval-v3 and returned-context sufficiency |
 | 2026-07-31 | #24/#25 qualify or reject the generator/prompt and end-to-end RAG profile |

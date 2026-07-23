@@ -7,11 +7,32 @@
     "checkpoint_id": "it5002-retrieval-rapid-v1",
     "status": "prospectively_frozen",
     "deadline": "2026-07-24",
-    "purpose": "Screen whether R5 merits immediate confirmatory study and provisional end-to-end integration; it cannot make the final retriever selection.",
+    "purpose": "Compare the complete bounded internal retrieval ladder while screening whether R5 merits immediate confirmatory study and provisional end-to-end integration; it cannot make the final retriever selection.",
     "conditions": [
+      "R0",
       "R1",
-      "R5"
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "O1"
     ],
+    "condition_scope": {
+      "R0_to_R5": "all_59_heldout_cases",
+      "R6": "13_multi_evidence_heldout_cases_only",
+      "O1": "39_answerable_heldout_cases_only"
+    },
+    "primary_contrast": "R5_vs_R1",
+    "descriptive_ablation_contrasts": [
+      "R1_vs_R0_heading_representation",
+      "R2_vs_R1_dense_vs_lexical",
+      "R3_vs_R2_hybrid_fusion",
+      "R4_vs_R3_deterministic_context",
+      "R5_vs_R4_reranking",
+      "R6_vs_R5_multi_evidence_decomposition"
+    ],
+    "black_box_reference_in_offline_ranking_table": false,
     "development": {
       "answerable_cases": 13,
       "no_evidence_cases": 13,
@@ -26,7 +47,7 @@
       "scenario_counts": {
         "exact_or_terminology": 13,
         "paraphrase_or_misconception": 13,
-        "reasoning_or_multi_evidence": 13
+        "multi_evidence": 13
       },
       "minimum_open_set_cases_per_category": 3,
       "case_manifest_hash_required": true,

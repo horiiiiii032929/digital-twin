@@ -171,7 +171,7 @@ unmeasured.
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-23 | #11 and #46 | Separate 59-case rapid R1-versus-R5 screen, metrics, gates, and access lock frozen | Internal freeze only |
+| 2026-07-23 | #11 and #46 | Separate 59-case rapid R0-R6 ablation, R5-versus-R1 primary contrast, metrics, gates, and access lock frozen | Internal freeze only |
 | 2026-07-24 | #46 | One rapid sealed run completed with raw counts, uncertainty, failures, latency, memory, and Go Deeper / Refine / Drop decision | P1 rapid retrieval result |
 | 2026-07-28 | #7 and #43 | Expanded retrieval-v3 and returned-context sufficiency candidates qualified or rejected | Decision addendum if material |
 | 2026-07-31 | #24 and #25 | Exact generator/prompt and frozen end-to-end RAG profile qualified or rejected | P2 end-to-end experiment result |

@@ -10,9 +10,10 @@ pending
 
 Before the full confirmatory study, run the prospectively frozen
 [`IT5002 retrieval rapid checkpoint`](2026-07-23-it5002-retrieval-rapid-checkpoint.md).
-It compares only R1 and R5 on a separate 59-case sealed set and produces the
-first professor-facing result by 2026-07-24. Those cases remain disjoint from
-the full retrieval-v3 splits.
+It runs R0-R5 on a separate 59-case sealed set, R6 on its multi-evidence slice,
+and O1 as an answerable-case ceiling. R5 versus R1 remains the primary decision
+contrast. The checkpoint produces the first professor-facing result by
+2026-07-24, and its cases remain disjoint from the full retrieval-v3 splits.
 
 The rapid result can decide `Go Deeper`, `Refine`, `Drop`, or `Invalid`. It
 cannot select `Keep` or support a final SOTA claim. The larger experiment below

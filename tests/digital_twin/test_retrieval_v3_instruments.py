@@ -60,3 +60,12 @@ def test_rapid_checkpoint_cannot_select_keep() -> None:
 
     with pytest.raises(ValueError, match="cannot make a final selection"):
         validate_freeze(changed)
+
+
+def test_rapid_checkpoint_requires_full_bounded_ladder() -> None:
+    freeze = load_json(FREEZE_PATH)
+    changed = copy.deepcopy(freeze)
+    changed["rapid_checkpoint"]["conditions"] = ["R1", "R5"]
+
+    with pytest.raises(ValueError, match="full bounded ladder"):
+        validate_freeze(changed)

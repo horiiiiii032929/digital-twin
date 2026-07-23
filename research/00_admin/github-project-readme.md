@@ -55,8 +55,8 @@ usability and learning-effectiveness claims are excluded.
 
 1. #11 freezes the method, data-governance, rubric, threshold, and reporting
    protocol. The instrument-contract portion is complete.
-2. #46 runs the separate 59-case R1-versus-R5 rapid checkpoint and produces
-   the first professor result within 24 hours.
+2. #46 runs the separate 59-case R0-R6 rapid ablation, with R5 versus R1 as the
+   primary contrast, and produces the first professor result within 24 hours.
 3. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
    dense, hybrid, deterministic contextual, reranked, and bounded-decomposition
    conditions.
@@ -80,7 +80,7 @@ usability and learning-effectiveness claims are excluded.
 
 | Date | Required outcome | Professor checkpoint |
 | --- | --- | --- |
-| 2026-07-23 | #11/#46 freeze a separate 59-case R1-versus-R5 rapid screen | Internal freeze |
+| 2026-07-23 | #11/#46 freeze a separate 59-case R0-R6 rapid ablation | Internal freeze |
 | 2026-07-24 | #46 execute one rapid sealed run and validate the result | P1 rapid experiment result |
 | 2026-07-28 | #7/#43 complete expanded retrieval-v3 and context sufficiency | Decision addendum if material |
 | 2026-07-31 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |

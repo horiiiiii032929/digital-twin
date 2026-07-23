@@ -85,9 +85,9 @@ no-evidence questions in ranking-metric denominators.
 The first professor-facing retrieval result uses a smaller disjoint screening
 set defined by the
 [`IT5002 retrieval rapid checkpoint`](../04_experiments/2026-07-23-it5002-retrieval-rapid-checkpoint.md):
-26 development cases and a sealed 59-case R1-versus-R5 comparison. That
-checkpoint cannot select `Keep`; its cases cannot enter the expanded
-retrieval-v3 held-out split.
+26 development cases and a sealed 59-case R0-R6 ablation with R5 versus R1 as
+the primary contrast. That checkpoint cannot select `Keep`; its cases cannot
+enter the expanded retrieval-v3 held-out split.
 
 The selected full-course candidate corpus is inventoried in
 [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the

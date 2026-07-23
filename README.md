@@ -137,9 +137,10 @@ Completed sub-issues cover
 the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
 evaluation architecture, result governance, and the first failed
 evidence-sufficiency comparison. The retrieval-v3 candidate contract is now
-the active research gate: run a separate 59-case R1-versus-R5 rapid screen and
-send its result by 2026-07-24, then complete the expanded confirmatory
-retrieval and context-sufficiency work by 2026-07-28. Generator and end-to-end
+the active research gate: run the full bounded R0-R6 retrieval ablation on a
+separate 59-case rapid screen and send its result by 2026-07-24, with R5 versus
+R1 as the primary contrast. Then complete the expanded confirmatory retrieval
+and context-sufficiency work by 2026-07-28. Generator and end-to-end
 qualification follows by 2026-07-31, with the hosted vertical slice targeted
 by 2026-08-04 and final evidence frozen by 2026-08-08. The remaining five
 weeks are reserved for the report, figures, presentation, demo stabilization,

@@ -37,7 +37,7 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-23 to 2026-07-24 | Rapid retrieval result | Prospectively frozen 59-case R1-versus-R5 screen, exact runtime binding, one sealed run, data QA, decision, figures, and professor result package |
+| 2026-07-23 to 2026-07-24 | Rapid retrieval result | Prospectively frozen 59-case R0-R6 ablation with R5 versus R1 primary, exact runtime binding, one sealed run, data QA, decision, figures, and professor result package |
 | 2026-07-25 to 2026-07-28 | Confirmatory retrieval and returned-context sufficiency | Expanded private course/open-set benchmark, full retrieval-v3 ablations, complete/partial/none classification, and safe-abstention decision |
 | 2026-07-29 to 2026-07-31 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
 | 2026-08-01 to 2026-08-04 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |

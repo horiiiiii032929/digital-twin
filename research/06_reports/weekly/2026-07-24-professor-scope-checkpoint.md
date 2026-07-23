@@ -141,7 +141,7 @@ student learning.
 
 | Date | Work | Evidence produced |
 | --- | --- | --- |
-| 2026-07-23 to 2026-07-24 | Execute #46: freeze, build, run, validate, and report the separate 59-case R1-versus-R5 rapid checkpoint | First course-specific retrieval result |
+| 2026-07-23 to 2026-07-24 | Execute #46: freeze, build, run, validate, and report the separate 59-case R0-R6 ablation with R5 versus R1 primary | First course-specific retrieval result |
 | 2026-07-25 to 2026-07-28 | Complete expanded retrieval-v3 and returned-context sufficiency | Confirmatory retrieval and safe-abstention decisions |
 | 2026-07-29 to 2026-07-31 | Qualify generator/prompt and end-to-end RAG | Frozen vertical-slice decision |
 | 2026-08-01 to 2026-08-04 | Build authenticated persistent staging around the selected or rollback profile | Deployed professor/student application |

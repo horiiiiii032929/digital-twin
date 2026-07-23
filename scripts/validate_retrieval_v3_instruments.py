@@ -112,8 +112,26 @@ def validate_freeze(freeze: dict[str, Any]) -> dict[str, int]:
         "retrieval rapid checkpoint deadline must remain 2026-07-24",
     )
     require(
-        rapid["conditions"] == ["R1", "R5"],
-        "retrieval rapid checkpoint must compare only R1 and R5",
+        rapid["conditions"] == ["R0", "R1", "R2", "R3", "R4", "R5", "R6", "O1"],
+        "retrieval rapid checkpoint must retain the full bounded ladder",
+    )
+    require(
+        rapid["condition_scope"]
+        == {
+            "R0_to_R5": "all_59_heldout_cases",
+            "R6": "13_multi_evidence_heldout_cases_only",
+            "O1": "39_answerable_heldout_cases_only",
+        },
+        "retrieval rapid condition scopes differ from the freeze",
+    )
+    require(
+        rapid["primary_contrast"] == "R5_vs_R1"
+        and len(rapid["descriptive_ablation_contrasts"]) == 6,
+        "retrieval rapid primary or descriptive contrasts differ",
+    )
+    require(
+        rapid["black_box_reference_in_offline_ranking_table"] is False,
+        "black-box references cannot enter the offline ranking table",
     )
     require(
         rapid["development"]
@@ -136,7 +154,12 @@ def validate_freeze(freeze: dict[str, Any]) -> dict[str, int]:
     )
     require(
         rapid["heldout"]["answerable_cases_per_lecture"] == 3
-        and sum(rapid["heldout"]["scenario_counts"].values()) == 39,
+        and rapid["heldout"]["scenario_counts"]
+        == {
+            "exact_or_terminology": 13,
+            "paraphrase_or_misconception": 13,
+            "multi_evidence": 13,
+        },
         "retrieval rapid answerable coverage differs from the freeze",
     )
     require(
