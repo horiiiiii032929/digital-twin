@@ -44,10 +44,12 @@ remain descriptive.
 
 The course dataset uses the versioned
 [`course_tutor_v1.schema.json`](course_tutor_v1.schema.json),
+[`course_tutor_v1_condition.schema.json`](course_tutor_v1_condition.schema.json),
 [`annotation guide`](course-tutor-v1-annotation-guide.md), and
 [`professor-anchor blueprint`](course-tutor-v1-professor-anchor.md). These fix
-the case unit, lineage, split discipline, claim-to-evidence graph, expected
-behavior, rubric applicability, and review history before model output.
+the case unit, lineage, split discipline, claim-to-evidence graph, controlled
+context/fault assignment, expected behavior, rubric applicability, and review
+history before model output.
 
 Public RAG and tutoring benchmarks supply constructs and instrument checks.
 They are not substitutes for the versioned course-specific benchmark.

@@ -29,11 +29,17 @@ The `course-tutor-v1` design is defined by:
   case JSON Schema;
 - [`course_tutor_v1_synthetic_example.json`](course_tutor_v1_synthetic_example.json),
   a public one-case example that contains no real course or student data;
+- [`course_tutor_v1_condition.schema.json`](course_tutor_v1_condition.schema.json)
+  and its
+  [`synthetic example`](course_tutor_v1_condition_synthetic_example.json),
+  which freeze candidate/presented evidence, exclusions, faults, and justified
+  condition-specific behavior without changing corpus answerability;
 - [`course-tutor-v1-annotation-guide.md`](course-tutor-v1-annotation-guide.md),
   the semantic rules, split discipline, privacy boundary, and annotation
   workflow; and
 - [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
-  the 12-case professor-review blueprint.
+  the construction state and review questions for the 12-case professor
+  anchor.
 
 The selected full-course candidate corpus is inventoried in
 [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the
@@ -44,10 +50,21 @@ Private course text, derived passages, real student content, and consent records
 must not be committed. The anchor is an instrument-calibration set, not a system
 performance result.
 
-Private anchor drafts and extracted evidence passages live under ignored
-`data/processed/course_tutor_v1/` and `data/interim/course_tutor_v1/`. The
-committed professor-anchor blueprint records construction and approval status
-without exposing course wording or gold claims.
+Private anchor cases, companion conditions, and extracted evidence passages
+live under ignored `data/processed/course_tutor_v1/` and
+`data/interim/course_tutor_v1/`. The committed professor-anchor document
+records construction and approval status without exposing course wording or
+gold claims.
+
+Validate the local 12-case researcher draft without running a model:
+
+```bash
+uv run python scripts/validate_course_tutor_dataset.py --expected-cases 12
+```
+
+This checks both JSON Schemas plus IDs, claim-evidence links, corpus and topic
+identity, passage hashes, candidate/presented evidence partitions, permission
+filters, condition-specific claim sets, and fault contracts.
 
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer

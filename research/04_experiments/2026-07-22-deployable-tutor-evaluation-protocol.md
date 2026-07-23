@@ -135,9 +135,11 @@ profile, prompts, thresholds, and analysis code are frozen.
 
 The versioned case contract is
 [`course_tutor_v1.schema.json`](../05_evaluation/course_tutor_v1.schema.json),
+with controlled context and fault assignments in
+[`course_tutor_v1_condition.schema.json`](../05_evaluation/course_tutor_v1_condition.schema.json),
 with semantic rules in the
 [`annotation guide`](../05_evaluation/course-tutor-v1-annotation-guide.md) and
-the planned 12-case coverage in the
+the 12-case construction and review state in the
 [`professor-anchor blueprint`](../05_evaluation/course-tutor-v1-professor-anchor.md).
 
 No held-out record from component qualification may be used to tune the final

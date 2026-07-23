@@ -2,8 +2,9 @@
 
 Date: 2026-07-23
 
-Status: schema candidate v1.1 for professor-anchor review; private draft cases
-may be authored locally, but no case is approved for tutoring or evaluation
+Status: case schema candidate v1.1 and condition schema candidate v1.0 for
+professor-anchor review; private draft cases may be authored locally, but no
+case is approved for tutoring or evaluation
 
 ## Purpose
 
@@ -28,6 +29,15 @@ draft to retain `pending` tutoring permission. Pending evidence may be authored
 and reviewed locally, but it cannot enter a tutor run or count as approved gold
 evidence.
 
+Deliberate context and fault conditions use the separate
+[`course_tutor_v1_condition.schema.json`](course_tutor_v1_condition.schema.json).
+Its
+[`synthetic example`](course_tutor_v1_condition_synthetic_example.json)
+shows how to distinguish candidate evidence, evidence actually presented after
+permission/version filtering, excluded evidence, injected faults, and
+condition-specific behavior. Keeping this separate preserves corpus
+answerability as a stable case label.
+
 ## Unit of analysis
 
 One **case** is one frozen student question plus any necessary prior dialogue,
@@ -39,6 +49,12 @@ run through C0-C4 and may produce several returned-context records. Keeping
 these units separate prevents a retriever's current behavior from becoming the
 gold label.
 
+A **condition record** is a frozen calibration or experimental assignment for
+one case. It records evidence candidates, evidence supplied after filtering,
+deliberate exclusions, any injected operational fault, and any justified
+condition-specific behavior override. It does not change what the full corpus
+can answer.
+
 ## Record groups
 
 | Group | What it fixes before a run | Why it is separate |
@@ -46,6 +62,7 @@ gold label.
 | Dataset identity | Version, split, language, course, corpus, policy, rubric, permission, full-context eligibility, and sealing state | Makes every result traceable to one frozen input |
 | Student input | Question, minimal dialogue, and declared or scenario-supported learning state | Prevents the evaluator from inventing student intent after seeing the response |
 | Ground truth | Corpus answerability, expected action, allowed support, atomic claims, evidence links, and policy rules | Separates content correctness from tutoring behavior |
+| Condition assignment | Candidate and presented evidence, exclusions, fault injection, and condition-specific behavior | Separates full-corpus gold labels from a controlled retrieval or failure condition |
 | Rubric applicability | Required pedagogy dimensions, hard-gate focus, and policy-pair eligibility | Fixes metric denominators before output generation |
 | Stressors | Retrieval, safety, and operational challenge tags | Supports failure slices without using the tag as the answerability label |
 | Annotation | Authors, reviewers, disagreement, revision, and professor decision | Preserves how the gold label was produced |
@@ -59,6 +76,9 @@ gold label.
 - Returned-context sufficiency asks whether the evidence actually supplied to
   the generator is `complete`, `partial`, or `none`.
 - The first is a case label. The second is a human judgment in the run output.
+- A frozen anchor condition may predeclare expected sufficiency for instrument
+  calibration, but the actual run must still record and verify what was
+  supplied.
 - Neither is inferred from query category, retrieval score, or vocabulary
   overlap.
 
@@ -97,7 +117,9 @@ disability, demographic attributes, motivation, or ability from writing style.
 9. Define the primary action, acceptable alternatives, forbidden actions,
    allowed support level, citations, and required tutoring moves.
 10. Predeclare applicable pedagogy dimensions and hard-gate focus.
-11. Complete independent review, preserve disagreements, and obtain professor
+11. When the case tests filtering, incomplete context, or failure recovery,
+    create a separate condition record and predeclare any behavior override.
+12. Complete independent review, preserve disagreements, and obtain professor
     approval for every anchor case before scaling the dataset.
 
 ## Semantic validation rules
@@ -115,6 +137,10 @@ rules must also pass before a split is approved:
 | Every claim-to-evidence reference resolves in both directions | Broken annotation graph |
 | `prohibited`, `superseded`, and `unapproved` evidence never supports a required claim | Unsafe gold label |
 | `not_answerable` cases contain no essential factual evidence and do not require an unsupported answer | False-answer target is invalid |
+| Every condition case ID and evidence-unit ID resolves; presented evidence is a subset of candidates and excluded evidence is never presented | Context-assignment corruption |
+| `complete`, `partial`, `none`, and `not_applicable` condition labels agree with the essential evidence actually presented | Incorrect sufficiency target |
+| Permission/version exclusions identify the candidate passage and filter reason; partial-context exclusions identify the deliberately absent essential passage | Permission filtering and retrieval misses are conflated |
+| A condition override names only claims supported by presented evidence; injected faults predeclare a bounded output state | Post-hoc success criteria or unsafe failure target |
 | Assessed-work cases declare assessment context, allowed support level, and at least one forbidden behavior | Integrity behavior is ambiguous |
 | Privacy/authorization stress cases name the prohibited behavior without embedding real personal data | Safety test creates its own privacy risk |
 | Hard-gate and pedagogy applicability are set before model output | Denominator can be changed after seeing results |
@@ -174,7 +200,7 @@ pending or ineligible C4 does not block the required C0-C3 evaluation.
 Evaluation outputs are stored separately under ignored `reports/generated/`.
 For every case and condition they must record:
 
-- run, case, condition, dataset, corpus, policy, model, prompt, and code
+- run, case, frozen condition, dataset, corpus, policy, model, prompt, and code
   revision identifiers;
 - exact retrieved passage IDs, ranks, scores, and context supplied;
 - human returned-context label: complete, partial, or none;
@@ -190,9 +216,14 @@ inspection.
 
 ## Definition of ready for professor review
 
-- the JSON Schema and synthetic example validate;
-- all 12 anchor slots have an explicit purpose and expected decision;
-- every anchor uses synthetic placeholders until course permission exists;
+- both JSON Schemas and both synthetic examples validate;
+- all 12 anchor slots have an explicit purpose, expected decision, and
+  researcher draft;
+- every question and student state is synthetic, while private course evidence
+  remains hashed and stored only under ignored local paths until permission
+  exists;
+- partial-context, permission-filter, and provider-outage assignments resolve
+  through the companion condition records;
 - professor questions focus on content, policy, evidence, and allowed tutoring
   behavior rather than implementation; and
 - no source ingestion, RAG implementation, provider call, or held-out record is

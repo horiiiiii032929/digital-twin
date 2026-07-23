@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/course_tutor_v1_condition.schema.json",
+  "title": "course-tutor-v1 evaluation condition set",
+  "description": "Companion schema that freezes the evidence shown, evidence withheld, simulated fault, and condition-specific expected behavior for a course-tutor-v1 case without changing corpus answerability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "condition_set_version",
+    "split",
+    "created_at",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "dataset_id": {
+      "const": "course-tutor-v1"
+    },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^course-tutor-v1\\.[0-9]+\\.[0-9]+-(anchor|development|heldout|example)$"
+    },
+    "condition_set_version": {
+      "type": "string",
+      "pattern": "^course-tutor-v1-conditions\\.[0-9]+\\.[0-9]+-(anchor|development|heldout|example)$"
+    },
+    "split": {
+      "enum": [
+        "anchor",
+        "development",
+        "heldout"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/condition_record"
+      }
+    }
+  },
+  "$defs": {
+    "action": {
+      "enum": [
+        "answer",
+        "scaffold",
+        "clarify",
+        "redirect",
+        "abstain"
+      ]
+    },
+    "condition_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition_id",
+        "case_id",
+        "context_assignment",
+        "fault_injection",
+        "expected_behavior"
+      ],
+      "properties": {
+        "condition_id": {
+          "type": "string",
+          "pattern": "^ctv1-condition-[a-z0-9-]+$"
+        },
+        "case_id": {
+          "type": "string",
+          "pattern": "^ctv1-(anchor|dev|test)-[0-9]{3}$"
+        },
+        "context_assignment": {
+          "$ref": "#/$defs/context_assignment"
+        },
+        "fault_injection": {
+          "$ref": "#/$defs/fault_injection"
+        },
+        "expected_behavior": {
+          "$ref": "#/$defs/condition_expected_behavior"
+        }
+      }
+    },
+    "context_assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_basis",
+        "expected_sufficiency",
+        "candidate_evidence_unit_ids",
+        "presented_evidence_unit_ids",
+        "excluded_evidence",
+        "rationale"
+      ],
+      "properties": {
+        "selection_basis": {
+          "enum": [
+            "oracle",
+            "retrieved",
+            "synthetic_injection",
+            "policy_only",
+            "none"
+          ]
+        },
+        "expected_sufficiency": {
+          "enum": [
+            "complete",
+            "partial",
+            "none",
+            "not_applicable"
+          ]
+        },
+        "candidate_evidence_unit_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Evidence returned or injected before permission and version filtering.",
+          "items": {
+            "type": "string",
+            "pattern": "^ev-[0-9]{2}$"
+          }
+        },
+        "presented_evidence_unit_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Evidence actually supplied to the response-producing component after filtering.",
+          "items": {
+            "type": "string",
+            "pattern": "^ev-[0-9]{2}$"
+          }
+        },
+        "excluded_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/excluded_evidence"
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "excluded_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_unit_id",
+        "reason"
+      ],
+      "properties": {
+        "evidence_unit_id": {
+          "type": "string",
+          "pattern": "^ev-[0-9]{2}$"
+        },
+        "reason": {
+          "enum": [
+            "not_retrieved",
+            "withheld_by_condition",
+            "permission_filter",
+            "version_filter"
+          ]
+        }
+      }
+    },
+    "fault_injection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fault",
+        "stage",
+        "trigger",
+        "retry_allowed",
+        "expected_output_state",
+        "rationale"
+      ],
+      "properties": {
+        "fault": {
+          "enum": [
+            "none",
+            "timeout",
+            "malformed_provider_output",
+            "provider_outage"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "none",
+            "retrieval",
+            "generation",
+            "policy",
+            "citation",
+            "orchestration"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "none",
+            "before_call",
+            "during_call",
+            "after_call"
+          ]
+        },
+        "retry_allowed": {
+          "type": "boolean"
+        },
+        "expected_output_state": {
+          "enum": [
+            "normal",
+            "bounded_failure"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "condition_expected_behavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "required_claim_ids",
+        "behavior_override",
+        "rationale"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "case_default",
+            "condition_override"
+          ]
+        },
+        "required_claim_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^clm-[0-9]{2}$"
+          }
+        },
+        "behavior_override": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/behavior_override"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "case_default"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "behavior_override": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "condition_override"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "behavior_override": {
+                "$ref": "#/$defs/behavior_override"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "behavior_override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_action",
+        "acceptable_alternatives",
+        "forbidden_actions",
+        "allowed_support_level",
+        "required_tutoring_moves",
+        "citation_requirement"
+      ],
+      "properties": {
+        "primary_action": {
+          "$ref": "#/$defs/action"
+        },
+        "acceptable_alternatives": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "allowed_support_level": {
+          "enum": [
+            "full_explanation",
+            "conceptual_only",
+            "hints_only",
+            "critique_only",
+            "similar_example_only",
+            "no_answer"
+          ]
+        },
+        "required_tutoring_moves": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "direct_explanation",
+              "hint",
+              "guiding_question",
+              "misconception_correction",
+              "critique",
+              "analogous_example",
+              "check_understanding"
+            ]
+          }
+        },
+        "citation_requirement": {
+          "enum": [
+            "required",
+            "not_required",
+            "conditional"
+          ]
+        }
+      }
+    }
+  }
+}

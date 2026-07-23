@@ -2,8 +2,9 @@
 
 Date: 2026-07-23
 
-Status: proposed 12-case instrument-calibration set; course content and expected
-decisions require professor approval
+Status: researcher draft complete and locally validated; course content,
+misconceptions, policy decisions, and tutoring permission require professor
+review
 
 ## Construction status
 
@@ -11,11 +12,38 @@ decisions require professor approval
 | --- | --- | --- | --- |
 | `ctv1-anchor-001` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 5, page 6; source identity, extracted-passage hash, and claim-evidence graph resolve | Pending review and tutoring permission |
 | `ctv1-anchor-002` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 2, page 18; source identity, extracted-passage hash, topic stratum, and claim-evidence graph resolve | Pending review and tutoring permission |
-| `ctv1-anchor-003` to `ctv1-anchor-012` | Blueprint only | Not yet instantiated | Pending |
+| `ctv1-anchor-003` | Drafted and validated locally | IT5002 Lecture 3, page 35; zero-register misconception candidate | Pending misconception and tutoring review |
+| `ctv1-anchor-004` | Drafted and validated locally | IT5002 Lecture 6, page 26 and Lecture 7, page 15; two essential units resolve | Pending content and tutoring review |
+| `ctv1-anchor-005` | Drafted and validated locally | IT5002 Lecture 11, page 14; two plausible process-state interpretations | Pending clarification-policy review |
+| `ctv1-anchor-006` | Drafted and validated locally | No positive evidence by design; empty context against the frozen 13-lecture boundary | Pending course-boundary and redirection review |
+| `ctv1-anchor-007` | Drafted and validated locally | Policy-only synthetic assessed-work request; no assignment or answer-key content included | Pending academic-integrity policy review |
+| `ctv1-anchor-008` | Drafted and validated locally | IT5002 Lecture 9, page 62 plus a synthetic prohibited negative control; permission-filter condition resolves | Pending source-authority and tutoring review |
+| `ctv1-anchor-009` | Drafted and validated locally | IT5002 Lecture 7, pages 30 and 17; one essential unit is deliberately withheld in the partial-context condition | Pending minimum-evidence behavior review |
+| `ctv1-anchor-010` | Drafted and validated locally | IT5002 Lecture 13, page 27; synthetic assessed-work attempt | Pending allowed-critique policy review |
+| `ctv1-anchor-011` | Drafted and validated locally | Policy-only privacy test; no real private record is created or retrieved | Pending privacy, authorization, and escalation review |
+| `ctv1-anchor-012` | Drafted and validated locally | IT5002 Lecture 1, page 5 plus a frozen generation-provider outage | Pending failure-message and retry-policy review |
 
-The private draft is stored under ignored
-`data/processed/course_tutor_v1/anchor/`; course wording and gold claims are not
-committed.
+The private case and condition drafts are stored under ignored
+`data/processed/course_tutor_v1/anchor/`; course wording, gold claims, and
+derived evidence passages are not committed.
+
+## Researcher drafting checkpoint
+
+This is a defensible stopping and reporting point:
+
+- all 12 planned anchor cases are instantiated;
+- every positive factual claim resolves to visually checked lecture evidence;
+- no-evidence, assessed-work, and privacy cases intentionally contain no
+  private answer source;
+- permission filtering, partial returned context, and provider outage have
+  explicit companion conditions;
+- case and condition schemas, IDs, claim graphs, source identities, passage
+  hashes, context partitions, and fault contracts validate locally; and
+- no model, retriever, prompt, or deployed tutor has been scored.
+
+The correct progress statement is therefore **instrument draft complete,
+professor calibration pending**. It is not “RAG complete,” “evaluation passed,”
+or “system ready for students.”
 
 ## What the anchor is for
 
