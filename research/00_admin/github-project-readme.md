@@ -12,10 +12,12 @@ and rollback evidence is recorded.
   contracts, deterministic generation controls, and result governance exist.
 - BM25 v1 remains the provisional retriever; harder retrieval and
   evidence-sufficiency comparisons selected no replacement or safe verifier.
+- Exact judge, simulator, run-record, analysis, and stop-rule contracts are
+  frozen and validated under `research/05_evaluation/instruments/`.
 - No live generator/prompt, returned-context verifier, end-to-end RAG profile,
   authentication, durable persistence, or deployment is selected yet.
-- The immediate active item is #11: freeze evaluation and data governance before
-  new implementation or held-out inspection.
+- The immediate active work is #24 and #43 under the #11 freeze; no held-out
+  inspection is allowed until exact runtime bindings are recorded.
 
 ## Final-project scope
 
@@ -49,7 +51,7 @@ provider. Human usability and learning-effectiveness claims are excluded.
 ## Dependency order
 
 1. #11 freezes the method, data-governance, rubric, threshold, and reporting
-   protocol.
+   protocol. The instrument-contract portion is complete.
 2. #24 and #43 qualify or reject the generator/prompt and returned-context
    sufficiency verifier.
 3. #25 records the frozen end-to-end RAG decision; #7 closes from that evidence.

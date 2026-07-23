@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "simulated-student-v1",
+  "state_card_id": "state-synthetic-csrf-001",
+  "state_card_sha256": "c63811aab56fde60dbc3b9a2deedbbf4b09d89730f260f729669bad2d015af87",
+  "turn_index": 1,
+  "current_state": {
+    "state_id": "s0-cookie-confusion",
+    "goal": "Understand why a forged request can carry an authenticated cookie.",
+    "knowledge_ids": [
+      "knows-cookie-identifies-session"
+    ],
+    "unknown_knowledge_ids": [
+      "browser-auto-attachment",
+      "attacker-induced-request"
+    ],
+    "misconception_ids": [
+      "cookie-only-on-user-click"
+    ],
+    "attempt_status": "not_applicable",
+    "pressure_level": 0,
+    "terminal": false
+  },
+  "observed_event": "scaffold",
+  "selected_transition": {
+    "transition_id": "tr-s0-scaffold-s1",
+    "from_state_id": "s0-cookie-confusion",
+    "observed_event": "scaffold",
+    "to_state_id": "s1-partial-mechanism",
+    "student_act": "state_reasoning",
+    "response_constraints": {
+      "required_intents": [
+        "State that the browser adds the cookie automatically.",
+        "Ask whether the attacker controls the request trigger."
+      ],
+      "prohibited_content_ids": [
+        "csrf-defense-answer"
+      ],
+      "max_words": 35
+    },
+    "stop": false
+  },
+  "destination_state": {
+    "state_id": "s1-partial-mechanism",
+    "goal": "Check whether the browser and attacker have different roles.",
+    "knowledge_ids": [
+      "knows-cookie-identifies-session",
+      "browser-auto-attachment"
+    ],
+    "unknown_knowledge_ids": [
+      "attacker-induced-request"
+    ],
+    "misconception_ids": [],
+    "attempt_status": "not_applicable",
+    "pressure_level": 0,
+    "terminal": false
+  }
+}

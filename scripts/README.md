@@ -41,3 +41,7 @@ Current utilities:
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of
   `npm run check`; run it directly with `npm run verify:evaluation-results`.
+- `validate_evaluation_instruments.py`: validates the frozen LLM-judge,
+  simulated-student, run-record, and analysis contracts plus public synthetic
+  examples, semantic cross-file invariants, and the freeze-manifest hashes; run
+  it with `npm run verify:evaluation-instruments`.

@@ -5,6 +5,7 @@ records, release profiles, and readable result summaries.
 
 ```text
 05_evaluation/
+├── instruments/ frozen prompts, schemas, analysis, examples, and hashes
 ├── templates/   component plans and decision records
 ├── records/     validated machine-readable candidate comparisons
 ├── profiles/    complete system component selections
@@ -16,6 +17,17 @@ records, release profiles, and readable result summaries.
 Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
+
+The exact no-participant evaluator contracts are frozen under
+[`instruments/`](instruments/). Validate judge, simulator, run-record, analysis,
+synthetic-example, and SHA-256 consistency with:
+
+```bash
+npm run verify:evaluation-instruments
+```
+
+This is structural readiness, not evidence that a judge is calibrated or a
+simulated trajectory is valid.
 
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in

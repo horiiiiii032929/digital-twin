@@ -2,8 +2,8 @@
 
 Date: 2026-07-22
 
-Status: active planning baseline; implementation has not started under this
-rescope.
+Status: active planning baseline; evaluation instruments are frozen, and
+deployable-application implementation has not started under this rescope.
 
 ## Scope decision
 
@@ -16,10 +16,11 @@ part of the required outcome.
 
 The target is a controlled one-course research deployment, not an
 institution-wide production service. Student recruitment is out of scope.
-Professor review is used to approve course truth and evaluation instruments;
-frozen simulated students and synthetic accounts provide multi-turn and
-deployment stress tests. The professor and institution must still approve
-course-material tutoring use and the model-provider data boundary.
+The researcher owns course-anchor and evaluation-instrument decisions;
+professor review is an optional expert-validity check. Frozen simulated
+students and synthetic accounts provide multi-turn and deployment stress tests.
+The professor or institution must still authorize any real student-facing
+release, while private course processing remains local.
 
 ## Research contribution
 

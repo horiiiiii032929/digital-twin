@@ -91,6 +91,9 @@ produce an inspectable, evaluated vertical slice.
 
 ### Demonstration and evidence
 
+- Validate the exact judge, simulator, run-record, and analysis freeze with
+  `npm run verify:evaluation-instruments` before provider calls or sealed
+  inspection.
 - Demonstrate a normal conceptual question, a misconception, a graded-work
   request, and a no-evidence question.
 - Compare the configured grounded tutor with a generic or non-grounded baseline.

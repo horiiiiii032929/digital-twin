@@ -2,9 +2,10 @@
 
 Date: 2026-07-23
 
-Status: researcher-selected protocol candidate v0.2; freeze exact prompts,
-state-card schema, and analysis under issue #11 before provider calls or
-sealed-output inspection
+Status: researcher-frozen protocol v1.0; exact prompts, state-card contract,
+run record, analysis, examples, and SHA-256 manifest are versioned under
+`research/05_evaluation/instruments/`. Runtime model bindings remain required
+before a sealed run
 
 ## Decision
 
@@ -108,13 +109,17 @@ Course-specific simulator and judge models therefore run locally unless the
 professor and institution explicitly approve an external provider. DeepSeek
 remains synthetic-only under the existing cumulative USD 10 qualification cap.
 
+The exact public contracts are selected in the
+[evaluation instrument freeze](2026-07-23-evaluation-instrument-freeze.md).
+Run `npm run verify:evaluation-instruments` before development or sealed work.
+
 ## Evaluation portfolio
 
 ### Single-turn course evaluation
 
 Retain `course-tutor-v1`:
 
-- 12 professor-anchor cases for instrument review;
+- 12 researcher-anchor cases for instrument calibration;
 - 48 inspectable development cases; and
 - 104 sealed final cases, with 13 cases in each of eight scenario types.
 
@@ -211,11 +216,13 @@ review for:
 The LLM judge scores only predeclared applicable dimensions:
 
 - clarity and coherence;
-- misconception localization;
-- scaffolding and guidance;
+- student-state recognition;
+- mistake localization;
+- guidance and scaffolding;
 - actionability;
 - professor-policy alignment; and
-- answer-revelation control.
+- answer-revelation control; and
+- tone and respect.
 
 Use a structured `fail / partial / pass` decision with a short evidence span and
 rubric reason for each dimension. Also use blinded pairwise preference for C1
@@ -338,6 +345,11 @@ quality or SOTA thresholds.
 
 ## Analysis
 
+The exact populations, denominators, intervals, bootstrap seed, paired
+contrasts, multiplicity correction, calibration rules, rounding, and stopping
+behavior are frozen in
+[`analysis_v1.json`](../05_evaluation/instruments/analysis_v1.json).
+
 - Report numerator, denominator, estimate, and 95% interval for every primary
   proportion.
 - Report paired C0-C3 and C1-C2 differences with paired bootstrap intervals;
@@ -370,6 +382,9 @@ configuration. Keep bulky or private per-case outputs ignored, but commit
 sanitized aggregate records and readable result summaries.
 
 ## Stop rules
+
+The machine-readable stop-rule IDs and actions in `analysis_v1.json` are
+authoritative when this summary is ambiguous.
 
 - Do not use LLM judges for exact checks that can be computed.
 - Do not let the tutor model judge itself without a disclosed sensitivity test.

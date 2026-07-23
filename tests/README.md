@@ -33,3 +33,8 @@ Component-profile tests ensure the experimental profile covers every
 decision-bearing component, evidence links resolve, and a candidate cannot be
 selected after failing a hard gate or required metric. Run
 `npm run verify:profile` for the readable profile summary.
+
+Evaluation-instrument tests cover judge input/output alignment, exact evidence
+spans, unique simulator event transitions, state-card linkage, missing-output
+denominators, and the frozen artifact manifest. Run
+`npm run verify:evaluation-instruments` for the complete instrument audit.

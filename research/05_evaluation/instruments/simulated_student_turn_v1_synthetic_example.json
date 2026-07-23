@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "simulated-student-v1",
+  "state_card_id": "state-synthetic-csrf-001",
+  "turn_index": 1,
+  "invalid": false,
+  "invalid_reason": null,
+  "from_state_id": "s0-cookie-confusion",
+  "observed_event": "scaffold",
+  "transition_id": "tr-s0-scaffold-s1",
+  "next_state_id": "s1-partial-mechanism",
+  "student_message": "So the browser adds the cookie automatically. Is the request itself the part the attacker causes?",
+  "stop": false
+}

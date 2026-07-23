@@ -55,11 +55,14 @@ BM25 retrieval, dense/RRF comparisons, component profiles, and result
 governance. Retrieval v2, evidence-sufficiency v1, and exploratory local
 generation all produced `Refine` or no-selection results.
 
-The project is not yet deployable: it has no selected returned-context verifier
+The exact no-participant judge, simulator, run-record, analysis, and stop-rule
+contracts are now frozen and validated. The project is not yet deployable: it
+has no selected returned-context verifier
 or live generator/prompt, no end-to-end RAG decision, no authentication or
 durable persistence, no student release flow, and no staging environment. Issue
-#11 is therefore the immediate gate: freeze the method, data-governance,
-privacy, dataset, rubric, and reporting protocol before implementation
-continues. This is a researcher-controlled reproducibility gate, not a request
-for the professor to select the method. The full rescope is recorded in the
+#11 now records the completed instrument freeze; the immediate experiments are
+#24 generator/prompt qualification and #43 returned-context verifier
+qualification before #25. This is a researcher-controlled reproducibility
+sequence, not a request for the professor to select the method. The full
+rescope is recorded in the
 [deployable pilot plan](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).

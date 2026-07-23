@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/instruments/simulated_student_state_v1.schema.json",
+  "title": "Simulated student v1 state card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instrument_id",
+    "state_card_id",
+    "dataset_version",
+    "split",
+    "scenario_type",
+    "course_id",
+    "data_boundary",
+    "initial_state_id",
+    "max_tutor_turns",
+    "states",
+    "transitions",
+    "checkpoints",
+    "invalidity_rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instrument_id": {
+      "const": "simulated-student-v1"
+    },
+    "state_card_id": {
+      "type": "string",
+      "pattern": "^state-[a-z0-9][a-z0-9-]{2,100}$"
+    },
+    "dataset_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "enum": [
+        "development",
+        "heldout",
+        "example"
+      ]
+    },
+    "scenario_type": {
+      "$ref": "#/$defs/scenario_type"
+    },
+    "course_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data_boundary": {
+      "enum": [
+        "synthetic_public",
+        "private_course_local"
+      ]
+    },
+    "initial_state_id": {
+      "$ref": "#/$defs/state_id"
+    },
+    "max_tutor_turns": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 4
+    },
+    "states": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/state"
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": {
+        "$ref": "#/$defs/transition"
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/checkpoint"
+      }
+    },
+    "invalidity_rules": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "unknown_knowledge_revealed",
+          "prohibited_content_revealed",
+          "undeclared_state_change",
+          "unmapped_transition",
+          "non_unique_transition",
+          "word_limit_exceeded",
+          "wrong_state_or_transition_id",
+          "invalid_stop_behavior",
+          "malformed_output"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "scenario_type": {
+      "enum": [
+        "direct",
+        "paraphrase",
+        "misconception",
+        "multi_evidence",
+        "ambiguity",
+        "no_evidence",
+        "assessed_work",
+        "permission_version"
+      ]
+    },
+    "state_id": {
+      "type": "string",
+      "pattern": "^s[0-9]+-[a-z0-9][a-z0-9-]{1,60}$"
+    },
+    "observed_event": {
+      "enum": [
+        "answer",
+        "scaffold",
+        "clarify",
+        "redirect",
+        "abstain",
+        "prohibited_completion",
+        "unsupported_claim",
+        "operational_failure",
+        "recovery"
+      ]
+    },
+    "student_act": {
+      "enum": [
+        "ask_follow_up",
+        "state_reasoning",
+        "repeat_pressure",
+        "provide_attempt",
+        "request_clarification",
+        "acknowledge",
+        "end_dialogue",
+        "report_failure"
+      ]
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_id",
+        "goal",
+        "knowledge_ids",
+        "unknown_knowledge_ids",
+        "misconception_ids",
+        "attempt_status",
+        "pressure_level",
+        "terminal"
+      ],
+      "properties": {
+        "state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "knowledge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unknown_knowledge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "misconception_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "attempt_status": {
+          "enum": [
+            "none",
+            "minimal",
+            "meaningful",
+            "completed",
+            "not_applicable"
+          ]
+        },
+        "pressure_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "terminal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transition_id",
+        "from_state_id",
+        "observed_event",
+        "to_state_id",
+        "student_act",
+        "response_constraints",
+        "stop"
+      ],
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "pattern": "^tr-[a-z0-9][a-z0-9-]{2,80}$"
+        },
+        "from_state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "observed_event": {
+          "$ref": "#/$defs/observed_event"
+        },
+        "to_state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "student_act": {
+          "$ref": "#/$defs/student_act"
+        },
+        "response_constraints": {
+          "$ref": "#/$defs/response_constraints"
+        },
+        "stop": {
+          "type": "boolean"
+        }
+      }
+    },
+    "response_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_intents",
+        "prohibited_content_ids",
+        "max_words"
+      ],
+      "properties": {
+        "required_intents": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "prohibited_content_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "max_words": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "after_tutor_turn",
+        "state_id",
+        "expected_tutor_actions",
+        "required_pedagogy_dimensions",
+        "hard_gate_focus",
+        "terminal_expected"
+      ],
+      "properties": {
+        "after_tutor_turn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "expected_tutor_actions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "answer",
+              "scaffold",
+              "clarify",
+              "redirect",
+              "abstain"
+            ]
+          }
+        },
+        "required_pedagogy_dimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "student_state_recognition",
+              "mistake_localization",
+              "guidance_and_scaffolding",
+              "actionability",
+              "answer_revelation_control",
+              "professor_policy_alignment",
+              "clarity_and_coherence",
+              "tone_and_respect"
+            ]
+          }
+        },
+        "hard_gate_focus": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "terminal_expected": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

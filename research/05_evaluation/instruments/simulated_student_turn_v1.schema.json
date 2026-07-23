@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/instruments/simulated_student_turn_v1.schema.json",
+  "title": "Simulated student v1 turn output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instrument_id",
+    "state_card_id",
+    "turn_index",
+    "invalid",
+    "invalid_reason",
+    "from_state_id",
+    "observed_event",
+    "transition_id",
+    "next_state_id",
+    "student_message",
+    "stop"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instrument_id": {
+      "const": "simulated-student-v1"
+    },
+    "state_card_id": {
+      "type": "string",
+      "pattern": "^state-[a-z0-9][a-z0-9-]{2,100}$"
+    },
+    "turn_index": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "invalid": {
+      "type": "boolean"
+    },
+    "invalid_reason": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "input_mismatch",
+            "unmapped_transition",
+            "non_unique_transition",
+            "malformed_input"
+          ]
+        }
+      ]
+    },
+    "from_state_id": {
+      "type": "string",
+      "pattern": "^s[0-9]+-[a-z0-9][a-z0-9-]{1,60}$"
+    },
+    "observed_event": {
+      "enum": [
+        "answer",
+        "scaffold",
+        "clarify",
+        "redirect",
+        "abstain",
+        "prohibited_completion",
+        "unsupported_claim",
+        "operational_failure",
+        "recovery"
+      ]
+    },
+    "transition_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^tr-[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "next_state_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^s[0-9]+-[a-z0-9][a-z0-9-]{1,60}$"
+    },
+    "student_message": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "stop": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "invalid": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "invalid_reason": {
+            "type": "null"
+          },
+          "transition_id": {
+            "type": "string"
+          },
+          "next_state_id": {
+            "type": "string"
+          },
+          "student_message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "invalid": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "invalid_reason": {
+            "type": "string"
+          },
+          "transition_id": {
+            "type": "null"
+          },
+          "next_state_id": {
+            "type": "null"
+          },
+          "student_message": {
+            "type": "null"
+          },
+          "stop": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}
