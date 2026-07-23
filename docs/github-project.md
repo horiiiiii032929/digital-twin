@@ -138,7 +138,7 @@ project board. The current presentation milestone is tracked through
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
 | S2 Protocol and RAG | 2026-07-22 to 2026-07-31 | Frozen protocol and qualified/rejected grounded RAG profile | #7, #11, #24, #25, #43 | 2026-07-31 |
 | S3 Deployable App | 2026-08-01 to 2026-08-10 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-10 |
-| S4 Hardening and Review | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, and professor evaluation-release decision | #9 | 2026-08-15 |
+| S4 Hardening and Review | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, researcher evaluation decision, and professor risk critique | #9 | 2026-08-15 |
 | S5 Simulated Evaluation | 2026-08-16 to 2026-08-22 | Calibrated LLM judge, simulated-student trajectories, and deployed synthetic-account acceptance | #10 | 2026-08-22 |
 | S6 Evidence Freeze | 2026-08-23 to 2026-08-26 | Blinded comparison, bounded refinement, and frozen claims | #12 | 2026-08-26 |
 | S7 Report and Presentation | 2026-08-27 to 2026-09-13 | Report, figures, deployed demo, reproducibility, slides, rehearsal, and three-day contingency | #13, #44 | 2026-09-13 |
@@ -156,9 +156,9 @@ project board. The current presentation milestone is tracked through
 - Update `Target Date` before changing scope so timeline drift is visible.
 - Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
 - Keep `Sprint` and `Evidence` field values short so the table remains readable.
-- Record each professor checkpoint in #44 and copy the decision to the local
-  decision log; general encouragement does not approve private-course provider
-  use or evaluator calibration.
+- Record each researcher decision and any professor critique separately in #44
+  and the local decision log; general encouragement does not approve
+  private-course provider use, evaluator calibration, or student release.
 - Do not close a technical execution issue until its design note, tests,
   experiment evidence, limitations, and learning log satisfy the shared
   definition of done.

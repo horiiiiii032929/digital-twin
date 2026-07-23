@@ -2,8 +2,8 @@
 
 Date: 2026-07-23
 
-Status: selected local corpus boundary; professor tutoring permission and
-external-provider permission remain pending
+Status: researcher-selected local evaluation corpus; external-provider use is
+prohibited and real student-facing release permission remains separate
 
 ## Decision
 
@@ -47,7 +47,7 @@ The committed sanitized inventory is
 
 | Source class | Initial role | Rationale |
 | --- | --- | --- |
-| Official lecture PDFs 1-13 | Candidate authoritative retrieval and gold evidence after professor approval | Complete official course sequence with stable pages and hashes |
+| Official lecture PDFs 1-13 | Authoritative local-evaluation retrieval and gold evidence | Complete official course sequence with stable pages and hashes |
 | Personal Markdown notes | Question wording and misconception discovery only | Useful student perspective, but sampled notes contain labeling and factual errors |
 | Tutorials | Excluded initially | May contain answer material and requires a separate permission/integrity decision |
 | Assignments, quizzes, exams, solutions, and answer files | Prohibited from retrieval | High academic-integrity risk |
@@ -84,10 +84,12 @@ uniform, but the allocation is frozen before case authoring.
 
 ## Remaining gates
 
-1. Professor confirms that all 13 lectures may be processed and used for tutor
-   grounding.
-2. Professor approves the source hierarchy and assessed-work boundary.
-3. External-provider review separately decides whether any lecture text may
-   leave the local environment.
-4. The 12-case anchor is instantiated and approved before development or held-
-   out authoring.
+1. Freeze the exact local evaluation instruments and source hierarchy under
+   issue #11.
+2. Keep all course-specific tutor, simulator, and judge processing local;
+   external-provider use remains prohibited.
+3. Freeze the researcher-authored 12-case anchor before development or held-out
+   authoring; record any later professor review as optional expert calibration.
+4. Obtain explicit professor or institutional authorization before real
+   student-facing release. Local research evaluation does not imply that
+   authorization.

@@ -32,10 +32,9 @@ course, without student recruitment. The project requires:
   synthetic-account acceptance; and
 - reproducible offline comparisons and a deployed demonstration.
 
-Course-specific evaluation is conditional on professor approval of course
-permissions and the model-provider data boundary. Private course material and
-outputs remain local unless external processing is explicitly approved. Human
-usability and learning-effectiveness claims are excluded.
+Course-specific evaluation is local-only under the researcher-selected working
+boundary. Private course material and outputs do not enter an external
+provider. Human usability and learning-effectiveness claims are excluded.
 
 ## Deferred from the critical path
 
@@ -56,25 +55,26 @@ usability and learning-effectiveness claims are excluded.
 3. #25 records the frozen end-to-end RAG decision; #7 closes from that evidence.
 4. #8 adds evaluated authentication, authorization, persistence, storage,
    professor/student journeys, and staging deployment.
-5. #9 hardens security/reliability and obtains professor evaluation-release Go
-   / Refine / No-Go.
+5. #9 hardens security/reliability and records the researcher evaluation-release
+   Go / Refine / No-Go; real student release authorization remains separate.
 6. #10 runs calibrated LLM-judge, simulated-student, and deployed
    synthetic-account evaluation.
 7. #12 runs the blinded final comparison and freezes evidence.
 8. #13 delivers the final report, deployed demo, reproducibility package, and
    presentation.
-9. #44 records every professor reporting and release decision.
+9. #44 records every researcher checkpoint, professor critique, and genuine
+   release decision separately.
 
 ## Tight roadmap
 
 | Date | Required outcome | Professor checkpoint |
 | --- | --- | --- |
-| 2026-07-24 | Scope, users, provider/data boundary, deferred work, and critical path approved | P0 scope and governance |
-| 2026-07-25 | #11 protocol frozen | Written P0 follow-up gate |
+| 2026-07-24 | Researcher-selected method, preliminary results, claim boundary, and next experiment reported | P0 method/results critique |
+| 2026-07-25 | #11 protocol frozen | Researcher freeze record |
 | 2026-07-29 | #24 and #43 qualified or rejected | Included in P1 |
-| 2026-07-31 | #25 and #7 end-to-end RAG decision | P1 RAG method decision |
+| 2026-07-31 | #25 and #7 end-to-end RAG decision | P1 RAG result critique |
 | 2026-08-10 | #8 authenticated persistent staging deployment | P2 staging and architecture review |
-| 2026-08-15 | #9 hardening and professor review | P3 evaluation Go / Refine / No-Go |
+| 2026-08-15 | #9 hardening and risk review | P3 researcher Go / Refine / No-Go |
 | 2026-08-22 | #10 simulated-student, LLM-judge, and synthetic-account evaluation | P4 evidence and claim decision |
 | 2026-08-26 | #12 final evaluation and evidence freeze | Written freeze confirmation |
 | 2026-09-03 | Full report draft and figures | P5 report review |

@@ -119,8 +119,9 @@ disability, demographic attributes, motivation, or ability from writing style.
 10. Predeclare applicable pedagogy dimensions and hard-gate focus.
 11. When the case tests filtering, incomplete context, or failure recovery,
     create a separate condition record and predeclare any behavior override.
-12. Complete independent review, preserve disagreements, and obtain professor
-    approval for every anchor case before scaling the dataset.
+12. Complete independent review, preserve disagreements, and record the
+    researcher freeze for every anchor case before scaling the dataset.
+    Optional professor review is added as expert-validity evidence.
 
 ## Semantic validation rules
 
@@ -144,7 +145,7 @@ rules must also pass before a split is approved:
 | Assessed-work cases declare assessment context, allowed support level, and at least one forbidden behavior | Integrity behavior is ambiguous |
 | Privacy/authorization stress cases name the prohibited behavior without embedding real personal data | Safety test creates its own privacy risk |
 | Hard-gate and pedagogy applicability are set before model output | Denominator can be changed after seeing results |
-| Anchor cases reach `professor_approved`; held-out cases are sealed and not professor-previewed individually | Instrument or split leakage |
+| Anchor cases reach `adjudicated` and the protocol records the researcher freeze; held-out cases are sealed and not previewed during calibration | Instrument or split leakage |
 | Normalized questions, dialogue, and claim sets do not duplicate or paraphrase a record in another split | Development-to-test leakage |
 | Direct identifiers, raw consent records, grades, private forum text, and unapproved transcripts are absent | Data-boundary violation |
 
@@ -168,7 +169,7 @@ and synthetic examples only.
 
 | Split | Size | Permitted use |
 | --- | ---: | --- |
-| Professor anchor | 12 | Rubric calibration, policy clarification, and schema correction; never a performance estimate |
+| Researcher anchor | 12 | Rubric calibration, policy clarification, and schema correction; never a performance estimate |
 | Development | 48 | Course-specific integration, prompt, threshold, and reviewer calibration |
 | Held-out | 104 | One final frozen C0-C3 comparison after component and analysis freeze |
 
@@ -189,8 +190,9 @@ pending or ineligible C4 does not block the required C0-C3 evaluation.
    rubric applicability, and safety focus.
 3. Differences receive stable disagreement IDs; do not overwrite the original
    labels silently.
-4. The professor approves or revises the 12 anchors, especially course facts,
-   misconceptions, assessed-work limits, and teaching moves.
+4. The researcher freezes the 12 anchors, especially course facts,
+   misconceptions, assessed-work limits, and teaching moves; optional professor
+   review is recorded as an expert-validity check.
 5. After calibration, two reviewers independently label the frozen share of
    final responses. Human judgment remains authoritative for any dimension
    whose automated agreement is below the protocol threshold.
@@ -214,7 +216,7 @@ The run-output schema and executable semantic validator are later evaluation-
 tooling work. Creating them does not authorize provider calls or held-out
 inspection.
 
-## Definition of ready for professor review
+## Definition of ready for instrument freeze
 
 - both JSON Schemas and both synthetic examples validate;
 - all 12 anchor slots have an explicit purpose, expected decision, and
@@ -224,7 +226,7 @@ inspection.
   exists;
 - partial-context, permission-filter, and provider-outage assignments resolve
   through the companion condition records;
-- professor questions focus on content, policy, evidence, and allowed tutoring
-  behavior rather than implementation; and
+- optional expert-review questions focus on content, policy, evidence, and
+  allowed tutoring behavior rather than implementation; and
 - no source ingestion, RAG implementation, provider call, or held-out record is
   created as part of this design step.

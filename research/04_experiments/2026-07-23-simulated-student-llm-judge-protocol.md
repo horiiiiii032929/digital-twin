@@ -2,8 +2,9 @@
 
 Date: 2026-07-23
 
-Status: protocol candidate v0.1; freeze under issue #11 before implementation,
-provider calls, or sealed-output inspection
+Status: researcher-selected protocol candidate v0.2; freeze exact prompts,
+state-card schema, and analysis under issue #11 before provider calls or
+sealed-output inspection
 
 ## Decision
 
@@ -11,7 +12,7 @@ Do not recruit students for the final-project evaluation. Replace the proposed
 human-participant pilot with a controlled offline evaluation that combines:
 
 1. deterministic safety, grounding, citation, policy, and operational checks;
-2. claim-to-evidence scoring against the professor-reviewed course benchmark;
+2. claim-to-evidence scoring against the researcher-frozen course benchmark;
 3. calibrated LLM judging for subjective pedagogical dimensions; and
 4. frozen simulated-student trajectories for multi-turn stress testing.
 
@@ -20,10 +21,10 @@ scripted browser journeys test authentication, authorization, persistence,
 failure recovery, and deployability. They do not establish human usability,
 student satisfaction, engagement, learning improvement, or population safety.
 
-The professor and project researcher are expert instrument reviewers, not
-research participants. Their role is to approve source permissions, expected
-actions, rubric interpretation, and a small judgment anchor used to check the
-automated evaluator.
+The project researcher owns the instrument and anchor labels. The professor may
+critique course truth, expected actions, rubric interpretation, and selected
+outputs, but that review is an optional validity check rather than a prerequisite
+for locally safe evaluation.
 
 ## Supported research question
 
@@ -46,8 +47,9 @@ No one evaluator is treated as ground truth:
 - Deterministic checks are authoritative for permissions, identifiers,
   citations, assessed-work rules, structured outputs, latency, cost, and
   operational failures.
-- The professor-reviewed benchmark is authoritative for course facts, required
-  claims, expected actions, evidence links, and policy applicability.
+- The researcher-frozen benchmark is authoritative for course facts, required
+  claims, expected actions, evidence links, and policy applicability. Professor
+  review, if obtained, is reported as an additional expert-validity check.
 - LLM judges score only subjective response qualities after calibration.
 - Simulated students generate controlled follow-up pressure and state changes;
   they never decide whether the tutor succeeded.
@@ -94,7 +96,7 @@ setting, seed, and code revision before a sealed run:
 | Primary LLM judge | Score subjective pedagogy using a structured rubric | May not override hard gates or course gold labels |
 | Sensitivity judge | Check model-family dependence and disagreement | May not silently replace the primary judge |
 | Deterministic evaluator | Enforce exact, programmatic checks | May not infer subjective teaching quality |
-| Professor/researcher anchor | Approve course truth, policy, and calibration labels | Is not a participant or evidence of student outcomes |
+| Researcher anchor with optional professor audit | Freeze course truth, policy, and calibration labels | Is not a participant or evidence of student outcomes |
 
 Use different model families for tutor, simulator, and judge where feasible.
 If hardware or provider constraints force role reuse, disclose it as a
@@ -237,11 +239,11 @@ For each simulated dialogue report:
 
 Before any sealed output is judged:
 
-1. The professor reviews the 12 case definitions, expected actions, policy
+1. The researcher freezes the 12 case definitions, expected actions, policy
    boundaries, and rubric interpretation.
 2. The researcher labels all 12 anchor outputs per calibration condition. The
-   professor reviews at least 8-12 deliberately selected outputs covering every
-   hard boundary and all rubric dimensions, if available.
+   professor may review 8-12 deliberately selected outputs covering every hard
+   boundary and all rubric dimensions.
 3. Blind system identity, randomize answer labels, and strip provider/model
    names and irrelevant stylistic metadata.
 4. Judge every pair in both A/B and B/A order.
@@ -266,9 +268,9 @@ Use the authored/deterministic labels for the primary outcome, mark the
 subjective dimension unresolved, and choose `Refine` or `Go Deeper`. Do not tune
 the judge on sealed outputs.
 
-If professor output review is unavailable, professor approval of expected
-actions remains necessary, but all LLM-judge scores are proxy diagnostics and
-cannot support the primary pedagogical claim.
+If professor output review is unavailable, LLM-judge scores are calibrated to a
+single researcher anchor. They may support only a clearly labeled proxy result,
+not a claim of independently verified professor alignment.
 
 ## Simulator validity controls
 
@@ -383,15 +385,19 @@ sanitized aggregate records and readable result summaries.
 - If the evidence is inconclusive, retain the simplest safe control and record
   `Refine` or `Go Deeper`.
 
-## Professor decision requested
+## Researcher decision and professor critique
 
-The professor is asked to:
+The researcher selects:
 
-1. approve or refine the 12 anchor expected actions and policy boundaries;
-2. confirm that no student recruitment is required for this project;
-3. approve local processing and tutoring use of the 13 official IT5002 lecture
-   PDFs;
-4. approve or reject external-provider use of private course content;
-5. review 8-12 calibration outputs if feasible; and
-6. accept the resulting claim boundary: deployability and tested offline
-   tutoring behavior, without human usability or learning-effectiveness claims.
+1. the 12 anchor expected actions and policy boundaries;
+2. a no-participant evaluation;
+3. local processing of the 13 official IT5002 lecture PDFs;
+4. no external-provider use of private course content;
+5. researcher-anchor calibration with optional professor review of 8-12
+   outputs; and
+6. the claim boundary: deployability and tested offline tutoring behavior,
+   without human usability or learning-effectiveness claims.
+
+The professor is asked to critique whether the research question is meaningful,
+the limitations are stated honestly, and the selected failure analysis is
+academically interesting.

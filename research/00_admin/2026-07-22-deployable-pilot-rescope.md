@@ -170,8 +170,8 @@ unmeasured.
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-24 | Professor checkpoint issue | No-participant scope, course boundary, evaluator design, provider gate, and critical path approved | P0 scope and evaluation decision |
-| 2026-07-25 | #11 | Method matrix, datasets, rubrics, thresholds, privacy protocol, and reporting plan frozen | Incorporated into P0 follow-up; written approval required before held-out runs |
+| 2026-07-24 | Professor checkpoint issue | Researcher-selected no-participant scope, preliminary results, evaluator design, and claim boundary reported | P0 method and preliminary-results critique |
+| 2026-07-25 | #11 | Method matrix, datasets, rubrics, thresholds, privacy protocol, and reporting plan frozen | Researcher freeze recorded before held-out runs |
 | 2026-07-29 | #24 and #43 | Exact generator/prompt and context-sufficiency candidates qualified or rejected | Development evidence included in P1 |
 | 2026-07-31 | #25 and #7 | Frozen end-to-end RAG result and selected or rejected grounded profile | P1 RAG method decision |
 | 2026-08-10 | #8 | Authenticated, persistent professor/student application deployed to staging | P2 staging demonstration and architecture decision |
@@ -188,16 +188,17 @@ unmeasured.
 Each report is a short conversational update with one durable page under
 `research/06_reports/weekly/`. It contains:
 
-1. the exact decision requested;
+1. the research decision already taken and the critique requested;
 2. status against the critical path: green, amber, or red;
 3. the most important evidence table or figure;
 4. the most important failure, privacy concern, or limitation;
 5. the proposed Keep, Refine, Go Deeper, or Drop decision; and
 6. the next checkpoint and consequences of delay.
 
-Professor decisions are copied into `research/00_admin/decision-log.md` and the
-corresponding GitHub issue. A meeting or polished demonstration without a
-recorded decision is not a passed gate.
+Researcher decisions and any professor critique are copied into
+`research/00_admin/decision-log.md` and the corresponding GitHub issue.
+Professor silence does not block a locally safe experiment, but unresolved
+critique that changes validity must be recorded before the final claim.
 
 Evaluator data classes, trust boundaries, role separation, threats, and stop
 conditions are frozen in the
@@ -210,7 +211,7 @@ conditions are frozen in the
 - No private professor or course data enters an external provider until
   permission and provider processing are approved.
 - No sealed simulated-student or synthetic-account evaluation begins until #9
-  passes authorization, privacy, recovery, and professor review hard gates.
+  passes authorization, privacy, recovery, and researcher release hard gates.
 - A failed RAG candidate produces a documented no-selection result; it does not
   delay authentication, persistence, and staging work if a safe rollback control
   can be used.

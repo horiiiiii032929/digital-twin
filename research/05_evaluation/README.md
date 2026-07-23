@@ -20,11 +20,12 @@ experimental profile with `npm run verify:profile`.
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in
 the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
-professor-reviewed course-specific gold benchmark, and keep deployed
+researcher-frozen course-specific gold benchmark, and keep deployed
 synthetic-account evidence separate from offline component selection. The
 2026-07-23 amendment removes participant recruitment and uses calibrated LLM
 judging, frozen simulated-student trajectories, and scripted synthetic-account
-acceptance.
+acceptance. Professor review, when available, is recorded as an optional
+expert-validity check rather than an experiment-start gate.
 
 The `course-tutor-v1` design is defined by:
 
@@ -41,7 +42,7 @@ The `course-tutor-v1` design is defined by:
   the semantic rules, split discipline, privacy boundary, and annotation
   workflow; and
 - [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
-  the construction state and review questions for the 12-case professor
+  the construction state and review questions for the 12-case researcher
   anchor.
 
 The selected full-course candidate corpus is inventoried in
@@ -56,7 +57,7 @@ instrument-calibration set, not a system performance result.
 Private anchor cases, companion conditions, and extracted evidence passages
 live under ignored `data/processed/course_tutor_v1/` and
 `data/interim/course_tutor_v1/`. The committed professor-anchor document
-records construction and approval status without exposing course wording or
+records construction and instrument state without exposing course wording or
 gold claims.
 
 Validate the local 12-case researcher draft without running a model:

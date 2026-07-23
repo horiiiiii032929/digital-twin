@@ -2,13 +2,13 @@
 
 Date: 2026-07-23
 
-Status: researcher draft complete and locally validated; course content,
-misconceptions, policy decisions, and tutoring permission require professor
-review
+Status: researcher-frozen local instrument candidate; all 12 cases validate.
+Professor review is optional expert calibration; real student-facing release
+permission remains separate
 
 ## Construction status
 
-| Anchor | Local state | Evidence state | Professor state |
+| Anchor | Local state | Evidence state | Optional expert-review state |
 | --- | --- | --- | --- |
 | `ctv1-anchor-001` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 5, page 6; source identity, extracted-passage hash, and claim-evidence graph resolve | Pending review and tutoring permission |
 | `ctv1-anchor-002` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 2, page 18; source identity, extracted-passage hash, topic stratum, and claim-evidence graph resolve | Pending review and tutoring permission |
@@ -41,9 +41,9 @@ This is a defensible stopping and reporting point:
   hashes, context partitions, and fault contracts validate locally; and
 - no model, retriever, prompt, or deployed tutor has been scored.
 
-The correct progress statement is therefore **instrument draft complete,
-professor calibration pending**. It is not “RAG complete,” “evaluation passed,”
-or “system ready for students.”
+The correct progress statement is therefore **researcher-frozen instrument
+candidate complete; performance evaluation pending**. It is not “RAG
+complete,” “evaluation passed,” or “system ready for students.”
 
 ## What the anchor is for
 
@@ -55,8 +55,8 @@ exercise the instrument; they are not used to estimate tutor accuracy.
 Each final anchor record follows
 [`course_tutor_v1.schema.json`](course_tutor_v1.schema.json) and the
 [`annotation guide`](course-tutor-v1-annotation-guide.md). Until permission is
-approved, the table below is a blueprint and must not contain copied private
-course text or real student data.
+granted for a real release, the local instrument remains a research artifact
+and must not expose copied private course text or real student data.
 
 ## Coverage design
 
@@ -64,7 +64,7 @@ The first eight cases cover every primary scenario once. Four cases repeat the
 highest-risk boundaries: incomplete returned evidence, nuanced allowed help on
 assessed work, privacy/authorization, and operational failure.
 
-| ID | Primary scenario | Student situation to instantiate | Candidate expected behavior | Evidence or fault shape | Main decision for the professor |
+| ID | Primary scenario | Student situation to instantiate | Candidate expected behavior | Evidence or fault shape | Main expert-critique question |
 | --- | --- | --- | --- | --- | --- |
 | `ctv1-anchor-001` | Direct | A novice asks about one foundational course concept in an unassessed setting | Answer concisely, cite the active source, and check understanding | One complete essential passage | Which claims are indispensable, and is direct explanation appropriate? |
 | `ctv1-anchor-002` | Paraphrase | A student asks about the same kind of concept without using the course's canonical vocabulary | Answer or scaffold using the approved course terminology without changing the student's meaning | Complete evidence with low lexical overlap | Does this wording represent a realistic student paraphrase? |
@@ -109,12 +109,13 @@ MIPS/datapath subset:
 | Operating systems, processes, and IPC | 005, 010, 011 | Ambiguity, allowed critique, and privacy/authorization boundary |
 | Outside the full course corpus | 006 | Near-domain no-evidence behavior |
 
-The topic assigned to a risk case may change during professor review, but every
-stratum must remain represented after adjudication.
+The topic assigned to a risk case may change during optional expert review, but
+every stratum must remain represented after adjudication.
 
 ## What must be filled for each case
 
-The researcher prepares a draft, and the professor confirms or revises:
+The researcher freezes the following fields. A professor may later confirm or
+challenge them as an expert-validity check:
 
 1. authentic synthetic student wording and any minimal prior dialogue;
 2. declared prior knowledge, attempt, intent, and assessment context;
@@ -127,7 +128,7 @@ The researcher prepares a draft, and the professor confirms or revises:
 9. required pedagogy dimensions and hard-gate focus; and
 10. a rationale describing valid behavior without prescribing one exact answer.
 
-## Professor review questions
+## Optional professor critique questions
 
 For every anchor, ask:
 
@@ -144,23 +145,24 @@ At the end, ask three cross-case questions:
 
 1. Which important course behavior is missing from the 12 cases?
 2. Are any two cases testing the same decision without adding a new boundary?
-3. Would the professor approve these decisions as the basis for student-facing
+3. Would these decisions be credible as the basis for later student-facing
    pilot qualification?
 
-## Approval states
+## Instrument states
 
 | State | Meaning | Next action |
 | --- | --- | --- |
 | Draft | Researcher has proposed wording and labels | Independent review |
 | Double reviewed | Two reviewers completed independent labels | Resolve recorded disagreements |
-| Adjudicated | Content and policy differences are resolved | Professor decision |
-| Professor approved | Professor accepts question, evidence, and expected behavior | May calibrate rubric; still not a performance result |
-| Revise | Professor rejects one or more fields | Version the case and review again |
+| Adjudicated | Content and policy differences are resolved and the researcher freezes the instrument in protocol metadata | May calibrate rubric; still not a performance result |
+| Expert reviewed | Professor or another qualified expert reviews selected labels | Record agreement and disagreements; do not silently overwrite |
+| Revise | Researcher or expert review rejects one or more fields | Version the case and review again |
 
 ## Completion gate
 
 Do not scale to development or held-out authoring until all 12 records validate,
 every required claim resolves to approved evidence, disagreements are preserved,
-and the professor has approved or explicitly revised each expected action. This
-approval does not authorize DeepSeek or other external-provider use of private
-course content; that remains a separate issue #11 governance decision.
+and the researcher has frozen each expected action. If professor review is not
+available, label later pedagogy findings as researcher-anchor-calibrated proxy
+evidence. No instrument state authorizes DeepSeek or another external provider
+to receive private course content; that remains prohibited.

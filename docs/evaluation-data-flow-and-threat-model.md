@@ -2,7 +2,8 @@
 
 Date: 2026-07-23
 
-Status: issue #11 design candidate; professor course/provider approval pending
+Status: researcher-selected local-evaluation boundary; exact instruments still
+freeze under issue #11
 
 ## Scope
 
@@ -40,7 +41,7 @@ sensitive data even when it does not contain a verbatim quotation.
 flowchart LR
     subgraph L["TB1 — Local research environment"]
         P["Private IT5002 corpus"]
-        G["Professor-reviewed gold cases"]
+        G["Researcher-frozen gold cases"]
         S["Frozen student simulator"]
         T["Tutor under test"]
         J["Primary and sensitivity judges"]
@@ -121,7 +122,7 @@ model outputs are summarized.
 | LLM judge | Blinded response, rubric, permitted reference fields | Structured dimension judgments | Override hard gates, see model identity, or alter gold labels |
 | Deterministic evaluator | Gold fields and structured run record | Exact gate and metric results | Infer subjective pedagogy |
 | Researcher | Private artifacts required for authoring/audit | Versioned cases, adjudication, sanitized reports | Inspect sealed outputs early or omit unfavorable runs |
-| Professor | Anchor, policy, selected calibration outputs, aggregate evidence | Approval/refinement decisions | Implicitly authorize external processing through general feedback |
+| Professor | Anchor, policy, selected calibration outputs, aggregate evidence | Optional expert critique and later student-release decisions | Implicitly authorize external processing through general feedback |
 | Synthetic account | Authorized staging course and own synthetic conversation | Synthetic messages/feedback | Access another account, course, source, or raw audit record |
 
 Where possible, tutor, simulator, and judge use different model families. If a
@@ -184,11 +185,19 @@ The professor or institutional owner may require a shorter course-material or
 derived-output retention window. That decision must be recorded before
 course-specific staging or provider use.
 
-## Required professor decisions
+## Researcher-owned working boundary
 
-1. May all 13 lecture PDFs be used for local tutoring and evaluation?
-2. Must all course-specific tutor, simulator, and judge processing remain local?
-3. May the professor review the 12 anchors and 8-12 calibration outputs?
-4. Is the no-participant claim boundary acceptable?
-5. What retention or deletion date applies to private course-derived outputs
-   after final submission?
+The current evaluation proceeds with these frozen assumptions:
+
+1. All 13 official lecture PDFs may be used for local research evaluation.
+2. Course-specific tutor, simulator, and judge processing remains local.
+3. No real-student data, human-participant claim, or external course-content
+   processing is permitted.
+4. The researcher-authored anchor is authoritative for the experiment. Any
+   later professor review is reported as an optional expert-validity check.
+5. Private course-derived outputs remain local through final grading and are
+   deleted after the required audit window.
+
+These assumptions do not authorize a student-facing release. Before real use,
+the professor or institutional owner must decide release, retention, and
+provider conditions explicitly.

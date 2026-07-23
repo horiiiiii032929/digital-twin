@@ -2,9 +2,9 @@
 
 Date: 2026-07-22
 
-Status: internally selected protocol candidate v1.2; professor and
-course-data/provider approval remain required under issue #11 before
-implementation, provider calls, or held-out inspection
+Status: internally selected protocol candidate v1.3; issue #11 must freeze exact
+instruments before provider calls or held-out inspection. Course-specific
+processing remains local.
 
 ## Decision
 
@@ -313,12 +313,11 @@ cases.
 ## Expert anchors and automated evaluation
 
 - Randomize condition order and hide condition identity from reviewers.
-- The professor reviews the 12-case anchor and adjudicates ambiguous policy or
-  course-content judgments.
-- The researcher labels the complete anchor. The professor reviews at least
-  8-12 deliberately selected calibration outputs covering every policy boundary
-  and rubric dimension if available. This is expert instrument calibration, not
-  a participant study.
+- The researcher freezes and labels the complete 12-case anchor and adjudicates
+  ambiguous policy or course-content judgments.
+- The professor may critique 8-12 deliberately selected calibration outputs
+  covering every policy boundary and rubric dimension. This is an optional
+  expert-validity check, not a participant study or an execution gate.
 - Preserve disagreements and adjudication; do not silently replace labels.
 - Use deterministic rules for IDs, permissions, exact actions, tokens, latency,
   and cost.
@@ -330,8 +329,9 @@ cases.
   only when agreement is at least 0.67, exact agreement is at least 80%,
   position and repeat consistency are each at least 90%, and it produces no
   false pass on an expert-labeled hard-gate failure.
-- If professor output review is unavailable or a calibration threshold fails,
-  automated judgments remain diagnostic and the pedagogical claim is narrowed.
+- Without professor output review, automated judgments are reported as
+  researcher-anchor-calibrated proxy evidence. If a calibration threshold
+  fails, they remain diagnostic and the pedagogical claim is narrowed.
 - If reviewer agreement is inadequate, refine the rubric and repeat rubric
   calibration without opening the sealed test outputs.
 

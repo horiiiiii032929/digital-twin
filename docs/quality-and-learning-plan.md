@@ -37,7 +37,7 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Research question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and professor approval |
+| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Researcher-selected question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and critique plan |
 | 2026-07-26 to 2026-07-31 | Grounded RAG qualification | Generator/prompt, returned-context sufficiency, claim/citation evidence, and end-to-end decision |
 | 2026-08-01 to 2026-08-10 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
 | 2026-08-11 to 2026-08-15 | Hardening and professor UAT | Threat modeling, privacy, reliability, load, backup/restore, recovery, and release decision |
@@ -55,8 +55,8 @@ produce an inspectable, evaluated vertical slice.
 
 ### Course corpus
 
-- Use the 13 inventoried official IT5002 lecture PDFs for the full-course pilot;
-  keep private content local and block tutoring use until professor approval.
+- Use the 13 inventoried official IT5002 lecture PDFs for the local full-course
+  evaluation; keep private content local and prohibit external-provider use.
 - Support UTF-8 text, Markdown, and selectable-text PDF input.
 - Preserve document ID, title, source label, content hash, and a human-readable
   locator through normalization and chunking.

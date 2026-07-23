@@ -13,9 +13,10 @@ Build and evaluate a deployable Digital Twin tutoring system for one professor
 and one course. The system should use approved course material, preserve a
 configurable teaching policy, give student-role accounts grounded tutoring with
 inspectable citations, and give the professor release and audit control.
-Student recruitment is out of scope; evaluation uses professor-reviewed
+Student recruitment is out of scope; evaluation uses researcher-frozen course
 anchors, calibrated LLM judges, frozen simulated students, and scripted
-synthetic accounts.
+synthetic accounts. Optional professor review is an expert-validity check, not
+a prerequisite for local experiments.
 
 ## Focused research question
 
@@ -58,6 +59,7 @@ The project is not yet deployable: it has no selected returned-context verifier
 or live generator/prompt, no end-to-end RAG decision, no authentication or
 durable persistence, no student release flow, and no staging environment. Issue
 #11 is therefore the immediate gate: freeze the method, data-governance,
-privacy, dataset, rubric, and professor-reporting protocol before implementation
-continues. The full rescope is recorded in the
+privacy, dataset, rubric, and reporting protocol before implementation
+continues. This is a researcher-controlled reproducibility gate, not a request
+for the professor to select the method. The full rescope is recorded in the
 [deployable pilot plan](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).

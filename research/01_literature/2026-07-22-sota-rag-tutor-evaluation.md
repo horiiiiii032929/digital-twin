@@ -250,9 +250,10 @@ preserve:
    final-answer correctness as separate fields and metrics.
 3. Add required atomic claims and claim-to-evidence mappings to generation
    cases before the held-out outputs are inspected.
-4. Pilot the rubric on professor-reviewed course scenarios and measure
-   expert-anchor agreement, answer-order consistency, repeat consistency, and
-   distinct-family sensitivity before scaling an LLM judge.
+4. Pilot the rubric on researcher-frozen course scenarios and measure
+   anchor agreement, answer-order consistency, repeat consistency, and
+   distinct-family sensitivity before scaling an LLM judge; record professor
+   review, if available, as an additional expert-validity analysis.
 5. Compare generic, grounded, and professor-configured conditions using the
    same DeepSeek model and questions; add the long-context control where
    feasible.
@@ -274,6 +275,6 @@ answerability label cannot validate context sufficiency and that citation-ID
 integrity cannot validate factual support.
 
 No component profile changes follow from this review. The next evidence target
-is a professor-reviewed no-participant protocol that validates the research
+is a researcher-frozen no-participant protocol that validates the research
 question, conditions, context labels, atomic claims, judge calibration, and
 simulator validity before the DeepSeek held-out run.

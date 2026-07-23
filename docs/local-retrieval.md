@@ -172,8 +172,9 @@ remove hard cases and inflate it.
   different queries.
 - Figure captions and surrounding selectable text can be retrieved, but image
   pixels are not semantically ranked.
-- The local IT5002 bundle has a sanitized source inventory, but still needs
-  professor tutoring permission before it can be used for private evaluation.
+- The local IT5002 bundle has a sanitized source inventory and is selected for
+  local research evaluation. This does not authorize external processing or a
+  real student-facing release.
 - Cross-encoder verification, calibrated answerability classification,
   reranking, and layout-aware retrieval remain candidates until a newly held-out
   experiment passes both abstention and ranking gates.

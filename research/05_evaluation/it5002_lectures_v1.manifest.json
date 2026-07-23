@@ -4,7 +4,7 @@
   "course_label": "Computer Systems and Applications",
   "version": "1.0.0",
   "snapshot_date": "2026-07-23",
-  "status": "local_snapshot_professor_permission_pending",
+  "status": "researcher_selected_local_evaluation_boundary",
   "source_root": "academia_vault/semester_1/IT5002_computer_architesture/lecture",
   "local_snapshot_root": "data/raw/course_materials/it5002_full/lecture",
   "content_boundary": {
@@ -23,9 +23,10 @@
   },
   "permissions": {
     "local_inventory": "user_authorized_2026-07-23",
-    "professor_tutoring_use": "pending",
+    "local_research_evaluation": "researcher_selected_2026-07-23",
+    "student_facing_release": "professor_or_institutional_authorization_required",
     "human_participant_use": "out_of_scope",
-    "external_provider_use": "prohibited_until_separately_approved"
+    "external_provider_use": "prohibited"
   },
   "profile": {
     "document_count": 13,
