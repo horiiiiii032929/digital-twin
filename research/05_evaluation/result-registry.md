@@ -13,6 +13,7 @@ research result unless its measurements are used as decision evidence.
 | `generation-v1-preflight-clean` | 2026-07-15 | Generator, prompt, policy enforcement, citation validation | `generation-v1` / `synthetic-browser-security-v1` | Completed | Go deeper; freeze deterministic control without selection | [Results](generation-v1-preflight-results.md) | Not applicable: single-control preflight | `npm run verify:generation` |
 | `generation-v1-gemma3-4b-exploratory` | 2026-07-15 | Generator and prompt | `generation-v1` / `synthetic-browser-security-v1` | Inconclusive | Refine; no selection | [Results](generation-v1-gemma3-4b-results.md) | [Record](records/generation-v1-gemma3-4b.json) | `npm run benchmark:generation-local` |
 | `evidence-sufficiency-v1-clean` | 2026-07-15 | Retriever evidence gate | `evidence-sufficiency-v1-test` / `synthetic-web-security-v2` | Inconclusive | Refine; no selection | [Results](evidence-sufficiency-v1-results.md) | [Record](records/evidence-sufficiency-v1.json) | `npm run benchmark:evidence-sufficiency` |
+| `it5002-retrieval-rapid-v1-invalid` | 2026-07-24 | Retriever and reranker | `it5002-retrieval-rapid-v1` / `it5002-lectures-v1` | Invalid | Drop local MPS R5 configuration; retain R1 rollback | [Results](it5002-retrieval-rapid-v1-results.md) | [Record](records/it5002-retrieval-rapid-v1-invalid.json) | Development and one-time held-out commands in result |
 
 ## Rules
 

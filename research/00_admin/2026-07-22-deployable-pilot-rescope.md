@@ -2,8 +2,8 @@
 
 Date: 2026-07-22
 
-Status: active planning baseline; implementation has not started under this
-rescope.
+Status: active planning baseline; evaluation instruments are frozen, and
+deployable-application implementation has not started under this rescope.
 
 ## Scope decision
 
@@ -16,10 +16,11 @@ part of the required outcome.
 
 The target is a controlled one-course research deployment, not an
 institution-wide production service. Student recruitment is out of scope.
-Professor review is used to approve course truth and evaluation instruments;
-frozen simulated students and synthetic accounts provide multi-turn and
-deployment stress tests. The professor and institution must still approve
-course-material tutoring use and the model-provider data boundary.
+The researcher owns course-anchor and evaluation-instrument decisions;
+professor review is an optional expert-validity check. Frozen simulated
+students and synthetic accounts provide multi-turn and deployment stress tests.
+The professor or institution must still authorize any real student-facing
+release, while private course processing remains local.
 
 ## Research contribution
 
@@ -170,14 +171,12 @@ unmeasured.
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-24 | Professor checkpoint issue | Researcher-selected no-participant scope, preliminary results, evaluator design, and claim boundary reported | P0 method and preliminary-results critique |
-| 2026-07-25 | #11 | Method matrix, datasets, rubrics, thresholds, privacy protocol, and reporting plan frozen | Researcher freeze recorded before held-out runs |
-| 2026-07-29 | #24 and #43 | Exact generator/prompt and context-sufficiency candidates qualified or rejected | Development evidence included in P1 |
-| 2026-07-31 | #25 and #7 | Frozen end-to-end RAG result and selected or rejected grounded profile | P1 RAG method decision |
-| 2026-08-10 | #8 | Authenticated, persistent professor/student application deployed to staging | P2 staging demonstration and architecture decision |
-| 2026-08-15 | #9 | Security, privacy, reliability, rollback, professor review, and synthetic release gates passed or failed | P3 evaluation-release go/no-go |
-| 2026-08-22 | #10 | Simulated-student, calibrated LLM-judge, and deployed synthetic-account evaluation completed | P4 evaluation evidence and supported-claim decision |
-| 2026-08-26 | #12 | Blinded comparison, failure analysis, limited refinement, and evidence freeze | Written evidence-freeze confirmation |
+| 2026-07-23 | #11 and #46 | Separate 59-case rapid R0-R6 ablation, R5-versus-R1 primary contrast, metrics, gates, and access lock frozen | Internal freeze only |
+| 2026-07-24 | #46 | One rapid sealed run completed with raw counts, uncertainty, failures, latency, memory, and Go Deeper / Refine / Drop decision | P1 rapid retrieval result |
+| 2026-07-28 | #7 and #43 | Expanded retrieval-v3 and returned-context sufficiency candidates qualified or rejected | Decision addendum if material |
+| 2026-07-31 | #24 and #25 | Exact generator/prompt and frozen end-to-end RAG profile qualified or rejected | P2 end-to-end experiment result |
+| 2026-08-04 | #8 | Authenticated, persistent professor/student application deployed to staging around the selected or rollback profile | Demonstration link |
+| 2026-08-08 | #9, #10, and #12 | Security, reliability, simulated-user, synthetic-account, final comparison, and evidence freeze completed | P3 final evidence and claim boundary |
 | 2026-09-03 | #13 | Full report draft, figures, and claim-to-evidence matrix | P5 report review |
 | 2026-09-09 | Professor checkpoint issue | Timed demo and failure-recovery rehearsal completed | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | #13 | Contingency only: blocking corrections, packaging, and final checks without new claims | No routine checkpoint; escalate only a blocker |
@@ -185,15 +184,17 @@ unmeasured.
 
 ## Professor checkpoint format
 
-Each report is a short conversational update with one durable page under
+Professor time is reserved for decision-bearing results. Planning, hosting,
+account, and ordinary progress questions remain internal unless they block the
+research. Each report is a compact result package under
 `research/06_reports/weekly/`. It contains:
 
-1. the research decision already taken and the critique requested;
-2. status against the critical path: green, amber, or red;
-3. the most important evidence table or figure;
-4. the most important failure, privacy concern, or limitation;
-5. the proposed Keep, Refine, Go Deeper, or Drop decision; and
-6. the next checkpoint and consequences of delay.
+1. the question, prediction, control, candidates, and frozen dataset;
+2. raw denominators, uncertainty, gates, latency, memory, and cost;
+3. the most important comparison table and no more than two figures;
+4. favorable and unfavorable representative cases;
+5. the Keep, Refine, Go Deeper, or Drop decision with limitations; and
+6. one bounded critique question that could change the interpretation.
 
 Researcher decisions and any professor critique are copied into
 `research/00_admin/decision-log.md` and the corresponding GitHub issue.
@@ -208,6 +209,8 @@ conditions are frozen in the
 
 - No product implementation starts until #11 freezes the evaluation and data
   governance protocol.
+- No professor progress message is sent before the retrieval-v3 result unless
+  an external permission or deadline blocker requires a decision.
 - No private professor or course data enters an external provider until
   permission and provider processing are approved.
 - No sealed simulated-student or synthetic-account evaluation begins until #9
@@ -217,10 +220,12 @@ conditions are frozen in the
   can be used.
 - Human-participant recruitment, human usability, and learning-effectiveness
   claims are out of scope rather than contingency items.
-- No new architecture, model, metric, or feature begins after the 2026-08-26
-  evidence freeze.
-- Reserve 2026-08-27 through 2026-09-13 for report writing, figures,
-  presentation work, demo stabilization, rehearsal, and contingency. Do not use
-  this runway to recover deferred feature scope.
+- No new architecture, model, metric, or feature begins after the 2026-08-08
+  evidence freeze unless a frozen result explicitly justifies one bounded
+  product improvement.
+- Reserve 2026-08-09 through 2026-09-13 primarily for report writing, figures,
+  presentation work, demo stabilization, rehearsal, contingency, and
+  evidence-backed product continuation. Do not use this runway to recover
+  deferred feature scope.
 - Proactive triggers, full analytics, Canvas, multimodality, and learning-outcome
   claims are cut before any core deployability or evidence requirement.

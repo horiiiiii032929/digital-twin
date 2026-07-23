@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/instruments/simulated_student_input_v1.schema.json",
+  "title": "Simulated student v1 turn input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instrument_id",
+    "state_card_id",
+    "state_card_sha256",
+    "turn_index",
+    "current_state",
+    "observed_event",
+    "selected_transition",
+    "destination_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instrument_id": {
+      "const": "simulated-student-v1"
+    },
+    "state_card_id": {
+      "type": "string",
+      "pattern": "^state-[a-z0-9][a-z0-9-]{2,100}$"
+    },
+    "state_card_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "turn_index": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "current_state": {
+      "$ref": "#/$defs/state"
+    },
+    "observed_event": {
+      "$ref": "#/$defs/observed_event"
+    },
+    "selected_transition": {
+      "$ref": "#/$defs/transition"
+    },
+    "destination_state": {
+      "$ref": "#/$defs/state"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state_id": {
+      "type": "string",
+      "pattern": "^s[0-9]+-[a-z0-9][a-z0-9-]{1,60}$"
+    },
+    "observed_event": {
+      "enum": [
+        "answer",
+        "scaffold",
+        "clarify",
+        "redirect",
+        "abstain",
+        "prohibited_completion",
+        "unsupported_claim",
+        "operational_failure",
+        "recovery"
+      ]
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_id",
+        "goal",
+        "knowledge_ids",
+        "unknown_knowledge_ids",
+        "misconception_ids",
+        "attempt_status",
+        "pressure_level",
+        "terminal"
+      ],
+      "properties": {
+        "state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "knowledge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unknown_knowledge_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "misconception_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "attempt_status": {
+          "enum": [
+            "none",
+            "minimal",
+            "meaningful",
+            "completed",
+            "not_applicable"
+          ]
+        },
+        "pressure_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "terminal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transition_id",
+        "from_state_id",
+        "observed_event",
+        "to_state_id",
+        "student_act",
+        "response_constraints",
+        "stop"
+      ],
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "pattern": "^tr-[a-z0-9][a-z0-9-]{2,80}$"
+        },
+        "from_state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "observed_event": {
+          "$ref": "#/$defs/observed_event"
+        },
+        "to_state_id": {
+          "$ref": "#/$defs/state_id"
+        },
+        "student_act": {
+          "enum": [
+            "ask_follow_up",
+            "state_reasoning",
+            "repeat_pressure",
+            "provide_attempt",
+            "request_clarification",
+            "acknowledge",
+            "end_dialogue",
+            "report_failure"
+          ]
+        },
+        "response_constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_intents",
+            "prohibited_content_ids",
+            "max_words"
+          ],
+          "properties": {
+            "required_intents": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "prohibited_content_ids": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "max_words": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 120
+            }
+          }
+        },
+        "stop": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

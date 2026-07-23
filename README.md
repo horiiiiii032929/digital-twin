@@ -65,6 +65,9 @@ The project's technical standard, learning commitments, and strengthened Sprint
   `reports/generated/`.
 - `npm run verify:evaluation-results`: validate the durable evaluation-result
   registry and its referenced artifacts.
+- `npm run verify:retrieval-v3-instruments`: validate the frozen IT5002
+  retrieval-v3 candidates, metrics, held-out lock, and public open-set example
+  without downloading or running a model.
 - `npm run verify:profile`: validate the versioned component profile.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
@@ -113,28 +116,35 @@ Implemented as Sprint 2 foundations:
 
 Still planned:
 
-- #11 pilot evaluation, privacy, data-governance, rubric, and reporting freeze.
-- #24, #43, and #25 generator/prompt, actual returned-context sufficiency, and
-  end-to-end RAG qualification.
+- Complete the private IT5002 retrieval-v3 development and held-out datasets,
+  bind exact Qwen3 model revisions, and compare fixed-window BM25,
+  heading-aware BM25, dense, hybrid, deterministic contextual, reranked, and
+  bounded decomposition conditions.
+- #24, #43, and #25 generator/prompt, returned-context sufficiency, and
+  end-to-end RAG qualification after retrieval-v3 selects or rejects a
+  candidate.
 - Authenticated professor/student roles, course membership, durable persistence,
   private storage, and student tutoring.
 - Staging deployment with secret isolation, redacted logs, health checks,
   rate limits, backup/restore, rollback, and visible provider failures.
-- Professor UAT and a supervised invited-student pilot or explicit
-  synthetic-user fallback.
+- Scripted professor/student synthetic-account acceptance and optional
+  professor review; no invited-student pilot or human usability claim.
 - Blinded final comparison, evidence freeze, report, deployed demonstration,
   and reproducibility package.
 
-Active Sprint 2 work is tracked by roadmap issue #7. Completed sub-issues cover
+Active Sprint 2 work is tracked by execution issue #46 under roadmap issue #7.
+Completed sub-issues cover
 the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
 evaluation architecture, result governance, and the first failed
-evidence-sufficiency comparison. Draft PR #36 contains the generation controls,
-local benchmark path, and registered exploratory result. The rescope makes #11
-the immediate gate before implementation continues: freeze the method and data
-protocol by 2026-07-25, qualify RAG by 2026-07-31, deploy staging by 2026-08-10,
-complete professor UAT by 2026-08-15, run the approved pilot by 2026-08-22, and
-freeze final evidence by 2026-08-26. The remaining 18 days are reserved for
-report writing, figures, presentation preparation, rehearsal, and contingency.
+evidence-sufficiency comparison. The retrieval-v3 candidate contract is now
+the active research gate: run the full bounded R0-R6 retrieval ablation on a
+separate 59-case rapid screen and send its result by 2026-07-24, with R5 versus
+R1 as the primary contrast. Then complete the expanded confirmatory retrieval
+and context-sufficiency work by 2026-07-28. Generator and end-to-end
+qualification follows by 2026-07-31, with the hosted vertical slice targeted
+by 2026-08-04 and final evidence frozen by 2026-08-08. The remaining five
+weeks are reserved for the report, figures, presentation, demo stabilization,
+rehearsal, and bounded product continuation.
 DeepSeek is a research constraint, not a
 best-model claim, and real-user provider processing requires separate approval.
 Proactive triggers, full learning-gap analytics, Canvas, multimodality, and

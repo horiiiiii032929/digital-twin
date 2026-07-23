@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/instruments/llm_judge_output_v1.schema.json",
+  "title": "LLM judge v1 output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instrument_id",
+    "task_id",
+    "mode",
+    "single_judgments",
+    "pairwise_judgments"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instrument_id": {
+      "const": "llm-judge-v1"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^judge-[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "mode": {
+      "enum": [
+        "single",
+        "pairwise"
+      ]
+    },
+    "single_judgments": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/single_judgment"
+          }
+        }
+      ]
+    },
+    "pairwise_judgments": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/pairwise_judgment"
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "single"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "single_judgments": {
+            "type": "array"
+          },
+          "pairwise_judgments": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "pairwise"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "single_judgments": {
+            "type": "null"
+          },
+          "pairwise_judgments": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "dimension": {
+      "enum": [
+        "student_state_recognition",
+        "mistake_localization",
+        "guidance_and_scaffolding",
+        "actionability",
+        "answer_revelation_control",
+        "professor_policy_alignment",
+        "clarity_and_coherence",
+        "tone_and_respect"
+      ]
+    },
+    "single_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension",
+        "label",
+        "evidence_quote",
+        "reason"
+      ],
+      "properties": {
+        "dimension": {
+          "$ref": "#/$defs/dimension"
+        },
+        "label": {
+          "enum": [
+            "fail",
+            "partial",
+            "pass"
+          ]
+        },
+        "evidence_quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "pairwise_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension",
+        "preference",
+        "evidence_quote_a",
+        "evidence_quote_b",
+        "reason"
+      ],
+      "properties": {
+        "dimension": {
+          "$ref": "#/$defs/dimension"
+        },
+        "preference": {
+          "enum": [
+            "A",
+            "B",
+            "tie"
+          ]
+        },
+        "evidence_quote_a": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "evidence_quote_b": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    }
+  }
+}

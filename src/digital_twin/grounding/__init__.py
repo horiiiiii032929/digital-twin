@@ -74,6 +74,7 @@ from src.digital_twin.grounding.retrieval_factory import (
     UnsupportedRetrieverSelectionError,
     build_selected_retriever,
 )
+from src.digital_twin.grounding.reranking import PairwiseReranker, RerankingRetriever
 
 
 __all__ = [
@@ -106,6 +107,7 @@ __all__ = [
     "MinimumRawScoreEvidenceGate",
     "SecondaryRetrieverAgreementGate",
     "ParsedDocumentBundle",
+    "PairwiseReranker",
     "InvalidRetrievalLimitError",
     "RelevantChunkReference",
     "RetrievalBenchmarkCorpus",
@@ -118,6 +120,7 @@ __all__ = [
     "RetrievalFailureCause",
     "RetrievalHit",
     "ReciprocalRankFusionRetriever",
+    "RerankingRetriever",
     "RelevanceThresholdRetriever",
     "Retriever",
     "SourceArtifact",
