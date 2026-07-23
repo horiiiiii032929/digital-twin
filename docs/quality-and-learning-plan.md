@@ -37,12 +37,13 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Researcher-selected question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and critique plan |
-| 2026-07-26 to 2026-07-31 | Grounded RAG qualification | Generator/prompt, returned-context sufficiency, claim/citation evidence, and end-to-end decision |
-| 2026-08-01 to 2026-08-10 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
-| 2026-08-11 to 2026-08-15 | Hardening and professor UAT | Threat modeling, privacy, reliability, load, backup/restore, recovery, and release decision |
-| 2026-08-16 to 2026-08-22 | Simulated-user evaluation | Calibrated LLM judging, multi-turn safe completion, synthetic-account acceptance, reliable turns, and claim boundaries |
-| 2026-08-23 to 2026-08-26 | Final evaluation and evidence freeze | Blinded comparison, bounded refinement, failure analysis, uncertainty, and frozen evidence |
+| 2026-07-22 to 2026-07-26 | Evaluation and retrieval-v3 freeze | Researcher-selected question, modern retrieval literature, course/open-set data contracts, candidates, metrics, gates, held-out lock, and professor result-reporting rule |
+| 2026-07-27 to 2026-07-30 | Course retrieval benchmark construction | Private development and held-out cases, claim/evidence judgments, split checks, exact runtime bindings, and synthetic resource preflight |
+| 2026-07-31 to 2026-08-05 | Course retrieval-v3 comparison | BM25, Qwen3 dense, hybrid, deterministic contextual, reranked, and bounded-decomposition ablations plus one held-out decision and professor result package |
+| 2026-08-06 to 2026-08-11 | Returned-context sufficiency | Complete/partial/none classification, threshold calibration, false-answer/false-abstention analysis, and safe-abstention decision |
+| 2026-08-12 to 2026-08-15 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
+| 2026-08-16 to 2026-08-21 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
+| 2026-08-22 to 2026-08-26 | Hardening, simulated evaluation, and evidence freeze | Privacy, reliability, recovery, calibrated judging, synthetic-account acceptance, blinded comparison, failure analysis, uncertainty, and frozen evidence |
 | 2026-08-27 to 2026-09-03 | Full report draft and figures | Complete argument, claim-to-evidence matrix, main plots, limitations, and professor review |
 | 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
 | 2026-09-10 to 2026-09-12 | Contingency buffer | Correct blocking defects, package the submission, and protect frozen claims from late scope growth |
@@ -69,6 +70,9 @@ produce an inspectable, evaluated vertical slice.
   size and overlap decisions.
 - Implement an inspectable lexical or BM25-style retrieval baseline before an
   embedding retriever.
+- For retrieval-v3, retain fixed-window and heading-aware BM25 controls; test
+  Qwen3 dense, hybrid RRF, deterministic contextual metadata, Qwen3 reranking,
+  and one bounded decomposition round under the frozen candidate contract.
 - Build a versioned evaluation set with at least 20 questions across direct
   grounding, misconception, integrity-boundary, ambiguous, and no-evidence
   cases.
@@ -77,6 +81,9 @@ produce an inspectable, evaluated vertical slice.
   evidence diagnostic rather than a complete RAG score.
 - Record failed queries and explain whether the source, chunking, query, or
   ranking caused each failure.
+- Keep NotebookLM outside internal Recall@K and nDCG comparisons because its
+  candidate ranking is hidden; report it only as a dated black-box end-to-end
+  product reference when permission and independent-state caveats are recorded.
 
 ### Generation and policy enforcement
 

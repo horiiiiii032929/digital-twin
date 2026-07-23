@@ -29,6 +29,19 @@ npm run verify:evaluation-instruments
 This is structural readiness, not evidence that a judge is calibrated or a
 simulated trajectory is valid.
 
+The course-specific retrieval-v3 candidate and analysis contract is separately
+frozen in
+[`instruments/retrieval_v3_freeze.json`](instruments/retrieval_v3_freeze.json).
+Validate its candidate identities, primary metrics, held-out lock, NotebookLM
+black-box boundary, and public open-set example with:
+
+```bash
+npm run verify:retrieval-v3-instruments
+```
+
+This validation does not download a model, complete a private dataset, inspect
+held-out cases, or produce a retrieval result.
+
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in
 the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
@@ -56,6 +69,18 @@ The `course-tutor-v1` design is defined by:
 - [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
   the construction state and review questions for the 12-case researcher
   anchor.
+
+The companion no-evidence instrument is defined by:
+
+- [`it5002_retrieval_open_set_v1.schema.json`](it5002_retrieval_open_set_v1.schema.json);
+- its
+  [`synthetic example`](it5002_retrieval_open_set_v1_synthetic_example.json);
+  and
+- the
+  [`annotation guide`](it5002-retrieval-open-set-v1-annotation-guide.md).
+
+It adds 24 development and 52 held-out hard-negative cases without placing
+no-evidence questions in ranking-metric denominators.
 
 The selected full-course candidate corpus is inventoried in
 [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the

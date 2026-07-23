@@ -171,14 +171,14 @@ unmeasured.
 
 | Target | Issue | Evaluated outcome | Professor report |
 | --- | --- | --- | --- |
-| 2026-07-24 | Professor checkpoint issue | Researcher-selected no-participant scope, preliminary results, evaluator design, and claim boundary reported | P0 method and preliminary-results critique |
-| 2026-07-25 | #11 | Method matrix, datasets, rubrics, thresholds, privacy protocol, and reporting plan frozen | Researcher freeze recorded before held-out runs |
-| 2026-07-29 | #24 and #43 | Exact generator/prompt and context-sufficiency candidates qualified or rejected | Development evidence included in P1 |
-| 2026-07-31 | #25 and #7 | Frozen end-to-end RAG result and selected or rejected grounded profile | P1 RAG method decision |
-| 2026-08-10 | #8 | Authenticated, persistent professor/student application deployed to staging | P2 staging demonstration and architecture decision |
-| 2026-08-15 | #9 | Security, privacy, reliability, rollback, professor review, and synthetic release gates passed or failed | P3 evaluation-release go/no-go |
-| 2026-08-22 | #10 | Simulated-student, calibrated LLM-judge, and deployed synthetic-account evaluation completed | P4 evaluation evidence and supported-claim decision |
-| 2026-08-26 | #12 | Blinded comparison, failure analysis, limited refinement, and evidence freeze | Written evidence-freeze confirmation |
+| 2026-07-26 | #11 and #7 | Retrieval-v3 question, candidates, data contract, metrics, gates, and held-out lock frozen | Internal freeze only; no professor message |
+| 2026-07-30 | #7 | Private development and sealed IT5002 retrieval cases validated; exact model revisions bound by a synthetic feasibility preflight | No report before a result |
+| 2026-08-02 | #7 | Development/calibration ablations complete; R5 and thresholds frozen | Internal decision record |
+| 2026-08-05 | #7 | One held-out course retrieval-v3 run completed with failures, uncertainty, latency, and selection or no-selection decision | P1 retrieval experiment result |
+| 2026-08-11 | #43 | Returned-context sufficiency and safe-abstention candidate qualified or rejected using the selected retriever or BM25 rollback | Include only if it changes P1 |
+| 2026-08-15 | #24 and #25 | Exact generator/prompt and frozen end-to-end RAG profile qualified or rejected | P2 end-to-end experiment result |
+| 2026-08-21 | #8 | Authenticated, persistent professor/student application deployed to staging around the selected or rollback profile | Demonstration link |
+| 2026-08-26 | #9, #10, and #12 | Security, reliability, simulated-user, synthetic-account, final comparison, and evidence freeze completed | P3 final evidence and claim boundary |
 | 2026-09-03 | #13 | Full report draft, figures, and claim-to-evidence matrix | P5 report review |
 | 2026-09-09 | Professor checkpoint issue | Timed demo and failure-recovery rehearsal completed | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | #13 | Contingency only: blocking corrections, packaging, and final checks without new claims | No routine checkpoint; escalate only a blocker |
@@ -186,15 +186,17 @@ unmeasured.
 
 ## Professor checkpoint format
 
-Each report is a short conversational update with one durable page under
+Professor time is reserved for decision-bearing results. Planning, hosting,
+account, and ordinary progress questions remain internal unless they block the
+research. Each report is a compact result package under
 `research/06_reports/weekly/`. It contains:
 
-1. the research decision already taken and the critique requested;
-2. status against the critical path: green, amber, or red;
-3. the most important evidence table or figure;
-4. the most important failure, privacy concern, or limitation;
-5. the proposed Keep, Refine, Go Deeper, or Drop decision; and
-6. the next checkpoint and consequences of delay.
+1. the question, prediction, control, candidates, and frozen dataset;
+2. raw denominators, uncertainty, gates, latency, memory, and cost;
+3. the most important comparison table and no more than two figures;
+4. favorable and unfavorable representative cases;
+5. the Keep, Refine, Go Deeper, or Drop decision with limitations; and
+6. one bounded critique question that could change the interpretation.
 
 Researcher decisions and any professor critique are copied into
 `research/00_admin/decision-log.md` and the corresponding GitHub issue.
@@ -209,6 +211,8 @@ conditions are frozen in the
 
 - No product implementation starts until #11 freezes the evaluation and data
   governance protocol.
+- No professor progress message is sent before the retrieval-v3 result unless
+  an external permission or deadline blocker requires a decision.
 - No private professor or course data enters an external provider until
   permission and provider processing are approved.
 - No sealed simulated-student or synthetic-account evaluation begins until #9

@@ -4,6 +4,11 @@ Date: 2026-07-24
 
 GitHub checkpoint: #44 / P0
 
+Status: internal preliminary record; not sent. On 2026-07-23 the reporting rule
+changed to reserve professor time for a valid course-specific experiment
+result. The first planned external checkpoint is the retrieval-v3 result
+package after the frozen held-out run, targeted for 2026-08-05/06.
+
 ## Update
 
 I have selected the project direction and evaluation method rather than waiting
@@ -136,13 +141,15 @@ student learning.
 
 | Date | Work | Evidence produced |
 | --- | --- | --- |
-| 2026-07-24 to 2026-07-25 | Finish #11 by freezing the exact judge prompt, simulator state-card schema, analysis configuration, and local-only boundary | Reproducible protocol and instrument tests |
-| 2026-07-26 to 2026-07-29 | Run #24 and #43 development/calibration work | Exact generator/prompt decision and returned-context verifier decision |
-| 2026-07-30 to 2026-07-31 | Run #25 under frozen C0-C3 conditions | First course-specific end-to-end RAG decision |
-| 2026-08-01 onward | Build only the selected or safe rollback vertical slice | Authenticated, persistent staging application |
+| 2026-07-23 to 2026-07-26 | Freeze #11/#7 retrieval-v3 candidates, datasets, metrics, analysis, gates, and held-out lock | Reproducible retrieval protocol and instrument tests |
+| 2026-07-27 to 2026-07-30 | Validate private development and sealed IT5002 retrieval cases and bind exact local model revisions | Validated dataset manifests and feasibility record |
+| 2026-07-31 to 2026-08-02 | Run development ablations and freeze the confirmatory condition and thresholds | Development comparison and selection record |
+| 2026-08-03 to 2026-08-05 | Run one held-out retrieval-v3 comparison | First course-specific retrieval decision |
+| 2026-08-06 onward | Qualify context sufficiency and generation before building around the selected or safe rollback profile | End-to-end RAG evidence, then authenticated persistent staging |
 
-The next professor checkpoint should contain actual #24/#43/#25 results,
-failure examples, one paired outcome figure, and a Keep / Refine / Go Deeper /
+The next professor checkpoint should contain the #7 retrieval-v3 result, raw
+denominators, uncertainty, latency and resource evidence, favorable and
+unfavorable cases, no more than two figures, and a Keep / Refine / Go Deeper /
 Drop decision. It should not ask the professor to choose the method.
 
 ## Feedback requested

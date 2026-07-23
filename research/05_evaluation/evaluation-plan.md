@@ -12,6 +12,12 @@ this final tutor evaluation; they do not replace it.
 
 ## Research questions
 
+- On the complete IT5002 corpus, does deterministic contextual hybrid retrieval
+  plus learned reranking improve complete-evidence success and claim coverage
+  over the heading-aware BM25 control without regressing no-evidence behavior
+  or the local resource budget?
+- On predeclared multi-evidence cases, does one bounded decomposition round add
+  enough evidence coverage to justify its latency and query-drift risk?
 - Does approved oracle evidence improve safe grounded task success over a
   generic assistant using the same generator?
 - Does the professor-approved policy measurably change pedagogical behavior
@@ -36,9 +42,13 @@ this final tutor evaluation; they do not replace it.
    IT5002 topic strata. Its candidate authoritative corpus is all 13 official
    lectures in
    [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json).
-5. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-
+5. `it5002-retrieval-open-set-v1` contains 24 development and 52 sealed
+   hard-negative no-evidence cases. It supplements `course-tutor-v1` for
+   retrieval threshold and abstention evaluation; it is excluded from
+   Recall@K, nDCG, and MRR denominators.
+6. `course-tutor-dialogue-v1` contains 16 development and 32 sealed simulated-
    student trajectories for multi-turn stress testing.
-6. Scripted synthetic-account records provide deployment and operational
+7. Scripted synthetic-account records provide deployment and operational
    acceptance evidence only; they do not establish human usability or learning.
 
 Component held-out records are not reused for tuning or for the final system
@@ -58,6 +68,13 @@ history before model output.
 Public RAG and tutoring benchmarks supply constructs and instrument checks.
 They are not substitutes for the versioned course-specific benchmark.
 
+The exact retrieval-v3 ablation, model candidates, deterministic contextual
+representation, metrics, gates, NotebookLM boundary, analysis, and professor
+result package are frozen in the
+[`IT5002 retrieval-v3 plan`](../04_experiments/2026-07-23-it5002-retrieval-v3-plan.md).
+NotebookLM is an exploratory black-box product reference and cannot select the
+internal retriever or contribute hidden Recall@K or nDCG values.
+
 ## Frozen conditions
 
 - C0: generic assistant, no course context;
@@ -73,6 +90,8 @@ Hold question, generator, decoding, token budget, and output schema constant.
 
 - unconditional safe grounded task success;
 - complete-evidence success@k; and
+- gold-claim context coverage@3 and no-evidence accuracy for retrieval
+  selection;
 - professor-policy pedagogical success plus blinded policy-condition
   preference; and
 - multi-turn safe trajectory completion.

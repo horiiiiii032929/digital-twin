@@ -45,3 +45,7 @@ Current utilities:
   simulated-student, run-record, and analysis contracts plus public synthetic
   examples, semantic cross-file invariants, and the freeze-manifest hashes; run
   it with `npm run verify:evaluation-instruments`.
+- `validate_retrieval_v3_instruments.py`: validates the frozen IT5002
+  retrieval-v3 candidate set, primary metrics, NotebookLM black-box boundary,
+  held-out lock, and public open-set example; run it with
+  `npm run verify:retrieval-v3-instruments`.

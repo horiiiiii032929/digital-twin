@@ -16,8 +16,10 @@ and rollback evidence is recorded.
   frozen and validated under `research/05_evaluation/instruments/`.
 - No live generator/prompt, returned-context verifier, end-to-end RAG profile,
   authentication, durable persistence, or deployment is selected yet.
-- The immediate active work is #24 and #43 under the #11 freeze; no held-out
-  inspection is allowed until exact runtime bindings are recorded.
+- The immediate active work is the #7 IT5002 retrieval-v3 comparison under the
+  #11 freeze. No model download, private development scoring, or held-out
+  inspection is allowed until exact runtime bindings and split controls are
+  recorded.
 
 ## Final-project scope
 
@@ -34,9 +36,10 @@ course, without student recruitment. The project requires:
   synthetic-account acceptance; and
 - reproducible offline comparisons and a deployed demonstration.
 
-Course-specific evaluation is local-only under the researcher-selected working
-boundary. Private course material and outputs do not enter an external
-provider. Human usability and learning-effectiveness claims are excluded.
+Internal course-specific retrieval evaluation remains local. A NotebookLM
+black-box reference is separate and may use private material only after the
+source permission, account terms, and run boundary are recorded. Human
+usability and learning-effectiveness claims are excluded.
 
 ## Deferred from the critical path
 
@@ -52,33 +55,37 @@ provider. Human usability and learning-effectiveness claims are excluded.
 
 1. #11 freezes the method, data-governance, rubric, threshold, and reporting
    protocol. The instrument-contract portion is complete.
-2. #24 and #43 qualify or reject the generator/prompt and returned-context
-   sufficiency verifier.
-3. #25 records the frozen end-to-end RAG decision; #7 closes from that evidence.
-4. #8 adds evaluated authentication, authorization, persistence, storage,
+2. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
+   dense, hybrid, deterministic contextual, reranked, and bounded-decomposition
+   conditions.
+3. #43 qualifies or rejects the returned-context sufficiency verifier using the
+   selected retriever or BM25 rollback.
+4. #24 qualifies the exact generator/prompt; #25 records the frozen end-to-end
+   RAG decision and #7 closes from that evidence.
+5. #8 adds evaluated authentication, authorization, persistence, storage,
    professor/student journeys, and staging deployment.
-5. #9 hardens security/reliability and records the researcher evaluation-release
+6. #9 hardens security/reliability and records the researcher evaluation-release
    Go / Refine / No-Go; real student release authorization remains separate.
-6. #10 runs calibrated LLM-judge, simulated-student, and deployed
+7. #10 runs calibrated LLM-judge, simulated-student, and deployed
    synthetic-account evaluation.
-7. #12 runs the blinded final comparison and freezes evidence.
-8. #13 delivers the final report, deployed demo, reproducibility package, and
+8. #12 runs the blinded final comparison and freezes evidence.
+9. #13 delivers the final report, deployed demo, reproducibility package, and
    presentation.
-9. #44 records every researcher checkpoint, professor critique, and genuine
+10. #44 records every researcher checkpoint, professor critique, and genuine
    release decision separately.
 
 ## Tight roadmap
 
 | Date | Required outcome | Professor checkpoint |
 | --- | --- | --- |
-| 2026-07-24 | Researcher-selected method, preliminary results, claim boundary, and next experiment reported | P0 method/results critique |
-| 2026-07-25 | #11 protocol frozen | Researcher freeze record |
-| 2026-07-29 | #24 and #43 qualified or rejected | Included in P1 |
-| 2026-07-31 | #25 and #7 end-to-end RAG decision | P1 RAG result critique |
-| 2026-08-10 | #8 authenticated persistent staging deployment | P2 staging and architecture review |
-| 2026-08-15 | #9 hardening and risk review | P3 researcher Go / Refine / No-Go |
-| 2026-08-22 | #10 simulated-student, LLM-judge, and synthetic-account evaluation | P4 evidence and claim decision |
-| 2026-08-26 | #12 final evaluation and evidence freeze | Written freeze confirmation |
+| 2026-07-26 | #11/#7 retrieval-v3 candidate, data, and analysis freeze | Internal freeze; no professor update |
+| 2026-07-30 | Private IT5002 development and held-out sets validate; runtime feasibility bound | No report before a result |
+| 2026-08-02 | Development ablations and thresholds frozen | Internal selection record |
+| 2026-08-05 | #7 held-out retrieval-v3 decision | P1 experiment result package |
+| 2026-08-11 | #43 context-sufficiency decision | Report only if decision-bearing |
+| 2026-08-15 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |
+| 2026-08-21 | #8 authenticated persistent staging deployment | Demonstration link |
+| 2026-08-26 | #9/#10/#12 final evaluation and evidence freeze | P3 final evidence package |
 | 2026-09-03 | Full report draft and figures | P5 report review |
 | 2026-09-09 | Timed demo and recovery rehearsal | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | Contingency only; no new scope or claims | Escalate blockers only |
@@ -113,6 +120,8 @@ trajectory completion, and reliable turn completion.
 - Do not infer private-course external-provider permission or evaluator
   validity from general encouragement.
 - Do not tune on sealed data or rerun until a favorable result appears.
+- Reserve professor contact for a decision-bearing result package or a genuine
+  permission/deadline blocker, not ordinary progress reporting.
 - Stop new architecture, model, metric, and feature work after 2026-08-26.
 - Protect 2026-08-27 through 2026-09-13 for report writing, figures, slides,
   demo stabilization, rehearsal, and contingency.

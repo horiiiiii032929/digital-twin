@@ -1,0 +1,385 @@
+{
+  "schema_version": "1.0.0",
+  "freeze_id": "it5002-retrieval-v3-candidate-freeze-2026-07-23",
+  "status": "candidate_set_frozen",
+  "heldout_access_allowed": false,
+  "research_question": "Does deterministic contextual hybrid retrieval with a learned reranker retrieve all essential IT5002 evidence more reliably than heading-aware BM25 while preserving no-evidence behavior and a practical local resource budget?",
+  "corpus": {
+    "corpus_id": "it5002-lectures-v1",
+    "manifest_path": "research/05_evaluation/it5002_lectures_v1.manifest.json",
+    "document_count": 13,
+    "page_count": 508,
+    "content_mode": "selectable_text",
+    "private_source_text_committed": false
+  },
+  "datasets": [
+    {
+      "dataset_id": "course-tutor-v1",
+      "development_cases": 48,
+      "heldout_cases": 104,
+      "purpose": "Answerable, partially answerable, policy, and existing no-evidence course cases with claim-to-evidence gold labels."
+    },
+    {
+      "dataset_id": "it5002-retrieval-open-set-v1",
+      "development_cases": 24,
+      "heldout_cases": 52,
+      "purpose": "Additional hard-negative no-evidence cases."
+    }
+  ],
+  "representations": [
+    {
+      "representation_id": "fixed-window-1200-160",
+      "kind": "fixed_window",
+      "max_chars": 1200,
+      "overlap_chars": 160,
+      "context_fields": []
+    },
+    {
+      "representation_id": "heading-paragraph-1200-160",
+      "kind": "heading_paragraph",
+      "max_chars": 1200,
+      "overlap_chars": 160,
+      "context_fields": []
+    },
+    {
+      "representation_id": "deterministic-context-heading-1200-160",
+      "kind": "deterministic_context_heading_paragraph",
+      "max_chars": 1200,
+      "overlap_chars": 160,
+      "context_fields": [
+        "course_id",
+        "lecture_id",
+        "lecture_title",
+        "heading_path",
+        "locator"
+      ]
+    }
+  ],
+  "query_instruction": "Given a student question about the approved IT5002 course, retrieve passages that together contain all evidence needed to answer accurately and safely.",
+  "conditions": [
+    {
+      "condition_id": "R0",
+      "selection_role": "representation_control",
+      "representation_id": "fixed-window-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 5
+        }
+      ],
+      "fusion": null,
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R1",
+      "selection_role": "rollback_control",
+      "representation_id": "heading-paragraph-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 5
+        }
+      ],
+      "fusion": null,
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R2",
+      "selection_role": "dense_ablation",
+      "representation_id": "heading-paragraph-1200-160",
+      "first_stage": [
+        {
+          "method": "dense",
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "parameters": {
+            "similarity": "cosine",
+            "instruction": "frozen_query_instruction"
+          },
+          "candidate_limit": 5
+        }
+      ],
+      "fusion": null,
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R3",
+      "selection_role": "hybrid_ablation",
+      "representation_id": "heading-paragraph-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 20
+        },
+        {
+          "method": "dense",
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "parameters": {
+            "similarity": "cosine",
+            "instruction": "frozen_query_instruction"
+          },
+          "candidate_limit": 20
+        }
+      ],
+      "fusion": {
+        "method": "rrf",
+        "k": 60,
+        "deduplicate_by": "passage_id"
+      },
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R4",
+      "selection_role": "context_ablation",
+      "representation_id": "deterministic-context-heading-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 20
+        },
+        {
+          "method": "dense",
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "parameters": {
+            "similarity": "cosine",
+            "instruction": "frozen_query_instruction"
+          },
+          "candidate_limit": 20
+        }
+      ],
+      "fusion": {
+        "method": "rrf",
+        "k": 60,
+        "deduplicate_by": "passage_id"
+      },
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R5",
+      "selection_role": "confirmatory_candidate",
+      "representation_id": "deterministic-context-heading-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 20
+        },
+        {
+          "method": "dense",
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "parameters": {
+            "similarity": "cosine",
+            "instruction": "frozen_query_instruction"
+          },
+          "candidate_limit": 20
+        }
+      ],
+      "fusion": {
+        "method": "rrf",
+        "k": 60,
+        "deduplicate_by": "passage_id"
+      },
+      "reranker": {
+        "model": "Qwen/Qwen3-Reranker-0.6B",
+        "instruction": "frozen_query_instruction",
+        "candidate_limit": 40
+      },
+      "decomposition": null,
+      "final_limit": 5
+    },
+    {
+      "condition_id": "R6",
+      "selection_role": "multi_evidence_conditional",
+      "representation_id": "deterministic-context-heading-1200-160",
+      "first_stage": [
+        {
+          "method": "bm25",
+          "model": "okapi-bm25",
+          "parameters": {
+            "k1": 1.2,
+            "b": 0.75
+          },
+          "candidate_limit": 20
+        },
+        {
+          "method": "dense",
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "parameters": {
+            "similarity": "cosine",
+            "instruction": "frozen_query_instruction"
+          },
+          "candidate_limit": 20
+        }
+      ],
+      "fusion": {
+        "method": "rrf",
+        "k": 60,
+        "deduplicate_by": "passage_id"
+      },
+      "reranker": {
+        "model": "Qwen/Qwen3-Reranker-0.6B",
+        "instruction": "frozen_query_instruction",
+        "candidate_limit": 40
+      },
+      "decomposition": {
+        "eligible_scenario": "multi_evidence",
+        "maximum_rounds": 1,
+        "maximum_subqueries": 3,
+        "prompt_binding_status": "pending_preflight_freeze"
+      },
+      "final_limit": 5
+    },
+    {
+      "condition_id": "O1",
+      "selection_role": "oracle_upper_bound",
+      "representation_id": "heading-paragraph-1200-160",
+      "first_stage": [],
+      "fusion": null,
+      "reranker": null,
+      "decomposition": null,
+      "final_limit": 5
+    }
+  ],
+  "black_box_reference": {
+    "reference_id": "B1",
+    "product": "NotebookLM",
+    "selection_eligible": false,
+    "planned_cases": 40,
+    "observable_metrics": [
+      "required_claim_support",
+      "citation_correctness",
+      "citation_completeness",
+      "abstention",
+      "latency"
+    ],
+    "prohibited_metrics": [
+      "recall_at_k",
+      "ndcg_at_k",
+      "candidate_rank",
+      "internal_retriever_latency"
+    ],
+    "required_metadata": [
+      "run_date",
+      "account_tier",
+      "source_revision",
+      "source_selection",
+      "query_order",
+      "conversation_history_treatment"
+    ]
+  },
+  "primary_metrics": [
+    {
+      "metric_id": "complete_evidence_success_at_3",
+      "denominator": "course cases with at least one essential evidence unit applicable to the permitted action",
+      "minimum_useful_effect_r5_minus_r1_pp": 5
+    },
+    {
+      "metric_id": "gold_claim_context_coverage_at_3",
+      "denominator": "macro mean over course cases with required claims",
+      "minimum_useful_effect_r5_minus_r1_pp": 5
+    },
+    {
+      "metric_id": "no_evidence_accuracy",
+      "denominator": "all corpus-not-answerable course cases plus all open-set cases",
+      "eligibility_floor": 0.95
+    }
+  ],
+  "hard_gates": [
+    "zero_prohibited_superseded_unapproved_or_wrong_course_hits",
+    "zero_sealed_access_before_full_freeze",
+    "zero_private_source_text_in_git_or_ordinary_logs",
+    "zero_missing_provenance",
+    "zero_silent_model_fallback",
+    "missing_malformed_timeout_and_operational_failures_remain_in_denominator"
+  ],
+  "operational_limits": {
+    "r1_to_r5_warm_p95_seconds": 5,
+    "r6_full_retrieval_p95_seconds": 8,
+    "r6_maximum_decomposition_rounds": 1,
+    "peak_resident_memory_gib": 8,
+    "cached_retrieval_artifacts_gib": 5
+  },
+  "analysis": {
+    "random_seed": 5002,
+    "bootstrap_replicates": 10000,
+    "family_alpha": 0.05,
+    "multiple_testing": "holm_h1_h3",
+    "confirmatory_hypotheses": [
+      {
+        "hypothesis_id": "H1",
+        "contrast": "R5_vs_R1_complete_evidence_success_at_3",
+        "test": "exact_two_sided_mcnemar"
+      },
+      {
+        "hypothesis_id": "H2",
+        "contrast": "R5_vs_R1_gold_claim_context_coverage_at_3",
+        "test": "paired_bootstrap"
+      },
+      {
+        "hypothesis_id": "H3",
+        "contrast": "R5_vs_R1_no_evidence_decision",
+        "test": "exact_two_sided_mcnemar"
+      }
+    ],
+    "conditional_contrast": {
+      "hypothesis_id": "H4",
+      "contrast": "R6_vs_R5_complete_evidence_success_at_3_on_multi_evidence",
+      "test": "descriptive_exact_mcnemar",
+      "minimum_useful_effect_pp": 10
+    }
+  },
+  "runtime_bindings": {
+    "status": "pending_feasibility_preflight",
+    "required_before_development_scoring": [
+      "model_revision_hashes",
+      "model_file_hashes",
+      "runtime_package_versions",
+      "numerical_precision",
+      "device",
+      "batch_size",
+      "cache_identity",
+      "decomposition_model_prompt_and_parameters"
+    ]
+  },
+  "artifact_paths": {
+    "literature": "research/01_literature/2026-07-23-modern-course-rag-retrieval.md",
+    "experiment_plan": "research/04_experiments/2026-07-23-it5002-retrieval-v3-plan.md",
+    "course_case_schema": "research/05_evaluation/course_tutor_v1.schema.json",
+    "open_set_schema": "research/05_evaluation/it5002_retrieval_open_set_v1.schema.json",
+    "open_set_example": "research/05_evaluation/it5002_retrieval_open_set_v1_synthetic_example.json",
+    "open_set_guide": "research/05_evaluation/it5002-retrieval-open-set-v1-annotation-guide.md"
+  }
+}
