@@ -89,6 +89,20 @@ set defined by the
 the primary contrast. That checkpoint cannot select `Keep`; its cases cannot
 enter the expanded retrieval-v3 held-out split.
 
+After a one-time held-out runner completes, independently recompute its metrics:
+
+```bash
+uv run python -m scripts.analyze_it5002_rapid_result \
+  --latency-contaminated
+```
+
+The contamination flag retains observed held-out timing while using the clean
+development p95 for the predeclared deployability gate. Omit it only when the
+held-out runtime was not affected by an independently documented operational
+contaminant. The command writes no private course text to the committed result
+package. Do not run it for an incomplete result: register the run as invalid
+instead.
+
 The selected full-course candidate corpus is inventoried in
 [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the
 scope rationale and source hierarchy in the

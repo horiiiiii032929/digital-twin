@@ -4,8 +4,9 @@ Date: 2026-07-23
 
 Deadline: within 24 hours, no later than 2026-07-24
 
-Status: prospectively frozen; private dataset construction, runtime binding,
-execution, analysis, and professor delivery are pending
+Status: held-out run invalid; development calibration completed, the sealed
+process exited after 29 of 59 standard cases, and the split is retired without
+rerun
 
 GitHub execution issue: #46
 
@@ -23,6 +24,28 @@ The rapid checkpoint answers:
 
 The larger retrieval-v3 experiment remains the final component-selection
 study. Rapid cases cannot be reused in its sealed split.
+
+## Execution outcome
+
+The development run completed under the frozen runtime. The one-time held-out
+run started at `2026-07-23T16:39:53Z`, completed 29 of the 59 standard R0-R5
+cases, and then disappeared between `2026-07-23T21:03:46Z` and
+`2026-07-23T21:18:51Z`. The ledger remains `started`; no held-out result
+artifact was written because the runner persisted results only after all
+standard, R6, and oracle work completed.
+
+The exact failure is an incomplete process termination with no retained stderr
+or macOS crash report. Severe unified-memory pressure and multi-minute MPS
+operations were observed, but those observations do not prove the termination
+cause. The run is registered as invalid, its partial in-memory measurements are
+not reconstructed, and the sealed split must not be rerun.
+
+The clean development result remains valid calibration and operational
+evidence. R5 retrieved complete evidence for 10 of 13 answerable cases versus 3
+of 13 for R1 and correctly abstained for all 13 development no-evidence cases,
+but its 64.8-second warm p95 exceeded the frozen 5-second gate. Therefore the
+specific local MPS Qwen3 configuration is dropped while R1 remains the
+rollback; no held-out quality or SOTA claim is available.
 
 ## Frozen comparison
 
