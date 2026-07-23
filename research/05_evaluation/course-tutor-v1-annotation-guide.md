@@ -2,8 +2,8 @@
 
 Date: 2026-07-23
 
-Status: schema candidate for professor-anchor review; no private course dataset
-has been created or approved
+Status: schema candidate v1.1 for professor-anchor review; private draft cases
+may be authored locally, but no case is approved for tutoring or evaluation
 
 ## Purpose
 
@@ -22,6 +22,11 @@ The machine-readable contract is
 [`course_tutor_v1_synthetic_example.json`](course_tutor_v1_synthetic_example.json)
 demonstrates the shape without containing real course, professor, or student
 data.
+
+Schema v1.1 adds a manifest-controlled topic stratum and allows a private local
+draft to retain `pending` tutoring permission. Pending evidence may be authored
+and reviewed locally, but it cannot enter a tutor run or count as approved gold
+evidence.
 
 ## Unit of analysis
 
@@ -102,7 +107,7 @@ rules must also pass before a split is approved:
 
 | Rule | Failure meaning |
 | --- | --- |
-| Dataset and case IDs are unique; every case split matches the file split | Provenance or split corruption |
+| Dataset and case IDs are unique; every case split matches the file split and every topic ID appears in the corpus manifest | Provenance, split, or topic corruption |
 | Every case-family ID occurs in one split only; parent and transformation history resolve | Paraphrase or transformed-case leakage |
 | Every difficulty label has a task-specific rationale | Uninterpretable slice label |
 | Every `answer` or content-bearing `scaffold` case has at least one required claim | Success cannot be judged |

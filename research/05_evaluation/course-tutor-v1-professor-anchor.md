@@ -5,6 +5,17 @@ Date: 2026-07-23
 Status: proposed 12-case instrument-calibration set; course content and expected
 decisions require professor approval
 
+## Construction status
+
+| Anchor | Local state | Evidence state | Professor state |
+| --- | --- | --- | --- |
+| `ctv1-anchor-001` | Drafted under schema v1.1 and validated locally | IT5002 Lecture 5, page 6; source identity, extracted-passage hash, and claim-evidence graph resolve | Pending review and tutoring permission |
+| `ctv1-anchor-002` to `ctv1-anchor-012` | Blueprint only | Not yet instantiated | Pending |
+
+The private draft is stored under ignored
+`data/processed/course_tutor_v1/anchor/`; course wording and gold claims are not
+committed.
+
 ## What the anchor is for
 
 The anchor finds disagreements about valid evidence, expected tutoring actions,
@@ -62,8 +73,8 @@ MIPS/datapath subset:
 
 | Topic stratum | Proposed anchor IDs | Intended coverage |
 | --- | --- | --- |
-| Foundations and number representation | 001, 012 | One normal concept plus one operational-failure case |
-| MIPS instruction-set architecture | 002, 003, 007 | Paraphrase, misconception, and assessed-work boundary |
+| Foundations and number representation | 002, 012 | One paraphrase plus one operational-failure case |
+| MIPS instruction-set architecture | 001, 003, 007 | Direct concept, misconception, and assessed-work boundary |
 | Datapath and control | 004, 009 | Multi-evidence synthesis and partial returned context |
 | Memory hierarchy and caches | 008 | Active-source/version or conflicting-note boundary |
 | Operating systems, processes, and IPC | 005, 010, 011 | Ambiguity, allowed critique, and privacy/authorization boundary |

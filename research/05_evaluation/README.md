@@ -44,6 +44,11 @@ Private course text, derived passages, real student content, and consent records
 must not be committed. The anchor is an instrument-calibration set, not a system
 performance result.
 
+Private anchor drafts and extracted evidence passages live under ignored
+`data/processed/course_tutor_v1/` and `data/interim/course_tutor_v1/`. The
+committed professor-anchor blueprint records construction and approval status
+without exposing course wording or gold claims.
+
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer
 quality and cannot select a model or prompt by itself. Its clean deterministic

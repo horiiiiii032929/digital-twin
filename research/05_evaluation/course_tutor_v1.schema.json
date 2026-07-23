@@ -25,7 +25,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "dataset_id": {
       "const": "course-tutor-v1"
@@ -178,7 +178,7 @@
         "content_class": {
           "enum": [
             "synthetic_public",
-            "approved_course_private"
+            "course_private"
           ]
         },
         "contains_direct_identifiers": {
@@ -214,7 +214,7 @@
           "if": {
             "properties": {
               "content_class": {
-                "const": "approved_course_private"
+                "const": "course_private"
               }
             }
           },
@@ -222,9 +222,6 @@
             "properties": {
               "source_text_committed_to_git": {
                 "const": false
-              },
-              "permission_status": {
-                "const": "approved"
               },
               "private_storage_ref": {
                 "type": "string",
@@ -245,6 +242,7 @@
         "case_id",
         "split",
         "scenario_type",
+        "topic_stratum",
         "difficulty",
         "difficulty_rationale",
         "lineage",
@@ -264,6 +262,11 @@
         },
         "scenario_type": {
           "$ref": "#/$defs/scenario_type"
+        },
+        "topic_stratum": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Dataset-manifest topic ID, such as mips-isa; allowed values are frozen with the corpus."
         },
         "difficulty": {
           "enum": [
