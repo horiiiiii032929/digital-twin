@@ -55,7 +55,8 @@ produce an inspectable, evaluated vertical slice.
 
 ### Course corpus
 
-- Use 4-8 synthetic or explicitly approved course documents.
+- Use the 13 inventoried official IT5002 lecture PDFs for the full-course pilot;
+  keep private content local and block tutoring use until professor approval.
 - Support UTF-8 text, Markdown, and selectable-text PDF input.
 - Preserve document ID, title, source label, content hash, and a human-readable
   locator through normalization and chunking.

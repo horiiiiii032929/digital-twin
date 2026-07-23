@@ -119,11 +119,15 @@ retriever outputs. Deliberately constructed complete, partial, or none stress
 contexts must be tagged and reported separately from naturally occurring
 outputs.
 
-Create `course-tutor-v1` from 4-8 explicitly approved course documents. Keep
-private originals and derived passages outside Git. Commit only schemas,
-synthetic examples, hashes, permission metadata, and sanitized aggregate
-evidence. The 12-case professor anchor deliberately covers every scenario type
-and repeats four high-risk boundaries. It validates expected actions, required
+Create `course-tutor-v1` against all 13 official IT5002 lecture PDFs in
+[`it5002_lectures_v1.manifest.json`](../05_evaluation/it5002_lectures_v1.manifest.json).
+Personal notes may inform question wording and misconceptions but are not
+authoritative evidence. Tutorials, assignments, exams, answers, secrets, and
+student records remain excluded. Keep private originals and derived passages
+outside Git. Commit only schemas, synthetic examples, hashes, permission
+metadata, and sanitized aggregate evidence. The 12-case professor anchor
+deliberately covers every scenario type and all five course-topic strata while
+repeating four high-risk boundaries. It validates expected actions, required
 claims, evidence links, and rubric interpretation; it is not a performance
 estimate. The 48 development cases may be used for course-specific integration
 decisions. Open the 104-case final set once, only after the protocol, component

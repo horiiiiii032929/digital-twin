@@ -35,6 +35,11 @@ The `course-tutor-v1` design is defined by:
 - [`course-tutor-v1-professor-anchor.md`](course-tutor-v1-professor-anchor.md),
   the 12-case professor-review blueprint.
 
+The selected full-course candidate corpus is inventoried in
+[`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json), with the
+scope rationale and source hierarchy in the
+[`IT5002 corpus decision`](../00_admin/2026-07-23-it5002-full-course-corpus-decision.md).
+
 Private course text, derived passages, real student content, and consent records
 must not be committed. The anchor is an instrument-calibration set, not a system
 performance result.

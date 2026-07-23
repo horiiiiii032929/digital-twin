@@ -30,7 +30,10 @@ this final tutor evaluation; they do not replace it.
 3. `context-sufficiency-v2` contains 60 calibration and 150 held-out returned-
    context records, balanced across complete, partial, and none.
 4. `course-tutor-v1` contains 12 professor-anchor, 48 development/calibration,
-   and 104 sealed final cases over eight predeclared scenario types.
+   and 104 sealed final cases over eight predeclared scenario types and five
+   IT5002 topic strata. Its candidate authoritative corpus is all 13 official
+   lectures in
+   [`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json).
 5. Supervised pilot records provide usability and operational evidence only;
    they do not select the RAG method or establish learning improvement.
 

@@ -47,7 +47,8 @@ and rollback.
 
 ## Decisions needed from the professor
 
-1. Which one course and which 4-8 documents may be used for the pilot?
+1. May all 13 inventoried official IT5002 lectures be processed and used for
+   tutor grounding, with notes and assessed/answer material excluded?
 2. Is a cohort of 5-15 invited adult students appropriate, and what institutional
    approval or consent process is required?
 3. May any approved course or student text be sent to an external DeepSeek API?

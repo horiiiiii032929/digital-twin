@@ -55,6 +55,23 @@ assessed work, privacy/authorization, and operational failure.
 The repeat cases are intentionally risk-weighted. This distribution is not a
 claim about how often these events occur in the deployed course.
 
+## Proposed IT5002 topic overlay
+
+The anchor also covers the full 13-lecture corpus rather than only the earlier
+MIPS/datapath subset:
+
+| Topic stratum | Proposed anchor IDs | Intended coverage |
+| --- | --- | --- |
+| Foundations and number representation | 001, 012 | One normal concept plus one operational-failure case |
+| MIPS instruction-set architecture | 002, 003, 007 | Paraphrase, misconception, and assessed-work boundary |
+| Datapath and control | 004, 009 | Multi-evidence synthesis and partial returned context |
+| Memory hierarchy and caches | 008 | Active-source/version or conflicting-note boundary |
+| Operating systems, processes, and IPC | 005, 010, 011 | Ambiguity, allowed critique, and privacy/authorization boundary |
+| Outside the full course corpus | 006 | Near-domain no-evidence behavior |
+
+The topic assigned to a risk case may change during professor review, but every
+stratum must remain represented after adjudication.
+
 ## What must be filled for each case
 
 The researcher prepares a draft, and the professor confirms or revises:

@@ -12,6 +12,11 @@ tutor. It evaluates whether one frozen system can use approved evidence, follow
 the professor's policy, respond appropriately to the student's declared state,
 and fail safely.
 
+The selected candidate course corpus is all 13 official IT5002 lecture PDFs in
+[`it5002_lectures_v1.manifest.json`](it5002_lectures_v1.manifest.json). The
+anchor and later splits cover five topic strata: foundations, MIPS ISA,
+datapath/control, memory hierarchy, and operating systems/processes/IPC.
+
 The machine-readable contract is
 [`course_tutor_v1.schema.json`](course_tutor_v1.schema.json). The committed
 [`course_tutor_v1_synthetic_example.json`](course_tutor_v1_synthetic_example.json)

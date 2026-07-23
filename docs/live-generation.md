@@ -161,5 +161,6 @@ while comparing full-document context, BM25, dense, hybrid, and justified
 reranked RAG strategies. That later experiment answers the primary research
 question without confusing model variation with retrieval variation.
 
-IT5002 files remain outside this flow until an explicit professor approval
-grants processing and tutoring permission.
+All 13 inventoried IT5002 lecture PDFs remain outside this flow until explicit
+professor approval grants tutoring permission. External-provider use requires a
+separate approval even after local tutoring permission exists.
