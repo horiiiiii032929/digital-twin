@@ -25,10 +25,19 @@ this final tutor evaluation; they do not replace it.
 ## Dataset portfolio
 
 1. Existing synthetic web-security data remains the public regression suite.
-2. `course-tutor-v1` contains 12 professor-anchor, 48 development/calibration,
-   and 72 sealed held-out cases over eight predeclared scenario types.
-3. Supervised pilot records provide usability and operational evidence only;
+2. `generator-qualification-v1` contains 48 development and 104 sealed
+   synthetic-only cases for the exact generator and prompt comparison.
+3. `context-sufficiency-v2` contains 60 calibration and 150 held-out returned-
+   context records, balanced across complete, partial, and none.
+4. `course-tutor-v1` contains 12 professor-anchor, 48 development/calibration,
+   and 104 sealed final cases over eight predeclared scenario types.
+5. Supervised pilot records provide usability and operational evidence only;
    they do not select the RAG method or establish learning improvement.
+
+Component held-out records are not reused for tuning or for the final system
+claim. The 104 final cases give 13 cases per scenario type and an aggregate
+worst-case Wilson 95% half-width of about 9.4 percentage points. Slice results
+remain descriptive.
 
 Public RAG and tutoring benchmarks supply constructs and instrument checks.
 They are not substitutes for the versioned course-specific benchmark.
@@ -39,7 +48,8 @@ They are not substitutes for the versioned course-specific benchmark.
 - C1: oracle evidence plus generic tutoring policy;
 - C2: the same oracle evidence plus professor policy;
 - C3: retrieved evidence plus professor policy; and
-- C4: all approved documents plus professor policy when they fit safely.
+- C4: all approved documents plus professor policy when they fit safely; this
+  is a conditional control, not one of the four required C0-C3 conditions.
 
 Hold question, generator, decoding, token budget, and output schema constant.
 
@@ -54,6 +64,14 @@ Permission, privacy, authorization, assessed-work, citation identity, source
 version, unsupported high-severity claims, provider failure, and approved cost
 and data boundaries are hard gates. A higher quality average cannot compensate
 for a gate failure.
+
+After hard gates, the final decision floors are 80% unconditional safe grounded
+task success, 80% complete-evidence success@3, 85% complete-evidence success@5,
+80% professor-policy pedagogical success on applicable cases, at least a
+10-point C3-over-C0 gain, no more than a 10-point C3-below-C2 retrieval loss,
+at least 95% reliable turn completion, and p95 latency no greater than 10
+seconds. These are bounded-pilot decision margins, not universal benchmark
+claims; paired intervals and raw denominators remain mandatory.
 
 ## Component evaluation contract
 

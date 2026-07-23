@@ -63,8 +63,11 @@ tie, or right wins, with a rationale.
 
 - Randomize response order and hide condition identity.
 - Calibrate on the 12-case professor anchor before opening final outputs.
-- Two reviewers independently label the anchor and at least 25% of final
-  responses.
+- Two reviewers independently label the anchor and a stratified 25% of final
+  C0-C3 responses, covering every condition and scenario type; double-review
+  every observed hard-gate failure.
 - Report agreement per dimension and preserve adjudicated disagreements.
 - Automated judges may provide development diagnostics only until validated
-  against these in-domain human labels.
+  against these in-domain human labels. A dimension may be automated only with
+  agreement of at least 0.67 and no false pass on a human-labeled hard-gate
+  failure.
