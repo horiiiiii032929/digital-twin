@@ -4,8 +4,8 @@ Decision date: 2026-07-27
 
 Decision owner: project researcher and source holder
 
-Status: approved for inventory and research evaluation; source location
-confirmed and cross-course portfolio inventory selected
+Status: approved for inventory and research evaluation; canonical source
+location confirmed and cross-course portfolio v2 selected
 
 ## Approved collection
 
@@ -54,16 +54,19 @@ Every student-facing release still requires:
 
 ## Access state
 
-The collection is available locally at
-`/Users/hikaru/Downloads/academia_vault`. Durable records use relative source
+The canonical collection is available locally at
+`/Users/hikaru/Documents/academia_vault`. Durable records use relative source
 paths beginning with `academia_vault/` and never require that workstation path.
-The existing ignored IT5002 snapshot remains under
-`data/raw/course_materials/`.
+The similarly named `Downloads/academia_vault` directory is a partial copy and
+must not be used for active corpus selection. The existing ignored IT5002
+snapshot remains under `data/raw/course_materials/`.
 
 Therefore:
 
 - permission is resolved;
-- all four semester-one course folders were inventoried;
-- the 17-PDF lecture-only primary corpus is recorded in
-  `research/05_evaluation/cross_course_portfolio_v1.manifest.json`; and
+- all nine course folders across semesters one and two were inventoried;
+- the active 32-PDF, four-course primary corpus is recorded in
+  `research/05_evaluation/cross_course_portfolio_v2.manifest.json`;
+- the earlier 17-PDF inventory is retained as a superseded partial-source
+  snapshot; and
 - source files remain outside Git.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the sanitized cross-course portfolio inventory."""
+"""Validate active and historical sanitized cross-course portfolio inventories."""
 
 from __future__ import annotations
 
@@ -12,10 +12,22 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST_PATH = (
-    ROOT / "research/05_evaluation/cross_course_portfolio_v1.manifest.json"
-)
-EXPECTED_COURSES = {"IT5001", "IT5002", "IT5004", "IT5008"}
+MANIFEST_DIR = ROOT / "research/05_evaluation"
+V1_MANIFEST_PATH = MANIFEST_DIR / "cross_course_portfolio_v1.manifest.json"
+V2_MANIFEST_PATH = MANIFEST_DIR / "cross_course_portfolio_v2.manifest.json"
+V1_EXPECTED_COURSES = {"IT5001", "IT5002", "IT5004", "IT5008"}
+V2_EXPECTED_COURSES = {"IT5002", "CS5421", "IT5100B", "IT5100E"}
+CANONICAL_CANDIDATES = {
+    "IT5001",
+    "IT5002",
+    "IT5004",
+    "IT5008",
+    "CS5421",
+    "IT5003",
+    "IT5007",
+    "IT5100B",
+    "IT5100E",
+}
 
 
 def require(condition: bool, message: str) -> None:
@@ -23,23 +35,29 @@ def require(condition: bool, message: str) -> None:
         raise ValueError(message)
 
 
-def load_manifest() -> dict[str, Any]:
+def load_manifest(path: Path) -> dict[str, Any]:
     try:
-        return json.loads(MANIFEST_PATH.read_text())
+        return json.loads(path.read_text())
     except FileNotFoundError as error:
-        raise ValueError(f"missing manifest: {MANIFEST_PATH}") from error
+        raise ValueError(f"missing manifest: {path}") from error
     except json.JSONDecodeError as error:
         raise ValueError(f"invalid manifest JSON: {error}") from error
 
 
-def validate_internal(manifest: dict[str, Any]) -> dict[str, int]:
+def validate_internal(
+    manifest: dict[str, Any],
+    *,
+    portfolio_id: str,
+    expected_courses: set[str],
+    expected_status: str,
+) -> dict[str, int]:
     require(
-        manifest["portfolio_id"] == "cross-course-portfolio-v1",
+        manifest["portfolio_id"] == portfolio_id,
         "unexpected portfolio ID",
     )
     require(
-        manifest["status"] == "selected_inventory_boundary",
-        "portfolio inventory must be selected",
+        manifest["status"] == expected_status,
+        f"{portfolio_id} has unexpected status",
     )
     require(
         not Path(manifest["source_root"]).is_absolute(),
@@ -49,7 +67,7 @@ def validate_internal(manifest: dict[str, Any]) -> dict[str, int]:
     courses = manifest["courses"]
     course_ids = [course["course_id"] for course in courses]
     require(len(course_ids) == len(set(course_ids)), "duplicate course ID")
-    require(set(course_ids) == EXPECTED_COURSES, "unexpected course portfolio")
+    require(set(course_ids) == expected_courses, "unexpected course portfolio")
 
     document_count = 0
     page_count = 0
@@ -70,6 +88,14 @@ def validate_internal(manifest: dict[str, Any]) -> dict[str, int]:
         require(
             len({document["filename"] for document in documents}) == len(documents),
             f"{course['course_id']} has duplicate filenames",
+        )
+        require(
+            all(
+                not Path(document["filename"]).is_absolute()
+                and ".." not in Path(document["filename"]).parts
+                for document in documents
+            ),
+            f"{course['course_id']} has an unsafe document path",
         )
 
         course_pages = sum(document["pages"] for document in documents)
@@ -119,6 +145,32 @@ def validate_internal(manifest: dict[str, Any]) -> dict[str, int]:
         "characters": character_count,
         "bytes": byte_count,
     }
+
+
+def validate_v2_inventory(manifest: dict[str, Any]) -> None:
+    candidates = manifest["canonical_candidate_inventory"]
+    candidate_ids = [candidate["course_id"] for candidate in candidates]
+    require(
+        len(candidate_ids) == len(set(candidate_ids)),
+        "duplicate canonical candidate course ID",
+    )
+    require(
+        set(candidate_ids) == CANONICAL_CANDIDATES,
+        "canonical candidate inventory must contain all nine courses",
+    )
+    kept = {
+        candidate["course_id"]
+        for candidate in candidates
+        if candidate["decision"] == "keep"
+    }
+    require(kept == V2_EXPECTED_COURSES, "candidate decisions and v2 courses differ")
+    require(
+        all(
+            candidate["decision"] in {"keep", "defer"}
+            for candidate in candidates
+        ),
+        "unexpected canonical candidate decision",
+    )
 
 
 def command_number(command: list[str], prefix: str | None = None) -> int:
@@ -184,8 +236,21 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        manifest = load_manifest()
-        summary = validate_internal(manifest)
+        v1_manifest = load_manifest(V1_MANIFEST_PATH)
+        validate_internal(
+            v1_manifest,
+            portfolio_id="cross-course-portfolio-v1",
+            expected_courses=V1_EXPECTED_COURSES,
+            expected_status="superseded_partial_source_snapshot",
+        )
+        manifest = load_manifest(V2_MANIFEST_PATH)
+        summary = validate_internal(
+            manifest,
+            portfolio_id="cross-course-portfolio-v2",
+            expected_courses=V2_EXPECTED_COURSES,
+            expected_status="selected_inventory_boundary",
+        )
+        validate_v2_inventory(manifest)
         if args.source_root is not None:
             validate_source(manifest, args.source_root)
     except (KeyError, TypeError, ValueError, subprocess.CalledProcessError) as error:
@@ -193,9 +258,10 @@ def main() -> int:
         return 1
 
     print(
-        "cross-course portfolio validation passed: "
+        "cross-course portfolio validation passed: active v2 has "
         f"{summary['courses']} courses, {summary['documents']} documents, "
-        f"{summary['pages']} pages, source_checked={args.source_root is not None}"
+        f"{summary['pages']} pages; historical v1 is superseded; "
+        f"source_checked={args.source_root is not None}"
     )
     return 0
 

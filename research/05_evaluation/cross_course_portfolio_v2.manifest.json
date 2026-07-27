@@ -1,0 +1,389 @@
+{
+  "portfolio_id": "cross-course-portfolio-v2",
+  "version": "2.0.0",
+  "snapshot_date": "2026-07-27",
+  "status": "selected_inventory_boundary",
+  "source_root": "academia_vault",
+  "canonical_source_hint": "Documents/academia_vault",
+  "permission_record": "research/03_data/academics-source-permission.md",
+  "supersedes": "cross-course-portfolio-v1",
+  "supersession_reason": "The v1 inventory used a partial Downloads copy instead of the source holder's canonical Documents collection.",
+  "primary_corpus_rule": "Only the explicitly enumerated, contiguous official lecture-slide sequences for the four selected courses",
+  "secondary_authoring_rule": "Researcher notes may support benchmark authoring but are not indexed evidence or gold evidence",
+  "exclusions": [
+    "assignments",
+    "solutions and answer keys",
+    "tutorial and practice material",
+    "projects and submissions",
+    "labs",
+    "assessment questions and graded work",
+    "student data",
+    "credentials and secrets",
+    "empty files",
+    "Obsidian configuration"
+  ],
+  "canonical_candidate_inventory": [
+    {
+      "course_id": "IT5001",
+      "candidate_document_count": 2,
+      "candidate_page_count": 116,
+      "candidate_pdftotext_character_count": 17271,
+      "decision": "defer",
+      "reason": "Only lectures 1 and 3 are present"
+    },
+    {
+      "course_id": "IT5002",
+      "candidate_document_count": 13,
+      "candidate_page_count": 508,
+      "candidate_pdftotext_character_count": 169996,
+      "decision": "keep",
+      "reason": "Contiguous lectures 1 through 13 and the existing research anchor"
+    },
+    {
+      "course_id": "IT5004",
+      "candidate_document_count": 2,
+      "candidate_page_count": 109,
+      "candidate_pdftotext_character_count": 38696,
+      "decision": "defer",
+      "reason": "Only lectures 4 and 5 are present"
+    },
+    {
+      "course_id": "IT5008",
+      "candidate_document_count": 5,
+      "candidate_page_count": 278,
+      "candidate_pdftotext_character_count": 161594,
+      "decision": "defer",
+      "reason": "Only non-contiguous lectures 1 through 3, 7, and 8 are present"
+    },
+    {
+      "course_id": "CS5421",
+      "candidate_document_count": 8,
+      "candidate_page_count": 429,
+      "candidate_pdftotext_character_count": 275704,
+      "decision": "keep",
+      "reason": "Contiguous lectures 1 through 8"
+    },
+    {
+      "course_id": "IT5003",
+      "candidate_document_count": 3,
+      "candidate_page_count": 40,
+      "candidate_pdftotext_character_count": 85106,
+      "decision": "defer",
+      "reason": "Only weeks 1, 4, and 5 are present"
+    },
+    {
+      "course_id": "IT5007",
+      "candidate_document_count": 2,
+      "candidate_page_count": 70,
+      "candidate_pdftotext_character_count": 9332,
+      "decision": "defer",
+      "reason": "Only weeks 1 and 3 contain lecture PDFs"
+    },
+    {
+      "course_id": "IT5100B",
+      "candidate_document_count": 5,
+      "candidate_page_count": 169,
+      "candidate_pdftotext_character_count": 56833,
+      "decision": "keep",
+      "reason": "Contiguous lectures 1 through 5"
+    },
+    {
+      "course_id": "IT5100E",
+      "candidate_document_count": 6,
+      "candidate_page_count": 212,
+      "candidate_pdftotext_character_count": 103629,
+      "decision": "keep",
+      "reason": "Contiguous lectures 1 through 6"
+    }
+  ],
+  "summary": {
+    "course_count": 4,
+    "document_count": 32,
+    "page_count": 1318,
+    "pdftotext_character_count": 606162,
+    "byte_count": 111107100,
+    "exact_duplicate_primary_documents": 0
+  },
+  "courses": [
+    {
+      "course_id": "IT5002",
+      "course_label": "Computer Systems and Applications",
+      "relative_root": "semester_1/IT5002_computer_architesture",
+      "document_count": 13,
+      "page_count": 508,
+      "pdftotext_character_count": 169996,
+      "byte_count": 15738973,
+      "documents": [
+        {
+          "filename": "lecture/1_introduction.pdf",
+          "sha256": "cf667b2389166a05d2e48e722841d591152b53273871bb6d6892c46d3f9f1688",
+          "pages": 17,
+          "pdftotext_characters": 4903,
+          "bytes": 1481498
+        },
+        {
+          "filename": "lecture/2_number_systems.pdf",
+          "sha256": "f0fe69de99e6139afa0c8ce540c80435616d2e939f6df4f4d1e2355762d843a8",
+          "pages": 51,
+          "pdftotext_characters": 18305,
+          "bytes": 572350
+        },
+        {
+          "filename": "lecture/3_MIPS_1.pdf",
+          "sha256": "c347650e0c736e766e247ee3bb8c044def9d3681d54b63d92090e315b1de29d2",
+          "pages": 49,
+          "pdftotext_characters": 18779,
+          "bytes": 986333
+        },
+        {
+          "filename": "lecture/4_MIPS_2.pdf",
+          "sha256": "66c15d675ba15d9e5e8e78247797a1b280c47204735ab40cdbb3fa7f6e4477de",
+          "pages": 43,
+          "pdftotext_characters": 14468,
+          "bytes": 717613
+        },
+        {
+          "filename": "lecture/5_MIPS_format.pdf",
+          "sha256": "02443efa0a3d80169094e5e22b769a905876286eb4961835c42ce79eb9856fe5",
+          "pages": 44,
+          "pdftotext_characters": 14928,
+          "bytes": 781747
+        },
+        {
+          "filename": "lecture/6_datapath_design.pdf",
+          "sha256": "0b29307569785d84db97ba3701e2c94a05975b8b322781f9d1721d610c29371f",
+          "pages": 43,
+          "pdftotext_characters": 18803,
+          "bytes": 1061571
+        },
+        {
+          "filename": "lecture/7_control.pdf",
+          "sha256": "b8e7e57ce322f8b69ef909fe4ac730e1c27eda1cd4d1748af37a8c8c62eaaf17",
+          "pages": 48,
+          "pdftotext_characters": 13950,
+          "bytes": 986891
+        },
+        {
+          "filename": "lecture/8_datapath.pdf",
+          "sha256": "c592b008a58068ca17cb9a2088744992e682a28b50c6b8e6e7339bbbc57130d9",
+          "pages": 40,
+          "pdftotext_characters": 13717,
+          "bytes": 2705420
+        },
+        {
+          "filename": "lecture/9_caches.pdf",
+          "sha256": "ca1f75f8be19c72681b5bb4b021867e999eb44ec632460339de099ef562489a1",
+          "pages": 84,
+          "pdftotext_characters": 28077,
+          "bytes": 3304126
+        },
+        {
+          "filename": "lecture/10_intro_to_OS.pdf",
+          "sha256": "a8f48a7f011d90120fc06c9a09686e792f4bcc6e8e13cb27361944e04dad93b9",
+          "pages": 16,
+          "pdftotext_characters": 3162,
+          "bytes": 763365
+        },
+        {
+          "filename": "lecture/11_process_management.pdf",
+          "sha256": "52c55a7e15fd17d62b0863ec3c6fc26f649ae35b3484ed61915a9109b3f7268a",
+          "pages": 22,
+          "pdftotext_characters": 6027,
+          "bytes": 852853
+        },
+        {
+          "filename": "lecture/12_processing.pdf",
+          "sha256": "2f26d084be0b59040f9082cd4604d92f98c23d318575ad663796853cea4dc20c",
+          "pages": 23,
+          "pdftotext_characters": 7004,
+          "bytes": 419509
+        },
+        {
+          "filename": "lecture/13_inter_process_communication.pdf",
+          "sha256": "f2b6a59445f58c5645ca1d3462830a692d6793b031fe21d7ec230d273df7b28e",
+          "pages": 28,
+          "pdftotext_characters": 7873,
+          "bytes": 1105697
+        }
+      ]
+    },
+    {
+      "course_id": "CS5421",
+      "course_label": "Database Tuning",
+      "relative_root": "semester_2/CS5421",
+      "document_count": 8,
+      "page_count": 429,
+      "pdftotext_character_count": 275704,
+      "byte_count": 61274646,
+      "documents": [
+        {
+          "filename": "midterm/day1/L01.pdf",
+          "sha256": "4d30cbfc3174b88abbb56e57f98aa92829ac02328c3e41b8cbb74e88a1ce6256",
+          "pages": 41,
+          "pdftotext_characters": 22391,
+          "bytes": 4584345
+        },
+        {
+          "filename": "midterm/day2/L02 (annotated).pdf",
+          "sha256": "b7eb54c82e67e3907ab5d54fd3fbc9b5b9350fcf857a3ad530f94249c5605106",
+          "pages": 58,
+          "pdftotext_characters": 39005,
+          "bytes": 12131038
+        },
+        {
+          "filename": "midterm/day3/L03 (annotated) (1).pdf",
+          "sha256": "cbd1b7c0b36c459ab39359161f2533c82bf071956ddc8ccf2dc0ea65767a4dd6",
+          "pages": 46,
+          "pdftotext_characters": 31191,
+          "bytes": 9006815
+        },
+        {
+          "filename": "midterm/day4/L04 (annotated) (1).pdf",
+          "sha256": "7f70888eef77bee39bdde36f4cc89fbaa0d29eccb64e935a63e664fbad5c8741",
+          "pages": 36,
+          "pdftotext_characters": 20981,
+          "bytes": 4751701
+        },
+        {
+          "filename": "midterm/day5/L_5__6_SQL_Tuning_in_PostgreSQL_export/L05 (annotated).pdf",
+          "sha256": "db13f9c113474cb03c19b318e36476b7b05b92eac86c2b49b9b75bbe42aad023",
+          "pages": 58,
+          "pdftotext_characters": 39566,
+          "bytes": 9579061
+        },
+        {
+          "filename": "midterm/day5/L_5__6_SQL_Tuning_in_PostgreSQL_export/L06 (annotated).pdf",
+          "sha256": "9cd8771870e5cfdaabf2b6c674d932a2a648522da15cd34f5c738be429a897c6",
+          "pages": 50,
+          "pdftotext_characters": 32858,
+          "bytes": 7193506
+        },
+        {
+          "filename": "final/L07.pdf",
+          "sha256": "8b98404ae4c09629f745328e9347809e4c49501f96b37b192856f0e15eab9c9f",
+          "pages": 71,
+          "pdftotext_characters": 44890,
+          "bytes": 11435497
+        },
+        {
+          "filename": "final/L08 (annotated) (1).pdf",
+          "sha256": "96adcc3899bf9eaa1e0a28b605f3911b5bb6856aceefb4a54b7784ed4610f037",
+          "pages": 69,
+          "pdftotext_characters": 44822,
+          "bytes": 2592683
+        }
+      ]
+    },
+    {
+      "course_id": "IT5100B",
+      "course_label": "Industry Readiness: Stream Processing",
+      "relative_root": "semester_2/IT5100B",
+      "document_count": 5,
+      "page_count": 169,
+      "pdftotext_character_count": 56833,
+      "byte_count": 2357251,
+      "documents": [
+        {
+          "filename": "note/week1/slide_course_introduction.pdf",
+          "sha256": "f7c2924ff09a65a85945817fcd8921334d01821de4ab42e9a4577e441e7c07e6",
+          "pages": 33,
+          "pdftotext_characters": 11171,
+          "bytes": 864374
+        },
+        {
+          "filename": "note/week2/lecture2_unboundedness.pdf",
+          "sha256": "a06e515124e99563cbd5fa90f387eb572788de6a72cc8b708a9eae89c7d4c245",
+          "pages": 24,
+          "pdftotext_characters": 8481,
+          "bytes": 179730
+        },
+        {
+          "filename": "note/week3/Lecture 3—Delays and Reactive Programming.pdf",
+          "sha256": "0da8e210f6f033dff63aec5948fdac302ce511fb08408782740b0e1f86838ec6",
+          "pages": 32,
+          "pdftotext_characters": 12622,
+          "bytes": 317610
+        },
+        {
+          "filename": "note/week4/Lecture 4—Event Streams and Apache Kafka.pdf",
+          "sha256": "1be8800aef662f1c7bbf4941e4ec37a4c3a24e8be45fd1f78bf3e1b8223ede1b",
+          "pages": 35,
+          "pdftotext_characters": 12906,
+          "bytes": 422363
+        },
+        {
+          "filename": "note/week5/Lecture 5—Event Stream Processing.pdf",
+          "sha256": "24f1541d81fd19dc932cfedebc2580ce479981ebb5f2b7ab82c5d23e7f92bc8d",
+          "pages": 45,
+          "pdftotext_characters": 11653,
+          "bytes": 573174
+        }
+      ]
+    },
+    {
+      "course_id": "IT5100E",
+      "course_label": "Industry Readiness: Security Best Practices",
+      "relative_root": "semester_2/IT5100E",
+      "document_count": 6,
+      "page_count": 212,
+      "pdftotext_character_count": 103629,
+      "byte_count": 31736230,
+      "documents": [
+        {
+          "filename": "final/Lecture 1—Course Introduction.pdf",
+          "sha256": "31292aa83ec1046cb486708770b87c4cafbb4cf35196465b14cfce99293893c7",
+          "pages": 49,
+          "pdftotext_characters": 17604,
+          "bytes": 18151616
+        },
+        {
+          "filename": "final/Lecture 2—Cryptography.pdf",
+          "sha256": "04a23047f6e012cc3b8fda651dcabd63a65a289a149cc3f3bf5daa3d32b874af",
+          "pages": 54,
+          "pdftotext_characters": 22349,
+          "bytes": 8219832
+        },
+        {
+          "filename": "final/Lecture 3—Authentication and Authorization.pdf",
+          "sha256": "940adae462882626c1d35e0f34acf0aa15061896d5d94cb8ace583467412d7cc",
+          "pages": 27,
+          "pdftotext_characters": 18288,
+          "bytes": 658037
+        },
+        {
+          "filename": "final/Lecture 4—Injections.pdf",
+          "sha256": "ca2b263cdc1a7036b451ffa4eab9dd854d0982a581b28e41594fc6c437dbd8a9",
+          "pages": 16,
+          "pdftotext_characters": 10076,
+          "bytes": 623216
+        },
+        {
+          "filename": "final/Lecture 5—AI and LLM Security Considerations.pdf",
+          "sha256": "5e74f5f1d6aab753b2dfa4bf747be54a6a5fa4eea44d24cd89c3665554a58484",
+          "pages": 39,
+          "pdftotext_characters": 20263,
+          "bytes": 3020028
+        },
+        {
+          "filename": "final/Lecture 6—Security Hardening.pdf",
+          "sha256": "e0cab4f5de8f69875016f4430c510a54b301395d2ff835635960442cc59e5557",
+          "pages": 27,
+          "pdftotext_characters": 15049,
+          "bytes": 1063501
+        }
+      ]
+    }
+  ],
+  "overlap_audit": {
+    "method": "raw bag-of-words cosine over each selected course's aggregated primary PDF text; descriptive inventory diagnostic only",
+    "course_pair_cosine": {
+      "IT5002__CS5421": 0.426,
+      "IT5002__IT5100B": 0.51,
+      "IT5002__IT5100E": 0.577,
+      "CS5421__IT5100B": 0.355,
+      "CS5421__IT5100E": 0.467,
+      "IT5100B__IT5100E": 0.73
+    },
+    "decision": "index only enumerated lecture PDFs; retain course identity on every chunk; detect or suppress repeated administrative and slide-template boilerplate; test shared terminology as cross-course confusion"
+  }
+}
