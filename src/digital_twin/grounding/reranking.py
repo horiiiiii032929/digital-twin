@@ -57,4 +57,3 @@ class RerankingRetriever:
             )
             for candidate, score in ranked[:limit]
         ]
-
