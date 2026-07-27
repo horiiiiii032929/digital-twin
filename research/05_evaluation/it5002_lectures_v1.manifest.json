@@ -23,10 +23,11 @@
   },
   "permissions": {
     "local_inventory": "user_authorized_2026-07-23",
-    "local_research_evaluation": "researcher_selected_2026-07-23",
+    "local_research_evaluation": "user_authorized_all_academics_2026-07-27",
     "student_facing_release": "professor_or_institutional_authorization_required",
     "human_participant_use": "out_of_scope",
-    "external_provider_use": "prohibited"
+    "external_provider_use": "allowed_after_provider_specific_prospective_approval_2026-07-27",
+    "permission_record": "research/03_data/academics-source-permission.md"
   },
   "profile": {
     "document_count": 13,
