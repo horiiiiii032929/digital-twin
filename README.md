@@ -77,7 +77,7 @@ The project's technical standard, learning commitments, and strengthened Sprint
 Use Python from `.python-version` and Node.js from `.node-version`. GitHub
 Actions runs `npm run check` for pushes to `main` and for pull requests.
 
-## Current Implementation Status
+## Current implementation status
 
 Implemented in the Sprint 1 prototype:
 
@@ -114,41 +114,34 @@ Implemented as Sprint 2 foundations:
   but factual-support review passed only 15/18 model answers, so no generator or
   prompt was selected.
 
-Still planned:
+Current evidence and limitations:
 
-- Complete the private IT5002 retrieval-v3 development and held-out datasets,
-  bind exact Qwen3 model revisions, and compare fixed-window BM25,
-  heading-aware BM25, dense, hybrid, deterministic contextual, reranked, and
-  bounded decomposition conditions.
-- #24, #43, and #25 generator/prompt, returned-context sufficiency, and
-  end-to-end RAG qualification after retrieval-v3 selects or rejects a
-  candidate.
-- Authenticated professor/student roles, course membership, durable persistence,
-  private storage, and student tutoring.
-- Staging deployment with secret isolation, redacted logs, health checks,
-  rate limits, backup/restore, rollback, and visible provider failures.
-- Scripted professor/student synthetic-account acceptance and optional
-  professor review; no invited-student pilot or human usability claim.
-- Blinded final comparison, evidence freeze, report, deployed demonstration,
-  and reproducibility package.
+- The 13-lecture IT5002 pilot is development evidence, not the final research
+  boundary or selected method.
+- In its 13 answerable development cases, local Qwen3 reranking retrieved
+  complete evidence for 10 cases versus 3 for heading-aware BM25.
+- The separate 59-case one-time rapid run failed after 29 cases. It is
+  registered as invalid, retired, and never rerun.
+- All observed no-evidence results used calibration cases and therefore are not
+  independent final evidence.
+- Jina has no evaluation result and remains an unselected provider spike.
+- The product still lacks complete multi-course professor/student journeys,
+  a selected cross-course retrieval profile, professor-fidelity evidence,
+  durable isolation/recovery evidence, and capacity results.
 
-Active Sprint 2 work is tracked by execution issue #46 under roadmap issue #7.
-Completed sub-issues cover
-the refactors, grounding contracts, parsing/chunking, retrieval v1/v2,
-evaluation architecture, result governance, and the first failed
-evidence-sufficiency comparison. The retrieval-v3 candidate contract is now
-the active research gate: run the full bounded R0-R6 retrieval ablation on a
-separate 59-case rapid screen and send its result by 2026-07-24, with R5 versus
-R1 as the primary contrast. Then complete the expanded confirmatory retrieval
-and context-sufficiency work by 2026-07-28. Generator and end-to-end
-qualification follows by 2026-07-31, with the hosted vertical slice targeted
-by 2026-08-04 and final evidence frozen by 2026-08-08. The remaining five
-weeks are reserved for the report, figures, presentation, demo stabilization,
-rehearsal, and bounded product continuation.
-DeepSeek is a research constraint, not a
-best-model claim, and real-user provider processing requires separate approval.
-Proactive triggers, full learning-gap analytics, Canvas, multimodality, and
-learning-effectiveness claims are deferred.
+The active baseline is a professor-configurable pedagogical Digital Twin for
+multiple professors and courses, not a one-course RAG pilot. Its central
+technical study compares heading BM25, dense, hybrid, and reranked hybrid
+retrieval across a verified heterogeneous-course benchmark. The product must
+also demonstrate professor-policy fidelity, evaluation-before-publication,
+course-isolated student tutoring, rollback, failure recovery, and bounded
+simulated capacity.
+
+See the
+[authoritative scope](research/00_admin/2026-07-27-frontier-digital-twin-scope.md)
+for the research programme, claims, data boundary, and compressed schedule. The
+technical and evidence freeze is 2026-08-16; September is reserved for report,
+presentation, revision, and contingency.
 
 ## Sprint 1 Onboarding Prototype
 

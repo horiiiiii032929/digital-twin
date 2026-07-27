@@ -1,6 +1,6 @@
 # Quality and Learning Plan
 
-Last reviewed: 2026-07-23
+Last reviewed: 2026-07-27
 
 ## Purpose
 
@@ -37,25 +37,25 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-23 to 2026-07-24 | Rapid retrieval result | Prospectively frozen 59-case R0-R6 ablation with R5 versus R1 primary, exact runtime binding, one sealed run, data QA, decision, figures, and professor result package |
-| 2026-07-25 to 2026-07-28 | Confirmatory retrieval and returned-context sufficiency | Expanded private course/open-set benchmark, full retrieval-v3 ablations, complete/partial/none classification, and safe-abstention decision |
-| 2026-07-29 to 2026-07-31 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
-| 2026-08-01 to 2026-08-04 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
-| 2026-08-05 to 2026-08-08 | Hardening, simulated evaluation, and evidence freeze | Privacy, reliability, recovery, calibrated judging, synthetic-account acceptance, blinded comparison, failure analysis, uncertainty, and frozen evidence |
-| 2026-08-09 to 2026-09-03 | Full report, figures, and bounded product continuation | Complete argument, claim-to-evidence matrix, main plots, limitations, professor review, demo stabilization, and only evidence-backed improvements |
-| 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
+| 2026-07-27 to 2026-07-29 | Scope and architecture lock | Multi-course product thesis, research questions, roadmap, repository architecture, and preserved decision history |
+| 2026-07-30 to 2026-08-02 | Course portfolio and benchmark freeze | Permission inventory, heterogeneous ingestion QA, about 100 verified cases, second review, and sealed split |
+| 2026-08-03 to 2026-08-08 | Cross-course retrieval qualification | Bounded provider qualification, shared M0-M3 implementation, development analysis, prospective freeze, one sealed run, result registration, and profile decision |
+| 2026-08-09 to 2026-08-12 | Pedagogical Digital Twin product | Multi-course professor configuration, evaluation-before-publication, invite-only student tutoring, persistence, citations, withdrawal, and rollback |
+| 2026-08-13 to 2026-08-16 | End-to-end validation and evidence freeze | Professor fidelity, pedagogy, synthetic journeys, isolation, failure recovery, bounded capacity, local deployment package, and frozen claims |
+| 2026-08-17 to 2026-08-31 | Analysis and report foundation | Complete analysis, claim-to-evidence matrix, main figures, report foundation, demo stabilization, and appointment preparation |
+| 2026-09-01 to 2026-09-09 | Presentation and revision | Complete draft, target 2026-09-04 professor presentation, revise evidence and communication, and rehearse failure recovery |
 | 2026-09-10 to 2026-09-12 | Contingency buffer | Correct blocking defects, package the submission, and protect frozen claims from late scope growth |
 | 2026-09-13 | Final presentation and submission | Deliver the report, deployed demonstration, presentation, and reproducibility package |
 
-## Strengthened Sprint 2 bar
+## Cross-course research bar
 
 Sprint 2 is not complete when one plausible answer appears on screen. It must
 produce an inspectable, evaluated vertical slice.
 
-### Course corpus
+### Course portfolio
 
-- Use the 13 inventoried official IT5002 lecture PDFs for the local full-course
-  evaluation; keep private content local and prohibit external-provider use.
+- Use roughly four heterogeneous, explicitly permitted courses for the final
+  evaluation. IT5002 is a pilot and may be one portfolio course.
 - Support UTF-8 text, Markdown, and selectable-text PDF input.
 - Preserve document ID, title, source label, content hash, and a human-readable
   locator through normalization and chunking.
@@ -66,22 +66,20 @@ produce an inspectable, evaluated vertical slice.
 
 - Implement a deterministic heading/paragraph-aware chunker with documented
   size and overlap decisions.
-- Implement an inspectable lexical or BM25-style retrieval baseline before an
-  embedding retriever.
-- For retrieval-v3, retain fixed-window and heading-aware BM25 controls; test
-  Qwen3 dense, hybrid RRF, deterministic contextual metadata, Qwen3 reranking,
-  and one bounded decomposition round under the frozen candidate contract.
-- Build a versioned evaluation set with at least 20 questions across direct
-  grounding, misconception, integrity-boundary, ambiguous, and no-evidence
-  cases.
-- Report gold-evidence Recall@3/5, complete-evidence success@3, and nDCG@3 as
-  the primary retrieval views; report Mean Reciprocal Rank as a first-useful-
-  evidence diagnostic rather than a complete RAG score.
+- Compare exactly M0 heading-aware BM25, M1 dense, M2 BM25+dense hybrid, and M3
+  hybrid plus reranking under shared chunks, queries, filters, and metrics.
+- Qualify provider/model candidates on development data, then freeze one
+  embedding and reranking configuration for the final comparison.
+- Build about 100 researcher-verified cases: 60 answerable and 40 no-evidence,
+  cross-course confusion, or adversarial cases. Independently second-review at
+  least 20%.
+- Treat complete-evidence success@3, atomic-claim coverage@3, no-evidence
+  accuracy, and course-isolation violations as primary. Report Recall@k, nDCG,
+  MRR, latency, cost, and failure type as diagnostics.
 - Record failed queries and explain whether the source, chunking, query, or
   ranking caused each failure.
-- Keep NotebookLM outside internal Recall@K and nDCG comparisons because its
-  candidate ranking is hidden; report it only as a dated black-box end-to-end
-  product reference when permission and independent-state caveats are recorded.
+- Keep black-box products outside internal ranking comparisons when candidate
+  rankings are hidden. Report them only as dated qualitative product references.
 
 ### Generation and policy enforcement
 
@@ -168,21 +166,22 @@ the student's ability to reproduce and defend the work.
 
 ## Final project standard
 
-By 2026-09-13, the project should defend six evidence-backed claims:
+By 2026-09-13, the project should defend seven evidence-backed claims:
 
-1. The end-to-end system works from approved source ingestion through cited
-   tutoring output.
-2. The professor-configured tutor behaves measurably differently from a generic
-   assistant.
-3. Evaluation artifacts support the reported strengths and limitations.
-4. Permissions, privacy, academic integrity, and professor approval are explicit
-   system controls.
-5. Scripted professor and student accounts complete deployed acceptance
-   journeys without cross-role or cross-course access, with durable state and
-   visible recovery.
-6. Security, reliability, synthetic interaction behavior, latency, cost,
-   rollback, judge validity, and deployment limitations are measured rather
-   than inferred from a local demonstration.
+1. Multiple professors can independently configure, evaluate, publish,
+   withdraw, and roll back course Digital Twins.
+2. The selected or rollback retrieval profile has defensible cross-course
+   evidence against M0-M3 controls.
+3. The professor-configured tutor behaves measurably differently from grounded
+   and non-grounded generic controls.
+4. Students receive course-isolated, persistent, cited tutoring or an explicit
+   safe action when evidence or policy is insufficient.
+5. Permissions, privacy, academic integrity, and evaluation-before-publication
+   are explicit system controls.
+6. Scripted and simulated journeys exercise isolation, provider failure,
+   recovery, and bounded capacity without being presented as human usability.
+7. Reliability, latency, cost, rollback, judge validity, portability, failures,
+   and limitations are measured rather than inferred from a demonstration.
 
 If evidence does not support a claim, the report must narrow or reject the claim
 rather than presenting the demonstration as proof.

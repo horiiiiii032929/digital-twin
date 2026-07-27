@@ -2,163 +2,84 @@
 
 Project board: https://github.com/users/horiiiiii032929/projects/1
 
-This repository is scaffolded to create issues that are automatically added to
-the linked GitHub Project by using the `projects: ["horiiiiii032929/1"]` key in
-the issue form templates.
+The board implements the authoritative
+[frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).
+Repository issue forms add new issues to the Project automatically.
 
-## Project Fields
-
-The project currently exposes these planning fields:
+## Planning fields
 
 - Status: Todo, In Progress, Done
 - Decision: Pending, Keep, Refine, Go Deeper, Drop
 - Work Type: Feature, Research, Design, Prototype, Documentation, Evaluation, Bug
-- Iteration: I1 Instructor Onboarding, I2 Student Active Tutoring, I3 Proactive
-  Interaction, I4 Learning Gap Report, I5 Evaluation and Refinement. I3 and I4
-  remain historical options; their original scopes are deferred from the final
-  critical path.
+- Iteration: historical product iterations; use Sprint for the compressed plan
 - Area: Instructor, Student, AI Agent, RAG, Analytics, Architecture,
   Documentation, Evaluation
 - Risk: Low, Medium, High
-- Evidence: free text
-- Sprint: free text
-- Target Date: date
+- Evidence: links or concise result references that already exist
+- Sprint: short delivery-phase name
+- Target Date: current prospective target
 
-## Local Workflow
+## Current state
 
-1. Keep #1-#13 as roadmap/history items, use #44 for professor gates, and use
-   their project status for delivery progress.
-2. When a sprint becomes active, create bounded execution issues with the
-   `Research Task` form and attach them as sub-issues of the roadmap item.
-3. Fill in Iteration, Work Type, Area, Risk, Sprint, and Target Date on each
-   execution item.
-4. Leave `Evidence` empty during planning. Add a document, test run, demo, or
-   merged pull request only after that artifact exists.
-5. Use the `Decision Record` form only for evaluated product or research choices.
-   Implementation tasks do not receive a placeholder decision.
-6. Link pull requests to the execution sub-issue. Update evidence when a real
-   result or check exists and again after merging.
+Completed work includes professor-approved chat-led onboarding, governed local
+ingestion, retrieval baselines/candidates, deterministic generation controls,
+evaluation instruments, component profiles, and result governance.
 
-Note: GitHub requires the person opening the issue to have write access to the
-target project for automatic project assignment from issue forms.
+The current method is not selected. IT5002 pilot results justify a cross-course
+study, while the separate one-time rapid run is invalid and retired. Jina has
+no result and remains an unselected provider spike. The final multi-course
+product and end-to-end evidence do not yet exist.
 
-## Current delivery status
+## Active roadmap
 
-- Sprint 1 onboarding was approved by Prof. Lek with a `Keep` decision.
-- Approved local ingestion, evaluated BM25 retrieval, the harder retrieval v2
-  benchmark, replaceable generation controls, and durable evaluation-result
-  governance are implemented.
-- Retrieval v2 produced a `Refine` decision with no replacement. BM25 v1
-  remains the provisional rollback baseline while evidence sufficiency is
-  addressed.
-- Draft PR #36 passes the deterministic 25-case generation/policy preflight and
-  contains the local Ollama benchmark path. The exploratory Gemma 3 4B run
-  passed structural checks but only 15/18 model answers passed a post-run
-  support audit, so no generator or prompt is selected.
-- #41 evaluated any-hit, BM25-score, lexical-coverage, and semantic-agreement
-  evidence gates on 30 calibration and 50 held-out cases. The decision is
-  `Refine` with no selection.
-- The system is not deployable yet: authentication, authorization, persistence,
-  private storage, student tutoring, staging, monitoring, backup/restore,
-  rollback, professor release review, and simulated evaluation evidence are
-  absent.
-- #11 is the immediate active execution item. Its instrument-contract portion
-  is complete; exact runtime bindings and private split validation remain
-  before any development scoring or held-out inspection.
-- #46 produces a separate sealed full-ladder R0-R6 rapid result by
-  2026-07-24, with R5 versus R1 primary. #7 then completes expanded
-  retrieval-v3 with #43 context-sufficiency by 2026-07-28.
-- #24 and #25 qualify or reject the generator/prompt and frozen end-to-end RAG
-  profile by 2026-07-31.
-- #8 delivers authenticated persistent professor/student staging by
-  2026-08-04.
-- #9, #10, and #12 complete hardening, simulated evaluation, final comparison,
-  and the evidence freeze by 2026-08-08.
-- #44 records decision-bearing professor critiques and final rehearsal; routine
-  planning updates remain internal.
-- Proactive triggers, full learning-gap analytics, Canvas, multimodality,
-  institution-wide SSO, public signup, and learning-effectiveness claims are
-  deferred.
-- The [quality and learning plan](quality-and-learning-plan.md) is the acceptance
-  standard for technical depth, evaluation evidence, and student understanding.
+| Phase | Dates | Required evidence |
+| --- | --- | --- |
+| F1 Scope and architecture lock | 2026-07-27 to 2026-07-29 | Authoritative scope, roadmap, repository architecture, archived superseded plans |
+| F2 Cross-course method qualification | 2026-07-30 to 2026-08-08 | Course portfolio, ingestion QA, verified benchmark, provider qualification, M0-M3 sealed result, selected/rollback retrieval profile |
+| F3 Product and end-to-end validation | 2026-08-09 to 2026-08-16 | Professor/student journeys, fidelity, pedagogy, publication control, isolation, recovery, capacity, local deployment package |
+| F4 Evidence and final communication | 2026-08-17 to 2026-09-13 | Analysis, report, figures, presentation, reproducibility, demo stabilization, contingency |
 
-### Active critical path
+Technical and evidence work freezes on 2026-08-16. The target professor
+presentation is 2026-09-04; final submission is 2026-09-13.
 
-Roadmap issue #7 stays `In Progress`; #46 is the current bounded execution
-item under the #11 freeze.
+## Issue workflow
 
-| Target | Issue and required outcome |
-| --- | --- |
-| 2026-07-23 | #11/#46 freeze the separate 59-case rapid R0-R6 ablation |
-| 2026-07-24 | #46 execute one rapid sealed run and send the first result package |
-| 2026-07-28 | #7/#43 complete expanded retrieval-v3 and returned-context sufficiency |
-| 2026-07-31 | #24/#25 qualify or reject the generator/prompt and end-to-end RAG profile |
-| 2026-08-04 | #8 deploy authenticated persistent professor/student staging |
-| 2026-08-08 | #9/#10/#12 complete hardening, simulated evaluation, final comparison, and evidence freeze |
-| 2026-09-03 | #44 P5 professor report-draft review |
-| 2026-09-09 | #44 P6 professor rehearsal |
-| 2026-09-10 to 2026-09-12 | Contingency only: correct blocking defects, package submission, and preserve frozen claims |
-| 2026-09-13 | #13 final report, deployed demo, and reproducibility package |
+1. Keep roadmap parents open and create bounded execution issues for concrete
+   decisions or deliverables.
+2. Move only active execution work to `In Progress`.
+3. Before implementation, record the decision, prediction, control, candidates,
+   evaluation data, metrics, hard gates, operational measures, and rollback.
+4. Leave `Evidence` empty until an artifact exists.
+5. Register every named evaluation result, including failed, invalid,
+   inconclusive, and no-selection runs.
+6. Close an issue only after design, tests, evidence, limitations,
+   documentation, learning log, and checks satisfy the shared definition of
+   done.
 
-Follow-up PR #39 makes every named decision-bearing evaluation result durable
-through a registry, reusable template, and CI validator. Attach this evidence to
-#34 and the parent #7 rather than creating a retrospective execution issue.
+## Professor checkpoints
 
-## Evaluation contract
+Use issue #44 for the Monday/Wednesday/Friday communication ledger. A checkpoint
+is not a formal report. When new evidence exists, provide:
 
-Every decision-bearing component must expose a stable runtime contract and a
-rollback control, compare plausible alternatives under shared conditions, and
-separate development, calibration, and untouched held-out data. Metrics,
-thresholds, reviewer protocol, and analysis must be declared before held-out
-inspection.
+- one decision or result;
+- exact sample size and two to four numbers;
+- one compact table or at most two charts;
+- one important limitation; and
+- the next decision and date.
 
-Safety, privacy, permission, provenance, and integrity gates run before relative
-quality. Results must include raw counts, failure slices, uncertainty, latency,
-tokens, cost, and footprint where applicable. Successful, failed, invalid, and
-inconclusive named runs remain registered. A profile changes only after every
-required gate passes; no selection is a valid outcome.
+Routine code progress stays on the board. Do not ask the professor to choose
+ordinary implementation details or treat general encouragement as provider,
+data, or student-release permission.
 
-The contract also applies to authentication, authorization, persistence,
-storage, conversation state, deployment, backup/restore, rollback, judge
-calibration, simulator validity, and synthetic-account acceptance. A local
-algorithm score cannot compensate for a privacy, authorization, integrity, or
-reliability failure in the deployed system.
+## Board maintenance
 
-Minimum sample sizes in issue bodies are floors. If important slices remain
-underpowered or uncertainty is too wide, record `Refine` and collect more
-evidence rather than treating the minimum as proof.
-
-## Timeline through presentation
-
-Use this schedule to keep `Sprint` and `Target Date` fields consistent on the
-project board. The current presentation milestone is tracked through
-2026-09-13.
-
-| Sprint | Dates | Focus | Items | Target Date |
-| --- | --- | --- | --- | --- |
-| S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
-| S2 Rapid Retrieval | 2026-07-23 to 2026-07-24 | Frozen 59-case screen, one sealed run, validated result, and professor package | #11, #46 | 2026-07-24 |
-| S3 Confirmatory RAG | 2026-07-25 to 2026-07-31 | Expanded retrieval, context sufficiency, generator/prompt, and end-to-end RAG decision | #7, #24, #25, #43 | 2026-07-31 |
-| S4 Deployable App | 2026-08-01 to 2026-08-04 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-04 |
-| S5 Hardening and Evidence Freeze | 2026-08-05 to 2026-08-08 | Security, privacy, reliability, recovery, calibrated judging, simulated-student and synthetic-account evaluation, blinded comparison, and frozen claims | #9, #10, #12 | 2026-08-08 |
-| S6 Report, Product, and Presentation | 2026-08-09 to 2026-09-13 | Report, figures, evidence-backed product refinement, deployed demo, reproducibility, slides, rehearsal, and contingency | #13, #44 | 2026-09-13 |
-
-## Board Maintenance
-
-- Keep parent issues for roadmap progress and sub-issues for active execution.
-- Retain the three-status workflow: Todo, In Progress, and Done.
-- Move only the active execution item to `In Progress`; completed sub-issues are
-  `Done`, and future work remains `Todo`.
-- Add artifact links to `Evidence` only when the artifact exists.
-- Use `Decision` only after a product or research choice has been evaluated.
-- Register every named decision-bearing result; retain failed, invalid, and
-  inconclusive runs rather than silently replacing them.
-- Update `Target Date` before changing scope so timeline drift is visible.
-- Keep issue titles compact and timeline-first: `[S# MM/DD] Deliverable`.
-- Keep `Sprint` and `Evidence` field values short so the table remains readable.
-- Record each researcher decision and any professor critique separately in #44
-  and the local decision log; general encouragement does not approve
-  private-course provider use, evaluator calibration, or student release.
-- Do not close a technical execution issue until its design note, tests,
-  experiment evidence, limitations, and learning log satisfy the shared
-  definition of done.
+- Preserve issue and result history; supersede or close obsolete work with a
+  link to its replacement.
+- Use milestone dates as hard phase boundaries and Target Date for individual
+  items.
+- Keep project fields concise and evidence-backed.
+- Do not silently replace a component profile or repair/rerun sealed evidence.
+- Hardware latency and cost are operational metrics, not retrieval-quality
+  criteria.
+- The product priorities are professor fidelity, pedagogical tutoring,
+  evaluation-before-publication, grounding, then supporting platform breadth.

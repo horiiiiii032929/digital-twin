@@ -1,135 +1,105 @@
 # Digital Twin Delivery
 
-This Project tracks an evaluation-first path to a deployable, controlled
-professor-configurable tutoring system. Code is not complete until its method,
-privacy, security, grounding, pedagogy, reliability, cost, evaluator validity,
-and rollback evidence is recorded.
+This Project tracks the evidence-first delivery of a professor-configurable
+pedagogical Digital Twin for multiple professors and courses. The product
+combines professor teaching behaviour, approved course evidence, tutoring
+policy, student interaction state, and evaluation-before-publication.
 
 ## Current position
 
-- Instructor onboarding is professor-approved and complete.
-- Parsing, chunking, BM25 retrieval, dense/hybrid comparisons, evaluation
-  contracts, deterministic generation controls, and result governance exist.
-- BM25 v1 remains the provisional retriever; harder retrieval and
-  evidence-sufficiency comparisons selected no replacement or safe verifier.
-- Exact judge, simulator, run-record, analysis, and stop-rule contracts are
-  frozen and validated under `research/05_evaluation/instruments/`.
-- No live generator/prompt, returned-context verifier, end-to-end RAG profile,
-  authentication, durable persistence, or deployment is selected yet.
-- The immediate active work is the #7 IT5002 retrieval-v3 comparison under the
-  #11 freeze. No model download, private development scoring, or held-out
-  inspection is allowed until exact runtime bindings and split controls are
-  recorded.
+- Professor-approved chat-led onboarding and policy configuration exist.
+- Local parsing, chunking, BM25, dense/hybrid retrieval candidates, generation
+  controls, evaluation instruments, component profiles, and result governance
+  exist.
+- IT5002 is useful pilot evidence, not the final corpus or method selection.
+- The one-time rapid sealed run is invalid and retired; it is not rerun.
+- Jina is an unselected implementation spike with no evaluation result.
+- Multi-course professor/student workflows, final retrieval selection,
+  professor-fidelity evaluation, persistence, isolation, recovery, and capacity
+  evidence are not complete.
 
-## Final-project scope
+The immediate work is scope/architecture alignment, then the course portfolio
+and cross-course benchmark. No new provider or model is selected before that
+prospective plan is frozen.
 
-Deliver and evaluate one authenticated web deployment for one professor and one
-course, without student recruitment. The project requires:
+## Final product
 
-- professor and student roles plus course membership;
-- approved private course sources and professor release control;
-- persistent conversations, citations, feedback, and minimized audit records;
-- explicit returned-context sufficiency and safe refusal/abstention;
-- staging, TLS, secret isolation, redacted logs, health checks, rate limits,
-  backup/restore, rollback, and incident handling;
-- calibrated LLM judging, frozen simulated-student trajectories, and scripted
-  synthetic-account acceptance; and
-- reproducible offline comparisons and a deployed demonstration.
+The final local, hosting-ready product supports:
 
-Internal course-specific retrieval evaluation remains local. A NotebookLM
-black-box reference is separate and may use private material only after the
-source permission, account terms, and run boundary are recorded. Human
-usability and learning-effectiveness claims are excluded.
+- invite-only administrator, professor, and student roles;
+- independently configurable multi-course Digital Twins;
+- governed ingestion of approved course sources;
+- professor teaching-behaviour and tutoring-policy configuration;
+- preview and evaluation gates before professor publication;
+- course-isolated, persistent student tutoring with inspectable citations;
+- publication withdrawal, source update, and rollback;
+- visible quality, failure, latency, and cost evidence; and
+- provider failure, recovery, portability, and bounded capacity tests.
 
-## Deferred from the critical path
+The planning envelope is approximately 10 professors, 20 courses, 500
+documents, and 100 concurrent student sessions. This is a simulated capacity
+target, not an adoption or service-level claim. Public hosting and real-user
+recruitment are not required.
 
-- Proactive learning triggers
-- Full learning-gap analytics and individual profiling
-- Canvas or another LMS connector
-- Public signup, multi-institution tenancy, and institution-wide SSO
-- Multilingual, OCR, audio, video, or multimodal tutoring
-- Automatic grading and claims of improved learning outcomes
-- Universal SOTA or institution-wide production-readiness claims
+## Research programme
 
-## Dependency order
+1. Cross-course retrieval: compare M0 heading-aware BM25, M1 dense, M2 hybrid,
+   and M3 hybrid plus reranking on about 100 verified cases across roughly four
+   heterogeneous courses.
+2. Professor fidelity and pedagogy: hold generator/evidence constant while
+   comparing a generic assistant, grounded generic tutor, and
+   professor-configured Digital Twin.
+3. End-to-end validity: test professor and student journeys, publication gates,
+   persistence, isolation, provider failure, recovery, and bounded capacity.
 
-1. #11 freezes the method, data-governance, rubric, threshold, and reporting
-   protocol. The instrument-contract portion is complete.
-2. #46 runs the separate 59-case R0-R6 rapid ablation, with R5 versus R1 as the
-   primary contrast, and produces the first professor result within 24 hours.
-3. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
-   dense, hybrid, deterministic contextual, reranked, and bounded-decomposition
-   conditions.
-4. #43 qualifies or rejects the returned-context sufficiency verifier using the
-   selected retriever or BM25 rollback.
-5. #24 qualifies the exact generator/prompt; #25 records the frozen end-to-end
-   RAG decision and #7 closes from that evidence.
-6. #8 adds evaluated authentication, authorization, persistence, storage,
-   professor/student journeys, and staging deployment.
-7. #9 hardens security/reliability and records the researcher evaluation-release
-   Go / Refine / No-Go; real student release authorization remains separate.
-8. #10 runs calibrated LLM-judge, simulated-student, and deployed
-   synthetic-account evaluation.
-9. #12 runs the blinded final comparison and freezes evidence.
-10. #13 delivers the final report, deployed demo, reproducibility package, and
-   presentation.
-11. #44 records every researcher checkpoint, professor critique, and genuine
-   release decision separately.
+Hardware latency and cost are operational outcomes. They do not determine
+retrieval quality. A provider or method earns selection only through
+project-specific evidence.
 
-## Tight roadmap
+## Critical path
 
-| Date | Required outcome | Professor checkpoint |
-| --- | --- | --- |
-| 2026-07-23 | #11/#46 freeze a separate 59-case R0-R6 rapid ablation | Internal freeze |
-| 2026-07-24 | #46 execute one rapid sealed run and validate the result | P1 rapid experiment result |
-| 2026-07-28 | #7/#43 complete expanded retrieval-v3 and context sufficiency | Decision addendum if material |
-| 2026-07-31 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |
-| 2026-08-04 | #8 authenticated persistent staging deployment | Demonstration link |
-| 2026-08-08 | #9/#10/#12 final evaluation and evidence freeze | P3 final evidence package |
-| 2026-09-03 | Full report draft and figures | P5 report review |
-| 2026-09-09 | Timed demo and recovery rehearsal | P6 final rehearsal |
-| 2026-09-10 to 2026-09-12 | Contingency only; no new scope or claims | Escalate blockers only |
-| 2026-09-13 | #13 final delivery | Final presentation |
+| Date | Required outcome |
+| --- | --- |
+| 2026-07-27 to 2026-07-29 | Scope, GitHub roadmap, and repository architecture lock |
+| 2026-07-30 to 2026-08-02 | Course portfolio, ingestion QA, and verified benchmark freeze |
+| 2026-08-03 to 2026-08-08 | Provider qualification, M0-M3 comparison, sealed run, and retrieval decision |
+| 2026-08-09 to 2026-08-12 | Selected-profile integration and professor/student core journeys |
+| 2026-08-13 to 2026-08-15 | Fidelity, pedagogy, isolation, recovery, capacity, and packaging evidence |
+| 2026-08-16 | Absolute technical and evidence freeze |
+| 2026-08-17 to 2026-08-31 | Analysis, figures, report foundation, demo stabilization, and appointment preparation |
+| 2026-09-01 to 2026-09-03 | Report and presentation draft |
+| 2026-09-04 | Target professor presentation |
+| 2026-09-05 to 2026-09-09 | Evidence-backed revision |
+| 2026-09-10 to 2026-09-12 | Contingency and packaging only |
+| 2026-09-13 | Final submission |
 
 ## Evaluation contract
 
-Every replaceable method and architecture boundary must:
+Every replaceable method and architecture boundary must define its decision,
+prediction, control, candidates, dataset, metrics, hard gates, failure cases,
+operational measures, and rollback before implementation or sealed inspection.
+Every named result remains registered, including failed, invalid,
+inconclusive, and no-selection outcomes.
 
-- define the decision, prediction, simplest control, and bounded candidates;
-- use shared development, calibration, and untouched held-out inputs;
-- predeclare primary metrics, diagnostics, hard gates, sample rationale, and
-  analysis before held-out inspection;
-- report privacy, permission, authorization, integrity, reliability, p50/p95
-  latency, cost, and recovery where applicable;
-- preserve raw failure counts, representative cases, uncertainty, and failure
-  attribution;
-- retain successful, failed, invalid, inconclusive, and no-selection results;
-- record Keep / Refine / Go Deeper / Drop and an explicit rollback; and
-- update the selected profile only when every required gate passes.
-
-The primary complete-system outcomes are unconditional safe grounded task
-success, calibrated professor-policy pedagogical success, multi-turn safe
-trajectory completion, and reliable turn completion.
+Safety, permission, privacy, academic integrity, provenance, isolation, and
+sealed-data rules are hard gates. Profiles change only after evidence passes
+their prospective gates. No paper, leaderboard, vendor statement, or successful
+demo is sufficient by itself.
 
 ## Operating rules
 
-- Keep roadmap parents in progress while only the current bounded execution item
-  is active.
-- Evidence fields link only to artifacts that exist.
-- Do not send real professor, course, or student data to an unapproved provider.
-- Do not infer private-course external-provider permission or evaluator
-  validity from general encouragement.
-- Do not tune on sealed data or rerun until a favorable result appears.
-- Reserve professor contact for a decision-bearing result package or a genuine
-  permission/deadline blocker, not ordinary progress reporting.
-- Stop new architecture, model, metric, and feature work after 2026-08-08
-  unless a frozen result explicitly justifies a bounded product improvement.
-- Protect 2026-08-09 through 2026-09-13 primarily for report writing, figures,
-  slides, demo stabilization, rehearsal, contingency, and evidence-backed
-  product continuation.
-- A working demo without security, operations, simulated interaction evidence,
-  evaluator calibration, and aggregate evidence is not a deployable-system
-  result.
+- Keep only the current bounded execution issue `In Progress`.
+- Use daily reviewable changes as a throughput goal; do not manufacture
+  experiments that do not answer a decision.
+- Report to the professor every Monday, Wednesday, and Friday only when there
+  is decision-bearing evidence: a short message, exact numbers, one table or at
+  most two charts, one limitation, and the next decision date.
+- Do not commit private course material, student data, credentials, or bulky
+  per-case outputs.
+- Do not use solution files, answer keys, or student submissions.
+- Do not claim human usability, adoption, engagement, or learning outcomes.
+- After 2026-08-16, make only changes needed to preserve frozen claims,
+  reproducibility, or the demonstration.
 
-The durable rescope is maintained at
-`research/00_admin/2026-07-22-deployable-pilot-rescope.md`.
+The durable baseline is
+`research/00_admin/2026-07-27-frontier-digital-twin-scope.md`.

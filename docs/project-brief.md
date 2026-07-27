@@ -7,47 +7,49 @@ use generic AI tools, but those tools usually lack course boundaries,
 instructor-specific source material, and the educator's preferred teaching
 style.
 
-## Product Direction
+## Product direction
 
-Build and evaluate a deployable Digital Twin tutoring system for one professor
-and one course. The system should use approved course material, preserve a
-configurable teaching policy, give student-role accounts grounded tutoring with
-inspectable citations, and give the professor release and audit control.
-Student recruitment is out of scope; evaluation uses researcher-frozen course
-anchors, calibrated LLM judges, frozen simulated students, and scripted
-synthetic accounts. Optional professor review is an expert-validity check, not
-a prerequisite for local experiments.
+Build and evaluate a professor-configurable pedagogical Digital Twin for
+multiple professors and courses. Each professor controls approved evidence,
+teaching behaviour, tutoring policy, evaluation cases, publication, withdrawal,
+and rollback. Invited students receive course-isolated, cited tutoring.
 
-## Focused research question
+The product runs locally for the final project and remains hosting-ready.
+Student recruitment is out of scope; evaluation uses researcher-verified
+course anchors, deterministic checks, calibrated LLM judges, frozen simulated
+students, scripted synthetic accounts, and capacity tests.
 
-For one course and a fixed generator, how do approved course evidence and a
-professor-configured tutoring policy affect safe grounded task success,
-citation completeness, boundary compliance, calibrated pedagogical success,
-multi-turn safe trajectory completion, reliable turn completion, latency, and
-cost relative to a generic assistant?
+## Focused research questions
+
+1. Across heterogeneous courses, how much do dense, hybrid, and reranked
+   retrieval improve evidence completeness and safe no-evidence handling over
+   heading-aware BM25?
+2. With generator and evidence held constant, how much does professor policy
+   improve professor fidelity, pedagogical behaviour, misconception handling,
+   and academic-integrity compliance over a generic tutoring policy?
+3. Can the resulting system complete multi-course professor and student
+   workflows with publication control, isolation, recovery, and bounded
+   simulated capacity?
 
 Every replaceable method and architecture boundary must be evaluated against a
 control. This includes parsing/chunking, retrieval, returned-context
 sufficiency, generation, prompts/policy, conversation state, authentication,
 authorization, persistence, storage, deployment, and usability.
 
-## Revised delivery phases
+## Delivery phases
 
-- Instructor onboarding: complete and professor-approved.
-- Grounded RAG qualification: freeze the protocol and qualify the generator,
-  verifier, and end-to-end RAG profile.
-- Deployable application: authenticated professor/student roles, persistence,
-  private storage, staging, and visible failures.
-- Evaluation qualification: security, privacy, reliability, professor review,
-  LLM-judge calibration, simulated-student stress tests, and synthetic-account
-  deployment acceptance.
-- Final evaluation and reporting: blinded comparisons, evidence freeze,
-  deployed demonstration, and reproducibility package.
+- Scope and architecture lock: authoritative thesis, course portfolio,
+  evaluation questions, provider boundary, and repository structure.
+- Cross-course retrieval study: verified benchmark, M0-M3 comparison, sealed
+  result, and selected or rollback retrieval profile.
+- Pedagogical Digital Twin: multi-course professor configuration,
+  evaluation-before-publication, and student tutoring journeys.
+- End-to-end validation: professor fidelity, pedagogy, isolation, failures,
+  recovery, simulated interactions, and bounded capacity.
+- Evidence and communication: technical freeze by 2026-08-16, then report,
+  figures, presentation, reproducibility, and demo stabilization.
 
-Proactive intervention and a full learning-gap analytics product are deferred
-from the final critical path.
-
-## Current Phase
+## Current phase
 
 Instructor onboarding is complete and approved. Grounding foundations include
 provider-neutral contracts, approved local parsing, deterministic chunking,
@@ -56,13 +58,13 @@ governance. Retrieval v2, evidence-sufficiency v1, and exploratory local
 generation all produced `Refine` or no-selection results.
 
 The exact no-participant judge, simulator, run-record, analysis, and stop-rule
-contracts are now frozen and validated. The project is not yet deployable: it
-has no selected returned-context verifier
-or live generator/prompt, no end-to-end RAG decision, no authentication or
-durable persistence, no student release flow, and no staging environment. Issue
-#11 now records the completed instrument freeze; the immediate experiments are
-#24 generator/prompt qualification and #43 returned-context verifier
-qualification before #25. This is a researcher-controlled reproducibility
-sequence, not a request for the professor to select the method. The full
-rescope is recorded in the
-[deployable pilot plan](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).
+contracts are frozen and validated. The IT5002 pilot provides useful
+development evidence but does not select a final method: local Qwen3 reranking
+reached 10/13 answerable cases versus 3/13 for heading BM25, while the separate
+59-case one-time run failed after 29 cases and is invalid. Jina is an unselected
+provider spike with no result.
+
+The current phase is scope and architecture lock. Next comes a verified
+cross-course benchmark and a prospective M0-M3 comparison, followed by the
+multi-professor product and end-to-end validation. The authoritative baseline
+is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).

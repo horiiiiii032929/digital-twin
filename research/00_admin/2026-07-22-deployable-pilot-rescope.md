@@ -2,8 +2,8 @@
 
 Date: 2026-07-22
 
-Status: active planning baseline; evaluation instruments are frozen, and
-deployable-application implementation has not started under this rescope.
+Status: superseded on 2026-07-27 by
+`2026-07-27-frontier-digital-twin-scope.md`; retained as decision history.
 
 ## Scope decision
 
