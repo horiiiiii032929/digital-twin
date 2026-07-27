@@ -12,10 +12,14 @@ and rollback evidence is recorded.
   contracts, deterministic generation controls, and result governance exist.
 - BM25 v1 remains the provisional retriever; harder retrieval and
   evidence-sufficiency comparisons selected no replacement or safe verifier.
+- Exact judge, simulator, run-record, analysis, and stop-rule contracts are
+  frozen and validated under `research/05_evaluation/instruments/`.
 - No live generator/prompt, returned-context verifier, end-to-end RAG profile,
   authentication, durable persistence, or deployment is selected yet.
-- The immediate active item is #11: freeze evaluation and data governance before
-  new implementation or held-out inspection.
+- The immediate active work is the #7 IT5002 retrieval-v3 comparison under the
+  #11 freeze. No model download, private development scoring, or held-out
+  inspection is allowed until exact runtime bindings and split controls are
+  recorded.
 
 ## Final-project scope
 
@@ -32,9 +36,10 @@ course, without student recruitment. The project requires:
   synthetic-account acceptance; and
 - reproducible offline comparisons and a deployed demonstration.
 
-Course-specific evaluation is local-only under the researcher-selected working
-boundary. Private course material and outputs do not enter an external
-provider. Human usability and learning-effectiveness claims are excluded.
+Internal course-specific retrieval evaluation remains local. A NotebookLM
+black-box reference is separate and may use private material only after the
+source permission, account terms, and run boundary are recorded. Human
+usability and learning-effectiveness claims are excluded.
 
 ## Deferred from the critical path
 
@@ -49,34 +54,38 @@ provider. Human usability and learning-effectiveness claims are excluded.
 ## Dependency order
 
 1. #11 freezes the method, data-governance, rubric, threshold, and reporting
-   protocol.
-2. #24 and #43 qualify or reject the generator/prompt and returned-context
-   sufficiency verifier.
-3. #25 records the frozen end-to-end RAG decision; #7 closes from that evidence.
-4. #8 adds evaluated authentication, authorization, persistence, storage,
+   protocol. The instrument-contract portion is complete.
+2. #46 runs the separate 59-case R0-R6 rapid ablation, with R5 versus R1 as the
+   primary contrast, and produces the first professor result within 24 hours.
+3. #7 completes the course-specific retrieval-v3 comparison of BM25, Qwen3
+   dense, hybrid, deterministic contextual, reranked, and bounded-decomposition
+   conditions.
+4. #43 qualifies or rejects the returned-context sufficiency verifier using the
+   selected retriever or BM25 rollback.
+5. #24 qualifies the exact generator/prompt; #25 records the frozen end-to-end
+   RAG decision and #7 closes from that evidence.
+6. #8 adds evaluated authentication, authorization, persistence, storage,
    professor/student journeys, and staging deployment.
-5. #9 hardens security/reliability and records the researcher evaluation-release
+7. #9 hardens security/reliability and records the researcher evaluation-release
    Go / Refine / No-Go; real student release authorization remains separate.
-6. #10 runs calibrated LLM-judge, simulated-student, and deployed
+8. #10 runs calibrated LLM-judge, simulated-student, and deployed
    synthetic-account evaluation.
-7. #12 runs the blinded final comparison and freezes evidence.
-8. #13 delivers the final report, deployed demo, reproducibility package, and
+9. #12 runs the blinded final comparison and freezes evidence.
+10. #13 delivers the final report, deployed demo, reproducibility package, and
    presentation.
-9. #44 records every researcher checkpoint, professor critique, and genuine
+11. #44 records every researcher checkpoint, professor critique, and genuine
    release decision separately.
 
 ## Tight roadmap
 
 | Date | Required outcome | Professor checkpoint |
 | --- | --- | --- |
-| 2026-07-24 | Researcher-selected method, preliminary results, claim boundary, and next experiment reported | P0 method/results critique |
-| 2026-07-25 | #11 protocol frozen | Researcher freeze record |
-| 2026-07-29 | #24 and #43 qualified or rejected | Included in P1 |
-| 2026-07-31 | #25 and #7 end-to-end RAG decision | P1 RAG result critique |
-| 2026-08-10 | #8 authenticated persistent staging deployment | P2 staging and architecture review |
-| 2026-08-15 | #9 hardening and risk review | P3 researcher Go / Refine / No-Go |
-| 2026-08-22 | #10 simulated-student, LLM-judge, and synthetic-account evaluation | P4 evidence and claim decision |
-| 2026-08-26 | #12 final evaluation and evidence freeze | Written freeze confirmation |
+| 2026-07-23 | #11/#46 freeze a separate 59-case R0-R6 rapid ablation | Internal freeze |
+| 2026-07-24 | #46 execute one rapid sealed run and validate the result | P1 rapid experiment result |
+| 2026-07-28 | #7/#43 complete expanded retrieval-v3 and context sufficiency | Decision addendum if material |
+| 2026-07-31 | #24/#25 generator and end-to-end RAG decision | P2 end-to-end result package |
+| 2026-08-04 | #8 authenticated persistent staging deployment | Demonstration link |
+| 2026-08-08 | #9/#10/#12 final evaluation and evidence freeze | P3 final evidence package |
 | 2026-09-03 | Full report draft and figures | P5 report review |
 | 2026-09-09 | Timed demo and recovery rehearsal | P6 final rehearsal |
 | 2026-09-10 to 2026-09-12 | Contingency only; no new scope or claims | Escalate blockers only |
@@ -111,9 +120,13 @@ trajectory completion, and reliable turn completion.
 - Do not infer private-course external-provider permission or evaluator
   validity from general encouragement.
 - Do not tune on sealed data or rerun until a favorable result appears.
-- Stop new architecture, model, metric, and feature work after 2026-08-26.
-- Protect 2026-08-27 through 2026-09-13 for report writing, figures, slides,
-  demo stabilization, rehearsal, and contingency.
+- Reserve professor contact for a decision-bearing result package or a genuine
+  permission/deadline blocker, not ordinary progress reporting.
+- Stop new architecture, model, metric, and feature work after 2026-08-08
+  unless a frozen result explicitly justifies a bounded product improvement.
+- Protect 2026-08-09 through 2026-09-13 primarily for report writing, figures,
+  slides, demo stabilization, rehearsal, contingency, and evidence-backed
+  product continuation.
 - A working demo without security, operations, simulated interaction evidence,
   evaluator calibration, and aggregate evidence is not a deployable-system
   result.

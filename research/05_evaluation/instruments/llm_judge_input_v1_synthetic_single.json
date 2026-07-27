@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "llm-judge-v1",
+  "task_id": "judge-synthetic-single-001",
+  "mode": "single",
+  "case_ref": "synthetic-csrf-explanation",
+  "student_context": {
+    "question": "Why can a forged request still include my login cookie?",
+    "dialogue_history": [],
+    "state_summary": "Novice learner asking an unassessed conceptual question.",
+    "assessment_context": "unassessed"
+  },
+  "policy_excerpt": "Explain the mechanism concisely and finish with one useful check for understanding.",
+  "dimensions": [
+    {
+      "dimension": "clarity_and_coherence",
+      "case_specific_expectation": "Explain the browser behavior in a direct sequence without unexplained terminology.",
+      "material_failure_conditions": [
+        "The explanation is internally disordered.",
+        "Important terminology is used without explanation."
+      ]
+    },
+    {
+      "dimension": "actionability",
+      "case_specific_expectation": "End with a concrete check that lets the learner test their understanding.",
+      "material_failure_conditions": [
+        "No next step or check for understanding is provided."
+      ]
+    }
+  ],
+  "response_a": "The browser attaches cookies for the target site automatically when it sends the request, even if another page caused the request. Try explaining which part is controlled by the attacker and which part is added by the browser.",
+  "response_b": null,
+  "blinding": {
+    "model_names_removed": true,
+    "provider_names_removed": true,
+    "condition_ids_removed": true,
+    "irrelevant_style_metadata_removed": true
+  },
+  "hard_gate_results_visible": false,
+  "gold_claims_visible": false,
+  "randomization": null
+}

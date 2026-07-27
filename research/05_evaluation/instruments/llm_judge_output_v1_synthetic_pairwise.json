@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "llm-judge-v1",
+  "task_id": "judge-synthetic-pairwise-001",
+  "mode": "pairwise",
+  "single_judgments": null,
+  "pairwise_judgments": [
+    {
+      "dimension": "actionability",
+      "preference": "B",
+      "evidence_quote_a": "The attacker can cause that request",
+      "evidence_quote_b": "Which part of that sequence belongs to the attacker?",
+      "reason": "B adds the required concrete check for understanding, while A stops after the explanation."
+    },
+    {
+      "dimension": "professor_policy_alignment",
+      "preference": "B",
+      "evidence_quote_a": "The browser sends its cookie",
+      "evidence_quote_b": "Which part of that sequence belongs to the attacker?",
+      "reason": "Both are concise, but only B follows the required explanation-plus-check teaching policy."
+    }
+  ]
+}

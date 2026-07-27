@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "generator-qualification-v1-example-001",
+  "run_type": "generator_qualification",
+  "status": "complete",
+  "started_at": "2026-07-23T06:00:00Z",
+  "finished_at": "2026-07-23T06:00:01Z",
+  "code_revision": {
+    "commit_sha": "0000000000000000000000000000000000000000",
+    "dirty": false,
+    "diff_sha256": null
+  },
+  "environment": {
+    "platform": "synthetic-example",
+    "python_version": "3.12",
+    "dependency_lock_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "reporting_timezone": "Asia/Tokyo"
+  },
+  "data": {
+    "dataset_id": "generator-qualification-v1",
+    "dataset_version": "generator-qualification-v1.0.0-example",
+    "split": "example",
+    "dataset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "corpus_id": "synthetic-web-security",
+    "corpus_version": "synthetic-web-security-v2",
+    "corpus_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "permission_record_ref": "synthetic-public-declaration-v1",
+    "sealed_opened_at": null
+  },
+  "condition": {
+    "condition_id": "component",
+    "context_mode": "oracle",
+    "policy_mode": "professor"
+  },
+  "system_config": {
+    "profile_id": "generator-example-v1",
+    "retriever": {
+      "implementation_id": "oracle-context",
+      "config_version": "v1"
+    },
+    "context_verifier": {
+      "implementation_id": "oracle-complete",
+      "config_version": "v1"
+    },
+    "generator": {
+      "implementation_id": "deterministic-example-generator",
+      "config_version": "v1"
+    },
+    "policy": {
+      "implementation_id": "structured-professor-policy",
+      "config_version": "v1"
+    },
+    "model": {
+      "provider": "local-example",
+      "model": "deterministic-example",
+      "immutable_revision": "v1",
+      "endpoint_class": "local",
+      "decoding": {
+        "temperature": 0,
+        "top_p": 1,
+        "max_output_tokens": 400,
+        "seed": 5002,
+        "max_attempts": 1,
+        "structured_output": "json_schema_strict"
+      }
+    },
+    "artifacts": []
+  },
+  "evaluator_config": {
+    "deterministic_evaluator_version": "evaluation-control-v1",
+    "analysis_id": "analysis-v1",
+    "analysis_sha256": "cf753f0d1cbe9146abd330c6d5ac3c98d16cd669fee2f13644e94e5489d367c0",
+    "judge_instrument_id": null,
+    "judge_model": null,
+    "sensitivity_judge_model": null,
+    "simulator_instrument_id": null,
+    "simulator_model": null,
+    "random_seed": 5002
+  },
+  "provider_boundary": {
+    "private_course_external_calls": 0,
+    "external_cost_cap_usd": 10,
+    "cumulative_external_cost_usd": 0,
+    "boundary_passed": true
+  },
+  "case_results": [
+    {
+      "result_id": "result-synthetic-001",
+      "case_id": "ctv1-anchor-001",
+      "attempt_status": "completed",
+      "analysis_eligibility": "included",
+      "exclusion_reason": null,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-web-security",
+      "timings": {
+        "end_to_end_ms": 8.2,
+        "retrieval_ms": 0,
+        "verification_ms": 0,
+        "generation_ms": 8.2,
+        "judge_ms": null
+      },
+      "usage": {
+        "input_tokens": 80,
+        "context_tokens": 35,
+        "output_tokens": 42,
+        "cost_usd": 0,
+        "retries": 0
+      },
+      "retrieval_hits": [
+        {
+          "passage_id": "csrf-origin",
+          "rank": 1,
+          "score": 1,
+          "source_version": "1",
+          "permission_status": "approved",
+          "presented": true
+        }
+      ],
+      "context": {
+        "gold_label": "complete",
+        "predicted_label": "complete",
+        "presented_passage_ids": [
+          "csrf-origin"
+        ],
+        "essential_units_covered": 1,
+        "essential_units_total": 1
+      },
+      "tutor_output": {
+        "action": "answer",
+        "text": "A browser can attach the target site's cookie automatically when another page causes the request.",
+        "claims": [
+          {
+            "claim_id": "clm-01",
+            "required": true,
+            "support_label": "supported",
+            "severity": "high",
+            "citation_ids": [
+              "cite-01"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "cite-01",
+            "passage_id": "csrf-origin",
+            "referentially_valid": true,
+            "correct": true,
+            "active_source_version": true
+          }
+        ]
+      },
+      "hard_gates": [
+        {
+          "gate_id": "high-severity-factual-support",
+          "applicable": true,
+          "passed": true,
+          "failure_code": null
+        },
+        {
+          "gate_id": "citation-identity",
+          "applicable": true,
+          "passed": true,
+          "failure_code": null
+        }
+      ],
+      "expected_action_correct": true,
+      "required_claim_recall": 1,
+      "supported_claim_precision": 1,
+      "citation_correctness": 1,
+      "citation_completeness": 1,
+      "safe_grounded_task_success": true,
+      "judge_task_ids": [],
+      "failure_categories": []
+    }
+  ],
+  "trajectory_results": [],
+  "invalidations": [],
+  "notes": "Synthetic public record used only to validate the run schema."
+}

@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/it5002_retrieval_open_set_v1.schema.json",
+  "title": "IT5002 retrieval open-set v1",
+  "description": "Hard-negative, no-answer retrieval cases for development and sealed evaluation. Private course-specific records remain outside Git.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "dataset_status",
+    "split",
+    "language",
+    "course_id",
+    "corpus_version",
+    "permission_record_ref",
+    "data_boundary",
+    "created_at",
+    "sealed_at",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "dataset_id": {
+      "const": "it5002-retrieval-open-set-v1"
+    },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^it5002-retrieval-open-set-v1\\.[0-9]+\\.[0-9]+-(development|heldout|example)$"
+    },
+    "dataset_status": {
+      "enum": [
+        "draft",
+        "approved",
+        "sealed",
+        "opened",
+        "example",
+        "invalid"
+      ]
+    },
+    "split": {
+      "enum": [
+        "development",
+        "heldout"
+      ]
+    },
+    "language": {
+      "const": "en"
+    },
+    "course_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpus_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "permission_record_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data_boundary": {
+      "$ref": "#/$defs/data_boundary"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sealed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "data_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_class",
+        "contains_direct_identifiers",
+        "source_text_committed_to_git",
+        "provider_use",
+        "private_storage_ref"
+      ],
+      "properties": {
+        "content_class": {
+          "enum": [
+            "synthetic_public",
+            "course_private"
+          ]
+        },
+        "contains_direct_identifiers": {
+          "const": false
+        },
+        "source_text_committed_to_git": {
+          "type": "boolean"
+        },
+        "provider_use": {
+          "enum": [
+            "local_only",
+            "approved_external_allowed"
+          ]
+        },
+        "private_storage_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "content_class": {
+                "const": "course_private"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_text_committed_to_git": {
+                "const": false
+              },
+              "private_storage_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "case_family_id",
+        "split",
+        "category",
+        "query",
+        "expected_action",
+        "topic_affinities",
+        "tempting_evidence",
+        "rationale",
+        "annotation"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^rosv1-(dev|test|example)-[0-9]{3}$"
+        },
+        "case_family_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "split": {
+          "enum": [
+            "development",
+            "heldout"
+          ]
+        },
+        "category": {
+          "enum": [
+            "near_domain_absent",
+            "vocabulary_collision",
+            "plausible_non_course",
+            "unsupported_precision",
+            "prohibited_trap",
+            "superseded_trap"
+          ]
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_action": {
+          "const": "abstain"
+        },
+        "topic_affinities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tempting_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tempting_evidence"
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "annotation": {
+          "$ref": "#/$defs/annotation"
+        }
+      }
+    },
+    "tempting_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_artifact_id",
+        "source_version",
+        "passage_id",
+        "locator",
+        "content_sha256",
+        "status",
+        "temptation_reason"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^tempt-[0-9]{2}$"
+        },
+        "source_artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_version": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "passage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "enum": [
+            "approved_but_insufficient",
+            "prohibited",
+            "superseded"
+          ]
+        },
+        "temptation_reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "authoring_method",
+        "annotator_ids",
+        "reviewer_ids",
+        "revision",
+        "created_at",
+        "updated_at",
+        "change_summary"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "single_review",
+            "double_review",
+            "adjudicated"
+          ]
+        },
+        "authoring_method": {
+          "enum": [
+            "researcher_authored",
+            "synthetic_transformation",
+            "llm_candidate_researcher_verified"
+          ]
+        },
+        "annotator_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reviewer_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "change_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

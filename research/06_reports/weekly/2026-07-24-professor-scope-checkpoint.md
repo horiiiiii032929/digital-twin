@@ -4,6 +4,11 @@ Date: 2026-07-24
 
 GitHub checkpoint: #44 / P0
 
+Status: internal preliminary record; not sent. On 2026-07-23 the reporting rule
+changed to reserve professor time for a valid course-specific experiment
+result. The first planned external checkpoint is the separate rapid retrieval
+result package after one frozen 59-case held-out run, due 2026-07-24.
+
 ## Update
 
 I have selected the project direction and evaluation method rather than waiting
@@ -136,14 +141,18 @@ student learning.
 
 | Date | Work | Evidence produced |
 | --- | --- | --- |
-| 2026-07-24 to 2026-07-25 | Finish #11 by freezing the exact judge prompt, simulator state-card schema, analysis configuration, and local-only boundary | Reproducible protocol and instrument tests |
-| 2026-07-26 to 2026-07-29 | Run #24 and #43 development/calibration work | Exact generator/prompt decision and returned-context verifier decision |
-| 2026-07-30 to 2026-07-31 | Run #25 under frozen C0-C3 conditions | First course-specific end-to-end RAG decision |
-| 2026-08-01 onward | Build only the selected or safe rollback vertical slice | Authenticated, persistent staging application |
+| 2026-07-23 to 2026-07-24 | Execute #46: freeze, build, run, validate, and report the separate 59-case R0-R6 ablation with R5 versus R1 primary | First course-specific retrieval result |
+| 2026-07-25 to 2026-07-28 | Complete expanded retrieval-v3 and returned-context sufficiency | Confirmatory retrieval and safe-abstention decisions |
+| 2026-07-29 to 2026-07-31 | Qualify generator/prompt and end-to-end RAG | Frozen vertical-slice decision |
+| 2026-08-01 to 2026-08-04 | Build authenticated persistent staging around the selected or rollback profile | Deployed professor/student application |
+| 2026-08-05 to 2026-08-08 | Harden and run simulated, synthetic-account, and final evaluation | Frozen evidence and claim boundary |
 
-The next professor checkpoint should contain actual #24/#43/#25 results,
-failure examples, one paired outcome figure, and a Keep / Refine / Go Deeper /
-Drop decision. It should not ask the professor to choose the method.
+The next professor checkpoint should contain the #46 rapid result, the `39`
+answerable and `20` no-evidence denominators, uncertainty, latency and resource
+evidence, favorable and unfavorable cases, no more than two figures, and a Go
+Deeper / Refine / Drop decision. It should state that final Keep selection
+requires the expanded confirmatory study and should not ask the professor to
+choose the method.
 
 ## Feedback requested
 

@@ -1,0 +1,133 @@
+{
+  "manifest_id": "instrument-freeze-v1",
+  "version": "1.0.0",
+  "status": "frozen",
+  "frozen_at": "2026-07-23T06:00:00Z",
+  "researcher_owned": true,
+  "professor_review_required_to_execute": false,
+  "human_participants": false,
+  "private_course_external_processing": false,
+  "default_configuration": {
+    "random_seed": 5002,
+    "judge_temperature": 0,
+    "judge_top_p": 1,
+    "judge_max_output_tokens": 1200,
+    "simulator_temperature": 0,
+    "simulator_top_p": 1,
+    "simulator_max_output_tokens": 500,
+    "max_attempts": 1,
+    "structured_output": "json_schema_strict"
+  },
+  "runtime_bindings_required_before_sealed_run": [
+    "tutor_provider_model_and_revision",
+    "primary_judge_provider_model_and_revision",
+    "sensitivity_judge_provider_model_and_revision",
+    "simulator_provider_model_and_revision",
+    "dependency_lock_hash",
+    "dataset_hash",
+    "corpus_manifest_hash",
+    "code_revision_and_dirty_state"
+  ],
+  "files": [
+    {
+      "artifact_id": "llm-judge-v1-prompt",
+      "path": "research/05_evaluation/instruments/llm_judge_v1.prompt.md",
+      "sha256": "bf8e3fba2047fd60d6ecccecd4bc74c5e7fb90e449ebe599c7c1ec9158f5f891"
+    },
+    {
+      "artifact_id": "llm-judge-v1-input-schema",
+      "path": "research/05_evaluation/instruments/llm_judge_input_v1.schema.json",
+      "sha256": "a1bffeec28b79ea7546486fc308b7b0eb6ebe8d74a6f8ae9ea925adf5c88a90b"
+    },
+    {
+      "artifact_id": "llm-judge-v1-output-schema",
+      "path": "research/05_evaluation/instruments/llm_judge_output_v1.schema.json",
+      "sha256": "baf4c23a3da86be4f141b8bebf77893eb826401125a3df7cefd41f158df277bb"
+    },
+    {
+      "artifact_id": "llm-judge-v1-single-input-example",
+      "path": "research/05_evaluation/instruments/llm_judge_input_v1_synthetic_single.json",
+      "sha256": "b093a477aa0978d810c40e2f7c55a21a3ed7ab197f0b9424ec73335b7a0ed58d"
+    },
+    {
+      "artifact_id": "llm-judge-v1-single-output-example",
+      "path": "research/05_evaluation/instruments/llm_judge_output_v1_synthetic_single.json",
+      "sha256": "531616d152be4d8438ab320b618a060052358d0e217238a848f689bf7a30d02f"
+    },
+    {
+      "artifact_id": "llm-judge-v1-pairwise-input-example",
+      "path": "research/05_evaluation/instruments/llm_judge_input_v1_synthetic_pairwise.json",
+      "sha256": "b5af0cf81009ec41a67f0462538db0863086bf8e48add2dd20b20a3c531063a8"
+    },
+    {
+      "artifact_id": "llm-judge-v1-pairwise-output-example",
+      "path": "research/05_evaluation/instruments/llm_judge_output_v1_synthetic_pairwise.json",
+      "sha256": "8f03abaf7fe8683dd2646a5e17890c6a51265460e3dd3f0091ce3710febf134f"
+    },
+    {
+      "artifact_id": "simulated-student-v1-prompt",
+      "path": "research/05_evaluation/instruments/simulated_student_v1.prompt.md",
+      "sha256": "ac841134d99f82d0ef8c921524357c3fe139bd9b67259e3f8380143a25256224"
+    },
+    {
+      "artifact_id": "simulated-student-v1-state-schema",
+      "path": "research/05_evaluation/instruments/simulated_student_state_v1.schema.json",
+      "sha256": "65e98aeda1b8c890fb2a214bd3947382d428ea0fa4f23488a82556cd6c1f3e07"
+    },
+    {
+      "artifact_id": "simulated-student-v1-input-schema",
+      "path": "research/05_evaluation/instruments/simulated_student_input_v1.schema.json",
+      "sha256": "5fae962119bb6f38e6182d6f31653a527bc08068ec661c5cde67aab5fcd587c6"
+    },
+    {
+      "artifact_id": "simulated-student-v1-output-schema",
+      "path": "research/05_evaluation/instruments/simulated_student_turn_v1.schema.json",
+      "sha256": "324238dd6c338946edd3ed9ea163d6de42318b6cd88f84f5a485bdb400a794ef"
+    },
+    {
+      "artifact_id": "simulated-student-v1-state-example",
+      "path": "research/05_evaluation/instruments/simulated_student_state_v1_synthetic_example.json",
+      "sha256": "c63811aab56fde60dbc3b9a2deedbbf4b09d89730f260f729669bad2d015af87"
+    },
+    {
+      "artifact_id": "simulated-student-v1-input-example",
+      "path": "research/05_evaluation/instruments/simulated_student_input_v1_synthetic_example.json",
+      "sha256": "2daeedf4d3903cceba9d6e15b62eccf52953e9c71d268175ac86b6cb722abe93"
+    },
+    {
+      "artifact_id": "simulated-student-v1-output-example",
+      "path": "research/05_evaluation/instruments/simulated_student_turn_v1_synthetic_example.json",
+      "sha256": "6711598788b9799d53eeea6b347a20340810ee62645ab3bc8ca2b0e712717ca3"
+    },
+    {
+      "artifact_id": "evaluation-run-v1-schema",
+      "path": "research/05_evaluation/instruments/evaluation_run_v1.schema.json",
+      "sha256": "6557fc4b4992e8a4ac4ed5c8c314c81c109b5fd8b2bdbfbcb707d7813676f8b4"
+    },
+    {
+      "artifact_id": "evaluation-run-v1-example",
+      "path": "research/05_evaluation/instruments/evaluation_run_v1_synthetic_example.json",
+      "sha256": "98bd358daf4b586a20e0974fd9e6ab321e86a11be437bf47c7d1281509e6baaa"
+    },
+    {
+      "artifact_id": "analysis-v1",
+      "path": "research/05_evaluation/instruments/analysis_v1.json",
+      "sha256": "cf753f0d1cbe9146abd330c6d5ac3c98d16cd669fee2f13644e94e5489d367c0"
+    },
+    {
+      "artifact_id": "response-rubric-v1",
+      "path": "research/05_evaluation/rubric.md",
+      "sha256": "cfc752ba33207996f4f12bf12356019dfd1c0b0e284b2a113ad19738e132f098"
+    },
+    {
+      "artifact_id": "course-tutor-v1-case-schema",
+      "path": "research/05_evaluation/course_tutor_v1.schema.json",
+      "sha256": "fe5e70399658a727dc806b00013697ebd33695ffcaaf7bdd151195160210fad7"
+    },
+    {
+      "artifact_id": "course-tutor-v1-condition-schema",
+      "path": "research/05_evaluation/course_tutor_v1_condition.schema.json",
+      "sha256": "8cdb6a17e7871f0572977d480d661fd60105b0f7fb848def4a86b3555c2043cc"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "llm-judge-v1",
+  "task_id": "judge-synthetic-single-001",
+  "mode": "single",
+  "single_judgments": [
+    {
+      "dimension": "clarity_and_coherence",
+      "label": "pass",
+      "evidence_quote": "another page caused the request",
+      "reason": "The response directly distinguishes the request trigger from the browser's automatic cookie behavior."
+    },
+    {
+      "dimension": "actionability",
+      "label": "pass",
+      "evidence_quote": "Try explaining which part is controlled by the attacker",
+      "reason": "The learner receives a concrete check that requires them to restate the mechanism."
+    }
+  ],
+  "pairwise_judgments": null
+}

@@ -62,18 +62,20 @@ target project for automatic project assignment from issue forms.
   private storage, student tutoring, staging, monitoring, backup/restore,
   rollback, professor release review, and simulated evaluation evidence are
   absent.
-- #11 is the immediate active execution item. It freezes the deployable-pilot
-  evaluation and data-governance protocol before new implementation, provider
-  calls, or held-out inspection.
-- #24 and #43 then qualify or reject the exact DeepSeek/prompt and actual
-  returned-context sufficiency methods. #25 and parent #7 record the frozen RAG
-  decision by 2026-07-31.
-- #8 delivers authenticated persistent professor/student staging by 2026-08-10;
-  #9 hardens it and records professor evaluation-release Go / Refine / No-Go by
-  2026-08-15.
-- #10 runs the simulated-student, LLM-judge, and deployed synthetic-account
-  evaluation by 2026-08-22.
-- #44 tracks seven professor decisions from scope approval through rehearsal.
+- #11 is the immediate active execution item. Its instrument-contract portion
+  is complete; exact runtime bindings and private split validation remain
+  before any development scoring or held-out inspection.
+- #46 produces a separate sealed full-ladder R0-R6 rapid result by
+  2026-07-24, with R5 versus R1 primary. #7 then completes expanded
+  retrieval-v3 with #43 context-sufficiency by 2026-07-28.
+- #24 and #25 qualify or reject the generator/prompt and frozen end-to-end RAG
+  profile by 2026-07-31.
+- #8 delivers authenticated persistent professor/student staging by
+  2026-08-04.
+- #9, #10, and #12 complete hardening, simulated evaluation, final comparison,
+  and the evidence freeze by 2026-08-08.
+- #44 records decision-bearing professor critiques and final rehearsal; routine
+  planning updates remain internal.
 - Proactive triggers, full learning-gap analytics, Canvas, multimodality,
   institution-wide SSO, public signup, and learning-effectiveness claims are
   deferred.
@@ -82,18 +84,17 @@ target project for automatic project assignment from issue forms.
 
 ### Active critical path
 
-Roadmap issue #7 stays `In Progress`; #11 is the current bounded execution gate.
+Roadmap issue #7 stays `In Progress`; #46 is the current bounded execution
+item under the #11 freeze.
 
 | Target | Issue and required outcome |
 | --- | --- |
-| 2026-07-24 | #44 P0 professor scope and evaluator-governance decision |
-| 2026-07-25 | #11 freeze pilot evaluation and data governance |
-| 2026-07-29 | #24 and #43 qualify or reject generator/prompt and returned-context verifier |
-| 2026-07-31 | #25 and #7 record the end-to-end RAG decision |
-| 2026-08-10 | #8 deploy authenticated persistent professor/student staging |
-| 2026-08-15 | #9 pass hardening and professor evaluation-release review, or record No-Go |
-| 2026-08-22 | #10 complete simulated-student, LLM-judge, and synthetic-account evaluation |
-| 2026-08-26 | #12 complete final evaluation and freeze evidence |
+| 2026-07-23 | #11/#46 freeze the separate 59-case rapid R0-R6 ablation |
+| 2026-07-24 | #46 execute one rapid sealed run and send the first result package |
+| 2026-07-28 | #7/#43 complete expanded retrieval-v3 and returned-context sufficiency |
+| 2026-07-31 | #24/#25 qualify or reject the generator/prompt and end-to-end RAG profile |
+| 2026-08-04 | #8 deploy authenticated persistent professor/student staging |
+| 2026-08-08 | #9/#10/#12 complete hardening, simulated evaluation, final comparison, and evidence freeze |
 | 2026-09-03 | #44 P5 professor report-draft review |
 | 2026-09-09 | #44 P6 professor rehearsal |
 | 2026-09-10 to 2026-09-12 | Contingency only: correct blocking defects, package submission, and preserve frozen claims |
@@ -136,12 +137,11 @@ project board. The current presentation milestone is tracked through
 | Sprint | Dates | Focus | Items | Target Date |
 | --- | --- | --- | --- | --- |
 | S1 Onboarding | 2026-06-22 to 2026-06-28 | I1 scope, setup flow, policy fields, prototype, professor review | #1-#6 | 2026-06-28 |
-| S2 Protocol and RAG | 2026-07-22 to 2026-07-31 | Frozen protocol and qualified/rejected grounded RAG profile | #7, #11, #24, #25, #43 | 2026-07-31 |
-| S3 Deployable App | 2026-08-01 to 2026-08-10 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-10 |
-| S4 Hardening and Review | 2026-08-11 to 2026-08-15 | Security, privacy, reliability, recovery, researcher evaluation decision, and professor risk critique | #9 | 2026-08-15 |
-| S5 Simulated Evaluation | 2026-08-16 to 2026-08-22 | Calibrated LLM judge, simulated-student trajectories, and deployed synthetic-account acceptance | #10 | 2026-08-22 |
-| S6 Evidence Freeze | 2026-08-23 to 2026-08-26 | Blinded comparison, bounded refinement, and frozen claims | #12 | 2026-08-26 |
-| S7 Report and Presentation | 2026-08-27 to 2026-09-13 | Report, figures, deployed demo, reproducibility, slides, rehearsal, and three-day contingency | #13, #44 | 2026-09-13 |
+| S2 Rapid Retrieval | 2026-07-23 to 2026-07-24 | Frozen 59-case screen, one sealed run, validated result, and professor package | #11, #46 | 2026-07-24 |
+| S3 Confirmatory RAG | 2026-07-25 to 2026-07-31 | Expanded retrieval, context sufficiency, generator/prompt, and end-to-end RAG decision | #7, #24, #25, #43 | 2026-07-31 |
+| S4 Deployable App | 2026-08-01 to 2026-08-04 | Authenticated persistent professor/student staging deployment | #8 | 2026-08-04 |
+| S5 Hardening and Evidence Freeze | 2026-08-05 to 2026-08-08 | Security, privacy, reliability, recovery, calibrated judging, simulated-student and synthetic-account evaluation, blinded comparison, and frozen claims | #9, #10, #12 | 2026-08-08 |
+| S6 Report, Product, and Presentation | 2026-08-09 to 2026-09-13 | Report, figures, evidence-backed product refinement, deployed demo, reproducibility, slides, rehearsal, and contingency | #13, #44 | 2026-09-13 |
 
 ## Board Maintenance
 

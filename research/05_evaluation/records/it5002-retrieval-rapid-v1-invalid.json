@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "run_id": "it5002-retrieval-rapid-v1-invalid",
+  "component": "retriever",
+  "dataset_id": "it5002-retrieval-rapid-v1",
+  "corpus_id": "it5002-lectures-v1",
+  "code_revision": "1e168ded1f5d6f04ae10a9d9b2fc987c819b98e8",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "heading-aware-bm25",
+        "version": "rapid-v1",
+        "configuration": {
+          "k1": 1.2,
+          "b": 0.75,
+          "final_k": 5,
+          "metric_k": 3
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "development-complete-evidence-success-at-3",
+          "value": 0.23076923076923078,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.23076923076923078,
+          "passed": true
+        },
+        {
+          "name": "development-claim-coverage-at-3",
+          "value": 0.23076923076923078,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.23076923076923078,
+          "passed": true
+        },
+        {
+          "name": "development-no-evidence-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "development-warm-p95-latency",
+          "value": 64.17974999931175,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 5000.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "permission-provenance-and-private-text",
+          "passed": true,
+          "evidence": "The completed development artifact retained source hashes and page locators; private course text remained ignored."
+        },
+        {
+          "name": "resource-limits",
+          "passed": true,
+          "evidence": "R1 warm p95 was 64.2 ms and requires no learned-model cache."
+        },
+        {
+          "name": "one-time-heldout-completion",
+          "passed": false,
+          "evidence": "The shared held-out process ended after 29 of 59 standard cases and wrote no final artifact."
+        }
+      ],
+      "failures_by_category": {
+        "ranking": 10,
+        "operations": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "qwen3-contextual-reranker",
+        "version": "rapid-v1",
+        "configuration": {
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "device": "mps",
+          "dtype": "float16",
+          "batch_size": 8,
+          "final_k": 5,
+          "metric_k": 3
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "development-complete-evidence-success-at-3",
+          "value": 0.7692307692307693,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.23076923076923078,
+          "passed": true
+        },
+        {
+          "name": "development-claim-coverage-at-3",
+          "value": 0.7692307692307693,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.23076923076923078,
+          "passed": true
+        },
+        {
+          "name": "development-no-evidence-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "development-warm-p95-latency",
+          "value": 64821.517834003316,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 5000.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "permission-provenance-and-private-text",
+          "passed": true,
+          "evidence": "The completed development artifact retained source hashes and page locators; private course text remained ignored."
+        },
+        {
+          "name": "resource-limits",
+          "passed": false,
+          "evidence": "Clean development warm p95 was 64.82 seconds against a 5-second gate; cache size was 2.25 GiB."
+        },
+        {
+          "name": "one-time-heldout-completion",
+          "passed": false,
+          "evidence": "The shared held-out process ended after 29 of 59 standard cases and wrote no final artifact."
+        }
+      ],
+      "failures_by_category": {
+        "ranking": 3,
+        "operations": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "drop",
+    "rationale": "Drop the current local MPS Qwen3 contextual-reranker configuration. It showed a large development quality gain but failed the frozen latency gate by about thirteen times, and the one-time held-out process did not complete. The invalid run cannot select a retriever.",
+    "limitations": [
+      "All quality measurements in this record are development calibration evidence, not held-out performance.",
+      "No held-out aggregate or paired uncertainty estimate exists because the process wrote no final artifact.",
+      "Peak RSS did not capture all Apple unified GPU-memory pressure.",
+      "The exact cause of premature process termination is undetermined because stderr and a crash report were unavailable."
+    ]
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/horiiiiii032929/digital-twin/research/05_evaluation/instruments/llm_judge_input_v1.schema.json",
+  "title": "LLM judge v1 input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instrument_id",
+    "task_id",
+    "mode",
+    "case_ref",
+    "student_context",
+    "policy_excerpt",
+    "dimensions",
+    "response_a",
+    "response_b",
+    "blinding",
+    "hard_gate_results_visible",
+    "gold_claims_visible",
+    "randomization"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instrument_id": {
+      "const": "llm-judge-v1"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^judge-[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "mode": {
+      "enum": [
+        "single",
+        "pairwise"
+      ]
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "student_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "dialogue_history",
+        "state_summary",
+        "assessment_context"
+      ],
+      "properties": {
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "dialogue_history": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "content"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "student",
+                  "tutor"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              }
+            }
+          }
+        },
+        "state_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "assessment_context": {
+          "enum": [
+            "unassessed",
+            "practice",
+            "assessed_current",
+            "assessed_completed",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "policy_excerpt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dimension",
+          "case_specific_expectation",
+          "material_failure_conditions"
+        ],
+        "properties": {
+          "dimension": {
+            "$ref": "#/$defs/dimension"
+          },
+          "case_specific_expectation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "material_failure_conditions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        }
+      }
+    },
+    "response_a": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12000
+    },
+    "response_b": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 12000
+    },
+    "blinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_names_removed",
+        "provider_names_removed",
+        "condition_ids_removed",
+        "irrelevant_style_metadata_removed"
+      ],
+      "properties": {
+        "model_names_removed": {
+          "const": true
+        },
+        "provider_names_removed": {
+          "const": true
+        },
+        "condition_ids_removed": {
+          "const": true
+        },
+        "irrelevant_style_metadata_removed": {
+          "const": true
+        }
+      }
+    },
+    "hard_gate_results_visible": {
+      "const": false
+    },
+    "gold_claims_visible": {
+      "const": false
+    },
+    "randomization": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "assignment_id",
+            "seed",
+            "presentation_order"
+          ],
+          "properties": {
+            "assignment_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "presentation_order": {
+              "enum": [
+                "AB",
+                "BA"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "single"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "response_b": {
+            "type": "null"
+          },
+          "randomization": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "pairwise"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "response_b": {
+            "type": "string",
+            "minLength": 1
+          },
+          "randomization": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "dimension": {
+      "enum": [
+        "student_state_recognition",
+        "mistake_localization",
+        "guidance_and_scaffolding",
+        "actionability",
+        "answer_revelation_control",
+        "professor_policy_alignment",
+        "clarity_and_coherence",
+        "tone_and_respect"
+      ]
+    }
+  }
+}

@@ -37,13 +37,12 @@ the complete digital-twin system.
 | Complete | Sprint 1: instructor onboarding | Requirements, policy modeling, review UX, and release gates |
 | 2026-07-11 to 2026-07-14 | Document parsing and chunking | Normalization, provenance, content boundaries, and deterministic tests |
 | 2026-07-15 to 2026-07-16 | Retrieval and source evidence | Lexical ranking, retrieval metrics, citation relationships, and error analysis |
-| 2026-07-22 to 2026-07-25 | Evaluation protocol and data governance | Researcher-selected question, simulated users, data flow, privacy, judge calibration, rubrics, gates, and critique plan |
-| 2026-07-26 to 2026-07-31 | Grounded RAG qualification | Generator/prompt, returned-context sufficiency, claim/citation evidence, and end-to-end decision |
-| 2026-08-01 to 2026-08-10 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
-| 2026-08-11 to 2026-08-15 | Hardening and professor UAT | Threat modeling, privacy, reliability, load, backup/restore, recovery, and release decision |
-| 2026-08-16 to 2026-08-22 | Simulated-user evaluation | Calibrated LLM judging, multi-turn safe completion, synthetic-account acceptance, reliable turns, and claim boundaries |
-| 2026-08-23 to 2026-08-26 | Final evaluation and evidence freeze | Blinded comparison, bounded refinement, failure analysis, uncertainty, and frozen evidence |
-| 2026-08-27 to 2026-09-03 | Full report draft and figures | Complete argument, claim-to-evidence matrix, main plots, limitations, and professor review |
+| 2026-07-23 to 2026-07-24 | Rapid retrieval result | Prospectively frozen 59-case R0-R6 ablation with R5 versus R1 primary, exact runtime binding, one sealed run, data QA, decision, figures, and professor result package |
+| 2026-07-25 to 2026-07-28 | Confirmatory retrieval and returned-context sufficiency | Expanded private course/open-set benchmark, full retrieval-v3 ablations, complete/partial/none classification, and safe-abstention decision |
+| 2026-07-29 to 2026-07-31 | Generator and end-to-end RAG qualification | Exact generator/prompt, claim/citation evidence, selected or rollback retrieval, and frozen vertical-slice decision |
+| 2026-08-01 to 2026-08-04 | Deployable professor/student application | Authentication, authorization, persistence, private storage, conversation state, staging, and rollback |
+| 2026-08-05 to 2026-08-08 | Hardening, simulated evaluation, and evidence freeze | Privacy, reliability, recovery, calibrated judging, synthetic-account acceptance, blinded comparison, failure analysis, uncertainty, and frozen evidence |
+| 2026-08-09 to 2026-09-03 | Full report, figures, and bounded product continuation | Complete argument, claim-to-evidence matrix, main plots, limitations, professor review, demo stabilization, and only evidence-backed improvements |
 | 2026-09-04 to 2026-09-09 | Revision and presentation preparation | Resolve review, stabilize demo, prepare slides, rehearse timing, and practice failure recovery |
 | 2026-09-10 to 2026-09-12 | Contingency buffer | Correct blocking defects, package the submission, and protect frozen claims from late scope growth |
 | 2026-09-13 | Final presentation and submission | Deliver the report, deployed demonstration, presentation, and reproducibility package |
@@ -69,6 +68,9 @@ produce an inspectable, evaluated vertical slice.
   size and overlap decisions.
 - Implement an inspectable lexical or BM25-style retrieval baseline before an
   embedding retriever.
+- For retrieval-v3, retain fixed-window and heading-aware BM25 controls; test
+  Qwen3 dense, hybrid RRF, deterministic contextual metadata, Qwen3 reranking,
+  and one bounded decomposition round under the frozen candidate contract.
 - Build a versioned evaluation set with at least 20 questions across direct
   grounding, misconception, integrity-boundary, ambiguous, and no-evidence
   cases.
@@ -77,6 +79,9 @@ produce an inspectable, evaluated vertical slice.
   evidence diagnostic rather than a complete RAG score.
 - Record failed queries and explain whether the source, chunking, query, or
   ranking caused each failure.
+- Keep NotebookLM outside internal Recall@K and nDCG comparisons because its
+  candidate ranking is hidden; report it only as a dated black-box end-to-end
+  product reference when permission and independent-state caveats are recorded.
 
 ### Generation and policy enforcement
 
@@ -91,6 +96,9 @@ produce an inspectable, evaluated vertical slice.
 
 ### Demonstration and evidence
 
+- Validate the exact judge, simulator, run-record, and analysis freeze with
+  `npm run verify:evaluation-instruments` before provider calls or sealed
+  inspection.
 - Demonstrate a normal conceptual question, a misconception, a graded-work
   request, and a no-evidence question.
 - Compare the configured grounded tutor with a generic or non-grounded baseline.

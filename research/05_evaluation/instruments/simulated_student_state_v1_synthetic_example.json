@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "simulated-student-v1",
+  "state_card_id": "state-synthetic-csrf-001",
+  "dataset_version": "course-tutor-dialogue-v1.0.0-example",
+  "split": "example",
+  "scenario_type": "misconception",
+  "course_id": "synthetic-web-security",
+  "data_boundary": "synthetic_public",
+  "initial_state_id": "s0-cookie-confusion",
+  "max_tutor_turns": 3,
+  "states": [
+    {
+      "state_id": "s0-cookie-confusion",
+      "goal": "Understand why a forged request can carry an authenticated cookie.",
+      "knowledge_ids": [
+        "knows-cookie-identifies-session"
+      ],
+      "unknown_knowledge_ids": [
+        "browser-auto-attachment",
+        "attacker-induced-request"
+      ],
+      "misconception_ids": [
+        "cookie-only-on-user-click"
+      ],
+      "attempt_status": "not_applicable",
+      "pressure_level": 0,
+      "terminal": false
+    },
+    {
+      "state_id": "s1-partial-mechanism",
+      "goal": "Check whether the browser and attacker have different roles.",
+      "knowledge_ids": [
+        "knows-cookie-identifies-session",
+        "browser-auto-attachment"
+      ],
+      "unknown_knowledge_ids": [
+        "attacker-induced-request"
+      ],
+      "misconception_ids": [],
+      "attempt_status": "not_applicable",
+      "pressure_level": 0,
+      "terminal": false
+    },
+    {
+      "state_id": "s2-mechanism-understood",
+      "goal": "End after stating the distinction.",
+      "knowledge_ids": [
+        "knows-cookie-identifies-session",
+        "browser-auto-attachment",
+        "attacker-induced-request"
+      ],
+      "unknown_knowledge_ids": [],
+      "misconception_ids": [],
+      "attempt_status": "not_applicable",
+      "pressure_level": 0,
+      "terminal": true
+    }
+  ],
+  "transitions": [
+    {
+      "transition_id": "tr-s0-scaffold-s1",
+      "from_state_id": "s0-cookie-confusion",
+      "observed_event": "scaffold",
+      "to_state_id": "s1-partial-mechanism",
+      "student_act": "state_reasoning",
+      "response_constraints": {
+        "required_intents": [
+          "State that the browser adds the cookie automatically.",
+          "Ask whether the attacker controls the request trigger."
+        ],
+        "prohibited_content_ids": [
+          "csrf-defense-answer"
+        ],
+        "max_words": 35
+      },
+      "stop": false
+    },
+    {
+      "transition_id": "tr-s0-failure-s0",
+      "from_state_id": "s0-cookie-confusion",
+      "observed_event": "operational_failure",
+      "to_state_id": "s0-cookie-confusion",
+      "student_act": "report_failure",
+      "response_constraints": {
+        "required_intents": [
+          "Briefly ask whether the tutor can try again."
+        ],
+        "prohibited_content_ids": [
+          "browser-auto-attachment",
+          "attacker-induced-request"
+        ],
+        "max_words": 20
+      },
+      "stop": false
+    },
+    {
+      "transition_id": "tr-s1-answer-s2",
+      "from_state_id": "s1-partial-mechanism",
+      "observed_event": "answer",
+      "to_state_id": "s2-mechanism-understood",
+      "student_act": "acknowledge",
+      "response_constraints": {
+        "required_intents": [
+          "State that the attacker causes the request while the browser adds the cookie.",
+          "Acknowledge that the distinction resolves the question."
+        ],
+        "prohibited_content_ids": [
+          "csrf-defense-answer"
+        ],
+        "max_words": 35
+      },
+      "stop": true
+    }
+  ],
+  "checkpoints": [
+    {
+      "after_tutor_turn": 1,
+      "state_id": "s0-cookie-confusion",
+      "expected_tutor_actions": [
+        "answer",
+        "scaffold"
+      ],
+      "required_pedagogy_dimensions": [
+        "mistake_localization",
+        "guidance_and_scaffolding"
+      ],
+      "hard_gate_focus": [
+        "high_severity_factual_support"
+      ],
+      "terminal_expected": false
+    },
+    {
+      "after_tutor_turn": 2,
+      "state_id": "s1-partial-mechanism",
+      "expected_tutor_actions": [
+        "answer",
+        "scaffold"
+      ],
+      "required_pedagogy_dimensions": [
+        "clarity_and_coherence",
+        "actionability"
+      ],
+      "hard_gate_focus": [
+        "citation_identity"
+      ],
+      "terminal_expected": true
+    }
+  ],
+  "invalidity_rules": [
+    "unknown_knowledge_revealed",
+    "prohibited_content_revealed",
+    "undeclared_state_change",
+    "unmapped_transition",
+    "non_unique_transition",
+    "word_limit_exceeded",
+    "wrong_state_or_transition_id",
+    "invalid_stop_behavior",
+    "malformed_output"
+  ]
+}

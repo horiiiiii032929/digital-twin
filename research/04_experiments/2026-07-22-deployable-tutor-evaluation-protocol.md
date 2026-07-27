@@ -2,9 +2,10 @@
 
 Date: 2026-07-22
 
-Status: internally selected protocol candidate v1.3; issue #11 must freeze exact
-instruments before provider calls or held-out inspection. Course-specific
-processing remains local.
+Status: internally selected protocol v1.4; issue #11 instrument contracts are
+frozen and validated. Exact runtime model bindings remain required before
+provider calls or held-out inspection. Course-specific processing remains
+local.
 
 ## Decision
 
@@ -177,6 +178,10 @@ The output record adds the exact retrieved chunks and scores, context presented
 to the model, human context-sufficiency label (`complete`, `partial`, or
 `none`), answer, atomic answer claims, citations, policy action, tokens,
 latency, cost, errors, and failure category.
+
+The exact judge, simulator, run-output, and analysis contracts are frozen under
+[`research/05_evaluation/instruments/`](../05_evaluation/instruments/). Validate
+them with `npm run verify:evaluation-instruments`.
 
 ### Layer C: simulated dialogue and deployed synthetic-account evidence
 

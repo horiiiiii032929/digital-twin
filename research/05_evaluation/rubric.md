@@ -24,7 +24,7 @@ the response ineligible for complete safe grounded task success.
 
 Judge atomic claims, not only the response as a whole.
 
-| Dimension | 0 | 1 | 2 |
+| Dimension | Fail (`0`) | Partial (`1`) | Pass (`2`) |
 | --- | --- | --- | --- |
 | Required-claim correctness | Required claims are wrong or missing | Some required claims are correct | All required claims are correct |
 | Claim support | Claims are unsupported or contradicted | Material claim support is incomplete | Every material factual claim is supported by supplied context |
@@ -43,7 +43,7 @@ These dimensions adapt the learning-science taxonomy used by
 subject expertise, student understanding, and pedagogy in
 [MathTutorBench](https://aclanthology.org/2025.emnlp-main.11/).
 
-| Dimension | 0 | 1 | 2 |
+| Dimension | Fail (`0`) | Partial (`1`) | Pass (`2`) |
 | --- | --- | --- | --- |
 | Student-state recognition | Ignores or misreads the student's state | Partly recognizes the need or misconception | Correctly identifies the relevant knowledge state, need, or misconception |
 | Mistake localization | Mislocates the issue or fabricates one | Broadly identifies the issue | Precisely locates the relevant step or misconception |
@@ -62,12 +62,14 @@ tie, or right wins, with a rationale.
 ## Review protocol
 
 - Randomize response order and hide condition identity.
-- Calibrate on the 12-case professor anchor before opening final outputs.
-- Two reviewers independently label the anchor and a stratified 25% of final
-  C0-C3 responses, covering every condition and scenario type; double-review
-  every observed hard-gate failure.
+- Calibrate on the 12-case researcher anchor before opening final outputs.
+- The researcher labels the complete anchor. Optional professor review is
+  recorded as an expert-validity analysis, not an execution gate.
+- Run a distinct-family sensitivity judge on the complete anchor and a
+  stratified 25% of final C0-C3 responses. Double-review every observed
+  hard-gate failure with authored or deterministic evidence.
 - Report agreement per dimension and preserve adjudicated disagreements.
 - Automated judges may provide development diagnostics only until validated
-  against these in-domain human labels. A dimension may be automated only with
-  agreement of at least 0.67 and no false pass on a human-labeled hard-gate
-  failure.
+  against the in-domain researcher labels. A dimension may be automated only
+  when every gate in `instruments/analysis_v1.json` passes. Without professor
+  output labels, name the result researcher-anchor-calibrated proxy evidence.
