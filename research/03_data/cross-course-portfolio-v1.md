@@ -2,13 +2,22 @@
 
 Decision date: 2026-07-27
 
-Status: selected inventory boundary; benchmark questions and sealed split are
-not yet frozen
+Status: superseded partial-source inventory; retained for traceability
+
+Superseded by:
+[`cross-course-portfolio-v2.md`](cross-course-portfolio-v2.md)
+
+This inventory was valid for the partial copy found at
+`Downloads/academia_vault`, but that copy was not the canonical collection. On
+2026-07-27 the source holder confirmed `Documents/academia_vault` as the exact
+source. The canonical collection contains nine course folders and materially
+more teaching material. Do not use v1 to author the cross-course benchmark or
+make a portfolio-selection claim.
 
 Machine-readable inventory:
 [`cross_course_portfolio_v1.manifest.json`](../05_evaluation/cross_course_portfolio_v1.manifest.json)
 
-## Decision
+## Historical decision
 
 Keep all four courses in `academia_vault/semester_1`:
 
