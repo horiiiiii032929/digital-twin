@@ -4,8 +4,8 @@ Decision date: 2026-07-27
 
 Decision owner: project researcher and source holder
 
-Status: approved for inventory and research evaluation; source location must be
-reconnected before the cross-course portfolio can be frozen
+Status: approved for inventory and research evaluation; source location
+confirmed and cross-course portfolio inventory selected
 
 ## Approved collection
 
@@ -54,18 +54,16 @@ Every student-facing release still requires:
 
 ## Access state
 
-The repository records the prior source reference as
-`academia_vault/semester_1/IT5002_computer_architesture/lecture`. On
-2026-07-27, no directory named `academics` or `academia_vault` was discoverable
-in the local home directory, mounted volumes, mounted Google Drive, or connected
-Google Drive search. Only the ignored local IT5002 snapshot under
-`data/raw/course_materials/` is currently accessible.
+The collection is available locally at
+`/Users/hikaru/Downloads/academia_vault`. Durable records use relative source
+paths beginning with `academia_vault/` and never require that workstation path.
+The existing ignored IT5002 snapshot remains under
+`data/raw/course_materials/`.
 
 Therefore:
 
 - permission is resolved;
-- IT5002 remains accessible as pilot material;
-- the four-course inventory cannot be completed until the collection is mounted
-  or its current path is supplied; and
-- no course-selection or corpus-diversity claim is made from filenames that
-  were not inspected.
+- all four semester-one course folders were inventoried;
+- the 17-PDF lecture-only primary corpus is recorded in
+  `research/05_evaluation/cross_course_portfolio_v1.manifest.json`; and
+- source files remain outside Git.

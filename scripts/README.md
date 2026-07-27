@@ -37,6 +37,13 @@ Current utilities:
 - `validate_component_profile.py`: validates the complete component inventory,
   selection status, evidence paths, and linked evaluation decisions; run it
   with `npm run verify:profile`.
+- `validate_cross_course_portfolio.py`: validates the four-course, 17-document
+  sanitized portfolio manifest, aggregate counts, selectable-text requirement,
+  and duplicate hashes. Pass
+  `--source-root /Users/hikaru/Downloads/academia_vault` for optional local
+  source/hash verification; the source files remain outside Git. It runs
+  without private sources in CI through
+  `npm run verify:cross-course-portfolio`.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

@@ -1,0 +1,211 @@
+{
+  "portfolio_id": "cross-course-portfolio-v1",
+  "version": "1.0.0",
+  "snapshot_date": "2026-07-27",
+  "status": "selected_inventory_boundary",
+  "source_root": "academia_vault/semester_1",
+  "permission_record": "research/03_data/academics-source-permission.md",
+  "primary_corpus_rule": "PDF files directly under each selected course lecture directory",
+  "secondary_authoring_rule": "Course notes may support benchmark authoring but are not indexed evidence or gold evidence",
+  "exclusions": [
+    "assignments",
+    "solutions and answer keys",
+    "tutorial answers",
+    "projects and submissions",
+    "labs and practice answers",
+    "midterm and final materials",
+    "student data",
+    "credentials and secrets",
+    "empty files",
+    "Obsidian configuration"
+  ],
+  "summary": {
+    "course_count": 4,
+    "document_count": 17,
+    "page_count": 822,
+    "pdftotext_character_count": 307539,
+    "byte_count": 38292113,
+    "exact_duplicate_primary_documents": 0
+  },
+  "courses": [
+    {
+      "course_id": "IT5001",
+      "course_label": "Software Fundamentals",
+      "relative_root": "semester_1/IT5001_software_fundamental/lecture",
+      "document_count": 2,
+      "page_count": 116,
+      "pdftotext_character_count": 17271,
+      "byte_count": 6329058,
+      "documents": [
+        {
+          "filename": "1_introduction.pdf",
+          "sha256": "eaf5b68ee7b3632201d863a86a3956a909ad6695fe8a225949df5c655e30ff62",
+          "pages": 89,
+          "pdftotext_characters": 13427,
+          "bytes": 5600071
+        },
+        {
+          "filename": "3_recursion_vs_iteration.pdf",
+          "sha256": "152f8fa253344a35fd90731841bac978252f988645a319671410d13ba03142c1",
+          "pages": 27,
+          "pdftotext_characters": 3844,
+          "bytes": 728987
+        }
+      ]
+    },
+    {
+      "course_id": "IT5002",
+      "course_label": "Computer Systems and Applications",
+      "relative_root": "semester_1/IT5002_computer_architesture/lecture",
+      "document_count": 9,
+      "page_count": 419,
+      "pdftotext_character_count": 145930,
+      "byte_count": 12597549,
+      "documents": [
+        {
+          "filename": "1_introduction.pdf",
+          "sha256": "cf667b2389166a05d2e48e722841d591152b53273871bb6d6892c46d3f9f1688",
+          "pages": 17,
+          "pdftotext_characters": 4903,
+          "bytes": 1481498
+        },
+        {
+          "filename": "2_number_systems.pdf",
+          "sha256": "f0fe69de99e6139afa0c8ce540c80435616d2e939f6df4f4d1e2355762d843a8",
+          "pages": 51,
+          "pdftotext_characters": 18305,
+          "bytes": 572350
+        },
+        {
+          "filename": "3_MIPS_1.pdf",
+          "sha256": "c347650e0c736e766e247ee3bb8c044def9d3681d54b63d92090e315b1de29d2",
+          "pages": 49,
+          "pdftotext_characters": 18779,
+          "bytes": 986333
+        },
+        {
+          "filename": "4_MIPS_2.pdf",
+          "sha256": "66c15d675ba15d9e5e8e78247797a1b280c47204735ab40cdbb3fa7f6e4477de",
+          "pages": 43,
+          "pdftotext_characters": 14468,
+          "bytes": 717613
+        },
+        {
+          "filename": "5_MIPS_format.pdf",
+          "sha256": "02443efa0a3d80169094e5e22b769a905876286eb4961835c42ce79eb9856fe5",
+          "pages": 44,
+          "pdftotext_characters": 14928,
+          "bytes": 781747
+        },
+        {
+          "filename": "6_datapath_design.pdf",
+          "sha256": "0b29307569785d84db97ba3701e2c94a05975b8b322781f9d1721d610c29371f",
+          "pages": 43,
+          "pdftotext_characters": 18803,
+          "bytes": 1061571
+        },
+        {
+          "filename": "7_control.pdf",
+          "sha256": "b8e7e57ce322f8b69ef909fe4ac730e1c27eda1cd4d1748af37a8c8c62eaaf17",
+          "pages": 48,
+          "pdftotext_characters": 13950,
+          "bytes": 986891
+        },
+        {
+          "filename": "8_datapath.pdf",
+          "sha256": "c592b008a58068ca17cb9a2088744992e682a28b50c6b8e6e7339bbbc57130d9",
+          "pages": 40,
+          "pdftotext_characters": 13717,
+          "bytes": 2705420
+        },
+        {
+          "filename": "9_caches.pdf",
+          "sha256": "ca1f75f8be19c72681b5bb4b021867e999eb44ec632460339de099ef562489a1",
+          "pages": 84,
+          "pdftotext_characters": 28077,
+          "bytes": 3304126
+        }
+      ]
+    },
+    {
+      "course_id": "IT5004",
+      "course_label": "Enterprise Systems",
+      "relative_root": "semester_1/IT5004_enterprise_system/lecture",
+      "document_count": 2,
+      "page_count": 109,
+      "pdftotext_character_count": 38696,
+      "byte_count": 5445643,
+      "documents": [
+        {
+          "filename": "4_requirements_analysis.pdf",
+          "sha256": "44f527adb008f1e40b9ede30c4f9ae1c5ae2da9619f70c35e7afd057ef6d8543",
+          "pages": 71,
+          "pdftotext_characters": 26027,
+          "bytes": 4835085
+        },
+        {
+          "filename": "5_introduction_to_enterprise_system.pdf",
+          "sha256": "a61a81c0c5e0017e7dd974dd09b29a29c5320ea6fc36f4a1ceae2619e3843418",
+          "pages": 38,
+          "pdftotext_characters": 12669,
+          "bytes": 610558
+        }
+      ]
+    },
+    {
+      "course_id": "IT5008",
+      "course_label": "Database Design",
+      "relative_root": "semester_1/IT5008_database_design/lecture",
+      "document_count": 4,
+      "page_count": 178,
+      "pdftotext_character_count": 105642,
+      "byte_count": 13919863,
+      "documents": [
+        {
+          "filename": "1_creating_and_populating_tables.pdf",
+          "sha256": "3b3332ea098d20cafe9b92e9270bd5dfed72398db3316030bca8a4de98d0950a",
+          "pages": 48,
+          "pdftotext_characters": 27936,
+          "bytes": 4800672
+        },
+        {
+          "filename": "2_simple_queries.pdf",
+          "sha256": "2d5b0dab8dc6cbaa47ff971c5fa6d719e5231c2490d9b0516c29a2a2668a6c5b",
+          "pages": 37,
+          "pdftotext_characters": 18423,
+          "bytes": 3012815
+        },
+        {
+          "filename": "3_aggregate_queries.pdf",
+          "sha256": "24c2e554ef62c242f5e760b0a6a9e6ad5182e8efd6466cbe01bf09767770e316",
+          "pages": 43,
+          "pdftotext_characters": 25333,
+          "bytes": 2843328
+        },
+        {
+          "filename": "7_programming.pdf",
+          "sha256": "48da9f8b3ceb1644d60c29a84b9a3caa77d0e5739bdb39ac55db3836fbe33ff9",
+          "pages": 50,
+          "pdftotext_characters": 33950,
+          "bytes": 3263048
+        }
+      ]
+    }
+  ],
+  "overlap_audit": {
+    "method": "bag-of-words cosine over aggregated lecture and note text; descriptive inventory diagnostic only",
+    "course_pair_cosine": {
+      "IT5001__IT5002": 0.107,
+      "IT5001__IT5004": 0.066,
+      "IT5001__IT5008": 0.114,
+      "IT5002__IT5004": 0.092,
+      "IT5002__IT5008": 0.085,
+      "IT5004__IT5008": 0.132
+    },
+    "it5002_matching_note_lecture_cosine_range": [
+      0.538,
+      0.721
+    ],
+    "decision": "index lecture PDFs only; retain notes for benchmark authoring without treating them as gold evidence"
+  }
+}
