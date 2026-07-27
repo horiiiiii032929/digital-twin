@@ -1,5 +1,9 @@
 # Evaluation architecture
 
+Status: active evaluation contract. Component examples and profile references
+predating 2026-07-27 are historical until a successor profile is
+evidence-selected.
+
 ## Purpose
 
 The Digital Twin is an experimental product: parsers, chunkers, retrieval

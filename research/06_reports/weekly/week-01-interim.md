@@ -25,7 +25,7 @@ issues, experiment plans, or decision records.
 
 Historical note: this was the original Week 01 plan. It was superseded by the
 2026-07-22 deployable-pilot rescope and is retained as decision history. Use
-`research/00_admin/2026-07-22-deployable-pilot-rescope.md` and the live GitHub
+`research/00_admin/archive/2026-07-22-deployable-pilot-rescope.md` and the live GitHub
 Project for current dates.
 
 | Period | Project Focus | GitHub Project Items | Target Evidence |

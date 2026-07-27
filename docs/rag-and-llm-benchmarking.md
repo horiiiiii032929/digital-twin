@@ -1,5 +1,9 @@
 # RAG and LLM application benchmarking
 
+Status: active measurement reference. Issue numbers, provider constraints, and
+one-course schedules recorded before 2026-07-27 are historical; the active
+M0-M3 cross-course decision is defined in issue #7 and the authoritative scope.
+
 The dated literature synthesis in
 [Evaluating grounded AI tutoring systems](../research/01_literature/2026-07-15-rag-tutoring-evaluation-practices.md)
 records the supporting sources, statistical cautions, and current implications

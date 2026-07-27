@@ -29,7 +29,7 @@ The project's technical standard, learning commitments, and strengthened Sprint
 .
 ├── .github/                # GitHub issue and PR templates linked to the project
 ├── data/                   # Local research data buckets, ignored by default
-├── docs/                   # Architecture, agent contracts, and project notes
+├── docs/                   # Active architecture/guides plus historical archive
 ├── experiments/            # Experiment configs and local run outputs
 ├── models/                 # Local model artifacts, ignored by default
 ├── notebooks/              # Exploratory notebooks
