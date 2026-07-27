@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -7,6 +8,7 @@ import pytest
 from services.embeddings import JinaTextEmbedder
 from services.jina_api import JinaBudgetExceeded, JinaUsageLedger
 from services.reranking import JinaReranker
+from scripts.run_it5002_hosted_retrieval_preflight import load_api_key
 
 
 def test_jina_embedder_uses_separate_passage_and_query_tasks() -> None:
@@ -97,3 +99,14 @@ def test_jina_budget_is_enforced_before_transport() -> None:
         embedder.embed_query("a query that exceeds the declared budget")
 
     assert called is False
+
+
+def test_hosted_runner_loads_key_from_ignored_env_file(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("JINA_API_KEY", raising=False)
+    env_path = tmp_path / ".env"
+    env_path.write_text("JINA_API_KEY='local-secret'\n", encoding="utf-8")
+
+    assert load_api_key(env_path) == "local-secret"

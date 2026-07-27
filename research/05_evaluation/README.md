@@ -119,8 +119,8 @@ Estimate the provider payload without a credential or network call:
 npm run preflight:retrieval-hosted
 ```
 
-After configuring `JINA_API_KEY` locally, the explicitly acknowledged
-development run is:
+After copying `.env.example` to the ignored `.env` file and configuring
+`JINA_API_KEY` locally, the explicitly acknowledged development run is:
 
 ```bash
 npm run benchmark:retrieval-hosted-development

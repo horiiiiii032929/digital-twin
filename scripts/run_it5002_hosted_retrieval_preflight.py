@@ -81,7 +81,7 @@ def main() -> None:
         raise ValueError(
             "--allow-external-provider is required for a potentially billable call"
         )
-    api_key = os.environ.get("JINA_API_KEY", "")
+    api_key = load_api_key()
     if not api_key:
         raise ValueError("JINA_API_KEY is not configured in the environment")
 
@@ -115,6 +115,22 @@ def main() -> None:
             indent=2,
         )
     )
+
+
+def load_api_key(env_path: Path = ROOT / ".env") -> str:
+    configured = os.environ.get("JINA_API_KEY", "").strip()
+    if configured:
+        return configured
+    if not env_path.is_file():
+        return ""
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        if name.strip() == "JINA_API_KEY":
+            return value.strip().strip("\"'")
+    return ""
 
 
 def require_permission(manifest: dict[str, Any]) -> None:
