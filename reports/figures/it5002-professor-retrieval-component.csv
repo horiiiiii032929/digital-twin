@@ -1,0 +1,7 @@
+condition,method,complete_successes,answerable_cases,complete_evidence_rate,correct_abstentions,no_evidence_cases,no_evidence_accuracy,p95_latency_seconds,latency_gate_seconds,scope
+R0,R0  Fixed-window BM25,3,13,0.23076923076923078,13,13,1.0,0.07496995899418835,5.0,development-only
+R1,R1  Heading-aware BM25,3,13,0.23076923076923078,13,13,1.0,0.06417974999931175,5.0,development-only
+R2,R2  Qwen3 dense,9,13,0.6923076923076923,13,13,1.0,16.73737966599583,5.0,development-only
+R3,R3  BM25 + dense RRF,9,13,0.6923076923076923,13,13,1.0,16.757299373013666,5.0,development-only
+R4,R4  Contextual hybrid,2,13,0.15384615384615385,13,13,1.0,16.754063041997142,5.0,development-only
+R5,R5  Qwen3 reranker,10,13,0.7692307692307693,13,13,1.0,64.82151783400332,5.0,development-only
