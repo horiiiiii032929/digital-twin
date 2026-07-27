@@ -1,5 +1,10 @@
 # Grounded generation and tutor-policy enforcement
 
+Status: implemented adapter and historical qualification guidance. DeepSeek was
+the fixed constraint for the earlier one-course plan; the active scope requires
+a prospective provider decision and does not select DeepSeek or another
+generator by default.
+
 ## Current decision state
 
 Issue #24 is in progress. The repository now has a deterministic grounded

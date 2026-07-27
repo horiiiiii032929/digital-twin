@@ -4,7 +4,8 @@ Date: 2026-07-27
 
 Status: authoritative project and delivery baseline
 
-Supersedes: `2026-07-22-deployable-pilot-rescope.md`
+Supersedes:
+[`archive/2026-07-22-deployable-pilot-rescope.md`](archive/2026-07-22-deployable-pilot-rescope.md)
 
 ## Product thesis
 

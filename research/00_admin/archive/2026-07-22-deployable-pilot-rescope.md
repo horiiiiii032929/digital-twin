@@ -203,7 +203,7 @@ critique that changes validity must be recorded before the final claim.
 
 Evaluator data classes, trust boundaries, role separation, threats, and stop
 conditions are frozen in the
-[evaluation data-flow and threat model](../../docs/evaluation-data-flow-and-threat-model.md).
+[evaluation data-flow and threat model](../../../docs/evaluation-data-flow-and-threat-model.md).
 
 ## Stop and fallback rules
 

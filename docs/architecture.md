@@ -1,167 +1,207 @@
-# Architecture Notes
+# Digital Twin architecture
 
-## Pillars
+Status: active target architecture
 
-### Identity and Knowledge Ingestion
+Scope authority:
+[`2026-07-27-frontier-digital-twin-scope.md`](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md)
 
-- Collect instructor-approved course materials.
-- Normalize transcripts, slides, forum replies, assignments, rubrics, and FAQs.
-- Track source metadata, permissions, and retrieval quality.
-- Build a baseline RAG pipeline before adding specialized agent behavior.
-- The onboarding flow deliberately remains metadata-only. The grounding layer
-  separately parses approved local sources and preserves their permission and
-  version lineage.
+## Architectural objective
 
-### Pedagogical Alignment Agent
+The system is a multi-course pedagogical Digital Twin, not a RAG endpoint. It
+must preserve five independently testable concerns:
 
-- Define the instructor's tutoring policy and boundaries.
-- Capture tone, preferred analogies, refusal behavior, and assessment style.
-- Use examples to calibrate how direct or Socratic the agent should be.
-- Evaluate responses against instructor rubrics.
-- Implemented onboarding coverage includes tutor policy generation, preview
-  evidence, professor feedback revisions, and release blockers.
+1. professor identity and teaching behaviour;
+2. governed course knowledge;
+3. pedagogical tutoring policy;
+4. student interaction state; and
+5. evaluation and professor publication control.
 
-### Student Interface and Instructor Dashboard
+Provider-specific code stays outside the domain. Every decision-bearing
+component remains replaceable through a stable interface and a versioned
+profile.
 
-- Provide student-facing tutoring flows.
-- Capture anonymized interaction summaries where allowed.
-- Surface recurring knowledge gaps to instructors.
-- Keep instructor review and override workflows explicit.
-- Deliver authenticated professor/student workflows, durable state, private
-  storage, and staging deployment for the controlled pilot.
-- Proactive interaction and full learning-gap analytics are deferred until the
-  grounded deployed pilot is evaluated.
-
-## Agent Contracts
-
-The implementation-facing AI agent scaffolds live in
-[agents/README.md](agents/README.md). They split the product into smaller,
-testable contracts:
-
-- Onboarding Orchestrator Agent
-- Source Governance Agent
-- Tutor Policy Agent
-- Preview Evidence Agent
-- Revision Review Agent
-- Student Tutoring Agent
-- Learning Gap Analytics Agent
-
-Sprint 1 implements the first five through deterministic workflow code. The
-student and analytics agents remain planned.
-
-## Active grounding work
-
-Sprint 2 is proving one provider-backed path without coupling the architecture
-to an LMS. The refactor establishes these stable layers first:
+## System context
 
 ```text
-apps/web                          professor review frontend
-        ↓ HTTP
-services/api/app                 factory, schemas, dependencies, routes
-        ↓ commands
-src/digital_twin/onboarding      interview and professor-release domain
-src/digital_twin/tutor_policy.py canonical shared policy schema
-        ↓ future tutoring use
-src/digital_twin/grounding       provider-neutral grounding contracts
+Administrator
+  └─ invite accounts, assign courses, inspect operations
+
+Professor
+  └─ create course → govern sources → configure Digital Twin
+     → preview/evaluate → publish/withdraw/rollback
+
+Student
+  └─ join assigned course → ask question → receive cited tutoring,
+     clarification, refusal, or no-evidence response
 ```
 
-The grounding contract sequence is:
+The final project runs locally and is packaged for later hosting. Public signup,
+institutional SSO, LMS coupling, and public hosting are not required.
+
+## Runtime boundaries
 
 ```text
-CourseDocument → DocumentChunker → DocumentChunk → Retriever → RetrievalHit
-                                                               ↓
-TutorPolicy ───────────────────────────────→ TutorGenerator → TutorAnswer
-                                                             ├─ citations
-                                                             ├─ warnings
-                                                             └─ usage trace
+apps/web
+  professor, student, and administrator journeys
+        │ HTTP
+        ▼
+services/api
+  authentication/session boundary, request schemas, orchestration adapters
+        │ commands and queries
+        ▼
+src/digital_twin
+  ├─ identity/course membership
+  ├─ onboarding and professor policy
+  ├─ source governance and grounding
+  ├─ tutoring conversation state
+  ├─ evaluation and publication
+  └─ audit/recovery contracts
+        │ provider interfaces
+        ▼
+services/
+  embeddings, reranking, generation, persistence, and storage adapters
 ```
 
-`SourceArtifact` and `ApprovalRecord` now gate local parsing. `CourseDocument`
-carries the approved source version, permission snapshot, content hash, ordered
-segments, and an opaque source locator. Chunks preserve this lineage in explicit
-fields and metadata. Deterministic term-overlap and BM25 retrieval filter
-non-tutoring and superseded chunks before returning scored source evidence. The
-generation path filters evidence permissions again, applies deterministic
-policy rules before any provider call, builds a versioned prompt, parses a
-structured answer, validates citations against retrieved hits, and records
-latency, tokens, and approximate cost. See
-[local-ingestion.md](local-ingestion.md) for parsing and chunking,
-[local-retrieval.md](local-retrieval.md) for ranking, and
-[live-generation.md](live-generation.md) for the generation control and live
-adapter boundary.
+Only the onboarding, grounding, generation, and experimental evaluation portions
+exist today. Identity, course membership, durable conversation state,
+publication persistence, and operational adapters remain F3 work. The current
+in-memory FastAPI/Vite prototype must not be described as the final
+architecture.
 
-Cross-cutting implementation selection is separate from these runtime
-contracts. The [evaluation architecture](evaluation-architecture.md) defines
-shared candidate records and the complete versioned system profile, while the
-[component inventory](component-inventory.md) shows which boundaries are
-selected, pending, or disabled. This preserves typed domain interfaces while
-making algorithms, models, prompts, and policies measurable and replaceable.
+## Core domain model
 
-Synthetic chunker, retriever, and generator implementations live under
-`tests/fixtures/` and make the contracts executable without network calls.
+### Account and tenancy
 
-### Sprint 2 implementation boundary
+- `Account`: invite-only administrator, professor, or student identity.
+- `Course`: professor-owned isolation boundary.
+- `Membership`: explicit account-to-course role.
 
-The provider-neutral contracts, local ingestion baseline, evaluated BM25
-retrieval baseline, harder BM25/dense/RRF comparison, deterministic generation
-preflight, system-wide component profile, durable result registry, and a
-swappable evidence-sufficiency boundary are implemented. Retrieval v2 and
-evidence-sufficiency v1 both produced `Refine` decisions with no replacement,
-so BM25 v1 with explicit any-hit behavior remains only the provisional
-rollback/control path. A LiteLLM adapter and local Ollama benchmark mode exist,
-but neither is wired to an API route or selected provider model. The first
-Gemma 3 4B exploratory run passed structure and policy checks but found three
-support failures in 18 model answers under a post-run diagnostic rubric; it
-therefore selected nothing.
-The following remain separate execution sub-issues under roadmap issue #7:
+### Source governance
 
-- Prospective fixed-DeepSeek and prompt qualification completing #24
-- Open-set answerability/evidence-verifier comparison in #43
-- Untouched end-to-end grounded-tutoring evaluation in #25
+- `SourceArtifact`: original approved source and sensitivity/permission state.
+- `SourceVersion`: immutable content hash, parser revision, inclusion state,
+  and rollback link.
+- `CourseDocument` and `DocumentChunk`: normalized content with course,
+  source-version, locator, and tutoring-permission lineage.
 
-The DeepSeek API is the primary generator product constraint, with synthetic
-evaluation only and a cumulative USD 10 #24 cap, but its exact configuration
-and prompt selection remain pending. Production embedding selection, Canvas,
-persistence, and live evaluation remain pending. Local BGE-small embeddings have been
-benchmarked for ranking and semantic evidence agreement but were not selected.
-The current any-hit control must not feed an end-to-end grounding claim. Canvas
-can be added later as an optional source adapter if a safe guest course contains
-useful material.
+Solution files, answer keys, student submissions, student data, credentials,
+and secrets never enter the tutoring corpus.
 
-### Deployable-system planning boundary
+### Professor Digital Twin
 
-The 2026-07-23 evaluation rescope makes a real staging deployment, calibrated
-LLM judging, simulated-student stress testing, and scripted synthetic-account
-acceptance part of the final outcome. The current FastAPI/Vite and in-memory
-onboarding stack is not deployable as-is. Before implementation resumes, #11
-must freeze the alternatives, metrics, privacy rules, and hard gates for:
+- `ProfessorProfile`: teaching approach, tone, examples, and tutoring moves.
+- `TutorPolicy`: boundaries, integrity behaviour, directness, scaffolding, and
+  safe actions.
+- `DigitalTwinDraft`: course sources, profile, policy, component profile, and
+  evaluation suite under review.
+- `DigitalTwinRelease`: immutable professor-approved publication with rollback.
 
-- invited-user authentication and session revocation;
-- professor/student roles and course membership;
-- transactional persistence and private source storage;
-- persistent conversation state and duplicate/stale response handling;
-- provider data processing, course permission, retention, deletion, and log
-  redaction;
-- staging/production separation, TLS, secrets, health checks, rate limits,
-  backup/restore, rollback, monitoring, and incident response; and
-- professor anchor/release review, evaluator calibration, simulator validity,
-  and synthetic-account reliability evidence.
+### Student tutoring
 
-No hosting, identity, database, or storage vendor is selected by this rescope.
-Each is an architecture decision requiring a control, bounded candidates,
-operational evidence, failure cases, and rollback. See the
-[deployable pilot rescope](../research/00_admin/2026-07-22-deployable-pilot-rescope.md).
-The evaluator and private-course trust boundaries are detailed in the
-[evaluation data-flow and threat model](evaluation-data-flow-and-threat-model.md).
+- `Conversation` and `Turn`: course- and student-isolated persistent state.
+- `EvidenceBundle`: ranked approved chunks plus required provenance.
+- `TutorAnswer`: answer/scaffold/clarify/refuse/abstain action, citations,
+  warnings, and usage trace.
 
-## Open Design Decisions
+### Evaluation and operations
 
-- Production citation rendering and locator navigation
-- Live prompt variant selection and exact DeepSeek model/configuration freeze
-- Agent prompt boundaries and provider-failure behavior
-- Future human-use privacy and consent model
-- End-to-end answer-quality rubric and evidence-sufficiency threshold
-- Identity provider, role/course authorization model, and session lifecycle
-- Database, private object storage, migrations, retention, and deletion
-- Hosting topology, environments, monitoring, backup/restore, and rollback
-- Private-course provider approval and local evaluator fallback
+- `EvaluationSuite`, `EvaluationRun`, and `EvaluationResult`: versioned cases,
+  configuration, per-case evidence, aggregate metrics, failures, and decision.
+- `AuditEvent`: minimized, redacted lifecycle and recovery evidence.
+
+## Grounded tutoring flow
+
+```text
+question + course + release
+        │
+        ├─ authorize membership and published release
+        ├─ retrieve only approved active course chunks
+        ├─ rerank through the selected or rollback profile
+        ├─ assemble evidence with source/version/locator lineage
+        ├─ apply professor policy and academic-integrity rules
+        ├─ generate through the selected provider adapter
+        ├─ validate citations and safe action
+        └─ persist the turn, usage, warnings, and redacted audit event
+```
+
+The cross-course retrieval ladder is M0 heading-aware BM25, M1 dense, M2
+BM25+dense hybrid, and M3 hybrid plus reranking. Jina and local Qwen3 are
+provider candidates, not architectural choices or selected profiles.
+
+## Evaluation-before-publication
+
+A professor may preview a draft at any time. Publication requires:
+
+- all included sources are approved, current, and permitted for tutoring;
+- required professor-profile and tutor-policy fields are approved;
+- deterministic privacy, permission, citation, and integrity gates pass;
+- the frozen preview/evaluation suite has no unresolved release blocker;
+- the component profile is selected or explicitly uses a documented rollback;
+- the professor explicitly approves the immutable release.
+
+Updating sources, policy, prompts, models, or retrieval configuration creates a
+new draft. It never mutates a published release silently.
+
+## Trust and privacy boundaries
+
+- Browser and API input is untrusted.
+- Every read and write is scoped by account, role, course, and release.
+- Raw course content and prompts are excluded from ordinary logs.
+- External provider calls use an allowlist and record provider, model, purpose,
+  data class, cost cap, and fallback.
+- Approved course material may leave the workstation only under the active
+  provider/data decision. Excluded material never does.
+- Deterministic rules are authoritative for permission, isolation, citation
+  identity, and academic-integrity hard gates; LLM judges do not override them.
+
+See [evaluation-data-flow-and-threat-model.md](evaluation-data-flow-and-threat-model.md)
+for the current detailed research boundary. It must receive a versioned
+successor before external course-data use.
+
+## Failure and recovery design
+
+Every external or durable boundary exposes a visible failure rather than a
+fabricated answer. Required scenarios include:
+
+- unsupported or failed ingestion;
+- unavailable embedding, reranking, or generation provider;
+- insufficient or cross-course evidence;
+- stale release or duplicate turn;
+- persistence restart and migration failure;
+- withdrawal and rollback;
+- backup and restore; and
+- rate/capacity exhaustion.
+
+The local deployment package must pin configuration, isolate secrets, expose
+health checks, use redacted structured logs, and document backup/restore and
+rollback.
+
+## Repository ownership
+
+| Path | Responsibility |
+| --- | --- |
+| `src/` | Provider-neutral domain logic and interfaces |
+| `services/` | API transport and provider/infrastructure adapters |
+| `apps/` | User-facing applications |
+| `scripts/` | Reproducible evaluation, ingestion, and operational commands |
+| `tests/` | Automated tests, synthetic fixtures, and manual verification |
+| `research/` | Literature, requirements, datasets, plans, results, and decisions |
+| `docs/` | Active implementation and architecture documentation |
+| `reports/` | Durable figures, claim matrix, and final communication assets |
+
+Historical designs and superseded plans live in explicit `archive/` folders.
+They remain traceable but are never treated as current instructions.
+
+## Open decisions
+
+- target persistence and migration design;
+- invite/session implementation and credential reset;
+- local private-file storage boundary;
+- exact embedding, reranking, and generator providers;
+- conversation orchestration and idempotency;
+- evaluation release schema and rollback mechanics;
+- hosting topology after the local final project; and
+- the privacy-approved external course-data path.
+
+Each decision requires a prospective comparison or architecture record before
+selection.

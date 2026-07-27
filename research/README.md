@@ -5,7 +5,8 @@ system is designed a certain way.
 
 ## Lanes
 
-- `00_admin/`: charter, decisions, meeting notes, and planning records
+- `00_admin/`: active charter, decisions, planning records, and an explicit
+  `archive/` for superseded administrative plans
 - `01_literature/`: papers, prior art, and citation notes
 - `02_requirements/`: user research, onboarding assumptions, and workflows
 - `03_data/`: dataset descriptions, schemas, consent, and provenance
