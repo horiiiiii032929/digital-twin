@@ -11,3 +11,4 @@ explicit permission to store the data in the repository.
 | Dataset | Source | Permission | Location | Notes |
 | --- | --- | --- | --- | --- |
 | Synthetic course sample | Local | Safe to commit | TBD | Use for tests and examples |
+| Academics course collection | User course-material collection | Approved for research with mandatory exclusions | Access path pending; see permission record | [Permission and exclusions](academics-source-permission.md) |
