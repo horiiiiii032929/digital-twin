@@ -108,6 +108,28 @@ The selected full-course candidate corpus is inventoried in
 scope rationale and source hierarchy in the
 [`IT5002 corpus decision`](../00_admin/2026-07-23-it5002-full-course-corpus-decision.md).
 
+The user-authorized Jina retrieval boundary and development-only hosted
+preflight are documented in the
+[`provider-boundary decision`](../00_admin/2026-07-27-it5002-jina-provider-boundary.md)
+and
+[`preflight plan`](../04_experiments/2026-07-27-hosted-retrieval-preflight-plan.md).
+Estimate the provider payload without a credential or network call:
+
+```bash
+npm run preflight:retrieval-hosted
+```
+
+After configuring `JINA_API_KEY` locally, the explicitly acknowledged
+development run is:
+
+```bash
+npm run benchmark:retrieval-hosted-development
+```
+
+The runner enforces a USD 1 estimated-cost cap by default. It never accesses
+the retired sealed split, and the output remains ignored under
+`experiments/runs/`.
+
 Private course text, derived passages, or any accidentally encountered real
 student content must not be committed. The anchor is an
 instrument-calibration set, not a system performance result.

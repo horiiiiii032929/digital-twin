@@ -54,8 +54,10 @@ produce an inspectable, evaluated vertical slice.
 
 ### Course corpus
 
-- Use the 13 inventoried official IT5002 lecture PDFs for the local full-course
-  evaluation; keep private content local and prohibit external-provider use.
+- Use the 13 inventoried official IT5002 lecture PDFs for the full-course
+  evaluation. Keep private content local except for the explicitly authorized,
+  retrieval-only Jina provider boundary; prohibit all other external-provider
+  use until separately approved.
 - Support UTF-8 text, Markdown, and selectable-text PDF input.
 - Preserve document ID, title, source label, content hash, and a human-readable
   locator through normalization and chunking.
