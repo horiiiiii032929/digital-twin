@@ -1,4 +1,7 @@
-from src.digital_twin.grounding.chunking import HeadingParagraphChunker
+from src.digital_twin.grounding.chunking import (
+    HeadingParagraphChunker,
+    PageBoundedHeadingParagraphChunker,
+)
 from src.digital_twin.grounding.evidence_sufficiency import (
     AnyHitEvidenceGate,
     EvidenceGatedRetriever,
@@ -99,6 +102,7 @@ __all__ = [
     "GenerationTrace",
     "GenerationUsage",
     "HeadingParagraphChunker",
+    "PageBoundedHeadingParagraphChunker",
     "EmptySourceError",
     "IngestionError",
     "LocalDocumentParser",

@@ -44,6 +44,12 @@ Current utilities:
   source/hash verification; the source files remain outside Git. It runs
   without private sources in CI through
   `npm run verify:cross-course-portfolio`.
+- `audit_cross_course_ingestion.py`: compares document-wide and page-bounded
+  heading/paragraph chunking over the private active portfolio without writing
+  course text to the result artifact. Run `npm run
+  audit:cross-course-ingestion`; set `ACADEMIA_VAULT_ROOT` when the canonical
+  vault is not at `~/Documents/academia_vault`. The sanitized output is written
+  to `reports/generated/cross-course-ingestion-v1.json`.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

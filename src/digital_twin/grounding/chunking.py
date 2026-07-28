@@ -133,6 +133,64 @@ class HeadingParagraphChunker:
         return groups
 
 
+class PageBoundedHeadingParagraphChunker:
+    """Apply heading/paragraph chunking without combining separate PDF pages."""
+
+    def __init__(self, *, max_chars: int = 1200, overlap_chars: int = 160) -> None:
+        self._chunker = HeadingParagraphChunker(
+            max_chars=max_chars,
+            overlap_chars=overlap_chars,
+        )
+
+    def chunk(self, document: CourseDocument) -> list[DocumentChunk]:
+        paged_segments = [
+            segment for segment in document.segments if segment.page is not None
+        ]
+        if not paged_segments:
+            return self._chunker.chunk(document)
+        if len(paged_segments) != len(document.segments):
+            raise ValueError(
+                "page-bounded chunking requires every document segment to have "
+                "a page or none of them to have a page"
+            )
+
+        segments_by_page: dict[int, list[DocumentSegment]] = {}
+        for segment in paged_segments:
+            if segment.page is None:
+                raise AssertionError("paged segment unexpectedly has no page")
+            segments_by_page.setdefault(segment.page, []).append(segment)
+
+        chunks: list[DocumentChunk] = []
+        ordinal = 0
+        for page, segments in sorted(segments_by_page.items()):
+            page_document = document.model_copy(
+                update={
+                    "text": "\n\n".join(segment.text for segment in segments),
+                    "segments": segments,
+                    "locator": f"page {page}",
+                }
+            )
+            for provisional in self._chunker.chunk(page_document):
+                content_hash = provisional.content_hash or hashlib.sha256(
+                    provisional.text.encode("utf-8")
+                ).hexdigest()
+                chunks.append(
+                    provisional.model_copy(
+                        update={
+                            "id": _chunk_id(
+                                document.id,
+                                ordinal,
+                                provisional.locator or f"page {page}",
+                                content_hash,
+                            ),
+                            "ordinal": ordinal,
+                        }
+                    )
+                )
+                ordinal += 1
+        return chunks
+
+
 def _group_locator(group: list[DocumentSegment]) -> str:
     first = group[0].locator
     last = group[-1].locator
