@@ -28,7 +28,7 @@ No private course text is included in this status document.
 
 This is not yet research-grade evaluation data:
 
-- 10/100 cases are researcher verified;
+- 15/100 cases are researcher verified;
 - 0/100 cases are independently second reviewed;
 - difficulty labels are 70 direct, 2 paraphrase, 3 multi-step, and 25 boundary;
 - no-evidence labels still require whole-corpus researcher searches; and
