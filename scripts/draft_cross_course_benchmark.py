@@ -658,6 +658,12 @@ def write_review(path: Path, dataset: dict[str, Any]) -> None:
         "",
     ]
     for case in dataset["cases"]:
+        review_status = case["review"]["status"]
+        accept_mark = "x" if review_status in {
+            "researcher_verified",
+            "second_reviewed",
+        } else " "
+        reject_mark = "x" if review_status == "rejected" else " "
         lines.extend(
             [
                 f"## {case['case_id']}",
@@ -682,8 +688,11 @@ def write_review(path: Path, dataset: dict[str, Any]) -> None:
             )
         lines.extend(
             [
-                "- Researcher decision: [ ] ACCEPT [ ] EDIT [ ] REJECT",
-                "- Notes:",
+                f"- Researcher decision: [{accept_mark}] ACCEPT "
+                f"[ ] EDIT [{reject_mark}] REJECT",
+                f"- Reviewer: {case['review']['reviewer'] or 'unassigned'}",
+                f"- Reviewed at: {case['review']['reviewed_at'] or 'not reviewed'}",
+                f"- Notes: {case['review']['notes']}",
                 "",
             ]
         )
