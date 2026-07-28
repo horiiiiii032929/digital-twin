@@ -50,3 +50,12 @@ definitions are:
 
 The local drafting model remains an authoring aid only. Draft 2 still requires
 researcher verification of all cases and independent review of at least 20.
+
+## Post-draft-2 escalation
+
+Draft 2 met the prospective structural gates but failed assistant semantic QC
+on 32 cases. Local-only revisions in drafts 3 through 5 therefore strengthened
+the uniqueness requirement from at least 70 unique chunks to zero gold-chunk
+reuse across all 85 evidence assignments. Every changed case had its prior
+review state reset. This escalation does not convert assistant QC into
+researcher or independent review.

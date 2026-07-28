@@ -34,13 +34,20 @@
         "base_seed"
       ],
       "properties": {
-        "method": {"const": "local-model-draft-with-exact-quote-validation"},
+        "method": {
+          "enum": [
+            "local-model-draft-with-exact-quote-validation",
+            "local-model-draft-with-local-assistant-qc"
+          ]
+        },
         "model": {"const": "gemma3:4b"},
         "model_digest": {"const": "a2af6cc3eb7f"},
         "prompt_path": {"type": "string", "minLength": 1},
         "prompt_sha256": {"$ref": "#/$defs/sha256"},
         "temperature": {"const": 0},
-        "base_seed": {"type": "integer", "minimum": 0}
+        "base_seed": {"type": "integer", "minimum": 0},
+        "qc_amendment_path": {"type": "string", "minLength": 1},
+        "predecessor_dataset_sha256": {"$ref": "#/$defs/sha256"}
       }
     },
     "cases": {

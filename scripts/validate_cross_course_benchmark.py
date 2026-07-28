@@ -136,6 +136,11 @@ def validate_structure(dataset: dict[str, Any], expected_cases: int) -> None:
     )
 
     for case in cases:
+        query_upper = case["query"].upper()
+        require(
+            not any(course_id in query_upper for course_id in EXPECTED_CONFUSION_TARGETS),
+            f"{case['case_id']} exposes a course ID in the query",
+        )
         evidence = case["gold_evidence"]
         if case["slice"] in {"answerable", "cross_course_confusion"}:
             require(case["expected_action"] == "retrieve", "positive action mismatch")
@@ -169,7 +174,8 @@ def validate_structure(dataset: dict[str, Any], expected_cases: int) -> None:
     if dataset["dataset_status"] == "machine_draft":
         require(researcher_count == 0, "machine draft contains researcher approval")
 
-    if dataset["dataset_version"] == "draft-2":
+    draft_number = int(dataset["dataset_version"].removeprefix("draft-"))
+    if draft_number >= 2:
         answerable_chunks = {
             evidence["chunk_id"]
             for case in cases
@@ -191,6 +197,16 @@ def validate_structure(dataset: dict[str, Any], expected_cases: int) -> None:
             not answerable_chunks & confusion_chunks,
             "answerable and confusion slices reuse gold chunks",
         )
+        if draft_number >= 3:
+            all_evidence_ids = [
+                evidence["chunk_id"]
+                for case in cases
+                for evidence in case["gold_evidence"]
+            ]
+            require(
+                len(all_evidence_ids) == len(set(all_evidence_ids)),
+                "QC-amended draft reuses a gold chunk",
+            )
         multi_cases = [
             case
             for case in cases

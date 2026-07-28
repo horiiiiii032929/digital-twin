@@ -55,15 +55,31 @@ claim/evidence mismatch, artificial multi-topic pairing, duplicate gold pair,
 administrative source, or weak/trivial question. Draft 2 therefore failed the
 semantic authoring gate. No draft-1 approval was transferred.
 
+## Draft 5 local-QC checkpoint
+
+All course material remained local. Drafts 3 through 5:
+
+- rewrote or replaced the 32 draft-2 failures;
+- corrected five defects found by a second full semantic sweep;
+- removed the final repeated gold chunk;
+- retained 34 direct, 31 paraphrase, 10 multi-step, and 25 boundary cases;
+- use 85 distinct gold chunks for 75 positive cases, with zero reuse;
+- retain 15 course-adjacent no-evidence cases whose top-three local BM25
+  matches did not support the requested facts; and
+- pass schema, allocation, query uniqueness, course-ID exclusion, source,
+  document, page, chunk, exact-quote, multi-step, and hash validation.
+
+Draft 5 has 0/100 researcher-verified and 0/100 independently reviewed cases.
+Assistant QC makes it eligible for researcher review, not retrieval
+evaluation.
+
 ## Next gate
 
-Draft 1 remains at
-`data/processed/cross_course_retrieval_v1/review/researcher_review.md`.
-Draft 2 and its checklist are retained separately under ignored private
-storage. The next draft must replace or rewrite the 32 flagged cases before
-researcher review resumes. After 100/100 semantic verification, obtain an
-independent review of at least 20 cases. Only then may the held-out cases be
-sealed.
+Earlier drafts and checklists remain under ignored private storage. The current
+review package is
+`data/processed/cross_course_retrieval_v1/review/researcher_review_draft_5.md`.
+After 100/100 researcher semantic verification, obtain an independent review
+of at least 20 cases. Only then may the held-out cases be sealed.
 
 Validate the private draft with:
 

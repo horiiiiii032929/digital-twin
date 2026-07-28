@@ -68,6 +68,10 @@ Current utilities:
 - `record_cross_course_reviews.py`: records explicit accept or reject decisions
   for one or more private benchmark case IDs, retains reviewer and timestamp
   provenance, and regenerates the ignored researcher checklist.
+- `apply_cross_course_qc_patch.py`: applies a hash-bound private QC patch to the
+  next draft version, resolves replacement evidence from the approved local
+  corpus, resets every changed review, records predecessor lineage, and
+  regenerates the private checklist.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of
