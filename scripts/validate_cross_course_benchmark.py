@@ -169,6 +169,54 @@ def validate_structure(dataset: dict[str, Any], expected_cases: int) -> None:
     if dataset["dataset_status"] == "machine_draft":
         require(researcher_count == 0, "machine draft contains researcher approval")
 
+    if dataset["dataset_version"] == "draft-2":
+        answerable_chunks = {
+            evidence["chunk_id"]
+            for case in cases
+            if case["slice"] == "answerable"
+            for evidence in case["gold_evidence"]
+        }
+        confusion_chunks = {
+            evidence["chunk_id"]
+            for case in cases
+            if case["slice"] == "cross_course_confusion"
+            for evidence in case["gold_evidence"]
+        }
+        all_gold_chunks = answerable_chunks | confusion_chunks
+        require(
+            len(all_gold_chunks) >= 70,
+            "draft-2 requires at least 70 unique gold chunks",
+        )
+        require(
+            not answerable_chunks & confusion_chunks,
+            "answerable and confusion slices reuse gold chunks",
+        )
+        multi_cases = [
+            case
+            for case in cases
+            if case["difficulty"] == "multi_step"
+        ]
+        require(len(multi_cases) == 10, "draft-2 requires 10 multi-step cases")
+        for case in multi_cases:
+            require(
+                len(case["required_claims"]) == 2,
+                f"{case['case_id']} does not have two required claims",
+            )
+            require(
+                len(case["gold_evidence"]) == 2,
+                f"{case['case_id']} does not have two gold chunks",
+            )
+            require(
+                len(
+                    {
+                        evidence["chunk_id"]
+                        for evidence in case["gold_evidence"]
+                    }
+                )
+                == 2,
+                f"{case['case_id']} reuses a multi-step gold chunk",
+            )
+
 
 def validate_evidence(dataset: dict[str, Any], source_root: Path) -> None:
     manifest = load_json(MANIFEST_PATH)

@@ -2,13 +2,13 @@
 
 Date: 2026-07-28
 
-Status: structurally valid researcher-review draft; not approved, sealed, or
-eligible for retrieval evaluation
+Status: draft 1 retained for traceability; draft 2 passed structural validation
+but failed assistant semantic QC; neither is approved, sealed, or eligible for
+retrieval evaluation
 
 ## Construction checkpoint
 
-The local authoring pass produced 100 private cases from the approved
-four-course portfolio:
+Draft 1 produced 100 private cases from the approved four-course portfolio:
 
 | Slice | Cases |
 | --- | ---: |
@@ -26,7 +26,7 @@ No private course text is included in this status document.
 
 ## Data-quality finding
 
-This is not yet research-grade evaluation data:
+Draft 1 is not research-grade evaluation data:
 
 - 15/100 cases are researcher verified;
 - 0/100 cases are independently second reviewed;
@@ -38,14 +38,31 @@ This is not yet research-grade evaluation data:
 The direct-question concentration is a construction bias and must be corrected
 during review. The benchmark must not be used to claim method quality yet.
 
+## Draft 2 QC outcome
+
+The prospective
+[QC amendment](../04_experiments/2026-07-28-cross-course-benchmark-v1-qc-amendment.md)
+produced a separate 100-case machine draft:
+
+- 34 direct, 31 paraphrase, 10 two-chunk multi-step, and 25 boundary cases;
+- 82 unique gold chunks across 75 positive cases;
+- zero answerable/confusion gold-chunk overlap; and
+- complete schema, allocation, manifest, document, page, chunk, quote, and
+  hash validation.
+
+Assistant semantic QC nevertheless flagged 32/100 cases for at least one
+claim/evidence mismatch, artificial multi-topic pairing, duplicate gold pair,
+administrative source, or weak/trivial question. Draft 2 therefore failed the
+semantic authoring gate. No draft-1 approval was transferred.
+
 ## Next gate
 
-Use the ignored local review checklist at
+Draft 1 remains at
 `data/processed/cross_course_retrieval_v1/review/researcher_review.md`.
-Accept, edit, or reject every case; explicitly verify evidence sufficiency,
-visual independence, natural student wording, and negative answerability.
-Replace weak cases in a new draft version, then obtain an independent review
-of at least 20 cases. Only after those gates pass may the 60 held-out cases be
+Draft 2 and its checklist are retained separately under ignored private
+storage. The next draft must replace or rewrite the 32 flagged cases before
+researcher review resumes. After 100/100 semantic verification, obtain an
+independent review of at least 20 cases. Only then may the held-out cases be
 sealed.
 
 Validate the private draft with:

@@ -55,6 +55,11 @@ Current utilities:
   combines it with explicit boundary cases, and writes the private 100-case
   draft plus researcher checklist under ignored `data/processed/`; run
   `npm run draft:cross-course-benchmark`.
+- `draft_cross_course_benchmark_v2.py`: constructs the QC-amended private
+  draft separately from draft 1, with prose filtering, balanced direct and
+  paraphrase cases, ten two-chunk cases, unused confusion targets, exact source
+  quote recovery, and course-adjacent no-evidence cases. It is an authoring
+  utility, not an approval mechanism.
 - `validate_cross_course_benchmark.py`: validates the public synthetic schema
   in CI through `npm run verify:cross-course-benchmark`. Run it against the
   private draft without `--synthetic` to check allocation, manifest hashes,
