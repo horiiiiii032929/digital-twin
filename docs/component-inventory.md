@@ -3,11 +3,12 @@
 Status: active readable inventory
 
 The machine-validated
+[`student-tutor-v1`](../research/05_evaluation/profiles/student-tutor-v1.json)
+is the active experimental profile. It selects the page-bounded chunker from
+the cross-course ingestion result while retaining BM25 as the retrieval
+rollback. The earlier
 [`student-tutor-v0`](../research/05_evaluation/profiles/student-tutor-v0.json)
-is a historical experimental profile. It remains authoritative for what that
-profile selected on its recorded date. It does not represent the newly locked
-multi-course product. A successor profile is created only after new evidence;
-this document does not silently change a component selection.
+remains immutable historical evidence.
 
 ## Product components
 
@@ -17,7 +18,7 @@ this document does not silently change a component selection.
 | Course membership | No multi-user boundary | Pending | Role and course authorization with isolation tests |
 | Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
 | Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Cross-course extraction QA; add alternatives only for observed failures |
-| Chunker | Heading/paragraph chunker v1 | Selected foundation / Refine | Cross-course boundary and required-claim QA |
+| Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
 | Embedding | Local BGE/Qwen candidates; no final selection | Pending | Development-only provider qualification in #50 |
 | Retriever | BM25 v1 rollback; prior dense/RRF studies selected no replacement | Pending final profile | M0-M3 cross-course comparison in #7 |
 | Reranker | Local Qwen3 adapter and pilot evidence only | Pending | Qualify provider in #50, then include fixed M3 in #7 |
@@ -43,6 +44,8 @@ this document does not silently change a component selection.
   but its negatives were calibration cases.
 - The separate one-time rapid run is invalid, retired, and never rerun.
 - Jina has no result and remains an unselected implementation spike.
+- Cross-course ingestion selected page-bounded chunks: 0/1,322 crossed pages,
+  compared with 591/598 for the document-wide control.
 
 These outcomes are indexed in
 [`result-registry.md`](../research/05_evaluation/result-registry.md). Unfavourable

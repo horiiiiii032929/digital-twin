@@ -14,7 +14,7 @@ from src.digital_twin.evaluation import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROFILE = (
-    ROOT / "research" / "05_evaluation" / "profiles" / "student-tutor-v0.json"
+    ROOT / "research" / "05_evaluation" / "profiles" / "student-tutor-v1.json"
 )
 
 

@@ -50,6 +50,16 @@ Current utilities:
   audit:cross-course-ingestion`; set `ACADEMIA_VAULT_ROOT` when the canonical
   vault is not at `~/Documents/academia_vault`. The sanitized output is written
   to `reports/generated/cross-course-ingestion-v1.json`.
+- `draft_cross_course_benchmark.py`: uses local `gemma3:4b` only to draft
+  answerable and cross-course-confusion wording against page-local chunks,
+  combines it with explicit boundary cases, and writes the private 100-case
+  draft plus researcher checklist under ignored `data/processed/`; run
+  `npm run draft:cross-course-benchmark`.
+- `validate_cross_course_benchmark.py`: validates the public synthetic schema
+  in CI through `npm run verify:cross-course-benchmark`. Run it against the
+  private draft without `--synthetic` to check allocation, manifest hashes,
+  page-local chunk identities, exact quotes, visual sufficiency flags, and
+  review gates.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

@@ -3,6 +3,11 @@
 Use this folder for versioned datasets, rubrics, machine-readable component
 records, release profiles, and readable result summaries.
 
+The current cross-course retrieval dataset is a private, unsealed machine
+draft. Its allocation, automated validation, and remaining semantic review
+gates are summarized in
+[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md).
+
 ```text
 05_evaluation/
 ├── instruments/ frozen prompts, schemas, analysis, examples, and hashes
