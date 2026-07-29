@@ -72,6 +72,12 @@ Current utilities:
   next draft version, resolves replacement evidence from the approved local
   corpus, resets every changed review, records predecessor lineage, and
   regenerates the private checklist.
+- `run_cross_course_retrieval_pilot.py`: runs the local-only, course-scoped
+  BM25, Qwen3 dense, reciprocal-rank-fusion, and Qwen3 reranking ladder on the
+  40 development cases without loading the 60 heldout-draft cases.
+- `analyze_cross_course_retrieval_pilot.py`: validates and sanitizes the
+  private development result, computes seeded paired uncertainty and sign
+  tests, and exports a professor-ready CSV plus PNG/SVG comparison chart.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

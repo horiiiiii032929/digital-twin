@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-retrieval-pilot-v1-development-attempt-002",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-draft-5-development",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "d6b89abffd841d5de5b9bf414ebd0eaf3efcd529",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-bm25",
+        "version": "pilot-v1",
+        "configuration": {
+          "k1": 1.2,
+          "b": 0.75,
+          "final_k": 10,
+          "metric_k": 3
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "development-complete-evidence-success-at-3", "value": 0.6571428571428571, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8461538461538461, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.7663815427016545, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7663815427016545, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records heldout_cases_loaded=0."},
+        {"name": "private-data-local-only", "passed": true, "evidence": "No external provider was called; private artifacts remain ignored."},
+        {"name": "researcher-verification-complete", "passed": false, "evidence": "Only 1/100 cases was researcher-verified at run time."},
+        {"name": "independent-review-complete", "passed": false, "evidence": "No case had independent second review at run time."}
+      ],
+      "failures_by_category": {"ranking": 12}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-dense",
+        "version": "pilot-v1",
+        "configuration": {
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "device": "mps",
+          "dtype": "float16"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-complete-evidence-success-at-3", "value": 0.7428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8717948717948718, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8371180100458743, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7663815427016545, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records heldout_cases_loaded=0."},
+        {"name": "private-data-local-only", "passed": true, "evidence": "No external provider was called; private artifacts remain ignored."},
+        {"name": "researcher-verification-complete", "passed": false, "evidence": "Only 1/100 cases was researcher-verified at run time."},
+        {"name": "independent-review-complete", "passed": false, "evidence": "No case had independent second review at run time."}
+      ],
+      "failures_by_category": {"ranking": 9}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-rrf",
+        "version": "pilot-v1",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "rank_constant": 60,
+          "candidate_limit": 20,
+          "implementation_tree_sha256": "7baf99fd14ecc5ae9ce6a8f37d40a9ed96d238369b770f1b8ede0b42feb0d7da"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-complete-evidence-success-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8974358974358975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8415783103279456, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7663815427016545, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records heldout_cases_loaded=0."},
+        {"name": "private-data-local-only", "passed": true, "evidence": "No external provider was called; private artifacts remain ignored."},
+        {"name": "researcher-verification-complete", "passed": false, "evidence": "Only 1/100 cases was researcher-verified at run time."},
+        {"name": "independent-review-complete", "passed": false, "evidence": "No case had independent second review at run time."}
+      ],
+      "failures_by_category": {"ranking": 7}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-reranker",
+        "version": "pilot-v1",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
+          "candidate_limit": 40,
+          "device": "mps"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-complete-evidence-success-at-3", "value": 0.8285714285714286, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8760116579736565, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7663815427016545, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records heldout_cases_loaded=0."},
+        {"name": "private-data-local-only", "passed": true, "evidence": "No external provider was called; private artifacts remain ignored."},
+        {"name": "researcher-verification-complete", "passed": false, "evidence": "Only 1/100 cases was researcher-verified at run time."},
+        {"name": "independent-review-complete", "passed": false, "evidence": "No case had independent second review at run time."}
+      ],
+      "failures_by_category": {"ranking": 6}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Hybrid fusion supplied five of the six complete-evidence improvements over BM25; reranking added only one. Advance M2 as the primary candidate and retain M3 as an ablation after benchmark verification, but select no production method from this development pilot.",
+    "limitations": [
+      "Only 1/100 cases was researcher-verified and 0/100 independently reviewed at run time.",
+      "The 35 positive development cases are too small for a final method claim.",
+      "Boundary thresholds were calibrated and measured on the same five cases.",
+      "Fixed method order contaminated cross-method latency comparisons.",
+      "No held-out case was loaded or scored."
+    ]
+  }
+}
