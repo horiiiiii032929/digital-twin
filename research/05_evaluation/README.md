@@ -47,6 +47,18 @@ npm run verify:retrieval-v3-instruments
 This validation does not download a model, complete a private dataset, inspect
 held-out cases, or produce a retrieval result.
 
+Analyze the private development-only local Qwen3 provider qualification without
+copying queries, passage text, or per-case rankings into durable outputs:
+
+```bash
+npm run analyze:retrieval-provider-local
+```
+
+This validates the complete 40-case method matrix and the held-out-access,
+course-isolation, provider-failure, and cost gates before emitting a sanitized
+summary, CSV, and chart under ignored `reports/generated/`. It does not select
+a provider; the prospectively frozen hosted comparison is still required.
+
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in
 the [deployable tutor evaluation protocol](../04_experiments/2026-07-22-deployable-tutor-evaluation-protocol.md): retain the synthetic suite, add a
