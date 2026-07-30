@@ -276,7 +276,7 @@ def plot(path_png: Path, path_svg: Path, analysis: dict[str, Any]) -> None:
     ]
     positions = np.arange(len(methods))
     height = 0.32
-    fig, ax = plt.subplots(figsize=(11.2, 6.6), facecolor="#FAFBFC")
+    fig, ax = plt.subplots(figsize=(10.8, 5.8), facecolor="#FAFBFC")
     ax.set_facecolor("#FAFBFC")
     complete_bars = ax.barh(
         positions - height / 2,
@@ -313,8 +313,7 @@ def plot(path_png: Path, path_svg: Path, analysis: dict[str, Any]) -> None:
         0,
         1.035,
         (
-            "35 positive development cases • assistant-QC benchmark • "
-            "held-out cases not accessed"
+            "Development set, 35 answerable cases"
         ),
         transform=ax.transAxes,
         fontsize=10.5,
@@ -329,7 +328,7 @@ def plot(path_png: Path, path_svg: Path, analysis: dict[str, Any]) -> None:
     ax.tick_params(axis="x", colors="#59636E")
     ax.legend(
         loc="lower center",
-        bbox_to_anchor=(0.5, -0.22),
+        bbox_to_anchor=(0.5, -0.24),
         ncol=2,
         frameon=False,
     )
@@ -345,31 +344,7 @@ def plot(path_png: Path, path_svg: Path, analysis: dict[str, Any]) -> None:
                 color="#263238",
                 fontfamily="monospace",
             )
-    comparison = analysis["paired_comparisons"]
-    ax.text(
-        0,
-        -0.31,
-        (
-            "Paired completeness: M2 vs M0 +14.3 pp (5 wins, 0 losses); "
-            "M3 vs M2 +2.9 pp (1 win, 0 losses)."
-        ),
-        transform=ax.transAxes,
-        fontsize=9.5,
-        color="#45515D",
-    )
-    ax.text(
-        0,
-        -0.37,
-        (
-            "Preliminary development evidence only; "
-            f"M2 vs M0 sign-test p={comparison['M2_vs_M0']['exact_two_sided_sign_p_value']:.4f}. "
-            "No production method selected."
-        ),
-        transform=ax.transAxes,
-        fontsize=9,
-        color="#6A747E",
-    )
-    fig.subplots_adjust(left=0.27, right=0.95, top=0.80, bottom=0.28)
+    fig.subplots_adjust(left=0.28, right=0.95, top=0.78, bottom=0.24)
     path_png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path_png, dpi=220, facecolor=fig.get_facecolor())
     fig.savefig(path_svg, facecolor=fig.get_facecolor())
