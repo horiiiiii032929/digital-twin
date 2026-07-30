@@ -92,10 +92,17 @@ layout-sensitive, but the frozen parser output and gold chunk preserve its
 required sequence. Image-only or spatial-only questions remain reserved for a
 separate future multimodal evaluation.
 
-Draft 6 currently has 1/100 researcher-verified and 0/100 independently
-reviewed cases. The 15 no-evidence cases still require recorded whole-corpus
-verification. The ten integrity/refusal cases remain useful system-policy
-tests but will not be aggregated into retrieval-ranking quality metrics.
+Draft 6 currently has 40/100 researcher-verified and 0/100 independently
+reviewed cases. This completes researcher verification of the full development
+split: 35 positive cases plus five separately assessed boundary cases. The
+three development no-evidence cases received recorded whole-corpus searches
+over all 32 approved PDFs. The ten integrity/refusal cases remain useful
+system-policy tests but will not be aggregated into retrieval-ranking quality
+metrics.
+
+The 60 held-out-draft labels remain available for researcher authoring review,
+but no retrieval candidate has loaded or scored them. Twelve held-out
+no-evidence cases still require recorded whole-corpus verification.
 
 ## Next gate
 

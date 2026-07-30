@@ -75,6 +75,9 @@ architecture.
 - `Account`: invite-only administrator, professor, or student identity.
 - `Course`: professor-owned isolation boundary.
 - `Membership`: explicit account-to-course role.
+- One `DigitalTwinRelease` belongs to one professor-owned course or section.
+  Individual lectures are versioned sources inside that release, not separate
+  Digital Twins.
 
 ### Source governance
 
@@ -83,6 +86,13 @@ architecture.
   and rollback link.
 - `CourseDocument` and `DocumentChunk`: normalized content with course,
   source-version, locator, and tutoring-permission lineage.
+
+Every source and chunk must carry immutable institution, professor, course,
+term, release, lecture, source, version, and permission identifiers. Retrieval
+must apply the authorized course/release/source scope before lexical search,
+embedding search, fusion, or reranking. Missing scope fails closed. Cross-course
+federation requires an explicit professor-approved set of course releases; it
+must never arise from semantic similarity alone.
 
 Solution files, answer keys, student submissions, student data, credentials,
 and secrets never enter the tutoring corpus.
@@ -153,6 +163,9 @@ new draft. It never mutates a published release silently.
   provider/data decision. Excluded material never does.
 - Deterministic rules are authoritative for permission, isolation, citation
   identity, and academic-integrity hard gates; LLM judges do not override them.
+- Zero unauthorized chunks in the retrieval candidate set is a hard gate, not
+  an average quality metric. The same check applies before reranking,
+  generation, citation display, and conversation persistence.
 
 See [evaluation-data-flow-and-threat-model.md](evaluation-data-flow-and-threat-model.md)
 for the current detailed research boundary. It must receive a versioned
