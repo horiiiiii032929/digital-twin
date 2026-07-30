@@ -2,8 +2,8 @@
 
 Date: 2026-07-28
 
-Status: prospective authoring plan; the dataset remains a private draft until
-researcher verification and sealing are complete
+Status: completed; private draft 6 was researcher verified, second reviewed,
+and sealed on 2026-07-30
 
 ## Decision question
 

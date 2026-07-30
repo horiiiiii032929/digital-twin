@@ -86,6 +86,10 @@ Current utilities:
   result and explicit adjudication, preserves the original disagreement, marks
   the 20-case sample, and advances a fully researcher-verified draft to
   `approved`.
+- `seal_cross_course_benchmark.py`: revalidates the approved private benchmark,
+  writes immutable-hash development and held-out files without overwriting,
+  and creates an unopened one-time held-out access ledger. It does not run or
+  configure retrieval candidates.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

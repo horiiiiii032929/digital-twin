@@ -2,9 +2,9 @@
 
 Date: 2026-07-30
 
-Status: private draft 6 is approved for sealing after complete researcher
-review and a blinded local-model second-review sample; it is not yet sealed and
-no final retrieval candidate has accessed the held-out split
+Status: private draft 6 was sealed on 2026-07-30 after complete researcher
+review and a blinded local-model second-review sample; no final retrieval
+candidate has accessed the held-out split
 
 ## Construction checkpoint
 
@@ -130,7 +130,7 @@ evidence labels only. Boundary cases received separate researcher checks.
 Details are recorded in
 [the result summary](cross-course-benchmark-model-second-review-v1-results.md).
 
-## Freeze readiness
+## Seal
 
 The private validator passed on 2026-07-30:
 
@@ -141,13 +141,31 @@ The private validator passed on 2026-07-30:
 | Blinded local-model second reviewed | 20/100 |
 | Whole-corpus checked no-evidence cases | 15/15 |
 | Retrieval candidate access to held-out cases | 0 |
-| Ready to freeze | Yes |
+| Sealed development cases | 40 |
+| Sealed held-out cases | 60 |
+| Held-out ledger | Unopened; zero attempts |
 
 Earlier drafts, raw decisions, adjudication, and checklists remain in ignored
-private storage. The current review package is
+private storage. The final review package is
 `data/processed/cross_course_retrieval_v1/review/researcher_review_draft_6.md`.
-The next gate is to seal the approved dataset and create the one-time held-out
-ledger before any final retrieval run.
+The sealed package is under
+`data/processed/cross_course_retrieval_v1/sealed_v1/`.
+
+| Artifact | SHA-256 |
+| --- | --- |
+| Development split | `e3749c3ee831dcf4c06f3b33cb94f21fe758eaec36e627d034715d4ca0cdd863` |
+| Held-out split | `1b909cab6a1c89db57d7675caabd7e0ab87148353c3054e9fd6a947436fe8ac5` |
+| Initial held-out ledger | `06d90ed7ecbe2047ceb0484a0926808fcd77fb4fda48e35a825cb9b98014d225` |
+
+The held-out file is private with owner-only permissions. The ledger records
+`unopened`, zero attempts, and no access authorization. File permissions and a
+ledger are procedural safeguards, not proof that manual access is impossible.
+Any unrecorded content inspection invalidates the final evaluation.
+
+The next research gate is development-only comparison of the frozen candidate
+methods. Candidate implementations, provider/model revisions, thresholds,
+metrics, analysis, code hash, and an endurance preflight must be frozen before
+the one-time runner may open the held-out split.
 
 Validate the private draft with:
 
