@@ -15,10 +15,38 @@ from src.digital_twin.evaluation.models import (
     load_evaluation_record,
     load_release_profile,
 )
+from src.digital_twin.evaluation.retrieval_qualification import (
+    CourseIsolationViolation,
+    CourseScopedRetriever,
+    POSITIVE_SLICES,
+    ProviderDescriptor,
+    ProviderExecution,
+    ProviderPair,
+    ProviderQualificationConfig,
+    ProviderRole,
+    ProviderUsage,
+    RetrievalLadderConfig,
+    RetrievalMethod,
+    SealedDevelopmentError,
+    aggregate_rows,
+    assign_boundary_courses,
+    development_thresholds,
+    load_provider_qualification_config,
+    load_sealed_development,
+    score_ranking,
+)
+from src.digital_twin.evaluation.retrieval_runtime import (
+    build_course_scoped_ladders,
+)
+from src.digital_twin.evaluation.retrieval_runner import (
+    evaluate_development_cases,
+)
 
 
 __all__ = [
     "CandidateEvaluation",
+    "CourseIsolationViolation",
+    "CourseScopedRetriever",
     "ComponentEvaluationRecord",
     "ComponentKind",
     "ComponentProfileEntry",
@@ -29,8 +57,26 @@ __all__ = [
     "ImplementationRef",
     "MetricDirection",
     "MetricResult",
+    "POSITIVE_SLICES",
     "ProfileStage",
+    "ProviderDescriptor",
+    "ProviderExecution",
+    "ProviderPair",
+    "ProviderQualificationConfig",
+    "ProviderRole",
+    "ProviderUsage",
+    "RetrievalLadderConfig",
+    "RetrievalMethod",
+    "SealedDevelopmentError",
     "SystemReleaseProfile",
+    "aggregate_rows",
+    "assign_boundary_courses",
+    "build_course_scoped_ladders",
+    "development_thresholds",
+    "evaluate_development_cases",
     "load_evaluation_record",
+    "load_provider_qualification_config",
     "load_release_profile",
+    "load_sealed_development",
+    "score_ranking",
 ]

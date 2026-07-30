@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "qualification_id": "cross-course-provider-qualification-v1",
+  "dataset_seal_id": "cross-course-retrieval-v1-draft-6-seal",
+  "development_sha256": "e3749c3ee831dcf4c06f3b33cb94f21fe758eaec36e627d034715d4ca0cdd863",
+  "heldout_sha256": "1b909cab6a1c89db57d7675caabd7e0ab87148353c3054e9fd6a947436fe8ac5",
+  "heldout_access_allowed": false,
+  "spend_cap_usd": 5.0,
+  "budget_rate_usd_per_million_input_tokens": 1.0,
+  "query_instruction": "Given a student question within one authorized university course, retrieve passages that directly support a grounded answer.",
+  "ladder": {
+    "bm25_k1": 1.2,
+    "bm25_b": 0.75,
+    "fusion_rank_constant": 60,
+    "fusion_candidate_limit": 20,
+    "rerank_candidate_limit": 40,
+    "result_limit": 10
+  },
+  "providers": [
+    {
+      "pair_id": "local-qwen3-0-6b",
+      "role": "control",
+      "embedding": {
+        "provider_id": "local-qwen3-embedding-0-6b",
+        "role": "embedding",
+        "provider": "local-huggingface",
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "execution": "local",
+        "max_cost_usd": 0
+      },
+      "reranking": {
+        "provider_id": "local-qwen3-reranker-0-6b",
+        "role": "reranking",
+        "provider": "local-huggingface",
+        "model": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "execution": "local",
+        "max_cost_usd": 0
+      }
+    },
+    {
+      "pair_id": "hosted-jina-text-v5-reranker-v3",
+      "role": "candidate",
+      "embedding": {
+        "provider_id": "jina-embeddings-v5-text-small",
+        "role": "embedding",
+        "provider": "jina-ai",
+        "model": "jina-embeddings-v5-text-small",
+        "revision": "api-model-release-2026-02-18",
+        "execution": "hosted",
+        "endpoint": "https://api.jina.ai/v1/embeddings",
+        "dimensions": 1024,
+        "max_cost_usd": 5.0
+      },
+      "reranking": {
+        "provider_id": "jina-reranker-v3",
+        "role": "reranking",
+        "provider": "jina-ai",
+        "model": "jina-reranker-v3",
+        "revision": "api-model-release-2025-10-01",
+        "execution": "hosted",
+        "endpoint": "https://api.jina.ai/v1/rerank",
+        "max_cost_usd": 5.0
+      }
+    }
+  ]
+}

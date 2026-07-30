@@ -6,6 +6,12 @@ import time
 from collections.abc import Sequence
 from pathlib import Path
 
+from services.retrieval_provider import (
+    RetrievalUsageLedger,
+    estimate_input_tokens,
+)
+from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
+
 
 class Qwen3RerankingDependencyError(RuntimeError):
     pass
@@ -77,6 +83,10 @@ class Qwen3Reranker:
         self.dtype = dtype
         self.batch_size = batch_size
         self.max_length = max_length
+        self.ledger = RetrievalUsageLedger(
+            max_cost_usd=0,
+            price_per_million_input_tokens_usd=0,
+        )
         self._false_token_id = self._tokenizer.convert_tokens_to_ids("no")
         self._true_token_id = self._tokenizer.convert_tokens_to_ids("yes")
         self._prefix_tokens = self._tokenizer.encode(
@@ -105,6 +115,7 @@ class Qwen3Reranker:
         )
         for start in range(0, len(pairs), self.batch_size):
             batch = pairs[start : start + self.batch_size]
+            estimated_tokens = estimate_input_tokens(*batch)
             encoded = self._tokenizer(
                 batch,
                 padding=False,
@@ -132,4 +143,11 @@ class Qwen3Reranker:
                 )
                 probabilities = self._torch.softmax(binary, dim=1)[:, 1]
             scores.extend(probabilities.float().cpu().tolist())
+            self.ledger.record(
+                values=batch,
+                estimated_input_tokens=estimated_tokens,
+            )
         return scores
+
+    def usage_snapshot(self) -> ProviderUsage:
+        return self.ledger.usage_snapshot()

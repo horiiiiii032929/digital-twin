@@ -74,7 +74,16 @@ Current utilities:
   regenerates the private checklist.
 - `run_cross_course_retrieval_pilot.py`: runs the local-only, course-scoped
   BM25, Qwen3 dense, reciprocal-rank-fusion, and Qwen3 reranking ladder on the
-  40 development cases without loading the 60 heldout-draft cases.
+  historical draft-5 development cases without loading heldout-draft cases. It
+  is retained to reproduce the registered pilot, not used for qualification.
+- `run_cross_course_retrieval_qualification.py`: verifies the private seal and
+  unopened ledger, loads only the 40-case development file, constructs the
+  shared course-scoped M0-M3 ladder, and records normalized quality,
+  isolation, latency, provider usage, cost, and failure evidence for one frozen
+  local or hosted provider pair. Run `npm run
+  qualify:retrieval-provider-local` for the local control or set
+  `JINA_API_KEY` and run `npm run qualify:retrieval-provider-jina` for the
+  hosted candidate. Neither command may read the held-out file.
 - `analyze_cross_course_retrieval_pilot.py`: validates and sanitizes the
   private development result, computes seeded paired uncertainty and sign
   tests, and exports a professor-ready CSV plus PNG/SVG comparison chart.
