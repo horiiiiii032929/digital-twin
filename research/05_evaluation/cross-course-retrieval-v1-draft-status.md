@@ -1,10 +1,10 @@
 # Cross-course retrieval benchmark v1 draft status
 
-Date: 2026-07-28
+Date: 2026-07-30
 
-Status: draft 1 retained for traceability; draft 2 passed structural validation
-but failed assistant semantic QC; neither is approved, sealed, or eligible for
-retrieval evaluation
+Status: private draft 6 passes structural, source, quote, hash, and assistant
+three-angle QC; it remains under researcher review and is not approved, sealed,
+or eligible for final retrieval evaluation
 
 ## Construction checkpoint
 
@@ -73,11 +73,35 @@ Draft 5 has 0/100 researcher-verified and 0/100 independently reviewed cases.
 Assistant QC makes it eligible for researcher review, not retrieval
 evaluation.
 
+## Draft 6 three-angle review and repair
+
+Assistant QC inspected all 100 case records and visually checked all 85
+original PDF pages cited as positive gold evidence from three angles:
+
+- semantic agreement among query, required claim, and evidence;
+- retrieval fairness and naturalness; and
+- text, chart, table, equation, diagram, handwriting, and layout dependence.
+
+The review identified 12 positive cases with incomplete claims, overstated
+questions, missing conditions, or weak wording. All 12 were repaired through a
+hash-bound draft-5-to-draft-6 QC patch. Draft 6 passes the private validator
+against the canonical source corpus.
+
+The visual audit found no image-only gold claim. One ordered diagram was
+layout-sensitive, but the frozen parser output and gold chunk preserve its
+required sequence. Image-only or spatial-only questions remain reserved for a
+separate future multimodal evaluation.
+
+Draft 6 currently has 1/100 researcher-verified and 0/100 independently
+reviewed cases. The 15 no-evidence cases still require recorded whole-corpus
+verification. The ten integrity/refusal cases remain useful system-policy
+tests but will not be aggregated into retrieval-ranking quality metrics.
+
 ## Next gate
 
 Earlier drafts and checklists remain under ignored private storage. The current
 review package is
-`data/processed/cross_course_retrieval_v1/review/researcher_review_draft_5.md`.
+`data/processed/cross_course_retrieval_v1/review/researcher_review_draft_6.md`.
 After 100/100 researcher semantic verification, obtain an independent review
 of at least 20 cases. Only then may the held-out cases be sealed.
 
@@ -85,6 +109,7 @@ Validate the private draft with:
 
 ```bash
 uv run python -m scripts.validate_cross_course_benchmark \
+  --dataset data/processed/cross_course_retrieval_v1/cross_course_retrieval_v1_draft_6.json \
   --expected-cases 100
 ```
 
