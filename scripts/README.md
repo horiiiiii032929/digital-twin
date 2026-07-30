@@ -78,6 +78,14 @@ Current utilities:
 - `analyze_cross_course_retrieval_pilot.py`: validates and sanitizes the
   private development result, computes seeded paired uncertainty and sign
   tests, and exports a professor-ready CSV plus PNG/SVG comparison chart.
+- `second_review_cross_course_benchmark.py`: selects a frozen 20-case,
+  four-course positive-label sample and obtains blinded structured semantic
+  review from a different local Ollama model without exposing retrieval output
+  or original review decisions.
+- `apply_cross_course_second_review.py`: validates the private second-review
+  result and explicit adjudication, preserves the original disagreement, marks
+  the 20-case sample, and advances a fully researcher-verified draft to
+  `approved`.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

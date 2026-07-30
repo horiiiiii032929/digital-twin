@@ -2,9 +2,9 @@
 
 Date: 2026-07-30
 
-Status: private draft 6 passes structural, source, quote, hash, and assistant
-three-angle QC; it remains under researcher review and is not approved, sealed,
-or eligible for final retrieval evaluation
+Status: private draft 6 is approved for sealing after complete researcher
+review and a blinded local-model second-review sample; it is not yet sealed and
+no final retrieval candidate has accessed the held-out split
 
 ## Construction checkpoint
 
@@ -24,7 +24,7 @@ allocation, unique ID and query, action/evidence consistency, source manifest,
 document hash, page, chunk hash, exact quote, and visual-dependency checks.
 No private course text is included in this status document.
 
-## Data-quality finding
+## Initial data-quality finding
 
 Draft 1 is not research-grade evaluation data:
 
@@ -92,33 +92,72 @@ layout-sensitive, but the frozen parser output and gold chunk preserve its
 required sequence. Image-only or spatial-only questions remain reserved for a
 separate future multimodal evaluation.
 
-Draft 6 currently has 40/100 researcher-verified and 0/100 independently
-reviewed cases. This completes researcher verification of the full development
-split: 35 positive cases plus five separately assessed boundary cases. The
-three development no-evidence cases received recorded whole-corpus searches
-over all 32 approved PDFs. The ten integrity/refusal cases remain useful
-system-policy tests but will not be aggregated into retrieval-ranking quality
-metrics.
+## Final researcher review
 
-The 60 held-out-draft labels remain available for researcher authoring review,
-but no retrieval candidate has loaded or scored them. Twelve held-out
-no-evidence cases still require recorded whole-corpus verification.
+All 100 cases are researcher verified:
 
-## Next gate
+- all 75 positive cases were checked for question, claim, and exact-evidence
+  agreement;
+- all 15 no-evidence cases received recorded whole-corpus searches over the 32
+  approved PDFs;
+- all 15 cross-course-confusion cases were checked for course scope and
+  plausible distractors; and
+- all 10 integrity/refusal cases were checked as a separate policy suite and
+  remain excluded from retrieval-ranking aggregates.
 
-Earlier drafts and checklists remain under ignored private storage. The current
-review package is
+Every lecture source is tagged with course, release, source, and permission
+scope. Retrieval must apply those filters before ranking or reranking. Missing
+scope fails closed, and any unauthorized candidate chunk fails the isolation
+gate.
+
+## Blinded local-model second review
+
+The prospective second-review plan selected 20 positive cases by fixed hash:
+five per course, comprising three answerable and two cross-course-confusion
+cases per course. The prompt omitted prior decisions, notes, rankings, metrics,
+and split-level results.
+
+The different local reviewer model accepted 19 cases and rejected one. The
+original rejection is preserved. Researcher adjudication retained
+`ccr1-cs5421-05` because the rejection's explanation contradicted the stated
+functional dependency: two records with the same determining position and
+different salaries are a violation. All 20 sampled cases now carry a
+second-review record.
+
+This is a blinded local-model second review, not independent human review,
+professor validation, or evidence of student usability. It covers positive
+evidence labels only. Boundary cases received separate researcher checks.
+Details are recorded in
+[the result summary](cross-course-benchmark-model-second-review-v1-results.md).
+
+## Freeze readiness
+
+The private validator passed on 2026-07-30:
+
+| Gate | Result |
+| --- | ---: |
+| Structural, source, quote, and hash validation | Pass |
+| Researcher verified | 100/100 |
+| Blinded local-model second reviewed | 20/100 |
+| Whole-corpus checked no-evidence cases | 15/15 |
+| Retrieval candidate access to held-out cases | 0 |
+| Ready to freeze | Yes |
+
+Earlier drafts, raw decisions, adjudication, and checklists remain in ignored
+private storage. The current review package is
 `data/processed/cross_course_retrieval_v1/review/researcher_review_draft_6.md`.
-After 100/100 researcher semantic verification, obtain an independent review
-of at least 20 cases. Only then may the held-out cases be sealed.
+The next gate is to seal the approved dataset and create the one-time held-out
+ledger before any final retrieval run.
 
 Validate the private draft with:
 
 ```bash
 uv run python -m scripts.validate_cross_course_benchmark \
   --dataset data/processed/cross_course_retrieval_v1/cross_course_retrieval_v1_draft_6.json \
+  --source-root /Users/hikaru/Documents/academia_vault \
   --expected-cases 100
 ```
 
-The validator reporting `passed` means structural and evidence identity checks
-passed. It does not mean the semantic labels are approved.
+The validator reporting `passed` establishes the recorded structural and
+evidence-identity gates. Semantic approval additionally depends on the
+researcher and second-review records described above.
