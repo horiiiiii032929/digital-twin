@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-provider-qualification-v1-local-qwen3",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-draft-6-development",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "6fd2181c8fdc50e6770b051d7e6d9af139935cbf",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-bm25",
+        "version": "provider-qualification-v1",
+        "configuration": {
+          "k1": 1.2,
+          "b": 0.75,
+          "result_limit": 10
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.6571428571428571, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8461538461538461, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.7558366785179818, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7558366785179818, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records zero held-out reads and the ledger remains unopened."},
+        {"name": "course-isolation", "passed": true, "evidence": "The result records zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The local providers recorded zero failures and zero retries."},
+        {"name": "cost-cap", "passed": true, "evidence": "Local execution cost was USD 0."}
+      ],
+      "failures_by_category": {"ranking": 12}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-dense",
+        "version": "provider-qualification-v1",
+        "configuration": {
+          "model": "Qwen/Qwen3-Embedding-0.6B",
+          "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "device": "mps",
+          "dtype": "float16",
+          "max_length": 2048
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.7428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8974358974358975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8119109135561351, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7558366785179818, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records zero held-out reads and the ledger remains unopened."},
+        {"name": "course-isolation", "passed": true, "evidence": "The result records zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The local providers recorded zero failures and zero retries."},
+        {"name": "cost-cap", "passed": true, "evidence": "Local execution cost was USD 0."}
+      ],
+      "failures_by_category": {"ranking": 9}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-rrf",
+        "version": "provider-qualification-v1",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "fusion_rank_constant": 60,
+          "fusion_candidate_limit": 20,
+          "result_limit": 10
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.7714285714285715, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.8974358974358975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8290527763749413, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7558366785179818, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records zero held-out reads and the ledger remains unopened."},
+        {"name": "course-isolation", "passed": true, "evidence": "The result records zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The local providers recorded zero failures and zero retries."},
+        {"name": "cost-cap", "passed": true, "evidence": "Local execution cost was USD 0."}
+      ],
+      "failures_by_category": {"ranking": 8}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-reranker",
+        "version": "provider-qualification-v1",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
+          "rerank_candidate_limit": 40,
+          "device": "mps",
+          "dtype": "float16"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6571428571428571, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8461538461538461, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8597452739186106, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7558366785179818, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records zero held-out reads and the ledger remains unopened."},
+        {"name": "course-isolation", "passed": true, "evidence": "The result records zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The local providers recorded zero failures and zero retries."},
+        {"name": "cost-cap", "passed": true, "evidence": "Local execution cost was USD 0."}
+      ],
+      "failures_by_category": {"ranking": 7}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Retain the completed local Qwen3 pair as the qualified provider control, but select no provider or retrieval method until the prospectively frozen hosted candidate is run and compared.",
+    "limitations": [
+      "Only the local-control half of the provider comparison is complete.",
+      "Development evidence does not support a held-out generalization claim.",
+      "Boundary thresholds were calibrated and measured on the same five cases.",
+      "Fixed execution order makes workstation latency descriptive rather than comparative.",
+      "The 60-case held-out split remains unopened."
+    ]
+  }
+}
