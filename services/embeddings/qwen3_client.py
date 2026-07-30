@@ -7,6 +7,12 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from services.retrieval_provider import (
+    RetrievalUsageLedger,
+    estimate_input_tokens,
+)
+from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
+
 
 class Qwen3EmbeddingDependencyError(RuntimeError):
     pass
@@ -73,6 +79,10 @@ class Qwen3TextEmbedder:
         self.dtype = dtype
         self.batch_size = batch_size
         self.max_length = max_length
+        self.ledger = RetrievalUsageLedger(
+            max_cost_usd=0,
+            price_per_million_input_tokens_usd=0,
+        )
 
     def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
         return self._embed(list(texts))
@@ -90,6 +100,7 @@ class Qwen3TextEmbedder:
         vectors: list[list[float]] = []
         for start in range(0, len(texts), self.batch_size):
             batch = texts[start : start + self.batch_size]
+            estimated_tokens = estimate_input_tokens(*batch)
             encoded = self._tokenizer(
                 batch,
                 padding=True,
@@ -105,7 +116,14 @@ class Qwen3TextEmbedder:
                 )
                 normalized = self._functional.normalize(pooled, p=2, dim=1)
             vectors.extend(normalized.float().cpu().tolist())
+            self.ledger.record(
+                values=batch,
+                estimated_input_tokens=estimated_tokens,
+            )
         return vectors
+
+    def usage_snapshot(self) -> ProviderUsage:
+        return self.ledger.usage_snapshot()
 
     def _last_token_pool(self, hidden: Any, attention_mask: Any) -> Any:
         left_padding = attention_mask[:, -1].sum() == attention_mask.shape[0]

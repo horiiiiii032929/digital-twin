@@ -19,9 +19,9 @@ remains immutable historical evidence.
 | Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
 | Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Cross-course extraction QA; add alternatives only for observed failures |
 | Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
-| Embedding | Local BGE/Qwen candidates; no final selection | Pending | Development-only provider qualification in #50 |
+| Embedding | Local Qwen control and hosted Jina text candidate behind shared development runner; no final selection | Pending | Complete development-only provider qualification in #50 |
 | Retriever | BM25 v1 rollback; prior dense/RRF studies selected no replacement | Pending final profile | M0-M3 cross-course comparison in #7 |
-| Reranker | Local Qwen3 adapter and pilot evidence only | Pending | Qualify provider in #50, then include fixed M3 in #7 |
+| Reranker | Local Qwen3 and hosted Jina adapters behind shared usage, cost, and failure contracts; no final selection | Pending | Qualify provider in #50, then include fixed M3 in #7 |
 | Evidence action | Any-hit rollback is not a safe selected verifier | Pending end-to-end | Measure evidence completeness/no-evidence directly in #7, #24, and #25 |
 | Generator | Deterministic control and unselected local/API adapters | Pending | Fixed provider/prompt qualification after retrieval selection |
 | Professor profile/policy | Structured professor policy v1 and approved onboarding direction | Selected foundation / Refine | Multi-professor persistence and fidelity evaluation |
