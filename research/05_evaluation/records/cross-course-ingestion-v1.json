@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-ingestion-v1",
+  "component": "chunker",
+  "dataset_id": "cross-course-ingestion-v1",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "fcd607fb968b64cf054e47cdffc460f1085de592",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "heading-paragraph-chunker",
+        "version": "v1",
+        "configuration": {
+          "max_chars": 1200,
+          "overlap_chars": 160,
+          "page_bounded": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "page-locality-rate",
+          "value": 0.011705685618729096,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provenance-complete-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "within-size-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "nonempty-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "unique-id-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "tiny-chunk-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "lower-is-better",
+          "threshold": 0.1,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "p95-chunk-latency",
+          "value": 1.1982919822912663,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "manifest-integrity",
+          "passed": true,
+          "evidence": "All 32 source hashes matched cross-course-portfolio-v2."
+        },
+        {
+          "name": "deterministic-identity",
+          "passed": true,
+          "evidence": "All 32 repeated parse and chunk passes produced stable identities."
+        },
+        {
+          "name": "page-locality",
+          "passed": false,
+          "evidence": "591 of 598 chunks crossed PDF page boundaries."
+        },
+        {
+          "name": "source-provenance",
+          "passed": true,
+          "evidence": "All 598 chunks retained source, version, locator, page, permission, and hash."
+        },
+        {
+          "name": "private-output-boundary",
+          "passed": true,
+          "evidence": "The durable result contains counts and identifiers but no private course text or figure bytes."
+        }
+      ],
+      "failures_by_category": {
+        "chunking": 591,
+        "layout": 5,
+        "parsing": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "page-bounded-heading-paragraph-chunker",
+        "version": "v1",
+        "configuration": {
+          "max_chars": 1200,
+          "overlap_chars": 160,
+          "page_bounded": true
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "page-locality-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provenance-complete-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "within-size-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "nonempty-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "unique-id-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "tiny-chunk-rate",
+          "value": 0.06354009077155824,
+          "unit": "ratio",
+          "direction": "lower-is-better",
+          "threshold": 0.1,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "p95-chunk-latency",
+          "value": 1.411332981660962,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "manifest-integrity",
+          "passed": true,
+          "evidence": "All 32 source hashes matched cross-course-portfolio-v2."
+        },
+        {
+          "name": "deterministic-identity",
+          "passed": true,
+          "evidence": "All 32 repeated parse and chunk passes produced stable identities."
+        },
+        {
+          "name": "page-locality",
+          "passed": true,
+          "evidence": "Zero of 1,322 chunks crossed PDF page boundaries."
+        },
+        {
+          "name": "source-provenance",
+          "passed": true,
+          "evidence": "All 1,322 chunks retained source, version, locator, page, permission, and hash."
+        },
+        {
+          "name": "private-output-boundary",
+          "passed": true,
+          "evidence": "The durable result contains counts and identifiers but no private course text or figure bytes."
+        }
+      ],
+      "failures_by_category": {
+        "chunking": 84,
+        "layout": 5,
+        "parsing": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "page-bounded-heading-paragraph-chunker",
+    "rationale": "The document-wide control mixed separate lecture pages in 591 of 598 chunks. The page-bounded candidate produced 1,322 page-local chunks with complete provenance, unique stable IDs, no empty or oversized chunks, and negligible additional chunking latency.",
+    "limitations": [
+      "Eighty-four selected chunks are shorter than 80 characters, including page-number-only and title-slide content.",
+      "Five of eight visually inspected pages contained important diagram or spatial meaning not fully represented by selectable text.",
+      "Embedded-image object counts are not semantic figure counts.",
+      "One IT5002 PDF emitted recoverable xref warnings during figure enumeration.",
+      "The result does not measure retrieval quality or optimal chunk size."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "dataset_id": "cross-course-retrieval-v1",
+  "dataset_version": "draft-1",
+  "dataset_status": "machine_draft",
+  "corpus_id": "cross-course-portfolio-v2",
+  "authoring": {
+    "method": "local-model-draft-with-exact-quote-validation",
+    "model": "gemma3:4b",
+    "model_digest": "a2af6cc3eb7f",
+    "prompt_path": "research/05_evaluation/instruments/cross_course_benchmark_author_v1.prompt.md",
+    "prompt_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "temperature": 0,
+    "base_seed": 5106
+  },
+  "cases": [
+    {
+      "case_id": "ccr1-synthetic-01",
+      "split": "development",
+      "slice": "answerable",
+      "target_course_id": "IT5002",
+      "query": "Why does the synthetic processor need a cache?",
+      "expected_action": "retrieve",
+      "difficulty": "paraphrase",
+      "topic": "synthetic cache",
+      "required_claims": [
+        "The synthetic cache reduces repeated slow memory access."
+      ],
+      "gold_evidence": [
+        {
+          "source_artifact_id": "synthetic-source",
+          "relative_path": "synthetic/course.pdf",
+          "document_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "page": 1,
+          "chunk_id": "chunk-111111111111111111111111",
+          "chunk_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "supporting_quote": "The cache reduces repeated slow memory access.",
+          "quote_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "visual_dependency": "text_sufficient"
+        }
+      ],
+      "distractor_source_ids": [],
+      "review": {
+        "status": "machine_draft",
+        "researcher_verified": false,
+        "second_reviewed": false,
+        "reviewer": null,
+        "reviewed_at": null,
+        "notes": "Synthetic shape example only."
+      }
+    }
+  ]
+}

@@ -44,6 +44,52 @@ Current utilities:
   source/hash verification; the source files remain outside Git. It runs
   without private sources in CI through
   `npm run verify:cross-course-portfolio`.
+- `audit_cross_course_ingestion.py`: compares document-wide and page-bounded
+  heading/paragraph chunking over the private active portfolio without writing
+  course text to the result artifact. Run `npm run
+  audit:cross-course-ingestion`; set `ACADEMIA_VAULT_ROOT` when the canonical
+  vault is not at `~/Documents/academia_vault`. The sanitized output is written
+  to `reports/generated/cross-course-ingestion-v1.json`.
+- `draft_cross_course_benchmark.py`: uses local `gemma3:4b` only to draft
+  answerable and cross-course-confusion wording against page-local chunks,
+  combines it with explicit boundary cases, and writes the private 100-case
+  draft plus researcher checklist under ignored `data/processed/`; run
+  `npm run draft:cross-course-benchmark`.
+- `draft_cross_course_benchmark_v2.py`: constructs the QC-amended private
+  draft separately from draft 1, with prose filtering, balanced direct and
+  paraphrase cases, ten two-chunk cases, unused confusion targets, exact source
+  quote recovery, and course-adjacent no-evidence cases. It is an authoring
+  utility, not an approval mechanism.
+- `validate_cross_course_benchmark.py`: validates the public synthetic schema
+  in CI through `npm run verify:cross-course-benchmark`. Run it against the
+  private draft without `--synthetic` to check allocation, manifest hashes,
+  page-local chunk identities, exact quotes, visual sufficiency flags, and
+  review gates.
+- `record_cross_course_reviews.py`: records explicit accept or reject decisions
+  for one or more private benchmark case IDs, retains reviewer and timestamp
+  provenance, and regenerates the ignored researcher checklist.
+- `apply_cross_course_qc_patch.py`: applies a hash-bound private QC patch to the
+  next draft version, resolves replacement evidence from the approved local
+  corpus, resets every changed review, records predecessor lineage, and
+  regenerates the private checklist.
+- `run_cross_course_retrieval_pilot.py`: runs the local-only, course-scoped
+  BM25, Qwen3 dense, reciprocal-rank-fusion, and Qwen3 reranking ladder on the
+  40 development cases without loading the 60 heldout-draft cases.
+- `analyze_cross_course_retrieval_pilot.py`: validates and sanitizes the
+  private development result, computes seeded paired uncertainty and sign
+  tests, and exports a professor-ready CSV plus PNG/SVG comparison chart.
+- `second_review_cross_course_benchmark.py`: selects a frozen 20-case,
+  four-course positive-label sample and obtains blinded structured semantic
+  review from a different local Ollama model without exposing retrieval output
+  or original review decisions.
+- `apply_cross_course_second_review.py`: validates the private second-review
+  result and explicit adjudication, preserves the original disagreement, marks
+  the 20-case sample, and advances a fully researcher-verified draft to
+  `approved`.
+- `seal_cross_course_benchmark.py`: revalidates the approved private benchmark,
+  writes immutable-hash development and held-out files without overwriting,
+  and creates an unopened one-time held-out access ledger. It does not run or
+  configure retrieval candidates.
 - `validate_evaluation_results.py`: requires every durable `*-results.md`
   summary and machine-readable component record to appear in the result
   registry, validates record schemas and unique run IDs, and runs as part of

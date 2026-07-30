@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digital-twin.local/schemas/cross-course-retrieval-v1.json",
+  "title": "Cross-course retrieval benchmark v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "dataset_status",
+    "corpus_id",
+    "authoring",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "dataset_id": {"const": "cross-course-retrieval-v1"},
+    "dataset_version": {"type": "string", "pattern": "^draft-[0-9]+$"},
+    "dataset_status": {
+      "enum": ["machine_draft", "researcher_review", "approved", "sealed", "opened"]
+    },
+    "corpus_id": {"const": "cross-course-portfolio-v2"},
+    "authoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "model",
+        "model_digest",
+        "prompt_path",
+        "prompt_sha256",
+        "temperature",
+        "base_seed"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "local-model-draft-with-exact-quote-validation",
+            "local-model-draft-with-local-assistant-qc"
+          ]
+        },
+        "model": {"const": "gemma3:4b"},
+        "model_digest": {"const": "a2af6cc3eb7f"},
+        "prompt_path": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "temperature": {"const": 0},
+        "base_seed": {"type": "integer", "minimum": 0},
+        "qc_amendment_path": {"type": "string", "minLength": 1},
+        "predecessor_dataset_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {"$ref": "#/$defs/case"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "split",
+        "slice",
+        "target_course_id",
+        "query",
+        "expected_action",
+        "difficulty",
+        "topic",
+        "required_claims",
+        "gold_evidence",
+        "distractor_source_ids",
+        "review"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "pattern": "^ccr1-[a-z0-9-]+-[0-9]{2}$"
+        },
+        "split": {"enum": ["development", "heldout_draft"]},
+        "slice": {
+          "enum": [
+            "answerable",
+            "no_evidence",
+            "cross_course_confusion",
+            "adversarial_integrity"
+          ]
+        },
+        "target_course_id": {
+          "type": ["string", "null"],
+          "enum": ["IT5002", "CS5421", "IT5100B", "IT5100E", null]
+        },
+        "query": {"type": "string", "minLength": 12, "maxLength": 500},
+        "expected_action": {
+          "enum": ["retrieve", "abstain", "refuse", "clarify"]
+        },
+        "difficulty": {
+          "enum": ["direct", "paraphrase", "multi_step", "boundary"]
+        },
+        "topic": {"type": "string", "minLength": 2, "maxLength": 120},
+        "required_claims": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {"type": "string", "minLength": 5, "maxLength": 600}
+        },
+        "gold_evidence": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "distractor_source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "review": {"$ref": "#/$defs/review"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_artifact_id",
+        "relative_path",
+        "document_sha256",
+        "page",
+        "chunk_id",
+        "chunk_sha256",
+        "supporting_quote",
+        "quote_sha256",
+        "visual_dependency"
+      ],
+      "properties": {
+        "source_artifact_id": {"type": "string", "minLength": 1},
+        "relative_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*\\.\\.).+$"
+        },
+        "document_sha256": {"$ref": "#/$defs/sha256"},
+        "page": {"type": "integer", "minimum": 1},
+        "chunk_id": {"type": "string", "pattern": "^chunk-[0-9a-f]{24}$"},
+        "chunk_sha256": {"$ref": "#/$defs/sha256"},
+        "supporting_quote": {"type": "string", "minLength": 5},
+        "quote_sha256": {"$ref": "#/$defs/sha256"},
+        "visual_dependency": {
+          "enum": ["text_sufficient", "visual_unsupported"]
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "researcher_verified",
+        "second_reviewed",
+        "reviewer",
+        "reviewed_at",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "machine_draft",
+            "researcher_verified",
+            "second_reviewed",
+            "rejected"
+          ]
+        },
+        "researcher_verified": {"type": "boolean"},
+        "second_reviewed": {"type": "boolean"},
+        "reviewer": {"type": ["string", "null"]},
+        "reviewed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

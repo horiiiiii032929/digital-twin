@@ -10,6 +10,7 @@ from src.digital_twin.grounding import (
     HeadingParagraphChunker,
     LocalDocumentParser,
     LocalFigureStore,
+    PageBoundedHeadingParagraphChunker,
     SourceIntegrityError,
     SourcePermissionError,
     SourcePermissions,
@@ -213,6 +214,36 @@ def test_chunker_uses_whole_segment_overlap(tmp_path: Path):
     assert "B" * 70 in chunks[0].text
     assert "B" * 70 in chunks[1].text
     assert "C" * 70 in chunks[1].text
+
+
+def test_page_bounded_chunker_never_combines_pdf_pages(tmp_path: Path):
+    path = tmp_path / "two-pages.pdf"
+    pdf = pymupdf.open()
+    first = pdf.new_page()
+    first.insert_text((72, 72), "First page short text.")
+    second = pdf.new_page()
+    second.insert_text((72, 72), "Second page short text.")
+    pdf.save(path, no_new_id=True)
+    pdf.close()
+    source, approval = approved_source(path)
+    document = LocalDocumentParser().parse(path, source, approval).document
+
+    baseline = HeadingParagraphChunker(max_chars=256, overlap_chars=32).chunk(
+        document
+    )
+    bounded = PageBoundedHeadingParagraphChunker(
+        max_chars=256,
+        overlap_chars=32,
+    ).chunk(document)
+
+    assert baseline[0].page_start == 1
+    assert baseline[0].page_end == 2
+    assert [(chunk.page_start, chunk.page_end) for chunk in bounded] == [
+        (1, 1),
+        (2, 2),
+    ]
+    assert [chunk.ordinal for chunk in bounded] == [0, 1]
+    assert len({chunk.id for chunk in bounded}) == 2
 
 
 def test_image_only_pdf_is_rejected_before_figures_are_persisted(tmp_path: Path):

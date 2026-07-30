@@ -26,7 +26,7 @@ LocalDocumentParser
   `- FigureAssets -> caller-provided FigureStore
         |
         v
-HeadingParagraphChunker
+PageBoundedHeadingParagraphChunker
   `- DocumentChunks with stable IDs, locators, hashes, and permission snapshot
 ```
 
@@ -65,20 +65,24 @@ source version.
 
 ## Chunking decision
 
-The baseline groups ordered heading, paragraph, or PDF-block segments up to
-1,200 characters, with up to 160 characters of whole-segment overlap. Character
-limits were selected instead of tokenizer-specific limits to keep the baseline
-provider-neutral and reproducible. Oversized individual segments are split on
-word boundaries, with a hard character fallback for unusually long tokens.
+The selected cross-course baseline groups ordered heading, paragraph, or
+PDF-block segments within each page up to 1,200 characters, with up to 160
+characters of whole-segment overlap. Character limits remain
+tokenizer-independent. Oversized individual segments are split on word
+boundaries, with a hard character fallback for unusually long tokens.
 
 Chunk IDs are SHA-256-derived from the versioned document ID, ordinal, locator,
 and content hash. Repeated runs over identical inputs therefore produce the
-same document, figure, and chunk identifiers. The issue #23 evaluation keeps
-the algorithm unchanged and tests a smaller 220-character, 60-character-overlap
-configuration over the compact synthetic corpus. See
-[local-retrieval.md](local-retrieval.md) for its measured retrieval behavior;
-chunk settings for a larger corpus must still be selected by evaluation rather
-than intuition.
+same document, figure, and chunk identifiers. The cross-course ingestion
+comparison found that the document-wide control crossed PDF page boundaries in
+591 of 598 chunks. The page-bounded candidate produced 1,322 chunks with zero
+cross-page chunks, complete provenance, stable identities, and no empty or
+oversized chunks. It is selected in
+[`student-tutor-v1`](../research/05_evaluation/profiles/student-tutor-v1.json).
+See the
+[result summary](../research/05_evaluation/cross-course-ingestion-v1-results.md)
+for limitations. Retrieval quality and size sensitivity remain separate
+evaluation questions.
 
 ## Verification
 
@@ -86,6 +90,13 @@ Run the focused synthetic verification:
 
 ```bash
 npm run verify:ingestion
+```
+
+Run the private cross-course audit only when the approved local corpus is
+available:
+
+```bash
+npm run audit:cross-course-ingestion
 ```
 
 It processes five approved synthetic sources across TXT, Markdown, and PDF,
@@ -109,6 +120,10 @@ npm run check
   converted into figure assets.
 - Caption detection uses nearby text geometry and can select the wrong text in
   dense layouts; figure descriptions remain a separate, reviewable model.
+- Eighty-four selected cross-course chunks are shorter than 80 characters,
+  including page-number-only and title-slide content.
+- Five of eight visually inspected cross-course pages contained important
+  diagram or spatial meaning not fully represented by selectable text.
 - TXT, Markdown, and PDF are the only supported formats. Word, PowerPoint,
   audio, video, Canvas, and Obsidian integration remain out of scope.
 - Retrieval filters non-tutoring and superseded chunks. The local store still

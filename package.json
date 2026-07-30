@@ -10,7 +10,7 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
@@ -21,6 +21,9 @@
     "benchmark:generation-local": "uv run python -m scripts.evaluate_generation --model ollama/gemma3:4b --json-mode --timeout-seconds 60 --max-output-tokens 600 --output reports/generated/generation-v1-gemma3-4b.json",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
     "verify:cross-course-portfolio": "uv run python -m scripts.validate_cross_course_portfolio",
+    "audit:cross-course-ingestion": "uv run python -m scripts.audit_cross_course_ingestion --output reports/generated/cross-course-ingestion-v1.json",
+    "draft:cross-course-benchmark": "uv run python -m scripts.draft_cross_course_benchmark",
+    "verify:cross-course-benchmark": "uv run python -m scripts.validate_cross_course_benchmark --synthetic --schema-only",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",

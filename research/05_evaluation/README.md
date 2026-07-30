@@ -3,6 +3,11 @@
 Use this folder for versioned datasets, rubrics, machine-readable component
 records, release profiles, and readable result summaries.
 
+The current cross-course retrieval benchmark is privately sealed with 40
+development and 60 unopened held-out cases. Its construction, review,
+adjudication, hashes, and access state are summarized in
+[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md).
+
 ```text
 05_evaluation/
 ├── instruments/ frozen prompts, schemas, analysis, examples, and hashes
