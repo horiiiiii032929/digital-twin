@@ -81,8 +81,8 @@ multimodal retrieval study in issue #60. This expands the candidate source
 universe beyond the active 32-PDF text benchmark; it does not modify that
 sealed benchmark or automatically make every file a student-facing source.
 
-A sanitized extension census at clarification time found 673 files (329 MiB),
-including:
+A first sanitized visible-file census at clarification time found 673 files
+and `du` reported 329 MiB on disk, including:
 
 | Format group | Observed files |
 | --- | ---: |
@@ -96,6 +96,13 @@ including:
 | DOCX, Pages, and EPS | 7 |
 | Other metadata, generated, archive, and extensionless files | 54 |
 | **Total** | **673** |
+
+A subsequent hash-bound filesystem inventory also traversed hidden and ignored
+tool state. It found 2,636 entries and 336,913,605 logical bytes: 1,906 were
+generated/tool-state exclusions, three had secret indicators and were excluded,
+435 require content review, and 292 are clear course-scoped candidates. The
+visible census and full traversal answer different questions and are both
+retained; neither count is a tutoring denominator.
 
 Counts are inventory evidence, not an ingestion denominator. The multimodal
 benchmark will sample evidence-bearing study artifacts by course, format, and

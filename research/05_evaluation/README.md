@@ -31,6 +31,21 @@ hash-bound visual assets under `tests/fixtures/multimodal/`. Validate them with
 contracts only: it contains no private course data, runs no model, and provides
 no candidate-quality evidence.
 
+The private authoring checkpoint is summarized without source content in
+[`multimodal-retrieval-v1-draft-status.md`](multimodal-retrieval-v1-draft-status.md).
+Create the ignored source inventory, PDF sample, and provisional 40-case draft
+with:
+
+```bash
+npm run inventory:multimodal-sources
+npm run sample:multimodal-pdf-pages
+npm run draft:multimodal-private-benchmark
+```
+
+The generated researcher checklist must be completed before split sealing or a
+V0-V3 run. Draw.io and other formats without a reliable local renderer remain
+in the review queue instead of being silently treated as supported.
+
 The exact no-participant evaluator contracts are frozen under
 [`instruments/`](instruments/). Validate judge, simulator, run-record, analysis,
 synthetic-example, and SHA-256 consistency with:
