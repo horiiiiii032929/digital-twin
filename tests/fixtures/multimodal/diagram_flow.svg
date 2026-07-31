@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#f8fafc"/>
+  <text x="32" y="44" font-family="sans-serif" font-size="24" font-weight="700">Request path</text>
+  <g font-family="sans-serif" font-size="20" text-anchor="middle">
+    <rect x="45" y="135" width="150" height="74" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+    <text x="120" y="180">Client</text>
+    <rect x="245" y="135" width="150" height="74" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/>
+    <text x="320" y="180">Gateway</text>
+    <rect x="445" y="135" width="150" height="74" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+    <text x="520" y="180">Course store</text>
+  </g>
+  <g stroke="#334155" stroke-width="5" fill="none">
+    <path d="M195 172 H238"/>
+    <path d="M395 172 H438"/>
+  </g>
+  <g fill="#334155">
+    <path d="M238 172 l-14 -9 v18 z"/>
+    <path d="M438 172 l-14 -9 v18 z"/>
+  </g>
+  <text x="320" y="292" font-family="sans-serif" font-size="18" text-anchor="middle" fill="#475569">Arrows define the processing order.</text>
+</svg>

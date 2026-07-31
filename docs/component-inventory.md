@@ -17,9 +17,10 @@ remains immutable historical evidence.
 | Account/session | None; prototype is unauthenticated | Pending | Invite-only admin/professor/student session design |
 | Course membership | No multi-user boundary | Pending | Role and course authorization with isolation tests |
 | Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
-| Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Cross-course extraction QA; add alternatives only for observed failures |
+| Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Evaluate local OCR and layout-aware visual regions in #60 without changing the sealed text corpus |
 | Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
-| Embedding | Local Qwen3 control qualified on development data; Jina retired before hosted execution | Pending final method profile | Optimize and freeze the local M0-M3 binding without opening held-out data |
+| Visual representation | Text, captions, and page renders only; public six-modality fixture validated | Pending | Author the approved local-only benchmark in #60, then compare V0-V2 before conditionally running visual embeddings |
+| Embedding | Local Qwen3 control qualified on development data; Jina retired before hosted execution | Pending final method profile | Run the frozen M0-M3 comparison in #7 without reopening development optimization |
 | Retriever | BM25 v1 rollback; prior dense/RRF studies selected no replacement | Pending final profile | M0-M3 cross-course comparison in #7 |
 | Reranker | Local Qwen3 M3 leads development quality but failed the latency gate at depth 40 and 20; Jina is not required | Research candidate / deployment-ineligible | Retain M3 in the sealed comparison; carry M2 as the operational candidate |
 | Evidence action | Any-hit rollback is not a safe selected verifier | Pending end-to-end | Measure evidence completeness/no-evidence directly in #7, #24, and #25 |
@@ -57,16 +58,18 @@ and invalid results are part of the evidence, not cleanup candidates.
 1. #49 freezes the permitted course portfolio and verified benchmark.
 2. The local deployability study freezes one quality-preserving Qwen3
    embedding/reranking configuration on development data only.
-3. #7 compares M0-M3 once on the sealed cross-course set and selects a profile
+3. #60 evaluates visual study-material retrieval separately while preserving
+   the text-only seal; its result cannot rewrite #7.
+4. #7 compares M0-M3 once on the sealed cross-course set and selects a profile
    or rollback.
-4. #24 qualifies professor fidelity, tutoring policy, generation, and citation
+5. #24 qualifies professor fidelity, tutoring policy, generation, and citation
    behaviour with generator/evidence controlled.
-5. #8 integrates multi-course professor/student journeys and
+6. #8 integrates multi-course professor/student journeys and
    evaluation-before-publication.
-6. #10 and #25 run calibrated pedagogical, simulated, and end-to-end
+7. #10 and #25 run calibrated pedagogical, simulated, and end-to-end
    evaluation.
-7. #9 validates isolation, failure, recovery, capacity, and packaging.
-8. #12 freezes the final profile and technical evidence on 2026-08-16.
+8. #9 validates isolation, failure, recovery, capacity, and packaging.
+9. #12 freezes the final profile and technical evidence on 2026-08-16.
 
 ## Profile rule
 

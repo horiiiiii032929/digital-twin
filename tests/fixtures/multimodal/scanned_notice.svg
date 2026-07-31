@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <defs><filter id="paper"><feTurbulence baseFrequency="0.8" numOctaves="2" seed="7" result="noise"/><feBlend in="SourceGraphic" in2="noise" mode="multiply"/></filter></defs>
+  <rect width="640" height="360" fill="#cbd5e1"/>
+  <g transform="rotate(-1.5 320 180)" filter="url(#paper)">
+    <rect x="95" y="38" width="450" height="284" fill="#fffef2" stroke="#78716c"/>
+    <text x="320" y="105" font-family="serif" font-size="27" font-weight="700" text-anchor="middle">LAB NOTICE</text>
+    <text x="130" y="166" font-family="serif" font-size="21">Submission closes: Friday, 18:00</text>
+    <text x="130" y="211" font-family="serif" font-size="21">Accepted format: PDF only</text>
+    <text x="130" y="256" font-family="serif" font-size="21">Late work requires approval.</text>
+  </g>
+</svg>
