@@ -19,9 +19,9 @@ remains immutable historical evidence.
 | Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
 | Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Cross-course extraction QA; add alternatives only for observed failures |
 | Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
-| Embedding | Local Qwen control and hosted Jina text candidate behind shared development runner; no final selection | Pending | Complete development-only provider qualification in #50 |
+| Embedding | Local Qwen3 control qualified on development data; Jina retired before hosted execution | Pending final method profile | Optimize and freeze the local M0-M3 binding without opening held-out data |
 | Retriever | BM25 v1 rollback; prior dense/RRF studies selected no replacement | Pending final profile | M0-M3 cross-course comparison in #7 |
-| Reranker | Local Qwen3 and hosted Jina adapters behind shared usage, cost, and failure contracts; no final selection | Pending | Qualify provider in #50, then include fixed M3 in #7 |
+| Reranker | Local Qwen3 M3 leads development quality but failed the latency gate at depth 40 and 20; Jina is not required | Research candidate / deployment-ineligible | Retain M3 in the sealed comparison; carry M2 as the operational candidate |
 | Evidence action | Any-hit rollback is not a safe selected verifier | Pending end-to-end | Measure evidence completeness/no-evidence directly in #7, #24, and #25 |
 | Generator | Deterministic control and unselected local/API adapters | Pending | Fixed provider/prompt qualification after retrieval selection |
 | Professor profile/policy | Structured professor policy v1 and approved onboarding direction | Selected foundation / Refine | Multi-professor persistence and fidelity evaluation |
@@ -43,7 +43,8 @@ remains immutable historical evidence.
 - The IT5002 development pilot showed a large descriptive reranking advantage,
   but its negatives were calibration cases.
 - The separate one-time rapid run is invalid, retired, and never rerun.
-- Jina has no result and remains an unselected implementation spike.
+- Jina has no result and was retired before hosted execution; its adapters remain
+  historical, unselected implementation evidence.
 - Cross-course ingestion selected page-bounded chunks: 0/1,322 crossed pages,
   compared with 591/598 for the document-wide control.
 
@@ -54,8 +55,8 @@ and invalid results are part of the evidence, not cleanup candidates.
 ## Selection sequence
 
 1. #49 freezes the permitted course portfolio and verified benchmark.
-2. #50 qualifies one embedding/reranking provider configuration on development
-   data only.
+2. The local deployability study freezes one quality-preserving Qwen3
+   embedding/reranking configuration on development data only.
 3. #7 compares M0-M3 once on the sealed cross-course set and selects a profile
    or rollback.
 4. #24 qualifies professor fidelity, tutoring policy, generation, and citation

@@ -26,8 +26,9 @@ ingestion, retrieval baselines/candidates, deterministic generation controls,
 evaluation instruments, component profiles, and result governance.
 
 The current method is not selected. IT5002 pilot results justify a cross-course
-study, while the separate one-time rapid run is invalid and retired. Jina has
-no result and remains an unselected provider spike. The final multi-course
+study, while the separate one-time rapid run is invalid and retired. Jina was
+retired before hosted execution; local Qwen3 is the semantic provider binding
+for quality-first deployability optimization. The final multi-course
 product and end-to-end evidence do not yet exist.
 
 ## Active roadmap

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-retrieval-deployability-v1-depth20",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-draft-6-development",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "7722544490c02252825249c5c09a313cdbd6aeb2",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "qwen3-m3-depth40-batch8-context1024",
+        "version": "deployability-v1",
+        "configuration": {"candidate_depth": 40, "reranking_batch_size": 8, "reranking_max_length": 1024, "device": "mps", "dtype": "float16"}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9230769230769231, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8597452739186106, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8597452739186106, "passed": true},
+        {"name": "development-mrr", "value": 0.8428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8428571428571429, "passed": true},
+        {"name": "warm-latency-p50", "value": 31428.12491649988, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "warm-latency-p95", "value": 61920.8983958002, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "peak-resident-memory", "value": 2229026816.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 4294967296.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 development cases completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "Zero held-out reads; ledger remained unopened."},
+        {"name": "quality-preservation", "passed": true, "evidence": "M3 achieved 28/35 complete-evidence successes."},
+        {"name": "course-isolation", "passed": true, "evidence": "Zero course-isolation violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "Zero failures and retries."},
+        {"name": "peak-memory", "passed": true, "evidence": "Peak RSS remained below 4 GiB."},
+        {"name": "deployment-latency", "passed": false, "evidence": "M3 p95 was 61,920.90 ms versus a 10,000 ms ceiling."},
+        {"name": "external-cost", "passed": true, "evidence": "Zero external calls and USD 0 cost."}
+      ],
+      "failures_by_category": {"operational": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "qwen3-m3-depth20-batch8-context1024",
+        "version": "deployability-v1",
+        "configuration": {"candidate_depth": 20, "reranking_batch_size": 8, "reranking_max_length": 1024, "manual_left_padding": true, "device": "mps", "dtype": "float16"}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9230769230769231, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.864809253541012, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8597452739186106, "passed": true},
+        {"name": "development-mrr", "value": 0.8428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8428571428571429, "passed": true},
+        {"name": "warm-latency-p50", "value": 14626.177728999664, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "warm-latency-p95", "value": 28132.26839099957, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "peak-resident-memory", "value": 2118418432.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 4294967296.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 development cases completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "Zero held-out reads; ledger remained unopened."},
+        {"name": "quality-preservation", "passed": true, "evidence": "M3 retained 28/35 complete-evidence successes and improved nDCG."},
+        {"name": "course-isolation", "passed": true, "evidence": "Zero course-isolation violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "Zero failures and retries."},
+        {"name": "peak-memory", "passed": true, "evidence": "Peak RSS was 2,118,418,432 bytes, below 4 GiB."},
+        {"name": "deployment-latency", "passed": false, "evidence": "M3 p95 was 28,132.27 ms versus a 10,000 ms ceiling."},
+        {"name": "external-cost", "passed": true, "evidence": "Zero external calls and USD 0 cost."}
+      ],
+      "failures_by_category": {"operational": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Depth 20 preserved the highest development quality and halved latency, but its 28.13-second p95 still failed the 10-second gate. Mark this local M3 deployment-ineligible, retain it in the research comparison, and use M2 as the operational candidate pending sealed evaluation.",
+    "limitations": [
+      "Development evidence does not support a held-out generalization claim.",
+      "Boundary cases are calibration diagnostics.",
+      "Timings are single-process workstation evidence, not concurrent capacity evidence.",
+      "The 60-case held-out split remains unopened."
+    ]
+  }
+}

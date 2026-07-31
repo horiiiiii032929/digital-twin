@@ -72,6 +72,26 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-root", type=Path, default=RUN_ROOT)
     parser.add_argument("--batch-size", type=int, default=8)
+    parser.add_argument(
+        "--embedding-batch-size",
+        type=int,
+        default=None,
+        help="Override the local embedding batch size independently.",
+    )
+    parser.add_argument(
+        "--reranking-batch-size",
+        type=int,
+        default=None,
+        help="Override the local reranking batch size independently.",
+    )
+    parser.add_argument("--embedding-max-length", type=int, default=2048)
+    parser.add_argument("--reranking-max-length", type=int, default=2048)
+    parser.add_argument(
+        "--rerank-candidate-limit",
+        type=int,
+        default=None,
+        help="Development-only override for an explicitly recorded M3 depth sweep.",
+    )
     parser.add_argument("--device", default="mps")
     parser.add_argument("--dtype", default="float16")
     parser.add_argument(
@@ -105,11 +125,23 @@ def build_providers(
     config: ProviderQualificationConfig,
     *,
     batch_size: int,
+    embedding_batch_size: int | None = None,
+    reranking_batch_size: int | None = None,
+    embedding_max_length: int = 2048,
+    reranking_max_length: int = 2048,
     device: str,
     dtype: str,
 ) -> tuple[Any, Any, dict[str, float], Any]:
     if batch_size < 1:
         raise ValueError("batch size must be positive")
+    resolved_embedding_batch_size = embedding_batch_size or batch_size
+    resolved_reranking_batch_size = reranking_batch_size or max(1, batch_size // 2)
+    if resolved_embedding_batch_size < 1 or resolved_reranking_batch_size < 1:
+        raise ValueError("provider batch sizes must be positive")
+    if embedding_max_length < 32:
+        raise ValueError("embedding max length must be at least 32")
+    if reranking_max_length < 64:
+        raise ValueError("reranking max length must be at least 64")
     started = time.perf_counter()
     if pair.embedding.execution == ProviderExecution.LOCAL:
         embedding_path = model_path(
@@ -129,16 +161,16 @@ def build_providers(
             instruction=config.query_instruction,
             device=device,
             dtype=dtype,
-            batch_size=batch_size,
-            max_length=2048,
+            batch_size=resolved_embedding_batch_size,
+            max_length=embedding_max_length,
         )
         reranker = Qwen3Reranker(
             reranking_path,
             instruction=config.query_instruction,
             device=device,
             dtype=dtype,
-            batch_size=max(1, batch_size // 2),
-            max_length=2048,
+            batch_size=resolved_reranking_batch_size,
+            max_length=reranking_max_length,
         )
         load_seconds = {
             "embedding_model_load": embedder.model_load_seconds,
@@ -309,14 +341,27 @@ def main() -> int:
         pair,
         config,
         batch_size=args.batch_size,
+        embedding_batch_size=args.embedding_batch_size,
+        reranking_batch_size=args.reranking_batch_size,
+        embedding_max_length=args.embedding_max_length,
+        reranking_max_length=args.reranking_max_length,
         device=args.device,
         dtype=args.dtype,
     )
+    effective_ladder = config.ladder
+    if args.rerank_candidate_limit is not None:
+        if args.rerank_candidate_limit < config.ladder.result_limit:
+            raise ValueError(
+                "rerank candidate limit cannot be smaller than the result limit"
+            )
+        effective_ladder = config.ladder.model_copy(
+            update={"rerank_candidate_limit": args.rerank_candidate_limit}
+        )
     runtimes, index_seconds = build_course_scoped_ladders(
         chunks_by_course,
         embedder=embedder,
         reranker=reranker,
-        config=config.ladder,
+        config=effective_ladder,
     )
     run_dir = args.output_root / pair.pair_id
     output_path = run_dir / QUERY_OUTPUT_NAME
@@ -401,7 +446,7 @@ def main() -> int:
         "heldout_file_reads": 0,
         "heldout_ledger_status": "unopened",
         "configuration": {
-            "ladder": config.ladder.model_dump(mode="json"),
+            "ladder": effective_ladder.model_dump(mode="json"),
             "query_instruction": config.query_instruction,
             "boundary_course_assignments": boundary_assignments,
             "device": (
@@ -415,6 +460,18 @@ def main() -> int:
                 else "provider-managed"
             ),
             "batch_size": args.batch_size,
+            "embedding_batch_size": embedder.batch_size
+            if pair.embedding.execution == ProviderExecution.LOCAL
+            else None,
+            "reranking_batch_size": reranker.batch_size
+            if pair.embedding.execution == ProviderExecution.LOCAL
+            else None,
+            "embedding_max_length": embedder.max_length
+            if pair.embedding.execution == ProviderExecution.LOCAL
+            else None,
+            "reranking_max_length": reranker.max_length
+            if pair.embedding.execution == ProviderExecution.LOCAL
+            else None,
             "spend_cap_usd": config.spend_cap_usd,
         },
         "aggregate": aggregate,

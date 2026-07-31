@@ -2,8 +2,14 @@
 
 Date: 2026-07-30
 
-Status: prospective development-only plan; no provider selected and no
-held-out access permitted
+Status: local control completed; hosted candidate retired by the prospective
+2026-07-31 deployability amendment; no held-out access permitted
+
+This v1 plan is retained as historical evidence. The local half ran as planned.
+Before the hosted half ran, the project removed hosted-provider comparison as
+a selection requirement because the final research question is M0-M3 method
+quality under a local deployment boundary. See
+[`2026-07-31-local-retrieval-deployability-plan.md`](2026-07-31-local-retrieval-deployability-plan.md).
 
 ## Decision question
 

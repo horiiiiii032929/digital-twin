@@ -124,7 +124,12 @@ Current evidence and limitations:
   registered as invalid, retired, and never rerun.
 - All observed no-evidence results used calibration cases and therefore are not
   independent final evidence.
-- Jina has no evaluation result and remains an unselected provider spike.
+- Jina was retired before hosted execution and is not a selection dependency.
+  Local Qwen3 remains the semantic provider binding for the M0-M3 study.
+- Local M3 preserved 80.0% complete-evidence success after optimization, but
+  its best tested p95 was 28.13 seconds. It remains a research candidate and is
+  deployment-ineligible on the reference hardware; M2 is the operational
+  candidate pending the sealed comparison.
 - The product still lacks complete multi-course professor/student journeys,
   a selected cross-course retrieval profile, professor-fidelity evidence,
   durable isolation/recovery evidence, and capacity results.
