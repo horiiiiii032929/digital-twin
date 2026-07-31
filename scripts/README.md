@@ -70,6 +70,23 @@ Current utilities:
   positive/boundary semantics, and required modality and safety slices without
   reading private sources or calling a model; run it with `npm run
   verify:multimodal-retrieval-instruments`.
+- `inventory_multimodal_sources.py`: creates a private hash-bound per-file
+  inventory under ignored storage and a sanitized aggregate without filenames
+  or content; it classifies generated and secret-indicated exclusions,
+  assessment-like review items, clear course candidates, formats, and possible
+  modalities. Run it with `npm run inventory:multimodal-sources`.
+- `sample_multimodal_pdf_pages.py`: analyzes eligible and previously approved
+  PDF pages, selects a balanced high-visual-score review sample across detected
+  courses, renders each selected page with Poppler, and creates private contact
+  sheets and a review queue. Run it with `npm run
+  sample:multimodal-pdf-pages`; its visual score is a sampling aid, not an
+  eligibility or modality decision.
+- `build_multimodal_private_draft.py`: combines the private page sample and
+  ignored authoring specification into a strict 40-case draft with source/page/
+  render hashes, provisional evidence regions, a Markdown checklist, and a
+  private local HTML review page that exports decisions without uploading
+  content. Run it with `npm run draft:multimodal-private-benchmark`. The output
+  remains unsealed and cannot run until every case is researcher-verified.
 - `record_cross_course_reviews.py`: records explicit accept or reject decisions
   for one or more private benchmark case IDs, retains reviewer and timestamp
   provenance, and regenerates the ignored researcher checklist.

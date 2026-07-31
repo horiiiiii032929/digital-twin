@@ -29,11 +29,14 @@ diagram, handwriting, or spatial meaning not fully represented by selectable
 text. The current parser therefore proves text coverage only.
 
 The full authorized source universe is the canonical academic vault rather
-than only the four-course PDF subset. A sanitized 2026-07-31 census found 673
-files (329 MiB): 123 PDFs, 27 Draw.io diagrams, 22 notebooks, 22 CSV files, 17
-PNG/JPEG images, 10 TeX sources, seven DOCX/Pages/EPS artifacts, substantial
-Markdown/text and code, and generated or metadata files requiring exclusion.
-These counts establish format diversity; they are not quality denominators.
+than only the four-course PDF subset. A visible-file census found 673 files;
+the subsequent hash-bound traversal found 2,636 entries and 336,913,605 logical
+bytes because it also counted hidden and ignored tool state. Of the full set,
+1,906 are generated/tool-state exclusions, three are secret-indicated
+exclusions, 435 require review, and 292 are clear course-scoped candidates.
+The vault includes 123 PDFs, 27 Draw.io diagrams, 22 notebooks, 22 CSV files,
+17 PNG/JPEG images, 10 TeX sources, and seven DOCX/Pages/EPS artifacts. These
+counts establish format diversity; they are not quality denominators.
 
 ## Prediction
 
@@ -204,11 +207,24 @@ Validate the public contract without a model or private source access:
 npm run verify:multimodal-retrieval-instruments
 ```
 
+Create the private inventory, PDF review sample, and unverified draft locally:
+
+```bash
+npm run inventory:multimodal-sources
+npm run sample:multimodal-pdf-pages
+npm run draft:multimodal-private-benchmark
+```
+
 The command verifies the JSON Schema, fixture hashes, rasterization contract,
 region bounds and ownership, modality/slice coverage, positive and boundary
 semantics, permissions, and review-state rules. No candidate evaluation has run,
 so there is no result-registry entry or Keep / Refine / Go Deeper / Drop
 decision yet.
+
+The current private checkpoint has 25 page assets and 40 cases: 24 visual-
+answerable, eight text controls, four no-evidence, and four integrity cases.
+All 40 are unverified and remain ignored; they cannot be sealed or run until
+the researcher completes the generated visual-review checklist.
 
 ## Stop rules
 
