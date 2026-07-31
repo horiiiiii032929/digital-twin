@@ -10,7 +10,7 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
@@ -24,6 +24,7 @@
     "audit:cross-course-ingestion": "uv run python -m scripts.audit_cross_course_ingestion --output reports/generated/cross-course-ingestion-v1.json",
     "draft:cross-course-benchmark": "uv run python -m scripts.draft_cross_course_benchmark",
     "verify:cross-course-benchmark": "uv run python -m scripts.validate_cross_course_benchmark --synthetic --schema-only",
+    "verify:multimodal-retrieval-instruments": "uv run python -m scripts.validate_multimodal_retrieval_dataset",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#fff"/>
+  <text x="32" y="40" font-family="sans-serif" font-size="24" font-weight="700">Warm query latency</text>
+  <g stroke="#334155" stroke-width="2">
+    <path d="M90 285 H600"/>
+    <path d="M90 70 V285"/>
+  </g>
+  <g font-family="sans-serif" font-size="17" text-anchor="middle">
+    <rect x="145" y="205" width="90" height="80" fill="#60a5fa"/>
+    <text x="190" y="310">M0</text><text x="190" y="194">1.2 s</text>
+    <rect x="285" y="98" width="90" height="187" fill="#f97316"/>
+    <text x="330" y="310">M1</text><text x="330" y="87">2.8 s</text>
+    <rect x="425" y="158" width="90" height="127" fill="#22c55e"/>
+    <text x="470" y="310">M2</text><text x="470" y="147">1.9 s</text>
+  </g>
+</svg>

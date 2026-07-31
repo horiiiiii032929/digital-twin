@@ -23,6 +23,14 @@ Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
 
+The visual study-material groundwork is defined by a strict
+[`multimodal retrieval schema`](multimodal_retrieval_v1.schema.json), a
+[`public synthetic fixture`](multimodal_retrieval_v1_synthetic.json), and six
+hash-bound visual assets under `tests/fixtures/multimodal/`. Validate them with
+`npm run verify:multimodal-retrieval-instruments`. The fixture exercises
+contracts only: it contains no private course data, runs no model, and provides
+no candidate-quality evidence.
+
 The exact no-participant evaluator contracts are frozen under
 [`instruments/`](instruments/). Validate judge, simulator, run-record, analysis,
 synthetic-example, and SHA-256 consistency with:
@@ -56,8 +64,9 @@ npm run analyze:retrieval-provider-local
 
 This validates the complete 40-case method matrix and the held-out-access,
 course-isolation, provider-failure, and cost gates before emitting a sanitized
-summary, CSV, and chart under ignored `reports/generated/`. It does not select
-a provider; the prospectively frozen hosted comparison is still required.
+summary, CSV, and chart under ignored `reports/generated/`. The historical
+hosted comparison was retired before execution; the registered local
+deployability results preserve that amendment and its operational decision.
 
 The existing committed datasets are regression and development assets, not the
 sole final-project benchmark. The selected successor design is documented in

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#fffdf5"/>
+  <text x="32" y="44" font-family="serif" font-size="25" font-weight="700">Softmax normalization</text>
+  <g font-family="serif" fill="#111827" text-anchor="middle">
+    <text x="320" y="145" font-size="38">pᵢ = exp(zᵢ)</text>
+    <path d="M190 164 H450" stroke="#111827" stroke-width="3"/>
+    <text x="320" y="215" font-size="38">Σⱼ exp(zⱼ)</text>
+    <text x="320" y="280" font-size="20" fill="#475569">The denominator sums across all classes.</text>
+  </g>
+</svg>

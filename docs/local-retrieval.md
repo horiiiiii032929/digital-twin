@@ -172,6 +172,10 @@ remove hard cases and inflate it.
   different queries.
 - Figure captions and surrounding selectable text can be retrieved, but image
   pixels are not semantically ranked.
+- Diagrams, charts, tables, equations, screenshots, scans, annotations, and
+  photos are scoped in the separate
+  [`multimodal retrieval plan`](../research/04_experiments/2026-07-31-multimodal-retrieval-v1-plan.md).
+  Audio and video remain a later temporal-retrieval decision.
 - The local IT5002 bundle has a sanitized source inventory and is selected for
   local research evaluation. This does not authorize external processing or a
   real student-facing release.

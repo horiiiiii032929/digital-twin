@@ -65,6 +65,11 @@ Current utilities:
   private draft without `--synthetic` to check allocation, manifest hashes,
   page-local chunk identities, exact quotes, visual sufficiency flags, and
   review gates.
+- `validate_multimodal_retrieval_dataset.py`: validates the public visual
+  retrieval fixture, source hashes, normalized evidence regions, permissions,
+  positive/boundary semantics, and required modality and safety slices without
+  reading private sources or calling a model; run it with `npm run
+  verify:multimodal-retrieval-instruments`.
 - `record_cross_course_reviews.py`: records explicit accept or reject decisions
   for one or more private benchmark case IDs, retains reviewer and timestamp
   provenance, and regenerates the ignored researcher checklist.

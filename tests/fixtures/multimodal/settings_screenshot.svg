@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#e2e8f0"/>
+  <rect x="55" y="38" width="530" height="284" rx="12" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="55" y="38" width="530" height="48" rx="12" fill="#1e293b"/>
+  <circle cx="82" cy="62" r="7" fill="#ef4444"/><circle cx="105" cy="62" r="7" fill="#f59e0b"/><circle cx="128" cy="62" r="7" fill="#22c55e"/>
+  <g font-family="sans-serif">
+    <text x="85" y="128" font-size="23" font-weight="700">Course access</text>
+    <text x="85" y="174" font-size="18">Share derived study notes</text>
+    <rect x="455" y="150" width="82" height="36" rx="18" fill="#16a34a"/>
+    <circle cx="518" cy="168" r="14" fill="#fff"/>
+    <text x="85" y="231" font-size="18">Allow external providers</text>
+    <rect x="455" y="207" width="82" height="36" rx="18" fill="#cbd5e1"/>
+    <circle cx="474" cy="225" r="14" fill="#fff"/>
+    <text x="85" y="282" font-size="15" fill="#64748b">Green means enabled.</text>
+  </g>
+</svg>

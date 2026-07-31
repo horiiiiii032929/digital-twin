@@ -124,6 +124,10 @@ npm run check
   including page-number-only and title-slide content.
 - Five of eight visually inspected cross-course pages contained important
   diagram or spatial meaning not fully represented by selectable text.
+- Visual completeness is now a separate prospective comparison under
+  [`multimodal study-material retrieval v1`](../research/04_experiments/2026-07-31-multimodal-retrieval-v1-plan.md).
+  It will compare local OCR and layout-aware extraction before considering
+  visual embeddings; it does not change the sealed text corpus.
 - TXT, Markdown, and PDF are the only supported formats. Word, PowerPoint,
   audio, video, Canvas, and Obsidian integration remain out of scope.
 - Retrieval filters non-tutoring and superseded chunks. The local store still
