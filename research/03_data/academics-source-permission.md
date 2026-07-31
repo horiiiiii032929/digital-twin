@@ -7,6 +7,8 @@ Decision owner: project researcher and source holder
 Status: approved for inventory and research evaluation; canonical source
 location confirmed and cross-course portfolio v2 selected
 
+Multimodal clarification date: 2026-07-31
+
 ## Approved collection
 
 All course materials contained in the user's `academics` collection may be:
@@ -70,3 +72,38 @@ Therefore:
 - the earlier 17-PDF inventory is retained as a superseded partial-source
   snapshot; and
 - source files remain outside Git.
+
+## Multimodal clarification
+
+The source holder confirmed that all eligible study materials inside the
+canonical `Documents/academia_vault` collection may be used for the local
+multimodal retrieval study in issue #60. This expands the candidate source
+universe beyond the active 32-PDF text benchmark; it does not modify that
+sealed benchmark or automatically make every file a student-facing source.
+
+A sanitized extension census at clarification time found 673 files (329 MiB),
+including:
+
+| Format group | Observed files |
+| --- | ---: |
+| PDF | 123 |
+| Markdown and plain text | 136 |
+| Source code and SQL | 255 |
+| Draw.io diagrams | 27 |
+| CSV and notebooks | 44 |
+| PNG and JPEG images | 17 |
+| TeX | 10 |
+| DOCX, Pages, and EPS | 7 |
+| Other metadata, generated, archive, and extensionless files | 54 |
+| **Total** | **673** |
+
+Counts are inventory evidence, not an ingestion denominator. The multimodal
+benchmark will sample evidence-bearing study artifacts by course, format, and
+observed modality. Generated files, caches, archives, duplicates, and unrelated
+software artifacts are classified before sampling. The mandatory exclusions
+above still apply to solutions, graded answers, student or participant data,
+credentials, and secrets even when such files are physically inside the vault.
+
+All visual rendering, OCR, layout extraction, descriptions, and embeddings for
+this study remain local-only. This clarification does not activate the earlier
+prospective external-provider permission.

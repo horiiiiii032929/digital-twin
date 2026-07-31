@@ -2,8 +2,9 @@
 
 Date: 2026-07-31
 
-Status: prospective groundwork complete; public synthetic instrument validated;
-no private benchmark authored, no model run, and no candidate selected
+Status: prospective groundwork complete; source and low-cost deployment
+boundaries clarified; public synthetic instrument validated; no private
+benchmark authored, no model run, and no candidate selected
 
 GitHub issue: [#60](https://github.com/horiiiiii032929/digital-twin/issues/60)
 
@@ -27,6 +28,13 @@ five of eight rendered pages inspected across the four courses contained
 diagram, handwriting, or spatial meaning not fully represented by selectable
 text. The current parser therefore proves text coverage only.
 
+The full authorized source universe is the canonical academic vault rather
+than only the four-course PDF subset. A sanitized 2026-07-31 census found 673
+files (329 MiB): 123 PDFs, 27 Draw.io diagrams, 22 notebooks, 22 CSV files, 17
+PNG/JPEG images, 10 TeX sources, seven DOCX/Pages/EPS artifacts, substantial
+Markdown/text and code, and generated or metadata files requiring exclusion.
+These counts establish format diversity; they are not quality denominators.
+
 ## Prediction
 
 A locally processed OCR and region-aware representation should recover most
@@ -48,10 +56,20 @@ Included in v1:
 - handwritten annotations when legible; and
 - instructional photos with an evidence-bearing region.
 
-PDF pages, slide renders, and standalone images may be source containers.
+PDF pages, Draw.io renders, notebook outputs, tables, equations, DOCX/Pages
+renders, and standalone images may be source containers when they are
+evidence-bearing study material. Code, Markdown, and other textual sources stay
+available to the text path and controls; they are not converted to images just
+to inflate multimodal coverage.
 Audio and video require temporal segmentation, transcript alignment, and
 different latency measures, so they remain a separate future decision rather
 than being silently mixed into this benchmark.
+
+Permission covers eligible study materials across the canonical vault. It does
+not override exclusions for solutions, graded answers, student or participant
+data, credentials, secrets, generated caches, duplicates, or unrelated files.
+Every sampled source receives an explicit eligibility decision before case
+authoring.
 
 ## Fixed candidates
 
@@ -70,6 +88,19 @@ V3 may run only if V2 misses the complete-evidence gate overall or fails a
 specific observed modality. No hosted model or external course-content transfer
 is permitted in this experiment.
 
+## Low-cost deployment boundary
+
+The student-facing target is a commodity CPU-only service with approximately
+two vCPUs, 4 GiB RAM, and no GPU. Visual rendering, OCR, layout analysis,
+description generation, and visual embedding construction are offline ingestion
+jobs on the local research workstation. The deployed request path receives only
+approved, revocable derived text, region metadata, and precomputed indexes; it
+does not keep an OCR, caption, layout, or vision model resident.
+
+This separates ingestion compute from serving cost. A provider or method that
+requires an always-on accelerator or server-side page processing is not
+deployment-eligible for v1, even if its offline quality is higher.
+
 ## Data and split discipline
 
 The committed
@@ -80,11 +111,13 @@ slices. SVG assets must be rasterized before candidate execution so embedded
 markup cannot leak answers. This set tests contracts and runners only; it cannot
 support a quality claim.
 
-The private course benchmark will be created separately under ignored storage.
+The private course benchmark will be created separately under ignored storage
+from eligible materials across the canonical vault, not only the active
+four-course text corpus.
 Before any candidate run, the researcher will:
 
-1. sample rendered pages by course and observed modality, not by image-object
-   count;
+1. classify candidate files by course, format, eligibility, and observed
+   modality, then sample artifacts rather than raw image objects;
 2. author at least 24 visual-answerable cases spanning at least four observed
    modalities, with at least four cases per included modality;
 3. add at least eight text-sufficient controls, four no-evidence cases, and four
@@ -118,8 +151,10 @@ Supporting measures:
   model, policy, integration, or operations;
 - offline render/extraction/index p50 and p95 per page;
 - warm retrieval p50 and p95 per query;
-- peak resident memory, model-cache size, derived storage per page, failures,
-  retries, token use, external calls, and cost.
+- offline and deployed peak resident memory, model-cache size, derived storage
+  per page, failures, retries, token use, external calls, and cost;
+- a reproducible monthly quote for the declared commodity server, reported as
+  operational evidence rather than a timeless price claim.
 
 ## Hard gates
 
@@ -136,9 +171,13 @@ A candidate is deployment-eligible on the declared reference hardware only if:
   evidence success@3;
 - text-control complete-evidence success does not regress from V0;
 - no-evidence and adversarial-integrity action accuracy are both 100%;
-- warm p95 retrieval latency is at most 2 seconds;
+- warm p95 retrieval latency is at most 2 seconds on the declared two-vCPU,
+  4-GiB, no-GPU target;
 - offline preprocessing p95 is at most 30 seconds per page;
-- peak process memory is at most 4 GiB; and
+- deployed service peak resident memory is at most 2.5 GiB, leaving capacity
+  for the operating system and storage process;
+- no OCR, layout, caption, or vision model is resident in the deployed service;
+- the current-vault derived retrieval package is at most 2 GiB; and
 - derived artifacts can be revoked by course, source, and version.
 
 The small private benchmark will also report paired bootstrap intervals. Hard
@@ -178,5 +217,8 @@ decision yet.
 - Do not run private pages through a hosted OCR, caption, or embedding service.
 - Do not use OCR confidence as evidence completeness.
 - Do not add V3 merely because it is nominally multimodal.
+- Do not move offline visual preprocessing onto the student request path.
+- Do not force code or textual files through image processing merely because
+  the full vault is authorized.
 - Stop and record the run if the held-out ledger, permission boundary, or source
   hash is violated.
