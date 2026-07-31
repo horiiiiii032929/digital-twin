@@ -17,6 +17,30 @@ class Qwen3RerankingDependencyError(RuntimeError):
     pass
 
 
+def left_pad_token_sequences(
+    sequences: Sequence[Sequence[int]],
+    *,
+    pad_token_id: int,
+) -> tuple[list[list[int]], list[list[int]]]:
+    """Left-pad token IDs while preserving every prebuilt prompt token."""
+
+    if not sequences:
+        return [], []
+    if pad_token_id < 0:
+        raise ValueError("pad token ID cannot be negative")
+    if any(not sequence for sequence in sequences):
+        raise ValueError("reranking token sequences cannot be empty")
+    maximum = max(len(sequence) for sequence in sequences)
+    input_ids: list[list[int]] = []
+    attention_masks: list[list[int]] = []
+    for sequence in sequences:
+        values = [int(token_id) for token_id in sequence]
+        padding = maximum - len(values)
+        input_ids.append([pad_token_id] * padding + values)
+        attention_masks.append([0] * padding + [1] * len(values))
+    return input_ids, attention_masks
+
+
 class Qwen3Reranker:
     """Score query-document pairs with a revision-pinned local Qwen3 model."""
 
@@ -127,11 +151,22 @@ class Qwen3Reranker:
                 [*self._prefix_tokens, *input_ids, *self._suffix_tokens]
                 for input_ids in encoded["input_ids"]
             ]
-            inputs = self._tokenizer.pad(
-                {"input_ids": wrapped},
-                padding=True,
-                return_tensors="pt",
-            ).to(self.device)
+            padded_ids, attention_masks = left_pad_token_sequences(
+                wrapped,
+                pad_token_id=self._tokenizer.pad_token_id,
+            )
+            inputs = {
+                "input_ids": self._torch.tensor(
+                    padded_ids,
+                    dtype=self._torch.long,
+                    device=self.device,
+                ),
+                "attention_mask": self._torch.tensor(
+                    attention_masks,
+                    dtype=self._torch.long,
+                    device=self.device,
+                ),
+            }
             with self._torch.inference_mode():
                 logits = self._model(**inputs).logits[:, -1, :]
                 binary = self._torch.stack(

@@ -7,6 +7,12 @@ Result ID: `cross-course-provider-qualification-v1-local-qwen3`
 Decision: **Refine; retain the local control and select no provider until the
 frozen hosted comparison is complete**
 
+Post-result amendment, 2026-07-31: the original decision above is preserved as
+the decision made from this run. Before the hosted candidate executed, the
+project retired Jina as a selection dependency and moved to a local quality-
+first deployability study. See
+[`cross-course-retrieval-deployability-v1-results.md`](cross-course-retrieval-deployability-v1-results.md).
+
 ## Scope and validity
 
 This is the completed local-control half of the prospective provider

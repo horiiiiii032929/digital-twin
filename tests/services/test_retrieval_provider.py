@@ -4,7 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from scripts.run_cross_course_retrieval_qualification import preflight_provider
+from scripts.run_cross_course_retrieval_qualification import (
+    build_providers,
+    preflight_provider,
+)
 from services.embeddings.jina_client import JinaTextEmbedder
 from services.reranking.jina_client import JinaReranker
 from services.retrieval_provider import (
@@ -63,6 +66,64 @@ def test_hosted_preflight_requires_external_credential_without_calling_provider(
         "credential_present": True,
         "provider_calls": 0,
     }
+
+
+def test_local_provider_runtime_overrides_are_independent(monkeypatch, tmp_path) -> None:
+    config = load_provider_qualification_config(CONFIG_PATH)
+    pair = next(provider for provider in config.providers if provider.role == "control")
+    embedding_path = tmp_path / "embedding"
+    reranking_path = tmp_path / "reranking"
+    embedding_path.mkdir()
+    reranking_path.mkdir()
+
+    monkeypatch.setattr(
+        "scripts.run_cross_course_retrieval_qualification.model_path",
+        lambda model, revision: embedding_path if "Embedding" in model else reranking_path,
+    )
+
+    class FakeEmbedder:
+        model_load_seconds = 0.1
+
+        def __init__(self, model_path, **kwargs):
+            del model_path
+            self.batch_size = kwargs["batch_size"]
+            self.max_length = kwargs["max_length"]
+
+    class FakeReranker:
+        model_load_seconds = 0.2
+
+        def __init__(self, model_path, **kwargs):
+            del model_path
+            self.batch_size = kwargs["batch_size"]
+            self.max_length = kwargs["max_length"]
+
+    monkeypatch.setattr(
+        "scripts.run_cross_course_retrieval_qualification.Qwen3TextEmbedder",
+        FakeEmbedder,
+    )
+    monkeypatch.setattr(
+        "scripts.run_cross_course_retrieval_qualification.Qwen3Reranker",
+        FakeReranker,
+    )
+
+    embedder, reranker, load, ledger = build_providers(
+        pair,
+        config,
+        batch_size=8,
+        embedding_batch_size=16,
+        reranking_batch_size=6,
+        embedding_max_length=1536,
+        reranking_max_length=768,
+        device="cpu",
+        dtype="float32",
+    )
+
+    assert embedder.batch_size == 16
+    assert embedder.max_length == 1536
+    assert reranker.batch_size == 6
+    assert reranker.max_length == 768
+    assert load == {"embedding_model_load": 0.1, "reranking_model_load": 0.2}
+    assert ledger is None
 
 
 def test_jina_embedding_contract_records_provider_usage() -> None:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.reranking import RerankingRetriever
+from services.reranking.qwen3_client import left_pad_token_sequences
 
 
 def _approved_chunk(identifier: str, text: str) -> DocumentChunk:
@@ -47,3 +48,13 @@ def test_reranking_reorders_candidates_and_preserves_chunks() -> None:
         "First synthetic passage.",
     ]
     assert [hit.raw_score for hit in hits] == [0.9, 0.1]
+
+
+def test_qwen_reranker_left_padding_preserves_prompt_tokens() -> None:
+    input_ids, attention_masks = left_pad_token_sequences(
+        [[11, 12, 13], [21]],
+        pad_token_id=0,
+    )
+
+    assert input_ids == [[11, 12, 13], [0, 0, 21]]
+    assert attention_masks == [[1, 1, 1], [0, 0, 1]]

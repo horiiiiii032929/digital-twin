@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-retrieval-deployability-v1-batch8-context1024",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-draft-6-development",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "7722544490c02252825249c5c09a313cdbd6aeb2",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-reranker-runtime-control",
+        "version": "provider-qualification-v1-control",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
+          "rerank_candidate_limit": 40,
+          "embedding_batch_size": 8,
+          "reranking_batch_size": 4,
+          "embedding_max_length": 2048,
+          "reranking_max_length": 2048,
+          "device": "mps",
+          "dtype": "float16"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9230769230769231, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8597452739186106, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8597452739186106, "passed": true},
+        {"name": "development-mrr", "value": 0.8428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8428571428571429, "passed": true},
+        {"name": "warm-latency-p50", "value": 41216.275270499864, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "warm-latency-p95", "value": 71876.27635000151, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "peak-resident-memory", "value": 2108735488.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 4294967296.0, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed in the registered control run."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The control recorded zero held-out reads and an unopened ledger."},
+        {"name": "quality-preservation", "passed": true, "evidence": "M3 achieved the 28/35 complete-evidence control value."},
+        {"name": "course-isolation", "passed": true, "evidence": "The control recorded zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The control recorded zero failures and zero retries."},
+        {"name": "peak-memory", "passed": true, "evidence": "Peak RSS was 2,108,735,488 bytes, below the 4 GiB ceiling."},
+        {"name": "deployment-latency", "passed": false, "evidence": "M3 warm p95 latency was 71,876.28 ms versus a 10,000 ms ceiling."},
+        {"name": "external-cost", "passed": true, "evidence": "Local execution made zero external calls and cost USD 0."}
+      ],
+      "failures_by_category": {"operational": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "course-scoped-qwen3-hybrid-reranker-batch8-context1024",
+        "version": "deployability-v1-batch8-context1024",
+        "configuration": {
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
+          "rerank_candidate_limit": 40,
+          "embedding_batch_size": 16,
+          "reranking_batch_size": 8,
+          "embedding_max_length": 2048,
+          "reranking_max_length": 1024,
+          "device": "mps",
+          "dtype": "float16"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-all-evidence-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-evidence-recall-at-5", "value": 0.9230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9230769230769231, "passed": true},
+        {"name": "development-ndcg-at-10", "value": 0.8597452739186106, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8597452739186106, "passed": true},
+        {"name": "development-mrr", "value": 0.8428571428571429, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8428571428571429, "passed": true},
+        {"name": "warm-latency-p50", "value": 31428.12491649988, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "warm-latency-p95", "value": 61920.8983958002, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 10000.0, "passed": false},
+        {"name": "peak-resident-memory", "value": 2229026816.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 4294967296.0, "passed": true},
+        {"name": "course-isolation-violations", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "complete-development-run", "passed": true, "evidence": "All 40 cases and 160 method rows completed."},
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The result records zero held-out reads and the ledger remains unopened."},
+        {"name": "quality-preservation", "passed": true, "evidence": "M3 retained 28/35 complete-evidence successes with unchanged aggregate secondary metrics."},
+        {"name": "course-isolation", "passed": true, "evidence": "The result records zero cross-course chunk violations."},
+        {"name": "provider-reliability", "passed": true, "evidence": "The local providers recorded zero failures and zero retries."},
+        {"name": "peak-memory", "passed": true, "evidence": "Peak RSS was 2,229,026,816 bytes, below the 4 GiB ceiling."},
+        {"name": "deployment-latency", "passed": false, "evidence": "M3 warm p95 latency was 61,920.90 ms versus a 10,000 ms ceiling."},
+        {"name": "external-cost", "passed": true, "evidence": "Local execution made zero external calls and cost USD 0."}
+      ],
+      "failures_by_category": {"operational": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The candidate preserved the highest observed development quality and improved median latency by about 24%, but its 61.92-second p95 failed the 10-second deployment gate. Keep M3 in the research comparison but do not freeze this runtime for deployment.",
+    "limitations": [
+      "Development evidence does not support a held-out generalization claim.",
+      "Boundary thresholds were calibrated and measured on the same five cases.",
+      "Fixed execution order makes workstation latency descriptive rather than a capacity result.",
+      "The 60-case held-out split remains unopened."
+    ]
+  }
+}
