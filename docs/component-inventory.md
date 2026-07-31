@@ -19,7 +19,7 @@ remains immutable historical evidence.
 | Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
 | Parser | PyMuPDF/TXT/Markdown local parser v1 | Selected foundation / Refine | Evaluate local OCR and layout-aware visual regions in #60 without changing the sealed text corpus |
 | Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
-| Visual representation | Text, captions, and page renders only; public six-modality fixture validated | Pending | Author the approved local-only benchmark in #60, then compare V0-V2 before conditionally running visual embeddings |
+| Visual representation | Full academic vault authorized locally; text, captions, and page renders only; public six-modality fixture validated | Pending | Classify eligible artifacts across formats, author the local-only benchmark in #60, then compare offline V0-V2 pipelines before conditionally running visual embeddings |
 | Embedding | Local Qwen3 control qualified on development data; Jina retired before hosted execution | Pending final method profile | Run the frozen M0-M3 comparison in #7 without reopening development optimization |
 | Retriever | BM25 v1 rollback; prior dense/RRF studies selected no replacement | Pending final profile | M0-M3 cross-course comparison in #7 |
 | Reranker | Local Qwen3 M3 leads development quality but failed the latency gate at depth 40 and 20; Jina is not required | Research candidate / deployment-ineligible | Retain M3 in the sealed comparison; carry M2 as the operational candidate |
