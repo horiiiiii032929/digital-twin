@@ -2,7 +2,7 @@
 
 Date: 2026-08-01
 
-Status: private assistant-authored draft; structurally valid; zero cases
+Status: private researcher-reviewed draft; structurally valid; 40/40 cases
 researcher-verified; not sealed and not runnable
 
 ## Current allocation
@@ -45,30 +45,34 @@ number, rendered-image SHA-256, local-only permission, and normalized evidence
 region. Source filenames, page text, queries, claims, renders, and review notes
 remain under ignored `data/interim/` or `data/processed/` storage.
 
-No external provider received or evaluated private content. The assistant
-proposed and visually checked the wording locally; that does not count as
-researcher verification.
+The recorded Claude second-review run received 26 eligible rendered pages under
+the documented consumer-account boundary; no mandatory exclusions were
+transferred. The assistant visual review and the final researcher review were
+local. The final local export confirmed 40/40 cases, with 39 accepted as
+authored and one revised and then approved after its wording was rewritten.
 
-## Required review
+## Review record and next gate
 
 The generated ignored checklist is
 `data/processed/multimodal_retrieval_v1/researcher_review_v1.md`. A private
 browser-based version at
 `data/processed/multimodal_retrieval_v1/researcher_review_v1.html` shows each
 render beside its query and claims, stores decisions locally, and exports a
-JSON review without uploading content. Codex has pre-adjudicated modality and
+JSON review without uploading content. Codex pre-adjudicated modality and
 visual-dependency taxonomy, so those fields are displayed for context and are
 not another decision the researcher must make. For every case, the researcher
-must confirm:
+was completed with:
 
 1. source eligibility and absence of graded answers or personal data;
 2. query clarity and required-claim correctness;
-3. evidence-region adequacy;
+3. evidence-region adequacy; and
 4. accept, reject, or revise disposition, with notes as needed.
 
-Rejected or edited cases receive new review state and are revalidated. The
-development/held-out split and access ledger are created only after every case
-is verified and the allocation still passes. Until then, V0-V3 must not run.
+The edited partition case was revalidated after its query was rewritten around
+the S1/S2 partition invariant. The private draft now has 40 researcher-verified
+cases, but the development/held-out split and access ledger are not frozen.
+Author seven genuinely visual replacement cases, freeze the split and ledger,
+and rerun structural checks before sealing; until then, V0-V3 must not run.
 
 Rebuild and validate the private draft with:
 
