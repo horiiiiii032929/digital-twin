@@ -118,6 +118,15 @@ Current utilities:
   V1, and V2 with course-isolated BM25 indexes and common page/region/action
   metrics, and writes private per-case evidence without touching held-out. Run
   it with `npm run benchmark:multimodal-development`.
+- `build_multimodal_visual_embeddings.py` and
+  `run_multimodal_retrieval_v3_development.py`: implement the conditional V3
+  comparison after V2's documented development quality failure. The builder
+  uses frozen, locally cached OpenCLIP ViT-B/32 weights to precompute page and
+  contextual region vectors without external calls. The runner keeps held-out
+  closed, encodes queries on CPU, fuses V2 lexical and visual region ranks with
+  fixed RRF, and evaluates only the failed table/scanned-page slices plus all
+  fixed controls. Run `npm run build:multimodal-visual-embeddings` followed by
+  `npm run benchmark:multimodal-v3-development`.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and

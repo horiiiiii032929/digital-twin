@@ -15,6 +15,7 @@ dependencies = [
 [project.optional-dependencies]
 retrieval-benchmark = [
     "fastembed==0.8.0",
+    "open-clip-torch>=3.2,<4.0",
     "sentence-transformers==5.2.0",
     "torch==2.9.1",
     "transformers==4.57.6",

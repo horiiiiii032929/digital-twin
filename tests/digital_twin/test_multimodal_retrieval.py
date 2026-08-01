@@ -6,9 +6,12 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     bbox_iou,
     build_candidate_records,
     build_course_retrievers,
+    contextual_crop_bbox,
     description_text,
     group_ocr_lines,
+    normalized_crop_pixels,
     query_has_retrieved_terms,
+    reciprocal_rank_fuse_regions,
     spatial_label,
     unique_asset_hits,
     union_bbox,
@@ -42,6 +45,48 @@ def test_bbox_and_spatial_helpers_are_normalized() -> None:
     assert spatial_label((0.7, 0.7, 0.2, 0.2)) == "bottom-right"
     with pytest.raises(ValueError, match="at least one"):
         union_bbox([])
+
+
+def test_contextual_crop_expands_narrow_regions_and_stays_on_page() -> None:
+    expanded = contextual_crop_bbox((0.9, 0.95, 0.08, 0.03))
+
+    assert expanded == pytest.approx((0.75, 0.8, 0.25, 0.2))
+    assert normalized_crop_pixels(
+        expanded, image_width=1000, image_height=500
+    ) == (750, 400, 1000, 500)
+
+
+def test_region_fusion_merges_duplicate_text_and_visual_records() -> None:
+    bbox = [0.1, 0.2, 0.3, 0.4]
+    lexical = [
+        {"record_id": "ocr", "asset_id": "asset-a", "bbox": bbox, "kind": "ocr"},
+        {
+            "record_id": "layout",
+            "asset_id": "asset-a",
+            "bbox": bbox,
+            "kind": "layout",
+        },
+    ]
+    visual = [
+        {
+            "record_id": "visual",
+            "asset_id": "asset-a",
+            "bbox": bbox,
+            "kind": "visual_crop",
+        },
+        {
+            "record_id": "other",
+            "asset_id": "asset-b",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "kind": "visual_page",
+        },
+    ]
+
+    fused = reciprocal_rank_fuse_regions(lexical, visual, rank_constant=60, limit=2)
+
+    assert [hit["asset_id"] for hit in fused] == ["asset-a", "asset-b"]
+    assert fused[0]["channels"] == ["lexical", "visual"]
+    assert fused[0]["kind"] == "visual_crop"
 
 
 def test_description_is_flattened_without_becoming_authoritative() -> None:

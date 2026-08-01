@@ -1,8 +1,9 @@
-"""Offline representations for the multimodal retrieval V0-V2 ladder."""
+"""Offline representations and ranking for the multimodal V0-V3 ladder."""
 
 from __future__ import annotations
 
 from collections.abc import Iterable
+import math
 from typing import Any
 
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
@@ -10,6 +11,84 @@ from src.digital_twin.grounding.retrieval import BM25Retriever, lexical_tokens
 
 
 BBox = tuple[float, float, float, float]
+
+
+def contextual_crop_bbox(
+    bbox: BBox,
+    *,
+    padding: float = 0.03,
+    minimum_width: float = 0.25,
+    minimum_height: float = 0.20,
+) -> BBox:
+    """Expand a normalized region deterministically while staying page-local."""
+    x, y, width, height = bbox
+    target_width = min(1.0, max(width + 2 * padding, minimum_width))
+    target_height = min(1.0, max(height + 2 * padding, minimum_height))
+    center_x = x + width / 2
+    center_y = y + height / 2
+    left = min(max(0.0, center_x - target_width / 2), 1.0 - target_width)
+    top = min(max(0.0, center_y - target_height / 2), 1.0 - target_height)
+    return (left, top, target_width, target_height)
+
+
+def normalized_crop_pixels(
+    bbox: BBox, *, image_width: int, image_height: int
+) -> tuple[int, int, int, int]:
+    """Convert a normalized top-left box to a non-empty pixel crop."""
+    if image_width < 1 or image_height < 1:
+        raise ValueError("image dimensions must be positive")
+    x, y, width, height = bbox
+    left = max(0, min(image_width - 1, math.floor(x * image_width)))
+    top = max(0, min(image_height - 1, math.floor(y * image_height)))
+    right = max(left + 1, min(image_width, math.ceil((x + width) * image_width)))
+    bottom = max(top + 1, min(image_height, math.ceil((y + height) * image_height)))
+    return (left, top, right, bottom)
+
+
+def region_key(asset_id: str, bbox: Iterable[float]) -> str:
+    """Create a stable key that merges OCR/layout records for one region."""
+    coordinates = ",".join(f"{float(value):.6f}" for value in bbox)
+    return f"{asset_id}:{coordinates}"
+
+
+def reciprocal_rank_fuse_regions(
+    lexical_hits: list[dict[str, Any]],
+    visual_hits: list[dict[str, Any]],
+    *,
+    rank_constant: int = 60,
+    limit: int = 10,
+) -> list[dict[str, Any]]:
+    """Fuse text and image rankings at region identity, not duplicate record ID."""
+    if rank_constant < 1 or limit < 1:
+        raise ValueError("rank_constant and limit must be positive")
+    scores: dict[str, float] = {}
+    representatives: dict[str, dict[str, Any]] = {}
+    channels: dict[str, set[str]] = {}
+    for channel, hits in (("lexical", lexical_hits), ("visual", visual_hits)):
+        seen: set[str] = set()
+        for rank, hit in enumerate(hits, start=1):
+            key = region_key(hit["asset_id"], hit["bbox"])
+            if key in seen:
+                continue
+            seen.add(key)
+            scores[key] = scores.get(key, 0.0) + 1 / (rank_constant + rank)
+            channels.setdefault(key, set()).add(channel)
+            current = representatives.get(key)
+            if current is None or channel == "visual":
+                representatives[key] = hit
+    if not scores:
+        return []
+    maximum = max(scores.values())
+    ordered = sorted(scores, key=lambda key: (-scores[key], key))[:limit]
+    return [
+        {
+            **representatives[key],
+            "score": scores[key] / maximum,
+            "raw_score": scores[key],
+            "channels": sorted(channels[key]),
+        }
+        for key in ordered
+    ]
 
 
 def union_bbox(boxes: Iterable[BBox]) -> BBox:

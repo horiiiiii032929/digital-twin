@@ -102,6 +102,19 @@ is eligible only under a prospective provider record for approved sources, with
 mandatory exclusions, minimization, retention/training state, call count, cost,
 and deletion or expiry recorded.
 
+Development attempt 001 activated that conditional branch. Before V3
+measurement, the implementation is frozen to OpenCLIP `3.3.0`, model
+`ViT-B-32-quickgelu`, pretrained tag `openai`, cached weight SHA-256
+`e6d1bd7789aa45192b3bf90570a789b478bae1b74ebcce7eddd908e83a2b7c31`,
+512-dimensional normalized vectors, and reciprocal-rank fusion with `k=60`
+and depth 20. Full pages and V1 OCR regions receive offline image vectors;
+region crops expand deterministically by 0.03 page units and to at least 0.25
+page width by 0.20 page height. Query text uses the fixed prefix `study material
+relevant to:` and the CLIP text tower on CPU. The run is restricted to the
+failed table and scanned-page modalities plus all fixed text, no-evidence, and
+integrity controls. No held-out case may be read. The query encoder's latency
+and resident memory are deployment evidence, not assumed acceptable.
+
 ## Low-cost deployment boundary
 
 The student-facing target is a commodity CPU-only service with approximately
