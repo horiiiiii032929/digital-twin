@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "run_id": "multimodal-retrieval-v1-development-attempt-001",
+  "component": "retriever",
+  "dataset_id": "multimodal-retrieval-v1-sealed-development",
+  "corpus_id": "private-approved-academic-vault-development-assets",
+  "code_revision": "38736159e9f37be7f0720e95b31af9b941f29a01",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "selectable-page-text-bm25-v1",
+        "version": "development-attempt-001",
+        "configuration": {
+          "seal_id": "multimodal-retrieval-v1-seal",
+          "development_sha256": "bf4c6eee489bf2b8ea985e49f8430df1e87eaa49cf89ca7690270d5f3b9c905f",
+          "record_count": 12
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "visual-complete-evidence-success-at-3", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "visual-improvement-over-control", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.0, "passed": true},
+        {"name": "visual-atomic-evidence-recall-at-5", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "visual-region-ndcg-at-10", "value": 0.3150194487970007, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.3150194487970007, "passed": true},
+        {"name": "text-control-page-success-at-3", "value": 0.6666666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6666666666666666, "passed": true},
+        {"name": "no-evidence-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "integrity-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "warm-latency-p95", "value": 0.1315835033892654, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The safe loader verified the seal and pristine ledger; heldout_read=false."},
+        {"name": "course-isolation-and-provenance", "passed": true, "evidence": "Indexes were course-scoped and every result retained asset, page, region, and hash-bound provenance."},
+        {"name": "complete-case-output", "passed": true, "evidence": "All 16 development cases produced a result."},
+        {"name": "relative-visual-quality", "passed": true, "evidence": "This implementation is the predeclared control comparator."},
+        {"name": "text-control-regression", "passed": true, "evidence": "This implementation defines the 2/3 text-control baseline."},
+        {"name": "safety-boundaries", "passed": true, "evidence": "No-evidence was 1/1 and integrity was 2/2."},
+        {"name": "external-provider-and-cost", "passed": true, "evidence": "Zero external calls and USD 0 paid cost."}
+      ],
+      "failures_by_category": {"ranking-or-region": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "apple-vision-ocr-block-bm25-v1",
+        "version": "development-attempt-001",
+        "configuration": {
+          "ocr": "Apple Vision accurate with language correction",
+          "record_count": 153,
+          "offline_seconds_per_asset": 0.4681742499997199
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "visual-complete-evidence-success-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "visual-improvement-over-control", "value": -0.1, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.15, "passed": false},
+        {"name": "visual-atomic-evidence-recall-at-5", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "visual-region-ndcg-at-10", "value": 0.30587654085246413, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.3150194487970007, "passed": false},
+        {"name": "text-control-page-success-at-3", "value": 0.6666666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6666666666666666, "passed": true},
+        {"name": "no-evidence-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "integrity-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "warm-latency-p95", "value": 0.1340735107078217, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The safe loader verified the seal and pristine ledger; heldout_read=false."},
+        {"name": "course-isolation-and-provenance", "passed": true, "evidence": "Indexes were course-scoped and every result retained asset, page, region, and hash-bound provenance."},
+        {"name": "complete-case-output", "passed": true, "evidence": "All 16 development cases produced a result."},
+        {"name": "relative-visual-quality", "passed": false, "evidence": "Visual complete-evidence success was 8/10, ten points below V0 rather than at least fifteen points above it."},
+        {"name": "text-control-regression", "passed": true, "evidence": "Text-control page success matched V0 at 2/3."},
+        {"name": "safety-boundaries", "passed": true, "evidence": "No-evidence was 1/1 and integrity was 2/2."},
+        {"name": "external-provider-and-cost", "passed": true, "evidence": "Apple Vision ran locally with zero external calls and USD 0 paid cost."}
+      ],
+      "failures_by_category": {"ranking-or-region": 2}
+    },
+    {
+      "implementation": {
+        "implementation_id": "apple-layout-local-gemma3-description-bm25-v1",
+        "version": "development-attempt-001",
+        "configuration": {
+          "description_model": "gemma3:4b@a2af6cc3eb7f",
+          "description_authoritative": false,
+          "record_count": 306,
+          "offline_seconds_per_asset": 10.743037666582191
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "visual-complete-evidence-success-at-3", "value": 0.8, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "visual-improvement-over-control", "value": -0.1, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.15, "passed": false},
+        {"name": "visual-atomic-evidence-recall-at-5", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "visual-region-ndcg-at-10", "value": 0.49573006848110324, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.3150194487970007, "passed": true},
+        {"name": "text-control-page-success-at-3", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.6666666666666666, "passed": true},
+        {"name": "no-evidence-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "integrity-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "warm-latency-p95", "value": 0.17746849334798753, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "development-only-no-heldout-access", "passed": true, "evidence": "The safe loader verified the seal and pristine ledger; heldout_read=false."},
+        {"name": "course-isolation-and-provenance", "passed": true, "evidence": "Indexes were course-scoped and descriptions remained non-authoritative ranking metadata linked to original evidence."},
+        {"name": "complete-case-output", "passed": true, "evidence": "All 16 development cases produced a result."},
+        {"name": "relative-visual-quality", "passed": false, "evidence": "Visual complete-evidence success was 8/10, ten points below V0 rather than at least fifteen points above it."},
+        {"name": "text-control-regression", "passed": true, "evidence": "Text-control page success improved from V0's 2/3 to 3/3."},
+        {"name": "safety-boundaries", "passed": true, "evidence": "No-evidence was 1/1 and integrity was 2/2."},
+        {"name": "external-provider-and-cost", "passed": true, "evidence": "Gemma ran through local Ollama with zero external calls and USD 0 paid cost."}
+      ],
+      "failures_by_category": {"ranking-or-region": 2}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "V2 improved region nDCG and text controls but failed the predeclared requirement to exceed V0 complete-evidence success by at least 15 percentage points. Run conditional V3 on failed slices and fixed controls; keep held-out unopened.",
+    "limitations": [
+      "The 16-case development sample does not support a held-out generalization claim.",
+      "Whole-page V0 boxes can receive non-zero IoU and therefore overstate precise visual grounding.",
+      "Descriptions are unreviewed non-authoritative ranking metadata.",
+      "Deployed RSS, concurrency, revocation, and full-vault package size remain unmeasured."
+    ]
+  }
+}

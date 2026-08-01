@@ -87,6 +87,15 @@ provenance.
 | V2 | V1 plus local region typing, reading order, table structure, and reviewed descriptions | Primary candidate |
 | V3 | V2 plus precomputed local visual embeddings and text/visual rank fusion | Conditional candidate only |
 
+The sealed development implementation fixes V1 to Apple Vision accurate OCR
+with normalized line boxes. V2 adds deterministic reading-order/spatial records
+and local `gemma3:4b` at digest `a2af6cc3eb7f` for page descriptions. Generated
+descriptions are explicitly non-authoritative, unreviewed ranking metadata; the
+original hash-bound page or region remains the only evidence. Both are offline
+workstation jobs with zero external provider calls. This implementation detail
+was frozen before the first development comparison and does not alter the
+sealed cases or ledger.
+
 V3 may run only if V2 misses the complete-evidence gate overall or fails a
 specific observed modality. A hosted model or external course-content transfer
 is eligible only under a prospective provider record for approved sources, with

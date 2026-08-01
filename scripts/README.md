@@ -105,6 +105,19 @@ Current utilities:
   Reusable split rules and the development-only loader live in
   `src/digital_twin/evaluation/multimodal_benchmark.py`. The loader verifies the
   seal and pristine ledger but deliberately never reads the held-out file.
+- `apple_vision_ocr.swift` and `build_multimodal_development_artifacts.py`:
+  build the sealed-development V0-V2 retrieval representations locally. V1
+  adds Apple Vision OCR blocks; V2 adds reading-order/layout records and local
+  `gemma3:4b` descriptions marked as non-authoritative, unreviewed ranking
+  metadata. The builder verifies the seal through the development-only loader,
+  records model and platform provenance, makes no external or paid call, and
+  does not read the held-out file. Run it with `npm run
+  build:multimodal-development-artifacts`.
+- `run_multimodal_retrieval_development.py`: verifies the multimodal seal and
+  pristine ledger, loads only the 16-case development partition, compares V0,
+  V1, and V2 with course-isolated BM25 indexes and common page/region/action
+  metrics, and writes private per-case evidence without touching held-out. Run
+  it with `npm run benchmark:multimodal-development`.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and
