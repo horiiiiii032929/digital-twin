@@ -175,7 +175,7 @@ def review_prompt(asset_payloads: list[dict[str, Any]]) -> str:
             "- action_correct: retrieve, abstain, or refuse is appropriate.",
             "- claims_supported: every required claim is visible and exact; for empty claims, the abstention or refusal is supported.",
             "- evidence_region_adequate: normalized regions contain all needed evidence; empty regions are correct only for abstain/refuse.",
-            "- modality_correct: the proposed modality describes the evidence actually needed.",
+            "- modality_correct: the proposed modality describes the source page's primary representation; do not use it as a minimum-evidence label.",
             "- visual_dependency_correct: selectable text alone cannot answer a visual-required case, while text controls are answerable from it.",
             "- source_eligible: nothing visible appears to be a graded solution, answer key, student submission, or secret.",
             "- privacy_safe: nothing visible appears to expose real student or private personal data; clearly fictional instructional examples are safe.",

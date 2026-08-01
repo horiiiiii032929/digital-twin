@@ -83,25 +83,31 @@ Direct visual adjudication confirmed defects in four cases:
   final value;
 - `mmr1-it5007-web-01`: evidence region clips the location labels; and
 - `mmr1-it5007-mapping-04`: required wording merges two separately labelled
-  locations; its modality also needs correction.
+  locations; its claim wording needs correction.
 
 The remaining 14 disagreements were subsequently adjudicated by Codex on
-2026-08-01 using the fixed minimum-evidence rule. This is a taxonomy decision,
-not researcher verification:
+2026-08-01 using the fixed benchmark taxonomy. This is a taxonomy decision,
+not researcher verification. Five additional controls/refusal cases received
+the same normalization so the rule is consistent across the full draft. The
+original reviewer interpretations are retained below as disagreement evidence;
+they are not the final schema labels:
 
 - six text controls use `mixed` for the source-page modality while the reviewer
   interpreted modality as the minimum answer evidence and requested `text`;
 - seven visual cases may be reconstructable from linearly extracted text, but
   whether ordering is reliable enough to make them text-sufficient is a
   benchmark-definition decision; and
-- one integrity-refusal case uses `not_applicable` for modality and dependency.
+- one integrity-refusal case proposed `not_applicable` for modality and
+  dependency, which is not in the fixed schema.
 
-The six text controls are therefore treated as text-sufficient controls. The
-seven visual cases whose claims are recoverable from linear extracted text are
-held out of the visual denominator pending genuinely visual replacement cases;
-they remain visible in the private checklist so their source claims and regions
-can still be checked. The private checklist displays these decisions and does
-not mutate the dataset automatically.
+The eight text controls retain their source-page modality (`mixed`) and
+`text_sufficient` dependency. The seven visual cases whose claims are
+recoverable from linear extracted text are held out of the visual denominator
+pending genuinely visual replacement cases; they remain visible in the private
+checklist so their source claims and regions can still be checked. The four
+integrity cases retain source modality because refusal action, not evidence
+modality, is the safety decision. The private checklist displays these
+decisions and does not mutate the dataset automatically.
 
 No private page content or model reasoning is reproduced here. The exact
 per-case reasons remain in the ignored result.

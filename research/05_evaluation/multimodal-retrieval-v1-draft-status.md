@@ -56,14 +56,15 @@ The generated ignored checklist is
 browser-based version at
 `data/processed/multimodal_retrieval_v1/researcher_review_v1.html` shows each
 render beside its query and claims, stores decisions locally, and exports a
-JSON review without uploading content. For every case, the researcher must
-confirm:
+JSON review without uploading content. Codex has pre-adjudicated modality and
+visual-dependency taxonomy, so those fields are displayed for context and are
+not another decision the researcher must make. For every case, the researcher
+must confirm:
 
 1. source eligibility and absence of graded answers or personal data;
 2. query clarity and required-claim correctness;
 3. evidence-region adequacy;
-4. visual-dependency and modality labels; and
-5. accept or reject, with notes.
+4. accept, reject, or revise disposition, with notes as needed.
 
 Rejected or edited cases receive new review state and are revalidated. The
 development/held-out split and access ledger are created only after every case
