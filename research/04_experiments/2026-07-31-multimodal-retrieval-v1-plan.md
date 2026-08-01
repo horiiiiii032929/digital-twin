@@ -139,7 +139,7 @@ pixels, OCR text, descriptions, and per-case outputs remain ignored and local.
 
 ## Cross-model QA protocol
 
-Run ID: `multimodal-benchmark-local-second-review-v1`
+Run ID: `multimodal-benchmark-claude-second-review-v1`
 
 Decision question: does a separate vision-language model identify claim,
 region, modality, visual-dependency, no-evidence, or integrity defects that the
