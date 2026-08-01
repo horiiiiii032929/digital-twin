@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-"""Freeze the reviewed multimodal benchmark without running retrieval candidates."""
+"""Seal the reviewed multimodal benchmark without running retrieval candidates."""
 
 from __future__ import annotations
 
 import argparse
-import copy
-import hashlib
 import json
 import os
-from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -17,6 +14,18 @@ from scripts.validate_multimodal_retrieval_dataset import (
     ROOT,
     load_json,
     validate_dataset,
+)
+from src.digital_twin.evaluation.multimodal_benchmark import (
+    DEVELOPMENT_CASES,
+    DEVELOPMENT_SLICE_TARGETS,
+    HELDOUT_CASES,
+    SEAL_ID,
+    SPLIT_SEED,
+    canonical_bytes,
+    choose_development_assets,
+    partition_dataset,
+    sha256_bytes,
+    sha256_file,
 )
 
 
@@ -30,15 +39,6 @@ DEVELOPMENT_FILENAME = "development.json"
 HELDOUT_FILENAME = "heldout.json"
 LEDGER_FILENAME = "heldout_once_ledger.json"
 SEAL_FILENAME = "seal.json"
-SPLIT_SEED = "multimodal-retrieval-v1-split-v1"
-DEVELOPMENT_CASES = 16
-HELDOUT_CASES = 24
-DEVELOPMENT_SLICE_TARGETS = {
-    "visual_answerable": 10,
-    "text_control": 3,
-    "no_evidence": 1,
-    "adversarial_integrity": 2,
-}
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,130 +48,11 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def canonical_bytes(value: dict[str, Any]) -> bytes:
-    return (
-        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
-    ).encode("utf-8")
-
-
-def sha256_bytes(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def display_path(path: Path) -> str:
     try:
         return str(path.resolve().relative_to(ROOT))
     except ValueError:
         return str(path.resolve())
-
-
-def _group_order(asset_id: str, seed: str) -> str:
-    return hashlib.sha256(f"{seed}:{asset_id}".encode()).hexdigest()
-
-
-def choose_development_assets(
-    dataset: dict[str, Any],
-    *,
-    development_cases: int = DEVELOPMENT_CASES,
-    slice_targets: dict[str, int] = DEVELOPMENT_SLICE_TARGETS,
-    seed: str = SPLIT_SEED,
-) -> frozenset[str]:
-    """Choose a deterministic exact split while keeping each page asset together."""
-    assets = {asset["asset_id"]: asset for asset in dataset["source_assets"]}
-    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for case in dataset["cases"]:
-        grouped[case["asset_id"]].append(case)
-    groups = sorted(grouped.items(), key=lambda item: _group_order(item[0], seed))
-    suffix_cases = [0] * (len(groups) + 1)
-    for index in range(len(groups) - 1, -1, -1):
-        suffix_cases[index] = suffix_cases[index + 1] + len(groups[index][1])
-
-    target = Counter(slice_targets)
-    best: tuple[tuple[Any, ...], frozenset[str]] | None = None
-
-    def search(
-        index: int,
-        selected_assets: tuple[str, ...],
-        selected_cases: tuple[dict[str, Any], ...],
-        counts: Counter[str],
-    ) -> None:
-        nonlocal best
-        total = len(selected_cases)
-        if total > development_cases or total + suffix_cases[index] < development_cases:
-            return
-        if any(counts[name] > expected for name, expected in target.items()):
-            return
-        if index == len(groups):
-            if total != development_cases or counts != target:
-                return
-            courses = Counter(
-                assets[case["asset_id"]]["course_id"] for case in selected_cases
-            )
-            modalities = {
-                case["modality"]
-                for case in selected_cases
-                if case["slice"] == "visual_answerable"
-            }
-            tie_break = hashlib.sha256("|".join(selected_assets).encode()).hexdigest()
-            score = (
-                len(courses),
-                len(modalities),
-                -max(courses.values()),
-                tie_break,
-            )
-            candidate = (score, frozenset(selected_assets))
-            if best is None or candidate[0] > best[0]:
-                best = candidate
-            return
-
-        asset_id, cases = groups[index]
-        delta = Counter(case["slice"] for case in cases)
-        search(
-            index + 1,
-            selected_assets + (asset_id,),
-            selected_cases + tuple(cases),
-            counts + delta,
-        )
-        search(index + 1, selected_assets, selected_cases, counts)
-
-    search(0, (), (), Counter())
-    if best is None:
-        raise ValueError("no asset-grouped split satisfies the development targets")
-    return best[1]
-
-
-def _partition_dataset(
-    dataset: dict[str, Any],
-    *,
-    development_assets: frozenset[str],
-    development: bool,
-) -> dict[str, Any]:
-    partition = copy.deepcopy(dataset)
-    partition["dataset_status"] = "sealed"
-    expected_membership = development
-    split = "development" if development else "heldout_draft"
-    partition["cases"] = [
-        case
-        for case in partition["cases"]
-        if (case["asset_id"] in development_assets) is expected_membership
-    ]
-    for case in partition["cases"]:
-        case["split"] = split
-    retained_assets = {case["asset_id"] for case in partition["cases"]}
-    partition["source_assets"] = [
-        asset
-        for asset in partition["source_assets"]
-        if asset["asset_id"] in retained_assets
-    ]
-    return partition
 
 
 def build_seal_artifacts(
@@ -189,10 +70,10 @@ def build_seal_artifacts(
         raise ValueError("all multimodal cases must be researcher verified")
 
     development_assets = choose_development_assets(dataset)
-    development = _partition_dataset(
+    development = partition_dataset(
         dataset, development_assets=development_assets, development=True
     )
-    heldout = _partition_dataset(
+    heldout = partition_dataset(
         dataset, development_assets=development_assets, development=False
     )
     if len(development["cases"]) != DEVELOPMENT_CASES:
@@ -214,12 +95,11 @@ def build_seal_artifacts(
     heldout_bytes = canonical_bytes(heldout)
     development_sha256 = sha256_bytes(development_bytes)
     heldout_sha256 = sha256_bytes(heldout_bytes)
-    seal_id = "multimodal-retrieval-v1-seal"
 
     ledger = {
         "schema_version": 1,
         "ledger_id": "multimodal-retrieval-v1-heldout-once",
-        "seal_id": seal_id,
+        "seal_id": SEAL_ID,
         "dataset_id": dataset["dataset_id"],
         "dataset_version": dataset["dataset_version"],
         "heldout_sha256": heldout_sha256,
@@ -236,7 +116,7 @@ def build_seal_artifacts(
     ledger_bytes = canonical_bytes(ledger)
     seal = {
         "schema_version": 1,
-        "seal_id": seal_id,
+        "seal_id": SEAL_ID,
         "dataset_id": dataset["dataset_id"],
         "dataset_version": dataset["dataset_version"],
         "sealed_at": sealed_at,

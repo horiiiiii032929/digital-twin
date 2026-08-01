@@ -102,6 +102,9 @@ Current utilities:
   coverage, writes hash-bound sealed partitions, and creates a pristine
   one-time held-out ledger without running a model. Run it once with `npm run
   seal:multimodal-private-benchmark`; existing seal files are never overwritten.
+  Reusable split rules and the development-only loader live in
+  `src/digital_twin/evaluation/multimodal_benchmark.py`. The loader verifies the
+  seal and pristine ledger but deliberately never reads the held-out file.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and

@@ -38,6 +38,10 @@ from src.digital_twin.evaluation.retrieval_qualification import (
 from src.digital_twin.evaluation.retrieval_runtime import (
     build_course_scoped_ladders,
 )
+from src.digital_twin.evaluation.multimodal_benchmark import (
+    MultimodalSealError,
+    load_sealed_development as load_sealed_multimodal_development,
+)
 from src.digital_twin.evaluation.retrieval_runner import (
     evaluate_development_cases,
 )
@@ -57,6 +61,7 @@ __all__ = [
     "ImplementationRef",
     "MetricDirection",
     "MetricResult",
+    "MultimodalSealError",
     "POSITIVE_SLICES",
     "ProfileStage",
     "ProviderDescriptor",
@@ -78,5 +83,6 @@ __all__ = [
     "load_provider_qualification_config",
     "load_release_profile",
     "load_sealed_development",
+    "load_sealed_multimodal_development",
     "score_ranking",
 ]
