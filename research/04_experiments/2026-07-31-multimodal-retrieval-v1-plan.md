@@ -135,6 +135,36 @@ Before any candidate run, the researcher will:
 Synthetic assets never enter the private performance denominator. Private page
 pixels, OCR text, descriptions, and per-case outputs remain ignored and local.
 
+## Local cross-model QA protocol
+
+Run ID: `multimodal-benchmark-local-second-review-v1`
+
+Decision question: does a separate local vision-language model identify claim,
+region, modality, visual-dependency, no-evidence, or integrity defects that the
+assistant visual QA missed before researcher verification?
+
+The baseline is the corrected assistant review v2, which accepted all 40 draft
+cases. The independent candidate reviewer is the locally installed
+`gemma3:4b` Ollama model at digest `a2af6cc3eb7f`. Temperature is zero, each
+case uses a stable seed, and every review receives the rendered page plus the
+query, expected action, required claims, modality, visual-dependency label, and
+selectable surrounding text. The model does not receive the assistant decision
+or notes.
+
+The run covers all 40 private cases rather than a sample. Report response and
+schema success, Accept / Revise / Reject counts, agreement with assistant QA,
+claim-support, region-adequacy, modality, visual-dependency, action, privacy,
+per-slice latency, token counts, and every disagreement. The prediction is that
+at least 36 cases will be accepted, no case will be rejected for unsupported
+claims or privacy, and any remaining revisions will expose useful ambiguity for
+researcher review.
+
+Hard gates are zero non-loopback requests, zero external-provider cost, 40
+schema-valid decisions, and no automatic benchmark mutation or sealing. Any
+Revise, Reject, privacy concern, or source-eligibility concern becomes an
+explicit researcher-review item. Passing this run is advisory and never changes
+`researcher_verified`; a local model is not an independent human reviewer.
+
 ## Metrics
 
 Primary quality metrics, reported overall and by modality:
