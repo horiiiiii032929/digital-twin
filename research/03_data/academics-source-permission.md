@@ -9,6 +9,8 @@ location confirmed and cross-course portfolio v2 selected
 
 Multimodal clarification date: 2026-07-31
 
+External review clarification date: 2026-08-01
+
 ## Approved collection
 
 All course materials contained in the user's `academics` collection may be:
@@ -27,6 +29,13 @@ material was automatically prohibited from every external provider. It does not
 select or approve a specific provider, model, retention policy, region, or
 experiment. Each provider use still requires the prospective record defined in
 the active scope.
+
+The source holder removed the multimodal experiment's blanket prohibition on
+external course-content transfer and authorized a governed cross-model QA run
+over eligible study material. This authorization does not extend to any
+mandatory exclusion below. Each external run must still name the provider,
+account class, model, transferred fields or pixels, retention and training
+state, region where known, call count, cost, and deletion or expiry procedure.
 
 ## Mandatory exclusions
 
@@ -111,6 +120,8 @@ software artifacts are classified before sampling. The mandatory exclusions
 above still apply to solutions, graded answers, student or participant data,
 credentials, and secrets even when such files are physically inside the vault.
 
-All visual rendering, OCR, layout extraction, descriptions, and embeddings for
-this study remain local-only. This clarification does not activate the earlier
-prospective external-provider permission.
+Visual rendering, OCR, layout extraction, descriptions, and embeddings for the
+retrieval study remain local by default. The governed Claude second-review run
+is the recorded exception: it transferred only eligible rendered pages and
+blinded case fields under the external review clarification above. Any later
+external processing requires its own prospective provider record.
