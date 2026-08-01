@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import pytest
 
-from scripts.build_multimodal_private_draft import build_dataset, review_html
+from scripts.build_multimodal_private_draft import (
+    build_dataset,
+    preserve_unchanged_reviews,
+    review_html,
+)
 
 
 def sample_queue() -> dict:
@@ -64,6 +68,27 @@ def test_builder_rejects_unknown_sample_candidate() -> None:
         build_dataset(sample_queue(), invalid)
 
 
+def test_builder_preserves_only_unchanged_verified_reviews() -> None:
+    prior = build_dataset(sample_queue(), authoring())
+    prior["cases"][0]["review"] = {
+        "status": "researcher_verified",
+        "researcher_verified": True,
+        "notes": "Previously checked.",
+    }
+
+    unchanged = preserve_unchanged_reviews(
+        build_dataset(sample_queue(), authoring()), prior
+    )
+    assert unchanged["cases"][0]["review"]["researcher_verified"] is True
+
+    changed_authoring = authoring()
+    changed_authoring["cases"][0]["query"] = "Which other component appears in the synthetic flow?"
+    changed = preserve_unchanged_reviews(
+        build_dataset(sample_queue(), changed_authoring), prior
+    )
+    assert changed["cases"][0]["review"]["researcher_verified"] is False
+
+
 def test_review_html_escapes_case_content(tmp_path) -> None:
     dataset = build_dataset(sample_queue(), authoring())
     dataset["cases"][0]["query"] = "Is x <script>alert(1)</script>?"
@@ -89,3 +114,19 @@ def test_review_html_marks_auto_adjudicated_taxonomy(tmp_path) -> None:
     assert "pre-adjudicated" in rendered
     assert 'data-check="taxonomy" checked disabled' in rendered
     assert "decisionReady" in rendered
+
+
+def test_review_html_hides_prior_verified_cases_by_default(tmp_path) -> None:
+    dataset = build_dataset(sample_queue(), authoring())
+    dataset["cases"][0]["review"] = {
+        "status": "researcher_verified",
+        "researcher_verified": True,
+        "notes": "Previously checked.",
+    }
+
+    rendered = review_html(dataset, tmp_path / "review.html")
+
+    assert "Prior review retained" in rendered
+    assert "preverified" in rendered
+    assert "Show 1 completed cases" in rendered
+    assert '"confirmed": true' in rendered

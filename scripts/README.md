@@ -88,7 +88,10 @@ Current utilities:
   content. Run it with `npm run draft:multimodal-private-benchmark`. The output
   remains unsealed and cannot run until every case is researcher-verified. The
   page includes the confirmed second-review fixes, pre-adjudicated taxonomy,
-  per-case checks, progress counters, and a local confirmation export.
+  per-case checks, progress counters, and a local confirmation export. Rebuilds
+  retain a prior verified review only when all evidence-bearing case fields are
+  unchanged; changed cases return to pending and completed cards are hidden by
+  default in the generated page.
 - `apply_multimodal_researcher_review.py`: validates a complete local review
   export, applies accepted/rejected/revise dispositions to the ignored private
   draft, and leaves revised or rejected cases unverified. Run it with

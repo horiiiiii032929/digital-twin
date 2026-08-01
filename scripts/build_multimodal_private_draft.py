@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import html
 import json
 import os
@@ -50,17 +51,20 @@ AUTO_ADJUDICATIONS = {
     "mmr1-control-packages-02": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
     "mmr1-control-serialization-07": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
     "mmr1-control-web-06": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
-    "mmr1-cs5421-dimensions-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-cs5421-indexes-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-cs5421-retail-03": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-integrity-permission-04": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
-    "mmr1-it5002-memory-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-it5004-sequence-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-it5008-email-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-it5008-faculty-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-integrity-crosscourse-01": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
     "mmr1-integrity-solution-02": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
     "mmr1-integrity-provider-03": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
+}
+
+FRESH_REVIEW_CASES = {
+    "mmr1-cs5421-dimensions-01",
+    "mmr1-cs5421-indexes-02",
+    "mmr1-cs5421-retail-03",
+    "mmr1-it5002-memory-01",
+    "mmr1-it5004-sequence-02",
+    "mmr1-it5008-email-02",
+    "mmr1-it5008-faculty-01",
 }
 
 
@@ -162,6 +166,36 @@ def build_dataset(
     }
 
 
+def _case_review_signature(case: dict[str, Any]) -> tuple[Any, ...]:
+    """Return the evidence-bearing fields that make a prior review reusable."""
+    return (
+        case["slice"],
+        case["modality"],
+        case["asset_id"],
+        case["query"],
+        tuple(case["required_claims"]),
+        case["expected_action"],
+        tuple(case["gold_region_ids"]),
+        case["visual_dependency"],
+    )
+
+
+def preserve_unchanged_reviews(
+    dataset: dict[str, Any], prior_dataset: dict[str, Any]
+) -> dict[str, Any]:
+    """Carry forward verified reviews only when the complete case evidence matches."""
+    prior_cases = {case["case_id"]: case for case in prior_dataset.get("cases", [])}
+    for case in dataset["cases"]:
+        prior = prior_cases.get(case["case_id"])
+        if (
+            prior is not None
+            and prior.get("review", {}).get("researcher_verified") is True
+            and _case_review_signature(prior) == _case_review_signature(case)
+        ):
+            case["review"] = copy.deepcopy(prior["review"])
+    return dataset
+
+
 def review_markdown(dataset: dict[str, Any]) -> str:
     assets = {asset["asset_id"]: asset for asset in dataset["source_assets"]}
     lines = [
@@ -220,6 +254,31 @@ def review_markdown(dataset: dict[str, Any]) -> str:
 
 def review_html(dataset: dict[str, Any], output_path: Path) -> str:
     assets = {asset["asset_id"]: asset for asset in dataset["source_assets"]}
+    initial_cases: dict[str, Any] = {}
+    for case in dataset["cases"]:
+        if case["review"]["researcher_verified"]:
+            initial_cases[case["case_id"]] = {
+                "checks": {
+                    "source": True,
+                    "claims": True,
+                    "region": True,
+                    "taxonomy": True,
+                },
+                "decision": "accept",
+                "confirmed": True,
+                "notes": case["review"]["notes"],
+            }
+    initial_state = {
+        "cases": initial_cases,
+        "fixes": {
+            case_id: case_id in initial_cases
+            for case_id in CONFIRMED_SECOND_REVIEW_FIXES
+        },
+        "policyConfirmed": True,
+    }
+    initial_state_json = json.dumps(initial_state, sort_keys=True).replace("</", "<\\/")
+    verified_count = len(initial_cases)
+    pending_count = len(dataset["cases"]) - verified_count
     cards: list[str] = []
     for case in dataset["cases"]:
         asset = assets[case["asset_id"]]
@@ -230,7 +289,13 @@ def review_html(dataset: dict[str, Any], output_path: Path) -> str:
         case_id = html.escape(case["case_id"])
         case_class = "case"
         review_callout = ""
-        if case["case_id"] in CONFIRMED_SECOND_REVIEW_FIXES:
+        if case["review"]["researcher_verified"]:
+            case_class += " preverified"
+            review_callout = '<p class="callout verified"><strong>Prior review retained:</strong> this unchanged case is already researcher-verified.</p>'
+        elif case["case_id"] in FRESH_REVIEW_CASES:
+            case_class += " fresh-review"
+            review_callout = '<p class="callout fresh"><strong>New visual replacement:</strong> confirm that the question truly requires the marked visual evidence.</p>'
+        elif case["case_id"] in CONFIRMED_SECOND_REVIEW_FIXES:
             case_class += " confirmed-fix"
             review_callout = f"<p class=\"callout fix\"><strong>Confirmed second-review fix:</strong> {html.escape(CONFIRMED_SECOND_REVIEW_FIXES[case['case_id']])}</p>"
         elif case["case_id"] in AUTO_ADJUDICATIONS:
@@ -290,6 +355,9 @@ button.secondary {{ background: #475569; }}
 .case {{ display: grid; grid-template-columns: minmax(420px, 1.2fr) minmax(360px, 0.8fr); gap: 18px; background: white; margin: 22px 0; padding: 18px; border-radius: 12px; box-shadow: 0 2px 12px #17203318; }}
 .case.confirmed-fix {{ border: 3px solid #dc2626; }}
 .case.auto-adjudicated {{ border: 3px solid #2563eb; }}
+.case.fresh-review {{ border: 3px solid #7c3aed; }}
+.case.preverified {{ display: none; opacity: .8; }}
+body.show-preverified .case.preverified {{ display: grid; }}
 .case header {{ grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }}
 .case h2 {{ margin: 0; }}
 .case img {{ width: 100%; max-height: 720px; object-fit: contain; background: #eef1f6; }}
@@ -297,6 +365,8 @@ button.secondary {{ background: #475569; }}
 .callout.fix {{ background: #fee2e2; border: 1px solid #f87171; }}
 .callout.taxonomy {{ background: #fef3c7; border: 1px solid #f59e0b; }}
 .callout.adjudicated {{ background: #dbeafe; border: 1px solid #60a5fa; }}
+.callout.fresh {{ background: #ede9fe; border: 1px solid #8b5cf6; }}
+.callout.verified {{ background: #dcfce7; border: 1px solid #4ade80; }}
 .checks {{ display: grid; gap: 8px; padding: 12px; margin: 14px 0; border: 1px solid #cbd5e1; border-radius: 8px; }}
 .checks label {{ display: block; }}
 .checks .confirm {{ font-weight: 700; border-top: 1px solid #cbd5e1; padding-top: 10px; }}
@@ -309,7 +379,7 @@ textarea {{ display: block; box-sizing: border-box; width: 100%; margin-top: 6px
 </head>
 <body><main>
 <h1>Multimodal retrieval v1 researcher review</h1>
-<p class="notice">Private local artifact. Nothing is uploaded. Start with the four red cards. Blue cards have their taxonomy pre-adjudicated; for every case, complete the three active checks, choose Accept / Reject / Revise, and confirm. The export records your review; it does not change the benchmark automatically.</p>
+<p class="notice">Private local artifact. Nothing is uploaded. Only {pending_count} new visual replacements need review; {verified_count} unchanged reviews were retained. Complete the checks, choose Accept / Reject / Revise, and confirm each purple card.</p>
 <section class="guide">
   <h2>1. Confirm the four direct fixes</h2>
   <ol>
@@ -319,13 +389,13 @@ textarea {{ display: block; box-sizing: border-box; width: 100%; margin-top: 6px
   <p>Codex applied the benchmark taxonomy: modality names the source page's primary representation, while visual dependency determines whether selectable text alone can answer. Cases answerable from linear extracted text are held out of the visual denominator. Blue cards show these decisions; you do not need to choose them again.</p>
   <label><input type="checkbox" id="policy-confirm" checked disabled> Taxonomy policy applied.</label>
 </section>
-<div class="toolbar"><button id="export">Export confirmations</button><button class="secondary" id="reset">Clear this browser's review state</button><strong id="progress">0 / {len(dataset['cases'])} cases confirmed</strong><strong id="fix-progress">0 / 4 fixes confirmed</strong><strong id="policy-progress">Taxonomy pre-adjudicated</strong></div>
+<div class="toolbar"><button id="export">Export confirmations</button><button class="secondary" id="reset">Clear this browser's review state</button><label><input type="checkbox" id="show-preverified"> Show {verified_count} completed cases</label><strong id="progress">{verified_count} / {len(dataset['cases'])} cases confirmed</strong><strong id="fix-progress">4 / 4 fixes confirmed</strong><strong id="policy-progress">Taxonomy pre-adjudicated</strong></div>
 {''.join(cards)}
 </main>
 <script>
-const key = 'multimodal-review-v2';
-const emptyState = {{cases: {{}}, fixes: {{}}, policyConfirmed: true}};
-const state = JSON.parse(localStorage.getItem(key) || 'null') || emptyState;
+const key = 'multimodal-review-v3';
+const initialState = {initial_state_json};
+const state = JSON.parse(localStorage.getItem(key) || 'null') || initialState;
 state.cases = state.cases || {{}}; state.fixes = state.fixes || {{}};
 state.policyConfirmed = true;
 function save() {{ localStorage.setItem(key, JSON.stringify(state)); update(); }}
@@ -339,6 +409,9 @@ function update() {{
 document.querySelectorAll('[data-fix-id]').forEach(box => {{
   const id = box.dataset.fixId; box.checked = Boolean(state.fixes[id]);
   box.addEventListener('change', () => {{ state.fixes[id] = box.checked; save(); }});
+}});
+document.querySelector('#show-preverified').addEventListener('change', event => {{
+  document.body.classList.toggle('show-preverified', event.target.checked);
 }});
 document.querySelectorAll('.case').forEach(card => {{
   const id = card.dataset.caseId; const prior = state.cases[id] || {{}};
@@ -378,7 +451,10 @@ def write_text(path: Path, text: str) -> None:
 def main() -> int:
     args = parse_args()
     try:
+        prior_dataset = load_json(args.output) if args.output.is_file() else None
         dataset = build_dataset(load_json(args.sample_queue), load_json(args.authoring))
+        if prior_dataset is not None:
+            dataset = preserve_unchanged_reviews(dataset, prior_dataset)
         summary = validate_dataset(dataset)
         write_text(args.output, json.dumps(dataset, indent=2, sort_keys=True) + "\n")
         write_text(args.review_output, review_markdown(dataset))
@@ -394,7 +470,10 @@ def main() -> int:
                 "cases": summary["cases"],
                 "slices": dict(sorted(Counter(case["slice"] for case in dataset["cases"]).items())),
                 "modalities": dict(sorted(Counter(case["modality"] for case in dataset["cases"] if case["slice"] == "visual_answerable").items())),
-                "researcher_verified": 0,
+                "researcher_verified": sum(
+                    case["review"]["researcher_verified"]
+                    for case in dataset["cases"]
+                ),
                 "model_called": False,
                 "private_output": True,
             },
