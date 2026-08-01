@@ -72,4 +72,7 @@ def test_review_html_escapes_case_content(tmp_path) -> None:
 
     assert "<script>alert(1)</script>" not in rendered
     assert "&lt;script&gt;alert(1)&lt;/script&gt;" in rendered
-    assert "Export decisions" in rendered
+    assert "Export confirmations" in rendered
+    assert "data-check=\"region\"" in rendered
+    assert "policy-confirm" in rendered
+    assert "cases confirmed" in rendered

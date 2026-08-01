@@ -86,7 +86,9 @@ Current utilities:
   render hashes, provisional evidence regions, a Markdown checklist, and a
   private local HTML review page that exports decisions without uploading
   content. Run it with `npm run draft:multimodal-private-benchmark`. The output
-  remains unsealed and cannot run until every case is researcher-verified.
+  remains unsealed and cannot run until every case is researcher-verified. The
+  page includes the confirmed second-review fixes, taxonomy guidance, per-case
+  checks, progress counters, and a local confirmation export.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and
