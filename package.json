@@ -29,6 +29,7 @@
     "sample:multimodal-pdf-pages": "uv run python -m scripts.sample_multimodal_pdf_pages",
     "draft:multimodal-private-benchmark": "uv run python -m scripts.build_multimodal_private_draft",
     "apply:multimodal-private-review": "uv run python -m scripts.apply_multimodal_researcher_review",
+    "seal:multimodal-private-benchmark": "uv run python -m scripts.seal_multimodal_benchmark",
     "review:multimodal-private-claude": "uv run python -m scripts.second_review_multimodal_benchmark --consumer-data-boundary-approved",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",

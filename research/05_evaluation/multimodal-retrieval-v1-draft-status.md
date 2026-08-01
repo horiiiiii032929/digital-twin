@@ -2,8 +2,9 @@
 
 Date: 2026-08-01
 
-Status: private researcher-reviewed draft; structurally valid; 40/40 cases
-researcher-verified; split and access ledger not yet sealed; not runnable
+Status: private benchmark sealed; structurally valid; 40/40 cases
+researcher-verified; 16-case development split available; 24-case held-out split
+unopened
 
 ## Current allocation
 
@@ -80,12 +81,26 @@ cover:
 4. accept, reject, or revise disposition, with notes as needed.
 
 The edited partition case remains verified after its S1/S2 invariant rewrite.
-All 40 cases are now researcher-verified. The next gate is to freeze the
-development/held-out split and access ledger, rerun structural checks, and seal.
-Until then, V0-V3 must not run.
+All 40 cases are researcher-verified. The deterministic seal keeps every page
+asset and all cases attached to it within one partition. The 16-case development
+split covers all nine courses and all six observed visual modalities; it has ten
+visual-answerable, three text-control, one no-evidence, and two integrity cases.
+The 24-case held-out file is hash-bound to a pristine one-time ledger with zero
+attempts and `heldout_access_allowed=false`.
+
+V0-V2 may now be implemented and compared on the sealed development split only.
+V3 remains conditional on a documented V2 quality failure. The held-out split
+must remain unopened until candidates, metrics, configuration, and the one-time
+runner are frozen.
 
 Rebuild and validate the private draft with:
 
 ```bash
 npm run draft:multimodal-private-benchmark
+```
+
+The completed private seal was created once with:
+
+```bash
+npm run seal:multimodal-private-benchmark
 ```

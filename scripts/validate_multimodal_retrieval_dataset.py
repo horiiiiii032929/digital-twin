@@ -165,18 +165,23 @@ def validate_status_and_coverage(dataset: dict[str, Any]) -> None:
             all(required_provenance <= set(asset) for asset in dataset["source_assets"]),
             "private dataset asset lacks source provenance",
         )
-        slices = Counter(case["slice"] for case in cases)
-        require(slices["visual_answerable"] >= 24, "private dataset has fewer than 24 visual cases")
-        require(slices["text_control"] >= 8, "private dataset has fewer than 8 text controls")
-        require(slices["no_evidence"] >= 4, "private dataset has fewer than 4 no-evidence cases")
-        require(slices["adversarial_integrity"] >= 4, "private dataset has fewer than 4 integrity cases")
-        visual_modalities = Counter(
-            case["modality"] for case in cases if case["slice"] == "visual_answerable"
-        )
-        require(
-            sum(count >= 4 for count in visual_modalities.values()) >= 4,
-            "private dataset needs at least four modalities with four visual cases each",
-        )
+        if dataset["dataset_status"] == "sealed":
+            splits = {case["split"] for case in cases}
+            require(len(splits) == 1, "sealed partition mixes development and held-out cases")
+            require(bool(cases), "sealed partition is empty")
+        else:
+            slices = Counter(case["slice"] for case in cases)
+            require(slices["visual_answerable"] >= 24, "private dataset has fewer than 24 visual cases")
+            require(slices["text_control"] >= 8, "private dataset has fewer than 8 text controls")
+            require(slices["no_evidence"] >= 4, "private dataset has fewer than 4 no-evidence cases")
+            require(slices["adversarial_integrity"] >= 4, "private dataset has fewer than 4 integrity cases")
+            visual_modalities = Counter(
+                case["modality"] for case in cases if case["slice"] == "visual_answerable"
+            )
+            require(
+                sum(count >= 4 for count in visual_modalities.values()) >= 4,
+                "private dataset needs at least four modalities with four visual cases each",
+            )
         if dataset["dataset_status"] in {"approved", "sealed"}:
             require(
                 all(case["review"]["researcher_verified"] for case in cases),

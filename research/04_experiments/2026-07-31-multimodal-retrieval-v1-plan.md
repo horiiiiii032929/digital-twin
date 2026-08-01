@@ -272,8 +272,10 @@ researcher completed the local review export and the edited partition case was
 rewritten around its S1/S2 invariant; all 40 are now researcher-verified and
 ignored. Seven text-recoverable candidates were subsequently replaced with
 genuinely visual questions and accepted through a fresh local researcher export.
-The draft remains unsealed because the development/held-out split and access
-ledger are still outstanding.
+The benchmark was sealed on 2026-08-01 with an asset-grouped 16-case development
+split and 24-case held-out split. The development partition covers all nine
+courses and six observed visual modalities. The held-out partition is bound to
+an unopened one-time access ledger and has zero attempts.
 
 The governed Claude second review completed all 40 cases on 2026-08-01. It
 accepted 22, requested revision on 17, and rejected one. Direct visual
@@ -285,8 +287,9 @@ field remains the source page's primary representation, while
 controls therefore retain `mixed` plus `text_sufficient`; the seven flagged
 visual candidates now use accepted visual-dependent replacements; and four
 integrity cases retain their source modality while the refusal action remains
-authoritative. Researcher source-content verification is complete, but the
-draft remains unsealed pending the split/ledger freeze. See
+authoritative. Researcher source-content verification and the split/ledger
+freeze are complete. V0-V2 may now run on sealed development only; V3 and
+held-out access remain gated. See
 [`multimodal-benchmark-claude-second-review-v1-results.md`](../05_evaluation/multimodal-benchmark-claude-second-review-v1-results.md).
 
 ## Stop rules

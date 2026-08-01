@@ -96,6 +96,12 @@ Current utilities:
   export, applies accepted/rejected/revise dispositions to the ignored private
   draft, and leaves revised or rejected cases unverified. Run it with
   `npm run apply:multimodal-private-review -- --review /path/to/export.json`.
+- `seal_multimodal_benchmark.py`: creates a deterministic 16-case development
+  and 24-case held-out freeze from the fully verified private draft, keeps every
+  rendered page and all of its cases in one split, maximizes course and modality
+  coverage, writes hash-bound sealed partitions, and creates a pristine
+  one-time held-out ledger without running a model. Run it once with `npm run
+  seal:multimodal-private-benchmark`; existing seal files are never overwritten.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and
