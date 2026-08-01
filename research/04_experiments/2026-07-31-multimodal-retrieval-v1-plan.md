@@ -267,9 +267,11 @@ not run.
 The current private checkpoint has 26 page assets and 40 cases: 24 visual-
 answerable, eight text controls, four no-evidence, and four integrity cases.
 An assistant visual QA round found and corrected seven cases and replaced one
-ambiguous case; a second assistant pass accepted the corrected draft. All 40
-remain researcher-unverified and ignored, so they cannot be sealed or run until
-the researcher completes the generated visual-review checklist.
+ambiguous case; a second assistant pass accepted the corrected draft. The
+researcher completed the local review export and the edited partition case was
+rewritten around its S1/S2 invariant; all 40 are now researcher-verified and
+ignored. The draft remains unsealed because the seven visual replacement cases,
+development/held-out split, and access ledger are still outstanding.
 
 The governed Claude second review completed all 40 cases on 2026-08-01. It
 accepted 22, requested revision on 17, and rejected one. Direct visual
@@ -281,8 +283,9 @@ field remains the source page's primary representation, while
 controls therefore retain `mixed` plus `text_sufficient`; seven visual
 candidates are held out of the visual denominator pending replacement cases;
 and four integrity cases retain their source modality while the refusal action
-remains authoritative. The draft still requires researcher source-content
-verification and remains unsealed. See
+remains authoritative. Researcher source-content verification is now complete,
+but the draft remains unsealed pending replacement cases and split/ledger
+freeze. See
 [`multimodal-benchmark-claude-second-review-v1-results.md`](../05_evaluation/multimodal-benchmark-claude-second-review-v1-results.md).
 
 ## Stop rules

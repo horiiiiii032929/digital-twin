@@ -146,6 +146,17 @@ structural checks, and complete researcher verification. Do not rerun Claude
 merely to seek higher agreement, and do not select a retrieval or deployment
 method from this QA run.
 
+## Post-review project checkpoint
+
+The subsequent local researcher export confirmed all 40 cases and all four
+direct-fix confirmations. Thirty-nine cases were accepted as authored. One
+partition case was revised because its original index-position wording was
+artificial; the query was rewritten around the diagram's S1/S2 partition
+invariant and then approved. The ignored private draft now records 40/40
+`researcher_verified` cases and remains unsealed while seven genuinely visual
+replacement cases and the development/held-out split and access ledger remain
+to be authored and frozen.
+
 ## Limitations
 
 - Claude model agreement is not independent human or professor review.
@@ -155,7 +166,8 @@ method from this QA run.
 - Batch latency includes agent/tool orchestration and is not a serving metric.
 - The taxonomy adjudication is a project-method decision, not independent human
   verification.
-- The benchmark remains researcher-unverified, private, ignored, and unsealed.
+- The benchmark is now researcher-verified, but remains private, ignored, and
+  unsealed pending replacement cases and split/ledger freeze.
 
 Reproduce only after accepting the documented consumer boundary:
 
