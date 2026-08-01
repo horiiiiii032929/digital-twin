@@ -76,3 +76,13 @@ def test_review_html_escapes_case_content(tmp_path) -> None:
     assert "data-check=\"region\"" in rendered
     assert "policy-confirm" in rendered
     assert "cases confirmed" in rendered
+
+
+def test_review_html_marks_auto_adjudicated_taxonomy(tmp_path) -> None:
+    dataset = build_dataset(sample_queue(), authoring())
+    dataset["cases"][0]["case_id"] = "mmr1-control-datamart-01"
+
+    rendered = review_html(dataset, tmp_path / "review.html")
+
+    assert "Codex adjudication" in rendered
+    assert "pre-adjudicated" in rendered

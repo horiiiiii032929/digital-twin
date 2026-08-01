@@ -85,15 +85,23 @@ Direct visual adjudication confirmed defects in four cases:
 - `mmr1-it5007-mapping-04`: required wording merges two separately labelled
   locations; its modality also needs correction.
 
-The remaining 14 disagreements stay open for researcher adjudication:
+The remaining 14 disagreements were subsequently adjudicated by Codex on
+2026-08-01 using the fixed minimum-evidence rule. This is a taxonomy decision,
+not researcher verification:
 
 - six text controls use `mixed` for the source-page modality while the reviewer
   interpreted modality as the minimum answer evidence and requested `text`;
 - seven visual cases may be reconstructable from linearly extracted text, but
   whether ordering is reliable enough to make them text-sufficient is a
   benchmark-definition decision; and
-- one integrity-refusal case exposed that the schema lacks a
-  `not_applicable` modality/dependency value.
+- one integrity-refusal case uses `not_applicable` for modality and dependency.
+
+The six text controls are therefore treated as text-sufficient controls. The
+seven visual cases whose claims are recoverable from linear extracted text are
+held out of the visual denominator pending genuinely visual replacement cases;
+they remain visible in the private checklist so their source claims and regions
+can still be checked. The private checklist displays these decisions and does
+not mutate the dataset automatically.
 
 No private page content or model reasoning is reproduced here. The exact
 per-case reasons remain in the ignored result.
@@ -126,11 +134,11 @@ usage counters, not evidence of an additional API invoice.
 | Automatic benchmark mutation or sealing | Pass: none |
 | Prospective quality prediction | Fail |
 
-**Refine.** Correct the four visually confirmed cases, define whether modality
-means source format or minimum answer evidence, adjudicate the seven
-text-ordering disputes and the integrity taxonomy, then rerun structural checks
-and complete researcher verification. Do not rerun Claude merely to seek higher
-agreement, and do not select a retrieval or deployment method from this QA run.
+**Refine.** Apply the four visually confirmed corrections, retain the Codex
+taxonomy adjudication, author seven genuinely visual replacement cases, rerun
+structural checks, and complete researcher verification. Do not rerun Claude
+merely to seek higher agreement, and do not select a retrieval or deployment
+method from this QA run.
 
 ## Limitations
 
@@ -139,8 +147,8 @@ agreement, and do not select a retrieval or deployment method from this QA run.
   Team, or Enterprise controls.
 - The model-improvement setting and processing region were not machine-readable.
 - Batch latency includes agent/tool orchestration and is not a serving metric.
-- Modality and visual-dependency disagreements partly reflect an underspecified
-  taxonomy rather than factual errors.
+- The taxonomy adjudication is a project-method decision, not independent human
+  verification.
 - The benchmark remains researcher-unverified, private, ignored, and unsealed.
 
 Reproduce only after accepting the documented consumer boundary:
