@@ -89,6 +89,10 @@ Current utilities:
   remains unsealed and cannot run until every case is researcher-verified. The
   page includes the confirmed second-review fixes, pre-adjudicated taxonomy,
   per-case checks, progress counters, and a local confirmation export.
+- `apply_multimodal_researcher_review.py`: validates a complete local review
+  export, applies accepted/rejected/revise dispositions to the ignored private
+  draft, and leaves revised or rejected cases unverified. Run it with
+  `npm run apply:multimodal-private-review -- --review /path/to/export.json`.
 - `second_review_multimodal_benchmark.py`: sends blinded, eligible rendered
   pages and case fields to an explicitly approved Claude model in asset-level
   batches, records a private per-case second review plus provider usage, and
