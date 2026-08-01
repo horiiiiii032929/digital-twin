@@ -221,9 +221,11 @@ semantics, permissions, and review-state rules. No candidate evaluation has run,
 so there is no result-registry entry or Keep / Refine / Go Deeper / Drop
 decision yet.
 
-The current private checkpoint has 25 page assets and 40 cases: 24 visual-
+The current private checkpoint has 26 page assets and 40 cases: 24 visual-
 answerable, eight text controls, four no-evidence, and four integrity cases.
-All 40 are unverified and remain ignored; they cannot be sealed or run until
+An assistant visual QA round found and corrected seven cases and replaced one
+ambiguous case; a second assistant pass accepted the corrected draft. All 40
+remain researcher-unverified and ignored, so they cannot be sealed or run until
 the researcher completes the generated visual-review checklist.
 
 ## Stop rules
