@@ -270,8 +270,10 @@ An assistant visual QA round found and corrected seven cases and replaced one
 ambiguous case; a second assistant pass accepted the corrected draft. The
 researcher completed the local review export and the edited partition case was
 rewritten around its S1/S2 invariant; all 40 are now researcher-verified and
-ignored. The draft remains unsealed because the seven visual replacement cases,
-development/held-out split, and access ledger are still outstanding.
+ignored. Seven text-recoverable candidates were subsequently replaced with
+genuinely visual questions and accepted through a fresh local researcher export.
+The draft remains unsealed because the development/held-out split and access
+ledger are still outstanding.
 
 The governed Claude second review completed all 40 cases on 2026-08-01. It
 accepted 22, requested revision on 17, and rejected one. Direct visual
@@ -280,12 +282,11 @@ Codex then supplied a deterministic taxonomy adjudication for the remaining 14
 flags plus five consistent normalization decisions. The schema's `modality`
 field remains the source page's primary representation, while
 `visual_dependency` records whether selectable text alone can answer. Eight
-controls therefore retain `mixed` plus `text_sufficient`; seven visual
-candidates are held out of the visual denominator pending replacement cases;
-and four integrity cases retain their source modality while the refusal action
-remains authoritative. Researcher source-content verification is now complete,
-but the draft remains unsealed pending replacement cases and split/ledger
-freeze. See
+controls therefore retain `mixed` plus `text_sufficient`; the seven flagged
+visual candidates now use accepted visual-dependent replacements; and four
+integrity cases retain their source modality while the refusal action remains
+authoritative. Researcher source-content verification is complete, but the
+draft remains unsealed pending the split/ledger freeze. See
 [`multimodal-benchmark-claude-second-review-v1-results.md`](../05_evaluation/multimodal-benchmark-claude-second-review-v1-results.md).
 
 ## Stop rules
