@@ -88,8 +88,10 @@ provenance.
 | V3 | V2 plus precomputed local visual embeddings and text/visual rank fusion | Conditional candidate only |
 
 V3 may run only if V2 misses the complete-evidence gate overall or fails a
-specific observed modality. No hosted model or external course-content transfer
-is permitted in this experiment.
+specific observed modality. A hosted model or external course-content transfer
+is eligible only under a prospective provider record for approved sources, with
+mandatory exclusions, minimization, retention/training state, call count, cost,
+and deletion or expiry recorded.
 
 ## Low-cost deployment boundary
 
@@ -135,21 +137,22 @@ Before any candidate run, the researcher will:
 Synthetic assets never enter the private performance denominator. Private page
 pixels, OCR text, descriptions, and per-case outputs remain ignored and local.
 
-## Local cross-model QA protocol
+## Cross-model QA protocol
 
 Run ID: `multimodal-benchmark-local-second-review-v1`
 
-Decision question: does a separate local vision-language model identify claim,
+Decision question: does a separate vision-language model identify claim,
 region, modality, visual-dependency, no-evidence, or integrity defects that the
-assistant visual QA missed before researcher verification?
+assistant visual QA missed before researcher verification, and is its provider
+boundary acceptable for this research use?
 
 The baseline is the corrected assistant review v2, which accepted all 40 draft
-cases. The independent candidate reviewer is the locally installed
-`gemma3:4b` Ollama model at digest `a2af6cc3eb7f`. Temperature is zero, each
-case uses a stable seed, and every review receives the rendered page plus the
+cases. Eligible independent reviewers are the locally installed `gemma3:4b`
+Ollama model at digest `a2af6cc3eb7f` and an explicitly approved Claude model.
+Each case uses a fresh, non-resumed review with deterministic settings where the
+provider supports them. Every reviewer receives the rendered page plus the
 query, expected action, required claims, modality, visual-dependency label, and
-selectable surrounding text. The model does not receive the assistant decision
-or notes.
+selectable surrounding text, but not the assistant decision or notes.
 
 The run covers all 40 private cases rather than a sample. Report response and
 schema success, Accept / Revise / Reject counts, agreement with assistant QA,
@@ -159,11 +162,19 @@ at least 36 cases will be accepted, no case will be rejected for unsupported
 claims or privacy, and any remaining revisions will expose useful ambiguity for
 researcher review.
 
-Hard gates are zero non-loopback requests, zero external-provider cost, 40
-schema-valid decisions, and no automatic benchmark mutation or sealing. Any
-Revise, Reject, privacy concern, or source-eligibility concern becomes an
+Hard gates are an allowlisted provider/model and source set, zero mandatory-
+exclusion transfers, a complete call/cost log, 40 schema-valid decisions, and
+no automatic benchmark mutation or sealing. Any Revise, Reject, privacy
+concern, source-eligibility concern, or provider-boundary failure becomes an
 explicit researcher-review item. Passing this run is advisory and never changes
-`researcher_verified`; a local model is not an independent human reviewer.
+`researcher_verified`; a model is not an independent human reviewer.
+
+The currently authenticated Claude Code account is a consumer Max account, not
+an API, Team, or Enterprise workspace. Before private pages are transferred,
+the run record must capture the consumer model-improvement setting and accept
+the applicable consumer retention/deletion terms. If that boundary is not
+accepted, use the local reviewer or a separately approved commercial API or
+enterprise workspace instead.
 
 ## Metrics
 
@@ -194,7 +205,8 @@ Supporting measures:
 A candidate is deployment-eligible on the declared reference hardware only if:
 
 - course-isolation, permission, and source-version violations are all zero;
-- external provider calls and API cost are zero;
+- every external provider call is prospectively approved, minimized, logged,
+  and within its recorded cost and data boundary;
 - every returned region has page-local, hash-bound derivation provenance;
 - every frozen case produces a complete result or an explicitly classified
   failure;
@@ -262,7 +274,8 @@ the researcher completes the generated visual-review checklist.
 
 - Do not modify or reopen the sealed text benchmark for this work.
 - Do not interpret raw PDF image-object counts as figures or denominator size.
-- Do not run private pages through a hosted OCR, caption, or embedding service.
+- Do not send excluded, unapproved, or unlogged material to an external
+  provider; approved hosted processing must follow its prospective run record.
 - Do not use OCR confidence as evidence completeness.
 - Do not add V3 merely because it is nominally multimodal.
 - Do not move offline visual preprocessing onto the student request path.
