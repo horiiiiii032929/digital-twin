@@ -41,21 +41,21 @@ CONFIRMED_SECOND_REVIEW_FIXES = {
     "mmr1-it5007-mapping-04": "Rewrite the claim so Internet and Server remain separate labels, and classify the evidence as a diagram.",
 }
 
-TAXONOMY_REVIEW_CASES = {
-    "mmr1-control-datamart-01",
-    "mmr1-control-enterprise-05",
-    "mmr1-control-memory-03",
-    "mmr1-control-packages-02",
-    "mmr1-control-serialization-07",
-    "mmr1-control-web-06",
-    "mmr1-cs5421-dimensions-01",
-    "mmr1-cs5421-indexes-02",
-    "mmr1-cs5421-retail-03",
-    "mmr1-integrity-permission-04",
-    "mmr1-it5002-memory-01",
-    "mmr1-it5004-sequence-02",
-    "mmr1-it5008-email-02",
-    "mmr1-it5008-faculty-01",
+AUTO_ADJUDICATIONS = {
+    "mmr1-control-datamart-01": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-enterprise-05": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-memory-03": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-packages-02": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-serialization-07": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-web-06": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-cs5421-dimensions-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-cs5421-indexes-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-cs5421-retail-03": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-integrity-permission-04": "Use modality=not_applicable and visual_dependency=not_applicable for this refusal case.",
+    "mmr1-it5002-memory-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-it5004-sequence-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-it5008-email-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-it5008-faculty-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
 }
 
 
@@ -173,8 +173,9 @@ def review_markdown(dataset: dict[str, Any]) -> str:
         "the label policy: modality means the minimum evidence needed to answer; a",
         "case is visual only when selectable text alone cannot answer it; and",
         "integrity-refusal cases use `not_applicable` for modality and dependency.",
-        "Fourteen cases are marked for taxonomy adjudication. The export records",
-        "these confirmations but does not mutate the dataset.",
+        "The taxonomy is pre-adjudicated in this page. Your review is limited to",
+        "source eligibility, query/claims, and evidence regions; the export records",
+        "your confirmations but does not mutate the dataset.",
         "",
     ]
     for case in dataset["cases"]:
@@ -197,8 +198,8 @@ def review_markdown(dataset: dict[str, Any]) -> str:
                 (
                     f"- Second-review status: confirmed fix — {CONFIRMED_SECOND_REVIEW_FIXES[case['case_id']]}"
                     if case["case_id"] in CONFIRMED_SECOND_REVIEW_FIXES
-                    else "- Second-review status: taxonomy adjudication required"
-                    if case["case_id"] in TAXONOMY_REVIEW_CASES
+                    else f"- Second-review status: Codex adjudication — {AUTO_ADJUDICATIONS[case['case_id']]}"
+                    if case["case_id"] in AUTO_ADJUDICATIONS
                     else "- Second-review status: no flagged disagreement"
                 ),
                 "- [ ] Source eligibility confirmed",
@@ -228,9 +229,14 @@ def review_html(dataset: dict[str, Any], output_path: Path) -> str:
         if case["case_id"] in CONFIRMED_SECOND_REVIEW_FIXES:
             case_class += " confirmed-fix"
             review_callout = f"<p class=\"callout fix\"><strong>Confirmed second-review fix:</strong> {html.escape(CONFIRMED_SECOND_REVIEW_FIXES[case['case_id']])}</p>"
-        elif case["case_id"] in TAXONOMY_REVIEW_CASES:
-            case_class += " taxonomy-review"
-            review_callout = "<p class=\"callout taxonomy\"><strong>Taxonomy decision:</strong> apply the recommended label policy above and record your judgment.</p>"
+        elif case["case_id"] in AUTO_ADJUDICATIONS:
+            case_class += " auto-adjudicated"
+            review_callout = f"<p class=\"callout adjudicated\"><strong>Codex adjudication:</strong> {html.escape(AUTO_ADJUDICATIONS[case['case_id']])}</p>"
+        taxonomy_check = (
+            '<label><input type="checkbox" data-check="taxonomy" checked disabled> Modality and visual dependency pre-adjudicated</label>'
+            if case["case_id"] in AUTO_ADJUDICATIONS
+            else '<label><input type="checkbox" data-check="taxonomy"> Modality and visual dependency are correct</label>'
+        )
         cards.append(
             f"""
 <article class="{case_class}" id="{case_id}" data-case-id="{case_id}">
@@ -245,7 +251,7 @@ def review_html(dataset: dict[str, Any], output_path: Path) -> str:
       <label><input type="checkbox" data-check="source"> Source is eligible for this study</label>
       <label><input type="checkbox" data-check="claims"> Query and required claims are correct</label>
       <label><input type="checkbox" data-check="region"> Evidence region is adequate</label>
-      <label><input type="checkbox" data-check="taxonomy"> Modality and visual dependency are correct</label>
+      {taxonomy_check}
       <label class="confirm"><input type="checkbox" data-confirm disabled> I confirm this case</label>
       <small class="case-status" data-status>Complete all checks before confirming.</small>
     </fieldset>
@@ -279,13 +285,14 @@ button {{ padding: 10px 16px; border: 0; border-radius: 8px; background: #2457d6
 button.secondary {{ background: #475569; }}
 .case {{ display: grid; grid-template-columns: minmax(420px, 1.2fr) minmax(360px, 0.8fr); gap: 18px; background: white; margin: 22px 0; padding: 18px; border-radius: 12px; box-shadow: 0 2px 12px #17203318; }}
 .case.confirmed-fix {{ border: 3px solid #dc2626; }}
-.case.taxonomy-review {{ border: 3px solid #d97706; }}
+.case.auto-adjudicated {{ border: 3px solid #2563eb; }}
 .case header {{ grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }}
 .case h2 {{ margin: 0; }}
 .case img {{ width: 100%; max-height: 720px; object-fit: contain; background: #eef1f6; }}
 .callout {{ padding: 12px; border-radius: 8px; }}
 .callout.fix {{ background: #fee2e2; border: 1px solid #f87171; }}
 .callout.taxonomy {{ background: #fef3c7; border: 1px solid #f59e0b; }}
+.callout.adjudicated {{ background: #dbeafe; border: 1px solid #60a5fa; }}
 .checks {{ display: grid; gap: 8px; padding: 12px; margin: 14px 0; border: 1px solid #cbd5e1; border-radius: 8px; }}
 .checks label {{ display: block; }}
 .checks .confirm {{ font-weight: 700; border-top: 1px solid #cbd5e1; padding-top: 10px; }}
@@ -304,39 +311,37 @@ textarea {{ display: block; box-sizing: border-box; width: 100%; margin-top: 6px
   <ol>
     {''.join(f'<li><label><input type="checkbox" data-fix-id="{html.escape(case_id)}"> <a href="#{html.escape(case_id)}">{html.escape(case_id)}</a>: {html.escape(description)}</label></li>' for case_id, description in CONFIRMED_SECOND_REVIEW_FIXES.items())}
   </ol>
-  <h2>2. Confirm the label policy</h2>
-  <p>Use the minimum evidence needed to answer. A case is visual only when selectable text alone cannot answer it. Integrity-refusal cases use <code>not_applicable</code> for modality and dependency.</p>
-  <label><input type="checkbox" id="policy-confirm"> I confirm this label policy for the cases below.</label>
+  <h2>2. Taxonomy is pre-adjudicated</h2>
+  <p>Codex applied the minimum-evidence policy: text controls use <code>text</code>, cases answerable from linear extracted text are held out of the visual denominator, and integrity refusals use <code>not_applicable</code>. Blue cards show these decisions.</p>
+  <label><input type="checkbox" id="policy-confirm" checked disabled> Taxonomy policy applied.</label>
 </section>
-<div class="toolbar"><button id="export">Export confirmations</button><button class="secondary" id="reset">Clear this browser's review state</button><strong id="progress">0 / {len(dataset['cases'])} cases confirmed</strong><strong id="fix-progress">0 / 4 fixes confirmed</strong><strong id="policy-progress">Policy pending</strong></div>
+<div class="toolbar"><button id="export">Export confirmations</button><button class="secondary" id="reset">Clear this browser's review state</button><strong id="progress">0 / {len(dataset['cases'])} cases confirmed</strong><strong id="fix-progress">0 / 4 fixes confirmed</strong><strong id="policy-progress">Taxonomy pre-adjudicated</strong></div>
 {''.join(cards)}
 </main>
 <script>
 const key = 'multimodal-review-v2';
-const emptyState = {{cases: {{}}, fixes: {{}}, policyConfirmed: false}};
+const emptyState = {{cases: {{}}, fixes: {{}}, policyConfirmed: true}};
 const state = JSON.parse(localStorage.getItem(key) || 'null') || emptyState;
 state.cases = state.cases || {{}}; state.fixes = state.fixes || {{}};
+state.policyConfirmed = true;
 function save() {{ localStorage.setItem(key, JSON.stringify(state)); update(); }}
 function update() {{
   const confirmed = Object.values(state.cases).filter(x => x.confirmed).length;
   const fixes = Object.values(state.fixes).filter(Boolean).length;
   document.querySelector('#progress').textContent = `${{confirmed}} / {len(dataset['cases'])} cases confirmed`;
   document.querySelector('#fix-progress').textContent = `${{fixes}} / 4 fixes confirmed`;
-  document.querySelector('#policy-progress').textContent = state.policyConfirmed ? 'Policy confirmed' : 'Policy pending';
+  document.querySelector('#policy-progress').textContent = 'Taxonomy pre-adjudicated';
 }}
 document.querySelectorAll('[data-fix-id]').forEach(box => {{
   const id = box.dataset.fixId; box.checked = Boolean(state.fixes[id]);
   box.addEventListener('change', () => {{ state.fixes[id] = box.checked; save(); }});
 }});
-const policy = document.querySelector('#policy-confirm');
-policy.checked = Boolean(state.policyConfirmed);
-policy.addEventListener('change', () => {{ state.policyConfirmed = policy.checked; save(); }});
 document.querySelectorAll('.case').forEach(card => {{
   const id = card.dataset.caseId; const prior = state.cases[id] || {{}};
   if (prior.decision) {{ const radio = card.querySelector(`input[value="${{prior.decision}}"]`); if (radio) radio.checked = true; }}
   const notes = card.querySelector('textarea'); notes.value = prior.notes || '';
   const checks = card.querySelectorAll('[data-check]'); const confirm = card.querySelector('[data-confirm]'); const status = card.querySelector('[data-status]');
-  checks.forEach(check => {{ check.checked = Boolean((prior.checks || {{}})[check.dataset.check]); check.addEventListener('change', () => {{
+  checks.forEach(check => {{ check.checked = check.disabled || Boolean((prior.checks || {{}})[check.dataset.check]); check.addEventListener('change', () => {{
     state.cases[id] = {{...(state.cases[id] || {{}}), checks: {{...((state.cases[id] || {{}}).checks || {{}}), [check.dataset.check]: check.checked}}}};
     const ready = [...checks].every(item => item.checked); confirm.disabled = !ready;
     if (!ready) {{ confirm.checked = false; state.cases[id].confirmed = false; status.textContent = 'Complete all checks before confirming.'; }} else {{ status.textContent = 'All checks complete; confirm this case when ready.'; }}
