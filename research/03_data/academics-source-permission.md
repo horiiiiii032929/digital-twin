@@ -120,6 +120,8 @@ software artifacts are classified before sampling. The mandatory exclusions
 above still apply to solutions, graded answers, student or participant data,
 credentials, and secrets even when such files are physically inside the vault.
 
-All visual rendering, OCR, layout extraction, descriptions, and embeddings for
-this study remain local-only. This clarification does not activate the earlier
-prospective external-provider permission.
+Visual rendering, OCR, layout extraction, descriptions, and embeddings for the
+retrieval study remain local by default. The governed Claude second-review run
+is the recorded exception: it transferred only eligible rendered pages and
+blinded case fields under the external review clarification above. Any later
+external processing requires its own prospective provider record.

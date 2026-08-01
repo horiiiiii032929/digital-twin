@@ -2,9 +2,9 @@
 
 Date: 2026-07-31
 
-Status: prospective groundwork complete; source and low-cost deployment
-boundaries clarified; public synthetic instrument validated; no private
-benchmark authored, no model run, and no candidate selected
+Status: private draft and governed Claude second review complete; draft requires
+researcher adjudication and correction before sealing; no retrieval candidate
+has run or been selected
 
 GitHub issue: [#60](https://github.com/horiiiiii032929/digital-twin/issues/60)
 
@@ -135,7 +135,9 @@ Before any candidate run, the researcher will:
    measuring V1-V3.
 
 Synthetic assets never enter the private performance denominator. Private page
-pixels, OCR text, descriptions, and per-case outputs remain ignored and local.
+pixels, OCR text, descriptions, and per-case outputs remain ignored. They stay
+local except for the minimized inputs of an explicitly approved, recorded
+external review.
 
 ## Cross-model QA protocol
 
@@ -149,8 +151,8 @@ boundary acceptable for this research use?
 The baseline is the corrected assistant review v2, which accepted all 40 draft
 cases. Eligible independent reviewers are the locally installed `gemma3:4b`
 Ollama model at digest `a2af6cc3eb7f` and an explicitly approved Claude model.
-Each case uses a fresh, non-resumed review with deterministic settings where the
-provider supports them. Every reviewer receives the rendered page plus the
+Each asset batch uses a fresh, non-resumed review with deterministic settings
+where the provider supports them. Every reviewer receives the rendered page plus the
 query, expected action, required claims, modality, visual-dependency label, and
 selectable surrounding text, but not the assistant decision or notes.
 
@@ -257,11 +259,10 @@ npm run sample:multimodal-pdf-pages
 npm run draft:multimodal-private-benchmark
 ```
 
-The command verifies the JSON Schema, fixture hashes, rasterization contract,
+The commands verify the JSON Schema, fixture hashes, rasterization contract,
 region bounds and ownership, modality/slice coverage, positive and boundary
-semantics, permissions, and review-state rules. No candidate evaluation has run,
-so there is no result-registry entry or Keep / Refine / Go Deeper / Drop
-decision yet.
+semantics, permissions, and review-state rules. The retrieval candidates have
+not run.
 
 The current private checkpoint has 26 page assets and 40 cases: 24 visual-
 answerable, eight text controls, four no-evidence, and four integrity cases.
@@ -269,6 +270,13 @@ An assistant visual QA round found and corrected seven cases and replaced one
 ambiguous case; a second assistant pass accepted the corrected draft. All 40
 remain researcher-unverified and ignored, so they cannot be sealed or run until
 the researcher completes the generated visual-review checklist.
+
+The governed Claude second review completed all 40 cases on 2026-08-01. It
+accepted 22, requested revision on 17, and rejected one. Direct visual
+adjudication confirmed three clipped evidence regions and one incorrect claim;
+14 other cases require taxonomy adjudication. The draft therefore remains
+unsealed. See
+[`multimodal-benchmark-claude-second-review-v1-results.md`](../05_evaluation/multimodal-benchmark-claude-second-review-v1-results.md).
 
 ## Stop rules
 
