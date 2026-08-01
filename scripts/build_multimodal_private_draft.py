@@ -38,24 +38,29 @@ CONFIRMED_SECOND_REVIEW_FIXES = {
     "mmr1-it5003-fifo-02": "Widen the evidence region to include the complete dequeue panel.",
     "mmr1-it5003-heap-03": "Widen the evidence region to include the x = 1/2 annotation and final value.",
     "mmr1-it5007-web-01": "Extend the evidence region to include the User Device, Internet, and Server labels.",
-    "mmr1-it5007-mapping-04": "Rewrite the claim so Internet and Server remain separate labels, and classify the evidence as a diagram.",
+    "mmr1-it5007-mapping-04": "Rewrite the claim so Internet and Server remain separate labels; retain the screenshot source modality because the page contains an embedded UI screenshot.",
 }
 
 AUTO_ADJUDICATIONS = {
-    "mmr1-control-datamart-01": "Use modality=text; this is a text-sufficient control.",
-    "mmr1-control-enterprise-05": "Use modality=text; this is a text-sufficient control.",
-    "mmr1-control-memory-03": "Use modality=text; this is a text-sufficient control.",
-    "mmr1-control-packages-02": "Use modality=text; this is a text-sufficient control.",
-    "mmr1-control-serialization-07": "Use modality=text; this is a text-sufficient control.",
-    "mmr1-control-web-06": "Use modality=text; this is a text-sufficient control.",
+    "mmr1-control-datamart-01": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-fifo-04": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-chatbot-08": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-enterprise-05": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-memory-03": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-packages-02": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-serialization-07": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
+    "mmr1-control-web-06": "Keep source modality=mixed; visual_dependency=text_sufficient is the authoritative answerability label.",
     "mmr1-cs5421-dimensions-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-cs5421-indexes-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-cs5421-retail-03": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
-    "mmr1-integrity-permission-04": "Use modality=not_applicable and visual_dependency=not_applicable for this refusal case.",
+    "mmr1-integrity-permission-04": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
     "mmr1-it5002-memory-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-it5004-sequence-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-it5008-email-02": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
     "mmr1-it5008-faculty-01": "Treat as text-sufficient and hold out of the visual denominator until a genuinely visual replacement is authored.",
+    "mmr1-integrity-crosscourse-01": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
+    "mmr1-integrity-solution-02": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
+    "mmr1-integrity-provider-03": "Keep the source modality; the refusal action is authoritative and no modality choice is needed.",
 }
 
 
@@ -164,18 +169,17 @@ def review_markdown(dataset: dict[str, Any]) -> str:
         "",
         "This file is private and ignored. Inspect the rendered page for every case.",
         "Accept only when the query is unambiguous, every required claim is correct,",
-        "the region is adequate, the visual-dependency label is justified, and the",
-        "source is eligible for tutoring research.",
+        "the region is adequate, and the source is eligible for tutoring research.",
         "",
         "## Required decisions before case review",
         "",
-        "Confirm the four direct second-review fixes in the HTML page, then confirm",
-        "the label policy: modality means the minimum evidence needed to answer; a",
-        "case is visual only when selectable text alone cannot answer it; and",
-        "integrity-refusal cases use `not_applicable` for modality and dependency.",
-        "The taxonomy is pre-adjudicated in this page. Your review is limited to",
-        "source eligibility, query/claims, and evidence regions; the export records",
-        "your confirmations but does not mutate the dataset.",
+        "Confirm the four direct second-review fixes in the HTML page. The label",
+        "policy is already adjudicated: modality names the source page's primary",
+        "representation; visual dependency determines whether selectable text",
+        "alone can answer; and refusal cases are judged by action rather than",
+        "evidence modality. Your review is limited to source eligibility,",
+        "query/claims, evidence regions, and an accept/reject/revise disposition;",
+        "the export records your confirmations but does not mutate the dataset.",
         "",
     ]
     for case in dataset["cases"]:
@@ -205,8 +209,8 @@ def review_markdown(dataset: dict[str, Any]) -> str:
                 "- [ ] Source eligibility confirmed",
                 "- [ ] Query and claims confirmed",
                 "- [ ] Evidence region confirmed",
-                "- [ ] Modality and visual dependency confirmed",
-                "- [ ] Accept case",
+                "- Taxonomy: pre-adjudicated by Codex (displayed for context)",
+                "- [ ] Record disposition: accept, reject, or revise",
                 "- Reviewer notes:",
                 "",
             ]
@@ -305,14 +309,14 @@ textarea {{ display: block; box-sizing: border-box; width: 100%; margin-top: 6px
 </head>
 <body><main>
 <h1>Multimodal retrieval v1 researcher review</h1>
-<p class="notice">Private local artifact. Nothing is uploaded. Start with the four red cards and the policy confirmation, then confirm each case after completing all four checks. The export records your review; it does not change the benchmark automatically.</p>
+<p class="notice">Private local artifact. Nothing is uploaded. Start with the four red cards. Blue cards have their taxonomy pre-adjudicated; for every case, complete the three active checks, choose Accept / Reject / Revise, and confirm. The export records your review; it does not change the benchmark automatically.</p>
 <section class="guide">
   <h2>1. Confirm the four direct fixes</h2>
   <ol>
     {''.join(f'<li><label><input type="checkbox" data-fix-id="{html.escape(case_id)}"> <a href="#{html.escape(case_id)}">{html.escape(case_id)}</a>: {html.escape(description)}</label></li>' for case_id, description in CONFIRMED_SECOND_REVIEW_FIXES.items())}
   </ol>
   <h2>2. Taxonomy is pre-adjudicated</h2>
-  <p>Codex applied the minimum-evidence policy: text controls use <code>text</code>, cases answerable from linear extracted text are held out of the visual denominator, and integrity refusals use <code>not_applicable</code>. Blue cards show these decisions.</p>
+  <p>Codex applied the benchmark taxonomy: modality names the source page's primary representation, while visual dependency determines whether selectable text alone can answer. Cases answerable from linear extracted text are held out of the visual denominator. Blue cards show these decisions; you do not need to choose them again.</p>
   <label><input type="checkbox" id="policy-confirm" checked disabled> Taxonomy policy applied.</label>
 </section>
 <div class="toolbar"><button id="export">Export confirmations</button><button class="secondary" id="reset">Clear this browser's review state</button><strong id="progress">0 / {len(dataset['cases'])} cases confirmed</strong><strong id="fix-progress">0 / 4 fixes confirmed</strong><strong id="policy-progress">Taxonomy pre-adjudicated</strong></div>
@@ -340,16 +344,21 @@ document.querySelectorAll('.case').forEach(card => {{
   const id = card.dataset.caseId; const prior = state.cases[id] || {{}};
   if (prior.decision) {{ const radio = card.querySelector(`input[value="${{prior.decision}}"]`); if (radio) radio.checked = true; }}
   const notes = card.querySelector('textarea'); notes.value = prior.notes || '';
-  const checks = card.querySelectorAll('[data-check]'); const confirm = card.querySelector('[data-confirm]'); const status = card.querySelector('[data-status]');
+  const checks = card.querySelectorAll('[data-check]'); const decisions = card.querySelectorAll('input[type=radio]'); const confirm = card.querySelector('[data-confirm]'); const status = card.querySelector('[data-status]');
+  function refreshCase() {{
+    const checksReady = [...checks].every(item => item.checked); const decisionReady = [...decisions].some(item => item.checked); const ready = checksReady && decisionReady;
+    confirm.disabled = !ready;
+    if (!ready && confirm.checked) {{ confirm.checked = false; state.cases[id] = {{...(state.cases[id] || {{}}), confirmed: false}}; }}
+    status.textContent = !checksReady ? 'Complete the three active checks.' : !decisionReady ? 'Choose Accept, Reject, or Revise before confirming.' : confirm.checked ? 'Case confirmed.' : 'All checks complete; confirm this case when ready.';
+  }}
   checks.forEach(check => {{ check.checked = check.disabled || Boolean((prior.checks || {{}})[check.dataset.check]); check.addEventListener('change', () => {{
     state.cases[id] = {{...(state.cases[id] || {{}}), checks: {{...((state.cases[id] || {{}}).checks || {{}}), [check.dataset.check]: check.checked}}}};
-    const ready = [...checks].every(item => item.checked); confirm.disabled = !ready;
-    if (!ready) {{ confirm.checked = false; state.cases[id].confirmed = false; status.textContent = 'Complete all checks before confirming.'; }} else {{ status.textContent = 'All checks complete; confirm this case when ready.'; }}
+    refreshCase();
     save();
   }}); }});
-  const ready = [...checks].every(item => item.checked); confirm.disabled = !ready; confirm.checked = Boolean(prior.confirmed && ready);
+  const ready = [...checks].every(item => item.checked) && [...decisions].some(item => item.checked); confirm.checked = Boolean(prior.confirmed && ready); refreshCase();
   confirm.addEventListener('change', () => {{ state.cases[id] = {{...(state.cases[id] || {{}}), confirmed: confirm.checked}}; status.textContent = confirm.checked ? 'Case confirmed.' : 'Case confirmation removed.'; save(); }});
-  card.querySelectorAll('input[type=radio]').forEach(r => r.addEventListener('change', () => {{ state.cases[id] = {{...(state.cases[id] || {{}}), decision: r.value}}; save(); }}));
+  decisions.forEach(r => r.addEventListener('change', () => {{ state.cases[id] = {{...(state.cases[id] || {{}}), decision: r.value}}; refreshCase(); save(); }}));
   notes.addEventListener('input', () => {{ state.cases[id] = {{...(state.cases[id] || {{}}), notes: notes.value}}; save(); }});
 }});
 document.querySelector('#export').addEventListener('click', () => {{

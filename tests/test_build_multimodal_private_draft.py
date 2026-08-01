@@ -76,6 +76,7 @@ def test_review_html_escapes_case_content(tmp_path) -> None:
     assert "data-check=\"region\"" in rendered
     assert "policy-confirm" in rendered
     assert "cases confirmed" in rendered
+    assert "choose Accept / Reject / Revise" in rendered
 
 
 def test_review_html_marks_auto_adjudicated_taxonomy(tmp_path) -> None:
@@ -86,3 +87,5 @@ def test_review_html_marks_auto_adjudicated_taxonomy(tmp_path) -> None:
 
     assert "Codex adjudication" in rendered
     assert "pre-adjudicated" in rendered
+    assert 'data-check="taxonomy" checked disabled' in rendered
+    assert "decisionReady" in rendered

@@ -275,9 +275,13 @@ The governed Claude second review completed all 40 cases on 2026-08-01. It
 accepted 22, requested revision on 17, and rejected one. Direct visual
 adjudication confirmed three clipped evidence regions and one incorrect claim.
 Codex then supplied a deterministic taxonomy adjudication for the remaining 14
-flags: six controls are text-sufficient, seven visual candidates are held out
-of the visual denominator pending replacement cases, and the integrity refusal
-uses `not_applicable`. The draft still requires researcher source-content
+flags plus five consistent normalization decisions. The schema's `modality`
+field remains the source page's primary representation, while
+`visual_dependency` records whether selectable text alone can answer. Eight
+controls therefore retain `mixed` plus `text_sufficient`; seven visual
+candidates are held out of the visual denominator pending replacement cases;
+and four integrity cases retain their source modality while the refusal action
+remains authoritative. The draft still requires researcher source-content
 verification and remains unsealed. See
 [`multimodal-benchmark-claude-second-review-v1-results.md`](../05_evaluation/multimodal-benchmark-claude-second-review-v1-results.md).
 
