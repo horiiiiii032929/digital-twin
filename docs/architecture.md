@@ -135,8 +135,9 @@ question + course + release
 ```
 
 The cross-course retrieval ladder is M0 heading-aware BM25, M1 dense, M2
-BM25+dense hybrid, and M3 hybrid plus reranking. Jina and local Qwen3 are
-provider candidates, not architectural choices or selected profiles.
+BM25+dense hybrid, and M3 hybrid plus reranking. Local Qwen3 is the selected M2
+embedding binding for the experimental profile; Jina was retired before hosted
+execution. M3 remains a research-quality reference with BM25 as rollback.
 
 ## Evaluation-before-publication
 

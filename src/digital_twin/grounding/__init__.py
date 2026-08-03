@@ -60,6 +60,7 @@ from src.digital_twin.grounding.retrieval import (
     TermOverlapRetriever,
     lexical_tokens,
 )
+from src.digital_twin.grounding.retrieval_runtime import FallbackRetriever
 from src.digital_twin.grounding.retrieval_evaluation import (
     RelevantChunkReference,
     RetrievalBenchmarkCorpus,
@@ -96,6 +97,7 @@ __all__ = [
     "EvidenceSufficiencyDecision",
     "EvidenceSufficiencyEvaluationSummary",
     "EvidenceSufficiencyGate",
+    "FallbackRetriever",
     "FigureAsset",
     "FigureDescription",
     "FigureStore",

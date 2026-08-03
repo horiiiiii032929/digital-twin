@@ -19,19 +19,23 @@ Synchronize = Callable[[], None]
 CaseCallback = Callable[[int, list[dict[str, Any]]], None]
 
 
-def evaluate_development_cases(
+def evaluate_cases(
     cases: list[dict[str, Any]],
     *,
     runtimes: Mapping[str, Mapping[str, Retriever]],
     chunk_course: Mapping[str, str],
     result_limit: int,
+    expected_split: str,
+    expected_count: int,
     synchronize: Synchronize | None = None,
     on_case_complete: CaseCallback | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, str]]:
-    if len(cases) != 40:
-        raise ValueError("qualification requires all 40 development cases")
-    if any(case["split"] != "development" for case in cases):
-        raise ValueError("qualification received a non-development case")
+    if len(cases) != expected_count:
+        raise ValueError(
+            f"qualification requires all {expected_count} {expected_split} cases"
+        )
+    if any(case["split"] != expected_split for case in cases):
+        raise ValueError(f"qualification received a non-{expected_split} case")
     if result_limit < 5:
         raise ValueError("result limit must be at least 5")
     expected_methods = {method.value for method in RetrievalMethod}
@@ -100,3 +104,24 @@ def evaluate_development_cases(
         if on_case_complete:
             on_case_complete(index, rows)
     return rows, boundary_assignments
+
+
+def evaluate_development_cases(
+    cases: list[dict[str, Any]],
+    *,
+    runtimes: Mapping[str, Mapping[str, Retriever]],
+    chunk_course: Mapping[str, str],
+    result_limit: int,
+    synchronize: Synchronize | None = None,
+    on_case_complete: CaseCallback | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, str]]:
+    return evaluate_cases(
+        cases,
+        runtimes=runtimes,
+        chunk_course=chunk_course,
+        result_limit=result_limit,
+        expected_split="development",
+        expected_count=40,
+        synchronize=synchronize,
+        on_case_complete=on_case_complete,
+    )

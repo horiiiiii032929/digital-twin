@@ -64,7 +64,10 @@ reached 10/13 answerable cases versus 3/13 for heading BM25, while the separate
 59-case one-time run failed after 29 cases and is invalid. Jina is an unselected
 provider spike with no result.
 
-The current phase is scope and architecture lock. Next comes a verified
-cross-course benchmark and a prospective M0-M3 comparison, followed by the
-multi-professor product and end-to-end validation. The authoritative baseline
-is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).
+The current phase is the transition from completed cross-course retrieval
+qualification to professor-fidelity and end-to-end validation. The one-time
+60-case held-out M0-M3 comparison selected M2 hybrid retrieval for the
+experimental profile and retained BM25 as rollback. Next comes M2 product
+activation, the professor-policy/generator comparison, and the minimum
+professor/student workflow needed for end-to-end evaluation. The authoritative
+baseline is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).

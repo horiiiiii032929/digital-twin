@@ -152,6 +152,17 @@ Current utilities:
   qualify:retrieval-provider-local` for the local control or set
   `JINA_API_KEY` and run `npm run qualify:retrieval-provider-jina` for the
   hosted candidate. Neither command may read the held-out file.
+- `run_cross_course_retrieval_heldout.py`: runs the frozen one-time 60-case
+  text comparison after explicit confirmation. It marks the unopened ledger
+  before reading held-out data, writes a checkpoint after each case, records
+  sanitized per-case rankings without query text, and makes any started
+  attempt non-rerunnable. Run `npm run benchmark:retrieval-heldout` only after
+  the plan and frozen instrument have been reviewed.
+- `analyze_cross_course_retrieval_heldout.py`: validates the completed one-time
+  result, computes seeded bootstrap intervals and paired comparisons, applies
+  the frozen BM25 quality floor and latency rule, and writes the sanitized
+  report, machine record, CSV, and chart. Run it with
+  `npm run analyze:retrieval-heldout`.
 - `analyze_cross_course_retrieval_pilot.py`: validates and sanitizes the
   private development result, computes seeded paired uncertainty and sign
   tests, and exports a professor-ready CSV plus PNG/SVG comparison chart.
@@ -180,3 +191,8 @@ Current utilities:
   metrics, NotebookLM black-box boundary, held-out locks, and public open-set
   example; run it with
   `npm run verify:retrieval-v3-instruments`.
+- `run_professor_fidelity_experiment.py`: validates the frozen R2
+  professor-fidelity conditions and prepares a sanitized run manifest without
+  opening private course data. Execution remains fail-closed until one exact
+  generator/prompt binding and the sealed runtime adapter are qualified; run
+  `npm run verify:professor-fidelity-plan` for the no-data preflight.

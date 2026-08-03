@@ -14,13 +14,20 @@ policy, student interaction state, and evaluation-before-publication.
 - IT5002 is useful pilot evidence, not the final corpus or method selection.
 - The one-time rapid sealed run is invalid and retired; it is not rerun.
 - Jina is an unselected implementation spike with no evaluation result.
-- Multi-course professor/student workflows, final retrieval selection,
+- The four-course benchmark is frozen and the one-time held-out comparison is
+  complete; M2 hybrid RRF is selected for the experimental profile and BM25 is
+  the rollback. M1 regressed on quality and latency; M3 exceeded the latency
+  ceiling despite higher retrieval quality.
+- The scoped multimodal development study is complete: V3 was dropped, V0 is
+  retained as rollback, and no multimodal profile is selected.
+- M2 product activation, multi-course professor/student workflows,
   professor-fidelity evaluation, persistence, isolation, recovery, and capacity
   evidence are not complete.
 
-The immediate work is scope/architecture alignment, then the course portfolio
-and cross-course benchmark. No new provider or model is selected before that
-prospective plan is frozen.
+The immediate work is to integrate M2 with a BM25 rollback into the smallest
+complete professor/student journey, then validate persistence, isolation,
+recovery, professor fidelity, and bounded capacity. Do not reopen the text
+benchmark for visual claims or continue multimodal V3 tuning.
 
 ## Final product
 
@@ -61,9 +68,9 @@ project-specific evidence.
 | Date | Required outcome |
 | --- | --- |
 | 2026-07-27 to 2026-07-29 | Scope, GitHub roadmap, and repository architecture lock |
-| 2026-07-30 to 2026-08-02 | Course portfolio, ingestion QA, and verified benchmark freeze |
-| 2026-08-03 to 2026-08-08 | Provider qualification, M0-M3 comparison, sealed run, and retrieval decision |
-| 2026-08-09 to 2026-08-12 | Selected-profile integration and professor/student core journeys |
+| 2026-07-30 to 2026-08-02 | Course portfolio, ingestion QA, benchmark freeze, provider qualification, multimodal development decision, and sealed text retrieval decision |
+| 2026-08-03 to 2026-08-08 | Register the retrieval decision, activate M2 behind the BM25 rollback, and freeze the R2/R3 execution plans |
+| 2026-08-09 to 2026-08-12 | Complete the minimum professor/student core journeys and regression evidence |
 | 2026-08-13 to 2026-08-15 | Fidelity, pedagogy, isolation, recovery, capacity, and packaging evidence |
 | 2026-08-16 | Absolute technical and evidence freeze |
 | 2026-08-17 to 2026-08-31 | Analysis, figures, report foundation, demo stabilization, and appointment preparation |

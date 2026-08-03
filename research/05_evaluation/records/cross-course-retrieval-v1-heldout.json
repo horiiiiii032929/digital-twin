@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-retrieval-v1-heldout-001",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-draft-6-heldout",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "04e484d38ebdebd0e2557f8783d37bd9f2c05945",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "bm25-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M0",
+          "device": "mps",
+          "dtype": "float16",
+          "rerank_candidate_limit": 20
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "heldout-complete-evidence-at-3",
+          "value": 0.8,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "heldout-evidence-recall-at-5",
+          "value": 0.8695652173913043,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8695652173913043,
+          "passed": true
+        },
+        {
+          "name": "heldout-ndcg-at-10",
+          "value": 0.7947476903137514,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7947476903137514,
+          "passed": true
+        },
+        {
+          "name": "heldout-mrr",
+          "value": 0.7538095238095238,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7538095238095238,
+          "passed": true
+        },
+        {
+          "name": "warm-latency-p95",
+          "value": 74.82741665298812,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10000.0,
+          "passed": true
+        },
+        {
+          "name": "course-isolation-violations",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete_60_case_run",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "one_time_heldout_ledger_completed",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_course_isolation_violations",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_provider_failures",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_retries",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_external_calls",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "peak_process_memory_at_most_4_gib",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "deployment-latency",
+          "passed": true,
+          "evidence": "Warm p95 was 74.83 ms versus a 10,000 ms ceiling."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "qwen3-dense-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M1",
+          "device": "mps",
+          "dtype": "float16",
+          "rerank_candidate_limit": 20
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "heldout-complete-evidence-at-3",
+          "value": 0.725,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "heldout-evidence-recall-at-5",
+          "value": 0.8260869565217391,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8695652173913043,
+          "passed": false
+        },
+        {
+          "name": "heldout-ndcg-at-10",
+          "value": 0.783001869558729,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7947476903137514,
+          "passed": false
+        },
+        {
+          "name": "heldout-mrr",
+          "value": 0.7654166666666666,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7538095238095238,
+          "passed": true
+        },
+        {
+          "name": "warm-latency-p95",
+          "value": 11959.152191712928,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10000.0,
+          "passed": false
+        },
+        {
+          "name": "course-isolation-violations",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete_60_case_run",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "one_time_heldout_ledger_completed",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_course_isolation_violations",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_provider_failures",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_retries",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_external_calls",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "peak_process_memory_at_most_4_gib",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "deployment-latency",
+          "passed": false,
+          "evidence": "Warm p95 was 11959.15 ms versus a 10,000 ms ceiling."
+        }
+      ],
+      "failures_by_category": {
+        "operational": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "qwen3-hybrid-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M2",
+          "device": "mps",
+          "dtype": "float16",
+          "rerank_candidate_limit": 20
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "heldout-complete-evidence-at-3",
+          "value": 0.85,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "heldout-evidence-recall-at-5",
+          "value": 0.8695652173913043,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8695652173913043,
+          "passed": true
+        },
+        {
+          "name": "heldout-ndcg-at-10",
+          "value": 0.8668240220610578,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7947476903137514,
+          "passed": true
+        },
+        {
+          "name": "heldout-mrr",
+          "value": 0.865625,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7538095238095238,
+          "passed": true
+        },
+        {
+          "name": "warm-latency-p95",
+          "value": 164.2099478965974,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10000.0,
+          "passed": true
+        },
+        {
+          "name": "course-isolation-violations",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete_60_case_run",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "one_time_heldout_ledger_completed",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_course_isolation_violations",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_provider_failures",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_retries",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_external_calls",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "peak_process_memory_at_most_4_gib",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "deployment-latency",
+          "passed": true,
+          "evidence": "Warm p95 was 164.21 ms versus a 10,000 ms ceiling."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "qwen3-reranked-hybrid-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M3",
+          "device": "mps",
+          "dtype": "float16",
+          "rerank_candidate_limit": 20
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "heldout-complete-evidence-at-3",
+          "value": 0.9,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "heldout-evidence-recall-at-5",
+          "value": 0.9347826086956522,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8695652173913043,
+          "passed": true
+        },
+        {
+          "name": "heldout-ndcg-at-10",
+          "value": 0.8637760848870182,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7947476903137514,
+          "passed": true
+        },
+        {
+          "name": "heldout-mrr",
+          "value": 0.8411111111111111,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.7538095238095238,
+          "passed": true
+        },
+        {
+          "name": "warm-latency-p95",
+          "value": 106543.57531248534,
+          "unit": "milliseconds",
+          "direction": "lower-is-better",
+          "threshold": 10000.0,
+          "passed": false
+        },
+        {
+          "name": "course-isolation-violations",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete_60_case_run",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "one_time_heldout_ledger_completed",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_course_isolation_violations",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_provider_failures",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_retries",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "zero_external_calls",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "peak_process_memory_at_most_4_gib",
+          "passed": true,
+          "evidence": "The completed one-time runner recorded the frozen held-out result."
+        },
+        {
+          "name": "deployment-latency",
+          "passed": false,
+          "evidence": "Warm p95 was 106543.58 ms versus a 10,000 ms ceiling."
+        }
+      ],
+      "failures_by_category": {
+        "operational": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "qwen3-hybrid-v1",
+    "rationale": "BM25 + dense RRF ranked highest among methods that passed the global gates, matched or exceeded BM25 on every primary quality metric, and passed the 10-second p95 deployment ceiling; retain BM25 as rollback.",
+    "limitations": [
+      "This one-time result estimates held-out text-grounded retrieval only.",
+      "Image-only and layout-dependent claims remain outside the text benchmark.",
+      "Latency and memory describe one local workstation and do not establish concurrent capacity.",
+      "The multimodal V3 candidate was dropped separately and no multimodal profile was selected."
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-retrieval-v1-heldout-001",
+  "dataset_seal_id": "cross-course-retrieval-v1-draft-6-seal",
+  "dataset_id": "cross-course-retrieval-v1",
+  "dataset_version": "draft-6",
+  "development_sha256": "e3749c3ee831dcf4c06f3b33cb94f21fe758eaec36e627d034715d4ca0cdd863",
+  "heldout_sha256": "1b909cab6a1c89db57d7675caabd7e0ab87148353c3054e9fd6a947436fe8ac5",
+  "provider_pair_id": "local-qwen3-0-6b",
+  "corpus_id": "cross-course-portfolio-v2",
+  "heldout_case_count": 60,
+  "runtime": {
+    "device": "mps",
+    "dtype": "float16",
+    "batch_size": 8,
+    "embedding_batch_size": 16,
+    "reranking_batch_size": 8,
+    "embedding_max_length": 2048,
+    "reranking_max_length": 1024,
+    "rerank_candidate_limit": 20,
+    "result_limit": 10
+  },
+  "development_thresholds": {
+    "M0": 11.200829136751842,
+    "M1": 0.7418737882121768,
+    "M2": 0.03225806451612904,
+    "M3": 0.03210449218750001
+  },
+  "primary_metrics": [
+    "complete_evidence_success_at_3",
+    "evidence_recall_at_5",
+    "ndcg_at_10",
+    "mrr"
+  ],
+  "hard_gates": [
+    "complete_60_case_run",
+    "one_time_heldout_ledger_completed",
+    "zero_course_isolation_violations",
+    "zero_provider_failures",
+    "zero_retries",
+    "zero_external_calls",
+    "peak_process_memory_at_most_4_gib"
+  ],
+  "deployment_latency_ceiling_ms": 10000,
+  "decision_rule": "Disqualify hard-gate failures and methods above the 10-second warm p95 latency ceiling; among the remaining methods, require every primary quality metric to meet or exceed the BM25 control, then prefer highest complete-evidence success at 3, evidence recall at 5, nDCG at 10, MRR, and simplicity. Retain BM25 as rollback. M3 remains a research comparison when its latency ceiling fails."
+}

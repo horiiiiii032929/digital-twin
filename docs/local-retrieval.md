@@ -2,24 +2,35 @@
 
 ## Decision
 
-Sprint 2 uses two deterministic lexical rankers over the same approved chunks:
-a unique-term overlap control and an Okapi BM25 candidate. BM25 is the selected
-baseline for the next grounded-generation step because it improved first-result
-quality on the project evaluation set without changing Recall@5 or no-evidence
-behavior. The term-overlap implementation remains as a control.
+Sprint 2 established the inspectable term-overlap and Okapi BM25 rankers over
+the same approved chunks. BM25 remains the explicit rollback baseline.
 
-No embedding model, vector database, hosted search service, live web source, or
-LMS connector is required. This keeps the first retrieval decision inspectable
-and makes a later semantic retriever prove its value against recorded evidence.
+The frozen cross-course comparison then selected M2, course-scoped BM25 plus
+local Qwen3 dense retrieval fused with reciprocal rank fusion. On the one-time
+60-case held-out split, M2 reached 85.0% complete evidence at 3, 87.0% evidence
+recall at 5, 0.867 nDCG@10, and 164 ms warm p95 latency. M1 regressed on quality
+and latency. M3 reached higher quality but failed the 10-second p95 gate. See
+[`cross-course-retrieval-v1-heldout-results.md`](../research/05_evaluation/cross-course-retrieval-v1-heldout-results.md)
+and its [machine record](../research/05_evaluation/records/cross-course-retrieval-v1-heldout.json).
 
-The harder v2 comparison has now tested that replacement. BM25+dense RRF
-improved Recall@3 and Recall@5, while local BGE-small dense retrieval was the
-only candidate to pass held-out no-evidence behavior. No candidate passed every
-hard gate and required ranking metric, so the decision is **Refine** and the v1
-BM25 profile selection remains only a provisional baseline. See
-[`retrieval-v2-results.md`](../research/05_evaluation/retrieval-v2-results.md)
-and the broader
-[`RAG and LLM benchmarking`](rag-and-llm-benchmarking.md) framework.
+The selected profile uses a local, revision-pinned Qwen3 embedding binding
+behind a provider-neutral runtime boundary; no hosted search service, live web
+source, or LMS connector is part of this decision. BM25 is the explicit
+provider-failure and unconfigured-runtime rollback. Product activation and
+end-to-end tutoring evidence remain F3 work.
+
+### Frozen M2 binding
+
+The experimental profile freezes M2 as heading-aware BM25 (`k1=1.2`,
+`b=0.75`) plus `Qwen/Qwen3-Embedding-0.6B` at revision
+`97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3`. The local embedder runs with the
+frozen course-retrieval query instruction, 2,048-token maximum input, MPS
+float16 execution, and reciprocal-rank fusion with rank constant 60 and 20
+candidates. The returned limit is 10 and no reranker is part of M2. The full
+machine-readable binding is in
+[`student-tutor-v1.json`](../research/05_evaluation/profiles/student-tutor-v1.json);
+the original provider-pair freeze remains in
+[`cross_course_provider_qualification_v1.json`](../research/05_evaluation/instruments/cross_course_provider_qualification_v1.json).
 
 Evidence-sufficiency v1 made the next boundary explicit and compared the
 current any-hit behavior with calibrated BM25 raw score, lexical coverage, and
@@ -53,9 +64,10 @@ DocumentChunk[]
   -> keep retrieval_allowed chunks
   -> keep only the active source version
   -> deterministic lexical tokenization
-  -> rank with term overlap or BM25
+  -> rank with selected M2 hybrid or BM25 rollback
   -> deterministic source/document/ordinal tie-break
   -> RetrievalHit(chunk + normalized and raw ranker score)
+  -> provider/runtime fallback telemetry without query or content logging
   -> swappable evidence-sufficiency gate
        |- insufficient: return no evidence for generation
        `- sufficient: retain ranked approved hits
