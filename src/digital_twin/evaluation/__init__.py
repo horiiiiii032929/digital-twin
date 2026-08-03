@@ -43,6 +43,7 @@ from src.digital_twin.evaluation.multimodal_benchmark import (
     load_sealed_development as load_sealed_multimodal_development,
 )
 from src.digital_twin.evaluation.retrieval_runner import (
+    evaluate_cases,
     evaluate_development_cases,
 )
 
@@ -78,6 +79,7 @@ __all__ = [
     "assign_boundary_courses",
     "build_course_scoped_ladders",
     "development_thresholds",
+    "evaluate_cases",
     "evaluate_development_cases",
     "load_evaluation_record",
     "load_provider_qualification_config",

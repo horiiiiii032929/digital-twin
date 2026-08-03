@@ -25,14 +25,15 @@ Completed work includes professor-approved chat-led onboarding, governed local
 ingestion, retrieval baselines/candidates, deterministic generation controls,
 evaluation instruments, component profiles, and result governance.
 
-The current method is not selected. IT5002 pilot results justify a cross-course
-study, while the separate one-time rapid run is invalid and retired. Jina was
-retired before hosted execution. Local M3 preserved the best development
-quality but failed its latency gate, so M2 is the operational candidate and
-BM25 remains the rollback pending the sealed comparison. Visual retrieval is a
-separate prospective study under #60; it cannot alter the sealed text
-benchmark. The final multi-course product and end-to-end evidence do not yet
-exist.
+The cross-course text qualification is complete: on the one-time 60-case
+held-out comparison, M2 hybrid BM25 plus dense RRF is selected for the
+experimental profile and BM25 remains the rollback. M1 regressed on quality and
+latency; M3 had the best quality but failed the 10-second p95 gate. IT5002
+pilot results remain context, not final selection evidence. Jina was retired
+before hosted execution. The scoped multimodal development study under #60 is
+complete: V3 was dropped, V0 is retained as the visual/text rollback, and no
+multimodal profile is selected. The final multi-course product and end-to-end
+evidence do not yet exist.
 
 ## Active roadmap
 
@@ -40,7 +41,7 @@ exist.
 | --- | --- | --- |
 | F1 Scope and architecture lock | 2026-07-27 to 2026-07-29 | Authoritative scope, roadmap, repository architecture, archived superseded plans |
 | F2 Cross-course method qualification | 2026-07-30 to 2026-08-08 | Course portfolio, ingestion QA, verified benchmark, provider qualification, M0-M3 sealed result, selected/rollback retrieval profile |
-| F3 Product and end-to-end validation | 2026-08-09 to 2026-08-16 | Professor/student journeys, fidelity, pedagogy, publication control, isolation, recovery, capacity, local deployment package |
+| F3 Product and end-to-end validation | 2026-08-09 to 2026-08-16 | Integrate M2 with BM25 rollback, then validate professor/student journeys, fidelity, pedagogy, publication control, isolation, recovery, capacity, and local deployment package |
 | F4 Evidence and final communication | 2026-08-17 to 2026-09-13 | Analysis, report, figures, presentation, reproducibility, demo stabilization, contingency |
 
 Technical and evidence work freezes on 2026-08-16. The target professor

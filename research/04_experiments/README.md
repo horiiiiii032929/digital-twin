@@ -13,6 +13,13 @@ The prospective visual study-material comparison is defined in
 It is independent of the sealed text benchmark and does not authorize a model
 run by itself.
 
+The current next research plans are:
+
+- [`2026-08-03-professor-fidelity-v1-plan.md`](2026-08-03-professor-fidelity-v1-plan.md)
+  for the frozen R2 policy/evidence comparison; and
+- [`2026-08-03-student-workflow-slice-plan.md`](2026-08-03-student-workflow-slice-plan.md)
+  for the bounded R3 student-facing acceptance path.
+
 ## Naming
 
 Use date-prefixed experiment names:

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "instrument_id": "professor-fidelity-v1",
+  "status": "frozen-preflight",
+  "research_question": "With generator and question held constant, does professor policy improve safe grounded tutoring behaviour, and what loss is introduced when oracle evidence is replaced by selected retrieval?",
+  "dataset": {
+    "dataset_id": "course-tutor-v1",
+    "anchor_cases": 12,
+    "development_cases": 48,
+    "heldout_cases": 104,
+    "scenario_types": [
+      "direct",
+      "paraphrase",
+      "misconception",
+      "multi_evidence",
+      "ambiguity",
+      "no_evidence",
+      "assessed_work",
+      "permission_version"
+    ],
+    "heldout_access": "one-time-confirmed-run",
+    "course_data_boundary": "local-only-unless-explicitly-approved"
+  },
+  "conditions": [
+    {
+      "condition_id": "C0",
+      "name": "generic-no-course-context",
+      "evidence": "none",
+      "policy": "generic-tutoring",
+      "purpose": "generic assistant baseline"
+    },
+    {
+      "condition_id": "C1",
+      "name": "oracle-generic-grounded",
+      "evidence": "oracle",
+      "policy": "generic-tutoring",
+      "purpose": "safe evidence upper-bound without professor policy"
+    },
+    {
+      "condition_id": "C2",
+      "name": "oracle-professor-grounded",
+      "evidence": "oracle",
+      "policy": "structured-professor-policy",
+      "purpose": "professor-policy contribution control"
+    },
+    {
+      "condition_id": "C3",
+      "name": "retrieved-professor-grounded",
+      "evidence": "selected-m2-or-bm25-rollback",
+      "policy": "structured-professor-policy",
+      "purpose": "deployed-profile condition"
+    }
+  ],
+  "fixed_inputs": [
+    "question",
+    "dialogue_history",
+    "student_state",
+    "course_scope",
+    "source_permissions",
+    "source_versions",
+    "generator_binding",
+    "decoding",
+    "output_schema",
+    "randomization_seed"
+  ],
+  "generator_binding": {
+    "status": "pending-qualification",
+    "required_fields": [
+      "implementation_id",
+      "provider_or_local_runtime",
+      "model",
+      "revision",
+      "prompt_version",
+      "decoding",
+      "data_boundary",
+      "fallback"
+    ],
+    "deterministic_control": "deterministic-grounded-generator-v1",
+    "selection_gate": "one exact non-control binding must pass generation, citation, provider-failure, cost, and privacy gates before sealed R2 output"
+  },
+  "primary_outcomes": [
+    "unconditional_safe_grounded_task_success",
+    "professor_policy_pedagogical_success",
+    "complete_evidence_success_at_3",
+    "citation_validity",
+    "no_evidence_accuracy"
+  ],
+  "diagnostic_outcomes": [
+    "required_claim_recall",
+    "supported_claim_precision",
+    "misconception_repair",
+    "academic_integrity_action",
+    "answer_revelation_control",
+    "latency_p50_p95",
+    "input_output_tokens",
+    "approximate_cost",
+    "provider_failures",
+    "fallback_activations"
+  ],
+  "hard_gates": [
+    "permission_and_course_scope",
+    "source_version_integrity",
+    "citation_identity_and_locator",
+    "no_unsupported_high_severity_claims",
+    "assessed_work_policy",
+    "provider_secret_isolation",
+    "malformed_output_and_timeout_handling",
+    "no_unapproved_external_course_data",
+    "complete_case_and_condition_ledger"
+  ],
+  "analysis": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 5002,
+    "paired_binary_test": "exact-mcnemar",
+    "multiple_comparison_correction": "holm-alpha-0.05",
+    "judge_calibration_required": true,
+    "human_outcome_claims_allowed": false,
+    "decision_order": [
+      "hard_gates",
+      "quality_floors",
+      "operational_limits",
+      "paired_effects",
+      "complexity_and_reversibility"
+    ]
+  },
+  "planned_contrasts": [
+    "C1_vs_C0",
+    "C2_vs_C1",
+    "C3_vs_C2",
+    "C3_vs_C0"
+  ],
+  "rollback": {
+    "retrieval": "bm25-v1",
+    "generator": "deterministic-grounded-generator-v1",
+    "policy": "structured-professor-policy-v1",
+    "action_on_hard_gate_failure": "retain-control-and-register-no-selection"
+  }
+}

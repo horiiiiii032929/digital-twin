@@ -94,44 +94,63 @@
       "component": "retriever",
       "status": "selected",
       "implementation": {
-        "implementation_id": "bm25",
-        "version": "v1",
+        "implementation_id": "qwen3-hybrid-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M2",
+          "provider_pair": "local-qwen3-0-6b",
+          "embedding_provider": "local-huggingface",
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "embedding_execution": "local",
+          "query_instruction": "Given a student question within one authorized university course, retrieve passages that directly support a grounded answer.",
+          "device": "mps",
+          "dtype": "float16",
+          "embedding_max_length": 2048,
+          "embedding_batch_size": 16,
+          "bm25_k1": 1.2,
+          "bm25_b": 0.75,
+          "tokenizer": "lowercase-alphanumeric",
+          "fusion_rank_constant": 60,
+          "fusion_candidate_limit": 20,
+          "result_limit": 10,
+          "reranker": "none"
+        }
+      },
+      "control": {
+        "implementation_id": "bm25-v1",
+        "version": "cross-course-retrieval-v1",
         "configuration": {
           "k1": 1.2,
           "b": 0.75,
           "tokenizer": "lowercase-alphanumeric"
         }
       },
-      "control": {
-        "implementation_id": "term-overlap",
-        "version": "v1",
-        "configuration": {
-          "tokenizer": "lowercase-alphanumeric"
-        }
-      },
       "decision": "keep",
-      "evaluation_dataset": "retrieval-v1",
-      "evaluation_record_path": "research/05_evaluation/records/retrieval-v1.json",
+      "evaluation_dataset": "cross-course-retrieval-v1-draft-6-heldout",
+      "evaluation_record_path": "research/05_evaluation/records/cross-course-retrieval-v1-heldout.json",
       "evidence_paths": [
         "docs/local-retrieval.md",
-      "research/05_evaluation/retrieval-v1-results.md",
-      "research/05_evaluation/retrieval-v2-results.md",
-      "research/05_evaluation/evidence-sufficiency-v1-results.md"
+        "research/04_experiments/2026-08-02-cross-course-retrieval-heldout-plan.md",
+        "research/05_evaluation/cross-course-retrieval-v1-heldout-results.md"
       ],
       "hard_gates": [
-        "permission-filter",
-        "active-version-filter",
-        "source-evidence",
-        "sensitive-data-excluded"
+        "complete_60_case_run",
+        "one_time_heldout_ledger_completed",
+        "zero_course_isolation_violations",
+        "zero_provider_failures",
+        "zero_retries",
+        "zero_external_calls",
+        "peak_process_memory_at_most_4_gib",
+        "deployment-latency"
       ],
       "candidate_ids": [
-    "embedding-retriever",
-    "hybrid-retriever",
-    "semantic-agreement-evidence-gate",
-    "minimum-raw-score-evidence-gate",
-    "lexical-coverage-evidence-gate"
+        "qwen3-dense-v1",
+        "qwen3-hybrid-v1",
+        "qwen3-reranked-hybrid-v1",
+        "bm25-v1"
       ],
-  "notes": "BM25 remains the provisional v1 rollback baseline and term overlap remains the regression control. Retrieval v2 selected no replacement. Evidence-sufficiency v1 also selected no gate: semantic agreement was strongest but failed calibration, false-answer, false-abstention, ranking, and latency requirements. Do not use retrieved evidence for an end-to-end grounding claim until a successor gate passes."
+      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Product activation and provider-failure fallback are tracked in issue #8; this profile change does not make image-only claims."
     },
     {
       "component": "reranker",

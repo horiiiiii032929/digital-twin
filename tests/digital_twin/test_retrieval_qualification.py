@@ -14,6 +14,7 @@ from src.digital_twin.evaluation import (
     SealedDevelopmentError,
     build_course_scoped_ladders,
     evaluate_development_cases,
+    evaluate_cases,
     load_provider_qualification_config,
     load_sealed_development,
 )
@@ -263,6 +264,45 @@ def test_development_runner_uses_all_cases_and_no_private_text() -> None:
     assert len(assignments) == 39
     assert all("query" not in row for row in rows)
     assert all("chunk_text" not in row for row in rows)
+
+
+def test_generic_runner_supports_the_heldout_split_contract() -> None:
+    target = chunk("gold", "cache coherence")
+    runtimes = {
+        course: {
+            method: CourseScopedRetriever(
+                course,
+                _StaticRetriever(target),
+                [target],
+            )
+            for method in ("M0", "M1", "M2", "M3")
+        }
+        for course in ("A", "B")
+    }
+    cases = [
+        {
+            "case_id": "heldout-positive",
+            "split": "heldout_draft",
+            "slice": "answerable",
+            "difficulty": "direct",
+            "target_course_id": "A",
+            "query": "What is cache coherence?",
+            "gold_evidence": [{"chunk_id": "gold"}],
+        }
+    ]
+
+    rows, assignments = evaluate_cases(
+        cases,
+        runtimes=runtimes,
+        chunk_course={"gold": "A"},
+        result_limit=10,
+        expected_split="heldout_draft",
+        expected_count=1,
+    )
+
+    assert len(rows) == 4
+    assert assignments == {}
+    assert all(row["case_id"] == "heldout-positive" for row in rows)
 
 
 class _StaticRetriever:

@@ -57,6 +57,13 @@ npm run verify:evaluation-instruments
 This is structural readiness, not evidence that a judge is calibrated or a
 simulated trajectory is valid.
 
+The next professor-fidelity comparison is frozen in
+[`professor_fidelity_v1.json`](instruments/professor_fidelity_v1.json), with
+its research plan in
+[`2026-08-03-professor-fidelity-v1-plan.md`](../04_experiments/2026-08-03-professor-fidelity-v1-plan.md).
+Its preflight runner intentionally fails closed until one exact generator and
+prompt binding is qualified; a dry run emits only a sanitized manifest.
+
 The course-specific retrieval-v3 candidate and analysis contract is separately
 frozen in
 [`instruments/retrieval_v3_freeze.json`](instruments/retrieval_v3_freeze.json).
