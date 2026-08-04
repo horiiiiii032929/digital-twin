@@ -208,11 +208,13 @@ They remain traceable but are never treated as current instructions.
 
 ## Open decisions
 
-- target persistence and migration design;
+- production persistence migration, backup, and restore design beyond the
+  accepted local SQLite R3 foundation;
 - invite/session implementation and credential reset;
 - local private-file storage boundary;
 - exact embedding, reranking, and generator providers;
-- conversation orchestration and idempotency;
+- concurrent conversation orchestration and capacity beyond the accepted
+  single-process idempotent request boundary;
 - evaluation release schema and rollback mechanics;
 - hosting topology after the local final project; and
 - the privacy-approved external course-data path.

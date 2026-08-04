@@ -196,3 +196,9 @@ Current utilities:
   opening private course data. Execution remains fail-closed until one exact
   generator/prompt binding and the sealed runtime adapter are qualified; run
   `npm run verify:professor-fidelity-plan` for the no-data preflight.
+- `verify_student_workflow_slice.py`: runs the network-free synthetic R3
+  acceptance journey against temporary SQLite repositories. It verifies
+  assigned-course access, selected-M2 retrieval, BM25 provider fallback,
+  restart persistence, citations, duplicate requests, withdrawal, isolation,
+  revoked accounts, malformed generation, and redacted audit telemetry. Run
+  it with `npm run verify:student-workflow`.

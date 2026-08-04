@@ -23,6 +23,7 @@ The authoritative product/research scope is maintained in
 - [Local ingestion](local-ingestion.md)
 - [Local retrieval](local-retrieval.md)
 - [Live generation](live-generation.md)
+- [Student tutoring workflow](student-workflow.md)
 - [RAG and LLM benchmarking](rag-and-llm-benchmarking.md)
 - [Agent contracts](agents/README.md)
 

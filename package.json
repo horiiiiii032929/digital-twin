@@ -37,6 +37,7 @@
     "review:multimodal-private-claude": "uv run python -m scripts.second_review_multimodal_benchmark --consumer-data-boundary-approved",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:professor-fidelity-plan": "uv run python -m scripts.run_professor_fidelity_experiment --dry-run",
+    "verify:student-workflow": "uv run python -m scripts.verify_student_workflow_slice",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",
