@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from src.digital_twin.tutor_policy import (
     FieldStatus,
@@ -52,3 +52,8 @@ class PreviewDecisionRequest(BaseModel):
 class CustomPreviewRequest(BaseModel):
     prompt: str
     tag: PromptTag
+
+
+class StudentMessageRequest(BaseModel):
+    content: str = Field(min_length=1)
+    request_id: str = Field(min_length=1, max_length=128)

@@ -64,6 +64,17 @@ its research plan in
 Its preflight runner intentionally fails closed until one exact generator and
 prompt binding is qualified; a dry run emits only a sanitized manifest.
 
+The first durable student workflow acceptance result is summarized in
+[`student-workflow-slice-v1-synthetic-results.md`](student-workflow-slice-v1-synthetic-results.md).
+Reproduce its 14 network-free synthetic checks with:
+
+```bash
+npm run verify:student-workflow
+```
+
+This selects only a bounded local persistence and authorization foundation. It
+does not qualify authentication, a live generator, usability, or capacity.
+
 The course-specific retrieval-v3 candidate and analysis contract is separately
 frozen in
 [`instruments/retrieval_v3_freeze.json`](instruments/retrieval_v3_freeze.json).
