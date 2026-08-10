@@ -62,11 +62,13 @@ services/
   embeddings, reranking, generation, persistence, and storage adapters
 ```
 
-Only the onboarding, grounding, generation, and experimental evaluation portions
-exist today. Identity, course membership, durable conversation state,
-publication persistence, and operational adapters remain F3 work. The current
-in-memory FastAPI/Vite prototype must not be described as the final
-architecture.
+The repository now contains a bounded synthetic-account implementation of
+course membership, durable conversation state, and release publication with
+evaluation, withdrawal, and rollback gates. The onboarding session store and
+synthetic account header are still prototype boundaries; credentialed identity,
+full professor/admin lifecycle, production persistence, and operational
+adapters remain future release work. This bounded implementation must not be
+described as production authentication or the final deployment architecture.
 
 ## Core domain model
 

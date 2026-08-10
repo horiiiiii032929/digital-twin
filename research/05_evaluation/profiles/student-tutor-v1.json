@@ -150,7 +150,7 @@
         "qwen3-reranked-hybrid-v1",
         "bm25-v1"
       ],
-      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Product activation and provider-failure fallback are tracked in issue #8; this profile change does not make image-only claims."
+      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Synthetic product activation, citation lineage, course isolation, and provider-failure fallback pass the registered student workflow v1/v2 architecture slices; live-generator and bounded-capacity qualification remain open. This profile does not make image-only claims."
     },
     {
       "component": "reranker",
@@ -182,33 +182,87 @@
     },
     {
       "component": "generator",
-      "status": "pending",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "litellm-deepseek-v4-flash-nonthinking-v1",
+        "version": "generator-qualification-v1-heldout-001",
+        "configuration": {
+          "provider_model": "deepseek-v4-flash",
+          "provider_revision": "fp_a18b46594c_prod0820_fp8_kvcache_20260402",
+          "thinking": false,
+          "temperature": 0,
+          "max_output_tokens": 600,
+          "timeout_seconds": 15,
+          "max_attempts": 1,
+          "data_boundary": "synthetic-public-only"
+        }
+      },
+      "control": {
+        "implementation_id": "deterministic-grounded-generator",
+        "version": "v1",
+        "configuration": {}
+      },
+      "decision": "keep",
+      "evaluation_dataset": "generator-qualification-v1.0.0-heldout",
+      "evidence_paths": [
+        "research/05_evaluation/generator-qualification-v1-development-attempt-002-results.md",
+        "research/05_evaluation/generator-qualification-v1-development-stability-001-results.md",
+        "research/05_evaluation/generator-qualification-v1-heldout-001-results.md"
+      ],
       "hard_gates": [
-        "grounded-evidence-only",
-        "provider-secret-isolation",
-        "explicit-provider-failure"
+        "synthetic-only-boundary",
+        "provider-identity-and-revision",
+        "permission-and-version-isolation",
+        "unsupported-high-severity-claims",
+        "assessed-work-policy",
+        "budget-and-ledger"
       ],
       "candidate_ids": [
         "deterministic-grounded-generator",
         "deepseek-api-primary",
         "live-provider-generator",
-        "ollama-gemma3-4b"
+        "ollama-gemma3-4b",
+        "litellm-deepseek-v4-flash-nonthinking-v1"
       ],
-      "notes": "DeepSeek API is the fixed primary product constraint for RAG studies, limited to synthetic evaluation data and a cumulative USD 10 #24 cap, but it is not evidence-selected or qualified. The deterministic control passes synthetic preflight. Local Gemma 3 4B passed structural checks but a post-run diagnostic found 3/18 unsupported or citation-mismatched answers. A prospective DeepSeek and prompt qualification with sufficient evidence remains required."
+      "notes": "The exact DeepSeek V4 Flash non-thinking binding is selected for the experimental profile after P2 passed development, stability, the non-rerunnable 104-case synthetic held-out run, full first review, and a 20-case second Codex review. The review was not independent human judgment. Synthetic-public-only remains the evaluated external-data boundary; broader private-course use still depends on the professor-fidelity and publication controls. The deterministic generator remains the rollback."
     },
     {
       "component": "prompt",
-      "status": "pending",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "strict-evidence-grounded-prompt-v3",
+        "version": "generator-qualification-v1-heldout-001",
+        "configuration": {
+          "max_words": 60,
+          "outside_facts": false,
+          "follow_up_when_answered": false
+        }
+      },
+      "control": {
+        "implementation_id": "direct-grounded-prompt-v1",
+        "version": "v1",
+        "configuration": {}
+      },
+      "decision": "keep",
+      "evaluation_dataset": "generator-qualification-v1.0.0-heldout",
+      "evidence_paths": [
+        "research/05_evaluation/generator-qualification-v1-development-attempt-001-results.md",
+        "research/05_evaluation/generator-qualification-v1-development-attempt-002-results.md",
+        "research/05_evaluation/generator-qualification-v1-heldout-001-results.md"
+      ],
       "hard_gates": [
         "policy-included",
         "evidence-included",
-        "prompt-version-recorded"
+        "prompt-version-recorded",
+        "citation-correctness",
+        "citation-completeness"
       ],
       "candidate_ids": [
         "direct-grounded-prompt",
-        "guided-grounded-prompt"
+        "guided-grounded-prompt",
+        "strict-evidence-grounded-prompt-v3"
       ],
-      "notes": "Direct grounded prompt v1 is implemented but unselected; variants must use the same questions, evidence, policy, and generator conditions."
+      "notes": "Strict-evidence P2/v3 is selected after P0 and P1 failed development citation correctness and P2 passed development, stability, and one-time held-out review. It minimizes unsupported elaboration and retains direct v1 as the control."
     },
     {
       "component": "tutor-policy",
@@ -274,7 +328,7 @@
         "deterministic-turn-state",
         "graph-orchestrator"
       ],
-      "notes": "Student conversation state belongs to issue #8 after the grounded vertical slice."
+      "notes": "Bounded SQLite conversation orchestration now passes synthetic course/release isolation, idempotency, restart reload, publication replacement, withdrawal, and rollback checks. The component remains pending profile selection until migration, backup/restore, multi-process concurrency, retention, live-provider recovery, and capacity evidence are recorded."
     },
     {
       "component": "proactive-trigger",

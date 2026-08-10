@@ -1,25 +1,45 @@
 # Grounded generation and tutor-policy enforcement
 
-Status: implemented adapter and historical qualification guidance. DeepSeek was
-the fixed constraint for the earlier one-course plan; the active scope requires
-a prospective provider decision and does not select DeepSeek or another
-generator by default.
+Status: exact DeepSeek V4 Flash non-thinking binding and strict-evidence P2/v3
+prompt selected in the experimental profile from completed synthetic
+qualification; deterministic rollback retained.
 
 ## Current decision state
 
-Issue #24 is in progress. The repository now has a deterministic grounded
-generator control, direct grounded prompt candidate, deterministic policy
-enforcer, deterministic citation validator, and a LiteLLM service adapter. No
-live provider or prompt is selected, no API credential is stored, and no paid
-call has been made. A local Ollama Gemma 3 4B candidate has been exercised with
-zero monetary cost, but no generator or prompt is selected.
+Issue #24 remains in progress because its professor-policy C0-C3 comparison has
+not run. Its generator sub-boundary is complete: the repository selects the
+exact DeepSeek binding and P2 prompt after development, stability, one-time
+held-out, and citation review gates passed. No API credential is stored. A
+local Ollama Gemma 3 4B candidate was exercised historically with zero monetary
+cost, but it is not currently installed or selected.
 
 On 2026-07-16, the project fixed the DeepSeek API as a product constraint for
-the primary generator rather than opening a broad LLM competition. This is not
-evidence that DeepSeek is universally best. It remains pending until an exact
-model identifier and configuration pass the prospective #24 qualification.
+the primary generator rather than opening a broad LLM competition. On
+2026-08-07, the prospective first candidate was frozen as official
+`deepseek-v4-flash` through LiteLLM model
+`deepseek/deepseek-v4-flash`, explicit non-thinking JSON mode, temperature 0,
+600 output tokens, one attempt, and a 15-second timeout. Flash was chosen as the
+bounded first candidate because the final system has a 10-second p95 target and
+the current official API positions it as the faster, lower-cost V4 option. This
+is a candidate freeze, not evidence that it works or that DeepSeek is best.
 Only synthetic evaluation data is permitted, and the complete #24 external API
-run has a cumulative USD 10 cap. Private course material remains prohibited.
+run retains the cumulative USD 10 cap. Private course material remains
+prohibited.
+
+The temporal provider facts were checked against DeepSeek's official
+[models and pricing](https://api-docs.deepseek.com/quick_start/pricing/),
+[thinking-mode](https://api-docs.deepseek.com/guides/thinking_mode), and
+[JSON-output](https://api-docs.deepseek.com/guides/json_mode/) documentation on
+2026-08-07. A later provider change requires a new binding and run identity.
+
+The qualification instrument, 48-case development split, 104-case sealed
+held-out split, hash manifest, review protocol, cost stops, and one-time
+held-out ledger are executable. P0 and P1 failed citation correctness in
+development. The refined strict-evidence P2 prompt passed all development
+floors, then passed 36/36 attempts on the frozen 12-case, three-repeat stability
+check. Routine CI verifies held-out only by hash and sealed metadata without
+parsing its cases. The credential value is never emitted or accepted in
+provider options.
 
 The 25-case synthetic preflight establishes that the control path is safe enough
 to compare with a live candidate. It is not evidence that the control produces
@@ -43,7 +63,9 @@ question + BM25 hits + approved TutorPolicy
        |- no approved evidence: stop
        |- direct graded-work completion: redirect
        `- normal grounded question: continue
-  -> direct-grounded-prompt v1
+  -> frozen prompt condition
+       |- P0 direct-grounded-prompt v1
+       `- P1 conservative-grounded-prompt v2
   -> TutorGenerator implementation
        |- deterministic control
        `- LiteLLM-backed live candidate
@@ -144,12 +166,13 @@ per-case output is local and ignored under `reports/generated/`.
 
 ## Remaining live decision
 
-To complete #24, freeze the exact DeepSeek model identifier and parameters,
-quality rubric, thresholds, review protocol, and prompt variants before
-inspecting held-out outputs. Use sufficient gold evidence for answer cases so
-the generator qualification is not confounded by a retrieval miss. Compare
-DeepSeek with the deterministic structural control and retain local Gemma as an
-offline fallback; do not turn this issue into a broad model leaderboard.
+The authorized one-time 104-case P2 held-out run completed with 104/104 task,
+claim, citation, policy, and completion checks passing. The full first review
+and the frozen 20-case second review found no defect. The exact binding and P2
+are now selected in the experimental profile with the deterministic rollback.
+The second pass was delegated to Codex and is not independent human judgment.
+Sufficient oracle evidence keeps qualification from being confounded by
+retrieval misses.
 
 The issue requires at least 40 development/calibration cases and 100 held-out
 cases, three repeats on a stability subset, and double review of at least 30

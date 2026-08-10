@@ -40,8 +40,9 @@ def main() -> None:
             f"unselected candidate: {arguments.model}"
             if live
             else (
-                "DeepSeek API constrained but unqualified; synthetic-only "
-                "budget approved at USD 10"
+                "DeepSeek V4 Flash non-thinking with strict-evidence P2 is "
+                "selected experimentally from generator-qualification-v1-"
+                "heldout-001; this command exercises the deterministic rollback"
             )
         ),
         "evaluation_mode": _evaluation_mode(arguments.model),

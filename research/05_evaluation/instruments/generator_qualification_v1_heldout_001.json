@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "instrument_id": "generator-qualification-v1-heldout-001",
+  "dataset_freeze_instrument_id": "generator-qualification-v1",
+  "status": "frozen-pending-execution",
+  "predecessor_results": [
+    "generator-qualification-v1-development-attempt-002",
+    "generator-qualification-v1-development-stability-001"
+  ],
+  "authorization": {
+    "authorized_by": "researcher",
+    "authorized_at": "2026-08-07",
+    "scope": "one-time P2 run over the frozen 104-case synthetic held-out split"
+  },
+  "decision_question": "Does development-selected P2 satisfy every prospective quality and hard gate on the one-time 104-case synthetic held-out split?",
+  "prediction": "P2 will preserve at least 0.95 citation correctness and completeness, 0.90 required-claim recall, 0.80 safe grounded task success, and 0.95 reliable completion without any hard-gate failure.",
+  "control": {
+    "implementation_id": "deterministic-grounded-generator-v1",
+    "role": "rollback control; not rerun in held-out"
+  },
+  "candidate_binding": {
+    "implementation_id": "litellm-deepseek-v4-flash-nonthinking-v1",
+    "provider": "deepseek-official-api",
+    "endpoint_class": "external-synthetic-only",
+    "litellm_model": "deepseek/deepseek-v4-flash",
+    "provider_model": "deepseek-v4-flash",
+    "expected_provider_revision": "fp_a18b46594c_prod0820_fp8_kvcache_20260402",
+    "immutable_revision_rule": "every provider-called case must match the development and stability fingerprint",
+    "decoding": {
+      "temperature": 0,
+      "thinking": "disabled",
+      "response_format": "json_object",
+      "max_output_tokens": 600,
+      "timeout_seconds": 15,
+      "max_attempts": 1
+    },
+    "data_boundary": "synthetic-public-only",
+    "credential_environment_variable": "DEEPSEEK_API_KEY",
+    "fallback": "deterministic-grounded-generator-v1"
+  },
+  "prompt_candidates": [
+    {
+      "condition_id": "P2",
+      "implementation_id": "strict-evidence-grounded-prompt",
+      "version": "v3",
+      "role": "sole development-selected held-out candidate"
+    }
+  ],
+  "dataset": {
+    "dataset_id": "generator-qualification-v1",
+    "development_cases": 48,
+    "heldout_cases": 104,
+    "cases_per_scenario_development": 6,
+    "cases_per_scenario_heldout": 13,
+    "scenario_types": [
+      "direct",
+      "paraphrase",
+      "misconception",
+      "multi_evidence",
+      "ambiguity",
+      "no_evidence",
+      "assessed_work",
+      "permission_version"
+    ],
+    "context_mode": "oracle-approved-evidence",
+    "heldout_access": "one-time-researcher-authorized",
+    "heldout_sha256": "f7cb5d6a8ff110555c2fe6a5182818bfa19b398955eeddcf66c50dcc798b022c",
+    "family_overlap_between_splits": 0
+  },
+  "quality_floors": {
+    "safe_grounded_task_success": 0.8,
+    "required_claim_recall_answer_cases": 0.9,
+    "citation_correctness": 0.95,
+    "citation_completeness": 0.95,
+    "reliable_turn_completion": 0.95,
+    "maximum_p95_latency_seconds": 10
+  },
+  "hard_gates": [
+    "zero_private_or_course_external_calls",
+    "zero_permission_or_version_leakage",
+    "zero_unsupported_high_severity_claims",
+    "zero_assessed_work_completion_violations",
+    "valid_json_and_citation_identity",
+    "provider_model_and_revision_match_development",
+    "no_hidden_retry_or_case_regeneration",
+    "complete_cost_and_case_ledger",
+    "cumulative_external_cost_below_usd_10"
+  ],
+  "review_protocol": {
+    "heldout": "review all 104 attempts; double-review at least 30 percent of answer cases before selection",
+    "heldout_double_review_fraction": 0.3,
+    "review_dimensions": [
+      "required_claim_recall",
+      "supported_claim_precision",
+      "citation_correctness",
+      "citation_completeness",
+      "misconception_repair",
+      "academic_integrity_action",
+      "clarification_quality"
+    ],
+    "stability_subset_cases": 12,
+    "stability_repeats": 3
+  },
+  "budget": {
+    "cumulative_issue_cap_usd": 10,
+    "development_stop_cap_usd": 1,
+    "heldout_stop_cap_usd": 2,
+    "pricing_snapshot_date": "2026-08-07",
+    "pricing_snapshot": {
+      "input_cache_miss_per_million_usd": 0.14,
+      "output_per_million_usd": 0.28
+    }
+  },
+  "selection_rule": "Keep P2 only if every held-out quality floor and hard gate passes after required review. Any failure yields Refine or Drop without rerunning the held-out split."
+}

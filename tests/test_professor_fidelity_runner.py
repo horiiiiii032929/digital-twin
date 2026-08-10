@@ -30,6 +30,15 @@ def test_professor_fidelity_preflight_manifest_excludes_private_text():
     assert manifest["private_text_emitted"] is False
     assert manifest["dataset"] is None
     assert manifest["blocked_reasons"]
+    assert not any("generator" in reason for reason in manifest["blocked_reasons"])
+    assert manifest["generator_qualification"]["status"] == "qualified-selected"
+    assert manifest["generator_qualification"]["candidate_binding"] == (
+        "litellm-deepseek-v4-flash-nonthinking-v1"
+    )
+    assert manifest["prompt_binding"]["implementation_id"] == (
+        "strict-evidence-grounded-prompt-v3"
+    )
+    assert manifest["generator_qualification"]["credential_value_emitted"] is False
 
 
 def test_professor_fidelity_instrument_rejects_condition_drift():

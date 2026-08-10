@@ -196,6 +196,22 @@ Current utilities:
   opening private course data. Execution remains fail-closed until one exact
   generator/prompt binding and the sealed runtime adapter are qualified; run
   `npm run verify:professor-fidelity-plan` for the no-data preflight.
+- `build_generator_qualification_dataset.py`: deterministically builds the
+  public synthetic 48-case development and 104-case sealed held-out generator
+  qualification splits plus their hash-bound freeze manifest.
+- `run_generator_qualification.py`: validates the exact DeepSeek V4 Flash
+  non-thinking binding, two frozen prompt conditions, synthetic-only data
+  boundary, split hashes, and cost gates. The default command is network-free;
+  `npm run benchmark:generator-qualification-development` requires the
+  environment-owned `DEEPSEEK_API_KEY` and writes ignored per-case output.
+- `run_generator_qualification_stability.py`: runs the frozen P2-only 12-case
+  development subset three times, requires the prior provider fingerprint, and
+  writes an ignored 36-attempt ledger without reading held-out. Run it with
+  `npm run benchmark:generator-qualification-development-stability`.
+- `render_generator_qualification_second_review.py`: renders the frozen
+  20-case held-out answer sample after the one-time run. Run it with
+  `npm run prepare:generator-qualification-second-review`; the local packet is
+  ignored until the researcher completes review.
 - `verify_student_workflow_slice.py`: runs the network-free synthetic R3
   acceptance journey against temporary SQLite repositories. It verifies
   assigned-course access, selected-M2 retrieval, BM25 provider fallback,

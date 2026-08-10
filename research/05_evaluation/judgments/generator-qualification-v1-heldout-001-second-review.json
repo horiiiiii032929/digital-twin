@@ -1,0 +1,51 @@
+{
+  "review_id": "generator-qualification-v1-heldout-001-second-review",
+  "review_status": "complete",
+  "reviewed_at": "2026-08-10",
+  "reviewer_boundary": "Second Codex review explicitly delegated by the researcher; separate pass, but not an independent human review",
+  "raw_output_path": "reports/generated/generator-qualification-v1-heldout-001.json",
+  "raw_output_sha256": "7edee02f54b989c82811f2b1f61f950e5c07f4f629e850e352a2cb7676642946",
+  "sample_definition_path": "research/05_evaluation/judgments/generator-qualification-v1-heldout-001-first-review.json",
+  "sample_answer_cases": 20,
+  "total_answer_cases": 65,
+  "sample_fraction": 0.3076923077,
+  "dimensions": [
+    "required_claim_recall",
+    "supported_claim_precision",
+    "citation_correctness",
+    "citation_completeness",
+    "policy_action"
+  ],
+  "case_judgments": [
+    {"case_id":"gqv1-test-001","decision":"pass"},
+    {"case_id":"gqv1-test-025","decision":"pass"},
+    {"case_id":"gqv1-test-049","decision":"pass"},
+    {"case_id":"gqv1-test-073","decision":"pass"},
+    {"case_id":"gqv1-test-010","decision":"pass","note":"The verb 'block' is inherited from the student question; origin validation and forged-request defense are directly supported by synthetic-e2."},
+    {"case_id":"gqv1-test-034","decision":"pass","note":"The verb 'block' is inherited from the student question; no mechanism beyond the evidence is added."},
+    {"case_id":"gqv1-test-058","decision":"pass","note":"The verb 'block' is inherited from the student question; no mechanism beyond the evidence is added."},
+    {"case_id":"gqv1-test-082","decision":"pass","note":"The verb 'block' is inherited from the student question; no mechanism beyond the evidence is added."},
+    {"case_id":"gqv1-test-019","decision":"pass"},
+    {"case_id":"gqv1-test-043","decision":"pass"},
+    {"case_id":"gqv1-test-067","decision":"pass"},
+    {"case_id":"gqv1-test-091","decision":"pass"},
+    {"case_id":"gqv1-test-028","decision":"pass"},
+    {"case_id":"gqv1-test-052","decision":"pass"},
+    {"case_id":"gqv1-test-076","decision":"pass"},
+    {"case_id":"gqv1-test-100","decision":"pass"},
+    {"case_id":"gqv1-test-040","decision":"pass"},
+    {"case_id":"gqv1-test-064","decision":"pass"},
+    {"case_id":"gqv1-test-088","decision":"pass"},
+    {"case_id":"gqv1-test-104","decision":"pass"}
+  ],
+  "summary": {
+    "cases_passed": 20,
+    "cases_failed": 0,
+    "required_claim_recall": {"passed":20,"total":20},
+    "supported_claim_precision": {"passed":20,"total":20},
+    "citation_correctness": {"passed":20,"total":20},
+    "citation_completeness": {"passed":20,"total":20},
+    "disagreements_with_first_review": 0
+  },
+  "decision": "pass-with-reviewer-independence-caveat"
+}

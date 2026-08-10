@@ -21,11 +21,16 @@ from src.digital_twin.generation.models import (
     PromptPackage,
 )
 from src.digital_twin.generation.policy import DeterministicPolicyEnforcer
-from src.digital_twin.generation.prompt import GroundedPromptBuilder
+from src.digital_twin.generation.prompt import (
+    ConservativeGroundedPromptBuilder,
+    GroundedPromptBuilder,
+    StrictEvidenceGroundedPromptBuilder,
+)
 
 
 __all__ = [
     "CitationValidationError",
+    "ConservativeGroundedPromptBuilder",
     "DeterministicCitationValidator",
     "DeterministicGroundedGenerator",
     "DeterministicPolicyEnforcer",
@@ -39,6 +44,7 @@ __all__ = [
     "PolicyAction",
     "PolicyDecision",
     "PromptPackage",
+    "StrictEvidenceGroundedPromptBuilder",
     "evaluate_generator",
     "load_generation_evaluation_set",
 ]

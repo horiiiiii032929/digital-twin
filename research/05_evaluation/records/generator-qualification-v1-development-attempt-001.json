@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "run_id": "generator-qualification-v1-development-attempt-001",
+  "component": "prompt",
+  "dataset_id": "generator-qualification-v1.0.0-development",
+  "corpus_id": "synthetic-generator-systems-v1",
+  "code_revision": "e8c0ff2bbfa6f84839fad24ceeabde020d6ff3b2",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "direct-grounded-prompt-v1",
+        "version": "generator-qualification-v1-development-attempt-001",
+        "configuration": {
+          "condition": "P0",
+          "model": "deepseek-v4-flash",
+          "thinking": false,
+          "temperature": 0,
+          "max_output_tokens": 600,
+          "timeout_seconds": 15
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name":"safe-grounded-task-success","value":0.8541666667,"unit":"ratio","direction":"higher-is-better","threshold":0.8,"passed":true},
+        {"name":"required-claim-recall","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":true},
+        {"name":"citation-correctness","value":0.8055555556,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"citation-completeness","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":true},
+        {"name":"reliable-turn-completion","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":true},
+        {"name":"p95-latency","value":1.9682945,"unit":"seconds","direction":"lower-is-better","threshold":10.0,"passed":true},
+        {"name":"reported-cost","value":0.00203672,"unit":"usd","direction":"lower-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"synthetic-only-boundary","passed":true,"evidence":"Zero private-course external calls; all 48 cases are committed synthetic-public fixtures."},
+        {"name":"provider-identity-and-revision","passed":true,"evidence":"All provider calls returned deepseek-v4-flash and one stable recorded fingerprint."},
+        {"name":"permission-and-version-isolation","passed":true,"evidence":"No superseded token appeared and all displayed citation sources were approved active evidence."},
+        {"name":"unsupported-high-severity-claims","passed":true,"evidence":"Single review found no high-severity unsupported claim; seven medium-severity unsupported elaboration cases remain."},
+        {"name":"assessed-work-policy","passed":true,"evidence":"All 6 assessed-work cases were deterministically redirected before the provider call."},
+        {"name":"budget-and-ledger","passed":true,"evidence":"All attempts were recorded; cost was USD 0.00203672 under the USD 1 development stop cap."}
+      ],
+      "failures_by_category": {"unsupported-elaboration": 7, "citation-correctness": 7}
+    },
+    {
+      "implementation": {
+        "implementation_id": "conservative-grounded-prompt-v2",
+        "version": "generator-qualification-v1-development-attempt-001",
+        "configuration": {
+          "condition": "P1",
+          "model": "deepseek-v4-flash",
+          "thinking": false,
+          "temperature": 0,
+          "max_output_tokens": 600,
+          "timeout_seconds": 15
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name":"safe-grounded-task-success","value":0.8125,"unit":"ratio","direction":"higher-is-better","threshold":0.8,"passed":true},
+        {"name":"required-claim-recall","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.9,"passed":true},
+        {"name":"citation-correctness","value":0.75,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":false},
+        {"name":"citation-completeness","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":true},
+        {"name":"reliable-turn-completion","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":0.95,"passed":true},
+        {"name":"p95-latency","value":2.198124917,"unit":"seconds","direction":"lower-is-better","threshold":10.0,"passed":true},
+        {"name":"reported-cost","value":0.00257152,"unit":"usd","direction":"lower-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"synthetic-only-boundary","passed":true,"evidence":"Zero private-course external calls; all 48 cases are committed synthetic-public fixtures."},
+        {"name":"provider-identity-and-revision","passed":true,"evidence":"All provider calls returned deepseek-v4-flash and one stable recorded fingerprint."},
+        {"name":"permission-and-version-isolation","passed":true,"evidence":"No superseded token appeared and all displayed citation sources were approved active evidence."},
+        {"name":"unsupported-high-severity-claims","passed":true,"evidence":"Single review found no high-severity unsupported claim; nine medium-severity unsupported elaboration cases remain."},
+        {"name":"assessed-work-policy","passed":true,"evidence":"All 6 assessed-work cases were deterministically redirected before the provider call."},
+        {"name":"budget-and-ledger","passed":true,"evidence":"All attempts were recorded; cost was USD 0.00257152 under the USD 1 development stop cap."}
+      ],
+      "failures_by_category": {"unsupported-elaboration": 9, "citation-correctness": 9, "unnecessary-pedagogical-move": 13}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Both prompt conditions completed reliably and cheaply, but both failed the prospective 0.95 citation-correctness floor after support review. P1 also induced more unsupported elaboration and unnecessary tutoring moves, so neither prompt can advance to held-out.",
+    "limitations": [
+      "The development corpus is deliberately synthetic and repetitive.",
+      "The support review is Codex-assisted single review rather than independent human review.",
+      "Three deterministic analysis rules were found over-strict and corrected prospectively without rerunning provider output.",
+      "The 104-case held-out split remains unopened and no final generator or prompt is selected."
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "review_id": "generator-qualification-v1-heldout-001-first-review",
+  "review_status": "complete-first-review-second-review-complete",
+  "reviewed_at": "2026-08-07",
+  "reviewer_boundary": "Codex-assisted researcher first review; not independent human review",
+  "raw_output_path": "reports/generated/generator-qualification-v1-heldout-001.json",
+  "raw_output_sha256": "7edee02f54b989c82811f2b1f61f950e5c07f4f629e850e352a2cb7676642946",
+  "attempts_reviewed": 104,
+  "answer_cases": 65,
+  "model_called_cases": 78,
+  "default_labels": {
+    "expected_action": "pass",
+    "required_claim_recall": "pass",
+    "supported_claim_precision": "pass",
+    "citation_correctness": "pass",
+    "citation_completeness": "pass",
+    "misconception_repair_when_applicable": "pass",
+    "academic_integrity_action_when_applicable": "pass",
+    "clarification_quality_when_applicable": "pass",
+    "unsupported_claim_severity": "none"
+  },
+  "overrides": [],
+  "review_summary": {
+    "safe_grounded_task_success": {"passed": 104, "total": 104},
+    "required_claim_recall_answer_cases": {"passed": 65, "total": 65},
+    "citation_correctness_model_called_cases": {"passed": 78, "total": 78},
+    "citation_completeness_answer_cases": {"passed": 65, "total": 65},
+    "reliable_turn_completion": {"passed": 104, "total": 104},
+    "unsupported_claims": 0,
+    "permission_or_version_leaks": 0,
+    "assessed_work_violations": 0
+  },
+  "second_review": {
+    "status": "complete-codex-second-review",
+    "completed_at": "2026-08-10",
+    "result_path": "research/05_evaluation/judgments/generator-qualification-v1-heldout-001-second-review.json",
+    "minimum_answer_cases": 20,
+    "sample_fraction": 0.3076923077,
+    "selection_rule": "four answer cases from each of five answer scenario types, spread across held-out topic strata before labels were assigned",
+    "case_ids": [
+      "gqv1-test-001",
+      "gqv1-test-025",
+      "gqv1-test-049",
+      "gqv1-test-073",
+      "gqv1-test-010",
+      "gqv1-test-034",
+      "gqv1-test-058",
+      "gqv1-test-082",
+      "gqv1-test-019",
+      "gqv1-test-043",
+      "gqv1-test-067",
+      "gqv1-test-091",
+      "gqv1-test-028",
+      "gqv1-test-052",
+      "gqv1-test-076",
+      "gqv1-test-100",
+      "gqv1-test-040",
+      "gqv1-test-064",
+      "gqv1-test-088",
+      "gqv1-test-104"
+    ]
+  }
+}

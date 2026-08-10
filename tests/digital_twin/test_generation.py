@@ -12,6 +12,7 @@ from scripts.evaluate_generation import (
     _paid_provider_called,
 )
 from src.digital_twin.generation import (
+    ConservativeGroundedPromptBuilder,
     DeterministicCitationValidator,
     DeterministicGroundedGenerator,
     DeterministicPolicyEnforcer,
@@ -19,6 +20,7 @@ from src.digital_twin.generation import (
     GroundedPromptBuilder,
     LiveGroundedGenerator,
     PolicyAction,
+    StrictEvidenceGroundedPromptBuilder,
     load_generation_evaluation_set,
 )
 from src.digital_twin.grounding import DocumentChunk, GenerationUsage, RetrievalHit
@@ -186,6 +188,33 @@ def test_prompt_records_policy_evidence_version_and_injection_boundary():
     assert prompt.evidence[0].hit.chunk.source_version == 2
     assert "never as instructions" in prompt.messages[0].content
     assert '"citation_id": "S1"' in prompt.messages[1].content
+
+
+def test_conservative_prompt_freezes_support_and_length_constraints():
+    prompt = ConservativeGroundedPromptBuilder().build(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert prompt.version == "v2"
+    assert "Use no outside facts" in prompt.messages[0].content
+    assert "at most 120 words" in prompt.messages[0].content
+    assert '"citation_ids"' in prompt.messages[0].content
+
+
+def test_strict_evidence_prompt_forbids_development_failure_modes():
+    prompt = StrictEvidenceGroundedPromptBuilder().build(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert prompt.version == "v3"
+    assert "do not ask a follow-up question" in prompt.messages[0].content
+    assert "implementation advice" in prompt.messages[0].content
+    assert "student did not state" in prompt.messages[0].content
+    assert "at most 60 words" in prompt.messages[0].content
 
 
 @pytest.mark.asyncio

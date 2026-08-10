@@ -138,6 +138,7 @@ class LiveGroundedGenerator:
             trace=_trace(
                 generator_id=self.implementation_id,
                 provider_model=response.provider_model,
+                provider_revision=response.provider_revision,
                 prompt_version=prompt.version,
                 policy_action=decision.action,
                 started=started,
@@ -261,11 +262,13 @@ def _trace(
     policy_action: PolicyAction,
     started: float,
     clock: _Clock,
+    provider_revision: str | None = None,
     usage: GenerationUsage | None = None,
 ) -> GenerationTrace:
     return GenerationTrace(
         generator_id=generator_id,
         provider_model=provider_model,
+        provider_revision=provider_revision,
         prompt_version=prompt_version,
         policy_action=policy_action.value,
         latency_ms=max(0.0, (clock() - started) * 1000),

@@ -20,14 +20,25 @@ policy, student interaction state, and evaluation-before-publication.
   ceiling despite higher retrieval quality.
 - The scoped multimodal development study is complete: V3 was dropped, V0 is
   retained as rollback, and no multimodal profile is selected.
-- M2 product activation, multi-course professor/student workflows,
-  professor-fidelity evaluation, persistence, isolation, recovery, and capacity
-  evidence are not complete.
+- Bounded synthetic M2 activation now includes course-isolated student turns,
+  persisted conversations, citation lineage, BM25/provider fallback, and
+  restart recovery. Evaluation-gated draft publication, atomic replacement,
+  withdrawal, rollback, and stale-conversation denial pass the registered
+  19-check v2 architecture slice.
+- The exact DeepSeek V4 Flash/P2 generator boundary is qualified and selected
+  with a deterministic rollback. Professor-fidelity evaluation remains blocked
+  by the incomplete `course-tutor-v1` splits, judge calibration, and sealed
+  execution adapter. Credentialed identity, complete professor/source
+  administration, migration, backup/restore, concurrency, and bounded capacity
+  evidence are also incomplete.
 
-The immediate work is to integrate M2 with a BM25 rollback into the smallest
-complete professor/student journey, then validate persistence, isolation,
-recovery, professor fidelity, and bounded capacity. Do not reopen the text
-benchmark for visual claims or continue multimodal V3 tuning.
+The immediate work is to complete and calibrate the course-tutor dataset, bind
+the selected generator/P2 into the sealed runtime adapter, and execute
+professor-fidelity development without opening held-out prematurely. In
+parallel, harden the R3 foundation with
+credentialed identity, migration, backup/restore, concurrency, recovery, and
+bounded-capacity evidence. Do not reopen the text benchmark for visual claims
+or continue multimodal V3 tuning.
 
 ## Final product
 

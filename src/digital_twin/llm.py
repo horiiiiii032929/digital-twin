@@ -16,6 +16,7 @@ class LlmMessage(BaseModel):
 class LlmResponse(BaseModel):
     content: str = Field(min_length=1)
     provider_model: str = Field(min_length=1)
+    provider_revision: str | None = None
     usage: GenerationUsage = Field(default_factory=GenerationUsage)
 
 

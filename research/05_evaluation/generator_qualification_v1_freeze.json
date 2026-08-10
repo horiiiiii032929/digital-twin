@@ -1,0 +1,42 @@
+{
+  "frozen_at": "2026-08-07T00:00:00Z",
+  "heldout_access_state": "sealed-unopened",
+  "instrument_id": "generator-qualification-v1",
+  "schema_version": 1,
+  "splits": {
+    "development": {
+      "case_count": 48,
+      "dataset_status": "approved",
+      "path": "research/05_evaluation/generator_qualification_v1_development.json",
+      "scenario_counts": {
+        "ambiguity": 6,
+        "assessed_work": 6,
+        "direct": 6,
+        "misconception": 6,
+        "multi_evidence": 6,
+        "no_evidence": 6,
+        "paraphrase": 6,
+        "permission_version": 6
+      },
+      "semantic_validation": "passed-at-seal",
+      "sha256": "a57ffeb7618e300a1647d733d605461c948b6b84ba9a1f48af904a0f814156c4"
+    },
+    "heldout": {
+      "case_count": 104,
+      "dataset_status": "sealed",
+      "path": "research/05_evaluation/generator_qualification_v1_heldout.json",
+      "scenario_counts": {
+        "ambiguity": 13,
+        "assessed_work": 13,
+        "direct": 13,
+        "misconception": 13,
+        "multi_evidence": 13,
+        "no_evidence": 13,
+        "paraphrase": 13,
+        "permission_version": 13
+      },
+      "semantic_validation": "passed-at-seal",
+      "sha256": "f7cb5d6a8ff110555c2fe6a5182818bfa19b398955eeddcf66c50dcc798b022c"
+    }
+  }
+}

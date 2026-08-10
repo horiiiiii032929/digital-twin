@@ -44,6 +44,24 @@ and withdrawn-release requests fail closed.
 - `GET /api/student/messages/{message_id}/citations` returns validated source,
   version, and locator lineage for an owned tutor message.
 
+The local professor publication boundary connects an onboarding session to a
+durable release:
+
+- `POST /api/professor/courses/{course_id}/releases` creates a draft from a
+  reviewed onboarding policy and chunk set;
+- `PATCH /api/professor/releases/{release_id}/evaluation` records the frozen
+  evaluation gate;
+- `POST /api/professor/releases/{release_id}/publish` requires passed
+  evaluation, approved policy, and approved tutoring chunks;
+- `POST /api/professor/releases/{release_id}/withdraw` removes the current
+  student-facing release; and
+- `POST /api/professor/releases/{release_id}/rollback` restores a previously
+  withdrawn, still-eligible release.
+
+Publishing atomically withdraws the previous course release. Conversations
+bound to that previous release fail closed rather than silently switching
+knowledge or policy versions.
+
 The default ASGI application stores local records under the ignored
 `data/interim/student-workflow/` directory. Tests and verification commands use
 temporary databases and synthetic content only.
@@ -77,8 +95,9 @@ audit telemetry.
 
 - `X-Account-ID` is a synthetic local session boundary, not credential-based
   authentication.
-- Professor course/release administration is not yet exposed through a durable
-  API.
+- Full professor course/source administration and credentialed authorization
+  are not yet exposed; the current publication API is a synthetic local
+  boundary.
 - The accepted path uses a synthetic embedder and deterministic generator;
   live provider qualification remains R2 work.
 - Backup/restore, schema migration, multi-process contention, capacity, and the

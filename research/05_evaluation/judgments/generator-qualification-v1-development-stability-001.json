@@ -1,0 +1,29 @@
+{
+  "review_id": "generator-qualification-v1-development-stability-001-review",
+  "review_status": "complete-single-review",
+  "reviewed_at": "2026-08-07",
+  "reviewer_boundary": "Codex-assisted researcher review; not independent human review",
+  "raw_output_path": "reports/generated/generator-qualification-v1-development-stability-001.json",
+  "raw_output_sha256": "7b6cb1c6549e6b0b04390e1580892c25813db476d6591c1bd6001654fc2e4a23",
+  "attempts_reviewed": 36,
+  "default_labels": {
+    "expected_action": "pass",
+    "required_claim_recall": "pass",
+    "supported_claim_precision": "pass",
+    "citation_correctness": "pass",
+    "citation_completeness": "pass",
+    "misconception_repair_when_applicable": "pass",
+    "academic_integrity_action_when_applicable": "pass",
+    "clarification_quality_when_applicable": "pass",
+    "unsupported_claim_severity": "none"
+  },
+  "overrides": [],
+  "review_summary": {
+    "safe_grounded_task_success": {"passed": 36, "total": 36},
+    "reliable_turn_completion": {"passed": 36, "total": 36},
+    "deterministic_check_passes": {"passed": 36, "total": 36},
+    "unsupported_claims": 0,
+    "provider_revision_count": 1,
+    "semantic_variation_observed": "One harmless wording variation: Beryl misconception repeat 3 omitted the introductory word 'In'."
+  }
+}

@@ -24,12 +24,12 @@ remains immutable historical evidence.
 | Retriever | M2 hybrid BM25 plus Qwen3 dense RRF selected on the 60-case held-out result; BM25 v1 retained as rollback | Selected / Keep experimentally | Synthetic product activation, citation checks, and fallback pass; retain for R2/R3 evaluation |
 | Reranker | Local Qwen3 M3 leads development quality but failed the latency gate at depth 40 and 20; Jina is not required | Research candidate / deployment-ineligible | Retain M3 in the sealed comparison; carry M2 as the operational candidate |
 | Evidence action | Any-hit rollback is not a safe selected verifier | Pending end-to-end | Measure evidence completeness/no-evidence directly in #24 and #25 |
-| Generator | Deterministic control and unselected local/API adapters | Pending | Fixed provider/prompt qualification after retrieval selection |
+| Generator | DeepSeek V4 Flash non-thinking with strict-evidence P2; P0/P1 failed development citation correctness; P2 passed development, 36/36 stability, 104/104 one-time held-out, and 20/20 second-review sample checks; deterministic rollback retained | Selected / Keep experimentally | Bind into professor-fidelity execution; retain synthetic-only evidence scope and disclose that second review was not independent human judgment |
 | Professor profile/policy | Structured professor policy v1 and approved onboarding direction | Selected foundation / Refine | Multi-professor persistence and fidelity evaluation |
 | Policy enforcement | Deterministic preflight only | Pending | Generic vs professor-policy comparison in #24 |
 | Citation validation | Deterministic validator plus persisted release/source/version/locator checks pass the synthetic student slice | Implemented foundation / Refine | Adversarial live-output qualification in #24 |
 | Conversation state | SQLite-backed course/release-scoped turns, idempotent request IDs, and restart reload pass synthetic acceptance | Implemented R3 foundation / Refine | Migration, backup/restore, concurrency, and capacity evidence |
-| Evaluation-before-publication | Preview/release domain foundation | Pending product integration | Immutable draft/evaluation/release/rollback lifecycle |
+| Evaluation-before-publication | Durable draft, evaluation gate, atomic publication replacement, withdrawal, rollback, and stale-conversation denial pass the 19-check synthetic v2 slice | Implemented R3 foundation / Refine | Connect frozen R2 evaluation evidence and complete migration, recovery, and concurrency qualification |
 | Audit/operations | Durable redacted lifecycle, denial, fallback, and recovery events pass content-exclusion checks | Implemented foundation / Refine | Health, backup/restore, bounded capacity, and operator visibility |
 | Learning-gap analytics | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
 | Proactive intervention | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
@@ -62,10 +62,11 @@ and invalid results are part of the evidence, not cleanup candidates.
    rollback remains authoritative.
 4. #7 compared M0-M3 once on the sealed cross-course set and selected M2 with
    BM25 rollback.
-5. #24 qualifies professor fidelity, tutoring policy, generation, and citation
+5. #8 now provides the bounded synthetic student journey and
+   evaluation-before-publication lifecycle; credentialed identity, complete
+   professor/source administration, and operational qualification remain.
+6. #24 qualifies professor fidelity, tutoring policy, generation, and citation
    behaviour with generator/evidence controlled.
-6. #8 integrates multi-course professor/student journeys and
-   evaluation-before-publication.
 7. #10 and #25 run calibrated pedagogical, simulated, and end-to-end
    evaluation.
 8. #9 validates isolation, failure, recovery, capacity, and packaging.

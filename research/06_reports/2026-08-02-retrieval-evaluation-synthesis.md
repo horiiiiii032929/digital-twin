@@ -5,6 +5,29 @@ Date: 2026-08-03
 Status: durable synthesis of the repository research record; not a new
 evaluation result.
 
+## Status amendment — 2026-08-07
+
+This synthesis remains the authoritative summary of the retrieval decision as
+of 2026-08-03. Later registered synthetic architecture evidence supersedes only
+its statements about product activation and R3 implementation status; it does
+not change the M2 retrieval selection or any reported retrieval metric.
+
+The student workflow v1 and publication v2 slices now verify bounded synthetic
+M2/BM25 activation, course/release authorization, SQLite conversation
+persistence, citation lineage, idempotency, provider fallback, restart recovery,
+evaluation-gated draft publication, atomic release replacement, withdrawal,
+rollback, and stale-conversation denial. The v2 command passes 19/19 acceptance
+checks. These are architecture acceptance results, not production-readiness,
+live-generator, professor-fidelity, human-usability, or capacity evidence.
+
+The remaining R2/R3 gaps are the exact qualified generator/prompt and sealed
+runtime adapter, professor-fidelity execution, credentialed identity, complete
+professor/source administration, migration and backup/restore, concurrency,
+retention, and bounded-capacity qualification. See
+[`student-workflow-slice-v2-publication-results.md`](../05_evaluation/student-workflow-slice-v2-publication-results.md)
+and [`docs/student-workflow.md`](../../docs/student-workflow.md) for the current
+implementation boundary.
+
 ## Executive summary
 
 This repository is a research-and-prototype workspace for a professor-
@@ -31,7 +54,8 @@ selected M2, BM25 plus Qwen3 dense reciprocal-rank fusion, for the experimental
 profile. BM25 remains the explicit rollback. M1 dense retrieval regressed
 quality and failed latency; M3 improved quality but failed the deployment
 latency gate. R2 and R3 remain open, and the selected retrieval profile has
-not yet been activated in the student-facing product path.
+not yet been activated in the student-facing product path. This final sentence
+records the 2026-08-03 state and is superseded by the dated amendment above.
 
 ## Research boundary and claims
 
@@ -195,7 +219,8 @@ prototype. A durable student account, course membership boundary, persistent
 conversation, citation navigation, release/withdrawal path, and provider
 failure recovery are not yet complete. The selected M2 profile is an
 experimental configuration; it does not by itself activate a live student
-retrieval path.
+retrieval path. This paragraph records the 2026-08-03 state and is superseded
+for bounded synthetic implementation status by the dated amendment above.
 
 R3 must test synthetic professor and student journeys, including:
 
@@ -244,6 +269,10 @@ not an unfinished Claude workflow:
 3. the selected profile needs product activation with BM25 fallback; and
 4. professor-fidelity and end-to-end evidence are still required before the
    final research claim can be frozen.
+
+Items 2 and 3 record the 2026-08-03 state; the 2026-08-07 amendment above
+records the later bounded activation and publication evidence. Item 4 remains
+current.
 
 The authoritative implementation map is
 [`docs/architecture.md`](../../docs/architecture.md), while the research
