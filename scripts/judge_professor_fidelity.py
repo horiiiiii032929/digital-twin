@@ -46,8 +46,10 @@ def write_json(path: Path, value: dict[str, Any]) -> None:
 
 
 def _selected(case_id: str, rate: float, salt: str) -> bool:
+    if rate == 0:
+        return False
     if not 0 < rate <= 1:
-        raise JudgeError("sample rate must be in (0, 1]")
+        raise JudgeError("selection rate must be in [0, 1]")
     bucket = int(hashlib.sha256(f"{salt}:{case_id}".encode()).hexdigest()[:8], 16) / 0xFFFFFFFF
     return bucket < rate
 
@@ -61,40 +63,12 @@ def _dataset_path(run: dict[str, Any], supplied: Path | None) -> Path:
     return PRIVATE_ROOT / f"{split}.json"
 
 
-def _ollama(prompt: str, model: str, *, seed: int) -> dict[str, Any]:
-    schema = {
-        "type": "object",
-        "properties": {
-            "responses": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "label": {"type": "string", "enum": list(LABELS)},
-                        "dimensions": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "dimension": {"type": "string"},
-                                    "label": {"type": "string", "enum": sorted(VALID)},
-                                    "quote": {"type": "string"},
-                                    "reason": {"type": "string"},
-                                },
-                                "required": ["dimension", "label", "quote", "reason"],
-                            },
-                        },
-                    },
-                    "required": ["label", "dimensions"],
-                },
-            },
-            "c1_c2_preference": {"type": "string", "enum": ["C1", "C2", "tie"]},
-        },
-        "required": ["responses", "c1_c2_preference"],
-    }
+def _ollama(
+    prompt: str, model: str, schema: dict[str, Any], *, seed: int
+) -> dict[str, Any]:
     request = urllib.request.Request(
         "http://127.0.0.1:11434/api/generate",
-        data=json.dumps({"model": model, "prompt": prompt, "stream": False, "format": schema, "options": {"temperature": 0, "seed": seed, "num_predict": 1600}}).encode(),
+        data=json.dumps({"model": model, "prompt": prompt, "stream": False, "think": False, "format": schema, "options": {"temperature": 0, "seed": seed, "num_predict": 1200}}).encode(),
         headers={"Content-Type": "application/json"},
         method="POST",
     )
@@ -106,6 +80,41 @@ def _ollama(prompt: str, model: str, *, seed: int) -> dict[str, Any]:
         raise JudgeError("local judge returned malformed JSON") from error
 
 
+def _single_schema(dimensions: list[str]) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "dimensions": {
+                "type": "array",
+                "minItems": len(dimensions),
+                "maxItems": len(dimensions),
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "dimension": {"type": "string", "enum": dimensions},
+                        "label": {"type": "string", "enum": sorted(VALID)},
+                        "quote": {"type": "string"},
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["dimension", "label", "quote", "reason"],
+                },
+            },
+        },
+        "required": ["dimensions"],
+    }
+
+
+def _pair_schema() -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "preference": {"type": "string", "enum": ["C1", "C2", "tie"]},
+            "reason": {"type": "string"},
+        },
+        "required": ["preference", "reason"],
+    }
+
+
 def _mapping(case_id: str, swap: bool) -> dict[str, str]:
     conditions = list(("C0", "C1", "C2", "C3"))
     shift = int(hashlib.sha256(case_id.encode()).hexdigest()[:2], 16) % 4
@@ -115,19 +124,36 @@ def _mapping(case_id: str, swap: bool) -> dict[str, str]:
     return dict(zip(LABELS, conditions, strict=True))
 
 
-def _prompt(case: dict[str, Any], rows: dict[str, dict[str, Any]], mapping: dict[str, str]) -> str:
+def _single_prompt(case: dict[str, Any], label: str, answer: str) -> str:
     dimensions = case["rubric"]["required_pedagogy_dimensions"]
-    blinded = {label: rows[condition]["answer"] for label, condition in mapping.items()}
-    c1_label = next(label for label, condition in mapping.items() if condition == "C1")
-    c2_label = next(label for label, condition in mapping.items() if condition == "C2")
     return (
         PROMPT_PATH.read_text(encoding="utf-8")
-        + "\nEvaluate all four blinded responses independently. Judge only these dimensions: "
+        + "\nEvaluate this one blinded response. Judge exactly these dimensions: "
         + json.dumps(dimensions)
-        + ". For c1_c2_preference, compare " + c1_label + " (C1) with " + c2_label
-        + " (C2), but return only C1, C2, or tie.\nINPUT JSON:\n"
-        + json.dumps({"question": case["student_input"]["question"], "student_state": case["student_input"]["student_state"], "dimension_expectations": case["ground_truth"]["expected_behavior"], "responses": blinded}, ensure_ascii=False, sort_keys=True)
+        + ". Keep every quote under 12 words and every reason under 20 words.\nINPUT JSON:\n"
+        + json.dumps({"question": case["student_input"]["question"], "student_state": case["student_input"]["student_state"], "dimension_expectations": case["ground_truth"]["expected_behavior"], "response": {"label": label, "text": answer}}, ensure_ascii=False, sort_keys=True)
     )
+
+
+def _pair_prompt(case: dict[str, Any], c1_label: str, c1: str, c2_label: str, c2: str) -> str:
+    return (
+        "You are a blinded pedagogical evaluator. Compare the two responses against the supplied expectations. "
+        "Return C1 if the first response is materially better, C2 if the second is materially better, or tie. "
+        "Do not infer model identity. Keep the reason under 20 words.\nINPUT JSON:\n"
+        + json.dumps({"question": case["student_input"]["question"], "dimension_expectations": case["ground_truth"]["expected_behavior"], "first": {"label": c1_label, "text": c1}, "second": {"label": c2_label, "text": c2}}, ensure_ascii=False, sort_keys=True)
+    )
+
+
+def _judge_case(case: dict[str, Any], rows: dict[str, dict[str, Any]], mapping: dict[str, str], model: str) -> dict[str, Any]:
+    dimensions = case["rubric"]["required_pedagogy_dimensions"]
+    responses = []
+    for label, condition in mapping.items():
+        value = _ollama(_single_prompt(case, label, rows[condition]["answer"]), model, _single_schema(dimensions), seed=5002)
+        responses.append({"label": label, "dimensions": value["dimensions"]})
+    c1_label = next(label for label, condition in mapping.items() if condition == "C1")
+    c2_label = next(label for label, condition in mapping.items() if condition == "C2")
+    pair = _ollama(_pair_prompt(case, c1_label, rows["C1"]["answer"], c2_label, rows["C2"]["answer"]), model, _pair_schema(), seed=5002)
+    return {"responses": responses, "c1_c2_preference": pair["preference"], "pairwise_reason": pair["reason"]}
 
 
 def _validate(value: dict[str, Any], case: dict[str, Any], mapping: dict[str, str]) -> None:
@@ -161,18 +187,30 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
         if set(rows) != {"C0", "C1", "C2", "C3"}:
             raise JudgeError(f"incomplete condition portfolio: {case_id}")
         mapping = _mapping(case_id, arguments.swap_order)
-        value = _ollama(_prompt(case_by_id[case_id], rows, mapping), arguments.model, seed=5002)
+        value = _judge_case(case_by_id[case_id], rows, mapping, arguments.model)
         _validate(value, case_by_id[case_id], mapping)
         results.append({"case_id": case_id, "mapping": mapping, "judgment": value, "repeat": False})
         if _selected(case_id, arguments.repeat_rate, f"repeat-{arguments.model}"):
-            repeated = _ollama(_prompt(case_by_id[case_id], rows, mapping), arguments.model, seed=5002)
+            repeated = _judge_case(case_by_id[case_id], rows, mapping, arguments.model)
             _validate(repeated, case_by_id[case_id], mapping)
             results.append({"case_id": case_id, "mapping": mapping, "judgment": repeated, "repeat": True})
+        write_json(
+            arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json"),
+            {
+                "status": "running",
+                "source_run_id": run["run_id"],
+                "model": arguments.model,
+                "completed_cases": index,
+                "case_judgments": results,
+            },
+        )
         print(f"judge={arguments.model} case={index}/{len(rows_by_case)}", flush=True)
     return {
         "judge_run_id": f"{run['run_id']}-{arguments.model.replace(':', '-')}{'-swapped' if arguments.swap_order else ''}",
         "status": "complete", "source_run_id": run["run_id"], "model": arguments.model,
         "model_digest": _model_digest(arguments.model), "temperature": 0, "seed": 5002,
+        "thinking": False,
+        "max_output_tokens_per_call": 1200, "calls_per_nonrepeat_case": 5,
         "sample_rate": arguments.sample_rate, "repeat_rate": arguments.repeat_rate,
         "swapped_order": arguments.swap_order, "case_judgments": results,
     }

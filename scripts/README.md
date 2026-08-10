@@ -213,6 +213,9 @@ Current utilities:
   explicit one-time command.
 - `judge_professor_fidelity.py`: runs blinded structured local Gemma or Qwen
   pedagogy judgments, deterministic position swaps, and seeded repeat samples.
+- `analyze_judge_calibration.py`: checks local-judge repeat, position, and
+  cross-family agreement and fails eligibility when the frozen blinded
+  researcher reference or any calibration gate is absent.
 - `analyze_professor_fidelity.py`: computes condition metrics, seeded bootstrap
   intervals, exact McNemar tests with Holm correction, decision gates,
   sanitized failures, and the professor-facing result summary.
