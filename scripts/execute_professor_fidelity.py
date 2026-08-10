@@ -19,6 +19,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
 from scripts.run_professor_fidelity_experiment import (
     load_instrument,
     load_selected_generator_qualification,
@@ -36,6 +38,7 @@ from src.digital_twin.llm import LlmMessage
 
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env", override=False)
 PRIVATE_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
 PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"

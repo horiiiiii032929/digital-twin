@@ -191,6 +191,9 @@ Current utilities:
   metrics, NotebookLM black-box boundary, held-out locks, and public open-set
   example; run it with
   `npm run verify:retrieval-v3-instruments`.
+- External-provider commands load repository-local secrets from `.env` without
+  overriding variables already exported by the shell. Copy `.env.example` to
+  `.env`, set `DEEPSEEK_API_KEY` locally, and never commit or share that file.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run

@@ -18,6 +18,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
 from services.llm import LiteLlmClient
 from src.digital_twin.generation import (
     ConservativeGroundedPromptBuilder,
@@ -34,6 +36,7 @@ from src.digital_twin.tutor_policy import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env", override=False)
 INSTRUMENT_PATH = (
     ROOT / "research/05_evaluation/instruments/generator_qualification_v1.json"
 )
