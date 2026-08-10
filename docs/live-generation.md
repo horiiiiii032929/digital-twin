@@ -6,16 +6,17 @@ qualification; deterministic rollback retained.
 
 ## Current decision state
 
-Issue #24 is closed in GitHub, but its C0-C3 development run is invalid for
-selection. The preserved provider trace completed 192/192 attempts, while the
+Issue #24 is reopened and `In Progress` because its C0-C3 development run is
+invalid for selection. The preserved provider trace completed 192/192
+attempts, while the
 registered correction found missing human authoring review, gold-label leakage
 in C2/C3, a drifted C3 chunking corpus, and missing condition/policy bindings.
 C3 had 13/30 source/page citation correctness, 19/30 source/page evidence
 coverage, and 0/30 exact selected-passage matches. Safe grounding, true
 citation completeness, and pedagogy remain unresolved, so no professor-
 fidelity claim or profile change is justified. The 104-case one-time held-out
-ledger remains unopened. The
-generator sub-boundary remains complete: the repository selects the exact
+ledger remains unopened. The generator sub-boundary remains complete: the
+repository selects the exact
 DeepSeek binding and P2 prompt after its own development, stability, one-time
 held-out, and citation review gates passed. No API credential is stored. A
 local Ollama Gemma 3 4B candidate was exercised historically with zero monetary
