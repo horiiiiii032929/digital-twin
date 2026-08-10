@@ -95,8 +95,7 @@ def sha256(path: Path) -> str:
 
 def split_paths(split: str) -> tuple[Path, Path]:
     if split == "anchor":
-        root = ROOT / "data/processed/course_tutor_v1/anchor"
-        return root / "course_tutor_v1_anchor_draft.json", root / "course_tutor_v1_anchor_conditions_draft.json"
+        return PRIVATE_ROOT / "anchor.json", PRIVATE_ROOT / "anchor_conditions.json"
     return PRIVATE_ROOT / f"{split}.json", PRIVATE_ROOT / f"{split}_conditions.json"
 
 

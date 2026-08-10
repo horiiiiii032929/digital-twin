@@ -37,6 +37,7 @@
     "review:multimodal-private-claude": "uv run python -m scripts.second_review_multimodal_benchmark --consumer-data-boundary-approved",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:professor-fidelity-plan": "uv run python -m scripts.run_professor_fidelity_experiment --dry-run",
+    "seal:course-tutor-anchor": "uv run python -m scripts.seal_course_tutor_anchor",
     "build:course-tutor-splits": "uv run python -m scripts.build_course_tutor_splits",
     "benchmark:professor-fidelity-development": "uv run --extra retrieval-benchmark python -m scripts.execute_professor_fidelity --execute --split development --allow-external-provider --output experiments/runs/professor_fidelity_v1/development/result.json",
     "benchmark:professor-fidelity-heldout": "uv run --extra retrieval-benchmark python -m scripts.execute_professor_fidelity --execute --split heldout --allow-external-provider --confirm-heldout-once --output experiments/runs/professor_fidelity_v1/heldout-001/result.json",

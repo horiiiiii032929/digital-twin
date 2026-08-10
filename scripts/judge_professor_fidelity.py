@@ -57,7 +57,7 @@ def _dataset_path(run: dict[str, Any], supplied: Path | None) -> Path:
         return supplied
     split = run["split"]
     if split == "anchor":
-        return ROOT / "data/processed/course_tutor_v1/anchor/course_tutor_v1_anchor_draft.json"
+        return PRIVATE_ROOT / "anchor.json"
     return PRIVATE_ROOT / f"{split}.json"
 
 

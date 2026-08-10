@@ -203,6 +203,10 @@ Current utilities:
   source-bound research cases, extracts hash-bound page evidence locally, and
   creates the unopened one-time ledger; run `npm run
   build:course-tutor-splits`.
+- `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
+  and review ledger after exact passage and policy inspection; the ledger
+  explicitly records Codex-assisted researcher review and keeps professor and
+  independent-human review false; run `npm run seal:course-tutor-anchor`.
 - `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
   Flash tutor and selected local M2 retrieval, checkpoints each case, enforces
   the provider fingerprint and cost stops, and opens held-out only with the
