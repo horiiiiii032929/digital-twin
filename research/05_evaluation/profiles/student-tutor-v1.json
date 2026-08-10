@@ -194,7 +194,7 @@
           "max_output_tokens": 600,
           "timeout_seconds": 15,
           "max_attempts": 1,
-          "data_boundary": "synthetic-public-only"
+        "data_boundary": "synthetic-public-plus-governed-it5002-professor-fidelity-2026-08-10"
         }
       },
       "control": {
@@ -210,7 +210,7 @@
         "research/05_evaluation/generator-qualification-v1-heldout-001-results.md"
       ],
       "hard_gates": [
-        "synthetic-only-boundary",
+      "governed-provider-boundary",
         "provider-identity-and-revision",
         "permission-and-version-isolation",
         "unsupported-high-severity-claims",

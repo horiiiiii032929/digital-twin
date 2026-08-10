@@ -100,11 +100,15 @@ does not imply human-use approval.
 
 ### TB3: external model provider
 
-DeepSeek receives public synthetic qualification cases only under the cumulative
-USD 10 cap. No private lecture, course-specific prompt, tutor output, simulator
-trajectory, or judge input crosses this boundary unless a later recorded
-decision explicitly approves the exact provider, model, endpoint, data use,
-retention, processing location, and fallback.
+DeepSeek receives public synthetic qualification cases and the explicitly
+authorized issue #24 IT5002 professor-fidelity tutor requests under the
+cumulative USD 10 cap. The governed exception is limited to the official
+`https://api.deepseek.com` endpoint, `deepseek-v4-flash` non-thinking binding,
+eligible lecture passages, synthetic case fields, frozen tutor policies, and
+derived tutor outputs. Judge inputs, simulator trajectories, student data,
+graded answers, solutions, credentials, and public deployment remain excluded.
+Disk context caching is enabled by the provider and normally expires within
+hours to days; no project-specific no-training guarantee is assumed.
 
 ### TB4: GitHub and report evidence
 

@@ -70,12 +70,8 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
         raise ProfessorFidelityPlanError(
             f"conditions must remain ordered as {EXPECTED_CONDITIONS}"
         )
-    if instrument.get("generator_binding", {}).get("status") != (
-        "pending-qualification"
-    ):
-        raise ProfessorFidelityPlanError(
-            "generator binding must remain pending until qualification"
-        )
+    if instrument.get("generator_binding", {}).get("status") != "qualified-selected":
+        raise ProfessorFidelityPlanError("generator binding is not qualified and selected")
     if instrument.get("analysis", {}).get("bootstrap_seed") != 5002:
         raise ProfessorFidelityPlanError("bootstrap seed drifted from frozen value")
     if instrument.get("analysis", {}).get("human_outcome_claims_allowed") is not False:
@@ -130,7 +126,7 @@ def build_preflight_manifest(
     qualification = load_selected_generator_qualification()
     return {
         "run_type": "professor-fidelity-v1-preflight",
-        "status": "blocked-pending-course-data-and-judge-calibration",
+        "status": "blocked-pending-judge-calibration-and-execution",
         "instrument_id": instrument["instrument_id"],
         "instrument_schema_version": instrument["schema_version"],
         "conditions": [
@@ -153,7 +149,6 @@ def build_preflight_manifest(
         "private_text_emitted": False,
         "execution_enabled": False,
         "blocked_reasons": [
-            "course-tutor-v1 development and held-out splits are incomplete",
             "judge calibration is incomplete",
             "sealed professor-fidelity execution remains intentionally disabled",
         ],

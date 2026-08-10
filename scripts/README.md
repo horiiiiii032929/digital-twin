@@ -191,11 +191,24 @@ Current utilities:
   metrics, NotebookLM black-box boundary, held-out locks, and public open-set
   example; run it with
   `npm run verify:retrieval-v3-instruments`.
-- `run_professor_fidelity_experiment.py`: validates the frozen R2
-  professor-fidelity conditions and prepares a sanitized run manifest without
-  opening private course data. Execution remains fail-closed until one exact
-  generator/prompt binding and the sealed runtime adapter are qualified; run
-  `npm run verify:professor-fidelity-plan` for the no-data preflight.
+- `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
+  exact qualified generator/prompt binding, private split hashes, and sanitized
+  preflight without opening held-out outputs; run `npm run
+  verify:professor-fidelity-plan`.
+- `build_course_tutor_splits.py`: deterministically builds and validates the
+  ignored 48-case development and 104-case sealed IT5002 tutoring splits from
+  source-bound research cases, extracts hash-bound page evidence locally, and
+  creates the unopened one-time ledger; run `npm run
+  build:course-tutor-splits`.
+- `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
+  Flash tutor and selected local M2 retrieval, checkpoints each case, enforces
+  the provider fingerprint and cost stops, and opens held-out only with the
+  explicit one-time command.
+- `judge_professor_fidelity.py`: runs blinded structured local Gemma or Qwen
+  pedagogy judgments, deterministic position swaps, and seeded repeat samples.
+- `analyze_professor_fidelity.py`: computes condition metrics, seeded bootstrap
+  intervals, exact McNemar tests with Holm correction, decision gates,
+  sanitized failures, and the professor-facing result summary.
 - `build_generator_qualification_dataset.py`: deterministically builds the
   public synthetic 48-case development and 104-case sealed held-out generator
   qualification splits plus their hash-bound freeze manifest.

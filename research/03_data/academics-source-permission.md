@@ -11,6 +11,28 @@ Multimodal clarification date: 2026-07-31
 
 External review clarification date: 2026-08-01
 
+Professor-fidelity provider clarification date: 2026-08-10
+
+## Professor-fidelity DeepSeek authorization
+
+The source holder explicitly authorizes the issue #24 single-turn C0-C3
+research evaluation to send eligible IT5002 lecture passages, synthetic
+student questions and states, the frozen tutoring policy, and derived tutor
+outputs to the official DeepSeek Open Platform endpoint at
+`https://api.deepseek.com` using `deepseek-v4-flash` in non-thinking mode.
+The authorization is limited to the qualified prompt and model binding recorded
+in `student-tutor-v1`, the cumulative USD 10 research cap, and the mandatory
+exclusions below. It does not authorize DeepSeek as a judge, simulator, public
+deployment, or student-facing service.
+
+DeepSeek's official API documentation states that disk context caching is
+enabled by default and that unused cache entries are normally cleared within
+hours to days. The public Open Platform terms assign input responsibility to
+the developer and do not provide a project-specific no-training guarantee.
+The evaluation therefore treats provider retention/training location as an
+explicit limitation, sends only source-holder-authorized teaching material,
+uses a non-personal `user_id`, and sends no participant or student data.
+
 ## Approved collection
 
 All course materials contained in the user's `academics` collection may be:
