@@ -198,27 +198,49 @@ Current utilities:
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run
   verify:professor-fidelity-plan`.
-- `build_course_tutor_splits.py`: deterministically builds and validates the
-  ignored 48-case development and 104-case sealed IT5002 tutoring splits from
-  source-bound research cases, extracts hash-bound page evidence locally, and
-  creates the unopened one-time ledger; run `npm run
-  build:course-tutor-splits`.
+- `build_course_tutor_splits.py`: deterministically builds and validates an
+  ignored 48-case development plus 104-case held-out **review draft** from
+  source-bound research cases. It labels the draft honestly, refuses to
+  overwrite prior artifacts, and creates neither a seal nor a held-out ledger;
+  run `npm run build:course-tutor-splits`.
+- `seal_course_tutor_splits.py`: validates explicit non-Codex human authoring
+  decisions for every draft case, then writes a new immutable sealed directory
+  and unopened held-out ledger with exclusive-create semantics. It cannot reset
+  or overwrite an earlier ledger; run `npm run seal:course-tutor-splits --
+  --review <ignored-review.json>` only after review is complete.
 - `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
   and review ledger after exact passage and policy inspection; the ledger
   explicitly records Codex-assisted researcher review and keeps professor and
   independent-human review false; run `npm run seal:course-tutor-anchor`.
 - `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
-  Flash tutor and selected local M2 retrieval, checkpoints each case, enforces
-  the provider fingerprint and cost stops, and opens held-out only with the
-  explicit one-time command.
+  Flash tutor and selected local M2 retrieval, checkpoints each case, records
+  timeout/unavailable/malformed responses as bounded failures in the
+  unconditional denominator, enforces the provider fingerprint and cost stops,
+  and opens held-out only with the explicit one-time command.
+- `professor_fidelity_scoring.py`: separates citation-ID validity,
+  source-and-locator correctness, claim-level citation coverage, eligible-case
+  retrieval completeness, structural success, and unresolved semantic review.
+  Exact-phrase matching is retained only as a non-selection diagnostic.
 - `judge_professor_fidelity.py`: runs blinded structured local Gemma or Qwen
-  pedagogy judgments, deterministic position swaps, and seeded repeat samples.
+  pedagogy judgments against the frozen JSON contracts, including one
+  preference per pedagogical dimension for both C1/C2 presentation orders and
+  seeded repeat samples.
 - `analyze_judge_calibration.py`: checks local-judge repeat, position, and
-  cross-family agreement and fails eligibility when the frozen blinded
-  researcher reference or any calibration gate is absent.
-- `analyze_professor_fidelity.py`: computes condition metrics, seeded bootstrap
-  intervals, exact McNemar tests with Holm correction, decision gates,
-  sanitized failures, and the professor-facing result summary.
+  cross-family/reference agreement and fails eligibility when the frozen
+  blinded researcher reference, any per-dimension gate, or pairwise position
+  gate is absent.
+- `prepare_professor_fidelity_blinded_review.py` and
+  `finalize_professor_fidelity_blinded_review.py`: create an ignored private
+  condition-blinded packet/template, keep the condition mapping separate during
+  review, and validate the completed normalized review before it may resolve
+  semantic or pedagogical metrics. Prepare the current anchor packet with `npm
+  run prepare:professor-fidelity-anchor-review`.
+- `analyze_professor_fidelity.py`: ignores embedded legacy scores, rescoring
+  preserved outputs from the hash-matched dataset and retrieved source metadata.
+  It uses the frozen eligible denominator, computes citation and completion
+  gates explicitly, supports eligible blinded review, and leaves safe-grounded
+  and pedagogy results unresolved otherwise. Run the current correction with
+  `npm run analyze:professor-fidelity-development`.
 - `build_generator_qualification_dataset.py`: deterministically builds the
   public synthetic 48-case development and 104-case sealed held-out generator
   qualification splits plus their hash-bound freeze manifest.

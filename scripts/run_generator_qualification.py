@@ -20,6 +20,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 
+from scripts.professor_fidelity_scoring import nearest_rank_percentile
 from services.llm import LiteLlmClient
 from src.digital_twin.generation import (
     ConservativeGroundedPromptBuilder,
@@ -338,7 +339,7 @@ async def execute(
         "input_tokens": sum(item["usage"]["input_tokens"] for item in results),
         "output_tokens": sum(item["usage"]["output_tokens"] for item in results),
         "latency_p50_ms": statistics.median(latencies) if latencies else None,
-        "latency_p95_ms": _percentile(latencies, 0.95),
+        "latency_p95_ms": nearest_rank_percentile(latencies, 0.95),
         "provider_revisions": sorted(
             {
                 item["provider_revision"]
@@ -404,7 +405,7 @@ def _case_result(
         item["source_id"] for item in case["candidate_evidence"] if item["presented"]
     }
     citation_sources = {citation.source_id for citation in answer.citations}
-    citation_identity_passed = citation_sources.issubset(presented_sources) and (
+    citation_source_identity_passed = citation_sources.issubset(presented_sources) and (
         bool(citation_sources) if case["citation_required"] else True
     )
     provider_called = trace.provider_model != "not-called"
@@ -423,7 +424,7 @@ def _case_result(
             actual_action == expected_action,
             required_terms_passed,
             forbidden_terms_absent,
-            citation_identity_passed,
+            citation_source_identity_passed,
             provider_identity_passed,
         )
     )
@@ -443,7 +444,7 @@ def _case_result(
         "completed": completed,
         "required_terms_passed": required_terms_passed,
         "forbidden_terms_absent": forbidden_terms_absent,
-        "citation_identity_passed": citation_identity_passed,
+        "citation_source_identity_passed": citation_source_identity_passed,
         "provider_identity_passed": provider_identity_passed,
         "deterministic_checks_passed": deterministic_checks_passed,
         "human_review": {
@@ -527,14 +528,6 @@ def _open_heldout_once(assets: dict[str, Any]) -> None:
         raise GeneratorQualificationError(
             "held-out access ledger already exists; rerun is prohibited"
         ) from error
-
-
-def _percentile(values: list[float], quantile: float) -> float | None:
-    if not values:
-        return None
-    ordered = sorted(values)
-    index = min(len(ordered) - 1, max(0, int(len(ordered) * quantile) - 1))
-    return ordered[index]
 
 
 def _code_revision() -> str:

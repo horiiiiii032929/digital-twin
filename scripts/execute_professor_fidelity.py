@@ -26,6 +26,10 @@ from scripts.run_professor_fidelity_experiment import (
     load_selected_generator_qualification,
     validate_dataset_and_conditions,
 )
+from scripts.professor_fidelity_scoring import (
+    nearest_rank_percentile,
+    score_response,
+)
 from services.embeddings import Qwen3TextEmbedder
 from services.llm import LiteLlmClient
 from src.digital_twin.evaluation import ComponentKind, load_release_profile
@@ -35,11 +39,17 @@ from src.digital_twin.grounding import (
 )
 from src.digital_twin.grounding.models import DocumentChunk
 from src.digital_twin.llm import LlmMessage
+from src.digital_twin.llm import (
+    LlmMalformedResponseError,
+    LlmTimeoutError,
+    LlmUnavailableError,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env", override=False)
-PRIVATE_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
+ANCHOR_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
+PRIVATE_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v2"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
 PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"
 MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
@@ -95,7 +105,7 @@ def sha256(path: Path) -> str:
 
 def split_paths(split: str) -> tuple[Path, Path]:
     if split == "anchor":
-        return PRIVATE_ROOT / "anchor.json", PRIVATE_ROOT / "anchor_conditions.json"
+        return ANCHOR_ROOT / "anchor.json", ANCHOR_ROOT / "anchor_conditions.json"
     return PRIVATE_ROOT / f"{split}.json", PRIVATE_ROOT / f"{split}_conditions.json"
 
 
@@ -115,8 +125,6 @@ def preflight(split: str) -> dict[str, Any]:
     blockers = []
     if not os.environ.get("DEEPSEEK_API_KEY", "").strip():
         blockers.append("missing DEEPSEEK_API_KEY")
-    if "gemma3:4b" not in models or "qwen3:4b" not in models:
-        blockers.append("local judge models are missing")
     if split == "heldout" and load_json(PRIVATE_ROOT / "heldout_once_ledger.json")["status"] != "unopened":
         blockers.append("held-out ledger is not unopened")
     return {
@@ -135,7 +143,15 @@ def preflight(split: str) -> dict[str, Any]:
 
 
 def _ollama_models() -> set[str]:
-    completed = subprocess.run(["ollama", "list"], capture_output=True, text=True, check=True)
+    try:
+        completed = subprocess.run(
+            ["ollama", "list"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return set()
     return {line.split()[0] for line in completed.stdout.splitlines()[1:] if line.strip()}
 
 
@@ -268,53 +284,27 @@ def _parse_output(content: str) -> dict[str, Any]:
         raise ProfessorFidelityExecutionError("provider returned invalid action")
     if not isinstance(value["answer"], str) or not isinstance(value["citation_ids"], list):
         raise ProfessorFidelityExecutionError("provider output types are invalid")
+    if not all(isinstance(citation_id, str) for citation_id in value["citation_ids"]):
+        raise ProfessorFidelityExecutionError("provider citation IDs must be strings")
     return value
 
 
 def _score(case: dict[str, Any], condition: str, output: dict[str, Any], hits: list[RetrievalHit]) -> dict[str, Any]:
-    expected = case["ground_truth"]["expected_behavior"]
-    answer = output["answer"].casefold()
-    valid_ids = {f"S{index}" for index in range(1, len(hits) + 1)}
-    citations = set(output["citation_ids"])
-    claim_rows = case["ground_truth"]["required_claims"]
-    claim_passes = [claim["claim_text"].casefold() in answer for claim in claim_rows]
-    action_passed = output["action"] == expected["primary_action"] or output["action"] in expected["acceptable_alternatives"]
-    citation_validity = citations <= valid_ids and (bool(citations) if expected["citation_requirement"] == "required" else True)
-    citation_completeness = not claim_rows or bool(citations)
-    assessed_gate = not (case["scenario_type"] == "assessed_work" and output["action"] == "answer")
-    permission_gate = citations <= valid_ids
-    unsupported_high = bool(claim_rows) and output["action"] == "answer" and not all(claim_passes)
-    complete_evidence = _complete_evidence(case, hits)
-    hard_gate_passed = citation_validity and assessed_gate and permission_gate and not unsupported_high
-    success = action_passed and hard_gate_passed and (all(claim_passes) if output["action"] == "answer" else True)
-    return {
-        "expected_action": expected["primary_action"], "actual_action": output["action"],
-        "action_passed": action_passed, "required_claim_recall": sum(claim_passes) / len(claim_passes) if claim_passes else 1.0,
-        "citation_validity": citation_validity, "citation_completeness": citation_completeness,
-        "complete_evidence_at_3": complete_evidence, "assessed_work_gate": assessed_gate,
-        "permission_gate": permission_gate, "unsupported_high_severity_claim": unsupported_high,
-        "hard_gate_passed": hard_gate_passed, "safe_grounded_success": success,
-        "pedagogy_pending": True,
-    }
-
-
-def _complete_evidence(case: dict[str, Any], hits: list[RetrievalHit]) -> bool:
-    essential = {
-        (item["source_artifact_id"], int(item["locator"].rsplit(" ", 1)[-1]))
-        for item in case["ground_truth"]["evidence_units"] if item["role"] == "essential"
-    }
-    if not essential:
-        return True
-    returned = {
-        (str(hit.chunk.metadata.get("course_document_id", hit.chunk.document_id)), int(hit.chunk.page_start or _page_from_locator(hit.chunk.locator)))
-        for hit in hits[:3]
-    }
-    return essential <= returned
-
-
-def _page_from_locator(locator: str) -> int:
-    digits = "".join(character if character.isdigit() else " " for character in locator).split()
-    return int(digits[-1]) if digits else 0
+    del condition  # The condition changes inputs, not the scoring definition.
+    retrieved = [
+        {
+            "chunk_id": hit.chunk.id,
+            "source_id": hit.chunk.metadata.get(
+                "course_document_id", hit.chunk.document_id
+            ),
+            "locator": hit.chunk.locator,
+            "page": hit.chunk.page_start,
+            "source_version": hit.chunk.source_version,
+            "score": hit.relevance_score,
+        }
+        for hit in hits
+    ]
+    return score_response(case, output, retrieved)
 
 
 async def execute(split: str, output_path: Path) -> dict[str, Any]:
@@ -343,8 +333,55 @@ async def execute(split: str, output_path: Path) -> dict[str, Any]:
                 hits = _oracle_hits(case)
             else:
                 hits = retriever.retrieve(case["student_input"]["question"], limit=3)
+            retrieved = [
+                {
+                    "chunk_id": hit.chunk.id,
+                    "source_id": hit.chunk.metadata.get(
+                        "course_document_id", hit.chunk.document_id
+                    ),
+                    "locator": hit.chunk.locator,
+                    "page": hit.chunk.page_start,
+                    "source_version": hit.chunk.source_version,
+                    "score": hit.relevance_score,
+                }
+                for hit in hits
+            ]
             started = time.perf_counter()
-            response = await client.chat(_messages(case, condition, hits), task=f"professor_fidelity_{split}_{condition}")
+            try:
+                response = await client.chat(
+                    _messages(case, condition, hits),
+                    task=f"professor_fidelity_{split}_{condition}",
+                )
+            except (LlmTimeoutError, LlmUnavailableError, LlmMalformedResponseError) as error:
+                latency_ms = (time.perf_counter() - started) * 1000
+                failure_output = {
+                    "answer": "",
+                    "citation_ids": [],
+                    "action": "operational_failure",
+                }
+                results.append(
+                    {
+                        "case_id": case["case_id"],
+                        "scenario_type": case["scenario_type"],
+                        "condition": condition,
+                        "status": "bounded_failure",
+                        "failure_type": type(error).__name__,
+                        "answer": "",
+                        "citation_ids": [],
+                        "retrieved": retrieved,
+                        "score": _score(case, condition, failure_output, hits),
+                        "provider_model": None,
+                        "provider_revision": None,
+                        "latency_ms": latency_ms,
+                        "usage": {
+                            "input_tokens": 0,
+                            "output_tokens": 0,
+                            "total_tokens": 0,
+                            "approximate_cost_usd": 0.0,
+                        },
+                    }
+                )
+                continue
             latency_ms = (time.perf_counter() - started) * 1000
             if response.provider_revision != EXPECTED_FINGERPRINT:
                 raise ProfessorFidelityExecutionError(f"provider fingerprint drifted: {response.provider_revision}")
@@ -354,11 +391,41 @@ async def execute(split: str, output_path: Path) -> dict[str, Any]:
             cap = HELDOUT_STOP_CAP_USD if split == "heldout" else DEVELOPMENT_STOP_CAP_USD
             if total_cost >= cap:
                 raise ProfessorFidelityExecutionError(f"cost stop cap reached: USD {total_cost:.6f}")
-            parsed = _parse_output(response.content)
+            try:
+                parsed = _parse_output(response.content)
+            except ProfessorFidelityExecutionError as error:
+                results.append(
+                    {
+                        "case_id": case["case_id"],
+                        "scenario_type": case["scenario_type"],
+                        "condition": condition,
+                        "status": "bounded_failure",
+                        "failure_type": type(error).__name__,
+                        "answer": "",
+                        "citation_ids": [],
+                        "retrieved": retrieved,
+                        "score": _score(
+                            case,
+                            condition,
+                            {
+                                "answer": "",
+                                "citation_ids": [],
+                                "action": "operational_failure",
+                            },
+                            hits,
+                        ),
+                        "provider_model": response.provider_model,
+                        "provider_revision": response.provider_revision,
+                        "latency_ms": latency_ms,
+                        "usage": response.usage.model_dump(mode="json"),
+                    }
+                )
+                continue
             results.append({
                 "case_id": case["case_id"], "scenario_type": case["scenario_type"], "condition": condition,
+                "status": "completed", "failure_type": None,
                 "answer": parsed["answer"], "citation_ids": parsed["citation_ids"],
-                "retrieved": [{"chunk_id": hit.chunk.id, "source_id": hit.chunk.metadata.get("course_document_id", hit.chunk.document_id), "locator": hit.chunk.locator, "page": hit.chunk.page_start, "score": hit.relevance_score} for hit in hits],
+                "retrieved": retrieved,
                 "score": _score(case, condition, parsed, hits), "provider_model": response.provider_model,
                 "provider_revision": response.provider_revision, "latency_ms": latency_ms,
                 "usage": response.usage.model_dump(mode="json"),
@@ -370,13 +437,16 @@ async def execute(split: str, output_path: Path) -> dict[str, Any]:
     result = {
         "run_id": f"professor-fidelity-v1-{split}-001", "status": "completed-pending-judge",
         "split": split, "dataset_sha256": sha256(dataset_path), "case_count": len(dataset["cases"]),
-        "condition_attempts": len(results), "conditions": list(CONDITIONS),
+        "condition_attempts": len(results),
+        "completed_attempts": sum(row.get("status", "completed") == "completed" for row in results),
+        "requested_attempts": expected_attempts,
+        "conditions": list(CONDITIONS),
         "provider_model": "deepseek-v4-flash", "provider_revision": EXPECTED_FINGERPRINT,
         "retrieval": "qwen3-hybrid-v1", "retrieval_fallback": "bm25-v1",
         "retrieval_provider_usage": embedder.usage_snapshot().model_dump(mode="json"),
         "cost_usd": total_cost, "input_tokens": sum(row["usage"]["input_tokens"] for row in results),
         "output_tokens": sum(row["usage"]["output_tokens"] for row in results),
-        "latency_p50_ms": statistics.median(latencies), "latency_p95_ms": sorted(latencies)[max(0, int(len(latencies) * .95) - 1)],
+        "latency_p50_ms": statistics.median(latencies), "latency_p95_ms": nearest_rank_percentile(latencies, 0.95),
         "code_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "working_tree_dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()),
         "results": results,

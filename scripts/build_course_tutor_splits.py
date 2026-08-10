@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build private, family-disjoint course-tutor-v1 development and held-out splits.
+"""Build review-only private course-tutor development and held-out drafts.
 
 The builder reuses only source-bound cases from the invalid IT5002 rapid
 retrieval instrument. It creates new tutoring tasks, extracts exact PDF pages
-locally, validates every output, and writes an unopened held-out ledger. Private
-questions, passages, and gold claims remain under ignored data paths.
+locally and validates every output. It does not approve, seal, or create a
+held-out execution ledger; a separate reviewed sealing step must do that.
+Private questions, passages, and gold claims remain under ignored data paths.
 """
 
 from __future__ import annotations
@@ -27,7 +28,7 @@ from scripts.validate_course_tutor_dataset import (
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_ROOT = ROOT / "data/processed/it5002_retrieval_rapid_v1"
-OUTPUT_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
+OUTPUT_ROOT = ROOT / "data/processed/course_tutor_v1/review_v1_2"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
 PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"
 MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
@@ -56,7 +57,13 @@ def parse_args() -> argparse.Namespace:
 
 def write_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(f"{json.dumps(value, indent=2, ensure_ascii=False)}\n")
+    try:
+        with path.open("x", encoding="utf-8") as stream:
+            stream.write(f"{json.dumps(value, indent=2, ensure_ascii=False)}\n")
+    except FileExistsError as error:
+        raise ValueError(
+            f"refusing to overwrite review or seal artifact: {path}"
+        ) from error
 
 
 def sha256(path: Path) -> str:
@@ -296,7 +303,7 @@ def build_case(
             "notes": "Deterministically constructed from a source-bound IT5002 research case.",
         },
         "annotation": {
-            "status": "double_review", "annotator_ids": ["researcher-01"],
+            "status": "draft", "annotator_ids": ["course-tutor-builder-v1.2"],
             "reviewer_ids": ["local-source-review-v1", "codex-schema-review-v1"],
             "professor_decision": "pending", "disagreement_ids": [], "revision": 1,
             "created_at": CREATED_AT, "updated_at": CREATED_AT,
@@ -368,16 +375,16 @@ def build_split(split: str, source_cases: list[dict[str, Any]], manifest: dict[s
         cases.append(case)
         conditions.append(condition)
     suffix = "development" if split == "development" else "heldout"
-    status = "approved" if split == "development" else "sealed"
+    status = "professor_review"
     dataset = {
         "schema_version": "1.1.0", "dataset_id": "course-tutor-v1",
-        "dataset_version": f"course-tutor-v1.1.0-{suffix}", "dataset_status": status,
+        "dataset_version": f"course-tutor-v1.2.0-{suffix}", "dataset_status": status,
         "split": split, "language": "en", "course_id": "IT5002",
         "corpus_version": "it5002-lectures-v1@1.0.0", "policy_version": "structured-professor-policy-v1",
         "rubric_version": "response-rubric-v1", "permission_record_ref": "research/03_data/academics-source-permission.md#professor-fidelity-deepseek-authorization",
         "data_boundary": {"content_class": "course_private", "contains_direct_identifiers": False, "source_text_committed_to_git": False, "provider_use": "approved_external_allowed", "permission_status": "approved", "private_storage_ref": "data/raw/course_materials/it5002_full/lecture"},
         "full_context_control": {"status": "ineligible", "approved_corpus_tokens": None, "frozen_context_limit": 1000000, "rationale": "C4 is outside the required C0-C3 comparison and is not used."},
-        "created_at": CREATED_AT, "sealed_at": CREATED_AT if split == "heldout" else None,
+        "created_at": CREATED_AT, "sealed_at": None,
         "cases": cases,
     }
     condition_set = {
@@ -408,11 +415,19 @@ def main() -> int:
         write_json(conditions_path, conditions)
         outputs[split] = {"dataset_sha256": sha256(dataset_path), "conditions_sha256": sha256(conditions_path)}
 
-    seal = {"seal_id": "course-tutor-v1-seal-001", "created_at": CREATED_AT, "splits": outputs, "scenario_order": list(SCENARIOS), "development_cases": 48, "heldout_cases": 104}
-    write_json(args.output_root / "seal.json", seal)
-    ledger = {"ledger_id": "course-tutor-v1-heldout-once-001", "status": "unopened", "dataset_sha256": outputs["heldout"]["dataset_sha256"], "conditions_sha256": outputs["heldout"]["conditions_sha256"], "opened_at": None, "run_id": None, "rerun_allowed": False}
-    write_json(args.output_root / "heldout_once_ledger.json", ledger)
-    print("course-tutor-v1 build passed: 48 development and 104 sealed held-out cases")
+    review_manifest = {
+        "draft_id": "course-tutor-v1.2-review-draft-001",
+        "created_at": CREATED_AT,
+        "status": "review-required",
+        "splits": outputs,
+        "scenario_order": list(SCENARIOS),
+        "development_cases": 48,
+        "heldout_cases": 104,
+        "seal_created": False,
+        "heldout_ledger_created": False,
+    }
+    write_json(args.output_root / "review_manifest.json", review_manifest)
+    print("course-tutor-v1.2 review draft passed: 48 development and 104 held-out authoring cases; nothing sealed")
     return 0
 
 

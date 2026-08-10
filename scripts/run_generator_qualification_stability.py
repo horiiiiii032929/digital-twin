@@ -12,11 +12,11 @@ from pathlib import Path
 from scripts.run_generator_qualification import (
     GeneratorQualificationError,
     ROOT,
-    _percentile,
     build_preflight,
     execute,
     validate_assets,
 )
+from scripts.professor_fidelity_scoring import nearest_rank_percentile
 
 
 INSTRUMENT_PATH = (
@@ -78,7 +78,7 @@ async def run_stability(assets):
         "input_tokens": sum(case["usage"]["input_tokens"] for case in results),
         "output_tokens": sum(case["usage"]["output_tokens"] for case in results),
         "latency_p50_ms": statistics.median(latencies),
-        "latency_p95_ms": _percentile(latencies, 0.95),
+        "latency_p95_ms": nearest_rank_percentile(latencies, 0.95),
         "provider_revisions": sorted(
             {case["provider_revision"] for case in results if case["provider_revision"]}
         ),
