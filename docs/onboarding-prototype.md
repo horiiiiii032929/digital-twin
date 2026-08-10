@@ -3,6 +3,11 @@
 The Sprint 1 onboarding prototype now covers the full professor review loop
 described in the research artifacts while staying provider-neutral.
 
+This page preserves the scope of the Sprint 1 onboarding component. The later
+bounded student and release-publication implementation is documented in
+[student-workflow.md](student-workflow.md); it does not turn the metadata-only
+onboarding UI into production authentication, ingestion, or administration.
+
 ## Sprint 1 defaults
 
 - Local course uploads are metadata-only. The browser records file name, MIME

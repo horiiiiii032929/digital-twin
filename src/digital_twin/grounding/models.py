@@ -224,6 +224,7 @@ class GenerationUsage(BaseModel):
 class GenerationTrace(BaseModel):
     generator_id: str = Field(min_length=1)
     provider_model: str = Field(min_length=1)
+    provider_revision: str | None = None
     prompt_version: str = Field(min_length=1)
     policy_action: str = Field(min_length=1)
     latency_ms: float = Field(ge=0, allow_inf_nan=False)

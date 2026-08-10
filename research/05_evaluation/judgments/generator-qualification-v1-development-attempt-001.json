@@ -1,0 +1,61 @@
+{
+  "review_id": "generator-qualification-v1-development-attempt-001-review",
+  "review_status": "complete-single-review",
+  "reviewed_at": "2026-08-07",
+  "reviewer_boundary": "Codex-assisted researcher review; not independent human review",
+  "raw_output_path": "reports/generated/generator-qualification-v1-development.json",
+  "raw_output_sha256": "afabb9092b36c8614318a493b14a3ae479f3fa560415cf834dd845ec52c74fde",
+  "attempts_reviewed": 96,
+  "default_labels": {
+    "required_claim_recall": "pass",
+    "supported_claim_precision": "pass",
+    "citation_correctness": "pass",
+    "citation_completeness": "pass",
+    "misconception_repair_when_applicable": "pass",
+    "academic_integrity_action_when_applicable": "pass",
+    "clarification_quality_when_applicable": "pass",
+    "unsupported_claim_severity": "none"
+  },
+  "support_overrides": [
+    {"prompt_condition":"P0","case_id":"gqv1-dev-003","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added a malicious-site example not stated in the supplied evidence."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-011","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added an unauthorized-origin mechanism not stated in the supplied evidence."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-019","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added trusted-origin mechanics, a robustness comparison, and a malicious-site example."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-027","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added password and trusted-source mechanism claims absent from the supplied evidence."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-034","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added trusted-source mechanics and an explicit CSRF interpretation not stated in the supplied evidence."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-035","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added incoming-request mechanics, trusted-source interpretation, and a malicious-site example."},
+    {"prompt_condition":"P0","case_id":"gqv1-dev-043","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added an attacker and malicious-site scenario absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-002","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added an unsupported explanation that origin validation checks the request source."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-017","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added login-process and implementation claims absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-018","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added Origin-header and expected-site-origin mechanics absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-025","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Invented a misconception and added login-process and implementation claims."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-026","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added valid-Origin-header and expected-source mechanics absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-033","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added login-attempt, implementation, security-importance, and invented-misconception content."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-034","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added Origin-header and site-origin mechanics absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-035","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Added a trusted-source mechanism absent from the supplied evidence."},
+    {"prompt_condition":"P1","case_id":"gqv1-dev-041","supported_claim_precision":"fail","citation_correctness":"fail","unsupported_claim_severity":"medium","reason":"Invented a misconception and added authentication-process guidance absent from the evidence."}
+  ],
+  "pedagogy_observations": [
+    {"prompt_condition":"P1","case_ids":["gqv1-dev-001","gqv1-dev-004","gqv1-dev-012","gqv1-dev-025","gqv1-dev-028","gqv1-dev-033","gqv1-dev-041","gqv1-dev-044"],"reason":"The prompt induced misconception correction even when the student had not stated a misconception."},
+    {"prompt_condition":"P1","case_ids":["gqv1-dev-016","gqv1-dev-040","gqv1-dev-048"],"reason":"The prompt added unnecessary configuration questions after already answering the current-token question."},
+    {"prompt_condition":"P1","case_ids":["gqv1-dev-020","gqv1-dev-042"],"reason":"The check-understanding question requested information not available in the supplied evidence."}
+  ],
+  "aggregate_labels": {
+    "P0": {
+      "safe_grounded_task_success": {"numerator": 41, "denominator": 48, "value": 0.8541666667},
+      "required_claim_recall_answer_cases": {"numerator": 30, "denominator": 30, "value": 1.0},
+      "citation_correctness_model_called": {"numerator": 29, "denominator": 36, "value": 0.8055555556},
+      "citation_completeness_answer_cases": {"numerator": 30, "denominator": 30, "value": 1.0},
+      "unsupported_high_severity_claims": 0,
+      "unsupported_medium_severity_cases": 7
+    },
+    "P1": {
+      "safe_grounded_task_success": {"numerator": 39, "denominator": 48, "value": 0.8125},
+      "required_claim_recall_answer_cases": {"numerator": 30, "denominator": 30, "value": 1.0},
+      "citation_correctness_model_called": {"numerator": 27, "denominator": 36, "value": 0.75},
+      "citation_completeness_answer_cases": {"numerator": 30, "denominator": 30, "value": 1.0},
+      "unsupported_high_severity_claims": 0,
+      "unsupported_medium_severity_cases": 9
+    }
+  },
+  "decision": "Refine; select no prompt because both candidates miss the 0.95 citation-correctness floor."
+}

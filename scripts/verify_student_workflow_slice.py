@@ -7,11 +7,16 @@ import json
 import tempfile
 from pathlib import Path
 
+from src.digital_twin.onboarding import InMemorySessionRepository, create_session
 from src.digital_twin.student import (
+    ReleaseEvaluationStatus,
+    ReleaseLifecycleService,
+    PublicationError,
     SQLiteStudentRepository,
     StudentReleaseStatus,
     StudentTutoringService,
     StudentWorkflowError,
+    approved_synthetic_policy,
     seed_synthetic_student_workflow,
 )
 
@@ -93,6 +98,69 @@ async def verify_student_workflow_slice() -> dict:
             checks,
             "duplicate-request-idempotent",
             duplicate.duplicate and duplicate.tutor_message.id == turn.tutor_message.id,
+        )
+        sessions = InMemorySessionRepository()
+        onboarding = create_session("publication-session-synthetic")
+        onboarding.current_step = "professor_approval"
+        onboarding.policy = approved_synthetic_policy()
+        sessions.save(onboarding)
+        publisher = ReleaseLifecycleService(repository)
+        source_release = repository.get_release(fixture.release_a_id)
+        if source_release is None:
+            raise AssertionError("synthetic source release was not seeded")
+        draft = publisher.create_draft_from_onboarding(
+            fixture.professor_id,
+            fixture.course_a_id,
+            onboarding,
+            chunks=source_release.chunks,
+            profile_id="student-tutor",
+            profile_version="v1",
+            release_id="release-a-v2-workflow-synthetic",
+        )
+        _record(
+            checks,
+            "release-draft-created",
+            draft.status == StudentReleaseStatus.DRAFT
+            and draft.evaluation_status == ReleaseEvaluationStatus.PENDING,
+        )
+        _expect_publication_error(
+            checks,
+            "publication-evaluation-gated",
+            "evaluation_required",
+            lambda: publisher.publish(fixture.professor_id, draft.id),
+        )
+        publisher.record_evaluation(
+            fixture.professor_id, draft.id, ReleaseEvaluationStatus.PASSED
+        )
+        publisher.publish(fixture.professor_id, draft.id)
+        _record(
+            checks,
+            "release-publish-replaces-current",
+            repository.get_published_release(fixture.course_a_id).id == draft.id
+            and repository.get_release(fixture.release_a_id).status
+            == StudentReleaseStatus.WITHDRAWN,
+        )
+        await _expect_async_error(
+            checks,
+            "stale-conversation-denied-after-publish",
+            "release_unavailable",
+            service.submit_message(
+                fixture.student_a_id,
+                conversation.id,
+                content="Ask after release replacement.",
+                client_request_id="stale-after-publish",
+            ),
+        )
+        publisher.withdraw(fixture.professor_id, draft.id)
+        publisher.record_evaluation(
+            fixture.professor_id, fixture.release_a_id, ReleaseEvaluationStatus.PASSED
+        )
+        publisher.rollback(fixture.professor_id, fixture.release_a_id)
+        _record(
+            checks,
+            "release-rollback-restores-previous",
+            repository.get_published_release(fixture.course_a_id).id
+            == fixture.release_a_id,
         )
         _expect_error(
             checks,
@@ -203,7 +271,7 @@ async def verify_student_workflow_slice() -> dict:
 
     passed = sum(bool(check["passed"]) for check in checks)
     result = {
-        "verification_id": "student-workflow-slice-v1-synthetic",
+        "verification_id": "student-workflow-slice-v2-publication-synthetic",
         "status": "passed" if passed == len(checks) else "failed",
         "case_count": len(checks),
         "passed": passed,
@@ -225,6 +293,15 @@ def _expect_error(checks, name, code, operation) -> None:
     try:
         operation()
     except StudentWorkflowError as error:
+        _record(checks, name, error.code == code)
+        return
+    _record(checks, name, False)
+
+
+def _expect_publication_error(checks, name, code, operation) -> None:
+    try:
+        operation()
+    except PublicationError as error:
         _record(checks, name, error.code == code)
         return
     _record(checks, name, False)

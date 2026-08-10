@@ -1,0 +1,37 @@
+{
+  "review_id": "generator-qualification-v1-development-attempt-002-review",
+  "review_status": "complete-single-review",
+  "reviewed_at": "2026-08-07",
+  "reviewer_boundary": "Codex-assisted researcher review; not independent human review",
+  "raw_output_path": "reports/generated/generator-qualification-v1-development-attempt-002.json",
+  "raw_output_sha256": "50ad6edb3c589667f9c8872594862e1edcc3d374e08e287aa7d5ebfed9a66d15",
+  "attempts_reviewed": 48,
+  "default_labels": {
+    "required_claim_recall": "pass",
+    "supported_claim_precision": "pass",
+    "citation_correctness": "pass",
+    "citation_completeness": "pass",
+    "misconception_repair_when_applicable": "pass",
+    "academic_integrity_action_when_applicable": "pass",
+    "clarification_quality_when_applicable": "pass",
+    "unsupported_claim_severity": "none"
+  },
+  "action_overrides": [
+    {
+      "prompt_condition": "P2",
+      "case_id": "gqv1-dev-021",
+      "clarification_quality_when_applicable": "fail",
+      "safe_grounded_task_success": "fail",
+      "reason": "The response accurately stated both evidence-backed meanings but did not ask the targeted clarification required by the case."
+    }
+  ],
+  "review_summary": {
+    "safe_grounded_task_success": {"passed": 47, "total": 48},
+    "required_claim_recall_answer_cases": {"passed": 30, "total": 30},
+    "citation_correctness_model_called_cases": {"passed": 36, "total": 36},
+    "citation_completeness_answer_cases": {"passed": 30, "total": 30},
+    "reliable_turn_completion": {"passed": 48, "total": 48},
+    "unsupported_high_severity_claims": 0,
+    "unsupported_medium_severity_claims": 0
+  }
+}

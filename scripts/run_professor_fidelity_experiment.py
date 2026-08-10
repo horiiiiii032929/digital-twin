@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -22,10 +23,16 @@ DEFAULT_INSTRUMENT = (
     ROOT / "research/05_evaluation/instruments/professor_fidelity_v1.json"
 )
 COURSE_SCHEMA = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
-CONDITION_SCHEMA = (
-    ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
-)
+CONDITION_SCHEMA = ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
 EXPECTED_CONDITIONS = ("C0", "C1", "C2", "C3")
+PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
+GENERATOR_REVIEW_PATH = (
+    ROOT / "research/05_evaluation/judgments/"
+    "generator-qualification-v1-heldout-001-second-review.json"
+)
+EXPECTED_GENERATOR_ID = "litellm-deepseek-v4-flash-nonthinking-v1"
+EXPECTED_PROMPT_ID = "strict-evidence-grounded-prompt-v3"
+EXPECTED_QUALIFICATION_VERSION = "generator-qualification-v1-heldout-001"
 
 
 class ProfessorFidelityPlanError(ValueError):
@@ -120,9 +127,10 @@ def build_preflight_manifest(
     *,
     dataset_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    qualification = load_selected_generator_qualification()
     return {
         "run_type": "professor-fidelity-v1-preflight",
-        "status": "blocked-pending-generator-qualification",
+        "status": "blocked-pending-course-data-and-judge-calibration",
         "instrument_id": instrument["instrument_id"],
         "instrument_schema_version": instrument["schema_version"],
         "conditions": [
@@ -134,15 +142,93 @@ def build_preflight_manifest(
             for condition in instrument["conditions"]
         ],
         "dataset": dataset_summary,
-        "generator_binding": instrument["generator_binding"],
+        "prospective_generator_binding_requirement": instrument[
+            "generator_binding"
+        ],
+        "generator_binding": qualification["generator"],
+        "prompt_binding": qualification["prompt"],
+        "generator_qualification": qualification["qualification"],
         "code_revision": _code_revision(),
         "working_tree_dirty": _working_tree_dirty(),
         "private_text_emitted": False,
         "execution_enabled": False,
         "blocked_reasons": [
-            "exact generator and prompt binding is not qualified",
-            "sealed execution adapter is not bound",
+            "course-tutor-v1 development and held-out splits are incomplete",
+            "judge calibration is incomplete",
+            "sealed professor-fidelity execution remains intentionally disabled",
         ],
+    }
+
+
+def load_selected_generator_qualification() -> dict[str, Any]:
+    profile = load_json(PROFILE_PATH)
+    review = load_json(GENERATOR_REVIEW_PATH)
+    components = {
+        component.get("component"): component
+        for component in profile.get("components", [])
+    }
+    generator = components.get("generator", {})
+    prompt = components.get("prompt", {})
+    generator_implementation = generator.get("implementation", {})
+    prompt_implementation = prompt.get("implementation", {})
+    if generator.get("status") != "selected" or (
+        generator_implementation.get("implementation_id") != EXPECTED_GENERATOR_ID
+        or generator_implementation.get("version") != EXPECTED_QUALIFICATION_VERSION
+    ):
+        raise ProfessorFidelityPlanError(
+            "experimental profile has no exact qualified generator selection"
+        )
+    if prompt.get("status") != "selected" or (
+        prompt_implementation.get("implementation_id") != EXPECTED_PROMPT_ID
+        or prompt_implementation.get("version") != EXPECTED_QUALIFICATION_VERSION
+    ):
+        raise ProfessorFidelityPlanError(
+            "experimental profile has no exact qualified prompt selection"
+        )
+    summary = review.get("summary", {})
+    if review.get("review_status") != "complete" or (
+        summary.get("cases_passed") != 20 or summary.get("cases_failed") != 0
+    ):
+        raise ProfessorFidelityPlanError(
+            "generator qualification second review is incomplete"
+        )
+    configuration = generator_implementation.get("configuration", {})
+    required_configuration = {
+        "provider_model",
+        "provider_revision",
+        "thinking",
+        "temperature",
+        "max_output_tokens",
+        "timeout_seconds",
+        "max_attempts",
+        "data_boundary",
+    }
+    if not required_configuration.issubset(configuration):
+        raise ProfessorFidelityPlanError(
+            "qualified generator configuration is incomplete"
+        )
+    return {
+        "generator": {
+            **generator_implementation,
+            "control": generator.get("control"),
+        },
+        "prompt": {
+            **prompt_implementation,
+            "control": prompt.get("control"),
+        },
+        "qualification": {
+            "result_id": EXPECTED_QUALIFICATION_VERSION,
+            "status": "qualified-selected",
+            "decision": "keep",
+            "candidate_binding": EXPECTED_GENERATOR_ID,
+            "prompt_binding": EXPECTED_PROMPT_ID,
+            "credential_environment_variable": "DEEPSEEK_API_KEY",
+            "credential_present": bool(os.environ.get("DEEPSEEK_API_KEY", "").strip()),
+            "credential_value_emitted": False,
+            "heldout_execution_completed": True,
+            "rerun_allowed": False,
+            "second_review": review["decision"],
+        },
     }
 
 

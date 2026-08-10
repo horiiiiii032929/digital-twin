@@ -24,8 +24,15 @@ class MembershipRole(StrEnum):
 
 
 class StudentReleaseStatus(StrEnum):
+    DRAFT = "draft"
     PUBLISHED = "published"
     WITHDRAWN = "withdrawn"
+
+
+class ReleaseEvaluationStatus(StrEnum):
+    PENDING = "pending"
+    PASSED = "passed"
+    FAILED = "failed"
 
 
 class Account(BaseModel):
@@ -56,6 +63,7 @@ class DigitalTwinRelease(BaseModel):
     policy: TutorPolicy
     chunks: list[DocumentChunk]
     status: StudentReleaseStatus = StudentReleaseStatus.PUBLISHED
+    evaluation_status: ReleaseEvaluationStatus = ReleaseEvaluationStatus.PENDING
     created_at: str = Field(default_factory=timestamp_now)
 
 

@@ -18,6 +18,7 @@ async def test_litellm_adapter_records_usage_cost_and_keeps_credentials_external
         captured.update(kwargs)
         return {
             "model": "provider/model-v1",
+            "system_fingerprint": "fp-synthetic-v1",
             "choices": [{"message": {"content": '{"answer":"ok"}'}}],
             "usage": {
                 "prompt_tokens": 12,
@@ -38,6 +39,7 @@ async def test_litellm_adapter_records_usage_cost_and_keeps_credentials_external
     )
 
     assert response.provider_model == "provider/model-v1"
+    assert response.provider_revision == "fp-synthetic-v1"
     assert response.usage.total_tokens == 15
     assert response.usage.approximate_cost_usd == 0.002
     assert captured["metadata"] == {"task": "grounded_tutor_answer"}
@@ -64,6 +66,43 @@ async def test_litellm_adapter_requests_json_mode_only_when_configured():
     await client.chat([LlmMessage(role="user", content="test")], task="test")
 
     assert captured["response_format"] == {"type": "json_object"}
+
+
+@pytest.mark.asyncio
+async def test_litellm_adapter_passes_frozen_provider_options_without_credentials():
+    captured = {}
+
+    async def completion(**kwargs):
+        captured.update(kwargs)
+        return {
+            "model": "deepseek-v4-flash",
+            "system_fingerprint": "fp-v4-flash-synthetic",
+            "choices": [{"message": {"content": '{"answer":"ok"}'}}],
+        }
+
+    client = LiteLlmClient(
+        "deepseek/deepseek-v4-flash",
+        response_format={"type": "json_object"},
+        provider_options={"extra_body": {"thinking": {"type": "disabled"}}},
+        completion=completion,
+    )
+
+    response = await client.chat(
+        [LlmMessage(role="user", content="synthetic")],
+        task="generator_qualification",
+    )
+
+    assert captured["extra_body"] == {"thinking": {"type": "disabled"}}
+    assert "api_key" not in captured
+    assert response.provider_revision == "fp-v4-flash-synthetic"
+
+
+def test_litellm_adapter_rejects_provider_option_credential_override():
+    with pytest.raises(ValueError, match="protected fields"):
+        LiteLlmClient(
+            "deepseek/deepseek-v4-flash",
+            provider_options={"api_key": "must-not-be-accepted"},
+        )
 
 
 @pytest.mark.asyncio

@@ -1,4 +1,5 @@
 from collections.abc import Awaitable, Callable
+from copy import deepcopy
 from typing import Any
 
 import litellm
@@ -29,6 +30,7 @@ class LiteLlmClient:
         timeout_seconds: float = 30,
         max_output_tokens: int = 600,
         response_format: dict[str, str] | None = None,
+        provider_options: dict[str, Any] | None = None,
         completion: _Completion = litellm.acompletion,
         cost_calculator: _CostCalculator = litellm.completion_cost,
     ) -> None:
@@ -42,6 +44,22 @@ class LiteLlmClient:
         self.timeout_seconds = timeout_seconds
         self.max_output_tokens = max_output_tokens
         self.response_format = response_format
+        self.provider_options = deepcopy(provider_options or {})
+        forbidden_options = {
+            "api_key",
+            "messages",
+            "metadata",
+            "model",
+            "timeout",
+            "max_tokens",
+            "response_format",
+        }
+        overlap = forbidden_options.intersection(self.provider_options)
+        if overlap:
+            raise ValueError(
+                "provider_options cannot override protected fields: "
+                + ", ".join(sorted(overlap))
+            )
         self.completion = completion
         self.cost_calculator = cost_calculator
 
@@ -59,6 +77,7 @@ class LiteLlmClient:
             }
             if self.response_format is not None:
                 completion_arguments["response_format"] = self.response_format
+            completion_arguments.update(deepcopy(self.provider_options))
             response = await self.completion(
                 **completion_arguments,
             )
@@ -99,6 +118,9 @@ class LiteLlmClient:
             return LlmResponse(
                 content=content,
                 provider_model=str(_field(response, "model", self.model) or self.model),
+                provider_revision=_optional_string(
+                    _field(response, "system_fingerprint", None)
+                ),
                 usage=GenerationUsage(
                     input_tokens=input_tokens,
                     output_tokens=output_tokens,
@@ -122,3 +144,10 @@ def _field(value: Any, name: str, default: Any) -> Any:
     if isinstance(value, dict):
         return value.get(name, default)
     return getattr(value, name, default)
+
+
+def _optional_string(value: Any) -> str | None:
+    if value is None:
+        return None
+    rendered = str(value).strip()
+    return rendered or None

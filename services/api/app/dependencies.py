@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends, Header, HTTPException, Request, status
 
 from src.digital_twin.onboarding import SessionRepository
-from src.digital_twin.student import StudentTutoringService
+from src.digital_twin.student import ReleaseLifecycleService, StudentTutoringService
 
 
 def get_session_repository(request: Request) -> SessionRepository:
@@ -20,7 +20,11 @@ def get_student_service(request: Request) -> StudentTutoringService:
     return request.app.state.student_service
 
 
-def get_student_account_id(
+def get_publication_service(request: Request) -> ReleaseLifecycleService:
+    return request.app.state.publication_service
+
+
+def get_synthetic_account_id(
     account_id: Annotated[str | None, Header(alias="X-Account-ID")] = None,
 ) -> str:
     if account_id is None or not account_id.strip():
@@ -38,4 +42,9 @@ StudentServiceDependency = Annotated[
     StudentTutoringService,
     Depends(get_student_service),
 ]
-StudentAccountDependency = Annotated[str, Depends(get_student_account_id)]
+StudentAccountDependency = Annotated[str, Depends(get_synthetic_account_id)]
+ProfessorAccountDependency = Annotated[str, Depends(get_synthetic_account_id)]
+PublicationServiceDependency = Annotated[
+    ReleaseLifecycleService,
+    Depends(get_publication_service),
+]

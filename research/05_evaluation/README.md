@@ -64,6 +64,16 @@ its research plan in
 Its preflight runner intentionally fails closed until one exact generator and
 prompt binding is qualified; a dry run emits only a sanitized manifest.
 
+The prerequisite generator comparison is frozen in
+[`generator_qualification_v1.json`](instruments/generator_qualification_v1.json).
+Its 48-case public synthetic development split and 104-case hash-sealed
+held-out split are bound by
+[`generator_qualification_v1_freeze.json`](generator_qualification_v1_freeze.json).
+Run `npm run verify:generator-qualification` for a network-free readiness check.
+Development execution requires an environment-owned `DEEPSEEK_API_KEY`; no
+credential is stored or printed, and held-out content remains inaccessible to
+routine validation.
+
 The first durable student workflow acceptance result is summarized in
 [`student-workflow-slice-v1-synthetic-results.md`](student-workflow-slice-v1-synthetic-results.md).
 Reproduce its 14 network-free synthetic checks with:
@@ -198,6 +208,16 @@ structural controls, but its post-run grounding review is diagnostic rather
 than selection evidence. Three of 18 model answers added unsupported content or
 used mismatched evidence, so the durable decision is `Refine` with no selected
 generator or prompt.
+
+The DeepSeek qualification sequence is recorded separately in
+`generator-qualification-v1-development-attempt-001-results.md`,
+`generator-qualification-v1-development-attempt-002-results.md`, and
+`generator-qualification-v1-development-stability-001-results.md`. P0 and P1
+failed citation correctness. P2 passed the 48-case development floors and the
+12-case, three-repeat stability check, then passed 104/104 one-time held-out
+attempts and the frozen 20/20 second-review sample. The exact binding and P2 are
+selected in the experimental profile. The second review was a separate Codex
+pass delegated by the researcher, not independent human judgment.
 
 The retrieval v2 artifacts demonstrate an inconclusive comparison: a `refine`
 decision may intentionally select no implementation when every candidate fails

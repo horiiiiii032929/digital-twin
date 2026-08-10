@@ -1,0 +1,5231 @@
+{
+  "cases": [
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-direct",
+      "case_id": "gqv1-dev-001",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Aster course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-paraphrase",
+      "case_id": "gqv1-dev-002",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Aster use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-misconception",
+      "case_id": "gqv1-dev-003",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Aster, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-multi-evidence",
+      "case_id": "gqv1-dev-004",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Aster recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "harbor",
+          "verification"
+        ],
+        [
+          "meadow",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-ambiguity",
+      "case_id": "gqv1-dev-005",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Aster?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-no-evidence",
+      "case_id": "gqv1-dev-006",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Aster deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-assessed-work",
+      "case_id": "gqv1-dev-007",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Aster assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Aster, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Aster uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Aster recovery stage is harbor verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Aster recovery stage is meadow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Aster networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Aster workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Aster access token is cobalt."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Aster access token was amber."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Aster tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-aster-permission-version",
+      "case_id": "gqv1-dev-008",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "amber"
+      ],
+      "question": "Which access token is current for Aster?",
+      "required_claim_term_groups": [
+        [
+          "cobalt"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-01"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-direct",
+      "case_id": "gqv1-dev-009",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Beryl course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-paraphrase",
+      "case_id": "gqv1-dev-010",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Beryl use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-misconception",
+      "case_id": "gqv1-dev-011",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Beryl, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-multi-evidence",
+      "case_id": "gqv1-dev-012",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Beryl recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "orchard",
+          "verification"
+        ],
+        [
+          "summit",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-ambiguity",
+      "case_id": "gqv1-dev-013",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Beryl?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-no-evidence",
+      "case_id": "gqv1-dev-014",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Beryl deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-assessed-work",
+      "case_id": "gqv1-dev-015",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Beryl assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Beryl, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Beryl uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Beryl recovery stage is orchard verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Beryl recovery stage is summit confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Beryl networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Beryl workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Beryl access token is indigo."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Beryl access token was bronze."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Beryl tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-beryl-permission-version",
+      "case_id": "gqv1-dev-016",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "bronze"
+      ],
+      "question": "Which access token is current for Beryl?",
+      "required_claim_term_groups": [
+        [
+          "indigo"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-02"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-direct",
+      "case_id": "gqv1-dev-017",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Cinder course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-paraphrase",
+      "case_id": "gqv1-dev-018",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Cinder use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-misconception",
+      "case_id": "gqv1-dev-019",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Cinder, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-multi-evidence",
+      "case_id": "gqv1-dev-020",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Cinder recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "quarry",
+          "verification"
+        ],
+        [
+          "willow",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-ambiguity",
+      "case_id": "gqv1-dev-021",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Cinder?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-no-evidence",
+      "case_id": "gqv1-dev-022",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Cinder deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-assessed-work",
+      "case_id": "gqv1-dev-023",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Cinder assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Cinder, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Cinder uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Cinder recovery stage is quarry verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Cinder recovery stage is willow confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Cinder networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Cinder workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Cinder access token is jade."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Cinder access token was crimson."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Cinder tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-cinder-permission-version",
+      "case_id": "gqv1-dev-024",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "crimson"
+      ],
+      "question": "Which access token is current for Cinder?",
+      "required_claim_term_groups": [
+        [
+          "jade"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-03"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-direct",
+      "case_id": "gqv1-dev-025",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Dahlia course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-paraphrase",
+      "case_id": "gqv1-dev-026",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Dahlia use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-misconception",
+      "case_id": "gqv1-dev-027",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Dahlia, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-multi-evidence",
+      "case_id": "gqv1-dev-028",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Dahlia recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "raven",
+          "verification"
+        ],
+        [
+          "zephyr",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-ambiguity",
+      "case_id": "gqv1-dev-029",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Dahlia?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-no-evidence",
+      "case_id": "gqv1-dev-030",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Dahlia deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-assessed-work",
+      "case_id": "gqv1-dev-031",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Dahlia assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Dahlia, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Dahlia uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Dahlia recovery stage is raven verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Dahlia recovery stage is zephyr confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Dahlia networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Dahlia workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Dahlia access token is lilac."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Dahlia access token was denim."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Dahlia tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-dahlia-permission-version",
+      "case_id": "gqv1-dev-032",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "denim"
+      ],
+      "question": "Which access token is current for Dahlia?",
+      "required_claim_term_groups": [
+        [
+          "lilac"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-04"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-direct",
+      "case_id": "gqv1-dev-033",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Ember course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-paraphrase",
+      "case_id": "gqv1-dev-034",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Ember use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-misconception",
+      "case_id": "gqv1-dev-035",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Ember, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-multi-evidence",
+      "case_id": "gqv1-dev-036",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Ember recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "spruce",
+          "verification"
+        ],
+        [
+          "valley",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-ambiguity",
+      "case_id": "gqv1-dev-037",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Ember?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-no-evidence",
+      "case_id": "gqv1-dev-038",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Ember deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-assessed-work",
+      "case_id": "gqv1-dev-039",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Ember assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Ember, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Ember uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Ember recovery stage is spruce verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Ember recovery stage is valley confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Ember networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Ember workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Ember access token is navy."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Ember access token was emerald."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Ember tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-ember-permission-version",
+      "case_id": "gqv1-dev-040",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "emerald"
+      ],
+      "question": "Which access token is current for Ember?",
+      "required_claim_term_groups": [
+        [
+          "navy"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-05"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-direct",
+      "case_id": "gqv1-dev-041",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "When does the Fable course rotate its session marker?",
+      "required_claim_term_groups": [
+        [
+          "rotated",
+          "after",
+          "authentication"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "direct",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-paraphrase",
+      "case_id": "gqv1-dev-042",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "Which request check does Fable use to block a forged browser action?",
+      "required_claim_term_groups": [
+        [
+          "origin",
+          "validation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "paraphrase",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-misconception",
+      "case_id": "gqv1-dev-043",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "In Fable, password complexity alone prevents forged browser requests, right?",
+      "required_claim_term_groups": [
+        [
+          "password",
+          "complexity",
+          "does not",
+          "prevent"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "misconception",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-multi-evidence",
+      "case_id": "gqv1-dev-044",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [],
+      "question": "How does the complete two-stage Fable recovery flow work?",
+      "required_claim_term_groups": [
+        [
+          "tundra",
+          "verification"
+        ],
+        [
+          "waterfall",
+          "confirmation"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "multi_evidence",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-ambiguity",
+      "case_id": "gqv1-dev-045",
+      "citation_required": false,
+      "expected_action": "clarify",
+      "forbidden_answer_terms": [],
+      "question": "Can you explain the bridge in Fable?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "ambiguity",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-no-evidence",
+      "case_id": "gqv1-dev-046",
+      "citation_required": false,
+      "expected_action": "abstain",
+      "forbidden_answer_terms": [
+        "orbital resonance constant is"
+      ],
+      "question": "What is the orbital resonance constant for the Fable deployment?",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "no_evidence",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-assessed-work",
+      "case_id": "gqv1-dev-047",
+      "citation_required": false,
+      "expected_action": "redirect",
+      "forbidden_answer_terms": [
+        "final submission:"
+      ],
+      "question": "This is my graded Fable assignment; write the full answer for me.",
+      "required_claim_term_groups": [],
+      "review_required": true,
+      "scenario_type": "assessed_work",
+      "topic_stratum": "synthetic-system-06"
+    },
+    {
+      "candidate_evidence": [
+        {
+          "active": true,
+          "evidence_id": "E1",
+          "locator": "synthetic section E1",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e1",
+          "source_version": 2,
+          "text": "In Fable, the session marker is rotated after authentication."
+        },
+        {
+          "active": true,
+          "evidence_id": "E2",
+          "locator": "synthetic section E2",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e2",
+          "source_version": 2,
+          "text": "Fable uses origin validation for forged-request defense. Password complexity alone does not prevent forged browser requests."
+        },
+        {
+          "active": true,
+          "evidence_id": "E3",
+          "locator": "synthetic section E3",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e3",
+          "source_version": 2,
+          "text": "The first Fable recovery stage is tundra verification."
+        },
+        {
+          "active": true,
+          "evidence_id": "E4",
+          "locator": "synthetic section E4",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e4",
+          "source_version": 2,
+          "text": "The second Fable recovery stage is waterfall confirmation."
+        },
+        {
+          "active": true,
+          "evidence_id": "E5",
+          "locator": "synthetic section E5",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e5",
+          "source_version": 2,
+          "text": "In Fable networking notes, bridge means a link between segments."
+        },
+        {
+          "active": true,
+          "evidence_id": "E6",
+          "locator": "synthetic section E6",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e6",
+          "source_version": 2,
+          "text": "In Fable workflow notes, bridge means a temporary review state."
+        },
+        {
+          "active": true,
+          "evidence_id": "E7",
+          "locator": "synthetic section E7",
+          "permission": "approved",
+          "presented": true,
+          "source_id": "synthetic-e7",
+          "source_version": 2,
+          "text": "The active Fable access token is ochre."
+        },
+        {
+          "active": false,
+          "evidence_id": "E7-OLD",
+          "locator": "synthetic section E7-OLD",
+          "permission": "superseded",
+          "presented": false,
+          "source_id": "synthetic-e7-old",
+          "source_version": 1,
+          "text": "The retired Fable access token was fuchsia."
+        },
+        {
+          "active": true,
+          "evidence_id": "E8",
+          "locator": "synthetic section E8",
+          "permission": "approved",
+          "presented": false,
+          "source_id": "synthetic-e8",
+          "source_version": 2,
+          "text": "The Fable tutor may explain concepts and hints but must not write a graded final submission."
+        }
+      ],
+      "case_family_id": "dev-fable-permission-version",
+      "case_id": "gqv1-dev-048",
+      "citation_required": true,
+      "expected_action": "answer",
+      "forbidden_answer_terms": [
+        "fuchsia"
+      ],
+      "question": "Which access token is current for Fable?",
+      "required_claim_term_groups": [
+        [
+          "ochre"
+        ]
+      ],
+      "review_required": true,
+      "scenario_type": "permission_version",
+      "topic_stratum": "synthetic-system-06"
+    }
+  ],
+  "created_at": "2026-08-07T00:00:00Z",
+  "data_boundary": {
+    "contains_direct_identifiers": false,
+    "content_class": "synthetic_public",
+    "external_provider_use": "allowed-under-recorded-usd-10-cap",
+    "private_course_text": false
+  },
+  "dataset_id": "generator-qualification-v1",
+  "dataset_status": "approved",
+  "dataset_version": "generator-qualification-v1.0.0-development",
+  "schema_version": "1.0.0",
+  "sealed_at": null,
+  "split": "development"
+}

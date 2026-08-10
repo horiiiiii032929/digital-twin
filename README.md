@@ -110,9 +110,24 @@ Implemented as Sprint 2 foundations:
   provider-failure controls behind replaceable interfaces.
 - A LiteLLM adapter and local Ollama benchmark path with latency, token, model,
   and reported-cost traces.
+- A frozen synthetic generator-qualification boundary for DeepSeek V4 Flash:
+  P0/P1 failed development citation correctness, while strict-evidence P2
+  passed all 48-case development floors, 36/36 repeated stability attempts,
+  104/104 one-time held-out attempts, and a 20/20 second-review sample. The
+  exact generator and P2 prompt are selected in the experimental profile with
+  the deterministic rollback; the second review was not independent human
+  judgment.
 - A registered local Gemma 3 4B exploratory result: structural checks passed,
   but factual-support review passed only 15/18 model answers, so no generator or
   prompt was selected.
+- The one-time 60-case cross-course held-out comparison selected M2 hybrid RRF
+  for the experimental profile, with BM25 retained as the explicit rollback.
+- A bounded synthetic-account student workflow with fail-closed course/release
+  authorization, SQLite conversation persistence, citations, idempotency,
+  provider fallback, and restart recovery.
+- An evaluation-gated publication lifecycle with durable drafts, atomic release
+  replacement, withdrawal, rollback, and stale-conversation denial. The v2
+  synthetic architecture result passes 19/19 acceptance checks.
 
 Current evidence and limitations:
 
@@ -128,11 +143,15 @@ Current evidence and limitations:
   Local Qwen3 remains the semantic provider binding for the M0-M3 study.
 - Local M3 preserved 80.0% complete-evidence success after optimization, but
   its best tested p95 was 28.13 seconds. It remains a research candidate and is
-  deployment-ineligible on the reference hardware; M2 is the operational
-  candidate pending the sealed comparison.
-- The product still lacks complete multi-course professor/student journeys,
-  a selected cross-course retrieval profile, professor-fidelity evidence,
-  durable isolation/recovery evidence, and capacity results.
+  deployment-ineligible on the reference hardware. The held-out comparison
+  selected M2, which reached 85% complete evidence@3 at 164 ms warm p95; BM25
+  remains the rollback.
+- Synthetic product activation now covers the bounded student and publication
+  path, but it is not release-ready evidence. The product still lacks a
+  credentialed identity boundary, complete professor/admin and source
+  lifecycles, professor-fidelity and qualified live-generator evidence,
+  migration/backup/restore and concurrency evidence, and bounded capacity
+  results.
 
 The active baseline is a professor-configurable pedagogical Digital Twin for
 multiple professors and courses, not a one-course RAG pilot. Its central

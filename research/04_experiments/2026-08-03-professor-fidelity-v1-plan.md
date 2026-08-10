@@ -6,6 +6,22 @@ Run status: frozen preflight; no sealed tutor output has been generated.
 
 Instrument: [`professor_fidelity_v1.json`](../05_evaluation/instruments/professor_fidelity_v1.json)
 
+## Status amendment — 2026-08-07
+
+The selected M2/BM25 product boundary, citations, course isolation, and
+provider-failure fallback now pass the bounded synthetic student workflow. The
+prospective generator qualification ran on official DeepSeek V4 Flash in
+non-thinking JSON mode. Direct P0 and conservative P1 failed citation
+correctness. Strict-evidence P2 passed every 48-case development floor, all 36
+stability attempts, and all 104 attempts in the authorized one-time synthetic
+held-out run. Its complete first review and frozen 20-case second review passed.
+The exact generator and P2 prompt are selected in the experimental profile;
+the second pass was Codex-delegated rather than independent human judgment.
+
+The private `course-tutor-v1` development and held-out sets and judge
+calibration remain incomplete.
+No sealed professor-fidelity tutor output has been generated.
+
 ## Decision question
 
 With question, course scope, generator, decoding, output schema, and evidence
@@ -149,11 +165,9 @@ missing provider or private dataset as a successful experiment.
 
 ## Known blockers before the sealed run
 
-1. Qualify and freeze one exact generator/prompt binding under the existing
-   provider and privacy boundary.
-2. Complete M2 product activation and verify BM25 fallback, citations, and
-   course isolation.
-3. Complete anchor judge calibration and development-only runtime checks.
-4. Confirm the private course-tutor dataset and condition split hashes.
-5. Run the sealed comparison once and register the result before changing the
+1. Bind the qualified generator and P2 prompt into the sealed execution adapter.
+2. Complete anchor judge calibration and development-only runtime checks.
+3. Complete and confirm the private course-tutor development and held-out
+   dataset and condition hashes.
+4. Run the sealed comparison once and register the result before changing the
    profile.

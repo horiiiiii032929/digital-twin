@@ -16,9 +16,14 @@ from src.digital_twin.student.models import (
     DigitalTwinRelease,
     MembershipRole,
     Message,
+    ReleaseEvaluationStatus,
     StudentCourse,
     StudentReleaseStatus,
     TutorTurn,
+)
+from src.digital_twin.student.publication import (
+    PublicationError,
+    ReleaseLifecycleService,
 )
 from src.digital_twin.student.repository import SQLiteStudentRepository, StudentRepository
 from src.digital_twin.student.service import StudentTutoringService, StudentWorkflowError
@@ -37,6 +42,9 @@ __all__ = [
     "DigitalTwinRelease",
     "MembershipRole",
     "Message",
+    "PublicationError",
+    "ReleaseLifecycleService",
+    "ReleaseEvaluationStatus",
     "SQLiteStudentRepository",
     "StudentCourse",
     "StudentReleaseStatus",

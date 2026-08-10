@@ -1,5 +1,7 @@
 from pydantic import BaseModel, Field
 
+from src.digital_twin.grounding.models import DocumentChunk
+from src.digital_twin.student.models import ReleaseEvaluationStatus
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     PreviewDecisionValue,
@@ -57,3 +59,15 @@ class CustomPreviewRequest(BaseModel):
 class StudentMessageRequest(BaseModel):
     content: str = Field(min_length=1)
     request_id: str = Field(min_length=1, max_length=128)
+
+
+class ReleaseCreateRequest(BaseModel):
+    session_id: str = Field(min_length=1)
+    profile_id: str = Field(min_length=1)
+    profile_version: str = Field(min_length=1)
+    chunks: list[DocumentChunk] = Field(default_factory=list)
+    release_id: str | None = Field(default=None, min_length=1)
+
+
+class ReleaseEvaluationRequest(BaseModel):
+    status: ReleaseEvaluationStatus
