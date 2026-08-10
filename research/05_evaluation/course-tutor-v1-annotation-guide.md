@@ -2,9 +2,13 @@
 
 Date: 2026-07-23
 
-Status: case schema candidate v1.1 and condition schema candidate v1.0 for
-professor-anchor review; private draft cases may be authored locally, but no
-case is approved for tutoring or evaluation
+Status: case schema v1.1 and condition schema v1.0; exact-passage dataset v1.2
+review drafts built locally; no v1.2 case is approved or sealed
+
+The historical v1.1 split is invalid for selection because its review metadata
+overstated mechanical/Codex checks. The v1.2 workflow records the deterministic
+builder as author, requires a complete non-Codex human authoring review of all
+cases, and creates an immutable seal only after every checklist item passes.
 
 ## Purpose
 

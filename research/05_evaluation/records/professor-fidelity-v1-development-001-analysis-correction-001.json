@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "run_id": "professor-fidelity-v1-development-001-analysis-correction-001",
+  "component": "tutor-policy",
+  "dataset_id": "course-tutor-v1.1.0-development",
+  "corpus_id": "it5002-lectures-v1",
+  "code_revision": "3c61f563c15439f26fb4a801438510d0e38227b7",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "c0-generic-no-evidence",
+        "version": "professor-fidelity-v1-analysis-correction-001",
+        "configuration": {
+          "evidence": "none",
+          "policy": "generic",
+          "source_run_id": "professor-fidelity-v1-development-001"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "development-deterministic-structural-success-diagnostic", "value": 0.125, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-action-accuracy-diagnostic", "value": 0.7291666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-citation-source-page-correctness-diagnostic", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-claim-source-coverage-diagnostic", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-source-page-evidence-at-3-proxy", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-exact-complete-evidence-at-3-diagnostic", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "dataset-human-authoring-review", "passed": false, "evidence": "v1.1 mechanical and Codex-assisted checks were mislabeled as double review."},
+        {"name": "selected-retriever-and-chunker-identity", "passed": true, "evidence": "Not applicable to C0, which intentionally has no retrieval."},
+        {"name": "condition-policy-prompt-binding", "passed": false, "evidence": "The condition hash and shared policy/prompt hash were not recorded; C2/C3 received case gold labels."},
+        {"name": "zero-deterministic-hard-gate-failures", "passed": false, "evidence": "6/48 C0 cases passed the deterministic structural boundary."},
+        {"name": "semantic-support-resolved", "passed": false, "evidence": "No eligible condition-blinded semantic review is bound to the run."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "No eligible condition-blinded pedagogy review is bound to the run."},
+        {"name": "heldout-isolation", "passed": true, "evidence": "The course-tutor held-out ledger remains unopened."},
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C0 attempts completed; 192/192 overall."}
+      ],
+      "failures_by_category": {"evaluation-design": 1, "deterministic-structural": 42}
+    },
+    {
+      "implementation": {
+        "implementation_id": "c1-oracle-generic-policy",
+        "version": "professor-fidelity-v1-analysis-correction-001",
+        "configuration": {
+          "evidence": "oracle",
+          "policy": "generic",
+          "source_run_id": "professor-fidelity-v1-development-001"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-deterministic-structural-success-diagnostic", "value": 0.7291666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-action-accuracy-diagnostic", "value": 0.8333333333333334, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-citation-source-page-correctness-diagnostic", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "development-claim-source-coverage-diagnostic", "value": 0.8333333333333334, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-source-page-evidence-at-3-proxy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-exact-complete-evidence-at-3-diagnostic", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "dataset-human-authoring-review", "passed": false, "evidence": "v1.1 had no independent human authoring review."},
+        {"name": "selected-retriever-and-chunker-identity", "passed": true, "evidence": "Not applicable to C1, which used authored oracle evidence."},
+        {"name": "condition-policy-prompt-binding", "passed": false, "evidence": "The condition hash and shared policy/prompt hash were not recorded."},
+        {"name": "zero-deterministic-hard-gate-failures", "passed": false, "evidence": "35/48 C1 cases passed the deterministic structural boundary."},
+        {"name": "semantic-support-resolved", "passed": false, "evidence": "Twenty-five structurally passing answers require blinded semantic review."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "No eligible condition-blinded pedagogy review is bound to the run."},
+        {"name": "heldout-isolation", "passed": true, "evidence": "The course-tutor held-out ledger remains unopened."},
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C1 attempts completed."}
+      ],
+      "failures_by_category": {"evaluation-design": 1, "deterministic-structural": 13, "semantic-review-pending": 25}
+    },
+    {
+      "implementation": {
+        "implementation_id": "c2-oracle-professor-policy",
+        "version": "professor-fidelity-v1-analysis-correction-001",
+        "configuration": {
+          "evidence": "oracle",
+          "policy": "structured-professor-policy-v1-with-case-label-leakage",
+          "source_run_id": "professor-fidelity-v1-development-001"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-deterministic-structural-success-diagnostic", "value": 0.9166666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-action-accuracy-diagnostic", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-citation-source-page-correctness-diagnostic", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "development-claim-source-coverage-diagnostic", "value": 0.8666666666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-source-page-evidence-at-3-proxy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-exact-complete-evidence-at-3-diagnostic", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "dataset-human-authoring-review", "passed": false, "evidence": "v1.1 had no independent human authoring review."},
+        {"name": "selected-retriever-and-chunker-identity", "passed": true, "evidence": "Not applicable to C2, which used authored oracle evidence."},
+        {"name": "condition-policy-prompt-binding", "passed": false, "evidence": "C2 received the case's expected action and tutoring moves; policy effects are contaminated."},
+        {"name": "zero-deterministic-hard-gate-failures", "passed": false, "evidence": "44/48 C2 cases passed the deterministic structural boundary."},
+        {"name": "semantic-support-resolved", "passed": false, "evidence": "Twenty-six structurally passing answers require blinded semantic review."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "No eligible condition-blinded pedagogy review is bound to the run."},
+        {"name": "heldout-isolation", "passed": true, "evidence": "The course-tutor held-out ledger remains unopened."},
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C2 attempts completed."}
+      ],
+      "failures_by_category": {"evaluation-design": 1, "label-leakage": 48, "deterministic-structural": 4, "semantic-review-pending": 26}
+    },
+    {
+      "implementation": {
+        "implementation_id": "c3-m2-professor-policy",
+        "version": "professor-fidelity-v1-analysis-correction-001",
+        "configuration": {
+          "evidence": "unbound-ad-hoc-text-chunks-not-selected-m2-corpus",
+          "policy": "structured-professor-policy-v1-with-case-label-leakage",
+          "generator": "deepseek-v4-flash-nonthinking",
+          "source_run_id": "professor-fidelity-v1-development-001"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-deterministic-structural-success-diagnostic", "value": 0.4791666666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-action-accuracy-diagnostic", "value": 0.9791666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "development-citation-source-page-correctness-diagnostic", "value": 0.43333333333333335, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-claim-source-coverage-diagnostic", "value": 0.6333333333333333, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-source-page-evidence-at-3-proxy", "value": 0.6333333333333333, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-exact-complete-evidence-at-3-diagnostic", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "dataset-human-authoring-review", "passed": false, "evidence": "v1.1 had no independent human authoring review."},
+        {"name": "selected-retriever-and-chunker-identity", "passed": false, "evidence": "C3 used ad hoc pdftotext character windows and recorded no selected chunker/corpus binding."},
+        {"name": "condition-policy-prompt-binding", "passed": false, "evidence": "The condition hash was omitted and C3 received case gold labels."},
+        {"name": "zero-deterministic-hard-gate-failures", "passed": false, "evidence": "23/48 C3 cases passed every deterministic hard gate; 25 failed at least one."},
+        {"name": "semantic-support-resolved", "passed": false, "evidence": "Eleven structurally passing answers require blinded semantic review."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "The earlier judge contract drifted and has no eligible blinded reference."},
+        {"name": "heldout-isolation", "passed": true, "evidence": "The course-tutor held-out ledger remains unopened."},
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C3 attempts completed; 192/192 overall."}
+      ],
+      "failures_by_category": {
+        "evaluation-design": 1,
+        "candidate-binding": 48,
+        "label-leakage": 48,
+        "citation-source-or-page": 17,
+        "claim-source-coverage": 11,
+        "exact-passage-retrieval": 30,
+        "policy": 1,
+        "semantic-review-pending": 11
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "The source run completed reliably but is invalid for selection. Its dataset lacked independent human authoring review, C2/C3 prompts leaked case gold labels, C3 did not use or bind the selected chunker corpus, and the condition/policy/prompt identities were incomplete. Preserve the outputs as diagnostic evidence, keep held-out unopened, create a human-reviewed exact-passage v1.2 seal, and rerun development with the corrected v2 boundary.",
+    "limitations": [
+      "This is a corrected audit of preserved development outputs, not a new tutor run.",
+      "No C0-C3 policy or retrieval contrast is selection eligible.",
+      "Safe-grounded success, semantic citation completeness, reviewed context sufficiency, and pedagogy remain unresolved.",
+      "Citation source/page correctness and claim-source coverage do not prove semantic entailment.",
+      "The private v1.1 cases were synthetic transformations with no independent human authoring review.",
+      "The authorized provider uses disk context caching and provides no project-specific no-training guarantee.",
+      "The 104-case one-time course-tutor held-out split remains unopened."
+    ]
+  }
+}

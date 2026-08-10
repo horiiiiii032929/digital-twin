@@ -149,7 +149,7 @@ Current evidence and limitations:
 - Synthetic product activation now covers the bounded student and publication
   path, but it is not release-ready evidence. The product still lacks a
   credentialed identity boundary, complete professor/admin and source
-  lifecycles, professor-fidelity and qualified live-generator evidence,
+  lifecycles, valid professor-fidelity and end-to-end evidence,
   migration/backup/restore and concurrency evidence, and bounded capacity
   results.
 

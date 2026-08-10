@@ -23,11 +23,11 @@ remains immutable historical evidence.
 | Embedding | Local Qwen3 binding qualified on development data; Jina retired before hosted execution | Selected for the M2 experimental profile | Runtime activation and provider-failure fallback pass the synthetic R3 slice; qualify end-to-end provider capacity |
 | Retriever | M2 hybrid BM25 plus Qwen3 dense RRF selected on the 60-case held-out result; BM25 v1 retained as rollback | Selected / Keep experimentally | Synthetic product activation, citation checks, and fallback pass; retain for R2/R3 evaluation |
 | Reranker | Local Qwen3 M3 leads development quality but failed the latency gate at depth 40 and 20; Jina is not required | Research candidate / deployment-ineligible | Retain M3 in the sealed comparison; carry M2 as the operational candidate |
-| Evidence action | C3 development complete evidence@3 was 77.1%; multi-evidence succeeded in only 1/6 cases | Refine / held-out unopened | Improve multi-evidence retrieval and pass the 80% development floor before held-out |
-| Generator | DeepSeek V4 Flash non-thinking with strict-evidence P2; P0/P1 failed development citation correctness; P2 passed development, 36/36 stability, 104/104 one-time held-out, and 20/20 second-review sample checks; deterministic rollback retained | Selected / Keep experimentally | Bind into professor-fidelity execution; retain synthetic-only evidence scope and disclose that second review was not independent human judgment |
-| Professor profile/policy | Structured professor policy v1 improved conservative C2 over C1 by 16.7 points in development, but automated pedagogy is unresolved | Selected foundation / Refine | Obtain genuinely blinded anchor review; do not claim professor fidelity |
+| Evidence action | Historical C3 had 19/30 source/page evidence coverage but 0/30 exact selected-passage matches because its chunker/corpus drifted | Invalid for selection / held-out unopened | Use the exact selected chunks in the human-reviewed v1.2 seal and rerun development |
+| Generator | DeepSeek V4 Flash non-thinking with strict-evidence P2; P0/P1 failed development citation correctness; P2 passed development, 36/36 stability, 104/104 one-time held-out, and 20/20 second-review sample checks; deterministic rollback retained | Selected / Keep experimentally | Retain the qualified generator binding; separately evaluate the hash-frozen professor-fidelity integration prompt on reviewed data |
+| Professor profile/policy | The historical C2/C3 prompts leaked case expected actions and cannot estimate a policy effect; semantic fidelity and pedagogy remain unresolved | Selected requirements foundation / Evaluation invalid | Use the shared hash-frozen policy with no case labels and rerun after human authoring review |
 | Policy enforcement | C0-C3 development completed; C3 action accuracy was 97.9% with one assessed-work failure | Refine | Add the assessed-work regression and rerun development before held-out |
-| Citation validation | C1-C3 achieved 100% citation-ID validity in development; semantic claim expression remains confounded by exact-phrase scoring | Implemented foundation / Refine | Replace and validate claim-support scoring before confirmatory evaluation |
+| Citation validation | Historical C1-C3 achieved 100% citation-ID validity, but C3 source/page correctness was 13/30; semantic alignment and true citation completeness remain unresolved | Implemented structural boundary / Refine | Record exact passage hashes and complete blinded semantic/citation review before confirmatory evaluation |
 | Conversation state | SQLite-backed course/release-scoped turns, idempotent request IDs, and restart reload pass synthetic acceptance | Implemented R3 foundation / Refine | Migration, backup/restore, concurrency, and capacity evidence |
 | Evaluation-before-publication | Durable draft, evaluation gate, atomic publication replacement, withdrawal, rollback, and stale-conversation denial pass the 19-check synthetic v2 slice | Implemented R3 foundation / Refine | Connect frozen R2 evaluation evidence and complete migration, recovery, and concurrency qualification |
 | Audit/operations | Durable redacted lifecycle, denial, fallback, and recovery events pass content-exclusion checks | Implemented foundation / Refine | Health, backup/restore, bounded capacity, and operator visibility |
@@ -65,8 +65,9 @@ and invalid results are part of the evidence, not cleanup candidates.
 5. #8 now provides the bounded synthetic student journey and
    evaluation-before-publication lifecycle; credentialed identity, complete
    professor/source administration, and operational qualification remain.
-6. #24 qualifies professor fidelity, tutoring policy, generation, and citation
-   behaviour with generator/evidence controlled.
+6. #24 produced a reliable provider trace but no valid professor-fidelity
+   comparison: dataset review, condition/policy bindings, C3 candidate identity,
+   citation semantics, and pedagogy all fail closed.
 7. #10 and #25 run calibrated pedagogical, simulated, and end-to-end
    evaluation.
 8. #9 validates isolation, failure, recovery, capacity, and packaging.

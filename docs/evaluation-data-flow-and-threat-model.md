@@ -26,8 +26,8 @@ The protected assets are:
 | Class | Examples | Default location | External provider | Git |
 | --- | --- | --- | --- | --- |
 | Public synthetic | Synthetic web-security corpus, public schemas, synthetic examples | Repository/workstation | Allowed within the approved USD 10 qualification cap | Allowed |
-| Private course | Lecture PDFs, extracted text/passages, professor policy, course-specific cases | Ignored local data and approved private staging storage | Prohibited until separately approved | Prohibited |
-| Derived sensitive | Tutor responses containing course content, simulator trajectories, judge inputs, per-case traces | Ignored local output or approved private staging storage | Same restriction as private course data | Prohibited |
+| Private course | Lecture PDFs, extracted text/passages, professor policy, course-specific cases | Ignored local data and approved private staging storage | Only the governed issue #24 tutor exception; otherwise prohibited | Prohibited |
+| Derived sensitive | Tutor responses containing course content, simulator trajectories, judge inputs, per-case traces | Ignored local output or approved private staging storage | Tutor outputs only under the same exception; judges/simulators remain local | Prohibited |
 | Sealed research | Final labels, state cards, prompts, assignments, outputs before freeze | Access-controlled local storage | Only after protocol and provider approval | Prohibited until sanitized |
 | Sanitized evidence | Aggregate metrics, redacted failures, hashes, configuration IDs, result summaries | Repository | Not applicable | Allowed after manual disclosure review |
 | Secret | API keys, session secrets, database URLs, signing keys | Environment/secret store | Only to the service that owns the secret | Prohibited |
@@ -57,7 +57,7 @@ flowchart LR
     end
 
     subgraph E["TB3 — External model provider"]
-        X["Synthetic-only DeepSeek qualification"]
+        X["Governed DeepSeek generator path"]
     end
 
     subgraph GH["TB4 — GitHub/public evidence"]
@@ -79,8 +79,8 @@ flowchart LR
     W --> O
     W -. "approved private course path only" .-> T
 
-    G -. "prohibited without separate approval" .-> X
-    P -. "prohibited" .-> X
+    G -. "approved issue #24 tutor fields only" .-> X
+    P -. "eligible lecture passages only" .-> X
     R -->|"sanitize and disclosure-review"| M
     O -->|"aggregate/redact"| M
 ```
@@ -116,6 +116,11 @@ Only public schemas, synthetic examples, hashes, configuration identifiers,
 sanitized aggregates, redacted representative failures, decision records, and
 plots may be committed. Manual disclosure review occurs before staging logs or
 model outputs are summarized.
+
+Condition-blinded review packets, response templates, and hidden condition
+mappings remain ignored private artifacts. The reviewer must not open the
+mapping until every judgment is complete and the finalizer has validated the
+packet.
 
 ## Role separation
 
@@ -194,9 +199,10 @@ course-specific staging or provider use.
 The current evaluation proceeds with these frozen assumptions:
 
 1. All 13 official lecture PDFs may be used for local research evaluation.
-2. Course-specific tutor, simulator, and judge processing remains local.
-3. No real-student data, human-participant claim, or external course-content
-   processing is permitted.
+2. Course-specific simulators and judges remain local. The external tutor is
+   limited to the recorded issue #24 exception and eligible lecture passages.
+3. No real-student data, human-participant claim, or external processing beyond
+   that exact governed tutor boundary is permitted.
 4. The researcher-authored anchor is authoritative for the experiment. Any
    later professor review is reported as an optional expert-validity check.
 5. Private course-derived outputs remain local through final grading and are

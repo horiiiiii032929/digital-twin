@@ -7,6 +7,7 @@ import argparse
 import copy
 import hashlib
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +25,15 @@ MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
 CASE_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
 CONDITION_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
+REQUIRED_REVIEW_CHECKS = (
+    "question_authentic_and_synthetic",
+    "expected_behavior_correct",
+    "claims_atomic_and_correct",
+    "evidence_supports_claims",
+    "permission_and_version_correct",
+    "split_assignment_acceptable",
+)
+EXPECTED_REVIEW_ID = "course-tutor-v1.2-authoring-review-001"
 
 
 def sha256(path: Path) -> str:
@@ -45,24 +55,41 @@ def _review_decisions(
     expected_case_ids: set[str],
 ) -> dict[str, dict[str, Any]]:
     reviewer = review.get("reviewer", {})
+    reviewed_at = review.get("reviewed_at")
+    try:
+        parsed_reviewed_at = datetime.fromisoformat(reviewed_at)
+    except (TypeError, ValueError):
+        parsed_reviewed_at = None
     if not all(
         (
+            review.get("review_id") == EXPECTED_REVIEW_ID,
             review.get("status") == "complete",
+            parsed_reviewed_at is not None
+            and parsed_reviewed_at.tzinfo is not None,
             reviewer.get("human_review") is True,
             reviewer.get("codex_assisted") is False,
             reviewer.get("role") in {"researcher", "professor"},
             isinstance(reviewer.get("reviewer_id"), str),
-            bool(reviewer.get("reviewer_id")),
+            bool(reviewer.get("reviewer_id", "").strip()),
         )
     ):
-        raise ValueError("a completed, non-Codex human review is required")
-    decisions = {
-        item["case_id"]: item
-        for item in review.get("splits", {}).get(split, {}).get("case_decisions", [])
-    }
+        raise ValueError(
+            "the exact completed, timestamped, non-Codex human review is required"
+        )
+    decision_rows = (
+        review.get("splits", {}).get(split, {}).get("case_decisions", [])
+    )
+    decisions = {item["case_id"]: item for item in decision_rows}
+    if len(decisions) != len(decision_rows):
+        raise ValueError(f"{split} review contains duplicate case decisions")
     if set(decisions) != expected_case_ids:
         raise ValueError(f"{split} review must cover every case exactly once")
-    if any(item.get("decision") != "approve" for item in decisions.values()):
+    if any(
+        item.get("decision") != "approve"
+        or any(item.get(check) is not True for check in REQUIRED_REVIEW_CHECKS)
+        or not isinstance(item.get("notes"), str)
+        for item in decisions.values()
+    ):
         raise ValueError(f"{split} contains unapproved review decisions")
     return decisions
 
@@ -74,6 +101,8 @@ def seal_splits(
 ) -> dict[str, Any]:
     review_manifest = load_json(input_root / "review_manifest.json")
     review = load_json(review_path)
+    if review.get("draft_hashes") != review_manifest.get("splits"):
+        raise ValueError("authoring review is not bound to the exact review draft")
     manifest = load_json(MANIFEST_PATH)
     case_schema = load_json(CASE_SCHEMA_PATH)
     condition_schema = load_json(CONDITION_SCHEMA_PATH)

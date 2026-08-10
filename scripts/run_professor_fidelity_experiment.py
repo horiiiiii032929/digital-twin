@@ -1,8 +1,8 @@
-"""Validate and preflight the frozen professor-fidelity experiment.
+"""Validate the frozen professor-fidelity plan and emit a sanitized manifest.
 
-This command deliberately prepares a sanitized run manifest only. Decision-
-bearing execution remains blocked until an exact generator/runtime adapter and
-the private course-tutor split are explicitly bound.
+This module never executes a provider call. The separate v2 execution adapter
+performs its own fail-closed checks for the reviewed dataset, conditions,
+retrieval/chunker, policy/prompt, credential, and output boundary.
 """
 
 from __future__ import annotations
@@ -16,9 +16,11 @@ from pathlib import Path
 from typing import Any
 
 import jsonschema
+from dotenv import load_dotenv
 
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env", override=False)
 DEFAULT_INSTRUMENT = (
     ROOT / "research/05_evaluation/instruments/professor_fidelity_v1.json"
 )
@@ -124,9 +126,14 @@ def build_preflight_manifest(
     dataset_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     qualification = load_selected_generator_qualification()
+    missing_dataset = dataset_summary is None
     return {
         "run_type": "professor-fidelity-v1-preflight",
-        "status": "blocked-pending-judge-calibration-and-execution",
+        "status": (
+            "validation-only-pending-reviewed-v2-dataset"
+            if missing_dataset
+            else "validation-only-dataset-bound"
+        ),
         "instrument_id": instrument["instrument_id"],
         "instrument_schema_version": instrument["schema_version"],
         "conditions": [
@@ -148,10 +155,11 @@ def build_preflight_manifest(
         "working_tree_dirty": _working_tree_dirty(),
         "private_text_emitted": False,
         "execution_enabled": False,
-        "blocked_reasons": [
-            "judge calibration is incomplete",
-            "sealed professor-fidelity execution remains intentionally disabled",
+        "selection_blockers": [
+            *(("reviewed v2 dataset is not supplied",) if missing_dataset else ()),
+            "condition-blinded semantic and pedagogy review is required before selection",
         ],
+        "execution_command": "python -m scripts.execute_professor_fidelity",
     }
 
 

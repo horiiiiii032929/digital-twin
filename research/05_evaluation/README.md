@@ -57,12 +57,21 @@ npm run verify:evaluation-instruments
 This is structural readiness, not evidence that a judge is calibrated or a
 simulated trajectory is valid.
 
-The next professor-fidelity comparison is frozen in
+The professor-fidelity comparison is frozen in
 [`professor_fidelity_v1.json`](instruments/professor_fidelity_v1.json), with
 its research plan in
 [`2026-08-03-professor-fidelity-v1-plan.md`](../04_experiments/2026-08-03-professor-fidelity-v1-plan.md).
-Its preflight runner intentionally fails closed until one exact generator and
-prompt binding is qualified; a dry run emits only a sanitized manifest.
+The first development source run completed 192/192 provider attempts but is
+invalid for selection. Its registered correction documents dataset-review,
+gold-label leakage, candidate-identity, condition-binding, citation, and judge
+defects. Do not cite its C0-C3 effects as professor-fidelity evidence.
+
+The repaired workflow builds exact selected-chunk v1.2 review drafts, creates
+no seal or held-out ledger until a non-Codex human approves every case, freezes
+a shared policy/integration prompt by hash, and records exact passage identity
+in future runs. The ignored v1.2 draft currently contains 48 development and
+104 held-out authoring cases and is awaiting human review; held-out execution
+remains unopened.
 
 The prerequisite generator comparison is frozen in
 [`generator_qualification_v1.json`](instruments/generator_qualification_v1.json).
@@ -196,6 +205,22 @@ uv run python scripts/validate_course_tutor_dataset.py --expected-cases 12
 This checks both JSON Schemas plus IDs, claim-evidence links, corpus and topic
 identity, passage hashes, candidate/presented evidence partitions, permission
 filters, condition-specific claim sets, and fault contracts.
+
+The current professor-fidelity repair commands are:
+
+```bash
+npm run build:course-tutor-splits
+npm run prepare:course-tutor-authoring-review
+npm run seal:course-tutor-splits -- --review <ignored-human-review.json>
+npm run analyze:professor-fidelity-development
+```
+
+The builder is review-only and refuses to overwrite its output. The review
+preparer creates ignored private development and held-out packets plus a
+hash-bound checklist template. The sealer requires a complete non-Codex human
+review for all 152 authoring cases, writes an immutable v2 seal, and creates a
+new unopened held-out ledger. The analysis command audits the preserved v1
+result without provider calls or held-out content access.
 
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer

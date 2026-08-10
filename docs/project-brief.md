@@ -70,9 +70,12 @@ experimental profile and retained BM25 as rollback. The first durable synthetic
 student slice now connects that profile to course authorization, published
 releases, persisted turns, citations, fallback, withdrawal, and restart checks.
 Generator/prompt qualification is complete, while the first 48-case
-professor-policy comparison ended in `Refine`: C3 missed safe-grounded and
-complete-evidence floors, automated pedagogy was ineligible, and the one-time
-held-out split remains unopened. Next comes scoring, multi-evidence retrieval,
-assessed-work, and blinded-anchor repair, alongside broader professor/student,
+professor-policy run is invalid for selection. Its outputs are preserved, but
+the audit found missing human authoring review, case-gold leakage, a drifted C3
+chunking corpus, and missing condition/policy bindings. C3 had 13/30
+source/page citation correctness and 0/30 exact selected-passage matches;
+semantic grounding, citation completeness, and pedagogy remain unresolved.
+The one-time held-out split remains unopened. Next comes human review of the
+exact-passage v1.2 draft, then a corrected development rerun, alongside broader professor/student,
 recovery, and capacity evidence. The
 authoritative baseline is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).

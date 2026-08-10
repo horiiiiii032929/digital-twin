@@ -27,15 +27,20 @@ policy, student interaction state, and evaluation-before-publication.
   19-check v2 architecture slice.
 - The exact DeepSeek V4 Flash/P2 generator boundary is qualified and selected
   with a deterministic rollback. Professor-fidelity C0-C3 development is
-  complete with a `Refine` decision: C3 missed the 80% safe-grounded and
-  complete-evidence floors, pedagogy is unresolved, and held-out remains
-  unopened. Credentialed identity, complete professor/source
+  preserved only as an operational trace and is invalid for selection. The
+  correction records missing human authoring review, case-gold leakage, a
+  drifted C3 chunking corpus, missing condition/policy bindings, 13/30
+  source/page citation correctness, and 0/30 exact selected-passage matches.
+  Safe grounding, citation completeness, and pedagogy remain unresolved;
+  held-out remains unopened.
+  Credentialed identity, complete professor/source
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The immediate R2 work is to replace exact-phrase claim scoring, improve
-multi-evidence retrieval, add the assessed-work regression, and obtain a
-genuinely blinded anchor review before considering held-out. In parallel,
+The immediate R2 work is to approve the exact-passage v1.2 cases through a
+non-Codex human authoring review, create the immutable v2 seal, and run the
+corrected hash-bound development comparison before any held-out decision.
+In parallel,
 harden the R3 foundation with
 credentialed identity, migration, backup/restore, concurrency, recovery, and
 bounded-capacity evidence. Do not reopen the text benchmark for visual claims

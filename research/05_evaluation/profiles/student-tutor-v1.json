@@ -150,7 +150,7 @@
         "qwen3-reranked-hybrid-v1",
         "bm25-v1"
       ],
-      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Synthetic product activation, citation lineage, course isolation, and provider-failure fallback pass the registered student workflow v1/v2 architecture slices; live-generator and bounded-capacity qualification remain open. This profile does not make image-only claims."
+      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Synthetic product activation, citation lineage, course isolation, and provider-failure fallback pass the registered student workflow v1/v2 architecture slices. The historical professor-fidelity C3 run did not use the selected chunker corpus and supplies no additional retrieval evidence. Bounded-capacity qualification remains open. This profile does not make image-only claims."
     },
     {
       "component": "reranker",
@@ -224,7 +224,7 @@
         "ollama-gemma3-4b",
         "litellm-deepseek-v4-flash-nonthinking-v1"
       ],
-      "notes": "The exact DeepSeek V4 Flash non-thinking binding is selected for the experimental profile after P2 passed development, stability, the non-rerunnable 104-case synthetic held-out run, full first review, and a 20-case second Codex review. The review was not independent human judgment. Synthetic-public-only remains the evaluated external-data boundary; broader private-course use still depends on the professor-fidelity and publication controls. The deterministic generator remains the rollback."
+      "notes": "The exact DeepSeek V4 Flash non-thinking binding is selected for the experimental profile after P2 passed development, stability, the non-rerunnable 104-case synthetic held-out run, full first review, and a 20-case second Codex review. The review was not independent human judgment. The authorized private-course source run demonstrated 192/192 provider completion but was invalid for quality selection because its dataset, prompt, policy, and retriever bindings drifted. The deterministic generator remains the rollback."
     },
     {
       "component": "prompt",
@@ -262,7 +262,7 @@
         "guided-grounded-prompt",
         "strict-evidence-grounded-prompt-v3"
       ],
-      "notes": "Strict-evidence P2/v3 is selected after P0 and P1 failed development citation correctness and P2 passed development, stability, and one-time held-out review. It minimizes unsupported elaboration and retains direct v1 as the control."
+      "notes": "Strict-evidence P2/v3 is selected after P0 and P1 failed development citation correctness and P2 passed development, stability, and one-time held-out review. The professor-fidelity action-schema integration prompt is a separate hash-frozen development binding and is not selected yet. Direct v1 remains the control."
     },
     {
       "component": "tutor-policy",
@@ -277,7 +277,8 @@
       "decision": "keep",
       "evidence_paths": [
         "docs/onboarding-prototype.md",
-        "research/02_requirements/chat-led-tutor-policy-extraction.md"
+        "research/02_requirements/chat-led-tutor-policy-extraction.md",
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
       ],
       "hard_gates": [
         "professor-approval",
@@ -287,7 +288,7 @@
       "candidate_ids": [
         "versioned-professor-policy-v2"
       ],
-      "notes": "The structured policy is selected; live enforcement quality remains a separate pending component."
+      "notes": "The structured policy remains a requirements-selected foundation. The historical C2/C3 comparison leaked case gold labels and cannot estimate its effect; live enforcement quality remains pending."
     },
     {
       "component": "policy-enforcement",
@@ -301,7 +302,10 @@
         "deterministic-policy-rules",
         "model-assisted-policy-check"
       ],
-      "notes": "Deterministic rules pass the synthetic preflight but remain unselected until adversarial and live-path evidence is recorded."
+      "evidence_paths": [
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
+      ],
+      "notes": "The historical live path had one assessed-work action failure, but its case-label leakage invalidates condition-level policy evidence. Deterministic rules remain unselected until a corrected adversarial and live-path run is recorded."
     },
     {
       "component": "citation-validation",
@@ -314,7 +318,10 @@
       "candidate_ids": [
         "deterministic-citation-validator"
       ],
-      "notes": "The deterministic validator is implemented; live malformed-output evidence is still required before selection."
+      "evidence_paths": [
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
+      ],
+      "notes": "The deterministic validator is implemented. Historical citation IDs were structurally valid, but C3 source/page correctness was 13/30 and semantic completeness is unresolved; corrected live malformed-output and semantic evidence are required before selection."
     },
     {
       "component": "conversation-orchestration",

@@ -1,5 +1,16 @@
 # Professor-fidelity v1 development result
 
+Status: **Invalid for selection; raw run preserved.** This historical result
+used the wrong complete-evidence denominator, conflated citation-ID validity
+with citation correctness/completeness, relied on ineligible lexical and judge
+implementations, omitted required bindings, used a different chunking corpus
+than the selected M2 profile, and leaked case gold labels into C2/C3 prompts.
+It is superseded by
+[`professor-fidelity-v1-development-001-analysis-correction-001`](professor-fidelity-v1-development-001-analysis-correction-001-results.md).
+
+The original `Refine` direction and unopened held-out decision remain, but the
+percentages below must not be cited as valid selection evidence.
+
 ## Answer first
 
 Decision: **Refine; do not open held-out and do not claim professor fidelity.**

@@ -65,8 +65,11 @@
   ],
   "decision": {
     "outcome": "refine",
-    "rationale": "C3 improved materially over C0 and remained within four points of oracle-policy C2, but failed the 80% safe-grounded and complete-evidence floors, had one assessed-work failure, and has unresolved pedagogy. Preserve held-out and refine scoring, multi-evidence retrieval, and blinded calibration.",
+    "rationale": "INVALID HISTORICAL RESULT FOR SELECTION: preserved for traceability and superseded by professor-fidelity-v1-development-001-analysis-correction-001. In addition to invalid metric interpretation, the dataset lacked independent human review, C2/C3 leaked case gold labels, C3 used an unbound drifted chunking corpus, and required condition/policy/prompt bindings were absent.",
     "limitations": [
+      "This machine record is invalid for selection and is superseded by professor-fidelity-v1-development-001-analysis-correction-001.",
+      "C2/C3 prompts included expected actions and tutoring moves from each case's gold rubric.",
+      "C3 did not use or bind the selected page-bounded chunker corpus, and the run omitted the condition-set and shared-policy hashes.",
       "Exact-phrase required-claim recall produced known paraphrase false negatives.",
       "Automated pedagogy is unresolved because no genuinely blinded researcher reference passed the frozen calibration boundary.",
       "The private cases are synthetic transformations and do not establish student learning or professor equivalence.",

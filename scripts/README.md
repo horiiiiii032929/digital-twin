@@ -200,23 +200,30 @@ Current utilities:
   verify:professor-fidelity-plan`.
 - `build_course_tutor_splits.py`: deterministically builds and validates an
   ignored 48-case development plus 104-case held-out **review draft** from
-  source-bound research cases. It labels the draft honestly, refuses to
-  overwrite prior artifacts, and creates neither a seal nor a held-out ledger;
-  run `npm run build:course-tutor-splits`.
+  source-bound research cases. It preserves the exact selected
+  heading/paragraph chunk IDs and content hashes, labels the draft honestly,
+  refuses to overwrite prior artifacts, and creates neither a seal nor a
+  held-out ledger; run `npm run build:course-tutor-splits`.
 - `seal_course_tutor_splits.py`: validates explicit non-Codex human authoring
   decisions for every draft case, then writes a new immutable sealed directory
   and unopened held-out ledger with exclusive-create semantics. It cannot reset
   or overwrite an earlier ledger; run `npm run seal:course-tutor-splits --
   --review <ignored-review.json>` only after review is complete.
+- `prepare_course_tutor_authoring_review.py`: renders private development and
+  held-out authoring packets plus a hash-bound per-case review template. Every
+  case requires six explicit checks before approval; run `npm run
+  prepare:course-tutor-authoring-review` and do not inspect model outputs during
+  held-out authoring review.
 - `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
   and review ledger after exact passage and policy inspection; the ledger
   explicitly records Codex-assisted researcher review and keeps professor and
   independent-human review false; run `npm run seal:course-tutor-anchor`.
 - `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
-  Flash tutor and selected local M2 retrieval, checkpoints each case, records
-  timeout/unavailable/malformed responses as bounded failures in the
-  unconditional denominator, enforces the provider fingerprint and cost stops,
-  and opens held-out only with the explicit one-time command.
+  Flash tutor and selected local M2 retrieval. It requires the selected chunker
+  corpus, exact passage hashes, condition-set hash, and shared policy/prompt
+  hash; never places case gold labels in prompts; checkpoints each case;
+  records provider failures in the unconditional denominator; and transitions
+  the held-out ledger before parsing held-out content.
 - `professor_fidelity_scoring.py`: separates citation-ID validity,
   source-and-locator correctness, claim-level citation coverage, eligible-case
   retrieval completeness, structural success, and unresolved semantic review.
@@ -233,14 +240,16 @@ Current utilities:
   `finalize_professor_fidelity_blinded_review.py`: create an ignored private
   condition-blinded packet/template, keep the condition mapping separate during
   review, and validate the completed normalized review before it may resolve
-  semantic or pedagogical metrics. Prepare the current anchor packet with `npm
-  run prepare:professor-fidelity-anchor-review`.
+  semantic, citation, evidence-sufficiency, or pedagogical metrics. Prepare the
+  current anchor packet with `npm run
+  prepare:professor-fidelity-anchor-review`.
 - `analyze_professor_fidelity.py`: ignores embedded legacy scores, rescoring
   preserved outputs from the hash-matched dataset and retrieved source metadata.
   It uses the frozen eligible denominator, computes citation and completion
-  gates explicitly, supports eligible blinded review, and leaves safe-grounded
-  and pedagogy results unresolved otherwise. Run the current correction with
-  `npm run analyze:professor-fidelity-development`.
+  gates explicitly, audits dataset and candidate bindings, supports eligible
+  blinded review, and leaves semantic outcomes unresolved otherwise. Run the
+  current invalid-for-selection correction with `npm run
+  analyze:professor-fidelity-development`.
 - `build_generator_qualification_dataset.py`: deterministically builds the
   public synthetic 48-case development and 104-case sealed held-out generator
   qualification splits plus their hash-bound freeze manifest.

@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import random
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,8 @@ DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v1/anchor/result.json"
 DEFAULT_DATASET = ROOT / "data/processed/course_tutor_v1/sealed_v1/anchor.json"
 DEFAULT_OUTPUT = ROOT / "reports/generated/professor-fidelity-anchor-blinded-review-v2"
 CONDITIONS = ("C0", "C1", "C2", "C3")
+PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"
+MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -48,6 +51,35 @@ def _mapping(case_id: str) -> dict[str, str]:
     return dict(zip(("A", "B", "C", "D"), conditions, strict=True))
 
 
+def _legacy_chunk_texts() -> dict[str, str]:
+    """Reconstruct only the context shown in the invalid historical run."""
+
+    manifest = load_json(MANIFEST_PATH)
+    chunks: dict[str, str] = {}
+    for document in manifest["documents"]:
+        completed = subprocess.run(
+            ["pdftotext", "-layout", str(PDF_ROOT / document["filename"]), "-"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        for page_number, raw_page in enumerate(completed.stdout.split("\f"), start=1):
+            page = " ".join(raw_page.split())
+            if not page:
+                continue
+            start = 0
+            while start < len(page):
+                value = page[start : start + 1200]
+                identity = hashlib.sha256(
+                    f"{document['document_id']}\x1f{page_number}\x1f{start}\x1f{value}".encode()
+                ).hexdigest()[:24]
+                chunks[f"chunk-{identity}"] = value
+                if start + 1200 >= len(page):
+                    break
+                start += 1040
+    return chunks
+
+
 def prepare_packet(
     run_path: Path,
     dataset_path: Path,
@@ -64,6 +96,7 @@ def prepare_packet(
     if set(rows) != set(cases):
         raise ValueError("run and dataset case IDs do not match")
     chunks = {chunk.id: chunk.text for chunk in _load_course_chunks()}
+    chunks.update(_legacy_chunk_texts())
     for case in dataset["cases"]:
         for evidence in case["ground_truth"]["evidence_units"]:
             if evidence["permission_status"] != "approved":
@@ -81,6 +114,8 @@ def prepare_packet(
     template_records = []
     packet = [
         "# Professor-fidelity blinded review packet",
+        "",
+        "Purpose: calibrate semantic, citation, context-sufficiency, and pedagogy judgments on preserved historical outputs. This packet cannot make the invalid source run selection-eligible.",
         "",
         "Do not open `mapping.json` while reviewing. Conditions, model names, and provider names are intentionally hidden.",
         "",

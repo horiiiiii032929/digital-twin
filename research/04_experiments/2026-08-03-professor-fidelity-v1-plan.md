@@ -2,7 +2,9 @@
 
 Date: 2026-08-03
 
-Run status: frozen preflight; no sealed tutor output has been generated.
+Run status: first development source run invalid for selection; corrected v2
+boundary implemented; v1.2 authoring draft awaiting human review; held-out
+unopened.
 
 Instrument: [`professor_fidelity_v1.json`](../05_evaluation/instruments/professor_fidelity_v1.json)
 
@@ -21,6 +23,32 @@ the second pass was Codex-delegated rather than independent human judgment.
 The private `course-tutor-v1` development and held-out sets and judge
 calibration remain incomplete.
 No sealed professor-fidelity tutor output has been generated.
+
+## Status amendment — 2026-08-10
+
+The first private C0-C3 development source run completed 192/192 provider
+attempts, but its result is invalid for selection. The audit found:
+
+1. the v1.1 cases had no independent human authoring review;
+2. C2/C3 prompts contained case expected actions and tutoring moves;
+3. C3 used ad hoc text windows rather than the selected page-bounded chunker;
+4. exact passage IDs, the condition-set hash, and a shared policy/prompt hash
+   were not recorded; and
+5. citation completeness, semantic grounding, and judge contracts were
+   misinterpreted or unresolved.
+
+The correction is registered as
+`professor-fidelity-v1-development-001-analysis-correction-001`. It preserves
+the outputs, makes no profile change, and keeps held-out unopened.
+
+The v2 implementation removes case gold labels, binds one shared policy and
+integration prompt by hash, uses the selected chunker corpus, records exact
+passage hashes and the condition hash, fails provider errors into the
+unconditional denominator, and prevents held-out parsing before the one-time
+ledger transition. A 48-case development plus 104-case held-out v1.2 authoring
+draft was built successfully with exact selected-chunk evidence. It created no
+seal and no held-out ledger; a completed non-Codex human authoring review is
+required next.
 
 ## Decision question
 
@@ -150,24 +178,26 @@ held-out dataset and its condition file:
 
 ```bash
 uv run python scripts/run_professor_fidelity_experiment.py \
-  --dataset data/processed/course_tutor_v1/development.json \
-  --conditions data/processed/course_tutor_v1/conditions/development.json \
+  --dataset data/processed/course_tutor_v1/sealed_v2/development.json \
+  --conditions data/processed/course_tutor_v1/sealed_v2/development_conditions.json \
   --split development \
   --dry-run \
   --output reports/generated/professor-fidelity-v1-preflight.json
 ```
 
-The execution adapter is intentionally not enabled by this preflight. It must
-receive an exact qualified generator binding, selected/rollback retriever,
-judge calibration state, and a one-time held-out confirmation before producing
-decision-bearing output. The runner fails closed rather than treating a
-missing provider or private dataset as a successful experiment.
+The manifest command is validation-only. The separate execution adapter now
+fails closed unless the exact generator, selected retriever/chunker, frozen
+policy/prompt, reviewed v2 dataset, condition hash, credential, and output
+boundary are present. Development output may be generated before judge
+calibration, but it cannot become decision evidence until eligible blinded
+semantic and pedagogical review is bound.
 
-## Known blockers before the sealed run
+## Known blockers before a corrected development run
 
-1. Bind the qualified generator and P2 prompt into the sealed execution adapter.
-2. Complete anchor judge calibration and development-only runtime checks.
-3. Complete and confirm the private course-tutor development and held-out
-   dataset and condition hashes.
-4. Run the sealed comparison once and register the result before changing the
-   profile.
+1. Human-review every exact-passage v1.2 authoring case without Codex assistance.
+2. Create the immutable v2 development/held-out seal and unopened ledger.
+3. Run corrected development once with the hash-bound v2 adapter.
+4. Complete condition-blinded semantic, citation, and pedagogy review and judge
+   calibration.
+5. Register a valid development result and pass every prospective floor before
+   considering the one-time held-out opening.

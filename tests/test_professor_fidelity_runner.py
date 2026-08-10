@@ -18,6 +18,10 @@ from scripts.run_professor_fidelity_experiment import (
     build_preflight_manifest,
     load_instrument,
 )
+from scripts.seal_course_tutor_splits import (
+    REQUIRED_REVIEW_CHECKS,
+    _review_decisions,
+)
 
 
 def _case(case_id: str, *, scenario: str = "direct") -> dict:
@@ -116,8 +120,10 @@ def test_professor_fidelity_preflight_manifest_excludes_private_text():
     assert manifest["execution_enabled"] is False
     assert manifest["private_text_emitted"] is False
     assert manifest["dataset"] is None
-    assert manifest["blocked_reasons"]
-    assert not any("course-tutor-v1" in reason for reason in manifest["blocked_reasons"])
+    assert manifest["selection_blockers"]
+    assert not any(
+        "course-tutor-v1" in reason for reason in manifest["selection_blockers"]
+    )
     assert manifest["generator_qualification"]["status"] == "qualified-selected"
     assert manifest["generator_qualification"]["candidate_binding"] == (
         "litellm-deepseek-v4-flash-nonthinking-v1"
@@ -435,3 +441,37 @@ def test_course_tutor_builder_does_not_claim_human_double_review(monkeypatch):
 
     assert case["annotation"]["status"] == "draft"
     assert case["annotation"]["professor_decision"] == "pending"
+
+
+def test_course_tutor_seal_requires_every_human_review_check():
+    decision = {
+        "case_id": "case-1",
+        **{check: True for check in REQUIRED_REVIEW_CHECKS},
+        "decision": "approve",
+        "notes": "",
+    }
+    review = {
+        "review_id": "course-tutor-v1.2-authoring-review-001",
+        "status": "complete",
+        "reviewed_at": "2026-08-10T12:00:00+00:00",
+        "reviewer": {
+            "reviewer_id": "researcher-1",
+            "role": "researcher",
+            "human_review": True,
+            "codex_assisted": False,
+        },
+        "splits": {"development": {"case_decisions": [decision]}},
+    }
+
+    assert _review_decisions(review, "development", {"case-1"}) == {
+        "case-1": decision
+    }
+
+    decision["evidence_supports_claims"] = False
+    with pytest.raises(ValueError, match="unapproved"):
+        _review_decisions(review, "development", {"case-1"})
+
+    decision["evidence_supports_claims"] = True
+    review["reviewed_at"] = None
+    with pytest.raises(ValueError, match="timestamped"):
+        _review_decisions(review, "development", {"case-1"})
