@@ -3,14 +3,20 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.digital_twin.evaluation import load_release_profile
 from services.api.app.routers.onboarding import router as onboarding_router
+from services.api.app.routers.publication import router as publication_router
 from services.api.app.routers.student import router as student_router
 from src.digital_twin.grounding.protocols import TextEmbedder, TutorGenerator
 from src.digital_twin.onboarding import (
     InMemorySessionRepository,
     SessionRepository,
 )
-from src.digital_twin.student import SQLiteStudentRepository, StudentRepository
+from src.digital_twin.student import (
+    ReleaseLifecycleService,
+    SQLiteStudentRepository,
+    StudentRepository,
+)
 from src.digital_twin.student.service import StudentTutoringService
 
 
@@ -37,6 +43,12 @@ def create_app(
         embedder=student_embedder,
         generator=student_generator,
     )
+    profile = load_release_profile(student_profile_path)
+    app.state.publication_service = ReleaseLifecycleService(
+        app.state.student_repository,
+        profile_id=profile.profile_id,
+        profile_version=profile.profile_version,
+    )
 
     app.add_middleware(
         CORSMiddleware,
@@ -47,5 +59,6 @@ def create_app(
         allow_headers=["*"],
     )
     app.include_router(onboarding_router, prefix="/api")
+    app.include_router(publication_router, prefix="/api")
     app.include_router(student_router, prefix="/api")
     return app

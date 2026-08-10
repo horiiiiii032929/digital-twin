@@ -16,6 +16,7 @@ from src.digital_twin.student.models import (
     CourseMembership,
     DigitalTwinRelease,
     Message,
+    ReleaseEvaluationStatus,
     StudentReleaseStatus,
 )
 from src.digital_twin.tutor_policy import TutorPolicy
@@ -77,6 +78,12 @@ class StudentRepository(Protocol):
         self, release_id: str, status: StudentReleaseStatus
     ) -> None: ...
 
+    def set_release_evaluation_status(
+        self, release_id: str, status: ReleaseEvaluationStatus
+    ) -> None: ...
+
+    def publish_release(self, release_id: str) -> None: ...
+
 
 class SQLiteStudentRepository:
     """Small local repository with restart-surviving, transaction-safe turns."""
@@ -122,6 +129,7 @@ class SQLiteStudentRepository:
             policy_version INTEGER NOT NULL,
             policy_json TEXT NOT NULL,
             status TEXT NOT NULL,
+            evaluation_status TEXT NOT NULL,
             created_at TEXT NOT NULL
         );
         CREATE TABLE IF NOT EXISTS release_chunks (
@@ -176,6 +184,17 @@ class SQLiteStudentRepository:
         """
         with self._lock, self._connection:
             self._connection.executescript(schema)
+            release_columns = {
+                row["name"]
+                for row in self._connection.execute(
+                    "PRAGMA table_info(releases)"
+                ).fetchall()
+            }
+            if "evaluation_status" not in release_columns:
+                self._connection.execute(
+                    "ALTER TABLE releases ADD COLUMN evaluation_status TEXT "
+                    "NOT NULL DEFAULT 'passed'"
+                )
 
     def save_account(self, account: Account) -> Account:
         with self._lock, self._connection:
@@ -212,8 +231,8 @@ class SQLiteStudentRepository:
             self._connection.execute(
                 """INSERT OR REPLACE INTO releases
                    (id, course_id, profile_id, profile_version, policy_version,
-                    policy_json, status, created_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    policy_json, status, evaluation_status, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     release.id,
                     release.course_id,
@@ -222,6 +241,7 @@ class SQLiteStudentRepository:
                     release.policy_version,
                     release.policy.model_dump_json(),
                     release.status.value,
+                    release.evaluation_status.value,
                     release.created_at,
                 ),
             )
@@ -413,6 +433,38 @@ class SQLiteStudentRepository:
                 (status.value, release_id),
             )
 
+    def set_release_evaluation_status(
+        self, release_id: str, status: ReleaseEvaluationStatus
+    ) -> None:
+        with self._lock, self._connection:
+            self._connection.execute(
+                "UPDATE releases SET evaluation_status = ? WHERE id = ?",
+                (status.value, release_id),
+            )
+
+    def publish_release(self, release_id: str) -> None:
+        """Atomically make one course release current and withdraw its predecessor."""
+        with self._lock, self._connection:
+            row = self._connection.execute(
+                "SELECT course_id FROM releases WHERE id = ?", (release_id,)
+            ).fetchone()
+            if row is None:
+                raise KeyError("release_not_found")
+            self._connection.execute(
+                """UPDATE releases SET status = ?
+                   WHERE course_id = ? AND status = ? AND id != ?""",
+                (
+                    StudentReleaseStatus.WITHDRAWN.value,
+                    row["course_id"],
+                    StudentReleaseStatus.PUBLISHED.value,
+                    release_id,
+                ),
+            )
+            self._connection.execute(
+                "UPDATE releases SET status = ? WHERE id = ?",
+                (StudentReleaseStatus.PUBLISHED.value, release_id),
+            )
+
     def _one(self, sql: str, parameters: tuple[object, ...]) -> sqlite3.Row | None:
         with self._lock:
             return self._connection.execute(sql, parameters).fetchone()
@@ -436,6 +488,7 @@ class SQLiteStudentRepository:
                 for item in chunk_rows
             ],
             status=row["status"],
+            evaluation_status=row["evaluation_status"],
             created_at=row["created_at"],
         )
 
