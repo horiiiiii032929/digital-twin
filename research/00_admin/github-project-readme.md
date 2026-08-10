@@ -26,16 +26,17 @@ policy, student interaction state, and evaluation-before-publication.
   withdrawal, rollback, and stale-conversation denial pass the registered
   19-check v2 architecture slice.
 - The exact DeepSeek V4 Flash/P2 generator boundary is qualified and selected
-  with a deterministic rollback. Professor-fidelity evaluation remains blocked
-  by the incomplete `course-tutor-v1` splits, judge calibration, and sealed
-  execution adapter. Credentialed identity, complete professor/source
+  with a deterministic rollback. Professor-fidelity C0-C3 development is
+  complete with a `Refine` decision: C3 missed the 80% safe-grounded and
+  complete-evidence floors, pedagogy is unresolved, and held-out remains
+  unopened. Credentialed identity, complete professor/source
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The immediate work is to complete and calibrate the course-tutor dataset, bind
-the selected generator/P2 into the sealed runtime adapter, and execute
-professor-fidelity development without opening held-out prematurely. In
-parallel, harden the R3 foundation with
+The immediate R2 work is to replace exact-phrase claim scoring, improve
+multi-evidence retrieval, add the assessed-work regression, and obtain a
+genuinely blinded anchor review before considering held-out. In parallel,
+harden the R3 foundation with
 credentialed identity, migration, backup/restore, concurrency, recovery, and
 bounded-capacity evidence. Do not reopen the text benchmark for visual claims
 or continue multimodal V3 tuning.

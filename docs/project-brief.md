@@ -64,11 +64,15 @@ reached 10/13 answerable cases versus 3/13 for heading BM25, while the separate
 59-case one-time run failed after 29 cases and is invalid. Jina is an unselected
 provider spike with no result.
 
-The current phase is professor-fidelity and end-to-end validation. The one-time
+The current phase is professor-fidelity refinement and end-to-end validation. The one-time
 60-case held-out M0-M3 comparison selected M2 hybrid retrieval for the
 experimental profile and retained BM25 as rollback. The first durable synthetic
 student slice now connects that profile to course authorization, published
 releases, persisted turns, citations, fallback, withdrawal, and restart checks.
-Next comes exact generator/prompt qualification, professor-policy comparison,
-and broader professor/student, recovery, and capacity evidence. The
+Generator/prompt qualification is complete, while the first 48-case
+professor-policy comparison ended in `Refine`: C3 missed safe-grounded and
+complete-evidence floors, automated pedagogy was ineligible, and the one-time
+held-out split remains unopened. Next comes scoring, multi-evidence retrieval,
+assessed-work, and blinded-anchor repair, alongside broader professor/student,
+recovery, and capacity evidence. The
 authoritative baseline is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).

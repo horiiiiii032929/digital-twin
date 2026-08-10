@@ -6,9 +6,13 @@ qualification; deterministic rollback retained.
 
 ## Current decision state
 
-Issue #24 remains in progress because its professor-policy C0-C3 comparison has
-not run. Its generator sub-boundary is complete: the repository selects the
-exact DeepSeek binding and P2 prompt after development, stability, one-time
+Issue #24 is closed in GitHub, and its C0-C3 development comparison now has a
+registered `Refine` result. C3 reached 60.4% conservative safe-grounded success
+and 77.1% complete evidence@3, below the prospective 80% floors; automated
+pedagogy remains unresolved, so no professor-fidelity claim or profile change
+is justified. The 104-case one-time held-out ledger remains unopened. The
+generator sub-boundary remains complete: the repository selects the exact
+DeepSeek binding and P2 prompt after its own development, stability, one-time
 held-out, and citation review gates passed. No API credential is stored. A
 local Ollama Gemma 3 4B candidate was exercised historically with zero monetary
 cost, but it is not currently installed or selected.
@@ -22,9 +26,10 @@ the primary generator rather than opening a broad LLM competition. On
 bounded first candidate because the final system has a 10-second p95 target and
 the current official API positions it as the faster, lower-cost V4 option. This
 is a candidate freeze, not evidence that it works or that DeepSeek is best.
-Only synthetic evaluation data is permitted, and the complete #24 external API
-run retains the cumulative USD 10 cap. Private course material remains
-prohibited.
+Issue #24's source-holder-authorized development exception permits eligible
+IT5002 lecture passages and synthetic case fields under the cumulative USD 10
+cap. Student data, judge inputs, simulator trajectories, and public deployment
+remain prohibited.
 
 The temporal provider facts were checked against DeepSeek's official
 [models and pricing](https://api-docs.deepseek.com/quick_start/pricing/),
