@@ -95,6 +95,8 @@
         "required_claim_expression",
         "supported_claim_precision",
         "citation_semantic_alignment",
+        "citation_completeness",
+        "presented_evidence_completeness",
         "pedagogy_dimensions"
       ],
       "properties": {
@@ -117,6 +119,12 @@
           "type": "boolean"
         },
         "citation_semantic_alignment": {
+          "type": "boolean"
+        },
+        "citation_completeness": {
+          "type": "boolean"
+        },
+        "presented_evidence_completeness": {
           "type": "boolean"
         },
         "pedagogy_dimensions": {

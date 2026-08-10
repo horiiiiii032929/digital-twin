@@ -18,6 +18,8 @@
       "required_claim_expression": true,
       "supported_claim_precision": true,
       "citation_semantic_alignment": true,
+      "citation_completeness": true,
+      "presented_evidence_completeness": true,
       "pedagogy_dimensions": [
         {
           "dimension": "clarity_and_coherence",

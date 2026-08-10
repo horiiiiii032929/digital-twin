@@ -4,7 +4,7 @@ import pytest
 
 from scripts.analyze_professor_fidelity import analyze
 from scripts.build_course_tutor_splits import build_case
-from scripts.execute_professor_fidelity import _parse_output, _score
+from scripts.execute_professor_fidelity import _messages, _parse_output, _score
 from scripts.finalize_professor_fidelity_blinded_review import finalize_review
 from scripts.judge_professor_fidelity import (
     _judgment_schema,
@@ -83,7 +83,9 @@ def _case(case_id: str, *, scenario: str = "direct") -> dict:
 
 def _hit(*, correct: bool = True) -> dict:
     return {
-        "chunk_id": "chunk-1",
+        "chunk_id": "lecture-01-page-001" if correct else "chunk-wrong",
+        "passage_id": "lecture-01-page-001" if correct else "lecture-99-page-009",
+        "content_sha256": "0" * 64 if correct else "9" * 64,
         "source_id": "lecture-01" if correct else "lecture-99",
         "locator": "Lecture 1, page 1" if correct else "Lecture 99, page 9",
         "page": 1 if correct else 9,
@@ -148,6 +150,30 @@ def test_professor_fidelity_output_requires_string_citation_ids():
         _parse_output('{"answer":"x","citation_ids":[1],"action":"answer"}')
 
 
+def test_professor_policy_prompt_never_receives_case_gold_labels():
+    case = _case("case-policy")
+    case["ground_truth"]["expected_behavior"].update(
+        {
+            "primary_action": "gold-action-must-stay-hidden",
+            "required_tutoring_moves": ["gold-move-must-stay-hidden"],
+            "forbidden_actions": ["gold-forbidden-must-stay-hidden"],
+        }
+    )
+    bindings = {
+        "generic_tutoring_policy": {"policy_id": "generic"},
+        "structured_professor_policy": {"policy_id": "professor"},
+    }
+
+    serialized = "\n".join(
+        message.content for message in _messages(case, "C2", [], bindings)
+    )
+
+    assert "gold-action-must-stay-hidden" not in serialized
+    assert "gold-move-must-stay-hidden" not in serialized
+    assert "gold-forbidden-must-stay-hidden" not in serialized
+    assert '"policy_id": "professor"' in serialized
+
+
 def test_scoring_separates_id_source_completeness_and_semantics():
     case = _case("case-01")
     paraphrased = {
@@ -160,7 +186,8 @@ def test_scoring_separates_id_source_completeness_and_semantics():
 
     assert score["citation_identity_validity"] is True
     assert score["citation_source_correctness"] is True
-    assert score["citation_completeness"] is True
+    assert score["citation_claim_source_coverage"] is True
+    assert score["citation_completeness"] is None
     assert score["exact_phrase_claim_recall_diagnostic"] == 0.0
     assert score["semantic_support_resolved"] is False
     assert score["safe_grounded_success"] is None
@@ -168,7 +195,8 @@ def test_scoring_separates_id_source_completeness_and_semantics():
     wrong_source = score_response(case, paraphrased, [_hit(correct=False)])
     assert wrong_source["citation_identity_validity"] is True
     assert wrong_source["citation_source_correctness"] is False
-    assert wrong_source["citation_completeness"] is False
+    assert wrong_source["citation_claim_source_coverage"] is False
+    assert wrong_source["citation_completeness"] is None
 
 
 def test_complete_evidence_excludes_cases_without_essential_evidence():
@@ -263,6 +291,8 @@ def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():
                     "required_claim_expression": True,
                     "supported_claim_precision": True,
                     "citation_semantic_alignment": True,
+                    "citation_completeness": True,
+                    "presented_evidence_completeness": True,
                     "pedagogy_dimensions": [
                         {"dimension": "clarity_and_coherence", "label": "pass"}
                     ],
@@ -310,6 +340,8 @@ def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():
     assert c3["complete_evidence_at_3"]["value"] == 0.7
     assert c3["citation_source_correctness"]["value"] == 0.7
     assert result["decision_gates"]["c3_complete_evidence_at_3_at_least_0_80"] is False
+    assert result["decision_gates"]["selected_retrieval_and_chunker_identity"] is False
+    assert result["decision_gates"]["condition_set_hash_bound"] is False
     assert result["decision"] == "refine"
     assert result["representative_failures"]
     assert "answer" not in result["representative_failures"][0]
@@ -348,6 +380,8 @@ def test_blinded_review_finalizer_resolves_hidden_conditions():
                 "required_claim_expression": True,
                 "supported_claim_precision": True,
                 "citation_semantic_alignment": True,
+                "citation_completeness": True,
+                "presented_evidence_completeness": True,
                 "pedagogy_dimensions": [
                     {"dimension": "clarity_and_coherence", "label": "pass"}
                 ],
@@ -396,6 +430,7 @@ def test_course_tutor_builder_does_not_claim_human_double_review(monkeypatch):
         scenario="direct",
         base=copy.deepcopy(base),
         manifest=manifest,
+        chunks_by_id={},
     )
 
     assert case["annotation"]["status"] == "draft"

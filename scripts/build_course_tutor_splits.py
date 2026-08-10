@@ -14,11 +14,11 @@ import argparse
 import copy
 import hashlib
 import json
-import subprocess
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from scripts.it5002_rapid_common import load_course_corpus
 from scripts.validate_course_tutor_dataset import (
     load_json,
     validate_dataset,
@@ -30,7 +30,6 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_ROOT = ROOT / "data/processed/it5002_retrieval_rapid_v1"
 OUTPUT_ROOT = ROOT / "data/processed/course_tutor_v1/review_v1_2"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
-PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"
 MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
 CASE_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
 CONDITION_SCHEMA_PATH = (
@@ -70,30 +69,6 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def passage_for(document_id: str, page: int, manifest: dict[str, Any]) -> dict[str, Any]:
-    passage_id = f"{document_id}-page-{page:03d}"
-    path = EVIDENCE_ROOT / f"{passage_id}.txt"
-    if not path.exists():
-        document = next(item for item in manifest["documents"] if item["document_id"] == document_id)
-        pdf_path = PDF_ROOT / document["filename"]
-        completed = subprocess.run(
-            ["pdftotext", "-f", str(page), "-l", str(page), "-layout", str(pdf_path), "-"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        text = completed.stdout.strip()
-        if not text:
-            raise ValueError(f"empty extracted page: {document_id} page {page}")
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(f"{text}\n")
-    return {
-        "passage_id": passage_id,
-        "content_sha256": sha256(path),
-        "locator": f"{document_id.replace('it5002-lecture-', 'Lecture ')}, page {page}",
-    }
-
-
 def topic_for(document_id: str, manifest: dict[str, Any]) -> str:
     for stratum in manifest["topic_strata"]:
         if document_id in stratum["documents"]:
@@ -101,16 +76,36 @@ def topic_for(document_id: str, manifest: dict[str, Any]) -> str:
     raise ValueError(f"no topic stratum for {document_id}")
 
 
-def source_rows(base: dict[str, Any], manifest: dict[str, Any]) -> list[dict[str, Any]]:
+def source_rows(
+    base: dict[str, Any],
+    chunks_by_id: dict[str, Any],
+) -> list[dict[str, Any]]:
     rows = []
     for index, source in enumerate(base.get("required_evidence", []), start=1):
-        passage = passage_for(source["document_id"], int(source["page"]), manifest)
+        chunk = chunks_by_id.get(source["chunk_id"])
+        if chunk is None:
+            raise ValueError(f"source passage is absent from selected chunker: {source['chunk_id']}")
+        if (
+            chunk.document_id != source["document_id"]
+            or chunk.content_hash != source["content_hash"]
+            or chunk.page_start != int(source["page"])
+        ):
+            raise ValueError(f"source passage identity drifted: {source['chunk_id']}")
+        path = EVIDENCE_ROOT / f"{chunk.id}.txt"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            if sha256(path) != chunk.content_hash:
+                raise ValueError(f"stored evidence hash drifted: {chunk.id}")
+        else:
+            path.write_text(chunk.text, encoding="utf-8")
         rows.append(
             {
                 "evidence_unit_id": f"ev-{index:02d}",
                 "source_artifact_id": source["document_id"],
                 "source_version": "1.0.0",
-                **passage,
+                "passage_id": chunk.id,
+                "content_sha256": chunk.content_hash,
+                "locator": chunk.locator,
                 "role": "essential",
                 "permission_status": "approved",
                 "supports_claim_ids": [],
@@ -195,6 +190,7 @@ def question_for(scenario: str, base: dict[str, Any], ordinal: int) -> str:
 
 def build_case(
     *, split: str, ordinal: int, scenario: str, base: dict[str, Any], manifest: dict[str, Any],
+    chunks_by_id: dict[str, Any],
     second_base: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     prefix = "dev" if split == "development" else "test"
@@ -202,7 +198,7 @@ def build_case(
     bases = [base] + ([second_base] if second_base is not None else [])
     evidence: list[dict[str, Any]] = []
     for item in bases:
-        for row in source_rows(item, manifest):
+        for row in source_rows(item, chunks_by_id):
             row = copy.deepcopy(row)
             row["evidence_unit_id"] = f"ev-{len(evidence) + 1:02d}"
             evidence.append(row)
@@ -337,7 +333,12 @@ def build_case(
     return case, condition
 
 
-def build_split(split: str, source_cases: list[dict[str, Any]], manifest: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+def build_split(
+    split: str,
+    source_cases: list[dict[str, Any]],
+    manifest: dict[str, Any],
+    chunks_by_id: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in source_cases:
         grouped[item["scenario"]].append(item)
@@ -371,7 +372,15 @@ def build_split(split: str, source_cases: list[dict[str, Any]], manifest: dict[s
 
     cases, conditions = [], []
     for ordinal, (scenario, base, second) in enumerate(selections, start=1):
-        case, condition = build_case(split=split, ordinal=ordinal, scenario=scenario, base=base, manifest=manifest, second_base=second)
+        case, condition = build_case(
+            split=split,
+            ordinal=ordinal,
+            scenario=scenario,
+            base=base,
+            manifest=manifest,
+            chunks_by_id=chunks_by_id,
+            second_base=second,
+        )
         cases.append(case)
         conditions.append(condition)
     suffix = "development" if split == "development" else "heldout"
@@ -398,13 +407,20 @@ def build_split(split: str, source_cases: list[dict[str, Any]], manifest: dict[s
 
 def main() -> int:
     args = parse_args()
-    manifest = load_json(MANIFEST_PATH)
+    corpus = load_course_corpus()
+    manifest = corpus.manifest
+    chunks_by_id = {chunk.id: chunk for chunk in corpus.structured_chunks}
     case_schema = load_json(CASE_SCHEMA_PATH)
     condition_schema = load_json(CONDITION_SCHEMA_PATH)
     outputs: dict[str, dict[str, str]] = {}
     for split, source_name in (("development", "development.json"), ("heldout", "heldout.json")):
         source = load_json(SOURCE_ROOT / source_name)
-        dataset, conditions = build_split(split, source["cases"], manifest)
+        dataset, conditions = build_split(
+            split,
+            source["cases"],
+            manifest,
+            chunks_by_id,
+        )
         validate_schema(dataset, case_schema)
         validate_schema(conditions, condition_schema)
         expected = 48 if split == "development" else 104

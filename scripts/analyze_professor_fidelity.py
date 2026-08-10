@@ -174,10 +174,15 @@ def _review_labels(
 ) -> tuple[
     dict[tuple[str, str], bool],
     dict[tuple[str, str], bool],
+    dict[tuple[str, str], bool],
+    dict[tuple[str, str], bool],
     dict[str, Any],
 ]:
     if review is None:
-        return {}, {}, {"eligible": False, "reason": "no blinded review supplied"}
+        return {}, {}, {}, {}, {
+            "eligible": False,
+            "reason": "no blinded review supplied",
+        }
     jsonschema.Draft202012Validator(
         load_json(BLINDED_REVIEW_SCHEMA),
         format_checker=jsonschema.FormatChecker(),
@@ -193,11 +198,13 @@ def _review_labels(
         )
     )
     if not eligible:
-        return {}, {}, {
+        return {}, {}, {}, {}, {
             "eligible": False,
             "reason": "review is incomplete, unblinded, or bound to another run",
         }
     semantic: dict[tuple[str, str], bool] = {}
+    citation_completeness: dict[tuple[str, str], bool] = {}
+    presented_evidence_completeness: dict[tuple[str, str], bool] = {}
     pedagogy: dict[tuple[str, str], bool] = {}
     for item in review.get("judgments", []):
         key = (item["case_id"], item["condition"])
@@ -209,18 +216,31 @@ def _review_labels(
                 "required_claim_expression",
                 "supported_claim_precision",
                 "citation_semantic_alignment",
+                "citation_completeness",
             )
         )
+        citation_completeness[key] = item["citation_completeness"]
+        presented_evidence_completeness[key] = item[
+            "presented_evidence_completeness"
+        ]
         dimensions = item.get("pedagogy_dimensions", [])
         pedagogy[key] = bool(dimensions) and all(
             dimension["label"] == "pass" for dimension in dimensions
         )
-    return semantic, pedagogy, {
-        "eligible": True,
-        "review_id": review.get("review_id"),
-        "reviewer_role": reviewer["role"],
-        "independent_human_review": reviewer.get("independent_human_review", False),
-    }
+    return (
+        semantic,
+        citation_completeness,
+        presented_evidence_completeness,
+        pedagogy,
+        {
+            "eligible": True,
+            "review_id": review.get("review_id"),
+            "reviewer_role": reviewer["role"],
+            "independent_human_review": reviewer.get(
+                "independent_human_review", False
+            ),
+        },
+    )
 
 
 def _judge_labels(
@@ -259,17 +279,25 @@ def _rescore_rows(
     run: dict[str, Any],
     dataset: dict[str, Any],
     semantic_review: dict[tuple[str, str], bool],
+    citation_completeness_review: dict[tuple[str, str], bool],
+    presented_evidence_review: dict[tuple[str, str], bool],
     pedagogy_review: dict[tuple[str, str], bool],
     judge_pedagogy: dict[tuple[str, str], bool],
 ) -> list[dict[str, Any]]:
     cases = {case["case_id"]: case for case in dataset["cases"]}
+    if len(cases) != len(dataset["cases"]) or len(cases) != run["case_count"]:
+        raise ValueError("dataset case identities or run case count drifted")
     run_case_ids = {row["case_id"] for row in run["results"]}
     if run_case_ids != set(cases):
         raise ValueError("run and dataset case IDs do not match")
     rescored = []
+    seen: set[tuple[str, str]] = set()
     for original in run["results"]:
         row = dict(original)
         key = (row["case_id"], row["condition"])
+        if row["condition"] not in CONDITIONS or key in seen:
+            raise ValueError(f"duplicate or invalid condition row: {key}")
+        seen.add(key)
         output = {
             "answer": row["answer"],
             "citation_ids": row["citation_ids"],
@@ -289,6 +317,16 @@ def _rescore_rows(
             safe_grounded = True
         score["semantic_support_resolved"] = not requires_semantic_review or key in semantic_review
         score["safe_grounded_success"] = safe_grounded
+        score["citation_completeness"] = (
+            citation_completeness_review.get(key)
+            if score["citation_applicable_claims"] > 0
+            else None
+        )
+        score["reviewed_presented_evidence_completeness"] = (
+            presented_evidence_review.get(key)
+            if score["complete_evidence_eligible"]
+            else None
+        )
         row["score"] = score
         row["pedagogy_success"] = pedagogy_review.get(key, judge_pedagogy.get(key))
         rescored.append(row)
@@ -304,7 +342,15 @@ def analyze(
 ) -> dict[str, Any]:
     if run["condition_attempts"] != len(run["results"]):
         raise ValueError("condition-attempt ledger does not match result rows")
-    semantic_review, pedagogy_review, review_status = _review_labels(
+    if run["condition_attempts"] != run["case_count"] * len(CONDITIONS):
+        raise ValueError("condition-attempt ledger is not a complete C0-C3 portfolio")
+    (
+        semantic_review,
+        citation_completeness_review,
+        presented_evidence_review,
+        pedagogy_review,
+        review_status,
+    ) = _review_labels(
         review, run["run_id"], run["dataset_sha256"]
     )
     judge_pedagogy, preferences, judge_status = _judge_labels(judge, calibration)
@@ -312,6 +358,8 @@ def analyze(
         run,
         dataset,
         semantic_review,
+        citation_completeness_review,
+        presented_evidence_review,
         pedagogy_review,
         judge_pedagogy,
     )
@@ -351,11 +399,30 @@ def analyze(
             "citation_source_correctness": _applicable_metric(
                 [row["score"]["citation_source_correctness"] for row in citation_required_rows]
             ),
-            "citation_completeness": _applicable_metric(
+            "citation_claim_source_coverage": _applicable_metric(
+                [
+                    row["score"]["citation_claim_source_coverage"]
+                    for row in citation_required_rows
+                ]
+            ),
+            "citation_completeness": _metric(
                 [row["score"]["citation_completeness"] for row in citation_required_rows]
             ),
             "complete_evidence_at_3": _applicable_metric(
                 [row["score"]["complete_evidence_at_3"] for row in condition_rows]
+            ),
+            "source_locator_evidence_at_3": _applicable_metric(
+                [
+                    row["score"]["source_locator_evidence_at_3"]
+                    for row in condition_rows
+                ]
+            ),
+            "reviewed_presented_evidence_completeness": _metric(
+                [
+                    row["score"]["reviewed_presented_evidence_completeness"]
+                    for row in condition_rows
+                    if row["score"]["complete_evidence_eligible"]
+                ]
             ),
             "no_evidence_accuracy": _applicable_metric(
                 [
@@ -413,7 +480,37 @@ def analyze(
         not row["score"]["deterministic_hard_gates_passed"]
         for row in rows_by_condition["C3"]
     )
+    dataset_human_reviewed = all(
+        case.get("annotation", {}).get("status")
+        in {"single_review", "professor_approved"}
+        and bool(case.get("annotation", {}).get("reviewer_ids"))
+        for case in dataset["cases"]
+    )
+    expected_retrieval_binding = {
+        "implementation_id": "qwen3-hybrid-v1",
+        "implementation_version": "cross-course-retrieval-v1",
+        "chunker_implementation_id": "page-bounded-heading-paragraph-chunker",
+        "chunker_version": "v1",
+        "corpus_id": "it5002-lectures-v1",
+    }
+    retrieval_binding = run.get("retrieval_binding", {})
+    candidate_binding_resolved = all(
+        retrieval_binding.get(key) == value
+        for key, value in expected_retrieval_binding.items()
+    )
+    condition_binding_resolved = bool(run.get("conditions_sha256"))
+    policy_prompt_binding_resolved = all(
+        (
+            run.get("policy_binding_sha256"),
+            run.get("prompt_binding")
+            == "professor-fidelity-integration-prompt-v2",
+        )
+    )
     gates = {
+        "dataset_human_authoring_review": dataset_human_reviewed,
+        "selected_retrieval_and_chunker_identity": candidate_binding_resolved,
+        "condition_set_hash_bound": condition_binding_resolved,
+        "policy_and_prompt_hash_bound": policy_prompt_binding_resolved,
         "zero_c3_deterministic_hard_gate_failures": c3_hard_failures == 0,
         "semantic_support_resolved": safe_resolved,
         "c3_safe_grounded_success_at_least_0_80": (
@@ -475,6 +572,13 @@ def analyze(
         "decision_gates": gates,
         "review": review_status,
         "judge": judge_status,
+        "binding_audit": {
+            "dataset_human_reviewed": dataset_human_reviewed,
+            "expected_retrieval_binding": expected_retrieval_binding,
+            "observed_retrieval_binding": retrieval_binding or None,
+            "condition_set_hash_bound": condition_binding_resolved,
+            "policy_prompt_binding_resolved": policy_prompt_binding_resolved,
+        },
         "operational": {
             key: run[key]
             for key in (
@@ -499,8 +603,10 @@ def analyze(
         "representative_failures": failures[:12],
         "limitations": [
             "Safe-grounded success and its paired effects are unresolved until blinded semantic review covers every structurally passing answer.",
+            "The source run did not bind the selected page-bounded chunker, exact retrieved passage IDs, the condition-set hash, or a hash-frozen shared policy; its C3 outputs are not evidence for the selected M2 product condition.",
+            "The v1.1 course-tutor cases were not independently human reviewed and leaked case-specific expected actions into the historical C2/C3 prompt, so condition effects are diagnostic only.",
             "Pedagogy is unresolved because the earlier local-judge implementation drifted from the frozen per-dimension pairwise contract and no eligible blinded reference exists.",
-            "Citation source correctness verifies source/page alignment to authored gold evidence; it does not by itself prove semantic entailment or exclude every unsupported sentence.",
+            "Citation source correctness and claim-source coverage verify source/page alignment only; they do not establish semantic entailment or true citation completeness.",
             "The course-tutor cases are synthetic transformations and do not establish learning, usability, satisfaction, adoption, or professor equivalence.",
             "Eligible private course text was processed by the authorized DeepSeek API; provider disk caching and the absence of a project-specific no-training guarantee remain data-boundary limitations.",
             "The one-time held-out split remains unopened because development gates failed.",
@@ -523,8 +629,8 @@ def render_report(result: dict[str, Any]) -> str:
         "",
         "## Corrected measurements",
         "",
-        "| Condition | Safe grounded | Structural success | Action | Citation source correctness | Citation completeness | Complete evidence@3 |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Condition | Safe grounded | Structural success | Action | Citation source correctness | Claim-source coverage | Semantic citation completeness | Exact evidence@3 |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for condition in CONDITIONS:
         row = summaries[condition]
@@ -533,6 +639,7 @@ def render_report(result: dict[str, Any]) -> str:
             f"{_display(row['deterministic_structural_success'])} | "
             f"{_display(row['action_accuracy'])} | "
             f"{_display(row['citation_source_correctness'])} | "
+            f"{_display(row['citation_claim_source_coverage'])} | "
             f"{_display(row['citation_completeness'])} | "
             f"{_display(row['complete_evidence_at_3'])} |"
         )

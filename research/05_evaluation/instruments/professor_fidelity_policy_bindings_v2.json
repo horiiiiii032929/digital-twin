@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0.0",
+  "binding_id": "professor-fidelity-policy-bindings-v2",
+  "status": "frozen-development",
+  "generic_tutoring_policy": {
+    "policy_id": "generic-tutoring-v1",
+    "instructions": [
+      "Be helpful and concise.",
+      "Use only the supplied approved evidence for course facts.",
+      "Do not invent an answer when the supplied evidence is insufficient."
+    ]
+  },
+  "structured_professor_policy": {
+    "policy_id": "structured-professor-policy-v1",
+    "knowledge_source_policy": "Use only active, approved IT5002 lecture evidence supplied in the request.",
+    "academic_integrity_policy": "Do not provide submission-ready answers to current graded work; ask for the student's attempt and offer a bounded hint or concept explanation.",
+    "teaching_approach": "Use a balanced approach: answer direct conceptual questions concisely, ask a targeted clarification for ambiguity, and scaffold when direct completion would undermine learning.",
+    "tutoring_moves": [
+      "direct explanation",
+      "targeted clarification",
+      "hints",
+      "prompts",
+      "misconception correction"
+    ],
+    "misconception_handling": "State the misconception precisely, correct it only with approved evidence, and give the smallest useful next step.",
+    "course_scope_boundary": "Stay within approved IT5002 course evidence and abstain when it is insufficient.",
+    "tone_guidance": "Be clear, concise, respectful, and professor-reviewable."
+  },
+  "prompt_binding": {
+    "prompt_id": "professor-fidelity-integration-prompt-v2",
+    "grounding_parent": "strict-evidence-grounded-prompt-v3",
+    "maximum_words": 60,
+    "output_schema": {
+      "answer": "string",
+      "citation_ids": "unique array of supplied citation IDs",
+      "action": "answer | scaffold | clarify | redirect | abstain"
+    },
+    "notes": "The integration prompt preserves the selected P2 grounding constraints while adding the action field required by the frozen C0-C3 policy evaluation. It must not include case labels, expected actions, required claims, or rubric answers."
+  }
+}

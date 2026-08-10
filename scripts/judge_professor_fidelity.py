@@ -15,8 +15,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 ANCHOR_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
 PRIVATE_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v2"
-DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v1/development/result.json"
-DEFAULT_OUTPUT = ROOT / "experiments/runs/professor_fidelity_v1/development/judgments-gemma3.json"
+DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v2/development-001/result.json"
+DEFAULT_OUTPUT = ROOT / "experiments/runs/professor_fidelity_v2/development-001/judgments-gemma3.json"
 PROMPT_PATH = ROOT / "research/05_evaluation/instruments/llm_judge_v1.prompt.md"
 LABELS = ("A", "B", "C", "D")
 VALID = {"pass", "partial", "fail"}
@@ -46,6 +46,15 @@ def load_json(path: Path) -> dict[str, Any]:
 def write_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(f"{json.dumps(value, indent=2, ensure_ascii=False)}\n")
+
+
+def write_json_exclusive(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with path.open("x", encoding="utf-8") as stream:
+            stream.write(f"{json.dumps(value, indent=2, ensure_ascii=False)}\n")
+    except FileExistsError as error:
+        raise JudgeError(f"refusing to overwrite judge result: {path}") from error
 
 
 def _selected(case_id: str, rate: float, salt: str) -> bool:
@@ -425,7 +434,10 @@ def _validate_case_result(
 
 def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
     run = load_json(arguments.run)
-    dataset = load_json(_dataset_path(run, arguments.dataset))
+    dataset_path = _dataset_path(run, arguments.dataset)
+    dataset = load_json(dataset_path)
+    if hashlib.sha256(dataset_path.read_bytes()).hexdigest() != run["dataset_sha256"]:
+        raise JudgeError("judge dataset hash does not match source run")
     case_by_id = {case["case_id"]: case for case in dataset["cases"]}
     rows_by_case: dict[str, dict[str, dict[str, Any]]] = {}
     for row in run["results"]:
@@ -532,8 +544,10 @@ def subprocess_run(command: list[str]) -> str:
 
 def main() -> None:
     arguments = parse_args()
+    if arguments.output.exists():
+        raise JudgeError(f"refusing to overwrite judge result: {arguments.output}")
     result = run_judging(arguments)
-    write_json(arguments.output, result)
+    write_json_exclusive(arguments.output, result)
     print(
         json.dumps(
             {key: value for key, value in result.items() if key != "case_judgments"},

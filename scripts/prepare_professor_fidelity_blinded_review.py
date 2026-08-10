@@ -16,7 +16,7 @@ from scripts.execute_professor_fidelity import _load_course_chunks
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v1/anchor/result.json"
 DEFAULT_DATASET = ROOT / "data/processed/course_tutor_v1/sealed_v1/anchor.json"
-DEFAULT_OUTPUT = ROOT / "reports/generated/professor-fidelity-anchor-blinded-review"
+DEFAULT_OUTPUT = ROOT / "reports/generated/professor-fidelity-anchor-blinded-review-v2"
 CONDITIONS = ("C0", "C1", "C2", "C3")
 
 
@@ -84,7 +84,7 @@ def prepare_packet(
         "",
         "Do not open `mapping.json` while reviewing. Conditions, model names, and provider names are intentionally hidden.",
         "",
-        "For every response, judge semantic claim expression, support precision, citation alignment, and each listed pedagogical dimension. Use only the supplied authored gold evidence and presented context.",
+        "For every response, judge semantic claim expression, support precision, citation alignment, citation completeness, presented-evidence completeness, and each listed pedagogical dimension. Use only the supplied authored gold evidence and presented context.",
         "",
     ]
     for case_index, case_id in enumerate(sorted(cases), start=1):
@@ -158,6 +158,8 @@ def prepare_packet(
                     "required_claim_expression": None,
                     "supported_claim_precision": None,
                     "citation_semantic_alignment": None,
+                    "citation_completeness": None,
+                    "presented_evidence_completeness": None,
                     "pedagogy_dimensions": [
                         {"dimension": dimension, "label": None}
                         for dimension in case["rubric"]["required_pedagogy_dimensions"]

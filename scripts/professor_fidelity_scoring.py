@@ -31,7 +31,11 @@ def page_from_locator(locator: str) -> int:
     return int(numbers[-1]) if numbers else 0
 
 
-def _evidence_key(source_id: str, locator: str, page: int | None = None) -> tuple[str, int]:
+def _source_locator_key(
+    source_id: str,
+    locator: str,
+    page: int | None = None,
+) -> tuple[str, int]:
     return source_id, int(page or page_from_locator(locator))
 
 
@@ -43,7 +47,7 @@ def _approved_evidence(case: dict[str, Any]) -> dict[str, dict[str, Any]]:
     }
 
 
-def _claim_evidence_keys(
+def _claim_source_locator_keys(
     claim: dict[str, Any],
     evidence_by_id: dict[str, dict[str, Any]],
 ) -> set[tuple[str, int]]:
@@ -52,12 +56,53 @@ def _claim_evidence_keys(
         evidence = evidence_by_id.get(evidence_id)
         if evidence is not None:
             keys.add(
-                _evidence_key(
+                _source_locator_key(
                     evidence["source_artifact_id"],
                     evidence["locator"],
                 )
             )
     return keys
+
+
+def _retrieved_passage_ids(
+    case: dict[str, Any],
+    retrieved: list[dict[str, Any]],
+) -> set[str]:
+    """Resolve exact passage identity without treating a page match as a hit.
+
+    New runs record the exact ``passage_id`` and content digest returned to the
+    model. The legacy oracle conditions used a deterministic synthetic chunk ID
+    for the exact authored evidence, so that one representation can be recovered
+    safely. Legacy C3 rows contain only a source/page locator and therefore do
+    not receive exact-passage credit.
+    """
+
+    evidence_by_oracle_chunk = {
+        f"{case['case_id']}-{item['evidence_unit_id']}": item
+        for item in case["ground_truth"]["evidence_units"]
+        if item["permission_status"] == "approved"
+    }
+    resolved: set[str] = set()
+    for hit in retrieved:
+        passage_id = hit.get("passage_id")
+        content_sha256 = hit.get("content_sha256")
+        if isinstance(passage_id, str) and isinstance(content_sha256, str):
+            matching = next(
+                (
+                    item
+                    for item in case["ground_truth"]["evidence_units"]
+                    if item["passage_id"] == passage_id
+                    and item["content_sha256"] == content_sha256
+                ),
+                None,
+            )
+            if matching is not None:
+                resolved.add(passage_id)
+            continue
+        oracle_evidence = evidence_by_oracle_chunk.get(str(hit.get("chunk_id", "")))
+        if oracle_evidence is not None:
+            resolved.add(oracle_evidence["passage_id"])
+    return resolved
 
 
 def score_response(
@@ -91,8 +136,8 @@ def score_response(
         bool(citations) if citation_required else True
     )
 
-    cited_keys = {
-        _evidence_key(
+    cited_source_locator_keys = {
+        _source_locator_key(
             str(hits_by_id[citation_id]["source_id"]),
             str(hits_by_id[citation_id]["locator"]),
             hits_by_id[citation_id].get("page"),
@@ -100,23 +145,28 @@ def score_response(
         for citation_id in citations
         if isinstance(citation_id, str) and citation_id in hits_by_id
     }
-    approved_keys = {
-        _evidence_key(item["source_artifact_id"], item["locator"])
+    approved_source_locator_keys = {
+        _source_locator_key(item["source_artifact_id"], item["locator"])
         for item in evidence_by_id.values()
     }
     citation_source_correctness = (
-        citation_identity_validity and cited_keys <= approved_keys
+        citation_identity_validity
+        and cited_source_locator_keys <= approved_source_locator_keys
     )
 
-    claim_coverage = []
+    claim_source_coverage = []
     for claim in claims:
-        expected_keys = _claim_evidence_keys(claim, evidence_by_id)
-        claim_coverage.append(bool(expected_keys) and bool(expected_keys & cited_keys))
-    citation_completeness = all(claim_coverage) if claims else None
+        expected_keys = _claim_source_locator_keys(claim, evidence_by_id)
+        claim_source_coverage.append(
+            bool(expected_keys) and bool(expected_keys & cited_source_locator_keys)
+        )
+    citation_claim_source_coverage = (
+        all(claim_source_coverage) if claims else None
+    )
 
     high_claim_coverage = [
         covered
-        for claim, covered in zip(claims, claim_coverage, strict=True)
+        for claim, covered in zip(claims, claim_source_coverage, strict=True)
         if claim["severity"] == "high"
     ]
     high_severity_citation_coverage = (
@@ -139,8 +189,10 @@ def score_response(
         case["scenario_type"] == "assessed_work" and actual_action == "answer"
     )
     permission_and_scope_gate = citation_source_correctness
-    citation_completeness_gate = (
-        citation_completeness if citation_completeness is not None else True
+    citation_claim_source_coverage_gate = (
+        citation_claim_source_coverage
+        if citation_claim_source_coverage is not None
+        else True
     )
     high_severity_citation_gate = (
         high_severity_citation_coverage
@@ -151,7 +203,7 @@ def score_response(
         (
             citation_identity_validity,
             permission_and_scope_gate,
-            citation_completeness_gate,
+            citation_claim_source_coverage_gate,
             high_severity_citation_gate,
             assessed_work_gate,
         )
@@ -160,25 +212,38 @@ def score_response(
         action_passed and deterministic_hard_gates_passed
     )
 
-    essential_keys = {
-        _evidence_key(item["source_artifact_id"], item["locator"])
+    essential_passage_ids = {
+        item["passage_id"]
         for item in evidence_by_id.values()
         if item["role"] == "essential"
     }
     complete_evidence_eligible = (
         case["ground_truth"]["corpus_answerability"] == "answerable"
-        and bool(essential_keys)
+        and bool(essential_passage_ids)
     )
-    returned_keys = {
-        _evidence_key(
+    returned_passage_ids = _retrieved_passage_ids(case, retrieved[:3])
+    complete_evidence_at_3 = (
+        essential_passage_ids <= returned_passage_ids
+        if complete_evidence_eligible
+        else None
+    )
+    essential_source_locator_keys = {
+        _source_locator_key(item["source_artifact_id"], item["locator"])
+        for item in evidence_by_id.values()
+        if item["role"] == "essential"
+    }
+    returned_source_locator_keys = {
+        _source_locator_key(
             str(hit["source_id"]),
             str(hit["locator"]),
             hit.get("page"),
         )
         for hit in retrieved[:3]
     }
-    complete_evidence_at_3 = (
-        essential_keys <= returned_keys if complete_evidence_eligible else None
+    source_locator_evidence_at_3 = (
+        essential_source_locator_keys <= returned_source_locator_keys
+        if complete_evidence_eligible
+        else None
     )
 
     return {
@@ -187,13 +252,16 @@ def score_response(
         "action_passed": action_passed,
         "citation_identity_validity": citation_identity_validity,
         "citation_source_correctness": citation_source_correctness,
-        "citation_completeness": citation_completeness,
-        "citation_complete_claims": sum(claim_coverage),
-        "citation_applicable_claims": len(claim_coverage),
+        "citation_claim_source_coverage": citation_claim_source_coverage,
+        "citation_completeness": None,
+        "citation_completeness_resolved": False,
+        "citation_source_covered_claims": sum(claim_source_coverage),
+        "citation_applicable_claims": len(claim_source_coverage),
         "high_severity_citation_coverage": high_severity_citation_coverage,
         "exact_phrase_claim_recall_diagnostic": exact_phrase_claim_recall_diagnostic,
         "complete_evidence_eligible": complete_evidence_eligible,
         "complete_evidence_at_3": complete_evidence_at_3,
+        "source_locator_evidence_at_3": source_locator_evidence_at_3,
         "assessed_work_gate": assessed_work_gate,
         "permission_and_scope_gate": permission_and_scope_gate,
         "deterministic_hard_gates_passed": deterministic_hard_gates_passed,

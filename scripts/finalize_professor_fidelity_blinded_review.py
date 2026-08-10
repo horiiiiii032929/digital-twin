@@ -61,6 +61,8 @@ def finalize_review(
                 "required_claim_expression",
                 "supported_claim_precision",
                 "citation_semantic_alignment",
+                "citation_completeness",
+                "presented_evidence_completeness",
             )
         ):
             raise ValueError(f"semantic labels are incomplete for {task_id}")
@@ -76,6 +78,10 @@ def finalize_review(
                 "required_claim_expression": judgment["required_claim_expression"],
                 "supported_claim_precision": judgment["supported_claim_precision"],
                 "citation_semantic_alignment": judgment["citation_semantic_alignment"],
+                "citation_completeness": judgment["citation_completeness"],
+                "presented_evidence_completeness": judgment[
+                    "presented_evidence_completeness"
+                ],
                 "pedagogy_dimensions": dimensions,
             }
         )
