@@ -79,6 +79,9 @@ Actions runs `npm run check` for pushes to `main` and for pull requests.
 
 ## Current implementation status
 
+Start with the dated [current project status](docs/current-status.md) for the
+active branch, evidence decisions, GitHub queue, and next human gate.
+
 Implemented in the Sprint 1 prototype:
 
 - Chat-led onboarding workflow with deterministic follow-up handling.

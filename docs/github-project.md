@@ -35,6 +35,13 @@ complete: V3 was dropped, V0 is retained as the visual/text rollback, and no
 multimodal profile is selected. The final multi-course product and end-to-end
 evidence do not yet exist.
 
+As of 2026-08-12, #24 is the sole `In Progress` item. Its historical C0-C3
+source run is preserved but invalid for selection; the next gate is non-Codex
+human authoring review of the exact-passage v1.2 cases. #8 returns to `Todo`
+with its completed 19-check synthetic publication foundation recorded, while
+#25, #10, #9, and #12 remain queued. See the
+[current project status](current-status.md) for the exact execution order.
+
 ## Active roadmap
 
 | Phase | Dates | Required evidence |

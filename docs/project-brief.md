@@ -64,18 +64,21 @@ reached 10/13 answerable cases versus 3/13 for heading BM25, while the separate
 59-case one-time run failed after 29 cases and is invalid. Jina is an unselected
 provider spike with no result.
 
-The current phase is professor-fidelity refinement and end-to-end validation. The one-time
-60-case held-out M0-M3 comparison selected M2 hybrid retrieval for the
-experimental profile and retained BM25 as rollback. The first durable synthetic
-student slice now connects that profile to course authorization, published
-releases, persisted turns, citations, fallback, withdrawal, and restart checks.
+The current phase is professor-fidelity refinement and end-to-end validation.
+The one-time 60-case held-out M0-M3 comparison selected M2 hybrid retrieval for
+the experimental profile and retained BM25 as rollback. The first durable
+synthetic student slice now connects that profile to course authorization,
+published releases, persisted turns, citations, fallback, withdrawal, and
+restart checks.
 Generator/prompt qualification is complete, while the first 48-case
 professor-policy run is invalid for selection. Its outputs are preserved, but
 the audit found missing human authoring review, case-gold leakage, a drifted C3
 chunking corpus, and missing condition/policy bindings. C3 had 13/30
 source/page citation correctness and 0/30 exact selected-passage matches;
 semantic grounding, citation completeness, and pedagogy remain unresolved.
-The one-time held-out split remains unopened. Next comes human review of the
-exact-passage v1.2 draft, then a corrected development rerun, alongside broader professor/student,
-recovery, and capacity evidence. The
+The professor-fidelity one-time held-out split remains unopened. Next comes
+human review of the exact-passage v1.2 draft, then a corrected development
+rerun, followed by broader professor/student, recovery, and capacity evidence.
+The dated operational queue is maintained in
+[current project status](current-status.md). The
 authoritative baseline is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).

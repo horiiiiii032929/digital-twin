@@ -155,10 +155,11 @@ all return a safe answer with a sanitized warning. Original provider exception
 messages are never copied into `TutorAnswer`, because they may contain request
 or credential details.
 
-The adapter is disabled by architecture rather than a Boolean switch: no API
-route or application dependency constructs it, and no provider/model selection
-exists in the system profile. Tests inject a completion function and make no
-network calls.
+The live adapter remains inactive in the API architecture: no route or
+application dependency constructs it. The experimental profile records the
+qualified provider/model binding, but runtime activation is a separate,
+evaluation-gated integration step. Tests inject a completion function and make
+no network calls.
 
 ## Synthetic preflight
 

@@ -1,5 +1,7 @@
 # Digital Twin Delivery
 
+Status date: 2026-08-12
+
 This Project tracks the evidence-first delivery of a professor-configurable
 pedagogical Digital Twin for multiple professors and courses. The product
 combines professor teaching behaviour, approved course evidence, tutoring
@@ -37,14 +39,14 @@ policy, student interaction state, and evaluation-before-publication.
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The immediate R2 work is to approve the exact-passage v1.2 cases through a
-non-Codex human authoring review, create the immutable v2 seal, and run the
-corrected hash-bound development comparison before any held-out decision.
-In parallel,
-harden the R3 foundation with
-credentialed identity, migration, backup/restore, concurrency, recovery, and
-bounded-capacity evidence. Do not reopen the text benchmark for visual claims
-or continue multimodal V3 tuning.
+The sole `In Progress` item is #24. The immediate R2 work is to approve the
+exact-passage v1.2 cases through a non-Codex human authoring review, create the
+immutable v2 seal, and run the corrected hash-bound development comparison
+before any held-out decision.
+#8 returns to `Todo` with its 19-check synthetic publication foundation
+preserved; credentialed identity and complete professor/source lifecycles
+resume after the current gate. #25, #10, #9, and #12 remain queued. Do not
+reopen the text benchmark for visual claims or continue multimodal V3 tuning.
 
 ## Final product
 

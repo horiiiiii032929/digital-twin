@@ -3,10 +3,13 @@
 Use this folder for versioned datasets, rubrics, machine-readable component
 records, release profiles, and readable result summaries.
 
-The current cross-course retrieval benchmark is privately sealed with 40
-development and 60 unopened held-out cases. Its construction, review,
-adjudication, hashes, and access state are summarized in
-[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md).
+The cross-course retrieval benchmark was privately sealed with 40 development
+and 60 held-out cases. The one-time held-out comparison is complete and selected
+M2 hybrid RRF for the experimental profile, with BM25 retained as rollback.
+Its construction and freeze state are preserved in
+[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md),
+and its decision-bearing result is recorded in
+[`cross-course-retrieval-v1-heldout-results.md`](cross-course-retrieval-v1-heldout-results.md).
 
 ```text
 05_evaluation/
@@ -83,16 +86,18 @@ Development execution requires an environment-owned `DEEPSEEK_API_KEY`; no
 credential is stored or printed, and held-out content remains inaccessible to
 routine validation.
 
-The first durable student workflow acceptance result is summarized in
-[`student-workflow-slice-v1-synthetic-results.md`](student-workflow-slice-v1-synthetic-results.md).
-Reproduce its 14 network-free synthetic checks with:
+The current durable student and publication workflow acceptance result is
+summarized in
+[`student-workflow-slice-v2-publication-results.md`](student-workflow-slice-v2-publication-results.md).
+Reproduce its 19 network-free synthetic checks with:
 
 ```bash
 npm run verify:student-workflow
 ```
 
-This selects only a bounded local persistence and authorization foundation. It
-does not qualify authentication, a live generator, usability, or capacity.
+This keeps only a bounded local persistence, authorization, and publication
+foundation. It does not qualify credentialed authentication, complete
+professor/source administration, usability, or capacity.
 
 The course-specific retrieval-v3 candidate and analysis contract is separately
 frozen in
