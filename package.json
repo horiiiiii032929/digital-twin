@@ -40,6 +40,7 @@
     "seal:course-tutor-anchor": "uv run python -m scripts.seal_course_tutor_anchor",
     "build:course-tutor-splits": "uv run python -m scripts.build_course_tutor_splits",
     "prepare:course-tutor-authoring-review": "uv run python -m scripts.prepare_course_tutor_authoring_review",
+    "cross-review:course-tutor-authoring": "uv run python -m scripts.cross_review_course_tutor_authoring",
     "seal:course-tutor-splits": "uv run python -m scripts.seal_course_tutor_splits",
     "benchmark:professor-fidelity-development": "uv run --extra retrieval-benchmark python -m scripts.execute_professor_fidelity --execute --split development --allow-external-provider --output experiments/runs/professor_fidelity_v2/development-001/result.json",
     "benchmark:professor-fidelity-heldout": "uv run --extra retrieval-benchmark python -m scripts.execute_professor_fidelity --execute --split heldout --allow-external-provider --confirm-heldout-once --output experiments/runs/professor_fidelity_v2/heldout-001/result.json",

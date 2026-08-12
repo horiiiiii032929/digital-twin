@@ -1,9 +1,15 @@
 import copy
+from types import SimpleNamespace
 
 import pytest
 
 from scripts.analyze_professor_fidelity import analyze
-from scripts.build_course_tutor_splits import build_case
+from scripts.build_course_tutor_splits import (
+    build_case,
+    curate_source_case,
+    question_for,
+    validate_split_isolation,
+)
 from scripts.execute_professor_fidelity import _messages, _parse_output, _score
 from scripts.finalize_professor_fidelity_blinded_review import finalize_review
 from scripts.judge_professor_fidelity import (
@@ -443,6 +449,112 @@ def test_course_tutor_builder_does_not_claim_human_double_review(monkeypatch):
     assert case["annotation"]["professor_decision"] == "pending"
 
 
+def test_course_tutor_builder_rebinds_invalid_source_evidence_and_claim():
+    source = {
+        "case_id": "private-source-case",
+        "family_id": "private-source-family",
+        "lecture_id": "private-document",
+        "query": "Original private question?",
+        "claims": ["Original private claim."],
+        "required_evidence": [],
+    }
+    chunk = SimpleNamespace(
+        id="chunk-page-8",
+        document_id="private-document",
+        page_start=8,
+        content_hash="1" * 64,
+    )
+
+    private_blueprint = {
+        "curated_source_rewrites": {
+            source["case_id"]: {
+                "query": "Re-authored private question?",
+                "claims": ["Re-authored private claim."],
+            }
+        },
+        "curated_evidence_pages": {source["case_id"]: [8]},
+    }
+
+    curated = curate_source_case(source, {chunk.id: chunk}, private_blueprint)
+
+    assert curated["claims"] == [
+        "Re-authored private claim."
+    ]
+    assert curated["required_evidence"] == [
+        {
+            "document_id": "private-document",
+            "page": 8,
+            "chunk_id": "chunk-page-8",
+            "content_hash": "1" * 64,
+        }
+    ]
+
+
+def test_course_tutor_builder_uses_authentic_misconception_and_ambiguity():
+    misconception_base = {
+        "case_id": "private-misconception-source",
+        "lecture_id": "private-document-a",
+        "query": "What is the approved concept?",
+    }
+    ambiguity_base = {
+        "case_id": "private-ambiguity-source",
+        "lecture_id": "private-document-b",
+        "query": "Which private concept applies?",
+    }
+
+    private_blueprint = {
+        "misconception_questions": {
+            misconception_base["case_id"]: (
+                "I think the source says the opposite of the approved concept. "
+                "Is that right?"
+            )
+        },
+        "ambiguity_questions": {
+            ambiguity_base["case_id"]: (
+                "The concept slide in Lecture 8 is unclear. Which detail should "
+                "I identify first?"
+            )
+        },
+    }
+
+    misconception = question_for(
+        "misconception", misconception_base, 1, private_blueprint
+    )
+    ambiguity = question_for(
+        "ambiguity", ambiguity_base, 1, private_blueprint
+    )
+
+    assert "opposite" in misconception
+    assert "cannot be the right idea here" not in misconception
+    assert "Lecture 8" in ambiguity
+    assert "concept slide" in ambiguity
+
+
+def test_course_tutor_builder_rejects_cross_split_passage_overlap():
+    def dataset(split, passage_id):
+        return {
+            "cases": [
+                {
+                    "lineage": {"case_family_id": f"family-{split}"},
+                    "ground_truth": {
+                        "evidence_units": [
+                            {
+                                "passage_id": passage_id,
+                                "permission_status": "approved",
+                            }
+                        ]
+                    },
+                }
+            ]
+        }
+
+    with pytest.raises(ValueError, match="share approved passages"):
+        validate_split_isolation(
+            dataset("development", "same-passage"),
+            dataset("heldout", "same-passage"),
+        )
+
+
 def test_course_tutor_seal_requires_every_human_review_check():
     decision = {
         "case_id": "case-1",
@@ -451,7 +563,7 @@ def test_course_tutor_seal_requires_every_human_review_check():
         "notes": "",
     }
     review = {
-        "review_id": "course-tutor-v1.2-authoring-review-001",
+        "review_id": "course-tutor-v1.2-authoring-review-004",
         "status": "complete",
         "reviewed_at": "2026-08-10T12:00:00+00:00",
         "reviewer": {

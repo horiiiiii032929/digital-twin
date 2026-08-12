@@ -19,7 +19,7 @@ from scripts.validate_course_tutor_dataset import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2"
+DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2_3"
 DEFAULT_OUTPUT = ROOT / "data/processed/course_tutor_v1/sealed_v2"
 MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
@@ -33,7 +33,7 @@ REQUIRED_REVIEW_CHECKS = (
     "permission_and_version_correct",
     "split_assignment_acceptable",
 )
-EXPECTED_REVIEW_ID = "course-tutor-v1.2-authoring-review-001"
+EXPECTED_REVIEW_ID = "course-tutor-v1.2-authoring-review-004"
 
 
 def sha256(path: Path) -> str:

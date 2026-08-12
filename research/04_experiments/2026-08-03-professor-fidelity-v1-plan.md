@@ -3,8 +3,9 @@
 Date: 2026-08-03
 
 Run status: first development source run invalid for selection; corrected v2
-boundary implemented; v1.2 authoring draft awaiting human review; held-out
-unopened.
+boundary implemented; private authoring drafts 001-003 rejected or superseded;
+corrected v1.2.3 draft 004 awaiting independent human review; held-out tutor
+outputs unopened.
 
 Instrument: [`professor_fidelity_v1.json`](../05_evaluation/instruments/professor_fidelity_v1.json)
 
@@ -49,6 +50,52 @@ ledger transition. A 48-case development plus 104-case held-out v1.2 authoring
 draft was built successfully with exact selected-chunk evidence. It created no
 seal and no held-out ledger; a completed non-Codex human authoring review is
 required next.
+
+## Status amendment — 2026-08-12
+
+Codex cross-reviewed all 152 private authoring cases and their exact approved
+lecture evidence without opening tutor outputs or the blinded condition
+mapping. The initial prediction that only isolated edits were needed failed.
+Draft 001 contained systematic false-misconception, wrapper-paraphrase,
+lecture-mismatched ambiguity, unrelated multi-evidence, broken lineage, and
+semantic claim-to-page defects inherited from the invalid rapid retrieval
+instrument. Case-level advisory triage was 43 clear, 19 uncertain, and 90
+issues; the draft was preserved privately and dropped.
+
+Corrected draft 002, version `course-tutor-v1.2.1`, treats the rapid instrument
+only as an inventory and explicitly curates every positive question, atomic
+claim, and approved page. Deterministic checks and a second semantic advisory
+pass report 133 clear cases, 19 uncertain no-evidence cases, and no unresolved
+LLM-detected issue. The 19-case private focus packet includes local lexical
+nearest-neighbor diagnostics. This remains `codex_assisted: true`, is not human
+approval, creates no seal or ledger, and does not waive independent review of
+all 152 cases. The result is registered as
+`course-tutor-v1.2.1-authoring-cross-review-001`.
+
+## Second authoring-QA amendment — 2026-08-12
+
+An independent second pass invalidated the draft-002 `133 clear / 19 uncertain`
+conclusion. The tracked builder contained private source-derived authoring
+content, development and held-out shared nine exact approved passage
+identities, multi-evidence cardinality did not establish passage necessity,
+and the permission/version negative control did not represent a conflicting
+superseded version. Several multi-evidence claims also exceeded their exact
+pages.
+
+Intermediate draft 003 repaired those classes but deeper family-by-family
+inspection found one answer-bearing past-assessment source and three incomplete
+or overbroad atomic claims. Those findings are preserved privately and draft
+003 was dropped.
+
+Draft 004, version `course-tutor-v1.2.3`, keeps the private authoring blueprint
+ignored, has zero exact approved-passage and authored-family overlap across
+splits, removes the assessed-answer source, binds all 114 required factual
+claims to approved citation identities, and uses a true excluded
+superseded-version conflict in all 19 permission cases. Expanded advisory
+triage is 114 clear, 38 uncertain, and 0 detected issues. The 38 uncertain cases
+are exactly the 19 no-evidence and 19 multi-evidence cases. Independent human
+review of all 152 cases remains mandatory. The result is registered as
+`course-tutor-v1.2.3-authoring-cross-review-002`.
 
 ## Decision question
 
@@ -194,7 +241,9 @@ semantic and pedagogical review is bound.
 
 ## Known blockers before a corrected development run
 
-1. Human-review every exact-passage v1.2 authoring case without Codex assistance.
+1. Human-confirm the 38 no-evidence and multi-evidence focus cases, then
+   independently review all exact-passage v1.2.3 authoring cases without using
+   the Codex advisory as an automatic approval.
 2. Create the immutable v2 development/held-out seal and unopened ledger.
 3. Run corrected development once with the hash-bound v2 adapter.
 4. Complete condition-blinded semantic, citation, and pedagogy review and judge

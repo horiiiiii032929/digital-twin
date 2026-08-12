@@ -122,6 +122,25 @@ hash-bound 152-case checklist are prepared under ignored
 `reports/generated/course-tutor-v1.2-authoring-review/`. Human authoring review
 is the next required decision point.
 
+### Subsequent authoring-QA amendment — 2026-08-12
+
+The statement above established mechanical chunk identity, not semantic
+claim-to-passage correctness. The later registered
+[`course-tutor-v1.2.1-authoring-cross-review-001`](course-tutor-v1.2.1-authoring-cross-review-001-results.md)
+found 90 case-level issues plus a dataset-wide lineage defect in draft 001.
+That draft is preserved privately and dropped. Corrected draft 002 is now the
+only candidate for independent human review; no seal or held-out tutor-output
+ledger exists.
+
+### Second authoring-QA amendment — 2026-08-12
+
+The draft-002 conclusion above was subsequently superseded. The registered
+[`course-tutor-v1.2.3-authoring-cross-review-002`](course-tutor-v1.2.3-authoring-cross-review-002-results.md)
+found additional privacy, split-isolation, source-version, evidence-necessity,
+and semantic defects in drafts 002 and 003. Both were preserved privately and
+dropped. Draft 004 is now the only candidate for independent human review; no
+seal or held-out tutor-output ledger exists.
+
 ## Multimodal boundary
 
 The historical C0-C3 run was text-only. It did not use visual page rendering,

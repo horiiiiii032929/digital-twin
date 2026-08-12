@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare private human-review packets for course-tutor v1.2 authoring."""
+"""Prepare private human-review packets for the current course-tutor draft."""
 
 from __future__ import annotations
 
@@ -11,8 +11,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2"
-DEFAULT_OUTPUT = ROOT / "reports/generated/course-tutor-v1.2-authoring-review"
+DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2_3"
+DEFAULT_OUTPUT = ROOT / "reports/generated/course-tutor-v1.2.3-authoring-review"
 EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
 CHECKS = (
     "question_authentic_and_synthetic",
@@ -105,6 +105,9 @@ def _render_case(case: dict[str, Any], index: int) -> list[str]:
 
 def prepare(input_root: Path, output_root: Path) -> dict[str, Any]:
     manifest = load_json(input_root / "review_manifest.json")
+    review_id = manifest.get(
+        "review_id", "course-tutor-v1.2-authoring-review-001"
+    )
     split_templates: dict[str, Any] = {}
     packet_paths: dict[str, str] = {}
     for split in ("development", "heldout"):
@@ -116,7 +119,7 @@ def prepare(input_root: Path, output_root: Path) -> dict[str, Any]:
         if actual_hash != expected_hash:
             raise ValueError(f"{split} review draft hash drifted")
         lines = [
-            f"# Course-tutor v1.2 {split} authoring review",
+            f"# {dataset['dataset_version']} {split} authoring review",
             "",
             "This is private course material. Do not commit or share this packet.",
             "Review each case against the exact evidence shown. Do not run or inspect model outputs while authoring-reviewing the held-out split.",
@@ -141,7 +144,7 @@ def prepare(input_root: Path, output_root: Path) -> dict[str, Any]:
 
     template = {
         "schema_version": "1.0.0-draft",
-        "review_id": "course-tutor-v1.2-authoring-review-001",
+        "review_id": review_id,
         "status": "draft",
         "reviewed_at": None,
         "reviewer": {

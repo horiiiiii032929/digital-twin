@@ -200,10 +200,14 @@ Current utilities:
   verify:professor-fidelity-plan`.
 - `build_course_tutor_splits.py`: deterministically builds and validates an
   ignored 48-case development plus 104-case held-out **review draft** from
-  source-bound research cases. It preserves the exact selected
-  heading/paragraph chunk IDs and content hashes, labels the draft honestly,
-  refuses to overwrite prior artifacts, and creates neither a seal nor a
-  held-out ledger; run `npm run build:course-tutor-splits`.
+  a private ignored authoring blueprint and a curated case inventory. Every
+  positive question, atomic claim, and approved lecture page is explicitly
+  re-authored rather than trusted from the invalid rapid instrument. The
+  builder rejects exact approved-passage or authored-family overlap across
+  development and held-out, validates superseded-version conflicts, preserves
+  exact heading/paragraph chunk IDs and content hashes, labels the draft
+  honestly, refuses to overwrite prior artifacts, and creates neither a seal
+  nor a held-out ledger; run `npm run build:course-tutor-splits`.
 - `seal_course_tutor_splits.py`: validates explicit non-Codex human authoring
   decisions for every draft case, then writes a new immutable sealed directory
   and unopened held-out ledger with exclusive-create semantics. It cannot reset
@@ -214,6 +218,12 @@ Current utilities:
   case requires six explicit checks before approval; run `npm run
   prepare:course-tutor-authoring-review` and do not inspect model outputs during
   held-out authoring review.
+- `cross_review_course_tutor_authoring.py`: validates the corrected private
+  draft, records a clearly labeled Codex advisory review, preserves the
+  rejected and superseded draft findings, and emits a reduced packet for
+  no-evidence absence and multi-evidence necessity judgments. It does not
+  modify or replace the official human review template; run `npm run
+  cross-review:course-tutor-authoring` before independent review.
 - `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
   and review ledger after exact passage and policy inspection; the ledger
   explicitly records Codex-assisted researcher review and keeps professor and

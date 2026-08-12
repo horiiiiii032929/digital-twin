@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -143,8 +144,32 @@ def validate_dataset(
     }
     passage_count = 0
     claim_count = 0
+    normalized_questions: dict[str, str] = {}
+    strict_curated = dataset["dataset_version"].startswith(
+        "course-tutor-v1.2."
+    )
 
     for case_id, case in cases.items():
+        question = case["student_input"]["question"]
+        normalized_question = re.sub(
+            r"[^a-z0-9]+", " ", question.lower()
+        ).strip()
+        require(
+            normalized_question not in normalized_questions,
+            f"{case_id} duplicates the question in "
+            f"{normalized_questions.get(normalized_question)}",
+        )
+        normalized_questions[normalized_question] = case_id
+        if (
+            strict_curated
+            and case["lineage"]["authoring_method"]
+            == "synthetic_transformation"
+        ):
+            require(
+                case["lineage"]["parent_case_id"] is not None,
+                f"{case_id} synthetic transformation lacks a parent case",
+            )
+
         ground_truth = case["ground_truth"]
         claims = ground_truth["required_claims"] + ground_truth["optional_claims"]
         claims_by_id = unique_by_id(claims, "claim_id", f"{case_id} claim")
@@ -157,6 +182,71 @@ def validate_dataset(
             f"{case_id} evidence",
         )
         claim_count += len(claims)
+
+        scenario = case["scenario_type"]
+        if scenario == "multi_evidence":
+            approved_essential = [
+                item
+                for item in evidence.values()
+                if item["role"] == "essential"
+                and item["permission_status"] == "approved"
+            ]
+            require(
+                len(ground_truth["required_claims"]) >= 2,
+                f"{case_id} multi-evidence case needs at least two claims",
+            )
+            require(
+                len(approved_essential) >= 2,
+                f"{case_id} multi-evidence case needs at least two approved "
+                "essential passages",
+            )
+            require(
+                all(len(item["supports_claim_ids"]) == 1 for item in approved_essential),
+                f"{case_id} multi-evidence passages must each support exactly "
+                "one required claim",
+            )
+            require(
+                all(len(claim["evidence_unit_ids"]) == 1 for claim in ground_truth["required_claims"]),
+                f"{case_id} multi-evidence claims must each bind to exactly "
+                "one essential passage",
+            )
+        if scenario == "misconception":
+            require(
+                case["student_input"]["student_state"]["misconception_id"]
+                is not None,
+                f"{case_id} misconception lacks a misconception ID",
+            )
+            require(
+                "cannot be the right idea here" not in question,
+                f"{case_id} uses the rejected true-claim-negation template",
+            )
+        if scenario == "paraphrase":
+            require(
+                not question.startswith(
+                    "I do not remember the formal course wording."
+                ),
+                f"{case_id} uses the rejected paraphrase wrapper",
+            )
+        if strict_curated and scenario == "ambiguity":
+            lecture_match = re.search(r"\bLecture (\d+)\b", question)
+            require(
+                lecture_match is not None,
+                f"{case_id} ambiguity does not identify its lecture",
+            )
+            expected_source = (
+                f"it5002-lecture-{int(lecture_match.group(1)):02d}"
+                if lecture_match is not None
+                else ""
+            )
+            approved_sources = {
+                item["source_artifact_id"]
+                for item in evidence.values()
+                if item["permission_status"] == "approved"
+            }
+            require(
+                approved_sources == {expected_source},
+                f"{case_id} ambiguity lecture does not match its evidence",
+            )
 
         for claim in claims:
             evidence_ids = set(claim["evidence_unit_ids"])
@@ -292,6 +382,33 @@ def validate_dataset(
                     evidence[evidence_id]["permission_status"] == "prohibited",
                     f"{case_id} permission filter targets non-prohibited evidence",
                 )
+
+        if scenario == "permission_version":
+            prohibited = [
+                item
+                for item in evidence.values()
+                if item["permission_status"] == "prohibited"
+            ]
+            approved = [
+                item
+                for item in evidence.values()
+                if item["permission_status"] == "approved"
+            ]
+            require(
+                len(prohibited) == 1 and bool(approved),
+                f"{case_id} permission/version case needs approved evidence "
+                "and one prohibited conflict",
+            )
+            require(
+                prohibited[0]["replacement_passage_id"]
+                in {item["passage_id"] for item in approved},
+                f"{case_id} prohibited conflict does not identify its approved "
+                "replacement",
+            )
+            require(
+                prohibited[0]["evidence_unit_id"] in excluded,
+                f"{case_id} prohibited conflict is not excluded",
+            )
 
         expected = condition["expected_behavior"]
         expected_claim_ids = set(expected["required_claim_ids"])
