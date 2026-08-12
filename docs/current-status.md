@@ -19,6 +19,11 @@ but they do not override this page for current sequencing.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
+- Privacy incident requiring owner action: superseded public commit `02dbf8d`
+  embedded private source-derived authoring constants. It has been removed from
+  the active branch history, but GitHub still serves the object by SHA. Treat
+  the remote privacy boundary as open until GitHub Support removes cached views
+  and pull-request references and runs server-side garbage collection.
 
 ## Evidence state
 
@@ -26,7 +31,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Keep experimentally | Exact DeepSeek V4 Flash non-thinking binding and strict-evidence P2 qualified on the separate synthetic boundary; deterministic fallback retained | Professor-policy fidelity on valid course cases |
-| Professor fidelity | Refine; draft 004 ready for independent human review | Drafts 001-003 and their unfavorable findings are preserved privately; corrected v1.2.3 passes expanded privacy, split-isolation, citation-binding, policy, and semantic checks with 114 clear, 38 uncertain, and 0 unresolved LLM-detected defects | Independent human authoring approval, no-evidence absence, multi-evidence necessity, C0-C3 effects, safe grounding, semantic citation completeness, and pedagogy |
+| Professor fidelity | Refine; draft 004 ready for independent human review after remote purge is initiated | Drafts 001-003 and their unfavorable findings are preserved privately; corrected v1.2.3 passes expanded local privacy, split-isolation, citation-binding, policy, and semantic checks with 114 clear, 38 uncertain, and 0 unresolved LLM-detected defects | GitHub server-side removal of superseded public commit, independent human authoring approval, no-evidence absence, multi-evidence necessity, C0-C3 effects, safe grounding, semantic citation completeness, and pedagogy |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -55,28 +60,31 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Start with the 38 cases in the ignored
+1. Submit the prepared GitHub Support request to purge public commit `02dbf8d`,
+   cached views, and PR references. The current branch is clean; this step
+   closes the remaining server-side privacy exposure.
+2. Start with the 38 cases in the ignored
    `course-tutor-v1.2.3-llm-cross-review/human_uncertainty_focus.md` packet.
    These are the 19 no-evidence cases requiring corpus-wide absence review and
    the 19 multi-evidence cases requiring confirmation that both passages are
    genuinely necessary.
-2. A non-Codex human then independently confirms all six checks for all 48
+3. A non-Codex human then independently confirms all six checks for all 48
    development and 104 held-out cases in the ignored
    `course-tutor-v1.2.3-authoring-review` packets. The 114 advisory-clear cases
    are a prioritization aid, not automatic approval. Do not run or inspect
    held-out tutor outputs.
-3. Any failed or uncertain case is revised and reviewed again. The sealer
+4. Any failed or uncertain case is revised and reviewed again. The sealer
    refuses partial approval, missing checks, Codex-assisted certification, or
    an unbound review file.
-4. After all cases pass, create the immutable v2 seal and unopened held-out
+5. After all cases pass, create the immutable v2 seal and unopened held-out
    ledger.
-5. Run the corrected hash-bound development comparison only.
-6. Complete condition-blinded semantic, citation, context-sufficiency, and
+6. Run the corrected hash-bound development comparison only.
+7. Complete condition-blinded semantic, citation, context-sufficiency, and
    pedagogy review.
-7. Register the development decision. Open the one-time held-out split only if
+8. Register the development decision. Open the one-time held-out split only if
    every prospective development gate permits it.
 
-The immediate user action is steps 1 and 2. Drafts 001-003 and their
+The immediate user action is steps 1-3. Drafts 001-003 and their
 unfavorable findings remain preserved privately; the official draft-004 review
 template is blank and explicitly requires `human_review: true` and
 `codex_assisted: false`. After that completed template is returned, the

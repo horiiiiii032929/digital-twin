@@ -9,7 +9,8 @@ held-out tutor outputs unopened.
 
 Decision: Drop private drafts 002 and 003, preserve their unfavorable
 findings, and advance corrected draft 004 to independent human review. Do not
-approve, seal, or execute the held-out split.
+approve, seal, or execute the held-out split. Initiate GitHub server-side purge
+of the superseded public commit before treating the privacy boundary as closed.
 
 ## Decision question
 
@@ -41,6 +42,10 @@ that passes the expanded deterministic and Codex semantic checks.
 - Random seed: not applicable; construction and checks are deterministic.
 - Held-out tutor outputs, blinded condition mapping, seal, and one-time
   held-out ledger were not opened or created.
+- Remote exposure: draft-002 authoring constants were pushed in public commit
+  `02dbf8dedf9e5728a3c765b1e6e8616366fc3721`. The branch and PR now point to a
+  clean rewritten history, but the superseded object remained publicly
+  addressable by SHA at the end of this audit.
 
 The draft-004 hash boundary is:
 
@@ -77,6 +82,11 @@ sixth checks in four inherited source families. All were corrected in draft
 004. The slide whose flattened text had ambiguous column ordering was also
 rendered and inspected visually; the visual layout supported the authored
 claim.
+
+Because the repository is public, rewriting the branch is necessary but not a
+complete remote purge. The owner must ask GitHub Support to remove cached views
+and pull-request references and run server-side garbage collection for the
+superseded commit. No course wording is repeated in this durable record.
 
 ## Candidate result
 
@@ -118,6 +128,9 @@ by this result.
 ## Limitations and human gate
 
 - This remains a single-LLM advisory and not independent human approval.
+- Local and active-branch privacy checks pass, but the remote privacy incident
+  remains open until GitHub confirms server-side purge of the superseded
+  commit.
 - The 114 clear dispositions are a prioritization aid, not automatic approval.
 - The independent reviewer must decide all six checks for all 152 cases and
   give special attention to the 38-case focus packet.
