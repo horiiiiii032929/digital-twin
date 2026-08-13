@@ -65,6 +65,19 @@ transient API timeout/connection failure. Authentication, configuration,
 model, and fingerprint failures remain hard stops. Valid approve/revise
 decisions are never retried, and no v4 private judgment is reused or sent.
 
+### V6 alias-and-output continuation
+
+The same source-holder direction authorizes
+`course-tutor-hybrid-authoring-review-v6` after v5 exposed a prompt alias
+ambiguity and a 4,096-token thinking-output ceiling. V6 keeps every v5 private
+field, exclusion, provider, `deepseek-v4-pro` model, non-personal identity,
+314-request maximum, and USD 2 ceiling. It may identify `dev` and `test` as the
+repository's canonical family-token aliases for `development` and `heldout`,
+respectively, and may increase the per-response output allowance to 8,192
+tokens. The same single bounded retry classes apply. Finish reason and
+reasoning-token usage may be recorded when returned. Valid decisions are never
+retried, and no judgment from v1 through v5 is reused or sent.
+
 ## Professor-fidelity DeepSeek authorization
 
 The source holder explicitly authorizes the issue #24 single-turn C0-C3
