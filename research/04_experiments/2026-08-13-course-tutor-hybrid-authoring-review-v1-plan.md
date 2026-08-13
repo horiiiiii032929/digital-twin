@@ -4,8 +4,16 @@ Plan ID: `course-tutor-hybrid-authoring-review-v1`
 
 Date frozen: 2026-08-13
 
-Status: prospective; no ensemble judgments or human sample decisions have been
-run under this protocol.
+Status: attempt 001 stopped as invalid on 2026-08-14; superseded prospectively
+by `course-tutor-hybrid-authoring-review-v2`. No human packet was issued, no
+seal was created, and held-out tutor outputs remained unopened.
+
+Attempt 001 preserved 172 of 456 planned records before the human-workload
+lower bound reached 66 cases, exceeding the frozen ceiling of 48. Qwen 3
+returned empty responses under implicit thinking mode, and Gemma's handling of
+the inherent no-evidence limitation made the 32-case baseline too fragile.
+The unfavorable result is registered as
+`course-tutor-hybrid-authoring-review-v1-attempt-001-invalid`.
 
 ## Decision question
 
