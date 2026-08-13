@@ -4,8 +4,11 @@ Plan ID: `course-tutor-hybrid-authoring-review-v4`
 
 Date frozen: 2026-08-14
 
-Status: prospective; frozen before any v4 model preflight or private case
-judgment.
+Status: invalid and stopped after 22 completed private judgments; superseded by
+`course-tutor-hybrid-authoring-review-v5`. A 23rd case timed out and remained
+explicitly in progress because the implementation incorrectly treated every
+provider exception as a hard stop. No held-out authoring case, local private
+judgment, human packet, seal, ledger, or tutor output was created.
 
 ## Decision question
 

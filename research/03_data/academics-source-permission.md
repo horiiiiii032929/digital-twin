@@ -54,6 +54,17 @@ maximum. A second private attempt is permitted only for empty or malformed
 structured output; valid approve/revise decisions are never retried. V3
 judgments are not sent to the provider or reused in v4.
 
+### V5 transient-failure continuation
+
+The same source-holder direction authorizes
+`course-tutor-hybrid-authoring-review-v5` after v4 exposed a private-request
+timeout classification bug. V5 keeps every v4 data field, exclusion, provider,
+model, non-personal identity, 314-request maximum, and USD 2 ceiling. Its one
+bounded second attempt may follow empty/malformed structured output or a
+transient API timeout/connection failure. Authentication, configuration,
+model, and fingerprint failures remain hard stops. Valid approve/revise
+decisions are never retried, and no v4 private judgment is reused or sent.
+
 ## Professor-fidelity DeepSeek authorization
 
 The source holder explicitly authorizes the issue #24 single-turn C0-C3
