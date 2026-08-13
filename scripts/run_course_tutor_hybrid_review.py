@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
+from openai import APIConnectionError, APITimeoutError, AuthenticationError
 from openai import OpenAI, OpenAIError
 
 from scripts.build_course_tutor_splits import validate_split_isolation
@@ -48,19 +49,19 @@ PERMISSION_PATH = ROOT / "research/03_data/academics-source-permission.md"
 PLAN_PATH = (
     ROOT
     / "research/04_experiments/"
-    "2026-08-14-course-tutor-hybrid-authoring-review-v4-plan.md"
+    "2026-08-14-course-tutor-hybrid-authoring-review-v5-plan.md"
 )
 EXPECTED_PERMISSION_SHA256 = (
-    "6f3f9383b7e3cfceb65d38c8fd8fcbd461bbb1379f22710b1b3a869a39448f77"
+    "0af82f1135e36642591b1c8f708c6d3bf56419e6e94520ecb5681cdc6ad7c748"
 )
 EXPECTED_PLAN_SHA256 = (
-    "18e266d3f9f17ba37723450f282347bae3d2135a2263baad8b7c2cf21e387665"
+    "d2f61fa628030cbe27456abed5c7815b23ac4ef31e6b0131e3232c77ad158b9a"
 )
-PLAN_ID = "course-tutor-hybrid-authoring-review-v4"
-ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v4-001"
-HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v4-001"
-PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v4"
-SAMPLE_SEED = "course-tutor-hybrid-human-sample-v4"
+PLAN_ID = "course-tutor-hybrid-authoring-review-v5"
+ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v5-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v5-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v5"
+SAMPLE_SEED = "course-tutor-hybrid-human-sample-v5"
 MAX_HUMAN_CASES = 48
 NEIGHBOR_COUNT = 8
 BASELINE_PER_STRATUM = 1
@@ -73,7 +74,7 @@ DEEPSEEK_PUBLIC_PROBE_MIN_VALID = 9
 DEEPSEEK_PRIVATE_MAX_ATTEMPTS = 2
 DEEPSEEK_INPUT_PRICE_PER_MILLION_USD = 0.435
 DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD = 0.87
-DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v4"
+DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v5"
 CHECK_FIELDS = (
     "question_authentic_and_synthetic",
     "expected_behavior_correct",
@@ -94,7 +95,7 @@ SCENARIOS = (
 )
 MODEL_BINDINGS = (
     {
-        "reviewer_id": "deepseek-v4-pro-reviewer-v4",
+        "reviewer_id": "deepseek-v4-pro-reviewer-v5",
         "model": DEEPSEEK_MODEL,
         "litellm_model": None,
         "family": "DeepSeek V4",
@@ -105,7 +106,7 @@ MODEL_BINDINGS = (
         "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
     },
     {
-        "reviewer_id": "local-qwen3-4b-reviewer-v4",
+        "reviewer_id": "local-qwen3-4b-reviewer-v5",
         "model": "qwen3:4b",
         "litellm_model": None,
         "family": "Qwen 3",
@@ -118,7 +119,7 @@ MODEL_BINDINGS = (
         "documented_revision": None,
     },
     {
-        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v4",
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v5",
         "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
         "litellm_model": None,
         "family": "Qwen 3 derivative",
@@ -159,12 +160,12 @@ def sha256(path: Path) -> str:
 def assert_external_authorization(allow_external_provider: bool) -> None:
     if not allow_external_provider:
         raise ValueError(
-            "the frozen v4 review requires --allow-external-provider"
+            "the frozen v5 review requires --allow-external-provider"
         )
     if sha256(PERMISSION_PATH) != EXPECTED_PERMISSION_SHA256:
         raise ValueError("DeepSeek permission record hash drifted")
     if sha256(PLAN_PATH) != EXPECTED_PLAN_SHA256:
-        raise ValueError("frozen v4 review plan hash drifted")
+        raise ValueError("frozen v5 review plan hash drifted")
 
 
 def _write_private_atomic(path: Path, value: dict[str, Any]) -> None:
@@ -543,7 +544,7 @@ def _deepseek_upper_bound_cost(input_tokens: int, output_tokens: int) -> float:
 def _deepseek_client() -> OpenAI:
     api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
     if not api_key:
-        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v4 review")
+        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v5 review")
     return OpenAI(
         api_key=api_key,
         base_url="https://api.deepseek.com",
@@ -571,14 +572,41 @@ def call_deepseek(
                 "user_id": DEEPSEEK_USER_ID,
             },
         )
+    except AuthenticationError as error:
+        return {
+            "status": "invalid",
+            "decision": None,
+            "usage": None,
+            "elapsed_seconds": round(time.perf_counter() - started, 6),
+            "provider_model": None,
+            "provider_revision": None,
+            "failure_class": "authentication_error",
+            "retryable": False,
+            "hard_stop": True,
+            "error": f"{type(error).__name__}: provider authentication failed",
+        }
+    except (APITimeoutError, APIConnectionError) as error:
+        return {
+            "status": "invalid",
+            "decision": None,
+            "usage": None,
+            "elapsed_seconds": round(time.perf_counter() - started, 6),
+            "provider_model": None,
+            "provider_revision": None,
+            "failure_class": "transient_provider_error",
+            "retryable": True,
+            "hard_stop": False,
+            "error": f"{type(error).__name__}: transient provider request failed",
+        }
     except OpenAIError as error:
         return {
             "status": "invalid",
             "decision": None,
             "usage": None,
+            "elapsed_seconds": round(time.perf_counter() - started, 6),
             "provider_model": None,
             "provider_revision": None,
-            "failure_class": "provider_error",
+            "failure_class": "provider_configuration_error",
             "retryable": False,
             "hard_stop": True,
             "error": f"{type(error).__name__}: provider request failed",
@@ -1192,7 +1220,7 @@ def run_review(
     assert_external_authorization(allow_external_provider)
     code_binding = _git_binding()
     if code_binding["dirty"]:
-        raise ValueError("the frozen v4 review must run from a clean revision")
+        raise ValueError("the frozen v5 review must run from a clean revision")
     datasets, _, review_manifest = _load_and_validate_draft(input_root)
     assert_model_bindings(ollama_url)
     deepseek_client = _deepseek_client()
@@ -1233,7 +1261,9 @@ def run_review(
             "private_max_attempts": DEEPSEEK_PRIVATE_MAX_ATTEMPTS,
             "request_limit": DEEPSEEK_CALL_LIMIT,
             "cost_stop_usd": DEEPSEEK_COST_STOP_USD,
-            "retries": "one-only-after-empty-or-malformed-content",
+            "retries": (
+                "one-only-after-empty-malformed-timeout-or-connection-failure"
+            ),
         },
     }
     if checkpoint_path.exists():
@@ -1388,8 +1418,18 @@ def run_review(
                     {
                         "status": final_attempt["status"],
                         "decision": final_attempt["decision"],
-                        "provider_model": final_attempt.get("provider_model"),
-                        "provider_revision": final_attempt.get("provider_revision"),
+                        "provider_model": (
+                            final_attempt.get("provider_model") or DEEPSEEK_MODEL
+                        ),
+                        "provider_revision": (
+                            final_attempt.get("provider_revision")
+                            or frozen_provider_revision
+                        ),
+                        "provider_identity_source": (
+                            "response"
+                            if final_attempt.get("provider_revision")
+                            else "frozen_request_binding"
+                        ),
                         "usage": aggregate_attempt_usage(row["attempts"]),
                         "error": final_attempt.get("error"),
                     }

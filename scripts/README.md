@@ -208,21 +208,21 @@ Current utilities:
   exact heading/paragraph chunk IDs and content hashes, labels the draft
   honestly, refuses to overwrite prior artifacts, and creates neither a seal
   nor a held-out ledger; run `npm run build:course-tutor-splits`.
-- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen v4
+- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen v5
   DeepSeek V4 Pro/Qwen/Qwen-derivative ensemble over all 152 authoring cases;
   Gemma is excluded. It binds the external reviewer to the official
   `DeepSeek-V4-Pro-0813` model and its preflight fingerprint, enables `high`
   thinking through the official OpenAI-compatible client, requires strict
   JSON, records every cost/token trace, stress-tests ten public probes, allows
-  one retry only for empty/malformed content, and enforces 314-request and USD
-  2 limits. It selects a stable
+  one retry only for empty/malformed content or a transient timeout/connection
+  failure, and enforces 314-request and USD 2 limits. It selects a stable
   16-case scenario-by-split human sample before reading verdicts, assigns all
   19 no-evidence cases to human review, and requires both DeepSeek-family and
   local-Qwen-family approval outside the human set. It renders a private human
   packet with all selection classes and model decisions hidden, and stops
   instead of assigning more than 48 cases to the human reviewer; run `npm run
   review:course-tutor-authoring-hybrid` from a clean committed revision after
-  confirming the bounded authorization in the v4 plan.
+  confirming the bounded authorization in the v5 plan.
 - `seal_course_tutor_splits.py`: validates all 456 cross-provider model
   records, exact frozen sampling and escalation, the completed blinded
   independent-human audit, two-family model approval outside the human set,

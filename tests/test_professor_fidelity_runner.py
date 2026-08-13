@@ -1,7 +1,9 @@
 import copy
 from types import SimpleNamespace
 
+import httpx
 import pytest
+from openai import APITimeoutError
 
 from scripts.analyze_professor_fidelity import analyze
 from scripts.build_course_tutor_splits import (
@@ -614,7 +616,7 @@ def test_course_tutor_hybrid_baseline_is_one_case_per_stratum():
     assert set(strata.values()) == {1}
 
 
-def test_course_tutor_v4_uses_deepseek_v4_pro_and_excludes_gemma():
+def test_course_tutor_v5_uses_deepseek_v4_pro_and_excludes_gemma():
     assert MODEL_BINDINGS[0]["model"] == "deepseek-v4-pro"
     assert MODEL_BINDINGS[0]["documented_revision"] == "DeepSeek-V4-Pro-0813"
     assert MODEL_BINDINGS[0]["thinking"] is True
@@ -622,7 +624,7 @@ def test_course_tutor_v4_uses_deepseek_v4_pro_and_excludes_gemma():
     assert not any("gemma" in binding["model"].casefold() for binding in MODEL_BINDINGS)
 
 
-def test_course_tutor_v4_calls_official_deepseek_json_thinking_transport():
+def test_course_tutor_v5_calls_official_deepseek_json_thinking_transport():
     captured = {}
 
     class Completions:
@@ -670,6 +672,32 @@ def test_course_tutor_v4_calls_official_deepseek_json_thinking_transport():
     assert captured["extra_body"]["thinking"] == {"type": "enabled"}
 
 
+def test_course_tutor_v5_treats_deepseek_timeout_as_retryable():
+    class Completions:
+        def create(self, **kwargs):
+            del kwargs
+            raise APITimeoutError(
+                request=httpx.Request(
+                    "POST", "https://api.deepseek.com/chat/completions"
+                )
+            )
+
+    client = SimpleNamespace(
+        chat=SimpleNamespace(completions=Completions())
+    )
+    result = call_deepseek(
+        client=client,
+        prompt="Return JSON.",
+        expected_revision="fp-v4-pro-synthetic",
+    )
+
+    assert result["status"] == "invalid"
+    assert result["failure_class"] == "transient_provider_error"
+    assert result["retryable"] is True
+    assert result["hard_stop"] is False
+    assert result["elapsed_seconds"] >= 0
+
+
 def test_course_tutor_model_decision_requires_consistent_checks():
     decision = {
         "decision": "approve",
@@ -683,7 +711,7 @@ def test_course_tutor_model_decision_requires_consistent_checks():
         validate_model_decision(decision)
 
 
-def test_course_tutor_v4_escalates_by_two_family_quorum():
+def test_course_tutor_v5_escalates_by_two_family_quorum():
     rows = [
         {
             "case_id": "case-1",
@@ -776,6 +804,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                             {
                                 "provider_model": "deepseek-v4-pro",
                                 "provider_revision": "fp-v4-pro-synthetic",
+                                "provider_identity_source": "response",
                                 "usage": {"approximate_cost_usd": 0.00001},
                                 "attempts": [
                                     {

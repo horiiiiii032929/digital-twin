@@ -189,7 +189,18 @@ def _validate_ensemble(
             ):
                 raise ValueError("DeepSeek row has an invalid attempt count")
             for attempt in attempts:
-                if any(
+                if attempt.get("failure_class") == "transient_provider_error":
+                    if any(
+                        (
+                            attempt.get("provider_model") is not None,
+                            attempt.get("provider_revision") is not None,
+                            attempt.get("usage") is not None,
+                            attempt.get("retryable") is not True,
+                            attempt.get("hard_stop") is not False,
+                        )
+                    ):
+                        raise ValueError("transient DeepSeek attempt is invalid")
+                elif any(
                     (
                         attempt.get("provider_model") != binding["model"],
                         attempt.get("provider_revision")
@@ -201,6 +212,13 @@ def _validate_ensemble(
                     raise ValueError("DeepSeek attempt differs from its binding")
             if attempts[-1].get("status") != row.get("status"):
                 raise ValueError("DeepSeek final attempt and decision status differ")
+            expected_identity_source = (
+                "response"
+                if attempts[-1].get("provider_revision")
+                else "frozen_request_binding"
+            )
+            if row.get("provider_identity_source") != expected_identity_source:
+                raise ValueError("DeepSeek identity source is invalid")
         if row.get("status") == "valid":
             validate_model_decision(row.get("decision"))
         elif row.get("status") != "invalid" or row.get("decision") is not None:
