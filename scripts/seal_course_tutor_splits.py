@@ -195,21 +195,30 @@ def _validate_ensemble(
                             attempt.get("provider_model") is not None,
                             attempt.get("provider_revision") is not None,
                             attempt.get("usage") is not None,
+                            attempt.get("finish_reason") is not None,
                             attempt.get("retryable") is not True,
                             attempt.get("hard_stop") is not False,
                         )
                     ):
                         raise ValueError("transient DeepSeek attempt is invalid")
-                elif any(
-                    (
-                        attempt.get("provider_model") != binding["model"],
-                        attempt.get("provider_revision")
-                        != ensemble["external_provider_revision"],
-                        not isinstance(attempt.get("usage"), dict),
-                        attempt.get("hard_stop") is True,
-                    )
-                ):
-                    raise ValueError("DeepSeek attempt differs from its binding")
+                else:
+                    usage = attempt.get("usage") or {}
+                    if any(
+                        (
+                            attempt.get("provider_model") != binding["model"],
+                            attempt.get("provider_revision")
+                            != ensemble["external_provider_revision"],
+                            not isinstance(attempt.get("usage"), dict),
+                            not isinstance(attempt.get("finish_reason"), str),
+                            not attempt.get("finish_reason", "").strip(),
+                            not isinstance(usage.get("reasoning_tokens"), int),
+                            usage.get("reasoning_tokens", -1) < 0,
+                            attempt.get("hard_stop") is True,
+                        )
+                    ):
+                        raise ValueError(
+                            "DeepSeek attempt differs from its binding"
+                        )
             if attempts[-1].get("status") != row.get("status"):
                 raise ValueError("DeepSeek final attempt and decision status differ")
             expected_identity_source = (
@@ -219,6 +228,8 @@ def _validate_ensemble(
             )
             if row.get("provider_identity_source") != expected_identity_source:
                 raise ValueError("DeepSeek identity source is invalid")
+            if row.get("finish_reason") != attempts[-1].get("finish_reason"):
+                raise ValueError("DeepSeek final finish reason is invalid")
         if row.get("status") == "valid":
             validate_model_decision(row.get("decision"))
         elif row.get("status") != "invalid" or row.get("decision") is not None:

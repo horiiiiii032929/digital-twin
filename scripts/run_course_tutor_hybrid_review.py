@@ -49,18 +49,18 @@ PERMISSION_PATH = ROOT / "research/03_data/academics-source-permission.md"
 PLAN_PATH = (
     ROOT
     / "research/04_experiments/"
-    "2026-08-14-course-tutor-hybrid-authoring-review-v5-plan.md"
+    "2026-08-14-course-tutor-hybrid-authoring-review-v6-plan.md"
 )
 EXPECTED_PERMISSION_SHA256 = (
-    "0af82f1135e36642591b1c8f708c6d3bf56419e6e94520ecb5681cdc6ad7c748"
+    "0595f2163c70b6a81e2b3bfe019a584f8adc47c0e2d5791cc485ccfc14988d9b"
 )
 EXPECTED_PLAN_SHA256 = (
-    "d2f61fa628030cbe27456abed5c7815b23ac4ef31e6b0131e3232c77ad158b9a"
+    "821c4c3e4575a9bfb2af1c345121475ca079c62c02ab6593f09c7f67ffd77851"
 )
-PLAN_ID = "course-tutor-hybrid-authoring-review-v5"
-ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v5-001"
-HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v5-001"
-PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v5"
+PLAN_ID = "course-tutor-hybrid-authoring-review-v6"
+ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v6-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v6-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v6"
 SAMPLE_SEED = "course-tutor-hybrid-human-sample-v5"
 MAX_HUMAN_CASES = 48
 NEIGHBOR_COUNT = 8
@@ -72,9 +72,10 @@ DEEPSEEK_COST_STOP_USD = 2.0
 DEEPSEEK_PUBLIC_PROBE_COUNT = 10
 DEEPSEEK_PUBLIC_PROBE_MIN_VALID = 9
 DEEPSEEK_PRIVATE_MAX_ATTEMPTS = 2
+DEEPSEEK_MAX_OUTPUT_TOKENS = 8192
 DEEPSEEK_INPUT_PRICE_PER_MILLION_USD = 0.435
 DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD = 0.87
-DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v5"
+DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v6"
 CHECK_FIELDS = (
     "question_authentic_and_synthetic",
     "expected_behavior_correct",
@@ -95,7 +96,7 @@ SCENARIOS = (
 )
 MODEL_BINDINGS = (
     {
-        "reviewer_id": "deepseek-v4-pro-reviewer-v5",
+        "reviewer_id": "deepseek-v4-pro-reviewer-v6",
         "model": DEEPSEEK_MODEL,
         "litellm_model": None,
         "family": "DeepSeek V4",
@@ -106,7 +107,7 @@ MODEL_BINDINGS = (
         "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
     },
     {
-        "reviewer_id": "local-qwen3-4b-reviewer-v5",
+        "reviewer_id": "local-qwen3-4b-reviewer-v6",
         "model": "qwen3:4b",
         "litellm_model": None,
         "family": "Qwen 3",
@@ -119,7 +120,7 @@ MODEL_BINDINGS = (
         "documented_revision": None,
     },
     {
-        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v5",
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v6",
         "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
         "litellm_model": None,
         "family": "Qwen 3 derivative",
@@ -160,12 +161,12 @@ def sha256(path: Path) -> str:
 def assert_external_authorization(allow_external_provider: bool) -> None:
     if not allow_external_provider:
         raise ValueError(
-            "the frozen v5 review requires --allow-external-provider"
+            "the frozen v6 review requires --allow-external-provider"
         )
     if sha256(PERMISSION_PATH) != EXPECTED_PERMISSION_SHA256:
         raise ValueError("DeepSeek permission record hash drifted")
     if sha256(PLAN_PATH) != EXPECTED_PLAN_SHA256:
-        raise ValueError("frozen v5 review plan hash drifted")
+        raise ValueError("frozen v6 review plan hash drifted")
 
 
 def _write_private_atomic(path: Path, value: dict[str, Any]) -> None:
@@ -440,7 +441,7 @@ def review_prompt(case_payload: dict[str, Any]) -> str:
             "- claims_atomic_and_correct: each required/optional claim is one checkable proposition and is factually consistent with the exact evidence; true when no positive claim is intentionally required.",
             "- evidence_supports_claims: exact passages support every mapped claim and the evidence set is sufficient without unsupported inference.",
             "- permission_and_version_correct: evidence is approved or intentionally prohibited/superseded for a version-conflict case, source/version/replacement metadata is coherent, and expected behavior respects that boundary.",
-            "- split_assignment_acceptable: the case says one valid split, its family identifier is split-specific, and its scenario label is coherent; static validators separately enforce cross-split isolation.",
+            "- split_assignment_acceptable: the case says one valid split, its family identifier is split-specific, and its scenario label is coherent. The frozen family-token aliases are development=dev and heldout=test; these matching aliases are valid even though the words differ. A development/test or heldout/dev mismatch fails. Static validators separately enforce cross-split isolation.",
             scenario_rule,
             "Give a short concrete reason emphasizing any failed check or the strongest approval evidence.",
             "CASE:",
@@ -544,7 +545,7 @@ def _deepseek_upper_bound_cost(input_tokens: int, output_tokens: int) -> float:
 def _deepseek_client() -> OpenAI:
     api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
     if not api_key:
-        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v5 review")
+        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v6 review")
     return OpenAI(
         api_key=api_key,
         base_url="https://api.deepseek.com",
@@ -564,7 +565,7 @@ def call_deepseek(
         response = client.chat.completions.create(
             model=DEEPSEEK_MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=4096,
+            max_tokens=DEEPSEEK_MAX_OUTPUT_TOKENS,
             response_format={"type": "json_object"},
             reasoning_effort="high",
             extra_body={
@@ -613,6 +614,13 @@ def call_deepseek(
         }
     elapsed_seconds = time.perf_counter() - started
     response_usage = response.usage
+    choice = response.choices[0] if response.choices else None
+    finish_reason = getattr(choice, "finish_reason", None)
+    completion_details = (
+        getattr(response_usage, "completion_tokens_details", None)
+        if response_usage
+        else None
+    )
     input_tokens = int(response_usage.prompt_tokens if response_usage else 0)
     output_tokens = int(response_usage.completion_tokens if response_usage else 0)
     total_tokens = int(response_usage.total_tokens if response_usage else 0)
@@ -621,6 +629,9 @@ def call_deepseek(
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
         "total_tokens": total_tokens,
+        "reasoning_tokens": int(
+            getattr(completion_details, "reasoning_tokens", 0) or 0
+        ),
         "approximate_cost_usd": _deepseek_upper_bound_cost(
             input_tokens, output_tokens
         ),
@@ -630,6 +641,7 @@ def call_deepseek(
         "usage": usage,
         "provider_model": response.model,
         "provider_revision": response.system_fingerprint,
+        "finish_reason": finish_reason,
     }
     if response.model != DEEPSEEK_MODEL:
         return {
@@ -664,13 +676,17 @@ def call_deepseek(
             "hard_stop": True,
             "error": "provider system fingerprint drifted during the frozen run",
         }
-    content = response.choices[0].message.content if response.choices else None
+    content = choice.message.content if choice else None
     if not isinstance(content, str) or not content.strip():
         return {
             **base,
             "status": "invalid",
             "decision": None,
-            "failure_class": "empty_content",
+            "failure_class": (
+                "output_limit_exhausted"
+                if finish_reason == "length"
+                else "empty_content"
+            ),
             "retryable": True,
             "hard_stop": False,
             "error": "provider returned empty structured content",
@@ -823,7 +839,11 @@ def validate_transport_preflights(rows: Any) -> list[dict[str, Any]]:
                     row.get("provider_model") != DEEPSEEK_MODEL,
                     not isinstance(row.get("provider_revision"), str),
                     not row.get("provider_revision", "").strip(),
+                    not isinstance(row.get("finish_reason"), str),
+                    not row.get("finish_reason", "").strip(),
                     not isinstance(usage.get("approximate_cost_usd"), (int, float)),
+                    not isinstance(usage.get("reasoning_tokens"), int),
+                    usage.get("reasoning_tokens", -1) < 0,
                     row.get("hard_stop") is True,
                 )
             ):
@@ -1220,7 +1240,7 @@ def run_review(
     assert_external_authorization(allow_external_provider)
     code_binding = _git_binding()
     if code_binding["dirty"]:
-        raise ValueError("the frozen v5 review must run from a clean revision")
+        raise ValueError("the frozen v6 review must run from a clean revision")
     datasets, _, review_manifest = _load_and_validate_draft(input_root)
     assert_model_bindings(ollama_url)
     deepseek_client = _deepseek_client()
@@ -1259,10 +1279,11 @@ def run_review(
             "public_stress_probes": DEEPSEEK_PUBLIC_PROBE_COUNT,
             "public_stress_min_valid": DEEPSEEK_PUBLIC_PROBE_MIN_VALID,
             "private_max_attempts": DEEPSEEK_PRIVATE_MAX_ATTEMPTS,
+            "max_output_tokens": DEEPSEEK_MAX_OUTPUT_TOKENS,
             "request_limit": DEEPSEEK_CALL_LIMIT,
             "cost_stop_usd": DEEPSEEK_COST_STOP_USD,
             "retries": (
-                "one-only-after-empty-malformed-timeout-or-connection-failure"
+                "one-only-after-empty-output-limit-malformed-timeout-or-connection-failure"
             ),
         },
     }
@@ -1326,6 +1347,9 @@ def run_review(
             "input_tokens": sum(usage.get("input_tokens", 0) for usage in known),
             "output_tokens": sum(usage.get("output_tokens", 0) for usage in known),
             "total_tokens": sum(usage.get("total_tokens", 0) for usage in known),
+            "reasoning_tokens": sum(
+                usage.get("reasoning_tokens", 0) for usage in known
+            ),
             "approximate_cost_usd": sum(
                 usage.get("approximate_cost_usd", 0.0) for usage in known
             ),
@@ -1430,6 +1454,7 @@ def run_review(
                             if final_attempt.get("provider_revision")
                             else "frozen_request_binding"
                         ),
+                        "finish_reason": final_attempt.get("finish_reason"),
                         "usage": aggregate_attempt_usage(row["attempts"]),
                         "error": final_attempt.get("error"),
                     }
