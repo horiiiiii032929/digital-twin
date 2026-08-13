@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Run the frozen local ensemble and prepare a blinded human authoring audit."""
+"""Run the frozen cross-provider ensemble and prepare a blinded human audit."""
 
 from __future__ import annotations
 
 import argparse
+import asyncio
 import hashlib
 import json
 import math
+import os
 import re
 import subprocess
 import time
@@ -18,6 +20,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
+from services.llm import LiteLlmClient
 from scripts.build_course_tutor_splits import validate_split_isolation
 from scripts.it5002_rapid_common import load_course_corpus
 from scripts.validate_course_tutor_dataset import (
@@ -25,9 +30,11 @@ from scripts.validate_course_tutor_dataset import (
     validate_dataset,
     validate_schema,
 )
+from src.digital_twin.llm import LlmError, LlmMessage
 
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env", override=False)
 DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2_3"
 DEFAULT_OUTPUT = (
     ROOT / "reports/generated/course-tutor-v1.2.3-hybrid-authoring-review"
@@ -39,14 +46,34 @@ CASE_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
 CONDITION_SCHEMA_PATH = (
     ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
 )
-PLAN_ID = "course-tutor-hybrid-authoring-review-v2"
-ENSEMBLE_ID = "course-tutor-v1.2.3-local-ensemble-v2-001"
-HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v2-001"
-PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v2"
-SAMPLE_SEED = "course-tutor-hybrid-human-sample-v2"
+PERMISSION_PATH = ROOT / "research/03_data/academics-source-permission.md"
+PLAN_PATH = (
+    ROOT
+    / "research/04_experiments/"
+    "2026-08-14-course-tutor-hybrid-authoring-review-v3-plan.md"
+)
+EXPECTED_PERMISSION_SHA256 = (
+    "fa5ddde5a3042eb8af02dbbb04228a78d7db0a5a9e5daebb8a2fcfbb0fa2fa2d"
+)
+EXPECTED_PLAN_SHA256 = (
+    "ee69258807b5de19cb41fe8c593c7f92ea158a1c11143e991676eec91920553a"
+)
+PLAN_ID = "course-tutor-hybrid-authoring-review-v3"
+ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v3-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v3-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v3"
+SAMPLE_SEED = "course-tutor-hybrid-human-sample-v3"
 MAX_HUMAN_CASES = 48
 NEIGHBOR_COUNT = 8
 BASELINE_PER_STRATUM = 1
+DEEPSEEK_MODEL = "deepseek-v4-pro"
+DEEPSEEK_LITELLM_MODEL = "deepseek/deepseek-v4-pro"
+DEEPSEEK_DOCUMENTED_REVISION = "DeepSeek-V4-Pro-0813"
+DEEPSEEK_CALL_LIMIT = 153
+DEEPSEEK_COST_STOP_USD = 2.0
+DEEPSEEK_INPUT_PRICE_PER_MILLION_USD = 0.435
+DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD = 0.87
+DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v3"
 CHECK_FIELDS = (
     "question_authentic_and_synthetic",
     "expected_behavior_correct",
@@ -67,31 +94,41 @@ SCENARIOS = (
 )
 MODEL_BINDINGS = (
     {
-        "reviewer_id": "local-gemma3-4b-reviewer-v2",
-        "model": "gemma3:4b",
-        "family": "Gemma 3",
-        "thinking": False,
-        "digest": (
-            "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a"
-        ),
+        "reviewer_id": "deepseek-v4-pro-reviewer-v3",
+        "model": DEEPSEEK_MODEL,
+        "litellm_model": DEEPSEEK_LITELLM_MODEL,
+        "family": "DeepSeek V4",
+        "endpoint_class": "external",
+        "thinking": True,
+        "reasoning_effort": "high",
+        "digest": None,
+        "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
     },
     {
-        "reviewer_id": "local-qwen3-4b-reviewer-v2",
+        "reviewer_id": "local-qwen3-4b-reviewer-v3",
         "model": "qwen3:4b",
+        "litellm_model": None,
         "family": "Qwen 3",
+        "endpoint_class": "local",
         "thinking": False,
+        "reasoning_effort": None,
         "digest": (
             "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
         ),
+        "documented_revision": None,
     },
     {
-        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v2",
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v3",
         "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
+        "litellm_model": None,
         "family": "Qwen 3 derivative",
+        "endpoint_class": "local",
         "thinking": False,
+        "reasoning_effort": None,
         "digest": (
             "f5046078f1f6b4dc2ad23265d7d9e616aeb77088bc9092623b2f3f056f7b19d4"
         ),
+        "documented_revision": None,
     },
 )
 DECISION_SCHEMA = {
@@ -111,11 +148,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--ollama-url", default=DEFAULT_OLLAMA_URL)
+    parser.add_argument("--allow-external-provider", action="store_true")
     return parser.parse_args()
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def assert_external_authorization(allow_external_provider: bool) -> None:
+    if not allow_external_provider:
+        raise ValueError(
+            "the frozen v3 review requires --allow-external-provider"
+        )
+    if sha256(PERMISSION_PATH) != EXPECTED_PERMISSION_SHA256:
+        raise ValueError("DeepSeek permission record hash drifted")
+    if sha256(PLAN_PATH) != EXPECTED_PLAN_SHA256:
+        raise ValueError("frozen v3 review plan hash drifted")
 
 
 def _write_private_atomic(path: Path, value: dict[str, Any]) -> None:
@@ -372,11 +421,17 @@ def review_prompt(case_payload: dict[str, Any]) -> str:
             "and essential evidence are correct when the question is genuinely "
             "underspecified and the expected action is to clarify without guessing."
         )
+    output_example = {
+        "decision": "approve",
+        **{field: True for field in CHECK_FIELDS},
+        "reason": "All six checks pass because the expected behavior and exact evidence align.",
+    }
     return "\n".join(
         (
-            "You are an independent local reviewer of a synthetic course-tutor evaluation case.",
+            "You are an independent reviewer of a synthetic course-tutor evaluation case.",
             "Do not assume the authored labels are correct. Judge only the supplied case and exact evidence.",
             "Return exactly one JSON object matching the supplied JSON schema; do not return markdown.",
+            f"JSON OUTPUT EXAMPLE: {json.dumps(output_example)}",
             "Set decision=approve if and only if every one of the six checks is true; otherwise set revise.",
             "Check definitions:",
             "- question_authentic_and_synthetic: realistic student wording, answerable or intentionally unanswerable as labeled, and no real-student data.",
@@ -420,6 +475,8 @@ def _installed_model_digests(url: str) -> dict[str, str]:
 def assert_model_bindings(url: str) -> None:
     installed = _installed_model_digests(url)
     for binding in MODEL_BINDINGS:
+        if binding["endpoint_class"] != "local":
+            continue
         if installed.get(binding["model"]) != binding["digest"]:
             raise ValueError(
                 f"local model binding mismatch for {binding['reviewer_id']}"
@@ -475,6 +532,106 @@ def call_ollama(
     }
 
 
+def _response_field(value: Any, name: str, default: Any = None) -> Any:
+    if isinstance(value, dict):
+        return value.get(name, default)
+    return getattr(value, name, default)
+
+
+def _deepseek_upper_bound_cost(*, completion_response: Any) -> float:
+    """Price every input token as a cache miss for a conservative run cap."""
+    usage = _response_field(completion_response, "usage", {})
+    input_tokens = int(_response_field(usage, "prompt_tokens", 0) or 0)
+    output_tokens = int(_response_field(usage, "completion_tokens", 0) or 0)
+    return (
+        input_tokens * DEEPSEEK_INPUT_PRICE_PER_MILLION_USD
+        + output_tokens * DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD
+    ) / 1_000_000
+
+
+def _deepseek_client() -> LiteLlmClient:
+    if not os.getenv("DEEPSEEK_API_KEY", "").strip():
+        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v3 review")
+    return LiteLlmClient(
+        DEEPSEEK_LITELLM_MODEL,
+        timeout_seconds=300,
+        max_output_tokens=4096,
+        temperature=None,
+        response_format={"type": "json_object"},
+        provider_options={
+            "reasoning_effort": "high",
+            "extra_body": {
+                "thinking": {"type": "enabled"},
+                "user_id": DEEPSEEK_USER_ID,
+            },
+        },
+        cost_calculator=_deepseek_upper_bound_cost,
+    )
+
+
+def call_deepseek(
+    *,
+    client: LiteLlmClient,
+    prompt: str,
+    expected_revision: str | None,
+) -> dict[str, Any]:
+    started = time.perf_counter()
+    response = asyncio.run(
+        client.chat(
+            [LlmMessage(role="user", content=prompt)],
+            task="course_tutor_authoring_review_v3",
+        )
+    )
+    elapsed_seconds = time.perf_counter() - started
+    usage = {
+        "elapsed_seconds": round(elapsed_seconds, 6),
+        "input_tokens": response.usage.input_tokens,
+        "output_tokens": response.usage.output_tokens,
+        "total_tokens": response.usage.total_tokens,
+        "approximate_cost_usd": response.usage.approximate_cost_usd,
+        "cost_method": "upper_bound_all_input_tokens_priced_as_cache_miss",
+    }
+    base = {
+        "usage": usage,
+        "provider_model": response.provider_model,
+        "provider_revision": response.provider_revision,
+    }
+    if response.provider_model != DEEPSEEK_MODEL:
+        return {
+            **base,
+            "status": "invalid",
+            "decision": None,
+            "error": "provider model differs from frozen deepseek-v4-pro binding",
+        }
+    if not response.provider_revision:
+        return {
+            **base,
+            "status": "invalid",
+            "decision": None,
+            "error": "provider omitted the required system fingerprint",
+        }
+    if (
+        expected_revision is not None
+        and response.provider_revision != expected_revision
+    ):
+        return {
+            **base,
+            "status": "invalid",
+            "decision": None,
+            "error": "provider system fingerprint drifted during the frozen run",
+        }
+    try:
+        decision = validate_model_decision(json.loads(response.content))
+    except (TypeError, ValueError, json.JSONDecodeError) as error:
+        return {
+            **base,
+            "status": "invalid",
+            "decision": None,
+            "error": f"{type(error).__name__}: structured decision invalid",
+        }
+    return {**base, "status": "valid", "decision": decision}
+
+
 def _transport_preflight_prompt() -> str:
     example = {
         "decision": "approve",
@@ -490,7 +647,11 @@ def _transport_preflight_prompt() -> str:
     )
 
 
-def run_transport_preflights(url: str) -> list[dict[str, Any]]:
+def run_transport_preflights(
+    url: str,
+    *,
+    deepseek_client: LiteLlmClient,
+) -> list[dict[str, Any]]:
     rows = []
     for binding in MODEL_BINDINGS:
         seed = _decision_seed(
@@ -500,22 +661,34 @@ def run_transport_preflights(url: str) -> list[dict[str, Any]]:
             "reviewer_id": binding["reviewer_id"],
             "model": binding["model"],
             "model_digest": binding["digest"],
+            "documented_revision": binding["documented_revision"],
             "family": binding["family"],
+            "endpoint_class": binding["endpoint_class"],
             "thinking": binding["thinking"],
+            "reasoning_effort": binding["reasoning_effort"],
             "seed": seed,
             "private_data_used": False,
         }
         try:
-            decision, usage = call_ollama(
-                url=url,
-                model=binding["model"],
-                prompt=_transport_preflight_prompt(),
-                seed=seed,
-                thinking=binding["thinking"],
-            )
-            row.update(
-                {"status": "valid", "decision": decision, "usage": usage}
-            )
+            if binding["endpoint_class"] == "external":
+                row.update(
+                    call_deepseek(
+                        client=deepseek_client,
+                        prompt=_transport_preflight_prompt(),
+                        expected_revision=None,
+                    )
+                )
+            else:
+                decision, usage = call_ollama(
+                    url=url,
+                    model=binding["model"],
+                    prompt=_transport_preflight_prompt(),
+                    seed=seed,
+                    thinking=binding["thinking"],
+                )
+                row.update(
+                    {"status": "valid", "decision": decision, "usage": usage}
+                )
         except (
             KeyError,
             TypeError,
@@ -523,6 +696,7 @@ def run_transport_preflights(url: str) -> list[dict[str, Any]]:
             json.JSONDecodeError,
             urllib.error.URLError,
             TimeoutError,
+            LlmError,
         ) as error:
             row.update(
                 {
@@ -548,13 +722,28 @@ def validate_transport_preflights(rows: Any) -> list[dict[str, Any]]:
             (
                 row.get("model") != binding["model"],
                 row.get("model_digest") != binding["digest"],
+                row.get("documented_revision")
+                != binding["documented_revision"],
                 row.get("family") != binding["family"],
+                row.get("endpoint_class") != binding["endpoint_class"],
                 row.get("thinking") is not binding["thinking"],
+                row.get("reasoning_effort") != binding["reasoning_effort"],
                 row.get("private_data_used") is not False,
                 row.get("status") != "valid",
             )
         ):
             raise ValueError("transport preflight differs from its frozen binding")
+        if binding["endpoint_class"] == "external":
+            usage = row.get("usage", {})
+            if any(
+                (
+                    row.get("provider_model") != DEEPSEEK_MODEL,
+                    not isinstance(row.get("provider_revision"), str),
+                    not row.get("provider_revision", "").strip(),
+                    not isinstance(usage.get("approximate_cost_usd"), (int, float)),
+                )
+            ):
+                raise ValueError("DeepSeek transport preflight lacks its provider binding")
         decision = validate_model_decision(row.get("decision"))
         if decision["decision"] != "approve":
             raise ValueError("transport preflight did not approve synthetic input")
@@ -639,7 +828,7 @@ def _summary(
     for row in decisions:
         rows_by_case[row["case_id"]].append(row)
     unanimous_approve = sum(
-        len(rows) == 3
+        len(rows) == len(MODEL_BINDINGS)
         and all(
             row["status"] == "valid"
             and row["decision"]["decision"] == "approve"
@@ -648,7 +837,7 @@ def _summary(
         for rows in rows_by_case.values()
     )
     unanimous_revise = sum(
-        len(rows) == 3
+        len(rows) == len(MODEL_BINDINGS)
         and all(
             row["status"] == "valid"
             and row["decision"]["decision"] == "revise"
@@ -895,13 +1084,19 @@ def run_review(
     input_root: Path,
     output_root: Path,
     ollama_url: str,
+    allow_external_provider: bool,
 ) -> dict[str, Any]:
     final_path = output_root / "ensemble_review.json"
     checkpoint_path = output_root / "checkpoint.json"
     if final_path.exists():
         raise ValueError(f"refusing to overwrite completed ensemble: {final_path}")
+    assert_external_authorization(allow_external_provider)
+    code_binding = _git_binding()
+    if code_binding["dirty"]:
+        raise ValueError("the frozen v3 review must run from a clean revision")
     datasets, _, review_manifest = _load_and_validate_draft(input_root)
     assert_model_bindings(ollama_url)
+    deepseek_client = _deepseek_client()
     baseline = select_baseline_case_ids(datasets)
     all_cases = sorted(
         [
@@ -918,9 +1113,25 @@ def run_review(
         "sample_seed": SAMPLE_SEED,
         "draft_hashes": review_manifest["splits"],
         "models": list(MODEL_BINDINGS),
-        "code": _git_binding(),
-        "local_only": True,
-        "external_provider_calls": 0,
+        "code": code_binding,
+        "local_only": False,
+        "authorization": {
+            "permission_sha256": EXPECTED_PERMISSION_SHA256,
+            "plan_sha256": EXPECTED_PLAN_SHA256,
+            "external_provider_allowed": True,
+        },
+        "external_provider": {
+            "provider": "DeepSeek",
+            "endpoint": "https://api.deepseek.com",
+            "model": DEEPSEEK_MODEL,
+            "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
+            "thinking": True,
+            "reasoning_effort": "high",
+            "user_id": DEEPSEEK_USER_ID,
+            "request_limit": DEEPSEEK_CALL_LIMIT,
+            "cost_stop_usd": DEEPSEEK_COST_STOP_USD,
+            "retries": 0,
+        },
     }
     if checkpoint_path.exists():
         checkpoint = load_json(checkpoint_path)
@@ -930,7 +1141,10 @@ def run_review(
         validate_transport_preflights(binding.get("transport_preflights"))
         decisions = checkpoint.get("model_decisions", [])
     else:
-        preflights = run_transport_preflights(ollama_url)
+        preflights = run_transport_preflights(
+            ollama_url,
+            deepseek_client=deepseek_client,
+        )
         try:
             validate_transport_preflights(preflights)
         except ValueError:
@@ -944,6 +1158,26 @@ def run_review(
             "transport_preflights": preflights,
         }
         decisions = []
+    deepseek_preflight = next(
+        row
+        for row in binding["transport_preflights"]
+        if row["endpoint_class"] == "external"
+    )
+    frozen_provider_revision = deepseek_preflight["provider_revision"]
+
+    def external_totals() -> tuple[int, float]:
+        external_rows = [
+            row for row in decisions if row.get("endpoint_class") == "external"
+        ]
+        cost = deepseek_preflight["usage"]["approximate_cost_usd"] + sum(
+            (row.get("usage") or {}).get("approximate_cost_usd") or 0.0
+            for row in external_rows
+        )
+        return 1 + len(external_rows), cost
+
+    preflight_calls, preflight_cost = external_totals()
+    if preflight_calls > DEEPSEEK_CALL_LIMIT or preflight_cost >= DEEPSEEK_COST_STOP_USD:
+        raise ValueError("DeepSeek preflight exhausted the frozen external budget")
     no_evidence = [
         case for case in all_cases if case["scenario_type"] == "no_evidence"
     ]
@@ -963,8 +1197,11 @@ def run_review(
                 "reviewer_id": model_binding["reviewer_id"],
                 "model": model_binding["model"],
                 "model_digest": model_binding["digest"],
+                "documented_revision": model_binding["documented_revision"],
                 "family": model_binding["family"],
+                "endpoint_class": model_binding["endpoint_class"],
                 "thinking": model_binding["thinking"],
+                "reasoning_effort": model_binding["reasoning_effort"],
                 "case_id": case["case_id"],
                 "split": case["split"],
                 "scenario_type": case["scenario_type"],
@@ -972,17 +1209,32 @@ def run_review(
                     model_binding["reviewer_id"], case["case_id"]
                 ),
             }
+            if model_binding["endpoint_class"] == "external":
+                call_count, cumulative_cost = external_totals()
+                if call_count >= DEEPSEEK_CALL_LIMIT:
+                    raise ValueError("DeepSeek request limit reached")
+                if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
+                    raise ValueError("DeepSeek cost stop reached")
             try:
-                decision, usage = call_ollama(
-                    url=ollama_url,
-                    model=model_binding["model"],
-                    prompt=prompt,
-                    seed=row["seed"],
-                    thinking=model_binding["thinking"],
-                )
-                row.update(
-                    {"status": "valid", "decision": decision, "usage": usage}
-                )
+                if model_binding["endpoint_class"] == "external":
+                    row.update(
+                        call_deepseek(
+                            client=deepseek_client,
+                            prompt=prompt,
+                            expected_revision=frozen_provider_revision,
+                        )
+                    )
+                else:
+                    decision, usage = call_ollama(
+                        url=ollama_url,
+                        model=model_binding["model"],
+                        prompt=prompt,
+                        seed=row["seed"],
+                        thinking=model_binding["thinking"],
+                    )
+                    row.update(
+                        {"status": "valid", "decision": decision, "usage": usage}
+                    )
             except (
                 KeyError,
                 TypeError,
@@ -990,6 +1242,7 @@ def run_review(
                 json.JSONDecodeError,
                 urllib.error.URLError,
                 TimeoutError,
+                LlmError,
             ) as error:
                 row.update(
                     {
@@ -1004,6 +1257,18 @@ def run_review(
                 checkpoint_path,
                 {"binding": binding, "model_decisions": decisions},
             )
+            if row["endpoint_class"] == "external":
+                _, cumulative_cost = external_totals()
+                if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
+                    raise ValueError(
+                        f"DeepSeek cost stop reached: USD {cumulative_cost:.6f}"
+                    )
+                if row.get("error") in {
+                    "provider model differs from frozen deepseek-v4-pro binding",
+                    "provider omitted the required system fingerprint",
+                    "provider system fingerprint drifted during the frozen run",
+                }:
+                    raise ValueError(row["error"])
             print(
                 json.dumps(
                     {
@@ -1026,8 +1291,14 @@ def run_review(
         if len(required) > MAX_HUMAN_CASES
         else "awaiting_human_audit"
     )
+    external_provider_calls, external_provider_cost_usd = external_totals()
+    if external_provider_calls != DEEPSEEK_CALL_LIMIT:
+        raise ValueError("completed run lacks exactly 153 DeepSeek requests")
     ensemble = {
         **binding,
+        "external_provider_calls": external_provider_calls,
+        "external_provider_cost_usd": round(external_provider_cost_usd, 9),
+        "external_provider_revision": frozen_provider_revision,
         "created_at": datetime.now().astimezone().isoformat(),
         "ensemble_status": "complete",
         "protocol_status": protocol_status,
@@ -1102,6 +1373,7 @@ def main() -> None:
                 input_root=arguments.input_root,
                 output_root=arguments.output_root,
                 ollama_url=arguments.ollama_url,
+                allow_external_provider=arguments.allow_external_provider,
             ),
             indent=2,
         )

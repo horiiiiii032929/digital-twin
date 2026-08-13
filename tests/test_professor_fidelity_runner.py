@@ -612,6 +612,14 @@ def test_course_tutor_hybrid_baseline_is_one_case_per_stratum():
     assert set(strata.values()) == {1}
 
 
+def test_course_tutor_v3_uses_deepseek_v4_pro_and_excludes_gemma():
+    assert MODEL_BINDINGS[0]["model"] == "deepseek-v4-pro"
+    assert MODEL_BINDINGS[0]["documented_revision"] == "DeepSeek-V4-Pro-0813"
+    assert MODEL_BINDINGS[0]["thinking"] is True
+    assert MODEL_BINDINGS[0]["reasoning_effort"] == "high"
+    assert not any("gemma" in binding["model"].casefold() for binding in MODEL_BINDINGS)
+
+
 def test_course_tutor_model_decision_requires_consistent_checks():
     decision = {
         "decision": "approve",
@@ -657,8 +665,11 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                         "reviewer_id": binding["reviewer_id"],
                         "model": binding["model"],
                         "model_digest": binding["digest"],
+                        "documented_revision": binding["documented_revision"],
                         "family": binding["family"],
+                        "endpoint_class": binding["endpoint_class"],
                         "thinking": binding["thinking"],
+                        "reasoning_effort": binding["reasoning_effort"],
                         "case_id": case["case_id"],
                         "split": case["split"],
                         "scenario_type": case["scenario_type"],
@@ -671,6 +682,15 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                             },
                             "reason": "All six checks pass.",
                         },
+                        **(
+                            {
+                                "provider_model": "deepseek-v4-pro",
+                                "provider_revision": "fp-v4-pro-synthetic",
+                                "usage": {"approximate_cost_usd": 0.00001},
+                            }
+                            if binding["endpoint_class"] == "external"
+                            else {}
+                        ),
                     }
                 )
     baseline = select_baseline_case_ids(datasets)
@@ -685,8 +705,11 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
             "reviewer_id": binding["reviewer_id"],
             "model": binding["model"],
             "model_digest": binding["digest"],
+            "documented_revision": binding["documented_revision"],
             "family": binding["family"],
+            "endpoint_class": binding["endpoint_class"],
             "thinking": binding["thinking"],
+            "reasoning_effort": binding["reasoning_effort"],
             "private_data_used": False,
             "status": "valid",
             "decision": {
@@ -696,6 +719,15 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                 },
                 "reason": "Synthetic transport preflight passes.",
             },
+            **(
+                {
+                    "provider_model": "deepseek-v4-pro",
+                    "provider_revision": "fp-v4-pro-synthetic",
+                    "usage": {"approximate_cost_usd": 0.00001},
+                }
+                if binding["endpoint_class"] == "external"
+                else {}
+            ),
         }
         for binding in MODEL_BINDINGS
     ]
@@ -707,8 +739,10 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
         "sample_seed": SAMPLE_SEED,
         "draft_hashes": draft_hashes,
         "models": list(MODEL_BINDINGS),
-        "local_only": True,
-        "external_provider_calls": 0,
+        "local_only": False,
+        "external_provider_calls": 153,
+        "external_provider_cost_usd": 0.00153,
+        "external_provider_revision": "fp-v4-pro-synthetic",
         "created_at": "2026-08-14T09:00:00+07:00",
         "code": {"revision": "e" * 40, "dirty": False},
         "transport_preflights": transport_preflights,

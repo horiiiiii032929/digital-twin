@@ -87,8 +87,12 @@ def _validate_ensemble(
             ensemble.get("sample_seed") == SAMPLE_SEED,
             ensemble.get("draft_hashes") == draft_hashes,
             ensemble.get("models") == list(MODEL_BINDINGS),
-            ensemble.get("local_only") is True,
-            ensemble.get("external_provider_calls") == 0,
+            ensemble.get("local_only") is False,
+            ensemble.get("external_provider_calls") == 153,
+            isinstance(ensemble.get("external_provider_cost_usd"), (int, float)),
+            0 <= ensemble.get("external_provider_cost_usd", -1) < 2,
+            isinstance(ensemble.get("external_provider_revision"), str),
+            bool(ensemble.get("external_provider_revision", "").strip()),
             _aware_timestamp(ensemble.get("created_at")) is not None,
         )
     ):
@@ -100,7 +104,17 @@ def _validate_ensemble(
         or code.get("dirty") is not False
     ):
         raise ValueError("ensemble must be bound to a clean 40-character revision")
-    validate_transport_preflights(ensemble.get("transport_preflights"))
+    preflights = validate_transport_preflights(
+        ensemble.get("transport_preflights")
+    )
+    external_preflight = next(
+        row for row in preflights if row["endpoint_class"] == "external"
+    )
+    if (
+        ensemble["external_provider_revision"]
+        != external_preflight["provider_revision"]
+    ):
+        raise ValueError("ensemble provider revision differs from its preflight")
 
     cases_by_id = {
         case["case_id"]: case
@@ -138,13 +152,25 @@ def _validate_ensemble(
             (
                 row.get("model") != binding["model"],
                 row.get("model_digest") != binding["digest"],
+                row.get("documented_revision")
+                != binding["documented_revision"],
                 row.get("family") != binding["family"],
+                row.get("endpoint_class") != binding["endpoint_class"],
                 row.get("thinking") is not binding["thinking"],
+                row.get("reasoning_effort") != binding["reasoning_effort"],
                 row.get("split") != case["split"],
                 row.get("scenario_type") != case["scenario_type"],
             )
         ):
             raise ValueError("ensemble row metadata differs from its frozen binding")
+        if binding["endpoint_class"] == "external" and any(
+            (
+                row.get("provider_model") != binding["model"],
+                row.get("provider_revision")
+                != ensemble["external_provider_revision"],
+            )
+        ):
+            raise ValueError("DeepSeek row differs from the frozen provider binding")
         if row.get("status") == "valid":
             validate_model_decision(row.get("decision"))
         elif row.get("status") != "invalid" or row.get("decision") is not None:
@@ -342,11 +368,11 @@ def seal_splits(
                     "revision": annotation["revision"] + 1,
                     "updated_at": reviewed_at,
                     "change_summary": (
-                        "Qualified after local three-model cross-review and "
+                        "Qualified after cross-provider three-model review and "
                         "blinded targeted independent-human validation under "
                         "the frozen hybrid protocol; this is not professor approval."
                         if was_human_audited
-                        else "Qualified by unanimous local three-model cross-review "
+                        else "Qualified by unanimous cross-provider three-model review "
                         "under the frozen hybrid protocol; this is not full human "
                         "or professor approval."
                     ),
@@ -381,7 +407,7 @@ def seal_splits(
         "ensemble_review_id": ensemble["ensemble_id"],
         "review_plan_id": PLAN_ID,
         "review_claim": (
-            "local multi-model cross-review with targeted independent-human validation"
+            "cross-provider multi-model review with targeted independent-human validation"
         ),
         "required_human_cases": len(human_case_ids),
         "github_support_purge_confirmed": True,

@@ -208,20 +208,25 @@ Current utilities:
   exact heading/paragraph chunk IDs and content hashes, labels the draft
   honestly, refuses to overwrite prior artifacts, and creates neither a seal
   nor a held-out ledger; run `npm run build:course-tutor-splits`.
-- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen local
-  Gemma/Qwen/Qwen-derivative ensemble over all 152 authoring cases. V2 disables
-  thinking explicitly, requires public synthetic schema preflights, selects a
-  stable 16-case scenario-by-split human sample before reading verdicts,
-  assigns all 19 no-evidence cases to human review, escalates every
+- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen v3
+  DeepSeek V4 Pro/Qwen/Qwen-derivative ensemble over all 152 authoring cases;
+  Gemma is excluded. It binds the external reviewer to the official
+  `DeepSeek-V4-Pro-0813` model and its preflight fingerprint, enables `high`
+  thinking, requires strict JSON, records cost and token traces, allows no
+  retries, and enforces 153-request and USD 2 limits. It selects a stable
+  16-case scenario-by-split human sample before reading verdicts, assigns all
+  19 no-evidence cases to human review, escalates every
   revise/disagreement/invalid result, and renders a private human packet with
   all selection classes and model decisions hidden. It stops instead of
   assigning more than 48 cases to the human reviewer; run `npm run
-  review:course-tutor-authoring-hybrid` from a clean committed revision.
-- `seal_course_tutor_splits.py`: validates all 456 local model records, exact
-  frozen sampling and escalation, the completed blinded independent-human
-  audit, unanimous model approval outside the human set, and explicit GitHub
-  purge confirmation. It then writes a new immutable sealed directory and
-  unopened held-out ledger with exclusive-create semantics; run `npm run
+  review:course-tutor-authoring-hybrid` from a clean committed revision after
+  confirming the bounded authorization in the v3 plan.
+- `seal_course_tutor_splits.py`: validates all 456 cross-provider model
+  records, exact frozen sampling and escalation, the completed blinded
+  independent-human audit, unanimous model approval outside the human set,
+  and explicit GitHub purge confirmation. It then writes a new immutable
+  sealed directory and unopened held-out ledger with exclusive-create
+  semantics; run `npm run
   seal:course-tutor-splits -- --ensemble-review <ignored-ensemble.json>
   --human-audit <ignored-audit.json> --github-purge-confirmed` only after both
   gates are complete.

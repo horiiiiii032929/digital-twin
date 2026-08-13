@@ -69,6 +69,28 @@ async def test_litellm_adapter_requests_json_mode_only_when_configured():
 
 
 @pytest.mark.asyncio
+async def test_litellm_adapter_can_omit_temperature_for_thinking_models():
+    captured = {}
+
+    async def completion(**kwargs):
+        captured.update(kwargs)
+        return {
+            "model": "deepseek-v4-pro",
+            "choices": [{"message": {"content": '{"answer":"ok"}'}}],
+        }
+
+    client = LiteLlmClient(
+        "deepseek/deepseek-v4-pro",
+        temperature=None,
+        completion=completion,
+    )
+
+    await client.chat([LlmMessage(role="user", content="test")], task="test")
+
+    assert "temperature" not in captured
+
+
+@pytest.mark.asyncio
 async def test_litellm_adapter_passes_frozen_provider_options_without_credentials():
     captured = {}
 
