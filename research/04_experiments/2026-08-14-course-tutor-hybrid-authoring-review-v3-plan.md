@@ -4,8 +4,11 @@ Plan ID: `course-tutor-hybrid-authoring-review-v3`
 
 Date frozen: 2026-08-14
 
-Status: prospective; frozen before any v3 model preflight or private case
-judgment.
+Status: invalid and stopped after 59 completed private judgments; superseded by
+`course-tutor-hybrid-authoring-review-v4`. The human-review lower bound reached
+49, above the frozen ceiling of 48. One additional in-flight request was
+interrupted; no local Qwen judgment, human packet, seal, held-out ledger, or
+tutor output was created.
 
 ## Decision question
 

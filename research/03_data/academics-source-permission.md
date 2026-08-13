@@ -42,6 +42,18 @@ no-training guarantee remain explicit limitations. This amendment does not
 authorize general DeepSeek judging, professor approval, public deployment,
 student-facing use, or any transfer outside the named v3 fields and limits.
 
+### V4 authoring-review continuation
+
+The same 2026-08-14 source-holder direction authorizes the prospective
+`course-tutor-hybrid-authoring-review-v4` replacement after v3 stopped at its
+human-workload gate. V4 keeps the identical provider, model, private fields,
+exclusions, non-personal identity, and USD 2 ceiling. It changes transport to
+the official OpenAI-compatible client and permits ten public synthetic stress
+probes plus at most two attempts per private case, for 314 external requests
+maximum. A second private attempt is permitted only for empty or malformed
+structured output; valid approve/revise decisions are never retried. V3
+judgments are not sent to the provider or reused in v4.
+
 ## Professor-fidelity DeepSeek authorization
 
 The source holder explicitly authorizes the issue #24 single-turn C0-C3
