@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seal course-tutor v1.2 splits only after explicit human authoring review."""
+"""Seal course-tutor v1.2.3 after its frozen hybrid authoring review."""
 
 from __future__ import annotations
 
@@ -11,10 +11,24 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from scripts.build_course_tutor_splits import validate_split_isolation
 from scripts.validate_course_tutor_dataset import (
     load_json,
     validate_dataset,
     validate_schema,
+)
+from scripts.run_course_tutor_hybrid_review import (
+    CHECK_FIELDS,
+    ENSEMBLE_ID,
+    HUMAN_AUDIT_ID,
+    MAX_HUMAN_CASES,
+    MODEL_BINDINGS,
+    PLAN_ID,
+    SAMPLE_SEED,
+    required_human_case_ids,
+    selection_commitment_sha256,
+    select_baseline_case_ids,
+    validate_model_decision,
 )
 
 
@@ -33,7 +47,8 @@ REQUIRED_REVIEW_CHECKS = (
     "permission_and_version_correct",
     "split_assignment_acceptable",
 )
-EXPECTED_REVIEW_ID = "course-tutor-v1.2-authoring-review-004"
+if REQUIRED_REVIEW_CHECKS != CHECK_FIELDS:
+    raise RuntimeError("hybrid review and sealing checks differ")
 
 
 def sha256(path: Path) -> str:
@@ -49,65 +64,219 @@ def write_json_exclusive(path: Path, value: dict[str, Any]) -> None:
         raise ValueError(f"refusing to overwrite sealed artifact: {path}") from error
 
 
-def _review_decisions(
-    review: dict[str, Any],
-    split: str,
-    expected_case_ids: set[str],
-) -> dict[str, dict[str, Any]]:
-    reviewer = review.get("reviewer", {})
-    reviewed_at = review.get("reviewed_at")
+def _aware_timestamp(value: Any) -> datetime | None:
     try:
-        parsed_reviewed_at = datetime.fromisoformat(reviewed_at)
+        parsed = datetime.fromisoformat(value)
     except (TypeError, ValueError):
-        parsed_reviewed_at = None
+        return None
+    return parsed if parsed.tzinfo is not None else None
+
+
+def _validate_ensemble(
+    ensemble: dict[str, Any],
+    datasets: dict[str, dict[str, Any]],
+    draft_hashes: dict[str, Any],
+) -> tuple[dict[str, list[dict[str, Any]]], list[str]]:
     if not all(
         (
-            review.get("review_id") == EXPECTED_REVIEW_ID,
-            review.get("status") == "complete",
-            parsed_reviewed_at is not None
-            and parsed_reviewed_at.tzinfo is not None,
+            ensemble.get("plan_id") == PLAN_ID,
+            ensemble.get("ensemble_id") == ENSEMBLE_ID,
+            ensemble.get("ensemble_status") == "complete",
+            ensemble.get("protocol_status") == "awaiting_human_audit",
+            ensemble.get("sample_seed") == SAMPLE_SEED,
+            ensemble.get("draft_hashes") == draft_hashes,
+            ensemble.get("models") == list(MODEL_BINDINGS),
+            ensemble.get("local_only") is True,
+            ensemble.get("external_provider_calls") == 0,
+            _aware_timestamp(ensemble.get("created_at")) is not None,
+        )
+    ):
+        raise ValueError("ensemble does not match the frozen hybrid protocol")
+    code = ensemble.get("code", {})
+    if (
+        not isinstance(code.get("revision"), str)
+        or len(code["revision"]) != 40
+        or code.get("dirty") is not False
+    ):
+        raise ValueError("ensemble must be bound to a clean 40-character revision")
+
+    cases_by_id = {
+        case["case_id"]: case
+        for dataset in datasets.values()
+        for case in dataset["cases"]
+    }
+    expected_keys = {
+        (binding["reviewer_id"], case_id)
+        for binding in MODEL_BINDINGS
+        for case_id in cases_by_id
+    }
+    rows = ensemble.get("model_decisions", [])
+    if not isinstance(rows, list):
+        raise ValueError("ensemble model decisions must be a list")
+    actual_keys = [
+        (row.get("reviewer_id"), row.get("case_id"))
+        for row in rows
+        if isinstance(row, dict)
+    ]
+    if len(actual_keys) != len(rows) or set(actual_keys) != expected_keys:
+        raise ValueError("ensemble must contain all 456 reviewer-case records")
+    if len(set(actual_keys)) != len(actual_keys):
+        raise ValueError("ensemble contains duplicate reviewer-case records")
+
+    bindings_by_id = {
+        binding["reviewer_id"]: binding for binding in MODEL_BINDINGS
+    }
+    rows_by_case: dict[str, list[dict[str, Any]]] = {
+        case_id: [] for case_id in cases_by_id
+    }
+    for row in rows:
+        binding = bindings_by_id[row["reviewer_id"]]
+        case = cases_by_id[row["case_id"]]
+        if any(
+            (
+                row.get("model") != binding["model"],
+                row.get("model_digest") != binding["digest"],
+                row.get("family") != binding["family"],
+                row.get("split") != case["split"],
+                row.get("scenario_type") != case["scenario_type"],
+            )
+        ):
+            raise ValueError("ensemble row metadata differs from its frozen binding")
+        if row.get("status") == "valid":
+            validate_model_decision(row.get("decision"))
+        elif row.get("status") != "invalid" or row.get("decision") is not None:
+            raise ValueError("ensemble row status is invalid")
+        rows_by_case[row["case_id"]].append(row)
+
+    baseline = select_baseline_case_ids(datasets)
+    selection = ensemble.get("selection", {})
+    if selection.get("baseline_case_ids") != baseline:
+        raise ValueError("ensemble baseline sample differs from the frozen sample")
+    required, reasons = required_human_case_ids(rows, baseline)
+    if (
+        selection.get("required_human_case_ids") != required
+        or selection.get("escalation_reasons") != reasons
+        or selection.get("maximum_human_cases") != MAX_HUMAN_CASES
+        or len(required) > MAX_HUMAN_CASES
+    ):
+        raise ValueError("ensemble human escalation set is invalid")
+
+    required_set = set(required)
+    for case_id, case_rows in rows_by_case.items():
+        if case_id in required_set:
+            continue
+        if not all(
+            row["status"] == "valid"
+            and row["decision"]["decision"] == "approve"
+            for row in case_rows
+        ):
+            raise ValueError("unsampled case lacks unanimous model approval")
+    return rows_by_case, required
+
+
+def _validate_human_audit(
+    audit: dict[str, Any],
+    *,
+    ensemble_sha256: str,
+    draft_hashes: dict[str, Any],
+    baseline_case_ids: list[str],
+    required_case_ids: list[str],
+) -> dict[str, dict[str, Any]]:
+    reviewer = audit.get("reviewer", {})
+    reviewed_at = _aware_timestamp(audit.get("reviewed_at"))
+    if not all(
+        (
+            audit.get("review_id") == HUMAN_AUDIT_ID,
+            audit.get("plan_id") == PLAN_ID,
+            audit.get("ensemble_id") == ENSEMBLE_ID,
+            audit.get("ensemble_sha256") == ensemble_sha256,
+            audit.get("status") == "complete",
+            audit.get("draft_hashes") == draft_hashes,
+            audit.get("selection_commitment_sha256")
+            == selection_commitment_sha256(
+                baseline_case_ids, required_case_ids
+            ),
+            audit.get("required_case_count") == len(required_case_ids),
+            reviewed_at is not None,
             reviewer.get("human_review") is True,
+            reviewer.get("independent_human_audit") is True,
             reviewer.get("codex_assisted") is False,
+            reviewer.get("blinded_to_model_decisions") is True,
+            reviewer.get("model_decisions_inspected") is False,
             reviewer.get("role") in {"researcher", "professor"},
             isinstance(reviewer.get("reviewer_id"), str),
             bool(reviewer.get("reviewer_id", "").strip()),
+            reviewer.get("reviewer_id")
+            not in {binding["reviewer_id"] for binding in MODEL_BINDINGS},
         )
     ):
         raise ValueError(
-            "the exact completed, timestamped, non-Codex human review is required"
+            "the exact completed, blinded, non-Codex human audit is required"
         )
-    decision_rows = (
-        review.get("splits", {}).get(split, {}).get("case_decisions", [])
-    )
+    decision_rows = audit.get("case_decisions", [])
+    if not isinstance(decision_rows, list):
+        raise ValueError("human audit case decisions must be a list")
     decisions = {item["case_id"]: item for item in decision_rows}
     if len(decisions) != len(decision_rows):
-        raise ValueError(f"{split} review contains duplicate case decisions")
-    if set(decisions) != expected_case_ids:
-        raise ValueError(f"{split} review must cover every case exactly once")
+        raise ValueError("human audit contains duplicate case decisions")
+    if set(decisions) != set(required_case_ids):
+        raise ValueError("human audit must cover the exact required case set")
     if any(
         item.get("decision") != "approve"
         or any(item.get(check) is not True for check in REQUIRED_REVIEW_CHECKS)
         or not isinstance(item.get("notes"), str)
         for item in decisions.values()
     ):
-        raise ValueError(f"{split} contains unapproved review decisions")
+        raise ValueError("human audit contains an unapproved decision")
     return decisions
+
+
+def validate_hybrid_reviews(
+    *,
+    ensemble: dict[str, Any],
+    human_audit: dict[str, Any],
+    ensemble_sha256: str,
+    datasets: dict[str, dict[str, Any]],
+    draft_hashes: dict[str, Any],
+) -> tuple[
+    dict[str, list[dict[str, Any]]],
+    dict[str, dict[str, Any]],
+]:
+    rows_by_case, required = _validate_ensemble(
+        ensemble, datasets, draft_hashes
+    )
+    decisions = _validate_human_audit(
+        human_audit,
+        ensemble_sha256=ensemble_sha256,
+        draft_hashes=draft_hashes,
+        baseline_case_ids=select_baseline_case_ids(datasets),
+        required_case_ids=required,
+    )
+    return rows_by_case, decisions
 
 
 def seal_splits(
     input_root: Path,
     output_root: Path,
-    review_path: Path,
+    ensemble_path: Path,
+    human_audit_path: Path,
+    *,
+    github_purge_confirmed: bool,
 ) -> dict[str, Any]:
+    if not github_purge_confirmed:
+        raise ValueError("GitHub Support purge confirmation is required")
     review_manifest = load_json(input_root / "review_manifest.json")
-    review = load_json(review_path)
-    if review.get("draft_hashes") != review_manifest.get("splits"):
-        raise ValueError("authoring review is not bound to the exact review draft")
+    ensemble = load_json(ensemble_path)
+    human_audit = load_json(human_audit_path)
+    if ensemble.get("draft_hashes") != review_manifest.get("splits"):
+        raise ValueError("ensemble is not bound to the exact review draft")
+    if human_audit.get("draft_hashes") != review_manifest.get("splits"):
+        raise ValueError("human audit is not bound to the exact review draft")
     manifest = load_json(MANIFEST_PATH)
     case_schema = load_json(CASE_SCHEMA_PATH)
     condition_schema = load_json(CONDITION_SCHEMA_PATH)
-    reviewer = review["reviewer"]
-    reviewed_at = review["reviewed_at"]
+    reviewer = human_audit["reviewer"]
+    reviewed_at = human_audit["reviewed_at"]
 
     planned_paths = [
         output_root / name
@@ -136,35 +305,61 @@ def seal_splits(
             raise ValueError(f"{split} condition hash drifted")
         dataset = copy.deepcopy(load_json(dataset_path))
         conditions = copy.deepcopy(load_json(conditions_path))
-        case_ids = {case["case_id"] for case in dataset["cases"]}
-        _review_decisions(review, split, case_ids)
+        validate_schema(dataset, case_schema)
+        validate_schema(conditions, condition_schema)
+        validate_dataset(dataset, conditions, manifest, EVIDENCE_ROOT, expected)
+        prepared[split] = dataset, conditions
+
+    datasets = {split: pair[0] for split, pair in prepared.items()}
+    validate_split_isolation(datasets["development"], datasets["heldout"])
+    model_rows, human_decisions = validate_hybrid_reviews(
+        ensemble=ensemble,
+        human_audit=human_audit,
+        ensemble_sha256=sha256(ensemble_path),
+        datasets=datasets,
+        draft_hashes=review_manifest["splits"],
+    )
+    human_case_ids = set(human_decisions)
+    model_reviewer_ids = [binding["reviewer_id"] for binding in MODEL_BINDINGS]
+
+    for split, expected in (("development", 48), ("heldout", 104)):
+        dataset, conditions = prepared[split]
         for case in dataset["cases"]:
+            case_id = case["case_id"]
+            was_human_audited = case_id in human_case_ids
+            reviewer_ids = list(model_reviewer_ids)
+            if was_human_audited:
+                reviewer_ids.append(reviewer["reviewer_id"])
             annotation = case["annotation"]
             annotation.update(
                 {
-                    "status": (
-                        "professor_approved"
-                        if reviewer["role"] == "professor"
-                        else "single_review"
-                    ),
-                    "reviewer_ids": [reviewer["reviewer_id"]],
-                    "professor_decision": (
-                        "approved" if reviewer["role"] == "professor" else "pending"
-                    ),
+                    "status": "single_review",
+                    "reviewer_ids": reviewer_ids,
+                    "professor_decision": "pending",
                     "revision": annotation["revision"] + 1,
                     "updated_at": reviewed_at,
                     "change_summary": (
-                        "Human authoring review approved the case, claim-evidence "
-                        "links, expected action, policy boundary, and split assignment."
+                        "Qualified after local three-model cross-review and "
+                        "blinded targeted independent-human validation under "
+                        "the frozen hybrid protocol; this is not professor approval."
+                        if was_human_audited
+                        else "Qualified by unanimous local three-model cross-review "
+                        "under the frozen hybrid protocol; this is not full human "
+                        "or professor approval."
                     ),
                 }
             )
+            if not was_human_audited and not all(
+                row["status"] == "valid"
+                and row["decision"]["decision"] == "approve"
+                for row in model_rows[case_id]
+            ):
+                raise ValueError("unreviewed case lacks unanimous approval")
         dataset["dataset_status"] = "approved" if split == "development" else "sealed"
         dataset["sealed_at"] = reviewed_at
         validate_schema(dataset, case_schema)
         validate_schema(conditions, condition_schema)
         validate_dataset(dataset, conditions, manifest, EVIDENCE_ROOT, expected)
-        prepared[split] = dataset, conditions
 
     output_hashes = {}
     for split, (dataset, conditions) in prepared.items():
@@ -177,9 +372,16 @@ def seal_splits(
             "conditions_sha256": sha256(conditions_path),
         }
     seal = {
-        "seal_id": "course-tutor-v1.2-seal-001",
+        "seal_id": "course-tutor-v1.2.3-hybrid-seal-001",
         "created_at": reviewed_at,
-        "authoring_review_id": review["review_id"],
+        "authoring_review_id": human_audit["review_id"],
+        "ensemble_review_id": ensemble["ensemble_id"],
+        "review_plan_id": PLAN_ID,
+        "review_claim": (
+            "local multi-model cross-review with targeted independent-human validation"
+        ),
+        "required_human_cases": len(human_case_ids),
+        "github_support_purge_confirmed": True,
         "splits": output_hashes,
         "development_cases": 48,
         "heldout_cases": 104,
@@ -188,7 +390,7 @@ def seal_splits(
     write_json_exclusive(
         output_root / "heldout_once_ledger.json",
         {
-            "ledger_id": "course-tutor-v1.2-heldout-once-001",
+            "ledger_id": "course-tutor-v1.2.3-heldout-once-001",
             "status": "unopened",
             "dataset_sha256": output_hashes["heldout"]["dataset_sha256"],
             "conditions_sha256": output_hashes["heldout"]["conditions_sha256"],
@@ -197,7 +399,10 @@ def seal_splits(
             "rerun_allowed": False,
         },
     )
-    write_json_exclusive(output_root / "authoring_review.json", review)
+    write_json_exclusive(
+        output_root / "authoring_review.json",
+        {"ensemble_review": ensemble, "human_audit": human_audit},
+    )
     return seal
 
 
@@ -205,11 +410,19 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--review", type=Path, required=True)
+    parser.add_argument("--ensemble-review", type=Path, required=True)
+    parser.add_argument("--human-audit", type=Path, required=True)
+    parser.add_argument("--github-purge-confirmed", action="store_true")
     arguments = parser.parse_args()
     print(
         json.dumps(
-            seal_splits(arguments.input_root, arguments.output_root, arguments.review),
+            seal_splits(
+                arguments.input_root,
+                arguments.output_root,
+                arguments.ensemble_review,
+                arguments.human_audit,
+                github_purge_confirmed=arguments.github_purge_confirmed,
+            ),
             indent=2,
         )
     )

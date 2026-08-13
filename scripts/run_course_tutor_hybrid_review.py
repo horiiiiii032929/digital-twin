@@ -1,0 +1,968 @@
+#!/usr/bin/env python3
+"""Run the frozen local ensemble and prepare a blinded human authoring audit."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import re
+import subprocess
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from collections import Counter, defaultdict
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from scripts.build_course_tutor_splits import validate_split_isolation
+from scripts.it5002_rapid_common import load_course_corpus
+from scripts.validate_course_tutor_dataset import (
+    load_json,
+    validate_dataset,
+    validate_schema,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2_3"
+DEFAULT_OUTPUT = (
+    ROOT / "reports/generated/course-tutor-v1.2.3-hybrid-authoring-review"
+)
+DEFAULT_OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+EVIDENCE_ROOT = ROOT / "data/interim/course_tutor_v1/evidence"
+MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
+CASE_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
+CONDITION_SCHEMA_PATH = (
+    ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
+)
+PLAN_ID = "course-tutor-hybrid-authoring-review-v1"
+ENSEMBLE_ID = "course-tutor-v1.2.3-local-ensemble-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v1"
+SAMPLE_SEED = "course-tutor-hybrid-human-sample-v1"
+MAX_HUMAN_CASES = 48
+NEIGHBOR_COUNT = 8
+CHECK_FIELDS = (
+    "question_authentic_and_synthetic",
+    "expected_behavior_correct",
+    "claims_atomic_and_correct",
+    "evidence_supports_claims",
+    "permission_and_version_correct",
+    "split_assignment_acceptable",
+)
+SCENARIOS = (
+    "ambiguity",
+    "assessed_work",
+    "direct",
+    "misconception",
+    "multi_evidence",
+    "no_evidence",
+    "paraphrase",
+    "permission_version",
+)
+MODEL_BINDINGS = (
+    {
+        "reviewer_id": "local-gemma3-4b-reviewer-v1",
+        "model": "gemma3:4b",
+        "family": "Gemma 3",
+        "digest": (
+            "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a"
+        ),
+    },
+    {
+        "reviewer_id": "local-qwen3-4b-reviewer-v1",
+        "model": "qwen3:4b",
+        "family": "Qwen 3",
+        "digest": (
+            "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+        ),
+    },
+    {
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v1",
+        "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
+        "family": "Qwen 3 derivative",
+        "digest": (
+            "f5046078f1f6b4dc2ad23265d7d9e616aeb77088bc9092623b2f3f056f7b19d4"
+        ),
+    },
+)
+DECISION_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["decision", *CHECK_FIELDS, "reason"],
+    "properties": {
+        "decision": {"enum": ["approve", "revise"]},
+        **{field: {"type": "boolean"} for field in CHECK_FIELDS},
+        "reason": {"type": "string", "minLength": 1},
+    },
+}
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--ollama-url", default=DEFAULT_OLLAMA_URL)
+    return parser.parse_args()
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _write_private_atomic(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.tmp")
+    temporary.write_text(
+        f"{json.dumps(value, indent=2, ensure_ascii=False)}\n",
+        encoding="utf-8",
+    )
+    temporary.chmod(0o600)
+    temporary.replace(path)
+    path.chmod(0o600)
+
+
+def _write_private_exclusive(path: Path, value: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with path.open("x", encoding="utf-8") as stream:
+            stream.write(value)
+    except FileExistsError as error:
+        raise ValueError(f"refusing to overwrite review artifact: {path}") from error
+    path.chmod(0o600)
+
+
+def _git_binding() -> dict[str, Any]:
+    revision = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    dirty = bool(
+        subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    return {"revision": revision, "dirty": dirty}
+
+
+def _stable_sample_key(case: dict[str, Any]) -> str:
+    identity = "\x1f".join(
+        (
+            SAMPLE_SEED,
+            case["split"],
+            case["scenario_type"],
+            case["case_id"],
+        )
+    )
+    return hashlib.sha256(identity.encode("utf-8")).hexdigest()
+
+
+def select_baseline_case_ids(
+    datasets: dict[str, dict[str, Any]],
+) -> list[str]:
+    selected: list[str] = []
+    for split in ("development", "heldout"):
+        cases = datasets[split]["cases"]
+        for scenario in SCENARIOS:
+            stratum = sorted(
+                (
+                    case
+                    for case in cases
+                    if case["scenario_type"] == scenario
+                ),
+                key=_stable_sample_key,
+            )
+            if len(stratum) < 2:
+                raise ValueError(f"insufficient cases for {split}/{scenario}")
+            selected.extend(case["case_id"] for case in stratum[:2])
+    if len(selected) != 32 or len(set(selected)) != 32:
+        raise ValueError("baseline human sample must contain 32 unique cases")
+    return selected
+
+
+def validate_model_decision(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValueError("model decision must be an object")
+    if set(value) != {"decision", *CHECK_FIELDS, "reason"}:
+        raise ValueError("model decision fields do not match the frozen schema")
+    if value["decision"] not in {"approve", "revise"}:
+        raise ValueError("model decision must be approve or revise")
+    for field in CHECK_FIELDS:
+        if not isinstance(value[field], bool):
+            raise ValueError(f"model decision field {field} must be boolean")
+    if not isinstance(value["reason"], str) or not value["reason"].strip():
+        raise ValueError("model decision reason must be non-empty")
+    all_pass = all(value[field] for field in CHECK_FIELDS)
+    if (value["decision"] == "approve") != all_pass:
+        raise ValueError("model decision is inconsistent with its check booleans")
+    return value
+
+
+def _tokens(value: str) -> list[str]:
+    stop = {
+        "a",
+        "an",
+        "and",
+        "are",
+        "as",
+        "be",
+        "by",
+        "do",
+        "does",
+        "for",
+        "from",
+        "how",
+        "in",
+        "is",
+        "it",
+        "of",
+        "on",
+        "or",
+        "should",
+        "that",
+        "the",
+        "this",
+        "to",
+        "what",
+        "when",
+        "where",
+        "which",
+        "why",
+        "with",
+    }
+    return [
+        token
+        for token in re.findall(r"[a-z0-9]+", value.casefold())
+        if len(token) > 2 and token not in stop
+    ]
+
+
+def build_no_evidence_neighbors(
+    cases: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]]:
+    corpus = load_course_corpus()
+    chunks = corpus.structured_chunks
+    chunk_tf = [Counter(_tokens(chunk.text)) for chunk in chunks]
+    document_frequency = Counter(token for row in chunk_tf for token in row)
+    corpus_size = len(chunks)
+
+    def vector(tokens: list[str]) -> dict[str, float]:
+        frequencies = Counter(tokens)
+        return {
+            token: count
+            * (math.log((corpus_size + 1) / (document_frequency[token] + 1)) + 1)
+            for token, count in frequencies.items()
+        }
+
+    def cosine(left: dict[str, float], right: dict[str, float]) -> float:
+        dot = sum(value * right.get(key, 0.0) for key, value in left.items())
+        left_norm = math.sqrt(sum(value * value for value in left.values()))
+        right_norm = math.sqrt(sum(value * value for value in right.values()))
+        if not left_norm or not right_norm:
+            return 0.0
+        return dot / (left_norm * right_norm)
+
+    chunk_vectors = [vector(list(row.elements())) for row in chunk_tf]
+    result: dict[str, list[dict[str, Any]]] = {}
+    for case in cases:
+        query_vector = vector(_tokens(case["student_input"]["question"]))
+        ranked = sorted(
+            (
+                (cosine(query_vector, chunk_vector), chunk)
+                for chunk_vector, chunk in zip(chunk_vectors, chunks, strict=True)
+            ),
+            key=lambda item: (-item[0], item[1].id),
+        )[:NEIGHBOR_COUNT]
+        result[case["case_id"]] = [
+            {
+                "source_artifact_id": chunk.document_id,
+                "passage_id": chunk.id,
+                "locator": chunk.locator,
+                "content_sha256": chunk.content_hash,
+                "lexical_tfidf_cosine": round(score, 6),
+                "text": chunk.text,
+            }
+            for score, chunk in ranked
+        ]
+    return result
+
+
+def _case_payload(
+    case: dict[str, Any],
+    neighbors: dict[str, list[dict[str, Any]]],
+) -> dict[str, Any]:
+    ground_truth = case["ground_truth"]
+    evidence = []
+    for item in ground_truth["evidence_units"]:
+        evidence.append(
+            {
+                **item,
+                "text": (
+                    EVIDENCE_ROOT / f"{item['passage_id']}.txt"
+                ).read_text(encoding="utf-8").strip(),
+            }
+        )
+    return {
+        "case_id": case["case_id"],
+        "split": case["split"],
+        "scenario_type": case["scenario_type"],
+        "topic_stratum": case["topic_stratum"],
+        "difficulty": case["difficulty"],
+        "difficulty_rationale": case["difficulty_rationale"],
+        "lineage": case["lineage"],
+        "student_input": case["student_input"],
+        "corpus_answerability": ground_truth["corpus_answerability"],
+        "expected_behavior": ground_truth["expected_behavior"],
+        "required_claims": ground_truth["required_claims"],
+        "optional_claims": ground_truth["optional_claims"],
+        "evidence_units": evidence,
+        "policy_rule_ids": ground_truth["policy_rule_ids"],
+        "reference_rationale": ground_truth["reference_rationale"],
+        "nearest_approved_passages": neighbors.get(case["case_id"], []),
+    }
+
+
+def review_prompt(case_payload: dict[str, Any]) -> str:
+    scenario = case_payload["scenario_type"]
+    scenario_rule = ""
+    if scenario == "no_evidence":
+        scenario_rule = (
+            "For this no-evidence case, evidence_supports_claims is true only if "
+            "there are no authored positive claims/evidence and none of the eight "
+            "supplied nearest approved passages answers the question. This local "
+            "neighbor check cannot prove corpus-wide absence; mention that limit."
+        )
+    elif scenario == "multi_evidence":
+        scenario_rule = (
+            "For this multi-evidence case, evidence_supports_claims is true only if "
+            "every claim is directly supported by its mapped passage and each "
+            "authored passage is necessary for the complete expected answer."
+        )
+    return "\n".join(
+        (
+            "You are an independent local reviewer of a synthetic course-tutor evaluation case.",
+            "Do not assume the authored labels are correct. Judge only the supplied case and exact evidence.",
+            "Return exactly one JSON object matching the supplied JSON schema; do not return markdown.",
+            "Set decision=approve if and only if every one of the six checks is true; otherwise set revise.",
+            "Check definitions:",
+            "- question_authentic_and_synthetic: realistic student wording, answerable or intentionally unanswerable as labeled, and no real-student data.",
+            "- expected_behavior_correct: action, support level, tutoring moves, citation rule, alternatives, and forbidden actions fit the question and assessment context.",
+            "- claims_atomic_and_correct: each required/optional claim is one checkable proposition and is factually consistent with the exact evidence; true when no positive claim is intentionally required.",
+            "- evidence_supports_claims: exact passages support every mapped claim and the evidence set is sufficient without unsupported inference.",
+            "- permission_and_version_correct: evidence is approved or intentionally prohibited/superseded for a version-conflict case, source/version/replacement metadata is coherent, and expected behavior respects that boundary.",
+            "- split_assignment_acceptable: the case says one valid split, its family identifier is split-specific, and its scenario label is coherent; static validators separately enforce cross-split isolation.",
+            scenario_rule,
+            "Give a short concrete reason emphasizing any failed check or the strongest approval evidence.",
+            "CASE:",
+            json.dumps(case_payload, ensure_ascii=False),
+        )
+    )
+
+
+def _assert_local_ollama_url(url: str) -> urllib.parse.ParseResult:
+    parsed = urllib.parse.urlparse(url)
+    if (
+        parsed.scheme != "http"
+        or parsed.hostname not in {"127.0.0.1", "localhost", "::1"}
+        or parsed.path != "/api/generate"
+    ):
+        raise ValueError("Ollama URL must be a local HTTP /api/generate endpoint")
+    return parsed
+
+
+def _installed_model_digests(url: str) -> dict[str, str]:
+    parsed = _assert_local_ollama_url(url)
+    tags_url = urllib.parse.urlunparse(
+        (parsed.scheme, parsed.netloc, "/api/tags", "", "", "")
+    )
+    try:
+        with urllib.request.urlopen(tags_url, timeout=30) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError) as error:
+        raise RuntimeError(f"local Ollama model lookup failed: {error}") from error
+    return {item["name"]: item["digest"] for item in payload.get("models", [])}
+
+
+def assert_model_bindings(url: str) -> None:
+    installed = _installed_model_digests(url)
+    for binding in MODEL_BINDINGS:
+        if installed.get(binding["model"]) != binding["digest"]:
+            raise ValueError(
+                f"local model binding mismatch for {binding['reviewer_id']}"
+            )
+
+
+def _decision_seed(reviewer_id: str, case_id: str) -> int:
+    digest = hashlib.sha256(
+        f"{PROMPT_VERSION}\x1f{reviewer_id}\x1f{case_id}".encode("utf-8")
+    ).hexdigest()
+    return int(digest[:8], 16)
+
+
+def call_ollama(
+    *,
+    url: str,
+    model: str,
+    prompt: str,
+    seed: int,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    _assert_local_ollama_url(url)
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(
+            {
+                "model": model,
+                "prompt": prompt,
+                "stream": False,
+                "format": DECISION_SCHEMA,
+                "keep_alive": "30m",
+                "options": {
+                    "temperature": 0,
+                    "seed": seed,
+                    "num_predict": 350,
+                },
+            }
+        ).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    started = time.perf_counter()
+    with urllib.request.urlopen(request, timeout=300) as response:
+        result = json.loads(response.read().decode("utf-8"))
+    elapsed_seconds = time.perf_counter() - started
+    decision = validate_model_decision(json.loads(result["response"]))
+    return decision, {
+        "elapsed_seconds": round(elapsed_seconds, 6),
+        "prompt_eval_count": result.get("prompt_eval_count"),
+        "eval_count": result.get("eval_count"),
+        "total_duration_ns": result.get("total_duration"),
+    }
+
+
+def required_human_case_ids(
+    model_decisions: list[dict[str, Any]],
+    baseline_case_ids: list[str],
+) -> tuple[list[str], dict[str, list[str]]]:
+    reasons: dict[str, set[str]] = defaultdict(set)
+    for case_id in baseline_case_ids:
+        reasons[case_id].add("frozen_baseline_sample")
+    rows_by_case: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in model_decisions:
+        rows_by_case[row["case_id"]].append(row)
+    for case_id, rows in rows_by_case.items():
+        if len(rows) != len(MODEL_BINDINGS):
+            reasons[case_id].add("missing_model_decision")
+        if any(row.get("status") != "valid" for row in rows):
+            reasons[case_id].add("invalid_model_decision")
+        valid_verdicts = {
+            row["decision"]["decision"]
+            for row in rows
+            if row.get("status") == "valid"
+        }
+        if "revise" in valid_verdicts:
+            reasons[case_id].add("model_revise")
+        if len(valid_verdicts) > 1:
+            reasons[case_id].add("reviewer_disagreement")
+    ordered = sorted(reasons)
+    return ordered, {
+        case_id: sorted(reasons[case_id]) for case_id in ordered
+    }
+
+
+def selection_commitment_sha256(
+    baseline_case_ids: list[str], required_case_ids: list[str]
+) -> str:
+    value = {
+        "sample_seed": SAMPLE_SEED,
+        "baseline_case_ids": baseline_case_ids,
+        "required_human_case_ids": required_case_ids,
+    }
+    serialized = json.dumps(
+        value, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(serialized).hexdigest()
+
+
+def _summary(
+    decisions: list[dict[str, Any]],
+    baseline: list[str],
+    required: list[str],
+    escalation_reasons: dict[str, list[str]],
+) -> dict[str, Any]:
+    valid = [row for row in decisions if row["status"] == "valid"]
+    invalid = [row for row in decisions if row["status"] != "valid"]
+    by_reviewer = {}
+    for binding in MODEL_BINDINGS:
+        rows = [
+            row
+            for row in decisions
+            if row["reviewer_id"] == binding["reviewer_id"]
+        ]
+        by_reviewer[binding["reviewer_id"]] = {
+            "attempts": len(rows),
+            "valid": sum(row["status"] == "valid" for row in rows),
+            "invalid": sum(row["status"] != "valid" for row in rows),
+            "approve": sum(
+                row.get("decision", {}).get("decision") == "approve"
+                for row in rows
+            ),
+            "revise": sum(
+                row.get("decision", {}).get("decision") == "revise"
+                for row in rows
+            ),
+        }
+    rows_by_case: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in decisions:
+        rows_by_case[row["case_id"]].append(row)
+    unanimous_approve = sum(
+        len(rows) == 3
+        and all(
+            row["status"] == "valid"
+            and row["decision"]["decision"] == "approve"
+            for row in rows
+        )
+        for rows in rows_by_case.values()
+    )
+    unanimous_revise = sum(
+        len(rows) == 3
+        and all(
+            row["status"] == "valid"
+            and row["decision"]["decision"] == "revise"
+            for row in rows
+        )
+        for rows in rows_by_case.values()
+    )
+    disagreement = sum(
+        len(
+            {
+                row["decision"]["decision"]
+                for row in rows
+                if row["status"] == "valid"
+            }
+        )
+        > 1
+        for rows in rows_by_case.values()
+    )
+    return {
+        "attempt_records": len(decisions),
+        "valid_model_decisions": len(valid),
+        "invalid_model_decisions": len(invalid),
+        "unanimous_approve_cases": unanimous_approve,
+        "unanimous_revise_cases": unanimous_revise,
+        "disagreement_cases": disagreement,
+        "baseline_human_cases": len(baseline),
+        "escalated_human_cases": sum(
+            case_id not in baseline for case_id in required
+        ),
+        "required_human_cases": len(required),
+        "escalation_reason_counts": dict(
+            sorted(
+                Counter(
+                    reason
+                    for reasons in escalation_reasons.values()
+                    for reason in reasons
+                    if reason != "frozen_baseline_sample"
+                ).items()
+            )
+        ),
+        "by_reviewer": by_reviewer,
+    }
+
+
+def _render_case(
+    case: dict[str, Any],
+    index: int,
+    neighbors: dict[str, list[dict[str, Any]]],
+) -> list[str]:
+    payload = _case_payload(case, neighbors)
+    expected = payload["expected_behavior"]
+    lines = [
+        f"## {index}. {case['case_id']}",
+        "",
+        f"- Split: `{case['split']}`",
+        f"- Scenario: `{case['scenario_type']}`",
+        f"- Topic: `{case['topic_stratum']}`",
+        f"- Difficulty: `{case['difficulty']}` — {case['difficulty_rationale']}",
+        f"- Corpus answerability: `{payload['corpus_answerability']}`",
+        f"- Student question: {case['student_input']['question']}",
+        f"- Expected primary action: `{expected['primary_action']}`",
+        f"- Acceptable alternatives: {', '.join(expected['acceptable_alternatives']) or 'none'}",
+        f"- Forbidden actions: {', '.join(expected['forbidden_actions']) or 'none'}",
+        f"- Allowed support: `{expected['allowed_support_level']}`",
+        f"- Required tutoring moves: {', '.join(expected['required_tutoring_moves']) or 'none'}",
+        f"- Citation requirement: `{expected['citation_requirement']}`",
+        "",
+        "### Required claims",
+        "",
+    ]
+    if payload["required_claims"]:
+        for claim in payload["required_claims"]:
+            lines.append(
+                f"- `{claim['claim_id']}` ({claim['severity']}): "
+                f"{claim['claim_text']} — evidence "
+                f"{', '.join(claim['evidence_unit_ids'])}"
+            )
+    else:
+        lines.append("- None; verify that the non-answer behavior is appropriate.")
+    lines.extend(["", "### Authored evidence", ""])
+    if not payload["evidence_units"]:
+        lines.append("No authored evidence. Confirm that this is intentional.")
+    for item in payload["evidence_units"]:
+        lines.extend(
+            [
+                f"#### {item['evidence_unit_id']} — {item['passage_id']}",
+                "",
+                f"- Source: `{item['source_artifact_id']}@{item['source_version']}`",
+                f"- Locator: {item['locator']}",
+                f"- Role/permission: `{item['role']}` / `{item['permission_status']}`",
+                f"- Supports: {', '.join(item['supports_claim_ids']) or 'none'}",
+                "",
+                item["text"],
+                "",
+            ]
+        )
+    if payload["nearest_approved_passages"]:
+        lines.extend(["### Eight nearest approved corpus passages", ""])
+        lines.append(
+            "These lexical neighbors support an absence check but cannot prove corpus-wide semantic absence."
+        )
+        lines.append("")
+        for item in payload["nearest_approved_passages"]:
+            lines.extend(
+                [
+                    f"#### {item['passage_id']}",
+                    "",
+                    f"- Source/locator: `{item['source_artifact_id']}` / {item['locator']}",
+                    f"- Lexical score: `{item['lexical_tfidf_cosine']}`",
+                    "",
+                    item["text"],
+                    "",
+                ]
+            )
+    lines.extend(
+        [
+            "### Review checklist",
+            "",
+            *[f"- [ ] {field.replace('_', ' ')}" for field in CHECK_FIELDS],
+            "- [ ] Record the decision and notes in `human_audit_template.json`.",
+            "",
+        ]
+    )
+    return lines
+
+
+def prepare_human_audit(
+    *,
+    output_root: Path,
+    ensemble: dict[str, Any],
+    ensemble_sha256: str,
+    cases_by_id: dict[str, dict[str, Any]],
+    neighbors: dict[str, list[dict[str, Any]]],
+) -> dict[str, str]:
+    required = ensemble["selection"]["required_human_case_ids"]
+    lines = [
+        "# Course-tutor v1.2.3 targeted independent-human audit",
+        "",
+        "This packet contains private course material. Do not commit or share it.",
+        "Model verdicts and reasons are intentionally absent. Do not inspect `ensemble_review.json` until this audit is complete.",
+        "Approve a case only when all six checks pass. Mark uncertainty or any defect `revise` and explain it.",
+        "",
+    ]
+    decisions = []
+    for index, case_id in enumerate(required, start=1):
+        case = cases_by_id[case_id]
+        lines.extend(_render_case(case, index, neighbors))
+        decisions.append(
+            {
+                "case_id": case_id,
+                "split": case["split"],
+                "scenario_type": case["scenario_type"],
+                **{field: None for field in CHECK_FIELDS},
+                "decision": None,
+                "notes": "",
+            }
+        )
+    template = {
+        "schema_version": "1.0.0-draft",
+        "review_id": HUMAN_AUDIT_ID,
+        "plan_id": PLAN_ID,
+        "ensemble_id": ENSEMBLE_ID,
+        "ensemble_sha256": ensemble_sha256,
+        "status": "draft",
+        "reviewed_at": None,
+        "reviewer": {
+            "reviewer_id": None,
+            "role": None,
+            "human_review": True,
+            "independent_human_audit": True,
+            "codex_assisted": False,
+            "blinded_to_model_decisions": True,
+            "model_decisions_inspected": False,
+        },
+        "draft_hashes": ensemble["draft_hashes"],
+        "selection_commitment_sha256": selection_commitment_sha256(
+            ensemble["selection"]["baseline_case_ids"], required
+        ),
+        "required_case_count": len(required),
+        "case_decisions": decisions,
+    }
+    packet_path = output_root / "human_audit_packet.md"
+    template_path = output_root / "human_audit_template.json"
+    _write_private_exclusive(packet_path, "\n".join(lines) + "\n")
+    _write_private_exclusive(
+        template_path,
+        f"{json.dumps(template, indent=2, ensure_ascii=False)}\n",
+    )
+    return {"packet": str(packet_path), "template": str(template_path)}
+
+
+def _load_and_validate_draft(
+    input_root: Path,
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, Any],
+]:
+    review_manifest = load_json(input_root / "review_manifest.json")
+    manifest = load_json(MANIFEST_PATH)
+    case_schema = load_json(CASE_SCHEMA_PATH)
+    condition_schema = load_json(CONDITION_SCHEMA_PATH)
+    datasets = {}
+    conditions = {}
+    for split, expected_count in (("development", 48), ("heldout", 104)):
+        dataset_path = input_root / f"{split}.json"
+        condition_path = input_root / f"{split}_conditions.json"
+        recorded = review_manifest["splits"][split]
+        if sha256(dataset_path) != recorded["dataset_sha256"]:
+            raise ValueError(f"{split} draft dataset hash drifted")
+        if sha256(condition_path) != recorded["conditions_sha256"]:
+            raise ValueError(f"{split} draft conditions hash drifted")
+        datasets[split] = load_json(dataset_path)
+        conditions[split] = load_json(condition_path)
+        validate_schema(datasets[split], case_schema)
+        validate_schema(conditions[split], condition_schema)
+        validate_dataset(
+            datasets[split],
+            conditions[split],
+            manifest,
+            EVIDENCE_ROOT,
+            expected_count,
+        )
+    validate_split_isolation(datasets["development"], datasets["heldout"])
+    return datasets, conditions, review_manifest
+
+
+def run_review(
+    *,
+    input_root: Path,
+    output_root: Path,
+    ollama_url: str,
+) -> dict[str, Any]:
+    final_path = output_root / "ensemble_review.json"
+    checkpoint_path = output_root / "checkpoint.json"
+    if final_path.exists():
+        raise ValueError(f"refusing to overwrite completed ensemble: {final_path}")
+    datasets, _, review_manifest = _load_and_validate_draft(input_root)
+    assert_model_bindings(ollama_url)
+    baseline = select_baseline_case_ids(datasets)
+    all_cases = sorted(
+        [
+            *datasets["development"]["cases"],
+            *datasets["heldout"]["cases"],
+        ],
+        key=lambda case: case["case_id"],
+    )
+    cases_by_id = {case["case_id"]: case for case in all_cases}
+    no_evidence = [
+        case for case in all_cases if case["scenario_type"] == "no_evidence"
+    ]
+    neighbors = build_no_evidence_neighbors(no_evidence)
+    binding = {
+        "plan_id": PLAN_ID,
+        "ensemble_id": ENSEMBLE_ID,
+        "prompt_version": PROMPT_VERSION,
+        "sample_seed": SAMPLE_SEED,
+        "draft_hashes": review_manifest["splits"],
+        "models": list(MODEL_BINDINGS),
+        "code": _git_binding(),
+        "local_only": True,
+        "external_provider_calls": 0,
+    }
+    if checkpoint_path.exists():
+        checkpoint = load_json(checkpoint_path)
+        if checkpoint.get("binding") != binding:
+            raise ValueError("checkpoint binding differs from the current review")
+        decisions = checkpoint.get("model_decisions", [])
+    else:
+        decisions = []
+    completed = {
+        (row["reviewer_id"], row["case_id"])
+        for row in decisions
+    }
+    total = len(MODEL_BINDINGS) * len(all_cases)
+    for model_binding in MODEL_BINDINGS:
+        for case in all_cases:
+            key = (model_binding["reviewer_id"], case["case_id"])
+            if key in completed:
+                continue
+            prompt = review_prompt(_case_payload(case, neighbors))
+            row = {
+                "reviewer_id": model_binding["reviewer_id"],
+                "model": model_binding["model"],
+                "model_digest": model_binding["digest"],
+                "family": model_binding["family"],
+                "case_id": case["case_id"],
+                "split": case["split"],
+                "scenario_type": case["scenario_type"],
+                "seed": _decision_seed(
+                    model_binding["reviewer_id"], case["case_id"]
+                ),
+            }
+            try:
+                decision, usage = call_ollama(
+                    url=ollama_url,
+                    model=model_binding["model"],
+                    prompt=prompt,
+                    seed=row["seed"],
+                )
+                row.update(
+                    {"status": "valid", "decision": decision, "usage": usage}
+                )
+            except (
+                KeyError,
+                TypeError,
+                ValueError,
+                json.JSONDecodeError,
+                urllib.error.URLError,
+                TimeoutError,
+            ) as error:
+                row.update(
+                    {
+                        "status": "invalid",
+                        "decision": None,
+                        "usage": None,
+                        "error": f"{type(error).__name__}: {error}",
+                    }
+                )
+            decisions.append(row)
+            _write_private_atomic(
+                checkpoint_path,
+                {"binding": binding, "model_decisions": decisions},
+            )
+            print(
+                json.dumps(
+                    {
+                        "progress": f"{len(decisions)}/{total}",
+                        "reviewer_id": row["reviewer_id"],
+                        "case_id": row["case_id"],
+                        "status": row["status"],
+                        "decision": (
+                            row["decision"]["decision"]
+                            if row["decision"]
+                            else None
+                        ),
+                    }
+                ),
+                flush=True,
+            )
+    required, escalation_reasons = required_human_case_ids(decisions, baseline)
+    protocol_status = (
+        "blocked_instrument_refinement_required"
+        if len(required) > MAX_HUMAN_CASES
+        else "awaiting_human_audit"
+    )
+    ensemble = {
+        **binding,
+        "created_at": datetime.now().astimezone().isoformat(),
+        "ensemble_status": "complete",
+        "protocol_status": protocol_status,
+        "committee_limitation": (
+            "Three model artifacts represent only two base-model families; "
+            "agreement is triage evidence, not independent proof."
+        ),
+        "no_evidence_limitation": (
+            "Eight deterministic lexical neighbors cannot prove corpus-wide "
+            "semantic absence."
+        ),
+        "selection": {
+            "baseline_case_ids": baseline,
+            "required_human_case_ids": required,
+            "escalation_reasons": escalation_reasons,
+            "maximum_human_cases": MAX_HUMAN_CASES,
+        },
+        "summary": _summary(
+            decisions,
+            baseline,
+            required,
+            escalation_reasons,
+        ),
+        "model_decisions": decisions,
+        "heldout_boundary": {
+            "tutor_outputs_opened": False,
+            "blinded_mapping_created": False,
+            "seal_created": False,
+            "heldout_ledger_created": False,
+        },
+    }
+    _write_private_exclusive(
+        final_path,
+        f"{json.dumps(ensemble, indent=2, ensure_ascii=False)}\n",
+    )
+    checkpoint_path.unlink(missing_ok=True)
+    result = {
+        "ensemble": str(final_path),
+        "protocol_status": protocol_status,
+        "summary": ensemble["summary"],
+        "human_audit": None,
+    }
+    if protocol_status == "awaiting_human_audit":
+        result["human_audit"] = prepare_human_audit(
+            output_root=output_root,
+            ensemble=ensemble,
+            ensemble_sha256=sha256(final_path),
+            cases_by_id=cases_by_id,
+            neighbors=neighbors,
+        )
+    else:
+        _write_private_exclusive(
+            output_root / "instrument_refinement_required.md",
+            "\n".join(
+                (
+                    "# Hybrid authoring review stopped",
+                    "",
+                    f"The frozen protocol requires human review of {len(required)} cases, exceeding the limit of {MAX_HUMAN_CASES}.",
+                    "Do not transfer this workload to the human reviewer. Preserve this result and prospectively refine the review instrument.",
+                    "",
+                )
+            ),
+        )
+    return result
+
+
+def main() -> None:
+    arguments = parse_args()
+    print(
+        json.dumps(
+            run_review(
+                input_root=arguments.input_root,
+                output_root=arguments.output_root,
+                ollama_url=arguments.ollama_url,
+            ),
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -208,22 +208,30 @@ Current utilities:
   exact heading/paragraph chunk IDs and content hashes, labels the draft
   honestly, refuses to overwrite prior artifacts, and creates neither a seal
   nor a held-out ledger; run `npm run build:course-tutor-splits`.
-- `seal_course_tutor_splits.py`: validates explicit non-Codex human authoring
-  decisions for every draft case, then writes a new immutable sealed directory
-  and unopened held-out ledger with exclusive-create semantics. It cannot reset
-  or overwrite an earlier ledger; run `npm run seal:course-tutor-splits --
-  --review <ignored-review.json>` only after review is complete.
+- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen local
+  Gemma/Qwen/Qwen-derivative ensemble over all 152 authoring cases, selects a
+  stable 32-case scenario-by-split human sample before reading verdicts,
+  escalates every revise/disagreement/invalid result, and renders a private
+  human packet with all model decisions hidden. It stops instead of assigning
+  more than 48 cases to the human reviewer; run `npm run
+  review:course-tutor-authoring-hybrid` from a clean committed revision.
+- `seal_course_tutor_splits.py`: validates all 456 local model records, exact
+  frozen sampling and escalation, the completed blinded independent-human
+  audit, unanimous model approval outside the human set, and explicit GitHub
+  purge confirmation. It then writes a new immutable sealed directory and
+  unopened held-out ledger with exclusive-create semantics; run `npm run
+  seal:course-tutor-splits -- --ensemble-review <ignored-ensemble.json>
+  --human-audit <ignored-audit.json> --github-purge-confirmed` only after both
+  gates are complete.
 - `prepare_course_tutor_authoring_review.py`: renders private development and
-  held-out authoring packets plus a hash-bound per-case review template. Every
-  case requires six explicit checks before approval; run `npm run
-  prepare:course-tutor-authoring-review` and do not inspect model outputs during
-  held-out authoring review.
+  held-out all-case packets plus a hash-bound template for the superseded
+  manual protocol. It remains for historical reproduction and is not accepted
+  by the current sealer.
 - `cross_review_course_tutor_authoring.py`: validates the corrected private
   draft, records a clearly labeled Codex advisory review, preserves the
   rejected and superseded draft findings, and emits a reduced packet for
-  no-evidence absence and multi-evidence necessity judgments. It does not
-  modify or replace the official human review template; run `npm run
-  cross-review:course-tutor-authoring` before independent review.
+  no-evidence absence and multi-evidence necessity judgments. This is the
+  preserved historical advisory, not evidence for the hybrid seal.
 - `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
   and review ledger after exact passage and policy inspection; the ledger
   explicitly records Codex-assisted researcher review and keeps professor and

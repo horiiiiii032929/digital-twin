@@ -7,6 +7,12 @@ Date: 2026-08-12
 Status: Codex advisory completed; independent human authoring review pending;
 held-out tutor outputs unopened.
 
+Supersession note (2026-08-13): the unfavorable and advisory findings in this
+result remain unchanged, but its proposed 152-case manual gate was replaced
+prospectively by
+[`course-tutor-hybrid-authoring-review-v1`](../04_experiments/2026-08-13-course-tutor-hybrid-authoring-review-v1-plan.md).
+This result is not evidence that the replacement gate passed.
+
 Decision: Drop private drafts 002 and 003, preserve their unfavorable
 findings, and advance corrected draft 004 to independent human review. Do not
 approve, seal, or execute the held-out split. Initiate GitHub server-side purge

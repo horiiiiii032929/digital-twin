@@ -1,6 +1,6 @@
 # Digital Twin Delivery
 
-Status date: 2026-08-12
+Status date: 2026-08-14
 
 This Project tracks the evidence-first delivery of a professor-configurable
 pedagogical Digital Twin for multiple professors and courses. The product
@@ -39,10 +39,12 @@ policy, student interaction state, and evaluation-before-publication.
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The sole `In Progress` item is #24. The immediate R2 work is to approve the
-exact-passage v1.2 cases through a non-Codex human authoring review, create the
-immutable v2 seal, and run the corrected hash-bound development comparison
-before any held-out decision.
+The sole `In Progress` item is #24. The immediate R2 work is the frozen local
+three-model authoring review of all exact-passage v1.2.3 cases followed by a
+stable 32-case independent-human audit plus model escalations, capped at 48
+human cases. The immutable v2 seal also requires confirmation on GitHub
+Support ticket #4659958 before the corrected hash-bound development comparison
+can run. Held-out tutor outputs remain unopened.
 #8 returns to `Todo` with its 19-check synthetic publication foundation
 preserved; credentialed identity and complete professor/source lifecycles
 resume after the current gate. #25, #10, #9, and #12 remain queued. Do not

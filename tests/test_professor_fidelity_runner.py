@@ -24,9 +24,22 @@ from scripts.run_professor_fidelity_experiment import (
     build_preflight_manifest,
     load_instrument,
 )
+from scripts.run_course_tutor_hybrid_review import (
+    ENSEMBLE_ID,
+    HUMAN_AUDIT_ID,
+    MAX_HUMAN_CASES,
+    MODEL_BINDINGS,
+    PLAN_ID,
+    SAMPLE_SEED,
+    required_human_case_ids,
+    selection_commitment_sha256,
+    select_baseline_case_ids,
+    validate_model_decision,
+)
 from scripts.seal_course_tutor_splits import (
     REQUIRED_REVIEW_CHECKS,
-    _review_decisions,
+    seal_splits,
+    validate_hybrid_reviews,
 )
 
 
@@ -555,35 +568,180 @@ def test_course_tutor_builder_rejects_cross_split_passage_overlap():
         )
 
 
-def test_course_tutor_seal_requires_every_human_review_check():
-    decision = {
-        "case_id": "case-1",
-        **{check: True for check in REQUIRED_REVIEW_CHECKS},
-        "decision": "approve",
-        "notes": "",
+def _hybrid_test_datasets() -> dict:
+    datasets = {}
+    for split in ("development", "heldout"):
+        cases = []
+        for scenario in (
+            "ambiguity",
+            "assessed_work",
+            "direct",
+            "misconception",
+            "multi_evidence",
+            "no_evidence",
+            "paraphrase",
+            "permission_version",
+        ):
+            for ordinal in range(3):
+                cases.append(
+                    {
+                        "case_id": f"{split}-{scenario}-{ordinal}",
+                        "split": split,
+                        "scenario_type": scenario,
+                    }
+                )
+        datasets[split] = {"cases": cases}
+    return datasets
+
+
+def test_course_tutor_hybrid_baseline_is_two_cases_per_stratum():
+    datasets = _hybrid_test_datasets()
+    selected = select_baseline_case_ids(datasets)
+
+    assert len(selected) == 32
+    selected_cases = {
+        case["case_id"]: case
+        for dataset in datasets.values()
+        for case in dataset["cases"]
     }
-    review = {
-        "review_id": "course-tutor-v1.2-authoring-review-004",
+    strata = {}
+    for case_id in selected:
+        case = selected_cases[case_id]
+        key = (case["split"], case["scenario_type"])
+        strata[key] = strata.get(key, 0) + 1
+    assert set(strata.values()) == {2}
+
+
+def test_course_tutor_model_decision_requires_consistent_checks():
+    decision = {
+        "decision": "approve",
+        **{check: True for check in REQUIRED_REVIEW_CHECKS},
+        "reason": "All six checks pass.",
+    }
+    assert validate_model_decision(decision) == decision
+
+    decision["evidence_supports_claims"] = False
+    with pytest.raises(ValueError, match="inconsistent"):
+        validate_model_decision(decision)
+
+
+def test_course_tutor_seal_requires_github_purge_confirmation(tmp_path):
+    with pytest.raises(ValueError, match="GitHub Support purge confirmation"):
+        seal_splits(
+            tmp_path / "draft",
+            tmp_path / "sealed",
+            tmp_path / "ensemble.json",
+            tmp_path / "audit.json",
+            github_purge_confirmed=False,
+        )
+
+
+def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
+    datasets = _hybrid_test_datasets()
+    draft_hashes = {
+        "development": {
+            "dataset_sha256": "a" * 64,
+            "conditions_sha256": "b" * 64,
+        },
+        "heldout": {
+            "dataset_sha256": "c" * 64,
+            "conditions_sha256": "d" * 64,
+        },
+    }
+    model_decisions = []
+    for binding in MODEL_BINDINGS:
+        for dataset in datasets.values():
+            for case in dataset["cases"]:
+                model_decisions.append(
+                    {
+                        "reviewer_id": binding["reviewer_id"],
+                        "model": binding["model"],
+                        "model_digest": binding["digest"],
+                        "family": binding["family"],
+                        "case_id": case["case_id"],
+                        "split": case["split"],
+                        "scenario_type": case["scenario_type"],
+                        "status": "valid",
+                        "decision": {
+                            "decision": "approve",
+                            **{
+                                check: True
+                                for check in REQUIRED_REVIEW_CHECKS
+                            },
+                            "reason": "All six checks pass.",
+                        },
+                    }
+                )
+    baseline = select_baseline_case_ids(datasets)
+    required, reasons = required_human_case_ids(model_decisions, baseline)
+    ensemble = {
+        "plan_id": PLAN_ID,
+        "ensemble_id": ENSEMBLE_ID,
+        "ensemble_status": "complete",
+        "protocol_status": "awaiting_human_audit",
+        "sample_seed": SAMPLE_SEED,
+        "draft_hashes": draft_hashes,
+        "models": list(MODEL_BINDINGS),
+        "local_only": True,
+        "external_provider_calls": 0,
+        "created_at": "2026-08-14T09:00:00+07:00",
+        "code": {"revision": "e" * 40, "dirty": False},
+        "selection": {
+            "baseline_case_ids": baseline,
+            "required_human_case_ids": required,
+            "escalation_reasons": reasons,
+            "maximum_human_cases": MAX_HUMAN_CASES,
+        },
+        "model_decisions": model_decisions,
+    }
+    decisions = [
+        {
+            "case_id": case_id,
+            **{check: True for check in REQUIRED_REVIEW_CHECKS},
+            "decision": "approve",
+            "notes": "",
+        }
+        for case_id in required
+    ]
+    audit = {
+        "review_id": HUMAN_AUDIT_ID,
+        "plan_id": PLAN_ID,
+        "ensemble_id": ENSEMBLE_ID,
+        "ensemble_sha256": "f" * 64,
         "status": "complete",
-        "reviewed_at": "2026-08-10T12:00:00+00:00",
+        "reviewed_at": "2026-08-14T10:00:00+07:00",
         "reviewer": {
             "reviewer_id": "researcher-1",
             "role": "researcher",
             "human_review": True,
+            "independent_human_audit": True,
             "codex_assisted": False,
+            "blinded_to_model_decisions": True,
+            "model_decisions_inspected": False,
         },
-        "splits": {"development": {"case_decisions": [decision]}},
+        "draft_hashes": draft_hashes,
+        "selection_commitment_sha256": selection_commitment_sha256(
+            baseline, required
+        ),
+        "required_case_count": len(required),
+        "case_decisions": decisions,
     }
 
-    assert _review_decisions(review, "development", {"case-1"}) == {
-        "case-1": decision
-    }
+    _, validated = validate_hybrid_reviews(
+        ensemble=ensemble,
+        human_audit=audit,
+        ensemble_sha256="f" * 64,
+        datasets=datasets,
+        draft_hashes=draft_hashes,
+    )
+    assert set(validated) == set(required)
 
-    decision["evidence_supports_claims"] = False
+    decisions[0]["evidence_supports_claims"] = False
     with pytest.raises(ValueError, match="unapproved"):
-        _review_decisions(review, "development", {"case-1"})
-
-    decision["evidence_supports_claims"] = True
-    review["reviewed_at"] = None
-    with pytest.raises(ValueError, match="timestamped"):
-        _review_decisions(review, "development", {"case-1"})
+        validate_hybrid_reviews(
+            ensemble=ensemble,
+            human_audit=audit,
+            ensemble_sha256="f" * 64,
+            datasets=datasets,
+            draft_hashes=draft_hashes,
+        )
