@@ -1,29 +1,20 @@
-# Course-tutor hybrid authoring review v2 plan
+# Course-tutor hybrid authoring review v3 plan
 
-Plan ID: `course-tutor-hybrid-authoring-review-v2`
+Plan ID: `course-tutor-hybrid-authoring-review-v3`
 
 Date frozen: 2026-08-14
 
-Status: invalid and stopped after 146/456 private judgments; superseded by
-`course-tutor-hybrid-authoring-review-v3`. No human packet, seal, held-out
-ledger, or tutor output was created.
-
-The repository owner changed the eligible-reviewer requirement after the run
-started and explicitly excluded Gemma. The process was stopped before the
-second reviewer began, and its checkpoint was preserved as
-`course-tutor-hybrid-authoring-review-v2-attempt-001-invalid`. DeepSeek was not
-called and no provider was mixed into this frozen local protocol.
+Status: prospective; frozen before any v3 model preflight or private case
+judgment.
 
 ## Decision question
 
 Can the unchanged 152-case private course-tutor draft be qualified through a
-reproducible local three-model review and a bounded independent-human audit
-after correcting the v1 transport and workload-design failures?
+cross-provider three-model review led by the newest official DeepSeek V4 Pro
+model and a bounded independent-human audit, with Gemma excluded?
 
-V1 remains an invalid preserved result. It stopped after 172/456 records when
-the minimum required-human set reached 66, above its frozen ceiling of 48.
-This plan changes reviewer transport and sampling only. It does not reinterpret
-the v1 records, change the candidate, or authorize tutor-output generation.
+V1 and v2 remain invalid preserved attempts. Their judgments are not reused,
+and this plan does not reinterpret them or authorize tutor-output generation.
 
 ## Candidate and boundary
 
@@ -41,24 +32,61 @@ the v1 records, change the candidate, or authorize tutor-output generation.
 - Private course text and per-case judgments remain ignored local artifacts.
 - No tutor output, blinded condition mapping, seal, or held-out execution
   ledger may be opened or created.
-- No external provider call is allowed. DeepSeek remains unauthorized for
-  judge use.
+- Gemma is excluded from the v3 committee and cannot be used as a fallback.
 
-## Frozen local reviewers and transport
+## Authorization and external-data boundary
 
-| Reviewer | Model | Family | Digest | Thinking |
+The repository owner explicitly authorized this DeepSeek judge use on
+2026-08-14. The bounded amendment is recorded in
+`research/03_data/academics-source-permission.md`.
+
+DeepSeek receives only the synthetic student question/state, authored expected
+behavior, atomic claims, exact approved evidence passages and metadata, and,
+for no-evidence cases, eight deterministic nearest approved passages. No real
+student data, participant data, solutions, credentials, environment values,
+tutor outputs, hidden condition mapping, model verdict from another reviewer,
+or human decision is sent.
+
+The official endpoint is `https://api.deepseek.com`. The run uses a
+non-personal `user_id`, permits at most 153 external requests (one public
+synthetic preflight plus 152 private case judgments), and has a cumulative USD
+2 hard stop. There are no retries. Each response records input/output tokens,
+latency, approximate cost, returned model, and returned system fingerprint.
+
+DeepSeek's retention/training boundary remains a known limitation: the project
+has no provider-specific no-training agreement. Authorization is limited to
+this authoring review and does not permit general judging, student-facing use,
+public deployment, or professor-approval claims.
+
+## Frozen reviewers and transport
+
+| Reviewer | Model binding | Family | Revision/digest | Thinking |
 | --- | --- | --- | --- | --- |
-| `local-gemma3-4b-reviewer-v2` | `gemma3:4b` | Gemma 3 | `a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a` | disabled |
-| `local-qwen3-4b-reviewer-v2` | `qwen3:4b` | Qwen 3 | `359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7` | disabled |
-| `local-huihui-qwen3-4b-reviewer-v2` | `huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0` | Qwen 3 derivative | `f5046078f1f6b4dc2ad23265d7d9e616aeb77088bc9092623b2f3f056f7b19d4` | disabled |
+| `deepseek-v4-pro-reviewer-v3` | LiteLLM `deepseek/deepseek-v4-pro`; provider `deepseek-v4-pro` | DeepSeek V4 | Official documented `DeepSeek-V4-Pro-0813`; bind the non-empty preflight system fingerprint for all private calls | enabled, `high` |
+| `local-qwen3-4b-reviewer-v3` | `qwen3:4b` | Qwen 3 | `359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7` | disabled |
+| `local-huihui-qwen3-4b-reviewer-v3` | `huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0` | Qwen 3 derivative | `f5046078f1f6b4dc2ad23265d7d9e616aeb77088bc9092623b2f3f056f7b19d4` | disabled |
 
-The Ollama request must set top-level `think: false`. Before any private case
-request, every binding must pass one public synthetic transport preflight with
-the exact six-check JSON schema. Any failed preflight stops the run. Private
-case calls receive no retries; malformed or missing responses remain invalid.
+DeepSeek's official changelog names `deepseek-v4-pro` as the current GA model
+and its model table identifies the served revision as `DeepSeek-V4-Pro-0813`:
+<https://api-docs.deepseek.com/updates/> and
+<https://api-docs.deepseek.com/quick_start/pricing/>. The OpenAI-compatible
+request enables thinking with effort `high`, uses JSON mode, and omits sampling
+parameters that thinking mode ignores. The prompt contains the word JSON and
+an exact schema example as required by the official JSON-output guide:
+<https://api-docs.deepseek.com/guides/thinking_mode/> and
+<https://api-docs.deepseek.com/guides/json_mode/>.
 
-Three artifacts still represent only two base-model families. Agreement is
-triage evidence, not independent proof, and the human audit remains required.
+Before private requests, each binding must pass one public synthetic transport
+preflight with the exact six-check JSON schema. DeepSeek's preflight must return
+`deepseek-v4-pro` and a non-empty system fingerprint; that fingerprint becomes
+the immutable private-run binding. Any failed preflight stops the run. Private
+calls receive no retries; empty, malformed, mismatched-model, or
+mismatched-fingerprint responses remain invalid. Any external cost at or above
+USD 2 stops further requests and invalidates the incomplete run.
+
+The three reviewers represent only two base-model families because both local
+reviewers are Qwen-related. Agreement is triage evidence, not independent
+proof, and the human audit remains mandatory.
 
 ## Six authoring checks
 
@@ -78,7 +106,7 @@ themselves. The expected non-answer or bounded-support behavior must still be
 correct.
 
 Every no-evidence case receives the eight nearest approved corpus passages
-from the same deterministic lexical search used in v1. The model's check is
+from the same deterministic lexical search used in v2. The model's check is
 bounded: none of those supplied passages may directly answer the question.
 The reviewer must not fail solely because eight lexical neighbors cannot prove
 corpus-wide semantic absence. All 19 no-evidence cases are independently human
@@ -90,9 +118,9 @@ necessary for the complete expected answer.
 
 ## Human audit contract
 
-Sample seed: `course-tutor-hybrid-human-sample-v2`
+Sample seed: `course-tutor-hybrid-human-sample-v3`
 
-Before reading v2 model verdicts, select one stable-hash case from each
+Before reading v3 model verdicts, select one stable-hash case from each
 scenario-by-split stratum. Eight scenarios across both splits produce a
 16-case baseline: eight development and eight held-out cases.
 
@@ -119,7 +147,9 @@ decisions were not inspected.
 
 - All three public transport preflights must pass.
 - All 456 private reviewer-case records must be present.
-- Zero external calls are permitted.
+- DeepSeek must have exactly one preflight and 152 no-retry private judgments,
+  with one unchanged returned model and fingerprint.
+- External cost must remain below USD 2.
 - The required human set must contain at most 48 cases.
 - Every case outside the human set requires unanimous three-model approval.
 - Every human-audited case requires six true checks and approve.
@@ -133,7 +163,7 @@ upper 95% bound is approximately 18.8%. That bound applies only to the random
 baseline and is not a guarantee for unsampled cases. The all-19 no-evidence
 census and model escalations are targeted coverage, not random-sample size.
 
-The allowed claim remains: local multi-model cross-review with targeted
+The allowed claim is: cross-provider multi-model review with targeted
 independent-human validation. Full human approval and professor validation are
 not allowed claims.
 
@@ -141,19 +171,22 @@ not allowed claims.
 
 - transport-preflight validity and latency by reviewer;
 - all private valid/invalid decisions and latency/token counts by reviewer;
+- DeepSeek returned model, fingerprint, token use, request count, and cost;
 - unanimous approvals/revisions and disagreements;
 - per-check, split, and scenario slices;
 - baseline, no-evidence census, escalated, and total human counts;
 - human defects by check, split, and scenario;
-- exact model, digest, thinking mode, prompt, seed, dataset, conditions, code
-  revision, and dirty state; and
-- zero-external-call and unopened-held-out boundary confirmation.
+- exact model, digest or provider revision, thinking mode, prompt, seed,
+  dataset, conditions, code revision, and dirty state; and
+- unopened-held-out boundary confirmation.
 
 ## Reproducibility sequence
 
-1. Validate unchanged draft hashes, schemas, permissions, and split isolation.
+1. Validate unchanged draft hashes, schemas, permission amendment, and split
+   isolation.
 2. Verify local model digests and run all three public synthetic preflights.
-3. Run all 456 private local decisions without retries.
+3. Bind the DeepSeek preflight fingerprint and run all 456 private decisions
+   without retries.
 4. Generate the blinded 16-plus-no-evidence-plus-escalations human packet.
 5. Complete the independent-human audit without inspecting model records.
 6. Validate ensemble and human decisions together.

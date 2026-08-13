@@ -13,6 +13,35 @@ External review clarification date: 2026-08-01
 
 Professor-fidelity provider clarification date: 2026-08-10
 
+Course-tutor judge clarification date: 2026-08-14
+
+## Course-tutor authoring-review DeepSeek authorization
+
+On 2026-08-14, the source holder explicitly authorized the official DeepSeek
+Open Platform as a judge for the single
+`course-tutor-hybrid-authoring-review-v3` run. This amendment supersedes the
+earlier judge exclusion only for this named authoring review. It authorizes
+`deepseek-v4-pro`, documented by DeepSeek as `DeepSeek-V4-Pro-0813`, at
+`https://api.deepseek.com` in thinking mode with effort `high`.
+
+The permitted payload is limited to synthetic student questions and states,
+authored expected behavior, atomic claims, exact approved IT5002 evidence
+passages and metadata, and eight deterministic approved lexical neighbors for
+each no-evidence check. It excludes real student or participant data,
+solutions, graded answers, credentials, environment values, tutor outputs,
+hidden condition mappings, other reviewers' verdicts, and human decisions.
+
+The authorization permits one public synthetic preflight and 152 private case
+judgments, with no retries and a cumulative USD 2 hard stop. Requests use a
+non-personal `user_id`; records must capture call count, model, system
+fingerprint, token use, latency, and approximate cost without exposing the API
+key or private text in committed artifacts.
+
+DeepSeek's default context caching and the absence of a project-specific
+no-training guarantee remain explicit limitations. This amendment does not
+authorize general DeepSeek judging, professor approval, public deployment,
+student-facing use, or any transfer outside the named v3 fields and limits.
+
 ## Professor-fidelity DeepSeek authorization
 
 The source holder explicitly authorizes the issue #24 single-turn C0-C3
