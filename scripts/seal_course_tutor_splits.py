@@ -19,6 +19,10 @@ from scripts.validate_course_tutor_dataset import (
 )
 from scripts.run_course_tutor_hybrid_review import (
     CHECK_FIELDS,
+    DEEPSEEK_CALL_LIMIT,
+    DEEPSEEK_COST_STOP_USD,
+    DEEPSEEK_PRIVATE_MAX_ATTEMPTS,
+    DEEPSEEK_PUBLIC_PROBE_COUNT,
     ENSEMBLE_ID,
     HUMAN_AUDIT_ID,
     MAX_HUMAN_CASES,
@@ -88,9 +92,15 @@ def _validate_ensemble(
             ensemble.get("draft_hashes") == draft_hashes,
             ensemble.get("models") == list(MODEL_BINDINGS),
             ensemble.get("local_only") is False,
-            ensemble.get("external_provider_calls") == 153,
+            isinstance(ensemble.get("external_provider_calls"), int),
+            DEEPSEEK_PUBLIC_PROBE_COUNT + len(datasets["development"]["cases"])
+            + len(datasets["heldout"]["cases"])
+            <= ensemble.get("external_provider_calls", -1)
+            <= DEEPSEEK_CALL_LIMIT,
             isinstance(ensemble.get("external_provider_cost_usd"), (int, float)),
-            0 <= ensemble.get("external_provider_cost_usd", -1) < 2,
+            0
+            <= ensemble.get("external_provider_cost_usd", -1)
+            < DEEPSEEK_COST_STOP_USD,
             isinstance(ensemble.get("external_provider_revision"), str),
             bool(ensemble.get("external_provider_revision", "").strip()),
             _aware_timestamp(ensemble.get("created_at")) is not None,
@@ -171,11 +181,39 @@ def _validate_ensemble(
             )
         ):
             raise ValueError("DeepSeek row differs from the frozen provider binding")
+        if binding["endpoint_class"] == "external":
+            attempts = row.get("attempts")
+            if (
+                not isinstance(attempts, list)
+                or not 1 <= len(attempts) <= DEEPSEEK_PRIVATE_MAX_ATTEMPTS
+            ):
+                raise ValueError("DeepSeek row has an invalid attempt count")
+            for attempt in attempts:
+                if any(
+                    (
+                        attempt.get("provider_model") != binding["model"],
+                        attempt.get("provider_revision")
+                        != ensemble["external_provider_revision"],
+                        not isinstance(attempt.get("usage"), dict),
+                        attempt.get("hard_stop") is True,
+                    )
+                ):
+                    raise ValueError("DeepSeek attempt differs from its binding")
+            if attempts[-1].get("status") != row.get("status"):
+                raise ValueError("DeepSeek final attempt and decision status differ")
         if row.get("status") == "valid":
             validate_model_decision(row.get("decision"))
         elif row.get("status") != "invalid" or row.get("decision") is not None:
             raise ValueError("ensemble row status is invalid")
         rows_by_case[row["case_id"]].append(row)
+
+    actual_external_calls = DEEPSEEK_PUBLIC_PROBE_COUNT + sum(
+        len(row.get("attempts", []))
+        for row in rows
+        if row.get("endpoint_class") == "external"
+    )
+    if ensemble["external_provider_calls"] != actual_external_calls:
+        raise ValueError("ensemble DeepSeek request count is not traceable")
 
     baseline = select_baseline_case_ids(datasets)
     selection = ensemble.get("selection", {})
@@ -194,12 +232,20 @@ def _validate_ensemble(
     for case_id, case_rows in rows_by_case.items():
         if case_id in required_set:
             continue
-        if not all(
-            row["status"] == "valid"
+        deepseek_approve = any(
+            row["endpoint_class"] == "external"
+            and row["status"] == "valid"
             and row["decision"]["decision"] == "approve"
             for row in case_rows
-        ):
-            raise ValueError("unsampled case lacks unanimous model approval")
+        )
+        local_approve = any(
+            row["endpoint_class"] == "local"
+            and row["status"] == "valid"
+            and row["decision"]["decision"] == "approve"
+            for row in case_rows
+        )
+        if not (deepseek_approve and local_approve):
+            raise ValueError("unsampled case lacks two-family model approval")
     return rows_by_case, required
 
 
@@ -372,18 +418,28 @@ def seal_splits(
                         "blinded targeted independent-human validation under "
                         "the frozen hybrid protocol; this is not professor approval."
                         if was_human_audited
-                        else "Qualified by unanimous cross-provider three-model review "
+                        else "Qualified by cross-provider two-family model approval "
                         "under the frozen hybrid protocol; this is not full human "
                         "or professor approval."
                     ),
                 }
             )
-            if not was_human_audited and not all(
-                row["status"] == "valid"
-                and row["decision"]["decision"] == "approve"
-                for row in model_rows[case_id]
-            ):
-                raise ValueError("unreviewed case lacks unanimous approval")
+            if not was_human_audited:
+                case_rows = model_rows[case_id]
+                deepseek_approve = any(
+                    row["endpoint_class"] == "external"
+                    and row["status"] == "valid"
+                    and row["decision"]["decision"] == "approve"
+                    for row in case_rows
+                )
+                local_approve = any(
+                    row["endpoint_class"] == "local"
+                    and row["status"] == "valid"
+                    and row["decision"]["decision"] == "approve"
+                    for row in case_rows
+                )
+                if not (deepseek_approve and local_approve):
+                    raise ValueError("unreviewed case lacks two-family approval")
         dataset["dataset_status"] = "approved" if split == "development" else "sealed"
         dataset["sealed_at"] = reviewed_at
         validate_schema(dataset, case_schema)
@@ -407,7 +463,7 @@ def seal_splits(
         "ensemble_review_id": ensemble["ensemble_id"],
         "review_plan_id": PLAN_ID,
         "review_claim": (
-            "cross-provider multi-model review with targeted independent-human validation"
+            "cross-provider two-family model review with targeted independent-human validation"
         ),
         "required_human_cases": len(human_case_ids),
         "github_support_purge_confirmed": True,

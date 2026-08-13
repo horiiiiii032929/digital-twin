@@ -25,12 +25,14 @@ from scripts.run_professor_fidelity_experiment import (
     load_instrument,
 )
 from scripts.run_course_tutor_hybrid_review import (
+    DEEPSEEK_PUBLIC_PROBE_COUNT,
     ENSEMBLE_ID,
     HUMAN_AUDIT_ID,
     MAX_HUMAN_CASES,
     MODEL_BINDINGS,
     PLAN_ID,
     SAMPLE_SEED,
+    call_deepseek,
     required_human_case_ids,
     selection_commitment_sha256,
     select_baseline_case_ids,
@@ -612,12 +614,60 @@ def test_course_tutor_hybrid_baseline_is_one_case_per_stratum():
     assert set(strata.values()) == {1}
 
 
-def test_course_tutor_v3_uses_deepseek_v4_pro_and_excludes_gemma():
+def test_course_tutor_v4_uses_deepseek_v4_pro_and_excludes_gemma():
     assert MODEL_BINDINGS[0]["model"] == "deepseek-v4-pro"
     assert MODEL_BINDINGS[0]["documented_revision"] == "DeepSeek-V4-Pro-0813"
     assert MODEL_BINDINGS[0]["thinking"] is True
     assert MODEL_BINDINGS[0]["reasoning_effort"] == "high"
     assert not any("gemma" in binding["model"].casefold() for binding in MODEL_BINDINGS)
+
+
+def test_course_tutor_v4_calls_official_deepseek_json_thinking_transport():
+    captured = {}
+
+    class Completions:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            return SimpleNamespace(
+                model="deepseek-v4-pro",
+                system_fingerprint="fp-v4-pro-synthetic",
+                usage=SimpleNamespace(
+                    prompt_tokens=100,
+                    completion_tokens=50,
+                    total_tokens=150,
+                ),
+                choices=[
+                    SimpleNamespace(
+                        message=SimpleNamespace(
+                            content=(
+                                '{"decision":"approve",'
+                                '"question_authentic_and_synthetic":true,'
+                                '"expected_behavior_correct":true,'
+                                '"claims_atomic_and_correct":true,'
+                                '"evidence_supports_claims":true,'
+                                '"permission_and_version_correct":true,'
+                                '"split_assignment_acceptable":true,'
+                                '"reason":"All six checks pass."}'
+                            )
+                        )
+                    )
+                ],
+            )
+
+    client = SimpleNamespace(
+        chat=SimpleNamespace(completions=Completions())
+    )
+    result = call_deepseek(
+        client=client,
+        prompt="Return JSON.",
+        expected_revision="fp-v4-pro-synthetic",
+    )
+
+    assert result["status"] == "valid"
+    assert captured["model"] == "deepseek-v4-pro"
+    assert captured["reasoning_effort"] == "high"
+    assert captured["response_format"] == {"type": "json_object"}
+    assert captured["extra_body"]["thinking"] == {"type": "enabled"}
 
 
 def test_course_tutor_model_decision_requires_consistent_checks():
@@ -631,6 +681,46 @@ def test_course_tutor_model_decision_requires_consistent_checks():
     decision["evidence_supports_claims"] = False
     with pytest.raises(ValueError, match="inconsistent"):
         validate_model_decision(decision)
+
+
+def test_course_tutor_v4_escalates_by_two_family_quorum():
+    rows = [
+        {
+            "case_id": "case-1",
+            "scenario_type": "direct",
+            "endpoint_class": "external",
+            "status": "valid",
+            "decision": {"decision": "approve"},
+        },
+        {
+            "case_id": "case-1",
+            "scenario_type": "direct",
+            "endpoint_class": "local",
+            "status": "valid",
+            "decision": {"decision": "approve"},
+        },
+        {
+            "case_id": "case-1",
+            "scenario_type": "direct",
+            "endpoint_class": "local",
+            "status": "valid",
+            "decision": {"decision": "revise"},
+        },
+    ]
+
+    required, _ = required_human_case_ids(rows, [])
+    assert required == []
+
+    rows[1]["decision"]["decision"] = "revise"
+    required, reasons = required_human_case_ids(rows, [])
+    assert required == ["case-1"]
+    assert reasons["case-1"] == ["no_local_family_approve"]
+
+    rows[0]["decision"]["decision"] = "revise"
+    rows[1]["decision"]["decision"] = "approve"
+    required, reasons = required_human_case_ids(rows, [])
+    assert required == ["case-1"]
+    assert reasons["case-1"] == ["deepseek_not_approve"]
 
 
 def test_course_tutor_seal_requires_github_purge_confirmation(tmp_path):
@@ -687,6 +777,23 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                                 "provider_model": "deepseek-v4-pro",
                                 "provider_revision": "fp-v4-pro-synthetic",
                                 "usage": {"approximate_cost_usd": 0.00001},
+                                "attempts": [
+                                    {
+                                        "status": "valid",
+                                        "decision": {
+                                            "decision": "approve",
+                                            **{
+                                                check: True
+                                                for check in REQUIRED_REVIEW_CHECKS
+                                            },
+                                            "reason": "All six checks pass.",
+                                        },
+                                        "provider_model": "deepseek-v4-pro",
+                                        "provider_revision": "fp-v4-pro-synthetic",
+                                        "usage": {"approximate_cost_usd": 0.00001},
+                                        "hard_stop": False,
+                                    }
+                                ],
                             }
                             if binding["endpoint_class"] == "external"
                             else {}
@@ -700,37 +807,47 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
         "mandatory_no_evidence_census" in case_reasons
         for case_reasons in reasons.values()
     ) == 6
-    transport_preflights = [
-        {
-            "reviewer_id": binding["reviewer_id"],
-            "model": binding["model"],
-            "model_digest": binding["digest"],
-            "documented_revision": binding["documented_revision"],
-            "family": binding["family"],
-            "endpoint_class": binding["endpoint_class"],
-            "thinking": binding["thinking"],
-            "reasoning_effort": binding["reasoning_effort"],
-            "private_data_used": False,
-            "status": "valid",
-            "decision": {
-                "decision": "approve",
-                **{
-                    check: True for check in REQUIRED_REVIEW_CHECKS
-                },
-                "reason": "Synthetic transport preflight passes.",
-            },
-            **(
+    transport_preflights = []
+    for binding in MODEL_BINDINGS:
+        probe_indexes = (
+            range(1, DEEPSEEK_PUBLIC_PROBE_COUNT + 1)
+            if binding["endpoint_class"] == "external"
+            else (None,)
+        )
+        for probe_index in probe_indexes:
+            transport_preflights.append(
                 {
-                    "provider_model": "deepseek-v4-pro",
-                    "provider_revision": "fp-v4-pro-synthetic",
-                    "usage": {"approximate_cost_usd": 0.00001},
+                    "reviewer_id": binding["reviewer_id"],
+                    "model": binding["model"],
+                    "model_digest": binding["digest"],
+                    "documented_revision": binding["documented_revision"],
+                    "family": binding["family"],
+                    "endpoint_class": binding["endpoint_class"],
+                    "thinking": binding["thinking"],
+                    "reasoning_effort": binding["reasoning_effort"],
+                    "probe_index": probe_index,
+                    "private_data_used": False,
+                    "status": "valid",
+                    "decision": {
+                        "decision": "approve",
+                        **{
+                            check: True for check in REQUIRED_REVIEW_CHECKS
+                        },
+                        "reason": "Synthetic transport preflight passes.",
+                    },
+                    **(
+                        {
+                            "provider_model": "deepseek-v4-pro",
+                            "provider_revision": "fp-v4-pro-synthetic",
+                            "usage": {"approximate_cost_usd": 0.00001},
+                            "retryable": False,
+                            "hard_stop": False,
+                        }
+                        if binding["endpoint_class"] == "external"
+                        else {}
+                    ),
                 }
-                if binding["endpoint_class"] == "external"
-                else {}
-            ),
-        }
-        for binding in MODEL_BINDINGS
-    ]
+            )
     ensemble = {
         "plan_id": PLAN_ID,
         "ensemble_id": ENSEMBLE_ID,
@@ -740,8 +857,8 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
         "draft_hashes": draft_hashes,
         "models": list(MODEL_BINDINGS),
         "local_only": False,
-        "external_provider_calls": 153,
-        "external_provider_cost_usd": 0.00153,
+        "external_provider_calls": 58,
+        "external_provider_cost_usd": 0.00058,
         "external_provider_revision": "fp-v4-pro-synthetic",
         "created_at": "2026-08-14T09:00:00+07:00",
         "code": {"revision": "e" * 40, "dirty": False},

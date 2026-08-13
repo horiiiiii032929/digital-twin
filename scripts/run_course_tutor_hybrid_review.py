@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import asyncio
 import hashlib
 import json
 import math
@@ -21,8 +20,8 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
+from openai import OpenAI, OpenAIError
 
-from services.llm import LiteLlmClient
 from scripts.build_course_tutor_splits import validate_split_isolation
 from scripts.it5002_rapid_common import load_course_corpus
 from scripts.validate_course_tutor_dataset import (
@@ -30,7 +29,6 @@ from scripts.validate_course_tutor_dataset import (
     validate_dataset,
     validate_schema,
 )
-from src.digital_twin.llm import LlmError, LlmMessage
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,30 +48,32 @@ PERMISSION_PATH = ROOT / "research/03_data/academics-source-permission.md"
 PLAN_PATH = (
     ROOT
     / "research/04_experiments/"
-    "2026-08-14-course-tutor-hybrid-authoring-review-v3-plan.md"
+    "2026-08-14-course-tutor-hybrid-authoring-review-v4-plan.md"
 )
 EXPECTED_PERMISSION_SHA256 = (
-    "fa5ddde5a3042eb8af02dbbb04228a78d7db0a5a9e5daebb8a2fcfbb0fa2fa2d"
+    "6f3f9383b7e3cfceb65d38c8fd8fcbd461bbb1379f22710b1b3a869a39448f77"
 )
 EXPECTED_PLAN_SHA256 = (
-    "ee69258807b5de19cb41fe8c593c7f92ea158a1c11143e991676eec91920553a"
+    "18e266d3f9f17ba37723450f282347bae3d2135a2263baad8b7c2cf21e387665"
 )
-PLAN_ID = "course-tutor-hybrid-authoring-review-v3"
-ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v3-001"
-HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v3-001"
-PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v3"
-SAMPLE_SEED = "course-tutor-hybrid-human-sample-v3"
+PLAN_ID = "course-tutor-hybrid-authoring-review-v4"
+ENSEMBLE_ID = "course-tutor-v1.2.3-cross-provider-ensemble-v4-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v4-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v4"
+SAMPLE_SEED = "course-tutor-hybrid-human-sample-v4"
 MAX_HUMAN_CASES = 48
 NEIGHBOR_COUNT = 8
 BASELINE_PER_STRATUM = 1
 DEEPSEEK_MODEL = "deepseek-v4-pro"
-DEEPSEEK_LITELLM_MODEL = "deepseek/deepseek-v4-pro"
 DEEPSEEK_DOCUMENTED_REVISION = "DeepSeek-V4-Pro-0813"
-DEEPSEEK_CALL_LIMIT = 153
+DEEPSEEK_CALL_LIMIT = 314
 DEEPSEEK_COST_STOP_USD = 2.0
+DEEPSEEK_PUBLIC_PROBE_COUNT = 10
+DEEPSEEK_PUBLIC_PROBE_MIN_VALID = 9
+DEEPSEEK_PRIVATE_MAX_ATTEMPTS = 2
 DEEPSEEK_INPUT_PRICE_PER_MILLION_USD = 0.435
 DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD = 0.87
-DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v3"
+DEEPSEEK_USER_ID = "digital-twin-course-tutor-review-v4"
 CHECK_FIELDS = (
     "question_authentic_and_synthetic",
     "expected_behavior_correct",
@@ -94,9 +94,9 @@ SCENARIOS = (
 )
 MODEL_BINDINGS = (
     {
-        "reviewer_id": "deepseek-v4-pro-reviewer-v3",
+        "reviewer_id": "deepseek-v4-pro-reviewer-v4",
         "model": DEEPSEEK_MODEL,
-        "litellm_model": DEEPSEEK_LITELLM_MODEL,
+        "litellm_model": None,
         "family": "DeepSeek V4",
         "endpoint_class": "external",
         "thinking": True,
@@ -105,7 +105,7 @@ MODEL_BINDINGS = (
         "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
     },
     {
-        "reviewer_id": "local-qwen3-4b-reviewer-v3",
+        "reviewer_id": "local-qwen3-4b-reviewer-v4",
         "model": "qwen3:4b",
         "litellm_model": None,
         "family": "Qwen 3",
@@ -118,7 +118,7 @@ MODEL_BINDINGS = (
         "documented_revision": None,
     },
     {
-        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v3",
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v4",
         "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
         "litellm_model": None,
         "family": "Qwen 3 derivative",
@@ -159,12 +159,12 @@ def sha256(path: Path) -> str:
 def assert_external_authorization(allow_external_provider: bool) -> None:
     if not allow_external_provider:
         raise ValueError(
-            "the frozen v3 review requires --allow-external-provider"
+            "the frozen v4 review requires --allow-external-provider"
         )
     if sha256(PERMISSION_PATH) != EXPECTED_PERMISSION_SHA256:
         raise ValueError("DeepSeek permission record hash drifted")
     if sha256(PLAN_PATH) != EXPECTED_PLAN_SHA256:
-        raise ValueError("frozen v3 review plan hash drifted")
+        raise ValueError("frozen v4 review plan hash drifted")
 
 
 def _write_private_atomic(path: Path, value: dict[str, Any]) -> None:
@@ -532,107 +532,144 @@ def call_ollama(
     }
 
 
-def _response_field(value: Any, name: str, default: Any = None) -> Any:
-    if isinstance(value, dict):
-        return value.get(name, default)
-    return getattr(value, name, default)
-
-
-def _deepseek_upper_bound_cost(*, completion_response: Any) -> float:
+def _deepseek_upper_bound_cost(input_tokens: int, output_tokens: int) -> float:
     """Price every input token as a cache miss for a conservative run cap."""
-    usage = _response_field(completion_response, "usage", {})
-    input_tokens = int(_response_field(usage, "prompt_tokens", 0) or 0)
-    output_tokens = int(_response_field(usage, "completion_tokens", 0) or 0)
     return (
         input_tokens * DEEPSEEK_INPUT_PRICE_PER_MILLION_USD
         + output_tokens * DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD
     ) / 1_000_000
 
 
-def _deepseek_client() -> LiteLlmClient:
-    if not os.getenv("DEEPSEEK_API_KEY", "").strip():
-        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v3 review")
-    return LiteLlmClient(
-        DEEPSEEK_LITELLM_MODEL,
-        timeout_seconds=300,
-        max_output_tokens=4096,
-        temperature=None,
-        response_format={"type": "json_object"},
-        provider_options={
-            "reasoning_effort": "high",
-            "extra_body": {
-                "thinking": {"type": "enabled"},
-                "user_id": DEEPSEEK_USER_ID,
-            },
-        },
-        cost_calculator=_deepseek_upper_bound_cost,
+def _deepseek_client() -> OpenAI:
+    api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
+    if not api_key:
+        raise ValueError("DEEPSEEK_API_KEY is required for the frozen v4 review")
+    return OpenAI(
+        api_key=api_key,
+        base_url="https://api.deepseek.com",
+        timeout=300,
+        max_retries=0,
     )
 
 
 def call_deepseek(
     *,
-    client: LiteLlmClient,
+    client: OpenAI,
     prompt: str,
     expected_revision: str | None,
 ) -> dict[str, Any]:
     started = time.perf_counter()
-    response = asyncio.run(
-        client.chat(
-            [LlmMessage(role="user", content=prompt)],
-            task="course_tutor_authoring_review_v3",
+    try:
+        response = client.chat.completions.create(
+            model=DEEPSEEK_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=4096,
+            response_format={"type": "json_object"},
+            reasoning_effort="high",
+            extra_body={
+                "thinking": {"type": "enabled"},
+                "user_id": DEEPSEEK_USER_ID,
+            },
         )
-    )
+    except OpenAIError as error:
+        return {
+            "status": "invalid",
+            "decision": None,
+            "usage": None,
+            "provider_model": None,
+            "provider_revision": None,
+            "failure_class": "provider_error",
+            "retryable": False,
+            "hard_stop": True,
+            "error": f"{type(error).__name__}: provider request failed",
+        }
     elapsed_seconds = time.perf_counter() - started
+    response_usage = response.usage
+    input_tokens = int(response_usage.prompt_tokens if response_usage else 0)
+    output_tokens = int(response_usage.completion_tokens if response_usage else 0)
+    total_tokens = int(response_usage.total_tokens if response_usage else 0)
     usage = {
         "elapsed_seconds": round(elapsed_seconds, 6),
-        "input_tokens": response.usage.input_tokens,
-        "output_tokens": response.usage.output_tokens,
-        "total_tokens": response.usage.total_tokens,
-        "approximate_cost_usd": response.usage.approximate_cost_usd,
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "total_tokens": total_tokens,
+        "approximate_cost_usd": _deepseek_upper_bound_cost(
+            input_tokens, output_tokens
+        ),
         "cost_method": "upper_bound_all_input_tokens_priced_as_cache_miss",
     }
     base = {
         "usage": usage,
-        "provider_model": response.provider_model,
-        "provider_revision": response.provider_revision,
+        "provider_model": response.model,
+        "provider_revision": response.system_fingerprint,
     }
-    if response.provider_model != DEEPSEEK_MODEL:
+    if response.model != DEEPSEEK_MODEL:
         return {
             **base,
             "status": "invalid",
             "decision": None,
+            "failure_class": "provider_model_mismatch",
+            "retryable": False,
+            "hard_stop": True,
             "error": "provider model differs from frozen deepseek-v4-pro binding",
         }
-    if not response.provider_revision:
+    if not response.system_fingerprint:
         return {
             **base,
             "status": "invalid",
             "decision": None,
+            "failure_class": "provider_revision_missing",
+            "retryable": False,
+            "hard_stop": True,
             "error": "provider omitted the required system fingerprint",
         }
     if (
         expected_revision is not None
-        and response.provider_revision != expected_revision
+        and response.system_fingerprint != expected_revision
     ):
         return {
             **base,
             "status": "invalid",
             "decision": None,
+            "failure_class": "provider_revision_mismatch",
+            "retryable": False,
+            "hard_stop": True,
             "error": "provider system fingerprint drifted during the frozen run",
         }
+    content = response.choices[0].message.content if response.choices else None
+    if not isinstance(content, str) or not content.strip():
+        return {
+            **base,
+            "status": "invalid",
+            "decision": None,
+            "failure_class": "empty_content",
+            "retryable": True,
+            "hard_stop": False,
+            "error": "provider returned empty structured content",
+        }
     try:
-        decision = validate_model_decision(json.loads(response.content))
+        decision = validate_model_decision(json.loads(content))
     except (TypeError, ValueError, json.JSONDecodeError) as error:
         return {
             **base,
             "status": "invalid",
             "decision": None,
+            "failure_class": "malformed_structured_content",
+            "retryable": True,
+            "hard_stop": False,
             "error": f"{type(error).__name__}: structured decision invalid",
         }
-    return {**base, "status": "valid", "decision": decision}
+    return {
+        **base,
+        "status": "valid",
+        "decision": decision,
+        "failure_class": None,
+        "retryable": False,
+        "hard_stop": False,
+    }
 
 
-def _transport_preflight_prompt() -> str:
+def _transport_preflight_prompt(probe_index: int | None = None) -> str:
     example = {
         "decision": "approve",
         **{field: True for field in CHECK_FIELDS},
@@ -641,6 +678,7 @@ def _transport_preflight_prompt() -> str:
     return "\n".join(
         (
             "This is a public synthetic JSON transport preflight.",
+            f"Probe index: {probe_index}." if probe_index is not None else "",
             "Return exactly the supplied object and no markdown.",
             json.dumps(example),
         )
@@ -650,72 +688,90 @@ def _transport_preflight_prompt() -> str:
 def run_transport_preflights(
     url: str,
     *,
-    deepseek_client: LiteLlmClient,
+    deepseek_client: OpenAI,
 ) -> list[dict[str, Any]]:
     rows = []
     for binding in MODEL_BINDINGS:
-        seed = _decision_seed(
-            binding["reviewer_id"], "public-synthetic-transport-preflight"
+        probe_indexes = (
+            range(1, DEEPSEEK_PUBLIC_PROBE_COUNT + 1)
+            if binding["endpoint_class"] == "external"
+            else (None,)
         )
-        row = {
-            "reviewer_id": binding["reviewer_id"],
-            "model": binding["model"],
-            "model_digest": binding["digest"],
-            "documented_revision": binding["documented_revision"],
-            "family": binding["family"],
-            "endpoint_class": binding["endpoint_class"],
-            "thinking": binding["thinking"],
-            "reasoning_effort": binding["reasoning_effort"],
-            "seed": seed,
-            "private_data_used": False,
-        }
-        try:
+        for probe_index in probe_indexes:
+            seed = _decision_seed(
+                binding["reviewer_id"],
+                f"public-synthetic-transport-preflight-{probe_index}",
+            )
+            row = {
+                "reviewer_id": binding["reviewer_id"],
+                "model": binding["model"],
+                "model_digest": binding["digest"],
+                "documented_revision": binding["documented_revision"],
+                "family": binding["family"],
+                "endpoint_class": binding["endpoint_class"],
+                "thinking": binding["thinking"],
+                "reasoning_effort": binding["reasoning_effort"],
+                "probe_index": probe_index,
+                "seed": seed,
+                "private_data_used": False,
+            }
             if binding["endpoint_class"] == "external":
                 row.update(
                     call_deepseek(
                         client=deepseek_client,
-                        prompt=_transport_preflight_prompt(),
+                        prompt=_transport_preflight_prompt(probe_index),
                         expected_revision=None,
                     )
                 )
             else:
-                decision, usage = call_ollama(
-                    url=url,
-                    model=binding["model"],
-                    prompt=_transport_preflight_prompt(),
-                    seed=seed,
-                    thinking=binding["thinking"],
-                )
-                row.update(
-                    {"status": "valid", "decision": decision, "usage": usage}
-                )
-        except (
-            KeyError,
-            TypeError,
-            ValueError,
-            json.JSONDecodeError,
-            urllib.error.URLError,
-            TimeoutError,
-            LlmError,
-        ) as error:
-            row.update(
-                {
-                    "status": "invalid",
-                    "decision": None,
-                    "usage": None,
-                    "error": f"{type(error).__name__}: {error}",
-                }
-            )
-        rows.append(row)
+                try:
+                    decision, usage = call_ollama(
+                        url=url,
+                        model=binding["model"],
+                        prompt=_transport_preflight_prompt(),
+                        seed=seed,
+                        thinking=binding["thinking"],
+                    )
+                    row.update(
+                        {"status": "valid", "decision": decision, "usage": usage}
+                    )
+                except (
+                    KeyError,
+                    TypeError,
+                    ValueError,
+                    json.JSONDecodeError,
+                    urllib.error.URLError,
+                    TimeoutError,
+                ) as error:
+                    row.update(
+                        {
+                            "status": "invalid",
+                            "decision": None,
+                            "usage": None,
+                            "error": f"{type(error).__name__}: {error}",
+                        }
+                    )
+            rows.append(row)
     return rows
 
 
 def validate_transport_preflights(rows: Any) -> list[dict[str, Any]]:
-    if not isinstance(rows, list) or len(rows) != len(MODEL_BINDINGS):
-        raise ValueError("all three public transport preflights are required")
+    expected_count = DEEPSEEK_PUBLIC_PROBE_COUNT + len(MODEL_BINDINGS) - 1
+    if not isinstance(rows, list) or len(rows) != expected_count:
+        raise ValueError("ten DeepSeek probes and two local preflights are required")
     expected = {binding["reviewer_id"]: binding for binding in MODEL_BINDINGS}
     if {row.get("reviewer_id") for row in rows} != set(expected):
         raise ValueError("transport preflight reviewer set is invalid")
+    external_rows = [row for row in rows if row.get("endpoint_class") == "external"]
+    local_rows = [row for row in rows if row.get("endpoint_class") == "local"]
+    if (
+        len(external_rows) != DEEPSEEK_PUBLIC_PROBE_COUNT
+        or len(local_rows) != len(MODEL_BINDINGS) - 1
+        or {row.get("probe_index") for row in external_rows}
+        != set(range(1, DEEPSEEK_PUBLIC_PROBE_COUNT + 1))
+        or any(row.get("probe_index") is not None for row in local_rows)
+    ):
+        raise ValueError("transport probe allocation is invalid")
     for row in rows:
         binding = expected[row["reviewer_id"]]
         if any(
@@ -729,24 +785,39 @@ def validate_transport_preflights(rows: Any) -> list[dict[str, Any]]:
                 row.get("thinking") is not binding["thinking"],
                 row.get("reasoning_effort") != binding["reasoning_effort"],
                 row.get("private_data_used") is not False,
-                row.get("status") != "valid",
             )
         ):
             raise ValueError("transport preflight differs from its frozen binding")
         if binding["endpoint_class"] == "external":
-            usage = row.get("usage", {})
+            usage = row.get("usage") or {}
             if any(
                 (
                     row.get("provider_model") != DEEPSEEK_MODEL,
                     not isinstance(row.get("provider_revision"), str),
                     not row.get("provider_revision", "").strip(),
                     not isinstance(usage.get("approximate_cost_usd"), (int, float)),
+                    row.get("hard_stop") is True,
                 )
             ):
                 raise ValueError("DeepSeek transport preflight lacks its provider binding")
-        decision = validate_model_decision(row.get("decision"))
-        if decision["decision"] != "approve":
-            raise ValueError("transport preflight did not approve synthetic input")
+            if row.get("status") == "valid":
+                decision = validate_model_decision(row.get("decision"))
+                if decision["decision"] != "approve":
+                    raise ValueError("DeepSeek probe did not approve synthetic input")
+            elif row.get("status") != "invalid" or row.get("retryable") is not True:
+                raise ValueError("DeepSeek probe has an unapproved failure class")
+        else:
+            if row.get("status") != "valid":
+                raise ValueError("local transport preflight failed")
+            decision = validate_model_decision(row.get("decision"))
+            if decision["decision"] != "approve":
+                raise ValueError("local transport preflight did not approve")
+    if sum(row["status"] == "valid" for row in external_rows) < (
+        DEEPSEEK_PUBLIC_PROBE_MIN_VALID
+    ):
+        raise ValueError("DeepSeek public stress gate failed")
+    if len({row["provider_revision"] for row in external_rows}) != 1:
+        raise ValueError("DeepSeek public stress fingerprints differ")
     return rows
 
 
@@ -765,17 +836,24 @@ def required_human_case_ids(
     for case_id, rows in rows_by_case.items():
         if len(rows) != len(MODEL_BINDINGS):
             reasons[case_id].add("missing_model_decision")
-        if any(row.get("status") != "valid" for row in rows):
-            reasons[case_id].add("invalid_model_decision")
-        valid_verdicts = {
-            row["decision"]["decision"]
-            for row in rows
-            if row.get("status") == "valid"
-        }
-        if "revise" in valid_verdicts:
-            reasons[case_id].add("model_revise")
-        if len(valid_verdicts) > 1:
-            reasons[case_id].add("reviewer_disagreement")
+        deepseek_rows = [
+            row for row in rows if row.get("endpoint_class") == "external"
+        ]
+        local_rows = [
+            row for row in rows if row.get("endpoint_class") == "local"
+        ]
+        if not any(
+            row.get("status") == "valid"
+            and row.get("decision", {}).get("decision") == "approve"
+            for row in deepseek_rows
+        ):
+            reasons[case_id].add("deepseek_not_approve")
+        if not any(
+            row.get("status") == "valid"
+            and row.get("decision", {}).get("decision") == "approve"
+            for row in local_rows
+        ):
+            reasons[case_id].add("no_local_family_approve")
     ordered = sorted(reasons)
     return ordered, {
         case_id: sorted(reasons[case_id]) for case_id in ordered
@@ -812,7 +890,13 @@ def _summary(
             if row["reviewer_id"] == binding["reviewer_id"]
         ]
         by_reviewer[binding["reviewer_id"]] = {
-            "attempts": len(rows),
+            "decision_records": len(rows),
+            "underlying_attempts": sum(
+                len(row.get("attempts", []))
+                if binding["endpoint_class"] == "external"
+                else 1
+                for row in rows
+            ),
             "valid": sum(row["status"] == "valid" for row in rows),
             "invalid": sum(row["status"] != "valid" for row in rows),
             "approve": sum(
@@ -856,6 +940,21 @@ def _summary(
         > 1
         for rows in rows_by_case.values()
     )
+    two_family_approve = sum(
+        any(
+            row["endpoint_class"] == "external"
+            and row["status"] == "valid"
+            and row["decision"]["decision"] == "approve"
+            for row in rows
+        )
+        and any(
+            row["endpoint_class"] == "local"
+            and row["status"] == "valid"
+            and row["decision"]["decision"] == "approve"
+            for row in rows
+        )
+        for rows in rows_by_case.values()
+    )
     return {
         "attempt_records": len(decisions),
         "valid_model_decisions": len(valid),
@@ -863,6 +962,7 @@ def _summary(
         "unanimous_approve_cases": unanimous_approve,
         "unanimous_revise_cases": unanimous_revise,
         "disagreement_cases": disagreement,
+        "two_family_approve_cases": two_family_approve,
         "baseline_human_cases": len(baseline),
         "mandatory_no_evidence_cases": sum(
             "mandatory_no_evidence_census" in reasons
@@ -873,9 +973,8 @@ def _summary(
                 reason
                 in {
                     "missing_model_decision",
-                    "invalid_model_decision",
-                    "model_revise",
-                    "reviewer_disagreement",
+                    "deepseek_not_approve",
+                    "no_local_family_approve",
                 }
                 for reason in escalation_reasons[case_id]
             )
@@ -1093,7 +1192,7 @@ def run_review(
     assert_external_authorization(allow_external_provider)
     code_binding = _git_binding()
     if code_binding["dirty"]:
-        raise ValueError("the frozen v3 review must run from a clean revision")
+        raise ValueError("the frozen v4 review must run from a clean revision")
     datasets, _, review_manifest = _load_and_validate_draft(input_root)
     assert_model_bindings(ollama_url)
     deepseek_client = _deepseek_client()
@@ -1128,9 +1227,13 @@ def run_review(
             "thinking": True,
             "reasoning_effort": "high",
             "user_id": DEEPSEEK_USER_ID,
+            "transport": "openai-python-direct-chat-completions",
+            "public_stress_probes": DEEPSEEK_PUBLIC_PROBE_COUNT,
+            "public_stress_min_valid": DEEPSEEK_PUBLIC_PROBE_MIN_VALID,
+            "private_max_attempts": DEEPSEEK_PRIVATE_MAX_ATTEMPTS,
             "request_limit": DEEPSEEK_CALL_LIMIT,
             "cost_stop_usd": DEEPSEEK_COST_STOP_USD,
-            "retries": 0,
+            "retries": "one-only-after-empty-or-malformed-content",
         },
     }
     if checkpoint_path.exists():
@@ -1140,6 +1243,8 @@ def run_review(
             raise ValueError("checkpoint binding differs from the current review")
         validate_transport_preflights(binding.get("transport_preflights"))
         decisions = checkpoint.get("model_decisions", [])
+        if any(row.get("status") == "in_progress" for row in decisions):
+            raise ValueError("checkpoint contains an ambiguous in-flight request")
     else:
         preflights = run_transport_preflights(
             ollama_url,
@@ -1158,22 +1263,46 @@ def run_review(
             "transport_preflights": preflights,
         }
         decisions = []
-    deepseek_preflight = next(
+    deepseek_preflights = [
         row
         for row in binding["transport_preflights"]
         if row["endpoint_class"] == "external"
-    )
-    frozen_provider_revision = deepseek_preflight["provider_revision"]
+    ]
+    frozen_provider_revision = deepseek_preflights[0]["provider_revision"]
 
     def external_totals() -> tuple[int, float]:
-        external_rows = [
-            row for row in decisions if row.get("endpoint_class") == "external"
+        attempts = [
+            attempt
+            for row in decisions
+            if row.get("endpoint_class") == "external"
+            for attempt in row.get("attempts", [])
         ]
-        cost = deepseek_preflight["usage"]["approximate_cost_usd"] + sum(
+        cost = sum(
             (row.get("usage") or {}).get("approximate_cost_usd") or 0.0
-            for row in external_rows
+            for row in deepseek_preflights
+        ) + sum(
+            (attempt.get("usage") or {}).get("approximate_cost_usd") or 0.0
+            for attempt in attempts
         )
-        return 1 + len(external_rows), cost
+        return len(deepseek_preflights) + len(attempts), cost
+
+    def aggregate_attempt_usage(attempts: list[dict[str, Any]]) -> dict[str, Any]:
+        usage_rows = [attempt.get("usage") for attempt in attempts]
+        known = [usage for usage in usage_rows if isinstance(usage, dict)]
+        return {
+            "elapsed_seconds": round(
+                sum(usage.get("elapsed_seconds", 0.0) for usage in known), 6
+            ),
+            "input_tokens": sum(usage.get("input_tokens", 0) for usage in known),
+            "output_tokens": sum(usage.get("output_tokens", 0) for usage in known),
+            "total_tokens": sum(usage.get("total_tokens", 0) for usage in known),
+            "approximate_cost_usd": sum(
+                usage.get("approximate_cost_usd", 0.0) for usage in known
+            ),
+            "attempts_with_known_usage": len(known),
+            "attempts_total": len(attempts),
+            "cost_method": "upper_bound_all_input_tokens_priced_as_cache_miss",
+        }
 
     preflight_calls, preflight_cost = external_totals()
     if preflight_calls > DEEPSEEK_CALL_LIMIT or preflight_cost >= DEEPSEEK_COST_STOP_USD:
@@ -1185,6 +1314,10 @@ def run_review(
     completed = {
         (row["reviewer_id"], row["case_id"])
         for row in decisions
+        if row.get("status") in {"valid", "invalid"}
+    }
+    mandatory_human_ids = set(baseline) | {
+        case["case_id"] for case in no_evidence
     }
     total = len(MODEL_BINDINGS) * len(all_cases)
     for model_binding in MODEL_BINDINGS:
@@ -1210,21 +1343,86 @@ def run_review(
                 ),
             }
             if model_binding["endpoint_class"] == "external":
-                call_count, cumulative_cost = external_totals()
-                if call_count >= DEEPSEEK_CALL_LIMIT:
-                    raise ValueError("DeepSeek request limit reached")
-                if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
-                    raise ValueError("DeepSeek cost stop reached")
-            try:
-                if model_binding["endpoint_class"] == "external":
-                    row.update(
-                        call_deepseek(
-                            client=deepseek_client,
-                            prompt=prompt,
-                            expected_revision=frozen_provider_revision,
-                        )
+                row.update(
+                    {
+                        "status": "in_progress",
+                        "decision": None,
+                        "attempts": [],
+                    }
+                )
+                decisions.append(row)
+                _write_private_atomic(
+                    checkpoint_path,
+                    {"binding": binding, "model_decisions": decisions},
+                )
+                for attempt_index in range(1, DEEPSEEK_PRIVATE_MAX_ATTEMPTS + 1):
+                    call_count, cumulative_cost = external_totals()
+                    if call_count >= DEEPSEEK_CALL_LIMIT:
+                        raise ValueError("DeepSeek request limit reached")
+                    if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
+                        raise ValueError("DeepSeek cost stop reached")
+                    attempt = call_deepseek(
+                        client=deepseek_client,
+                        prompt=prompt,
+                        expected_revision=frozen_provider_revision,
                     )
-                else:
+                    attempt["attempt_index"] = attempt_index
+                    row["attempts"].append(attempt)
+                    _write_private_atomic(
+                        checkpoint_path,
+                        {"binding": binding, "model_decisions": decisions},
+                    )
+                    _, cumulative_cost = external_totals()
+                    if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
+                        raise ValueError(
+                            f"DeepSeek cost stop reached: USD {cumulative_cost:.6f}"
+                        )
+                    if attempt.get("hard_stop") is True:
+                        raise ValueError(attempt["error"])
+                    if attempt["status"] == "valid":
+                        break
+                    if attempt.get("retryable") is not True:
+                        break
+                final_attempt = row["attempts"][-1]
+                row.update(
+                    {
+                        "status": final_attempt["status"],
+                        "decision": final_attempt["decision"],
+                        "provider_model": final_attempt.get("provider_model"),
+                        "provider_revision": final_attempt.get("provider_revision"),
+                        "usage": aggregate_attempt_usage(row["attempts"]),
+                        "error": final_attempt.get("error"),
+                    }
+                )
+                _write_private_atomic(
+                    checkpoint_path,
+                    {"binding": binding, "model_decisions": decisions},
+                )
+                deepseek_escalations = {
+                    decision_row["case_id"]
+                    for decision_row in decisions
+                    if decision_row.get("endpoint_class") == "external"
+                    and (
+                        decision_row.get("status") != "valid"
+                        or decision_row.get("decision", {}).get("decision")
+                        != "approve"
+                    )
+                }
+                human_lower_bound = len(
+                    mandatory_human_ids | deepseek_escalations
+                )
+                if human_lower_bound > MAX_HUMAN_CASES:
+                    _write_private_exclusive(
+                        output_root / "instrument_refinement_required.md",
+                        (
+                            "# Hybrid authoring review stopped\n\n"
+                            f"The DeepSeek-stage human lower bound is {human_lower_bound}, "
+                            f"above the frozen maximum of {MAX_HUMAN_CASES}.\n"
+                        ),
+                    )
+                    raise ValueError("DeepSeek-stage human lower bound exceeded")
+            else:
+                try:
                     decision, usage = call_ollama(
                         url=ollama_url,
                         model=model_binding["model"],
@@ -1235,40 +1433,27 @@ def run_review(
                     row.update(
                         {"status": "valid", "decision": decision, "usage": usage}
                     )
-            except (
-                KeyError,
-                TypeError,
-                ValueError,
-                json.JSONDecodeError,
-                urllib.error.URLError,
-                TimeoutError,
-                LlmError,
-            ) as error:
-                row.update(
-                    {
-                        "status": "invalid",
-                        "decision": None,
-                        "usage": None,
-                        "error": f"{type(error).__name__}: {error}",
-                    }
-                )
-            decisions.append(row)
-            _write_private_atomic(
-                checkpoint_path,
-                {"binding": binding, "model_decisions": decisions},
-            )
-            if row["endpoint_class"] == "external":
-                _, cumulative_cost = external_totals()
-                if cumulative_cost >= DEEPSEEK_COST_STOP_USD:
-                    raise ValueError(
-                        f"DeepSeek cost stop reached: USD {cumulative_cost:.6f}"
+                except (
+                    KeyError,
+                    TypeError,
+                    ValueError,
+                    json.JSONDecodeError,
+                    urllib.error.URLError,
+                    TimeoutError,
+                ) as error:
+                    row.update(
+                        {
+                            "status": "invalid",
+                            "decision": None,
+                            "usage": None,
+                            "error": f"{type(error).__name__}: {error}",
+                        }
                     )
-                if row.get("error") in {
-                    "provider model differs from frozen deepseek-v4-pro binding",
-                    "provider omitted the required system fingerprint",
-                    "provider system fingerprint drifted during the frozen run",
-                }:
-                    raise ValueError(row["error"])
+                decisions.append(row)
+                _write_private_atomic(
+                    checkpoint_path,
+                    {"binding": binding, "model_decisions": decisions},
+                )
             print(
                 json.dumps(
                     {
@@ -1281,6 +1466,7 @@ def run_review(
                             if row["decision"]
                             else None
                         ),
+                        "underlying_attempts": len(row.get("attempts", [])) or 1,
                     }
                 ),
                 flush=True,
@@ -1292,8 +1478,9 @@ def run_review(
         else "awaiting_human_audit"
     )
     external_provider_calls, external_provider_cost_usd = external_totals()
-    if external_provider_calls != DEEPSEEK_CALL_LIMIT:
-        raise ValueError("completed run lacks exactly 153 DeepSeek requests")
+    minimum_external_calls = DEEPSEEK_PUBLIC_PROBE_COUNT + len(all_cases)
+    if not minimum_external_calls <= external_provider_calls <= DEEPSEEK_CALL_LIMIT:
+        raise ValueError("completed run has an invalid DeepSeek request count")
     ensemble = {
         **binding,
         "external_provider_calls": external_provider_calls,
