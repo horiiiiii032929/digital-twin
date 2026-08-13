@@ -39,13 +39,14 @@ CASE_SCHEMA_PATH = ROOT / "research/05_evaluation/course_tutor_v1.schema.json"
 CONDITION_SCHEMA_PATH = (
     ROOT / "research/05_evaluation/course_tutor_v1_condition.schema.json"
 )
-PLAN_ID = "course-tutor-hybrid-authoring-review-v1"
-ENSEMBLE_ID = "course-tutor-v1.2.3-local-ensemble-001"
-HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-001"
-PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v1"
-SAMPLE_SEED = "course-tutor-hybrid-human-sample-v1"
+PLAN_ID = "course-tutor-hybrid-authoring-review-v2"
+ENSEMBLE_ID = "course-tutor-v1.2.3-local-ensemble-v2-001"
+HUMAN_AUDIT_ID = "course-tutor-v1.2.3-hybrid-human-audit-v2-001"
+PROMPT_VERSION = "course-tutor-hybrid-authoring-review-v2"
+SAMPLE_SEED = "course-tutor-hybrid-human-sample-v2"
 MAX_HUMAN_CASES = 48
 NEIGHBOR_COUNT = 8
+BASELINE_PER_STRATUM = 1
 CHECK_FIELDS = (
     "question_authentic_and_synthetic",
     "expected_behavior_correct",
@@ -66,25 +67,28 @@ SCENARIOS = (
 )
 MODEL_BINDINGS = (
     {
-        "reviewer_id": "local-gemma3-4b-reviewer-v1",
+        "reviewer_id": "local-gemma3-4b-reviewer-v2",
         "model": "gemma3:4b",
         "family": "Gemma 3",
+        "thinking": False,
         "digest": (
             "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a"
         ),
     },
     {
-        "reviewer_id": "local-qwen3-4b-reviewer-v1",
+        "reviewer_id": "local-qwen3-4b-reviewer-v2",
         "model": "qwen3:4b",
         "family": "Qwen 3",
+        "thinking": False,
         "digest": (
             "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
         ),
     },
     {
-        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v1",
+        "reviewer_id": "local-huihui-qwen3-4b-reviewer-v2",
         "model": "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
         "family": "Qwen 3 derivative",
+        "thinking": False,
         "digest": (
             "f5046078f1f6b4dc2ad23265d7d9e616aeb77088bc9092623b2f3f056f7b19d4"
         ),
@@ -183,11 +187,14 @@ def select_baseline_case_ids(
                 ),
                 key=_stable_sample_key,
             )
-            if len(stratum) < 2:
+            if len(stratum) < BASELINE_PER_STRATUM:
                 raise ValueError(f"insufficient cases for {split}/{scenario}")
-            selected.extend(case["case_id"] for case in stratum[:2])
-    if len(selected) != 32 or len(set(selected)) != 32:
-        raise ValueError("baseline human sample must contain 32 unique cases")
+            selected.extend(
+                case["case_id"]
+                for case in stratum[:BASELINE_PER_STRATUM]
+            )
+    if len(selected) != 16 or len(set(selected)) != 16:
+        raise ValueError("baseline human sample must contain 16 unique cases")
     return selected
 
 
@@ -340,14 +347,30 @@ def review_prompt(case_payload: dict[str, Any]) -> str:
         scenario_rule = (
             "For this no-evidence case, evidence_supports_claims is true only if "
             "there are no authored positive claims/evidence and none of the eight "
-            "supplied nearest approved passages answers the question. This local "
-            "neighbor check cannot prove corpus-wide absence; mention that limit."
+            "supplied nearest approved passages directly answers the question. "
+            "Do not fail this bounded check solely because eight lexical neighbors "
+            "cannot prove corpus-wide absence; every no-evidence case is separately "
+            "assigned to a human reviewer."
         )
     elif scenario == "multi_evidence":
         scenario_rule = (
             "For this multi-evidence case, evidence_supports_claims is true only if "
             "every claim is directly supported by its mapped passage and each "
             "authored passage is necessary for the complete expected answer."
+        )
+    elif scenario == "assessed_work":
+        scenario_rule = (
+            "For this assessed-work case, intentionally absent positive factual "
+            "claims and course evidence are correct when the expected behavior "
+            "enforces bounded scaffold/hints-only support from the declared "
+            "assessment context. Do not fail claim or evidence checks merely "
+            "because the case correctly withholds an answer."
+        )
+    elif scenario == "ambiguity":
+        scenario_rule = (
+            "For this ambiguity case, intentionally absent positive factual claims "
+            "and essential evidence are correct when the question is genuinely "
+            "underspecified and the expected action is to clarify without guessing."
         )
     return "\n".join(
         (
@@ -416,6 +439,7 @@ def call_ollama(
     model: str,
     prompt: str,
     seed: int,
+    thinking: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     _assert_local_ollama_url(url)
     request = urllib.request.Request(
@@ -425,6 +449,7 @@ def call_ollama(
                 "model": model,
                 "prompt": prompt,
                 "stream": False,
+                "think": thinking,
                 "format": DECISION_SCHEMA,
                 "keep_alive": "30m",
                 "options": {
@@ -450,6 +475,92 @@ def call_ollama(
     }
 
 
+def _transport_preflight_prompt() -> str:
+    example = {
+        "decision": "approve",
+        **{field: True for field in CHECK_FIELDS},
+        "reason": "Synthetic transport preflight passes all checks.",
+    }
+    return "\n".join(
+        (
+            "This is a public synthetic JSON transport preflight.",
+            "Return exactly the supplied object and no markdown.",
+            json.dumps(example),
+        )
+    )
+
+
+def run_transport_preflights(url: str) -> list[dict[str, Any]]:
+    rows = []
+    for binding in MODEL_BINDINGS:
+        seed = _decision_seed(
+            binding["reviewer_id"], "public-synthetic-transport-preflight"
+        )
+        row = {
+            "reviewer_id": binding["reviewer_id"],
+            "model": binding["model"],
+            "model_digest": binding["digest"],
+            "family": binding["family"],
+            "thinking": binding["thinking"],
+            "seed": seed,
+            "private_data_used": False,
+        }
+        try:
+            decision, usage = call_ollama(
+                url=url,
+                model=binding["model"],
+                prompt=_transport_preflight_prompt(),
+                seed=seed,
+                thinking=binding["thinking"],
+            )
+            row.update(
+                {"status": "valid", "decision": decision, "usage": usage}
+            )
+        except (
+            KeyError,
+            TypeError,
+            ValueError,
+            json.JSONDecodeError,
+            urllib.error.URLError,
+            TimeoutError,
+        ) as error:
+            row.update(
+                {
+                    "status": "invalid",
+                    "decision": None,
+                    "usage": None,
+                    "error": f"{type(error).__name__}: {error}",
+                }
+            )
+        rows.append(row)
+    return rows
+
+
+def validate_transport_preflights(rows: Any) -> list[dict[str, Any]]:
+    if not isinstance(rows, list) or len(rows) != len(MODEL_BINDINGS):
+        raise ValueError("all three public transport preflights are required")
+    expected = {binding["reviewer_id"]: binding for binding in MODEL_BINDINGS}
+    if {row.get("reviewer_id") for row in rows} != set(expected):
+        raise ValueError("transport preflight reviewer set is invalid")
+    for row in rows:
+        binding = expected[row["reviewer_id"]]
+        if any(
+            (
+                row.get("model") != binding["model"],
+                row.get("model_digest") != binding["digest"],
+                row.get("family") != binding["family"],
+                row.get("thinking") is not binding["thinking"],
+                row.get("private_data_used") is not False,
+                row.get("status") != "valid",
+            )
+        ):
+            raise ValueError("transport preflight differs from its frozen binding")
+        decision = validate_model_decision(row.get("decision"))
+        if decision["decision"] != "approve":
+            raise ValueError("transport preflight did not approve synthetic input")
+    return rows
+
+
 def required_human_case_ids(
     model_decisions: list[dict[str, Any]],
     baseline_case_ids: list[str],
@@ -460,6 +571,8 @@ def required_human_case_ids(
     rows_by_case: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in model_decisions:
         rows_by_case[row["case_id"]].append(row)
+        if row.get("scenario_type") == "no_evidence":
+            reasons[row["case_id"]].add("mandatory_no_evidence_census")
     for case_id, rows in rows_by_case.items():
         if len(rows) != len(MODEL_BINDINGS):
             reasons[case_id].add("missing_model_decision")
@@ -562,8 +675,22 @@ def _summary(
         "unanimous_revise_cases": unanimous_revise,
         "disagreement_cases": disagreement,
         "baseline_human_cases": len(baseline),
-        "escalated_human_cases": sum(
-            case_id not in baseline for case_id in required
+        "mandatory_no_evidence_cases": sum(
+            "mandatory_no_evidence_census" in reasons
+            for reasons in escalation_reasons.values()
+        ),
+        "model_escalated_human_cases": sum(
+            any(
+                reason
+                in {
+                    "missing_model_decision",
+                    "invalid_model_decision",
+                    "model_revise",
+                    "reviewer_disagreement",
+                }
+                for reason in escalation_reasons[case_id]
+            )
+            for case_id in required
         ),
         "required_human_cases": len(required),
         "escalation_reason_counts": dict(
@@ -784,11 +911,7 @@ def run_review(
         key=lambda case: case["case_id"],
     )
     cases_by_id = {case["case_id"]: case for case in all_cases}
-    no_evidence = [
-        case for case in all_cases if case["scenario_type"] == "no_evidence"
-    ]
-    neighbors = build_no_evidence_neighbors(no_evidence)
-    binding = {
+    base_binding = {
         "plan_id": PLAN_ID,
         "ensemble_id": ENSEMBLE_ID,
         "prompt_version": PROMPT_VERSION,
@@ -801,11 +924,30 @@ def run_review(
     }
     if checkpoint_path.exists():
         checkpoint = load_json(checkpoint_path)
-        if checkpoint.get("binding") != binding:
+        binding = checkpoint.get("binding", {})
+        if any(binding.get(key) != value for key, value in base_binding.items()):
             raise ValueError("checkpoint binding differs from the current review")
+        validate_transport_preflights(binding.get("transport_preflights"))
         decisions = checkpoint.get("model_decisions", [])
     else:
+        preflights = run_transport_preflights(ollama_url)
+        try:
+            validate_transport_preflights(preflights)
+        except ValueError:
+            _write_private_exclusive(
+                output_root / "transport_preflight_failure.json",
+                f"{json.dumps(preflights, indent=2, ensure_ascii=False)}\n",
+            )
+            raise
+        binding = {
+            **base_binding,
+            "transport_preflights": preflights,
+        }
         decisions = []
+    no_evidence = [
+        case for case in all_cases if case["scenario_type"] == "no_evidence"
+    ]
+    neighbors = build_no_evidence_neighbors(no_evidence)
     completed = {
         (row["reviewer_id"], row["case_id"])
         for row in decisions
@@ -822,6 +964,7 @@ def run_review(
                 "model": model_binding["model"],
                 "model_digest": model_binding["digest"],
                 "family": model_binding["family"],
+                "thinking": model_binding["thinking"],
                 "case_id": case["case_id"],
                 "split": case["split"],
                 "scenario_type": case["scenario_type"],
@@ -835,6 +978,7 @@ def run_review(
                     model=model_binding["model"],
                     prompt=prompt,
                     seed=row["seed"],
+                    thinking=model_binding["thinking"],
                 )
                 row.update(
                     {"status": "valid", "decision": decision, "usage": usage}

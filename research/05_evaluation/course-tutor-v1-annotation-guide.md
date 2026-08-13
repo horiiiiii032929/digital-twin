@@ -9,10 +9,13 @@ case is approved or sealed
 The historical v1.1 split is invalid for selection because its review metadata
 overstated mechanical/Codex checks. The v1.2.3 workflow records the
 deterministic builder as author, runs three frozen local model artifacts over
-every case, and requires an independent-human audit of a stable 32-case sample
-plus every model escalation. The audit stops for instrument refinement above
-48 human cases. An immutable seal is possible only when all required checks
-pass and GitHub confirms the superseded public commit was purged.
+every case, and requires an independent-human audit of a stable 16-case sample,
+all 19 no-evidence cases, and every model escalation. The first 32-sample
+instrument attempt is preserved as invalid after its lower bound reached 66
+human cases. V2 disables model thinking explicitly and requires public schema
+preflights. The audit still stops for instrument refinement above 48 human
+cases. An immutable seal is possible only when all required checks pass and
+GitHub confirms the superseded public commit was purged.
 
 The case annotation remains conservatively `single_review` after this gate;
 the reviewer IDs, change summary, and seal record carry the exact hybrid

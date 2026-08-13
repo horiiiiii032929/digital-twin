@@ -74,8 +74,10 @@ no seal or held-out ledger until the frozen hybrid authoring review passes,
 freezes a shared policy/integration prompt by hash, and records exact passage
 identity in future runs. The ignored v1.2.3 draft contains 48 development and
 104 held-out authoring cases. Its gate is all-case local three-model review plus
-a stable 32-case human sample and every model escalation, capped at 48 human
-cases. Held-out tutor execution remains unopened.
+a stable 16-case human sample, a census of all 19 no-evidence cases, and every
+model escalation, capped at 48 human cases. The v1 attempt stopped invalid at
+172/456 records; v2 adds explicit non-thinking transport and public preflights.
+Held-out tutor execution remains unopened.
 
 The prerequisite generator comparison is frozen in
 [`generator_qualification_v1.json`](instruments/generator_qualification_v1.json).

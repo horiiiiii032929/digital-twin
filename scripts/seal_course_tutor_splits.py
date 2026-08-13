@@ -29,6 +29,7 @@ from scripts.run_course_tutor_hybrid_review import (
     selection_commitment_sha256,
     select_baseline_case_ids,
     validate_model_decision,
+    validate_transport_preflights,
 )
 
 
@@ -99,6 +100,7 @@ def _validate_ensemble(
         or code.get("dirty") is not False
     ):
         raise ValueError("ensemble must be bound to a clean 40-character revision")
+    validate_transport_preflights(ensemble.get("transport_preflights"))
 
     cases_by_id = {
         case["case_id"]: case
@@ -137,6 +139,7 @@ def _validate_ensemble(
                 row.get("model") != binding["model"],
                 row.get("model_digest") != binding["digest"],
                 row.get("family") != binding["family"],
+                row.get("thinking") is not binding["thinking"],
                 row.get("split") != case["split"],
                 row.get("scenario_type") != case["scenario_type"],
             )

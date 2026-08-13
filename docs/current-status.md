@@ -32,7 +32,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Keep experimentally | Exact DeepSeek V4 Flash non-thinking binding and strict-evidence P2 qualified on the separate synthetic boundary; deterministic fallback retained | Professor-policy fidelity on valid course cases |
-| Professor fidelity | Refine; frozen hybrid authoring review is the active gate | Drafts 001-003 and their unfavorable findings are preserved privately; corrected v1.2.3 passes expanded local privacy, split-isolation, citation-binding, policy, and semantic checks; a prospective three-model plus targeted-human protocol replaces the unrealistic 152-case manual checklist | Completed 456-decision local ensemble, bounded independent-human audit, GitHub server-side purge confirmation, C0-C3 effects, safe grounding, semantic citation completeness, and pedagogy |
+| Professor fidelity | Refine; frozen hybrid authoring review v2 is the active gate | Drafts 001-003 and their unfavorable findings are preserved privately; corrected v1.2.3 passes expanded local checks; hybrid v1 stopped invalid at 172/456 records when its human lower bound reached 66; v2 fixes local transport and sampling prospectively | Completed v2 456-decision local ensemble, bounded independent-human audit, GitHub server-side purge confirmation, C0-C3 effects, safe grounding, semantic citation completeness, and pedagogy |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -61,16 +61,17 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Complete and commit the hybrid review implementation from the prospective
-   [`course-tutor-hybrid-authoring-review-v1`](../research/04_experiments/2026-08-13-course-tutor-hybrid-authoring-review-v1-plan.md)
-   plan.
-2. Run the three frozen local model artifacts over all 152 cases, producing
-   all 456 attempt records. The 32-case baseline is selected by stable hash
-   before verdicts are read.
-3. If the required human set exceeds 48, preserve the result and refine the
-   instrument. Otherwise, a non-Codex human reviews the blinded 32-case sample
-   plus every disagreement, revise, invalid, or missing model result. Do not
-   inspect the ensemble verdicts while completing that packet.
+1. Complete and commit the revised implementation from the prospective
+   [`course-tutor-hybrid-authoring-review-v2`](../research/04_experiments/2026-08-14-course-tutor-hybrid-authoring-review-v2-plan.md)
+   plan. V1 remains preserved as an invalid stopped attempt.
+2. Run the three public local schema preflights, then all three frozen local
+   model artifacts over all 152 cases, producing all 456 private attempt
+   records. The 16-case baseline is selected by stable hash before verdicts
+   are read.
+3. If the required human set exceeds 48, preserve the result and refine again.
+   Otherwise, a non-Codex human reviews the blinded 16-case sample, all 19
+   no-evidence cases, and every disagreement, revise, invalid, or missing model
+   result. Do not inspect the ensemble verdicts while completing that packet.
 4. Any failed or uncertain human-audited case blocks sealing and requires a
    revised candidate plus a fresh full ensemble and sample. Unsampled cases
    require unanimous three-model approval.

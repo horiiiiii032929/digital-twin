@@ -41,8 +41,10 @@ policy, student interaction state, and evaluation-before-publication.
 
 The sole `In Progress` item is #24. The immediate R2 work is the frozen local
 three-model authoring review of all exact-passage v1.2.3 cases followed by a
-stable 32-case independent-human audit plus model escalations, capped at 48
-human cases. The immutable v2 seal also requires confirmation on GitHub
+stable 16-case independent-human audit, all 19 no-evidence cases, and model
+escalations, capped at 48 human cases. The initial 32-sample instrument attempt
+is preserved as invalid; v2 corrects local thinking-mode transport and adds
+public preflights. The immutable seal also requires confirmation on GitHub
 Support ticket #4659958 before the corrected hash-bound development comparison
 can run. Held-out tutor outputs remain unopened.
 #8 returns to `Todo` with its 19-check synthetic publication foundation

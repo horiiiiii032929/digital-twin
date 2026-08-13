@@ -594,11 +594,11 @@ def _hybrid_test_datasets() -> dict:
     return datasets
 
 
-def test_course_tutor_hybrid_baseline_is_two_cases_per_stratum():
+def test_course_tutor_hybrid_baseline_is_one_case_per_stratum():
     datasets = _hybrid_test_datasets()
     selected = select_baseline_case_ids(datasets)
 
-    assert len(selected) == 32
+    assert len(selected) == 16
     selected_cases = {
         case["case_id"]: case
         for dataset in datasets.values()
@@ -609,7 +609,7 @@ def test_course_tutor_hybrid_baseline_is_two_cases_per_stratum():
         case = selected_cases[case_id]
         key = (case["split"], case["scenario_type"])
         strata[key] = strata.get(key, 0) + 1
-    assert set(strata.values()) == {2}
+    assert set(strata.values()) == {1}
 
 
 def test_course_tutor_model_decision_requires_consistent_checks():
@@ -658,6 +658,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                         "model": binding["model"],
                         "model_digest": binding["digest"],
                         "family": binding["family"],
+                        "thinking": binding["thinking"],
                         "case_id": case["case_id"],
                         "split": case["split"],
                         "scenario_type": case["scenario_type"],
@@ -674,6 +675,30 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                 )
     baseline = select_baseline_case_ids(datasets)
     required, reasons = required_human_case_ids(model_decisions, baseline)
+    assert len(required) == 20
+    assert sum(
+        "mandatory_no_evidence_census" in case_reasons
+        for case_reasons in reasons.values()
+    ) == 6
+    transport_preflights = [
+        {
+            "reviewer_id": binding["reviewer_id"],
+            "model": binding["model"],
+            "model_digest": binding["digest"],
+            "family": binding["family"],
+            "thinking": binding["thinking"],
+            "private_data_used": False,
+            "status": "valid",
+            "decision": {
+                "decision": "approve",
+                **{
+                    check: True for check in REQUIRED_REVIEW_CHECKS
+                },
+                "reason": "Synthetic transport preflight passes.",
+            },
+        }
+        for binding in MODEL_BINDINGS
+    ]
     ensemble = {
         "plan_id": PLAN_ID,
         "ensemble_id": ENSEMBLE_ID,
@@ -686,6 +711,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
         "external_provider_calls": 0,
         "created_at": "2026-08-14T09:00:00+07:00",
         "code": {"revision": "e" * 40, "dirty": False},
+        "transport_preflights": transport_preflights,
         "selection": {
             "baseline_case_ids": baseline,
             "required_human_case_ids": required,
