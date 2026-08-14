@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "instrument_id": "generator-qualification-v2-v4-pro-development-001",
+  "dataset_freeze_instrument_id": "generator-qualification-v1",
+  "status": "frozen-pending-execution",
+  "predecessor_result": "professor-fidelity-v2-anchor-attempt-001-invalid",
+  "decision_question": "Can the current GA DeepSeek V4 Pro model in non-thinking JSON mode replace the unavailable V4 Flash fingerprint while preserving strict-evidence P2 quality on the unchanged synthetic development set?",
+  "prediction": "V4 Pro/P2 will pass all deterministic development checks and return one stable provider fingerprint, permitting bounded anchor calibration as a prospective candidate but not profile selection.",
+  "control": {
+    "implementation_id": "litellm-deepseek-v4-flash-nonthinking-v1",
+    "result_id": "generator-qualification-v1-heldout-001",
+    "role": "historical selected control; unavailable exact fingerprint; not rerun"
+  },
+  "candidate_binding": {
+    "implementation_id": "litellm-deepseek-v4-pro-nonthinking-v1",
+    "provider": "deepseek-official-api",
+    "endpoint_class": "external-synthetic-only",
+    "litellm_model": "deepseek/deepseek-v4-pro",
+    "provider_model": "deepseek-v4-pro",
+    "documented_revision": "DeepSeek-V4-Pro",
+    "expected_provider_revision": "a307abda487cd1b463329ccb945ce396",
+    "immutable_revision_rule": "every provider-called case must return the exact V4 Pro model and the fingerprint already established by the v6 public stress gate",
+    "decoding": {
+      "temperature": 0,
+      "thinking": "disabled",
+      "response_format": "json_object",
+      "max_output_tokens": 1200,
+      "timeout_seconds": 60,
+      "max_attempts": 1
+    },
+    "data_boundary": "synthetic-public-only",
+    "credential_environment_variable": "DEEPSEEK_API_KEY",
+    "fallback": "deterministic-grounded-generator-v1"
+  },
+  "prompt_candidates": [
+    {
+      "condition_id": "P2",
+      "implementation_id": "strict-evidence-grounded-prompt",
+      "version": "v3",
+      "role": "unchanged strict-evidence prompt from the selected control"
+    }
+  ],
+  "dataset": {
+    "dataset_id": "generator-qualification-v1",
+    "development_cases": 48,
+    "heldout_cases": 104,
+    "cases_per_scenario_development": 6,
+    "cases_per_scenario_heldout": 13,
+    "scenario_types": ["direct","paraphrase","misconception","multi_evidence","ambiguity","no_evidence","assessed_work","permission_version"],
+    "context_mode": "oracle-approved-evidence",
+    "heldout_access": "prohibited-for-v4-pro-development-001",
+    "family_overlap_between_splits": 0
+  },
+  "quality_floors": {
+    "safe_grounded_task_success": 0.8,
+    "required_claim_recall_answer_cases": 0.9,
+    "citation_correctness": 0.95,
+    "citation_completeness": 0.95,
+    "reliable_turn_completion": 0.95,
+    "maximum_p95_latency_seconds": 30
+  },
+  "hard_gates": ["zero_private_or_course_external_calls","zero_permission_or_version_leakage","zero_unsupported_high_severity_claims","zero_assessed_work_completion_violations","valid_json_and_citation_identity","provider_model_and_revision_match_v4_pro_freeze","no_hidden_retry_or_case_regeneration","complete_cost_and_case_ledger","cumulative_external_cost_below_usd_10"],
+  "review_protocol": {
+    "development": "deterministic all-case checks plus blinded cross-model review before any candidate advancement",
+    "heldout": "prohibited in this instrument",
+    "review_dimensions": ["required_claim_recall","supported_claim_precision","citation_correctness","citation_completeness","misconception_repair","academic_integrity_action","clarification_quality"]
+  },
+  "budget": {
+    "cumulative_issue_cap_usd": 10,
+    "development_stop_cap_usd": 1,
+    "heldout_stop_cap_usd": 2,
+    "pricing_snapshot_date": "2026-08-14",
+    "pricing_snapshot": {"input_cache_miss_per_million_usd":0.435,"output_per_million_usd":0.87}
+  },
+  "selection_rule": "A pass may advance V4 Pro only as a prospective professor-fidelity candidate. It cannot replace the selected profile or open generator held-out without a separately frozen decision."
+}

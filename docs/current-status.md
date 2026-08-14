@@ -31,7 +31,7 @@ but they do not override this page for current sequencing.
 | Boundary | Current decision | What is established | What is not established |
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
-| Generator and prompt | Keep experimentally | Exact DeepSeek V4 Flash non-thinking binding and strict-evidence P2 qualified on the separate synthetic boundary; deterministic fallback retained | Professor-policy fidelity on valid course cases |
+| Generator and prompt | Refine availability; historical V4 Flash selection preserved | Exact DeepSeek V4 Flash non-thinking/P2 qualification remains valid historical evidence, but the corrected anchor stopped when the served fingerprint drifted; deterministic fallback remains | A currently available qualified provider binding; prospective V4 Pro development qualification is the active replacement test |
 | Professor fidelity | Go deeper to the frozen 41-case blinded human audit | Corrected v1.2.3 passes expanded deterministic checks; v6 completed all 456 committee records with DeepSeek V4 Pro plus two frozen local Qwen artifacts; the required audit union is 41 cases, below the 48-case cap; the GitHub purge dependency is satisfied | Independent-human approval, an immutable seal, corrected C0-C3 effects, safe grounding, semantic citation completeness, pedagogy, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
@@ -61,31 +61,36 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. A non-Codex human reviews the blinded 16-case sample, all 19
+1. Run the frozen public-synthetic DeepSeek V4 Pro development qualification
+   created after the selected V4 Flash fingerprint drifted. Register it whether
+   favorable or unfavorable; no generator held-out is authorized.
+2. A non-Codex human reviews the blinded 16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing
    that packet. The completed model boundary is recorded in the
    [v6 result](../research/05_evaluation/course-tutor-hybrid-authoring-review-v6-001-results.md).
-2. Any failed or uncertain human-audited case blocks sealing and requires a
+3. Any failed or uncertain human-audited case blocks sealing and requires a
    revised candidate plus a fresh full ensemble and sample. Unsampled cases
    require unanimous three-model approval.
-3. If every audited case passes, validate the frozen ensemble and human audit
+4. If every audited case passes, validate the frozen ensemble and human audit
    together, then create the immutable v2 seal and unopened held-out ledger.
-4. Run the corrected hash-bound development comparison only.
-5. Complete condition-blinded semantic, citation, context-sufficiency, and
+5. Run the corrected hash-bound development comparison only after one exact
+   available generator candidate is prospectively accepted for development.
+6. Complete condition-blinded semantic, citation, context-sufficiency, and
    pedagogy review. The prepared
    [post-audit v3 plan](../research/04_experiments/2026-08-14-professor-fidelity-post-audit-v3-plan.md)
    uses DeepSeek V4 Pro as the primary pedagogical judge, a swapped-order
    DeepSeek sample, and local Qwen sensitivity; Gemma is not active.
-6. Register the development decision. Open the one-time held-out split only if
+7. Register the development decision. Open the one-time held-out split only if
    every prospective development gate permits it.
 
-The only unavoidable user action now is the bounded blinded human packet in
-step 1. Codex must not complete it because the frozen instrument requires an
+The immediate unavoidable user action is the bounded blinded human packet in
+step 2. Codex must not complete it because the frozen instrument requires an
 independent reviewer who has not inspected model decisions. After that review,
-Codex can validate and continue the sequence. Drafts 001-005 and their
-unfavorable or invalid findings remain preserved. No full-152 human-approval
-or professor-validation claim is allowed.
+Codex can validate and continue the sequence. A later bounded anchor-output
+reference may also be required to qualify automated pedagogy scoring. Drafts
+001-005 and unfavorable or invalid attempts remain preserved. No full-152
+human-approval or professor-validation claim is allowed.
 
 ## Source-of-truth order
 

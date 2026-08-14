@@ -44,6 +44,28 @@ def test_generator_stability_instrument_freezes_subset_and_revision():
     assert assets["datasets"]["heldout"]["dataset"] is None
 
 
+def test_v4_pro_development_instrument_is_prospective_and_heldout_closed():
+    assets = validate_assets(
+        Path(
+            "research/05_evaluation/instruments/"
+            "generator_qualification_v2_v4_pro_development_001.json"
+        )
+    )
+    binding = assets["instrument"]["candidate_binding"]
+
+    assert binding["provider_model"] == "deepseek-v4-pro"
+    assert binding["documented_revision"] == "DeepSeek-V4-Pro"
+    assert binding["expected_provider_revision"] == (
+        "a307abda487cd1b463329ccb945ce396"
+    )
+    assert binding["decoding"]["thinking"] == "disabled"
+    assert [
+        item["condition_id"]
+        for item in assets["instrument"]["prompt_candidates"]
+    ] == ["P2"]
+    assert assets["datasets"]["heldout"]["dataset"] is None
+
+
 def test_generator_heldout_instrument_freezes_selected_p2_and_hash():
     assets = validate_assets(
         Path(

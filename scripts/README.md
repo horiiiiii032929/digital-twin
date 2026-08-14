@@ -198,6 +198,14 @@ Current utilities:
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run
   verify:professor-fidelity-plan`.
+- `run_generator_qualification.py` also accepts the prospective
+  `generator-qualification-v2-v4-pro-development-001` instrument. That
+  development-only boundary uses current GA DeepSeek V4 Pro in non-thinking
+  JSON mode with unchanged strict-evidence P2, the v6-established fingerprint,
+  conservative current pricing, no retry, and no held-out authorization; run
+  its preflight with `npm run verify:generator-qualification-v4-pro` and its
+  bounded candidate run with
+  `npm run benchmark:generator-qualification-v4-pro-development`.
 - `validate_professor_fidelity_post_audit.py`: statically validates the exact
   post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
   one-time held-out confirmation, plan, and purge-closure record. It checks

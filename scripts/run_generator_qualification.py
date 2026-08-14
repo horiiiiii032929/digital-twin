@@ -50,6 +50,8 @@ PROMPTS = {
     "P1": ConservativeGroundedPromptBuilder,
     "P2": StrictEvidenceGroundedPromptBuilder,
 }
+DEEPSEEK_V4_PRO_INPUT_PRICE_PER_MILLION_USD = 0.435
+DEEPSEEK_V4_PRO_OUTPUT_PRICE_PER_MILLION_USD = 0.87
 
 
 class GeneratorQualificationError(ValueError):
@@ -129,28 +131,38 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
         "generator-qualification-v1-development-attempt-002",
         "generator-qualification-v1-development-stability-001",
         "generator-qualification-v1-heldout-001",
+        "generator-qualification-v2-v4-pro-development-001",
     }:
         raise GeneratorQualificationError("unexpected instrument id")
     if instrument.get("status") != "frozen-pending-execution":
         raise GeneratorQualificationError("instrument is not frozen for execution")
     binding = instrument.get("candidate_binding", {})
+    v4_pro = instrument_id == "generator-qualification-v2-v4-pro-development-001"
     expected = {
-        "litellm_model": "deepseek/deepseek-v4-flash",
-        "provider_model": "deepseek-v4-flash",
+        "litellm_model": (
+            "deepseek/deepseek-v4-pro"
+            if v4_pro
+            else "deepseek/deepseek-v4-flash"
+        ),
+        "provider_model": "deepseek-v4-pro" if v4_pro else "deepseek-v4-flash",
         "data_boundary": "synthetic-public-only",
     }
     for field, value in expected.items():
         if binding.get(field) != value:
             raise GeneratorQualificationError(f"candidate binding drifted: {field}")
+    if v4_pro and (
+        binding.get("documented_revision") != "DeepSeek-V4-Pro"
+        or binding.get("expected_provider_revision")
+        != "a307abda487cd1b463329ccb945ce396"
+    ):
+        raise GeneratorQualificationError("V4 Pro revision binding drifted")
     decoding = binding.get("decoding", {})
     if decoding.get("thinking") != "disabled":
         raise GeneratorQualificationError("thinking mode must remain disabled")
     if decoding.get("temperature") != 0 or decoding.get("max_attempts") != 1:
         raise GeneratorQualificationError("decoding or retry policy drifted")
     prompt_ids = [item.get("condition_id") for item in instrument["prompt_candidates"]]
-    expected_prompts = (
-        ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
-    )
+    expected_prompts = ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
     if prompt_ids != expected_prompts:
         raise GeneratorQualificationError("prompt candidates drifted")
     if instrument.get("budget", {}).get("cumulative_issue_cap_usd") != 10:
@@ -281,13 +293,21 @@ async def execute(
     binding = instrument["candidate_binding"]
     decoding = binding["decoding"]
     stop_cap = instrument["budget"][f"{split}_stop_cap_usd"]
-    client = LiteLlmClient(
-        binding["litellm_model"],
-        timeout_seconds=decoding["timeout_seconds"],
-        max_output_tokens=decoding["max_output_tokens"],
-        response_format={"type": "json_object"},
-        provider_options={"extra_body": {"thinking": {"type": "disabled"}}},
-    )
+    client_options: dict[str, Any] = {
+        "timeout_seconds": decoding["timeout_seconds"],
+        "max_output_tokens": decoding["max_output_tokens"],
+        "temperature": decoding.get("temperature"),
+        "response_format": {"type": "json_object"},
+        "provider_options": {
+            "extra_body": {
+                "thinking": {"type": decoding["thinking"]},
+                "user_id": "digital-twin-generator-qualification-v2",
+            }
+        },
+    }
+    if binding["provider_model"] == "deepseek-v4-pro":
+        client_options["cost_calculator"] = _deepseek_v4_pro_cost
+    client = LiteLlmClient(binding["litellm_model"], **client_options)
     policy = _approved_synthetic_policy()
     results = []
     cumulative_cost = 0.0
@@ -323,7 +343,7 @@ async def execute(
                 )
     latencies = [item["latency_ms"] for item in results]
     return {
-        "run_type": "generator-qualification-v1",
+        "run_type": instrument["instrument_id"],
         "status": "development-output-review-required",
         "instrument_id": instrument["instrument_id"],
         "split": split,
@@ -492,6 +512,22 @@ def _term_present(term: str, answer: str) -> bool:
         stem = normalized[:-2]
         return any(form in answer for form in (stem, f"{stem}s", f"{stem}es"))
     return False
+
+
+def _response_field(value: Any, name: str, default: Any = None) -> Any:
+    if isinstance(value, dict):
+        return value.get(name, default)
+    return getattr(value, name, default)
+
+
+def _deepseek_v4_pro_cost(*, completion_response: Any) -> float:
+    usage = _response_field(completion_response, "usage", {})
+    input_tokens = int(_response_field(usage, "prompt_tokens", 0) or 0)
+    output_tokens = int(_response_field(usage, "completion_tokens", 0) or 0)
+    return (
+        input_tokens * DEEPSEEK_V4_PRO_INPUT_PRICE_PER_MILLION_USD
+        + output_tokens * DEEPSEEK_V4_PRO_OUTPUT_PRICE_PER_MILLION_USD
+    ) / 1_000_000
 
 
 def _approved_synthetic_policy():
