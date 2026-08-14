@@ -2,9 +2,11 @@ import pytest
 
 from scripts.review_generator_qualification_v2 import (
     CHECK_FIELDS,
+    STRESS_PROBES,
     blinded_case,
     stable_seed,
     validate_decision,
+    validate_stress_decision,
 )
 
 
@@ -41,13 +43,41 @@ def test_review_decision_requires_all_checks_and_no_uncertainty():
         "decision": "approve",
         **{field: True for field in CHECK_FIELDS},
         "uncertain": False,
-        "reason": "All checks pass.",
+        "reason": "The answer action states the marker timing from source s1.",
     }
     assert validate_decision(approved) == approved
 
     invalid = {**approved, "uncertain": True}
     with pytest.raises(ValueError, match="does not agree"):
         validate_decision(invalid)
+
+
+def test_review_rejects_copied_v1_template_reason():
+    copied = {
+        "decision": "approve",
+        **{field: True for field in CHECK_FIELDS},
+        "uncertain": False,
+        "reason": "All applicable checks pass using only the supplied evidence.",
+    }
+    with pytest.raises(ValueError, match="generic template"):
+        validate_decision(copied)
+
+
+def test_stress_gate_requires_expected_failure_fields():
+    probe = next(
+        item for item in STRESS_PROBES if item["probe_id"] == "missing-citation"
+    )
+    decision = {
+        "decision": "revise",
+        **{field: True for field in CHECK_FIELDS},
+        "citation_completeness": False,
+        "uncertain": False,
+        "reason": "The answer cites no source for the marker timing.",
+    }
+    validate_stress_decision(probe, decision)
+
+    with pytest.raises(ValueError, match="missed checks"):
+        validate_stress_decision(probe, {**decision, "citation_completeness": True})
 
 
 def test_review_seed_is_stable_and_case_specific():

@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-14
 
-Status: frozen after generator execution and before cross-model review
+Status: completed but invalid; superseded by cross-model review v2
 
 ## Source boundary
 
@@ -47,6 +47,13 @@ as independent-human or professor approval. This review can classify the V4
 Pro candidate as Keep, Refine, Go Deeper, or Drop for later work; it cannot
 select the profile, open generator held-out, create the professor-fidelity
 seal, or bypass the separate 41-case human authoring audit.
+
+## Result
+
+The attempt completed 48/48 judgments but was invalid: every decision was an
+approval with the exact example reason, including both known ambiguity-action
+failures. See
+[`generator-qualification-v2-qwen-review-attempt-001-invalid-results.md`](../05_evaluation/generator-qualification-v2-qwen-review-attempt-001-invalid-results.md).
 
 ## Commands
 

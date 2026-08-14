@@ -210,9 +210,11 @@ Current utilities:
   all-48-case local Qwen cross-model review of the V4 Pro public-synthetic
   development output. It hides generator identity and deterministic labels,
   requires the exact `qwen3:4b` digest, prohibits Gemma and non-loopback
-  endpoints, and escalates every deterministic failure, Qwen revision, or
-  uncertainty. Run `npm run verify:generator-qualification-v4-pro-review`
-  before `npm run review:generator-qualification-v4-pro`.
+  endpoints, and must reject five fixed defect probes before reading candidate
+  cases. It rejects the invalid v1 template reason and escalates every
+  deterministic failure, Qwen revision, or uncertainty. Run `npm run
+  verify:generator-qualification-v4-pro-review` before `npm run
+  review:generator-qualification-v4-pro`.
 - `validate_professor_fidelity_post_audit.py`: statically validates the exact
   post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
   one-time held-out confirmation, plan, and purge-closure record. It checks

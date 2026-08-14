@@ -4,11 +4,11 @@ Result ID: `generator-qualification-v2-v4-pro-development-001`
 
 Date: 2026-08-14
 
-Status: Completed execution; Refine pending frozen all-case cross-model review
+Status: Completed execution; Refine after invalid first cross-model review
 
 Decision: Do not advance or select the candidate. Preserve the exact run and
-classify the two ambiguity-action failures with the separately frozen local
-Qwen review.
+classify the two ambiguity-action failures with the prospectively repaired
+local Qwen review.
 
 ## Run identity and boundary
 
@@ -55,13 +55,14 @@ required:
   before answering.
 
 The first response may be semantically clarifying despite its invalid action
-field. The second is a substantive clarification-policy failure. This
-interpretation is diagnostic until the frozen cross-model review completes.
+field. The second is a substantive clarification-policy failure. The first
+Qwen review approved both but was invalid because all 48 decisions copied one
+example approval reason and demonstrated no defect sensitivity.
 
 ## Next action and limits
 
-Run the all-48-case local Qwen review frozen in
-[`2026-08-14-generator-qualification-v2-cross-model-review-plan.md`](../04_experiments/2026-08-14-generator-qualification-v2-cross-model-review-plan.md).
+Run the sensitivity-gated all-48-case local Qwen review frozen in
+[`2026-08-14-generator-qualification-v2-cross-model-review-v2-plan.md`](../04_experiments/2026-08-14-generator-qualification-v2-cross-model-review-v2-plan.md).
 Any deterministic failure, Qwen revise/uncertain decision, or disagreement
 remains escalated. No result from that review is independent-human evidence,
 and it cannot defer or satisfy the separate 41-case authoring audit.

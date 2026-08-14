@@ -31,7 +31,7 @@ but they do not override this page for current sequencing.
 | Boundary | Current decision | What is established | What is not established |
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
-| Generator and prompt | Refine current V4 Pro candidate; historical V4 Flash selection preserved | V4 Pro completed the unchanged 48-case public-synthetic development run at one exact fingerprint: 46/48 deterministic all-check passes, with two ambiguity-action failures; deterministic fallback remains | Cross-model classification of all 48 outputs, a corrected currently available candidate, and any prospective profile replacement |
+| Generator and prompt | Refine current V4 Pro candidate; historical V4 Flash selection preserved | V4 Pro completed the unchanged 48-case public-synthetic development run at one exact fingerprint: 46/48 deterministic all-check passes, with two ambiguity-action failures; first Qwen review was invalid for template copying; deterministic fallback remains | Sensitivity-gated cross-model classification, a corrected currently available candidate, and any prospective profile replacement |
 | Professor fidelity | Go deeper to the frozen 41-case blinded human audit | Corrected v1.2.3 passes expanded deterministic checks; v6 completed all 456 committee records with DeepSeek V4 Pro plus two frozen local Qwen artifacts; the required audit union is 41 cases, below the 48-case cap; the GitHub purge dependency is satisfied | Independent-human approval, an immutable seal, corrected C0-C3 effects, safe grounding, semantic citation completeness, pedagogy, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
@@ -61,10 +61,10 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Complete the frozen all-48-case local Qwen cross-model review of the V4 Pro
-   public-synthetic development output. Escalate both deterministic failures
-   and every Qwen revise, uncertainty, or disagreement; no generator held-out
-   is authorized.
+1. Run the prospectively repaired local Qwen review. It must pass five public
+   defect-sensitivity probes before reviewing all 48 V4 Pro development
+   outputs. Escalate both deterministic failures and every Qwen revise,
+   uncertainty, or disagreement; no generator held-out is authorized.
 2. A non-Codex human reviews the blinded 16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing
