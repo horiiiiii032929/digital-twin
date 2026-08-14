@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "run_id": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
+  "component": "tutor-policy",
+  "dataset_id": "course-tutor-v1.0.2-anchor",
+  "corpus_id": "it5002-lectures-v1",
+  "code_revision": "3e4d97ef1fec3b91b19c1094f3bf23f3971ee7a2",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "c0-generic-no-evidence-anchor-002",
+        "version": "professor-fidelity-v2-anchor-002",
+        "configuration": {
+          "condition": "C0",
+          "evidence": "none",
+          "policy": "generic-tutoring-v1",
+          "generator": "deepseek-v4-pro-nonthinking-p3-v4",
+          "source_run_id": "professor-fidelity-v2-anchor-002"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "anchor-deterministic-hard-gate-success-diagnostic",
+          "value": 0.3333333333333333,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-deterministic-structural-success-diagnostic",
+          "value": 0.08333333333333333,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-action-accuracy-diagnostic",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-citation-identity-validity-diagnostic",
+          "value": 0.3333333333333333,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "anchor-citation-source-correctness-diagnostic",
+          "value": 0.3333333333333333,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-generator-identity-and-reliable-completion",
+          "passed": true,
+          "evidence": "All 12 C0 responses completed at the frozen V4 Pro fingerprint."
+        },
+        {
+          "name": "minimum-evaluator-repeat-consistency-0.90",
+          "passed": false,
+          "evidence": "The shared primary evaluator's single-label repeat agreement was 33/48 (68.75%)."
+        },
+        {
+          "name": "complete-position-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared swapped DeepSeek attempt stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-family-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared local-Qwen attempt stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "zero-evaluator-false-passes-on-hard-gate-failures",
+          "passed": false,
+          "evidence": "The shared evaluator produced one all-pass pedagogy portfolio on a C3 deterministic hard-gate failure."
+        },
+        {
+          "name": "blinded-independent-human-reference",
+          "passed": false,
+          "evidence": "The shared 48-response review template remains draft with zero labels filled."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out run was executed."
+        }
+      ],
+      "failures_by_category": {
+        "deterministic-hard-gate": 8,
+        "evaluation-design": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "c1-oracle-generic-anchor-002",
+        "version": "professor-fidelity-v2-anchor-002",
+        "configuration": {
+          "condition": "C1",
+          "evidence": "oracle",
+          "policy": "generic-tutoring-v1",
+          "generator": "deepseek-v4-pro-nonthinking-p3-v4",
+          "source_run_id": "professor-fidelity-v2-anchor-002"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "anchor-deterministic-hard-gate-success-diagnostic",
+          "value": 0.8333333333333334,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "anchor-deterministic-structural-success-diagnostic",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-action-accuracy-diagnostic",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-citation-identity-validity-diagnostic",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "anchor-citation-source-correctness-diagnostic",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-generator-identity-and-reliable-completion",
+          "passed": true,
+          "evidence": "All 12 C1 responses completed at the frozen V4 Pro fingerprint."
+        },
+        {
+          "name": "minimum-evaluator-repeat-consistency-0.90",
+          "passed": false,
+          "evidence": "The shared primary evaluator's single-label repeat agreement was 33/48 (68.75%)."
+        },
+        {
+          "name": "complete-position-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared swapped DeepSeek attempt stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-family-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared local-Qwen attempt stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "zero-evaluator-false-passes-on-hard-gate-failures",
+          "passed": false,
+          "evidence": "The shared evaluator produced one all-pass pedagogy portfolio on a C3 deterministic hard-gate failure."
+        },
+        {
+          "name": "blinded-independent-human-reference",
+          "passed": false,
+          "evidence": "The shared 48-response review template remains draft with zero labels filled."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out run was executed."
+        }
+      ],
+      "failures_by_category": {
+        "deterministic-hard-gate": 2,
+        "evaluation-design": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "c2-oracle-professor-anchor-002",
+        "version": "professor-fidelity-v2-anchor-002",
+        "configuration": {
+          "condition": "C2",
+          "evidence": "oracle",
+          "policy": "structured-professor-policy-v1",
+          "generator": "deepseek-v4-pro-nonthinking-p3-v4",
+          "source_run_id": "professor-fidelity-v2-anchor-002"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "anchor-deterministic-hard-gate-success-diagnostic",
+          "value": 0.8333333333333334,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "anchor-deterministic-structural-success-diagnostic",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-action-accuracy-diagnostic",
+          "value": 0.8333333333333334,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": true
+        },
+        {
+          "name": "anchor-citation-identity-validity-diagnostic",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "anchor-citation-source-correctness-diagnostic",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-generator-identity-and-reliable-completion",
+          "passed": true,
+          "evidence": "All 12 C2 responses completed at the frozen V4 Pro fingerprint."
+        },
+        {
+          "name": "minimum-evaluator-repeat-consistency-0.90",
+          "passed": false,
+          "evidence": "The shared primary evaluator's single-label repeat agreement was 33/48 (68.75%)."
+        },
+        {
+          "name": "complete-position-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared swapped DeepSeek attempt stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-family-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared local-Qwen attempt stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "zero-evaluator-false-passes-on-hard-gate-failures",
+          "passed": false,
+          "evidence": "The shared evaluator produced one all-pass pedagogy portfolio on a C3 deterministic hard-gate failure."
+        },
+        {
+          "name": "blinded-independent-human-reference",
+          "passed": false,
+          "evidence": "The shared 48-response review template remains draft with zero labels filled."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out run was executed."
+        }
+      ],
+      "failures_by_category": {
+        "deterministic-hard-gate": 2,
+        "evaluation-design": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "c3-retrieved-professor-anchor-002",
+        "version": "professor-fidelity-v2-anchor-002",
+        "configuration": {
+          "condition": "C3",
+          "evidence": "qwen3-hybrid-v1",
+          "policy": "structured-professor-policy-v1",
+          "generator": "deepseek-v4-pro-nonthinking-p3-v4",
+          "source_run_id": "professor-fidelity-v2-anchor-002"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "anchor-deterministic-hard-gate-success-diagnostic",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-deterministic-structural-success-diagnostic",
+          "value": 0.4166666666666667,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-action-accuracy-diagnostic",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.8,
+          "passed": false
+        },
+        {
+          "name": "anchor-citation-identity-validity-diagnostic",
+          "value": 0.9166666666666666,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "anchor-citation-source-correctness-diagnostic",
+          "value": 0.5833333333333334,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-generator-identity-and-reliable-completion",
+          "passed": true,
+          "evidence": "All 12 C3 responses completed at the frozen V4 Pro fingerprint."
+        },
+        {
+          "name": "minimum-evaluator-repeat-consistency-0.90",
+          "passed": false,
+          "evidence": "The shared primary evaluator's single-label repeat agreement was 33/48 (68.75%)."
+        },
+        {
+          "name": "complete-position-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared swapped DeepSeek attempt stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-family-sensitivity-run",
+          "passed": false,
+          "evidence": "The shared local-Qwen attempt stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "zero-evaluator-false-passes-on-hard-gate-failures",
+          "passed": false,
+          "evidence": "The C3 evaluator produced one all-pass pedagogy portfolio on a deterministic hard-gate failure."
+        },
+        {
+          "name": "blinded-independent-human-reference",
+          "passed": false,
+          "evidence": "The shared 48-response review template remains draft with zero labels filled."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out run was executed."
+        }
+      ],
+      "failures_by_category": {
+        "deterministic-hard-gate": 6,
+        "evaluation-design": 1,
+        "evaluator-false-pass": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Anchor generation completed, but no condition is selectable because repeat consistency failed, swapped and Qwen diagnostics were invalid, one false pedagogy pass occurred on a deterministic hard-gate failure, and no blinded human reference exists.",
+    "limitations": [
+      "The 12-case anchor is diagnostic and cannot select P3 or a C0-C3 condition.",
+      "Invalid partial swapped and Qwen agreements are not calibration metrics.",
+      "Generator and primary judge share the DeepSeek V4 Pro family.",
+      "Semantic citation completeness, professor approval, learning outcomes, development effects, and held-out performance remain unresolved.",
+      "Both bounded human packets are unfilled and may be deferred but are not passed or waived."
+    ]
+  }
+}

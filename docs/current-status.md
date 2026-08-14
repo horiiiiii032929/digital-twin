@@ -61,11 +61,12 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Freeze and register the aggregate anchor-002 machine-review summary. Do not
-   rerun primary attempt 001, swapped attempt 001, or Qwen attempt 001. Do not
-   use partial agreement as calibration evidence.
-2. Defer both human packets until deciding whether to redesign the automated
-   pedagogy evaluator. When resumed, a non-Codex human reviews the blinded
+1. Decide whether to redesign the automated pedagogy evaluator or pause #24
+   and report the diagnostic result. Do not rerun primary attempt 001, swapped
+   attempt 001, or Qwen attempt 001, and do not use partial agreement as
+   calibration evidence.
+2. Defer both human packets until that decision. When resumed, a non-Codex
+   human reviews the blinded
    16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing

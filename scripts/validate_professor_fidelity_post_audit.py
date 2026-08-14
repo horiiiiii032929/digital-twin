@@ -163,7 +163,6 @@ def validate() -> dict[str, Any]:
         "private_artifact_presence": private_artifacts,
         "sealed_artifact_presence": sealed_artifacts,
         "ordered_gates": [
-            "freeze and register aggregate anchor-002 machine-review summary",
             "decide whether to redesign the automated pedagogy evaluator",
             "complete bounded human packets only when the work resumes",
             "validate audit and create immutable seal plus unopened ledger",
