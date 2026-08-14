@@ -69,6 +69,8 @@
     "benchmark:generator-qualification-v4-pro-development": "uv run python -m scripts.run_generator_qualification --instrument research/05_evaluation/instruments/generator_qualification_v2_v4_pro_development_001.json --execute --split development --prompt-condition P2 --allow-external-provider --output reports/generated/generator-qualification-v2-v4-pro-development-001.json",
     "verify:generator-qualification-v4-pro-p3": "uv run python -m scripts.run_generator_qualification --instrument research/05_evaluation/instruments/generator_qualification_v3_v4_pro_p3_development_001.json",
     "benchmark:generator-qualification-v4-pro-p3-development": "uv run python -m scripts.run_generator_qualification --instrument research/05_evaluation/instruments/generator_qualification_v3_v4_pro_p3_development_001.json --execute --split development --prompt-condition P3 --allow-external-provider --output reports/generated/generator-qualification-v3-v4-pro-p3-development-001.json",
+    "verify:generator-qualification-v4-pro-p3-review": "uv run python -m scripts.judge_generator_qualification_v3",
+    "review:generator-qualification-v4-pro-p3-deepseek": "uv run python -m scripts.judge_generator_qualification_v3 --execute",
     "verify:generator-qualification-v4-pro-review": "uv run python -m scripts.review_generator_qualification_v2",
     "review:generator-qualification-v4-pro": "uv run python -m scripts.review_generator_qualification_v2 --execute",
     "analyze:generator-qualification-v4-pro-action-correction": "uv run python -m scripts.analyze_generator_qualification_v2",

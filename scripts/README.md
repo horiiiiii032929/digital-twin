@@ -226,6 +226,13 @@ Current utilities:
   behavior and keeps held-out closed. Run `npm run
   verify:generator-qualification-v4-pro-p3` before `npm run
   benchmark:generator-qualification-v4-pro-p3-development`.
+- `judge_generator_qualification_v3.py`: runs a bounded same-family semantic
+  review of the exact P3 output with current DeepSeek V4 Pro high thinking. It
+  must pass five public defect probes before candidate case 1, requires the
+  exact fingerprint, has no retries, and records cost/usage per case. It does
+  not claim cross-family independence. Run `npm run
+  verify:generator-qualification-v4-pro-p3-review` before `npm run
+  review:generator-qualification-v4-pro-p3-deepseek`.
 - `validate_professor_fidelity_post_audit.py`: statically validates the exact
   post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
   one-time held-out confirmation, plan, and purge-closure record. It checks
