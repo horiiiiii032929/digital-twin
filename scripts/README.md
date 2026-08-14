@@ -221,6 +221,11 @@ Current utilities:
   cases, preserves every other hard check, verifies that exactly one action
   changes, and never overwrites the original result. Run `npm run
   analyze:generator-qualification-v4-pro-action-correction`.
+- `ClarificationFirstGroundedPromptBuilder` is exposed to the qualification
+  runner as P3. Its prospective V4 Pro instrument changes only ambiguity
+  behavior and keeps held-out closed. Run `npm run
+  verify:generator-qualification-v4-pro-p3` before `npm run
+  benchmark:generator-qualification-v4-pro-p3-development`.
 - `validate_professor_fidelity_post_audit.py`: statically validates the exact
   post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
   one-time held-out confirmation, plan, and purge-closure record. It checks

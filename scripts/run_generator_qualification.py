@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 from scripts.professor_fidelity_scoring import nearest_rank_percentile
 from services.llm import LiteLlmClient
 from src.digital_twin.generation import (
+    ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     GroundedPromptBuilder,
     LiveGroundedGenerator,
@@ -49,6 +50,7 @@ PROMPTS = {
     "P0": GroundedPromptBuilder,
     "P1": ConservativeGroundedPromptBuilder,
     "P2": StrictEvidenceGroundedPromptBuilder,
+    "P3": ClarificationFirstGroundedPromptBuilder,
 }
 DEEPSEEK_V4_PRO_INPUT_PRICE_PER_MILLION_USD = 0.435
 DEEPSEEK_V4_PRO_OUTPUT_PRICE_PER_MILLION_USD = 0.87
@@ -132,12 +134,16 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
         "generator-qualification-v1-development-stability-001",
         "generator-qualification-v1-heldout-001",
         "generator-qualification-v2-v4-pro-development-001",
+        "generator-qualification-v3-v4-pro-p3-development-001",
     }:
         raise GeneratorQualificationError("unexpected instrument id")
     if instrument.get("status") != "frozen-pending-execution":
         raise GeneratorQualificationError("instrument is not frozen for execution")
     binding = instrument.get("candidate_binding", {})
-    v4_pro = instrument_id == "generator-qualification-v2-v4-pro-development-001"
+    v4_pro = instrument_id in {
+        "generator-qualification-v2-v4-pro-development-001",
+        "generator-qualification-v3-v4-pro-p3-development-001",
+    }
     expected = {
         "litellm_model": (
             "deepseek/deepseek-v4-pro" if v4_pro else "deepseek/deepseek-v4-flash"
@@ -160,9 +166,12 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
     if decoding.get("temperature") != 0 or decoding.get("max_attempts") != 1:
         raise GeneratorQualificationError("decoding or retry policy drifted")
     prompt_ids = [item.get("condition_id") for item in instrument["prompt_candidates"]]
-    expected_prompts = (
-        ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
-    )
+    if instrument_id == "generator-qualification-v1":
+        expected_prompts = ["P0", "P1"]
+    elif instrument_id == "generator-qualification-v3-v4-pro-p3-development-001":
+        expected_prompts = ["P3"]
+    else:
+        expected_prompts = ["P2"]
     if prompt_ids != expected_prompts:
         raise GeneratorQualificationError("prompt candidates drifted")
     if instrument.get("budget", {}).get("cumulative_issue_cap_usd") != 10:

@@ -63,6 +63,21 @@ def test_v4_pro_development_instrument_is_prospective_and_heldout_closed():
     assert assets["datasets"]["heldout"]["dataset"] is None
 
 
+def test_v4_pro_p3_instrument_is_narrow_and_heldout_closed():
+    assets = validate_assets(
+        Path(
+            "research/05_evaluation/instruments/"
+            "generator_qualification_v3_v4_pro_p3_development_001.json"
+        )
+    )
+
+    assert [
+        item["condition_id"] for item in assets["instrument"]["prompt_candidates"]
+    ] == ["P3"]
+    assert assets["instrument"]["control"]["corrected_passes"] == 47
+    assert assets["datasets"]["heldout"]["dataset"] is None
+
+
 def test_generator_heldout_instrument_freezes_selected_p2_and_hash():
     assets = validate_assets(
         Path(

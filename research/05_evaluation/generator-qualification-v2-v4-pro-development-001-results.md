@@ -59,6 +59,11 @@ field. The second is a substantive clarification-policy failure. The first
 Qwen review approved both but was invalid because all 48 decisions copied one
 example approval reason and demonstrated no defect sensitivity.
 
+The separately registered
+[action-analysis correction](generator-qualification-v2-v4-pro-development-001-action-analysis-correction-001-results.md)
+confirmed the first response as an instrumentation false negative and changed
+the diagnostic result to 47/48 without altering this original record.
+
 ## Next action and limits
 
 Run the sensitivity-gated all-48-case local Qwen review frozen in
