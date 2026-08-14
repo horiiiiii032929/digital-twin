@@ -69,6 +69,7 @@
     "benchmark:generator-qualification-v4-pro-development": "uv run python -m scripts.run_generator_qualification --instrument research/05_evaluation/instruments/generator_qualification_v2_v4_pro_development_001.json --execute --split development --prompt-condition P2 --allow-external-provider --output reports/generated/generator-qualification-v2-v4-pro-development-001.json",
     "verify:generator-qualification-v4-pro-review": "uv run python -m scripts.review_generator_qualification_v2",
     "review:generator-qualification-v4-pro": "uv run python -m scripts.review_generator_qualification_v2 --execute",
+    "analyze:generator-qualification-v4-pro-action-correction": "uv run python -m scripts.analyze_generator_qualification_v2",
     "benchmark:generator-qualification-heldout": "uv run python -m scripts.run_generator_qualification --instrument research/05_evaluation/instruments/generator_qualification_v1_heldout_001.json --execute --split heldout --prompt-condition P2 --allow-external-provider --confirm-heldout-once --output reports/generated/generator-qualification-v1-heldout-001.json",
     "prepare:generator-qualification-second-review": "uv run python -m scripts.render_generator_qualification_second_review",
     "verify:student-workflow": "uv run python -m scripts.verify_student_workflow_slice",

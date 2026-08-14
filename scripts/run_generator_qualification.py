@@ -140,9 +140,7 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
     v4_pro = instrument_id == "generator-qualification-v2-v4-pro-development-001"
     expected = {
         "litellm_model": (
-            "deepseek/deepseek-v4-pro"
-            if v4_pro
-            else "deepseek/deepseek-v4-flash"
+            "deepseek/deepseek-v4-pro" if v4_pro else "deepseek/deepseek-v4-flash"
         ),
         "provider_model": "deepseek-v4-pro" if v4_pro else "deepseek-v4-flash",
         "data_boundary": "synthetic-public-only",
@@ -162,7 +160,9 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
     if decoding.get("temperature") != 0 or decoding.get("max_attempts") != 1:
         raise GeneratorQualificationError("decoding or retry policy drifted")
     prompt_ids = [item.get("condition_id") for item in instrument["prompt_candidates"]]
-    expected_prompts = ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
+    expected_prompts = (
+        ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
+    )
     if prompt_ids != expected_prompts:
         raise GeneratorQualificationError("prompt candidates drifted")
     if instrument.get("budget", {}).get("cumulative_issue_cap_usd") != 10:
@@ -499,6 +499,13 @@ def _actual_action(
     )
     if scenario_type == "ambiguity" and any(
         marker in answer for marker in clarification_markers
+    ):
+        return "clarify"
+    targeted_question_markers = ("which meaning", "which one", "do you mean")
+    if (
+        scenario_type == "ambiguity"
+        and "?" in answer
+        and any(marker in answer for marker in targeted_question_markers)
     ):
         return "clarify"
     return "answer"

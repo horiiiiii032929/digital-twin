@@ -215,6 +215,12 @@ Current utilities:
   deterministic failure, Qwen revision, or uncertainty. Run `npm run
   verify:generator-qualification-v4-pro-review` before `npm run
   review:generator-qualification-v4-pro`.
+- `analyze_generator_qualification_v2.py`: performs the frozen no-model action
+  analysis correction over the exact V4 Pro development output. It recognizes
+  explicit “which meaning/which one/do you mean?” questions only in ambiguity
+  cases, preserves every other hard check, verifies that exactly one action
+  changes, and never overwrites the original result. Run `npm run
+  analyze:generator-qualification-v4-pro-action-correction`.
 - `validate_professor_fidelity_post_audit.py`: statically validates the exact
   post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
   one-time held-out confirmation, plan, and purge-closure record. It checks

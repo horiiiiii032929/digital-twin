@@ -55,13 +55,10 @@ def test_v4_pro_development_instrument_is_prospective_and_heldout_closed():
 
     assert binding["provider_model"] == "deepseek-v4-pro"
     assert binding["documented_revision"] == "DeepSeek-V4-Pro"
-    assert binding["expected_provider_revision"] == (
-        "a307abda487cd1b463329ccb945ce396"
-    )
+    assert binding["expected_provider_revision"] == ("a307abda487cd1b463329ccb945ce396")
     assert binding["decoding"]["thinking"] == "disabled"
     assert [
-        item["condition_id"]
-        for item in assets["instrument"]["prompt_candidates"]
+        item["condition_id"] for item in assets["instrument"]["prompt_candidates"]
     ] == ["P2"]
     assert assets["datasets"]["heldout"]["dataset"] is None
 
@@ -117,6 +114,14 @@ def test_generator_qualification_analysis_handles_inflection_and_action_scope():
         _actual_action(
             "answer",
             "There are two meanings. Which context are you asking about?",
+            scenario_type="ambiguity",
+        )
+        == "clarify"
+    )
+    assert (
+        _actual_action(
+            "answer",
+            "There are two meanings. Which meaning are you asking about?",
             scenario_type="ambiguity",
         )
         == "clarify"
