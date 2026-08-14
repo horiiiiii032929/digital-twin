@@ -187,7 +187,11 @@ def preflight(split: str) -> dict[str, Any]:
         "integration_prompt": policy_bindings["prompt_binding"]["prompt_id"],
         "policy_binding_sha256": sha256(POLICY_BINDING_PATH),
         "credential_present": not any("DEEPSEEK" in item for item in blockers),
-        "local_judges_present": "gemma3:4b" in models and "qwen3:4b" in models,
+        "primary_judge": "deepseek-v4-pro",
+        "primary_judge_credential_present": bool(
+            os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        ),
+        "qwen_sensitivity_judge_present": "qwen3:4b" in models,
         "execution_enabled": not blockers,
         "private_text_emitted": False,
         "blockers": blockers,

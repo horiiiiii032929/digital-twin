@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze local professor-fidelity judge calibration without overclaiming."""
+"""Analyze cross-provider professor-fidelity judge calibration without overclaiming."""
 
 from __future__ import annotations
 

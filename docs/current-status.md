@@ -73,7 +73,10 @@ diagnostic metrics into selection evidence.
    together, then create the immutable v2 seal and unopened held-out ledger.
 4. Run the corrected hash-bound development comparison only.
 5. Complete condition-blinded semantic, citation, context-sufficiency, and
-   pedagogy review.
+   pedagogy review. The prepared
+   [post-audit v3 plan](../research/04_experiments/2026-08-14-professor-fidelity-post-audit-v3-plan.md)
+   uses DeepSeek V4 Pro as the primary pedagogical judge, a swapped-order
+   DeepSeek sample, and local Qwen sensitivity; Gemma is not active.
 6. Register the development decision. Open the one-time held-out split only if
    every prospective development gate permits it.
 

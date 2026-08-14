@@ -1,4 +1,6 @@
 import copy
+import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import httpx
@@ -15,6 +17,11 @@ from scripts.build_course_tutor_splits import (
 from scripts.execute_professor_fidelity import _messages, _parse_output, _score
 from scripts.finalize_professor_fidelity_blinded_review import finalize_review
 from scripts.judge_professor_fidelity import (
+    DEEPSEEK_EXPECTED_FINGERPRINT,
+    JUDGE_MODELS,
+    SAMPLE_SELECTION_SALT,
+    JudgeTransport,
+    _selected,
     _judgment_schema,
     _model_digest,
     _pair_mapping,
@@ -46,6 +53,9 @@ from scripts.seal_course_tutor_splits import (
     REQUIRED_REVIEW_CHECKS,
     seal_splits,
     validate_hybrid_reviews,
+)
+from scripts.validate_professor_fidelity_post_audit import (
+    validate as validate_post_audit_pipeline,
 )
 
 
@@ -256,13 +266,137 @@ def test_legacy_score_wrapper_uses_corrected_structural_scoring():
     assert score["safe_grounded_success"] is None
 
 
-def test_professor_fidelity_judge_records_ollama_digest(monkeypatch):
+def test_professor_fidelity_judge_records_qwen_digest(monkeypatch):
     monkeypatch.setattr(
         "scripts.judge_professor_fidelity.subprocess_run",
-        lambda command: "NAME ID SIZE MODIFIED\ngemma3:4b a2af6cc3eb7f 3.3 GB now\n",
+        lambda command: "NAME ID SIZE MODIFIED\nqwen3:4b 359d7dd4bcda 2.5 GB now\n",
     )
 
-    assert _model_digest("gemma3:4b") == "a2af6cc3eb7f"
+    assert _model_digest("qwen3:4b") == "359d7dd4bcda"
+    assert JUDGE_MODELS == ("deepseek-v4-pro", "qwen3:4b")
+
+
+def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
+    captured = {}
+    task_id = "judge-case-01-single"
+    dimensions = ["clarity_and_coherence"]
+
+    class Completions:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            return SimpleNamespace(
+                model="deepseek-v4-pro",
+                system_fingerprint=DEEPSEEK_EXPECTED_FINGERPRINT,
+                usage=SimpleNamespace(
+                    prompt_tokens=100,
+                    completion_tokens=50,
+                    total_tokens=150,
+                    completion_tokens_details=SimpleNamespace(
+                        reasoning_tokens=40
+                    ),
+                ),
+                choices=[
+                    SimpleNamespace(
+                        finish_reason="stop",
+                        message=SimpleNamespace(
+                            content=(
+                                '{"schema_version":"1.0.0",'
+                                '"instrument_id":"llm-judge-v1",'
+                                f'"task_id":"{task_id}",'
+                                '"mode":"single",'
+                                '"single_judgments":[{'
+                                '"dimension":"clarity_and_coherence",'
+                                '"label":"pass",'
+                                '"evidence_quote":"clear",'
+                                '"reason":"The response is clear."}],'
+                                '"pairwise_judgments":null}'
+                            )
+                        ),
+                    )
+                ],
+            )
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=Completions()))
+    transport = JudgeTransport(
+        "deepseek-v4-pro",
+        split="development",
+        call_limit=2,
+        cost_stop_usd=1,
+        deepseek_client=client,
+    )
+    schema = _judgment_schema(
+        task_id=task_id,
+        mode="single",
+        dimensions=dimensions,
+    )
+    value = transport.call(
+        prompt="Return JSON.",
+        schema=schema,
+        seed=5002,
+        task_id=task_id,
+    )
+
+    _validate_judgment(
+        value,
+        task_id=task_id,
+        mode="single",
+        dimensions=dimensions,
+    )
+    assert captured["model"] == "deepseek-v4-pro"
+    assert captured["max_tokens"] == 8192
+    assert captured["reasoning_effort"] == "high"
+    assert captured["response_format"] == {"type": "json_object"}
+    assert captured["extra_body"]["thinking"] == {"type": "enabled"}
+    assert transport.summary()["reasoning_tokens"] == 40
+
+
+def test_active_professor_fidelity_commands_exclude_gemma():
+    root = Path(__file__).resolve().parents[1]
+    package = json.loads((root / "package.json").read_text(encoding="utf-8"))
+    commands = {
+        name: command
+        for name, command in package["scripts"].items()
+        if name.startswith("judge:professor-fidelity")
+    }
+
+    assert commands
+    assert all("gemma" not in command.casefold() for command in commands.values())
+    assert "--model deepseek-v4-pro" in commands[
+        "judge:professor-fidelity-development"
+    ]
+    assert "--model deepseek-v4-pro" in commands[
+        "judge:professor-fidelity-heldout"
+    ]
+
+
+def test_professor_fidelity_judge_sensitivity_uses_one_shared_sample():
+    case_ids = [f"case-{index:03d}" for index in range(104)]
+    selected = [
+        case_id
+        for case_id in case_ids
+        if _selected(case_id, 0.25, SAMPLE_SELECTION_SALT)
+    ]
+
+    assert 15 <= len(selected) <= 35
+    assert selected == [
+        case_id
+        for case_id in case_ids
+        if _selected(case_id, 0.25, SAMPLE_SELECTION_SALT)
+    ]
+
+
+def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
+    result = validate_post_audit_pipeline()
+
+    assert result["status"] == "passed"
+    assert result["execution_status"] == (
+        "blocked-by-independent-human-authoring-audit"
+    )
+    assert result["active_primary_judge"]["model"] == "deepseek-v4-pro"
+    assert result["active_gemma_calls"] == 0
+    assert result["private_artifact_content_read"] is False
+    assert result["heldout_content_read"] is False
+    assert result["model_called"] is False
 
 
 def test_judge_contract_requires_per_dimension_pairwise_output():

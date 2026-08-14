@@ -198,6 +198,11 @@ Current utilities:
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run
   verify:professor-fidelity-plan`.
+- `validate_professor_fidelity_post_audit.py`: statically validates the exact
+  post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
+  one-time held-out confirmation, plan, and purge-closure record. It checks
+  only private-artifact presence, never content, and makes no model call; run
+  `npm run verify:professor-fidelity-post-audit`.
 - `build_course_tutor_splits.py`: deterministically builds and validates an
   ignored 48-case development plus 104-case held-out **review draft** from
   a private ignored authoring blueprint and a curated case inventory. Every
@@ -262,10 +267,15 @@ Current utilities:
   source-and-locator correctness, claim-level citation coverage, eligible-case
   retrieval completeness, structural success, and unresolved semantic review.
   Exact-phrase matching is retained only as a non-selection diagnostic.
-- `judge_professor_fidelity.py`: runs blinded structured local Gemma or Qwen
-  pedagogy judgments against the frozen JSON contracts, including one
-  preference per pedagogical dimension for both C1/C2 presentation orders and
-  seeded repeat samples.
+- `judge_professor_fidelity.py`: runs blinded structured pedagogy judgments
+  against the frozen JSON contracts. The active primary binding is the
+  official `deepseek-v4-pro` model (`DeepSeek-V4-Pro-0813`) in JSON mode with
+  `high` thinking, the v6-observed fingerprint, per-run call and cost stops,
+  and complete token/reasoning/cost telemetry. Local `qwen3:4b` is retained as
+  a bounded sensitivity reviewer; Gemma is excluded from active
+  professor-fidelity commands. The runner records one preference per
+  pedagogical dimension, seeded repeat samples, and a separately invoked
+  swapped-order sensitivity sample.
 - `analyze_judge_calibration.py`: checks local-judge repeat, position, and
   cross-family/reference agreement and fails eligibility when the frozen
   blinded researcher reference, any per-dimension gate, or pairwise position

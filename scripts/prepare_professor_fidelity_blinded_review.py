@@ -15,9 +15,9 @@ from scripts.execute_professor_fidelity import _load_course_chunks
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v1/anchor/result.json"
+DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v2/anchor-001/result.json"
 DEFAULT_DATASET = ROOT / "data/processed/course_tutor_v1/sealed_v1/anchor.json"
-DEFAULT_OUTPUT = ROOT / "reports/generated/professor-fidelity-anchor-blinded-review-v2"
+DEFAULT_OUTPUT = ROOT / "reports/generated/professor-fidelity-anchor-blinded-review-v3"
 CONDITIONS = ("C0", "C1", "C2", "C3")
 PDF_ROOT = ROOT / "data/raw/course_materials/it5002_full/lecture"
 MANIFEST_PATH = ROOT / "research/05_evaluation/it5002_lectures_v1.manifest.json"
@@ -115,7 +115,16 @@ def prepare_packet(
     packet = [
         "# Professor-fidelity blinded review packet",
         "",
-        "Purpose: calibrate semantic, citation, context-sufficiency, and pedagogy judgments on preserved historical outputs. This packet cannot make the invalid source run selection-eligible.",
+        (
+            "Purpose: calibrate semantic, citation, context-sufficiency, and "
+            "pedagogy judgments on the current anchor outputs. This packet "
+            "does not approve the authoring dataset or authorize development "
+            "or held-out execution."
+            if run["run_id"].startswith("professor-fidelity-v2-anchor")
+            else "Purpose: calibrate semantic, citation, context-sufficiency, "
+            "and pedagogy judgments on preserved historical outputs. This "
+            "packet cannot make the invalid source run selection-eligible."
+        ),
         "",
         "Do not open `mapping.json` while reviewing. Conditions, model names, and provider names are intentionally hidden.",
         "",
