@@ -34,6 +34,7 @@ from scripts.run_course_tutor_hybrid_review import (
     MODEL_BINDINGS,
     PLAN_ID,
     SAMPLE_SEED,
+    _summary,
     call_deepseek,
     required_human_case_ids,
     review_prompt,
@@ -729,6 +730,39 @@ def test_course_tutor_model_decision_requires_consistent_checks():
     decision["evidence_supports_claims"] = False
     with pytest.raises(ValueError, match="inconsistent"):
         validate_model_decision(decision)
+
+
+def test_course_tutor_summary_counts_invalid_null_decision():
+    rows = []
+    for index, binding in enumerate(MODEL_BINDINGS):
+        valid = index != 0
+        rows.append(
+            {
+                "reviewer_id": binding["reviewer_id"],
+                "endpoint_class": binding["endpoint_class"],
+                "case_id": "synthetic-case",
+                "status": "valid" if valid else "invalid",
+                "decision": (
+                    {"decision": "approve"} if valid else None
+                ),
+                "attempts": (
+                    [{}] if binding["endpoint_class"] == "external" else []
+                ),
+            }
+        )
+
+    summary = _summary(
+        rows,
+        [],
+        ["synthetic-case"],
+        {"synthetic-case": ["deepseek_not_approve"]},
+    )
+
+    assert summary["valid_model_decisions"] == 2
+    assert summary["invalid_model_decisions"] == 1
+    assert summary["by_reviewer"][MODEL_BINDINGS[0]["reviewer_id"]][
+        "invalid"
+    ] == 1
 
 
 def test_course_tutor_v6_escalates_by_two_family_quorum():

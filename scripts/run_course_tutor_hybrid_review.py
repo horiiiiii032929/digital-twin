@@ -151,6 +151,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--ollama-url", default=DEFAULT_OLLAMA_URL)
     parser.add_argument("--allow-external-provider", action="store_true")
+    parser.add_argument(
+        "--finalize-existing-checkpoint",
+        action="store_true",
+        help=(
+            "finalize an already-complete checkpoint without issuing model calls"
+        ),
+    )
     return parser.parse_args()
 
 
@@ -948,11 +955,11 @@ def _summary(
             "valid": sum(row["status"] == "valid" for row in rows),
             "invalid": sum(row["status"] != "valid" for row in rows),
             "approve": sum(
-                row.get("decision", {}).get("decision") == "approve"
+                (row.get("decision") or {}).get("decision") == "approve"
                 for row in rows
             ),
             "revise": sum(
-                row.get("decision", {}).get("decision") == "revise"
+                (row.get("decision") or {}).get("decision") == "revise"
                 for row in rows
             ),
         }
@@ -1232,6 +1239,7 @@ def run_review(
     output_root: Path,
     ollama_url: str,
     allow_external_provider: bool,
+    finalize_existing_checkpoint: bool = False,
 ) -> dict[str, Any]:
     final_path = output_root / "ensemble_review.json"
     checkpoint_path = output_root / "checkpoint.json"
@@ -1287,15 +1295,52 @@ def run_review(
             ),
         },
     }
+    finalization_code = None
+    finalization_source_checkpoint_sha256 = None
     if checkpoint_path.exists():
+        finalization_source_checkpoint_sha256 = sha256(checkpoint_path)
         checkpoint = load_json(checkpoint_path)
         binding = checkpoint.get("binding", {})
-        if any(binding.get(key) != value for key, value in base_binding.items()):
-            raise ValueError("checkpoint binding differs from the current review")
+        differing_binding_keys = {
+            key
+            for key, value in base_binding.items()
+            if binding.get(key) != value
+        }
+        if differing_binding_keys:
+            if (
+                not finalize_existing_checkpoint
+                or differing_binding_keys != {"code"}
+            ):
+                raise ValueError(
+                    "checkpoint binding differs from the current review"
+                )
+            finalization_code = code_binding
         validate_transport_preflights(binding.get("transport_preflights"))
         decisions = checkpoint.get("model_decisions", [])
         if any(row.get("status") == "in_progress" for row in decisions):
             raise ValueError("checkpoint contains an ambiguous in-flight request")
+        if finalize_existing_checkpoint:
+            expected_pairs = {
+                (model_binding["reviewer_id"], case["case_id"])
+                for model_binding in MODEL_BINDINGS
+                for case in all_cases
+            }
+            actual_pairs = {
+                (row.get("reviewer_id"), row.get("case_id"))
+                for row in decisions
+                if isinstance(row, dict)
+            }
+            if (
+                len(decisions) != len(expected_pairs)
+                or actual_pairs != expected_pairs
+                or any(
+                    row.get("status") not in {"valid", "invalid"}
+                    for row in decisions
+                )
+            ):
+                raise ValueError(
+                    "checkpoint finalization requires all frozen decisions"
+                )
     else:
         preflights = run_transport_preflights(
             ollama_url,
@@ -1582,6 +1627,11 @@ def run_review(
             "heldout_ledger_created": False,
         },
     }
+    if finalization_code is not None:
+        ensemble["finalization_code"] = finalization_code
+        ensemble["finalization_source_checkpoint_sha256"] = (
+            finalization_source_checkpoint_sha256
+        )
     _write_private_exclusive(
         final_path,
         f"{json.dumps(ensemble, indent=2, ensure_ascii=False)}\n",
@@ -1626,6 +1676,9 @@ def main() -> None:
                 output_root=arguments.output_root,
                 ollama_url=arguments.ollama_url,
                 allow_external_provider=arguments.allow_external_provider,
+                finalize_existing_checkpoint=(
+                    arguments.finalize_existing_checkpoint
+                ),
             ),
             indent=2,
         )

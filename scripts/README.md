@@ -225,7 +225,11 @@ Current utilities:
   packet with all selection classes and model decisions hidden, and stops
   instead of assigning more than 48 cases to the human reviewer; run `npm run
   review:course-tutor-authoring-hybrid` from a clean committed revision after
-  confirming the bounded authorization in the v6 plan.
+  confirming the bounded authorization in the v6 plan. If all 456 checkpointed
+  decisions completed but deterministic finalization failed, repair and commit
+  the finalizer, then pass `--finalize-existing-checkpoint`; this mode requires
+  the exact complete frozen reviewer/case set, makes no model call, preserves
+  the execution revision, and records the separate finalizer revision.
 - `seal_course_tutor_splits.py`: validates all 456 cross-provider model
   records, exact frozen sampling and escalation, the completed blinded
   independent-human audit, two-family model approval outside the human set,

@@ -114,6 +114,18 @@ def _validate_ensemble(
         or code.get("dirty") is not False
     ):
         raise ValueError("ensemble must be bound to a clean 40-character revision")
+    finalization_code = ensemble.get("finalization_code")
+    if finalization_code is not None and (
+        not isinstance(finalization_code, dict)
+        or not isinstance(finalization_code.get("revision"), str)
+        or len(finalization_code["revision"]) != 40
+        or finalization_code.get("dirty") is not False
+        or not isinstance(
+            ensemble.get("finalization_source_checkpoint_sha256"), str
+        )
+        or len(ensemble["finalization_source_checkpoint_sha256"]) != 64
+    ):
+        raise ValueError("ensemble finalization binding is invalid")
     preflights = validate_transport_preflights(
         ensemble.get("transport_preflights")
     )
