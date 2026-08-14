@@ -14,17 +14,17 @@ but they do not override this page for current sequencing.
 - Local worktree was synchronized with the branch remote at the start of this
   status audit.
 - PR #75 CI passes at the currently pushed revision. The latest full local
-  check for draft 004 passed 249 Python tests, 15 frontend tests,
+  check passed 256 Python tests, 15 frontend tests,
   documentation and evaluation validators, lint, and the production build.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
-- Privacy incident requiring owner action: superseded public commit `02dbf8d`
-  embedded private source-derived authoring constants. It has been removed from
-  the active branch history, but GitHub still serves the object by SHA. Treat
-  the remote privacy boundary as open until GitHub Support removes cached views
-  and pull-request references and runs server-side garbage collection. Support
-  request #4659958 has been submitted and remains open.
+- The remote privacy incident is closed. Superseded public commit `02dbf8d`
+  was removed from active history; GitHub Support closed request #4659958 after
+  confirming zero references and completing server-side garbage collection and
+  cached-view clearance. The authenticated commit API no longer finds the SHA,
+  and the public commit URL returns HTTP 404. See the
+  [purge closure record](../research/00_admin/2026-08-14-github-public-history-purge-closure.md).
 
 ## Evidence state
 
@@ -32,7 +32,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Keep experimentally | Exact DeepSeek V4 Flash non-thinking binding and strict-evidence P2 qualified on the separate synthetic boundary; deterministic fallback retained | Professor-policy fidelity on valid course cases |
-| Professor fidelity | Refine; frozen hybrid authoring review v2 is the active gate | Drafts 001-003 and their unfavorable findings are preserved privately; corrected v1.2.3 passes expanded local checks; hybrid v1 stopped invalid at 172/456 records when its human lower bound reached 66; v2 fixes local transport and sampling prospectively | Completed v2 456-decision local ensemble, bounded independent-human audit, GitHub server-side purge confirmation, C0-C3 effects, safe grounding, semantic citation completeness, and pedagogy |
+| Professor fidelity | Go deeper to the frozen 41-case blinded human audit | Corrected v1.2.3 passes expanded deterministic checks; v6 completed all 456 committee records with DeepSeek V4 Pro plus two frozen local Qwen artifacts; the required audit union is 41 cases, below the 48-case cap; the GitHub purge dependency is satisfied | Independent-human approval, an immutable seal, corrected C0-C3 effects, safe grounding, semantic citation completeness, pedagogy, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -61,32 +61,28 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Complete and commit the revised implementation from the prospective
-   [`course-tutor-hybrid-authoring-review-v2`](../research/04_experiments/2026-08-14-course-tutor-hybrid-authoring-review-v2-plan.md)
-   plan. V1 remains preserved as an invalid stopped attempt.
-2. Run the three public local schema preflights, then all three frozen local
-   model artifacts over all 152 cases, producing all 456 private attempt
-   records. The 16-case baseline is selected by stable hash before verdicts
-   are read.
-3. If the required human set exceeds 48, preserve the result and refine again.
-   Otherwise, a non-Codex human reviews the blinded 16-case sample, all 19
+1. A non-Codex human reviews the blinded 16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
-   result. Do not inspect the ensemble verdicts while completing that packet.
-4. Any failed or uncertain human-audited case blocks sealing and requires a
+   result: 41 cases total. Do not inspect the ensemble verdicts while completing
+   that packet. The completed model boundary is recorded in the
+   [v6 result](../research/05_evaluation/course-tutor-hybrid-authoring-review-v6-001-results.md).
+2. Any failed or uncertain human-audited case blocks sealing and requires a
    revised candidate plus a fresh full ensemble and sample. Unsampled cases
    require unanimous three-model approval.
-5. Wait for GitHub Support request #4659958 to confirm server-side purge, then
-   create the immutable v2 seal and unopened held-out ledger.
-6. Run the corrected hash-bound development comparison only.
-7. Complete condition-blinded semantic, citation, context-sufficiency, and
+3. If every audited case passes, validate the frozen ensemble and human audit
+   together, then create the immutable v2 seal and unopened held-out ledger.
+4. Run the corrected hash-bound development comparison only.
+5. Complete condition-blinded semantic, citation, context-sufficiency, and
    pedagogy review.
-8. Register the development decision. Open the one-time held-out split only if
+6. Register the development decision. Open the one-time held-out split only if
    every prospective development gate permits it.
 
-Codex can complete steps 1-2. The only unavoidable user action is the bounded
-blinded human packet produced by step 3 and forwarding any GitHub Support
-response. Drafts 001-003 and their unfavorable findings remain preserved
-privately. No full-152 human-approval or professor-validation claim is allowed.
+The only unavoidable user action now is the bounded blinded human packet in
+step 1. Codex must not complete it because the frozen instrument requires an
+independent reviewer who has not inspected model decisions. After that review,
+Codex can validate and continue the sequence. Drafts 001-005 and their
+unfavorable or invalid findings remain preserved. No full-152 human-approval
+or professor-validation claim is allowed.
 
 ## Source-of-truth order
 

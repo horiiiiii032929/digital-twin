@@ -131,13 +131,24 @@ timestamp, and confirmation that model decisions were not inspected.
 - The human audit is targeted, not a full professor review of all 152 cases.
 - Model committee completion does not establish professor fidelity, dataset
   approval, release readiness, or student-facing safety.
-- GitHub Support ticket `4659958` remains an independent sealing dependency
-  until public commit `02dbf8d` removal is confirmed.
+- At model-result registration, GitHub Support ticket `4659958` remained an
+  independent sealing dependency. The post-run administrative update below
+  records its later closure without changing this model result.
+
+## Post-run administrative update
+
+On 2026-08-14, GitHub Support closed ticket `4659958` after confirming no
+remaining references and completing server-side garbage collection and
+cached-view clearance for public commit `02dbf8d`. The authenticated commit API
+then returned no commit for the SHA, and the public commit URL returned HTTP
+404. This satisfies the independent purge dependency but does not change any
+committee decision or waive the human audit. See the
+[purge closure record](../00_admin/2026-08-14-github-public-history-purge-closure.md).
 
 ## Next gate
 
 Complete the blinded 41-case human audit. If every selected case is approved,
-validate the ensemble and audit together. Seal only after the GitHub purge
-confirmation. Any human revision requires candidate repair and a new
-prospective authoring-review decision; do not silently edit or approve the
-current draft.
+validate the ensemble and audit together, then create the seal. The GitHub
+purge dependency is satisfied. Any human revision requires candidate repair
+and a new prospective authoring-review decision; do not silently edit or
+approve the current draft.

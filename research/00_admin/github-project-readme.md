@@ -39,14 +39,14 @@ policy, student interaction state, and evaluation-before-publication.
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The sole `In Progress` item is #24. The immediate R2 work is the frozen local
-three-model authoring review of all exact-passage v1.2.3 cases followed by a
-stable 16-case independent-human audit, all 19 no-evidence cases, and model
-escalations, capped at 48 human cases. The initial 32-sample instrument attempt
-is preserved as invalid; v2 corrects local thinking-mode transport and adds
-public preflights. The immutable seal also requires confirmation on GitHub
-Support ticket #4659958 before the corrected hash-bound development comparison
-can run. Held-out tutor outputs remain unopened.
+The sole `In Progress` item is #24. The frozen v6 authoring committee is
+complete for all exact-passage v1.2.3 cases: 456 records across DeepSeek V4 Pro
+and two local Qwen artifacts. Its exact blinded independent-human union is 41
+cases, comprising the stable sample, all no-evidence cases, and every model
+escalation; this is below the 48-case cap and is the active gate. GitHub Support
+closed ticket #4659958 after completing the public-object purge, and read-only
+remote checks confirm the superseded SHA is unavailable. The purge no longer
+blocks sealing. Held-out tutor outputs remain unopened.
 #8 returns to `Todo` with its 19-check synthetic publication foundation
 preserved; credentialed identity and complete professor/source lifecycles
 resume after the current gate. #25, #10, #9, and #12 remain queued. Do not
