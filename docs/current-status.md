@@ -62,10 +62,10 @@ diagnostic metrics into selection evidence.
 ## Next decision sequence
 
 1. Preserve completed V4 Pro/P3 `anchor-002` generation and the invalid primary
-   judge attempt 001. Pass the frozen public empty-response judge-v4 probe,
-   then run separately identified primary attempt 002, swapped DeepSeek,
-   diagnostic local Qwen, blinded packet preparation, and prehuman calibration.
-   Stop at the bounded human reference; no generator held-out is authorized.
+   judge attempt 001. The public empty-response judge-v4 probe passed; run
+   separately identified primary attempt 002, swapped DeepSeek, diagnostic
+   local Qwen, blinded packet preparation, and prehuman calibration. Stop at
+   the bounded human reference; no generator held-out is authorized.
 2. A non-Codex human reviews the blinded 16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing

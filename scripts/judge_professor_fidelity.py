@@ -35,6 +35,12 @@ DEFAULT_OUTPUT = (
     / "experiments/runs/professor_fidelity_v2/development-001/judgments-deepseek-v4-pro.json"
 )
 PROMPT_PATH = ROOT / "research/05_evaluation/instruments/llm_judge_v1.prompt.md"
+ANCHOR_JUDGE_V4_PROBE_PATH = (
+    ROOT / "reports/generated/professor-fidelity-judge-v4-empty-response-probe-001.json"
+)
+EXPECTED_ANCHOR_JUDGE_V4_PROBE_SHA256 = (
+    "c7650bbeb4fbf659c63193e6635c6c143d0606bceccd79cb5f178bc3e5d31430"
+)
 LABELS = ("A", "B", "C", "D")
 VALID = {"pass", "partial", "fail"}
 CONDITIONS = ("C0", "C1", "C2", "C3")
@@ -89,6 +95,41 @@ def parse_args() -> argparse.Namespace:
 
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _load_anchor_judge_v4_qualification() -> dict[str, Any]:
+    if not ANCHOR_JUDGE_V4_PROBE_PATH.is_file():
+        raise JudgeError("anchor judge-v4 public qualification is missing")
+    observed_sha256 = hashlib.sha256(
+        ANCHOR_JUDGE_V4_PROBE_PATH.read_bytes()
+    ).hexdigest()
+    if observed_sha256 != EXPECTED_ANCHOR_JUDGE_V4_PROBE_SHA256:
+        raise JudgeError("anchor judge-v4 public qualification hash drifted")
+    probe = load_json(ANCHOR_JUDGE_V4_PROBE_PATH)
+    judgments = probe.get("judgment", {}).get("single_judgments", [])
+    judgment = judgments[0] if isinstance(judgments, list) and judgments else {}
+    transport = probe.get("transport", {})
+    if (
+        probe.get("probe_id") != "professor-fidelity-judge-v4-empty-response-probe-001"
+        or probe.get("status") != "passed"
+        or probe.get("private_text_used") is not False
+        or probe.get("heldout_used") is not False
+        or probe.get("contract_revision") != JUDGE_CONTRACT_REVISION
+        or probe.get("empty_response_display") != EMPTY_RESPONSE_DISPLAY
+        or probe.get("working_tree_dirty") is not False
+        or transport.get("calls") != 1
+        or transport.get("provider_model") != DEEPSEEK_MODEL
+        or transport.get("provider_revision") != DEEPSEEK_EXPECTED_FINGERPRINT
+        or judgment.get("label") != "fail"
+        or judgment.get("evidence_quote") != EMPTY_RESPONSE_DISPLAY
+    ):
+        raise JudgeError("anchor judge-v4 public qualification is invalid")
+    return {
+        "probe_id": probe["probe_id"],
+        "raw_sha256": observed_sha256,
+        "code_revision": probe["code_revision"],
+        "status": probe["status"],
+    }
 
 
 def write_json(path: Path, value: dict[str, Any]) -> None:
@@ -498,6 +539,78 @@ def _display_response(response: str) -> str:
     return response if response.strip() else EMPTY_RESPONSE_DISPLAY
 
 
+def _alphanumeric_index(value: str) -> tuple[str, list[int]]:
+    characters: list[str] = []
+    positions: list[int] = []
+    for index, character in enumerate(value):
+        if not character.isalnum():
+            continue
+        for folded in character.casefold():
+            characters.append(folded)
+            positions.append(index)
+    return "".join(characters), positions
+
+
+def _align_quote(quote: str, response: str) -> tuple[str, str]:
+    if quote in response:
+        return quote, "exact"
+    normalized_quote, _ = _alphanumeric_index(quote)
+    normalized_response, response_positions = _alphanumeric_index(response)
+    if not normalized_quote:
+        raise JudgeError("evidence quote has no alphanumeric content")
+    start = normalized_response.find(normalized_quote)
+    if start < 0 or normalized_response.find(normalized_quote, start + 1) >= 0:
+        raise JudgeError("evidence quote is not uniquely source-aligned")
+    end = start + len(normalized_quote) - 1
+    aligned = response[response_positions[start] : response_positions[end] + 1]
+    return aligned, "punctuation-case-normalized"
+
+
+def _align_judgment_quotes(
+    value: dict[str, Any],
+    *,
+    mode: str,
+    response_a: str,
+    response_b: str | None,
+) -> list[dict[str, Any]]:
+    alignments = []
+    records = (
+        value.get("single_judgments")
+        if mode == "single"
+        else value.get("pairwise_judgments")
+    )
+    if not isinstance(records, list):
+        return alignments
+    fields = (
+        (("evidence_quote", response_a),)
+        if mode == "single"
+        else (
+            ("evidence_quote_a", response_a),
+            ("evidence_quote_b", response_b),
+        )
+    )
+    for item in records:
+        if not isinstance(item, dict):
+            continue
+        for field, response in fields:
+            quote = item.get(field)
+            if not isinstance(quote, str) or response is None:
+                continue
+            aligned, method = _align_quote(quote, response)
+            if method != "exact":
+                alignments.append(
+                    {
+                        "dimension": item.get("dimension"),
+                        "field": field,
+                        "method": method,
+                        "original_quote": quote,
+                        "aligned_quote": aligned,
+                    }
+                )
+                item[field] = aligned
+    return alignments
+
+
 def _prompt(payload: dict[str, Any]) -> str:
     return (
         PROMPT_PATH.read_text(encoding="utf-8")
@@ -571,6 +684,7 @@ def _judge_case(
 ) -> dict[str, Any]:
     dimensions = case["rubric"]["required_pedagogy_dimensions"]
     responses = []
+    quote_alignments = []
     for label, condition in mapping.items():
         task_id = f"judge-{case['case_id']}-{label.lower()}"
         payload = _judge_input(
@@ -590,6 +704,18 @@ def _judge_case(
             ),
             seed=5002,
             task_id=task_id,
+        )
+        quote_alignments.extend(
+            {
+                "task_id": task_id,
+                **alignment,
+            }
+            for alignment in _align_judgment_quotes(
+                value,
+                mode="single",
+                response_a=payload["response_a"],
+                response_b=None,
+            )
         )
         _validate_judgment(
             value,
@@ -621,6 +747,18 @@ def _judge_case(
         seed=5002,
         task_id=pair_task_id,
     )
+    quote_alignments.extend(
+        {
+            "task_id": pair_task_id,
+            **alignment,
+        }
+        for alignment in _align_judgment_quotes(
+            pair,
+            mode="pairwise",
+            response_a=pair_payload["response_a"],
+            response_b=pair_payload["response_b"],
+        )
+    )
     _validate_judgment(
         pair,
         task_id=pair_task_id,
@@ -644,6 +782,7 @@ def _judge_case(
         "responses": responses,
         "c1_c2_pairwise": normalized,
         "pair_mapping": pair_mapping,
+        "quote_alignments": quote_alignments,
     }
 
 
@@ -671,6 +810,9 @@ def _validate_case_result(
 
 def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
     run = load_json(arguments.run)
+    judge_qualification = (
+        _load_anchor_judge_v4_qualification() if run["split"] == "anchor" else None
+    )
     transport = JudgeTransport(
         arguments.model,
         split=run["split"],
@@ -747,6 +889,7 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
                 "model": arguments.model,
                 "contract_revision": JUDGE_CONTRACT_REVISION,
                 "attempt_id": arguments.attempt_id,
+                "judge_qualification": judge_qualification,
                 "transport": transport.summary(),
                 "completed_cases": index,
                 "expected_cases": len(selected_case_ids),
@@ -764,6 +907,7 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
         "instrument_id": "llm-judge-v1",
         "contract_revision": JUDGE_CONTRACT_REVISION,
         "attempt_id": arguments.attempt_id,
+        "judge_qualification": judge_qualification,
         "model": arguments.model,
         "model_digest": transport.model_digest,
         "temperature": 0 if arguments.model != DEEPSEEK_MODEL else None,

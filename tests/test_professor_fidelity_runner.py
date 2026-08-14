@@ -30,6 +30,7 @@ from scripts.judge_professor_fidelity import (
     JUDGE_MODELS,
     SAMPLE_SELECTION_SALT,
     JudgeTransport,
+    _align_quote,
     _judge_input,
     _selected,
     _judgment_schema,
@@ -561,6 +562,20 @@ def test_judge_v4_displays_empty_responses_and_requires_exact_quotes():
             response_a=payload["response_a"],
             response_b=None,
         )
+
+
+def test_judge_v4_aligns_only_unique_punctuation_variants():
+    response = "Use the exact source span—with punctuation—when judging."
+
+    aligned, method = _align_quote(
+        "source span with punctuation",
+        response,
+    )
+
+    assert aligned == "source span—with punctuation"
+    assert method == "punctuation-case-normalized"
+    with pytest.raises(ValueError, match="not uniquely source-aligned"):
+        _align_quote("missing semantic claim", response)
 
 
 def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():

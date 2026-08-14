@@ -2,7 +2,12 @@
 
 Date frozen: 2026-08-14
 
-Status: Frozen before the public probe and any new private judging
+Status: Public probe passed; primary attempt 002 authorized
+
+Outcome update: the public probe passed at clean revision `1841b29`; its raw
+SHA-256 is
+`c7650bbeb4fbf659c63193e6635c6c143d0606bceccd79cb5f178bc3e5d31430`.
+Primary attempt 002 is permitted but not yet evaluated.
 
 ## Decision question
 
@@ -24,8 +29,11 @@ cannot be rerun.
 - Preserve the original response for the source run.
 - Display a whitespace-only response to a judge as the literal
   `[EMPTY RESPONSE]`.
-- Require every single and pairwise evidence quote to be an exact substring of
-  the displayed response.
+- Require every stored single and pairwise evidence quote to be an exact
+  substring of the displayed response. A uniquely source-aligned variant that
+  differs only by punctuation, whitespace, or case may be replaced by the
+  actual source span with the original and aligned values recorded; semantic,
+  missing, or ambiguous fuzzy matches fail closed.
 - Preserve the frozen rubric, labels, blinding, case order, DeepSeek V4 Pro
   high-thinking binding, exact fingerprint, no-retry rule, and USD 1 anchor
   stop.
