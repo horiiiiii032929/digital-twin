@@ -14,7 +14,14 @@ from scripts.build_course_tutor_splits import (
     question_for,
     validate_split_isolation,
 )
-from scripts.execute_professor_fidelity import _messages, _parse_output, _score
+from scripts.execute_professor_fidelity import (
+    V4_PRO_EXPECTED_FINGERPRINT,
+    _generator_runtime,
+    _messages,
+    _parse_output,
+    _score,
+    _v4_pro_cost,
+)
 from scripts.finalize_professor_fidelity_blinded_review import finalize_review
 from scripts.judge_professor_fidelity import (
     DEEPSEEK_EXPECTED_FINGERPRINT,
@@ -102,7 +109,9 @@ def _case(case_id: str, *, scenario: str = "direct") -> dict:
             "student_state": {"assessment_context": "unassessed"},
         },
         "ground_truth": {
-            "corpus_answerability": "answerable" if answerable else "partially_answerable",
+            "corpus_answerability": "answerable"
+            if answerable
+            else "partially_answerable",
             "expected_behavior": {
                 "primary_action": action,
                 "acceptable_alternatives": [],
@@ -215,6 +224,58 @@ def test_professor_policy_prompt_never_receives_case_gold_labels():
     assert '"policy_id": "professor"' in serialized
 
 
+def test_p3_prompt_requires_clarification_before_explanation_and_hides_gold():
+    case = _case("case-p3", scenario="ambiguity")
+    case["ground_truth"]["expected_behavior"]["primary_action"] = (
+        "gold-action-must-stay-hidden"
+    )
+    bindings = {
+        "generic_tutoring_policy": {"policy_id": "generic"},
+        "structured_professor_policy": {"policy_id": "professor"},
+    }
+
+    serialized = "\n".join(
+        message.content
+        for message in _messages(
+            case,
+            "C2",
+            [],
+            bindings,
+            prompt_binding_id="professor-fidelity-integration-prompt-v3-p3",
+        )
+    )
+
+    assert "do not explain either meaning yet" in serialized
+    assert "Which meaning" in serialized
+    assert "gold-action-must-stay-hidden" not in serialized
+
+
+def test_v4_pro_anchor_runtime_is_exact_and_uses_manual_cost():
+    runtime = _generator_runtime(
+        {
+            "generator": {
+                "provider_model": "deepseek-v4-pro",
+                "provider_revision": V4_PRO_EXPECTED_FINGERPRINT,
+                "thinking": "disabled",
+                "temperature": 0,
+                "max_output_tokens": 1200,
+                "timeout_seconds": 60,
+            }
+        }
+    )
+
+    assert runtime["provider_model"] == "deepseek-v4-pro"
+    assert runtime["litellm_model"] == "deepseek/deepseek-v4-pro"
+    assert runtime["expected_fingerprint"] == V4_PRO_EXPECTED_FINGERPRINT
+    assert runtime["thinking"] is False
+    assert runtime["cost_calculator"] is _v4_pro_cost
+    assert _v4_pro_cost(
+        completion_response={
+            "usage": {"prompt_tokens": 1_000_000, "completion_tokens": 1_000_000}
+        }
+    ) == pytest.approx(1.305)
+
+
 def test_scoring_separates_id_source_completeness_and_semantics():
     case = _case("case-01")
     paraphrased = {
@@ -291,9 +352,7 @@ def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
                     prompt_tokens=100,
                     completion_tokens=50,
                     total_tokens=150,
-                    completion_tokens_details=SimpleNamespace(
-                        reasoning_tokens=40
-                    ),
+                    completion_tokens_details=SimpleNamespace(reasoning_tokens=40),
                 ),
                 choices=[
                     SimpleNamespace(
@@ -361,12 +420,22 @@ def test_active_professor_fidelity_commands_exclude_gemma():
 
     assert commands
     assert all("gemma" not in command.casefold() for command in commands.values())
-    assert "--model deepseek-v4-pro" in commands[
-        "judge:professor-fidelity-development"
-    ]
-    assert "--model deepseek-v4-pro" in commands[
-        "judge:professor-fidelity-heldout"
-    ]
+    assert "--model deepseek-v4-pro" in commands["judge:professor-fidelity-development"]
+    assert "--model deepseek-v4-pro" in commands["judge:professor-fidelity-heldout"]
+
+
+def test_active_anchor_commands_use_new_run_and_never_invalid_run():
+    root = Path(__file__).resolve().parents[1]
+    package = json.loads((root / "package.json").read_text(encoding="utf-8"))
+    commands = {
+        name: command
+        for name, command in package["scripts"].items()
+        if "professor-fidelity-anchor" in name
+    }
+
+    assert commands
+    assert all("anchor-002" in command for command in commands.values())
+    assert all("anchor-001" not in command for command in commands.values())
 
 
 def test_professor_fidelity_judge_sensitivity_uses_one_shared_sample():
@@ -390,8 +459,10 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
 
     assert result["status"] == "passed"
     assert result["execution_status"] == (
-        "blocked-by-independent-human-authoring-audit"
+        "anchor-ready-development-blocked-by-independent-human-authoring-audit"
     )
+    assert result["active_anchor"]["run_id"] == "professor-fidelity-v2-anchor-002"
+    assert result["active_anchor"]["selection_status"] == "not-selected"
     assert result["active_primary_judge"]["model"] == "deepseek-v4-pro"
     assert result["active_gemma_calls"] == 0
     assert result["private_artifact_content_read"] is False
@@ -630,9 +701,7 @@ def test_course_tutor_builder_rebinds_invalid_source_evidence_and_claim():
 
     curated = curate_source_case(source, {chunk.id: chunk}, private_blueprint)
 
-    assert curated["claims"] == [
-        "Re-authored private claim."
-    ]
+    assert curated["claims"] == ["Re-authored private claim."]
     assert curated["required_evidence"] == [
         {
             "document_id": "private-document",
@@ -673,9 +742,7 @@ def test_course_tutor_builder_uses_authentic_misconception_and_ambiguity():
     misconception = question_for(
         "misconception", misconception_base, 1, private_blueprint
     )
-    ambiguity = question_for(
-        "ambiguity", ambiguity_base, 1, private_blueprint
-    )
+    ambiguity = question_for("ambiguity", ambiguity_base, 1, private_blueprint)
 
     assert "opposite" in misconception
     assert "cannot be the right idea here" not in misconception
@@ -773,9 +840,7 @@ def test_course_tutor_v6_calls_official_deepseek_json_thinking_transport():
                     prompt_tokens=100,
                     completion_tokens=50,
                     total_tokens=150,
-                    completion_tokens_details=SimpleNamespace(
-                        reasoning_tokens=40
-                    ),
+                    completion_tokens_details=SimpleNamespace(reasoning_tokens=40),
                 ),
                 choices=[
                     SimpleNamespace(
@@ -791,14 +856,12 @@ def test_course_tutor_v6_calls_official_deepseek_json_thinking_transport():
                                 '"split_assignment_acceptable":true,'
                                 '"reason":"All six checks pass."}'
                             )
-                        )
+                        ),
                     )
                 ],
             )
 
-    client = SimpleNamespace(
-        chat=SimpleNamespace(completions=Completions())
-    )
+    client = SimpleNamespace(chat=SimpleNamespace(completions=Completions()))
     result = call_deepseek(
         client=client,
         prompt="Return JSON.",
@@ -825,9 +888,7 @@ def test_course_tutor_v6_treats_deepseek_timeout_as_retryable():
                 )
             )
 
-    client = SimpleNamespace(
-        chat=SimpleNamespace(completions=Completions())
-    )
+    client = SimpleNamespace(chat=SimpleNamespace(completions=Completions()))
     result = call_deepseek(
         client=client,
         prompt="Return JSON.",
@@ -876,12 +937,8 @@ def test_course_tutor_summary_counts_invalid_null_decision():
                 "endpoint_class": binding["endpoint_class"],
                 "case_id": "synthetic-case",
                 "status": "valid" if valid else "invalid",
-                "decision": (
-                    {"decision": "approve"} if valid else None
-                ),
-                "attempts": (
-                    [{}] if binding["endpoint_class"] == "external" else []
-                ),
+                "decision": ({"decision": "approve"} if valid else None),
+                "attempts": ([{}] if binding["endpoint_class"] == "external" else []),
             }
         )
 
@@ -894,9 +951,7 @@ def test_course_tutor_summary_counts_invalid_null_decision():
 
     assert summary["valid_model_decisions"] == 2
     assert summary["invalid_model_decisions"] == 1
-    assert summary["by_reviewer"][MODEL_BINDINGS[0]["reviewer_id"]][
-        "invalid"
-    ] == 1
+    assert summary["by_reviewer"][MODEL_BINDINGS[0]["reviewer_id"]]["invalid"] == 1
 
 
 def test_course_tutor_v6_escalates_by_two_family_quorum():
@@ -982,10 +1037,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                         "status": "valid",
                         "decision": {
                             "decision": "approve",
-                            **{
-                                check: True
-                                for check in REQUIRED_REVIEW_CHECKS
-                            },
+                            **{check: True for check in REQUIRED_REVIEW_CHECKS},
                             "reason": "All six checks pass.",
                         },
                         **(
@@ -1028,10 +1080,13 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
     baseline = select_baseline_case_ids(datasets)
     required, reasons = required_human_case_ids(model_decisions, baseline)
     assert len(required) == 20
-    assert sum(
-        "mandatory_no_evidence_census" in case_reasons
-        for case_reasons in reasons.values()
-    ) == 6
+    assert (
+        sum(
+            "mandatory_no_evidence_census" in case_reasons
+            for case_reasons in reasons.values()
+        )
+        == 6
+    )
     transport_preflights = []
     for binding in MODEL_BINDINGS:
         probe_indexes = (
@@ -1055,9 +1110,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
                     "status": "valid",
                     "decision": {
                         "decision": "approve",
-                        **{
-                            check: True for check in REQUIRED_REVIEW_CHECKS
-                        },
+                        **{check: True for check in REQUIRED_REVIEW_CHECKS},
                         "reason": "Synthetic transport preflight passes.",
                     },
                     **(
@@ -1126,9 +1179,7 @@ def test_course_tutor_seal_validates_hybrid_ensemble_and_human_audit():
             "model_decisions_inspected": False,
         },
         "draft_hashes": draft_hashes,
-        "selection_commitment_sha256": selection_commitment_sha256(
-            baseline, required
-        ),
+        "selection_commitment_sha256": selection_commitment_sha256(baseline, required),
         "required_case_count": len(required),
         "case_decisions": decisions,
     }

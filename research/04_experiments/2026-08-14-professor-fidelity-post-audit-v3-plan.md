@@ -24,7 +24,7 @@ substitute for the 41-case authoring audit, or authorize development/held-out.
 
 | Role | Binding | Purpose |
 | --- | --- | --- |
-| Tutor generator | Selected DeepSeek V4 Flash non-thinking/P2 binding | Preserve the already qualified generator while isolating policy and retrieval effects |
+| Anchor tutor candidate | DeepSeek V4 Pro non-thinking/P3, frozen as `professor-fidelity-anchor-v4-p3-candidate` | Replace the unavailable V4 Flash fingerprint for the new diagnostic `anchor-002` only; not selected for development or held-out |
 | Primary pedagogical judge | Official `deepseek-v4-pro`, documented `DeepSeek-V4-Pro-0813`, fingerprint `a307abda487cd1b463329ccb945ce396`, JSON mode, thinking `high` | Evaluate every development response under the frozen per-dimension contract |
 | Position sensitivity | The same DeepSeek V4 Pro binding on a stable 25% sample with C1/C2 order swapped | Detect order sensitivity without changing model family |
 | Family sensitivity | Frozen local `qwen3:4b` on a stable 25% sample | Measure cross-family agreement without external transmission |
@@ -33,11 +33,12 @@ Gemma is excluded from active professor-fidelity commands. Its historical
 exploratory and failed-attempt records remain preserved and must not be
 rewritten as if they did not occur.
 
-The newest DeepSeek model is used for judging. The tutor generator is not
-silently replaced with V4 Pro because the selected V4 Flash/P2 combination is
-a separately qualified component. Replacing the generator would require a new
-prospective qualification and comparison before it could support a component
-selection claim.
+The newest DeepSeek model is used for judging. The historical V4 Flash/P2
+selection is preserved, but its served fingerprint is unavailable. V4 Pro/P3
+was separately qualified on public synthetic development plus same-family
+semantic review and is bound prospectively to `anchor-002` only. It remains
+unselected and cannot support development or held-out until a separate
+selection decision is frozen after the authoring audit and anchor calibration.
 
 ## Operational bounds
 
@@ -55,7 +56,8 @@ selection claim.
 
 ## Ordered execution
 
-1. While the authoring audit is pending, execute the corrected 12-case anchor,
+1. While the authoring audit is pending, execute the corrected 12-case
+   `anchor-002` with the anchor-only V4 Pro/P3 candidate,
    run primary/swapped/sensitivity judges, and prepare its blinded human
    calibration packet. Without the completed reference, calibration remains
    ineligible and diagnostic.

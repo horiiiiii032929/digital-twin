@@ -31,7 +31,7 @@ but they do not override this page for current sequencing.
 | Boundary | Current decision | What is established | What is not established |
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
-| Generator and prompt | Go deeper on current V4 Pro/P3 candidate; historical V4 Flash selection preserved | V4 Pro/P3 completed the unchanged 48-case public-synthetic development run at one exact fingerprint with 48/48 deterministic all-check passes and every scenario 6/6; Qwen is rejected for citation clearance; deterministic fallback remains | Sensitivity-gated same-family semantic review, independent evidence, and any prospective profile replacement |
+| Generator and prompt | Go deeper with V4 Pro/P3 as anchor-only candidate; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic deterministic checks and a five-probe, 48/48 same-family DeepSeek semantic review at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, professor-fidelity anchor calibration, and any prospective profile replacement |
 | Professor fidelity | Go deeper to the frozen 41-case blinded human audit | Corrected v1.2.3 passes expanded deterministic checks; v6 completed all 456 committee records with DeepSeek V4 Pro plus two frozen local Qwen artifacts; the required audit union is 41 cases, below the 48-case cap; the GitHub purge dependency is satisfied | Independent-human approval, an immutable seal, corrected C0-C3 effects, safe grounding, semantic citation completeness, pedagogy, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
@@ -61,9 +61,10 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Run the frozen five-probe DeepSeek high-thinking semantic review, then all
-   48 P3 outputs only if the sensitivity gate passes. Treat it as same-family
-   triangulation, not independent proof; no generator held-out is authorized.
+1. Execute the new V4 Pro/P3 `anchor-002`, then run primary/swapped DeepSeek
+   judging, diagnostic local Qwen sensitivity, blinded packet preparation, and
+   prehuman calibration. Stop at the bounded human reference; no generator
+   held-out is authorized.
 2. A non-Codex human reviews the blinded 16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing

@@ -4,10 +4,9 @@ Result ID: `generator-qualification-v3-v4-pro-p3-development-001`
 
 Date: 2026-08-14
 
-Status: Deterministic development gates passed; calibrated semantic review
-pending
+Status: Deterministic development gates and same-family semantic review passed
 
-Decision: Go deeper to the frozen DeepSeek high-thinking semantic review. Do
+Decision: Go deeper with P3 as an anchor-only professor-fidelity candidate. Do
 not select P3 or open generator held-out.
 
 ## Run identity and boundary
@@ -48,8 +47,8 @@ Deterministic checks do not independently establish supported-claim precision,
 semantic citation completeness, or pedagogy. Local Qwen cannot clear those
 dimensions because its v2 reviewer failed the missing-citation stress probe.
 
-Run the frozen same-family DeepSeek high-thinking semantic review over five
-public defect probes and then all 48 outputs. This is useful triangulation but
-not an independent model family, human review, professor approval, or
-permission to open held-out. The separate 41-case authoring audit remains a
-hard gate for professor-fidelity sealing.
+The frozen same-family DeepSeek high-thinking semantic review passed five
+public defect probes and approved all 48 outputs. See
+[`generator-qualification-v3-v4-pro-p3-deepseek-review-001-results.md`](generator-qualification-v3-v4-pro-p3-deepseek-review-001-results.md).
+This remains non-independent evidence. The separate 41-case authoring audit is
+a hard gate for professor-fidelity sealing.

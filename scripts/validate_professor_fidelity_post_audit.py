@@ -18,21 +18,19 @@ from scripts.judge_professor_fidelity import (
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_PATH = ROOT / "package.json"
 PLAN_PATH = (
-    ROOT
-    / "research/04_experiments/"
-    "2026-08-14-professor-fidelity-post-audit-v3-plan.md"
+    ROOT / "research/04_experiments/2026-08-14-professor-fidelity-post-audit-v3-plan.md"
 )
 PURGE_RECORD_PATH = (
-    ROOT
-    / "research/00_admin/"
-    "2026-08-14-github-public-history-purge-closure.md"
+    ROOT / "research/00_admin/2026-08-14-github-public-history-purge-closure.md"
 )
 PRIVATE_REVIEW_ROOT = (
-    ROOT
-    / "reports/generated/"
-    "course-tutor-v1.2.3-hybrid-authoring-review"
+    ROOT / "reports/generated/course-tutor-v1.2.3-hybrid-authoring-review"
 )
 SEALED_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v2"
+ANCHOR_CANDIDATE_PATH = (
+    ROOT / "research/05_evaluation/profiles/"
+    "professor-fidelity-anchor-v4-p3-candidate.json"
+)
 
 
 def _require(condition: bool, message: str) -> None:
@@ -64,6 +62,7 @@ def validate() -> dict[str, Any]:
         "judge:professor-fidelity-anchor-swapped",
         "judge:professor-fidelity-anchor-qwen-sensitivity",
         "prepare:professor-fidelity-anchor-review",
+        "finalize:professor-fidelity-anchor-review",
         "calibrate:professor-fidelity-anchor-prehuman",
         "calibrate:professor-fidelity-anchor",
     }
@@ -74,18 +73,15 @@ def validate() -> dict[str, Any]:
         "an active professor-fidelity judge command still references Gemma",
     )
     _require(
-        "--model deepseek-v4-pro"
-        in scripts["judge:professor-fidelity-development"],
+        "--model deepseek-v4-pro" in scripts["judge:professor-fidelity-development"],
         "development primary judge is not DeepSeek V4 Pro",
     )
     _require(
-        "--model deepseek-v4-pro"
-        in scripts["judge:professor-fidelity-heldout"],
+        "--model deepseek-v4-pro" in scripts["judge:professor-fidelity-heldout"],
         "held-out primary judge is not DeepSeek V4 Pro",
     )
     _require(
-        "--confirm-heldout-once"
-        in scripts["benchmark:professor-fidelity-heldout"],
+        "--confirm-heldout-once" in scripts["benchmark:professor-fidelity-heldout"],
         "held-out execution lacks one-time confirmation",
     )
     _require(
@@ -93,9 +89,22 @@ def validate() -> dict[str, Any]:
         in scripts["judge:professor-fidelity-development-qwen-sensitivity"],
         "development sensitivity judge is not local Qwen",
     )
+    anchor_command_names = {
+        name for name in required_commands if "professor-fidelity-anchor" in name
+    }
+    anchor_commands = {name: scripts[name] for name in anchor_command_names}
+    _require(
+        all("anchor-002" in command for command in anchor_commands.values()),
+        "an active anchor command does not use anchor-002",
+    )
+    _require(
+        all("anchor-001" not in command for command in anchor_commands.values()),
+        "an active anchor command still references invalid anchor-001",
+    )
     _require(JUDGE_MODELS == (DEEPSEEK_MODEL, "qwen3:4b"), "judge model set drifted")
     _require(PLAN_PATH.is_file(), "post-audit v3 plan is missing")
     _require(PURGE_RECORD_PATH.is_file(), "GitHub purge closure record is missing")
+    _require(ANCHOR_CANDIDATE_PATH.is_file(), "anchor V4 Pro/P3 candidate is missing")
 
     private_artifacts = {
         name: (PRIVATE_REVIEW_ROOT / filename).is_file()
@@ -116,7 +125,14 @@ def validate() -> dict[str, Any]:
     }
     return {
         "status": "passed",
-        "execution_status": "blocked-by-independent-human-authoring-audit",
+        "execution_status": (
+            "anchor-ready-development-blocked-by-independent-human-authoring-audit"
+        ),
+        "active_anchor": {
+            "run_id": "professor-fidelity-v2-anchor-002",
+            "candidate_profile": "professor-fidelity-anchor-v4-p3-candidate",
+            "selection_status": "not-selected",
+        },
         "active_primary_judge": {
             "model": DEEPSEEK_MODEL,
             "documented_revision": DEEPSEEK_DOCUMENTED_REVISION,
