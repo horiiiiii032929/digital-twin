@@ -25,9 +25,12 @@ from scripts.execute_professor_fidelity import (
 from scripts.finalize_professor_fidelity_blinded_review import finalize_review
 from scripts.judge_professor_fidelity import (
     DEEPSEEK_EXPECTED_FINGERPRINT,
+    EMPTY_RESPONSE_DISPLAY,
+    JUDGE_CONTRACT_REVISION,
     JUDGE_MODELS,
     SAMPLE_SELECTION_SALT,
     JudgeTransport,
+    _judge_input,
     _selected,
     _judgment_schema,
     _model_digest,
@@ -400,6 +403,8 @@ def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
         task_id=task_id,
         mode="single",
         dimensions=dimensions,
+        response_a="The response is clear.",
+        response_b=None,
     )
     assert captured["model"] == "deepseek-v4-pro"
     assert captured["max_tokens"] == 8192
@@ -436,6 +441,8 @@ def test_active_anchor_commands_use_new_run_and_never_invalid_run():
     assert commands
     assert all("anchor-002" in command for command in commands.values())
     assert all("anchor-001" not in command for command in commands.values())
+    assert "--attempt-id 002" in commands["judge:professor-fidelity-anchor"]
+    assert "attempt-002.json" in commands["judge:professor-fidelity-anchor"]
 
 
 def test_professor_fidelity_judge_sensitivity_uses_one_shared_sample():
@@ -464,6 +471,10 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
     assert result["active_anchor"]["run_id"] == "professor-fidelity-v2-anchor-002"
     assert result["active_anchor"]["selection_status"] == "not-selected"
     assert result["active_primary_judge"]["model"] == "deepseek-v4-pro"
+    assert result["active_primary_judge"]["contract_revision"] == (
+        JUDGE_CONTRACT_REVISION
+    )
+    assert result["active_primary_judge"]["attempt_id"] == "002"
     assert result["active_gemma_calls"] == 0
     assert result["private_artifact_content_read"] is False
     assert result["heldout_content_read"] is False
@@ -493,9 +504,63 @@ def test_judge_contract_requires_per_dimension_pairwise_output():
     }
 
     assert schema["properties"]["pairwise_judgments"]["minItems"] == 2
-    _validate_judgment(value, task_id=task_id, mode="pairwise", dimensions=dimensions)
+    _validate_judgment(
+        value,
+        task_id=task_id,
+        mode="pairwise",
+        dimensions=dimensions,
+        response_a="This is clear and actionable.",
+        response_b="This is less clear and less actionable.",
+    )
     assert _pair_mapping(False) == {"A": "C1", "B": "C2"}
     assert _pair_mapping(True) == {"A": "C2", "B": "C1"}
+
+
+def test_judge_v4_displays_empty_responses_and_requires_exact_quotes():
+    case = _case("case-empty")
+    payload = _judge_input(
+        case,
+        task_id="judge-case-empty-single",
+        mode="single",
+        response_a="",
+        response_b=None,
+        presentation_order=None,
+    )
+    value = {
+        "schema_version": "1.0.0",
+        "instrument_id": "llm-judge-v1",
+        "task_id": "judge-case-empty-single",
+        "mode": "single",
+        "single_judgments": [
+            {
+                "dimension": "clarity_and_coherence",
+                "label": "fail",
+                "evidence_quote": EMPTY_RESPONSE_DISPLAY,
+                "reason": "The response is empty.",
+            }
+        ],
+        "pairwise_judgments": None,
+    }
+
+    assert payload["response_a"] == EMPTY_RESPONSE_DISPLAY
+    _validate_judgment(
+        value,
+        task_id="judge-case-empty-single",
+        mode="single",
+        dimensions=["clarity_and_coherence"],
+        response_a=payload["response_a"],
+        response_b=None,
+    )
+    value["single_judgments"][0]["evidence_quote"] = "not in the response"
+    with pytest.raises(ValueError, match="not exact"):
+        _validate_judgment(
+            value,
+            task_id="judge-case-empty-single",
+            mode="single",
+            dimensions=["clarity_and_coherence"],
+            response_a=payload["response_a"],
+            response_b=None,
+        )
 
 
 def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():

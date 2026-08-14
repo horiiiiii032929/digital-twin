@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import time
 import urllib.request
@@ -26,8 +27,13 @@ ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env", override=False)
 ANCHOR_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v1"
 PRIVATE_ROOT = ROOT / "data/processed/course_tutor_v1/sealed_v2"
-DEFAULT_RUN = ROOT / "experiments/runs/professor_fidelity_v2/development-001/result.json"
-DEFAULT_OUTPUT = ROOT / "experiments/runs/professor_fidelity_v2/development-001/judgments-deepseek-v4-pro.json"
+DEFAULT_RUN = (
+    ROOT / "experiments/runs/professor_fidelity_v2/development-001/result.json"
+)
+DEFAULT_OUTPUT = (
+    ROOT
+    / "experiments/runs/professor_fidelity_v2/development-001/judgments-deepseek-v4-pro.json"
+)
 PROMPT_PATH = ROOT / "research/05_evaluation/instruments/llm_judge_v1.prompt.md"
 LABELS = ("A", "B", "C", "D")
 VALID = {"pass", "partial", "fail"}
@@ -40,6 +46,8 @@ DEEPSEEK_MAX_OUTPUT_TOKENS = 8192
 DEEPSEEK_INPUT_PRICE_PER_MILLION_USD = 0.435
 DEEPSEEK_OUTPUT_PRICE_PER_MILLION_USD = 0.87
 DEEPSEEK_USER_ID = "digital-twin-professor-fidelity-judge-v3"
+JUDGE_CONTRACT_REVISION = "per-dimension-pairwise-v4-empty-response-display"
+EMPTY_RESPONSE_DISPLAY = "[EMPTY RESPONSE]"
 SAMPLE_SELECTION_SALT = "professor-fidelity-judge-v3-shared-sample"
 REPEAT_SELECTION_SALT = "professor-fidelity-judge-v3-repeat"
 DEEPSEEK_DEFAULT_CALL_LIMITS = {"anchor": 100, "development": 350, "heldout": 750}
@@ -66,6 +74,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--swap-order", action="store_true")
     parser.add_argument("--repeat-rate", type=float, default=0.2)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--attempt-id", default="001")
     arguments = parser.parse_args()
     if arguments.model == DEEPSEEK_MODEL and not arguments.allow_external_provider:
         parser.error("DeepSeek judging requires --allow-external-provider")
@@ -73,6 +82,8 @@ def parse_args() -> argparse.Namespace:
         parser.error("--call-limit must be positive")
     if arguments.cost_stop_usd is not None and arguments.cost_stop_usd <= 0:
         parser.error("--cost-stop-usd must be positive")
+    if not re.fullmatch(r"[0-9]{3}", arguments.attempt_id):
+        parser.error("--attempt-id must be exactly three digits")
     return arguments
 
 
@@ -99,9 +110,10 @@ def _selected(case_id: str, rate: float, salt: str) -> bool:
         return False
     if not 0 < rate <= 1:
         raise JudgeError("selection rate must be in [0, 1]")
-    bucket = int(
-        hashlib.sha256(f"{salt}:{case_id}".encode()).hexdigest()[:8], 16
-    ) / 0xFFFFFFFF
+    bucket = (
+        int(hashlib.sha256(f"{salt}:{case_id}".encode()).hexdigest()[:8], 16)
+        / 0xFFFFFFFF
+    )
     return bucket < rate
 
 
@@ -268,9 +280,7 @@ class JudgeTransport:
         completion_details = (
             getattr(usage, "completion_tokens_details", None) if usage else None
         )
-        reasoning_tokens = int(
-            getattr(completion_details, "reasoning_tokens", 0) or 0
-        )
+        reasoning_tokens = int(getattr(completion_details, "reasoning_tokens", 0) or 0)
         call_cost = _deepseek_upper_bound_cost(input_tokens, output_tokens)
         self.total_input_tokens += input_tokens
         self.total_output_tokens += output_tokens
@@ -295,10 +305,7 @@ class JudgeTransport:
                 },
             }
         )
-        if (
-            self.cost_stop_usd is not None
-            and self.total_cost_usd >= self.cost_stop_usd
-        ):
+        if self.cost_stop_usd is not None and self.total_cost_usd >= self.cost_stop_usd:
             raise JudgeError(
                 f"DeepSeek judge cost stop reached: USD {self.total_cost_usd:.6f}"
             )
@@ -306,14 +313,10 @@ class JudgeTransport:
 
     def summary(self) -> dict[str, Any]:
         return {
-            "endpoint_class": (
-                "external" if self.model == DEEPSEEK_MODEL else "local"
-            ),
+            "endpoint_class": ("external" if self.model == DEEPSEEK_MODEL else "local"),
             "provider_model": self.model,
             "documented_revision": (
-                DEEPSEEK_DOCUMENTED_REVISION
-                if self.model == DEEPSEEK_MODEL
-                else None
+                DEEPSEEK_DOCUMENTED_REVISION if self.model == DEEPSEEK_MODEL else None
             ),
             "provider_revision": self.model_digest,
             "call_limit": self.call_limit,
@@ -467,8 +470,10 @@ def _judge_input(
             "factual correctness, citations, permissions, or hard gates."
         ),
         "dimensions": _dimension_specs(case),
-        "response_a": response_a,
-        "response_b": response_b,
+        "response_a": _display_response(response_a),
+        "response_b": (
+            _display_response(response_b) if response_b is not None else None
+        ),
         "blinding": {
             "model_names_removed": True,
             "provider_names_removed": True,
@@ -489,6 +494,10 @@ def _judge_input(
     }
 
 
+def _display_response(response: str) -> str:
+    return response if response.strip() else EMPTY_RESPONSE_DISPLAY
+
+
 def _prompt(payload: dict[str, Any]) -> str:
     return (
         PROMPT_PATH.read_text(encoding="utf-8")
@@ -503,6 +512,8 @@ def _validate_judgment(
     task_id: str,
     mode: str,
     dimensions: list[str],
+    response_a: str,
+    response_b: str | None,
 ) -> None:
     if set(value) != {
         "schema_version",
@@ -518,9 +529,7 @@ def _validate_judgment(
     if value["task_id"] != task_id or value["mode"] != mode:
         raise JudgeError("judge task identity drifted")
     records = (
-        value["single_judgments"]
-        if mode == "single"
-        else value["pairwise_judgments"]
+        value["single_judgments"] if mode == "single" else value["pairwise_judgments"]
     )
     if not isinstance(records, list) or {
         item.get("dimension") for item in records
@@ -534,6 +543,8 @@ def _validate_judgment(
             for item in records
         ):
             raise JudgeError("single-response judgment is invalid")
+        if any(item["evidence_quote"] not in response_a for item in records):
+            raise JudgeError("single-response evidence quote is not exact")
     elif value["single_judgments"] is not None or any(
         item.get("preference") not in {"A", "B", "tie"}
         or not item.get("evidence_quote_a")
@@ -542,6 +553,12 @@ def _validate_judgment(
         for item in records
     ):
         raise JudgeError("pairwise judgment is invalid")
+    elif response_b is None or any(
+        item["evidence_quote_a"] not in response_a
+        or item["evidence_quote_b"] not in response_b
+        for item in records
+    ):
+        raise JudgeError("pairwise evidence quote is not exact")
 
 
 def _judge_case(
@@ -579,6 +596,8 @@ def _judge_case(
             task_id=task_id,
             mode="single",
             dimensions=dimensions,
+            response_a=payload["response_a"],
+            response_b=None,
         )
         responses.append({"label": label, "dimensions": value["single_judgments"]})
 
@@ -607,6 +626,8 @@ def _judge_case(
         task_id=pair_task_id,
         mode="pairwise",
         dimensions=dimensions,
+        response_a=pair_payload["response_a"],
+        response_b=pair_payload["response_b"],
     )
     normalized = []
     for item in pair["pairwise_judgments"]:
@@ -665,6 +686,11 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
     for row in run["results"]:
         rows_by_case.setdefault(row["case_id"], {})[row["condition"]] = row
     results = []
+    judge_run_id = (
+        f"{run['run_id']}-{arguments.model.replace(':', '-')}"
+        f"{'-swapped' if arguments.swap_order else ''}"
+        f"-{JUDGE_CONTRACT_REVISION}-attempt-{arguments.attempt_id}"
+    )
     selected_case_ids = [
         case_id
         for case_id in sorted(rows_by_case)
@@ -716,8 +742,11 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
             arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json"),
             {
                 "status": "running",
+                "judge_run_id": judge_run_id,
                 "source_run_id": run["run_id"],
                 "model": arguments.model,
+                "contract_revision": JUDGE_CONTRACT_REVISION,
+                "attempt_id": arguments.attempt_id,
                 "transport": transport.summary(),
                 "completed_cases": index,
                 "expected_cases": len(selected_case_ids),
@@ -729,14 +758,12 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
             flush=True,
         )
     return {
-        "judge_run_id": (
-            f"{run['run_id']}-{arguments.model.replace(':', '-')}"
-            f"{'-swapped' if arguments.swap_order else ''}-contract-v3"
-        ),
+        "judge_run_id": judge_run_id,
         "status": "complete",
         "source_run_id": run["run_id"],
         "instrument_id": "llm-judge-v1",
-        "contract_revision": "per-dimension-pairwise-v3",
+        "contract_revision": JUDGE_CONTRACT_REVISION,
+        "attempt_id": arguments.attempt_id,
         "model": arguments.model,
         "model_digest": transport.model_digest,
         "temperature": 0 if arguments.model != DEEPSEEK_MODEL else None,
@@ -744,13 +771,9 @@ def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
         "selection_seed": 5002,
         "sample_selection_salt": SAMPLE_SELECTION_SALT,
         "thinking": arguments.model == DEEPSEEK_MODEL,
-        "reasoning_effort": (
-            "high" if arguments.model == DEEPSEEK_MODEL else None
-        ),
+        "reasoning_effort": ("high" if arguments.model == DEEPSEEK_MODEL else None),
         "max_output_tokens_per_call": (
-            DEEPSEEK_MAX_OUTPUT_TOKENS
-            if arguments.model == DEEPSEEK_MODEL
-            else 1200
+            DEEPSEEK_MAX_OUTPUT_TOKENS if arguments.model == DEEPSEEK_MODEL else 1200
         ),
         "calls_per_nonrepeat_case": 5,
         "sample_rate": arguments.sample_rate,
@@ -782,8 +805,11 @@ def subprocess_run(command: list[str]) -> str:
 
 def main() -> None:
     arguments = parse_args()
-    if arguments.output.exists():
-        raise JudgeError(f"refusing to overwrite judge result: {arguments.output}")
+    checkpoint = arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json")
+    if arguments.output.exists() or checkpoint.exists():
+        raise JudgeError(
+            f"refusing to overwrite judge result or checkpoint: {arguments.output}"
+        )
     result = run_judging(arguments)
     write_json_exclusive(arguments.output, result)
     print(

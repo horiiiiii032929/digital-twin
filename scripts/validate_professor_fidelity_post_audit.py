@@ -11,6 +11,7 @@ from scripts.judge_professor_fidelity import (
     DEEPSEEK_DOCUMENTED_REVISION,
     DEEPSEEK_EXPECTED_FINGERPRINT,
     DEEPSEEK_MODEL,
+    JUDGE_CONTRACT_REVISION,
     JUDGE_MODELS,
 )
 
@@ -48,6 +49,7 @@ def validate() -> dict[str, Any]:
     }
     required_commands = {
         "seal:course-tutor-splits",
+        "qualify:professor-fidelity-judge-v4",
         "benchmark:professor-fidelity-anchor",
         "benchmark:professor-fidelity-development",
         "benchmark:professor-fidelity-heldout",
@@ -101,6 +103,12 @@ def validate() -> dict[str, Any]:
         all("anchor-001" not in command for command in anchor_commands.values()),
         "an active anchor command still references invalid anchor-001",
     )
+    primary_anchor_command = scripts["judge:professor-fidelity-anchor"]
+    _require(
+        "--attempt-id 002" in primary_anchor_command
+        and "judgments-deepseek-v4-pro-attempt-002.json" in primary_anchor_command,
+        "active primary anchor judge is not isolated as attempt 002",
+    )
     _require(JUDGE_MODELS == (DEEPSEEK_MODEL, "qwen3:4b"), "judge model set drifted")
     _require(PLAN_PATH.is_file(), "post-audit v3 plan is missing")
     _require(PURGE_RECORD_PATH.is_file(), "GitHub purge closure record is missing")
@@ -139,6 +147,8 @@ def validate() -> dict[str, Any]:
             "expected_fingerprint": DEEPSEEK_EXPECTED_FINGERPRINT,
             "thinking": True,
             "reasoning_effort": "high",
+            "contract_revision": JUDGE_CONTRACT_REVISION,
+            "attempt_id": "002",
         },
         "active_sensitivity_judge": "qwen3:4b",
         "active_gemma_calls": 0,

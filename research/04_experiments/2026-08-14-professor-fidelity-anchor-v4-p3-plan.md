@@ -39,7 +39,10 @@ review.
 ## Ordered anchor work
 
 1. Execute 12 cases × C0-C3 once as `anchor-002`.
-2. Run all-case DeepSeek V4 Pro high-thinking judgments.
+2. Run all-case DeepSeek V4 Pro high-thinking judgments. Primary attempt 001
+   stopped invalid after 5/12 checkpointed cases and must not be rerun. Follow
+   the separately frozen judge-v4 recovery plan and public probe before primary
+   attempt 002.
 3. Run the swapped-order DeepSeek judgments.
 4. Run local Qwen sensitivity judgments and treat them as diagnostic because
    Qwen failed the generator citation-completeness stress gate.
