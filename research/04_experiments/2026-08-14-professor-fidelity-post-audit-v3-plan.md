@@ -61,6 +61,7 @@ selection decision is frozen after the authoring audit and anchor calibration.
    run primary/swapped/sensitivity judges, and prepare its blinded human
    calibration packet. Without the completed reference, calibration remains
    ineligible and diagnostic.
+
 2. Complete the 41-case blinded independent-human authoring audit.
 3. Validate the exact frozen ensemble/audit pair and create the immutable v2
    development/held-out seal plus unopened held-out ledger.
@@ -74,6 +75,15 @@ selection decision is frozen after the authoring audit and anchor calibration.
 7. Analyze and register the development result. Open held-out once only if all
    frozen development, calibration, privacy, cost, completion, citation,
    pedagogy, and operational gates pass.
+
+## Anchor outcome update
+
+The anchor completed 48/48 generation responses. The primary contract-v4 judge
+completed but failed repeat consistency at 68.75%; swapped DeepSeek and local
+Qwen stopped invalid after 5/12 and 2/12 cases respectively. The blinded
+48-response packet is prepared and unfilled. Automated calibration is
+ineligible, so both human reviews may be deferred while evaluator redesign is
+decided; development and held-out remain closed.
 
 ## Commands prepared in advance
 

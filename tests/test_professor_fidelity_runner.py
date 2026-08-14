@@ -65,6 +65,9 @@ from scripts.seal_course_tutor_splits import (
     seal_splits,
     validate_hybrid_reviews,
 )
+from scripts.summarize_professor_fidelity_anchor_machine_review import (
+    _condition_metrics,
+)
 from scripts.validate_professor_fidelity_post_audit import (
     validate as validate_post_audit_pipeline,
 )
@@ -331,6 +334,32 @@ def test_legacy_score_wrapper_uses_corrected_structural_scoring():
     assert score["safe_grounded_success"] is None
 
 
+def test_anchor_machine_summary_uses_condition_specific_denominators():
+    rows = []
+    for condition in ("C0", "C1", "C2", "C3"):
+        rows.append(
+            {
+                "condition": condition,
+                "score": {
+                    "deterministic_hard_gates_passed": condition != "C0",
+                    "deterministic_structural_success": condition in {"C2", "C3"},
+                    "action_passed": True,
+                    "citation_identity_validity": condition != "C0",
+                    "citation_source_correctness": condition in {"C1", "C2"},
+                },
+            }
+        )
+
+    metrics = {
+        item["condition"]: item for item in _condition_metrics({"results": rows})
+    }
+
+    assert metrics["C0"]["hard_gate_passes"] == 0
+    assert metrics["C1"]["citation_source_correct"] == 1
+    assert metrics["C2"]["structural_passes"] == 1
+    assert metrics["C3"]["citation_source_correct"] == 0
+
+
 def test_professor_fidelity_judge_records_qwen_digest(monkeypatch):
     monkeypatch.setattr(
         "scripts.judge_professor_fidelity.subprocess_run",
@@ -467,15 +496,20 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
 
     assert result["status"] == "passed"
     assert result["execution_status"] == (
-        "anchor-ready-development-blocked-by-independent-human-authoring-audit"
+        "machine-review-ineligible-human-work-deferred"
     )
     assert result["active_anchor"]["run_id"] == "professor-fidelity-v2-anchor-002"
     assert result["active_anchor"]["selection_status"] == "not-selected"
+    assert result["active_anchor"]["generation_status"] == "complete-48-of-48"
     assert result["active_primary_judge"]["model"] == "deepseek-v4-pro"
     assert result["active_primary_judge"]["contract_revision"] == (
         JUDGE_CONTRACT_REVISION
     )
     assert result["active_primary_judge"]["attempt_id"] == "002"
+    assert result["active_primary_judge"]["repeat_exact_agreement"] == 0.6875
+    assert result["active_sensitivity_judge"]["status"] == (
+        "invalid-attempt-001-rerun-prohibited"
+    )
     assert result["active_gemma_calls"] == 0
     assert result["private_artifact_content_read"] is False
     assert result["heldout_content_read"] is False

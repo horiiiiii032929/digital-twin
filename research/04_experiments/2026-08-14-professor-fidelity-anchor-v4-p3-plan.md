@@ -51,6 +51,17 @@ review.
 6. Stop for the bounded human reference. Do not fill it with Codex/model
    judgments and do not proceed to professor-fidelity development.
 
+## Outcome update
+
+Anchor generation completed 48/48. Primary DeepSeek attempt 002 completed but
+failed the 90% repeat-consistency gate at 68.75% and produced one all-pass
+pedagogy judgment on a deterministic hard-gate failure. Swapped DeepSeek
+attempt 001 stopped invalid after 5/12 cases; local-Qwen attempt 001 stopped
+invalid after 2/12. Both are rerun-prohibited. The blinded 48-response packet
+was prepared with zero labels filled. Automated calibration is ineligible, so
+the human reference and separate authoring audit may be deferred but cannot be
+treated as passed.
+
 Any generator model/fingerprint drift, missing cost, incomplete attempt,
 private-boundary mismatch, judge sensitivity failure, or unresolved reference
 keeps the anchor diagnostic and blocks calibration claims.

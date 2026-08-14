@@ -31,8 +31,8 @@ but they do not override this page for current sequencing.
 | Boundary | Current decision | What is established | What is not established |
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
-| Generator and prompt | Go deeper with V4 Pro/P3 as anchor-only candidate; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic deterministic checks and a five-probe, 48/48 same-family DeepSeek semantic review at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, professor-fidelity anchor calibration, and any prospective profile replacement |
-| Professor fidelity | Go deeper to the frozen 41-case blinded human audit | Corrected v1.2.3 passes expanded deterministic checks; v6 completed all 456 committee records with DeepSeek V4 Pro plus two frozen local Qwen artifacts; the required audit union is 41 cases, below the 48-case cap; the GitHub purge dependency is satisfied | Independent-human approval, an immutable seal, corrected C0-C3 effects, safe grounding, semantic citation completeness, pedagogy, or professor approval |
+| Generator and prompt | Refine after anchor-only V4 Pro/P3; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic checks and same-family review, then completed the 48-response anchor at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, calibrated professor-fidelity scoring, or any prospective profile replacement |
+| Professor fidelity | Refine the evaluator; defer human work without treating it as passed | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but failed 90% repeat consistency, swapped DeepSeek and local Qwen stopped invalid, and an unfilled blinded 48-response packet is ready; the separate 41-case authoring packet also remains ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -61,12 +61,12 @@ diagnostic metrics into selection evidence.
 
 ## Next decision sequence
 
-1. Preserve completed V4 Pro/P3 `anchor-002` generation and the invalid primary
-   judge attempt 001. The public empty-response judge-v4 probe passed; run
-   separately identified primary attempt 002, swapped DeepSeek, diagnostic
-   local Qwen, blinded packet preparation, and prehuman calibration. Stop at
-   the bounded human reference; no generator held-out is authorized.
-2. A non-Codex human reviews the blinded 16-case sample, all 19
+1. Freeze and register the aggregate anchor-002 machine-review summary. Do not
+   rerun primary attempt 001, swapped attempt 001, or Qwen attempt 001. Do not
+   use partial agreement as calibration evidence.
+2. Defer both human packets until deciding whether to redesign the automated
+   pedagogy evaluator. When resumed, a non-Codex human reviews the blinded
+   16-case sample, all 19
    no-evidence cases, and every disagreement, revise, invalid, or missing model
    result: 41 cases total. Do not inspect the ensemble verdicts while completing
    that packet. The completed model boundary is recorded in the
@@ -86,13 +86,12 @@ diagnostic metrics into selection evidence.
 7. Register the development decision. Open the one-time held-out split only if
    every prospective development gate permits it.
 
-The immediate unavoidable user action is the bounded blinded human packet in
-step 2. Codex must not complete it because the frozen instrument requires an
-independent reviewer who has not inspected model decisions. After that review,
-Codex can validate and continue the sequence. A later bounded anchor-output
-reference may also be required to qualify automated pedagogy scoring. Drafts
-001-005 and unfavorable or invalid attempts remain preserved. No full-152
-human-approval or professor-validation claim is allowed.
+There is no immediate human action while evaluator redesign is undecided. Both
+bounded blinded packets may be deferred, but neither is passed or waived.
+Codex must not complete them because the frozen instruments require an
+independent reviewer who has not inspected model decisions. Drafts 001-005 and
+all unfavorable or invalid attempts remain preserved. No full-152 human
+approval or professor-validation claim is allowed.
 
 ## Source-of-truth order
 

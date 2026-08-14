@@ -67,6 +67,7 @@ def validate() -> dict[str, Any]:
         "finalize:professor-fidelity-anchor-review",
         "calibrate:professor-fidelity-anchor-prehuman",
         "calibrate:professor-fidelity-anchor",
+        "summarize:professor-fidelity-anchor-machine",
     }
     _require(required_commands.issubset(scripts), "post-audit commands are incomplete")
     _require(judge_commands, "professor-fidelity judge commands are absent")
@@ -133,13 +134,12 @@ def validate() -> dict[str, Any]:
     }
     return {
         "status": "passed",
-        "execution_status": (
-            "anchor-ready-development-blocked-by-independent-human-authoring-audit"
-        ),
+        "execution_status": "machine-review-ineligible-human-work-deferred",
         "active_anchor": {
             "run_id": "professor-fidelity-v2-anchor-002",
             "candidate_profile": "professor-fidelity-anchor-v4-p3-candidate",
             "selection_status": "not-selected",
+            "generation_status": "complete-48-of-48",
         },
         "active_primary_judge": {
             "model": DEEPSEEK_MODEL,
@@ -149,8 +149,13 @@ def validate() -> dict[str, Any]:
             "reasoning_effort": "high",
             "contract_revision": JUDGE_CONTRACT_REVISION,
             "attempt_id": "002",
+            "result_status": "complete-calibration-ineligible",
+            "repeat_exact_agreement": 0.6875,
         },
-        "active_sensitivity_judge": "qwen3:4b",
+        "active_sensitivity_judge": {
+            "model": "qwen3:4b",
+            "status": "invalid-attempt-001-rerun-prohibited",
+        },
         "active_gemma_calls": 0,
         "private_artifact_content_read": False,
         "heldout_content_read": False,
@@ -158,8 +163,9 @@ def validate() -> dict[str, Any]:
         "private_artifact_presence": private_artifacts,
         "sealed_artifact_presence": sealed_artifacts,
         "ordered_gates": [
-            "prepare 12-case anchor judge calibration while audit is pending",
-            "complete blinded 41-case independent-human authoring audit",
+            "freeze and register aggregate anchor-002 machine-review summary",
+            "decide whether to redesign the automated pedagogy evaluator",
+            "complete bounded human packets only when the work resumes",
             "validate audit and create immutable seal plus unopened ledger",
             "execute development C0-C3",
             "run DeepSeek/Qwen blinded judging and calibration",
