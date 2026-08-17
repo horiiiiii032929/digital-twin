@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "run_id": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+  "component": "tutor-policy",
+  "dataset_id": "course-tutor-v1.0.2-anchor",
+  "corpus_id": "it5002-lectures-v1",
+  "code_revision": "dbd7a71c4fd7da48773f68bd3358faab099ef4cc",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "anchor-machine-review-original-interpretation",
+        "version": "professor-fidelity-anchor-summary-001",
+        "configuration": {
+          "source_run_id": "professor-fidelity-v2-anchor-002",
+          "pedagogy_hard_gate_disagreement": "incorrectly-treated-as-calibration-failure",
+          "pairwise_repeat_source": "literal-11-of-12",
+          "citation_denominator": "all-12-responses"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "anchor-primary-repeat-exact-agreement",
+          "value": 0.6875,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": false
+        },
+        {
+          "name": "anchor-pairwise-repeat-exact-agreement",
+          "value": 0.9166666666666666,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "c3-citation-source-correctness-applicable",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-swapped-position-sensitivity",
+          "passed": false,
+          "evidence": "The swapped run stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-cross-family-sensitivity",
+          "passed": false,
+          "evidence": "The Qwen run stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "blinded-human-reference",
+          "passed": false,
+          "evidence": "The 48-response reference contains zero completed judgments."
+        },
+        {
+          "name": "separate-pedagogy-from-hidden-hard-gates",
+          "passed": false,
+          "evidence": "The original interpretation graded a pedagogy-only judge on hidden citation evidence."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out tutor execution occurred."
+        }
+      ],
+      "failures_by_category": {
+        "evaluation-interpretation": 1,
+        "repeat-reliability": 1,
+        "sensitivity-completion": 2,
+        "human-reference": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "anchor-machine-review-corrected-interpretation",
+        "version": "professor-fidelity-anchor-summary-correction-001",
+        "configuration": {
+          "source_run_id": "professor-fidelity-v2-anchor-002",
+          "pedagogy_hard_gate_disagreement": "cross-layer-diagnostic-only",
+          "pairwise_repeat_source": "computed-from-source-labels",
+          "citation_denominator": "eight-claim-applicable-cases"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "anchor-primary-repeat-exact-agreement",
+          "value": 0.6875,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": false
+        },
+        {
+          "name": "anchor-pairwise-repeat-exact-agreement",
+          "value": 0.9166666666666666,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "c3-citation-source-correctness-applicable",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-swapped-position-sensitivity",
+          "passed": false,
+          "evidence": "The swapped run stopped invalid after 5/12 cases."
+        },
+        {
+          "name": "complete-cross-family-sensitivity",
+          "passed": false,
+          "evidence": "The Qwen run stopped invalid after 2/12 cases."
+        },
+        {
+          "name": "blinded-human-reference",
+          "passed": false,
+          "evidence": "The 48-response reference contains zero completed judgments."
+        },
+        {
+          "name": "separate-pedagogy-from-hidden-hard-gates",
+          "passed": true,
+          "evidence": "The corrected analyzer reports the disagreement diagnostically and excludes it from calibration eligibility."
+        },
+        {
+          "name": "heldout-isolation",
+          "passed": true,
+          "evidence": "No development or held-out tutor execution occurred."
+        }
+      ],
+      "failures_by_category": {
+        "repeat-reliability": 1,
+        "sensitivity-completion": 2,
+        "human-reference": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "Adopt the corrected interpretation and safeguards, but keep automated pedagogy ineligible. Repeat agreement remains below 90%, swapped and cross-family sensitivity runs remain invalid, and no blinded human reference exists. The correction does not select a condition or open development or held-out execution.",
+    "limitations": [
+      "The correction reanalyzes preserved aggregate artifacts and makes no model call.",
+      "The 48 repeat labels are clustered within two repeated cases and eight responses.",
+      "The original attempt-002 artifact predates per-input SHA-256 persistence.",
+      "Citation source correctness does not establish semantic entailment or completeness.",
+      "The human reference is deferred and contains zero completed judgments.",
+      "Development and held-out remain unopened."
+    ]
+  }
+}

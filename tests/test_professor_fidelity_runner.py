@@ -544,6 +544,16 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
     assert result["active_anchor"]["selection_status"] == "not-selected"
     assert result["active_anchor"]["generation_status"] == "complete-48-of-48"
     assert result["active_primary_judge"]["model"] == "deepseek-v4-pro"
+    assert result["analysis_correction"] == {
+        "run_id": (
+            "professor-fidelity-v2-anchor-002-machine-review-summary-001-"
+            "analysis-correction-001"
+        ),
+        "code_revision": "dbd7a71c4fd7da48773f68bd3358faab099ef4cc",
+        "decision": "refine",
+        "interpretation_status": "corrected",
+        "cross_layer_disagreement": "diagnostic-not-calibration-gate",
+    }
     assert result["active_primary_judge"]["contract_revision"] == (
         JUDGE_CONTRACT_REVISION
     )

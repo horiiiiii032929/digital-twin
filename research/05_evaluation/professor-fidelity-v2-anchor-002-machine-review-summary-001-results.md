@@ -1,5 +1,12 @@
 # Professor-fidelity v2 anchor 002 machine-review summary 001 results
 
+> Correction (2026-08-17): the hidden hard-gate disagreement below is a
+> cross-layer diagnostic, not a pedagogy-calibration gate, because the judge
+> could not see citation or deterministic hard-gate evidence. Current
+> interpretation and corrected denominators are recorded in
+> [analysis correction 001](professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001-results.md).
+> This historical result remains unchanged as evidence of the original analysis.
+
 Result ID: `professor-fidelity-v2-anchor-002-machine-review-summary-001`
 
 Date: 2026-08-14

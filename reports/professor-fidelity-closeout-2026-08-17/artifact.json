@@ -5,7 +5,7 @@
     "surface": "report",
     "title": "Professor Fidelity Evaluation Closeout",
     "description": "Technical closeout of the paused professor-fidelity and tutoring-policy evaluation.",
-    "generatedAt": "2026-08-17T03:01:14Z",
+    "generatedAt": "2026-08-17T08:19:05Z",
     "cards": [
       {
         "id": "anchor_completion",
@@ -44,19 +44,19 @@
         ]
       },
       {
-        "id": "false_passes",
-        "description": "All-pass pedagogy portfolios on deterministic hard-gate failures.",
+        "id": "repeat_scope",
+        "description": "The repeat estimate covers two cases, eight responses, and 48 dimension labels.",
         "dataset": "headline",
         "sourceId": "headline_snapshot_sql",
         "metrics": [
           {
-            "label": "False pedagogy passes",
-            "field": "false_passes",
+            "label": "Repeated cases",
+            "field": "repeat_cases",
             "format": "number"
           },
           {
-            "label": "Allowed",
-            "field": "false_passes_target",
+            "label": "Repeated responses",
+            "field": "repeat_responses",
             "format": "number"
           }
         ]
@@ -138,7 +138,7 @@
       {
         "id": "gate_outcomes",
         "title": "Machine-review gate outcomes",
-        "subtitle": "Frozen anchor-002 review; exact observed values and prospective gates.",
+        "subtitle": "Corrected anchor-002 review; exact gates plus one labeled cross-layer diagnostic.",
         "dataset": "gates",
         "sourceId": "gate_snapshot_sql",
         "defaultSort": {
@@ -153,7 +153,7 @@
           },
           {
             "field": "gate",
-            "label": "Gate",
+            "label": "Gate / diagnostic",
             "type": "text"
           },
           {
@@ -220,8 +220,8 @@
             "format": "percent"
           },
           {
-            "field": "citation_source_rate",
-            "label": "Citation source",
+            "field": "citation_source_applicable_rate",
+            "label": "Citation source (applicable)",
             "format": "percent"
           }
         ]
@@ -230,8 +230,8 @@
     "sources": [
       {
         "id": "machine_review_summary",
-        "label": "Professor-fidelity anchor-002 machine-review summary",
-        "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-results.md"
+        "label": "Corrected professor-fidelity anchor-002 machine-review summary",
+        "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001-results.md"
       },
       {
         "id": "anchor_generation_result",
@@ -279,7 +279,7 @@
         "id": "technical_summary",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## The evaluation should be paused and reported as Refine\n\nThe anchor run completed, but the automated pedagogy evaluator did not meet its prospective reliability and safety gates. Exact repeat agreement was **68.75%** against a **90%** requirement, swapped-order and cross-family diagnostics stopped invalid, and one answer that failed a deterministic hard gate received an all-pass pedagogy portfolio. No C0-C3 condition, P3 prompt, professor-fidelity effect, or automated pedagogy score is eligible for selection.\n\nThe defensible decision is to preserve the result, keep held-out closed, and defer both independent-human packets without calling them passed or waived."
+        "body": "## The evaluation should remain paused and reported as Refine\n\nThe anchor run completed, but the automated pedagogy evaluator did not meet its prospective reliability gates. Exact repeat agreement was **68.75%** against a **90%** requirement, and both the swapped-order and cross-family sensitivity runs stopped invalid. A prior closeout also treated one pedagogy-versus-hard-gate disagreement as an evaluator failure; that interpretation is corrected because the pedagogy judge was intentionally blinded to citations and deterministic gates. No C0-C3 condition, P3 prompt, professor-fidelity effect, or automated pedagogy score is eligible for selection.\n\nThe correction does not change the decision: preserve the result, keep held-out closed, and defer both independent-human packets without calling them passed or waived."
       },
       {
         "id": "headline_metrics",
@@ -287,7 +287,7 @@
         "cardIds": [
           "anchor_completion",
           "repeat_consistency",
-          "false_passes",
+          "repeat_scope",
           "human_reference"
         ]
       },
@@ -295,7 +295,7 @@
         "id": "gate_definition",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## Independent machine gates block selection\n\nA gate passes only when the complete frozen run meets its prespecified threshold. Partial swapped or Qwen outputs are diagnostic traces, not calibration estimates. The narrow pairwise-repeat pass does not override failed single-label repeat consistency, invalid sensitivity runs, or the false-pass gate."
+        "body": "## Independent reliability gates still block selection\n\nA gate passes only when the complete frozen run meets its prespecified threshold. Partial swapped or Qwen outputs are diagnostic traces, not calibration estimates. The narrow pairwise-repeat pass does not override failed single-label repeat consistency, invalid sensitivity runs, or the absent blinded human reference. The pedagogy-versus-hard-gate disagreement is shown only as a cross-layer diagnostic."
       },
       {
         "id": "gate_table",
@@ -306,7 +306,7 @@
         "id": "condition_interpretation",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## C2 leads only on one deterministic diagnostic\n\nC1 and C2 each passed deterministic hard gates on **10 of 12** cases. C2 added one action pass but did not improve structural success. The deployable retrieval condition C3 was weaker, passing hard gates on **6 of 12** cases and source correctness on **7 of 12**. These measures do not establish semantic citation completeness or professor fidelity, so the apparent ordering cannot select a condition."
+        "body": "## C2 leads only on one deterministic diagnostic\n\nC1 and C2 each passed deterministic hard gates on **10 of 12** cases. C2 added one action pass but did not improve structural success. The deployable retrieval condition C3 was weaker, passing hard gates on **6 of 12** cases. Among the **eight citation-applicable cases**, citation source correctness was **4/8** for C3 versus **8/8** for C1 and C2. These measures do not establish semantic citation completeness or professor fidelity, so the apparent ordering cannot select a condition."
       },
       {
         "id": "condition_chart",
@@ -322,19 +322,19 @@
         "id": "scope_definitions",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## Scope and metric definitions\n\nThe population is a separately sealed **12-case anchor**, evaluated under four conditions for **48 generated responses**. Completion measures requested responses returned at the exact frozen provider fingerprint. Repeat consistency is exact agreement across 48 repeated single-dimension labels. Pairwise consistency compares the C1-versus-C2 preference for each case. A false pedagogy pass occurs when every pedagogy label passes although the deterministic response contract fails.\n\nThe anchor is diagnostic. It is not the corrected development split, the one-time held-out split, a student-outcome study, or a professor approval exercise."
+        "body": "## Scope and metric definitions\n\nThe population is a separately sealed **12-case anchor**, evaluated under four conditions for **48 generated responses**. Completion measures requested responses returned at the exact frozen provider fingerprint. Repeat consistency is **33 matching labels out of 48 dimension labels**, drawn from **two repeated cases and eight repeated condition responses**; the 48 labels are not 48 independent repeated responses. Pairwise consistency is **11/12 dimension preferences** from those same two repeated cases. Citation source correctness is reported over the **eight claim-applicable cases per condition**, while deterministic hard gates remain unconditional over all 12.\n\nThe anchor is diagnostic. It is not the corrected development split, the one-time held-out split, a student-outcome study, or a professor approval exercise."
       },
       {
         "id": "methodology",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## Validation design and evidence boundary\n\nDeepSeek V4 Pro generated all 48 responses at one recorded fingerprint. A high-thinking DeepSeek V4 Pro judge completed 12 base cases plus two frozen repeats. A swapped-order DeepSeek run and local-Qwen family-sensitivity run were required to detect ordering and model-family effects, but both stopped invalid and were preserved without rerun. A blinded 48-response human-reference packet was frozen with zero labels filled.\n\nExact tables are used instead of charts because the evidence consists of a small 12-case diagnostic and categorical hard-gate outcomes. Plotting those values would imply more precision than the design supports and would make the blocking logic less auditable."
+        "body": "## Validation design and evidence boundary\n\nDeepSeek V4 Pro generated all 48 responses at one recorded fingerprint. A high-thinking DeepSeek V4 Pro judge completed 12 base cases plus two frozen case-level repeats. A swapped-order DeepSeek run and local-Qwen family-sensitivity run were required to detect ordering and model-family effects, but both stopped invalid and were preserved without rerun. A blinded 48-response human-reference packet was frozen with zero response judgments completed.\n\nThe repair now binds future calibrated judgments to the exact source run, model, digest, and contract; stores a SHA-256 for every future canonical judge input; requires every authored human-review dimension; and computes repeat metrics from source labels. These safeguards do not retroactively add input digests to the preserved attempt-002 artifact."
       },
       {
         "id": "limitations",
         "type": "markdown",
         "sourceId": "machine_review_summary",
-        "body": "## What the result does not establish\n\nThe generator and primary judge share a model family. Invalid partial swapped and Qwen results cannot estimate calibration. The human reference is absent. Semantic citation completeness, professor approval, learning outcomes, corrected development effects, and held-out performance remain unresolved. The historical selected experimental profile therefore remains unchanged."
+        "body": "## What the result does not establish\n\nThe generator and primary judge share a model family. Invalid partial swapped and Qwen results cannot estimate calibration. The human reference is absent. The repeat estimate is clustered within two cases and is not a broad independent reliability sample. Semantic citation completeness, professor approval, learning outcomes, corrected development effects, and held-out performance remain unresolved. The historical selected experimental profile therefore remains unchanged."
       },
       {
         "id": "recommendation",
@@ -350,7 +350,7 @@
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-17T03:01:14Z",
+    "generatedAt": "2026-08-17T08:19:05Z",
     "status": "ready",
     "datasets": {
       "headline": [
@@ -359,8 +359,8 @@
           "anchor_completion_target": 1.0,
           "repeat_consistency": 0.6875,
           "repeat_consistency_target": 0.9,
-          "false_passes": 1,
-          "false_passes_target": 0,
+          "repeat_cases": 2,
+          "repeat_responses": 8,
           "human_reference_completion": 0.0,
           "human_reference_target": 1.0
         }
@@ -424,17 +424,17 @@
         },
         {
           "priority": 8,
-          "gate": "Zero false pedagogy passes",
-          "result": "Fail",
-          "observed": "1 false pass",
-          "threshold": "0",
-          "interpretation": "The evaluator can approve a deterministic contract failure."
+          "gate": "Cross-layer disagreement",
+          "result": "Diagnostic; not a gate",
+          "observed": "1 pedagogy all-pass portfolio with a hidden citation-source failure",
+          "threshold": "Not applicable",
+          "interpretation": "The pedagogy judge could not see citations or hard gates, so this does not measure evaluator calibration."
         },
         {
           "priority": 9,
           "gate": "Blinded human reference",
           "result": "Pending",
-          "observed": "0/48 labels",
+          "observed": "0/48 response judgments",
           "threshold": "Complete independent reference",
           "interpretation": "Deferred; not passed or waived."
         },
@@ -455,7 +455,9 @@
           "structural_rate": 0.08333333333333333,
           "action_rate": 0.75,
           "citation_id_rate": 0.3333333333333333,
-          "citation_source_rate": 0.3333333333333333
+          "citation_source_compliance_rate": 0.3333333333333333,
+          "citation_source_applicable_rate": 0.0,
+          "citation_source_applicable_n": 8
         },
         {
           "condition": "C1",
@@ -464,7 +466,9 @@
           "structural_rate": 0.75,
           "action_rate": 0.75,
           "citation_id_rate": 1.0,
-          "citation_source_rate": 1.0
+          "citation_source_compliance_rate": 1.0,
+          "citation_source_applicable_rate": 1.0,
+          "citation_source_applicable_n": 8
         },
         {
           "condition": "C2",
@@ -473,7 +477,9 @@
           "structural_rate": 0.75,
           "action_rate": 0.8333333333333334,
           "citation_id_rate": 1.0,
-          "citation_source_rate": 1.0
+          "citation_source_compliance_rate": 1.0,
+          "citation_source_applicable_rate": 1.0,
+          "citation_source_applicable_n": 8
         },
         {
           "condition": "C3",
@@ -482,7 +488,9 @@
           "structural_rate": 0.4166666666666667,
           "action_rate": 0.75,
           "citation_id_rate": 0.9166666666666666,
-          "citation_source_rate": 0.5833333333333334
+          "citation_source_compliance_rate": 0.5833333333333334,
+          "citation_source_applicable_rate": 0.5,
+          "citation_source_applicable_n": 8
         }
       ],
       "condition_chart": [
@@ -548,8 +556,8 @@
   "sources": [
     {
       "id": "machine_review_summary",
-      "label": "Professor-fidelity anchor-002 machine-review summary",
-      "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-results.md"
+      "label": "Corrected professor-fidelity anchor-002 machine-review summary",
+      "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001-results.md"
     },
     {
       "id": "anchor_generation_result",

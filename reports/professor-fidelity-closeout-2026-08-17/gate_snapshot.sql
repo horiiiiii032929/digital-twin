@@ -1,4 +1,4 @@
--- Frozen from professor-fidelity-v2-anchor-002-machine-review-summary-001.
+-- Corrected by professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001.
 -- The priority column preserves the prospective gate reading order.
 SELECT *
 FROM (
@@ -10,8 +10,8 @@ FROM (
         (5, 'Swapped run completion', 'Fail', '5/12 cases; invalid', '12/12 cases', 'Position sensitivity remains unresolved.'),
         (6, 'Qwen sensitivity completion', 'Fail', '2/12 cases; invalid', '12/12 cases', 'Cross-family sensitivity remains unresolved.'),
         (7, 'Position consistency', 'Unresolved / Fail', 'Invalid partial: 24/29 (82.76%)', 'At least 90% on a complete run', 'Partial agreement cannot be calibration evidence.'),
-        (8, 'Zero false pedagogy passes', 'Fail', '1 false pass', '0', 'The evaluator can approve a deterministic contract failure.'),
-        (9, 'Blinded human reference', 'Pending', '0/48 labels', 'Complete independent reference', 'Deferred; not passed or waived.'),
+        (8, 'Cross-layer disagreement', 'Diagnostic; not a gate', '1 pedagogy all-pass portfolio with a hidden citation-source failure', 'Not applicable', 'The pedagogy judge could not see citations or hard gates, so this does not measure evaluator calibration.'),
+        (9, 'Blinded human reference', 'Pending', '0/48 response judgments', 'Complete independent reference', 'Deferred; not passed or waived.'),
         (10, 'Held-out isolation', 'Pass', '0 development or held-out accesses', '0 unauthorized accesses', 'The sealed boundary remains intact.')
 ) AS gate_outcomes(priority, gate, result, observed, threshold, interpretation)
 ORDER BY priority;

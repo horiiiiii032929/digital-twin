@@ -31,7 +31,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Refine after anchor-only V4 Pro/P3; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic checks and same-family review, then completed the 48-response anchor at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, calibrated professor-fidelity scoring, or any prospective profile replacement |
-| Professor fidelity | Refine / Paused; report the diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but failed 90% repeat consistency, swapped DeepSeek and local Qwen stopped invalid, and an unfilled blinded 48-response packet is ready; the separate 41-case authoring packet also remains ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
+| Professor fidelity | Refine / Paused; report the corrected diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but agreed on only 33/48 dimension labels across two repeated cases; swapped DeepSeek and local Qwen stopped invalid; the hidden citation-hard-gate disagreement is a cross-layer diagnostic, not a pedagogy-calibration gate; an unfilled blinded 48-response packet and the separate 41-case authoring packet remain ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -64,6 +64,9 @@ evidence.
 1. Report the professor-fidelity result as `Refine / Paused`; the durable
    professor-facing report is
    [Professor fidelity evaluation closeout](../reports/professor-fidelity-closeout-2026-08-17/report.html).
+   Analysis correction 001 at code revision `dbd7a71` supersedes the original
+   false-pass interpretation: C3 citation-source correctness is 4/8 applicable
+   cases, and the hidden-hard-gate disagreement is diagnostic only.
 2. PR #75 is merged as unfavorable but decision-bearing evidence. Issue #24
    remains open and is out of active execution.
 3. Complete issue #12 by freezing only the claims and profiles supported by

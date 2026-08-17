@@ -1,5 +1,11 @@
 # Professor-fidelity v2 anchor 002 DeepSeek primary attempt 002 results
 
+> Correction (2026-08-17): the all-pass pedagogy portfolio paired with a hidden
+> citation hard-gate failure is a cross-layer diagnostic, not a false pedagogy
+> pass. The judge was intentionally blind to citation and hard-gate evidence.
+> See [analysis correction 001](professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001-results.md).
+> The preserved labels and ineligible decision do not change.
+
 Result ID: `professor-fidelity-v2-anchor-002-deepseek-primary-attempt-002`
 
 Date: 2026-08-14

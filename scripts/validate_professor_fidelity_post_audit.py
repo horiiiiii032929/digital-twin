@@ -32,6 +32,17 @@ ANCHOR_CANDIDATE_PATH = (
     ROOT / "research/05_evaluation/profiles/"
     "professor-fidelity-anchor-v4-p3-candidate.json"
 )
+CORRECTION_RECORD_PATH = (
+    ROOT
+    / "research/05_evaluation/records/"
+    "professor-fidelity-v2-anchor-002-machine-review-summary-001-"
+    "analysis-correction-001.json"
+)
+CORRECTION_RUN_ID = (
+    "professor-fidelity-v2-anchor-002-machine-review-summary-001-"
+    "analysis-correction-001"
+)
+CORRECTION_CODE_REVISION = "dbd7a71c4fd7da48773f68bd3358faab099ef4cc"
 
 
 def _require(condition: bool, message: str) -> None:
@@ -115,6 +126,37 @@ def validate() -> dict[str, Any]:
     _require(PLAN_PATH.is_file(), "post-audit v3 plan is missing")
     _require(PURGE_RECORD_PATH.is_file(), "GitHub purge closure record is missing")
     _require(ANCHOR_CANDIDATE_PATH.is_file(), "anchor V4 Pro/P3 candidate is missing")
+    _require(CORRECTION_RECORD_PATH.is_file(), "analysis correction record is missing")
+    correction = json.loads(CORRECTION_RECORD_PATH.read_text(encoding="utf-8"))
+    _require(
+        correction.get("run_id") == CORRECTION_RUN_ID,
+        "analysis correction run ID drifted",
+    )
+    _require(
+        correction.get("code_revision") == CORRECTION_CODE_REVISION,
+        "analysis correction code revision drifted",
+    )
+    _require(
+        correction.get("decision", {}).get("outcome") == "refine",
+        "analysis correction decision drifted",
+    )
+    correction_candidates = correction.get("candidates", [])
+    _require(
+        len(correction_candidates) == 2
+        and correction_candidates[1].get("implementation", {}).get(
+            "implementation_id"
+        )
+        == "anchor-machine-review-corrected-interpretation",
+        "analysis correction candidate is missing",
+    )
+    corrected_hard_gates = {
+        gate.get("name"): gate.get("passed")
+        for gate in correction_candidates[1].get("hard_gates", [])
+    }
+    _require(
+        corrected_hard_gates.get("separate-pedagogy-from-hidden-hard-gates") is True,
+        "analysis correction still grades pedagogy on hidden hard gates",
+    )
 
     private_artifacts = {
         name: (PRIVATE_REVIEW_ROOT / filename).is_file()
@@ -152,6 +194,13 @@ def validate() -> dict[str, Any]:
             "attempt_id": "002",
             "result_status": "complete-calibration-ineligible",
             "repeat_exact_agreement": 0.6875,
+        },
+        "analysis_correction": {
+            "run_id": CORRECTION_RUN_ID,
+            "code_revision": CORRECTION_CODE_REVISION,
+            "decision": correction["decision"]["outcome"],
+            "interpretation_status": "corrected",
+            "cross_layer_disagreement": "diagnostic-not-calibration-gate",
         },
         "active_sensitivity_judge": {
             "model": "qwen3:4b",

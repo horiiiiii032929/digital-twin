@@ -10,7 +10,9 @@ Generated outputs should go under `generated/`, which is ignored by default.
 The durable technical report for the paused professor-fidelity evaluation is
 [Professor fidelity evaluation closeout](professor-fidelity-closeout-2026-08-17/report.html).
 Its adjacent `artifact.json` is the validated source payload used to build the
-self-contained report.
+self-contained report. The current report uses professor-fidelity analysis
+correction 001, which preserves the original result while correcting the
+repeat scope, citation denominator, and hidden-hard-gate interpretation.
 
 ## Current RAG numbers
 
