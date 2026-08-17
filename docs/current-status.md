@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-14
+Status date: 2026-08-17
 
 This is the operational starting point for the repository. Frozen experiment
 plans and historical result documents remain authoritative for their own runs,
@@ -8,13 +8,13 @@ but they do not override this page for current sequencing.
 
 ## Repository state
 
-- Active branch: `codex/close-issue-24-professor-fidelity`.
-- Active pull request: draft PR
-  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75).
-- Local worktree was synchronized with the branch remote at the start of this
+- Professor-fidelity evidence is frozen at commit `e964747`; PR
+  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75) is the
+  closeout and merge vehicle.
+- The closeout branch and its remote were synchronized at the start of this
   status audit.
-- PR #75 CI passes at the currently pushed revision. The latest full local
-  check passed 256 Python tests, 15 frontend tests,
+- PR #75 CI passes at the frozen revision. The latest full local
+  check passed 278 Python tests, 15 frontend tests,
   documentation and evaluation validators, lint, and the production build.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
@@ -32,7 +32,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Refine after anchor-only V4 Pro/P3; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic checks and same-family review, then completed the 48-response anchor at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, calibrated professor-fidelity scoring, or any prospective profile replacement |
-| Professor fidelity | Refine the evaluator; defer human work without treating it as passed | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but failed 90% repeat consistency, swapped DeepSeek and local Qwen stopped invalid, and an unfilled blinded 48-response packet is ready; the separate 41-case authoring packet also remains ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
+| Professor fidelity | Refine / Paused; report the diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but failed 90% repeat consistency, swapped DeepSeek and local Qwen stopped invalid, and an unfilled blinded 48-response packet is ready; the separate 41-case authoring packet also remains ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -48,47 +48,36 @@ Only one bounded execution issue should be `In Progress`.
 
 | Order | Issue | Board state | Purpose |
 | ---: | --- | --- | --- |
-| 1 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | In Progress / Refine | Complete hybrid authoring review, corrected development execution, and blinded semantic/citation/pedagogy review |
-| 2 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Complete credentialed identity and professor/source lifecycles after the current fidelity gate |
-| 3 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Run the frozen complete profile only after #24 produces valid development evidence |
-| 4 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Evaluate calibrated multi-turn behavior |
-| 5 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Produce bounded operational evidence |
-| 6 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Todo / Pending | Freeze only the claims and profiles supported by completed evidence |
+| 1 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | In Progress / Pending | Freeze supported claims, limitations, reproducibility, and the professor-facing report |
+| 2 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
+| 3 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Preserve the 19-check foundation; do not start new feature development after the technical freeze |
+| 4 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
+| 5 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
+| 6 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
 
-The schedule is high risk: the technical evidence freeze is 2026-08-16. Do not
-compensate by opening held-out data early, silently changing gates, or promoting
-diagnostic metrics into selection evidence.
+The 2026-08-16 technical-freeze date has passed. Issue #12 is therefore the sole
+active queue item. Do not start new feature or method development, open held-out
+data, silently change gates, or promote diagnostic metrics into selection
+evidence.
 
-## Next decision sequence
+## Frozen closeout sequence
 
-1. Decide whether to redesign the automated pedagogy evaluator or pause #24
-   and report the diagnostic result. Do not rerun primary attempt 001, swapped
-   attempt 001, or Qwen attempt 001, and do not use partial agreement as
-   calibration evidence.
-2. Defer both human packets until that decision. When resumed, a non-Codex
-   human reviews the blinded
-   16-case sample, all 19
-   no-evidence cases, and every disagreement, revise, invalid, or missing model
-   result: 41 cases total. Do not inspect the ensemble verdicts while completing
-   that packet. The completed model boundary is recorded in the
-   [v6 result](../research/05_evaluation/course-tutor-hybrid-authoring-review-v6-001-results.md).
-3. Any failed or uncertain human-audited case blocks sealing and requires a
-   revised candidate plus a fresh full ensemble and sample. Unsampled cases
-   require unanimous three-model approval.
-4. If every audited case passes, validate the frozen ensemble and human audit
-   together, then create the immutable v2 seal and unopened held-out ledger.
-5. Run the corrected hash-bound development comparison only after one exact
-   available generator candidate is prospectively accepted for development.
-6. Complete condition-blinded semantic, citation, context-sufficiency, and
-   pedagogy review. The prepared
-   [post-audit v3 plan](../research/04_experiments/2026-08-14-professor-fidelity-post-audit-v3-plan.md)
-   uses DeepSeek V4 Pro as the primary pedagogical judge, a swapped-order
-   DeepSeek sample, and local Qwen sensitivity; Gemma is not active.
-7. Register the development decision. Open the one-time held-out split only if
-   every prospective development gate permits it.
+1. Report the professor-fidelity result as `Refine / Paused`; the durable
+   professor-facing report is
+   [Professor fidelity evaluation closeout](../reports/professor-fidelity-closeout-2026-08-17/report.html).
+2. Merge PR #75 as unfavorable but decision-bearing evidence. Keep issue #24
+   open and move it out of active execution.
+3. Complete issue #12 by freezing only the claims and profiles supported by
+   registered evidence, then stabilize the report and demonstration.
+4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or
+   any professor-fidelity held-out evaluation. Partial agreement remains
+   diagnostic only.
+5. Defer both human packets. If a future evaluator-redesign iteration is
+   separately authorized, a non-Codex reviewer must complete the frozen
+   instruments before any calibration or professor-approval claim.
 
-There is no immediate human action while evaluator redesign is undecided. Both
-bounded blinded packets may be deferred, but neither is passed or waived.
+There is no immediate human action. Both bounded blinded packets are deferred,
+but neither is passed or waived.
 Codex must not complete them because the frozen instruments require an
 independent reviewer who has not inspected model decisions. Drafts 001-005 and
 all unfavorable or invalid attempts remain preserved. No full-152 human

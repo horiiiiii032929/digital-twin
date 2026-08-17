@@ -5,6 +5,13 @@ materials.
 
 Generated outputs should go under `generated/`, which is ignored by default.
 
+## Professor-fidelity closeout
+
+The durable technical report for the paused professor-fidelity evaluation is
+[Professor fidelity evaluation closeout](professor-fidelity-closeout-2026-08-17/report.html).
+Its adjacent `artifact.json` is the validated source payload used to build the
+self-contained report.
+
 ## Current RAG numbers
 
 Run `python3 scripts/plot_current_rag_numbers.py` to create compact CSV tables,

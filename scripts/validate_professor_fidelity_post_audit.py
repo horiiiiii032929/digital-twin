@@ -134,7 +134,7 @@ def validate() -> dict[str, Any]:
     }
     return {
         "status": "passed",
-        "execution_status": "machine-review-ineligible-human-work-deferred",
+        "execution_status": "machine-review-ineligible-paused-human-work-deferred",
         "active_anchor": {
             "run_id": "professor-fidelity-v2-anchor-002",
             "candidate_profile": "professor-fidelity-anchor-v4-p3-candidate",
@@ -163,8 +163,9 @@ def validate() -> dict[str, Any]:
         "private_artifact_presence": private_artifacts,
         "sealed_artifact_presence": sealed_artifacts,
         "ordered_gates": [
-            "decide whether to redesign the automated pedagogy evaluator",
-            "complete bounded human packets only when the work resumes",
+            "preserve and report the ineligible machine-review result",
+            "resume evaluator redesign only with separate authorization",
+            "complete bounded human packets only after authorized resumption",
             "validate audit and create immutable seal plus unopened ledger",
             "execute development C0-C3",
             "run DeepSeek/Qwen blinded judging and calibration",

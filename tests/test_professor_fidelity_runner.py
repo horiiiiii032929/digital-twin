@@ -496,7 +496,7 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
 
     assert result["status"] == "passed"
     assert result["execution_status"] == (
-        "machine-review-ineligible-human-work-deferred"
+        "machine-review-ineligible-paused-human-work-deferred"
     )
     assert result["active_anchor"]["run_id"] == "professor-fidelity-v2-anchor-002"
     assert result["active_anchor"]["selection_status"] == "not-selected"
@@ -514,6 +514,11 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
     assert result["private_artifact_content_read"] is False
     assert result["heldout_content_read"] is False
     assert result["model_called"] is False
+    assert result["ordered_gates"][:3] == [
+        "preserve and report the ineligible machine-review result",
+        "resume evaluator redesign only with separate authorization",
+        "complete bounded human packets only after authorized resumption",
+    ]
 
 
 def test_judge_contract_requires_per_dimension_pairwise_output():
