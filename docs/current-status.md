@@ -8,12 +8,11 @@ but they do not override this page for current sequencing.
 
 ## Repository state
 
-- Professor-fidelity evidence is frozen at commit `e964747`; PR
-  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75) is the
-  closeout and merge vehicle.
-- The closeout branch and its remote were synchronized at the start of this
-  status audit.
-- PR #75 CI passes at the frozen revision. The latest full local
+- Professor-fidelity evidence and the Option A closeout were merged through PR
+  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75) at merge commit
+  `10e00c5`.
+- The local workspace was synchronized with `origin/main` after the merge.
+- PR #75 CI passed at the frozen revision. The latest full local
   check passed 278 Python tests, 15 frontend tests,
   documentation and evaluation validators, lint, and the production build.
 - Private course data, generated review packets, `.env`, build output,
@@ -65,8 +64,8 @@ evidence.
 1. Report the professor-fidelity result as `Refine / Paused`; the durable
    professor-facing report is
    [Professor fidelity evaluation closeout](../reports/professor-fidelity-closeout-2026-08-17/report.html).
-2. Merge PR #75 as unfavorable but decision-bearing evidence. Keep issue #24
-   open and move it out of active execution.
+2. PR #75 is merged as unfavorable but decision-bearing evidence. Issue #24
+   remains open and is out of active execution.
 3. Complete issue #12 by freezing only the claims and profiles supported by
    registered evidence, then stabilize the report and demonstration.
 4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or
