@@ -6,9 +6,18 @@ qualification; deterministic rollback retained.
 
 ## Current decision state
 
-Issue #24 remains in progress because its professor-policy C0-C3 comparison has
-not run. Its generator sub-boundary is complete: the repository selects the
-exact DeepSeek binding and P2 prompt after development, stability, one-time
+Issue #24 is reopened and `In Progress` because its C0-C3 development run is
+invalid for selection. The preserved provider trace completed 192/192
+attempts, while the
+registered correction found missing human authoring review, gold-label leakage
+in C2/C3, a drifted C3 chunking corpus, and missing condition/policy bindings.
+C3 had 13/30 source/page citation correctness, 19/30 source/page evidence
+coverage, and 0/30 exact selected-passage matches. Safe grounding, true
+citation completeness, and pedagogy remain unresolved, so no professor-
+fidelity claim or profile change is justified. The 104-case one-time held-out
+ledger remains unopened. The generator sub-boundary remains complete: the
+repository selects the exact
+DeepSeek binding and P2 prompt after its own development, stability, one-time
 held-out, and citation review gates passed. No API credential is stored. A
 local Ollama Gemma 3 4B candidate was exercised historically with zero monetary
 cost, but it is not currently installed or selected.
@@ -22,9 +31,10 @@ the primary generator rather than opening a broad LLM competition. On
 bounded first candidate because the final system has a 10-second p95 target and
 the current official API positions it as the faster, lower-cost V4 option. This
 is a candidate freeze, not evidence that it works or that DeepSeek is best.
-Only synthetic evaluation data is permitted, and the complete #24 external API
-run retains the cumulative USD 10 cap. Private course material remains
-prohibited.
+Issue #24's source-holder-authorized development exception permits eligible
+IT5002 lecture passages and synthetic case fields under the cumulative USD 10
+cap. Student data, judge inputs, simulator trajectories, and public deployment
+remain prohibited.
 
 The temporal provider facts were checked against DeepSeek's official
 [models and pricing](https://api-docs.deepseek.com/quick_start/pricing/),
@@ -145,10 +155,11 @@ all return a safe answer with a sanitized warning. Original provider exception
 messages are never copied into `TutorAnswer`, because they may contain request
 or credential details.
 
-The adapter is disabled by architecture rather than a Boolean switch: no API
-route or application dependency constructs it, and no provider/model selection
-exists in the system profile. Tests inject a completion function and make no
-network calls.
+The live adapter remains inactive in the API architecture: no route or
+application dependency constructs it. The experimental profile records the
+qualified provider/model binding, but runtime activation is a separate,
+evaluation-gated integration step. Tests inject a completion function and make
+no network calls.
 
 ## Synthetic preflight
 

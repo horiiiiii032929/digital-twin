@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "run_id": "professor-fidelity-v1-development-001",
+  "component": "tutor-policy",
+  "dataset_id": "course-tutor-v1.1.0-development",
+  "corpus_id": "it5002-lectures-v1",
+  "code_revision": "3d968ae43c46a12921cd3c8237c64b5747a209e7",
+  "candidates": [
+    {
+      "implementation": {"implementation_id": "c0-generic-no-evidence", "version": "professor-fidelity-v1", "configuration": {"evidence": "none", "policy": "generic"}},
+      "role": "control",
+      "metrics": [
+        {"name": "development-safe-grounded-success", "value": 0.125, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-citation-validity", "value": 0.375, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "development-complete-evidence-at-3", "value": 0.375, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C0 turns completed."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "The automated judge is ineligible without a blinded researcher reference."}
+      ],
+      "failures_by_category": {"generation-or-evaluation": 42}
+    },
+    {
+      "implementation": {"implementation_id": "c1-oracle-generic-policy", "version": "professor-fidelity-v1", "configuration": {"evidence": "oracle", "policy": "generic"}},
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-safe-grounded-success", "value": 0.4791666666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-citation-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "development-complete-evidence-at-3", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C1 turns completed."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "The automated judge is ineligible without a blinded researcher reference."}
+      ],
+      "failures_by_category": {"generation-or-evaluation": 25}
+    },
+    {
+      "implementation": {"implementation_id": "c2-oracle-professor-policy", "version": "professor-fidelity-v1", "configuration": {"evidence": "oracle", "policy": "structured-professor-policy-v1"}},
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-safe-grounded-success", "value": 0.6458333333333334, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-citation-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "development-complete-evidence-at-3", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C2 turns completed."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "The automated judge is ineligible without a blinded researcher reference."}
+      ],
+      "failures_by_category": {"generation-or-evaluation": 17}
+    },
+    {
+      "implementation": {"implementation_id": "c3-m2-professor-policy", "version": "professor-fidelity-v1", "configuration": {"evidence": "qwen3-hybrid-v1-top3", "policy": "structured-professor-policy-v1", "generator": "deepseek-v4-flash-nonthinking"}},
+      "role": "candidate",
+      "metrics": [
+        {"name": "development-safe-grounded-success", "value": 0.6041666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "development-citation-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "development-complete-evidence-at-3", "value": 0.7708333333333334, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "reliable-completion", "passed": true, "evidence": "48/48 C3 turns completed; 192/192 overall."},
+        {"name": "pedagogy-resolved", "passed": false, "evidence": "The automated judge is ineligible without a blinded researcher reference."}
+      ],
+      "failures_by_category": {"ranking": 11, "evaluation-or-generation": 18, "policy": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "rationale": "INVALID HISTORICAL RESULT FOR SELECTION: preserved for traceability and superseded by professor-fidelity-v1-development-001-analysis-correction-001. In addition to invalid metric interpretation, the dataset lacked independent human review, C2/C3 leaked case gold labels, C3 used an unbound drifted chunking corpus, and required condition/policy/prompt bindings were absent.",
+    "limitations": [
+      "This machine record is invalid for selection and is superseded by professor-fidelity-v1-development-001-analysis-correction-001.",
+      "C2/C3 prompts included expected actions and tutoring moves from each case's gold rubric.",
+      "C3 did not use or bind the selected page-bounded chunker corpus, and the run omitted the condition-set and shared-policy hashes.",
+      "Exact-phrase required-claim recall produced known paraphrase false negatives.",
+      "Automated pedagogy is unresolved because no genuinely blinded researcher reference passed the frozen calibration boundary.",
+      "The private cases are synthetic transformations and do not establish student learning or professor equivalence.",
+      "The authorized provider uses disk context caching and provides no project-specific no-training guarantee.",
+      "The 104-case one-time held-out split remains unopened."
+    ]
+  }
+}

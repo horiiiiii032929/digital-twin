@@ -5,6 +5,7 @@ design records.
 
 ## Active product and architecture
 
+- [Current project status](current-status.md)
 - [Project brief](project-brief.md)
 - [Digital Twin architecture](architecture.md)
 - [Component inventory](component-inventory.md)

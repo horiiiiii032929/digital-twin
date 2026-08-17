@@ -79,6 +79,9 @@ Actions runs `npm run check` for pushes to `main` and for pull requests.
 
 ## Current implementation status
 
+Start with the dated [current project status](docs/current-status.md) for the
+active branch, evidence decisions, GitHub queue, and next human gate.
+
 Implemented in the Sprint 1 prototype:
 
 - Chat-led onboarding workflow with deterministic follow-up handling.
@@ -149,7 +152,7 @@ Current evidence and limitations:
 - Synthetic product activation now covers the bounded student and publication
   path, but it is not release-ready evidence. The product still lacks a
   credentialed identity boundary, complete professor/admin and source
-  lifecycles, professor-fidelity and qualified live-generator evidence,
+  lifecycles, valid professor-fidelity and end-to-end evidence,
   migration/backup/restore and concurrency evidence, and bounded capacity
   results.
 

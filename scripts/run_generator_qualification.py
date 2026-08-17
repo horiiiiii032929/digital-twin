@@ -18,8 +18,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+
+from scripts.professor_fidelity_scoring import nearest_rank_percentile
 from services.llm import LiteLlmClient
 from src.digital_twin.generation import (
+    ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     GroundedPromptBuilder,
     LiveGroundedGenerator,
@@ -34,6 +38,7 @@ from src.digital_twin.tutor_policy import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env", override=False)
 INSTRUMENT_PATH = (
     ROOT / "research/05_evaluation/instruments/generator_qualification_v1.json"
 )
@@ -45,7 +50,10 @@ PROMPTS = {
     "P0": GroundedPromptBuilder,
     "P1": ConservativeGroundedPromptBuilder,
     "P2": StrictEvidenceGroundedPromptBuilder,
+    "P3": ClarificationFirstGroundedPromptBuilder,
 }
+DEEPSEEK_V4_PRO_INPUT_PRICE_PER_MILLION_USD = 0.435
+DEEPSEEK_V4_PRO_OUTPUT_PRICE_PER_MILLION_USD = 0.87
 
 
 class GeneratorQualificationError(ValueError):
@@ -125,28 +133,45 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
         "generator-qualification-v1-development-attempt-002",
         "generator-qualification-v1-development-stability-001",
         "generator-qualification-v1-heldout-001",
+        "generator-qualification-v2-v4-pro-development-001",
+        "generator-qualification-v3-v4-pro-p3-development-001",
     }:
         raise GeneratorQualificationError("unexpected instrument id")
     if instrument.get("status") != "frozen-pending-execution":
         raise GeneratorQualificationError("instrument is not frozen for execution")
     binding = instrument.get("candidate_binding", {})
+    v4_pro = instrument_id in {
+        "generator-qualification-v2-v4-pro-development-001",
+        "generator-qualification-v3-v4-pro-p3-development-001",
+    }
     expected = {
-        "litellm_model": "deepseek/deepseek-v4-flash",
-        "provider_model": "deepseek-v4-flash",
+        "litellm_model": (
+            "deepseek/deepseek-v4-pro" if v4_pro else "deepseek/deepseek-v4-flash"
+        ),
+        "provider_model": "deepseek-v4-pro" if v4_pro else "deepseek-v4-flash",
         "data_boundary": "synthetic-public-only",
     }
     for field, value in expected.items():
         if binding.get(field) != value:
             raise GeneratorQualificationError(f"candidate binding drifted: {field}")
+    if v4_pro and (
+        binding.get("documented_revision") != "DeepSeek-V4-Pro"
+        or binding.get("expected_provider_revision")
+        != "a307abda487cd1b463329ccb945ce396"
+    ):
+        raise GeneratorQualificationError("V4 Pro revision binding drifted")
     decoding = binding.get("decoding", {})
     if decoding.get("thinking") != "disabled":
         raise GeneratorQualificationError("thinking mode must remain disabled")
     if decoding.get("temperature") != 0 or decoding.get("max_attempts") != 1:
         raise GeneratorQualificationError("decoding or retry policy drifted")
     prompt_ids = [item.get("condition_id") for item in instrument["prompt_candidates"]]
-    expected_prompts = (
-        ["P0", "P1"] if instrument_id == "generator-qualification-v1" else ["P2"]
-    )
+    if instrument_id == "generator-qualification-v1":
+        expected_prompts = ["P0", "P1"]
+    elif instrument_id == "generator-qualification-v3-v4-pro-p3-development-001":
+        expected_prompts = ["P3"]
+    else:
+        expected_prompts = ["P2"]
     if prompt_ids != expected_prompts:
         raise GeneratorQualificationError("prompt candidates drifted")
     if instrument.get("budget", {}).get("cumulative_issue_cap_usd") != 10:
@@ -277,13 +302,21 @@ async def execute(
     binding = instrument["candidate_binding"]
     decoding = binding["decoding"]
     stop_cap = instrument["budget"][f"{split}_stop_cap_usd"]
-    client = LiteLlmClient(
-        binding["litellm_model"],
-        timeout_seconds=decoding["timeout_seconds"],
-        max_output_tokens=decoding["max_output_tokens"],
-        response_format={"type": "json_object"},
-        provider_options={"extra_body": {"thinking": {"type": "disabled"}}},
-    )
+    client_options: dict[str, Any] = {
+        "timeout_seconds": decoding["timeout_seconds"],
+        "max_output_tokens": decoding["max_output_tokens"],
+        "temperature": decoding.get("temperature"),
+        "response_format": {"type": "json_object"},
+        "provider_options": {
+            "extra_body": {
+                "thinking": {"type": decoding["thinking"]},
+                "user_id": "digital-twin-generator-qualification-v2",
+            }
+        },
+    }
+    if binding["provider_model"] == "deepseek-v4-pro":
+        client_options["cost_calculator"] = _deepseek_v4_pro_cost
+    client = LiteLlmClient(binding["litellm_model"], **client_options)
     policy = _approved_synthetic_policy()
     results = []
     cumulative_cost = 0.0
@@ -319,7 +352,7 @@ async def execute(
                 )
     latencies = [item["latency_ms"] for item in results]
     return {
-        "run_type": "generator-qualification-v1",
+        "run_type": instrument["instrument_id"],
         "status": "development-output-review-required",
         "instrument_id": instrument["instrument_id"],
         "split": split,
@@ -335,7 +368,7 @@ async def execute(
         "input_tokens": sum(item["usage"]["input_tokens"] for item in results),
         "output_tokens": sum(item["usage"]["output_tokens"] for item in results),
         "latency_p50_ms": statistics.median(latencies) if latencies else None,
-        "latency_p95_ms": _percentile(latencies, 0.95),
+        "latency_p95_ms": nearest_rank_percentile(latencies, 0.95),
         "provider_revisions": sorted(
             {
                 item["provider_revision"]
@@ -401,7 +434,7 @@ def _case_result(
         item["source_id"] for item in case["candidate_evidence"] if item["presented"]
     }
     citation_sources = {citation.source_id for citation in answer.citations}
-    citation_identity_passed = citation_sources.issubset(presented_sources) and (
+    citation_source_identity_passed = citation_sources.issubset(presented_sources) and (
         bool(citation_sources) if case["citation_required"] else True
     )
     provider_called = trace.provider_model != "not-called"
@@ -420,7 +453,7 @@ def _case_result(
             actual_action == expected_action,
             required_terms_passed,
             forbidden_terms_absent,
-            citation_identity_passed,
+            citation_source_identity_passed,
             provider_identity_passed,
         )
     )
@@ -440,7 +473,7 @@ def _case_result(
         "completed": completed,
         "required_terms_passed": required_terms_passed,
         "forbidden_terms_absent": forbidden_terms_absent,
-        "citation_identity_passed": citation_identity_passed,
+        "citation_source_identity_passed": citation_source_identity_passed,
         "provider_identity_passed": provider_identity_passed,
         "deterministic_checks_passed": deterministic_checks_passed,
         "human_review": {
@@ -477,6 +510,13 @@ def _actual_action(
         marker in answer for marker in clarification_markers
     ):
         return "clarify"
+    targeted_question_markers = ("which meaning", "which one", "do you mean")
+    if (
+        scenario_type == "ambiguity"
+        and "?" in answer
+        and any(marker in answer for marker in targeted_question_markers)
+    ):
+        return "clarify"
     return "answer"
 
 
@@ -488,6 +528,22 @@ def _term_present(term: str, answer: str) -> bool:
         stem = normalized[:-2]
         return any(form in answer for form in (stem, f"{stem}s", f"{stem}es"))
     return False
+
+
+def _response_field(value: Any, name: str, default: Any = None) -> Any:
+    if isinstance(value, dict):
+        return value.get(name, default)
+    return getattr(value, name, default)
+
+
+def _deepseek_v4_pro_cost(*, completion_response: Any) -> float:
+    usage = _response_field(completion_response, "usage", {})
+    input_tokens = int(_response_field(usage, "prompt_tokens", 0) or 0)
+    output_tokens = int(_response_field(usage, "completion_tokens", 0) or 0)
+    return (
+        input_tokens * DEEPSEEK_V4_PRO_INPUT_PRICE_PER_MILLION_USD
+        + output_tokens * DEEPSEEK_V4_PRO_OUTPUT_PRICE_PER_MILLION_USD
+    ) / 1_000_000
 
 
 def _approved_synthetic_policy():
@@ -524,14 +580,6 @@ def _open_heldout_once(assets: dict[str, Any]) -> None:
         raise GeneratorQualificationError(
             "held-out access ledger already exists; rerun is prohibited"
         ) from error
-
-
-def _percentile(values: list[float], quantile: float) -> float | None:
-    if not values:
-        return None
-    ordered = sorted(values)
-    index = min(len(ordered) - 1, max(0, int(len(ordered) * quantile) - 1))
-    return ordered[index]
 
 
 def _code_revision() -> str:

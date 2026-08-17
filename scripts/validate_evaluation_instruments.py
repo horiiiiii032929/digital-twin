@@ -387,6 +387,21 @@ def validate_instruments() -> dict[str, int | str]:
         validate_schema(output_record, judge_output_schema)
         validate_judge_pair(input_record, output_record)
 
+    blinded_review_schema = load_json(
+        INSTRUMENTS / "professor_fidelity_blinded_review_v1.schema.json"
+    )
+    blinded_review_example = load_json(
+        INSTRUMENTS / "professor_fidelity_blinded_review_v1_synthetic.json"
+    )
+    validate_schema(blinded_review_example, blinded_review_schema)
+    require(
+        set(
+            blinded_review_schema["$defs"]["dimension"]["enum"]
+        )
+        == course_dimensions,
+        "blinded review dimensions differ from course-tutor-v1",
+    )
+
     state_schema = load_json(
         INSTRUMENTS / "simulated_student_state_v1.schema.json"
     )

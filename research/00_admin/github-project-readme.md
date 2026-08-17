@@ -1,5 +1,7 @@
 # Digital Twin Delivery
 
+Status date: 2026-08-14
+
 This Project tracks the evidence-first delivery of a professor-configurable
 pedagogical Digital Twin for multiple professors and courses. The product
 combines professor teaching behaviour, approved course evidence, tutoring
@@ -26,19 +28,29 @@ policy, student interaction state, and evaluation-before-publication.
   withdrawal, rollback, and stale-conversation denial pass the registered
   19-check v2 architecture slice.
 - The exact DeepSeek V4 Flash/P2 generator boundary is qualified and selected
-  with a deterministic rollback. Professor-fidelity evaluation remains blocked
-  by the incomplete `course-tutor-v1` splits, judge calibration, and sealed
-  execution adapter. Credentialed identity, complete professor/source
+  with a deterministic rollback. Professor-fidelity C0-C3 development is
+  preserved only as an operational trace and is invalid for selection. The
+  correction records missing human authoring review, case-gold leakage, a
+  drifted C3 chunking corpus, missing condition/policy bindings, 13/30
+  source/page citation correctness, and 0/30 exact selected-passage matches.
+  Safe grounding, citation completeness, and pedagogy remain unresolved;
+  held-out remains unopened.
+  Credentialed identity, complete professor/source
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The immediate work is to complete and calibrate the course-tutor dataset, bind
-the selected generator/P2 into the sealed runtime adapter, and execute
-professor-fidelity development without opening held-out prematurely. In
-parallel, harden the R3 foundation with
-credentialed identity, migration, backup/restore, concurrency, recovery, and
-bounded-capacity evidence. Do not reopen the text benchmark for visual claims
-or continue multimodal V3 tuning.
+The sole `In Progress` item is #24. The frozen v6 authoring committee is
+complete for all exact-passage v1.2.3 cases: 456 records across DeepSeek V4 Pro
+and two local Qwen artifacts. Its exact blinded independent-human union is 41
+cases, comprising the stable sample, all no-evidence cases, and every model
+escalation; this is below the 48-case cap and is the active gate. GitHub Support
+closed ticket #4659958 after completing the public-object purge, and read-only
+remote checks confirm the superseded SHA is unavailable. The purge no longer
+blocks sealing. Held-out tutor outputs remain unopened.
+#8 returns to `Todo` with its 19-check synthetic publication foundation
+preserved; credentialed identity and complete professor/source lifecycles
+resume after the current gate. #25, #10, #9, and #12 remain queued. Do not
+reopen the text benchmark for visual claims or continue multimodal V3 tuning.
 
 ## Final product
 

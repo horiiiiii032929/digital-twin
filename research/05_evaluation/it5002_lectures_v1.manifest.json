@@ -26,7 +26,7 @@
     "local_research_evaluation": "user_authorized_all_academics_2026-07-27",
     "student_facing_release": "professor_or_institutional_authorization_required",
     "human_participant_use": "out_of_scope",
-    "external_provider_use": "allowed_after_provider_specific_prospective_approval_2026-07-27",
+    "external_provider_use": "deepseek-v4-flash-professor-fidelity-authorized_2026-08-10",
     "permission_record": "research/03_data/academics-source-permission.md"
   },
   "profile": {
@@ -86,7 +86,7 @@
       "pages": 17,
       "pdftotext_characters": 5001,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-02",
@@ -96,7 +96,7 @@
       "pages": 51,
       "pdftotext_characters": 18896,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-03",
@@ -106,7 +106,7 @@
       "pages": 49,
       "pdftotext_characters": 19523,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-04",
@@ -116,7 +116,7 @@
       "pages": 43,
       "pdftotext_characters": 14872,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-05",
@@ -126,7 +126,7 @@
       "pages": 44,
       "pdftotext_characters": 15329,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-06",
@@ -136,7 +136,7 @@
       "pages": 43,
       "pdftotext_characters": 19139,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-07",
@@ -146,7 +146,7 @@
       "pages": 48,
       "pdftotext_characters": 14169,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-08",
@@ -156,7 +156,7 @@
       "pages": 40,
       "pdftotext_characters": 14646,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-09",
@@ -166,7 +166,7 @@
       "pages": 84,
       "pdftotext_characters": 28751,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-10",
@@ -176,7 +176,7 @@
       "pages": 16,
       "pdftotext_characters": 3298,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-11",
@@ -186,7 +186,7 @@
       "pages": 22,
       "pdftotext_characters": 6323,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-12",
@@ -196,7 +196,7 @@
       "pages": 23,
       "pdftotext_characters": 7328,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     },
     {
       "document_id": "it5002-lecture-13",
@@ -206,7 +206,7 @@
       "pages": 28,
       "pdftotext_characters": 8199,
       "source_role": "official_lecture",
-      "tutoring_permission": "pending"
+      "tutoring_permission": "approved_research_evaluation_2026-08-10"
     }
   ]
 }

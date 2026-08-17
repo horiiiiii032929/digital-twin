@@ -6,6 +6,15 @@ Status: researcher-frozen local instrument candidate; all 12 cases validate.
 Professor review is optional expert calibration; real student-facing release
 permission remains separate
 
+## Status amendment — 2026-08-10
+
+The anchor remains usable for rubric calibration, but the historical C0-C3
+outputs cannot validate a policy or product condition: their prompt leaked case
+labels and their C3 chunker drifted. A revised condition-blinded packet is
+prepared only to calibrate semantic, citation, context-sufficiency, and
+pedagogy judgments; it cannot make the source run selection-eligible. The
+exact-passage v1.2 development/held-out authoring review is a separate gate.
+
 ## Construction status
 
 | Anchor | Local state | Evidence state | Optional expert-review state |
@@ -164,5 +173,6 @@ Do not scale to development or held-out authoring until all 12 records validate,
 every required claim resolves to approved evidence, disagreements are preserved,
 and the researcher has frozen each expected action. If professor review is not
 available, label later pedagogy findings as researcher-anchor-calibrated proxy
-evidence. No instrument state authorizes DeepSeek or another external provider
-to receive private course content; that remains prohibited.
+evidence. Instrument state alone does not authorize an external provider. The
+separate issue #24 source-holder authorization governs the exact DeepSeek tutor
+boundary; judges, simulators, student data, and any broader use remain excluded.

@@ -191,11 +191,144 @@ Current utilities:
   metrics, NotebookLM black-box boundary, held-out locks, and public open-set
   example; run it with
   `npm run verify:retrieval-v3-instruments`.
-- `run_professor_fidelity_experiment.py`: validates the frozen R2
-  professor-fidelity conditions and prepares a sanitized run manifest without
-  opening private course data. Execution remains fail-closed until one exact
-  generator/prompt binding and the sealed runtime adapter are qualified; run
-  `npm run verify:professor-fidelity-plan` for the no-data preflight.
+- External-provider commands load repository-local secrets from `.env` without
+  overriding variables already exported by the shell. Copy `.env.example` to
+  `.env`, set `DEEPSEEK_API_KEY` locally, and never commit or share that file.
+- `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
+  exact qualified generator/prompt binding, private split hashes, and sanitized
+  preflight without opening held-out outputs; run `npm run
+  verify:professor-fidelity-plan`.
+- `run_generator_qualification.py` also accepts the prospective
+  `generator-qualification-v2-v4-pro-development-001` instrument. That
+  development-only boundary uses current GA DeepSeek V4 Pro in non-thinking
+  JSON mode with unchanged strict-evidence P2, the v6-established fingerprint,
+  conservative current pricing, no retry, and no held-out authorization; run
+  its preflight with `npm run verify:generator-qualification-v4-pro` and its
+  bounded candidate run with
+  `npm run benchmark:generator-qualification-v4-pro-development`.
+- `review_generator_qualification_v2.py`: validates and executes the frozen
+  all-48-case local Qwen cross-model review of the V4 Pro public-synthetic
+  development output. It hides generator identity and deterministic labels,
+  requires the exact `qwen3:4b` digest, prohibits Gemma and non-loopback
+  endpoints, and must reject five fixed defect probes before reading candidate
+  cases. It rejects the invalid v1 template reason and escalates every
+  deterministic failure, Qwen revision, or uncertainty. Run `npm run
+  verify:generator-qualification-v4-pro-review` before `npm run
+  review:generator-qualification-v4-pro`.
+- `analyze_generator_qualification_v2.py`: performs the frozen no-model action
+  analysis correction over the exact V4 Pro development output. It recognizes
+  explicit “which meaning/which one/do you mean?” questions only in ambiguity
+  cases, preserves every other hard check, verifies that exactly one action
+  changes, and never overwrites the original result. Run `npm run
+  analyze:generator-qualification-v4-pro-action-correction`.
+- `ClarificationFirstGroundedPromptBuilder` is exposed to the qualification
+  runner as P3. Its prospective V4 Pro instrument changes only ambiguity
+  behavior and keeps held-out closed. Run `npm run
+  verify:generator-qualification-v4-pro-p3` before `npm run
+  benchmark:generator-qualification-v4-pro-p3-development`.
+- `judge_generator_qualification_v3.py`: runs a bounded same-family semantic
+  review of the exact P3 output with current DeepSeek V4 Pro high thinking. It
+  must pass five public defect probes before candidate case 1, requires the
+  exact fingerprint, has no retries, and records cost/usage per case. It does
+  not claim cross-family independence. Run `npm run
+  verify:generator-qualification-v4-pro-p3-review` before `npm run
+  review:generator-qualification-v4-pro-p3-deepseek`.
+- `validate_professor_fidelity_post_audit.py`: statically validates the exact
+  post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
+  one-time held-out confirmation, plan, and purge-closure record. It checks
+  only private-artifact presence, never content, and makes no model call; run
+  `npm run verify:professor-fidelity-post-audit`.
+- `build_course_tutor_splits.py`: deterministically builds and validates an
+  ignored 48-case development plus 104-case held-out **review draft** from
+  a private ignored authoring blueprint and a curated case inventory. Every
+  positive question, atomic claim, and approved lecture page is explicitly
+  re-authored rather than trusted from the invalid rapid instrument. The
+  builder rejects exact approved-passage or authored-family overlap across
+  development and held-out, validates superseded-version conflicts, preserves
+  exact heading/paragraph chunk IDs and content hashes, labels the draft
+  honestly, refuses to overwrite prior artifacts, and creates neither a seal
+  nor a held-out ledger; run `npm run build:course-tutor-splits`.
+- `run_course_tutor_hybrid_review.py`: runs the prospectively frozen v6
+  DeepSeek V4 Pro/Qwen/Qwen-derivative ensemble over all 152 authoring cases;
+  Gemma is excluded. It binds the external reviewer to the official
+  `DeepSeek-V4-Pro-0813` model and its preflight fingerprint, enables `high`
+  thinking through the official OpenAI-compatible client, requires strict
+  JSON with an 8,192-token allowance, records finish-reason, reasoning-token,
+  cost, and latency traces, and stress-tests ten public probes. The split check
+  explicitly maps the frozen `development`/`heldout` labels to the `dev`/`test`
+  family tokens. It allows one retry only for empty, output-limited, or
+  malformed content or a transient timeout/connection failure, and enforces
+  314-request and USD 2 limits. It selects a stable
+  16-case scenario-by-split human sample before reading verdicts, assigns all
+  19 no-evidence cases to human review, and requires both DeepSeek-family and
+  local-Qwen-family approval outside the human set. It renders a private human
+  packet with all selection classes and model decisions hidden, and stops
+  instead of assigning more than 48 cases to the human reviewer; run `npm run
+  review:course-tutor-authoring-hybrid` from a clean committed revision after
+  confirming the bounded authorization in the v6 plan. If all 456 checkpointed
+  decisions completed but deterministic finalization failed, repair and commit
+  the finalizer, then pass `--finalize-existing-checkpoint`; this mode requires
+  the exact complete frozen reviewer/case set, makes no model call, preserves
+  the execution revision, and records the separate finalizer revision.
+- `seal_course_tutor_splits.py`: validates all 456 cross-provider model
+  records, exact frozen sampling and escalation, the completed blinded
+  independent-human audit, two-family model approval outside the human set,
+  and explicit GitHub purge confirmation. It then writes a new immutable
+  sealed directory and unopened held-out ledger with exclusive-create
+  semantics; run `npm run
+  seal:course-tutor-splits -- --ensemble-review <ignored-ensemble.json>
+  --human-audit <ignored-audit.json> --github-purge-confirmed` only after both
+  gates are complete.
+- `prepare_course_tutor_authoring_review.py`: renders private development and
+  held-out all-case packets plus a hash-bound template for the superseded
+  manual protocol. It remains for historical reproduction and is not accepted
+  by the current sealer.
+- `cross_review_course_tutor_authoring.py`: validates the corrected private
+  draft, records a clearly labeled Codex advisory review, preserves the
+  rejected and superseded draft findings, and emits a reduced packet for
+  no-evidence absence and multi-evidence necessity judgments. This is the
+  preserved historical advisory, not evidence for the hybrid seal.
+- `seal_course_tutor_anchor.py`: produces the ignored 12-case reviewed anchor
+  and review ledger after exact passage and policy inspection; the ledger
+  explicitly records Codex-assisted researcher review and keeps professor and
+  independent-human review false; run `npm run seal:course-tutor-anchor`.
+- `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
+  Flash tutor and selected local M2 retrieval. It requires the selected chunker
+  corpus, exact passage hashes, condition-set hash, and shared policy/prompt
+  hash; never places case gold labels in prompts; checkpoints each case;
+  records provider failures in the unconditional denominator; and transitions
+  the held-out ledger before parsing held-out content.
+- `professor_fidelity_scoring.py`: separates citation-ID validity,
+  source-and-locator correctness, claim-level citation coverage, eligible-case
+  retrieval completeness, structural success, and unresolved semantic review.
+  Exact-phrase matching is retained only as a non-selection diagnostic.
+- `judge_professor_fidelity.py`: runs blinded structured pedagogy judgments
+  against the frozen JSON contracts. The active primary binding is the
+  official `deepseek-v4-pro` model (`DeepSeek-V4-Pro-0813`) in JSON mode with
+  `high` thinking, the v6-observed fingerprint, per-run call and cost stops,
+  and complete token/reasoning/cost telemetry. Local `qwen3:4b` is retained as
+  a bounded sensitivity reviewer; Gemma is excluded from active
+  professor-fidelity commands. The runner records one preference per
+  pedagogical dimension, seeded repeat samples, and a separately invoked
+  swapped-order sensitivity sample.
+- `analyze_judge_calibration.py`: checks local-judge repeat, position, and
+  cross-family/reference agreement and fails eligibility when the frozen
+  blinded researcher reference, any per-dimension gate, or pairwise position
+  gate is absent.
+- `prepare_professor_fidelity_blinded_review.py` and
+  `finalize_professor_fidelity_blinded_review.py`: create an ignored private
+  condition-blinded packet/template, keep the condition mapping separate during
+  review, and validate the completed normalized review before it may resolve
+  semantic, citation, evidence-sufficiency, or pedagogical metrics. Prepare the
+  current anchor packet with `npm run
+  prepare:professor-fidelity-anchor-review`.
+- `analyze_professor_fidelity.py`: ignores embedded legacy scores, rescoring
+  preserved outputs from the hash-matched dataset and retrieved source metadata.
+  It uses the frozen eligible denominator, computes citation and completion
+  gates explicitly, audits dataset and candidate bindings, supports eligible
+  blinded review, and leaves semantic outcomes unresolved otherwise. Run the
+  current invalid-for-selection correction with `npm run
+  analyze:professor-fidelity-development`.
 - `build_generator_qualification_dataset.py`: deterministically builds the
   public synthetic 48-case development and 104-case sealed held-out generator
   qualification splits plus their hash-bound freeze manifest.

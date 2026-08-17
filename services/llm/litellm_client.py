@@ -29,6 +29,7 @@ class LiteLlmClient:
         *,
         timeout_seconds: float = 30,
         max_output_tokens: int = 600,
+        temperature: float | None = 0,
         response_format: dict[str, str] | None = None,
         provider_options: dict[str, Any] | None = None,
         completion: _Completion = litellm.acompletion,
@@ -40,9 +41,12 @@ class LiteLlmClient:
             raise ValueError("timeout_seconds must be positive")
         if max_output_tokens < 1:
             raise ValueError("max_output_tokens must be positive")
+        if temperature is not None and not 0 <= temperature <= 2:
+            raise ValueError("temperature must be between 0 and 2")
         self.model = model
         self.timeout_seconds = timeout_seconds
         self.max_output_tokens = max_output_tokens
+        self.temperature = temperature
         self.response_format = response_format
         self.provider_options = deepcopy(provider_options or {})
         forbidden_options = {
@@ -71,10 +75,11 @@ class LiteLlmClient:
                     message.model_dump(mode="json") for message in messages
                 ],
                 "timeout": self.timeout_seconds,
-                "temperature": 0,
                 "max_tokens": self.max_output_tokens,
                 "metadata": {"task": task},
             }
+            if self.temperature is not None:
+                completion_arguments["temperature"] = self.temperature
             if self.response_format is not None:
                 completion_arguments["response_format"] = self.response_format
             completion_arguments.update(deepcopy(self.provider_options))

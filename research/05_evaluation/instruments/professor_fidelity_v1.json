@@ -19,7 +19,7 @@
       "permission_version"
     ],
     "heldout_access": "one-time-confirmed-run",
-    "course_data_boundary": "local-only-unless-explicitly-approved"
+    "course_data_boundary": "governed-deepseek-tutor-only-authorization-2026-08-10"
   },
   "conditions": [
     {
@@ -64,7 +64,7 @@
     "randomization_seed"
   ],
   "generator_binding": {
-    "status": "pending-qualification",
+    "status": "qualified-selected",
     "required_fields": [
       "implementation_id",
       "provider_or_local_runtime",

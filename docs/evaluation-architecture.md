@@ -251,14 +251,22 @@ Live generation and tutor-policy enforcement must not be implemented as one
 inseparable model call. Issue #24 should preserve separate generator, prompt,
 policy-enforcement, and citation-validation boundaries.
 
-The first generation evaluation should qualify the fixed DeepSeek API product
-constraint against the deterministic generator control while retaining local
-Gemma as an offline fallback. Use the same questions, sufficient gold evidence,
-tutor policy, and predeclared prompt conditions so retrieval misses do not
-confound the generator result. Only synthetic inputs are permitted and the
-cumulative #24 external spend is capped at USD 10. Hard gates are
+The first generation evaluation qualified the fixed DeepSeek API product
+constraint against the deterministic generator control. Its public synthetic
+boundary selected strict-evidence P2. A separately recorded source-holder
+exception later authorized eligible IT5002 passages for the issue #24 tutor
+only; judges and simulators remain local, and cumulative #24 external spend is
+capped at USD 10. Use the same questions, sufficient gold evidence, shared
+policy, and predeclared prompt conditions so retrieval misses do not confound
+the generator result. Hard gates are
 grounded-evidence use, valid citations, graded-work behavior, no-evidence
 behavior, secret isolation, private-data exclusion, explicit provider failures,
 and budget enforcement. Quality metrics should cover grounding, pedagogy,
 policy compliance, and citation validity, correctness, and completeness;
 operational metrics should cover latency, tokens, and cost.
+
+The first private C0-C3 source run is preserved but invalid for selection
+because its dataset lacked independent human review, C2/C3 leaked case gold
+labels, C3 used a drifted chunking corpus, and required condition/policy hashes
+were absent. The v2 boundary now fails closed on those identities; this does
+not retroactively validate the old result.

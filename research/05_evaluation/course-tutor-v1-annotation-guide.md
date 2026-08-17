@@ -2,9 +2,25 @@
 
 Date: 2026-07-23
 
-Status: case schema candidate v1.1 and condition schema candidate v1.0 for
-professor-anchor review; private draft cases may be authored locally, but no
-case is approved for tutoring or evaluation
+Status: case schema v1.1 and condition schema v1.0; exact-passage dataset
+v1.2.3 review draft built locally; hybrid authoring review pending; no v1.2.3
+case is approved or sealed
+
+The historical v1.1 split is invalid for selection because its review metadata
+overstated mechanical/Codex checks. The v1.2.3 workflow records the
+deterministic builder as author, runs three frozen local model artifacts over
+every case, and requires an independent-human audit of a stable 16-case sample,
+all 19 no-evidence cases, and every model escalation. The first 32-sample
+instrument attempt is preserved as invalid after its lower bound reached 66
+human cases. V2 disables model thinking explicitly and requires public schema
+preflights. The audit still stops for instrument refinement above 48 human
+cases. An immutable seal is possible only when all required checks pass and
+GitHub confirms the superseded public commit was purged.
+
+The case annotation remains conservatively `single_review` after this gate;
+the reviewer IDs, change summary, and seal record carry the exact hybrid
+provenance. `double_review` and `professor_approved` are not used to imply
+all-case independent-human or professor validation.
 
 ## Purpose
 

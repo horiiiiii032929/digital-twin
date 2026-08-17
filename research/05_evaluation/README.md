@@ -3,10 +3,13 @@
 Use this folder for versioned datasets, rubrics, machine-readable component
 records, release profiles, and readable result summaries.
 
-The current cross-course retrieval benchmark is privately sealed with 40
-development and 60 unopened held-out cases. Its construction, review,
-adjudication, hashes, and access state are summarized in
-[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md).
+The cross-course retrieval benchmark was privately sealed with 40 development
+and 60 held-out cases. The one-time held-out comparison is complete and selected
+M2 hybrid RRF for the experimental profile, with BM25 retained as rollback.
+Its construction and freeze state are preserved in
+[`cross-course-retrieval-v1-draft-status.md`](cross-course-retrieval-v1-draft-status.md),
+and its decision-bearing result is recorded in
+[`cross-course-retrieval-v1-heldout-results.md`](cross-course-retrieval-v1-heldout-results.md).
 
 ```text
 05_evaluation/
@@ -57,12 +60,24 @@ npm run verify:evaluation-instruments
 This is structural readiness, not evidence that a judge is calibrated or a
 simulated trajectory is valid.
 
-The next professor-fidelity comparison is frozen in
+The professor-fidelity comparison is frozen in
 [`professor_fidelity_v1.json`](instruments/professor_fidelity_v1.json), with
 its research plan in
 [`2026-08-03-professor-fidelity-v1-plan.md`](../04_experiments/2026-08-03-professor-fidelity-v1-plan.md).
-Its preflight runner intentionally fails closed until one exact generator and
-prompt binding is qualified; a dry run emits only a sanitized manifest.
+The first development source run completed 192/192 provider attempts but is
+invalid for selection. Its registered correction documents dataset-review,
+gold-label leakage, candidate-identity, condition-binding, citation, and judge
+defects. Do not cite its C0-C3 effects as professor-fidelity evidence.
+
+The repaired workflow builds exact selected-chunk v1.2 review drafts, creates
+no seal or held-out ledger until the frozen hybrid authoring review passes,
+freezes a shared policy/integration prompt by hash, and records exact passage
+identity in future runs. The ignored v1.2.3 draft contains 48 development and
+104 held-out authoring cases. Its gate is all-case local three-model review plus
+a stable 16-case human sample, a census of all 19 no-evidence cases, and every
+model escalation, capped at 48 human cases. The v1 attempt stopped invalid at
+172/456 records; v2 adds explicit non-thinking transport and public preflights.
+Held-out tutor execution remains unopened.
 
 The prerequisite generator comparison is frozen in
 [`generator_qualification_v1.json`](instruments/generator_qualification_v1.json).
@@ -74,16 +89,18 @@ Development execution requires an environment-owned `DEEPSEEK_API_KEY`; no
 credential is stored or printed, and held-out content remains inaccessible to
 routine validation.
 
-The first durable student workflow acceptance result is summarized in
-[`student-workflow-slice-v1-synthetic-results.md`](student-workflow-slice-v1-synthetic-results.md).
-Reproduce its 14 network-free synthetic checks with:
+The current durable student and publication workflow acceptance result is
+summarized in
+[`student-workflow-slice-v2-publication-results.md`](student-workflow-slice-v2-publication-results.md).
+Reproduce its 19 network-free synthetic checks with:
 
 ```bash
 npm run verify:student-workflow
 ```
 
-This selects only a bounded local persistence and authorization foundation. It
-does not qualify authentication, a live generator, usability, or capacity.
+This keeps only a bounded local persistence, authorization, and publication
+foundation. It does not qualify credentialed authentication, complete
+professor/source administration, usability, or capacity.
 
 The course-specific retrieval-v3 candidate and analysis contract is separately
 frozen in
@@ -196,6 +213,24 @@ uv run python scripts/validate_course_tutor_dataset.py --expected-cases 12
 This checks both JSON Schemas plus IDs, claim-evidence links, corpus and topic
 identity, passage hashes, candidate/presented evidence partitions, permission
 filters, condition-specific claim sets, and fault contracts.
+
+The current professor-fidelity repair commands are:
+
+```bash
+npm run build:course-tutor-splits
+npm run review:course-tutor-authoring-hybrid
+npm run seal:course-tutor-splits -- --ensemble-review <ignored-ensemble.json> \
+  --human-audit <ignored-human-audit.json> --github-purge-confirmed
+npm run analyze:professor-fidelity-development
+```
+
+The builder is review-only and refuses to overwrite its output. The hybrid
+runner binds exact local model digests, records all 456 attempts, and creates
+an ignored model-blinded human packet. The sealer requires the exact completed
+ensemble and independent-human audit, unanimous model approval outside the
+human set, and GitHub Support purge confirmation before writing an immutable
+v2 seal and unopened held-out ledger. The analysis command audits the
+preserved v1 result without provider calls or held-out content access.
 
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer

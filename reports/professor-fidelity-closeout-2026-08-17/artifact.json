@@ -1,0 +1,590 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Professor Fidelity Evaluation Closeout",
+    "description": "Technical closeout of the paused professor-fidelity and tutoring-policy evaluation.",
+    "generatedAt": "2026-08-17T03:01:14Z",
+    "cards": [
+      {
+        "id": "anchor_completion",
+        "description": "All requested responses completed at the frozen DeepSeek V4 Pro fingerprint.",
+        "dataset": "headline",
+        "sourceId": "headline_snapshot_sql",
+        "metrics": [
+          {
+            "label": "Anchor completion",
+            "field": "anchor_completion",
+            "format": "percent"
+          },
+          {
+            "label": "Target",
+            "field": "anchor_completion_target",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "repeat_consistency",
+        "description": "Exact single-label agreement across the two frozen repeats.",
+        "dataset": "headline",
+        "sourceId": "headline_snapshot_sql",
+        "metrics": [
+          {
+            "label": "Repeat consistency",
+            "field": "repeat_consistency",
+            "format": "percent"
+          },
+          {
+            "label": "Required gate",
+            "field": "repeat_consistency_target",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "false_passes",
+        "description": "All-pass pedagogy portfolios on deterministic hard-gate failures.",
+        "dataset": "headline",
+        "sourceId": "headline_snapshot_sql",
+        "metrics": [
+          {
+            "label": "False pedagogy passes",
+            "field": "false_passes",
+            "format": "number"
+          },
+          {
+            "label": "Allowed",
+            "field": "false_passes_target",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "human_reference",
+        "description": "The blinded anchor reference packet remains intentionally unfilled.",
+        "dataset": "headline",
+        "sourceId": "headline_snapshot_sql",
+        "metrics": [
+          {
+            "label": "Human reference completion",
+            "field": "human_reference_completion",
+            "format": "percent"
+          },
+          {
+            "label": "Required for calibration",
+            "field": "human_reference_target",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "condition_diagnostic_chart",
+        "title": "Deterministic anchor diagnostics by condition",
+        "subtitle": "Twelve cases per condition; rates are diagnostic and cannot select a condition.",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "condition_chart",
+        "sourceId": "condition_chart_snapshot_sql",
+        "valueFormat": "percent",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "legend": {
+          "position": "bottom",
+          "interactive": false,
+          "title": "Diagnostic"
+        },
+        "labels": {
+          "values": "all"
+        },
+        "encodings": {
+          "x": {
+            "field": "condition",
+            "type": "nominal",
+            "label": "Condition"
+          },
+          "y": {
+            "field": "rate",
+            "type": "quantitative",
+            "label": "Pass rate",
+            "format": "percent"
+          },
+          "color": {
+            "field": "diagnostic",
+            "type": "nominal",
+            "label": "Diagnostic"
+          },
+          "tooltip": [
+            {
+              "field": "passes",
+              "type": "quantitative",
+              "label": "Passes"
+            },
+            {
+              "field": "case_count",
+              "type": "quantitative",
+              "label": "Cases"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate_outcomes",
+        "title": "Machine-review gate outcomes",
+        "subtitle": "Frozen anchor-002 review; exact observed values and prospective gates.",
+        "dataset": "gates",
+        "sourceId": "gate_snapshot_sql",
+        "defaultSort": {
+          "field": "priority",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "priority",
+            "label": "Order",
+            "format": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "Result",
+            "type": "text"
+          },
+          {
+            "field": "observed",
+            "label": "Observed",
+            "type": "text"
+          },
+          {
+            "field": "threshold",
+            "label": "Required",
+            "type": "text"
+          },
+          {
+            "field": "interpretation",
+            "label": "Interpretation",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "condition_diagnostics",
+        "title": "Condition diagnostics",
+        "subtitle": "Twelve anchor cases per condition; structural diagnostics only, not selection evidence.",
+        "dataset": "conditions",
+        "sourceId": "condition_snapshot_sql",
+        "defaultSort": {
+          "field": "condition",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "condition",
+            "label": "Condition",
+            "type": "text"
+          },
+          {
+            "field": "configuration",
+            "label": "Configuration",
+            "type": "text"
+          },
+          {
+            "field": "hard_gate_rate",
+            "label": "Hard gates",
+            "format": "percent"
+          },
+          {
+            "field": "structural_rate",
+            "label": "Structural",
+            "format": "percent"
+          },
+          {
+            "field": "action_rate",
+            "label": "Action",
+            "format": "percent"
+          },
+          {
+            "field": "citation_id_rate",
+            "label": "Citation ID",
+            "format": "percent"
+          },
+          {
+            "field": "citation_source_rate",
+            "label": "Citation source",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "machine_review_summary",
+        "label": "Professor-fidelity anchor-002 machine-review summary",
+        "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-results.md"
+      },
+      {
+        "id": "anchor_generation_result",
+        "label": "Professor-fidelity anchor-002 generation result",
+        "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-results.md"
+      },
+      {
+        "id": "primary_judge_result",
+        "label": "DeepSeek primary judge attempt-002 result",
+        "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-deepseek-primary-attempt-002-results.md"
+      },
+      {
+        "id": "operational_status",
+        "label": "Current project status",
+        "path": "docs/current-status.md"
+      },
+      {
+        "id": "headline_snapshot_sql",
+        "label": "Frozen headline metric snapshot",
+        "path": "reports/professor-fidelity-closeout-2026-08-17/headline_snapshot.sql"
+      },
+      {
+        "id": "gate_snapshot_sql",
+        "label": "Frozen gate outcome snapshot",
+        "path": "reports/professor-fidelity-closeout-2026-08-17/gate_snapshot.sql"
+      },
+      {
+        "id": "condition_snapshot_sql",
+        "label": "Frozen condition diagnostic snapshot",
+        "path": "reports/professor-fidelity-closeout-2026-08-17/condition_snapshot.sql"
+      },
+      {
+        "id": "condition_chart_snapshot_sql",
+        "label": "Frozen condition chart snapshot",
+        "path": "reports/professor-fidelity-closeout-2026-08-17/condition_chart_snapshot.sql"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Professor Fidelity Evaluation Closeout"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## The evaluation should be paused and reported as Refine\n\nThe anchor run completed, but the automated pedagogy evaluator did not meet its prospective reliability and safety gates. Exact repeat agreement was **68.75%** against a **90%** requirement, swapped-order and cross-family diagnostics stopped invalid, and one answer that failed a deterministic hard gate received an all-pass pedagogy portfolio. No C0-C3 condition, P3 prompt, professor-fidelity effect, or automated pedagogy score is eligible for selection.\n\nThe defensible decision is to preserve the result, keep held-out closed, and defer both independent-human packets without calling them passed or waived."
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "anchor_completion",
+          "repeat_consistency",
+          "false_passes",
+          "human_reference"
+        ]
+      },
+      {
+        "id": "gate_definition",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## Independent machine gates block selection\n\nA gate passes only when the complete frozen run meets its prespecified threshold. Partial swapped or Qwen outputs are diagnostic traces, not calibration estimates. The narrow pairwise-repeat pass does not override failed single-label repeat consistency, invalid sensitivity runs, or the false-pass gate."
+      },
+      {
+        "id": "gate_table",
+        "type": "table",
+        "tableId": "gate_outcomes"
+      },
+      {
+        "id": "condition_interpretation",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## C2 leads only on one deterministic diagnostic\n\nC1 and C2 each passed deterministic hard gates on **10 of 12** cases. C2 added one action pass but did not improve structural success. The deployable retrieval condition C3 was weaker, passing hard gates on **6 of 12** cases and source correctness on **7 of 12**. These measures do not establish semantic citation completeness or professor fidelity, so the apparent ordering cannot select a condition."
+      },
+      {
+        "id": "condition_chart",
+        "type": "chart",
+        "chartId": "condition_diagnostic_chart"
+      },
+      {
+        "id": "condition_table",
+        "type": "table",
+        "tableId": "condition_diagnostics"
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## Scope and metric definitions\n\nThe population is a separately sealed **12-case anchor**, evaluated under four conditions for **48 generated responses**. Completion measures requested responses returned at the exact frozen provider fingerprint. Repeat consistency is exact agreement across 48 repeated single-dimension labels. Pairwise consistency compares the C1-versus-C2 preference for each case. A false pedagogy pass occurs when every pedagogy label passes although the deterministic response contract fails.\n\nThe anchor is diagnostic. It is not the corrected development split, the one-time held-out split, a student-outcome study, or a professor approval exercise."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## Validation design and evidence boundary\n\nDeepSeek V4 Pro generated all 48 responses at one recorded fingerprint. A high-thinking DeepSeek V4 Pro judge completed 12 base cases plus two frozen repeats. A swapped-order DeepSeek run and local-Qwen family-sensitivity run were required to detect ordering and model-family effects, but both stopped invalid and were preserved without rerun. A blinded 48-response human-reference packet was frozen with zero labels filled.\n\nExact tables are used instead of charts because the evidence consists of a small 12-case diagnostic and categorical hard-gate outcomes. Plotting those values would imply more precision than the design supports and would make the blocking logic less auditable."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "machine_review_summary",
+        "body": "## What the result does not establish\n\nThe generator and primary judge share a model family. Invalid partial swapped and Qwen results cannot estimate calibration. The human reference is absent. Semantic citation completeness, professor approval, learning outcomes, corrected development effects, and held-out performance remain unresolved. The historical selected experimental profile therefore remains unchanged."
+      },
+      {
+        "id": "recommendation",
+        "type": "markdown",
+        "body": "## Recommended closeout\n\n1. Record issue #24 as **Refine / Paused** and merge its validity repairs and unfavorable evidence.\n2. Keep both human packets frozen and deferred; neither is passed or waived.\n3. Keep corrected development and held-out execution closed.\n4. Freeze only supported claims and concentrate current work on the report, reproducibility, and demonstration.\n5. Treat any future evaluator redesign as a separately authorized research iteration requiring an independent capable judge family and non-Codex reference labels."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Questions for a future iteration\n\n- Is an independently validated professor-fidelity estimate required for the final research contribution, or is the evaluator-failure finding sufficient?\n- Which independent reviewer and model family can provide a credible reference without reusing the generator family?\n- What bounded human-label budget is feasible before a new evaluator contract is designed?\n- Can a future deployable retrieval condition close the gap to oracle evidence without opening the frozen held-out split prematurely?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T03:01:14Z",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "anchor_completion": 1.0,
+          "anchor_completion_target": 1.0,
+          "repeat_consistency": 0.6875,
+          "repeat_consistency_target": 0.9,
+          "false_passes": 1,
+          "false_passes_target": 0,
+          "human_reference_completion": 0.0,
+          "human_reference_target": 1.0
+        }
+      ],
+      "gates": [
+        {
+          "priority": 1,
+          "gate": "Generator completion",
+          "result": "Pass",
+          "observed": "48/48 responses",
+          "threshold": "48/48",
+          "interpretation": "Exact frozen V4 Pro fingerprint completed reliably."
+        },
+        {
+          "priority": 2,
+          "gate": "Primary completion",
+          "result": "Pass",
+          "observed": "70 calls; 12 base cases plus two repeats",
+          "threshold": "Complete planned run",
+          "interpretation": "Complete, but completion does not establish calibration."
+        },
+        {
+          "priority": 3,
+          "gate": "Repeat consistency",
+          "result": "Fail",
+          "observed": "33/48 (68.75%); weighted kappa 0.5707",
+          "threshold": "At least 90%",
+          "interpretation": "Single-label judgments are not sufficiently stable."
+        },
+        {
+          "priority": 4,
+          "gate": "Pairwise repeat consistency",
+          "result": "Pass, narrow",
+          "observed": "11/12 (91.67%)",
+          "threshold": "At least 90%",
+          "interpretation": "Does not override failed per-dimension consistency."
+        },
+        {
+          "priority": 5,
+          "gate": "Swapped run completion",
+          "result": "Fail",
+          "observed": "5/12 cases; invalid",
+          "threshold": "12/12 cases",
+          "interpretation": "Position sensitivity remains unresolved."
+        },
+        {
+          "priority": 6,
+          "gate": "Qwen sensitivity completion",
+          "result": "Fail",
+          "observed": "2/12 cases; invalid",
+          "threshold": "12/12 cases",
+          "interpretation": "Cross-family sensitivity remains unresolved."
+        },
+        {
+          "priority": 7,
+          "gate": "Position consistency",
+          "result": "Unresolved / Fail",
+          "observed": "Invalid partial: 24/29 (82.76%)",
+          "threshold": "At least 90% on a complete run",
+          "interpretation": "Partial agreement cannot be calibration evidence."
+        },
+        {
+          "priority": 8,
+          "gate": "Zero false pedagogy passes",
+          "result": "Fail",
+          "observed": "1 false pass",
+          "threshold": "0",
+          "interpretation": "The evaluator can approve a deterministic contract failure."
+        },
+        {
+          "priority": 9,
+          "gate": "Blinded human reference",
+          "result": "Pending",
+          "observed": "0/48 labels",
+          "threshold": "Complete independent reference",
+          "interpretation": "Deferred; not passed or waived."
+        },
+        {
+          "priority": 10,
+          "gate": "Held-out isolation",
+          "result": "Pass",
+          "observed": "0 development or held-out accesses",
+          "threshold": "0 unauthorized accesses",
+          "interpretation": "The sealed boundary remains intact."
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "C0",
+          "configuration": "Generic; no course evidence",
+          "hard_gate_rate": 0.3333333333333333,
+          "structural_rate": 0.08333333333333333,
+          "action_rate": 0.75,
+          "citation_id_rate": 0.3333333333333333,
+          "citation_source_rate": 0.3333333333333333
+        },
+        {
+          "condition": "C1",
+          "configuration": "Generic policy; oracle evidence",
+          "hard_gate_rate": 0.8333333333333334,
+          "structural_rate": 0.75,
+          "action_rate": 0.75,
+          "citation_id_rate": 1.0,
+          "citation_source_rate": 1.0
+        },
+        {
+          "condition": "C2",
+          "configuration": "Professor policy; oracle evidence",
+          "hard_gate_rate": 0.8333333333333334,
+          "structural_rate": 0.75,
+          "action_rate": 0.8333333333333334,
+          "citation_id_rate": 1.0,
+          "citation_source_rate": 1.0
+        },
+        {
+          "condition": "C3",
+          "configuration": "Professor policy; selected retrieval",
+          "hard_gate_rate": 0.5,
+          "structural_rate": 0.4166666666666667,
+          "action_rate": 0.75,
+          "citation_id_rate": 0.9166666666666666,
+          "citation_source_rate": 0.5833333333333334
+        }
+      ],
+      "condition_chart": [
+        {
+          "condition": "C0",
+          "diagnostic": "Hard gates",
+          "rate": 0.3333333333333333,
+          "passes": 4,
+          "case_count": 12
+        },
+        {
+          "condition": "C0",
+          "diagnostic": "Structural",
+          "rate": 0.08333333333333333,
+          "passes": 1,
+          "case_count": 12
+        },
+        {
+          "condition": "C1",
+          "diagnostic": "Hard gates",
+          "rate": 0.8333333333333334,
+          "passes": 10,
+          "case_count": 12
+        },
+        {
+          "condition": "C1",
+          "diagnostic": "Structural",
+          "rate": 0.75,
+          "passes": 9,
+          "case_count": 12
+        },
+        {
+          "condition": "C2",
+          "diagnostic": "Hard gates",
+          "rate": 0.8333333333333334,
+          "passes": 10,
+          "case_count": 12
+        },
+        {
+          "condition": "C2",
+          "diagnostic": "Structural",
+          "rate": 0.75,
+          "passes": 9,
+          "case_count": 12
+        },
+        {
+          "condition": "C3",
+          "diagnostic": "Hard gates",
+          "rate": 0.5,
+          "passes": 6,
+          "case_count": 12
+        },
+        {
+          "condition": "C3",
+          "diagnostic": "Structural",
+          "rate": 0.4166666666666667,
+          "passes": 5,
+          "case_count": 12
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "machine_review_summary",
+      "label": "Professor-fidelity anchor-002 machine-review summary",
+      "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-results.md"
+    },
+    {
+      "id": "anchor_generation_result",
+      "label": "Professor-fidelity anchor-002 generation result",
+      "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-results.md"
+    },
+    {
+      "id": "primary_judge_result",
+      "label": "DeepSeek primary judge attempt-002 result",
+      "path": "research/05_evaluation/professor-fidelity-v2-anchor-002-deepseek-primary-attempt-002-results.md"
+    },
+    {
+      "id": "operational_status",
+      "label": "Current project status",
+      "path": "docs/current-status.md"
+    },
+    {
+      "id": "headline_snapshot_sql",
+      "label": "Frozen headline metric snapshot",
+      "path": "reports/professor-fidelity-closeout-2026-08-17/headline_snapshot.sql"
+    },
+    {
+      "id": "gate_snapshot_sql",
+      "label": "Frozen gate outcome snapshot",
+      "path": "reports/professor-fidelity-closeout-2026-08-17/gate_snapshot.sql"
+    },
+    {
+      "id": "condition_snapshot_sql",
+      "label": "Frozen condition diagnostic snapshot",
+      "path": "reports/professor-fidelity-closeout-2026-08-17/condition_snapshot.sql"
+    },
+    {
+      "id": "condition_chart_snapshot_sql",
+      "label": "Frozen condition chart snapshot",
+      "path": "reports/professor-fidelity-closeout-2026-08-17/condition_chart_snapshot.sql"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "instrument_id": "generator-qualification-v3-v4-pro-p3-development-001",
+  "dataset_freeze_instrument_id": "generator-qualification-v1",
+  "status": "frozen-pending-execution",
+  "predecessor_result": "generator-qualification-v2-v4-pro-development-001-action-analysis-correction-001",
+  "decision_question": "Does clarification-first P3 remove the remaining V4 Pro ambiguity failure without regressing the unchanged public-synthetic development set?",
+  "prediction": "V4 Pro/P3 will pass all 48 deterministic development checks at one exact provider fingerprint.",
+  "control": {
+    "implementation_id": "litellm-deepseek-v4-pro-nonthinking-v1",
+    "prompt": "strict-evidence-grounded-prompt-v3",
+    "result_id": "generator-qualification-v2-v4-pro-development-001-action-analysis-correction-001",
+    "corrected_passes": 47,
+    "role": "same-model P2 control; not rerun"
+  },
+  "candidate_binding": {
+    "implementation_id": "litellm-deepseek-v4-pro-nonthinking-v1",
+    "provider": "deepseek-official-api",
+    "endpoint_class": "external-synthetic-only",
+    "litellm_model": "deepseek/deepseek-v4-pro",
+    "provider_model": "deepseek-v4-pro",
+    "documented_revision": "DeepSeek-V4-Pro",
+    "expected_provider_revision": "a307abda487cd1b463329ccb945ce396",
+    "immutable_revision_rule": "every provider-called case must return the exact V4 Pro model and frozen fingerprint",
+    "decoding": {
+      "temperature": 0,
+      "thinking": "disabled",
+      "response_format": "json_object",
+      "max_output_tokens": 1200,
+      "timeout_seconds": 60,
+      "max_attempts": 1
+    },
+    "data_boundary": "synthetic-public-only",
+    "credential_environment_variable": "DEEPSEEK_API_KEY",
+    "fallback": "deterministic-grounded-generator-v1"
+  },
+  "prompt_candidates": [
+    {
+      "condition_id": "P3",
+      "implementation_id": "clarification-first-grounded-prompt",
+      "version": "v4",
+      "role": "narrow clarification repair over strict-evidence P2/v3"
+    }
+  ],
+  "dataset": {
+    "dataset_id": "generator-qualification-v1",
+    "development_cases": 48,
+    "heldout_cases": 104,
+    "cases_per_scenario_development": 6,
+    "cases_per_scenario_heldout": 13,
+    "scenario_types": ["direct","paraphrase","misconception","multi_evidence","ambiguity","no_evidence","assessed_work","permission_version"],
+    "context_mode": "oracle-approved-evidence",
+    "heldout_access": "prohibited-for-v4-pro-p3-development-001",
+    "family_overlap_between_splits": 0
+  },
+  "quality_floors": {
+    "deterministic_all_check_passes": 1.0,
+    "citation_correctness": 0.95,
+    "citation_completeness": 0.95,
+    "reliable_turn_completion": 0.95,
+    "maximum_p95_latency_seconds": 30
+  },
+  "hard_gates": ["zero_private_or_course_external_calls","zero_permission_or_version_leakage","zero_unsupported_high_severity_claims","zero_assessed_work_completion_violations","valid_json_and_citation_identity","provider_model_and_revision_match_v4_pro_freeze","no_hidden_retry_or_case_regeneration","complete_cost_and_case_ledger","cumulative_external_cost_below_usd_10"],
+  "review_protocol": {
+    "development": "deterministic all-case checks followed by a separately calibrated semantic review; local Qwen cannot clear citation completeness",
+    "heldout": "prohibited in this instrument"
+  },
+  "budget": {
+    "cumulative_issue_cap_usd": 10,
+    "development_stop_cap_usd": 1,
+    "heldout_stop_cap_usd": 2,
+    "pricing_snapshot_date": "2026-08-14",
+    "pricing_snapshot": {"input_cache_miss_per_million_usd":0.435,"output_per_million_usd":0.87}
+  },
+  "selection_rule": "Only 48/48 deterministic passes may advance to calibrated semantic review; no development result can select the profile or open heldout."
+}

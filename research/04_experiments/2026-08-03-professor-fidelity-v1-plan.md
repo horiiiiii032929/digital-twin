@@ -2,7 +2,10 @@
 
 Date: 2026-08-03
 
-Run status: frozen preflight; no sealed tutor output has been generated.
+Run status: first development source run invalid for selection; corrected v2
+boundary implemented; private authoring drafts 001-003 rejected or superseded;
+corrected v1.2.3 draft 004 awaiting independent human review; held-out tutor
+outputs unopened.
 
 Instrument: [`professor_fidelity_v1.json`](../05_evaluation/instruments/professor_fidelity_v1.json)
 
@@ -21,6 +24,78 @@ the second pass was Codex-delegated rather than independent human judgment.
 The private `course-tutor-v1` development and held-out sets and judge
 calibration remain incomplete.
 No sealed professor-fidelity tutor output has been generated.
+
+## Status amendment — 2026-08-10
+
+The first private C0-C3 development source run completed 192/192 provider
+attempts, but its result is invalid for selection. The audit found:
+
+1. the v1.1 cases had no independent human authoring review;
+2. C2/C3 prompts contained case expected actions and tutoring moves;
+3. C3 used ad hoc text windows rather than the selected page-bounded chunker;
+4. exact passage IDs, the condition-set hash, and a shared policy/prompt hash
+   were not recorded; and
+5. citation completeness, semantic grounding, and judge contracts were
+   misinterpreted or unresolved.
+
+The correction is registered as
+`professor-fidelity-v1-development-001-analysis-correction-001`. It preserves
+the outputs, makes no profile change, and keeps held-out unopened.
+
+The v2 implementation removes case gold labels, binds one shared policy and
+integration prompt by hash, uses the selected chunker corpus, records exact
+passage hashes and the condition hash, fails provider errors into the
+unconditional denominator, and prevents held-out parsing before the one-time
+ledger transition. A 48-case development plus 104-case held-out v1.2 authoring
+draft was built successfully with exact selected-chunk evidence. It created no
+seal and no held-out ledger; a completed non-Codex human authoring review is
+required next.
+
+## Status amendment — 2026-08-12
+
+Codex cross-reviewed all 152 private authoring cases and their exact approved
+lecture evidence without opening tutor outputs or the blinded condition
+mapping. The initial prediction that only isolated edits were needed failed.
+Draft 001 contained systematic false-misconception, wrapper-paraphrase,
+lecture-mismatched ambiguity, unrelated multi-evidence, broken lineage, and
+semantic claim-to-page defects inherited from the invalid rapid retrieval
+instrument. Case-level advisory triage was 43 clear, 19 uncertain, and 90
+issues; the draft was preserved privately and dropped.
+
+Corrected draft 002, version `course-tutor-v1.2.1`, treats the rapid instrument
+only as an inventory and explicitly curates every positive question, atomic
+claim, and approved page. Deterministic checks and a second semantic advisory
+pass report 133 clear cases, 19 uncertain no-evidence cases, and no unresolved
+LLM-detected issue. The 19-case private focus packet includes local lexical
+nearest-neighbor diagnostics. This remains `codex_assisted: true`, is not human
+approval, creates no seal or ledger, and does not waive independent review of
+all 152 cases. The result is registered as
+`course-tutor-v1.2.1-authoring-cross-review-001`.
+
+## Second authoring-QA amendment — 2026-08-12
+
+An independent second pass invalidated the draft-002 `133 clear / 19 uncertain`
+conclusion. The tracked builder contained private source-derived authoring
+content, development and held-out shared nine exact approved passage
+identities, multi-evidence cardinality did not establish passage necessity,
+and the permission/version negative control did not represent a conflicting
+superseded version. Several multi-evidence claims also exceeded their exact
+pages.
+
+Intermediate draft 003 repaired those classes but deeper family-by-family
+inspection found one answer-bearing past-assessment source and three incomplete
+or overbroad atomic claims. Those findings are preserved privately and draft
+003 was dropped.
+
+Draft 004, version `course-tutor-v1.2.3`, keeps the private authoring blueprint
+ignored, has zero exact approved-passage and authored-family overlap across
+splits, removes the assessed-answer source, binds all 114 required factual
+claims to approved citation identities, and uses a true excluded
+superseded-version conflict in all 19 permission cases. Expanded advisory
+triage is 114 clear, 38 uncertain, and 0 detected issues. The 38 uncertain cases
+are exactly the 19 no-evidence and 19 multi-evidence cases. Independent human
+review of all 152 cases remains mandatory. The result is registered as
+`course-tutor-v1.2.3-authoring-cross-review-002`.
 
 ## Decision question
 
@@ -150,24 +225,28 @@ held-out dataset and its condition file:
 
 ```bash
 uv run python scripts/run_professor_fidelity_experiment.py \
-  --dataset data/processed/course_tutor_v1/development.json \
-  --conditions data/processed/course_tutor_v1/conditions/development.json \
+  --dataset data/processed/course_tutor_v1/sealed_v2/development.json \
+  --conditions data/processed/course_tutor_v1/sealed_v2/development_conditions.json \
   --split development \
   --dry-run \
   --output reports/generated/professor-fidelity-v1-preflight.json
 ```
 
-The execution adapter is intentionally not enabled by this preflight. It must
-receive an exact qualified generator binding, selected/rollback retriever,
-judge calibration state, and a one-time held-out confirmation before producing
-decision-bearing output. The runner fails closed rather than treating a
-missing provider or private dataset as a successful experiment.
+The manifest command is validation-only. The separate execution adapter now
+fails closed unless the exact generator, selected retriever/chunker, frozen
+policy/prompt, reviewed v2 dataset, condition hash, credential, and output
+boundary are present. Development output may be generated before judge
+calibration, but it cannot become decision evidence until eligible blinded
+semantic and pedagogical review is bound.
 
-## Known blockers before the sealed run
+## Known blockers before a corrected development run
 
-1. Bind the qualified generator and P2 prompt into the sealed execution adapter.
-2. Complete anchor judge calibration and development-only runtime checks.
-3. Complete and confirm the private course-tutor development and held-out
-   dataset and condition hashes.
-4. Run the sealed comparison once and register the result before changing the
-   profile.
+1. Human-confirm the 38 no-evidence and multi-evidence focus cases, then
+   independently review all exact-passage v1.2.3 authoring cases without using
+   the Codex advisory as an automatic approval.
+2. Create the immutable v2 development/held-out seal and unopened ledger.
+3. Run corrected development once with the hash-bound v2 adapter.
+4. Complete condition-blinded semantic, citation, and pedagogy review and judge
+   calibration.
+5. Register a valid development result and pass every prospective floor before
+   considering the one-time held-out opening.

@@ -409,6 +409,7 @@ dependencies = [
     { name = "litellm" },
     { name = "pydantic" },
     { name = "pymupdf" },
+    { name = "python-dotenv" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -438,6 +439,7 @@ requires-dist = [
     { name = "open-clip-torch", marker = "extra == 'retrieval-benchmark'", specifier = ">=3.2,<4.0" },
     { name = "pydantic", specifier = ">=2.7,<3.0" },
     { name = "pymupdf", specifier = ">=1.24,<2.0" },
+    { name = "python-dotenv", specifier = ">=1.2,<2.0" },
     { name = "sentence-transformers", marker = "extra == 'retrieval-benchmark'", specifier = "==5.2.0" },
     { name = "torch", marker = "extra == 'retrieval-benchmark'", specifier = "==2.9.1" },
     { name = "transformers", marker = "extra == 'retrieval-benchmark'", specifier = "==4.57.6" },

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "review_id": "synthetic-professor-fidelity-review-001",
+  "source_run_id": "synthetic-professor-fidelity-run-001",
+  "dataset_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "status": "complete",
+  "reviewed_at": "2026-08-10T12:00:00Z",
+  "reviewer": {
+    "reviewer_id": "synthetic-researcher",
+    "role": "researcher",
+    "blinded_to_conditions": true,
+    "independent_human_review": false
+  },
+  "judgments": [
+    {
+      "case_id": "synthetic-case-001",
+      "condition": "C2",
+      "required_claim_expression": true,
+      "supported_claim_precision": true,
+      "citation_semantic_alignment": true,
+      "citation_completeness": true,
+      "presented_evidence_completeness": true,
+      "pedagogy_dimensions": [
+        {
+          "dimension": "clarity_and_coherence",
+          "label": "pass"
+        }
+      ]
+    }
+  ]
+}

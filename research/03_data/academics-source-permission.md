@@ -11,6 +11,93 @@ Multimodal clarification date: 2026-07-31
 
 External review clarification date: 2026-08-01
 
+Professor-fidelity provider clarification date: 2026-08-10
+
+Course-tutor judge clarification date: 2026-08-14
+
+## Course-tutor authoring-review DeepSeek authorization
+
+On 2026-08-14, the source holder explicitly authorized the official DeepSeek
+Open Platform as a judge for the single
+`course-tutor-hybrid-authoring-review-v3` run. This amendment supersedes the
+earlier judge exclusion only for this named authoring review. It authorizes
+`deepseek-v4-pro`, documented by DeepSeek as `DeepSeek-V4-Pro-0813`, at
+`https://api.deepseek.com` in thinking mode with effort `high`.
+
+The permitted payload is limited to synthetic student questions and states,
+authored expected behavior, atomic claims, exact approved IT5002 evidence
+passages and metadata, and eight deterministic approved lexical neighbors for
+each no-evidence check. It excludes real student or participant data,
+solutions, graded answers, credentials, environment values, tutor outputs,
+hidden condition mappings, other reviewers' verdicts, and human decisions.
+
+The authorization permits one public synthetic preflight and 152 private case
+judgments, with no retries and a cumulative USD 2 hard stop. Requests use a
+non-personal `user_id`; records must capture call count, model, system
+fingerprint, token use, latency, and approximate cost without exposing the API
+key or private text in committed artifacts.
+
+DeepSeek's default context caching and the absence of a project-specific
+no-training guarantee remain explicit limitations. This amendment does not
+authorize general DeepSeek judging, professor approval, public deployment,
+student-facing use, or any transfer outside the named v3 fields and limits.
+
+### V4 authoring-review continuation
+
+The same 2026-08-14 source-holder direction authorizes the prospective
+`course-tutor-hybrid-authoring-review-v4` replacement after v3 stopped at its
+human-workload gate. V4 keeps the identical provider, model, private fields,
+exclusions, non-personal identity, and USD 2 ceiling. It changes transport to
+the official OpenAI-compatible client and permits ten public synthetic stress
+probes plus at most two attempts per private case, for 314 external requests
+maximum. A second private attempt is permitted only for empty or malformed
+structured output; valid approve/revise decisions are never retried. V3
+judgments are not sent to the provider or reused in v4.
+
+### V5 transient-failure continuation
+
+The same source-holder direction authorizes
+`course-tutor-hybrid-authoring-review-v5` after v4 exposed a private-request
+timeout classification bug. V5 keeps every v4 data field, exclusion, provider,
+model, non-personal identity, 314-request maximum, and USD 2 ceiling. Its one
+bounded second attempt may follow empty/malformed structured output or a
+transient API timeout/connection failure. Authentication, configuration,
+model, and fingerprint failures remain hard stops. Valid approve/revise
+decisions are never retried, and no v4 private judgment is reused or sent.
+
+### V6 alias-and-output continuation
+
+The same source-holder direction authorizes
+`course-tutor-hybrid-authoring-review-v6` after v5 exposed a prompt alias
+ambiguity and a 4,096-token thinking-output ceiling. V6 keeps every v5 private
+field, exclusion, provider, `deepseek-v4-pro` model, non-personal identity,
+314-request maximum, and USD 2 ceiling. It may identify `dev` and `test` as the
+repository's canonical family-token aliases for `development` and `heldout`,
+respectively, and may increase the per-response output allowance to 8,192
+tokens. The same single bounded retry classes apply. Finish reason and
+reasoning-token usage may be recorded when returned. Valid decisions are never
+retried, and no judgment from v1 through v5 is reused or sent.
+
+## Professor-fidelity DeepSeek authorization
+
+The source holder explicitly authorizes the issue #24 single-turn C0-C3
+research evaluation to send eligible IT5002 lecture passages, synthetic
+student questions and states, the frozen tutoring policy, and derived tutor
+outputs to the official DeepSeek Open Platform endpoint at
+`https://api.deepseek.com` using `deepseek-v4-flash` in non-thinking mode.
+The authorization is limited to the qualified prompt and model binding recorded
+in `student-tutor-v1`, the cumulative USD 10 research cap, and the mandatory
+exclusions below. It does not authorize DeepSeek as a judge, simulator, public
+deployment, or student-facing service.
+
+DeepSeek's official API documentation states that disk context caching is
+enabled by default and that unused cache entries are normally cleared within
+hours to days. The public Open Platform terms assign input responsibility to
+the developer and do not provide a project-specific no-training guarantee.
+The evaluation therefore treats provider retention/training location as an
+explicit limitation, sends only source-holder-authorized teaching material,
+uses a non-personal `user_id`, and sends no participant or student data.
+
 ## Approved collection
 
 All course materials contained in the user's `academics` collection may be:

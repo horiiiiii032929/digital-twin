@@ -12,6 +12,7 @@ from scripts.evaluate_generation import (
     _paid_provider_called,
 )
 from src.digital_twin.generation import (
+    ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     DeterministicCitationValidator,
     DeterministicGroundedGenerator,
@@ -214,6 +215,19 @@ def test_strict_evidence_prompt_forbids_development_failure_modes():
     assert "do not ask a follow-up question" in prompt.messages[0].content
     assert "implementation advice" in prompt.messages[0].content
     assert "student did not state" in prompt.messages[0].content
+    assert "at most 60 words" in prompt.messages[0].content
+
+
+def test_clarification_first_prompt_freezes_narrow_ambiguity_repair():
+    prompt = ClarificationFirstGroundedPromptBuilder().build(
+        "Can you explain the bridge?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert prompt.version == "v4"
+    assert "do not explain either meaning yet" in prompt.messages[0].content
+    assert "beginning with 'Which meaning'" in prompt.messages[0].content
     assert "at most 60 words" in prompt.messages[0].content
 
 

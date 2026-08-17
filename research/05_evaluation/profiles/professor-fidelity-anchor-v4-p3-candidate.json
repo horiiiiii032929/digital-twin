@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "profile_id": "professor-fidelity-anchor-v4-p3-candidate",
+  "status": "frozen-anchor-only",
+  "selection_status": "not-selected",
+  "generator": {
+    "implementation_id": "litellm-deepseek-v4-pro-nonthinking-v1",
+    "provider_model": "deepseek-v4-pro",
+    "litellm_model": "deepseek/deepseek-v4-pro",
+    "documented_revision": "DeepSeek-V4-Pro",
+    "provider_revision": "a307abda487cd1b463329ccb945ce396",
+    "thinking": "disabled",
+    "temperature": 0,
+    "max_output_tokens": 1200,
+    "timeout_seconds": 60,
+    "max_attempts": 1,
+    "data_boundary": "anchor-private-authorized-only"
+  },
+  "prompt": {
+    "implementation_id": "clarification-first-grounded-prompt",
+    "version": "v4",
+    "condition_id": "P3",
+    "integration_prompt_id": "professor-fidelity-integration-prompt-v3-p3"
+  },
+  "evidence": {
+    "development_result_id": "generator-qualification-v3-v4-pro-p3-development-001",
+    "development_raw_sha256": "0912473156086d660f87f3e6e79373b094b3f1baa239be00e8b209de1cb20bce",
+    "development_deterministic_passes": 48,
+    "semantic_review_result_id": "generator-qualification-v3-v4-pro-p3-deepseek-review-001",
+    "semantic_review_raw_sha256": "97e625f562f249a9f2e920a09e62d5b5a6a8e5fa61c0d42615d037f58ff4ed60",
+    "semantic_review_approvals": 48,
+    "semantic_review_same_family": true,
+    "qwen_citation_clearance": false
+  },
+  "authorization": {
+    "scope": "new professor-fidelity anchor run only",
+    "generator_heldout": "prohibited",
+    "professor_fidelity_development": "blocked-until-authoring-audit-and-separate-selection",
+    "professor_fidelity_heldout": "prohibited"
+  },
+  "fallback": "deterministic-grounded-generator-v1"
+}
