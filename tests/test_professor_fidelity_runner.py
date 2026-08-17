@@ -7,7 +7,8 @@ import httpx
 import pytest
 from openai import APITimeoutError
 
-from scripts.analyze_professor_fidelity import analyze
+from scripts.analyze_judge_calibration import analyze as analyze_judge_calibration
+from scripts.analyze_professor_fidelity import _judge_labels, analyze
 from scripts.build_course_tutor_splits import (
     build_case,
     curate_source_case,
@@ -32,6 +33,7 @@ from scripts.judge_professor_fidelity import (
     JudgeTransport,
     _align_quote,
     _judge_input,
+    _judge_input_sha256,
     _selected,
     _judgment_schema,
     _model_digest,
@@ -67,6 +69,7 @@ from scripts.seal_course_tutor_splits import (
 )
 from scripts.summarize_professor_fidelity_anchor_machine_review import (
     _condition_metrics,
+    _pairwise_repeat_agreement,
 )
 from scripts.validate_professor_fidelity_post_audit import (
     validate as validate_post_audit_pipeline,
@@ -346,6 +349,7 @@ def test_anchor_machine_summary_uses_condition_specific_denominators():
                     "action_passed": True,
                     "citation_identity_validity": condition != "C0",
                     "citation_source_correctness": condition in {"C1", "C2"},
+                    "citation_applicable_claims": 0 if condition == "C0" else 1,
                 },
             }
         )
@@ -358,6 +362,42 @@ def test_anchor_machine_summary_uses_condition_specific_denominators():
     assert metrics["C1"]["citation_source_correct"] == 1
     assert metrics["C2"]["structural_passes"] == 1
     assert metrics["C3"]["citation_source_correct"] == 0
+    assert metrics["C0"]["citation_source_applicable_n"] == 0
+    assert metrics["C1"]["citation_source_applicable_n"] == 1
+    assert metrics["C1"]["citation_source_correct_applicable"] == 1
+    assert metrics["C3"]["citation_source_correct_applicable"] == 0
+
+
+def test_anchor_machine_summary_computes_pairwise_repeat_agreement():
+    judge = {
+        "case_judgments": [
+            {
+                "case_id": "case-01",
+                "repeat": False,
+                "judgment": {
+                    "c1_c2_pairwise": [
+                        {"dimension": "clarity_and_coherence", "preference": "C1"},
+                        {"dimension": "tone_and_respect", "preference": "tie"},
+                    ]
+                },
+            },
+            {
+                "case_id": "case-01",
+                "repeat": True,
+                "judgment": {
+                    "c1_c2_pairwise": [
+                        {"dimension": "clarity_and_coherence", "preference": "C1"},
+                        {"dimension": "tone_and_respect", "preference": "C2"},
+                    ]
+                },
+            },
+        ]
+    }
+
+    assert _pairwise_repeat_agreement(judge) == {
+        "n": 2,
+        "exact_agreement": 0.5,
+    }
 
 
 def test_professor_fidelity_judge_records_qwen_digest(monkeypatch):
@@ -426,6 +466,7 @@ def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
         schema=schema,
         seed=5002,
         task_id=task_id,
+        input_sha256="a" * 64,
     )
 
     _validate_judgment(
@@ -442,6 +483,7 @@ def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
     assert captured["response_format"] == {"type": "json_object"}
     assert captured["extra_body"]["thinking"] == {"type": "enabled"}
     assert transport.summary()["reasoning_tokens"] == 40
+    assert transport.call_records[0]["input_sha256"] == "a" * 64
 
 
 def test_active_professor_fidelity_commands_exclude_gemma():
@@ -603,6 +645,24 @@ def test_judge_v4_displays_empty_responses_and_requires_exact_quotes():
         )
 
 
+def test_judge_input_sha256_uses_canonical_payload_serialization():
+    case = _case("case-digest")
+    payload = _judge_input(
+        case,
+        task_id="judge-case-digest-single",
+        mode="single",
+        response_a="A response.",
+        response_b=None,
+        presentation_order=None,
+    )
+
+    observed = _judge_input_sha256(payload)
+    reordered = dict(reversed(list(payload.items())))
+
+    assert observed == _judge_input_sha256(reordered)
+    assert len(observed) == 64
+
+
 def test_judge_v4_aligns_only_unique_punctuation_variants():
     response = "Use the exact source span—with punctuation—when judging."
 
@@ -702,6 +762,82 @@ def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():
     assert "answer" not in result["representative_failures"][0]
 
 
+def test_judge_labels_reject_calibration_from_another_binding():
+    judge = {
+        "status": "complete",
+        "source_run_id": "wrong-run",
+        "instrument_id": "llm-judge-v1",
+        "contract_revision": JUDGE_CONTRACT_REVISION,
+        "judge_run_id": "judge-wrong-run",
+        "model": "unrelated-model",
+        "model_digest": "unrelated-digest",
+        "case_judgments": [],
+    }
+    calibration = {
+        "status": "eligible",
+        "automated_pedagogy_eligible": True,
+        "source_run_id": "expected-run",
+        "calibration_id": "calibration-expected-run",
+        "models": {
+            "primary": {
+                "judge_run_id": "judge-expected-run",
+                "model": "expected-model",
+                "digest": "expected-digest",
+                "contract_revision": JUDGE_CONTRACT_REVISION,
+            }
+        },
+    }
+
+    with pytest.raises(ValueError, match="judge/calibration binding"):
+        _judge_labels(judge, calibration, run_id="expected-run")
+
+
+def test_pedagogy_calibration_does_not_grade_hidden_hard_gates():
+    judgment = {
+        "case_id": "case-01",
+        "mapping": {"A": "C3"},
+        "repeat": False,
+        "judgment": {
+            "responses": [
+                {
+                    "label": "A",
+                    "dimensions": [
+                        {"dimension": "clarity_and_coherence", "label": "pass"}
+                    ],
+                }
+            ],
+            "c1_c2_pairwise": [],
+        },
+    }
+    judge = {
+        "judge_run_id": "judge-01",
+        "source_run_id": "run-01",
+        "status": "complete",
+        "instrument_id": "llm-judge-v1",
+        "contract_revision": JUDGE_CONTRACT_REVISION,
+        "model": "judge-model",
+        "model_digest": "judge-digest",
+        "case_judgments": [judgment],
+    }
+    run = {
+        "run_id": "run-01",
+        "results": [
+            {
+                "case_id": "case-01",
+                "condition": "C3",
+                "score": {"deterministic_hard_gates_passed": False},
+            }
+        ],
+    }
+
+    result = analyze_judge_calibration(run, judge, judge, judge)
+
+    assert "zero_false_passes_on_hard_gate_failures" not in result["gates"]
+    assert result["cross_layer_diagnostics"][
+        "pedagogy_all_pass_with_deterministic_failure"
+    ] == [{"case_id": "case-01", "condition": "C3"}]
+
+
 def test_blinded_review_finalizer_resolves_hidden_conditions():
     mapping = {
         "source_run_id": "run-1",
@@ -744,10 +880,61 @@ def test_blinded_review_finalizer_resolves_hidden_conditions():
         ],
     }
 
-    result = finalize_review(template, mapping)
+    result = finalize_review(template, mapping, {"cases": [_case("case-a")]})
 
     assert result["judgments"][0]["condition"] == "C2"
     assert "task_id" not in result["judgments"][0]
+
+
+def test_blinded_review_finalizer_requires_every_authored_dimension():
+    case = _case("case-a")
+    case["rubric"]["required_pedagogy_dimensions"] = [
+        "clarity_and_coherence",
+        "tone_and_respect",
+    ]
+    mapping = {
+        "source_run_id": "run-1",
+        "dataset_sha256": "a" * 64,
+        "assignments": [
+            {
+                "task_id": "review-case-a",
+                "case_id": "case-a",
+                "response_label": "A",
+                "condition": "C2",
+            }
+        ],
+    }
+    template = {
+        "review_id": "review-1",
+        "source_run_id": "run-1",
+        "dataset_sha256": "a" * 64,
+        "status": "complete",
+        "reviewed_at": "2026-08-10T12:00:00+00:00",
+        "reviewer": {
+            "reviewer_id": "researcher-1",
+            "role": "researcher",
+            "blinded_to_conditions": True,
+            "independent_human_review": False,
+        },
+        "judgments": [
+            {
+                "task_id": "review-case-a",
+                "case_id": "case-a",
+                "response_label": "A",
+                "required_claim_expression": True,
+                "supported_claim_precision": True,
+                "citation_semantic_alignment": True,
+                "citation_completeness": True,
+                "presented_evidence_completeness": True,
+                "pedagogy_dimensions": [
+                    {"dimension": "clarity_and_coherence", "label": "pass"}
+                ],
+            }
+        ],
+    }
+
+    with pytest.raises(ValueError, match="pedagogy dimensions drifted"):
+        finalize_review(template, mapping, {"cases": [case]})
 
 
 def test_course_tutor_builder_does_not_claim_human_double_review(monkeypatch):

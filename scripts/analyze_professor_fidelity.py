@@ -171,6 +171,7 @@ def _review_labels(
     review: dict[str, Any] | None,
     run_id: str,
     dataset_sha256: str,
+    dataset: dict[str, Any],
 ) -> tuple[
     dict[tuple[str, str], bool],
     dict[tuple[str, str], bool],
@@ -206,10 +207,13 @@ def _review_labels(
     citation_completeness: dict[tuple[str, str], bool] = {}
     presented_evidence_completeness: dict[tuple[str, str], bool] = {}
     pedagogy: dict[tuple[str, str], bool] = {}
+    cases = {case["case_id"]: case for case in dataset["cases"]}
     for item in review.get("judgments", []):
         key = (item["case_id"], item["condition"])
         if key in semantic:
             raise ValueError(f"duplicate blinded review judgment: {key}")
+        if item["case_id"] not in cases:
+            raise ValueError(f"blinded review case is outside the dataset: {key}")
         semantic[key] = all(
             item[field] is True
             for field in (
@@ -224,6 +228,16 @@ def _review_labels(
             "presented_evidence_completeness"
         ]
         dimensions = item.get("pedagogy_dimensions", [])
+        expected_dimensions = cases[item["case_id"]]["rubric"][
+            "required_pedagogy_dimensions"
+        ]
+        observed_dimensions = [dimension.get("dimension") for dimension in dimensions]
+        if (
+            len(observed_dimensions) != len(expected_dimensions)
+            or len(set(observed_dimensions)) != len(observed_dimensions)
+            or set(observed_dimensions) != set(expected_dimensions)
+        ):
+            raise ValueError(f"blinded review pedagogy dimensions drifted: {key}")
         pedagogy[key] = bool(dimensions) and all(
             dimension["label"] == "pass" for dimension in dimensions
         )
@@ -246,14 +260,35 @@ def _review_labels(
 def _judge_labels(
     judge: dict[str, Any] | None,
     calibration: dict[str, Any] | None,
+    *,
+    run_id: str,
 ) -> tuple[dict[tuple[str, str], bool], Counter[str], dict[str, Any]]:
     if judge is None:
         return {}, Counter(), {"eligible": False, "reason": "no judge supplied"}
-    if calibration is None or calibration.get("automated_pedagogy_eligible") is not True:
+    if (
+        calibration is None
+        or calibration.get("status") != "eligible"
+        or calibration.get("automated_pedagogy_eligible") is not True
+    ):
         return {}, Counter(), {
             "eligible": False,
             "reason": "judge calibration is absent or ineligible",
         }
+    expected = calibration.get("models", {}).get("primary", {})
+    binding_matches = all(
+        (
+            calibration.get("source_run_id") == run_id,
+            judge.get("status") == "complete",
+            judge.get("source_run_id") == run_id,
+            judge.get("instrument_id") == "llm-judge-v1",
+            judge.get("judge_run_id") == expected.get("judge_run_id"),
+            judge.get("model") == expected.get("model"),
+            judge.get("model_digest") == expected.get("digest"),
+            judge.get("contract_revision") == expected.get("contract_revision"),
+        )
+    )
+    if not binding_matches:
+        raise ValueError("judge/calibration binding does not match the analyzed run")
     scores: dict[tuple[str, str], bool] = {}
     preferences: Counter[str] = Counter()
     for record in judge["case_judgments"]:
@@ -262,7 +297,10 @@ def _judge_labels(
         mapping = record["mapping"]
         for response in record["judgment"]["responses"]:
             condition = mapping[response["label"]]
-            scores[(record["case_id"], condition)] = all(
+            key = (record["case_id"], condition)
+            if key in scores:
+                raise ValueError(f"duplicate automated pedagogy judgment: {key}")
+            scores[key] = all(
                 item["label"] == "pass" for item in response["dimensions"]
             )
         for pairwise in record["judgment"].get("c1_c2_pairwise", []):
@@ -351,9 +389,13 @@ def analyze(
         pedagogy_review,
         review_status,
     ) = _review_labels(
-        review, run["run_id"], run["dataset_sha256"]
+        review, run["run_id"], run["dataset_sha256"], dataset
     )
-    judge_pedagogy, preferences, judge_status = _judge_labels(judge, calibration)
+    judge_pedagogy, preferences, judge_status = _judge_labels(
+        judge,
+        calibration,
+        run_id=run["run_id"],
+    )
     rows = _rescore_rows(
         run,
         dataset,

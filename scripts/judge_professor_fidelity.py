@@ -258,7 +258,10 @@ class JudgeTransport:
         schema: dict[str, Any],
         seed: int,
         task_id: str,
+        input_sha256: str,
     ) -> dict[str, Any]:
+        if not re.fullmatch(r"[a-f0-9]{64}", input_sha256):
+            raise JudgeError("judge input SHA-256 is invalid")
         if self.call_limit is not None and len(self.call_records) >= self.call_limit:
             raise JudgeError("judge call limit reached")
         if self.model != DEEPSEEK_MODEL:
@@ -266,6 +269,7 @@ class JudgeTransport:
             self.call_records.append(
                 {
                     "task_id": task_id,
+                    "input_sha256": input_sha256,
                     "endpoint_class": "local",
                     "provider_model": self.model,
                     "provider_revision": self.model_digest,
@@ -330,6 +334,7 @@ class JudgeTransport:
         self.call_records.append(
             {
                 "task_id": task_id,
+                "input_sha256": input_sha256,
                 "endpoint_class": "external",
                 "provider_model": response.model,
                 "provider_revision": response.system_fingerprint,
@@ -611,11 +616,24 @@ def _align_judgment_quotes(
     return alignments
 
 
+def _canonical_judge_input(payload: dict[str, Any]) -> str:
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _judge_input_sha256(payload: dict[str, Any]) -> str:
+    return hashlib.sha256(_canonical_judge_input(payload).encode("utf-8")).hexdigest()
+
+
 def _prompt(payload: dict[str, Any]) -> str:
     return (
         PROMPT_PATH.read_text(encoding="utf-8")
         + "\nINPUT JSON:\n"
-        + json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        + _canonical_judge_input(payload)
     )
 
 
@@ -704,6 +722,7 @@ def _judge_case(
             ),
             seed=5002,
             task_id=task_id,
+            input_sha256=_judge_input_sha256(payload),
         )
         quote_alignments.extend(
             {
@@ -725,7 +744,13 @@ def _judge_case(
             response_a=payload["response_a"],
             response_b=None,
         )
-        responses.append({"label": label, "dimensions": value["single_judgments"]})
+        responses.append(
+            {
+                "label": label,
+                "input_sha256": _judge_input_sha256(payload),
+                "dimensions": value["single_judgments"],
+            }
+        )
 
     pair_mapping = _pair_mapping(swap)
     pair_task_id = f"judge-{case['case_id']}-c1-c2-{'ba' if swap else 'ab'}"
@@ -746,6 +771,7 @@ def _judge_case(
         ),
         seed=5002,
         task_id=pair_task_id,
+        input_sha256=_judge_input_sha256(pair_payload),
     )
     quote_alignments.extend(
         {
@@ -781,6 +807,7 @@ def _judge_case(
     return {
         "responses": responses,
         "c1_c2_pairwise": normalized,
+        "pairwise_input_sha256": _judge_input_sha256(pair_payload),
         "pair_mapping": pair_mapping,
         "quote_alignments": quote_alignments,
     }
@@ -801,11 +828,17 @@ def _validate_case_result(
             raise JudgeError("judge dimensions drifted")
         if record["label"] not in mapping:
             raise JudgeError("judge response label is invalid")
+        if not re.fullmatch(r"[a-f0-9]{64}", str(record.get("input_sha256", ""))):
+            raise JudgeError("judge response input digest is invalid")
     pairwise = value.get("c1_c2_pairwise", [])
     if {item.get("dimension") for item in pairwise} != expected_dimensions:
         raise JudgeError("pairwise dimensions drifted")
     if any(item.get("preference") not in {"C1", "C2", "tie"} for item in pairwise):
         raise JudgeError("pairwise preference is invalid")
+    if not re.fullmatch(
+        r"[a-f0-9]{64}", str(value.get("pairwise_input_sha256", ""))
+    ):
+        raise JudgeError("pairwise input digest is invalid")
 
 
 def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:

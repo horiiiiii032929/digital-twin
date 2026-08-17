@@ -309,17 +309,21 @@ Current utilities:
   and complete token/reasoning/cost telemetry. Local `qwen3:4b` is retained as
   a bounded sensitivity reviewer; Gemma is excluded from active
   professor-fidelity commands. The runner records one preference per
-  pedagogical dimension, seeded repeat samples, and a separately invoked
-  swapped-order sensitivity sample.
-- `analyze_judge_calibration.py`: checks local-judge repeat, position, and
-  cross-family/reference agreement and fails eligibility when the frozen
+  pedagogical dimension, a SHA-256 binding for every canonical judge input,
+  seeded repeat samples, and a separately invoked swapped-order sensitivity
+  sample.
+- `analyze_judge_calibration.py`: checks judge repeat, position, and
+  cross-family/reference agreement; requires every artifact to match the exact
+  run, model, digest, and contract; and fails eligibility when the frozen
   blinded researcher reference, any per-dimension gate, or pairwise position
-  gate is absent.
+  gate is absent. Pedagogy-versus-hidden-hard-gate disagreement remains a
+  cross-layer diagnostic and is not graded as an evaluator failure.
 - `prepare_professor_fidelity_blinded_review.py` and
   `finalize_professor_fidelity_blinded_review.py`: create an ignored private
   condition-blinded packet/template, keep the condition mapping separate during
-  review, and validate the completed normalized review before it may resolve
-  semantic, citation, evidence-sufficiency, or pedagogical metrics. Prepare the
+  review, bind finalization to the exact dataset, and require every authored
+  pedagogy dimension before a completed review may resolve semantic, citation,
+  evidence-sufficiency, or pedagogical metrics. Prepare the
   current anchor packet with `npm run
   prepare:professor-fidelity-anchor-review`.
 - `analyze_professor_fidelity.py`: ignores embedded legacy scores, rescoring
@@ -329,6 +333,11 @@ Current utilities:
   blinded review, and leaves semantic outcomes unresolved otherwise. Run the
   current invalid-for-selection correction with `npm run
   analyze:professor-fidelity-development`.
+- `correct_professor_fidelity_anchor_machine_review.py`: recomputes the
+  anchor-002 aggregate interpretation without provider calls, calculates
+  repeat metrics from source labels, separates citation-applicable
+  denominators, and records the correction under a new result identity. Run it
+  with `npm run correct:professor-fidelity-anchor-machine`.
 - `build_generator_qualification_dataset.py`: deterministically builds the
   public synthetic 48-case development and 104-case sealed held-out generator
   qualification splits plus their hash-bound freeze manifest.

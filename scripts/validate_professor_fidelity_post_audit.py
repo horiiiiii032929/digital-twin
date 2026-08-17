@@ -68,6 +68,7 @@ def validate() -> dict[str, Any]:
         "calibrate:professor-fidelity-anchor-prehuman",
         "calibrate:professor-fidelity-anchor",
         "summarize:professor-fidelity-anchor-machine",
+        "correct:professor-fidelity-anchor-machine",
     }
     _require(required_commands.issubset(scripts), "post-audit commands are incomplete")
     _require(judge_commands, "professor-fidelity judge commands are absent")
