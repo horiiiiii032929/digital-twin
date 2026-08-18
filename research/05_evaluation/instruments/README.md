@@ -39,3 +39,7 @@ uv run python scripts/validate_evaluation_instruments.py
 Validation proves structural and cross-file consistency. It does not prove that
 a judge is calibrated, a simulator is valid on final trajectories, or a tutor
 passes evaluation.
+
+The separate `dependency_vulnerability_exceptions_v1.json` policy is not part
+of the frozen tutor instrument set. It records temporary, exact exceptions for
+the optional local retrieval runtime and is enforced by `npm run audit:python`.

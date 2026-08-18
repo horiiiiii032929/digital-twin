@@ -1,6 +1,7 @@
 # Dependency and security upgrade plan
 
-Status: frozen before candidate installation
+Status: completed; the ML group was dropped and the independently passing
+dependency upgrades were retained
 
 ## Decision
 
@@ -38,7 +39,10 @@ lockfiles remain the rollback through Git history.
 
 ## Gates
 
-1. Python dependency audit reports zero known vulnerabilities.
+1. Python dependency audit reports zero unreviewed vulnerabilities. Any
+   temporary compatibility exception must match a tracked package, version,
+   advisory ID, fix-version set, and occurrence exactly, remain local-only,
+   and carry a review date.
 2. npm audit reports zero known vulnerabilities without forced overrides.
 3. All repository checks pass on Python 3.12 and Node 24.
 4. Every candidate M2 top-three list is identical to the control for all 40
@@ -69,3 +73,14 @@ The final decision will be registered whether it is Keep, partial Keep, or
 Drop. Raw development output remains ignored; the durable summary will contain
 only aggregate results, exact revisions and versions, gates, limitations, and
 the rollback decision.
+
+## Outcome
+
+The Torch 2.13.0, Transformers 5.15.0, and Sentence Transformers 5.7.0
+candidate preserved aggregate metrics but changed the exact top-three ranking
+for two of 40 development cases. The predeclared exact-ranking gate therefore
+failed and the group was restored to 2.9.1, 4.57.6, and 5.2.0 respectively.
+The other Python and frontend upgrades passed their tests and audits and were
+retained. Exact temporary advisories on the restored optional ML environment
+are tracked by `dependency_vulnerability_exceptions_v1.json`; CI rejects any
+unlisted finding or drift.

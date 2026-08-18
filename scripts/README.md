@@ -378,3 +378,13 @@ Current utilities:
   restart persistence, citations, duplicate requests, withdrawal, isolation,
   revoked accounts, malformed generation, and redacted audit telemetry. Run
   it with `npm run verify:student-workflow`.
+- `evaluate_ml_dependency_compatibility.py` and
+  `compare_ml_dependency_compatibility.py`: run the frozen selected-M2
+  development comparison before changing retrieval ML dependencies and fail
+  when exact top-three rankings, quality, isolation, data boundaries, or
+  latency gates regress. Generated per-case artifacts remain ignored.
+- `audit_python_dependencies.py`: audits the fully resolved Python lock,
+  including optional retrieval dependencies, and matches every finding by
+  exact package, version, advisory, fix versions, and occurrence against the
+  tracked time-bounded exception policy. Any new, changed, or stale exception
+  fails the command; run `npm run audit:python`.

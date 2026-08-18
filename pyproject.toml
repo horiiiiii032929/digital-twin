@@ -17,9 +17,9 @@ dependencies = [
 retrieval-benchmark = [
     "fastembed==0.8.0",
     "open-clip-torch>=3.3,<4.0",
-    "sentence-transformers==5.7.0",
-    "torch==2.13.0",
-    "transformers==5.15.0",
+    "sentence-transformers==5.2.0",
+    "torch==2.9.1",
+    "transformers==4.57.6",
 ]
 
 [dependency-groups]
