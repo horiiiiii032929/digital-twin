@@ -12,6 +12,9 @@
   "scripts": {
     "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:generator-qualification && npm run verify:generator-qualification-v4-pro && npm run verify:generator-qualification-v4-pro-p3 && npm run verify:professor-fidelity-post-audit && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run verify:student-workflow && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
+    "audit:python": "uv run python -m scripts.audit_python_dependencies",
+    "audit:js": "npm audit --audit-level=moderate",
+    "audit:dependencies": "npm run audit:python && npm run audit:js",
     "dev:web": "npm --workspace apps/web run dev",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
     "test": "uv run pytest tests",

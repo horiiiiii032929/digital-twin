@@ -11,6 +11,10 @@ Current utilities:
   upgrades. They require exact top-three rankings across all 40 cases, no
   quality or isolation regression, no held-out/external access, and at most a
   20% median p95 latency increase.
+- `audit_python_dependencies.py`: exports every locked core, development, and
+  optional dependency to a temporary pinned requirements file and runs
+  `pip-audit` without installing heavy optional ML packages. Use `npm run
+  audit:dependencies` for the Python and npm security gates used by CI.
 - `validate_markdown_links.py`: checks local links in repository Markdown files;
   run it with `npm run check:docs`.
 - `verify_local_ingestion.py`: parses and chunks five approved synthetic TXT,

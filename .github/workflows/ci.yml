@@ -41,5 +41,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
+      - name: Audit resolved dependencies
+        run: npm run audit:dependencies
+
       - name: Verify repository
         run: npm run check
