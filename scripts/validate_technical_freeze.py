@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,8 @@ EXPECTED_CLAIMS = {
     "U06": "unsupported",
     "U07": "rejected-wording",
 }
+REGISTRY_PATH = "research/05_evaluation/result-registry.md"
+REGISTRY_ROW_PATTERN = re.compile(r"^\| `([^`]+)` \|.*$", re.MULTILINE)
 
 
 def sha256(path: Path) -> str:
@@ -60,6 +63,43 @@ def registered_result_ids(root: Path) -> set[str]:
         encoding="utf-8"
     )
     return set(re.findall(r"^\| `([^`]+)` \|", text, flags=re.MULTILINE))
+
+
+def validate_registry_extension(frozen_text: str, current_text: str) -> None:
+    """Allow new registry rows while preserving every frozen row exactly."""
+
+    def rows(text: str) -> dict[str, str]:
+        matches = REGISTRY_ROW_PATTERN.findall(text)
+        if len(matches) != len(set(matches)):
+            raise ValueError("evaluation registry contains duplicate result IDs")
+        return {
+            match.group(1): match.group(0)
+            for match in REGISTRY_ROW_PATTERN.finditer(text)
+        }
+
+    frozen_rows = rows(frozen_text)
+    current_rows = rows(current_text)
+    changed = [
+        result_id
+        for result_id, frozen_row in frozen_rows.items()
+        if current_rows.get(result_id) != frozen_row
+    ]
+    if changed:
+        raise ValueError(
+            "frozen evaluation registry rows drifted: " + ", ".join(changed)
+        )
+
+
+def frozen_repository_file(
+    root: Path, revision: str, relative_path: str
+) -> bytes:
+    """Read one tracked file from the freeze's recorded evidence revision."""
+    return subprocess.run(
+        ["git", "show", f"{revision}:{relative_path}"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
@@ -81,7 +121,19 @@ def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
             raise ValueError(f"duplicate freeze artifact binding: {relative_path}")
         artifact_paths.add(relative_path)
         path = _repository_file(root, relative_path)
-        if sha256(path) != binding["sha256"]:
+        if relative_path == REGISTRY_PATH:
+            frozen_bytes = frozen_repository_file(
+                root,
+                manifest["evidence_base_revision"],
+                relative_path,
+            )
+            if hashlib.sha256(frozen_bytes).hexdigest() != binding["sha256"]:
+                raise ValueError(f"freeze artifact hash mismatch: {relative_path}")
+            validate_registry_extension(
+                frozen_bytes.decode("utf-8"),
+                path.read_text(encoding="utf-8"),
+            )
+        elif sha256(path) != binding["sha256"]:
             raise ValueError(f"freeze artifact hash mismatch: {relative_path}")
 
     profile_contract = manifest["profile"]
