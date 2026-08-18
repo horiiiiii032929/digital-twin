@@ -5,6 +5,12 @@ data validation, or project automation scripts.
 
 Current utilities:
 
+- `evaluate_ml_dependency_compatibility.py` and
+  `compare_ml_dependency_compatibility.py`: run and compare a three-trial,
+  development-only selected-M2 compatibility check before and after ML-library
+  upgrades. They require exact top-three rankings across all 40 cases, no
+  quality or isolation regression, no held-out/external access, and at most a
+  20% median p95 latency increase.
 - `validate_markdown_links.py`: checks local links in repository Markdown files;
   run it with `npm run check:docs`.
 - `verify_local_ingestion.py`: parses and chunks five approved synthetic TXT,
