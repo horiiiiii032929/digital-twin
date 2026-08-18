@@ -2,16 +2,18 @@
 
 ## Decision
 
-Sprint 2 uses a small, inspectable local ingestion baseline for approved UTF-8
-text, Markdown, and selectable-text PDFs. Source bytes stay outside domain
-models and Git. Parsing produces normalized documents, text segments, figure
-metadata, and deterministic chunks with explicit lineage.
+The repository retains the selected, inspectable text-ingestion baseline and
+now adds a prospective region-aware product path for approved PDFs. Source
+bytes and original crops stay outside domain models and Git. Parsing can
+produce normalized documents, ordered text segments, tables/rows/cells,
+figures, vector diagrams, equation-like blocks, OCR regions, page fallbacks,
+and release-ready chunks with explicit lineage.
 
-The implementation uses PyMuPDF for selectable-text PDF blocks, embedded image
-extraction, page geometry, and normalized figure bounding boxes. This was chosen
-over a text-only PDF library because issue #22 requires both text and figure
-provenance. OCR, layout reconstruction, and vision-generated descriptions are
-deliberately deferred.
+The implementation uses PyMuPDF for selectable text, page geometry, table
+structure, embedded images, vector clusters, and normalized region boxes. OCR
+and region descriptions are provider-neutral injected interfaces. No OCR or
+vision provider is selected by default, and generated descriptions are
+searchable metadata rather than authoritative evidence.
 
 ## Data flow
 
@@ -23,11 +25,13 @@ Local file
         v
 LocalDocumentParser
   |- CourseDocument + ordered DocumentSegments
-  `- FigureAssets -> caller-provided FigureStore
+  |- FigureAssets -> caller-provided FigureStore
+  `- DocumentRegions -> caller-provided RegionCropStore
         |
         v
-PageBoundedHeadingParagraphChunker
-  `- DocumentChunks with stable IDs, locators, hashes, and permission snapshot
+PageBoundedHeadingParagraphChunker (selected text baseline)
+or RegionAwareChunker (prospective multimodal path)
+  `- DocumentChunks with stable IDs, region/crop lineage, and permission snapshot
 ```
 
 The parser verifies that the bytes match the approved SHA-256 checksum and
@@ -62,6 +66,14 @@ source version.
   checksum, and an opaque image reference.
 - Figure bytes are persisted only through a caller-provided store. The included
   local store must point to a Git-ignored directory.
+- Region crops preserve source checksum and version, page, normalized
+  `(x0, y0, x1, y1)` bounds, region kind, extraction method, parent region,
+  permission snapshot, crop checksum, and opaque crop reference.
+- Scanned and large-image pages use an injected OCR provider. A configured
+  provider returns normalized text regions; the parser never grants permission
+  or treats OCR/model metadata as an independent source.
+- Table cells retain the original cell value and add source-derived row and
+  column labels only to the searchable representation.
 
 ## Chunking decision
 
@@ -110,24 +122,34 @@ uv run pytest tests/digital_twin/test_local_ingestion.py
 npm run check
 ```
 
+Validate and execute the new public-synthetic development pilot with:
+
+```bash
+npm run verify:multimodal-product-grounding
+npm run benchmark:multimodal-product-grounding-development
+```
+
 ## Known limitations and failure cases
 
-- Scanned/image-only PDFs are rejected because OCR is not implemented.
+- Scanned/image-only PDFs require a configured OCR provider. The current
+  product foundation proves the injected path with authored synthetic OCR but
+  does not select or ship a production OCR engine.
 - Encrypted PDFs and malformed PDFs are rejected.
-- PDF reading order depends on the source's selectable-text layout metadata;
-  complex multi-column slides may need a later layout-aware parser.
-- Only embedded raster images are extracted. Vector drawings and tables are not
-  converted into figure assets.
+- Reading order and column detection remain deterministic heuristics. Complex
+  lecture layouts still need representative provider/layout qualification.
+- Vector clusters are coarse diagram regions; they do not yet recover graph
+  semantics, equation structure, or arbitrary nested layout.
 - Caption detection uses nearby text geometry and can select the wrong text in
   dense layouts; figure descriptions remain a separate, reviewable model.
 - Eighty-four selected cross-course chunks are shorter than 80 characters,
   including page-number-only and title-slide content.
 - Five of eight visually inspected cross-course pages contained important
   diagram or spatial meaning not fully represented by selectable text.
-- Visual completeness is now a separate prospective comparison under
-  [`multimodal study-material retrieval v1`](../research/04_experiments/2026-07-31-multimodal-retrieval-v1-plan.md).
-  It will compare local OCR and layout-aware extraction before considering
-  visual embeddings; it does not change the sealed text corpus.
+- The new 21-case synthetic V2 pilot reached 13/13 complete visual evidence and
+  citation lineage with the compact deterministic route, but failed its frozen
+  relative p95 gate. No multimodal profile is selected, and the historical
+  24-case held-out split remains unopened. See the
+  [attempt-003 result](../research/05_evaluation/multimodal-product-grounding-v2-development-attempt-003-results.md).
 - TXT, Markdown, and PDF are the only supported formats. Word, PowerPoint,
   audio, video, Canvas, and Obsidian integration remain out of scope.
 - Retrieval filters non-tutoring and superseded chunks. The local store still

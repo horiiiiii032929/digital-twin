@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "run_id": "multimodal-product-grounding-v2-development-attempt-002",
+  "component": "retriever",
+  "dataset_id": "multimodal-product-grounding-v2-development-1.0.1",
+  "corpus_id": "multimodal-product-grounding-v2-public-synthetic-9",
+  "code_revision": "707c08edd794656b6605212f3a21de993e44a81d",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "multimodal-text-page-bm25-control",
+        "version": "v1",
+        "configuration": {
+          "case_count": 21,
+          "visual_case_count": 13,
+          "chunk_count": 7,
+          "historical_heldout_read": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "visual-complete-evidence-at-3", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "visual-atomic-recall-at-5", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "visual-region-ndcg-at-10", "value": 0.01897600120411617, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.01897600120411617, "passed": true},
+        {"name": "visual-top1-localization-iou", "value": 0.019368922428202262, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7, "passed": false},
+        {"name": "citation-lineage-accuracy", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "retrieval-p95-ms", "value": 0.05841700476594269, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 0.07010040571913123, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "visual-complete-evidence-at-3", "passed": false, "evidence": "The page control retrieved complete evidence for 0/13 visual-answerable cases."},
+        {"name": "visual-atomic-recall-at-5", "passed": false, "evidence": "The page control recovered none of the required visual atoms."},
+        {"name": "visual-region-ndcg-improvement", "passed": true, "evidence": "The control defines the nDCG comparison floor."},
+        {"name": "visual-top1-localization", "passed": false, "evidence": "Mean top-1 localization IoU was 0.0194, below 0.70."},
+        {"name": "table-relationship-accuracy", "passed": true, "evidence": "Both candidates passed the three table fact-support checks."},
+        {"name": "unsupported-description-rate", "passed": true, "evidence": "No generated description provider was enabled."},
+        {"name": "no-evidence-behavior", "passed": true, "evidence": "The control passed 2/2 no-evidence cases."},
+        {"name": "isolation-and-integrity", "passed": true, "evidence": "The control passed 2/2 isolation and 2/2 integrity cases."},
+        {"name": "text-control-no-regression", "passed": true, "evidence": "The control passed 2/2 selectable-text cases."},
+        {"name": "citation-lineage", "passed": false, "evidence": "The page control did not carry region crop lineage."},
+        {"name": "no-online-vision", "passed": true, "evidence": "Zero online vision calls were made."},
+        {"name": "relative-p95", "passed": true, "evidence": "The control defines the 1.20 relative p95 ceiling."}
+      ],
+      "failures_by_category": {"ranking": 13, "localization": 13, "citation-lineage": 13}
+    },
+    {
+      "implementation": {
+        "implementation_id": "multimodal-region-routed-local-candidate",
+        "version": "v2",
+        "configuration": {
+          "case_count": 21,
+          "visual_case_count": 13,
+          "chunk_count": 44,
+          "ocr_adapter": "instrument-authored-ocr-1-0-1",
+          "description_provider_enabled": false,
+          "historical_heldout_read": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "visual-complete-evidence-at-3", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": true},
+        {"name": "visual-atomic-recall-at-5", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "visual-region-ndcg-at-10", "value": 0.9764156153671284, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.01897600120411617, "passed": true},
+        {"name": "visual-top1-localization-iou", "value": 0.9316225628519634, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7, "passed": true},
+        {"name": "citation-lineage-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "retrieval-p95-ms", "value": 0.0789580080891028, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 0.07010040571913123, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "visual-complete-evidence-at-3", "passed": true, "evidence": "Complete evidence was retrieved for 13/13 visual-answerable cases."},
+        {"name": "visual-atomic-recall-at-5", "passed": true, "evidence": "Every required visual evidence atom was retrieved within five results."},
+        {"name": "visual-region-ndcg-improvement", "passed": true, "evidence": "Region nDCG@10 improved from 0.0190 to 0.9764."},
+        {"name": "visual-top1-localization", "passed": true, "evidence": "Mean top-1 localization IoU was 0.9316."},
+        {"name": "table-relationship-accuracy", "passed": true, "evidence": "The candidate passed 3/3 table fact-support checks."},
+        {"name": "unsupported-description-rate", "passed": true, "evidence": "No generated description provider was enabled."},
+        {"name": "no-evidence-behavior", "passed": true, "evidence": "The candidate passed 2/2 no-evidence cases."},
+        {"name": "isolation-and-integrity", "passed": true, "evidence": "The candidate passed 2/2 isolation and 2/2 integrity cases."},
+        {"name": "text-control-no-regression", "passed": true, "evidence": "The candidate passed 2/2 selectable-text controls."},
+        {"name": "citation-lineage", "passed": true, "evidence": "All 13 expected visual citations retained source, region, bounding-box, and crop lineage."},
+        {"name": "no-online-vision", "passed": true, "evidence": "Zero online vision calls were made."},
+        {"name": "relative-p95", "passed": false, "evidence": "0.0790 ms exceeded the frozen 0.0701 ms ceiling."}
+      ],
+      "failures_by_category": {"integration": 2, "operations": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "R2 passed the frozen quality, safety, text-control, citation-lineage, and zero-online-vision gates, but failed the relative p95 gate. Two correctly retrieved equation cases also exposed a prospective answerable-action weakness, so no profile was selected.",
+    "limitations": [
+      "The run used nine authored synthetic PDFs and cannot establish real-course performance.",
+      "The authored OCR adapter does not qualify a production OCR provider.",
+      "The 13-case visual sample has a wide uncertainty interval.",
+      "The latency ratio compares sub-millisecond local retrieval operations.",
+      "The historical 24-case held-out split was not read."
+    ]
+  }
+}

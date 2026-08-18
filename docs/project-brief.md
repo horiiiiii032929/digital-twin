@@ -60,9 +60,9 @@ Text retrieval retains the experimentally selected M2 hybrid profile with
 BM25 rollback. The bounded synthetic publication/student foundation passes its
 registered 19 checks. These are useful baselines, not production evidence.
 
-The immediate work is issue #85: correct and audit the multimodal evaluator.
-Issue #86 then replaces the shallow evaluation-only path with region-aware
-multimodal product ingestion and citations. The deployment, large-benchmark,
+Issue #85 corrected and audited the multimodal evaluator. Issue #86 now provides
+the prospective region-aware ingestion and citation foundation, with a
+registered Refine decision and no selected multimodal profile. The deployment, large-benchmark,
 fidelity, operations, end-to-end, and pilot issues are explicitly downstream.
 
 ## Claim boundary

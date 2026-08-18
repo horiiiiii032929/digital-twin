@@ -4,6 +4,9 @@ from typing import TYPE_CHECKING, Protocol
 from src.digital_twin.grounding.models import (
     CourseDocument,
     DocumentChunk,
+    DocumentRegion,
+    OCRTextRegion,
+    RegionDescription,
     RetrievalHit,
     TutorAnswer,
 )
@@ -24,6 +27,38 @@ class DocumentChunker(Protocol):
 class FigureStore(Protocol):
     def store(self, figure_id: str, extension: str, content: bytes) -> str:
         """Persist extracted bytes outside domain models and return an opaque ref."""
+
+
+class RegionCropStore(Protocol):
+    def store(self, region_id: str, extension: str, content: bytes) -> str:
+        """Persist an original page crop and return an opaque, access-checked ref."""
+
+
+class OCRProvider(Protocol):
+    implementation_id: str
+    version: str
+
+    def recognize(
+        self,
+        page_image: bytes,
+        *,
+        page_number: int,
+        image_width: int,
+        image_height: int,
+    ) -> list[OCRTextRegion]:
+        """Return text and normalized boxes without owning source permissions."""
+
+
+class RegionDescriptionProvider(Protocol):
+    implementation_id: str
+    version: str
+
+    def describe(
+        self,
+        region: DocumentRegion,
+        crop: bytes,
+    ) -> RegionDescription | None:
+        """Create searchable metadata; the crop remains the citable evidence."""
 
 
 class Retriever(Protocol):

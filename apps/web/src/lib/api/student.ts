@@ -84,6 +84,22 @@ export function listStudentMessageCitations(
   )
 }
 
+export async function loadStudentCitationCrop(
+  messageId: string,
+  citationId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<Blob> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/student/messages/${messageId}/citations/${citationId}/crop`,
+    { headers: studentHeaders(accountId) },
+  )
+  if (!response.ok) {
+    const error = await readStudentError(response)
+    throw new StudentApiError(error.message, response.status, error.code)
+  }
+  return response.blob()
+}
+
 async function studentRequest<T>(
   path: string,
   options: RequestInit = {},

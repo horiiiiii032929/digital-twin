@@ -43,11 +43,20 @@ and withdrawn-release requests fail closed.
   `content` and a stable `request_id`; exact duplicates return the original
   turn, while reuse for different content is rejected as a conflict.
 - `GET /api/student/messages/{message_id}/citations` returns validated source,
-  version, and locator lineage for an owned tutor message.
+  version, page, region, bounding box, checksum, crop reference, and locator
+  lineage for an owned tutor message.
+- `GET /api/student/messages/{message_id}/citations/{citation_id}/crop` returns
+  an approved original PNG crop only after the same student/course/release
+  authorization check; raw local paths are never returned.
 
 The local professor publication boundary connects an onboarding session to a
 durable release:
 
+- `PUT /api/professor/courses/{course_id}/sources/{artifact_id}` accepts one
+  bounded approved PDF body, applies professor/course authorization before
+  processing, and returns release-ready region chunks. OCR and description
+  providers remain injected; this synchronous local endpoint moves to the
+  durable job/object-storage boundary in the deployment work;
 - `POST /api/professor/courses/{course_id}/releases` creates a draft from a
   reviewed onboarding policy and chunk set;
 - `PATCH /api/professor/releases/{release_id}/evaluation` records the frozen
@@ -77,7 +86,8 @@ does not construct the professor controller. It provides:
 - release-bound new and restored conversations;
 - a focused tutoring conversation with grounded answer markers;
 - desktop citation inspection and a mobile citation sheet with source version,
-  locator, and release lineage;
+  page/region metadata, approved original-crop preview, locator, and release
+  lineage;
 - stable request identifiers so an explicit retry cannot duplicate a turn;
 - draft preservation and distinct recovery actions for transport failure and a
   withdrawn or replaced release; and

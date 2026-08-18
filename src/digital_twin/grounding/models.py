@@ -95,6 +95,102 @@ class DocumentSegment(BaseModel):
         return bounding_box
 
 
+class RegionKind(StrEnum):
+    TEXT = "text"
+    HEADING = "heading"
+    COLUMN = "column"
+    TABLE = "table"
+    TABLE_ROW = "table-row"
+    TABLE_CELL = "table-cell"
+    FIGURE = "figure"
+    DIAGRAM = "diagram"
+    EQUATION = "equation"
+    CAPTION = "caption"
+    SCREENSHOT = "screenshot"
+    OCR = "ocr"
+    PAGE = "page"
+
+
+class OCRTextRegion(BaseModel):
+    """Provider-neutral OCR output using normalized page coordinates."""
+
+    text: str = Field(min_length=1)
+    bounding_box: tuple[float, float, float, float]
+    confidence: float | None = Field(default=None, ge=0, le=1)
+    reading_order: int = Field(default=0, ge=0)
+
+    @field_validator("bounding_box")
+    @classmethod
+    def bounding_box_must_be_normalized(
+        cls,
+        bounding_box: tuple[float, float, float, float],
+    ) -> tuple[float, float, float, float]:
+        validated = DocumentSegment.bounding_box_must_be_normalized(bounding_box)
+        if validated is None:
+            raise ValueError("OCR bounding_box is required")
+        return validated
+
+
+class DocumentRegion(BaseModel):
+    """An original, citable page region plus optional searchable metadata."""
+
+    id: str = Field(min_length=1)
+    document_id: str = Field(min_length=1)
+    source_artifact_id: str = Field(min_length=1)
+    source_version: int = Field(ge=1)
+    source_checksum: str
+    page: int = Field(ge=1)
+    kind: RegionKind
+    bounding_box: tuple[float, float, float, float]
+    reading_order: int = Field(ge=0)
+    locator: str = Field(min_length=1)
+    text: str = ""
+    description: str = ""
+    description_method: str | None = None
+    description_model_version: str | None = None
+    description_prompt_version: str | None = None
+    parent_region_id: str | None = None
+    extraction_method: str = Field(min_length=1)
+    checksum: str
+    crop_ref: str = Field(min_length=1)
+    permissions: SourcePermissions
+    metadata: dict[str, str] = Field(default_factory=dict)
+
+    @field_validator("bounding_box")
+    @classmethod
+    def bounding_box_must_be_normalized(
+        cls,
+        bounding_box: tuple[float, float, float, float],
+    ) -> tuple[float, float, float, float]:
+        validated = DocumentSegment.bounding_box_must_be_normalized(bounding_box)
+        if validated is None:
+            raise ValueError("region bounding_box is required")
+        return validated
+
+    @field_validator("checksum", "source_checksum")
+    @classmethod
+    def checksums_must_be_sha256(cls, checksum: str) -> str:
+        normalized = checksum.lower()
+        if not _SHA256_PATTERN.fullmatch(normalized):
+            raise ValueError("region checksums must be lowercase SHA-256 digests")
+        return normalized
+
+    @model_validator(mode="after")
+    def description_metadata_must_be_explicit(self) -> "DocumentRegion":
+        if self.description and not self.description_method:
+            raise ValueError("described regions require description_method")
+        return self
+
+
+class RegionDescription(BaseModel):
+    region_id: str = Field(min_length=1)
+    text: str = Field(min_length=1)
+    method: str = Field(min_length=1)
+    model_version: str | None = None
+    prompt_version: str | None = None
+    review_status: str = Field(min_length=1)
+
+
 class CourseDocument(BaseModel):
     id: str = Field(min_length=1)
     title: str = Field(min_length=1)
@@ -132,7 +228,15 @@ class DocumentChunk(BaseModel):
     locator: str | None = None
     page_start: int | None = Field(default=None, ge=1)
     page_end: int | None = Field(default=None, ge=1)
+    region_id: str | None = None
+    region_kind: RegionKind | None = None
+    bounding_box: tuple[float, float, float, float] | None = None
+    crop_ref: str | None = None
+    source_checksum: str | None = None
+    region_checksum: str | None = None
+    description_method: str | None = None
     retrieval_allowed: bool = False
+    display_allowed: bool = False
     metadata: dict[str, str] = Field(default_factory=dict)
 
     @model_validator(mode="after")
@@ -147,6 +251,13 @@ class DocumentChunk(BaseModel):
             self.locator = self.metadata.get("locator", f"chunk {self.ordinal + 1}")
         if self.page_start and self.page_end and self.page_end < self.page_start:
             raise ValueError("page_end must not be before page_start")
+        if self.bounding_box is not None:
+            DocumentSegment.bounding_box_must_be_normalized(self.bounding_box)
+        for checksum in (self.source_checksum, self.region_checksum):
+            if checksum is not None and not _SHA256_PATTERN.fullmatch(checksum):
+                raise ValueError("chunk lineage checksums must be SHA-256 digests")
+        if self.region_id and not self.crop_ref:
+            raise ValueError("region chunks require an original crop reference")
         return self
 
 
@@ -196,6 +307,8 @@ class FigureDescription(BaseModel):
 class ParsedDocumentBundle(BaseModel):
     document: CourseDocument
     figures: list[FigureAsset] = Field(default_factory=list)
+    regions: list[DocumentRegion] = Field(default_factory=list)
+    processing_warnings: list[str] = Field(default_factory=list)
 
 
 class RetrievalHit(BaseModel):
@@ -208,6 +321,14 @@ class SourceCitation(BaseModel):
     source_id: str = Field(min_length=1)
     title: str = Field(min_length=1)
     locator: str = Field(min_length=1)
+    source_artifact_id: str | None = None
+    source_version: int | None = Field(default=None, ge=1)
+    source_checksum: str | None = None
+    page: int | None = Field(default=None, ge=1)
+    region_id: str | None = None
+    region_kind: RegionKind | None = None
+    bounding_box: tuple[float, float, float, float] | None = None
+    crop_ref: str | None = None
 
 
 class GenerationUsage(BaseModel):

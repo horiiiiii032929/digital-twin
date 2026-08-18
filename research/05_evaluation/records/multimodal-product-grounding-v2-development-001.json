@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "run_id": "multimodal-product-grounding-v2-development-001",
+  "component": "retriever",
+  "dataset_id": "multimodal-product-grounding-v2-development-1.0.0",
+  "corpus_id": "multimodal-product-grounding-v2-public-synthetic-9",
+  "code_revision": "707c08edd794656b6605212f3a21de993e44a81d",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "multimodal-text-page-bm25-control",
+        "version": "v1",
+        "configuration": {"case_count": 21, "visual_case_count": 13, "chunk_count": 7, "historical_heldout_read": false}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "visual-complete-evidence-at-3", "value": 0.15384615384615385, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "visual-atomic-recall-at-5", "value": 0.15384615384615385, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "visual-region-ndcg-at-10", "value": 0.0447191727422216, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.0447191727422216, "passed": true},
+        {"name": "visual-top1-localization-iou", "value": 0.04511209396630769, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7, "passed": false},
+        {"name": "table-relationship-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "no-evidence-false-positive-rate", "value": 0.0, "unit": "ratio", "direction": "lower-is-better", "threshold": 0.05, "passed": true},
+        {"name": "citation-lineage-accuracy", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "retrieval-p95-ms", "value": 0.0440419971710071, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 0.05285039660520852, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "historical-heldout-closed", "passed": true, "evidence": "historical_heldout_read=false"},
+        {"name": "text-control-no-regression", "passed": true, "evidence": "2/2 selectable-text controls passed."},
+        {"name": "safety-and-isolation", "passed": true, "evidence": "2/2 no-evidence, 2/2 integrity, and 2/2 isolation cases passed."},
+        {"name": "no-online-vision", "passed": true, "evidence": "Zero online vision calls."},
+        {"name": "quality-target", "passed": false, "evidence": "Complete@3 and recall@5 were below the frozen floors."},
+        {"name": "citation-lineage", "passed": false, "evidence": "The page control did not carry region crop lineage."},
+        {"name": "relative-p95", "passed": true, "evidence": "The control defines the 1.20 ratio ceiling."}
+      ],
+      "failures_by_category": {"ranking": 11, "citation-lineage": 13}
+    },
+    {
+      "implementation": {
+        "implementation_id": "multimodal-region-local-bm25-candidate",
+        "version": "v1",
+        "configuration": {"case_count": 21, "visual_case_count": 13, "chunk_count": 37, "ocr_adapter": "instrument-authored-ocr-1-0-0", "description_provider_enabled": false, "historical_heldout_read": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "visual-complete-evidence-at-3", "value": 0.23076923076923078, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8, "passed": false},
+        {"name": "visual-atomic-recall-at-5", "value": 0.4230769230769231, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "visual-region-ndcg-at-10", "value": 0.08258551638346473, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.0447191727422216, "passed": true},
+        {"name": "visual-top1-localization-iou", "value": 0.04308083609111923, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7, "passed": false},
+        {"name": "table-relationship-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "no-evidence-false-positive-rate", "value": 0.0, "unit": "ratio", "direction": "lower-is-better", "threshold": 0.05, "passed": true},
+        {"name": "citation-lineage-accuracy", "value": 0.5384615384615384, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "retrieval-p95-ms", "value": 0.10662501154001802, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 0.05285039660520852, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "historical-heldout-closed", "passed": true, "evidence": "historical_heldout_read=false"},
+        {"name": "text-control-no-regression", "passed": true, "evidence": "2/2 selectable-text controls passed."},
+        {"name": "safety-and-isolation", "passed": true, "evidence": "2/2 no-evidence, 2/2 integrity, and 2/2 isolation cases passed."},
+        {"name": "no-online-vision", "passed": true, "evidence": "Zero online vision calls and no description model."},
+        {"name": "quality-target", "passed": false, "evidence": "OCR adapter, table context, duplicate ranking, and label defects kept quality below floors."},
+        {"name": "citation-lineage", "passed": false, "evidence": "Only 7/13 expected visual assets were retrieved with complete lineage."},
+        {"name": "relative-p95", "passed": false, "evidence": "0.1066 ms exceeded the frozen 0.0529 ms ceiling."}
+      ],
+      "failures_by_category": {"integration": 3, "ranking": 10, "data-label": 4, "operations": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "R1 improved recall and region nDCG but failed complete evidence, recall, localization, lineage, and latency gates. Repair the diagnosed OCR adapter, table context, routing, and development labels prospectively without opening held-out.",
+    "limitations": [
+      "The run used nine authored synthetic PDFs and cannot establish real-course performance.",
+      "The OCR adapter rejected authored bbox fields, so scanned and screenshot assets were not represented.",
+      "Four localization labels were broader than deterministic rendered regions.",
+      "No production OCR or description provider was qualified.",
+      "The historical 24-case held-out split was not read."
+    ]
+  }
+}

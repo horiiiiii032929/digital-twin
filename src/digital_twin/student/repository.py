@@ -169,7 +169,13 @@ class SQLiteStudentRepository:
             source_document_id TEXT NOT NULL,
             source_version INTEGER NOT NULL,
             title TEXT NOT NULL,
-            locator TEXT NOT NULL
+            locator TEXT NOT NULL,
+            source_checksum TEXT,
+            page INTEGER,
+            region_id TEXT,
+            region_kind TEXT,
+            bounding_box_json TEXT,
+            crop_ref TEXT
         );
         CREATE TABLE IF NOT EXISTS audit_events (
             id TEXT PRIMARY KEY,
@@ -195,6 +201,24 @@ class SQLiteStudentRepository:
                     "ALTER TABLE releases ADD COLUMN evaluation_status TEXT "
                     "NOT NULL DEFAULT 'passed'"
                 )
+            citation_columns = {
+                row["name"]
+                for row in self._connection.execute(
+                    "PRAGMA table_info(citations)"
+                ).fetchall()
+            }
+            for column, column_type in (
+                ("source_checksum", "TEXT"),
+                ("page", "INTEGER"),
+                ("region_id", "TEXT"),
+                ("region_kind", "TEXT"),
+                ("bounding_box_json", "TEXT"),
+                ("crop_ref", "TEXT"),
+            ):
+                if column not in citation_columns:
+                    self._connection.execute(
+                        f"ALTER TABLE citations ADD COLUMN {column} {column_type}"
+                    )
 
     def save_account(self, account: Account) -> Account:
         with self._lock, self._connection:
@@ -380,8 +404,10 @@ class SQLiteStudentRepository:
             self._connection.executemany(
                 """INSERT INTO citations
                    (id, message_id, course_id, release_id, source_artifact_id,
-                    source_document_id, source_version, title, locator)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    source_document_id, source_version, title, locator,
+                    source_checksum, page, region_id, region_kind,
+                    bounding_box_json, crop_ref)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 [
                     (
                         citation.id,
@@ -393,6 +419,16 @@ class SQLiteStudentRepository:
                         citation.source_version,
                         citation.title,
                         citation.locator,
+                        citation.source_checksum,
+                        citation.page,
+                        citation.region_id,
+                        citation.region_kind,
+                        (
+                            json.dumps(citation.bounding_box)
+                            if citation.bounding_box is not None
+                            else None
+                        ),
+                        citation.crop_ref,
                     )
                     for citation in citations
                 ],
@@ -410,7 +446,15 @@ class SQLiteStudentRepository:
                 "SELECT * FROM citations WHERE message_id = ? ORDER BY rowid",
                 (message_id,),
             ).fetchall()
-        return [Citation.model_validate(dict(row)) for row in rows]
+        citations: list[Citation] = []
+        for row in rows:
+            values = dict(row)
+            bounding_box_json = values.pop("bounding_box_json", None)
+            values["bounding_box"] = (
+                tuple(json.loads(bounding_box_json)) if bounding_box_json else None
+            )
+            citations.append(Citation.model_validate(values))
+        return citations
 
     def save_audit_event(self, event: AuditEvent) -> AuditEvent:
         with self._lock, self._connection:

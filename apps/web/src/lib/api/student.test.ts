@@ -6,6 +6,7 @@ import {
   getStudentConversation,
   listStudentCourses,
   listStudentMessageCitations,
+  loadStudentCitationCrop,
   submitStudentMessage,
 } from "@/lib/api/student"
 
@@ -41,6 +42,7 @@ describe("student API client", () => {
       "student-a",
     )
     await listStudentMessageCitations("message-a", "student-a")
+    await loadStudentCitationCrop("message-a", "citation-a", "student-a")
 
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
@@ -67,6 +69,13 @@ describe("student API client", () => {
       4,
       "/api/student/messages/message-a/citations",
       expect.any(Object),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      5,
+      "/api/student/messages/message-a/citations/citation-a/crop",
+      expect.objectContaining({
+        headers: expect.objectContaining({ "X-Account-ID": "student-a" }),
+      }),
     )
   })
 
@@ -103,6 +112,7 @@ function stubFetch(payload: unknown, status = 200) {
     ok: status >= 200 && status < 300,
     status,
     json: vi.fn().mockResolvedValue(payload),
+    blob: vi.fn().mockResolvedValue(new Blob(["synthetic-crop"])),
   })
   vi.stubGlobal("fetch", fetchMock)
   return fetchMock

@@ -6,6 +6,7 @@ from services.api.app.factory import create_app
 from src.digital_twin.grounding.models import (
     GenerationTrace,
     GenerationUsage,
+    RegionKind,
     SourceCitation,
     TutorAnswer,
 )
@@ -81,6 +82,7 @@ def _client(
         student_repository=repository,
         student_embedder=embedder,
         student_generator=generator,
+        region_crop_root=tmp_path / "region-crops",
     )
     return TestClient(app), repository, fixture
 
@@ -144,6 +146,57 @@ def test_authorized_student_journey_uses_m2_and_exposes_persisted_citation(tmp_p
         "implementation": "qwen3-hybrid-v1",
         "primary_available": True,
     }
+
+
+def test_authorized_student_can_open_original_region_crop(tmp_path):
+    client, repository, fixture = _client(tmp_path, embedder=KeywordEmbedder())
+    release = repository.get_release(fixture.release_a_id)
+    assert release is not None
+    crop_root = tmp_path / "region-crops"
+    crop_root.mkdir()
+    updated_chunks = []
+    for chunk in release.chunks:
+        region_id = f"region-{chunk.ordinal}"
+        filename = f"{region_id}.png"
+        (crop_root / filename).write_bytes(b"synthetic-approved-png")
+        updated_chunks.append(
+            chunk.model_copy(
+                update={
+                    "region_id": region_id,
+                    "region_kind": RegionKind.DIAGRAM,
+                    "bounding_box": (0.1, 0.2, 0.8, 0.9),
+                    "crop_ref": f"region://{filename}",
+                    "source_checksum": "a" * 64,
+                    "region_checksum": "b" * 64,
+                    "display_allowed": True,
+                }
+            )
+        )
+    repository.save_release(release.model_copy(update={"chunks": updated_chunks}))
+
+    conversation = _create_conversation(client, fixture)
+    turn = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "What does cache coherence do?", "request_id": "crop-turn"},
+    )
+    assert turn.status_code == 200
+    citation = turn.json()["citations"][0]
+    assert citation["region_kind"] == "diagram"
+    assert citation["crop_ref"].startswith("region://")
+
+    crop_url = (
+        f"/api/student/messages/{citation['message_id']}/citations/"
+        f"{citation['id']}/crop"
+    )
+    crop = client.get(crop_url, headers=_headers(fixture.student_a_id))
+    assert crop.status_code == 200
+    assert crop.content == b"synthetic-approved-png"
+    assert crop.headers["cache-control"] == "private, no-store"
+
+    denied = client.get(crop_url, headers=_headers(fixture.student_b_id))
+    assert denied.status_code == 403
+    assert denied.json()["detail"]["code"] == "conversation_access_denied"
 
 
 def test_duplicate_request_returns_the_original_persisted_turn(tmp_path):

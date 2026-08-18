@@ -8,13 +8,20 @@ from src.digital_twin.grounding.models import (
     ApprovalDecision,
     ApprovalRecord,
     CourseDocument,
+    DocumentRegion,
     DocumentSegment,
     FigureAsset,
     ParsedDocumentBundle,
+    RegionKind,
     SourceArtifact,
     SourceSensitivity,
 )
-from src.digital_twin.grounding.protocols import FigureStore
+from src.digital_twin.grounding.protocols import (
+    FigureStore,
+    OCRProvider,
+    RegionCropStore,
+    RegionDescriptionProvider,
+)
 from src.digital_twin.tutor_policy import SourceLabel
 
 
@@ -52,10 +59,30 @@ class LocalFigureStore:
         return f"figure://{filename}"
 
 
+class LocalRegionCropStore:
+    """Persist original page-region crops outside the release domain model."""
+
+    def __init__(self, root: Path) -> None:
+        self.root = root
+
+    def store(self, region_id: str, extension: str, content: bytes) -> str:
+        safe_extension = re.sub(r"[^a-z0-9]", "", extension.lower()) or "png"
+        self.root.mkdir(parents=True, exist_ok=True)
+        filename = f"{region_id}.{safe_extension}"
+        (self.root / filename).write_bytes(content)
+        return f"region://{filename}"
+
+
 class _EphemeralFigureStore:
     def store(self, figure_id: str, extension: str, content: bytes) -> str:
         del extension, content
         return f"unpersisted://{figure_id}"
+
+
+class _EphemeralRegionCropStore:
+    def store(self, region_id: str, extension: str, content: bytes) -> str:
+        del extension, content
+        return f"unpersisted-region://{region_id}"
 
 
 def source_artifact_from_path(
@@ -88,8 +115,22 @@ def source_artifact_from_path(
 
 
 class LocalDocumentParser:
-    def __init__(self, figure_store: FigureStore | None = None) -> None:
+    def __init__(
+        self,
+        figure_store: FigureStore | None = None,
+        *,
+        region_store: RegionCropStore | None = None,
+        ocr_provider: OCRProvider | None = None,
+        description_provider: RegionDescriptionProvider | None = None,
+        ocr_text_threshold: int = 32,
+    ) -> None:
+        if ocr_text_threshold < 0:
+            raise ValueError("ocr_text_threshold must be non-negative")
         self.figure_store = figure_store or _EphemeralFigureStore()
+        self.region_store = region_store or _EphemeralRegionCropStore()
+        self.ocr_provider = ocr_provider
+        self.description_provider = description_provider
+        self.ocr_text_threshold = ocr_text_threshold
 
     def parse(
         self,
@@ -108,7 +149,7 @@ class LocalDocumentParser:
         )
 
         if source_format == "pdf":
-            segments, figures = self._parse_pdf(
+            segments, figures, regions, warnings = self._parse_pdf(
                 content,
                 document_id=document_id,
                 source=source,
@@ -126,6 +167,8 @@ class LocalDocumentParser:
                 else _plain_text_segments(normalized)
             )
             figures = []
+            regions = []
+            warnings = []
 
         text = "\n\n".join(segment.text for segment in segments).strip()
         if not text:
@@ -149,7 +192,12 @@ class LocalDocumentParser:
                 "approval_record_id": approval.id,
             },
         )
-        return ParsedDocumentBundle(document=document, figures=figures)
+        return ParsedDocumentBundle(
+            document=document,
+            figures=figures,
+            regions=regions,
+            processing_warnings=warnings,
+        )
 
     def _validate_access(
         self,
@@ -197,7 +245,12 @@ class LocalDocumentParser:
         document_id: str,
         source: SourceArtifact,
         approval: ApprovalRecord,
-    ) -> tuple[list[DocumentSegment], list[FigureAsset]]:
+    ) -> tuple[
+        list[DocumentSegment],
+        list[FigureAsset],
+        list[DocumentRegion],
+        list[str],
+    ]:
         try:
             pdf = pymupdf.open(stream=content, filetype="pdf")
         except pymupdf.FileDataError as exc:
@@ -208,47 +261,139 @@ class LocalDocumentParser:
                 raise UnsupportedSourceError("encrypted PDFs are not supported")
 
             segments: list[DocumentSegment] = []
-            page_blocks: list[tuple[pymupdf.Page, list[tuple]]] = []
+            figures: list[FigureAsset] = []
+            regions: list[DocumentRegion] = []
+            warnings: list[str] = []
+            page_inputs: list[tuple[pymupdf.Page, int, list[tuple]]] = []
             for page_index, page in enumerate(pdf):
                 page_number = page_index + 1
+                page_segment_start = len(segments)
                 text_blocks = [
                     block
                     for block in page.get_text("blocks", sort=True)
                     if len(block) > 6 and block[6] == 0 and _normalize_text(block[4])
                 ]
+                columns = _column_assignments(text_blocks, page.rect)
                 for block_ordinal, block in enumerate(text_blocks, start=1):
+                    text = _normalize_text(block[4])
+                    rect = pymupdf.Rect(block[:4])
+                    column = columns.get(block_ordinal - 1)
+                    kind = _text_region_kind(text, column=column)
+                    locator = _region_locator(
+                        page_number,
+                        kind,
+                        block_ordinal,
+                        column=column,
+                    )
                     segments.append(
                         DocumentSegment(
-                            text=_normalize_text(block[4]),
-                            locator=f"page {page_number}, text block {block_ordinal}",
+                            text=text,
+                            locator=locator,
                             page=page_number,
-                            bounding_box=_normalized_rect(
-                                pymupdf.Rect(block[:4]),
-                                page.rect,
-                            ),
+                            bounding_box=_normalized_rect(rect, page.rect),
                         )
                     )
-                page_blocks.append((page, text_blocks))
-
-            if not segments:
-                raise EmptySourceError(
-                    "PDF contains no selectable text; scanned-image OCR is not supported"
-                )
-
-            figures: list[FigureAsset] = []
-            for page_index, (page, text_blocks) in enumerate(page_blocks):
-                figures.extend(
-                    self._extract_page_figures(
-                        pdf,
+                    region, crop = self._make_region(
                         page,
-                        page_number=page_index + 1,
+                        rect,
                         document_id=document_id,
                         source=source,
                         approval=approval,
-                        text_blocks=text_blocks,
+                        page_number=page_number,
+                        kind=kind,
+                        reading_order=len(regions),
+                        locator=locator,
+                        text=text,
+                        extraction_method="pymupdf-selectable-text",
+                        metadata={"column": column or "full-width"},
                     )
+                    regions.append(region)
+                    self._apply_description(region, crop, warnings)
+
+                selectable_chars = sum(
+                    len(_normalize_text(block[4])) for block in text_blocks
                 )
-            return segments, figures
+                if (
+                    selectable_chars < self.ocr_text_threshold
+                    or _page_has_large_image(page, minimum_area_ratio=0.1)
+                ):
+                    ocr_segments, ocr_regions = self._extract_ocr_regions(
+                        page,
+                        document_id=document_id,
+                        source=source,
+                        approval=approval,
+                        page_number=page_number,
+                        reading_order_start=len(regions),
+                        warnings=warnings,
+                    )
+                    segments.extend(ocr_segments)
+                    regions.extend(ocr_regions)
+                page_text = "\n\n".join(
+                    segment.text for segment in segments[page_segment_start:]
+                ).strip()
+                if page_text:
+                    page_region, _ = self._make_region(
+                        page,
+                        page.rect,
+                        document_id=document_id,
+                        source=source,
+                        approval=approval,
+                        page_number=page_number,
+                        kind=RegionKind.PAGE,
+                        reading_order=len(regions),
+                        locator=f"page {page_number}",
+                        text=page_text,
+                        extraction_method="pymupdf-page-text-fallback",
+                        metadata={"fallback": "selected-text"},
+                    )
+                    regions.append(page_region)
+                page_inputs.append((page, page_number, text_blocks))
+
+            if not segments:
+                raise EmptySourceError(
+                    "PDF contains no selectable text; OCR is not supported without "
+                    "a configured provider"
+                )
+
+            for page, page_number, text_blocks in page_inputs:
+                table_regions = self._extract_table_regions(
+                    page,
+                    document_id=document_id,
+                    source=source,
+                    approval=approval,
+                    page_number=page_number,
+                    reading_order_start=len(regions),
+                    warnings=warnings,
+                )
+                regions.extend(table_regions)
+
+                page_figures, figure_regions = self._extract_page_figures(
+                    pdf,
+                    page,
+                    page_number=page_number,
+                    document_id=document_id,
+                    source=source,
+                    approval=approval,
+                    text_blocks=text_blocks,
+                    reading_order_start=len(regions),
+                    warnings=warnings,
+                )
+                figures.extend(page_figures)
+                regions.extend(figure_regions)
+
+                diagram_regions = self._extract_diagram_regions(
+                    page,
+                    document_id=document_id,
+                    source=source,
+                    approval=approval,
+                    page_number=page_number,
+                    reading_order_start=len(regions),
+                    excluded_regions=[*table_regions, *figure_regions],
+                    warnings=warnings,
+                )
+                regions.extend(diagram_regions)
+
+            return segments, figures, regions, warnings
 
     def _extract_page_figures(
         self,
@@ -260,8 +405,11 @@ class LocalDocumentParser:
         source: SourceArtifact,
         approval: ApprovalRecord,
         text_blocks: list[tuple],
-    ) -> list[FigureAsset]:
+        reading_order_start: int,
+        warnings: list[str],
+    ) -> tuple[list[FigureAsset], list[DocumentRegion]]:
         figures: list[FigureAsset] = []
+        regions: list[DocumentRegion] = []
         seen: set[tuple[int, float, float, float, float]] = set()
         for image in page.get_images(full=True):
             xref = image[0]
@@ -306,7 +454,352 @@ class LocalDocumentParser:
                         permissions=approval.permissions,
                     )
                 )
-        return figures
+                area = normalized_box[2] - normalized_box[0]
+                area *= normalized_box[3] - normalized_box[1]
+                kind = RegionKind.SCREENSHOT if area >= 0.5 else RegionKind.FIGURE
+                region, crop = self._make_region(
+                    page,
+                    rect,
+                    document_id=document_id,
+                    source=source,
+                    approval=approval,
+                    page_number=page_number,
+                    kind=kind,
+                    reading_order=reading_order_start + len(regions),
+                    locator=f"page {page_number}, {kind.value} {len(regions) + 1}",
+                    text="\n".join(part for part in (caption, surrounding_text) if part),
+                    extraction_method="pymupdf-embedded-image-region",
+                    metadata={"figure_asset_id": figure_id},
+                )
+                regions.append(region)
+                self._apply_description(region, crop, warnings)
+        return figures, regions
+
+    def _extract_ocr_regions(
+        self,
+        page: pymupdf.Page,
+        *,
+        document_id: str,
+        source: SourceArtifact,
+        approval: ApprovalRecord,
+        page_number: int,
+        reading_order_start: int,
+        warnings: list[str],
+    ) -> tuple[list[DocumentSegment], list[DocumentRegion]]:
+        if self.ocr_provider is None:
+            warnings.append(f"page {page_number}: OCR required but no provider configured")
+            return [], []
+
+        page_pixmap = page.get_pixmap(matrix=pymupdf.Matrix(2, 2), alpha=False)
+        page_image = page_pixmap.tobytes("png")
+        try:
+            recognized = self.ocr_provider.recognize(
+                page_image,
+                page_number=page_number,
+                image_width=page_pixmap.width,
+                image_height=page_pixmap.height,
+            )
+        except Exception as exc:  # provider failures become inspectable ingestion failures
+            warnings.append(
+                f"page {page_number}: OCR provider {self.ocr_provider.implementation_id} "
+                f"failed ({type(exc).__name__})"
+            )
+            return [], []
+
+        segments: list[DocumentSegment] = []
+        regions: list[DocumentRegion] = []
+        for ordinal, recognized_region in enumerate(
+            sorted(recognized, key=lambda item: item.reading_order),
+            start=1,
+        ):
+            text = _normalize_text(recognized_region.text)
+            if not text:
+                continue
+            rect = _denormalized_rect(recognized_region.bounding_box, page.rect)
+            locator = f"page {page_number}, OCR region {ordinal}"
+            segments.append(
+                DocumentSegment(
+                    text=text,
+                    locator=locator,
+                    page=page_number,
+                    bounding_box=recognized_region.bounding_box,
+                )
+            )
+            metadata = {}
+            if recognized_region.confidence is not None:
+                metadata["ocr_confidence"] = f"{recognized_region.confidence:.6f}"
+            region, crop = self._make_region(
+                page,
+                rect,
+                document_id=document_id,
+                source=source,
+                approval=approval,
+                page_number=page_number,
+                kind=RegionKind.OCR,
+                reading_order=reading_order_start + len(regions),
+                locator=locator,
+                text=text,
+                extraction_method=(
+                    f"ocr:{self.ocr_provider.implementation_id}:"
+                    f"{self.ocr_provider.version}"
+                ),
+                metadata=metadata,
+            )
+            regions.append(region)
+            self._apply_description(region, crop, warnings)
+        if not regions:
+            warnings.append(f"page {page_number}: OCR provider returned no text regions")
+        return segments, regions
+
+    def _extract_table_regions(
+        self,
+        page: pymupdf.Page,
+        *,
+        document_id: str,
+        source: SourceArtifact,
+        approval: ApprovalRecord,
+        page_number: int,
+        reading_order_start: int,
+        warnings: list[str],
+    ) -> list[DocumentRegion]:
+        try:
+            tables = page.find_tables().tables
+        except Exception as exc:
+            warnings.append(
+                f"page {page_number}: table extraction failed ({type(exc).__name__})"
+            )
+            return []
+
+        regions: list[DocumentRegion] = []
+        for table_ordinal, table in enumerate(tables, start=1):
+            rows = [
+                [_normalize_text(cell or "") for cell in row]
+                for row in table.extract()
+            ]
+            column_headers = rows[0] if rows else []
+            table_text = "\n".join(
+                " | ".join(cell for cell in row) for row in rows if any(row)
+            ).strip()
+            if not table_text:
+                continue
+            table_rect = pymupdf.Rect(table.bbox)
+            table_region, crop = self._make_region(
+                page,
+                table_rect,
+                document_id=document_id,
+                source=source,
+                approval=approval,
+                page_number=page_number,
+                kind=RegionKind.TABLE,
+                reading_order=reading_order_start + len(regions),
+                locator=f"page {page_number}, table {table_ordinal}",
+                text=table_text,
+                extraction_method="pymupdf-table",
+                metadata={"table_ordinal": str(table_ordinal)},
+            )
+            regions.append(table_region)
+            self._apply_description(table_region, crop, warnings)
+
+            for row_ordinal, row in enumerate(rows, start=1):
+                row_text = " | ".join(cell for cell in row).strip(" |")
+                if not row_text or row_ordinal > len(table.rows):
+                    continue
+                row_rect = pymupdf.Rect(table.rows[row_ordinal - 1].bbox)
+                row_region, _ = self._make_region(
+                    page,
+                    row_rect,
+                    document_id=document_id,
+                    source=source,
+                    approval=approval,
+                    page_number=page_number,
+                    kind=RegionKind.TABLE_ROW,
+                    reading_order=reading_order_start + len(regions),
+                    locator=(
+                        f"page {page_number}, table {table_ordinal}, row {row_ordinal}"
+                    ),
+                    text=row_text,
+                    extraction_method="pymupdf-table-row",
+                    parent_region_id=table_region.id,
+                    metadata={
+                        "table_ordinal": str(table_ordinal),
+                        "row_ordinal": str(row_ordinal),
+                        "row_header": row[0] if row else "",
+                        "column_headers": " | ".join(column_headers),
+                    },
+                )
+                regions.append(row_region)
+
+                cells = table.rows[row_ordinal - 1].cells
+                for column_ordinal, cell_text in enumerate(row, start=1):
+                    if not cell_text or column_ordinal > len(cells):
+                        continue
+                    cell_box = cells[column_ordinal - 1]
+                    if cell_box is None:
+                        continue
+                    cell_region, _ = self._make_region(
+                        page,
+                        pymupdf.Rect(cell_box),
+                        document_id=document_id,
+                        source=source,
+                        approval=approval,
+                        page_number=page_number,
+                        kind=RegionKind.TABLE_CELL,
+                        reading_order=reading_order_start + len(regions),
+                        locator=(
+                            f"page {page_number}, table {table_ordinal}, "
+                            f"row {row_ordinal}, column {column_ordinal}"
+                        ),
+                        text=cell_text,
+                        extraction_method="pymupdf-table-cell",
+                        parent_region_id=row_region.id,
+                        metadata={
+                            "table_ordinal": str(table_ordinal),
+                            "row_ordinal": str(row_ordinal),
+                            "column_ordinal": str(column_ordinal),
+                            "row_header": row[0] if row else "",
+                            "column_header": (
+                                column_headers[column_ordinal - 1]
+                                if column_ordinal <= len(column_headers)
+                                else ""
+                            ),
+                            "cell_value": cell_text,
+                        },
+                    )
+                    regions.append(cell_region)
+        return regions
+
+    def _extract_diagram_regions(
+        self,
+        page: pymupdf.Page,
+        *,
+        document_id: str,
+        source: SourceArtifact,
+        approval: ApprovalRecord,
+        page_number: int,
+        reading_order_start: int,
+        excluded_regions: list[DocumentRegion],
+        warnings: list[str],
+    ) -> list[DocumentRegion]:
+        try:
+            clusters = page.cluster_drawings()
+        except Exception as exc:
+            warnings.append(
+                f"page {page_number}: drawing extraction failed ({type(exc).__name__})"
+            )
+            return []
+
+        regions: list[DocumentRegion] = []
+        for rect in clusters:
+            normalized = _normalized_rect(rect, page.rect)
+            if not _valid_normalized_box(normalized):
+                continue
+            if any(
+                _intersection_over_union(normalized, region.bounding_box) >= 0.65
+                for region in excluded_regions
+            ):
+                continue
+            region, crop = self._make_region(
+                page,
+                rect,
+                document_id=document_id,
+                source=source,
+                approval=approval,
+                page_number=page_number,
+                kind=RegionKind.DIAGRAM,
+                reading_order=reading_order_start + len(regions),
+                locator=f"page {page_number}, diagram {len(regions) + 1}",
+                text=_text_near_rect(page, rect),
+                extraction_method="pymupdf-vector-cluster",
+            )
+            regions.append(region)
+            self._apply_description(region, crop, warnings)
+        return regions
+
+    def _make_region(
+        self,
+        page: pymupdf.Page,
+        rect: pymupdf.Rect,
+        *,
+        document_id: str,
+        source: SourceArtifact,
+        approval: ApprovalRecord,
+        page_number: int,
+        kind: RegionKind,
+        reading_order: int,
+        locator: str,
+        text: str,
+        extraction_method: str,
+        parent_region_id: str | None = None,
+        metadata: dict[str, str] | None = None,
+    ) -> tuple[DocumentRegion, bytes]:
+        clipped = rect & page.rect
+        normalized_box = _normalized_rect(clipped, page.rect)
+        if not _valid_normalized_box(normalized_box):
+            raise SourceIntegrityError("extracted region has an invalid bounding box")
+        identity = ",".join(f"{value:.6f}" for value in normalized_box)
+        region_id = _stable_id(
+            "region",
+            document_id,
+            str(page_number),
+            kind.value,
+            identity,
+            _normalize_text(text),
+        )
+        crop = page.get_pixmap(
+            matrix=pymupdf.Matrix(2, 2),
+            clip=clipped,
+            alpha=False,
+        ).tobytes("png")
+        crop_ref = self.region_store.store(region_id, "png", crop)
+        return (
+            DocumentRegion(
+                id=region_id,
+                document_id=document_id,
+                source_artifact_id=source.id,
+                source_version=source.version,
+                source_checksum=source.checksum,
+                page=page_number,
+                kind=kind,
+                bounding_box=normalized_box,
+                reading_order=reading_order,
+                locator=locator,
+                text=_normalize_text(text),
+                parent_region_id=parent_region_id,
+                extraction_method=extraction_method,
+                checksum=_sha256(crop),
+                crop_ref=crop_ref,
+                permissions=approval.permissions,
+                metadata=metadata or {},
+            ),
+            crop,
+        )
+
+    def _apply_description(
+        self,
+        region: DocumentRegion,
+        crop: bytes,
+        warnings: list[str],
+    ) -> None:
+        if self.description_provider is None:
+            return
+        try:
+            description = self.description_provider.describe(region, crop)
+        except Exception as exc:
+            warnings.append(
+                f"{region.locator}: description provider "
+                f"{self.description_provider.implementation_id} failed "
+                f"({type(exc).__name__})"
+            )
+            return
+        if description is None:
+            return
+        if description.region_id != region.id:
+            warnings.append(f"{region.locator}: description region identity mismatch")
+            return
+        region.description = description.text
+        region.description_method = description.method
+        region.description_model_version = description.model_version
+        region.description_prompt_version = description.prompt_version
 
 
 def _source_format(path: Path) -> str:
@@ -424,6 +917,117 @@ def _normalized_rect(
 def _valid_normalized_box(box: tuple[float, float, float, float]) -> bool:
     x0, y0, x1, y1 = box
     return 0 <= x0 < x1 <= 1 and 0 <= y0 < y1 <= 1
+
+
+def _denormalized_rect(
+    box: tuple[float, float, float, float],
+    page_rect: pymupdf.Rect,
+) -> pymupdf.Rect:
+    x0, y0, x1, y1 = box
+    return pymupdf.Rect(
+        page_rect.x0 + x0 * page_rect.width,
+        page_rect.y0 + y0 * page_rect.height,
+        page_rect.x0 + x1 * page_rect.width,
+        page_rect.y0 + y1 * page_rect.height,
+    )
+
+
+def _column_assignments(
+    text_blocks: list[tuple],
+    page_rect: pymupdf.Rect,
+) -> dict[int, str]:
+    candidates: dict[int, str] = {}
+    sides: set[str] = set()
+    for index, block in enumerate(text_blocks):
+        rect = pymupdf.Rect(block[:4])
+        width_ratio = rect.width / page_rect.width
+        center_ratio = (rect.x0 + rect.x1 - 2 * page_rect.x0) / (
+            2 * page_rect.width
+        )
+        if width_ratio > 0.62:
+            continue
+        if center_ratio < 0.46:
+            side = "left"
+        elif center_ratio > 0.54:
+            side = "right"
+        else:
+            continue
+        candidates[index] = side
+        sides.add(side)
+    return candidates if sides == {"left", "right"} else {}
+
+
+def _page_has_large_image(
+    page: pymupdf.Page,
+    *,
+    minimum_area_ratio: float,
+) -> bool:
+    page_area = page.rect.width * page.rect.height
+    if page_area <= 0:
+        return False
+    for image in page.get_images(full=True):
+        for rect in page.get_image_rects(image[0]):
+            if rect.width * rect.height / page_area >= minimum_area_ratio:
+                return True
+    return False
+
+
+def _text_region_kind(text: str, *, column: str | None) -> RegionKind:
+    compact = " ".join(text.split())
+    lowered = compact.lower()
+    if re.match(r"^(figure|fig\.|table)\s+\d+", lowered):
+        return RegionKind.CAPTION
+    math_markers = ("=", "∑", "∫", "√", "≈", "≤", "≥", "→", "λ", "α", "β")
+    if len(compact) <= 240 and any(marker in compact for marker in math_markers):
+        return RegionKind.EQUATION
+    if column is not None:
+        return RegionKind.COLUMN
+    if (
+        len(compact) <= 100
+        and "\n" not in text
+        and (compact.isupper() or compact.istitle())
+        and not compact.endswith((".", ":", ";"))
+    ):
+        return RegionKind.HEADING
+    return RegionKind.TEXT
+
+
+def _region_locator(
+    page_number: int,
+    kind: RegionKind,
+    ordinal: int,
+    *,
+    column: str | None,
+) -> str:
+    if column:
+        return f"page {page_number}, {column} column, text block {ordinal}"
+    return f"page {page_number}, {kind.value} block {ordinal}"
+
+
+def _intersection_over_union(
+    first: tuple[float, float, float, float],
+    second: tuple[float, float, float, float],
+) -> float:
+    left = max(first[0], second[0])
+    top = max(first[1], second[1])
+    right = min(first[2], second[2])
+    bottom = min(first[3], second[3])
+    intersection = max(0.0, right - left) * max(0.0, bottom - top)
+    if intersection == 0:
+        return 0.0
+    first_area = (first[2] - first[0]) * (first[3] - first[1])
+    second_area = (second[2] - second[0]) * (second[3] - second[1])
+    return intersection / (first_area + second_area - intersection)
+
+
+def _text_near_rect(page: pymupdf.Page, rect: pymupdf.Rect) -> str:
+    expanded = pymupdf.Rect(
+        max(page.rect.x0, rect.x0 - 36),
+        max(page.rect.y0, rect.y0 - 36),
+        min(page.rect.x1, rect.x1 + 36),
+        min(page.rect.y1, rect.y1 + 72),
+    )
+    return _normalize_text(page.get_text("text", clip=expanded, sort=True))
 
 
 def _figure_context(

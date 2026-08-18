@@ -185,6 +185,12 @@ export type StudentCitation = {
   source_version: number
   title: string
   locator: string
+  source_checksum?: string | null
+  page?: number | null
+  region_id?: string | null
+  region_kind?: string | null
+  bounding_box?: [number, number, number, number] | null
+  crop_ref?: string | null
 }
 
 export type StudentConversationView = {

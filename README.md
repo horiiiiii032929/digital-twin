@@ -149,6 +149,11 @@ Implemented as Sprint 2 foundations:
 - An evaluation-gated publication lifecycle with durable drafts, atomic release
   replacement, withdrawal, rollback, and stale-conversation denial. The v2
   synthetic architecture result passes 19/19 acceptance checks.
+- A prospective region-aware PDF foundation for tables, cells, diagrams,
+  equations, scans, mixed layouts, original crops, release-ready chunks, and
+  access-checked student crop citations. Its final 21-case synthetic
+  development attempt passed 13/14 gates and selected no multimodal profile
+  because the relative warm-p95 gate failed.
 - A frozen experimental technical baseline with machine-checked claim limits,
   component-to-result links, reproducibility commands, rollback, and explicit
   unsupported capacity/deployment/learning claims.
@@ -170,8 +175,9 @@ Current evidence and limitations:
   deployment-ineligible on the reference hardware. The held-out comparison
   selected M2, which reached 85% complete evidence@3 versus BM25's 80% at
   164 ms warm p95; BM25 remains the rollback.
-- Synthetic product activation now covers the bounded student and publication
-  path, but it is not release-ready evidence. The product still lacks a
+- Synthetic product activation now covers the bounded student, publication,
+  scanned-PDF ingestion, and visual-citation path, but it is not release-ready
+  evidence. The product still lacks a production OCR/layout provider, a
   credentialed identity boundary, complete professor/admin and source
   lifecycles, valid professor-fidelity and end-to-end evidence,
   migration/backup/restore and concurrency evidence, and bounded capacity

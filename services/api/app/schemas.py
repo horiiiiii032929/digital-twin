@@ -71,3 +71,15 @@ class ReleaseCreateRequest(BaseModel):
 
 class ReleaseEvaluationRequest(BaseModel):
     status: ReleaseEvaluationStatus
+
+
+class CourseSourceIngestionResponse(BaseModel):
+    source_artifact_id: str
+    source_version: int = Field(ge=1)
+    source_checksum: str
+    document_id: str
+    chunk_count: int = Field(ge=0)
+    region_count: int = Field(ge=0)
+    region_kind_counts: dict[str, int] = Field(default_factory=dict)
+    processing_warnings: list[str] = Field(default_factory=list)
+    chunks: list[DocumentChunk] = Field(default_factory=list)

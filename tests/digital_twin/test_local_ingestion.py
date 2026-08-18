@@ -10,7 +10,12 @@ from src.digital_twin.grounding import (
     HeadingParagraphChunker,
     LocalDocumentParser,
     LocalFigureStore,
+    LocalRegionCropStore,
+    OCRTextRegion,
     PageBoundedHeadingParagraphChunker,
+    RegionAwareChunker,
+    RegionDescription,
+    RegionKind,
     SourceIntegrityError,
     SourcePermissionError,
     SourcePermissions,
@@ -19,6 +24,51 @@ from src.digital_twin.grounding import (
 )
 from tests.fixtures.ingestion import approved_source, write_synthetic_pdf
 from src.digital_twin.grounding.ingestion import _normalized_rect
+
+
+class SyntheticOCRProvider:
+    implementation_id = "synthetic-ocr"
+    version = "1.0.0"
+
+    def recognize(
+        self,
+        page_image: bytes,
+        *,
+        page_number: int,
+        image_width: int,
+        image_height: int,
+    ) -> list[OCRTextRegion]:
+        assert page_image.startswith(b"\x89PNG")
+        assert page_number >= 1
+        assert image_width > 0 and image_height > 0
+        return [
+            OCRTextRegion(
+                text="Scanned cache policy uses write invalidate.",
+                bounding_box=(0.1, 0.1, 0.9, 0.25),
+                confidence=0.98,
+            )
+        ]
+
+
+class SyntheticDescriptionProvider:
+    implementation_id = "synthetic-region-description"
+    version = "1.0.0"
+
+    def describe(self, region, crop):
+        assert crop.startswith(b"\x89PNG")
+        if region.kind not in {
+            RegionKind.TABLE,
+            RegionKind.FIGURE,
+            RegionKind.DIAGRAM,
+            RegionKind.SCREENSHOT,
+        }:
+            return None
+        return RegionDescription(
+            region_id=region.id,
+            text=f"Synthetic description of {region.kind.value}.",
+            method="deterministic-synthetic-description",
+            review_status="synthetic-test",
+        )
 
 
 def test_markdown_parsing_and_chunking_preserve_stable_provenance(tmp_path: Path):
@@ -191,6 +241,114 @@ def test_pdf_coordinates_account_for_nonzero_page_origin():
     content = pymupdf.Rect(20, 40, 60, 120)
 
     assert _normalized_rect(content, page) == (0.1, 0.1, 0.5, 0.5)
+
+
+def test_region_aware_pdf_extracts_layout_and_preserves_crop_lineage(tmp_path: Path):
+    path = tmp_path / "mixed-layout.pdf"
+    pdf = pymupdf.open()
+
+    table_page = pdf.new_page(width=612, height=792)
+    xs = [60, 220, 380, 540]
+    ys = [80, 120, 160]
+    for x in xs:
+        table_page.draw_line((x, ys[0]), (x, ys[-1]), color=(0, 0, 0))
+    for y in ys:
+        table_page.draw_line((xs[0], y), (xs[-1], y), color=(0, 0, 0))
+    values = [["Method", "Recall", "Latency"], ["Region", "0.92", "40 ms"]]
+    for row_index, row in enumerate(values):
+        for column_index, value in enumerate(row):
+            table_page.insert_text(
+                (xs[column_index] + 5, ys[row_index] + 25),
+                value,
+                fontsize=10,
+            )
+    table_page.insert_text((72, 220), "E = mc2", fontsize=12)
+    table_page.draw_rect((72, 280, 220, 390), color=(0, 0, 0))
+    table_page.draw_line((90, 330), (200, 330), color=(0, 0, 0))
+    table_page.insert_text((92, 320), "request")
+    table_page.insert_text((150, 350), "cache")
+
+    column_page = pdf.new_page(width=612, height=792)
+    column_page.insert_textbox(
+        (50, 80, 270, 240),
+        "Left column explains invalidation and ownership.",
+        fontsize=11,
+    )
+    column_page.insert_textbox(
+        (340, 80, 560, 240),
+        "Right column explains acknowledgements and ordering.",
+        fontsize=11,
+    )
+    pdf.save(path, no_new_id=True)
+    pdf.close()
+
+    source, approval = approved_source(path)
+    crop_root = tmp_path / "region-crops"
+    bundle = LocalDocumentParser(
+        region_store=LocalRegionCropStore(crop_root),
+        description_provider=SyntheticDescriptionProvider(),
+    ).parse(path, source, approval)
+
+    kinds = {region.kind for region in bundle.regions}
+    assert {
+        RegionKind.TABLE,
+        RegionKind.TABLE_ROW,
+        RegionKind.TABLE_CELL,
+        RegionKind.EQUATION,
+        RegionKind.DIAGRAM,
+        RegionKind.COLUMN,
+    } <= kinds
+    assert any(
+        region.kind == RegionKind.TABLE and "Region | 0.92 | 40 ms" in region.text
+        for region in bundle.regions
+    )
+    assert all(region.source_checksum == source.checksum for region in bundle.regions)
+    assert all(region.source_version == source.version for region in bundle.regions)
+    assert all(region.crop_ref.startswith("region://") for region in bundle.regions)
+    assert len(list(crop_root.glob("*.png"))) == len(bundle.regions)
+
+    chunks = RegionAwareChunker().chunk(bundle)
+    assert chunks
+    assert all(chunk.region_id and chunk.crop_ref for chunk in chunks)
+    assert all(chunk.page_start == chunk.page_end for chunk in chunks)
+    described = next(chunk for chunk in chunks if chunk.description_method)
+    assert "Generated search description" in described.text
+    assert described.metadata["description_is_authoritative"] == "false"
+
+
+def test_scanned_pdf_uses_injected_ocr_and_produces_citable_regions(tmp_path: Path):
+    path = tmp_path / "scan.pdf"
+    write_synthetic_pdf(path, with_text=False, with_figure=True)
+    source, approval = approved_source(
+        path,
+        permissions=SourcePermissions(
+            processing_allowed=True,
+            tutoring_allowed=True,
+            display_allowed=True,
+        ),
+    )
+
+    bundle = LocalDocumentParser(
+        region_store=LocalRegionCropStore(tmp_path / "crops"),
+        ocr_provider=SyntheticOCRProvider(),
+        description_provider=SyntheticDescriptionProvider(),
+    ).parse(path, source, approval)
+
+    assert "Scanned cache policy uses write invalidate." in bundle.document.text
+    ocr_region = next(
+        region for region in bundle.regions if region.kind == RegionKind.OCR
+    )
+    assert ocr_region.metadata["ocr_confidence"] == "0.980000"
+    assert ocr_region.extraction_method == "ocr:synthetic-ocr:1.0.0"
+    assert any(
+        region.kind in {RegionKind.FIGURE, RegionKind.SCREENSHOT}
+        for region in bundle.regions
+    )
+    chunks = RegionAwareChunker().chunk(bundle)
+    ocr_chunk = next(chunk for chunk in chunks if chunk.region_id == ocr_region.id)
+    assert ocr_chunk.retrieval_allowed is True
+    assert ocr_chunk.display_allowed is True
+    assert ocr_chunk.bounding_box == pytest.approx((0.1, 0.1, 0.9, 0.25))
 
 
 def test_chunker_uses_whole_segment_overlap(tmp_path: Path):

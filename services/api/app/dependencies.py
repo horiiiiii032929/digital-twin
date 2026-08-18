@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import Depends, Header, HTTPException, Request, status
 
+from src.digital_twin.grounding import LocalCourseSourceIngestionService
 from src.digital_twin.onboarding import SessionRepository
 from src.digital_twin.student import ReleaseLifecycleService, StudentTutoringService
 
@@ -22,6 +23,10 @@ def get_student_service(request: Request) -> StudentTutoringService:
 
 def get_publication_service(request: Request) -> ReleaseLifecycleService:
     return request.app.state.publication_service
+
+
+def get_source_ingestion_service(request: Request) -> LocalCourseSourceIngestionService:
+    return request.app.state.source_ingestion_service
 
 
 def get_synthetic_account_id(
@@ -47,4 +52,8 @@ ProfessorAccountDependency = Annotated[str, Depends(get_synthetic_account_id)]
 PublicationServiceDependency = Annotated[
     ReleaseLifecycleService,
     Depends(get_publication_service),
+]
+SourceIngestionServiceDependency = Annotated[
+    LocalCourseSourceIngestionService,
+    Depends(get_source_ingestion_service),
 ]

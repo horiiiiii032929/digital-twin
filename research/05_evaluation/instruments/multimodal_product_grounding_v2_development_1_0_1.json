@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "dataset_id": "multimodal-product-grounding-v2-development-1.0.1",
+  "split": "development",
+  "permission": "public-synthetic",
+  "historical_heldout_read": false,
+  "base_instrument": "research/05_evaluation/instruments/multimodal_product_grounding_v2_development_1_0_0.json",
+  "base_sha256": "21926cac1a5349ed287855224873d2c43025bb93eeefd09f0b135a019f710b29",
+  "change_reason": "Correct four over-broad authored boxes to the deterministic rendered diagram and equation region geometry found during attempt 001.",
+  "unchanged_fields": [
+    "assets",
+    "queries",
+    "expected_actions",
+    "expected_assets",
+    "expected_facts",
+    "ocr_text",
+    "slices",
+    "all_other_gold_bboxes",
+    "gates"
+  ],
+  "gold_bbox_replacements": {
+    "mpg-dev-004": [[0.114379085, 0.151515152, 0.882352941, 0.277777778]],
+    "mpg-dev-005": [[0.114379085, 0.151515152, 0.882352941, 0.277777778]],
+    "mpg-dev-006": [[0.117647059, 0.108143941, 0.581970464, 0.139371217]],
+    "mpg-dev-007": [[0.117647059, 0.234406558, 0.237794115, 0.265633843]]
+  }
+}

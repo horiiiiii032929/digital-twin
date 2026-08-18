@@ -42,14 +42,20 @@ professor-communication track.
 
 ## Critical path
 
-1. #85 — evaluator correction (`In Progress`).
-2. #86 — region-aware multimodal product grounding.
+1. #85 — evaluator correction (`Done / Refine`).
+2. #86 — region-aware multimodal product grounding (`In Progress / Refine`
+   evidence; repository handoff pending).
 3. #88 — deployable platform foundation.
 4. #87 — large factual QA benchmark with a larger dummy corpus and multimodal
    slice.
 5. #24, #9, and #25 — fidelity, production operations, and deployed end-to-end
    validation.
 6. #10 — approval-gated professor/student workflow and usability pilot.
+
+Issue #86 now has region-aware product ingestion, access-checked original-crop
+citations, and three registered prospective development attempts. Attempt 003
+passed all quality/integration gates but failed the frozen relative p95 gate, so
+no multimodal profile is selected and the text profile remains the fallback.
 
 GitHub parent/sub-issue and blocked-by links encode this order under product
 goal #8. Issue #13 and communication ledger #44 remain parallel academic
