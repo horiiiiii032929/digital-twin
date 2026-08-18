@@ -48,6 +48,7 @@ import type {
   StudentCitation,
   StudentCourse,
 } from "@/lib/api"
+import { loadStudentCitationCrop } from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { WorkspaceBrand } from "@/components/workspace/workspace-brand"
 
@@ -696,6 +697,36 @@ function CitationPanel({
   dialogTitle?: boolean
   onClose?: () => void
 }) {
+  const [cropUrl, setCropUrl] = useState<string | null>(null)
+  const [cropError, setCropError] = useState<string | null>(null)
+
+  useEffect(() => {
+    setCropUrl(null)
+    setCropError(null)
+    if (!citation?.crop_ref) return
+
+    let active = true
+    let objectUrl: string | null = null
+    void loadStudentCitationCrop(citation.message_id, citation.id)
+      .then((blob) => {
+        if (!active) return
+        objectUrl = URL.createObjectURL(blob)
+        setCropUrl(objectUrl)
+      })
+      .catch((error: unknown) => {
+        if (active) {
+          setCropError(
+            error instanceof Error ? error.message : "Source region unavailable.",
+          )
+        }
+      })
+
+    return () => {
+      active = false
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
+    }
+  }, [citation?.crop_ref, citation?.id, citation?.message_id])
+
   const title = (
     <h2 className="text-sm font-semibold">Sources for this answer</h2>
   )
@@ -739,7 +770,46 @@ function CitationPanel({
                 </p>
               </div>
             </div>
+            {citation.crop_ref ? (
+              <div className="mt-4 overflow-hidden rounded-lg border bg-[var(--shell)]">
+                {cropUrl ? (
+                  <a
+                    href={cropUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open original source region for ${citation.title}`}
+                  >
+                    <img
+                      src={cropUrl}
+                      alt={`Original source region from ${citation.locator}`}
+                      className="max-h-72 w-full object-contain"
+                    />
+                  </a>
+                ) : cropError ? (
+                  <p className="px-3 py-4 text-sm text-muted-foreground">
+                    {cropError}
+                  </p>
+                ) : (
+                  <p className="px-3 py-4 text-sm text-muted-foreground">
+                    Loading original source region…
+                  </p>
+                )}
+              </div>
+            ) : null}
             <dl className="mt-5 grid gap-3 border-t pt-4 text-sm">
+              {citation.page ? (
+                <div>
+                  <dt className="text-xs font-medium text-muted-foreground">
+                    Page and region
+                  </dt>
+                  <dd className="mt-0.5">
+                    Page {citation.page}
+                    {citation.region_kind
+                      ? ` · ${citation.region_kind.replaceAll("-", " ")}`
+                      : ""}
+                  </dd>
+                </div>
+              ) : null}
               <div>
                 <dt className="text-xs font-medium text-muted-foreground">
                   Source version

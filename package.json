@@ -39,6 +39,8 @@
     "build:multimodal-visual-embeddings": "uv run python -m scripts.build_multimodal_visual_embeddings",
     "benchmark:multimodal-v3-development": "uv run python -m scripts.run_multimodal_retrieval_v3_development",
     "audit:multimodal-v3-result": "uv run python -m scripts.audit_multimodal_v3_result",
+    "verify:multimodal-product-grounding": "uv run python -m scripts.run_multimodal_product_grounding",
+    "benchmark:multimodal-product-grounding-development": "uv run python -m scripts.run_multimodal_product_grounding --execute",
     "review:multimodal-private-claude": "uv run python -m scripts.second_review_multimodal_benchmark --consumer-data-boundary-approved",
     "verify:evaluation-instruments": "uv run python -m scripts.validate_evaluation_instruments",
     "verify:professor-fidelity-plan": "uv run python -m scripts.run_professor_fidelity_experiment --dry-run",

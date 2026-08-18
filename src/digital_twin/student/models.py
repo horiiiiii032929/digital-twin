@@ -101,6 +101,12 @@ class Citation(BaseModel):
     source_version: int = Field(ge=1)
     title: str = Field(min_length=1)
     locator: str = Field(min_length=1)
+    source_checksum: str | None = None
+    page: int | None = Field(default=None, ge=1)
+    region_id: str | None = None
+    region_kind: str | None = None
+    bounding_box: tuple[float, float, float, float] | None = None
+    crop_ref: str | None = None
 
 
 class AuditEvent(BaseModel):

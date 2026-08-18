@@ -156,8 +156,10 @@ schedule-driven pass.
 6. [#10](https://github.com/horiiiiii032929/digital-twin/issues/10) is the
    approval-gated real-workflow/usability pilot.
 
-Only #85 begins in progress. Dependencies on the live GitHub Project enforce
-the remaining sequence.
+#85 is complete. #86 implemented the prospective region-aware foundation and
+recorded a Refine decision after its final synthetic development attempt passed
+all quality/integration gates but failed the frozen relative p95 gate. The live
+GitHub Project remains the source for the next unblocked execution item.
 
 ## Claim and safety boundaries
 

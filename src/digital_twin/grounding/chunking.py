@@ -3,7 +3,9 @@ import hashlib
 from src.digital_twin.grounding.models import (
     CourseDocument,
     DocumentChunk,
+    DocumentRegion,
     DocumentSegment,
+    ParsedDocumentBundle,
 )
 
 
@@ -189,6 +191,105 @@ class PageBoundedHeadingParagraphChunker:
                 )
                 ordinal += 1
         return chunks
+
+
+class RegionAwareChunker:
+    """Create one lineage-preserving retrieval unit per extracted page region."""
+
+    def chunk(self, bundle: ParsedDocumentBundle) -> list[DocumentChunk]:
+        if not bundle.regions:
+            return PageBoundedHeadingParagraphChunker().chunk(bundle.document)
+
+        chunks: list[DocumentChunk] = []
+        for region in sorted(
+            bundle.regions,
+            key=lambda item: (item.page, item.reading_order, item.id),
+        ):
+            searchable_parts = [_structured_region_text(region)]
+            if region.description:
+                searchable_parts.append(
+                    "Generated search description "
+                    f"({region.description_method}): {region.description.strip()}"
+                )
+            text = "\n\n".join(part for part in searchable_parts if part)
+            if not text:
+                continue
+            content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+            ordinal = len(chunks)
+            chunks.append(
+                DocumentChunk(
+                    id=_chunk_id(
+                        bundle.document.id,
+                        ordinal,
+                        region.locator,
+                        content_hash,
+                    ),
+                    document_id=bundle.document.id,
+                    text=text,
+                    ordinal=ordinal,
+                    source_artifact_id=region.source_artifact_id,
+                    source_version=region.source_version,
+                    source_label=bundle.document.source_label,
+                    content_hash=content_hash,
+                    locator=region.locator,
+                    page_start=region.page,
+                    page_end=region.page,
+                    region_id=region.id,
+                    region_kind=region.kind,
+                    bounding_box=region.bounding_box,
+                    crop_ref=region.crop_ref,
+                    source_checksum=region.source_checksum,
+                    region_checksum=region.checksum,
+                    description_method=region.description_method,
+                    retrieval_allowed=region.permissions.tutoring_allowed,
+                    display_allowed=region.permissions.display_allowed,
+                    metadata={
+                        **bundle.document.metadata,
+                        **region.metadata,
+                        "title": bundle.document.title,
+                        "source_label": bundle.document.source_label.value,
+                        "source_artifact_id": region.source_artifact_id,
+                        "source_version": str(region.source_version),
+                        "source_checksum": region.source_checksum,
+                        "document_content_hash": (
+                            bundle.document.content_hash or ""
+                        ),
+                        "locator": region.locator,
+                        "region_id": region.id,
+                        "region_kind": region.kind.value,
+                        "region_checksum": region.checksum,
+                        "crop_ref": region.crop_ref,
+                        "parent_region_id": region.parent_region_id or "",
+                        "description_is_authoritative": "false",
+                        "retrieval_allowed": str(
+                            region.permissions.tutoring_allowed
+                        ).lower(),
+                        "display_allowed": str(
+                            region.permissions.display_allowed
+                        ).lower(),
+                    },
+                )
+            )
+        return chunks
+
+
+def _structured_region_text(region: DocumentRegion) -> str:
+    if region.kind.value == "table-cell":
+        row_header = region.metadata.get("row_header", "").strip()
+        column_header = region.metadata.get("column_header", "").strip()
+        labels = []
+        if row_header and row_header != region.text:
+            labels.append(f"Row: {row_header}")
+        if column_header and column_header != region.text:
+            labels.append(f"Column: {column_header}")
+        labels.append(f"Value: {region.text}")
+        return ". ".join(labels)
+    if region.kind.value == "table-row":
+        headers = region.metadata.get("column_headers", "").strip()
+        return f"Columns: {headers}. Row: {region.text}" if headers else region.text
+    if region.kind.value == "equation":
+        return f"Defined equation formula: {region.text}"
+    return region.text.strip()
 
 
 def _group_locator(group: list[DocumentSegment]) -> str:

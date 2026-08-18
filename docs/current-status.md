@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-18
+Status date: 2026-08-19
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -37,7 +37,7 @@ continues to hold report, presentation, and professor-communication work.
 | --- | --- | --- | --- |
 | Product UX | Keep as baseline | Professor and student conversation-first workspaces; responsive synthetic flows | Human workflow/usability evidence and complete real source/account lifecycle |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
-| Multimodal retrieval | Refine; no selection | Corrected development measurement, unfavorable V3 result preserved, V0 text fallback | Region-aware extraction, product ingestion, precise visual citations, and prospective selection |
+| Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Keep as bounded foundation | 19/19 synthetic isolation, persistence, citation, publication replacement, withdrawal, rollback, and stale-release checks | Credentialed identity, complete source administration, durable production storage, jobs, deployment, observability, recovery, capacity, and usability |
@@ -48,7 +48,7 @@ continues to hold report, presentation, and professor-communication work.
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | Done / Refine | Metric suite corrected and tested; historical V3 analysis corrected; Drop unchanged; held-out unopened |
-| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Todo / next | Real table/column/figure/equation/scan regions, product ingestion and visual citations, deployable decision and text fallback |
+| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | In progress / Refine evidence recorded | Foundation, product ingestion, crop citations, and prospective decision implemented; close after repository/Project handoff |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / blocked by #86 | Credentialed RBAC, durable data/storage, jobs, HTTPS staging, observability, backup/restore, security, rollback |
 | 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / blocked by #86 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
 | 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / blocked by #86 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
@@ -56,9 +56,11 @@ continues to hold report, presentation, and professor-communication work.
 | 7 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24, #86, #88 | One immutable staging release candidate passes or receives explicit Refine/Drop decision |
 | 8 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
 
-Issue #85 is complete, making #86 the next implementation item. The dependency
-graph, milestones, priority labels, target dates, and issue bodies are recorded
-on GitHub Project 1.
+Issue #85 is complete. Issue #86 now has a tested product foundation and three
+registered prospective development attempts. Attempt 003 passed 13/14 gates:
+all quality, safety, action, text-control, and lineage gates passed; relative
+warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
+and the historical held-out split was not opened.
 
 ## Known multimodal correction
 
@@ -77,12 +79,12 @@ V2's 2/3, and the V3 online-model gate still fails. The Drop decision and
 text-only rollback therefore remain unchanged. The 24-case held-out split was
 not read.
 
-The next multimodal candidate must also replace the shallow layout proxy:
-current grouping does not model columns, table rows/cells, figures, equations,
-or reading order, and product ingestion still rejects scanned PDFs. Gemma is
-excluded from the new candidate path. A replacement vision model is selected
-only through a prospective provider/model qualification and project-specific
-evidence.
+The prospective path now models columns, table rows/cells, figures, diagrams,
+equation-like blocks, OCR, reading order, page/region checksums, and original
+crops. Scanned PDFs work when an approved OCR provider is injected. Gemma
+remains excluded. A production OCR/layout or replacement vision model is
+selected only through a new prospective qualification and representative
+course evidence.
 
 ## Large benchmark interpretation
 

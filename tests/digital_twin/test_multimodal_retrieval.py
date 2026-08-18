@@ -2,6 +2,13 @@ from __future__ import annotations
 
 import pytest
 
+from src.digital_twin.grounding import (
+    DocumentChunk,
+    ModalityAwareRegionRetriever,
+    RegionKind,
+    RegionRoute,
+    classify_region_query,
+)
 from src.digital_twin.evaluation.multimodal_retrieval import (
     bbox_iou,
     build_candidate_records,
@@ -183,3 +190,81 @@ def test_course_retrievers_keep_records_isolated() -> None:
 
     assert [hit.chunk.id for hit in hits] == ["record-a"]
     assert unique_asset_hits(hits, by_id)[0]["asset_id"] == "asset-a"
+
+
+def test_modality_router_prefers_structured_regions_and_keeps_text_fallback() -> None:
+    chunks = [
+        _region_chunk(
+            "page",
+            "Region-aware Complete@3 Recall@5 Page text",
+            RegionKind.PAGE,
+        ),
+        _region_chunk(
+            "cell",
+            "Row: Region-aware. Column: Complete@3. Value: 0.84",
+            RegionKind.TABLE_CELL,
+        ),
+        _region_chunk(
+            "diagram",
+            "Input PDF Region parser Search index",
+            RegionKind.DIAGRAM,
+        ),
+        _region_chunk(
+            "text",
+            "Approved source versions remain immutable.",
+            RegionKind.TEXT,
+        ),
+        _region_chunk(
+            "ocr",
+            "A cache obtains exclusive ownership before modification.",
+            RegionKind.OCR,
+        ),
+    ]
+    retriever = ModalityAwareRegionRetriever(chunks)
+
+    table = retriever.retrieve("What Complete@3 value is reported?", limit=3)
+    assert [hit.chunk.id for hit in table] == ["cell"]
+    assert retriever.last_route == RegionRoute.TABLE
+
+    diagram = retriever.retrieve("Which stage follows the Region parser?", limit=3)
+    assert [hit.chunk.id for hit in diagram] == ["diagram"]
+    assert retriever.last_route == RegionRoute.DIAGRAM
+
+    text = retriever.retrieve("What remains immutable?", limit=3)
+    assert text[0].chunk.id == "text"
+    assert retriever.last_route == RegionRoute.GENERAL
+    scan = retriever.retrieve("What does a cache obtain before modification?", limit=3)
+    assert scan[0].chunk.id == "ocr"
+    assert retriever.last_route == RegionRoute.GENERAL
+    assert classify_region_query("Show the dashboard screenshot") == RegionRoute.VISUAL_TEXT
+
+
+def _region_chunk(
+    chunk_id: str,
+    text: str,
+    kind: RegionKind,
+) -> DocumentChunk:
+    return DocumentChunk(
+        id=chunk_id,
+        document_id="document-a",
+        text=text,
+        ordinal=0,
+        source_artifact_id="source-a",
+        source_version=1,
+        locator=f"page 1, {kind.value}",
+        page_start=1,
+        page_end=1,
+        region_id=f"region-{chunk_id}",
+        region_kind=kind,
+        bounding_box=(0.1, 0.1, 0.9, 0.9),
+        crop_ref=f"region://region-{chunk_id}.png",
+        source_checksum="a" * 64,
+        region_checksum="b" * 64,
+        retrieval_allowed=True,
+        display_allowed=True,
+        metadata=(
+            {"row_ordinal": "2", "column_ordinal": "2"}
+            if kind == RegionKind.TABLE_CELL
+            else {}
+        ),
+    )

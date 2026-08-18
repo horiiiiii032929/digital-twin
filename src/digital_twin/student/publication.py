@@ -76,6 +76,11 @@ class ReleaseLifecycleService:
         )
         return self.repository.save_release(draft)
 
+    def authorize_source_ingestion(self, professor_id: str, course_id: str) -> None:
+        """Apply the same ownership boundary before source bytes are processed."""
+
+        self._require_course_owner(professor_id, course_id)
+
     def record_evaluation(
         self,
         professor_id: str,

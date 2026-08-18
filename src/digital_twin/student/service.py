@@ -488,6 +488,14 @@ class StudentTutoringService:
                     source_version=chunk.source_version,
                     title=source.title,
                     locator=source.locator,
+                    source_checksum=chunk.source_checksum,
+                    page=chunk.page_start,
+                    region_id=chunk.region_id,
+                    region_kind=(
+                        chunk.region_kind.value if chunk.region_kind is not None else None
+                    ),
+                    bounding_box=chunk.bounding_box,
+                    crop_ref=chunk.crop_ref if chunk.display_allowed else None,
                 )
             )
         return citations, False

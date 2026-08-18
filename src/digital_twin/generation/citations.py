@@ -37,6 +37,14 @@ class DeterministicCitationValidator:
                     source_id=chunk.document_id,
                     title=chunk.metadata.get("title") or chunk.document_id,
                     locator=chunk.locator or f"chunk {chunk.ordinal + 1}",
+                    source_artifact_id=chunk.source_artifact_id,
+                    source_version=chunk.source_version,
+                    source_checksum=chunk.source_checksum,
+                    page=chunk.page_start,
+                    region_id=chunk.region_id,
+                    region_kind=chunk.region_kind,
+                    bounding_box=chunk.bounding_box,
+                    crop_ref=chunk.crop_ref if chunk.display_allowed else None,
                 )
             )
         return citations

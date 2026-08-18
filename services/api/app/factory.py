@@ -7,7 +7,13 @@ from src.digital_twin.evaluation import load_release_profile
 from services.api.app.routers.onboarding import router as onboarding_router
 from services.api.app.routers.publication import router as publication_router
 from services.api.app.routers.student import router as student_router
-from src.digital_twin.grounding.protocols import TextEmbedder, TutorGenerator
+from src.digital_twin.grounding import LocalCourseSourceIngestionService
+from src.digital_twin.grounding.protocols import (
+    OCRProvider,
+    RegionDescriptionProvider,
+    TextEmbedder,
+    TutorGenerator,
+)
 from src.digital_twin.onboarding import (
     InMemorySessionRepository,
     SessionRepository,
@@ -24,6 +30,8 @@ ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_STUDENT_PROFILE = (
     ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
 )
+DEFAULT_REGION_CROP_ROOT = ROOT / "data/interim/multimodal-region-crops"
+DEFAULT_SOURCE_ROOT = ROOT / "data/interim/course-sources"
 
 
 def create_app(
@@ -33,10 +41,21 @@ def create_app(
     student_embedder: TextEmbedder | None = None,
     student_generator: TutorGenerator | None = None,
     student_profile_path: Path = DEFAULT_STUDENT_PROFILE,
+    region_crop_root: Path = DEFAULT_REGION_CROP_ROOT,
+    source_root: Path = DEFAULT_SOURCE_ROOT,
+    source_ocr_provider: OCRProvider | None = None,
+    source_description_provider: RegionDescriptionProvider | None = None,
 ) -> FastAPI:
     app = FastAPI(title="Digital Twin Prototype API")
     app.state.session_repository = repository or InMemorySessionRepository()
     app.state.student_repository = student_repository or SQLiteStudentRepository()
+    app.state.region_crop_root = region_crop_root
+    app.state.source_ingestion_service = LocalCourseSourceIngestionService(
+        source_root,
+        region_crop_root,
+        ocr_provider=source_ocr_provider,
+        description_provider=source_description_provider,
+    )
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=student_profile_path,
