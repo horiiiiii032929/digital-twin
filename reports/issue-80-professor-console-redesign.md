@@ -8,8 +8,10 @@ Baseline: `2071c8b999621b9d567442ca492d6c372e23b1bd`
 
 Candidate: `codex/redesign-professor-console`
 
-Engineering disposition: **Ready for professor/user review. Do not call this a
-human-usability result.**
+Product-direction disposition: **Keep.** The repository owner selected Option B
+and confirmed that the remaining product work should continue from this visual
+and interaction model. Do not call this a professor-approval or human-usability
+result.
 
 ## Decision question
 
@@ -69,6 +71,7 @@ update → the policy status and advanced editor remain usable.
 | Tablet layout | Pass at 768×1024 with no page-level horizontal overflow |
 | Mobile layout | Pass at 390×844; stage switching, source tool, release bar, and named controls remain usable with no page-level horizontal overflow |
 | Accessibility smoke checks | Pass: no unnamed buttons, inputs, textareas, selects, or links in the inspected states; status is expressed in text as well as color |
+| Product-direction review | Keep: repository owner selected the conversation-plus-tool workspace and authorized the next product slice |
 | Human usability | Not run |
 | Professor preference/approval | Pending |
 
@@ -95,9 +98,10 @@ only. It does not establish faster task completion, lower error rate,
 accessibility conformance, human usability, professor satisfaction, pedagogy,
 learning outcomes, or production readiness.
 
-## Next decision
+## Decision and next boundary
 
-Ask the user/professor to review the live candidate. Mark #80 **Keep** only if
-the conversation-plus-tool model, policy density, and release status are
-understandable without explanation; otherwise record the specific friction and
-refine the candidate.
+Keep Option B as the product direction and close #80 when its implementation PR
+merges. This decision accepts the conversation-plus-tool model for continued
+prototype development; it does not substitute for professor review or a human
+usability study. Continue the next bounded product slice under #8 without
+changing the frozen retrieval, generator, policy, or research-evidence profile.

@@ -124,3 +124,9 @@ The implementation intentionally differs as follows:
 This is an engineering and visual-fidelity QA result, not a usability study or
 accessibility-conformance audit. It does not establish professor satisfaction,
 task-time improvement, pedagogy, or production readiness.
+
+## Product-direction decision
+
+The repository owner selected Option B and authorized continued product work
+from this conversation-plus-tool pattern. The disposition for issue #80 is
+**Keep**. Professor approval and human-usability evidence remain untested.
