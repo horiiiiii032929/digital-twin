@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-17
+Status date: 2026-08-18
 
 This is the operational starting point for the repository. Frozen experiment
 plans and historical result documents remain authoritative for their own runs,
@@ -9,12 +9,15 @@ but they do not override this page for current sequencing.
 ## Repository state
 
 - Professor-fidelity evidence and the Option A closeout were merged through PR
-  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75) at merge commit
-  `10e00c5`.
-- The local workspace was synchronized with `origin/main` after the merge.
-- PR #75 CI passed at the frozen revision. The latest full local
-  check passed 278 Python tests, 15 frontend tests,
-  documentation and evaluation validators, lint, and the production build.
+  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75). The corrective
+  interpretation is registered separately and the execution path now reads a
+  tracked `paused` policy before any sealed development or held-out data.
+- Development and held-out execution are unauthorized. Their active commands
+  are non-executing preflights; anchor and Gemma reproduction commands are
+  historical and require an explicit caller confirmation.
+- The 2026-08-18 cleanup check passed 285 Python tests, 15 frontend tests,
+  documentation and evaluation validators, frontend lint, and the production
+  build without making a model call.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -31,7 +34,7 @@ but they do not override this page for current sequencing.
 | --- | --- | --- | --- |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
 | Generator and prompt | Refine after anchor-only V4 Pro/P3; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic checks and same-family review, then completed the 48-response anchor at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, calibrated professor-fidelity scoring, or any prospective profile replacement |
-| Professor fidelity | Refine / Paused; report the diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but failed 90% repeat consistency, swapped DeepSeek and local Qwen stopped invalid, and an unfilled blinded 48-response packet is ready; the separate 41-case authoring packet also remains ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
+| Professor fidelity | Refine / Paused; report the corrected diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but agreed on only 33/48 dimension labels across two repeated cases; swapped DeepSeek and local Qwen stopped invalid; the hidden citation-hard-gate disagreement is a cross-layer diagnostic, not a pedagogy-calibration gate; an unfilled blinded 48-response packet and the separate 41-case authoring packet remain ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
 | Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
 | Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
 
@@ -64,8 +67,11 @@ evidence.
 1. Report the professor-fidelity result as `Refine / Paused`; the durable
    professor-facing report is
    [Professor fidelity evaluation closeout](../reports/professor-fidelity-closeout-2026-08-17/report.html).
-2. PR #75 is merged as unfavorable but decision-bearing evidence. Issue #24
-   remains open and is out of active execution.
+   Analysis correction 001 at code revision `dbd7a71` supersedes the original
+   false-pass interpretation: C3 citation-source correctness is 4/8 applicable
+   cases, and the hidden-hard-gate disagreement is diagnostic only.
+2. Preserve PR #75 and its correction as unfavorable but decision-bearing
+   evidence. Issue #24 remains open and is out of active execution.
 3. Complete issue #12 by freezing only the claims and profiles supported by
    registered evidence, then stabilize the report and demonstration.
 4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or

@@ -280,10 +280,16 @@ def prepare_packet(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--run", type=Path, default=DEFAULT_RUN)
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     arguments = parser.parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor review preparation is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     print(
         json.dumps(
             prepare_packet(arguments.run, arguments.dataset, arguments.output_root),

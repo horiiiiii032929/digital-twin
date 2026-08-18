@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Execute the frozen professor-fidelity C0-C3 comparison.
+"""Execute an explicitly authorized professor-fidelity C0-C3 comparison.
 
-Development may be rerun while tooling is calibrated. Held-out execution is
+The tracked execution policy is authoritative. Paused private splits fail
+before their sealed datasets are opened. Held-out execution is additionally
 one-time, hash-bound, checkpointed after every case, and fail-closed.
 """
 
@@ -65,6 +66,11 @@ ANCHOR_CANDIDATE_PATH = (
     ROOT / "research/05_evaluation/profiles/"
     "professor-fidelity-anchor-v4-p3-candidate.json"
 )
+EXECUTION_POLICY_PATH = (
+    ROOT / "research/05_evaluation/instruments/"
+    "professor_fidelity_execution_policy_v1.json"
+)
+RESULT_REGISTRY_PATH = ROOT / "research/05_evaluation/result-registry.md"
 P3_DEVELOPMENT_RUN_PATH = (
     ROOT / "reports/generated/generator-qualification-v3-v4-pro-p3-development-001.json"
 )
@@ -110,14 +116,29 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--allow-external-provider", action="store_true")
     parser.add_argument("--confirm-heldout-once", action="store_true")
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
+    parser.add_argument("--development-analysis", type=Path)
     parser.add_argument("--output", type=Path)
     arguments = parser.parse_args()
     if arguments.execute and not arguments.allow_external_provider:
         parser.error("execution requires --allow-external-provider")
     if arguments.execute and arguments.output is None:
         parser.error("execution requires --output under the ignored run boundary")
-    if arguments.split == "heldout" and not arguments.confirm_heldout_once:
+    if (
+        arguments.execute
+        and arguments.split == "heldout"
+        and not arguments.confirm_heldout_once
+    ):
         parser.error("held-out execution requires --confirm-heldout-once")
+    if (
+        arguments.execute
+        and arguments.split == "anchor"
+        and not arguments.confirm_historical_reproduction
+    ):
+        parser.error(
+            "anchor execution is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     return arguments
 
 
@@ -145,6 +166,122 @@ def split_paths(split: str) -> tuple[Path, Path]:
     if split == "anchor":
         return ANCHOR_ROOT / "anchor.json", ANCHOR_ROOT / "anchor_conditions.json"
     return PRIVATE_ROOT / f"{split}.json", PRIVATE_ROOT / f"{split}_conditions.json"
+
+
+def _load_execution_policy() -> dict[str, Any]:
+    policy = load_json(EXECUTION_POLICY_PATH)
+    expected_decision = (
+        "professor-fidelity-v2-anchor-002-machine-review-summary-001-"
+        "analysis-correction-001"
+    )
+    if (
+        policy.get("schema_version") != "1.0.0"
+        or policy.get("policy_id") != "professor-fidelity-execution-policy-v1"
+        or policy.get("status") not in {"paused", "active"}
+        or policy.get("recorded_decision", {}).get("result_id")
+        != expected_decision
+        or policy.get("recorded_decision", {}).get("decision") != "refine"
+        or set(policy.get("splits", {})) != {"anchor", "development", "heldout"}
+    ):
+        raise ProfessorFidelityExecutionError("execution policy is invalid or drifted")
+    return policy
+
+
+def _working_tree_dirty() -> bool:
+    return bool(
+        subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+
+
+def _validate_heldout_development_result(
+    policy: dict[str, Any],
+    development_analysis: Path | None,
+) -> dict[str, Any]:
+    requirement = policy["splits"]["heldout"]["requires_development_result"]
+    analysis_path = requirement.get("analysis_path")
+    record_path = requirement.get("record_path")
+    if not analysis_path or not record_path or development_analysis is None:
+        raise ProfessorFidelityExecutionError(
+            "held-out authorization lacks a registered development result"
+        )
+    expected_analysis_path = (ROOT / analysis_path).resolve()
+    if (
+        development_analysis.resolve() != expected_analysis_path
+        or not expected_analysis_path.is_file()
+    ):
+        raise ProfessorFidelityExecutionError(
+            "development analysis does not match the authorized analysis artifact"
+        )
+    analysis_sha256 = requirement.get("analysis_sha256")
+    if not analysis_sha256 or sha256(expected_analysis_path) != analysis_sha256:
+        raise ProfessorFidelityExecutionError("development analysis hash drifted")
+    result = load_json(expected_analysis_path)
+    gates = result.get("decision_gates", {})
+    if (
+        result.get("result_id") != requirement.get("result_id")
+        or result.get("source_run_id") != requirement.get("source_run_id")
+        or result.get("dataset_sha256") != requirement.get("dataset_sha256")
+        or result.get("status") != "complete-development-eligible"
+        or result.get("decision") != "keep"
+        or result.get("heldout_eligible") is not True
+        or result.get("analysis_working_tree_dirty") is not False
+        or not gates
+        or not all(value is True for value in gates.values())
+    ):
+        raise ProfessorFidelityExecutionError(
+            "registered development result is not eligible for held-out execution"
+        )
+    expected_record_path = (ROOT / record_path).resolve()
+    record_sha256 = requirement.get("record_sha256")
+    if (
+        not expected_record_path.is_file()
+        or not record_sha256
+        or sha256(expected_record_path) != record_sha256
+    ):
+        raise ProfessorFidelityExecutionError(
+            "registered development decision record is missing or drifted"
+        )
+    record = load_json(expected_record_path)
+    if (
+        record.get("run_id") != result["result_id"]
+        or record.get("decision", {}).get("outcome") != "keep"
+        or not any(
+            candidate.get("implementation", {}).get("configuration", {}).get(
+                "source_run_id"
+            )
+            == result["source_run_id"]
+            and candidate.get("implementation", {}).get("configuration", {}).get(
+                "dataset_sha256"
+            )
+            == result["dataset_sha256"]
+            and candidate.get("hard_gates")
+            and all(gate.get("passed") is True for gate in candidate["hard_gates"])
+            for candidate in record.get("candidates", [])
+        )
+    ):
+        raise ProfessorFidelityExecutionError(
+            "registered development decision does not match the eligible analysis"
+        )
+    registry = RESULT_REGISTRY_PATH.read_text(encoding="utf-8")
+    if result["result_id"] not in registry:
+        raise ProfessorFidelityExecutionError(
+            "development result is absent from the result registry"
+        )
+    return {
+        "result_id": result["result_id"],
+        "analysis_path": analysis_path,
+        "analysis_sha256": analysis_sha256,
+        "record_path": record_path,
+        "record_sha256": record_sha256,
+        "decision": result["decision"],
+        "heldout_eligible": True,
+    }
 
 
 def _load_policy_bindings(split: str) -> dict[str, Any]:
@@ -268,41 +405,84 @@ def _heldout_seal_summary() -> dict[str, Any]:
     }
 
 
-def preflight(split: str) -> dict[str, Any]:
-    load_instrument()
-    qualification = _generator_qualification(split)
-    policy_bindings = _load_policy_bindings(split)
-    dataset_path, conditions_path = split_paths(split)
-    dataset_summary = (
-        _heldout_seal_summary()
-        if split == "heldout"
-        else validate_dataset_and_conditions(
-            dataset_path,
-            conditions_path,
-            split=split,
-        )
-    )
-    models = _ollama_models()
+def preflight(
+    split: str,
+    *,
+    historical_reproduction_confirmed: bool = False,
+    development_analysis: Path | None = None,
+) -> dict[str, Any]:
+    policy = _load_execution_policy()
+    authorization = policy["splits"][split]
     blockers = []
+    if authorization.get("authorized") is not True:
+        blockers.append(
+            f"{split} execution is not authorized by {policy['policy_id']}"
+        )
+    if (
+        split == "anchor"
+        and authorization.get("requires_historical_confirmation") is True
+        and not historical_reproduction_confirmed
+    ):
+        blockers.append("historical reproduction confirmation is missing")
     if not os.environ.get("DEEPSEEK_API_KEY", "").strip():
         blockers.append("missing DEEPSEEK_API_KEY")
-    if (
-        split == "heldout"
-        and load_json(PRIVATE_ROOT / "heldout_once_ledger.json")["status"] != "unopened"
-    ):
-        blockers.append("held-out ledger is not unopened")
+    if _working_tree_dirty():
+        blockers.append("working tree is dirty")
+
+    dataset_summary: dict[str, Any] = {
+        "split": split,
+        "status": "not-inspected-policy-blocked",
+        "content_opened": False,
+    }
+    qualification: dict[str, Any] | None = None
+    policy_bindings: dict[str, Any] | None = None
+    development_result: dict[str, Any] | None = None
+    if not blockers:
+        load_instrument()
+        qualification = _generator_qualification(split)
+        policy_bindings = _load_policy_bindings(split)
+        dataset_path, conditions_path = split_paths(split)
+        if split == "heldout":
+            development_result = _validate_heldout_development_result(
+                policy, development_analysis
+            )
+            dataset_summary = _heldout_seal_summary()
+            if dataset_summary["ledger_status"] != "unopened":
+                blockers.append("held-out ledger is not unopened")
+        else:
+            dataset_summary = validate_dataset_and_conditions(
+                dataset_path,
+                conditions_path,
+                split=split,
+            )
+    models = _ollama_models() if not blockers else set()
     return {
         "status": "ready" if not blockers else "blocked",
         "split": split,
         "dataset": dataset_summary,
         "conditions": list(CONDITIONS),
-        "generator": qualification["generator"],
-        "prompt": qualification["prompt"],
-        "generator_qualification": qualification["qualification"],
-        "integration_prompt": policy_bindings["prompt_binding"]["prompt_id"],
-        "policy_binding_sha256": sha256(
-            POLICY_BINDING_V3_PATH if split == "anchor" else POLICY_BINDING_V2_PATH
+        "execution_policy": {
+            "policy_id": policy["policy_id"],
+            "status": policy["status"],
+            "split_authorized": authorization.get("authorized") is True,
+            "scope": authorization.get("scope"),
+        },
+        "generator": qualification["generator"] if qualification else None,
+        "prompt": qualification["prompt"] if qualification else None,
+        "generator_qualification": (
+            qualification["qualification"] if qualification else None
         ),
+        "integration_prompt": (
+            policy_bindings["prompt_binding"]["prompt_id"]
+            if policy_bindings
+            else None
+        ),
+        "policy_binding_sha256": (
+            sha256(POLICY_BINDING_V3_PATH if split == "anchor" else POLICY_BINDING_V2_PATH)
+            if policy_bindings
+            else None
+        ),
+        "development_result": development_result,
         "credential_present": not any("DEEPSEEK" in item for item in blockers),
         "primary_judge": "deepseek-v4-pro",
         "primary_judge_credential_present": bool(
@@ -581,7 +761,13 @@ def _generator_runtime(qualification: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-async def execute(split: str, output_path: Path) -> dict[str, Any]:
+async def execute(
+    split: str,
+    output_path: Path,
+    *,
+    historical_reproduction_confirmed: bool = False,
+    development_analysis: Path | None = None,
+) -> dict[str, Any]:
     resolved_output = output_path.resolve()
     if not resolved_output.is_relative_to(RUN_ROOT.resolve()):
         raise ProfessorFidelityExecutionError(
@@ -591,7 +777,11 @@ async def execute(split: str, output_path: Path) -> dict[str, Any]:
         raise ProfessorFidelityExecutionError(
             "refusing to overwrite an existing professor-fidelity run"
         )
-    status = preflight(split)
+    status = preflight(
+        split,
+        historical_reproduction_confirmed=historical_reproduction_confirmed,
+        development_analysis=development_analysis,
+    )
     if status["blockers"]:
         raise ProfessorFidelityExecutionError("; ".join(status["blockers"]))
     dataset_path, conditions_path = split_paths(split)
@@ -852,9 +1042,30 @@ def _complete_heldout(output_path: Path) -> None:
 def main() -> None:
     arguments = parse_args()
     if not arguments.execute:
-        print(json.dumps(preflight(arguments.split), indent=2, sort_keys=True))
+        print(
+            json.dumps(
+                preflight(
+                    arguments.split,
+                    historical_reproduction_confirmed=(
+                        arguments.confirm_historical_reproduction
+                    ),
+                    development_analysis=arguments.development_analysis,
+                ),
+                indent=2,
+                sort_keys=True,
+            )
+        )
         return
-    result = asyncio.run(execute(arguments.split, arguments.output))
+    result = asyncio.run(
+        execute(
+            arguments.split,
+            arguments.output,
+            historical_reproduction_confirmed=(
+                arguments.confirm_historical_reproduction
+            ),
+            development_analysis=arguments.development_analysis,
+        )
+    )
     print(
         json.dumps(
             {key: value for key, value in result.items() if key != "results"}, indent=2

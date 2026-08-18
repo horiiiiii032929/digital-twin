@@ -18,6 +18,7 @@ from scripts.judge_professor_fidelity import (
     JudgeError,
     JudgeTransport,
     _judge_input,
+    _judge_input_sha256,
     _judgment_schema,
     _prompt,
     _validate_judgment,
@@ -91,6 +92,7 @@ def run_probe(output: Path) -> dict[str, Any]:
         ),
         seed=5002,
         task_id=TASK_ID,
+        input_sha256=_judge_input_sha256(payload),
     )
     status = "passed"
     failure = None

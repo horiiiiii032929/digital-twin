@@ -214,23 +214,19 @@ This checks both JSON Schemas plus IDs, claim-evidence links, corpus and topic
 identity, passage hashes, candidate/presented evidence partitions, permission
 filters, condition-specific claim sets, and fault contracts.
 
-The current professor-fidelity repair commands are:
+The current professor-fidelity safety checks are:
 
 ```bash
-npm run build:course-tutor-splits
-npm run review:course-tutor-authoring-hybrid
-npm run seal:course-tutor-splits -- --ensemble-review <ignored-ensemble.json> \
-  --human-audit <ignored-human-audit.json> --github-purge-confirmed
-npm run analyze:professor-fidelity-development
+npm run verify:professor-fidelity-post-audit
+npm run preflight:professor-fidelity-development
+npm run preflight:professor-fidelity-heldout
 ```
 
-The builder is review-only and refuses to overwrite its output. The hybrid
-runner binds exact local model digests, records all 456 attempts, and creates
-an ignored model-blinded human packet. The sealer requires the exact completed
-ensemble and independent-human audit, unanimous model approval outside the
-human set, and GitHub Support purge confirmation before writing an immutable
-v2 seal and unopened held-out ledger. The analysis command audits the
-preserved v1 result without provider calls or held-out content access.
+The tracked execution policy is paused, so both preflights must report blocked
+without reading sealed split content. Historical anchor work and the prepared
+human packets are retained but deferred. Development can resume only after an
+explicit policy change; held-out additionally requires a registered all-gates
+`Keep` development result and one-time confirmation.
 
 `generation_v1.json` is the public preflight set for policy action, citation,
 no-evidence, and provider-suppression behavior. It does not measure live answer

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "professor-fidelity-execution-policy-v1",
+  "status": "paused",
+  "recorded_decision": {
+    "result_id": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+    "record_path": "research/05_evaluation/records/professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001.json",
+    "decision": "refine"
+  },
+  "splits": {
+    "anchor": {
+      "authorized": true,
+      "scope": "historical-reproduction-only",
+      "source_run_id": "professor-fidelity-v2-anchor-002",
+      "requires_historical_confirmation": true
+    },
+    "development": {
+      "authorized": false,
+      "scope": "prospective-evaluation",
+      "source_run_id": "professor-fidelity-v2-development-001",
+      "reason": "The corrected anchor decision is Refine and prospective evaluation has not been reauthorized."
+    },
+    "heldout": {
+      "authorized": false,
+      "scope": "one-time-prospective-evaluation",
+      "source_run_id": "professor-fidelity-v2-heldout-001",
+      "reason": "Development is not authorized and no registered Keep result passes every development gate.",
+      "requires_development_result": {
+        "result_id": null,
+        "analysis_path": null,
+        "analysis_sha256": null,
+        "record_path": null,
+        "record_sha256": null,
+        "source_run_id": "professor-fidelity-v2-development-001",
+        "dataset_sha256": null,
+        "decision": "keep",
+        "heldout_eligible": true,
+        "all_decision_gates": true,
+        "registered_in": "research/05_evaluation/result-registry.md"
+      },
+      "requires_one_time_confirmation": true
+    }
+  }
+}

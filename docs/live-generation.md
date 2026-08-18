@@ -6,21 +6,30 @@ qualification; deterministic rollback retained.
 
 ## Current decision state
 
-Issue #24 is reopened and `In Progress` because its C0-C3 development run is
-invalid for selection. The preserved provider trace completed 192/192
-attempts, while the
-registered correction found missing human authoring review, gold-label leakage
-in C2/C3, a drifted C3 chunking corpus, and missing condition/policy bindings.
-C3 had 13/30 source/page citation correctness, 19/30 source/page evidence
-coverage, and 0/30 exact selected-passage matches. Safe grounding, true
-citation completeness, and pedagogy remain unresolved, so no professor-
-fidelity claim or profile change is justified. The 104-case one-time held-out
-ledger remains unopened. The generator sub-boundary remains complete: the
-repository selects the exact
-DeepSeek binding and P2 prompt after its own development, stability, one-time
-held-out, and citation review gates passed. No API credential is stored. A
-local Ollama Gemma 3 4B candidate was exercised historically with zero monetary
-cost, but it is not currently installed or selected.
+Issue #24 is `Todo / Refine (Paused)`. Its current evidence is the anchor-only
+V4 Pro/P3 run: 48/48 tutor responses completed at one provider fingerprint,
+but the primary judge repeated only two cases and agreed on 33/48 dimension
+labels. The swapped DeepSeek attempt stopped invalid after 5/12 cases and the
+local Qwen attempt stopped invalid after 2/12; neither may be rerun as if it
+were the same attempt. Corrected C3 citation-source correctness is 4/8
+claim-applicable cases. The prepared 48-response blinded packet has no labels
+and is deferred, so automated pedagogy, semantic citation completeness, and
+professor approval remain unresolved. No professor-fidelity profile change is
+justified.
+
+The tracked execution policy blocks professor-fidelity development and
+held-out work before sealed content is read. Active npm commands expose only
+non-executing preflights; historical anchor commands require an explicit
+reproduction confirmation. The earlier 192-attempt C0-C3 trace remains
+registered but invalid for selection because it lacked human authoring review,
+leaked case labels into C2/C3, used a drifted C3 corpus, and omitted required
+bindings.
+
+The separate generator sub-boundary remains complete: the experimental profile
+retains exact DeepSeek V4 Flash non-thinking with P2 after its own development,
+stability, one-time held-out, and citation-review gates passed. Deterministic
+generation remains the rollback. No API credential is stored. Local Gemma 3
+4B is a retired historical candidate and is neither active nor selected.
 
 On 2026-07-16, the project fixed the DeepSeek API as a product constraint for
 the primary generator rather than opening a broad LLM competition. On
@@ -31,10 +40,10 @@ the primary generator rather than opening a broad LLM competition. On
 bounded first candidate because the final system has a 10-second p95 target and
 the current official API positions it as the faster, lower-cost V4 option. This
 is a candidate freeze, not evidence that it works or that DeepSeek is best.
-Issue #24's source-holder-authorized development exception permits eligible
-IT5002 lecture passages and synthetic case fields under the cumulative USD 10
-cap. Student data, judge inputs, simulator trajectories, and public deployment
-remain prohibited.
+The earlier source-holder authorization defined the permitted IT5002 boundary,
+but it does not override the current machine-enforced pause. A new prospective
+authorization and clean run identity are required before any development work.
+Student data, simulator trajectories, and public deployment remain prohibited.
 
 The temporal provider facts were checked against DeepSeek's official
 [models and pricing](https://api-docs.deepseek.com/quick_start/pricing/),
@@ -42,14 +51,12 @@ The temporal provider facts were checked against DeepSeek's official
 [JSON-output](https://api-docs.deepseek.com/guides/json_mode/) documentation on
 2026-08-07. A later provider change requires a new binding and run identity.
 
-The qualification instrument, 48-case development split, 104-case sealed
-held-out split, hash manifest, review protocol, cost stops, and one-time
-held-out ledger are executable. P0 and P1 failed citation correctness in
-development. The refined strict-evidence P2 prompt passed all development
+For the separate generator qualification, P0 and P1 failed citation correctness
+in development. The refined strict-evidence P2 prompt passed all development
 floors, then passed 36/36 attempts on the frozen 12-case, three-repeat stability
-check. Routine CI verifies held-out only by hash and sealed metadata without
-parsing its cases. The credential value is never emitted or accepted in
-provider options.
+check and its own 104-case one-time held-out evaluation. That does not authorize
+the professor-fidelity development or held-out splits. The credential value is
+never emitted or accepted in provider options.
 
 The 25-case synthetic preflight establishes that the control path is safe enough
 to compare with a live candidate. It is not evidence that the control produces

@@ -10,7 +10,8 @@
 - Working tree: clean for both control and live runs
 - Reproduction: `npm run verify:generation -- --output
   reports/generated/generation-v1-deterministic-current.json` and
-  `npm run benchmark:generation-local`
+  `npm run historical:benchmark:generation-gemma3 --
+  --confirm-historical-reproduction`
 - Runtime: local Ollama, `gemma3:4b`, LiteLLM JSON response mode, temperature 0,
   60-second per-call timeout, and 600 maximum output tokens
 - Generated artifacts: `reports/generated/generation-v1-deterministic-current.json`

@@ -60,8 +60,9 @@ The project's technical standard, learning commitments, and strengthened Sprint
   lexical-coverage, and semantic-agreement evidence gates.
 - `npm run verify:generation`: run the deterministic generation, policy,
   citation, no-evidence, and provider-suppression regression set.
-- `npm run benchmark:generation-local`: run the unselected local Ollama Gemma 3
-  4B candidate in strict JSON mode and write ignored per-case output under
+- `npm run historical:benchmark:generation-gemma3 --
+  --confirm-historical-reproduction`: explicitly reproduce the retired,
+  unselected local Gemma 3 4B candidate and write ignored per-case output under
   `reports/generated/`.
 - `npm run verify:evaluation-results`: validate the durable evaluation-result
   registry and its referenced artifacts.

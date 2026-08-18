@@ -14,6 +14,7 @@ import hashlib
 import json
 import math
 import random
+import re
 import statistics
 import subprocess
 from collections import Counter, defaultdict
@@ -45,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--primary-judge", type=Path)
     parser.add_argument("--judge-calibration", type=Path)
     parser.add_argument("--blinded-review", type=Path)
+    parser.add_argument("--analysis-id", required=True)
     parser.add_argument("--record-output", type=Path, required=True)
     parser.add_argument("--report-output", type=Path, required=True)
     return parser.parse_args()
@@ -171,6 +173,7 @@ def _review_labels(
     review: dict[str, Any] | None,
     run_id: str,
     dataset_sha256: str,
+    dataset: dict[str, Any],
 ) -> tuple[
     dict[tuple[str, str], bool],
     dict[tuple[str, str], bool],
@@ -206,10 +209,13 @@ def _review_labels(
     citation_completeness: dict[tuple[str, str], bool] = {}
     presented_evidence_completeness: dict[tuple[str, str], bool] = {}
     pedagogy: dict[tuple[str, str], bool] = {}
+    cases = {case["case_id"]: case for case in dataset["cases"]}
     for item in review.get("judgments", []):
         key = (item["case_id"], item["condition"])
         if key in semantic:
             raise ValueError(f"duplicate blinded review judgment: {key}")
+        if item["case_id"] not in cases:
+            raise ValueError(f"blinded review case is outside the dataset: {key}")
         semantic[key] = all(
             item[field] is True
             for field in (
@@ -224,6 +230,16 @@ def _review_labels(
             "presented_evidence_completeness"
         ]
         dimensions = item.get("pedagogy_dimensions", [])
+        expected_dimensions = cases[item["case_id"]]["rubric"][
+            "required_pedagogy_dimensions"
+        ]
+        observed_dimensions = [dimension.get("dimension") for dimension in dimensions]
+        if (
+            len(observed_dimensions) != len(expected_dimensions)
+            or len(set(observed_dimensions)) != len(observed_dimensions)
+            or set(observed_dimensions) != set(expected_dimensions)
+        ):
+            raise ValueError(f"blinded review pedagogy dimensions drifted: {key}")
         pedagogy[key] = bool(dimensions) and all(
             dimension["label"] == "pass" for dimension in dimensions
         )
@@ -246,14 +262,35 @@ def _review_labels(
 def _judge_labels(
     judge: dict[str, Any] | None,
     calibration: dict[str, Any] | None,
+    *,
+    run_id: str,
 ) -> tuple[dict[tuple[str, str], bool], Counter[str], dict[str, Any]]:
     if judge is None:
         return {}, Counter(), {"eligible": False, "reason": "no judge supplied"}
-    if calibration is None or calibration.get("automated_pedagogy_eligible") is not True:
+    if (
+        calibration is None
+        or calibration.get("status") != "eligible"
+        or calibration.get("automated_pedagogy_eligible") is not True
+    ):
         return {}, Counter(), {
             "eligible": False,
             "reason": "judge calibration is absent or ineligible",
         }
+    expected = calibration.get("models", {}).get("primary", {})
+    binding_matches = all(
+        (
+            calibration.get("source_run_id") == run_id,
+            judge.get("status") == "complete",
+            judge.get("source_run_id") == run_id,
+            judge.get("instrument_id") == "llm-judge-v1",
+            judge.get("judge_run_id") == expected.get("judge_run_id"),
+            judge.get("model") == expected.get("model"),
+            judge.get("model_digest") == expected.get("digest"),
+            judge.get("contract_revision") == expected.get("contract_revision"),
+        )
+    )
+    if not binding_matches:
+        raise ValueError("judge/calibration binding does not match the analyzed run")
     scores: dict[tuple[str, str], bool] = {}
     preferences: Counter[str] = Counter()
     for record in judge["case_judgments"]:
@@ -262,7 +299,10 @@ def _judge_labels(
         mapping = record["mapping"]
         for response in record["judgment"]["responses"]:
             condition = mapping[response["label"]]
-            scores[(record["case_id"], condition)] = all(
+            key = (record["case_id"], condition)
+            if key in scores:
+                raise ValueError(f"duplicate automated pedagogy judgment: {key}")
+            scores[key] = all(
                 item["label"] == "pass" for item in response["dimensions"]
             )
         for pairwise in record["judgment"].get("c1_c2_pairwise", []):
@@ -339,7 +379,26 @@ def analyze(
     judge: dict[str, Any] | None = None,
     calibration: dict[str, Any] | None = None,
     review: dict[str, Any] | None = None,
+    *,
+    analysis_id: str | None = None,
+    analysis_working_tree_dirty: bool | None = None,
 ) -> dict[str, Any]:
+    result_id = analysis_id or f"{run['run_id']}-analysis-001"
+    if not re.fullmatch(r"[a-z0-9][a-z0-9._-]*", result_id):
+        raise ValueError("analysis ID must be a stable lowercase identifier")
+    analysis_dirty = (
+        bool(
+            subprocess.run(
+                ["git", "status", "--porcelain"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+        )
+        if analysis_working_tree_dirty is None
+        else analysis_working_tree_dirty
+    )
     if run["condition_attempts"] != len(run["results"]):
         raise ValueError("condition-attempt ledger does not match result rows")
     if run["condition_attempts"] != run["case_count"] * len(CONDITIONS):
@@ -351,9 +410,13 @@ def analyze(
         pedagogy_review,
         review_status,
     ) = _review_labels(
-        review, run["run_id"], run["dataset_sha256"]
+        review, run["run_id"], run["dataset_sha256"], dataset
     )
-    judge_pedagogy, preferences, judge_status = _judge_labels(judge, calibration)
+    judge_pedagogy, preferences, judge_status = _judge_labels(
+        judge,
+        calibration,
+        run_id=run["run_id"],
+    )
     rows = _rescore_rows(
         run,
         dataset,
@@ -498,16 +561,25 @@ def analyze(
         retrieval_binding.get(key) == value
         for key, value in expected_retrieval_binding.items()
     )
-    condition_binding_resolved = bool(run.get("conditions_sha256"))
+    condition_binding_resolved = bool(
+        re.fullmatch(r"[a-f0-9]{64}", str(run.get("conditions_sha256", "")))
+    )
     policy_prompt_binding_resolved = all(
         (
-            run.get("policy_binding_sha256"),
+            run.get("policy_binding_sha256")
+            == "6c2556fcf87d889eae8451ee07aaf11b6c490da6e956453ac801317dab1db366",
             run.get("prompt_binding")
             == "professor-fidelity-integration-prompt-v2",
         )
     )
     gates = {
         "dataset_human_authoring_review": dataset_human_reviewed,
+        "independent_blinded_outcome_review": (
+            review_status.get("eligible") is True
+            and review_status.get("independent_human_review") is True
+        ),
+        "source_run_working_tree_clean": run.get("working_tree_dirty") is False,
+        "analysis_working_tree_clean": analysis_dirty is False,
         "selected_retrieval_and_chunker_identity": candidate_binding_resolved,
         "condition_set_hash_bound": condition_binding_resolved,
         "policy_and_prompt_hash_bound": policy_prompt_binding_resolved,
@@ -538,6 +610,7 @@ def analyze(
         "p95_latency_at_most_10_seconds": c3["latency_p95_ms"] <= 10000,
     }
     decision = "keep" if all(gates.values()) else "refine"
+    heldout_eligible = decision == "keep" and all(gates.values())
     failures = []
     for row in rows_by_condition["C3"]:
         failed = [
@@ -556,10 +629,16 @@ def analyze(
             )
 
     return {
-        "result_id": f"{run['run_id']}-analysis-correction-001",
+        "result_id": result_id,
         "source_run_id": run["run_id"],
-        "status": "analysis-corrected-development-refine",
+        "dataset_sha256": run["dataset_sha256"],
+        "status": (
+            "complete-development-eligible"
+            if heldout_eligible
+            else "complete-development-refine"
+        ),
         "decision": decision,
+        "heldout_eligible": heldout_eligible,
         "sample_size": run["case_count"],
         "condition_attempts": run["condition_attempts"],
         "completed_attempts": completed,
@@ -600,16 +679,15 @@ def analyze(
             capture_output=True,
             text=True,
         ).stdout.strip(),
+        "analysis_working_tree_dirty": analysis_dirty,
         "representative_failures": failures[:12],
         "limitations": [
-            "Safe-grounded success and its paired effects are unresolved until blinded semantic review covers every structurally passing answer.",
-            "The source run did not bind the selected page-bounded chunker, exact retrieved passage IDs, the condition-set hash, or a hash-frozen shared policy; its C3 outputs are not evidence for the selected M2 product condition.",
-            "The v1.1 course-tutor cases were not independently human reviewed and leaked case-specific expected actions into the historical C2/C3 prompt, so condition effects are diagnostic only.",
-            "Pedagogy is unresolved because the earlier local-judge implementation drifted from the frozen per-dimension pairwise contract and no eligible blinded reference exists.",
+            "Safe-grounded effects are unresolved wherever eligible blinded semantic review does not cover every required answer.",
+            "Automated pedagogy is eligible only when its exact judge binding has a passing calibration record; model-family agreement alone is not independent validation.",
             "Citation source correctness and claim-source coverage verify source/page alignment only; they do not establish semantic entailment or true citation completeness.",
             "The course-tutor cases are synthetic transformations and do not establish learning, usability, satisfaction, adoption, or professor equivalence.",
             "Eligible private course text was processed by the authorized DeepSeek API; provider disk caching and the absence of a project-specific no-training guarantee remain data-boundary limitations.",
-            "The one-time held-out split remains unopened because development gates failed.",
+            "Held-out authorization is a separate machine policy decision; this analysis alone cannot open the one-time held-out split.",
         ],
     }
 
@@ -623,11 +701,11 @@ def _display(metric: dict[str, Any]) -> str:
 def render_report(result: dict[str, Any]) -> str:
     summaries = result["condition_summaries"]
     lines = [
-        "# Professor-fidelity C0-C3 corrected analysis",
+        "# Professor-fidelity C0-C3 development analysis",
         "",
-        f"Decision: **{result['decision'].title()}**. This correction rescored {result['condition_attempts']}/{result['requested_attempts']} preserved tutor outputs without new provider calls.",
+        f"Decision: **{result['decision'].title()}**. The analysis scored {result['condition_attempts']}/{result['requested_attempts']} recorded condition attempts. Held-out eligible: **{'yes' if result['heldout_eligible'] else 'no'}**.",
         "",
-        "## Corrected measurements",
+        "## Measurements",
         "",
         "| Condition | Safe grounded | Structural success | Action | Citation source correctness | Claim-source coverage | Semantic citation completeness | Exact evidence@3 |",
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
@@ -660,6 +738,18 @@ def render_report(result: dict[str, Any]) -> str:
 
 def main() -> None:
     arguments = parse_args()
+    from scripts.execute_professor_fidelity import (
+        _load_execution_policy,
+        _working_tree_dirty,
+    )
+
+    policy = _load_execution_policy()
+    if policy["splits"]["development"].get("authorized") is not True:
+        raise ValueError(
+            f"development analysis is not authorized by {policy['policy_id']}"
+        )
+    if _working_tree_dirty():
+        raise ValueError("development analysis requires a clean working tree")
     run = load_json(arguments.run)
     dataset = load_json(arguments.dataset)
     if sha256(arguments.dataset) != run["dataset_sha256"]:
@@ -670,6 +760,7 @@ def main() -> None:
         load_json(arguments.primary_judge) if arguments.primary_judge else None,
         load_json(arguments.judge_calibration) if arguments.judge_calibration else None,
         load_json(arguments.blinded_review) if arguments.blinded_review else None,
+        analysis_id=arguments.analysis_id,
     )
     write_json(arguments.record_output, result)
     arguments.report_output.parent.mkdir(parents=True, exist_ok=True)

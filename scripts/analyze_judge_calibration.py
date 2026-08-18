@@ -15,6 +15,7 @@ LABELS = ("fail", "partial", "pass")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--primary", type=Path, required=True)
     parser.add_argument("--swapped", type=Path, required=True)
@@ -54,6 +55,9 @@ def _pairwise_labels(
 
 def _reference_labels(
     reference: dict[str, Any] | None,
+    *,
+    source_run_id: str,
+    dataset_sha256: str | None,
 ) -> dict[tuple[str, str, str], str]:
     if reference is None:
         return {}
@@ -61,6 +65,9 @@ def _reference_labels(
     if not all(
         (
             reference.get("status") == "complete",
+            reference.get("source_run_id") == source_run_id,
+            dataset_sha256 is None
+            or reference.get("dataset_sha256") == dataset_sha256,
             reviewer.get("blinded_to_conditions") is True,
             reviewer.get("role") in {"researcher", "professor"},
         )
@@ -77,6 +84,26 @@ def _reference_labels(
                 )
             ] = dimension["label"]
     return labels
+
+
+def _validate_judge_binding(
+    judge: dict[str, Any],
+    *,
+    source_run_id: str,
+    role: str,
+) -> None:
+    if not all(
+        (
+            judge.get("status") == "complete",
+            judge.get("source_run_id") == source_run_id,
+            judge.get("instrument_id") == "llm-judge-v1",
+            judge.get("judge_run_id"),
+            judge.get("contract_revision"),
+            judge.get("model"),
+            judge.get("model_digest"),
+        )
+    ):
+        raise ValueError(f"{role} judge binding is incomplete or mismatched")
 
 
 def _agreement(left: dict[tuple[str, str, str], str], right: dict[tuple[str, str, str], str]) -> dict[str, Any]:
@@ -133,11 +160,21 @@ def analyze(
     sensitivity: dict[str, Any],
     reference: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    for role, judge in (
+        ("primary", primary),
+        ("swapped", swapped),
+        ("sensitivity", sensitivity),
+    ):
+        _validate_judge_binding(judge, source_run_id=run["run_id"], role=role)
     primary_labels = _labels(primary, repeats=False)
     repeat_labels = _labels(primary, repeats=True)
     swapped_labels = _labels(swapped, repeats=False)
     sensitivity_labels = _labels(sensitivity, repeats=False)
-    reference_labels = _reference_labels(reference)
+    reference_labels = _reference_labels(
+        reference,
+        source_run_id=run["run_id"],
+        dataset_sha256=run.get("dataset_sha256"),
+    )
     primary_pairwise = _pairwise_labels(primary, repeats=False)
     swapped_pairwise = _pairwise_labels(swapped, repeats=False)
     run_rows = {(row["case_id"], row["condition"]): row for row in run["results"]}
@@ -181,7 +218,6 @@ def analyze(
             and pairwise_position["exact_agreement"] >= 0.90
         ),
         "minimum_repeat_consistency_0_90": (repeat_overall["exact_agreement"] or 0) >= 0.90,
-        "zero_false_passes_on_hard_gate_failures": not false_passes,
     }
     eligible = all(gates.values())
     return {
@@ -190,8 +226,18 @@ def analyze(
         "automated_pedagogy_eligible": eligible,
         "source_run_id": run["run_id"],
         "models": {
-            "primary": {"model": primary["model"], "digest": primary["model_digest"]},
-            "sensitivity": {"model": sensitivity["model"], "digest": sensitivity["model_digest"]},
+            "primary": {
+                "judge_run_id": primary["judge_run_id"],
+                "model": primary["model"],
+                "digest": primary["model_digest"],
+                "contract_revision": primary["contract_revision"],
+            },
+            "sensitivity": {
+                "judge_run_id": sensitivity["judge_run_id"],
+                "model": sensitivity["model"],
+                "digest": sensitivity["model_digest"],
+                "contract_revision": sensitivity["contract_revision"],
+            },
         },
         "overall": {
             "primary_vs_swapped": swapped_overall,
@@ -207,7 +253,13 @@ def analyze(
             "primary_vs_blinded_reference": reference_by_dimension,
         },
         "gates": gates,
-        "false_passes_on_hard_gate_failures": false_passes,
+        "cross_layer_diagnostics": {
+            "pedagogy_all_pass_with_deterministic_failure": false_passes,
+            "interpretation": (
+                "Diagnostic only: the pedagogy judge is blinded to deterministic "
+                "hard-gate evidence and is not expected to detect those failures."
+            ),
+        },
         "evaluator_failures": [
             "Gemma bundled attempt 001: malformed/truncated JSON before a result was written.",
             "Gemma bundled attempt 002: required-dimension drift after six checkpointed cases.",
@@ -217,12 +269,18 @@ def analyze(
             "Only a completed review whose reviewer was blinded to condition identities can serve as the calibration reference.",
             "Model-to-model, repeat, and position agreement cannot substitute for the frozen blinded researcher reference.",
             "Automated pedagogy labels remain diagnostic until a blinded reviewer reference passes every frozen dimension gate.",
+            "Pedagogy-versus-hard-gate disagreement is cross-layer diagnostic evidence, not an evaluator calibration failure.",
         ],
     }
 
 
 def main() -> None:
     arguments = parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor calibration is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     result = analyze(
         load_json(arguments.run), load_json(arguments.primary),
         load_json(arguments.swapped), load_json(arguments.sensitivity),

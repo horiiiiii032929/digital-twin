@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,7 @@ def load_json(path: Path) -> dict[str, Any]:
 def finalize_review(
     template: dict[str, Any],
     mapping: dict[str, Any],
+    dataset: dict[str, Any],
 ) -> dict[str, Any]:
     if template.get("status") != "complete":
         raise ValueError("review template must be marked complete")
@@ -41,14 +43,25 @@ def finalize_review(
         )
     ):
         raise ValueError("reviewer metadata is incomplete")
+    assignment_rows = mapping.get("assignments", [])
+    judgment_rows = template.get("judgments", [])
     assignments = {
         item["task_id"]: item for item in mapping.get("assignments", [])
     }
     judgments = {
         item["task_id"]: item for item in template.get("judgments", [])
     }
+    if len(assignments) != len(assignment_rows) or len(judgments) != len(
+        judgment_rows
+    ):
+        raise ValueError("review tasks must be unique")
     if set(assignments) != set(judgments):
         raise ValueError("completed review must cover every blinded task exactly once")
+    cases = {case["case_id"]: case for case in dataset.get("cases", [])}
+    if len(cases) != len(dataset.get("cases", [])):
+        raise ValueError("review dataset case identities are not unique")
+    if {item["case_id"] for item in assignment_rows} - set(cases):
+        raise ValueError("review mapping contains a case outside the dataset")
     normalized = []
     for task_id in sorted(assignments):
         assignment = assignments[task_id]
@@ -71,6 +84,16 @@ def finalize_review(
             item.get("label") not in VALID_LABELS for item in dimensions
         ):
             raise ValueError(f"pedagogy labels are incomplete for {task_id}")
+        expected_dimensions = cases[assignment["case_id"]]["rubric"][
+            "required_pedagogy_dimensions"
+        ]
+        observed_dimensions = [item.get("dimension") for item in dimensions]
+        if (
+            len(observed_dimensions) != len(expected_dimensions)
+            or len(set(observed_dimensions)) != len(observed_dimensions)
+            or set(observed_dimensions) != set(expected_dimensions)
+        ):
+            raise ValueError(f"pedagogy dimensions drifted for {task_id}")
         normalized.append(
             {
                 "case_id": assignment["case_id"],
@@ -105,13 +128,25 @@ def finalize_review(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--template", type=Path, required=True)
     parser.add_argument("--mapping", type=Path, required=True)
+    parser.add_argument("--dataset", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor review finalization is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
+    mapping = load_json(arguments.mapping)
+    dataset_sha256 = hashlib.sha256(arguments.dataset.read_bytes()).hexdigest()
+    if mapping.get("dataset_sha256") != dataset_sha256:
+        raise ValueError("review dataset hash does not match the blinded mapping")
     result = finalize_review(
         load_json(arguments.template),
-        load_json(arguments.mapping),
+        mapping,
+        load_json(arguments.dataset),
     )
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     try:

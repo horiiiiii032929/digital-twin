@@ -60,6 +60,7 @@ ARTIFACTS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
@@ -76,6 +77,11 @@ def _condition_metrics(run: dict[str, Any]) -> list[dict[str, Any]]:
     records = []
     for condition in ("C0", "C1", "C2", "C3"):
         rows = [row for row in run["results"] if row["condition"] == condition]
+        citation_applicable_rows = [
+            row
+            for row in rows
+            if row["score"].get("citation_applicable_claims", 0) > 0
+        ]
         records.append(
             {
                 "condition": condition,
@@ -93,9 +99,21 @@ def _condition_metrics(run: dict[str, Any]) -> list[dict[str, Any]]:
                 "citation_source_correct": sum(
                     row["score"]["citation_source_correctness"] is True for row in rows
                 ),
+                "citation_source_applicable_n": len(citation_applicable_rows),
+                "citation_source_correct_applicable": sum(
+                    row["score"]["citation_source_correctness"] is True
+                    for row in citation_applicable_rows
+                ),
             }
         )
     return records
+
+
+def _pairwise_repeat_agreement(judge: dict[str, Any]) -> dict[str, Any]:
+    return _exact_agreement(
+        _pairwise_labels(judge, repeats=False),
+        _pairwise_labels(judge, repeats=True),
+    )
 
 
 def summarize() -> dict[str, Any]:
@@ -133,13 +151,14 @@ def summarize() -> dict[str, Any]:
     grouped: dict[tuple[str, str], list[str]] = {}
     for (case_id, condition, _), label in primary_labels.items():
         grouped.setdefault((case_id, condition), []).append(label)
-    false_passes = [
+    cross_layer_disagreements = [
         {"case_id": key[0], "condition": key[1]}
         for key, labels in sorted(grouped.items())
         if all(label == "pass" for label in labels)
         and not run_rows[key]["score"]["deterministic_hard_gates_passed"]
     ]
     repeat_agreement = _agreement(primary_labels, repeat_labels)
+    pairwise_repeat_agreement = _pairwise_repeat_agreement(primary)
     return {
         "summary_id": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
         "status": "ineligible",
@@ -165,9 +184,15 @@ def summarize() -> dict[str, Any]:
             "calls": primary["transport"]["calls"],
             "base_cases": sum(not row["repeat"] for row in primary["case_judgments"]),
             "repeat_cases": sum(row["repeat"] for row in primary["case_judgments"]),
+            "repeat_responses": sum(
+                len(row["judgment"]["responses"])
+                for row in primary["case_judgments"]
+                if row["repeat"]
+            ),
+            "repeat_labels": repeat_agreement["n"],
             "cost_usd": primary["transport"]["cost_usd"],
             "repeat_agreement": repeat_agreement,
-            "pairwise_repeat_exact_agreement": 11 / 12,
+            "pairwise_repeat_agreement": pairwise_repeat_agreement,
             "quote_alignment_count": sum(
                 len(row["judgment"].get("quote_alignments", []))
                 for row in primary["case_judgments"]
@@ -201,10 +226,18 @@ def summarize() -> dict[str, Any]:
             "swapped_complete": False,
             "sensitivity_complete": False,
             "minimum_pairwise_position_consistency_0_90": False,
-            "zero_false_passes_on_hard_gate_failures": not false_passes,
             "blinded_human_reference_present": False,
         },
-        "false_passes_on_hard_gate_failures": false_passes,
+        "cross_layer_diagnostics": {
+            "pedagogy_all_pass_with_deterministic_failure": (
+                cross_layer_disagreements
+            ),
+            "interpretation": (
+                "Diagnostic only: the pedagogy judge was blinded to citations and "
+                "deterministic hard-gate results, so this is not an evaluator "
+                "calibration failure."
+            ),
+        },
         "human_packet": {
             "status": template["status"],
             "judgment_count": len(template["judgments"]),
@@ -224,6 +257,11 @@ def summarize() -> dict[str, Any]:
 
 def main() -> None:
     arguments = parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor summarization is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     result = summarize()
     write_json_exclusive(arguments.output, result)
     print(

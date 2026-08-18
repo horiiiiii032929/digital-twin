@@ -81,6 +81,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repeat-rate", type=float, default=0.2)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--attempt-id", default="001")
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     arguments = parser.parse_args()
     if arguments.model == DEEPSEEK_MODEL and not arguments.allow_external_provider:
         parser.error("DeepSeek judging requires --allow-external-provider")
@@ -91,6 +92,31 @@ def parse_args() -> argparse.Namespace:
     if not re.fullmatch(r"[0-9]{3}", arguments.attempt_id):
         parser.error("--attempt-id must be exactly three digits")
     return arguments
+
+
+def _enforce_cli_execution_policy(arguments: argparse.Namespace) -> None:
+    """Fail before opening a run whose split is paused or historical."""
+
+    from scripts.execute_professor_fidelity import _load_execution_policy
+
+    run_path = arguments.run.as_posix()
+    if "anchor-002" in run_path:
+        if not arguments.confirm_historical_reproduction:
+            raise JudgeError(
+                "anchor judging is historical reproduction and requires "
+                "--confirm-historical-reproduction"
+            )
+        return
+    split = next(
+        (name for name in ("development", "heldout") if name in run_path), None
+    )
+    if split is None:
+        raise JudgeError("cannot infer an authorized split from --run")
+    policy = _load_execution_policy()
+    if policy["splits"][split].get("authorized") is not True:
+        raise JudgeError(
+            f"{split} judging is not authorized by {policy['policy_id']}"
+        )
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -258,7 +284,10 @@ class JudgeTransport:
         schema: dict[str, Any],
         seed: int,
         task_id: str,
+        input_sha256: str,
     ) -> dict[str, Any]:
+        if not re.fullmatch(r"[a-f0-9]{64}", input_sha256):
+            raise JudgeError("judge input SHA-256 is invalid")
         if self.call_limit is not None and len(self.call_records) >= self.call_limit:
             raise JudgeError("judge call limit reached")
         if self.model != DEEPSEEK_MODEL:
@@ -266,6 +295,7 @@ class JudgeTransport:
             self.call_records.append(
                 {
                     "task_id": task_id,
+                    "input_sha256": input_sha256,
                     "endpoint_class": "local",
                     "provider_model": self.model,
                     "provider_revision": self.model_digest,
@@ -330,6 +360,7 @@ class JudgeTransport:
         self.call_records.append(
             {
                 "task_id": task_id,
+                "input_sha256": input_sha256,
                 "endpoint_class": "external",
                 "provider_model": response.model,
                 "provider_revision": response.system_fingerprint,
@@ -611,11 +642,24 @@ def _align_judgment_quotes(
     return alignments
 
 
+def _canonical_judge_input(payload: dict[str, Any]) -> str:
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _judge_input_sha256(payload: dict[str, Any]) -> str:
+    return hashlib.sha256(_canonical_judge_input(payload).encode("utf-8")).hexdigest()
+
+
 def _prompt(payload: dict[str, Any]) -> str:
     return (
         PROMPT_PATH.read_text(encoding="utf-8")
         + "\nINPUT JSON:\n"
-        + json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        + _canonical_judge_input(payload)
     )
 
 
@@ -704,6 +748,7 @@ def _judge_case(
             ),
             seed=5002,
             task_id=task_id,
+            input_sha256=_judge_input_sha256(payload),
         )
         quote_alignments.extend(
             {
@@ -725,7 +770,13 @@ def _judge_case(
             response_a=payload["response_a"],
             response_b=None,
         )
-        responses.append({"label": label, "dimensions": value["single_judgments"]})
+        responses.append(
+            {
+                "label": label,
+                "input_sha256": _judge_input_sha256(payload),
+                "dimensions": value["single_judgments"],
+            }
+        )
 
     pair_mapping = _pair_mapping(swap)
     pair_task_id = f"judge-{case['case_id']}-c1-c2-{'ba' if swap else 'ab'}"
@@ -746,6 +797,7 @@ def _judge_case(
         ),
         seed=5002,
         task_id=pair_task_id,
+        input_sha256=_judge_input_sha256(pair_payload),
     )
     quote_alignments.extend(
         {
@@ -781,6 +833,7 @@ def _judge_case(
     return {
         "responses": responses,
         "c1_c2_pairwise": normalized,
+        "pairwise_input_sha256": _judge_input_sha256(pair_payload),
         "pair_mapping": pair_mapping,
         "quote_alignments": quote_alignments,
     }
@@ -801,11 +854,17 @@ def _validate_case_result(
             raise JudgeError("judge dimensions drifted")
         if record["label"] not in mapping:
             raise JudgeError("judge response label is invalid")
+        if not re.fullmatch(r"[a-f0-9]{64}", str(record.get("input_sha256", ""))):
+            raise JudgeError("judge response input digest is invalid")
     pairwise = value.get("c1_c2_pairwise", [])
     if {item.get("dimension") for item in pairwise} != expected_dimensions:
         raise JudgeError("pairwise dimensions drifted")
     if any(item.get("preference") not in {"C1", "C2", "tie"} for item in pairwise):
         raise JudgeError("pairwise preference is invalid")
+    if not re.fullmatch(
+        r"[a-f0-9]{64}", str(value.get("pairwise_input_sha256", ""))
+    ):
+        raise JudgeError("pairwise input digest is invalid")
 
 
 def run_judging(arguments: argparse.Namespace) -> dict[str, Any]:
@@ -949,6 +1008,7 @@ def subprocess_run(command: list[str]) -> str:
 
 def main() -> None:
     arguments = parse_args()
+    _enforce_cli_execution_policy(arguments)
     checkpoint = arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json")
     if arguments.output.exists() or checkpoint.exists():
         raise JudgeError(
