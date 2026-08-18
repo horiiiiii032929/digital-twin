@@ -115,3 +115,10 @@ The candidate is ready for a `Keep` or `Refine` product-direction review. A
 not be interpreted as a model-selection change, professor validation, student
 approval, accessibility certification, learning-outcome evidence, or a
 production release decision.
+
+Rollback is bounded to the product surface: remove the `/student` route, its
+new client/controller/components, and the reciprocal navigation link. The
+verified student/publication API, persisted synthetic records, frozen component
+profile, and professor workspace remain the unchanged control. Browser-only
+conversation identifiers may be discarded without deleting authoritative API
+messages or citations.
