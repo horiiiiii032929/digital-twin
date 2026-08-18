@@ -177,22 +177,19 @@ Current evidence and limitations:
   migration/backup/restore and concurrency evidence, and bounded capacity
   results.
 
-The active baseline is a professor-configurable pedagogical Digital Twin for
-multiple professors and courses, not a one-course RAG pilot. Its central
-technical study compares heading BM25, dense, hybrid, and reranked hybrid
-retrieval across a verified heterogeneous-course benchmark. The product must
-also demonstrate professor-policy fidelity, evaluation-before-publication,
-course-isolated student tutoring, rollback, failure recovery, and bounded
-simulated capacity.
+The active goal is a deployed, invite-only Course Digital Twin for multiple
+professors and courses, not a one-course RAG pilot or local-only demonstration.
+The merged professor/student workspace is the UX baseline. The next gates are
+trusted multimodal course grounding, credentialed identity and durable product
+infrastructure, a larger factual QA scale benchmark, calibrated professor
+fidelity, production operations, and real workflow validation.
 
 See the
-[authoritative scope](research/00_admin/2026-07-27-frontier-digital-twin-scope.md)
-for the research programme, claims, data boundary, and compressed schedule. The
-technical evidence was frozen on 2026-08-18 as an **experimental, not
-release-ready** baseline. See the
-[technical evidence freeze](reports/technical-evidence-freeze-2026-08-18.md).
-Remaining work is report, presentation, feedback-led revision, and contingency;
-new feature or method development requires an explicit post-freeze decision.
+[real-world product scope](research/00_admin/2026-08-18-real-world-product-scope.md)
+for the prospective product, evaluation, deployment, and claim gates. The
+[technical evidence freeze](reports/technical-evidence-freeze-2026-08-18.md)
+remains authoritative for the earlier experimental baseline and is not
+rewritten by the expanded product goal.
 
 ## Sprint 1 Onboarding Prototype
 

@@ -2,139 +2,109 @@
 
 Status date: 2026-08-18
 
-This is the operational starting point for the repository. Frozen experiment
-plans and historical result documents remain authoritative for their own runs,
-but they do not override this page for current sequencing.
+This is the operational starting point for prospective work. Frozen experiment
+plans, result records, corrections, profiles, and the technical evidence freeze
+remain authoritative for the historical runs and claims they document.
 
-## Repository state
+## Current outcome
 
-- Professor-fidelity evidence and the Option A closeout were merged through PR
-  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75). The corrective
-  interpretation is registered separately and the execution path now reads a
-  tracked `paused` policy before any sealed development or held-out data.
-- Development and held-out execution are unauthorized. Their active commands
-  are non-executing preflights; anchor and Gemma reproduction commands are
-  historical and require an explicit caller confirmation.
-- The current candidate `npm run check` passes 300 Python tests, 27 frontend
-  tests, documentation and evaluation validators, the 19-check student
-  workflow, frontend lint, and the production build. Technical-freeze
-  validation confirms no frozen artifact changed and no external model was
-  called.
-- Dependency/security PR
-  [#78](https://github.com/horiiiiii032929/digital-twin/pull/78) upgraded the
-  independently compatible Python and frontend stack. The tested major ML
-  group was dropped after two of 40 exact top-three rankings changed. npm has
-  zero findings; the optional local ML environment has nine exact, expiring,
-  machine-enforced exceptions and zero unreviewed findings.
-- The technical baseline is frozen as experimental, not release-ready. The
-  [freeze report](../reports/technical-evidence-freeze-2026-08-18.md),
-  [claim matrix](../reports/claim-to-evidence-matrix.md), and machine manifest
-  [`technical-evidence-freeze-v1`](../research/05_evaluation/profiles/technical-evidence-freeze-v1.json)
-  preserve supported results, negative results, limitations, reproducibility,
-  and rollback.
-- Post-freeze professor UI issue
-  [#80](https://github.com/horiiiiii032929/digital-twin/issues/80) is complete
-  with a `Keep` product-direction decision. PR
-  [#81](https://github.com/horiiiiii032929/digital-twin/pull/81) merged the
-  conversation-plus-tool workspace. That decision is repository-owner review,
-  not professor approval or human-usability evidence.
-- [#82](https://github.com/horiiiiii032929/digital-twin/issues/82) and
-  [#84](https://github.com/horiiiiii032929/digital-twin/issues/84) are the two
-  active bounded product items. Draft PR
-  [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) combines the
-  student tutoring workspace with the accepted conversation-first professor
-  direction. Populated professor policy, preview, and approval review states now
-  use progressive disclosure, and `?demo=supervisor` loads a deterministic
-  synthetic walkthrough. Engineering and responsive QA are complete on the
-  candidate; human product-direction review remains pending.
-- Private course data, generated review packets, `.env`, build output,
-  dependency folders, and Python caches remain ignored. They are intentionally
-  not reorganized into Git.
-- The remote privacy incident is closed. Superseded public commit `02dbf8d`
-  was removed from active history; GitHub Support closed request #4659958 after
-  confirming zero references and completing server-side garbage collection and
-  cached-view clearance. The authenticated commit API no longer finds the SHA,
-  and the public commit URL returns HTTP 404. See the
-  [purge closure record](../research/00_admin/2026-08-14-github-public-history-purge-closure.md).
+The project has moved from an experimental local-demo goal to a deployed,
+invite-only real-world Course Digital Twin goal. The new prospective baseline is
+the [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
+
+PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
+reviewed conversation-first professor and student workspaces into `main` at
+`acaaecd`. Issues #82 and #84 are `Done / Keep`. The merged flow passed the
+recorded repository checks, 19/19 synthetic publication/student checks,
+responsive browser QA, and independent Impeccable review. This establishes the
+product UX baseline; it does not establish human usability or production
+readiness.
+
+GitHub Project 1 is reorganized around product goal
+[#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
+gates:
+
+- P1 — Multimodal Product Grounding;
+- P2 — Deployable Product Foundation; and
+- P3 — Pilot Validation and Release.
+
+The older F2 milestone is closed. Open F3 work was reassigned into P1-P3. F4
+continues to hold report, presentation, and professor-communication work.
 
 ## Evidence state
 
-| Boundary | Current decision | What is established | What is not established |
+| Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 retained as rollback | Final end-to-end tutor quality |
-| Generator and prompt | Refine after anchor-only V4 Pro/P3; historical V4 Flash selection preserved | V4 Pro/P3 passed 48/48 public-synthetic checks and same-family review, then completed the 48-response anchor at one exact fingerprint; Qwen is rejected for citation clearance; deterministic fallback remains | Independent evidence, calibrated professor-fidelity scoring, or any prospective profile replacement |
-| Professor fidelity | Refine / Paused; report the corrected diagnostic outcome | Anchor-002 completed 48/48 V4 Pro/P3 responses; the primary judge completed but agreed on only 33/48 dimension labels across two repeated cases; swapped DeepSeek and local Qwen stopped invalid; the hidden citation-hard-gate disagreement is a cross-layer diagnostic, not a pedagogy-calibration gate; an unfilled blinded 48-response packet and the separate 41-case authoring packet remain ready | Calibrated automated pedagogy, independent-human approval, an immutable seal, corrected development C0-C3 effects, semantic citation completeness, learning outcomes, or professor approval |
-| Multimodal retrieval | Refine; no selection | Development study and failure evidence are recorded; V0 text remains rollback | A selected multimodal profile or complete visual-course coverage |
-| Student/publication core | Keep as bounded foundation | Synthetic course isolation, persistence, citations, fallback, publication replacement, withdrawal, rollback, and stale-release denial pass 19/19 checks | Credentialed identity, complete professor/source administration, migration, backup/restore, concurrency, capacity, and usability |
+| Product UX | Keep as baseline | Professor and student conversation-first workspaces; responsive synthetic flows | Human workflow/usability evidence and complete real source/account lifecycle |
+| Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
+| Multimodal retrieval | Refine; no selection | Historical development failures and localization evidence preserved; V0 text fallback | Trustworthy corrected metrics, region-aware extraction, product ingestion, precise visual citations, and prospective selection |
+| Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
+| Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
+| Publication/student core | Keep as bounded foundation | 19/19 synthetic isolation, persistence, citation, publication replacement, withdrawal, rollback, and stale-release checks | Credentialed identity, complete source administration, durable production storage, jobs, deployment, observability, recovery, capacity, and usability |
+| Large factual QA | Planned | Professor suggestion and issue #87 define a separate scale benchmark | Larger dummy document corpus, multimodal slice, multi-model generation/cross-check, source validation, human audit, and result |
 
-The historical professor-fidelity comparison is invalid for selection because
-the cases lacked independent human authoring review, C2/C3 prompts leaked case
-labels, C3 used a drifted chunk corpus, and required condition and policy/prompt
-bindings were absent. The unfavorable result remains registered; no profile
-selection was changed.
+## Immediate critical path
 
-## Post-freeze queue
-
-Issues #82 and #84 are the active post-freeze product items on draft PR #83.
-They may complete the bounded student demo and shared interaction shell without
-changing frozen model, retrieval, profile, or research-evidence decisions.
-Resume any other queued item only after a new explicit decision, ideally from
-professor feedback.
-
-| Order | Issue | Board state | Purpose |
+| Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#84 Unified professor/student workspace](https://github.com/horiiiiii032929/digital-twin/issues/84) | In Progress / Pending | Shared LLM-style shell, populated review queues, and synthetic supervisor walkthrough are technically checked on draft PR #83; await product-direction review |
-| 2 | [#82 Student tutoring workspace](https://github.com/horiiiiii032929/digital-twin/issues/82) | In Progress / Pending | Responsive grounded-tutoring candidate is implemented on draft PR #83; await the same product-direction review before Keep/Refine |
-| 3 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | Done / Keep | Selected conversation-plus-tool LLM workspace merged through PR #81 |
-| 4 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
-| 5 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
-| 6 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Parent foundation for #82; retain the 19-check core and do not expand beyond the authorized UI slice |
-| 7 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
-| 8 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
-| 9 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
+| 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | In Progress / Pending | Duplicate-loop defect fixed, metric suite audited, regression tests added, historical V3 result corrected or confirmed, held-out unopened |
+| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Todo / blocked by #85 | Real table/column/figure/equation/scan regions, product ingestion and visual citations, deployable decision and text fallback |
+| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / blocked by #86 | Credentialed RBAC, durable data/storage, jobs, HTTPS staging, observability, backup/restore, security, rollback |
+| 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / blocked by #86 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
+| 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / blocked by #86 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
+| 6 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence |
+| 7 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24, #86, #88 | One immutable staging release candidate passes or receives explicit Refine/Drop decision |
+| 8 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
 
-The 2026-08-16 target was missed by two days; the technical evidence was frozen
-on 2026-08-18. Do not start new feature or method development, open held-out
-data, silently change gates, or promote diagnostic metrics into selection
-evidence without a new post-freeze decision.
+Only #85 is currently in progress. The dependency graph, milestones, priority
+labels, target dates, and issue bodies are recorded on GitHub Project 1.
 
-## Frozen closeout sequence
+## Known multimodal correction
 
-1. Report the professor-fidelity result as `Refine / Paused`; the durable
-   professor-facing report is
-   [Professor fidelity evaluation closeout](../reports/professor-fidelity-closeout-2026-08-17/report.html).
-   Analysis correction 001 at code revision `dbd7a71` supersedes the original
-   false-pass interpretation: C3 citation-source correctness is 4/8 applicable
-   cases, and the hidden-hard-gate disagreement is diagnostic only.
-2. Preserve PR #75 and its correction as unfavorable but decision-bearing
-   evidence. Issue #24 remains open and is out of active execution.
-3. Issue #12 is complete: only claims and profile selections supported by
-   registered evidence are frozen, and the report plus local professor demo
-   pass rendered smoke checks.
-4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or
-   any professor-fidelity held-out evaluation. Partial agreement remains
-   diagnostic only.
-5. Defer both human packets. If a future evaluator-redesign iteration is
-   separately authorized, a non-Codex reviewer must complete the frozen
-   instruments before any calibration or professor-approval claim.
+The V3 development runner constructs region relevance using a duplicated
+`for hit in raw_hit_rows` loop. That can repeat every relevance value and
+corrupt region@k and nDCG. Issue #85 repairs and tests the metric boundary first.
+The old V3 result remains immutable and receives a linked correction or
+invalidation; it is not edited to look successful.
 
-There is no immediate human action. Both bounded blinded packets are deferred,
-but neither is passed or waived.
-Codex must not complete them because the frozen instruments require an
-independent reviewer who has not inspected model decisions. Drafts 001-005 and
-all unfavorable or invalid attempts remain preserved. No full-152 human
-approval or professor-validation claim is allowed.
+The next multimodal candidate must also replace the shallow layout proxy:
+current grouping does not model columns, table rows/cells, figures, equations,
+or reading order, and product ingestion still rejects scanned PDFs. Gemma is
+excluded from the new candidate path. A replacement vision model is selected
+only through a prospective provider/model qualification and project-specific
+evidence.
+
+## Large benchmark interpretation
+
+Issue #87 adopts the stronger, product-relevant interpretation of the
+professor's suggestion: build a larger permission-safe dummy document corpus,
+then derive and cross-check factual QA toward 10,000 cases. This tests corpus
+and factual-answer scale rather than repeatedly sampling only the existing 32
+PDFs. It includes a meaningful multimodal slice and remains separate from the
+verified 100-case benchmark and Professor Digital Twin fidelity.
+
+## Human and safety boundary
+
+A real-user pilot is now a product gate, but recruitment is not automatically
+authorized. Issue #10 requires consent, privacy, recruitment, and supervisor
+approval before exposure to real users. Until then, use synthetic accounts and
+approved or dummy content.
+
+Private course data, generated review packets, `.env`, build output,
+dependencies, model artifacts, and bulky run outputs remain ignored. Do not use
+solutions, answer keys, submissions, student data, credentials, or consent
+records as committed fixtures.
 
 ## Source-of-truth order
 
-Use the following order when status statements conflict:
+When status statements conflict, use:
 
-1. immutable run records and registered result corrections;
-2. the versioned technical-freeze manifest and selected experimental profile;
-3. the frozen claim-to-evidence matrix;
+1. immutable run records and registered corrections for historical results;
+2. versioned component/release profiles and the technical evidence freeze;
+3. the prospective real-world product scope;
 4. this dated operational status;
-5. the live GitHub Project fields;
+5. the live GitHub Project fields and dependencies;
 6. component guides and historical plans.
 
-Never edit an old result to make it appear successful. Add a correction or new
-run and retain the original evidence.
+Never edit an old result to make it appear successful. Add a correction or a
+new prospective run and retain the original evidence.
