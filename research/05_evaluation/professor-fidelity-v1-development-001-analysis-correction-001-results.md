@@ -151,10 +151,14 @@ change that stop decision.
 
 ## Reproduction
 
-No provider call and no held-out content access are required:
+The historical analyzer command used for this correction is retired and must
+not be confused with the prospective v2 analyzer. The durable result and
+machine record remain reproducible evidence. Current integrity verification
+requires no provider call and no held-out content access:
 
 ```bash
-npm run analyze:professor-fidelity-development
+npm run verify:evaluation-results
+npm run verify:professor-fidelity-post-audit
 npm run check
 ```
 

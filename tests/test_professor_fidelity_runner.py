@@ -7,6 +7,7 @@ import httpx
 import pytest
 from openai import APITimeoutError
 
+import scripts.execute_professor_fidelity as professor_fidelity_executor
 from scripts.analyze_judge_calibration import analyze as analyze_judge_calibration
 from scripts.analyze_professor_fidelity import _judge_labels, analyze
 from scripts.build_course_tutor_splits import (
@@ -486,35 +487,62 @@ def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
     assert transport.call_records[0]["input_sha256"] == "a" * 64
 
 
-def test_active_professor_fidelity_commands_exclude_gemma():
+def test_active_professor_fidelity_commands_are_non_executing_and_exclude_gemma():
     root = Path(__file__).resolve().parents[1]
     package = json.loads((root / "package.json").read_text(encoding="utf-8"))
     commands = {
         name: command
         for name, command in package["scripts"].items()
-        if name.startswith("judge:professor-fidelity")
+        if not name.startswith(("historical:", "deferred:"))
     }
 
     assert commands
     assert all("gemma" not in command.casefold() for command in commands.values())
-    assert "--model deepseek-v4-pro" in commands["judge:professor-fidelity-development"]
-    assert "--model deepseek-v4-pro" in commands["judge:professor-fidelity-heldout"]
+    assert "--execute" not in commands["preflight:professor-fidelity-development"]
+    assert "--execute" not in commands["preflight:professor-fidelity-heldout"]
+    assert "benchmark:professor-fidelity-development" not in commands
+    assert "benchmark:professor-fidelity-heldout" not in commands
 
 
-def test_active_anchor_commands_use_new_run_and_never_invalid_run():
+def test_historical_anchor_commands_require_explicit_namespace_and_use_anchor_002():
     root = Path(__file__).resolve().parents[1]
     package = json.loads((root / "package.json").read_text(encoding="utf-8"))
     commands = {
         name: command
         for name, command in package["scripts"].items()
-        if "professor-fidelity-anchor" in name
+        if name.startswith("historical:") and "professor-fidelity-anchor" in name
     }
 
     assert commands
     assert all("anchor-002" in command for command in commands.values())
     assert all("anchor-001" not in command for command in commands.values())
-    assert "--attempt-id 002" in commands["judge:professor-fidelity-anchor"]
-    assert "attempt-002.json" in commands["judge:professor-fidelity-anchor"]
+    assert all("--confirm-historical-reproduction" not in command for command in commands.values())
+    primary = commands["historical:judge:professor-fidelity-anchor"]
+    assert "--attempt-id 002" in primary
+    assert "attempt-002.json" in primary
+
+
+def test_paused_preflight_does_not_open_private_split(monkeypatch):
+    def fail_if_called(*_args, **_kwargs):
+        raise AssertionError("paused preflight touched a sealed/private artifact")
+
+    monkeypatch.setattr(professor_fidelity_executor, "_working_tree_dirty", lambda: False)
+    monkeypatch.setattr(professor_fidelity_executor, "_generator_qualification", fail_if_called)
+    monkeypatch.setattr(professor_fidelity_executor, "_load_policy_bindings", fail_if_called)
+    monkeypatch.setattr(
+        professor_fidelity_executor, "validate_dataset_and_conditions", fail_if_called
+    )
+    monkeypatch.setattr(professor_fidelity_executor, "_heldout_seal_summary", fail_if_called)
+
+    for split in ("development", "heldout"):
+        result = professor_fidelity_executor.preflight(split)
+        assert result["status"] == "blocked"
+        assert result["execution_enabled"] is False
+        assert result["dataset"] == {
+            "split": split,
+            "status": "not-inspected-policy-blocked",
+            "content_opened": False,
+        }
 
 
 def test_professor_fidelity_judge_sensitivity_uses_one_shared_sample():
@@ -562,6 +590,9 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
     assert result["active_sensitivity_judge"]["status"] == (
         "invalid-attempt-001-rerun-prohibited"
     )
+    assert result["execution_policy"]["status"] == "paused"
+    assert result["execution_policy"]["development_authorized"] is False
+    assert result["execution_policy"]["heldout_authorized"] is False
     assert result["active_gemma_calls"] == 0
     assert result["private_artifact_content_read"] is False
     assert result["heldout_content_read"] is False
@@ -768,8 +799,112 @@ def test_analysis_uses_eligible_denominators_and_complete_evidence_gate():
     assert result["decision_gates"]["selected_retrieval_and_chunker_identity"] is False
     assert result["decision_gates"]["condition_set_hash_bound"] is False
     assert result["decision"] == "refine"
+    assert result["status"] == "complete-development-refine"
+    assert result["heldout_eligible"] is False
+    assert result["result_id"] == "synthetic-run-analysis-001"
     assert result["representative_failures"]
     assert "answer" not in result["representative_failures"][0]
+
+
+def test_analysis_marks_only_an_all_gates_development_result_heldout_eligible():
+    cases = [_case(f"eligible-{index:02d}") for index in range(10)]
+    for case in cases:
+        case["annotation"] = {
+            "status": "single_review",
+            "reviewer_ids": ["researcher-1"],
+        }
+    results = []
+    judgments = []
+    for case in cases:
+        for condition in ("C0", "C1", "C2", "C3"):
+            grounded = condition != "C0"
+            results.append(
+                {
+                    "case_id": case["case_id"],
+                    "scenario_type": "direct",
+                    "condition": condition,
+                    "status": "completed",
+                    "latency_ms": 100,
+                    "answer": "Every register uses the same number of bits.",
+                    "citation_ids": ["S1"] if grounded else [],
+                    "retrieved": [_hit()] if grounded else [],
+                    "score": {"actual_action": "answer"},
+                }
+            )
+            judgments.append(
+                {
+                    "case_id": case["case_id"],
+                    "condition": condition,
+                    "required_claim_expression": grounded,
+                    "supported_claim_precision": grounded,
+                    "citation_semantic_alignment": grounded,
+                    "citation_completeness": grounded,
+                    "presented_evidence_completeness": grounded,
+                    "pedagogy_dimensions": [
+                        {"dimension": "clarity_and_coherence", "label": "pass"}
+                    ],
+                }
+            )
+    run = {
+        "run_id": "eligible-development-run",
+        "dataset_sha256": "b" * 64,
+        "conditions_sha256": "c" * 64,
+        "policy_binding_sha256": (
+            "6c2556fcf87d889eae8451ee07aaf11b6c490da6e956453ac801317dab1db366"
+        ),
+        "prompt_binding": "professor-fidelity-integration-prompt-v2",
+        "retrieval_binding": {
+            "implementation_id": "qwen3-hybrid-v1",
+            "implementation_version": "cross-course-retrieval-v1",
+            "chunker_implementation_id": "page-bounded-heading-paragraph-chunker",
+            "chunker_version": "v1",
+            "corpus_id": "it5002-lectures-v1",
+        },
+        "case_count": 10,
+        "condition_attempts": 40,
+        "completed_attempts": 40,
+        "requested_attempts": 40,
+        "cost_usd": 0.01,
+        "input_tokens": 100,
+        "output_tokens": 100,
+        "latency_p50_ms": 100,
+        "latency_p95_ms": 100,
+        "provider_model": "synthetic",
+        "provider_revision": "synthetic",
+        "retrieval": "qwen3-hybrid-v1",
+        "code_revision": "synthetic",
+        "working_tree_dirty": False,
+        "results": results,
+    }
+    review = {
+        "schema_version": "1.0.0",
+        "review_id": "eligible-review",
+        "source_run_id": run["run_id"],
+        "dataset_sha256": run["dataset_sha256"],
+        "status": "complete",
+        "reviewed_at": "2026-08-18T00:00:00+00:00",
+        "reviewer": {
+            "reviewer_id": "researcher-1",
+            "role": "researcher",
+            "blinded_to_conditions": True,
+            "independent_human_review": True,
+        },
+        "judgments": judgments,
+    }
+
+    result = analyze(
+        run,
+        {"cases": cases},
+        review=review,
+        analysis_id="eligible-development-analysis-001",
+        analysis_working_tree_dirty=False,
+    )
+
+    assert all(result["decision_gates"].values())
+    assert result["decision"] == "keep"
+    assert result["status"] == "complete-development-eligible"
+    assert result["heldout_eligible"] is True
+    assert result["result_id"] == "eligible-development-analysis-001"
 
 
 def test_judge_labels_reject_calibration_from_another_binding():

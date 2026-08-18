@@ -15,6 +15,7 @@ LABELS = ("fail", "partial", "pass")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--primary", type=Path, required=True)
     parser.add_argument("--swapped", type=Path, required=True)
@@ -275,6 +276,11 @@ def analyze(
 
 def main() -> None:
     arguments = parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor calibration is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     result = analyze(
         load_json(arguments.run), load_json(arguments.primary),
         load_json(arguments.swapped), load_json(arguments.sensitivity),

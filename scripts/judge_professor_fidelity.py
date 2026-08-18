@@ -81,6 +81,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repeat-rate", type=float, default=0.2)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--attempt-id", default="001")
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     arguments = parser.parse_args()
     if arguments.model == DEEPSEEK_MODEL and not arguments.allow_external_provider:
         parser.error("DeepSeek judging requires --allow-external-provider")
@@ -91,6 +92,31 @@ def parse_args() -> argparse.Namespace:
     if not re.fullmatch(r"[0-9]{3}", arguments.attempt_id):
         parser.error("--attempt-id must be exactly three digits")
     return arguments
+
+
+def _enforce_cli_execution_policy(arguments: argparse.Namespace) -> None:
+    """Fail before opening a run whose split is paused or historical."""
+
+    from scripts.execute_professor_fidelity import _load_execution_policy
+
+    run_path = arguments.run.as_posix()
+    if "anchor-002" in run_path:
+        if not arguments.confirm_historical_reproduction:
+            raise JudgeError(
+                "anchor judging is historical reproduction and requires "
+                "--confirm-historical-reproduction"
+            )
+        return
+    split = next(
+        (name for name in ("development", "heldout") if name in run_path), None
+    )
+    if split is None:
+        raise JudgeError("cannot infer an authorized split from --run")
+    policy = _load_execution_policy()
+    if policy["splits"][split].get("authorized") is not True:
+        raise JudgeError(
+            f"{split} judging is not authorized by {policy['policy_id']}"
+        )
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -982,6 +1008,7 @@ def subprocess_run(command: list[str]) -> str:
 
 def main() -> None:
     arguments = parse_args()
+    _enforce_cli_execution_policy(arguments)
     checkpoint = arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json")
     if arguments.output.exists() or checkpoint.exists():
         raise JudgeError(

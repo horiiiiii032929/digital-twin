@@ -17,9 +17,11 @@ Current utilities:
 - `evaluate_generation.py`: runs the deterministic generator, policy, citation,
   and no-evidence preflight over 25 synthetic cases without a provider, tokens,
   or cost; run it with `npm run verify:generation`. An explicit `--model` plus
-  optional `--json-mode` runs a benchmark-only live candidate; the repository's
-  local zero-cost command is `npm run benchmark:generation-local`. A non-Ollama
-  model is rejected unless `--allow-external-provider` explicitly acknowledges
+  optional `--json-mode` runs a benchmark-only live candidate. Gemma is retired;
+  its historical alias requires `npm run
+  historical:benchmark:generation-gemma3 --
+  --confirm-historical-reproduction`. A non-Ollama model is rejected unless
+  `--allow-external-provider` explicitly acknowledges
   the potentially billable external call; such a run also requires the
   separately recorded budget decision defined by issue #24.
 - `benchmark_retrieval.py`: calibrates and compares BM25, local BGE-small dense
@@ -233,11 +235,12 @@ Current utilities:
   not claim cross-family independence. Run `npm run
   verify:generator-qualification-v4-pro-p3-review` before `npm run
   review:generator-qualification-v4-pro-p3-deepseek`.
-- `validate_professor_fidelity_post_audit.py`: statically validates the exact
-  post-audit command chain, DeepSeek V4 Pro/Qwen judge roles, Gemma exclusion,
-  one-time held-out confirmation, plan, and purge-closure record. It checks
-  only private-artifact presence, never content, and makes no model call; run
-  `npm run verify:professor-fidelity-post-audit`.
+- `validate_professor_fidelity_post_audit.py`: validates the tracked paused
+  execution policy, non-executing development/held-out preflights, historical
+  and deferred command namespaces, DeepSeek V4 Pro/Qwen roles, Gemma exclusion,
+  correction record, plan, and purge closure. It checks only private-artifact
+  presence, never content, and makes no model call; run `npm run
+  verify:professor-fidelity-post-audit`.
 - `build_course_tutor_splits.py`: deterministically builds and validates an
   ignored 48-case development plus 104-case held-out **review draft** from
   a private ignored authoring blueprint and a curated case inventory. Every
@@ -292,12 +295,14 @@ Current utilities:
   and review ledger after exact passage and policy inspection; the ledger
   explicitly records Codex-assisted researcher review and keeps professor and
   independent-human review false; run `npm run seal:course-tutor-anchor`.
-- `execute_professor_fidelity.py`: executes C0-C3 with the pinned DeepSeek V4
-  Flash tutor and selected local M2 retrieval. It requires the selected chunker
-  corpus, exact passage hashes, condition-set hash, and shared policy/prompt
-  hash; never places case gold labels in prompts; checkpoints each case;
-  records provider failures in the unconditional denominator; and transitions
-  the held-out ledger before parsing held-out content.
+- `execute_professor_fidelity.py`: enforces
+  `professor_fidelity_execution_policy_v1.json` before opening a split. The
+  current active commands are `npm run preflight:professor-fidelity-development`
+  and `npm run preflight:professor-fidelity-heldout`; both fail closed without
+  reading sealed content. Historical anchor reproduction additionally requires
+  `--confirm-historical-reproduction`. A future authorized run still requires
+  the selected chunker, exact passage hashes, condition and policy/prompt
+  hashes, a clean tree, checkpoints, cost stops, and one-time held-out ledger.
 - `professor_fidelity_scoring.py`: separates citation-ID validity,
   source-and-locator correctness, claim-level citation coverage, eligible-case
   retrieval completeness, structural success, and unresolved semantic review.
@@ -308,7 +313,9 @@ Current utilities:
   `high` thinking, the v6-observed fingerprint, per-run call and cost stops,
   and complete token/reasoning/cost telemetry. Local `qwen3:4b` is retained as
   a bounded sensitivity reviewer; Gemma is excluded from active
-  professor-fidelity commands. The runner records one preference per
+  professor-fidelity commands. CLI judging also reads the execution policy
+  before a development or held-out run, while anchor judging requires explicit
+  historical confirmation. The runner records one preference per
   pedagogical dimension, a SHA-256 binding for every canonical judge input,
   seeded repeat samples, and a separately invoked swapped-order sensitivity
   sample.
@@ -324,15 +331,16 @@ Current utilities:
   review, bind finalization to the exact dataset, and require every authored
   pedagogy dimension before a completed review may resolve semantic, citation,
   evidence-sufficiency, or pedagogical metrics. Prepare the
-  current anchor packet with `npm run
-  prepare:professor-fidelity-anchor-review`.
-- `analyze_professor_fidelity.py`: ignores embedded legacy scores, rescoring
-  preserved outputs from the hash-matched dataset and retrieved source metadata.
-  It uses the frozen eligible denominator, computes citation and completion
-  gates explicitly, audits dataset and candidate bindings, supports eligible
-  blinded review, and leaves semantic outcomes unresolved otherwise. Run the
-  current invalid-for-selection correction with `npm run
-  analyze:professor-fidelity-development`.
+  historical anchor packet only with `npm run
+  historical:prepare:professor-fidelity-anchor-review --
+  --confirm-historical-reproduction`. The existing unfilled packet is deferred.
+- `analyze_professor_fidelity.py`: ignores embedded scores and prospectively
+  rescores a hash-matched development run from retrieved source metadata. It
+  uses eligible denominators, computes citation and completion gates, audits
+  dataset/candidate bindings, and leaves semantics unresolved without eligible
+  review. Its status and `heldout_eligible` field are dynamic; only an all-gates
+  `Keep` result can be referenced by a later held-out policy authorization. The
+  CLI remains deferred while development is paused.
 - `correct_professor_fidelity_anchor_machine_review.py`: recomputes the
   anchor-002 aggregate interpretation without provider calls, calculates
   repeat metrics from source labels, separates citation-applicable

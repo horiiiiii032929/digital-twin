@@ -87,6 +87,12 @@ decided; development and held-out remain closed.
 
 ## Commands prepared in advance
 
+These command names record the plan as executed. They were retired after the
+`Refine / Paused` closeout. Current commands use `historical:` or `deferred:`
+namespaces, and historical execution requires a caller-supplied
+`--confirm-historical-reproduction`; consult `package.json` rather than running
+the names below.
+
 ```bash
 npm run benchmark:professor-fidelity-anchor
 npm run judge:professor-fidelity-anchor

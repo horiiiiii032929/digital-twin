@@ -128,11 +128,17 @@ def finalize_review(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--template", type=Path, required=True)
     parser.add_argument("--mapping", type=Path, required=True)
     parser.add_argument("--dataset", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor review finalization is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     mapping = load_json(arguments.mapping)
     dataset_sha256 = hashlib.sha256(arguments.dataset.read_bytes()).hexdigest()
     if mapping.get("dataset_sha256") != dataset_sha256:

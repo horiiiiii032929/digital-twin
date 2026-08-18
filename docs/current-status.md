@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-17
+Status date: 2026-08-18
 
 This is the operational starting point for the repository. Frozen experiment
 plans and historical result documents remain authoritative for their own runs,
@@ -9,12 +9,15 @@ but they do not override this page for current sequencing.
 ## Repository state
 
 - Professor-fidelity evidence and the Option A closeout were merged through PR
-  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75) at merge commit
-  `10e00c5`.
-- The local workspace was synchronized with `origin/main` after the merge.
-- PR #75 CI passed at the frozen revision. The latest full local
-  check passed 278 Python tests, 15 frontend tests,
-  documentation and evaluation validators, lint, and the production build.
+  [#75](https://github.com/horiiiiii032929/digital-twin/pull/75). The corrective
+  interpretation is registered separately and the execution path now reads a
+  tracked `paused` policy before any sealed development or held-out data.
+- Development and held-out execution are unauthorized. Their active commands
+  are non-executing preflights; anchor and Gemma reproduction commands are
+  historical and require an explicit caller confirmation.
+- The 2026-08-18 cleanup check passed 285 Python tests, 15 frontend tests,
+  documentation and evaluation validators, frontend lint, and the production
+  build without making a model call.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -67,8 +70,8 @@ evidence.
    Analysis correction 001 at code revision `dbd7a71` supersedes the original
    false-pass interpretation: C3 citation-source correctness is 4/8 applicable
    cases, and the hidden-hard-gate disagreement is diagnostic only.
-2. PR #75 is merged as unfavorable but decision-bearing evidence. Issue #24
-   remains open and is out of active execution.
+2. Preserve PR #75 and its correction as unfavorable but decision-bearing
+   evidence. Issue #24 remains open and is out of active execution.
 3. Complete issue #12 by freezing only the claims and profiles supported by
    registered evidence, then stabilize the report and demonstration.
 4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or

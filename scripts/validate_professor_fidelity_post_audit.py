@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the prepared professor-fidelity path without opening private data."""
+"""Validate the paused professor-fidelity path without opening private data."""
 
 from __future__ import annotations
 
@@ -18,6 +18,10 @@ from scripts.judge_professor_fidelity import (
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_PATH = ROOT / "package.json"
+POLICY_PATH = (
+    ROOT / "research/05_evaluation/instruments/"
+    "professor_fidelity_execution_policy_v1.json"
+)
 PLAN_PATH = (
     ROOT / "research/04_experiments/2026-08-14-professor-fidelity-post-audit-v3-plan.md"
 )
@@ -50,111 +54,138 @@ def _require(condition: bool, message: str) -> None:
         raise ValueError(message)
 
 
-def validate() -> dict[str, Any]:
-    package = json.loads(PACKAGE_PATH.read_text(encoding="utf-8"))
-    scripts = package["scripts"]
-    judge_commands = {
+def _validate_commands(scripts: dict[str, str]) -> dict[str, Any]:
+    preflights = {
+        "development": "preflight:professor-fidelity-development",
+        "heldout": "preflight:professor-fidelity-heldout",
+    }
+    for split, name in preflights.items():
+        _require(name in scripts, f"{split} preflight command is missing")
+        command = scripts[name]
+        _require(f"--split {split}" in command, f"{split} preflight split drifted")
+        _require("--execute" not in command, f"{split} preflight can execute")
+        _require("--allow-external-provider" not in command, f"{split} preflight authorizes a provider")
+
+    historical_names = {
+        "historical:benchmark:generation-gemma3",
+        "historical:benchmark:professor-fidelity-anchor",
+        "historical:judge:professor-fidelity-anchor",
+        "historical:judge:professor-fidelity-anchor-swapped",
+        "historical:judge:professor-fidelity-anchor-qwen-sensitivity",
+        "historical:prepare:professor-fidelity-anchor-review",
+        "historical:finalize:professor-fidelity-anchor-review",
+        "historical:calibrate:professor-fidelity-anchor-prehuman",
+        "historical:calibrate:professor-fidelity-anchor",
+        "historical:summarize:professor-fidelity-anchor-machine",
+    }
+    _require(historical_names.issubset(scripts), "historical commands are incomplete")
+    _require(
+        all("--confirm-historical-reproduction" not in scripts[name] for name in historical_names),
+        "historical confirmation must be supplied interactively, not baked into a command",
+    )
+    _require(
+        all("anchor-001" not in scripts[name] for name in historical_names),
+        "a historical command references invalid anchor-001",
+    )
+
+    deferred = {
         name: command
         for name, command in scripts.items()
-        if name.startswith("judge:professor-fidelity")
+        if name.startswith("deferred:") and "professor-fidelity" in name
     }
-    required_commands = {
-        "seal:course-tutor-splits",
-        "qualify:professor-fidelity-judge-v4",
+    _require(len(deferred) == 7, "deferred professor-fidelity commands drifted")
+    _require(
+        any("--model deepseek-v4-pro" in command for command in deferred.values()),
+        "deferred primary judge is not DeepSeek V4 Pro",
+    )
+    _require(
+        any("--model qwen3:4b" in command for command in deferred.values()),
+        "deferred sensitivity judge is not local Qwen",
+    )
+
+    retired_active_names = {
+        "benchmark:generation-local",
         "benchmark:professor-fidelity-anchor",
         "benchmark:professor-fidelity-development",
         "benchmark:professor-fidelity-heldout",
         "judge:professor-fidelity-development",
-        "judge:professor-fidelity-development-swapped",
-        "judge:professor-fidelity-development-qwen-sensitivity",
         "judge:professor-fidelity-heldout",
-        "judge:professor-fidelity-heldout-swapped",
-        "judge:professor-fidelity-heldout-qwen-sensitivity",
-        "analyze:professor-fidelity-development",
         "judge:professor-fidelity-anchor",
-        "judge:professor-fidelity-anchor-swapped",
-        "judge:professor-fidelity-anchor-qwen-sensitivity",
-        "prepare:professor-fidelity-anchor-review",
-        "finalize:professor-fidelity-anchor-review",
-        "calibrate:professor-fidelity-anchor-prehuman",
-        "calibrate:professor-fidelity-anchor",
-        "summarize:professor-fidelity-anchor-machine",
-        "correct:professor-fidelity-anchor-machine",
+        "analyze:professor-fidelity-development",
     }
-    _require(required_commands.issubset(scripts), "post-audit commands are incomplete")
-    _require(judge_commands, "professor-fidelity judge commands are absent")
     _require(
-        all("gemma" not in command.casefold() for command in judge_commands.values()),
-        "an active professor-fidelity judge command still references Gemma",
+        retired_active_names.isdisjoint(scripts),
+        "a retired executable command remains in the active namespace",
     )
-    _require(
-        "--model deepseek-v4-pro" in scripts["judge:professor-fidelity-development"],
-        "development primary judge is not DeepSeek V4 Pro",
-    )
-    _require(
-        "--model deepseek-v4-pro" in scripts["judge:professor-fidelity-heldout"],
-        "held-out primary judge is not DeepSeek V4 Pro",
-    )
-    _require(
-        "--confirm-heldout-once" in scripts["benchmark:professor-fidelity-heldout"],
-        "held-out execution lacks one-time confirmation",
-    )
-    _require(
-        "--model qwen3:4b"
-        in scripts["judge:professor-fidelity-development-qwen-sensitivity"],
-        "development sensitivity judge is not local Qwen",
-    )
-    anchor_command_names = {
-        name for name in required_commands if "professor-fidelity-anchor" in name
+    active = {
+        name: command
+        for name, command in scripts.items()
+        if not name.startswith(("historical:", "deferred:"))
     }
-    anchor_commands = {name: scripts[name] for name in anchor_command_names}
     _require(
-        all("anchor-002" in command for command in anchor_commands.values()),
-        "an active anchor command does not use anchor-002",
+        all("gemma3:4b" not in command.casefold() for command in active.values()),
+        "an active command still invokes Gemma",
     )
     _require(
-        all("anchor-001" not in command for command in anchor_commands.values()),
-        "an active anchor command still references invalid anchor-001",
+        "--attempt-id 002" in scripts["historical:judge:professor-fidelity-anchor"],
+        "historical primary anchor judge is not isolated as attempt 002",
     )
-    primary_anchor_command = scripts["judge:professor-fidelity-anchor"]
+    return {
+        "active_preflights": sorted(preflights.values()),
+        "historical_command_count": len(historical_names),
+        "deferred_command_count": len(deferred),
+    }
+
+
+def validate() -> dict[str, Any]:
+    package = json.loads(PACKAGE_PATH.read_text(encoding="utf-8"))
+    command_status = _validate_commands(package["scripts"])
+    policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
     _require(
-        "--attempt-id 002" in primary_anchor_command
-        and "judgments-deepseek-v4-pro-attempt-002.json" in primary_anchor_command,
-        "active primary anchor judge is not isolated as attempt 002",
+        policy.get("schema_version") == "1.0.0"
+        and policy.get("policy_id") == "professor-fidelity-execution-policy-v1"
+        and policy.get("status") == "paused",
+        "professor-fidelity execution policy is absent or not paused",
+    )
+    splits = policy.get("splits", {})
+    _require(splits.get("development", {}).get("authorized") is False, "development is authorized while paused")
+    _require(splits.get("heldout", {}).get("authorized") is False, "held-out is authorized while paused")
+    _require(
+        splits.get("anchor", {}).get("scope") == "historical-reproduction-only"
+        and splits.get("anchor", {}).get("requires_historical_confirmation") is True,
+        "anchor historical-reproduction policy drifted",
+    )
+    heldout_requirement = splits["heldout"]["requires_development_result"]
+    _require(
+        heldout_requirement.get("decision") == "keep"
+        and heldout_requirement.get("heldout_eligible") is True
+        and heldout_requirement.get("all_decision_gates") is True
+        and heldout_requirement.get("result_id") is None,
+        "held-out development-result gate drifted",
     )
     _require(JUDGE_MODELS == (DEEPSEEK_MODEL, "qwen3:4b"), "judge model set drifted")
     _require(PLAN_PATH.is_file(), "post-audit v3 plan is missing")
     _require(PURGE_RECORD_PATH.is_file(), "GitHub purge closure record is missing")
     _require(ANCHOR_CANDIDATE_PATH.is_file(), "anchor V4 Pro/P3 candidate is missing")
     _require(CORRECTION_RECORD_PATH.is_file(), "analysis correction record is missing")
+
     correction = json.loads(CORRECTION_RECORD_PATH.read_text(encoding="utf-8"))
+    _require(correction.get("run_id") == CORRECTION_RUN_ID, "analysis correction run ID drifted")
+    _require(correction.get("code_revision") == CORRECTION_CODE_REVISION, "analysis correction code revision drifted")
+    _require(correction.get("decision", {}).get("outcome") == "refine", "analysis correction decision drifted")
+    candidates = correction.get("candidates", [])
     _require(
-        correction.get("run_id") == CORRECTION_RUN_ID,
-        "analysis correction run ID drifted",
-    )
-    _require(
-        correction.get("code_revision") == CORRECTION_CODE_REVISION,
-        "analysis correction code revision drifted",
-    )
-    _require(
-        correction.get("decision", {}).get("outcome") == "refine",
-        "analysis correction decision drifted",
-    )
-    correction_candidates = correction.get("candidates", [])
-    _require(
-        len(correction_candidates) == 2
-        and correction_candidates[1].get("implementation", {}).get(
-            "implementation_id"
-        )
+        len(candidates) == 2
+        and candidates[1].get("implementation", {}).get("implementation_id")
         == "anchor-machine-review-corrected-interpretation",
         "analysis correction candidate is missing",
     )
-    corrected_hard_gates = {
+    corrected_gates = {
         gate.get("name"): gate.get("passed")
-        for gate in correction_candidates[1].get("hard_gates", [])
+        for gate in candidates[1].get("hard_gates", [])
     }
     _require(
-        corrected_hard_gates.get("separate-pedagogy-from-hidden-hard-gates") is True,
+        corrected_gates.get("separate-pedagogy-from-hidden-hard-gates") is True,
         "analysis correction still grades pedagogy on hidden hard gates",
     )
 
@@ -178,6 +209,13 @@ def validate() -> dict[str, Any]:
     return {
         "status": "passed",
         "execution_status": "machine-review-ineligible-paused-human-work-deferred",
+        "execution_policy": {
+            "policy_id": policy["policy_id"],
+            "status": policy["status"],
+            "development_authorized": False,
+            "heldout_authorized": False,
+            **command_status,
+        },
         "active_anchor": {
             "run_id": "professor-fidelity-v2-anchor-002",
             "candidate_profile": "professor-fidelity-anchor-v4-p3-candidate",
@@ -216,11 +254,10 @@ def validate() -> dict[str, Any]:
             "preserve and report the ineligible machine-review result",
             "resume evaluator redesign only with separate authorization",
             "complete bounded human packets only after authorized resumption",
-            "validate audit and create immutable seal plus unopened ledger",
-            "execute development C0-C3",
-            "run DeepSeek/Qwen blinded judging and calibration",
-            "analyze and register development decision",
-            "open held-out once only if every development gate passes",
+            "authorize development in the tracked execution policy",
+            "execute and register a complete development analysis",
+            "require Keep plus every development gate before held-out authorization",
+            "open held-out once only with explicit confirmation",
         ],
     }
 

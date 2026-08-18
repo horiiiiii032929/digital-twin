@@ -60,6 +60,7 @@ ARTIFACTS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
@@ -256,6 +257,11 @@ def summarize() -> dict[str, Any]:
 
 def main() -> None:
     arguments = parse_args()
+    if not arguments.confirm_historical_reproduction:
+        raise ValueError(
+            "anchor summarization is historical reproduction and requires "
+            "--confirm-historical-reproduction"
+        )
     result = summarize()
     write_json_exclusive(arguments.output, result)
     print(

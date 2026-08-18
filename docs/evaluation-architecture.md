@@ -174,8 +174,9 @@ never be silently overwritten by a later run.
 ## System release profile
 
 The profile at
-[`student-tutor-v0.json`](../research/05_evaluation/profiles/student-tutor-v0.json)
-is the versioned source of truth for component selection. Every component in
+[`student-tutor-v1.json`](../research/05_evaluation/profiles/student-tutor-v1.json)
+is the active versioned source of truth for experimental component selection.
+The v0 profile remains immutable historical evidence. Every component in
 the inventory must appear exactly once as:
 
 - `selected`: an implementation is active and supported by evidence;
