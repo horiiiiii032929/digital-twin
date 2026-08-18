@@ -24,36 +24,49 @@ export function ApprovalChecklist({
   )
 
   return (
-    <section className="rounded-lg border bg-card p-4 text-card-foreground">
-      <div className="mb-3 flex items-start justify-between gap-3">
+    <section className="text-card-foreground" aria-labelledby="approval-checklist-title">
+      <div className="flex items-start justify-between gap-3 border-b pb-4">
         <div>
-          <h2 className="text-sm font-semibold">Approval Checklist</h2>
-          <p className="text-xs text-muted-foreground">
+          <div className="dossier-label">Final authority</div>
+          <h3 id="approval-checklist-title" className="mt-1 text-[15px] font-semibold">
+            Release checklist
+          </h3>
+          <p className="mt-1 text-sm leading-5 text-muted-foreground">
             Local professor review checklist for the draft release gate.
           </p>
         </div>
-        <Badge variant={releaseStatus === "approved" ? "default" : "outline"}>
+        <Badge
+          variant="outline"
+          className={
+            releaseStatus === "approved"
+              ? "status-badge status-badge-success"
+              : "status-badge status-badge-warning"
+          }
+        >
           {releaseStatus === "approved" ? "approved" : "draft only"}
         </Badge>
       </div>
 
       {items.length === 0 ? (
-        <div className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
+        <div className="mt-5 border border-dashed p-4 text-sm leading-6 text-muted-foreground">
           Checklist appears after the policy draft is generated.
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="pt-5">
           {incompleteBlockers.length > 0 && (
-            <div className="rounded-md border border-amber-200 bg-amber-50 p-2 text-xs text-amber-800">
+            <div className="border border-[var(--warning-border)] bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
               {incompleteBlockers.length} blocking checklist items remain.
             </div>
           )}
-          <div className="space-y-3">
-            {items.map((item) => (
+          <div className="mt-4 border-t">
+            {items.map((item, index) => (
               <label
                 key={item.id}
-                className="flex cursor-pointer items-start gap-3 rounded-lg border bg-background p-3 text-sm"
+                className="grid cursor-pointer grid-cols-[32px_20px_minmax(0,1fr)_auto] items-start gap-3 border-b py-4 text-sm hover:bg-[var(--workspace)]"
               >
+                <span className="dossier-label mt-0.5 text-[var(--cobalt)]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <Checkbox
                   checked={item.checked}
                   disabled={updatingItemId === item.id}
@@ -63,7 +76,7 @@ export function ApprovalChecklist({
                   aria-label={item.label}
                 />
                 <span className="grid gap-1">
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-semibold leading-5">{item.label}</span>
                   <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     {item.blocks_release ? (
                       <>
@@ -79,7 +92,7 @@ export function ApprovalChecklist({
                   </span>
                 </span>
                 {updatingItemId === item.id && (
-                  <Loader2 className="ml-auto mt-0.5 size-4 animate-spin text-muted-foreground" />
+                  <Loader2 className="mt-0.5 size-4 animate-spin text-muted-foreground" />
                 )}
               </label>
             ))}

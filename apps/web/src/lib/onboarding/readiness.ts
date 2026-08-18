@@ -14,8 +14,15 @@ export type ReleaseReadiness = {
   checklistBlockers: number
 }
 
+export type ReviewStageId =
+  | "sources"
+  | "interview"
+  | "policy"
+  | "preview"
+  | "approval"
+
 export type StepState = {
-  id: "sources" | "interview" | "policy" | "preview" | "approval"
+  id: ReviewStageId
   label: string
   detail: string
   state: "active" | "blocked" | "complete" | "waiting"
@@ -28,7 +35,10 @@ export function getReleaseReadiness(
   if (!session) {
     blockers.add("Start the onboarding session.")
   } else {
-    if (session.source_inventory.length === 0) {
+    const hasApprovedSource = session.source_inventory.some(
+      (source) => source.permission_status === "approved" && !source.excluded,
+    )
+    if (!hasApprovedSource) {
       blockers.add("Add at least one approved source metadata item.")
     }
     if (!session.policy) {
@@ -83,13 +93,33 @@ export function getReleaseReadiness(
 export function getStepStates(session: OnboardingSession | null): StepState[] {
   const currentStep = session?.current_step ?? "starting"
   const hasPolicy = Boolean(session?.policy)
-  const hasSources = (session?.source_inventory.length ?? 0) > 0
+  const hasSources =
+    session?.source_inventory.some(
+      (source) => source.permission_status === "approved" && !source.excluded,
+    ) ?? false
   const sourceBlocked =
-    (session?.release_blockers.source_inventory?.length ?? 0) > 0
+    (session?.release_blockers.source_inventory?.length ?? 0) > 0 ||
+    Boolean(session && !hasSources)
+  const policyFields = session?.policy
+    ? [
+        ...session.policy.safety_compliance,
+        ...session.policy.pedagogy,
+        ...session.policy.professor_review,
+      ]
+    : []
+  const policyBlocked = policyFields.some(
+    (field) => field.status === "blocks_release",
+  )
   const previewBlocked =
-    (session?.release_blockers.preview_acceptance?.length ?? 0) > 0
+    (session?.release_blockers.preview_acceptance?.length ?? 0) > 0 ||
+    (session?.preview_cases.some(
+      (preview) => preview.decision !== "accepted",
+    ) ?? false)
   const checklistBlocked =
-    (session?.release_blockers.approval_checklist?.length ?? 0) > 0
+    (session?.release_blockers.approval_checklist?.length ?? 0) > 0 ||
+    (session?.approval_checklist.some(
+      (item) => item.blocks_release && !item.checked,
+    ) ?? false)
 
   return [
     {
@@ -114,7 +144,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
       detail: hasPolicy
         ? "Review editable policy fields."
         : "Generated after interview.",
-      state: hasPolicy ? "active" : "waiting",
+      state: !hasPolicy ? "waiting" : policyBlocked ? "blocked" : "active",
     },
     {
       id: "preview",
@@ -146,12 +176,13 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
 export function getNextAction(
   session: OnboardingSession | null,
   blockers: string[],
-): { title: string; detail: string } {
+): { title: string; detail: string; stage: ReviewStageId } {
   if (!session) {
     return {
       title: "Starting onboarding session",
       detail:
         "The review console will populate once the API returns the draft session.",
+      stage: "interview",
     }
   }
 
@@ -159,6 +190,7 @@ export function getNextAction(
     return {
       title: "Release gate is clear",
       detail: "All professor review gates are complete for this draft.",
+      stage: "approval",
     }
   }
 
@@ -167,6 +199,19 @@ export function getNextAction(
       title: "Add source metadata first",
       detail:
         "Start with syllabus, slide, assignment, or rubric metadata so preview grounding can be audited.",
+      stage: "sources",
+    }
+  }
+
+  const hasApprovedSource = session.source_inventory.some(
+    (source) => source.permission_status === "approved" && !source.excluded,
+  )
+  if (!hasApprovedSource) {
+    return {
+      title: "Approve a course source",
+      detail:
+        "At least one registered source must be explicitly approved and included before the release gate can clear.",
+      stage: "sources",
     }
   }
 
@@ -174,6 +219,7 @@ export function getNextAction(
     return {
       title: "Continue the instructor interview",
       detail: `Answer the current prompt for ${formatStep(session.current_step)} to generate the first tutor policy draft.`,
+      stage: "interview",
     }
   }
 
@@ -182,6 +228,43 @@ export function getNextAction(
       title: "Resolve the pending revision",
       detail:
         "A professor feedback item has produced a policy update proposal that needs confirmation or discard.",
+      stage: "preview",
+    }
+  }
+
+  const policyFields = [
+    ...session.policy.safety_compliance,
+    ...session.policy.pedagogy,
+    ...session.policy.professor_review,
+  ]
+  if (policyFields.some((field) => field.status === "blocks_release")) {
+    return {
+      title: "Resolve blocking policy fields",
+      detail:
+        "Review the fields marked as release blockers and either confirm their values or retain an explicit safe default.",
+      stage: "policy",
+    }
+  }
+
+  if (session.preview_cases.some((preview) => preview.decision !== "accepted")) {
+    return {
+      title: "Review required preview evidence",
+      detail:
+        "Every required preview needs an explicit professor decision before approval.",
+      stage: "preview",
+    }
+  }
+
+  if (
+    session.approval_checklist.some(
+      (item) => item.blocks_release && !item.checked,
+    )
+  ) {
+    return {
+      title: "Complete the approval checklist",
+      detail:
+        "Confirm each remaining release condition after its supporting evidence is clear.",
+      stage: "approval",
     }
   }
 
@@ -189,6 +272,7 @@ export function getNextAction(
     return {
       title: "Clear the next release blocker",
       detail: blockers[0],
+      stage: stageForBlocker(blockers[0]),
     }
   }
 
@@ -196,7 +280,26 @@ export function getNextAction(
     title: "Review final approval",
     detail:
       "The draft is ready for professor approval once the checklist confirms the release criteria.",
+    stage: "approval",
   }
+}
+
+function stageForBlocker(blocker: string): ReviewStageId {
+  const normalized = blocker.toLowerCase()
+
+  if (
+    normalized.includes("source inventory") ||
+    normalized.includes("approved source metadata")
+  ) {
+    return "sources"
+  }
+  if (normalized.includes("preview") || normalized.includes("evidence")) {
+    return "preview"
+  }
+  if (normalized.includes("policy") || normalized.includes("interview")) {
+    return "policy"
+  }
+  return "approval"
 }
 
 export function formatReleaseStatus(status: ReleaseStatus): string {

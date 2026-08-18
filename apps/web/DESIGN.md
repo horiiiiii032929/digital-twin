@@ -1,222 +1,256 @@
 ---
-name: Course Digital Twin Onboarding
-description: A restrained professor review console for source, policy, preview, and approval gates.
+name: Course Digital Twin Professor Console
+description: An evidence-led release dossier for professor-controlled tutor configuration.
 colors:
-  background: "#ffffff"
-  workspace: "#f7f7f4"
-  foreground: "#18181b"
-  primary: "#27272a"
-  primary-foreground: "#fafafa"
-  secondary: "#f4f4f5"
-  muted: "#f4f4f5"
-  muted-foreground: "#71717a"
-  border: "#e4e4e7"
-  destructive: "#dc2626"
-  warning-bg: "#fffbeb"
-  warning-text: "#92400e"
-  info-bg: "#f0f9ff"
-  info-text: "#075985"
+  ink: "#101828"
+  cobalt: "#1d4ed8"
+  cobalt-soft: "#eef4ff"
+  paper: "#ffffff"
+  workspace: "#f5f7fb"
+  muted: "#667085"
+  rule: "#d9e0ea"
+  rule-strong: "#98a2b3"
+  success: "#087a55"
+  success-soft: "#ecfdf3"
+  warning: "#a15c08"
+  warning-soft: "#fff7e6"
+  destructive: "#b42318"
+  destructive-soft: "#fff2f0"
 typography:
   headline:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 600
-    lineHeight: 1.3
-    letterSpacing: "0"
+    fontSize: "1.5rem"
+    fontWeight: 620
+    lineHeight: 1.2
+    letterSpacing: "-0.025em"
   title:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 600
+    fontSize: "0.9375rem"
+    fontWeight: 620
     lineHeight: 1.35
-    letterSpacing: "0"
+    letterSpacing: "-0.01em"
   body:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.55
     letterSpacing: "0"
   label:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 500
+    fontSize: "0.6875rem"
+    fontWeight: 650
     lineHeight: 1.35
-    letterSpacing: "0"
+    letterSpacing: "0.1em"
 rounded:
-  sm: "6px"
-  md: "8px"
-  lg: "10px"
-  xl: "12px"
+  sm: "4px"
+  md: "6px"
+  lg: "8px"
 spacing:
   xs: "4px"
   sm: "8px"
-  md: "16px"
-  lg: "24px"
+  md: "12px"
+  lg: "16px"
+  xl: "24px"
+  2xl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.primary-foreground}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
     rounded: "{rounded.md}"
-    padding: "8px 16px"
-  button-outline:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
+    padding: "8px 14px"
+  button-secondary:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.md}"
-    padding: "8px 16px"
+    padding: "8px 14px"
+  stage-active:
+    backgroundColor: "{colors.cobalt-soft}"
+    textColor: "{colors.cobalt}"
+    rounded: "{rounded.sm}"
+    padding: "10px 12px"
   status-chip:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
-    padding: "4px 8px"
+    backgroundColor: "{colors.workspace}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: "3px 7px"
 ---
 
-# Design System: Course Digital Twin Onboarding
+# Design System: Course Digital Twin Professor Console
 
-## 1. Overview
+## Overview
 
-**Creative North Star: "The Review Console"**
+**Creative North Star: "The Course Release Dossier"**
 
-This product is a task surface for professors checking whether a Course Digital
-Twin is ready for student exposure. The design should feel calm, exact, and
-operational: current release state first, review evidence close behind, and the
-chat interview treated as one workstream rather than the whole product.
+The professor console combines an academic review dossier with the decisiveness
+of a code-review merge gate. It is precise, calm, and accountable: every action
+is visibly connected to evidence, policy, or release impact. The screen should
+feel like one continuous working document, not a collection of dashboard cards.
 
-The system rejects generic AI demo styling. It should not use decorative
-gradients, glass panels, oversized hero copy, or card-heavy marketing rhythm.
-The professor needs a readable console where every release-affecting state is
-auditable.
+The interface uses compact editorial hierarchy, ruled divisions, numbered
+decision references, and restrained status color. It refuses generic AI-chat
+styling, opaque automation, decorative SaaS polish, and invented intelligence.
 
 **Key Characteristics:**
 
-- Restrained color with semantic status accents.
-- Dense but readable panels for review work.
-- Clear active-step hierarchy and release gate visibility.
-- Standard shadcn-style controls and lucide icons.
+- A persistent five-stage release route with one selected work surface.
+- Evidence and workflow trace remain adjacent to the current decision.
+- Flat paper surfaces separated by rules, spacing, and tonal bands.
+- Cobalt marks interaction; amber, red, and green communicate status only.
+- All state is expressed in text as well as color.
 
-## 2. Colors
+## Colors
 
-The palette is near-neutral and light, with color reserved for semantic review
-state.
+The palette is cool paper and navy ink, with one operational cobalt and narrowly
+reserved semantic colors.
 
 ### Primary
 
-- **Console Ink** (#27272a): Primary actions, active step text, and high-priority
-  labels.
+- **Decision Cobalt:** Marks the selected stage, links, focus, and the current
+  operational action.
+- **Dossier Ink:** Carries headings, primary controls, and release-critical text.
 
 ### Neutral
 
-- **Workspace Canvas** (#f7f7f4): Page-level background, used to separate the
-  working surface from white review panels.
-- **Panel White** (#ffffff): Primary content panels and tool surfaces.
-- **Divider Gray** (#e4e4e7): Borders, separators, and inactive control outlines.
-- **Muted Copy** (#71717a): Secondary metadata only; avoid it for key decisions.
+- **Review Paper:** The uninterrupted primary working surface.
+- **Cool Workspace:** Separates the dossier from the browser canvas and supports
+  quiet secondary regions.
+- **Audit Rule:** Divides stages, evidence entries, and document sections.
+- **Secondary Ink:** Metadata and explanatory copy; never release decisions.
 
-### Semantic
+### Tertiary
 
-- **Release Warning** (#fffbeb / #92400e): Blocking checklist and pending revision
-  notices.
-- **Review Info** (#f0f9ff / #075985): Draft-only and source-governance notices.
-- **Destructive Red** (#dc2626): Failed requests and destructive states.
+- **Verified Green:** Confirmed evidence and completed gates only.
+- **Review Amber:** Pending decisions and non-destructive blockers only.
+- **Blocked Red:** Failed operations, explicit rejection, and blocked release only.
 
 ### Named Rules
 
-**The Rare Accent Rule.** Color exists to explain state, not decorate the page.
-If a color does not indicate review state, selection, or action, remove it.
+**The Status Has Meaning Rule.** Green, amber, and red never decorate; each use
+must explain a real review state in accompanying text.
 
-## 3. Typography
+**The One Active Signal Rule.** Cobalt identifies the current route or action,
+not every interactive surface at once.
+
+## Typography
 
 **Display Font:** Geist Variable with Inter and system fallbacks
-**Body Font:** Geist Variable with Inter and system fallbacks
-**Label/Mono Font:** Same family unless code or source identifiers require mono
 
-**Character:** Compact, utilitarian, and steady. Product text should read like a
-review tool, not a launch page.
+**Body Font:** Geist Variable with Inter and system fallbacks
+
+**Label/Mono Font:** Geist Variable for interface labels; system monospace only
+for trace identifiers when needed
+
+**Character:** A compact grotesk with the clarity of an assessment form and the
+rhythm of technical documentation. Weight and spacing create hierarchy without
+hero typography.
 
 ### Hierarchy
 
-- **Headline** (600, 20px, 1.3): Page title and primary workspace headings only.
-- **Title** (600, 14px, 1.35): Panel headers, active-step labels, and checklist
-  labels.
-- **Body** (400, 14px, 1.5): Messages, policy text, preview explanations, and
-  source notes. Long prose should stay near 65-75ch.
-- **Label** (500, 12px, 1.35): Metadata, small status, field labels, and compact
-  counts. Do not use tracked uppercase as a default section style.
+- **Headline** (620, 24px, 1.2): Page title and the active dossier heading.
+- **Title** (620, 15px, 1.35): Decision groups, review artifacts, and route labels.
+- **Body** (400, 14px, 1.55): Prompts, policy values, explanations, and evidence;
+  prose stays near 70ch when possible.
+- **Label** (650, 11px, 0.1em): Short uppercase indices, evidence references, and
+  state captions only.
 
 ### Named Rules
 
-**The Small Surface Rule.** Product UI uses a fixed rem scale. Avoid fluid type
-and hero-scale headings inside the review console.
+**The Working Scale Rule.** No product heading exceeds 24px; the console is a
+review instrument, not a landing page.
 
-## 4. Elevation
+## Layout
 
-This system uses tonal layering and borders instead of decorative shadows. Panels
-are flat at rest. Depth comes from the page canvas, panel borders, separators,
-and active-state backgrounds.
+Desktop uses a three-region workbench: a narrow release route, a flexible active
+workspace, and a compact evidence rail. A release ledger spans the top and keeps
+status, blockers, and the recommended next action visible. Dividers align across
+regions so the screen reads as a single dossier.
+
+At tablet widths the evidence rail moves below the workspace. On mobile the
+five-stage route becomes one horizontally scrollable control above the active
+work; release context follows the primary task in document order. Touch targets
+remain at least 40px and no critical action relies on hover.
+
+Spacing follows a compact 4/8/12/16/24/32px rhythm. Dense evidence rows use the
+smaller steps; major dossier sections use 24-32px separation.
+
+## Elevation & Depth
+
+The system is flat. Depth comes from paper against a cool workspace, strong and
+subtle rules, and selected tonal bands. Routine panels and controls have no box
+shadow; overlays may use one small structural shadow if introduced later.
 
 ### Named Rules
 
-**The Flat-by-Default Rule.** Do not combine a 1px border with a wide soft shadow
-on cards or buttons. Use a border or a small state shadow, not both.
+**The Ruled Paper Rule.** Prefer a divider or a slight background change over a
+new floating card.
 
-## 5. Components
+## Shapes
+
+Controls use precise 4-8px corners. Full work regions stay square where they meet
+the surrounding dossier grid. Pills are reserved for truly compact status values;
+repeated containers must not become rounded floating tiles.
+
+## Components
 
 ### Buttons
 
-- **Shape:** Medium radius (8px), matching the existing shadcn button vocabulary.
-- **Primary:** Console Ink background with white text for the next decisive
-  action.
-- **Hover / Focus:** Use existing component variants, visible focus rings, and
-  150-200ms state transitions.
-- **Secondary / Outline:** White or muted backgrounds with border contrast for
-  non-primary actions such as restart, discard, or expand.
+- **Shape:** Compact, slightly softened rectangle (6px radius).
+- **Primary:** Dossier Ink with white text for the decisive action in a region.
+- **Hover / Focus:** A short tonal shift and a visible 2px cobalt focus outline.
+- **Secondary / Ghost:** White or transparent with an audit rule; never muted to
+  the point that the boundary disappears.
 
 ### Chips
 
-- **Style:** Small, text-and-icon badges with muted or semantic backgrounds.
-- **State:** Status chips must include readable text; color alone cannot carry
-  approval, blocker, or draft state.
+- **Style:** Small square-cornered labels with an icon or explicit text.
+- **State:** Semantic backgrounds are faint; text carries the actual status.
 
 ### Cards / Containers
 
-- **Corner Style:** 10-12px maximum for panels and repeated review items.
-- **Background:** White primary panels on the workspace canvas.
-- **Shadow Strategy:** Flat by default; no decorative glow.
-- **Border:** 1px neutral border for grouping and scan boundaries.
-- **Internal Padding:** 16px for standard panels, 12px for dense list items.
+- **Corner Style:** 8px only for self-contained records; structural regions are
+  divided by rules rather than wrapped as cards.
+- **Background:** Review Paper for active work and Cool Workspace for secondary
+  context.
+- **Shadow Strategy:** None at rest.
+- **Border:** One-pixel Audit Rule; use stronger rules for primary boundaries.
+- **Internal Padding:** 16px for records and 24px for major work sections.
 
 ### Inputs / Fields
 
-- **Style:** White or background surface, 1px border, medium radius.
-- **Focus:** Use ring color from the existing shadcn token set.
-- **Error / Disabled:** Preserve text labels and disabled affordances; avoid
-  color-only communication.
+- **Style:** White field, one-pixel Audit Rule, 6px radius, and persistent label.
+- **Focus:** Cobalt border and visible focus outline.
+- **Error / Disabled:** Explicit text and reduced contrast without removing the
+  control boundary.
 
 ### Navigation
 
-The onboarding flow should expose a persistent step map with source, interview,
-policy, preview, revision, and approval states. The active task should be visually
-distinct and linked to the main work area.
+The five-stage route is the only primary navigation. Each item shows its number,
+label, and textual state. The selected item uses cobalt; complete, waiting, and
+blocked states retain their semantic labels without competing with selection.
 
-### Review Panels
+### Evidence Ledger
 
-Use panels for actual review artifacts: source inventory, tutor policy, preview
-evidence, revision proposal, and approval checklist. Avoid nesting panels inside
-larger decorative cards; use full-width bands or side-by-side regions instead.
+Evidence entries use a numbered or timestamped row, a short action description,
+and compact source or policy references. The ledger stays visually secondary but
+adjacent to the active decision.
 
-## 6. Do's and Don'ts
+## Do's and Don'ts
 
 ### Do:
 
-- **Do** lead with release readiness and the next blocking decision.
-- **Do** keep evidence, source labels, and release blockers close to the relevant
-  action.
-- **Do** use lucide icons in small controls and status labels.
-- **Do** preserve keyboard access and visible focus states for review controls.
+- **Do** lead with the current release state and next professor decision.
+- **Do** place supporting evidence beside the action it justifies.
+- **Do** preserve the exact five stages: Sources, Interview, Policy, Preview, and
+  Approval.
+- **Do** use whitespace and ruled sections before adding another container.
+- **Do** keep professor authority explicit for revisions and approval.
 
 ### Don't:
 
-- **Don't** make the chat transcript the only dominant element once review
-  artifacts exist.
-- **Don't** use decorative gradients, glassmorphism, or purple-blue AI branding.
-- **Don't** hide release blockers deep in a scroll rail.
-- **Don't** use border-left accent stripes, gradient text, or oversized rounded
-  cards.
+- **Don't** make chat the visual identity of the product.
+- **Don't** duplicate route navigation with a second tab bar.
+- **Don't** add invented analytics, course data, people, integrations, or release
+  actions.
+- **Don't** use gradients, glass, purple AI branding, oversized heroes, or soft
+  decorative shadows.
+- **Don't** hide blockers, provenance, or uncertainty behind color-only state.

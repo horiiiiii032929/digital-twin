@@ -70,9 +70,10 @@ describe("readiness selectors", () => {
 
     expect(readiness.status).toBe("draft")
     expect(readiness.blockers).toEqual(["Start the onboarding session."])
-    expect(getNextAction(null, readiness.blockers).title).toBe(
-      "Starting onboarding session",
-    )
+    expect(getNextAction(null, readiness.blockers)).toMatchObject({
+      title: "Starting onboarding session",
+      stage: "interview",
+    })
   })
 
   it("derives a clear gate from approved evidence", () => {
@@ -87,9 +88,10 @@ describe("readiness selectors", () => {
       pendingPreviews: 0,
       checklistBlockers: 0,
     })
-    expect(getNextAction(session, readiness.blockers).title).toBe(
-      "Release gate is clear",
-    )
+    expect(getNextAction(session, readiness.blockers)).toMatchObject({
+      title: "Release gate is clear",
+      stage: "approval",
+    })
     expect(getStepStates(session).find((step) => step.id === "approval")?.state).toBe(
       "complete",
     )
@@ -105,8 +107,47 @@ describe("readiness selectors", () => {
     expect(readiness.blockers).toContain(
       "Complete the instructor interview to generate policy.",
     )
-    expect(getNextAction(session, readiness.blockers).title).toBe(
-      "Add source metadata first",
+    expect(getNextAction(session, readiness.blockers)).toMatchObject({
+      title: "Add source metadata first",
+      stage: "sources",
+    })
+  })
+
+  it("routes release blockers to the review surface that can resolve them", () => {
+    const session = approvedSession()
+
+    expect(
+      getNextAction(session, ["Accept all required preview evidence."]).stage,
+    ).toBe("preview")
+    expect(
+      getNextAction(session, ["Complete the professor approval checklist."])
+        .stage,
+    ).toBe("approval")
+  })
+
+  it("does not count pending source metadata as an approved source", () => {
+    const session = approvedSession()
+    session.source_inventory[0].permission_status = "pending"
+
+    const readiness = getReleaseReadiness(session)
+
+    expect(readiness.approvedSources).toBe(0)
+    expect(readiness.blockers).toContain(
+      "Add at least one approved source metadata item.",
     )
+    expect(getNextAction(session, readiness.blockers).stage).toBe("sources")
+    expect(getStepStates(session)[0].state).toBe("blocked")
+  })
+
+  it("derives blocked preview and approval stages from unresolved records", () => {
+    const session = approvedSession()
+    session.preview_cases[0].decision = "pending"
+    session.approval_checklist[0].checked = false
+    session.release_blockers = {}
+
+    const steps = getStepStates(session)
+
+    expect(steps.find((step) => step.id === "preview")?.state).toBe("blocked")
+    expect(steps.find((step) => step.id === "approval")?.state).toBe("blocked")
   })
 })

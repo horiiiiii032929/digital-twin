@@ -7,11 +7,6 @@ import {
   ChatContainerScrollAnchor,
 } from "@/components/ui/chat-container"
 import {
-  Message,
-  MessageAvatar,
-  MessageContent,
-} from "@/components/ui/message"
-import {
   PromptInput,
   PromptInputAction,
   PromptInputActions,
@@ -20,7 +15,6 @@ import {
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion"
 import { Button } from "@/components/ui/button"
 import type { ChatMessage } from "@/lib/api/types"
-import { cn } from "@/lib/utils"
 
 type OnboardingChatProps = {
   messages: ChatMessage[]
@@ -89,19 +83,20 @@ export function OnboardingChat({
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <ChatContainerRoot className="min-h-[260px] flex-1 px-4 sm:min-h-[420px]">
-        <ChatContainerContent className="gap-4 py-4">
+    <div className="flex min-h-0 flex-1 flex-col md:min-h-[620px]">
+      <ChatContainerRoot className="min-h-0 flex-1 px-4 sm:min-h-[320px] sm:px-6 md:min-h-[420px]">
+        <ChatContainerContent className="gap-0 py-5">
           {isLoading ? (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 border-y py-4 text-sm text-muted-foreground">
               <Loader2 className="size-4 animate-spin" />
               Starting onboarding session
             </div>
           ) : (
             messages.map((message, index) => (
-              <ChatBubble
+              <InterviewEntry
                 key={`${message.role}-${index}`}
                 message={message}
+                index={index + 1}
               />
             ))
           )}
@@ -109,33 +104,40 @@ export function OnboardingChat({
         </ChatContainerContent>
       </ChatContainerRoot>
 
-      <div className="border-t bg-background/80 p-3">
+      <div className="border-t bg-[var(--workspace)] p-4 sm:px-6 sm:py-5">
         {suggestions.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-2">
-            {suggestions.map((suggestion) => (
-              <PromptSuggestion
-                key={suggestion}
-                type="button"
-                size="sm"
-                className="h-auto max-w-full justify-start whitespace-normal rounded-lg text-left leading-5"
-                disabled={isSubmitting || isLoading}
-                onClick={() => void submitSuggestion(suggestion)}
-              >
-                {suggestion}
-              </PromptSuggestion>
-            ))}
+          <div className="mb-4">
+            <div className="dossier-label mb-2">Suggested response patterns</div>
+            <div className="grid gap-2 lg:grid-cols-2">
+              {suggestions.map((suggestion) => (
+                <PromptSuggestion
+                  key={suggestion}
+                  type="button"
+                  size="sm"
+                  className="h-auto max-w-full justify-start whitespace-normal rounded-md bg-white px-3 py-2.5 text-left leading-5"
+                  disabled={isSubmitting || isLoading}
+                  onClick={() => void submitSuggestion(suggestion)}
+                >
+                  {suggestion}
+                </PromptSuggestion>
+              ))}
+            </div>
           </div>
         )}
 
+        <label htmlFor="instructor-answer" className="dossier-label mb-2 block">
+          Professor response
+        </label>
         <PromptInput
           value={draft}
           onValueChange={setDraft}
           onSubmit={() => void submit()}
           disabled={isSubmitting || isLoading}
           isLoading={isSubmitting}
-          className="rounded-lg"
+          className="rounded-md border-[var(--rule-strong)] bg-white"
         >
           <PromptInputTextarea
+            id="instructor-answer"
             placeholder="Answer the current onboarding question..."
             aria-label="Onboarding answer"
           />
@@ -174,31 +176,54 @@ export function OnboardingChat({
   )
 }
 
-function ChatBubble({ message }: { message: ChatMessage }) {
+function InterviewEntry({
+  message,
+  index,
+}: {
+  message: ChatMessage
+  index: number
+}) {
   const isInstructor = message.role === "instructor"
+  const isSystem = message.role === "system"
 
   return (
-    <Message className={cn(isInstructor && "justify-end")}>
-      {!isInstructor && (
-        <MessageAvatar src="" alt="Assistant" fallback="DT" className="mt-1" />
-      )}
-      <MessageContent
-        className={cn(
-          "max-w-[82%] rounded-lg px-3 py-2 text-sm leading-6 shadow-none",
+    <article
+      className={
+        isInstructor
+          ? "grid grid-cols-[40px_minmax(0,1fr)] gap-3 border-x border-t border-[#b9cdfb] bg-[var(--cobalt-soft)] px-4 py-4 last:border-b"
+          : "grid grid-cols-[40px_minmax(0,1fr)] gap-3 border-t px-4 py-4 last:border-b"
+      }
+    >
+      <div
+        className={
           isInstructor
-            ? "bg-primary text-primary-foreground"
-            : "border bg-card text-card-foreground",
+            ? "flex size-8 items-center justify-center border border-[#b9cdfb] bg-white text-[var(--cobalt)]"
+            : "flex size-8 items-center justify-center bg-[var(--ink)] text-white"
+        }
+        aria-hidden="true"
+      >
+        {isInstructor ? (
+          <UserRound className="size-4" />
+        ) : (
+          <Bot className="size-4" />
         )}
+      </div>
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="dossier-label">
+            {isInstructor ? "Professor decision" : isSystem ? "System record" : "Digital Twin prompt"}
+          </span>
+          <span className="text-[11px] font-medium tabular-nums text-muted-foreground">
+            INT-{String(index).padStart(2, "0")}
+          </span>
+        </div>
+        <p
+          className="mt-2 whitespace-pre-wrap text-sm leading-6 text-[var(--ink)]"
         aria-label={isInstructor ? "Instructor message" : "Assistant message"}
       >
         {message.content}
-      </MessageContent>
-      {isInstructor && (
-        <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
-          <UserRound className="size-4" />
-        </div>
-      )}
-      {message.role === "system" && <Bot className="size-4" />}
-    </Message>
+        </p>
+      </div>
+    </article>
   )
 }

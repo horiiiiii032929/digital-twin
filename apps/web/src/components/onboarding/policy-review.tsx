@@ -66,11 +66,14 @@ export function PolicyReview({
   }, [groups, policy])
 
   return (
-    <section className="rounded-lg border bg-card p-4 text-card-foreground">
-      <div className="mb-3 flex items-start justify-between gap-3">
+    <section className="text-card-foreground" aria-labelledby="policy-review-title">
+      <div className="flex items-start justify-between gap-3 border-b pb-4">
         <div>
-          <h2 className="text-sm font-semibold">Tutor Policy</h2>
-          <p className="text-xs text-muted-foreground">
+          <div className="dossier-label">Policy record</div>
+          <h3 id="policy-review-title" className="mt-1 text-[15px] font-semibold">
+            Generated tutor policy
+          </h3>
+          <p className="mt-1 text-sm leading-5 text-muted-foreground">
             Editable fields generated from the instructor interview.
           </p>
         </div>
@@ -78,38 +81,43 @@ export function PolicyReview({
       </div>
 
       {!policy ? (
-        <div className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
+        <div className="mt-5 border border-dashed p-4 text-sm leading-6 text-muted-foreground">
           Complete the interview to generate policy fields.
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="divide-y">
           {groups.map((group) => (
-            <div key={group.title} className="space-y-2">
-              <h3 className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
-                {group.title}
-              </h3>
-              {group.fields.map((field) => (
-                <FieldEditor
-                  key={field.id}
-                  field={field}
-                  draft={drafts[field.id] ?? fieldValueToText(field.value)}
-                  isSaving={updatingFieldId === field.id}
-                  onDraftChange={(value) =>
-                    setDrafts((current) => ({
-                      ...current,
-                      [field.id]: value,
-                    }))
-                  }
-                  onSave={(status) =>
-                    onUpdateField(
-                      field.id,
-                      textToFieldValue(field.value, drafts[field.id] ?? ""),
-                      status,
-                    )
-                  }
-                />
-              ))}
-            </div>
+            <section key={group.title} className="py-5 first:pt-5">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <h4 className="dossier-label text-[var(--ink)]">{group.title}</h4>
+                <span className="text-xs tabular-nums text-muted-foreground">
+                  {group.fields.length} field{group.fields.length === 1 ? "" : "s"}
+                </span>
+              </div>
+              <div className="border-t">
+                {group.fields.map((field) => (
+                  <FieldEditor
+                    key={field.id}
+                    field={field}
+                    draft={drafts[field.id] ?? fieldValueToText(field.value)}
+                    isSaving={updatingFieldId === field.id}
+                    onDraftChange={(value) =>
+                      setDrafts((current) => ({
+                        ...current,
+                        [field.id]: value,
+                      }))
+                    }
+                    onSave={(status) =>
+                      onUpdateField(
+                        field.id,
+                        textToFieldValue(field.value, drafts[field.id] ?? ""),
+                        status,
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       )}
@@ -131,10 +139,10 @@ function FieldEditor({
   onSave: (status: FieldStatus) => Promise<void>
 }) {
   return (
-    <div className="rounded-lg border bg-background p-3">
-      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+    <article className="border-b py-4">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <div className="text-sm font-medium">{field.label}</div>
+          <div className="text-sm font-semibold">{field.label}</div>
           <StatusLabel status={field.status} />
         </div>
         <Button
@@ -156,7 +164,12 @@ function FieldEditor({
       <Textarea
         value={draft}
         onChange={(event) => onDraftChange(event.target.value)}
-        className="min-h-20 resize-y text-sm"
+        className={cn(
+          "min-h-24 resize-y text-sm leading-6",
+          typeof field.value === "object" &&
+            !Array.isArray(field.value) &&
+            "font-mono text-xs",
+        )}
         aria-label={`${field.label} value`}
       />
 
@@ -167,6 +180,7 @@ function FieldEditor({
             type="button"
             size="sm"
             variant={field.status === option.value ? "default" : "outline"}
+            aria-pressed={field.status === option.value}
             onClick={() => void onSave(option.value)}
             disabled={isSaving}
           >
@@ -178,27 +192,32 @@ function FieldEditor({
       {(field.warning || field.safe_default) && (
         <div className="mt-3 space-y-2 text-xs">
           {field.warning && (
-            <p className="flex gap-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-amber-800">
+            <p className="flex gap-2 border border-[var(--warning-border)] bg-[var(--warning-soft)] p-3 text-[var(--warning)]">
               <ShieldAlert className="mt-0.5 size-3.5 shrink-0" />
               {field.warning}
             </p>
           )}
           {field.safe_default && (
-            <p className="rounded-md border border-sky-200 bg-sky-50 p-2 text-sky-800">
+            <p className="border border-[#b9cdfb] bg-[var(--cobalt-soft)] p-3 text-[var(--cobalt)]">
               Safe default: {field.safe_default}
             </p>
           )}
         </div>
       )}
-    </div>
+    </article>
   )
 }
 
 function ReleaseBadge({ status }: { status: string }) {
   return (
     <Badge
-      variant={status === "approved" ? "default" : "outline"}
-      className={cn(status === "blocked" && "border-red-200 text-red-700")}
+      variant="outline"
+      className={cn(
+        "status-badge",
+        status === "approved" && "status-badge-success",
+        status === "blocked" && "status-badge-danger",
+        status === "draft" && "status-badge-warning",
+      )}
     >
       {status.replace("_", " ")}
     </Badge>
@@ -210,9 +229,9 @@ function StatusLabel({ status }: { status: FieldStatus }) {
     <div
       className={cn(
         "mt-0.5 text-xs font-medium",
-        status === "resolved" && "text-emerald-700",
-        status === "needs_review" && "text-amber-700",
-        status === "blocks_release" && "text-red-700",
+        status === "resolved" && "text-[var(--success)]",
+        status === "needs_review" && "text-[var(--warning)]",
+        status === "blocks_release" && "text-[var(--destructive-ink)]",
       )}
     >
       {status.replace("_", " ")}

@@ -1,41 +1,71 @@
+import { useState } from "react"
 import {
   AlertCircle,
-  Bot,
-  CheckCircle2,
-  ClipboardCheck,
-  FileSearch,
-  FileText,
-  GitBranch,
-  MessageSquareText,
-  ShieldAlert,
-  ShieldCheck,
+  ArrowRight,
+  BookOpenCheck,
+  FlaskConical,
 } from "lucide-react"
 
 import { ApprovalChecklist } from "@/components/onboarding/approval-checklist"
 import {
-  ReadinessMetric,
-  ReadinessSummary,
-  StepStatusCard,
+  ReleaseRoute,
+  ReleaseStateIcon,
   WorkbenchHeader,
 } from "@/components/onboarding/console/readiness-summary"
+import { ReviewContext } from "@/components/onboarding/console/review-context"
 import { RevisionProposalPanel } from "@/components/onboarding/console/revision-proposal-panel"
 import { OnboardingChat } from "@/components/onboarding/onboarding-chat"
 import { PolicyReview } from "@/components/onboarding/policy-review"
 import { PreviewComparison } from "@/components/onboarding/preview-comparison"
 import { SourceInventory } from "@/components/onboarding/source-inventory"
-import { WorkflowTrace } from "@/components/onboarding/workflow-trace"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
 import type { OnboardingController } from "@/hooks/use-onboarding-session"
+import type { ReviewStageId } from "@/lib/onboarding/readiness"
 import {
   formatReleaseStatus,
-  formatStep,
   getNextAction,
   getReleaseReadiness,
   getStepStates,
 } from "@/lib/onboarding/readiness"
 import { cn } from "@/lib/utils"
+
+const STAGE_COPY: Record<
+  ReviewStageId,
+  { index: string; title: string; detail: string }
+> = {
+  sources: {
+    index: "01",
+    title: "Source governance",
+    detail:
+      "Register course-material metadata, classify provenance, and make an explicit permission decision for each source.",
+  },
+  interview: {
+    index: "02",
+    title: "Instructor interview",
+    detail:
+      "Record source rules, teaching approach, integrity boundaries, misconception handling, and approval criteria.",
+  },
+  policy: {
+    index: "03",
+    title: "Tutor policy",
+    detail:
+      "Inspect the generated policy field by field and mark every decision as resolved, review needed, or release blocking.",
+  },
+  preview: {
+    index: "04",
+    title: "Preview evidence",
+    detail:
+      "Compare configured behavior with the generic control, inspect source provenance, and record a professor decision.",
+  },
+  approval: {
+    index: "05",
+    title: "Professor approval",
+    detail:
+      "Confirm the final checklist only after source, policy, preview, and revision gates are clear.",
+  },
+}
 
 export function ProfessorReviewConsole({
   controller,
@@ -65,241 +95,270 @@ export function ProfessorReviewConsole({
     confirmRevision,
     discardRevision,
   } = controller
+  const [activeStage, setActiveStage] = useState<ReviewStageId>("interview")
   const releaseReadiness = getReleaseReadiness(session)
   const stepStates = getStepStates(session)
   const nextAction = getNextAction(session, releaseReadiness.blockers)
+  const activeCopy = STAGE_COPY[activeStage]
 
   return (
-    <main className="min-h-screen bg-[#f7f7f4] text-foreground">
-      <div className="mx-auto flex min-h-screen max-w-[1540px] flex-col gap-4 px-4 py-4 lg:px-6">
-        <header className="rounded-xl border bg-background">
-          <div className="flex flex-col gap-4 px-4 py-4 lg:flex-row lg:items-start lg:justify-between">
-            <div className="min-w-0">
-              <div className="mb-2 flex flex-wrap items-center gap-2">
-                <Badge variant="secondary" className="gap-1.5">
-                  <Bot className="size-3.5" />
-                  Course Digital Twin
-                </Badge>
-                <Badge variant="outline" className="gap-1.5">
-                  <GitBranch className="size-3.5" />
-                  Sprint 1 prototype
-                </Badge>
-                <Badge
-                  variant={
-                    releaseReadiness.status === "approved" ? "default" : "outline"
-                  }
-                  className={cn(
-                    "gap-1.5",
-                    releaseReadiness.status === "blocked" &&
-                      "border-red-200 text-red-700",
-                  )}
-                >
-                  <ShieldCheck className="size-3.5" />
-                  {formatReleaseStatus(releaseReadiness.status)}
-                </Badge>
-              </div>
-              <h1 className="text-xl font-semibold tracking-normal text-balance">
-                Professor Review Console
-              </h1>
-              <p className="mt-1 max-w-3xl text-sm leading-6 text-muted-foreground">
-                Set up a draft tutor by collecting instructor guidance, approving
-                source metadata, reviewing evidence, and clearing the release gate.
-              </p>
-            </div>
-
-            <div className="grid gap-2 sm:grid-cols-2 lg:w-[520px]">
-              <ReadinessMetric
-                label="Release blockers"
-                value={releaseReadiness.blockers.length}
-                tone={releaseReadiness.blockers.length === 0 ? "clear" : "blocked"}
-              />
-              <ReadinessMetric
-                label="Accepted previews"
-                value={`${releaseReadiness.acceptedPreviews}/${releaseReadiness.previewCount}`}
-                tone={
-                  releaseReadiness.previewCount > 0 &&
-                  releaseReadiness.acceptedPreviews === releaseReadiness.previewCount
-                    ? "clear"
-                    : "waiting"
-                }
-              />
-            </div>
-          </div>
-
-          <div className="border-t px-4 py-3">
-            <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-              <div className="flex min-w-0 items-start gap-3">
-                <div
-                  className={cn(
-                    "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg",
-                    releaseReadiness.blockers.length === 0
-                      ? "bg-emerald-50 text-emerald-700"
-                      : "bg-amber-50 text-amber-700",
-                  )}
-                >
-                  {releaseReadiness.blockers.length === 0 ? (
-                    <CheckCircle2 className="size-4" />
-                  ) : (
-                    <ShieldAlert className="size-4" />
-                  )}
+    <main className="min-h-screen bg-[var(--workspace)] text-foreground">
+      <div className="mx-auto min-h-screen max-w-[1800px] px-0 py-0 2xl:px-5 2xl:py-5">
+        <div className="min-h-screen border-x bg-white 2xl:min-h-[calc(100vh-2.5rem)] 2xl:border">
+          <header className="bg-white">
+            <div className="flex flex-col gap-4 px-4 py-4 sm:gap-5 sm:px-7 sm:py-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--ink)]">
+                    <span className="flex size-7 items-center justify-center bg-[var(--ink)] text-white">
+                      <BookOpenCheck className="size-4" aria-hidden="true" />
+                    </span>
+                    Course Digital Twin
+                  </span>
+                  <Badge variant="outline" className="status-badge">
+                    <FlaskConical className="size-3" aria-hidden="true" />
+                    Experimental prototype
+                  </Badge>
                 </div>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold">{nextAction.title}</div>
-                  <p className="mt-0.5 text-sm leading-6 text-muted-foreground">
+                <h1 className="mt-3 text-xl font-semibold tracking-[-0.025em] text-[var(--ink)] sm:mt-4 sm:text-2xl">
+                  Professor Review Console
+                </h1>
+                <p className="mt-1.5 hidden max-w-[72ch] text-sm leading-6 text-muted-foreground sm:block">
+                  Configure and verify a draft course tutor through explicit source,
+                  policy, evidence, and approval decisions.
+                </p>
+              </div>
+
+              <dl className="grid min-w-0 grid-cols-3 border-l border-t lg:w-[480px]">
+                <LedgerMetric
+                  label="Release state"
+                  mobileLabel="Status"
+                  value={formatReleaseStatus(releaseReadiness.status)}
+                  tone={
+                    releaseReadiness.status === "approved"
+                      ? "success"
+                      : releaseReadiness.status === "blocked"
+                        ? "danger"
+                        : "warning"
+                  }
+                />
+                <LedgerMetric
+                  label="Blockers"
+                  mobileLabel="Blockers"
+                  value={releaseReadiness.blockers.length}
+                  tone={releaseReadiness.blockers.length === 0 ? "success" : "warning"}
+                />
+                <LedgerMetric
+                  label="Previews"
+                  mobileLabel="Previews"
+                  value={`${releaseReadiness.acceptedPreviews}/${releaseReadiness.previewCount}`}
+                  tone={
+                    releaseReadiness.previewCount > 0 &&
+                    releaseReadiness.acceptedPreviews === releaseReadiness.previewCount
+                      ? "success"
+                      : "neutral"
+                  }
+                />
+              </dl>
+            </div>
+
+            <section
+              aria-labelledby="next-decision-title"
+              className={cn(
+                "grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-t px-4 py-3 sm:gap-4 sm:px-7 sm:py-4 lg:items-center",
+                releaseReadiness.blockers.length === 0
+                  ? "bg-[var(--success-soft)]"
+                  : "bg-[var(--warning-soft)]",
+              )}
+            >
+              <div className="flex min-w-0 gap-3">
+                <span
+                  className={cn(
+                    "mt-0.5 flex size-8 shrink-0 items-center justify-center border",
+                    releaseReadiness.blockers.length === 0
+                      ? "border-[var(--success-border)] text-[var(--success)]"
+                      : "border-[var(--warning-border)] text-[var(--warning)]",
+                  )}
+                >
+                  <ReleaseStateIcon clear={releaseReadiness.blockers.length === 0} />
+                </span>
+                <div>
+                  <div className="dossier-label">Recommended decision</div>
+                  <h2 id="next-decision-title" className="mt-1 text-sm font-semibold">
+                    {nextAction.title}
+                  </h2>
+                  <p className="mt-0.5 hidden max-w-4xl text-sm leading-5 text-muted-foreground sm:block">
                     {nextAction.detail}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {releaseReadiness.blockers.slice(0, 3).map((blocker) => (
-                  <Badge
-                    key={blocker}
-                    variant="outline"
-                    className="max-w-full border-amber-200 bg-amber-50 text-amber-800"
-                  >
-                    <span className="truncate">{blocker}</span>
-                  </Badge>
-                ))}
-                {releaseReadiness.blockers.length > 3 && (
-                  <Badge variant="outline">
-                    +{releaseReadiness.blockers.length - 3} more
-                  </Badge>
-                )}
-              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="justify-self-end border-[var(--rule-strong)] bg-white sm:h-9 sm:px-3.5 lg:justify-self-end"
+                onClick={() => setActiveStage(nextAction.stage)}
+              >
+                <span className="hidden sm:inline">
+                  Open {STAGE_COPY[nextAction.stage].title.toLowerCase()}
+                </span>
+                <span className="sm:hidden">Open</span>
+                <ArrowRight data-icon="inline-end" />
+              </Button>
+            </section>
+          </header>
+
+          {error && (
+            <div className="border-t px-5 py-4 sm:px-7">
+              <Alert
+                variant="destructive"
+                className="border-[var(--destructive-border)] bg-[var(--destructive-soft)]"
+              >
+                <AlertCircle className="size-4" />
+                <AlertTitle>Onboarding request failed</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
             </div>
-          </div>
-        </header>
+          )}
 
-        {error && (
-          <Alert variant="destructive">
-            <AlertCircle className="size-4" />
-            <AlertTitle>Onboarding request failed</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
+          <div className="grid border-t xl:grid-cols-[244px_minmax(0,1fr)_332px]">
+            <aside className="min-w-0 border-b bg-white xl:sticky xl:top-0 xl:max-h-screen xl:self-start xl:overflow-y-auto xl:border-b-0 xl:border-r">
+              <ReleaseRoute
+                steps={stepStates}
+                currentStep={session?.current_step ?? "starting"}
+                selectedStage={activeStage}
+                onSelectStage={setActiveStage}
+              />
+            </aside>
 
-        <div className="grid min-h-0 flex-1 gap-4 xl:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="grid content-start gap-4">
-            <section className="rounded-xl border bg-background p-3">
-              <div className="mb-3 flex items-center justify-between gap-2">
-                <h2 className="text-sm font-semibold">Setup map</h2>
-                <Badge variant="outline">
-                  {formatStep(session?.current_step ?? "starting")}
-                </Badge>
-              </div>
-              <div className="grid gap-2">
-                {stepStates.map((step) => (
-                  <StepStatusCard key={step.id} step={step} />
-                ))}
+            <section className="min-w-0 bg-white">
+              <WorkbenchHeader
+                index={activeCopy.index}
+                title={activeCopy.title}
+                detail={activeCopy.detail}
+                badge={stageBadge(activeStage, session)}
+              />
+              <div className={cn(activeStage === "interview" ? "" : "p-5 sm:p-6")}>
+                {activeStage === "interview" && (
+                  <OnboardingChat
+                    messages={session?.messages ?? []}
+                    currentStep={session?.current_step ?? "starting"}
+                    isLoading={isStarting}
+                    isSubmitting={isSubmitting}
+                    onSendMessage={sendMessage}
+                    onRestart={restart}
+                  />
+                )}
+
+                {activeStage === "sources" && (
+                  <SourceInventory
+                    items={session?.source_inventory ?? []}
+                    blockers={session?.release_blockers.source_inventory ?? []}
+                    isAdding={isAddingSource}
+                    updatingSourceId={updatingSourceId}
+                    onAddSource={addSource}
+                    onUpdateSource={editSource}
+                  />
+                )}
+
+                {activeStage === "policy" && (
+                  <PolicyReview
+                    policy={session?.policy ?? null}
+                    updatingFieldId={updatingFieldId}
+                    onUpdateField={editPolicyField}
+                  />
+                )}
+
+                {activeStage === "preview" && (
+                  <div className="grid gap-5">
+                    {session?.revision_proposal && (
+                      <RevisionProposalPanel
+                        session={session}
+                        isResolvingRevision={isResolvingRevision}
+                        onConfirm={confirmRevision}
+                        onDiscard={discardRevision}
+                      />
+                    )}
+                    <PreviewComparison
+                      previewCases={session?.preview_cases ?? []}
+                      updatingPreviewId={updatingPreviewId}
+                      isAddingCustomPreview={isAddingCustomPreview}
+                      onPreviewDecision={decidePreview}
+                      onAddCustomPreview={addCustomPreview}
+                    />
+                  </div>
+                )}
+
+                {activeStage === "approval" && (
+                  <ApprovalChecklist
+                    items={session?.approval_checklist ?? []}
+                    releaseStatus={session?.policy?.release_status ?? "draft"}
+                    updatingItemId={updatingApprovalItemId}
+                    onUpdateItem={updateApprovalItem}
+                  />
+                )}
               </div>
             </section>
 
-            <ReadinessSummary readiness={releaseReadiness} />
-          </aside>
-
-          <section className="min-w-0 rounded-xl border bg-background">
-            <Tabs defaultValue="interview" className="min-h-0">
-              <div className="border-b px-3 py-3">
-                <TabsList className="w-full justify-start overflow-x-auto">
-                  <TabsTrigger value="interview" className="min-w-fit">
-                    <MessageSquareText data-icon="inline-start" />
-                    Interview
-                  </TabsTrigger>
-                  <TabsTrigger value="sources" className="min-w-fit">
-                    <FileText data-icon="inline-start" />
-                    Sources
-                  </TabsTrigger>
-                  <TabsTrigger value="policy" className="min-w-fit">
-                    <ShieldCheck data-icon="inline-start" />
-                    Policy
-                  </TabsTrigger>
-                  <TabsTrigger value="preview" className="min-w-fit">
-                    <FileSearch data-icon="inline-start" />
-                    Preview
-                  </TabsTrigger>
-                  <TabsTrigger value="approval" className="min-w-fit">
-                    <ClipboardCheck data-icon="inline-start" />
-                    Approval
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="interview" className="m-0">
-                <div className="grid min-h-[520px] gap-0 lg:min-h-[680px] lg:grid-cols-[minmax(0,1fr)_380px]">
-                  <section className="flex min-h-[520px] flex-col overflow-hidden border-b lg:min-h-[680px] lg:border-b-0 lg:border-r">
-                    <WorkbenchHeader
-                      title="Instructor interview"
-                      detail="Collect source rules, teaching style, integrity boundaries, misconception handling, and approval criteria."
-                      badge={
-                        session?.policy ? "policy generated" : "collecting answers"
-                      }
-                    />
-                    <OnboardingChat
-                      messages={session?.messages ?? []}
-                      currentStep={session?.current_step ?? "starting"}
-                      isLoading={isStarting}
-                      isSubmitting={isSubmitting}
-                      onSendMessage={sendMessage}
-                      onRestart={restart}
-                    />
-                  </section>
-                  <aside className="grid content-start gap-4 p-4">
-                    <WorkflowTrace trace={session?.trace ?? []} />
-                  </aside>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="sources" className="m-0 p-4">
-                <SourceInventory
-                  items={session?.source_inventory ?? []}
-                  blockers={session?.release_blockers.source_inventory ?? []}
-                  isAdding={isAddingSource}
-                  updatingSourceId={updatingSourceId}
-                  onAddSource={addSource}
-                  onUpdateSource={editSource}
-                />
-              </TabsContent>
-
-              <TabsContent value="policy" className="m-0 p-4">
-                <PolicyReview
-                  policy={session?.policy ?? null}
-                  updatingFieldId={updatingFieldId}
-                  onUpdateField={editPolicyField}
-                />
-              </TabsContent>
-
-              <TabsContent value="preview" className="m-0 p-4">
-                <div className="grid gap-4">
-                  <PreviewComparison
-                    previewCases={session?.preview_cases ?? []}
-                    updatingPreviewId={updatingPreviewId}
-                    isAddingCustomPreview={isAddingCustomPreview}
-                    onPreviewDecision={decidePreview}
-                    onAddCustomPreview={addCustomPreview}
-                  />
-                  {session?.revision_proposal && (
-                    <RevisionProposalPanel
-                      session={session}
-                      isResolvingRevision={isResolvingRevision}
-                      onConfirm={confirmRevision}
-                      onDiscard={discardRevision}
-                    />
-                  )}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="approval" className="m-0 p-4">
-                <ApprovalChecklist
-                  items={session?.approval_checklist ?? []}
-                  releaseStatus={session?.policy?.release_status ?? "draft"}
-                  updatingItemId={updatingApprovalItemId}
-                  onUpdateItem={updateApprovalItem}
-                />
-              </TabsContent>
-            </Tabs>
-          </section>
+            <div className="min-w-0 border-t xl:sticky xl:top-0 xl:max-h-screen xl:self-start xl:overflow-y-auto xl:border-l xl:border-t-0">
+              <ReviewContext session={session} readiness={releaseReadiness} />
+            </div>
+          </div>
         </div>
       </div>
     </main>
   )
+}
+
+function LedgerMetric({
+  label,
+  mobileLabel,
+  value,
+  tone,
+}: {
+  label: string
+  mobileLabel: string
+  value: string | number
+  tone: "success" | "warning" | "danger" | "neutral"
+}) {
+  return (
+    <div className="min-w-0 border-b border-r px-3 py-3 sm:px-4">
+      <dt className="dossier-label min-h-4 leading-4 sm:min-h-0">
+        <span className="sm:hidden">{mobileLabel}</span>
+        <span className="hidden sm:inline">{label}</span>
+      </dt>
+      <dd
+        className={cn(
+          "mt-1 truncate text-sm font-semibold tabular-nums",
+          tone === "success" && "text-[var(--success)]",
+          tone === "warning" && "text-[var(--warning)]",
+          tone === "danger" && "text-[var(--destructive)]",
+          tone === "neutral" && "text-[var(--ink)]",
+        )}
+      >
+        {value}
+      </dd>
+    </div>
+  )
+}
+
+function stageBadge(
+  stage: ReviewStageId,
+  session: OnboardingController["session"],
+): string {
+  if (stage === "sources") {
+    return `${session?.source_inventory.length ?? 0} registered`
+  }
+  if (stage === "interview") {
+    return session?.policy ? "policy generated" : "collecting answers"
+  }
+  if (stage === "policy") {
+    return `policy v${session?.policy_version ?? 0}`
+  }
+  if (stage === "preview") {
+    return `${session?.preview_cases.length ?? 0} cases`
+  }
+  return session?.policy?.release_status === "approved"
+    ? "approved"
+    : "draft only"
 }
