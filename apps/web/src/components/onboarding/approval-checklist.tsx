@@ -24,12 +24,11 @@ export function ApprovalChecklist({
   )
 
   return (
-    <section className="text-card-foreground" aria-labelledby="approval-checklist-title">
-      <div className="flex items-start justify-between gap-3 border-b pb-4">
+    <section className="p-5 text-card-foreground sm:p-6" aria-labelledby="approval-checklist-title">
+      <div className="flex items-start justify-between gap-3 border-b pb-5">
         <div>
-          <div className="dossier-label">Final authority</div>
-          <h3 id="approval-checklist-title" className="mt-1 text-[15px] font-semibold">
-            Release checklist
+          <h3 id="approval-checklist-title" className="text-lg font-semibold tracking-[-0.02em]">
+            Approval
           </h3>
           <p className="mt-1 text-sm leading-5 text-muted-foreground">
             Local professor review checklist for the draft release gate.
@@ -48,25 +47,22 @@ export function ApprovalChecklist({
       </div>
 
       {items.length === 0 ? (
-        <div className="mt-5 border border-dashed p-4 text-sm leading-6 text-muted-foreground">
+          <div className="mt-5 rounded-xl border border-dashed p-5 text-sm leading-6 text-muted-foreground">
           Checklist appears after the policy draft is generated.
         </div>
       ) : (
         <div className="pt-5">
           {incompleteBlockers.length > 0 && (
-            <div className="border border-[var(--warning-border)] bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
+            <div className="rounded-lg bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
               {incompleteBlockers.length} blocking checklist items remain.
             </div>
           )}
-          <div className="mt-4 border-t">
-            {items.map((item, index) => (
+          <div className="mt-4 overflow-hidden rounded-xl border">
+            {items.map((item) => (
               <label
                 key={item.id}
-                className="grid cursor-pointer grid-cols-[32px_20px_minmax(0,1fr)_auto] items-start gap-3 border-b py-4 text-sm hover:bg-[var(--workspace)]"
+                className="grid cursor-pointer grid-cols-[20px_minmax(0,1fr)_auto] items-start gap-3 border-b p-4 text-sm last:border-b-0 hover:bg-[var(--shell)]"
               >
-                <span className="dossier-label mt-0.5 text-[var(--cobalt)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <Checkbox
                   checked={item.checked}
                   disabled={updatingItemId === item.id}

@@ -8,61 +8,69 @@
     "Geist Variable", Inter, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light;
-  color: #101828;
-  background: #f5f7fb;
+  color: #202123;
+  background: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --ink: #101828;
-  --cobalt: #1d4ed8;
-  --cobalt-soft: #eef4ff;
-  --workspace: #f5f7fb;
-  --rule: #d9e0ea;
-  --rule-strong: #98a2b3;
-  --success: #087a55;
-  --success-soft: #ecfdf3;
-  --success-border: #8dd9bb;
-  --warning: #a15c08;
-  --warning-soft: #fff7e6;
-  --warning-border: #f5c875;
-  --destructive-ink: #b42318;
-  --destructive-soft: #fff2f0;
-  --destructive-border: #f1a09a;
+  --ink: #202123;
+  --accent-strong: #5b5bd6;
+  --accent-soft: #eeeeff;
+  --accent-border: #b8b8ee;
+  --cobalt: var(--accent-strong);
+  --cobalt-soft: var(--accent-soft);
+  --shell: #f7f7f8;
+  --workspace: var(--shell);
+  --subtle: #f0f0f2;
+  --rule: #e2e2e6;
+  --rule-strong: #c7c7cd;
+  --border-strong: #c7c7cd;
+  --success: #147a57;
+  --success-soft: #eaf8f2;
+  --success-border: #9bd9bf;
+  --warning: #a85d00;
+  --warning-soft: #fff6e5;
+  --warning-border: #f5ca83;
+  --destructive-ink: #c2413b;
+  --destructive-soft: #fff0ef;
+  --destructive-border: #f4b7b4;
+  --shadow-composer: 0 8px 30px rgba(32, 33, 35, 0.08),
+    0 1px 3px rgba(32, 33, 35, 0.08);
 
-  --radius: 0.375rem;
+  --radius: 0.5rem;
   --background: #ffffff;
-  --foreground: #101828;
+  --foreground: #202123;
   --card: #ffffff;
-  --card-foreground: #101828;
+  --card-foreground: #202123;
   --popover: #ffffff;
-  --popover-foreground: #101828;
-  --primary: #101828;
+  --popover-foreground: #202123;
+  --primary: #202123;
   --primary-foreground: #ffffff;
-  --secondary: #f2f4f7;
-  --secondary-foreground: #1d2939;
-  --muted: #f2f4f7;
-  --muted-foreground: #667085;
-  --accent: #eef4ff;
-  --accent-foreground: #1d4ed8;
-  --destructive: #b42318;
-  --border: #d9e0ea;
-  --input: #d9e0ea;
-  --ring: #1d4ed8;
-  --chart-1: #1d4ed8;
-  --chart-2: #087a55;
-  --chart-3: #a15c08;
-  --chart-4: #667085;
-  --chart-5: #b42318;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #101828;
-  --sidebar-primary: #1d4ed8;
+  --secondary: #f0f0f2;
+  --secondary-foreground: #343438;
+  --muted: #f0f0f2;
+  --muted-foreground: #6b6b73;
+  --accent: #eeeeff;
+  --accent-foreground: #4a4ab7;
+  --destructive: #c2413b;
+  --border: #e2e2e6;
+  --input: #e2e2e6;
+  --ring: #5b5bd6;
+  --chart-1: #5b5bd6;
+  --chart-2: #147a57;
+  --chart-3: #a85d00;
+  --chart-4: #6b6b73;
+  --chart-5: #c2413b;
+  --sidebar: #f7f7f8;
+  --sidebar-foreground: #202123;
+  --sidebar-primary: #5b5bd6;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eef4ff;
-  --sidebar-accent-foreground: #1d4ed8;
-  --sidebar-border: #d9e0ea;
-  --sidebar-ring: #1d4ed8;
+  --sidebar-accent: #eeeeff;
+  --sidebar-accent-foreground: #4a4ab7;
+  --sidebar-border: #e2e2e6;
+  --sidebar-ring: #5b5bd6;
 }
 
 @theme inline {
@@ -113,14 +121,14 @@
 }
 
 html {
-  background: var(--workspace);
+  background: #ffffff;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: var(--workspace);
+  background: #ffffff;
 }
 
 button,
@@ -159,19 +167,18 @@ summary {
 @layer components {
   .dossier-label {
     color: var(--muted-foreground);
-    font-size: 0.6875rem;
-    font-weight: 650;
+    font-size: 0.75rem;
+    font-weight: 550;
     line-height: 1.35;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0;
   }
 
   .status-badge {
-    min-height: 1.375rem;
-    border-radius: 0.25rem;
-    padding-inline: 0.4375rem;
-    font-size: 0.6875rem;
-    font-weight: 650;
+    min-height: 1.5rem;
+    border-radius: 999px;
+    padding-inline: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 550;
   }
 
   .status-badge-success {
@@ -201,5 +208,13 @@ summary {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+@media (pointer: coarse) {
+  button,
+  select,
+  input[type="file"] {
+    min-height: 44px;
   }
 }

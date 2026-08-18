@@ -34,9 +34,10 @@ but they do not override this page for current sequencing.
   [#80](https://github.com/horiiiiii032929/digital-twin/issues/80) is the only
   active implementation item. It is a demo-UX refactor of the existing
   professor console, not a component-profile change or new evaluation claim.
-  The candidate now has a single five-stage route, evidence-adjacent workbench,
-  updated design system, and passing engineering QA; subjective professor and
-  human-usability review remain pending.
+  The selected conversation-plus-tool candidate now has a single five-stage
+  route, LLM-style interview workspace, structured review tools, updated design
+  system, and passing engineering QA; subjective professor and human-usability
+  review remain pending.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -72,7 +73,7 @@ ideally from professor feedback.
 
 | Order | Issue | Board state | Purpose |
 | ---: | --- | --- | --- |
-| 1 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | In Progress / Pending | Evidence-led demo UX candidate is implemented and technically checked; await subjective review before Keep/Refine |
+| 1 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | In Progress / Pending | Conversation-plus-tool LLM workspace is implemented and technically checked; await subjective review before Keep/Refine |
 | 2 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
 | 3 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
 | 4 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Preserve the 19-check foundation; do not start new feature development after the technical freeze |

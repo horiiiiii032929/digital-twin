@@ -124,7 +124,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
   return [
     {
       id: "sources",
-      label: "Source inventory",
+      label: "Sources",
       detail: hasSources
         ? "Metadata added for review."
         : "Add approved source metadata.",
@@ -132,7 +132,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
     },
     {
       id: "interview",
-      label: "Instructor interview",
+      label: "Interview",
       detail: hasPolicy
         ? "Answers generated a draft policy."
         : `Current: ${formatStep(currentStep)}`,
@@ -140,7 +140,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
     },
     {
       id: "policy",
-      label: "Tutor policy",
+      label: "Policy",
       detail: hasPolicy
         ? "Review editable policy fields."
         : "Generated after interview.",
@@ -148,7 +148,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
     },
     {
       id: "preview",
-      label: "Preview evidence",
+      label: "Preview",
       detail: previewBlocked
         ? "Accept or revise required cases."
         : "Compare configured and generic responses.",
@@ -160,7 +160,7 @@ export function getStepStates(session: OnboardingSession | null): StepState[] {
     },
     {
       id: "approval",
-      label: "Professor approval",
+      label: "Approval",
       detail: checklistBlocked
         ? "Checklist still blocks release."
         : "Final release confirmation.",

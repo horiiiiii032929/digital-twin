@@ -1,33 +1,33 @@
 ---
-name: Course Digital Twin Professor Console
-description: An evidence-led release dossier for professor-controlled tutor configuration.
+name: Course Digital Twin Professor Workspace
+description: A familiar LLM workspace for configuring and approving a course tutor.
 colors:
-  ink: "#101828"
-  cobalt: "#1d4ed8"
-  cobalt-soft: "#eef4ff"
-  paper: "#ffffff"
-  workspace: "#f5f7fb"
-  muted: "#667085"
-  rule: "#d9e0ea"
-  rule-strong: "#98a2b3"
-  success: "#087a55"
-  success-soft: "#ecfdf3"
-  warning: "#a15c08"
-  warning-soft: "#fff7e6"
-  destructive: "#b42318"
-  destructive-soft: "#fff2f0"
+  ink: "#202123"
+  accent: "#5b5bd6"
+  accent-soft: "#eeeeff"
+  canvas: "#ffffff"
+  shell: "#f7f7f8"
+  subtle: "#f0f0f2"
+  muted: "#6b6b73"
+  border: "#e2e2e6"
+  success: "#147a57"
+  success-soft: "#eaf8f2"
+  warning: "#a85d00"
+  warning-soft: "#fff6e5"
+  destructive: "#c2413b"
+  destructive-soft: "#fff0ef"
 typography:
   headline:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.5rem"
+    fontSize: "1.25rem"
     fontWeight: 620
-    lineHeight: 1.2
-    letterSpacing: "-0.025em"
+    lineHeight: 1.25
+    letterSpacing: "-0.02em"
   title:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.9375rem"
-    fontWeight: 620
-    lineHeight: 1.35
+    fontWeight: 600
+    lineHeight: 1.4
     letterSpacing: "-0.01em"
   body:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
@@ -37,14 +37,15 @@ typography:
     letterSpacing: "0"
   label:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.6875rem"
-    fontWeight: 650
+    fontSize: "0.75rem"
+    fontWeight: 550
     lineHeight: 1.35
-    letterSpacing: "0.1em"
+    letterSpacing: "0"
 rounded:
-  sm: "4px"
-  md: "6px"
-  lg: "8px"
+  sm: "8px"
+  md: "12px"
+  lg: "16px"
+  full: "999px"
 spacing:
   xs: "4px"
   sm: "8px"
@@ -55,202 +56,200 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.md}"
+    textColor: "{colors.canvas}"
+    rounded: "{rounded.sm}"
     padding: "8px 14px"
   button-secondary:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "{colors.canvas}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     padding: "8px 14px"
-  stage-active:
-    backgroundColor: "{colors.cobalt-soft}"
-    textColor: "{colors.cobalt}"
-    rounded: "{rounded.sm}"
-    padding: "10px 12px"
-  status-chip:
-    backgroundColor: "{colors.workspace}"
+  nav-active:
+    backgroundColor: "{colors.subtle}"
     textColor: "{colors.ink}"
     rounded: "{rounded.sm}"
-    padding: "3px 7px"
+    padding: "8px 10px"
+  status-chip:
+    backgroundColor: "{colors.subtle}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    padding: "3px 8px"
 ---
 
-# Design System: Course Digital Twin Professor Console
+# Design System: Course Digital Twin Professor Workspace
 
 ## Overview
 
-**Creative North Star: "The Course Release Dossier"**
+**Creative North Star: "The Grounded AI Workspace"**
 
-The professor console combines an academic review dossier with the decisiveness
-of a code-review merge gate. It is precise, calm, and accountable: every action
-is visibly connected to evidence, policy, or release impact. The screen should
-feel like one continuous working document, not a collection of dashboard cards.
+The professor console should feel immediately familiar to someone who already
+uses a mature LLM product: a quiet application shell, a focused conversational
+workspace, lightweight project navigation, and contextual material available
+without competing with the current task. The product-specific difference is
+that conversation is connected to visible source permissions, policy fields,
+preview evidence, and professor approval.
 
-The interface uses compact editorial hierarchy, ruled divisions, numbered
-decision references, and restrained status color. It refuses generic AI-chat
-styling, opaque automation, decorative SaaS polish, and invented intelligence.
+This direction replaces the release-dossier presentation. It removes report-like
+metric grids, numbered records as decoration, repeated explanatory prose, and
+full-screen ruled-paper framing. Research status remains truthful but secondary.
 
 **Key Characteristics:**
 
-- A persistent five-stage release route with one selected work surface.
-- Evidence and workflow trace remain adjacent to the current decision.
-- Flat paper surfaces separated by rules, spacing, and tonal bands.
-- Cobalt marks interaction; amber, red, and green communicate status only.
-- All state is expressed in text as well as color.
+- A persistent, quiet workspace shell with compact setup navigation.
+- Conversation is the natural starting point; structured tools open in the same
+  workspace rather than resembling separate reports.
+- Release state and blockers are concise, discoverable, and never decorative.
+- Context uses a lightweight side panel with progressive disclosure.
+- Familiar LLM-product density, rounding, hover states, and composer behavior.
 
 ## Colors
 
-The palette is cool paper and navy ink, with one operational cobalt and narrowly
-reserved semantic colors.
+The palette is neutral and screen-native. Near-black carries primary actions;
+iris marks selection and focus; semantic colors are reserved for real states.
 
 ### Primary
 
-- **Decision Cobalt:** Marks the selected stage, links, focus, and the current
-  operational action.
-- **Dossier Ink:** Carries headings, primary controls, and release-critical text.
+- **Workspace Ink** (#202123): Primary text and decisive actions.
+- **Context Iris** (#5b5bd6): Selected navigation, focus, and current AI context.
 
 ### Neutral
 
-- **Review Paper:** The uninterrupted primary working surface.
-- **Cool Workspace:** Separates the dossier from the browser canvas and supports
-  quiet secondary regions.
-- **Audit Rule:** Divides stages, evidence entries, and document sections.
-- **Secondary Ink:** Metadata and explanatory copy; never release decisions.
+- **Conversation Canvas** (#ffffff): Main task and chat surface.
+- **Soft Shell** (#f7f7f8): Application navigation and page background.
+- **Quiet Fill** (#f0f0f2): Hover, selected-neutral, and grouped metadata.
+- **Soft Border** (#e2e2e6): Inputs and structural separation.
+- **Secondary Text** (#6b6b73): Explanations and metadata.
 
 ### Tertiary
 
-- **Verified Green:** Confirmed evidence and completed gates only.
-- **Review Amber:** Pending decisions and non-destructive blockers only.
-- **Blocked Red:** Failed operations, explicit rejection, and blocked release only.
+- **Ready Green** (#147a57): Completed release conditions.
+- **Review Amber** (#a85d00): Pending decisions and blockers.
+- **Blocked Red** (#c2413b): Failed actions and explicit rejection.
 
 ### Named Rules
 
-**The Status Has Meaning Rule.** Green, amber, and red never decorate; each use
-must explain a real review state in accompanying text.
+**The Quiet Shell Rule.** Navigation supports the work and never becomes the
+largest visual object on screen.
 
-**The One Active Signal Rule.** Cobalt identifies the current route or action,
-not every interactive surface at once.
+**The One Active Signal Rule.** Iris identifies the current place or focused AI
+context; it is not scattered across every interactive element.
 
 ## Typography
 
-**Display Font:** Geist Variable with Inter and system fallbacks
+**Display Font:** Geist Variable with system fallbacks
 
-**Body Font:** Geist Variable with Inter and system fallbacks
+**Body Font:** Geist Variable with system fallbacks
 
-**Label/Mono Font:** Geist Variable for interface labels; system monospace only
-for trace identifiers when needed
-
-**Character:** A compact grotesk with the clarity of an assessment form and the
-rhythm of technical documentation. Weight and spacing create hierarchy without
-hero typography.
+**Character:** A neutral, highly legible UI grotesk associated with contemporary
+AI workspaces. Hierarchy comes from weight and spacing, not uppercase labels or
+editorial display treatments.
 
 ### Hierarchy
 
-- **Headline** (620, 24px, 1.2): Page title and the active dossier heading.
-- **Title** (620, 15px, 1.35): Decision groups, review artifacts, and route labels.
-- **Body** (400, 14px, 1.55): Prompts, policy values, explanations, and evidence;
-  prose stays near 70ch when possible.
-- **Label** (650, 11px, 0.1em): Short uppercase indices, evidence references, and
-  state captions only.
+- **Headline** (620, 20px, 1.25): Current workspace title.
+- **Title** (600, 15px, 1.4): Tool sections and substantial records.
+- **Body** (400, 14px, 1.55): Conversation, descriptions, and review content.
+- **Label** (550, 12px, 1.35): Navigation state, metadata, and concise captions.
 
 ### Named Rules
 
-**The Working Scale Rule.** No product heading exceeds 24px; the console is a
-review instrument, not a landing page.
+**The Human Label Rule.** Use sentence case. Uppercase is limited to unavoidable
+identifiers from stored evidence, never used as the main hierarchy device.
 
 ## Layout
 
-Desktop uses a three-region workbench: a narrow release route, a flexible active
-workspace, and a compact evidence rail. A release ledger spans the top and keeps
-status, blockers, and the recommended next action visible. Dividers align across
-regions so the screen reads as a single dossier.
+Desktop uses a familiar LLM workspace: a 240px navigation sidebar, a flexible
+conversation area, and a structured tool area of similar visual weight. The app
+bar is compact and contains the product identity, course setup state, and an
+Activity toggle that temporarily replaces the structured tool with release
+context.
 
-At tablet widths the evidence rail moves below the workspace. On mobile the
-five-stage route becomes one horizontally scrollable control above the active
-work; release context follows the primary task in document order. Touch targets
-remain at least 40px and no critical action relies on hover.
+The setup stages appear as concise sidebar navigation, followed by one compact
+release-status summary. The main task surface is centered with a readable maximum
+width for conversation and forms. Structured tools may use the available width,
+but their headings and controls align to the same workspace rhythm.
 
-Spacing follows a compact 4/8/12/16/24/32px rhythm. Dense evidence rows use the
-smaller steps; major dossier sections use 24-32px separation.
+Below 1280px the selected stage or Activity surface becomes the focused work
+area instead of competing with the conversation. Below 1024px the sidebar becomes
+a compact horizontal stage switcher beneath the app bar. The primary task always
+precedes supporting evidence in document order.
+
+Spacing follows a 4/8/12/16/24/32px rhythm. Routine controls are compact; major
+task transitions use 24-32px separation.
 
 ## Elevation & Depth
 
-The system is flat. Depth comes from paper against a cool workspace, strong and
-subtle rules, and selected tonal bands. Routine panels and controls have no box
-shadow; overlays may use one small structural shadow if introduced later.
+The shell is mostly tonal and flat. A restrained ambient shadow is allowed for
+the chat composer, popovers, and a context panel that overlays narrow layouts.
+Ordinary content groups use background contrast and spacing rather than stacks
+of bordered cards.
 
 ### Named Rules
 
-**The Ruled Paper Rule.** Prefer a divider or a slight background change over a
-new floating card.
+**The Floating Composer Rule.** The composer is the clearest elevated object in
+conversation mode; routine records must not compete with it.
 
 ## Shapes
 
-Controls use precise 4-8px corners. Full work regions stay square where they meet
-the surrounding dossier grid. Pills are reserved for truly compact status values;
-repeated containers must not become rounded floating tiles.
+Navigation and controls use 8px corners; substantive floating surfaces use
+12-16px. Status chips may be fully rounded because they communicate short,
+atomic values. Avoid both square report frames and excessive bubble-shaped cards.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** Compact, slightly softened rectangle (6px radius).
-- **Primary:** Dossier Ink with white text for the decisive action in a region.
-- **Hover / Focus:** A short tonal shift and a visible 2px cobalt focus outline.
-- **Secondary / Ghost:** White or transparent with an audit rule; never muted to
-  the point that the boundary disappears.
+- **Shape:** Compact 8px rectangle.
+- **Primary:** Near-black with white text for the decisive action.
+- **Hover / Focus:** Subtle tonal shift and a visible iris focus outline.
+- **Secondary / Ghost:** Quiet fill or white with a soft border.
 
 ### Chips
 
-- **Style:** Small square-cornered labels with an icon or explicit text.
-- **State:** Semantic backgrounds are faint; text carries the actual status.
+- **Style:** Short sentence-case state labels with restrained fills.
+- **State:** Meaning remains explicit in text; color is supplementary.
 
 ### Cards / Containers
 
-- **Corner Style:** 8px only for self-contained records; structural regions are
-  divided by rules rather than wrapped as cards.
-- **Background:** Review Paper for active work and Cool Workspace for secondary
-  context.
-- **Shadow Strategy:** None at rest.
-- **Border:** One-pixel Audit Rule; use stronger rules for primary boundaries.
-- **Internal Padding:** 16px for records and 24px for major work sections.
+- **Corner Style:** 12px for self-contained records and 16px for floating tools.
+- **Background:** White task canvas or quiet neutral fill.
+- **Shadow Strategy:** None at rest except composer and overlays.
+- **Border:** Soft border only when grouping cannot be expressed by spacing.
+- **Internal Padding:** 12-20px depending on density.
 
 ### Inputs / Fields
 
-- **Style:** White field, one-pixel Audit Rule, 6px radius, and persistent label.
-- **Focus:** Cobalt border and visible focus outline.
-- **Error / Disabled:** Explicit text and reduced contrast without removing the
-  control boundary.
+- **Style:** White or quiet-fill field, soft border, 8-12px radius.
+- **Focus:** Iris border and focus outline.
+- **Error / Disabled:** Explicit supporting text and stable control boundaries.
 
 ### Navigation
 
-The five-stage route is the only primary navigation. Each item shows its number,
-label, and textual state. The selected item uses cobalt; complete, waiting, and
-blocked states retain their semantic labels without competing with selection.
+The five setup stages are compact rows with an icon, label, and state indicator.
+The active item uses a quiet fill and iris icon; complete and blocked state never
+overpowers navigation selection. On mobile these become a horizontal step switcher.
 
-### Evidence Ledger
+### Conversation Composer
 
-Evidence entries use a numbered or timestamped row, a short action description,
-and compact source or policy references. The ledger stays visually secondary but
-adjacent to the active decision.
+The composer is a rounded, elevated input region at the bottom of the interview
+workspace. Suggested answers appear as compact prompt chips above it. Interview
+history uses restrained assistant identity and natural content width rather than
+speech-bubble theater.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** lead with the current release state and next professor decision.
-- **Do** place supporting evidence beside the action it justifies.
-- **Do** preserve the exact five stages: Sources, Interview, Policy, Preview, and
-  Approval.
-- **Do** use whitespace and ruled sections before adding another container.
-- **Do** keep professor authority explicit for revisions and approval.
+- **Do** make the interface recognizable as an LLM workspace within seconds.
+- **Do** keep the current task centered and reveal evidence alongside it.
+- **Do** preserve the five real stages and professor-controlled approval.
+- **Do** use progressive disclosure for trace and secondary metadata.
+- **Do** state prototype limitations in secondary product chrome or documentation.
 
 ### Don't:
 
-- **Don't** make chat the visual identity of the product.
-- **Don't** duplicate route navigation with a second tab bar.
-- **Don't** add invented analytics, course data, people, integrations, or release
-  actions.
-- **Don't** use gradients, glass, purple AI branding, oversized heroes, or soft
-  decorative shadows.
-- **Don't** hide blockers, provenance, or uncertainty behind color-only state.
+- **Don't** reproduce another product's logo, exact branding, or proprietary UI.
+- **Don't** lead with evaluation terminology, metric grids, or a dossier metaphor.
+- **Don't** make every section a bordered dashboard card.
+- **Don't** invent courses, users, integrations, analytics, or model capabilities.
+- **Don't** hide source permissions, blockers, citations, or uncertainty.

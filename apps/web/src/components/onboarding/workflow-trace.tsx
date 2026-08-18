@@ -16,32 +16,26 @@ type WorkflowTraceProps = {
 export function WorkflowTrace({ trace }: WorkflowTraceProps) {
   return (
     <section aria-labelledby="workflow-trace-title">
-      <div className="flex items-end justify-between gap-3">
-        <div>
-          <div className="dossier-label">System evidence</div>
-          <h2 id="workflow-trace-title" className="mt-1 text-[15px] font-semibold">
-            Workflow trace
-          </h2>
-        </div>
-        <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+      <div className="flex items-center justify-between gap-3">
+        <h3 id="workflow-trace-title" className="text-sm font-semibold">
+          Setup history
+        </h3>
+        <span className="text-xs font-medium tabular-nums text-muted-foreground">
           {trace.length} events
         </span>
       </div>
 
       {trace.length === 0 ? (
-        <div className="mt-3 flex items-start gap-2 border-t pt-3 text-sm leading-5 text-muted-foreground">
+        <div className="mt-3 flex items-start gap-2 rounded-lg bg-[var(--shell)] p-3 text-sm leading-5 text-muted-foreground">
           <CircleDashed className="mt-0.5 size-4 shrink-0" />
           Trace events appear after the session starts.
         </div>
       ) : (
-        <ol className="mt-3 border-t">
+        <ol className="mt-3 overflow-hidden rounded-xl border">
           {trace.map((item, index) => (
-            <li key={item.id} className="border-b">
+            <li key={item.id} className="border-b last:border-b-0">
               <details open={index === trace.length - 1} className="group">
-                <summary className="grid min-h-12 cursor-pointer list-none grid-cols-[24px_20px_minmax(0,1fr)_16px] items-start gap-2 py-3 text-sm focus-visible:outline-2 focus-visible:outline-[var(--cobalt)] [&::-webkit-details-marker]:hidden">
-                  <span className="dossier-label mt-0.5 text-[var(--cobalt)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                <summary className="grid min-h-12 cursor-pointer list-none grid-cols-[20px_minmax(0,1fr)_16px] items-start gap-2 px-4 py-3 text-sm outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/30 [&::-webkit-details-marker]:hidden">
                   <StatusIcon status={item.status} />
                   <span className="min-w-0">
                     <span className="block font-semibold leading-5">{item.title}</span>
@@ -49,7 +43,7 @@ export function WorkflowTrace({ trace }: WorkflowTraceProps) {
                   </span>
                   <ChevronDown className="mt-0.5 size-4 text-muted-foreground transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="pb-3 pl-[52px] text-xs leading-5 text-muted-foreground">
+                <p className="px-4 pb-3 pl-12 text-xs leading-5 text-muted-foreground">
                   {item.detail}
                 </p>
               </details>

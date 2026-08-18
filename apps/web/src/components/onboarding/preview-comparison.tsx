@@ -35,7 +35,7 @@ type PreviewComparisonProps = {
     decision: PreviewDecisionValue,
     reason?: string,
   ) => Promise<void>
-  onAddCustomPreview: (prompt: string, tag: PromptTag) => Promise<void>
+  onAddCustomPreview: (prompt: string, tag: PromptTag) => Promise<boolean>
 }
 
 const PROMPT_TAGS: Array<{ value: PromptTag; label: string }> = [
@@ -63,21 +63,22 @@ export function PreviewComparison({
     if (!prompt || isAddingCustomPreview) {
       return
     }
-    await onAddCustomPreview(prompt, customTag)
+    if (!(await onAddCustomPreview(prompt, customTag))) {
+      return
+    }
     setCustomPrompt("")
     setCustomTag("teaching_behavior")
   }
 
   return (
     <section className="text-card-foreground" aria-labelledby="preview-evidence-title">
-      <div className="flex items-start justify-between gap-3 border-b pb-4">
+      <div className="flex items-start justify-between gap-3 border-b pb-5">
         <div>
-          <div className="dossier-label">Comparison record</div>
-          <h3 id="preview-evidence-title" className="mt-1 text-[15px] font-semibold">
-            Required preview cases
+          <h3 id="preview-evidence-title" className="text-lg font-semibold tracking-[-0.02em]">
+            Preview
           </h3>
           <p className="mt-1 text-sm leading-5 text-muted-foreground">
-            Configured tutor responses, source audit, and professor decisions.
+            Compare tutor behavior, inspect its sources, and record your decision.
           </p>
         </div>
         <Badge variant="outline" className="status-badge">
@@ -86,11 +87,11 @@ export function PreviewComparison({
       </div>
 
       {previewCases.length === 0 ? (
-        <div className="mt-5 border border-dashed p-4 text-sm leading-6 text-muted-foreground">
+        <div className="mt-5 rounded-xl border border-dashed p-5 text-sm leading-6 text-muted-foreground">
           Preview cases appear after draft policy generation.
         </div>
       ) : (
-        <div className="divide-y">
+        <div className="flex flex-col gap-4 pt-5">
           {previewCases.map((preview, index) => (
             <PreviewCard
               key={preview.id}
@@ -110,9 +111,8 @@ export function PreviewComparison({
         </div>
       )}
 
-      <section className="mt-5 border-t pt-5" aria-labelledby="custom-preview-title">
-        <div className="dossier-label">Additional evidence</div>
-        <h3 id="custom-preview-title" className="mt-1 text-sm font-semibold">
+      <section className="mt-5 rounded-xl border bg-[var(--shell)] p-4" aria-labelledby="custom-preview-title">
+        <h3 id="custom-preview-title" className="text-sm font-semibold">
           Professor custom prompt
         </h3>
         <p className="mt-1 text-xs leading-5 text-muted-foreground">
@@ -122,7 +122,7 @@ export function PreviewComparison({
           <Textarea
             value={customPrompt}
             onChange={(event) => setCustomPrompt(event.target.value)}
-            className="min-h-20 text-sm"
+            className="min-h-20 bg-white text-sm"
             placeholder="Write a prompt to test before approval..."
             aria-label="Custom preview prompt"
           />
@@ -130,7 +130,7 @@ export function PreviewComparison({
             <select
               value={customTag}
               onChange={(event) => setCustomTag(event.target.value as PromptTag)}
-              className="h-10 rounded-md border bg-white px-3 text-sm outline-none focus-visible:border-[var(--cobalt)] focus-visible:ring-2 focus-visible:ring-ring/25"
+              className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
               aria-label="Custom prompt tag"
             >
               {PROMPT_TAGS.map((tag) => (
@@ -179,14 +179,14 @@ function PreviewCard({
   ) => Promise<void>
 }) {
   return (
-    <article className="py-5">
-      <div className="grid grid-cols-[36px_minmax(0,1fr)] gap-3">
-        <span className="dossier-label mt-0.5 text-[var(--cobalt)]">
-          P-{String(index).padStart(2, "0")}
+    <article className="rounded-xl border p-4">
+      <div className="grid grid-cols-[32px_minmax(0,1fr)] gap-3">
+        <span className="flex size-8 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-xs font-semibold text-[var(--accent-strong)]">
+          {index}
         </span>
         <div>
           <div className="flex gap-2 text-sm font-semibold leading-6">
-            <MessageSquareText className="mt-1 size-4 shrink-0 text-[var(--cobalt)]" />
+            <MessageSquareText className="mt-1 size-4 shrink-0 text-[var(--accent-strong)]" />
             <span>{preview.prompt}</span>
           </div>
 
@@ -203,7 +203,7 @@ function PreviewCard({
         </div>
       </div>
 
-      <div className="mt-4 sm:ml-12">
+      <div className="mt-4 sm:ml-11">
         <ResponseBlock
           label="Configured response"
           body={preview.configured_response}
@@ -225,7 +225,7 @@ function PreviewCard({
       )}
 
       {preview.warnings.length > 0 && (
-        <div className="mt-3 space-y-1 border border-[var(--warning-border)] bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
+        <div className="mt-3 flex flex-col gap-1 rounded-lg bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
           {preview.warnings.map((warning) => (
             <div key={warning} className="flex gap-2">
               <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
@@ -237,7 +237,7 @@ function PreviewCard({
 
       <div className="mt-4 grid gap-2">
         <Collapsible>
-          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between border-y px-3 py-2 text-left text-sm font-semibold hover:bg-[var(--workspace)] focus-visible:outline-2 focus-visible:outline-[var(--cobalt)]">
+          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30">
             Generic comparison
             <ChevronDown className="size-4" />
           </CollapsibleTrigger>
@@ -251,16 +251,16 @@ function PreviewCard({
         </Collapsible>
 
         <Collapsible>
-          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between border-y px-3 py-2 text-left text-sm font-semibold hover:bg-[var(--workspace)] focus-visible:outline-2 focus-visible:outline-[var(--cobalt)]">
+          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30">
             Source audit
             <FileSearch className="size-4" />
           </CollapsibleTrigger>
           <CollapsibleContent className="pt-3">
-            <div className="border-t">
+            <div className="overflow-hidden rounded-lg border">
               {preview.source_audit.map((source) => (
                 <div
                   key={`${preview.id}-${source.url}`}
-                  className="border-b bg-[var(--workspace)] p-3 text-xs"
+                  className="border-b bg-[var(--shell)] p-3 text-xs last:border-b-0"
                 >
                   <div className="font-medium">{source.source_title}</div>
                   <div className="mt-1 break-words text-muted-foreground">
@@ -280,16 +280,16 @@ function PreviewCard({
         </Collapsible>
       </div>
 
-      <div className="mt-4 grid gap-3 border-t bg-[var(--workspace)] p-3">
-        <label htmlFor={`decision-reason-${preview.id}`} className="dossier-label">
-          Decision reason <span className="normal-case tracking-normal">(optional)</span>
+      <div className="mt-4 grid gap-3 rounded-lg bg-[var(--shell)] p-3">
+        <label htmlFor={`decision-reason-${preview.id}`} className="text-xs font-medium text-muted-foreground">
+          Decision reason (optional)
         </label>
         <input
           id={`decision-reason-${preview.id}`}
           value={reason}
           onChange={(event) => onReasonChange(event.target.value)}
           placeholder="Optional decision reason"
-          className="h-10 rounded-md border bg-white px-3 text-sm outline-none focus-visible:border-[var(--cobalt)] focus-visible:ring-2 focus-visible:ring-ring/25"
+          className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
         />
         <div className="flex flex-wrap gap-2">
           <Button
@@ -338,11 +338,11 @@ function ResponseBlock({
     <div
       className={
         tone === "configured"
-          ? "border-l-2 border-[var(--cobalt)] bg-[var(--cobalt-soft)] p-4"
-          : "border-l-2 border-[var(--rule-strong)] bg-[var(--workspace)] p-4"
+          ? "rounded-lg bg-[var(--accent-soft)] p-4"
+          : "rounded-lg bg-[var(--shell)] p-4"
       }
     >
-      <div className="dossier-label mb-1">
+      <div className="mb-1 text-xs font-medium text-muted-foreground">
         {label}
       </div>
       <p className="whitespace-pre-line text-sm leading-6">{body}</p>
@@ -375,7 +375,7 @@ function labelTone(label: SourceLabel): string {
     return "border-[var(--success-border)] bg-[var(--success-soft)] text-[var(--success)]"
   }
   if (label === "system-suggested-trusted") {
-    return "border-[#b9cdfb] bg-[var(--cobalt-soft)] text-[var(--cobalt)]"
+    return "border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent-strong)]"
   }
   if (label === "professor-approved-external") {
     return "border-[var(--success-border)] bg-[var(--success-soft)] text-[var(--success)]"

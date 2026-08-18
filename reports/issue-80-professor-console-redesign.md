@@ -13,81 +13,91 @@ human-usability result.**
 
 ## Decision question
 
-Can the existing professor workflow be reorganized so release state, the next
-decision, supporting evidence, and professor authority are easier to follow
-without changing the onboarding API, introducing unsupported features, or
-weakening any release gate?
+Can the professor workflow feel like a coherent LLM product while keeping source
+permissions, policy state, preview evidence, release blockers, and professor
+authority explicit and preserving the existing onboarding API?
 
-## Compared directions
+## Direction decision
 
-- **Baseline:** neutral card-and-tab console at the technical-freeze revision.
-- **Candidate A:** evidence-led academic decision sheet.
-- **Candidate B:** dense proof desk; rejected because it suggested unsupported
-  evidence-library and export functions.
-- **Candidate C:** release workbench; useful two-pane focus, but too visually
-  heavy as a complete direction.
-- **Selected candidate:** A+C, named **The Course Release Dossier**—an
-  evidence-led dossier with a focused workbench and restrained status-only
-  color.
+The first implementation, **The Course Release Dossier**, was rejected after
+rendered review because it looked like a research artifact rather than a product.
+That rejection is retained as part of the design history.
+
+Three LLM-workspace directions were then compared. The selected direction was
+**Option B: Conversation + tool**. Its defining topology is a quiet setup-stage
+sidebar, a natural interview workspace, a structured review tool at right, and a
+compact blocker strip. The composition draws on familiar LLM-product patterns
+without copying competitor branding or carrying invented mock capabilities into
+the implementation.
 
 ## Implemented result
 
-- Replaced duplicate setup-map and tab navigation with one keyboard-accessible
-  five-stage route: Sources, Interview, Policy, Preview, and Approval.
-- Added one active workbench and one adjacent review-context rail containing
-  release readiness, blockers, evidence snapshots, and workflow trace.
-- Reworked interview messages, source decisions, policy fields, preview cases,
-  revisions, and approval items as ruled review records rather than nested
-  cards.
-- Preserved all existing controller actions and API contracts. No model,
-  integration, course data, analytics, export, or release capability was added.
-- Corrected local readiness derivation so pending/excluded source metadata is
-  not counted as approved, and unresolved policy, preview, and checklist data
-  independently marks its stage blocked.
-- Applied the independent Impeccable finish review: desktop route/context rails
-  now remain sticky, the duplicate readiness block was removed from the evidence
-  rail, and mobile headers, route rows, chat height, and release labels were
-  compacted without hiding the release state or next decision.
+- Rebuilt the page as a compact application shell with Sources, Interview,
+  Policy, Preview, and Approval navigation.
+- Kept the real interview in the central conversation surface and mapped each
+  existing review stage to the structured tool area.
+- Preserved all controller operations and API contracts for source metadata,
+  policy editing, preview decisions, revision proposals, and approval checks.
+- Replaced report-like records and repeated cards with product-density rows,
+  status controls, progressive disclosure, and one elevated composer.
+- Kept structured policy JSON available through an explicit advanced editor
+  while presenting a truthful human-readable summary by default.
+- Added an Activity surface for blockers, recent evidence, and setup history.
+- Kept the release strip and top status tied to the actual derived readiness;
+  no invented model, upload-processing, integration, analytics, collaboration,
+  or release capability was added.
+- Applied the independent Impeccable finish review: release chrome remains fixed
+  to the viewport, invalid structured JSON cannot be saved, failed create/send
+  operations retain input, blocker summaries no longer imply incorrect links,
+  message accessibility names preserve their content, source privacy copy is
+  explicit, and coarse-pointer controls meet the 44-pixel target floor.
 
 ## Engineering evaluation
 
-The flow under test was: app loads → professor completes the five interview
-prompts → policy, preview, and approval surfaces render → route selection and
-release context update without runtime errors.
+The principal flow was: app loads → professor completes all five interview
+prompts → policy and evidence surfaces render → stage and Activity navigation
+update → the policy status and advanced editor remain usable.
 
 | Check | Result |
 | --- | --- |
-| Page identity and meaningful content | Pass: meaningful title, release ledger, five-stage route, active workbench, and review context |
-| Functional parity | Pass: all five existing stages and revision/approval actions remain wired to the existing controller |
-| State derivation regression tests | Pass: 18 frontend tests, including pending-source and unresolved-stage cases |
-| Repository regression suite | Pass: 299 Python tests, frontend tests, validators, lint, and production build via `npm run check` |
-| Impeccable deterministic audit | Pass: zero findings after the final changed-target scan |
-| Rendered desktop check | Pass at 1280×720; no page-level horizontal overflow, framework overlay, console error, or console warning |
-| Interaction check | Pass: route selection works; five suggested answers generate the policy and update blocked/complete stage states |
-| Responsive implementation review | Pass at code level after finish review: the route becomes horizontally scrollable, the three-region workbench stacks, narrow headers and chat become content-driven, and release labels remain explicit below the `xl` breakpoint |
+| Page identity and meaningful content | Pass: product identity, five-stage navigation, interview, structured tool, and release state render |
+| Functional parity | Pass: all existing stages and controller actions remain wired |
+| Interview flow | Pass: five answers generate the real draft policy and update stage states |
+| Policy controls | Pass: field value, status, save, safe-default text, and structured JSON editor remain available |
+| Browser runtime | Pass: no console warnings or errors during the checked flows |
+| Desktop layout | Pass at 1280×720 with no page-level horizontal overflow |
+| Tablet layout | Pass at 768×1024 with no page-level horizontal overflow |
+| Mobile layout | Pass at 390×844; stage switching, source tool, release bar, and named controls remain usable with no page-level horizontal overflow |
+| Accessibility smoke checks | Pass: no unnamed buttons, inputs, textareas, selects, or links in the inspected states; status is expressed in text as well as color |
 | Human usability | Not run |
 | Professor preference/approval | Pending |
 
-The in-app browser could render the desktop app but did not expose viewport
-emulation in this run. Therefore the candidate does not claim new measured
-mobile usability; a short real-device or narrow-window visual check remains a
-review task before closing #80.
+The final `npm run check` passed all documentation and evaluation validators,
+299 Python tests, 18 frontend tests, frontend lint, and the production build.
+The command used preflight-only evaluation paths and made no external model call.
+Detailed visual comparison and iteration evidence is in `design-qa.md`.
 
 ## Evidence and limitations
 
 Local, ignored visual artifacts are stored under
-`reports/generated/ui-redesign-issue-80/`, including three explored directions
-and the final desktop policy-state screenshot. The candidate uses only
-synthetic demonstration data.
+`reports/generated/ui-redesign-issue-80/`. They include the selected Option B
+reference, normalized comparison images, desktop implementation states, and a
+mobile check. The candidate uses only synthetic demonstration data.
 
-This result supports engineering correctness and a review-ready visual
-candidate only. It does not establish faster task completion, lower error rate,
+The approved concept contains invented example copy and controls such as a named
+course, timestamps, attachments, bulk review, and adding arbitrary policy items.
+Those composition-only elements were intentionally not implemented because the
+current product does not support them. The implementation uses actual interview,
+policy, blocker, preview, and approval data instead.
+
+This result supports engineering correctness and a review-ready visual candidate
+only. It does not establish faster task completion, lower error rate,
 accessibility conformance, human usability, professor satisfaction, pedagogy,
 learning outcomes, or production readiness.
 
 ## Next decision
 
-Ask the user/professor to review the candidate at desktop and a narrow mobile
-width. Mark #80 **Keep** only if the five-stage route, information density, and
-evidence rail are understandable without explanation; otherwise record the
-specific friction and refine the candidate.
+Ask the user/professor to review the live candidate. Mark #80 **Keep** only if
+the conversation-plus-tool model, policy density, and release status are
+understandable without explanation; otherwise record the specific friction and
+refine the candidate.

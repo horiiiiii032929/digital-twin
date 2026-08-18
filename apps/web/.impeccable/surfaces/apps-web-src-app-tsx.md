@@ -2,15 +2,15 @@
 version: 1
 slug: "apps-web-src-app-tsx"
 primary_target: "apps/web/src/App.tsx"
-related_targets: ["apps/web/src/components/onboarding/console/professor-review-console.tsx","apps/web/src/components/onboarding/console/readiness-summary.tsx","apps/web/src/components/onboarding/onboarding-chat.tsx","apps/web/src/components/onboarding/source-inventory.tsx","apps/web/src/components/onboarding/policy-review.tsx","apps/web/src/components/onboarding/preview-comparison.tsx","apps/web/src/components/onboarding/approval-checklist.tsx","apps/web/src/components/onboarding/workflow-trace.tsx"]
+related_targets: ["apps/web/src/components/onboarding/console/professor-review-console.tsx","apps/web/src/components/onboarding/console/readiness-summary.tsx","apps/web/src/components/onboarding/console/review-context.tsx","apps/web/src/components/onboarding/onboarding-chat.tsx","apps/web/src/components/onboarding/source-inventory.tsx","apps/web/src/components/onboarding/policy-review.tsx","apps/web/src/components/onboarding/preview-comparison.tsx","apps/web/src/components/onboarding/approval-checklist.tsx"]
 ---
 
-THESIS: One professor decision surface connects every action to evidence and release impact; it refuses a generic AI chat dashboard and repetitive card grid.
+THESIS: A familiar LLM workspace lets a professor configure a grounded tutor through conversation and inspectable tools; it refuses a generic admin dashboard and the prior evaluation dossier.
 
-OWN-WORLD: True white and cool paper, navy ink, cobalt active state, status-only amber/red/green, ruled dossier dividers, precise 4-8px geometry, and compact Geist typography.
+OWN-WORLD: Soft neutral application shell, white conversation canvas, near-black primary actions, restrained iris selection, sentence-case labels, 8-16px product rounding, and one subtly elevated composer.
 
-STORY: The professor sees release state and the next blocker, selects one of five numbered stages, works the active task, cross-checks adjacent evidence, and explicitly approves.
+STORY: The professor sees setup progress, answers the teaching interview, opens source/policy/preview tools beside the conversation, checks evidence, and retains final approval authority.
 
-FIRST VIEWPORT: A compact release ledger sits above a three-region workbench: numbered route at left, active work in the center, evidence and trace at right. Mobile uses a horizontal stage route with context after the task.
+FIRST VIEWPORT: Compact app bar above a three-part workspace: quiet stage sidebar, centered conversation, and an active structured tool at right. Release blockers form a concise status, not a metric ledger.
 
-FORM: Evidence-led dossier plus focused two-pane workbench, selected from the Course Release Dossier exploration (seed e646b687). Preserve only Sources, Interview, Policy, Preview, and Approval and never invent course data, people, metrics, integrations, or actions.
+FORM: Approved conversation-plus-tool composition B, grounded AI workspace, seed e646b687. Reference `reports/generated/ui-redesign-issue-80/llm-workspace-option-b.png`; preserve its topology and density without copying invented sample data, actions, or competitor branding.

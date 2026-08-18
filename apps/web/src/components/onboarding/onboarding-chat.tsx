@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react"
-import { Bot, Loader2, RotateCcw, SendHorizontal, UserRound } from "lucide-react"
+import { useState } from "react"
+import { Loader2, RotateCcw, SendHorizontal, Sparkles, UserRound } from "lucide-react"
 
 import {
   ChatContainerContent,
@@ -21,7 +21,7 @@ type OnboardingChatProps = {
   currentStep: string
   isLoading: boolean
   isSubmitting: boolean
-  onSendMessage: (content: string) => Promise<void>
+  onSendMessage: (content: string) => Promise<boolean>
   onRestart: () => Promise<void>
 }
 
@@ -57,10 +57,7 @@ export function OnboardingChat({
   onRestart,
 }: OnboardingChatProps) {
   const [draft, setDraft] = useState("")
-  const suggestions = useMemo(
-    () => SUGGESTIONS_BY_STEP[currentStep] ?? [],
-    [currentStep],
-  )
+  const suggestions = SUGGESTIONS_BY_STEP[currentStep] ?? []
 
   const submit = async () => {
     const content = draft.trim()
@@ -69,8 +66,9 @@ export function OnboardingChat({
       return
     }
 
-    setDraft("")
-    await onSendMessage(content)
+    if (await onSendMessage(content)) {
+      setDraft("")
+    }
   }
 
   const submitSuggestion = async (content: string) => {
@@ -78,150 +76,126 @@ export function OnboardingChat({
       return
     }
 
-    setDraft("")
     await onSendMessage(content)
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col md:min-h-[620px]">
-      <ChatContainerRoot className="min-h-0 flex-1 px-4 sm:min-h-[320px] sm:px-6 md:min-h-[420px]">
-        <ChatContainerContent className="gap-0 py-5">
+    <div className="flex h-full min-h-[560px] flex-col">
+      <ChatContainerRoot className="min-h-0 flex-1">
+        <ChatContainerContent className="mx-auto w-full max-w-[760px] gap-7 px-5 py-7 sm:px-7 lg:py-8">
           {isLoading ? (
-            <div className="flex items-center gap-2 border-y py-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 py-4 text-sm text-muted-foreground">
               <Loader2 className="size-4 animate-spin" />
-              Starting onboarding session
+              Starting setup session
             </div>
           ) : (
             messages.map((message, index) => (
-              <InterviewEntry
-                key={`${message.role}-${index}`}
-                message={message}
-                index={index + 1}
-              />
+              <InterviewEntry key={`${message.role}-${index}`} message={message} />
             ))
           )}
           <ChatContainerScrollAnchor />
         </ChatContainerContent>
       </ChatContainerRoot>
 
-      <div className="border-t bg-[var(--workspace)] p-4 sm:px-6 sm:py-5">
-        {suggestions.length > 0 && (
-          <div className="mb-4">
-            <div className="dossier-label mb-2">Suggested response patterns</div>
-            <div className="grid gap-2 lg:grid-cols-2">
+      <div className="border-t bg-white px-4 pb-5 pt-3 sm:px-6">
+        <div className="mx-auto w-full max-w-[720px]">
+          {suggestions.length > 0 ? (
+            <div className="mb-3">
+              <div className="mb-2 text-xs font-medium text-muted-foreground">Suggestions</div>
+              <div className="grid gap-2 sm:grid-cols-2">
               {suggestions.map((suggestion) => (
                 <PromptSuggestion
                   key={suggestion}
                   type="button"
                   size="sm"
-                  className="h-auto max-w-full justify-start whitespace-normal rounded-md bg-white px-3 py-2.5 text-left leading-5"
+                    className="h-auto min-w-0 justify-start whitespace-normal rounded-lg border-border bg-white px-3 py-2 text-left text-xs leading-5 hover:bg-[var(--subtle)]"
                   disabled={isSubmitting || isLoading}
                   onClick={() => void submitSuggestion(suggestion)}
                 >
                   {suggestion}
                 </PromptSuggestion>
               ))}
+              </div>
             </div>
-          </div>
-        )}
+          ) : null}
 
-        <label htmlFor="instructor-answer" className="dossier-label mb-2 block">
-          Professor response
-        </label>
-        <PromptInput
-          value={draft}
-          onValueChange={setDraft}
-          onSubmit={() => void submit()}
-          disabled={isSubmitting || isLoading}
-          isLoading={isSubmitting}
-          className="rounded-md border-[var(--rule-strong)] bg-white"
-        >
-          <PromptInputTextarea
-            id="instructor-answer"
-            placeholder="Answer the current onboarding question..."
-            aria-label="Onboarding answer"
-          />
-          <PromptInputActions className="justify-between">
-            <PromptInputAction tooltip="Restart session">
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                aria-label="Restart session"
-                onClick={() => void onRestart()}
-                disabled={isSubmitting || isLoading}
-              >
-                <RotateCcw data-icon="inline-start" />
-              </Button>
-            </PromptInputAction>
-            <PromptInputAction tooltip="Send answer">
-              <Button
-                type="button"
-                size="icon"
-                aria-label="Send answer"
-                onClick={() => void submit()}
-                disabled={!draft.trim() || isSubmitting || isLoading}
-              >
-                {isSubmitting ? (
-                  <Loader2 data-icon="inline-start" className="animate-spin" />
-                ) : (
-                  <SendHorizontal data-icon="inline-start" />
-                )}
-              </Button>
-            </PromptInputAction>
-          </PromptInputActions>
-        </PromptInput>
+          <label htmlFor="instructor-answer" className="sr-only">
+            Reply to the setup assistant
+          </label>
+          <PromptInput
+            value={draft}
+            onValueChange={setDraft}
+            onSubmit={() => void submit()}
+            disabled={isSubmitting || isLoading}
+            isLoading={isSubmitting}
+            className="rounded-2xl border-border bg-white p-2 shadow-[var(--shadow-composer)] focus-within:border-[var(--accent-border)] focus-within:ring-2 focus-within:ring-[var(--accent-soft)]"
+          >
+            <PromptInputTextarea
+              id="instructor-answer"
+              placeholder="Reply to the setup assistant"
+              aria-label="Setup assistant reply"
+              className="min-h-12 px-2 py-2 text-sm"
+            />
+            <PromptInputActions className="justify-between px-0.5 pb-0.5">
+              <PromptInputAction tooltip="Restart session">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label="Restart session"
+                  onClick={() => void onRestart()}
+                  disabled={isSubmitting || isLoading}
+                >
+                  <RotateCcw data-icon="inline-start" />
+                </Button>
+              </PromptInputAction>
+              <PromptInputAction tooltip="Send answer">
+                <Button
+                  type="button"
+                  size="icon-lg"
+                  aria-label="Send answer"
+                  onClick={() => void submit()}
+                  disabled={!draft.trim() || isSubmitting || isLoading}
+                >
+                  {isSubmitting ? (
+                    <Loader2 data-icon="inline-start" className="animate-spin" />
+                  ) : (
+                    <SendHorizontal data-icon="inline-start" />
+                  )}
+                </Button>
+              </PromptInputAction>
+            </PromptInputActions>
+          </PromptInput>
+        </div>
       </div>
     </div>
   )
 }
 
-function InterviewEntry({
-  message,
-  index,
-}: {
-  message: ChatMessage
-  index: number
-}) {
+function InterviewEntry({ message }: { message: ChatMessage }) {
   const isInstructor = message.role === "instructor"
   const isSystem = message.role === "system"
 
   return (
-    <article
-      className={
-        isInstructor
-          ? "grid grid-cols-[40px_minmax(0,1fr)] gap-3 border-x border-t border-[#b9cdfb] bg-[var(--cobalt-soft)] px-4 py-4 last:border-b"
-          : "grid grid-cols-[40px_minmax(0,1fr)] gap-3 border-t px-4 py-4 last:border-b"
-      }
-    >
+    <article className="grid grid-cols-[36px_minmax(0,1fr)] gap-3">
       <div
-        className={
-          isInstructor
-            ? "flex size-8 items-center justify-center border border-[#b9cdfb] bg-white text-[var(--cobalt)]"
-            : "flex size-8 items-center justify-center bg-[var(--ink)] text-white"
-        }
+        className={isInstructor
+          ? "flex size-8 items-center justify-center rounded-full bg-[var(--subtle)] text-muted-foreground"
+          : "flex size-8 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)]"}
         aria-hidden="true"
       >
         {isInstructor ? (
           <UserRound className="size-4" />
         ) : (
-          <Bot className="size-4" />
+          <Sparkles className="size-4" />
         )}
       </div>
       <div className="min-w-0">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="dossier-label">
-            {isInstructor ? "Professor decision" : isSystem ? "System record" : "Digital Twin prompt"}
-          </span>
-          <span className="text-[11px] font-medium tabular-nums text-muted-foreground">
-            INT-{String(index).padStart(2, "0")}
-          </span>
+        <div className="text-sm font-semibold">
+          {isInstructor ? "Professor" : isSystem ? "System" : "Setup assistant"}
         </div>
-        <p
-          className="mt-2 whitespace-pre-wrap text-sm leading-6 text-[var(--ink)]"
-        aria-label={isInstructor ? "Instructor message" : "Assistant message"}
-      >
-        {message.content}
+        <p className="mt-1 max-w-[70ch] whitespace-pre-wrap text-sm leading-6 text-[var(--ink)]">
+          {message.content}
         </p>
       </div>
     </article>

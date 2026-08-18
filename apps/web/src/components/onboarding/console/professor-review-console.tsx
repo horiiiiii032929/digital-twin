@@ -1,17 +1,15 @@
 import { useState } from "react"
 import {
+  Activity,
   AlertCircle,
-  ArrowRight,
-  BookOpenCheck,
-  FlaskConical,
+  ChevronDown,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Sparkles,
 } from "lucide-react"
 
 import { ApprovalChecklist } from "@/components/onboarding/approval-checklist"
-import {
-  ReleaseRoute,
-  ReleaseStateIcon,
-  WorkbenchHeader,
-} from "@/components/onboarding/console/readiness-summary"
+import { ReleaseRoute } from "@/components/onboarding/console/readiness-summary"
 import { ReviewContext } from "@/components/onboarding/console/review-context"
 import { RevisionProposalPanel } from "@/components/onboarding/console/revision-proposal-panel"
 import { OnboardingChat } from "@/components/onboarding/onboarding-chat"
@@ -19,7 +17,6 @@ import { PolicyReview } from "@/components/onboarding/policy-review"
 import { PreviewComparison } from "@/components/onboarding/preview-comparison"
 import { SourceInventory } from "@/components/onboarding/source-inventory"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import type { OnboardingController } from "@/hooks/use-onboarding-session"
 import type { ReviewStageId } from "@/lib/onboarding/readiness"
@@ -31,40 +28,12 @@ import {
 } from "@/lib/onboarding/readiness"
 import { cn } from "@/lib/utils"
 
-const STAGE_COPY: Record<
-  ReviewStageId,
-  { index: string; title: string; detail: string }
-> = {
-  sources: {
-    index: "01",
-    title: "Source governance",
-    detail:
-      "Register course-material metadata, classify provenance, and make an explicit permission decision for each source.",
-  },
-  interview: {
-    index: "02",
-    title: "Instructor interview",
-    detail:
-      "Record source rules, teaching approach, integrity boundaries, misconception handling, and approval criteria.",
-  },
-  policy: {
-    index: "03",
-    title: "Tutor policy",
-    detail:
-      "Inspect the generated policy field by field and mark every decision as resolved, review needed, or release blocking.",
-  },
-  preview: {
-    index: "04",
-    title: "Preview evidence",
-    detail:
-      "Compare configured behavior with the generic control, inspect source provenance, and record a professor decision.",
-  },
-  approval: {
-    index: "05",
-    title: "Professor approval",
-    detail:
-      "Confirm the final checklist only after source, policy, preview, and revision gates are clear.",
-  },
+const TOOL_TITLES: Record<ReviewStageId, string> = {
+  sources: "Sources",
+  interview: "Tutor policy",
+  policy: "Tutor policy",
+  preview: "Preview",
+  approval: "Approval",
 }
 
 export function ProfessorReviewConsole({
@@ -96,269 +65,377 @@ export function ProfessorReviewConsole({
     discardRevision,
   } = controller
   const [activeStage, setActiveStage] = useState<ReviewStageId>("interview")
+  const [activityOpen, setActivityOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const releaseReadiness = getReleaseReadiness(session)
   const stepStates = getStepStates(session)
   const nextAction = getNextAction(session, releaseReadiness.blockers)
-  const activeCopy = STAGE_COPY[activeStage]
+
+  const openStage = (stage: ReviewStageId) => {
+    setActiveStage(stage)
+    setActivityOpen(false)
+  }
 
   return (
-    <main className="min-h-screen bg-[var(--workspace)] text-foreground">
-      <div className="mx-auto min-h-screen max-w-[1800px] px-0 py-0 2xl:px-5 2xl:py-5">
-        <div className="min-h-screen border-x bg-white 2xl:min-h-[calc(100vh-2.5rem)] 2xl:border">
-          <header className="bg-white">
-            <div className="flex flex-col gap-4 px-4 py-4 sm:gap-5 sm:px-7 sm:py-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--ink)]">
-                    <span className="flex size-7 items-center justify-center bg-[var(--ink)] text-white">
-                      <BookOpenCheck className="size-4" aria-hidden="true" />
-                    </span>
-                    Course Digital Twin
-                  </span>
-                  <Badge variant="outline" className="status-badge">
-                    <FlaskConical className="size-3" aria-hidden="true" />
-                    Experimental prototype
-                  </Badge>
-                </div>
-                <h1 className="mt-3 text-xl font-semibold tracking-[-0.025em] text-[var(--ink)] sm:mt-4 sm:text-2xl">
-                  Professor Review Console
-                </h1>
-                <p className="mt-1.5 hidden max-w-[72ch] text-sm leading-6 text-muted-foreground sm:block">
-                  Configure and verify a draft course tutor through explicit source,
-                  policy, evidence, and approval decisions.
-                </p>
-              </div>
+    <main className="flex h-dvh flex-col overflow-hidden bg-white text-foreground">
+      <AppBar
+        collapsed={sidebarCollapsed}
+        status={formatReleaseStatus(releaseReadiness.status)}
+        blockerCount={releaseReadiness.blockers.length}
+        activityOpen={activityOpen}
+        onToggleActivity={() => setActivityOpen((open) => !open)}
+      />
 
-              <dl className="grid min-w-0 grid-cols-3 border-l border-t lg:w-[480px]">
-                <LedgerMetric
-                  label="Release state"
-                  mobileLabel="Status"
-                  value={formatReleaseStatus(releaseReadiness.status)}
-                  tone={
-                    releaseReadiness.status === "approved"
-                      ? "success"
-                      : releaseReadiness.status === "blocked"
-                        ? "danger"
-                        : "warning"
-                  }
-                />
-                <LedgerMetric
-                  label="Blockers"
-                  mobileLabel="Blockers"
-                  value={releaseReadiness.blockers.length}
-                  tone={releaseReadiness.blockers.length === 0 ? "success" : "warning"}
-                />
-                <LedgerMetric
-                  label="Previews"
-                  mobileLabel="Previews"
-                  value={`${releaseReadiness.acceptedPreviews}/${releaseReadiness.previewCount}`}
-                  tone={
-                    releaseReadiness.previewCount > 0 &&
-                    releaseReadiness.acceptedPreviews === releaseReadiness.previewCount
-                      ? "success"
-                      : "neutral"
-                  }
-                />
-              </dl>
-            </div>
-
-            <section
-              aria-labelledby="next-decision-title"
-              className={cn(
-                "grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-t px-4 py-3 sm:gap-4 sm:px-7 sm:py-4 lg:items-center",
-                releaseReadiness.blockers.length === 0
-                  ? "bg-[var(--success-soft)]"
-                  : "bg-[var(--warning-soft)]",
-              )}
+      <div
+        className={cn(
+          "grid min-h-0 flex-1 lg:h-[calc(100dvh-57px)] lg:overflow-hidden",
+          sidebarCollapsed
+            ? "lg:grid-cols-[72px_minmax(0,1fr)]"
+            : "lg:grid-cols-[240px_minmax(0,1fr)]",
+        )}
+      >
+        <aside className="hidden min-h-0 flex-col border-r bg-[var(--shell)] lg:flex">
+          <ReleaseRoute
+            steps={stepStates}
+            selectedStage={activeStage}
+            collapsed={sidebarCollapsed}
+            onSelectStage={openStage}
+          />
+          <div className="mt-auto border-t p-2">
+            <Button
+              type="button"
+              variant="ghost"
+              size={sidebarCollapsed ? "icon" : "sm"}
+              className={cn("text-muted-foreground", !sidebarCollapsed && "w-full justify-start")}
+              aria-label={sidebarCollapsed ? "Expand setup navigation" : "Collapse setup navigation"}
+              onClick={() => setSidebarCollapsed((collapsed) => !collapsed)}
             >
-              <div className="flex min-w-0 gap-3">
-                <span
-                  className={cn(
-                    "mt-0.5 flex size-8 shrink-0 items-center justify-center border",
-                    releaseReadiness.blockers.length === 0
-                      ? "border-[var(--success-border)] text-[var(--success)]"
-                      : "border-[var(--warning-border)] text-[var(--warning)]",
-                  )}
-                >
-                  <ReleaseStateIcon clear={releaseReadiness.blockers.length === 0} />
-                </span>
-                <div>
-                  <div className="dossier-label">Recommended decision</div>
-                  <h2 id="next-decision-title" className="mt-1 text-sm font-semibold">
-                    {nextAction.title}
-                  </h2>
-                  <p className="mt-0.5 hidden max-w-4xl text-sm leading-5 text-muted-foreground sm:block">
-                    {nextAction.detail}
-                  </p>
-                </div>
-              </div>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="justify-self-end border-[var(--rule-strong)] bg-white sm:h-9 sm:px-3.5 lg:justify-self-end"
-                onClick={() => setActiveStage(nextAction.stage)}
-              >
-                <span className="hidden sm:inline">
-                  Open {STAGE_COPY[nextAction.stage].title.toLowerCase()}
-                </span>
-                <span className="sm:hidden">Open</span>
-                <ArrowRight data-icon="inline-end" />
-              </Button>
-            </section>
-          </header>
+              {sidebarCollapsed ? (
+                <PanelLeftOpen data-icon="inline-start" />
+              ) : (
+                <PanelLeftClose data-icon="inline-start" />
+              )}
+              {sidebarCollapsed ? null : "Collapse"}
+            </Button>
+          </div>
+        </aside>
 
-          {error && (
-            <div className="border-t px-5 py-4 sm:px-7">
-              <Alert
-                variant="destructive"
-                className="border-[var(--destructive-border)] bg-[var(--destructive-soft)]"
-              >
-                <AlertCircle className="size-4" />
-                <AlertTitle>Onboarding request failed</AlertTitle>
+        <section className="flex min-h-0 min-w-0 flex-col bg-white">
+          <div className="border-b bg-[var(--shell)] lg:hidden">
+            <ReleaseRoute
+              steps={stepStates}
+              selectedStage={activeStage}
+              collapsed={false}
+              onSelectStage={openStage}
+            />
+          </div>
+
+          {error ? (
+            <div className="px-4 pt-4 sm:px-6">
+              <Alert variant="destructive">
+                <AlertCircle />
+                <AlertTitle>Setup request failed</AlertTitle>
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             </div>
-          )}
+          ) : null}
 
-          <div className="grid border-t xl:grid-cols-[244px_minmax(0,1fr)_332px]">
-            <aside className="min-w-0 border-b bg-white xl:sticky xl:top-0 xl:max-h-screen xl:self-start xl:overflow-y-auto xl:border-b-0 xl:border-r">
-              <ReleaseRoute
-                steps={stepStates}
+          <div className="grid min-h-0 flex-1 xl:grid-cols-[minmax(480px,1.03fr)_minmax(420px,0.97fr)]">
+            <section
+              aria-label="Setup conversation"
+              className={cn(
+                "min-h-0 min-w-0 bg-white xl:block xl:border-r",
+                activeStage !== "interview" || activityOpen ? "hidden" : "block",
+              )}
+            >
+              <OnboardingChat
+                messages={session?.messages ?? []}
                 currentStep={session?.current_step ?? "starting"}
-                selectedStage={activeStage}
-                onSelectStage={setActiveStage}
+                isLoading={isStarting}
+                isSubmitting={isSubmitting}
+                onSendMessage={sendMessage}
+                onRestart={restart}
               />
-            </aside>
-
-            <section className="min-w-0 bg-white">
-              <WorkbenchHeader
-                index={activeCopy.index}
-                title={activeCopy.title}
-                detail={activeCopy.detail}
-                badge={stageBadge(activeStage, session)}
-              />
-              <div className={cn(activeStage === "interview" ? "" : "p-5 sm:p-6")}>
-                {activeStage === "interview" && (
-                  <OnboardingChat
-                    messages={session?.messages ?? []}
-                    currentStep={session?.current_step ?? "starting"}
-                    isLoading={isStarting}
-                    isSubmitting={isSubmitting}
-                    onSendMessage={sendMessage}
-                    onRestart={restart}
-                  />
-                )}
-
-                {activeStage === "sources" && (
-                  <SourceInventory
-                    items={session?.source_inventory ?? []}
-                    blockers={session?.release_blockers.source_inventory ?? []}
-                    isAdding={isAddingSource}
-                    updatingSourceId={updatingSourceId}
-                    onAddSource={addSource}
-                    onUpdateSource={editSource}
-                  />
-                )}
-
-                {activeStage === "policy" && (
-                  <PolicyReview
-                    policy={session?.policy ?? null}
-                    updatingFieldId={updatingFieldId}
-                    onUpdateField={editPolicyField}
-                  />
-                )}
-
-                {activeStage === "preview" && (
-                  <div className="grid gap-5">
-                    {session?.revision_proposal && (
-                      <RevisionProposalPanel
-                        session={session}
-                        isResolvingRevision={isResolvingRevision}
-                        onConfirm={confirmRevision}
-                        onDiscard={discardRevision}
-                      />
-                    )}
-                    <PreviewComparison
-                      previewCases={session?.preview_cases ?? []}
-                      updatingPreviewId={updatingPreviewId}
-                      isAddingCustomPreview={isAddingCustomPreview}
-                      onPreviewDecision={decidePreview}
-                      onAddCustomPreview={addCustomPreview}
-                    />
-                  </div>
-                )}
-
-                {activeStage === "approval" && (
-                  <ApprovalChecklist
-                    items={session?.approval_checklist ?? []}
-                    releaseStatus={session?.policy?.release_status ?? "draft"}
-                    updatingItemId={updatingApprovalItemId}
-                    onUpdateItem={updateApprovalItem}
-                  />
-                )}
-              </div>
             </section>
 
-            <div className="min-w-0 border-t xl:sticky xl:top-0 xl:max-h-screen xl:self-start xl:overflow-y-auto xl:border-l xl:border-t-0">
-              <ReviewContext session={session} readiness={releaseReadiness} />
-            </div>
+            <section
+              aria-label={activityOpen ? "Review activity" : TOOL_TITLES[activeStage]}
+              className={cn(
+                "min-h-0 min-w-0 overflow-y-auto bg-white xl:block",
+                activeStage === "interview" && !activityOpen ? "hidden" : "block",
+              )}
+            >
+              {activityOpen ? (
+                <ReviewContext session={session} readiness={releaseReadiness} />
+              ) : (
+                <StageTool
+                  stage={activeStage}
+                  controller={controller}
+                  onAddSource={addSource}
+                  onUpdateSource={editSource}
+                  onUpdateField={editPolicyField}
+                  onUpdateApproval={updateApprovalItem}
+                  onPreviewDecision={decidePreview}
+                  onAddCustomPreview={addCustomPreview}
+                  onConfirmRevision={confirmRevision}
+                  onDiscardRevision={discardRevision}
+                  isAddingSource={isAddingSource}
+                  updatingSourceId={updatingSourceId}
+                  updatingFieldId={updatingFieldId}
+                  updatingApprovalItemId={updatingApprovalItemId}
+                  updatingPreviewId={updatingPreviewId}
+                  isAddingCustomPreview={isAddingCustomPreview}
+                  isResolvingRevision={isResolvingRevision}
+                />
+              )}
+            </section>
           </div>
-        </div>
+
+          <ReleaseBar
+            blockers={releaseReadiness.blockers}
+            nextActionTitle={nextAction.title}
+            onOpenNext={() => openStage(nextAction.stage)}
+          />
+        </section>
       </div>
     </main>
   )
 }
 
-function LedgerMetric({
-  label,
-  mobileLabel,
-  value,
-  tone,
+function AppBar({
+  collapsed,
+  status,
+  blockerCount,
+  activityOpen,
+  onToggleActivity,
 }: {
-  label: string
-  mobileLabel: string
-  value: string | number
-  tone: "success" | "warning" | "danger" | "neutral"
+  collapsed: boolean
+  status: string
+  blockerCount: number
+  activityOpen: boolean
+  onToggleActivity: () => void
 }) {
+  const statusLabel =
+    blockerCount > 0
+      ? `${capitalize(status)} · ${blockerCount} blocker${blockerCount === 1 ? "" : "s"}`
+      : capitalize(status)
+
   return (
-    <div className="min-w-0 border-b border-r px-3 py-3 sm:px-4">
-      <dt className="dossier-label min-h-4 leading-4 sm:min-h-0">
-        <span className="sm:hidden">{mobileLabel}</span>
-        <span className="hidden sm:inline">{label}</span>
-      </dt>
-      <dd
+    <header className="flex min-h-14 items-stretch border-b bg-white">
+      <div
         className={cn(
-          "mt-1 truncate text-sm font-semibold tabular-nums",
-          tone === "success" && "text-[var(--success)]",
-          tone === "warning" && "text-[var(--warning)]",
-          tone === "danger" && "text-[var(--destructive)]",
-          tone === "neutral" && "text-[var(--ink)]",
+          "hidden shrink-0 items-center gap-2.5 border-r px-4 lg:flex",
+          collapsed ? "w-[72px] justify-center px-0" : "w-[240px]",
         )}
       >
-        {value}
-      </dd>
+        <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-strong)] text-white">
+          <Sparkles className="size-4" aria-hidden="true" />
+        </span>
+        {collapsed ? null : (
+          <span className="truncate text-sm font-semibold tracking-[-0.01em]">
+            Course Digital Twin
+          </span>
+        )}
+      </div>
+
+      <div className="flex min-w-0 flex-1 items-center justify-between gap-3 px-3 sm:px-5">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-strong)] text-white lg:hidden">
+            <Sparkles className="size-4" aria-hidden="true" />
+          </span>
+          <h1 className="truncate text-base font-semibold tracking-[-0.02em]">
+            Tutor setup
+          </h1>
+          <span
+            className={cn(
+              "hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium sm:inline-flex",
+              blockerCount > 0
+                ? "bg-[var(--warning-soft)] text-[var(--warning)]"
+                : "bg-[var(--success-soft)] text-[var(--success)]",
+            )}
+          >
+            <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
+            {statusLabel}
+          </span>
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          aria-label="Activity"
+          aria-pressed={activityOpen}
+          onClick={onToggleActivity}
+        >
+          <Activity data-icon="inline-start" />
+          <span className="hidden sm:inline">Activity</span>
+          <ChevronDown
+            data-icon="inline-end"
+            className={cn("transition-transform", activityOpen && "rotate-180")}
+          />
+        </Button>
+      </div>
+    </header>
+  )
+}
+
+function StageTool({
+  stage,
+  controller,
+  onAddSource,
+  onUpdateSource,
+  onUpdateField,
+  onUpdateApproval,
+  onPreviewDecision,
+  onAddCustomPreview,
+  onConfirmRevision,
+  onDiscardRevision,
+  isAddingSource,
+  updatingSourceId,
+  updatingFieldId,
+  updatingApprovalItemId,
+  updatingPreviewId,
+  isAddingCustomPreview,
+  isResolvingRevision,
+}: {
+  stage: ReviewStageId
+  controller: OnboardingController
+  onAddSource: OnboardingController["addSource"]
+  onUpdateSource: OnboardingController["editSource"]
+  onUpdateField: OnboardingController["editPolicyField"]
+  onUpdateApproval: OnboardingController["updateApprovalItem"]
+  onPreviewDecision: OnboardingController["decidePreview"]
+  onAddCustomPreview: OnboardingController["addCustomPreview"]
+  onConfirmRevision: OnboardingController["confirmRevision"]
+  onDiscardRevision: OnboardingController["discardRevision"]
+  isAddingSource: boolean
+  updatingSourceId: string | null
+  updatingFieldId: string | null
+  updatingApprovalItemId: string | null
+  updatingPreviewId: string | null
+  isAddingCustomPreview: boolean
+  isResolvingRevision: boolean
+}) {
+  const { session } = controller
+
+  if (stage === "sources") {
+    return (
+      <SourceInventory
+        items={session?.source_inventory ?? []}
+        blockers={session?.release_blockers.source_inventory ?? []}
+        isAdding={isAddingSource}
+        updatingSourceId={updatingSourceId}
+        onAddSource={onAddSource}
+        onUpdateSource={onUpdateSource}
+      />
+    )
+  }
+
+  if (stage === "preview") {
+    return (
+      <div className="flex flex-col gap-4 p-5 sm:p-6">
+        {session?.revision_proposal ? (
+          <RevisionProposalPanel
+            session={session}
+            isResolvingRevision={isResolvingRevision}
+            onConfirm={onConfirmRevision}
+            onDiscard={onDiscardRevision}
+          />
+        ) : null}
+        <PreviewComparison
+          previewCases={session?.preview_cases ?? []}
+          updatingPreviewId={updatingPreviewId}
+          isAddingCustomPreview={isAddingCustomPreview}
+          onPreviewDecision={onPreviewDecision}
+          onAddCustomPreview={onAddCustomPreview}
+        />
+      </div>
+    )
+  }
+
+  if (stage === "approval") {
+    return (
+      <ApprovalChecklist
+        items={session?.approval_checklist ?? []}
+        releaseStatus={session?.policy?.release_status ?? "draft"}
+        updatingItemId={updatingApprovalItemId}
+        onUpdateItem={onUpdateApproval}
+      />
+    )
+  }
+
+  return (
+    <PolicyReview
+      policy={session?.policy ?? null}
+      updatingFieldId={updatingFieldId}
+      onUpdateField={onUpdateField}
+    />
+  )
+}
+
+function ReleaseBar({
+  blockers,
+  nextActionTitle,
+  onOpenNext,
+}: {
+  blockers: string[]
+  nextActionTitle: string
+  onOpenNext: () => void
+}) {
+  if (blockers.length === 0) {
+    return (
+      <div className="flex min-h-12 items-center gap-2 border-t bg-[var(--success-soft)] px-4 text-sm text-[var(--success)] sm:px-6">
+        <span className="size-2 rounded-full bg-current" aria-hidden="true" />
+        All release conditions are clear.
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex min-h-12 items-center gap-3 overflow-x-auto border-t bg-[var(--shell)] px-3 text-sm sm:px-5">
+      <button
+        type="button"
+        onClick={onOpenNext}
+        className="flex shrink-0 items-center gap-2 rounded-lg px-2 py-1.5 font-semibold text-[var(--warning)] outline-none hover:bg-[var(--warning-soft)] focus-visible:ring-2 focus-visible:ring-ring/30"
+      >
+        <AlertCircle className="size-4" aria-hidden="true" />
+        {blockers.length} blocker{blockers.length === 1 ? "" : "s"}
+      </button>
+      <span className="hidden h-5 w-px shrink-0 bg-border sm:block" aria-hidden="true" />
+      <div className="hidden min-w-[240px] flex-1 items-center gap-4 overflow-hidden text-xs text-muted-foreground sm:flex">
+        {blockers.slice(0, 2).map((blocker) => (
+          <span
+            key={blocker}
+            className="flex min-w-0 items-center gap-2"
+          >
+            <span
+              className="size-1.5 shrink-0 rounded-full bg-[var(--destructive-ink)]"
+              aria-hidden="true"
+            />
+            <span className="truncate">{formatBlockerLabel(blocker)}</span>
+          </span>
+        ))}
+        {blockers.length > 2 ? (
+          <span className="shrink-0">+{blockers.length - 2} more</span>
+        ) : null}
+      </div>
+      <Button type="button" variant="link" size="sm" className="shrink-0" onClick={onOpenNext}>
+        <span className="sm:hidden">Review</span>
+        <span className="hidden sm:inline">{nextActionTitle}</span>
+      </Button>
     </div>
   )
 }
 
-function stageBadge(
-  stage: ReviewStageId,
-  session: OnboardingController["session"],
-): string {
-  if (stage === "sources") {
-    return `${session?.source_inventory.length ?? 0} registered`
+function formatBlockerLabel(blocker: string): string {
+  if (!blocker.includes("_") && !blocker.includes("-")) {
+    return blocker
   }
-  if (stage === "interview") {
-    return session?.policy ? "policy generated" : "collecting answers"
-  }
-  if (stage === "policy") {
-    return `policy v${session?.policy_version ?? 0}`
-  }
-  if (stage === "preview") {
-    return `${session?.preview_cases.length ?? 0} cases`
-  }
-  return session?.policy?.release_status === "approved"
-    ? "approved"
-    : "draft only"
+
+  const label = blocker.replaceAll("_", " ").replaceAll("-", " ")
+  return `${label.charAt(0).toUpperCase()}${label.slice(1)}`
+}
+
+function capitalize(value: string): string {
+  return `${value.charAt(0).toUpperCase()}${value.slice(1)}`
 }

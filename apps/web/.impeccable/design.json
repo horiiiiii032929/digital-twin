@@ -1,155 +1,152 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-08-18T00:00:00+08:00",
-  "title": "Design System: Course Digital Twin Professor Console",
+  "title": "Design System: Course Digital Twin Professor Workspace",
   "extensions": {
     "colorMeta": {
       "ink": {
         "role": "primary",
-        "displayName": "Dossier Ink",
-        "canonical": "#101828",
-        "tonalRamp": ["#0c111d", "#101828", "#1d2939", "#344054", "#475467", "#667085", "#98a2b3", "#eaecf0"]
+        "displayName": "Workspace Ink",
+        "canonical": "#202123",
+        "tonalRamp": ["#111113", "#202123", "#343438", "#505057", "#6b6b73", "#a0a0a8", "#d5d5da", "#f0f0f2"]
       },
-      "cobalt": {
+      "accent": {
         "role": "primary",
-        "displayName": "Decision Cobalt",
-        "canonical": "#1d4ed8",
-        "tonalRamp": ["#102a71", "#153eaa", "#1d4ed8", "#3267e3", "#6d8ff0", "#a7bcf7", "#d5e0fb", "#eef4ff"]
+        "displayName": "Context Iris",
+        "canonical": "#5b5bd6",
+        "tonalRamp": ["#2c2c72", "#4141a6", "#5b5bd6", "#7373e5", "#9b9bf0", "#c4c4f8", "#ddddfc", "#eeeeff"]
       },
-      "workspace": {
+      "shell": {
         "role": "neutral",
-        "displayName": "Cool Workspace",
-        "canonical": "#f5f7fb",
-        "tonalRamp": ["#101828", "#344054", "#667085", "#98a2b3", "#d0d5dd", "#e4e7ec", "#f2f4f7", "#f9fafb"]
+        "displayName": "Soft Shell",
+        "canonical": "#f7f7f8",
+        "tonalRamp": ["#202123", "#505057", "#6b6b73", "#a0a0a8", "#c7c7cd", "#e2e2e6", "#f0f0f2", "#f7f7f8"]
       },
       "success": {
         "role": "tertiary",
-        "displayName": "Verified Green",
-        "canonical": "#087a55",
-        "tonalRamp": ["#063b2c", "#075c41", "#087a55", "#15966a", "#47b88a", "#8dd9bb", "#c9f0df", "#ecfdf3"]
+        "displayName": "Ready Green",
+        "canonical": "#147a57",
+        "tonalRamp": ["#0a3d2d", "#105f45", "#147a57", "#2c9d76", "#61ba98", "#9bd9bf", "#cceddf", "#eaf8f2"]
       },
       "warning": {
         "role": "tertiary",
         "displayName": "Review Amber",
-        "canonical": "#a15c08",
-        "tonalRamp": ["#4c2a05", "#754106", "#a15c08", "#c87912", "#e9a23b", "#f5c875", "#fbe3ad", "#fff7e6"]
+        "canonical": "#a85d00",
+        "tonalRamp": ["#4f2b00", "#794300", "#a85d00", "#ce7b16", "#eda747", "#f5ca83", "#fbe5bd", "#fff6e5"]
       },
       "destructive": {
         "role": "tertiary",
         "displayName": "Blocked Red",
-        "canonical": "#b42318",
-        "tonalRamp": ["#55160f", "#7a1c14", "#b42318", "#d83b2f", "#e86c62", "#f1a09a", "#f8d0cd", "#fff2f0"]
+        "canonical": "#c2413b",
+        "tonalRamp": ["#5b1d1a", "#8a2d29", "#c2413b", "#dd5c56", "#eb8883", "#f4b7b4", "#fad9d7", "#fff0ef"]
       }
     },
     "typographyMeta": {
       "headline": {
-        "displayName": "Headline",
-        "purpose": "Page title and active dossier heading."
+        "displayName": "Workspace Headline",
+        "purpose": "Current task or workspace title."
       },
       "title": {
-        "displayName": "Title",
-        "purpose": "Decision groups, review artifacts, and route labels."
+        "displayName": "Tool Title",
+        "purpose": "Structured tools and substantial records."
       },
       "body": {
-        "displayName": "Body",
-        "purpose": "Prompts, policy values, explanations, and evidence."
+        "displayName": "Conversation Body",
+        "purpose": "Interview content, descriptions, and review records."
       },
       "label": {
-        "displayName": "Ledger Label",
-        "purpose": "Short uppercase indices, references, and state captions."
+        "displayName": "Interface Label",
+        "purpose": "Navigation state and concise metadata in sentence case."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "composer",
+        "value": "0 8px 30px rgba(32, 33, 35, 0.08), 0 1px 3px rgba(32, 33, 35, 0.08)",
+        "purpose": "Conversation composer and temporary overlay panels only."
+      }
+    ],
     "motion": [
       {
         "name": "state-fast",
-        "value": "140ms cubic-bezier(0.2, 0, 0, 1)",
-        "purpose": "Selection, hover, focus, and disclosure feedback."
+        "value": "150ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Navigation, hover, focus, and disclosure feedback."
       }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
       { "name": "lg", "value": "1024px" },
-      { "name": "2xl", "value": "1536px" }
+      { "name": "xl", "value": "1280px" }
     ]
   },
   "components": [
     {
-      "name": "Primary Decision Button",
+      "name": "Primary Action",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The decisive action within the current review region.",
-      "html": "<button class=\"ds-btn-primary\">Confirm decision</button>",
-      "css": ".ds-btn-primary { background:#101828; color:#fff; border:1px solid #101828; border-radius:6px; padding:8px 14px; font:600 14px/1.4 'Geist Variable',system-ui,sans-serif; transition:background 140ms cubic-bezier(.2,0,0,1); } .ds-btn-primary:hover { background:#1d2939; } .ds-btn-primary:focus-visible { outline:2px solid #1d4ed8; outline-offset:2px; } .ds-btn-primary:active { background:#0c111d; }"
+      "description": "One decisive professor action in the active tool.",
+      "html": "<button class=\"ds-btn-primary\">Continue</button>",
+      "css": ".ds-btn-primary { background:#202123; color:#fff; border:1px solid #202123; border-radius:8px; padding:8px 14px; font:600 14px/1.4 'Geist Variable',system-ui,sans-serif; transition:background 150ms cubic-bezier(.2,0,0,1); } .ds-btn-primary:hover { background:#343438; } .ds-btn-primary:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; }"
     },
     {
-      "name": "Secondary Button",
-      "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "A reversible or supporting review action.",
-      "html": "<button class=\"ds-btn-secondary\">Review evidence</button>",
-      "css": ".ds-btn-secondary { background:#fff; color:#101828; border:1px solid #d9e0ea; border-radius:6px; padding:8px 14px; font:600 14px/1.4 'Geist Variable',system-ui,sans-serif; transition:border-color 140ms cubic-bezier(.2,0,0,1),background 140ms cubic-bezier(.2,0,0,1); } .ds-btn-secondary:hover { background:#f5f7fb; border-color:#98a2b3; } .ds-btn-secondary:focus-visible { outline:2px solid #1d4ed8; outline-offset:2px; } .ds-btn-secondary:active { background:#eef4ff; }"
-    },
-    {
-      "name": "Review Field",
-      "kind": "input",
-      "description": "Persistent-label input for professor-authored decisions.",
-      "html": "<label class=\"ds-field\"><span>Decision reason</span><input value=\"Needs a clearer evidence reference\" /></label>",
-      "css": ".ds-field { display:grid; gap:6px; color:#344054; font:650 11px/1.35 'Geist Variable',system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; } .ds-field input { min-width:260px; background:#fff; color:#101828; border:1px solid #d9e0ea; border-radius:6px; padding:9px 11px; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; letter-spacing:0; text-transform:none; } .ds-field input:hover { border-color:#98a2b3; } .ds-field input:focus-visible { border-color:#1d4ed8; outline:2px solid #1d4ed8; outline-offset:1px; }"
-    },
-    {
-      "name": "Active Release Stage",
+      "name": "Workspace Navigation Item",
       "kind": "nav",
-      "refersTo": "stage-active",
-      "description": "The selected step in the professor-controlled release route.",
-      "html": "<button class=\"ds-stage\"><span class=\"ds-stage-index\">03</span><span><strong>Policy</strong><small>Review required</small></span></button>",
-      "css": ".ds-stage { width:260px; display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; text-align:left; background:#eef4ff; color:#1d4ed8; border:1px solid #b9cdfb; border-radius:4px; padding:10px 12px; font-family:'Geist Variable',system-ui,sans-serif; } .ds-stage:hover { background:#e0eaff; } .ds-stage:focus-visible { outline:2px solid #1d4ed8; outline-offset:2px; } .ds-stage-index { font-size:11px; font-weight:650; letter-spacing:.1em; } .ds-stage strong { display:block; color:#101828; font-size:14px; line-height:1.35; } .ds-stage small { display:block; margin-top:2px; color:#475467; font-size:12px; line-height:1.4; }"
+      "refersTo": "nav-active",
+      "description": "Selected stage in the quiet professor-workspace sidebar.",
+      "html": "<button class=\"ds-nav\"><span>Policy</span><small>Review needed</small></button>",
+      "css": ".ds-nav { width:220px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f0f0f2; color:#202123; border:0; border-radius:8px; padding:8px 10px; font:550 14px/1.4 'Geist Variable',system-ui,sans-serif; } .ds-nav:hover { background:#e8e8eb; } .ds-nav:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; } .ds-nav small { color:#6b6b73; font-size:12px; }"
+    },
+    {
+      "name": "Conversation Composer",
+      "kind": "input",
+      "description": "The elevated prompt area that anchors interview mode.",
+      "html": "<div class=\"ds-composer\"><textarea placeholder=\"Reply to the setup assistant\"></textarea><button aria-label=\"Send\">↑</button></div>",
+      "css": ".ds-composer { width:620px; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; background:#fff; border:1px solid #e2e2e6; border-radius:16px; padding:12px; box-shadow:0 8px 30px rgba(32,33,35,.08),0 1px 3px rgba(32,33,35,.08); } .ds-composer:focus-within { border-color:#b8b8ee; box-shadow:0 0 0 2px #eeeeff,0 8px 30px rgba(32,33,35,.08); } .ds-composer textarea { border:0; outline:0; resize:none; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-composer button { width:32px; height:32px; border:0; border-radius:8px; background:#202123; color:#fff; }"
     },
     {
       "name": "Status Chip",
       "kind": "chip",
       "refersTo": "status-chip",
-      "description": "A compact state label whose wording remains understandable without color.",
-      "html": "<span class=\"ds-status\"><span aria-hidden=\"true\"></span>Review needed</span>",
-      "css": ".ds-status { display:inline-flex; align-items:center; gap:6px; background:#fff7e6; color:#754106; border:1px solid #f5c875; border-radius:4px; padding:3px 7px; font:650 11px/1.35 'Geist Variable',system-ui,sans-serif; } .ds-status span { width:6px; height:6px; background:#a15c08; border-radius:50%; }"
+      "description": "A concise release or stage state with explicit wording.",
+      "html": "<span class=\"ds-status\"><span aria-hidden=\"true\"></span>Draft · 2 blockers</span>",
+      "css": ".ds-status { display:inline-flex; align-items:center; gap:6px; background:#fff6e5; color:#794300; border:1px solid #f5ca83; border-radius:999px; padding:3px 8px; font:550 12px/1.35 'Geist Variable',system-ui,sans-serif; } .ds-status span { width:6px; height:6px; background:#a85d00; border-radius:50%; }"
     },
     {
-      "name": "Evidence Ledger Row",
+      "name": "Context Panel",
       "kind": "custom",
-      "description": "A compact trace entry linking a review event to its reference and time.",
-      "html": "<div class=\"ds-ledger\"><span class=\"ds-ledger-ref\">EV-04</span><div><strong>Preview accepted</strong><p>Grounding evidence retained with the decision.</p></div><time>14:32</time></div>",
-      "css": ".ds-ledger { width:360px; display:grid; grid-template-columns:48px 1fr auto; gap:10px; align-items:start; border-top:1px solid #d9e0ea; padding:12px 0; color:#101828; font-family:'Geist Variable',system-ui,sans-serif; } .ds-ledger-ref { color:#1d4ed8; font-size:11px; font-weight:650; letter-spacing:.08em; } .ds-ledger strong { font-size:13px; line-height:1.35; } .ds-ledger p { margin:3px 0 0; color:#667085; font-size:12px; line-height:1.45; } .ds-ledger time { color:#667085; font-size:11px; }"
+      "description": "Secondary sources, blockers, evidence, and activity beside the active task.",
+      "html": "<aside class=\"ds-context\"><header><strong>Context</strong><span>2 blockers</span></header><p>Add one approved source before previewing the tutor.</p></aside>",
+      "css": ".ds-context { width:320px; background:#f7f7f8; border-left:1px solid #e2e2e6; padding:16px; color:#202123; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-context header { display:flex; align-items:center; justify-content:space-between; } .ds-context header span { color:#6b6b73; font-size:12px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Course Release Dossier",
-    "overview": "The professor console combines an academic review dossier with the decisiveness of a code-review merge gate. It is precise, calm, and accountable: every action is visibly connected to evidence, policy, or release impact. The screen should feel like one continuous working document, not a collection of dashboard cards. The interface uses compact editorial hierarchy, ruled divisions, numbered decision references, and restrained status color. It refuses generic AI-chat styling, opaque automation, decorative SaaS polish, and invented intelligence.",
+    "northStar": "The Grounded AI Workspace",
+    "overview": "A mature LLM-style workspace where a professor configures a course tutor through conversation and opens inspectable source, policy, preview, and approval tools without leaving the same working context. The product feels familiar and calm, while professor authority and evidence remain explicit.",
     "keyCharacteristics": [
-      "A persistent five-stage release route with one selected work surface.",
-      "Evidence and workflow trace remain adjacent to the current decision.",
-      "Flat paper surfaces separated by rules, spacing, and tonal bands.",
-      "Cobalt marks interaction; amber, red, and green communicate status only.",
-      "All state is expressed in text as well as color."
+      "Quiet application shell with compact stage navigation.",
+      "Centered conversation or structured tool as the primary surface.",
+      "Context panel for blockers, evidence, and trace.",
+      "Neutral palette with restrained iris focus and semantic states.",
+      "Sentence-case product copy and progressive disclosure."
     ],
     "rules": [
-      { "name": "The Status Has Meaning Rule", "body": "Green, amber, and red never decorate; each use must explain a real review state in accompanying text.", "section": "colors" },
-      { "name": "The One Active Signal Rule", "body": "Cobalt identifies the current route or action, not every interactive surface at once.", "section": "colors" },
-      { "name": "The Working Scale Rule", "body": "No product heading exceeds 24px; the console is a review instrument, not a landing page.", "section": "typography" },
-      { "name": "The Ruled Paper Rule", "body": "Prefer a divider or a slight background change over a new floating card.", "section": "elevation" }
+      { "name": "The Quiet Shell Rule", "body": "Navigation supports the work and never becomes the largest visual object on screen.", "section": "layout" },
+      { "name": "The One Active Signal Rule", "body": "Iris identifies the current place or focused AI context; it is not scattered across every control.", "section": "colors" },
+      { "name": "The Human Label Rule", "body": "Use sentence case; uppercase is reserved for unavoidable stored identifiers.", "section": "typography" },
+      { "name": "The Floating Composer Rule", "body": "The composer is the clearest elevated object in conversation mode; routine records do not compete with it.", "section": "elevation" }
     ],
     "dos": [
-      "Do lead with the current release state and next professor decision.",
-      "Do place supporting evidence beside the action it justifies.",
-      "Do preserve the exact five stages: Sources, Interview, Policy, Preview, and Approval.",
-      "Do use whitespace and ruled sections before adding another container.",
-      "Do keep professor authority explicit for revisions and approval."
+      "Do make the interface recognizable as an LLM workspace within seconds.",
+      "Do center the current task and keep evidence adjacent.",
+      "Do preserve all five real stages and professor approval authority.",
+      "Do use progressive disclosure for trace and secondary metadata."
     ],
     "donts": [
-      "Don't make chat the visual identity of the product.",
-      "Don't duplicate route navigation with a second tab bar.",
-      "Don't add invented analytics, course data, people, integrations, or release actions.",
-      "Don't use gradients, glass, purple AI branding, oversized heroes, or soft decorative shadows.",
-      "Don't hide blockers, provenance, or uncertainty behind color-only state."
+      "Don't reproduce another product's exact branding or proprietary UI.",
+      "Don't lead with metric grids or evaluation-dossier language.",
+      "Don't turn every section into a bordered dashboard card.",
+      "Don't invent courses, integrations, analytics, or model capabilities.",
+      "Don't hide source permissions, blockers, citations, or uncertainty."
     ]
   }
 }

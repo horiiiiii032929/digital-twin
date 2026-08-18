@@ -11,11 +11,12 @@ onboarding UI into production authentication, ingestion, or administration.
 ## Professor review console
 
 Issue [#80](https://github.com/horiiiiii032929/digital-twin/issues/80)
-restructures the existing features as an evidence-led release dossier. The UI
-has one five-stage route—Sources, Interview, Policy, Preview, and Approval—plus
-one active workbench and an adjacent review-context rail. Release status,
-recommended action, blockers, evidence snapshots, and workflow trace remain
-visible without duplicating navigation or turning chat into the whole product.
+restructures the existing features as a familiar LLM-style professor workspace.
+The UI has one five-stage route—Sources, Interview, Policy, Preview, and
+Approval—plus a natural setup conversation, an adjacent structured review tool,
+and an Activity view. Release status, recommended action, blockers, evidence
+snapshots, and workflow trace remain inspectable without turning the prototype
+into a report or hiding professor authority.
 
 The redesign does not add a model, integration, data source, release action, or
 research claim. It preserves the existing API/controller boundary and remains
