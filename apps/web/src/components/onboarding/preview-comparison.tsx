@@ -57,6 +57,23 @@ export function PreviewComparison({
   const [reasonByCase, setReasonByCase] = useState<Record<string, string>>({})
   const [customPrompt, setCustomPrompt] = useState("")
   const [customTag, setCustomTag] = useState<PromptTag>("teaching_behavior")
+  const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null)
+  const [customPromptOpen, setCustomPromptOpen] = useState(false)
+  const fallbackCase =
+    previewCases.find((preview) => preview.decision === "pending") ??
+    previewCases[0]
+  const selectedPreview =
+    previewCases.find((preview) => preview.id === selectedCaseId) ?? fallbackCase
+  const selectedIndex = selectedPreview
+    ? previewCases.findIndex((preview) => preview.id === selectedPreview.id)
+    : -1
+  const acceptedCount = previewCases.filter(
+    (preview) => preview.decision === "accepted",
+  ).length
+  const rejectedCount = previewCases.filter(
+    (preview) => preview.decision === "rejected",
+  ).length
+  const pendingCount = previewCases.length - acceptedCount - rejectedCount
 
   const addCustom = async () => {
     const prompt = customPrompt.trim()
@@ -92,69 +109,125 @@ export function PreviewComparison({
         </div>
       ) : (
         <div className="flex flex-col gap-4 pt-5">
-          {previewCases.map((preview, index) => (
+          <div
+            className="flex flex-wrap gap-x-4 gap-y-1 rounded-lg bg-[var(--shell)] px-3 py-2.5 text-xs font-medium"
+            aria-label={`${acceptedCount} accepted, ${pendingCount} pending, ${rejectedCount} rejected`}
+          >
+            <span className="text-[var(--success)]">{acceptedCount} accepted</span>
+            <span className="text-[var(--warning)]">{pendingCount} pending</span>
+            <span className="text-[var(--destructive-ink)]">{rejectedCount} rejected</span>
+          </div>
+
+          <nav aria-label="Preview case queue">
+            <ol className="overflow-hidden rounded-xl border">
+              {previewCases.map((preview, index) => (
+                <li key={preview.id} className="border-b last:border-b-0">
+                  <button
+                    type="button"
+                    className={cn(
+                      "flex min-h-12 w-full items-center gap-3 px-3 py-2.5 text-left outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/30",
+                      selectedPreview?.id === preview.id && "bg-[var(--accent-soft)]",
+                    )}
+                    aria-current={selectedPreview?.id === preview.id ? "true" : undefined}
+                    aria-label={`Open preview case ${index + 1}: ${formatTag(preview.tag)}, ${preview.decision}`}
+                    onClick={() => setSelectedCaseId(preview.id)}
+                  >
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg border bg-white text-xs font-semibold">
+                      {index + 1}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-semibold">
+                        {formatTag(preview.tag)}
+                      </span>
+                      <span className="block truncate text-xs text-muted-foreground">
+                        {preview.prompt}
+                      </span>
+                    </span>
+                    <DecisionBadge decision={preview.decision} />
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          {selectedPreview ? (
             <PreviewCard
-              key={preview.id}
-              preview={preview}
-              index={index + 1}
-              reason={reasonByCase[preview.id] ?? ""}
-              isSaving={updatingPreviewId === preview.id}
+              key={selectedPreview.id}
+              preview={selectedPreview}
+              index={selectedIndex + 1}
+              reason={reasonByCase[selectedPreview.id] ?? ""}
+              isSaving={updatingPreviewId === selectedPreview.id}
               onReasonChange={(reason) =>
                 setReasonByCase((current) => ({
                   ...current,
-                  [preview.id]: reason,
+                  [selectedPreview.id]: reason,
                 }))
               }
               onDecision={onPreviewDecision}
             />
-          ))}
+          ) : null}
         </div>
       )}
 
-      <section className="mt-5 rounded-xl border bg-[var(--shell)] p-4" aria-labelledby="custom-preview-title">
-        <h3 id="custom-preview-title" className="text-sm font-semibold">
-          Professor custom prompt
-        </h3>
-        <p className="mt-1 text-xs leading-5 text-muted-foreground">
-          Add a tagged case that must be reviewed before approval.
-        </p>
-        <div className="mt-3 grid gap-3">
-          <Textarea
-            value={customPrompt}
-            onChange={(event) => setCustomPrompt(event.target.value)}
-            className="min-h-20 bg-white text-sm"
-            placeholder="Write a prompt to test before approval..."
-            aria-label="Custom preview prompt"
+      <Collapsible
+        open={customPromptOpen}
+        onOpenChange={setCustomPromptOpen}
+        className="mt-5 overflow-hidden rounded-xl border bg-[var(--shell)]"
+      >
+        <CollapsibleTrigger className="flex min-h-12 w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-semibold outline-none hover:bg-[var(--subtle)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/30">
+          <span>
+            Add a custom test
+            <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+              Optional professor-authored preview case
+            </span>
+          </span>
+          <Plus
+            className={cn(
+              "size-4 shrink-0 transition-transform",
+              customPromptOpen && "rotate-45",
+            )}
+            aria-hidden="true"
           />
-          <div className="flex flex-wrap items-center gap-2">
-            <select
-              value={customTag}
-              onChange={(event) => setCustomTag(event.target.value as PromptTag)}
-              className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
-              aria-label="Custom prompt tag"
-            >
-              {PROMPT_TAGS.map((tag) => (
-                <option key={tag.value} value={tag.value}>
-                  {tag.label}
-                </option>
-              ))}
-            </select>
-            <Button
-              type="button"
-              size="sm"
-              onClick={() => void addCustom()}
-              disabled={!customPrompt.trim() || isAddingCustomPreview}
-            >
-              {isAddingCustomPreview ? (
-                <Loader2 data-icon="inline-start" className="animate-spin" />
-              ) : (
-                <Plus data-icon="inline-start" />
-              )}
-              Add prompt
-            </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="border-t p-4">
+          <div className="grid gap-3">
+            <Textarea
+              value={customPrompt}
+              onChange={(event) => setCustomPrompt(event.target.value)}
+              className="min-h-20 bg-white text-sm"
+              placeholder="Write a prompt to test before approval..."
+              aria-label="Custom preview prompt"
+            />
+            <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
+              <select
+                value={customTag}
+                onChange={(event) => setCustomTag(event.target.value as PromptTag)}
+                className="h-10 min-w-0 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
+                aria-label="Custom prompt tag"
+              >
+                {PROMPT_TAGS.map((tag) => (
+                  <option key={tag.value} value={tag.value}>
+                    {tag.label}
+                  </option>
+                ))}
+              </select>
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => void addCustom()}
+                disabled={!customPrompt.trim() || isAddingCustomPreview}
+              >
+                {isAddingCustomPreview ? (
+                  <Loader2 data-icon="inline-start" className="animate-spin" />
+                ) : (
+                  <Plus data-icon="inline-start" />
+                )}
+                Add prompt
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </CollapsibleContent>
+      </Collapsible>
     </section>
   )
 }
@@ -237,7 +310,10 @@ function PreviewCard({
 
       <div className="mt-4 grid gap-2">
         <Collapsible>
-          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30">
+          <CollapsibleTrigger
+            className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30"
+            aria-label={`Show generic comparison for preview case ${index}`}
+          >
             Generic comparison
             <ChevronDown className="size-4" />
           </CollapsibleTrigger>
@@ -251,7 +327,10 @@ function PreviewCard({
         </Collapsible>
 
         <Collapsible>
-          <CollapsibleTrigger className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30">
+          <CollapsibleTrigger
+            className="flex min-h-10 w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-ring/30"
+            aria-label={`Show source audit for preview case ${index}`}
+          >
             Source audit
             <FileSearch className="size-4" />
           </CollapsibleTrigger>
@@ -282,7 +361,7 @@ function PreviewCard({
 
       <div className="mt-4 grid gap-3 rounded-lg bg-[var(--shell)] p-3">
         <label htmlFor={`decision-reason-${preview.id}`} className="text-xs font-medium text-muted-foreground">
-          Decision reason (optional)
+          Case {index} decision reason (optional)
         </label>
         <input
           id={`decision-reason-${preview.id}`}
@@ -297,6 +376,7 @@ function PreviewCard({
             size="sm"
             variant={preview.decision === "accepted" ? "default" : "outline"}
             aria-pressed={preview.decision === "accepted"}
+            aria-label={`Accept preview case ${index}`}
             disabled={isSaving}
             onClick={() => void onDecision(preview.id, "accepted", reason)}
           >
@@ -312,6 +392,7 @@ function PreviewCard({
             size="sm"
             variant={preview.decision === "rejected" ? "default" : "outline"}
             aria-pressed={preview.decision === "rejected"}
+            aria-label={`Reject preview case ${index}`}
             disabled={isSaving}
             onClick={() => void onDecision(preview.id, "rejected", reason)}
           >

@@ -44,13 +44,20 @@ conversation-first layout the current authority.
   sheet affordance, and breakpoint-accurate action labels.
 - Preserved all existing loading, empty, revoked, stale-release, failed-question,
   and workspace-recovery behavior.
+- Hardened populated professor review: policy fields and preview cases are
+  summary-first one-item queues, approval separates remaining and completed
+  checks, all save/compare/audit/decision controls have item-specific accessible
+  names, and stage changes reset the inspector scroll position.
+- Added `?demo=supervisor`, backed by a deterministic API fixture containing
+  synthetic interview answers and metadata only. It opens at Policy and makes
+  the professor review flow inspectable without rebuilding five interview turns.
 
 ## Screen and state coverage
 
 | Surface | States inspected |
 | --- | --- |
-| Professor desktop | Interview, Sources empty/blocker, Policy empty, Preview empty/custom prompt, Approval empty, Activity/blockers/history, inspector close/reopen |
-| Professor mobile | Conversation, setup navigation sheet, interview inspector, source inspector, blocker status |
+| Professor desktop | Interview, Sources empty/blocker and synthetic approved metadata, Policy empty/populated queue, Preview empty/three-case queue/custom prompt/decision, Approval empty/populated/completed split, Activity/blockers/history, inspector close/reopen and stage scroll reset |
+| Professor mobile | Conversation, setup navigation sheet, populated policy and preview inspectors, source inspector, blocker status, no horizontal overflow |
 | Student desktop | Empty conversation, grounded answer, inline citation, citation inspector open/closed, New chat/current chat rail |
 | Student mobile | Conversation, course navigation sheet, citation sheet, header status, composer |
 | Shared behavior | Desktop 1536×1024, mobile 390×844, short 768×512 and 390×420 viewports, no page overflow, semantic names, disabled actions, focus-visible controls, and mobile-sheet-to-desktop transitions |
@@ -91,6 +98,11 @@ primary-action token.
   fixed, and retested; the post-fix verdict was `SHIP`.
 - Final screenshots are local ignored artifacts under
   `reports/generated/ui-redesign-product-wide/`.
+- The populated-state follow-up used the built-in browser at 1280×720 and
+  390×844. It verified zero page/inspector horizontal overflow, field- and
+  case-specific accessible names, a real preview decision, top-reset on stage
+  change, and student citation source-version/release lineage with no console
+  warnings or errors.
 
 ## Limitations and human review boundary
 

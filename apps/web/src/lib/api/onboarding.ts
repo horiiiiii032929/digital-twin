@@ -15,6 +15,13 @@ export function createOnboardingSession(): Promise<OnboardingSession> {
   })
 }
 
+export function createSupervisorDemoSession(): Promise<OnboardingSession> {
+  return request<OnboardingSession>(
+    "/api/onboarding/sessions/supervisor-demo",
+    { method: "POST" },
+  )
+}
+
 export function submitOnboardingMessage(
   sessionId: string,
   content: string,

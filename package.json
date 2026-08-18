@@ -85,6 +85,7 @@
     "prepare:generator-qualification-second-review": "uv run python -m scripts.render_generator_qualification_second_review",
     "verify:student-workflow": "uv run python -m scripts.verify_student_workflow_slice",
     "seed:student-demo": "uv run python -m scripts.seed_student_demo",
+    "prepare:supervisor-demo": "npm run seed:student-demo",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",

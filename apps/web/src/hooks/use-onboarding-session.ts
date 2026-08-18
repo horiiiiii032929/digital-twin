@@ -12,6 +12,7 @@ import {
   addSourceInventoryItem,
   confirmRevisionProposal,
   createOnboardingSession,
+  createSupervisorDemoSession,
   discardRevisionProposal,
   setPreviewDecision,
   submitOnboardingMessage,
@@ -65,7 +66,11 @@ export type OnboardingController = SessionState & {
   discardRevision: () => Promise<void>
 }
 
-export function useOnboardingSession(): OnboardingController {
+export function useOnboardingSession({
+  supervisorDemo = false,
+}: {
+  supervisorDemo?: boolean
+} = {}): OnboardingController {
   const [state, dispatch] = useReducer(sessionReducer, initialSessionState)
 
   const startSession = useCallback(async () => {
@@ -74,12 +79,14 @@ export function useOnboardingSession(): OnboardingController {
     try {
       dispatch({
         type: "start/succeeded",
-        session: await createOnboardingSession(),
+        session: await (supervisorDemo
+          ? createSupervisorDemoSession()
+          : createOnboardingSession()),
       })
     } catch (caught) {
       dispatch({ type: "start/failed", error: errorMessage(caught) })
     }
-  }, [])
+  }, [supervisorDemo])
 
   useEffect(() => {
     void startSession()

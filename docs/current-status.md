@@ -15,7 +15,7 @@ but they do not override this page for current sequencing.
 - Development and held-out execution are unauthorized. Their active commands
   are non-executing preflights; anchor and Gemma reproduction commands are
   historical and require an explicit caller confirmation.
-- The current candidate `npm run check` passes 299 Python tests, 26 frontend
+- The current candidate `npm run check` passes 300 Python tests, 27 frontend
   tests, documentation and evaluation validators, the 19-check student
   workflow, frontend lint, and the production build. Technical-freeze
   validation confirms no frozen artifact changed and no external model was
@@ -38,11 +38,15 @@ but they do not override this page for current sequencing.
   [#81](https://github.com/horiiiiii032929/digital-twin/pull/81) merged the
   conversation-plus-tool workspace. That decision is repository-owner review,
   not professor approval or human-usability evidence.
-- [#82](https://github.com/horiiiiii032929/digital-twin/issues/82) is the sole
-  active implementation item. It extends the accepted visual direction to a
-  bounded student tutoring workspace using the existing synthetic publication,
-  conversation, and citation contracts. Engineering and responsive QA are
-  complete on the candidate; product-direction review remains pending.
+- [#82](https://github.com/horiiiiii032929/digital-twin/issues/82) and
+  [#84](https://github.com/horiiiiii032929/digital-twin/issues/84) are the two
+  active bounded product items. Draft PR
+  [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) combines the
+  student tutoring workspace with the accepted conversation-first professor
+  direction. Populated professor policy, preview, and approval review states now
+  use progressive disclosure, and `?demo=supervisor` loads a deterministic
+  synthetic walkthrough. Engineering and responsive QA are complete on the
+  candidate; human product-direction review remains pending.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -71,21 +75,23 @@ selection was changed.
 
 ## Post-freeze queue
 
-Issue #82 is the sole active post-freeze item. It may complete the bounded
-student demo without changing frozen model, retrieval, profile, or
-research-evidence decisions. Resume any other queued item only after a new
-explicit decision, ideally from professor feedback.
+Issues #82 and #84 are the active post-freeze product items on draft PR #83.
+They may complete the bounded student demo and shared interaction shell without
+changing frozen model, retrieval, profile, or research-evidence decisions.
+Resume any other queued item only after a new explicit decision, ideally from
+professor feedback.
 
 | Order | Issue | Board state | Purpose |
 | ---: | --- | --- | --- |
-| 1 | [#82 Student tutoring workspace](https://github.com/horiiiiii032929/digital-twin/issues/82) | In Progress / Pending | Responsive grounded-tutoring candidate is implemented and technically checked; await product-direction review before Keep/Refine |
-| 2 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | Done / Keep | Selected conversation-plus-tool LLM workspace merged through PR #81 |
-| 3 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
-| 4 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
-| 5 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Parent foundation for #82; retain the 19-check core and do not expand beyond the authorized UI slice |
-| 6 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
-| 7 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
-| 8 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
+| 1 | [#84 Unified professor/student workspace](https://github.com/horiiiiii032929/digital-twin/issues/84) | In Progress / Pending | Shared LLM-style shell, populated review queues, and synthetic supervisor walkthrough are technically checked on draft PR #83; await product-direction review |
+| 2 | [#82 Student tutoring workspace](https://github.com/horiiiiii032929/digital-twin/issues/82) | In Progress / Pending | Responsive grounded-tutoring candidate is implemented on draft PR #83; await the same product-direction review before Keep/Refine |
+| 3 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | Done / Keep | Selected conversation-plus-tool LLM workspace merged through PR #81 |
+| 4 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
+| 5 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
+| 6 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Parent foundation for #82; retain the 19-check core and do not expand beyond the authorized UI slice |
+| 7 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
+| 8 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
+| 9 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
 
 The 2026-08-16 target was missed by two days; the technical evidence was frozen
 on 2026-08-18. Do not start new feature or method development, open held-out

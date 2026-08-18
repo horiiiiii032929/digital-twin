@@ -14,9 +14,16 @@ function App() {
 }
 
 function ProfessorApp() {
-  const controller = useOnboardingSession()
+  const supervisorDemo =
+    new URLSearchParams(window.location.search).get("demo") === "supervisor"
+  const controller = useOnboardingSession({ supervisorDemo })
   useDocumentTitle("Professor Review Console · Course Digital Twin")
-  return <ProfessorReviewConsole controller={controller} />
+  return (
+    <ProfessorReviewConsole
+      controller={controller}
+      supervisorDemo={supervisorDemo}
+    />
+  )
 }
 
 function StudentApp() {

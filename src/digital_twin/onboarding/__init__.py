@@ -6,6 +6,7 @@ from src.digital_twin.onboarding.commands import (
     update_policy_field_value,
     update_source_inventory_item,
 )
+from src.digital_twin.onboarding.demo import create_supervisor_demo_session
 from src.digital_twin.onboarding.models import OnboardingSession
 from src.digital_twin.onboarding.repository import (
     InMemorySessionRepository,
@@ -25,6 +26,7 @@ __all__ = [
     "add_source_inventory_item",
     "confirm_revision_proposal",
     "create_session",
+    "create_supervisor_demo_session",
     "discard_revision_proposal",
     "set_preview_decision",
     "submit_message",

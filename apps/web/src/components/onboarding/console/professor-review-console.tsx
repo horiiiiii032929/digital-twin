@@ -16,6 +16,7 @@ import {
   Activity,
   AlertCircle,
   BookOpen,
+  FlaskConical,
   Menu,
   PanelRightClose,
   PanelRightOpen,
@@ -56,8 +57,10 @@ type InspectorMode = ReviewStageId | "activity"
 
 export function ProfessorReviewConsole({
   controller,
+  supervisorDemo = false,
 }: {
   controller: OnboardingController
+  supervisorDemo?: boolean
 }) {
   const {
     session,
@@ -82,8 +85,12 @@ export function ProfessorReviewConsole({
     confirmRevision,
     discardRevision,
   } = controller
-  const [activeStage, setActiveStage] = useState<ReviewStageId>("interview")
-  const [inspectorMode, setInspectorMode] = useState<InspectorMode>("interview")
+  const [activeStage, setActiveStage] = useState<ReviewStageId>(
+    supervisorDemo ? "policy" : "interview",
+  )
+  const [inspectorMode, setInspectorMode] = useState<InspectorMode>(
+    supervisorDemo ? "policy" : "interview",
+  )
   const [desktopInspectorOpen, setDesktopInspectorOpen] = useState(true)
   const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -224,6 +231,25 @@ export function ProfessorReviewConsole({
             onToggleInspector={toggleInspector}
           />
 
+          {supervisorDemo ? (
+            <div className="border-b bg-[var(--accent-soft)] px-4 py-2.5 text-[var(--accent-foreground)] sm:px-5">
+              <div className="mx-auto flex max-w-3xl items-start gap-2.5 text-xs leading-5">
+                <FlaskConical className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+                <p className="min-w-0 flex-1">
+                  <strong className="font-semibold">Synthetic supervisor demo.</strong>{" "}
+                  The completed interview and source entry contain no private course
+                  files or student records.
+                </p>
+                <a
+                  href="/"
+                  className="shrink-0 font-semibold underline underline-offset-2 outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+                >
+                  Start empty
+                </a>
+              </div>
+            </div>
+          ) : null}
+
           {error ? (
             <div className="px-4 pt-4 sm:px-6">
               <Alert variant="destructive">
@@ -248,6 +274,7 @@ export function ProfessorReviewConsole({
 
         {desktopInspectorOpen ? (
           <ProfessorInspector
+            key={inspectorMode}
             title={inspectorMode === "activity" ? "Activity" : TOOL_TITLES[inspectorMode]}
             className="hidden border-l lg:flex"
             onClose={() => setDesktopInspectorOpen(false)}
@@ -290,6 +317,7 @@ export function ProfessorReviewConsole({
               className="absolute top-2 left-1/2 z-10 h-1 w-9 -translate-x-1/2 rounded-full bg-[var(--rule-strong)]"
             />
             <ProfessorInspector
+              key={inspectorMode}
               title={inspectorMode === "activity" ? "Activity" : TOOL_TITLES[inspectorMode]}
               className="flex min-h-0 flex-1"
               onClose={() => setMobileInspectorOpen(false)}
