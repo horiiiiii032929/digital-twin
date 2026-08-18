@@ -32,7 +32,8 @@ lockfiles remain the rollback through Git history.
 - Three query trials are run after one index build. Only case IDs, ranked chunk
   IDs, aggregate metrics, timings, and version metadata are written to ignored
   output.
-- The cross-course and professor-fidelity held-out splits remain unopened.
+- The already-completed cross-course held-out split is not read. The
+  professor-fidelity held-out split remains unopened.
 - No external provider or billable model call is permitted.
 
 ## Gates

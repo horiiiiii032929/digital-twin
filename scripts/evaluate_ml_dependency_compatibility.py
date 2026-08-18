@@ -28,9 +28,9 @@ from src.digital_twin.evaluation import (
     CourseScopedRetriever,
     assign_boundary_courses,
     load_provider_qualification_config,
-    load_sealed_development,
     score_ranking,
 )
+from src.digital_twin.evaluation.retrieval_qualification import sha256_file
 from src.digital_twin.grounding import (
     BM25Retriever,
     DenseRetriever,
@@ -146,6 +146,33 @@ def _profile_configuration() -> dict[str, Any]:
     return configuration
 
 
+def _load_development_only(config: Any) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Validate seal/ledger metadata without opening the held-out file."""
+
+    seal = json.loads(SEAL_PATH.read_text(encoding="utf-8"))
+    ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
+    if (
+        seal.get("seal_id") != config.dataset_seal_id
+        or seal.get("development_sha256") != config.development_sha256
+        or seal.get("heldout_sha256") != config.heldout_sha256
+        or ledger.get("seal_id") != seal.get("seal_id")
+        or ledger.get("heldout_sha256") != config.heldout_sha256
+        or ledger.get("status") not in {"unopened", "completed"}
+    ):
+        raise ValueError("cross-course development seal or ledger metadata drifted")
+    development_path = ROOT / seal["development_path"]
+    if sha256_file(development_path) != config.development_sha256:
+        raise ValueError("cross-course development dataset hash drifted")
+    dataset = json.loads(development_path.read_text(encoding="utf-8"))
+    if (
+        dataset.get("dataset_status") != "sealed"
+        or len(dataset.get("cases", [])) != 40
+        or any(case.get("split") != "development" for case in dataset["cases"])
+    ):
+        raise ValueError("cross-course development dataset is invalid")
+    return dataset, seal
+
+
 def _build_runtimes(
     chunks_by_course: dict[str, list[DocumentChunk]],
     configuration: dict[str, Any],
@@ -224,12 +251,7 @@ def evaluate(arguments: argparse.Namespace) -> dict[str, Any]:
     if _git_value("status", "--porcelain"):
         raise ValueError("dependency compatibility evaluation requires a clean tree")
     config = load_provider_qualification_config(CONFIG_PATH)
-    dataset, seal = load_sealed_development(
-        root=ROOT,
-        seal_path=SEAL_PATH,
-        ledger_path=LEDGER_PATH,
-        config=config,
-    )
+    dataset, seal = _load_development_only(config)
     _manifest, records = load_corpus(arguments.source_root)
     chunks_by_course: dict[str, list[DocumentChunk]] = defaultdict(list)
     chunk_course: dict[str, str] = {}
