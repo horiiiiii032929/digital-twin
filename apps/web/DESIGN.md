@@ -174,6 +174,14 @@ area instead of competing with the conversation. Below 1024px the sidebar become
 a compact horizontal stage switcher beneath the app bar. The primary task always
 precedes supporting evidence in document order.
 
+The student extension uses the same visual world with a simpler topology:
+240px assigned-course navigation, a flexible tutoring conversation, and a
+420px citation inspector. The conversation is the primary surface and citation
+lineage remains visible without turning the page into a report. Below 1024px,
+course state becomes a compact strip and citation details open as a bottom
+sheet. The student and professor routes share product identity and tokens while
+keeping their controllers and task hierarchy separate.
+
 Spacing follows a 4/8/12/16/24/32px rhythm. Routine controls are compact; major
 task transitions use 24-32px separation.
 

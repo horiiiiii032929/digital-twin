@@ -48,6 +48,8 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm ci`: install the locked frontend workspace dependencies.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
+- `npm run seed:student-demo`: seed the ignored local database with one
+  synthetic student, course, published release, and citation-bearing sources.
 - `npm run check`: run the complete local and CI verification suite.
 - `npm run audit:dependencies`: audit npm plus the complete Python lock and
   reject any unreviewed or drifted vulnerability finding.
@@ -81,6 +83,14 @@ The project's technical standard, learning commitments, and strengthened Sprint
 
 Use Python from `.python-version` and Node.js from `.node-version`. GitHub
 Actions runs `npm run check` for pushes to `main` and for pull requests.
+
+## Local product demo
+
+Run `npm run seed:student-demo`, `npm run dev:api`, and `npm run dev:web`, then
+open <http://localhost:5173/> for the professor setup workspace or
+<http://localhost:5173/student> for the student tutor. Both routes use synthetic
+local fixtures. The student `X-Account-ID` boundary is demonstrative, not
+production authentication.
 
 ## Current implementation status
 
@@ -133,6 +143,9 @@ Implemented as Sprint 2 foundations:
 - A bounded synthetic-account student workflow with fail-closed course/release
   authorization, SQLite conversation persistence, citations, idempotency,
   provider fallback, and restart recovery.
+- A responsive student tutoring workspace with release-bound conversation
+  restoration, grounded citation inspection, stable retries, stale-release
+  recovery, and a mobile citation sheet.
 - An evaluation-gated publication lifecycle with durable drafts, atomic release
   replacement, withdrawal, rollback, and stale-conversation denial. The v2
   synthetic architecture result passes 19/19 acceptance checks.

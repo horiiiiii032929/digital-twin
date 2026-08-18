@@ -2,10 +2,11 @@
 
 ## Scope
 
-The current student slice is a local, synthetic-account implementation for R3
-acceptance testing. It is not production authentication or human-usability
-evidence. It adds durable, course-isolated tutoring without changing the
-professor onboarding workflow.
+The current student slice is a local, synthetic-account implementation for
+bounded workflow and demo evaluation. It is not production authentication or
+human-usability evidence. It adds durable, course-isolated tutoring and a
+responsive student workspace without changing the selected retrieval,
+generation, policy, or professor-onboarding contracts.
 
 ## Data flow
 
@@ -66,6 +67,40 @@ The default ASGI application stores local records under the ignored
 `data/interim/student-workflow/` directory. Tests and verification commands use
 temporary databases and synthetic content only.
 
+## Student web workspace
+
+The Vite application exposes the professor workspace at `/` and the student
+tutor at `/student`. The student route uses the same published-release API and
+does not construct the professor controller. It provides:
+
+- assigned-course selection and a release-availability state;
+- release-bound new and restored conversations;
+- a focused tutoring conversation with grounded answer markers;
+- desktop citation inspection and a mobile citation sheet with source version,
+  locator, and release lineage;
+- stable request identifiers so an explicit retry cannot duplicate a turn;
+- draft preservation and distinct recovery actions for transport failure and a
+  withdrawn or replaced release; and
+- responsive 1440px, 768px, and 390px layouts with text-labelled state and
+  44-pixel coarse-pointer targets.
+
+Only the active course ID and conversation IDs are stored in versioned browser
+storage. Messages, answers, and citations are reloaded from the API and remain
+authoritative there. Browser storage failure therefore removes convenience,
+not authorization or source lineage.
+
+Seed and run the synthetic local demo with:
+
+```bash
+npm run seed:student-demo
+npm run dev:api
+npm run dev:web
+```
+
+Then open <http://localhost:5173/student>. The default synthetic identity is
+`student-a-synthetic`; `VITE_STUDENT_ACCOUNT_ID` may override it for a local
+fixture. This header is not a credential or a production session mechanism.
+
 ## Retrieval and generation boundary
 
 The service loads the active `student-tutor-v1` profile. An injected compatible
@@ -101,7 +136,10 @@ rollback, and stale-conversation denial.
   boundary.
 - The accepted path uses a synthetic embedder and deterministic generator;
   live provider qualification remains R2 work.
-- Backup/restore, schema migration, multi-process contention, capacity, and the
-  student web interface remain untested.
+- Backup/restore, schema migration, multi-process contention, capacity, formal
+  accessibility conformance, and human usability remain untested.
+- The browser remembers only a minimal local conversation index. There is no
+  server-side conversation-list endpoint, rename/delete flow, search, or
+  cross-device history synchronization.
 - The result supports bounded workflow behavior only, not usability, adoption,
   satisfaction, engagement, or learning-effectiveness claims.

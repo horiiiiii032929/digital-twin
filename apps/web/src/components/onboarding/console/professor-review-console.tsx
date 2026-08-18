@@ -2,6 +2,7 @@ import { useState } from "react"
 import {
   Activity,
   AlertCircle,
+  BookOpen,
   ChevronDown,
   PanelLeftClose,
   PanelLeftOpen,
@@ -259,21 +260,29 @@ function AppBar({
           </span>
         </div>
 
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          aria-label="Activity"
-          aria-pressed={activityOpen}
-          onClick={onToggleActivity}
-        >
-          <Activity data-icon="inline-start" />
-          <span className="hidden sm:inline">Activity</span>
-          <ChevronDown
-            data-icon="inline-end"
-            className={cn("transition-transform", activityOpen && "rotate-180")}
-          />
-        </Button>
+        <div className="flex items-center gap-1.5">
+          <Button asChild variant="ghost" size="sm">
+            <a href="/student" aria-label="Open student tutor">
+              <BookOpen data-icon="inline-start" />
+              <span className="hidden md:inline">Student tutor</span>
+            </a>
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            aria-label="Activity"
+            aria-pressed={activityOpen}
+            onClick={onToggleActivity}
+          >
+            <Activity data-icon="inline-start" />
+            <span className="hidden sm:inline">Activity</span>
+            <ChevronDown
+              data-icon="inline-end"
+              className={cn("transition-transform", activityOpen && "rotate-180")}
+            />
+          </Button>
+        </div>
       </div>
     </header>
   )
