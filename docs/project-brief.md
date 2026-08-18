@@ -1,84 +1,73 @@
-# Project Brief
+# Project brief
 
 ## Problem
 
-Human teaching time does not scale to every student interaction. Students can
-use generic AI tools, but those tools usually lack course boundaries,
-instructor-specific source material, and the educator's preferred teaching
-style.
+Generic AI assistants do not reliably respect course boundaries, approved
+evidence, instructor teaching behaviour, publication control, or academic-
+integrity policy. A useful real-world system must let professors govern those
+boundaries and must remain understandable, recoverable, and safe for students.
 
 ## Product direction
 
-Build and evaluate a professor-configurable pedagogical Digital Twin for
-multiple professors and courses. Each professor controls approved evidence,
-teaching behaviour, tutoring policy, evaluation cases, publication, withdrawal,
-and rollback. Invited students receive course-isolated, cited tutoring.
+Deliver a deployed, invite-only Course Digital Twin for multiple professors
+and courses. Professors govern approved text and multimodal sources, teaching
+behaviour, tutoring policy, evaluation, publication, withdrawal, and rollback.
+Authorized students receive persistent, course-isolated tutoring with
+inspectable source, page, region, and version citations.
 
-The product runs locally for the final project and remains hosting-ready.
-Student recruitment is out of scope; evaluation uses researcher-verified
-course anchors, deterministic checks, calibrated LLM judges, frozen simulated
-students, scripted synthetic accounts, and capacity tests.
+The current local professor/student application is the product UX baseline.
+The target is a hosted pilot with credentialed identity, durable database and
+object storage, asynchronous ingestion, observable operations, backup/restore,
+and evidence from realistic workflows and workloads.
 
-## Focused research questions
+The authoritative prospective scope is the
+[real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
+Historical experiment records and the technical evidence freeze remain
+authoritative for the results they document.
 
-1. Across heterogeneous courses, how much do dense, hybrid, and reranked
-   retrieval improve evidence completeness and safe no-evidence handling over
-   heading-aware BM25?
-2. With generator and evidence held constant, how much does professor policy
-   improve professor fidelity, pedagogical behaviour, misconception handling,
-   and academic-integrity compliance over a generic tutoring policy?
-3. Can the resulting system complete multi-course professor and student
-   workflows with publication control, isolation, recovery, and bounded
-   simulated capacity?
+## Research and evaluation questions
 
-Every replaceable method and architecture boundary must be evaluated against a
-control. This includes parsing/chunking, retrieval, returned-context
-sufficiency, generation, prompts/policy, conversation state, authentication,
-authorization, persistence, storage, deployment, and usability.
+1. Can region-aware multimodal ingestion and retrieval improve precise
+   grounding for scans, tables, diagrams, equations, and mixed-layout course
+   material over the selected text path without requiring a heavyweight vision
+   model online?
+2. With generator and evidence held constant, does professor configuration
+   improve fidelity, pedagogical behaviour, misconception handling, and
+   academic-integrity compliance over generic and grounded-generic controls?
+3. Can the deployed system complete administrator, professor, and student
+   journeys with correct authorization, citation lineage, publication control,
+   recovery, observability, and bounded capacity?
+4. Does a separate large factual QA benchmark approaching 10,000 cases expose
+   quality, abstention, isolation, latency, or cost failures that the verified
+   100-case benchmark cannot estimate?
 
 ## Delivery phases
 
-- Scope and architecture lock: authoritative thesis, course portfolio,
-  evaluation questions, provider boundary, and repository structure.
-- Cross-course retrieval study: verified benchmark, M0-M3 comparison, sealed
-  result, and selected or rollback retrieval profile.
-- Pedagogical Digital Twin: multi-course professor configuration,
-  evaluation-before-publication, and student tutoring journeys.
-- End-to-end validation: professor fidelity, pedagogy, isolation, failures,
-  recovery, simulated interactions, and bounded capacity.
-- Evidence and communication: technical freeze by 2026-08-16, then report,
-  figures, presentation, reproducibility, and demo stabilization.
+- **P0 — Product UX baseline:** completed by merged PR #83.
+- **P1 — Multimodal product grounding:** correct the evaluator, implement real
+  region extraction and product ingestion, then select or reject a candidate.
+- **P2 — Deployable product foundation:** credentialed RBAC, durable data and
+  storage, ingestion jobs, staging deployment, observability, security,
+  backup/restore, and rollback.
+- **P3 — Pilot validation and release:** large factual benchmark, calibrated
+  fidelity, end-to-end and operational validation, and approval-gated real-user
+  workflow evidence.
 
 ## Current phase
 
-Instructor onboarding is complete and approved. Grounding foundations include
-provider-neutral contracts, approved local parsing, deterministic chunking,
-BM25 retrieval, dense/RRF comparisons, component profiles, and result
-governance. Retrieval v2, evidence-sufficiency v1, and exploratory local
-generation all produced `Refine` or no-selection results.
+PR #83 merged the reviewed professor/student conversation-first workspace.
+Text retrieval retains the experimentally selected M2 hybrid profile with
+BM25 rollback. The bounded synthetic publication/student foundation passes its
+registered 19 checks. These are useful baselines, not production evidence.
 
-The exact no-participant judge, simulator, run-record, analysis, and stop-rule
-contracts are frozen and validated. The IT5002 pilot provides useful
-development evidence but does not select a final method: local Qwen3 reranking
-reached 10/13 answerable cases versus 3/13 for heading BM25, while the separate
-59-case one-time run failed after 29 cases and is invalid. Jina is an unselected
-provider spike with no result.
+The immediate work is issue #85: correct and audit the multimodal evaluator.
+Issue #86 then replaces the shallow evaluation-only path with region-aware
+multimodal product ingestion and citations. The deployment, large-benchmark,
+fidelity, operations, end-to-end, and pilot issues are explicitly downstream.
 
-The current phase is professor-fidelity refinement and end-to-end validation.
-The one-time 60-case held-out M0-M3 comparison selected M2 hybrid retrieval for
-the experimental profile and retained BM25 as rollback. The first durable
-synthetic student slice now connects that profile to course authorization,
-published releases, persisted turns, citations, fallback, withdrawal, and
-restart checks.
-Generator/prompt qualification is complete, while the first 48-case
-professor-policy run is invalid for selection. Its outputs are preserved, but
-the audit found missing human authoring review, case-gold leakage, a drifted C3
-chunking corpus, and missing condition/policy bindings. C3 had 13/30
-source/page citation correctness and 0/30 exact selected-passage matches;
-semantic grounding, citation completeness, and pedagogy remain unresolved.
-The professor-fidelity one-time held-out split remains unopened. Next comes
-human review of the exact-passage v1.2 draft, then a corrected development
-rerun, followed by broader professor/student, recovery, and capacity evidence.
-The dated operational queue is maintained in
-[current project status](current-status.md). The
-authoritative baseline is the [frontier Digital Twin scope](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).
+## Claim boundary
+
+A deployment, demo, LLM agreement count, or successful synthetic flow does not
+by itself establish production readiness, professor fidelity, human usability,
+learning improvement, adoption, or an SLA. Each claim requires its prospective
+gate and recorded evidence.

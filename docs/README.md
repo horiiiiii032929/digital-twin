@@ -6,6 +6,7 @@ design records.
 ## Active product and architecture
 
 - [Current project status](current-status.md)
+- [Real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 - [Technical evidence freeze](../reports/technical-evidence-freeze-2026-08-18.md)
 - [Frozen claim-to-evidence matrix](../reports/claim-to-evidence-matrix.md)
 - [Project brief](project-brief.md)
@@ -17,8 +18,10 @@ design records.
 - [Evaluation architecture](evaluation-architecture.md)
 - [Evaluation data flow and threat model](evaluation-data-flow-and-threat-model.md)
 
-The authoritative product/research scope is maintained in
-[`research/00_admin/2026-07-27-frontier-digital-twin-scope.md`](../research/00_admin/2026-07-27-frontier-digital-twin-scope.md).
+The authoritative prospective product scope is maintained in
+[`research/00_admin/2026-08-18-real-world-product-scope.md`](../research/00_admin/2026-08-18-real-world-product-scope.md).
+The earlier frontier scope and all frozen experiment records remain historical
+sources of truth for the decisions and results they document.
 
 ## Active component guides
 
