@@ -1,50 +1,76 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-01T00:00:00+09:00",
-  "title": "Design System: Course Digital Twin Onboarding",
+  "generatedAt": "2026-08-18T00:00:00+08:00",
+  "title": "Design System: Course Digital Twin Professor Workspace",
   "extensions": {
     "colorMeta": {
-      "primary": {
+      "ink": {
         "role": "primary",
-        "displayName": "Console Ink",
-        "canonical": "#27272a",
-        "tonalRamp": ["#18181b", "#27272a", "#3f3f46"]
+        "displayName": "Workspace Ink",
+        "canonical": "#202123",
+        "tonalRamp": ["#111113", "#202123", "#343438", "#505057", "#6b6b73", "#a0a0a8", "#d5d5da", "#f0f0f2"]
       },
-      "workspace": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Context Iris",
+        "canonical": "#5b5bd6",
+        "tonalRamp": ["#2c2c72", "#4141a6", "#5b5bd6", "#7373e5", "#9b9bf0", "#c4c4f8", "#ddddfc", "#eeeeff"]
+      },
+      "shell": {
         "role": "neutral",
-        "displayName": "Workspace Canvas",
-        "canonical": "#f7f7f4",
-        "tonalRamp": ["#ffffff", "#f7f7f4", "#e4e4e7"]
+        "displayName": "Soft Shell",
+        "canonical": "#f7f7f8",
+        "tonalRamp": ["#202123", "#505057", "#6b6b73", "#a0a0a8", "#c7c7cd", "#e2e2e6", "#f0f0f2", "#f7f7f8"]
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Ready Green",
+        "canonical": "#147a57",
+        "tonalRamp": ["#0a3d2d", "#105f45", "#147a57", "#2c9d76", "#61ba98", "#9bd9bf", "#cceddf", "#eaf8f2"]
       },
       "warning": {
-        "role": "semantic",
-        "displayName": "Release Warning",
-        "canonical": "#92400e",
-        "tonalRamp": ["#fffbeb", "#fef3c7", "#92400e"]
+        "role": "tertiary",
+        "displayName": "Review Amber",
+        "canonical": "#a85d00",
+        "tonalRamp": ["#4f2b00", "#794300", "#a85d00", "#ce7b16", "#eda747", "#f5ca83", "#fbe5bd", "#fff6e5"]
       },
-      "info": {
-        "role": "semantic",
-        "displayName": "Review Info",
-        "canonical": "#075985",
-        "tonalRamp": ["#f0f9ff", "#bae6fd", "#075985"]
+      "destructive": {
+        "role": "tertiary",
+        "displayName": "Blocked Red",
+        "canonical": "#c2413b",
+        "tonalRamp": ["#5b1d1a", "#8a2d29", "#c2413b", "#dd5c56", "#eb8883", "#f4b7b4", "#fad9d7", "#fff0ef"]
       }
     },
     "typographyMeta": {
       "headline": {
-        "displayName": "Headline",
-        "purpose": "Page title and primary workspace headings."
+        "displayName": "Workspace Headline",
+        "purpose": "Current task or workspace title."
+      },
+      "title": {
+        "displayName": "Tool Title",
+        "purpose": "Structured tools and substantial records."
       },
       "body": {
-        "displayName": "Body",
-        "purpose": "Review copy, messages, source notes, and policy explanations."
+        "displayName": "Conversation Body",
+        "purpose": "Interview content, descriptions, and review records."
+      },
+      "label": {
+        "displayName": "Interface Label",
+        "purpose": "Navigation state and concise metadata in sentence case."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "composer",
+        "value": "0 8px 30px rgba(32, 33, 35, 0.08), 0 1px 3px rgba(32, 33, 35, 0.08)",
+        "purpose": "Conversation composer and temporary overlay panels only."
+      }
+    ],
     "motion": [
       {
         "name": "state-fast",
-        "value": "150ms ease-out",
-        "purpose": "Button, disclosure, and selected-state feedback."
+        "value": "150ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Navigation, hover, focus, and disclosure feedback."
       }
     ],
     "breakpoints": [
@@ -55,20 +81,72 @@
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Action",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Primary action for the next release-affecting step.",
-      "html": "<button class=\"rounded-md bg-zinc-800 px-4 py-2 text-sm font-medium text-white\">Continue</button>",
-      "css": ".rounded-md { border-radius: 8px; }"
+      "description": "One decisive professor action in the active tool.",
+      "html": "<button class=\"ds-btn-primary\">Continue</button>",
+      "css": ".ds-btn-primary { background:#202123; color:#fff; border:1px solid #202123; border-radius:8px; padding:8px 14px; font:600 14px/1.4 'Geist Variable',system-ui,sans-serif; transition:background 150ms cubic-bezier(.2,0,0,1); } .ds-btn-primary:hover { background:#343438; } .ds-btn-primary:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; }"
+    },
+    {
+      "name": "Workspace Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-active",
+      "description": "Selected stage in the quiet professor-workspace sidebar.",
+      "html": "<button class=\"ds-nav\"><span>Policy</span><small>Review needed</small></button>",
+      "css": ".ds-nav { width:220px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f0f0f2; color:#202123; border:0; border-radius:8px; padding:8px 10px; font:550 14px/1.4 'Geist Variable',system-ui,sans-serif; } .ds-nav:hover { background:#e8e8eb; } .ds-nav:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; } .ds-nav small { color:#6b6b73; font-size:12px; }"
+    },
+    {
+      "name": "Conversation Composer",
+      "kind": "input",
+      "description": "The elevated prompt area that anchors interview mode.",
+      "html": "<div class=\"ds-composer\"><textarea placeholder=\"Reply to the setup assistant\"></textarea><button aria-label=\"Send\">↑</button></div>",
+      "css": ".ds-composer { width:620px; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; background:#fff; border:1px solid #e2e2e6; border-radius:16px; padding:12px; box-shadow:0 8px 30px rgba(32,33,35,.08),0 1px 3px rgba(32,33,35,.08); } .ds-composer:focus-within { border-color:#b8b8ee; box-shadow:0 0 0 2px #eeeeff,0 8px 30px rgba(32,33,35,.08); } .ds-composer textarea { border:0; outline:0; resize:none; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-composer button { width:32px; height:32px; border:0; border-radius:8px; background:#202123; color:#fff; }"
     },
     {
       "name": "Status Chip",
       "kind": "chip",
       "refersTo": "status-chip",
-      "description": "Compact text-and-icon status for draft, blocker, source, and approval states.",
-      "html": "<span class=\"rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-900\">draft only</span>",
-      "css": ".rounded-md { border-radius: 8px; }"
+      "description": "A concise release or stage state with explicit wording.",
+      "html": "<span class=\"ds-status\"><span aria-hidden=\"true\"></span>Draft · 2 blockers</span>",
+      "css": ".ds-status { display:inline-flex; align-items:center; gap:6px; background:#fff6e5; color:#794300; border:1px solid #f5ca83; border-radius:999px; padding:3px 8px; font:550 12px/1.35 'Geist Variable',system-ui,sans-serif; } .ds-status span { width:6px; height:6px; background:#a85d00; border-radius:50%; }"
+    },
+    {
+      "name": "Context Panel",
+      "kind": "custom",
+      "description": "Secondary sources, blockers, evidence, and activity beside the active task.",
+      "html": "<aside class=\"ds-context\"><header><strong>Context</strong><span>2 blockers</span></header><p>Add one approved source before previewing the tutor.</p></aside>",
+      "css": ".ds-context { width:320px; background:#f7f7f8; border-left:1px solid #e2e2e6; padding:16px; color:#202123; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-context header { display:flex; align-items:center; justify-content:space-between; } .ds-context header span { color:#6b6b73; font-size:12px; }"
     }
-  ]
+  ],
+  "narrative": {
+    "northStar": "The Grounded AI Workspace",
+    "overview": "A mature LLM-style workspace where a professor configures a course tutor through conversation and opens inspectable source, policy, preview, and approval tools without leaving the same working context. The product feels familiar and calm, while professor authority and evidence remain explicit.",
+    "keyCharacteristics": [
+      "Quiet application shell with compact stage navigation.",
+      "Centered conversation or structured tool as the primary surface.",
+      "Context panel for blockers, evidence, and trace.",
+      "Neutral palette with restrained iris focus and semantic states.",
+      "Sentence-case product copy and progressive disclosure."
+    ],
+    "rules": [
+      { "name": "The Quiet Shell Rule", "body": "Navigation supports the work and never becomes the largest visual object on screen.", "section": "layout" },
+      { "name": "The One Active Signal Rule", "body": "Iris identifies the current place or focused AI context; it is not scattered across every control.", "section": "colors" },
+      { "name": "The Human Label Rule", "body": "Use sentence case; uppercase is reserved for unavoidable stored identifiers.", "section": "typography" },
+      { "name": "The Floating Composer Rule", "body": "The composer is the clearest elevated object in conversation mode; routine records do not compete with it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do make the interface recognizable as an LLM workspace within seconds.",
+      "Do center the current task and keep evidence adjacent.",
+      "Do preserve all five real stages and professor approval authority.",
+      "Do use progressive disclosure for trace and secondary metadata."
+    ],
+    "donts": [
+      "Don't reproduce another product's exact branding or proprietary UI.",
+      "Don't lead with metric grids or evaluation-dossier language.",
+      "Don't turn every section into a bordered dashboard card.",
+      "Don't invent courses, integrations, analytics, or model capabilities.",
+      "Don't hide source permissions, blockers, citations, or uncertainty."
+    ]
+  }
 }

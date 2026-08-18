@@ -4,6 +4,7 @@ import { Ban, Check, FileText, Loader2, ShieldAlert, Upload } from "lucide-react
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import type {
   SourceInventoryItem,
   SourceLabel,
@@ -21,7 +22,7 @@ type SourceInventoryProps = {
     mime_type: string
     size_bytes: number
     notes?: string
-  }) => Promise<void>
+  }) => Promise<boolean>
   onUpdateSource: (
     sourceId: string,
     updates: Partial<
@@ -58,44 +59,66 @@ export function SourceInventory({
     size_bytes: number
   } | null>(null)
   const [notes, setNotes] = useState("")
+  const hasApprovedSource = items.some(
+    (item) => item.permission_status === "approved" && !item.excluded,
+  )
+  const sourceStatus =
+    blockers.length === 0 && hasApprovedSource
+      ? "clear"
+      : blockers.length > 0
+        ? `${blockers.length} blocker${blockers.length === 1 ? "" : "s"}`
+        : "needs source"
 
   const addSelected = async () => {
     if (!selectedFile || isAdding) {
       return
     }
 
-    await onAddSource({
+    const added = await onAddSource({
       ...selectedFile,
       notes: notes.trim(),
     })
+    if (!added) {
+      return
+    }
     setSelectedFile(null)
     setNotes("")
   }
 
   return (
-    <section className="rounded-lg border bg-card p-4 text-card-foreground">
-      <div className="mb-3 flex items-start justify-between gap-3">
+    <section className="p-5 text-card-foreground sm:p-6" aria-labelledby="source-inventory-title">
+      <div className="flex items-start justify-between gap-3 border-b pb-5">
         <div>
-          <h2 className="text-sm font-semibold">Source Inventory</h2>
-          <p className="text-xs text-muted-foreground">
-            Local course-material metadata and permission decisions.
+          <h3 id="source-inventory-title" className="text-lg font-semibold tracking-[-0.02em]">
+            Sources
+          </h3>
+          <p className="mt-1 text-sm leading-5 text-muted-foreground">
+            Add course-material metadata and decide what the tutor may use.
           </p>
         </div>
-        <Badge variant={blockers.length === 0 ? "default" : "outline"}>
-          {blockers.length === 0 ? "clear" : `${blockers.length} blockers`}
+        <Badge
+          variant="outline"
+          className={cn(
+            "status-badge",
+            sourceStatus === "clear"
+              ? "status-badge-success"
+              : "status-badge-warning",
+          )}
+        >
+          {sourceStatus}
         </Badge>
       </div>
 
-      <div className="space-y-3">
-        <div className="rounded-lg border bg-background p-3">
+      <div className="flex flex-col gap-5 pt-5">
+        <div className="rounded-xl border border-dashed border-[var(--border-strong)] bg-[var(--shell)] p-4">
           <label className="grid gap-2 text-sm font-medium">
             <span className="flex items-center gap-2">
-              <Upload className="size-4 text-sky-700" />
+              <Upload className="size-4 text-[var(--accent-strong)]" />
               Add course file metadata
             </span>
             <input
               type="file"
-              className="text-sm file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-1.5 file:text-sm file:font-medium"
+              className="min-h-10 text-sm text-muted-foreground file:mr-3 file:min-h-9 file:rounded-lg file:border file:border-border file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-[var(--ink)] hover:file:border-[var(--border-strong)]"
               onChange={(event) => {
                 const file = event.target.files?.[0]
                 if (!file) {
@@ -109,10 +132,14 @@ export function SourceInventory({
                 })
               }}
             />
+            <span className="text-xs font-normal leading-5 text-muted-foreground">
+              Only file name, type, size, and permission notes are saved. File
+              contents are not uploaded or parsed.
+            </span>
           </label>
 
           {selectedFile && (
-            <div className="mt-3 grid gap-2 text-sm">
+            <div className="mt-4 grid gap-3 border-t pt-4 text-sm">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="secondary">{selectedFile.name}</Badge>
                 <span className="text-xs text-muted-foreground">
@@ -123,7 +150,8 @@ export function SourceInventory({
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
                 placeholder="Optional permission notes"
-                className="h-9 rounded-md border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label="Source permission notes"
+                className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
               />
               <Button
                 type="button"
@@ -142,23 +170,21 @@ export function SourceInventory({
           )}
         </div>
 
-        {blockers.length > 0 && (
-          <div className="rounded-md border border-amber-200 bg-amber-50 p-2 text-xs text-amber-800">
-            {blockers.map((blocker) => (
-              <div key={blocker} className="flex gap-2">
-                <ShieldAlert className="mt-0.5 size-3.5 shrink-0" />
-                {blocker}
-              </div>
-            ))}
-          </div>
-        )}
+        {blockers.length > 0 ? (
+          <Alert className="border-[var(--warning-border)] bg-[var(--warning-soft)] text-[var(--warning)]">
+            <ShieldAlert />
+            <AlertDescription className="flex flex-col gap-1 text-[var(--warning)]">
+              {blockers.map((blocker) => <span key={blocker}>{blocker}</span>)}
+            </AlertDescription>
+          </Alert>
+        ) : null}
 
         {items.length === 0 ? (
-          <div className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
+          <div className="rounded-xl border border-dashed p-5 text-sm leading-6 text-muted-foreground">
             Add syllabus, slide, assignment, or rubric metadata before final approval.
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="overflow-hidden rounded-xl border">
             {items.map((item) => (
               <SourceRow
                 key={item.id}
@@ -195,11 +221,11 @@ function SourceRow({
   ) => Promise<void>
 }) {
   return (
-    <div className="rounded-lg border bg-background p-3">
+    <article className="border-b p-4 last:border-b-0">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 text-sm font-medium">
-            <FileText className="size-4 shrink-0 text-sky-700" />
+            <FileText className="size-4 shrink-0 text-[var(--accent-strong)]" />
             <span className="truncate">{item.name}</span>
           </div>
           <div className="mt-1 flex flex-wrap gap-2 text-xs text-muted-foreground">
@@ -210,7 +236,7 @@ function SourceRow({
         <StatusBadge status={item.permission_status} />
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
         <label className="grid gap-1 text-xs font-medium text-muted-foreground">
           Source label
           <select
@@ -219,17 +245,17 @@ function SourceRow({
             onChange={(event) =>
               void onUpdate({ source_label: event.target.value as SourceLabel })
             }
-            className="h-9 rounded-md border bg-background px-2 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="h-10 rounded-lg border bg-white px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
           >
             {SOURCE_LABELS.map((label) => (
               <option key={label} value={label}>
-                {label}
+                {label.replaceAll("-", " ")}
               </option>
             ))}
           </select>
         </label>
 
-        <label className="flex items-center gap-2 text-xs text-muted-foreground">
+        <label className="flex min-h-10 items-center gap-2 text-xs text-muted-foreground sm:col-span-2">
           <Checkbox
             checked={item.sensitive}
             disabled={isSaving}
@@ -241,12 +267,13 @@ function SourceRow({
           Sensitive or private material
         </label>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 sm:col-span-2">
           <Button
             type="button"
             size="sm"
             variant={item.permission_status === "approved" ? "default" : "outline"}
             disabled={isSaving}
+            aria-pressed={item.permission_status === "approved"}
             onClick={() =>
               void onUpdate({
                 permission_status: "approved",
@@ -266,6 +293,7 @@ function SourceRow({
             size="sm"
             variant={item.excluded ? "default" : "outline"}
             disabled={isSaving}
+            aria-pressed={item.excluded}
             onClick={() =>
               void onUpdate({
                 permission_status: "excluded",
@@ -280,19 +308,24 @@ function SourceRow({
       </div>
 
       {item.notes && (
-        <p className="mt-3 rounded-md bg-muted/60 p-2 text-xs text-muted-foreground">
+        <p className="mt-3 rounded-lg bg-[var(--shell)] px-3 py-2 text-xs leading-5 text-muted-foreground">
           {item.notes}
         </p>
       )}
-    </div>
+    </article>
   )
 }
 
 function StatusBadge({ status }: { status: SourcePermissionStatus }) {
   return (
     <Badge
-      variant={status === "approved" ? "default" : "outline"}
-      className={cn(status === "excluded" && "border-slate-300 text-slate-600")}
+      variant="outline"
+      className={cn(
+        "status-badge",
+        status === "approved" && "status-badge-success",
+        status === "pending" && "status-badge-warning",
+        status === "excluded" && "border-[var(--rule-strong)] text-muted-foreground",
+      )}
     >
       {status}
     </Badge>

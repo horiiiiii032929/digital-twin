@@ -18,19 +18,21 @@ export function RevisionProposalPanel({
   }
 
   return (
-    <section className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+    <section className="rounded-xl border border-[var(--warning-border)] bg-[var(--warning-soft)] p-4 text-[var(--warning)]">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <div className="text-sm font-semibold">Pending policy revision</div>
-          <p className="mt-1 text-xs leading-5">
+          <h3 className="text-sm font-semibold text-[var(--ink)]">
+            Pending policy revision
+          </h3>
+          <p className="mt-1 text-xs leading-5 text-[var(--warning)]">
             Confirm to update the policy, or discard to keep the current draft.
           </p>
         </div>
-        <Badge variant="outline" className="border-amber-300 text-amber-900">
+        <Badge variant="outline" className="status-badge status-badge-warning">
           review needed
         </Badge>
       </div>
-      <p className="mt-3 text-sm leading-6">
+      <p className="mt-4 rounded-lg bg-white p-3 text-sm leading-6 text-[var(--ink)]">
         {session.revision_proposal.proposed_value}
       </p>
       <div className="mt-2 flex flex-wrap gap-2">

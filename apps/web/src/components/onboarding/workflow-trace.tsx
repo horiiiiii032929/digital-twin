@@ -1,18 +1,11 @@
 import {
   AlertTriangle,
   CheckCircle2,
+  ChevronDown,
   CircleDashed,
   CircleStop,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
-import {
-  ChainOfThought,
-  ChainOfThoughtContent,
-  ChainOfThoughtItem,
-  ChainOfThoughtStep,
-  ChainOfThoughtTrigger,
-} from "@/components/ui/chain-of-thought"
 import type { TraceStatus, WorkflowTraceItem } from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
@@ -22,60 +15,61 @@ type WorkflowTraceProps = {
 
 export function WorkflowTrace({ trace }: WorkflowTraceProps) {
   return (
-    <section className="rounded-lg border bg-card p-4 text-card-foreground">
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div>
-          <h2 className="text-sm font-semibold">Workflow Trace</h2>
-          <p className="text-xs text-muted-foreground">
-            LangGraph step events and guardrail outcomes.
-          </p>
-        </div>
-        <Badge variant="outline">{trace.length} events</Badge>
+    <section aria-labelledby="workflow-trace-title">
+      <div className="flex items-center justify-between gap-3">
+        <h3 id="workflow-trace-title" className="text-sm font-semibold">
+          Setup history
+        </h3>
+        <span className="text-xs font-medium tabular-nums text-muted-foreground">
+          {trace.length} events
+        </span>
       </div>
 
       {trace.length === 0 ? (
-        <EmptyState label="Trace events appear after the session starts." />
+        <div className="mt-3 flex items-start gap-2 rounded-lg bg-[var(--shell)] p-3 text-sm leading-5 text-muted-foreground">
+          <CircleDashed className="mt-0.5 size-4 shrink-0" />
+          Trace events appear after the session starts.
+        </div>
       ) : (
-        <ChainOfThought>
+        <ol className="mt-3 overflow-hidden rounded-xl border">
           {trace.map((item, index) => (
-            <ChainOfThoughtStep
-              key={item.id}
-              defaultOpen={index === trace.length - 1}
-            >
-              <ChainOfThoughtTrigger leftIcon={<StatusIcon status={item.status} />}>
-                <span className="flex flex-wrap items-center gap-2">
-                  {item.title}
-                  <TraceBadge status={item.status} />
-                </span>
-              </ChainOfThoughtTrigger>
-              <ChainOfThoughtContent>
-                <ChainOfThoughtItem>{item.detail}</ChainOfThoughtItem>
-              </ChainOfThoughtContent>
-            </ChainOfThoughtStep>
+            <li key={item.id} className="border-b last:border-b-0">
+              <details open={index === trace.length - 1} className="group">
+                <summary className="grid min-h-12 cursor-pointer list-none grid-cols-[20px_minmax(0,1fr)_16px] items-start gap-2 px-4 py-3 text-sm outline-none hover:bg-[var(--shell)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/30 [&::-webkit-details-marker]:hidden">
+                  <StatusIcon status={item.status} />
+                  <span className="min-w-0">
+                    <span className="block font-semibold leading-5">{item.title}</span>
+                    <TraceLabel status={item.status} />
+                  </span>
+                  <ChevronDown className="mt-0.5 size-4 text-muted-foreground transition-transform group-open:rotate-180" />
+                </summary>
+                <p className="px-4 pb-3 pl-12 text-xs leading-5 text-muted-foreground">
+                  {item.detail}
+                </p>
+              </details>
+            </li>
           ))}
-        </ChainOfThought>
+        </ol>
       )}
     </section>
   )
 }
 
-function TraceBadge({ status }: { status: TraceStatus }) {
+function TraceLabel({ status }: { status: TraceStatus }) {
   const label =
     status === "complete"
-      ? "complete"
+      ? "Complete"
       : status === "warning"
-        ? "review"
-        : "blocked"
+        ? "Review needed"
+        : "Blocked"
 
   return (
     <span
       className={cn(
-        "rounded-md border px-1.5 py-0.5 text-[11px] font-medium",
-        status === "complete" &&
-          "border-emerald-200 bg-emerald-50 text-emerald-700",
-        status === "warning" &&
-          "border-amber-200 bg-amber-50 text-amber-700",
-        status === "blocked" && "border-red-200 bg-red-50 text-red-700",
+        "mt-1 block text-[11px] font-semibold",
+        status === "complete" && "text-[var(--success)]",
+        status === "warning" && "text-[var(--warning)]",
+        status === "blocked" && "text-[var(--destructive-ink)]",
       )}
     >
       {label}
@@ -85,21 +79,12 @@ function TraceBadge({ status }: { status: TraceStatus }) {
 
 function StatusIcon({ status }: { status: TraceStatus }) {
   if (status === "complete") {
-    return <CheckCircle2 className="size-4 text-emerald-600" />
+    return <CheckCircle2 className="mt-0.5 size-4 text-[var(--success)]" />
   }
 
   if (status === "warning") {
-    return <AlertTriangle className="size-4 text-amber-600" />
+    return <AlertTriangle className="mt-0.5 size-4 text-[var(--warning)]" />
   }
 
-  return <CircleStop className="size-4 text-red-600" />
-}
-
-function EmptyState({ label }: { label: string }) {
-  return (
-    <div className="flex items-center gap-2 rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
-      <CircleDashed className="size-4" />
-      {label}
-    </div>
-  )
+  return <CircleStop className="mt-0.5 size-4 text-[var(--destructive-ink)]" />
 }

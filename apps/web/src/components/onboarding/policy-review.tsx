@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { Loader2, Save, ShieldAlert } from "lucide-react"
+import { ChevronDown, Loader2, Save, ShieldAlert } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,11 @@ type PolicyReviewProps = {
 type PolicyGroup = {
   title: string
   fields: PolicyField[]
+}
+
+type FieldDraft = {
+  status: FieldStatus
+  value: string
 }
 
 const STATUS_OPTIONS: Array<{ value: FieldStatus; label: string }> = [
@@ -44,7 +49,7 @@ export function PolicyReview({
         : [],
     [policy],
   )
-  const [drafts, setDrafts] = useState<Record<string, string>>({})
+  const [drafts, setDrafts] = useState<Record<string, FieldDraft>>({})
 
   useEffect(() => {
     if (!policy) {
@@ -57,7 +62,10 @@ export function PolicyReview({
 
       for (const field of groups.flatMap((group) => group.fields)) {
         if (!(field.id in next)) {
-          next[field.id] = fieldValueToText(field.value)
+          next[field.id] = {
+            status: field.status,
+            value: fieldValueToText(field.value),
+          }
         }
       }
 
@@ -66,50 +74,63 @@ export function PolicyReview({
   }, [groups, policy])
 
   return (
-    <section className="rounded-lg border bg-card p-4 text-card-foreground">
-      <div className="mb-3 flex items-start justify-between gap-3">
+    <section className="p-5 text-card-foreground sm:p-6" aria-labelledby="policy-review-title">
+      <div className="flex items-start justify-between gap-3 border-b pb-5">
         <div>
-          <h2 className="text-sm font-semibold">Tutor Policy</h2>
-          <p className="text-xs text-muted-foreground">
-            Editable fields generated from the instructor interview.
+          <h3 id="policy-review-title" className="text-lg font-semibold tracking-[-0.02em]">
+            Tutor policy
+          </h3>
+          <p className="mt-1 text-sm leading-5 text-muted-foreground">
+            Review the guidance generated from your interview.
           </p>
         </div>
         <ReleaseBadge status={policy?.release_status ?? "draft"} />
       </div>
 
       {!policy ? (
-        <div className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
+        <div className="mt-5 rounded-xl border border-dashed p-5 text-sm leading-6 text-muted-foreground">
           Complete the interview to generate policy fields.
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-5 pt-5">
           {groups.map((group) => (
-            <div key={group.title} className="space-y-2">
-              <h3 className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
-                {group.title}
-              </h3>
-              {group.fields.map((field) => (
-                <FieldEditor
-                  key={field.id}
-                  field={field}
-                  draft={drafts[field.id] ?? fieldValueToText(field.value)}
-                  isSaving={updatingFieldId === field.id}
-                  onDraftChange={(value) =>
-                    setDrafts((current) => ({
-                      ...current,
-                      [field.id]: value,
-                    }))
-                  }
-                  onSave={(status) =>
-                    onUpdateField(
-                      field.id,
-                      textToFieldValue(field.value, drafts[field.id] ?? ""),
-                      status,
-                    )
-                  }
-                />
-              ))}
-            </div>
+            <section key={group.title} className="overflow-hidden rounded-xl border">
+              <div className="flex items-center justify-between gap-3 bg-[var(--shell)] px-4 py-3">
+                <h4 className="text-sm font-semibold">{group.title}</h4>
+                <span className="text-xs tabular-nums text-muted-foreground">
+                  {group.fields.length} field{group.fields.length === 1 ? "" : "s"}
+                </span>
+              </div>
+              <div>
+                {group.fields.map((field) => (
+                  <FieldEditor
+                    key={field.id}
+                    field={field}
+                    draft={drafts[field.id] ?? {
+                      status: field.status,
+                      value: fieldValueToText(field.value),
+                    }}
+                    isSaving={updatingFieldId === field.id}
+                    onDraftChange={(draft) =>
+                      setDrafts((current) => ({
+                        ...current,
+                        [field.id]: draft,
+                      }))
+                    }
+                    onSave={() =>
+                      onUpdateField(
+                        field.id,
+                        textToFieldValue(
+                          field.value,
+                          drafts[field.id]?.value ?? fieldValueToText(field.value),
+                        ),
+                        drafts[field.id]?.status ?? field.status,
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       )}
@@ -125,80 +146,141 @@ function FieldEditor({
   onSave,
 }: {
   field: PolicyField
-  draft: string
+  draft: FieldDraft
   isSaving: boolean
-  onDraftChange: (value: string) => void
-  onSave: (status: FieldStatus) => Promise<void>
+  onDraftChange: (draft: FieldDraft) => void
+  onSave: () => Promise<void>
 }) {
+  const isStructuredValue =
+    typeof field.value === "object" && !Array.isArray(field.value)
+  const [structuredEditorOpen, setStructuredEditorOpen] = useState(false)
+  const structuredValueIsValid =
+    !isStructuredValue || isValidStructuredValue(draft.value)
+
   return (
-    <div className="rounded-lg border bg-background p-3">
-      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <div className="text-sm font-medium">{field.label}</div>
-          <StatusLabel status={field.status} />
-        </div>
-        <Button
-          type="button"
-          size="sm"
-          variant="outline"
-          onClick={() => void onSave(field.status)}
-          disabled={isSaving}
-        >
-          {isSaving ? (
-            <Loader2 data-icon="inline-start" className="animate-spin" />
-          ) : (
-            <Save data-icon="inline-start" />
-          )}
-          Save
-        </Button>
+    <article className="grid gap-3 border-t p-4 first:border-t-0 sm:grid-cols-[minmax(140px,0.72fr)_minmax(220px,1.28fr)]">
+      <div>
+        <div className="text-sm font-semibold leading-5">{field.label}</div>
+        <StatusLabel status={field.status} />
       </div>
+      <div className="min-w-0">
+        {isStructuredValue ? (
+          <div className="rounded-lg border bg-[var(--shell)] px-3 py-2.5">
+            <p className="text-sm leading-5 text-foreground">
+              {summarizeStructuredValue(draft.value)}
+            </p>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="mt-1 -ml-2 h-7 px-2 text-xs text-muted-foreground"
+              aria-expanded={structuredEditorOpen}
+              onClick={() => setStructuredEditorOpen((open) => !open)}
+            >
+              Edit JSON
+              <ChevronDown
+                data-icon="inline-end"
+                className={cn(
+                  "transition-transform",
+                  structuredEditorOpen && "rotate-180",
+                )}
+              />
+            </Button>
+          </div>
+        ) : null}
 
-      <Textarea
-        value={draft}
-        onChange={(event) => onDraftChange(event.target.value)}
-        className="min-h-20 resize-y text-sm"
-        aria-label={`${field.label} value`}
-      />
+        {!isStructuredValue || structuredEditorOpen ? (
+          <Textarea
+            value={draft.value}
+            onChange={(event) =>
+              onDraftChange({ ...draft, value: event.target.value })
+            }
+            className={cn(
+              "h-20 min-h-20 resize-y text-sm leading-5",
+              isStructuredValue && "mt-2 font-mono text-xs",
+            )}
+            aria-label={`${field.label} value`}
+            aria-invalid={!structuredValueIsValid}
+          />
+        ) : null}
 
-      <div className="mt-2 flex flex-wrap gap-2">
-        {STATUS_OPTIONS.map((option) => (
+        {isStructuredValue && !structuredValueIsValid ? (
+          <p className="mt-2 text-xs font-medium text-[var(--destructive-ink)]">
+            Enter a valid JSON object before saving.
+          </p>
+        ) : null}
+
+        <div className="mt-2 flex items-center gap-2">
+          <div className="relative min-w-0 flex-1">
+            <select
+              value={draft.status}
+              onChange={(event) =>
+                onDraftChange({
+                  ...draft,
+                  status: event.target.value as FieldStatus,
+                })
+              }
+              aria-label={`${field.label} status`}
+              disabled={isSaving}
+              className="h-9 w-full appearance-none rounded-lg border bg-white px-3 pr-8 text-xs font-medium outline-none focus-visible:border-[var(--accent-border)] focus-visible:ring-2 focus-visible:ring-[var(--accent-soft)]"
+            >
+              {STATUS_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
+              aria-hidden="true"
+            />
+          </div>
           <Button
-            key={option.value}
             type="button"
             size="sm"
-            variant={field.status === option.value ? "default" : "outline"}
-            onClick={() => void onSave(option.value)}
-            disabled={isSaving}
+            variant="outline"
+            onClick={() => void onSave()}
+            disabled={isSaving || !structuredValueIsValid}
           >
-            {option.label}
+            {isSaving ? (
+              <Loader2 data-icon="inline-start" className="animate-spin" />
+            ) : (
+              <Save data-icon="inline-start" />
+            )}
+            Save
           </Button>
-        ))}
+        </div>
       </div>
 
-      {(field.warning || field.safe_default) && (
-        <div className="mt-3 space-y-2 text-xs">
-          {field.warning && (
-            <p className="flex gap-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-amber-800">
+      {(field.warning || field.safe_default) ? (
+        <div className="flex flex-col gap-2 sm:col-start-2">
+          {field.warning ? (
+            <p className="flex gap-2 rounded-lg bg-[var(--warning-soft)] p-3 text-xs leading-5 text-[var(--warning)]">
               <ShieldAlert className="mt-0.5 size-3.5 shrink-0" />
               {field.warning}
             </p>
-          )}
-          {field.safe_default && (
-            <p className="rounded-md border border-sky-200 bg-sky-50 p-2 text-sky-800">
+          ) : null}
+          {field.safe_default ? (
+            <p className="rounded-lg bg-[var(--accent-soft)] p-3 text-xs leading-5 text-[var(--accent-foreground)]">
               Safe default: {field.safe_default}
             </p>
-          )}
+          ) : null}
         </div>
-      )}
-    </div>
+      ) : null}
+    </article>
   )
 }
 
 function ReleaseBadge({ status }: { status: string }) {
   return (
     <Badge
-      variant={status === "approved" ? "default" : "outline"}
-      className={cn(status === "blocked" && "border-red-200 text-red-700")}
+      variant="outline"
+      className={cn(
+        "status-badge",
+        status === "approved" && "status-badge-success",
+        status === "blocked" && "status-badge-danger",
+        status === "draft" && "status-badge-warning",
+      )}
     >
       {status.replace("_", " ")}
     </Badge>
@@ -210,9 +292,9 @@ function StatusLabel({ status }: { status: FieldStatus }) {
     <div
       className={cn(
         "mt-0.5 text-xs font-medium",
-        status === "resolved" && "text-emerald-700",
-        status === "needs_review" && "text-amber-700",
-        status === "blocks_release" && "text-red-700",
+        status === "resolved" && "text-[var(--success)]",
+        status === "needs_review" && "text-[var(--warning)]",
+        status === "blocks_release" && "text-[var(--destructive-ink)]",
       )}
     >
       {status.replace("_", " ")}
@@ -230,6 +312,34 @@ function fieldValueToText(
     return JSON.stringify(value, null, 2)
   }
   return value
+}
+
+function summarizeStructuredValue(value: string): string {
+  try {
+    const parsed = JSON.parse(value) as Record<string, unknown>
+    const current = parsed.source_strictness
+    const recommended = parsed.recommended_value
+
+    if (typeof current === "string" && current !== "unresolved") {
+      return `Current: ${current.replaceAll("_", " ")}`
+    }
+    if (typeof recommended === "string") {
+      return `Not confirmed · Recommended: ${recommended.replaceAll("_", " ")}`
+    }
+  } catch {
+    return "Invalid JSON · Open the editor to correct it"
+  }
+
+  return "Structured policy value"
+}
+
+function isValidStructuredValue(value: string): boolean {
+  try {
+    const parsed = JSON.parse(value)
+    return Boolean(parsed) && typeof parsed === "object" && !Array.isArray(parsed)
+  } catch {
+    return false
+  }
 }
 
 function textToFieldValue(

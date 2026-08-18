@@ -1,16 +1,11 @@
-import { useMemo, useState } from "react"
-import { Bot, Loader2, RotateCcw, SendHorizontal, UserRound } from "lucide-react"
+import { useState } from "react"
+import { Loader2, RotateCcw, SendHorizontal, Sparkles, UserRound } from "lucide-react"
 
 import {
   ChatContainerContent,
   ChatContainerRoot,
   ChatContainerScrollAnchor,
 } from "@/components/ui/chat-container"
-import {
-  Message,
-  MessageAvatar,
-  MessageContent,
-} from "@/components/ui/message"
 import {
   PromptInput,
   PromptInputAction,
@@ -20,14 +15,13 @@ import {
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion"
 import { Button } from "@/components/ui/button"
 import type { ChatMessage } from "@/lib/api/types"
-import { cn } from "@/lib/utils"
 
 type OnboardingChatProps = {
   messages: ChatMessage[]
   currentStep: string
   isLoading: boolean
   isSubmitting: boolean
-  onSendMessage: (content: string) => Promise<void>
+  onSendMessage: (content: string) => Promise<boolean>
   onRestart: () => Promise<void>
 }
 
@@ -63,10 +57,7 @@ export function OnboardingChat({
   onRestart,
 }: OnboardingChatProps) {
   const [draft, setDraft] = useState("")
-  const suggestions = useMemo(
-    () => SUGGESTIONS_BY_STEP[currentStep] ?? [],
-    [currentStep],
-  )
+  const suggestions = SUGGESTIONS_BY_STEP[currentStep] ?? []
 
   const submit = async () => {
     const content = draft.trim()
@@ -75,8 +66,9 @@ export function OnboardingChat({
       return
     }
 
-    setDraft("")
-    await onSendMessage(content)
+    if (await onSendMessage(content)) {
+      setDraft("")
+    }
   }
 
   const submitSuggestion = async (content: string) => {
@@ -84,121 +76,128 @@ export function OnboardingChat({
       return
     }
 
-    setDraft("")
     await onSendMessage(content)
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <ChatContainerRoot className="min-h-[260px] flex-1 px-4 sm:min-h-[420px]">
-        <ChatContainerContent className="gap-4 py-4">
+    <div className="flex h-full min-h-[560px] flex-col">
+      <ChatContainerRoot className="min-h-0 flex-1">
+        <ChatContainerContent className="mx-auto w-full max-w-[760px] gap-7 px-5 py-7 sm:px-7 lg:py-8">
           {isLoading ? (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 py-4 text-sm text-muted-foreground">
               <Loader2 className="size-4 animate-spin" />
-              Starting onboarding session
+              Starting setup session
             </div>
           ) : (
             messages.map((message, index) => (
-              <ChatBubble
-                key={`${message.role}-${index}`}
-                message={message}
-              />
+              <InterviewEntry key={`${message.role}-${index}`} message={message} />
             ))
           )}
           <ChatContainerScrollAnchor />
         </ChatContainerContent>
       </ChatContainerRoot>
 
-      <div className="border-t bg-background/80 p-3">
-        {suggestions.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-2">
-            {suggestions.map((suggestion) => (
-              <PromptSuggestion
-                key={suggestion}
-                type="button"
-                size="sm"
-                className="h-auto max-w-full justify-start whitespace-normal rounded-lg text-left leading-5"
-                disabled={isSubmitting || isLoading}
-                onClick={() => void submitSuggestion(suggestion)}
-              >
-                {suggestion}
-              </PromptSuggestion>
-            ))}
-          </div>
-        )}
+      <div className="border-t bg-white px-4 pb-5 pt-3 sm:px-6">
+        <div className="mx-auto w-full max-w-[720px]">
+          {suggestions.length > 0 ? (
+            <div className="mb-3">
+              <div className="mb-2 text-xs font-medium text-muted-foreground">Suggestions</div>
+              <div className="grid gap-2 sm:grid-cols-2">
+              {suggestions.map((suggestion) => (
+                <PromptSuggestion
+                  key={suggestion}
+                  type="button"
+                  size="sm"
+                    className="h-auto min-w-0 justify-start whitespace-normal rounded-lg border-border bg-white px-3 py-2 text-left text-xs leading-5 hover:bg-[var(--subtle)]"
+                  disabled={isSubmitting || isLoading}
+                  onClick={() => void submitSuggestion(suggestion)}
+                >
+                  {suggestion}
+                </PromptSuggestion>
+              ))}
+              </div>
+            </div>
+          ) : null}
 
-        <PromptInput
-          value={draft}
-          onValueChange={setDraft}
-          onSubmit={() => void submit()}
-          disabled={isSubmitting || isLoading}
-          isLoading={isSubmitting}
-          className="rounded-lg"
-        >
-          <PromptInputTextarea
-            placeholder="Answer the current onboarding question..."
-            aria-label="Onboarding answer"
-          />
-          <PromptInputActions className="justify-between">
-            <PromptInputAction tooltip="Restart session">
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                aria-label="Restart session"
-                onClick={() => void onRestart()}
-                disabled={isSubmitting || isLoading}
-              >
-                <RotateCcw data-icon="inline-start" />
-              </Button>
-            </PromptInputAction>
-            <PromptInputAction tooltip="Send answer">
-              <Button
-                type="button"
-                size="icon"
-                aria-label="Send answer"
-                onClick={() => void submit()}
-                disabled={!draft.trim() || isSubmitting || isLoading}
-              >
-                {isSubmitting ? (
-                  <Loader2 data-icon="inline-start" className="animate-spin" />
-                ) : (
-                  <SendHorizontal data-icon="inline-start" />
-                )}
-              </Button>
-            </PromptInputAction>
-          </PromptInputActions>
-        </PromptInput>
+          <label htmlFor="instructor-answer" className="sr-only">
+            Reply to the setup assistant
+          </label>
+          <PromptInput
+            value={draft}
+            onValueChange={setDraft}
+            onSubmit={() => void submit()}
+            disabled={isSubmitting || isLoading}
+            isLoading={isSubmitting}
+            className="rounded-2xl border-border bg-white p-2 shadow-[var(--shadow-composer)] focus-within:border-[var(--accent-border)] focus-within:ring-2 focus-within:ring-[var(--accent-soft)]"
+          >
+            <PromptInputTextarea
+              id="instructor-answer"
+              placeholder="Reply to the setup assistant"
+              aria-label="Setup assistant reply"
+              className="min-h-12 px-2 py-2 text-sm"
+            />
+            <PromptInputActions className="justify-between px-0.5 pb-0.5">
+              <PromptInputAction tooltip="Restart session">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label="Restart session"
+                  onClick={() => void onRestart()}
+                  disabled={isSubmitting || isLoading}
+                >
+                  <RotateCcw data-icon="inline-start" />
+                </Button>
+              </PromptInputAction>
+              <PromptInputAction tooltip="Send answer">
+                <Button
+                  type="button"
+                  size="icon-lg"
+                  aria-label="Send answer"
+                  onClick={() => void submit()}
+                  disabled={!draft.trim() || isSubmitting || isLoading}
+                >
+                  {isSubmitting ? (
+                    <Loader2 data-icon="inline-start" className="animate-spin" />
+                  ) : (
+                    <SendHorizontal data-icon="inline-start" />
+                  )}
+                </Button>
+              </PromptInputAction>
+            </PromptInputActions>
+          </PromptInput>
+        </div>
       </div>
     </div>
   )
 }
 
-function ChatBubble({ message }: { message: ChatMessage }) {
+function InterviewEntry({ message }: { message: ChatMessage }) {
   const isInstructor = message.role === "instructor"
+  const isSystem = message.role === "system"
 
   return (
-    <Message className={cn(isInstructor && "justify-end")}>
-      {!isInstructor && (
-        <MessageAvatar src="" alt="Assistant" fallback="DT" className="mt-1" />
-      )}
-      <MessageContent
-        className={cn(
-          "max-w-[82%] rounded-lg px-3 py-2 text-sm leading-6 shadow-none",
-          isInstructor
-            ? "bg-primary text-primary-foreground"
-            : "border bg-card text-card-foreground",
-        )}
-        aria-label={isInstructor ? "Instructor message" : "Assistant message"}
+    <article className="grid grid-cols-[36px_minmax(0,1fr)] gap-3">
+      <div
+        className={isInstructor
+          ? "flex size-8 items-center justify-center rounded-full bg-[var(--subtle)] text-muted-foreground"
+          : "flex size-8 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)]"}
+        aria-hidden="true"
       >
-        {message.content}
-      </MessageContent>
-      {isInstructor && (
-        <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+        {isInstructor ? (
           <UserRound className="size-4" />
+        ) : (
+          <Sparkles className="size-4" />
+        )}
+      </div>
+      <div className="min-w-0">
+        <div className="text-sm font-semibold">
+          {isInstructor ? "Professor" : isSystem ? "System" : "Setup assistant"}
         </div>
-      )}
-      {message.role === "system" && <Bot className="size-4" />}
-    </Message>
+        <p className="mt-1 max-w-[70ch] whitespace-pre-wrap text-sm leading-6 text-[var(--ink)]">
+          {message.content}
+        </p>
+      </div>
+    </article>
   )
 }

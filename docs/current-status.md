@@ -30,6 +30,14 @@ but they do not override this page for current sequencing.
   [`technical-evidence-freeze-v1`](../research/05_evaluation/profiles/technical-evidence-freeze-v1.json)
   preserve supported results, negative results, limitations, reproducibility,
   and rollback.
+- Post-freeze issue
+  [#80](https://github.com/horiiiiii032929/digital-twin/issues/80) is the only
+  active implementation item. It is a demo-UX refactor of the existing
+  professor console, not a component-profile change or new evaluation claim.
+  The selected conversation-plus-tool candidate now has a single five-stage
+  route, LLM-style interview workspace, structured review tools, updated design
+  system, and passing engineering QA; subjective professor and human-usability
+  review remain pending.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -58,17 +66,20 @@ selection was changed.
 
 ## Post-freeze queue
 
-No implementation issue is active after the technical freeze. Resume a queued
-item only after a new explicit decision, ideally from professor feedback.
+Issue #80 is the sole active post-freeze item. It may improve the professor demo
+without changing frozen model, retrieval, profile, or research-evidence
+decisions. Resume any other queued item only after a new explicit decision,
+ideally from professor feedback.
 
 | Order | Issue | Board state | Purpose |
 | ---: | --- | --- | --- |
-| 1 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
-| 2 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
-| 3 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Preserve the 19-check foundation; do not start new feature development after the technical freeze |
-| 4 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
-| 5 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
-| 6 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
+| 1 | [#80 Professor review console redesign](https://github.com/horiiiiii032929/digital-twin/issues/80) | In Progress / Pending | Conversation-plus-tool LLM workspace is implemented and technically checked; await subjective review before Keep/Refine |
+| 2 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
+| 3 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
+| 4 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Preserve the 19-check foundation; do not start new feature development after the technical freeze |
+| 5 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
+| 6 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
+| 7 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
 
 The 2026-08-16 target was missed by two days; the technical evidence was frozen
 on 2026-08-18. Do not start new feature or method development, open held-out

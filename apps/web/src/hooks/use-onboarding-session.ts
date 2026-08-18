@@ -29,13 +29,13 @@ import type {
 
 export type OnboardingController = SessionState & {
   restart: () => Promise<void>
-  sendMessage: (content: string) => Promise<void>
+  sendMessage: (content: string) => Promise<boolean>
   addSource: (item: {
     name: string
     mime_type: string
     size_bytes: number
     notes?: string
-  }) => Promise<void>
+  }) => Promise<boolean>
   editSource: (
     sourceId: string,
     updates: Partial<
@@ -60,7 +60,7 @@ export type OnboardingController = SessionState & {
     decision: PreviewDecisionValue,
     reason?: string,
   ) => Promise<void>
-  addCustomPreview: (prompt: string, tag: PromptTag) => Promise<void>
+  addCustomPreview: (prompt: string, tag: PromptTag) => Promise<boolean>
   confirmRevision: () => Promise<void>
   discardRevision: () => Promise<void>
 }
@@ -94,17 +94,20 @@ export function useOnboardingSession(): OnboardingController {
       dispatch({ type: "operation/pending", operation, id })
 
       try {
+        const session = await command()
         dispatch({
           type: "operation/succeeded",
           operation,
-          session: await command(),
+          session,
         })
+        return true
       } catch (caught) {
         dispatch({
           type: "operation/failed",
           operation,
           error: errorMessage(caught),
         })
+        return false
       } finally {
         dispatch({ type: "operation/finished", operation })
       }
@@ -116,10 +119,10 @@ export function useOnboardingSession(): OnboardingController {
     async (content: string) => {
       const trimmed = content.trim()
       if (!trimmed || !state.session || state.isSubmitting) {
-        return
+        return false
       }
 
-      await runOperation("message", () =>
+      return runOperation("message", () =>
         submitOnboardingMessage(state.session!.session_id, trimmed),
       )
     },
@@ -153,10 +156,10 @@ export function useOnboardingSession(): OnboardingController {
       notes?: string
     }) => {
       if (!state.session || state.isAddingSource) {
-        return
+        return false
       }
 
-      await runOperation("source-add", () =>
+      return runOperation("source-add", () =>
         addSourceInventoryItem(state.session!.session_id, item),
       )
     },
@@ -240,10 +243,10 @@ export function useOnboardingSession(): OnboardingController {
     async (prompt: string, tag: PromptTag) => {
       const trimmed = prompt.trim()
       if (!state.session || state.isAddingCustomPreview || !trimmed) {
-        return
+        return false
       }
 
-      await runOperation("preview-add", () =>
+      return runOperation("preview-add", () =>
         addCustomPreviewCase(state.session!.session_id, {
           prompt: trimmed,
           tag,

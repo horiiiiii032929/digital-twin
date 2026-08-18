@@ -1,222 +1,255 @@
 ---
-name: Course Digital Twin Onboarding
-description: A restrained professor review console for source, policy, preview, and approval gates.
+name: Course Digital Twin Professor Workspace
+description: A familiar LLM workspace for configuring and approving a course tutor.
 colors:
-  background: "#ffffff"
-  workspace: "#f7f7f4"
-  foreground: "#18181b"
-  primary: "#27272a"
-  primary-foreground: "#fafafa"
-  secondary: "#f4f4f5"
-  muted: "#f4f4f5"
-  muted-foreground: "#71717a"
-  border: "#e4e4e7"
-  destructive: "#dc2626"
-  warning-bg: "#fffbeb"
-  warning-text: "#92400e"
-  info-bg: "#f0f9ff"
-  info-text: "#075985"
+  ink: "#202123"
+  accent: "#5b5bd6"
+  accent-soft: "#eeeeff"
+  canvas: "#ffffff"
+  shell: "#f7f7f8"
+  subtle: "#f0f0f2"
+  muted: "#6b6b73"
+  border: "#e2e2e6"
+  success: "#147a57"
+  success-soft: "#eaf8f2"
+  warning: "#a85d00"
+  warning-soft: "#fff6e5"
+  destructive: "#c2413b"
+  destructive-soft: "#fff0ef"
 typography:
   headline:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.25rem"
-    fontWeight: 600
-    lineHeight: 1.3
-    letterSpacing: "0"
+    fontWeight: 620
+    lineHeight: 1.25
+    letterSpacing: "-0.02em"
   title:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.875rem"
+    fontSize: "0.9375rem"
     fontWeight: 600
-    lineHeight: 1.35
-    letterSpacing: "0"
+    lineHeight: 1.4
+    letterSpacing: "-0.01em"
   body:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.55
     letterSpacing: "0"
   label:
     fontFamily: "Geist Variable, Inter, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.75rem"
-    fontWeight: 500
+    fontWeight: 550
     lineHeight: 1.35
     letterSpacing: "0"
 rounded:
-  sm: "6px"
-  md: "8px"
-  lg: "10px"
-  xl: "12px"
+  sm: "8px"
+  md: "12px"
+  lg: "16px"
+  full: "999px"
 spacing:
   xs: "4px"
   sm: "8px"
-  md: "16px"
-  lg: "24px"
+  md: "12px"
+  lg: "16px"
+  xl: "24px"
+  2xl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.primary-foreground}"
-    rounded: "{rounded.md}"
-    padding: "8px 16px"
-  button-outline:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
-    padding: "8px 16px"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.canvas}"
+    rounded: "{rounded.sm}"
+    padding: "8px 14px"
+  button-secondary:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: "8px 14px"
+  nav-active:
+    backgroundColor: "{colors.subtle}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: "8px 10px"
   status-chip:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
-    padding: "4px 8px"
+    backgroundColor: "{colors.subtle}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    padding: "3px 8px"
 ---
 
-# Design System: Course Digital Twin Onboarding
+# Design System: Course Digital Twin Professor Workspace
 
-## 1. Overview
+## Overview
 
-**Creative North Star: "The Review Console"**
+**Creative North Star: "The Grounded AI Workspace"**
 
-This product is a task surface for professors checking whether a Course Digital
-Twin is ready for student exposure. The design should feel calm, exact, and
-operational: current release state first, review evidence close behind, and the
-chat interview treated as one workstream rather than the whole product.
+The professor console should feel immediately familiar to someone who already
+uses a mature LLM product: a quiet application shell, a focused conversational
+workspace, lightweight project navigation, and contextual material available
+without competing with the current task. The product-specific difference is
+that conversation is connected to visible source permissions, policy fields,
+preview evidence, and professor approval.
 
-The system rejects generic AI demo styling. It should not use decorative
-gradients, glass panels, oversized hero copy, or card-heavy marketing rhythm.
-The professor needs a readable console where every release-affecting state is
-auditable.
+This direction replaces the release-dossier presentation. It removes report-like
+metric grids, numbered records as decoration, repeated explanatory prose, and
+full-screen ruled-paper framing. Research status remains truthful but secondary.
 
 **Key Characteristics:**
 
-- Restrained color with semantic status accents.
-- Dense but readable panels for review work.
-- Clear active-step hierarchy and release gate visibility.
-- Standard shadcn-style controls and lucide icons.
+- A persistent, quiet workspace shell with compact setup navigation.
+- Conversation is the natural starting point; structured tools open in the same
+  workspace rather than resembling separate reports.
+- Release state and blockers are concise, discoverable, and never decorative.
+- Context uses a lightweight side panel with progressive disclosure.
+- Familiar LLM-product density, rounding, hover states, and composer behavior.
 
-## 2. Colors
+## Colors
 
-The palette is near-neutral and light, with color reserved for semantic review
-state.
+The palette is neutral and screen-native. Near-black carries primary actions;
+iris marks selection and focus; semantic colors are reserved for real states.
 
 ### Primary
 
-- **Console Ink** (#27272a): Primary actions, active step text, and high-priority
-  labels.
+- **Workspace Ink** (#202123): Primary text and decisive actions.
+- **Context Iris** (#5b5bd6): Selected navigation, focus, and current AI context.
 
 ### Neutral
 
-- **Workspace Canvas** (#f7f7f4): Page-level background, used to separate the
-  working surface from white review panels.
-- **Panel White** (#ffffff): Primary content panels and tool surfaces.
-- **Divider Gray** (#e4e4e7): Borders, separators, and inactive control outlines.
-- **Muted Copy** (#71717a): Secondary metadata only; avoid it for key decisions.
+- **Conversation Canvas** (#ffffff): Main task and chat surface.
+- **Soft Shell** (#f7f7f8): Application navigation and page background.
+- **Quiet Fill** (#f0f0f2): Hover, selected-neutral, and grouped metadata.
+- **Soft Border** (#e2e2e6): Inputs and structural separation.
+- **Secondary Text** (#6b6b73): Explanations and metadata.
 
-### Semantic
+### Tertiary
 
-- **Release Warning** (#fffbeb / #92400e): Blocking checklist and pending revision
-  notices.
-- **Review Info** (#f0f9ff / #075985): Draft-only and source-governance notices.
-- **Destructive Red** (#dc2626): Failed requests and destructive states.
+- **Ready Green** (#147a57): Completed release conditions.
+- **Review Amber** (#a85d00): Pending decisions and blockers.
+- **Blocked Red** (#c2413b): Failed actions and explicit rejection.
 
 ### Named Rules
 
-**The Rare Accent Rule.** Color exists to explain state, not decorate the page.
-If a color does not indicate review state, selection, or action, remove it.
+**The Quiet Shell Rule.** Navigation supports the work and never becomes the
+largest visual object on screen.
 
-## 3. Typography
+**The One Active Signal Rule.** Iris identifies the current place or focused AI
+context; it is not scattered across every interactive element.
 
-**Display Font:** Geist Variable with Inter and system fallbacks
-**Body Font:** Geist Variable with Inter and system fallbacks
-**Label/Mono Font:** Same family unless code or source identifiers require mono
+## Typography
 
-**Character:** Compact, utilitarian, and steady. Product text should read like a
-review tool, not a launch page.
+**Display Font:** Geist Variable with system fallbacks
+
+**Body Font:** Geist Variable with system fallbacks
+
+**Character:** A neutral, highly legible UI grotesk associated with contemporary
+AI workspaces. Hierarchy comes from weight and spacing, not uppercase labels or
+editorial display treatments.
 
 ### Hierarchy
 
-- **Headline** (600, 20px, 1.3): Page title and primary workspace headings only.
-- **Title** (600, 14px, 1.35): Panel headers, active-step labels, and checklist
-  labels.
-- **Body** (400, 14px, 1.5): Messages, policy text, preview explanations, and
-  source notes. Long prose should stay near 65-75ch.
-- **Label** (500, 12px, 1.35): Metadata, small status, field labels, and compact
-  counts. Do not use tracked uppercase as a default section style.
+- **Headline** (620, 20px, 1.25): Current workspace title.
+- **Title** (600, 15px, 1.4): Tool sections and substantial records.
+- **Body** (400, 14px, 1.55): Conversation, descriptions, and review content.
+- **Label** (550, 12px, 1.35): Navigation state, metadata, and concise captions.
 
 ### Named Rules
 
-**The Small Surface Rule.** Product UI uses a fixed rem scale. Avoid fluid type
-and hero-scale headings inside the review console.
+**The Human Label Rule.** Use sentence case. Uppercase is limited to unavoidable
+identifiers from stored evidence, never used as the main hierarchy device.
 
-## 4. Elevation
+## Layout
 
-This system uses tonal layering and borders instead of decorative shadows. Panels
-are flat at rest. Depth comes from the page canvas, panel borders, separators,
-and active-state backgrounds.
+Desktop uses a familiar LLM workspace: a 240px navigation sidebar, a flexible
+conversation area, and a structured tool area of similar visual weight. The app
+bar is compact and contains the product identity, course setup state, and an
+Activity toggle that temporarily replaces the structured tool with release
+context.
+
+The setup stages appear as concise sidebar navigation, followed by one compact
+release-status summary. The main task surface is centered with a readable maximum
+width for conversation and forms. Structured tools may use the available width,
+but their headings and controls align to the same workspace rhythm.
+
+Below 1280px the selected stage or Activity surface becomes the focused work
+area instead of competing with the conversation. Below 1024px the sidebar becomes
+a compact horizontal stage switcher beneath the app bar. The primary task always
+precedes supporting evidence in document order.
+
+Spacing follows a 4/8/12/16/24/32px rhythm. Routine controls are compact; major
+task transitions use 24-32px separation.
+
+## Elevation & Depth
+
+The shell is mostly tonal and flat. A restrained ambient shadow is allowed for
+the chat composer, popovers, and a context panel that overlays narrow layouts.
+Ordinary content groups use background contrast and spacing rather than stacks
+of bordered cards.
 
 ### Named Rules
 
-**The Flat-by-Default Rule.** Do not combine a 1px border with a wide soft shadow
-on cards or buttons. Use a border or a small state shadow, not both.
+**The Floating Composer Rule.** The composer is the clearest elevated object in
+conversation mode; routine records must not compete with it.
 
-## 5. Components
+## Shapes
+
+Navigation and controls use 8px corners; substantive floating surfaces use
+12-16px. Status chips may be fully rounded because they communicate short,
+atomic values. Avoid both square report frames and excessive bubble-shaped cards.
+
+## Components
 
 ### Buttons
 
-- **Shape:** Medium radius (8px), matching the existing shadcn button vocabulary.
-- **Primary:** Console Ink background with white text for the next decisive
-  action.
-- **Hover / Focus:** Use existing component variants, visible focus rings, and
-  150-200ms state transitions.
-- **Secondary / Outline:** White or muted backgrounds with border contrast for
-  non-primary actions such as restart, discard, or expand.
+- **Shape:** Compact 8px rectangle.
+- **Primary:** Near-black with white text for the decisive action.
+- **Hover / Focus:** Subtle tonal shift and a visible iris focus outline.
+- **Secondary / Ghost:** Quiet fill or white with a soft border.
 
 ### Chips
 
-- **Style:** Small, text-and-icon badges with muted or semantic backgrounds.
-- **State:** Status chips must include readable text; color alone cannot carry
-  approval, blocker, or draft state.
+- **Style:** Short sentence-case state labels with restrained fills.
+- **State:** Meaning remains explicit in text; color is supplementary.
 
 ### Cards / Containers
 
-- **Corner Style:** 10-12px maximum for panels and repeated review items.
-- **Background:** White primary panels on the workspace canvas.
-- **Shadow Strategy:** Flat by default; no decorative glow.
-- **Border:** 1px neutral border for grouping and scan boundaries.
-- **Internal Padding:** 16px for standard panels, 12px for dense list items.
+- **Corner Style:** 12px for self-contained records and 16px for floating tools.
+- **Background:** White task canvas or quiet neutral fill.
+- **Shadow Strategy:** None at rest except composer and overlays.
+- **Border:** Soft border only when grouping cannot be expressed by spacing.
+- **Internal Padding:** 12-20px depending on density.
 
 ### Inputs / Fields
 
-- **Style:** White or background surface, 1px border, medium radius.
-- **Focus:** Use ring color from the existing shadcn token set.
-- **Error / Disabled:** Preserve text labels and disabled affordances; avoid
-  color-only communication.
+- **Style:** White or quiet-fill field, soft border, 8-12px radius.
+- **Focus:** Iris border and focus outline.
+- **Error / Disabled:** Explicit supporting text and stable control boundaries.
 
 ### Navigation
 
-The onboarding flow should expose a persistent step map with source, interview,
-policy, preview, revision, and approval states. The active task should be visually
-distinct and linked to the main work area.
+The five setup stages are compact rows with an icon, label, and state indicator.
+The active item uses a quiet fill and iris icon; complete and blocked state never
+overpowers navigation selection. On mobile these become a horizontal step switcher.
 
-### Review Panels
+### Conversation Composer
 
-Use panels for actual review artifacts: source inventory, tutor policy, preview
-evidence, revision proposal, and approval checklist. Avoid nesting panels inside
-larger decorative cards; use full-width bands or side-by-side regions instead.
+The composer is a rounded, elevated input region at the bottom of the interview
+workspace. Suggested answers appear as compact prompt chips above it. Interview
+history uses restrained assistant identity and natural content width rather than
+speech-bubble theater.
 
-## 6. Do's and Don'ts
+## Do's and Don'ts
 
 ### Do:
 
-- **Do** lead with release readiness and the next blocking decision.
-- **Do** keep evidence, source labels, and release blockers close to the relevant
-  action.
-- **Do** use lucide icons in small controls and status labels.
-- **Do** preserve keyboard access and visible focus states for review controls.
+- **Do** make the interface recognizable as an LLM workspace within seconds.
+- **Do** keep the current task centered and reveal evidence alongside it.
+- **Do** preserve the five real stages and professor-controlled approval.
+- **Do** use progressive disclosure for trace and secondary metadata.
+- **Do** state prototype limitations in secondary product chrome or documentation.
 
 ### Don't:
 
-- **Don't** make the chat transcript the only dominant element once review
-  artifacts exist.
-- **Don't** use decorative gradients, glassmorphism, or purple-blue AI branding.
-- **Don't** hide release blockers deep in a scroll rail.
-- **Don't** use border-left accent stripes, gradient text, or oversized rounded
-  cards.
+- **Don't** reproduce another product's logo, exact branding, or proprietary UI.
+- **Don't** lead with evaluation terminology, metric grids, or a dossier metaphor.
+- **Don't** make every section a bordered dashboard card.
+- **Don't** invent courses, users, integrations, analytics, or model capabilities.
+- **Don't** hide source permissions, blockers, citations, or uncertainty.
