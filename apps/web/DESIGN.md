@@ -1,6 +1,6 @@
 ---
-name: Course Digital Twin Professor Workspace
-description: A familiar LLM workspace for configuring and approving a course tutor.
+name: Course Digital Twin Product Workspace
+description: A conversation-first grounded AI workspace with inspectable setup and evidence.
 colors:
   ink: "#202123"
   accent: "#5b5bd6"
@@ -76,30 +76,33 @@ components:
     padding: "3px 8px"
 ---
 
-# Design System: Course Digital Twin Professor Workspace
+# Design System: Course Digital Twin Product Workspace
 
 ## Overview
 
-**Creative North Star: "The Grounded AI Workspace"**
+**Creative North Star: "Conversation with accountable context"**
 
-The professor console should feel immediately familiar to someone who already
-uses a mature LLM product: a quiet application shell, a focused conversational
-workspace, lightweight project navigation, and contextual material available
-without competing with the current task. The product-specific difference is
-that conversation is connected to visible source permissions, policy fields,
-preview evidence, and professor approval.
+Both roles share one recognizable LLM-product structure: a quiet navigation
+rail, a dominant conversation canvas, a minimal course header, and one floating
+composer. Course setup, release blockers, and citation lineage open as
+contextual inspectors only when the user asks for them. The product-specific
+difference is not more dashboard chrome; it is that every answer and release
+decision can reveal its evidence and boundary.
 
-This direction replaces the release-dossier presentation. It removes report-like
-metric grids, numbered records as decoration, repeated explanatory prose, and
-full-screen ruled-paper framing. Research status remains truthful but secondary.
+This direction replaces both the release-dossier presentation and the setup
+wizard presentation. It removes horizontal stage bars, permanently open
+inspectors, metric grids, repeated explanatory prose, and task controls that
+compete with the conversation.
 
 **Key Characteristics:**
 
-- A persistent, quiet workspace shell with compact setup navigation.
-- Conversation is the natural starting point; structured tools open in the same
-  workspace rather than resembling separate reports.
+- A shared 216px quiet rail for product identity, the current course, and only
+  truthful role-specific navigation.
+- Conversation remains visible across professor setup stages; structured tools
+  open in a contextual inspector rather than replacing the workspace.
 - Release state and blockers are concise, discoverable, and never decorative.
-- Context uses a lightweight side panel with progressive disclosure.
+- Context is closed by default for students and opens from an inline citation;
+  professor setup opens from the active stage or Setup action.
 - Familiar LLM-product density, rounding, hover states, and composer behavior.
 
 ## Colors
@@ -158,21 +161,22 @@ identifiers from stored evidence, never used as the main hierarchy device.
 
 ## Layout
 
-Desktop uses a familiar LLM workspace: a 240px navigation sidebar, a flexible
-conversation area, and a structured tool area of similar visual weight. The app
-bar is compact and contains the product identity, course setup state, and an
-Activity toggle that temporarily replaces the structured tool with release
-context.
+Desktop uses a familiar LLM workspace: a 216px navigation rail, a flexible
+conversation canvas, and a 384-408px contextual inspector only while context is
+open. The rail owns product identity and concise role navigation. The header
+belongs to the conversation canvas and contains the current course, the truthful
+release state, and one context action.
 
-The setup stages appear as concise sidebar navigation, followed by one compact
-release-status summary. The main task surface is centered with a readable maximum
-width for conversation and forms. Structured tools may use the available width,
-but their headings and controls align to the same workspace rhythm.
+Professor setup stages are concise rail rows followed by one explicit blocker
+summary. Selecting a stage opens its inspector while preserving the interview
+conversation. Student navigation contains only the assigned course, New chat,
+and the one browser-local conversation; it never implies server-side history.
+Selecting an inline citation opens the source inspector and preserves transcript
+position.
 
-Below 1280px the selected stage or Activity surface becomes the focused work
-area instead of competing with the conversation. Below 1024px the sidebar becomes
-a compact horizontal stage switcher beneath the app bar. The primary task always
-precedes supporting evidence in document order.
+Below 1024px the rail becomes a menu sheet and contextual tools become an
+accessible bottom sheet. The conversation remains the page beneath the sheet.
+The primary task precedes supporting evidence in document order at every size.
 
 Spacing follows a 4/8/12/16/24/32px rhythm. Routine controls are compact; major
 task transitions use 24-32px separation.
@@ -188,6 +192,10 @@ of bordered cards.
 
 **The Floating Composer Rule.** The composer is the clearest elevated object in
 conversation mode; routine records must not compete with it.
+
+**The Conversation Stays Home Rule.** Opening setup, blockers, activity, or a
+citation may narrow or cover the canvas temporarily, but it never navigates the
+user into a separate dashboard page.
 
 ## Shapes
 
@@ -225,9 +233,17 @@ atomic values. Avoid both square report frames and excessive bubble-shaped cards
 
 ### Navigation
 
-The five setup stages are compact rows with an icon, label, and state indicator.
-The active item uses a quiet fill and iris icon; complete and blocked state never
-overpowers navigation selection. On mobile these become a horizontal step switcher.
+The rail uses compact open rows, not a tab bar. Professor rows show the five real
+setup stages and their text/icon state; student rows show only the real assigned
+course and browser-local conversation. The active item uses a quiet iris fill.
+On mobile the rail becomes a modal menu sheet rather than a horizontal stepper.
+
+### Context Inspector
+
+The inspector is 384-408px on desktop, white with one left rule and no resting
+shadow. It has a compact sticky header with title and Close action. On mobile it
+is a bottom sheet with a visible drag affordance, a maximum height that preserves
+orientation, keyboard focus containment, Escape close, and focus return.
 
 ### Conversation Composer
 
@@ -241,7 +257,8 @@ speech-bubble theater.
 ### Do:
 
 - **Do** make the interface recognizable as an LLM workspace within seconds.
-- **Do** keep the current task centered and reveal evidence alongside it.
+- **Do** keep conversation as the stable center and reveal structured context
+  only when it is relevant.
 - **Do** preserve the five real stages and professor-controlled approval.
 - **Do** use progressive disclosure for trace and secondary metadata.
 - **Do** state prototype limitations in secondary product chrome or documentation.
@@ -249,6 +266,8 @@ speech-bubble theater.
 ### Don't:
 
 - **Don't** reproduce another product's logo, exact branding, or proprietary UI.
+- **Don't** return to a horizontal setup wizard or permanently open three-column
+  dashboard.
 - **Don't** lead with evaluation terminology, metric grids, or a dossier metaphor.
 - **Don't** make every section a bordered dashboard card.
 - **Don't** invent courses, users, integrations, analytics, or model capabilities.

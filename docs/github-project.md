@@ -35,16 +35,17 @@ complete: V3 was dropped, V0 is retained as the visual/text rollback, and no
 multimodal profile is selected. The final multi-course product and end-to-end
 evidence do not yet exist.
 
-As of 2026-08-18, #12 is complete and #80 is the sole implementation issue in
-`In Progress`. Issue #80 is a bounded redesign of the existing professor demo;
-it does not alter the frozen component profile or authorize new model or
-held-out execution. The repository remains an experimental, not release-ready
-baseline. Issue #24 is `Todo / Refine (Paused)`: its corrected anchor evidence
-is preserved, both human packets are deferred, and a tracked execution policy
-blocks development and held-out access. GitHub Support closed ticket #4659958
-after completing the public-object purge; remote API and web checks confirm the
-superseded SHA is unavailable. #8, #25, #10, and #9 remain queued rather than
-active.
+As of 2026-08-18, #12 and #80 are complete. PR #81 merged the repository-owner
+`Keep` decision for the professor conversation-plus-tool direction. #82 is the
+sole implementation issue in `In Progress`; it is a bounded student-workspace
+extension of the existing synthetic publication and tutoring core. It does not
+alter the frozen component profile or authorize model or held-out execution.
+The repository remains an experimental, not release-ready baseline. Issue #24
+is `Todo / Refine (Paused)`: its corrected anchor evidence is preserved, both
+human packets are deferred, and a tracked execution policy blocks development
+and held-out access. GitHub Support closed ticket #4659958 after completing the
+public-object purge; remote API and web checks confirm the superseded SHA is
+unavailable. #8 remains the parent foundation; #25, #10, and #9 remain queued.
 See the
 [current project status](current-status.md) for the exact execution order.
 

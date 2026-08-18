@@ -21,7 +21,7 @@ export function WorkflowTrace({ trace }: WorkflowTraceProps) {
           Setup history
         </h3>
         <span className="text-xs font-medium tabular-nums text-muted-foreground">
-          {trace.length} events
+          {trace.length} event{trace.length === 1 ? "" : "s"}
         </span>
       </div>
 
@@ -66,7 +66,7 @@ function TraceLabel({ status }: { status: TraceStatus }) {
   return (
     <span
       className={cn(
-        "mt-1 block text-[11px] font-semibold",
+        "mt-1 block text-xs font-semibold",
         status === "complete" && "text-[var(--success)]",
         status === "warning" && "text-[var(--warning)]",
         status === "blocked" && "text-[var(--destructive-ink)]",

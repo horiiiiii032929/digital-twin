@@ -146,3 +146,55 @@ export type OnboardingSession = {
   release_blockers: Record<string, string[]>
   trace: WorkflowTraceItem[]
 }
+
+export type StudentCourse = {
+  course_id: string
+  title: string
+  release_id: string
+  profile_id: string
+  profile_version: string
+}
+
+export type StudentConversation = {
+  id: string
+  student_id: string
+  course_id: string
+  release_id: string
+  created_at: string
+  updated_at: string
+}
+
+export type StudentChatMessage = {
+  id: string
+  conversation_id: string
+  role: "student" | "tutor"
+  content: string
+  action: string
+  client_request_id?: string | null
+  response_to_message_id?: string | null
+  created_at: string
+}
+
+export type StudentCitation = {
+  id: string
+  message_id: string
+  course_id: string
+  release_id: string
+  source_artifact_id: string
+  source_document_id: string
+  source_version: number
+  title: string
+  locator: string
+}
+
+export type StudentConversationView = {
+  conversation: StudentConversation
+  messages: StudentChatMessage[]
+}
+
+export type StudentTutorTurn = {
+  student_message: StudentChatMessage
+  tutor_message: StudentChatMessage
+  citations: StudentCitation[]
+  duplicate: boolean
+}

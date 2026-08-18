@@ -16,6 +16,7 @@ from src.digital_twin.onboarding_workflow import (
     add_source_inventory_item,
     confirm_revision_proposal,
     create_session,
+    create_supervisor_demo_session,
     discard_revision_proposal,
     set_preview_decision,
     submit_message,
@@ -56,6 +57,18 @@ def health() -> dict[str, str]:
 @router.post("/onboarding/sessions", status_code=status.HTTP_201_CREATED)
 def create_onboarding_session(repository: SessionRepositoryDependency):
     return repository.save(create_session())
+
+
+@router.post(
+    "/onboarding/sessions/supervisor-demo",
+    status_code=status.HTTP_201_CREATED,
+)
+def create_synthetic_supervisor_demo_session(
+    repository: SessionRepositoryDependency,
+):
+    """Return a populated local review state built only from synthetic metadata."""
+
+    return repository.save(create_supervisor_demo_session())
 
 
 @router.get("/onboarding/sessions/{session_id}")

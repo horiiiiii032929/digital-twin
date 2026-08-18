@@ -14,15 +14,18 @@ decide which course sources are permitted, express teaching and integrity rules,
 inspect generated policy, compare grounded preview behavior, and retain final
 release authority.
 
-Students are a separate downstream audience. They use an approved tutor release;
-they do not participate in this configuration workflow.
+Students are a separate downstream audience. They use only an assigned course's
+current approved tutor release; they do not participate in configuration. They
+need persistent conversation, explicit safe actions, and inspectable citation
+lineage.
 
 ## Product Purpose
 
 Course Digital Twin helps an instructor configure and verify an evidence-grounded
-course tutor. Success means that the professor can understand what the tutor may
-use, how it should teach, what evidence supports its behavior, which blockers
-remain, and whether it is safe to approve for the bounded prototype.
+course tutor, then gives an assigned student a focused way to use the current
+published release. Success means the professor understands what the tutor may
+use and whether it is safe to approve, while the student can see which course
+and release answer a question and which source version supports the response.
 
 ## Positioning
 
@@ -33,10 +36,10 @@ and a professor-controlled approval gate.
 ## Operating Context
 
 The professor console is an occasional but concentrated setup and review
-workspace, primarily used on desktop before a tutor release. It combines an
-LLM-style interview with structured source, policy, preview, revision, approval,
-and workflow-trace records. Canvas remains an optional future connector rather
-than a required dependency.
+workspace, primarily used on desktop before a tutor release. The student tutor
+is a repeated-use conversation workspace on desktop or mobile after publication.
+Both use the same grounded-AI shell while preserving distinct permissions.
+Canvas remains an optional future connector rather than a required dependency.
 
 ## Capabilities and Constraints
 
@@ -52,6 +55,11 @@ than a required dependency.
   discarded.
 - Approval remains blocked until the implemented source, interview, policy,
   preview, and checklist conditions are satisfied.
+- The student prototype lists only assigned courses with a published release,
+  binds each conversation to that release, persists server history, and exposes
+  validated citation title, locator, version, and release lineage.
+- The current student identity boundary is the documented synthetic
+  `X-Account-ID` fixture, not credentialed authentication.
 - The interface must not invent integrations, analytics, course identities,
   collaborators, model capabilities, or deployment readiness.
 - The frozen technical baseline is experimental evidence, not a release-ready
@@ -72,6 +80,8 @@ without copying their branding, proprietary assets, or unsupported capabilities.
 - Current engineering and research status: `docs/current-status.md` and
   `reports/technical-evidence-freeze-2026-08-18.md`.
 - UI redesign evaluation: `reports/issue-80-professor-console-redesign.md`.
+- Student workspace engineering evaluation:
+  `reports/issue-82-student-tutoring-workspace.md`.
 
 No human-usability study, professor approval of this final interface, production
 capacity evidence, or real-course deployment evidence is currently available.

@@ -21,6 +21,36 @@ def test_create_session_returns_first_prompt():
     assert payload["messages"][-1]["role"] == "assistant"
 
 
+def test_create_supervisor_demo_returns_populated_synthetic_review_state():
+    response = client.post("/api/onboarding/sessions/supervisor-demo")
+
+    assert response.status_code == 201
+    payload = response.json()
+    assert payload["current_step"] == "professor_approval"
+    assert payload["policy"] is not None
+    assert len(payload["preview_cases"]) == 3
+    assert len(payload["approval_checklist"]) == 10
+    assert payload["source_inventory"] == [
+        {
+            "id": payload["source_inventory"][0]["id"],
+            "name": "synthetic-course-outline.pdf",
+            "mime_type": "application/pdf",
+            "size_bytes": 12_400,
+            "permission_status": "approved",
+            "source_label": "course-approved",
+            "excluded": False,
+            "sensitive": False,
+            "notes": (
+                "Synthetic metadata-only supervisor demo source; no file contents "
+                "or private course data are stored."
+            ),
+        }
+    ]
+    assert client.get(
+        f"/api/onboarding/sessions/{payload['session_id']}"
+    ).status_code == 200
+
+
 def test_submit_message_advances_session():
     created = client.post("/api/onboarding/sessions").json()
 

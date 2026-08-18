@@ -25,6 +25,37 @@ documented in
 [the issue #80 implementation report](../reports/issue-80-professor-console-redesign.md);
 human usability and professor approval remain untested.
 
+Populated review states use progressive disclosure: policy fields and preview
+cases are reviewed one at a time, each action has a field- or case-specific
+accessible name, completed approval checks are separated from the remaining
+queue, and switching stages returns the inspector to its summary rather than
+preserving an unrelated scroll position.
+
+## Synthetic supervisor walkthrough
+
+Prepare the bounded student fixture, then run both local applications:
+
+```bash
+npm run prepare:supervisor-demo
+npm run dev:api
+npm run dev:web
+```
+
+Open <http://localhost:5173/?demo=supervisor>. Each load creates a fresh
+in-memory professor session containing five synthetic interview answers, one
+approved metadata-only synthetic source, 16 policy fields, three preview cases,
+and the ten-item approval checklist. The route opens at Policy so a supervisor
+can inspect the meaningful review state immediately. It contains no source file
+contents, private course data, student records, professor approval, or
+production release.
+
+Use the **Student tutor** link to inspect the separately seeded synthetic
+published release, ask or restore the cache-coherence question, and open citation
+`[1]` to see source version, page locator, and current-release lineage. The
+professor onboarding session and the student release remain separate prototype
+boundaries; this walkthrough does not claim that the onboarding UI published the
+student release.
+
 ## Sprint 1 defaults
 
 - Local course uploads are metadata-only. The browser records file name, MIME
@@ -61,6 +92,7 @@ human usability and professor approval remain untested.
 
 ## Out of scope
 
-This prototype does not implement production ingestion, authentication,
-database persistence, RAG, LMS integration, live search, or student-facing
-tutoring.
+The professor onboarding component does not implement production ingestion,
+authentication, durable session persistence, live retrieval, LMS integration,
+or live search. The separate bounded student workflow is synthetic and is
+documented in [student-workflow.md](student-workflow.md).

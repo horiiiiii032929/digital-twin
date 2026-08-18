@@ -6,6 +6,7 @@ import {
   addSourceInventoryItem,
   confirmRevisionProposal,
   createOnboardingSession,
+  createSupervisorDemoSession,
   discardRevisionProposal,
   setPreviewDecision,
   submitOnboardingMessage,
@@ -49,6 +50,16 @@ describe("onboarding API client", () => {
     await expect(createOnboardingSession()).resolves.toEqual(SESSION)
     expect(fetchMock).toHaveBeenCalledWith(
       "/api/onboarding/sessions",
+      expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("creates the synthetic supervisor review state", async () => {
+    const fetchMock = stubFetch(SESSION, 201)
+
+    await expect(createSupervisorDemoSession()).resolves.toEqual(SESSION)
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/onboarding/sessions/supervisor-demo",
       expect.objectContaining({ method: "POST" }),
     )
   })
