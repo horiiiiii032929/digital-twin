@@ -1,6 +1,6 @@
 # Digital Twin Product Delivery
 
-Status date: 2026-08-18
+Status date: 2026-08-19
 
 This Project tracks the transition from an evaluated local prototype to a
 deployed, invite-only Course Digital Twin that real professors can configure
@@ -13,9 +13,11 @@ and publish and authorized students can use.
 - M2 hybrid text retrieval remains the experimental selection with BM25
   rollback. The synthetic publication/student foundation remains 19/19.
 - These components are a product baseline, not release or usability evidence.
-- Multimodal retrieval has no selected profile and is not integrated into real
-  ingestion. A concrete duplicate-loop defect in the V3 region relevance
-  calculation must be corrected before its region metrics are trusted.
+- Issues #85 and #86 are `Done / Refine`. PR #91 added region-aware PDF
+  ingestion, deterministic modality routing, and access-checked original-crop
+  citations. Attempt 003 passed 13/14 synthetic development gates but failed
+  the frozen relative p95 gate, so no multimodal profile was selected and the
+  historical held-out split remains closed.
 - Professor fidelity remains `Refine / Paused`; the prior C0-C3 comparison is
   invalid for selection and its held-out split remains closed.
 - Credentialed identity, durable production storage, source jobs, deployment,
@@ -44,18 +46,19 @@ The deployed pilot must provide:
 | Gate | Target | Required outcome |
 | --- | --- | --- |
 | P0 Product UX baseline | Complete | PR #83 merged; local demo and tests retained |
-| P1 Multimodal Product Grounding | 2026-08-28 | Correct evaluator, region-aware product ingestion/retrieval, visual citations, prospective decision and fallback |
+| P1 Multimodal Product Grounding | Complete / Refine | #85 and #86 merged; region-aware foundation retained, text fallback preserved, no multimodal profile selected |
 | P2 Deployable Product Foundation | 2026-09-06 | Credentialed RBAC, durable data/storage, jobs, staging deployment, observability, security, backup/restore, rollback |
 | P3 Pilot Validation and Release | 2026-09-13 | Large factual benchmark, calibrated fidelity, end-to-end/operations evidence, release or explicit no-release decision |
 
 ## Critical path
 
-1. #85 corrects and hardens multimodal evaluation and is the only item in
-   progress.
-2. #86 builds region-aware multimodal product grounding. Gemma is excluded;
-   any replacement model must be qualified prospectively.
-3. #88 replaces prototype infrastructure with a deployable foundation.
-4. #87 builds a larger permission-safe dummy document corpus and a separate
+1. #85 corrected and hardened multimodal evaluation (`Done / Refine`).
+2. #86 built the region-aware multimodal product foundation (`Done / Refine`).
+   Gemma remains excluded; any replacement model must be qualified
+   prospectively.
+3. #88 is the next item and replaces prototype infrastructure with a deployable
+   foundation.
+4. #87 then builds a larger permission-safe dummy document corpus and a separate
    factual QA benchmark approaching 10,000 cases, including a multimodal slice.
 5. #24, #9, and #25 provide fidelity, operational, and deployed end-to-end
    evidence.
