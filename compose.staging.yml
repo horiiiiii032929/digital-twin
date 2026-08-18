@@ -1,0 +1,84 @@
+name: digital-twin-staging
+
+x-runtime-environment: &runtime-environment
+  APP_MODE: staging
+  APP_DATABASE_PATH: /var/lib/digital-twin/digital-twin.sqlite3
+  APP_DATA_ROOT: /var/lib/digital-twin
+  APP_ALLOWED_ORIGINS: https://${APP_DOMAIN:?APP_DOMAIN is required}
+  APP_SECURE_COOKIES: "true"
+  APP_SESSION_TTL_SECONDS: ${APP_SESSION_TTL_SECONDS:-28800}
+  APP_MAX_UPLOAD_BYTES: ${APP_MAX_UPLOAD_BYTES:-52428800}
+  APP_MAX_OBJECT_STORE_BYTES: ${APP_MAX_OBJECT_STORE_BYTES:-5368709120}
+  APP_LOGIN_ATTEMPTS_PER_MINUTE: ${APP_LOGIN_ATTEMPTS_PER_MINUTE:-10}
+  APP_AUTHENTICATED_REQUESTS_PER_MINUTE: ${APP_AUTHENTICATED_REQUESTS_PER_MINUTE:-120}
+  APP_LOG_LEVEL: ${APP_LOG_LEVEL:-INFO}
+  APP_GENERATOR_MODE: ${APP_GENERATOR_MODE:-deterministic}
+  APP_PROVIDER_MAX_CALLS_PER_PROCESS: ${APP_PROVIDER_MAX_CALLS_PER_PROCESS:-1000}
+  APP_PROVIDER_COST_CAP_USD: ${APP_PROVIDER_COST_CAP_USD:-5.0}
+  DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+
+services:
+  api:
+    image: digital-twin-api:${APP_IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      target: api
+    environment: *runtime-environment
+    restart: unless-stopped
+    volumes:
+      - runtime-data:/var/lib/digital-twin
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/ready', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  worker:
+    image: digital-twin-api:${APP_IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      target: api
+    command: ["python", "-m", "scripts.run_ingestion_worker"]
+    environment: *runtime-environment
+    restart: unless-stopped
+    volumes:
+      - runtime-data:/var/lib/digital-twin
+    depends_on:
+      api:
+        condition: service_healthy
+
+  web:
+    image: digital-twin-web:${APP_IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      target: web
+      args:
+        VITE_AUTH_MODE: session
+        VITE_API_BASE_URL: ""
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?APP_DOMAIN is required}
+      TLS_EMAIL: ${TLS_EMAIL:?TLS_EMAIL is required}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  runtime-data:
+  caddy-data:
+  caddy-config:

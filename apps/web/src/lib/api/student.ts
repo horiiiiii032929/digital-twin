@@ -10,6 +10,9 @@ import type {
 export const STUDENT_ACCOUNT_ID =
   import.meta.env.VITE_STUDENT_ACCOUNT_ID?.trim() || "student-a-synthetic"
 
+export const SESSION_AUTH_ENABLED =
+  import.meta.env.VITE_AUTH_MODE === "session"
+
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? ""
 
@@ -24,7 +27,7 @@ export class StudentApiError extends ApiError {
 }
 
 function studentHeaders(accountId: string): HeadersInit {
-  return { "X-Account-ID": accountId }
+  return SESSION_AUTH_ENABLED ? {} : { "X-Account-ID": accountId }
 }
 
 export function listStudentCourses(
@@ -91,7 +94,7 @@ export async function loadStudentCitationCrop(
 ): Promise<Blob> {
   const response = await fetch(
     `${API_BASE_URL}/api/student/messages/${messageId}/citations/${citationId}/crop`,
-    { headers: studentHeaders(accountId) },
+    { credentials: "include", headers: studentHeaders(accountId) },
   )
   if (!response.ok) {
     const error = await readStudentError(response)
@@ -106,6 +109,7 @@ async function studentRequest<T>(
 ): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       ...options.headers,

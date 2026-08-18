@@ -236,6 +236,7 @@ def _provider_failure(
         "authentication": "Live generation is not configured correctly.",
         "configuration": "Live generation is not configured correctly.",
         "unavailable": "The tutor model is temporarily unavailable.",
+        "budget-exceeded": "The tutor model usage budget has been reached.",
         "malformed-response": "The tutor model returned an invalid grounded answer.",
     }
     warning = messages.get(error.code, "The tutor model could not produce an answer.")

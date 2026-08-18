@@ -14,9 +14,9 @@ remains immutable historical evidence.
 
 | Component | Current evidence/control | State for final product | Next decision |
 | --- | --- | --- | --- |
-| Account/session | Synthetic `X-Account-ID` session plus active/revoked account checks | Implemented R3 test boundary / Refine | Replace with invite-only credential/session design before release candidate |
-| Course membership | Durable course membership with fail-closed student authorization | Implemented R3 foundation / Refine | Add professor/admin lifecycle and migration evidence |
-| Source governance | Metadata workflow plus approval/version domain | Selected foundation / Refine | Persist course-scoped source lifecycle and rollback |
+| Account/session | Invite-only scrypt credentials, digest-only opaque Secure/HttpOnly/Strict sessions, rotation/reset/revocation; synthetic header retained only in A0 demo/test | A1 staging candidate / Go Deeper | Exercise public HTTPS, then decide whether institutional SSO/MFA is required for the pilot |
+| Course membership | Durable professor-owned course and student membership with fail-closed role/user/course authorization | A1 staging candidate / Go Deeper | Validate administration and course lifecycle with pilot operators |
+| Source governance | Approval/version domain plus content-addressed raw objects, tracked derived artifacts, async job lifecycle, explicit retention/export/deletion | A1 staging candidate / Go Deeper | Qualify representative real source lifecycle and approved off-host retention |
 | Parser | Selected text parser plus prospective PyMuPDF region path for columns, tables/cells, figures, diagrams, equations, OCR, and page crops | Product foundation / Refine | Qualify a production OCR/layout provider on representative PDFs; keep selected text parser as fallback |
 | Chunker | Page-bounded heading/paragraph chunker v1 | Selected / Keep | Retrieval sensitivity and visual-content follow-up |
 | Visual representation | Original page/region crops and non-authoritative description boundary implemented; historical 24-case held-out unopened | New public-synthetic attempt 003: 13/13 complete@3, 100% recall@5, 0.9764 nDCG, 0.9316 top-1 IoU, and 13/13 lineage; relative p95 gate failed, so no profile selected | Stop tuning the 21-case set; qualify real OCR/layout and representative end-to-end latency with text rollback |
@@ -28,9 +28,9 @@ remains immutable historical evidence.
 | Professor profile/policy | The historical C2/C3 prompts leaked case expected actions; anchor-only V4 Pro/P3 completed 48/48, but judge repeat agreement was 33/48 labels across two cases and both sensitivity attempts stopped invalid | Requirements foundation / Refine (Paused) | Keep the deferred human packets unclaimed; resume only as a separately authorized evaluator redesign |
 | Policy enforcement | Historical development action accuracy is diagnostic only; the tracked execution policy now denies development and held-out work before private split access | Refine / machine-paused | Require an explicit policy change and new run identity before prospective development; require a registered all-gates Keep result before held-out |
 | Citation validation | Deterministic validation now carries source/version/checksum/page/region/bbox and access-checked original crop; historical semantic limitations remain | Implemented structural and region-lineage boundary / Refine | Validate semantic completeness on representative release evidence and production storage authorization |
-| Conversation state | SQLite-backed course/release-scoped turns, idempotent request IDs, and restart reload pass synthetic acceptance | Implemented R3 foundation / Refine | Migration, backup/restore, concurrency, and capacity evidence |
-| Evaluation-before-publication | Durable draft, evaluation gate, atomic publication replacement, withdrawal, rollback, and stale-conversation denial pass the 19-check synthetic v2 slice | Implemented R3 foundation / Refine | Connect frozen R2 evaluation evidence and complete migration, recovery, and concurrency qualification |
-| Audit/operations | Durable redacted lifecycle, denial, fallback, and recovery events pass content-exclusion checks | Implemented foundation / Refine | Health, backup/restore, bounded capacity, and operator visibility |
+| Conversation state | SQLite WAL schema v5, course/release-scoped turns, idempotent request IDs, restart and clean restore | A1 staging candidate / Go Deeper | Measure representative concurrent selected-model workload and clean host restore |
+| Evaluation-before-publication | Durable draft/deterministic preflight/publication/withdrawal/rollback plus credentialed professor-upload-to-student-citation workflow | 41/41 local foundation checks / Go Deeper | Bind immutable release-candidate evaluation and complete public staging rehearsal |
+| Audit/operations | Redacted request/audit events, health/readiness, admin p50/p95/error/alert/provider-budget metrics, backup/restore, retention/export/deletion, Docker/Caddy package | A1 staging candidate / Go Deeper | Add approved external log/alert sink and off-host encrypted backup before broader use |
 | Learning-gap analytics | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
 | Proactive intervention | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
 
@@ -62,9 +62,9 @@ and invalid results are part of the evidence, not cleanup candidates.
    rollback remains authoritative.
 4. #7 compared M0-M3 once on the sealed cross-course set and selected M2 with
    BM25 rollback.
-5. #8 now provides the bounded synthetic student journey and
-   evaluation-before-publication lifecycle; credentialed identity, complete
-   professor/source administration, and operational qualification remain.
+5. #8 provides the bounded synthetic journey and publication lifecycle; #88
+   adds the credentialed, durable, recoverable A1 staging candidate and passes
+   41/41 local foundation checks with A0 rollback.
 6. #24 produced a reliable provider trace but no selectable professor-fidelity
    result. Its corrected anchor decision is `Refine / Paused`; development,
    held-out, and the deferred human packets require separate authorization.
@@ -73,8 +73,9 @@ and invalid results are part of the evidence, not cleanup candidates.
    deployment claims.
 8. #10 and #25 remain future work for calibrated pedagogical, simulated, and
    end-to-end evaluation; they are not implied by the freeze.
-9. #9 remains future operational qualification for backup/restore,
-   concurrency, bounded capacity, and deployment packaging.
+9. #9 remains future release-level operations for public-host evidence,
+   representative concurrency, external alerts, and sustained capacity; #88
+   establishes the local packaging, recovery, and 100-request baseline.
 
 ## Profile rule
 

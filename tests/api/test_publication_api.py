@@ -53,9 +53,7 @@ def _client(
     sessions = InMemorySessionRepository()
     session = create_session("onboarding-release-synthetic")
     session.current_step = "professor_approval"
-    session.policy = (
-        approved_synthetic_policy() if approved else build_initial_policy()
-    )
+    session.policy = approved_synthetic_policy() if approved else build_initial_policy()
     sessions.save(session)
     app = create_app(
         repository=sessions,
@@ -78,14 +76,18 @@ def _create_draft(client: TestClient, repository, sessions, fixture, release_id)
             "profile_id": "student-tutor",
             "profile_version": "v1",
             "release_id": release_id,
-            "chunks": [chunk.model_dump(mode="json") for chunk in source_release.chunks],
+            "chunks": [
+                chunk.model_dump(mode="json") for chunk in source_release.chunks
+            ],
         },
     )
     assert response.status_code == 201
     return response.json()
 
 
-def _set_evaluation(client: TestClient, fixture, release_id: str, status: str = "passed"):
+def _set_evaluation(
+    client: TestClient, fixture, release_id: str, status: str = "passed"
+):
     return client.patch(
         f"/api/professor/releases/{release_id}/evaluation",
         headers=_headers(fixture.professor_id),
@@ -115,7 +117,33 @@ def test_publication_requires_evaluation_and_resolved_policy(tmp_path):
     )
     assert blocked.status_code == 409
     assert blocked.json()["detail"]["code"] == "release_blocked"
-    assert repository.get_published_release(fixture.course_a_id).id == fixture.release_a_id
+    assert (
+        repository.get_published_release(fixture.course_a_id).id == fixture.release_a_id
+    )
+
+
+def test_professor_course_index_is_resumable_without_returning_release_payloads(
+    tmp_path,
+):
+    client, _, _, fixture = _client(tmp_path, approved=True)
+
+    response = client.get(
+        "/api/professor/courses",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert response.status_code == 200
+    courses = response.json()
+    assert [course["course_id"] for course in courses] == [
+        fixture.course_b_id,
+        fixture.course_a_id,
+    ]
+    course_a = next(
+        course for course in courses if course["course_id"] == fixture.course_a_id
+    )
+    assert fixture.student_a_id in course_a["student_account_ids"]
+    assert course_a["releases"][0]["chunk_count"] == 2
+    assert "chunks" not in course_a["releases"][0]
 
 
 def test_publish_replaces_current_release_and_denies_stale_conversation(tmp_path):
@@ -136,7 +164,10 @@ def test_publish_replaces_current_release_and_denies_stale_conversation(tmp_path
     )
     assert published.status_code == 200
     assert published.json()["status"] == "published"
-    assert repository.get_release(fixture.release_a_id).status == StudentReleaseStatus.WITHDRAWN
+    assert (
+        repository.get_release(fixture.release_a_id).status
+        == StudentReleaseStatus.WITHDRAWN
+    )
 
     stale_turn = client.post(
         f"/api/student/conversations/{conversation.json()['id']}/messages",
@@ -154,10 +185,13 @@ def test_withdraw_and_rollback_restore_previous_release(tmp_path):
         client, repository, sessions, fixture, "release-a-v2-rollback-synthetic"
     )
     assert _set_evaluation(client, fixture, draft["id"]).status_code == 200
-    assert client.post(
-        f"/api/professor/releases/{draft['id']}/publish",
-        headers=_headers(fixture.professor_id),
-    ).status_code == 200
+    assert (
+        client.post(
+            f"/api/professor/releases/{draft['id']}/publish",
+            headers=_headers(fixture.professor_id),
+        ).status_code
+        == 200
+    )
 
     withdrawn = client.post(
         f"/api/professor/releases/{draft['id']}/withdraw",
@@ -165,9 +199,12 @@ def test_withdraw_and_rollback_restore_previous_release(tmp_path):
     )
     assert withdrawn.status_code == 200
     assert withdrawn.json()["status"] == "withdrawn"
-    assert client.get(
-        "/api/student/courses", headers=_headers(fixture.student_a_id)
-    ).json() == []
+    assert (
+        client.get(
+            "/api/student/courses", headers=_headers(fixture.student_a_id)
+        ).json()
+        == []
+    )
 
     rollback = client.post(
         f"/api/professor/releases/{fixture.release_a_id}/rollback",
@@ -176,7 +213,9 @@ def test_withdraw_and_rollback_restore_previous_release(tmp_path):
     assert rollback.status_code == 200
     assert rollback.json()["id"] == fixture.release_a_id
     assert rollback.json()["status"] == "published"
-    assert repository.get_published_release(fixture.course_a_id).id == fixture.release_a_id
+    assert (
+        repository.get_published_release(fixture.course_a_id).id == fixture.release_a_id
+    )
 
 
 def test_professor_ingests_scanned_pdf_into_release_ready_region_chunks(tmp_path):
@@ -207,7 +246,9 @@ def test_professor_ingests_scanned_pdf_into_release_ready_region_chunks(tmp_path
     assert payload["region_kind_counts"]["ocr"] == 1
     assert payload["region_count"] >= 2
     assert payload["chunk_count"] == len(payload["chunks"])
-    assert any("Scanned release evidence" in chunk["text"] for chunk in payload["chunks"])
+    assert any(
+        "Scanned release evidence" in chunk["text"] for chunk in payload["chunks"]
+    )
     assert all(
         chunk["metadata"]["course_id"] == fixture.course_a_id
         for chunk in payload["chunks"]
@@ -230,6 +271,17 @@ def test_professor_ingests_scanned_pdf_into_release_ready_region_chunks(tmp_path
     )
     assert draft.status_code == 201
     assert draft.json()["chunks"][0]["region_id"]
+
+    preflight = client.post(
+        f"/api/professor/releases/{draft.json()['id']}/preflight",
+        headers=_headers(fixture.professor_id),
+    )
+    assert preflight.status_code == 200
+    assert preflight.json()["passed"] is True
+    assert all(check["passed"] for check in preflight.json()["checks"])
+    assert (
+        repository.get_release(draft.json()["id"]).evaluation_status.value == "passed"
+    )
 
     denied = client.put(
         f"/api/professor/courses/{fixture.course_a_id}/sources/denied",

@@ -212,6 +212,17 @@ Current utilities:
 - External-provider commands load repository-local secrets from `.env` without
   overriding variables already exported by the shell. Copy `.env.example` to
   `.env`, set `DEEPSEEK_API_KEY` locally, and never commit or share that file.
+- `bootstrap_admin.py`: provisions or rotates the first staging administrator
+  from an environment-only password without emitting it.
+- `run_ingestion_worker.py`: claims leased SQLite ingestion jobs, writes
+  recoverable results, and safely recovers expired worker leases.
+- `backup_runtime.py` and `restore_runtime.py`: create a checksum-verified
+  online SQLite/object backup and restore it only into a clean target.
+- `manage_runtime_data.py`: performs explicit staging retention, redacted
+  account export, and confirmation-bound account/course deletion.
+- `verify_deployable_foundation.py`: runs the network-free 40-gate invited
+  professor/student workflow, restart, clean restore, rollback, and 100-request
+  capacity measurement.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run

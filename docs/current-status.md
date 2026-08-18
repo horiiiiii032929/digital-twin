@@ -20,6 +20,17 @@ responsive browser QA, and independent Impeccable review. This establishes the
 product UX baseline; it does not establish human usability or production
 readiness.
 
+Issue [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) is now
+in progress with a **Go Deeper** local architecture result. The deployable
+candidate passed 41/41 synthetic checks across credentialed access, professor
+upload/publication, student answer/original-region citation, restart,
+backup/clean restore, security, lifecycle, and bounded capacity. The measured
+100-request error rate was 0%, API p50/p95 was 2.345/2.964 ms, ingestion was
+52.455 ms, and peak RSS was 0.30 GiB on the development host. The professor UI
+now supports resumable course/student/source/release delivery, and rendered
+desktop/mobile QA passed without console errors. Public DNS/TLS, host-side
+restore, and the staging walkthrough remain before #88 can close.
+
 GitHub Project 1 is reorganized around product goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
 gates:
@@ -40,7 +51,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Keep as bounded foundation | 19/19 synthetic isolation, persistence, citation, publication replacement, withdrawal, rollback, and stale-release checks | Credentialed identity, complete source administration, durable production storage, jobs, deployment, observability, recovery, capacity, and usability |
+| Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice plus 41/41 credentialed, durable, recoverable foundation checks; deterministic preflight and A0 demo rollback retained | Public HTTPS/host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
 | Large factual QA | Planned | Professor suggestion and issue #87 define a separate scale benchmark | Larger dummy document corpus, multimodal slice, multi-model generation/cross-check, source validation, human audit, and result |
 
 ## Immediate critical path
@@ -49,7 +60,7 @@ continues to hold report, presentation, and professor-communication work.
 | ---: | --- | --- | --- |
 | 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | Done / Refine | Metric suite corrected and tested; historical V3 analysis corrected; Drop unchanged; held-out unopened |
 | 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Done / Refine | Foundation, product ingestion, crop citations, and prospective decision merged in PR #91; no multimodal profile selected |
-| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / next | Credentialed RBAC, durable data/storage, jobs, HTTPS staging, observability, backup/restore, security, rollback |
+| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper | Local 41/41 plus responsive professor delivery QA passed; complete public DNS/TLS, clean-host restore, and staging walkthrough before closure |
 | 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / P3 after #88 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
 | 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / P3 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
 | 6 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence |
@@ -60,8 +71,9 @@ Issues #85 and #86 are complete. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #88 is now the next
-unblocked product-delivery item.
+and the historical held-out split was not opened. Issue #88 is the active
+product-delivery item; its implementation and local qualification are complete
+enough for a controlled host rehearsal, not for a real-user pilot.
 
 ## Known multimodal correction
 

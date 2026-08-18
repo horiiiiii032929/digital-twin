@@ -1,0 +1,17 @@
+.git
+.github
+.venv
+node_modules
+apps/web/node_modules
+apps/web/dist
+data
+experiments/runs
+logs
+models
+output
+reports/generated
+.env
+.env.*
+**/__pycache__
+**/*.pyc
+**/.DS_Store

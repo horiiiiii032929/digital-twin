@@ -128,6 +128,37 @@ class StudentCourse(BaseModel):
     profile_version: str
 
 
+class ProfessorReleaseSummary(BaseModel):
+    id: str = Field(min_length=1)
+    course_id: str = Field(min_length=1)
+    status: StudentReleaseStatus
+    evaluation_status: ReleaseEvaluationStatus
+    policy_version: int = Field(ge=1)
+    chunk_count: int = Field(ge=0)
+    created_at: str = Field(min_length=1)
+
+
+class ProfessorCourseView(BaseModel):
+    course_id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    student_account_ids: list[str] = Field(default_factory=list)
+    releases: list[ProfessorReleaseSummary] = Field(default_factory=list)
+
+
+class ReleasePreflightCheck(BaseModel):
+    id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    passed: bool
+    detail: str = Field(min_length=1)
+
+
+class ReleasePreflightResult(BaseModel):
+    release_id: str = Field(min_length=1)
+    passed: bool
+    checks: list[ReleasePreflightCheck]
+    evaluated_at: str = Field(default_factory=timestamp_now)
+
+
 class ConversationView(BaseModel):
     conversation: Conversation
     messages: list[Message]

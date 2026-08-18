@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 from src.digital_twin.grounding.models import DocumentChunk
-from src.digital_twin.student.models import ReleaseEvaluationStatus
+from src.digital_twin.student.models import AccountRole, ReleaseEvaluationStatus
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     PreviewDecisionValue,
@@ -83,3 +83,33 @@ class CourseSourceIngestionResponse(BaseModel):
     region_kind_counts: dict[str, int] = Field(default_factory=dict)
     processing_warnings: list[str] = Field(default_factory=list)
     chunks: list[DocumentChunk] = Field(default_factory=list)
+
+
+class LoginRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=320)
+    password: str = Field(min_length=1, max_length=1024)
+
+
+class AccountInviteRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=320)
+    display_name: str = Field(min_length=1, max_length=160)
+    role: AccountRole
+    temporary_password: str = Field(min_length=12, max_length=1024)
+
+
+class PasswordChangeRequest(BaseModel):
+    current_password: str = Field(min_length=1, max_length=1024)
+    new_password: str = Field(min_length=12, max_length=1024)
+
+
+class PasswordResetRequest(BaseModel):
+    new_password: str = Field(min_length=12, max_length=1024)
+
+
+class CourseCreateRequest(BaseModel):
+    title: str = Field(min_length=1, max_length=240)
+    course_id: str | None = Field(default=None, min_length=1, max_length=128)
+
+
+class StudentAssignmentRequest(BaseModel):
+    student_account_id: str = Field(min_length=1, max_length=128)

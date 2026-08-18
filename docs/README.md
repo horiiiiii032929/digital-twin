@@ -17,6 +17,8 @@ design records.
 - [Privacy and ethics](privacy-and-ethics.md)
 - [Evaluation architecture](evaluation-architecture.md)
 - [Evaluation data flow and threat model](evaluation-data-flow-and-threat-model.md)
+- [Staging deployment and recovery](deployment.md)
+- [Deployable product threat model](deployment-threat-model.md)
 
 The authoritative prospective product scope is maintained in
 [`research/00_admin/2026-08-18-real-world-product-scope.md`](../research/00_admin/2026-08-18-real-world-product-scope.md).

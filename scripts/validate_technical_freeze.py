@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -15,9 +16,9 @@ from src.digital_twin.evaluation import ComponentStatus, load_release_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = (
-    ROOT
-    / "research/05_evaluation/profiles/technical-evidence-freeze-v1.json"
+    ROOT / "research/05_evaluation/profiles/technical-evidence-freeze-v1.json"
 )
+MANIFEST_PATH = "research/05_evaluation/profiles/technical-evidence-freeze-v1.json"
 EXPECTED_BOUNDARIES = {
     "cross-course-retrieval": "pass-experimental",
     "professor-fidelity": "fail-refine-paused",
@@ -90,9 +91,7 @@ def validate_registry_extension(frozen_text: str, current_text: str) -> None:
         )
 
 
-def frozen_repository_file(
-    root: Path, revision: str, relative_path: str
-) -> bytes:
+def frozen_repository_file(root: Path, revision: str, relative_path: str) -> bytes:
     """Read one tracked file from the freeze's recorded evidence revision."""
     return subprocess.run(
         ["git", "show", f"{revision}:{relative_path}"],
@@ -100,6 +99,21 @@ def frozen_repository_file(
         check=True,
         capture_output=True,
     ).stdout
+
+
+def freeze_artifact_revision(root: Path) -> str:
+    """Return the immutable commit that introduced the v1 freeze manifest."""
+
+    revision = subprocess.run(
+        ["git", "log", "--diff-filter=A", "-1", "--format=%H", "--", MANIFEST_PATH],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", revision):
+        raise ValueError("technical freeze introduction revision was not found")
+    return revision
 
 
 def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
@@ -114,30 +128,38 @@ def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
     if manifest.get("external_model_called") is not False:
         raise ValueError("freeze validation cannot call an external model")
 
+    artifact_revision = freeze_artifact_revision(root)
+
     artifact_paths: set[str] = set()
     for binding in manifest.get("artifact_bindings", []):
         relative_path = binding["path"]
         if relative_path in artifact_paths:
             raise ValueError(f"duplicate freeze artifact binding: {relative_path}")
         artifact_paths.add(relative_path)
-        path = _repository_file(root, relative_path)
+        frozen_bytes = frozen_repository_file(
+            root,
+            artifact_revision,
+            relative_path,
+        )
+        if hashlib.sha256(frozen_bytes).hexdigest() != binding["sha256"]:
+            raise ValueError(f"freeze artifact hash mismatch: {relative_path}")
         if relative_path == REGISTRY_PATH:
-            frozen_bytes = frozen_repository_file(
-                root,
-                manifest["evidence_base_revision"],
-                relative_path,
-            )
-            if hashlib.sha256(frozen_bytes).hexdigest() != binding["sha256"]:
-                raise ValueError(f"freeze artifact hash mismatch: {relative_path}")
             validate_registry_extension(
                 frozen_bytes.decode("utf-8"),
-                path.read_text(encoding="utf-8"),
+                _repository_file(root, relative_path).read_text(encoding="utf-8"),
             )
-        elif sha256(path) != binding["sha256"]:
-            raise ValueError(f"freeze artifact hash mismatch: {relative_path}")
 
     profile_contract = manifest["profile"]
-    profile = load_release_profile(_repository_file(root, profile_contract["path"]))
+    with tempfile.NamedTemporaryFile(suffix=".json") as profile_file:
+        profile_file.write(
+            frozen_repository_file(
+                root,
+                artifact_revision,
+                profile_contract["path"],
+            )
+        )
+        profile_file.flush()
+        profile = load_release_profile(Path(profile_file.name))
     counts = {
         status.value: sum(entry.status == status for entry in profile.components)
         for status in ComponentStatus
@@ -187,13 +209,17 @@ def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
     for claim in claims:
         unknown = set(claim.get("result_ids", [])) - registry_ids
         if unknown:
-            raise ValueError(f"claim references unregistered results: {claim['claim_id']}")
+            raise ValueError(
+                f"claim references unregistered results: {claim['claim_id']}"
+            )
         if claim["status"] != EXPECTED_CLAIMS[claim["claim_id"]]:
             raise ValueError(f"frozen claim status drifted: {claim['claim_id']}")
 
-    claim_matrix = (
-        root / "reports/claim-to-evidence-matrix.md"
-    ).read_text(encoding="utf-8")
+    claim_matrix = frozen_repository_file(
+        root,
+        artifact_revision,
+        "reports/claim-to-evidence-matrix.md",
+    ).decode("utf-8")
     matrix_ids = set(
         re.findall(r"^\| `(C\d{2}|U\d{2})` \|", claim_matrix, re.MULTILINE)
     )
@@ -202,19 +228,22 @@ def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
 
     boundaries = manifest.get("required_boundaries", [])
     boundary_names = [boundary["boundary"] for boundary in boundaries]
-    if len(boundary_names) != len(set(boundary_names)) or set(
-        boundary_names
-    ) != set(EXPECTED_BOUNDARIES):
+    if len(boundary_names) != len(set(boundary_names)) or set(boundary_names) != set(
+        EXPECTED_BOUNDARIES
+    ):
         raise ValueError("required technical boundary inventory is incomplete")
     for boundary in boundaries:
         if boundary["disposition"] != EXPECTED_BOUNDARIES[boundary["boundary"]]:
-            raise ValueError(f"technical boundary disposition drifted: {boundary['boundary']}")
+            raise ValueError(
+                f"technical boundary disposition drifted: {boundary['boundary']}"
+            )
 
     professor_policy = json.loads(
-        (
-            root
-            / "research/05_evaluation/instruments/professor_fidelity_execution_policy_v1.json"
-        ).read_text(encoding="utf-8")
+        frozen_repository_file(
+            root,
+            artifact_revision,
+            "research/05_evaluation/instruments/professor_fidelity_execution_policy_v1.json",
+        )
     )
     if (
         professor_policy.get("status") != "paused"
@@ -232,9 +261,9 @@ def validate_freeze(manifest: dict[str, Any], *, root: Path) -> dict[str, Any]:
     }
     if set(manifest.get("reproduction_commands", [])) != required_commands:
         raise ValueError("technical freeze reproduction commands drifted")
-    package_scripts = json.loads(
-        (root / "package.json").read_text(encoding="utf-8")
-    )["scripts"]
+    package_scripts = json.loads((root / "package.json").read_text(encoding="utf-8"))[
+        "scripts"
+    ]
     if package_scripts.get("verify:technical-freeze") != (
         "uv run python -m scripts.validate_technical_freeze"
     ) or "npm run verify:technical-freeze" not in package_scripts.get("check", ""):

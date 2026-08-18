@@ -7,12 +7,19 @@ from uuid import uuid4
 from src.digital_twin.grounding.models import DocumentChunk
 from src.digital_twin.onboarding.models import OnboardingSession
 from src.digital_twin.student.models import (
+    Account,
     AccountRole,
     AccountStatus,
+    AuditEvent,
     Course,
+    CourseMembership,
     DigitalTwinRelease,
     MembershipRole,
+    ProfessorCourseView,
+    ProfessorReleaseSummary,
     ReleaseEvaluationStatus,
+    ReleasePreflightCheck,
+    ReleasePreflightResult,
     StudentReleaseStatus,
 )
 from src.digital_twin.student.repository import StudentRepository
@@ -81,6 +88,92 @@ class ReleaseLifecycleService:
 
         self._require_course_owner(professor_id, course_id)
 
+    def create_course(
+        self,
+        professor_id: str,
+        title: str,
+        *,
+        course_id: str | None = None,
+    ) -> Course:
+        self._require_active_professor(professor_id)
+        normalized_title = title.strip()
+        if not normalized_title:
+            raise PublicationError("course_title_required", "Course title is required.")
+        course = Course(
+            id=course_id or f"course-{uuid4()}",
+            title=normalized_title,
+            owner_professor_id=professor_id,
+        )
+        if self.repository.get_course(course.id) is not None:
+            raise PublicationError(
+                "course_exists", "The course identifier already exists."
+            )
+        self.repository.save_course(course)
+        self.repository.save_membership(
+            CourseMembership(
+                account_id=professor_id,
+                course_id=course.id,
+                role=MembershipRole.PROFESSOR,
+            )
+        )
+        return course
+
+    def list_courses(self, professor_id: str) -> list[ProfessorCourseView]:
+        self._require_active_professor(professor_id)
+        views: list[ProfessorCourseView] = []
+        for course in self.repository.list_professor_courses(professor_id):
+            students = [
+                membership.account_id
+                for membership in self.repository.list_course_memberships(course.id)
+                if membership.role == MembershipRole.STUDENT and membership.active
+            ]
+            releases = [
+                ProfessorReleaseSummary(
+                    id=release.id,
+                    course_id=release.course_id,
+                    status=release.status,
+                    evaluation_status=release.evaluation_status,
+                    policy_version=release.policy_version,
+                    chunk_count=len(release.chunks),
+                    created_at=release.created_at,
+                )
+                for release in self.repository.list_course_releases(course.id)
+            ]
+            views.append(
+                ProfessorCourseView(
+                    course_id=course.id,
+                    title=course.title,
+                    student_account_ids=students,
+                    releases=releases,
+                )
+            )
+        return views
+
+    def assign_student(
+        self,
+        professor_id: str,
+        course_id: str,
+        student_id: str,
+    ) -> CourseMembership:
+        self._require_course_owner(professor_id, course_id)
+        student = self.repository.get_account(student_id)
+        if student is None:
+            raise PublicationError("account_not_found", "The student was not found.")
+        if (
+            student.status != AccountStatus.ACTIVE
+            or student.role != AccountRole.STUDENT
+        ):
+            raise PublicationError(
+                "student_role_required", "An active student account is required."
+            )
+        return self.repository.save_membership(
+            CourseMembership(
+                account_id=student.id,
+                course_id=course_id,
+                role=MembershipRole.STUDENT,
+            )
+        )
+
     def record_evaluation(
         self,
         professor_id: str,
@@ -90,6 +183,92 @@ class ReleaseLifecycleService:
         release = self._require_owned_release(professor_id, release_id)
         self.repository.set_release_evaluation_status(release.id, status)
         return self._require_release(release.id)
+
+    def run_preflight(
+        self, professor_id: str, release_id: str
+    ) -> ReleasePreflightResult:
+        """Run deterministic release gates and persist their aggregate outcome."""
+
+        release = self._require_owned_release(professor_id, release_id)
+        checks = [
+            ReleasePreflightCheck(
+                id="active-profile",
+                label="Selected component profile",
+                passed=(
+                    release.profile_id == self.profile_id
+                    and release.profile_version == self.profile_version
+                ),
+                detail=(
+                    f"Release uses {release.profile_id} {release.profile_version}; "
+                    f"runtime expects {self.profile_id} {self.profile_version}."
+                ),
+            ),
+            ReleasePreflightCheck(
+                id="approved-policy",
+                label="Professor policy approval",
+                passed=release.policy.release_status == ReleaseStatus.APPROVED,
+                detail=(
+                    "The policy has explicit professor approval."
+                    if release.policy.release_status == ReleaseStatus.APPROVED
+                    else "The policy still has unresolved review or approval blockers."
+                ),
+            ),
+            ReleasePreflightCheck(
+                id="approved-evidence",
+                label="Approved retrieval evidence",
+                passed=bool(release.chunks)
+                and all(chunk.retrieval_allowed for chunk in release.chunks),
+                detail=(
+                    f"{len(release.chunks)} chunk(s) are included; every chunk must be approved for tutoring."
+                ),
+            ),
+            ReleasePreflightCheck(
+                id="course-scope",
+                label="Course isolation",
+                passed=bool(release.chunks)
+                and all(
+                    chunk.metadata.get("course_id") == release.course_id
+                    for chunk in release.chunks
+                ),
+                detail="Every release chunk must carry the owning course identifier.",
+            ),
+            ReleasePreflightCheck(
+                id="citation-lineage",
+                label="Citation lineage",
+                passed=bool(release.chunks)
+                and all(
+                    chunk.source_artifact_id and chunk.source_checksum and chunk.locator
+                    for chunk in release.chunks
+                ),
+                detail="Every chunk must retain its source artifact, checksum, and locator.",
+            ),
+        ]
+        passed = all(check.passed for check in checks)
+        self.repository.set_release_evaluation_status(
+            release.id,
+            ReleaseEvaluationStatus.PASSED
+            if passed
+            else ReleaseEvaluationStatus.FAILED,
+        )
+        self.repository.save_audit_event(
+            AuditEvent(
+                id=f"audit-{uuid4()}",
+                event_type="release.preflight_completed",
+                account_id=professor_id,
+                course_id=release.course_id,
+                release_id=release.id,
+                details={
+                    "passed": passed,
+                    "passed_checks": sum(check.passed for check in checks),
+                    "total_checks": len(checks),
+                },
+            )
+        )
+        return ReleasePreflightResult(
+            release_id=release.id,
+            passed=passed,
+            checks=checks,
+        )
 
     def publish(self, professor_id: str, release_id: str) -> DigitalTwinRelease:
         release = self._require_owned_release(professor_id, release_id)
@@ -104,9 +283,7 @@ class ReleaseLifecycleService:
                 "release_not_published",
                 "Only the current published release can be withdrawn.",
             )
-        self.repository.set_release_status(
-            release.id, StudentReleaseStatus.WITHDRAWN
-        )
+        self.repository.set_release_status(release.id, StudentReleaseStatus.WITHDRAWN)
         return self._require_release(release.id)
 
     def rollback(self, professor_id: str, release_id: str) -> DigitalTwinRelease:
@@ -158,19 +335,7 @@ class ReleaseLifecycleService:
         return release
 
     def _require_course_owner(self, professor_id: str, course_id: str) -> Course:
-        account = self.repository.get_account(professor_id)
-        if account is None:
-            raise PublicationError(
-                "account_not_found", "The professor account was not found."
-            )
-        if account.status != AccountStatus.ACTIVE:
-            raise PublicationError(
-                "account_inactive", "The professor account is inactive or revoked."
-            )
-        if account.role != AccountRole.PROFESSOR:
-            raise PublicationError(
-                "professor_role_required", "A professor account is required."
-            )
+        self._require_active_professor(professor_id)
         course = self.repository.get_course(course_id)
         membership = self.repository.get_membership(professor_id, course_id)
         if (
@@ -185,6 +350,22 @@ class ReleaseLifecycleService:
                 "The professor does not own or manage this course.",
             )
         return course
+
+    def _require_active_professor(self, professor_id: str) -> Account:
+        account = self.repository.get_account(professor_id)
+        if account is None:
+            raise PublicationError(
+                "account_not_found", "The professor account was not found."
+            )
+        if account.status != AccountStatus.ACTIVE:
+            raise PublicationError(
+                "account_inactive", "The professor account is inactive or revoked."
+            )
+        if account.role != AccountRole.PROFESSOR:
+            raise PublicationError(
+                "professor_role_required", "A professor account is required."
+            )
+        return account
 
 
 def _validate_chunk_course_scope(chunks: list[DocumentChunk], course_id: str) -> None:

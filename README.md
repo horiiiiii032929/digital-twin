@@ -56,6 +56,11 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run verify:technical-freeze`: validate the frozen experimental profile,
   registered evidence links, supported/unsupported claims, and artifact hashes.
 - `npm run check:docs`: validate repository-local Markdown links.
+- `npm run verify:deployable-foundation`: validate the staging topology and run
+  identity, migration, job, recovery, lifecycle, and security tests.
+- `npm run benchmark:deployable-foundation-development`: run the network-free
+  invited professor-upload-to-student-citation, restart, restore, and 100-request
+  capacity journey.
 - `npm run verify:ingestion`: verify the local parsing and chunking baseline.
 - `npm run verify:retrieval`: run the network-free retrieval v1 regression set.
 - `npm run benchmark:retrieval`: compare BM25, local BGE-small, and RRF on
@@ -91,6 +96,19 @@ open <http://localhost:5173/> for the professor setup workspace or
 <http://localhost:5173/student> for the student tutor. Both routes use synthetic
 local fixtures. The student `X-Account-ID` boundary is demonstrative, not
 production authentication.
+
+## Invite-only staging candidate
+
+The A1 candidate adds credentialed administrator/professor/student access,
+secure revocable cookie sessions, durable SQLite schema migrations, owned
+onboarding state, content-addressed source storage, recoverable ingestion jobs,
+password/account/data lifecycle controls, redacted operations, backup/restore,
+and a Caddy HTTPS package. Its local development evaluation passed 41/41 checks;
+public DNS/certificate and clean-host rehearsal remain pending.
+
+Start with [staging deployment and recovery](docs/deployment.md) and the
+[deployment threat model](docs/deployment-threat-model.md). Never copy a real
+secret into a tracked file.
 
 ## Current implementation status
 
@@ -157,6 +175,9 @@ Implemented as Sprint 2 foundations:
 - A frozen experimental technical baseline with machine-checked claim limits,
   component-to-result links, reproducibility commands, rollback, and explicit
   unsupported capacity/deployment/learning claims.
+- A prospective A1 single-host staging foundation with 41/41 local checks,
+  checksum-verified clean restore, 0% errors across 100 synthetic API requests,
+  2.765 ms local API p95, 0.30 GiB peak RSS, and explicit A0 demo rollback.
 
 Current evidence and limitations:
 
@@ -175,13 +196,13 @@ Current evidence and limitations:
   deployment-ineligible on the reference hardware. The held-out comparison
   selected M2, which reached 85% complete evidence@3 versus BM25's 80% at
   164 ms warm p95; BM25 remains the rollback.
-- Synthetic product activation now covers the bounded student, publication,
-  scanned-PDF ingestion, and visual-citation path, but it is not release-ready
-  evidence. The product still lacks a production OCR/layout provider, a
-  credentialed identity boundary, complete professor/admin and source
-  lifecycles, valid professor-fidelity and end-to-end evidence,
-  migration/backup/restore and concurrency evidence, and bounded capacity
-  results.
+- Synthetic product activation now covers credentialed professor/admin/student
+  access, publication, scanned-PDF ingestion, visual citations, migrations,
+  restart, backup/restore, lifecycle controls, and a bounded 100-request local
+  capacity result. It still lacks a production OCR/layout provider, valid
+  professor-fidelity and real-workflow evidence, public HTTPS rehearsal,
+  representative concurrent selected-model capacity, and release-candidate
+  evidence.
 
 The active goal is a deployed, invite-only Course Digital Twin for multiple
 professors and courses, not a one-course RAG pilot or local-only demonstration.
