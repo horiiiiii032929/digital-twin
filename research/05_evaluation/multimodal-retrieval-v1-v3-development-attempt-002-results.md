@@ -8,6 +8,12 @@ Decision: **Drop this V3 configuration. Retain V0 as the text rollback, keep V2
 as research evidence only, and do not open held-out or select a multimodal
 profile.**
 
+> **Correction (2026-08-18):** The reported region metric was inflated by
+> duplicate representation gains. A registered no-model correction replaces
+> V2 `0.212` and V3 `0.186` with corrected nDCG values `0.0676` and `0.0756`.
+> Complete evidence, atomic recall, controls, and the Drop decision are
+> unchanged. See the [corrective analysis](multimodal-retrieval-v1-v3-development-attempt-002-analysis-correction-001-results.md).
+
 ## Decision context
 
 Development attempt 001 activated the predeclared V3 branch after V1 and V2

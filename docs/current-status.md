@@ -37,7 +37,7 @@ continues to hold report, presentation, and professor-communication work.
 | --- | --- | --- | --- |
 | Product UX | Keep as baseline | Professor and student conversation-first workspaces; responsive synthetic flows | Human workflow/usability evidence and complete real source/account lifecycle |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
-| Multimodal retrieval | Refine; no selection | Historical development failures and localization evidence preserved; V0 text fallback | Trustworthy corrected metrics, region-aware extraction, product ingestion, precise visual citations, and prospective selection |
+| Multimodal retrieval | Refine; no selection | Corrected development measurement, unfavorable V3 result preserved, V0 text fallback | Region-aware extraction, product ingestion, precise visual citations, and prospective selection |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Keep as bounded foundation | 19/19 synthetic isolation, persistence, citation, publication replacement, withdrawal, rollback, and stale-release checks | Credentialed identity, complete source administration, durable production storage, jobs, deployment, observability, recovery, capacity, and usability |
@@ -47,8 +47,8 @@ continues to hold report, presentation, and professor-communication work.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | In Progress / Pending | Duplicate-loop defect fixed, metric suite audited, regression tests added, historical V3 result corrected or confirmed, held-out unopened |
-| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Todo / blocked by #85 | Real table/column/figure/equation/scan regions, product ingestion and visual citations, deployable decision and text fallback |
+| 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | Done / Refine | Metric suite corrected and tested; historical V3 analysis corrected; Drop unchanged; held-out unopened |
+| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Todo / next | Real table/column/figure/equation/scan regions, product ingestion and visual citations, deployable decision and text fallback |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / blocked by #86 | Credentialed RBAC, durable data/storage, jobs, HTTPS staging, observability, backup/restore, security, rollback |
 | 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / blocked by #86 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
 | 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / blocked by #86 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
@@ -56,16 +56,26 @@ continues to hold report, presentation, and professor-communication work.
 | 7 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24, #86, #88 | One immutable staging release candidate passes or receives explicit Refine/Drop decision |
 | 8 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
 
-Only #85 is currently in progress. The dependency graph, milestones, priority
-labels, target dates, and issue bodies are recorded on GitHub Project 1.
+Issue #85 is complete, making #86 the next implementation item. The dependency
+graph, milestones, priority labels, target dates, and issue bodies are recorded
+on GitHub Project 1.
 
 ## Known multimodal correction
 
-The V3 development runner constructs region relevance using a duplicated
-`for hit in raw_hit_rows` loop. That can repeat every relevance value and
-corrupt region@k and nDCG. Issue #85 repairs and tests the metric boundary first.
-The old V3 result remains immutable and receives a linked correction or
-invalidation; it is not edited to look successful.
+The suspected duplicated `for hit in raw_hit_rows` loop was not present in the
+committed runner, and the preserved values match the single-pass legacy
+formula. The actual defect was duplicate gain: overlapping OCR, layout, and
+description records could each add discounted IoU for the same gold region,
+after which the unnormalized total was capped at one.
+
+Issue #85 replaces that metric with one-to-one region matching and normalized
+discounted IoU, tests page/region ranking, IoU thresholds, complete evidence,
+atomic recall, and nDCG, and registers a no-model correction. V2 changes from
+0.212 to 0.0676 and V3 from 0.186 to 0.0756 on corrected region nDCG. Complete
+evidence remains tied at 1/3, V3 atomic recall remains worse at 1/3 versus
+V2's 2/3, and the V3 online-model gate still fails. The Drop decision and
+text-only rollback therefore remain unchanged. The 24-case held-out split was
+not read.
 
 The next multimodal candidate must also replace the shallow layout proxy:
 current grouping does not model columns, table rows/cells, figures, equations,
