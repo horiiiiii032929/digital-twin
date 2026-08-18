@@ -35,12 +35,14 @@ complete: V3 was dropped, V0 is retained as the visual/text rollback, and no
 multimodal profile is selected. The final multi-course product and end-to-end
 evidence do not yet exist.
 
-As of 2026-08-18, #12 is the sole `In Progress` item. Issue #24 is
-`Todo / Refine (Paused)`: its corrected anchor evidence is preserved, both
-human packets are deferred, and a tracked execution policy blocks development
-and held-out access. GitHub Support closed ticket #4659958 after completing the
-public-object purge; remote API and web checks confirm the superseded SHA is
-unavailable. #8, #25, #10, and #9 remain queued rather than active.
+As of 2026-08-18, #12 is complete and no implementation issue is `In Progress`.
+The repository is frozen as an experimental, not release-ready baseline. Issue
+#24 is `Todo / Refine (Paused)`: its corrected anchor evidence is preserved,
+both human packets are deferred, and a tracked execution policy blocks
+development and held-out access. GitHub Support closed ticket #4659958 after
+completing the public-object purge; remote API and web checks confirm the
+superseded SHA is unavailable. #8, #25, #10, and #9 remain queued rather than
+active.
 See the
 [current project status](current-status.md) for the exact execution order.
 
@@ -53,8 +55,10 @@ See the
 | F3 Product and end-to-end validation | 2026-08-09 to 2026-08-16 | Integrate M2 with BM25 rollback, then validate professor/student journeys, fidelity, pedagogy, publication control, isolation, recovery, capacity, and local deployment package |
 | F4 Evidence and final communication | 2026-08-17 to 2026-09-13 | Analysis, report, figures, presentation, reproducibility, demo stabilization, contingency |
 
-Technical and evidence work freezes on 2026-08-16. The target professor
-presentation is 2026-09-04; final submission is 2026-09-13.
+Technical and evidence work froze on 2026-08-18, two days after the target.
+The target professor presentation is 2026-09-04; final submission is
+2026-09-13. Until feedback authorizes a post-freeze change, work is limited to
+report, presentation, and demonstration preservation.
 
 ## Issue workflow
 

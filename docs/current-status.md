@@ -15,9 +15,21 @@ but they do not override this page for current sequencing.
 - Development and held-out execution are unauthorized. Their active commands
   are non-executing preflights; anchor and Gemma reproduction commands are
   historical and require an explicit caller confirmation.
-- The 2026-08-18 cleanup check passed 285 Python tests, 15 frontend tests,
+- The 2026-08-18 technical-freeze check passed 299 Python tests, 15 frontend tests,
   documentation and evaluation validators, frontend lint, and the production
   build without making a model call.
+- Dependency/security PR
+  [#78](https://github.com/horiiiiii032929/digital-twin/pull/78) upgraded the
+  independently compatible Python and frontend stack. The tested major ML
+  group was dropped after two of 40 exact top-three rankings changed. npm has
+  zero findings; the optional local ML environment has nine exact, expiring,
+  machine-enforced exceptions and zero unreviewed findings.
+- The technical baseline is frozen as experimental, not release-ready. The
+  [freeze report](../reports/technical-evidence-freeze-2026-08-18.md),
+  [claim matrix](../reports/claim-to-evidence-matrix.md), and machine manifest
+  [`technical-evidence-freeze-v1`](../research/05_evaluation/profiles/technical-evidence-freeze-v1.json)
+  preserve supported results, negative results, limitations, reproducibility,
+  and rollback.
 - Private course data, generated review packets, `.env`, build output,
   dependency folders, and Python caches remain ignored. They are intentionally
   not reorganized into Git.
@@ -44,23 +56,24 @@ labels, C3 used a drifted chunk corpus, and required condition and policy/prompt
 bindings were absent. The unfavorable result remains registered; no profile
 selection was changed.
 
-## Active execution queue
+## Post-freeze queue
 
-Only one bounded execution issue should be `In Progress`.
+No implementation issue is active after the technical freeze. Resume a queued
+item only after a new explicit decision, ideally from professor feedback.
 
 | Order | Issue | Board state | Purpose |
 | ---: | --- | --- | --- |
-| 1 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | In Progress / Pending | Freeze supported claims, limitations, reproducibility, and the professor-facing report |
+| 1 | [#12 Technical evidence freeze](https://github.com/horiiiiii032929/digital-twin/issues/12) | Done / Keep | Experimental profile, claims, limitations, reproducibility, report, and demo smoke are frozen |
 | 2 | [#24 Professor fidelity and tutoring policy](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine (Paused) | Preserve the diagnostic result and deferred human packets; resume only as a separately authorized evaluator redesign |
 | 3 | [#8 Multi-course professor/student core](https://github.com/horiiiiii032929/digital-twin/issues/8) | Todo / Pending | Preserve the 19-check foundation; do not start new feature development after the technical freeze |
 | 4 | [#25 End-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / Pending | Retain for a future validated complete profile; do not open blocked fidelity held-out data |
 | 5 | [#10 Pedagogical and simulated journeys](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / Pending | Retain as future work; calibrated multi-turn evaluation is not established |
 | 6 | [#9 Isolation, recovery, capacity, and packaging](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / Pending | Limit current work to reproducibility and demo-preserving checks |
 
-The 2026-08-16 technical-freeze date has passed. Issue #12 is therefore the sole
-active queue item. Do not start new feature or method development, open held-out
+The 2026-08-16 target was missed by two days; the technical evidence was frozen
+on 2026-08-18. Do not start new feature or method development, open held-out
 data, silently change gates, or promote diagnostic metrics into selection
-evidence.
+evidence without a new post-freeze decision.
 
 ## Frozen closeout sequence
 
@@ -72,8 +85,9 @@ evidence.
    cases, and the hidden-hard-gate disagreement is diagnostic only.
 2. Preserve PR #75 and its correction as unfavorable but decision-bearing
    evidence. Issue #24 remains open and is out of active execution.
-3. Complete issue #12 by freezing only the claims and profiles supported by
-   registered evidence, then stabilize the report and demonstration.
+3. Issue #12 is complete: only claims and profile selections supported by
+   registered evidence are frozen, and the report plus local professor demo
+   pass rendered smoke checks.
 4. Do not rerun primary attempt 001, swapped attempt 001, Qwen attempt 001, or
    any professor-fidelity held-out evaluation. Partial agreement remains
    diagnostic only.
@@ -93,10 +107,11 @@ approval or professor-validation claim is allowed.
 Use the following order when status statements conflict:
 
 1. immutable run records and registered result corrections;
-2. the selected experimental component profile;
-3. this dated operational status;
-4. the live GitHub Project fields;
-5. component guides and historical plans.
+2. the versioned technical-freeze manifest and selected experimental profile;
+3. the frozen claim-to-evidence matrix;
+4. this dated operational status;
+5. the live GitHub Project fields;
+6. component guides and historical plans.
 
 Never edit an old result to make it appear successful. Add a correction or new
 run and retain the original evidence.

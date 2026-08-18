@@ -191,6 +191,7 @@ class ComponentProfileEntry(BaseModel):
     decision: DecisionOutcome | None = None
     evaluation_dataset: str | None = None
     evaluation_record_path: str | None = None
+    result_ids: list[str] = Field(default_factory=list)
     evidence_paths: list[str] = Field(default_factory=list)
     hard_gates: list[str] = Field(default_factory=list)
     candidate_ids: list[str] = Field(default_factory=list)
@@ -200,6 +201,10 @@ class ComponentProfileEntry(BaseModel):
     def status_must_match_selection_evidence(self) -> "ComponentProfileEntry":
         if len(self.evidence_paths) != len(set(self.evidence_paths)):
             raise ValueError("component evidence paths must be unique")
+        if len(self.result_ids) != len(set(self.result_ids)):
+            raise ValueError("component result identifiers must be unique")
+        if any(not result_id.strip() for result_id in self.result_ids):
+            raise ValueError("component result identifiers cannot be empty")
         if len(self.hard_gates) != len(set(self.hard_gates)):
             raise ValueError("component hard gates must be unique")
         if len(self.candidate_ids) != len(set(self.candidate_ids)):

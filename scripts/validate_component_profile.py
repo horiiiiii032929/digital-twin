@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from src.digital_twin.evaluation import (
@@ -31,9 +32,17 @@ def validate_profile_evidence(
     root: Path,
 ) -> dict[str, object]:
     evaluated_components: list[str] = []
+    registered_result_ids = _registered_result_ids(root)
+    result_links: dict[str, list[str]] = {}
     selections: dict[str, str] = {}
 
     for entry in profile.components:
+        unknown_result_ids = set(entry.result_ids) - registered_result_ids
+        if unknown_result_ids:
+            unknown = ", ".join(sorted(unknown_result_ids))
+            raise ValueError(f"profile references unregistered results: {unknown}")
+        if entry.result_ids:
+            result_links[entry.component.value] = entry.result_ids
         for evidence_path in entry.evidence_paths:
             _require_repository_file(root, evidence_path)
 
@@ -83,8 +92,15 @@ def validate_profile_evidence(
         "component_count": len(profile.components),
         "component_status_counts": counts,
         "evaluated_components": sorted(evaluated_components),
+        "result_links": result_links,
         "selections": selections,
     }
+
+
+def _registered_result_ids(root: Path) -> set[str]:
+    registry = root / "research/05_evaluation/result-registry.md"
+    text = registry.read_text(encoding="utf-8")
+    return set(re.findall(r"^\| `([^`]+)` \|", text, flags=re.MULTILINE))
 
 
 def _require_repository_file(root: Path, relative_path: str) -> Path:

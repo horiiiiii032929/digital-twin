@@ -1,6 +1,6 @@
 # Digital Twin Delivery
 
-Status date: 2026-08-14
+Status date: 2026-08-18
 
 This Project tracks the evidence-first delivery of a professor-configurable
 pedagogical Digital Twin for multiple professors and courses. The product
@@ -39,18 +39,16 @@ policy, student interaction state, and evaluation-before-publication.
   administration, migration, backup/restore, concurrency, and bounded capacity
   evidence are also incomplete.
 
-The sole `In Progress` item is #24. The frozen v6 authoring committee is
-complete for all exact-passage v1.2.3 cases: 456 records across DeepSeek V4 Pro
-and two local Qwen artifacts. Its exact blinded independent-human union is 41
-cases, comprising the stable sample, all no-evidence cases, and every model
-escalation; this is below the 48-case cap and is the active gate. GitHub Support
-closed ticket #4659958 after completing the public-object purge, and read-only
-remote checks confirm the superseded SHA is unavailable. The purge no longer
-blocks sealing. Held-out tutor outputs remain unopened.
-#8 returns to `Todo` with its 19-check synthetic publication foundation
-preserved; credentialed identity and complete professor/source lifecycles
-resume after the current gate. #25, #10, #9, and #12 remain queued. Do not
-reopen the text benchmark for visual claims or continue multimodal V3 tuning.
+Issue #12 is complete and no implementation issue is `In Progress`. The
+technical baseline is frozen as **experimental, not release-ready**. M2 text
+retrieval and the DeepSeek V4 Flash/P2 generator boundary remain selected with
+explicit rollbacks; multimodal retrieval has no selection; professor fidelity
+is `Refine / Paused`; and the synthetic publication/student foundation remains
+19/19. Capacity, backup/restore, concurrency, credentialed identity, public
+deployment, human usability, learning outcomes, and professor approval are not
+established. #24, #8, #25, #10, and #9 remain queued for a separately
+authorized post-freeze decision. Held-out professor-fidelity data remains
+closed.
 
 ## Final product
 

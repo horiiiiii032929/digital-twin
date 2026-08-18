@@ -48,7 +48,7 @@ describe("onboarding API client", () => {
 
     await expect(createOnboardingSession()).resolves.toEqual(SESSION)
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions",
+      "/api/onboarding/sessions",
       expect.objectContaining({ method: "POST" }),
     )
   })
@@ -71,7 +71,7 @@ describe("onboarding API client", () => {
 
     await submitOnboardingMessage("session-1", "Use public slides only.")
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions/session-1/messages",
+      "/api/onboarding/sessions/session-1/messages",
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({ content: "Use public slides only." }),
@@ -89,7 +89,7 @@ describe("onboarding API client", () => {
       "needs_review",
     )
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions/session-1/policy-fields/academic_integrity_policy",
+      "/api/onboarding/sessions/session-1/policy-fields/academic_integrity_policy",
       expect.objectContaining({
         method: "PATCH",
         body: JSON.stringify({
@@ -111,7 +111,7 @@ describe("onboarding API client", () => {
     })
 
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions/session-1/source-inventory",
+      "/api/onboarding/sessions/session-1/source-inventory",
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({
@@ -134,7 +134,7 @@ describe("onboarding API client", () => {
     })
 
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions/session-1/source-inventory/source-1",
+      "/api/onboarding/sessions/session-1/source-inventory/source-1",
       expect.objectContaining({
         method: "PATCH",
         body: JSON.stringify({
@@ -152,7 +152,7 @@ describe("onboarding API client", () => {
     await updateApprovalChecklistItem("session-1", "integrity", true)
 
     expect(fetchMock).toHaveBeenCalledWith(
-      "http://localhost:8000/api/onboarding/sessions/session-1/approval-checklist/integrity",
+      "/api/onboarding/sessions/session-1/approval-checklist/integrity",
       expect.objectContaining({
         method: "PATCH",
         body: JSON.stringify({ checked: true }),
@@ -176,7 +176,7 @@ describe("onboarding API client", () => {
 
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
-      "http://localhost:8000/api/onboarding/sessions/session-1/preview-cases/academic-integrity/decision",
+      "/api/onboarding/sessions/session-1/preview-cases/academic-integrity/decision",
       expect.objectContaining({
         method: "PATCH",
         body: JSON.stringify({
@@ -187,7 +187,7 @@ describe("onboarding API client", () => {
     )
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
-      "http://localhost:8000/api/onboarding/sessions/session-1/preview-cases",
+      "/api/onboarding/sessions/session-1/preview-cases",
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({
@@ -206,12 +206,12 @@ describe("onboarding API client", () => {
 
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
-      "http://localhost:8000/api/onboarding/sessions/session-1/revision-proposal/confirm",
+      "/api/onboarding/sessions/session-1/revision-proposal/confirm",
       expect.objectContaining({ method: "POST" }),
     )
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
-      "http://localhost:8000/api/onboarding/sessions/session-1/revision-proposal/discard",
+      "/api/onboarding/sessions/session-1/revision-proposal/discard",
       expect.objectContaining({ method: "POST" }),
     )
   })

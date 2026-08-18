@@ -134,6 +134,16 @@ def test_profile_hard_gates_must_match_evaluation_record():
         validate_profile_evidence(changed_profile, root=ROOT)
 
 
+def test_profile_rejects_unregistered_result_link():
+    profile = load_release_profile(PROFILE_PATH)
+    payload = profile.model_dump(mode="json")
+    payload["components"][0]["result_ids"] = ["missing-result"]
+    changed_profile = SystemReleaseProfile.model_validate(payload)
+
+    with pytest.raises(ValueError, match="unregistered results"):
+        validate_profile_evidence(changed_profile, root=ROOT)
+
+
 def test_component_specific_factory_swaps_retriever_from_profile():
     profile = load_release_profile(PROFILE_PATH)
     selection = next(
