@@ -1,25 +1,48 @@
 # Claim-to-evidence matrix
 
-Status: living index; no claim is accepted until its named evidence exists and
-passes the frozen gates.
+Status: frozen on 2026-08-18 for the experimental `student-tutor-v1`
+technical baseline. A supported claim is intentionally narrow; anything absent
+or marked unsupported must not appear as a project result in the report,
+presentation, or demonstration.
 
-| Report claim | Primary dataset or evidence | Primary outcome | Required diagnostics and gates | Planned figure or table | Current status |
-| --- | --- | --- | --- | --- | --- |
-| The system retrieves complete approved evidence for course questions | `course-tutor-v1` sealed test | Complete-evidence success@3/5 | Recall, precision, graded nDCG, MRR, permission/version violations, scenario slices | Retrieval comparison with 95% intervals | Pending dataset |
-| The generated tutor is grounded and abstains safely | `course-tutor-v1` C1-C3 outputs | Unconditional safe grounded task success | Atomic claim support, contradiction, citation correctness/completeness, false answer/abstention, hard gates | Paired condition comparison and failure flow | Pending protocol freeze |
-| Professor policy changes tutoring behavior | Blinded C1 versus C2 outputs | Professor-policy pedagogical success and win/tie/loss | Per-dimension rubric, assessed-work gate, reviewer agreement | Policy-effect forest or dot plot | Pending anchor review |
-| Retrieval is justified relative to simpler context controls | C2-C4 paired comparison | Safe grounded success difference | Retrieval loss, latency, tokens, cost, complexity, rollback | Quality-latency-cost trade-off plot | Pending candidate freeze |
-| Invited professors and students can use the deployed pilot | Supervised task records | Role-specific task completion | Time, errors, intervention, failed turns, citation comprehension, privacy incidents | Task completion and failed-turn plot | Pending deployment |
-| The deployed pilot is operationally controlled | Staging and pilot operational records | Reliable turn completion | p50/p95 latency, timeout/error rate, recovery, backup/restore, rollback, cost, authorization and deletion gates | Reliability and recovery table | Pending deployment |
+## Supported and narrowed claims
+
+| Claim ID | Frozen claim | Evidence | Exact boundary | Status |
+| --- | --- | --- | --- | --- |
+| `C01` | Approved local TXT, Markdown, and selectable-text PDF sources can be parsed with stable provenance and permission checks in the tested local pipeline. | `ingestion-v1-clean`; `cross-course-ingestion-v1` | Five synthetic sources plus the approved four-course selectable-text audit; no OCR/layout-completeness claim | Supported, bounded |
+| `C02` | Page-bounded heading/paragraph chunking removed cross-page chunks while preserving deterministic identity and provenance on the audited corpus. | `cross-course-ingestion-v1` | 0/1,322 candidate chunks crossed a page versus 591/598 control chunks | Supported |
+| `C03` | M2 hybrid BM25 plus frozen local Qwen3 dense RRF outperformed BM25 on complete-evidence@3 in the one-time 60-case cross-course comparison and passed its operational gates. | `cross-course-retrieval-v1-heldout-001` | 85.0% versus 80.0% complete-evidence@3; four approved courses; 164 ms warm p95; zero isolation/provider/retry failures | Supported, experimental |
+| `C04` | The selected M2 retrieval stack has an explicit BM25 rollback and rejects unreviewed dependency replacement. | `cross-course-retrieval-v1-heldout-001`; `dependency-compatibility-python-ml-001` | The tested major ML upgrade changed two of 40 development top-three rankings and was dropped | Supported |
+| `C05` | DeepSeek V4 Flash non-thinking with strict-evidence P2 passed the frozen public-synthetic generator qualification used for the experimental profile. | `generator-qualification-v1-heldout-001` | 104/104 one-time held-out attempts plus 20/20 Codex second-review sample; not independent human review or private-course fidelity evidence | Supported, bounded |
+| `C06` | The local synthetic publication/student foundation fails closed on tested authorization, release, citation, fallback, persistence, withdrawal, and rollback scenarios. | `student-workflow-slice-v2-publication-synthetic` | 19/19 deterministic synthetic checks; no human user, network provider, concurrent load, or production identity | Supported, bounded |
+| `C07` | The professor-fidelity evaluator is not eligible for automated selection and the evaluation remains paused. | `professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001` | 33/48 repeat labels agreed across two repeated cases; swapped and Qwen sensitivity attempts invalid; human reference 0/48 | Supported negative result |
+| `C08` | The professor review demo renders, starts an onboarding session through the same-origin local API, advances after a suggested answer, and remains explicitly draft-only. | Technical-freeze browser smoke plus frontend/API tests | Local development demonstration only; no usability or release-readiness inference | Demonstration verified, not a research claim |
+
+## Unsupported or rejected claims
+
+| Claim ID | Claim that must not be made | Evidence state | Frozen disposition |
+| --- | --- | --- | --- |
+| `U01` | Professor policy measurably improves tutoring behavior or matches a professor. | Historical comparison invalid; anchor evaluator ineligible; no completed independent-human reference | Unsupported; `Refine / Paused` |
+| `U02` | The system is grounded and citation-complete end to end on representative private-course questions. | Structural/synthetic component evidence exists, but corrected professor-fidelity development and held-out evidence do not | Unsupported |
+| `U03` | The system provides reliable multimodal retrieval over figures, tables, diagrams, scans, or equations. | V2 failed the relative development gate; V3 regressed and was dropped; no profile selected | Unsupported; text-only rollback |
+| `U04` | The application is production-ready, publicly deployable, or operationally controlled. | No credentialed identity, health/monitoring package, migration, backup/restore, deletion, or operator recovery qualification | Unsupported |
+| `U05` | The system supports a bounded concurrent capacity or service-level target. | No concurrent capacity run exists | Unsupported |
+| `U06` | The system improves learning, usability, adoption, satisfaction, engagement, or professor approval. | No participant or learning-outcome study and no completed professor approval exercise | Unsupported |
+| `U07` | The current dependency stack is vulnerability-free. | npm has zero findings; the optional local ML environment has nine exact temporary reviewed advisories | Rejected wording; say zero **unreviewed** findings and local-only exceptions reviewed by 2026-09-15 |
 
 ## Use rules
 
-- Link each accepted row to a stable result ID and registry entry.
-- Generate every numeric figure from machine-readable per-case records with a
-  committed script.
-- Preserve rejected, narrowed, inconclusive, failed, and invalid claims.
-- State the dataset, profile, model, prompt, revision, sample size, uncertainty,
-  limitations, and participant boundary beside every result used in the report
-  or slides.
-- Do not convert a benchmark-specific or synthetic result into a universal SOTA,
-  production-readiness, or learning-improvement claim.
+- Cite the stable result ID and dataset boundary beside every accepted numeric
+  statement.
+- Preserve failed, invalid, inconclusive, and no-selection results; do not
+  rewrite them as successful evidence.
+- Generate numeric figures only from machine-readable or frozen source
+  artifacts.
+- State profile, model/prompt revision, sample size, operational context,
+  reviewer boundary, and important limitation with each result.
+- Do not generalize a benchmark-specific, synthetic, anchor-only, local, or
+  demonstration result into a SOTA, production, human-usability, or
+  learning-improvement claim.
+- Any post-freeze change to a selected component, claim, result interpretation,
+  security exception, or demo-critical route requires a new versioned freeze
+  and full regression checks.

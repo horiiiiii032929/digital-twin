@@ -86,10 +86,11 @@ npm run verify:student-workflow
 npm run check
 ```
 
-The first command executes 14 network-free synthetic acceptance checks covering
+The first command executes 19 network-free synthetic acceptance checks covering
 the successful journey, selected M2 path, fallback, isolation, revocation,
-withdrawal, restart, idempotency, citations, malformed generation, and redacted
-audit telemetry.
+restart, idempotency, citations, malformed generation, redacted audit
+telemetry, evaluation-gated draft publication, atomic replacement, withdrawal,
+rollback, and stale-conversation denial.
 
 ## Limitations
 

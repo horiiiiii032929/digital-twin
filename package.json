@@ -10,7 +10,7 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:generator-qualification && npm run verify:generator-qualification-v4-pro && npm run verify:generator-qualification-v4-pro-p3 && npm run verify:professor-fidelity-post-audit && npm run verify:evaluation-results && npm run verify:profile && npm run verify:generation && npm run verify:student-workflow && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:generator-qualification && npm run verify:generator-qualification-v4-pro && npm run verify:generator-qualification-v4-pro-p3 && npm run verify:professor-fidelity-post-audit && npm run verify:evaluation-results && npm run verify:profile && npm run verify:technical-freeze && npm run verify:generation && npm run verify:student-workflow && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
     "audit:python": "uv run python -m scripts.audit_python_dependencies",
     "audit:js": "npm audit --audit-level=moderate",
@@ -23,6 +23,7 @@
     "verify:generation": "uv run python -m scripts.evaluate_generation",
     "historical:benchmark:generation-gemma3": "uv run python -m scripts.evaluate_generation --model ollama/gemma3:4b --json-mode --timeout-seconds 60 --max-output-tokens 600 --output reports/generated/generation-v1-gemma3-4b.json",
     "verify:profile": "uv run python -m scripts.validate_component_profile",
+    "verify:technical-freeze": "uv run python -m scripts.validate_technical_freeze",
     "verify:cross-course-portfolio": "uv run python -m scripts.validate_cross_course_portfolio",
     "audit:cross-course-ingestion": "uv run python -m scripts.audit_cross_course_ingestion --output reports/generated/cross-course-ingestion-v1.json",
     "draft:cross-course-benchmark": "uv run python -m scripts.draft_cross_course_benchmark",

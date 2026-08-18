@@ -68,10 +68,13 @@ and invalid results are part of the evidence, not cleanup candidates.
 6. #24 produced a reliable provider trace but no selectable professor-fidelity
    result. Its corrected anchor decision is `Refine / Paused`; development,
    held-out, and the deferred human packets require separate authorization.
-7. #10 and #25 run calibrated pedagogical, simulated, and end-to-end
-   evaluation.
-8. #9 validates isolation, failure, recovery, capacity, and packaging.
-9. #12 freezes the final profile and technical evidence on 2026-08-16.
+7. #12 froze the supported experimental profile and technical evidence on
+   2026-08-18, including explicit unsupported pedagogy, capacity, recovery, and
+   deployment claims.
+8. #10 and #25 remain future work for calibrated pedagogical, simulated, and
+   end-to-end evaluation; they are not implied by the freeze.
+9. #9 remains future operational qualification for backup/restore,
+   concurrency, bounded capacity, and deployment packaging.
 
 ## Profile rule
 

@@ -49,6 +49,12 @@ Current utilities:
 - `validate_component_profile.py`: validates the complete component inventory,
   selection status, evidence paths, and linked evaluation decisions; run it
   with `npm run verify:profile`.
+- `validate_technical_freeze.py`: validates the experimental freeze status,
+  selected/disabled component links to registered results, complete supported
+  and unsupported claim inventory, required technical boundary dispositions,
+  paused professor-fidelity policy, artifact hashes, reproduction commands,
+  and rollback/change-control contract; run it with `npm run
+  verify:technical-freeze`.
 - `validate_cross_course_portfolio.py`: validates the active four-course,
   32-document v2 portfolio plus the superseded v1 snapshot, aggregate counts,
   selectable-text requirement, and duplicate hashes. Pass

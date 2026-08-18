@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "freeze_id": "technical-evidence-freeze-v1",
+  "freeze_date": "2026-08-18",
+  "status": "frozen-experimental-not-release-candidate",
+  "evidence_base_revision": "7abdd291cd2e0455afd6385ca3ad44557f2daf92",
+  "profile": {
+    "path": "research/05_evaluation/profiles/student-tutor-v1.json",
+    "profile_id": "student-tutor",
+    "profile_version": "v1",
+    "stage": "experimental",
+    "selected_components": 7,
+    "pending_components": 7,
+    "disabled_components": 0
+  },
+  "component_evidence": [
+    {
+      "component": "source-adapter",
+      "status": "selected",
+      "result_ids": ["ingestion-v1-clean"]
+    },
+    {
+      "component": "parser",
+      "status": "selected",
+      "result_ids": ["ingestion-v1-clean", "cross-course-ingestion-v1"]
+    },
+    {
+      "component": "chunker",
+      "status": "selected",
+      "result_ids": ["cross-course-ingestion-v1"]
+    },
+    {
+      "component": "retriever",
+      "status": "selected",
+      "result_ids": [
+        "cross-course-retrieval-v1-heldout-001",
+        "dependency-compatibility-python-ml-001",
+        "student-workflow-slice-v2-publication-synthetic"
+      ]
+    },
+    {
+      "component": "generator",
+      "status": "selected",
+      "result_ids": ["generator-qualification-v1-heldout-001"]
+    },
+    {
+      "component": "prompt",
+      "status": "selected",
+      "result_ids": ["generator-qualification-v1-heldout-001"]
+    },
+    {
+      "component": "tutor-policy",
+      "status": "selected",
+      "result_ids": [
+        "student-workflow-slice-v2-publication-synthetic",
+        "professor-fidelity-v1-development-001-analysis-correction-001"
+      ]
+    }
+  ],
+  "claims": [
+    {"claim_id": "C01", "status": "supported-bounded", "result_ids": ["ingestion-v1-clean", "cross-course-ingestion-v1"]},
+    {"claim_id": "C02", "status": "supported", "result_ids": ["cross-course-ingestion-v1"]},
+    {"claim_id": "C03", "status": "supported-experimental", "result_ids": ["cross-course-retrieval-v1-heldout-001"]},
+    {"claim_id": "C04", "status": "supported", "result_ids": ["cross-course-retrieval-v1-heldout-001", "dependency-compatibility-python-ml-001"]},
+    {"claim_id": "C05", "status": "supported-bounded", "result_ids": ["generator-qualification-v1-heldout-001"]},
+    {"claim_id": "C06", "status": "supported-bounded", "result_ids": ["student-workflow-slice-v2-publication-synthetic"]},
+    {"claim_id": "C07", "status": "supported-negative-result", "result_ids": ["professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001"]},
+    {"claim_id": "C08", "status": "demonstration-verified-not-research-claim", "result_ids": []},
+    {"claim_id": "U01", "status": "unsupported-refine-paused", "result_ids": ["professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001"]},
+    {"claim_id": "U02", "status": "unsupported", "result_ids": ["professor-fidelity-v1-development-001-analysis-correction-001"]},
+    {"claim_id": "U03", "status": "unsupported-text-only-rollback", "result_ids": ["multimodal-retrieval-v1-v3-development-attempt-002"]},
+    {"claim_id": "U04", "status": "unsupported", "result_ids": []},
+    {"claim_id": "U05", "status": "unsupported", "result_ids": []},
+    {"claim_id": "U06", "status": "unsupported", "result_ids": []},
+    {"claim_id": "U07", "status": "rejected-wording", "result_ids": ["dependency-compatibility-python-ml-001"]}
+  ],
+  "required_boundaries": [
+    {"boundary": "cross-course-retrieval", "disposition": "pass-experimental"},
+    {"boundary": "professor-fidelity", "disposition": "fail-refine-paused"},
+    {"boundary": "pedagogy", "disposition": "unresolved"},
+    {"boundary": "synthetic-journeys", "disposition": "pass-bounded"},
+    {"boundary": "isolation", "disposition": "pass-bounded"},
+    {"boundary": "recovery", "disposition": "partial"},
+    {"boundary": "capacity", "disposition": "not-established"},
+    {"boundary": "cost", "disposition": "partial"},
+    {"boundary": "local-deployment-packaging", "disposition": "not-established"}
+  ],
+  "demo_qa": {
+    "status": "passed-after-same-origin-api-repair",
+    "flow": "app loads -> professor review screen renders -> suggested answer advances interview and workflow trace",
+    "desktop_console_errors": 0,
+    "mobile_viewport": {"width": 390, "height": 844},
+    "mobile_console_errors": 0,
+    "professor_report_console_errors": 0,
+    "research_claim": false
+  },
+  "artifact_bindings": [
+    {"path": "research/05_evaluation/profiles/student-tutor-v1.json", "sha256": "28ccb0a2dc8779f88d7c994eca802d4e660c5dee93c6e2795f0508f801d38199"},
+    {"path": "research/05_evaluation/result-registry.md", "sha256": "8f3078022580c28d9c38c883b3f92b6c32425906271ccb9d21cd12ea94673c08"},
+    {"path": "reports/claim-to-evidence-matrix.md", "sha256": "a9d9e4c63489e77d48fc6fa65b40256ea21e216a2bf9fd1ae3e9f9fa4222ba69"},
+    {"path": "reports/technical-evidence-freeze-2026-08-18.md", "sha256": "8f1024139fa3940aef3f872f12f4c32b002b991f053ed5419da7dba59ec0a366"},
+    {"path": "reports/professor-fidelity-closeout-2026-08-17/report.html", "sha256": "55313e05354ce2a7742a40a43c04b9765749a74ae872e704e6b4087f61d53ad5"},
+    {"path": "research/05_evaluation/instruments/professor_fidelity_execution_policy_v1.json", "sha256": "ac1b37878d2c092edbc4fe0c1926c08292582ada9781e5b7adfc3c489ce4025f"},
+    {"path": "research/05_evaluation/instruments/dependency_vulnerability_exceptions_v1.json", "sha256": "057038b73ac1c2ef3ad1867199699499bfdb66428f193ee2049479f747b7f627"},
+    {"path": "apps/web/src/lib/api/client.ts", "sha256": "970e7ab35d00650d455b2de5d4106408a67c0bef601928c0667199f449e5ab7c"},
+    {"path": "apps/web/vite.config.ts", "sha256": "61cd027d599a33b0bdd43b9bc39c3a98472ac571aa0b6c6c0343c8a6ee2e32f0"},
+    {"path": "package-lock.json", "sha256": "12fb7510a59beebd87b89a9ace1e27c112b073b479d7664aea63a2743eb1d1ac"},
+    {"path": "uv.lock", "sha256": "2015cf437ed597c25182b7a3c801eaeffefa22ce8a9a1cda87ab3ca667e97abc"}
+  ],
+  "reproduction_commands": [
+    "uv sync --locked --dev",
+    "npm ci",
+    "npm run audit:dependencies",
+    "npm run verify:technical-freeze",
+    "npm run check"
+  ],
+  "rollbacks": [
+    "M2 retrieval falls back to BM25 v1.",
+    "Live generation falls back to deterministic-grounded-generator v1.",
+    "The direct-grounded prompt remains the prompt control.",
+    "Evidence-base revision 7abdd291cd2e0455afd6385ca3ad44557f2daf92 remains the pre-freeze Git rollback."
+  ],
+  "change_control": "Any selected implementation/configuration, claim status, evidence interpretation, security exception, artifact binding, or demo-critical route change requires a new freeze ID and full audit/check execution.",
+  "private_or_heldout_data_read": false,
+  "external_model_called": false
+}

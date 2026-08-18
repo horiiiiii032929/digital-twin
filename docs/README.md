@@ -6,6 +6,8 @@ design records.
 ## Active product and architecture
 
 - [Current project status](current-status.md)
+- [Technical evidence freeze](../reports/technical-evidence-freeze-2026-08-18.md)
+- [Frozen claim-to-evidence matrix](../reports/claim-to-evidence-matrix.md)
 - [Project brief](project-brief.md)
 - [Digital Twin architecture](architecture.md)
 - [Component inventory](component-inventory.md)

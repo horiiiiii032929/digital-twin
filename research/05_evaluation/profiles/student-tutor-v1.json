@@ -15,6 +15,9 @@
         }
       },
       "decision": "keep",
+      "result_ids": [
+        "ingestion-v1-clean"
+      ],
       "evidence_paths": [
         "docs/local-ingestion.md"
       ],
@@ -41,6 +44,10 @@
       },
       "decision": "keep",
       "evaluation_dataset": "synthetic-ingestion-v1",
+      "result_ids": [
+        "ingestion-v1-clean",
+        "cross-course-ingestion-v1"
+      ],
       "evidence_paths": [
         "docs/local-ingestion.md",
         "research/04_experiments/2026-07-14-local-ingestion-learning-log.md"
@@ -71,6 +78,9 @@
       "decision": "keep",
       "evaluation_dataset": "cross-course-ingestion-v1",
       "evaluation_record_path": "research/05_evaluation/records/cross-course-ingestion-v1.json",
+      "result_ids": [
+        "cross-course-ingestion-v1"
+      ],
       "evidence_paths": [
         "docs/local-ingestion.md",
         "research/04_experiments/2026-07-28-cross-course-ingestion-v1-plan.md",
@@ -129,6 +139,11 @@
       "decision": "keep",
       "evaluation_dataset": "cross-course-retrieval-v1-draft-6-heldout",
       "evaluation_record_path": "research/05_evaluation/records/cross-course-retrieval-v1-heldout.json",
+      "result_ids": [
+        "cross-course-retrieval-v1-heldout-001",
+        "dependency-compatibility-python-ml-001",
+        "student-workflow-slice-v2-publication-synthetic"
+      ],
       "evidence_paths": [
         "docs/local-retrieval.md",
         "research/04_experiments/2026-08-02-cross-course-retrieval-heldout-plan.md",
@@ -204,6 +219,9 @@
       },
       "decision": "keep",
       "evaluation_dataset": "generator-qualification-v1.0.0-heldout",
+      "result_ids": [
+        "generator-qualification-v1-heldout-001"
+      ],
       "evidence_paths": [
         "research/05_evaluation/generator-qualification-v1-development-attempt-002-results.md",
         "research/05_evaluation/generator-qualification-v1-development-stability-001-results.md",
@@ -245,6 +263,9 @@
       },
       "decision": "keep",
       "evaluation_dataset": "generator-qualification-v1.0.0-heldout",
+      "result_ids": [
+        "generator-qualification-v1-heldout-001"
+      ],
       "evidence_paths": [
         "research/05_evaluation/generator-qualification-v1-development-attempt-001-results.md",
         "research/05_evaluation/generator-qualification-v1-development-attempt-002-results.md",
@@ -275,6 +296,10 @@
         }
       },
       "decision": "keep",
+      "result_ids": [
+        "student-workflow-slice-v2-publication-synthetic",
+        "professor-fidelity-v1-development-001-analysis-correction-001"
+      ],
       "evidence_paths": [
         "docs/onboarding-prototype.md",
         "research/02_requirements/chat-led-tutor-policy-extraction.md",

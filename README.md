@@ -49,6 +49,10 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
 - `npm run check`: run the complete local and CI verification suite.
+- `npm run audit:dependencies`: audit npm plus the complete Python lock and
+  reject any unreviewed or drifted vulnerability finding.
+- `npm run verify:technical-freeze`: validate the frozen experimental profile,
+  registered evidence links, supported/unsupported claims, and artifact hashes.
 - `npm run check:docs`: validate repository-local Markdown links.
 - `npm run verify:ingestion`: verify the local parsing and chunking baseline.
 - `npm run verify:retrieval`: run the network-free retrieval v1 regression set.
@@ -132,6 +136,9 @@ Implemented as Sprint 2 foundations:
 - An evaluation-gated publication lifecycle with durable drafts, atomic release
   replacement, withdrawal, rollback, and stale-conversation denial. The v2
   synthetic architecture result passes 19/19 acceptance checks.
+- A frozen experimental technical baseline with machine-checked claim limits,
+  component-to-result links, reproducibility commands, rollback, and explicit
+  unsupported capacity/deployment/learning claims.
 
 Current evidence and limitations:
 
@@ -148,8 +155,8 @@ Current evidence and limitations:
 - Local M3 preserved 80.0% complete-evidence success after optimization, but
   its best tested p95 was 28.13 seconds. It remains a research candidate and is
   deployment-ineligible on the reference hardware. The held-out comparison
-  selected M2, which reached 85% complete evidence@3 at 164 ms warm p95; BM25
-  remains the rollback.
+  selected M2, which reached 85% complete evidence@3 versus BM25's 80% at
+  164 ms warm p95; BM25 remains the rollback.
 - Synthetic product activation now covers the bounded student and publication
   path, but it is not release-ready evidence. The product still lacks a
   credentialed identity boundary, complete professor/admin and source
@@ -168,8 +175,11 @@ simulated capacity.
 See the
 [authoritative scope](research/00_admin/2026-07-27-frontier-digital-twin-scope.md)
 for the research programme, claims, data boundary, and compressed schedule. The
-technical and evidence freeze is 2026-08-16; September is reserved for report,
-presentation, revision, and contingency.
+technical evidence was frozen on 2026-08-18 as an **experimental, not
+release-ready** baseline. See the
+[technical evidence freeze](reports/technical-evidence-freeze-2026-08-18.md).
+Remaining work is report, presentation, feedback-led revision, and contingency;
+new feature or method development requires an explicit post-freeze decision.
 
 ## Sprint 1 Onboarding Prototype
 
