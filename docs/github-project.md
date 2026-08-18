@@ -43,17 +43,17 @@ professor-communication track.
 ## Critical path
 
 1. #85 — evaluator correction (`Done / Refine`).
-2. #86 — region-aware multimodal product grounding (`In Progress / Refine`
-   evidence; repository handoff pending).
-3. #88 — deployable platform foundation.
+2. #86 — region-aware multimodal product grounding (`Done / Refine`; PR #91).
+3. #88 — deployable platform foundation (next).
 4. #87 — large factual QA benchmark with a larger dummy corpus and multimodal
    slice.
 5. #24, #9, and #25 — fidelity, production operations, and deployed end-to-end
    validation.
 6. #10 — approval-gated professor/student workflow and usability pilot.
 
-Issue #86 now has region-aware product ingestion, access-checked original-crop
-citations, and three registered prospective development attempts. Attempt 003
+Issue #86 merged region-aware product ingestion, access-checked original-crop
+citations, and three registered prospective development attempts in PR #91.
+Attempt 003
 passed all quality/integration gates but failed the frozen relative p95 gate, so
 no multimodal profile is selected and the text profile remains the fallback.
 
