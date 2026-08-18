@@ -72,7 +72,7 @@ export function PreviewComparison({
 
   return (
     <section className="text-card-foreground" aria-labelledby="preview-evidence-title">
-      <div className="flex items-start justify-between gap-3 border-b pb-5">
+      <div className="flex items-start justify-between gap-3 border-b pb-5 pr-11">
         <div>
           <h3 id="preview-evidence-title" className="text-lg font-semibold tracking-[-0.02em]">
             Preview

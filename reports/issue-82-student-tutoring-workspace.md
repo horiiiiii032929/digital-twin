@@ -122,3 +122,12 @@ verified student/publication API, persisted synthetic records, frozen component
 profile, and professor workspace remain the unchanged control. Browser-only
 conversation identifiers may be discarded without deleting authoritative API
 messages or citations.
+
+## Current visual authority
+
+Issue #84 preserves the controller, API, citation, recovery, and isolation work
+recorded here but supersedes the fixed 240px/420px three-column presentation.
+The current design uses a 216px rail and opens citations contextually in a 400px
+inspector or mobile sheet. This record remains the engineering evidence for the
+student slice; `reports/issue-84-unified-llm-workspace.md` is the current visual
+and product-direction record.

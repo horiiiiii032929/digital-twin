@@ -75,7 +75,7 @@ export function PolicyReview({
 
   return (
     <section className="p-5 text-card-foreground sm:p-6" aria-labelledby="policy-review-title">
-      <div className="flex items-start justify-between gap-3 border-b pb-5">
+      <div className="flex items-start justify-between gap-3 border-b pb-5 pr-11">
         <div>
           <h3 id="policy-review-title" className="text-lg font-semibold tracking-[-0.02em]">
             Tutor policy

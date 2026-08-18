@@ -105,3 +105,11 @@ merges. This decision accepts the conversation-plus-tool model for continued
 prototype development; it does not substitute for professor review or a human
 usability study. Continue the next bounded product slice under #8 without
 changing the frozen retrieval, generator, policy, or research-evidence profile.
+
+## Current visual authority
+
+The repository-owner review later returned **Refine** for the product-wide UX.
+Issue #84 supersedes Option B's horizontal/narrow-layout behavior with a shared
+conversation-first rail and contextual inspector. The functional parity and QA
+evidence in this record remain valid historical evidence; its screenshots are
+no longer the current visual specification.

@@ -1,13 +1,27 @@
-import { useState } from "react"
+/**
+ * THESIS: Conversation is the professor's stable setup home; structured stages
+ * open as accountable context instead of becoming a horizontal admin wizard.
+ * OWN-WORLD: A 216px cool-neutral rail, true-white chat canvas, charcoal
+ * actions, restrained iris focus, compact controls, and one elevated composer.
+ * STORY: Continue the interview, open a setup stage, resolve blockers, inspect
+ * evidence, preview behavior, and retain explicit release authority.
+ * FIRST VIEWPORT: Setup rail, wide conversation, compact course/status header,
+ * and an optional 400px inspector that never replaces the transcript.
+ * FORM: User-delegated familiar-LLM canon, accepted composition C in
+ * reports/generated/ui-redesign-product-wide/composition-c-accepted.png.
+ */
+
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react"
 import {
   Activity,
   AlertCircle,
   BookOpen,
-  ChevronDown,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Sparkles,
+  Menu,
+  PanelRightClose,
+  PanelRightOpen,
+  X,
 } from "lucide-react"
+import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { ApprovalChecklist } from "@/components/onboarding/approval-checklist"
 import { ReleaseRoute } from "@/components/onboarding/console/readiness-summary"
@@ -19,6 +33,7 @@ import { PreviewComparison } from "@/components/onboarding/preview-comparison"
 import { SourceInventory } from "@/components/onboarding/source-inventory"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { WorkspaceBrand } from "@/components/workspace/workspace-brand"
 import type { OnboardingController } from "@/hooks/use-onboarding-session"
 import type { ReviewStageId } from "@/lib/onboarding/readiness"
 import {
@@ -31,11 +46,13 @@ import { cn } from "@/lib/utils"
 
 const TOOL_TITLES: Record<ReviewStageId, string> = {
   sources: "Sources",
-  interview: "Tutor policy",
+  interview: "Interview",
   policy: "Tutor policy",
   preview: "Preview",
   approval: "Approval",
 }
+
+type InspectorMode = ReviewStageId | "activity"
 
 export function ProfessorReviewConsole({
   controller,
@@ -66,70 +83,146 @@ export function ProfessorReviewConsole({
     discardRevision,
   } = controller
   const [activeStage, setActiveStage] = useState<ReviewStageId>("interview")
-  const [activityOpen, setActivityOpen] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [inspectorMode, setInspectorMode] = useState<InspectorMode>("interview")
+  const [desktopInspectorOpen, setDesktopInspectorOpen] = useState(true)
+  const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const mobileMenuTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const mobileInspectorTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const inspectorOpeningFromMenuRef = useRef(false)
   const releaseReadiness = getReleaseReadiness(session)
   const stepStates = getStepStates(session)
   const nextAction = getNextAction(session, releaseReadiness.blockers)
 
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)")
+    const closeMobileSurfacesOnDesktop = (event: MediaQueryListEvent) => {
+      if (!event.matches) return
+      inspectorOpeningFromMenuRef.current = false
+      setMobileMenuOpen(false)
+      setMobileInspectorOpen(false)
+    }
+    desktop.addEventListener("change", closeMobileSurfacesOnDesktop)
+    return () => desktop.removeEventListener("change", closeMobileSurfacesOnDesktop)
+  }, [])
+
   const openStage = (stage: ReviewStageId) => {
     setActiveStage(stage)
-    setActivityOpen(false)
+    setInspectorMode(stage)
+    openInspectorForViewport()
   }
 
-  return (
-    <main className="flex h-dvh flex-col overflow-hidden bg-white text-foreground">
-      <AppBar
-        collapsed={sidebarCollapsed}
-        status={formatReleaseStatus(releaseReadiness.status)}
-        blockerCount={releaseReadiness.blockers.length}
-        activityOpen={activityOpen}
-        onToggleActivity={() => setActivityOpen((open) => !open)}
-      />
+  const openActivity = () => {
+    setInspectorMode("activity")
+    openInspectorForViewport()
+  }
 
+  const openInspectorForViewport = () => {
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      setDesktopInspectorOpen(true)
+    } else {
+      if (mobileMenuOpen) inspectorOpeningFromMenuRef.current = true
+      setMobileInspectorOpen(true)
+    }
+    setMobileMenuOpen(false)
+  }
+
+  const toggleInspector = () => {
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      setDesktopInspectorOpen((open) => !open)
+    } else {
+      setMobileInspectorOpen(true)
+    }
+  }
+
+  const renderInspectorContent = () =>
+    inspectorMode === "activity" ? (
+      <ReviewContext session={session} readiness={releaseReadiness} />
+    ) : (
+      <StageTool
+        stage={inspectorMode}
+        controller={controller}
+        onAddSource={addSource}
+        onUpdateSource={editSource}
+        onUpdateField={editPolicyField}
+        onUpdateApproval={updateApprovalItem}
+        onPreviewDecision={decidePreview}
+        onAddCustomPreview={addCustomPreview}
+        onConfirmRevision={confirmRevision}
+        onDiscardRevision={discardRevision}
+        isAddingSource={isAddingSource}
+        updatingSourceId={updatingSourceId}
+        updatingFieldId={updatingFieldId}
+        updatingApprovalItemId={updatingApprovalItemId}
+        updatingPreviewId={updatingPreviewId}
+        isAddingCustomPreview={isAddingCustomPreview}
+        isResolvingRevision={isResolvingRevision}
+      />
+    )
+
+  return (
+    <main className="h-dvh min-w-0 overflow-hidden bg-white text-foreground">
       <div
         className={cn(
-          "grid min-h-0 flex-1 lg:h-[calc(100dvh-57px)] lg:overflow-hidden",
-          sidebarCollapsed
-            ? "lg:grid-cols-[72px_minmax(0,1fr)]"
-            : "lg:grid-cols-[240px_minmax(0,1fr)]",
+          "grid h-full min-h-0 min-w-0 lg:overflow-hidden",
+          desktopInspectorOpen
+            ? "lg:grid-cols-[216px_minmax(0,1fr)_400px]"
+            : "lg:grid-cols-[216px_minmax(0,1fr)]",
         )}
       >
         <aside className="hidden min-h-0 flex-col border-r bg-[var(--shell)] lg:flex">
+          <WorkspaceBrand />
+          <div className="px-3 pt-3">
+            <Button
+              type="button"
+              className="w-full"
+              onClick={() => openStage(nextAction.stage)}
+            >
+              Continue setup
+            </Button>
+          </div>
           <ReleaseRoute
             steps={stepStates}
-            selectedStage={activeStage}
-            collapsed={sidebarCollapsed}
+            selectedStage={inspectorMode === "activity" ? undefined : activeStage}
+            collapsed={false}
             onSelectStage={openStage}
           />
-          <div className="mt-auto border-t p-2">
+
+          <div className="mt-auto space-y-1 border-t p-3">
             <Button
               type="button"
               variant="ghost"
-              size={sidebarCollapsed ? "icon" : "sm"}
-              className={cn("text-muted-foreground", !sidebarCollapsed && "w-full justify-start")}
-              aria-label={sidebarCollapsed ? "Expand setup navigation" : "Collapse setup navigation"}
-              onClick={() => setSidebarCollapsed((collapsed) => !collapsed)}
-            >
-              {sidebarCollapsed ? (
-                <PanelLeftOpen data-icon="inline-start" />
-              ) : (
-                <PanelLeftClose data-icon="inline-start" />
+              className={cn(
+                "w-full justify-start",
+                releaseReadiness.blockers.length > 0
+                  ? "text-[var(--warning)] hover:bg-[var(--warning-soft)] hover:text-[var(--warning)]"
+                  : "text-[var(--success)] hover:bg-[var(--success-soft)] hover:text-[var(--success)]",
               )}
-              {sidebarCollapsed ? null : "Collapse"}
+              onClick={openActivity}
+            >
+              <AlertCircle data-icon="inline-start" />
+              {releaseReadiness.blockers.length} blocker
+              {releaseReadiness.blockers.length === 1 ? "" : "s"}
+            </Button>
+            <Button asChild variant="ghost" className="w-full justify-start">
+              <a href="/student">
+                <BookOpen data-icon="inline-start" />
+                Student tutor
+              </a>
             </Button>
           </div>
         </aside>
 
         <section className="flex min-h-0 min-w-0 flex-col bg-white">
-          <div className="border-b bg-[var(--shell)] lg:hidden">
-            <ReleaseRoute
-              steps={stepStates}
-              selectedStage={activeStage}
-              collapsed={false}
-              onSelectStage={openStage}
-            />
-          </div>
+          <ProfessorHeader
+            status={formatReleaseStatus(releaseReadiness.status)}
+            blockerCount={releaseReadiness.blockers.length}
+            inspectorOpen={desktopInspectorOpen}
+            menuTriggerRef={mobileMenuTriggerRef}
+            inspectorTriggerRef={mobileInspectorTriggerRef}
+            onOpenMenu={() => setMobileMenuOpen(true)}
+            onToggleInspector={toggleInspector}
+          />
 
           {error ? (
             <div className="px-4 pt-4 sm:px-6">
@@ -141,150 +234,286 @@ export function ProfessorReviewConsole({
             </div>
           ) : null}
 
-          <div className="grid min-h-0 flex-1 xl:grid-cols-[minmax(480px,1.03fr)_minmax(420px,0.97fr)]">
-            <section
-              aria-label="Setup conversation"
-              className={cn(
-                "min-h-0 min-w-0 bg-white xl:block xl:border-r",
-                activeStage !== "interview" || activityOpen ? "hidden" : "block",
-              )}
-            >
-              <OnboardingChat
-                messages={session?.messages ?? []}
-                currentStep={session?.current_step ?? "starting"}
-                isLoading={isStarting}
-                isSubmitting={isSubmitting}
-                onSendMessage={sendMessage}
-                onRestart={restart}
-              />
-            </section>
-
-            <section
-              aria-label={activityOpen ? "Review activity" : TOOL_TITLES[activeStage]}
-              className={cn(
-                "min-h-0 min-w-0 overflow-y-auto bg-white xl:block",
-                activeStage === "interview" && !activityOpen ? "hidden" : "block",
-              )}
-            >
-              {activityOpen ? (
-                <ReviewContext session={session} readiness={releaseReadiness} />
-              ) : (
-                <StageTool
-                  stage={activeStage}
-                  controller={controller}
-                  onAddSource={addSource}
-                  onUpdateSource={editSource}
-                  onUpdateField={editPolicyField}
-                  onUpdateApproval={updateApprovalItem}
-                  onPreviewDecision={decidePreview}
-                  onAddCustomPreview={addCustomPreview}
-                  onConfirmRevision={confirmRevision}
-                  onDiscardRevision={discardRevision}
-                  isAddingSource={isAddingSource}
-                  updatingSourceId={updatingSourceId}
-                  updatingFieldId={updatingFieldId}
-                  updatingApprovalItemId={updatingApprovalItemId}
-                  updatingPreviewId={updatingPreviewId}
-                  isAddingCustomPreview={isAddingCustomPreview}
-                  isResolvingRevision={isResolvingRevision}
-                />
-              )}
-            </section>
-          </div>
-
-          <ReleaseBar
-            blockers={releaseReadiness.blockers}
-            nextActionTitle={nextAction.title}
-            onOpenNext={() => openStage(nextAction.stage)}
-          />
+          <section aria-label="Setup conversation" className="min-h-0 min-w-0 flex-1 bg-white">
+            <OnboardingChat
+              messages={session?.messages ?? []}
+              currentStep={session?.current_step ?? "starting"}
+              isLoading={isStarting}
+              isSubmitting={isSubmitting}
+              onSendMessage={sendMessage}
+              onRestart={restart}
+            />
+          </section>
         </section>
+
+        {desktopInspectorOpen ? (
+          <ProfessorInspector
+            title={inspectorMode === "activity" ? "Activity" : TOOL_TITLES[inspectorMode]}
+            className="hidden border-l lg:flex"
+            onClose={() => setDesktopInspectorOpen(false)}
+          >
+            {renderInspectorContent()}
+          </ProfessorInspector>
+        ) : null}
       </div>
+
+      <ProfessorMobileMenu
+        open={mobileMenuOpen}
+        steps={stepStates}
+        selectedStage={inspectorMode === "activity" ? undefined : activeStage}
+        blockerCount={releaseReadiness.blockers.length}
+        onOpenChange={setMobileMenuOpen}
+        triggerRef={mobileMenuTriggerRef}
+        inspectorOpeningRef={inspectorOpeningFromMenuRef}
+        onSelectStage={openStage}
+        onOpenActivity={openActivity}
+      />
+
+      <DialogPrimitive.Root
+        open={mobileInspectorOpen}
+        onOpenChange={setMobileInspectorOpen}
+      >
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-20 bg-black/15 lg:hidden" />
+          <DialogPrimitive.Content
+            onCloseAutoFocus={(event) => {
+              event.preventDefault()
+              mobileInspectorTriggerRef.current?.focus()
+            }}
+            className="fixed inset-x-0 bottom-0 z-30 flex max-h-[84dvh] min-h-[52dvh] flex-col overflow-hidden rounded-t-2xl border-t bg-white shadow-[0_-12px_40px_rgba(32,33,35,0.14)] outline-none lg:hidden"
+          >
+            <DialogPrimitive.Title className="sr-only">
+              {inspectorMode === "activity" ? "Activity" : TOOL_TITLES[inspectorMode]}
+            </DialogPrimitive.Title>
+            <div
+              aria-hidden="true"
+              className="absolute top-2 left-1/2 z-10 h-1 w-9 -translate-x-1/2 rounded-full bg-[var(--rule-strong)]"
+            />
+            <ProfessorInspector
+              title={inspectorMode === "activity" ? "Activity" : TOOL_TITLES[inspectorMode]}
+              className="flex min-h-0 flex-1"
+              onClose={() => setMobileInspectorOpen(false)}
+            >
+              {renderInspectorContent()}
+            </ProfessorInspector>
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
     </main>
   )
 }
 
-function AppBar({
-  collapsed,
+function ProfessorHeader({
   status,
   blockerCount,
-  activityOpen,
-  onToggleActivity,
+  inspectorOpen,
+  menuTriggerRef,
+  inspectorTriggerRef,
+  onOpenMenu,
+  onToggleInspector,
 }: {
-  collapsed: boolean
   status: string
   blockerCount: number
-  activityOpen: boolean
-  onToggleActivity: () => void
+  inspectorOpen: boolean
+  menuTriggerRef: RefObject<HTMLButtonElement | null>
+  inspectorTriggerRef: RefObject<HTMLButtonElement | null>
+  onOpenMenu: () => void
+  onToggleInspector: () => void
 }) {
-  const statusLabel =
-    blockerCount > 0
-      ? `${capitalize(status)} · ${blockerCount} blocker${blockerCount === 1 ? "" : "s"}`
-      : capitalize(status)
-
   return (
-    <header className="flex min-h-14 items-stretch border-b bg-white">
-      <div
-        className={cn(
-          "hidden shrink-0 items-center gap-2.5 border-r px-4 lg:flex",
-          collapsed ? "w-[72px] justify-center px-0" : "w-[240px]",
-        )}
-      >
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-strong)] text-white">
-          <Sparkles className="size-4" aria-hidden="true" />
-        </span>
-        {collapsed ? null : (
-          <span className="truncate text-sm font-semibold tracking-[-0.01em]">
-            Course Digital Twin
-          </span>
-        )}
-      </div>
-
-      <div className="flex min-w-0 flex-1 items-center justify-between gap-3 px-3 sm:px-5">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-strong)] text-white lg:hidden">
-            <Sparkles className="size-4" aria-hidden="true" />
-          </span>
-          <h1 className="truncate text-base font-semibold tracking-[-0.02em]">
+    <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white px-3 sm:px-5">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <Button
+          ref={menuTriggerRef}
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
+          aria-label="Open setup navigation"
+          onClick={onOpenMenu}
+        >
+          <Menu aria-hidden="true" />
+        </Button>
+        <div className="min-w-0">
+          <h1 className="truncate text-sm font-semibold tracking-[-0.015em] sm:text-base">
             Tutor setup
           </h1>
           <span
             className={cn(
-              "hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium sm:inline-flex",
-              blockerCount > 0
-                ? "bg-[var(--warning-soft)] text-[var(--warning)]"
-                : "bg-[var(--success-soft)] text-[var(--success)]",
+              "block truncate text-xs font-medium sm:hidden",
+              blockerCount > 0 ? "text-[var(--warning)]" : "text-[var(--success)]",
             )}
           >
-            <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
-            {statusLabel}
+            {capitalize(status)}
+            {blockerCount > 0
+              ? ` · ${blockerCount} blocker${blockerCount === 1 ? "" : "s"}`
+              : ""}
           </span>
         </div>
+        <span
+          className={cn(
+            "hidden items-center gap-1.5 text-xs font-medium sm:inline-flex",
+            blockerCount > 0 ? "text-[var(--warning)]" : "text-[var(--success)]",
+          )}
+        >
+          <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
+          {capitalize(status)}
+          {blockerCount > 0
+            ? ` · ${blockerCount} blocker${blockerCount === 1 ? "" : "s"}`
+            : ""}
+        </span>
+      </div>
 
-        <div className="flex items-center gap-1.5">
-          <Button asChild variant="ghost" size="sm">
-            <a href="/student" aria-label="Open student tutor">
-              <BookOpen data-icon="inline-start" />
-              <span className="hidden md:inline">Student tutor</span>
-            </a>
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            aria-label="Activity"
-            aria-pressed={activityOpen}
-            onClick={onToggleActivity}
-          >
-            <Activity data-icon="inline-start" />
-            <span className="hidden sm:inline">Activity</span>
-            <ChevronDown
-              data-icon="inline-end"
-              className={cn("transition-transform", activityOpen && "rotate-180")}
-            />
-          </Button>
-        </div>
+      <div className="flex items-center gap-1.5">
+        <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+          <a href="/student" aria-label="Open student tutor">
+            <BookOpen data-icon="inline-start" />
+            Student tutor
+          </a>
+        </Button>
+        <Button
+          ref={inspectorTriggerRef}
+          type="button"
+          variant="outline"
+          size="sm"
+          className="lg:hidden"
+          aria-label="Open setup inspector"
+          onClick={onToggleInspector}
+        >
+          <PanelRightOpen data-icon="inline-start" />
+          Setup
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="hidden lg:inline-flex"
+          aria-label={inspectorOpen ? "Close setup inspector" : "Open setup inspector"}
+          aria-pressed={inspectorOpen}
+          onClick={onToggleInspector}
+        >
+          {inspectorOpen ? (
+            <PanelRightClose data-icon="inline-start" />
+          ) : (
+            <PanelRightOpen data-icon="inline-start" />
+          )}
+          Setup
+        </Button>
       </div>
     </header>
+  )
+}
+
+function ProfessorInspector({
+  title,
+  className,
+  onClose,
+  children,
+}: {
+  title: string
+  className?: string
+  onClose: () => void
+  children: ReactNode
+}) {
+  return (
+    <aside
+      aria-label={`${title} inspector`}
+      className={cn("relative min-h-0 min-w-0 flex-col overflow-y-auto bg-white", className)}
+    >
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon"
+        className="absolute top-2.5 right-2.5 z-10 size-9 bg-white/95"
+        aria-label={`Close ${title.toLowerCase()} inspector`}
+        onClick={onClose}
+      >
+        <X aria-hidden="true" />
+      </Button>
+      {children}
+    </aside>
+  )
+}
+
+function ProfessorMobileMenu({
+  open,
+  steps,
+  selectedStage,
+  blockerCount,
+  onOpenChange,
+  triggerRef,
+  inspectorOpeningRef,
+  onSelectStage,
+  onOpenActivity,
+}: {
+  open: boolean
+  steps: ReturnType<typeof getStepStates>
+  selectedStage?: ReviewStageId
+  blockerCount: number
+  onOpenChange: (open: boolean) => void
+  triggerRef: RefObject<HTMLButtonElement | null>
+  inspectorOpeningRef: RefObject<boolean>
+  onSelectStage: (stage: ReviewStageId) => void
+  onOpenActivity: () => void
+}) {
+  return (
+    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay className="fixed inset-0 z-20 bg-black/15 lg:hidden" />
+        <DialogPrimitive.Content
+          onCloseAutoFocus={(event) => {
+            event.preventDefault()
+            if (inspectorOpeningRef.current) {
+              inspectorOpeningRef.current = false
+              return
+            }
+            triggerRef.current?.focus()
+          }}
+          className="fixed inset-y-0 left-0 z-30 flex w-[min(88vw,320px)] flex-col border-r bg-[var(--shell)] shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
+        >
+          <DialogPrimitive.Title className="sr-only">
+            Tutor setup navigation
+          </DialogPrimitive.Title>
+          <WorkspaceBrand className="pr-14" />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute top-2.5 right-2.5"
+            aria-label="Close setup navigation"
+            onClick={() => onOpenChange(false)}
+          >
+            <X aria-hidden="true" />
+          </Button>
+          <ReleaseRoute
+            steps={steps}
+            selectedStage={selectedStage}
+            collapsed={false}
+            onSelectStage={onSelectStage}
+          />
+          <div className="mt-auto space-y-1 border-t p-3">
+            <Button
+              type="button"
+              variant="ghost"
+              className={cn(
+                "w-full justify-start",
+                blockerCount > 0 ? "text-[var(--warning)]" : "text-[var(--success)]",
+              )}
+              onClick={onOpenActivity}
+            >
+              <Activity data-icon="inline-start" />
+              {blockerCount} blocker{blockerCount === 1 ? "" : "s"}
+            </Button>
+            <Button asChild variant="ghost" className="w-full justify-start">
+              <a href="/student">
+                <BookOpen data-icon="inline-start" />
+                Student tutor
+              </a>
+            </Button>
+          </div>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
   )
 }
 
@@ -326,6 +555,38 @@ function StageTool({
   isResolvingRevision: boolean
 }) {
   const { session } = controller
+
+  if (stage === "interview") {
+    return (
+      <section className="p-5 sm:p-6">
+        <header className="border-b pb-5 pr-10">
+          <h2 className="text-lg font-semibold tracking-[-0.02em]">Interview</h2>
+          <p className="mt-1 text-sm leading-6 text-muted-foreground">
+            Shape the tutor through the setup conversation.
+          </p>
+        </header>
+        <div className="space-y-6 pt-6">
+          <section>
+            <h3 className="text-sm font-semibold">About this stage</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Your answers define the course scope, teaching approach, academic
+              integrity boundaries, misconception handling, and approval criteria.
+            </p>
+          </section>
+          <section>
+            <h3 className="text-sm font-semibold">Current interview section</h3>
+            <p className="mt-2 rounded-lg bg-[var(--accent-soft)] px-3 py-2.5 text-sm font-medium text-[var(--accent-strong)]">
+              {formatInterviewStep(session?.current_step ?? "starting")}
+            </p>
+          </section>
+          <p className="border-t pt-5 text-xs leading-5 text-muted-foreground">
+            Continue in the conversation. The draft policy remains reviewable
+            before any release decision.
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   if (stage === "sources") {
     return (
@@ -382,69 +643,12 @@ function StageTool({
   )
 }
 
-function ReleaseBar({
-  blockers,
-  nextActionTitle,
-  onOpenNext,
-}: {
-  blockers: string[]
-  nextActionTitle: string
-  onOpenNext: () => void
-}) {
-  if (blockers.length === 0) {
-    return (
-      <div className="flex min-h-12 items-center gap-2 border-t bg-[var(--success-soft)] px-4 text-sm text-[var(--success)] sm:px-6">
-        <span className="size-2 rounded-full bg-current" aria-hidden="true" />
-        All release conditions are clear.
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex min-h-12 items-center gap-3 overflow-x-auto border-t bg-[var(--shell)] px-3 text-sm sm:px-5">
-      <button
-        type="button"
-        onClick={onOpenNext}
-        className="flex shrink-0 items-center gap-2 rounded-lg px-2 py-1.5 font-semibold text-[var(--warning)] outline-none hover:bg-[var(--warning-soft)] focus-visible:ring-2 focus-visible:ring-ring/30"
-      >
-        <AlertCircle className="size-4" aria-hidden="true" />
-        {blockers.length} blocker{blockers.length === 1 ? "" : "s"}
-      </button>
-      <span className="hidden h-5 w-px shrink-0 bg-border sm:block" aria-hidden="true" />
-      <div className="hidden min-w-[240px] flex-1 items-center gap-4 overflow-hidden text-xs text-muted-foreground sm:flex">
-        {blockers.slice(0, 2).map((blocker) => (
-          <span
-            key={blocker}
-            className="flex min-w-0 items-center gap-2"
-          >
-            <span
-              className="size-1.5 shrink-0 rounded-full bg-[var(--destructive-ink)]"
-              aria-hidden="true"
-            />
-            <span className="truncate">{formatBlockerLabel(blocker)}</span>
-          </span>
-        ))}
-        {blockers.length > 2 ? (
-          <span className="shrink-0">+{blockers.length - 2} more</span>
-        ) : null}
-      </div>
-      <Button type="button" variant="link" size="sm" className="shrink-0" onClick={onOpenNext}>
-        <span className="sm:hidden">Review</span>
-        <span className="hidden sm:inline">{nextActionTitle}</span>
-      </Button>
-    </div>
-  )
-}
-
-function formatBlockerLabel(blocker: string): string {
-  if (!blocker.includes("_") && !blocker.includes("-")) {
-    return blocker
-  }
-
-  const label = blocker.replaceAll("_", " ").replaceAll("-", " ")
-  return `${label.charAt(0).toUpperCase()}${label.slice(1)}`
-}
-
 function capitalize(value: string): string {
   return `${value.charAt(0).toUpperCase()}${value.slice(1)}`
+}
+
+function formatInterviewStep(step: string): string {
+  if (step === "starting") return "Starting setup"
+  const label = step.replaceAll("_", " ").replaceAll("-", " ")
+  return `${label.charAt(0).toUpperCase()}${label.slice(1)}`
 }

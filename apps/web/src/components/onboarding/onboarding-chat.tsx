@@ -80,7 +80,7 @@ export function OnboardingChat({
   }
 
   return (
-    <div className="flex h-full min-h-[560px] flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       <ChatContainerRoot className="min-h-0 flex-1">
         <ChatContainerContent className="mx-auto w-full max-w-[760px] gap-7 px-5 py-7 sm:px-7 lg:py-8">
           {isLoading ? (

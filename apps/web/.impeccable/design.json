@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-18T00:00:00+08:00",
-  "title": "Design System: Course Digital Twin Professor Workspace",
+  "generatedAt": "2026-08-18T17:00:00+08:00",
+  "title": "Design System: Course Digital Twin Product Workspace",
   "extensions": {
     "colorMeta": {
       "ink": {
@@ -63,7 +63,7 @@
       {
         "name": "composer",
         "value": "0 8px 30px rgba(32, 33, 35, 0.08), 0 1px 3px rgba(32, 33, 35, 0.08)",
-        "purpose": "Conversation composer and temporary overlay panels only."
+        "purpose": "Conversation composer and modal overlay sheets only."
       }
     ],
     "motion": [
@@ -92,9 +92,9 @@
       "name": "Workspace Navigation Item",
       "kind": "nav",
       "refersTo": "nav-active",
-      "description": "Selected stage in the quiet professor-workspace sidebar.",
+      "description": "Selected setup stage, course, or local conversation in the shared 216px rail.",
       "html": "<button class=\"ds-nav\"><span>Policy</span><small>Review needed</small></button>",
-      "css": ".ds-nav { width:220px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f0f0f2; color:#202123; border:0; border-radius:8px; padding:8px 10px; font:550 14px/1.4 'Geist Variable',system-ui,sans-serif; } .ds-nav:hover { background:#e8e8eb; } .ds-nav:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; } .ds-nav small { color:#6b6b73; font-size:12px; }"
+      "css": ".ds-nav { width:216px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f0f0f2; color:#202123; border:0; border-radius:8px; padding:8px 10px; font:550 14px/1.4 'Geist Variable',system-ui,sans-serif; } .ds-nav:hover { background:#e8e8eb; } .ds-nav:focus-visible { outline:2px solid #5b5bd6; outline-offset:2px; } .ds-nav small { color:#6b6b73; font-size:12px; }"
     },
     {
       "name": "Conversation Composer",
@@ -114,18 +114,18 @@
     {
       "name": "Context Panel",
       "kind": "custom",
-      "description": "Secondary sources, blockers, evidence, and activity beside the active task.",
+      "description": "Temporary setup, source, blocker, evidence, or activity inspector beside the stable conversation.",
       "html": "<aside class=\"ds-context\"><header><strong>Context</strong><span>2 blockers</span></header><p>Add one approved source before previewing the tutor.</p></aside>",
-      "css": ".ds-context { width:320px; background:#f7f7f8; border-left:1px solid #e2e2e6; padding:16px; color:#202123; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-context header { display:flex; align-items:center; justify-content:space-between; } .ds-context header span { color:#6b6b73; font-size:12px; }"
+      "css": ".ds-context { width:400px; background:#fff; border-left:1px solid #e2e2e6; color:#202123; font:400 14px/1.5 'Geist Variable',system-ui,sans-serif; } .ds-context header { position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; min-height:56px; padding:0 16px; border-bottom:1px solid #e2e2e6; background:#fff; } .ds-context header span { color:#6b6b73; font-size:12px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Grounded AI Workspace",
-    "overview": "A mature LLM-style workspace where a professor configures a course tutor through conversation and opens inspectable source, policy, preview, and approval tools without leaving the same working context. The product feels familiar and calm, while professor authority and evidence remain explicit.",
+    "northStar": "Conversation with accountable context",
+    "overview": "A mature LLM-style workspace where conversation remains stable while professor setup and student evidence open as contextual inspectors. The product feels familiar and calm while professor authority, release boundaries, and citation lineage remain explicit.",
     "keyCharacteristics": [
-      "Quiet application shell with compact stage navigation.",
-      "Centered conversation or structured tool as the primary surface.",
-      "Context panel for blockers, evidence, and trace.",
+      "Shared 216px rail with truthful role-specific navigation.",
+      "Centered conversation as the stable primary surface.",
+      "Context inspector for setup, blockers, evidence, and trace.",
       "Neutral palette with restrained iris focus and semantic states.",
       "Sentence-case product copy and progressive disclosure."
     ],
@@ -133,16 +133,18 @@
       { "name": "The Quiet Shell Rule", "body": "Navigation supports the work and never becomes the largest visual object on screen.", "section": "layout" },
       { "name": "The One Active Signal Rule", "body": "Iris identifies the current place or focused AI context; it is not scattered across every control.", "section": "colors" },
       { "name": "The Human Label Rule", "body": "Use sentence case; uppercase is reserved for unavoidable stored identifiers.", "section": "typography" },
-      { "name": "The Floating Composer Rule", "body": "The composer is the clearest elevated object in conversation mode; routine records do not compete with it.", "section": "elevation" }
+      { "name": "The Floating Composer Rule", "body": "The composer is the clearest elevated object in conversation mode; routine records do not compete with it.", "section": "elevation" },
+      { "name": "The Conversation Stays Home Rule", "body": "Setup, blockers, activity, and citations open as temporary context; they never navigate the user into a separate dashboard.", "section": "layout" }
     ],
     "dos": [
       "Do make the interface recognizable as an LLM workspace within seconds.",
-      "Do center the current task and keep evidence adjacent.",
+      "Do keep conversation stable and reveal structured context only when relevant.",
       "Do preserve all five real stages and professor approval authority.",
       "Do use progressive disclosure for trace and secondary metadata."
     ],
     "donts": [
       "Don't reproduce another product's exact branding or proprietary UI.",
+      "Don't return to a horizontal setup wizard or permanently open three-column dashboard.",
       "Don't lead with metric grids or evaluation-dossier language.",
       "Don't turn every section into a bordered dashboard card.",
       "Don't invent courses, integrations, analytics, or model capabilities.",

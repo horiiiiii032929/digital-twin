@@ -17,7 +17,7 @@ export function ReviewContext({
 
   return (
     <aside aria-label="Review activity" className="min-h-full bg-white p-5 sm:p-6">
-      <header className="border-b pb-5">
+      <header className="border-b pb-5 pr-11">
         <h2 className="text-lg font-semibold tracking-[-0.02em]">Activity</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Release conditions, evidence, and setup history.

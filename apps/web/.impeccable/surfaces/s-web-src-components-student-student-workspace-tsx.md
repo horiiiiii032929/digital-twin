@@ -13,10 +13,10 @@ TASK AND PROOF: Course availability and release binding precede chat. Every norm
 
 CONSTRAINTS: Use only existing `/api/student` behavior and synthetic fixture data. Do not imply credentialed identity, live ingestion, streaming, model selection, web search, human usability, learning outcomes, or production readiness. Preserve role/course/release isolation and failed input.
 
-DIRECTION: Extend the approved Grounded AI Workspace. Desktop uses a 240px assigned-course rail, focused conversation canvas, and 420px citation panel. Mobile uses a compact course switcher and citation bottom sheet. The floating composer is the only elevated object.
+DIRECTION: Use the shared conversation-first grounded workspace. Desktop uses a 216px truthful course rail and a wide conversation canvas; citation lineage opens in a 384-408px contextual inspector only after an inline citation action. Mobile uses a menu sheet and citation bottom sheet. The floating composer is the only elevated object.
 
-MEMORABLE MOMENT: Selecting citation `[1]` keeps the answer in context while revealing the exact synthetic source title, page locator, source version, and current release boundary.
+MEMORABLE MOMENT: Selecting citation `[1]` preserves the answer position and opens the exact synthetic source title, page locator, source version, and current release boundary; closing it restores the full-width conversation.
 
-REFERENCE: `reports/generated/ui-redesign-issue-82-student-workspace/student-workspace-desktop-concept.png` and `student-workspace-mobile-concept.png`.
+REFERENCE: `reports/generated/ui-redesign-product-wide/composition-c-accepted.png`; the earlier issue #82 concepts remain historical evidence, not the current layout authority.
 
 UNRESOLVED: Credentialed authentication, conversation listing across devices, real-course content, and human-usability validation remain outside this slice.

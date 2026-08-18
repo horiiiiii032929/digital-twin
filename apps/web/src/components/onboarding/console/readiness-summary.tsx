@@ -25,35 +25,35 @@ export function ReleaseRoute({
   onSelectStage,
 }: {
   steps: StepState[]
-  selectedStage: ReviewStageId
+  selectedStage?: ReviewStageId
   collapsed: boolean
   onSelectStage: (stage: ReviewStageId) => void
 }) {
   return (
-    <nav aria-label="Tutor setup stages" className="min-w-0 p-2 sm:p-3 lg:py-5">
+    <nav aria-label="Tutor setup stages" className="min-w-0 px-2 py-3">
       {collapsed ? null : (
-        <h2 className="hidden px-2 pb-2 text-xs font-medium text-muted-foreground lg:block">
-          Setup stages
+        <h2 className="px-2 pb-2 text-xs font-semibold text-muted-foreground">
+          Tutor setup
         </h2>
       )}
 
-      <ol className="flex gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
+      <ol className="flex flex-col gap-0.5">
         {steps.map((step, index) => (
-          <li key={step.id} className="min-w-[154px] lg:min-w-0">
+          <li key={step.id}>
             <button
               type="button"
               onClick={() => onSelectStage(step.id)}
               aria-current={selectedStage === step.id ? "step" : undefined}
               aria-label={`${step.label}, ${STEP_HELP[step.id]}, ${STEP_STATE_LABELS[step.state]}`}
               className={cn(
-                "group flex min-h-14 w-full items-center gap-3 rounded-lg px-2.5 py-2 text-left text-sm outline-none transition-colors hover:bg-[var(--subtle)] focus-visible:ring-2 focus-visible:ring-ring/30",
+                "group flex min-h-10 w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-sm outline-none transition-colors hover:bg-[var(--subtle)] focus-visible:ring-2 focus-visible:ring-ring/30",
                 selectedStage === step.id && "bg-[var(--accent-soft)]",
                 collapsed && "justify-center px-0",
               )}
             >
               <span
                 className={cn(
-                  "flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-semibold",
+                  "flex size-5 shrink-0 items-center justify-center rounded-full border text-xs font-semibold",
                   selectedStage === step.id
                     ? "border-[var(--accent-strong)] bg-[var(--accent-strong)] text-white"
                     : "border-[var(--border-strong)] bg-white text-muted-foreground",
@@ -71,9 +71,6 @@ export function ReleaseRoute({
                     )}
                   >
                     {step.label}
-                  </span>
-                  <span className="mt-0.5 block truncate text-[11px] text-muted-foreground">
-                    {STEP_HELP[step.id]}
                   </span>
                 </span>
               )}
