@@ -30,6 +30,9 @@ backup/clean restore, security, lifecycle, and bounded capacity. The measured
 now supports resumable course/student/source/release delivery, and rendered
 desktop/mobile QA passed without console errors. Public DNS/TLS, host-side
 restore, and the staging walkthrough remain before #88 can close.
+The tested local candidate is frozen at revision `e619df9` by
+`deployable-product-foundation-freeze-v1`; its three external gates remain
+explicitly pending.
 
 GitHub Project 1 is reorganized around product goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
