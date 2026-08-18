@@ -5,6 +5,16 @@ data validation, or project automation scripts.
 
 Current utilities:
 
+- `evaluate_ml_dependency_compatibility.py` and
+  `compare_ml_dependency_compatibility.py`: run and compare a three-trial,
+  development-only selected-M2 compatibility check before and after ML-library
+  upgrades. They require exact top-three rankings across all 40 cases, no
+  quality or isolation regression, no held-out/external access, and at most a
+  20% median p95 latency increase.
+- `audit_python_dependencies.py`: exports every locked core, development, and
+  optional dependency to a temporary pinned requirements file and runs
+  `pip-audit` without installing heavy optional ML packages. Use `npm run
+  audit:dependencies` for the Python and npm security gates used by CI.
 - `validate_markdown_links.py`: checks local links in repository Markdown files;
   run it with `npm run check:docs`.
 - `verify_local_ingestion.py`: parses and chunks five approved synthetic TXT,
@@ -368,3 +378,13 @@ Current utilities:
   restart persistence, citations, duplicate requests, withdrawal, isolation,
   revoked accounts, malformed generation, and redacted audit telemetry. Run
   it with `npm run verify:student-workflow`.
+- `evaluate_ml_dependency_compatibility.py` and
+  `compare_ml_dependency_compatibility.py`: run the frozen selected-M2
+  development comparison before changing retrieval ML dependencies and fail
+  when exact top-three rankings, quality, isolation, data boundaries, or
+  latency gates regress. Generated per-case artifacts remain ignored.
+- `audit_python_dependencies.py`: audits the fully resolved Python lock,
+  including optional retrieval dependencies, and matches every finding by
+  exact package, version, advisory, fix versions, and occurrence against the
+  tracked time-bounded exception policy. Any new, changed, or stale exception
+  fails the command; run `npm run audit:python`.

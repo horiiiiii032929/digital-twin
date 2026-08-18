@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "run_id": "dependency-compatibility-python-ml-001",
+  "component": "retriever",
+  "dataset_id": "cross-course-retrieval-v1-development-40",
+  "corpus_id": "cross-course-portfolio-v2",
+  "code_revision": "6b225802002d1ff5f0a7ddfc2776815ad5f58046",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "selected-m2-ml-stack-control",
+        "version": "torch-2.9.1_transformers-4.57.6_sentence-transformers-5.2.0",
+        "configuration": {
+          "python": "3.12.13",
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "trials": 3,
+          "development_cases": 40
+        }
+      },
+      "metrics": [
+        {"name": "complete-evidence-success-at-3", "value": 0.7714285714285715, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7714285714285715, "passed": true},
+        {"name": "evidence-recall-at-3", "value": 0.7435897435897436, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7435897435897436, "passed": true},
+        {"name": "ndcg-at-10", "value": 0.8290527763749413, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8290527763749413, "passed": true},
+        {"name": "mrr", "value": 0.7785714285714286, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7785714285714286, "passed": true},
+        {"name": "exact-top-three-list-compatibility", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "median-trial-p95-latency", "value": 95.99007440083369, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 115.188089280, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "clean-revision", "passed": true, "evidence": "c5154e5d0fe211a7d0d400f37523c85e2c1af4fe"},
+        {"name": "same-frozen-binding", "passed": true, "evidence": "This is the frozen binding control."},
+        {"name": "all-top-three-rankings-identical", "passed": true, "evidence": "40/40 control rankings define the compatibility reference."},
+        {"name": "aggregate-quality-no-regression", "passed": true, "evidence": "Control values define the quality floors."},
+        {"name": "zero-course-isolation-violations", "passed": true, "evidence": "0 violations."},
+        {"name": "no-heldout-or-external-access", "passed": true, "evidence": "heldout_file_reads=0; external_provider_calls=0"},
+        {"name": "latency-within-20-percent", "passed": true, "evidence": "Control defines the 1.20 candidate ratio ceiling."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "selected-m2-ml-stack-candidate",
+        "version": "torch-2.13.0_transformers-5.15.0_sentence-transformers-5.7.0",
+        "configuration": {
+          "python": "3.12.13",
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "trials": 3,
+          "development_cases": 40
+        }
+      },
+      "metrics": [
+        {"name": "complete-evidence-success-at-3", "value": 0.7714285714285715, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7714285714285715, "passed": true},
+        {"name": "evidence-recall-at-3", "value": 0.7435897435897436, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7435897435897436, "passed": true},
+        {"name": "ndcg-at-10", "value": 0.8290527763749413, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.8290527763749413, "passed": true},
+        {"name": "mrr", "value": 0.7785714285714286, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.7785714285714286, "passed": true},
+        {"name": "exact-top-three-list-compatibility", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "median-trial-p95-latency", "value": 70.64084794874361, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 115.188089280, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "clean-revision", "passed": true, "evidence": "6b225802002d1ff5f0a7ddfc2776815ad5f58046"},
+        {"name": "same-frozen-binding", "passed": true, "evidence": "Binding objects matched exactly."},
+        {"name": "all-top-three-rankings-identical", "passed": false, "evidence": "38/40 matched; ccr1-cs5421-02 and ccr1-it5002-04 changed at rank three."},
+        {"name": "aggregate-quality-no-regression", "passed": true, "evidence": "All four declared quality metrics were equal."},
+        {"name": "zero-course-isolation-violations", "passed": true, "evidence": "0 violations in both runs."},
+        {"name": "no-heldout-or-external-access", "passed": true, "evidence": "heldout_file_reads=0; external_provider_calls=0"},
+        {"name": "latency-within-20-percent", "passed": true, "evidence": "Candidate/control ratio=0.7359182539411604."}
+      ],
+      "failures_by_category": {"model-runtime-ranking-compatibility": 2}
+    }
+  ],
+  "decision": {
+    "outcome": "drop",
+    "selected_implementation_id": null,
+    "rationale": "Drop the tested dependency candidate because it changed two exact top-three rankings and failed the predeclared all-case compatibility gate despite equal aggregate quality and lower latency. Retain the already-selected control stack without making a new selection.",
+    "limitations": [
+      "The grouped comparison does not isolate which upgraded library caused the drift.",
+      "The restored optional ML stack has temporary tracked advisories and is not deployment-approved.",
+      "No held-out split was read."
+    ]
+  }
+}
