@@ -57,8 +57,9 @@ The deployed pilot must provide:
 
 ## Critical path
 
-1. #87 freezes and validates a bounded source-linked factual-QA pilot, then
-   scales the same process toward 10,000 cases, including a multimodal slice.
+1. #87 runs a bounded source-linked factual-QA quality pilot, revises the method
+   if a gate fails, and completes a six-case audit before scaling toward 10,000
+   cases, including a multimodal slice.
 2. #88 remains active but externally blocked; resume its public deployment
    gates when a host and domain are selected.
 3. #24 calibrates Professor Digital Twin fidelity against independent expert
@@ -83,9 +84,10 @@ measures, and rollback before execution. Every favorable, unfavorable,
 invalid, or inconclusive named result remains registered.
 
 The verified 100-case benchmark remains the high-confidence research set. The
-new large factual benchmark is separate and uses multi-model generation and
-cross-checking, deterministic source validation, disagreement handling, and a
-stratified human audit. Multi-model agreement is not ground truth.
+new large factual-QA dataset pipeline is separate and uses multi-model
+generation and cross-checking, deterministic source validation, disagreement
+handling, and a stratified human audit. Multi-model agreement is not ground
+truth, and failed gates require method revision rather than model ranking.
 
 ## Operating rules
 

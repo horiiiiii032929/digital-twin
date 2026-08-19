@@ -89,18 +89,19 @@ Use a new development set. Keep the existing 24-case multimodal held-out split
 closed until the candidate, configuration, metrics, gates, and analysis are
 frozen. Retain the selected text retriever as the explicit fallback.
 
-### E2: large factual QA scale benchmark
+### E2: large factual-QA dataset quality
 
-Implement the professor's suggestion as a separate benchmark approaching
-10,000 factual question-answer cases. Build a larger permission-safe dummy
-document corpus first, including a meaningful multimodal slice, then generate
-and cross-check cases with multiple independent LLMs.
+Implement the professor's suggestion as a separate dataset-quality pipeline
+approaching 10,000 factual question-answer cases. Build a larger
+permission-safe dummy document corpus first, including a meaningful multimodal
+slice, then generate and cross-check cases with multiple LLMs.
 
 Multi-model agreement is not ground truth. Every retained case requires source
 evidence, provenance, deterministic validation, deduplication, disagreement
-handling, and a stratified human audit. Pilot the process before scaling. Keep
-this dataset separate from the verified 100-case retrieval benchmark and the
-Professor Digital Twin fidelity comparison.
+handling, and a stratified human audit. Pilot the process before scaling. A
+failed gate changes the generation or review method; it does not trigger a
+model-ranking exercise. Keep this dataset separate from the verified 100-case
+retrieval benchmark and the Professor Digital Twin fidelity comparison.
 
 ### E3: Professor Digital Twin fidelity
 
@@ -148,7 +149,7 @@ schedule-driven pass.
 3. [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) replaces
    prototype infrastructure with a deployable foundation.
 4. [#87](https://github.com/horiiiiii032929/digital-twin/issues/87) creates the
-   large factual QA scale benchmark.
+   large source-linked factual-QA dataset pipeline.
 5. [#24](https://github.com/horiiiiii032929/digital-twin/issues/24),
    [#9](https://github.com/horiiiiii032929/digital-twin/issues/9), and
    [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) provide
