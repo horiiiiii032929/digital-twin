@@ -12,6 +12,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.model_policy import require_model_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATASET = (
@@ -157,6 +159,7 @@ def call_ollama(
     prompt: str,
     seed: int,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    require_model_allowed(model)
     payload = {
         "model": model,
         "prompt": prompt,

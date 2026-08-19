@@ -388,6 +388,17 @@ def test_generation_evaluator_requires_external_provider_acknowledgment(
         _arguments()
 
 
+@pytest.mark.parametrize("model", ("ollama/gemma3:4b", "ollama/qwen3:4b"))
+def test_generation_evaluator_cannot_reproduce_prohibited_models(
+    monkeypatch,
+    model,
+):
+    monkeypatch.setattr(sys, "argv", ["evaluate_generation", "--model", model])
+
+    with pytest.raises(SystemExit, match="2"):
+        _arguments()
+
+
 def test_generation_evaluator_accepts_explicit_external_provider_scope(monkeypatch):
     monkeypatch.setattr(
         sys,

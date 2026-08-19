@@ -16,6 +16,7 @@ from src.digital_twin.generation import (
     load_generation_evaluation_set,
 )
 from src.digital_twin.grounding import BM25Retriever
+from src.digital_twin.model_policy import ModelPolicyError, require_model_allowed
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     ReleaseStatus,
@@ -136,7 +137,6 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--model")
     parser.add_argument("--json-mode", action="store_true")
-    parser.add_argument("--confirm-historical-reproduction", action="store_true")
     parser.add_argument(
         "--allow-external-provider",
         action="store_true",
@@ -156,15 +156,11 @@ def _arguments() -> argparse.Namespace:
             "a non-Ollama model requires --allow-external-provider and a "
             "separately recorded budget decision"
         )
-    if (
-        arguments.model
-        and "gemma" in arguments.model.casefold()
-        and not arguments.confirm_historical_reproduction
-    ):
-        parser.error(
-            "Gemma is a retired historical candidate; reproduction requires "
-            "--confirm-historical-reproduction"
-        )
+    if arguments.model:
+        try:
+            arguments.model = require_model_allowed(arguments.model)
+        except ModelPolicyError as error:
+            parser.error(str(error))
     return arguments
 
 

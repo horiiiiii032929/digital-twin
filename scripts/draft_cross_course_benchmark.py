@@ -29,6 +29,7 @@ from src.digital_twin.grounding import (
     source_artifact_from_path,
 )
 from src.digital_twin.grounding.models import DocumentChunk
+from src.digital_twin.model_policy import require_model_allowed
 from src.digital_twin.tutor_policy import SourceLabel
 
 
@@ -243,6 +244,7 @@ def ollama_json(
     seed: int,
     cache_root: Path,
 ) -> dict[str, Any]:
+    require_model_allowed(MODEL)
     cache_key = sha256_text(f"{MODEL}\x1f{seed}\x1f{prompt}")
     cache_path = cache_root / f"{cache_key}.json"
     if cache_path.exists():

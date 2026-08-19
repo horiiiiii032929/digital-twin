@@ -14,6 +14,7 @@ from scripts.judge_professor_fidelity import (
     JUDGE_CONTRACT_REVISION,
     JUDGE_MODELS,
 )
+from src.digital_twin.model_policy import LOCAL_GENERAL_MODEL
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,11 +68,9 @@ def _validate_commands(scripts: dict[str, str]) -> dict[str, Any]:
         _require("--allow-external-provider" not in command, f"{split} preflight authorizes a provider")
 
     historical_names = {
-        "historical:benchmark:generation-gemma3",
         "historical:benchmark:professor-fidelity-anchor",
         "historical:judge:professor-fidelity-anchor",
         "historical:judge:professor-fidelity-anchor-swapped",
-        "historical:judge:professor-fidelity-anchor-qwen-sensitivity",
         "historical:prepare:professor-fidelity-anchor-review",
         "historical:finalize:professor-fidelity-anchor-review",
         "historical:calibrate:professor-fidelity-anchor-prehuman",
@@ -99,8 +98,11 @@ def _validate_commands(scripts: dict[str, str]) -> dict[str, Any]:
         "deferred primary judge is not DeepSeek V4 Pro",
     )
     _require(
-        any("--model qwen3:4b" in command for command in deferred.values()),
-        "deferred sensitivity judge is not local Qwen",
+        any(
+            f"--model {LOCAL_GENERAL_MODEL}" in command
+            for command in deferred.values()
+        ),
+        "deferred sensitivity judge is not the current local Qwen model",
     )
 
     retired_active_names = {
@@ -163,7 +165,10 @@ def validate() -> dict[str, Any]:
         and heldout_requirement.get("result_id") is None,
         "held-out development-result gate drifted",
     )
-    _require(JUDGE_MODELS == (DEEPSEEK_MODEL, "qwen3:4b"), "judge model set drifted")
+    _require(
+        JUDGE_MODELS == (DEEPSEEK_MODEL, LOCAL_GENERAL_MODEL),
+        "judge model set drifted",
+    )
     _require(PLAN_PATH.is_file(), "post-audit v3 plan is missing")
     _require(PURGE_RECORD_PATH.is_file(), "GitHub purge closure record is missing")
     _require(ANCHOR_CANDIDATE_PATH.is_file(), "anchor V4 Pro/P3 candidate is missing")
@@ -240,9 +245,13 @@ def validate() -> dict[str, Any]:
             "interpretation_status": "corrected",
             "cross_layer_disagreement": "diagnostic-not-calibration-gate",
         },
-        "active_sensitivity_judge": {
+        "historical_sensitivity_judge": {
             "model": "qwen3:4b",
             "status": "invalid-attempt-001-rerun-prohibited",
+        },
+        "prospective_sensitivity_judge": {
+            "model": LOCAL_GENERAL_MODEL,
+            "status": "not-selected-requires-new-calibration",
         },
         "active_gemma_calls": 0,
         "private_artifact_content_read": False,

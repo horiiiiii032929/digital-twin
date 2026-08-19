@@ -8,6 +8,7 @@ from src.digital_twin.llm import (
     LlmMessage,
     LlmTimeoutError,
 )
+from src.digital_twin.model_policy import ModelPolicyError
 
 
 @pytest.mark.asyncio
@@ -125,6 +126,12 @@ def test_litellm_adapter_rejects_provider_option_credential_override():
             "deepseek/deepseek-v4-flash",
             provider_options={"api_key": "must-not-be-accepted"},
         )
+
+
+@pytest.mark.parametrize("model", ("gemma3:4b", "ollama/gemma3:4b", "qwen3:4b"))
+def test_litellm_adapter_blocks_prohibited_or_retired_models(model):
+    with pytest.raises(ModelPolicyError):
+        LiteLlmClient(model)
 
 
 @pytest.mark.asyncio

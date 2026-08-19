@@ -117,6 +117,14 @@ remains excluded. A production OCR/layout or replacement vision model is
 selected only through a new prospective qualification and representative
 course evidence.
 
+The active model policy now blocks every Gemma call and all retired local
+Qwen3 general-reviewer calls before provider I/O. DeepSeek V4 Flash/Pro,
+Claude Sonnet 5, and the selected task-specific Qwen3 Embedding binding remain
+current for their recorded roles. `qwen3.5:4b` is the prospective local general
+and vision-language replacement, but it is not selected until a new instrument
+passes its project-specific gates. See
+[the current model policy](../research/00_admin/2026-08-19-current-model-policy.md).
+
 ## Large factual-QA interpretation
 
 Issue #87 adopts the stronger, product-relevant interpretation of the

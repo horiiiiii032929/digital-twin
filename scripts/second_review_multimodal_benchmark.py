@@ -15,6 +15,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.model_policy import require_registered_current_model
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATASET = (
@@ -232,6 +234,7 @@ def run_claude_batch(
     model: str,
     max_budget_usd: float,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    model = require_registered_current_model(model)
     with tempfile.TemporaryDirectory(prefix="multimodal-claude-review-") as temp_value:
         temp_dir = Path(temp_value)
         asset_payloads = []
