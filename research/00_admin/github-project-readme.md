@@ -22,9 +22,9 @@ historical record.
   historical held-out split remains closed.
 - Professor fidelity remains `Refine / Paused`; the prior C0-C3 comparison is
   invalid for selection and its held-out split remains closed.
-- #88 and draft PR #93 passed the local/container foundation checks, but public
-  host/domain selection, trusted TLS, target-host restore, and the public
-  walkthrough remain externally blocked.
+- #88 and merged PR #93 (`adf39af`) passed the local/container foundation
+  checks, but public host/domain selection, trusted TLS, target-host restore,
+  and the public walkthrough remain externally blocked.
 - The professor accepted the proposed evaluation approach and recommended a
   separate factual-QA dataset near 10,000 cases using multiple LLMs. #87 is now
   the current unblocked execution item.
