@@ -17,6 +17,7 @@ MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v1.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v2.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v3.json",
+    PROFILE_ROOT / "deployable-product-foundation-freeze-v4.json",
 )
 EXPECTED_EXTERNAL_GATES = {
     "public-dns-and-certificate",
@@ -129,6 +130,48 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
             "npm run verify:model-policy",
         },
         "artifact_count": 46,
+        "require_current_match": False,
+    },
+    "deployable-product-foundation-freeze-v4": {
+        "status": "go-deeper-public-host-rehearsal-pending",
+        "run_id": "deployable-product-foundation-v4-provider-registry-001",
+        "candidate_id": "A1-single-node-staging-v4-provider-registry",
+        "local_fields": {
+            "model_policy_focused_passed": 107,
+            "model_policy_focused_total": 107,
+            "in_process_passed": 41,
+            "in_process_total": 41,
+            "live_https_passed": 30,
+            "live_https_total": 30,
+            "container_build_passed": True,
+            "clean_restore_passed": True,
+            "external_provider_calls": 0,
+            "private_data_used": False,
+        },
+        "local_label": "107/107-policy-provider-and-30/30-live-https",
+        "summary_marker": "107/107 focused",
+        "build_fields": {
+            "status": "passed",
+            "compose_graph_validated": True,
+            "image_build_claimed": True,
+            "api_image_sha256": (
+                "cedb76c79c563200aae4802544eb5d0616157f14ac23da63a8717f9db4e1a440"
+            ),
+            "web_image_sha256": (
+                "e4f4a60903544afab70e93287c8add40499805cc088d28eaf605318642a24917"
+            ),
+        },
+        "commands": {
+            "npm run check",
+            "npm run audit:dependencies",
+            "npm run verify:deployable-foundation",
+            "npm run benchmark:deployable-foundation-development",
+            "npm run staging:build",
+            "npm run verify:staging-https",
+            "npm run verify:deployable-freeze",
+            "npm run verify:model-policy",
+        },
+        "artifact_count": 53,
         "require_current_match": True,
     },
 }
@@ -203,7 +246,10 @@ def validate_deployable_freeze(
     ):
         raise ValueError("local gate count or data boundary drifted")
 
-    if freeze_id == "deployable-product-foundation-freeze-v3":
+    if freeze_id in {
+        "deployable-product-foundation-freeze-v3",
+        "deployable-product-foundation-freeze-v4",
+    }:
         expected_model_policy = {
             "policy_id": "current-model-policy-2026-08-19",
             "gemma_execution_allowed": False,
@@ -215,6 +261,11 @@ def validate_deployable_freeze(
             ),
             "model_called_during_policy_validation": False,
         }
+        if freeze_id == "deployable-product-foundation-freeze-v4":
+            expected_model_policy["registered_hosted_retrieval_models"] = [
+                "jina-embeddings-v5-text-small",
+                "jina-reranker-v3",
+            ]
         if manifest.get("model_policy") != expected_model_policy:
             raise ValueError("current model policy freeze binding drifted")
 
