@@ -14,6 +14,10 @@ from services.retrieval_provider import (
     post_json,
 )
 from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
+from src.digital_twin.model_policy import require_registered_current_model
+
+
+DEFAULT_MODEL = "jina-reranker-v3"
 
 
 class JinaReranker:
@@ -24,13 +28,14 @@ class JinaReranker:
         api_key: str,
         *,
         ledger: RetrievalUsageLedger,
-        model: str = "jina-reranker-v3",
+        model: str = DEFAULT_MODEL,
         endpoint: str = "https://api.jina.ai/v1/rerank",
         timeout_seconds: float = 60,
         transport: PostJson = post_json,
     ) -> None:
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
+        require_registered_current_model(model)
         self._headers = bearer_headers(api_key)
         self.ledger = ledger
         self.model = model

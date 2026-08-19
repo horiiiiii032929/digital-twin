@@ -60,6 +60,16 @@ CURRENT_MODEL_BINDINGS = (
         provider_model="Qwen/Qwen3-Reranker-0.6B",
         status="evaluated-not-selected",
     ),
+    CurrentModelBinding(
+        role="prospective-hosted-text-embedding",
+        provider_model="jina-embeddings-v5-text-small",
+        status="current-candidate-not-selected",
+    ),
+    CurrentModelBinding(
+        role="prospective-hosted-text-reranker",
+        provider_model="jina-reranker-v3",
+        status="current-candidate-not-selected",
+    ),
 )
 
 CURRENT_MODEL_IDS = frozenset(

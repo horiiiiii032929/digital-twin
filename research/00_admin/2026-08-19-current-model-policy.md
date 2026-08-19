@@ -26,6 +26,8 @@ replace a selected component only through a new versioned evaluation.
 | Private multimodal independent reviewer | `claude-sonnet-5` | Keep as an optional governed review path. Anthropic identifies it as a current pinned model. |
 | Selected text embedding | `Qwen/Qwen3-Embedding-0.6B` at revision `97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3` | Keep. Qwen3 Embedding is the current task-specific Qwen embedding/ranking series, and this exact implementation is project-selected. |
 | Prospective reranker | `Qwen/Qwen3-Reranker-0.6B` | Evaluated but not selected. It remains a current task-specific candidate, not an active product component. |
+| Prospective hosted text embedding | `jina-embeddings-v5-text-small`, API release `2026-02-18` | Current Jina text-embedding candidate. It is registered for the controlled provider qualification only and is not selected. |
+| Prospective hosted text reranker | `jina-reranker-v3`, API release `2025-10-01` | Jina identifies this as its latest flagship reranker. It is registered for the controlled provider qualification only and is not selected. |
 
 The 16 GiB development machine cannot practically run the current Qwen3.6
 27B/35B local artifacts. `qwen3.5:4b` is therefore the newest size-compatible
@@ -51,8 +53,8 @@ retrieval; each use needs a new instrument and its own quality gates.
 - `LiteLlmClient` rejects Gemma and retired general Qwen identities centrally.
 - Package commands cannot expose Gemma or an executable retired-Qwen binding.
 - `npm run verify:model-policy` validates the selected product profile, current
-  judge candidates, exact local digest, guarded historical entrypoints, and
-  documentation without calling a model.
+  judge and hosted retrieval candidates, exact local digest, guarded historical
+  entrypoints, and documentation without calling a model.
 - Model freshness must be checked before each new named evaluation and at least
   once per release cycle. Floating `latest` aliases are not accepted as durable
   evidence.
@@ -64,3 +66,6 @@ retrieval; each use needs a new instrument and its own quality gates.
 - [Qwen3.5 4B Ollama artifact and capabilities](https://ollama.com/library/qwen3.5%3A4b)
 - [Qwen3 Embedding official repository](https://github.com/QwenLM/Qwen3-Embedding)
 - [Anthropic current model overview](https://platform.claude.com/docs/en/about-claude/models/overview)
+- [Jina model catalog](https://jina.ai/models/)
+- [Jina Embeddings v5 text small](https://jina.ai/models/jina-embeddings-v5-text-small/)
+- [Jina Reranker v3](https://jina.ai/models/jina-reranker-v3/)

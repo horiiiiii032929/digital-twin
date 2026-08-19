@@ -10,6 +10,8 @@ from typing import Any
 
 from scripts.judge_professor_fidelity import JUDGE_MODELS
 from scripts.second_review_multimodal_benchmark import DEFAULT_MODEL as CLAUDE_MODEL
+from services.embeddings.jina_client import DEFAULT_MODEL as JINA_EMBEDDING_MODEL
+from services.reranking.jina_client import DEFAULT_MODEL as JINA_RERANKER_MODEL
 from src.digital_twin.model_policy import (
     CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
@@ -72,6 +74,8 @@ def validate() -> dict[str, Any]:
     require_registered_current_model(generator_model)
     require_registered_current_model(embedding_model)
     require_registered_current_model(CLAUDE_MODEL)
+    require_registered_current_model(JINA_EMBEDDING_MODEL)
+    require_registered_current_model(JINA_RERANKER_MODEL)
     _require(
         JUDGE_MODELS == ("deepseek-v4-pro", LOCAL_GENERAL_MODEL),
         "professor-fidelity judge bindings are not current",

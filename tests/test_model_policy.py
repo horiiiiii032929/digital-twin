@@ -37,6 +37,8 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
         "claude-sonnet-5",
         "Qwen/Qwen3-Embedding-0.6B",
         "Qwen/Qwen3-Reranker-0.6B",
+        "jina-embeddings-v5-text-small",
+        "jina-reranker-v3",
     ),
 )
 def test_registered_current_models_are_accepted(model):
