@@ -4,8 +4,9 @@ Project board: https://github.com/users/horiiiiii032929/projects/1
 
 The board implements the authoritative
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
-Historical closed issues preserve the research and prototype record; active
-issues now track a deployed real-world product.
+Historical closed issues preserve the research and prototype record and are
+archived from the live Project view; the nine visible cards now track only the
+open product, evaluation, and delivery work.
 
 ## Planning fields
 
@@ -42,14 +43,19 @@ professor-communication track.
 
 ## Critical path
 
-1. #85 — evaluator correction (`Done / Refine`).
-2. #86 — region-aware multimodal product grounding (`Done / Refine`; PR #91).
-3. #88 — deployable platform foundation (next).
-4. #87 — large factual QA benchmark with a larger dummy corpus and multimodal
-   slice.
-5. #24, #9, and #25 — fidelity, production operations, and deployed end-to-end
-   validation.
-6. #10 — approval-gated professor/student workflow and usability pilot.
+1. #87 — current unblocked work: freeze and pass a source-linked factual-QA
+   pilot, then scale the same process toward 10,000 cases.
+2. #88 — active but externally blocked on host/domain selection; PR #93 retains
+   the passed local/container foundation and recovery evidence.
+3. #24 — calibrate Professor Digital Twin fidelity against independent expert
+   labels, separately from factual QA.
+4. #9 and #25 — production operations and deployed end-to-end validation after
+   their platform/fidelity dependencies clear.
+5. #10 — approval-gated professor/student workflow and usability pilot.
+
+Issues #85 and #86 are completed `Refine` history and are archived from the
+live board. Issues #13 and #44 remain parallel final-delivery and professor-
+communication work.
 
 Issue #86 merged region-aware product ingestion, access-checked original-crop
 citations, and three registered prospective development attempts in PR #91.

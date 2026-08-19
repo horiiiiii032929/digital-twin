@@ -20,8 +20,9 @@ responsive browser QA, and independent Impeccable review. This establishes the
 product UX baseline; it does not establish human usability or production
 readiness.
 
-Issue [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) is now
-in progress with a **Go Deeper** local architecture result. The deployable
+Issue [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) remains
+in progress with a **Go Deeper** local architecture result, but is now marked
+externally blocked while a public host and domain are selected. The deployable
 candidate passed 41/41 synthetic checks across credentialed access, professor
 upload/publication, student answer/original-region citation, restart,
 backup/clean restore, security, lifecycle, and bounded capacity. The measured
@@ -71,22 +72,22 @@ continues to hold report, presentation, and professor-communication work.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | Done / Refine | Metric suite corrected and tested; historical V3 analysis corrected; Drop unchanged; held-out unopened |
-| 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Done / Refine | Foundation, product ingestion, crop citations, and prospective decision merged in PR #91; no multimodal profile selected |
-| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper | Local 41/41, exact image build, 25/25 local-HTTPS/recovery checks, and responsive professor delivery QA passed; complete public DNS/TLS, target-host restore, and public staging walkthrough before closure |
-| 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / P3 after #88 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
-| 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / P3 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
-| 6 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence |
-| 7 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives explicit Refine/Drop decision |
-| 8 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
+| 1 | [#87 Factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Pending | Freeze and pass a bounded source-linked pilot, then scale the same process toward 10,000 cases |
+| 2 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
+| 3 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
+| 4 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
+| 5 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives an explicit Refine/Drop decision |
+| 6 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
 
-Issues #85 and #86 are complete. PR #91 merged the tested multimodal product
+Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #88 is the active
-product-delivery item; its implementation and local qualification are complete
-enough for a controlled host rehearsal, not for a real-user pilot.
+and the historical held-out split was not opened. Issue #87 is now the current
+unblocked evaluation item because it directly implements the professor's
+large factual-QA recommendation. Issue #88 remains active but externally
+blocked; its implementation and local qualification are complete enough for a
+controlled host rehearsal, not for a real-user pilot.
 
 ## Known multimodal correction
 
