@@ -16,6 +16,10 @@ V2_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v2.json"
 )
+V3_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v3.json"
+)
 
 
 def _manifest() -> dict:
@@ -24,6 +28,10 @@ def _manifest() -> dict:
 
 def _v2_manifest() -> dict:
     return json.loads(V2_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v3_manifest() -> dict:
+    return json.loads(V3_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -37,7 +45,7 @@ def test_current_deployable_foundation_freeze_validates() -> None:
     assert result["current_match_required"] is False
 
 
-def test_current_container_qualified_freeze_validates() -> None:
+def test_historical_container_qualified_freeze_validates() -> None:
     result = validate_deployable_freeze(_v2_manifest(), root=ROOT)
 
     assert result["status"] == "passed"
@@ -45,6 +53,17 @@ def test_current_container_qualified_freeze_validates() -> None:
     assert result["local_gates"] == "25/25-live-https"
     assert result["external_gates_pending"] == 3
     assert result["artifact_bindings"] == 37
+    assert result["current_match_required"] is False
+
+
+def test_current_model_policy_container_freeze_validates() -> None:
+    result = validate_deployable_freeze(_v3_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "go-deeper"
+    assert result["local_gates"] == "95/95-policy-and-25/25-live-https"
+    assert result["external_gates_pending"] == 3
+    assert result["artifact_bindings"] == 46
     assert result["current_match_required"] is True
 
 
@@ -53,6 +72,14 @@ def test_container_qualified_freeze_rejects_image_identity_drift() -> None:
     manifest["container_build"]["web_image_sha256"] = "0" * 64
 
     with pytest.raises(ValueError, match="container-build evidence drifted"):
+        validate_deployable_freeze(manifest, root=ROOT)
+
+
+def test_model_policy_freeze_rejects_model_binding_drift() -> None:
+    manifest = _v3_manifest()
+    manifest["model_policy"]["gemma_execution_allowed"] = True
+
+    with pytest.raises(ValueError, match="model policy freeze binding drifted"):
         validate_deployable_freeze(manifest, root=ROOT)
 
 

@@ -203,6 +203,21 @@ def validate_deployable_freeze(
     ):
         raise ValueError("local gate count or data boundary drifted")
 
+    if freeze_id == "deployable-product-foundation-freeze-v3":
+        expected_model_policy = {
+            "policy_id": "current-model-policy-2026-08-19",
+            "gemma_execution_allowed": False,
+            "retired_general_qwen_execution_allowed": False,
+            "local_general_model": "qwen3.5:4b",
+            "local_general_model_digest": (
+                "2a654d98e6fba55d452b7043684e9b57"
+                "a947e393bbffa62485a7aac05ee4eefd"
+            ),
+            "model_called_during_policy_validation": False,
+        }
+        if manifest.get("model_policy") != expected_model_policy:
+            raise ValueError("current model policy freeze binding drifted")
+
     external = manifest.get("external_gates", [])
     gate_ids = [gate.get("id") for gate in external]
     if len(gate_ids) != len(set(gate_ids)) or set(gate_ids) != EXPECTED_EXTERNAL_GATES:
