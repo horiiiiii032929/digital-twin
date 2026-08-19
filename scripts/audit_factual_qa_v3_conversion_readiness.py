@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
+import subprocess
 import tomllib
 import zipfile
 from collections import Counter, defaultdict
@@ -24,9 +26,9 @@ fitz.TOOLS.mupdf_display_warnings(False)
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MANIFEST = ROOT / "data/interim/factual_qa_v3/source_dispositions_v2.json"
-DEFAULT_PRIVATE_OUTPUT = ROOT / "data/interim/factual_qa_v3/conversion_readiness_v1.json"
-DEFAULT_SUMMARY_OUTPUT = ROOT / "reports/generated/factual-qa-v3-conversion-readiness-v1.json"
+DEFAULT_MANIFEST = ROOT / "data/interim/factual_qa_v3/source_dispositions_v3.json"
+DEFAULT_PRIVATE_OUTPUT = ROOT / "data/interim/factual_qa_v3/conversion_readiness_v3.json"
+DEFAULT_SUMMARY_OUTPUT = ROOT / "reports/generated/factual-qa-v3-conversion-readiness-v3.json"
 
 
 READY_STATUSES = {
@@ -59,8 +61,6 @@ def canonical_sha256(value: Any) -> str:
 
 def decode_nonempty(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
-    if not text.strip():
-        raise ValueError("empty_source")
     return text
 
 
@@ -71,13 +71,20 @@ def probe_conversion(path: Path, format_group: str) -> tuple[str, dict[str, int]
             return "empty_source", metrics
         if format_group in {"code", "text", "typeset_source"}:
             text = decode_nonempty(path)
+            if not text.strip():
+                return "empty_source", metrics
             metrics["character_count"] = len(text)
             return "ready_local_text", metrics
         if format_group == "structured_text":
             text = decode_nonempty(path)
             suffix = path.suffix.lower()
             if suffix == ".json":
-                json.loads(text)
+                try:
+                    json.loads(text)
+                except json.JSONDecodeError:
+                    metrics["structured_parse_fallback"] = 1
+                    metrics["character_count"] = len(text)
+                    return "ready_local_text", metrics
             elif suffix == ".toml":
                 tomllib.loads(text)
             metrics["character_count"] = len(text)
@@ -119,18 +126,52 @@ def probe_conversion(path: Path, format_group: str) -> tuple[str, dict[str, int]
                 metrics["height"] = image.height
             return "ready_local_visual", metrics
         if format_group == "vector_image" and path.suffix.lower() == ".eps":
-            header = path.read_bytes()[:4]
-            return ("ready_local_visual" if header.startswith(b"%!") else "invalid_source"), metrics
+            completed = subprocess.run(
+                ["sips", "-g", "pixelWidth", "-g", "pixelHeight", str(path)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            return ("ready_local_visual" if completed.returncode == 0 else "needs_vector_conversion"), metrics
         if format_group == "office_document":
             if path.suffix.lower() == ".docx":
                 with zipfile.ZipFile(path) as archive:
                     if "word/document.xml" not in archive.namelist():
                         return "invalid_source", metrics
-            elif path.suffix.lower() == ".pages":
+            if path.suffix.lower() == ".pages":
                 with zipfile.ZipFile(path) as archive:
-                    if not archive.namelist():
-                        return "invalid_source", metrics
+                    previews = [
+                        name
+                        for name in archive.namelist()
+                        if name.lower().endswith((".png", ".jpg", ".jpeg"))
+                    ]
+                    if previews:
+                        with Image.open(io.BytesIO(archive.read(previews[0]))) as image:
+                            image.verify()
+                        metrics["preview_count"] = len(previews)
+                        return "ready_local_visual", metrics
+            completed = subprocess.run(
+                ["textutil", "-convert", "txt", "-stdout", str(path)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if completed.returncode == 0 and completed.stdout.strip():
+                metrics["character_count"] = len(completed.stdout)
+                return "ready_local_text", metrics
             return "needs_office_conversion", metrics
+        if format_group == "other":
+            suffix = path.suffix.lower()
+            if suffix in {".bst", ".cls"} or not suffix:
+                text = decode_nonempty(path)
+                if not text.strip():
+                    return "empty_source", metrics
+                metrics["character_count"] = len(text)
+                return "ready_local_text", metrics
+            if suffix == ".ico":
+                with Image.open(path) as image:
+                    image.verify()
+                return "ready_local_visual", metrics
         return "unsupported_format", metrics
     except UnicodeDecodeError:
         return "needs_encoding_conversion", metrics
@@ -180,7 +221,7 @@ def audit_manifest(manifest: dict[str, Any]) -> tuple[dict[str, Any], dict[str, 
     now = datetime.now(UTC).isoformat()
     private = {
         "schema_version": 1,
-        "audit_id": "factual-qa-v3-conversion-readiness-v1",
+        "audit_id": "factual-qa-v3-conversion-readiness-v3",
         "generated_at": now,
         "source_disposition_manifest_id": manifest["manifest_id"],
         "source_disposition_sha256": manifest["disposition_sha256"],

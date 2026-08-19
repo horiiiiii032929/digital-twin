@@ -17,10 +17,10 @@ DEFAULT_INVENTORY = (
     ROOT / "data/interim/multimodal_retrieval_v1/source_inventory_v1.json"
 )
 DEFAULT_PRIVATE_OUTPUT = (
-    ROOT / "data/interim/factual_qa_v3/source_dispositions_v2.json"
+    ROOT / "data/interim/factual_qa_v3/source_dispositions_v3.json"
 )
 DEFAULT_SUMMARY_OUTPUT = (
-    ROOT / "reports/generated/factual-qa-v3-source-dispositions-v2.json"
+    ROOT / "reports/generated/factual-qa-v3-source-dispositions-v3.json"
 )
 
 
@@ -55,6 +55,11 @@ def is_generated_metadata(relative_path: str) -> bool:
         or name.endswith(".swp")
         or name.endswith(".bkp")
     )
+
+
+def is_unrelated_project_config(relative_path: str) -> bool:
+    name = relative_path.replace("\\", "/").lower().split("/")[-1]
+    return name in {".gitignore", ".python-version"}
 
 
 def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -102,9 +107,15 @@ def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[
         if content_hash in sensitive_hashes:
             role = "excluded_integrity_or_privacy"
             reason = "sensitive-indicated content hash group"
+        elif source["bytes"] == 0:
+            role = "excluded_duplicate_generated_tool_state"
+            reason = "zero-byte source contains no evidence"
         elif is_generated_metadata(source["relative_path"]):
             role = "excluded_duplicate_generated_tool_state"
             reason = "generated metadata or transient tool-state artifact"
+        elif is_unrelated_project_config(source["relative_path"]):
+            role = "excluded_integrity_or_privacy"
+            reason = "unrelated project configuration"
         elif source["source_id"] != canonical_source_id:
             role = "excluded_duplicate_generated_tool_state"
             reason = "exact-content duplicate; canonical lineage retained"
@@ -145,7 +156,7 @@ def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[
     now = datetime.now(UTC).isoformat()
     private_payload = {
         "schema_version": 1,
-        "manifest_id": "factual-qa-v3-source-dispositions-v2",
+        "manifest_id": "factual-qa-v3-source-dispositions-v3",
         "generated_at": now,
         "source_inventory_id": inventory.get("inventory_id"),
         "source_inventory_sha256": inventory.get("inventory_sha256"),

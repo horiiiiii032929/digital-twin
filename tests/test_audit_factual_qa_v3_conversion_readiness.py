@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import zipfile
 from pathlib import Path
 
 from PIL import Image
@@ -78,3 +79,43 @@ def test_empty_and_unsupported_sources_fail_conversion_gate(tmp_path: Path) -> N
     assert summary["integrity_gate"] is True
     assert summary["local_conversion_gate"] is False
     assert summary["status_counts"] == {"empty_source": 1, "unsupported_format": 1}
+
+
+def test_malformed_json_falls_back_to_local_text(tmp_path: Path) -> None:
+    (tmp_path / "notes.json").write_text("not valid JSON but readable notes")
+    item = disposition(tmp_path, "notes.json", "structured_text")
+
+    private, summary = audit_manifest(manifest(tmp_path, [item]))
+
+    assert summary["local_conversion_gate"] is True
+    assert private["records"][0]["conversion_status"] == "ready_local_text"
+    assert private["records"][0]["metrics"]["structured_parse_fallback"] == 1
+
+
+def test_tex_support_and_extensionless_text_use_local_text_path(tmp_path: Path) -> None:
+    (tmp_path / "references.bst").write_text("ENTRY { author } {} {}")
+    (tmp_path / "README").write_text("Course instructions")
+    items = [
+        disposition(tmp_path, "references.bst", "other"),
+        disposition(tmp_path, "README", "other"),
+    ]
+
+    _, summary = audit_manifest(manifest(tmp_path, items))
+
+    assert summary["local_conversion_gate"] is True
+    assert summary["status_counts"] == {"ready_local_text": 2}
+
+
+def test_pages_preview_uses_local_visual_path(tmp_path: Path) -> None:
+    preview = tmp_path / "preview.png"
+    Image.new("RGB", (5, 4), "white").save(preview)
+    pages = tmp_path / "notes.pages"
+    with zipfile.ZipFile(pages, "w") as archive:
+        archive.write(preview, "QuickLook/Thumbnail.png")
+
+    private, summary = audit_manifest(
+        manifest(tmp_path, [disposition(tmp_path, "notes.pages", "office_document")])
+    )
+
+    assert summary["local_conversion_gate"] is True
+    assert private["records"][0]["conversion_status"] == "ready_local_visual"

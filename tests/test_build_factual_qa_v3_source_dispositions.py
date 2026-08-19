@@ -3,6 +3,7 @@ from __future__ import annotations
 from scripts.build_factual_qa_v3_source_dispositions import (
     build_dispositions,
     is_generated_metadata,
+    is_unrelated_project_config,
 )
 
 
@@ -86,3 +87,19 @@ def test_nested_and_extensionless_tool_metadata_is_excluded() -> None:
     assert is_generated_metadata("course/report.swp")
     assert is_generated_metadata("course/old.bkp")
     assert not is_generated_metadata("course/lecture.md")
+
+
+def test_unrelated_project_configuration_is_excluded() -> None:
+    assert is_unrelated_project_config("course/.gitignore")
+    assert is_unrelated_project_config("course/.python-version")
+    assert not is_unrelated_project_config("course/lecture.py")
+
+
+def test_zero_byte_source_is_excluded_without_conversion() -> None:
+    item = source("empty", "course/empty.asm", "empty-hash", "eligible_candidate", "recognized")
+    item["bytes"] = 0
+
+    private, summary = build_dispositions({"sources": [item]})
+
+    assert private["dispositions"][0]["source_role"] == "excluded_duplicate_generated_tool_state"
+    assert summary["release_ready_gate"] is True
