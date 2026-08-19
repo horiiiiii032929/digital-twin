@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "freeze_id": "deployable-product-foundation-freeze-v5",
+  "freeze_date": "2026-08-19",
+  "status": "go-deeper-public-host-rehearsal-pending",
+  "evidence_revision": "989fd6a9147ea4a69744040e0d94c361489309fa",
+  "run_id": "deployable-product-foundation-v5-local-multimodel-policy-001",
+  "baseline_id": "A1-single-node-staging-v4-provider-registry",
+  "candidate_id": "A1-single-node-staging-v5-local-multimodel-policy",
+  "decision": "go-deeper",
+  "model_policy": {
+    "policy_id": "current-model-policy-2026-08-19-v2",
+    "gemma_execution_allowed": false,
+    "claude_execution_allowed": false,
+    "retired_general_qwen_execution_allowed": false,
+    "local_general_model": "qwen3.5:9b-q4_K_M",
+    "local_general_model_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "registered_openrouter_models": [
+      "openrouter/deepseek/deepseek-v4-flash-0731",
+      "openrouter/mistralai/mistral-small-2603"
+    ],
+    "openrouter_provider_options": {
+      "allow_fallbacks": false,
+      "require_parameters": true,
+      "data_collection": "deny",
+      "zdr": true
+    },
+    "registered_hosted_retrieval_models": [
+      "jina-embeddings-v5-text-small",
+      "jina-reranker-v3"
+    ],
+    "model_called_during_policy_validation": false
+  },
+  "local_gates": {
+    "model_policy_focused_passed": 113,
+    "model_policy_focused_total": 113,
+    "in_process_passed": 41,
+    "in_process_total": 41,
+    "live_https_passed": 30,
+    "live_https_total": 30,
+    "container_build_passed": true,
+    "clean_restore_passed": true,
+    "external_provider_calls": 0,
+    "private_data_used": false
+  },
+  "external_gates": [
+    {
+      "id": "public-dns-and-certificate",
+      "status": "pending",
+      "reason": "Local Caddy TLS passed, but a public host and domain have not been selected for trusted certificate issuance."
+    },
+    {
+      "id": "clean-host-restore",
+      "status": "pending",
+      "reason": "A separate-project clean restore passed locally but not on the selected target host."
+    },
+    {
+      "id": "staging-workflow-walkthrough",
+      "status": "pending",
+      "reason": "The credentialed workflow passed local HTTPS but not the eventual public HTTPS origin."
+    }
+  ],
+  "container_build": {
+    "status": "passed",
+    "compose_graph_validated": true,
+    "image_build_claimed": true,
+    "api_image_sha256": "595e59041e63c54cd29e9c35f3e3f934c23689b3adfe58c95e26360b131258cc",
+    "web_image_sha256": "a0af70e70c542dcb04131236d7ebe854aa3161612b32098bfc6a2371f4ebbaea"
+  },
+  "artifact_bindings": [
+    {
+      "path": "research/04_experiments/2026-08-19-deployable-product-foundation-plan.md",
+      "sha256": "38c6ad4d02b686274ad5a266182552f1756808fe3f4aa16399301aa8f61bd8b9"
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v1-development-001-results.md",
+      "sha256": "459f81de5a234ff92e494c26becc88aebe21f4a8cb6316569ab68c52e44b3a5f"
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v1-development-001.json",
+      "sha256": "159e8984ee58cc464602fe5465877d5a8afc75012f68ac289a8b8196fb138fce"
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v2-container-001-results.md",
+      "sha256": "d2d66acb7f68e9d2dd1117df4ada5971f4c36ff9ef050ab28e37002d5c59ba97"
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v2-container-001.json",
+      "sha256": "34868041011fd352111a73b91fc89c33ce0e1403394b3789a86d27fcb39de93e"
+    },
+    {
+      "path": "compose.staging.yml",
+      "sha256": "fb2dcf83e2c52caec47893ce53ef1b83f095f3cbdc476621cdd30005a88c887b"
+    },
+    {
+      "path": "deploy/Dockerfile",
+      "sha256": "6a781dc24c99e291a5eae13d25cc47425c5958a82791efcf86122ebf39a4384b"
+    },
+    {
+      "path": "deploy/Caddyfile",
+      "sha256": "eca977a575bb99be7fcf46fd9ee609f986b4ee55d0850e12de842491a851225b"
+    },
+    {
+      "path": "docs/deployment.md",
+      "sha256": "ce5766596b017f8b01232e1f6cbfb4e1c3545ac67e165caa27049637dbca4d19"
+    },
+    {
+      "path": "docs/deployment-threat-model.md",
+      "sha256": "473d02994987bf3303d980412604661e32f14dcd5cf31403936180782a399c18"
+    },
+    {
+      "path": "services/api/app/main.py",
+      "sha256": "59ad90ed45531c9471ca7de86124fad083c89323b1ee467f1642485e07d70ce2"
+    },
+    {
+      "path": "services/api/app/config.py",
+      "sha256": "f823a62c9686d5a4653141ca4e3e0da03842af7f61d703389ea207645cb6a5c7"
+    },
+    {
+      "path": "services/api/app/factory.py",
+      "sha256": "d75e2192b65732007c96e751bef14830ec700679a1bbd8a399cf6af33f2e39bb"
+    },
+    {
+      "path": "services/api/app/middleware.py",
+      "sha256": "50c1ea2c835fadbf332c217e957cfedfa3ca546207011a591a431bd115734aa5"
+    },
+    {
+      "path": "services/api/app/observability.py",
+      "sha256": "0acf3674853b903566958d7540f6779feba4191fa471207f740e7789d4ac9330"
+    },
+    {
+      "path": "services/api/app/routers/auth.py",
+      "sha256": "9cfb2469106c0e589a56d52e931930396fe15c5c5133ee60e9ffbcee93e2264a"
+    },
+    {
+      "path": "services/api/app/routers/operations.py",
+      "sha256": "4212cff7b8d4c0559344d27d15c126e205f47e25f8e3e4a0896d907f03b91254"
+    },
+    {
+      "path": "services/api/app/routers/publication.py",
+      "sha256": "16ce1ebefe5ad61a76235b06a59b7d5719105aecf49530f6483c32e88707c61c"
+    },
+    {
+      "path": "src/digital_twin/identity/models.py",
+      "sha256": "82af1695a6a96369c96cb741046dfba95f1fee0fac8aded750b06356addde5e9"
+    },
+    {
+      "path": "src/digital_twin/identity/repository.py",
+      "sha256": "c14527b3721d0a2410073cc5b8267f6b991f797ff17e0db785c23582f3ed4709"
+    },
+    {
+      "path": "src/digital_twin/identity/service.py",
+      "sha256": "d546d46719534e4810f40c6c19cf66f9e72318f227a78d0d8ed1cf663348a93a"
+    },
+    {
+      "path": "src/digital_twin/student/migrations.py",
+      "sha256": "ef32b29f84e828bd2509690c31a9c62b38a16fefdb5ad8f108a6f967646d7fc9"
+    },
+    {
+      "path": "src/digital_twin/student/publication.py",
+      "sha256": "17f41af93b3fc182972a347fbd38ec010e4bb02515cf88846362aa585a857212"
+    },
+    {
+      "path": "src/digital_twin/student/repository.py",
+      "sha256": "a0cd6944ea8e2314b27902c4d2d0df7bddff938c2e15edabd4d1358552b46f1e"
+    },
+    {
+      "path": "services/ingestion/jobs.py",
+      "sha256": "10411b423d753e8d80319eb6073121e03f34b76650af9367a2c92fdc0a64462d"
+    },
+    {
+      "path": "services/persistence/ingestion_jobs.py",
+      "sha256": "3f5442d4f3f1b168668586f73549e7df9974aab81028bb9b6a7dc4ef40bdd380"
+    },
+    {
+      "path": "services/storage/filesystem.py",
+      "sha256": "151be033fad518e819e2f300c442f26e34cb99a69d2f26a5a3ff4b5822090e66"
+    },
+    {
+      "path": "services/operations/backup.py",
+      "sha256": "d7a4ccfacdd8adca2c61104aa8fc52ab434aa14ced568d2fcbcf85b24fd33bb7"
+    },
+    {
+      "path": "services/operations/lifecycle.py",
+      "sha256": "59d1c5e51de11dfbddffb1ce7dbe7470a59c75a606ec09a67a563f32a66a569b"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "fd36d083e2fbdaa9adc589d3d3a57e975b43af1392dd58d21a35b8f1355cade8"
+    },
+    {
+      "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
+      "sha256": "1ac633096b2b8b864014c3b5227de5dae3ccb5ef24f4fdb211115c038ea0fba1"
+    },
+    {
+      "path": "apps/web/src/lib/api/professor.ts",
+      "sha256": "ecf524485b0406e535c4046df5f2a5a7bd8c2f20d9ee6b16e40c68777d87cd3d"
+    },
+    {
+      "path": "scripts/verify_https_staging.py",
+      "sha256": "bfdae8f112809c9cff483dace3feb1bde2f225483aa29507cfeb6c5be9d57fbe"
+    },
+    {
+      "path": "tests/api/test_staging_entrypoint.py",
+      "sha256": "c662082a30598d2b4533f36c5e27b443b70258d473bfc5c565b41a33efcc35cb"
+    },
+    {
+      "path": "tests/test_staging_compose.py",
+      "sha256": "4f72d1f3f7da161e25f8391a674594efa88182c2322ffb9de906f7b872bd3c2f"
+    },
+    {
+      "path": "tests/test_verify_https_staging.py",
+      "sha256": "b02284c22c3404fcee4ec82cde8c69980332ed2f50cdea853b08b71392037b46"
+    },
+    {
+      "path": "package.json",
+      "sha256": "2e478435bd7c6d8364a7457a09f9508e365eeeea1705fe99716dfc8ad0d5aad3"
+    },
+    {
+      "path": "research/04_experiments/2026-08-19-current-model-policy-deployment-v1-plan.md",
+      "sha256": "86e8472fadcc734f700a514453ceda3cae714d34e91010e05d7cc3626f833246"
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v3-model-policy-001-results.md",
+      "sha256": "03e5384280aebcb7d3d4ff311c2db95c0adf6eb5a725eb6236046adbcaa8624f"
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v3-model-policy-001.json",
+      "sha256": "d5a4066b9f0e275dda44bfe5c3a121c37556342078091cb5f6e66f70452270e9"
+    },
+    {
+      "path": "research/00_admin/2026-08-19-current-model-policy.md",
+      "sha256": "07b873cf49d2e56d47b75821c8b62d76f7a81772af40909747c0da0d622e0a87"
+    },
+    {
+      "path": "src/digital_twin/model_policy.py",
+      "sha256": "7fc3011dd1b5968a2359ee6342ceb83e07a883404576a078217564deb7dbc659"
+    },
+    {
+      "path": "services/llm/litellm_client.py",
+      "sha256": "c67c05f332310676841bd3f03650f6d4521eb59fb9f0743a01e927a0ba07f854"
+    },
+    {
+      "path": "scripts/validate_model_policy.py",
+      "sha256": "911d2dd88dc0bd94ca3069542fbbb8aa52985bb151be48d0c1b40640fc317540"
+    },
+    {
+      "path": "tests/test_model_policy.py",
+      "sha256": "709c28be1c76922e0ecaa7eb9d9378b53acf4a9d43aebbd9581b22f4d5d5abc9"
+    },
+    {
+      "path": "tests/services/test_litellm_client.py",
+      "sha256": "9c5534afe52e21f82e23d96cc2742ba45be90f4e61ffd81fbc2dcf1fbc375f0b"
+    },
+    {
+      "path": "research/04_experiments/2026-08-19-current-model-provider-registry-v2-plan.md",
+      "sha256": "561909d5a32064651b13047d8bcec65abbcfbc1b55358bc357374ea25c7cb45f"
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v4-provider-registry-001-results.md",
+      "sha256": "05b451104f73ad9293af63e2d8818d5a906052e8786f5448511ae6639ff898e5"
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v4-provider-registry-001.json",
+      "sha256": "224320c760b5f96ba4befbb09a8f39ea399e80b1d40afa4eacbd1b388812a8ee"
+    },
+    {
+      "path": "research/05_evaluation/instruments/cross_course_provider_qualification_v1.json",
+      "sha256": "285f5b0f1f88074c7f0e7652d1a937007eb8fbe100d48eb1ccc89560c2d23597"
+    },
+    {
+      "path": "services/embeddings/jina_client.py",
+      "sha256": "0ffaebe57ee7a3bf15dee4a5df46a1b191797490a8196484e57549f882f7ad01"
+    },
+    {
+      "path": "services/reranking/jina_client.py",
+      "sha256": "63a91b0ad87c200e76e563bd6c9c1373e3aa20f154f5aa1494b35a0e790ad892"
+    },
+    {
+      "path": "tests/services/test_retrieval_provider.py",
+      "sha256": "ebefd1014d1b3cf6be5d0b56095dfc9bc643adb35df7a87c6a1d26424c6d7e39"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "021e8f00a01592f32a980273fc526b84cccf6fbf768d1ea956f60f4a9c44a43d"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8c8f65550f97da192d3d20760f1d916936d5d79af902315eaa25fbd209861b40"
+    },
+    {
+      "path": "docs/current-status.md",
+      "sha256": "5ec635a4146cfffd9ceebc0fcdc189da564cdfa52dd932298c6fc2203771a796"
+    },
+    {
+      "path": "research/00_admin/2026-08-19-current-model-policy-v2.md",
+      "sha256": "78e15055f3c43924046cc9d5c920577c0f1ae64b3d97c4a075e34bec6cb47ae9"
+    },
+    {
+      "path": "research/00_admin/decision-log.md",
+      "sha256": "610345e04954ab522c45ef74e578a77a414768fa0a45e8483c943417cec3ceba"
+    },
+    {
+      "path": "research/01_literature/2026-08-19-local-llm-runtime-options.md",
+      "sha256": "b8869054508a0df0e9165f1050df2d744a2c1a406f4b365a4a09a6245985b9df"
+    },
+    {
+      "path": "research/04_experiments/2026-08-19-local-multimodel-policy-deployment-v3-plan.md",
+      "sha256": "5e170de97b5b1684d89731ecc83c6092ebce9b2d9ef9281bdd42e95af3f8a78a"
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v5-local-multimodel-policy-001-results.md",
+      "sha256": "b4c977189431daf3663fe4a1356a126c101a7653065da890567d156c9be89f0b"
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v5-local-multimodel-policy-001.json",
+      "sha256": "7369ce696db924475126eb4db6b40330b5939aa0643091a0bde5b62899486504"
+    },
+    {
+      "path": "research/05_evaluation/result-registry.md",
+      "sha256": "21de5f74998b7df699b556f59fe2a362a43dfba20652b372c6631913218fb7fa"
+    },
+    {
+      "path": "scripts/README.md",
+      "sha256": "9aebd51054b75513fdc7650f5c94184fa960594ada2a0726fc9517ae24d1e1be"
+    },
+    {
+      "path": "scripts/judge_professor_fidelity.py",
+      "sha256": "b1eebacb7724646fb47cd6697c2f8abb52f85af6be2a7a94e1e8c586e17b1ae7"
+    },
+    {
+      "path": "scripts/validate_professor_fidelity_post_audit.py",
+      "sha256": "35182128d99cf7348635dac0bcee38615a12b3d06a4e626c4502b5e68fb86a54"
+    },
+    {
+      "path": "tests/test_professor_fidelity_runner.py",
+      "sha256": "bc85727f98d72061d4663ab1d9b461b52a1b1835ba7c7c89f6b5b618f827f2fd"
+    }
+  ],
+  "reproduction_commands": [
+    "npm run check",
+    "npm run audit:dependencies",
+    "npm run verify:model-policy",
+    "npm run verify:deployable-foundation",
+    "npm run benchmark:deployable-foundation-development",
+    "npm run staging:build",
+    "npm run verify:staging-https",
+    "npm run verify:deployable-freeze"
+  ],
+  "rollback": {
+    "product": "A0-local-demo",
+    "generator": "deterministic-grounded-generator-v1",
+    "retriever": "bm25-v1",
+    "deployment": "A1-single-node-staging-v4 image and untouched previous data volume",
+    "model_policy": "disable OpenRouter and local-model execution; retain direct DeepSeek only for previously selected roles"
+  },
+  "change_control": "Any bound implementation, provider-model identity, routing policy, local artifact digest, configuration, evidence interpretation, image identity, or external-gate status change requires a new freeze ID. Do not rewrite this manifest.",
+  "private_or_heldout_data_read": false,
+  "external_model_called": false
+}
