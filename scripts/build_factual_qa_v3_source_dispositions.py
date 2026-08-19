@@ -17,10 +17,10 @@ DEFAULT_INVENTORY = (
     ROOT / "data/interim/multimodal_retrieval_v1/source_inventory_v1.json"
 )
 DEFAULT_PRIVATE_OUTPUT = (
-    ROOT / "data/interim/factual_qa_v3/source_dispositions_v1.json"
+    ROOT / "data/interim/factual_qa_v3/source_dispositions_v2.json"
 )
 DEFAULT_SUMMARY_OUTPUT = (
-    ROOT / "reports/generated/factual-qa-v3-source-dispositions-v1.json"
+    ROOT / "reports/generated/factual-qa-v3-source-dispositions-v2.json"
 )
 
 
@@ -43,6 +43,18 @@ def load_inventory(path: Path) -> dict[str, Any]:
 def _canonical_json_sha256(value: Any) -> str:
     encoded = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
     return hashlib.sha256(encoded).hexdigest()
+
+
+def is_generated_metadata(relative_path: str) -> bool:
+    normalized = relative_path.replace("\\", "/").lower()
+    parts = normalized.split("/")
+    name = parts[-1]
+    return (
+        ".pytest_cache" in parts
+        or name == ".ds_store"
+        or name.endswith(".swp")
+        or name.endswith(".bkp")
+    )
 
 
 def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -90,6 +102,9 @@ def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[
         if content_hash in sensitive_hashes:
             role = "excluded_integrity_or_privacy"
             reason = "sensitive-indicated content hash group"
+        elif is_generated_metadata(source["relative_path"]):
+            role = "excluded_duplicate_generated_tool_state"
+            reason = "generated metadata or transient tool-state artifact"
         elif source["source_id"] != canonical_source_id:
             role = "excluded_duplicate_generated_tool_state"
             reason = "exact-content duplicate; canonical lineage retained"
@@ -130,7 +145,7 @@ def build_dispositions(inventory: dict[str, Any]) -> tuple[dict[str, Any], dict[
     now = datetime.now(UTC).isoformat()
     private_payload = {
         "schema_version": 1,
-        "manifest_id": "factual-qa-v3-source-dispositions-v1",
+        "manifest_id": "factual-qa-v3-source-dispositions-v2",
         "generated_at": now,
         "source_inventory_id": inventory.get("inventory_id"),
         "source_inventory_sha256": inventory.get("inventory_sha256"),

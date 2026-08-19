@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from scripts.build_factual_qa_v3_source_dispositions import build_dispositions
+from scripts.build_factual_qa_v3_source_dispositions import (
+    build_dispositions,
+    is_generated_metadata,
+)
 
 
 def source(
@@ -75,3 +78,11 @@ def test_output_is_stable_for_input_order() -> None:
 
     assert first["disposition_sha256"] == second["disposition_sha256"]
     assert first_summary["source_role_counts"] == second_summary["source_role_counts"]
+
+
+def test_nested_and_extensionless_tool_metadata_is_excluded() -> None:
+    assert is_generated_metadata("course/.DS_Store")
+    assert is_generated_metadata("course/.pytest_cache/v/cache/nodeids")
+    assert is_generated_metadata("course/report.swp")
+    assert is_generated_metadata("course/old.bkp")
+    assert not is_generated_metadata("course/lecture.md")
