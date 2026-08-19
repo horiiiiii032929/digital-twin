@@ -172,7 +172,7 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
             "npm run verify:model-policy",
         },
         "artifact_count": 53,
-        "require_current_match": True,
+        "require_current_match": False,
     },
 }
 

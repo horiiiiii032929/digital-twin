@@ -57,8 +57,8 @@ The project's technical standard, learning commitments, and strengthened Sprint
   registered evidence links, supported/unsupported claims, and artifact hashes.
 - `npm run check:docs`: validate repository-local Markdown links.
 - `npm run verify:model-policy`: verify exact current model bindings and prove
-  that Gemma and retired general-Qwen execution paths are disabled without
-  calling a model.
+  that Gemma, Claude, and retired general-Qwen execution paths are disabled
+  without calling a model.
 - `npm run verify:deployable-foundation`: validate the staging topology and run
   identity, migration, job, recovery, lifecycle, and security tests.
 - `npm run benchmark:deployable-foundation-development`: run the network-free

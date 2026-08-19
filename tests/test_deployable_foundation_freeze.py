@@ -75,7 +75,7 @@ def test_historical_model_policy_container_freeze_validates() -> None:
     assert result["current_match_required"] is False
 
 
-def test_current_provider_registry_container_freeze_validates() -> None:
+def test_historical_provider_registry_container_freeze_validates() -> None:
     result = validate_deployable_freeze(_v4_manifest(), root=ROOT)
 
     assert result["status"] == "passed"
@@ -83,7 +83,7 @@ def test_current_provider_registry_container_freeze_validates() -> None:
     assert result["local_gates"] == "107/107-policy-provider-and-30/30-live-https"
     assert result["external_gates_pending"] == 3
     assert result["artifact_bindings"] == 53
-    assert result["current_match_required"] is True
+    assert result["current_match_required"] is False
 
 
 def test_container_qualified_freeze_rejects_image_identity_drift() -> None:

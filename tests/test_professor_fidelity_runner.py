@@ -404,11 +404,14 @@ def test_anchor_machine_summary_computes_pairwise_repeat_agreement():
 def test_professor_fidelity_judge_records_qwen_digest(monkeypatch):
     monkeypatch.setattr(
         "scripts.judge_professor_fidelity.subprocess_run",
-        lambda command: "NAME ID SIZE MODIFIED\nqwen3.5:4b 2a654d98e6fb 3.4 GB now\n",
+        lambda command: (
+            "NAME ID SIZE MODIFIED\n"
+            "qwen3.5:9b-q4_K_M 6488c96fa5fa 6.6 GB now\n"
+        ),
     )
 
-    assert _model_digest("qwen3.5:4b") == "2a654d98e6fb"
-    assert JUDGE_MODELS == ("deepseek-v4-pro", "qwen3.5:4b")
+    assert _model_digest("qwen3.5:9b-q4_K_M") == "6488c96fa5fa"
+    assert JUDGE_MODELS == ("deepseek-v4-pro", "qwen3.5:9b-q4_K_M")
 
 
 def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
@@ -592,7 +595,7 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
         "invalid-attempt-001-rerun-prohibited"
     )
     assert result["prospective_sensitivity_judge"] == {
-        "model": "qwen3.5:4b",
+        "model": "qwen3.5:9b-q4_K_M",
         "status": "not-selected-requires-new-calibration",
     }
     assert result["execution_policy"]["status"] == "paused"

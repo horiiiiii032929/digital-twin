@@ -9,14 +9,21 @@ from pathlib import Path
 from typing import Any
 
 from scripts.judge_professor_fidelity import JUDGE_MODELS
-from scripts.second_review_multimodal_benchmark import DEFAULT_MODEL as CLAUDE_MODEL
+from scripts.second_review_multimodal_benchmark import (
+    DEFAULT_MODEL as HISTORICAL_CLAUDE_MODEL,
+)
 from services.embeddings.jina_client import DEFAULT_MODEL as JINA_EMBEDDING_MODEL
 from services.reranking.jina_client import DEFAULT_MODEL as JINA_RERANKER_MODEL
 from src.digital_twin.model_policy import (
     CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
     LOCAL_GENERAL_MODEL_DIGEST,
+    OPENROUTER_DEEPSEEK_MODEL,
+    OPENROUTER_INDEPENDENT_REVIEW_MODEL,
     POLICY_ID,
+    ModelPolicyError,
+    controlled_openrouter_provider_options,
+    require_model_allowed,
     require_registered_current_model,
 )
 
@@ -24,11 +31,13 @@ from src.digital_twin.model_policy import (
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_PATH = ROOT / "package.json"
 PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
-POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-19-current-model-policy.md"
+POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-19-current-model-policy-v2.md"
 
 PROHIBITED_COMMAND_MARKERS = (
     "gemma",
+    "claude",
     "--model qwen3:4b",
+    "--model qwen3.5:4b",
     "huihui_ai/qwen3-abliterated",
 )
 
@@ -41,6 +50,7 @@ HISTORICAL_MODEL_ENTRYPOINTS = (
     "scripts/run_course_tutor_hybrid_review.py",
     "scripts/review_generator_qualification_v2.py",
     "scripts/run_factual_qa_quality_pilot.py",
+    "scripts/second_review_multimodal_benchmark.py",
 )
 
 
@@ -73,9 +83,16 @@ def validate() -> dict[str, Any]:
     ]
     require_registered_current_model(generator_model)
     require_registered_current_model(embedding_model)
-    require_registered_current_model(CLAUDE_MODEL)
     require_registered_current_model(JINA_EMBEDDING_MODEL)
     require_registered_current_model(JINA_RERANKER_MODEL)
+    require_registered_current_model(OPENROUTER_DEEPSEEK_MODEL)
+    require_registered_current_model(OPENROUTER_INDEPENDENT_REVIEW_MODEL)
+    try:
+        require_model_allowed(HISTORICAL_CLAUDE_MODEL)
+    except ModelPolicyError:
+        pass
+    else:
+        raise ValueError("the historical Claude entrypoint is not prohibited")
     _require(
         JUDGE_MODELS == ("deepseek-v4-pro", LOCAL_GENERAL_MODEL),
         "professor-fidelity judge bindings are not current",
@@ -88,12 +105,27 @@ def validate() -> dict[str, Any]:
         "the local Qwen3.5 artifact must be pinned to its full digest",
     )
     _require(POLICY_DOC_PATH.is_file(), "current model policy record is missing")
+    _require(
+        controlled_openrouter_provider_options()
+        == {
+            "extra_body": {
+                "provider": {
+                    "allow_fallbacks": False,
+                    "require_parameters": True,
+                    "data_collection": "deny",
+                    "zdr": True,
+                }
+            }
+        },
+        "controlled OpenRouter routing policy drifted",
+    )
 
     guarded_entrypoints = []
     for relative in HISTORICAL_MODEL_ENTRYPOINTS:
         source = (ROOT / relative).read_text(encoding="utf-8")
         _require(
-            "require_model_allowed" in source,
+            "require_model_allowed" in source
+            or "require_registered_current_model" in source,
             f"historical model entrypoint lacks execution guard: {relative}",
         )
         guarded_entrypoints.append(relative)
@@ -110,9 +142,15 @@ def validate() -> dict[str, Any]:
         "status": "passed",
         "policy_id": POLICY_ID,
         "gemma_execution_allowed": False,
+        "claude_execution_allowed": False,
         "retired_general_qwen_execution_allowed": False,
         "local_general_model": LOCAL_GENERAL_MODEL,
         "local_general_model_digest": LOCAL_GENERAL_MODEL_DIGEST,
+        "openrouter_models": [
+            OPENROUTER_DEEPSEEK_MODEL,
+            OPENROUTER_INDEPENDENT_REVIEW_MODEL,
+        ],
+        "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {
             "generator": generator_model,
             "embedding": embedding_model,

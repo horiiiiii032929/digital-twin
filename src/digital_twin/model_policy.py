@@ -8,14 +8,30 @@ from being called accidentally.
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
+from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-19"
-LOCAL_GENERAL_MODEL = "qwen3.5:4b"
+POLICY_ID = "current-model-policy-2026-08-19-v2"
+LOCAL_GENERAL_MODEL = "qwen3.5:9b-q4_K_M"
 LOCAL_GENERAL_MODEL_DIGEST = (
-    "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd"
+    "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7"
 )
+OPENROUTER_DEEPSEEK_MODEL = "openrouter/deepseek/deepseek-v4-flash-0731"
+OPENROUTER_INDEPENDENT_REVIEW_MODEL = (
+    "openrouter/mistralai/mistral-small-2603"
+)
+_OPENROUTER_PROVIDER_OPTIONS: dict[str, Any] = {
+    "extra_body": {
+        "provider": {
+            "allow_fallbacks": False,
+            "require_parameters": True,
+            "data_collection": "deny",
+            "zdr": True,
+        }
+    }
+}
 
 
 class ModelPolicyError(ValueError):
@@ -46,9 +62,14 @@ CURRENT_MODEL_BINDINGS = (
         status="prospective-not-selected",
     ),
     CurrentModelBinding(
+        role="openrouter-deepseek-transport",
+        provider_model=OPENROUTER_DEEPSEEK_MODEL,
+        status="prospective-not-selected-retain-direct-deepseek",
+    ),
+    CurrentModelBinding(
         role="multimodal-independent-reviewer",
-        provider_model="claude-sonnet-5",
-        status="approved-private-review-option",
+        provider_model=OPENROUTER_INDEPENDENT_REVIEW_MODEL,
+        status="prospective-not-selected",
     ),
     CurrentModelBinding(
         role="selected-text-embedding",
@@ -79,7 +100,7 @@ CURRENT_MODEL_IDS = frozenset(
     | {
         "deepseek/deepseek-v4-flash",
         "deepseek/deepseek-v4-pro",
-        "ollama/qwen3.5:4b",
+        f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )
 
@@ -89,6 +110,8 @@ RETIRED_GENERAL_MODEL_IDS = frozenset(
         "ollama/qwen3:4b",
         "huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
         "ollama/huihui_ai/qwen3-abliterated:4b-thinking-2507-q8_0",
+        "qwen3.5:4b",
+        "ollama/qwen3.5:4b",
     }
 )
 
@@ -104,12 +127,22 @@ def require_model_allowed(model: str) -> str:
         raise ModelPolicyError(
             f"{POLICY_ID} prohibits every Gemma model from execution"
         )
+    if "claude" in folded or folded.startswith("anthropic/"):
+        raise ModelPolicyError(
+            f"{POLICY_ID} prohibits every Claude model from execution"
+        )
     if folded in RETIRED_GENERAL_MODEL_IDS:
         raise ModelPolicyError(
             f"{POLICY_ID} retired general model {normalized}; use "
             f"{LOCAL_GENERAL_MODEL} only in a new prospective instrument"
         )
     return normalized
+
+
+def controlled_openrouter_provider_options() -> dict[str, Any]:
+    """Return the frozen OpenRouter routing boundary without credentials."""
+
+    return deepcopy(_OPENROUTER_PROVIDER_OPTIONS)
 
 
 def require_registered_current_model(model: str) -> str:
