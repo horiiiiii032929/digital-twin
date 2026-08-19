@@ -24,6 +24,7 @@
     "ops:data": "uv run python -m scripts.manage_runtime_data",
     "staging:config": "docker compose --env-file deploy/staging.env.example -f compose.staging.yml config --quiet",
     "staging:build": "docker compose --env-file deploy/staging.env.example -f compose.staging.yml build",
+    "verify:staging-https": "uv run python -m scripts.verify_https_staging",
     "dev:api": "uv run uvicorn services.api.app.main:app --reload --port 8000",
     "test": "uv run pytest tests",
     "test:api": "uv run pytest tests",

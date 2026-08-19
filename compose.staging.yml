@@ -41,10 +41,8 @@ services:
 
   worker:
     image: digital-twin-api:${APP_IMAGE_TAG:-local}
-    build:
-      context: .
-      dockerfile: deploy/Dockerfile
-      target: api
+    # The worker runs the API image with a different command. Building the
+    # shared tag twice races during concurrent BuildKit export.
     command: ["python", "-m", "scripts.run_ingestion_worker"]
     environment: *runtime-environment
     restart: unless-stopped

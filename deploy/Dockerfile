@@ -35,4 +35,8 @@ CMD ["uvicorn", "services.api.app.main:app", "--host", "0.0.0.0", "--port", "800
 FROM caddy:2.10-alpine AS web
 COPY deploy/Caddyfile /etc/caddy/Caddyfile
 COPY --from=web-build /build/apps/web/dist /srv
+RUN addgroup -S -g 1000 caddy \
+    && adduser -S -D -H -u 1000 -G caddy caddy \
+    && chown -R caddy:caddy /data /config /srv /etc/caddy
+USER caddy
 EXPOSE 80 443 443/udp

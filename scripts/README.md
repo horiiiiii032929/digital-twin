@@ -220,9 +220,14 @@ Current utilities:
   online SQLite/object backup and restore it only into a clean target.
 - `manage_runtime_data.py`: performs explicit staging retention, redacted
   account export, and confirmation-bound account/course deletion.
-- `verify_deployable_foundation.py`: runs the network-free 40-gate invited
+- `verify_deployable_foundation.py`: runs the network-free 41-gate invited
   professor/student workflow, restart, clean restore, rollback, and 100-request
   capacity measurement.
+- `verify_https_staging.py`: drives the credentialed professor upload through
+  student answer/original-region citation journey against a live HTTPS origin.
+  It reads all passwords from environment variables, supports a private CA
+  file for local Caddy qualification, emits no credentials, and can replay a
+  sanitized result after container restart or clean restore.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run

@@ -54,6 +54,61 @@ Caddy requests and renews the public certificate automatically. Certificate
 issuance cannot pass until DNS and ports are correct. Do not weaken secure
 cookies or substitute an HTTP staging origin.
 
+## Local container and HTTPS qualification
+
+Before using a public host, the same images and secure-cookie path can be
+qualified on `localhost` with Caddy's private local certificate authority. This
+does not replace the public DNS/certificate gate, but it exercises the built
+images, reverse proxy, API, worker, volumes, TLS, and credentialed workflow
+together. Use an isolated Compose project so existing containers and volumes
+remain untouched:
+
+```bash
+export APP_DOMAIN=localhost
+export TLS_EMAIL=local@example.invalid
+export APP_IMAGE_TAG=foundation-v2-local
+docker compose -p digital-twin-local \
+  --env-file deploy/staging.env.example -f compose.staging.yml build
+docker compose -p digital-twin-local \
+  --env-file deploy/staging.env.example -f compose.staging.yml \
+  up -d --no-build --wait
+docker compose -p digital-twin-local \
+  --env-file deploy/staging.env.example -f compose.staging.yml \
+  cp web:/data/caddy/pki/authorities/local/root.crt /tmp/digital-twin-root.crt
+```
+
+Read synthetic/local qualification passwords without writing them to a file,
+bootstrap the administrator, and run the live verifier:
+
+```bash
+read -s STAGING_ADMIN_PASSWORD
+read -s STAGING_PROFESSOR_PASSWORD
+read -s STAGING_STUDENT_PASSWORD
+export STAGING_ADMIN_PASSWORD STAGING_PROFESSOR_PASSWORD STAGING_STUDENT_PASSWORD
+BOOTSTRAP_ADMIN_PASSWORD="$STAGING_ADMIN_PASSWORD" docker compose \
+  -p digital-twin-local --env-file deploy/staging.env.example \
+  -f compose.staging.yml run --rm -e BOOTSTRAP_ADMIN_PASSWORD api \
+  python -m scripts.bootstrap_admin --email admin@foundation.local \
+  --display-name "Foundation administrator"
+npm run verify:staging-https -- \
+  --base-url https://localhost \
+  --ca-file /tmp/digital-twin-root.crt \
+  --admin-email admin@foundation.local \
+  --output reports/generated/deployable-product-foundation-live/result.json
+```
+
+The result contains only synthetic account identifiers, workflow identifiers,
+checks, timings, and a citation-crop checksum. It contains no passwords. After
+restarting the containers or restoring the archive into a new Compose project,
+replay the exact state check with:
+
+```bash
+npm run verify:staging-https -- \
+  --base-url https://localhost \
+  --ca-file /tmp/digital-twin-root.crt \
+  --resume reports/generated/deployable-product-foundation-live/result.json
+```
+
 Provision the first administrator without printing the password:
 
 ```bash
