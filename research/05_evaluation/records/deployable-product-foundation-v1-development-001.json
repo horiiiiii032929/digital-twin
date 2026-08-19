@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v1-development-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v1-development",
+  "corpus_id": "synthetic-network-security-one-pdf-v1",
+  "code_revision": "9855579f252a417beaeba0fad658a614fea65c22",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a0-local-demo",
+        "version": "v1",
+        "configuration": {
+          "identity": "synthetic-header",
+          "onboarding": "memory",
+          "ingestion": "synchronous",
+          "https_package": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "local-hard-gate-pass-rate",
+          "value": 0.14285714285714285,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "synthetic-workflow-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {"name": "credential-and-session-boundary", "passed": false, "evidence": "The control uses synthetic account headers rather than credentials and revocable cookies."},
+        {"name": "durable-owned-state", "passed": false, "evidence": "The control onboarding repository is process memory."},
+        {"name": "recoverable-asynchronous-ingestion", "passed": false, "evidence": "The control parses synchronously and has no leased recovery queue."},
+        {"name": "migration-and-clean-restore", "passed": false, "evidence": "The control has no complete migration and clean backup/restore workflow."},
+        {"name": "security-and-observability", "passed": false, "evidence": "The control has no credential boundary, staging rate limits, or administrator metrics."},
+        {"name": "bounded-capacity", "passed": false, "evidence": "No frozen 100-request capacity measurement exists for the control architecture."},
+        {"name": "rollback-availability", "passed": true, "evidence": "The local synthetic professor/student demo remains runnable."}
+      ],
+      "failures_by_category": {
+        "identity": 1,
+        "persistence": 1,
+        "queue-lease": 1,
+        "recovery": 1,
+        "security": 1,
+        "capacity": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging",
+        "version": "v1",
+        "configuration": {
+          "identity": "scrypt-opaque-cookie",
+          "database": "sqlite-wal-schema-v5",
+          "object_store": "content-addressed-filesystem-v1",
+          "queue": "sqlite-leased-v1",
+          "web_proxy": "caddy-automatic-https",
+          "generator_mode": "deterministic-network-free"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "local-hard-gate-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "synthetic-workflow-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {"name": "credential-and-session-boundary", "passed": true, "evidence": "Invite login, secure cookie, expiry/revocation, password rotation/reset, and synthetic-header rejection pass."},
+        {"name": "durable-owned-state", "passed": true, "evidence": "Account, onboarding, course, source, release, conversation, citation, and audit state survive repository restart."},
+        {"name": "recoverable-asynchronous-ingestion", "passed": true, "evidence": "Idempotent enqueue, leased claim, completion, cancellation, retry, and expired-lease recovery pass."},
+        {"name": "migration-and-clean-restore", "passed": true, "evidence": "Schema v5 clean/legacy/rollback checks and checksum-verified clean restore pass."},
+        {"name": "security-and-observability", "passed": true, "evidence": "Authorization, origin, rate, upload, log-redaction, metrics/alerts, lifecycle, and provider-budget checks pass."},
+        {"name": "bounded-capacity", "passed": true, "evidence": "100 requests had 0% errors, 2.964 ms p95, and 0.30 GiB peak RSS on the development host."},
+        {"name": "rollback-availability", "passed": true, "evidence": "The A0 demo was started against synthetic data after the candidate recovery checks."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging",
+    "rationale": "A1 passed all 41 local acceptance and capacity checks while preserving A0. Public DNS, certificate issuance, and host-side restore remain the only architecture-selection evidence not exercised.",
+    "limitations": [
+      "The result uses synthetic accounts, one authored PDF, and one development host.",
+      "Public HTTPS certificate issuance and a clean host deployment were not exercised.",
+      "The container graph validates, but base-image registry resolution stalled in the current environment.",
+      "The capacity measurement excludes external generation and public network latency.",
+      "The result does not establish real-course quality, human usability, multi-host scale, or a production SLA."
+    ]
+  }
+}

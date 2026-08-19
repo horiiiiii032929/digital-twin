@@ -25,7 +25,9 @@ import type {
   OnboardingSession,
   PreviewDecisionValue,
   PromptTag,
+  SourceLabel,
   SourceInventoryItem,
+  SourcePermissionStatus,
 } from "@/lib/api/types"
 
 export type OnboardingController = SessionState & {
@@ -35,6 +37,10 @@ export type OnboardingController = SessionState & {
     name: string
     mime_type: string
     size_bytes: number
+    permission_status?: SourcePermissionStatus
+    source_label?: SourceLabel
+    excluded?: boolean
+    sensitive?: boolean | null
     notes?: string
   }) => Promise<boolean>
   editSource: (
@@ -160,6 +166,10 @@ export function useOnboardingSession({
       name: string
       mime_type: string
       size_bytes: number
+      permission_status?: SourcePermissionStatus
+      source_label?: SourceLabel
+      excluded?: boolean
+      sensitive?: boolean | null
       notes?: string
     }) => {
       if (!state.session || state.isAddingSource) {

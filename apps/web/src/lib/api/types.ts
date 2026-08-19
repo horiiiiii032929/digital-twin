@@ -132,6 +132,7 @@ export type TutorPolicy = {
 
 export type OnboardingSession = {
   session_id: string
+  owner_account_id?: string | null
   current_step: string
   answers: Record<string, string>
   messages: ChatMessage[]
@@ -203,4 +204,89 @@ export type StudentTutorTurn = {
   tutor_message: StudentChatMessage
   citations: StudentCitation[]
   duplicate: boolean
+}
+
+export type AccountRole = "admin" | "professor" | "student"
+
+export type IdentityProfile = {
+  account_id: string
+  email: string
+  display_name: string
+  role: AccountRole
+}
+
+export type ProfessorReleaseStatus = "draft" | "published" | "withdrawn"
+export type ReleaseEvaluationStatus = "pending" | "passed" | "failed"
+
+export type ProfessorReleaseSummary = {
+  id: string
+  course_id: string
+  status: ProfessorReleaseStatus
+  evaluation_status: ReleaseEvaluationStatus
+  policy_version: number
+  chunk_count: number
+  created_at: string
+}
+
+export type ProfessorCourse = {
+  course_id: string
+  title: string
+  student_account_ids: string[]
+  releases: ProfessorReleaseSummary[]
+}
+
+export type IngestionJobStatus =
+  | "pending"
+  | "running"
+  | "succeeded"
+  | "failed"
+  | "cancelled"
+
+export type ProfessorIngestionResult = {
+  source_artifact_id: string
+  source_version: number
+  source_checksum: string
+  document_id: string
+  chunk_count: number
+  region_count: number
+  region_kind_counts: Record<string, number>
+  processing_warnings: string[]
+  chunks: Record<string, unknown>[]
+}
+
+export type ProfessorIngestionJob = {
+  id: string
+  course_id: string
+  artifact_id: string
+  title: string
+  version: number
+  status: IngestionJobStatus
+  attempts: number
+  max_attempts: number
+  error_code?: string | null
+  error_message?: string | null
+  result?: ProfessorIngestionResult | null
+  created_at: string
+  updated_at: string
+}
+
+export type ProfessorRelease = ProfessorReleaseSummary & {
+  profile_id: string
+  profile_version: string
+  policy: TutorPolicy
+  chunks: Record<string, unknown>[]
+}
+
+export type ReleasePreflightCheck = {
+  id: string
+  label: string
+  passed: boolean
+  detail: string
+}
+
+export type ReleasePreflightResult = {
+  release_id: string
+  passed: boolean
+  checks: ReleasePreflightCheck[]
+  evaluated_at: string
 }

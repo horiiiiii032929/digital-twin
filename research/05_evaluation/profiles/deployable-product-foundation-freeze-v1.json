@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "freeze_id": "deployable-product-foundation-freeze-v1",
+  "freeze_date": "2026-08-19",
+  "status": "go-deeper-external-rehearsal-pending",
+  "evidence_revision": "e619df93e5391daf6e459cf6dc0df0e438bb1da6",
+  "run_id": "deployable-product-foundation-v1-development-001",
+  "baseline_id": "A0-local-demo",
+  "candidate_id": "A1-single-node-staging",
+  "decision": "go-deeper",
+  "local_gates": {
+    "passed": 41,
+    "total": 41,
+    "external_provider_calls": 0,
+    "private_data_used": false
+  },
+  "external_gates": [
+    {
+      "id": "public-dns-and-certificate",
+      "status": "pending",
+      "reason": "A public host and domain have not been selected."
+    },
+    {
+      "id": "clean-host-restore",
+      "status": "pending",
+      "reason": "Restore passed locally but has not been rehearsed on the target host."
+    },
+    {
+      "id": "staging-workflow-walkthrough",
+      "status": "pending",
+      "reason": "The credentialed workflow passed locally but not over public HTTPS."
+    }
+  ],
+  "container_build": {
+    "status": "blocked-registry-resolution",
+    "compose_graph_validated": true,
+    "image_build_claimed": false
+  },
+  "artifact_bindings": [
+    {"path": "research/04_experiments/2026-08-19-deployable-product-foundation-plan.md", "sha256": "38c6ad4d02b686274ad5a266182552f1756808fe3f4aa16399301aa8f61bd8b9"},
+    {"path": "research/05_evaluation/deployable-product-foundation-v1-development-001-results.md", "sha256": "459f81de5a234ff92e494c26becc88aebe21f4a8cb6316569ab68c52e44b3a5f"},
+    {"path": "research/05_evaluation/records/deployable-product-foundation-v1-development-001.json", "sha256": "159e8984ee58cc464602fe5465877d5a8afc75012f68ac289a8b8196fb138fce"},
+    {"path": "services/api/app/config.py", "sha256": "f823a62c9686d5a4653141ca4e3e0da03842af7f61d703389ea207645cb6a5c7"},
+    {"path": "services/api/app/middleware.py", "sha256": "50c1ea2c835fadbf332c217e957cfedfa3ca546207011a591a431bd115734aa5"},
+    {"path": "services/api/app/observability.py", "sha256": "0acf3674853b903566958d7540f6779feba4191fa471207f740e7789d4ac9330"},
+    {"path": "services/api/app/routers/auth.py", "sha256": "9cfb2469106c0e589a56d52e931930396fe15c5c5133ee60e9ffbcee93e2264a"},
+    {"path": "services/api/app/routers/operations.py", "sha256": "4212cff7b8d4c0559344d27d15c126e205f47e25f8e3e4a0896d907f03b91254"},
+    {"path": "services/api/app/routers/publication.py", "sha256": "16ce1ebefe5ad61a76235b06a59b7d5719105aecf49530f6483c32e88707c61c"},
+    {"path": "src/digital_twin/identity/models.py", "sha256": "82af1695a6a96369c96cb741046dfba95f1fee0fac8aded750b06356addde5e9"},
+    {"path": "src/digital_twin/identity/repository.py", "sha256": "c14527b3721d0a2410073cc5b8267f6b991f797ff17e0db785c23582f3ed4709"},
+    {"path": "src/digital_twin/identity/service.py", "sha256": "d546d46719534e4810f40c6c19cf66f9e72318f227a78d0d8ed1cf663348a93a"},
+    {"path": "src/digital_twin/student/migrations.py", "sha256": "ef32b29f84e828bd2509690c31a9c62b38a16fefdb5ad8f108a6f967646d7fc9"},
+    {"path": "src/digital_twin/student/publication.py", "sha256": "17f41af93b3fc182972a347fbd38ec010e4bb02515cf88846362aa585a857212"},
+    {"path": "src/digital_twin/student/repository.py", "sha256": "a0cd6944ea8e2314b27902c4d2d0df7bddff938c2e15edabd4d1358552b46f1e"},
+    {"path": "services/ingestion/jobs.py", "sha256": "10411b423d753e8d80319eb6073121e03f34b76650af9367a2c92fdc0a64462d"},
+    {"path": "services/persistence/ingestion_jobs.py", "sha256": "3f5442d4f3f1b168668586f73549e7df9974aab81028bb9b6a7dc4ef40bdd380"},
+    {"path": "services/storage/filesystem.py", "sha256": "151be033fad518e819e2f300c442f26e34cb99a69d2f26a5a3ff4b5822090e66"},
+    {"path": "services/operations/backup.py", "sha256": "d7a4ccfacdd8adca2c61104aa8fc52ab434aa14ced568d2fcbcf85b24fd33bb7"},
+    {"path": "services/operations/lifecycle.py", "sha256": "59d1c5e51de11dfbddffb1ce7dbe7470a59c75a606ec09a67a563f32a66a569b"},
+    {"path": "apps/web/src/App.tsx", "sha256": "fd36d083e2fbdaa9adc589d3d3a57e975b43af1392dd58d21a35b8f1355cade8"},
+    {"path": "apps/web/src/hooks/use-auth-session.ts", "sha256": "a0003959c92edddeb71730da07dccd26b6a07d704dd71a72e76d1f2950257938"},
+    {"path": "apps/web/src/components/professor/professor-workspace.tsx", "sha256": "39bb08920c589704800d2600ff32eb4d5f8414626711fa03bbc9a3c3ee27a041"},
+    {"path": "apps/web/src/components/professor/professor-delivery-workspace.tsx", "sha256": "1ac633096b2b8b864014c3b5227de5dae3ccb5ef24f4fdb211115c038ea0fba1"},
+    {"path": "apps/web/src/lib/api/professor.ts", "sha256": "ecf524485b0406e535c4046df5f2a5a7bd8c2f20d9ee6b16e40c68777d87cd3d"},
+    {"path": "compose.staging.yml", "sha256": "b9a8997ac4be86dc2addf52092105677f2c3f17f315318bd3f116bc2a897426b"},
+    {"path": "deploy/Dockerfile", "sha256": "448f08ce83b4a21132b7920e28a19da7938a58151ea25af085c4ed280de68ce2"},
+    {"path": "deploy/Caddyfile", "sha256": "eca977a575bb99be7fcf46fd9ee609f986b4ee55d0850e12de842491a851225b"},
+    {"path": "docs/deployment.md", "sha256": "f6c6b882f5af6cf1eafa780154812091d1716c63372c21e31353a5389ff23c7e"},
+    {"path": "docs/deployment-threat-model.md", "sha256": "473d02994987bf3303d980412604661e32f14dcd5cf31403936180782a399c18"}
+  ],
+  "reproduction_commands": [
+    "npm run check",
+    "npm run audit:dependencies",
+    "npm run verify:deployable-foundation",
+    "npm run benchmark:deployable-foundation-development",
+    "npm run verify:deployable-freeze"
+  ],
+  "rollback": {
+    "product": "A0-local-demo",
+    "generator": "deterministic-grounded-generator-v1",
+    "retriever": "bm25-v1",
+    "deployment": "previous image tag and untouched previous data volume"
+  },
+  "change_control": "Any bound implementation, configuration, evidence interpretation, or external-gate status change requires a new freeze ID. Do not rewrite this manifest.",
+  "private_or_heldout_data_read": false,
+  "external_model_called": false
+}

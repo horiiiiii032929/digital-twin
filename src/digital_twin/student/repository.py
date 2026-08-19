@@ -19,6 +19,7 @@ from src.digital_twin.student.models import (
     ReleaseEvaluationStatus,
     StudentReleaseStatus,
 )
+from src.digital_twin.student.migrations import apply_migrations
 from src.digital_twin.tutor_policy import TutorPolicy
 
 
@@ -46,6 +47,12 @@ class StudentRepository(Protocol):
     def list_student_courses(
         self, account_id: str
     ) -> list[tuple[Course, DigitalTwinRelease]]: ...
+
+    def list_professor_courses(self, account_id: str) -> list[Course]: ...
+
+    def list_course_memberships(self, course_id: str) -> list[CourseMembership]: ...
+
+    def list_course_releases(self, course_id: str) -> list[DigitalTwinRelease]: ...
 
     def save_conversation(self, conversation: Conversation) -> Conversation: ...
 
@@ -96,129 +103,22 @@ class SQLiteStudentRepository:
         self._connection = sqlite3.connect(self.path, check_same_thread=False)
         self._connection.row_factory = sqlite3.Row
         self._connection.execute("PRAGMA foreign_keys = ON")
+        self._connection.execute("PRAGMA busy_timeout = 5000")
+        if self.path != ":memory:":
+            self._connection.execute("PRAGMA journal_mode = WAL")
         self._initialize()
 
     def close(self) -> None:
         with self._lock:
             self._connection.close()
 
+    def healthcheck(self) -> bool:
+        with self._lock:
+            return self._connection.execute("SELECT 1").fetchone()[0] == 1
+
     def _initialize(self) -> None:
-        schema = """
-        CREATE TABLE IF NOT EXISTS accounts (
-            id TEXT PRIMARY KEY,
-            role TEXT NOT NULL,
-            status TEXT NOT NULL
-        );
-        CREATE TABLE IF NOT EXISTS courses (
-            id TEXT PRIMARY KEY,
-            title TEXT NOT NULL,
-            owner_professor_id TEXT NOT NULL REFERENCES accounts(id)
-        );
-        CREATE TABLE IF NOT EXISTS memberships (
-            account_id TEXT NOT NULL REFERENCES accounts(id),
-            course_id TEXT NOT NULL REFERENCES courses(id),
-            role TEXT NOT NULL,
-            active INTEGER NOT NULL,
-            PRIMARY KEY (account_id, course_id)
-        );
-        CREATE TABLE IF NOT EXISTS releases (
-            id TEXT PRIMARY KEY,
-            course_id TEXT NOT NULL REFERENCES courses(id),
-            profile_id TEXT NOT NULL,
-            profile_version TEXT NOT NULL,
-            policy_version INTEGER NOT NULL,
-            policy_json TEXT NOT NULL,
-            status TEXT NOT NULL,
-            evaluation_status TEXT NOT NULL,
-            created_at TEXT NOT NULL
-        );
-        CREATE TABLE IF NOT EXISTS release_chunks (
-            release_id TEXT NOT NULL REFERENCES releases(id) ON DELETE CASCADE,
-            chunk_id TEXT NOT NULL,
-            chunk_json TEXT NOT NULL,
-            PRIMARY KEY (release_id, chunk_id)
-        );
-        CREATE TABLE IF NOT EXISTS conversations (
-            id TEXT PRIMARY KEY,
-            student_id TEXT NOT NULL REFERENCES accounts(id),
-            course_id TEXT NOT NULL REFERENCES courses(id),
-            release_id TEXT NOT NULL REFERENCES releases(id),
-            created_at TEXT NOT NULL,
-            updated_at TEXT NOT NULL
-        );
-        CREATE TABLE IF NOT EXISTS messages (
-            id TEXT PRIMARY KEY,
-            conversation_id TEXT NOT NULL REFERENCES conversations(id),
-            role TEXT NOT NULL,
-            content TEXT NOT NULL,
-            action TEXT NOT NULL,
-            trace_json TEXT,
-            client_request_id TEXT,
-            response_to_message_id TEXT REFERENCES messages(id),
-            created_at TEXT NOT NULL
-        );
-        CREATE UNIQUE INDEX IF NOT EXISTS messages_request_unique
-            ON messages(conversation_id, client_request_id)
-            WHERE client_request_id IS NOT NULL;
-        CREATE TABLE IF NOT EXISTS citations (
-            id TEXT PRIMARY KEY,
-            message_id TEXT NOT NULL REFERENCES messages(id),
-            course_id TEXT NOT NULL REFERENCES courses(id),
-            release_id TEXT NOT NULL REFERENCES releases(id),
-            source_artifact_id TEXT NOT NULL,
-            source_document_id TEXT NOT NULL,
-            source_version INTEGER NOT NULL,
-            title TEXT NOT NULL,
-            locator TEXT NOT NULL,
-            source_checksum TEXT,
-            page INTEGER,
-            region_id TEXT,
-            region_kind TEXT,
-            bounding_box_json TEXT,
-            crop_ref TEXT
-        );
-        CREATE TABLE IF NOT EXISTS audit_events (
-            id TEXT PRIMARY KEY,
-            event_type TEXT NOT NULL,
-            account_id TEXT,
-            course_id TEXT,
-            release_id TEXT,
-            conversation_id TEXT,
-            details_json TEXT NOT NULL,
-            created_at TEXT NOT NULL
-        );
-        """
-        with self._lock, self._connection:
-            self._connection.executescript(schema)
-            release_columns = {
-                row["name"]
-                for row in self._connection.execute(
-                    "PRAGMA table_info(releases)"
-                ).fetchall()
-            }
-            if "evaluation_status" not in release_columns:
-                self._connection.execute(
-                    "ALTER TABLE releases ADD COLUMN evaluation_status TEXT "
-                    "NOT NULL DEFAULT 'passed'"
-                )
-            citation_columns = {
-                row["name"]
-                for row in self._connection.execute(
-                    "PRAGMA table_info(citations)"
-                ).fetchall()
-            }
-            for column, column_type in (
-                ("source_checksum", "TEXT"),
-                ("page", "INTEGER"),
-                ("region_id", "TEXT"),
-                ("region_kind", "TEXT"),
-                ("bounding_box_json", "TEXT"),
-                ("crop_ref", "TEXT"),
-            ):
-                if column not in citation_columns:
-                    self._connection.execute(
-                        f"ALTER TABLE citations ADD COLUMN {column} {column_type}"
-                    )
+        with self._lock:
+            apply_migrations(self._connection)
 
     def save_account(self, account: Account) -> Account:
         with self._lock, self._connection:
@@ -334,6 +234,41 @@ class SQLiteStudentRepository:
                 result.append((course, release))
         return result
 
+    def list_professor_courses(self, account_id: str) -> list[Course]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT c.* FROM courses c
+                   JOIN memberships m ON m.course_id = c.id
+                   WHERE m.account_id = ? AND m.role = 'professor'
+                     AND m.active = 1 AND c.owner_professor_id = ?
+                   ORDER BY c.title, c.id""",
+                (account_id, account_id),
+            ).fetchall()
+        return [Course.model_validate(dict(row)) for row in rows]
+
+    def list_course_memberships(self, course_id: str) -> list[CourseMembership]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT * FROM memberships WHERE course_id = ?
+                   ORDER BY role, account_id""",
+                (course_id,),
+            ).fetchall()
+        memberships: list[CourseMembership] = []
+        for row in rows:
+            value = dict(row)
+            value["active"] = bool(value["active"])
+            memberships.append(CourseMembership.model_validate(value))
+        return memberships
+
+    def list_course_releases(self, course_id: str) -> list[DigitalTwinRelease]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT * FROM releases WHERE course_id = ?
+                   ORDER BY created_at DESC, id DESC""",
+                (course_id,),
+            ).fetchall()
+        return [self._release(row) for row in rows]
+
     def save_conversation(self, conversation: Conversation) -> Conversation:
         with self._lock, self._connection:
             self._connection.execute(
@@ -352,9 +287,7 @@ class SQLiteStudentRepository:
         return conversation.model_copy(deep=True)
 
     def get_conversation(self, conversation_id: str) -> Conversation | None:
-        row = self._one(
-            "SELECT * FROM conversations WHERE id = ?", (conversation_id,)
-        )
+        row = self._one("SELECT * FROM conversations WHERE id = ?", (conversation_id,))
         return Conversation.model_validate(dict(row)) if row else None
 
     def list_messages(self, conversation_id: str) -> list[Message]:
@@ -468,9 +401,7 @@ class SQLiteStudentRepository:
             ).fetchall()
         return [self._audit_event(row) for row in rows]
 
-    def set_release_status(
-        self, release_id: str, status: StudentReleaseStatus
-    ) -> None:
+    def set_release_status(self, release_id: str, status: StudentReleaseStatus) -> None:
         with self._lock, self._connection:
             self._connection.execute(
                 "UPDATE releases SET status = ? WHERE id = ?",

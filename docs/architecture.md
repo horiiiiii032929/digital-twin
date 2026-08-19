@@ -35,8 +35,9 @@ Student
      clarification, refusal, or no-evidence response
 ```
 
-The final project runs locally and is packaged for later hosting. Public signup,
-institutional SSO, LMS coupling, and public hosting are not required.
+The final project retains a local demo and now has a single-host staging
+package. Public signup, institutional SSO, and LMS coupling are not required;
+public HTTPS staging is required before the deployable foundation closes.
 
 ## Runtime boundaries
 
@@ -62,13 +63,16 @@ services/
   embeddings, reranking, generation, persistence, and storage adapters
 ```
 
-The repository now contains a bounded synthetic-account implementation of
-course membership, durable conversation state, and release publication with
-evaluation, withdrawal, and rollback gates. The onboarding session store and
-synthetic account header are still prototype boundaries; credentialed identity,
-full professor/admin lifecycle, production persistence, and operational
-adapters remain future release work. This bounded implementation must not be
-described as production authentication or the final deployment architecture.
+The repository now contains two explicit profiles. `A0-local-demo` retains the
+synthetic account header and in-memory onboarding state. In
+`A1-single-node-staging`, administrators invite credentialed accounts, opaque
+digest-only cookie sessions determine identity, professor onboarding is owned
+and durable, SQLite schema v5 stores transactional course/release/conversation
+state, a content-addressed volume stores source bytes, and a leased worker runs
+idempotent ingestion. Caddy serves the role-routed web app and same-origin API
+over automatic HTTPS. A1 passed the local 41/41 development qualification but
+is not a released production architecture until the external host rehearsal
+and downstream pilot gates pass.
 
 ## Core domain model
 
@@ -173,6 +177,8 @@ new draft. It never mutates a published release silently.
 See [evaluation-data-flow-and-threat-model.md](evaluation-data-flow-and-threat-model.md)
 for the current detailed research boundary. It must receive a versioned
 successor before external course-data use.
+See [deployment-threat-model.md](deployment-threat-model.md) for the credential,
+host, object, queue, backup, and optional provider boundary implemented by A1.
 
 ## Failure and recovery design
 
@@ -210,16 +216,14 @@ They remain traceable but are never treated as current instructions.
 
 ## Open decisions
 
-- production persistence migration, backup, and restore design beyond the
-  accepted local SQLite R3 foundation;
-- invite/session implementation and credential reset;
-- local private-file storage boundary;
-- exact embedding, reranking, and generator providers;
-- concurrent conversation orchestration and capacity beyond the accepted
-  single-process idempotent request boundary;
-- evaluation release schema and rollback mechanics;
-- hosting topology after the local final project; and
-- the privacy-approved external course-data path.
+- public staging host/domain, certificate rehearsal, and approved off-host
+  backup location;
+- institutional SSO/MFA and a managed database/object/queue boundary before
+  horizontal or higher-risk deployment;
+- selected retrieval/generator capacity with representative concurrent load;
+- external alert delivery and provider-data approval for private course use;
+- real PDF/OCR/layout qualification and human professor/student usability; and
+- the privacy-approved pilot and release-candidate path.
 
 Each decision requires a prospective comparison or architecture record before
 selection.

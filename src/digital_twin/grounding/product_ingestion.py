@@ -37,6 +37,7 @@ class CourseSourceIngestionResult(BaseModel):
     approval: ApprovalRecord
     bundle: ParsedDocumentBundle
     chunks: list[DocumentChunk] = Field(default_factory=list)
+    stored_source_ref: str = Field(min_length=1)
 
 
 class LocalCourseSourceIngestionService:
@@ -146,7 +147,8 @@ class LocalCourseSourceIngestionService:
                 str(version),
                 checksum,
             )
-            temporary_path.replace(self.source_root / f"{final_name}.pdf")
+            final_path = self.source_root / f"{final_name}.pdf"
+            temporary_path.replace(final_path)
         except Exception:
             temporary_path.unlink(missing_ok=True)
             raise
@@ -156,6 +158,7 @@ class LocalCourseSourceIngestionService:
             approval=approval,
             bundle=bundle,
             chunks=chunks,
+            stored_source_ref=f"source://{final_path.name}",
         )
 
 

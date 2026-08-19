@@ -4,7 +4,9 @@ Status date: 2026-08-19
 
 This Project tracks the transition from an evaluated local prototype to a
 deployed, invite-only Course Digital Twin that real professors can configure
-and publish and authorized students can use.
+and publish and authorized students can use. Completed cards are archived from
+the live view, not deleted; their issues, PRs, results, and decisions remain the
+historical record.
 
 ## Current position
 
@@ -20,9 +22,12 @@ and publish and authorized students can use.
   historical held-out split remains closed.
 - Professor fidelity remains `Refine / Paused`; the prior C0-C3 comparison is
   invalid for selection and its held-out split remains closed.
-- Credentialed identity, durable production storage, source jobs, deployment,
-  observability, backup/restore, capacity, and human workflow evidence remain
-  incomplete.
+- #88 and draft PR #93 passed the local/container foundation checks, but public
+  host/domain selection, trusted TLS, target-host restore, and the public
+  walkthrough remain externally blocked.
+- The professor accepted the proposed evaluation approach and recommended a
+  separate factual-QA dataset near 10,000 cases using multiple LLMs. #87 is now
+  the current unblocked execution item.
 
 ## Product goal
 
@@ -52,18 +57,20 @@ The deployed pilot must provide:
 
 ## Critical path
 
-1. #85 corrected and hardened multimodal evaluation (`Done / Refine`).
-2. #86 built the region-aware multimodal product foundation (`Done / Refine`).
-   Gemma remains excluded; any replacement model must be qualified
-   prospectively.
-3. #88 is the next item and replaces prototype infrastructure with a deployable
-   foundation.
-4. #87 then builds a larger permission-safe dummy document corpus and a separate
-   factual QA benchmark approaching 10,000 cases, including a multimodal slice.
-5. #24, #9, and #25 provide fidelity, operational, and deployed end-to-end
-   evidence.
-6. #10 runs only after consent/privacy/recruitment approval and validates real
+1. #87 freezes and validates a bounded source-linked factual-QA pilot, then
+   scales the same process toward 10,000 cases, including a multimodal slice.
+2. #88 remains active but externally blocked; resume its public deployment
+   gates when a host and domain are selected.
+3. #24 calibrates Professor Digital Twin fidelity against independent expert
+   labels, separately from factual QA.
+4. #9 and #25 provide target-host operational and deployed end-to-end evidence
+   after their dependencies clear.
+5. #10 runs only after consent/privacy/recruitment approval and validates real
    workflows without converting usability into a learning-outcome claim.
+
+Issues #85 and #86 are completed `Refine` history and are archived from the
+live view. Gemma remains excluded; any replacement model must be qualified
+prospectively.
 
 Product goal #8 is the parent. GitHub blocked-by links encode the sequence.
 Issues #13 and #44 retain report/presentation and professor communication.

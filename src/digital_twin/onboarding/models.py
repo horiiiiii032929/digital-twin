@@ -15,6 +15,7 @@ from src.digital_twin.tutor_policy import (
 
 class OnboardingSession(BaseModel):
     session_id: str
+    owner_account_id: str | None = None
     current_step: str
     answers: dict[str, str] = Field(default_factory=dict)
     messages: list[ChatMessage] = Field(default_factory=list)

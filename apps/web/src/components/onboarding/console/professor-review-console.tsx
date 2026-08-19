@@ -18,6 +18,7 @@ import {
   BookOpen,
   FlaskConical,
   Menu,
+  PackageCheck,
   PanelRightClose,
   PanelRightOpen,
   X,
@@ -58,9 +59,11 @@ type InspectorMode = ReviewStageId | "activity"
 export function ProfessorReviewConsole({
   controller,
   supervisorDemo = false,
+  onOpenDelivery,
 }: {
   controller: OnboardingController
   supervisorDemo?: boolean
+  onOpenDelivery?: () => void
 }) {
   const {
     session,
@@ -196,6 +199,17 @@ export function ProfessorReviewConsole({
           />
 
           <div className="mt-auto space-y-1 border-t p-3">
+            {onOpenDelivery ? (
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full justify-start"
+                onClick={onOpenDelivery}
+              >
+                <PackageCheck data-icon="inline-start" />
+                Course delivery
+              </Button>
+            ) : null}
             <Button
               type="button"
               variant="ghost"
@@ -294,6 +308,7 @@ export function ProfessorReviewConsole({
         inspectorOpeningRef={inspectorOpeningFromMenuRef}
         onSelectStage={openStage}
         onOpenActivity={openActivity}
+        onOpenDelivery={onOpenDelivery}
       />
 
       <DialogPrimitive.Root
@@ -473,6 +488,7 @@ function ProfessorMobileMenu({
   inspectorOpeningRef,
   onSelectStage,
   onOpenActivity,
+  onOpenDelivery,
 }: {
   open: boolean
   steps: ReturnType<typeof getStepStates>
@@ -483,6 +499,7 @@ function ProfessorMobileMenu({
   inspectorOpeningRef: RefObject<boolean>
   onSelectStage: (stage: ReviewStageId) => void
   onOpenActivity: () => void
+  onOpenDelivery?: () => void
 }) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
@@ -520,6 +537,20 @@ function ProfessorMobileMenu({
             onSelectStage={onSelectStage}
           />
           <div className="mt-auto space-y-1 border-t p-3">
+            {onOpenDelivery ? (
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full justify-start"
+                onClick={() => {
+                  onOpenChange(false)
+                  onOpenDelivery()
+                }}
+              >
+                <PackageCheck data-icon="inline-start" />
+                Course delivery
+              </Button>
+            ) : null}
             <Button
               type="button"
               variant="ghost"

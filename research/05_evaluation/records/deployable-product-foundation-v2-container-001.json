@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v2-container-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v2-container",
+  "corpus_id": "synthetic-network-security-one-pdf-v1",
+  "code_revision": "1fcd6fd94747dc484ecf692271ff6398845706eb",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v1",
+        "version": "v1",
+        "configuration": {
+          "compose_worker_build": "duplicate-api-tag-export",
+          "staging_entrypoint": "eager-demo-store-import",
+          "web_runtime_user": "root",
+          "container_build_claimed": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "container-build-pass-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "live-https-workflow-pass-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "reproducible-container-build",
+          "passed": false,
+          "evidence": "API and worker raced while exporting the same image tag."
+        },
+        {
+          "name": "live-credentialed-https-workflow",
+          "passed": false,
+          "evidence": "The ASGI entrypoint touched the legacy demo path and could not start the staging API."
+        },
+        {
+          "name": "restart-and-original-volume-rollback",
+          "passed": false,
+          "evidence": "No live workflow existed to verify after a container restart."
+        },
+        {
+          "name": "clean-volume-backup-restore",
+          "passed": false,
+          "evidence": "The unstartable control image could not complete a clean-volume restore rehearsal."
+        },
+        {
+          "name": "least-privilege-runtime",
+          "passed": false,
+          "evidence": "The initial Caddy image ran as root."
+        },
+        {
+          "name": "log-content-exclusion",
+          "passed": false,
+          "evidence": "A complete live control journey did not exist for the required log-content scan."
+        }
+      ],
+      "failures_by_category": {
+        "deployment": 1,
+        "configuration": 1,
+        "security": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v2",
+        "version": "v2",
+        "configuration": {
+          "identity": "scrypt-opaque-secure-cookie",
+          "database": "sqlite-wal-schema-v5",
+          "object_store": "content-addressed-filesystem-v1",
+          "queue": "sqlite-leased-worker-v1",
+          "web_proxy": "non-root-caddy-2.10-automatic-https",
+          "generator_mode": "deterministic-network-free",
+          "api_image_sha256": "f879ae4cb275174b9b233a5a7276a6510cec3453dc16a83f40f3891fbe3bde42",
+          "web_image_sha256": "cb87eb79cdbbda694c864b220f76ae008446535a0308b3f068103d555976a582"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "container-build-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "live-https-workflow-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "reproducible-container-build",
+          "passed": true,
+          "evidence": "The documented multi-stage Compose build exported one API and one web image."
+        },
+        {
+          "name": "live-credentialed-https-workflow",
+          "passed": true,
+          "evidence": "The final image passed 15/15 professor-upload-to-student-citation checks through Caddy HTTPS."
+        },
+        {
+          "name": "restart-and-original-volume-rollback",
+          "passed": true,
+          "evidence": "The untouched original project passed 5/5 state and citation replay checks after restart."
+        },
+        {
+          "name": "clean-volume-backup-restore",
+          "passed": true,
+          "evidence": "A schema-v5, 13-file checksum-verified archive restored into a separate project and passed 5/5 replay checks."
+        },
+        {
+          "name": "least-privilege-runtime",
+          "passed": true,
+          "evidence": "API/worker run as app and Caddy runs as UID/GID 1000 caddy."
+        },
+        {
+          "name": "log-content-exclusion",
+          "passed": true,
+          "evidence": "The final 245-line container log scan found no synthetic credential or uploaded course sentence."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging-v2",
+    "rationale": "The corrected images built and passed the complete live HTTPS, clean restore, and original-volume rollback journey. Public DNS, trusted certificate issuance, and target-host rehearsal remain external gates.",
+    "limitations": [
+      "The run used synthetic accounts, one authored PDF, localhost, and one development host.",
+      "Caddy used its local CA rather than a publicly trusted certificate.",
+      "The clean restore used a separate Compose project on the same host, not the eventual target host.",
+      "The result excludes real-course quality, human usability, external generation, concurrency, multi-host scale, and a production SLA."
+    ]
+  }
+}

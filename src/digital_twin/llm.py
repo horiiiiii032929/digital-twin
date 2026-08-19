@@ -36,6 +36,10 @@ class LlmUnavailableError(LlmError):
     code = "unavailable"
 
 
+class LlmBudgetExceededError(LlmUnavailableError):
+    code = "budget-exceeded"
+
+
 class LlmConfigurationError(LlmError):
     code = "configuration"
 
