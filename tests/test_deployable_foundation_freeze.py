@@ -12,10 +12,18 @@ MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v1.json"
 )
+V2_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v2.json"
+)
 
 
 def _manifest() -> dict:
     return json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v2_manifest() -> dict:
+    return json.loads(V2_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -26,6 +34,26 @@ def test_current_deployable_foundation_freeze_validates() -> None:
     assert result["local_gates"] == "41/41"
     assert result["external_gates_pending"] == 3
     assert result["artifact_bindings"] == 30
+    assert result["current_match_required"] is False
+
+
+def test_current_container_qualified_freeze_validates() -> None:
+    result = validate_deployable_freeze(_v2_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "go-deeper"
+    assert result["local_gates"] == "25/25-live-https"
+    assert result["external_gates_pending"] == 3
+    assert result["artifact_bindings"] == 37
+    assert result["current_match_required"] is True
+
+
+def test_container_qualified_freeze_rejects_image_identity_drift() -> None:
+    manifest = _v2_manifest()
+    manifest["container_build"]["web_image_sha256"] = "0" * 64
+
+    with pytest.raises(ValueError, match="container-build evidence drifted"):
+        validate_deployable_freeze(manifest, root=ROOT)
 
 
 def test_deployable_freeze_rejects_bound_artifact_hash_drift() -> None:

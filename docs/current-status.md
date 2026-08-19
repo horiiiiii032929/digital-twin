@@ -40,6 +40,9 @@ journey checks, 5/5 after a separate-project clean restore, and 5/5 after
 switching back to the untouched original volume. Local Caddy TLS is now proven;
 public DNS/trusted certificate issuance and the same rehearsal on the selected
 host remain external gates.
+The current candidate is bound by `deployable-product-foundation-freeze-v2` at
+evidence revision `7e980a6`; V1 remains a historical freeze for the earlier
+unclaimed-build result.
 
 GitHub Project 1 is reorganized around product goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
