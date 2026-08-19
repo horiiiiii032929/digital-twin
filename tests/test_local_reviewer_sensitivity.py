@@ -65,10 +65,13 @@ class _PerfectTransport:
             for pair in assets["dataset"]["pairs"]
         ]
         self.calls = 0
+        self.visual_calls = 0
 
     async def review(self, *, prompt, schema, image_bytes):
-        del schema, image_bytes
+        del schema
         json.loads(prompt)
+        if image_bytes:
+            self.visual_calls += 1
         pair_index, condition_index = divmod(self.calls, 2)
         self.calls += 1
         value = (
@@ -149,9 +152,20 @@ async def test_perfect_transport_passes_all_prospective_gates():
     assets = validate_assets()
     transport = _PerfectTransport(assets)
 
-    payload = await execute(assets, transport)
+    def synthetic_image_loader(pair, source_map):
+        del source_map
+        if pair["source_mode"] == "approved-image":
+            return [b"synthetic-png-bytes"]
+        return []
+
+    payload = await execute(
+        assets,
+        transport,
+        image_loader=synthetic_image_loader,
+    )
 
     assert transport.calls == 22
+    assert transport.visual_calls == 12
     assert payload["metrics"]["structured_completion_rate"] == 1.0
     assert payload["metrics"]["critical_defect_recall"] == 1.0
     assert payload["metrics"]["clean_control_acceptance_rate"] == 1.0

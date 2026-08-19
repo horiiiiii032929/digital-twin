@@ -15,7 +15,7 @@ import urllib.request
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, Callable, Protocol
 
 from src.digital_twin.model_policy import require_registered_current_model
 
@@ -553,7 +553,12 @@ def _image_bytes(pair: dict[str, Any], source_map: dict[str, dict[str, Any]]) ->
 
 
 async def execute(
-    assets: dict[str, Any], transport: ReviewTransport
+    assets: dict[str, Any],
+    transport: ReviewTransport,
+    *,
+    image_loader: Callable[
+        [dict[str, Any], dict[str, dict[str, Any]]], list[bytes]
+    ] = _image_bytes,
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     dataset = assets["dataset"]
@@ -563,7 +568,7 @@ async def execute(
     call_count = 0
     for pair in dataset["pairs"]:
         blueprint = assets["blueprint_map"][pair["blueprint_id"]]
-        images = _image_bytes(pair, assets["source_map"])
+        images = image_loader(pair, assets["source_map"])
         for condition in ("clean", "defect"):
             if call_count >= instrument["execution"]["call_limit"]:
                 raise ReviewerSensitivityError("frozen call limit reached")
