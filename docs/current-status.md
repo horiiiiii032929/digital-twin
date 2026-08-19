@@ -33,6 +33,13 @@ restore, and the staging walkthrough remain before #88 can close.
 The tested local candidate is frozen at revision `e619df9` by
 `deployable-product-foundation-freeze-v1`; its three external gates remain
 explicitly pending.
+The subsequent container rehearsal found and corrected a duplicate-image build
+race and an eager demo-store import, then hardened Caddy to a non-root user. At
+clean revision `1fcd6fd`, the exact images built and passed 15/15 live HTTPS
+journey checks, 5/5 after a separate-project clean restore, and 5/5 after
+switching back to the untouched original volume. Local Caddy TLS is now proven;
+public DNS/trusted certificate issuance and the same rehearsal on the selected
+host remain external gates.
 
 GitHub Project 1 is reorganized around product goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
@@ -54,7 +61,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice plus 41/41 credentialed, durable, recoverable foundation checks; deterministic preflight and A0 demo rollback retained | Public HTTPS/host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
+| Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
 | Large factual QA | Planned | Professor suggestion and issue #87 define a separate scale benchmark | Larger dummy document corpus, multimodal slice, multi-model generation/cross-check, source validation, human audit, and result |
 
 ## Immediate critical path
@@ -63,7 +70,7 @@ continues to hold report, presentation, and professor-communication work.
 | ---: | --- | --- | --- |
 | 1 | [#85 Correct multimodal evaluator](https://github.com/horiiiiii032929/digital-twin/issues/85) | Done / Refine | Metric suite corrected and tested; historical V3 analysis corrected; Drop unchanged; held-out unopened |
 | 2 | [#86 Region-aware multimodal product grounding](https://github.com/horiiiiii032929/digital-twin/issues/86) | Done / Refine | Foundation, product ingestion, crop citations, and prospective decision merged in PR #91; no multimodal profile selected |
-| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper | Local 41/41 plus responsive professor delivery QA passed; complete public DNS/TLS, clean-host restore, and staging walkthrough before closure |
+| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper | Local 41/41, exact image build, 25/25 local-HTTPS/recovery checks, and responsive professor delivery QA passed; complete public DNS/TLS, target-host restore, and public staging walkthrough before closure |
 | 4 | [#87 Large factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | Todo / P3 after #88 | Quality-gated pilot and scale run approaching 10,000 source-linked factual cases |
 | 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / P3 | Automated evaluator calibrated against independent expert labels and valid prospective comparison |
 | 6 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence |
