@@ -28,6 +28,10 @@ V5_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v5.json"
 )
+V6_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v6.json"
+)
 
 
 def _manifest() -> dict:
@@ -48,6 +52,10 @@ def _v4_manifest() -> dict:
 
 def _v5_manifest() -> dict:
     return json.loads(V5_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v6_manifest() -> dict:
+    return json.loads(V6_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -94,7 +102,7 @@ def test_historical_provider_registry_container_freeze_validates() -> None:
     assert result["current_match_required"] is False
 
 
-def test_current_local_multimodel_policy_container_freeze_validates() -> None:
+def test_historical_local_multimodel_policy_container_freeze_validates() -> None:
     result = validate_deployable_freeze(_v5_manifest(), root=ROOT)
 
     assert result["status"] == "passed"
@@ -104,7 +112,31 @@ def test_current_local_multimodel_policy_container_freeze_validates() -> None:
     )
     assert result["external_gates_pending"] == 3
     assert result["artifact_bindings"] == 67
+    assert result["current_match_required"] is False
+
+
+def test_current_stable_boundary_container_freeze_validates() -> None:
+    result = validate_deployable_freeze(_v6_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "go-deeper"
+    assert result["local_gates"] == (
+        "113/113-policy-provider-and-30/30-live-https"
+    )
+    assert result["external_gates_pending"] == 3
+    assert result["artifact_bindings"] == 67
+    assert result["current_match_bindings"] == 45
     assert result["current_match_required"] is True
+
+
+def test_stable_boundary_excludes_append_only_registry_from_current_match() -> None:
+    manifest = _v6_manifest()
+    bindings = {item["path"]: item for item in manifest["artifact_bindings"]}
+
+    assert bindings["research/05_evaluation/result-registry.md"][
+        "current_match_required"
+    ] is False
+    assert bindings["compose.staging.yml"]["current_match_required"] is True
 
 
 def test_container_qualified_freeze_rejects_image_identity_drift() -> None:

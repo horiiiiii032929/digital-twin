@@ -48,7 +48,20 @@ OpenRouter DeepSeek/Mistral routes; and retains exact Jina candidate identities.
 At clean revision `c28ae5f`, the requalified V5 package passed 113/113 focused
 policy/provider tests, 41/41 in-process checks, a clean image build, 15/15 live
 HTTPS checks, and three 5/5 restart/restore/rollback replays with zero model
-calls. V1-V4 remain historical evidence; a V5 freeze binds the current package.
+calls. V1-V5 remain historical evidence. The successor V6 freeze preserves the
+same qualified V5 implementation and
+evidence revision but narrows current-tree matching to 45 implementation and
+configuration artifacts. Append-only evaluation records remain revision-bound
+evidence without making every new research result invalidate the deployment
+package.
+
+The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
+synthetic-public method-development attempts. Both detected 11/11 planted
+defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
+clean visual controls and 11/11 derived failure labels, but falsely rejected
+one correct cross-course abstention, so the local model remains advisory-only
+and is not an autonomous acceptance gate. Direct DeepSeek remains the retained
+path; an exact OpenRouter independent reviewer is prospective and uncalled.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.

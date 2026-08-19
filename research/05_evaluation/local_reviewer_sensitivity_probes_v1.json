@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "dataset_id": "local-reviewer-sensitivity-probes-v1",
+  "status": "frozen",
+  "content_class": "synthetic-public",
+  "intended_use": "Paired development probes for a factual-QA diagnostic reviewer; not a general model benchmark or human-audit substitute.",
+  "source_corpus": {
+    "path": "research/05_evaluation/factual_qa_pilot_corpus_v1.json",
+    "sha256": "dd69703503b6ed0883e19e03330f9a4d98fa9c14056a71d7bdfdee0ed4aecd31"
+  },
+  "pairs": [
+    {
+      "pair_id": "text-session-timing",
+      "blueprint_id": "fqa-p01",
+      "source_mode": "approved-text",
+      "source_unit_ids": ["browser-session-lifecycle"],
+      "clean": {
+        "question": "When is the session identifier rotated?",
+        "answer": "The session identifier is rotated immediately after successful authentication.",
+        "action": "answer",
+        "citation_source_ids": ["browser-session-lifecycle"]
+      },
+      "defect": {
+        "question": "When is the session identifier rotated?",
+        "answer": "The session identifier is rotated immediately before authentication begins.",
+        "action": "answer",
+        "citation_source_ids": ["browser-session-lifecycle"],
+        "primary_failure": "wrong_factual_answer"
+      }
+    },
+    {
+      "pair_id": "text-multi-evidence",
+      "blueprint_id": "fqa-p06",
+      "source_mode": "approved-text",
+      "source_unit_ids": ["data-idempotency", "data-recovery-objectives"],
+      "clean": {
+        "question": "How does the service prevent duplicate application when a retry uses the same idempotency key and payload, and which objective limits how long service restoration may take?",
+        "answer": "The service returns the previously recorded outcome instead of applying the operation twice, and the recovery time objective limits restoration duration.",
+        "action": "answer",
+        "citation_source_ids": ["data-idempotency", "data-recovery-objectives"]
+      },
+      "defect": {
+        "question": "How does the service prevent duplicate application when a retry uses the same idempotency key and payload, and which objective limits how long service restoration may take?",
+        "answer": "The service returns the previously recorded outcome instead of applying the operation twice.",
+        "action": "answer",
+        "citation_source_ids": ["data-idempotency"],
+        "primary_failure": "incomplete_answer"
+      }
+    },
+    {
+      "pair_id": "boundary-no-evidence",
+      "blueprint_id": "fqa-p18",
+      "source_mode": "no-evidence",
+      "source_unit_ids": [],
+      "clean": {
+        "question": "What is the required password expiry interval?",
+        "answer": "The approved sources do not provide the requested information.",
+        "action": "abstain",
+        "citation_source_ids": []
+      },
+      "defect": {
+        "question": "What is the required password expiry interval?",
+        "answer": "Passwords must expire every 90 days.",
+        "action": "answer",
+        "citation_source_ids": [],
+        "primary_failure": "unsupported_no_evidence_answer"
+      }
+    },
+    {
+      "pair_id": "boundary-ambiguous",
+      "blueprint_id": "fqa-p21",
+      "source_mode": "approved-text",
+      "source_unit_ids": ["ml-calibration"],
+      "clean": {
+        "question": "What is the right confidence to use?",
+        "answer": "Could you specify the prediction or comparison set you are asking about?",
+        "action": "clarify",
+        "citation_source_ids": []
+      },
+      "defect": {
+        "question": "What is the right confidence to use?",
+        "answer": "The right confidence is 0.8.",
+        "action": "answer",
+        "citation_source_ids": ["ml-calibration"],
+        "primary_failure": "wrong_boundary_action"
+      }
+    },
+    {
+      "pair_id": "boundary-cross-course",
+      "blueprint_id": "fqa-p23",
+      "source_mode": "disallowed-distractor",
+      "source_unit_ids": ["data-recovery-objectives"],
+      "clean": {
+        "question": "In the browser-security course, what does the recovery time objective define?",
+        "answer": "The approved browser-security sources do not provide that information.",
+        "action": "abstain",
+        "citation_source_ids": []
+      },
+      "defect": {
+        "question": "In the browser-security course, what does the recovery time objective define?",
+        "answer": "It limits how long service restoration may take.",
+        "action": "answer",
+        "citation_source_ids": ["data-recovery-objectives"],
+        "primary_failure": "cross_course_leakage"
+      }
+    },
+    {
+      "pair_id": "visual-diagram-flow",
+      "blueprint_id": "fqa-p12",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-request-flow"],
+      "clean": {
+        "question": "Which component immediately precedes the course store in the diagram?",
+        "answer": "The gateway immediately precedes the course store.",
+        "action": "answer",
+        "citation_source_ids": ["visual-request-flow"]
+      },
+      "defect": {
+        "question": "Which component immediately precedes the course store in the diagram?",
+        "answer": "The client immediately precedes the course store.",
+        "action": "answer",
+        "citation_source_ids": ["visual-request-flow"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    },
+    {
+      "pair_id": "visual-latency-chart",
+      "blueprint_id": "fqa-p13",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-latency-chart"],
+      "clean": {
+        "question": "Which method has the highest shown warm-query latency, and what is the value?",
+        "answer": "M1 has the highest latency at 2.8 seconds.",
+        "action": "answer",
+        "citation_source_ids": ["visual-latency-chart"]
+      },
+      "defect": {
+        "question": "Which method has the highest shown warm-query latency, and what is the value?",
+        "answer": "M2 has the highest latency at 1.9 seconds.",
+        "action": "answer",
+        "citation_source_ids": ["visual-latency-chart"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    },
+    {
+      "pair_id": "visual-assessment-table",
+      "blueprint_id": "fqa-p14",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-assessment-table"],
+      "clean": {
+        "question": "What is the combined project and quiz weight in the table?",
+        "answer": "The project and quizzes together account for 65 percent.",
+        "action": "answer",
+        "citation_source_ids": ["visual-assessment-table"]
+      },
+      "defect": {
+        "question": "What is the combined project and quiz weight in the table?",
+        "answer": "The project and quizzes together account for 80 percent.",
+        "action": "answer",
+        "citation_source_ids": ["visual-assessment-table"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    },
+    {
+      "pair_id": "visual-softmax-equation",
+      "blueprint_id": "fqa-p15",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-softmax-equation"],
+      "clean": {
+        "question": "What values appear in the softmax denominator sum?",
+        "answer": "The denominator sums exponentiated logits across all classes.",
+        "action": "answer",
+        "citation_source_ids": ["visual-softmax-equation"]
+      },
+      "defect": {
+        "question": "What values appear in the softmax denominator sum?",
+        "answer": "The denominator contains only the exponentiated logit of the predicted class.",
+        "action": "answer",
+        "citation_source_ids": ["visual-softmax-equation"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    },
+    {
+      "pair_id": "visual-settings-screen",
+      "blueprint_id": "fqa-p16",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-settings-screen"],
+      "clean": {
+        "question": "Which setting is disabled in the screenshot?",
+        "answer": "Allow external providers is disabled.",
+        "action": "answer",
+        "citation_source_ids": ["visual-settings-screen"]
+      },
+      "defect": {
+        "question": "Which setting is disabled in the screenshot?",
+        "answer": "Share derived study notes is disabled.",
+        "action": "answer",
+        "citation_source_ids": ["visual-settings-screen"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    },
+    {
+      "pair_id": "visual-scanned-notice",
+      "blueprint_id": "fqa-p17",
+      "source_mode": "approved-image",
+      "source_unit_ids": ["visual-scanned-notice"],
+      "clean": {
+        "question": "When do submissions close in the scanned notice?",
+        "answer": "Submissions close Friday at 18:00.",
+        "action": "answer",
+        "citation_source_ids": ["visual-scanned-notice"]
+      },
+      "defect": {
+        "question": "When do submissions close in the scanned notice?",
+        "answer": "Submissions close Sunday at 12:00.",
+        "action": "answer",
+        "citation_source_ids": ["visual-scanned-notice"],
+        "primary_failure": "visual_evidence_mismatch"
+      }
+    }
+  ]
+}
