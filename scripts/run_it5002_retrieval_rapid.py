@@ -17,6 +17,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.model_policy import require_model_allowed
+
 from services.embeddings import Qwen3TextEmbedder
 from services.reranking import Qwen3Reranker
 from src.digital_twin.grounding import (
@@ -685,6 +687,7 @@ def _fuse_ranked_lists(
 
 
 def _decompose(query: str) -> list[str]:
+    require_model_allowed(DECOMPOSITION_MODEL)
     format_schema = {
         "type": "object",
         "properties": {

@@ -30,6 +30,7 @@ from scripts.validate_course_tutor_dataset import (
     validate_dataset,
     validate_schema,
 )
+from src.digital_twin.model_policy import require_model_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -507,6 +508,7 @@ def call_ollama(
     seed: int,
     thinking: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    require_model_allowed(model)
     _assert_local_ollama_url(url)
     request = urllib.request.Request(
         url,

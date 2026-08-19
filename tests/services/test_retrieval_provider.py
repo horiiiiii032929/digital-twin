@@ -17,6 +17,7 @@ from services.retrieval_provider import (
     bearer_headers,
 )
 from src.digital_twin.evaluation import load_provider_qualification_config
+from src.digital_twin.model_policy import ModelPolicyError
 
 
 CONFIG_PATH = (
@@ -209,3 +210,25 @@ def test_jina_adapters_reject_malformed_shapes_without_response_content() -> Non
 
     assert "secret" not in str(raised.value)
     assert "private query" not in str(raised.value)
+
+
+@pytest.mark.parametrize(
+    ("adapter", "model"),
+    (
+        (JinaTextEmbedder, "jina-embeddings-v4"),
+        (JinaReranker, "jina-reranker-v2-base-multilingual"),
+        (JinaTextEmbedder, "gemma3:4b"),
+    ),
+)
+def test_jina_adapters_reject_unregistered_or_prohibited_models(
+    adapter, model
+) -> None:
+    with pytest.raises(ModelPolicyError):
+        adapter(
+            "secret-token",
+            ledger=RetrievalUsageLedger(
+                max_cost_usd=1,
+                price_per_million_input_tokens_usd=1,
+            ),
+            model=model,
+        )

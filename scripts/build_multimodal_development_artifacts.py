@@ -23,6 +23,7 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     build_candidate_records,
     group_ocr_lines,
 )
+from src.digital_twin.model_policy import require_model_allowed
 
 
 SEALED_ROOT = ROOT / "data/processed/multimodal_retrieval_v1/sealed_v1"
@@ -92,6 +93,7 @@ def parse_ollama_json(output: str) -> dict[str, Any]:
 
 
 def describe_image(image_path: Path) -> tuple[dict[str, Any], float]:
+    require_model_allowed(DESCRIPTION_MODEL)
     started = time.perf_counter()
     environment = dict(os.environ)
     environment["OLLAMA_NOHISTORY"] = "1"

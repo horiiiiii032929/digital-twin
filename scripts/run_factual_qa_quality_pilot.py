@@ -26,6 +26,7 @@ from typing import Any, Protocol
 from dotenv import load_dotenv
 
 from services.llm import LiteLlmClient
+from src.digital_twin.model_policy import require_model_allowed
 from src.digital_twin.llm import LlmMessage
 
 
@@ -206,6 +207,7 @@ class OllamaJsonTransport:
     """Local deterministic JSON transport for the independent Qwen review."""
 
     def __init__(self, binding: dict[str, Any], *, url: str) -> None:
+        require_model_allowed(binding["model"])
         self.binding = binding
         self.url = _assert_local_ollama_url(url)
 

@@ -404,11 +404,14 @@ def test_anchor_machine_summary_computes_pairwise_repeat_agreement():
 def test_professor_fidelity_judge_records_qwen_digest(monkeypatch):
     monkeypatch.setattr(
         "scripts.judge_professor_fidelity.subprocess_run",
-        lambda command: "NAME ID SIZE MODIFIED\nqwen3:4b 359d7dd4bcda 2.5 GB now\n",
+        lambda command: (
+            "NAME ID SIZE MODIFIED\n"
+            "qwen3.5:9b-q4_K_M 6488c96fa5fa 6.6 GB now\n"
+        ),
     )
 
-    assert _model_digest("qwen3:4b") == "359d7dd4bcda"
-    assert JUDGE_MODELS == ("deepseek-v4-pro", "qwen3:4b")
+    assert _model_digest("qwen3.5:9b-q4_K_M") == "6488c96fa5fa"
+    assert JUDGE_MODELS == ("deepseek-v4-pro", "qwen3.5:9b-q4_K_M")
 
 
 def test_professor_fidelity_judge_uses_deepseek_v4_pro_json_thinking():
@@ -498,6 +501,7 @@ def test_active_professor_fidelity_commands_are_non_executing_and_exclude_gemma(
 
     assert commands
     assert all("gemma" not in command.casefold() for command in commands.values())
+    assert all("--model qwen3:4b" not in command for command in commands.values())
     assert "--execute" not in commands["preflight:professor-fidelity-development"]
     assert "--execute" not in commands["preflight:professor-fidelity-heldout"]
     assert "benchmark:professor-fidelity-development" not in commands
@@ -587,9 +591,13 @@ def test_post_audit_pipeline_preflight_is_non_executing_and_fail_closed():
     )
     assert result["active_primary_judge"]["attempt_id"] == "002"
     assert result["active_primary_judge"]["repeat_exact_agreement"] == 0.6875
-    assert result["active_sensitivity_judge"]["status"] == (
+    assert result["historical_sensitivity_judge"]["status"] == (
         "invalid-attempt-001-rerun-prohibited"
     )
+    assert result["prospective_sensitivity_judge"] == {
+        "model": "qwen3.5:9b-q4_K_M",
+        "status": "not-selected-requires-new-calibration",
+    }
     assert result["execution_policy"]["status"] == "paused"
     assert result["execution_policy"]["development_authorized"] is False
     assert result["execution_policy"]["heldout_authorized"] is False

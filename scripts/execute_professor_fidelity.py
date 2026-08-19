@@ -34,6 +34,7 @@ from scripts.professor_fidelity_scoring import (
 )
 from services.embeddings import Qwen3TextEmbedder
 from services.llm import LiteLlmClient
+from src.digital_twin.model_policy import LOCAL_GENERAL_MODEL
 from src.digital_twin.evaluation import ComponentKind, load_release_profile
 from src.digital_twin.grounding import (
     RetrievalHit,
@@ -488,7 +489,7 @@ def preflight(
         "primary_judge_credential_present": bool(
             os.environ.get("DEEPSEEK_API_KEY", "").strip()
         ),
-        "qwen_sensitivity_judge_present": "qwen3:4b" in models,
+        "qwen_sensitivity_judge_present": LOCAL_GENERAL_MODEL in models,
         "execution_enabled": not blockers,
         "private_text_emitted": False,
         "blockers": blockers,

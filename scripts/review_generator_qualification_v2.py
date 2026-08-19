@@ -14,6 +14,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.model_policy import require_model_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "research/05_evaluation/generator_qualification_v1_development.json"
@@ -340,6 +342,7 @@ def validate_stress_decision(probe: dict[str, Any], decision: dict[str, Any]) ->
 def call_ollama(
     *, url: str, prompt: str, seed: int
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    require_model_allowed(MODEL)
     _assert_local_ollama_url(url)
     request = urllib.request.Request(
         url,

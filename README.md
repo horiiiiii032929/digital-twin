@@ -56,6 +56,9 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run verify:technical-freeze`: validate the frozen experimental profile,
   registered evidence links, supported/unsupported claims, and artifact hashes.
 - `npm run check:docs`: validate repository-local Markdown links.
+- `npm run verify:model-policy`: verify exact current model bindings and prove
+  that Gemma, Claude, and retired general-Qwen execution paths are disabled
+  without calling a model.
 - `npm run verify:deployable-foundation`: validate the staging topology and run
   identity, migration, job, recovery, lifecycle, and security tests.
 - `npm run benchmark:deployable-foundation-development`: run the network-free
@@ -71,10 +74,6 @@ The project's technical standard, learning commitments, and strengthened Sprint
   lexical-coverage, and semantic-agreement evidence gates.
 - `npm run verify:generation`: run the deterministic generation, policy,
   citation, no-evidence, and provider-suppression regression set.
-- `npm run historical:benchmark:generation-gemma3 --
-  --confirm-historical-reproduction`: explicitly reproduce the retired,
-  unselected local Gemma 3 4B candidate and write ignored per-case output under
-  `reports/generated/`.
 - `npm run verify:evaluation-results`: validate the durable evaluation-result
   registry and its referenced artifacts.
 - `npm run verify:retrieval-v3-instruments`: validate the frozen IT5002
@@ -83,11 +82,9 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `uv run python -m scripts.run_factual_qa_quality_pilot`: validate the frozen
   synthetic-public factual-QA corpus, model roles, gates, and local reviewer
   binding without calling an external model.
-- `uv run python -m scripts.run_factual_qa_quality_pilot --execute --allow-external-provider`:
-  execute the bounded 24-case quality pilot using
-  DeepSeek V4 Pro, DeepSeek V4 Flash, and diagnostic local Qwen3; attempt 002
-  passed the bounded machine gates, and the command still refuses to scale or
-  overwrite recorded output.
+  Attempt 002 remains immutable evidence, but its retired Qwen3 binding cannot
+  execute again. Any new factual-QA iteration must use a new instrument with a
+  current, freshly calibrated reviewer.
 - `npm run verify:profile`: validate the versioned component profile.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.

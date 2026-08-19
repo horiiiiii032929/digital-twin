@@ -22,6 +22,11 @@ from typing import Any
 from dotenv import load_dotenv
 from openai import OpenAI, OpenAIError
 
+from src.digital_twin.model_policy import (
+    LOCAL_GENERAL_MODEL,
+    require_model_allowed,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env", override=False)
@@ -44,7 +49,7 @@ EXPECTED_ANCHOR_JUDGE_V4_PROBE_SHA256 = (
 LABELS = ("A", "B", "C", "D")
 VALID = {"pass", "partial", "fail"}
 CONDITIONS = ("C0", "C1", "C2", "C3")
-JUDGE_MODELS = ("deepseek-v4-pro", "qwen3:4b")
+JUDGE_MODELS = ("deepseek-v4-pro", LOCAL_GENERAL_MODEL)
 DEEPSEEK_MODEL = "deepseek-v4-pro"
 DEEPSEEK_DOCUMENTED_REVISION = "DeepSeek-V4-Pro-0813"
 DEEPSEEK_EXPECTED_FINGERPRINT = "a307abda487cd1b463329ccb945ce396"
@@ -199,6 +204,7 @@ def _ollama(
     *,
     seed: int,
 ) -> dict[str, Any]:
+    require_model_allowed(model)
     request = urllib.request.Request(
         "http://127.0.0.1:11434/api/generate",
         data=json.dumps(
@@ -245,6 +251,7 @@ class JudgeTransport:
         cost_stop_usd: float | None = None,
         deepseek_client: Any | None = None,
     ) -> None:
+        require_model_allowed(model)
         if model not in JUDGE_MODELS:
             raise JudgeError(f"unsupported judge model: {model}")
         self.model = model

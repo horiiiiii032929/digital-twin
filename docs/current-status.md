@@ -41,9 +41,14 @@ journey checks, 5/5 after a separate-project clean restore, and 5/5 after
 switching back to the untouched original volume. Local Caddy TLS is now proven;
 public DNS/trusted certificate issuance and the same rehearsal on the selected
 host remain external gates.
-The current candidate is bound by `deployable-product-foundation-freeze-v2` at
-evidence revision `7e980a6`; V1 remains a historical freeze for the earlier
-unclaimed-build result.
+The current candidate now uses model policy v2. It rejects Gemma, Claude, and
+retired local general-Qwen calls before provider I/O; retains direct DeepSeek;
+pins the exact prospective local `qwen3.5:9b-q4_K_M` artifact; controls optional
+OpenRouter DeepSeek/Mistral routes; and retains exact Jina candidate identities.
+At clean revision `c28ae5f`, the requalified V5 package passed 113/113 focused
+policy/provider tests, 41/41 in-process checks, a clean image build, 15/15 live
+HTTPS checks, and three 5/5 restart/restore/rollback replays with zero model
+calls. V1-V4 remain historical evidence; a V5 freeze binds the current package.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.
@@ -116,6 +121,13 @@ crops. Scanned PDFs work when an approved OCR provider is injected. Gemma
 remains excluded. A production OCR/layout or replacement vision model is
 selected only through a new prospective qualification and representative
 course evidence.
+
+The active model policy now blocks every Gemma and Claude call and all retired
+local general-Qwen calls before provider I/O. Direct DeepSeek V4 Flash/Pro and
+the selected task-specific Qwen3 Embedding binding remain current for their
+recorded roles. `qwen3.5:9b-q4_K_M` and exact OpenRouter DeepSeek/Mistral routes
+are prospective only; they require new project-specific quality evidence. See
+[the current model policy](../research/00_admin/2026-08-19-current-model-policy-v2.md).
 
 ## Large factual-QA interpretation
 

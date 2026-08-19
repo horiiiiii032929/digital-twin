@@ -10,6 +10,8 @@ from collections import Counter
 from datetime import UTC, datetime
 from typing import Any
 
+from src.digital_twin.model_policy import require_model_allowed
+
 from scripts.it5002_rapid_common import (
     DEVELOPMENT_PATH,
     HELDOUT_PATH,
@@ -784,6 +786,7 @@ def _ollama_json(
     temperature: float = 0.0,
     format_schema: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    require_model_allowed(model)
     payload = json.dumps(
         {
             "model": model,

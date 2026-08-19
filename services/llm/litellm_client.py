@@ -14,6 +14,7 @@ from src.digital_twin.llm import (
     LlmTimeoutError,
     LlmUnavailableError,
 )
+from src.digital_twin.model_policy import require_model_allowed
 
 
 _Completion = Callable[..., Awaitable[Any]]
@@ -35,8 +36,7 @@ class LiteLlmClient:
         completion: _Completion = litellm.acompletion,
         cost_calculator: _CostCalculator = litellm.completion_cost,
     ) -> None:
-        if not model.strip():
-            raise ValueError("model must not be empty")
+        model = require_model_allowed(model)
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
         if max_output_tokens < 1:
