@@ -26,6 +26,20 @@ Follow [the evaluation architecture](../../docs/evaluation-architecture.md)
 when proposing or replacing an implementation. Validate the current
 experimental profile with `npm run verify:profile`.
 
+The local Qwen reviewer qualification uses 22 paired synthetic-public probes,
+including six actual image pairs, to test defect detection rather than general
+model ranking. Validate hashes, labels, call limits, and source coverage without
+loading the model with:
+
+```bash
+uv run python -m scripts.run_local_reviewer_sensitivity
+```
+
+Adding `--execute` and the output path documented in the experiment plan calls
+only the exact local Qwen artifact. Its result can permit diagnostic first-pass
+use only; it cannot clear a human audit, select an external judge, or authorize
+factual-QA scaling.
+
 The visual study-material groundwork is defined by a strict
 [`multimodal retrieval schema`](multimodal_retrieval_v1.schema.json), a
 [`public synthetic fixture`](multimodal_retrieval_v1_synthetic.json), and six

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "instrument_id": "local-qwen-reviewer-sensitivity-v1-development-001",
+  "status": "frozen-pending-execution",
+  "decision_question": "Can the exact local Qwen3.5 9B artifact serve as a diagnostic first-pass factual-QA reviewer across text, boundary, cross-course, and actual visual evidence?",
+  "decision_role": "diagnostic-first-pass-only",
+  "dataset": {
+    "path": "research/05_evaluation/local_reviewer_sensitivity_probes_v1.json",
+    "sha256": "c72abce9f4d392aeab0ec31ef90d26b9759a95ff90b9c4ee0138ec799770a352",
+    "dataset_id": "local-reviewer-sensitivity-probes-v1",
+    "pair_count": 11,
+    "probe_count": 22,
+    "content_class": "synthetic-public"
+  },
+  "candidate": {
+    "provider": "local-ollama",
+    "model": "qwen3.5:9b-q4_K_M",
+    "model_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "required_capabilities": ["completion", "vision"],
+    "temperature": 0,
+    "seed": 8703,
+    "max_output_tokens": 500,
+    "timeout_seconds": 180,
+    "prompt_version": "local-factual-qa-reviewer-sensitivity-v1"
+  },
+  "execution": {
+    "call_limit": 22,
+    "concurrency": 1,
+    "retry_attempts": 0,
+    "external_provider_calls_max": 0,
+    "private_data_calls_max": 0,
+    "cost_usd_max": 0,
+    "output_overwrite_allowed": false
+  },
+  "quality_gates": {
+    "source_integrity_rate_min": 1.0,
+    "model_identity_exact_required": true,
+    "vision_capability_required": true,
+    "structured_completion_rate_min": 1.0,
+    "critical_defect_recall_min": 1.0,
+    "clean_control_acceptance_rate_min": 0.9,
+    "visual_defect_recall_min": 1.0,
+    "visual_clean_accept_count_min": 5,
+    "primary_failure_accuracy_min": 0.8,
+    "external_provider_calls_max": 0,
+    "private_data_calls_max": 0,
+    "cost_usd_max": 0
+  },
+  "failure_labels": [
+    "none",
+    "wrong_factual_answer",
+    "incomplete_answer",
+    "unsupported_no_evidence_answer",
+    "wrong_boundary_action",
+    "cross_course_leakage",
+    "visual_evidence_mismatch"
+  ],
+  "acceptance_rule": "The candidate passes only if every prospective gate passes. A pass permits diagnostic first-pass use only; it does not select a final judge, clear the human audit, or authorize dataset scaling.",
+  "failure_response": "On any hard-gate failure, retain or drop diagnostic-only status, classify the failure, change the method before a successor run, and preserve this result without threshold changes.",
+  "prohibited_interpretations": [
+    "general model benchmark",
+    "human audit replacement",
+    "Professor Digital Twin fidelity validation",
+    "authorization to scale toward 10000 cases",
+    "selection of the OpenRouter reviewer"
+  ]
+}
