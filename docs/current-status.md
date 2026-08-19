@@ -87,13 +87,13 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper / audit pending | Attempt 002 passed every machine gate: 24/24 retained, 7/7 safe boundary actions, 6/6 multimodal retained, zero leakage/duplicates, and complete dual review | Complete the preserved six-case human audit; refine on any failure, otherwise freeze a separate scale-stage plan |
+| Large factual QA | Refine / v3 no-model implementation | Historical attempts 001 and 002 are preserved; the refreshed Academia Vault inventory covers 2,637 files and the v3 product method is frozen with a separate oracle control | Resolve all source dispositions and pass conversion, lineage, response-contract, citation, mutation, and audit-packet gates before authorizing a bounded real-source pilot |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Complete the six-case audit preserved from attempt 002; refine on failure or freeze the scale-stage method on pass |
+| 1 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine | Implement factual-QA v3 and pass its nine no-model gates across all eligible Academia Vault sources and the dummy oracle control before any paid pilot |
 | 2 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 3 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 4 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -104,12 +104,13 @@ Issues #85 and #86 are complete and archived from the live Project view. PR #91 
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 is now at its
-bounded human-audit gate after attempt 001 exposed method defects and the
-prospective attempt 002 passed all machine gates. This qualifies the
-dataset-building method, not a model benchmark. Issue #88 remains active but externally
-blocked; its implementation and local qualification are complete enough for a
-controlled host rehearsal, not for a real-user pilot.
+and the historical held-out split was not opened. Issue #87 preserves attempt
+002's passed machine gates and uncompleted audit as historical v2 evidence, but
+the active boundary is now the broader v3 no-model implementation over the
+eligible Academia Vault. This remains method validation, not a model benchmark.
+Issue #88 remains active but externally blocked; its implementation and local
+qualification are complete enough for a controlled host rehearsal, not for a
+real-user pilot.
 
 ## Known multimodal correction
 
@@ -144,13 +145,22 @@ are prospective only; they require new project-specific quality evidence. See
 
 ## Large factual-QA interpretation
 
-Issue #87 adopts the stronger, product-relevant interpretation of the
-professor's suggestion: build a larger permission-safe dummy document corpus,
-then derive and cross-check factual QA toward 10,000 cases. This is not a model
-leaderboard. The bounded pilot evaluates whether the source-constrained method
-produces trustworthy cases; failed gates require method revision. It includes a
-meaningful multimodal slice and remains separate from the verified 100-case
-benchmark and Professor Digital Twin fidelity.
+Issue #87 now adopts a product-first v3 interpretation of the professor's
+suggestion. The primary corpus is every eligible file in the canonical Academia
+Vault, not a large dummy corpus. A small deterministic dummy corpus with a
+hidden fact manifest remains only as an oracle control for extraction,
+retrieval, citation, boundary-action, and mutation mechanics. The refreshed
+inventory found 2,637 regular files: 294 clear candidates, 437 requiring
+review, 1,903 generated/tool-state exclusions, and three sensitive exclusions.
+Every file requires a recorded disposition before release.
+
+The historical 24-case attempts remain valid evidence about their frozen v2
+method, but the preserved six-case audit is no longer the active product gate.
+V3 requires claim-level exact evidence, retrieval without injected gold
+passages, multimodal source lineage, deterministic mutation sensitivity, and a
+compact human-audit packet. It remains separate from the verified 100-case
+retrieval benchmark and Professor Digital Twin fidelity. No external model
+call, 30--50 case pilot, or scale toward 10,000 cases is authorized yet.
 
 ## Human and safety boundary
 

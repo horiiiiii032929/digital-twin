@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-design-001",
+  "issue": 87,
+  "status": "frozen-no-model-implementation",
+  "decision_type": "method_and_product_validation",
+  "model_leaderboard": false,
+  "source_inventory": {
+    "inventory_id": "academic-vault-source-inventory-v1-refresh-2026-08-19",
+    "canonical_root": "Documents/academia_vault",
+    "prohibited_root": "Downloads/academia_vault",
+    "permission_record": "research/03_data/academics-source-permission.md",
+    "inventory_sha256": "41370d3d25157896320c881d95bc605781d166ac653b6f67d6f3e2a1ae05ebb3",
+    "regular_file_count": 2637,
+    "logical_bytes": 337556462,
+    "eligibility_counts": {
+      "eligible_candidate": 294,
+      "review_required": 437,
+      "excluded_generated": 1903,
+      "excluded_sensitive": 3
+    },
+    "contains_private_paths": false,
+    "contains_source_content": false,
+    "all_regular_files_require_disposition": true
+  },
+  "source_roles": [
+    "authoritative_evidence",
+    "supporting_context",
+    "question_inspiration_only",
+    "excluded_integrity_or_privacy",
+    "excluded_duplicate_generated_tool_state",
+    "review_or_conversion_required"
+  ],
+  "mandatory_exclusions": [
+    "solutions_and_answer_keys",
+    "completed_or_graded_assessments",
+    "student_or_participant_data",
+    "credentials_and_secrets",
+    "unrelated_content"
+  ],
+  "personal_notes": {
+    "default_role": "question_inspiration_only",
+    "authoritative_without_official_verification": false
+  },
+  "deduplication": {
+    "method": "exact_content_sha256",
+    "process_unique_content_once": true,
+    "preserve_all_path_lineage": true
+  },
+  "lanes": {
+    "primary": {
+      "corpus": "all_eligible_academia_vault_files",
+      "gold_evidence_injected_into_retrieval": false
+    },
+    "oracle_control": {
+      "corpus": "small_deterministic_dummy_documents",
+      "hidden_structured_fact_manifest": true,
+      "may_establish_real_course_quality": false
+    }
+  },
+  "product_path": [
+    "inventory_and_classify",
+    "convert_with_lineage",
+    "extract_atomic_evidence",
+    "author_questions_and_safe_actions",
+    "retrieve_without_gold_injection",
+    "generate_structured_response",
+    "run_deterministic_validation",
+    "review_unresolved_disputes",
+    "render_human_audit_packet"
+  ],
+  "response_contract": {
+    "actions": ["answer", "clarify", "abstain", "refuse"],
+    "required_top_level_fields": ["action", "claims", "answer"],
+    "claim_required_fields": ["text", "evidence"],
+    "evidence_required_fields": ["citation_id", "quote"],
+    "atomic_claims_required": true,
+    "exact_quotes_required": true
+  },
+  "no_model_gates": [
+    "complete_source_disposition",
+    "mandatory_exclusion_and_path_sanitization",
+    "conversion_lineage_and_checksum_stability",
+    "oracle_control_mechanics",
+    "response_schema",
+    "exact_quote_and_citation_target",
+    "content_deduplication_with_path_lineage",
+    "mutation_sensitivity",
+    "sanitized_human_audit_rendering"
+  ],
+  "mutation_classes": [
+    "wrong_numeric_value",
+    "reversed_comparison",
+    "omitted_table_row",
+    "wrong_diagram_edge",
+    "changed_equation_symbol",
+    "unsupported_claim",
+    "wrong_citation",
+    "incomplete_multi_source_evidence",
+    "cross_course_confusion",
+    "wrong_answer_vs_abstain",
+    "over_refusal"
+  ],
+  "model_policy": {
+    "external_execution_authorized": false,
+    "paid_calls_allowed": false,
+    "scale_authorized": false,
+    "prospective_roles": {
+      "deepseek-v4-flash": "routine_authoring_and_product_generation",
+      "deepseek-v4-pro": "unresolved_disputes_only",
+      "qwen3.5:9b-q4_K_M": "local_advisory_diagnostic_only"
+    },
+    "prohibited_families": ["gemma", "claude", "retired_local_general_qwen"],
+    "separate_provider_record_required": true
+  },
+  "human_audit_required_fields": [
+    "original_page_or_crop",
+    "extracted_text",
+    "source_id",
+    "page_and_region",
+    "source_version_and_checksum",
+    "requested_action",
+    "atomic_claims",
+    "exact_evidence_quotes",
+    "deterministic_checks",
+    "reviewer_disagreements",
+    "mutation_outcomes"
+  ],
+  "failure_routes": [
+    "source_governance",
+    "conversion_or_ocr",
+    "chunking_or_evidence_units",
+    "retrieval",
+    "evidence_sufficiency",
+    "generation",
+    "citation_binding",
+    "safety_policy",
+    "integration",
+    "operations"
+  ]
+}
