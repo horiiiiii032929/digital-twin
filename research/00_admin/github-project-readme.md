@@ -26,8 +26,9 @@ historical record.
   checks, but public host/domain selection, trusted TLS, target-host restore,
   and the public walkthrough remain externally blocked.
 - The professor accepted the proposed evaluation approach and recommended a
-  separate factual-QA dataset near 10,000 cases using multiple LLMs. #87 is now
-  the current unblocked execution item.
+  separate factual-QA dataset near 10,000 cases using multiple LLMs. #87's
+  bounded attempt 002 passed all machine gates and is now at its six-case
+  human-audit decision point.
 
 ## Product goal
 
