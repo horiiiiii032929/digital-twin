@@ -31,16 +31,17 @@ from src.digital_twin.llm import LlmMessage
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_PATH = (
-    ROOT
-    / "research/05_evaluation/instruments/"
-    "factual_qa_quality_pilot_v1_attempt_001.json"
+    ROOT / "research/05_evaluation/instruments/"
+    "factual_qa_quality_pilot_v1_attempt_002.json"
 )
 MULTIMODAL_FIXTURE_PATH = (
     ROOT / "research/05_evaluation/multimodal_retrieval_v1_synthetic.json"
 )
-DEFAULT_OUTPUT = (
-    ROOT / "reports/generated/factual-qa-quality-pilot-v1-attempt-001.json"
-)
+DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-quality-pilot-v1-attempt-002.json"
+SUPPORTED_INSTRUMENT_IDS = {
+    "factual-qa-quality-pilot-v1-attempt-001",
+    "factual-qa-quality-pilot-v1-attempt-002",
+}
 EXPECTED_SLICES = {
     "direct-text": 4,
     "paraphrase-text": 4,
@@ -67,8 +68,8 @@ AUTHOR_SCHEMA = {
         "citations",
     ],
     "properties": {
-        "question": {"type": "string"},
-        "answer": {"type": "string"},
+        "question": {"type": "string", "minLength": 1},
+        "answer": {"type": "string", "minLength": 1},
         "action": {
             "type": "string",
             "enum": ["answer", "abstain", "clarify", "refuse"],
@@ -314,7 +315,8 @@ def validate_assets(
 def _validate_instrument(instrument: dict[str, Any]) -> None:
     if instrument.get("schema_version") != 1:
         raise FactualQaPilotError("unsupported instrument schema")
-    if instrument.get("instrument_id") != "factual-qa-quality-pilot-v1-attempt-001":
+    instrument_id = instrument.get("instrument_id")
+    if instrument_id not in SUPPORTED_INSTRUMENT_IDS:
         raise FactualQaPilotError("unexpected factual-QA instrument ID")
     if instrument.get("status") != "frozen-pending-execution":
         raise FactualQaPilotError("factual-QA instrument is not frozen")
@@ -338,8 +340,18 @@ def _validate_instrument(instrument: dict[str, Any]) -> None:
         raise FactualQaPilotError("cost stop drifted")
     if instrument.get("human_audit", {}).get("sample_size") != 6:
         raise FactualQaPilotError("human audit size drifted")
-    if instrument.get("quality_gates", {}).get("model_identity_stable_required") is not True:
+    if (
+        instrument.get("quality_gates", {}).get("model_identity_stable_required")
+        is not True
+    ):
         raise FactualQaPilotError("model identity gate drifted")
+    if instrument_id == "factual-qa-quality-pilot-v1-attempt-002":
+        for role in ("author", "cross_reviewer"):
+            binding = roles[role]
+            if binding.get("thinking") != "disabled" or binding.get("temperature") != 0:
+                raise FactualQaPilotError(
+                    f"attempt 002 deterministic binding drifted: {role}"
+                )
 
 
 def validate_corpus(corpus: dict[str, Any]) -> dict[str, Any]:
@@ -391,7 +403,9 @@ def validate_corpus(corpus: dict[str, Any]) -> dict[str, Any]:
         "visual_units": sum(source["modality"] != "text" for source in sources),
         "courses": len({source["course_id"] for source in sources}),
         "case_blueprints": len(blueprints),
-        "slice_counts": dict(sorted(Counter(item["slice"] for item in blueprints).items())),
+        "slice_counts": dict(
+            sorted(Counter(item["slice"] for item in blueprints).items())
+        ),
         "source_integrity_rate": 1.0,
     }
 
@@ -420,7 +434,9 @@ def _validate_source(
         raise FactualQaPilotError(f"source hash drifted: {source['source_unit_id']}")
     evidence_text = source["evidence_text"]
     if not isinstance(evidence_text, str) or not evidence_text.strip():
-        raise FactualQaPilotError(f"source truth is missing: {source['source_unit_id']}")
+        raise FactualQaPilotError(
+            f"source truth is missing: {source['source_unit_id']}"
+        )
     claims = source["claims"]
     if not isinstance(claims, list) or not claims:
         raise FactualQaPilotError(f"claims are missing: {source['source_unit_id']}")
@@ -539,9 +555,7 @@ async def execute(
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     corpus = assets["corpus"]
-    source_map = {
-        source["source_unit_id"]: source for source in corpus["source_units"]
-    }
+    source_map = {source["source_unit_id"]: source for source in corpus["source_units"]}
     call_limits = {
         "author": instrument["execution"]["author_call_limit"],
         "cross": instrument["execution"]["cross_reviewer_call_limit"],
@@ -556,6 +570,7 @@ async def execute(
             raise FactualQaPilotError("author call limit reached")
         source_context = _source_context(blueprint, source_map=source_map)
         author_prompt = _author_prompt(blueprint, source_context=source_context)
+        call_counts["author"] += 1
         try:
             author_call = await author_transport.call_json(
                 system=_author_system_prompt(),
@@ -563,11 +578,9 @@ async def execute(
                 task="factual_qa_case_authoring",
                 schema=AUTHOR_SCHEMA,
             )
-            call_counts["author"] += 1
             authored = author_call.value
             author_error = None
         except Exception as error:
-            call_counts["author"] += 1
             authored = None
             author_call = None
             author_error = type(error).__name__
@@ -582,6 +595,8 @@ async def execute(
         )
         cross_call = None
         independent_call = None
+        cross_review_raw = None
+        independent_review_raw = None
         cross_review = None
         independent_review = None
         review_errors: list[str] = []
@@ -591,36 +606,35 @@ async def execute(
                 authored=authored,
                 source_context=source_context,
             )
+            if call_counts["cross"] >= call_limits["cross"]:
+                raise FactualQaPilotError("cross-reviewer call limit reached")
+            call_counts["cross"] += 1
             try:
-                if call_counts["cross"] >= call_limits["cross"]:
-                    raise FactualQaPilotError("cross-reviewer call limit reached")
                 cross_call = await cross_reviewer_transport.call_json(
                     system=_review_system_prompt(),
                     prompt=review_prompt,
                     task="factual_qa_case_cross_review",
                     schema=REVIEW_SCHEMA,
                 )
-                call_counts["cross"] += 1
-                cross_review = validate_review(cross_call.value)
-            except Exception as error:
-                call_counts["cross"] += 1
-                review_errors.append(f"cross:{type(error).__name__}")
-            else:
+                cross_review_raw = cross_call.value
                 external_cost += cross_call.approximate_cost_usd
                 _enforce_cost(instrument, external_cost)
+                cross_review = validate_review(cross_review_raw)
+            except Exception as error:
+                review_errors.append(f"cross:{type(error).__name__}")
+            if call_counts["independent"] >= call_limits["independent"]:
+                raise FactualQaPilotError("independent-reviewer call limit reached")
+            call_counts["independent"] += 1
             try:
-                if call_counts["independent"] >= call_limits["independent"]:
-                    raise FactualQaPilotError("independent-reviewer call limit reached")
                 independent_call = await independent_reviewer_transport.call_json(
                     system=_review_system_prompt(),
                     prompt=review_prompt,
                     task="factual_qa_case_independent_review",
                     schema=REVIEW_SCHEMA,
                 )
-                call_counts["independent"] += 1
-                independent_review = validate_review(independent_call.value)
+                independent_review_raw = independent_call.value
+                independent_review = validate_review(independent_review_raw)
             except Exception as error:
-                call_counts["independent"] += 1
                 review_errors.append(f"independent:{type(error).__name__}")
 
         retained = bool(
@@ -646,8 +660,10 @@ async def execute(
                 "author_error": author_error,
                 "author_call": _call_record(author_call),
                 "deterministic": deterministic,
+                "cross_review_raw": cross_review_raw,
                 "cross_review": cross_review,
                 "cross_review_call": _call_record(cross_call),
+                "independent_review_raw": independent_review_raw,
                 "independent_review": independent_review,
                 "independent_review_call": _call_record(independent_call),
                 "review_errors": review_errors,
@@ -766,9 +782,13 @@ def deterministic_case_checks(
     if blueprint["expected_action"] == "answer":
         checks["answer_has_claims"] = bool(claims)
         checks["answer_has_citations"] = bool(citations)
-        covered_sources = {allowed_claims[claim] for claim in claims if claim in allowed_claims}
+        covered_sources = {
+            allowed_claims[claim] for claim in claims if claim in allowed_claims
+        }
         checks["required_sources_covered"] = covered_sources == allowed_source_ids
-        checks["citation_sources_complete"] = set(citation_source_ids) == allowed_source_ids
+        checks["citation_sources_complete"] = (
+            set(citation_source_ids) == allowed_source_ids
+        )
     else:
         checks["boundary_has_no_claims"] = claims == []
         checks["boundary_has_no_citations"] = citations == []
@@ -801,9 +821,17 @@ def validate_review(review: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(review.get("rationale"), str) or not review["rationale"].strip():
         raise FactualQaPilotError("review rationale is missing")
     expected_accept = all(review[field] for field in boolean_fields)
-    if (review["verdict"] == "accept") != expected_accept:
-        raise FactualQaPilotError("review verdict contradicts dimension checks")
-    return review
+    reported_verdict = review["verdict"]
+    contract_mismatch = (reported_verdict == "accept") != expected_accept
+    normalized = dict(review)
+    normalized["reported_verdict"] = reported_verdict
+    normalized["contract_mismatch"] = contract_mismatch
+    if contract_mismatch:
+        normalized["verdict"] = "reject"
+        normalized["failure_categories"] = sorted(
+            set((*failures, "review_contract_mismatch"))
+        )
+    return normalized
 
 
 def analyze_results(
@@ -826,14 +854,12 @@ def analyze_results(
     reviewed = [
         item
         for item in results
-        if item["cross_review"] is not None
-        and item["independent_review"] is not None
+        if item["cross_review"] is not None and item["independent_review"] is not None
     ]
     agreements = [
         item
         for item in reviewed
-        if item["cross_review"]["verdict"]
-        == item["independent_review"]["verdict"]
+        if item["cross_review"]["verdict"] == item["independent_review"]["verdict"]
     ]
     retained = [item for item in results if item["retained"]]
     multimodal = [item for item in results if item["slice"] == "multimodal"]
@@ -871,9 +897,7 @@ def analyze_results(
         ),
         "retained_case_rate": _rate(len(retained), total),
         "quarantine_rate": _rate(total - len(retained), total),
-        "retained_multimodal_rate": _rate(
-            len(retained_multimodal), len(multimodal)
-        ),
+        "retained_multimodal_rate": _rate(len(retained_multimodal), len(multimodal)),
         "model_identity_stable": model_identity_stable,
         "private_data_calls": 0,
         "cost_usd": external_cost_usd,
@@ -898,8 +922,7 @@ def analyze_results(
         >= gates["cross_reviewer_completion_rate_min"],
         "retained_case_rate": metrics["retained_case_rate"]
         >= gates["retained_case_rate_min"],
-        "quarantine_rate": metrics["quarantine_rate"]
-        <= gates["quarantine_rate_max"],
+        "quarantine_rate": metrics["quarantine_rate"] <= gates["quarantine_rate_max"],
         "retained_multimodal_rate": metrics["retained_multimodal_rate"]
         >= gates["retained_multimodal_rate_min"],
         "model_identity_stable": metrics["model_identity_stable"]
@@ -910,14 +933,13 @@ def analyze_results(
     }
     machine_gates_passed = all(gate_results.values())
     diagnostic_alerts = []
-    if metrics["reviewer_agreement_rate"] < instrument["diagnostic_alerts"][
-        "qwen_agreement_rate_below"
-    ]:
+    if (
+        metrics["reviewer_agreement_rate"]
+        < instrument["diagnostic_alerts"]["qwen_agreement_rate_below"]
+    ):
         diagnostic_alerts.append("qwen-reviewer-agreement-below-alert")
     failure_counts = Counter(
-        reason
-        for item in results
-        for reason in item["quarantine_reasons"]
+        reason for item in results for reason in item["quarantine_reasons"]
     )
     latencies = [
         call["latency_ms"]
@@ -958,9 +980,9 @@ def analyze_results(
                 ),
             }
             for slice_name in EXPECTED_SLICES
-            if (slice_cases := [
-                item for item in results if item["slice"] == slice_name
-            ])
+            if (
+                slice_cases := [item for item in results if item["slice"] == slice_name]
+            )
         },
         "operational": {
             "external_cost_usd": external_cost_usd,
@@ -1065,8 +1087,9 @@ def _author_system_prompt() -> str:
         "You create one source-grounded factual-QA dataset case. Use only the "
         "provided source truth and claim IDs. Never add outside facts. Follow the "
         "expected action. For answer cases, cite exact verbatim substrings from "
-        "every required source unit. For abstain, clarify, or refuse cases, return "
-        "no claim IDs and no citations. Return JSON only."
+        "every required source unit. Always return a non-empty user-visible answer. "
+        "For abstain, clarify, or refuse cases, return no claim IDs and no citations. "
+        "Return JSON only."
     )
 
 
@@ -1075,22 +1098,29 @@ def _review_system_prompt() -> str:
         "You independently audit one factual-QA dataset case against its frozen "
         "blueprint and supplied source truth. Reject any unsupported detail, missing "
         "required evidence, wrong action, unclear question, citation mismatch, or "
-        "course-boundary violation. Do not reward fluency. Return JSON only."
+        "course-boundary violation. For an abstain, clarify, or refuse case, an "
+        "appropriate non-factual safe response with no claims and no citations is "
+        "fully supported and has correct citation lineage. Do not reward fluency. "
+        "Return JSON only."
     )
 
 
-def _author_prompt(
-    blueprint: dict[str, Any], *, source_context: dict[str, Any]
-) -> str:
+def _author_prompt(blueprint: dict[str, Any], *, source_context: dict[str, Any]) -> str:
     payload = {
         "blueprint": blueprint,
         "approved_target_course_sources": source_context["approved_sources"],
         "unapproved_other_course_distractors": source_context["distractors"],
         "requirements": {
             "question_count": 1,
+            "nonempty_user_visible_answer_required": True,
             "answer_length": "one to three concise sentences",
             "answer_cases": "select only supplied claim IDs and cite one exact quote from every required source unit",
-            "boundary_cases": "use the expected safe action; selected_claim_ids and citations must be empty",
+            "boundary_cases": {
+                "common": "use the expected safe action; selected_claim_ids and citations must be empty",
+                "abstain_answer": "state concisely that the approved sources do not provide the requested information",
+                "clarify_answer": "ask one targeted clarification question",
+                "refuse_answer": "state a concise permission, privacy, or academic-integrity refusal",
+            },
             "cross_course_rule": "never use or cite a distractor as target-course evidence",
         },
     }
@@ -1109,6 +1139,7 @@ def _review_prompt(
         "unapproved_other_course_distractors": source_context["distractors"],
         "authored_case": authored,
         "verdict_rule": "accept only when every boolean dimension is true",
+        "boundary_review_rule": "For abstain, clarify, and refuse, a correct non-factual safe response with empty claim IDs and citations counts as fully_supported=true and citation_lineage_correct=true.",
     }
     return json.dumps(payload, ensure_ascii=False, sort_keys=True)
 
@@ -1172,17 +1203,17 @@ def _sensitivity_flags(
     independent_review: dict[str, Any] | None,
     review_errors: list[str],
 ) -> list[str]:
-    flags = [
-        error for error in review_errors if error.startswith("independent:")
-    ]
+    flags = [error for error in review_errors if error.startswith("independent:")]
     if independent_review and independent_review["verdict"] == "reject":
         flags.append("independent-reviewer-reject")
         flags.extend(
             f"independent-reviewer:{item}"
             for item in independent_review["failure_categories"]
         )
-    if cross_review and independent_review and (
-        cross_review["verdict"] != independent_review["verdict"]
+    if (
+        cross_review
+        and independent_review
+        and (cross_review["verdict"] != independent_review["verdict"])
     ):
         flags.append("reviewer-disagreement")
     return sorted(set(flags))
@@ -1353,7 +1384,9 @@ def _write_json_exclusive(path: Path, value: dict[str, Any]) -> None:
             json.dump(value, stream, indent=2, ensure_ascii=False, sort_keys=True)
             stream.write("\n")
     except FileExistsError as error:
-        raise FactualQaPilotError(f"refusing to overwrite run output: {path}") from error
+        raise FactualQaPilotError(
+            f"refusing to overwrite run output: {path}"
+        ) from error
 
 
 def _arguments() -> argparse.Namespace:
@@ -1361,9 +1394,7 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--instrument", type=Path, default=INSTRUMENT_PATH)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--allow-external-provider", action="store_true")
-    parser.add_argument(
-        "--ollama-url", default="http://127.0.0.1:11434/api/generate"
-    )
+    parser.add_argument("--ollama-url", default="http://127.0.0.1:11434/api/generate")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     arguments = parser.parse_args()
     if arguments.execute and not arguments.allow_external_provider:
@@ -1373,8 +1404,16 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> None:
     arguments = _arguments()
+    instrument_path = (
+        arguments.instrument
+        if arguments.instrument.is_absolute()
+        else ROOT / arguments.instrument
+    )
+    output_path = (
+        arguments.output if arguments.output.is_absolute() else ROOT / arguments.output
+    )
     load_dotenv(ROOT / ".env", override=False)
-    assets = validate_assets(arguments.instrument)
+    assets = validate_assets(instrument_path)
     preflight = build_preflight(assets, ollama_url=arguments.ollama_url)
     if not arguments.execute:
         print(json.dumps(preflight, indent=2, sort_keys=True))
@@ -1394,7 +1433,7 @@ def main() -> None:
             ),
         )
     )
-    _write_json_exclusive(arguments.output, result)
+    _write_json_exclusive(output_path, result)
     summary = {
         "run_type": result["run_type"],
         "status": result["status"],
@@ -1406,7 +1445,7 @@ def main() -> None:
         "failed_gates": result["summary"]["failed_gates"],
         "metrics": result["summary"]["metrics"],
         "human_audit_packet_created": result["human_audit_packet"] is not None,
-        "output": str(arguments.output.relative_to(ROOT)),
+        "output": str(output_path.relative_to(ROOT)),
         "private_data_read": False,
         "private_data_emitted": False,
     }

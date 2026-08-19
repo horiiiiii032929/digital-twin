@@ -21,14 +21,15 @@ def _assets():
 
 
 def _source_map(corpus):
-    return {
-        source["source_unit_id"]: source for source in corpus["source_units"]
-    }
+    return {source["source_unit_id"]: source for source in corpus["source_units"]}
 
 
 def _valid_authored(blueprint, source_map):
     if blueprint["expected_action"] == "answer":
-        claims = [source_map[source_id]["claims"][0]["claim_id"] for source_id in blueprint["evidence_unit_ids"]]
+        claims = [
+            source_map[source_id]["claims"][0]["claim_id"]
+            for source_id in blueprint["evidence_unit_ids"]
+        ]
         citations = [
             {
                 "source_unit_id": source_id,
@@ -174,12 +175,16 @@ def test_deterministic_checks_require_every_source_for_multi_evidence():
     assert result["checks"]["citation_sources_complete"] is False
 
 
-def test_review_verdict_cannot_contradict_dimension_checks():
+def test_review_verdict_contradiction_is_preserved_and_rejected_fail_closed():
     review = _accepted_review()
     review["fully_supported"] = False
 
-    with pytest.raises(FactualQaPilotError, match="contradicts"):
-        validate_review(review)
+    normalized = validate_review(review)
+
+    assert normalized["reported_verdict"] == "accept"
+    assert normalized["verdict"] == "reject"
+    assert normalized["contract_mismatch"] is True
+    assert "review_contract_mismatch" in normalized["failure_categories"]
 
 
 def test_passing_machine_result_stops_at_human_audit():
