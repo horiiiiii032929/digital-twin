@@ -23,18 +23,17 @@ from src.digital_twin.model_policy import require_registered_current_model
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INSTRUMENT = ROOT / (
     "research/05_evaluation/instruments/"
-    "local_qwen_reviewer_sensitivity_v1_development_001.json"
+    "local_qwen_reviewer_sensitivity_v2_development_002.json"
 )
 DEFAULT_OUTPUT = ROOT / (
     "reports/generated/"
-    "local-qwen-reviewer-sensitivity-v1-development-001.json"
+    "local-qwen-reviewer-sensitivity-v2-development-002.json"
 )
 DEFAULT_OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
-REVIEW_BOOLEAN_FIELDS = (
+SEMANTIC_REVIEW_FIELDS = (
     "response_action_correct",
     "response_content_correct",
-    "fully_supported",
-    "citation_lineage_correct",
+    "evidence_complete",
     "course_boundary_respected",
 )
 
@@ -92,6 +91,10 @@ def validate_assets(instrument_path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any
     instrument = load_json(instrument_path)
     if instrument.get("status") != "frozen-pending-execution":
         raise ReviewerSensitivityError("instrument is not frozen pending execution")
+    if instrument.get("method_version") != (
+        "hybrid-deterministic-lineage-derived-triage-v2"
+    ):
+        raise ReviewerSensitivityError("instrument does not use the supported method")
 
     dataset_binding = instrument.get("dataset", {})
     dataset_path = _root_path(str(dataset_binding.get("path", "")))
@@ -349,15 +352,15 @@ class OllamaMultimodalJsonTransport:
         )
 
 
-def review_schema(failure_labels: list[str]) -> dict[str, Any]:
+def review_schema() -> dict[str, Any]:
     properties: dict[str, Any] = {
-        "verdict": {"type": "string", "enum": ["accept", "reject"]},
-        "primary_failure": {"type": "string", "enum": failure_labels},
         "evidence_observation": {"type": "string", "minLength": 1},
         "rationale": {"type": "string", "minLength": 1},
     }
-    properties.update({field: {"type": "boolean"} for field in REVIEW_BOOLEAN_FIELDS})
-    required = ["verdict", "primary_failure", *REVIEW_BOOLEAN_FIELDS, "evidence_observation", "rationale"]
+    properties.update(
+        {field: {"type": "boolean"} for field in SEMANTIC_REVIEW_FIELDS}
+    )
+    required = [*SEMANTIC_REVIEW_FIELDS, "evidence_observation", "rationale"]
     return {
         "type": "object",
         "additionalProperties": False,
@@ -366,39 +369,101 @@ def review_schema(failure_labels: list[str]) -> dict[str, Any]:
     }
 
 
-def validate_review(review: dict[str, Any], failure_labels: list[str]) -> dict[str, Any]:
-    if review.get("verdict") not in {"accept", "reject"}:
-        raise ReviewerSensitivityError("review verdict is invalid")
-    if review.get("primary_failure") not in set(failure_labels):
-        raise ReviewerSensitivityError("review failure label is invalid")
-    if any(not isinstance(review.get(field), bool) for field in REVIEW_BOOLEAN_FIELDS):
-        raise ReviewerSensitivityError("review boolean fields are invalid")
+def validate_semantic_review(review: dict[str, Any]) -> dict[str, Any]:
+    if any(not isinstance(review.get(field), bool) for field in SEMANTIC_REVIEW_FIELDS):
+        raise ReviewerSensitivityError("semantic review boolean fields are invalid")
     for field in ("evidence_observation", "rationale"):
         if not isinstance(review.get(field), str) or not review[field].strip():
             raise ReviewerSensitivityError(f"review {field} is missing")
-    expected_accept = (
-        all(review[field] for field in REVIEW_BOOLEAN_FIELDS)
-        and review["primary_failure"] == "none"
+    return dict(review)
+
+
+def deterministic_citation_lineage(
+    pair: dict[str, Any], candidate: dict[str, Any]
+) -> bool:
+    cited = set(candidate["citation_source_ids"])
+    if pair["source_mode"] in {"approved-text", "approved-image"}:
+        allowed = set(pair["source_unit_ids"])
+    else:
+        allowed = set()
+    if candidate["action"] == "answer" and allowed:
+        return cited == allowed
+    return not cited
+
+
+def derive_review(
+    semantic: dict[str, Any],
+    *,
+    pair: dict[str, Any],
+    candidate: dict[str, Any],
+    blueprint: dict[str, Any],
+) -> dict[str, Any]:
+    citation_correct = deterministic_citation_lineage(pair, candidate)
+    accepted = all(semantic[field] for field in SEMANTIC_REVIEW_FIELDS) and (
+        citation_correct
     )
-    contract_mismatch = (review["verdict"] == "accept") != expected_accept
-    normalized = dict(review)
-    normalized["reported_verdict"] = review["verdict"]
-    normalized["contract_mismatch"] = contract_mismatch
-    if contract_mismatch:
-        normalized["verdict"] = "reject"
-    return normalized
+    primary_failure = _derive_primary_failure(
+        semantic,
+        pair=pair,
+        blueprint=blueprint,
+        citation_correct=citation_correct,
+        accepted=accepted,
+    )
+    return {
+        **semantic,
+        "citation_lineage_correct": citation_correct,
+        "verdict": "accept" if accepted else "reject",
+        "primary_failure": primary_failure,
+        "contract_mismatch": False,
+        "derivation": "hybrid-deterministic-lineage-derived-triage-v2",
+    }
+
+
+def _derive_primary_failure(
+    semantic: dict[str, Any],
+    *,
+    pair: dict[str, Any],
+    blueprint: dict[str, Any],
+    citation_correct: bool,
+    accepted: bool,
+) -> str:
+    if accepted:
+        return "none"
+    if pair["source_mode"] == "disallowed-distractor":
+        return "cross_course_leakage"
+    if blueprint["expected_action"] != "answer" and not semantic[
+        "response_action_correct"
+    ]:
+        if pair["source_mode"] == "no-evidence":
+            return "unsupported_no_evidence_answer"
+        return "wrong_boundary_action"
+    if pair["source_mode"] == "no-evidence":
+        return "unsupported_no_evidence_answer"
+    if pair["source_mode"] == "approved-image" and not semantic[
+        "response_content_correct"
+    ]:
+        return "visual_evidence_mismatch"
+    if len(pair["source_unit_ids"]) > 1 and (
+        not semantic["evidence_complete"] or not citation_correct
+    ):
+        return "incomplete_answer"
+    if not semantic["response_content_correct"]:
+        return "wrong_factual_answer"
+    if not citation_correct or not semantic["evidence_complete"]:
+        return "incomplete_answer"
+    return "wrong_factual_answer"
 
 
 def _system_prompt() -> str:
     return (
-        "You are a strict but fair reviewer of one synthetic factual-QA case. "
-        "Use only the supplied approved evidence and any attached image. Treat "
-        "a source marked disallowed-distractor as unavailable to the target "
-        "course. For no-evidence, abstention is correct. For ambiguity, a "
-        "targeted clarification is correct. A correct boundary response needs "
-        "no citation. Inspect attached images directly; do not infer their "
-        "contents from the candidate answer. Accept only when every review "
-        "dimension is true and primary_failure is none. Return JSON only."
+        "You are a strict but fair semantic reviewer of one synthetic factual-QA "
+        "case. Use only approved evidence and any attached image. Treat a source "
+        "marked disallowed-distractor as unavailable to the target course. For "
+        "no-evidence, abstention is correct. For ambiguity, targeted clarification "
+        "is correct. Inspect attached images directly and bind each image to its "
+        "explicit source ID. Citation membership is checked separately in code; "
+        "do not reject an answer because visual source text is intentionally "
+        "withheld. Judge only the requested semantic dimensions. Return JSON only."
     )
 
 
@@ -408,10 +473,9 @@ def _prompt(
     candidate: dict[str, Any],
     blueprint: dict[str, Any],
     source_map: dict[str, dict[str, Any]],
-    failure_labels: list[str],
 ) -> str:
     sources = []
-    for source_id in pair["source_unit_ids"]:
+    for image_index, source_id in enumerate(pair["source_unit_ids"], start=1):
         source = source_map[source_id]
         rendered = {
             "source_unit_id": source_id,
@@ -424,11 +488,23 @@ def _prompt(
                 else "approved-target-course"
             ),
         }
-        if pair["source_mode"] == "approved-text" or pair["source_mode"] == "disallowed-distractor":
+        if pair["source_mode"] in {
+            "approved-text",
+            "disallowed-distractor",
+        }:
             rendered["source_text"] = source["evidence_text"]
         else:
-            rendered["source_text"] = "Not supplied; inspect the attached image."
+            rendered["visual_attachment_index"] = image_index
+            rendered["visual_instruction"] = (
+                "This source ID is approved and is the attached image. Inspect it "
+                "directly; its textual source truth is intentionally withheld."
+            )
         sources.append(rendered)
+    approved_citation_ids = (
+        pair["source_unit_ids"]
+        if pair["source_mode"] in {"approved-text", "approved-image"}
+        else []
+    )
     payload = {
         "review_context": {
             "target_course_id": blueprint["course_id"],
@@ -436,23 +512,16 @@ def _prompt(
             "question_intent": blueprint["question_intent"],
             "source_mode": pair["source_mode"],
             "sources": sources,
+            "approved_citation_source_ids": approved_citation_ids,
+            "citation_lineage_status": (
+                "checked separately by deterministic exact-ID code; do not judge it"
+            ),
         },
         "candidate": candidate,
-        "primary_failure_labels": {
-            "none": "all dimensions pass",
-            "wrong_factual_answer": "answer contradicts approved text evidence",
-            "incomplete_answer": "answer or citations omit a required part or source",
-            "unsupported_no_evidence_answer": "factual answer is asserted when no approved evidence exists",
-            "wrong_boundary_action": "candidate answers when it should clarify, abstain, or refuse",
-            "cross_course_leakage": "candidate uses a disallowed other-course source",
-            "visual_evidence_mismatch": "answer contradicts the attached visual evidence",
-        },
-        "allowed_failure_labels": failure_labels,
-        "review_dimensions": {
+        "semantic_dimensions_only": {
             "response_action_correct": "candidate action matches expected_action",
             "response_content_correct": "candidate response correctly addresses the question",
-            "fully_supported": "all factual content is supported and all required parts are present",
-            "citation_lineage_correct": "citation source IDs cover the evidence used and never cite a disallowed source",
+            "evidence_complete": "all factual content is supported and every requested answer part is present",
             "course_boundary_respected": "only target-course approved evidence is used",
         },
     }
@@ -488,8 +557,7 @@ async def execute(
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     dataset = assets["dataset"]
-    labels = instrument["failure_labels"]
-    schema = review_schema(labels)
+    schema = review_schema()
     results = []
     memory_samples = [_ollama_rss_mib()]
     call_count = 0
@@ -519,12 +587,17 @@ async def execute(
                         },
                         blueprint=blueprint,
                         source_map=assets["source_map"],
-                        failure_labels=labels,
                     ),
                     schema=schema,
                     image_bytes=images,
                 )
-                review = validate_review(call.value, labels)
+                semantic_review = validate_semantic_review(call.value)
+                review = derive_review(
+                    semantic_review,
+                    pair=pair,
+                    candidate=candidate,
+                    blueprint=blueprint,
+                )
             except ReviewerSensitivityError as exc:
                 error = str(exc)
             memory_samples.append(_ollama_rss_mib())
@@ -569,8 +642,9 @@ async def execute(
         "private_data_calls": 0,
         "approximate_cost_usd": 0.0,
         "memory": {
-            "ollama_runner_rss_samples_mib": memory_samples,
-            "ollama_runner_peak_rss_mib": max(memory_samples),
+            "ollama_model_process_rss_samples_mib": memory_samples,
+            "ollama_model_process_peak_rss_mib": max(memory_samples),
+            "sampler_process_names": ["ollama runner", "llama-server"],
         },
         "metrics": analysis["metrics"],
         "gates": analysis["gates"],
@@ -693,7 +767,7 @@ def _ollama_rss_mib() -> float:
         return 0.0
     total_kib = 0
     for line in output.splitlines():
-        if "ollama runner" not in line:
+        if "ollama runner" not in line and "llama-server" not in line:
             continue
         fields = line.strip().split(maxsplit=1)
         if fields and fields[0].isdigit():

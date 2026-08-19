@@ -6,45 +6,50 @@ from scripts.run_local_reviewer_sensitivity import (
     ReviewCall,
     ReviewerSensitivityError,
     analyze_results,
+    derive_review,
+    deterministic_citation_lineage,
     execute,
     review_schema,
     validate_assets,
-    validate_review,
+    validate_semantic_review,
 )
 
 
-def _accepted_review():
+def _accepted_semantic_review():
     return {
-        "verdict": "accept",
-        "primary_failure": "none",
         "response_action_correct": True,
         "response_content_correct": True,
-        "fully_supported": True,
-        "citation_lineage_correct": True,
+        "evidence_complete": True,
         "course_boundary_respected": True,
         "evidence_observation": "The supplied evidence supports the candidate.",
         "rationale": "Every review dimension passes.",
     }
 
 
-def _rejected_review(primary_failure):
-    return {
-        "verdict": "reject",
-        "primary_failure": primary_failure,
-        "response_action_correct": primary_failure
-        not in {
-            "unsupported_no_evidence_answer",
-            "wrong_boundary_action",
-            "cross_course_leakage",
-        },
-        "response_content_correct": False,
-        "fully_supported": False,
-        "citation_lineage_correct": primary_failure
-        not in {"incomplete_answer", "cross_course_leakage"},
-        "course_boundary_respected": primary_failure != "cross_course_leakage",
+def _semantic_for_failure(primary_failure):
+    semantic = {
+        **_accepted_semantic_review(),
         "evidence_observation": "The candidate contains the seeded defect.",
         "rationale": "The response must be rejected.",
     }
+    if primary_failure == "incomplete_answer":
+        semantic["evidence_complete"] = False
+    elif primary_failure in {
+        "unsupported_no_evidence_answer",
+        "wrong_boundary_action",
+    }:
+        semantic["response_action_correct"] = False
+        semantic["response_content_correct"] = False
+        semantic["evidence_complete"] = False
+    elif primary_failure == "cross_course_leakage":
+        semantic["response_action_correct"] = False
+        semantic["response_content_correct"] = False
+        semantic["evidence_complete"] = False
+        semantic["course_boundary_respected"] = False
+    else:
+        semantic["response_content_correct"] = False
+        semantic["evidence_complete"] = False
+    return semantic
 
 
 class _PerfectTransport:
@@ -67,9 +72,9 @@ class _PerfectTransport:
         pair_index, condition_index = divmod(self.calls, 2)
         self.calls += 1
         value = (
-            _accepted_review()
+            _accepted_semantic_review()
             if condition_index == 0
-            else _rejected_review(self.failures[pair_index])
+            else _semantic_for_failure(self.failures[pair_index])
         )
         return ReviewCall(
             value=value,
@@ -93,37 +98,50 @@ def test_assets_freeze_22_paired_public_probes_with_six_visual_pairs():
     assert assets["instrument"]["candidate"]["model"] == "qwen3.5:9b-q4_K_M"
 
 
-def test_review_schema_is_closed_and_uses_frozen_failure_labels():
-    assets = validate_assets()
-    schema = review_schema(assets["instrument"]["failure_labels"])
+def test_review_schema_is_closed_and_excludes_deterministic_fields():
+    schema = review_schema()
 
     assert schema["additionalProperties"] is False
-    assert schema["properties"]["primary_failure"]["enum"] == assets[
-        "instrument"
-    ]["failure_labels"]
+    assert "primary_failure" not in schema["properties"]
+    assert "verdict" not in schema["properties"]
+    assert "citation_lineage_correct" not in schema["properties"]
 
 
-def test_review_contract_mismatch_is_preserved_and_fails_closed():
+def test_semantic_review_rejects_missing_boolean():
+    incomplete = _accepted_semantic_review()
+    del incomplete["evidence_complete"]
+
+    with pytest.raises(ReviewerSensitivityError, match="boolean fields"):
+        validate_semantic_review(incomplete)
+
+
+def test_deterministic_citation_lineage_handles_approved_and_disallowed_sources():
     assets = validate_assets()
-    contradictory = _accepted_review()
-    contradictory["fully_supported"] = False
-
-    normalized = validate_review(
-        contradictory, assets["instrument"]["failure_labels"]
+    approved = assets["dataset"]["pairs"][0]
+    disallowed = next(
+        pair
+        for pair in assets["dataset"]["pairs"]
+        if pair["source_mode"] == "disallowed-distractor"
     )
 
-    assert normalized["reported_verdict"] == "accept"
-    assert normalized["verdict"] == "reject"
-    assert normalized["contract_mismatch"] is True
+    assert deterministic_citation_lineage(approved, approved["clean"]) is True
+    assert deterministic_citation_lineage(disallowed, disallowed["clean"]) is True
+    assert deterministic_citation_lineage(disallowed, disallowed["defect"]) is False
 
 
-def test_review_rejects_unknown_failure_label():
+def test_derived_triage_labels_match_every_seeded_defect():
     assets = validate_assets()
-    review = _rejected_review("wrong_factual_answer")
-    review["primary_failure"] = "invented-label"
 
-    with pytest.raises(ReviewerSensitivityError, match="failure label"):
-        validate_review(review, assets["instrument"]["failure_labels"])
+    for pair in assets["dataset"]["pairs"]:
+        blueprint = assets["blueprint_map"][pair["blueprint_id"]]
+        review = derive_review(
+            _semantic_for_failure(pair["defect"]["primary_failure"]),
+            pair=pair,
+            candidate=pair["defect"],
+            blueprint=blueprint,
+        )
+        assert review["verdict"] == "reject"
+        assert review["primary_failure"] == pair["defect"]["primary_failure"]
 
 
 @pytest.mark.asyncio
@@ -157,10 +175,16 @@ def test_analysis_fails_when_one_critical_defect_is_accepted():
             expected_failure = (
                 "none" if condition == "clean" else pair["defect"]["primary_failure"]
             )
-            review = (
-                _accepted_review()
+            semantic = (
+                _accepted_semantic_review()
                 if condition == "clean"
-                else _rejected_review(expected_failure)
+                else _semantic_for_failure(expected_failure)
+            )
+            review = derive_review(
+                semantic,
+                pair=pair,
+                candidate=pair[condition],
+                blueprint=assets["blueprint_map"][pair["blueprint_id"]],
             )
             results.append(
                 {
@@ -175,7 +199,14 @@ def test_analysis_fails_when_one_critical_defect_is_accepted():
                     },
                 }
             )
-    results[1]["review"] = _accepted_review()
+    results[1]["review"] = derive_review(
+        _accepted_semantic_review(),
+        pair=assets["dataset"]["pairs"][0],
+        candidate=assets["dataset"]["pairs"][0]["clean"],
+        blueprint=assets["blueprint_map"][
+            assets["dataset"]["pairs"][0]["blueprint_id"]
+        ],
+    )
 
     analysis = analyze_results(assets["instrument"], results, identity)
 
