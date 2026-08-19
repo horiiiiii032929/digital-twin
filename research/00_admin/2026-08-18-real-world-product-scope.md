@@ -134,7 +134,7 @@ from a usability pilot.
 | P0 Product UX baseline | Complete | PR #83 merged; professor and student conversation-first workspaces retained as the implementation baseline |
 | P1 Multimodal product grounding | 2026-08-28 | Correct evaluator, region-aware ingestion/retrieval, product citation integration, prospective decision and fallback |
 | P2 Deployable product foundation | 2026-09-06 | Credentialed RBAC, durable data/storage, jobs, staging deployment, observability, security, backup/restore, and rollback |
-| P3 Pilot validation and release | 2026-09-13 | Large factual benchmark, calibrated fidelity, operational/end-to-end evidence, and a release or explicit no-release decision |
+| P3 Pilot validation and release | 2026-09-13 | Large factual-QA dataset quality, calibrated fidelity, operational/end-to-end evidence, and a release or explicit no-release decision |
 
 Dates are planning targets, not evidence or release claims. A failed hard gate
 produces a documented Refine, Go Deeper, or Drop decision rather than a hidden

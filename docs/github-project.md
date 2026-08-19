@@ -43,9 +43,9 @@ professor-communication track.
 
 ## Critical path
 
-1. #87 — current unblocked work: run the frozen source-linked factual-QA
-   quality pilot, revise the method if a gate fails, and complete the six-case
-   audit before scaling toward 10,000 cases.
+1. #87 — attempt 002 passed all machine gates after the failed method was
+   revised; complete the preserved six-case audit, then either refine again or
+   freeze a separate scale-stage dataset plan.
 2. #88 — active but externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.

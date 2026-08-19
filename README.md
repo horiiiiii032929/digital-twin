@@ -85,8 +85,9 @@ The project's technical standard, learning commitments, and strengthened Sprint
   binding without calling an external model.
 - `uv run python -m scripts.run_factual_qa_quality_pilot --execute --allow-external-provider`:
   execute the bounded 24-case quality pilot using
-  DeepSeek V4 Pro, DeepSeek V4 Flash, and diagnostic local Qwen3; the command
-  refuses to scale or overwrite its recorded output.
+  DeepSeek V4 Pro, DeepSeek V4 Flash, and diagnostic local Qwen3; attempt 002
+  passed the bounded machine gates, and the command still refuses to scale or
+  overwrite recorded output.
 - `npm run verify:profile`: validate the versioned component profile.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
@@ -216,7 +217,9 @@ professors and courses, not a one-course RAG pilot or local-only demonstration.
 The merged professor/student workspace is the UX baseline. The next gates are
 trusted multimodal course grounding, credentialed identity and durable product
 infrastructure, a larger factual-QA dataset-quality pipeline, calibrated professor
-fidelity, production operations, and real workflow validation.
+fidelity, production operations, and real workflow validation. The bounded
+factual-QA method passed its machine gates on attempt 002 and is waiting on a
+six-case human audit; this is dataset-method evidence, not a model benchmark.
 
 See the
 [real-world product scope](research/00_admin/2026-08-18-real-world-product-scope.md)
