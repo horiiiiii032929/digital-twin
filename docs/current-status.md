@@ -41,9 +41,14 @@ journey checks, 5/5 after a separate-project clean restore, and 5/5 after
 switching back to the untouched original volume. Local Caddy TLS is now proven;
 public DNS/trusted certificate issuance and the same rehearsal on the selected
 host remain external gates.
-The current candidate is bound by `deployable-product-foundation-freeze-v2` at
-evidence revision `7e980a6`; V1 remains a historical freeze for the earlier
-unclaimed-build result.
+The current candidate now adds a central current-model execution policy. It
+blocks every Gemma and retired local general-Qwen call before provider I/O,
+preserves historical records, and pins prospective local `qwen3.5:4b`. At clean
+revision `101ce06`, the requalified package passed 95/95 focused policy tests,
+41/41 in-process checks, a clean image build, 15/15 live HTTPS checks, 5/5 clean
+restore checks, and 5/5 original-volume rollback checks with zero model calls.
+It is bound by `deployable-product-foundation-freeze-v3`; V1 and V2 remain
+historical freezes.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.

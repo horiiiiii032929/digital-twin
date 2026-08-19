@@ -16,6 +16,7 @@ PROFILE_ROOT = ROOT / "research/05_evaluation/profiles"
 MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v1.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v2.json",
+    PROFILE_ROOT / "deployable-product-foundation-freeze-v3.json",
 )
 EXPECTED_EXTERNAL_GATES = {
     "public-dns-and-certificate",
@@ -86,6 +87,48 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
             "npm run verify:deployable-freeze",
         },
         "artifact_count": 37,
+        "require_current_match": False,
+    },
+    "deployable-product-foundation-freeze-v3": {
+        "status": "go-deeper-public-host-rehearsal-pending",
+        "run_id": "deployable-product-foundation-v3-model-policy-001",
+        "candidate_id": "A1-single-node-staging-v3-model-policy",
+        "local_fields": {
+            "model_policy_focused_passed": 95,
+            "model_policy_focused_total": 95,
+            "in_process_passed": 41,
+            "in_process_total": 41,
+            "live_https_passed": 25,
+            "live_https_total": 25,
+            "container_build_passed": True,
+            "clean_restore_passed": True,
+            "external_provider_calls": 0,
+            "private_data_used": False,
+        },
+        "local_label": "95/95-policy-and-25/25-live-https",
+        "summary_marker": "95/95 focused policy",
+        "build_fields": {
+            "status": "passed",
+            "compose_graph_validated": True,
+            "image_build_claimed": True,
+            "api_image_sha256": (
+                "1de9c871a1b24a84528449ef422e105fc274dd751a81d6bed8f698e0df6c9f36"
+            ),
+            "web_image_sha256": (
+                "4dc17ed8463da0427ab4e74c463b0c7680a09c64345327684036a6a0948bd11b"
+            ),
+        },
+        "commands": {
+            "npm run check",
+            "npm run audit:dependencies",
+            "npm run verify:deployable-foundation",
+            "npm run benchmark:deployable-foundation-development",
+            "npm run staging:build",
+            "npm run verify:staging-https",
+            "npm run verify:deployable-freeze",
+            "npm run verify:model-policy",
+        },
+        "artifact_count": 46,
         "require_current_match": True,
     },
 }
@@ -218,7 +261,7 @@ def validate_deployable_freeze(
         raise ValueError("deployable freeze command is not registered")
     if "npm run verify:deployable-freeze" not in package_scripts.get("check", ""):
         raise ValueError("deployable freeze is absent from the full check")
-    if freeze_id.endswith("v2") and package_scripts.get("verify:staging-https") != (
+    if freeze_id != "deployable-product-foundation-freeze-v1" and package_scripts.get("verify:staging-https") != (
         "uv run python -m scripts.verify_https_staging"
     ):
         raise ValueError("live HTTPS verification command is not registered")

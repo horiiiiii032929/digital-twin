@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v3-model-policy-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v3-model-policy",
+  "corpus_id": "synthetic-network-security-one-pdf-v1",
+  "code_revision": "101ce0642d4c1d91807b7fc1d8cf41ea3fb069eb",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v2",
+        "version": "v2",
+        "configuration": {
+          "model_execution_policy": "distributed-script-specific-controls",
+          "gemma_historical_execution_route": true,
+          "retired_qwen_execution_routes": true,
+          "container_build": "qualified",
+          "generator_mode": "deterministic-network-free"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "prohibited-model-block-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "current-model-registry-pass-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "in-process-deployment-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "live-https-and-recovery-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "central-fail-before-io-model-policy",
+          "passed": false,
+          "evidence": "V2 had no repository-wide model execution guard."
+        },
+        {
+          "name": "current-exact-model-bindings",
+          "passed": false,
+          "evidence": "V2 still exposed retired Qwen3 and Gemma execution routes."
+        },
+        {
+          "name": "historical-result-integrity",
+          "passed": true,
+          "evidence": "V2 preserved historical model results and identities."
+        },
+        {
+          "name": "reproducible-container-build",
+          "passed": true,
+          "evidence": "V2 images built and were retained as the deployment control."
+        },
+        {
+          "name": "live-credentialed-https-workflow",
+          "passed": true,
+          "evidence": "V2 passed its 15-check live HTTPS workflow."
+        },
+        {
+          "name": "clean-restore-and-rollback",
+          "passed": true,
+          "evidence": "V2 passed clean restore and original-volume rollback."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "V2 deployment qualification made zero model calls and used synthetic data."
+        }
+      ],
+      "failures_by_category": {
+        "policy": 2
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v3-model-policy",
+        "version": "v3",
+        "configuration": {
+          "model_execution_policy": "current-model-policy-2026-08-19",
+          "gemma_execution_allowed": false,
+          "retired_general_qwen_execution_allowed": false,
+          "local_general_model": "qwen3.5:4b",
+          "container_build": "qualified",
+          "generator_mode": "deterministic-network-free"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "prohibited-model-block-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "current-model-registry-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "in-process-deployment-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "live-https-and-recovery-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "central-fail-before-io-model-policy",
+          "passed": true,
+          "evidence": "Central and direct transports reject prohibited identities before provider I/O; focused tests passed 95/95."
+        },
+        {
+          "name": "current-exact-model-bindings",
+          "passed": true,
+          "evidence": "The validator accepted all exact current role bindings and the pinned Qwen3.5 digest."
+        },
+        {
+          "name": "historical-result-integrity",
+          "passed": true,
+          "evidence": "Historical result files and recorded model identities were not rewritten."
+        },
+        {
+          "name": "reproducible-container-build",
+          "passed": true,
+          "evidence": "The V3 API and web images built from clean revision 101ce0642d4c1d91807b7fc1d8cf41ea3fb069eb."
+        },
+        {
+          "name": "live-credentialed-https-workflow",
+          "passed": true,
+          "evidence": "The candidate passed 15/15 new live HTTPS checks."
+        },
+        {
+          "name": "clean-restore-and-rollback",
+          "passed": true,
+          "evidence": "The candidate passed 5/5 clean-restore and 5/5 original-volume replay checks."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "All policy and deployment checks used synthetic data and made zero model calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging-v3-model-policy",
+    "rationale": "The candidate blocks prohibited models, validates exact current role bindings, and preserves the full qualified local staging workflow and recovery boundary.",
+    "limitations": [
+      "Qwen3.5 installation and identity are verified, but its quality is not evaluated or selected for a product role.",
+      "The deployment run used synthetic data, localhost, and one development host.",
+      "Public DNS, trusted certificate issuance, and target-host restore remain pending.",
+      "The result does not establish professor-fidelity calibration, multimodal quality, factual-QA scale quality, human usability, or a production SLA."
+    ]
+  }
+}
