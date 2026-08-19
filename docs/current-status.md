@@ -44,6 +44,9 @@ host remain external gates.
 The current candidate is bound by `deployable-product-foundation-freeze-v2` at
 evidence revision `7e980a6`; V1 remains a historical freeze for the earlier
 unclaimed-build result.
+PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
+foundation into `main` at `adf39af`; this accepts the local/container-qualified
+implementation without promoting the still-pending public deployment claim.
 
 GitHub Project 1 is reorganized around product goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active

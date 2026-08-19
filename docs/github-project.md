@@ -45,8 +45,9 @@ professor-communication track.
 
 1. #87 — current unblocked work: freeze and pass a source-linked factual-QA
    pilot, then scale the same process toward 10,000 cases.
-2. #88 — active but externally blocked on host/domain selection; PR #93 retains
-   the passed local/container foundation and recovery evidence.
+2. #88 — active but externally blocked on host/domain selection; merged PR #93
+   (`adf39af`) retains the passed local/container foundation and recovery
+   evidence.
 3. #24 — calibrate Professor Digital Twin fidelity against independent expert
    labels, separately from factual QA.
 4. #9 and #25 — production operations and deployed end-to-end validation after
