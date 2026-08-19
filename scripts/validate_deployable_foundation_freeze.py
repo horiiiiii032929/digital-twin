@@ -19,6 +19,7 @@ MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v3.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v4.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v5.json",
+    PROFILE_ROOT / "deployable-product-foundation-freeze-v6.json",
 )
 EXPECTED_EXTERNAL_GATES = {
     "public-dns-and-certificate",
@@ -215,6 +216,49 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
             "npm run verify:model-policy",
         },
         "artifact_count": 67,
+        "require_current_match": False,
+    },
+    "deployable-product-foundation-freeze-v6": {
+        "status": "go-deeper-public-host-rehearsal-pending",
+        "run_id": "deployable-product-foundation-v5-local-multimodel-policy-001",
+        "candidate_id": "A1-single-node-staging-v5-local-multimodel-policy",
+        "local_fields": {
+            "model_policy_focused_passed": 113,
+            "model_policy_focused_total": 113,
+            "in_process_passed": 41,
+            "in_process_total": 41,
+            "live_https_passed": 30,
+            "live_https_total": 30,
+            "container_build_passed": True,
+            "clean_restore_passed": True,
+            "external_provider_calls": 0,
+            "private_data_used": False,
+        },
+        "local_label": "113/113-policy-provider-and-30/30-live-https",
+        "summary_marker": "113/113 focused",
+        "build_fields": {
+            "status": "passed",
+            "compose_graph_validated": True,
+            "image_build_claimed": True,
+            "api_image_sha256": (
+                "595e59041e63c54cd29e9c35f3e3f934c23689b3adfe58c95e26360b131258cc"
+            ),
+            "web_image_sha256": (
+                "a0af70e70c542dcb04131236d7ebe854aa3161612b32098bfc6a2371f4ebbaea"
+            ),
+        },
+        "commands": {
+            "npm run check",
+            "npm run audit:dependencies",
+            "npm run verify:deployable-foundation",
+            "npm run benchmark:deployable-foundation-development",
+            "npm run staging:build",
+            "npm run verify:staging-https",
+            "npm run verify:deployable-freeze",
+            "npm run verify:model-policy",
+        },
+        "artifact_count": 67,
+        "current_match_binding_count": 45,
         "require_current_match": True,
     },
 }
@@ -311,7 +355,10 @@ def validate_deployable_freeze(
             ]
         if manifest.get("model_policy") != expected_model_policy:
             raise ValueError("current model policy freeze binding drifted")
-    elif freeze_id == "deployable-product-foundation-freeze-v5":
+    elif freeze_id in {
+        "deployable-product-foundation-freeze-v5",
+        "deployable-product-foundation-freeze-v6",
+    }:
         expected_model_policy = {
             "policy_id": "current-model-policy-2026-08-19-v2",
             "gemma_execution_allowed": False,
@@ -369,10 +416,30 @@ def validate_deployable_freeze(
             raise ValueError(f"invalid artifact hash: {relative_path}")
         if _sha256(_revision_file(root, revision, relative_path)) != expected:
             raise ValueError(f"revision artifact hash mismatch: {relative_path}")
-        if spec["require_current_match"] and (
+        binding_requires_current = spec["require_current_match"]
+        if freeze_id == "deployable-product-foundation-freeze-v6":
+            binding_requires_current = binding.get("current_match_required")
+            if not isinstance(binding_requires_current, bool):
+                raise ValueError(
+                    f"current-match classification missing: {relative_path}"
+                )
+        if binding_requires_current and (
             _sha256(_current_file(root, relative_path).read_bytes()) != expected
         ):
             raise ValueError(f"current artifact drifted from freeze: {relative_path}")
+    if freeze_id == "deployable-product-foundation-freeze-v6":
+        current_match_count = sum(
+            binding["current_match_required"] for binding in bindings
+        )
+        if current_match_count != spec["current_match_binding_count"]:
+            raise ValueError("current-match artifact scope drifted")
+        binding_by_path = {binding["path"]: binding for binding in bindings}
+        if binding_by_path["research/05_evaluation/result-registry.md"][
+            "current_match_required"
+        ]:
+            raise ValueError("append-only result registry cannot bind current package")
+        if not binding_by_path["compose.staging.yml"]["current_match_required"]:
+            raise ValueError("deployment implementation must bind current package")
 
     record_path = f"research/05_evaluation/records/{spec['run_id']}.json"
     record = _revision_json(root, revision, record_path)
@@ -406,7 +473,7 @@ def validate_deployable_freeze(
     if not manifest.get("rollback") or not manifest.get("change_control"):
         raise ValueError("deployable freeze must preserve rollback and change control")
 
-    return {
+    result = {
         "status": "passed",
         "freeze_id": freeze_id,
         "evidence_revision": revision,
@@ -418,6 +485,9 @@ def validate_deployable_freeze(
         "private_or_heldout_data_read": False,
         "external_model_called": False,
     }
+    if freeze_id == "deployable-product-foundation-freeze-v6":
+        result["current_match_bindings"] = spec["current_match_binding_count"]
+    return result
 
 
 def main() -> None:
