@@ -43,12 +43,13 @@ public DNS/trusted certificate issuance and the same rehearsal on the selected
 host remain external gates.
 The current candidate now adds a central current-model execution policy. It
 blocks every Gemma and retired local general-Qwen call before provider I/O,
-preserves historical records, and pins prospective local `qwen3.5:4b`. At clean
-revision `101ce06`, the requalified package passed 95/95 focused policy tests,
-41/41 in-process checks, a clean image build, 15/15 live HTTPS checks, 5/5 clean
-restore checks, and 5/5 original-volume rollback checks with zero model calls.
-It is bound by `deployable-product-foundation-freeze-v3`; V1 and V2 remain
-historical freezes.
+preserves historical records, pins prospective local `qwen3.5:4b`, and requires
+the optional hosted Jina retrieval pair to match exact registered v5/v3 IDs. At
+clean revision `9966f5f`, the requalified V4 package passed 107/107 focused
+policy/provider tests, 41/41 in-process checks, a clean image build, 15/15 live
+HTTPS checks, and three 5/5 restart/restore/rollback replays with zero model
+calls. It supersedes the V3 candidate after its own freeze is registered; V1-V3
+remain historical evidence.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.

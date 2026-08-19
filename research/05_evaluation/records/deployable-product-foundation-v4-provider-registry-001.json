@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v4-provider-registry-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v4-provider-registry",
+  "corpus_id": "synthetic-network-security-one-pdf-v1",
+  "code_revision": "9966f5f106468bec93af8e69d740099910824ae7",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v3-model-policy",
+        "version": "v3",
+        "configuration": {
+          "model_execution_policy": "current-model-policy-2026-08-19",
+          "hosted_retrieval_model_enforcement": "adapter-default-only",
+          "gemma_execution_allowed": false,
+          "container_build": "qualified"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "all-executable-models-registered-rate",
+          "value": 0.75,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "hosted-provider-drift-block-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "deployment-regression-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gemma-and-retired-qwen-fail-before-io",
+          "passed": true,
+          "evidence": "V3 centrally rejected Gemma and retired general Qwen identities."
+        },
+        {
+          "name": "exact-hosted-retrieval-model-binding",
+          "passed": false,
+          "evidence": "The Jina adapters accepted arbitrary runtime model overrides."
+        },
+        {
+          "name": "historical-result-integrity",
+          "passed": true,
+          "evidence": "Historical records remained immutable."
+        },
+        {
+          "name": "deployment-and-recovery-regression",
+          "passed": true,
+          "evidence": "The V3 staging package had already passed its local deployment and recovery gates."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "The control qualification used synthetic data and made zero model calls."
+        }
+      ],
+      "failures_by_category": {
+        "policy": 2
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v4-provider-registry",
+        "version": "v4",
+        "configuration": {
+          "model_execution_policy": "current-model-policy-2026-08-19",
+          "hosted_embedding_model": "jina-embeddings-v5-text-small",
+          "hosted_reranker_model": "jina-reranker-v3",
+          "gemma_execution_allowed": false,
+          "container_build": "qualified"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "all-executable-models-registered-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "hosted-provider-drift-block-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "deployment-regression-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gemma-and-retired-qwen-fail-before-io",
+          "passed": true,
+          "evidence": "Central and direct transports reject prohibited identities before provider I/O."
+        },
+        {
+          "name": "exact-hosted-retrieval-model-binding",
+          "passed": true,
+          "evidence": "Both Jina adapters require their registered current v5/v3 identities before provider I/O; three drift probes passed."
+        },
+        {
+          "name": "historical-result-integrity",
+          "passed": true,
+          "evidence": "No historical result or recorded model identity was rewritten."
+        },
+        {
+          "name": "deployment-and-recovery-regression",
+          "passed": true,
+          "evidence": "The candidate passed 31 deployment tests, 41 in-process checks, 15 live checks, and three five-check recovery replays."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "All policy and deployment checks used synthetic data and made zero model calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging-v4-provider-registry",
+    "rationale": "The candidate preserves the no-Gemma boundary and qualified staging workflow while preventing silent hosted retrieval-model drift.",
+    "limitations": [
+      "Jina model identity and transport enforcement are verified, but retrieval quality is not evaluated or selected.",
+      "Qwen3.5 installation and identity remain unselected for any product role.",
+      "The deployment run used synthetic data, localhost, and one development host.",
+      "Public DNS, trusted certificate issuance, target-host restore, professor-fidelity calibration, multimodal quality, factual-QA scale quality, and human usability remain pending."
+    ]
+  }
+}
