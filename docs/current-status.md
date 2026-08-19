@@ -41,15 +41,14 @@ journey checks, 5/5 after a separate-project clean restore, and 5/5 after
 switching back to the untouched original volume. Local Caddy TLS is now proven;
 public DNS/trusted certificate issuance and the same rehearsal on the selected
 host remain external gates.
-The current candidate now adds a central current-model execution policy. It
-blocks every Gemma and retired local general-Qwen call before provider I/O,
-preserves historical records, pins prospective local `qwen3.5:4b`, and requires
-the optional hosted Jina retrieval pair to match exact registered v5/v3 IDs. At
-clean revision `9966f5f`, the requalified V4 package passed 107/107 focused
+The current candidate now uses model policy v2. It rejects Gemma, Claude, and
+retired local general-Qwen calls before provider I/O; retains direct DeepSeek;
+pins the exact prospective local `qwen3.5:9b-q4_K_M` artifact; controls optional
+OpenRouter DeepSeek/Mistral routes; and retains exact Jina candidate identities.
+At clean revision `c28ae5f`, the requalified V5 package passed 113/113 focused
 policy/provider tests, 41/41 in-process checks, a clean image build, 15/15 live
 HTTPS checks, and three 5/5 restart/restore/rollback replays with zero model
-calls. It supersedes the V3 candidate after its own freeze is registered; V1-V3
-remain historical evidence.
+calls. V1-V4 remain historical evidence; a V5 freeze binds the current package.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.
@@ -123,13 +122,12 @@ remains excluded. A production OCR/layout or replacement vision model is
 selected only through a new prospective qualification and representative
 course evidence.
 
-The active model policy now blocks every Gemma call and all retired local
-Qwen3 general-reviewer calls before provider I/O. DeepSeek V4 Flash/Pro,
-Claude Sonnet 5, and the selected task-specific Qwen3 Embedding binding remain
-current for their recorded roles. `qwen3.5:4b` is the prospective local general
-and vision-language replacement, but it is not selected until a new instrument
-passes its project-specific gates. See
-[the current model policy](../research/00_admin/2026-08-19-current-model-policy.md).
+The active model policy now blocks every Gemma and Claude call and all retired
+local general-Qwen calls before provider I/O. Direct DeepSeek V4 Flash/Pro and
+the selected task-specific Qwen3 Embedding binding remain current for their
+recorded roles. `qwen3.5:9b-q4_K_M` and exact OpenRouter DeepSeek/Mistral routes
+are prospective only; they require new project-specific quality evidence. See
+[the current model policy](../research/00_admin/2026-08-19-current-model-policy-v2.md).
 
 ## Large factual-QA interpretation
 

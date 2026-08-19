@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v5-local-multimodel-policy-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v5-local-multimodel-policy",
+  "corpus_id": "synthetic-network-security-one-pdf-v1",
+  "code_revision": "c28ae5f8dda1c7e240156268ad0620fa04730cf4",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v4-provider-registry",
+        "version": "v4",
+        "configuration": {
+          "model_execution_policy": "current-model-policy-2026-08-19",
+          "local_general_model": "qwen3.5:4b",
+          "claude_execution_allowed": true,
+          "openrouter_controlled_routes": "none"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "prospective-policy-hard-gate-pass-rate",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "deployment-regression-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gemma-prohibited-before-io",
+          "passed": true,
+          "evidence": "V4 centrally rejected every Gemma identity."
+        },
+        {
+          "name": "claude-and-qwen35-4b-prohibited-before-io",
+          "passed": false,
+          "evidence": "V4 registered Claude and Qwen3.5 4B as prospective executable options."
+        },
+        {
+          "name": "exact-feasible-local-artifact",
+          "passed": false,
+          "evidence": "V4 pinned the replaced 4B local artifact rather than the selected 9B candidate identity."
+        },
+        {
+          "name": "controlled-openrouter-candidate-routes",
+          "passed": false,
+          "evidence": "V4 had no exact OpenRouter candidate bindings or frozen routing controls."
+        },
+        {
+          "name": "deployment-and-recovery-regression",
+          "passed": true,
+          "evidence": "The historical V4 deployment qualification passed its frozen local gates."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "The historical V4 qualification used synthetic data and made zero model calls."
+        }
+      ],
+      "failures_by_category": {
+        "policy": 3
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v5-local-multimodel-policy",
+        "version": "v5",
+        "configuration": {
+          "model_execution_policy": "current-model-policy-2026-08-19-v2",
+          "local_general_model": "qwen3.5:9b-q4_K_M",
+          "local_manifest_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+          "claude_execution_allowed": false,
+          "openrouter_deepseek_model": "openrouter/deepseek/deepseek-v4-flash-0731",
+          "openrouter_independent_model": "openrouter/mistralai/mistral-small-2603",
+          "openrouter_allow_fallbacks": false,
+          "openrouter_require_parameters": true,
+          "openrouter_data_collection": "deny",
+          "openrouter_zdr": true,
+          "container_build": "qualified"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "prospective-policy-hard-gate-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "deployment-regression-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gemma-prohibited-before-io",
+          "passed": true,
+          "evidence": "Central and direct transports reject Gemma identities before provider I/O."
+        },
+        {
+          "name": "claude-and-qwen35-4b-prohibited-before-io",
+          "passed": true,
+          "evidence": "Claude and retired Qwen3.5 4B identities are rejected before provider or Ollama I/O, and package commands expose neither model."
+        },
+        {
+          "name": "exact-feasible-local-artifact",
+          "passed": true,
+          "evidence": "The only scoped local artifact is qwen3.5:9b-q4_K_M at the recorded full manifest digest."
+        },
+        {
+          "name": "controlled-openrouter-candidate-routes",
+          "passed": true,
+          "evidence": "Exact DeepSeek/Mistral routes and all four immutable provider controls passed policy tests."
+        },
+        {
+          "name": "deployment-and-recovery-regression",
+          "passed": true,
+          "evidence": "The candidate passed 31 deployment tests, 41 in-process checks, 15 live checks, and three five-check recovery replays."
+        },
+        {
+          "name": "zero-model-call-synthetic-boundary",
+          "passed": true,
+          "evidence": "All policy and deployment checks used synthetic data and made zero local or external model calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging-v5-local-multimodel-policy",
+    "rationale": "The candidate enforces the requested no-Claude boundary, pins the feasible local model, controls optional OpenRouter routes, and preserves every qualified deployment and recovery behavior.",
+    "limitations": [
+      "Identity, routing controls, and local installation are verified, but Qwen3.5 9B and Mistral answer quality are not evaluated or selected.",
+      "Direct DeepSeek remains selected; OpenRouter and BYOK have not been configured or called.",
+      "The deployment run used synthetic data, localhost, and one development host.",
+      "Public DNS, trusted certificate issuance, target-host restore, professor-fidelity calibration, real-course multimodal quality, factual-QA scale quality, and human usability remain pending."
+    ]
+  }
+}
