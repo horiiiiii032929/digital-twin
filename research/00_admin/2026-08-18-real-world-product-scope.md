@@ -89,18 +89,19 @@ Use a new development set. Keep the existing 24-case multimodal held-out split
 closed until the candidate, configuration, metrics, gates, and analysis are
 frozen. Retain the selected text retriever as the explicit fallback.
 
-### E2: large factual QA scale benchmark
+### E2: large factual-QA dataset quality
 
-Implement the professor's suggestion as a separate benchmark approaching
-10,000 factual question-answer cases. Build a larger permission-safe dummy
-document corpus first, including a meaningful multimodal slice, then generate
-and cross-check cases with multiple independent LLMs.
+Implement the professor's suggestion as a separate dataset-quality pipeline
+approaching 10,000 factual question-answer cases. Build a larger
+permission-safe dummy document corpus first, including a meaningful multimodal
+slice, then generate and cross-check cases with multiple LLMs.
 
 Multi-model agreement is not ground truth. Every retained case requires source
 evidence, provenance, deterministic validation, deduplication, disagreement
-handling, and a stratified human audit. Pilot the process before scaling. Keep
-this dataset separate from the verified 100-case retrieval benchmark and the
-Professor Digital Twin fidelity comparison.
+handling, and a stratified human audit. Pilot the process before scaling. A
+failed gate changes the generation or review method; it does not trigger a
+model-ranking exercise. Keep this dataset separate from the verified 100-case
+retrieval benchmark and the Professor Digital Twin fidelity comparison.
 
 ### E3: Professor Digital Twin fidelity
 
@@ -133,7 +134,7 @@ from a usability pilot.
 | P0 Product UX baseline | Complete | PR #83 merged; professor and student conversation-first workspaces retained as the implementation baseline |
 | P1 Multimodal product grounding | 2026-08-28 | Correct evaluator, region-aware ingestion/retrieval, product citation integration, prospective decision and fallback |
 | P2 Deployable product foundation | 2026-09-06 | Credentialed RBAC, durable data/storage, jobs, staging deployment, observability, security, backup/restore, and rollback |
-| P3 Pilot validation and release | 2026-09-13 | Large factual benchmark, calibrated fidelity, operational/end-to-end evidence, and a release or explicit no-release decision |
+| P3 Pilot validation and release | 2026-09-13 | Large factual-QA dataset quality, calibrated fidelity, operational/end-to-end evidence, and a release or explicit no-release decision |
 
 Dates are planning targets, not evidence or release claims. A failed hard gate
 produces a documented Refine, Go Deeper, or Drop decision rather than a hidden
@@ -148,7 +149,7 @@ schedule-driven pass.
 3. [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) replaces
    prototype infrastructure with a deployable foundation.
 4. [#87](https://github.com/horiiiiii032929/digital-twin/issues/87) creates the
-   large factual QA scale benchmark.
+   large source-linked factual-QA dataset pipeline.
 5. [#24](https://github.com/horiiiiii032929/digital-twin/issues/24),
    [#9](https://github.com/horiiiiii032929/digital-twin/issues/9), and
    [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) provide

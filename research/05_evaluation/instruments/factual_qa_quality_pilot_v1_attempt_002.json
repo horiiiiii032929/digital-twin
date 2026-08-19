@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-quality-pilot-v1-attempt-002",
+  "status": "frozen-pending-execution",
+  "predecessor": "factual-qa-quality-pilot-v1-attempt-001",
+  "decision_question": "Does the corrected source-constrained generation and fail-closed cross-review method produce a trustworthy factual-QA pilot that is ready for a six-case stratified human audit?",
+  "method_version": "source-constrained-factual-qa-v2",
+  "corpus": {
+    "path": "research/05_evaluation/factual_qa_pilot_corpus_v1.json",
+    "sha256": "dd69703503b6ed0883e19e03330f9a4d98fa9c14056a71d7bdfdee0ed4aecd31",
+    "corpus_id": "factual-qa-pilot-corpus-v1",
+    "case_blueprints": 24,
+    "content_class": "synthetic-public"
+  },
+  "model_roles": {
+    "author": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-pro",
+      "provider_model": "deepseek-v4-pro",
+      "documented_revision": "DeepSeek-V4-Pro",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 900,
+      "timeout_seconds": 90,
+      "prompt_version": "factual-qa-author-v2-nonempty-boundary",
+      "revision_policy": "require a non-empty fingerprint and one stable fingerprint within the run"
+    },
+    "cross_reviewer": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-flash",
+      "provider_model": "deepseek-v4-flash",
+      "documented_revision": "DeepSeek-V4-Flash",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 900,
+      "timeout_seconds": 90,
+      "prompt_version": "factual-qa-review-v2-fail-closed",
+      "revision_policy": "require a non-empty fingerprint and one stable fingerprint within the run"
+    },
+    "independent_sensitivity_reviewer": {
+      "provider": "local-ollama",
+      "model": "qwen3:4b",
+      "model_digest": "359d7dd4bcda",
+      "thinking": "disabled",
+      "temperature": 0,
+      "seed": 8702,
+      "max_output_tokens": 700,
+      "timeout_seconds": 180,
+      "prompt_version": "factual-qa-review-v2-fail-closed",
+      "decision_role": "diagnostic-only-until-calibrated"
+    }
+  },
+  "excluded_models": ["gemma3:4b"],
+  "execution": {
+    "author_call_limit": 24,
+    "cross_reviewer_call_limit": 24,
+    "independent_reviewer_call_limit": 24,
+    "concurrency": 1,
+    "retry_attempts": 0,
+    "cost_stop_usd": 1.0,
+    "output_overwrite_allowed": false
+  },
+  "acceptance_rule": "Retain a case only when all deterministic checks pass and the normalized fail-closed DeepSeek V4 Flash review accepts it. Qwen3 remains diagnostic; disagreements are prioritized for human audit but do not decide acceptance.",
+  "quality_gates": {
+    "source_integrity_rate_min": 1.0,
+    "author_completion_rate_min": 1.0,
+    "deterministic_provenance_rate_min": 1.0,
+    "boundary_action_rate_min": 1.0,
+    "cross_course_leakage_count_max": 0,
+    "duplicate_question_rate_max": 0.05,
+    "near_duplicate_question_rate_max": 0.05,
+    "cross_reviewer_completion_rate_min": 1.0,
+    "retained_case_rate_min": 0.8,
+    "quarantine_rate_max": 0.2,
+    "retained_multimodal_rate_min": 0.8,
+    "model_identity_stable_required": true,
+    "private_data_calls_max": 0,
+    "cost_usd_max": 1.0
+  },
+  "diagnostic_alerts": {
+    "qwen_agreement_rate_below": 0.8,
+    "interpretation": "A low rate is evidence about reviewer instability, not automatic evidence that the authored case is wrong. Prior repository results make Qwen3 ineligible for citation clearance until human calibration."
+  },
+  "human_audit": {
+    "status": "required-after-machine-gates",
+    "sample_size": 6,
+    "selection": "deterministic stratified sample across text, multi-evidence, multimodal, and boundary slices, prioritizing Qwen disagreements",
+    "scale_rule": "Do not scale until all six sampled cases have verified question clarity, answer correctness, complete source support, correct action, and citation lineage."
+  },
+  "failure_response": {
+    "decision_on_any_hard_gate_failure": "refine",
+    "required_action": "classify failures, change the source-constrained method or prompts, freeze a successor attempt, and rerun the bounded pilot",
+    "prohibited_action": "rank models or scale a failing method"
+  },
+  "prospective_repairs": [
+    "require a non-empty user-visible response for abstain, clarify, and refuse cases",
+    "use DeepSeek V4 Flash non-thinking JSON review",
+    "count every attempted model call exactly once",
+    "normalize contradictory review dimensions to a fail-closed rejection and preserve the raw review",
+    "resolve output paths before writing and rendering the summary"
+  ]
+}

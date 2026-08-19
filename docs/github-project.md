@@ -35,7 +35,7 @@ the release-critical path.
 | P0 | Product UX baseline — complete | Merged professor/student conversation-first workspace in PR #83 |
 | P1 | Multimodal Product Grounding | Correct metrics, implement region-aware ingestion/retrieval, integrate visual citations, select or retain fallback |
 | P2 | Deployable Product Foundation | Identity, durable data/storage, jobs, deployment, observability, security, recovery, and capacity |
-| P3 | Pilot Validation and Release | Large factual benchmark, calibrated fidelity, end-to-end evidence, and approval-gated usability pilot |
+| P3 | Pilot Validation and Release | Large factual-QA dataset quality, calibrated fidelity, end-to-end evidence, and approval-gated usability pilot |
 
 The older F1/F2 milestones are closed history. F3 is superseded by P1-P3 after
 its open issues were reassigned. F4 remains the report, presentation, and
@@ -43,8 +43,9 @@ professor-communication track.
 
 ## Critical path
 
-1. #87 — current unblocked work: freeze and pass a source-linked factual-QA
-   pilot, then scale the same process toward 10,000 cases.
+1. #87 — attempt 002 passed all machine gates after the failed method was
+   revised; complete the preserved six-case audit, then either refine again or
+   freeze a separate scale-stage dataset plan.
 2. #88 — active but externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.

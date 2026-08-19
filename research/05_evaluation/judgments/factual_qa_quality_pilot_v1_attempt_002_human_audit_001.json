@@ -1,0 +1,120 @@
+{
+  "packet_id": "factual-qa-quality-pilot-v1-attempt-002-human-audit-001",
+  "instrument_id": "factual-qa-quality-pilot-v1-attempt-002",
+  "corpus_sha256": "dd69703503b6ed0883e19e03330f9a4d98fa9c14056a71d7bdfdee0ed4aecd31",
+  "status": "pending-human-review",
+  "instructions": {
+    "pass_only_if": [
+      "question is clear for the intended slice",
+      "answer or safe action is correct",
+      "every factual statement is supported by the cited source truth",
+      "all required evidence is cited",
+      "course and privacy boundaries are respected"
+    ],
+    "scale_rule": "all six cases must pass; otherwise refine the method"
+  },
+  "cases": [
+    {
+      "blueprint_id": "fqa-p01",
+      "slice": "direct-text",
+      "course_id": "course-browser-security",
+      "expected_action": "answer",
+      "evidence_unit_ids": ["browser-session-lifecycle"],
+      "question": "When is the session identifier rotated?",
+      "answer": "The session identifier is rotated immediately after successful authentication.",
+      "citations": [
+        {
+          "source_unit_id": "browser-session-lifecycle",
+          "quote": "The application rotates the session identifier immediately after successful authentication."
+        }
+      ],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    },
+    {
+      "blueprint_id": "fqa-p05",
+      "slice": "paraphrase-text",
+      "course_id": "course-data-systems",
+      "expected_action": "answer",
+      "evidence_unit_ids": ["data-write-ahead-log"],
+      "question": "What durable-write ordering is required for recovery in a write-ahead log system?",
+      "answer": "The write-ahead log record must reach durable storage before the corresponding data page is flushed. This ordering allows recovery to replay committed changes.",
+      "citations": [
+        {
+          "source_unit_id": "data-write-ahead-log",
+          "quote": "The write-ahead log record must reach durable storage before the corresponding data page is flushed. This ordering allows recovery to replay committed changes."
+        }
+      ],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    },
+    {
+      "blueprint_id": "fqa-p06",
+      "slice": "multi-evidence-text",
+      "course_id": "course-data-systems",
+      "expected_action": "answer",
+      "evidence_unit_ids": ["data-idempotency", "data-recovery-objectives"],
+      "question": "How does the service prevent duplicate application when a retry uses the same idempotency key and payload, and which objective limits how long service restoration may take?",
+      "answer": "The service prevents duplicate application by returning the previously recorded outcome instead of applying the operation twice. The recovery time objective limits how long service restoration may take.",
+      "citations": [
+        {
+          "source_unit_id": "data-idempotency",
+          "quote": "the service returns the previously recorded outcome instead of applying the operation twice"
+        },
+        {
+          "source_unit_id": "data-recovery-objectives",
+          "quote": "The recovery time objective limits how long service restoration may take"
+        }
+      ],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    },
+    {
+      "blueprint_id": "fqa-p15",
+      "slice": "multimodal",
+      "course_id": "course-machine-learning",
+      "expected_action": "answer",
+      "evidence_unit_ids": ["visual-softmax-equation"],
+      "question": "What values appear in the softmax denominator sum?",
+      "answer": "The denominator sums exponentiated logits across all classes.",
+      "citations": [
+        {
+          "source_unit_id": "visual-softmax-equation",
+          "quote": "The softmax denominator sums exponentiated logits across all classes."
+        }
+      ],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    },
+    {
+      "blueprint_id": "fqa-p18",
+      "slice": "no-evidence",
+      "course_id": "course-browser-security",
+      "expected_action": "abstain",
+      "evidence_unit_ids": [],
+      "question": "What is the required password expiry interval?",
+      "answer": "The approved sources do not provide the requested information.",
+      "citations": [],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    },
+    {
+      "blueprint_id": "fqa-p21",
+      "slice": "ambiguous",
+      "course_id": "course-machine-learning",
+      "expected_action": "clarify",
+      "evidence_unit_ids": ["ml-calibration"],
+      "question": "What is the right confidence to use?",
+      "answer": "Could you specify the prediction or comparison set you are asking about?",
+      "citations": [],
+      "human_decision": null,
+      "human_failure_categories": [],
+      "human_notes": ""
+    }
+  ]
+}

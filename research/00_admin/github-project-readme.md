@@ -26,8 +26,9 @@ historical record.
   checks, but public host/domain selection, trusted TLS, target-host restore,
   and the public walkthrough remain externally blocked.
 - The professor accepted the proposed evaluation approach and recommended a
-  separate factual-QA dataset near 10,000 cases using multiple LLMs. #87 is now
-  the current unblocked execution item.
+  separate factual-QA dataset near 10,000 cases using multiple LLMs. #87's
+  bounded attempt 002 passed all machine gates and is now at its six-case
+  human-audit decision point.
 
 ## Product goal
 
@@ -53,12 +54,13 @@ The deployed pilot must provide:
 | P0 Product UX baseline | Complete | PR #83 merged; local demo and tests retained |
 | P1 Multimodal Product Grounding | Complete / Refine | #85 and #86 merged; region-aware foundation retained, text fallback preserved, no multimodal profile selected |
 | P2 Deployable Product Foundation | 2026-09-06 | Credentialed RBAC, durable data/storage, jobs, staging deployment, observability, security, backup/restore, rollback |
-| P3 Pilot Validation and Release | 2026-09-13 | Large factual benchmark, calibrated fidelity, end-to-end/operations evidence, release or explicit no-release decision |
+| P3 Pilot Validation and Release | 2026-09-13 | Large factual-QA dataset quality, calibrated fidelity, end-to-end/operations evidence, release or explicit no-release decision |
 
 ## Critical path
 
-1. #87 freezes and validates a bounded source-linked factual-QA pilot, then
-   scales the same process toward 10,000 cases, including a multimodal slice.
+1. #87 passed the bounded source-linked factual-QA method's machine gates on
+   attempt 002 after revising the failed attempt 001; complete its preserved
+   six-case audit before freezing any scale-stage dataset plan.
 2. #88 remains active but externally blocked; resume its public deployment
    gates when a host and domain are selected.
 3. #24 calibrates Professor Digital Twin fidelity against independent expert
@@ -83,9 +85,10 @@ measures, and rollback before execution. Every favorable, unfavorable,
 invalid, or inconclusive named result remains registered.
 
 The verified 100-case benchmark remains the high-confidence research set. The
-new large factual benchmark is separate and uses multi-model generation and
-cross-checking, deterministic source validation, disagreement handling, and a
-stratified human audit. Multi-model agreement is not ground truth.
+new large factual-QA dataset pipeline is separate and uses multi-model
+generation and cross-checking, deterministic source validation, disagreement
+handling, and a stratified human audit. Multi-model agreement is not ground
+truth, and failed gates require method revision rather than model ranking.
 
 ## Operating rules
 

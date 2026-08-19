@@ -69,13 +69,13 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Planned | Professor suggestion and issue #87 define a separate scale benchmark | Larger dummy document corpus, multimodal slice, multi-model generation/cross-check, source validation, human audit, and result |
+| Large factual QA | Go Deeper / audit pending | Attempt 002 passed every machine gate: 24/24 retained, 7/7 safe boundary actions, 6/6 multimodal retained, zero leakage/duplicates, and complete dual review | Complete the preserved six-case human audit; refine on any failure, otherwise freeze a separate scale-stage plan |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#87 Factual QA benchmark](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Pending | Freeze and pass a bounded source-linked pilot, then scale the same process toward 10,000 cases |
+| 1 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Complete the six-case audit preserved from attempt 002; refine on failure or freeze the scale-stage method on pass |
 | 2 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 3 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 4 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -86,9 +86,10 @@ Issues #85 and #86 are complete and archived from the live Project view. PR #91 
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 is now the current
-unblocked evaluation item because it directly implements the professor's
-large factual-QA recommendation. Issue #88 remains active but externally
+and the historical held-out split was not opened. Issue #87 is now at its
+bounded human-audit gate after attempt 001 exposed method defects and the
+prospective attempt 002 passed all machine gates. This qualifies the
+dataset-building method, not a model benchmark. Issue #88 remains active but externally
 blocked; its implementation and local qualification are complete enough for a
 controlled host rehearsal, not for a real-user pilot.
 
@@ -116,14 +117,15 @@ remains excluded. A production OCR/layout or replacement vision model is
 selected only through a new prospective qualification and representative
 course evidence.
 
-## Large benchmark interpretation
+## Large factual-QA interpretation
 
 Issue #87 adopts the stronger, product-relevant interpretation of the
 professor's suggestion: build a larger permission-safe dummy document corpus,
-then derive and cross-check factual QA toward 10,000 cases. This tests corpus
-and factual-answer scale rather than repeatedly sampling only the existing 32
-PDFs. It includes a meaningful multimodal slice and remains separate from the
-verified 100-case benchmark and Professor Digital Twin fidelity.
+then derive and cross-check factual QA toward 10,000 cases. This is not a model
+leaderboard. The bounded pilot evaluates whether the source-constrained method
+produces trustworthy cases; failed gates require method revision. It includes a
+meaningful multimodal slice and remains separate from the verified 100-case
+benchmark and Professor Digital Twin fidelity.
 
 ## Human and safety boundary
 

@@ -80,6 +80,14 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm run verify:retrieval-v3-instruments`: validate the frozen IT5002
   retrieval-v3 candidates, metrics, held-out lock, and public open-set example
   without downloading or running a model.
+- `uv run python -m scripts.run_factual_qa_quality_pilot`: validate the frozen
+  synthetic-public factual-QA corpus, model roles, gates, and local reviewer
+  binding without calling an external model.
+- `uv run python -m scripts.run_factual_qa_quality_pilot --execute --allow-external-provider`:
+  execute the bounded 24-case quality pilot using
+  DeepSeek V4 Pro, DeepSeek V4 Flash, and diagnostic local Qwen3; attempt 002
+  passed the bounded machine gates, and the command still refuses to scale or
+  overwrite recorded output.
 - `npm run verify:profile`: validate the versioned component profile.
 - `npm run test:api`: run current Python tests for the API/domain scaffold.
 - `npm run test:web`: run frontend tests.
@@ -208,8 +216,10 @@ The active goal is a deployed, invite-only Course Digital Twin for multiple
 professors and courses, not a one-course RAG pilot or local-only demonstration.
 The merged professor/student workspace is the UX baseline. The next gates are
 trusted multimodal course grounding, credentialed identity and durable product
-infrastructure, a larger factual QA scale benchmark, calibrated professor
-fidelity, production operations, and real workflow validation.
+infrastructure, a larger factual-QA dataset-quality pipeline, calibrated professor
+fidelity, production operations, and real workflow validation. The bounded
+factual-QA method passed its machine gates on attempt 002 and is waiting on a
+six-case human audit; this is dataset-method evidence, not a model benchmark.
 
 See the
 [real-world product scope](research/00_admin/2026-08-18-real-world-product-scope.md)

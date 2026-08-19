@@ -37,9 +37,10 @@ authoritative for the results they document.
 3. Can the deployed system complete administrator, professor, and student
    journeys with correct authorization, citation lineage, publication control,
    recovery, observability, and bounded capacity?
-4. Does a separate large factual QA benchmark approaching 10,000 cases expose
-   quality, abstention, isolation, latency, or cost failures that the verified
-   100-case benchmark cannot estimate?
+4. Can a source-linked generation and review method produce a trustworthy
+   factual-QA dataset approaching 10,000 cases while exposing quality,
+   abstention, isolation, latency, and cost failures that the verified 100-case
+   benchmark cannot estimate?
 
 ## Delivery phases
 
@@ -49,7 +50,7 @@ authoritative for the results they document.
 - **P2 — Deployable product foundation:** credentialed RBAC, durable data and
   storage, ingestion jobs, staging deployment, observability, security,
   backup/restore, and rollback.
-- **P3 — Pilot validation and release:** large factual benchmark, calibrated
+- **P3 — Pilot validation and release:** large factual-QA dataset quality, calibrated
   fidelity, end-to-end and operational validation, and approval-gated real-user
   workflow evidence.
 
