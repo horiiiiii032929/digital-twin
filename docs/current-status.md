@@ -35,12 +35,13 @@ accepted six stratified controls. The decision is **Refine**; authorization is
 revoked and 10,000-case scale remains closed. No path permits private or held-out
 data, and the wider freeze remains active.
 
-Reviewed successor `factual-qa-v3-scale-rehearsal-005` changes the method rather
+Frozen successor `factual-qa-v3-scale-rehearsal-005` changes the method rather
 than lowering the failed gate. It makes exact target-claim, full evidence-quote,
 verbatim source, and no-extra-claim checks explicit to both model reviewers. Its
 24 mutation probes exclude every blueprint used by 004 and add unseen
-paraphrased-citation and extra-supported-claim defects. The design is not frozen
-or authorized for execution.
+paraphrased-citation and extra-supported-claim defects. The researcher authorized
+this exact bounded paid run; the wider freeze remains active and 10,000-case
+execution remains unauthorized.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -75,9 +76,8 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections pass the current 641-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 436-file audit. Evaluation
-execution remains unauthorized because the freeze is intentionally still
-active pending the next explicit work decision.
+artifacts are also fully dispositioned in the current 438-file audit. Evaluation
+execution remains frozen except for the exact bounded rehearsal 005 authorization.
 
 ## Current outcome
 
@@ -164,14 +164,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine after invalid 002; reviewed 004 blocked; no 10,000 scale | The 40-case oracle pilot passed. Rehearsal 002 is operationally invalid after bulk authoring preceded discovery of an unavailable Mistral ZDR route; it provides no quality result. Unexecuted 003 is superseded. Successor 004 preserves the reviewed 120-case design, models, and two pre-bulk canaries while explicitly allowing provider data collection only for committed synthetic-public fixtures | Publish the blocked 004 policy checkpoint, separately authorize only 004, and require both paid canaries before any bulk calls |
+| Large factual QA | Rehearsal 005 authorized; no 10,000 scale yet | Rehearsal 004 passed retrieval but failed reviewer mutation sensitivity. Successor 005 adds a stricter reviewer contract and 24 unseen paired defects under the same synthetic-only provider, call, and cost boundaries | Execute 005, complete its compact audit, then design the professor-requested 10,000-case dummy factual-QA pipeline if the reviewer gate passes |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch keeps the global freeze with only the completed oracle authorization while reviewed 004 remains blocked |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 002 / reviewed 004 blocked | Publish and separately authorize 004, pass the clean preflight, obtain explicit paid approval, then require both provider canaries before bulk execution |
+| 1 | Repository correctness freeze | Keep / bounded exception | The global freeze remains active with exact authorizations only for the completed oracle and rehearsal 005; no other evaluation or 10,000-case run is open |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / 005 authorized | Pass the clean preflight and both provider canaries, execute the bounded 120-case run, and require its machine gates plus compact audit before designing the 10,000-case run |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -277,10 +277,11 @@ manual audit confirmed six quarantines and six controls. The method must be
 refined before real-source or larger execution, and scale toward 10,000 remains
 unauthorized.
 
-Prospective rehearsal 005 implements that refinement with 24 new paired defects
-across six mutation classes. It remains blocked pending review, a separate
-bounded authorization, and a clean preflight. Real Academia Vault content is not
-part of 005 and remains closed until this reviewer gate passes.
+Rehearsal 005 implements that refinement with 24 new paired defects across six
+mutation classes. It is frozen and separately authorized for one bounded paid
+execution, subject to a clean preflight and both provider canaries. Real Academia
+Vault content is not part of 005, and 10,000-case generation remains closed until
+this reviewer gate passes.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40

@@ -1270,12 +1270,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
-      "evidence": "Manual prospective-method review confirmed successor 005 preserves the 120-case source and execution boundaries, strengthens exact citation and claim-scope review, uses 24 new mutation probes excluding every 004 probe blueprint, retains the USD 3 and no-10000-scale limits, and remains blocked pending separate authorization.",
+      "evidence": "Manual bounded-authorization review confirmed frozen successor 005 preserves the 120-case synthetic source and execution boundaries, strengthens exact citation and claim-scope review, uses 24 new mutation probes excluding every 004 probe blueprint, retains the USD 3 and no-10000-scale limits, and is authorized for one exact paid execution subject to clean preflight and both provider canaries.",
       "findings": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json",
       "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-strict-review-method-review",
-      "sha256": "f0bfae6f1f747db9fdd37d163532cf9db6c92c17c748dd1ad98ab95cb9c7d7c5"
+      "reviewer": "codex-primary-bounded-authorization-review",
+      "sha256": "f5d068f8933eff4a29b000b0a3874f4f5bdcc72f8a12049348a90f74232c4e28"
     },
     {
       "audit_status": "audited",
@@ -3833,12 +3833,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, completed rehearsal 004 has its one-time authorization revoked after a failed reviewer-sensitivity gate, and only the completed oracle remains on the bounded allowlist.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, completed rehearsal 004 stays revoked, and only the completed oracle plus the exact frozen rehearsal 005 are on the bounded allowlist; no 10,000-case run is authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
+      "sha256": "51aa31e5e2da1540eb39fb82f0de3907464d9121c3c3ee845fd45538daf7cdc2"
     },
     {
       "audit_status": "audited",
@@ -4119,12 +4119,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, successor, and unknown run IDs.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen rehearsal 005, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, and unknown successor IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "8ed21ac00a3fe9705462eeba86018031ae99c1c4a424322e1dbbe8cb3295a41e"
+      "sha256": "36611a3e30753f0f2690b57eaa81bb63c01b3e6262f893f0cd4c3047fd2f855d"
     },
     {
       "audit_status": "audited",
@@ -4515,12 +4515,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate reviewed 005 expansion, draft-status blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
+      "evidence": "Focused tests validate frozen 005 authorization, explicit non-frozen blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "30f5498568d90111c410f628b7d1be1543d7ca8dd8e564a52f4a2b092fbdb37e"
+      "sha256": "eb9edf0b707ccb49e5d3a829622a45022dd723cd05ae3952282cbec59b9f1a7a"
     },
     {
       "audit_status": "audited",

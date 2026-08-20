@@ -48,9 +48,7 @@ def test_assets_expand_to_reviewed_120_case_slice_design() -> None:
     assets = validate_assets()
     corpus = assets["corpus"]
 
-    assert assets["instrument"]["status"] == (
-        "reviewed-pending-execution-authorization"
-    )
+    assert assets["instrument"]["status"] == "frozen-pending-execution"
     assert len(corpus["case_blueprints"]) == 120
     assert Counter(case["slice"] for case in corpus["case_blueprints"]) == (
         EXPECTED_SLICES

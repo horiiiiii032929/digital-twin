@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-rehearsal-005",
-  "status": "reviewed-pending-execution-authorization",
+  "status": "frozen-pending-execution",
   "supersedes_failed_gate": "factual-qa-v3-scale-rehearsal-004",
   "issue": 87,
   "decision_question": "Does a mechanically explicit citation reviewer recover missing, truncated, paraphrased, extra-claim, invalid-claim, and invalid-source defects on new probes while preserving the corrected 120-case factual-QA method?",
