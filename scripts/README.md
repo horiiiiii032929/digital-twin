@@ -421,7 +421,10 @@ Current utilities:
   completed but failed reviewer mutation sensitivity because all missing and
   truncated citations were accepted. The authorization is revoked; a rerun
   requires a new instrument and reviewer-method correction while the global
-  freeze stays active.
+  freeze stays active. Reviewed successor `005` makes exact target-claim and
+  complete verbatim evidence-quote checks mechanical, adds paraphrased-citation
+  and extra-supported-claim mutations, and selects 24 probes without reusing any
+  004 mutation blueprint. It remains unexecuted and unauthorized.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case

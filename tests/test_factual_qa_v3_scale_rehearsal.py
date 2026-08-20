@@ -7,6 +7,7 @@ import pytest
 from scripts.run_factual_qa_v3_scale_rehearsal import (
     EXPECTED_SLICES,
     MUTATION_TYPES,
+    PREVIOUS_MUTATION_BLUEPRINT_IDS,
     OpenRouterJsonTransport,
     ProviderHealthGateError,
     _analyze,
@@ -17,6 +18,8 @@ from scripts.run_factual_qa_v3_scale_rehearsal import (
     _parallel_ordered,
     _percentile,
     _provider_health_gate,
+    _strict_review_prompt,
+    _strict_review_system_prompt,
     build_preflight,
     validate_assets,
 )
@@ -45,7 +48,9 @@ def test_assets_expand_to_reviewed_120_case_slice_design() -> None:
     assets = validate_assets()
     corpus = assets["corpus"]
 
-    assert assets["instrument"]["status"] == "frozen-pending-execution"
+    assert assets["instrument"]["status"] == (
+        "reviewed-pending-execution-authorization"
+    )
     assert len(corpus["case_blueprints"]) == 120
     assert Counter(case["slice"] for case in corpus["case_blueprints"]) == (
         EXPECTED_SLICES
@@ -281,7 +286,7 @@ def test_provider_health_gate_stops_before_bulk_when_reviewer_fails() -> None:
     assert raised.value.approximate_cost_usd == pytest.approx(0.01)
 
 
-def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
+def test_all_24_new_reviewer_mutations_are_deterministic_defects() -> None:
     corpus = validate_assets()["corpus"]
     source_map = {source["source_unit_id"]: source for source in corpus["source_units"]}
     blueprints = [
@@ -324,19 +329,19 @@ def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
         )
 
     mutation_blueprints, mutations = _mutation_probes(
-        blueprints, results, source_map=source_map, count=20
+        blueprints, results, source_map=source_map, count=24
     )
 
-    assert len(mutations) == 20
+    assert len(mutations) == 24
     assert Counter(item["mutation_type"] for item in mutations) == Counter(
         MUTATION_TYPES
     )
     assert all(item["deterministic"]["passed"] is False for item in mutations)
     assert Counter(item["slice"] for item in mutation_blueprints) == {
-        "direct-text": 5,
-        "paraphrase-text": 5,
-        "multi-evidence-text": 5,
-        "multimodal": 5,
+        "direct-text": 6,
+        "paraphrase-text": 6,
+        "multi-evidence-text": 6,
+        "multimodal": 6,
     }
     assert {item["course_id"] for item in mutation_blueprints} == {
         "course-browser-security",
@@ -344,6 +349,42 @@ def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
         "course-machine-learning",
         "course-human-ai",
     }
+    assert not (
+        {item["blueprint_id"] for item in mutation_blueprints}
+        & PREVIOUS_MUTATION_BLUEPRINT_IDS
+    )
+
+
+def test_strict_review_contract_makes_citation_rules_mechanical() -> None:
+    corpus = validate_assets()["corpus"]
+    source_map = {source["source_unit_id"]: source for source in corpus["source_units"]}
+    blueprint = next(
+        case for case in corpus["case_blueprints"] if case["slice"] == "direct-text"
+    )
+    source = source_map[blueprint["evidence_unit_ids"][0]]
+    authored = {
+        "question": "Synthetic question?",
+        "answer": "Synthetic answer.",
+        "action": "answer",
+        "selected_claim_ids": blueprint["target_claim_ids"],
+        "citations": [
+            {
+                "source_unit_id": source["source_unit_id"],
+                "quote": source["claims"][0]["evidence_quote"],
+            }
+        ],
+    }
+    prompt = _strict_review_prompt(
+        blueprint,
+        authored=authored,
+        source_context={"approved_sources": [source], "distractors": []},
+    )
+    system = _strict_review_system_prompt()
+
+    assert "exactly the blueprint target_claim_ids" in system
+    assert "complete evidence_quote" in system
+    assert "paraphrase, shortened" in system
+    assert "no extra selected claim IDs" in prompt
 
 
 def test_deterministic_checks_require_a_citation_anchor_for_every_target_claim() -> None:
@@ -485,7 +526,7 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
                 "latency_ms": 1000.0,
             },
         }
-        for _ in range(20)
+        for _ in range(24)
     ]
 
     summary = _analyze(
@@ -499,7 +540,7 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
         call_counts={
             "author": 120,
             "independent_case": 120,
-            "independent_mutation": 20,
+            "independent_mutation": 24,
             "dispute": 0,
         },
     )
@@ -521,7 +562,7 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
         call_counts={
             "author": 120,
             "independent_case": 120,
-            "independent_mutation": 20,
+            "independent_mutation": 24,
             "dispute": 0,
         },
     )
@@ -546,7 +587,7 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
         call_counts={
             "author": 120,
             "independent_case": 120,
-            "independent_mutation": 20,
+            "independent_mutation": 24,
             "dispute": 1,
         },
     )

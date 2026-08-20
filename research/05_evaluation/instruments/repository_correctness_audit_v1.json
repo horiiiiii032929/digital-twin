@@ -1202,6 +1202,17 @@
     },
     {
       "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective real-source method review confirmed a separate 40-case stratified pilot, exact-hash source eligibility, explicit privacy exclusions, source-level citation and retrieval gates, multimodal and boundary slices, bounded provider retention and cost, a compact human audit, and no authority to upload the Vault or scale to 10,000 cases.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_real_source_pilot_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-real-source-design-review",
+      "sha256": "2e44f55f915835a650150597ab6c97016cbc0d17e39e4f658fb8a88738dde23b"
+    },
+    {
+      "audit_status": "audited",
       "disposition": "historical_guarded",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
@@ -1254,6 +1265,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-bounded-authorization-review",
       "sha256": "7a446f812427c7620a9e163f0455370a9a9b8a0b94fee54060fde7b7402b78df"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual prospective-method review confirmed successor 005 preserves the 120-case source and execution boundaries, strengthens exact citation and claim-scope review, uses 24 new mutation probes excluding every 004 probe blueprint, retains the USD 3 and no-10000-scale limits, and remains blocked pending separate authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-strict-review-method-review",
+      "sha256": "f0bfae6f1f747db9fdd37d163532cf9db6c92c17c748dd1ad98ab95cb9c7d7c5"
     },
     {
       "audit_status": "audited",
@@ -2414,12 +2436,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual synthetic-data policy review plus Ruff and focused tests. Successor 004 validates the immutable reviewed source design, allows data collection only on the synthetic-public route, runs schema-valid author and reviewer canaries before bulk calls, records complete canary-failure accounting, reserves cost conservatively, retains every quality and scale boundary, and remains execution-blocked pending authorization.",
+      "evidence": "Manual prospective-method review plus Ruff and focused tests. Successor 005 preserves canary, source, cost, and scale boundaries; makes exact target-claim and evidence-quote checks mechanical; adds paraphrased-citation and extra-supported-claim mutations; excludes all 004 probe blueprints; and remains execution-blocked pending authorization.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "2bf7db90925b17557fc0099f923cbd7173dee77f96c862e3f1d3b85441b20a9f"
+      "sha256": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084"
     },
     {
       "audit_status": "audited",
@@ -4493,12 +4515,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate exact frozen 120-case expansion, draft-status blocking, the pinned first-party Mistral synthetic-public data-collection route, successful two-provider canaries, fail-closed reviewer-canary accounting before bulk calls, 286-call and USD 3 bounds, all prior source/citation/mutation/dispute gates, and the no-10000-scale boundary.",
+      "evidence": "Focused tests validate reviewed 005 expansion, draft-status blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "a61e9e3d1a2f8d52975166dae8de33127aca62b30a9b4c0bc25efad4bba9b016"
+      "sha256": "30f5498568d90111c410f628b7d1be1543d7ca8dd8e564a52f4a2b092fbdb37e"
     },
     {
       "audit_status": "audited",

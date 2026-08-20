@@ -41,8 +41,6 @@ from scripts.run_factual_qa_quality_pilot import (
     _author_system_prompt,
     _call_record,
     _code_revision,
-    _review_prompt,
-    _review_system_prompt,
     _source_context,
     _working_tree_dirty,
     deterministic_case_checks,
@@ -71,10 +69,10 @@ from services.llm import LiteLlmClient
 
 
 INSTRUMENT_PATH = (
-    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_004.json"
+    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json"
 )
-DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-004.json"
-REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-004"
+DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-005.json"
+REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-005"
 EXPECTED_SLICES = Counter(
     {
         "direct-text": 30,
@@ -88,10 +86,36 @@ EXPECTED_SLICES = Counter(
     }
 )
 MUTATION_TYPES = (
-    *("truncated-citation" for _ in range(5)),
-    *("missing-citation" for _ in range(5)),
-    *("invalid-claim-binding" for _ in range(5)),
-    *("invalid-source-binding" for _ in range(5)),
+    *("truncated-citation" for _ in range(4)),
+    *("missing-citation" for _ in range(4)),
+    *("paraphrased-citation" for _ in range(4)),
+    *("extra-supported-claim" for _ in range(4)),
+    *("invalid-claim-binding" for _ in range(4)),
+    *("invalid-source-binding" for _ in range(4)),
+)
+PREVIOUS_MUTATION_BLUEPRINT_IDS = frozenset(
+    {
+        "fqa-r001",
+        "fqa-r002",
+        "fqa-r003",
+        "fqa-r013",
+        "fqa-r014",
+        "fqa-r016",
+        "fqa-r029",
+        "fqa-r030",
+        "fqa-r045",
+        "fqa-r046",
+        "fqa-r061",
+        "fqa-r064",
+        "fqa-r067",
+        "fqa-r070",
+        "fqa-r071",
+        "fqa-r079",
+        "fqa-r083",
+        "fqa-r088",
+        "fqa-r092",
+        "fqa-r093",
+    }
 )
 PROVIDER_HEALTH_SCHEMA = {
     "type": "object",
@@ -200,9 +224,9 @@ def validate_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "provider_health_probe_call_limit": 2,
         "author_call_limit": 120,
         "independent_reviewer_case_call_limit": 120,
-        "independent_reviewer_mutation_call_limit": 20,
+        "independent_reviewer_mutation_call_limit": 24,
         "dispute_reviewer_call_limit": 24,
-        "total_provider_call_limit": 286,
+        "total_provider_call_limit": 290,
         "author_concurrency": 8,
         "independent_reviewer_concurrency": 8,
         "dispute_reviewer_concurrency": 4,
@@ -694,6 +718,55 @@ async def _provider_health_gate(
     return calls, cost, reservations
 
 
+def _strict_review_system_prompt() -> str:
+    return (
+        "You independently audit one factual-QA dataset case against its frozen "
+        "blueprint and supplied source truth. Apply the review contract "
+        "mechanically. For an answer case, reject unless selected_claim_ids is "
+        "exactly the blueprint target_claim_ids with no missing or extra claim. "
+        "Reject unless every target claim has a citation from its bound source "
+        "whose normalized quote contains that claim's complete evidence_quote as "
+        "one contiguous verbatim substring. Reject any citation quote that is not "
+        "a verbatim substring of the named source_truth. A paraphrase, shortened "
+        "quote, ellipsis, or semantically equivalent quote is not sufficient. "
+        "Also reject unsupported detail, wrong action, unclear questions, external "
+        "knowledge, or course-boundary violations. For abstain, clarify, or refuse "
+        "cases, require the expected safe action with empty claim IDs and citations. "
+        "Do not infer missing linkage and do not reward fluency. Return JSON only."
+    )
+
+
+def _strict_review_prompt(
+    blueprint: dict[str, Any],
+    *,
+    authored: dict[str, Any],
+    source_context: dict[str, Any],
+) -> str:
+    payload = {
+        "blueprint": blueprint,
+        "approved_target_course_sources": source_context["approved_sources"],
+        "unapproved_other_course_distractors": source_context["distractors"],
+        "authored_case": authored,
+        "verdict_rule": "accept only when every boolean dimension is true",
+        "mechanical_answer_checks": [
+            "selected_claim_ids equals target_claim_ids as a set",
+            "each target claim has a citation from its bound source unit",
+            "each target claim citation contains the complete evidence_quote verbatim",
+            "every citation quote is a verbatim substring of its named source_truth",
+            "no extra selected claim IDs are present",
+        ],
+        "normalization_rule": (
+            "Whitespace may be collapsed for comparison; wording, punctuation-bearing "
+            "content, and evidence coverage may not be paraphrased or shortened."
+        ),
+        "boundary_review_rule": (
+            "For abstain, clarify, and refuse, require the expected safe action, "
+            "a suitable non-factual response, and empty claim IDs and citations."
+        ),
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
 async def execute(assets: dict[str, Any]) -> dict[str, Any]:
     instrument = assets["instrument"]
     corpus = assets["corpus"]
@@ -792,11 +865,11 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
                 }
             )
 
-        review_system = _review_system_prompt()
+        review_system = _strict_review_system_prompt()
         review_inputs = [
             (
                 blueprint,
-                _review_prompt(
+                _strict_review_prompt(
                     blueprint,
                     authored=result["authored_case"],
                     source_context=_source_context(
@@ -861,12 +934,15 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
             )
 
         mutation_blueprints, mutation_results = _mutation_probes(
-            blueprints, results, source_map=source_map, count=20
+            blueprints,
+            results,
+            source_map=source_map,
+            count=instrument["reviewer_sensitivity"]["mutation_count"],
         )
         mutation_review_inputs = [
             (
                 blueprint,
-                _review_prompt(
+                _strict_review_prompt(
                     blueprint,
                     authored=mutation["mutated_case"],
                     source_context=_source_context(
@@ -927,7 +1003,7 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
         dispute_inputs = [
             (
                 index,
-                _review_prompt(
+                _strict_review_prompt(
                     blueprints[index],
                     authored=results[index]["authored_case"],
                     source_context=_source_context(
@@ -1082,6 +1158,7 @@ def _mutation_probes(
         (blueprint, result)
         for blueprint, result in zip(blueprints, results, strict=True)
         if blueprint["expected_action"] == ANSWER_ACTION
+        and blueprint["blueprint_id"] not in PREVIOUS_MUTATION_BLUEPRINT_IDS
         and result["deterministic"]["passed"]
         and result["authored_case"].get("citations")
         and result["authored_case"].get("selected_claim_ids")
@@ -1103,6 +1180,32 @@ def _mutation_probes(
             )
         elif mutation_type == "missing-citation":
             mutated["citations"] = []
+        elif mutation_type == "paraphrased-citation":
+            target_claim_id = blueprint["target_claim_ids"][0]
+            target_claim = next(
+                claim
+                for source_id in blueprint["evidence_unit_ids"]
+                for claim in source_map[source_id]["claims"]
+                if claim["claim_id"] == target_claim_id
+            )
+            mutated["citations"][0]["quote"] = (
+                f"Paraphrased support: {target_claim['text']}"
+            )
+        elif mutation_type == "extra-supported-claim":
+            target_claim_ids = set(blueprint["target_claim_ids"])
+            source_id, extra_claim = next(
+                (source_id, claim)
+                for source_id in blueprint["evidence_unit_ids"]
+                for claim in source_map[source_id]["claims"]
+                if claim["claim_id"] not in target_claim_ids
+            )
+            mutated["selected_claim_ids"].append(extra_claim["claim_id"])
+            mutated["citations"].append(
+                {
+                    "source_unit_id": source_id,
+                    "quote": extra_claim["evidence_quote"],
+                }
+            )
         elif mutation_type == "invalid-claim-binding":
             mutated["selected_claim_ids"][0] = "invalid-claim-id"
         elif mutation_type == "invalid-source-binding":

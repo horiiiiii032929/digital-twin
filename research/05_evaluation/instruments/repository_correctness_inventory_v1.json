@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 436
+    "audited": 438
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 74,
+    "evaluation_configuration": 76,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 80
   },
-  "file_count": 436,
+  "file_count": 438,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "00f17f21330f03756ba205eff95224a94e3a272d534e911db0e547d9f8c35a52",
+  "record_sha256": "f2db3a51cb75bfe1f9ac461a9f18188147924198706d382a825d8dee72236e15",
   "records": [
     {
       "audit": {
@@ -1768,6 +1768,22 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Prospective real-source method review confirmed a separate 40-case stratified pilot, exact-hash source eligibility, explicit privacy exclusions, source-level citation and retrieval gates, multimodal and boundary slices, bounded provider retention and cost, a compact human audit, and no authority to upload the Vault or scale to 10,000 cases.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-real-source-design-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_real_source_pilot_001.json",
+      "risk": "high",
+      "sha256": "2e44f55f915835a650150597ab6c97016cbc0d17e39e4f658fb8a88738dde23b"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
         "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -1828,6 +1844,22 @@
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_004.json",
       "risk": "high",
       "sha256": "7a446f812427c7620a9e163f0455370a9a9b8a0b94fee54060fde7b7402b78df"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Manual prospective-method review confirmed successor 005 preserves the 120-case source and execution boundaries, strengthens exact citation and claim-scope review, uses 24 new mutation probes excluding every 004 probe blueprint, retains the USD 3 and no-10000-scale limits, and remains blocked pending separate authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-strict-review-method-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json",
+      "risk": "high",
+      "sha256": "f0bfae6f1f747db9fdd37d163532cf9db6c92c17c748dd1ad98ab95cb9c7d7c5"
     },
     {
       "audit": {
@@ -3612,7 +3644,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual synthetic-data policy review plus Ruff and focused tests. Successor 004 validates the immutable reviewed source design, allows data collection only on the synthetic-public route, runs schema-valid author and reviewer canaries before bulk calls, records complete canary-failure accounting, reserves cost conservatively, retains every quality and scale boundary, and remains execution-blocked pending authorization.",
+        "evidence": "Manual prospective-method review plus Ruff and focused tests. Successor 005 preserves canary, source, cost, and scale boundaries; makes exact target-claim and evidence-quote checks mechanical; adds paraphrased-citation and extra-supported-claim mutations; excludes all 004 probe blueprints; and remains execution-blocked pending authorization.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -3626,7 +3658,7 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
       "risk": "high",
-      "sha256": "2bf7db90925b17557fc0099f923cbd7173dee77f96c862e3f1d3b85441b20a9f"
+      "sha256": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084"
     },
     {
       "audit": {
@@ -6726,7 +6758,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests validate exact frozen 120-case expansion, draft-status blocking, the pinned first-party Mistral synthetic-public data-collection route, successful two-provider canaries, fail-closed reviewer-canary accounting before bulk calls, 286-call and USD 3 bounds, all prior source/citation/mutation/dispute gates, and the no-10000-scale boundary.",
+        "evidence": "Focused tests validate reviewed 005 expansion, draft-status blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6737,7 +6769,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "risk": "medium",
-      "sha256": "a61e9e3d1a2f8d52975166dae8de33127aca62b30a9b4c0bc25efad4bba9b016"
+      "sha256": "30f5498568d90111c410f628b7d1be1543d7ca8dd8e564a52f4a2b092fbdb37e"
     },
     {
       "audit": {
@@ -7157,7 +7189,7 @@
     }
   ],
   "risk_counts": {
-    "high": 342,
+    "high": 344,
     "medium": 94
   },
   "schema_version": 1,

@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness audit is complete on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-all 436 executable or execution-affecting files are hash-bound and audited,
+all 438 executable or execution-affecting files are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 52 protected entrypoints
@@ -34,6 +34,13 @@ completed 12-case manual audit confirmed all six deterministic quarantines and
 accepted six stratified controls. The decision is **Refine**; authorization is
 revoked and 10,000-case scale remains closed. No path permits private or held-out
 data, and the wider freeze remains active.
+
+Reviewed successor `factual-qa-v3-scale-rehearsal-005` changes the method rather
+than lowering the failed gate. It makes exact target-claim, full evidence-quote,
+verbatim source, and no-extra-claim checks explicit to both model reviewers. Its
+24 mutation probes exclude every blueprint used by 004 and add unseen
+paraphrased-citation and extra-supported-claim defects. The design is not frozen
+or authorized for execution.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -269,6 +276,18 @@ invalid claim/source bindings but accepted all missing/truncated citations. The
 manual audit confirmed six quarantines and six controls. The method must be
 refined before real-source or larger execution, and scale toward 10,000 remains
 unauthorized.
+
+Prospective rehearsal 005 implements that refinement with 24 new paired defects
+across six mutation classes. It remains blocked pending review, a separate
+bounded authorization, and a clean preflight. Real Academia Vault content is not
+part of 005 and remains closed until this reviewer gate passes.
+
+[Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
+tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
+cases across text, code, multi-source, table, diagram, other multimodal, and
+boundary slices. It cannot execute until 005 qualifies the reviewer and every
+selected Vault source has an explicit eligible exact-hash disposition. Raw Vault
+files remain local; only sanitized evidence may enter GitHub.
 
 ## Human and safety boundary
 

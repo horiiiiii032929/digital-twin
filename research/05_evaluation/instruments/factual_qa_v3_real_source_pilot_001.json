@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-real-source-pilot-001",
+  "status": "draft-blocked-prerequisites",
+  "issue": 102,
+  "decision_question": "Can the source-linked factual-QA method produce a trustworthy 40-case pilot from eligible Academia Vault teaching material across text, code, multi-source, table, diagram, other multimodal, no-evidence, cross-course, and integrity cases?",
+  "model_leaderboard": false,
+  "source_universe": {
+    "inventory_result_id": "academic-vault-source-inventory-v1-refresh-2026-08-19",
+    "regular_file_count": 2637,
+    "canonical_relative_root": "academia_vault/",
+    "raw_files_committed": false,
+    "current_content_review_queue": 535,
+    "required_disposition": "every selected source must have an explicit eligible role, exact content hash, permission, course identity, modality, version, and local locator before case authoring"
+  },
+  "hard_exclusions": [
+    "credentials-secrets-tokens-private-keys-environment-values",
+    "identifiable-student-or-participant-records",
+    "solutions-answer-keys-graded-answers-and-submissions",
+    "generated-tool-state-dependencies-and-unrelated-personal-files"
+  ],
+  "prerequisite_gates": [
+    "factual-qa-v3-scale-rehearsal-005 passes unseen paired-defect reviewer sensitivity and human audit",
+    "all 40 cases bind only explicit eligible exact-hash sources",
+    "questions target claims required evidence and source locators complete manual verification",
+    "provider fields retention call count cost and failure behavior frozen prospectively",
+    "clean repository and no-call preflight passes",
+    "separate bounded paid execution authorization recorded"
+  ],
+  "case_design": {
+    "total": 40,
+    "slice_counts": {
+      "text": 10,
+      "code": 6,
+      "multi-source": 6,
+      "table": 4,
+      "diagram": 4,
+      "other-multimodal": 4,
+      "no-evidence": 2,
+      "cross-course-confusion": 2,
+      "academic-integrity": 2
+    },
+    "answerable": 34,
+    "boundary": 6,
+    "minimum_course_count": 4,
+    "gold_evidence_injected_into_retrieval": false,
+    "source_sampling": "stratify across eligible courses and modalities; do not repeatedly sample one document when alternatives exist",
+    "ground_truth": "researcher-verified target claims with exact source-level evidence quotes and locators"
+  },
+  "product_path": {
+    "ingestion": "LocalCourseSourceIngestionService",
+    "chunking": "RegionAwareChunker",
+    "retrieval": "student-tutor-v1 selected qwen3-hybrid-v1",
+    "retrieval_control": "bm25-v1",
+    "citation_contract": "exact source version locator quote and claim binding",
+    "raw_image_claim_boundary": "multimodal claims require actual page or region evidence; accessibility text may assist but cannot silently replace image evaluation"
+  },
+  "prospective_model_roles": {
+    "author": {
+      "provider": "deepseek-official-api",
+      "model": "deepseek-v4-flash",
+      "status": "conditional-on-freeze"
+    },
+    "independent_reviewer": {
+      "provider": "openrouter-first-party-mistral",
+      "model": "mistralai/mistral-small-2603",
+      "status": "conditional-on-rehearsal-005-qualification"
+    },
+    "dispute_reviewer": {
+      "provider": "deepseek-official-api",
+      "model": "deepseek-v4-pro",
+      "status": "conditional-bounded-disputes-only"
+    },
+    "excluded_models": [
+      "gemma",
+      "claude",
+      "qwen3:4b",
+      "qwen3.5:4b"
+    ]
+  },
+  "provider_data_policy": {
+    "collection_and_retention": "allowed only for exact eligible source excerpts and generated evaluation fields in this named pilot",
+    "raw_file_upload": false,
+    "private_paths_emitted": false,
+    "credentials_or_identifiable_records_emitted": false,
+    "git_publication": "sanitized manifests aggregate metrics summaries and approved examples only"
+  },
+  "reviewer_sensitivity": {
+    "mutation_count": 12,
+    "minimum_types": [
+      "missing-required-citation",
+      "truncated-or-paraphrased-citation",
+      "invalid-source-binding",
+      "extra-supported-claim"
+    ],
+    "mutations_enter_dataset": false
+  },
+  "proposed_execution_bounds": {
+    "provider_health_calls": 2,
+    "author_calls": 40,
+    "independent_case_reviews": 40,
+    "independent_mutation_reviews": 12,
+    "dispute_reviews_max": 12,
+    "total_provider_calls_max": 106,
+    "retry_attempts": 0,
+    "external_cost_usd_max": 2.0,
+    "scale_to_10000_authorized": false
+  },
+  "quality_gates": {
+    "source_integrity_rate_min": 1.0,
+    "author_completion_rate_min": 1.0,
+    "deterministic_provenance_rate_min": 0.95,
+    "boundary_action_rate_min": 1.0,
+    "all_evidence_at_3_min": 0.85,
+    "evidence_recall_at_5_min": 0.95,
+    "multimodal_all_evidence_at_3_min": 0.8,
+    "reviewer_mutation_sensitivity_min": 0.9,
+    "reviewer_paired_clean_specificity_min": 0.9,
+    "cross_course_leakage_count_max": 0,
+    "private_data_calls_max": 0,
+    "unreviewed_disagreement_count_max": 0,
+    "human_audit_packet_size_max": 12,
+    "external_cost_usd_max": 2.0
+  },
+  "human_audit": {
+    "required": true,
+    "sample_size_max": 12,
+    "selection": "every deterministic failure and unresolved disagreement first, then controls spanning all slices and at least four courses",
+    "authority": "human source verification and deterministic lineage override model agreement"
+  },
+  "decision_rule": {
+    "all_machine_gates_and_human_audit_pass": "keep-and-design-separate-larger-checkpoint",
+    "any_gate_fails": "refine-method",
+    "scale_to_10000_authorized_by_this_pilot": false
+  }
+}
