@@ -21,9 +21,9 @@ authorization was revoked. The corrected
 review, but its one-time execution is invalid: all 120 author calls completed
 before the first-party Mistral ZDR route returned an upstream authentication
 failure. Its authorization is revoked and the invalid artifact is preserved.
-Reviewed successor `factual-qa-v3-scale-rehearsal-003` adds two pre-bulk provider
-canaries and remains blocked pending separate authorization. No path permits
-private or held-out data, and the wider execution freeze remains active.
+Frozen successor `factual-qa-v3-scale-rehearsal-003` adds two pre-bulk provider
+canaries and now has one exact bounded authorization. No path permits private or
+held-out data, and the wider execution freeze remains active.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -147,14 +147,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine after invalid 002; reviewed 003 blocked; no 10,000 scale | The 40-case oracle pilot passed. Rehearsal 002 is operationally invalid after bulk authoring preceded discovery of an unavailable Mistral ZDR route; it provides no quality result. Successor 003 preserves the reviewed 120-case design and models, adds two pre-bulk provider canaries, and records a synthetic-public-only request-level ZDR exception while retaining `data_collection=deny` | Publish the invalid result and blocked 003 correction, then separately authorize only 003 and require both paid canaries to pass before any bulk calls |
+| Large factual QA | Refine after invalid 002; frozen 003 pending paid approval; no 10,000 scale | The 40-case oracle pilot passed. Rehearsal 002 is operationally invalid after bulk authoring preceded discovery of an unavailable Mistral ZDR route; it provides no quality result. Successor 003 preserves the reviewed 120-case design and models, adds two pre-bulk provider canaries, records a synthetic-public-only request-level ZDR exception while retaining `data_collection=deny`, and has one exact bounded authorization | Pass the clean no-call preflight, obtain explicit paid approval for 003, and require both canaries to pass before any bulk calls |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch keeps the global freeze with only the completed oracle authorization while corrected 003 remains blocked |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 002 / reviewed 003 blocked | Publish the invalid 002 evidence and blocked 003 canary correction, separately authorize 003, then require both provider canaries before the 120-case bulk run |
+| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch keeps the global freeze with the completed oracle and one exact pending 003 authorization |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 002 / frozen 003 | Pass the clean no-call preflight, obtain explicit paid approval for 003, then require both provider canaries before the 120-case bulk run |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |

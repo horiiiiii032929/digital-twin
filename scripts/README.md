@@ -416,7 +416,8 @@ Current utilities:
   authoring. Reviewed successor `003` adds schema-valid author and reviewer
   health canaries before bulk calls, uses the same first-party Mistral model with
   a synthetic-public-only request-level ZDR exception and data collection
-  denied, and remains blocked pending separate execution authorization.
+  denied, and has one exact bounded authorization while the global freeze
+  remains active.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
