@@ -71,10 +71,10 @@ from services.llm import LiteLlmClient
 
 
 INSTRUMENT_PATH = (
-    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_003.json"
+    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_004.json"
 )
-DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-003.json"
-REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-003"
+DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-004.json"
+REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-004"
 EXPECTED_SLICES = Counter(
     {
         "direct-text": 30,
@@ -234,7 +234,7 @@ def validate_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "order": ["Mistral"],
         "allow_fallbacks": False,
         "require_parameters": True,
-        "data_collection": "deny",
+        "data_collection": "allow",
         "zdr": False,
     }
     if roles["independent_reviewer"].get("provider_routing") != expected_routing:

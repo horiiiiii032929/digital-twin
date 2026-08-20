@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-scale-rehearsal-004",
+  "status": "reviewed-pending-execution-authorization",
+  "supersedes_before_execution": "factual-qa-v3-scale-rehearsal-003",
+  "issue": 87,
+  "decision_question": "Can the corrected source-linked factual-QA v3 method produce and independently review 120 synthetic-public cases within frozen quality, sensitivity, speed, privacy, and cost gates after both providers pass pre-bulk health canaries?",
+  "method_version": "source-linked-factual-qa-v3-120-case-rehearsal-v4",
+  "model_leaderboard": false,
+  "base_corpus": {
+    "path": "research/05_evaluation/factual_qa_pilot_corpus_v1.json",
+    "sha256": "dd69703503b6ed0883e19e03330f9a4d98fa9c14056a71d7bdfdee0ed4aecd31"
+  },
+  "source_design": {
+    "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_source_design_002.json",
+    "sha256": "f56904349837a72cb054375f3bdc86082eb051041514a2330e24e2263ab7c90b"
+  },
+  "case_design": {
+    "total": 120,
+    "answerable": 96,
+    "boundary": 24,
+    "slice_counts": {
+      "direct-text": 30,
+      "paraphrase-text": 30,
+      "multi-evidence-text": 18,
+      "multimodal": 18,
+      "no-evidence": 6,
+      "ambiguous": 6,
+      "cross-course-confusion": 6,
+      "adversarial-integrity": 6
+    },
+    "underlying_claim_count": 48,
+    "multi_evidence_definition": "every case requires two distinct source units and one explicitly anchored claim from each",
+    "multimodal_definition": "18 distinct approved visual facts, three from each of six controlled fixtures",
+    "data_boundary": "synthetic-public",
+    "private_course_text": false,
+    "student_data": false,
+    "controlled_visual_scope": "synthetic fixtures with approved accessibility descriptions; no raw image-only quality claim"
+  },
+  "product_path": {
+    "source_format": "generated-selectable-text-pdf",
+    "ingestion": "LocalCourseSourceIngestionService",
+    "chunking": "RegionAwareChunker",
+    "retrieval": "student-tutor-v1 selected qwen3-hybrid-v1",
+    "retrieval_control": "bm25-v1",
+    "gold_evidence_injected_into_retrieval": false
+  },
+  "provider_health_gate": {
+    "position": "before bulk authoring",
+    "author_canary_calls": 1,
+    "independent_reviewer_canary_calls": 1,
+    "required_result": "both providers return schema-valid status=ok with expected model identity",
+    "failure_action": "write an exclusive invalid-execution artifact with complete canary accounting and make zero bulk calls"
+  },
+  "model_roles": {
+    "author": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-flash",
+      "provider_model": "deepseek-v4-flash",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 700,
+      "timeout_seconds": 45,
+      "prompt_version": "factual-qa-v3-source-linked-author-004"
+    },
+    "independent_reviewer": {
+      "provider": "openrouter",
+      "litellm_model": "openrouter/mistralai/mistral-small-2603",
+      "provider_model": "mistralai/mistral-small-2603",
+      "credential_environment_variable": "OPENROUTER_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 500,
+      "timeout_seconds": 30,
+      "prompt_version": "factual-qa-v3-mistral-review-004",
+      "decision_role": "independent-advisory-review",
+      "pricing_usd_per_million_input_tokens": 0.15,
+      "pricing_usd_per_million_output_tokens": 0.6,
+      "provider_routing": {
+        "order": ["Mistral"],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "allow",
+        "zdr": false
+      },
+      "synthetic_public_data_policy": "Data collection and provider retention are allowed only for this evaluation phase over committed synthetic-public fixtures. Private, course, instructor, student, and product data remain prohibited."
+    },
+    "dispute_reviewer": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-pro",
+      "provider_model": "deepseek-v4-pro",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 700,
+      "timeout_seconds": 60,
+      "prompt_version": "factual-qa-v3-dispute-review-004"
+    }
+  },
+  "excluded_models": ["gemma", "claude", "qwen3:4b", "qwen3.5:4b"],
+  "execution": {
+    "provider_health_probe_call_limit": 2,
+    "author_call_limit": 120,
+    "independent_reviewer_case_call_limit": 120,
+    "independent_reviewer_mutation_call_limit": 20,
+    "dispute_reviewer_call_limit": 24,
+    "total_provider_call_limit": 286,
+    "author_concurrency": 8,
+    "independent_reviewer_concurrency": 8,
+    "dispute_reviewer_concurrency": 4,
+    "retry_attempts": 0,
+    "cost_stop_usd": 3.0,
+    "clean_worktree_required": true,
+    "output_overwrite_allowed": false
+  },
+  "reviewer_sensitivity": {
+    "mutation_count": 20,
+    "mutation_types": {
+      "truncated-citation": 5,
+      "missing-citation": 5,
+      "invalid-claim-binding": 5,
+      "invalid-source-binding": 5
+    },
+    "mutations_enter_dataset": false
+  },
+  "quality_gates": {
+    "pdf_ingestion_rate_min": 1.0,
+    "source_integrity_rate_min": 1.0,
+    "author_completion_rate_min": 1.0,
+    "deterministic_provenance_rate_min": 0.95,
+    "boundary_action_rate_min": 1.0,
+    "all_evidence_at_3_min": 0.9,
+    "evidence_recall_at_5_min": 0.95,
+    "multimodal_all_evidence_at_3_min": 0.9,
+    "independent_review_completion_rate_min": 1.0,
+    "unreviewed_disagreement_count_max": 0,
+    "unresolved_disagreement_count_max": 12,
+    "dispute_review_completion_rate_min": 1.0,
+    "human_audit_required_case_count_max": 12,
+    "mutation_probe_completion_rate_min": 1.0,
+    "reviewer_mutation_sensitivity_min": 0.9,
+    "reviewer_paired_clean_specificity_min": 0.9,
+    "reviewer_malformed_response_count_max": 0,
+    "reviewer_p95_latency_ms_max": 8000,
+    "review_stage_elapsed_seconds_max": 240,
+    "end_to_end_elapsed_seconds_max": 900,
+    "normalized_exact_duplicate_question_rate_max": 0.02,
+    "cross_course_leakage_count_max": 0,
+    "private_data_calls_max": 0,
+    "external_cost_usd_max": 3.0,
+    "model_identity_stable_required": true
+  },
+  "human_audit": {
+    "required_before_next_scale_decision": true,
+    "sample_size": 12,
+    "selection": "all deterministic failures and unresolved reviewer disagreements first, then stratified retained controls across every slice",
+    "decision_boundary": "A completed audit may inform the next scale plan but cannot authorize 10000 cases by itself."
+  },
+  "decision_rule": {
+    "all_machine_gates_pass": "human-audit-required",
+    "any_machine_gate_fails": "refine-method",
+    "scale_to_10000_authorized_by_this_run": false
+  }
+}

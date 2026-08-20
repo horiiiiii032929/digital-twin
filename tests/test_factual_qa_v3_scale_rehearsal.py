@@ -41,11 +41,13 @@ def _accept_review() -> dict[str, object]:
     }
 
 
-def test_assets_expand_to_frozen_120_case_slice_design() -> None:
+def test_assets_expand_to_reviewed_120_case_slice_design() -> None:
     assets = validate_assets()
     corpus = assets["corpus"]
 
-    assert assets["instrument"]["status"] == "frozen-pending-execution"
+    assert assets["instrument"]["status"] == (
+        "reviewed-pending-execution-authorization"
+    )
     assert len(corpus["case_blueprints"]) == 120
     assert Counter(case["slice"] for case in corpus["case_blueprints"]) == (
         EXPECTED_SLICES
@@ -213,7 +215,7 @@ def test_openrouter_reviewer_is_pinned_to_first_party_mistral() -> None:
                 "order": ["Mistral"],
                 "allow_fallbacks": False,
                 "require_parameters": True,
-                "data_collection": "deny",
+                "data_collection": "allow",
                 "zdr": False,
             }
         }

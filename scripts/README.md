@@ -414,10 +414,11 @@ Current utilities:
   and course-aligned boundary coverage. Attempt `002` is preserved as an invalid
   execution after its first-party Mistral ZDR route failed only after bulk
   authoring. Reviewed successor `003` adds schema-valid author and reviewer
-  health canaries before bulk calls, uses the same first-party Mistral model with
-  a synthetic-public-only request-level ZDR exception and data collection
-  denied, and has one exact bounded authorization while the global freeze
-  remains active.
+  health canaries before bulk calls. Unexecuted `003` is superseded after the
+  researcher allowed data collection for the synthetic evaluation phase.
+  Reviewed `004` keeps the same first-party Mistral model, allows data collection
+  and retention only for committed synthetic-public fixtures, and remains
+  blocked pending separate authorization while the global freeze stays active.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case

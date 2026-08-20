@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness audit is complete on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-all 435 executable or execution-affecting files are hash-bound and audited,
+all 436 executable or execution-affecting files are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 52 protected entrypoints
@@ -21,9 +21,12 @@ authorization was revoked. The corrected
 review, but its one-time execution is invalid: all 120 author calls completed
 before the first-party Mistral ZDR route returned an upstream authentication
 failure. Its authorization is revoked and the invalid artifact is preserved.
-Frozen successor `factual-qa-v3-scale-rehearsal-003` adds two pre-bulk provider
-canaries and now has one exact bounded authorization. No path permits private or
-held-out data, and the wider execution freeze remains active.
+Unexecuted successor `factual-qa-v3-scale-rehearsal-003` was superseded after the
+researcher allowed provider data collection for this synthetic evaluation
+phase. Reviewed `factual-qa-v3-scale-rehearsal-004` preserves the two pre-bulk
+provider canaries, explicitly allows collection and retention only for committed
+synthetic-public fixtures, and remains blocked pending separate authorization.
+No path permits private or held-out data, and the wider freeze remains active.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -58,7 +61,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections pass the current 641-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 435-file audit. Evaluation
+artifacts are also fully dispositioned in the current 436-file audit. Evaluation
 execution remains unauthorized because the freeze is intentionally still
 active pending the next explicit work decision.
 
@@ -147,14 +150,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine after invalid 002; frozen 003 pending paid approval; no 10,000 scale | The 40-case oracle pilot passed. Rehearsal 002 is operationally invalid after bulk authoring preceded discovery of an unavailable Mistral ZDR route; it provides no quality result. Successor 003 preserves the reviewed 120-case design and models, adds two pre-bulk provider canaries, records a synthetic-public-only request-level ZDR exception while retaining `data_collection=deny`, and has one exact bounded authorization | Pass the clean no-call preflight, obtain explicit paid approval for 003, and require both canaries to pass before any bulk calls |
+| Large factual QA | Refine after invalid 002; reviewed 004 blocked; no 10,000 scale | The 40-case oracle pilot passed. Rehearsal 002 is operationally invalid after bulk authoring preceded discovery of an unavailable Mistral ZDR route; it provides no quality result. Unexecuted 003 is superseded. Successor 004 preserves the reviewed 120-case design, models, and two pre-bulk canaries while explicitly allowing provider data collection only for committed synthetic-public fixtures | Publish the blocked 004 policy checkpoint, separately authorize only 004, and require both paid canaries before any bulk calls |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch keeps the global freeze with the completed oracle and one exact pending 003 authorization |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 002 / frozen 003 | Pass the clean no-call preflight, obtain explicit paid approval for 003, then require both provider canaries before the 120-case bulk run |
+| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch keeps the global freeze with only the completed oracle authorization while reviewed 004 remains blocked |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 002 / reviewed 004 blocked | Publish and separately authorize 004, pass the clean preflight, obtain explicit paid approval, then require both provider canaries before bulk execution |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -248,13 +251,14 @@ an upstream `401 Invalid API Key`. The OpenRouter account key remained valid and
 reported zero usage, so this is an endpoint-readiness and runner-order defect,
 not a missing credential. Exact reviewer attempted-call and external-cost
 accounting is incomplete; no generated outputs or quality metrics survive and
-002 is registered as invalid. Reviewed successor 003 preserves the same source
-design and model roles but performs one schema-valid canary through each
-provider before bulk authoring. Because the corpus is entirely synthetic-public,
-003 disables request-level ZDR only for the first-party Mistral reviewer while
-keeping data collection denied; every product, private, course, instructor, and
-student-data path retains strict ZDR controls. Scale toward 10,000 remains
-unauthorized.
+002 is registered as invalid. Unexecuted 003 added one schema-valid canary
+through each provider before bulk authoring, then was superseded when the
+researcher explicitly allowed provider data collection for this evaluation
+phase. Reviewed successor 004 preserves those canaries and the exact source and
+model design while allowing provider collection and retention only for the
+committed synthetic-public fixtures. Every product, private, course, instructor,
+and student-data path remains excluded and retains strict ZDR controls. Scale
+toward 10,000 remains unauthorized.
 
 ## Human and safety boundary
 
