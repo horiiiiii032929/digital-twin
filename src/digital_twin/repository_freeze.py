@@ -23,9 +23,7 @@ BLOCKED_OPERATIONS = frozenset(
 # script can exercise; one fail-closed guard at the entrypoint blocks all of them.
 FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
     {
-        "scripts/analyze_cross_course_retrieval_heldout.py": (
-            "heldout_execution",
-        ),
+        "scripts/analyze_cross_course_retrieval_heldout.py": ("heldout_execution",),
         "scripts/analyze_it5002_rapid_result.py": ("heldout_execution",),
         "scripts/apply_cross_course_qc_patch.py": ("dataset_generation",),
         "scripts/apply_cross_course_second_review.py": ("dataset_generation",),
@@ -68,9 +66,7 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "scripts/judge_generator_qualification_v3.py": (
-            "external_model_evaluation",
-        ),
+        "scripts/judge_generator_qualification_v3.py": ("external_model_evaluation",),
         "scripts/judge_professor_fidelity.py": (
             "external_model_evaluation",
             "local_model_evaluation",
@@ -80,18 +76,12 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/finalize_professor_fidelity_blinded_review.py": (
             "dataset_generation",
         ),
-        "scripts/prepare_course_tutor_authoring_review.py": (
-            "dataset_generation",
-        ),
-        "scripts/prepare_professor_fidelity_blinded_review.py": (
-            "dataset_generation",
-        ),
+        "scripts/prepare_course_tutor_authoring_review.py": ("dataset_generation",),
+        "scripts/prepare_professor_fidelity_blinded_review.py": ("dataset_generation",),
         "scripts/qualify_professor_fidelity_judge_v4.py": (
             "external_model_evaluation",
         ),
-        "scripts/review_generator_qualification_v2.py": (
-            "local_model_evaluation",
-        ),
+        "scripts/review_generator_qualification_v2.py": ("local_model_evaluation",),
         "scripts/record_cross_course_reviews.py": ("dataset_generation",),
         "scripts/render_generator_qualification_second_review.py": (
             "dataset_generation",
@@ -118,6 +108,12 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "dataset_generation",
             "external_model_evaluation",
         ),
+        "scripts/run_factual_qa_v3_oracle_pilot.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_generator_qualification.py": (
             "external_model_evaluation",
             "heldout_execution",
@@ -136,9 +132,7 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "scripts/run_multimodal_product_grounding.py": (
-            "method_evaluation_execution",
-        ),
+        "scripts/run_multimodal_product_grounding.py": ("method_evaluation_execution",),
         "scripts/run_multimodal_retrieval_development.py": (
             "method_evaluation_execution",
         ),
@@ -146,19 +140,27 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "scripts/run_professor_fidelity_experiment.py": (
-            "heldout_execution",
-        ),
+        "scripts/run_professor_fidelity_experiment.py": ("heldout_execution",),
         "scripts/sample_multimodal_pdf_pages.py": ("dataset_generation",),
         "scripts/seal_course_tutor_anchor.py": ("dataset_generation",),
         "scripts/seal_course_tutor_splits.py": ("dataset_generation",),
         "scripts/seal_cross_course_benchmark.py": ("dataset_generation",),
         "scripts/seal_multimodal_benchmark.py": ("dataset_generation",),
-        "scripts/second_review_cross_course_benchmark.py": (
+        "scripts/second_review_cross_course_benchmark.py": ("dataset_generation",),
+        "scripts/second_review_multimodal_benchmark.py": ("dataset_generation",),
+    }
+)
+
+# One named, versioned pilot may execute while the wider pre-evaluation freeze
+# remains active. The authorization is intentionally not operation-generic: a
+# successor instrument requires a new code review and an explicit entry here.
+BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
+    {
+        "factual-qa-v3-oracle-pilot-001": (
             "dataset_generation",
-        ),
-        "scripts/second_review_multimodal_benchmark.py": (
-            "dataset_generation",
+            "external_model_evaluation",
+            "local_model_evaluation",
+            "method_evaluation_execution",
         ),
     }
 )
@@ -194,4 +196,20 @@ def require_pre_evaluation_operation_allowed(operation: str) -> None:
         raise RepositoryFreezeError(
             f"{FREEZE_ID} blocks {operation} until a versioned repository "
             "correctness freeze is complete"
+        )
+
+
+def require_bounded_pilot_operation_allowed(instrument_id: str) -> None:
+    """Authorize only an exact, reviewed pilot while retaining the global freeze."""
+
+    operations = BOUNDED_PILOT_AUTHORIZATIONS.get(instrument_id)
+    if operations is None:
+        raise RepositoryFreezeError(
+            f"{instrument_id!r} is not a bounded authorization under {FREEZE_ID}"
+        )
+    if not operations or any(
+        operation not in BLOCKED_OPERATIONS for operation in operations
+    ):
+        raise RepositoryFreezeError(
+            f"{instrument_id!r} has an invalid bounded authorization"
         )

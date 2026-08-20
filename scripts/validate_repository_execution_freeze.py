@@ -54,7 +54,10 @@ EXEMPT_SCRIPTS = {
     "validate_professor_fidelity_post_audit.py",
     "validate_repository_execution_freeze.py",
 }
-GUARD_NAME = "require_pre_evaluation_operation_allowed"
+GUARD_NAMES = {
+    "require_pre_evaluation_operation_allowed",
+    "require_bounded_pilot_operation_allowed",
+}
 
 
 def has_main_guard(path: Path) -> bool:
@@ -76,7 +79,7 @@ def has_main_guard(path: Path) -> bool:
             isinstance(node, ast.Expr)
             and isinstance(node.value, ast.Call)
             and isinstance(node.value.func, ast.Name)
-            and node.value.func.id == GUARD_NAME
+            and node.value.func.id in GUARD_NAMES
         )
 
     for statement in main.body:
@@ -148,9 +151,7 @@ def validate_freeze_coverage(root: Path = ROOT) -> dict[str, object]:
         "freeze_id": status.freeze_id,
         "freeze_active": status.active,
         "registered_entrypoint_count": (
-            len(FROZEN_ENTRYPOINT_OPERATIONS)
-            if root.resolve() == ROOT.resolve()
-            else 0
+            len(FROZEN_ENTRYPOINT_OPERATIONS) if root.resolve() == ROOT.resolve() else 0
         ),
         "protected_script_count": len(scripts),
         "missing_guard_count": 0,

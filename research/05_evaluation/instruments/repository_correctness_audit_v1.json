@@ -1193,6 +1193,17 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective manual method review confirmed a 40-case synthetic-public oracle design, exact current-model bindings, no leaderboard objective, explicit product-path scope, hard quality/cost gates, and an eight-case human audit before scale.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_oracle_pilot_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "1cbb0949cde9efca0fa2134b35321e3e3232b39fa947432b7ad740b0f4b1dff0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
       "path": "research/05_evaluation/instruments/generator_qualification_v1.json",
@@ -2337,6 +2348,17 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, and fail-closed cost enforcement.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_oracle_pilot.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "bf395dca44b996c015fb5c3a82746f7a445e6c75536ac6e5f23f0b15a37b1b0e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
       "path": "scripts/run_generator_qualification.py",
@@ -2689,12 +2711,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual registry/AST review, direct-script execution regression, strengthened top-level guard analysis, name-based future-entrypoint detection, and focused validator tests.",
+      "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "41122237bb0137f4965adfa22112818bfda1863740348d3497ceb3f5624dc5a5"
+      "sha256": "3b83329ec3936e0b9cbf1f3c9033fabbea329fdd183b95ee8c215f9531052615"
     },
     {
       "audit_status": "audited",
@@ -3723,12 +3745,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus blocked-operation, unknown-operation, and explicit-status tests.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active while only factual-qa-v3-oracle-pilot-001 receives an exact versioned authorization for its four declared operations.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "c7b1c6b3e29d74273b39d54f0f2d0e88a3c8b164b013c9dc8db9d597ece8ade0"
+      "sha256": "50ecce1d35aa479e27541ceaa29ca14a7b5f409d437c7eab396718eb70da2d50"
     },
     {
       "audit_status": "audited",
@@ -4009,12 +4031,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all registered operations and unknown-operation fail-closed behavior.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the one exact bounded pilot authorization, and rejection of successor or unknown pilot IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "dbb80efb0ddb3383e8f329685a4665273daef91222902bbbcbee4223ba47d9aa"
+      "sha256": "6ce3b1dd23df2136580ff0d7dd46e6aeadeb944713fe42032eb624936d1a6fd7"
     },
     {
       "audit_status": "audited",
@@ -4389,6 +4411,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "ecf3585e61d77767401bcf14157ec42045668fae634b2beb19744b2d96a81d42"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, and deterministic eight-case audit selection.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_oracle_pilot.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "a3d9ac5f08c03b376f8d4763806b2e5d94fa86ffd8c26c1dcd6d0639a757afb7"
     },
     {
       "audit_status": "audited",
