@@ -408,3 +408,12 @@ Current utilities:
   exact package, version, advisory, fix versions, and occurrence against the
   tracked time-bounded exception policy. Any new, changed, or stale exception
   fails the command; run `npm run audit:python`.
+- `run_factual_qa_v3_scale_rehearsal.py`: validates the frozen 120-case
+  synthetic-public rehearsal, expands all approved claims into fixed slices,
+  exercises product PDF ingestion and selected hybrid retrieval, runs bounded
+  concurrent DeepSeek authoring plus first-party OpenRouter Mistral review,
+  and emits paired mutation sensitivity plus a 12-case human-audit packet.
+  `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
+  explicit execution command requires both environment-owned provider keys,
+  writes an ignored non-overwriting artifact, and cannot authorize a
+  10,000-case run.

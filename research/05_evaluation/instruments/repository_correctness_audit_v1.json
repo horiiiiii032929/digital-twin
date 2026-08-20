@@ -874,12 +874,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "execution-configuration",
-      "evidence": "Manual command/configuration review plus locked repository verification; canonical npm gate now requires zero pending or open audit findings.",
+      "evidence": "Manual command/configuration review plus locked repository verification; the 120-case rehearsal exposes separate no-call preflight and explicit dual-provider execution commands while the canonical gate still requires zero pending or open audit findings.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "c0d6459d8fb6a1f6ee9dfb166f5f5cf9d9d0b475e3e05b3db0826aafb9dffacc"
+      "sha256": "c5edfb1380301927bd9418d79f0a575f1859884b8913c3d1cbe01f36d1677035"
     },
     {
       "audit_status": "audited",
@@ -1199,6 +1199,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "1cbb0949cde9efca0fa2134b35321e3e3232b39fa947432b7ad740b0f4b1dff0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective method review confirmed one 120-case synthetic-public rehearsal rather than a model leaderboard, complete slice and claim coverage, deterministic retention authority, exact DeepSeek/Mistral roles, paired mutation sensitivity, a clean execution revision, bounded concurrency/calls/cost, operational gates, and a 12-case human audit before any later scale decision.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "5ac33c047aae20caca2621cbf5830d37fbc110c429707bc0fc8df8071504a08e"
     },
     {
       "audit_status": "audited",
@@ -2354,6 +2365,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "76eee8ebf01033b8aa1a743f5b9a3bbc379aa5e166014c3533d8396588eaa8e6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow, provider, privacy, and failure-boundary review plus Ruff, compilation, 120-case deterministic preflight, focused concurrency/mutation tests, exact registered model routes, clean-revision enforcement, invalid-attempt preservation, no retries, bounded calls/cost, exclusive output, and fail-closed dual-provider authorization.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "fe69097c31b786de36b05687dd9270e2f53de37f89e114428850d6524321be70"
     },
     {
       "audit_status": "audited",
@@ -3745,12 +3767,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active while only factual-qa-v3-oracle-pilot-001 receives an exact versioned authorization for its four declared operations.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active while only the exact completed oracle pilot and the exact frozen 120-case rehearsal receive versioned authorization for their declared operations.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "50ecce1d35aa479e27541ceaa29ca14a7b5f409d437c7eab396718eb70da2d50"
+      "sha256": "d67d370be50fe7d525472f06620183fe43fb0fdc6dbe408267414ce768049e8e"
     },
     {
       "audit_status": "audited",
@@ -4031,12 +4053,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the one exact bounded pilot authorization, and rejection of successor or unknown pilot IDs.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the two exact bounded run authorizations, and rejection of successor or unknown run IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "6ce3b1dd23df2136580ff0d7dd46e6aeadeb944713fe42032eb624936d1a6fd7"
+      "sha256": "752c7ec2d1dc551548a96518a71f7b400c3e2dd2247b3ace31cc684129ac3543"
     },
     {
       "audit_status": "audited",
@@ -4422,6 +4444,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "58a85e50a67b0397bbc51328e9e91a9babcab79f3aa46f8bbda169884912d523"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests validate exact 120-case and slice expansion, complete approved-claim coverage, credential- and clean-revision-safe preflight, pinned first-party OpenRouter Mistral routing, 20 guaranteed deterministic mutation defects, bounded concurrency with stable result order, nearest-rank p95 calculation, and the audit-required/no-10000-scale decision boundary.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "0912de0d7eb5b95ddae315ec1ba425e3f97ccc18763393a5e6558830b933d497"
     },
     {
       "audit_status": "audited",

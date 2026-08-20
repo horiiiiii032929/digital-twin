@@ -9,12 +9,14 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness audit is complete on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-all 429 executable or execution-affecting files are hash-bound and audited,
+all 432 executable or execution-affecting files are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 51 protected entrypoints
-and contains one exact bounded authorization for
-`factual-qa-v3-oracle-pilot-001`; that pilot read no private or held-out data.
+active for all general evaluation actions. It covers 52 protected entrypoints
+and contains exact bounded authorizations for the completed
+`factual-qa-v3-oracle-pilot-001` and the frozen, not-yet-executed
+`factual-qa-v3-scale-rehearsal-001`. Neither path permits private or held-out
+data.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -27,7 +29,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 626 Python tests and 46 frontend tests, frontend lint, and the
+check passes 635 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -138,14 +140,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper to 100–200 rehearsal; no 10,000 scale | Corrected source governance remains active. The separately authorized 40-case synthetic-public oracle pilot passed every machine gate: 39/40 provenance-valid, 32/32 all-evidence@3, 8/8 boundary actions, zero leakage, and USD 0.005825 external cost. Human audit accepted all seven retained controls and confirmed the one citation quarantine | Freeze and evaluate a faster independent-review transport in a 100–200 case rehearsal before any move toward 10,000 |
+| Large factual QA | Go Deeper to frozen 120-case rehearsal; no 10,000 scale | The 40-case synthetic-public oracle pilot passed every machine gate and its human audit. A single-method 120-case successor is now frozen with DeepSeek V4 Flash authoring, first-party OpenRouter Mistral Small 4 review, concurrency eight, 20 paired citation/lineage mutations, deterministic retention authority, and hard quality/speed/cost gates | Configure `OPENROUTER_API_KEY`, pass the no-call preflight, then explicitly authorize the one-time rehearsal execution |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current pilot branch has 429/429 files audited and keeps the global freeze with one exact pilot authorization |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper / audit complete | Freeze a faster independent-review transport and run a 100–200 case rehearsal before deciding whether to scale |
+| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch has 432/432 files audited and keeps the global freeze with two exact bounded run IDs |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper / 120-case rehearsal frozen | Configure the OpenRouter credential, pass preflight, and run the exact bounded rehearsal before deciding whether to scale |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -233,8 +235,11 @@ cases. The six controlled visual cases used approved accessibility descriptions
 and do not establish raw image-only quality. The run passed its machine gates
 and the corrected eight-case human audit is complete: seven retained controls
 were accepted and the quarantined citation defect was confirmed as a rejection.
-The next authorized design step is a faster 100–200 case rehearsal; scale toward
-10,000 remains unauthorized.
+The successor is now frozen at 120 cases. It uses concurrent direct DeepSeek V4
+Flash authoring and a first-party OpenRouter Mistral Small 4 independent review,
+with 20 paired deterministic defect probes and a 12-case human-audit packet.
+The no-call preflight currently stops because `OPENROUTER_API_KEY` is not
+configured. Scale toward 10,000 remains unauthorized.
 
 ## Human and safety boundary
 
