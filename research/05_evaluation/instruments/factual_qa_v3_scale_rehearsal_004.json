@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-rehearsal-004",
-  "status": "reviewed-pending-execution-authorization",
+  "status": "frozen-pending-execution",
   "supersedes_before_execution": "factual-qa-v3-scale-rehearsal-003",
   "issue": 87,
   "decision_question": "Can the corrected source-linked factual-QA v3 method produce and independently review 120 synthetic-public cases within frozen quality, sensitivity, speed, privacy, and cost gates after both providers pass pre-bulk health canaries?",

@@ -25,8 +25,10 @@ Unexecuted successor `factual-qa-v3-scale-rehearsal-003` was superseded after th
 researcher allowed provider data collection for this synthetic evaluation
 phase. Reviewed `factual-qa-v3-scale-rehearsal-004` preserves the two pre-bulk
 provider canaries, explicitly allows collection and retention only for committed
-synthetic-public fixtures, and remains blocked pending separate authorization.
-No path permits private or held-out data, and the wider freeze remains active.
+synthetic-public fixtures, and now has an exact bounded execution authorization.
+Its paid execution still requires a clean ready preflight and explicit approval
+immediately before provider calls. No path permits private or held-out data, and
+the wider freeze remains active.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was

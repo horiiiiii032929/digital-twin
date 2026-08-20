@@ -1248,12 +1248,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
-      "evidence": "Manual policy-scope review confirmed successor 004 preserves the exact 120-case source and canary-gated execution design, explicitly allows provider collection and retention only for committed synthetic-public evaluation fixtures, excludes every private/product/course/instructor/student path, caps calls at 286 and cost at USD 3, prohibits 10,000-case scale, and remains blocked pending separate authorization.",
+      "evidence": "Manual policy-scope review confirmed frozen successor 004 preserves the exact 120-case source and canary-gated execution design, explicitly allows provider collection and retention only for committed synthetic-public evaluation fixtures, excludes every private/product/course/instructor/student path, caps calls at 286 and cost at USD 3, prohibits 10,000-case scale, and still requires a clean preflight plus explicit paid-run approval.",
       "findings": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_004.json",
       "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-synthetic-data-policy-review",
-      "sha256": "9e316f83da00dc50d33fe9555af427d4a37a33cb2cc979f81f2356c99d4efab3"
+      "reviewer": "codex-primary-bounded-authorization-review",
+      "sha256": "7a446f812427c7620a9e163f0455370a9a9b8a0b94fee54060fde7b7402b78df"
     },
     {
       "audit_status": "audited",
@@ -3811,12 +3811,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, only the completed oracle retains authorization, unexecuted 003 is revoked after the policy change, and reviewed 004 remains unauthorized until a separate explicit freeze decision.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, defective 001, invalid 002, and superseded 003 remain revoked, and only the completed oracle plus exact frozen rehearsal 004 have bounded authorization.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
+      "sha256": "e4149145eb4965cb2ff7eee565f2dff130c44d35e15ce1aa0f19e3dc10c2c780"
     },
     {
       "audit_status": "audited",
@@ -4097,12 +4097,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of defective 001, invalid 002, superseded 003, reviewed 004, successor, and unknown run IDs.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen 004, and explicit rejection of defective 001, invalid 002, superseded 003, successor, and unknown run IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "8ed21ac00a3fe9705462eeba86018031ae99c1c4a424322e1dbbe8cb3295a41e"
+      "sha256": "ee4aadc450c45d34f54986a616f49f94f4cd8f1c95aaeb68b598d578e80cec63"
     },
     {
       "audit_status": "audited",
@@ -4493,12 +4493,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate exact reviewed 120-case expansion, draft-status blocking, the pinned first-party Mistral synthetic-public data-collection route, successful two-provider canaries, fail-closed reviewer-canary accounting before bulk calls, 286-call and USD 3 bounds, all prior source/citation/mutation/dispute gates, and the no-10000-scale boundary.",
+      "evidence": "Focused tests validate exact frozen 120-case expansion, draft-status blocking, the pinned first-party Mistral synthetic-public data-collection route, successful two-provider canaries, fail-closed reviewer-canary accounting before bulk calls, 286-call and USD 3 bounds, all prior source/citation/mutation/dispute gates, and the no-10000-scale boundary.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "2f7a794ad46b062ebe5132ee71872653740017eb4edc79733181dbe4a3ff3db1"
+      "sha256": "a61e9e3d1a2f8d52975166dae8de33127aca62b30a9b4c0bc25efad4bba9b016"
     },
     {
       "audit_status": "audited",
