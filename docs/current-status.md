@@ -6,13 +6,14 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The repository-wide correctness audit is complete on `main` at merge revision
+The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-all 441 executable or execution-affecting files are hash-bound and audited,
+the current branch extends it to all 444 executable or execution-affecting
+files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 52 protected entrypoints
+active for all general evaluation actions. It covers 54 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -43,13 +44,14 @@ accounting were persisted. Authorization is revoked. The correction is a small,
 durably checkpointed reviewer qualification rather than another 120-case rerun;
 10,000-case execution remains unauthorized.
 
-Prospective `factual-qa-v3-reviewer-qualification-006` replaces another full
-rehearsal with 24 new deterministic clean/defect pairs. It uses one Mistral
-canary and 48 paired reviews, no retries, a USD 0.50 stop, and durable checkpoints
-after each eight-call batch. Individual malformed responses become counted
-failures with sanitized call metadata. The researcher authorized this exact
-bounded run; it is frozen for one execution while the wider freeze and the
-10,000-case prohibition remain active.
+Completed `factual-qa-v3-reviewer-qualification-006` replaced another full
+rehearsal with 24 new deterministic clean/defect pairs. Mistral accepted all 24
+clean controls and rejected all 24 defects, including 4/4 in every mutation
+class. All 49 calls completed in 16.04 seconds for USD 0.012175 with zero
+malformed/provider errors. The strict reviewer is kept as advisory quality
+control for the 10,000-case design; deterministic lineage remains authoritative.
+The one-time 006 authorization is revoked, and 10,000-case execution still
+requires a separate frozen design and paid authorization.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -62,7 +64,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 641 Python tests and 46 frontend tests, frontend lint, and the
+check passes 658 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -82,10 +84,11 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 641-test Python suite.
+connections. These corrections pass the current 658-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 441-file audit. Evaluation
-execution remains frozen except for the exact bounded rehearsal 005 authorization.
+artifacts are also fully dispositioned in the current 444-file audit. Evaluation
+execution remains frozen; no rehearsal, 10,000-case stage, or provider run is
+currently authorized.
 
 ## Current outcome
 
@@ -172,14 +175,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine after invalid 005; no 10,000 scale yet | Rehearsal 004 passed retrieval but failed reviewer sensitivity. Rehearsal 005 reached dispute review after all pre-dispute stages, then lost its in-memory result when one DeepSeek response contained malformed JSON | Qualify the strict reviewer on a small deterministic paired set with durable checkpoints, then design the professor-requested 10,000-case dummy factual-QA pipeline |
+| Large factual QA | Go Deeper after reviewer qualification; execution closed | Rehearsal 004 exposed reviewer sensitivity failure; 005 exposed non-durable malformed-response handling; focused qualification 006 then passed 24/24 clean controls, 24/24 defects, and all six mutation classes | Publish the deterministic 1,000-source / 10,000-case design, then separately freeze and authorize the 100-case checkpoint |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Keep / closed after invalid 005 | The global freeze remains active with only the historical completed-oracle authorization; rehearsal 005 and 10,000-case execution are closed |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine invalid 005 | Replace the full rerun with a focused, checkpointed reviewer qualification, then freeze the 10,000-case dummy factual-QA design |
+| 1 | Repository correctness freeze | Keep / provider execution closed | The global freeze remains active with only the historical completed-oracle authorization; every 10,000-case stage is closed |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Publish the provider-free deterministic design, then freeze a separately authorized 100-case checkpoint before 1,000 or 10,000 cases |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -288,13 +291,22 @@ unauthorized.
 Rehearsal 005 implemented that refinement with 24 new paired defects across six
 mutation classes. Its one-time execution is invalid because a malformed DeepSeek
 dispute response discarded completed in-memory stages and left exact accounting
-incomplete. Its authorization is revoked. Real Academia Vault content was not
-used, and 10,000-case generation remains closed pending a focused reviewer gate.
+incomplete. Its authorization is revoked. Focused reviewer qualification 006
+then passed all clean, defect, per-mutation, completion, latency, and cost gates.
+
+The provider-free `factual-qa-v3-10000-pipeline-001` design now fixes 20 dummy
+courses, 1,000 source units, 8,000 deterministic claims, and 10,000 blueprints:
+8,000 answerable cases plus 2,000 no-evidence, ambiguity, cross-course, and
+academic-integrity boundaries. The local builder passes exact grain, key,
+lineage, distribution, stage, determinism, and privacy checks with zero model
+calls. Dataset writing and every paid 100, 1,000, and 10,000 stage remain
+unauthorized pending separate frozen checkpoints.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
 cases across text, code, multi-source, table, diagram, other multimodal, and
-boundary slices. It cannot execute until 005 qualifies the reviewer and every
+boundary slices. It cannot execute until the large dummy-data checkpoint is
+decided and every
 selected Vault source has an explicit eligible exact-hash disposition. Raw Vault
 files remain local; only sanitized evidence may enter GitHub.
 

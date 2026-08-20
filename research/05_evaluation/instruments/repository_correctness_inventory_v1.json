@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 441
+    "audited": 444
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 94,
+    "active_or_unclassified_tooling": 95,
     "active_runtime": 96,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 77,
+    "evaluation_configuration": 78,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 81
+    "verification": 82
   },
-  "file_count": 441,
+  "file_count": 444,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "86e7cf9e149c53b05bc02f068b296413519ca755249a19ff45f72f3713dc1059",
+  "record_sha256": "3578739a4daa58e0d984d4c9fa8ccf6a6f0ef3f2e13ecfd2c5936b85837ca4b4",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "execution-configuration",
-        "evidence": "Manual command/configuration review plus locked repository verification; the 120-case rehearsal exposes separate no-call preflight and explicit dual-provider execution commands while the canonical gate still requires zero pending or open audit findings.",
+        "evidence": "Manual command/configuration review plus locked repository verification; the canonical gate includes the deterministic no-call 10,000-case design validator while paid execution remains separate and the inventory gate requires zero pending or open audit findings.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "c5edfb1380301927bd9418d79f0a575f1859884b8913c3d1cbe01f36d1677035"
+      "sha256": "7b00c4884aa483f5987a3d0c1cb2fbf16bbad2e2d53df324ad32f82a27a8d3bd"
     },
     {
       "audit": {
@@ -1719,6 +1719,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Manual design review confirmed deterministic source truth is authoritative, exact 10,000-case slices and staged gates are frozen, multi-model review is advisory, and no write or provider execution is authorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_10000_pipeline_001.json",
+      "risk": "high",
+      "sha256": "4db3671dac240b3871f361b66e93cbeb466b7beeed053bded7dc2ff04c8682ec"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -1784,14 +1800,14 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
-        "evidence": "Bounded-authorization review confirmed frozen reviewer qualification 006 uses 24 new deterministic clean/defect pairs, one exact Mistral canary, 48 paired reviews, no retries, a USD 0.50 stop, eight-call durable checkpoints, counted malformed/provider failures, synthetic-only inputs, and no authority for 10,000-case execution.",
+        "evidence": "Preserved completed reviewer qualification 006. Its one-time run passed every frozen gate: 24/24 clean accepts, 24/24 defect rejects, 4/4 per mutation class, 49/49 responses, zero malformed/provider errors, USD 0.012175 cost, synthetic-only inputs, and no authority for 10,000-case execution. Authorization is revoked.",
         "findings": [],
         "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-bounded-authorization-review"
+        "reviewer": "codex-primary-completed-result-review"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
-      "disposition": "active_audited",
+      "disposition": "historical_guarded",
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_006.json",
       "risk": "high",
@@ -2978,6 +2994,24 @@
       "path": "scripts/build_course_tutor_splits.py",
       "risk": "high",
       "sha256": "06e9348178d3f64a8266190d00a3b1f75eabc5aa0379b8996bed2c315074ec41"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Manual algorithm and boundary review plus focused execution confirmed exact source, claim, case, slice, course, modality, and checkpoint grains; direct CLI validation makes zero calls and write mode fails closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:factual-qa-v3-10000-design"
+      ],
+      "path": "scripts/build_factual_qa_v3_10000_blueprints.py",
+      "risk": "high",
+      "sha256": "5b908cb2138b333c26585c89524966bcd58f541a7a3b9b3c5f9fbf27ced80d11"
     },
     {
       "audit": {
@@ -5782,7 +5816,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, invalid rehearsal 005 is revoked, only the completed oracle and exact frozen reviewer qualification 006 are on the bounded allowlist, and no 10,000-case run is authorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, invalid rehearsal 005 and completed reviewer qualification 006 are revoked, the deterministic 10,000-case builder is protected, only the completed oracle remains on the bounded allowlist, and no scale stage is authorized.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -5793,7 +5827,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "7057b434b87b503f0d79ea8135206e03936c045a4dc8435bf36aab0487169fcd"
+      "sha256": "0ab89ca271b65ff750c2281d27344a838e1f1a9273186cd772e1964408505f63"
     },
     {
       "audit": {
@@ -6198,7 +6232,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze policy tests pass for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen reviewer qualification 006, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, invalid 005, and unknown successor IDs.",
+        "evidence": "Focused freeze policy tests pass for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of all rehearsals, completed reviewer qualification 006, the draft 10,000-case pipeline, and unknown successor IDs.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6209,7 +6243,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "faed1f63d2f8d84768427f918dd5011d6de5e30f0ab94b3c738f69263c4f0d54"
+      "sha256": "15310232ba7147a9fa5a55bb66d7e9618e02623eb008799841e3ce169cf893e7"
     },
     {
       "audit": {
@@ -6758,6 +6792,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Focused tests cover unique grains, exact distributions, claim/source integrity, multi-source requirements, boundary actions, deterministic hashing, private-data absence, and unauthorized write rejection.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_v3_10000_blueprints.py",
+      "risk": "medium",
+      "sha256": "658e7a603430f23b5c005c06dd033d45495ae0db32432446aa1eb684ad63614a"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -7237,8 +7287,8 @@
     }
   ],
   "risk_counts": {
-    "high": 346,
-    "medium": 95
+    "high": 348,
+    "medium": 96
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

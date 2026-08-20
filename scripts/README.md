@@ -438,4 +438,13 @@ Current utilities:
   records malformed/provider failures rather than discarding the run. Its
   no-call preflight is the default; execution requires a separately frozen 006
   instrument plus `--execute --allow-openrouter`. It cannot authorize 10,000
-  cases by itself.
+  cases by itself. The one-time 006 run passed all gates at 49/49 calls and USD
+  0.012175; authorization is revoked and the result is registered.
+- `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
+  dummy factual-QA scale design from deterministic source truth. Its default
+  mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
+  stratified case blueprints without writing files or making provider calls.
+  Run the reproducible no-call gate with
+  `npm run verify:factual-qa-v3-10000-design`.
+  `--write` is fail-closed under the repository freeze; neither dataset writing
+  nor the 100, 1,000, or 10,000 paid stages is authorized by the draft design.

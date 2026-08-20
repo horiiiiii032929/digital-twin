@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "run_id": "factual-qa-v3-reviewer-qualification-006",
+  "status": "completed",
+  "decision": "keep-reviewer-design-10000-pipeline",
+  "code_revision": "15d0a83ed976b2e5e61a815afb153270a9ee7c76",
+  "instrument_sha256": "ece01bfcf163b6e498a1273f1de14f14c557aa8308f1eeadf50024412773ae85",
+  "raw_artifact_sha256": "255b370397b3dfeb04b044868600c4c2966bd74a2cc959d04074b60e6ae647b1",
+  "data_boundary": "synthetic-public",
+  "provider_model": "mistralai/mistral-small-2603",
+  "provider_calls": 49,
+  "review_completion_rate": 1.0,
+  "clean_specificity": 1.0,
+  "mutation_sensitivity": 1.0,
+  "per_mutation_type_sensitivity": {
+    "extra-supported-claim": 1.0,
+    "invalid-claim-binding": 1.0,
+    "invalid-source-binding": 1.0,
+    "missing-citation": 1.0,
+    "paraphrased-citation": 1.0,
+    "truncated-citation": 1.0
+  },
+  "malformed_or_provider_error_count": 0,
+  "reviewer_p95_latency_ms": 2986.671391595155,
+  "elapsed_seconds": 16.042712875001598,
+  "external_cost_usd": 0.01217475,
+  "private_data_calls": 0,
+  "failed_gates": [],
+  "scale_to_10000_authorized": false
+}

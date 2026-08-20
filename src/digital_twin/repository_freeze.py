@@ -31,6 +31,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/benchmark_evidence_sufficiency.py": ("method_evaluation_execution",),
         "scripts/benchmark_retrieval.py": ("method_evaluation_execution",),
         "scripts/build_course_tutor_splits.py": ("dataset_generation",),
+        "scripts/build_factual_qa_v3_10000_blueprints.py": (
+            "dataset_generation",
+        ),
         "scripts/build_generator_qualification_dataset.py": ("dataset_generation",),
         "scripts/build_it5002_rapid_dataset.py": (
             "dataset_generation",
@@ -170,10 +173,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "dataset_generation",
             "external_model_evaluation",
             "local_model_evaluation",
-            "method_evaluation_execution",
-        ),
-        "factual-qa-v3-reviewer-qualification-006": (
-            "external_model_evaluation",
             "method_evaluation_execution",
         ),
     }
