@@ -421,12 +421,21 @@ Current utilities:
   completed but failed reviewer mutation sensitivity because all missing and
   truncated citations were accepted. The authorization is revoked; a rerun
   requires a new instrument and reviewer-method correction while the global
-  freeze stays active. Reviewed successor `005` makes exact target-claim and
+  freeze stays active. Successor `005` made exact target-claim and
   complete verbatim evidence-quote checks mechanical, adds paraphrased-citation
   and extra-supported-claim mutations, and selects 24 probes without reusing any
-  004 mutation blueprint. It remains unexecuted and unauthorized.
+  004 mutation blueprint. Its one-time run is invalid after one malformed
+  DeepSeek dispute response discarded completed in-memory metrics; authorization
+  is revoked.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
   run. Provider canaries are part of paid execution and stop before every bulk
   call if either exact route is unavailable.
+- `run_factual_qa_v3_reviewer_qualification.py`: replaces another full 120-case
+  rerun with 24 new deterministic clean/defect pairs. After one Mistral Small 4
+  canary it performs 48 paired reviews, checkpoints after every eight calls, and
+  records malformed/provider failures rather than discarding the run. Its
+  no-call preflight is the default; execution requires a separately frozen 006
+  instrument plus `--execute --allow-openrouter`. It cannot authorize 10,000
+  cases by itself.

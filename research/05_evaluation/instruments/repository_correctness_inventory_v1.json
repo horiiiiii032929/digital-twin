@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 438
+    "audited": 441
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 93,
+    "active_or_unclassified_tooling": 94,
     "active_runtime": 96,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 76,
+    "evaluation_configuration": 77,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 80
+    "verification": 81
   },
-  "file_count": 438,
+  "file_count": 441,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d2f64a27b36437df234f33d40e3cbc7c781762277b7643d39c95ff77f18232a6",
+  "record_sha256": "86e7cf9e149c53b05bc02f068b296413519ca755249a19ff45f72f3713dc1059",
   "records": [
     {
       "audit": {
@@ -1784,6 +1784,22 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Bounded-authorization review confirmed frozen reviewer qualification 006 uses 24 new deterministic clean/defect pairs, one exact Mistral canary, 48 paired reviews, no retries, a USD 0.50 stop, eight-call durable checkpoints, counted malformed/provider failures, synthetic-only inputs, and no authority for 10,000-case execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-bounded-authorization-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_006.json",
+      "risk": "high",
+      "sha256": "ece01bfcf163b6e498a1273f1de14f14c557aa8308f1eeadf50024412773ae85"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
         "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -1848,14 +1864,14 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
-        "evidence": "Manual bounded-authorization review confirmed frozen successor 005 preserves the 120-case synthetic source and execution boundaries, strengthens exact citation and claim-scope review, uses 24 new mutation probes excluding every 004 probe blueprint, retains the USD 3 and no-10000-scale limits, and is authorized for one exact paid execution subject to clean preflight and both provider canaries.",
+        "evidence": "Preserved frozen 005 instrument after its one-time execution became invalid during dispute review. Both canaries and pre-dispute stages completed, one DeepSeek response contained malformed JSON, completed metrics and exact accounting were not persisted, authorization is revoked, and no 10,000-case scale is allowed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-bounded-authorization-review"
+        "reviewer": "codex-primary-invalid-execution-review"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
-      "disposition": "active_audited",
+      "disposition": "historical_guarded",
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json",
       "risk": "high",
@@ -3644,14 +3660,30 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual prospective-method review plus Ruff and focused tests. Successor 005 preserves canary, source, cost, and scale boundaries; makes exact target-claim and evidence-quote checks mechanical; adds paraphrased-citation and extra-supported-claim mutations; excludes all 004 probe blueprints; and remains execution-blocked pending authorization.",
+        "evidence": "Manual control-flow review plus Ruff and focused tests confirmed 006 generates exact deterministic pairs, uses only pinned no-fallback Mistral Small 4 while tolerating OpenRouter's absent revision field, checkpoints every eight calls, captures malformed and provider failures without aborting, preserves attempted/response/token/cost metadata, reserves below the USD 0.50 stop, blocks while unfrozen or dirty, and cannot authorize 10,000 cases.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-focused-reviewer-runner-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_factual_qa_v3_reviewer_qualification.py",
+      "risk": "high",
+      "sha256": "4ca125dec1ef509cdf04c43347559f463f04cbe0aa5ccc9e4b53c018dbd52bb1"
+    },
+    {
+      "audit": {
+        "domain": "tooling-and-execution-freeze",
+        "evidence": "Preserved guarded 005 runner after an invalid one-time execution exposed incomplete failure accounting: a malformed DeepSeek dispute response aborted completed in-memory stages. Its bounded authorization is revoked; successor work must add durable checkpoints and counted malformed-review records before scale.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
-      "disposition": "active_audited",
+      "disposition": "historical_guarded",
       "package_commands": [
         "preflight:factual-qa-v3-scale-rehearsal",
         "rehearse:factual-qa-v3-scale"
@@ -5750,7 +5782,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, completed rehearsal 004 stays revoked, and only the completed oracle plus the exact frozen rehearsal 005 are on the bounded allowlist; no 10,000-case run is authorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, invalid rehearsal 005 is revoked, only the completed oracle and exact frozen reviewer qualification 006 are on the bounded allowlist, and no 10,000-case run is authorized.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -5761,7 +5793,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "51aa31e5e2da1540eb39fb82f0de3907464d9121c3c3ee845fd45538daf7cdc2"
+      "sha256": "7057b434b87b503f0d79ea8135206e03936c045a4dc8435bf36aab0487169fcd"
     },
     {
       "audit": {
@@ -6166,7 +6198,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen rehearsal 005, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, and unknown successor IDs.",
+        "evidence": "Focused freeze policy tests pass for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen reviewer qualification 006, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, invalid 005, and unknown successor IDs.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6177,7 +6209,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "36611a3e30753f0f2690b57eaa81bb63c01b3e6262f893f0cd4c3047fd2f855d"
+      "sha256": "faed1f63d2f8d84768427f918dd5011d6de5e30f0ab94b3c738f69263c4f0d54"
     },
     {
       "audit": {
@@ -6758,6 +6790,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Focused tests validate the frozen 49-call and USD 0.50 authorization, explicit non-frozen blocking, 24 balanced new clean/defect pairs across four modalities, deterministic labels for all six mutation classes, exact no-fallback provider binding, synthetic-only source boundary, no-10,000 authority, and maximum cost reservation.",
+        "findings": [],
+        "reviewed_at": "2026-08-20",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_v3_reviewer_qualification.py",
+      "risk": "medium",
+      "sha256": "867d909a43d332ba92ce4d6a5d933156075a5d9d3127ac5e84e1d4f741dc7de8"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Focused tests validate frozen 005 authorization, explicit non-frozen blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -7189,8 +7237,8 @@
     }
   ],
   "risk_counts": {
-    "high": 344,
-    "medium": 94
+    "high": 346,
+    "medium": 95
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

@@ -114,6 +114,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_factual_qa_v3_reviewer_qualification.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_factual_qa_v3_scale_rehearsal.py": (
             "dataset_generation",
             "external_model_evaluation",
@@ -168,10 +172,8 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "factual-qa-v3-scale-rehearsal-005": (
-            "dataset_generation",
+        "factual-qa-v3-reviewer-qualification-006": (
             "external_model_evaluation",
-            "local_model_evaluation",
             "method_evaluation_execution",
         ),
     }
