@@ -412,9 +412,9 @@ Current utilities:
   synthetic-public rehearsal source design, including exact per-claim citation
   anchors, 18 distinct controlled visual facts, 18 genuine two-source cases,
   and course-aligned boundary coverage. The `001` execution authorization was
-  revoked before any run; reviewed `002` remains blocked pending explicit
-  execution authorization.
-  `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. A future
-  explicit execution command will require both environment-owned provider
-  keys, write an ignored non-overwriting artifact, and cannot authorize a
-  10,000-case run.
+  revoked before any run; corrected `002` is frozen with an exact bounded
+  authorization while the global freeze remains active.
+  `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
+  explicit execution command requires both environment-owned provider keys,
+  writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
+  run.

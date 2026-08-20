@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "753b5c40164b323c1fe861b31b2d53692b52d6ea8d64837b1e766e66c0379a36",
+  "record_sha256": "2e1a59c6a24f9171ff837bd18160283342cc9f89b9ea3f84d92c0069149d4363",
   "records": [
     {
       "audit": {
@@ -1784,7 +1784,7 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
-        "evidence": "Manual source and methodology review confirmed corrected 002 remains execution-blocked, binds immutable base and source-design hashes, defines 120 cases over 48 anchored claims, requires genuine two-source evidence, adds disagreement/dispute and human-audit-capacity gates, preserves strict provider/cost boundaries, and cannot authorize 10,000-case scale.",
+        "evidence": "Manual source and methodology review confirmed corrected 002 binds immutable base and source-design hashes, defines 120 cases over 48 anchored claims, requires genuine two-source evidence, adds disagreement/dispute and human-audit-capacity gates, preserves strict provider/cost boundaries, is frozen for one exact bounded rehearsal, and cannot authorize 10,000-case scale.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-manual-120-blueprint-review"
@@ -1795,7 +1795,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_002.json",
       "risk": "high",
-      "sha256": "dd7296e0b18e8620a6e8dd9e56d85877c1965a0630215fecee718531c76b2de5"
+      "sha256": "49996c91264c6413f167c3d1beb8f43931f0c72b12b247905751aa0a91d1ae38"
     },
     {
       "audit": {
@@ -5686,7 +5686,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, the completed oracle pilot retains its exact historical authorization, defective unexecuted rehearsal 001 is revoked, and reviewed rehearsal 002 remains unauthorized until a separate explicit freeze decision.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, the completed oracle pilot retains its exact historical authorization, defective unexecuted rehearsal 001 remains revoked, and frozen rehearsal 002 receives only the same four exact bounded operations without authorizing successors or scale.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -5697,7 +5697,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
+      "sha256": "a74b3efb9e073429d65271588ee69fda8d52faef326250a8591aa0efab16d9c9"
     },
     {
       "audit": {
@@ -6102,7 +6102,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the one exact completed oracle authorization, and explicit rejection of defective rehearsal 001, reviewed-but-unfrozen rehearsal 002, successor, and unknown run IDs.",
+        "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen rehearsal 002, and explicit rejection of defective rehearsal 001, successor, and unknown run IDs.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6113,7 +6113,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "77adb05c369eb6dc3b70c4136a77c55a2f879adcaa8f47d696f880489a88c2b7"
+      "sha256": "da7c1369a2f1c13e3a98445b91d708f17055d63ba41281c167d68d617eeeb314"
     },
     {
       "audit": {
@@ -6694,7 +6694,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests validate exact 120-case expansion over 48 exact-anchored claims, 18 distinct visual facts, 18 genuine two-source cases, corrected boundary contexts, all-course cross-confusion coverage, per-claim citation completeness, blocked reviewed status, pinned Mistral routing, stratified 20-case mutations, conservative pre-call cost reservation, disagreement/dispute gates, human-audit capacity, bounded concurrency, and the no-10000-scale boundary.",
+        "evidence": "Focused tests validate exact frozen 120-case expansion over 48 exact-anchored claims, 18 distinct visual facts, 18 genuine two-source cases, corrected boundary contexts, all-course cross-confusion coverage, per-claim citation completeness, draft-status blocking, pinned Mistral routing, stratified 20-case mutations, conservative pre-call cost reservation, disagreement/dispute gates, human-audit capacity, bounded concurrency, and the no-10000-scale boundary.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6705,7 +6705,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "risk": "medium",
-      "sha256": "010aeaf755acedfaa77b4323df271d98e7b704cf2443db0dbed1fc98911a0e57"
+      "sha256": "7b1765654c2468b2da59c771b701faea445fcfcee6b3a493c02f6e86cf6fec50"
     },
     {
       "audit": {

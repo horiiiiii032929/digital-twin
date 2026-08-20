@@ -39,6 +39,7 @@ def test_assets_expand_to_frozen_120_case_slice_design() -> None:
     assets = validate_assets()
     corpus = assets["corpus"]
 
+    assert assets["instrument"]["status"] == "frozen-pending-execution"
     assert len(corpus["case_blueprints"]) == 120
     assert Counter(case["slice"] for case in corpus["case_blueprints"]) == (
         EXPECTED_SLICES
@@ -175,6 +176,7 @@ def test_draft_instrument_cannot_be_ready_for_execution(
     tmp_path,
 ) -> None:
     assets = validate_assets()
+    assets["instrument"]["status"] = "reviewed-pending-execution-authorization"
     monkeypatch.setenv("DEEPSEEK_API_KEY", "configured")
     monkeypatch.setenv("OPENROUTER_API_KEY", "configured")
     monkeypatch.setattr(

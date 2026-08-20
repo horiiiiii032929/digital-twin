@@ -17,9 +17,9 @@ and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
-`factual-qa-v3-scale-rehearsal-002` source and evaluation logic have completed
-manual review and remain blocked pending explicit execution authorization. No
-path permits private or held-out data.
+`factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
+review and now have one exact bounded authorization. No path permits private or
+held-out data, and the wider execution freeze remains active.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -143,14 +143,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Reviewed 120-case rehearsal pending execution authorization; no 10,000 scale | The 40-case synthetic-public oracle pilot passed every machine gate and its human audit. The corrected single-method 120-case successor has completed source and logic review with DeepSeek V4 Flash authoring, first-party OpenRouter Mistral Small 4 review, concurrency eight, 20 paired citation/lineage mutations, deterministic retention authority, and hard quality/speed/cost gates | Publish the reviewed design, separately freeze and authorize rehearsal 002, then pass the clean no-call preflight before the one-time execution |
+| Large factual QA | Frozen 120-case rehearsal pending paid-run approval; no 10,000 scale | The 40-case synthetic-public oracle pilot passed every machine gate and its human audit. The corrected single-method 120-case successor has completed source and logic review and received an exact bounded authorization with DeepSeek V4 Flash authoring, first-party OpenRouter Mistral Small 4 review, concurrency eight, 20 paired citation/lineage mutations, deterministic retention authority, and hard quality/speed/cost gates | Publish the authorization checkpoint, pass the clean no-call preflight, then obtain explicit approval immediately before the one-time paid execution |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch has 434/434 files audited and keeps the global freeze with one completed bounded run ID |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / reviewed rehearsal pending authorization | Publish rehearsal 002, separately authorize its bounded execution, pass the clean no-call preflight, and run it before deciding whether to scale |
+| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9`; the current branch has 434/434 files audited and keeps the global freeze with one completed and one exact pending bounded run ID |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / frozen rehearsal pending paid-run approval | Publish the exact rehearsal 002 authorization, pass the clean no-call preflight, obtain explicit paid-run approval, and execute before deciding whether to scale |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -238,14 +238,14 @@ cases. The six controlled visual cases used approved accessibility descriptions
 and do not establish raw image-only quality. The run passed its machine gates
 and the corrected eight-case human audit is complete: seven retained controls
 were accepted and the quarantined citation defect was confirmed as a rejection.
-The corrected successor has completed manual source and evaluation-logic review
-at 120 cases but is not yet frozen or authorized for execution. It uses
+The corrected successor completed manual source and evaluation-logic review at
+120 cases and now has an exact bounded execution authorization. It uses
 concurrent direct DeepSeek V4 Flash authoring and a first-party OpenRouter
 Mistral Small 4 independent review, with 20 paired deterministic defect probes
 and a 12-case priority human-audit packet. Both provider credentials are
-present in the environment. The no-call preflight currently stops because the
-reviewed instrument is intentionally not frozen and the design changes are not
-yet committed. Scale toward 10,000 remains unauthorized.
+present in the environment. The no-call preflight remains network-free and must
+pass from the clean authorization revision before explicit approval for the
+first paid call. Scale toward 10,000 remains unauthorized.
 
 ## Human and safety boundary
 
