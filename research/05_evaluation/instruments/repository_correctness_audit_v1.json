@@ -2348,12 +2348,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, and fail-closed cost enforcement.",
+      "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, fail-closed cost enforcement, and post-run audit priority correction.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_oracle_pilot.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "bf395dca44b996c015fb5c3a82746f7a445e6c75536ac6e5f23f0b15a37b1b0e"
+      "sha256": "76eee8ebf01033b8aa1a743f5b9a3bbc379aa5e166014c3533d8396588eaa8e6"
     },
     {
       "audit_status": "audited",
@@ -4416,12 +4416,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, and deterministic eight-case audit selection.",
+      "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, deterministic eight-case selection, and failure-before-clean-control audit priority.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_oracle_pilot.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "a3d9ac5f08c03b376f8d4763806b2e5d94fa86ffd8c26c1dcd6d0639a757afb7"
+      "sha256": "58a85e50a67b0397bbc51328e9e91a9babcab79f3aa46f8bbda169884912d523"
     },
     {
       "audit_status": "audited",

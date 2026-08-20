@@ -116,3 +116,29 @@ def test_passing_summary_still_requires_eight_case_human_audit() -> None:
     assert summary["decision"] == "human-audit-required"
     assert summary["scale_authorized"] is False
     assert len(packet) == 8
+
+
+def test_audit_packet_prioritizes_deterministic_failure_within_slice() -> None:
+    accepted = {
+        "blueprint_id": "accepted-first-lexically",
+        "slice": "multimodal",
+        "authored_case": {
+            "question": "Q?",
+            "answer": "A",
+            "action": "answer",
+            "citations": [],
+        },
+        "deterministic": {"passed": True, "checks": {"exact_quote": True}},
+        "retrieval": {"applicable": True},
+        "independent_review": {"verdict": "accept"},
+        "human_audit_priority": True,
+    }
+    failed = {
+        **accepted,
+        "blueprint_id": "failed-second-lexically",
+        "deterministic": {"passed": False, "checks": {"exact_quote": False}},
+    }
+
+    packet = _audit_packet([accepted, failed], sample_size=1)
+
+    assert packet[0]["blueprint_id"] == "failed-second-lexically"

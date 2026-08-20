@@ -660,9 +660,15 @@ def _analyze(
 def _audit_packet(
     results: list[dict[str, Any]], *, sample_size: int
 ) -> list[dict[str, Any]]:
+    def review_disagrees(item: dict[str, Any]) -> bool:
+        expected = "accept" if item["deterministic"]["passed"] else "reject"
+        return item["independent_review"]["verdict"] != expected
+
     prioritized = sorted(
         results,
         key=lambda item: (
+            item["deterministic"]["passed"],
+            not review_disagrees(item),
             not item["human_audit_priority"],
             item["slice"]
             not in {"multimodal", "multi-evidence-text", "adversarial-integrity"},

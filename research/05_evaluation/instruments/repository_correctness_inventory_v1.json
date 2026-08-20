@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "85d9f0918a959af461c1e14e25a36658eb316dcacbd2a2f9fc71fc1ac43d1cc2",
+  "record_sha256": "d5e8aaf0a61738e887e5f9ce941d8e2e611437e5daee6d03092faf7c63ad47c7",
   "records": [
     {
       "audit": {
@@ -3516,7 +3516,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, and fail-closed cost enforcement.",
+        "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, fail-closed cost enforcement, and post-run audit priority correction.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -3527,7 +3527,7 @@
       "package_commands": [],
       "path": "scripts/run_factual_qa_v3_oracle_pilot.py",
       "risk": "high",
-      "sha256": "bf395dca44b996c015fb5c3a82746f7a445e6c75536ac6e5f23f0b15a37b1b0e"
+      "sha256": "76eee8ebf01033b8aa1a743f5b9a3bbc379aa5e166014c3533d8396588eaa8e6"
     },
     {
       "audit": {
@@ -6611,7 +6611,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, and deterministic eight-case audit selection.",
+        "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, deterministic eight-case selection, and failure-before-clean-control audit priority.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6622,7 +6622,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_oracle_pilot.py",
       "risk": "medium",
-      "sha256": "a3d9ac5f08c03b376f8d4763806b2e5d94fa86ffd8c26c1dcd6d0639a757afb7"
+      "sha256": "58a85e50a67b0397bbc51328e9e91a9babcab79f3aa46f8bbda169884912d523"
     },
     {
       "audit": {

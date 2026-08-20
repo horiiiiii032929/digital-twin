@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "run_id": "factual-qa-v3-oracle-pilot-001",
+  "execution_revision": "7ef0ef3e3867d52ee3c8821d45b20a91e7bc9289",
+  "instrument_id": "factual-qa-v3-oracle-pilot-001",
+  "instrument_sha256": "1cbb0949cde9efca0fa2134b35321e3e3232b39fa947432b7ad740b0f4b1dff0",
+  "raw_output_sha256": "b1c4431dceab8c830459b2a48976b4bd1db645a7a4ab0a7585c76ac09726eda5",
+  "data_boundary": "synthetic-public",
+  "case_count": 40,
+  "answerable_cases": 32,
+  "boundary_cases": 8,
+  "machine_gates_passed": true,
+  "scale_authorized": false,
+  "decision": "go-deeper-to-100-200-case-rehearsal",
+  "human_audit": {
+    "status": "complete",
+    "review_date": "2026-08-20",
+    "reviewer_identifier": "project researcher",
+    "accepted_retained_controls": 7,
+    "confirmed_quarantine_rejections": 1,
+    "rejected_case_ids": ["fqa-p14"],
+    "interpretation": "The seven retained controls passed human review. The quarantined case was correctly rejected for citation incompleteness despite a correct answer and retrieval result."
+  },
+  "metrics": {
+    "pdf_ingestion_rate": 1.0,
+    "author_completion_rate": 1.0,
+    "deterministic_provenance_rate": 0.975,
+    "deterministic_provenance_wilson_95": [0.8711863103652591, 0.9955731684973186],
+    "boundary_action_rate": 1.0,
+    "all_evidence_at_3": 1.0,
+    "all_evidence_at_3_wilson_95": [0.8928208017449293, 1.0],
+    "evidence_recall_at_5": 1.0,
+    "multimodal_all_evidence_at_3": 1.0,
+    "multimodal_all_evidence_at_3_wilson_95": [0.6096657120978346, 1.0],
+    "deterministic_independent_agreement_rate": 0.95,
+    "deterministic_independent_agreement_wilson_95": [0.8349612263085903, 0.9861793326138516],
+    "cross_course_leakage_count": 0,
+    "private_data_calls": 0,
+    "external_cost_usd": 0.005825455,
+    "elapsed_seconds": 624.6925450839917
+  },
+  "provider_calls": {
+    "deepseek-v4-flash": {
+      "count": 40,
+      "revision": "a26a7955944dc5c60445bff77fac9c8e",
+      "mean_latency_ms": 1466.368863525713,
+      "cost_usd": 0.00495502
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "count": 40,
+      "revision": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+      "mean_latency_ms": 12467.587103149344,
+      "cost_usd": 0.0
+    },
+    "deepseek-v4-pro": {
+      "count": 2,
+      "revision": "a307abda487cd1b463329ccb945ce396",
+      "mean_latency_ms": 4251.361770497169,
+      "cost_usd": 0.000870435
+    }
+  },
+  "quarantined_cases": [
+    {
+      "blueprint_id": "fqa-p14",
+      "failure_category": "citation-exactness",
+      "detail": "The citation omitted 'of the assessment.' from the approved source sentence. Both LLM reviewers accepted it; the deterministic exact-quote check rejected it."
+    }
+  ],
+  "reviewer_disagreements": [
+    {
+      "blueprint_id": "fqa-p14",
+      "deterministic_verdict": "reject",
+      "qwen_verdict": "accept",
+      "deepseek_pro_dispute_verdict": "accept"
+    },
+    {
+      "blueprint_id": "fqa-v31",
+      "deterministic_verdict": "accept",
+      "qwen_verdict": "reject",
+      "deepseek_pro_dispute_verdict": "accept"
+    }
+  ],
+  "corrected_audit_packet_case_ids": [
+    "fqa-p14",
+    "fqa-v31",
+    "fqa-p03",
+    "fqa-p24",
+    "fqa-p02",
+    "fqa-p18",
+    "fqa-p21",
+    "fqa-p23"
+  ],
+  "limitations": [
+    "The visual cases used controlled accessibility descriptions beside synthetic visual fixtures; raw image-only understanding was not evaluated.",
+    "The 40-case sample is too small to establish a production error rate; Wilson intervals remain wide.",
+    "The exact-source corpus is synthetic and cannot establish quality on the private Academia Vault.",
+    "The completed human audit contains only seven retained controls and one known defect; it is too small to estimate a production error rate.",
+    "The local reviewer averaged 12.47 seconds per case and is too slow for a sequential 10000-case run."
+  ]
+}
