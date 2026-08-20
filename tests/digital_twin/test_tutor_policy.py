@@ -1,3 +1,5 @@
+import pytest
+
 from src.digital_twin.tutor_policy import (
     ApprovalItem,
     FieldStatus,
@@ -6,7 +8,6 @@ from src.digital_twin.tutor_policy import (
     PolicyField,
     ReleaseStatus,
     SourceLabel,
-    TutorPolicy,
     build_initial_policy,
 )
 
@@ -80,3 +81,26 @@ def test_source_inventory_flags_sensitive_names_as_excluded_by_default():
     assert item.excluded is True
     assert item.permission_status == SourcePermissionStatus.EXCLUDED
     assert item.source_label == SourceLabel.COURSE_APPROVED
+
+
+def test_sensitive_name_cannot_be_manually_marked_non_sensitive() -> None:
+    item = SourceInventoryItem(
+        id="source-2",
+        name="private-student-grades.csv",
+        sensitive=False,
+        permission_status=SourcePermissionStatus.APPROVED,
+    )
+
+    assert item.sensitive is True
+    assert item.excluded is True
+    assert item.permission_status == SourcePermissionStatus.EXCLUDED
+
+
+def test_approved_source_cannot_keep_unapproved_external_label() -> None:
+    with pytest.raises(ValueError, match="unapproved label"):
+        SourceInventoryItem(
+            id="source-3",
+            name="external.pdf",
+            permission_status=SourcePermissionStatus.APPROVED,
+            source_label=SourceLabel.UNAPPROVED_EXTERNAL,
+        )

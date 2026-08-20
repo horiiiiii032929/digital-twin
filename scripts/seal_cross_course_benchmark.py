@@ -13,6 +13,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.draft_cross_course_benchmark import MANIFEST_PATH, ROOT, sha256_file
 from scripts.validate_cross_course_benchmark import (
     load_json,
@@ -206,6 +208,7 @@ def write_exclusive(artifacts: dict[str, tuple[Path, bytes]]) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset = load_json(args.dataset)
     validate_schema(dataset)
     validate_structure(dataset, expected_cases=100)

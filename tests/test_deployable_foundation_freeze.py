@@ -127,6 +127,11 @@ def test_current_stable_boundary_container_freeze_validates() -> None:
     assert result["artifact_bindings"] == 67
     assert result["current_match_bindings"] == 45
     assert result["current_match_required"] is True
+    assert result["current_match_enforced"] is False
+    assert result["current_match_status"] == (
+        "suspended-by-repository-correctness-audit"
+    )
+    assert result["release_claim_authorized"] is False
 
 
 def test_stable_boundary_excludes_append_only_registry_from_current_match() -> None:

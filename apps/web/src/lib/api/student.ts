@@ -1,4 +1,4 @@
-import { ApiError } from "@/lib/api/client"
+import { ApiError, pathSegment } from "@/lib/api/client"
 import type {
   StudentCitation,
   StudentConversation,
@@ -43,7 +43,7 @@ export function createStudentConversation(
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<StudentConversation> {
   return studentRequest<StudentConversation>(
-    `/api/student/courses/${courseId}/conversations`,
+    `/api/student/courses/${pathSegment(courseId)}/conversations`,
     {
       method: "POST",
       headers: studentHeaders(accountId),
@@ -56,7 +56,7 @@ export function getStudentConversation(
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<StudentConversationView> {
   return studentRequest<StudentConversationView>(
-    `/api/student/conversations/${conversationId}`,
+    `/api/student/conversations/${pathSegment(conversationId)}`,
     { headers: studentHeaders(accountId) },
   )
 }
@@ -68,7 +68,7 @@ export function submitStudentMessage(
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<StudentTutorTurn> {
   return studentRequest<StudentTutorTurn>(
-    `/api/student/conversations/${conversationId}/messages`,
+    `/api/student/conversations/${pathSegment(conversationId)}/messages`,
     {
       method: "POST",
       headers: studentHeaders(accountId),
@@ -82,7 +82,7 @@ export function listStudentMessageCitations(
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<StudentCitation[]> {
   return studentRequest<StudentCitation[]>(
-    `/api/student/messages/${messageId}/citations`,
+    `/api/student/messages/${pathSegment(messageId)}/citations`,
     { headers: studentHeaders(accountId) },
   )
 }
@@ -93,7 +93,7 @@ export async function loadStudentCitationCrop(
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<Blob> {
   const response = await fetch(
-    `${API_BASE_URL}/api/student/messages/${messageId}/citations/${citationId}/crop`,
+    `${API_BASE_URL}/api/student/messages/${pathSegment(messageId)}/citations/${pathSegment(citationId)}/crop`,
     { credentials: "include", headers: studentHeaders(accountId) },
   )
   if (!response.ok) {

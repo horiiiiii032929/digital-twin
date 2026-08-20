@@ -9,5 +9,7 @@ React/Vite frontend for the Sprint 1 chat-led onboarding prototype.
 - `npm run test:web`: run Vitest API client tests.
 - `npm run lint:web`: run Oxlint.
 
-The frontend expects the FastAPI service on `http://localhost:8000`. Override it
-with `VITE_API_BASE_URL` when needed.
+The frontend reads `VITE_*` values from the repository-root `.env` and expects
+the FastAPI service through the local `/api` development proxy. Override the
+origin with `VITE_API_BASE_URL` only when the frontend and API are hosted
+separately.

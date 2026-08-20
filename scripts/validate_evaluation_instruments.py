@@ -285,6 +285,11 @@ def validate_analysis(analysis: dict[str, Any]) -> None:
 
 
 def validate_run(run: dict[str, Any]) -> None:
+    if run["status"] == "complete":
+        require(
+            isinstance(run["finished_at"], str) and bool(run["finished_at"]),
+            "complete run must have a completion timestamp",
+        )
     result_ids = [item["result_id"] for item in run["case_results"]]
     require(len(result_ids) == len(set(result_ids)), "duplicate case result ID")
     trajectory_ids = [
@@ -324,7 +329,7 @@ def validate_run(run: dict[str, Any]) -> None:
 
 def validate_freeze_manifest(manifest: dict[str, Any]) -> None:
     require(
-        manifest["manifest_id"] == "instrument-freeze-v1",
+        manifest["manifest_id"] == "instrument-freeze-v2",
         "unexpected freeze manifest ID",
     )
     require(manifest["status"] == "frozen", "freeze manifest must be frozen")
@@ -438,9 +443,9 @@ def validate_instruments() -> dict[str, int | str]:
         state_card_path, state_card, simulator_input, simulator_output
     )
 
-    run_schema = load_json(INSTRUMENTS / "evaluation_run_v1.schema.json")
+    run_schema = load_json(INSTRUMENTS / "evaluation_run_v2.schema.json")
     run_example = load_json(
-        INSTRUMENTS / "evaluation_run_v1_synthetic_example.json"
+        INSTRUMENTS / "evaluation_run_v2_synthetic_example.json"
     )
     validate_schema(run_example, run_schema)
     validate_run(run_example)
@@ -454,7 +459,7 @@ def validate_instruments() -> dict[str, int | str]:
         "evaluation run analysis hash mismatch",
     )
 
-    manifest = load_json(INSTRUMENTS / "instrument_freeze_v1.json")
+    manifest = load_json(INSTRUMENTS / "instrument_freeze_v2.json")
     validate_freeze_manifest(manifest)
 
     return {

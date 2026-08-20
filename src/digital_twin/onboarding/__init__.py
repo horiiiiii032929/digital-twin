@@ -1,6 +1,7 @@
 from src.digital_twin.onboarding.commands import (
     add_custom_preview_case,
     add_source_inventory_item,
+    bind_session_to_course,
     set_preview_decision,
     update_approval_checklist_item,
     update_policy_field_value,
@@ -12,6 +13,7 @@ from src.digital_twin.onboarding.repository import (
     InMemorySessionRepository,
     ScopedSessionRepository,
     SessionRepository,
+    SessionWriteConflictError,
     SQLiteSessionRepository,
 )
 from src.digital_twin.onboarding.revisions import (
@@ -25,9 +27,11 @@ __all__ = [
     "OnboardingSession",
     "ScopedSessionRepository",
     "SessionRepository",
+    "SessionWriteConflictError",
     "SQLiteSessionRepository",
     "add_custom_preview_case",
     "add_source_inventory_item",
+    "bind_session_to_course",
     "confirm_revision_proposal",
     "create_session",
     "create_supervisor_demo_session",

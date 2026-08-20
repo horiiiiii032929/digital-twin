@@ -18,6 +18,8 @@ from typing import Any
 import jsonschema
 from dotenv import load_dotenv
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env", override=False)
@@ -309,6 +311,8 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> None:
     arguments = _arguments()
+    if arguments.split == "heldout":
+        require_pre_evaluation_operation_allowed("heldout_execution")
     instrument = load_instrument(arguments.instrument)
     dataset_summary = None
     if arguments.dataset is not None:

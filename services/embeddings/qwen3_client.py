@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import time
 from collections.abc import Sequence
 from pathlib import Path
@@ -30,15 +31,26 @@ class Qwen3TextEmbedder:
         dtype: str = "float16",
         batch_size: int = 8,
         max_length: int = 2048,
+        model_name: str = "Qwen/Qwen3-Embedding-0.6B",
+        model_revision: str | None = None,
     ) -> None:
         if not model_path.is_dir():
             raise ValueError(f"Qwen3 embedding model path is missing: {model_path}")
         if not instruction.strip():
             raise ValueError("Qwen3 embedding instruction is required")
-        if batch_size < 1:
+        if isinstance(batch_size, bool) or batch_size < 1:
             raise ValueError("batch_size must be at least 1")
-        if max_length < 32:
+        if isinstance(max_length, bool) or max_length < 32:
             raise ValueError("max_length must be at least 32")
+        if device not in {"cpu", "mps", "cuda"}:
+            raise ValueError("device must be cpu, mps, or cuda")
+        if dtype not in {"float16", "bfloat16", "float32"}:
+            raise ValueError("dtype must be float16, bfloat16, or float32")
+        if not model_name.strip():
+            raise ValueError("model_name is required")
+        resolved_revision = (model_revision or model_path.name).strip()
+        if not resolved_revision:
+            raise ValueError("model_revision is required")
 
         try:
             import torch
@@ -51,6 +63,8 @@ class Qwen3TextEmbedder:
 
         if device == "mps" and not torch.backends.mps.is_available():
             raise ValueError("MPS was requested but is unavailable")
+        if device == "cuda" and not torch.cuda.is_available():
+            raise ValueError("CUDA was requested but is unavailable")
         try:
             torch_dtype = getattr(torch, dtype)
         except AttributeError as error:
@@ -74,6 +88,10 @@ class Qwen3TextEmbedder:
             torch.mps.synchronize()
         self.model_load_seconds = time.perf_counter() - started
         self.model_path = model_path
+        self.provider_id = "local-huggingface"
+        self.model_name = model_name.strip()
+        self.model_revision = resolved_revision
+        self.execution = "local"
         self.instruction = instruction.strip()
         self.device = device
         self.dtype = dtype
@@ -115,7 +133,14 @@ class Qwen3TextEmbedder:
                     encoded["attention_mask"],
                 )
                 normalized = self._functional.normalize(pooled, p=2, dim=1)
-            vectors.extend(normalized.float().cpu().tolist())
+            batch_vectors = normalized.float().cpu().tolist()
+            if any(
+                not math.isfinite(float(value))
+                for vector in batch_vectors
+                for value in vector
+            ):
+                raise ValueError("Qwen3 returned a non-finite embedding vector")
+            vectors.extend(batch_vectors)
             self.ledger.record(
                 values=batch,
                 estimated_input_tokens=estimated_tokens,

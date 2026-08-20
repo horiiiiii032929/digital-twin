@@ -21,7 +21,8 @@ export function AdminWorkspace() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
+    const formElement = event.currentTarget
+    const form = new FormData(formElement)
     setSubmitting(true)
     setError(null)
     setCreated(null)
@@ -33,7 +34,7 @@ export function AdminWorkspace() {
         temporary_password: String(form.get("temporary_password") ?? ""),
       })
       setCreated(account)
-      event.currentTarget.reset()
+      formElement.reset()
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Invite failed.")
     } finally {
@@ -74,8 +75,8 @@ export function AdminWorkspace() {
           </CardHeader>
           <CardContent>
             <form className="grid gap-5 sm:grid-cols-2" onSubmit={submit}>
-              <AdminField label="Display name" name="display_name" />
-              <AdminField label="Email" name="email" type="email" />
+              <AdminField label="Display name" maxLength={160} name="display_name" />
+              <AdminField label="Email" maxLength={320} name="email" type="email" />
               <label className="block">
                 <span className="mb-2 block text-sm font-medium">Role</span>
                 <select
@@ -92,6 +93,7 @@ export function AdminWorkspace() {
                 autoComplete="new-password"
                 label="Temporary password"
                 minLength={12}
+                maxLength={1024}
                 name="temporary_password"
                 type="password"
               />
@@ -105,13 +107,19 @@ export function AdminWorkspace() {
                 <Alert className="border-[var(--success-border)] bg-[var(--success-soft)] text-[var(--success)] sm:col-span-2">
                   <CheckCircle2 aria-hidden="true" />
                   <AlertDescription className="text-[var(--success)]">
-                    {created.display_name} was invited as {created.role}.
+                    <p>{created.display_name} was invited as {created.role}.</p>
+                    <p className="mt-1">
+                      Account ID: {" "}
+                      <code className="break-all font-mono font-semibold select-all">
+                        {created.account_id}
+                      </code>
+                    </p>
                   </AlertDescription>
                 </Alert>
               ) : null}
 
               <div className="sm:col-span-2">
-                <Button disabled={submitting}>
+                <Button disabled={submitting} type="submit">
                   <UserPlus aria-hidden="true" />
                   {submitting ? "Creating account…" : "Create account"}
                 </Button>

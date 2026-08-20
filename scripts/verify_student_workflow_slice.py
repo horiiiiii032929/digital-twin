@@ -7,6 +7,7 @@ import json
 import tempfile
 from pathlib import Path
 
+from src.digital_twin.grounding import AnyHitEvidenceGate
 from src.digital_twin.onboarding import InMemorySessionRepository, create_session
 from src.digital_twin.student import (
     ReleaseEvaluationStatus,
@@ -26,6 +27,19 @@ PROFILE = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
 
 
 class KeywordEmbedder:
+    provider_id = "local-huggingface"
+    model_name = "Qwen/Qwen3-Embedding-0.6B"
+    model_revision = "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    execution = "local"
+    instruction = (
+        "Given a student question within one authorized university course, "
+        "retrieve passages that directly support a grounded answer."
+    )
+    device = "mps"
+    dtype = "float16"
+    max_length = 2048
+    batch_size = 16
+
     def embed_documents(self, texts):
         return [self._vector(text) for text in texts]
 
@@ -68,6 +82,7 @@ async def verify_student_workflow_slice() -> dict:
             repository,
             profile_path=PROFILE,
             embedder=KeywordEmbedder(),
+            evidence_gate=AnyHitEvidenceGate(),
         )
 
         courses = service.list_courses(fixture.student_a_id)
@@ -101,10 +116,14 @@ async def verify_student_workflow_slice() -> dict:
         )
         sessions = InMemorySessionRepository()
         onboarding = create_session("publication-session-synthetic")
+        onboarding.course_id = fixture.course_a_id
         onboarding.current_step = "professor_approval"
         onboarding.policy = approved_synthetic_policy()
         sessions.save(onboarding)
-        publisher = ReleaseLifecycleService(repository)
+        publisher = ReleaseLifecycleService(
+            repository,
+            evidence_sufficiency_ready=True,
+        )
         source_release = repository.get_release(fixture.release_a_id)
         if source_release is None:
             raise AssertionError("synthetic source release was not seeded")
@@ -189,6 +208,7 @@ async def verify_student_workflow_slice() -> dict:
             restarted,
             profile_path=PROFILE,
             embedder=KeywordEmbedder(),
+            evidence_gate=AnyHitEvidenceGate(),
         )
         restored = restarted_service.get_conversation(
             fixture.student_a_id, conversation.id
@@ -216,6 +236,7 @@ async def verify_student_workflow_slice() -> dict:
             fallback_repository,
             profile_path=PROFILE,
             embedder=QueryFailingEmbedder(),
+            evidence_gate=AnyHitEvidenceGate(),
         )
         fallback_conversation = fallback_service.create_conversation(
             fallback_fixture.student_a_id, fallback_fixture.course_a_id
@@ -231,7 +252,9 @@ async def verify_student_workflow_slice() -> dict:
             checks,
             "bm25-provider-fallback",
             bool(fallback_turn.citations)
-            and any(event.event_type == "retrieval-fallback" for event in fallback_events),
+            and any(
+                event.event_type == "retrieval-fallback" for event in fallback_events
+            ),
         )
         serialized_audit = " ".join(
             event.model_dump_json() for event in fallback_events
@@ -251,6 +274,7 @@ async def verify_student_workflow_slice() -> dict:
             profile_path=PROFILE,
             embedder=KeywordEmbedder(),
             generator=RaisingGenerator(),
+            evidence_gate=AnyHitEvidenceGate(),
         )
         malformed_conversation = malformed_service.create_conversation(
             malformed_fixture.student_a_id, malformed_fixture.course_a_id
@@ -278,6 +302,8 @@ async def verify_student_workflow_slice() -> dict:
         "failed": len(checks) - passed,
         "network_called": False,
         "private_data_used": False,
+        "evidence_gate": "any-hit-evidence-gate-synthetic-control-only",
+        "product_evidence_gate_selected": False,
         "checks": checks,
     }
     if result["status"] != "passed":

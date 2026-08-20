@@ -9,6 +9,7 @@ import type { OnboardingSession } from "@/lib/api/types"
 
 const SESSION: OnboardingSession = {
   session_id: "session-1",
+  revision: 1,
   current_step: "source_permissions",
   answers: {},
   messages: [],

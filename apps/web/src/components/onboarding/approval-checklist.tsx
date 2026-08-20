@@ -44,13 +44,19 @@ export function ApprovalChecklist({
         </div>
         <Badge
           variant="outline"
-          className={
+          className={`status-badge ${
             releaseStatus === "approved"
-              ? "status-badge status-badge-success"
-              : "status-badge status-badge-warning"
-          }
+              ? "status-badge-success"
+              : releaseStatus === "blocked"
+                ? "status-badge-danger"
+                : "status-badge-warning"
+          }`}
         >
-          {releaseStatus === "approved" ? "approved" : "draft only"}
+          {releaseStatus === "approved"
+            ? "approved"
+            : releaseStatus === "blocked"
+              ? "blocked"
+              : "draft only"}
         </Badge>
       </div>
 

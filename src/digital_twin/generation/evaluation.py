@@ -4,6 +4,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field, model_validator
 
+from src.digital_twin.generation.citations import citation_matches_chunk
 from src.digital_twin.generation.models import PolicyAction
 from src.digital_twin.grounding import GenerationUsage, Retriever, TutorGenerator
 from src.digital_twin.tutor_policy import TutorPolicy
@@ -211,12 +212,8 @@ def _infer_action(citations, hits) -> str:
 
 
 def _citations_match_hits(citations, hits) -> bool:
-    relationships = {
-        (hit.chunk.document_id, hit.chunk.locator or f"chunk {hit.chunk.ordinal + 1}")
-        for hit in hits
-    }
     return all(
-        (citation.source_id, citation.locator) in relationships
+        sum(citation_matches_chunk(citation, hit.chunk) for hit in hits) == 1
         for citation in citations
     )
 

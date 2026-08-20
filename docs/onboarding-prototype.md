@@ -1,12 +1,14 @@
 # Chat-led onboarding prototype
 
-The Sprint 1 onboarding prototype now covers the full professor review loop
+The onboarding prototype now covers the integrated professor review loop
 described in the research artifacts while staying provider-neutral.
 
-This page preserves the scope of the Sprint 1 onboarding component. The later
-bounded student and release-publication implementation is documented in
-[student-workflow.md](student-workflow.md); it does not turn the metadata-only
-onboarding UI into production authentication, ingestion, or administration.
+This page preserves the scope of the current onboarding path. The broader student
+and release-publication implementation is documented in
+[student-workflow.md](student-workflow.md). Onboarding now includes durable
+professor session flow and policy/edit review primitives used by the current
+product path, while LMS integration, external LMS/course orchestration, and full
+administration workflows remain separate.
 
 ## Professor review console
 
@@ -18,9 +20,9 @@ and an Activity view. Release status, recommended action, blockers, evidence
 snapshots, and workflow trace remain inspectable without turning the prototype
 into a report or hiding professor authority.
 
-The redesign does not add a model, integration, data source, release action, or
-research claim. It preserves the existing API/controller boundary and remains
-an experimental demonstration. Automated and rendered engineering checks are
+The redesign does not add a new model. It adds review- and policy-flow controls
+while preserving existing API/controller boundaries. Automated and rendered
+engineering checks are
 documented in
 [the issue #80 implementation report](../reports/issue-80-professor-console-redesign.md);
 human usability and professor approval remain untested.
@@ -33,10 +35,10 @@ preserving an unrelated scroll position.
 
 ## Synthetic supervisor walkthrough
 
-Prepare the bounded student fixture, then run both local applications:
+Run both local applications; the bounded student fixture is created in memory
+when the demo API starts:
 
 ```bash
-npm run prepare:supervisor-demo
 npm run dev:api
 npm run dev:web
 ```
@@ -49,14 +51,14 @@ can inspect the meaningful review state immediately. It contains no source file
 contents, private course data, student records, professor approval, or
 production release.
 
-Use the **Student tutor** link to inspect the separately seeded synthetic
+Use the **Student tutor** link to inspect the automatically seeded synthetic
 published release, ask or restore the cache-coherence question, and open citation
 `[1]` to see source version, page locator, and current-release lineage. The
 professor onboarding session and the student release remain separate prototype
 boundaries; this walkthrough does not claim that the onboarding UI published the
 student release.
 
-## Sprint 1 defaults
+## Current defaults
 
 - Local course uploads are metadata-only. The browser records file name, MIME
   type, size, permission status, source label, sensitivity flag, and notes. File
@@ -92,7 +94,6 @@ student release.
 
 ## Out of scope
 
-The professor onboarding component does not implement production ingestion,
-authentication, durable session persistence, live retrieval, LMS integration,
-or live search. The separate bounded student workflow is synthetic and is
+The professor onboarding component does not implement LMS integration, external
+course orchestration, or live search. The separate bounded student workflow is
 documented in [student-workflow.md](student-workflow.md).

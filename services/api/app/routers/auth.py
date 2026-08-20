@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from uuid import uuid4
-
 from fastapi import APIRouter, HTTPException, Request, Response, status
 
 from services.api.app.dependencies import (
@@ -19,7 +17,6 @@ from services.api.app.schemas import (
     PasswordResetRequest,
 )
 from src.digital_twin.identity import IdentityError, IdentityProfile
-from src.digital_twin.student import AuditEvent
 
 
 router = APIRouter(tags=["identity"])
@@ -28,7 +25,6 @@ router = APIRouter(tags=["identity"])
 @router.post("/auth/login", response_model=IdentityProfile)
 def login(
     payload: LoginRequest,
-    request: Request,
     response: Response,
     identity: IdentityServiceDependency,
     settings: SettingsDependency,
@@ -56,7 +52,6 @@ def login(
         samesite="strict",
     )
     response.headers["Cache-Control"] = "no-store"
-    _audit(request, "identity.login", issued.principal.account_id)
     return issued.principal
 
 
@@ -83,12 +78,7 @@ def logout(
     identity: IdentityServiceDependency,
     settings: SettingsDependency,
 ):
-    account_id: str | None = None
     token = request.cookies.get(settings.session_cookie_name, "")
-    try:
-        account_id = identity.authenticate(token).account_id
-    except IdentityError:
-        pass
     identity.logout(token)
     response.delete_cookie(
         settings.session_cookie_name,
@@ -98,13 +88,11 @@ def logout(
         samesite="strict",
     )
     response.headers["Cache-Control"] = "no-store"
-    _audit(request, "identity.logout", account_id)
 
 
 @router.post("/auth/password", status_code=status.HTTP_204_NO_CONTENT)
 def change_password(
     payload: PasswordChangeRequest,
-    request: Request,
     response: Response,
     account_id: CurrentAccountDependency,
     identity: IdentityServiceDependency,
@@ -126,7 +114,6 @@ def change_password(
         samesite="strict",
     )
     response.headers["Cache-Control"] = "no-store"
-    _audit(request, "identity.password_changed", account_id)
 
 
 @router.post(
@@ -136,7 +123,6 @@ def change_password(
 )
 def invite_account(
     payload: AccountInviteRequest,
-    request: Request,
     account_id: AdminAccountDependency,
     identity: IdentityServiceDependency,
 ):
@@ -150,13 +136,6 @@ def invite_account(
         )
     except IdentityError as error:
         raise _identity_http_error(error) from error
-    _audit(
-        request,
-        "identity.account_invited",
-        account_id,
-        target_account_id=invited.account_id,
-        target_role=invited.role.value,
-    )
     return invited
 
 
@@ -167,7 +146,6 @@ def invite_account(
 def reset_password(
     target_account_id: str,
     payload: PasswordResetRequest,
-    request: Request,
     account_id: AdminAccountDependency,
     identity: IdentityServiceDependency,
 ):
@@ -179,12 +157,6 @@ def reset_password(
         )
     except IdentityError as error:
         raise _identity_http_error(error) from error
-    _audit(
-        request,
-        "identity.password_reset",
-        account_id,
-        target_account_id=target_account_id,
-    )
 
 
 @router.delete(
@@ -193,7 +165,6 @@ def reset_password(
 )
 def revoke_account(
     target_account_id: str,
-    request: Request,
     account_id: AdminAccountDependency,
     identity: IdentityServiceDependency,
 ):
@@ -209,12 +180,6 @@ def revoke_account(
         identity.revoke_account(account_id, target_account_id)
     except IdentityError as error:
         raise _identity_http_error(error) from error
-    _audit(
-        request,
-        "identity.account_revoked",
-        account_id,
-        target_account_id=target_account_id,
-    )
 
 
 def _identity_http_error(error: IdentityError) -> HTTPException:
@@ -234,20 +199,4 @@ def _identity_http_error(error: IdentityError) -> HTTPException:
     return HTTPException(
         status_code=code,
         detail={"code": error.code, "message": error.message},
-    )
-
-
-def _audit(
-    request: Request,
-    event_type: str,
-    account_id: str | None,
-    **details: str,
-) -> None:
-    request.app.state.student_repository.save_audit_event(
-        AuditEvent(
-            id=f"audit-{uuid4()}",
-            event_type=event_type,
-            account_id=account_id,
-            details=details,
-        )
     )

@@ -24,6 +24,7 @@ from scripts.judge_professor_fidelity import (
     _validate_judgment,
     write_json_exclusive,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -147,6 +148,7 @@ def run_probe(output: Path) -> dict[str, Any]:
 
 def main() -> None:
     arguments = parse_args()
+    require_pre_evaluation_operation_allowed("external_model_evaluation")
     result = run_probe(arguments.output)
     print(
         json.dumps(

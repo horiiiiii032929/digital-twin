@@ -24,6 +24,7 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     group_ocr_lines,
 )
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 SEALED_ROOT = ROOT / "data/processed/multimodal_retrieval_v1/sealed_v1"
@@ -118,6 +119,7 @@ def describe_image(image_path: Path) -> tuple[dict[str, Any], float]:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         dataset, seal = load_sealed_development(
             root=ROOT, seal_path=args.seal, ledger_path=args.ledger

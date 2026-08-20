@@ -37,6 +37,7 @@ from src.digital_twin.grounding import (
     ReciprocalRankFusionRetriever,
 )
 from src.digital_twin.grounding.models import DocumentChunk
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
@@ -348,6 +349,7 @@ def evaluate(arguments: argparse.Namespace) -> dict[str, Any]:
 
 def main() -> None:
     arguments = parse_args()
+    require_pre_evaluation_operation_allowed("local_model_evaluation")
     if arguments.output.exists():
         raise ValueError(f"refusing to overwrite compatibility result: {arguments.output}")
     result = evaluate(arguments)

@@ -15,6 +15,8 @@ from typing import Any
 from dotenv import load_dotenv
 from openai import OpenAI, OpenAIError
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.review_generator_qualification_v2 import (
     CHECK_FIELDS,
     STRESS_PROBES,
@@ -205,6 +207,8 @@ def _write_invalid(
 
 def main() -> int:
     args = parse_args()
+    if args.execute:
+        require_pre_evaluation_operation_allowed("external_model_evaluation")
     dataset, run = load_assets()
     credential_present = bool(os.getenv("DEEPSEEK_API_KEY", "").strip())
     preflight = {

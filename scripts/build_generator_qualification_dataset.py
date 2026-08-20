@@ -7,6 +7,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = ROOT / "research/05_evaluation"
@@ -203,6 +205,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
     arguments = parser.parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     arguments.output_root.mkdir(parents=True, exist_ok=True)
     split_records = {}
     for split in ("development", "heldout"):

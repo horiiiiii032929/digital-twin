@@ -1,6 +1,8 @@
 from src.digital_twin.generation.citations import (
     CitationValidationError,
     DeterministicCitationValidator,
+    authoritative_citation_for_chunk,
+    citation_matches_chunk,
 )
 from src.digital_twin.generation.generator import (
     DeterministicGroundedGenerator,
@@ -47,6 +49,8 @@ __all__ = [
     "PolicyDecision",
     "PromptPackage",
     "StrictEvidenceGroundedPromptBuilder",
+    "authoritative_citation_for_chunk",
+    "citation_matches_chunk",
     "evaluate_generator",
     "load_generation_evaluation_set",
 ]

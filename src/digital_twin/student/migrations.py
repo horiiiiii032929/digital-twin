@@ -29,10 +29,14 @@ def apply_migrations(
     connection: sqlite3.Connection,
     migrations: Iterable[SQLiteMigration] | None = None,
 ) -> int:
-    selected = tuple(migrations or DEFAULT_MIGRATIONS)
+    selected = tuple(DEFAULT_MIGRATIONS if migrations is None else migrations)
     versions = [migration.version for migration in selected]
-    if versions != sorted(versions) or len(versions) != len(set(versions)):
-        raise ValueError("migration versions must be unique and ordered")
+    if (
+        any(version < 1 for version in versions)
+        or versions != sorted(versions)
+        or len(versions) != len(set(versions))
+    ):
+        raise ValueError("migration versions must be positive, unique, and ordered")
     connection.execute(
         """CREATE TABLE IF NOT EXISTS schema_migrations (
                version INTEGER PRIMARY KEY,
@@ -48,6 +52,12 @@ def apply_migrations(
             "SELECT version, name, checksum FROM schema_migrations"
         ).fetchall()
     }
+    unknown_versions = sorted(set(applied) - set(versions))
+    if unknown_versions:
+        formatted = ", ".join(str(version) for version in unknown_versions)
+        raise RuntimeError(
+            "database contains migrations unknown to this runtime: " + formatted
+        )
     for migration in selected:
         recorded = applied.get(migration.version)
         if recorded is not None:
@@ -117,6 +127,18 @@ def _upgrade_release_and_citation_lineage(connection: sqlite3.Connection) -> Non
             connection.execute(
                 f"ALTER TABLE citations ADD COLUMN {column} {column_type}"
             )
+
+
+def _add_onboarding_session_revision(connection: sqlite3.Connection) -> None:
+    columns = {
+        str(row[1])
+        for row in connection.execute("PRAGMA table_info(onboarding_sessions)")
+    }
+    if "revision" not in columns:
+        connection.execute(
+            """ALTER TABLE onboarding_sessions ADD COLUMN revision INTEGER
+               NOT NULL DEFAULT 1"""
+        )
 
 
 CORE_SCHEMA_STATEMENTS = (
@@ -275,6 +297,30 @@ INGESTION_JOB_SCHEMA_STATEMENTS = (
 )
 
 
+STORAGE_DELETION_QUEUE_SCHEMA_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS storage_deletion_queue (
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           storage_kind TEXT NOT NULL CHECK(storage_kind IN ('object', 'derived')),
+           storage_ref TEXT NOT NULL,
+           target_type TEXT NOT NULL,
+           target_id TEXT NOT NULL,
+           attempts INTEGER NOT NULL DEFAULT 0,
+           last_error TEXT,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL,
+           UNIQUE(storage_kind, storage_ref)
+       )""",
+    """CREATE INDEX IF NOT EXISTS storage_deletion_queue_created_idx
+       ON storage_deletion_queue(created_at, id)""",
+)
+
+
+RELEASE_INVARIANT_STATEMENTS = (
+    """CREATE UNIQUE INDEX IF NOT EXISTS releases_one_published_per_course
+       ON releases(course_id) WHERE status = 'published'""",
+)
+
+
 DEFAULT_MIGRATIONS = (
     SQLiteMigration(
         version=1,
@@ -314,6 +360,28 @@ DEFAULT_MIGRATIONS = (
         definition="\n".join(INGESTION_JOB_SCHEMA_STATEMENTS),
         operation=lambda connection: _execute_statements(
             connection, INGESTION_JOB_SCHEMA_STATEMENTS
+        ),
+    ),
+    SQLiteMigration(
+        version=6,
+        name="durable-storage-deletion-queue",
+        definition="\n".join(STORAGE_DELETION_QUEUE_SCHEMA_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, STORAGE_DELETION_QUEUE_SCHEMA_STATEMENTS
+        ),
+    ),
+    SQLiteMigration(
+        version=7,
+        name="optimistic-onboarding-session-revisions",
+        definition="add onboarding_sessions.revision for ownership-safe compare-and-swap writes",
+        operation=_add_onboarding_session_revision,
+    ),
+    SQLiteMigration(
+        version=8,
+        name="one-published-release-per-course",
+        definition="\n".join(RELEASE_INVARIANT_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, RELEASE_INVARIANT_STATEMENTS
         ),
     ),
 )

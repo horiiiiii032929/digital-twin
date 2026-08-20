@@ -99,10 +99,9 @@ storage. Messages, answers, and citations are reloaded from the API and remain
 authoritative there. Browser storage failure therefore removes convenience,
 not authorization or source lineage.
 
-Seed and run the synthetic local demo with:
+Run the synthetic local demo; its fixture is created in memory at API startup:
 
 ```bash
-npm run seed:student-demo
 npm run dev:api
 npm run dev:web
 ```

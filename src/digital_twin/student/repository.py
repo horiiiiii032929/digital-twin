@@ -9,6 +9,7 @@ from typing import Protocol
 from src.digital_twin.grounding.models import DocumentChunk, GenerationTrace
 from src.digital_twin.student.models import (
     Account,
+    AccountRole,
     AuditEvent,
     Citation,
     Conversation,
@@ -16,6 +17,7 @@ from src.digital_twin.student.models import (
     CourseMembership,
     DigitalTwinRelease,
     Message,
+    MembershipRole,
     ReleaseEvaluationStatus,
     StudentReleaseStatus,
 )
@@ -23,10 +25,18 @@ from src.digital_twin.student.migrations import apply_migrations
 from src.digital_twin.tutor_policy import TutorPolicy
 
 
+class DuplicateTurnError(RuntimeError):
+    """A concurrent request already claimed the conversation request ID."""
+
+
 class StudentRepository(Protocol):
     def save_account(self, account: Account) -> Account: ...
 
     def save_course(self, course: Course) -> Course: ...
+
+    def save_course_with_owner(
+        self, course: Course, membership: CourseMembership
+    ) -> Course: ...
 
     def save_membership(self, membership: CourseMembership) -> CourseMembership: ...
 
@@ -121,26 +131,117 @@ class SQLiteStudentRepository:
             apply_migrations(self._connection)
 
     def save_account(self, account: Account) -> Account:
+        account = Account.model_validate(account.model_dump(mode="python"))
         with self._lock, self._connection:
+            existing = self._connection.execute(
+                "SELECT role FROM accounts WHERE id = ?", (account.id,)
+            ).fetchone()
+            if existing is not None and existing["role"] != account.role.value:
+                raise ValueError("account role is immutable")
             self._connection.execute(
-                "INSERT OR REPLACE INTO accounts(id, role, status) VALUES (?, ?, ?)",
+                """INSERT INTO accounts(id, role, status) VALUES (?, ?, ?)
+                   ON CONFLICT(id) DO UPDATE SET
+                     role = excluded.role,
+                     status = excluded.status""",
                 (account.id, account.role.value, account.status.value),
             )
         return account.model_copy(deep=True)
 
     def save_course(self, course: Course) -> Course:
+        course = Course.model_validate(course.model_dump(mode="python"))
         with self._lock, self._connection:
+            existing = self._connection.execute(
+                "SELECT owner_professor_id FROM courses WHERE id = ?", (course.id,)
+            ).fetchone()
+            if (
+                existing is not None
+                and existing["owner_professor_id"] != course.owner_professor_id
+            ):
+                raise ValueError("course ownership is immutable")
+            self._validate_course_owner(course)
             self._connection.execute(
-                "INSERT OR REPLACE INTO courses(id, title, owner_professor_id) VALUES (?, ?, ?)",
+                """INSERT INTO courses(id, title, owner_professor_id)
+                   VALUES (?, ?, ?)
+                   ON CONFLICT(id) DO UPDATE SET
+                     title = excluded.title,
+                     owner_professor_id = excluded.owner_professor_id""",
                 (course.id, course.title, course.owner_professor_id),
             )
         return course.model_copy(deep=True)
 
-    def save_membership(self, membership: CourseMembership) -> CourseMembership:
+    def save_course_with_owner(
+        self, course: Course, membership: CourseMembership
+    ) -> Course:
+        course = Course.model_validate(course.model_dump(mode="python"))
+        membership = CourseMembership.model_validate(
+            membership.model_dump(mode="python")
+        )
+        if (
+            membership.account_id != course.owner_professor_id
+            or membership.course_id != course.id
+            or membership.role != MembershipRole.PROFESSOR
+            or not membership.active
+        ):
+            raise ValueError("course owner membership is inconsistent")
         with self._lock, self._connection:
+            self._validate_course_owner(course)
+            if self._connection.execute(
+                "SELECT 1 FROM courses WHERE id = ?", (course.id,)
+            ).fetchone() is not None:
+                raise ValueError("course identifier already exists")
             self._connection.execute(
-                """INSERT OR REPLACE INTO memberships
-                   (account_id, course_id, role, active) VALUES (?, ?, ?, ?)""",
+                """INSERT INTO courses(id, title, owner_professor_id)
+                   VALUES (?, ?, ?)""",
+                (course.id, course.title, course.owner_professor_id),
+            )
+            self._connection.execute(
+                """INSERT INTO memberships(account_id, course_id, role, active)
+                   VALUES (?, ?, ?, ?)""",
+                (
+                    membership.account_id,
+                    membership.course_id,
+                    membership.role.value,
+                    int(membership.active),
+                ),
+            )
+        return course.model_copy(deep=True)
+
+    def save_membership(self, membership: CourseMembership) -> CourseMembership:
+        membership = CourseMembership.model_validate(
+            membership.model_dump(mode="python")
+        )
+        with self._lock, self._connection:
+            account = self._connection.execute(
+                "SELECT role FROM accounts WHERE id = ?", (membership.account_id,)
+            ).fetchone()
+            course = self._connection.execute(
+                "SELECT owner_professor_id FROM courses WHERE id = ?",
+                (membership.course_id,),
+            ).fetchone()
+            expected_role = {
+                MembershipRole.PROFESSOR: AccountRole.PROFESSOR.value,
+                MembershipRole.STUDENT: AccountRole.STUDENT.value,
+            }[membership.role]
+            if account is None or course is None or account["role"] != expected_role:
+                raise ValueError("membership account, course, and role are inconsistent")
+            if (
+                membership.role == MembershipRole.PROFESSOR
+                and course["owner_professor_id"] != membership.account_id
+            ):
+                raise ValueError("only the course owner may hold professor membership")
+            existing = self._connection.execute(
+                """SELECT role FROM memberships
+                   WHERE account_id = ? AND course_id = ?""",
+                (membership.account_id, membership.course_id),
+            ).fetchone()
+            if existing is not None and existing["role"] != membership.role.value:
+                raise ValueError("membership role is immutable")
+            self._connection.execute(
+                """INSERT INTO memberships
+                   (account_id, course_id, role, active) VALUES (?, ?, ?, ?)
+                   ON CONFLICT(account_id, course_id) DO UPDATE SET
+                     role = excluded.role,
+                     active = excluded.active""",
                 (
                     membership.account_id,
                     membership.course_id,
@@ -150,28 +251,47 @@ class SQLiteStudentRepository:
             )
         return membership.model_copy(deep=True)
 
+    def _validate_course_owner(self, course: Course) -> None:
+        owner = self._connection.execute(
+            "SELECT role, status FROM accounts WHERE id = ?",
+            (course.owner_professor_id,),
+        ).fetchone()
+        if (
+            owner is None
+            or owner["role"] != AccountRole.PROFESSOR.value
+            or owner["status"] != "active"
+        ):
+            raise ValueError("course owner must be an active professor")
+
     def save_release(self, release: DigitalTwinRelease) -> DigitalTwinRelease:
+        release = DigitalTwinRelease.model_validate(release.model_dump(mode="python"))
         with self._lock, self._connection:
-            self._connection.execute(
-                """INSERT OR REPLACE INTO releases
-                   (id, course_id, profile_id, profile_version, policy_version,
-                    policy_json, status, evaluation_status, created_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    release.id,
-                    release.course_id,
-                    release.profile_id,
-                    release.profile_version,
-                    release.policy_version,
-                    release.policy.model_dump_json(),
-                    release.status.value,
-                    release.evaluation_status.value,
-                    release.created_at,
-                ),
-            )
-            self._connection.execute(
-                "DELETE FROM release_chunks WHERE release_id = ?", (release.id,)
-            )
+            try:
+                self._connection.execute(
+                    """INSERT INTO releases
+                       (id, course_id, profile_id, profile_version, policy_version,
+                        policy_json, status, evaluation_status, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        release.id,
+                        release.course_id,
+                        release.profile_id,
+                        release.profile_version,
+                        release.policy_version,
+                        release.policy.model_dump_json(),
+                        release.status.value,
+                        release.evaluation_status.value,
+                        release.created_at,
+                    ),
+                )
+            except sqlite3.IntegrityError as error:
+                if self._connection.execute(
+                    "SELECT 1 FROM releases WHERE id = ?", (release.id,)
+                ).fetchone():
+                    raise ValueError(
+                        "release content is immutable after creation"
+                    ) from error
+                raise
             self._connection.executemany(
                 "INSERT INTO release_chunks(release_id, chunk_id, chunk_json) VALUES (?, ?, ?)",
                 [
@@ -270,6 +390,9 @@ class SQLiteStudentRepository:
         return [self._release(row) for row in rows]
 
     def save_conversation(self, conversation: Conversation) -> Conversation:
+        conversation = Conversation.model_validate(
+            conversation.model_dump(mode="python")
+        )
         with self._lock, self._connection:
             self._connection.execute(
                 """INSERT INTO conversations
@@ -331,47 +454,82 @@ class SQLiteStudentRepository:
         citations: list[Citation],
         audit_events: list[AuditEvent],
     ) -> None:
-        with self._lock, self._connection:
-            self._insert_message(student_message)
-            self._insert_message(tutor_message)
-            self._connection.executemany(
-                """INSERT INTO citations
-                   (id, message_id, course_id, release_id, source_artifact_id,
-                    source_document_id, source_version, title, locator,
-                    source_checksum, page, region_id, region_kind,
-                    bounding_box_json, crop_ref)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                [
-                    (
-                        citation.id,
-                        citation.message_id,
-                        citation.course_id,
-                        citation.release_id,
-                        citation.source_artifact_id,
-                        citation.source_document_id,
-                        citation.source_version,
-                        citation.title,
-                        citation.locator,
-                        citation.source_checksum,
-                        citation.page,
-                        citation.region_id,
-                        citation.region_kind,
+        conversation = Conversation.model_validate(
+            conversation.model_dump(mode="python")
+        )
+        student_message = Message.model_validate(
+            student_message.model_dump(mode="python")
+        )
+        tutor_message = Message.model_validate(tutor_message.model_dump(mode="python"))
+        citations = [
+            Citation.model_validate(citation.model_dump(mode="python"))
+            for citation in citations
+        ]
+        audit_events = [
+            AuditEvent.model_validate(event.model_dump(mode="python"))
+            for event in audit_events
+        ]
+        if (
+            student_message.conversation_id != conversation.id
+            or tutor_message.conversation_id != conversation.id
+            or student_message.role != "student"
+            or tutor_message.role != "tutor"
+            or not student_message.client_request_id
+            or tutor_message.response_to_message_id != student_message.id
+            or any(
+                citation.message_id != tutor_message.id
+                or citation.course_id != conversation.course_id
+                or citation.release_id != conversation.release_id
+                for citation in citations
+            )
+        ):
+            raise ValueError("tutor turn records have inconsistent lineage")
+        try:
+            with self._lock, self._connection:
+                self._insert_message(student_message)
+                self._insert_message(tutor_message)
+                self._connection.executemany(
+                    """INSERT INTO citations
+                       (id, message_id, course_id, release_id, source_artifact_id,
+                        source_document_id, source_version, title, locator,
+                        source_checksum, page, region_id, region_kind,
+                        bounding_box_json, crop_ref)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    [
                         (
-                            json.dumps(citation.bounding_box)
-                            if citation.bounding_box is not None
-                            else None
-                        ),
-                        citation.crop_ref,
-                    )
-                    for citation in citations
-                ],
-            )
-            for event in audit_events:
-                self._insert_audit_event(event)
-            self._connection.execute(
-                "UPDATE conversations SET updated_at = ? WHERE id = ?",
-                (conversation.updated_at, conversation.id),
-            )
+                            citation.id,
+                            citation.message_id,
+                            citation.course_id,
+                            citation.release_id,
+                            citation.source_artifact_id,
+                            citation.source_document_id,
+                            citation.source_version,
+                            citation.title,
+                            citation.locator,
+                            citation.source_checksum,
+                            citation.page,
+                            citation.region_id,
+                            citation.region_kind,
+                            (
+                                json.dumps(citation.bounding_box)
+                                if citation.bounding_box is not None
+                                else None
+                            ),
+                            citation.crop_ref,
+                        )
+                        for citation in citations
+                    ],
+                )
+                for event in audit_events:
+                    self._insert_audit_event(event)
+                self._connection.execute(
+                    "UPDATE conversations SET updated_at = ? WHERE id = ?",
+                    (conversation.updated_at, conversation.id),
+                )
+        except sqlite3.IntegrityError as error:
+            if "messages.conversation_id, messages.client_request_id" in str(error):
+                raise DuplicateTurnError from error
+            raise
 
     def list_citations(self, message_id: str) -> list[Citation]:
         with self._lock:
@@ -390,6 +548,7 @@ class SQLiteStudentRepository:
         return citations
 
     def save_audit_event(self, event: AuditEvent) -> AuditEvent:
+        event = AuditEvent.model_validate(event.model_dump(mode="python"))
         with self._lock, self._connection:
             self._insert_audit_event(event)
         return event.model_copy(deep=True)
@@ -402,43 +561,66 @@ class SQLiteStudentRepository:
         return [self._audit_event(row) for row in rows]
 
     def set_release_status(self, release_id: str, status: StudentReleaseStatus) -> None:
+        if status == StudentReleaseStatus.PUBLISHED:
+            raise ValueError("publish_release must be used to publish a release")
         with self._lock, self._connection:
-            self._connection.execute(
+            cursor = self._connection.execute(
                 "UPDATE releases SET status = ? WHERE id = ?",
                 (status.value, release_id),
             )
+            if cursor.rowcount != 1:
+                raise KeyError("release_not_found")
 
     def set_release_evaluation_status(
         self, release_id: str, status: ReleaseEvaluationStatus
     ) -> None:
         with self._lock, self._connection:
-            self._connection.execute(
-                "UPDATE releases SET evaluation_status = ? WHERE id = ?",
-                (status.value, release_id),
+            cursor = self._connection.execute(
+                """UPDATE releases SET evaluation_status = ?
+                   WHERE id = ? AND (status != ? OR ? = ?)""",
+                (
+                    status.value,
+                    release_id,
+                    StudentReleaseStatus.PUBLISHED.value,
+                    status.value,
+                    ReleaseEvaluationStatus.PASSED.value,
+                ),
             )
+            if cursor.rowcount != 1:
+                if self._connection.execute(
+                    "SELECT 1 FROM releases WHERE id = ?", (release_id,)
+                ).fetchone() is None:
+                    raise KeyError("release_not_found")
+                raise ValueError("published releases must retain passed evaluation")
 
     def publish_release(self, release_id: str) -> None:
         """Atomically make one course release current and withdraw its predecessor."""
         with self._lock, self._connection:
-            row = self._connection.execute(
-                "SELECT course_id FROM releases WHERE id = ?", (release_id,)
-            ).fetchone()
-            if row is None:
+            release = self.get_release(release_id)
+            if release is None:
                 raise KeyError("release_not_found")
+            DigitalTwinRelease.model_validate(
+                {
+                    **release.model_dump(mode="python"),
+                    "status": StudentReleaseStatus.PUBLISHED,
+                }
+            )
             self._connection.execute(
                 """UPDATE releases SET status = ?
                    WHERE course_id = ? AND status = ? AND id != ?""",
                 (
                     StudentReleaseStatus.WITHDRAWN.value,
-                    row["course_id"],
+                    release.course_id,
                     StudentReleaseStatus.PUBLISHED.value,
                     release_id,
                 ),
             )
-            self._connection.execute(
+            cursor = self._connection.execute(
                 "UPDATE releases SET status = ? WHERE id = ?",
                 (StudentReleaseStatus.PUBLISHED.value, release_id),
             )
+            if cursor.rowcount != 1:
+                raise RuntimeError("release publication update failed")
 
     def _one(self, sql: str, parameters: tuple[object, ...]) -> sqlite3.Row | None:
         with self._lock:

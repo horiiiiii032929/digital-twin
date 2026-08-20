@@ -25,6 +25,15 @@ services:
       dockerfile: deploy/Dockerfile
       target: api
     environment: *runtime-environment
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
     restart: unless-stopped
     volumes:
       - runtime-data:/var/lib/digital-twin
@@ -45,6 +54,15 @@ services:
     # shared tag twice races during concurrent BuildKit export.
     command: ["python", "-m", "scripts.run_ingestion_worker"]
     environment: *runtime-environment
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
     restart: unless-stopped
     volumes:
       - runtime-data:/var/lib/digital-twin
@@ -64,6 +82,17 @@ services:
     environment:
       APP_DOMAIN: ${APP_DOMAIN:?APP_DOMAIN is required}
       TLS_EMAIL: ${TLS_EMAIL:?TLS_EMAIL is required}
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    pids_limit: 256
     restart: unless-stopped
     ports:
       - "80:80"

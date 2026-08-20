@@ -11,6 +11,8 @@ from typing import Any
 
 import jsonschema
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "research/05_evaluation/instruments/professor_fidelity_blinded_review_v1.schema.json"
@@ -134,6 +136,7 @@ def main() -> None:
     parser.add_argument("--dataset", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     if not arguments.confirm_historical_reproduction:
         raise ValueError(
             "anchor review finalization is historical reproduction and requires "

@@ -133,6 +133,8 @@ export type TutorPolicy = {
 export type OnboardingSession = {
   session_id: string
   owner_account_id?: string | null
+  course_id?: string | null
+  revision: number
   current_step: string
   answers: Record<string, string>
   messages: ChatMessage[]
@@ -233,6 +235,13 @@ export type ProfessorCourse = {
   title: string
   student_account_ids: string[]
   releases: ProfessorReleaseSummary[]
+}
+
+export type CourseMembership = {
+  account_id: string
+  course_id: string
+  role: "professor" | "student"
+  active: boolean
 }
 
 export type IngestionJobStatus =

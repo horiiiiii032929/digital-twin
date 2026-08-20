@@ -134,6 +134,7 @@ export function OnboardingChat({
               id="instructor-answer"
               placeholder="Reply to the setup assistant"
               aria-label="Setup assistant reply"
+              maxLength={8000}
               className="min-h-12 px-2 py-2 text-sm"
             />
             <PromptInputActions className="justify-between px-0.5 pb-0.5">

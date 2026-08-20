@@ -1,5 +1,7 @@
 import hashlib
+import os
 import re
+import tempfile
 from pathlib import Path
 
 import pymupdf
@@ -49,13 +51,15 @@ class LocalFigureStore:
     """Keep extracted figures in a caller-selected, Git-ignored directory."""
 
     def __init__(self, root: Path) -> None:
-        self.root = root
+        self.root = root.resolve()
+        self.created_paths: list[Path] = []
 
     def store(self, figure_id: str, extension: str, content: bytes) -> str:
         safe_extension = re.sub(r"[^a-z0-9]", "", extension.lower()) or "bin"
         self.root.mkdir(parents=True, exist_ok=True)
         filename = f"{figure_id}.{safe_extension}"
-        (self.root / filename).write_bytes(content)
+        if _atomic_content_file(self.root / filename, content):
+            self.created_paths.append(self.root / filename)
         return f"figure://{filename}"
 
 
@@ -63,13 +67,15 @@ class LocalRegionCropStore:
     """Persist original page-region crops outside the release domain model."""
 
     def __init__(self, root: Path) -> None:
-        self.root = root
+        self.root = root.resolve()
+        self.created_paths: list[Path] = []
 
     def store(self, region_id: str, extension: str, content: bytes) -> str:
         safe_extension = re.sub(r"[^a-z0-9]", "", extension.lower()) or "png"
         self.root.mkdir(parents=True, exist_ok=True)
         filename = f"{region_id}.{safe_extension}"
-        (self.root / filename).write_bytes(content)
+        if _atomic_content_file(self.root / filename, content):
+            self.created_paths.append(self.root / filename)
         return f"region://{filename}"
 
 
@@ -83,6 +89,32 @@ class _EphemeralRegionCropStore:
     def store(self, region_id: str, extension: str, content: bytes) -> str:
         del extension, content
         return f"unpersisted-region://{region_id}"
+
+
+def _atomic_content_file(destination: Path, content: bytes) -> bool:
+    """Create one immutable derived artifact atomically; return whether it was new."""
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.is_symlink():
+        raise SourceIntegrityError("derived artifact path is a symbolic link")
+    if destination.exists():
+        if not destination.is_file() or _sha256(destination.read_bytes()) != _sha256(content):
+            raise SourceIntegrityError("derived artifact identity has conflicting content")
+        return False
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f"{destination.name}-", suffix=".pending", dir=destination.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(temporary, 0o600)
+        temporary.replace(destination)
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        raise
+    return True
 
 
 def source_artifact_from_path(

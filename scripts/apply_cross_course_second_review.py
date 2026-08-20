@@ -9,6 +9,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.draft_cross_course_benchmark import ROOT, write_review
 
 
@@ -116,6 +118,7 @@ def apply_second_review(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset_hash = sha256_file(args.dataset)
     dataset = json.loads(args.dataset.read_text(encoding="utf-8"))
     result = json.loads(args.result.read_text(encoding="utf-8"))

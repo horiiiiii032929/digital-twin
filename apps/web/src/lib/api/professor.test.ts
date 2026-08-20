@@ -1,8 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import {
+  bindProfessorOnboardingSession,
+  buildInlineProfessorIngestionJob,
+  buildProfessorReleasePayload,
   createProfessorRelease,
   listProfessorCourses,
+  isProfessorIngestionJob,
   publishProfessorRelease,
   runProfessorReleasePreflight,
   uploadProfessorCoursePdf,
@@ -62,6 +66,7 @@ describe("professor API client", () => {
       courseId: "course-a",
       sessionId: "session-a",
       chunks: [{ id: "chunk-a" }],
+      ingestionJobIds: ["job-a"],
     })
     await runProfessorReleasePreflight("release-a")
     await publishProfessorRelease("release-a")
@@ -76,6 +81,7 @@ describe("professor API client", () => {
           profile_id: "student-tutor",
           profile_version: "v1",
           chunks: [{ id: "chunk-a" }],
+          ingestion_job_ids: [],
         }),
       }),
     )
@@ -87,6 +93,98 @@ describe("professor API client", () => {
     expect(fetchMock).toHaveBeenNthCalledWith(
       3,
       "/api/professor/releases/release-a/publish",
+      expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("binds tutor setup to a course before release", async () => {
+    const fetchMock = stubFetch({})
+
+    await bindProfessorOnboardingSession("course-a", "session-a")
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/professor/courses/course-a/onboarding-sessions/session-a/bind",
+      expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("never sends browser-returned chunks in session-auth staging mode", () => {
+    expect(
+      buildProfessorReleasePayload(
+        {
+          sessionId: "session-a",
+          chunks: [{ id: "untrusted-browser-chunk" }],
+          ingestionJobIds: ["server-job-a"],
+        },
+        true,
+      ),
+    ).toEqual({
+      session_id: "session-a",
+      profile_id: "student-tutor",
+      profile_version: "v1",
+      chunks: [],
+      ingestion_job_ids: ["server-job-a"],
+    })
+  })
+
+  it("keeps demo chunks and queued job identifiers mutually exclusive", () => {
+    expect(
+      buildProfessorReleasePayload(
+        {
+          sessionId: "session-a",
+          chunks: [{ id: "inline-chunk" }],
+          ingestionJobIds: ["must-not-be-sent"],
+        },
+        false,
+      ),
+    ).toEqual({
+      session_id: "session-a",
+      profile_id: "student-tutor",
+      profile_version: "v1",
+      chunks: [{ id: "inline-chunk" }],
+      ingestion_job_ids: [],
+    })
+  })
+
+  it("normalizes inline demo ingestion into a successful UI job", () => {
+    const result = {
+      source_artifact_id: "artifact-a",
+      source_version: 2,
+      source_checksum: "a".repeat(64),
+      document_id: "document-a",
+      chunk_count: 3,
+      region_count: 4,
+      region_kind_counts: { text: 4 },
+      processing_warnings: [],
+      chunks: [{ id: "chunk-a" }],
+    }
+
+    expect(isProfessorIngestionJob(result)).toBe(false)
+    expect(
+      buildInlineProfessorIngestionJob({
+        courseId: "course-a",
+        artifactId: "artifact-a",
+        title: "Lecture A",
+        result,
+        timestamp: "2026-08-20T00:00:00Z",
+      }),
+    ).toMatchObject({
+      id: `inline-${"a".repeat(16)}`,
+      course_id: "course-a",
+      artifact_id: "artifact-a",
+      title: "Lecture A",
+      status: "succeeded",
+      result,
+    })
+  })
+
+  it("encodes dynamic professor path segments", async () => {
+    const fetchMock = stubFetch({})
+
+    await bindProfessorOnboardingSession("course ?a", "session#one")
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/professor/courses/course%20%3Fa/onboarding-sessions/session%23one/bind",
       expect.objectContaining({ method: "POST" }),
     )
   })

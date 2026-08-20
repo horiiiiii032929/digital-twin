@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer } from "react"
+import { useCallback, useEffect, useReducer, useRef } from "react"
 
 import {
   initialSessionState,
@@ -14,12 +14,23 @@ import {
   createOnboardingSession,
   createSupervisorDemoSession,
   discardRevisionProposal,
+  getOnboardingSession,
   setPreviewDecision,
   submitOnboardingMessage,
   updateApprovalChecklistItem,
   updatePolicyField,
   updateSourceInventoryItem,
 } from "@/lib/api/onboarding"
+import { ApiError } from "@/lib/api/client"
+import {
+  PROFESSOR_ACCOUNT_ID,
+  bindProfessorOnboardingSession,
+} from "@/lib/api/professor"
+import {
+  clearProfessorOnboardingSessionId,
+  readProfessorOnboardingSessionId,
+  writeProfessorOnboardingSessionId,
+} from "@/lib/onboarding/session-index"
 import type {
   FieldStatus,
   OnboardingSession,
@@ -32,6 +43,7 @@ import type {
 
 export type OnboardingController = SessionState & {
   restart: () => Promise<void>
+  bindCourse: (courseId: string) => Promise<boolean>
   sendMessage: (content: string) => Promise<boolean>
   addSource: (item: {
     name: string
@@ -74,29 +86,92 @@ export type OnboardingController = SessionState & {
 
 export function useOnboardingSession({
   supervisorDemo = false,
+  accountId = PROFESSOR_ACCOUNT_ID,
 }: {
   supervisorDemo?: boolean
+  accountId?: string
 } = {}): OnboardingController {
   const [state, dispatch] = useReducer(sessionReducer, initialSessionState)
+  const startedRef = useRef(false)
+  const startInFlightRef = useRef(false)
+  const operationInFlightRef = useRef(false)
 
-  const startSession = useCallback(async () => {
+  const runSessionStart = useCallback(async (
+    load: () => Promise<OnboardingSession>,
+  ) => {
+    if (startInFlightRef.current || operationInFlightRef.current) return
+    startInFlightRef.current = true
     dispatch({ type: "start/pending" })
 
     try {
+      const session = await load()
+      if (!supervisorDemo && typeof window !== "undefined") {
+        try {
+          writeProfessorOnboardingSessionId(
+            window.localStorage,
+            accountId,
+            session.session_id,
+          )
+        } catch {
+          // Browser storage is optional; the server remains authoritative.
+        }
+      }
       dispatch({
         type: "start/succeeded",
-        session: await (supervisorDemo
-          ? createSupervisorDemoSession()
-          : createOnboardingSession()),
+        session,
       })
     } catch (caught) {
       dispatch({ type: "start/failed", error: errorMessage(caught) })
+    } finally {
+      startInFlightRef.current = false
     }
-  }, [supervisorDemo])
+  }, [accountId, supervisorDemo])
+
+  const startSession = useCallback(
+    () =>
+      runSessionStart(() =>
+        supervisorDemo
+          ? createSupervisorDemoSession()
+          : createOnboardingSession(),
+      ),
+    [runSessionStart, supervisorDemo],
+  )
+
+  const initializeSession = useCallback(
+    () =>
+      runSessionStart(async () => {
+        if (supervisorDemo || typeof window === "undefined") {
+          return supervisorDemo
+            ? createSupervisorDemoSession()
+            : createOnboardingSession()
+        }
+        const remembered = readProfessorOnboardingSessionId(
+          window.localStorage,
+          accountId,
+        )
+        if (!remembered) return createOnboardingSession()
+        try {
+          return await getOnboardingSession(remembered)
+        } catch (reason) {
+          if (!(reason instanceof ApiError) || ![403, 404].includes(reason.status)) {
+            throw reason
+          }
+          try {
+            clearProfessorOnboardingSessionId(window.localStorage, accountId)
+          } catch {
+            // A failed cleanup must not block creation of a usable session.
+          }
+          return createOnboardingSession()
+        }
+      }),
+    [accountId, runSessionStart, supervisorDemo],
+  )
 
   useEffect(() => {
-    void startSession()
-  }, [startSession])
+    if (startedRef.current) return
+    startedRef.current = true
+    void initializeSession()
+  }, [initializeSession])
 
   const runOperation = useCallback(
     async (
@@ -104,6 +179,8 @@ export function useOnboardingSession({
       command: () => Promise<OnboardingSession>,
       id?: string,
     ) => {
+      if (startInFlightRef.current || operationInFlightRef.current) return false
+      operationInFlightRef.current = true
       dispatch({ type: "operation/pending", operation, id })
 
       try {
@@ -123,6 +200,7 @@ export function useOnboardingSession({
         return false
       } finally {
         dispatch({ type: "operation/finished", operation })
+        operationInFlightRef.current = false
       }
     },
     [],
@@ -140,6 +218,16 @@ export function useOnboardingSession({
       )
     },
     [runOperation, state.isSubmitting, state.session],
+  )
+
+  const bindCourse = useCallback(
+    async (courseId: string) => {
+      if (!state.session) return false
+      return runOperation("course-bind", () =>
+        bindProfessorOnboardingSession(courseId, state.session!.session_id),
+      )
+    },
+    [runOperation, state.session],
   )
 
   const editPolicyField = useCallback(
@@ -296,6 +384,7 @@ export function useOnboardingSession({
   return {
     ...state,
     restart: startSession,
+    bindCourse,
     sendMessage,
     addSource,
     editSource,

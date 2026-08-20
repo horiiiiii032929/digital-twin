@@ -1,10 +1,55 @@
 # Current project status
 
-Status date: 2026-08-19
+Status date: 2026-08-20
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
+
+The repository-wide correctness audit is complete in the current worktree:
+all 426 executable or execution-affecting files are hash-bound and audited,
+with zero pending files and zero open findings. The canonical verification gate
+now fails if pending or open records reappear. The execution freeze remains
+active until this correction set is committed and the next evaluation action
+is separately authorized. It covers 50 protected entrypoints and passed with
+no model/provider calls or private/held-out reads.
+
+The complete locked dependency set now reports zero known Python or JavaScript
+vulnerabilities and has no active exceptions. The optional retrieval stack was
+upgraded to Torch 2.13.0, Transformers 5.15.1, and Sentence Transformers 6.0.0;
+historical retrieval results remain bound to their old environment, and the
+upgraded stack is not selected until a new post-freeze evaluation is authorized.
+
+The runtime-boundary checkpoint is complete. Persistence updates are
+non-destructive, release content is immutable, staging evidence is resolved
+from successful server-side ingestion jobs, storage deletion is durable and
+retryable, backup/restore is bounded and atomic, and concurrent student turns
+converge on one response with authoritative citation metadata. The final local
+check passes 621 Python tests and 46 frontend tests, frontend lint, and the
+production build. This is a correctness closure, not a renewed deployment or
+model-selection claim.
+
+The onboarding and policy checkpoint is also complete. Professor session writes
+now reject stale updates and owner takeover, each reviewed setup is bound to one
+course, and source or policy changes revoke approvals that no longer match the
+reviewed state. Preview decisions must match the current policy version, every
+custom preview must be accepted, and staging release creation now carries only
+server-owned ingestion job IDs from the browser. Rendered desktop navigation
+from tutor setup to course delivery passed without console errors; the broader
+frontend and cross-browser audit remains open.
+
+The active-runtime audit is now complete at 96/96 inventoried files. Identity
+security mutations and their audit records commit atomically; course ownership
+creation is atomic; account, owner, and membership roles cannot drift; one
+published release per course is enforced in SQLite; and repository writes
+revalidate copied domain models. Publication cannot bypass evaluation/policy
+gates, expired ingestion workers cannot finalize jobs, chunked uploads are
+stream-bounded, rate-limit storage is bounded, and readiness checks all durable
+connections. These corrections passed the final 621-test Python suite.
+Frontend, verification, tooling, evaluation configuration, and historical
+artifacts are also fully dispositioned in the 426-file audit. Evaluation
+execution remains unauthorized because the freeze is intentionally still
+active pending the next explicit work decision.
 
 ## Current outcome
 
@@ -54,6 +99,10 @@ evidence revision but narrows current-tree matching to 45 implementation and
 configuration artifacts. Append-only evaluation records remain revision-bound
 evidence without making every new research result invalidate the deployment
 package.
+V6's historical evidence remains valid, but its current-package match is now
+explicitly suspended during the repository correctness audit. It authorizes no
+release claim; a newly qualified deployable freeze is required after the
+repository correctness freeze passes.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -87,29 +136,31 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper / audit pending | Attempt 002 passed every machine gate: 24/24 retained, 7/7 safe boundary actions, 6/6 multimodal retained, zero leakage/duplicates, and complete dual review | Complete the preserved six-case human audit; refine on any failure, otherwise freeze a separate scale-stage plan |
+| Large factual QA | Refine / corrected governance | Conversion passed; corrected no-model triage retains 32 approved exact-hash authoritative sources, eight deterministic integrity/privacy exclusions, 2,027 duplicate/generated records, and 570 provisional content-level reviews; local boundary screening covered 570/570 and prioritized 35 without final labels | Finish repository correctness, priority boundary adjudication, calibrated semantic governance, response/citation/mutation contracts, and the audit packet before any bounded pilot |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Complete the six-case audit preserved from attempt 002; refine on failure or freeze the scale-stage method on pass |
-| 2 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
-| 3 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
-| 4 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
-| 5 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives an explicit Refine/Drop decision |
-| 6 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
+| 1 | Repository correctness freeze | Complete locally / Keep corrections | Commit and synchronize the 426/426 audited correction set; keep execution frozen until the next action is explicitly authorized |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine / ready for next authorization | Apply corrected v2 source governance, complete content-safe source roles and deterministic product contracts, then authorize any semantic review separately |
+| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
+| 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
+| 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
+| 6 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives an explicit Refine/Drop decision |
+| 7 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 is now at its
-bounded human-audit gate after attempt 001 exposed method defects and the
-prospective attempt 002 passed all machine gates. This qualifies the
-dataset-building method, not a model benchmark. Issue #88 remains active but externally
-blocked; its implementation and local qualification are complete enough for a
-controlled host rehearsal, not for a real-user pilot.
+and the historical held-out split was not opened. Issue #87 preserves attempt
+002's passed machine gates and uncompleted audit as historical v2 evidence, but
+the active boundary is now the broader v3 no-model implementation over the
+eligible Academia Vault. This remains method validation, not a model benchmark.
+Issue #88 remains active but externally blocked; its implementation and local
+qualification are complete enough for a controlled host rehearsal, not for a
+real-user pilot.
 
 ## Known multimodal correction
 
@@ -144,13 +195,31 @@ are prospective only; they require new project-specific quality evidence. See
 
 ## Large factual-QA interpretation
 
-Issue #87 adopts the stronger, product-relevant interpretation of the
-professor's suggestion: build a larger permission-safe dummy document corpus,
-then derive and cross-check factual QA toward 10,000 cases. This is not a model
-leaderboard. The bounded pilot evaluates whether the source-constrained method
-produces trustworthy cases; failed gates require method revision. It includes a
-meaningful multimodal slice and remains separate from the verified 100-case
-benchmark and Professor Digital Twin fidelity.
+Issue #87 now adopts a product-first v3 interpretation of the professor's
+suggestion. The primary corpus is every eligible file in the canonical Academia
+Vault, not a large dummy corpus. A small deterministic dummy corpus with a
+hidden fact manifest remains only as an oracle control for extraction,
+retrieval, citation, boundary-action, and mutation mechanics. The refreshed
+inventory found 2,637 regular files: 294 clear candidates, 437 requiring
+review, 1,903 generated/tool-state exclusions, and three sensitive exclusions.
+Every file requires a recorded content-safe disposition before release. The v1
+semantic triage is preserved but prospectively corrected: path and format alone
+cannot finalize supporting or exclusion labels. V2 retains 32 approved
+exact-hash authoritative sources and returns 570 readable candidates to
+content-level review. This is a provisional queue, not a requirement for 570
+manual judgments. The deterministic private content screen verified all 570
+hashes, extracted local text for 554, and routed 19 lexical privacy/integrity
+signals plus 16 visual/binary sources to priority review. The remaining 535 are
+still semantically unresolved; absence of a lexical signal is not eligibility
+evidence.
+
+The historical 24-case attempts remain valid evidence about their frozen v2
+method, but the preserved six-case audit is no longer the active product gate.
+Corrected V3 requires claim-level exact evidence, retrieval without injected gold
+passages, multimodal source lineage, deterministic mutation sensitivity, and a
+compact human-audit packet. It remains separate from the verified 100-case
+retrieval benchmark and Professor Digital Twin fidelity. No external model
+call, 30--50 case pilot, or scale toward 10,000 cases is authorized yet.
 
 ## Human and safety boundary
 

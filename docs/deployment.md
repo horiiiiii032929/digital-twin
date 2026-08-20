@@ -162,7 +162,23 @@ Deletion requires `--confirm` to exactly match the account/course ID.
 Successful ingestion records are retained while releases may depend on their
 lineage. Professor accounts with owned courses cannot be deleted until each
 course is explicitly deleted. Course deletion removes database state plus
-tracked raw and derived source artifacts.
+tracked raw and derived source artifacts. Cleanup intent is committed in a
+durable queue with the database deletion, so a filesystem failure remains
+visible and retryable. Shared artifacts are retained while another ingestion
+job references them.
+
+Retry pending storage cleanup explicitly after correcting the filesystem
+problem:
+
+```bash
+docker compose --env-file .env.staging -f compose.staging.yml exec api \
+  python -m scripts.manage_runtime_data drain-deletions
+```
+
+Retention also reconciles old unreferenced raw and derived artifacts after a
+one-hour grace period. Staging release creation accepts ingestion job IDs and
+resolves their successful, professor-owned chunks on the server; it does not
+trust chunks returned by a browser.
 
 ## Backup and clean restore
 

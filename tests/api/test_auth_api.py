@@ -3,12 +3,23 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from services.api.app.config import AppSettings, RuntimeMode
-from services.api.app.factory import create_app
+from services.api.app.config import AppSettings, GeneratorMode, RuntimeMode
+from services.api.app.factory import (
+    DEFAULT_STUDENT_PROFILE,
+    _configured_generator,
+    create_app,
+)
+from src.digital_twin.evaluation import (
+    ComponentKind,
+    SystemReleaseProfile,
+    load_release_profile,
+)
 from src.digital_twin.identity import IdentityService, SQLiteIdentityRepository
+from src.digital_twin.onboarding import create_session
 from src.digital_twin.student import (
     AccountRole,
     SQLiteStudentRepository,
+    approved_synthetic_policy,
     seed_synthetic_student_workflow,
 )
 from tests.fixtures.ingestion import write_synthetic_pdf
@@ -249,6 +260,51 @@ def test_staging_configuration_fails_closed_for_insecure_origin(tmp_path):
         ).validate()
 
 
+def test_staging_configuration_cannot_exceed_proxy_upload_cap(tmp_path):
+    with pytest.raises(ValueError, match="proxy 64 MiB cap"):
+        AppSettings(
+            mode=RuntimeMode.STAGING,
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=(ORIGIN,),
+            secure_cookies=True,
+            max_upload_bytes=65 * 1024 * 1024,
+        ).validate()
+
+
+@pytest.mark.parametrize(
+    "origin",
+    (
+        "https://user:secret@example.test",
+        "https://example.test/path",
+        "https://example.test/",
+        "https://example.test?query=1",
+    ),
+)
+def test_configuration_rejects_non_origin_cors_values(tmp_path, origin):
+    with pytest.raises(ValueError, match=r"plain HTTP\(S\) origins"):
+        AppSettings(
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=(origin,),
+        ).validate()
+
+
+def test_configuration_rejects_nonfinite_or_boolean_direct_limits(tmp_path):
+    with pytest.raises(ValueError, match="COST"):
+        AppSettings(
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            provider_cost_cap_usd=float("nan"),
+        ).validate()
+    with pytest.raises(ValueError, match="integer limits"):
+        AppSettings(
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            max_upload_bytes=True,
+        ).validate()
+
+
 def test_live_generator_configuration_requires_environment_credential(
     tmp_path, monkeypatch
 ):
@@ -262,6 +318,31 @@ def test_live_generator_configuration_requires_environment_credential(
             secure_cookies=True,
             generator_mode="deepseek-v4-flash",
         ).validate()
+
+
+def test_live_generator_is_bound_to_selected_profile_model_and_revision():
+    profile = load_release_profile(DEFAULT_STUDENT_PROFILE)
+    settings = AppSettings(generator_mode=GeneratorMode.DEEPSEEK_V4_FLASH)
+
+    generator, budget = _configured_generator(settings, profile)
+
+    assert generator.client is budget
+    assert budget.client.expected_provider_model == "deepseek-v4-flash"
+    assert budget.client.expected_provider_revision == (
+        "fp_a18b46594c_prod0820_fp8_kvcache_20260402"
+    )
+
+    payload = profile.model_dump(mode="json")
+    component = next(
+        entry
+        for entry in payload["components"]
+        if entry["component"] == ComponentKind.GENERATOR
+    )
+    component["implementation"]["configuration"]["provider_revision"] = ""
+    drifted = SystemReleaseProfile.model_validate(payload)
+
+    with pytest.raises(ValueError, match="provider_revision is invalid"):
+        _configured_generator(settings, drifted)
 
 
 def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):
@@ -296,6 +377,28 @@ def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):
     completed = client.app.state.ingestion_job_service.process_one("test-worker")
     assert completed.status.value == "succeeded"
 
+    onboarding = create_session("staging-release-session")
+    onboarding.owner_account_id = fixture.professor_id
+    onboarding.course_id = fixture.course_a_id
+    onboarding.current_step = "professor_approval"
+    onboarding.policy = approved_synthetic_policy()
+    client.app.state.session_repository.save(onboarding)
+    release = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers={"Origin": ORIGIN},
+        json={
+            "session_id": onboarding.session_id,
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "ingestion_job_ids": [completed.id],
+            "chunks": [],
+        },
+    )
+    assert release.status_code == 201
+    assert release.json()["chunks"] == [
+        chunk.model_dump(mode="json") for chunk in completed.result.chunks
+    ]
+
     course_jobs = client.get(
         f"/api/professor/courses/{fixture.course_a_id}/ingestion-jobs"
     )
@@ -321,6 +424,60 @@ def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):
     )
     denied = client.get(f"/api/professor/ingestion-jobs/{completed.id}")
     assert denied.status_code == 404
+
+
+def test_staging_streamed_upload_is_bounded_without_content_length(tmp_path):
+    client, _, _, _, fixture, _ = _client(tmp_path, max_upload_bytes=8)
+    assert (
+        _login(client, "professor@example.test", PROFESSOR_PASSWORD).status_code == 200
+    )
+
+    response = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/sources/lecture-large",
+        params={"title": "Large lecture"},
+        headers={
+            "Origin": ORIGIN,
+            "Content-Type": "application/pdf",
+            "Idempotency-Key": "streamed-large-upload",
+            "Transfer-Encoding": "chunked",
+        },
+        content=(part for part in (b"%PDF-", b"too-large")),
+    )
+
+    assert response.status_code == 413
+    assert response.json()["detail"]["code"] == "source_too_large"
+    assert client.app.state.ingestion_job_repository.list_for_course(
+        fixture.professor_id, fixture.course_a_id
+    ) == []
+
+
+def test_staging_release_rejects_browser_supplied_chunks(tmp_path):
+    client, students, _, _, fixture, _ = _client(tmp_path)
+    assert (
+        _login(client, "professor@example.test", PROFESSOR_PASSWORD).status_code == 200
+    )
+    onboarding = create_session("staging-untrusted-chunks")
+    onboarding.owner_account_id = fixture.professor_id
+    onboarding.course_id = fixture.course_a_id
+    onboarding.current_step = "professor_approval"
+    onboarding.policy = approved_synthetic_policy()
+    client.app.state.session_repository.save(onboarding)
+    existing = students.get_release(fixture.release_a_id)
+    assert existing is not None
+
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers={"Origin": ORIGIN},
+        json={
+            "session_id": onboarding.session_id,
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "chunks": [chunk.model_dump(mode="json") for chunk in existing.chunks],
+        },
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"]["code"] == "server_bound_sources_required"
 
 
 def test_staging_does_not_accept_manual_release_pass(tmp_path):
@@ -387,3 +544,13 @@ def test_metrics_require_administrator_and_upload_size_is_guarded(tmp_path):
     assert metrics.status_code == 200
     assert metrics.json()["request_count"] >= 4
     assert "latency_p95_ms" in metrics.json()
+
+
+def test_readiness_reports_closed_durable_dependency_as_unavailable(tmp_path):
+    client, _, identities, *_ = _client(tmp_path)
+    identities.close()
+
+    response = client.get("/api/health/ready")
+
+    assert response.status_code == 503
+    assert response.json()["detail"]["checks"]["identity_database"] is False

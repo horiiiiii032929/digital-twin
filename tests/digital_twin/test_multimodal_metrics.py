@@ -143,12 +143,26 @@ def test_no_gold_regions_have_explicit_zero_denominator_metrics() -> None:
 def test_gold_bbox_resolution_rejects_unknown_region() -> None:
     case = {"asset_id": "asset-a", "gold_region_ids": ["missing"]}
     assets = {
-        "asset-a": {
-            "regions": [
-                {"region_id": "known", "bbox": [0.1, 0.1, 0.2, 0.2]}
-            ]
-        }
+        "asset-a": {"regions": [{"region_id": "known", "bbox": [0.1, 0.1, 0.2, 0.2]}]}
     }
 
     with pytest.raises(ValueError, match="unknown gold regions"):
         gold_bboxes_for_case(case, assets)
+
+
+def test_metric_rejects_duplicate_gold_regions_and_nonfinite_threshold() -> None:
+    assets = {
+        "asset-a": {"regions": [{"region_id": "known", "bbox": [0.1, 0.1, 0.2, 0.2]}]}
+    }
+    with pytest.raises(ValueError, match="gold region IDs must be unique"):
+        gold_bboxes_for_case(
+            {"asset_id": "asset-a", "gold_region_ids": ["known", "known"]},
+            assets,
+        )
+    with pytest.raises(ValueError, match="between zero and one"):
+        score_multimodal_ranking(
+            [],
+            expected_asset_id="asset-a",
+            gold_bboxes=[],
+            region_iou_threshold=float("nan"),
+        )

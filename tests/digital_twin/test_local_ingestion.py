@@ -9,6 +9,7 @@ from src.digital_twin.grounding import (
     EmptySourceError,
     HeadingParagraphChunker,
     LocalDocumentParser,
+    LocalCourseSourceIngestionService,
     LocalFigureStore,
     LocalRegionCropStore,
     OCRTextRegion,
@@ -22,8 +23,9 @@ from src.digital_twin.grounding import (
     SourceSensitivity,
     UnsupportedSourceError,
 )
-from tests.fixtures.ingestion import approved_source, write_synthetic_pdf
 from src.digital_twin.grounding.ingestion import _normalized_rect
+from src.digital_twin.tutor_policy import SourceLabel
+from tests.fixtures.ingestion import approved_source, write_synthetic_pdf
 
 
 class SyntheticOCRProvider:
@@ -88,16 +90,16 @@ def test_markdown_parsing_and_chunking_preserve_stable_provenance(tmp_path: Path
     second_chunks = chunker.chunk(second.document)
 
     assert first == second
-    assert [chunk.id for chunk in first_chunks] == [
-        chunk.id for chunk in second_chunks
-    ]
+    assert [chunk.id for chunk in first_chunks] == [chunk.id for chunk in second_chunks]
     assert first.document.source_artifact_id == source.id
     assert first.document.source_version == source.version
     assert first.document.approval_record_id == approval.id
     assert first.document.segments[2].heading_path == ["Authentication", "CSRF"]
     assert all(chunk.source_artifact_id == source.id for chunk in first_chunks)
     assert all(chunk.retrieval_allowed for chunk in first_chunks)
-    assert all(chunk.metadata["source_checksum"] == source.checksum for chunk in first_chunks)
+    assert all(
+        chunk.metadata["source_checksum"] == source.checksum for chunk in first_chunks
+    )
     assert all(len(chunk.text) <= 128 for chunk in first_chunks)
 
 
@@ -312,7 +314,8 @@ def test_region_aware_pdf_extracts_layout_and_preserves_crop_lineage(tmp_path: P
     assert all(chunk.region_id and chunk.crop_ref for chunk in chunks)
     assert all(chunk.page_start == chunk.page_end for chunk in chunks)
     described = next(chunk for chunk in chunks if chunk.description_method)
-    assert "Generated search description" in described.text
+    assert "Synthetic description" not in described.text
+    assert "Synthetic description" in described.metadata["search_description"]
     assert described.metadata["description_is_authoritative"] == "false"
 
 
@@ -354,12 +357,7 @@ def test_scanned_pdf_uses_injected_ocr_and_produces_citable_regions(tmp_path: Pa
 def test_chunker_uses_whole_segment_overlap(tmp_path: Path):
     path = tmp_path / "overlap.md"
     path.write_text(
-        "# Topic\n\n"
-        + "A" * 70
-        + "\n\n"
-        + "B" * 70
-        + "\n\n"
-        + "C" * 70,
+        "# Topic\n\n" + "A" * 70 + "\n\n" + "B" * 70 + "\n\n" + "C" * 70,
         encoding="utf-8",
     )
     source, approval = approved_source(path)
@@ -386,9 +384,7 @@ def test_page_bounded_chunker_never_combines_pdf_pages(tmp_path: Path):
     source, approval = approved_source(path)
     document = LocalDocumentParser().parse(path, source, approval).document
 
-    baseline = HeadingParagraphChunker(max_chars=256, overlap_chars=32).chunk(
-        document
-    )
+    baseline = HeadingParagraphChunker(max_chars=256, overlap_chars=32).chunk(document)
     bounded = PageBoundedHeadingParagraphChunker(
         max_chars=256,
         overlap_chars=32,
@@ -418,6 +414,87 @@ def test_image_only_pdf_is_rejected_before_figures_are_persisted(tmp_path: Path)
         )
 
     assert not figure_dir.exists()
+
+
+def test_product_ingestion_removes_new_derived_files_when_chunking_fails(
+    tmp_path: Path, monkeypatch
+):
+    pdf = tmp_path / "source.pdf"
+    write_synthetic_pdf(pdf, with_text=True, with_figure=True)
+    source_root = tmp_path / "sources"
+    crop_root = tmp_path / "crops"
+    service = LocalCourseSourceIngestionService(source_root, crop_root)
+
+    def fail_chunking(self, bundle):
+        del self, bundle
+        raise RuntimeError("synthetic chunking failure")
+
+    monkeypatch.setattr(RegionAwareChunker, "chunk", fail_chunking)
+
+    with pytest.raises(RuntimeError, match="synthetic chunking failure"):
+        service.ingest_pdf(
+            pdf.read_bytes(),
+            course_id="course-synthetic",
+            artifact_id="lecture-synthetic",
+            title="Synthetic lecture",
+            version=1,
+            professor_id="professor-synthetic",
+            permissions=SourcePermissions(
+                processing_allowed=True,
+                tutoring_allowed=True,
+                display_allowed=True,
+            ),
+        )
+
+    assert not list(source_root.glob("*.pdf"))
+    assert not [path for path in crop_root.rglob("*") if path.is_file()]
+
+
+@pytest.mark.parametrize(
+    ("artifact_id", "title", "source_label", "message"),
+    [
+        (
+            "external-source",
+            "External source",
+            SourceLabel.UNAPPROVED_EXTERNAL,
+            "unapproved external",
+        ),
+        (
+            "student-grades",
+            "Lecture notes",
+            SourceLabel.COURSE_APPROVED,
+            "sensitive student or private",
+        ),
+    ],
+)
+def test_product_ingestion_rejects_unapproved_or_sensitive_sources_before_writes(
+    tmp_path: Path,
+    artifact_id: str,
+    title: str,
+    source_label: SourceLabel,
+    message: str,
+):
+    source_root = tmp_path / "sources"
+    crop_root = tmp_path / "crops"
+    service = LocalCourseSourceIngestionService(source_root, crop_root)
+
+    with pytest.raises(ValueError, match=message):
+        service.ingest_pdf(
+            b"synthetic bytes",
+            course_id="course-synthetic",
+            artifact_id=artifact_id,
+            title=title,
+            version=1,
+            professor_id="professor-synthetic",
+            permissions=SourcePermissions(
+                processing_allowed=True,
+                tutoring_allowed=True,
+            ),
+            source_label=source_label,
+        )
+
+    assert not source_root.exists()
+    assert not crop_root.exists()
 
 
 def test_unsupported_format_and_mime_mismatch_are_rejected(tmp_path: Path):
@@ -488,6 +565,7 @@ def test_chunker_rejects_invalid_size_and_preserves_non_tutoring_state(tmp_path:
     chunks = HeadingParagraphChunker().chunk(document)
 
     assert chunks[0].retrieval_allowed is False
+    assert chunks[0].display_allowed is False
     with pytest.raises(ValueError, match="at least 128"):
         HeadingParagraphChunker(max_chars=127)
     with pytest.raises(ValueError, match="below max_chars"):

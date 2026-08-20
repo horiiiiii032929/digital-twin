@@ -29,6 +29,19 @@ def chunk(identifier: str, text: str, *, source: str = "lecture") -> DocumentChu
 
 
 class KeywordEmbedder:
+    provider_id = "local-huggingface"
+    model_name = "Qwen/Qwen3-Embedding-0.6B"
+    model_revision = "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    execution = "local"
+    instruction = (
+        "Given a student question within one authorized university course, "
+        "retrieve passages that directly support a grounded answer."
+    )
+    device = "mps"
+    dtype = "float16"
+    max_length = 2048
+    batch_size = 16
+
     def embed_documents(self, texts):
         return [self._vector(text) for text in texts]
 
@@ -45,7 +58,7 @@ class KeywordEmbedder:
         ]
 
 
-class FailingEmbedder:
+class FailingEmbedder(KeywordEmbedder):
     def embed_documents(self, texts):
         del texts
         raise RuntimeError("provider unavailable")
@@ -110,6 +123,22 @@ def test_selected_m2_builds_with_an_injected_embedder():
     assert retriever.primary_available is True
     assert retriever.primary_implementation_id == "qwen3-hybrid-v1"
     assert [hit.chunk.id for hit in retriever.retrieve("cache", limit=5)]
+
+
+def test_selected_m2_rejects_an_embedder_that_does_not_match_the_profile():
+    embedder = KeywordEmbedder()
+    embedder.model_revision = "different-revision"
+
+    with pytest.raises(
+        ValueError,
+        match="injected embedder does not match selected profile: model_revision",
+    ):
+        build_selected_retriever(
+            selected_entry(),
+            [chunk("cache", "cache coherence and memory")],
+            embedder=embedder,
+            allow_control_fallback=False,
+        )
 
 
 def test_selected_m2_without_provider_uses_bm25_control():

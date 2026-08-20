@@ -128,6 +128,11 @@ def partition_dataset(
     development: bool,
 ) -> dict[str, Any]:
     """Create one sealed partition and retain only its referenced assets."""
+    if not isinstance(development, bool):
+        raise ValueError("development must be a boolean")
+    known_assets = {asset["asset_id"] for asset in dataset["source_assets"]}
+    if not development_assets <= known_assets:
+        raise MultimodalSealError("development split references an unknown asset")
     partition = copy.deepcopy(dataset)
     partition["dataset_status"] = "sealed"
     split = "development" if development else "heldout_draft"

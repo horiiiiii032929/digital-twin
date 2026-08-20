@@ -114,22 +114,37 @@ class FileSystemObjectStore:
         with self._lock:
             return sorted(
                 path.relative_to(self.root).as_posix()
-                for path in self.root.rglob("*")
-                if path.is_file() and not path.name.endswith(".pending")
+                for path in self._storage_files()
+                if not path.name.endswith(".pending")
             )
 
     def used_bytes(self) -> int:
         with self._lock:
             return sum(
                 path.stat().st_size
-                for path in self.root.rglob("*")
-                if path.is_file() and not path.name.endswith(".pending")
+                for path in self._storage_files()
+                if not path.name.endswith(".pending")
             )
 
     def _resolve(self, key: str) -> Path:
         if not key or key.startswith("/") or "\\" in key:
             raise ValueError("object key is invalid")
-        candidate = (self.root / key).resolve()
-        if not candidate.is_relative_to(self.root):
-            raise ValueError("object key escapes the configured root")
+        parts = Path(key).parts
+        if not parts or any(part in {"", ".", ".."} for part in parts):
+            raise ValueError("object key is invalid")
+        candidate = self.root.joinpath(*parts)
+        current = self.root
+        for part in parts:
+            current = current / part
+            if current.is_symlink():
+                raise RuntimeError("object storage contains a symbolic link")
         return candidate
+
+    def _storage_files(self) -> list[Path]:
+        files: list[Path] = []
+        for path in self.root.rglob("*"):
+            if path.is_symlink():
+                raise RuntimeError("object storage contains a symbolic link")
+            if path.is_file():
+                files.append(path)
+        return files

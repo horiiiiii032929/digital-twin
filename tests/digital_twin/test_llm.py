@@ -1,4 +1,5 @@
 import pytest
+from pydantic import ValidationError
 
 from src.digital_twin.llm import FixtureLlmClient, LlmMessage
 
@@ -36,3 +37,17 @@ async def test_fixture_llm_joins_messages_in_order():
         response.content
         == "fixture response for policy_extraction: Use policy notes. Extract a tutor policy."
     )
+
+
+def test_llm_message_rejects_blank_content() -> None:
+    with pytest.raises(ValidationError, match="must not be blank"):
+        LlmMessage(role="user", content="   ")
+
+
+@pytest.mark.asyncio
+async def test_fixture_llm_rejects_unsafe_task_metadata() -> None:
+    with pytest.raises(ValueError, match="machine identifier"):
+        await FixtureLlmClient().chat(
+            [LlmMessage(role="user", content="Synthetic")],
+            task="student private question",
+        )

@@ -29,6 +29,7 @@ export const initialSessionState: SessionState = {
 }
 
 export type SessionOperation =
+  | "course-bind"
   | "message"
   | "source-add"
   | "source-update"
@@ -96,6 +97,8 @@ function operationPatch(
   id?: string,
 ): Partial<SessionState> {
   switch (operation) {
+    case "course-bind":
+      return {}
     case "message":
       return { isSubmitting: active }
     case "source-add":

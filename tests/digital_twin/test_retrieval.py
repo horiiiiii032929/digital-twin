@@ -137,6 +137,17 @@ def test_bm25_exposes_absolute_score_without_changing_normalized_ranking():
     assert hits[0].raw_score > 0
 
 
+def test_non_authoritative_description_is_searchable_but_not_citable_text():
+    visual = chunk("visual", "Visual region requires direct inspection.")
+    visual.metadata["search_description"] = "directed acyclic graph arrows"
+    visual.metadata["description_is_authoritative"] = "false"
+
+    hits = BM25Retriever([visual]).retrieve("acyclic graph arrows")
+
+    assert [hit.chunk.id for hit in hits] == ["visual"]
+    assert "acyclic graph" not in hits[0].chunk.text
+
+
 def test_evidence_gates_are_swappable_and_keep_the_control_explicit():
     chunks = [chunk("policy", "course policy applies to graded work")]
     retriever = BM25Retriever(chunks)
@@ -145,10 +156,13 @@ def test_evidence_gates_are_swappable_and_keep_the_control_explicit():
         retriever,
         AnyHitEvidenceGate(),
     ).retrieve("monetary policy")
-    assert EvidenceGatedRetriever(
-        retriever,
-        MinimumRawScoreEvidenceGate(minimum_raw_score=10),
-    ).retrieve("monetary policy") == []
+    assert (
+        EvidenceGatedRetriever(
+            retriever,
+            MinimumRawScoreEvidenceGate(minimum_raw_score=10),
+        ).retrieve("monetary policy")
+        == []
+    )
 
     lexical_gate = LexicalCoverageEvidenceGate(
         minimum_query_coverage=0.5,
@@ -176,6 +190,13 @@ def test_evidence_gate_configuration_rejects_invalid_thresholds():
         SecondaryRetrieverAgreementGate(
             BM25Retriever([]),
             minimum_relevance_score=1.1,
+        )
+    with pytest.raises(ValueError, match="negative"):
+        MinimumRawScoreEvidenceGate(float("nan"))
+    with pytest.raises(ValueError, match="between 0 and 1"):
+        LexicalCoverageEvidenceGate(
+            minimum_query_coverage=float("nan"),
+            minimum_matching_terms=1,
         )
 
 
@@ -246,6 +267,37 @@ def test_evidence_sufficiency_evaluator_keeps_abstention_and_ranking_visible(
     assert summary.answerability_by_category["no-evidence"]["accuracy"] == 1
 
 
+def test_evidence_sufficiency_evaluator_retrieves_each_case_once(tmp_path: Path):
+    evaluation_path = (
+        Path(__file__).resolve().parents[2]
+        / "research"
+        / "05_evaluation"
+        / "retrieval_v1.json"
+    )
+    evaluation_set = load_retrieval_evaluation_set(evaluation_path)
+    chunks = build_retrieval_evaluation_chunks(tmp_path)
+
+    class CountingRetriever:
+        def __init__(self):
+            self.calls = 0
+            self.delegate = BM25Retriever(chunks)
+
+        def retrieve(self, query, *, limit=5):
+            self.calls += 1
+            return self.delegate.retrieve(query, limit=limit)
+
+    retriever = CountingRetriever()
+    evaluate_evidence_sufficiency(
+        "single-pass",
+        retriever,
+        AnyHitEvidenceGate(),
+        chunks,
+        evaluation_set,
+    )
+
+    assert retriever.calls == len(evaluation_set.cases)
+
+
 def test_bm25_ranking_is_deterministic_and_exposes_source_evidence():
     chunks = [
         chunk("second", "cache mapping", source="source-b", ordinal=1),
@@ -274,6 +326,47 @@ def test_dense_retriever_uses_injected_embeddings_and_similarity_threshold():
     assert retriever.retrieve("unrelated astronomy") == []
 
 
+def test_dense_retriever_rejects_non_finite_and_inconsistent_embeddings():
+    chunks = [
+        chunk("first", "cache state"),
+        chunk("second", "memory state"),
+    ]
+
+    class InconsistentEmbedder:
+        def embed_documents(self, texts):
+            del texts
+            return [[1.0, 0.0], [1.0]]
+
+        def embed_query(self, text):
+            del text
+            return [1.0, 0.0]
+
+    class NonFiniteEmbedder(InconsistentEmbedder):
+        def embed_documents(self, texts):
+            del texts
+            return [[1.0, 0.0], [float("nan"), 1.0]]
+
+    with pytest.raises(ValueError, match="inconsistent document dimensions"):
+        DenseRetriever(chunks, InconsistentEmbedder())
+    with pytest.raises(ValueError, match="finite"):
+        DenseRetriever(chunks, NonFiniteEmbedder())
+
+
+def test_dense_retriever_rejects_query_dimension_mismatch():
+    class QueryMismatchEmbedder:
+        def embed_documents(self, texts):
+            return [[1.0, 0.0] for _ in texts]
+
+        def embed_query(self, text):
+            del text
+            return [1.0]
+
+    retriever = DenseRetriever([chunk("cache", "cache state")], QueryMismatchEmbedder())
+
+    with pytest.raises(ValueError, match="dimension does not match"):
+        retriever.retrieve("cache")
+
+
 def test_reciprocal_rank_fusion_combines_ranks_and_preserves_no_match():
     chunks = [
         chunk("a", "browser authentication token"),
@@ -288,6 +381,26 @@ def test_reciprocal_rank_fusion_combines_ranks_and_preserves_no_match():
 
     assert hybrid.retrieve("password for logged-in browser")[0].chunk.id in {"a", "b"}
     assert hybrid.retrieve("unrelated astronomy") == []
+
+
+def test_reciprocal_rank_fusion_rejects_conflicting_chunk_identity():
+    original = chunk("shared", "authoritative cache text")
+    altered = original.model_copy(update={"text": "altered cache text"})
+
+    class StaticRetriever:
+        def __init__(self, value):
+            self.value = value
+
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [RetrievalHit(chunk=self.value, relevance_score=1)]
+
+    fused = ReciprocalRankFusionRetriever(
+        [StaticRetriever(original), StaticRetriever(altered)]
+    )
+
+    with pytest.raises(ValueError, match="authoritative chunk content"):
+        fused.retrieve("cache")
 
 
 def test_versioned_evaluation_set_reports_metrics_and_failure_causes(
@@ -413,6 +526,40 @@ def test_evaluator_distinguishes_source_chunking_query_and_ranking_failures():
         )
         == RetrievalFailureCause.RANKING
     )
+
+
+def test_evaluator_counts_returned_chunk_with_spoofed_trusted_id_as_unsafe():
+    canonical = chunk("trusted", "canonical cache evidence", source="source-z")
+    spoofed = canonical.model_copy(
+        update={
+            "document_id": "untrusted-document",
+            "source_artifact_id": "untrusted-source",
+            "locator": "page 99",
+        }
+    )
+
+    class SpoofingRetriever:
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [RetrievalHit(chunk=spoofed, relevance_score=1)]
+
+    evaluation_path = (
+        Path(__file__).resolve().parents[2]
+        / "research"
+        / "05_evaluation"
+        / "retrieval_v1.json"
+    )
+    evaluation_set = load_retrieval_evaluation_set(evaluation_path)
+    one_case = evaluation_set.model_copy(update={"cases": [evaluation_set.cases[0]]})
+
+    summary = evaluate_retriever(
+        "spoofing-retriever",
+        SpoofingRetriever(),
+        [canonical],
+        one_case,
+    )
+
+    assert summary.safety_violation_count == 1
 
 
 def test_v2_benchmark_data_is_synthetic_resolvable_and_materially_larger():

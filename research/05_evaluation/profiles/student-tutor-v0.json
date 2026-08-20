@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "profile_id": "student-tutor",
   "profile_version": "v0",
   "stage": "experimental",
@@ -125,6 +125,29 @@
     "lexical-coverage-evidence-gate"
       ],
   "notes": "BM25 remains the provisional v1 rollback baseline and term overlap remains the regression control. Retrieval v2 selected no replacement. Evidence-sufficiency v1 also selected no gate: semantic agreement was strongest but failed calibration, false-answer, false-abstention, ranking, and latency requirements. Do not use retrieved evidence for an end-to-end grounding claim until a successor gate passes."
+    },
+    {
+      "component": "evidence-sufficiency",
+      "status": "pending",
+      "result_ids": [
+        "evidence-sufficiency-v1-clean"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/evidence-sufficiency-v1-results.md"
+      ],
+      "hard_gates": [
+        "zero-false-answers",
+        "answerable-recall",
+        "balanced-accuracy",
+        "ranking-non-regression",
+        "latency-budget"
+      ],
+      "candidate_ids": [
+        "semantic-agreement-evidence-gate",
+        "minimum-raw-score-evidence-gate",
+        "lexical-coverage-evidence-gate"
+      ],
+      "notes": "Evidence-sufficiency v1 selected no safe method. Product generation must remain fail-closed until a prospective successor passes every gate."
     },
     {
       "component": "reranker",

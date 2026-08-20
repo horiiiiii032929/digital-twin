@@ -9,6 +9,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = ROOT / "data/processed/course_tutor_v1/review_v1_2_3"
@@ -178,6 +180,7 @@ def main() -> None:
     parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     arguments = parser.parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     print(json.dumps(prepare(arguments.input_root, arguments.output_root), indent=2))
 
 

@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field
+import json
+
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.digital_twin.grounding.models import DocumentChunk
 from src.digital_twin.student.models import AccountRole, ReleaseEvaluationStatus
@@ -12,34 +14,67 @@ from src.digital_twin.tutor_policy import (
 
 
 class MessageRequest(BaseModel):
-    content: str
+    content: str = Field(min_length=1, max_length=8_000)
+
+    @field_validator("content")
+    @classmethod
+    def content_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "message")
 
 
 class PolicyFieldUpdateRequest(BaseModel):
     value: str | list[str] | dict
     status: FieldStatus = FieldStatus.RESOLVED
 
+    @field_validator("value")
+    @classmethod
+    def value_must_be_bounded_json(
+        cls, value: str | list[str] | dict
+    ) -> str | list[str] | dict:
+        try:
+            encoded = json.dumps(
+                value,
+                ensure_ascii=False,
+                allow_nan=False,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        except (TypeError, ValueError) as error:
+            raise ValueError("policy field value must be finite JSON") from error
+        if len(encoded) > 65_536:
+            raise ValueError("policy field value exceeds 65536 bytes")
+        return value
+
 
 class SourceInventoryCreateRequest(BaseModel):
-    name: str
-    mime_type: str = "application/octet-stream"
-    size_bytes: int = 0
+    name: str = Field(min_length=1, max_length=255)
+    mime_type: str = Field(default="application/octet-stream", min_length=1, max_length=255)
+    size_bytes: int = Field(default=0, ge=0, le=1_099_511_627_776)
     permission_status: SourcePermissionStatus = SourcePermissionStatus.PENDING
     source_label: SourceLabel = SourceLabel.COURSE_APPROVED
     excluded: bool = False
     sensitive: bool | None = None
-    notes: str = ""
+    notes: str = Field(default="", max_length=4_000)
+
+    @field_validator("name", "mime_type")
+    @classmethod
+    def required_text_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "source metadata")
 
 
 class SourceInventoryUpdateRequest(BaseModel):
-    name: str | None = None
-    mime_type: str | None = None
-    size_bytes: int | None = None
+    name: str | None = Field(default=None, min_length=1, max_length=255)
+    mime_type: str | None = Field(default=None, min_length=1, max_length=255)
+    size_bytes: int | None = Field(default=None, ge=0, le=1_099_511_627_776)
     permission_status: SourcePermissionStatus | None = None
     source_label: SourceLabel | None = None
     excluded: bool | None = None
     sensitive: bool | None = None
-    notes: str | None = None
+    notes: str | None = Field(default=None, max_length=4_000)
+
+    @field_validator("name", "mime_type")
+    @classmethod
+    def required_text_must_be_nonblank(cls, value: str | None) -> str | None:
+        return None if value is None else _nonblank(value, "source metadata")
 
 
 class ApprovalChecklistUpdateRequest(BaseModel):
@@ -48,25 +83,50 @@ class ApprovalChecklistUpdateRequest(BaseModel):
 
 class PreviewDecisionRequest(BaseModel):
     decision: PreviewDecisionValue
-    reason: str | None = None
+    reason: str | None = Field(default=None, max_length=2_000)
 
 
 class CustomPreviewRequest(BaseModel):
-    prompt: str
+    prompt: str = Field(min_length=1, max_length=8_000)
     tag: PromptTag
 
 
 class StudentMessageRequest(BaseModel):
-    content: str = Field(min_length=1)
+    content: str = Field(min_length=1, max_length=8_000)
     request_id: str = Field(min_length=1, max_length=128)
+
+    @field_validator("request_id")
+    @classmethod
+    def required_text_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "student request identifier")
 
 
 class ReleaseCreateRequest(BaseModel):
-    session_id: str = Field(min_length=1)
-    profile_id: str = Field(min_length=1)
-    profile_version: str = Field(min_length=1)
+    session_id: str = Field(min_length=1, max_length=128)
+    profile_id: str = Field(min_length=1, max_length=128)
+    profile_version: str = Field(min_length=1, max_length=128)
     chunks: list[DocumentChunk] = Field(default_factory=list)
-    release_id: str | None = Field(default=None, min_length=1)
+    ingestion_job_ids: list[str] = Field(default_factory=list, max_length=100)
+    release_id: str | None = Field(default=None, min_length=1, max_length=128)
+
+    @field_validator("session_id", "profile_id", "profile_version", "release_id")
+    @classmethod
+    def identifiers_must_be_nonblank(cls, value: str | None) -> str | None:
+        return None if value is None else _nonblank(value, "release identifier")
+
+    @field_validator("ingestion_job_ids")
+    @classmethod
+    def job_ids_must_be_unique_and_nonblank(cls, value: list[str]) -> list[str]:
+        normalized = [_nonblank(item, "ingestion job identifier") for item in value]
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("ingestion job identifiers must be unique")
+        return normalized
+
+    @model_validator(mode="after")
+    def release_sources_must_not_be_ambiguous(self) -> "ReleaseCreateRequest":
+        if self.chunks and self.ingestion_job_ids:
+            raise ValueError("provide chunks or ingestion jobs, not both")
+        return self
 
 
 class ReleaseEvaluationRequest(BaseModel):
@@ -89,12 +149,22 @@ class LoginRequest(BaseModel):
     email: str = Field(min_length=3, max_length=320)
     password: str = Field(min_length=1, max_length=1024)
 
+    @field_validator("email")
+    @classmethod
+    def email_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "email")
+
 
 class AccountInviteRequest(BaseModel):
     email: str = Field(min_length=3, max_length=320)
     display_name: str = Field(min_length=1, max_length=160)
     role: AccountRole
     temporary_password: str = Field(min_length=12, max_length=1024)
+
+    @field_validator("email", "display_name")
+    @classmethod
+    def identity_text_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "account field")
 
 
 class PasswordChangeRequest(BaseModel):
@@ -110,6 +180,23 @@ class CourseCreateRequest(BaseModel):
     title: str = Field(min_length=1, max_length=240)
     course_id: str | None = Field(default=None, min_length=1, max_length=128)
 
+    @field_validator("title", "course_id")
+    @classmethod
+    def course_text_must_be_nonblank(cls, value: str | None) -> str | None:
+        return None if value is None else _nonblank(value, "course field")
+
 
 class StudentAssignmentRequest(BaseModel):
     student_account_id: str = Field(min_length=1, max_length=128)
+
+    @field_validator("student_account_id")
+    @classmethod
+    def student_id_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "student account identifier")
+
+
+def _nonblank(value: str, label: str) -> str:
+    normalized = value.strip()
+    if not normalized:
+        raise ValueError(f"{label} cannot be blank")
+    return normalized

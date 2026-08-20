@@ -1,3 +1,4 @@
+import math
 from collections.abc import Mapping, Sequence
 
 from src.digital_twin.evaluation import (
@@ -185,6 +186,11 @@ def _build_implementation(
         )
         _require_configuration_value(
             implementation.configuration,
+            "embedding_provider",
+            "local-huggingface",
+        )
+        _require_configuration_value(
+            implementation.configuration,
             "embedding_model",
             "Qwen/Qwen3-Embedding-0.6B",
         )
@@ -195,6 +201,44 @@ def _build_implementation(
         )
         _require_configuration_value(
             implementation.configuration,
+            "embedding_execution",
+            "local",
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "query_instruction",
+            (
+                "Given a student question within one authorized university course, "
+                "retrieve passages that directly support a grounded answer."
+            ),
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "device",
+            "mps",
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "dtype",
+            "float16",
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "embedding_max_length",
+            2048,
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "embedding_batch_size",
+            16,
+        )
+        _require_configuration_value(
+            implementation.configuration,
+            "result_limit",
+            10,
+        )
+        _require_configuration_value(
+            implementation.configuration,
             "reranker",
             "none",
         )
@@ -202,14 +246,11 @@ def _build_implementation(
             raise UnsupportedRetrieverSelectionError(
                 "qwen3 hybrid retrieval requires an injected embedder"
             )
+        _validate_embedder_binding(embedder, implementation.configuration)
         bm25 = BM25Retriever(
             chunks,
-            k1=_numeric_configuration(
-                implementation.configuration, "bm25_k1", 1.2
-            ),
-            b=_numeric_configuration(
-                implementation.configuration, "bm25_b", 0.75
-            ),
+            k1=_numeric_configuration(implementation.configuration, "bm25_k1", 1.2),
+            b=_numeric_configuration(implementation.configuration, "bm25_b", 0.75),
             active_source_versions=active_source_versions,
         )
         dense = DenseRetriever(
@@ -262,7 +303,12 @@ def _numeric_configuration(
         raise UnsupportedRetrieverSelectionError(
             f"retriever configuration {name} must be numeric"
         )
-    return float(value)
+    numeric = float(value)
+    if not math.isfinite(numeric):
+        raise UnsupportedRetrieverSelectionError(
+            f"retriever configuration {name} must be finite"
+        )
+    return numeric
 
 
 def _require_configuration_value(
@@ -286,4 +332,35 @@ def _integer_configuration(
         raise UnsupportedRetrieverSelectionError(
             f"retriever configuration {name} must be an integer"
         )
+    if value < 1:
+        raise UnsupportedRetrieverSelectionError(
+            f"retriever configuration {name} must be at least 1"
+        )
     return value
+
+
+def _validate_embedder_binding(
+    embedder: TextEmbedder,
+    configuration: dict[str, str | int | float | bool],
+) -> None:
+    expected = {
+        "provider_id": configuration["embedding_provider"],
+        "model_name": configuration["embedding_model"],
+        "model_revision": configuration["embedding_revision"],
+        "execution": configuration["embedding_execution"],
+        "instruction": configuration["query_instruction"],
+        "device": configuration["device"],
+        "dtype": configuration["dtype"],
+        "max_length": configuration["embedding_max_length"],
+        "batch_size": configuration["embedding_batch_size"],
+    }
+    mismatched = [
+        name
+        for name, expected_value in expected.items()
+        if getattr(embedder, name, None) != expected_value
+    ]
+    if mismatched:
+        names = ", ".join(mismatched)
+        raise UnsupportedRetrieverSelectionError(
+            f"injected embedder does not match selected profile: {names}"
+        )

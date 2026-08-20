@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.reranking import RerankingRetriever
 from services.reranking.qwen3_client import left_pad_token_sequences
@@ -58,3 +60,27 @@ def test_qwen_reranker_left_padding_preserves_prompt_tokens() -> None:
 
     assert input_ids == [[11, 12, 13], [0, 0, 21]]
     assert attention_masks == [[1, 1, 1], [0, 0, 1]]
+
+
+@pytest.mark.parametrize(
+    ("sequences", "pad_token_id"),
+    (([[1, True]], 0), ([[1]], True), ([[-1]], 0)),
+)
+def test_qwen_reranker_padding_rejects_invalid_token_ids(
+    sequences, pad_token_id
+) -> None:
+    with pytest.raises(ValueError):
+        left_pad_token_sequences(sequences, pad_token_id=pad_token_id)
+
+
+@pytest.mark.parametrize("score", [float("nan"), float("inf"), -0.1, 1.1])
+def test_reranking_rejects_invalid_provider_scores(score: float) -> None:
+    class InvalidReranker:
+        def score(self, query, documents):
+            del query
+            return [score for _ in documents]
+
+    retriever = RerankingRetriever(_StaticRetriever(), InvalidReranker())
+
+    with pytest.raises(ValueError, match="finite and between 0 and 1"):
+        retriever.retrieve("synthetic query")

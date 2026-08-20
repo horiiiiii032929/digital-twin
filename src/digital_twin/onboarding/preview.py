@@ -1,6 +1,10 @@
 from uuid import uuid4
 
 from src.digital_twin.onboarding.models import OnboardingSession
+from src.digital_twin.onboarding.release import (
+    _invalidate_release_approval,
+    _uncheck_approval_items,
+)
 from src.digital_twin.tutor_policy import (
     ApprovalItem,
     EvidenceSnapshot,
@@ -322,3 +326,14 @@ def _regenerate_previews(session: OnboardingSession) -> None:
             reason="Regenerated for current policy version.",
             policy_version=session.policy_version,
         )
+    _uncheck_approval_items(
+        session,
+        frozenset(
+            {
+                "preview_external_grounding",
+                "preview_academic_integrity",
+                "preview_custom_prompt",
+            }
+        ),
+    )
+    _invalidate_release_approval(session)

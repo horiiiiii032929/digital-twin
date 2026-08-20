@@ -23,7 +23,11 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
 )
 from src.digital_twin.student.repository import StudentRepository
-from src.digital_twin.tutor_policy import ReleaseStatus
+from src.digital_twin.tutor_policy import (
+    KnowledgeSourcePolicy,
+    ReleaseStatus,
+    SourceLabel,
+)
 
 
 class PublicationError(ValueError):
@@ -42,10 +46,12 @@ class ReleaseLifecycleService:
         *,
         profile_id: str = "student-tutor",
         profile_version: str = "v1",
+        evidence_sufficiency_ready: bool = False,
     ) -> None:
         self.repository = repository
         self.profile_id = profile_id
         self.profile_version = profile_version
+        self.evidence_sufficiency_ready = evidence_sufficiency_ready
 
     def create_draft_from_onboarding(
         self,
@@ -59,6 +65,16 @@ class ReleaseLifecycleService:
         release_id: str | None = None,
     ) -> DigitalTwinRelease:
         self._require_course_owner(professor_id, course_id)
+        if session.course_id is None:
+            raise PublicationError(
+                "onboarding_course_required",
+                "Bind the reviewed tutor setup to this course before creating a release.",
+            )
+        if session.course_id != course_id:
+            raise PublicationError(
+                "course_scope_violation",
+                "The reviewed tutor setup belongs to a different course.",
+            )
         if session.policy is None:
             raise PublicationError(
                 "policy_not_ready",
@@ -70,8 +86,17 @@ class ReleaseLifecycleService:
                 "The release profile does not match the active component profile.",
             )
         _validate_chunk_course_scope(chunks, course_id)
+        identifier = release_id.strip() if release_id is not None else f"release-{uuid4()}"
+        if not identifier:
+            raise PublicationError(
+                "release_id_required", "Release identifier cannot be empty."
+            )
+        if self.repository.get_release(identifier) is not None:
+            raise PublicationError(
+                "release_exists", "The release identifier already exists."
+            )
         draft = DigitalTwinRelease(
-            id=release_id or f"release-{uuid4()}",
+            id=identifier,
             course_id=course_id,
             profile_id=profile_id,
             profile_version=profile_version,
@@ -99,8 +124,13 @@ class ReleaseLifecycleService:
         normalized_title = title.strip()
         if not normalized_title:
             raise PublicationError("course_title_required", "Course title is required.")
+        identifier = course_id.strip() if course_id is not None else f"course-{uuid4()}"
+        if not identifier:
+            raise PublicationError(
+                "course_id_required", "Course identifier cannot be empty."
+            )
         course = Course(
-            id=course_id or f"course-{uuid4()}",
+            id=identifier,
             title=normalized_title,
             owner_professor_id=professor_id,
         )
@@ -108,13 +138,13 @@ class ReleaseLifecycleService:
             raise PublicationError(
                 "course_exists", "The course identifier already exists."
             )
-        self.repository.save_course(course)
-        self.repository.save_membership(
+        self.repository.save_course_with_owner(
+            course,
             CourseMembership(
                 account_id=professor_id,
                 course_id=course.id,
                 role=MembershipRole.PROFESSOR,
-            )
+            ),
         )
         return course
 
@@ -204,6 +234,15 @@ class ReleaseLifecycleService:
                 ),
             ),
             ReleasePreflightCheck(
+                id="evidence-sufficiency",
+                label="Evidence sufficiency selection",
+                passed=self.evidence_sufficiency_ready,
+                detail=(
+                    "A product release requires a selected evidence-sufficiency "
+                    "method; the runtime otherwise abstains before generation."
+                ),
+            ),
+            ReleasePreflightCheck(
                 id="approved-policy",
                 label="Professor policy approval",
                 passed=release.policy.release_status == ReleaseStatus.APPROVED,
@@ -233,23 +272,53 @@ class ReleaseLifecycleService:
                 detail="Every release chunk must carry the owning course identifier.",
             ),
             ReleasePreflightCheck(
+                id="active-source-versions",
+                label="Single active source version",
+                passed=bool(release.chunks)
+                and _source_versions_are_unambiguous(release.chunks),
+                detail=(
+                    "Every source artifact must contribute exactly one approved "
+                    "version to the release."
+                ),
+            ),
+            ReleasePreflightCheck(
+                id="source-policy",
+                label="Professor source policy",
+                passed=bool(release.chunks)
+                and _source_labels_match_policy(release.chunks, release.policy),
+                detail=(
+                    "Every release source must be explicitly approved and permitted "
+                    "by the professor's selected source strictness."
+                ),
+            ),
+            ReleasePreflightCheck(
                 id="citation-lineage",
                 label="Citation lineage",
                 passed=bool(release.chunks)
                 and all(
-                    chunk.source_artifact_id and chunk.source_checksum and chunk.locator
+                    chunk.source_artifact_id
+                    and chunk.source_checksum
+                    and chunk.locator
+                    and isinstance(chunk.metadata.get("title"), str)
+                    and bool(chunk.metadata["title"].strip())
                     for chunk in release.chunks
+                )
+                and _citation_locations_are_unique(release.chunks),
+                detail=(
+                    "Every chunk must retain a source artifact, checksum, title, "
+                    "and unambiguous locator."
                 ),
-                detail="Every chunk must retain its source artifact, checksum, and locator.",
             ),
         ]
         passed = all(check.passed for check in checks)
-        self.repository.set_release_evaluation_status(
-            release.id,
-            ReleaseEvaluationStatus.PASSED
-            if passed
-            else ReleaseEvaluationStatus.FAILED,
-        )
+        evaluation_persisted = release.status != StudentReleaseStatus.PUBLISHED
+        if evaluation_persisted:
+            self.repository.set_release_evaluation_status(
+                release.id,
+                ReleaseEvaluationStatus.PASSED
+                if passed
+                else ReleaseEvaluationStatus.FAILED,
+            )
         self.repository.save_audit_event(
             AuditEvent(
                 id=f"audit-{uuid4()}",
@@ -261,6 +330,7 @@ class ReleaseLifecycleService:
                     "passed": passed,
                     "passed_checks": sum(check.passed for check in checks),
                     "total_checks": len(checks),
+                    "evaluation_persisted": evaluation_persisted,
                 },
             )
         )
@@ -298,6 +368,19 @@ class ReleaseLifecycleService:
         return self._require_release(release.id)
 
     def _require_publishable(self, release: DigitalTwinRelease) -> None:
+        if (
+            release.profile_id != self.profile_id
+            or release.profile_version != self.profile_version
+        ):
+            raise PublicationError(
+                "profile_mismatch",
+                "The release profile does not match the active component profile.",
+            )
+        if not self.evidence_sufficiency_ready:
+            raise PublicationError(
+                "evidence_sufficiency_required",
+                "Select and configure an evidence-sufficiency method before publication.",
+            )
         if release.evaluation_status == ReleaseEvaluationStatus.PENDING:
             raise PublicationError(
                 "evaluation_required",
@@ -319,6 +402,38 @@ class ReleaseLifecycleService:
             raise PublicationError(
                 "source_scope_not_ready",
                 "A published release requires at least one approved tutoring chunk.",
+            )
+        if len({chunk.id for chunk in release.chunks}) != len(release.chunks):
+            raise PublicationError(
+                "source_scope_not_ready", "Release chunk identifiers must be unique."
+            )
+        if not _citation_locations_are_unique(release.chunks):
+            raise PublicationError(
+                "source_scope_not_ready",
+                "Release citation locations must identify exactly one chunk.",
+            )
+        if not _source_versions_are_unambiguous(release.chunks):
+            raise PublicationError(
+                "source_scope_not_ready",
+                "A release cannot mix versions of the same source artifact.",
+            )
+        if not _source_labels_match_policy(release.chunks, release.policy):
+            raise PublicationError(
+                "source_scope_not_ready",
+                "Release sources do not satisfy the professor-approved source policy.",
+            )
+        if any(
+            chunk.metadata.get("course_id") != release.course_id
+            or not chunk.source_artifact_id
+            or not chunk.source_checksum
+            or not chunk.locator
+            or not isinstance(chunk.metadata.get("title"), str)
+            or not chunk.metadata["title"].strip()
+            for chunk in release.chunks
+        ):
+            raise PublicationError(
+                "source_scope_not_ready",
+                "Release evidence must retain exact course scope and citation lineage.",
             )
 
     def _require_owned_release(
@@ -369,10 +484,55 @@ class ReleaseLifecycleService:
 
 
 def _validate_chunk_course_scope(chunks: list[DocumentChunk], course_id: str) -> None:
+    seen_ids: set[str] = set()
     for chunk in chunks:
         chunk_course_id = chunk.metadata.get("course_id")
-        if chunk_course_id is not None and chunk_course_id != course_id:
+        if chunk.id in seen_ids or chunk_course_id != course_id:
             raise PublicationError(
                 "course_scope_violation",
-                "A release chunk belongs to a different course.",
+                "Release chunks must be unique and belong to the selected course.",
             )
+        seen_ids.add(chunk.id)
+    if not _citation_locations_are_unique(chunks):
+        raise PublicationError(
+            "course_scope_violation",
+            "Release citation locations must identify exactly one chunk.",
+        )
+
+
+def _citation_locations_are_unique(chunks: list[DocumentChunk]) -> bool:
+    locations = [
+        (chunk.document_id, chunk.locator or f"chunk {chunk.ordinal + 1}")
+        for chunk in chunks
+    ]
+    return len(locations) == len(set(locations))
+
+
+def _source_versions_are_unambiguous(chunks: list[DocumentChunk]) -> bool:
+    versions: dict[str, set[int]] = {}
+    for chunk in chunks:
+        source_id = chunk.source_artifact_id or chunk.document_id
+        versions.setdefault(source_id, set()).add(chunk.source_version)
+    return all(len(source_versions) == 1 for source_versions in versions.values())
+
+
+def _source_labels_match_policy(chunks, policy) -> bool:
+    field = next(
+        (item for item in policy.all_fields if item.id == "knowledge_source_policy"),
+        None,
+    )
+    if field is None or not isinstance(field.value, dict):
+        return False
+    try:
+        source_policy = KnowledgeSourcePolicy.model_validate(field.value)
+    except ValueError:
+        return False
+    allowed = {SourceLabel.COURSE_APPROVED}
+    if source_policy.source_strictness != "course_only":
+        allowed.update(
+            {
+                SourceLabel.PROFESSOR_APPROVED_EXTERNAL,
+                SourceLabel.SYSTEM_SUGGESTED_TRUSTED,
+            }
+        )
+    return all(chunk.source_label in allowed for chunk in chunks)

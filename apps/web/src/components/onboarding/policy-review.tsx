@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { ChevronDown, Loader2, Save, ShieldAlert } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import type { FieldStatus, PolicyField, TutorPolicy } from "@/lib/api/types"
+import { mergePolicyDrafts, type FieldDraft } from "@/lib/onboarding/policy-drafts"
 import { cn } from "@/lib/utils"
 
 type PolicyReviewProps = {
@@ -20,11 +21,6 @@ type PolicyReviewProps = {
 type PolicyGroup = {
   title: string
   fields: PolicyField[]
-}
-
-type FieldDraft = {
-  status: FieldStatus
-  value: string
 }
 
 const STATUS_OPTIONS: Array<{ value: FieldStatus; label: string }> = [
@@ -62,26 +58,30 @@ export function PolicyReview({
     [allFields],
   )
   const [drafts, setDrafts] = useState<Record<string, FieldDraft>>({})
+  const serverDrafts = useRef<Record<string, FieldDraft>>({})
   const [expandedFieldId, setExpandedFieldId] = useState<string | null>(null)
 
   useEffect(() => {
     if (!policy) {
       setDrafts({})
+      serverDrafts.current = {}
       setExpandedFieldId(null)
       return
     }
 
-    setDrafts(
-      Object.fromEntries(
-        allFields.map((field) => [
+    const nextServerDrafts = Object.fromEntries(
+      allFields.map((field) => [
           field.id,
           {
             status: field.status,
             value: fieldValueToText(field.value),
           },
         ]),
-      ),
     )
+    setDrafts((current) =>
+      mergePolicyDrafts(current, serverDrafts.current, nextServerDrafts),
+    )
+    serverDrafts.current = nextServerDrafts
     setExpandedFieldId((current) => {
       if (current && allFields.some((field) => field.id === current)) {
         return current

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "profile_id": "student-tutor",
   "profile_version": "v1",
   "stage": "experimental",
@@ -166,6 +166,29 @@
         "bm25-v1"
       ],
       "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Synthetic product activation, citation lineage, course isolation, and provider-failure fallback pass the registered student workflow v1/v2 architecture slices. The historical professor-fidelity C3 run did not use the selected chunker corpus and supplies no additional retrieval evidence. Bounded-capacity qualification remains open. This profile does not make image-only claims."
+    },
+    {
+      "component": "evidence-sufficiency",
+      "status": "pending",
+      "result_ids": [
+        "evidence-sufficiency-v1-clean"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/evidence-sufficiency-v1-results.md"
+      ],
+      "hard_gates": [
+        "zero-false-answers",
+        "answerable-recall",
+        "balanced-accuracy",
+        "ranking-non-regression",
+        "latency-budget"
+      ],
+      "candidate_ids": [
+        "semantic-agreement-evidence-gate",
+        "minimum-raw-score-evidence-gate",
+        "lexical-coverage-evidence-gate"
+      ],
+      "notes": "Evidence-sufficiency v1 selected no safe method. Product generation remains fail-closed until a prospective successor passes every gate; synthetic workflow checks inject a test-only control explicitly."
     },
     {
       "component": "reranker",

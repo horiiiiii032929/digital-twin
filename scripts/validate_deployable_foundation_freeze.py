@@ -13,6 +13,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE_ROOT = ROOT / "research/05_evaluation/profiles"
+CURRENT_MATCH_SUSPENSION_PATH = (
+    ROOT
+    / "research/05_evaluation/instruments/deployable_current_match_suspension_v1.json"
+)
 MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v1.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v2.json",
@@ -268,6 +272,28 @@ def _sha256(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
 
 
+def _validate_current_match_suspension(root: Path) -> dict[str, Any]:
+    path = root / CURRENT_MATCH_SUSPENSION_PATH.relative_to(ROOT)
+    suspension = json.loads(path.read_text(encoding="utf-8"))
+    expected = {
+        "schema_version": 1,
+        "suspension_id": "deployable-current-match-suspension-v1",
+        "status": "active-repository-correctness-audit",
+        "suspends_current_match_for": "deployable-product-foundation-freeze-v6",
+        "historical_revision_validation_required": True,
+        "release_claim_authorized": False,
+        "public_deployment_authorized": False,
+        "external_evaluation_authorized": False,
+        "current_match_drift_is_diagnostic": True,
+    }
+    for field, value in expected.items():
+        if suspension.get(field) != value:
+            raise ValueError(f"deployable current-match suspension drifted: {field}")
+    if not suspension.get("reason") or not suspension.get("required_successor"):
+        raise ValueError("deployable current-match suspension lacks rationale or exit")
+    return suspension
+
+
 def _revision_file(root: Path, revision: str, relative_path: str) -> bytes:
     return subprocess.run(
         ["git", "show", f"{revision}:{relative_path}"],
@@ -402,6 +428,10 @@ def validate_deployable_freeze(
     ):
         raise ValueError("container-build evidence drifted")
 
+    suspension = None
+    if freeze_id == "deployable-product-foundation-freeze-v6":
+        suspension = _validate_current_match_suspension(root)
+    current_drift: list[str] = []
     bindings = manifest.get("artifact_bindings", [])
     binding_paths = [binding.get("path") for binding in bindings]
     if (
@@ -426,7 +456,11 @@ def validate_deployable_freeze(
         if binding_requires_current and (
             _sha256(_current_file(root, relative_path).read_bytes()) != expected
         ):
-            raise ValueError(f"current artifact drifted from freeze: {relative_path}")
+            if suspension is None:
+                raise ValueError(
+                    f"current artifact drifted from freeze: {relative_path}"
+                )
+            current_drift.append(relative_path)
     if freeze_id == "deployable-product-foundation-freeze-v6":
         current_match_count = sum(
             binding["current_match_required"] for binding in bindings
@@ -487,6 +521,14 @@ def validate_deployable_freeze(
     }
     if freeze_id == "deployable-product-foundation-freeze-v6":
         result["current_match_bindings"] = spec["current_match_binding_count"]
+        result["current_match_enforced"] = suspension is None
+        result["current_match_status"] = (
+            "enforced"
+            if suspension is None
+            else "suspended-by-repository-correctness-audit"
+        )
+        result["current_drift_count"] = len(current_drift)
+        result["release_claim_authorized"] = False
     return result
 
 

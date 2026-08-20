@@ -16,6 +16,8 @@ from src.digital_twin.tutor_policy import (
 class OnboardingSession(BaseModel):
     session_id: str
     owner_account_id: str | None = None
+    course_id: str | None = None
+    revision: int = Field(default=0, ge=0)
     current_step: str
     answers: dict[str, str] = Field(default_factory=dict)
     messages: list[ChatMessage] = Field(default_factory=list)
@@ -34,6 +36,7 @@ class OnboardingSession(BaseModel):
             "approval_checklist": [],
             "preview_decisions": [],
             "preview_acceptance": [],
+            "revision_proposal": [],
         }
     )
     trace: list[WorkflowTraceItem] = Field(default_factory=list)

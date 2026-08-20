@@ -28,6 +28,10 @@ from dotenv import load_dotenv
 from services.llm import LiteLlmClient
 from src.digital_twin.model_policy import require_model_allowed
 from src.digital_twin.llm import LlmMessage
+from src.digital_twin.repository_freeze import (
+    freeze_status,
+    require_pre_evaluation_operation_allowed,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -512,15 +516,20 @@ def build_preflight(assets: dict[str, Any], *, ollama_url: str) -> dict[str, Any
         local_binding["model"], ollama_url=ollama_url
     )
     local_model_ready = installed_digest == local_binding["model_digest"]
+    repository_freeze = freeze_status()
     return {
         "run_type": "factual-qa-quality-pilot-preflight",
         "instrument_id": instrument["instrument_id"],
         "method_version": instrument["method_version"],
         "status": (
-            "ready-for-pilot-execution"
+            "blocked-repository-correctness-freeze"
+            if repository_freeze.active
+            else "ready-for-pilot-execution"
             if credential_present and local_model_ready
             else "blocked"
         ),
+        "repository_freeze_id": repository_freeze.freeze_id,
+        "repository_freeze_active": repository_freeze.active,
         "corpus": {
             "path": str(assets["corpus_path"].relative_to(ROOT)),
             "sha256": assets["corpus_sha256"],
@@ -1406,6 +1415,8 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> None:
     arguments = _arguments()
+    if arguments.execute:
+        require_pre_evaluation_operation_allowed("dataset_generation")
     instrument_path = (
         arguments.instrument
         if arguments.instrument.is_absolute()

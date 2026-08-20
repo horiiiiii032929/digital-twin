@@ -11,6 +11,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.build_course_tutor_splits import validate_split_isolation
 from scripts.validate_course_tutor_dataset import (
     load_json,
@@ -540,6 +542,7 @@ def main() -> None:
     parser.add_argument("--human-audit", type=Path, required=True)
     parser.add_argument("--github-purge-confirmed", action="store_true")
     arguments = parser.parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     print(
         json.dumps(
             seal_splits(

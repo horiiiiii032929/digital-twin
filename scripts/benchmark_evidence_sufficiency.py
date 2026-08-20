@@ -18,6 +18,7 @@ from src.digital_twin.grounding import (
     load_retrieval_benchmark_corpus,
     load_retrieval_evaluation_set,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,7 @@ RANKING_NON_REGRESSION_RATIO = 0.95
 
 def main() -> None:
     arguments = _arguments()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     corpus = load_retrieval_benchmark_corpus(arguments.corpus)
     calibration = load_retrieval_evaluation_set(arguments.calibration)
     test = load_retrieval_evaluation_set(arguments.dataset)

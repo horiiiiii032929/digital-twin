@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 from typing import Any
 
@@ -12,6 +13,7 @@ from services.retrieval_provider import (
     bearer_headers,
     estimate_input_tokens,
     post_json,
+    require_https_endpoint,
 )
 from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
 from src.digital_twin.model_policy import require_registered_current_model
@@ -33,9 +35,10 @@ class JinaReranker:
         timeout_seconds: float = 60,
         transport: PostJson = post_json,
     ) -> None:
-        if timeout_seconds <= 0:
+        if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
         require_registered_current_model(model)
+        require_https_endpoint(endpoint)
         self._headers = bearer_headers(api_key)
         self.ledger = ledger
         self.model = model
@@ -105,8 +108,17 @@ def _reranking_item(item: Any, document_count: int) -> tuple[int, float]:
         raise RetrievalProviderError("Jina reranking result has an unexpected shape")
     index = item.get("index")
     score = item.get("relevance_score")
-    if not isinstance(index, int) or not 0 <= index < document_count:
+    if (
+        isinstance(index, bool)
+        or not isinstance(index, int)
+        or not 0 <= index < document_count
+    ):
         raise RetrievalProviderError("Jina reranking result has an invalid index")
-    if not isinstance(score, (int, float)):
+    if isinstance(score, bool) or not isinstance(score, (int, float)):
         raise RetrievalProviderError("Jina reranking result has a non-numeric score")
-    return index, float(score)
+    normalized = float(score)
+    if not math.isfinite(normalized) or not 0 <= normalized <= 1:
+        raise RetrievalProviderError(
+            "Jina reranking result has an invalid relevance score"
+        )
+    return index, normalized

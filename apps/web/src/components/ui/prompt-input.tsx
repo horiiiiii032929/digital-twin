@@ -7,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { shouldSubmitPromptInput } from "@/lib/prompt-input"
 import { cn } from "@/lib/utils"
 import React, {
   createContext,
@@ -155,7 +156,7 @@ function PromptInputTextarea({
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (shouldSubmitPromptInput(e.nativeEvent)) {
       e.preventDefault()
       onSubmit?.()
     }

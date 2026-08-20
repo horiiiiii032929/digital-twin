@@ -9,6 +9,7 @@ from src.digital_twin.student.models import (
     CourseMembership,
     DigitalTwinRelease,
     MembershipRole,
+    ReleaseEvaluationStatus,
     StudentReleaseStatus,
 )
 from src.digital_twin.student.repository import StudentRepository
@@ -116,6 +117,8 @@ def seed_synthetic_student_workflow(
         profile_version="v1",
         policy_version=1,
         policy=policy,
+        status=StudentReleaseStatus.PUBLISHED,
+        evaluation_status=ReleaseEvaluationStatus.PASSED,
         chunks=[
             _chunk(
                 "cache",
@@ -140,6 +143,8 @@ def seed_synthetic_student_workflow(
         profile_version="v1",
         policy_version=1,
         policy=policy,
+        status=StudentReleaseStatus.PUBLISHED,
+        evaluation_status=ReleaseEvaluationStatus.PASSED,
         chunks=[
             _chunk(
                 "policy",
@@ -178,6 +183,7 @@ def _chunk(
         ordinal=0,
         source_artifact_id=f"source-{identifier}-synthetic",
         source_version=1,
+        source_checksum="a" * 64,
         source_label=SourceLabel.COURSE_APPROVED,
         locator=locator,
         retrieval_allowed=True,

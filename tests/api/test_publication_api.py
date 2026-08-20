@@ -3,15 +3,16 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from services.api.app.factory import create_app
-from src.digital_twin.grounding import OCRTextRegion
+from src.digital_twin.grounding import AnyHitEvidenceGate, OCRTextRegion
 from src.digital_twin.onboarding import InMemorySessionRepository, create_session
 from src.digital_twin.student import (
+    ReleaseEvaluationStatus,
     SQLiteStudentRepository,
     StudentReleaseStatus,
     approved_synthetic_policy,
     seed_synthetic_student_workflow,
 )
-from src.digital_twin.tutor_policy import build_initial_policy
+from src.digital_twin.tutor_policy import SourceLabel, build_initial_policy
 from tests.fixtures.ingestion import write_synthetic_pdf
 
 
@@ -52,6 +53,7 @@ def _client(
     fixture = seed_synthetic_student_workflow(student_repository)
     sessions = InMemorySessionRepository()
     session = create_session("onboarding-release-synthetic")
+    session.course_id = fixture.course_a_id
     session.current_step = "professor_approval"
     session.policy = approved_synthetic_policy() if approved else build_initial_policy()
     sessions.save(session)
@@ -61,6 +63,7 @@ def _client(
         source_root=tmp_path / "course-sources",
         region_crop_root=tmp_path / "region-crops",
         source_ocr_provider=source_ocr_provider,
+        student_evidence_gate=AnyHitEvidenceGate(),
     )
     return TestClient(app), student_repository, sessions, fixture
 
@@ -120,6 +123,160 @@ def test_publication_requires_evaluation_and_resolved_policy(tmp_path):
     assert (
         repository.get_published_release(fixture.course_a_id).id == fixture.release_a_id
     )
+
+
+def test_product_preflight_blocks_without_selected_evidence_sufficiency(tmp_path):
+    repository = SQLiteStudentRepository(tmp_path / "ungated-publication.sqlite3")
+    fixture = seed_synthetic_student_workflow(repository)
+    client = TestClient(create_app(student_repository=repository))
+
+    preflight = client.post(
+        f"/api/professor/releases/{fixture.release_a_id}/preflight",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert preflight.status_code == 200
+    evidence = next(
+        check
+        for check in preflight.json()["checks"]
+        if check["id"] == "evidence-sufficiency"
+    )
+    assert preflight.json()["passed"] is False
+    assert evidence["passed"] is False
+    assert (
+        repository.get_release(fixture.release_a_id).evaluation_status
+        == ReleaseEvaluationStatus.PASSED
+    )
+
+
+def test_onboarding_session_must_be_bound_once_to_release_course(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    unbound = create_session("unbound-course-session")
+    unbound.current_step = "professor_approval"
+    unbound.policy = approved_synthetic_policy()
+    unbound = sessions.save(unbound)
+    source_release = repository.get_release(fixture.release_a_id)
+    assert source_release is not None
+    payload = {
+        "session_id": unbound.session_id,
+        "profile_id": "student-tutor",
+        "profile_version": "v1",
+        "chunks": [chunk.model_dump(mode="json") for chunk in source_release.chunks],
+    }
+
+    rejected = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json=payload,
+    )
+    assert rejected.status_code == 409
+    assert rejected.json()["detail"]["code"] == "onboarding_course_required"
+
+    bound = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/onboarding-sessions/{unbound.session_id}/bind",
+        headers=_headers(fixture.professor_id),
+    )
+    assert bound.status_code == 200
+    assert bound.json()["course_id"] == fixture.course_a_id
+
+    rebound = client.post(
+        f"/api/professor/courses/{fixture.course_b_id}/onboarding-sessions/{unbound.session_id}/bind",
+        headers=_headers(fixture.professor_id),
+    )
+    assert rebound.status_code == 409
+    assert rebound.json()["detail"]["code"] == "onboarding_course_scope_mismatch"
+
+
+def test_release_draft_rejects_ambiguous_citation_locations(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    source_release = repository.get_release(fixture.release_a_id)
+    session = sessions.get("onboarding-release-synthetic")
+    chunks = [chunk.model_copy(deep=True) for chunk in source_release.chunks]
+    chunks[1].document_id = chunks[0].document_id
+    chunks[1].locator = chunks[0].locator
+
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": session.session_id,
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "release_id": "ambiguous-citation-release",
+            "chunks": [chunk.model_dump(mode="json") for chunk in chunks],
+        },
+    )
+
+    assert response.status_code == 403
+    assert response.json()["detail"]["code"] == "course_scope_violation"
+
+
+def test_release_preflight_rejects_mixed_versions_of_one_source(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    source_release = repository.get_release(fixture.release_a_id)
+    session = sessions.get("onboarding-release-synthetic")
+    chunks = [chunk.model_copy(deep=True) for chunk in source_release.chunks]
+    chunks[1].source_artifact_id = chunks[0].source_artifact_id
+    chunks[1].source_version = chunks[0].source_version + 1
+
+    draft = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": session.session_id,
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "release_id": "mixed-source-version-release",
+            "chunks": [chunk.model_dump(mode="json") for chunk in chunks],
+        },
+    )
+    assert draft.status_code == 201
+
+    preflight = client.post(
+        f"/api/professor/releases/{draft.json()['id']}/preflight",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert preflight.status_code == 200
+    assert preflight.json()["passed"] is False
+    source_check = next(
+        check
+        for check in preflight.json()["checks"]
+        if check["id"] == "active-source-versions"
+    )
+    assert source_check["passed"] is False
+
+
+def test_release_preflight_enforces_course_only_source_policy(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    source_release = repository.get_release(fixture.release_a_id)
+    session = sessions.get("onboarding-release-synthetic")
+    chunks = [chunk.model_copy(deep=True) for chunk in source_release.chunks]
+    chunks[1].source_label = SourceLabel.PROFESSOR_APPROVED_EXTERNAL
+
+    draft = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": session.session_id,
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "release_id": "source-policy-mismatch-release",
+            "chunks": [chunk.model_dump(mode="json") for chunk in chunks],
+        },
+    )
+    assert draft.status_code == 201
+
+    preflight = client.post(
+        f"/api/professor/releases/{draft.json()['id']}/preflight",
+        headers=_headers(fixture.professor_id),
+    )
+
+    source_check = next(
+        check for check in preflight.json()["checks"] if check["id"] == "source-policy"
+    )
+    assert preflight.json()["passed"] is False
+    assert source_check["passed"] is False
 
 
 def test_professor_course_index_is_resumable_without_returning_release_payloads(

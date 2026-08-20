@@ -29,7 +29,7 @@ from src.digital_twin.grounding.protocols import (
     OCRProvider,
     RegionDescriptionProvider,
 )
-from src.digital_twin.tutor_policy import SourceLabel
+from src.digital_twin.tutor_policy import SourceLabel, infer_sensitive_source_name
 
 
 class CourseSourceIngestionResult(BaseModel):
@@ -56,7 +56,11 @@ class LocalCourseSourceIngestionService:
         description_provider: RegionDescriptionProvider | None = None,
         max_source_bytes: int = 50 * 1024 * 1024,
     ) -> None:
-        if max_source_bytes <= 0:
+        if (
+            isinstance(max_source_bytes, bool)
+            or not isinstance(max_source_bytes, int)
+            or max_source_bytes <= 0
+        ):
             raise ValueError("max_source_bytes must be positive")
         self.source_root = source_root
         self.region_crop_root = region_crop_root
@@ -82,8 +86,23 @@ class LocalCourseSourceIngestionService:
             raise ValueError("uploaded PDF exceeds the configured size limit")
         if version < 1:
             raise ValueError("source version must be at least 1")
-        if not all(value.strip() for value in (course_id, artifact_id, title, professor_id)):
-            raise ValueError("course, source, title, and professor identifiers are required")
+        if not all(
+            value.strip() for value in (course_id, artifact_id, title, professor_id)
+        ):
+            raise ValueError(
+                "course, source, title, and professor identifiers are required"
+            )
+        if source_label == SourceLabel.UNAPPROVED_EXTERNAL:
+            raise ValueError(
+                "unapproved external sources cannot be ingested for tutoring"
+            )
+        if infer_sensitive_source_name(title) or infer_sensitive_source_name(
+            artifact_id
+        ):
+            raise ValueError(
+                "potentially sensitive student or private sources require a separate "
+                "consent-reviewed ingestion path"
+            )
 
         checksum = hashlib.sha256(content).hexdigest()
         source_identity = f"{course_id}:{artifact_id}"
@@ -117,12 +136,15 @@ class LocalCourseSourceIngestionService:
             dir=self.source_root,
         )
         temporary_path = Path(temporary_name)
+        figure_store = LocalFigureStore(self.region_crop_root / "figures")
+        region_store = LocalRegionCropStore(self.region_crop_root)
+        created_derived_paths: list[Path] = []
         try:
             with os.fdopen(descriptor, "wb") as handle:
                 handle.write(content)
             parser = LocalDocumentParser(
-                LocalFigureStore(self.region_crop_root / "figures"),
-                region_store=LocalRegionCropStore(self.region_crop_root),
+                figure_store,
+                region_store=region_store,
                 ocr_provider=self.ocr_provider,
                 description_provider=self.description_provider,
             )
@@ -148,9 +170,21 @@ class LocalCourseSourceIngestionService:
                 checksum,
             )
             final_path = self.source_root / f"{final_name}.pdf"
-            temporary_path.replace(final_path)
+            if final_path.is_symlink():
+                raise ValueError("stored source path is a symbolic link")
+            if final_path.exists():
+                if hashlib.sha256(final_path.read_bytes()).hexdigest() != checksum:
+                    raise ValueError("stored source identity has conflicting content")
+                temporary_path.unlink()
+            else:
+                os.chmod(temporary_path, 0o600)
+                temporary_path.replace(final_path)
         except Exception:
             temporary_path.unlink(missing_ok=True)
+            created_derived_paths.extend(figure_store.created_paths)
+            created_derived_paths.extend(region_store.created_paths)
+            for path in reversed(created_derived_paths):
+                path.unlink(missing_ok=True)
             raise
 
         return CourseSourceIngestionResult(

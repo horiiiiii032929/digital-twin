@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from src.digital_twin.model_policy import require_registered_current_model
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -352,6 +353,7 @@ def aggregate(decisions: list[dict[str, Any]], batches: list[dict[str, Any]]) ->
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     if not args.consumer_data_boundary_approved:
         raise ValueError("consumer data boundary approval is required")
     if args.max_budget_usd_per_batch <= 0:

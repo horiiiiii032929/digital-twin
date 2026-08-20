@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Ban, Check, FileText, Loader2, ShieldAlert, Upload } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -59,6 +59,7 @@ export function SourceInventory({
     size_bytes: number
   } | null>(null)
   const [notes, setNotes] = useState("")
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const hasApprovedSource = items.some(
     (item) => item.permission_status === "approved" && !item.excluded,
   )
@@ -83,6 +84,7 @@ export function SourceInventory({
     }
     setSelectedFile(null)
     setNotes("")
+    if (fileInputRef.current) fileInputRef.current.value = ""
   }
 
   return (
@@ -117,6 +119,7 @@ export function SourceInventory({
               Add course file metadata
             </span>
             <input
+              ref={fileInputRef}
               type="file"
               className="min-h-10 text-sm text-muted-foreground file:mr-3 file:min-h-9 file:rounded-lg file:border file:border-border file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-[var(--ink)] hover:file:border-[var(--border-strong)]"
               onChange={(event) => {
@@ -151,6 +154,7 @@ export function SourceInventory({
                 onChange={(event) => setNotes(event.target.value)}
                 placeholder="Optional permission notes"
                 aria-label="Source permission notes"
+                maxLength={4000}
                 className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
               />
               <Button

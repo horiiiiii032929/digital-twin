@@ -12,6 +12,8 @@ import random
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.draft_cross_course_benchmark import ROOT
 
 
@@ -561,6 +563,7 @@ def write_report(path: Path, analysis: dict[str, Any]) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("heldout_execution")
     require(args.bootstrap_samples >= 1_000, "use at least 1,000 bootstrap samples")
     source_bytes = args.input.read_bytes()
     result = json.loads(source_bytes)

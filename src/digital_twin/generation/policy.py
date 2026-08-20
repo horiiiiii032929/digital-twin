@@ -2,7 +2,12 @@ import re
 
 from src.digital_twin.generation.models import PolicyAction, PolicyDecision
 from src.digital_twin.grounding.models import RetrievalHit
-from src.digital_twin.tutor_policy import FieldStatus, ReleaseStatus, TutorPolicy
+from src.digital_twin.tutor_policy import (
+    FieldStatus,
+    KnowledgeSourcePolicy,
+    ReleaseStatus,
+    TutorPolicy,
+)
 
 
 _GRADED_CONTEXT = re.compile(
@@ -101,14 +106,28 @@ def policy_is_approved_for_generation(policy: TutorPolicy) -> bool:
         ),
         None,
     )
+    knowledge_policy = _validated_knowledge_source_policy(knowledge)
     return bool(
         approval is not None
         and approval.status == FieldStatus.RESOLVED
         and approval.value == "approved"
         and knowledge is not None
         and knowledge.status == FieldStatus.RESOLVED
-        and isinstance(knowledge.value, dict)
-        and knowledge.value.get("confirmed") is True
+        and knowledge_policy is not None
+        and knowledge_policy.confirmed
+        and knowledge_policy.source_strictness != "unresolved"
+        and knowledge_policy.external_sources_require_visible_labels
         and integrity is not None
         and integrity.status == FieldStatus.RESOLVED
     )
+
+
+def _validated_knowledge_source_policy(
+    field,
+) -> KnowledgeSourcePolicy | None:
+    if field is None or not isinstance(field.value, dict):
+        return None
+    try:
+        return KnowledgeSourcePolicy.model_validate(field.value)
+    except ValueError:
+        return None

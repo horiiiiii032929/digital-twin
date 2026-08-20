@@ -10,8 +10,13 @@
     "apps/web"
   ],
   "scripts": {
-    "check": "npm run check:docs && npm run verify:model-policy && npm run check:staging-config && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:generator-qualification && npm run verify:generator-qualification-v4-pro && npm run verify:generator-qualification-v4-pro-p3 && npm run verify:professor-fidelity-post-audit && npm run verify:evaluation-results && npm run verify:profile && npm run verify:technical-freeze && npm run verify:deployable-freeze && npm run verify:generation && npm run verify:student-workflow && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
+    "check": "npm run check:docs && npm run verify:repository-execution-freeze && npm run verify:repository-correctness-inventory && npm run verify:factual-qa-v3-design && npm run verify:model-policy && npm run check:staging-config && npm run verify:cross-course-portfolio && npm run verify:cross-course-benchmark && npm run verify:multimodal-retrieval-instruments && npm run verify:evaluation-instruments && npm run verify:retrieval-v3-instruments && npm run verify:generator-qualification && npm run verify:generator-qualification-v4-pro && npm run verify:generator-qualification-v4-pro-p3 && npm run verify:professor-fidelity-post-audit && npm run verify:evaluation-results && npm run verify:profile && npm run verify:technical-freeze && npm run verify:deployable-freeze && npm run verify:generation && npm run verify:student-workflow && npm run test:api && npm run test:web && npm run lint:web && npm run build:web",
     "check:docs": "uv run python scripts/validate_markdown_links.py",
+    "inventory:repository-correctness": "uv run python -m scripts.build_repository_correctness_inventory",
+    "verify:repository-correctness-inventory": "uv run python -m scripts.build_repository_correctness_inventory --check --require-complete",
+    "verify:factual-qa-v3-design": "uv run python -m scripts.validate_factual_qa_v3_design",
+    "verify:repository-execution-freeze": "uv run python -m scripts.validate_repository_execution_freeze",
+    "screen:factual-qa-v3-content-boundaries": "uv run python -m scripts.screen_factual_qa_v3_content_boundaries",
     "verify:model-policy": "uv run python -m scripts.validate_model_policy",
     "check:staging-config": "docker compose --env-file deploy/staging.env.example -f compose.staging.yml config --quiet",
     "audit:python": "uv run python -m scripts.audit_python_dependencies",
@@ -92,8 +97,6 @@
     "verify:student-workflow": "uv run python -m scripts.verify_student_workflow_slice",
     "verify:deployable-foundation": "docker compose --env-file deploy/staging.env.example -f compose.staging.yml config --quiet && uv run pytest tests/api/test_auth_api.py tests/api/test_observability.py tests/digital_twin/test_sqlite_migrations.py tests/services/test_ingestion_jobs.py tests/services/test_llm_budget.py tests/services/test_runtime_backup.py tests/services/test_runtime_lifecycle.py -q",
     "benchmark:deployable-foundation-development": "uv run python -m scripts.verify_deployable_foundation",
-    "seed:student-demo": "uv run python -m scripts.seed_student_demo",
-    "prepare:supervisor-demo": "npm run seed:student-demo",
     "verify:retrieval-v3-instruments": "uv run python -m scripts.validate_retrieval_v3_instruments",
     "verify:evaluation-results": "uv run python -m scripts.validate_evaluation_results",
     "verify:retrieval": "uv run python -m scripts.evaluate_retrieval",

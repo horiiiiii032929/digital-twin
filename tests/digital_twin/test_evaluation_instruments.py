@@ -10,6 +10,7 @@ from scripts.validate_evaluation_instruments import (
     validate_instruments,
     validate_judge_pair,
     validate_run,
+    validate_schema,
     validate_state_card,
 )
 
@@ -50,7 +51,7 @@ def test_simulator_rejects_two_transitions_for_one_state_event() -> None:
 
 
 def test_missing_tutor_output_stays_in_primary_denominator() -> None:
-    run = load_json(INSTRUMENTS / "evaluation_run_v1_synthetic_example.json")
+    run = load_json(INSTRUMENTS / "evaluation_run_v2_synthetic_example.json")
     changed = copy.deepcopy(run)
     result = changed["case_results"][0]
     result["attempt_status"] = "missing"
@@ -59,3 +60,16 @@ def test_missing_tutor_output_stays_in_primary_denominator() -> None:
 
     with pytest.raises(ValueError, match="must remain included"):
         validate_run(changed)
+
+
+def test_complete_evaluation_run_requires_completion_timestamp() -> None:
+    run = load_json(INSTRUMENTS / "evaluation_run_v2_synthetic_example.json")
+    changed = copy.deepcopy(run)
+    changed["finished_at"] = None
+
+    with pytest.raises(ValueError, match="completion timestamp"):
+        validate_run(changed)
+
+    schema = load_json(INSTRUMENTS / "evaluation_run_v2.schema.json")
+    with pytest.raises(ValueError, match="schema validation failed"):
+        validate_schema(changed, schema)

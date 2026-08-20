@@ -64,6 +64,7 @@ export function useAuthSession(): AuthSessionController {
       setProfile(null)
     } catch (reason) {
       setError(errorMessage(reason, "Could not sign out."))
+      throw reason
     } finally {
       setSubmitting(false)
     }

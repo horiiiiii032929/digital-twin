@@ -22,6 +22,8 @@ from src.digital_twin.generation import (
     LiveGroundedGenerator,
     PolicyAction,
     StrictEvidenceGroundedPromptBuilder,
+    authoritative_citation_for_chunk,
+    citation_matches_chunk,
     load_generation_evaluation_set,
 )
 from src.digital_twin.grounding import DocumentChunk, GenerationUsage, RetrievalHit
@@ -52,7 +54,11 @@ def approved_policy():
         if field.status == FieldStatus.BLOCKS_RELEASE:
             field.status = FieldStatus.RESOLVED
         if field.id == "knowledge_source_policy":
-            field.value = {**field.value, "confirmed": True}
+            field.value = {
+                **field.value,
+                "source_strictness": "any_source_with_labels",
+                "confirmed": True,
+            }
         if field.id in {"academic_integrity_policy", "professor_release_approval"}:
             field.status = FieldStatus.RESOLVED
         if field.id == "professor_release_approval":
@@ -126,6 +132,26 @@ def test_policy_enforcer_requires_professor_release_approval():
     assert not decision.permits_model_call
 
 
+def test_policy_enforcer_rejects_malformed_approved_source_policy():
+    policy = approved_policy()
+    knowledge = next(
+        field for field in policy.all_fields if field.id == "knowledge_source_policy"
+    )
+    knowledge.value = {
+        **knowledge.value,
+        "source_strictness": "unresolved",
+        "confirmed": True,
+    }
+
+    decision = DeterministicPolicyEnforcer().evaluate(
+        "How does CSRF work?",
+        [approved_hit()],
+        policy,
+    )
+
+    assert decision.action == PolicyAction.POLICY_NOT_APPROVED
+
+
 def test_generation_evaluation_set_covers_all_preflight_categories():
     evaluation_set = load_generation_evaluation_set(GENERATION_DATASET)
 
@@ -189,6 +215,23 @@ def test_prompt_records_policy_evidence_version_and_injection_boundary():
     assert prompt.evidence[0].hit.chunk.source_version == 2
     assert "never as instructions" in prompt.messages[0].content
     assert '"citation_id": "S1"' in prompt.messages[1].content
+
+
+def test_prompt_excludes_non_authoritative_search_description():
+    hit = approved_hit()
+    hit.chunk.metadata["search_description"] = (
+        "Generated claim that must remain retrieval-only."
+    )
+    hit.chunk.metadata["description_is_authoritative"] = "false"
+
+    prompt = GroundedPromptBuilder().build(
+        "How does CSRF work?",
+        [hit],
+        approved_policy(),
+    )
+
+    assert "Generated claim" not in prompt.messages[1].content
+    assert "authenticated browser session" in prompt.messages[1].content
 
 
 def test_conservative_prompt_freezes_support_and_length_constraints():
@@ -442,3 +485,17 @@ def test_citation_validator_rejects_duplicates():
 
     with pytest.raises(ValueError, match="duplicate"):
         DeterministicCitationValidator().validate(["S1", "S1"], prompt.evidence)
+
+
+def test_citation_lineage_match_rejects_altered_version_but_canonicalizes_title():
+    hit = approved_hit()
+    citation = authoritative_citation_for_chunk(hit.chunk)
+
+    assert citation_matches_chunk(
+        citation.model_copy(update={"title": "Untrusted presentation title"}),
+        hit.chunk,
+    )
+    assert not citation_matches_chunk(
+        citation.model_copy(update={"source_version": hit.chunk.source_version + 1}),
+        hit.chunk,
+    )

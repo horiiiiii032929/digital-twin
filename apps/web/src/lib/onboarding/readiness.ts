@@ -71,7 +71,7 @@ export function getReleaseReadiness(
     session?.preview_cases.filter((preview) => preview.decision === "accepted")
       .length ?? 0
   const pendingPreviews =
-    session?.preview_cases.filter((preview) => preview.decision !== "accepted")
+    session?.preview_cases.filter((preview) => preview.decision === "pending")
       .length ?? 0
   const checklistBlockers =
     session?.approval_checklist.filter(
@@ -79,7 +79,10 @@ export function getReleaseReadiness(
     ).length ?? 0
 
   return {
-    status: session?.policy?.release_status ?? "draft",
+    status:
+      blockers.size > 0 && session?.policy?.release_status === "approved"
+        ? "blocked"
+        : (session?.policy?.release_status ?? "draft"),
     blockers: [...blockers],
     approvedSources,
     policyBlockers,

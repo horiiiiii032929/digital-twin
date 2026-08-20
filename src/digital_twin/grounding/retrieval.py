@@ -22,10 +22,21 @@ class InvalidRetrievalLimitError(RetrievalError):
     pass
 
 
+class _ZeroMagnitudeEmbeddingError(ValueError):
+    pass
+
+
 def lexical_tokens(value: str) -> list[str]:
     """Return deterministic, provider-independent lowercase lexical tokens."""
 
     return _TOKEN_PATTERN.findall(value.lower())
+
+
+def retrieval_text(chunk: DocumentChunk) -> str:
+    """Combine citable text with explicitly non-authoritative search metadata."""
+
+    description = chunk.metadata.get("search_description", "").strip()
+    return f"{chunk.text}\n\n{description}" if description else chunk.text
 
 
 class TermOverlapRetriever:
@@ -39,7 +50,8 @@ class TermOverlapRetriever:
     ) -> None:
         self.chunks = _eligible_chunks(chunks, active_source_versions)
         self._terms = {
-            chunk.id: set(lexical_tokens(chunk.text)) for chunk in self.chunks
+            chunk.id: set(lexical_tokens(retrieval_text(chunk)))
+            for chunk in self.chunks
         }
 
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
@@ -68,11 +80,11 @@ class BM25Retriever:
         minimum_score: float = 0.0,
         active_source_versions: Mapping[str, int] | None = None,
     ) -> None:
-        if k1 <= 0:
+        if not math.isfinite(k1) or k1 <= 0:
             raise ValueError("k1 must be positive")
-        if not 0 <= b <= 1:
+        if not math.isfinite(b) or not 0 <= b <= 1:
             raise ValueError("b must be between 0 and 1")
-        if minimum_score < 0:
+        if not math.isfinite(minimum_score) or minimum_score < 0:
             raise ValueError("minimum_score cannot be negative")
 
         self.k1 = k1
@@ -80,7 +92,8 @@ class BM25Retriever:
         self.minimum_score = minimum_score
         self.chunks = _eligible_chunks(chunks, active_source_versions)
         self._term_frequencies = {
-            chunk.id: Counter(lexical_tokens(chunk.text)) for chunk in self.chunks
+            chunk.id: Counter(lexical_tokens(retrieval_text(chunk)))
+            for chunk in self.chunks
         }
         self._document_lengths = {
             chunk.id: sum(self._term_frequencies[chunk.id].values())
@@ -156,18 +169,30 @@ class DenseRetriever:
         minimum_similarity: float = -1.0,
         active_source_versions: Mapping[str, int] | None = None,
     ) -> None:
-        if not -1 <= minimum_similarity <= 1:
+        if not math.isfinite(minimum_similarity) or not -1 <= minimum_similarity <= 1:
             raise ValueError("minimum_similarity must be between -1 and 1")
         self.chunks = _eligible_chunks(chunks, active_source_versions)
         self.embedder = embedder
         self.minimum_similarity = minimum_similarity
-        vectors = embedder.embed_documents([chunk.text for chunk in self.chunks])
+        vectors = (
+            embedder.embed_documents([retrieval_text(chunk) for chunk in self.chunks])
+            if self.chunks
+            else []
+        )
         if len(vectors) != len(self.chunks):
             raise ValueError("embedder returned the wrong number of document vectors")
-        self._vectors = {
-            chunk.id: _normalized_vector(vector)
-            for chunk, vector in zip(self.chunks, vectors, strict=True)
-        }
+        normalized_vectors = [_normalized_vector(vector) for vector in vectors]
+        dimensions = {len(vector) for vector in normalized_vectors}
+        if len(dimensions) > 1:
+            raise ValueError("embedder returned inconsistent document dimensions")
+        self._dimension = next(iter(dimensions), None)
+        self._vectors = dict(
+            zip(
+                (chunk.id for chunk in self.chunks),
+                normalized_vectors,
+                strict=True,
+            )
+        )
 
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         _validate_limit(limit)
@@ -176,9 +201,12 @@ class DenseRetriever:
         if not self.chunks:
             return []
         raw_query_vector = self.embedder.embed_query(query)
-        if not raw_query_vector or not any(float(value) for value in raw_query_vector):
+        try:
+            query_vector = _normalized_vector(raw_query_vector)
+        except _ZeroMagnitudeEmbeddingError:
             return []
-        query_vector = _normalized_vector(raw_query_vector)
+        if self._dimension is not None and len(query_vector) != self._dimension:
+            raise ValueError("query embedding dimension does not match the index")
         scored: list[tuple[float, DocumentChunk]] = []
         for chunk in self.chunks:
             similarity = sum(
@@ -207,9 +235,9 @@ class ReciprocalRankFusionRetriever:
     ) -> None:
         if len(retrievers) < 2:
             raise ValueError("reciprocal rank fusion requires at least two retrievers")
-        if rank_constant < 1:
+        if isinstance(rank_constant, bool) or rank_constant < 1:
             raise ValueError("rank_constant must be at least 1")
-        if candidate_limit < 1:
+        if isinstance(candidate_limit, bool) or candidate_limit < 1:
             raise ValueError("candidate_limit must be at least 1")
         self.retrievers = list(retrievers)
         self.rank_constant = rank_constant
@@ -221,8 +249,18 @@ class ReciprocalRankFusionRetriever:
         chunks: dict[str, DocumentChunk] = {}
         for retriever in self.retrievers:
             hits = retriever.retrieve(query, limit=max(limit, self.candidate_limit))
+            identifiers = [hit.chunk.id for hit in hits]
+            if len(identifiers) != len(set(identifiers)):
+                raise ValueError(
+                    "a fused retriever returned duplicate chunk identifiers"
+                )
             for rank, hit in enumerate(hits, start=1):
                 identifier = hit.chunk.id
+                existing = chunks.get(identifier)
+                if existing is not None and existing != hit.chunk:
+                    raise ValueError(
+                        "fused retrievers disagreed on authoritative chunk content"
+                    )
                 chunks[identifier] = hit.chunk
                 fused_scores[identifier] = fused_scores.get(identifier, 0.0) + 1 / (
                     self.rank_constant + rank
@@ -250,7 +288,10 @@ class RelevanceThresholdRetriever:
         minimum_relevance_score: float,
         candidate_limit: int = 100,
     ) -> None:
-        if not 0 <= minimum_relevance_score <= 1:
+        if (
+            not math.isfinite(minimum_relevance_score)
+            or not 0 <= minimum_relevance_score <= 1
+        ):
             raise ValueError("minimum_relevance_score must be between 0 and 1")
         if candidate_limit < 1:
             raise ValueError("candidate_limit must be at least 1")
@@ -265,19 +306,24 @@ class RelevanceThresholdRetriever:
             limit=max(limit, self.candidate_limit),
         )
         return [
-            hit
-            for hit in hits
-            if hit.relevance_score >= self.minimum_relevance_score
+            hit for hit in hits if hit.relevance_score >= self.minimum_relevance_score
         ][:limit]
 
 
 def _normalized_vector(vector: Sequence[float]) -> list[float]:
-    values = [float(value) for value in vector]
+    try:
+        values = [float(value) for value in vector]
+    except (TypeError, ValueError) as error:
+        raise ValueError("embedding vectors must be numeric") from error
     if not values:
         raise ValueError("embedding vectors cannot be empty")
+    if any(not math.isfinite(value) for value in values):
+        raise ValueError("embedding vectors must contain only finite values")
     magnitude = math.sqrt(sum(value * value for value in values))
     if magnitude == 0:
-        raise ValueError("embedding vectors cannot have zero magnitude")
+        raise _ZeroMagnitudeEmbeddingError(
+            "embedding vectors cannot have zero magnitude"
+        )
     return [value / magnitude for value in values]
 
 
@@ -308,7 +354,7 @@ def _eligible_chunks(
 
 
 def _validate_limit(limit: int) -> None:
-    if limit < 1:
+    if isinstance(limit, bool) or limit < 1:
         raise InvalidRetrievalLimitError("retrieval limit must be at least 1")
 
 
@@ -318,6 +364,17 @@ def _ranked_hits(
     limit: int,
     raw_scores: list[tuple[float, DocumentChunk]] | None = None,
 ) -> list[RetrievalHit]:
+    if any(
+        not math.isfinite(score) or not 0 <= score <= 1
+        for score, _ in normalized_scores
+    ):
+        raise ValueError(
+            "normalized retrieval scores must be finite and between 0 and 1"
+        )
+    if raw_scores is not None and any(
+        not math.isfinite(score) or score < 0 for score, _ in raw_scores
+    ):
+        raise ValueError("raw retrieval scores must be finite and non-negative")
     raw_by_chunk = (
         {chunk.id: score for score, chunk in raw_scores}
         if raw_scores is not None

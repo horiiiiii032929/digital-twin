@@ -1,5 +1,6 @@
 """Swappable, inspectable gates between retrieval and generation."""
 
+import math
 import time
 from collections.abc import Sequence
 
@@ -49,7 +50,7 @@ _STOP_WORDS = {
 
 class EvidenceSufficiencyDecision(BaseModel):
     sufficient: bool
-    score: float = Field(ge=0, le=1)
+    score: float = Field(ge=0, le=1, allow_inf_nan=False)
     reason: str = Field(min_length=1)
     features: dict[str, float | int | bool] = Field(default_factory=dict)
 
@@ -59,7 +60,7 @@ class EvidenceSufficiencyCaseResult(BaseModel):
     category: RetrievalCaseCategory
     expected_answerable: bool
     predicted_answerable: bool
-    score: float = Field(ge=0, le=1)
+    score: float = Field(ge=0, le=1, allow_inf_nan=False)
     reason: str
     features: dict[str, float | int | bool]
 
@@ -111,7 +112,11 @@ class MinimumRawScoreEvidenceGate:
     implementation_id = "minimum-raw-score-evidence-gate"
 
     def __init__(self, minimum_raw_score: float) -> None:
-        if minimum_raw_score < 0:
+        if (
+            isinstance(minimum_raw_score, bool)
+            or not math.isfinite(minimum_raw_score)
+            or minimum_raw_score < 0
+        ):
             raise ValueError("minimum_raw_score cannot be negative")
         self.minimum_raw_score = minimum_raw_score
 
@@ -157,11 +162,15 @@ class LexicalCoverageEvidenceGate:
         minimum_matching_terms: int,
         evidence_limit: int = 3,
     ) -> None:
-        if not 0 <= minimum_query_coverage <= 1:
+        if (
+            isinstance(minimum_query_coverage, bool)
+            or not math.isfinite(minimum_query_coverage)
+            or not 0 <= minimum_query_coverage <= 1
+        ):
             raise ValueError("minimum_query_coverage must be between 0 and 1")
-        if minimum_matching_terms < 1:
+        if isinstance(minimum_matching_terms, bool) or minimum_matching_terms < 1:
             raise ValueError("minimum_matching_terms must be at least 1")
-        if evidence_limit < 1:
+        if isinstance(evidence_limit, bool) or evidence_limit < 1:
             raise ValueError("evidence_limit must be at least 1")
         self.minimum_query_coverage = minimum_query_coverage
         self.minimum_matching_terms = minimum_matching_terms
@@ -219,10 +228,16 @@ class SecondaryRetrieverAgreementGate:
         secondary_limit: int = 5,
         require_source_overlap: bool = True,
     ) -> None:
-        if not 0 <= minimum_relevance_score <= 1:
+        if (
+            isinstance(minimum_relevance_score, bool)
+            or not math.isfinite(minimum_relevance_score)
+            or not 0 <= minimum_relevance_score <= 1
+        ):
             raise ValueError("minimum_relevance_score must be between 0 and 1")
-        if secondary_limit < 1:
+        if isinstance(secondary_limit, bool) or secondary_limit < 1:
             raise ValueError("secondary_limit must be at least 1")
+        if not isinstance(require_source_overlap, bool):
+            raise ValueError("require_source_overlap must be a boolean")
         self.secondary_retriever = secondary_retriever
         self.minimum_relevance_score = minimum_relevance_score
         self.secondary_limit = secondary_limit
@@ -288,20 +303,41 @@ class EvidenceGatedRetriever:
         *,
         candidate_limit: int = 20,
     ) -> None:
-        if candidate_limit < 1:
+        if isinstance(candidate_limit, bool) or candidate_limit < 1:
             raise ValueError("candidate_limit must be at least 1")
         self.retriever = retriever
         self.gate = gate
         self.candidate_limit = candidate_limit
 
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
-        if limit < 1:
+        if isinstance(limit, bool) or limit < 1:
             raise ValueError("retrieval limit must be at least 1")
         hits = self.retriever.retrieve(
             query,
             limit=max(limit, self.candidate_limit),
         )
         decision = self.gate.assess(query, hits)
+        return list(hits[:limit]) if decision.sufficient else []
+
+
+class _CapturingEvidenceGatedRetriever(EvidenceGatedRetriever):
+    """Capture the exact gate decision made during one evaluation retrieval."""
+
+    def __init__(self, retriever, gate, *, candidate_limit: int) -> None:
+        super().__init__(retriever, gate, candidate_limit=candidate_limit)
+        self.captures: list[tuple[EvidenceSufficiencyDecision, float]] = []
+
+    def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
+        if isinstance(limit, bool) or limit < 1:
+            raise ValueError("retrieval limit must be at least 1")
+        hits = self.retriever.retrieve(
+            query,
+            limit=max(limit, self.candidate_limit),
+        )
+        started = time.perf_counter()
+        decision = self.gate.assess(query, hits)
+        latency_ms = (time.perf_counter() - started) * 1000
+        self.captures.append((decision, latency_ms))
         return list(hits[:limit]) if decision.sufficient else []
 
 
@@ -314,7 +350,7 @@ def evaluate_evidence_sufficiency(
     *,
     candidate_limit: int = 20,
 ) -> EvidenceSufficiencyEvaluationSummary:
-    gated = EvidenceGatedRetriever(
+    gated = _CapturingEvidenceGatedRetriever(
         retriever,
         gate,
         candidate_limit=candidate_limit,
@@ -325,19 +361,21 @@ def evaluate_evidence_sufficiency(
         chunks,
         evaluation_set,
     )
+    if len(gated.captures) != len(evaluation_set.cases):
+        raise RuntimeError("evidence evaluation did not capture one decision per case")
     decisions: list[EvidenceSufficiencyCaseResult] = []
     gate_latencies: list[float] = []
-    for case in evaluation_set.cases:
-        hits = retriever.retrieve(case.query, limit=candidate_limit)
-        started = time.perf_counter()
-        decision = gate.assess(case.query, hits)
-        gate_latencies.append((time.perf_counter() - started) * 1000)
+    for case, (decision, latency_ms) in zip(
+        evaluation_set.cases,
+        gated.captures,
+        strict=True,
+    ):
+        gate_latencies.append(latency_ms)
         decisions.append(
             EvidenceSufficiencyCaseResult(
                 case_id=case.id,
                 category=case.category,
-                expected_answerable=case.category
-                != RetrievalCaseCategory.NO_EVIDENCE,
+                expected_answerable=case.category != RetrievalCaseCategory.NO_EVIDENCE,
                 predicted_answerable=decision.sufficient,
                 score=decision.score,
                 reason=decision.reason,
@@ -350,14 +388,10 @@ def evaluate_evidence_sufficiency(
         decision for decision in decisions if not decision.expected_answerable
     ]
     accepted_ids = {
-        decision.case_id
-        for decision in answerable
-        if decision.predicted_answerable
+        decision.case_id for decision in answerable if decision.predicted_answerable
     }
     accepted_retrieval = [
-        result
-        for result in retrieval_summary.cases
-        if result.case_id in accepted_ids
+        result for result in retrieval_summary.cases if result.case_id in accepted_ids
     ]
     answerable_recall = _ratio(
         sum(decision.predicted_answerable for decision in answerable),

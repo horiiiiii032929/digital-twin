@@ -1,4 +1,4 @@
-import { request } from "@/lib/api/client"
+import { pathSegment, request } from "@/lib/api/client"
 import type {
   FieldStatus,
   OnboardingSession,
@@ -22,12 +22,20 @@ export function createSupervisorDemoSession(): Promise<OnboardingSession> {
   )
 }
 
+export function getOnboardingSession(
+  sessionId: string,
+): Promise<OnboardingSession> {
+  return request<OnboardingSession>(
+    `/api/onboarding/sessions/${pathSegment(sessionId)}`,
+  )
+}
+
 export function submitOnboardingMessage(
   sessionId: string,
   content: string,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/messages`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/messages`,
     {
       method: "POST",
       body: JSON.stringify({ content }),
@@ -42,7 +50,7 @@ export function updatePolicyField(
   status: FieldStatus,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/policy-fields/${fieldId}`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/policy-fields/${pathSegment(fieldId)}`,
     {
       method: "PATCH",
       body: JSON.stringify({ value, status }),
@@ -64,7 +72,7 @@ export function addSourceInventoryItem(
   },
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/source-inventory`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/source-inventory`,
     {
       method: "POST",
       body: JSON.stringify(item),
@@ -90,7 +98,7 @@ export function updateSourceInventoryItem(
   >,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/source-inventory/${sourceId}`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/source-inventory/${pathSegment(sourceId)}`,
     {
       method: "PATCH",
       body: JSON.stringify(updates),
@@ -104,7 +112,7 @@ export function updateApprovalChecklistItem(
   checked: boolean,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/approval-checklist/${itemId}`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/approval-checklist/${pathSegment(itemId)}`,
     {
       method: "PATCH",
       body: JSON.stringify({ checked }),
@@ -119,7 +127,7 @@ export function setPreviewDecision(
   reason?: string,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/preview-cases/${previewCaseId}/decision`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/preview-cases/${pathSegment(previewCaseId)}/decision`,
     {
       method: "PATCH",
       body: JSON.stringify({ decision, reason }),
@@ -135,7 +143,7 @@ export function addCustomPreviewCase(
   },
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/preview-cases`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/preview-cases`,
     {
       method: "POST",
       body: JSON.stringify(preview),
@@ -147,7 +155,7 @@ export function confirmRevisionProposal(
   sessionId: string,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/revision-proposal/confirm`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/revision-proposal/confirm`,
     {
       method: "POST",
     },
@@ -158,7 +166,7 @@ export function discardRevisionProposal(
   sessionId: string,
 ): Promise<OnboardingSession> {
   return request<OnboardingSession>(
-    `/api/onboarding/sessions/${sessionId}/revision-proposal/discard`,
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/revision-proposal/discard`,
     {
       method: "POST",
     },

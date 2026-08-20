@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 from services.embeddings import Qwen3TextEmbedder
 from services.reranking import Qwen3Reranker
@@ -229,6 +230,10 @@ def main() -> None:
     )
     parser.add_argument("--confirm-heldout-once", action="store_true")
     args = parser.parse_args()
+    if args.phase == "heldout":
+        require_pre_evaluation_operation_allowed("heldout_execution")
+    else:
+        require_pre_evaluation_operation_allowed("method_evaluation_execution")
     if args.phase == "heldout" and not args.confirm_heldout_once:
         raise SystemExit("heldout requires --confirm-heldout-once")
 

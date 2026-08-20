@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import math
 import os
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -66,9 +68,7 @@ class AppSettings:
             secure_cookies=_boolean(
                 "APP_SECURE_COOKIES", default=mode == RuntimeMode.STAGING
             ),
-            max_upload_bytes=_positive_int(
-                "APP_MAX_UPLOAD_BYTES", 50 * 1024 * 1024
-            ),
+            max_upload_bytes=_positive_int("APP_MAX_UPLOAD_BYTES", 50 * 1024 * 1024),
             max_object_store_bytes=_positive_int(
                 "APP_MAX_OBJECT_STORE_BYTES", 5 * 1024 * 1024 * 1024
             ),
@@ -85,9 +85,7 @@ class AppSettings:
             provider_max_calls_per_process=_positive_int(
                 "APP_PROVIDER_MAX_CALLS_PER_PROCESS", 1_000
             ),
-            provider_cost_cap_usd=_positive_float(
-                "APP_PROVIDER_COST_CAP_USD", 5.0
-            ),
+            provider_cost_cap_usd=_positive_float("APP_PROVIDER_COST_CAP_USD", 5.0),
         )
         settings.validate()
         return settings
@@ -113,21 +111,65 @@ class AppSettings:
         return self.data_root / "derived/course-sources"
 
     def validate(self) -> None:
-        if not self.session_cookie_name:
+        if (
+            not self.session_cookie_name
+            or self.session_cookie_name.strip() != self.session_cookie_name
+            or any(character in self.session_cookie_name for character in ";,\r\n\t ")
+        ):
             raise ValueError("APP_SESSION_COOKIE_NAME cannot be empty")
         if not self.allowed_origins:
             raise ValueError("APP_ALLOWED_ORIGINS requires at least one origin")
-        if any("*" in origin for origin in self.allowed_origins):
-            raise ValueError("wildcard CORS origins are not permitted")
+        if len(self.allowed_origins) != len(set(self.allowed_origins)):
+            raise ValueError("duplicate CORS origins are not permitted")
+        for origin in self.allowed_origins:
+            parsed = urlsplit(origin)
+            if (
+                "*" in origin
+                or parsed.scheme not in {"http", "https"}
+                or not parsed.hostname
+                or parsed.username is not None
+                or parsed.password is not None
+                or parsed.path
+                or parsed.query
+                or parsed.fragment
+            ):
+                raise ValueError("CORS origins must be plain HTTP(S) origins")
+        integer_limits = {
+            "APP_SESSION_TTL_SECONDS": self.session_ttl_seconds,
+            "APP_MAX_UPLOAD_BYTES": self.max_upload_bytes,
+            "APP_MAX_OBJECT_STORE_BYTES": self.max_object_store_bytes,
+            "APP_LOGIN_ATTEMPTS_PER_MINUTE": self.login_attempts_per_minute,
+            "APP_AUTHENTICATED_REQUESTS_PER_MINUTE": (
+                self.authenticated_requests_per_minute
+            ),
+            "APP_PROVIDER_MAX_CALLS_PER_PROCESS": (self.provider_max_calls_per_process),
+        }
+        if any(
+            isinstance(value, bool) or not isinstance(value, int) or value <= 0
+            for value in integer_limits.values()
+        ):
+            raise ValueError("runtime integer limits must be positive integers")
+        if (
+            isinstance(self.provider_cost_cap_usd, bool)
+            or not math.isfinite(self.provider_cost_cap_usd)
+            or self.provider_cost_cap_usd <= 0
+        ):
+            raise ValueError("APP_PROVIDER_COST_CAP_USD must be positive")
         if self.mode == RuntimeMode.STAGING:
             if not self.secure_cookies:
                 raise ValueError("staging requires APP_SECURE_COOKIES=true")
-            if any(not origin.startswith("https://") for origin in self.allowed_origins):
+            if any(
+                not origin.startswith("https://") for origin in self.allowed_origins
+            ):
                 raise ValueError("staging origins must use https://")
             if str(self.database_path) == ":memory:":
                 raise ValueError("staging requires a durable database path")
             if not self.database_path.is_absolute() or not self.data_root.is_absolute():
                 raise ValueError("staging database and data paths must be absolute")
+            if self.max_upload_bytes > 64 * 1024 * 1024:
+                raise ValueError(
+                    "staging APP_MAX_UPLOAD_BYTES cannot exceed the proxy 64 MiB cap"
+                )
         if (
             self.generator_mode == GeneratorMode.DEEPSEEK_V4_FLASH
             and not os.getenv("DEEPSEEK_API_KEY", "").strip()
@@ -140,7 +182,7 @@ class AppSettings:
 def _positive_int(name: str, default: int) -> int:
     raw = os.getenv(name)
     value = default if raw is None else int(raw)
-    if value <= 0:
+    if not math.isfinite(value) or value <= 0:
         raise ValueError(f"{name} must be positive")
     return value
 
@@ -160,6 +202,6 @@ def _boolean(name: str, *, default: bool) -> bool:
 def _positive_float(name: str, default: float) -> float:
     raw = os.getenv(name)
     value = default if raw is None else float(raw)
-    if value <= 0:
+    if not math.isfinite(value) or value <= 0:
         raise ValueError(f"{name} must be positive")
     return value
