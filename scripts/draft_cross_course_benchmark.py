@@ -30,6 +30,7 @@ from src.digital_twin.grounding import (
 )
 from src.digital_twin.grounding.models import DocumentChunk
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 from src.digital_twin.tutor_policy import SourceLabel
 
 
@@ -704,6 +705,7 @@ def write_review(path: Path, dataset: dict[str, Any]) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     started = time.monotonic()
     try:
         _, records = load_corpus(args.source_root)

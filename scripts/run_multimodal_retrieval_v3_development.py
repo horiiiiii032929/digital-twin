@@ -35,6 +35,7 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     reciprocal_rank_fuse_regions,
     unsafe_retrieval_instruction,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 SEALED_ROOT = ROOT / "data/processed/multimodal_retrieval_v1/sealed_v1"
@@ -317,6 +318,7 @@ def evaluate_candidate(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("local_model_evaluation")
     try:
         os.environ["HF_HUB_OFFLINE"] = "1"
         os.environ["TRANSFORMERS_OFFLINE"] = "1"

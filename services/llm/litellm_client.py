@@ -1,5 +1,6 @@
 from collections.abc import Awaitable, Callable
 from copy import deepcopy
+import math
 from typing import Any
 
 import litellm
@@ -13,8 +14,9 @@ from src.digital_twin.llm import (
     LlmResponse,
     LlmTimeoutError,
     LlmUnavailableError,
+    validate_llm_task,
 )
-from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.model_policy import require_registered_current_model
 
 
 _Completion = Callable[..., Awaitable[Any]]
@@ -33,15 +35,19 @@ class LiteLlmClient:
         temperature: float | None = 0,
         response_format: dict[str, str] | None = None,
         provider_options: dict[str, Any] | None = None,
+        expected_provider_model: str | None = None,
+        expected_provider_revision: str | None = None,
         completion: _Completion = litellm.acompletion,
         cost_calculator: _CostCalculator = litellm.completion_cost,
     ) -> None:
-        model = require_model_allowed(model)
-        if timeout_seconds <= 0:
+        model = require_registered_current_model(model)
+        if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
-        if max_output_tokens < 1:
+        if isinstance(max_output_tokens, bool) or max_output_tokens < 1:
             raise ValueError("max_output_tokens must be positive")
-        if temperature is not None and not 0 <= temperature <= 2:
+        if temperature is not None and (
+            not math.isfinite(temperature) or not 0 <= temperature <= 2
+        ):
             raise ValueError("temperature must be between 0 and 2")
         self.model = model
         self.timeout_seconds = timeout_seconds
@@ -49,6 +55,10 @@ class LiteLlmClient:
         self.temperature = temperature
         self.response_format = response_format
         self.provider_options = deepcopy(provider_options or {})
+        self.expected_provider_model = require_registered_current_model(
+            expected_provider_model or model
+        )
+        self.expected_provider_revision = _optional_string(expected_provider_revision)
         forbidden_options = {
             "api_key",
             "messages",
@@ -56,7 +66,12 @@ class LiteLlmClient:
             "model",
             "timeout",
             "max_tokens",
+            "max_completion_tokens",
             "response_format",
+            "temperature",
+            "stream",
+            "tools",
+            "tool_choice",
         }
         overlap = forbidden_options.intersection(self.provider_options)
         if overlap:
@@ -68,12 +83,13 @@ class LiteLlmClient:
         self.cost_calculator = cost_calculator
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
+        task = validate_llm_task(task)
+        if not messages:
+            raise ValueError("at least one LLM message is required")
         try:
             completion_arguments = {
                 "model": self.model,
-                "messages": [
-                    message.model_dump(mode="json") for message in messages
-                ],
+                "messages": [message.model_dump(mode="json") for message in messages],
                 "timeout": self.timeout_seconds,
                 "max_tokens": self.max_output_tokens,
                 "metadata": {"task": task},
@@ -108,11 +124,15 @@ class LiteLlmClient:
 
         try:
             usage = _field(response, "usage", {})
-            input_tokens = int(_field(usage, "prompt_tokens", 0) or 0)
-            output_tokens = int(_field(usage, "completion_tokens", 0) or 0)
-            total_tokens = int(
-                _field(usage, "total_tokens", input_tokens + output_tokens) or 0
+            input_tokens = _usage_count(usage, "prompt_tokens", default=0)
+            output_tokens = _usage_count(usage, "completion_tokens", default=0)
+            total_tokens = _usage_count(
+                usage,
+                "total_tokens",
+                default=input_tokens + output_tokens,
             )
+            if total_tokens < input_tokens + output_tokens:
+                raise ValueError("total token count is inconsistent")
         except (TypeError, ValueError) as error:
             raise LlmMalformedResponseError() from error
         try:
@@ -120,12 +140,20 @@ class LiteLlmClient:
         except Exception:
             cost = None
         try:
+            provider_model = str(_field(response, "model", self.model) or self.model)
+            provider_revision = _optional_string(
+                _field(response, "system_fingerprint", None)
+            )
+            _validate_response_identity(
+                provider_model,
+                provider_revision,
+                expected_model=self.expected_provider_model,
+                expected_revision=self.expected_provider_revision,
+            )
             return LlmResponse(
                 content=content,
-                provider_model=str(_field(response, "model", self.model) or self.model),
-                provider_revision=_optional_string(
-                    _field(response, "system_fingerprint", None)
-                ),
+                provider_model=provider_model,
+                provider_revision=provider_revision,
                 usage=GenerationUsage(
                     input_tokens=input_tokens,
                     output_tokens=output_tokens,
@@ -139,7 +167,7 @@ class LiteLlmClient:
 
 def _content(response: Any) -> Any:
     choices = _field(response, "choices", [])
-    if not choices:
+    if not isinstance(choices, list) or len(choices) != 1:
         return None
     message = _field(choices[0], "message", {})
     return _field(message, "content", None)
@@ -156,3 +184,40 @@ def _optional_string(value: Any) -> str | None:
         return None
     rendered = str(value).strip()
     return rendered or None
+
+
+def _usage_count(value: Any, name: str, *, default: int) -> int:
+    raw = _field(value, name, default)
+    if raw is None:
+        raw = default
+    if isinstance(raw, bool) or not isinstance(raw, int) or raw < 0:
+        raise ValueError(f"{name} must be a non-negative integer")
+    return raw
+
+
+def _validate_response_identity(
+    provider_model: str,
+    provider_revision: str | None,
+    *,
+    expected_model: str,
+    expected_revision: str | None,
+) -> None:
+    try:
+        require_registered_current_model(provider_model)
+    except ValueError as error:
+        raise LlmMalformedResponseError() from error
+    if _canonical_model_id(provider_model) != _canonical_model_id(expected_model):
+        raise LlmMalformedResponseError()
+    if expected_revision is not None and provider_revision != expected_revision:
+        raise LlmMalformedResponseError()
+
+
+def _canonical_model_id(model: str) -> str:
+    normalized = model.strip().casefold()
+    if normalized.startswith("openrouter/"):
+        normalized = normalized.removeprefix("openrouter/")
+    if normalized.startswith("ollama/"):
+        normalized = normalized.removeprefix("ollama/")
+    if normalized.startswith("deepseek/deepseek-"):
+        normalized = normalized.removeprefix("deepseek/")
+    return normalized

@@ -8,6 +8,7 @@ import {
   createOnboardingSession,
   createSupervisorDemoSession,
   discardRevisionProposal,
+  getOnboardingSession,
   setPreviewDecision,
   submitOnboardingMessage,
   updateApprovalChecklistItem,
@@ -18,6 +19,7 @@ import {
 
 const SESSION: OnboardingSession = {
   session_id: "session-1",
+  revision: 1,
   current_step: "source_permissions",
   answers: {},
   messages: [],
@@ -64,6 +66,16 @@ describe("onboarding API client", () => {
     )
   })
 
+  it("loads a resumable onboarding session with an encoded identifier", async () => {
+    const fetchMock = stubFetch(SESSION)
+
+    await expect(getOnboardingSession("session ?one")).resolves.toEqual(SESSION)
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/onboarding/sessions/session%20%3Fone",
+      expect.any(Object),
+    )
+  })
+
   it("preserves structured API error messages through the compatibility barrel", async () => {
     stubFetch(
       { detail: { message: "Complete the interview before editing policy fields." } },
@@ -87,6 +99,17 @@ describe("onboarding API client", () => {
         method: "POST",
         body: JSON.stringify({ content: "Use public slides only." }),
       }),
+    )
+  })
+
+  it("encodes dynamic onboarding identifiers", async () => {
+    const fetchMock = stubFetch(SESSION)
+
+    await updatePolicyField("session ?one", "field#one", "value", "resolved")
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/onboarding/sessions/session%20%3Fone/policy-fields/field%23one",
+      expect.objectContaining({ method: "PATCH" }),
     )
   })
 

@@ -36,7 +36,11 @@ def evaluate_cases(
         )
     if any(case["split"] != expected_split for case in cases):
         raise ValueError(f"qualification received a non-{expected_split} case")
-    if result_limit < 5:
+    if (
+        isinstance(result_limit, bool)
+        or not isinstance(result_limit, int)
+        or result_limit < 5
+    ):
         raise ValueError("result limit must be at least 5")
     expected_methods = {method.value for method in RetrievalMethod}
     if not runtimes:
@@ -44,6 +48,10 @@ def evaluate_cases(
     for course_id, methods in runtimes.items():
         if set(methods) != expected_methods:
             raise ValueError(f"{course_id} retrieval ladder is incomplete")
+
+    case_ids = [case["case_id"] for case in cases]
+    if len(case_ids) != len(set(case_ids)):
+        raise ValueError("qualification case IDs must be unique")
 
     for case in cases:
         for evidence in case["gold_evidence"]:
@@ -74,11 +82,21 @@ def evaluate_cases(
                 case["query"],
                 limit=result_limit,
             )
+            if len(hits) > result_limit:
+                raise ValueError("retriever returned more hits than requested")
             if synchronize:
                 synchronize()
             latency_ms = (time.perf_counter() - started) * 1000
             ranked_ids = [hit.chunk.id for hit in hits]
-            score = float(hits[0].raw_score or hits[0].relevance_score) if hits else 0.0
+            score = (
+                float(
+                    hits[0].raw_score
+                    if hits[0].raw_score is not None
+                    else hits[0].relevance_score
+                )
+                if hits
+                else 0.0
+            )
             row: dict[str, Any] = {
                 "case_id": case["case_id"],
                 "slice": case["slice"],

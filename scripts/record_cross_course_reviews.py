@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.draft_cross_course_benchmark import ROOT, write_review
 
 
@@ -37,6 +39,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset: dict[str, Any] = json.loads(
         args.dataset.read_text(encoding="utf-8")
     )

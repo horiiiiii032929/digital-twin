@@ -17,7 +17,9 @@ from src.digital_twin.evaluation import (
     evaluate_cases,
     load_provider_qualification_config,
     load_sealed_development,
+    score_ranking,
 )
+from src.digital_twin.evaluation.retrieval_qualification import development_thresholds
 from src.digital_twin.grounding import DocumentChunk, RetrievalHit
 
 
@@ -187,6 +189,42 @@ def test_course_scope_fails_closed_on_injected_chunk() -> None:
         retriever.retrieve("cache")
 
 
+def test_course_scope_fails_closed_on_spoofed_allowed_chunk_id() -> None:
+    allowed = chunk("allowed", "cache policy")
+    spoofed = allowed.model_copy(update={"document_id": "other-document"})
+
+    class SpoofingRetriever:
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [RetrievalHit(chunk=spoofed, relevance_score=1)]
+
+    retriever = CourseScopedRetriever("COURSE-A", SpoofingRetriever(), [allowed])
+
+    with pytest.raises(CourseIsolationViolation, match="unauthorized"):
+        retriever.retrieve("cache")
+
+
+def test_ranking_does_not_reward_duplicate_retrieval_ids() -> None:
+    metrics = score_ranking(["gold", "second"], ["gold", "gold", "second"])
+
+    assert metrics["ndcg_at_10"] < 1
+    assert metrics["complete_evidence_at_3"] is True
+
+
+def test_development_thresholds_require_finite_boundary_scores() -> None:
+    rows = [
+        {
+            "method": method,
+            "is_positive": False,
+            "decision_score": float("nan") if method == "M2" else 0.1,
+        }
+        for method in ("M0", "M1", "M2", "M3")
+    ]
+
+    with pytest.raises(ValueError, match="decision scores must be finite"):
+        development_thresholds(rows)
+
+
 def test_shared_ladder_is_course_scoped_and_complete() -> None:
     chunks_by_course = {
         "COURSE-A": [chunk("a-cache", "cache coherence")],
@@ -303,6 +341,42 @@ def test_generic_runner_supports_the_heldout_split_contract() -> None:
     assert len(rows) == 4
     assert assignments == {}
     assert all(row["case_id"] == "heldout-positive" for row in rows)
+
+
+def test_runner_preserves_an_explicit_zero_raw_decision_score() -> None:
+    target = chunk("gold", "cache coherence")
+
+    class ZeroRawRetriever:
+        def retrieve(self, query, *, limit=5):
+            del query, limit
+            return [RetrievalHit(chunk=target, relevance_score=0.8, raw_score=0)]
+
+    runtimes = {
+        "A": {
+            method: CourseScopedRetriever("A", ZeroRawRetriever(), [target])
+            for method in ("M0", "M1", "M2", "M3")
+        }
+    }
+    case = {
+        "case_id": "zero-score",
+        "split": "development",
+        "slice": "answerable",
+        "difficulty": "direct",
+        "target_course_id": "A",
+        "query": "What is cache coherence?",
+        "gold_evidence": [{"chunk_id": "gold"}],
+    }
+
+    rows, _ = evaluate_cases(
+        [case],
+        runtimes=runtimes,
+        chunk_course={"gold": "A"},
+        result_limit=5,
+        expected_split="development",
+        expected_count=1,
+    )
+
+    assert all(row["decision_score"] == 0 for row in rows)
 
 
 class _StaticRetriever:

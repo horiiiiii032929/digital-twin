@@ -45,7 +45,7 @@ def test_experimental_profile_covers_every_component_and_validates_evidence():
     assert summary["status"] == "passed"
     assert summary["component_status_counts"] == {
         "selected": 5,
-        "pending": 9,
+        "pending": 10,
         "disabled": 0,
     }
     assert summary["evaluated_components"] == ["retriever"]
@@ -194,3 +194,22 @@ def test_component_specific_factory_rejects_an_unregistered_selection():
 
     with pytest.raises(UnsupportedRetrieverSelectionError, match="unsupported"):
         build_selected_retriever(unsupported, [])
+
+
+def test_profile_rejects_nonfinite_configuration_and_identical_control():
+    with pytest.raises(ValidationError, match="must be finite"):
+        ImplementationRef(
+            implementation_id="candidate",
+            version="v1",
+            configuration={"threshold": float("nan")},
+        )
+
+    profile = load_release_profile(PROFILE_PATH)
+    payload = profile.model_dump(mode="json")
+    selected = next(
+        entry for entry in payload["components"] if entry["status"] == "selected"
+    )
+    selected["control"] = selected["implementation"]
+
+    with pytest.raises(ValidationError, match="implementation and control must differ"):
+        SystemReleaseProfile.model_validate(payload)

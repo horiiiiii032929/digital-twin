@@ -123,7 +123,10 @@ def _resolve_region_crop(root: Path, crop_ref: str | None) -> Path | None:
     if not filename or Path(filename).name != filename or not filename.endswith(".png"):
         return None
     resolved_root = root.resolve()
-    candidate = (resolved_root / filename).resolve()
+    lexical_candidate = resolved_root / filename
+    if lexical_candidate.is_symlink():
+        return None
+    candidate = lexical_candidate.resolve()
     if not candidate.is_relative_to(resolved_root) or not candidate.is_file():
         return None
     return candidate
@@ -143,12 +146,15 @@ def _http_error(error: StudentWorkflowError) -> HTTPException:
         "profile_mismatch",
         "citation_scope_violation",
         "request_id_conflict",
+        "turn_persistence_conflict",
     }
     status_code = (
         status.HTTP_404_NOT_FOUND
         if error.code in not_found
         else status.HTTP_409_CONFLICT
         if error.code in conflict
+        else status.HTTP_422_UNPROCESSABLE_CONTENT
+        if error.code == "invalid_message"
         else status.HTTP_403_FORBIDDEN
     )
     return HTTPException(

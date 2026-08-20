@@ -13,6 +13,7 @@ from typing import Any, Literal, Protocol
 from pydantic import BaseModel, Field, model_validator
 
 from src.digital_twin.grounding.models import DocumentChunk
+from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.grounding.protocols import Retriever
 
 
@@ -206,19 +207,30 @@ class CourseScopedRetriever:
     ) -> None:
         if not course_id.strip():
             raise ValueError("course ID is required")
-        identifiers = [chunk.id for chunk in allowed_chunks if chunk.retrieval_allowed]
+        all_identifiers = [chunk.id for chunk in allowed_chunks]
+        if len(all_identifiers) != len(set(all_identifiers)):
+            raise ValueError("course scope contains duplicate chunk IDs")
+        approved = [chunk for chunk in allowed_chunks if chunk.retrieval_allowed]
+        identifiers = [chunk.id for chunk in approved]
         if not identifiers:
             raise ValueError("course scope has no approved chunks")
-        if len(identifiers) != len(set(identifiers)):
-            raise ValueError("course scope contains duplicate chunk IDs")
         self.course_id = course_id
         self.retriever = retriever
         self.allowed_chunk_ids = frozenset(identifiers)
+        self._allowed_chunks = {chunk.id: chunk for chunk in approved}
 
-    def retrieve(self, query: str, *, limit: int = 5):
+    def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         hits = self.retriever.retrieve(query, limit=limit)
+        identifiers = [hit.chunk.id for hit in hits]
+        if len(identifiers) != len(set(identifiers)):
+            raise CourseIsolationViolation(
+                f"{self.course_id} retriever returned duplicate chunks"
+            )
         unauthorized = [
-            hit.chunk.id for hit in hits if hit.chunk.id not in self.allowed_chunk_ids
+            hit.chunk.id
+            for hit in hits
+            if hit.chunk.id not in self._allowed_chunks
+            or hit.chunk != self._allowed_chunks[hit.chunk.id]
         ]
         if unauthorized:
             raise CourseIsolationViolation(
@@ -234,7 +246,13 @@ def score_ranking(
     gold = set(gold_ids)
     if not gold:
         raise ValueError("positive case must contain gold evidence")
-    gains = [1 if identifier in gold else 0 for identifier in ranked_ids[:10]]
+    if len(gold) != len(gold_ids):
+        raise ValueError("gold evidence IDs must be unique")
+    seen: set[str] = set()
+    gains = []
+    for identifier in ranked_ids[:10]:
+        gains.append(1 if identifier in gold and identifier not in seen else 0)
+        seen.add(identifier)
     ideal = [1] * min(len(gold), 10)
 
     def dcg(values: list[int]) -> float:
@@ -368,17 +386,21 @@ def aggregate_rows(
 def development_thresholds(
     rows: list[dict[str, Any]],
 ) -> dict[str, float]:
-    return {
-        method.value: math.nextafter(
-            max(
-                row["decision_score"]
-                for row in rows
-                if row["method"] == method.value and not row["is_positive"]
-            ),
-            math.inf,
-        )
-        for method in RetrievalMethod
-    }
+    thresholds: dict[str, float] = {}
+    for method in RetrievalMethod:
+        scores = [
+            float(row["decision_score"])
+            for row in rows
+            if row["method"] == method.value and not row["is_positive"]
+        ]
+        if not scores:
+            raise ValueError(
+                f"{method.value} requires at least one boundary calibration case"
+            )
+        if any(not math.isfinite(score) for score in scores):
+            raise ValueError(f"{method.value} decision scores must be finite")
+        thresholds[method.value] = math.nextafter(max(scores), math.inf)
+    return thresholds
 
 
 def _mean(values: list[float]) -> float:

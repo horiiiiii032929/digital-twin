@@ -17,6 +17,8 @@ from typing import Any
 import pymupdf
 from PIL import Image, ImageDraw, ImageFont
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_ROOT = Path.home() / "Documents" / "academia_vault"
@@ -289,6 +291,7 @@ def write_json(path: Path, value: dict[str, Any]) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         inventory = load_json(args.inventory)
         diagnostics, failures = analyze_sources(inventory, args.source_root)

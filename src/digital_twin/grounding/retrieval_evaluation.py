@@ -48,6 +48,12 @@ class RetrievalEvaluationCase(BaseModel):
             raise ValueError("no-evidence cases cannot declare relevant chunks")
         if self.category != RetrievalCaseCategory.NO_EVIDENCE and not self.relevant:
             raise ValueError("evidence cases require at least one relevant chunk")
+        relationships = [
+            (reference.source_artifact_id, _normalized_text(reference.text_contains))
+            for reference in self.relevant
+        ]
+        if len(relationships) != len(set(relationships)):
+            raise ValueError("relevant chunk references must be unique")
         return self
 
 
@@ -85,7 +91,9 @@ class RetrievalEvaluationHit(BaseModel):
     document_id: str
     source_artifact_id: str
     source_version: int
+    source_checksum: str | None = None
     locator: str
+    retrieval_allowed: bool
     relevance_score: float
     raw_score: float | None = Field(default=None, ge=0)
 
@@ -138,7 +146,9 @@ def load_retrieval_evaluation_set(path: Path) -> RetrievalEvaluationSet:
 
 
 def load_retrieval_benchmark_corpus(path: Path) -> RetrievalBenchmarkCorpus:
-    return RetrievalBenchmarkCorpus.model_validate_json(path.read_text(encoding="utf-8"))
+    return RetrievalBenchmarkCorpus.model_validate_json(
+        path.read_text(encoding="utf-8")
+    )
 
 
 def evaluate_retriever(
@@ -343,7 +353,9 @@ def _serialize_hit(rank: int, hit: RetrievalHit) -> RetrievalEvaluationHit:
         document_id=chunk.document_id,
         source_artifact_id=chunk.source_artifact_id or chunk.document_id,
         source_version=chunk.source_version,
+        source_checksum=chunk.source_checksum,
         locator=chunk.locator or f"chunk {chunk.ordinal + 1}",
+        retrieval_allowed=chunk.retrieval_allowed,
         relevance_score=hit.relevance_score,
         raw_score=hit.raw_score,
     )
@@ -379,7 +391,17 @@ def _safety_violation_count(
     for result in results:
         for hit in result.hits:
             chunk = chunks_by_id.get(hit.chunk_id)
-            if chunk is None or not chunk.retrieval_allowed:
+            if (
+                chunk is None
+                or not hit.retrieval_allowed
+                or not chunk.retrieval_allowed
+                or hit.document_id != chunk.document_id
+                or hit.source_artifact_id
+                != (chunk.source_artifact_id or chunk.document_id)
+                or hit.source_version != chunk.source_version
+                or hit.source_checksum != chunk.source_checksum
+                or hit.locator != (chunk.locator or f"chunk {chunk.ordinal + 1}")
+            ):
                 violations += 1
                 continue
             source_id = chunk.source_artifact_id or chunk.document_id

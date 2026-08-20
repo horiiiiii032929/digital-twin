@@ -99,3 +99,26 @@ def test_applied_migration_checksum_change_fails_closed():
 
     with pytest.raises(RuntimeError, match="checksum"):
         apply_migrations(connection, (changed,))
+
+
+def test_explicit_empty_migration_set_does_not_apply_defaults():
+    connection = sqlite3.connect(":memory:")
+
+    assert apply_migrations(connection, ()) == 0
+    assert current_schema_version(connection) == 0
+    assert connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE name = 'accounts'"
+    ).fetchone() is None
+
+
+def test_database_with_newer_unknown_migration_fails_closed():
+    connection = sqlite3.connect(":memory:")
+    apply_migrations(connection, (DEFAULT_MIGRATIONS[0],))
+    connection.execute(
+        """INSERT INTO schema_migrations(version, name, checksum, applied_at)
+           VALUES (999, 'future', 'future-checksum', '2026-08-19T00:00:00+00:00')"""
+    )
+    connection.commit()
+
+    with pytest.raises(RuntimeError, match="unknown to this runtime: 999"):
+        apply_migrations(connection, DEFAULT_MIGRATIONS)

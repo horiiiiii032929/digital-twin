@@ -6,7 +6,10 @@ from uuid import uuid4
 from pydantic import ValidationError
 
 from src.digital_twin.evaluation import ComponentKind, load_release_profile
-from src.digital_twin.generation import DeterministicGroundedGenerator
+from src.digital_twin.generation import (
+    DeterministicGroundedGenerator,
+    citation_matches_chunk,
+)
 from src.digital_twin.grounding import FallbackRetriever, build_selected_retriever
 from src.digital_twin.grounding.models import (
     GenerationTrace,
@@ -14,7 +17,11 @@ from src.digital_twin.grounding.models import (
     RetrievalHit,
     TutorAnswer,
 )
-from src.digital_twin.grounding.protocols import TextEmbedder, TutorGenerator
+from src.digital_twin.grounding.protocols import (
+    EvidenceSufficiencyGate,
+    TextEmbedder,
+    TutorGenerator,
+)
 from src.digital_twin.student.models import (
     Account,
     AccountRole,
@@ -31,7 +38,7 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
     TutorTurn,
 )
-from src.digital_twin.student.repository import StudentRepository
+from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
 from src.digital_twin.tutor_policy import timestamp_now
 
 
@@ -50,6 +57,7 @@ class StudentTutoringService:
         profile_path: Path,
         embedder: TextEmbedder | None = None,
         generator: TutorGenerator | None = None,
+        evidence_gate: EvidenceSufficiencyGate | None = None,
     ) -> None:
         self.repository = repository
         profile = load_release_profile(profile_path)
@@ -62,6 +70,7 @@ class StudentTutoringService:
         )
         self.embedder = embedder
         self.generator = generator or DeterministicGroundedGenerator()
+        self.evidence_gate = evidence_gate
         self._retrievers: dict[str, object] = {}
 
     def list_courses(self, account_id: str) -> list[StudentCourse]:
@@ -124,6 +133,12 @@ class StudentTutoringService:
         content: str,
         client_request_id: str,
     ) -> TutorTurn:
+        content = content.strip()
+        client_request_id = client_request_id.strip()
+        if not content or not client_request_id:
+            raise StudentWorkflowError(
+                "invalid_message", "Message content and request ID are required."
+            )
         conversation = self._authorize_conversation(account_id, conversation_id)
         existing = self.repository.find_turn(conversation.id, client_request_id)
         if existing is not None:
@@ -216,28 +231,48 @@ class StudentTutoringService:
                 ),
             },
         )
-        self.repository.save_turn(
-            conversation,
-            student_message,
-            tutor_message,
-            citations,
-            [*retrieval_events, *generation_events, completed],
-        )
+        try:
+            self.repository.save_turn(
+                conversation,
+                student_message,
+                tutor_message,
+                citations,
+                [*retrieval_events, *generation_events, completed],
+            )
+        except DuplicateTurnError:
+            existing = self.repository.find_turn(conversation.id, client_request_id)
+            if existing is None:
+                raise StudentWorkflowError(
+                    "turn_persistence_conflict",
+                    "The concurrent request could not be resolved safely.",
+                )
+            stored_student, stored_tutor, stored_citations = existing
+            if stored_student.content != content:
+                self._deny(
+                    "request_id_conflict",
+                    "The request ID is already bound to a different student message.",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=conversation.release_id,
+                    conversation_id=conversation.id,
+                )
+            return TutorTurn(
+                student_message=stored_student,
+                tutor_message=stored_tutor,
+                citations=stored_citations,
+                duplicate=True,
+            )
         return TutorTurn(
             student_message=student_message,
             tutor_message=tutor_message,
             citations=citations,
         )
 
-    def list_citations(
-        self, account_id: str, message_id: str
-    ) -> list[Citation]:
+    def list_citations(self, account_id: str, message_id: str) -> list[Citation]:
         message = self.repository.get_message(message_id)
         if message is None or message.role != "tutor":
             raise StudentWorkflowError("message_not_found", "Message was not found.")
-        conversation = self._authorize_conversation(
-            account_id, message.conversation_id
-        )
+        conversation = self._authorize_conversation(account_id, message.conversation_id)
         citations = self.repository.list_citations(message.id)
         if any(
             citation.course_id != conversation.course_id
@@ -350,11 +385,13 @@ class StudentTutoringService:
             return [], []
         retriever = self._retrievers.get(release.id)
         if retriever is None:
-            active_versions = {
-                chunk.source_artifact_id: chunk.source_version
-                for chunk in release.chunks
-                if chunk.source_artifact_id is not None
-            }
+            active_versions: dict[str, int] = {}
+            for chunk in release.chunks:
+                source_id = chunk.source_artifact_id or chunk.document_id
+                active_versions[source_id] = max(
+                    chunk.source_version,
+                    active_versions.get(source_id, 0),
+                )
             retriever = build_selected_retriever(
                 self.retriever_selection,
                 release.chunks,
@@ -397,10 +434,7 @@ class StudentTutoringService:
                 },
             )
         )
-        if (
-            isinstance(retriever, FallbackRetriever)
-            and fallback_used
-        ):
+        if isinstance(retriever, FallbackRetriever) and fallback_used:
             events.append(
                 self._event(
                     "retrieval-fallback",
@@ -415,7 +449,63 @@ class StudentTutoringService:
                     },
                 )
             )
-        return hits, events
+        if self.evidence_gate is None:
+            events.append(
+                self._event(
+                    "evidence-sufficiency-blocked",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                    details={
+                        "implementation": "unselected",
+                        "candidate_hit_count": len(hits),
+                        "sufficient": False,
+                    },
+                )
+            )
+            return [], events
+        try:
+            decision = self.evidence_gate.assess(question, hits)
+        except (RuntimeError, ValueError, ValidationError) as error:
+            events.append(
+                self._event(
+                    "evidence-sufficiency-failure",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                    details={
+                        "implementation": getattr(
+                            self.evidence_gate,
+                            "implementation_id",
+                            "evidence-gate",
+                        ),
+                        "failure_type": type(error).__name__,
+                    },
+                )
+            )
+            return [], events
+        events.append(
+            self._event(
+                "evidence-sufficiency-assessed",
+                account_id=account_id,
+                course_id=conversation.course_id,
+                release_id=release.id,
+                conversation_id=conversation.id,
+                details={
+                    "implementation": getattr(
+                        self.evidence_gate,
+                        "implementation_id",
+                        "evidence-gate",
+                    ),
+                    "candidate_hit_count": len(hits),
+                    "sufficient": decision.sufficient,
+                    "score": decision.score,
+                },
+            )
+        )
+        return (hits if decision.sufficient else []), events
 
     async def _generate(
         self,
@@ -469,13 +559,19 @@ class StudentTutoringService:
             and not answer.citations
         ):
             return [], True
-        by_identity = {
-            (hit.chunk.document_id, hit.chunk.locator): hit.chunk for hit in hits
-        }
         citations: list[Citation] = []
         for source in answer.citations:
-            chunk = by_identity.get((source.source_id, source.locator))
-            if chunk is None or not chunk.retrieval_allowed:
+            matches = [
+                hit.chunk for hit in hits if citation_matches_chunk(source, hit.chunk)
+            ]
+            if len(matches) != 1:
+                return [], True
+            chunk = matches[0]
+            authoritative_title = chunk.metadata.get("title")
+            if (
+                not isinstance(authoritative_title, str)
+                or not authoritative_title.strip()
+            ):
                 return [], True
             citations.append(
                 Citation(
@@ -486,13 +582,15 @@ class StudentTutoringService:
                     source_artifact_id=chunk.source_artifact_id or chunk.document_id,
                     source_document_id=chunk.document_id,
                     source_version=chunk.source_version,
-                    title=source.title,
-                    locator=source.locator,
+                    title=authoritative_title.strip(),
+                    locator=chunk.locator or f"chunk {chunk.ordinal + 1}",
                     source_checksum=chunk.source_checksum,
                     page=chunk.page_start,
                     region_id=chunk.region_id,
                     region_kind=(
-                        chunk.region_kind.value if chunk.region_kind is not None else None
+                        chunk.region_kind.value
+                        if chunk.region_kind is not None
+                        else None
                     ),
                     bounding_box=chunk.bounding_box,
                     crop_ref=chunk.crop_ref if chunk.display_allowed else None,

@@ -2,6 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://digital-twin.local/schemas/cross-course-retrieval-v1.json",
   "title": "Cross-course retrieval benchmark v1",
+  "description": "Historical immutable schema for the sealed Gemma-authored v1 benchmark. Retained only to validate existing evidence; prohibited for new authoring or model execution.",
+  "x-lifecycle": "historical-immutable",
   "type": "object",
   "additionalProperties": false,
   "required": [

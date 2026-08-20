@@ -9,6 +9,8 @@ import os
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.draft_cross_course_benchmark import (
     ROOT,
     blank_review,
@@ -109,6 +111,7 @@ def apply_case_fields(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset = json.loads(args.source.read_text(encoding="utf-8"))
     patch = json.loads(args.patch.read_text(encoding="utf-8"))
     source_sha256 = sha256_file(args.source)

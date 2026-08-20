@@ -10,6 +10,7 @@ import {
 function approvedSession(): OnboardingSession {
   return {
     session_id: "session-1",
+    revision: 1,
     current_step: "complete",
     answers: {},
     messages: [],
@@ -139,6 +140,18 @@ describe("readiness selectors", () => {
     expect(getStepStates(session)[0].state).toBe("blocked")
   })
 
+  it("does not expose approved status when defensive blockers remain", () => {
+    const session = approvedSession()
+    session.source_inventory = []
+
+    const readiness = getReleaseReadiness(session)
+
+    expect(readiness.status).toBe("blocked")
+    expect(readiness.blockers).toContain(
+      "Add at least one approved source metadata item.",
+    )
+  })
+
   it("derives blocked preview and approval stages from unresolved records", () => {
     const session = approvedSession()
     session.preview_cases[0].decision = "pending"
@@ -149,5 +162,18 @@ describe("readiness selectors", () => {
 
     expect(steps.find((step) => step.id === "preview")?.state).toBe("blocked")
     expect(steps.find((step) => step.id === "approval")?.state).toBe("blocked")
+  })
+
+  it("does not report rejected preview decisions as pending", () => {
+    const session = approvedSession()
+    session.preview_cases[0].decision = "rejected"
+
+    const readiness = getReleaseReadiness(session)
+
+    expect(readiness.acceptedPreviews).toBe(0)
+    expect(readiness.pendingPreviews).toBe(0)
+    expect(getStepStates(session).find((step) => step.id === "preview")?.state).toBe(
+      "blocked",
+    )
   })
 })

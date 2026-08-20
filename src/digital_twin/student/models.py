@@ -1,8 +1,11 @@
+import math
+import re
 from enum import StrEnum
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, model_validator
 
+from src.digital_twin.generation.policy import policy_is_approved_for_generation
 from src.digital_twin.grounding.models import DocumentChunk, GenerationTrace
 from src.digital_twin.tutor_policy import TutorPolicy, timestamp_now
 
@@ -62,9 +65,24 @@ class DigitalTwinRelease(BaseModel):
     policy_version: int = Field(ge=1)
     policy: TutorPolicy
     chunks: list[DocumentChunk]
-    status: StudentReleaseStatus = StudentReleaseStatus.PUBLISHED
+    status: StudentReleaseStatus = StudentReleaseStatus.DRAFT
     evaluation_status: ReleaseEvaluationStatus = ReleaseEvaluationStatus.PENDING
     created_at: str = Field(default_factory=timestamp_now)
+
+    @model_validator(mode="after")
+    def published_release_must_be_approved_and_evaluated(self) -> "DigitalTwinRelease":
+        identifiers = [chunk.id for chunk in self.chunks]
+        if len(identifiers) != len(set(identifiers)):
+            raise ValueError("release chunk IDs must be unique")
+        if self.status == StudentReleaseStatus.PUBLISHED and (
+            self.evaluation_status != ReleaseEvaluationStatus.PASSED
+            or not self.chunks
+            or not policy_is_approved_for_generation(self.policy)
+        ):
+            raise ValueError(
+                "published releases require passed evaluation, evidence, and policy"
+            )
+        return self
 
 
 class Conversation(BaseModel):
@@ -83,7 +101,7 @@ class Message(BaseModel):
     id: str = Field(min_length=1)
     conversation_id: str = Field(min_length=1)
     role: MessageRole
-    content: str = Field(min_length=1)
+    content: str = Field(min_length=1, max_length=100_000)
     action: str = Field(min_length=1)
     trace: GenerationTrace | None = None
     client_request_id: str | None = None
@@ -108,6 +126,30 @@ class Citation(BaseModel):
     bounding_box: tuple[float, float, float, float] | None = None
     crop_ref: str | None = None
 
+    @field_validator("source_checksum")
+    @classmethod
+    def source_checksum_must_be_sha256(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        normalized = value.casefold()
+        if not re.fullmatch(r"[0-9a-f]{64}", normalized):
+            raise ValueError("citation source checksum must be a SHA-256 digest")
+        return normalized
+
+    @field_validator("bounding_box")
+    @classmethod
+    def bounding_box_must_be_normalized(
+        cls, value: tuple[float, float, float, float] | None
+    ) -> tuple[float, float, float, float] | None:
+        if value is None:
+            return None
+        x0, y0, x1, y1 = value
+        if any(not math.isfinite(coordinate) for coordinate in value) or not (
+            0 <= x0 < x1 <= 1 and 0 <= y0 < y1 <= 1
+        ):
+            raise ValueError("citation bounding_box must be normalized")
+        return value
+
 
 class AuditEvent(BaseModel):
     id: str = Field(min_length=1)
@@ -119,13 +161,25 @@ class AuditEvent(BaseModel):
     details: dict[str, str | int | float | bool | None] = Field(default_factory=dict)
     created_at: str = Field(default_factory=timestamp_now)
 
+    @field_validator("details")
+    @classmethod
+    def detail_numbers_must_be_finite(
+        cls, value: dict[str, str | int | float | bool | None]
+    ) -> dict[str, str | int | float | bool | None]:
+        if any(
+            isinstance(item, float) and not math.isfinite(item)
+            for item in value.values()
+        ):
+            raise ValueError("audit detail numbers must be finite")
+        return value
+
 
 class StudentCourse(BaseModel):
-    course_id: str
-    title: str
-    release_id: str
-    profile_id: str
-    profile_version: str
+    course_id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    release_id: str = Field(min_length=1)
+    profile_id: str = Field(min_length=1)
+    profile_version: str = Field(min_length=1)
 
 
 class ProfessorReleaseSummary(BaseModel):

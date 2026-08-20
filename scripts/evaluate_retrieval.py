@@ -19,6 +19,7 @@ from src.digital_twin.grounding import (
     evaluate_retriever,
     load_retrieval_evaluation_set,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,7 @@ DEFAULT_DATASET = ROOT / "research" / "05_evaluation" / "retrieval_v1.json"
 
 def main() -> None:
     arguments = _arguments()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     evaluation_set = load_retrieval_evaluation_set(arguments.dataset)
 
     with tempfile.TemporaryDirectory(prefix="digital-twin-retrieval-") as temp:

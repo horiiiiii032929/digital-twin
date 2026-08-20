@@ -15,21 +15,35 @@ export function AccountControl({
   onSignOut: () => Promise<void>
   onChangePassword: (currentPassword: string, newPassword: string) => Promise<void>
 }) {
-  const [error, setError] = useState<string | null>(null)
+  const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [signOutError, setSignOutError] = useState<string | null>(null)
 
   async function submitPassword(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     const next = String(form.get("new_password") ?? "")
     if (next !== String(form.get("confirm_password") ?? "")) {
-      setError("New passwords do not match.")
+      setPasswordError("New passwords do not match.")
       return
     }
-    setError(null)
+    setPasswordError(null)
     try {
       await onChangePassword(String(form.get("current_password") ?? ""), next)
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Password change failed.")
+      setPasswordError(
+        reason instanceof Error ? reason.message : "Password change failed.",
+      )
+    }
+  }
+
+  async function submitSignOut() {
+    setSignOutError(null)
+    try {
+      await onSignOut()
+    } catch (reason) {
+      setSignOutError(
+        reason instanceof Error ? reason.message : "Could not sign out.",
+      )
     }
   }
 
@@ -58,9 +72,9 @@ export function AccountControl({
           <PasswordField label="Current password" name="current_password" />
           <PasswordField label="New password" name="new_password" />
           <PasswordField label="Confirm new password" name="confirm_password" />
-          {error ? (
+          {passwordError ? (
             <p className="text-xs leading-5 text-destructive" role="alert">
-              {error}
+              {passwordError}
             </p>
           ) : null}
           <Button className="w-full" disabled={submitting} size="sm" type="submit">
@@ -72,13 +86,18 @@ export function AccountControl({
         <Button
           className="w-full"
           disabled={submitting}
-          onClick={() => void onSignOut()}
+          onClick={() => void submitSignOut()}
           size="sm"
           variant="outline"
         >
           <LogOut aria-hidden="true" />
           Sign out
         </Button>
+        {signOutError ? (
+          <p className="mt-2 text-xs leading-5 text-destructive" role="alert">
+            {signOutError}
+          </p>
+        ) : null}
       </div>
     </details>
   )
@@ -92,6 +111,7 @@ function PasswordField({ label, name }: { label: string; name: string }) {
         autoComplete={name === "current_password" ? "current-password" : "new-password"}
         className="h-9 w-full rounded-md border px-3 text-sm outline-none focus:border-[var(--accent-strong)] focus:ring-3 focus:ring-[var(--accent-soft)]"
         minLength={name === "current_password" ? 1 : 12}
+        maxLength={1024}
         name={name}
         required
         type="password"

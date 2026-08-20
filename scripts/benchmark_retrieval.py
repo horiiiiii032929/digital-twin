@@ -22,6 +22,7 @@ from src.digital_twin.grounding import (
     load_retrieval_benchmark_corpus,
     load_retrieval_evaluation_set,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,7 @@ DEFAULT_BM25_THRESHOLDS = (0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0)
 
 def main() -> None:
     arguments = _arguments()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     corpus = load_retrieval_benchmark_corpus(arguments.corpus)
     calibration_set = load_retrieval_evaluation_set(arguments.calibration)
     test_set = load_retrieval_evaluation_set(arguments.dataset)

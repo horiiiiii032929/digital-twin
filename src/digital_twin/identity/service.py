@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import binascii
 import hashlib
 import hmac
 import re
@@ -21,6 +22,7 @@ from src.digital_twin.student.models import (
     Account,
     AccountRole,
     AccountStatus,
+    AuditEvent,
 )
 from src.digital_twin.student.repository import StudentRepository
 
@@ -30,6 +32,27 @@ _PASSWORD_MIN_LENGTH = 12
 _SCRYPT_N = 2**14
 _SCRYPT_R = 8
 _SCRYPT_P = 1
+_SCRYPT_SALT_BYTES = 16
+_SCRYPT_HASH_BYTES = 32
+_DUMMY_SALT = b"\x00" * _SCRYPT_SALT_BYTES
+_DUMMY_HASH = hashlib.scrypt(
+    b"Invalid-password-0",
+    salt=_DUMMY_SALT,
+    n=_SCRYPT_N,
+    r=_SCRYPT_R,
+    p=_SCRYPT_P,
+    dklen=_SCRYPT_HASH_BYTES,
+)
+_DUMMY_PASSWORD_HASH = "$".join(
+    (
+        "scrypt-v1",
+        str(_SCRYPT_N),
+        str(_SCRYPT_R),
+        str(_SCRYPT_P),
+        base64.urlsafe_b64encode(_DUMMY_SALT).decode("ascii"),
+        base64.urlsafe_b64encode(_DUMMY_HASH).decode("ascii"),
+    )
+)
 
 
 class IdentityError(ValueError):
@@ -47,7 +70,11 @@ class IdentityService:
         *,
         session_ttl_seconds: int = 8 * 60 * 60,
     ) -> None:
-        if session_ttl_seconds <= 0:
+        if (
+            isinstance(session_ttl_seconds, bool)
+            or not isinstance(session_ttl_seconds, int)
+            or session_ttl_seconds <= 0
+        ):
             raise ValueError("session_ttl_seconds must be positive")
         self.identity_repository = identity_repository
         self.account_repository = account_repository
@@ -61,6 +88,7 @@ class IdentityService:
         role: AccountRole,
         password: str,
         account_id: str | None = None,
+        audit_event: AuditEvent | None = None,
     ) -> IdentityProfile:
         normalized_email = _normalize_email(email)
         _validate_password(password)
@@ -75,11 +103,9 @@ class IdentityService:
             raise IdentityError(
                 "account_role_conflict", "The existing account has a different role."
             )
-        self.account_repository.save_account(
-            Account(id=identifier, role=role, status=AccountStatus.ACTIVE)
-        )
         now = _timestamp()
-        self.identity_repository.save_credential(
+        self.identity_repository.save_account_credential(
+            Account(id=identifier, role=role, status=AccountStatus.ACTIVE),
             CredentialRecord(
                 account_id=identifier,
                 email=email.strip(),
@@ -88,7 +114,8 @@ class IdentityService:
                 password_hash=hash_password(password),
                 created_at=existing.created_at if existing else now,
                 updated_at=now,
-            )
+            ),
+            audit_event,
         )
         return IdentityProfile(
             account_id=identifier,
@@ -113,18 +140,30 @@ class IdentityService:
             or actor.role != AccountRole.ADMIN
         ):
             raise IdentityError("admin_required", "An active administrator is required.")
+        identifier = f"account-{uuid4()}"
         return self.provision_account(
+            account_id=identifier,
             email=email,
             display_name=display_name,
             role=role,
             password=temporary_password,
+            audit_event=_audit_event(
+                "identity.account_invited",
+                actor_id,
+                target_account_id=identifier,
+                target_role=role.value,
+            ),
         )
 
     def login(self, email: str, password: str) -> IssuedSession:
         credential = self.identity_repository.get_credential_by_email(
             _normalize_email(email)
         )
-        if credential is None or not verify_password(password, credential.password_hash):
+        password_hash = (
+            credential.password_hash if credential is not None else _DUMMY_PASSWORD_HASH
+        )
+        password_valid = verify_password(password, password_hash)
+        if credential is None or not password_valid:
             raise IdentityError("invalid_credentials", "Email or password is incorrect.")
         account = self.account_repository.get_account(credential.account_id)
         if account is None or account.status != AccountStatus.ACTIVE:
@@ -139,7 +178,8 @@ class IdentityService:
                 created_at=now.isoformat(),
                 expires_at=expires.isoformat(),
                 last_seen_at=now.isoformat(),
-            )
+            ),
+            _audit_event("identity.login", account.id),
         )
         return IssuedSession(
             token=token,
@@ -153,11 +193,13 @@ class IdentityService:
         digest = _token_digest(token)
         session = self.identity_repository.get_session(digest)
         now = datetime.now(UTC)
-        if (
-            session is None
-            or session.revoked_at is not None
-            or datetime.fromisoformat(session.expires_at) <= now
-        ):
+        if session is None or session.revoked_at is not None:
+            raise IdentityError("session_invalid", "Your session is invalid or expired.")
+        try:
+            expires_at = datetime.fromisoformat(session.expires_at)
+            if expires_at.tzinfo is None or expires_at <= now:
+                raise ValueError("session expiry is absent or expired")
+        except (TypeError, ValueError):
             raise IdentityError("session_invalid", "Your session is invalid or expired.")
         account = self.account_repository.get_account(session.account_id)
         credential = self.identity_repository.get_credential(session.account_id)
@@ -171,8 +213,20 @@ class IdentityService:
         return _profile(credential, account.role)
 
     def logout(self, token: str) -> None:
-        if token:
-            self.identity_repository.revoke_session(_token_digest(token), _timestamp())
+        if not token:
+            return
+        digest = _token_digest(token)
+        session = self.identity_repository.get_session(digest)
+        account_id = session.account_id if session is not None else None
+        self.identity_repository.revoke_session(
+            digest,
+            _timestamp(),
+            (
+                _audit_event("identity.logout", account_id)
+                if account_id is not None
+                else None
+            ),
+        )
 
     def change_password(
         self,
@@ -188,7 +242,11 @@ class IdentityService:
             raise IdentityError(
                 "invalid_current_password", "The current password is incorrect."
             )
-        self._replace_password(credential, new_password)
+        self._replace_password(
+            credential,
+            new_password,
+            audit_event=_audit_event("identity.password_changed", account_id),
+        )
 
     def reset_password(
         self,
@@ -207,7 +265,15 @@ class IdentityService:
         credential = self.identity_repository.get_credential(account_id)
         if credential is None:
             raise IdentityError("account_not_found", "The account was not found.")
-        self._replace_password(credential, new_password)
+        self._replace_password(
+            credential,
+            new_password,
+            audit_event=_audit_event(
+                "identity.password_reset",
+                actor_id,
+                target_account_id=account_id,
+            ),
+        )
 
     def revoke_account(self, actor_id: str, account_id: str) -> None:
         actor = self.account_repository.get_account(actor_id)
@@ -220,10 +286,16 @@ class IdentityService:
             raise IdentityError("admin_required", "An active administrator is required.")
         if target is None:
             raise IdentityError("account_not_found", "The account was not found.")
-        self.account_repository.save_account(
-            target.model_copy(update={"status": AccountStatus.REVOKED})
-        )
-        self.identity_repository.revoke_account_sessions(account_id, _timestamp())
+        if not self.identity_repository.revoke_account_and_sessions(
+            account_id,
+            _timestamp(),
+            _audit_event(
+                "identity.account_revoked",
+                actor_id,
+                target_account_id=account_id,
+            ),
+        ):
+            raise IdentityError("account_not_found", "The account was not found.")
 
     def profile_for_account(self, account_id: str) -> IdentityProfile:
         credential = self.identity_repository.get_credential(account_id)
@@ -233,32 +305,36 @@ class IdentityService:
         return _profile(credential, account.role)
 
     def _replace_password(
-        self, credential: CredentialRecord, new_password: str
+        self,
+        credential: CredentialRecord,
+        new_password: str,
+        *,
+        audit_event: AuditEvent,
     ) -> None:
         _validate_password(new_password)
-        self.identity_repository.save_credential(
+        now = _timestamp()
+        self.identity_repository.replace_credential_and_revoke_sessions(
             credential.model_copy(
                 update={
                     "password_hash": hash_password(new_password),
-                    "updated_at": _timestamp(),
+                    "updated_at": now,
                 }
-            )
-        )
-        self.identity_repository.revoke_account_sessions(
-            credential.account_id, _timestamp()
+            ),
+            now,
+            audit_event,
         )
 
 
 def hash_password(password: str) -> str:
     _validate_password(password)
-    salt = secrets.token_bytes(16)
+    salt = secrets.token_bytes(_SCRYPT_SALT_BYTES)
     derived = hashlib.scrypt(
         password.encode("utf-8"),
         salt=salt,
         n=_SCRYPT_N,
         r=_SCRYPT_R,
         p=_SCRYPT_P,
-        dklen=32,
+        dklen=_SCRYPT_HASH_BYTES,
     )
     return "$".join(
         (
@@ -275,19 +351,26 @@ def hash_password(password: str) -> str:
 def verify_password(password: str, encoded: str) -> bool:
     try:
         algorithm, raw_n, raw_r, raw_p, raw_salt, raw_hash = encoded.split("$")
-        if algorithm != "scrypt-v1":
+        if (
+            algorithm != "scrypt-v1"
+            or int(raw_n) != _SCRYPT_N
+            or int(raw_r) != _SCRYPT_R
+            or int(raw_p) != _SCRYPT_P
+        ):
             return False
-        salt = base64.urlsafe_b64decode(raw_salt.encode("ascii"))
-        expected = base64.urlsafe_b64decode(raw_hash.encode("ascii"))
+        salt = base64.b64decode(raw_salt, altchars=b"-_", validate=True)
+        expected = base64.b64decode(raw_hash, altchars=b"-_", validate=True)
+        if len(salt) != _SCRYPT_SALT_BYTES or len(expected) != _SCRYPT_HASH_BYTES:
+            return False
         actual = hashlib.scrypt(
             password.encode("utf-8"),
             salt=salt,
-            n=int(raw_n),
-            r=int(raw_r),
-            p=int(raw_p),
-            dklen=len(expected),
+            n=_SCRYPT_N,
+            r=_SCRYPT_R,
+            p=_SCRYPT_P,
+            dklen=_SCRYPT_HASH_BYTES,
         )
-    except (ValueError, TypeError):
+    except (binascii.Error, ValueError, TypeError):
         return False
     return hmac.compare_digest(actual, expected)
 
@@ -328,3 +411,16 @@ def _token_digest(token: str) -> str:
 
 def _timestamp() -> str:
     return datetime.now(UTC).isoformat()
+
+
+def _audit_event(
+    event_type: str,
+    account_id: str,
+    **details: str | None,
+) -> AuditEvent:
+    return AuditEvent(
+        id=f"audit-{uuid4()}",
+        event_type=event_type,
+        account_id=account_id,
+        details={key: value for key, value in details.items() if value is not None},
+    )

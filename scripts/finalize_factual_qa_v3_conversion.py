@@ -10,6 +10,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DISPOSITIONS = ROOT / "data/interim/factual_qa_v3/source_dispositions_v3.json"
@@ -112,6 +114,7 @@ def finalize(
 
 
 def main() -> int:
+    require_pre_evaluation_operation_allowed("dataset_generation")
     private, summary = finalize(
         json.loads(DISPOSITIONS.read_text()),
         json.loads(READINESS.read_text()),

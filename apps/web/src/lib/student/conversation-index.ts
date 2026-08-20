@@ -1,3 +1,5 @@
+import type { StudentConversation, StudentCourse } from "@/lib/api/types"
+
 export const STUDENT_CONVERSATION_INDEX_KEY =
   "course-digital-twin.student-conversations.v1"
 
@@ -15,9 +17,10 @@ export const EMPTY_STUDENT_CONVERSATION_INDEX: StudentConversationIndex = {
 
 export function readStudentConversationIndex(
   storage: Pick<Storage, "getItem">,
+  accountId?: string,
 ): StudentConversationIndex {
   try {
-    const raw = storage.getItem(STUDENT_CONVERSATION_INDEX_KEY)
+    const raw = storage.getItem(studentConversationIndexKey(accountId))
     if (!raw) return { ...EMPTY_STUDENT_CONVERSATION_INDEX }
 
     const parsed = JSON.parse(raw) as Partial<StudentConversationIndex>
@@ -39,8 +42,26 @@ export function readStudentConversationIndex(
 export function writeStudentConversationIndex(
   storage: Pick<Storage, "setItem">,
   index: StudentConversationIndex,
+  accountId?: string,
 ): void {
-  storage.setItem(STUDENT_CONVERSATION_INDEX_KEY, JSON.stringify(index))
+  storage.setItem(studentConversationIndexKey(accountId), JSON.stringify(index))
+}
+
+export function studentConversationIndexKey(accountId?: string): string {
+  const scope = accountId?.trim()
+  return scope
+    ? `${STUDENT_CONVERSATION_INDEX_KEY}.${encodeURIComponent(scope)}`
+    : STUDENT_CONVERSATION_INDEX_KEY
+}
+
+export function isConversationForCurrentRelease(
+  conversation: StudentConversation,
+  course: StudentCourse,
+): boolean {
+  return (
+    conversation.course_id === course.course_id &&
+    conversation.release_id === course.release_id
+  )
 }
 
 export function rememberStudentConversation(

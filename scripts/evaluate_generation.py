@@ -17,6 +17,7 @@ from src.digital_twin.generation import (
 )
 from src.digital_twin.grounding import BM25Retriever
 from src.digital_twin.model_policy import ModelPolicyError, require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     ReleaseStatus,
@@ -30,6 +31,8 @@ DEFAULT_DATASET = ROOT / "research" / "05_evaluation" / "generation_v1.json"
 
 def main() -> None:
     arguments = _arguments()
+    if arguments.model is not None:
+        require_pre_evaluation_operation_allowed("method_evaluation_execution")
     summary = asyncio.run(_evaluate(arguments))
     live = arguments.model is not None
     payload = {
@@ -102,7 +105,11 @@ def _approved_synthetic_policy():
         if field.status == FieldStatus.BLOCKS_RELEASE:
             field.status = FieldStatus.RESOLVED
         if field.id == "knowledge_source_policy":
-            field.value = {**field.value, "confirmed": True}
+            field.value = {
+                **field.value,
+                "source_strictness": "course_only",
+                "confirmed": True,
+            }
         if field.id in {"academic_integrity_policy", "professor_release_approval"}:
             field.status = FieldStatus.RESOLVED
         if field.id == "professor_release_approval":

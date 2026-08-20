@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
@@ -27,6 +28,9 @@ class RetrievalBudgetExceeded(RuntimeError):
     """Raised before a hosted request would exceed the prospective cap."""
 
 
+MAX_PROVIDER_RESPONSE_BYTES = 32 * 1024 * 1024
+
+
 @dataclass
 class RetrievalUsageLedger:
     max_cost_usd: float
@@ -40,10 +44,30 @@ class RetrievalUsageLedger:
     cache_hits: int = 0
 
     def __post_init__(self) -> None:
-        if self.max_cost_usd < 0:
+        if (
+            isinstance(self.max_cost_usd, bool)
+            or not math.isfinite(self.max_cost_usd)
+            or self.max_cost_usd < 0
+        ):
             raise ValueError("max_cost_usd cannot be negative")
-        if self.price_per_million_input_tokens_usd < 0:
+        if (
+            isinstance(self.price_per_million_input_tokens_usd, bool)
+            or not math.isfinite(self.price_per_million_input_tokens_usd)
+            or self.price_per_million_input_tokens_usd < 0
+        ):
             raise ValueError("input-token price cannot be negative")
+        for name in (
+            "request_count",
+            "input_items",
+            "input_characters",
+            "input_tokens",
+            "retry_count",
+            "failure_count",
+            "cache_hits",
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise ValueError(f"{name} must be a non-negative integer")
         if self.price_per_million_input_tokens_usd and not self.max_cost_usd:
             raise ValueError("priced usage requires a positive cost cap")
 
@@ -52,7 +76,11 @@ class RetrievalUsageLedger:
         return self.input_tokens * self.price_per_million_input_tokens_usd / 1_000_000
 
     def require_capacity(self, estimated_input_tokens: int) -> None:
-        if estimated_input_tokens < 0:
+        if (
+            isinstance(estimated_input_tokens, bool)
+            or not isinstance(estimated_input_tokens, int)
+            or estimated_input_tokens < 0
+        ):
             raise ValueError("estimated input tokens cannot be negative")
         projected_tokens = self.input_tokens + estimated_input_tokens
         projected_cost = (
@@ -70,6 +98,12 @@ class RetrievalUsageLedger:
         estimated_input_tokens: int,
         response: Mapping[str, Any] | None = None,
     ) -> None:
+        if (
+            isinstance(estimated_input_tokens, bool)
+            or not isinstance(estimated_input_tokens, int)
+            or estimated_input_tokens < 0
+        ):
+            raise ValueError("estimated input tokens cannot be negative")
         actual_tokens = _response_input_tokens(response) if response else None
         self.request_count += 1
         self.input_items += len(values)
@@ -116,6 +150,9 @@ def post_json(
     body: Mapping[str, Any],
     timeout_seconds: float,
 ) -> dict[str, Any]:
+    require_https_endpoint(url)
+    if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
+        raise ValueError("provider timeout must be finite and positive")
     request = urllib.request.Request(
         url,
         data=json.dumps(body).encode("utf-8"),
@@ -124,9 +161,16 @@ def post_json(
     )
     try:
         with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
-            payload = json.loads(response.read().decode("utf-8"))
+            raw = response.read(MAX_PROVIDER_RESPONSE_BYTES + 1)
+            if len(raw) > MAX_PROVIDER_RESPONSE_BYTES:
+                raise RetrievalProviderError(
+                    "retrieval API response exceeded the size limit"
+                )
+            payload = json.loads(raw.decode("utf-8"))
     except urllib.error.HTTPError as error:
-        request_id = error.headers.get("x-request-id", "not-returned")
+        request_id = _sanitized_request_id(
+            error.headers.get("x-request-id", "not-returned")
+        )
         raise RetrievalProviderError(
             f"retrieval API returned HTTP {error.code}; request_id={request_id}"
         ) from error
@@ -143,12 +187,34 @@ def post_json(
     return payload
 
 
+def require_https_endpoint(url: str) -> str:
+    parsed = urllib.parse.urlsplit(url)
+    if (
+        parsed.scheme != "https"
+        or not parsed.hostname
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed.fragment
+    ):
+        raise ValueError("retrieval provider endpoint must be a plain HTTPS URL")
+    return url
+
+
+def _sanitized_request_id(value: Any) -> str:
+    rendered = str(value)
+    if not rendered or len(rendered) > 128:
+        return "not-returned"
+    if any(not (character.isalnum() or character in "-_.") for character in rendered):
+        return "not-returned"
+    return rendered
+
+
 def _response_input_tokens(response: Mapping[str, Any]) -> int | None:
     usage = response.get("usage")
     if not isinstance(usage, Mapping):
         return None
     for key in ("prompt_tokens", "input_tokens", "total_tokens"):
         value = usage.get(key)
-        if isinstance(value, int) and value >= 0:
+        if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
             return value
     return None

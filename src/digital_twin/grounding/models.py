@@ -69,7 +69,10 @@ class ApprovalRecord(BaseModel):
 
     @model_validator(mode="after")
     def approval_requires_a_professor_reviewer(self) -> "ApprovalRecord":
-        if self.decision == ApprovalDecision.APPROVED and self.reviewer_role != "professor":
+        if (
+            self.decision == ApprovalDecision.APPROVED
+            and self.reviewer_role != "professor"
+        ):
             raise ValueError("only a professor can approve a source")
         return self
 
@@ -80,6 +83,14 @@ class DocumentSegment(BaseModel):
     heading_path: list[str] = Field(default_factory=list)
     page: int | None = Field(default=None, ge=1)
     bounding_box: tuple[float, float, float, float] | None = None
+
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, text: str) -> str:
+        normalized = text.strip()
+        if not normalized:
+            raise ValueError("document segment text must not be blank")
+        return normalized
 
     @field_validator("bounding_box")
     @classmethod
@@ -118,6 +129,14 @@ class OCRTextRegion(BaseModel):
     bounding_box: tuple[float, float, float, float]
     confidence: float | None = Field(default=None, ge=0, le=1)
     reading_order: int = Field(default=0, ge=0)
+
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, text: str) -> str:
+        normalized = text.strip()
+        if not normalized:
+            raise ValueError("OCR text must not be blank")
+        return normalized
 
     @field_validator("bounding_box")
     @classmethod
@@ -205,6 +224,14 @@ class CourseDocument(BaseModel):
     segments: list[DocumentSegment] = Field(default_factory=list)
     metadata: dict[str, str] = Field(default_factory=dict)
 
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, text: str) -> str:
+        normalized = text.strip()
+        if not normalized:
+            raise ValueError("course document text must not be blank")
+        return normalized
+
     @model_validator(mode="after")
     def fill_stable_provenance_defaults(self) -> "CourseDocument":
         if self.source_artifact_id is None:
@@ -238,6 +265,14 @@ class DocumentChunk(BaseModel):
     retrieval_allowed: bool = False
     display_allowed: bool = False
     metadata: dict[str, str] = Field(default_factory=dict)
+
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, text: str) -> str:
+        normalized = text.strip()
+        if not normalized:
+            raise ValueError("document chunk text must not be blank")
+        return normalized
 
     @model_validator(mode="after")
     def fill_chunk_defaults(self) -> "DocumentChunk":
@@ -310,11 +345,55 @@ class ParsedDocumentBundle(BaseModel):
     regions: list[DocumentRegion] = Field(default_factory=list)
     processing_warnings: list[str] = Field(default_factory=list)
 
+    @model_validator(mode="after")
+    def derived_assets_must_match_document_lineage(self) -> "ParsedDocumentBundle":
+        document = self.document
+        source_id = document.source_artifact_id or document.id
+        region_ids = [region.id for region in self.regions]
+        figure_ids = [figure.id for figure in self.figures]
+        if len(region_ids) != len(set(region_ids)):
+            raise ValueError("document region identifiers must be unique")
+        if len(figure_ids) != len(set(figure_ids)):
+            raise ValueError("document figure identifiers must be unique")
+        for region in self.regions:
+            if (
+                region.document_id != document.id
+                or region.source_artifact_id != source_id
+                or region.source_version != document.source_version
+            ):
+                raise ValueError("document region lineage does not match its document")
+            if not _permissions_are_subset(region.permissions, document.permissions):
+                raise ValueError(
+                    "document region permissions exceed source permissions"
+                )
+        for figure in self.figures:
+            if (
+                figure.document_id != document.id
+                or figure.source_artifact_id != source_id
+                or figure.source_version != document.source_version
+            ):
+                raise ValueError("document figure lineage does not match its document")
+            if not _permissions_are_subset(figure.permissions, document.permissions):
+                raise ValueError(
+                    "document figure permissions exceed source permissions"
+                )
+        return self
+
+
+def _permissions_are_subset(
+    derived: SourcePermissions,
+    source: SourcePermissions,
+) -> bool:
+    return all(
+        not getattr(derived, field) or getattr(source, field)
+        for field in ("processing_allowed", "tutoring_allowed", "display_allowed")
+    )
+
 
 class RetrievalHit(BaseModel):
     chunk: DocumentChunk
-    relevance_score: float = Field(ge=0, le=1)
-    raw_score: float | None = Field(default=None, ge=0)
+    relevance_score: float = Field(ge=0, le=1, allow_inf_nan=False)
+    raw_score: float | None = Field(default=None, ge=0, allow_inf_nan=False)
 
 
 class SourceCitation(BaseModel):
@@ -329,6 +408,24 @@ class SourceCitation(BaseModel):
     region_kind: RegionKind | None = None
     bounding_box: tuple[float, float, float, float] | None = None
     crop_ref: str | None = None
+
+    @field_validator("source_checksum")
+    @classmethod
+    def source_checksum_must_be_sha256(cls, checksum: str | None) -> str | None:
+        if checksum is None:
+            return None
+        normalized = checksum.lower()
+        if not _SHA256_PATTERN.fullmatch(normalized):
+            raise ValueError("citation source checksum must be a SHA-256 digest")
+        return normalized
+
+    @field_validator("bounding_box")
+    @classmethod
+    def citation_bounding_box_must_be_normalized(
+        cls,
+        bounding_box: tuple[float, float, float, float] | None,
+    ) -> tuple[float, float, float, float] | None:
+        return DocumentSegment.bounding_box_must_be_normalized(bounding_box)
 
 
 class GenerationUsage(BaseModel):

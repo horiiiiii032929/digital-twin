@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.validate_course_tutor_dataset import (
     load_json,
     validate_dataset,
@@ -132,6 +134,7 @@ def seal_anchor() -> dict[str, Any]:
 
 
 def main() -> None:
+    require_pre_evaluation_operation_allowed("dataset_generation")
     print(json.dumps(seal_anchor(), indent=2, sort_keys=True))
 
 

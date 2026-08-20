@@ -35,6 +35,7 @@ from scripts.professor_fidelity_scoring import (
 from services.embeddings import Qwen3TextEmbedder
 from services.llm import LiteLlmClient
 from src.digital_twin.model_policy import LOCAL_GENERAL_MODEL
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 from src.digital_twin.evaluation import ComponentKind, load_release_profile
 from src.digital_twin.grounding import (
     RetrievalHit,
@@ -1042,6 +1043,10 @@ def _complete_heldout(output_path: Path) -> None:
 
 def main() -> None:
     arguments = parse_args()
+    if arguments.split == "heldout":
+        require_pre_evaluation_operation_allowed("heldout_execution")
+    if arguments.execute:
+        require_pre_evaluation_operation_allowed("method_evaluation_execution")
     if not arguments.execute:
         print(
             json.dumps(

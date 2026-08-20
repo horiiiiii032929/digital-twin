@@ -24,6 +24,7 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     contextual_crop_bbox,
     normalized_crop_pixels,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 SEALED_ROOT = ROOT / "data/processed/multimodal_retrieval_v1/sealed_v1"
@@ -120,6 +121,7 @@ def visual_inputs(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         os.environ["HF_HUB_OFFLINE"] = "1"
         os.environ["TRANSFORMERS_OFFLINE"] = "1"

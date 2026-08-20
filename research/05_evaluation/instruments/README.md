@@ -10,7 +10,7 @@ evaluation. The v1 instrument set is selected in
 | --- | --- | --- |
 | LLM judge | `llm_judge_input_v1.schema.json` | `llm_judge_output_v1.schema.json` |
 | Simulated student | `simulated_student_state_v1.schema.json` plus a frozen observed event | `simulated_student_turn_v1.schema.json` |
-| Evaluation run | Frozen run configuration and attempted items | `evaluation_run_v1.schema.json` |
+| Evaluation run | Frozen run configuration and attempted items | `evaluation_run_v2.schema.json` |
 | Analysis | Validated run records | `analysis_v1.json` |
 
 The exact prompts are `llm_judge_v1.prompt.md` and

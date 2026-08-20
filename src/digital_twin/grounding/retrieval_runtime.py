@@ -42,7 +42,7 @@ class FallbackRetriever:
         return self.primary is not None
 
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
-        if limit < 1:
+        if isinstance(limit, bool) or limit < 1:
             raise InvalidRetrievalLimitError("retrieval limit must be at least 1")
         if not lexical_tokens(query):
             raise EmptyQueryError("query must contain at least one lexical token")

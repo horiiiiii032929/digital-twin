@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.build_multimodal_private_draft import (
     AUTO_ADJUDICATIONS,
     CONFIRMED_SECOND_REVIEW_FIXES,
@@ -96,6 +98,7 @@ def apply_review(dataset: dict[str, Any], review: dict[str, Any]) -> dict[str, A
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         dataset = apply_review(load_json(args.dataset), load_json(args.review))
         summary = validate_dataset(dataset)

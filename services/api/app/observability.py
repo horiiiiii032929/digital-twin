@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 
+import math
 from collections import Counter, deque
 from threading import RLock
 
 
 class OperationalMetrics:
     def __init__(self, *, latency_window: int = 10_000) -> None:
+        if (
+            isinstance(latency_window, bool)
+            or not isinstance(latency_window, int)
+            or latency_window < 1
+        ):
+            raise ValueError("latency_window must be a positive integer")
         self._lock = RLock()
         self._requests: Counter[str] = Counter()
         self._statuses: Counter[str] = Counter()
@@ -21,6 +28,16 @@ class OperationalMetrics:
         status_code: int,
         duration_ms: float,
     ) -> None:
+        if not method.strip() or not route.strip():
+            raise ValueError("request method and route are required")
+        if (
+            isinstance(status_code, bool)
+            or not isinstance(status_code, int)
+            or not 100 <= status_code <= 599
+        ):
+            raise ValueError("status_code must be a valid HTTP status")
+        if not math.isfinite(duration_ms) or duration_ms < 0:
+            raise ValueError("duration_ms must be finite and non-negative")
         route_key = f"{method} {route}"
         with self._lock:
             self._requests[route_key] += 1
@@ -32,9 +49,7 @@ class OperationalMetrics:
             latencies = sorted(self._latencies_ms)
             total = sum(self._requests.values())
             errors = sum(
-                count
-                for code, count in self._statuses.items()
-                if int(code) >= 500
+                count for code, count in self._statuses.items() if int(code) >= 500
             )
             p50 = _percentile(latencies, 0.50)
             p95 = _percentile(latencies, 0.95)

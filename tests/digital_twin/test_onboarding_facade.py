@@ -1,7 +1,12 @@
+import pytest
+
 from src.digital_twin import onboarding_workflow
 from src.digital_twin.onboarding import (
     InMemorySessionRepository,
     OnboardingSession,
+    ScopedSessionRepository,
+    SessionWriteConflictError,
+    SQLiteSessionRepository,
     create_session,
 )
 
@@ -42,3 +47,57 @@ def test_in_memory_repository_isolates_saved_session_state() -> None:
 
     repository.clear()
     assert repository.get("repository-session") is None
+
+
+@pytest.mark.parametrize("repository_kind", ["memory", "sqlite"])
+def test_session_repository_rejects_stale_snapshot(tmp_path, repository_kind) -> None:
+    repository = (
+        InMemorySessionRepository()
+        if repository_kind == "memory"
+        else SQLiteSessionRepository(tmp_path / "onboarding.sqlite3")
+    )
+    first = repository.save(create_session(session_id="session-race"))
+    stale = repository.get(first.session_id)
+    current = repository.get(first.session_id)
+    assert stale is not None and current is not None
+
+    current.current_step = "teaching_approach"
+    saved = repository.save(current)
+    stale.current_step = "academic_integrity"
+
+    with pytest.raises(SessionWriteConflictError):
+        repository.save(stale)
+
+    assert repository.get(first.session_id) == saved
+    if isinstance(repository, SQLiteSessionRepository):
+        repository.close()
+
+
+@pytest.mark.parametrize("repository_kind", ["memory", "sqlite"])
+def test_scoped_session_repository_cannot_take_over_existing_owner(
+    tmp_path,
+    repository_kind,
+) -> None:
+    repository = (
+        InMemorySessionRepository()
+        if repository_kind == "memory"
+        else SQLiteSessionRepository(tmp_path / "owned-onboarding.sqlite3")
+    )
+    if isinstance(repository, SQLiteSessionRepository):
+        with repository._connection:
+            repository._connection.executemany(
+                "INSERT INTO accounts (id, role, status) VALUES (?, 'professor', 'active')",
+                [("professor-a",), ("professor-b",)],
+            )
+    owner_a = ScopedSessionRepository(repository, "professor-a")
+    owner_b = ScopedSessionRepository(repository, "professor-b")
+    created = owner_a.save(create_session(session_id="owned-session"))
+    collision = create_session(session_id="owned-session")
+
+    with pytest.raises(PermissionError):
+        owner_b.save(collision)
+
+    assert owner_a.get(created.session_id) is not None
+    assert owner_b.get(created.session_id) is None
+    if isinstance(repository, SQLiteSessionRepository):
+        repository.close()

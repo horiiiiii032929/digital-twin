@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "research/05_evaluation/generator_qualification_v1_heldout.json"
@@ -23,6 +25,7 @@ SECOND_REVIEW = (
 
 
 def main() -> None:
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset = json.loads(DATASET.read_text(encoding="utf-8"))
     run = json.loads(RUN.read_text(encoding="utf-8"))
     judgment = json.loads(JUDGMENT.read_text(encoding="utf-8"))

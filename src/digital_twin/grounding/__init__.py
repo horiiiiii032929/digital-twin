@@ -72,6 +72,7 @@ from src.digital_twin.grounding.retrieval import (
     RelevanceThresholdRetriever,
     TermOverlapRetriever,
     lexical_tokens,
+    retrieval_text,
 )
 from src.digital_twin.grounding.retrieval_runtime import FallbackRetriever
 from src.digital_twin.grounding.region_retrieval import (
@@ -177,6 +178,7 @@ __all__ = [
     "evaluate_retriever",
     "evaluate_evidence_sufficiency",
     "lexical_tokens",
+    "retrieval_text",
     "load_retrieval_evaluation_set",
     "load_retrieval_benchmark_corpus",
     "source_artifact_from_path",

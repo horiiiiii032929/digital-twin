@@ -28,6 +28,7 @@ from scripts.draft_cross_course_benchmark import (
     stable_order,
     write_review,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 PROMPT_PATH = (
@@ -700,6 +701,7 @@ def adversarial_cases() -> list[dict[str, Any]]:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     started = time.monotonic()
     try:
         _, records = load_corpus(args.source_root)

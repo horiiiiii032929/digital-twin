@@ -46,8 +46,12 @@ function AuthenticatedApp() {
 
   return (
     <>
-      {auth.profile.role === "student" ? <StudentApp /> : null}
-      {auth.profile.role === "professor" ? <ProfessorApp /> : null}
+      {auth.profile.role === "student" ? (
+        <StudentApp accountId={auth.profile.account_id} />
+      ) : null}
+      {auth.profile.role === "professor" ? (
+        <ProfessorApp accountId={auth.profile.account_id} />
+      ) : null}
       {auth.profile.role === "admin" ? <AdminWorkspace /> : null}
       <AccountControl
         onChangePassword={auth.updatePassword}
@@ -59,10 +63,10 @@ function AuthenticatedApp() {
   )
 }
 
-function ProfessorApp() {
+function ProfessorApp({ accountId }: { accountId?: string } = {}) {
   const supervisorDemo =
     new URLSearchParams(window.location.search).get("demo") === "supervisor"
-  const controller = useOnboardingSession({ supervisorDemo })
+  const controller = useOnboardingSession({ supervisorDemo, accountId })
   return (
     <ProfessorWorkspace
       controller={controller}
@@ -71,8 +75,8 @@ function ProfessorApp() {
   )
 }
 
-function StudentApp() {
-  const controller = useStudentWorkspace()
+function StudentApp({ accountId }: { accountId?: string } = {}) {
+  const controller = useStudentWorkspace(accountId)
   useDocumentTitle("Student Tutor · Course Digital Twin")
   return <StudentWorkspace controller={controller} />
 }

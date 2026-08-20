@@ -8,6 +8,7 @@ import hashlib
 import json
 import math
 import subprocess
+import sys
 import tempfile
 import time
 import tracemalloc
@@ -20,6 +21,7 @@ from typing import Any
 import pymupdf
 
 from src.digital_twin.evaluation.multimodal_metrics import score_multimodal_ranking
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 from src.digital_twin.evaluation.multimodal_retrieval import (
     bbox_iou,
     query_has_retrieved_terms,
@@ -676,10 +678,15 @@ def _gate_results(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def main() -> int:
     args = parse_args()
+    if args.execute:
+        require_pre_evaluation_operation_allowed("method_evaluation_execution")
     try:
         dataset = load_and_validate(args.instrument)
     except (OSError, ValueError, json.JSONDecodeError) as error:
-        print(f"multimodal product grounding validation failed: {error}")
+        print(
+            f"multimodal product grounding validation failed: {error}",
+            file=sys.stderr,
+        )
         return 1
 
     if not args.execute:

@@ -25,6 +25,8 @@ class ObjectStore(Protocol):
 
 
 class IngestionJobRepository(Protocol):
+    def healthcheck(self) -> bool: ...
+
     def get_by_idempotency_key(
         self, professor_id: str, course_id: str, idempotency_key: str
     ) -> IngestionJob | None: ...
@@ -38,6 +40,10 @@ class IngestionJobRepository(Protocol):
     ) -> list[IngestionJob]: ...
 
     def claim(self, worker_id: str, *, lease_seconds: int) -> IngestionJob | None: ...
+
+    def renew_lease(
+        self, job_id: str, worker_id: str, *, lease_seconds: int
+    ) -> bool: ...
 
     def complete(self, job_id: str, worker_id: str, result_json: str) -> bool: ...
 

@@ -21,7 +21,18 @@ def liveness() -> dict[str, str]:
 @router.get("/health/ready")
 def readiness(request: Request):
     checks = {
-        "database": bool(request.app.state.student_repository.healthcheck()),
+        "student_database": _dependency_ready(
+            request.app.state.student_repository.healthcheck
+        ),
+        "identity_database": _dependency_ready(
+            request.app.state.identity_repository.healthcheck
+        ),
+        "ingestion_database": _dependency_ready(
+            request.app.state.ingestion_job_repository.healthcheck
+        ),
+        "onboarding_store": _dependency_ready(
+            request.app.state.session_repository.healthcheck
+        ),
         "object_store": _object_store_ready(request.app.state.object_store.root),
     }
     if not all(checks.values()):
@@ -63,4 +74,14 @@ def metrics(request: Request, account_id: AdminAccountDependency):
 
 
 def _object_store_ready(root) -> bool:
-    return root.is_dir() and os.access(root, os.R_OK | os.W_OK | os.X_OK)
+    try:
+        return root.is_dir() and os.access(root, os.R_OK | os.W_OK | os.X_OK)
+    except OSError:
+        return False
+
+
+def _dependency_ready(check) -> bool:
+    try:
+        return bool(check())
+    except Exception:
+        return False

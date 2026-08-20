@@ -21,6 +21,11 @@ from services.api.app.schemas import (
 from services.ingestion import IngestionJobError
 from src.digital_twin.grounding import IngestionError, SourcePermissions
 from src.digital_twin.operations import IngestionJob
+from src.digital_twin.onboarding import (
+    OnboardingSession,
+    SessionWriteConflictError,
+    bind_session_to_course,
+)
 from src.digital_twin.student import (
     Course,
     CourseMembership,
@@ -68,6 +73,49 @@ def create_course(
 
 
 @router.post(
+    "/courses/{course_id}/onboarding-sessions/{session_id}/bind",
+    response_model=OnboardingSession,
+)
+def bind_onboarding_session(
+    course_id: str,
+    session_id: str,
+    account_id: ProfessorAccountDependency,
+    sessions: SessionRepositoryDependency,
+    publication: PublicationServiceDependency,
+):
+    session = sessions.get(session_id)
+    if session is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "code": "session_not_found",
+                "message": "Onboarding session was not found.",
+            },
+        )
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return sessions.save(bind_session_to_course(session, course_id))
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "code": str(error),
+                "message": "This tutor setup is already bound to another course.",
+            },
+        ) from error
+    except (PermissionError, SessionWriteConflictError) as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "code": "session_write_conflict",
+                "message": "The tutor setup changed; reload it before binding.",
+            },
+        ) from error
+
+
+@router.post(
     "/courses/{course_id}/students",
     response_model=CourseMembership,
     status_code=status.HTTP_201_CREATED,
@@ -104,11 +152,22 @@ async def ingest_course_source(
     jobs: IngestionJobServiceDependency,
     settings: SettingsDependency,
     idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
-    title: str = Query(min_length=1),
+    title: str = Query(min_length=1, max_length=240),
     version: int = Query(default=1, ge=1),
     display_allowed: bool = Query(default=False),
     source_label: SourceLabel = Query(default=SourceLabel.COURSE_APPROVED),
 ):
+    if any(
+        not value.strip() or len(value.strip()) > 128
+        for value in (course_id, artifact_id)
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={
+                "code": "source_metadata_invalid",
+                "message": "Course and source identifiers must be 1–128 characters.",
+            },
+        )
     content_type = request.headers.get("content-type", "").partition(";")[0].strip()
     if content_type != "application/pdf":
         raise HTTPException(
@@ -117,7 +176,7 @@ async def ingest_course_source(
         )
     try:
         publication.authorize_source_ingestion(account_id, course_id)
-        content = await request.body()
+        content = await _read_bounded_body(request, settings.max_upload_bytes)
         if settings.mode == RuntimeMode.STAGING:
             job, _ = jobs.enqueue_pdf(
                 content,
@@ -244,6 +303,8 @@ def create_release_draft(
     account_id: ProfessorAccountDependency,
     sessions: SessionRepositoryDependency,
     service: PublicationServiceDependency,
+    jobs: IngestionJobServiceDependency,
+    settings: SettingsDependency,
 ):
     session = sessions.get(request.session_id)
     if session is None:
@@ -255,17 +316,35 @@ def create_release_draft(
             },
         )
     try:
+        if settings.mode == RuntimeMode.STAGING:
+            if request.chunks:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                    detail={
+                        "code": "server_bound_sources_required",
+                        "message": (
+                            "Staging releases must use completed server-side ingestion jobs."
+                        ),
+                    },
+                )
+            chunks = jobs.release_chunks_owned(
+                account_id, course_id, request.ingestion_job_ids
+            )
+        else:
+            chunks = request.chunks
         return service.create_draft_from_onboarding(
             account_id,
             course_id,
             session,
-            chunks=request.chunks,
+            chunks=chunks,
             profile_id=request.profile_id,
             profile_version=request.profile_version,
             release_id=request.release_id,
         )
     except PublicationError as error:
         raise _http_error(error) from error
+    except IngestionJobError as error:
+        raise _job_http_error(error) from error
 
 
 @router.patch(
@@ -388,3 +467,18 @@ def _job_http_error(error: IngestionJobError) -> HTTPException:
         status_code=code,
         detail={"code": error.code, "message": error.message},
     )
+
+
+async def _read_bounded_body(request: Request, limit: int) -> bytes:
+    content = bytearray()
+    async for chunk in request.stream():
+        if len(content) + len(chunk) > limit:
+            raise HTTPException(
+                status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                detail={
+                    "code": "source_too_large",
+                    "message": "The upload exceeds the configured size limit.",
+                },
+            )
+        content.extend(chunk)
+    return bytes(content)

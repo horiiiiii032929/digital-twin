@@ -11,12 +11,11 @@ from services.api.app.factory import create_app
 load_dotenv(Path(__file__).resolve().parents[3] / ".env", override=False)
 settings = AppSettings.from_env()
 if settings.mode == RuntimeMode.DEMO:
-    # Import the compatibility stores only for the rollback/demo runtime. Their
-    # legacy path lives below the source tree and must never be touched by the
-    # non-root staging container.
-    from services.api.app.store import store, student_store
+    from services.api.app.store import store
+    from src.digital_twin.student import seed_synthetic_student_workflow
 
-    app = create_app(store, student_repository=student_store, settings=settings)
+    app = create_app(store, settings=settings)
+    seed_synthetic_student_workflow(app.state.student_repository)
 else:
     app = create_app(
         settings=settings,

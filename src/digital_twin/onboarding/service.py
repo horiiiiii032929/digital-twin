@@ -19,7 +19,10 @@ from src.digital_twin.onboarding.preview import (
     _decision_record_for,
     _snapshot_for,
 )
-from src.digital_twin.onboarding.release import _recompute_release_state
+from src.digital_twin.onboarding.release import (
+    _invalidate_release_approval,
+    _recompute_release_state,
+)
 from src.digital_twin.onboarding.revisions import (
     _is_confirmation_message,
     _is_discard_message,
@@ -100,6 +103,8 @@ def _process_turn(state: GraphState) -> GraphState:
         proposal = _proposal_from_feedback(session, user_message)
         if proposal is not None:
             session.revision_proposal = proposal
+            _invalidate_release_approval(session)
+            _recompute_release_state(session)
             session.messages.append(
                 ChatMessage(
                     role="assistant",

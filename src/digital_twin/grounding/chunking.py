@@ -52,16 +52,21 @@ class HeadingParagraphChunker:
                     page_start=min(pages) if pages else None,
                     page_end=max(pages) if pages else None,
                     retrieval_allowed=document.permissions.tutoring_allowed,
+                    display_allowed=document.permissions.display_allowed,
                     metadata={
                         **document.metadata,
                         "title": document.title,
                         "source_label": document.source_label.value,
-                        "source_artifact_id": document.source_artifact_id or document.id,
+                        "source_artifact_id": document.source_artifact_id
+                        or document.id,
                         "source_version": str(document.source_version),
                         "document_content_hash": document.content_hash or "",
                         "locator": locator,
                         "retrieval_allowed": str(
                             document.permissions.tutoring_allowed
+                        ).lower(),
+                        "display_allowed": str(
+                            document.permissions.display_allowed
                         ).lower(),
                     },
                 )
@@ -173,9 +178,10 @@ class PageBoundedHeadingParagraphChunker:
                 }
             )
             for provisional in self._chunker.chunk(page_document):
-                content_hash = provisional.content_hash or hashlib.sha256(
-                    provisional.text.encode("utf-8")
-                ).hexdigest()
+                content_hash = (
+                    provisional.content_hash
+                    or hashlib.sha256(provisional.text.encode("utf-8")).hexdigest()
+                )
                 chunks.append(
                     provisional.model_copy(
                         update={
@@ -205,16 +211,17 @@ class RegionAwareChunker:
             bundle.regions,
             key=lambda item: (item.page, item.reading_order, item.id),
         ):
-            searchable_parts = [_structured_region_text(region)]
-            if region.description:
-                searchable_parts.append(
-                    "Generated search description "
-                    f"({region.description_method}): {region.description.strip()}"
-                )
-            text = "\n\n".join(part for part in searchable_parts if part)
-            if not text:
+            authoritative_text = _structured_region_text(region)
+            search_description = region.description.strip()
+            if not authoritative_text and not search_description:
                 continue
+            text = authoritative_text or (
+                "This visual-only region requires direct inspection of its cited crop."
+            )
             content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+            search_content_hash = hashlib.sha256(
+                f"{text}\x1f{search_description}".encode("utf-8")
+            ).hexdigest()
             ordinal = len(chunks)
             chunks.append(
                 DocumentChunk(
@@ -222,7 +229,7 @@ class RegionAwareChunker:
                         bundle.document.id,
                         ordinal,
                         region.locator,
-                        content_hash,
+                        search_content_hash,
                     ),
                     document_id=bundle.document.id,
                     text=text,
@@ -251,9 +258,7 @@ class RegionAwareChunker:
                         "source_artifact_id": region.source_artifact_id,
                         "source_version": str(region.source_version),
                         "source_checksum": region.source_checksum,
-                        "document_content_hash": (
-                            bundle.document.content_hash or ""
-                        ),
+                        "document_content_hash": (bundle.document.content_hash or ""),
                         "locator": region.locator,
                         "region_id": region.id,
                         "region_kind": region.kind.value,
@@ -261,6 +266,8 @@ class RegionAwareChunker:
                         "crop_ref": region.crop_ref,
                         "parent_region_id": region.parent_region_id or "",
                         "description_is_authoritative": "false",
+                        "search_description": search_description,
+                        "search_content_hash": search_content_hash,
                         "retrieval_allowed": str(
                             region.permissions.tutoring_allowed
                         ).lower(),

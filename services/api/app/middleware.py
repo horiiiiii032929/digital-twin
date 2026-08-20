@@ -79,7 +79,9 @@ class RequestObservabilityMiddleware(BaseHTTPMiddleware):
         call_next: Callable[[Request], Awaitable[Response]],
     ) -> Response:
         supplied = request.headers.get("x-request-id", "")
-        request_id = supplied if _REQUEST_ID_PATTERN.fullmatch(supplied) else str(uuid4())
+        request_id = (
+            supplied if _REQUEST_ID_PATTERN.fullmatch(supplied) else str(uuid4())
+        )
         request.state.request_id = request_id
         started = time.perf_counter()
         status_code = 500
@@ -167,18 +169,24 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         now = time.monotonic()
         cutoff = now - 60
         with self._lock:
+            if key not in self._events and len(self._events) >= 10_000:
+                self._prune(cutoff)
+                if len(self._events) >= 10_000:
+                    return False
             events = self._events[key]
             while events and events[0] <= cutoff:
                 events.popleft()
             if len(events) >= limit:
                 return False
             events.append(now)
-            if len(self._events) > 10_000:
-                self._events = defaultdict(
-                    deque,
-                    {name: values for name, values in self._events.items() if values},
-                )
             return True
+
+    def _prune(self, cutoff: float) -> None:
+        for name, values in list(self._events.items()):
+            while values and values[0] <= cutoff:
+                values.popleft()
+            if not values:
+                del self._events[name]
 
 
 class UploadSizeGuardMiddleware(BaseHTTPMiddleware):
@@ -195,7 +203,11 @@ class UploadSizeGuardMiddleware(BaseHTTPMiddleware):
             raw_length = request.headers.get("content-length")
             if raw_length is not None:
                 try:
-                    too_large = int(raw_length) > self.settings.max_upload_bytes
+                    parsed_length = int(raw_length)
+                    too_large = (
+                        parsed_length < 0
+                        or parsed_length > self.settings.max_upload_bytes
+                    )
                 except ValueError:
                     too_large = True
                 if too_large:

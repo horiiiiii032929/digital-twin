@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "suspension_id": "deployable-current-match-suspension-v1",
+  "status": "active-repository-correctness-audit",
+  "suspends_current_match_for": "deployable-product-foundation-freeze-v6",
+  "historical_revision_validation_required": true,
+  "reason": "Repository-wide correctness work intentionally changes bound implementation and configuration files before a new release candidate is qualified.",
+  "release_claim_authorized": false,
+  "public_deployment_authorized": false,
+  "external_evaluation_authorized": false,
+  "required_successor": "a new deployable-product freeze created only after repository-correctness-freeze-v1 passes",
+  "current_match_drift_is_diagnostic": true
+}

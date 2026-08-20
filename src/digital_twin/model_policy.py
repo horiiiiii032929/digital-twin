@@ -19,9 +19,7 @@ LOCAL_GENERAL_MODEL_DIGEST = (
     "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7"
 )
 OPENROUTER_DEEPSEEK_MODEL = "openrouter/deepseek/deepseek-v4-flash-0731"
-OPENROUTER_INDEPENDENT_REVIEW_MODEL = (
-    "openrouter/mistralai/mistral-small-2603"
-)
+OPENROUTER_INDEPENDENT_REVIEW_MODEL = "openrouter/mistralai/mistral-small-2603"
 _OPENROUTER_PROVIDER_OPTIONS: dict[str, Any] = {
     "extra_body": {
         "provider": {
@@ -94,12 +92,12 @@ CURRENT_MODEL_BINDINGS = (
 )
 
 CURRENT_MODEL_IDS = frozenset(
-    {
-        binding.provider_model.casefold() for binding in CURRENT_MODEL_BINDINGS
-    }
+    {binding.provider_model.casefold() for binding in CURRENT_MODEL_BINDINGS}
     | {
         "deepseek/deepseek-v4-flash",
         "deepseek/deepseek-v4-pro",
+        "deepseek/deepseek-v4-flash-0731",
+        "mistralai/mistral-small-2603",
         f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )

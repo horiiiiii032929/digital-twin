@@ -26,6 +26,7 @@ from src.digital_twin.model_policy import (
     LOCAL_GENERAL_MODEL,
     require_model_allowed,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1015,6 +1016,7 @@ def subprocess_run(command: list[str]) -> str:
 
 def main() -> None:
     arguments = parse_args()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     _enforce_cli_execution_policy(arguments)
     checkpoint = arguments.output.with_name(f"{arguments.output.stem}-checkpoint.json")
     if arguments.output.exists() or checkpoint.exists():

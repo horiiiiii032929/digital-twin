@@ -105,6 +105,17 @@ describe("student API client", () => {
       ),
     )
   })
+
+  it("encodes dynamic student path segments", async () => {
+    const fetchMock = stubFetch({})
+
+    await getStudentConversation("conversation ?one", "student-a")
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/student/conversations/conversation%20%3Fone",
+      expect.any(Object),
+    )
+  })
 })
 
 function stubFetch(payload: unknown, status = 200) {

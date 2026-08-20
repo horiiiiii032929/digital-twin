@@ -12,6 +12,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.validate_multimodal_retrieval_dataset import validate_dataset
 
 
@@ -450,6 +452,7 @@ def write_text(path: Path, text: str) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         prior_dataset = load_json(args.output) if args.output.is_file() else None
         dataset = build_dataset(load_json(args.sample_queue), load_json(args.authoring))

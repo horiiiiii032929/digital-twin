@@ -52,15 +52,20 @@ def test_bbox_and_spatial_helpers_are_normalized() -> None:
     assert spatial_label((0.7, 0.7, 0.2, 0.2)) == "bottom-right"
     with pytest.raises(ValueError, match="at least one"):
         union_bbox([])
+    with pytest.raises(ValueError, match="normalized"):
+        bbox_iou((0.9, 0.9, 0.2, 0.2), (0.0, 0.0, 1.0, 1.0))
 
 
 def test_contextual_crop_expands_narrow_regions_and_stays_on_page() -> None:
     expanded = contextual_crop_bbox((0.9, 0.95, 0.08, 0.03))
 
     assert expanded == pytest.approx((0.75, 0.8, 0.25, 0.2))
-    assert normalized_crop_pixels(
-        expanded, image_width=1000, image_height=500
-    ) == (750, 400, 1000, 500)
+    assert normalized_crop_pixels(expanded, image_width=1000, image_height=500) == (
+        750,
+        400,
+        1000,
+        500,
+    )
 
 
 def test_region_fusion_merges_duplicate_text_and_visual_records() -> None:
@@ -126,9 +131,7 @@ def test_description_is_flattened_without_becoming_authoritative() -> None:
         }
     ]
 
-    records = build_candidate_records(
-        asset, ocr_blocks=blocks, description=description
-    )
+    records = build_candidate_records(asset, ocr_blocks=blocks, description=description)
 
     assert len(records["V0"]) == 1
     assert len(records["V1"]) == 2
@@ -164,6 +167,7 @@ def test_course_retrievers_keep_records_isolated() -> None:
             "asset_id": "asset-a",
             "course_id": "IT5001",
             "source_artifact_id": "source-a",
+            "source_document_sha256": "c" * 64,
             "render_sha256": "a" * 64,
             "page": 1,
             "permission": "course-approved-local-only",
@@ -176,6 +180,7 @@ def test_course_retrievers_keep_records_isolated() -> None:
             "asset_id": "asset-b",
             "course_id": "IT5002",
             "source_artifact_id": "source-b",
+            "source_document_sha256": "d" * 64,
             "render_sha256": "b" * 64,
             "page": 1,
             "permission": "course-approved-local-only",
@@ -236,7 +241,10 @@ def test_modality_router_prefers_structured_regions_and_keeps_text_fallback() ->
     scan = retriever.retrieve("What does a cache obtain before modification?", limit=3)
     assert scan[0].chunk.id == "ocr"
     assert retriever.last_route == RegionRoute.GENERAL
-    assert classify_region_query("Show the dashboard screenshot") == RegionRoute.VISUAL_TEXT
+    assert (
+        classify_region_query("Show the dashboard screenshot")
+        == RegionRoute.VISUAL_TEXT
+    )
 
 
 def _region_chunk(

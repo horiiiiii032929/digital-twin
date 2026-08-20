@@ -10,6 +10,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.it5002_rapid_common import (
     HELDOUT_PATH,
     LOCAL_RUN_ROOT,
@@ -39,6 +41,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--latency-contaminated", action="store_true")
     args = parser.parse_args()
+    require_pre_evaluation_operation_allowed("heldout_execution")
 
     analysis = analyze(
         development_result_path=args.development_result,

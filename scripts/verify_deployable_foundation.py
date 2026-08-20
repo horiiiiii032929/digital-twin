@@ -18,6 +18,7 @@ from fastapi.testclient import TestClient
 from services.api.app.config import AppSettings, RuntimeMode
 from services.api.app.factory import create_app
 from services.operations import create_runtime_backup, restore_runtime_backup
+from src.digital_twin.grounding import AnyHitEvidenceGate
 from src.digital_twin.student import (
     AccountRole,
     SQLiteStudentRepository,
@@ -60,7 +61,10 @@ def run_acceptance() -> dict[str, Any]:
         root = Path(temporary)
         runtime_root = root / "primary-runtime"
         settings = _settings(runtime_root)
-        app = create_app(settings=settings)
+        app = create_app(
+            settings=settings,
+            student_evidence_gate=AnyHitEvidenceGate(),
+        )
         client = TestClient(app, base_url="https://testserver")
         try:
             accounts = _provision_and_login(client, app, checks)
@@ -118,6 +122,8 @@ def run_acceptance() -> dict[str, Any]:
         "split": "development",
         "network_calls": 0,
         "private_data_used": False,
+        "evidence_gate": "any-hit-evidence-gate-synthetic-control-only",
+        "product_evidence_gate_selected": False,
         "code_revision": _git_value("rev-parse", "HEAD"),
         "working_tree_dirty": bool(_git_value("status", "--porcelain")),
         "environment": {
@@ -133,7 +139,9 @@ def run_acceptance() -> dict[str, Any]:
         "external_https_rehearsal": "pending-host-and-domain",
         "decision": "go-deeper" if local_pass else "refine",
         "decision_reason": (
-            "All local hard gates passed; public DNS/certificate issuance remains."
+            "Local architecture gates passed with a synthetic-only evidence control; "
+            "a product evidence-sufficiency method and public DNS/certificate "
+            "issuance remain."
             if local_pass
             else "One or more frozen local gates failed."
         ),
@@ -436,7 +444,10 @@ def _capacity(client, checks):
 
 
 def _restart_verification(settings, accounts, workflow, checks):
-    app = create_app(settings=settings)
+    app = create_app(
+        settings=settings,
+        student_evidence_gate=AnyHitEvidenceGate(),
+    )
     client = TestClient(app, base_url="https://testserver")
     try:
         _expect(
@@ -490,7 +501,10 @@ def _backup_restore_verification(root, settings, accounts, workflow, checks):
         manifest.model_dump() == restored.model_dump(),
     )
     restored_settings = _settings(restored_root)
-    app = create_app(settings=restored_settings)
+    app = create_app(
+        settings=restored_settings,
+        student_evidence_gate=AnyHitEvidenceGate(),
+    )
     client = TestClient(app, base_url="https://testserver")
     try:
         _expect(
@@ -530,7 +544,11 @@ def _demo_rollback_verification(root, checks):
         allowed_origins=("http://localhost:5173",),
         secure_cookies=False,
     )
-    app = create_app(student_repository=students, settings=settings)
+    app = create_app(
+        student_repository=students,
+        settings=settings,
+        student_evidence_gate=AnyHitEvidenceGate(),
+    )
     client = TestClient(app)
     try:
         response = client.get(

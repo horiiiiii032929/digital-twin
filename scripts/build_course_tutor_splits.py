@@ -21,6 +21,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.it5002_rapid_common import load_course_corpus
 from scripts.validate_course_tutor_dataset import (
     load_json,
@@ -619,6 +621,7 @@ def validate_split_isolation(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     authoring_blueprint = load_authoring_blueprint(args.authoring_blueprint)
     corpus = load_course_corpus()
     manifest = corpus.manifest

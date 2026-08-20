@@ -30,6 +30,10 @@ from src.digital_twin.generation import (
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import DocumentChunk, RetrievalHit
+from src.digital_twin.repository_freeze import (
+    freeze_status,
+    require_pre_evaluation_operation_allowed,
+)
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     ReleaseStatus,
@@ -253,13 +257,18 @@ def build_preflight(assets: dict[str, Any]) -> dict[str, Any]:
     instrument = assets["instrument"]
     credential_name = instrument["candidate_binding"]["credential_environment_variable"]
     credential_present = bool(os.environ.get(credential_name, "").strip())
+    repository_freeze = freeze_status()
     return {
         "run_type": "generator-qualification-v1-preflight",
         "status": (
-            "ready-for-development-execution"
+            "blocked-repository-correctness-freeze"
+            if repository_freeze.active
+            else "ready-for-development-execution"
             if credential_present
             else "blocked-missing-provider-credential"
         ),
+        "repository_freeze_id": repository_freeze.freeze_id,
+        "repository_freeze_active": repository_freeze.active,
         "instrument_id": instrument["instrument_id"],
         "binding": instrument["candidate_binding"],
         "prompt_conditions": [
@@ -552,7 +561,11 @@ def _approved_synthetic_policy():
         if field.status == FieldStatus.BLOCKS_RELEASE:
             field.status = FieldStatus.RESOLVED
         if field.id == "knowledge_source_policy":
-            field.value = {**field.value, "confirmed": True}
+            field.value = {
+                **field.value,
+                "source_strictness": "course_only",
+                "confirmed": True,
+            }
         if field.id in {"academic_integrity_policy", "professor_release_approval"}:
             field.status = FieldStatus.RESOLVED
         if field.id == "professor_release_approval":
@@ -629,6 +642,10 @@ def _arguments() -> argparse.Namespace:
 
 def main() -> None:
     arguments = _arguments()
+    if arguments.split == "heldout":
+        require_pre_evaluation_operation_allowed("heldout_execution")
+    if arguments.execute:
+        require_pre_evaluation_operation_allowed("method_evaluation_execution")
     assets = validate_assets(arguments.instrument)
     instrument = assets["instrument"]
     allowed_conditions = {

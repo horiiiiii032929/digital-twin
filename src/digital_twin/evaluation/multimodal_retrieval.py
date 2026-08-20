@@ -13,6 +13,23 @@ from src.digital_twin.grounding.retrieval import BM25Retriever, lexical_tokens
 BBox = tuple[float, float, float, float]
 
 
+def validated_bbox(bbox: Iterable[float]) -> BBox:
+    """Validate an x/y/width/height box in normalized page coordinates."""
+
+    try:
+        values = tuple(float(value) for value in bbox)
+    except (TypeError, ValueError) as error:
+        raise ValueError("bounding box must contain four numeric values") from error
+    if len(values) != 4:
+        raise ValueError("bounding box must contain four numeric values")
+    x, y, width, height = values
+    if any(not math.isfinite(value) for value in values):
+        raise ValueError("bounding box values must be finite")
+    if x < 0 or y < 0 or width <= 0 or height <= 0 or x + width > 1 or y + height > 1:
+        raise ValueError("bounding box must be normalized x/y/width/height")
+    return x, y, width, height
+
+
 def contextual_crop_bbox(
     bbox: BBox,
     *,
@@ -21,7 +38,16 @@ def contextual_crop_bbox(
     minimum_height: float = 0.20,
 ) -> BBox:
     """Expand a normalized region deterministically while staying page-local."""
-    x, y, width, height = bbox
+    x, y, width, height = validated_bbox(bbox)
+    if not math.isfinite(padding) or padding < 0:
+        raise ValueError("padding must be finite and non-negative")
+    if (
+        not math.isfinite(minimum_width)
+        or not 0 < minimum_width <= 1
+        or not math.isfinite(minimum_height)
+        or not 0 < minimum_height <= 1
+    ):
+        raise ValueError("minimum crop dimensions must be between zero and one")
     target_width = min(1.0, max(width + 2 * padding, minimum_width))
     target_height = min(1.0, max(height + 2 * padding, minimum_height))
     center_x = x + width / 2
@@ -35,9 +61,16 @@ def normalized_crop_pixels(
     bbox: BBox, *, image_width: int, image_height: int
 ) -> tuple[int, int, int, int]:
     """Convert a normalized top-left box to a non-empty pixel crop."""
-    if image_width < 1 or image_height < 1:
+    if (
+        isinstance(image_width, bool)
+        or not isinstance(image_width, int)
+        or isinstance(image_height, bool)
+        or not isinstance(image_height, int)
+        or image_width < 1
+        or image_height < 1
+    ):
         raise ValueError("image dimensions must be positive")
-    x, y, width, height = bbox
+    x, y, width, height = validated_bbox(bbox)
     left = max(0, min(image_width - 1, math.floor(x * image_width)))
     top = max(0, min(image_height - 1, math.floor(y * image_height)))
     right = max(left + 1, min(image_width, math.ceil((x + width) * image_width)))
@@ -47,7 +80,7 @@ def normalized_crop_pixels(
 
 def region_key(asset_id: str, bbox: Iterable[float]) -> str:
     """Create a stable key that merges OCR/layout records for one region."""
-    coordinates = ",".join(f"{float(value):.6f}" for value in bbox)
+    coordinates = ",".join(f"{value:.6f}" for value in validated_bbox(bbox))
     return f"{asset_id}:{coordinates}"
 
 
@@ -59,7 +92,14 @@ def reciprocal_rank_fuse_regions(
     limit: int = 10,
 ) -> list[dict[str, Any]]:
     """Fuse text and image rankings at region identity, not duplicate record ID."""
-    if rank_constant < 1 or limit < 1:
+    if (
+        isinstance(rank_constant, bool)
+        or not isinstance(rank_constant, int)
+        or isinstance(limit, bool)
+        or not isinstance(limit, int)
+        or rank_constant < 1
+        or limit < 1
+    ):
         raise ValueError("rank_constant and limit must be positive")
     scores: dict[str, float] = {}
     representatives: dict[str, dict[str, Any]] = {}
@@ -92,7 +132,7 @@ def reciprocal_rank_fuse_regions(
 
 
 def union_bbox(boxes: Iterable[BBox]) -> BBox:
-    materialized = list(boxes)
+    materialized = [validated_bbox(box) for box in boxes]
     if not materialized:
         raise ValueError("at least one bounding box is required")
     left = min(box[0] for box in materialized)
@@ -103,7 +143,7 @@ def union_bbox(boxes: Iterable[BBox]) -> BBox:
 
 
 def spatial_label(bbox: BBox) -> str:
-    x, y, width, height = bbox
+    x, y, width, height = validated_bbox(bbox)
     center_x = x + width / 2
     center_y = y + height / 2
     vertical = "top" if center_y < 1 / 3 else "bottom" if center_y > 2 / 3 else "middle"
@@ -120,15 +160,30 @@ def group_ocr_lines(
     vertical_gap: float = 0.035,
 ) -> list[dict[str, Any]]:
     """Combine reading-order OCR lines into bounded local text regions."""
-    if maximum_lines < 1:
+    if (
+        isinstance(maximum_lines, bool)
+        or not isinstance(maximum_lines, int)
+        or maximum_lines < 1
+    ):
         raise ValueError("maximum_lines must be positive")
+    if not math.isfinite(vertical_gap) or vertical_gap < 0:
+        raise ValueError("vertical_gap must be finite and non-negative")
+    for line in lines:
+        validated_bbox(line["bbox"])
+        confidence = float(line["confidence"])
+        if not math.isfinite(confidence) or not 0 <= confidence <= 1:
+            raise ValueError("OCR confidence must be between zero and one")
+        if not str(line["text"]).strip():
+            raise ValueError("OCR line text must not be blank")
     ordered = sorted(lines, key=lambda line: (line["bbox"][1], line["bbox"][0]))
     groups: list[list[dict[str, Any]]] = []
     current: list[dict[str, Any]] = []
     current_bottom = 0.0
     for line in ordered:
         top = float(line["bbox"][1])
-        if current and (len(current) >= maximum_lines or top - current_bottom > vertical_gap):
+        if current and (
+            len(current) >= maximum_lines or top - current_bottom > vertical_gap
+        ):
             groups.append(current)
             current = []
         current.append(line)
@@ -141,7 +196,9 @@ def group_ocr_lines(
 
     blocks = []
     for index, group in enumerate(groups):
-        bbox = union_bbox(tuple(float(value) for value in line["bbox"]) for line in group)
+        bbox = union_bbox(
+            tuple(float(value) for value in line["bbox"]) for line in group
+        )
         blocks.append(
             {
                 "block_id": f"ocr-block-{index:03d}",
@@ -245,8 +302,8 @@ def build_candidate_records(
 
 
 def bbox_iou(left: BBox, right: BBox) -> float:
-    left_x, left_y, left_width, left_height = left
-    right_x, right_y, right_width, right_height = right
+    left_x, left_y, left_width, left_height = validated_bbox(left)
+    right_x, right_y, right_width, right_height = validated_bbox(right)
     intersection_width = max(
         0.0,
         min(left_x + left_width, right_x + right_width) - max(left_x, right_x),
@@ -269,6 +326,7 @@ def build_course_retrievers(
         raise ValueError("candidate representation contains duplicate record IDs")
     by_course: dict[str, list[DocumentChunk]] = {}
     for ordinal, record in enumerate(records):
+        x, y, width, height = validated_bbox(record["bbox"])
         by_course.setdefault(record["course_id"], []).append(
             DocumentChunk(
                 id=record["record_id"],
@@ -276,12 +334,13 @@ def build_course_retrievers(
                 text=record["text"],
                 ordinal=ordinal,
                 source_artifact_id=record["source_artifact_id"],
-                content_hash=record["render_sha256"],
                 locator=f"page:{record['page']}",
                 page_start=record["page"],
                 page_end=record["page"],
-                retrieval_allowed=record["permission"]
-                == "course-approved-local-only",
+                bounding_box=(x, y, x + width, y + height),
+                source_checksum=record["source_document_sha256"],
+                region_checksum=record["render_sha256"],
+                retrieval_allowed=record["permission"] == "course-approved-local-only",
                 metadata={"asset_id": record["asset_id"]},
             )
         )
@@ -297,7 +356,20 @@ def unique_asset_hits(
     seen: set[str] = set()
     result = []
     for hit in hits:
-        record = records_by_id[hit.chunk.id]
+        record = records_by_id.get(hit.chunk.id)
+        if record is None:
+            raise ValueError("retrieval hit references an unknown candidate record")
+        x, y, width, height = validated_bbox(record["bbox"])
+        if (
+            hit.chunk.document_id != record["asset_id"]
+            or hit.chunk.source_artifact_id != record["source_artifact_id"]
+            or hit.chunk.page_start != record["page"]
+            or hit.chunk.page_end != record["page"]
+            or hit.chunk.bounding_box != (x, y, x + width, y + height)
+            or hit.chunk.source_checksum != record["source_document_sha256"]
+            or hit.chunk.region_checksum != record["render_sha256"]
+        ):
+            raise ValueError("retrieval hit lineage differs from candidate record")
         if record["asset_id"] in seen:
             continue
         seen.add(record["asset_id"])
@@ -343,7 +415,9 @@ def query_has_retrieved_terms(query: str, hit_texts: list[str]) -> bool:
         "which",
     }
     query_terms = {
-        term for term in lexical_tokens(query) if term not in stopwords and len(term) > 2
+        term
+        for term in lexical_tokens(query)
+        if term not in stopwords and len(term) > 2
     }
     retrieved_terms = set(lexical_tokens("\n".join(hit_texts)))
     required = min(2, len(query_terms))

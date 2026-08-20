@@ -65,6 +65,7 @@ export function LoginScreen({ error, submitting, onSubmit }: LoginScreenProps) {
                     autoFocus
                     className="h-11 w-full rounded-lg border bg-white px-3.5 text-sm outline-none transition focus:border-[var(--accent-strong)] focus:ring-3 focus:ring-[var(--accent-soft)]"
                     name="email"
+                    maxLength={320}
                     onChange={(event) => setEmail(event.target.value)}
                     required
                     type="email"
@@ -77,6 +78,7 @@ export function LoginScreen({ error, submitting, onSubmit }: LoginScreenProps) {
                     autoComplete="current-password"
                     className="h-11 w-full rounded-lg border bg-white px-3.5 text-sm outline-none transition focus:border-[var(--accent-strong)] focus:ring-3 focus:ring-[var(--accent-soft)]"
                     name="password"
+                    maxLength={1024}
                     onChange={(event) => setPassword(event.target.value)}
                     required
                     type="password"
@@ -90,7 +92,12 @@ export function LoginScreen({ error, submitting, onSubmit }: LoginScreenProps) {
                   </Alert>
                 ) : null}
 
-                <Button className="w-full" disabled={submitting} size="lg">
+                <Button
+                  className="w-full"
+                  disabled={submitting}
+                  size="lg"
+                  type="submit"
+                >
                   {submitting ? "Signing in…" : "Sign in"}
                   {!submitting ? <ArrowRight aria-hidden="true" /> : null}
                 </Button>

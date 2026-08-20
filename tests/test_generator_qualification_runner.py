@@ -101,7 +101,8 @@ def test_generator_qualification_preflight_never_emits_credential(monkeypatch):
 
     preflight = build_preflight(validate_assets())
 
-    assert preflight["status"] == "ready-for-development-execution"
+    assert preflight["status"] == "blocked-repository-correctness-freeze"
+    assert preflight["repository_freeze_active"] is True
     assert preflight["credential_present"] is True
     assert preflight["credential_value_emitted"] is False
     assert "synthetic-secret-value" not in str(preflight)

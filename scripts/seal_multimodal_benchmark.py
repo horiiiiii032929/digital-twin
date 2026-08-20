@@ -10,6 +10,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.validate_multimodal_retrieval_dataset import (
     ROOT,
     load_json,
@@ -179,6 +181,7 @@ def write_exclusive(artifacts: dict[str, tuple[Path, bytes]]) -> None:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     try:
         dataset = load_json(args.dataset)
         validate_dataset(dataset)

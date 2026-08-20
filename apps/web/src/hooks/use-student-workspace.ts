@@ -17,6 +17,7 @@ import type {
 } from "@/lib/api"
 import {
   forgetStudentConversation,
+  isConversationForCurrentRelease,
   readStudentConversationIndex,
   rememberStudentConversation,
   writeStudentConversationIndex,
@@ -86,7 +87,7 @@ export function useStudentWorkspace(
           activeCourseId: null,
           conversationByCourse: {},
         }
-      : readStudentConversationIndex(window.localStorage),
+      : readStudentConversationIndex(window.localStorage, accountId),
   )
 
   const saveIndex = useCallback(
@@ -94,13 +95,13 @@ export function useStudentWorkspace(
       indexRef.current = next
       if (typeof window !== "undefined") {
         try {
-          writeStudentConversationIndex(window.localStorage, next)
+          writeStudentConversationIndex(window.localStorage, next, accountId)
         } catch {
           // Browser storage is an optional convenience; server state stays authoritative.
         }
       }
     },
-    [],
+    [accountId],
   )
 
   const loadConversation = useCallback(
@@ -122,31 +123,38 @@ export function useStudentWorkspace(
             activeConversationId,
             accountId,
           )
-          const tutorMessages = view.messages.filter(
-            (message) => message.role === "tutor",
-          )
-          const citationLists = await Promise.all(
-            tutorMessages.map((message) =>
-              listStudentMessageCitations(message.id, accountId),
-            ),
-          )
-          if (operation !== operationRef.current) return
+          if (!isConversationForCurrentRelease(view.conversation, course)) {
+            saveIndex(
+              forgetStudentConversation(indexRef.current, course.course_id),
+            )
+            activeConversationId = undefined
+          } else {
+            const tutorMessages = view.messages.filter(
+              (message) => message.role === "tutor",
+            )
+            const citationLists = await Promise.all(
+              tutorMessages.map((message) =>
+                listStudentMessageCitations(message.id, accountId),
+              ),
+            )
+            if (operation !== operationRef.current) return
 
-          const nextCitations = Object.fromEntries(
-            tutorMessages.map((message, index) => [
-              message.id,
-              citationLists[index] ?? [],
-            ]),
-          )
-          const latestCitation = [...citationLists]
-            .reverse()
-            .find((citations) => citations.length > 0)?.[0]
-          setConversation(view.conversation)
-          setMessages(view.messages)
-          setCitationsByMessage(nextCitations)
-          setSelectedCitation(latestCitation ?? null)
-          setIsLoadingConversation(false)
-          return
+            const nextCitations = Object.fromEntries(
+              tutorMessages.map((message, index) => [
+                message.id,
+                citationLists[index] ?? [],
+              ]),
+            )
+            const latestCitation = [...citationLists]
+              .reverse()
+              .find((citations) => citations.length > 0)?.[0]
+            setConversation(view.conversation)
+            setMessages(view.messages)
+            setCitationsByMessage(nextCitations)
+            setSelectedCitation(latestCitation ?? null)
+            setIsLoadingConversation(false)
+            return
+          }
         } catch (caught) {
           const staleLocalReference =
             caught instanceof StudentApiError && [403, 404].includes(caught.status)

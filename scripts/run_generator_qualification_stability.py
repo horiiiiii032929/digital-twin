@@ -17,6 +17,7 @@ from scripts.run_generator_qualification import (
     validate_assets,
 )
 from scripts.professor_fidelity_scoring import nearest_rank_percentile
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 INSTRUMENT_PATH = (
@@ -96,6 +97,8 @@ def main():
     parser.add_argument("--allow-external-provider", action="store_true")
     parser.add_argument("--output", type=Path)
     arguments = parser.parse_args()
+    if arguments.execute:
+        require_pre_evaluation_operation_allowed("external_model_evaluation")
     assets = validate_assets(INSTRUMENT_PATH)
     if not arguments.execute:
         print(json.dumps(build_preflight(assets), indent=2, sort_keys=True))

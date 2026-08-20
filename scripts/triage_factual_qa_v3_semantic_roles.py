@@ -14,19 +14,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data/interim/factual_qa_v3/source_dispositions_v4.json"
 PORTFOLIO = ROOT / "research/05_evaluation/cross_course_portfolio_v2.manifest.json"
-PRIVATE_OUTPUT = ROOT / "data/interim/factual_qa_v3/source_roles_v1.json"
-SUMMARY_OUTPUT = ROOT / "reports/generated/factual-qa-v3-source-roles-v1.json"
-ASSESSMENT_ARTIFACT_FORMATS = {
-    "code",
-    "diagram",
-    "notebook",
-    "office_document",
-    "other",
-    "raster_image",
-    "structured_table",
-    "structured_text",
-    "vector_image",
-}
+PRIVATE_OUTPUT = ROOT / "data/interim/factual_qa_v3/source_roles_v2.json"
+SUMMARY_OUTPUT = ROOT / "reports/generated/factual-qa-v3-source-roles-v2.json"
 
 
 def approved_hashes(portfolio: dict[str, Any]) -> set[str]:
@@ -50,25 +39,17 @@ def triage(
                 record["requires_explicit_review"] = False
                 rule = "approved_cross_course_portfolio_v2_hash"
             elif original["inventory_eligibility"] == "eligible_candidate":
-                record["source_role"] = "supporting_context"
-                record["requires_explicit_review"] = False
-                rule = "recognized_course_scoped_non_authoritative"
+                rule = "course_candidate_requires_content_review"
             elif (
                 original["disposition_reason"]
                 == "unsupported or extensionless format"
                 and original["course_id"] != "unassigned"
             ):
-                record["source_role"] = "supporting_context"
-                record["requires_explicit_review"] = False
-                rule = "course_scoped_and_conversion_resolved"
-            elif (
-                original["disposition_reason"]
-                == "assessment-like path requires content review"
-                and original["format_group"] in ASSESSMENT_ARTIFACT_FORMATS
+                rule = "conversion_resolved_requires_content_review"
+            elif original["disposition_reason"] == (
+                "assessment-like path requires content review"
             ):
-                record["source_role"] = "excluded_integrity_or_privacy"
-                record["requires_explicit_review"] = False
-                rule = "completed_work_risk_non_document_assessment_artifact"
+                rule = "assessment_candidate_requires_content_review"
             else:
                 rule = "content_level_review_required"
         record["semantic_triage_rule"] = rule
@@ -85,7 +66,7 @@ def triage(
     now = datetime.now(UTC).isoformat()
     private = {
         "schema_version": 1,
-        "manifest_id": "factual-qa-v3-source-roles-v1",
+        "manifest_id": "factual-qa-v3-source-roles-v2",
         "generated_at": now,
         "conversion_manifest_sha256": manifest["manifest_sha256"],
         "approved_portfolio_id": "cross-course-portfolio-v2",
@@ -105,6 +86,8 @@ def triage(
         "unresolved_review_count": sum(unresolved_by_format.values()),
         "unresolved_by_format": dict(sorted(unresolved_by_format.items())),
         "semantic_role_gate": sum(unresolved_by_format.values()) == 0,
+        "content_eligibility_complete": False,
+        "path_or_format_only_labels_are_final": False,
         "contains_private_paths": False,
         "contains_source_content": False,
         "external_provider_calls": 0,

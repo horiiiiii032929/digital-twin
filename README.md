@@ -48,8 +48,6 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm ci`: install the locked frontend workspace dependencies.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
-- `npm run seed:student-demo`: seed the ignored local database with one
-  synthetic student, course, published release, and citation-bearing sources.
 - `npm run check`: run the complete local and CI verification suite.
 - `npm run audit:dependencies`: audit npm plus the complete Python lock and
   reject any unreviewed or drifted vulnerability finding.
@@ -96,11 +94,11 @@ Actions runs `npm run check` for pushes to `main` and for pull requests.
 
 ## Local product demo
 
-Run `npm run seed:student-demo`, `npm run dev:api`, and `npm run dev:web`, then
+Run `npm run dev:api` and `npm run dev:web`, then
 open <http://localhost:5173/> for the professor setup workspace or
 <http://localhost:5173/student> for the student tutor. Both routes use synthetic
-local fixtures. The student `X-Account-ID` boundary is demonstrative, not
-production authentication.
+in-memory fixtures created automatically at demo startup. The student
+`X-Account-ID` boundary is demonstrative, not production authentication.
 
 ## Invite-only staging candidate
 

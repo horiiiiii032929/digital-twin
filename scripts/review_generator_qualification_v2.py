@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -399,6 +400,8 @@ def _working_tree_dirty() -> bool:
 
 def main() -> int:
     args = parse_args()
+    if args.execute:
+        require_pre_evaluation_operation_allowed("local_model_evaluation")
     dataset, run = load_assets()
     digest = installed_model_digest(args.ollama_url)
     preflight = {

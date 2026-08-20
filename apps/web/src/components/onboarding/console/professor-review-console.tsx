@@ -55,6 +55,8 @@ const TOOL_TITLES: Record<ReviewStageId, string> = {
 }
 
 type InspectorMode = ReviewStageId | "activity"
+const STUDENT_TUTOR_LINK_AVAILABLE =
+  import.meta.env.VITE_AUTH_MODE !== "session"
 
 export function ProfessorReviewConsole({
   controller,
@@ -225,12 +227,14 @@ export function ProfessorReviewConsole({
               {releaseReadiness.blockers.length} blocker
               {releaseReadiness.blockers.length === 1 ? "" : "s"}
             </Button>
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <a href="/student">
-                <BookOpen data-icon="inline-start" />
-                Student tutor
-              </a>
-            </Button>
+            {STUDENT_TUTOR_LINK_AVAILABLE ? (
+              <Button asChild variant="ghost" className="w-full justify-start">
+                <a href="/student">
+                  <BookOpen data-icon="inline-start" />
+                  Student tutor
+                </a>
+              </Button>
+            ) : null}
           </div>
         </aside>
 
@@ -408,12 +412,14 @@ function ProfessorHeader({
       </div>
 
       <div className="flex items-center gap-1.5">
-        <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-          <a href="/student" aria-label="Open student tutor">
-            <BookOpen data-icon="inline-start" />
-            Student tutor
-          </a>
-        </Button>
+        {STUDENT_TUTOR_LINK_AVAILABLE ? (
+          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <a href="/student" aria-label="Open student tutor">
+              <BookOpen data-icon="inline-start" />
+              Student tutor
+            </a>
+          </Button>
+        ) : null}
         <Button
           ref={inspectorTriggerRef}
           type="button"
@@ -563,12 +569,14 @@ function ProfessorMobileMenu({
               <Activity data-icon="inline-start" />
               {blockerCount} blocker{blockerCount === 1 ? "" : "s"}
             </Button>
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <a href="/student">
-                <BookOpen data-icon="inline-start" />
-                Student tutor
-              </a>
-            </Button>
+            {STUDENT_TUTOR_LINK_AVAILABLE ? (
+              <Button asChild variant="ghost" className="w-full justify-start">
+                <a href="/student">
+                  <BookOpen data-icon="inline-start" />
+                  Student tutor
+                </a>
+              </Button>
+            ) : null}
           </div>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>

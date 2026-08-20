@@ -11,6 +11,8 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.execute_professor_fidelity import _load_course_chunks
 
 
@@ -285,6 +287,7 @@ def main() -> None:
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     arguments = parser.parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     if not arguments.confirm_historical_reproduction:
         raise ValueError(
             "anchor review preparation is historical reproduction and requires "

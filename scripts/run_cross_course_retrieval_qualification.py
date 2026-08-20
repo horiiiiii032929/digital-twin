@@ -37,6 +37,7 @@ from src.digital_twin.evaluation import (
     load_sealed_development,
 )
 from src.digital_twin.grounding import DocumentChunk
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 CONFIG_PATH = (
@@ -324,6 +325,7 @@ def main() -> int:
         )
         return 0
 
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     corpus_started = time.perf_counter()
     _manifest, records = load_corpus(args.source_root)
     corpus_load_seconds = time.perf_counter() - corpus_started

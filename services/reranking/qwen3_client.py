@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import time
 from collections.abc import Sequence
 from pathlib import Path
@@ -26,7 +27,11 @@ def left_pad_token_sequences(
 
     if not sequences:
         return [], []
-    if pad_token_id < 0:
+    if (
+        isinstance(pad_token_id, bool)
+        or not isinstance(pad_token_id, int)
+        or pad_token_id < 0
+    ):
         raise ValueError("pad token ID cannot be negative")
     if any(not sequence for sequence in sequences):
         raise ValueError("reranking token sequences cannot be empty")
@@ -34,7 +39,12 @@ def left_pad_token_sequences(
     input_ids: list[list[int]] = []
     attention_masks: list[list[int]] = []
     for sequence in sequences:
-        values = [int(token_id) for token_id in sequence]
+        if any(
+            isinstance(token_id, bool) or not isinstance(token_id, int) or token_id < 0
+            for token_id in sequence
+        ):
+            raise ValueError("reranking token IDs must be non-negative integers")
+        values = list(sequence)
         padding = maximum - len(values)
         input_ids.append([pad_token_id] * padding + values)
         attention_masks.append([0] * padding + [1] * len(values))
@@ -65,10 +75,14 @@ class Qwen3Reranker:
             raise ValueError(f"Qwen3 reranker model path is missing: {model_path}")
         if not instruction.strip():
             raise ValueError("Qwen3 reranker instruction is required")
-        if batch_size < 1:
+        if isinstance(batch_size, bool) or batch_size < 1:
             raise ValueError("batch_size must be at least 1")
-        if max_length < 64:
+        if isinstance(max_length, bool) or max_length < 64:
             raise ValueError("max_length must be at least 64")
+        if device not in {"cpu", "mps", "cuda"}:
+            raise ValueError("device must be cpu, mps, or cuda")
+        if dtype not in {"float16", "bfloat16", "float32"}:
+            raise ValueError("dtype must be float16, bfloat16, or float32")
 
         try:
             import torch
@@ -80,6 +94,8 @@ class Qwen3Reranker:
 
         if device == "mps" and not torch.backends.mps.is_available():
             raise ValueError("MPS was requested but is unavailable")
+        if device == "cuda" and not torch.cuda.is_available():
+            raise ValueError("CUDA was requested but is unavailable")
         try:
             torch_dtype = getattr(torch, dtype)
         except AttributeError as error:
@@ -113,6 +129,14 @@ class Qwen3Reranker:
         )
         self._false_token_id = self._tokenizer.convert_tokens_to_ids("no")
         self._true_token_id = self._tokenizer.convert_tokens_to_ids("yes")
+        if (
+            not isinstance(self._false_token_id, int)
+            or not isinstance(self._true_token_id, int)
+            or self._false_token_id < 0
+            or self._true_token_id < 0
+            or self._false_token_id == self._true_token_id
+        ):
+            raise ValueError("Qwen3 reranker yes/no token identities are invalid")
         self._prefix_tokens = self._tokenizer.encode(
             self._PREFIX,
             add_special_tokens=False,
@@ -121,6 +145,10 @@ class Qwen3Reranker:
             self._SUFFIX,
             add_special_tokens=False,
         )
+        if self._tokenizer.pad_token_id is None:
+            raise ValueError("Qwen3 reranker tokenizer requires a pad token")
+        if self.max_length <= len(self._prefix_tokens) + len(self._suffix_tokens):
+            raise ValueError("max_length is too small for the Qwen3 reranker prompt")
 
     def score(self, query: str, documents: Sequence[str]) -> list[float]:
         if not documents:
@@ -177,7 +205,13 @@ class Qwen3Reranker:
                     dim=1,
                 )
                 probabilities = self._torch.softmax(binary, dim=1)[:, 1]
-            scores.extend(probabilities.float().cpu().tolist())
+            batch_scores = probabilities.float().cpu().tolist()
+            if any(
+                not math.isfinite(float(score)) or not 0 <= float(score) <= 1
+                for score in batch_scores
+            ):
+                raise ValueError("Qwen3 returned an invalid reranking score")
+            scores.extend(batch_scores)
             self.ledger.record(
                 values=batch,
                 estimated_input_tokens=estimated_tokens,

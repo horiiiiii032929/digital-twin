@@ -1,3 +1,4 @@
+import math
 import re
 from enum import StrEnum
 from pathlib import Path
@@ -15,6 +16,7 @@ class ComponentKind(StrEnum):
     PARSER = "parser"
     CHUNKER = "chunker"
     RETRIEVER = "retriever"
+    EVIDENCE_SUFFICIENCY = "evidence-sufficiency"
     RERANKER = "reranker"
     FIGURE_DESCRIPTION = "figure-description"
     GENERATOR = "generator"
@@ -60,6 +62,13 @@ class ImplementationRef(BaseModel):
     def identifier_must_be_portable(self) -> "ImplementationRef":
         if not _IDENTIFIER_PATTERN.fullmatch(self.implementation_id):
             raise ValueError("implementation_id must use lowercase kebab-case")
+        if any(not name.strip() for name in self.configuration):
+            raise ValueError("implementation configuration keys cannot be blank")
+        if any(
+            isinstance(value, float) and not math.isfinite(value)
+            for value in self.configuration.values()
+        ):
+            raise ValueError("implementation configuration values must be finite")
         return self
 
 
@@ -224,6 +233,14 @@ class ComponentProfileEntry(BaseModel):
                 raise ValueError("selected components require evidence and hard gates")
             if self.decision == DecisionOutcome.DROP:
                 raise ValueError("selected components cannot have a drop decision")
+            if (
+                self.control is not None
+                and self.control.implementation_id
+                == self.implementation.implementation_id
+                and self.control.version == self.implementation.version
+                and self.control.configuration == self.implementation.configuration
+            ):
+                raise ValueError("selected implementation and control must differ")
         elif self.status == ComponentStatus.PENDING:
             if (
                 self.implementation is not None
@@ -245,7 +262,7 @@ class ComponentProfileEntry(BaseModel):
 
 
 class SystemReleaseProfile(BaseModel):
-    schema_version: Literal[1]
+    schema_version: Literal[1, 2]
     profile_id: str = Field(min_length=1)
     profile_version: str = Field(min_length=1)
     stage: ProfileStage
@@ -258,7 +275,10 @@ class SystemReleaseProfile(BaseModel):
         components = [entry.component for entry in self.components]
         if len(components) != len(set(components)):
             raise ValueError("profile components must be unique")
-        missing = set(ComponentKind) - set(components)
+        required = set(ComponentKind)
+        if self.schema_version == 1:
+            required.remove(ComponentKind.EVIDENCE_SUFFICIENCY)
+        missing = required - set(components)
         if missing:
             names = ", ".join(sorted(component.value for component in missing))
             raise ValueError(f"profile is missing components: {names}")

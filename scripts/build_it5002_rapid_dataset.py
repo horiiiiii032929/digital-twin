@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 from scripts.it5002_rapid_common import (
     DEVELOPMENT_PATH,
@@ -156,6 +157,7 @@ NO_EVIDENCE_QUERIES: dict[str, list[str]] = {
 
 
 def main() -> None:
+    require_pre_evaluation_operation_allowed("dataset_generation")
     corpus = load_course_corpus()
     chunks_by_lecture = _candidate_chunks(corpus.structured_chunks)
     development: list[RapidRetrievalCase] = []

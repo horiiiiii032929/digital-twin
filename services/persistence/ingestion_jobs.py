@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+import math
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from threading import RLock
@@ -18,18 +19,24 @@ from src.digital_twin.student.migrations import apply_migrations
 class SQLiteIngestionJobRepository:
     def __init__(self, path: str | Path) -> None:
         self.path = str(path)
-        Path(self.path).parent.mkdir(parents=True, exist_ok=True)
+        if self.path != ":memory:":
+            Path(self.path).parent.mkdir(parents=True, exist_ok=True)
         self._lock = RLock()
         self._connection = sqlite3.connect(self.path, check_same_thread=False)
         self._connection.row_factory = sqlite3.Row
         self._connection.execute("PRAGMA foreign_keys = ON")
         self._connection.execute("PRAGMA busy_timeout = 5000")
-        self._connection.execute("PRAGMA journal_mode = WAL")
+        if self.path != ":memory:":
+            self._connection.execute("PRAGMA journal_mode = WAL")
         apply_migrations(self._connection)
 
     def close(self) -> None:
         with self._lock:
             self._connection.close()
+
+    def healthcheck(self) -> bool:
+        with self._lock:
+            return self._connection.execute("SELECT 1").fetchone()[0] == 1
 
     def enqueue(self, job: IngestionJob) -> tuple[IngestionJob, bool]:
         with self._lock, self._connection:
@@ -82,7 +89,13 @@ class SQLiteIngestionJobRepository:
         return _job(row) if row else None
 
     def claim(self, worker_id: str, *, lease_seconds: int) -> IngestionJob | None:
-        if not worker_id.strip() or lease_seconds <= 0:
+        if (
+            not worker_id.strip()
+            or isinstance(lease_seconds, bool)
+            or not isinstance(lease_seconds, (int, float))
+            or not math.isfinite(lease_seconds)
+            or lease_seconds <= 0
+        ):
             raise ValueError("worker_id and a positive lease are required")
         now = datetime.now(UTC)
         expires = now + timedelta(seconds=lease_seconds)
@@ -127,14 +140,29 @@ class SQLiteIngestionJobRepository:
 
     def complete(self, job_id: str, worker_id: str, result_json: str) -> bool:
         now = _timestamp()
-        IngestionJobResult.model_validate_json(result_json)
+        result = IngestionJobResult.model_validate_json(result_json)
         with self._lock, self._connection:
+            job = self._connection.execute(
+                """SELECT course_id, artifact_id, version, source_checksum
+                   FROM ingestion_jobs WHERE id = ?""",
+                (job_id,),
+            ).fetchone()
+            if job is None:
+                return False
+            if (
+                result.source_artifact_id
+                != f"{job['course_id']}:{job['artifact_id']}"
+                or result.source_version != job["version"]
+                or result.source_checksum != job["source_checksum"]
+            ):
+                raise ValueError("ingestion result does not match the claimed source")
             cursor = self._connection.execute(
                 """UPDATE ingestion_jobs SET
                      status = ?, result_json = ?, error_code = NULL,
                      error_message = NULL, lease_owner = NULL,
                      lease_expires_at = NULL, updated_at = ?
-                   WHERE id = ? AND status = ? AND lease_owner = ?""",
+                   WHERE id = ? AND status = ? AND lease_owner = ?
+                     AND lease_expires_at > ?""",
                 (
                     IngestionJobStatus.SUCCEEDED.value,
                     result_json,
@@ -142,6 +170,35 @@ class SQLiteIngestionJobRepository:
                     job_id,
                     IngestionJobStatus.RUNNING.value,
                     worker_id,
+                    now,
+                ),
+            )
+        return cursor.rowcount == 1
+
+    def renew_lease(
+        self, job_id: str, worker_id: str, *, lease_seconds: int
+    ) -> bool:
+        if (
+            isinstance(lease_seconds, bool)
+            or not isinstance(lease_seconds, (int, float))
+            or not math.isfinite(lease_seconds)
+            or lease_seconds <= 0
+        ):
+            raise ValueError("lease_seconds must be positive")
+        now = datetime.now(UTC)
+        expires = now + timedelta(seconds=lease_seconds)
+        with self._lock, self._connection:
+            cursor = self._connection.execute(
+                """UPDATE ingestion_jobs SET lease_expires_at = ?, updated_at = ?
+                   WHERE id = ? AND status = ? AND lease_owner = ?
+                     AND lease_expires_at > ?""",
+                (
+                    expires.isoformat(),
+                    now.isoformat(),
+                    job_id,
+                    IngestionJobStatus.RUNNING.value,
+                    worker_id,
+                    now.isoformat(),
                 ),
             )
         return cursor.rowcount == 1
@@ -154,20 +211,25 @@ class SQLiteIngestionJobRepository:
         error_code: str,
         error_message: str,
     ) -> bool:
+        if not error_code.strip() or not error_message.strip():
+            raise ValueError("failed jobs require a sanitized error")
+        now = _timestamp()
         with self._lock, self._connection:
             cursor = self._connection.execute(
                 """UPDATE ingestion_jobs SET
                      status = ?, error_code = ?, error_message = ?,
                      lease_owner = NULL, lease_expires_at = NULL, updated_at = ?
-                   WHERE id = ? AND status = ? AND lease_owner = ?""",
+                   WHERE id = ? AND status = ? AND lease_owner = ?
+                     AND lease_expires_at > ?""",
                 (
                     IngestionJobStatus.FAILED.value,
                     error_code[:80],
                     error_message[:500],
-                    _timestamp(),
+                    now,
                     job_id,
                     IngestionJobStatus.RUNNING.value,
                     worker_id,
+                    now,
                 ),
             )
         return cursor.rowcount == 1
@@ -178,13 +240,12 @@ class SQLiteIngestionJobRepository:
                 """UPDATE ingestion_jobs SET
                      status = ?, lease_owner = NULL, lease_expires_at = NULL,
                      updated_at = ?
-                   WHERE id = ? AND status IN (?, ?, ?)""",
+                   WHERE id = ? AND status IN (?, ?)""",
                 (
                     IngestionJobStatus.CANCELLED.value,
                     _timestamp(),
                     job_id,
                     IngestionJobStatus.PENDING.value,
-                    IngestionJobStatus.RUNNING.value,
                     IngestionJobStatus.FAILED.value,
                 ),
             )
@@ -207,8 +268,9 @@ class SQLiteIngestionJobRepository:
         return self.get(job_id)
 
     def recover_expired(self, now: str) -> int:
+        normalized_now = _normalized_timestamp(now)
         with self._lock, self._connection:
-            return self._recover_expired(now)
+            return self._recover_expired(normalized_now)
 
     def _recover_expired(self, now: str) -> int:
         retryable = self._connection.execute(
@@ -280,3 +342,13 @@ def _job(row: sqlite3.Row) -> IngestionJob:
 
 def _timestamp() -> str:
     return datetime.now(UTC).isoformat()
+
+
+def _normalized_timestamp(value: str) -> str:
+    try:
+        parsed = datetime.fromisoformat(value)
+    except (TypeError, ValueError) as error:
+        raise ValueError("lease recovery time must be an ISO-8601 timestamp") from error
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError("lease recovery time must include a timezone")
+    return parsed.astimezone(UTC).isoformat()

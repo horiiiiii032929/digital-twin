@@ -52,6 +52,8 @@ import { loadStudentCitationCrop } from "@/lib/api"
 import { cn } from "@/lib/utils"
 import { WorkspaceBrand } from "@/components/workspace/workspace-brand"
 
+const SESSION_AUTH_ENABLED = import.meta.env.VITE_AUTH_MODE === "session"
+
 export function StudentWorkspace({
   controller,
 }: {
@@ -96,7 +98,10 @@ export function StudentWorkspace({
   }, [])
 
   useEffect(() => {
-    if (!selectedCitation) setCitationPanelOpen(false)
+    if (!selectedCitation) {
+      setCitationPanelOpen(false)
+      setCitationSheetOpen(false)
+    }
   }, [selectedCitation])
 
   const openCitation = (
@@ -320,11 +325,13 @@ function StudentHeader({
         ) : null}
       </div>
       <div className="flex items-center gap-1.5">
-        <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-          <a href="/" aria-label="Open tutor setup">
-            Tutor setup
-          </a>
-        </Button>
+        {!SESSION_AUTH_ENABLED ? (
+          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <a href="/" aria-label="Open tutor setup">
+              Tutor setup
+            </a>
+          </Button>
+        ) : null}
         <Button
           type="button"
           variant="outline"
@@ -452,7 +459,9 @@ function CourseRail({
       ) : null}
 
       <p className="mt-auto border-t px-4 py-3 text-xs leading-5 text-muted-foreground">
-        Synthetic local account · Chat ID stays in this browser.
+        {SESSION_AUTH_ENABLED
+          ? "Course access follows your signed-in account."
+          : "Synthetic local account · Chat ID stays in this browser."}
       </p>
     </aside>
   )
@@ -659,6 +668,7 @@ function Composer({
           <PromptInputTextarea
             placeholder={isLoading ? "Opening the course conversation…" : "Ask about this course"}
             aria-label="Ask about this course"
+            maxLength={8000}
             className="min-h-12 px-2 py-2.5 text-sm"
           />
           <PromptInputActions className="justify-end px-1 pb-1">

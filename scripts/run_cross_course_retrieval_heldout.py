@@ -33,6 +33,7 @@ from src.digital_twin.evaluation import (
 )
 from src.digital_twin.evaluation.retrieval_runner import evaluate_cases
 from src.digital_twin.grounding import DocumentChunk
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 FINAL_CONFIG_PATH = (
@@ -262,6 +263,7 @@ def build_implementation_hash(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("heldout_execution")
     if not args.confirm_heldout_once:
         raise ValueError(
             "held-out execution requires --confirm-heldout-once; no data was read"

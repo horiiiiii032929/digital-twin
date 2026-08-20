@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type FormEvent,
 } from "react"
@@ -36,9 +37,11 @@ import { WorkspaceBrand } from "@/components/workspace/workspace-brand"
 import type { OnboardingController } from "@/hooks/use-onboarding-session"
 import {
   assignProfessorCourseStudent,
+  buildInlineProfessorIngestionJob,
   cancelProfessorIngestionJob,
   createProfessorCourse,
   createProfessorRelease,
+  isProfessorIngestionJob,
   listProfessorCourses,
   listProfessorIngestionJobs,
   publishProfessorRelease,
@@ -69,6 +72,10 @@ export function ProfessorDeliveryWorkspace({
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
   const [preflight, setPreflight] = useState<ReleasePreflightResult | null>(null)
+  const selectedCourseIdRef = useRef<string | null>(null)
+  const inlineJobsByCourseRef = useRef(
+    new Map<string, ProfessorIngestionJob[]>(),
+  )
 
   const selectedCourse = useMemo(
     () => courses.find((course) => course.course_id === selectedCourseId) ?? null,
@@ -94,7 +101,14 @@ export function ProfessorDeliveryWorkspace({
   }, [])
 
   const refreshJobs = useCallback(async (courseId: string) => {
-    setJobs(await listProfessorIngestionJobs(courseId))
+    const remoteJobs = await listProfessorIngestionJobs(courseId)
+    if (selectedCourseIdRef.current !== courseId) return
+    const inlineJobs = inlineJobsByCourseRef.current.get(courseId) ?? []
+    const remoteIds = new Set(remoteJobs.map((job) => job.id))
+    setJobs([
+      ...remoteJobs,
+      ...inlineJobs.filter((job) => !remoteIds.has(job.id)),
+    ])
   }, [])
 
   useEffect(() => {
@@ -118,8 +132,9 @@ export function ProfessorDeliveryWorkspace({
   }, [])
 
   useEffect(() => {
+    selectedCourseIdRef.current = selectedCourseId
+    setJobs([])
     if (!selectedCourseId) {
-      setJobs([])
       return
     }
     setPreflight(null)
@@ -128,10 +143,22 @@ export function ProfessorDeliveryWorkspace({
 
   useEffect(() => {
     if (!selectedCourseId || !hasActiveJob) return
-    const timer = window.setInterval(() => {
-      void refreshJobs(selectedCourseId).catch((reason) => setError(message(reason)))
-    }, 1800)
-    return () => window.clearInterval(timer)
+    let active = true
+    let timer: number | undefined
+    const poll = async () => {
+      try {
+        await refreshJobs(selectedCourseId)
+      } catch (reason) {
+        if (active) setError(message(reason))
+      } finally {
+        if (active) timer = window.setTimeout(poll, 1800)
+      }
+    }
+    timer = window.setTimeout(poll, 1800)
+    return () => {
+      active = false
+      if (timer !== undefined) window.clearTimeout(timer)
+    }
   }, [hasActiveJob, refreshJobs, selectedCourseId])
 
   async function runAction(key: string, action: () => Promise<void>) {
@@ -191,16 +218,43 @@ export function ProfessorDeliveryWorkspace({
     }
     await runAction("upload", async () => {
       const title = String(data.get("source_title") ?? "").trim() || file.name
-      await uploadProfessorCoursePdf({
+      const artifact = artifactId(file.name)
+      const uploaded = await uploadProfessorCoursePdf({
         courseId: selectedCourse.course_id,
-        artifactId: artifactId(file.name),
+        artifactId: artifact,
         title,
         file,
         idempotencyKey: crypto.randomUUID(),
       })
-      await refreshJobs(selectedCourse.course_id)
+      if (isProfessorIngestionJob(uploaded)) {
+        await refreshJobs(selectedCourse.course_id)
+      } else {
+        const inlineJob = buildInlineProfessorIngestionJob({
+          courseId: selectedCourse.course_id,
+          artifactId: artifact,
+          title,
+          result: uploaded,
+          timestamp: new Date().toISOString(),
+        })
+        const existing =
+          inlineJobsByCourseRef.current.get(selectedCourse.course_id) ?? []
+        inlineJobsByCourseRef.current.set(selectedCourse.course_id, [
+          inlineJob,
+          ...existing.filter((job) => job.id !== inlineJob.id),
+        ])
+        if (selectedCourseIdRef.current === selectedCourse.course_id) {
+          setJobs((current) => [
+            inlineJob,
+            ...current.filter((job) => job.id !== inlineJob.id),
+          ])
+        }
+      }
       form.reset()
-      setNotice("Upload queued. It is safe to leave this page while the worker processes it.")
+      setNotice(
+        isProfessorIngestionJob(uploaded)
+          ? "Upload queued. It is safe to leave this page while the worker processes it."
+          : "Upload processed. The evidence is ready for tutor review.",
+      )
     })
   }
 
@@ -208,12 +262,28 @@ export function ProfessorDeliveryWorkspace({
     const session = controller.session
     if (!selectedCourse || !session) return
     await runAction("create-draft", async () => {
-      for (const job of successfulJobs) {
-        if (
-          !session.source_inventory.some(
-            (source) => source.name === job.title,
-          )
-        ) {
+      if (
+        session.course_id !== null &&
+        session.course_id !== undefined &&
+        session.course_id !== selectedCourse.course_id
+      ) {
+        throw new Error(
+          "This tutor setup belongs to another course. Start a new tutor setup for the selected course.",
+        )
+      }
+      const newlyBound = !session.course_id
+      if (newlyBound) {
+        const bound = await controller.bindCourse(selectedCourse.course_id)
+        if (!bound) throw new Error("Could not bind tutor setup to this course.")
+      }
+      const unreviewedJobs = successfulJobs.filter(
+        (job) =>
+          !session.source_inventory.some((source) =>
+            source.notes.includes(`ingestion job ${job.id}`),
+          ),
+      )
+      if (unreviewedJobs.length > 0) {
+        for (const job of unreviewedJobs) {
           const recorded = await controller.addSource({
             name: job.title,
             mime_type: "application/pdf",
@@ -226,12 +296,23 @@ export function ProfessorDeliveryWorkspace({
           })
           if (!recorded) throw new Error("Could not record the approved source.")
         }
+        setNotice(
+          "New evidence was added to tutor setup. Review the updated source scope and approve the current configuration before creating the release draft.",
+        )
+        return
+      }
+      if (newlyBound) {
+        setNotice(
+          "Tutor setup is now bound to this course. Review and approve the current course configuration before creating the release draft.",
+        )
+        return
       }
       const chunks = successfulJobs.flatMap((job) => job.result?.chunks ?? [])
       await createProfessorRelease({
         courseId: selectedCourse.course_id,
         sessionId: session.session_id,
         chunks,
+        ingestionJobIds: successfulJobs.map((job) => job.id),
       })
       await refreshCourses(selectedCourse.course_id)
       setPreflight(null)
@@ -287,6 +368,7 @@ export function ProfessorDeliveryWorkspace({
                       ? "bg-[var(--accent-soft)] font-medium text-[var(--accent-foreground)]"
                       : "text-muted-foreground hover:bg-white hover:text-foreground",
                   )}
+                  disabled={busy !== null}
                   onClick={() => setSelectedCourseId(course.course_id)}
                 >
                   {course.title}
@@ -339,6 +421,7 @@ export function ProfessorDeliveryWorkspace({
                   <select
                     aria-label="Select course"
                     className="h-11 w-full rounded-lg border bg-white px-3 text-sm font-medium outline-none focus:border-[var(--accent-strong)] focus:ring-3 focus:ring-[var(--accent-soft)]"
+                    disabled={busy !== null}
                     value={selectedCourseId ?? ""}
                     onChange={(event) => setSelectedCourseId(event.target.value)}
                   >
@@ -471,8 +554,13 @@ function CreateCourseCard({
       </CardHeader>
       <CardContent>
         <form className="space-y-3" onSubmit={onSubmit}>
-          <Field label="Course title" name="title" placeholder="e.g. CS3230 Design and Analysis" />
-          <Button className="w-full" disabled={busy !== null}>
+          <Field
+            label="Course title"
+            maxLength={240}
+            name="title"
+            placeholder="e.g. CS3230 Design and Analysis"
+          />
+          <Button className="w-full" disabled={busy !== null} type="submit">
             <Plus aria-hidden="true" />
             {busy === "create-course" ? "Creating…" : "Create course"}
           </Button>
@@ -512,8 +600,18 @@ function StudentsCard({
           <p className="text-sm text-muted-foreground">No students assigned yet.</p>
         )}
         <form className="space-y-3 border-t pt-4" onSubmit={onSubmit}>
-          <Field label="Student account ID" name="student_account_id" placeholder="account-…" />
-          <Button className="w-full" disabled={busy !== null} variant="outline">
+          <Field
+            label="Student account ID"
+            maxLength={128}
+            name="student_account_id"
+            placeholder="account-…"
+          />
+          <Button
+            className="w-full"
+            disabled={busy !== null}
+            type="submit"
+            variant="outline"
+          >
             <UserPlus aria-hidden="true" />
             {busy === "assign-student" ? "Assigning…" : "Assign student"}
           </Button>
@@ -546,7 +644,12 @@ function EvidenceCard({
       </CardHeader>
       <CardContent className="space-y-5">
         <form className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end" onSubmit={onSubmit}>
-          <Field label="Source title" name="source_title" placeholder="Week 1 lecture" />
+          <Field
+            label="Source title"
+            maxLength={240}
+            name="source_title"
+            placeholder="Week 1 lecture"
+          />
           <label className="block">
             <span className="mb-1.5 block text-xs font-medium">PDF file</span>
             <input
@@ -557,7 +660,7 @@ function EvidenceCard({
               type="file"
             />
           </label>
-          <Button disabled={busy !== null}>
+          <Button disabled={busy !== null} type="submit">
             <Upload aria-hidden="true" />
             {busy === "upload" ? "Queueing…" : "Upload"}
           </Button>

@@ -26,6 +26,7 @@ from src.digital_twin.evaluation.multimodal_retrieval import (
     unique_asset_hits,
     unsafe_retrieval_instruction,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 SEALED_ROOT = ROOT / "data/processed/multimodal_retrieval_v1/sealed_v1"
@@ -235,6 +236,7 @@ def evaluate_candidate(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     try:
         dataset, seal = load_sealed_development(
             root=ROOT, seal_path=args.seal, ledger_path=args.ledger

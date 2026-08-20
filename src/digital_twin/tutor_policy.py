@@ -63,24 +63,29 @@ def infer_sensitive_source_name(name: str) -> bool:
 
 class ChatMessage(BaseModel):
     role: MessageRole
-    content: str
+    content: str = Field(max_length=8_000)
 
 
 class SourceInventoryItem(BaseModel):
-    id: str
-    name: str
-    mime_type: str = "application/octet-stream"
-    size_bytes: int = 0
+    id: str = Field(min_length=1, max_length=128)
+    name: str = Field(min_length=1, max_length=255)
+    mime_type: str = Field(default="application/octet-stream", min_length=1, max_length=255)
+    size_bytes: int = Field(default=0, ge=0, le=1_099_511_627_776)
     permission_status: SourcePermissionStatus = SourcePermissionStatus.PENDING
     source_label: SourceLabel = SourceLabel.COURSE_APPROVED
     excluded: bool = False
     sensitive: bool | None = None
-    notes: str = ""
+    notes: str = Field(default="", max_length=4_000)
 
     @model_validator(mode="after")
     def apply_metadata_defaults(self) -> "SourceInventoryItem":
-        if self.sensitive is None:
-            self.sensitive = infer_sensitive_source_name(self.name)
+        self.name = self.name.strip()
+        self.mime_type = self.mime_type.strip().lower()
+        if not self.name or not self.mime_type:
+            raise ValueError("source name and MIME type are required")
+        inferred_sensitive = infer_sensitive_source_name(self.name)
+        if self.sensitive is None or inferred_sensitive:
+            self.sensitive = inferred_sensitive or bool(self.sensitive)
 
         if self.permission_status == SourcePermissionStatus.EXCLUDED:
             self.excluded = True
@@ -88,12 +93,15 @@ class SourceInventoryItem(BaseModel):
         if self.excluded:
             self.permission_status = SourcePermissionStatus.EXCLUDED
 
-        if (
-            self.sensitive
-            and self.permission_status == SourcePermissionStatus.PENDING
-        ):
+        if self.sensitive:
             self.excluded = True
             self.permission_status = SourcePermissionStatus.EXCLUDED
+
+        if (
+            self.permission_status == SourcePermissionStatus.APPROVED
+            and self.source_label == SourceLabel.UNAPPROVED_EXTERNAL
+        ):
+            raise ValueError("approved sources cannot use the unapproved label")
 
         return self
 
@@ -135,6 +143,23 @@ class KnowledgeSourcePolicy(BaseModel):
     external_sources_require_visible_labels: bool = True
     confirmed: bool = False
     policy_level: str = "course"
+
+    @model_validator(mode="after")
+    def validate_source_mode(self) -> "KnowledgeSourcePolicy":
+        supported = {"course_only", "trusted_only", "any_source_with_labels"}
+        if set(self.allowed_values) != supported:
+            raise ValueError("knowledge source allowed values are fixed")
+        if self.source_strictness not in supported | {"unresolved"}:
+            raise ValueError("unsupported source strictness")
+        if self.recommended_value not in supported:
+            raise ValueError("unsupported recommended source strictness")
+        if self.preview_source_mode not in supported:
+            raise ValueError("unsupported preview source mode")
+        if self.policy_level != "course":
+            raise ValueError("knowledge source policy must be course scoped")
+        if self.confirmed and self.source_strictness == "unresolved":
+            raise ValueError("confirmed source strictness cannot be unresolved")
+        return self
 
 
 class PolicyField(BaseModel):

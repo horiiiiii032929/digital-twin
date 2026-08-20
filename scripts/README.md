@@ -216,7 +216,8 @@ Current utilities:
 - `backup_runtime.py` and `restore_runtime.py`: create a checksum-verified
   online SQLite/object backup and restore it only into a clean target.
 - `manage_runtime_data.py`: performs explicit staging retention, redacted
-  account export, and confirmation-bound account/course deletion.
+  account export, confirmation-bound account/course deletion, and retry of the
+  durable raw/derived storage-deletion queue.
 - `verify_deployable_foundation.py`: runs the network-free 41-gate invited
   professor/student workflow, restart, clean restore, rollback, and 100-request
   capacity measurement.

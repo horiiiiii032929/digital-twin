@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -197,6 +198,7 @@ def call_ollama(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     dataset = json.loads(args.dataset.read_text(encoding="utf-8"))
     if not all(case["review"]["researcher_verified"] for case in dataset["cases"]):
         raise ValueError("all cases must be researcher-verified before second review")

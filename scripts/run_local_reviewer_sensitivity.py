@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Callable, Protocol
 
 from src.digital_twin.model_policy import require_registered_current_model
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -810,6 +811,8 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--execute", action="store_true")
     arguments = parser.parse_args()
+    if arguments.execute:
+        require_pre_evaluation_operation_allowed("local_model_evaluation")
     assets = validate_assets(arguments.instrument.resolve())
     summary = {
         "instrument_id": assets["instrument"]["instrument_id"],

@@ -26,6 +26,7 @@ from src.digital_twin.grounding import (
     ReciprocalRankFusionRetriever,
     RerankingRetriever,
 )
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 DATASET_PATH = (
@@ -376,6 +377,7 @@ def implementation_hash() -> str:
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     require(args.batch_size >= 1, "batch size must be positive")
     dataset = json.loads(args.dataset.read_text(encoding="utf-8"))
     require(dataset["dataset_version"] == "draft-5", "pilot requires draft 5")

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 from typing import Any
 
@@ -12,6 +13,7 @@ from services.retrieval_provider import (
     bearer_headers,
     estimate_input_tokens,
     post_json,
+    require_https_endpoint,
 )
 from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
 from src.digital_twin.model_policy import require_registered_current_model
@@ -35,13 +37,14 @@ class JinaTextEmbedder:
         timeout_seconds: float = 60,
         transport: PostJson = post_json,
     ) -> None:
-        if dimensions < 1:
+        if isinstance(dimensions, bool) or dimensions < 1:
             raise ValueError("dimensions must be positive")
-        if batch_size < 1:
+        if isinstance(batch_size, bool) or batch_size < 1:
             raise ValueError("batch_size must be positive")
-        if timeout_seconds <= 0:
+        if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
         require_registered_current_model(model)
+        require_https_endpoint(endpoint)
         self._headers = bearer_headers(api_key)
         self.ledger = ledger
         self.model = model
@@ -108,17 +111,25 @@ class JinaTextEmbedder:
             if indices != list(range(len(batch))):
                 self.ledger.record_failure()
                 raise RetrievalProviderError("Jina returned invalid embedding indexes")
-            vectors.extend(_embedding(item) for item in ordered)
+            try:
+                vectors.extend(_embedding(item, self.dimensions) for item in ordered)
+            except RetrievalProviderError:
+                self.ledger.record_failure()
+                raise
         return vectors
 
 
 def _response_index(item: Any) -> int:
-    if not isinstance(item, dict) or not isinstance(item.get("index"), int):
+    if (
+        not isinstance(item, dict)
+        or isinstance(item.get("index"), bool)
+        or not isinstance(item.get("index"), int)
+    ):
         raise RetrievalProviderError("Jina embedding response is missing an index")
     return item["index"]
 
 
-def _embedding(item: Any) -> list[float]:
+def _embedding(item: Any, expected_dimensions: int) -> list[float]:
     if not isinstance(item, dict) or not isinstance(item.get("embedding"), list):
         raise RetrievalProviderError("Jina embedding response is missing a vector")
     try:
@@ -127,4 +138,10 @@ def _embedding(item: Any) -> list[float]:
         raise RetrievalProviderError("Jina embedding vector is not numeric") from error
     if not vector:
         raise RetrievalProviderError("Jina returned an empty embedding vector")
+    if len(vector) != expected_dimensions:
+        raise RetrievalProviderError(
+            "Jina returned an embedding with unexpected dimensions"
+        )
+    if any(not math.isfinite(value) for value in vector):
+        raise RetrievalProviderError("Jina returned a non-finite embedding vector")
     return vector

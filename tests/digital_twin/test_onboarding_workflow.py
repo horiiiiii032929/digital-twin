@@ -230,7 +230,8 @@ def test_source_inventory_approval_and_exclusion_update_release_blockers():
         SourcePermissionStatus.PENDING
     )
     assert with_pending_source.release_blockers["source_inventory"] == [
-        "week-01-slides.pdf needs an approve or exclude decision."
+        "week-01-slides.pdf needs an approve or exclude decision.",
+        "Add at least one approved, included source.",
     ]
 
     approved = update_source_inventory_item(
@@ -330,6 +331,39 @@ def test_missing_custom_preview_has_actionable_release_blocker():
     ]
 
 
+def test_every_added_custom_preview_requires_current_acceptance() -> None:
+    session = _complete_interview()
+    session = add_custom_preview_case(
+        session,
+        prompt="Use a short analogy.",
+        tag="teaching_behavior",
+    )
+    session = add_custom_preview_case(
+        session,
+        prompt="Answer with a neutral tone.",
+        tag="tone",
+    )
+    session = set_preview_decision(session, "custom-1", "accepted")
+
+    assert "custom-2 preview is not accepted." in (
+        session.release_blockers["preview_acceptance"]
+    )
+    custom_check = next(
+        item
+        for item in session.approval_checklist
+        if item.id == "preview_custom_prompt"
+    )
+    assert custom_check.checked is False
+
+    accepted = set_preview_decision(session, "custom-2", "accepted")
+    custom_check = next(
+        item
+        for item in accepted.approval_checklist
+        if item.id == "preview_custom_prompt"
+    )
+    assert custom_check.checked is True
+
+
 def test_approval_checklist_persists_and_marks_release_ready_when_blockers_resolved():
     session = _complete_interview()
     session = add_source_inventory_item(
@@ -358,6 +392,142 @@ def test_approval_checklist_persists_and_marks_release_ready_when_blockers_resol
     assert session.policy.status == ReleaseStatus.APPROVED
     assert session.policy.release_status == ReleaseStatus.APPROVED
     assert all(not blockers for blockers in session.release_blockers.values())
+
+
+def test_policy_change_versions_preview_and_revokes_stale_acceptance() -> None:
+    session = _complete_interview()
+    session = add_source_inventory_item(
+        session,
+        name="week-01-slides.pdf",
+        permission_status=SourcePermissionStatus.APPROVED,
+    )
+    session = _resolve_policy_blockers(session)
+    session = add_custom_preview_case(
+        session,
+        prompt="Explain CSRF with a short analogy.",
+        tag="teaching_behavior",
+    )
+    for preview in session.preview_cases:
+        session = set_preview_decision(session, preview.id, "accepted")
+    previous_version = session.policy_version
+
+    changed = update_policy_field_value(
+        session,
+        "tone_guidance",
+        "Use concise and neutral language.",
+        FieldStatus.RESOLVED,
+    )
+
+    assert changed.policy_version == previous_version + 1
+    assert all(
+        preview.policy_version == changed.policy_version
+        and preview.decision == "pending"
+        for preview in changed.preview_cases
+    )
+    assert all(
+        record.policy_version == changed.policy_version
+        and record.decision == "pending"
+        for record in changed.preview_decisions.values()
+    )
+    assert changed.policy.release_status == ReleaseStatus.BLOCKED
+    assert "external-grounding preview is not accepted." in (
+        changed.release_blockers["preview_acceptance"]
+    )
+
+
+def test_release_check_rejects_stale_preview_decision_even_if_marked_accepted() -> None:
+    session = _complete_interview()
+    session.preview_decisions["external-grounding"].decision = "accepted"
+    session.preview_decisions["external-grounding"].policy_version = 0
+    session.preview_cases[0].decision = "accepted"
+
+    from src.digital_twin.onboarding.release import _recompute_release_state
+
+    _recompute_release_state(session)
+
+    assert session.release_blockers["preview_decisions"] == [
+        "external-grounding decision is for a stale policy version."
+    ]
+    assert "external-grounding preview is not accepted." in (
+        session.release_blockers["preview_acceptance"]
+    )
+
+
+def test_source_change_revokes_source_and_final_approval() -> None:
+    session = _complete_interview()
+    session = add_source_inventory_item(
+        session,
+        name="week-01-slides.pdf",
+        permission_status=SourcePermissionStatus.APPROVED,
+    )
+    for item_id in ("source_scope", "private_sources", "professor_release_approval"):
+        session = update_approval_checklist_item(session, item_id, True)
+
+    changed = update_source_inventory_item(
+        session,
+        session.source_inventory[0].id,
+        notes="Re-reviewed source metadata.",
+    )
+
+    checked = {item.id: item.checked for item in changed.approval_checklist}
+    assert checked["source_scope"] is False
+    assert checked["private_sources"] is False
+    assert checked["professor_release_approval"] is False
+    approval = next(
+        field
+        for field in changed.policy.professor_review
+        if field.id == "professor_release_approval"
+    )
+    assert approval.status == FieldStatus.BLOCKS_RELEASE
+    assert approval.value == "pending"
+
+
+def test_pending_revision_proposal_is_an_explicit_release_blocker() -> None:
+    session = _complete_interview()
+
+    proposed = submit_message(
+        session,
+        "The tone should be more friendly and concise.",
+    )
+
+    assert proposed.revision_proposal is not None
+    assert proposed.release_blockers["revision_proposal"] == [
+        "Resolve or discard the pending policy revision proposal."
+    ]
+
+
+def test_unchecking_integrity_approval_revokes_policy_confirmation() -> None:
+    session = _complete_interview()
+    session = update_approval_checklist_item(session, "integrity", True)
+    version_after_confirmation = session.policy_version
+
+    changed = update_approval_checklist_item(session, "integrity", False)
+    field = next(
+        item
+        for item in changed.policy.safety_compliance
+        if item.id == "academic_integrity_policy"
+    )
+
+    assert changed.policy_version == version_after_confirmation + 1
+    assert field.status == FieldStatus.NEEDS_REVIEW
+    assert "integrity" in changed.release_blockers["approval_checklist"]
+
+
+def test_resolved_knowledge_policy_requires_confirmed_supported_mode() -> None:
+    session = _complete_interview()
+    field = next(
+        item
+        for item in session.policy.safety_compliance
+        if item.id == "knowledge_source_policy"
+    )
+
+    with pytest.raises(ValueError, match="knowledge_source_policy_not_confirmed"):
+        update_policy_field_value(
+            session,
+            field.id,
+            field.value,
+            FieldStatus.RESOLVED,
+        )
 
 
 def test_chat_feedback_creates_confirmable_revision_and_regenerates_preview():

@@ -5,9 +5,13 @@ from src.digital_twin.grounding import (
     CourseDocument,
     DocumentChunk,
     DocumentChunker,
+    DocumentRegion,
+    ParsedDocumentBundle,
+    RegionKind,
     RetrievalHit,
     Retriever,
     SourceCitation,
+    SourcePermissions,
     TutorAnswer,
     TutorGenerator,
 )
@@ -49,11 +53,89 @@ def test_contract_models_validate_labels_scores_and_ordinals():
             ordinal=-1,
         )
 
-    chunk = SyntheticDocumentChunker(words_per_chunk=4).chunk(
-        synthetic_document()
-    )[0]
+    chunk = SyntheticDocumentChunker(words_per_chunk=4).chunk(synthetic_document())[0]
     with pytest.raises(ValidationError):
         RetrievalHit(chunk=chunk, relevance_score=1.1)
+    with pytest.raises(ValidationError):
+        RetrievalHit(chunk=chunk, relevance_score=float("nan"))
+    with pytest.raises(ValidationError):
+        RetrievalHit(chunk=chunk, relevance_score=1, raw_score=float("inf"))
+
+
+def test_source_citation_validates_checksum_and_normalized_bounding_box():
+    with pytest.raises(ValidationError, match="SHA-256"):
+        SourceCitation(
+            source_id="document-1",
+            title="Synthetic source",
+            locator="page 1",
+            source_checksum="not-a-checksum",
+        )
+    with pytest.raises(ValidationError, match="normalized"):
+        SourceCitation(
+            source_id="document-1",
+            title="Synthetic source",
+            locator="page 1",
+            bounding_box=(0, 0, 2, 1),
+        )
+
+
+def test_grounding_text_models_reject_whitespace_only_content():
+    with pytest.raises(ValidationError, match="must not be blank"):
+        DocumentChunk(
+            id="chunk-blank",
+            document_id="document-blank",
+            text="   ",
+            ordinal=0,
+        )
+
+
+def test_parsed_bundle_rejects_cross_document_or_permission_escalation():
+    permissions = SourcePermissions(
+        processing_allowed=True,
+        tutoring_allowed=False,
+        display_allowed=False,
+    )
+    document = CourseDocument(
+        id="document-1",
+        title="Synthetic source",
+        text="Synthetic source text.",
+        source_label="course-approved",
+        permissions=permissions,
+    )
+    region = DocumentRegion(
+        id="region-1",
+        document_id=document.id,
+        source_artifact_id=document.source_artifact_id,
+        source_version=document.source_version,
+        source_checksum="a" * 64,
+        page=1,
+        kind=RegionKind.TEXT,
+        bounding_box=(0.1, 0.1, 0.9, 0.2),
+        reading_order=0,
+        locator="page 1",
+        text="Synthetic region text.",
+        extraction_method="synthetic",
+        checksum="b" * 64,
+        crop_ref="region://region-1.png",
+        permissions=permissions,
+    )
+
+    with pytest.raises(ValidationError, match="lineage does not match"):
+        ParsedDocumentBundle(
+            document=document,
+            regions=[region.model_copy(update={"document_id": "other-document"})],
+        )
+    elevated = region.model_copy(
+        update={
+            "permissions": SourcePermissions(
+                processing_allowed=True,
+                tutoring_allowed=True,
+                display_allowed=False,
+            )
+        }
+    )
+    with pytest.raises(ValidationError, match="permissions exceed"):
+        ParsedDocumentBundle(document=document, regions=[elevated])
 
 
 def test_tutor_answer_rejects_duplicate_citation_relationships():
@@ -85,9 +167,7 @@ def test_synthetic_fixtures_implement_provider_neutral_contracts():
 
 @pytest.mark.asyncio
 async def test_synthetic_grounding_path_has_citation_relationships_and_no_network():
-    chunks = SyntheticDocumentChunker(words_per_chunk=6).chunk(
-        synthetic_document()
-    )
+    chunks = SyntheticDocumentChunker(words_per_chunk=6).chunk(synthetic_document())
     hits = SyntheticRetriever(chunks).retrieve("final project reflection")
 
     answer = await SyntheticTutorGenerator().generate(

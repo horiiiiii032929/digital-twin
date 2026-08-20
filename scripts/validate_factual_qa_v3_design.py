@@ -10,7 +10,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_PATH = (
-    ROOT / "research/05_evaluation/instruments/factual_qa_v3_design_001.json"
+    ROOT / "research/05_evaluation/instruments/factual_qa_v3_design_002.json"
 )
 
 SOURCE_ROLES = {
@@ -53,10 +53,18 @@ FAILURE_ROUTES = {
     "integration",
     "operations",
 }
-NO_MODEL_GATES = {
-    "complete_source_disposition",
-    "mandatory_exclusion_and_path_sanitization",
+PRE_SEMANTIC_REVIEW_GATES = {
+    "repository_correctness_freeze",
+    "complete_physical_file_accounting",
+    "deterministic_mandatory_exclusion_prefilter",
+    "private_path_and_payload_sanitization",
     "conversion_lineage_and_checksum_stability",
+    "eligible_only_private_review_packet",
+    "synthetic_reviewer_sensitivity",
+    "specific_provider_and_cost_authorization",
+}
+PRE_GENERATION_GATES = {
+    "complete_content_level_source_disposition",
     "oracle_control_mechanics",
     "response_schema",
     "exact_quote_and_citation_target",
@@ -96,14 +104,14 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
 
 
 def validate_instrument(payload: dict[str, Any]) -> dict[str, Any]:
-    require(payload.get("schema_version") == 1, "schema_version must be 1")
+    require(payload.get("schema_version") == 2, "schema_version must be 2")
     require(
-        payload.get("instrument_id") == "factual-qa-v3-design-001",
+        payload.get("instrument_id") == "factual-qa-v3-design-002",
         "unexpected instrument_id",
     )
     require(
-        payload.get("status") == "frozen-no-model-implementation",
-        "design must remain frozen for no-model implementation",
+        payload.get("status") == "frozen-correctness-preflight",
+        "design must remain frozen for correctness preflight",
     )
     require(payload.get("model_leaderboard") is False, "leaderboard framing prohibited")
 
@@ -129,6 +137,23 @@ def validate_instrument(payload: dict[str, Any]) -> dict[str, Any]:
     require(
         set(payload["mandatory_exclusions"]) == MANDATORY_EXCLUSIONS,
         "mandatory exclusions changed",
+    )
+    semantic = payload["semantic_governance"]
+    require(
+        semantic["path_or_format_may_finalize_content_role"] is False,
+        "path or format cannot finalize a content role",
+    )
+    require(
+        semantic["model_agreement_is_ground_truth"] is False,
+        "model agreement cannot become ground truth",
+    )
+    require(
+        semantic["model_may_promote_authoritative_evidence"] is False,
+        "models cannot promote authoritative evidence",
+    )
+    require(
+        semantic["authoritative_requires_approved_official_provenance"] is True,
+        "authoritative evidence requires approved official provenance",
     )
     notes = payload["personal_notes"]
     require(notes["default_role"] == "question_inspiration_only", "personal-note role changed")
@@ -167,7 +192,14 @@ def validate_instrument(payload: dict[str, Any]) -> dict[str, Any]:
 
     require(set(payload["mutation_classes"]) == MUTATIONS, "mutation coverage changed")
     require(set(payload["failure_routes"]) == FAILURE_ROUTES, "failure routing changed")
-    require(set(payload["no_model_gates"]) == NO_MODEL_GATES, "no-model gates changed")
+    require(
+        set(payload["pre_semantic_review_gates"]) == PRE_SEMANTIC_REVIEW_GATES,
+        "pre-semantic-review gates changed",
+    )
+    require(
+        set(payload["pre_generation_gates"]) == PRE_GENERATION_GATES,
+        "pre-generation gates changed",
+    )
     require(
         set(payload["human_audit_required_fields"]) == AUDIT_FIELDS,
         "audit packet contract is incomplete",
@@ -175,17 +207,33 @@ def validate_instrument(payload: dict[str, Any]) -> dict[str, Any]:
 
     policy = payload["model_policy"]
     require(policy["external_execution_authorized"] is False, "external execution is not authorized")
+    require(policy["local_model_execution_authorized"] is False, "local model execution is not authorized")
     require(policy["paid_calls_allowed"] is False, "paid calls are not authorized")
+    require(policy["dataset_generation_authorized"] is False, "dataset generation is not authorized")
+    require(policy["heldout_execution_authorized"] is False, "held-out execution is not authorized")
     require(policy["scale_authorized"] is False, "scale is not authorized")
     require(policy["separate_provider_record_required"] is True, "provider record gate required")
     require(set(policy["prohibited_families"]) == {"gemma", "claude", "retired_local_general_qwen"}, "prohibited model policy changed")
 
+    review = payload["semantic_review_protocol"]
+    require(review["reviewers_blinded_to_each_other"] is True, "semantic reviewers must be blinded")
+    require(review["human_calibration_required"] is True, "human calibration is required")
+    require(review["human_review_all_disagreements"] is True, "all disagreements require human review")
+    require(review["critical_exclusion_false_negatives_gate"] == 0, "critical exclusion false-negative gate changed")
+    require(
+        review["model_output_cannot_clear_privacy_or_authority_gate_alone"] is True,
+        "model output cannot clear privacy or authority alone",
+    )
+
     return {
         "instrument_id": payload["instrument_id"],
-        "status": "passed",
+        "design_contract_valid": True,
+        "validation_scope": "design-contract-only",
+        "execution_gate_status": "blocked",
         "regular_file_count": inventory["regular_file_count"],
         "source_roles": len(payload["source_roles"]),
-        "no_model_gates": len(payload["no_model_gates"]),
+        "pre_semantic_review_gates": len(payload["pre_semantic_review_gates"]),
+        "pre_generation_gates": len(payload["pre_generation_gates"]),
         "external_execution_authorized": False,
     }
 

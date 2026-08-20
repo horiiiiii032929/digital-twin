@@ -7,7 +7,11 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from src.digital_twin.evaluation.multimodal_retrieval import BBox, bbox_iou
+from src.digital_twin.evaluation.multimodal_retrieval import (
+    BBox,
+    bbox_iou,
+    validated_bbox,
+)
 
 
 @dataclass(frozen=True)
@@ -41,15 +45,19 @@ def gold_bboxes_for_case(
         for region in assets[asset_id]["regions"]
     }
     gold_region_ids = [str(region_id) for region_id in case["gold_region_ids"]]
+    if len(gold_region_ids) != len(set(gold_region_ids)):
+        raise ValueError("gold region IDs must be unique")
     missing = [region_id for region_id in gold_region_ids if region_id not in regions]
     if missing:
         raise ValueError(
             f"case references unknown gold regions for {asset_id}: {', '.join(missing)}"
         )
-    return [regions[region_id] for region_id in gold_region_ids]
+    return [validated_bbox(regions[region_id]) for region_id in gold_region_ids]
 
 
-def _unique_asset_rank(hits: list[dict[str, Any]], expected_asset_id: str) -> int | None:
+def _unique_asset_rank(
+    hits: list[dict[str, Any]], expected_asset_id: str
+) -> int | None:
     seen: set[str] = set()
     rank = 0
     for hit in hits:
@@ -172,8 +180,13 @@ def score_multimodal_ranking(
     region_iou_threshold: float = 0.1,
 ) -> MultimodalRankingMetrics:
     """Score one ranked list with explicit page and atomic-region denominators."""
-    if not 0.0 <= region_iou_threshold <= 1.0:
+    if (
+        isinstance(region_iou_threshold, bool)
+        or not math.isfinite(region_iou_threshold)
+        or not 0.0 <= region_iou_threshold <= 1.0
+    ):
         raise ValueError("region_iou_threshold must be between zero and one")
+    gold_bboxes = [validated_bbox(bbox) for bbox in gold_bboxes]
 
     page_rank = _unique_asset_rank(hits, expected_asset_id)
     page_success_at_3 = page_rank is not None and page_rank <= 3
@@ -207,9 +220,7 @@ def score_multimodal_ranking(
         complete_evidence_success_at_3=(
             gold_count > 0 and page_success_at_3 and matched_at_3 == gold_count
         ),
-        atomic_evidence_recall_at_5=(
-            matched_at_5 / gold_count if gold_count else 0.0
-        ),
+        atomic_evidence_recall_at_5=(matched_at_5 / gold_count if gold_count else 0.0),
         matched_gold_regions_at_3=matched_at_3,
         matched_gold_regions_at_5=matched_at_5,
         gold_region_count=gold_count,

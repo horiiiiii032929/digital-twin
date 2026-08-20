@@ -197,6 +197,7 @@ export function PreviewComparison({
               className="min-h-20 bg-white text-sm"
               placeholder="Write a prompt to test before approval..."
               aria-label="Custom preview prompt"
+              maxLength={8000}
             />
             <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
               <select
@@ -368,6 +369,7 @@ function PreviewCard({
           value={reason}
           onChange={(event) => onReasonChange(event.target.value)}
           placeholder="Optional decision reason"
+          maxLength={2000}
           className="h-10 rounded-lg border bg-white px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/25"
         />
         <div className="flex flex-wrap gap-2">

@@ -9,6 +9,7 @@ from services.api.app.config import AppSettings, RuntimeMode
 from services.operations import (
     delete_account_data,
     delete_course_data,
+    drain_storage_deletions,
     export_account_data,
     prune_runtime_data,
 )
@@ -30,6 +31,7 @@ def main() -> None:
     delete_course = commands.add_parser("delete-course")
     delete_course.add_argument("--course-id", required=True)
     delete_course.add_argument("--confirm", required=True)
+    commands.add_parser("drain-deletions")
     args = parser.parse_args()
 
     settings = AppSettings.from_env()
@@ -51,6 +53,8 @@ def main() -> None:
             store,
             terminal_job_days=args.terminal_job_days,
             audit_days=args.audit_days,
+            source_root=settings.source_root,
+            region_crop_root=settings.region_crop_root,
         )
         print(result.model_dump_json())
     elif args.command == "delete-account":
@@ -58,13 +62,21 @@ def main() -> None:
             raise SystemExit("--confirm must exactly match --account-id")
         result = delete_account_data(settings.database_path, args.account_id)
         print(result.model_dump_json())
-    else:
+    elif args.command == "delete-course":
         if args.confirm != args.course_id:
             raise SystemExit("--confirm must exactly match --course-id")
         result = delete_course_data(
             settings.database_path,
             store,
             args.course_id,
+            source_root=settings.source_root,
+            region_crop_root=settings.region_crop_root,
+        )
+        print(result.model_dump_json())
+    else:
+        result = drain_storage_deletions(
+            settings.database_path,
+            store,
             source_root=settings.source_root,
             region_crop_root=settings.region_crop_root,
         )

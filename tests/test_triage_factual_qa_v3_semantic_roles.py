@@ -20,7 +20,7 @@ def record(
     }
 
 
-def test_triage_uses_provenance_without_promoting_clear_candidates() -> None:
+def test_triage_promotes_only_approved_hashes_and_keeps_path_labels_provisional() -> None:
     manifest = {
         "manifest_sha256": "conversion",
         "source_root": "/private",
@@ -36,8 +36,12 @@ def test_triage_uses_provenance_without_promoting_clear_candidates() -> None:
     by_id = {item["source_id"]: item for item in private["dispositions"]}
 
     assert by_id["approved"]["source_role"] == "authoritative_evidence"
-    assert by_id["candidate"]["source_role"] == "supporting_context"
-    assert by_id["code"]["source_role"] == "excluded_integrity_or_privacy"
+    assert by_id["candidate"]["source_role"] == "review_or_conversion_required"
+    assert by_id["candidate"]["requires_explicit_review"] is True
+    assert by_id["code"]["source_role"] == "review_or_conversion_required"
+    assert by_id["code"]["requires_explicit_review"] is True
     assert by_id["text"]["requires_explicit_review"] is True
-    assert summary["unresolved_review_count"] == 1
+    assert summary["unresolved_review_count"] == 3
     assert summary["semantic_role_gate"] is False
+    assert summary["content_eligibility_complete"] is False
+    assert summary["path_or_format_only_labels_are_final"] is False

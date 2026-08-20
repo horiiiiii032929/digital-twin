@@ -31,6 +31,7 @@ from scripts.validate_course_tutor_dataset import (
     validate_schema,
 )
 from src.digital_twin.model_policy import require_model_allowed
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1671,6 +1672,7 @@ def run_review(
 
 def main() -> None:
     arguments = parse_args()
+    require_pre_evaluation_operation_allowed("method_evaluation_execution")
     print(
         json.dumps(
             run_review(

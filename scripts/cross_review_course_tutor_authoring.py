@@ -18,6 +18,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+
 from scripts.it5002_rapid_common import load_course_corpus
 from scripts.build_course_tutor_splits import validate_split_isolation
 from scripts.validate_course_tutor_dataset import (
@@ -280,6 +282,7 @@ def _validate_split(
 
 def main() -> int:
     args = parse_args()
+    require_pre_evaluation_operation_allowed("dataset_generation")
     manifest = load_json(MANIFEST_PATH)
     case_schema = load_json(CASE_SCHEMA_PATH)
     condition_schema = load_json(CONDITION_SCHEMA_PATH)

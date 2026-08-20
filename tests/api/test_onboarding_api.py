@@ -17,6 +17,7 @@ def test_create_session_returns_first_prompt():
 
     assert response.status_code == 201
     payload = response.json()
+    assert payload["revision"] == 1
     assert payload["current_step"] == "source_permissions"
     assert payload["messages"][-1]["role"] == "assistant"
 
@@ -62,6 +63,18 @@ def test_submit_message_advances_session():
     assert response.status_code == 200
     payload = response.json()
     assert payload["current_step"] == "teaching_approach"
+    assert payload["revision"] == created["revision"] + 1
+
+
+def test_submit_message_rejects_blank_content_at_api_boundary():
+    created = client.post("/api/onboarding/sessions").json()
+
+    response = client.post(
+        f"/api/onboarding/sessions/{created['session_id']}/messages",
+        json={"content": "   "},
+    )
+
+    assert response.status_code == 422
 
 
 def test_unknown_session_returns_404():
@@ -133,6 +146,47 @@ def test_source_inventory_routes_create_and_update_metadata_only_items():
     updated_source = update_response.json()["source_inventory"][0]
     assert updated_source["permission_status"] == "approved"
     assert updated_source["notes"] == "Approved for Sprint 1 preview."
+
+
+def test_source_inventory_rejects_contradictory_approval_label() -> None:
+    created = _completed_session()
+
+    response = client.post(
+        f"/api/onboarding/sessions/{created['session_id']}/source-inventory",
+        json={
+            "name": "external-reference.pdf",
+            "permission_status": "approved",
+            "source_label": "unapproved-external",
+        },
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"]["code"] == "invalid_source_inventory_item"
+
+
+def test_policy_field_update_rejects_oversized_nested_value() -> None:
+    created = client.post("/api/onboarding/sessions").json()
+
+    response = client.patch(
+        f"/api/onboarding/sessions/{created['session_id']}/policy-fields/teaching_style",
+        json={"value": {"content": "x" * 65_537}, "status": "needs_review"},
+    )
+
+    assert response.status_code == 422
+
+
+def test_custom_preview_rejects_whitespace_only_prompt() -> None:
+    created = _completed_session()
+
+    response = client.post(
+        f"/api/onboarding/sessions/{created['session_id']}/preview-cases",
+        json={"prompt": "   ", "tag": "other"},
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"]["code"] == (
+        "custom_preview_prompt_required"
+    )
 
 
 def test_preview_decision_custom_prompt_revision_and_approval_routes():
