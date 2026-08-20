@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from collections import Counter
+import pytest
 
 from scripts.run_factual_qa_v3_scale_rehearsal import (
     EXPECTED_SLICES,
@@ -9,12 +10,15 @@ from scripts.run_factual_qa_v3_scale_rehearsal import (
     OpenRouterJsonTransport,
     _analyze,
     _deterministic_record,
+    _enforce_cost_reservation,
+    _maximum_batch_cost,
     _mutation_probes,
     _parallel_ordered,
     _percentile,
     build_preflight,
     validate_assets,
 )
+from scripts.run_factual_qa_quality_pilot import FactualQaPilotError, REVIEW_SCHEMA
 
 
 def _accept_review() -> dict[str, object]:
@@ -56,6 +60,78 @@ def test_assets_expand_to_frozen_120_case_slice_design() -> None:
     assert covered == expected
 
 
+def test_source_design_has_exact_claim_anchors_and_distinct_visual_facts() -> None:
+    corpus = validate_assets()["corpus"]
+    claims = [
+        (source, claim)
+        for source in corpus["source_units"]
+        for claim in source["claims"]
+    ]
+
+    assert len(claims) == 48
+    assert len({claim["claim_id"] for _, claim in claims}) == 48
+    assert all(
+        " ".join(claim["evidence_quote"].split())
+        in " ".join(source["evidence_text"].split())
+        for source, claim in claims
+    )
+    visual_claims = [
+        case["target_claim_ids"][0]
+        for case in corpus["case_blueprints"]
+        if case["slice"] == "multimodal"
+    ]
+    assert len(visual_claims) == len(set(visual_claims)) == 18
+
+
+def test_multi_evidence_and_cross_course_cases_cover_distinct_sources_and_courses() -> None:
+    corpus = validate_assets()["corpus"]
+    source_map = {source["source_unit_id"]: source for source in corpus["source_units"]}
+    claim_sources = {
+        claim["claim_id"]: source["source_unit_id"]
+        for source in corpus["source_units"]
+        for claim in source["claims"]
+    }
+    multi = [
+        case
+        for case in corpus["case_blueprints"]
+        if case["slice"] == "multi-evidence-text"
+    ]
+    assert len(multi) == 18
+    assert all(len(set(case["evidence_unit_ids"])) == 2 for case in multi)
+    assert all(
+        {claim_sources[claim_id] for claim_id in case["target_claim_ids"]}
+        == set(case["evidence_unit_ids"])
+        for case in multi
+    )
+
+    cross_course = [
+        case
+        for case in corpus["case_blueprints"]
+        if case["slice"] == "cross-course-confusion"
+    ]
+    all_courses = {source["course_id"] for source in corpus["source_units"]}
+    assert {case["course_id"] for case in cross_course} == all_courses
+    assert {
+        source_map[case["distractor_unit_ids"][0]]["course_id"]
+        for case in cross_course
+    } == all_courses
+    course_counts = Counter(case["course_id"] for case in corpus["case_blueprints"])
+    assert max(course_counts.values()) - min(course_counts.values()) <= 2
+
+
+def test_boundary_topics_are_assigned_to_the_relevant_course_context() -> None:
+    cases = {
+        case["blueprint_id"]: case
+        for case in validate_assets()["corpus"]["case_blueprints"]
+    }
+
+    assert cases["fqa-r099"]["course_id"] == "course-machine-learning"
+    assert cases["fqa-r100"]["course_id"] == "course-human-ai"
+    assert cases["fqa-r103"]["course_id"] == "course-machine-learning"
+    assert cases["fqa-r105"]["course_id"] == "course-browser-security"
+    assert cases["fqa-r107"]["course_id"] == "course-human-ai"
+
+
 def test_preflight_requires_both_provider_credentials(monkeypatch) -> None:
     assets = validate_assets()
     monkeypatch.setenv("DEEPSEEK_API_KEY", "configured")
@@ -75,6 +151,7 @@ def test_preflight_is_ready_only_with_both_keys_and_clean_revision(
     tmp_path,
 ) -> None:
     assets = validate_assets()
+    assets["instrument"]["status"] = "frozen-pending-execution"
     monkeypatch.setenv("DEEPSEEK_API_KEY", "configured")
     monkeypatch.setenv("OPENROUTER_API_KEY", "configured")
     monkeypatch.setattr(
@@ -91,6 +168,28 @@ def test_preflight_is_ready_only_with_both_keys_and_clean_revision(
     assert result["status"] == "ready"
     assert result["working_tree_dirty"] is False
     assert result["external_call_enabled"] is False
+
+
+def test_draft_instrument_cannot_be_ready_for_execution(
+    monkeypatch,
+    tmp_path,
+) -> None:
+    assets = validate_assets()
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "configured")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "configured")
+    monkeypatch.setattr(
+        "scripts.run_factual_qa_v3_oracle_pilot.EMBEDDING_ROOT",
+        tmp_path,
+    )
+    monkeypatch.setattr(
+        "scripts.run_factual_qa_v3_scale_rehearsal._working_tree_dirty",
+        lambda: False,
+    )
+
+    result = build_preflight(assets)
+
+    assert result["status"] == "blocked"
+    assert result["instrument_frozen"] is False
 
 
 def test_openrouter_reviewer_is_pinned_to_first_party_mistral() -> None:
@@ -120,7 +219,7 @@ def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
         case
         for case in corpus["case_blueprints"]
         if case["expected_action"] == "answer"
-    ][:20]
+    ]
     results = []
     for blueprint in blueprints:
         claim_ids = blueprint["target_claim_ids"]
@@ -155,7 +254,7 @@ def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
             }
         )
 
-    _, mutations = _mutation_probes(
+    mutation_blueprints, mutations = _mutation_probes(
         blueprints, results, source_map=source_map, count=20
     )
 
@@ -164,6 +263,60 @@ def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:
         MUTATION_TYPES
     )
     assert all(item["deterministic"]["passed"] is False for item in mutations)
+    assert Counter(item["slice"] for item in mutation_blueprints) == {
+        "direct-text": 5,
+        "paraphrase-text": 5,
+        "multi-evidence-text": 5,
+        "multimodal": 5,
+    }
+    assert {item["course_id"] for item in mutation_blueprints} == {
+        "course-browser-security",
+        "course-data-systems",
+        "course-machine-learning",
+        "course-human-ai",
+    }
+
+
+def test_deterministic_checks_require_a_citation_anchor_for_every_target_claim() -> None:
+    corpus = validate_assets()["corpus"]
+    source_map = {source["source_unit_id"]: source for source in corpus["source_units"]}
+    blueprint = next(
+        case
+        for case in corpus["case_blueprints"]
+        if case["slice"] == "multi-evidence-text"
+    )
+    first_id, second_id = blueprint["evidence_unit_ids"]
+    second_target = next(
+        claim_id
+        for claim_id in blueprint["target_claim_ids"]
+        if any(
+            claim["claim_id"] == claim_id for claim in source_map[second_id]["claims"]
+        )
+    )
+    unrelated_second_quote = next(
+        claim["evidence_quote"]
+        for claim in source_map[second_id]["claims"]
+        if claim["claim_id"] != second_target
+    )
+    authored = {
+        "question": "What are the two required facts?",
+        "answer": "Synthetic answer.",
+        "action": "answer",
+        "selected_claim_ids": blueprint["target_claim_ids"],
+        "citations": [
+            {
+                "source_unit_id": first_id,
+                "quote": source_map[first_id]["evidence_text"],
+            },
+            {"source_unit_id": second_id, "quote": unrelated_second_quote},
+        ],
+    }
+
+    result = _deterministic_record(blueprint, authored, source_map=source_map)
+
+    assert result["checks"]["citation_sources_complete"] is True
+    assert result["checks"]["target_claim_citations_complete"] is False
+    assert result["passed"] is False
 
 
 def test_parallel_ordered_preserves_input_order() -> None:
@@ -184,6 +337,25 @@ def test_parallel_ordered_preserves_input_order() -> None:
 
     assert result == [value * 2 for value in range(8)]
     assert maximum_active == 3
+
+
+def test_cost_reservation_blocks_a_batch_before_the_hard_cap_can_be_exceeded() -> None:
+    instrument = validate_assets()["instrument"]
+    binding = instrument["model_roles"]["independent_reviewer"]
+    reserved = _maximum_batch_cost(
+        binding,
+        system="Synthetic review system.",
+        prompts=["Synthetic bounded prompt." for _ in range(120)],
+        schema=REVIEW_SCHEMA,
+    )
+
+    assert 0 < reserved < instrument["execution"]["cost_stop_usd"]
+    with pytest.raises(FactualQaPilotError, match="cost reservation exceeds stop"):
+        _enforce_cost_reservation(
+            instrument,
+            incurred=instrument["execution"]["cost_stop_usd"],
+            reserved=reserved,
+        )
 
 
 def test_percentile_uses_nearest_rank() -> None:
@@ -208,6 +380,7 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
         action = boundary_slices.get(slice_name, "answer")
         results.append(
             {
+                "blueprint_id": f"fqa-summary-{index:03d}",
                 "slice": slice_name,
                 "expected_action": action,
                 "authored_case": {
@@ -229,6 +402,8 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
                     "provider_model": "mistralai/mistral-small-2603",
                     "latency_ms": 1000.0,
                 },
+                "dispute_review": None,
+                "dispute_review_call": None,
                 "distractor_unit_ids": [],
             }
         )
@@ -264,3 +439,47 @@ def test_passing_summary_still_requires_human_audit_and_blocks_10000_scale() -> 
     assert summary["decision"] == "human-audit-required"
     assert summary["scale_to_10000_authorized"] is False
     assert summary["failed_gates"] == []
+
+    results[0]["independent_review"] = {**_accept_review(), "verdict": "reject"}
+    failed = _analyze(
+        instrument,
+        results,
+        mutation_results=mutation_results,
+        ingestion={"pdf_ingestion_rate": 1.0},
+        external_cost=0.25,
+        review_elapsed_seconds=60.0,
+        elapsed_seconds=180.0,
+        call_counts={
+            "author": 120,
+            "independent_case": 120,
+            "independent_mutation": 20,
+            "dispute": 0,
+        },
+    )
+    assert failed["machine_gates_passed"] is False
+    assert failed["metrics"]["unreviewed_disagreement_count"] == 1
+    assert "unreviewed_disagreement_count" in failed["failed_gates"]
+    assert "dispute_review_completion_rate" in failed["failed_gates"]
+
+    results[0]["dispute_review"] = _accept_review()
+    results[0]["dispute_review_call"] = {
+        "provider_model": "deepseek-v4-pro",
+        "provider_revision": "stable-dispute-revision",
+    }
+    resolved = _analyze(
+        instrument,
+        results,
+        mutation_results=mutation_results,
+        ingestion={"pdf_ingestion_rate": 1.0},
+        external_cost=0.25,
+        review_elapsed_seconds=60.0,
+        elapsed_seconds=180.0,
+        call_counts={
+            "author": 120,
+            "independent_case": 120,
+            "independent_mutation": 20,
+            "dispute": 1,
+        },
+    )
+    assert resolved["machine_gates_passed"] is True
+    assert resolved["metrics"]["unresolved_disagreement_count"] == 0

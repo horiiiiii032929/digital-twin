@@ -1202,14 +1202,36 @@
     },
     {
       "audit_status": "audited",
-      "disposition": "active_audited",
+      "disposition": "historical_guarded",
       "domain": "evaluation-instruments-and-profiles",
-      "evidence": "Prospective method review confirmed one 120-case synthetic-public rehearsal rather than a model leaderboard, complete slice and claim coverage, deterministic retention authority, exact DeepSeek/Mistral roles, paired mutation sensitivity, a clean execution revision, bounded concurrency/calls/cost, operational gates, and a 12-case human audit before any later scale decision.",
+      "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
       "findings": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_001.json",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "5ac33c047aae20caca2621cbf5830d37fbc110c429707bc0fc8df8071504a08e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual source and methodology review confirmed corrected 002 remains execution-blocked, binds immutable base and source-design hashes, defines 120 cases over 48 anchored claims, requires genuine two-source evidence, adds disagreement/dispute and human-audit-capacity gates, preserves strict provider/cost boundaries, and cannot authorize 10,000-case scale.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_002.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-manual-120-blueprint-review",
+      "sha256": "dd7296e0b18e8620a6e8dd9e56d85877c1965a0630215fecee718531c76b2de5"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual source-grounding review verified 30 exact text-claim citation anchors against immutable evidence, 18 distinct facts against six synthetic visual fixtures, 18 explicit two-source cases, corrected course-aligned boundary labels, all-course cross-confusion coverage, 120 unique intents, and a 29/31/29/31 course distribution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_source_design_002.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-manual-source-review",
+      "sha256": "f56904349837a72cb054375f3bdc86082eb051041514a2330e24e2263ab7c90b"
     },
     {
       "audit_status": "audited",
@@ -2370,12 +2392,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual control-flow, provider, privacy, and failure-boundary review plus Ruff, compilation, 120-case deterministic preflight, focused concurrency/mutation tests, exact registered model routes, clean-revision enforcement, invalid-attempt preservation, no retries, bounded calls/cost, exclusive output, and fail-closed dual-provider authorization.",
+      "evidence": "Manual control-flow, provider, privacy, source-lineage, and failure-boundary review plus Ruff and focused tests. Corrected 002 validates immutable source hashes and exact claim anchors, expands 18 distinct visual and 18 true two-source cases, enforces per-claim citation completeness, stratifies mutations, gates all reviewer disagreements and audit capacity, reserves conservative batch cost before calls, preserves invalid attempts, and remains execution-blocked pending explicit authorization.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "fe69097c31b786de36b05687dd9270e2f53de37f89e114428850d6524321be70"
+      "sha256": "5d4c1320ba9c12b2c6128538cb05aa8bae35d0c74ee4a99191e772f4fab693f4"
     },
     {
       "audit_status": "audited",
@@ -3767,12 +3789,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active while only the exact completed oracle pilot and the exact frozen 120-case rehearsal receive versioned authorization for their declared operations.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, the completed oracle pilot retains its exact historical authorization, defective unexecuted rehearsal 001 is revoked, and reviewed rehearsal 002 remains unauthorized until a separate explicit freeze decision.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "d67d370be50fe7d525472f06620183fe43fb0fdc6dbe408267414ce768049e8e"
+      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
     },
     {
       "audit_status": "audited",
@@ -4053,12 +4075,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the two exact bounded run authorizations, and rejection of successor or unknown run IDs.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, the one exact completed oracle authorization, and explicit rejection of defective rehearsal 001, reviewed-but-unfrozen rehearsal 002, successor, and unknown run IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "752c7ec2d1dc551548a96518a71f7b400c3e2dd2247b3ace31cc684129ac3543"
+      "sha256": "77adb05c369eb6dc3b70c4136a77c55a2f879adcaa8f47d696f880489a88c2b7"
     },
     {
       "audit_status": "audited",
@@ -4449,12 +4471,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate exact 120-case and slice expansion, complete approved-claim coverage, credential-, embedding-, and clean-revision-safe preflight without host-machine assumptions, pinned first-party OpenRouter Mistral routing, 20 guaranteed deterministic mutation defects, bounded concurrency with stable result order, nearest-rank p95 calculation, and the audit-required/no-10000-scale decision boundary.",
+      "evidence": "Focused tests validate exact 120-case expansion over 48 exact-anchored claims, 18 distinct visual facts, 18 genuine two-source cases, corrected boundary contexts, all-course cross-confusion coverage, per-claim citation completeness, blocked reviewed status, pinned Mistral routing, stratified 20-case mutations, conservative pre-call cost reservation, disagreement/dispute gates, human-audit capacity, bounded concurrency, and the no-10000-scale boundary.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "cf5671d280b68c27231498b1cf2c80f71994471607ac731c2c41d814116845da"
+      "sha256": "010aeaf755acedfaa77b4323df271d98e7b704cf2443db0dbed1fc98911a0e57"
     },
     {
       "audit_status": "audited",
