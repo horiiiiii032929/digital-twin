@@ -411,10 +411,14 @@ Current utilities:
 - `run_factual_qa_v3_scale_rehearsal.py`: validates the corrected 120-case
   synthetic-public rehearsal source design, including exact per-claim citation
   anchors, 18 distinct controlled visual facts, 18 genuine two-source cases,
-  and course-aligned boundary coverage. The `001` execution authorization was
-  revoked before any run; corrected `002` is frozen with an exact bounded
-  authorization while the global freeze remains active.
+  and course-aligned boundary coverage. Attempt `002` is preserved as an invalid
+  execution after its first-party Mistral ZDR route failed only after bulk
+  authoring. Reviewed successor `003` adds schema-valid author and reviewer
+  health canaries before bulk calls, uses the same first-party Mistral model with
+  a synthetic-public-only request-level ZDR exception and data collection
+  denied, and remains blocked pending separate execution authorization.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
-  run.
+  run. Provider canaries are part of paid execution and stop before every bulk
+  call if either exact route is unavailable.

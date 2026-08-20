@@ -8,6 +8,7 @@ from scripts.run_factual_qa_v3_scale_rehearsal import (
     EXPECTED_SLICES,
     MUTATION_TYPES,
     OpenRouterJsonTransport,
+    ProviderHealthGateError,
     _analyze,
     _deterministic_record,
     _enforce_cost_reservation,
@@ -15,10 +16,15 @@ from scripts.run_factual_qa_v3_scale_rehearsal import (
     _mutation_probes,
     _parallel_ordered,
     _percentile,
+    _provider_health_gate,
     build_preflight,
     validate_assets,
 )
-from scripts.run_factual_qa_quality_pilot import FactualQaPilotError, REVIEW_SCHEMA
+from scripts.run_factual_qa_quality_pilot import (
+    FactualQaPilotError,
+    JsonCall,
+    REVIEW_SCHEMA,
+)
 
 
 def _accept_review() -> dict[str, object]:
@@ -35,11 +41,13 @@ def _accept_review() -> dict[str, object]:
     }
 
 
-def test_assets_expand_to_frozen_120_case_slice_design() -> None:
+def test_assets_expand_to_reviewed_120_case_slice_design() -> None:
     assets = validate_assets()
     corpus = assets["corpus"]
 
-    assert assets["instrument"]["status"] == "frozen-pending-execution"
+    assert assets["instrument"]["status"] == (
+        "reviewed-pending-execution-authorization"
+    )
     assert len(corpus["case_blueprints"]) == 120
     assert Counter(case["slice"] for case in corpus["case_blueprints"]) == (
         EXPECTED_SLICES
@@ -208,10 +216,71 @@ def test_openrouter_reviewer_is_pinned_to_first_party_mistral() -> None:
                 "allow_fallbacks": False,
                 "require_parameters": True,
                 "data_collection": "deny",
-                "zdr": True,
+                "zdr": False,
             }
         }
     }
+
+
+class _HealthTransport:
+    def __init__(self, result: JsonCall | Exception) -> None:
+        self.result = result
+
+    async def call_json(self, **_: object) -> JsonCall:
+        if isinstance(self.result, Exception):
+            raise self.result
+        return self.result
+
+
+def _health_call(model: str, cost: float) -> JsonCall:
+    return JsonCall(
+        value={"status": "ok"},
+        provider_model=model,
+        provider_revision="test-revision",
+        input_tokens=4,
+        output_tokens=2,
+        approximate_cost_usd=cost,
+        latency_ms=1.0,
+    )
+
+
+def test_provider_health_gate_passes_before_bulk_calls() -> None:
+    instrument = validate_assets()["instrument"]
+
+    calls, cost, reservations = asyncio.run(
+        _provider_health_gate(
+            instrument,
+            author=_HealthTransport(_health_call("deepseek-v4-flash", 0.01)),
+            independent=_HealthTransport(
+                _health_call("mistralai/mistral-small-2603", 0.02)
+            ),
+        )
+    )
+
+    assert len(calls) == 2
+    assert cost == pytest.approx(0.03)
+    assert [item["stage"] for item in reservations] == [
+        "author-health",
+        "independent-reviewer-health",
+    ]
+
+
+def test_provider_health_gate_stops_before_bulk_when_reviewer_fails() -> None:
+    instrument = validate_assets()["instrument"]
+
+    with pytest.raises(ProviderHealthGateError) as raised:
+        asyncio.run(
+            _provider_health_gate(
+                instrument,
+                author=_HealthTransport(_health_call("deepseek-v4-flash", 0.01)),
+                independent=_HealthTransport(FactualQaPilotError("unavailable")),
+            )
+        )
+
+    assert raised.value.stage == "independent-reviewer-health"
+    assert raised.value.calls_attempted == 2
+    assert raised.value.calls_completed == 1
+    assert raised.value.approximate_cost_usd == pytest.approx(0.01)
 
 
 def test_all_20_reviewer_mutations_are_deterministic_defects() -> None:

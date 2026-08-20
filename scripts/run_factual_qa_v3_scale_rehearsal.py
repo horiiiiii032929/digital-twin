@@ -71,10 +71,10 @@ from services.llm import LiteLlmClient
 
 
 INSTRUMENT_PATH = (
-    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_002.json"
+    ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_003.json"
 )
-DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-002.json"
-REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-002"
+DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-rehearsal-003.json"
+REHEARSAL_ID = "factual-qa-v3-scale-rehearsal-003"
 EXPECTED_SLICES = Counter(
     {
         "direct-text": 30,
@@ -93,8 +93,31 @@ MUTATION_TYPES = (
     *("invalid-claim-binding" for _ in range(5)),
     *("invalid-source-binding" for _ in range(5)),
 )
+PROVIDER_HEALTH_SCHEMA = {
+    "type": "object",
+    "required": ["status"],
+    "properties": {"status": {"type": "string", "enum": ["ok"]}},
+}
 _T = TypeVar("_T")
 _R = TypeVar("_R")
+
+
+class ProviderHealthGateError(FactualQaPilotError):
+    """Raised with complete accounting when a pre-bulk provider canary fails."""
+
+    def __init__(
+        self,
+        stage: str,
+        *,
+        calls_attempted: int,
+        calls_completed: int,
+        approximate_cost_usd: float,
+    ) -> None:
+        super().__init__(f"provider health gate failed: {stage}")
+        self.stage = stage
+        self.calls_attempted = calls_attempted
+        self.calls_completed = calls_completed
+        self.approximate_cost_usd = approximate_cost_usd
 
 
 class OpenRouterJsonTransport:
@@ -174,11 +197,12 @@ def validate_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
 
     execution = instrument.get("execution", {})
     expected_execution = {
+        "provider_health_probe_call_limit": 2,
         "author_call_limit": 120,
         "independent_reviewer_case_call_limit": 120,
         "independent_reviewer_mutation_call_limit": 20,
         "dispute_reviewer_call_limit": 24,
-        "total_provider_call_limit": 284,
+        "total_provider_call_limit": 286,
         "author_concurrency": 8,
         "independent_reviewer_concurrency": 8,
         "dispute_reviewer_concurrency": 4,
@@ -211,7 +235,7 @@ def validate_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "allow_fallbacks": False,
         "require_parameters": True,
         "data_collection": "deny",
-        "zdr": True,
+        "zdr": False,
     }
     if roles["independent_reviewer"].get("provider_routing") != expected_routing:
         raise FactualQaPilotError("OpenRouter provider policy drifted")
@@ -609,6 +633,67 @@ async def _parallel_ordered(
     return list(await asyncio.gather(*(run(item) for item in items)))
 
 
+async def _provider_health_gate(
+    instrument: dict[str, Any],
+    *,
+    author: Any,
+    independent: Any,
+) -> tuple[list[JsonCall], float, list[dict[str, float | str]]]:
+    system = (
+        "Return only the requested JSON object. This is a synthetic-public "
+        "provider availability and structured-output canary."
+    )
+    prompt = 'Return {"status":"ok"}.'
+    stages = (
+        (
+            "author-health",
+            author,
+            instrument["model_roles"]["author"],
+            "factual_qa_v3_author_provider_health",
+        ),
+        (
+            "independent-reviewer-health",
+            independent,
+            instrument["model_roles"]["independent_reviewer"],
+            "factual_qa_v3_reviewer_provider_health",
+        ),
+    )
+    calls: list[JsonCall] = []
+    reservations: list[dict[str, float | str]] = []
+    cost = 0.0
+    for stage, transport, binding, task in stages:
+        reserved = _maximum_batch_cost(
+            binding,
+            system=system,
+            prompts=[prompt],
+            schema=PROVIDER_HEALTH_SCHEMA,
+        )
+        _enforce_cost_reservation(instrument, incurred=cost, reserved=reserved)
+        reservations.append(
+            {"stage": stage, "maximum_reserved_cost_usd": reserved}
+        )
+        try:
+            call = await transport.call_json(
+                system=system,
+                prompt=prompt,
+                task=task,
+                schema=PROVIDER_HEALTH_SCHEMA,
+            )
+            if call.value.get("status") != "ok":
+                raise FactualQaPilotError("provider canary returned a non-ok status")
+        except Exception as error:
+            raise ProviderHealthGateError(
+                stage,
+                calls_attempted=len(calls) + 1,
+                calls_completed=len(calls),
+                approximate_cost_usd=cost,
+            ) from error
+        calls.append(call)
+        cost += call.approximate_cost_usd
+        _enforce_cost(instrument, cost)
+    return calls, cost, reservations
+
+
 async def execute(assets: dict[str, Any]) -> dict[str, Any]:
     instrument = assets["instrument"]
     corpus = assets["corpus"]
@@ -620,6 +705,11 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
     )
     dispute = DeepSeekJsonTransport(instrument["model_roles"]["dispute_reviewer"])
     started = time.perf_counter()
+    health_calls, external_cost, cost_reservations = await _provider_health_gate(
+        instrument,
+        author=author,
+        independent=independent,
+    )
 
     import tempfile
 
@@ -629,7 +719,6 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
         )
         retrievers, embedder = _selected_retrieval(chunks_by_course)
         blueprints = corpus["case_blueprints"]
-        cost_reservations: list[dict[str, float | str]] = []
         author_system = _author_system_prompt()
         author_inputs = [
             (
@@ -650,7 +739,11 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
             prompts=[prompt for _, prompt in author_inputs],
             schema=AUTHOR_SCHEMA,
         )
-        _enforce_cost_reservation(instrument, incurred=0.0, reserved=author_reserved)
+        _enforce_cost_reservation(
+            instrument,
+            incurred=external_cost,
+            reserved=author_reserved,
+        )
         cost_reservations.append(
             {"stage": "author", "maximum_reserved_cost_usd": author_reserved}
         )
@@ -669,7 +762,7 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
             concurrency=execution["author_concurrency"],
             operation=author_one,
         )
-        external_cost = sum(call.approximate_cost_usd for call in author_calls)
+        external_cost += sum(call.approximate_cost_usd for call in author_calls)
         _enforce_cost(instrument, external_cost)
 
         results: list[dict[str, Any]] = []
@@ -887,6 +980,7 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
         review_elapsed = time.perf_counter() - review_started
         elapsed = time.perf_counter() - started
         call_counts = {
+            "provider_health": len(health_calls),
             "author": len(author_calls),
             "independent_case": len(review_calls),
             "independent_mutation": len(mutation_calls),
@@ -920,6 +1014,7 @@ async def execute(assets: dict[str, Any]) -> dict[str, Any]:
             "private_data_read": False,
             "private_data_emitted": False,
             "call_counts": call_counts,
+            "provider_health_calls": [_call_record(call) for call in health_calls],
             "cost_reservations": cost_reservations,
             "ingestion": ingestion,
             "retrieval_provider": {
@@ -1458,6 +1553,9 @@ def main() -> None:
     try:
         result = asyncio.run(execute(assets))
     except Exception as error:
+        health_failure = (
+            error if isinstance(error, ProviderHealthGateError) else None
+        )
         _write_json_exclusive(
             output_path,
             {
@@ -1473,7 +1571,17 @@ def main() -> None:
                 "private_data_emitted": False,
                 "failure_category": type(error).__name__,
                 "failure_detail": str(error),
-                "provider_call_accounting_complete": False,
+                "failure_stage": health_failure.stage if health_failure else None,
+                "provider_calls_attempted": (
+                    health_failure.calls_attempted if health_failure else None
+                ),
+                "provider_calls_completed": (
+                    health_failure.calls_completed if health_failure else None
+                ),
+                "approximate_cost_usd": (
+                    health_failure.approximate_cost_usd if health_failure else None
+                ),
+                "provider_call_accounting_complete": health_failure is not None,
                 "scale_to_10000_authorized": False,
             },
         )

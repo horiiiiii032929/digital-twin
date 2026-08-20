@@ -1237,6 +1237,17 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual correction review confirmed successor 003 preserves the exact reviewed 120-case source design, adds two paid pre-bulk provider canaries, caps total calls at 286 and cost at USD 3, records the synthetic-public-only request-level ZDR exception while denying data collection, prohibits private data and 10,000-case scale, and remains execution-blocked pending separate authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_003.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-invalid-attempt-correction-review",
+      "sha256": "ff5e95ea161c8fb063a45b6bbfb5c2be44e57767d14975a8f0f06a5606aaf8ad"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
       "path": "research/05_evaluation/instruments/generator_qualification_v1.json",
@@ -2392,12 +2403,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual control-flow, provider, privacy, source-lineage, and failure-boundary review plus Ruff and focused tests. Corrected 002 validates immutable source hashes and exact claim anchors, expands 18 distinct visual and 18 true two-source cases, enforces per-claim citation completeness, stratifies mutations, gates all reviewer disagreements and audit capacity, reserves conservative batch cost before calls, preserves invalid attempts, and remains execution-blocked pending explicit authorization.",
+      "evidence": "Manual invalid-attempt correction review plus Ruff and focused tests. Successor 003 validates the immutable reviewed source design, runs schema-valid author and reviewer canaries before bulk calls, records complete canary-failure accounting, reserves canary and bulk cost conservatively, retains every quality and scale boundary, and remains execution-blocked pending explicit authorization.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "5d4c1320ba9c12b2c6128538cb05aa8bae35d0c74ee4a99191e772f4fab693f4"
+      "sha256": "8ab3ed7d6cee90a5c241c03606e5d6021f8cb548ab1bd90608bdcebbf95ca1d0"
     },
     {
       "audit_status": "audited",
@@ -3789,12 +3800,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, the completed oracle pilot retains its exact historical authorization, defective unexecuted rehearsal 001 remains revoked, and frozen rehearsal 002 receives only the same four exact bounded operations without authorizing successors or scale.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, only the completed oracle pilot retains bounded authorization, invalid rehearsal 002 is revoked, and reviewed successor 003 remains unauthorized until a separate explicit freeze decision.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "a74b3efb9e073429d65271588ee69fda8d52faef326250a8591aa0efab16d9c9"
+      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
     },
     {
       "audit_status": "audited",
@@ -4075,12 +4086,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen rehearsal 002, and explicit rejection of defective rehearsal 001, successor, and unknown run IDs.",
+      "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of defective rehearsal 001, invalid rehearsal 002, reviewed successor 003, and unknown run IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "da7c1369a2f1c13e3a98445b91d708f17055d63ba41281c167d68d617eeeb314"
+      "sha256": "de81266b22a13a5cf1b2d1c70c4d19887d6db4e69ab4ebf721044215e580f661"
     },
     {
       "audit_status": "audited",
@@ -4471,12 +4482,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate exact frozen 120-case expansion over 48 exact-anchored claims, 18 distinct visual facts, 18 genuine two-source cases, corrected boundary contexts, all-course cross-confusion coverage, per-claim citation completeness, draft-status blocking, pinned Mistral routing, stratified 20-case mutations, conservative pre-call cost reservation, disagreement/dispute gates, human-audit capacity, bounded concurrency, and the no-10000-scale boundary.",
+      "evidence": "Focused tests validate exact reviewed 120-case expansion, draft-status blocking, the pinned first-party Mistral synthetic-public route, successful two-provider canaries, fail-closed reviewer-canary accounting before bulk calls, 286-call and USD 3 bounds, all prior source/citation/mutation/dispute gates, and the no-10000-scale boundary.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "7b1765654c2468b2da59c771b701faea445fcfcee6b3a493c02f6e86cf6fec50"
+      "sha256": "f7d293e05af560d0ba22953349cc68a535fab636259d40f41981557b872d87fd"
     },
     {
       "audit_status": "audited",
