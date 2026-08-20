@@ -6,13 +6,15 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The repository-wide correctness audit is complete in the current worktree:
+The repository-wide correctness audit is complete on `main` at merge revision
+`db2f5e9` through PR
+[#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
 all 426 executable or execution-affecting files are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active until this correction set is committed and the next evaluation action
-is separately authorized. It covers 50 protected entrypoints and passed with
-no model/provider calls or private/held-out reads.
+active until the next evaluation action is separately authorized. It covers 50
+protected entrypoints and passed with no model/provider calls or private/held-out
+reads.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -142,7 +144,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Complete locally / Keep corrections | Commit and synchronize the 426/426 audited correction set; keep execution frozen until the next action is explicitly authorized |
+| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9` with 426/426 files audited; keep execution frozen until the next action is explicitly authorized |
 | 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine / ready for next authorization | Apply corrected v2 source governance, complete content-safe source roles and deterministic product contracts, then authorize any semantic review separately |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |

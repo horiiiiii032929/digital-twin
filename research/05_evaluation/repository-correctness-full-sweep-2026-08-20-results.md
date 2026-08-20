@@ -1,13 +1,13 @@
 # Repository correctness full sweep — 2026-08-20
 
-Status: complete local correction and audit closure
+Status: complete and merged through PR #98 at `db2f5e9`
 
 ## Decision
 
-Keep the corrected repository state and close the repository-correctness audit
-in the current worktree. Do not treat this as a deployment, model-selection, or
-evaluation result. Keep the execution freeze active until the correction set is
-committed and the next evaluation action is separately authorized.
+Keep the corrected repository state merged on `main` and close the
+repository-correctness audit. Do not treat this as a deployment, model-selection,
+or evaluation result. Keep the execution freeze active until the next evaluation
+action is separately authorized.
 
 ## Scope and findings
 
