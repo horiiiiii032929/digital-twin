@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "4b77004dc3d5ce70e4a7f40de81f81881ed9d94bfb3d7f48cd1a4ecbbcca44a6",
+  "record_sha256": "085530720cd0bdd95c655ce93237cbc50938df6ce298907cadc4c06835aaba69",
   "records": [
     {
       "audit": {
@@ -6662,7 +6662,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests validate exact 120-case and slice expansion, complete approved-claim coverage, credential- and clean-revision-safe preflight, pinned first-party OpenRouter Mistral routing, 20 guaranteed deterministic mutation defects, bounded concurrency with stable result order, nearest-rank p95 calculation, and the audit-required/no-10000-scale decision boundary.",
+        "evidence": "Focused tests validate exact 120-case and slice expansion, complete approved-claim coverage, credential-, embedding-, and clean-revision-safe preflight without host-machine assumptions, pinned first-party OpenRouter Mistral routing, 20 guaranteed deterministic mutation defects, bounded concurrency with stable result order, nearest-rank p95 calculation, and the audit-required/no-10000-scale decision boundary.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6673,7 +6673,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "risk": "medium",
-      "sha256": "0912de0d7eb5b95ddae315ec1ba425e3f97ccc18763393a5e6558830b933d497"
+      "sha256": "cf5671d280b68c27231498b1cf2c80f71994471607ac731c2c41d814116845da"
     },
     {
       "audit": {

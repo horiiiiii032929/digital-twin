@@ -72,10 +72,15 @@ def test_preflight_requires_both_provider_credentials(monkeypatch) -> None:
 
 def test_preflight_is_ready_only_with_both_keys_and_clean_revision(
     monkeypatch,
+    tmp_path,
 ) -> None:
     assets = validate_assets()
     monkeypatch.setenv("DEEPSEEK_API_KEY", "configured")
     monkeypatch.setenv("OPENROUTER_API_KEY", "configured")
+    monkeypatch.setattr(
+        "scripts.run_factual_qa_v3_oracle_pilot.EMBEDDING_ROOT",
+        tmp_path,
+    )
     monkeypatch.setattr(
         "scripts.run_factual_qa_v3_scale_rehearsal._working_tree_dirty",
         lambda: False,
