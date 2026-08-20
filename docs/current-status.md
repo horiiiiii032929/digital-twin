@@ -25,10 +25,15 @@ Unexecuted successor `factual-qa-v3-scale-rehearsal-003` was superseded after th
 researcher allowed provider data collection for this synthetic evaluation
 phase. Reviewed `factual-qa-v3-scale-rehearsal-004` preserves the two pre-bulk
 provider canaries, explicitly allows collection and retention only for committed
-synthetic-public fixtures, and now has an exact bounded execution authorization.
-Its paid execution still requires a clean ready preflight and explicit approval
-immediately before provider calls. No path permits private or held-out data, and
-the wider freeze remains active.
+synthetic-public fixtures. Its one-time execution completed at clean revision
+`6a75410`: 114/120 cases passed deterministic provenance and retrieval recovered
+all required evidence in the top three for 96/96 answerable cases, but the
+independent reviewer detected only 10/20 controlled mutations. It accepted every
+missing- and truncated-citation defect, failing the 90% sensitivity gate. The
+completed 12-case manual audit confirmed all six deterministic quarantines and
+accepted six stratified controls. The decision is **Refine**; authorization is
+revoked and 10,000-case scale remains closed. No path permits private or held-out
+data, and the wider freeze remains active.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -256,11 +261,14 @@ accounting is incomplete; no generated outputs or quality metrics survive and
 002 is registered as invalid. Unexecuted 003 added one schema-valid canary
 through each provider before bulk authoring, then was superseded when the
 researcher explicitly allowed provider data collection for this evaluation
-phase. Reviewed successor 004 preserves those canaries and the exact source and
-model design while allowing provider collection and retention only for the
-committed synthetic-public fixtures. Every product, private, course, instructor,
-and student-data path remains excluded and retains strict ZDR controls. Scale
-toward 10,000 remains unauthorized.
+phase. Successor 004 preserved those canaries and the exact source and model
+design while allowing provider collection and retention only for the committed
+synthetic-public fixtures. The run completed 268 provider calls for USD 0.046029
+and passed every gate except reviewer mutation sensitivity: Mistral rejected all
+invalid claim/source bindings but accepted all missing/truncated citations. The
+manual audit confirmed six quarantines and six controls. The method must be
+refined before real-source or larger execution, and scale toward 10,000 remains
+unauthorized.
 
 ## Human and safety boundary
 

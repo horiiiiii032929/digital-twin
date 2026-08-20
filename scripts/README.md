@@ -417,10 +417,11 @@ Current utilities:
   health canaries before bulk calls. Unexecuted `003` is superseded after the
   researcher allowed data collection for the synthetic evaluation phase.
   Reviewed `004` keeps the same first-party Mistral model, allows data collection
-  and retention only for committed synthetic-public fixtures, and has an exact
-  bounded authorization while the global freeze stays active. Paid execution
-  still requires a clean ready preflight and explicit approval immediately
-  before provider calls.
+  and retention only for committed synthetic-public fixtures. Its one-time run
+  completed but failed reviewer mutation sensitivity because all missing and
+  truncated citations were accepted. The authorization is revoked; a rerun
+  requires a new instrument and reviewer-method correction while the global
+  freeze stays active.
   `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
   explicit execution command requires both environment-owned provider keys,
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case

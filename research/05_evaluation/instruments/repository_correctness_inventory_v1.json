@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "21889e971974327d08ac8c36d23e11e5cb1f513fd04fc197f70eef4fcf0b4379",
+  "record_sha256": "00f17f21330f03756ba205eff95224a94e3a272d534e911db0e547d9f8c35a52",
   "records": [
     {
       "audit": {
@@ -5718,7 +5718,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, defective 001, invalid 002, and superseded 003 remain revoked, and only the completed oracle plus exact frozen rehearsal 004 have bounded authorization.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, completed rehearsal 004 has its one-time authorization revoked after a failed reviewer-sensitivity gate, and only the completed oracle remains on the bounded allowlist.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -5729,7 +5729,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e4149145eb4965cb2ff7eee565f2dff130c44d35e15ce1aa0f19e3dc10c2c780"
+      "sha256": "bc243b09028248a7518879bc5e051e5ba2dd85b837de6dcbb97bb6ade84fc5ad"
     },
     {
       "audit": {
@@ -6134,7 +6134,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of the completed oracle and frozen 004, and explicit rejection of defective 001, invalid 002, superseded 003, successor, and unknown run IDs.",
+        "evidence": "Focused freeze policy tests passed for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of defective 001, invalid 002, superseded 003, completed 004, successor, and unknown run IDs.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6145,7 +6145,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "ee4aadc450c45d34f54986a616f49f94f4cd8f1c95aaeb68b598d578e80cec63"
+      "sha256": "8ed21ac00a3fe9705462eeba86018031ae99c1c4a424322e1dbbe8cb3295a41e"
     },
     {
       "audit": {
