@@ -21,6 +21,7 @@ from scripts.run_factual_qa_v3_scale_pilot_100 import (
     validate_instrument,
 )
 from src.digital_twin.repository_freeze import (
+    RepositoryFreezeError,
     require_bounded_pilot_operation_allowed,
 )
 
@@ -30,12 +31,12 @@ def assets() -> dict:
     return load_assets()
 
 
-def test_instrument_is_frozen_authorized_and_price_bounded(assets: dict) -> None:
+def test_completed_instrument_is_revoked_and_price_bounded(assets: dict) -> None:
     instrument = assets["instrument"]
 
     assert instrument["instrument_id"] == INSTRUMENT_ID
-    assert instrument["status"] == "frozen-pending-execution"
-    assert instrument["execution"]["provider_execution_authorized"] is True
+    assert instrument["status"] == "completed-refine-authorization-revoked"
+    assert instrument["execution"]["provider_execution_authorized"] is False
     assert instrument["execution"]["dataset_write_authorized"] is False
     assert instrument["execution"]["automatic_stage_promotion"] is False
     assert instrument["execution"]["total_provider_call_limit"] == 246
@@ -64,7 +65,7 @@ def test_pilot_cases_are_exactly_stratified_and_source_linked(assets: dict) -> N
     )
 
 
-def test_preflight_is_ready_without_calls(
+def test_completed_preflight_is_blocked_without_calls(
     assets: dict, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-only")
@@ -75,15 +76,16 @@ def test_preflight_is_ready_without_calls(
     )
     preflight = build_preflight(assets, output_path=tmp_path / "unused.json")
 
-    assert preflight["status"] == "ready"
-    assert preflight["provider_execution_authorized"] is True
+    assert preflight["status"] == "blocked-not-authorized"
+    assert preflight["provider_execution_authorized"] is False
     assert preflight["external_call_enabled"] is False
     assert preflight["checkpoint_1000_authorized"] is False
     assert preflight["scale_10000_authorized"] is False
 
 
-def test_repository_freeze_allows_only_the_exact_pilot() -> None:
-    require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+def test_repository_freeze_revokes_the_completed_pilot() -> None:
+    with pytest.raises(RepositoryFreezeError):
+        require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
 
 
 def test_qwen_cannot_be_bound_without_a_registered_passing_result(

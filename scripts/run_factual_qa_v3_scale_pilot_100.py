@@ -192,12 +192,15 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ScalePilotError("pilot stage design drifted")
     execution = instrument.get("execution", {})
     authorized = execution.get("provider_execution_authorized")
-    expected_status = (
-        "frozen-pending-execution"
+    allowed_statuses = (
+        {"frozen-pending-execution"}
         if authorized is True
-        else "draft-reviewed-provider-execution-unauthorized"
+        else {
+            "draft-reviewed-provider-execution-unauthorized",
+            "completed-refine-authorization-revoked",
+        }
     )
-    if authorized not in {True, False} or instrument.get("status") != expected_status:
+    if authorized not in {True, False} or instrument.get("status") not in allowed_statuses:
         raise ScalePilotError("instrument status and provider authorization drifted")
     if execution.get("dataset_write_authorized") is not False:
         raise ScalePilotError("dataset writing must remain unauthorized")

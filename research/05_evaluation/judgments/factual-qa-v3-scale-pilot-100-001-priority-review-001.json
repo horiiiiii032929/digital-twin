@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-pilot-100-001-priority-review-001",
+  "run_id": "factual-qa-v3-scale-pilot-100-001",
+  "reviewer_type": "codex-primary-independent-case-review-not-human",
+  "reviewed_at": "2026-08-21",
+  "decision": "confirm-all-priority-quarantines",
+  "confirmed": 12,
+  "total": 12,
+  "cases": [
+    {"blueprint_id": "fqa10k-c04-476", "decision": "confirm-quarantine", "reason": "author-response-malformed"},
+    {"blueprint_id": "fqa10k-c14-426", "decision": "confirm-quarantine", "reason": "boundary-action-and-citation-contract-failed"},
+    {"blueprint_id": "fqa10k-c15-426", "decision": "confirm-quarantine", "reason": "boundary-case-included-forbidden-claims-and-citations"},
+    {"blueprint_id": "fqa10k-c16-426", "decision": "confirm-quarantine", "reason": "author-response-malformed"},
+    {"blueprint_id": "fqa10k-c17-426", "decision": "confirm-quarantine", "reason": "author-response-malformed"},
+    {"blueprint_id": "fqa10k-c18-426", "decision": "confirm-quarantine", "reason": "author-response-malformed"},
+    {"blueprint_id": "fqa10k-c01-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"},
+    {"blueprint_id": "fqa10k-c04-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"},
+    {"blueprint_id": "fqa10k-c05-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"},
+    {"blueprint_id": "fqa10k-c06-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"},
+    {"blueprint_id": "fqa10k-c07-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"},
+    {"blueprint_id": "fqa10k-c18-251", "decision": "confirm-quarantine", "reason": "citation-source-and-quote-contract-failed"}
+  ],
+  "human_review_completed": false,
+  "human_review_required_before_method_refinement": false,
+  "note": "This cross-review confirms deterministic quarantine decisions only; it is not professor or human calibration evidence."
+}

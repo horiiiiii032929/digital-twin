@@ -320,9 +320,16 @@ Network-free simulations exercised the 222-call no-dispute path and the
 246-call maximum-dispute path, including deterministic acceptance, 20 mutation
 probes, malformed/provider failure accounting, exact model identity, atomic
 checkpoints, safe resume, aggregate and slice gates, and a 12-case priority
-packet. The exact 100-case instrument is now frozen and one-time provider
-execution is authorized under the repository freeze. The 1,000- and
-10,000-case stages remain unauthorized and cannot be promoted automatically.
+packet. The paid run completed as **Refine** at revision `0d60f86`: 226/226
+provider calls returned for USD 0.110512 with stable model identities, complete
+accounting, and zero token-limit violations. However, only 4/100 authored cases
+passed deterministic validity, 9 author responses were malformed, and all 100
+Mistral review responses violated the scale-run contract. Because only four
+valid cases were boundary cases, zero answerable cases were eligible for the
+20 planned mutation probes. The 12-case priority cross-review confirmed all 12
+deterministic quarantines. This exposes prompt/schema and mutation-eligibility
+defects in the method, not a valid scale-quality result. Authorization is
+revoked; the 1,000- and 10,000-case stages remain closed.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
