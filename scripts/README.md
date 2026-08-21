@@ -449,6 +449,14 @@ Current utilities:
   `npm run verify:factual-qa-v3-10000-design`.
   `--write` is fail-closed under the repository freeze; neither dataset writing
   nor the 100, 1,000, or 10,000 paid stages is authorized by the draft design.
+- `build_factual_qa_v3_10000_truth_packages.py`: preserves the immutable v1
+  blueprints and derives 10,000 deterministic v2 truth packages. Canonical
+  questions, answers, actions, structured claims, exact citations, boundary
+  reasons, and hashes are authoritative; model output can modify none of them.
+  The no-call command `npm run verify:factual-qa-v3-10000-truth` proves exact
+  distribution, source lineage, boundary-empty lineage, normalized question
+  uniqueness, byte stability, and zero private/provider access. `--write`
+  remains blocked by the repository freeze.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report
@@ -471,3 +479,26 @@ Current utilities:
   `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
   rejected because attempt 002 is completed and revoked. Any successor requires
   a new instrument and separate frozen authorization. Later stages remain blocked.
+- `run_factual_qa_v3_scale_pilot_100_003.py`: validates and simulates the
+  deterministic-truth successor. The author contract contains only
+  `question_variant`; deterministic code assembles the canonical answer,
+  action, claims, and citations. Malformed or duplicate variants fall back to
+  unique canonical wording with explicit provenance and still count against
+  the model-quality gates. The runner reuses qualification-006 review,
+  deterministic mutations, atomic checkpoints, safe resume, bounded disputes,
+  and the USD 3 emergency stop. Use `npm run
+  verify:factual-qa-v3-pilot-100-003`, `npm run
+  preflight:factual-qa-v3-pilot-100-003`, or `npm run
+  simulate:factual-qa-v3-pilot-100-003`. Paid execution remains unauthorized.
+- `validate_factual_qa_provider_freshness.py`: validates the frozen 24-hour
+  provider snapshot without network access by default. `--live` compares the
+  instrument against the official DeepSeek pricing table and OpenRouter model
+  list without making inference calls. Any model revision, context limit,
+  conservative peak price, exact Mistral slug/price, or routing drift blocks a
+  paid preflight. Run `npm run verify:factual-qa-provider-freshness`; the live
+  check is invoked by `npm run preflight-live:factual-qa-v3-pilot-100-003`.
+- `validate_professor_digital_twin_transition.py`: validates the separate C0-C3
+  fidelity design, the explicit/inferred professor-profile provenance schema,
+  professor approval gate, and the empty 8-12-case calibration template. It
+  opens no held-out content and makes no model call; run `npm run
+  verify:professor-digital-twin-transition`.

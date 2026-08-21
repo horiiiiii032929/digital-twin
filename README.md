@@ -1,11 +1,15 @@
 # digital-twin
 
-Research and prototype workspace for a Digital Twin teaching system. The project
-goal is to capture an educator's course knowledge, tone, and teaching approach
-so students can get contextual tutoring support while instructors get actionable
-learning-gap summaries.
+Evaluation-first product workspace for releasing an invite-only Course Digital
+Twin. Professors govern approved sources, teaching behaviour, publication, and
+rollback; authorized students receive persistent citation-grounded tutoring.
 
-GitHub Project: [Digital Twin Delivery](https://github.com/users/horiiiiii032929/projects/1)
+The active outcome is a hosted, supervisor-reviewable release candidate followed
+by an approval-gated real-user pilot—not another local demo or model benchmark.
+Start with the [release plan](docs/release-plan.md), then use the
+[current status](docs/current-status.md) for dated evidence and blockers.
+
+GitHub Project: [Course Digital Twin Release](https://github.com/users/horiiiiii032929/projects/1)
 
 ## Project Pillars
 
@@ -207,18 +211,18 @@ Current evidence and limitations:
   representative concurrent selected-model capacity, and release-candidate
   evidence.
 
-The active goal is a deployed, invite-only Course Digital Twin for multiple
-professors and courses, not a one-course RAG pilot or local-only demonstration.
-The merged professor/student workspace is the UX baseline. The next gates are
-trusted multimodal course grounding, credentialed identity and durable product
-infrastructure, a larger factual-QA dataset-quality pipeline, calibrated professor
-fidelity, production operations, and real workflow validation. The bounded
-factual-QA method passed its machine gates on attempt 002 and is waiting on a
-six-case human audit; this is dataset-method evidence, not a model benchmark.
+The active goal is release of an invite-only Course Digital Twin for multiple
+professors and courses, not a one-course RAG pilot, local-only demonstration,
+or standalone benchmark. The merged professor/student workspace is the UX
+baseline. Draft PR #103 contains the deterministic 10,000-package factual-QA
+successor and a provider-unauthorized pilot simulation. Remaining release gates
+cover factual quality, professor fidelity, target-host deployment and
+operations, complete workflows, privacy, and approval-gated usability.
 
 See the
 [real-world product scope](research/00_admin/2026-08-18-real-world-product-scope.md)
-for the prospective product, evaluation, deployment, and claim gates. The
+for the prospective product and the [release plan](docs/release-plan.md) for
+the active delivery order. The
 [technical evidence freeze](reports/technical-evidence-freeze-2026-08-18.md)
 remains authoritative for the earlier experimental baseline and is not
 rewritten by the expanded product goal.

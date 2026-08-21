@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "professor-digital-twin-profile-v1",
+  "title": "Professor Digital Twin profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "course_id",
+    "status",
+    "dimensions",
+    "approval"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "course_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "draft-unapproved",
+        "approved-reference",
+        "withdrawn"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "teaching_style",
+        "explanation_depth",
+        "example_policy",
+        "misconception_handling",
+        "academic_integrity"
+      ],
+      "properties": {
+        "teaching_style": {
+          "$ref": "#/$defs/dimension"
+        },
+        "explanation_depth": {
+          "$ref": "#/$defs/dimension"
+        },
+        "example_policy": {
+          "$ref": "#/$defs/dimension"
+        },
+        "misconception_handling": {
+          "$ref": "#/$defs/dimension"
+        },
+        "academic_integrity": {
+          "$ref": "#/$defs/dimension"
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "approver_role",
+        "approved_profile_sha256",
+        "approved_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "withdrawn"
+          ]
+        },
+        "approver_role": {
+          "const": "professor"
+        },
+        "approved_profile_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance",
+        "evidence_refs",
+        "professor_approved"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "enum": [
+            "explicit",
+            "inferred"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "professor_approved": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

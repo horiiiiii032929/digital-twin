@@ -874,12 +874,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "execution-configuration",
-      "evidence": "Manual command/configuration review plus locked repository verification; Qwen qualification and 100-case validation, simulation, preflight, and execution commands are explicit and separate; the 100-case paid command remains fail-closed; and the inventory gate requires zero pending or open audit findings.",
+      "evidence": "Manual command/configuration review plus locked repository verification; deterministic truth, pilot-003 validation, simulation, preflight, provider-freshness, and Professor Digital Twin transition commands are explicit and separate; paid execution remains fail-closed; and the inventory gate requires zero pending or open audit findings.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "e4730d4998aee81425d4d3715c296bc352537440953b8bd1ae56d3bfb77adf45"
+      "sha256": "518a3c4f4e785e224ae7779af641c5e1164eab8c60da5eaeed9573951b52bec3"
     },
     {
       "audit_status": "audited",
@@ -3899,12 +3899,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; attempts 001/002 and qualifications 006/007 are revoked; only the historical oracle remains allowlisted; no 1,000- or 10,000-case stage is authorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; the deterministic truth-package builder and pilot-003 runner are classified, pilot 003 is not allowlisted, historical paid authorizations remain revoked, and no 1,000- or 10,000-case stage is authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "6afcceb158d032ec40004004d80bdea254aaf686c5e3792225fb44c39f64ebfa"
+      "sha256": "e0c5afa309d6e71602d8471260fcd236dabe3a1e0d37173314b45c22648d958e"
     },
     {
       "audit_status": "audited",
@@ -4939,6 +4939,149 @@
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
       "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual schema and hash review plus deterministic builder execution confirmed the successor preserves pipeline-001 immutability, prospectively corrects cross-course confusion to an empty-lineage boundary, binds authoritative truth fields, requires exactly 8,000 answerable and 2,000 boundary cases, and authorizes no provider or dataset writes.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_10000_pipeline_002.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "7a7a3eafd4ef70893056f362230836bd4bcd5d9aba5197e89f451aa09e49776e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual gate and provider-binding review confirmed pilot 003 is reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicitly frozen for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "5992e54260a6773b536299eb2721d89470d8c9a6278765cc7df16a4701a67cbe"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual contract review confirmed explicit and inferred provenance are represented per teaching dimension, professor approval is mandatory before reference use, and factual hard gates remain separate from fidelity dimensions.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/professor_digital_twin_profile_v1.schema.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "8ecce18b1b14c88ae40b762065220f95d6a64f72c2370c6128e6e75e2111811a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Schema and semantic validation confirmed the synthetic profile is structurally valid, unapproved, clearly non-reference, and contains no private professor data.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/professor_digital_twin_profile_v1_synthetic.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "d59ab6962f32e8385e95fe23724e5376c36373b27e76452e71d1e7090c62391c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual and semantic validation confirmed the calibration packet remains empty, bounded to 8-12 cases, separates hard correctness gates from teaching-fidelity ratings, and cannot be executed before professor guidance.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/professor_fidelity_calibration_packet_v1_template.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "93e012b327cd62549fa046bfb5cf45e237a5d829ac2da584fd3954b316d772de"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Manual algorithm review plus repeat execution confirmed byte-stable 10,000-case truth packages, exactly 8,000 answerable and 2,000 boundary actions, exact answer lineage, fully empty boundary lineage, unique normalized questions, deterministic hashes, no private inputs, and fail-closed write authorization.",
+      "findings": [],
+      "path": "scripts/build_factual_qa_v3_10000_truth_packages.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "a5f6a4c6e6b2986ccbb586c4491dbac9111b6e2cab738b79f0942f49b3e80ec9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Manual state-machine and accounting review plus normal, malformed, duplicate, canary-failure, identity-drift, maximum-dispute, and resume simulations confirmed successor truth is projected over immutable upstream structure, deterministic assembly and boundary actions remain authoritative, fallback provenance is explicit, accounting is atomic, and paid execution is unauthorized.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_scale_pilot_100_003.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "1d59d608d6edc45b60c6ece6ac2b95d8d2e9af40bc1069ebeb9a55aa49358326"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, DeepSeek account-linked retention/storage terms, Mistral 30-day/no-training policy, and a 24-hour age bound without making inference calls.",
+      "findings": [],
+      "path": "scripts/validate_factual_qa_provider_freshness.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "290641331fc391830233511018797ef288e78935d111530de2a3c332c40775b9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Manual C0-C3 invariant review plus schema and semantic validation confirmed fixed-comparison constraints, approval-gated profile provenance, separate hard and fidelity dimensions, and no held-out or model execution.",
+      "findings": [],
+      "path": "scripts/validate_professor_digital_twin_transition.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "15d4bc9017885e644d2921f63ca19c81dda24acbfd0da74d600e2c16f7062b26"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused regressions cover snapshot expiry, future timestamps, exact model revisions and prices, routing restrictions, OpenRouter identity, official metadata parsing, and fail-closed DeepSeek/OpenRouter retention-policy drift.",
+      "findings": [],
+      "path": "tests/test_factual_qa_provider_freshness.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "fd11ce226d3c2c9cd65c6fc084ff475ba690e2fec5c443bf9512cdea89e28fd6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused regressions cover all 10,000 package counts, byte stability, source and claim lineage, canonical content, boundary empty lineage, exact duplicates, near-duplicate reporting, privacy, and unauthorized writes.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_10000_truth_packages.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "8917684abe231860a65b444eb768ae30e7824e32f8adddfd94f9f3ba940bdb59"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused regressions prove question-only model authority, deterministic metadata immutability, canonical fallback and quarantine behavior, duplicate rejection, canary/identity/retention-policy failure closure, cost and call ceilings, and exact resume binding.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_scale_pilot_100_003.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "be39ec94c304a6df3dc61ba1ad6893aa4f33954e27d762251a2c386fa19ab913"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused regressions cover profile schema compliance, approval eligibility, prohibited private content, C0-C3 invariants, hard-versus-fidelity separation, and the bounded empty calibration packet.",
+      "findings": [],
+      "path": "tests/test_professor_digital_twin_transition.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "f59b10d56895a3508cd22dd8b86c88885a99c336df73cf5658ee8485da8ce967"
     }
   ],
   "schema_version": 1

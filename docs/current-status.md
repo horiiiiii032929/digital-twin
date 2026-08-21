@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 449 executable or execution-affecting
+the current branch extends it to all 462 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 55 protected entrypoints
+active for all general evaluation actions. It covers 57 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -65,6 +65,26 @@ Boundary handling, one multi-source claim binding, duplicate questions, and two
 malformed outcomes still failed their gates. Its authorization is revoked; the
 1,000- and 10,000-case stages remain unauthorized.
 
+The provider-free successor is now implemented as
+`factual-qa-v3-10000-pipeline-002` with unauthorized pilot 003. Deterministic
+code owns canonical questions and answers, actions, claims, exact quotes,
+citations, boundary reasons, and hashes; a model may propose only question
+wording. Historical pipeline 001 remains unchanged. Pipeline 002 corrects its
+cross-course boundary mismatch prospectively, producing exactly 8,000
+answerable and 2,000 empty-lineage boundary packages. All 10,000 are byte-stable
+and normalized-question unique. The normal 222-call network-free simulation
+passes every gate, while paid preflight remains `blocked-not-authorized`.
+
+The current metadata checkpoint also found that older prospective DeepSeek
+prices in the repository were stale. Pilot 003 binds the current documented
+DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
+plus exact OpenRouter `mistralai/mistral-small-2603` routing with fallback
+disabled. The frozen policy snapshot records DeepSeek account-linked retention
+and PRC storage plus the OpenRouter registry's 30-day, no-training Mistral
+policy. Only synthetic-public fixtures are permitted. Historical result
+bindings were not changed. Paid execution requires another live metadata check
+within 24 hours.
+
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
 upgraded to Torch 2.13.0, Transformers 5.15.1, and Sentence Transformers 6.0.0;
@@ -76,7 +96,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 682 Python tests and 46 frontend tests, frontend lint, and the
+check passes 707 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -96,17 +116,20 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 682-test Python suite.
+connections. These corrections pass the current 707-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 449-file audit. Evaluation
+artifacts are also fully dispositioned in the current 462-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
 ## Current outcome
 
-The project has moved from an experimental local-demo goal to a deployed,
-invite-only real-world Course Digital Twin goal. The new prospective baseline is
-the [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
+The active goal is to release the system, not to maximize any individual
+benchmark. The [release plan](release-plan.md) defines a hosted R1 release
+candidate, an approval-gated R2 invite-only pilot, and an R3 final project
+release. The [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
+continues to define the product; evaluation tracks are evidence gates toward
+that release.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -166,7 +189,7 @@ PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.
 
-GitHub Project 1 is reorganized around product goal
+GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
 gates:
 
@@ -187,19 +210,25 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine after paid 100-case attempt 002 | Qualification 006 selected Mistral Small 4; Qwen qualification 007 failed; attempt 002 reached 93/100 deterministic validity, 85/85 citation validity, 97/100 reviewer agreement, and 20/20 mutation rejection | Move authoritative actions, claims, answers, and citations into deterministic truth packages; validate the provider-free successor before any new paid checkpoint |
+| Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
-## Immediate critical path
+## Release readiness and critical path
+
+The repository and local product baseline are healthy, but the system is not
+release-ready. The current release blockers are professor-method guidance,
+separately authorized factual-QA confirmation, public host/domain selection,
+target-host operations evidence, professor-fidelity calibration, and one frozen
+end-to-end candidate decision.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Keep / no prospective execution authorized | The global freeze remains active with only the completed historical oracle pilot allowlisted; every scale stage is closed |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine | Build deterministic truth-package pipeline 002 and provider-unauthorized pilot 003; require professor-method guidance and separate paid authorization before execution |
-| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
-| 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
-| 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
-| 6 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives an explicit Refine/Drop decision |
-| 7 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
+| 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
+| 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
+| 3 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
+| 4 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / externally blocked | Select a host/domain, then pass trusted TLS, target-host restore, and public walkthrough |
+| 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
+| 6 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
+| 7 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
@@ -360,6 +389,16 @@ assemble actions, claim IDs, and citations, quarantine null authors before model
 review, and enforce normalized question uniqueness. The 1,000- and 10,000-case
 stages remain unauthorized.
 
+Pipeline 002 implements that method-level correction rather than another prompt
+revision. Its truth content hash is
+`1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
+The provider-free build passes the full repository gate with 707 Python and 46
+frontend tests and a 462/462 complete audit. Pilot 003 is reviewed but not
+frozen or allowlisted. The separate Professor Digital Twin transition now has a
+validated C0-C3 contract, approval-gated explicit/inferred professor-profile
+schema, and an empty 8-12-case calibration template. Fidelity judging and held-
+out access remain paused pending professor guidance.
+
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
 cases across text, code, multi-source, table, diagram, other multimodal, and
@@ -387,9 +426,10 @@ When status statements conflict, use:
 1. immutable run records and registered corrections for historical results;
 2. versioned component/release profiles and the technical evidence freeze;
 3. the prospective real-world product scope;
-4. this dated operational status;
-5. the live GitHub Project fields and dependencies;
-6. component guides and historical plans.
+4. the active release plan;
+5. this dated operational status;
+6. the live GitHub Project fields and dependencies;
+7. component guides and historical plans.
 
 Never edit an old result to make it appear successful. Add a correction or a
 new prospective run and retain the original evidence.

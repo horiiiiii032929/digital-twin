@@ -5,6 +5,7 @@ design records.
 
 ## Active product and architecture
 
+- [Course Digital Twin release plan](release-plan.md)
 - [Current project status](current-status.md)
 - [Real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 - [Technical evidence freeze](../reports/technical-evidence-freeze-2026-08-18.md)
@@ -20,8 +21,9 @@ design records.
 - [Staging deployment and recovery](deployment.md)
 - [Deployable product threat model](deployment-threat-model.md)
 
-The authoritative prospective product scope is maintained in
+The product definition is maintained in
 [`research/00_admin/2026-08-18-real-world-product-scope.md`](../research/00_admin/2026-08-18-real-world-product-scope.md).
+The [release plan](release-plan.md) is the operational order of work.
 The earlier frontier scope and all frozen experiment records remain historical
 sources of truth for the decisions and results they document.
 

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-10000-pipeline-002",
+  "status": "draft-reviewed-provider-execution-unauthorized",
+  "issue": 87,
+  "predecessor": "factual-qa-v3-10000-pipeline-001",
+  "decision_question": "Can deterministic truth packages preserve authoritative source-linked ground truth while models contribute only optional natural-language variants and advisory review?",
+  "model_leaderboard": false,
+  "ground_truth_policy": "Canonical questions, answers, actions, claims, and citations are deterministic. Model output cannot create or modify ground truth.",
+  "relationship_to_other_evaluations": {
+    "verified_100_case_retrieval_benchmark": "separate",
+    "real_source_pilot": "later separate track",
+    "professor_digital_twin_fidelity": "later separate track"
+  },
+  "upstream_blueprint_design": {
+    "instrument_id": "factual-qa-v3-10000-pipeline-001",
+    "content_sha256": "cd43954f51ceb559a2d95b57fd0b25d551c43c103d404bb5ce49bfbe33f5b2cb",
+    "course_count": 20,
+    "source_count": 1000,
+    "claim_count": 8000,
+    "case_count": 10000
+  },
+  "prospective_boundary_correction": {
+    "historical_upstream_unchanged": true,
+    "slice": "cross-course-confusion",
+    "upstream_action": "answer",
+    "authoritative_successor_action": "abstain",
+    "reason": "The frozen composition defines cross-course confusion as one of 2,000 boundary cases; the successor therefore forces empty lineage instead of answering from another course."
+  },
+  "truth_package_contract": {
+    "version": "factual-qa-v3-truth-package-v1",
+    "authoritative_fields": [
+      "expected_action",
+      "structured_target_claims",
+      "canonical_question",
+      "canonical_answer",
+      "selected_claim_ids",
+      "citations",
+      "boundary_reason"
+    ],
+    "boundary_lineage_policy": "selected_claim_ids, citations, structured_target_claims, candidate_claims, and context_source_ids are always empty when expected_action is abstain, clarify, or refuse",
+    "model_mutable_fields": [
+      "question_variant"
+    ],
+    "model_generated_ground_truth_allowed": false
+  },
+  "case_design": {
+    "case_count": 10000,
+    "answerable_count": 8000,
+    "boundary_count": 2000,
+    "action_counts": {
+      "answer": 8000,
+      "abstain": 1000,
+      "clarify": 500,
+      "refuse": 500
+    },
+    "slice_counts": {
+      "direct-text": 2000,
+      "paraphrase-text": 1500,
+      "multi-source": 1500,
+      "code": 800,
+      "table": 800,
+      "diagram": 500,
+      "equation": 400,
+      "visual-other": 500,
+      "no-evidence": 500,
+      "ambiguous": 500,
+      "cross-course-confusion": 500,
+      "academic-integrity": 500
+    },
+    "course_balance": "exactly 500 cases per dummy course"
+  },
+  "wording_strategies": {
+    "default": "deterministic-plus-model-question-variant",
+    "deterministic-plus-model-question-variant": "Keep the deterministic canonical question and answer; a model may propose one question variant that is validated against the fixed truth package.",
+    "multi-model-question-variants": "Multiple models may propose question variants, but agreement is advisory and cannot alter the truth package."
+  },
+  "deterministic_acceptance": {
+    "truth_package_hash_required": true,
+    "source_and_claim_referential_integrity_required": true,
+    "exact_citation_quote_required": true,
+    "boundary_empty_lineage_required": true,
+    "normalized_question_uniqueness_required": true,
+    "near_duplicate_reporting_required": true,
+    "private_data_calls_max": 0,
+    "raw_vault_files_allowed": false
+  },
+  "execution_safety": {
+    "provider_execution_authorized": false,
+    "dataset_write_authorized": false,
+    "automatic_stage_promotion": false,
+    "retry_attempts": 0,
+    "provider_and_model_calls": 0,
+    "authorize_10000_by_this_instrument": false
+  },
+  "decision_rule": {
+    "provider_free_validation_passes": "publish the truth-package design and prepare a separately authorized 100-case wording checkpoint",
+    "provider_free_validation_fails": "correct deterministic construction before any model or provider call",
+    "model_ranking_from_failure": false
+  }
+}
