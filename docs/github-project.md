@@ -6,8 +6,8 @@ The board executes the
 [release plan](release-plan.md) within the authoritative
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
 Historical closed issues preserve the research and prototype record and are
-archived from the live Project view; the nine visible cards now track only the
-open product, evaluation, and delivery work.
+archived from the live Project view; visible cards track only open product,
+evaluation, and delivery work.
 
 ## Planning fields
 
