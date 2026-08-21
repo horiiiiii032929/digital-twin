@@ -70,14 +70,14 @@ Current utilities:
   hard ceiling, and synthetic-public data only. Provider execution remains
   unauthorized; the simulation is orchestration evidence only and cannot
   freeze the dataset.
-- `run_autonomous_tutoring_graph_development.py`: executes the frozen ten-
-  trajectory T0/T1 comparison entirely against committed synthetic fixtures.
-  It records intents, actions, learner-state revisions, citation lineage,
-  restart and fallback behavior, latency, and zero provider usage. Run
+- `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
+  trajectory T0/T1 comparison against committed synthetic fixtures. It records
+  intents, actions, learner-state revisions, citation lineage, restart and
+  fallback behavior, latency, and zero provider usage. Run
   `npm run verify:autonomous-tutoring-graph-development` for the no-write
-  contract check and `npm run evaluate:autonomous-tutoring-graph-development`
-  once from the clean implementation revision. The exclusive generated output
-  cannot promote T1 automatically.
+  contract check. The one-time execution authorization is revoked; any future
+  confirmation requires a successor instrument and cannot promote T1
+  automatically.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

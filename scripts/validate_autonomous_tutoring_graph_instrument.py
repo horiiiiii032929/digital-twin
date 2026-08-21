@@ -49,8 +49,8 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
         "instrument ID drifted",
     )
     require(
-        payload.get("status") == "frozen-network-free-development",
-        "instrument must remain frozen and network-free",
+        payload.get("status") == "completed-go-deeper",
+        "instrument must preserve the completed development result",
     )
     conditions = payload.get("conditions", {})
     require(conditions.get("control") == "T0-grounded-assistant", "T0 is missing")
@@ -64,8 +64,8 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
     require(execution.get("held_out_execution_authorized") is False, "held-out run enabled")
     require(execution.get("network_required") is False, "network dependency introduced")
     require(
-        execution.get("network_free_development_authorized") is True,
-        "network-free development execution is not authorized",
+        execution.get("network_free_development_authorized") is False,
+        "completed network-free development execution must be revoked",
     )
     require(execution.get("automatic_promotion") is False, "automatic promotion enabled")
     require(execution.get("maximum_repairs_per_turn") == 1, "repair bound drifted")

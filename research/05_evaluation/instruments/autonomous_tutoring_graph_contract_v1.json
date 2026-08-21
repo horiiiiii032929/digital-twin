@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "autonomous-tutoring-graph-contract-v1",
-  "status": "frozen-network-free-development",
+  "status": "completed-go-deeper",
   "issue": 107,
   "decision_question": "Does the bounded T1 tutoring graph select valid pedagogical transitions and terminate safely without weakening T0 grounding controls?",
   "conditions": {
@@ -21,7 +21,7 @@
     "paid_execution_authorized": false,
     "held_out_execution_authorized": false,
     "network_required": false,
-    "network_free_development_authorized": true,
+    "network_free_development_authorized": false,
     "automatic_promotion": false,
     "maximum_repairs_per_turn": 1,
     "maximum_graph_steps_per_turn": 12

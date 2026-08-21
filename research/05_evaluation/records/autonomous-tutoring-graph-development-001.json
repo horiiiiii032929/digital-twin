@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "run_id": "autonomous-tutoring-graph-development-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "autonomous-tutoring-graph-contract-v1-development-10",
+  "corpus_id": "synthetic-cache-coherence-release-v1",
+  "code_revision": "51eb43a7e0fc2321ce0b17a936c58142094a2efc",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "grounded-assistant-control",
+        "version": "t0-v1",
+        "configuration": {
+          "mode": "grounded-assistant",
+          "trajectories": 10,
+          "turns": 13,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "action-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "supported-claim-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "atomic-state-persistence-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "unauthorized-scope-events", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "duplicate-turns", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "condition-contract-validity", "passed": true, "evidence": "13/13 T0 actions matched the frozen control expectations."},
+        {"name": "grounding-and-citation-safety", "passed": true, "evidence": "11/11 citation-applicable turns had valid citations; zero unsupported or cross-course claims."},
+        {"name": "policy-and-scope-safety", "passed": true, "evidence": "Zero unauthorized, cross-course, or critical policy events."},
+        {"name": "failure-recovery", "passed": true, "evidence": "The forced malformed-response turn reached the expected safe citation fallback."},
+        {"name": "persistence-and-restart", "passed": true, "evidence": "13/13 turns persisted atomically and the restart trajectory remained consistent."},
+        {"name": "bounded-provider-free-execution", "passed": true, "evidence": "Zero provider calls, tokens, cost, duplicate turns, or automatic promotion."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "bounded-autonomous-tutoring-graph",
+        "version": "t1-v1",
+        "configuration": {
+          "mode": "bounded-tutoring-graph",
+          "trajectories": 10,
+          "turns": 13,
+          "maximum_repairs_per_turn": 1,
+          "maximum_graph_steps_per_turn": 12,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "action-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "supported-claim-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "atomic-state-persistence-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "unauthorized-scope-events", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "duplicate-turns", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "condition-contract-validity", "passed": true, "evidence": "13/13 T1 actions and pedagogical intents matched the frozen expectations."},
+        {"name": "grounding-and-citation-safety", "passed": true, "evidence": "11/11 citation-applicable turns had valid citations; zero unsupported or cross-course claims."},
+        {"name": "policy-and-scope-safety", "passed": true, "evidence": "Zero unauthorized, cross-course, or critical policy events."},
+        {"name": "failure-recovery", "passed": true, "evidence": "The forced malformed-response turn used one bounded repair and reached the safe graph fallback."},
+        {"name": "persistence-and-restart", "passed": true, "evidence": "13/13 state revisions persisted atomically and the restart trajectory remained consistent."},
+        {"name": "bounded-provider-free-execution", "passed": true, "evidence": "Zero provider calls, tokens, cost, duplicate turns, unbounded loops, model-owned mutations, or automatic promotion."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bounded-autonomous-tutoring-graph",
+    "rationale": "Advance T1 only to one separately frozen confirmation because every synthetic network-free development gate passed. This is a development-method decision, not release-profile promotion; T0 remains the active staging configuration and rollback.",
+    "limitations": [
+      "The ten trajectories are synthetic development cases and are not an untouched confirmation set.",
+      "The deterministic generator and turn signals do not establish model-based learner-state interpretation or natural tutoring quality.",
+      "The run does not establish professor fidelity, student learning, human usability, provider reliability, or hosted latency.",
+      "T1 remains rejected by staging configuration and requires a separate confirmation decision before release selection."
+    ]
+  }
+}

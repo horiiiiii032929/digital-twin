@@ -241,7 +241,7 @@ Still missing before release selection:
 - a provider-qualified autonomous T1 path, one frozen multi-turn confirmation,
   and the professor-approved T2 fidelity reference.
 
-## Frozen network-free development checkpoint
+## Completed network-free development checkpoint
 
 Issue #107 now implements the first T1 contract behind
 `APP_STUDENT_TUTORING_MODE=bounded-tutoring-graph` for local demo/test use. T0
@@ -256,12 +256,18 @@ remains the default and staging validation rejects T1. The implementation adds:
 - a ten-trajectory, provider-free development contract at
   `research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json`.
 
-The ten-trajectory development execution is frozen and authorized only for the
-deterministic local T0/T1 comparison. Its runner requires a clean revision,
-creates one exclusive ignored output, and cannot call a provider or promote T1.
-This does not select T1 for release, prove model-based learner-state
-interpretation, establish professor fidelity, authorize provider use, or
-establish student learning.
+The ten-trajectory deterministic local T0/T1 comparison completed at clean
+revision `51eb43a` as `completed-go-deeper`. Every expected action and T1 intent
+matched; citations, forced fallback, atomic persistence, and restart consistency
+were 100%; and no safety violation, provider call, token, or cost occurred. The
+per-turn evidence and durable decision are recorded in
+[`autonomous-tutoring-graph-development-001`](../research/05_evaluation/autonomous-tutoring-graph-development-001-results.md).
+The one-time network-free execution authorization is revoked.
+
+T0 remains selected for staging and rollback. The development pass advances T1
+only to one separately frozen confirmation; it does not select T1 for release,
+prove model-based learner-state interpretation, establish professor fidelity,
+authorize provider use, or establish student learning.
 
 ## Evaluation question
 

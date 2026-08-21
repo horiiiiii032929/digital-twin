@@ -177,15 +177,15 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if payload.get("instrument_id") != "autonomous-tutoring-graph-contract-v1":
         raise DevelopmentEvaluationError("unexpected tutoring-graph instrument")
-    if payload.get("status") != "frozen-network-free-development":
-        raise DevelopmentEvaluationError("development instrument is not frozen")
+    if payload.get("status") != "completed-go-deeper":
+        raise DevelopmentEvaluationError("development instrument result is not preserved")
     execution = payload.get("execution", {})
     expected = {
         "provider_calls_authorized": False,
         "paid_execution_authorized": False,
         "held_out_execution_authorized": False,
         "network_required": False,
-        "network_free_development_authorized": True,
+        "network_free_development_authorized": False,
         "automatic_promotion": False,
         "maximum_repairs_per_turn": 1,
         "maximum_graph_steps_per_turn": 12,
@@ -574,7 +574,9 @@ def main() -> int:
             output=args.output,
             require_clean=False,
         )
-        result["status"] = "validated-network-free"
+        result["status"] = (
+            "blocked-not-authorized" if result["blockers"] else "validated-network-free"
+        )
         result["instrument_sha256"] = _instrument_sha256(args.instrument)
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0

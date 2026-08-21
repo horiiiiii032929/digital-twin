@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ef789b150af5a226777d66f35ab424e9ff4bacb7ef39f22a292d531858dd7ecd",
+  "record_sha256": "03becb679db5ba49a61ad6129c9d1d4b86c5dba99cfbe5f9dbe9021f281142b9",
   "records": [
     {
       "audit": {
@@ -1528,7 +1528,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Frozen contract review confirms ten trajectories, 13 turns per condition, exact T0/T1 action and T1 intent expectations, provider-free authority, three terminal result states, and no automatic promotion.",
+        "evidence": "Completed-contract review preserves ten trajectories, 13 turns per condition, exact T0/T1 action and T1 intent expectations, the Go Deeper result, revoked execution authority, three terminal result states, and no automatic promotion.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1539,7 +1539,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json",
       "risk": "high",
-      "sha256": "64e54298b5419fa3e6d9d4a31f481201cd9fe1de73feeb5832b72d5e50cfaa33"
+      "sha256": "7c54f94a64a7a91993aaa98efb4c15b3a958faa1b0a4e3e02f953e5082644310"
     },
     {
       "audit": {
@@ -3936,7 +3936,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Manual fail-closed review and focused execution tests cover exact bounded-freeze authorization, clean-revision and exclusive-output preflight, identical synthetic T0/T1 inputs, actual SQLite persistence/restart, citation and claim validation, bounded failure control, complete per-turn accounting, and zero provider/token/cost usage.",
+        "evidence": "Manual fail-closed review and focused tests cover revoked post-result preflight, identical synthetic T0/T1 inputs, actual SQLite persistence/restart, citation and claim validation, bounded failure control, complete per-turn accounting, and zero provider/token/cost usage in the preserved execution.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -3950,7 +3950,7 @@
       ],
       "path": "scripts/run_autonomous_tutoring_graph_development.py",
       "risk": "high",
-      "sha256": "4335b45bbbc0926781ad97c9a4d7829ca863755a315dc0677b026e3b1dde47a7"
+      "sha256": "d5f393819e98337a7f319b44e38b2c8b733dd20c4095b9c42881a501ef3f8c0b"
     },
     {
       "audit": {
@@ -4499,7 +4499,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Validator review and mutation tests enforce the frozen network-free authority, action expectations, exact trajectory/turn counts, bounded graph settings, result states, and prohibition on provider, paid, held-out, or automatic-promotion execution.",
+        "evidence": "Validator review and mutation tests enforce the completed result state, revoked network-free authority, action expectations, exact trajectory/turn counts, bounded graph settings, and prohibition on provider, paid, held-out, or automatic-promotion execution.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -4512,7 +4512,7 @@
       ],
       "path": "scripts/validate_autonomous_tutoring_graph_instrument.py",
       "risk": "high",
-      "sha256": "2dd005f045df0a7209f358a222650951687805dbff7104ce219f80612dec7f0b"
+      "sha256": "632175eb842a6fb913faad8d3af1597cb0276c7f6c58bc7a901a32aa66de5214"
     },
     {
       "audit": {
@@ -6304,7 +6304,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; only the historical oracle and exact network-free autonomous-tutoring development run are bounded, while provider review, pilot 003, held-out, paid, 1,000-, and 10,000-case execution remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; the completed autonomous-tutoring development authorization is revoked and only the historical oracle remains bounded, while provider review, pilot 003, held-out, paid, 1,000-, and 10,000-case execution remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6315,7 +6315,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8468c768bfdfa11c7350be5bb03eb4b4bb62d0a6c7ddb3308e7c7bc8fee5544e"
+      "sha256": "f15967c0fbf7a32292a8d334e786446ca369789871fc585aad0332d4ada34057"
     },
     {
       "audit": {
@@ -6736,7 +6736,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle plus the network-free autonomous-tutoring development run, and explicit rejection of provider review, paid pilots, 10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, revocation of the completed autonomous-tutoring development run, and explicit rejection of provider review, paid pilots, 10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6747,7 +6747,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "dbecd0889d5929e062e45ac92290714ff91167800feb42f75b346bafef981a3b"
+      "sha256": "b9971b90b35e3c277720c32e80caf4513d40b2c9e9d376133584d1022459773f"
     },
     {
       "audit": {
@@ -7696,7 +7696,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused regressions verify ready no-call preflight, complete passing T0/T1 execution, method-failure Refine behavior, invalid-execution preservation, zero external usage, and no automatic promotion.",
+        "evidence": "Focused regressions verify revoked post-result preflight, complete passing T0/T1 evaluation logic, method-failure Refine behavior, invalid-execution preservation, zero external usage, and no automatic promotion.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -7707,7 +7707,7 @@
       "package_commands": [],
       "path": "tests/test_run_autonomous_tutoring_graph_development.py",
       "risk": "medium",
-      "sha256": "9bd26bcb098527f64fa4c1986ef1eeff7545feab8fe15a567c74fa040ff68d24"
+      "sha256": "fe13c92a59b8f8ce9a6d76d12b80b00b1836e7799839b6736c3afe94a4a20765"
     },
     {
       "audit": {

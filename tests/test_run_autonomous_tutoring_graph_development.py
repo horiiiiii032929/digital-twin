@@ -11,7 +11,7 @@ from scripts.run_autonomous_tutoring_graph_development import (
 )
 
 
-def test_network_free_development_preflight_is_ready_for_temporary_output(
+def test_completed_network_free_development_preflight_is_revoked(
     tmp_path,
 ):
     instrument = load_instrument()
@@ -24,8 +24,8 @@ def test_network_free_development_preflight_is_ready_for_temporary_output(
 
     assert result == {
         "run_id": RUN_ID,
-        "status": "ready",
-        "blockers": [],
+        "status": "blocked",
+        "blockers": ["network-free-development-not-authorized"],
         "provider_calls": 0,
         "tokens": 0,
         "cost_usd": 0.0,
