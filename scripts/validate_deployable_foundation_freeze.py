@@ -491,7 +491,7 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
         },
         "tree_binding_count": 14,
         "file_binding_count": 19,
-        "require_current_match": True,
+        "require_current_match": False,
         "external_gate_ids": {
             "evidence-sufficiency-selection-and-live-publication",
             "public-dns-and-certificate",

@@ -238,8 +238,8 @@ def test_current_malformed_output_correction_freeze_validates() -> None:
     assert result["decision"] == "refine"
     assert result["local_gates"] == "30/30-open-set-build-only"
     assert result["artifact_bindings"] == 33
-    assert result["current_match_required"] is True
-    assert result["current_match_status"] == "enforced"
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
     assert result["image_build_claimed"] is False
     assert result["release_claim_authorized"] is False
 

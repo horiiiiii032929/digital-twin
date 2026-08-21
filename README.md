@@ -225,8 +225,8 @@ or standalone benchmark. The merged professor/student workspace is the UX
 baseline. PR #103 merged the deterministic 10,000-package factual-QA successor
 and a provider-unauthorized pilot simulation. PR #104 merged the V8 image
 requalification and its fail-closed evidence-sufficiency blocker. The active
-#105 branch now includes the corrected V10 open-set boundary and the authored,
-unfrozen 120-case decision draft; candidate execution remains blocked.
+#105 branch is now frozen at V11 with the corrected open-set boundary and the
+authored, unfrozen 120-case decision draft; candidate execution remains blocked.
 Remaining release gates cover a selected answerability method, factual quality,
 professor fidelity, target-host deployment and operations, complete workflows,
 privacy, and approval-gated usability.

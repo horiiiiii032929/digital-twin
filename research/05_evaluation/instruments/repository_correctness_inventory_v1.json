@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 472
+    "audited": 473
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 91,
+    "evaluation_configuration": 92,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 90
   },
-  "file_count": 472,
+  "file_count": 473,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b45cb5b35f34f0f942a39f0158486eb24b5e261fa1f033994a8b247fa22df2f4",
+  "record_sha256": "ae8b46389a99300794852cb6fb518c8e9a75f52840870811570c84e1d552cccd",
   "records": [
     {
       "audit": {
@@ -2663,6 +2663,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Freeze review binds 14 runtime trees and 22 critical files to the exact V11 decision-draft checkpoint, marks V10 historical, preserves null selection and historical V8 images, and authorizes no review completion, dataset freeze, execution, image, deployment, or release claim.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v11.json",
+      "risk": "high",
+      "sha256": "e96819b1d3dbfa514ac2000ca95f2ca3bfbf52453de59c1c7a55d24cfc1a6bc9"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -4450,7 +4466,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "V10 review preserves V9 historically and binds the current malformed-verifier correction, null selection, unbuilt current images, and denied execution/release authority.",
+        "evidence": "V11 review preserves V10 historically and binds the current source-linked decision draft, pending independent review, null selection, unbuilt current images, and denied execution/release authority.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4463,7 +4479,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "c6b91ab6e27b7082da68d55fbd27794587de530e1fc84f92f571ae8cff84a230"
+      "sha256": "fb23d2195896fe6a77a3b4c3e6610ec999d306d776282a85d4bd3b9bdcd3084f"
     },
     {
       "audit": {
@@ -7111,7 +7127,7 @@
     {
       "audit": {
         "domain": "deployment-verification",
-        "evidence": "V10 regression tests validate the current corrected build-only freeze and reject image, selection, and release promotion while preserving V9 as historical-superseded.",
+        "evidence": "V11 regression tests validate the current decision-draft build-only freeze, reject false review/freeze/image/selection/release promotion, and preserve V10 as historical-superseded.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -7122,7 +7138,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "2a8535b5b2476c1ce3864ae910e10e74be742d0fe78502f09ddfd941bc781fb5"
+      "sha256": "928944507e9693e3f71caca163319c236917676e59f92f9c78c4880041c71c2f"
     },
     {
       "audit": {
@@ -7766,7 +7782,7 @@
     }
   ],
   "risk_counts": {
-    "high": 368,
+    "high": 369,
     "medium": 104
   },
   "schema_version": 1,
