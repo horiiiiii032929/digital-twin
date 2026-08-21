@@ -11,7 +11,7 @@ or 10,000-case stages.
 
 ## Bound implementation
 
-- Implementation revision: `137f2f0`
+- Implementation revision: `35634f7`
 - Upstream immutable blueprint SHA-256:
   `cd43954f51ceb559a2d95b57fd0b25d551c43c103d404bb5ce49bfbe33f5b2cb`
 - Truth configuration SHA-256:
@@ -49,7 +49,7 @@ exactly 8,000 answerable and 2,000 boundary cases.
   identity-drift, interruption/resume, pricing-expiry, and budget-stop paths are
   covered by focused regressions.
 - Repository inventory: 462/462 audited, zero open findings.
-- Complete repository gate: 706 Python and 46 frontend tests passed; frontend
+- Complete repository gate: 707 Python and 46 frontend tests passed; frontend
   lint and production build passed.
 
 ## Provider freshness checkpoint

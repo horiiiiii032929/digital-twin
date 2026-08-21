@@ -96,7 +96,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 706 Python tests and 46 frontend tests, frontend lint, and the
+check passes 707 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -116,7 +116,7 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 706-test Python suite.
+connections. These corrections pass the current 707-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
 artifacts are also fully dispositioned in the current 462-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
@@ -383,7 +383,7 @@ stages remain unauthorized.
 Pipeline 002 implements that method-level correction rather than another prompt
 revision. Its truth content hash is
 `1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
-The provider-free build passes the full repository gate with 706 Python and 46
+The provider-free build passes the full repository gate with 707 Python and 46
 frontend tests and a 462/462 complete audit. Pilot 003 is reviewed but not
 frozen or allowlisted. The separate Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
