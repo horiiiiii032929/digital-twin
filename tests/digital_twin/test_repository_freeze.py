@@ -62,4 +62,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-scale-pilot-100-001")
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed("factual-qa-v3-scale-pilot-100-002")
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-10000-pipeline-001")

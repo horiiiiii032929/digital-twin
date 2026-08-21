@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 448
+    "audited": 449
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 80,
+    "evaluation_configuration": 81,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 83
   },
-  "file_count": 448,
+  "file_count": 449,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5a650f7a24aa253445437e01bcddbb3ef39eafbecea04cf6ca9e6276d39b67a5",
+  "record_sha256": "41768577ba19a049cd634e4710ba3be2b57b0f1f98b4e632aa51cd3ee8aa84c9",
   "records": [
     {
       "audit": {
@@ -1844,6 +1844,22 @@
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_001.json",
       "risk": "high",
       "sha256": "6a6d92eb2e2397b4a3b43c84733a5ea83968457e6763a7a5ae08b5b8a7135e52"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Prospective successor review confirms a full shared author JSON schema, the exact qualification-006 strict reviewer contract, 20 deterministic canonical mutation controls independent of author success, unchanged 246-call and USD 3 limits, no automatic promotion, and provider execution explicitly unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-successor-contract-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_002.json",
+      "risk": "high",
+      "sha256": "3c2898280a5ef8821abbcc33bb7e6ac8fd7898d6cdbae3b53ca1d9f5f2a9fd90"
     },
     {
       "audit": {
@@ -3745,7 +3761,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual control-flow review, Ruff, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirmed deterministic authority, safe resume, complete malformed/provider accounting, requested-versus-reported token tracking, pre/post-call USD 3 emergency stopping, exact model identity, exclusive output, priority packets, and fail-closed provider authorization.",
+        "evidence": "Manual control-flow review, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirm deterministic authority, exact shared reviewer qualification contract reuse, strict author citation objects, mutation controls independent of author success, safe resume, complete accounting, USD 3 stopping, exact identity, exclusive output, and fail-closed provider authorization.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-build-only-runner-review"
@@ -3761,7 +3777,7 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
       "risk": "high",
-      "sha256": "c7e8168cfc992bd8f309d17f10bec8374ef47ad6c0775ab1e9243745fa022556"
+      "sha256": "fce54a086f313e2597beef8680941db08f80bb463fc7561caf67c90d4d5d082d"
     },
     {
       "audit": {
@@ -6288,7 +6304,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the completed oracle, and explicit rejection of rehearsals, completed qualifications 006/007, completed scale pilot 100 attempt 001, the 10,000-case pipeline, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the completed oracle, and explicit rejection of rehearsals, completed qualifications 006/007, both scale-pilot attempts 001/002, the 10,000-case pipeline, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -6299,7 +6315,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "01c3be2087d4bc36c10f3673fbac4223b7eb6b4f99a0daf1affeb7d43d26bbfd"
+      "sha256": "a54a2244cc4c705a4398792750b88071cc8228fd6c34cc01c1b5904f981d41cf"
     },
     {
       "audit": {
@@ -6912,7 +6928,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Sixteen focused tests validate the exact design, completed/revoked state and blocked preflight, USD 3 emergency ceiling, Qwen qualification dependency, 222-call simulation, zero-bulk canary failure, malformed continuation, dispute/call ceilings, token-limit accounting, pre/post-call cost stops, safe resume, exclusive output, and binding tamper rejection.",
+        "evidence": "Twenty-one focused tests validate successor 002's unauthorized state, shared full schemas and strict qualification prompt, rejection of observed malformed citation shapes, deterministic mutation independence under total author failure, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-build-only-runner-review"
@@ -6923,7 +6939,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_pilot_100.py",
       "risk": "medium",
-      "sha256": "f1e4d6f4e54732dda7c3be5942aae7aff347817cdcf26e7df4548b106e451f8d"
+      "sha256": "d1d53e9f97f070ddbc21b3547f2980bd9bccee31b554b8c0b5650a849b319364"
     },
     {
       "audit": {
@@ -7359,7 +7375,7 @@
     }
   ],
   "risk_counts": {
-    "high": 351,
+    "high": 352,
     "medium": 97
   },
   "schema_version": 1,

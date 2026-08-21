@@ -1246,6 +1246,17 @@
     },
     {
       "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective successor review confirms a full shared author JSON schema, the exact qualification-006 strict reviewer contract, 20 deterministic canonical mutation controls independent of author success, unchanged 246-call and USD 3 limits, no automatic promotion, and provider execution explicitly unauthorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_002.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-successor-contract-review",
+      "sha256": "3c2898280a5ef8821abbcc33bb7e6ac8fd7898d6cdbae3b53ca1d9f5f2a9fd90"
+    },
+    {
+      "audit_status": "audited",
       "disposition": "historical_guarded",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
@@ -2480,12 +2491,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual control-flow review, Ruff, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirmed deterministic authority, safe resume, complete malformed/provider accounting, requested-versus-reported token tracking, pre/post-call USD 3 emergency stopping, exact model identity, exclusive output, priority packets, and fail-closed provider authorization.",
+      "evidence": "Manual control-flow review, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirm deterministic authority, exact shared reviewer qualification contract reuse, strict author citation objects, mutation controls independent of author success, safe resume, complete accounting, USD 3 stopping, exact identity, exclusive output, and fail-closed provider authorization.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-build-only-runner-review",
-      "sha256": "c7e8168cfc992bd8f309d17f10bec8374ef47ad6c0775ab1e9243745fa022556"
+      "sha256": "fce54a086f313e2597beef8680941db08f80bb463fc7561caf67c90d4d5d082d"
     },
     {
       "audit_status": "audited",
@@ -4174,12 +4185,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the completed oracle, and explicit rejection of rehearsals, completed qualifications 006/007, completed scale pilot 100 attempt 001, the 10,000-case pipeline, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the completed oracle, and explicit rejection of rehearsals, completed qualifications 006/007, both scale-pilot attempts 001/002, the 10,000-case pipeline, and unknown successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "01c3be2087d4bc36c10f3673fbac4223b7eb6b4f99a0daf1affeb7d43d26bbfd"
+      "sha256": "a54a2244cc4c705a4398792750b88071cc8228fd6c34cc01c1b5904f981d41cf"
     },
     {
       "audit_status": "audited",
@@ -4581,12 +4592,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Sixteen focused tests validate the exact design, completed/revoked state and blocked preflight, USD 3 emergency ceiling, Qwen qualification dependency, 222-call simulation, zero-bulk canary failure, malformed continuation, dispute/call ceilings, token-limit accounting, pre/post-call cost stops, safe resume, exclusive output, and binding tamper rejection.",
+      "evidence": "Twenty-one focused tests validate successor 002's unauthorized state, shared full schemas and strict qualification prompt, rejection of observed malformed citation shapes, deterministic mutation independence under total author failure, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_pilot_100.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-build-only-runner-review",
-      "sha256": "f1e4d6f4e54732dda7c3be5942aae7aff347817cdcf26e7df4548b106e451f8d"
+      "sha256": "d1d53e9f97f070ddbc21b3547f2980bd9bccee31b554b8c0b5650a849b319364"
     },
     {
       "audit_status": "audited",

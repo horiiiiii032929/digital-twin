@@ -9,17 +9,30 @@ from pathlib import Path
 import pytest
 
 from scripts.run_factual_qa_v3_scale_pilot_100 import (
+    AUTHOR_SCHEMA,
     INSTRUMENT_ID,
+    REVIEW_SCHEMA,
     PlannedInterruption,
     ScalePilotError,
     SimulatedTransport,
+    _author_prompt,
     _maximum_reserved_cost,
+    _review_prompt,
     _simulation_transports,
+    build_mutations,
     build_preflight,
+    canonical_authored_case,
+    deterministic_record,
     execute,
     load_assets,
+    validate_authored,
     validate_instrument,
 )
+from scripts.run_factual_qa_quality_pilot import (
+    AUTHOR_SCHEMA as QUALIFIED_AUTHOR_SCHEMA,
+    REVIEW_SCHEMA as QUALIFIED_REVIEW_SCHEMA,
+)
+from scripts.run_factual_qa_v3_scale_rehearsal import _strict_review_prompt
 from src.digital_twin.repository_freeze import (
     RepositoryFreezeError,
     require_bounded_pilot_operation_allowed,
@@ -31,17 +44,76 @@ def assets() -> dict:
     return load_assets()
 
 
-def test_completed_instrument_is_revoked_and_price_bounded(assets: dict) -> None:
+def test_successor_instrument_is_unauthorized_and_price_bounded(assets: dict) -> None:
     instrument = assets["instrument"]
 
     assert instrument["instrument_id"] == INSTRUMENT_ID
-    assert instrument["status"] == "completed-refine-authorization-revoked"
+    assert instrument["status"] == "draft-reviewed-provider-execution-unauthorized"
     assert instrument["execution"]["provider_execution_authorized"] is False
     assert instrument["execution"]["dataset_write_authorized"] is False
     assert instrument["execution"]["automatic_stage_promotion"] is False
     assert instrument["execution"]["total_provider_call_limit"] == 246
     assert instrument["execution"]["cost_stop_usd"] == 3.0
     assert _maximum_reserved_cost(instrument) < instrument["execution"]["cost_stop_usd"]
+    assert instrument["contract_design"] == {
+        "version": "factual-qa-v3-contract-v2",
+        "author_schema": "shared-full-json-schema",
+        "reviewer_contract": "qualification-006-strict-contract",
+        "mutation_basis": "deterministic-canonical-cases",
+    }
+
+
+def test_author_and_reviewer_use_shared_full_contracts(assets: dict) -> None:
+    blueprint = assets["blueprints"][0]
+    source_map = assets["source_map"]
+    authored = canonical_authored_case(blueprint, source_map=source_map)
+
+    assert AUTHOR_SCHEMA is QUALIFIED_AUTHOR_SCHEMA
+    assert REVIEW_SCHEMA is QUALIFIED_REVIEW_SCHEMA
+    assert _review_prompt(blueprint, authored, source_map=source_map) == (
+        _strict_review_prompt(
+            blueprint,
+            authored=authored,
+            source_context={
+                "approved_sources": [
+                    source_map[source_id]
+                    for source_id in blueprint["evidence_unit_ids"]
+                ],
+                "distractors": [
+                    source_map[source_id]
+                    for source_id in blueprint["distractor_unit_ids"]
+                ],
+            },
+        )
+    )
+    prompt = json.loads(_author_prompt(blueprint, source_map=source_map))
+    assert prompt["requirements"]["output_contract"][
+        "citation_object_exact_keys"
+    ] == ["source_unit_id", "quote"]
+
+
+@pytest.mark.parametrize(
+    "invalid_citations",
+    [
+        ["source as a string"],
+        [{"claim_id": "claim", "evidence_quote": "quote"}],
+        [{"source_unit_id": "source"}],
+        [{"source_unit_id": "source", "quote": "quote", "extra": True}],
+    ],
+)
+def test_author_validator_rejects_every_observed_bad_citation_shape(
+    invalid_citations: list,
+) -> None:
+    value = {
+        "question": "Question?",
+        "answer": "Answer.",
+        "action": "answer",
+        "selected_claim_ids": ["claim"],
+        "citations": invalid_citations,
+    }
+
+    with pytest.raises(ScalePilotError, match="citation"):
+        validate_authored(value)
 
 
 def test_pilot_cases_are_exactly_stratified_and_source_linked(assets: dict) -> None:
@@ -188,7 +260,37 @@ def test_malformed_author_outputs_are_accounted_and_refine(
         for item in state["results"]
     )
     assert state["summary"]["metrics"]["malformed_response_rate"] > 0
+    assert len(state["mutations"]) == 20
+    assert all(
+        mutation["deterministic"]["passed"] is False
+        and mutation["review_outcome"]["status"] == "complete"
+        for mutation in state["mutations"]
+    )
     assert state["accounting"]["calls_attempted"] <= 246
+
+
+def test_mutations_are_built_from_deterministic_controls_not_author_results(
+    assets: dict,
+) -> None:
+    blueprints = assets["blueprints"]
+    source_map = assets["source_map"]
+    mutations = build_mutations(
+        blueprints,
+        blueprints_by_id={item["blueprint_id"]: item for item in blueprints},
+        source_map=source_map,
+    )
+
+    assert len(mutations) == 20
+    for mutation in mutations:
+        blueprint = next(
+            item
+            for item in blueprints
+            if item["blueprint_id"] == mutation["blueprint_id"]
+        )
+        assert deterministic_record(
+            blueprint, mutation["control_case"], source_map=source_map
+        )["passed"]
+        assert mutation["deterministic"]["passed"] is False
 
 
 def test_disputes_are_bounded_to_24_and_total_calls_to_246(

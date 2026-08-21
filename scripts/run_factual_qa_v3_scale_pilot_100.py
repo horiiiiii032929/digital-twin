@@ -33,18 +33,29 @@ from src.digital_twin.model_policy import require_registered_current_model
 from src.digital_twin.repository_freeze import (
     require_bounded_pilot_operation_allowed,
 )
+from scripts.run_factual_qa_quality_pilot import (
+    AUTHOR_SCHEMA,
+    REVIEW_SCHEMA,
+    validate_review as validate_shared_review,
+)
+from scripts.run_factual_qa_v3_scale_rehearsal import (
+    _strict_review_prompt,
+    _strict_review_system_prompt,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_PATH = (
     ROOT
     / "research/05_evaluation/instruments/"
-    "factual_qa_v3_scale_pilot_100_001.json"
+    "factual_qa_v3_scale_pilot_100_002.json"
 )
 DEFAULT_OUTPUT = (
-    ROOT / "reports/generated/factual-qa-v3-scale-pilot-100-001.json"
+    ROOT / "reports/generated/factual-qa-v3-scale-pilot-100-002.json"
 )
-INSTRUMENT_ID = "factual-qa-v3-scale-pilot-100-001"
+LEGACY_INSTRUMENT_ID = "factual-qa-v3-scale-pilot-100-001"
+INSTRUMENT_ID = "factual-qa-v3-scale-pilot-100-002"
+SUPPORTED_INSTRUMENT_IDS = frozenset({LEGACY_INSTRUMENT_ID, INSTRUMENT_ID})
 PIPELINE_ID = "factual-qa-v3-10000-pipeline-001"
 PILOT_STAGE = "pilot-100"
 ANSWER_ACTION = "answer"
@@ -70,16 +81,6 @@ EXPECTED_MUTATIONS = {
     "invalid-claim-binding": 3,
     "invalid-source-binding": 3,
 }
-AUTHOR_SCHEMA = {
-    "type": "object",
-    "required": [
-        "question",
-        "answer",
-        "action",
-        "selected_claim_ids",
-        "citations",
-    ],
-}
 REVIEW_BOOLEAN_FIELDS = (
     "question_matches_blueprint",
     "answer_or_action_correct",
@@ -88,15 +89,6 @@ REVIEW_BOOLEAN_FIELDS = (
     "no_external_knowledge",
     "course_boundary_respected",
 )
-REVIEW_SCHEMA = {
-    "type": "object",
-    "required": [
-        "verdict",
-        *REVIEW_BOOLEAN_FIELDS,
-        "failure_categories",
-        "rationale",
-    ],
-}
 HEALTH_SCHEMA = {
     "type": "object",
     "required": ["status"],
@@ -181,7 +173,8 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     instrument = _load_json(path)
     if instrument.get("schema_version") != 1:
         raise ScalePilotError("unsupported scale-pilot instrument schema")
-    if instrument.get("instrument_id") != INSTRUMENT_ID:
+    instrument_id = instrument.get("instrument_id")
+    if instrument_id not in SUPPORTED_INSTRUMENT_IDS:
         raise ScalePilotError("unexpected scale-pilot instrument ID")
     if instrument.get("model_leaderboard") is not False:
         raise ScalePilotError("the scale pilot cannot become a model leaderboard")
@@ -190,6 +183,17 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ScalePilotError("blueprint pipeline identity drifted")
     if design.get("stage_id") != PILOT_STAGE or design.get("case_count") != 100:
         raise ScalePilotError("pilot stage design drifted")
+    if instrument_id == INSTRUMENT_ID:
+        contract = instrument.get("contract_design", {})
+        if contract != {
+            "version": "factual-qa-v3-contract-v2",
+            "author_schema": "shared-full-json-schema",
+            "reviewer_contract": "qualification-006-strict-contract",
+            "mutation_basis": "deterministic-canonical-cases",
+        }:
+            raise ScalePilotError("successor contract design drifted")
+        if instrument.get("method_version") != "factual-qa-v3-staged-pipeline-v2":
+            raise ScalePilotError("successor method version drifted")
     execution = instrument.get("execution", {})
     authorized = execution.get("provider_execution_authorized")
     allowed_statuses = (
@@ -462,7 +466,7 @@ def build_preflight(
         status = "ready" if ready else "blocked-preflight"
     return {
         "run_type": "factual-qa-v3-scale-pilot-100-preflight",
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": instrument["instrument_id"],
         "status": status,
         "code_revision": _code_revision(),
         "provider_execution_authorized": authorized,
@@ -511,6 +515,25 @@ def _author_prompt(
                 "answer": "use exactly target_claim_ids and exact evidence quotes",
                 "boundary": "use expected action with empty claims and citations",
                 "external_knowledge": "prohibited",
+                "output_contract": {
+                    "exact_top_level_keys": [
+                        "question",
+                        "answer",
+                        "action",
+                        "selected_claim_ids",
+                        "citations",
+                    ],
+                    "citation_object_exact_keys": ["source_unit_id", "quote"],
+                    "citation_rule": (
+                        "citations must be objects, never strings; source_unit_id "
+                        "must name an approved source and quote must copy the complete "
+                        "target evidence_quote verbatim"
+                    ),
+                    "claim_rule": (
+                        "selected_claim_ids must equal target_claim_ids exactly, with "
+                        "no aliases, omissions, duplicates, or extra claims"
+                    ),
+                },
             },
         },
         ensure_ascii=False,
@@ -524,15 +547,10 @@ def _review_prompt(
     *,
     source_map: dict[str, dict[str, Any]],
 ) -> str:
-    return json.dumps(
-        {
-            "blueprint": blueprint,
-            "source_context": _source_context(blueprint, source_map=source_map),
-            "authored_case": authored,
-            "verdict_rule": "accept only when every deterministic requirement passes",
-        },
-        ensure_ascii=False,
-        sort_keys=True,
+    return _strict_review_prompt(
+        blueprint,
+        authored=authored,
+        source_context=_source_context(blueprint, source_map=source_map),
     )
 
 
@@ -540,43 +558,41 @@ def validate_authored(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ScalePilotError("authored response root must be an object")
     required = {"question", "answer", "action", "selected_claim_ids", "citations"}
-    if not required.issubset(value):
-        raise ScalePilotError("authored response is missing required fields")
+    if set(value) != required:
+        raise ScalePilotError("authored response keys do not exactly match contract")
     if not isinstance(value["question"], str) or not value["question"].strip():
         raise ScalePilotError("authored question is empty")
     if not isinstance(value["answer"], str) or not value["answer"].strip():
         raise ScalePilotError("authored answer is empty")
     if value["action"] not in {ANSWER_ACTION, *BOUNDARY_ACTIONS}:
         raise ScalePilotError("authored action is invalid")
-    if not isinstance(value["selected_claim_ids"], list):
+    if not isinstance(value["selected_claim_ids"], list) or any(
+        not isinstance(claim_id, str) or not claim_id.strip()
+        for claim_id in value["selected_claim_ids"]
+    ):
         raise ScalePilotError("authored selected_claim_ids must be a list")
+    if len(value["selected_claim_ids"]) != len(set(value["selected_claim_ids"])):
+        raise ScalePilotError("authored selected_claim_ids contain duplicates")
     if not isinstance(value["citations"], list):
         raise ScalePilotError("authored citations must be a list")
+    for citation in value["citations"]:
+        if not isinstance(citation, dict) or set(citation) != {
+            "source_unit_id",
+            "quote",
+        }:
+            raise ScalePilotError("authored citation shape is invalid")
+        if any(
+            not isinstance(citation[field], str) or not citation[field].strip()
+            for field in ("source_unit_id", "quote")
+        ):
+            raise ScalePilotError("authored citation values are invalid")
     return value
 
 
 def validate_review(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ScalePilotError("review response root must be an object")
-    if value.get("verdict") not in {"accept", "reject"}:
-        raise ScalePilotError("review verdict is invalid")
-    if any(not isinstance(value.get(field), bool) for field in REVIEW_BOOLEAN_FIELDS):
-        raise ScalePilotError("review boolean fields are invalid")
-    failures = value.get("failure_categories")
-    if not isinstance(failures, list) or any(not isinstance(item, str) for item in failures):
-        raise ScalePilotError("review failure categories are invalid")
-    if not isinstance(value.get("rationale"), str) or not value["rationale"].strip():
-        raise ScalePilotError("review rationale is missing")
-    expected_accept = all(value[field] for field in REVIEW_BOOLEAN_FIELDS)
-    normalized = dict(value)
-    normalized["reported_verdict"] = value["verdict"]
-    normalized["contract_mismatch"] = (value["verdict"] == "accept") != expected_accept
-    if normalized["contract_mismatch"]:
-        normalized["verdict"] = "reject"
-        normalized["failure_categories"] = sorted(
-            {*failures, "review-contract-mismatch"}
-        )
-    return normalized
+    return validate_shared_review(value)
 
 
 def deterministic_record(
@@ -659,18 +675,54 @@ def _mutation_sequence() -> list[str]:
     ]
 
 
+def canonical_authored_case(
+    blueprint: dict[str, Any],
+    *,
+    source_map: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """Build a deterministic valid control without depending on model output."""
+    if blueprint["expected_action"] != ANSWER_ACTION:
+        return {
+            "question": f"Boundary control for {blueprint['blueprint_id']}?",
+            "answer": f"The required safe action is {blueprint['expected_action']}.",
+            "action": blueprint["expected_action"],
+            "selected_claim_ids": [],
+            "citations": [],
+        }
+    claim_index = {
+        claim["claim_id"]: (source_id, claim)
+        for source_id in blueprint["evidence_unit_ids"]
+        for claim in source_map[source_id]["claims"]
+    }
+    citations = [
+        {
+            "source_unit_id": claim_index[claim_id][0],
+            "quote": claim_index[claim_id][1]["evidence_quote"],
+        }
+        for claim_id in blueprint["target_claim_ids"]
+    ]
+    return {
+        "question": f"Canonical question for {blueprint['blueprint_id']}?",
+        "answer": " ".join(
+            claim_index[claim_id][1]["text"]
+            for claim_id in blueprint["target_claim_ids"]
+        ),
+        "action": ANSWER_ACTION,
+        "selected_claim_ids": list(blueprint["target_claim_ids"]),
+        "citations": citations,
+    }
+
+
 def build_mutations(
-    results: list[dict[str, Any]],
+    blueprints: list[dict[str, Any]],
     *,
     blueprints_by_id: dict[str, dict[str, Any]],
     source_map: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     eligible = [
-        result
-        for result in results
-        if result["expected_action"] == ANSWER_ACTION
-        and result["deterministic"]["passed"]
-        and result["authored_case"]["citations"]
+        blueprint
+        for blueprint in blueprints
+        if blueprint["expected_action"] == ANSWER_ACTION
     ]
     selected: list[dict[str, Any]] = []
     remaining = list(eligible)
@@ -682,9 +734,15 @@ def build_mutations(
         selected.append(choice)
         remaining.remove(choice)
     mutations: list[dict[str, Any]] = []
-    for result, mutation_type in zip(selected, _mutation_sequence(), strict=False):
-        blueprint = blueprints_by_id[result["blueprint_id"]]
-        mutated = deepcopy(result["authored_case"])
+    if len(selected) != 20:
+        raise ScalePilotError("insufficient answerable blueprints for mutations")
+    for blueprint, mutation_type in zip(selected, _mutation_sequence(), strict=True):
+        if blueprints_by_id[blueprint["blueprint_id"]] != blueprint:
+            raise ScalePilotError("mutation blueprint lookup drifted")
+        control = canonical_authored_case(blueprint, source_map=source_map)
+        if not deterministic_record(blueprint, control, source_map=source_map)["passed"]:
+            raise ScalePilotError("canonical mutation control is invalid")
+        mutated = deepcopy(control)
         if mutation_type == "missing-citation":
             mutated["citations"] = []
         elif mutation_type == "truncated-citation":
@@ -720,6 +778,7 @@ def build_mutations(
                 "blueprint_id": blueprint["blueprint_id"],
                 "slice": blueprint["slice"],
                 "mutation_type": mutation_type,
+                "control_case": control,
                 "mutated_case": mutated,
                 "deterministic": deterministic,
                 "review_outcome": None,
@@ -876,7 +935,16 @@ class SimulatedTransport:
             content = json.dumps(value)
         else:
             payload = json.loads(prompt)
-            context = payload["source_context"]
+            context = payload.get("source_context")
+            if context is None:
+                context = {
+                    "approved_sources": payload[
+                        "approved_target_course_sources"
+                    ],
+                    "distractors": payload[
+                        "unapproved_other_course_distractors"
+                    ],
+                }
             source_map = {
                 source["source_unit_id"]: source
                 for source in (
@@ -964,7 +1032,7 @@ def _state_bindings(assets: dict[str, Any]) -> dict[str, Any]:
 def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
     return {
         "schema_version": 1,
-        "run_type": INSTRUMENT_ID,
+        "run_type": assets["instrument"]["instrument_id"],
         "status": "running",
         "simulation": simulation,
         "bindings": _state_bindings(assets),
@@ -1001,7 +1069,7 @@ def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dic
         raise ScalePilotError("simulation/external resume mode drifted")
     if state.get("bindings") != _state_bindings(assets):
         raise ScalePilotError("resume bindings drifted")
-    if state.get("run_type") != INSTRUMENT_ID:
+    if state.get("run_type") != assets["instrument"]["instrument_id"]:
         raise ScalePilotError("resume run identity drifted")
     return state
 
@@ -1440,7 +1508,14 @@ async def execute(
             _checkpoint(output_path, state)
             return state
 
-    author_system = "Author one exact source-grounded synthetic factual-QA case. Return JSON only."
+    author_system = (
+        "Author one exact source-grounded synthetic factual-QA case. Return one "
+        "JSON object only, with exactly these top-level keys: question, answer, "
+        "action, selected_claim_ids, citations. Every citation must be an object "
+        "with exactly source_unit_id and quote. Never return citation strings, "
+        "claim_id citation keys, evidence_quote citation keys, Markdown, or prose "
+        "outside the JSON object."
+    )
     for blueprint in blueprints[len(state["results"]):]:
         outcome = await _safe_call(
             role="author",
@@ -1475,7 +1550,7 @@ async def execute(
         if state["status"] == "invalid-execution":
             return state
 
-    review_system = "Audit the case mechanically against source truth. Return JSON only."
+    review_system = _strict_review_system_prompt()
     for result in state["results"]:
         if result["review_outcome"] is not None:
             continue
@@ -1501,7 +1576,7 @@ async def execute(
 
     if not state["mutations"]:
         state["mutations"] = build_mutations(
-            state["results"],
+            blueprints,
             blueprints_by_id=blueprints_by_id,
             source_map=source_map,
         )
@@ -1651,7 +1726,7 @@ def main() -> int:
     if not arguments.execute:
         print(json.dumps(preflight, indent=2, sort_keys=True))
         return 0
-    require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+    require_bounded_pilot_operation_allowed(assets["instrument"]["instrument_id"])
     if preflight["status"] != "ready":
         raise ScalePilotError("paid pilot preflight is not ready")
     transports: dict[str, RawTransport] = {
