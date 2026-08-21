@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "93c7d322fff3622241401f66fe02cc461b823877655ee4d61a2c7643e773fb4f",
+  "record_sha256": "6ac2bf543f36f9200e9216bbbe0b03607680ee72935df398f26f2fa69dfc3b1a",
   "records": [
     {
       "audit": {
@@ -5620,7 +5620,7 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual boundary review plus focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed.",
+        "evidence": "Manual boundary review plus 30 focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, malformed verifier output, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -5631,7 +5631,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "1bfdb9039c2de880cc13eb354bf19670f582518f4aa3d4499fcdca809d067cc7"
+      "sha256": "a2a3af07a0f4d77d8eb43f8c9c1c2494a77c30d921f5bc61024390f4da3cb8b8"
     },
     {
       "audit": {
@@ -6580,7 +6580,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, verifier failure redaction, bounded evidence, and invalid v2 configuration.",
+        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, raised and malformed verifier failure, redaction, bounded evidence, and invalid v2 configuration.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -6591,7 +6591,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
-      "sha256": "803df14cb3778f6ba58d3651d8f68015831e461e9d380e180227b5194a0ca8ee"
+      "sha256": "8bbc7c873a908ef2b9c9e407e89f40f8948718851e41bf4eb6b638652380b3af"
     },
     {
       "audit": {

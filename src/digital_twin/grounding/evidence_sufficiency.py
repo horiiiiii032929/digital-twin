@@ -182,7 +182,8 @@ class CalibratedOpenSetEvidenceGate:
             )
 
         try:
-            signals = self.verifier.verify(query, bounded_hits)
+            raw_signals = self.verifier.verify(query, bounded_hits)
+            signals = EvidenceSupportSignals.model_validate(raw_signals)
         except Exception as error:  # The release boundary must fail closed.
             return self._rejected(
                 "evidence verifier failed closed",

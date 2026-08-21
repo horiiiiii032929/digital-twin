@@ -362,6 +362,30 @@ def test_open_set_gate_fails_closed_on_verifier_error_and_bounds_evidence():
     assert "sensitive provider detail" not in str(decision.model_dump())
 
 
+def test_open_set_gate_fails_closed_on_malformed_verifier_output():
+    class MalformedVerifier:
+        implementation_id = "malformed-verifier"
+        version = "test-v1"
+
+        def verify(self, query, hits):
+            del query, hits
+            return {"direct_support": "not-a-probability"}
+
+    decision = open_set_gate(MalformedVerifier()).assess(
+        "question",
+        [
+            RetrievalHit(
+                chunk=chunk("support", "eligible evidence"),
+                relevance_score=1,
+            )
+        ],
+    )
+
+    assert decision.sufficient is False
+    assert decision.reason == "evidence verifier failed closed"
+    assert decision.features["verifier_error"] is True
+
+
 def test_open_set_gate_rejects_invalid_configuration_and_signal_lineage():
     verifier = StaticSupportVerifier(support_signals())
 
