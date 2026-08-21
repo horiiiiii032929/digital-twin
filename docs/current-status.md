@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-20
+Status date: 2026-08-21
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -9,13 +9,14 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 444 executable or execution-affecting
+the current branch extends it to all 445 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 54 protected entrypoints
-and retains an exact bounded authorization only for the completed
-`factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
+and retains exact bounded authorizations only for the completed
+`factual-qa-v3-oracle-pilot-001` and the synthetic-only, 49-call
+`factual-qa-v3-reviewer-qualification-007`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -50,8 +51,10 @@ clean controls and rejected all 24 defects, including 4/4 in every mutation
 class. All 49 calls completed in 16.04 seconds for USD 0.012175 with zero
 malformed/provider errors. The strict reviewer is kept as advisory quality
 control for the 10,000-case design; deterministic lineage remains authoritative.
-The one-time 006 authorization is revoked, and 10,000-case execution still
-requires a separate frozen design and paid authorization.
+The one-time 006 authorization is revoked. A new 24-pair qualification will
+test hosted Qwen3.7 Plus under a 49-call and USD 0.10 ceiling; Mistral Small 4
+remains the qualified fallback. This does not authorize the 100-, 1,000-, or
+10,000-case stages.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -64,7 +67,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 658 Python tests and 46 frontend tests, frontend lint, and the
+check passes 661 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -84,11 +87,11 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 658-test Python suite.
+connections. These corrections pass the current 661-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 444-file audit. Evaluation
-execution remains frozen; no rehearsal, 10,000-case stage, or provider run is
-currently authorized.
+artifacts are also fully dispositioned in the current 445-file audit. Evaluation
+execution remains frozen except for exact bounded qualification 007; no
+100-, 1,000-, or 10,000-case stage is authorized.
 
 ## Current outcome
 
@@ -175,13 +178,13 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper after reviewer qualification; execution closed | Rehearsal 004 exposed reviewer sensitivity failure; 005 exposed non-durable malformed-response handling; focused qualification 006 then passed 24/24 clean controls, 24/24 defects, and all six mutation classes | Publish the deterministic 1,000-source / 10,000-case design, then separately freeze and authorize the 100-case checkpoint |
+| Large factual QA | Go Deeper; Qwen3.7 Plus qualification authorized | Qualification 006 passed every Mistral Small 4 gate; the deterministic 1,000-source / 10,000-case design is published at `be61e69` | Run the bounded USD 0.10 Qwen3.7 Plus qualification, then bind the passing reviewer to the separately frozen 100-case checkpoint |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Keep / provider execution closed | The global freeze remains active with only the historical completed-oracle authorization; every 10,000-case stage is closed |
+| 1 | Repository correctness freeze | Keep / one bounded qualification open | The global freeze remains active with only the completed-oracle record and exact 49-call Qwen qualification 007 allowlisted; every scale stage is closed |
 | 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Publish the provider-free deterministic design, then freeze a separately authorized 100-case checkpoint before 1,000 or 10,000 cases |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
@@ -228,9 +231,10 @@ course evidence.
 The active model policy now blocks every Gemma and Claude call and all retired
 local general-Qwen calls before provider I/O. Direct DeepSeek V4 Flash/Pro and
 the selected task-specific Qwen3 Embedding binding remain current for their
-recorded roles. `qwen3.5:9b-q4_K_M` and exact OpenRouter DeepSeek/Mistral routes
-are prospective only; they require new project-specific quality evidence. See
-[the current model policy](../research/00_admin/2026-08-19-current-model-policy-v2.md).
+recorded roles. Mistral Small 4 is retained as the qualified advisory reviewer.
+Hosted Qwen3.7 Plus is registered only for bounded qualification 007 under a
+USD 0.10 hard stop; no local model is used. See
+[the current model policy](../research/00_admin/2026-08-21-current-model-policy-v3.md).
 
 ## Large factual-QA interpretation
 

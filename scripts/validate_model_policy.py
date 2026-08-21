@@ -20,6 +20,7 @@ from src.digital_twin.model_policy import (
     LOCAL_GENERAL_MODEL_DIGEST,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_INDEPENDENT_REVIEW_MODEL,
+    OPENROUTER_QWEN_REVIEW_MODEL,
     POLICY_ID,
     ModelPolicyError,
     controlled_openrouter_provider_options,
@@ -31,7 +32,7 @@ from src.digital_twin.model_policy import (
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_PATH = ROOT / "package.json"
 PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
-POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-19-current-model-policy-v2.md"
+POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-21-current-model-policy-v3.md"
 
 PROHIBITED_COMMAND_MARKERS = (
     "gemma",
@@ -87,6 +88,7 @@ def validate() -> dict[str, Any]:
     require_registered_current_model(JINA_RERANKER_MODEL)
     require_registered_current_model(OPENROUTER_DEEPSEEK_MODEL)
     require_registered_current_model(OPENROUTER_INDEPENDENT_REVIEW_MODEL)
+    require_registered_current_model(OPENROUTER_QWEN_REVIEW_MODEL)
     try:
         require_model_allowed(HISTORICAL_CLAUDE_MODEL)
     except ModelPolicyError:
@@ -149,6 +151,7 @@ def validate() -> dict[str, Any]:
         "openrouter_models": [
             OPENROUTER_DEEPSEEK_MODEL,
             OPENROUTER_INDEPENDENT_REVIEW_MODEL,
+            OPENROUTER_QWEN_REVIEW_MODEL,
         ],
         "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {

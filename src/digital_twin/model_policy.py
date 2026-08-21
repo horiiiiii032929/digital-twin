@@ -13,13 +13,14 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-19-v2"
+POLICY_ID = "current-model-policy-2026-08-21-v3"
 LOCAL_GENERAL_MODEL = "qwen3.5:9b-q4_K_M"
 LOCAL_GENERAL_MODEL_DIGEST = (
     "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7"
 )
 OPENROUTER_DEEPSEEK_MODEL = "openrouter/deepseek/deepseek-v4-flash-0731"
 OPENROUTER_INDEPENDENT_REVIEW_MODEL = "openrouter/mistralai/mistral-small-2603"
+OPENROUTER_QWEN_REVIEW_MODEL = "openrouter/qwen/qwen3.7-plus"
 _OPENROUTER_PROVIDER_OPTIONS: dict[str, Any] = {
     "extra_body": {
         "provider": {
@@ -67,7 +68,12 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="multimodal-independent-reviewer",
         provider_model=OPENROUTER_INDEPENDENT_REVIEW_MODEL,
-        status="prospective-not-selected",
+        status="qualified-advisory-fallback",
+    ),
+    CurrentModelBinding(
+        role="factual-qa-independent-reviewer-candidate",
+        provider_model=OPENROUTER_QWEN_REVIEW_MODEL,
+        status="prospective-qualification-pending",
     ),
     CurrentModelBinding(
         role="selected-text-embedding",
@@ -98,6 +104,7 @@ CURRENT_MODEL_IDS = frozenset(
         "deepseek/deepseek-v4-pro",
         "deepseek/deepseek-v4-flash-0731",
         "mistralai/mistral-small-2603",
+        "qwen/qwen3.7-plus",
         f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )

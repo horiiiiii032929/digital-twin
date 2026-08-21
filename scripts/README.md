@@ -432,14 +432,15 @@ Current utilities:
   writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
   run. Provider canaries are part of paid execution and stop before every bulk
   call if either exact route is unavailable.
-- `run_factual_qa_v3_reviewer_qualification.py`: replaces another full 120-case
-  rerun with 24 new deterministic clean/defect pairs. After one Mistral Small 4
-  canary it performs 48 paired reviews, checkpoints after every eight calls, and
-  records malformed/provider failures rather than discarding the run. Its
-  no-call preflight is the default; execution requires a separately frozen 006
-  instrument plus `--execute --allow-openrouter`. It cannot authorize 10,000
-  cases by itself. The one-time 006 run passed all gates at 49/49 calls and USD
-  0.012175; authorization is revoked and the result is registered.
+- `run_factual_qa_v3_reviewer_qualification.py`: runs bounded 24-pair reviewer
+  qualifications with one provider canary, 48 paired reviews, eight-call
+  durable checkpoints, zero retries, and complete malformed/provider failure
+  accounting. Qualification 006 passed Mistral Small 4 at 49/49 calls and USD
+  0.012175; its authorization is revoked and its result is registered.
+  Qualification 007 uses 24 new instances to test hosted Qwen3.7 Plus under a
+  USD 0.10 hard stop. Use `npm run preflight:factual-qa-v3-qwen-reviewer` for
+  the no-call check and the separately authorized `qualify:` command for paid
+  execution. Neither qualification authorizes a 10,000-case run.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

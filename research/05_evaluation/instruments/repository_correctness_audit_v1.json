@@ -874,12 +874,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "execution-configuration",
-      "evidence": "Manual command/configuration review plus locked repository verification; the canonical gate includes the deterministic no-call 10,000-case design validator while paid execution remains separate and the inventory gate requires zero pending or open audit findings.",
+      "evidence": "Manual command/configuration review plus locked repository verification; bounded preflight and paid commands for Qwen3.7 Plus qualification 007 are explicit and separate, the 10,000-case design remains no-call, and the inventory gate requires zero pending or open audit findings.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "7b00c4884aa483f5987a3d0c1cb2fbf16bbad2e2d53df324ad32f82a27a8d3bd"
+      "sha256": "58dd59d50a75ee7ec1118a46c03e52364c0565480f5fc0a8ae65ee072e96878a"
     },
     {
       "audit_status": "audited",
@@ -1221,6 +1221,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-completed-result-review",
       "sha256": "ece01bfcf163b6e498a1273f1de14f14c557aa8308f1eeadf50024412773ae85"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective method, cost, and data-boundary review confirmed 24 new deterministic clean/defect pairs disjoint from 006, exact hosted Qwen3.7 Plus routing, 49 calls with no retries, a USD 0.10 hard stop, synthetic-only inputs, complete identity/error/latency/cost gates, Mistral Small 4 fallback, and no authority for the 100- or 10,000-case stages.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-qwen-qualification-review",
+      "sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f"
     },
     {
       "audit_status": "audited",
@@ -2447,12 +2458,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual control-flow review plus Ruff and focused tests confirmed 006 generates exact deterministic pairs, uses only pinned no-fallback Mistral Small 4 while tolerating OpenRouter's absent revision field, checkpoints every eight calls, captures malformed and provider failures without aborting, preserves attempted/response/token/cost metadata, reserves below the USD 0.50 stop, blocks while unfrozen or dirty, and cannot authorize 10,000 cases.",
+      "evidence": "Manual control-flow review plus Ruff and focused tests confirmed the shared runner preserves the exact historical 006 fixtures and generates disjoint 007 fixtures; pins each no-fallback provider model; checkpoints every eight calls; records malformed/provider failures without aborting; preserves call, token, latency, and cost metadata; enforces the model-specific USD stop; blocks while unfrozen or dirty; and cannot authorize 100 or 10,000 cases.",
       "findings": [],
       "path": "scripts/run_factual_qa_v3_reviewer_qualification.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-focused-reviewer-runner-review",
-      "sha256": "4ca125dec1ef509cdf04c43347559f463f04cbe0aa5ccc9e4b53c018dbd52bb1"
+      "sha256": "310f0631474fc1ada5cd846b60bdfb15e492800fd1e8c0716743079d633eea78"
     },
     {
       "audit_status": "audited",
@@ -2793,7 +2804,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "911d2dd88dc0bd94ca3069542fbbb8aa52985bb151be48d0c1b40640fc317540"
+      "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6"
     },
     {
       "audit_status": "audited",
@@ -3684,7 +3695,7 @@
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "8191204ab1df89df9da8b93b9292616fba17cacd2e11d953d4b7fc4174059df9"
+      "sha256": "8c401d73ba771c7212d9e6134c0779261cbc31088b823842c195603bfa5b53ff"
     },
     {
       "audit_status": "audited",
@@ -3855,12 +3866,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active, invalid rehearsal 005 and completed reviewer qualification 006 are revoked, the deterministic 10,000-case builder is protected, only the completed oracle remains on the bounded allowlist, and no scale stage is authorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active; invalid rehearsal 005 and completed qualification 006 remain revoked; only the completed oracle and exact bounded qualification 007 are allowlisted; and no 100- or 10,000-case scale stage is authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "0ab89ca271b65ff750c2281d27344a838e1f1a9273186cd772e1964408505f63"
+      "sha256": "baf72989a2607783a6907ff86b47d9fe993886d14e1b574f3c7bf6ca91995db3"
     },
     {
       "audit_status": "audited",
@@ -4141,12 +4152,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests pass for all globally blocked operations, unknown-operation fail-closed behavior, exact authorization of only the completed oracle, and explicit rejection of all rehearsals, completed reviewer qualification 006, the draft 10,000-case pipeline, and unknown successor IDs.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the completed oracle and bounded qualification 007, and explicit rejection of rehearsals, completed qualification 006, the draft 10,000-case pipeline, and unknown successor IDs.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "15310232ba7147a9fa5a55bb66d7e9618e02623eb008799841e3ce169cf893e7"
+      "sha256": "097df620a05863b1e4d7fe700183e24869fd8b1e60f00778dbf7ff5c7140e903"
     },
     {
       "audit_status": "audited",
@@ -4537,12 +4548,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests validate the frozen 49-call and USD 0.50 authorization, explicit non-frozen blocking, 24 balanced new clean/defect pairs across four modalities, deterministic labels for all six mutation classes, exact no-fallback provider binding, synthetic-only source boundary, no-10,000 authority, and maximum cost reservation.",
+      "evidence": "Focused tests validate both bounded 49-call qualifications, historical 006 fixture stability, 24 balanced and deterministic clean/defect pairs per run, disjoint 007 identities, exact no-fallback Qwen3.7 Plus binding, synthetic-only source boundaries, the USD 0.10 reservation, dirty/unfrozen blocking, and no scale authority.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_reviewer_qualification.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "867d909a43d332ba92ce4d6a5d933156075a5d9d3127ac5e84e1d4f741dc7de8"
+      "sha256": "ea1a9cc8f3510fcf66c19b32f9f570ab3a7a92d04b5a103abe9662e0270f47b0"
     },
     {
       "audit_status": "audited",
@@ -4641,7 +4652,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "709c28be1c76922e0ecaa7eb9d9378b53acf4a9d43aebbd9581b22f4d5d5abc9"
+      "sha256": "bd682dd910c384d931a39ed31d1ad910e5736e0fbf529a0083fec8b55a7ade3c"
     },
     {
       "audit_status": "audited",

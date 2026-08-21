@@ -19,6 +19,8 @@
     "verify:repository-execution-freeze": "uv run python -m scripts.validate_repository_execution_freeze",
     "screen:factual-qa-v3-content-boundaries": "uv run python -m scripts.screen_factual_qa_v3_content_boundaries",
     "preflight:factual-qa-v3-scale-rehearsal": "uv run python -m scripts.run_factual_qa_v3_scale_rehearsal",
+    "preflight:factual-qa-v3-qwen-reviewer": "uv run python -m scripts.run_factual_qa_v3_reviewer_qualification --instrument research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json",
+    "qualify:factual-qa-v3-qwen-reviewer": "uv run python -m scripts.run_factual_qa_v3_reviewer_qualification --instrument research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json --execute --allow-openrouter",
     "rehearse:factual-qa-v3-scale": "uv run python -m scripts.run_factual_qa_v3_scale_rehearsal --execute --allow-deepseek --allow-openrouter",
     "verify:model-policy": "uv run python -m scripts.validate_model_policy",
     "check:staging-config": "docker compose --env-file deploy/staging.env.example -f compose.staging.yml config --quiet",
