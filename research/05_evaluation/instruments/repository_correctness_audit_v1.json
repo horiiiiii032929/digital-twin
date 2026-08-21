@@ -13,15 +13,15 @@
       "sha256": "9d6a0b1dd60c81e2bf26e15c28a3b1299515f58dea05dec0babb624b298d4986"
     },
     {
+      "path": ".env.example",
+      "sha256": "d11492a635d2779b21c0f2c1d95dcd606f9da64b9db15ee03228fdf1c98b2997",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Manual secret/default review confirmed placeholders only, deterministic generator default, and bounded provider/runtime limits.",
-      "findings": [],
-      "path": ".env.example",
-      "reviewed_at": "2026-08-19",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "021e8f00a01592f32a980273fc526b84cccf6fbf768d1ea956f60f4a9c44a43d"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -816,15 +816,15 @@
       "sha256": "3c6382ce8b703bb2912b33d2db9fb24bab467699cad6de567b244bc120de277c"
     },
     {
+      "path": "compose.staging.yml",
+      "sha256": "fa7bc1ec8240689c33dc3608a55c58bda7d6dfea5701807e41a17c89304202b7",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Compose rendering passed; API and web runtime probes verified read-only roots, dropped capabilities, no-new-privileges, non-root users, and readiness.",
-      "findings": [],
-      "path": "compose.staging.yml",
-      "reviewed_at": "2026-08-19",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "4019dae00dabe830db7e754b96ea38960185c28ce256ebc84398c390b85dce75"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -849,15 +849,15 @@
       "sha256": "ca0e04d098a4d8d6311bf14198b4e8e5fab09e0e6da889b1d667c2ca84aca761"
     },
     {
+      "path": "deploy/staging.env.example",
+      "sha256": "00b13e3a7322859e390d36db455ac53c1b796f7a06550296a2f7571423ea06ba",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Manual placeholder review and successful Compose rendering; no credential value is committed.",
-      "findings": [],
-      "path": "deploy/staging.env.example",
-      "reviewed_at": "2026-08-19",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "a352fb5e01f93a0a529b0167fea09efd744b935fa222eb7867d63cdec225a10a"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -871,15 +871,15 @@
       "sha256": "896d0c74b3abbcefac64a3667f42f32640cb1605eee387feb9bdad1485a3cef4"
     },
     {
+      "path": "package.json",
+      "sha256": "ac2fbc307e576936074136a67877f1e22a51982511ff03005592eae7468ec7d1",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "execution-configuration",
-      "evidence": "Command review confirms deterministic decision-draft build/check, v2 validation, and preflight are explicit, provider-free, and separate from historical v1 execution; no evaluation or release authorization was added.",
-      "findings": [],
-      "path": "package.json",
+      "domain": "autonomous-tutoring-graph",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "69e3e8bef2fc6476350cbea745701b206a8654f8ac6a16f05368a4649f87147f"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -2986,12 +2986,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "V12 review preserves V11 historically and binds the current bounded independent-review workflow, unopened source-linked decision draft, null selection, unbuilt current images, and denied review/evaluation/release authority.",
+      "evidence": "V12 remains historically reproducible while the issue #107 build-only T1 contract explicitly supersedes current-tree matching without authorizing deployment, evaluation, or release.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "eb4e3c2cbd2e2d13ab7d0b6e3a90b5daaaddb5f7430e345956b2bb0840b2a639"
+      "sha256": "73711f1c6687c29e5b9605856bf0d74133ed0757ce278623255fc451b868e4e4"
     },
     {
       "audit_status": "audited",
@@ -3214,15 +3214,15 @@
       "sha256": "20c25d2aa75f16b91090a4d5d350c73d3614787858f5ba8b04795b261320e6a4"
     },
     {
+      "path": "services/api/app/config.py",
+      "sha256": "c81c5e6dc8ed2fb22275e6326d5634a56b6f65a84f9bc3c361a9c36525ca96ba",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-configuration-and-composition",
-      "evidence": "Manual startup and trust-boundary review verified validated runtime settings and exact profile-bound generator composition; focused API/configuration tests passed.",
-      "findings": [],
-      "path": "services/api/app/config.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "d08493928792d5a71230736260bf2568f135b5beead5941d6af6023837bf656f"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -3236,15 +3236,15 @@
       "sha256": "15e08dd49a05234f27136108b49f23fc8a2226113c717d152b7f30197f97988d"
     },
     {
+      "path": "services/api/app/factory.py",
+      "sha256": "840e105398d6989f3ce56704f5bb489119a4559b7202007dd53639224eb5315f",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-configuration-and-composition",
-      "evidence": "Manual startup and trust-boundary review verified validated runtime settings and exact profile-bound generator composition; focused API/configuration tests passed.",
-      "findings": [],
-      "path": "services/api/app/factory.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "2ea4d88f5fb585b6576cac06f0af693efa4965aa4115478a68500bef5779cf8f"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -3687,15 +3687,15 @@
       "sha256": "301f4d768b89482e92c41f3bb89b7de39fd28e4ce6ed38fd5510e61082d7e89c"
     },
     {
+      "path": "src/digital_twin/generation/__init__.py",
+      "sha256": "77097ddce1bb002c02070943068f37f5ad7c5c1fee1b2829a256dd87371e9f7c",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "grounded-generation-correctness",
-      "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/generation/__init__.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "79e15d351fb040a31d8b21861502b928e2dace0adb257bfa4731968809634193"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -3720,15 +3720,15 @@
       "sha256": "603cbcf5da0ddb69e2abbbe9838399c99d7f1ad062da4afb29fdddd7af142a33"
     },
     {
+      "path": "src/digital_twin/generation/generator.py",
+      "sha256": "936c92aa1957d1fc38fa46e81be83908f0960ff254e81556170311456b10f0e2",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "grounded-generation-correctness",
-      "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/generation/generator.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "4a846145e6715b456c13f77187fdaeaa42bc82276c87fe5a38d41c32f2bf982b"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -3753,15 +3753,15 @@
       "sha256": "ff37d86df4f006eb3b63f9d01d7c5969a51eb50eda12e98cb3cacac2fcc80e3c"
     },
     {
+      "path": "src/digital_twin/generation/prompt.py",
+      "sha256": "6b2ff9dcb5461199dc58e8e064fcd3e4e9bb941f02207ecae414753fad4dcda2",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "grounded-generation-correctness",
-      "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/generation/prompt.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "9b0766cf8b1361b5127088867e3a46780873b46ec149e47cd689cb2a8a62fe4c"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4149,15 +4149,15 @@
       "sha256": "81d10e65327bc79a417cccbdad003326dc63df3e2df0fb9a6749afb49c7e39e5"
     },
     {
+      "path": "src/digital_twin/student/__init__.py",
+      "sha256": "72aba3b1c60a722925d068a58b0ccf458215c106478cd0d8a2f8bf6da7e974e5",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-package-surface",
-      "evidence": "Manual student-domain export review confirmed the supported repository, lifecycle, tutoring, fixture, and model interfaces; complete Python suite passed.",
-      "findings": [],
-      "path": "src/digital_twin/student/__init__.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "4f6a9f4cf5c045e9886975df458a8fa20948647785c674c6134d342846bb6a48"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4171,26 +4171,26 @@
       "sha256": "5c8420768cd8f65f0d8124e411fd1a6c7c25d1093d72ee2186c36134f3e3f811"
     },
     {
+      "path": "src/digital_twin/student/migrations.py",
+      "sha256": "36ece71f4ae759cbe95524e03cb16bc4ce2764589200d281a9b8eb55ea5f2b63",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-persistence",
-      "evidence": "Ordered checksum migrations, rollback, explicit empty selection, future-version refusal, complete schema, durable deletion queue, and onboarding compare-and-swap revision migration reviewed; migration tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/student/migrations.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "48a642afb7baefa354ef8e1aaf7db486d697772caf6f8dd3c61a6eb8cca7543d"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
+      "path": "src/digital_twin/student/models.py",
+      "sha256": "f60f0da9f962bf78796fcf1153311334c54ac6b59e92f55ac61764a90f9d95b5",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "student-product-domain-models",
-      "evidence": "Manual model review plus regressions verified draft-safe release defaults, publication evaluation/policy/evidence gates, unique chunks, citation checksum/bounds, finite audit details, and repository-boundary revalidation.",
-      "findings": [],
-      "path": "src/digital_twin/student/models.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "cefce0d49081e8c4c9122f96b47e43e6ee5972644f57641fa61f67a344c89dd5"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4204,26 +4204,26 @@
       "sha256": "dbd0380a4c3967d7c979b6163f890a4baa8856d6c07a2d81bb8d86523bc3d087"
     },
     {
+      "path": "src/digital_twin/student/repository.py",
+      "sha256": "b25f8b7541f0a4ea877a991f880e6ea8ecb38be52fba101574ff594e7dc3b44b",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-persistence",
-      "evidence": "Non-destructive upserts, immutable releases, transactional turns, concurrent duplicate signaling, citations, and atomic publication reviewed; persistence tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/student/repository.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "14ee304eb106e8346f74e7a702b2a3576136e4053e6fc2c97935cf32684f897a"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
+      "path": "src/digital_twin/student/service.py",
+      "sha256": "ea7a3a0174a1fc3c4f366231206486c300f0278e191c983ccaf531774a585a0f",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-student",
-      "evidence": "Student/course/conversation authorization, current-release binding, retrieval fallback telemetry, generation failure, authoritative citations, and concurrent idempotency reviewed; workflow tests passed.",
-      "findings": [],
-      "path": "src/digital_twin/student/service.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "b41a7e2f01c738ddb88ddbb46d604805937ba4c2f9ee1b47186221b9b0af721b"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4237,15 +4237,15 @@
       "sha256": "073447f0bfc97e28cb13158951d4268add3ccae06251f2a0080a8cbd8d8bc389"
     },
     {
+      "path": "tests/api/test_auth_api.py",
+      "sha256": "2d933bafee00552337f1c74d70d87bd27ec12672cae01e5072903113afb8c69f",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-verification",
-      "evidence": "Credential, origin, cookie, role, rate-limit, async ingestion, server-bound release provenance, and course-bound staging release regressions reviewed and passed.",
-      "findings": [],
-      "path": "tests/api/test_auth_api.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "4ba5d3c144858b7589ec316133a0affbf0fdcecb72bfb1a06e693cc7b7d77578"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4303,15 +4303,15 @@
       "sha256": "c662082a30598d2b4533f36c5e27b443b70258d473bfc5c565b41a33efcc35cb"
     },
     {
+      "path": "tests/api/test_student_api.py",
+      "sha256": "1179f76fb9adb92d31099d558d6eab69316c66273bd87b450b48af715e5c5128",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-verification",
-      "evidence": "Student isolation, citation/crop, concurrent and sequential idempotency, stale release, provider failure, and persistence regressions reviewed and passed.",
-      "findings": [],
-      "path": "tests/api/test_student_api.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "2857c7a0ba1bfa8a3cd14152f0673acebfb5020aa7d92e203d39b4c38a0c7fe5"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4339,12 +4339,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-and-grounding-verification",
-      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+      "evidence": "Focused generation regressions cover T0 behavior, bounded T1 pedagogical plans, unchanged citation lineage, provider failures, and policy suppression.",
       "findings": [],
       "path": "tests/digital_twin/test_generation.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "27d472cf28ff8e40d80f869c8cb6858215c61e22e86339ee8f66410fd7dd88d0"
+      "sha256": "5f7a047fb8b879497101c382aeaf18b5781030d18eae959b0161245778a0a003"
     },
     {
       "audit_status": "audited",
@@ -4490,15 +4490,15 @@
       "sha256": "6778e506e755afb1901122a71aa11a07cebdbb85c30f9463c92a344e4d1bf6e2"
     },
     {
+      "path": "tests/digital_twin/test_sqlite_migrations.py",
+      "sha256": "9093dbec532046022c7122cf7da92252b1eb31cbca8e0394849a868b9b496e59",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "runtime-verification",
-      "evidence": "Clean, legacy, rollback, checksum, explicit-empty, and future-version migration regressions reviewed and passed.",
-      "findings": [],
-      "path": "tests/digital_twin/test_sqlite_migrations.py",
-      "reviewed_at": "2026-08-20",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "7b5cd083ac20be95f77e6f158787ccffac6fc1119d97c801c4b35138d0a14d41"
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     },
     {
       "audit_status": "audited",
@@ -4779,12 +4779,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "deployment-verification",
-      "evidence": "V12 regression tests validate the current bounded review-workflow freeze, reject false review/freeze/selection/release promotion, and preserve V11 as historical-superseded.",
+      "evidence": "Regression tests preserve V12 historically, bind its explicit issue #107 successor, and continue rejecting false review, selection, deployment, and release promotion.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "dd0a2c7614a6366c14d78181dd4daff3b46ace535420241fdf12415009ca009c"
+      "sha256": "c35521e15aee2a4b8cb4258e7e2bfd9d48c136c57e48bbcbcfa3d1582d44fafe"
     },
     {
       "audit_status": "audited",
@@ -5247,6 +5247,50 @@
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
       "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1"
+    },
+    {
+      "path": "research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json",
+      "sha256": "4b8d6bb8fbb25902c6a0dfd9e9d840a85c3157746a775a7f92a4d0d67e7c57f6",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
+    },
+    {
+      "path": "scripts/validate_autonomous_tutoring_graph_instrument.py",
+      "sha256": "3ffbdeb52734116612d2349e17b0c0a12f568de09d703baaa05ea2b4fa489b6f",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
+    },
+    {
+      "path": "src/digital_twin/student/tutoring_graph.py",
+      "sha256": "d859981c3cf97a5086c845b4fa76d81fe5bd8d44b419137e32af718e4561b525",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_validate_autonomous_tutoring_graph_instrument.py",
+      "sha256": "6806fe261e1ea725866bcb95a391a15a9645a3087f466d171a3eb30e27c0b907",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "findings": []
     }
   ],
   "schema_version": 1

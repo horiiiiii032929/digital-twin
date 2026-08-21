@@ -12,6 +12,7 @@ from scripts.evaluate_generation import (
     _paid_provider_called,
 )
 from src.digital_twin.generation import (
+    BoundedPedagogicalPromptBuilder,
     ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     DeterministicCitationValidator,
@@ -274,6 +275,27 @@ def test_clarification_first_prompt_freezes_narrow_ambiguity_repair():
     assert "at most 60 words" in prompt.messages[0].content
 
 
+def test_bounded_pedagogical_prompt_carries_only_code_selected_plan():
+    prompt = BoundedPedagogicalPromptBuilder().build_for_intent(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+        intent="give_hint",
+        help_level=1,
+        repair_reason=None,
+    )
+    payload = json.loads(prompt.messages[1].content)
+
+    assert prompt.version == "t1-v1"
+    assert payload["pedagogical_plan"] == {
+        "help_level": 1,
+        "intent": "give_hint",
+        "repair_reason": None,
+    }
+    assert payload["approved_evidence"][0]["citation_id"] == "S1"
+    assert "do not choose a different teaching move" in prompt.messages[0].content
+
+
 @pytest.mark.asyncio
 async def test_deterministic_generator_produces_grounded_citation_and_trace():
     answer = await DeterministicGroundedGenerator().generate(
@@ -288,6 +310,21 @@ async def test_deterministic_generator_produces_grounded_citation_and_trace():
     assert answer.trace is not None
     assert answer.trace.generator_id == "deterministic-grounded-generator"
     assert answer.trace.usage.total_tokens == 0
+
+
+@pytest.mark.asyncio
+async def test_deterministic_generator_applies_bounded_intent_without_changing_lineage():
+    answer = await DeterministicGroundedGenerator().generate_for_intent(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+        intent="give_hint",
+        help_level=1,
+    )
+
+    assert answer.content.startswith("Hint:")
+    assert answer.citations == [authoritative_citation_for_chunk(approved_hit().chunk)]
+    assert answer.trace is not None and answer.trace.policy_action == "answer"
 
 
 @pytest.mark.asyncio

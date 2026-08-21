@@ -22,11 +22,16 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
 )
 from src.digital_twin.student.migrations import apply_migrations
+from src.digital_twin.student.tutoring_graph import LearnerState
 from src.digital_twin.tutor_policy import TutorPolicy
 
 
 class DuplicateTurnError(RuntimeError):
     """A concurrent request already claimed the conversation request ID."""
+
+
+class LearnerStateConflictError(RuntimeError):
+    """The durable learner state advanced before this turn could commit."""
 
 
 class StudentRepository(Protocol):
@@ -68,6 +73,8 @@ class StudentRepository(Protocol):
 
     def get_conversation(self, conversation_id: str) -> Conversation | None: ...
 
+    def get_learner_state(self, conversation_id: str) -> LearnerState | None: ...
+
     def list_messages(self, conversation_id: str) -> list[Message]: ...
 
     def get_message(self, message_id: str) -> Message | None: ...
@@ -83,6 +90,8 @@ class StudentRepository(Protocol):
         tutor_message: Message,
         citations: list[Citation],
         audit_events: list[AuditEvent],
+        learner_state: LearnerState | None = None,
+        expected_learner_state_revision: int | None = None,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -413,6 +422,13 @@ class SQLiteStudentRepository:
         row = self._one("SELECT * FROM conversations WHERE id = ?", (conversation_id,))
         return Conversation.model_validate(dict(row)) if row else None
 
+    def get_learner_state(self, conversation_id: str) -> LearnerState | None:
+        row = self._one(
+            "SELECT state_json FROM conversation_learner_states WHERE conversation_id = ?",
+            (conversation_id,),
+        )
+        return LearnerState.model_validate_json(row["state_json"]) if row else None
+
     def list_messages(self, conversation_id: str) -> list[Message]:
         with self._lock:
             rows = self._connection.execute(
@@ -453,6 +469,8 @@ class SQLiteStudentRepository:
         tutor_message: Message,
         citations: list[Citation],
         audit_events: list[AuditEvent],
+        learner_state: LearnerState | None = None,
+        expected_learner_state_revision: int | None = None,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -469,6 +487,20 @@ class SQLiteStudentRepository:
             AuditEvent.model_validate(event.model_dump(mode="python"))
             for event in audit_events
         ]
+        if learner_state is not None:
+            learner_state = LearnerState.model_validate(
+                learner_state.model_dump(mode="python")
+            )
+            if (
+                learner_state.conversation_id != conversation.id
+                or learner_state.course_id != conversation.course_id
+                or learner_state.release_id != conversation.release_id
+                or expected_learner_state_revision is None
+                or learner_state.revision != expected_learner_state_revision + 1
+            ):
+                raise ValueError("learner state has inconsistent turn lineage")
+        elif expected_learner_state_revision is not None:
+            raise ValueError("learner state revision requires learner state")
         if (
             student_message.conversation_id != conversation.id
             or tutor_message.conversation_id != conversation.id
@@ -486,6 +518,22 @@ class SQLiteStudentRepository:
             raise ValueError("tutor turn records have inconsistent lineage")
         try:
             with self._lock, self._connection:
+                if learner_state is not None:
+                    current = self._connection.execute(
+                        """SELECT revision FROM conversation_learner_states
+                           WHERE conversation_id = ?""",
+                        (conversation.id,),
+                    ).fetchone()
+                    current_revision = int(current["revision"]) if current else 0
+                    if current_revision != expected_learner_state_revision:
+                        duplicate = self._connection.execute(
+                            """SELECT 1 FROM messages
+                               WHERE conversation_id = ? AND client_request_id = ?""",
+                            (conversation.id, student_message.client_request_id),
+                        ).fetchone()
+                        if duplicate is not None:
+                            raise DuplicateTurnError
+                        raise LearnerStateConflictError
                 self._insert_message(student_message)
                 self._insert_message(tutor_message)
                 self._connection.executemany(
@@ -522,6 +570,27 @@ class SQLiteStudentRepository:
                 )
                 for event in audit_events:
                     self._insert_audit_event(event)
+                if learner_state is not None:
+                    self._connection.execute(
+                        """INSERT INTO conversation_learner_states
+                           (conversation_id, course_id, release_id, revision,
+                            state_json, updated_at)
+                           VALUES (?, ?, ?, ?, ?, ?)
+                           ON CONFLICT(conversation_id) DO UPDATE SET
+                             course_id = excluded.course_id,
+                             release_id = excluded.release_id,
+                             revision = excluded.revision,
+                             state_json = excluded.state_json,
+                             updated_at = excluded.updated_at""",
+                        (
+                            learner_state.conversation_id,
+                            learner_state.course_id,
+                            learner_state.release_id,
+                            learner_state.revision,
+                            learner_state.model_dump_json(),
+                            learner_state.updated_at,
+                        ),
+                    )
                 self._connection.execute(
                     "UPDATE conversations SET updated_at = ? WHERE id = ?",
                     (conversation.updated_at, conversation.id),
@@ -653,8 +722,9 @@ class SQLiteStudentRepository:
         self._connection.execute(
             """INSERT INTO messages
                (id, conversation_id, role, content, action, trace_json,
-                client_request_id, response_to_message_id, created_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                client_request_id, response_to_message_id, tutoring_mode,
+                tutoring_intent, learner_state_revision, created_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 message.id,
                 message.conversation_id,
@@ -664,6 +734,9 @@ class SQLiteStudentRepository:
                 message.trace.model_dump_json() if message.trace else None,
                 message.client_request_id,
                 message.response_to_message_id,
+                message.tutoring_mode,
+                message.tutoring_intent,
+                message.learner_state_revision,
                 message.created_at,
             ),
         )

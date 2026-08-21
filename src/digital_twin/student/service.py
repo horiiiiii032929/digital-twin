@@ -39,6 +39,15 @@ from src.digital_twin.student.models import (
     TutorTurn,
 )
 from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
+from src.digital_twin.student.repository import LearnerStateConflictError
+from src.digital_twin.student.tutoring_graph import (
+    BoundedTutoringGraph,
+    LearnerState,
+    TutoringGraphInput,
+    TutoringIntent,
+    TutoringMode,
+    initial_learner_state,
+)
 from src.digital_twin.tutor_policy import timestamp_now
 
 
@@ -58,6 +67,7 @@ class StudentTutoringService:
         embedder: TextEmbedder | None = None,
         generator: TutorGenerator | None = None,
         evidence_gate: EvidenceSufficiencyGate | None = None,
+        tutoring_mode: str = TutoringMode.T0,
     ) -> None:
         self.repository = repository
         profile = load_release_profile(profile_path)
@@ -71,7 +81,19 @@ class StudentTutoringService:
         self.embedder = embedder
         self.generator = generator or DeterministicGroundedGenerator()
         self.evidence_gate = evidence_gate
+        if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1}:
+            raise ValueError("unsupported student tutoring mode")
+        self.tutoring_mode = tutoring_mode
         self._retrievers: dict[str, object] = {}
+        self.tutoring_graph = (
+            BoundedTutoringGraph(
+                retrieve=self._graph_retrieve,
+                generate=self._graph_generate,
+                fallback=self._graph_fallback,
+            )
+            if self.tutoring_mode == TutoringMode.T1
+            else None
+        )
 
     def list_courses(self, account_id: str) -> list[StudentCourse]:
         self._require_student(account_id)
@@ -157,21 +179,64 @@ class StudentTutoringService:
                 tutor_message=tutor_message,
                 citations=citations,
                 duplicate=True,
+                tutoring_mode=tutor_message.tutoring_mode,
+                tutoring_intent=tutor_message.tutoring_intent,
+                learner_state_revision=tutor_message.learner_state_revision,
             )
         release = self._require_current_release(conversation, account_id)
-        hits, retrieval_events = self._retrieve(
-            release,
-            account_id=account_id,
-            conversation=conversation,
-            question=content,
-        )
-        answer, generation_events = await self._generate(
-            release,
-            hits,
-            content,
-            account_id=account_id,
-            conversation=conversation,
-        )
+        tutoring_intent: str | None = None
+        learner_state: LearnerState | None = None
+        expected_learner_state_revision: int | None = None
+        if self.tutoring_graph is None:
+            hits, retrieval_events = self._retrieve(
+                release,
+                account_id=account_id,
+                conversation=conversation,
+                question=content,
+            )
+            answer, generation_events = await self._generate(
+                release,
+                hits,
+                content,
+                account_id=account_id,
+                conversation=conversation,
+            )
+        else:
+            prior_state = self.repository.get_learner_state(conversation.id)
+            if prior_state is None:
+                prior_state = initial_learner_state(conversation)
+            expected_learner_state_revision = prior_state.revision
+            graph_result = await self.tutoring_graph.run(
+                TutoringGraphInput(
+                    account_id=account_id,
+                    conversation=conversation,
+                    release=release,
+                    student_message=content,
+                    learner_state=prior_state,
+                )
+            )
+            hits = graph_result.hits
+            retrieval_events = []
+            generation_events = [
+                *graph_result.audit_events,
+                self._event(
+                    "tutoring-graph-completed",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                    details={
+                        "implementation": self.tutoring_graph.implementation_id,
+                        "intent": graph_result.intent,
+                        "repair_count": graph_result.repair_count,
+                        "validation_passed": graph_result.validation_passed,
+                        "failure_reason": graph_result.failure_reason,
+                    },
+                ),
+            ]
+            answer = graph_result.answer
+            learner_state = graph_result.learner_state
+            tutoring_intent = graph_result.intent
         now = timestamp_now()
         student_message = Message(
             id=f"message-{uuid4()}",
@@ -180,6 +245,7 @@ class StudentTutoringService:
             content=content,
             action="question",
             client_request_id=client_request_id,
+            tutoring_mode=self.tutoring_mode,
             created_at=now,
         )
         tutor_message = Message(
@@ -190,6 +256,11 @@ class StudentTutoringService:
             action=answer.trace.policy_action if answer.trace else "safe-failure",
             trace=answer.trace,
             response_to_message_id=student_message.id,
+            tutoring_mode=self.tutoring_mode,
+            tutoring_intent=tutoring_intent,
+            learner_state_revision=(
+                learner_state.revision if learner_state is not None else None
+            ),
             created_at=now,
         )
         citations, citation_failure = self._citations(
@@ -229,6 +300,8 @@ class StudentTutoringService:
                     if tutor_message.trace
                     else "safe-failure"
                 ),
+                "tutoring_mode": self.tutoring_mode,
+                "tutoring_intent": tutoring_intent,
             },
         )
         try:
@@ -238,6 +311,8 @@ class StudentTutoringService:
                 tutor_message,
                 citations,
                 [*retrieval_events, *generation_events, completed],
+                learner_state,
+                expected_learner_state_revision,
             )
         except DuplicateTurnError:
             existing = self.repository.find_turn(conversation.id, client_request_id)
@@ -261,11 +336,24 @@ class StudentTutoringService:
                 tutor_message=stored_tutor,
                 citations=stored_citations,
                 duplicate=True,
+                tutoring_mode=stored_tutor.tutoring_mode,
+                tutoring_intent=stored_tutor.tutoring_intent,
+                learner_state_revision=stored_tutor.learner_state_revision,
             )
+        except LearnerStateConflictError as error:
+            raise StudentWorkflowError(
+                "learner_state_conflict",
+                "Another tutoring turn advanced this conversation. Please resend.",
+            ) from error
         return TutorTurn(
             student_message=student_message,
             tutor_message=tutor_message,
             citations=citations,
+            tutoring_mode=self.tutoring_mode,
+            tutoring_intent=tutoring_intent,
+            learner_state_revision=(
+                learner_state.revision if learner_state is not None else None
+            ),
         )
 
     def list_citations(self, account_id: str, message_id: str) -> list[Citation]:
@@ -507,6 +595,115 @@ class StudentTutoringService:
         )
         return (hits if decision.sufficient else []), events
 
+    def _graph_retrieve(
+        self, graph_input: TutoringGraphInput
+    ) -> tuple[list[RetrievalHit], list[AuditEvent]]:
+        return self._retrieve(
+            graph_input.release,
+            account_id=graph_input.account_id,
+            conversation=graph_input.conversation,
+            question=graph_input.student_message,
+        )
+
+    async def _graph_generate(
+        self,
+        graph_input: TutoringGraphInput,
+        hits: list[RetrievalHit],
+        intent: str,
+        help_level: int,
+        repair_reason: str | None,
+    ) -> tuple[TutorAnswer, list[AuditEvent]]:
+        short_circuit = self._graph_policy_answer(intent)
+        if short_circuit is not None:
+            return short_circuit, []
+        generate_for_intent = getattr(self.generator, "generate_for_intent", None)
+        if callable(generate_for_intent):
+            try:
+                answer = await generate_for_intent(
+                    graph_input.student_message,
+                    hits,
+                    graph_input.release.policy,
+                    intent=intent,
+                    help_level=help_level,
+                    repair_reason=repair_reason,
+                )
+                return answer, []
+            except (RuntimeError, ValueError, ValidationError) as error:
+                return self._generation_failure_answer(error), [
+                    self._event(
+                        "generation-failure",
+                        account_id=graph_input.account_id,
+                        course_id=graph_input.conversation.course_id,
+                        release_id=graph_input.release.id,
+                        conversation_id=graph_input.conversation.id,
+                        details={"failure_type": type(error).__name__},
+                    )
+                ]
+        return await self._generate(
+            graph_input.release,
+            hits,
+            graph_input.student_message,
+            account_id=graph_input.account_id,
+            conversation=graph_input.conversation,
+        )
+
+    @staticmethod
+    def _graph_policy_answer(intent: str) -> TutorAnswer | None:
+        responses = {
+            TutoringIntent.REFUSE_AND_REDIRECT: (
+                "I cannot complete graded work for you. Share what you have tried, "
+                "and I can help with one bounded next step.",
+                "redirect-graded-work",
+            ),
+            TutoringIntent.ABSTAIN_NO_EVIDENCE: (
+                "I do not have enough approved course evidence to support that "
+                "response. Please refine the question or ask the instructor.",
+                "no-evidence",
+            ),
+            TutoringIntent.CLARIFY_REQUEST: (
+                "Which concept or step would you like to work through?",
+                "clarify-request",
+            ),
+        }
+        selected = responses.get(intent)
+        if selected is None:
+            return None
+        content, action = selected
+        return TutorAnswer(
+            content=content,
+            trace=GenerationTrace(
+                generator_id="bounded-tutoring-graph-v1",
+                provider_model="not-called",
+                prompt_version="graph-policy-v1",
+                policy_action=action,
+                latency_ms=0,
+                usage=GenerationUsage(),
+            ),
+        )
+
+    @staticmethod
+    def _graph_fallback(
+        graph_input: TutoringGraphInput,
+        intent: str,
+        failure_reason: str | None,
+    ) -> TutorAnswer:
+        del graph_input, intent, failure_reason
+        return TutorAnswer(
+            content=(
+                "I could not validate that tutoring response. Please restate the "
+                "step you are working on or ask the instructor."
+            ),
+            warnings=["The bounded tutoring graph used its safe fallback."],
+            trace=GenerationTrace(
+                generator_id="bounded-tutoring-graph-v1",
+                provider_model="not-called",
+                prompt_version="safe-fallback-v1",
+                policy_action="safe-graph-failure",
+                latency_ms=0,
+                usage=GenerationUsage(),
+            ),
+        )
+
     async def _generate(
         self,
         release: DigitalTwinRelease,
@@ -519,23 +716,7 @@ class StudentTutoringService:
         try:
             return await self.generator.generate(question, hits, release.policy), []
         except (RuntimeError, ValueError, ValidationError) as error:
-            answer = TutorAnswer(
-                content=(
-                    "The tutor could not produce a validated response. "
-                    "Please try again or ask the instructor."
-                ),
-                warnings=["Generation failed safely."],
-                trace=GenerationTrace(
-                    generator_id=getattr(
-                        self.generator, "implementation_id", "unknown-generator"
-                    ),
-                    provider_model="not-returned",
-                    prompt_version="not-returned",
-                    policy_action="safe-provider-failure",
-                    latency_ms=0,
-                    usage=GenerationUsage(),
-                ),
-            )
+            answer = self._generation_failure_answer(error)
             event = self._event(
                 "generation-failure",
                 account_id=account_id,
@@ -545,6 +726,26 @@ class StudentTutoringService:
                 details={"failure_type": type(error).__name__},
             )
             return answer, [event]
+
+    def _generation_failure_answer(self, error: Exception) -> TutorAnswer:
+        del error
+        return TutorAnswer(
+            content=(
+                "The tutor could not produce a validated response. "
+                "Please try again or ask the instructor."
+            ),
+            warnings=["Generation failed safely."],
+            trace=GenerationTrace(
+                generator_id=getattr(
+                    self.generator, "implementation_id", "unknown-generator"
+                ),
+                provider_model="not-returned",
+                prompt_version="not-returned",
+                policy_action="safe-provider-failure",
+                latency_ms=0,
+                usage=GenerationUsage(),
+            ),
+        )
 
     def _citations(
         self,

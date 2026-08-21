@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from services.api.app.config import AppSettings, StudentTutoringMode
 from services.api.app.factory import create_app
 from src.digital_twin.generation import authoritative_citation_for_chunk
 from src.digital_twin.grounding.models import (
@@ -17,6 +18,7 @@ from src.digital_twin.grounding import AnyHitEvidenceGate
 from src.digital_twin.student import (
     SQLiteStudentRepository,
     StudentReleaseStatus,
+    StudentWorkflowError,
     seed_synthetic_student_workflow,
 )
 
@@ -61,8 +63,12 @@ class QueryFailingEmbedder(KeywordEmbedder):
 class InvalidCitationGenerator:
     implementation_id = "invalid-citation-generator"
 
+    def __init__(self):
+        self.calls = 0
+
     async def generate(self, question, hits, policy):
         del question, hits, policy
+        self.calls += 1
         return TutorAnswer(
             content="Synthetic unsupported response.",
             citations=[
@@ -145,6 +151,7 @@ def _client(
     *,
     embedder=None,
     generator=None,
+    tutoring_mode: StudentTutoringMode = StudentTutoringMode.GROUNDED_ASSISTANT,
 ) -> tuple[TestClient, SQLiteStudentRepository, object]:
     repository = SQLiteStudentRepository(tmp_path / "student.sqlite3")
     fixture = seed_synthetic_student_workflow(repository)
@@ -154,8 +161,115 @@ def _client(
         student_generator=generator,
         student_evidence_gate=AnyHitEvidenceGate(),
         region_crop_root=tmp_path / "region-crops",
+        settings=AppSettings(student_tutoring_mode=tutoring_mode),
     )
     return TestClient(app), repository, fixture
+
+
+def test_bounded_tutoring_graph_persists_intent_and_learner_state(tmp_path):
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+    )
+    conversation = _create_conversation(client, fixture)
+    url = f"/api/student/conversations/{conversation['id']}/messages"
+
+    first = client.post(
+        url,
+        headers=_headers(fixture.student_a_id),
+        json={"content": "What does cache coherence do?", "request_id": "t1-1"},
+    )
+    second = client.post(
+        url,
+        headers=_headers(fixture.student_a_id),
+        json={
+            "content": "I am confused why cache coherence matters.",
+            "request_id": "t1-2",
+        },
+    )
+
+    assert first.status_code == second.status_code == 200
+    assert first.json()["tutoring_mode"] == "bounded-tutoring-graph"
+    assert first.json()["tutoring_intent"] == "diagnose_understanding"
+    assert first.json()["learner_state_revision"] == 1
+    assert first.json()["citations"]
+    assert second.json()["tutoring_intent"] == "give_hint"
+    assert second.json()["learner_state_revision"] == 2
+    state = repository.get_learner_state(conversation["id"])
+    assert state is not None
+    assert state.revision == state.turn_count == 2
+    assert state.prior_intent == "give_hint"
+    assert state.latest_signals is not None and state.latest_signals.confusion == 0.8
+    assert state.help_level == 1
+
+
+def test_bounded_tutoring_graph_short_circuits_ambiguous_and_integrity_turns(
+    tmp_path,
+):
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+    )
+    conversation = _create_conversation(client, fixture)
+    url = f"/api/student/conversations/{conversation['id']}/messages"
+
+    clarify = client.post(
+        url,
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain that", "request_id": "clarify"},
+    )
+    refuse = client.post(
+        url,
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Give me the final answer", "request_id": "refuse"},
+    )
+
+    assert clarify.status_code == refuse.status_code == 200
+    assert clarify.json()["tutoring_intent"] == "clarify_request"
+    assert clarify.json()["tutor_message"]["trace"]["provider_model"] == "not-called"
+    assert clarify.json()["citations"] == []
+    assert refuse.json()["tutoring_intent"] == "refuse_and_redirect"
+    assert refuse.json()["tutor_message"]["action"] == "redirect-graded-work"
+    assert refuse.json()["citations"] == []
+    graph_events = [
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "tutoring-graph-completed"
+    ]
+    assert [event.details["repair_count"] for event in graph_events] == [0, 0]
+
+
+def test_bounded_tutoring_graph_repairs_once_then_falls_back(tmp_path):
+    generator = InvalidCitationGenerator()
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        generator=generator,
+        tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+    )
+    conversation = _create_conversation(client, fixture)
+
+    response = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain cache coherence.", "request_id": "repair-once"},
+    )
+
+    assert response.status_code == 200
+    assert generator.calls == 2
+    assert response.json()["tutor_message"]["action"] == "safe-graph-failure"
+    assert response.json()["citations"] == []
+    graph_event = next(
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "tutoring-graph-completed"
+    )
+    assert graph_event.details["repair_count"] == 1
+    assert graph_event.details["failure_reason"] == (
+        "citation-not-in-presented-evidence"
+    )
 
 
 def _create_conversation(client: TestClient, fixture) -> dict:
@@ -362,6 +476,46 @@ async def test_concurrent_duplicate_request_converges_on_one_persisted_turn(tmp_
     assert first.tutor_message.id == second.tutor_message.id
     assert len(repository.list_messages(conversation.id)) == 2
     assert first.citations[0].title == "Synthetic cache notes"
+
+
+@pytest.mark.asyncio
+async def test_concurrent_t1_turns_fail_closed_on_learner_state_race(tmp_path):
+    generator = BarrierGenerator()
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        generator=generator,
+        tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+    )
+    service = client.app.state.student_service
+    conversation = service.create_conversation(
+        fixture.student_a_id, fixture.course_a_id
+    )
+
+    results = await asyncio.gather(
+        service.submit_message(
+            fixture.student_a_id,
+            conversation.id,
+            content="Explain cache coherence.",
+            client_request_id="parallel-one",
+        ),
+        service.submit_message(
+            fixture.student_a_id,
+            conversation.id,
+            content="What does cache coherence do?",
+            client_request_id="parallel-two",
+        ),
+        return_exceptions=True,
+    )
+
+    completed = [result for result in results if not isinstance(result, Exception)]
+    conflicts = [result for result in results if isinstance(result, Exception)]
+    assert len(completed) == len(conflicts) == 1
+    assert isinstance(conflicts[0], StudentWorkflowError)
+    assert conflicts[0].code == "learner_state_conflict"
+    state = repository.get_learner_state(conversation.id)
+    assert state is not None and state.revision == 1
+    assert len(repository.list_messages(conversation.id)) == 2
 
 
 def test_whitespace_only_message_is_rejected_as_invalid_input(tmp_path):
@@ -573,4 +727,53 @@ def test_conversation_survives_repository_and_application_restart(tmp_path):
     assert reloaded.status_code == 200
     assert len(reloaded.json()["messages"]) == 2
     assert reloaded.json()["messages"][1]["action"] == "answer"
+    second_repository.close()
+
+
+def test_t1_learner_state_survives_repository_and_application_restart(tmp_path):
+    database = tmp_path / "t1-restart.sqlite3"
+    settings = AppSettings(
+        student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+    )
+    first_repository = SQLiteStudentRepository(database)
+    fixture = seed_synthetic_student_workflow(first_repository)
+    first_app = create_app(
+        student_repository=first_repository,
+        student_embedder=KeywordEmbedder(),
+        student_evidence_gate=AnyHitEvidenceGate(),
+        settings=settings,
+    )
+    with TestClient(first_app) as first_client:
+        conversation = _create_conversation(first_client, fixture)
+        first = first_client.post(
+            f"/api/student/conversations/{conversation['id']}/messages",
+            headers=_headers(fixture.student_a_id),
+            json={"content": "What does cache coherence do?", "request_id": "one"},
+        )
+        assert first.status_code == 200
+        assert first.json()["learner_state_revision"] == 1
+    first_repository.close()
+
+    second_repository = SQLiteStudentRepository(database)
+    second_app = create_app(
+        student_repository=second_repository,
+        student_embedder=KeywordEmbedder(),
+        student_evidence_gate=AnyHitEvidenceGate(),
+        settings=settings,
+    )
+    with TestClient(second_app) as second_client:
+        second = second_client.post(
+            f"/api/student/conversations/{conversation['id']}/messages",
+            headers=_headers(fixture.student_a_id),
+            json={
+                "content": "I am confused why cache coherence matters.",
+                "request_id": "two",
+            },
+        )
+
+    assert second.status_code == 200
+    assert second.json()["tutoring_intent"] == "give_hint"
+    assert second.json()["learner_state_revision"] == 2
+    state = second_repository.get_learner_state(conversation["id"])
+    assert state is not None and state.turn_count == 2
     second_repository.close()

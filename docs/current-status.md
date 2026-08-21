@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 477 executable or execution-affecting
+the current branch extends it to all 481 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -118,7 +118,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections pass the current 754-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 477-file audit. Evaluation
+artifacts are also fully dispositioned in the current 481-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -134,12 +134,16 @@ that release.
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the
 student-facing architecture decision on 2026-08-21. The existing student
-workflow is now named as the T0 grounded control. The missing core product
-method is T1: a bounded learner-state and pedagogical-intent graph that chooses
-how to diagnose, scaffold, explain, hint, quiz, refuse, or abstain and then
-adapts on the next student turn. T2 applies the professor-approved policy to the
-same graph. This decision makes no runtime or evaluation claim and does not
-resolve the professor's pending 10,000-case dataset-method guidance.
+workflow is now named as the T0 grounded control. The build-only T1 successor
+now adds a typed learner-state contract, deterministic pedagogical-intent
+selection, a fixed LangGraph path, one-repair maximum, deterministic fallback,
+atomic SQLite state revisions, race rejection, restart recovery, and an
+explicit local demo/test mode. Its ten-trajectory instrument is network-free;
+provider, paid, held-out, and automatic-promotion execution remain
+unauthorized. Staging rejects T1 until a finite multi-turn confirmation and
+release-profile decision pass. T2 applies the professor-approved policy to the
+same graph and remains pending professor-profile guidance. This checkpoint does
+not resolve the professor's pending 10,000-case dataset-method guidance.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -214,8 +218,9 @@ earlier foundation into `main` at `adf39af`. PR
 deterministic factual-QA successor and repository-correctness corrections at
 `4657219`. PR
 [#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
-requalification. V12 remains a separate corrected build-only release checkpoint
-and does not promote the still-pending product or public deployment claim.
+requalification. V12 remains preserved as a historical corrected build-only
+checkpoint. The issue #107 T1 source change supersedes its current-tree match
+without promoting the still-pending product or public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
@@ -232,18 +237,18 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | Keep T0 as baseline; T1/T2 pending | Professor and student conversation-first workspaces; responsive synthetic flows; accepted bounded tutoring-graph decision | Implement and confirm learner-state, pedagogical-intent, bounded-repair, and course-improvement loops; then obtain human workflow/usability evidence |
+| Product UX and autonomous tutoring | Keep T0 as release baseline; T1 build-only | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free contract | Run the finite T0/T1 development and one frozen confirmation method; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, rebuild the same source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The current release blockers are the unimplemented T1 autonomous
+release-ready. The current release blockers are an unconfirmed T1 autonomous
 tutoring graph, a selected evidence-sufficiency method, professor-method
 guidance, separately authorized factual-QA confirmation, public host/domain
 selection, target-host operations evidence, professor-fidelity calibration,
@@ -253,7 +258,7 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / accepted design | Implement the network-free T1 graph contract, preserve T0 as rollback, and freeze one T0/T1 multi-turn confirmation method |
+| 3 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / build-only contract implemented | Preserve T0 as rollback, complete the network-free ten-trajectory contract, and freeze one T0/T1 multi-turn confirmation method before staging selection |
 | 4 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
 | 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
@@ -426,7 +431,7 @@ revision. Its truth content hash is
 `1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
 That merged provider-free checkpoint passed 713 Python and 46 frontend tests
 with a 465/465 complete audit. The current V12 checkpoint passes 754 Python and
-46 frontend tests with a 477/477 complete audit. Pilot 003 is reviewed but not
+46 frontend tests with a 481/481 complete audit. Pilot 003 is reviewed but not
 frozen or allowlisted. The separate Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
 schema, and an empty 8-12-case calibration template. Fidelity judging and held-

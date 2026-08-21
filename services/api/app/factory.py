@@ -4,7 +4,12 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from services.api.app.config import AppSettings, GeneratorMode, RuntimeMode
+from services.api.app.config import (
+    AppSettings,
+    GeneratorMode,
+    RuntimeMode,
+    StudentTutoringMode,
+)
 from services.api.app.middleware import (
     OriginGuardMiddleware,
     RateLimitMiddleware,
@@ -28,6 +33,7 @@ from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, LiteLlmClient
 from src.digital_twin.generation import (
+    BoundedPedagogicalPromptBuilder,
     LiveGroundedGenerator,
     StrictEvidenceGroundedPromptBuilder,
 )
@@ -152,6 +158,7 @@ def create_app(
         embedder=student_embedder,
         generator=student_generator or configured_generator,
         evidence_gate=student_evidence_gate,
+        tutoring_mode=runtime_settings.student_tutoring_mode.value,
     )
     app.state.publication_service = ReleaseLifecycleService(
         app.state.student_repository,
@@ -249,10 +256,16 @@ def _configured_generator(
         max_calls=settings.provider_max_calls_per_process,
         max_cost_usd=settings.provider_cost_cap_usd,
     )
+    prompt_builder = (
+        BoundedPedagogicalPromptBuilder()
+        if settings.student_tutoring_mode
+        == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+        else StrictEvidenceGroundedPromptBuilder()
+    )
     return (
         LiveGroundedGenerator(
             client,
-            prompt_builder=StrictEvidenceGroundedPromptBuilder(),
+            prompt_builder=prompt_builder,
         ),
         client,
     )

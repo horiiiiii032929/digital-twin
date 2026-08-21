@@ -627,7 +627,8 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
         },
         "tree_binding_count": 14,
         "file_binding_count": 26,
-        "require_current_match": True,
+        "require_current_match": False,
+        "superseded_by": "autonomous-tutoring-graph-contract-v1",
         "external_gate_ids": {
             "evidence-sufficiency-selection-and-live-publication",
             "public-dns-and-certificate",
@@ -1062,6 +1063,8 @@ def validate_deployable_freeze(
         result["container_build_status"] = build["status"]
         result["image_build_claimed"] = build["image_build_claimed"]
         result["release_claim_authorized"] = False
+        if not spec["require_current_match"] and spec.get("superseded_by"):
+            result["superseded_by"] = spec["superseded_by"]
     return result
 
 
