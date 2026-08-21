@@ -9,7 +9,7 @@ boundaries and must remain understandable, recoverable, and safe for students.
 
 ## Product direction
 
-Deliver a deployed, invite-only Course Digital Twin for multiple professors
+Release a deployed, invite-only Course Digital Twin for multiple professors
 and courses. Professors govern approved text and multimodal sources, teaching
 behaviour, tutoring policy, evaluation, publication, withdrawal, and rollback.
 Authorized students receive persistent, course-isolated tutoring with
@@ -22,6 +22,8 @@ and evidence from realistic workflows and workloads.
 
 The authoritative prospective scope is the
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
+The active delivery order and release/no-release gates are defined in the
+[Course Digital Twin release plan](release-plan.md).
 Historical experiment records and the technical evidence freeze remain
 authoritative for the results they document.
 
@@ -61,10 +63,13 @@ Text retrieval retains the experimentally selected M2 hybrid profile with
 BM25 rollback. The bounded synthetic publication/student foundation passes its
 registered 19 checks. These are useful baselines, not production evidence.
 
-Issue #85 corrected and audited the multimodal evaluator. Issue #86 now provides
+Issue #85 corrected and audited the multimodal evaluator. Issue #86 provides
 the prospective region-aware ingestion and citation foundation, with a
-registered Refine decision and no selected multimodal profile. The deployment, large-benchmark,
-fidelity, operations, end-to-end, and pilot issues are explicitly downstream.
+registered Refine decision and no selected multimodal profile. Draft PR #103
+contains the deterministic 10,000-package factual-QA successor and an
+unauthorized simulated pilot. The active phase is release integration: close
+the factual-quality, professor-fidelity, target-host, operations, and deployed
+journey gates against one immutable candidate.
 
 ## Claim boundary
 

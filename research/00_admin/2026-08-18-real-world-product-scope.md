@@ -4,6 +4,8 @@ Date: 2026-08-18
 
 Status: authoritative for prospective product delivery
 
+Operational delivery order: [Course Digital Twin release plan](../../docs/release-plan.md)
+
 Supersedes the delivery constraints in
 [`2026-07-27-frontier-digital-twin-scope.md`](2026-07-27-frontier-digital-twin-scope.md)
 for future work. Historical experiment plans, results, claims, profiles, and
@@ -25,6 +27,11 @@ This is still an evaluation-first project. Deployment does not convert an
 experimental model or component into a production selection. Every replaceable
 model, parser, retriever, prompt, policy, judge, and architecture boundary keeps
 an explicit control, versioned evidence, hard gates, and rollback.
+
+The operational target is now expressed as release stages: a hosted R1 release
+candidate, an approval-gated R2 invite-only pilot, and an R3 final project
+release. These stages clarify delivery order without narrowing this product
+scope or rewriting existing evidence.
 
 ## Product-level definition of done
 

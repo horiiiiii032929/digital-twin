@@ -1,8 +1,9 @@
-# Digital Twin Product Delivery
+# Course Digital Twin Release
 
 Project board: https://github.com/users/horiiiiii032929/projects/1
 
-The board implements the authoritative
+The board executes the
+[release plan](release-plan.md) within the authoritative
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
 Historical closed issues preserve the research and prototype record and are
 archived from the live Project view; the nine visible cards now track only the
@@ -10,8 +11,9 @@ open product, evaluation, and delivery work.
 
 ## Planning fields
 
-- **Status:** Todo, In Progress, Done. Keep only one unblocked execution item
-  in progress unless a documented parallel track has independent evidence.
+- **Status:** Todo, In Progress, Done. Release goal #8 remains `In Progress` as
+  the parent. Keep only one unblocked execution package in progress per
+  independent track.
 - **Decision:** Pending, Keep, Refine, Go Deeper, Drop.
 - **Work Type:** Feature, Research, Design, Prototype, Documentation,
   Evaluation, Bug.
@@ -28,7 +30,11 @@ Priority labels provide the critical path: `priority:p0` is work required next,
 `priority:p1` is required for the release candidate, and `priority:p2` follows
 the release-critical path.
 
-## Current product gates
+## Release stages and product gates
+
+The release stages are R0 local baseline, R1 hosted release candidate, R2
+invite-only pilot, and R3 final project release. Product gates P0-P3 supply the
+evidence needed to promote between those stages.
 
 | Gate | Milestone | Purpose |
 | --- | --- | --- |
@@ -43,10 +49,9 @@ professor-communication track.
 
 ## Critical path
 
-1. #87 — attempt 002 passed all machine gates after the failed method was
-   revised; complete the preserved six-case audit, then either refine again or
-   freeze a separate scale-stage dataset plan.
-2. #88 — active but externally blocked on host/domain selection; merged PR #93
+1. #87 — draft PR #103 contains the provider-free deterministic successor and
+   unauthorized pilot 003. Interpret professor guidance before any paid run.
+2. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
 3. #24 — calibrate Professor Digital Twin fidelity against independent expert
@@ -65,7 +70,7 @@ Attempt 003
 passed all quality/integration gates but failed the frozen relative p95 gate, so
 no multimodal profile is selected and the text profile remains the fallback.
 
-GitHub parent/sub-issue and blocked-by links encode this order under product
+GitHub parent/sub-issue and blocked-by links encode this order under release
 goal #8. Issue #13 and communication ledger #44 remain parallel academic
 delivery work and do not substitute for product gates.
 

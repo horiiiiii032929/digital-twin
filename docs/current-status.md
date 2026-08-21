@@ -124,9 +124,12 @@ the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
 ## Current outcome
 
-The project has moved from an experimental local-demo goal to a deployed,
-invite-only real-world Course Digital Twin goal. The new prospective baseline is
-the [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md).
+The active goal is to release the system, not to maximize any individual
+benchmark. The [release plan](release-plan.md) defines a hosted R1 release
+candidate, an approval-gated R2 invite-only pilot, and an R3 final project
+release. The [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
+continues to define the product; evaluation tracks are evidence gates toward
+that release.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -186,7 +189,7 @@ PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 foundation into `main` at `adf39af`; this accepts the local/container-qualified
 implementation without promoting the still-pending public deployment claim.
 
-GitHub Project 1 is reorganized around product goal
+GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
 gates:
 
@@ -209,17 +212,23 @@ continues to hold report, presentation, and professor-communication work.
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
 | Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
-## Immediate critical path
+## Release readiness and critical path
+
+The repository and local product baseline are healthy, but the system is not
+release-ready. The current release blockers are professor-method guidance,
+separately authorized factual-QA confirmation, public host/domain selection,
+target-host operations evidence, professor-fidelity calibration, and one frozen
+end-to-end candidate decision.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Keep / no prospective execution authorized | The global freeze remains active with only the completed historical oracle pilot allowlisted; every scale stage is closed |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
-| 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
-| 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
-| 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
-| 6 | [#25 Deployed end-to-end validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked by #24 and #88 | One immutable staging release candidate passes or receives an explicit Refine/Drop decision |
-| 7 | [#10 Real-workflow pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / blocked by #9 and #25 | Approval-gated professor/student workflow evidence; usability remains separate from learning outcomes |
+| 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
+| 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
+| 3 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
+| 4 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / externally blocked | Select a host/domain, then pass trusted TLS, target-host restore, and public walkthrough |
+| 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
+| 6 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
+| 7 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
@@ -417,9 +426,10 @@ When status statements conflict, use:
 1. immutable run records and registered corrections for historical results;
 2. versioned component/release profiles and the technical evidence freeze;
 3. the prospective real-world product scope;
-4. this dated operational status;
-5. the live GitHub Project fields and dependencies;
-6. component guides and historical plans.
+4. the active release plan;
+5. this dated operational status;
+6. the live GitHub Project fields and dependencies;
+7. component guides and historical plans.
 
 Never edit an old result to make it appear successful. Add a correction or a
 new prospective run and retain the original evidence.
