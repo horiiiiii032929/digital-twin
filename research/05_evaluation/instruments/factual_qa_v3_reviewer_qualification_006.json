@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-reviewer-qualification-006",
+  "status": "frozen-pending-execution",
+  "supersedes_invalid_run": "factual-qa-v3-scale-rehearsal-005",
+  "issue": 87,
+  "decision_question": "Can the strict independent reviewer distinguish 24 deterministic clean/defect pairs while preserving complete accounting and checkpoints when an individual response is malformed?",
+  "model_leaderboard": false,
+  "method_version": "factual-qa-v3-strict-reviewer-paired-qualification-v1",
+  "fixture": {
+    "generator": "deterministic-synthetic-review-fixtures-v1",
+    "pair_count": 24,
+    "clean_case_count": 24,
+    "mutated_case_count": 24,
+    "mutation_types": {
+      "missing-citation": 4,
+      "truncated-citation": 4,
+      "paraphrased-citation": 4,
+      "extra-supported-claim": 4,
+      "invalid-claim-binding": 4,
+      "invalid-source-binding": 4
+    },
+    "previous_provider_inputs_reused": false,
+    "data_boundary": "synthetic-public",
+    "private_course_text": false,
+    "student_data": false
+  },
+  "model_role": {
+    "provider": "openrouter",
+    "litellm_model": "openrouter/mistralai/mistral-small-2603",
+    "provider_model": "mistralai/mistral-small-2603",
+    "credential_environment_variable": "OPENROUTER_API_KEY",
+    "temperature": 0,
+    "max_output_tokens": 650,
+    "timeout_seconds": 30,
+    "pricing_usd_per_million_input_tokens": 0.15,
+    "pricing_usd_per_million_output_tokens": 0.6,
+    "provider_routing": {
+      "order": ["Mistral"],
+      "allow_fallbacks": false,
+      "require_parameters": true,
+      "data_collection": "allow",
+      "zdr": false
+    }
+  },
+  "execution": {
+    "provider_health_call_limit": 1,
+    "clean_review_call_limit": 24,
+    "mutation_review_call_limit": 24,
+    "total_provider_call_limit": 49,
+    "batch_size": 8,
+    "retry_attempts": 0,
+    "cost_stop_usd": 0.5,
+    "clean_worktree_required": true,
+    "checkpoint_after_each_batch": true,
+    "output_overwrite_allowed": false
+  },
+  "quality_gates": {
+    "provider_health_pass_required": true,
+    "review_completion_rate_min": 1.0,
+    "clean_specificity_min": 0.9,
+    "mutation_sensitivity_min": 0.9,
+    "per_mutation_type_sensitivity_min": 0.75,
+    "malformed_or_provider_error_count_max": 0,
+    "reviewer_p95_latency_ms_max": 8000,
+    "model_identity_stable_required": true,
+    "external_cost_usd_max": 0.5,
+    "private_data_calls_max": 0
+  },
+  "failure_policy": {
+    "individual_malformed_response": "record failure metadata and continue without retry",
+    "provider_error": "record attempted call and continue without retry",
+    "canary_failure": "write invalid checkpoint and make zero review calls",
+    "checkpoint_rule": "persist sanitized call metadata and completed verdicts after every eight-call batch"
+  },
+  "decision_rule": {
+    "all_gates_pass": "keep-reviewer-and-design-10000-case-pipeline",
+    "any_gate_fails": "refine-reviewer-or-use-deterministic-only-acceptance",
+    "scale_to_10000_authorized_by_this_run": false
+  },
+  "excluded_models": ["gemma", "claude", "qwen3:4b", "qwen3.5:4b"]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "run_id": "factual-qa-v3-scale-rehearsal-004",
+  "execution_revision": "6a754103221cafd79c2f1d16e5a9c117add0f757",
+  "instrument_id": "factual-qa-v3-scale-rehearsal-004",
+  "instrument_sha256": "7a446f812427c7620a9e163f0455370a9a9b8a0b94fee54060fde7b7402b78df",
+  "raw_output_sha256": "c2e147dee995187f29f17681e105c290da249cdf3a7f94b99da92174baed60d4",
+  "data_boundary": "synthetic-public",
+  "case_count": 120,
+  "answerable_cases": 96,
+  "boundary_cases": 24,
+  "retained_cases": 114,
+  "quarantined_cases": 6,
+  "machine_gates_passed": false,
+  "scale_authorized": false,
+  "decision": "refine-reviewer-method",
+  "failed_gates": [
+    "reviewer_mutation_sensitivity"
+  ],
+  "human_audit": {
+    "status": "complete",
+    "review_id": "factual-qa-v3-scale-rehearsal-004-human-audit-001",
+    "accepted_controls": 6,
+    "confirmed_quarantine_rejections": 6,
+    "model_false_accepts_on_quarantined_cases": 6
+  },
+  "metrics": {
+    "pdf_ingestion_rate": 1.0,
+    "source_integrity_rate": 1.0,
+    "author_completion_rate": 1.0,
+    "deterministic_provenance_rate": 0.95,
+    "boundary_action_rate": 1.0,
+    "all_evidence_at_3": 1.0,
+    "evidence_recall_at_5": 1.0,
+    "multimodal_all_evidence_at_3": 1.0,
+    "independent_review_completion_rate": 1.0,
+    "deterministic_independent_agreement_rate": 0.95,
+    "reviewer_mutation_sensitivity": 0.5,
+    "reviewer_paired_clean_specificity": 1.0,
+    "unresolved_disagreement_count": 6,
+    "cross_course_leakage_count": 0,
+    "normalized_exact_duplicate_question_rate": 0.0,
+    "private_data_calls": 0,
+    "reviewer_p95_latency_ms": 2445.119916999829,
+    "review_stage_elapsed_seconds": 38.2236387909943,
+    "end_to_end_elapsed_seconds": 82.29806966600881,
+    "external_cost_usd": 0.046029385,
+    "total_provider_calls": 268,
+    "input_tokens": 200228,
+    "output_tokens": 32278
+  },
+  "provider_calls": {
+    "provider_health": 2,
+    "deepseek_v4_flash_author": 120,
+    "mistral_small_4_case_review": 120,
+    "mistral_small_4_mutation_review": 20,
+    "deepseek_v4_pro_dispute": 6
+  },
+  "provider_revisions": {
+    "deepseek-v4-flash": "a26a7955944dc5c60445bff77fac9c8e",
+    "mistralai/mistral-small-2603": null,
+    "deepseek-v4-pro": "a307abda487cd1b463329ccb945ce396"
+  },
+  "mutation_results": {
+    "invalid_claim_binding": "5/5 rejected",
+    "invalid_source_binding": "5/5 rejected",
+    "missing_citation": "0/5 rejected",
+    "truncated_citation": "0/5 rejected"
+  },
+  "quarantined_case_ids": [
+    "fqa-r005",
+    "fqa-r006",
+    "fqa-r021",
+    "fqa-r022",
+    "fqa-r031",
+    "fqa-r072"
+  ],
+  "limitations": [
+    "The independent reviewer failed every missing- and truncated-citation mutation despite rejecting all invalid claim and source identifiers.",
+    "The dispute reviewer also accepted all six deterministic provenance failures, so model agreement cannot clear exact source and citation gates.",
+    "The multimodal cases use controlled accessibility descriptions and do not establish raw image-only understanding.",
+    "The corpus is synthetic and does not establish quality on eligible Academia Vault material."
+  ]
+}

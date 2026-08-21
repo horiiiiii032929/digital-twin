@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-10000-pipeline-001",
+  "status": "draft-reviewed-provider-execution-unauthorized",
+  "issue": 87,
+  "decision_question": "Can a source-linked generation and review method create 10,000 trustworthy dummy factual-QA cases while exposing quality, abstention, isolation, latency, and cost failures?",
+  "model_leaderboard": false,
+  "ground_truth_policy": "Deterministic source claims and exact source lineage are authoritative; no LLM vote or agreement becomes ground truth.",
+  "relationship_to_other_evaluations": {
+    "verified_100_case_retrieval_benchmark": "separate",
+    "real_source_pilot": "later separate track",
+    "professor_digital_twin_fidelity": "later separate track"
+  },
+  "dummy_source_universe": {
+    "generator": "deterministic-synthetic-source-truth-v1",
+    "course_count": 20,
+    "source_units_per_course": 50,
+    "source_unit_count": 1000,
+    "claims_per_source_unit": 8,
+    "claim_count": 8000,
+    "source_modalities_per_course": {
+      "text": 25,
+      "code": 6,
+      "table": 6,
+      "diagram": 4,
+      "equation": 3,
+      "screenshot": 3,
+      "scanned": 3
+    },
+    "private_or_real_course_content": false
+  },
+  "case_design": {
+    "case_count": 10000,
+    "answerable_count": 8000,
+    "boundary_count": 2000,
+    "slice_counts": {
+      "direct-text": 2000,
+      "paraphrase-text": 1500,
+      "multi-source": 1500,
+      "code": 800,
+      "table": 800,
+      "diagram": 500,
+      "equation": 400,
+      "visual-other": 500,
+      "no-evidence": 500,
+      "ambiguous": 500,
+      "cross-course-confusion": 500,
+      "academic-integrity": 500
+    },
+    "course_balance": "exactly 500 cases per dummy course",
+    "required_lineage": [
+      "blueprint_id",
+      "course_id",
+      "target_claim_ids",
+      "evidence_unit_ids",
+      "distractor_unit_ids",
+      "expected_action"
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "pilot-100",
+      "case_count": 100,
+      "maximum_provider_calls": 246,
+      "promotion": "separate authorization and all hard gates required"
+    },
+    {
+      "stage_id": "checkpoint-1000",
+      "additional_case_count": 900,
+      "cumulative_case_count": 1000,
+      "maximum_provider_calls": 1912,
+      "promotion": "separate authorization and all hard gates required"
+    },
+    {
+      "stage_id": "scale-10000",
+      "additional_case_count": 9000,
+      "cumulative_case_count": 10000,
+      "maximum_provider_calls": 19048,
+      "promotion": "separate authorization and all hard gates required"
+    }
+  ],
+  "prospective_model_roles": {
+    "author": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "role": "word questions and answers from fixed blueprints and source truth"
+    },
+    "independent_reviewer": {
+      "provider": "openrouter",
+      "model": "mistralai/mistral-small-2603",
+      "qualification": "factual-qa-v3-reviewer-qualification-006",
+      "role": "advisory source, answer, citation, and boundary review"
+    },
+    "bounded_dispute_reviewer": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro",
+      "role": "review only unresolved deterministic/reviewer disagreements",
+      "full_scale_call_limit": 1000
+    },
+    "excluded_models": ["gemma", "claude", "qwen3:4b", "qwen3.5:4b"]
+  },
+  "deterministic_acceptance": {
+    "unique_primary_keys_required": true,
+    "source_and_claim_referential_integrity_required": true,
+    "exact_citation_substring_required": true,
+    "all_target_claims_required": true,
+    "extra_claims_allowed": false,
+    "multi_source_requires_two_distinct_sources": true,
+    "private_data_calls_max": 0,
+    "raw_vault_files_allowed": false
+  },
+  "quality_gates": {
+    "provider_response_completion_rate_min": 0.995,
+    "deterministic_acceptance_rate_min": 0.95,
+    "reviewer_agreement_rate_min": 0.9,
+    "citation_validity_rate_min": 0.99,
+    "target_claim_completeness_rate_min": 0.99,
+    "boundary_action_accuracy_min": 0.95,
+    "exact_duplicate_question_rate_max": 0.001,
+    "unresolved_dispute_rate_max": 0.01,
+    "malformed_response_rate_max": 0.005,
+    "mutation_sensitivity_min": 0.9,
+    "cost_and_latency_accounting_complete_required": true,
+    "human_priority_packet_max": 12
+  },
+  "execution_safety": {
+    "provider_execution_authorized": false,
+    "dataset_write_authorized": false,
+    "automatic_stage_promotion": false,
+    "retry_attempts": 0,
+    "checkpoint_every_calls": 100,
+    "malformed_response_policy": "persist sanitized call metadata and continue or fail the stage according to the frozen gate; never discard completed accounting",
+    "provider_canary_call_limit": 6,
+    "full_scale_author_call_limit": 10000,
+    "full_scale_review_call_limit": 10000,
+    "full_scale_mutation_review_call_limit": 200,
+    "full_scale_dispute_call_limit": 1000,
+    "full_scale_maximum_calls": 21206,
+    "full_scale_cost_stop_usd": 20.0,
+    "cost_cap_requires_fresh_price_verification_before_authorization": true
+  },
+  "decision_rule": {
+    "all_stage_gates_pass": "keep method and request authorization for the next checkpoint",
+    "any_hard_gate_fails": "refine the dataset or Digital Twin pipeline method and repeat the bounded stage",
+    "model_ranking_from_failure": false,
+    "authorize_10000_by_this_instrument": false
+  }
+}

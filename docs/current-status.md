@@ -1,20 +1,69 @@
 # Current project status
 
-Status date: 2026-08-20
+Status date: 2026-08-21
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The repository-wide correctness audit is complete on `main` at merge revision
+The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-all 426 executable or execution-affecting files are hash-bound and audited,
+the current branch extends it to all 449 executable or execution-affecting
+files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active until the next evaluation action is separately authorized. It covers 50
-protected entrypoints and passed with no model/provider calls or private/held-out
-reads.
+active for all general evaluation actions. It covers 55 protected entrypoints
+and retains an exact bounded authorization only for the completed
+`factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
+defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
+authorization was revoked. The corrected
+`factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
+review, but its one-time execution is invalid: all 120 author calls completed
+before the first-party Mistral ZDR route returned an upstream authentication
+failure. Its authorization is revoked and the invalid artifact is preserved.
+Unexecuted successor `factual-qa-v3-scale-rehearsal-003` was superseded after the
+researcher allowed provider data collection for this synthetic evaluation
+phase. Reviewed `factual-qa-v3-scale-rehearsal-004` preserves the two pre-bulk
+provider canaries, explicitly allows collection and retention only for committed
+synthetic-public fixtures. Its one-time execution completed at clean revision
+`6a75410`: 114/120 cases passed deterministic provenance and retrieval recovered
+all required evidence in the top three for 96/96 answerable cases, but the
+independent reviewer detected only 10/20 controlled mutations. It accepted every
+missing- and truncated-citation defect, failing the 90% sensitivity gate. The
+completed 12-case manual audit confirmed all six deterministic quarantines and
+accepted six stratified controls. The decision is **Refine**; authorization is
+revoked and 10,000-case scale remains closed. No path permits private or held-out
+data, and the wider freeze remains active.
+
+Successor `factual-qa-v3-scale-rehearsal-005` made exact target-claim, full
+evidence-quote, verbatim-source, and no-extra-claim checks explicit. Its paid run
+is invalid: both canaries and the pre-dispute stages completed, but one malformed
+DeepSeek dispute response aborted the result before completed metrics and exact
+accounting were persisted. Authorization is revoked. The correction is a small,
+durably checkpointed reviewer qualification rather than another 120-case rerun;
+10,000-case execution remains unauthorized.
+
+Completed `factual-qa-v3-reviewer-qualification-006` replaced another full
+rehearsal with 24 new deterministic clean/defect pairs. Mistral accepted all 24
+clean controls and rejected all 24 defects, including 4/4 in every mutation
+class. All 49 calls completed in 16.04 seconds for USD 0.012175 with zero
+malformed/provider errors. The strict reviewer is kept as advisory quality
+control for the 10,000-case design; deterministic lineage remains authoritative.
+The one-time 006 authorization is revoked. The subsequent 24-pair hosted
+Qwen3.7 Plus qualification 007 failed six gates: only 41/48 reviews were
+contract-valid, clean specificity was 75.0%, mutation sensitivity was 83.3%,
+reviewer p95 latency was 42.46 seconds, and measured cost was USD 0.128239.
+The provider returned more output tokens than the requested cap, exposing that
+the prospective reservation did not enforce the USD 0.10 limit. Qwen is not
+selected, its one-time authorization is revoked, and qualified Mistral Small 4
+remains the advisory reviewer. Cost enforcement was hardened before the two
+paid 100-case attempts. Corrected attempt 002 completed safely as **Refine**:
+93/100 cases passed deterministic validation, all 85 answerable cases had valid
+citations, reviewer agreement was 97/100, and all 20 mutations were rejected.
+Boundary handling, one multi-source claim binding, duplicate questions, and two
+malformed outcomes still failed their gates. Its authorization is revoked; the
+1,000- and 10,000-case stages remain unauthorized.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -27,7 +76,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 621 Python tests and 46 frontend tests, frontend lint, and the
+check passes 682 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -47,11 +96,11 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections passed the final 621-test Python suite.
+connections. These corrections pass the current 682-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the 426-file audit. Evaluation
-execution remains unauthorized because the freeze is intentionally still
-active pending the next explicit work decision.
+artifacts are also fully dispositioned in the current 449-file audit. Evaluation
+execution remains frozen; only the completed historical oracle pilot remains in
+the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
 ## Current outcome
 
@@ -138,14 +187,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Refine / corrected governance | Conversion passed; corrected no-model triage retains 32 approved exact-hash authoritative sources, eight deterministic integrity/privacy exclusions, 2,027 duplicate/generated records, and 570 provisional content-level reviews; local boundary screening covered 570/570 and prioritized 35 without final labels | Finish repository correctness, priority boundary adjudication, calibrated semantic governance, response/citation/mutation contracts, and the audit packet before any bounded pilot |
+| Large factual QA | Refine after paid 100-case attempt 002 | Qualification 006 selected Mistral Small 4; Qwen qualification 007 failed; attempt 002 reached 93/100 deterministic validity, 85/85 citation validity, 97/100 reviewer agreement, and 20/20 mutation rejection | Move authoritative actions, claims, answers, and citations into deterministic truth packages; validate the provider-free successor before any new paid checkpoint |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Merged / Keep corrections | PR #98 merged at `db2f5e9` with 426/426 files audited; keep execution frozen until the next action is explicitly authorized |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine / ready for next authorization | Apply corrected v2 source governance, complete content-safe source roles and deterministic product contracts, then authorize any semantic review separately |
+| 1 | Repository correctness freeze | Keep / no prospective execution authorized | The global freeze remains active with only the completed historical oracle pilot allowlisted; every scale stage is closed |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine | Build deterministic truth-package pipeline 002 and provider-unauthorized pilot 003; require professor-method guidance and separate paid authorization before execution |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -156,10 +205,11 @@ Issues #85 and #86 are complete and archived from the live Project view. PR #91 
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 preserves attempt
-002's passed machine gates and uncompleted audit as historical v2 evidence, but
-the active boundary is now the broader v3 no-model implementation over the
-eligible Academia Vault. This remains method validation, not a model benchmark.
+and the historical held-out split was not opened. Issue #87 preserves paid
+attempt 002 and its completed 12-case cross-review as historical evidence. The
+active correction moves canonical questions, answers, actions, claim IDs, and
+citations into deterministic source truth while keeping model generation and
+review advisory. This remains method validation, not a model benchmark.
 Issue #88 remains active but externally blocked; its implementation and local
 qualification are complete enough for a controlled host rehearsal, not for a
 real-user pilot.
@@ -191,9 +241,10 @@ course evidence.
 The active model policy now blocks every Gemma and Claude call and all retired
 local general-Qwen calls before provider I/O. Direct DeepSeek V4 Flash/Pro and
 the selected task-specific Qwen3 Embedding binding remain current for their
-recorded roles. `qwen3.5:9b-q4_K_M` and exact OpenRouter DeepSeek/Mistral routes
-are prospective only; they require new project-specific quality evidence. See
-[the current model policy](../research/00_admin/2026-08-19-current-model-policy-v2.md).
+recorded roles. Mistral Small 4 is retained as the qualified advisory reviewer.
+Hosted Qwen3.7 Plus failed bounded qualification 007 and is not selected; its
+one-time authorization is revoked and no local model is used. See
+[the current model policy](../research/00_admin/2026-08-21-current-model-policy-v3.md).
 
 ## Large factual-QA interpretation
 
@@ -220,8 +271,102 @@ method, but the preserved six-case audit is no longer the active product gate.
 Corrected V3 requires claim-level exact evidence, retrieval without injected gold
 passages, multimodal source lineage, deterministic mutation sensitivity, and a
 compact human-audit packet. It remains separate from the verified 100-case
-retrieval benchmark and Professor Digital Twin fidelity. No external model
-call, 30--50 case pilot, or scale toward 10,000 cases is authorized yet.
+retrieval benchmark and Professor Digital Twin fidelity.
+
+The separately authorized 40-case oracle pilot has now executed on four
+synthetic selectable-text PDFs. Product ingestion created 115 chunks without
+warnings. DeepSeek V4 Flash authored 40 cases, exact local Qwen 3.5 reviewed all
+40, and DeepSeek V4 Pro reviewed two disputes. Thirty-nine cases passed exact
+deterministic provenance; the one quarantined table case omitted the final words
+from its citation, which both LLM reviewers incorrectly accepted. Hybrid
+retrieval recovered all required evidence in the top three for 32/32 answerable
+cases. The six controlled visual cases used approved accessibility descriptions
+and do not establish raw image-only quality. The run passed its machine gates
+and the corrected eight-case human audit is complete: seven retained controls
+were accepted and the quarantined citation defect was confirmed as a rejection.
+Rehearsal 002 completed all 120 direct DeepSeek V4 Flash author calls in memory,
+then failed when the first-party OpenRouter Mistral Small 4 ZDR endpoint returned
+an upstream `401 Invalid API Key`. The OpenRouter account key remained valid and
+reported zero usage, so this is an endpoint-readiness and runner-order defect,
+not a missing credential. Exact reviewer attempted-call and external-cost
+accounting is incomplete; no generated outputs or quality metrics survive and
+002 is registered as invalid. Unexecuted 003 added one schema-valid canary
+through each provider before bulk authoring, then was superseded when the
+researcher explicitly allowed provider data collection for this evaluation
+phase. Successor 004 preserved those canaries and the exact source and model
+design while allowing provider collection and retention only for the committed
+synthetic-public fixtures. The run completed 268 provider calls for USD 0.046029
+and passed every gate except reviewer mutation sensitivity: Mistral rejected all
+invalid claim/source bindings but accepted all missing/truncated citations. The
+manual audit confirmed six quarantines and six controls. The method must be
+refined before real-source or larger execution, and scale toward 10,000 remains
+unauthorized.
+
+Rehearsal 005 implemented that refinement with 24 new paired defects across six
+mutation classes. Its one-time execution is invalid because a malformed DeepSeek
+dispute response discarded completed in-memory stages and left exact accounting
+incomplete. Its authorization is revoked. Focused reviewer qualification 006
+then passed all clean, defect, per-mutation, completion, latency, and cost gates.
+
+The provider-free `factual-qa-v3-10000-pipeline-001` design now fixes 20 dummy
+courses, 1,000 source units, 8,000 deterministic claims, and 10,000 blueprints:
+8,000 answerable cases plus 2,000 no-evidence, ambiguity, cross-course, and
+academic-integrity boundaries. The local builder passes exact grain, key,
+lineage, distribution, stage, determinism, and privacy checks with zero model
+calls. Dataset writing and every paid 100, 1,000, and 10,000 stage remain
+unauthorized pending separate frozen checkpoints.
+
+The shared `factual-qa-v3-scale-pilot-100` runner binds the first
+100 stratified blueprints and validates a maximum of 246 calls under a USD 3.00
+emergency stop. Its USD 0.323842 prospective reservation is informational;
+actual provider-reported tokens and cost are checkpointed on every call, and
+requested-versus-reported token-limit violations are counted explicitly.
+Network-free simulations exercised the 222-call no-dispute path and the
+246-call maximum-dispute path, including deterministic acceptance, 20 mutation
+probes, malformed/provider failure accounting, exact model identity, atomic
+checkpoints, safe resume, aggregate and slice gates, and a 12-case priority
+packet. The paid run completed as **Refine** at revision `0d60f86`: 226/226
+provider calls returned for USD 0.110512 with stable model identities, complete
+accounting, and zero token-limit violations. However, only 4/100 authored cases
+passed deterministic validity, 9 author responses were malformed, and all 100
+Mistral review responses violated the scale-run contract. Because only four
+valid cases were boundary cases, zero answerable cases were eligible for the
+20 planned mutation probes. The 12-case priority cross-review confirmed all 12
+deterministic quarantines. This exposes prompt/schema and mutation-eligibility
+defects in the method, not a valid scale-quality result. Authorization is
+revoked; the 1,000- and 10,000-case stages remain closed.
+
+Successor `factual-qa-v3-scale-pilot-100-002` corrects those three method
+defects without making provider calls. Authoring now uses the full shared JSON
+schema plus an exact citation-object contract; scale review imports the same
+strict schema, prompts, and validator used by qualification 006; and all 20
+mutation probes are built from deterministic canonical controls independent of
+author success. At clean revision `d5fe874`, the normal 222-call and maximum
+246-call network-free paths passed, and a total-author-malformation regression
+still constructed and reviewed all 20 mutations. The full repository gate
+passed with 682 Python and 46 frontend tests, and the audit is 449/449 complete.
+The paid attempt 002 completed as **Refine** at clean revision `1e2125b`. It
+improved deterministic validity from 4/100 to 93/100, restored 97% reviewer
+agreement, achieved 100% citation validity, and ran all 20 mutation probes with
+20/20 rejection. The valid run used 225 calls and USD 0.102517 with stable
+models, complete accounting, and zero token-limit violations. It still failed
+five gates: all five ambiguity cases violated the boundary contract, one
+multi-source claim/citation binding failed, one author and one review were
+malformed, and five exact duplicate questions remained. Codex cross-review
+confirmed seven quarantines and five retained controls; two Mistral false
+accepts were correctly rejected by deterministic checks and DeepSeek disputes.
+Attempt 002 authorization is revoked. The next method should deterministically
+assemble actions, claim IDs, and citations, quarantine null authors before model
+review, and enforce normalized question uniqueness. The 1,000- and 10,000-case
+stages remain unauthorized.
+
+[Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
+tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
+cases across text, code, multi-source, table, diagram, other multimodal, and
+boundary slices. It cannot execute until the large dummy-data checkpoint is
+decided and every
+selected Vault source has an explicit eligible exact-hash disposition. Raw Vault
+files remain local; only sanitized evidence may enter GitHub.
 
 ## Human and safety boundary
 

@@ -874,12 +874,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "execution-configuration",
-      "evidence": "Manual command/configuration review plus locked repository verification; canonical npm gate now requires zero pending or open audit findings.",
+      "evidence": "Manual command/configuration review plus locked repository verification; Qwen qualification and 100-case validation, simulation, preflight, and execution commands are explicit and separate; the 100-case paid command remains fail-closed; and the inventory gate requires zero pending or open audit findings.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "c0d6459d8fb6a1f6ee9dfb166f5f5cf9d9d0b475e3e05b3db0826aafb9dffacc"
+      "sha256": "e4730d4998aee81425d4d3715c296bc352537440953b8bd1ae56d3bfb77adf45"
     },
     {
       "audit_status": "audited",
@@ -1188,6 +1188,138 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "9462926b29d0dd1c305b03830dc51452dd7be8bd4418977c0fbad946b38161ad"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective manual method review confirmed a 40-case synthetic-public oracle design, exact current-model bindings, no leaderboard objective, explicit product-path scope, hard quality/cost gates, and an eight-case human audit before scale.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_oracle_pilot_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "1cbb0949cde9efca0fa2134b35321e3e3232b39fa947432b7ad740b0f4b1dff0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective real-source method review confirmed a separate 40-case stratified pilot, exact-hash source eligibility, explicit privacy exclusions, source-level citation and retrieval gates, multimodal and boundary slices, bounded provider retention and cost, a compact human audit, and no authority to upload the Vault or scale to 10,000 cases.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_real_source_pilot_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-real-source-design-review",
+      "sha256": "2e44f55f915835a650150597ab6c97016cbc0d17e39e4f658fb8a88738dde23b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "historical_guarded",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Preserved completed reviewer qualification 006. Its one-time run passed every frozen gate: 24/24 clean accepts, 24/24 defect rejects, 4/4 per mutation class, 49/49 responses, zero malformed/provider errors, USD 0.012175 cost, synthetic-only inputs, and no authority for 10,000-case execution. Authorization is revoked.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_006.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-completed-result-review",
+      "sha256": "ece01bfcf163b6e498a1273f1de14f14c557aa8308f1eeadf50024412773ae85"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective method, cost, and data-boundary review confirmed 24 new deterministic clean/defect pairs disjoint from 006, exact hosted Qwen3.7 Plus routing, 49 calls with no retries, a USD 0.10 hard stop, synthetic-only inputs, complete identity/error/latency/cost gates, Mistral Small 4 fallback, and no authority for the 100- or 10,000-case stages.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-qwen-qualification-review",
+      "sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Completed attempt-001 review preserves the exact executed 100-case bindings and records Refine with authorization revoked; the instrument retains its 246-call, zero-retry, USD 3 emergency, deterministic-authority, no-promotion, and no-1,000/10,000 boundaries.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_001.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-pilot-review",
+      "sha256": "6a6d92eb2e2397b4a3b43c84733a5ea83968457e6763a7a5ae08b5b8a7135e52"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Completed attempt-002 review preserves the valid Refine result and revoked authorization: 93/100 deterministic-valid, 100% citation validity, 97% reviewer agreement, 20/20 mutation rejection, 225 calls, USD 0.102517, and no authority for 1,000/10,000 stages.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_002.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-successor-contract-review",
+      "sha256": "39e5d7d069aaecb64df8111002dc863cb1deba50e4a2ef03788e03ee03135d10"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "historical_guarded",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Preserved unexecuted 001 instrument. A complete manual 120-blueprint review found source-grain, visual-diversity, boundary-context, mutation-sampling, citation-completeness, and disagreement-gating defects; its bounded execution authorization is revoked and corrected 002 supersedes it without erasing the unfavorable review.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "5ac33c047aae20caca2621cbf5830d37fbc110c429707bc0fc8df8071504a08e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual source and methodology review confirmed corrected 002 binds immutable base and source-design hashes, defines 120 cases over 48 anchored claims, requires genuine two-source evidence, adds disagreement/dispute and human-audit-capacity gates, preserves strict provider/cost boundaries, is frozen for one exact bounded rehearsal, and cannot authorize 10,000-case scale.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_002.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-manual-120-blueprint-review",
+      "sha256": "49996c91264c6413f167c3d1beb8f43931f0c72b12b247905751aa0a91d1ae38"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual source-grounding review verified 30 exact text-claim citation anchors against immutable evidence, 18 distinct facts against six synthetic visual fixtures, 18 explicit two-source cases, corrected course-aligned boundary labels, all-course cross-confusion coverage, 120 unique intents, and a 29/31/29/31 course distribution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_source_design_002.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-manual-source-review",
+      "sha256": "f56904349837a72cb054375f3bdc86082eb051041514a2330e24e2263ab7c90b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual correction review confirmed successor 003 preserves the exact reviewed 120-case source design, adds two paid pre-bulk provider canaries, caps total calls at 286 and cost at USD 3, records the synthetic-public-only request-level ZDR exception while denying data collection, prohibits private data and 10,000-case scale, and is frozen for one exact bounded rehearsal.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_003.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-invalid-attempt-correction-review",
+      "sha256": "961b2278a40adf4368b950cfa79fdf5c1b04b39f863f9f1ccaa9a6cd304647b7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Manual policy-scope review confirmed frozen successor 004 preserves the exact 120-case source and canary-gated execution design, explicitly allows provider collection and retention only for committed synthetic-public evaluation fixtures, excludes every private/product/course/instructor/student path, caps calls at 286 and cost at USD 3, prohibits 10,000-case scale, and still requires a clean preflight plus explicit paid-run approval.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_004.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-bounded-authorization-review",
+      "sha256": "7a446f812427c7620a9e163f0455370a9a9b8a0b94fee54060fde7b7402b78df"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "historical_guarded",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Preserved frozen 005 instrument after its one-time execution became invalid during dispute review. Both canaries and pre-dispute stages completed, one DeepSeek response contained malformed JSON, completed metrics and exact accounting were not persisted, authorization is revoked, and no 10,000-case scale is allowed.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_rehearsal_005.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-invalid-execution-review",
+      "sha256": "f5d068f8933eff4a29b000b0a3874f4f5bdcc72f8a12049348a90f74232c4e28"
     },
     {
       "audit_status": "audited",
@@ -2337,6 +2469,50 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow and data-boundary review plus Ruff, compilation, focused tests, direct preflight, exact model/digest checks, product PDF ingestion, selected hybrid retrieval, zero-retry call caps, exclusive output, fail-closed cost enforcement, and post-run audit priority correction.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_oracle_pilot.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "76eee8ebf01033b8aa1a743f5b9a3bbc379aa5e166014c3533d8396588eaa8e6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow review plus Ruff and focused tests confirmed the shared runner preserves the exact historical 006 fixtures and generates disjoint 007 fixtures; pins each no-fallback provider model; checkpoints every eight calls; records malformed/provider failures without aborting; preserves call, token, latency, and cost metadata; enforces the model-specific USD stop; blocks while unfrozen or dirty; and cannot authorize 100 or 10,000 cases.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_reviewer_qualification.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-focused-reviewer-runner-review",
+      "sha256": "310f0631474fc1ada5cd846b60bdfb15e492800fd1e8c0716743079d633eea78"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow review, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirm deterministic authority, exact shared reviewer qualification contract reuse, strict author citation objects, mutation controls independent of author success, safe resume, complete accounting, USD 3 stopping, exact identity, exclusive output, and fail-closed provider authorization.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-runner-review",
+      "sha256": "fce54a086f313e2597beef8680941db08f80bb463fc7561caf67c90d4d5d082d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "historical_guarded",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Preserved guarded 005 runner after an invalid one-time execution exposed incomplete failure accounting: a malformed DeepSeek dispute response aborted completed in-memory stages. Its bounded authorization is revoked; successor work must add durable checkpoints and counted malformed-review records before scale.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_scale_rehearsal.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
       "path": "scripts/run_generator_qualification.py",
@@ -2661,7 +2837,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "911d2dd88dc0bd94ca3069542fbbb8aa52985bb151be48d0c1b40640fc317540"
+      "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6"
     },
     {
       "audit_status": "audited",
@@ -2689,12 +2865,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual registry/AST review, direct-script execution regression, strengthened top-level guard analysis, name-based future-entrypoint detection, and focused validator tests.",
+      "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "41122237bb0137f4965adfa22112818bfda1863740348d3497ceb3f5624dc5a5"
+      "sha256": "3b83329ec3936e0b9cbf1f3c9033fabbea329fdd183b95ee8c215f9531052615"
     },
     {
       "audit_status": "audited",
@@ -3552,7 +3728,7 @@
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "8191204ab1df89df9da8b93b9292616fba17cacd2e11d953d4b7fc4174059df9"
+      "sha256": "ac490596050108c31cd581b5feb0fddb408823d8af09acdc71c59c1761c77d22"
     },
     {
       "audit_status": "audited",
@@ -3723,12 +3899,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus blocked-operation, unknown-operation, and explicit-status tests.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; attempts 001/002 and qualifications 006/007 are revoked; only the historical oracle remains allowlisted; no 1,000- or 10,000-case stage is authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "c7b1c6b3e29d74273b39d54f0f2d0e88a3c8b164b013c9dc8db9d597ece8ade0"
+      "sha256": "6afcceb158d032ec40004004d80bdea254aaf686c5e3792225fb44c39f64ebfa"
     },
     {
       "audit_status": "audited",
@@ -4009,12 +4185,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze policy tests passed for all registered operations and unknown-operation fail-closed behavior.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of rehearsals, completed qualifications 006/007, completed attempts 001/002, the 10,000-case pipeline, and unknown successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "dbb80efb0ddb3383e8f329685a4665273daef91222902bbbcbee4223ba47d9aa"
+      "sha256": "a54a2244cc4c705a4398792750b88071cc8228fd6c34cc01c1b5904f981d41cf"
     },
     {
       "audit_status": "audited",
@@ -4394,6 +4570,50 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
+      "evidence": "Focused tests validate the exact 40-case/current-model contract, cost-boundary drift rejection, retrieval evidence scoring without gold injection, machine-gate aggregation, deterministic eight-case selection, and failure-before-clean-control audit priority.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_oracle_pilot.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "58a85e50a67b0397bbc51328e9e91a9babcab79f3aa46f8bbda169884912d523"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests validate both bounded 49-call qualifications, historical 006 fixture stability, 24 balanced and deterministic clean/defect pairs per run, disjoint 007 identities, exact no-fallback Qwen3.7 Plus binding, synthetic-only source boundaries, the USD 0.10 reservation, dirty/unfrozen blocking, and no scale authority.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_reviewer_qualification.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "ea1a9cc8f3510fcf66c19b32f9f570ab3a7a92d04b5a103abe9662e0270f47b0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Twenty-one focused tests validate successor 002's completed/revoked state and blocked preflight, shared full schemas and strict qualification prompt, observed malformed citation rejection, author-independent mutations, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_scale_pilot_100.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-runner-review",
+      "sha256": "02aa1bb30f7a602abcc88a16581821b02a35c95aa6d0b74004a2c64e60c6f1ca"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests validate frozen 005 authorization, explicit non-frozen blocking, pinned provider routing, canary accounting, 290-call and USD 3 bounds, the mechanical strict-review contract, 24 balanced deterministic mutations, exclusion of all 004 probe blueprints, and the no-10000-scale boundary.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "eb9edf0b707ccb49e5d3a829622a45022dd723cd05ae3952282cbec59b9f1a7a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
       "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_design.py",
@@ -4476,7 +4696,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "709c28be1c76922e0ecaa7eb9d9378b53acf4a9d43aebbd9581b22f4d5d5abc9"
+      "sha256": "bd682dd910c384d931a39ed31d1ad910e5736e0fbf529a0083fec8b55a7ade3c"
     },
     {
       "audit_status": "audited",
@@ -4675,6 +4895,39 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "b02284c22c3404fcee4ec82cde8c69980332ed2f50cdea853b08b71392037b46"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual design review confirmed deterministic source truth is authoritative, exact 10,000-case slices and staged gates are frozen, multi-model review is advisory, and no write or provider execution is authorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_10000_pipeline_001.json",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "4db3671dac240b3871f361b66e93cbeb466b7beeed053bded7dc2ff04c8682ec"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Manual algorithm and boundary review plus focused execution confirmed exact source, claim, case, slice, course, modality, and checkpoint grains; direct CLI validation makes zero calls and write mode fails closed.",
+      "findings": [],
+      "path": "scripts/build_factual_qa_v3_10000_blueprints.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "5b908cb2138b333c26585c89524966bcd58f541a7a3b9b3c5f9fbf27ced80d11"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover unique grains, exact distributions, claim/source integrity, multi-source requirements, boundary actions, deterministic hashing, private-data absence, and unauthorized write rejection.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_10000_blueprints.py",
+      "reviewed_at": "2026-08-20",
+      "reviewer": "codex-primary-review",
+      "sha256": "658e7a603430f23b5c005c06dd033d45495ae0db32432446aa1eb684ad63614a"
     },
     {
       "audit_status": "audited",

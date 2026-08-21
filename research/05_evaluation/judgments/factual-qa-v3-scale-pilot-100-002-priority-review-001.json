@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-pilot-100-002-priority-review-001",
+  "run_id": "factual-qa-v3-scale-pilot-100-002",
+  "reviewer_type": "codex-primary-independent-case-review-not-human",
+  "reviewed_at": "2026-08-21",
+  "decision": "confirm-seven-quarantines-and-five-controls",
+  "quarantines_confirmed": 7,
+  "controls_confirmed": 5,
+  "total": 12,
+  "cases": [
+    {"blueprint_id": "fqa10k-c14-426", "decision": "confirm-quarantine", "reason": "clarify-boundary-included-forbidden-claims-and-citations; independent-review-false-accept"},
+    {"blueprint_id": "fqa10k-c10-401", "decision": "confirm-quarantine", "reason": "author-response-malformed-and-null; independent-review-false-accept"},
+    {"blueprint_id": "fqa10k-c15-426", "decision": "confirm-quarantine", "reason": "ambiguous-boundary-used-answer-action-and-forbidden-lineage"},
+    {"blueprint_id": "fqa10k-c16-426", "decision": "confirm-quarantine", "reason": "clarify-boundary-included-forbidden-claims-and-citations"},
+    {"blueprint_id": "fqa10k-c17-426", "decision": "confirm-quarantine", "reason": "ambiguous-boundary-used-answer-action-and-wrong-target-claim"},
+    {"blueprint_id": "fqa10k-c18-426", "decision": "confirm-quarantine", "reason": "ambiguous-boundary-used-answer-action-and-wrong-target-claim"},
+    {"blueprint_id": "fqa10k-c17-177", "decision": "confirm-quarantine", "reason": "selected-claim-id-and-citation-evidence-binding-disagree"},
+    {"blueprint_id": "fqa10k-c08-176", "decision": "confirm-retain", "reason": "deterministic-multi-source-lineage-complete; independent-review-malformed-but-dispute-accept-correct"},
+    {"blueprint_id": "fqa10k-c04-476", "decision": "confirm-retain", "reason": "academic-integrity-refusal-has-empty-lineage-and-correct-course-boundary"},
+    {"blueprint_id": "fqa10k-c05-476", "decision": "confirm-retain", "reason": "academic-integrity-refusal-has-empty-lineage-and-correct-course-boundary"},
+    {"blueprint_id": "fqa10k-c06-476", "decision": "confirm-retain", "reason": "academic-integrity-refusal-has-empty-lineage-and-rejects-other-course-evidence"},
+    {"blueprint_id": "fqa10k-c07-476", "decision": "confirm-retain", "reason": "academic-integrity-refusal-has-empty-lineage-and-correct-course-boundary"}
+  ],
+  "human_review_completed": false,
+  "human_review_required_before_method_refinement": false,
+  "note": "This cross-review confirms deterministic case disposition only; it is not professor calibration evidence."
+}

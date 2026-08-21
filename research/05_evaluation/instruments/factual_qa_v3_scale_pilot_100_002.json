@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-scale-pilot-100-002",
+  "status": "completed-refine-authorization-revoked",
+  "issue": 87,
+  "predecessor": "factual-qa-v3-scale-pilot-100-001",
+  "method_version": "factual-qa-v3-staged-pipeline-v2",
+  "decision_question": "Do the corrected shared author/reviewer contracts and deterministic mutation controls pass a bounded 100-case factual-QA evaluation?",
+  "model_leaderboard": false,
+  "contract_design": {
+    "version": "factual-qa-v3-contract-v2",
+    "author_schema": "shared-full-json-schema",
+    "reviewer_contract": "qualification-006-strict-contract",
+    "mutation_basis": "deterministic-canonical-cases"
+  },
+  "blueprint_design": {
+    "instrument_id": "factual-qa-v3-10000-pipeline-001",
+    "content_sha256": "cd43954f51ceb559a2d95b57fd0b25d551c43c103d404bb5ce49bfbe33f5b2cb",
+    "stage_id": "pilot-100",
+    "case_count": 100,
+    "source_count": 1000,
+    "claim_count": 8000
+  },
+  "model_roles": {
+    "author": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-flash",
+      "provider_model": "deepseek-v4-flash",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "temperature": 0,
+      "thinking": "disabled",
+      "max_input_tokens": 5000,
+      "max_output_tokens": 700,
+      "timeout_seconds": 30,
+      "pricing_usd_per_million_input_tokens": 0.14,
+      "pricing_usd_per_million_output_tokens": 0.28,
+      "revision_required": true
+    },
+    "independent_reviewer": {
+      "provider": "openrouter",
+      "litellm_model": "openrouter/mistralai/mistral-small-2603",
+      "provider_model": "mistralai/mistral-small-2603",
+      "credential_environment_variable": "OPENROUTER_API_KEY",
+      "qualification": "factual-qa-v3-reviewer-qualification-006",
+      "temperature": 0,
+      "max_input_tokens": 6000,
+      "max_output_tokens": 650,
+      "timeout_seconds": 30,
+      "pricing_usd_per_million_input_tokens": 0.15,
+      "pricing_usd_per_million_output_tokens": 0.6,
+      "revision_required": false,
+      "provider_routing": {
+        "order": ["Mistral"],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "allow",
+        "zdr": false
+      }
+    },
+    "dispute_reviewer": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-pro",
+      "provider_model": "deepseek-v4-pro",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "temperature": 0,
+      "thinking": "disabled",
+      "max_input_tokens": 6000,
+      "max_output_tokens": 700,
+      "timeout_seconds": 60,
+      "pricing_usd_per_million_input_tokens": 0.435,
+      "pricing_usd_per_million_output_tokens": 0.87,
+      "revision_required": true
+    }
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "dataset_write_authorized": false,
+    "automatic_stage_promotion": false,
+    "provider_canary_call_limit": 2,
+    "author_call_limit": 100,
+    "independent_review_call_limit": 100,
+    "mutation_review_call_limit": 20,
+    "dispute_review_call_limit": 24,
+    "total_provider_call_limit": 246,
+    "retry_attempts": 0,
+    "checkpoint_every_calls": 1,
+    "cost_stop_usd": 3.0,
+    "clean_worktree_required": true,
+    "output_overwrite_allowed": false,
+    "resume_requires_exact_bindings": true
+  },
+  "mutation_design": {
+    "count": 20,
+    "source": "deterministic-canonical-cases",
+    "independent_of_author_success": true,
+    "type_counts": {
+      "missing-citation": 4,
+      "truncated-citation": 4,
+      "paraphrased-citation": 3,
+      "extra-supported-claim": 3,
+      "invalid-claim-binding": 3,
+      "invalid-source-binding": 3
+    }
+  },
+  "quality_gates": {
+    "provider_response_completion_rate_min": 0.995,
+    "deterministic_acceptance_rate_min": 0.95,
+    "reviewer_agreement_rate_min": 0.9,
+    "citation_validity_rate_min": 0.99,
+    "target_claim_completeness_rate_min": 0.99,
+    "boundary_action_accuracy_min": 0.95,
+    "exact_duplicate_question_rate_max": 0.001,
+    "unresolved_dispute_rate_max": 0.01,
+    "malformed_response_rate_max": 0.005,
+    "mutation_sensitivity_min": 0.9,
+    "model_identity_stable_required": true,
+    "cost_and_latency_accounting_complete_required": true,
+    "external_cost_usd_max": 3.0,
+    "private_data_calls_max": 0,
+    "human_priority_packet_max": 12
+  },
+  "failure_policy": {
+    "canary_failure": "write invalid-execution and make zero bulk calls",
+    "malformed_or_provider_error": "record sanitized failure and continue without retry",
+    "budget_or_identity_failure": "checkpoint and stop invalid-execution",
+    "resume": "allow only a running checkpoint with exact instrument, blueprint, code, model, and pricing bindings"
+  },
+  "decision_rule": {
+    "all_machine_gates_pass": "completed-keep",
+    "any_machine_gate_fails": "completed-refine",
+    "authorize_checkpoint_1000": false,
+    "authorize_scale_10000": false
+  },
+  "data_boundary": {
+    "content_class": "deterministic-synthetic-public",
+    "private_course_text": false,
+    "student_data": false,
+    "academia_vault_read_allowed": false,
+    "provider_collection_allowed_for_this_future_run": true
+  },
+  "excluded_models": ["gemma", "claude", "local-qwen", "qwen3:4b", "qwen3.5:4b"]
+}

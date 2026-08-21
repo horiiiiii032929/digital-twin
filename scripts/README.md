@@ -408,3 +408,66 @@ Current utilities:
   exact package, version, advisory, fix versions, and occurrence against the
   tracked time-bounded exception policy. Any new, changed, or stale exception
   fails the command; run `npm run audit:python`.
+- `run_factual_qa_v3_scale_rehearsal.py`: validates the corrected 120-case
+  synthetic-public rehearsal source design, including exact per-claim citation
+  anchors, 18 distinct controlled visual facts, 18 genuine two-source cases,
+  and course-aligned boundary coverage. Attempt `002` is preserved as an invalid
+  execution after its first-party Mistral ZDR route failed only after bulk
+  authoring. Reviewed successor `003` adds schema-valid author and reviewer
+  health canaries before bulk calls. Unexecuted `003` is superseded after the
+  researcher allowed data collection for the synthetic evaluation phase.
+  Reviewed `004` keeps the same first-party Mistral model, allows data collection
+  and retention only for committed synthetic-public fixtures. Its one-time run
+  completed but failed reviewer mutation sensitivity because all missing and
+  truncated citations were accepted. The authorization is revoked; a rerun
+  requires a new instrument and reviewer-method correction while the global
+  freeze stays active. Successor `005` made exact target-claim and
+  complete verbatim evidence-quote checks mechanical, adds paraphrased-citation
+  and extra-supported-claim mutations, and selects 24 probes without reusing any
+  004 mutation blueprint. Its one-time run is invalid after one malformed
+  DeepSeek dispute response discarded completed in-memory metrics; authorization
+  is revoked.
+  `npm run preflight:factual-qa-v3-scale-rehearsal` is network-free. The
+  explicit execution command requires both environment-owned provider keys,
+  writes an ignored non-overwriting artifact, and cannot authorize a 10,000-case
+  run. Provider canaries are part of paid execution and stop before every bulk
+  call if either exact route is unavailable.
+- `run_factual_qa_v3_reviewer_qualification.py`: runs bounded 24-pair reviewer
+  qualifications with one provider canary, 48 paired reviews, eight-call
+  durable checkpoints, zero retries, and complete malformed/provider failure
+  accounting. Qualification 006 passed Mistral Small 4 at 49/49 calls and USD
+  0.012175; its authorization is revoked and its result is registered.
+  Qualification 007 tested hosted Qwen3.7 Plus on 24 new instances and failed
+  completion, specificity, sensitivity, malformed-response, latency, and cost
+  gates. Its authorization is revoked; Mistral Small 4 remains qualified.
+  Neither qualification authorizes a 10,000-case run.
+- `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
+  dummy factual-QA scale design from deterministic source truth. Its default
+  mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
+  stratified case blueprints without writing files or making provider calls.
+  Run the reproducible no-call gate with
+  `npm run verify:factual-qa-v3-10000-design`.
+  `--write` is fail-closed under the repository freeze; neither dataset writing
+  nor the 100, 1,000, or 10,000 paid stages is authorized by the draft design.
+- `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
+  100-case stage over the hash-bound 10,000-case design. Validation and
+  preflight make no provider calls; preflight must report
+  `ready` only for an exact frozen instrument on a clean worktree with both
+  credentials and an unused output path. Completed attempt 001 returned Refine
+  after 226 calls exposed author/reviewer contract and mutation-eligibility
+  defects; its authorization is revoked. Successor attempt 002 uses the full
+  shared author schema, the exact qualification-006 strict reviewer contract,
+  and deterministic canonical mutation controls that do not depend on author
+  success. Its paid run completed as Refine with 93/100 deterministic validity,
+  97% reviewer agreement, and 20/20 mutation rejection, but ambiguity-boundary,
+  duplicate-question, one target-claim, and malformed-response gates failed.
+  Attempt 002 authorization is revoked. The network-free
+  simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
+  durable per-call checkpoints, safe resume, model identity, cost accounting,
+  requested-versus-reported token-limit accounting, a USD 3 emergency stop,
+  aggregate/slice gates, and the 12-case priority packet with deterministic fake
+  transports. Use `npm run verify:factual-qa-v3-pilot-100`,
+  `npm run preflight:factual-qa-v3-pilot-100`, or
+  `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
+  rejected because attempt 002 is completed and revoked. Any successor requires
+  a new instrument and separate frozen authorization. Later stages remain blocked.

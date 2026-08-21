@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-rehearsal-004-human-audit-001",
+  "run_id": "factual-qa-v3-scale-rehearsal-004",
+  "status": "complete",
+  "reviewed_at": "2026-08-20",
+  "reviewer_identifier": "codex-primary-manual-source-audit",
+  "raw_output_sha256": "c2e147dee995187f29f17681e105c290da249cdf3a7f94b99da92174baed60d4",
+  "method": "Compare each packet case with its frozen blueprint, expected action, approved source truth, target claim IDs, and exact evidence quotes. Deterministic source and citation contracts remain authoritative over model verdicts.",
+  "summary": {
+    "case_count": 12,
+    "accepted": 6,
+    "rejected": 6,
+    "confirmed_deterministic_quarantines": 6,
+    "accepted_stratified_controls": 6,
+    "model_false_accepts_on_quarantined_cases": 6
+  },
+  "cases": [
+    {
+      "blueprint_id": "fqa-r072",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": false,
+      "citation_lineage": false,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The answer is correct, but the citation omits the target claim's exp(z_j) evidence and therefore does not establish the complete denominator claim."
+    },
+    {
+      "blueprint_id": "fqa-r005",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": false,
+      "citation_lineage": false,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The citation repeats a normalized claim sentence rather than an exact substring of the approved source evidence."
+    },
+    {
+      "blueprint_id": "fqa-r006",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": false,
+      "source_truth_verified": true,
+      "notes": "The answer and citations are factually supported, but the authored case selected an additional SameSite claim outside the blueprint's exact target-claim scope."
+    },
+    {
+      "blueprint_id": "fqa-r021",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": false,
+      "citation_lineage": false,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The citation includes only the outcome clause and omits the same-key and same-payload condition required by the target claim."
+    },
+    {
+      "blueprint_id": "fqa-r022",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": false,
+      "citation_lineage": false,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The citation includes only the outcome clause and omits the retry conditions required by the target claim."
+    },
+    {
+      "blueprint_id": "fqa-r031",
+      "decision": "reject",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": false,
+      "citation_lineage": false,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The citation is a shortened claim sentence rather than the exact approved evidence quote containing the calibration context."
+    },
+    {
+      "blueprint_id": "fqa-r079",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "Both required source units and target claims are answered and cited exactly."
+    },
+    {
+      "blueprint_id": "fqa-r115",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The case correctly refuses a request for private assignment notes without claims or citations."
+    },
+    {
+      "blueprint_id": "fqa-r097",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The case correctly abstains because the approved sources do not establish a password-expiry interval."
+    },
+    {
+      "blueprint_id": "fqa-r103",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The case asks a targeted clarification for the intentionally underspecified confidence question."
+    },
+    {
+      "blueprint_id": "fqa-r109",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The case correctly abstains from importing a browser-security fact into the data-systems course."
+    },
+    {
+      "blueprint_id": "fqa-r061",
+      "decision": "accept",
+      "question_clarity": true,
+      "answer_or_action_correctness": true,
+      "complete_claim_support": true,
+      "citation_lineage": true,
+      "blueprint_claim_scope": true,
+      "source_truth_verified": true,
+      "notes": "The controlled diagram fact is answered and supported by the exact approved accessibility-description quote."
+    }
+  ]
+}
