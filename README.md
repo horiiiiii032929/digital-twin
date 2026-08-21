@@ -110,10 +110,12 @@ The current foundation adds credentialed administrator/professor/student
 access, secure revocable cookie sessions, durable SQLite schema migrations,
 owned onboarding state, content-addressed source storage, recoverable ingestion
 jobs, password/account/data lifecycle controls, redacted operations,
-backup/restore, and a Caddy HTTPS package. The exact current images now build
-and become healthy in isolated local HTTPS, and clean administrator bootstrap
-plus source ingestion work. Publication intentionally fails closed because no
-production evidence-sufficiency method is selected. Issue
+backup/restore, and a Caddy HTTPS package. The exact V8 images built and became
+healthy in isolated local HTTPS, and clean administrator bootstrap plus source
+ingestion worked. Publication intentionally failed closed because no production
+evidence-sufficiency method was selected. The current V9 source adds the
+provider-neutral successor boundary but has not been rebuilt into images or
+selected for release. Issue
 [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) owns that R1
 release blocker; public DNS/certificate and clean-host rehearsal follow only
 after it passes.
@@ -220,8 +222,9 @@ The active goal is release of an invite-only Course Digital Twin for multiple
 professors and courses, not a one-course RAG pilot, local-only demonstration,
 or standalone benchmark. The merged professor/student workspace is the UX
 baseline. PR #103 merged the deterministic 10,000-package factual-QA successor
-and a provider-unauthorized pilot simulation. Draft PR #104 records the current
-image requalification and its fail-closed evidence-sufficiency blocker.
+and a provider-unauthorized pilot simulation. PR #104 merged the V8 image
+requalification and its fail-closed evidence-sufficiency blocker. The active
+#105 branch builds the V9 open-set boundary with execution still blocked.
 Remaining release gates cover a selected answerability method, factual quality,
 professor fidelity, target-host deployment and operations, complete workflows,
 privacy, and approval-gated usability.

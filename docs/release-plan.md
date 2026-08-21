@@ -54,8 +54,9 @@ data, or professor input:
    unauthorized.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
-4. Preserve V8's current-image `Refine` result and prepare the prospective
-   evidence-sufficiency successor without selecting a test-only gate.
+4. Preserve V8's historical current-image `Refine` result and advance V9's
+   build-only evidence-sufficiency successor without selecting a test-only gate
+   or claiming that the changed source revision has been rebuilt.
 5. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 

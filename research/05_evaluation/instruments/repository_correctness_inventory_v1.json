@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 468
+    "audited": 469
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 89,
+    "evaluation_configuration": 90,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 89
   },
-  "file_count": 468,
+  "file_count": 469,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "4188bebbfdd4968e3eecfd58a41f690550c97893fa80a1360bba4ba3aab91673",
+  "record_sha256": "93c7d322fff3622241401f66fe02cc461b823877655ee4d61a2c7643e773fb4f",
   "records": [
     {
       "audit": {
@@ -2759,6 +2759,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Freeze review binds 14 runtime trees and 19 critical files to the V9 build checkpoint, preserves the null evidence-sufficiency selection and historical V8 image identities, and authorizes no execution, image, deployment, or release claim.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v9.json",
+      "risk": "high",
+      "sha256": "051f4613e2effe6b9302f47a21a7c3ff01621921de734fd64f1ed843dfde00b6"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -4399,7 +4415,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "V8 freeze review preserves V7 historically and binds the current Refine result, runtime trees, files, image identities, unselected evidence gate, and four pending external gates while rejecting any release promotion.",
+        "evidence": "V9 review preserves V8 as historical image evidence and binds the current open-set build-only tree, null selection, unbuilt current images, and denied execution/release authority.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4412,7 +4428,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "9e0e1f0875e5b5212cb4fcc211fd12805bc69d07f532cd4824026f5adbb6a8e6"
+      "sha256": "0217e2435b932a4bfbe8fc29537e8441af082451fdf2632787343469828db208"
     },
     {
       "audit": {
@@ -7043,8 +7059,8 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Focused V1-V8 freeze regressions preserve historical evidence, enforce V8 as the current Refine boundary, and reject tree drift, stale hashes, promoted gates, changed policy, selected-candidate drift, or release claims.",
+        "domain": "deployment-verification",
+        "evidence": "V9 regression tests validate the current build-only freeze and reject image, selection, and release promotion while preserving V8 as historical-superseded.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -7055,7 +7071,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "121cd828ac939f43cfc336a0473204b71072317211dcef8e3460d5f27a584e64"
+      "sha256": "6ae64e6db1b29a750660cdd4a5ddada2f257a3eec122202c05b3ce60ca2dd736"
     },
     {
       "audit": {
@@ -7699,7 +7715,7 @@
     }
   ],
   "risk_counts": {
-    "high": 365,
+    "high": 366,
     "medium": 103
   },
   "schema_version": 1,
