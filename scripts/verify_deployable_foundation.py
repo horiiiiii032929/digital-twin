@@ -27,7 +27,10 @@ from src.digital_twin.student import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN_ID = "deployable-product-foundation-v1-development-001"
+RUN_ID = "deployable-product-foundation-v7-post-correctness-requalification-001"
+CANDIDATE_ID = "A1-single-node-staging-v7-post-correctness"
+BASELINE_ID = "A1-single-node-staging-v5-local-multimodel-policy"
+DATASET_ID = "synthetic-deployable-foundation-v7-post-correctness"
 ORIGIN = "https://staging.example.test"
 ADMIN_PASSWORD = "Admin-synthetic-password-42"
 PROFESSOR_PASSWORD = "Professor-synthetic-password-42"
@@ -57,6 +60,7 @@ def run_acceptance() -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
     failures: list[dict[str, str]] = []
     metrics: dict[str, Any] = {}
+    stage = "initialize"
     with tempfile.TemporaryDirectory(prefix="digital-twin-foundation-") as temporary:
         root = Path(temporary)
         runtime_root = root / "primary-runtime"
@@ -67,9 +71,13 @@ def run_acceptance() -> dict[str, Any]:
         )
         client = TestClient(app, base_url="https://testserver")
         try:
+            stage = "account-provisioning"
             accounts = _provision_and_login(client, app, checks)
+            stage = "professor-publication-workflow"
             workflow = _professor_workflow(client, app, root, accounts, checks, metrics)
+            stage = "student-tutoring-workflow"
             _student_workflow(client, accounts, workflow, checks)
+            stage = "capacity-and-cost-controls"
             metrics.update(_capacity(client, checks))
             _record(
                 checks,
@@ -78,22 +86,37 @@ def run_acceptance() -> dict[str, Any]:
                 "Deterministic staging run made zero external calls and cost USD 0.",
             )
         except Exception as error:
-            failures.append({"class": "acceptance", "error_type": type(error).__name__})
+            failures.append(
+                {
+                    "class": "acceptance",
+                    "stage": stage,
+                    "error_type": type(error).__name__,
+                    "message": str(error),
+                }
+            )
         finally:
             client.close()
             _close_app(app)
 
         if not failures:
             try:
+                stage = "restart-verification"
                 _restart_verification(settings, accounts, workflow, checks)
+                stage = "backup-restore-verification"
                 backup_metrics = _backup_restore_verification(
                     root, settings, accounts, workflow, checks
                 )
                 metrics.update(backup_metrics)
+                stage = "demo-rollback-verification"
                 _demo_rollback_verification(root, checks)
             except Exception as error:
                 failures.append(
-                    {"class": "recovery", "error_type": type(error).__name__}
+                    {
+                        "class": "recovery",
+                        "stage": stage,
+                        "error_type": type(error).__name__,
+                        "message": str(error),
+                    }
                 )
 
         metrics["database_bytes"] = (
@@ -116,9 +139,9 @@ def run_acceptance() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "run_id": RUN_ID,
-        "candidate_id": "A1-single-node-staging",
-        "baseline_id": "A0-local-demo",
-        "dataset": "synthetic-deployable-foundation-v1",
+        "candidate_id": CANDIDATE_ID,
+        "baseline_id": BASELINE_ID,
+        "dataset": DATASET_ID,
         "split": "development",
         "network_calls": 0,
         "private_data_used": False,
@@ -139,9 +162,9 @@ def run_acceptance() -> dict[str, Any]:
         "external_https_rehearsal": "pending-host-and-domain",
         "decision": "go-deeper" if local_pass else "refine",
         "decision_reason": (
-            "Local architecture gates passed with a synthetic-only evidence control; "
-            "a product evidence-sufficiency method and public DNS/certificate "
-            "issuance remain."
+            "The current post-correctness code passed the complete synthetic "
+            "credentialed workflow, persistence, recovery, capacity, and rollback "
+            "gates; public DNS, trusted TLS, and target-host validation remain."
             if local_pass
             else "One or more frozen local gates failed."
         ),
@@ -246,6 +269,16 @@ def _professor_workflow(client, app, root, accounts, checks, metrics):
         "professor-onboarding-persists",
         checks,
     )
+    session = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course['id']}/onboarding-sessions/"
+            f"{session['session_id']}/bind",
+            headers={"Origin": ORIGIN},
+        ),
+        200,
+        "professor-session-bound-to-course",
+        checks,
+    )
     session = _approve_session(client, session)
     _record(
         checks,
@@ -310,7 +343,7 @@ def _professor_workflow(client, app, root, accounts, checks, metrics):
                 "profile_id": "student-tutor",
                 "profile_version": "v1",
                 "release_id": "release-foundation-v1",
-                "chunks": job["result"]["chunks"],
+                "ingestion_job_ids": [queued["id"]],
             },
         ),
         201,
@@ -330,6 +363,10 @@ def _professor_workflow(client, app, root, accounts, checks, metrics):
         checks,
         "release-preflight-passes",
         preflight["passed"] and all(item["passed"] for item in preflight["checks"]),
+        json.dumps(
+            [item for item in preflight["checks"] if not item["passed"]],
+            sort_keys=True,
+        ),
     )
     published = _expect_json(
         client.post(
@@ -567,24 +604,23 @@ def _demo_rollback_verification(root, checks):
 
 def _approve_session(client, session):
     session_id = session["session_id"]
-    policy_fields = [
-        field
-        for group in ("safety_compliance", "pedagogy", "professor_review")
-        for field in session["policy"][group]
-    ]
-    by_id = {field["id"]: field for field in policy_fields}
-    for field_id in list(session["release_blockers"]["policy_fields"]):
-        field = by_id[field_id]
-        value = field["value"]
-        if field_id == "professor_release_approval":
-            value = "Approved for the synthetic foundation verification."
+    for item in list(session["approval_checklist"]):
+        if item["id"].startswith("preview_") or item["id"] == (
+            "professor_release_approval"
+        ):
+            continue
         response = client.patch(
-            f"/api/onboarding/sessions/{session_id}/policy-fields/{field_id}",
+            f"/api/onboarding/sessions/{session_id}/approval-checklist/{item['id']}",
             headers={"Origin": ORIGIN},
-            json={"value": value, "status": "resolved"},
+            json={"checked": True},
         )
         if response.status_code != 200:
-            raise RuntimeError("could not resolve synthetic policy field")
+            detail = response.json().get("detail", {})
+            code = detail.get("code") if isinstance(detail, dict) else None
+            raise RuntimeError(
+                "could not complete synthetic policy checklist item "
+                f"{item['id']}: HTTP {response.status_code}, code={code or 'unknown'}"
+            )
         session = response.json()
     for preview in list(session["preview_cases"]):
         response = client.patch(
@@ -615,15 +651,15 @@ def _approve_session(client, session):
     if response.status_code != 200:
         raise RuntimeError("could not accept synthetic custom preview")
     session = response.json()
-    for item in list(session["approval_checklist"]):
-        response = client.patch(
-            f"/api/onboarding/sessions/{session_id}/approval-checklist/{item['id']}",
-            headers={"Origin": ORIGIN},
-            json={"checked": True},
-        )
-        if response.status_code != 200:
-            raise RuntimeError("could not complete synthetic approval checklist")
-        session = response.json()
+    response = client.patch(
+        f"/api/onboarding/sessions/{session_id}/approval-checklist/"
+        "professor_release_approval",
+        headers={"Origin": ORIGIN},
+        json={"checked": True},
+    )
+    if response.status_code != 200:
+        raise RuntimeError("could not complete final synthetic professor approval")
+    session = response.json()
     return session
 
 
@@ -661,11 +697,20 @@ def _login(client, email, password):
 
 def _expect(response, status_code, name, checks):
     passed = response.status_code == status_code
+    detail = f"HTTP {response.status_code}; expected {status_code}."
+    if not passed:
+        payload = response.json()
+        error_detail = payload.get("detail", {}) if isinstance(payload, dict) else {}
+        if isinstance(error_detail, dict) and error_detail.get("code"):
+            detail += f" code={error_detail['code']}"
     _record(
-        checks, name, passed, f"HTTP {response.status_code}; expected {status_code}."
+        checks,
+        name,
+        passed,
+        detail,
     )
     if not passed:
-        raise RuntimeError(f"{name} failed with HTTP {response.status_code}")
+        raise RuntimeError(f"{name} failed: {detail}")
     return response
 
 

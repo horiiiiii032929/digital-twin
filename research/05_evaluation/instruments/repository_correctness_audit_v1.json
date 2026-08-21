@@ -1831,7 +1831,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Post-correctness release requalification review corrected stale onboarding approval order, mandatory course binding, server-owned ingestion lineage, and failure diagnostics; the 42-gate synthetic deployment journey and focused regressions pass with zero provider/private-data access.",
       "findings": [],
       "path": "scripts/analyze_cross_course_provider_result.py",
       "reviewed_at": "2026-08-20",
@@ -2901,20 +2901,31 @@
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
       "path": "scripts/verify_deployable_foundation.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "4de2fb6d8e73d34cd35d2a010d8ab5e99e4cfe35e1cd452f0f81fe8b7936e4b2"
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-release-requalification",
+      "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Post-correctness live-HTTPS workflow review corrected policy-before-preview ordering, course binding, and server-owned ingestion lineage while preserving secure credentials, source ownership, and no-provider boundaries; focused tests pass.",
       "findings": [],
       "path": "scripts/verify_https_staging.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "bfdae8f112809c9cff483dace3feb1bde2f225483aa29507cfeb6c5be9d57fbe"
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-release-requalification",
+      "sha256": "c21fefe2558a7d939c36944a552c0405c0992145ebec4ac3418643982fbb5daf"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "A complete in-process deployment acceptance regression now executes the current 42-gate credentialed professor/student, persistence, recovery, capacity, and rollback journey in the normal test suite with zero network/provider calls.",
+      "findings": [],
+      "path": "tests/test_verify_deployable_foundation.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-release-requalification",
+      "sha256": "0ca49745a86b15546d00dc480547aa8fffd256438db66a31b81231e1a339b50b"
     },
     {
       "audit_status": "audited",

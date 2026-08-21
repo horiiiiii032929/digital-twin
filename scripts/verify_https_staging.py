@@ -182,6 +182,19 @@ def run_journey(
         ),
         201,
     )
+    session = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course_id}/onboarding-sessions/"
+            f"{session['session_id']}/bind",
+            headers={"Origin": origin},
+        ),
+        200,
+    )
+    _record(
+        checks,
+        "professor-session-bound-to-course",
+        session["course_id"] == course_id,
+    )
     session = _approve_session(client, session, origin)
     _record(
         checks,
@@ -228,7 +241,7 @@ def run_journey(
                 "profile_id": "student-tutor",
                 "profile_version": "v1",
                 "release_id": release_id,
-                "chunks": job["result"]["chunks"],
+                "ingestion_job_ids": [queued["id"]],
             },
         ),
         201,
@@ -458,20 +471,17 @@ def _approve_session(
     origin: str,
 ) -> dict[str, Any]:
     session_id = session["session_id"]
-    fields = {
-        field["id"]: field
-        for group in ("safety_compliance", "pedagogy", "professor_review")
-        for field in session["policy"][group]
-    }
-    for field_id in list(session["release_blockers"]["policy_fields"]):
-        value = fields[field_id]["value"]
-        if field_id == "professor_release_approval":
-            value = "Approved for the synthetic live HTTPS rehearsal."
+    for item in list(session["approval_checklist"]):
+        if item["id"].startswith("preview_") or item["id"] == (
+            "professor_release_approval"
+        ):
+            continue
         session = _expect_json(
             client.patch(
-                f"/api/onboarding/sessions/{session_id}/policy-fields/{field_id}",
+                f"/api/onboarding/sessions/{session_id}/approval-checklist/"
+                f"{item['id']}",
                 headers={"Origin": origin},
-                json={"value": value, "status": "resolved"},
+                json={"checked": True},
             ),
             200,
         )
@@ -504,15 +514,15 @@ def _approve_session(
         ),
         200,
     )
-    for item in list(session["approval_checklist"]):
-        session = _expect_json(
-            client.patch(
-                f"/api/onboarding/sessions/{session_id}/approval-checklist/{item['id']}",
-                headers={"Origin": origin},
-                json={"checked": True},
-            ),
-            200,
-        )
+    session = _expect_json(
+        client.patch(
+            f"/api/onboarding/sessions/{session_id}/approval-checklist/"
+            "professor_release_approval",
+            headers={"Origin": origin},
+            json={"checked": True},
+        ),
+        200,
+    )
     return session
 
 
