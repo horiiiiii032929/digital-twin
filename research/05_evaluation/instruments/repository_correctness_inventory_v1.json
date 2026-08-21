@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9f0606e95e4759536f8bee6e99dd6c6eeeb60d0bf2672657609cda2846d47e09",
+  "record_sha256": "42e78cca59602aed3a3dc2ada7495c5601ae95cac80b8f2e738b3840e86ca4a9",
   "records": [
     {
       "audit": {
@@ -4534,9 +4534,9 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "V12 review preserves V11 historically and binds the current bounded independent-review workflow, unopened source-linked decision draft, null selection, unbuilt current images, and denied review/evaluation/release authority.",
+        "evidence": "V12 remains historically reproducible while reviewer-binding instrument 002 explicitly supersedes current-tree matching without authorizing provider review, dataset freeze, candidate evaluation, image construction, deployment, or release.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -4547,7 +4547,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "eb4e3c2cbd2e2d13ab7d0b6e3a90b5daaaddb5f7430e345956b2bb0840b2a639"
+      "sha256": "7d61cff6bddbb0ab3bf6203cf27d8bd73481b81ac2270ca6486155ba7d453381"
     },
     {
       "audit": {
@@ -7195,9 +7195,9 @@
     {
       "audit": {
         "domain": "deployment-verification",
-        "evidence": "V12 regression tests validate the current bounded review-workflow freeze, reject false review/freeze/selection/release promotion, and preserve V11 as historical-superseded.",
+        "evidence": "Regression tests preserve V12 as a historical build-only checkpoint after reviewer-binding instrument 002, reject false review/freeze/selection/release promotion, and retain its exact historical bindings.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7206,7 +7206,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "dd0a2c7614a6366c14d78181dd4daff3b46ace535420241fdf12415009ca009c"
+      "sha256": "fa355a5d2a88bf24dbbda8af97217f9075d0e22073d4434cf0f6c1b787e8e8eb"
     },
     {
       "audit": {

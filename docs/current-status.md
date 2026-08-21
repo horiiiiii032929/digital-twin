@@ -216,8 +216,9 @@ earlier foundation into `main` at `adf39af`. PR
 deterministic factual-QA successor and repository-correctness corrections at
 `4657219`. PR
 [#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
-requalification. V12 remains a separate corrected build-only release checkpoint
-and does not promote the still-pending product or public deployment claim.
+requalification. V12 remains preserved as a historical corrected build-only
+checkpoint. Reviewer-binding instrument `002` supersedes its current-tree match
+without promoting the still-pending product or public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
