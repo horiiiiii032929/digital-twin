@@ -36,6 +36,10 @@ V7_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json"
 )
+V8_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json"
+)
 
 
 def _manifest() -> dict:
@@ -64,6 +68,10 @@ def _v6_manifest() -> dict:
 
 def _v7_manifest() -> dict:
     return json.loads(V7_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v8_manifest() -> dict:
+    return json.loads(V8_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -152,9 +160,31 @@ def test_post_correctness_current_tree_freeze_validates_without_image_claim() ->
     assert result["artifact_bindings"] == 31
     assert result["tree_bindings"] == 14
     assert result["file_bindings"] == 17
-    assert result["current_match_status"] == "enforced"
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
     assert result["container_build_status"] == "blocked-local-docker-runtime"
     assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
+def test_current_image_refine_freeze_validates_without_release_claim() -> None:
+    result = validate_deployable_freeze(_v8_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == (
+        "current-images-healthy-publication-fail-closed"
+    )
+    assert result["external_gates_pending"] == 4
+    assert result["artifact_bindings"] == 31
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 17
+    assert result["current_match_required"] is True
+    assert result["current_match_status"] == "enforced"
+    assert result["container_build_status"] == (
+        "passed-current-images-product-publication-blocked"
+    )
+    assert result["image_build_claimed"] is True
     assert result["release_claim_authorized"] is False
 
 
@@ -228,3 +258,17 @@ def test_v7_freeze_rejects_unearned_image_or_release_claim() -> None:
 
     with pytest.raises(ValueError, match="cannot authorize a release claim"):
         validate_deployable_freeze(release_manifest, root=ROOT)
+
+
+def test_v8_freeze_rejects_release_claim_or_selected_candidate() -> None:
+    release_manifest = _v8_manifest()
+    release_manifest["release_claim_authorized"] = True
+
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)
+
+    decision_manifest = _v8_manifest()
+    decision_manifest["decision"] = "go-deeper"
+
+    with pytest.raises(ValueError, match="decision drifted"):
+        validate_deployable_freeze(decision_manifest, root=ROOT)

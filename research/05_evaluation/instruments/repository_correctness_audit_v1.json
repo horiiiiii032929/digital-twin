@@ -2777,12 +2777,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "V7 freeze review confirmed revision ancestry, current runtime tree identities, file hashes, model-policy identity, four pending external gates, and fail-closed image/release claims; focused regressions passed with zero provider calls or private reads.",
+      "evidence": "V8 freeze review preserves V7 historically and binds the current Refine result, runtime trees, files, image identities, unselected evidence gate, and four pending external gates while rejecting any release promotion.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "f9dcd9bbec7f9f947bfaaccf9ddab4aa93c2337202042c05e34650ca131b7e30"
+      "sha256": "9e0e1f0875e5b5212cb4fcc211fd12805bc69d07f532cd4824026f5adbb6a8e6"
     },
     {
       "audit_status": "audited",
@@ -4548,12 +4548,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused V1-V7 freeze regressions verify the current 42/42 tree-bound package while rejecting tree drift, stale hashes, duplicate or promoted gates, changed model policy, and unearned container or release claims.",
+      "evidence": "Focused V1-V8 freeze regressions preserve historical evidence, enforce V8 as the current Refine boundary, and reject tree drift, stale hashes, promoted gates, changed policy, selected-candidate drift, or release claims.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "cc761f1ade79f9e676b65d11fef364e4a7b2789c0a5029ff794a19489dbc57c0"
+      "sha256": "121cd828ac939f43cfc336a0473204b71072317211dcef8e3460d5f27a584e64"
     },
     {
       "audit_status": "audited",
@@ -5104,6 +5104,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "d2d8fd676e747eed418d4d6968631772fac82f0cd2770b206e9b35f46d13d1ee"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Reviewed V8 freeze binds clean current images and operational entrypoints while preserving the failed product publication gate, null selection, exact Refine decision, and zero release/provider/private-data authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "c1578c00b3a2729e672947f213d8675a585815cfa66d03358957264ac9b52e99"
     }
   ],
   "schema_version": 1

@@ -25,6 +25,7 @@ MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v5.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v6.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v7.json",
+    PROFILE_ROOT / "deployable-product-foundation-freeze-v8.json",
 )
 EXPECTED_EXTERNAL_GATES = {
     "public-dns-and-certificate",
@@ -310,9 +311,68 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
         },
         "tree_binding_count": 14,
         "file_binding_count": 17,
-        "require_current_match": True,
+        "require_current_match": False,
         "external_gate_ids": {
             "current-container-build-and-local-https",
+            "public-dns-and-certificate",
+            "clean-host-restore",
+            "staging-workflow-walkthrough",
+        },
+    },
+    "deployable-product-foundation-freeze-v8": {
+        "status": "refine-evidence-sufficiency-selection-required",
+        "run_id": "deployable-product-foundation-v8-current-image-attempt-001",
+        "candidate_id": "A1-single-node-staging-v8-current-image",
+        "decision": "refine",
+        "selected_implementation_id": None,
+        "local_fields": {
+            "container_build_passed": True,
+            "container_readiness_passed": True,
+            "operational_entrypoints_passed": 4,
+            "operational_entrypoints_total": 4,
+            "clean_admin_bootstrap_passed": True,
+            "source_ingestion_reached_publication": True,
+            "evidence_sufficiency_selected": False,
+            "publication_completed": False,
+            "publication_status_code": 409,
+            "fail_closed_without_test_control": True,
+            "external_provider_calls": 0,
+            "external_provider_cost_usd": 0.0,
+            "private_data_used": False,
+        },
+        "local_label": "current-images-healthy-publication-fail-closed",
+        "summary_marker": "Publication then failed closed",
+        "build_fields": {
+            "status": "passed-current-images-product-publication-blocked",
+            "compose_graph_validated": True,
+            "image_build_claimed": True,
+            "api_image_sha256": (
+                "a78a99e17e3a5b2bdba52aa6c490ca7"
+                "aa532df9b46b2b9c9f136840360cde929"
+            ),
+            "web_image_sha256": (
+                "242c39320e0acbee5f014854c4300145"
+                "01a716cbb7d055ca9884ad468f644028"
+            ),
+            "docker_engine_version_observed": "28.5.1",
+            "containers_started": True,
+            "runtime_volumes_created": True,
+        },
+        "commands": {
+            "npm run check",
+            "npm run audit:dependencies",
+            "npm run verify:deployable-foundation",
+            "npm run benchmark:deployable-foundation-development",
+            "npm run staging:build",
+            "npm run verify:staging-https",
+            "npm run verify:deployable-freeze",
+            "npm run verify:model-policy",
+        },
+        "tree_binding_count": 14,
+        "file_binding_count": 17,
+        "require_current_match": True,
+        "external_gate_ids": {
+            "evidence-sufficiency-selection-and-live-publication",
             "public-dns-and-certificate",
             "clean-host-restore",
             "staging-workflow-walkthrough",
@@ -432,7 +492,8 @@ def validate_deployable_freeze(
         raise ValueError("deployable freeze status drifted")
     if manifest.get("run_id") != spec["run_id"]:
         raise ValueError("deployable freeze run identity drifted")
-    if manifest.get("decision") != "go-deeper":
+    expected_decision = spec.get("decision", "go-deeper")
+    if manifest.get("decision") != expected_decision:
         raise ValueError("deployable freeze decision drifted")
     if manifest.get("candidate_id") != spec["candidate_id"]:
         raise ValueError("deployable freeze candidate drifted")
@@ -444,19 +505,22 @@ def validate_deployable_freeze(
         raise ValueError("deployable freeze cannot read private or held-out data")
     if manifest.get("external_model_called") is not False:
         raise ValueError("deployable freeze cannot call an external model")
-    if freeze_id == "deployable-product-foundation-freeze-v7":
+    if freeze_id in {
+        "deployable-product-foundation-freeze-v7",
+        "deployable-product-foundation-freeze-v8",
+    }:
         implementation_revision = manifest.get("implementation_revision", "")
         if (
             not re.fullmatch(r"[0-9a-f]{40}", implementation_revision)
             or not _is_ancestor_of(root, implementation_revision, revision)
         ):
-            raise ValueError("V7 implementation revision is not evidence-bound")
+            raise ValueError("current-tree implementation revision is not evidence-bound")
         if manifest.get("schema_version") != 2:
-            raise ValueError("V7 requires the tree-binding freeze schema")
+            raise ValueError("current-tree freeze requires the tree-binding schema")
         if manifest.get("release_claim_authorized") is not False:
-            raise ValueError("V7 cannot authorize a release claim")
+            raise ValueError("current-tree freeze cannot authorize a release claim")
         if manifest.get("public_deployment_authorized") is not False:
-            raise ValueError("V7 cannot authorize public deployment")
+            raise ValueError("current-tree freeze cannot authorize public deployment")
 
     local_gates = manifest.get("local_gates", {})
     if any(
@@ -519,7 +583,10 @@ def validate_deployable_freeze(
         }
         if manifest.get("model_policy") != expected_model_policy:
             raise ValueError("current model policy freeze binding drifted")
-    elif freeze_id == "deployable-product-foundation-freeze-v7":
+    elif freeze_id in {
+        "deployable-product-foundation-freeze-v7",
+        "deployable-product-foundation-freeze-v8",
+    }:
         expected_model_policy = {
             "policy_id": "current-model-policy-2026-08-21-v3",
             "gemma_execution_allowed": False,
@@ -539,7 +606,7 @@ def validate_deployable_freeze(
             "model_called_during_policy_validation": False,
         }
         if manifest.get("model_policy") != expected_model_policy:
-            raise ValueError("V7 current model policy binding drifted")
+            raise ValueError("current-tree model policy binding drifted")
 
     external = manifest.get("external_gates", [])
     gate_ids = [gate.get("id") for gate in external]
@@ -563,7 +630,10 @@ def validate_deployable_freeze(
     if freeze_id == "deployable-product-foundation-freeze-v6":
         suspension = _validate_current_match_suspension(root)
     current_drift: list[str] = []
-    if freeze_id == "deployable-product-foundation-freeze-v7":
+    if freeze_id in {
+        "deployable-product-foundation-freeze-v7",
+        "deployable-product-foundation-freeze-v8",
+    }:
         tree_bindings = manifest.get("tree_bindings", [])
         file_bindings = manifest.get("file_bindings", [])
         tree_paths = [binding.get("path") for binding in tree_bindings]
@@ -575,7 +645,7 @@ def validate_deployable_freeze(
             or len(file_paths) != spec["file_binding_count"]
             or set(tree_paths) & set(file_paths)
         ):
-            raise ValueError("V7 binding inventory is incomplete or duplicated")
+            raise ValueError("current-tree binding inventory is incomplete or duplicated")
         for binding in tree_bindings:
             relative_path = binding["path"]
             expected = binding.get("git_tree_sha1", "")
@@ -583,11 +653,13 @@ def validate_deployable_freeze(
                 raise ValueError(f"invalid tree identity: {relative_path}")
             if _tree_identity(root, revision, relative_path) != expected:
                 raise ValueError(f"revision tree identity mismatch: {relative_path}")
-            if (
+            if spec["require_current_match"] and (
                 _tree_identity(root, "HEAD", relative_path) != expected
                 or _path_has_worktree_changes(root, relative_path)
             ):
-                raise ValueError(f"current tree drifted from V7: {relative_path}")
+                raise ValueError(
+                    f"current tree drifted from {freeze_id}: {relative_path}"
+                )
         for binding in file_bindings:
             relative_path = binding["path"]
             expected = binding.get("sha256", "")
@@ -597,11 +669,15 @@ def validate_deployable_freeze(
                 raise ValueError(f"revision artifact hash mismatch: {relative_path}")
             requires_current = binding.get("current_match_required")
             if not isinstance(requires_current, bool):
-                raise ValueError(f"V7 current-match classification missing: {relative_path}")
-            if requires_current and (
+                raise ValueError(
+                    f"current-tree current-match classification missing: {relative_path}"
+                )
+            if spec["require_current_match"] and requires_current and (
                 _sha256(_current_file(root, relative_path).read_bytes()) != expected
             ):
-                raise ValueError(f"current artifact drifted from V7: {relative_path}")
+                raise ValueError(
+                    f"current artifact drifted from {freeze_id}: {relative_path}"
+                )
         bindings = [*tree_bindings, *file_bindings]
     else:
         bindings = manifest.get("artifact_bindings", [])
@@ -651,9 +727,9 @@ def validate_deployable_freeze(
     record = _revision_json(root, revision, record_path)
     if (
         record.get("run_id") != manifest["run_id"]
-        or record.get("decision", {}).get("outcome") != "go-deeper"
+        or record.get("decision", {}).get("outcome") != expected_decision
         or record.get("decision", {}).get("selected_implementation_id")
-        != manifest["candidate_id"].lower()
+        != spec.get("selected_implementation_id", manifest["candidate_id"].lower())
     ):
         raise ValueError("registered decision does not match the deployment freeze")
     summary_path = f"research/05_evaluation/{spec['run_id']}-results.md"
@@ -701,12 +777,17 @@ def validate_deployable_freeze(
         )
         result["current_drift_count"] = len(current_drift)
         result["release_claim_authorized"] = False
-    elif freeze_id == "deployable-product-foundation-freeze-v7":
+    elif freeze_id in {
+        "deployable-product-foundation-freeze-v7",
+        "deployable-product-foundation-freeze-v8",
+    }:
         result["tree_bindings"] = spec["tree_binding_count"]
         result["file_bindings"] = spec["file_binding_count"]
-        result["current_match_status"] = "enforced"
+        result["current_match_status"] = (
+            "enforced" if spec["require_current_match"] else "historical-superseded"
+        )
         result["container_build_status"] = build["status"]
-        result["image_build_claimed"] = False
+        result["image_build_claimed"] = build["image_build_claimed"]
         result["release_claim_authorized"] = False
     return result
 

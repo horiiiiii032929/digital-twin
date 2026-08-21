@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 464
+    "audited": 465
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 87,
+    "evaluation_configuration": 88,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 88
   },
-  "file_count": 464,
+  "file_count": 465,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e4ba61471815bbae29d9abe3396b01b3d636cb451cac06f2a0ab9dd6f3c07294",
+  "record_sha256": "cb012745eaab291267494d10d444b90d9b1e40676574d3dc3c67e9a77b354136",
   "records": [
     {
       "audit": {
@@ -2728,6 +2728,22 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Reviewed V8 freeze binds clean current images and operational entrypoints while preserving the failed product publication gate, null selection, exact Refine decision, and zero release/provider/private-data authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json",
+      "risk": "high",
+      "sha256": "c1578c00b3a2729e672947f213d8675a585815cfa66d03358957264ac9b52e99"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -4367,7 +4383,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "V7 freeze review confirmed revision ancestry, current runtime tree identities, file hashes, model-policy identity, four pending external gates, and fail-closed image/release claims; focused regressions passed with zero provider calls or private reads.",
+        "evidence": "V8 freeze review preserves V7 historically and binds the current Refine result, runtime trees, files, image identities, unselected evidence gate, and four pending external gates while rejecting any release promotion.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4380,7 +4396,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "f9dcd9bbec7f9f947bfaaccf9ddab4aa93c2337202042c05e34650ca131b7e30"
+      "sha256": "9e0e1f0875e5b5212cb4fcc211fd12805bc69d07f532cd4824026f5adbb6a8e6"
     },
     {
       "audit": {
@@ -6993,7 +7009,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused V1-V7 freeze regressions verify the current 42/42 tree-bound package while rejecting tree drift, stale hashes, duplicate or promoted gates, changed model policy, and unearned container or release claims.",
+        "evidence": "Focused V1-V8 freeze regressions preserve historical evidence, enforce V8 as the current Refine boundary, and reject tree drift, stale hashes, promoted gates, changed policy, selected-candidate drift, or release claims.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -7004,7 +7020,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "cc761f1ade79f9e676b65d11fef364e4a7b2789c0a5029ff794a19489dbc57c0"
+      "sha256": "121cd828ac939f43cfc336a0473204b71072317211dcef8e3460d5f27a584e64"
     },
     {
       "audit": {
@@ -7632,7 +7648,7 @@
     }
   ],
   "risk_counts": {
-    "high": 362,
+    "high": 363,
     "medium": 102
   },
   "schema_version": 1,
