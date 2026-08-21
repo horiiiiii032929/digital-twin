@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 469
+    "audited": 470
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 90,
+    "evaluation_configuration": 91,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 89
   },
-  "file_count": 469,
+  "file_count": 470,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6ac2bf543f36f9200e9216bbbe0b03607680ee72935df398f26f2fa69dfc3b1a",
+  "record_sha256": "094b0853fdaa9ca3b5c4bdd130c9ac37ffc8f1345f4d4cec2cd3e939d1c407ca",
   "records": [
     {
       "audit": {
@@ -2647,6 +2647,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Freeze review binds 14 runtime trees and 19 critical files to the V10 malformed-output correction, preserves null selection and historical V8 images, and authorizes no evaluation, image, deployment, or release claim.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v10.json",
+      "risk": "high",
+      "sha256": "6510d4ffee411236be5ad80395766fd3f8934fcaa453d7d2623557dfb20b95c1"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -4415,7 +4431,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "V9 review preserves V8 as historical image evidence and binds the current open-set build-only tree, null selection, unbuilt current images, and denied execution/release authority.",
+        "evidence": "V10 review preserves V9 historically and binds the current malformed-verifier correction, null selection, unbuilt current images, and denied execution/release authority.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4428,7 +4444,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "0217e2435b932a4bfbe8fc29537e8441af082451fdf2632787343469828db208"
+      "sha256": "c6b91ab6e27b7082da68d55fbd27794587de530e1fc84f92f571ae8cff84a230"
     },
     {
       "audit": {
@@ -7060,7 +7076,7 @@
     {
       "audit": {
         "domain": "deployment-verification",
-        "evidence": "V9 regression tests validate the current build-only freeze and reject image, selection, and release promotion while preserving V8 as historical-superseded.",
+        "evidence": "V10 regression tests validate the current corrected build-only freeze and reject image, selection, and release promotion while preserving V9 as historical-superseded.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -7071,7 +7087,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "6ae64e6db1b29a750660cdd4a5ddada2f257a3eec122202c05b3ce60ca2dd736"
+      "sha256": "2a8535b5b2476c1ce3864ae910e10e74be742d0fe78502f09ddfd941bc781fb5"
     },
     {
       "audit": {
@@ -7715,7 +7731,7 @@
     }
   ],
   "risk_counts": {
-    "high": 366,
+    "high": 367,
     "medium": 103
   },
   "schema_version": 1,

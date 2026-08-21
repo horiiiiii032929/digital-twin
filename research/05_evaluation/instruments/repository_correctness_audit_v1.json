@@ -1808,6 +1808,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Freeze review binds 14 runtime trees and 19 critical files to the V10 malformed-output correction, preserves null selection and historical V8 images, and authorizes no evaluation, image, deployment, or release claim.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v10.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "6510d4ffee411236be5ad80395766fd3f8934fcaa453d7d2623557dfb20b95c1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
@@ -2920,12 +2931,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "V9 review preserves V8 as historical image evidence and binds the current open-set build-only tree, null selection, unbuilt current images, and denied execution/release authority.",
+      "evidence": "V10 review preserves V9 historically and binds the current malformed-verifier correction, null selection, unbuilt current images, and denied execution/release authority.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "0217e2435b932a4bfbe8fc29537e8441af082451fdf2632787343469828db208"
+      "sha256": "c6b91ab6e27b7082da68d55fbd27794587de530e1fc84f92f571ae8cff84a230"
     },
     {
       "audit_status": "audited",
@@ -4713,12 +4724,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "deployment-verification",
-      "evidence": "V9 regression tests validate the current build-only freeze and reject image, selection, and release promotion while preserving V8 as historical-superseded.",
+      "evidence": "V10 regression tests validate the current corrected build-only freeze and reject image, selection, and release promotion while preserving V9 as historical-superseded.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "6ae64e6db1b29a750660cdd4a5ddada2f257a3eec122202c05b3ce60ca2dd736"
+      "sha256": "2a8535b5b2476c1ce3864ae910e10e74be742d0fe78502f09ddfd941bc781fb5"
     },
     {
       "audit_status": "audited",
