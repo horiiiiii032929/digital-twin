@@ -221,9 +221,9 @@ course isolation, selected retrieval with fallback, professor-policy loading,
 citation validation, idempotent turns, persistence, and safe generation
 failure. Its accepted path still uses a deterministic grounded generator.
 
-LangGraph currently orchestrates the professor onboarding workflow. The
-student runtime does not yet have the learner-state, pedagogical-intent,
-bounded-repair, or course-improvement graphs proposed here.
+LangGraph first orchestrated only the professor onboarding workflow. Issue #107
+now adds the build-only student T1 graph described below; T0 remains selected
+for release.
 
 Reusable foundations:
 
@@ -235,15 +235,39 @@ Reusable foundations:
 - provider-neutral model, embedding, and reranking interfaces; and
 - student/professor conversation-first web workspaces.
 
-Missing product method:
+Still missing before release selection:
 
-- typed learner-state and mastery updates;
-- tutoring-intent transition policy;
-- graph-controlled help/scaffolding levels;
-- evidence-aware pedagogical planning;
-- bounded response verification and repair;
 - privacy-preserving learning-gap aggregation; and
-- a live provider-bound autonomous T1/T2 tutoring path.
+- a provider-qualified autonomous T1 path, one frozen multi-turn confirmation,
+  and the professor-approved T2 fidelity reference.
+
+## Completed network-free development checkpoint
+
+Issue #107 now implements the first T1 contract behind
+`APP_STUDENT_TUTORING_MODE=bounded-tutoring-graph` for local demo/test use. T0
+remains the default and staging validation rejects T1. The implementation adds:
+
+- privacy-minimized typed learner state with revisioned atomic persistence;
+- deterministic turn signals and a bounded tutoring-intent selector;
+- one compiled LangGraph invocation per student message with 12 steps maximum;
+- at most one response repair followed by a deterministic safe fallback;
+- exact citation and source-lineage validation before persistence;
+- fail-closed learner-state race handling and restart-surviving state; and
+- a ten-trajectory, provider-free development contract at
+  `research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json`.
+
+The ten-trajectory deterministic local T0/T1 comparison completed at clean
+revision `51eb43a` as `completed-go-deeper`. Every expected action and T1 intent
+matched; citations, forced fallback, atomic persistence, and restart consistency
+were 100%; and no safety violation, provider call, token, or cost occurred. The
+per-turn evidence and durable decision are recorded in
+[`autonomous-tutoring-graph-development-001`](../research/05_evaluation/autonomous-tutoring-graph-development-001-results.md).
+The one-time network-free execution authorization is revoked.
+
+T0 remains selected for staging and rollback. The development pass advances T1
+only to one separately frozen confirmation; it does not select T1 for release,
+prove model-based learner-state interpretation, establish professor fidelity,
+authorize provider use, or establish student learning.
 
 ## Evaluation question
 

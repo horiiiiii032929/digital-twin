@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-21
+Status date: 2026-08-22
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -36,7 +36,7 @@ toward the release; none is the release by itself.
 | Gate | Release requirement | Current state | Owner issue |
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
-| Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 grounded workflow exists; T1 graph implementation and multi-turn confirmation are pending | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
+| Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; no evidence-sufficiency or multimodal method is selected | [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) and successor to #41 |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | 10,000 deterministic truth packages and pilot-003 simulation ready; paid stages unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
@@ -58,9 +58,9 @@ data, or professor input:
    unauthorized.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
-4. Preserve the current T0 student workflow as the grounded control and prepare
-   the network-free T1 graph contract without opening a provider or held-out
-   evaluation.
+4. Preserve the completed network-free T0/T1 development result and its revoked
+   authorization. Keep T1 rejected by staging configuration while preparing,
+   but not executing, one separately frozen confirmation.
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
    build-only evidence-sufficiency workflow. Its exact Mistral reviewer binding
    remains provider-unauthorized; simulation is not independent-review evidence

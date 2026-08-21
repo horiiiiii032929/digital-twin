@@ -33,6 +33,11 @@ binding uses DeepSeek V4 Flash, strict-evidence prompt v3, non-thinking mode,
 temperature zero, a 600-token ceiling, a 15-second timeout, and process-local
 call/cost caps. Never put real secrets in the example file or Git.
 
+Keep `APP_STUDENT_TUTORING_MODE=grounded-assistant` in staging. The bounded T1
+tutoring graph is implemented behind an explicit local demo/test mode, but the
+runtime validator rejects it in staging until its finite multi-turn evaluation
+and release-profile decision are complete.
+
 ## Build and start
 
 Validate before touching runtime state:

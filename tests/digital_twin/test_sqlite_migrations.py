@@ -26,6 +26,7 @@ def test_clean_database_applies_all_ordered_migrations(tmp_path):
         "citations",
         "identity_credentials",
         "identity_sessions",
+        "conversation_learner_states",
         "schema_migrations",
     }
     repository.close()

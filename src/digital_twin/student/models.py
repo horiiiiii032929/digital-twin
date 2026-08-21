@@ -106,6 +106,9 @@ class Message(BaseModel):
     trace: GenerationTrace | None = None
     client_request_id: str | None = None
     response_to_message_id: str | None = None
+    tutoring_mode: str = "grounded-assistant"
+    tutoring_intent: str | None = None
+    learner_state_revision: int | None = Field(default=None, ge=0)
     created_at: str = Field(default_factory=timestamp_now)
 
 
@@ -223,3 +226,6 @@ class TutorTurn(BaseModel):
     tutor_message: Message
     citations: list[Citation]
     duplicate: bool = False
+    tutoring_mode: str = "grounded-assistant"
+    tutoring_intent: str | None = None
+    learner_state_revision: int | None = Field(default=None, ge=0)

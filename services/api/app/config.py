@@ -24,6 +24,11 @@ class GeneratorMode(StrEnum):
     DEEPSEEK_V4_FLASH = "deepseek-v4-flash"
 
 
+class StudentTutoringMode(StrEnum):
+    GROUNDED_ASSISTANT = "grounded-assistant"
+    BOUNDED_TUTORING_GRAPH = "bounded-tutoring-graph"
+
+
 @dataclass(frozen=True, slots=True)
 class AppSettings:
     mode: RuntimeMode = RuntimeMode.DEMO
@@ -39,6 +44,9 @@ class AppSettings:
     authenticated_requests_per_minute: int = 120
     log_level: str = "INFO"
     generator_mode: GeneratorMode = GeneratorMode.DETERMINISTIC
+    student_tutoring_mode: StudentTutoringMode = (
+        StudentTutoringMode.GROUNDED_ASSISTANT
+    )
     provider_max_calls_per_process: int = 1_000
     provider_cost_cap_usd: float = 5.0
 
@@ -81,6 +89,12 @@ class AppSettings:
             log_level=os.getenv("APP_LOG_LEVEL", "INFO").upper(),
             generator_mode=GeneratorMode(
                 os.getenv("APP_GENERATOR_MODE", GeneratorMode.DETERMINISTIC.value)
+            ),
+            student_tutoring_mode=StudentTutoringMode(
+                os.getenv(
+                    "APP_STUDENT_TUTORING_MODE",
+                    StudentTutoringMode.GROUNDED_ASSISTANT.value,
+                )
             ),
             provider_max_calls_per_process=_positive_int(
                 "APP_PROVIDER_MAX_CALLS_PER_PROCESS", 1_000
@@ -156,6 +170,13 @@ class AppSettings:
         ):
             raise ValueError("APP_PROVIDER_COST_CAP_USD must be positive")
         if self.mode == RuntimeMode.STAGING:
+            if (
+                self.student_tutoring_mode
+                == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+            ):
+                raise ValueError(
+                    "bounded tutoring graph is not yet selected for staging release"
+                )
             if not self.secure_cookies:
                 raise ValueError("staging requires APP_SECURE_COOKIES=true")
             if any(

@@ -3,7 +3,12 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from services.api.app.config import AppSettings, GeneratorMode, RuntimeMode
+from services.api.app.config import (
+    AppSettings,
+    GeneratorMode,
+    RuntimeMode,
+    StudentTutoringMode,
+)
 from services.api.app.factory import (
     DEFAULT_STUDENT_PROFILE,
     _configured_generator,
@@ -269,6 +274,18 @@ def test_staging_configuration_cannot_exceed_proxy_upload_cap(tmp_path):
             allowed_origins=(ORIGIN,),
             secure_cookies=True,
             max_upload_bytes=65 * 1024 * 1024,
+        ).validate()
+
+
+def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):
+    with pytest.raises(ValueError, match="not yet selected for staging"):
+        AppSettings(
+            mode=RuntimeMode.STAGING,
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=(ORIGIN,),
+            secure_cookies=True,
+            student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
         ).validate()
 
 

@@ -267,7 +267,7 @@ def test_current_decision_draft_freeze_validates_without_execution_claim() -> No
     assert result["release_claim_authorized"] is False
 
 
-def test_review_workflow_freeze_is_historical_after_reviewer_binding() -> None:
+def test_review_workflow_freeze_is_historical_after_successor_builds() -> None:
     result = validate_deployable_freeze(_v12_manifest(), root=ROOT)
 
     assert result["status"] == "passed"
@@ -278,9 +278,10 @@ def test_review_workflow_freeze_is_historical_after_reviewer_binding() -> None:
     assert result["file_bindings"] == 26
     assert result["current_match_required"] is False
     assert result["current_match_status"] == "historical-superseded"
-    assert result["superseded_by"] == (
-        "evidence-sufficiency-v2-independent-review-002"
-    )
+    assert result["superseded_by"] == [
+        "evidence-sufficiency-v2-independent-review-002",
+        "autonomous-tutoring-graph-contract-v1",
+    ]
     assert result["image_build_claimed"] is False
     assert result["release_claim_authorized"] is False
 

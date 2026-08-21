@@ -103,6 +103,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_autonomous_tutoring_graph_development.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_cross_course_retrieval_heldout.py": (
             "heldout_execution",
             "method_evaluation_execution",

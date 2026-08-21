@@ -70,6 +70,24 @@ class DeterministicGroundedGenerator:
             ),
         )
 
+    async def generate_for_intent(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+        *,
+        intent: str,
+        help_level: int,
+        repair_reason: str | None = None,
+    ) -> TutorAnswer:
+        del repair_reason
+        answer = await self.generate(question, hits, policy)
+        if answer.trace is None or answer.trace.policy_action != PolicyAction.ANSWER:
+            return answer
+        evidence = _approved_hits(hits)[0].chunk.text
+        content = _deterministic_pedagogical_response(intent, help_level, evidence)
+        return answer.model_copy(update={"content": content})
+
 
 class LiveGroundedGenerator:
     implementation_id = "live-provider-generator"
@@ -147,9 +165,99 @@ class LiveGroundedGenerator:
             ),
         )
 
+    async def generate_for_intent(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+        *,
+        intent: str,
+        help_level: int,
+        repair_reason: str | None = None,
+    ) -> TutorAnswer:
+        build_for_intent = getattr(self.prompt_builder, "build_for_intent", None)
+        if not callable(build_for_intent):
+            raise ValueError("live T1 generation requires a pedagogical prompt builder")
+        started = self.clock()
+        approved_hits = _approved_hits(hits)
+        decision = self.policy_enforcer.evaluate(question, approved_hits, policy)
+        short_circuit = _policy_answer(
+            decision.action,
+            generator_id=self.implementation_id,
+            started=started,
+            clock=self.clock,
+        )
+        if short_circuit is not None:
+            return short_circuit
+        prompt = build_for_intent(
+            question,
+            approved_hits,
+            policy,
+            intent=intent,
+            help_level=help_level,
+            repair_reason=repair_reason,
+        )
+        try:
+            response = await self.client.chat(
+                prompt.messages,
+                task="bounded_pedagogical_tutor_answer",
+            )
+        except LlmError as error:
+            return _provider_failure(error, started=started, clock=self.clock)
+        try:
+            output = ModelTutorOutput.model_validate_json(response.content)
+            citations = self.citation_validator.validate(
+                output.citation_ids,
+                prompt.evidence,
+            )
+        except (ValidationError, ValueError):
+            return _provider_failure(
+                LlmMalformedResponseError(),
+                started=started,
+                clock=self.clock,
+                provider_model=response.provider_model,
+                usage=response.usage,
+            )
+        return TutorAnswer(
+            content=output.answer,
+            citations=citations,
+            trace=_trace(
+                generator_id=self.implementation_id,
+                provider_model=response.provider_model,
+                provider_revision=response.provider_revision,
+                prompt_version=prompt.version,
+                policy_action=decision.action,
+                started=started,
+                clock=self.clock,
+                usage=response.usage,
+            ),
+        )
+
 
 def _approved_hits(hits: list[RetrievalHit]) -> list[RetrievalHit]:
     return [hit for hit in hits if hit.chunk.retrieval_allowed]
+
+
+def _deterministic_pedagogical_response(
+    intent: str,
+    help_level: int,
+    evidence: str,
+) -> str:
+    lead = {
+        "diagnose_understanding": "Start by identifying the part you already understand.",
+        "ask_next_step": "What would your next reasoning step be?",
+        "prompt_self_explanation": "Explain this relationship in your own words.",
+        "give_hint": "Hint: focus on this approved course statement.",
+        "give_analogy_or_example": "Use this approved course statement as the example.",
+        "correct_misconception": "Recheck the misconception against this course statement.",
+        "explain_concept": "Here is the relevant course explanation.",
+        "check_understanding": "Use this statement, then explain what it implies.",
+        "give_retrieval_practice": "Recall the key relationship before checking this statement.",
+        "summarize_progress": "The relevant course point is this.",
+        "close_or_transition_objective": "Use this final check before moving on.",
+    }.get(intent, "Work from this approved course statement.")
+    scaffold = " Try one step yourself." if help_level < 3 else " Compare it directly with your current reasoning."
+    return f"{lead} {evidence}{scaffold}"
 
 
 def _policy_answer(

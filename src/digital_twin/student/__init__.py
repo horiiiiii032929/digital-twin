@@ -29,8 +29,20 @@ from src.digital_twin.student.publication import (
     PublicationError,
     ReleaseLifecycleService,
 )
-from src.digital_twin.student.repository import SQLiteStudentRepository, StudentRepository
+from src.digital_twin.student.repository import (
+    LearnerStateConflictError,
+    SQLiteStudentRepository,
+    StudentRepository,
+)
 from src.digital_twin.student.service import StudentTutoringService, StudentWorkflowError
+from src.digital_twin.student.tutoring_graph import (
+    BoundedTutoringGraph,
+    LearnerState,
+    TutoringGraphInput,
+    TutoringGraphResult,
+    TutoringIntent,
+    TutoringMode,
+)
 
 
 __all__ = [
@@ -53,6 +65,9 @@ __all__ = [
     "ReleaseEvaluationStatus",
     "ReleasePreflightCheck",
     "ReleasePreflightResult",
+    "BoundedTutoringGraph",
+    "LearnerState",
+    "LearnerStateConflictError",
     "SQLiteStudentRepository",
     "StudentCourse",
     "StudentReleaseStatus",
@@ -61,6 +76,10 @@ __all__ = [
     "StudentWorkflowError",
     "SyntheticStudentFixture",
     "TutorTurn",
+    "TutoringGraphInput",
+    "TutoringGraphResult",
+    "TutoringIntent",
+    "TutoringMode",
     "approved_synthetic_policy",
     "seed_synthetic_student_workflow",
 ]

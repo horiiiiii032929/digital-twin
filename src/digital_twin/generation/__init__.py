@@ -24,6 +24,7 @@ from src.digital_twin.generation.models import (
 )
 from src.digital_twin.generation.policy import DeterministicPolicyEnforcer
 from src.digital_twin.generation.prompt import (
+    BoundedPedagogicalPromptBuilder,
     ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     GroundedPromptBuilder,
@@ -32,6 +33,7 @@ from src.digital_twin.generation.prompt import (
 
 
 __all__ = [
+    "BoundedPedagogicalPromptBuilder",
     "CitationValidationError",
     "ClarificationFirstGroundedPromptBuilder",
     "ConservativeGroundedPromptBuilder",

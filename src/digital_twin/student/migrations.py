@@ -141,6 +141,31 @@ def _add_onboarding_session_revision(connection: sqlite3.Connection) -> None:
         )
 
 
+def _add_bounded_tutoring_state(connection: sqlite3.Connection) -> None:
+    message_columns = {
+        str(row[1]) for row in connection.execute("PRAGMA table_info(messages)")
+    }
+    additions = (
+        ("tutoring_mode", "TEXT NOT NULL DEFAULT 'grounded-assistant'"),
+        ("tutoring_intent", "TEXT"),
+        ("learner_state_revision", "INTEGER"),
+    )
+    for name, definition in additions:
+        if name not in message_columns:
+            connection.execute(f"ALTER TABLE messages ADD COLUMN {name} {definition}")
+    connection.execute(
+        """CREATE TABLE IF NOT EXISTS conversation_learner_states (
+               conversation_id TEXT PRIMARY KEY
+                   REFERENCES conversations(id) ON DELETE CASCADE,
+               course_id TEXT NOT NULL REFERENCES courses(id),
+               release_id TEXT NOT NULL REFERENCES releases(id),
+               revision INTEGER NOT NULL CHECK(revision >= 1),
+               state_json TEXT NOT NULL,
+               updated_at TEXT NOT NULL
+           )"""
+    )
+
+
 CORE_SCHEMA_STATEMENTS = (
     """CREATE TABLE IF NOT EXISTS accounts (
            id TEXT PRIMARY KEY,
@@ -383,5 +408,13 @@ DEFAULT_MIGRATIONS = (
         operation=lambda connection: _execute_statements(
             connection, RELEASE_INVARIANT_STATEMENTS
         ),
+    ),
+    SQLiteMigration(
+        version=9,
+        name="bounded-tutoring-learner-state",
+        definition=(
+            "add message tutoring metadata and conversation_learner_states"
+        ),
+        operation=_add_bounded_tutoring_state,
     ),
 )
