@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 462
+    "audited": 465
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 86,
+    "evaluation_configuration": 88,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 87
+    "verification": 88
   },
-  "file_count": 462,
+  "file_count": 465,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e2c472f2a09f5e7af38d3191bce3a87a926a5ff6120ff87f326796a7ab1ef6e0",
+  "record_sha256": "cb012745eaab291267494d10d444b90d9b1e40676574d3dc3c67e9a77b354136",
   "records": [
     {
       "audit": {
@@ -1240,9 +1240,9 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "All three bases are digest pinned; clean API/web images built; API image contains only the runtime worker script and active profile inputs.",
+        "evidence": "All three bases are digest pinned; the API image exposes only the five documented staging operational entrypoints plus active profile inputs, including clean administrator bootstrap, backup, restore, lifecycle, and worker commands.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1251,7 +1251,7 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "e7f82a3313c4f9c757b9c4b3a082faa2a380f1e51ca6b88e93fb0d6e18b691ee"
+      "sha256": "ca0e04d098a4d8d6311bf14198b4e8e5fab09e0e6da889b1d667c2ca84aca761"
     },
     {
       "audit": {
@@ -2712,6 +2712,38 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Reviewed V7 deployment freeze binds the clean post-correctness implementation and result revisions, 14 runtime trees, 17 critical files, the current model policy, and four unpassed external gates without claiming a container image, public deployment, or release.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json",
+      "risk": "high",
+      "sha256": "d2d8fd676e747eed418d4d6968631772fac82f0cd2770b206e9b35f46d13d1ee"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Reviewed V8 freeze binds clean current images and operational entrypoints while preserving the failed product publication gate, null selection, exact Refine decision, and zero release/provider/private-data authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json",
+      "risk": "high",
+      "sha256": "c1578c00b3a2729e672947f213d8675a585815cfa66d03358957264ac9b52e99"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -2776,7 +2808,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Post-correctness release requalification review corrected stale onboarding approval order, mandatory course binding, server-owned ingestion lineage, and failure diagnostics; the 42-gate synthetic deployment journey and focused regressions pass with zero provider/private-data access.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -4351,10 +4383,10 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "V8 freeze review preserves V7 historically and binds the current Refine result, runtime trees, files, image identities, unselected evidence gate, and four pending external gates while rejecting any release promotion.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4364,7 +4396,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "845c5a82e3b6d01b3e62d37e0564b12438020849e29a1c8111e2d6a91f853b85"
+      "sha256": "9e0e1f0875e5b5212cb4fcc211fd12805bc69d07f532cd4824026f5adbb6a8e6"
     },
     {
       "audit": {
@@ -4587,8 +4619,8 @@
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-release-requalification"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4598,15 +4630,15 @@
       ],
       "path": "scripts/verify_deployable_foundation.py",
       "risk": "high",
-      "sha256": "4de2fb6d8e73d34cd35d2a010d8ab5e99e4cfe35e1cd452f0f81fe8b7936e4b2"
+      "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b"
     },
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Post-correctness live-HTTPS workflow review corrected policy-before-preview ordering, course binding, and server-owned ingestion lineage while preserving secure credentials, source ownership, and no-provider boundaries; focused tests pass.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-release-requalification"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4616,7 +4648,7 @@
       ],
       "path": "scripts/verify_https_staging.py",
       "risk": "high",
-      "sha256": "bfdae8f112809c9cff483dace3feb1bde2f225483aa29507cfeb6c5be9d57fbe"
+      "sha256": "c21fefe2558a7d939c36944a552c0405c0992145ebec4ac3418643982fbb5daf"
     },
     {
       "audit": {
@@ -6977,10 +7009,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "evidence": "Focused V1-V8 freeze regressions preserve historical evidence, enforce V8 as the current Refine boundary, and reject tree drift, stale hashes, promoted gates, changed policy, selected-candidate drift, or release claims.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -6988,7 +7020,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "55fc72363e92b906e6d2e6ff0bc0292392638049b0577e106e05f44dc0cf821b"
+      "sha256": "121cd828ac939f43cfc336a0473204b71072317211dcef8e3460d5f27a584e64"
     },
     {
       "audit": {
@@ -7329,9 +7361,9 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Five configuration regressions passed for CI pins, image digests, minimal runtime surface, interactive historical confirmation, Vite env binding, and security headers.",
+        "evidence": "Configuration regressions require digest-pinned bases, the exact documented operational scripts without copying the broad scripts tree, interactive historical confirmation, Vite env binding, and security headers.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7340,7 +7372,7 @@
       "package_commands": [],
       "path": "tests/test_repository_configuration.py",
       "risk": "medium",
-      "sha256": "d3ed727fcc0ac40d55942506adb11dae2b7733e37d4288b25227602c231aa977"
+      "sha256": "899d0c8762ea678580c599eb63e4d5dd3179d36656128bcdd6fefa40247052c5"
     },
     {
       "audit": {
@@ -7569,6 +7601,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "A complete in-process deployment acceptance regression now executes the current 42-gate credentialed professor/student, persistence, recovery, capacity, and rollback journey in the normal test suite with zero network/provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-release-requalification"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_verify_deployable_foundation.py",
+      "risk": "medium",
+      "sha256": "0ca49745a86b15546d00dc480547aa8fffd256438db66a31b81231e1a339b50b"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -7600,8 +7648,8 @@
     }
   ],
   "risk_counts": {
-    "high": 361,
-    "medium": 101
+    "high": 363,
+    "medium": 102
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

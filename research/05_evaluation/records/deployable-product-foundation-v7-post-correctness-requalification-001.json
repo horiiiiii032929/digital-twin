@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v7-post-correctness-requalification-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v7-post-correctness",
+  "corpus_id": "synthetic-network-security-one-pdf-v7",
+  "code_revision": "f553be5f9fa6288514e091b3f9e062e7e1afdbda",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v5-local-multimodel-policy",
+        "version": "v5-historical-control",
+        "configuration": {
+          "current_tree_match": false,
+          "container_evidence_revision": "989fd6a9147ea4a69744040e0d94c361489309fa",
+          "current_release_verifier_contract": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "current-tree-binding-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "credentialed-in-process-gate-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "current-policy-before-preview-contract",
+          "passed": false,
+          "evidence": "The historical verifier resolved policy and previews in an order that no longer matched fail-closed invalidation."
+        },
+        {
+          "name": "course-bound-final-approval-contract",
+          "passed": false,
+          "evidence": "The historical verifier approved setup before course binding, which the current product correctly revokes."
+        },
+        {
+          "name": "server-owned-ingestion-lineage-contract",
+          "passed": false,
+          "evidence": "The historical verifier submitted browser-returned chunks rather than current server-owned ingestion job IDs."
+        },
+        {
+          "name": "complete-failure-diagnostics",
+          "passed": false,
+          "evidence": "The historical result recorded only the exception type and could show all recorded checks passed despite an unrecorded failure."
+        },
+        {
+          "name": "zero-model-and-private-data-boundary",
+          "passed": true,
+          "evidence": "The historical local/container package used synthetic data and zero model calls."
+        }
+      ],
+      "failures_by_category": {
+        "integration": 3,
+        "evaluation": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v7-post-correctness",
+        "version": "v7-in-process",
+        "configuration": {
+          "current_tree_match": true,
+          "implementation_revision": "f553be5f9fa6288514e091b3f9e062e7e1afdbda",
+          "current_container_build_claimed": false,
+          "generator_mode": "deterministic"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "current-tree-binding-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "credentialed-in-process-gate-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "current-policy-before-preview-contract",
+          "passed": true,
+          "evidence": "Policy and non-preview checklist fields are finalized before preview acceptance, with final professor approval last."
+        },
+        {
+          "name": "course-bound-final-approval-contract",
+          "passed": true,
+          "evidence": "Setup is bound to the professor-owned course before policy/preview review and final approval."
+        },
+        {
+          "name": "server-owned-ingestion-lineage-contract",
+          "passed": true,
+          "evidence": "Staging release creation uses the completed professor/course-owned ingestion job ID and never trusts browser chunks."
+        },
+        {
+          "name": "complete-failure-diagnostics",
+          "passed": true,
+          "evidence": "Every caught failure records class, stage, exception type, and a bounded safe message; the complete 42-gate path is now a regression test."
+        },
+        {
+          "name": "zero-model-and-private-data-boundary",
+          "passed": true,
+          "evidence": "The clean run read only generated synthetic data, made zero model/provider calls, and cost USD 0."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "a1-single-node-staging-v7-post-correctness",
+    "rationale": "The current implementation and verifier agree on fail-closed professor review and server-owned source lineage, and all 42 in-process deployment, recovery, capacity, and rollback gates pass on a clean revision.",
+    "limitations": [
+      "The current V7 container image was not built because the local Docker engine stalled on pinned registry metadata and did not recover within the bounded retry.",
+      "Historical V5 container and HTTPS evidence does not establish compatibility for the current code revision.",
+      "Public DNS, trusted TLS, target-host restore, target-host operations, realistic source quality, professor fidelity, and human usability remain pending.",
+      "The run used synthetic data, deterministic generation, one development machine, and a 100-request local capacity probe; it does not establish an SLA."
+    ]
+  }
+}

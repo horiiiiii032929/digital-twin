@@ -13,9 +13,10 @@ The host must provide two vCPUs, four GiB RAM, persistent Docker volumes, a
 public DNS name pointing to the host, and inbound TCP 80/443 plus UDP 443.
 The measured development envelope used 0.30 GiB peak RSS. As a transparent
 planning comparator, a DigitalOcean Basic 2-vCPU/4-GiB/80-GiB Droplet is listed
-at USD 24/month as of 2026-08-19; backups, domain, tax, provider inference, and
-egress outside the included allowance are separate. This is an estimate, not a
-hosting selection. See the [official Droplet pricing](https://www.digitalocean.com/pricing/droplets).
+at USD 24/month as verified on 2026-08-21; backups, domain, tax, provider
+inference, and egress outside the included allowance are separate. This is an
+estimate, not a hosting selection. See the
+[official Droplet pricing](https://www.digitalocean.com/pricing/droplets).
 
 Create a private deployment environment file:
 

@@ -1,0 +1,129 @@
+{
+  "schema_version": 2,
+  "freeze_id": "deployable-product-foundation-freeze-v7",
+  "freeze_date": "2026-08-21",
+  "status": "go-deeper-current-container-requalification-pending",
+  "implementation_revision": "f553be5f9fa6288514e091b3f9e062e7e1afdbda",
+  "evidence_revision": "7c1469ba0bc6a40e68dc8a1bf78cb3e615b0a697",
+  "run_id": "deployable-product-foundation-v7-post-correctness-requalification-001",
+  "baseline_id": "A1-single-node-staging-v5-local-multimodel-policy",
+  "candidate_id": "A1-single-node-staging-v7-post-correctness",
+  "decision": "go-deeper",
+  "release_claim_authorized": false,
+  "public_deployment_authorized": false,
+  "model_policy": {
+    "policy_id": "current-model-policy-2026-08-21-v3",
+    "gemma_execution_allowed": false,
+    "claude_execution_allowed": false,
+    "retired_general_qwen_execution_allowed": false,
+    "product_generator": "deepseek-v4-flash",
+    "deterministic_generator_rollback": true,
+    "independent_reviewer": "openrouter/mistralai/mistral-small-2603",
+    "rejected_reviewer": "openrouter/qwen/qwen3.7-plus",
+    "local_general_model": "qwen3.5:9b-q4_K_M",
+    "local_general_model_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "openrouter_allow_fallbacks": false,
+    "openrouter_require_parameters": true,
+    "model_called_during_policy_validation": false
+  },
+  "local_gates": {
+    "in_process_passed": 42,
+    "in_process_total": 42,
+    "capacity_requests": 100,
+    "capacity_errors": 0,
+    "api_p95_ms": 3.073,
+    "api_p95_gate_ms": 750.0,
+    "backup_schema_version": 8,
+    "dependency_vulnerabilities": 0,
+    "container_build_passed": false,
+    "live_https_executed": false,
+    "external_provider_calls": 0,
+    "external_provider_cost_usd": 0.0,
+    "private_data_used": false
+  },
+  "external_gates": [
+    {
+      "id": "current-container-build-and-local-https",
+      "status": "pending",
+      "reason": "The isolated current-image build stalled on pinned registry metadata and Docker Desktop did not recover within the bounded retry."
+    },
+    {
+      "id": "public-dns-and-certificate",
+      "status": "pending",
+      "reason": "A public host and domain have not been selected for trusted certificate issuance."
+    },
+    {
+      "id": "clean-host-restore",
+      "status": "pending",
+      "reason": "Schema-v8 restore passed in-process, but no current-image restore has run on the target host."
+    },
+    {
+      "id": "staging-workflow-walkthrough",
+      "status": "pending",
+      "reason": "The current workflow passed in-process but not through the current container image or eventual public HTTPS origin."
+    }
+  ],
+  "container_build": {
+    "status": "blocked-local-docker-runtime",
+    "compose_graph_validated": true,
+    "image_build_claimed": false,
+    "docker_engine_version_observed": "28.5.1",
+    "containers_started": false,
+    "runtime_volumes_created": false
+  },
+  "tree_bindings": [
+    {"path": "apps/web", "git_tree_sha1": "a844426a789c793097808c7dd5f92f9fe4e62605"},
+    {"path": "deploy", "git_tree_sha1": "801e7834edb8dd5b75ab13425240a73431f63b57"},
+    {"path": "services/api", "git_tree_sha1": "597ad6ec907ae7db4b82d295ff13633ec6ab2869"},
+    {"path": "services/embeddings", "git_tree_sha1": "eff49f3d52187529a96048403d0e03dc5dd8301f"},
+    {"path": "services/ingestion", "git_tree_sha1": "c4940b79e7ac83989203f28b57db84515a5803fd"},
+    {"path": "services/llm", "git_tree_sha1": "fdb020e3068f48426daf4b3f0c0b193d69f478c5"},
+    {"path": "services/operations", "git_tree_sha1": "1f335c5e95904f72628ec5dfce2e528b12074319"},
+    {"path": "services/persistence", "git_tree_sha1": "1f1cda456fda7dee330e3634cba66f6b58b32180"},
+    {"path": "services/reranking", "git_tree_sha1": "5d6745ea1dbf959fcb90a3aeb29a47adbaa46256"},
+    {"path": "services/storage", "git_tree_sha1": "ba5162d35e2285f2530e33f1c66a9ca22eeb79c6"},
+    {"path": "src/digital_twin", "git_tree_sha1": "c589756c041c93b80bf5929f43c04578a2db59fe"},
+    {"path": "tests/api", "git_tree_sha1": "1d0773cd366953129921f9dda2663e75779a49a0"},
+    {"path": "tests/digital_twin", "git_tree_sha1": "bae239a89ec8b3bae38183326f4bfb92b7f6e39f"},
+    {"path": "tests/services", "git_tree_sha1": "55e62b412d28fcc06e682149a6fb843bc4eb4dde"}
+  ],
+  "file_bindings": [
+    {"path": ".env.example", "sha256": "021e8f00a01592f32a980273fc526b84cccf6fbf768d1ea956f60f4a9c44a43d", "current_match_required": true},
+    {"path": "compose.staging.yml", "sha256": "4019dae00dabe830db7e754b96ea38960185c28ce256ebc84398c390b85dce75", "current_match_required": true},
+    {"path": "package.json", "sha256": "518a3c4f4e785e224ae7779af641c5e1164eab8c60da5eaeed9573951b52bec3", "current_match_required": true},
+    {"path": "package-lock.json", "sha256": "896d0c74b3abbcefac64a3667f42f32640cb1605eee387feb9bdad1485a3cef4", "current_match_required": true},
+    {"path": "pyproject.toml", "sha256": "2d6e8003add2bf981663fdcb254d2a55d858fe6327ac601366bea45110c6590e", "current_match_required": true},
+    {"path": "uv.lock", "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1", "current_match_required": true},
+    {"path": "scripts/verify_deployable_foundation.py", "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b", "current_match_required": true},
+    {"path": "scripts/verify_https_staging.py", "sha256": "c21fefe2558a7d939c36944a552c0405c0992145ebec4ac3418643982fbb5daf", "current_match_required": true},
+    {"path": "scripts/validate_model_policy.py", "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6", "current_match_required": true},
+    {"path": "tests/test_verify_deployable_foundation.py", "sha256": "0ca49745a86b15546d00dc480547aa8fffd256438db66a31b81231e1a339b50b", "current_match_required": true},
+    {"path": "tests/test_verify_https_staging.py", "sha256": "b02284c22c3404fcee4ec82cde8c69980332ed2f50cdea853b08b71392037b46", "current_match_required": true},
+    {"path": "tests/test_staging_compose.py", "sha256": "d0b3260ae167afa513dd9916456ff1ec74a249578da400520574a00d6ab1d9d2", "current_match_required": true},
+    {"path": "research/05_evaluation/deployable-product-foundation-v7-post-correctness-requalification-001-results.md", "sha256": "37d2a74327c33e9f32155a68df18c56e4262a4da05bc6b2631ebd952922ca474", "current_match_required": false},
+    {"path": "research/05_evaluation/records/deployable-product-foundation-v7-post-correctness-requalification-001.json", "sha256": "3762071e60b775f744fd12c9f8c0117d10ac0f609007a915ba9c5b7e04168f2a", "current_match_required": false},
+    {"path": "research/00_admin/2026-08-21-current-model-policy-v3.md", "sha256": "5dbb3058f63f8a0f8d52f97cb4f402bcb52a5ddc763a92080e560a8c516ae422", "current_match_required": false},
+    {"path": "docs/deployment.md", "sha256": "a6026ef8815cbc04f8de05128ea3c5f1688596c7397cca2400cb5d7d57a9f6f5", "current_match_required": true},
+    {"path": "docs/deployment-threat-model.md", "sha256": "473d02994987bf3303d980412604661e32f14dcd5cf31403936180782a399c18", "current_match_required": true}
+  ],
+  "reproduction_commands": [
+    "npm run check",
+    "npm run audit:dependencies",
+    "npm run verify:model-policy",
+    "npm run verify:deployable-foundation",
+    "npm run benchmark:deployable-foundation-development",
+    "npm run staging:build",
+    "npm run verify:staging-https",
+    "npm run verify:deployable-freeze"
+  ],
+  "rollback": {
+    "product": "A0-local-demo",
+    "current_code": "A1-single-node-staging-v5-local-multimodel-policy at its frozen revision",
+    "container": "historical V5 image evidence only; no current V7 image is selected",
+    "generator": "deterministic-grounded-generator-v1",
+    "retriever": "bm25-v1"
+  },
+  "change_control": "Any bound runtime tree, current-match file, model policy, container state, or external-gate change requires a new freeze. Evidence-only files remain revision-bound. V7 authorizes no image, public deployment, provider execution, or release claim.",
+  "private_or_heldout_data_read": false,
+  "external_model_called": false
+}
