@@ -67,6 +67,17 @@ frozen or opened. The preflight therefore remains
 `blocked-dataset-not-frozen`; this intentionally prevents a build-only draft
 from becoming evaluation authority.
 
+The independent-review workflow is separately versioned as
+`evidence-sufficiency-v2-independent-review-001`. It reconstructs 12 blinded
+ten-case batches and a separate six-clean/six-defect sensitivity control. The
+review contract checks question naturalness and answerability, action, claims,
+exact evidence, course/version boundaries, boundary reasons, and modality
+representation. Advisory output cannot modify deterministic truth. Any dataset
+defect requires a corrected draft with a new hash and a successor review ID;
+any sensitivity failure invalidates the reviewer result. The network-free
+simulation is not review evidence, and provider/model identity, freshness,
+cost ceiling, and execution authorization remain deliberately unbound.
+
 ## Metrics and gates
 
 Selection requires all of the following on the one-time decision split:

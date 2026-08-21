@@ -57,6 +57,16 @@ Current utilities:
   memory and verify the committed draft's exact hash and source lineage. The
   write command remains blocked by the active repository execution freeze; the
   draft is review-pending, not frozen evaluation authority.
+- `prepare_evidence_sufficiency_v2_independent_review.py`: reconstructs the
+  blinded 120-case review packet, 12 ten-case batches, and a separate 12-item
+  clean/defect sensitivity control. It validates strict advisory judgments,
+  caps the future priority packet at 12 cases, and reports a fail-closed
+  provider preflight. Run
+  `npm run verify:evidence-sufficiency-v2-independent-review`,
+  `npm run simulate:evidence-sufficiency-v2-independent-review`, or
+  `npm run preflight:evidence-sufficiency-v2-independent-review`. The current
+  instrument has no provider/model/cost binding and no authorization; the
+  simulation is orchestration evidence only and cannot freeze the dataset.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,
