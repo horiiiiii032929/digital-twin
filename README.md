@@ -113,9 +113,10 @@ jobs, password/account/data lifecycle controls, redacted operations,
 backup/restore, and a Caddy HTTPS package. The exact V8 images built and became
 healthy in isolated local HTTPS, and clean administrator bootstrap plus source
 ingestion worked. Publication intentionally failed closed because no production
-evidence-sufficiency method was selected. The current V10 source adds the
-provider-neutral successor boundary but has not been rebuilt into images or
-selected for release. Issue
+evidence-sufficiency method was selected. The current source adds the corrected
+provider-neutral successor boundary and a deterministic, source-linked
+120-case decision draft, but the draft remains independently review-pending
+and the source has not been rebuilt into images or selected for release. Issue
 [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) owns that R1
 release blocker; public DNS/certificate and clean-host rehearsal follow only
 after it passes.
@@ -224,8 +225,8 @@ or standalone benchmark. The merged professor/student workspace is the UX
 baseline. PR #103 merged the deterministic 10,000-package factual-QA successor
 and a provider-unauthorized pilot simulation. PR #104 merged the V8 image
 requalification and its fail-closed evidence-sufficiency blocker. The active
-#105 branch builds the corrected V10 open-set boundary with execution still
-blocked.
+#105 branch now includes the corrected V10 open-set boundary and the authored,
+unfrozen 120-case decision draft; candidate execution remains blocked.
 Remaining release gates cover a selected answerability method, factual quality,
 professor fidelity, target-host deployment and operations, complete workflows,
 privacy, and approval-gated usability.

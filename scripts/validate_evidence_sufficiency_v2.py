@@ -8,6 +8,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+from scripts.build_evidence_sufficiency_v2_decision_draft import (
+    DecisionDraftError,
+    load_and_validate_draft,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INSTRUMENT = (
@@ -30,7 +35,7 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
 
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise EvidenceSufficiencyV2ValidationError("unexpected instrument ID")
-    if instrument.get("status") != "build-only-dataset-authoring-pending":
+    if instrument.get("status") != "build-only-dataset-review-pending":
         raise EvidenceSufficiencyV2ValidationError("build-only status drifted")
     if instrument.get("model_leaderboard") is not False:
         raise EvidenceSufficiencyV2ValidationError(
@@ -78,10 +83,38 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         raise EvidenceSufficiencyV2ValidationError("decision action counts drifted")
     if sum(slice_counts.values()) != 120:
         raise EvidenceSufficiencyV2ValidationError("decision slices do not sum to 120")
-    if decision.get("path") is not None or decision.get("frozen") is not False:
+    decision_path_value = decision.get("path")
+    if not isinstance(decision_path_value, str) or not decision_path_value:
         raise EvidenceSufficiencyV2ValidationError(
-            "decision dataset must remain absent and unfrozen during build-only work"
+            "decision draft path is required during review-pending work"
         )
+    try:
+        draft_summary = load_and_validate_draft(ROOT / decision_path_value)
+    except (OSError, json.JSONDecodeError, DecisionDraftError) as error:
+        raise EvidenceSufficiencyV2ValidationError(
+            "decision draft failed deterministic validation"
+        ) from error
+    if (
+        draft_summary.get("dataset_id") != decision.get("dataset_id")
+        or draft_summary.get("content_sha256") != decision.get("content_sha256")
+        or draft_summary.get("case_count") != decision.get("case_count")
+        or draft_summary.get("action_counts") != action_counts
+        or draft_summary.get("slice_counts") != slice_counts
+    ):
+        raise EvidenceSufficiencyV2ValidationError(
+            "decision draft binding drifted"
+        )
+    if decision.get("frozen") is not False:
+        raise EvidenceSufficiencyV2ValidationError(
+            "decision draft cannot be frozen before independent review"
+        )
+    if (
+        decision.get("status") != "draft-pending-independent-review"
+        or decision.get("structural_validation") != "passed"
+        or decision.get("independent_advisory_review") != "pending"
+        or decision.get("human_priority_review") != "pending"
+    ):
+        raise EvidenceSufficiencyV2ValidationError("decision review state drifted")
     if decision.get("opened") is not False:
         raise EvidenceSufficiencyV2ValidationError("decision split was opened")
 

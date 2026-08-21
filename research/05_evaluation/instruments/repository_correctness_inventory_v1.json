@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 470
+    "audited": 472
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 101,
+    "active_or_unclassified_tooling": 102,
     "active_runtime": 96,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 89
+    "verification": 90
   },
-  "file_count": 470,
+  "file_count": 472,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "094b0853fdaa9ca3b5c4bdd130c9ac37ffc8f1345f4d4cec2cd3e939d1c407ca",
+  "record_sha256": "b45cb5b35f34f0f942a39f0158486eb24b5e261fa1f033994a8b247fa22df2f4",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "execution-configuration",
-        "evidence": "Command review confirms v2 validation and preflight are explicit, provider-free, and separate from historical v1 execution; no evaluation or release authorization was added.",
+        "evidence": "Command review confirms deterministic decision-draft build/check, v2 validation, and preflight are explicit, provider-free, and separate from historical v1 execution; no evaluation or release authorization was added.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "4ec6093dc92e25957f59f06353f413e8242088dc40bb9e6c6b488b98641cb33c"
+      "sha256": "707e53c8ea0ac955b155ab71ca2208eae22805f00960beb28353854cbb20f32c"
     },
     {
       "audit": {
@@ -1688,7 +1688,7 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Instrument review confirms consumed v1 data is development-only, AnyHit is unselectable, the 120-case decision split is absent and unopened, exact candidates are unbound, and every execution/release authority is false.",
+        "evidence": "Instrument review binds the exact structurally validated 120-case synthetic-public draft while keeping it unfrozen and unopened; consumed v1 data remains development-only, AnyHit is unselectable, exact candidates are unbound, and every execution/release authority is false.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -1699,7 +1699,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
       "risk": "high",
-      "sha256": "de02d9ccc963cb63c9844edd4f3d0e6f181848d09dad477d4c45ef0c0cc6391c"
+      "sha256": "f5f09c10e60cb54b7157ab219989744dd50f2301063b5a3f727e1a83c8cd141f"
     },
     {
       "audit": {
@@ -3206,6 +3206,25 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
+        "evidence": "Manual construction review and focused mutation tests confirm deterministic 120-case authoring, six-course stratification, exact active-source lineage, empty abstain lineage, version boundaries, byte-stable hashing, and zero provider/private-data access.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:evidence-sufficiency-v2-draft",
+        "verify:evidence-sufficiency-v2-draft"
+      ],
+      "path": "scripts/build_evidence_sufficiency_v2_decision_draft.py",
+      "risk": "high",
+      "sha256": "6f81baf9fb58d1a2cca57a17b612966ec7d5979d89abb3d27bf2713096099698"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
         "evidence": "Manual algorithm and boundary review plus focused execution confirmed exact source, claim, case, slice, course, modality, and checkpoint grains; direct CLI validation makes zero calls and write mode fails closed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -4485,7 +4504,7 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Manual validation and negative mutation tests confirm the build-only contract, source counts, boundary ownership, freshness policy, AnyHit exclusion, and all authorization blocks fail closed without provider or private-data access.",
+        "evidence": "Manual validation and negative mutation tests confirm the instrument binds the exact review-pending draft while preserving boundary ownership, freshness policy, AnyHit exclusion, and all authorization blocks without provider or private-data access.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4499,7 +4518,7 @@
       ],
       "path": "scripts/validate_evidence_sufficiency_v2.py",
       "risk": "high",
-      "sha256": "3c368f446fcfe93ce55055d71bffdedb8b8d00ce1c5be80da050d35760f6f085"
+      "sha256": "567787029f5450758757e50e4c84dd7f039712ec6a72b771e92fa3d7a897d946"
     },
     {
       "audit": {
@@ -6148,7 +6167,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; the deterministic truth-package builder and pilot-003 runner are classified, pilot 003 is not allowlisted, historical paid authorizations remain revoked, and no 1,000- or 10,000-case stage is authorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; the deterministic truth-package builder, evidence-sufficiency draft builder, and pilot-003 runner are classified, pilot 003 is not allowlisted, historical paid authorizations remain revoked, and no decision, 1,000-, or 10,000-case execution is authorized.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -6159,7 +6178,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e0c5afa309d6e71602d8471260fcd236dabe3a1e0d37173314b45c22648d958e"
+      "sha256": "e55c943254113f5fc2740d756d25bbfd5bbe055e6b41214a0d97a824240aeb73"
     },
     {
       "audit": {
@@ -6995,6 +7014,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-verification",
+        "evidence": "Focused regressions prove exact 120-case and slice distribution, byte stability, six-course stratification, active-version lineage, empty abstain lineage, distractor boundaries, bounded review state, and fail-closed corruption detection.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_evidence_sufficiency_v2_decision_draft.py",
+      "risk": "medium",
+      "sha256": "b3251660b758e72b046084c7ab9f2028d3358c7b59243fe036a7e8d0043ec3d4"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -7731,8 +7766,8 @@
     }
   ],
   "risk_counts": {
-    "high": 367,
-    "medium": 103
+    "high": 368,
+    "medium": 104
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

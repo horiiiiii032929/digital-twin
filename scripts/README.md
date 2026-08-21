@@ -50,6 +50,13 @@ Current utilities:
   `npm run preflight:evidence-sufficiency-v2`. The preflight must remain blocked
   until a new independently reviewed decision set, exact candidate, and
   separate execution authorization exist.
+- `build_evidence_sufficiency_v2_decision_draft.py`: deterministically builds
+  and validates the 120-case synthetic-public decision draft without reading
+  private data or calling a model. Run
+  `npm run verify:evidence-sufficiency-v2-draft` to reconstruct the design in
+  memory and verify the committed draft's exact hash and source lineage. The
+  write command remains blocked by the active repository execution freeze; the
+  draft is review-pending, not frozen evaluation authority.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

@@ -45,8 +45,8 @@ hours of any authorized execution. No Gemma or Claude model is eligible.
 - The 30-case v1 calibration set and consumed 50-case v1 held-out set become
   development-only evidence. They can expose known failure modes but cannot
   support a v2 selection.
-- A new 120-case synthetic-public decision set will contain 80 answerable and
-  40 abstain cases. Every answerable case must bind atomic claims to exact
+- A deterministic 120-case synthetic-public decision draft now contains 80
+  answerable and 40 abstain cases. Every answerable case binds atomic claims to exact
   source quotes; every abstain case must have empty authoritative lineage and a
   source-independent boundary reason.
 - Required slices are direct, paraphrase, multi-evidence, ambiguous,
@@ -57,9 +57,15 @@ hours of any authorized execution. No Gemma or Claude model is eligible.
 - The new decision split must pass structural review, independent advisory
   review, and a maximum 12-case priority human packet before it is frozen.
 
-The decision split does not exist yet. The validator and preflight therefore
-must remain `blocked-dataset-not-frozen`; this is intentional and prevents a
-build-only change from becoming an evaluation authorization.
+The exact draft is committed at
+`research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_001.json`
+with content hash
+`7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023`.
+It passes deterministic structure and lineage validation but remains pending
+independent advisory review and the bounded priority review packet. It is not
+frozen or opened. The preflight therefore remains
+`blocked-dataset-not-frozen`; this intentionally prevents a build-only draft
+from becoming evaluation authority.
 
 ## Metrics and gates
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "evidence-sufficiency-v2-build-001",
-  "status": "build-only-dataset-authoring-pending",
+  "status": "build-only-dataset-review-pending",
   "issue": 105,
   "predecessor_result": "evidence-sufficiency-v1-clean",
   "decision_question": "Can retrieved evidence be classified as sufficient for answering with zero false answers while retaining at least 90 percent of answerable questions?",
@@ -33,9 +33,10 @@
     ]
   },
   "prospective_decision_dataset": {
-    "dataset_id": "evidence-sufficiency-v2-decision-001",
-    "status": "authoring-and-independent-review-required",
-    "path": null,
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+    "status": "draft-pending-independent-review",
+    "path": "research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_001.json",
+    "content_sha256": "7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023",
     "case_count": 120,
     "action_counts": {
       "answer": 80,
@@ -54,6 +55,9 @@
     },
     "ground_truth_policy": "Deterministic source-linked actions, atomic claims, exact evidence quotes, and empty lineage for abstain cases; model review is advisory only.",
     "independent_advisory_review_required": true,
+    "structural_validation": "passed",
+    "independent_advisory_review": "pending",
+    "human_priority_review": "pending",
     "priority_human_packet_max": 12,
     "frozen": false,
     "opened": false
