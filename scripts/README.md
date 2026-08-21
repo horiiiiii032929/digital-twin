@@ -64,9 +64,12 @@ Current utilities:
   provider preflight. Run
   `npm run verify:evidence-sufficiency-v2-independent-review`,
   `npm run simulate:evidence-sufficiency-v2-independent-review`, or
-  `npm run preflight:evidence-sufficiency-v2-independent-review`. The current
-  instrument has no provider/model/cost binding and no authorization; the
-  simulation is orchestration evidence only and cannot freeze the dataset.
+  `npm run preflight:evidence-sufficiency-v2-independent-review`. Successor
+  instrument `002` binds exact OpenRouter routing to
+  `mistralai/mistral-small-2603`, the published input/output prices, a USD 0.50
+  hard ceiling, and synthetic-public data only. Provider execution remains
+  unauthorized; the simulation is orchestration evidence only and cannot
+  freeze the dataset.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

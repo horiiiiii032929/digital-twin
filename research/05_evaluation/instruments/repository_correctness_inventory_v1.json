@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 477
+    "audited": 478
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 94,
+    "evaluation_configuration": 95,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 91
   },
-  "file_count": 477,
+  "file_count": 478,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "35f0551ca690c37327bbe55d4611530eb3d93a56a8a6798fe7e5c93a677a4774",
+  "record_sha256": "9f0606e95e4759536f8bee6e99dd6c6eeeb60d0bf2672657609cda2846d47e09",
   "records": [
     {
       "audit": {
@@ -1716,6 +1716,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_001.json",
       "risk": "high",
       "sha256": "05e6c2078ae5ae2d103c6b18b18d9ccaecf8e1fd695fac022f00041516c5baac"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Manual contract and metadata review plus focused tests bind exact OpenRouter Mistral Small 4 routing, current published pricing, a USD 0.50 ceiling, zero retries, and synthetic-public inputs while preserving zero provider, dataset-freeze, candidate-evaluation, or automatic-promotion authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_002.json",
+      "risk": "high",
+      "sha256": "10abd47586c0b7161d48c8a414a3ba4a024c9d8e829b47792bd4156e1a08a755"
     },
     {
       "audit": {
@@ -3748,9 +3764,9 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual fail-closed review plus focused tests verify byte-stable packet reconstruction, strict judgment validation, bounded priority routing, no-call simulation, explicit blocked preflight, and a repository-freeze guard before any output write.",
+        "evidence": "Manual fail-closed review plus focused tests verify historical and reviewer-bound instruments, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata-expiry blocking, no-call simulation, authorization-only blocked preflight, and a repository-freeze guard before any output write.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
       },
       "audit_status": "audited",
@@ -3763,7 +3779,7 @@
       ],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "353632c73145ea7662be0976ccc99b7d00f3fc18234574ac63fa729f90b351ff"
+      "sha256": "f07d6a43e59e6f13ab8c45fa2e495e6d33e5eec585062e4763d65a1ae7375241"
     },
     {
       "audit": {
@@ -7499,9 +7515,9 @@
     {
       "audit": {
         "domain": "evaluation-verification",
-        "evidence": "Focused regressions prove exact packet binding and batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, bounded priority routing, blocked no-call preflight, and freeze-guarded writes.",
+        "evidence": "Focused regressions prove historical and reviewer-bound packet binding, batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, bounded priority routing, metadata-expiry blocking, authorization-only blocked preflight, and freeze-guarded writes.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
       },
       "audit_status": "audited",
@@ -7510,7 +7526,7 @@
       "package_commands": [],
       "path": "tests/test_prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "bbe4e35f8c70daaa7e498fd58499c47f8a236806ce619a6500dc5f91b16a7990"
+      "sha256": "f5fe6ef9184a2ce3cef971165ffe9a9aa6dced53a98caf0e8f720ac86455b960"
     },
     {
       "audit": {
@@ -7850,7 +7866,7 @@
     }
   ],
   "risk_counts": {
-    "high": 372,
+    "high": 373,
     "medium": 105
   },
   "schema_version": 1,
