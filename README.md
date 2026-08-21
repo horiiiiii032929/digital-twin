@@ -106,12 +106,17 @@ in-memory fixtures created automatically at demo startup. The student
 
 ## Invite-only staging candidate
 
-The A1 candidate adds credentialed administrator/professor/student access,
-secure revocable cookie sessions, durable SQLite schema migrations, owned
-onboarding state, content-addressed source storage, recoverable ingestion jobs,
-password/account/data lifecycle controls, redacted operations, backup/restore,
-and a Caddy HTTPS package. Its local development evaluation passed 41/41 checks;
-public DNS/certificate and clean-host rehearsal remain pending.
+The current foundation adds credentialed administrator/professor/student
+access, secure revocable cookie sessions, durable SQLite schema migrations,
+owned onboarding state, content-addressed source storage, recoverable ingestion
+jobs, password/account/data lifecycle controls, redacted operations,
+backup/restore, and a Caddy HTTPS package. The exact current images now build
+and become healthy in isolated local HTTPS, and clean administrator bootstrap
+plus source ingestion work. Publication intentionally fails closed because no
+production evidence-sufficiency method is selected. Issue
+[#105](https://github.com/horiiiiii032929/digital-twin/issues/105) owns that R1
+release blocker; public DNS/certificate and clean-host rehearsal follow only
+after it passes.
 
 Start with [staging deployment and recovery](docs/deployment.md) and the
 [deployment threat model](docs/deployment-threat-model.md). Never copy a real
@@ -214,10 +219,12 @@ Current evidence and limitations:
 The active goal is release of an invite-only Course Digital Twin for multiple
 professors and courses, not a one-course RAG pilot, local-only demonstration,
 or standalone benchmark. The merged professor/student workspace is the UX
-baseline. Draft PR #103 contains the deterministic 10,000-package factual-QA
-successor and a provider-unauthorized pilot simulation. Remaining release gates
-cover factual quality, professor fidelity, target-host deployment and
-operations, complete workflows, privacy, and approval-gated usability.
+baseline. PR #103 merged the deterministic 10,000-package factual-QA successor
+and a provider-unauthorized pilot simulation. Draft PR #104 records the current
+image requalification and its fail-closed evidence-sufficiency blocker.
+Remaining release gates cover a selected answerability method, factual quality,
+professor fidelity, target-host deployment and operations, complete workflows,
+privacy, and approval-gated usability.
 
 See the
 [real-world product scope](research/00_admin/2026-08-18-real-world-product-scope.md)
