@@ -3,8 +3,9 @@
 import math
 import time
 from collections.abc import Sequence
+from typing import Protocol
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.grounding.retrieval import lexical_tokens
@@ -85,6 +86,205 @@ class EvidenceSufficiencyEvaluationSummary(BaseModel):
     answerability_by_category: dict[str, dict[str, float | int]]
     decisions: list[EvidenceSufficiencyCaseResult]
     retrieval: RetrievalEvaluationSummary
+
+
+class EvidenceSupportSignals(BaseModel):
+    """Provider-neutral semantic signals used by the open-set v2 gate.
+
+    The verifier may score evidence, but it cannot return the final product
+    decision. Referenced hit IDs are checked against the exact eligible hits
+    supplied by retrieval before the signals can be used.
+    """
+
+    direct_support: float = Field(ge=0, le=1, allow_inf_nan=False)
+    completeness: float = Field(ge=0, le=1, allow_inf_nan=False)
+    contradiction: float = Field(ge=0, le=1, allow_inf_nan=False)
+    ambiguity: float = Field(ge=0, le=1, allow_inf_nan=False)
+    supporting_hit_ids: list[str] = Field(default_factory=list)
+    reason: str = Field(min_length=1)
+
+    @field_validator("supporting_hit_ids")
+    @classmethod
+    def supporting_hit_ids_must_be_unique(cls, values: list[str]) -> list[str]:
+        if any(not value.strip() for value in values):
+            raise ValueError("supporting_hit_ids cannot contain blank IDs")
+        if len(values) != len(set(values)):
+            raise ValueError("supporting_hit_ids must be unique")
+        return values
+
+
+class EvidenceSupportVerifier(Protocol):
+    """Score semantic support without owning the final answer/abstain policy."""
+
+    implementation_id: str
+    version: str
+
+    def verify(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSupportSignals:
+        """Return bounded support signals for the exact retrieved evidence."""
+
+
+class CalibratedOpenSetEvidenceGate:
+    """Fail-closed policy over independently calibrated support signals."""
+
+    implementation_id = "calibrated-open-set-evidence-gate-v2"
+
+    def __init__(
+        self,
+        verifier: EvidenceSupportVerifier,
+        *,
+        minimum_direct_support: float,
+        minimum_completeness: float,
+        maximum_contradiction: float,
+        maximum_ambiguity: float,
+        minimum_supporting_hits: int = 1,
+        evidence_limit: int = 5,
+    ) -> None:
+        self._validate_probability(
+            minimum_direct_support,
+            "minimum_direct_support",
+        )
+        self._validate_probability(minimum_completeness, "minimum_completeness")
+        self._validate_probability(maximum_contradiction, "maximum_contradiction")
+        self._validate_probability(maximum_ambiguity, "maximum_ambiguity")
+        if isinstance(minimum_supporting_hits, bool) or minimum_supporting_hits < 1:
+            raise ValueError("minimum_supporting_hits must be at least 1")
+        if isinstance(evidence_limit, bool) or evidence_limit < 1:
+            raise ValueError("evidence_limit must be at least 1")
+        if minimum_supporting_hits > evidence_limit:
+            raise ValueError("minimum_supporting_hits cannot exceed evidence_limit")
+        if not getattr(verifier, "implementation_id", ""):
+            raise ValueError("verifier must declare implementation_id")
+        if not getattr(verifier, "version", ""):
+            raise ValueError("verifier must declare version")
+        self.verifier = verifier
+        self.minimum_direct_support = minimum_direct_support
+        self.minimum_completeness = minimum_completeness
+        self.maximum_contradiction = maximum_contradiction
+        self.maximum_ambiguity = maximum_ambiguity
+        self.minimum_supporting_hits = minimum_supporting_hits
+        self.evidence_limit = evidence_limit
+
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSufficiencyDecision:
+        bounded_hits = list(hits[: self.evidence_limit])
+        if not bounded_hits:
+            return self._rejected(
+                "no eligible evidence was retrieved",
+                verifier_called=False,
+                hit_count=0,
+            )
+
+        try:
+            signals = self.verifier.verify(query, bounded_hits)
+        except Exception as error:  # The release boundary must fail closed.
+            return self._rejected(
+                "evidence verifier failed closed",
+                verifier_called=True,
+                hit_count=len(bounded_hits),
+                verifier_error=True,
+                verifier_error_type=type(error).__name__,
+            )
+
+        eligible_hit_ids = {hit.chunk.id for hit in bounded_hits}
+        supporting_hit_ids = set(signals.supporting_hit_ids)
+        if not supporting_hit_ids.issubset(eligible_hit_ids):
+            return self._rejected(
+                "evidence verifier referenced an unknown hit",
+                verifier_called=True,
+                hit_count=len(bounded_hits),
+                verifier_output_valid=False,
+            )
+
+        checks = {
+            "direct_support_passed": (
+                signals.direct_support >= self.minimum_direct_support
+            ),
+            "completeness_passed": (
+                signals.completeness >= self.minimum_completeness
+            ),
+            "contradiction_passed": (
+                signals.contradiction <= self.maximum_contradiction
+            ),
+            "ambiguity_passed": signals.ambiguity <= self.maximum_ambiguity,
+            "supporting_hits_passed": (
+                len(supporting_hit_ids) >= self.minimum_supporting_hits
+            ),
+        }
+        sufficient = all(checks.values())
+        score = min(
+            signals.direct_support,
+            signals.completeness,
+            1 - signals.contradiction,
+            1 - signals.ambiguity,
+        )
+        return EvidenceSufficiencyDecision(
+            sufficient=sufficient,
+            score=score,
+            reason=(
+                "retrieved evidence passes calibrated open-set support checks"
+                if sufficient
+                else "retrieved evidence fails calibrated open-set support checks"
+            ),
+            features={
+                "hit_count": len(bounded_hits),
+                "direct_support": signals.direct_support,
+                "completeness": signals.completeness,
+                "contradiction": signals.contradiction,
+                "ambiguity": signals.ambiguity,
+                "supporting_hit_count": len(supporting_hit_ids),
+                "minimum_direct_support": self.minimum_direct_support,
+                "minimum_completeness": self.minimum_completeness,
+                "maximum_contradiction": self.maximum_contradiction,
+                "maximum_ambiguity": self.maximum_ambiguity,
+                "minimum_supporting_hits": self.minimum_supporting_hits,
+                "verifier_called": True,
+                "verifier_error": False,
+                "verifier_output_valid": True,
+                **checks,
+            },
+        )
+
+    @staticmethod
+    def _validate_probability(value: float, name: str) -> None:
+        if (
+            isinstance(value, bool)
+            or not math.isfinite(value)
+            or not 0 <= value <= 1
+        ):
+            raise ValueError(f"{name} must be between 0 and 1")
+
+    def _rejected(
+        self,
+        reason: str,
+        *,
+        verifier_called: bool,
+        hit_count: int,
+        verifier_error: bool = False,
+        verifier_error_type: str | None = None,
+        verifier_output_valid: bool = True,
+    ) -> EvidenceSufficiencyDecision:
+        features: dict[str, float | int | bool] = {
+            "hit_count": hit_count,
+            "verifier_called": verifier_called,
+            "verifier_error": verifier_error,
+            "verifier_output_valid": verifier_output_valid,
+        }
+        if verifier_error_type is not None:
+            # Avoid leaking provider or exception text through product traces.
+            features["verifier_error_type_known"] = bool(verifier_error_type)
+        return EvidenceSufficiencyDecision(
+            sufficient=False,
+            score=0.0,
+            reason=reason,
+            features=features,
+        )
 
 
 class AnyHitEvidenceGate:

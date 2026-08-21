@@ -44,6 +44,12 @@ Current utilities:
   frozen choices on a separate held-out set; run calibration without touching
   held-out results using `npm run calibrate:evidence-sufficiency`, and run the
   recorded comparison with `npm run benchmark:evidence-sufficiency`.
+- `validate_evidence_sufficiency_v2.py`: validates the provider-neutral open-set
+  answerability successor and reports a network-free, fail-closed preflight.
+  Run `npm run verify:evidence-sufficiency-v2` or
+  `npm run preflight:evidence-sufficiency-v2`. The preflight must remain blocked
+  until a new independently reviewed decision set, exact candidate, and
+  separate execution authorization exist.
 - `synthetic_course_corpus.py`: shares the approved synthetic source, PDF, and
   chunk builders used by ingestion and retrieval verification.
 - `validate_component_profile.py`: validates the complete component inventory,

@@ -5,7 +5,10 @@ from src.digital_twin.grounding.chunking import (
 )
 from src.digital_twin.grounding.evidence_sufficiency import (
     AnyHitEvidenceGate,
+    CalibratedOpenSetEvidenceGate,
     EvidenceGatedRetriever,
+    EvidenceSupportSignals,
+    EvidenceSupportVerifier,
     EvidenceSufficiencyCaseResult,
     EvidenceSufficiencyDecision,
     EvidenceSufficiencyEvaluationSummary,
@@ -105,6 +108,7 @@ __all__ = [
     "ApprovalDecision",
     "ApprovalRecord",
     "BM25Retriever",
+    "CalibratedOpenSetEvidenceGate",
     "CourseDocument",
     "CourseSourceIngestionResult",
     "DocumentChunk",
@@ -114,6 +118,8 @@ __all__ = [
     "DenseRetriever",
     "EmptyQueryError",
     "EvidenceGatedRetriever",
+    "EvidenceSupportSignals",
+    "EvidenceSupportVerifier",
     "EvidenceSufficiencyCaseResult",
     "EvidenceSufficiencyDecision",
     "EvidenceSufficiencyEvaluationSummary",

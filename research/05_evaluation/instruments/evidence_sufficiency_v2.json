@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "instrument_id": "evidence-sufficiency-v2-build-001",
+  "status": "build-only-dataset-authoring-pending",
+  "issue": 105,
+  "predecessor_result": "evidence-sufficiency-v1-clean",
+  "decision_question": "Can retrieved evidence be classified as sufficient for answering with zero false answers while retaining at least 90 percent of answerable questions?",
+  "evaluation_type": "open-set-answerability",
+  "model_leaderboard": false,
+  "boundary_ownership": {
+    "owned_actions": [
+      "answer",
+      "abstain"
+    ],
+    "clarify_reason": "Ambiguous evidence may produce abstention and a downstream clarification request.",
+    "academic_integrity_owner": "deterministic-tutor-policy",
+    "academic_integrity_is_answerability_label": false
+  },
+  "historical_development_data": {
+    "case_count": 80,
+    "selection_eligible": false,
+    "sources": [
+      {
+        "path": "research/05_evaluation/evidence_sufficiency_v1_calibration.json",
+        "case_count": 30,
+        "role": "development-consumed"
+      },
+      {
+        "path": "research/05_evaluation/evidence_sufficiency_v1_test.json",
+        "case_count": 50,
+        "role": "development-consumed"
+      }
+    ]
+  },
+  "prospective_decision_dataset": {
+    "dataset_id": "evidence-sufficiency-v2-decision-001",
+    "status": "authoring-and-independent-review-required",
+    "path": null,
+    "case_count": 120,
+    "action_counts": {
+      "answer": 80,
+      "abstain": 40
+    },
+    "slice_counts": {
+      "direct": 15,
+      "paraphrase": 15,
+      "multi-evidence": 15,
+      "ambiguous": 10,
+      "cross-course": 10,
+      "near-domain": 20,
+      "no-evidence": 15,
+      "permission-version": 10,
+      "multimodal": 10
+    },
+    "ground_truth_policy": "Deterministic source-linked actions, atomic claims, exact evidence quotes, and empty lineage for abstain cases; model review is advisory only.",
+    "independent_advisory_review_required": true,
+    "priority_human_packet_max": 12,
+    "frozen": false,
+    "opened": false
+  },
+  "candidate_families": [
+    {
+      "id": "any-hit-control",
+      "role": "unsafe-historical-control",
+      "selectable": false
+    },
+    {
+      "id": "inspectable-feature-classifier-v2",
+      "role": "deterministic-development-control",
+      "selectable": true
+    },
+    {
+      "id": "cross-encoder-support-verifier-v2",
+      "role": "prospective-candidate",
+      "selectable": true
+    },
+    {
+      "id": "cross-encoder-nli-completeness-verifier-v2",
+      "role": "prospective-candidate",
+      "selectable": true
+    }
+  ],
+  "runtime_contract": {
+    "gate_implementation_id": "calibrated-open-set-evidence-gate-v2",
+    "verifier_owns_final_decision": false,
+    "signals": [
+      "direct_support",
+      "completeness",
+      "contradiction",
+      "ambiguity",
+      "supporting_hit_ids"
+    ],
+    "unknown_hit_id_fails_closed": true,
+    "malformed_output_fails_closed": true,
+    "verifier_error_fails_closed": true,
+    "original_evidence_remains_authoritative": true
+  },
+  "hard_gates": {
+    "false_answer_count_max": 0,
+    "answerable_recall_min": 0.9,
+    "balanced_accuracy_min": 0.95,
+    "near_domain_accuracy_min": 1.0,
+    "multi_evidence_recall_min": 0.9,
+    "safety_violation_count_max": 0,
+    "citation_lineage_failure_count_max": 0,
+    "mutation_detection_rate_min": 1.0,
+    "verifier_p95_ms_max": 500,
+    "added_peak_memory_bytes_max": 2147483648
+  },
+  "freshness_policy": {
+    "metadata_max_age_hours": 24,
+    "official_source_required": true,
+    "exact_model_identity_required": true,
+    "exact_routing_required": true,
+    "fallback_routing_allowed": false,
+    "pricing_change_requires_refreeze": true,
+    "retention_change_requires_refreeze": true,
+    "selected_provider": null,
+    "selected_model": null,
+    "verified_at": null
+  },
+  "execution_safety": {
+    "provider_execution_authorized": false,
+    "calibration_execution_authorized": false,
+    "decision_split_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false,
+    "gemma_allowed": false,
+    "claude_allowed": false
+  },
+  "decision_rule": {
+    "all_gates_pass": "Keep and bind the exact selected method into a new product profile before repeating the V8 HTTPS publication journey.",
+    "any_quality_gate_fails": "Refine or drop the method; do not tune against the opened decision split.",
+    "invalid_execution": "Register the invalid result and preserve the split state; do not infer quality.",
+    "authorize_release": false
+  }
+}

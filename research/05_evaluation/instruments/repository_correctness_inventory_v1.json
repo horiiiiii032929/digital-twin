@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 465
+    "audited": 468
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 100,
+    "active_or_unclassified_tooling": 101,
     "active_runtime": 96,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 88,
+    "evaluation_configuration": 89,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 88
+    "verification": 89
   },
-  "file_count": 465,
+  "file_count": 468,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cb012745eaab291267494d10d444b90d9b1e40676574d3dc3c67e9a77b354136",
+  "record_sha256": "4188bebbfdd4968e3eecfd58a41f690550c97893fa80a1360bba4ba3aab91673",
   "records": [
     {
       "audit": {
@@ -1288,10 +1288,10 @@
     {
       "audit": {
         "domain": "execution-configuration",
-        "evidence": "Manual command/configuration review plus locked repository verification; deterministic truth, pilot-003 validation, simulation, preflight, provider-freshness, and Professor Digital Twin transition commands are explicit and separate; paid execution remains fail-closed; and the inventory gate requires zero pending or open audit findings.",
+        "evidence": "Command review confirms v2 validation and preflight are explicit, provider-free, and separate from historical v1 execution; no evaluation or release authorization was added.",
         "findings": [],
         "reviewed_at": "2026-08-21",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "518a3c4f4e785e224ae7779af641c5e1164eab8c60da5eaeed9573951b52bec3"
+      "sha256": "4ec6093dc92e25957f59f06353f413e8242088dc40bb9e6c6b488b98641cb33c"
     },
     {
       "audit": {
@@ -1684,6 +1684,22 @@
       "path": "research/05_evaluation/instruments/evaluation_run_v2_synthetic_example.json",
       "risk": "high",
       "sha256": "61e228f44e44a21d00a386fe5b76f792df4defebc90d64dd054bae6c8dd9a213"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Instrument review confirms consumed v1 data is development-only, AnyHit is unselectable, the 120-case decision split is absent and unopened, exact candidates are unbound, and every execution/release authority is false.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
+      "risk": "high",
+      "sha256": "de02d9ccc963cb63c9844edd4f3d0e6f181848d09dad477d4c45ef0c0cc6391c"
     },
     {
       "audit": {
@@ -4437,6 +4453,25 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
+        "evidence": "Manual validation and negative mutation tests confirm the build-only contract, source counts, boundary ownership, freshness policy, AnyHit exclusion, and all authorization blocks fail closed without provider or private-data access.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:evidence-sufficiency-v2",
+        "verify:evidence-sufficiency-v2"
+      ],
+      "path": "scripts/validate_evidence_sufficiency_v2.py",
+      "risk": "high",
+      "sha256": "3c368f446fcfe93ce55055d71bffdedb8b8d00ce1c5be80da050d35760f6f085"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
         "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, DeepSeek account-linked retention/storage terms, Mistral 30-day/no-training policy, and a 24-hour age bound without making inference calls.",
         "findings": [],
         "reviewed_at": "2026-08-21",
@@ -5537,9 +5572,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "evidence": "Export review confirms the provider-neutral open-set gate, support signals, and verifier protocol are explicit without changing the historical controls.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5548,7 +5583,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "47ba58519d55e65a979eeb46b880fef5c2fff5eb48131ff47a9d03eb3d3445ca"
+      "sha256": "21e071bcfe172a8993d23929bc83b1894476e255e6cee2b114c174aacd0bd866"
     },
     {
       "audit": {
@@ -5569,9 +5604,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "evidence": "Manual boundary review plus focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5580,7 +5615,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "19006625d0a9f0ed172590ec1a33badbfa7db1ec172e141446f1ef460572b3dc"
+      "sha256": "1bfdb9039c2de880cc13eb354bf19670f582518f4aa3d4499fcdca809d067cc7"
     },
     {
       "audit": {
@@ -6529,9 +6564,9 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, verifier failure redaction, bounded evidence, and invalid v2 configuration.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6540,7 +6575,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
-      "sha256": "96826b532a8b7056f30d1bef22276b48edd15a985a01c5fd6fc59a4a8e6e6be1"
+      "sha256": "803df14cb3778f6ba58d3651d8f68015831e461e9d380e180227b5194a0ca8ee"
     },
     {
       "audit": {
@@ -7037,6 +7072,22 @@
       "path": "tests/test_draft_cross_course_benchmark_v2.py",
       "risk": "medium",
       "sha256": "17d8b845de4db469288aeb898770a96de6e8529f2f18c4e09bd8de8af709cfb8"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-verification",
+        "evidence": "Focused tests prove preflight remains blocked, consumed data and AnyHit cannot select v2, self-authorization and release claims are rejected, and academic-integrity ownership remains separate.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_evidence_sufficiency_v2.py",
+      "risk": "medium",
+      "sha256": "902d5a2e6bc75bf8b1ef8ed1a098648c17e1f1d8f83806fe2c1f6b5982de8ef1"
     },
     {
       "audit": {
@@ -7648,8 +7699,8 @@
     }
   ],
   "risk_counts": {
-    "high": 363,
-    "medium": 102
+    "high": 365,
+    "medium": 103
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
