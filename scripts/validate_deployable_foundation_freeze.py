@@ -29,6 +29,7 @@ MANIFEST_PATHS = (
     PROFILE_ROOT / "deployable-product-foundation-freeze-v9.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v10.json",
     PROFILE_ROOT / "deployable-product-foundation-freeze-v11.json",
+    PROFILE_ROOT / "deployable-product-foundation-freeze-v12.json",
 )
 EXPECTED_EXTERNAL_GATES = {
     "public-dns-and-certificate",
@@ -556,6 +557,76 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
         },
         "tree_binding_count": 14,
         "file_binding_count": 22,
+        "require_current_match": False,
+        "external_gate_ids": {
+            "evidence-sufficiency-selection-and-live-publication",
+            "public-dns-and-certificate",
+            "clean-host-restore",
+            "staging-workflow-walkthrough",
+        },
+    },
+    "deployable-product-foundation-freeze-v12": {
+        "status": "refine-independent-review-execution-and-selection-required",
+        "run_id": "deployable-product-foundation-v12-review-workflow-001",
+        "candidate_id": "A1-single-node-staging-v12-review-workflow",
+        "decision": "refine",
+        "selected_implementation_id": None,
+        "local_fields": {
+            "review_workflow_focused_passed": 35,
+            "review_workflow_focused_total": 35,
+            "review_packet_validated": True,
+            "review_packet_case_count": 120,
+            "review_batch_count": 12,
+            "sensitivity_control_count": 12,
+            "network_free_judgment_count": 132,
+            "network_free_simulation_passed": True,
+            "review_preflight_blocked_fail_closed": True,
+            "independent_reviewer_bound": False,
+            "independent_review_completed": False,
+            "decision_dataset_frozen": False,
+            "candidate_model_bound": False,
+            "evidence_sufficiency_selected": False,
+            "current_source_image_built": False,
+            "publication_completed": False,
+            "external_provider_calls": 0,
+            "external_provider_cost_usd": 0.0,
+            "private_or_heldout_data_used": False,
+        },
+        "local_label": "35/35-review-workflow-build-only",
+        "summary_marker": "35-test focused suite passes",
+        "build_fields": {
+            "status": "current-source-images-unbuilt-v8-images-historical",
+            "compose_graph_validated": True,
+            "image_build_claimed": False,
+            "prior_v8_api_image_sha256": (
+                "a78a99e17e3a5b2bdba52aa6c490ca7"
+                "aa532df9b46b2b9c9f136840360cde929"
+            ),
+            "prior_v8_web_image_sha256": (
+                "242c39320e0acbee5f014854c4300145"
+                "01a716cbb7d055ca9884ad468f644028"
+            ),
+            "containers_started": False,
+            "runtime_volumes_created": False,
+        },
+        "commands": {
+            "npm run check",
+            "npm run audit:dependencies",
+            "npm run verify:model-policy",
+            "npm run verify:evidence-sufficiency-v2-draft",
+            "npm run verify:evidence-sufficiency-v2",
+            "npm run verify:evidence-sufficiency-v2-independent-review",
+            "npm run simulate:evidence-sufficiency-v2-independent-review",
+            "npm run preflight:evidence-sufficiency-v2-independent-review",
+            "npm run preflight:evidence-sufficiency-v2",
+            "npm run verify:deployable-foundation",
+            "npm run benchmark:deployable-foundation-development",
+            "npm run staging:build",
+            "npm run verify:staging-https",
+            "npm run verify:deployable-freeze",
+        },
+        "tree_binding_count": 14,
+        "file_binding_count": 26,
         "require_current_match": True,
         "external_gate_ids": {
             "evidence-sufficiency-selection-and-live-publication",
@@ -697,6 +768,7 @@ def validate_deployable_freeze(
         "deployable-product-foundation-freeze-v9",
         "deployable-product-foundation-freeze-v10",
         "deployable-product-foundation-freeze-v11",
+        "deployable-product-foundation-freeze-v12",
     }:
         implementation_revision = manifest.get("implementation_revision", "")
         if (
@@ -778,6 +850,7 @@ def validate_deployable_freeze(
         "deployable-product-foundation-freeze-v9",
         "deployable-product-foundation-freeze-v10",
         "deployable-product-foundation-freeze-v11",
+        "deployable-product-foundation-freeze-v12",
     }:
         expected_model_policy = {
             "policy_id": "current-model-policy-2026-08-21-v3",
@@ -828,6 +901,7 @@ def validate_deployable_freeze(
         "deployable-product-foundation-freeze-v9",
         "deployable-product-foundation-freeze-v10",
         "deployable-product-foundation-freeze-v11",
+        "deployable-product-foundation-freeze-v12",
     }:
         tree_bindings = manifest.get("tree_bindings", [])
         file_bindings = manifest.get("file_bindings", [])
@@ -978,6 +1052,7 @@ def validate_deployable_freeze(
         "deployable-product-foundation-freeze-v9",
         "deployable-product-foundation-freeze-v10",
         "deployable-product-foundation-freeze-v11",
+        "deployable-product-foundation-freeze-v12",
     }:
         result["tree_bindings"] = spec["tree_binding_count"]
         result["file_bindings"] = spec["file_binding_count"]

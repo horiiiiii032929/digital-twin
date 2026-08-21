@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 465 executable or execution-affecting
+the current branch extends it to all 477 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 57 protected entrypoints
+active for all general evaluation actions. It covers 59 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -96,7 +96,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 738 Python tests and 46 frontend tests, frontend lint, and the
+check passes 753 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -116,9 +116,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 738-test Python suite.
+connections. These corrections pass the current 753-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 473-file audit. Evaluation
+artifacts are also fully dispositioned in the current 477-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -178,13 +178,18 @@ The deterministic 120-case synthetic-public decision draft is now authored:
 text, table, diagram, code, and equation evidence. All answer cases bind exact
 active-source claims and quotes; all abstain cases have empty authoritative
 lineage. Its exact hash passes automated structural validation, but independent
-advisory review and the 12-case priority packet remain pending. The draft is
-unfrozen and unopened, so preflight correctly remains
-`blocked-dataset-not-frozen`; no exact verifier is bound, and calibration plus
-decision execution are unauthorized. V11 is the current **Refine** checkpoint
-with no selected implementation. Because its source tree differs from V8, the V8 image
-identities are historical evidence; the current source has no image or
-publication claim.
+advisory review and the 12-case priority packet remain pending. V12 now binds a
+deterministic review workflow: 12 blinded ten-case batches, six clean controls,
+six planted defect classes, strict judgment accounting, and a maximum 12-case
+priority packet. Its 132-judgment network-free simulation passes, but that is
+orchestration evidence rather than review evidence. The review preflight remains
+`blocked-not-authorized` because no exact reviewer, fresh provider metadata,
+cost ceiling, or one-time execution authorization is bound. The draft remains
+unfrozen and unopened; no exact verifier is selected, and calibration plus
+decision execution are unauthorized. V12 is the current **Refine** checkpoint
+with no selected implementation. Because its source tree differs from V8, the
+V8 image identities are historical evidence; the current source has no image
+or publication claim.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -199,7 +204,7 @@ earlier foundation into `main` at `adf39af`. PR
 deterministic factual-QA successor and repository-correctness corrections at
 `4657219`. PR
 [#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
-requalification. V11 remains a separate corrected build-only release checkpoint
+requalification. V12 remains a separate corrected build-only release checkpoint
 and does not promote the still-pending product or public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
@@ -222,7 +227,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; V11 binds the corrected fail-closed provider-neutral gate and exact 120-case decision draft | Independently review/freeze the decision set, select a real evidence-sufficiency method, rebuild the same source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, rebuild the same source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
 ## Release readiness and critical path
@@ -238,7 +243,7 @@ professor-fidelity calibration, and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / draft authored / Refine | Independently review and freeze the 120-case decision set, then prospectively select an open-set answerability gate without using AnyHit |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 5 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 6 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
 | 7 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
@@ -254,7 +259,7 @@ active correction moves canonical questions, answers, actions, claim IDs, and
 citations into deterministic source truth while keeping model generation and
 review advisory. This remains method validation, not a model benchmark.
 Issue #88 remains active. V8 images are operational historical evidence, while
-the changed V11 source is intentionally unbuilt. Product publication remains
+the changed V12 source is intentionally unbuilt. Product publication remains
 blocked by the unselected evidence-sufficiency component; a host rehearsal is
 premature until that gate is selected and the same source revision is rebuilt.
 
@@ -408,8 +413,8 @@ Pipeline 002 implements that method-level correction rather than another prompt
 revision. Its truth content hash is
 `1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
 That merged provider-free checkpoint passed 713 Python and 46 frontend tests
-with a 465/465 complete audit. The current V11 checkpoint passes 738 Python and
-46 frontend tests with a 473/473 complete audit. Pilot 003 is reviewed but not
+with a 465/465 complete audit. The current V12 checkpoint passes 753 Python and
+46 frontend tests with a 477/477 complete audit. Pilot 003 is reviewed but not
 frozen or allowlisted. The separate Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
 schema, and an empty 8-12-case calibration template. Fidelity judging and held-

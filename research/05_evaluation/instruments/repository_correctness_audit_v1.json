@@ -879,7 +879,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "707e53c8ea0ac955b155ab71ca2208eae22805f00960beb28353854cbb20f32c"
+      "sha256": "69e3e8bef2fc6476350cbea745701b206a8654f8ac6a16f05368a4649f87147f"
     },
     {
       "audit_status": "audited",
@@ -1155,6 +1155,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "f5f09c10e60cb54b7157ab219989744dd50f2301063b5a3f727e1a83c8cd141f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual contract review and focused simulation confirm exact draft/hash binding, blinded 12x10 review batches, separate six-clean/six-defect sensitivity controls, strict advisory responses, zero automatic ground-truth authority, and no provider/model/cost or execution authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_001.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-data-quality-review",
+      "sha256": "05e6c2078ae5ae2d103c6b18b18d9ccaecf8e1fd695fac022f00041516c5baac"
     },
     {
       "audit_status": "audited",
@@ -1830,6 +1841,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Freeze review binds 14 runtime trees and 26 critical files to the V12 bounded independent-review workflow, preserves null selection and historical V8 images, and authorizes no provider review, dataset freeze, candidate execution, image, deployment, or release claim.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v12.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-data-quality-review",
+      "sha256": "50afd2fffd157cb2b4fba8cd8f0d938590d8394346ef11641faa27b6c6d88331"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
@@ -2489,6 +2511,17 @@
     },
     {
       "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual fail-closed review plus focused tests verify byte-stable packet reconstruction, strict judgment validation, bounded priority routing, no-call simulation, explicit blocked preflight, and a repository-freeze guard before any output write.",
+      "findings": [],
+      "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-data-quality-review",
+      "sha256": "353632c73145ea7662be0976ccc99b7d00f3fc18234574ac63fa729f90b351ff"
+    },
+    {
+      "audit_status": "audited",
       "disposition": "historical_guarded",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
@@ -2953,12 +2986,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "V11 review preserves V10 historically and binds the current source-linked decision draft, pending independent review, null selection, unbuilt current images, and denied execution/release authority.",
+      "evidence": "V12 review preserves V11 historically and binds the current bounded independent-review workflow, unopened source-linked decision draft, null selection, unbuilt current images, and denied review/evaluation/release authority.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "fb23d2195896fe6a77a3b4c3e6610ec999d306d776282a85d4bd3b9bdcd3084f"
+      "sha256": "eb4e3c2cbd2e2d13ab7d0b6e3a90b5daaaddb5f7430e345956b2bb0840b2a639"
     },
     {
       "audit_status": "audited",
@@ -4113,7 +4146,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "e55c943254113f5fc2740d756d25bbfd5bbe055e6b41214a0d97a824240aeb73"
+      "sha256": "81d10e65327bc79a417cccbdad003326dc63df3e2df0fb9a6749afb49c7e39e5"
     },
     {
       "audit_status": "audited",
@@ -4746,12 +4779,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "deployment-verification",
-      "evidence": "V11 regression tests validate the current decision-draft build-only freeze, reject false review/freeze/image/selection/release promotion, and preserve V10 as historical-superseded.",
+      "evidence": "V12 regression tests validate the current bounded review-workflow freeze, reject false review/freeze/selection/release promotion, and preserve V11 as historical-superseded.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "928944507e9693e3f71caca163319c236917676e59f92f9c78c4880041c71c2f"
+      "sha256": "dd0a2c7614a6366c14d78181dd4daff3b46ace535420241fdf12415009ca009c"
     },
     {
       "audit_status": "audited",
@@ -4785,6 +4818,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "902d5a2e6bc75bf8b1ef8ed1a098648c17e1f1d8f83806fe2c1f6b5982de8ef1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-verification",
+      "evidence": "Focused regressions prove exact packet binding and batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, bounded priority routing, blocked no-call preflight, and freeze-guarded writes.",
+      "findings": [],
+      "path": "tests/test_prepare_evidence_sufficiency_v2_independent_review.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-data-quality-review",
+      "sha256": "bbe4e35f8c70daaa7e498fd58499c47f8a236806ce619a6500dc5f91b16a7990"
     },
     {
       "audit_status": "audited",

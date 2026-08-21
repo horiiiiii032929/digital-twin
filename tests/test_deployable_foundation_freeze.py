@@ -52,6 +52,10 @@ V11_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v11.json"
 )
+V12_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v12.json"
+)
 
 
 def _manifest() -> dict:
@@ -96,6 +100,10 @@ def _v10_manifest() -> dict:
 
 def _v11_manifest() -> dict:
     return json.loads(V11_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v12_manifest() -> dict:
+    return json.loads(V12_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -253,6 +261,21 @@ def test_current_decision_draft_freeze_validates_without_execution_claim() -> No
     assert result["artifact_bindings"] == 36
     assert result["tree_bindings"] == 14
     assert result["file_bindings"] == 22
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
+    assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
+def test_current_review_workflow_freeze_validates_without_execution_claim() -> None:
+    result = validate_deployable_freeze(_v12_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == "35/35-review-workflow-build-only"
+    assert result["artifact_bindings"] == 40
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 26
     assert result["current_match_required"] is True
     assert result["current_match_status"] == "enforced"
     assert result["image_build_claimed"] is False
@@ -374,6 +397,28 @@ def test_v11_freeze_rejects_review_freeze_execution_or_release_claims() -> None:
         validate_deployable_freeze(frozen_manifest, root=ROOT)
 
     release_manifest = _v11_manifest()
+    release_manifest["release_claim_authorized"] = True
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)
+
+
+def test_v12_freeze_rejects_review_freeze_selection_or_release_claims() -> None:
+    reviewed_manifest = _v12_manifest()
+    reviewed_manifest["local_gates"]["independent_review_completed"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(reviewed_manifest, root=ROOT)
+
+    frozen_manifest = _v12_manifest()
+    frozen_manifest["local_gates"]["decision_dataset_frozen"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(frozen_manifest, root=ROOT)
+
+    selected_manifest = _v12_manifest()
+    selected_manifest["local_gates"]["evidence_sufficiency_selected"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(selected_manifest, root=ROOT)
+
+    release_manifest = _v12_manifest()
     release_manifest["release_claim_authorized"] = True
     with pytest.raises(ValueError, match="cannot authorize a release claim"):
         validate_deployable_freeze(release_manifest, root=ROOT)
