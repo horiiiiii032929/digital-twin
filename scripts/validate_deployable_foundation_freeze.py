@@ -628,7 +628,10 @@ FREEZE_SPECS: dict[str, dict[str, Any]] = {
         "tree_binding_count": 14,
         "file_binding_count": 26,
         "require_current_match": False,
-        "superseded_by": "autonomous-tutoring-graph-contract-v1",
+        "superseded_by": [
+            "evidence-sufficiency-v2-independent-review-002",
+            "autonomous-tutoring-graph-contract-v1",
+        ],
         "external_gate_ids": {
             "evidence-sufficiency-selection-and-live-publication",
             "public-dns-and-certificate",

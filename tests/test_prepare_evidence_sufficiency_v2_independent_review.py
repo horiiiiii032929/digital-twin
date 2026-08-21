@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import copy
 from collections import Counter
+from datetime import datetime, timedelta
+from pathlib import Path
 
 import pytest
 
@@ -165,21 +167,46 @@ def test_judgment_validator_fails_closed(packet: dict, mutation: str) -> None:
 
 
 def test_preflight_reports_exact_build_only_blockers(instrument: dict) -> None:
-    result = preflight(instrument)
+    verified_at = datetime.fromisoformat(
+        instrument["execution_safety"]["reviewer_verified_at"]
+    )
+    result = preflight(instrument, now=verified_at + timedelta(hours=1))
 
     assert result == {
-        "instrument_id": "evidence-sufficiency-v2-independent-review-001",
+        "instrument_id": "evidence-sufficiency-v2-independent-review-002",
         "status": "blocked-not-authorized",
-        "blockers": [
-            "independent-reviewer-not-bound",
-            "reviewer-metadata-not-fresh",
-            "review-cost-ceiling-not-frozen",
-            "provider-review-not-authorized",
-        ],
+        "blockers": ["provider-review-not-authorized"],
         "provider_or_model_calls": 0,
         "private_data_read": False,
         "candidate_evaluation_opened": False,
     }
+
+
+def test_historical_unbound_instrument_preserves_all_four_blockers() -> None:
+    historical_path = (
+        Path(__file__).resolve().parents[1]
+        / "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_001.json"
+    )
+    result = preflight(load_instrument(historical_path))
+
+    assert result["blockers"] == [
+        "independent-reviewer-not-bound",
+        "reviewer-metadata-not-fresh",
+        "review-cost-ceiling-not-frozen",
+        "provider-review-not-authorized",
+    ]
+
+
+def test_bound_reviewer_metadata_expires_after_24_hours(instrument: dict) -> None:
+    verified_at = datetime.fromisoformat(
+        instrument["execution_safety"]["reviewer_verified_at"]
+    )
+    result = preflight(instrument, now=verified_at + timedelta(hours=24, seconds=1))
+
+    assert result["blockers"] == [
+        "reviewer-metadata-not-fresh",
+        "provider-review-not-authorized",
+    ]
 
 
 def test_write_mode_is_blocked_by_repository_execution_freeze(

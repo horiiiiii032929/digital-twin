@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import copy
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -22,14 +23,20 @@ from src.digital_twin.repository_freeze import (
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_001.json"
+    / "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_002.json"
 )
 DEFAULT_OUTPUT = (
     ROOT
     / "reports/generated/evidence-sufficiency-v2-independent-review-packet-001.json"
 )
-INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-001"
-PACKET_ID = "evidence-sufficiency-v2-independent-review-packet-001"
+SUPPORTED_INSTRUMENTS = {
+    "evidence-sufficiency-v2-independent-review-001": (
+        "build-only-provider-unauthorized"
+    ),
+    "evidence-sufficiency-v2-independent-review-002": (
+        "reviewer-bound-provider-unauthorized"
+    ),
+}
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
     "item_id",
@@ -64,9 +71,10 @@ def _canonical_sha256(value: Any) -> str:
 
 def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     instrument = json.loads(path.read_text(encoding="utf-8"))
-    if instrument.get("instrument_id") != INSTRUMENT_ID:
+    instrument_id = instrument.get("instrument_id")
+    if instrument_id not in SUPPORTED_INSTRUMENTS:
         raise IndependentReviewError("unexpected independent-review instrument ID")
-    if instrument.get("status") != "build-only-provider-unauthorized":
+    if instrument.get("status") != SUPPORTED_INSTRUMENTS[instrument_id]:
         raise IndependentReviewError("independent-review build status drifted")
     dataset = instrument.get("decision_dataset", {})
     if (
@@ -90,14 +98,74 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     if any(safety.get(key) is not False for key in required_false):
         raise IndependentReviewError("independent-review execution safety drifted")
     if (
-        safety.get("reviewer_provider") is not None
-        or safety.get("reviewer_model") is not None
-        or safety.get("reviewer_verified_at") is not None
-        or safety.get("retries") != 0
+        safety.get("retries") != 0
         or safety.get("maximum_calls") != 13
-        or safety.get("maximum_cost_usd") is not None
     ):
-        raise IndependentReviewError("reviewer binding must remain absent")
+        raise IndependentReviewError("reviewer execution bounds drifted")
+    if instrument_id.endswith("-001"):
+        if (
+            safety.get("reviewer_provider") is not None
+            or safety.get("reviewer_model") is not None
+            or safety.get("reviewer_verified_at") is not None
+            or safety.get("maximum_cost_usd") is not None
+        ):
+            raise IndependentReviewError("reviewer binding must remain absent")
+    elif {
+        "reviewer_provider": safety.get("reviewer_provider"),
+        "reviewer_model": safety.get("reviewer_model"),
+        "reviewer_litellm_model": safety.get("reviewer_litellm_model"),
+        "credential_environment_variable": safety.get(
+            "credential_environment_variable"
+        ),
+        "maximum_cost_usd": safety.get("maximum_cost_usd"),
+        "maximum_reserved_cost_usd": safety.get("maximum_reserved_cost_usd"),
+    } != {
+        "reviewer_provider": "openrouter",
+        "reviewer_model": "mistralai/mistral-small-2603",
+        "reviewer_litellm_model": "openrouter/mistralai/mistral-small-2603",
+        "credential_environment_variable": "OPENROUTER_API_KEY",
+        "maximum_cost_usd": 0.5,
+        "maximum_reserved_cost_usd": 0.0702,
+    }:
+        raise IndependentReviewError("reviewer proposal binding drifted")
+    elif {
+        "metadata_maximum_age_hours": safety.get("metadata_maximum_age_hours"),
+        "metadata_source": safety.get("metadata_source"),
+        "provider_policy_source": safety.get("provider_policy_source"),
+        "temperature": safety.get("temperature"),
+        "max_input_tokens_per_call": safety.get("max_input_tokens_per_call"),
+        "max_output_tokens_per_call": safety.get("max_output_tokens_per_call"),
+        "pricing_usd_per_million_input_tokens": safety.get(
+            "pricing_usd_per_million_input_tokens"
+        ),
+        "pricing_usd_per_million_output_tokens": safety.get(
+            "pricing_usd_per_million_output_tokens"
+        ),
+        "provider_routing": safety.get("provider_routing"),
+        "provider_policy": safety.get("provider_policy"),
+    } != {
+        "metadata_maximum_age_hours": 24,
+        "metadata_source": "https://openrouter.ai/api/v1/models",
+        "provider_policy_source": "https://openrouter.ai/providers",
+        "temperature": 0,
+        "max_input_tokens_per_call": 20000,
+        "max_output_tokens_per_call": 4000,
+        "pricing_usd_per_million_input_tokens": 0.15,
+        "pricing_usd_per_million_output_tokens": 0.6,
+        "provider_routing": {
+            "order": ["Mistral"],
+            "allow_fallbacks": False,
+            "require_parameters": True,
+            "data_collection": "allow",
+            "zdr": False,
+        },
+        "provider_policy": {
+            "trains_on_prompts": False,
+            "retention": "30 day retention",
+            "data_boundary": "synthetic-public-evaluation-only",
+        },
+    }:
+        raise IndependentReviewError("reviewer metadata or routing drifted")
     decision_rule = instrument.get("decision_rule", {})
     if any(
         decision_rule.get(key) is not False
@@ -271,8 +339,8 @@ def build_review_packet(
     sensitivity_items, scoring_key = _mutation_items(case_map, source_map)
     core = {
         "schema_version": 1,
-        "packet_id": PACKET_ID,
-        "instrument_id": INSTRUMENT_ID,
+        "packet_id": instrument["review_packet"]["packet_id"],
+        "instrument_id": instrument["instrument_id"],
         "dataset_id": draft["dataset_id"],
         "dataset_content_sha256": draft["content_sha256"],
         "status": "build-only-provider-unauthorized",
@@ -301,7 +369,8 @@ def validate_review_packet(
     if content_sha256 != expected_hash:
         raise IndependentReviewError("review packet instrument binding drifted")
     if (
-        packet.get("packet_id") != PACKET_ID
+        packet.get("packet_id") != instrument["review_packet"]["packet_id"]
+        or packet.get("instrument_id") != instrument["instrument_id"]
         or packet.get("provider_or_model_calls") != 0
         or packet.get("private_data_read") is not False
         or packet.get("candidate_evaluation_opened") is not False
@@ -349,8 +418,8 @@ def validate_review_packet(
     ):
         raise IndependentReviewError("sensitivity answer leaked into reviewer payload")
     return {
-        "instrument_id": INSTRUMENT_ID,
-        "packet_id": PACKET_ID,
+        "instrument_id": instrument["instrument_id"],
+        "packet_id": instrument["review_packet"]["packet_id"],
         "content_sha256": content_sha256,
         "source_count": len(source_map),
         "review_case_count": len(review_items),
@@ -464,7 +533,7 @@ def validate_judgments(
         "unresolved_clear": not unresolved,
     }
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": instrument["instrument_id"],
         "status": (
             "simulation-passed-not-evidence"
             if simulation and all(gates.values())
@@ -519,19 +588,34 @@ def simulated_judgments(packet: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
+def preflight(
+    instrument: dict[str, Any], *, now: datetime | None = None
+) -> dict[str, Any]:
     safety = instrument["execution_safety"]
     blockers = []
     if safety["reviewer_model"] is None:
         blockers.append("independent-reviewer-not-bound")
     if safety["reviewer_verified_at"] is None:
         blockers.append("reviewer-metadata-not-fresh")
+    else:
+        try:
+            verified_at = datetime.fromisoformat(safety["reviewer_verified_at"])
+            current = now or datetime.now(timezone.utc)
+            age_hours = (
+                current.astimezone(timezone.utc)
+                - verified_at.astimezone(timezone.utc)
+            ).total_seconds() / 3600
+        except (TypeError, ValueError):
+            blockers.append("reviewer-metadata-not-fresh")
+        else:
+            if age_hours < 0 or age_hours > 24:
+                blockers.append("reviewer-metadata-not-fresh")
     if safety["maximum_cost_usd"] is None:
         blockers.append("review-cost-ceiling-not-frozen")
     if not safety["provider_execution_authorized"]:
         blockers.append("provider-review-not-authorized")
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": instrument["instrument_id"],
         "status": "blocked-not-authorized" if blockers else "ready",
         "blockers": blockers,
         "provider_or_model_calls": 0,

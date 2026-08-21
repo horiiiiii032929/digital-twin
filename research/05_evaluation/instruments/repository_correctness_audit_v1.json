@@ -1170,6 +1170,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Manual contract and metadata review plus focused tests bind exact OpenRouter Mistral Small 4 routing, current published pricing, a USD 0.50 ceiling, zero retries, and synthetic-public inputs while preserving zero provider, dataset-freeze, candidate-evaluation, or automatic-promotion authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_002.json",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-data-quality-review",
+      "sha256": "10abd47586c0b7161d48c8a414a3ba4a024c9d8e829b47792bd4156e1a08a755"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
@@ -2513,12 +2524,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual fail-closed review plus focused tests verify byte-stable packet reconstruction, strict judgment validation, bounded priority routing, no-call simulation, explicit blocked preflight, and a repository-freeze guard before any output write.",
+      "evidence": "Manual fail-closed review plus focused tests verify historical and reviewer-bound instruments, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata-expiry blocking, no-call simulation, authorization-only blocked preflight, and a repository-freeze guard before any output write.",
       "findings": [],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "sha256": "353632c73145ea7662be0976ccc99b7d00f3fc18234574ac63fa729f90b351ff"
+      "sha256": "f07d6a43e59e6f13ab8c45fa2e495e6d33e5eec585062e4763d65a1ae7375241"
     },
     {
       "audit_status": "audited",
@@ -2986,12 +2997,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "V12 remains historically reproducible while the issue #107 build-only T1 contract explicitly supersedes current-tree matching without authorizing deployment, evaluation, or release.",
+      "evidence": "V12 remains historically reproducible while reviewer-binding instrument 002 and the issue #107 build-only T1 contract supersede current-tree matching without authorizing provider review, dataset freeze, candidate evaluation, deployment, or release.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "73711f1c6687c29e5b9605856bf0d74133ed0757ce278623255fc451b868e4e4"
+      "sha256": "8f2ffa501e8e1bc56b1d3765af4ecf2fbd00c2cbc442b9b61d7de023a6cd2f4b"
     },
     {
       "audit_status": "audited",
@@ -4779,12 +4790,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "deployment-verification",
-      "evidence": "Regression tests preserve V12 historically, bind its explicit issue #107 successor, and continue rejecting false review, selection, deployment, and release promotion.",
+      "evidence": "Regression tests preserve V12 as a historical build-only checkpoint after reviewer-binding instrument 002 and the T1 graph contract, reject false review/freeze/selection/release promotion, and retain its exact historical bindings.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "c35521e15aee2a4b8cb4258e7e2bfd9d48c136c57e48bbcbcfa3d1582d44fafe"
+      "sha256": "238dff67084dbf4e45a233ec05f3bb54b1f23eba17461b05e854ab97c7cecda5"
     },
     {
       "audit_status": "audited",
@@ -4823,12 +4834,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-verification",
-      "evidence": "Focused regressions prove exact packet binding and batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, bounded priority routing, blocked no-call preflight, and freeze-guarded writes.",
+      "evidence": "Focused regressions prove historical and reviewer-bound packet binding, batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, bounded priority routing, metadata-expiry blocking, authorization-only blocked preflight, and freeze-guarded writes.",
       "findings": [],
       "path": "tests/test_prepare_evidence_sufficiency_v2_independent_review.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "sha256": "bbe4e35f8c70daaa7e498fd58499c47f8a236806ce619a6500dc5f91b16a7990"
+      "sha256": "f5fe6ef9184a2ce3cef971165ffe9a9aa6dced53a98caf0e8f720ac86455b960"
     },
     {
       "audit_status": "audited",

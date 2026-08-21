@@ -62,10 +62,10 @@ data, or professor input:
    the implemented network-free T1 graph contract without opening a provider or
    held-out evaluation. Keep T1 rejected by staging configuration until the
    finite confirmation produces a recorded release decision.
-5. Preserve V8's historical current-image `Refine` result and advance V12's
-   corrected build-only evidence-sufficiency review workflow without claiming
-   that simulation equals independent review or that the changed source
-   revision has been rebuilt.
+5. Preserve V8's historical current-image `Refine` result and V12's corrected
+   build-only evidence-sufficiency workflow. Its exact Mistral reviewer binding
+   remains provider-unauthorized; simulation is not independent-review evidence
+   and the changed source revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 

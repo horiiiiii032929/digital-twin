@@ -196,9 +196,11 @@ advisory review and the 12-case priority packet remain pending. V12 now binds a
 deterministic review workflow: 12 blinded ten-case batches, six clean controls,
 six planted defect classes, strict judgment accounting, and a maximum 12-case
 priority packet. Its 132-judgment network-free simulation passes, but that is
-orchestration evidence rather than review evidence. The review preflight remains
-`blocked-not-authorized` because no exact reviewer, fresh provider metadata,
-cost ceiling, or one-time execution authorization is bound. The draft remains
+orchestration evidence rather than review evidence. Prospective review
+instrument `002` now binds exact OpenRouter Mistral Small 4 routing, current
+published pricing, synthetic-public inputs, and a USD 0.50 ceiling. The review
+preflight remains `blocked-not-authorized` because one-time execution is not
+authorized. The draft remains
 unfrozen and unopened; no exact verifier is selected, and calibration plus
 decision execution are unauthorized. V12 is the current **Refine** checkpoint
 with no selected implementation. Because its source tree differs from V8, the
@@ -211,7 +213,7 @@ defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
 clean visual controls and 11/11 derived failure labels, but falsely rejected
 one correct cross-course abstention, so the local model remains advisory-only
 and is not an autonomous acceptance gate. Direct DeepSeek remains the retained
-path; an exact OpenRouter independent reviewer is prospective and uncalled.
+path; the exact OpenRouter Mistral reviewer is bound prospectively but uncalled.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 earlier foundation into `main` at `adf39af`. PR
 [#103](https://github.com/horiiiiii032929/digital-twin/pull/103) merged the
@@ -219,8 +221,9 @@ deterministic factual-QA successor and repository-correctness corrections at
 `4657219`. PR
 [#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
 requalification. V12 remains preserved as a historical corrected build-only
-checkpoint. The issue #107 T1 source change supersedes its current-tree match
-without promoting the still-pending product or public deployment claim.
+checkpoint. Reviewer-binding instrument `002` and the issue #107 T1 source
+change supersede its current-tree match without promoting the still-pending
+product or public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active

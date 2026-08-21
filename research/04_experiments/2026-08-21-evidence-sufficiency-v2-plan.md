@@ -78,6 +78,14 @@ any sensitivity failure invalidates the reviewer result. The network-free
 simulation is not review evidence, and provider/model identity, freshness,
 cost ceiling, and execution authorization remain deliberately unbound.
 
+Prospective successor `evidence-sufficiency-v2-independent-review-002` binds
+the advisory reviewer to exact OpenRouter routing for
+`mistralai/mistral-small-2603`, current published pricing, a USD 0.50 emergency
+ceiling, zero retries, and synthetic-public inputs. The binding does not
+authorize a provider call, freeze the draft, or open candidate evaluation; its
+preflight must remain `blocked-not-authorized` until a separate one-time
+authorization is recorded against fresh metadata.
+
 ## Metrics and gates
 
 Selection requires all of the following on the one-time decision split:
