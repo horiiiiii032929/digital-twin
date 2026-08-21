@@ -40,6 +40,22 @@ V8_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json"
 )
+V9_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v9.json"
+)
+V10_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v10.json"
+)
+V11_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v11.json"
+)
+V12_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v12.json"
+)
 
 
 def _manifest() -> dict:
@@ -72,6 +88,22 @@ def _v7_manifest() -> dict:
 
 def _v8_manifest() -> dict:
     return json.loads(V8_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v9_manifest() -> dict:
+    return json.loads(V9_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v10_manifest() -> dict:
+    return json.loads(V10_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v11_manifest() -> dict:
+    return json.loads(V11_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v12_manifest() -> dict:
+    return json.loads(V12_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -179,12 +211,77 @@ def test_current_image_refine_freeze_validates_without_release_claim() -> None:
     assert result["artifact_bindings"] == 31
     assert result["tree_bindings"] == 14
     assert result["file_bindings"] == 17
-    assert result["current_match_required"] is True
-    assert result["current_match_status"] == "enforced"
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
     assert result["container_build_status"] == (
         "passed-current-images-product-publication-blocked"
     )
     assert result["image_build_claimed"] is True
+    assert result["release_claim_authorized"] is False
+
+
+def test_current_open_set_build_freeze_validates_without_image_or_release_claim() -> None:
+    result = validate_deployable_freeze(_v9_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == "29/29-open-set-build-only"
+    assert result["external_gates_pending"] == 4
+    assert result["artifact_bindings"] == 33
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 19
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
+    assert result["container_build_status"] == (
+        "current-source-images-unbuilt-v8-images-historical"
+    )
+    assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
+def test_current_malformed_output_correction_freeze_validates() -> None:
+    result = validate_deployable_freeze(_v10_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == "30/30-open-set-build-only"
+    assert result["artifact_bindings"] == 33
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
+    assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
+def test_current_decision_draft_freeze_validates_without_execution_claim() -> None:
+    result = validate_deployable_freeze(_v11_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == "41/41-decision-draft-build-only"
+    assert result["artifact_bindings"] == 36
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 22
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
+    assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
+def test_review_workflow_freeze_is_historical_after_reviewer_binding() -> None:
+    result = validate_deployable_freeze(_v12_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "refine"
+    assert result["local_gates"] == "35/35-review-workflow-build-only"
+    assert result["artifact_bindings"] == 40
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 26
+    assert result["current_match_required"] is False
+    assert result["current_match_status"] == "historical-superseded"
+    assert result["superseded_by"] == (
+        "evidence-sufficiency-v2-independent-review-002"
+    )
+    assert result["image_build_claimed"] is False
     assert result["release_claim_authorized"] is False
 
 
@@ -272,3 +369,59 @@ def test_v8_freeze_rejects_release_claim_or_selected_candidate() -> None:
 
     with pytest.raises(ValueError, match="decision drifted"):
         validate_deployable_freeze(decision_manifest, root=ROOT)
+
+
+def test_v10_freeze_rejects_image_release_or_selection_claim() -> None:
+    image_manifest = _v10_manifest()
+    image_manifest["container_build"]["image_build_claimed"] = True
+    with pytest.raises(ValueError, match="container-build evidence drifted"):
+        validate_deployable_freeze(image_manifest, root=ROOT)
+
+    release_manifest = _v10_manifest()
+    release_manifest["release_claim_authorized"] = True
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)
+
+    selected_manifest = _v10_manifest()
+    selected_manifest["local_gates"]["evidence_sufficiency_selected"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(selected_manifest, root=ROOT)
+
+
+def test_v11_freeze_rejects_review_freeze_execution_or_release_claims() -> None:
+    reviewed_manifest = _v11_manifest()
+    reviewed_manifest["local_gates"]["independent_review_completed"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(reviewed_manifest, root=ROOT)
+
+    frozen_manifest = _v11_manifest()
+    frozen_manifest["local_gates"]["decision_dataset_frozen"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(frozen_manifest, root=ROOT)
+
+    release_manifest = _v11_manifest()
+    release_manifest["release_claim_authorized"] = True
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)
+
+
+def test_v12_freeze_rejects_review_freeze_selection_or_release_claims() -> None:
+    reviewed_manifest = _v12_manifest()
+    reviewed_manifest["local_gates"]["independent_review_completed"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(reviewed_manifest, root=ROOT)
+
+    frozen_manifest = _v12_manifest()
+    frozen_manifest["local_gates"]["decision_dataset_frozen"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(frozen_manifest, root=ROOT)
+
+    selected_manifest = _v12_manifest()
+    selected_manifest["local_gates"]["evidence_sufficiency_selected"] = True
+    with pytest.raises(ValueError, match="local gate count"):
+        validate_deployable_freeze(selected_manifest, root=ROOT)
+
+    release_manifest = _v12_manifest()
+    release_manifest["release_claim_authorized"] = True
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)

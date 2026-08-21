@@ -91,6 +91,7 @@ def parse_deepseek_pricing(html: str) -> dict[str, Any]:
     output_row = next((row for row in rows if row and row[0] == "MAX OUTPUT"), None)
     if version_row is None or len(version_row) < 3:
         raise ProviderFreshnessError("DeepSeek model revisions are absent")
+    model_revisions = version_row[1:]
     if context_row is None or len(context_row) < 2:
         raise ProviderFreshnessError("DeepSeek context length is absent")
     if output_row is None or len(output_row) < 2:
@@ -101,14 +102,19 @@ def parse_deepseek_pricing(html: str) -> dict[str, Any]:
     active_price: str | None = None
     for row in rows:
         joined = " | ".join(row)
-        if "1M INPUT TOKENS (CACHE MISS)" in joined:
+        compact_joined = re.sub(r"\s+", "", joined).upper()
+        if "1MINPUTTOKENS(CACHEMISS)" in compact_joined:
             active_price = "cache-miss"
             continue
-        if "1M OUTPUT TOKENS" in joined:
+        if "1MOUTPUTTOKENS" in compact_joined:
             active_price = "output"
             continue
         if row and row[0] == "PEAK" and len(row) >= 3:
-            values = [_price(row[-2]), _price(row[-1])]
+            values = [_price(value) for value in row[1:]]
+            if len(values) != len(model_revisions):
+                raise ProviderFreshnessError(
+                    "DeepSeek pricing columns do not match model revisions"
+                )
             if active_price == "cache-miss":
                 cache_miss_peak = values
             elif active_price == "output":
@@ -126,12 +132,12 @@ def parse_deepseek_pricing(html: str) -> dict[str, Any]:
         "maximum_output_tokens": maximum_output,
         "models": {
             "deepseek-v4-flash": {
-                "documented_revision": version_row[-2],
+                "documented_revision": model_revisions[0],
                 "peak_cache_miss_input_per_million_usd": cache_miss_peak[0],
                 "peak_output_per_million_usd": output_peak[0],
             },
             "deepseek-v4-pro": {
-                "documented_revision": version_row[-1],
+                "documented_revision": model_revisions[1],
                 "peak_cache_miss_input_per_million_usd": cache_miss_peak[1],
                 "peak_output_per_million_usd": output_peak[1],
             },

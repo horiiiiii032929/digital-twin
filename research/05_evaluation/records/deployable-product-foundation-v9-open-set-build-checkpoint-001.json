@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v9-open-set-build-checkpoint-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-build-only-no-decision-split",
+  "corpus_id": "historical-v1-development-references-only",
+  "code_revision": "df093d8c6bffa93577a5210c5beb57ccd973a6c1",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "any-hit-evidence-gate",
+        "version": "historical-v1-unsafe-control",
+        "configuration": {
+          "semantic_verifier": "none",
+          "thresholds_calibrated": false,
+          "decision_dataset_frozen": false,
+          "provider_execution_authorized": false,
+          "release_candidate_selected": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "focused-test-pass-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "focused-test-count",
+          "value": 0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 29,
+          "passed": false
+        },
+        {
+          "name": "decision-dataset-freeze-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "selected-evidence-sufficiency-configuration-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "semantic-verifier-cannot-own-final-decision",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "invalid-lineage-and-verifier-failure-fail-closed",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "consumed-data-and-any-hit-unselectable",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "decision-dataset-frozen-and-independently-reviewed",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "current-source-image-and-publication-qualified",
+          "passed": false,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        },
+        {
+          "name": "zero-model-private-data-and-heldout-access",
+          "passed": true,
+          "evidence": "Historical AnyHit is retained only as an unsafe no-call control and is not eligible for product selection."
+        }
+      ],
+      "failures_by_category": {
+        "evaluation": 1,
+        "safety": 1,
+        "deployment": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "calibrated-open-set-evidence-gate-v2",
+        "version": "build-001",
+        "configuration": {
+          "semantic_verifier": "unbound",
+          "thresholds_calibrated": false,
+          "decision_dataset_frozen": false,
+          "provider_execution_authorized": false,
+          "release_candidate_selected": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "focused-test-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "focused-test-count",
+          "value": 29,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 29,
+          "passed": true
+        },
+        {
+          "name": "decision-dataset-freeze-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "selected-evidence-sufficiency-configuration-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "semantic-verifier-cannot-own-final-decision",
+          "passed": true,
+          "evidence": "The verifier returns bounded support signals; the deterministic calibrated gate owns the final answer or abstain decision."
+        },
+        {
+          "name": "invalid-lineage-and-verifier-failure-fail-closed",
+          "passed": true,
+          "evidence": "Focused tests reject unknown hit IDs and redact verifier exceptions while returning abstain."
+        },
+        {
+          "name": "consumed-data-and-any-hit-unselectable",
+          "passed": true,
+          "evidence": "The v2 validator rejects selection eligibility for consumed v1 data and the historical AnyHit control."
+        },
+        {
+          "name": "decision-dataset-frozen-and-independently-reviewed",
+          "passed": false,
+          "evidence": "The new 120-case decision split is intentionally absent, unopened, and pending authoring plus review."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "No exact semantic verifier or calibrated configuration is selected."
+        },
+        {
+          "name": "current-source-image-and-publication-qualified",
+          "passed": false,
+          "evidence": "V8 images predate the v2 source change; the current revision has not been rebuilt or published."
+        },
+        {
+          "name": "zero-model-private-data-and-heldout-access",
+          "passed": true,
+          "evidence": "Build-only validation used no provider/model call, private source, or opened decision split."
+        }
+      ],
+      "failures_by_category": {
+        "data": 1,
+        "evaluation": 1,
+        "deployment": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The provider-neutral v2 boundary is implemented and fails closed, but the prospective decision dataset, exact semantic verifier, calibrated thresholds, and current-image publication evidence do not exist yet.",
+    "limitations": [
+      "This is build evidence, not method-quality evidence.",
+      "The 80 referenced v1 cases are consumed and development-only.",
+      "No candidate model, provider, threshold, cost, latency, or memory result is selected.",
+      "V8 image health does not apply to the changed V9 source revision."
+    ]
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v12-review-workflow-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "75238aa183ea1554aadf19c902e8cf81320a571f",
+  "review_instrument_id": "evidence-sufficiency-v2-independent-review-001",
+  "review_packet_sha256": "4b7cfce67a4299c8bd3ef9c0d44df7dfbf3de72d1dad46cd4d78fc913158cb8e",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "unbounded-manual-review",
+        "version": "v11-absent-workflow-control",
+        "configuration": {
+          "review_case_count": 0,
+          "review_batch_count": 0,
+          "review_batch_size": 0,
+          "sensitivity_clean_count": 0,
+          "sensitivity_defect_count": 0,
+          "priority_packet_max": 0,
+          "provider_execution_authorized": false,
+          "automatic_dataset_freeze": false,
+          "automatic_ground_truth_mutation": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "focused-test-pass-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-simulation-contract-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "simulated-clean-specificity",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "simulated-defect-detection",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-draft-and-packet-binding",
+          "passed": false,
+          "evidence": "V11 had no independently versioned review packet."
+        },
+        {
+          "name": "reviewer-answer-key-separation",
+          "passed": false,
+          "evidence": "V11 had no executable reviewer payload contract."
+        },
+        {
+          "name": "strict-complete-judgment-accounting",
+          "passed": false,
+          "evidence": "V11 had no judgment ingestion or accounting workflow."
+        },
+        {
+          "name": "independent-review-completed",
+          "passed": false,
+          "evidence": "No independent review was completed."
+        },
+        {
+          "name": "decision-dataset-frozen",
+          "passed": false,
+          "evidence": "The exact draft remained unfrozen and unopened."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "No exact semantic verifier or calibrated configuration was selected."
+        },
+        {
+          "name": "zero-model-private-data-and-heldout-access",
+          "passed": true,
+          "evidence": "V11 made no provider/model call and read no private or held-out data."
+        }
+      ],
+      "failures_by_category": {
+        "review": 3,
+        "evaluation": 1,
+        "deployment": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-workflow-v1",
+        "version": "build-001-provider-unauthorized",
+        "configuration": {
+          "review_case_count": 120,
+          "review_batch_count": 12,
+          "review_batch_size": 10,
+          "sensitivity_clean_count": 6,
+          "sensitivity_defect_count": 6,
+          "priority_packet_max": 12,
+          "provider_execution_authorized": false,
+          "automatic_dataset_freeze": false,
+          "automatic_ground_truth_mutation": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "focused-test-pass-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-simulation-contract-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "simulated-clean-specificity",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "simulated-defect-detection",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-draft-and-packet-binding",
+          "passed": true,
+          "evidence": "The 120-case draft and reconstructed packet are bound to exact content hashes."
+        },
+        {
+          "name": "reviewer-answer-key-separation",
+          "passed": true,
+          "evidence": "Reviewer items contain no expected verdict, defect class, dataset slice, or review status."
+        },
+        {
+          "name": "strict-complete-judgment-accounting",
+          "passed": true,
+          "evidence": "Focused tests reject missing, duplicate, invalid-dimension, altered-source, and altered-case inputs."
+        },
+        {
+          "name": "independent-review-completed",
+          "passed": false,
+          "evidence": "Only the network-free orchestration simulation ran; no reviewer is bound or called."
+        },
+        {
+          "name": "decision-dataset-frozen",
+          "passed": false,
+          "evidence": "The exact draft remains unfrozen and unopened."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "No exact semantic verifier or calibrated configuration is selected."
+        },
+        {
+          "name": "zero-model-private-data-and-heldout-access",
+          "passed": true,
+          "evidence": "The build and simulation used zero provider/model calls and no private or held-out data."
+        }
+      ],
+      "failures_by_category": {
+        "review": 1,
+        "evaluation": 1,
+        "deployment": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The bounded independent-review workflow is deterministic and fail closed, but the independent review, dataset freeze, candidate calibration, selection, and release qualification remain pending.",
+    "limitations": [
+      "Simulation results prove orchestration only and are not reviewer-quality evidence.",
+      "Reviewer provider, exact model, freshness metadata, and cost ceiling remain unbound.",
+      "The synthetic-public draft does not replace representative real-source qualification.",
+      "No current source image or publication claim exists."
+    ]
+  }
+}

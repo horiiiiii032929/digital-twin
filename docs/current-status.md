@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 465 executable or execution-affecting
+the current branch extends it to all 477 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 57 protected entrypoints
+active for all general evaluation actions. It covers 59 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -96,7 +96,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 713 Python tests and 46 frontend tests, frontend lint, and the
+check passes 754 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -116,9 +116,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 713-test Python suite.
+connections. These corrections pass the current 754-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 465-file audit. Evaluation
+artifacts are also fully dispositioned in the current 477-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -130,6 +130,16 @@ candidate, an approval-gated R2 invite-only pilot, and an R3 final project
 release. The [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 continues to define the product; evaluation tracks are evidence gates toward
 that release.
+
+The project owner accepted
+[`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the
+student-facing architecture decision on 2026-08-21. The existing student
+workflow is now named as the T0 grounded control. The missing core product
+method is T1: a bounded learner-state and pedagogical-intent graph that chooses
+how to diagnose, scaffold, explain, hint, quiz, refuse, or abstain and then
+adapts on the next student turn. T2 applies the professor-approved policy to the
+same graph. This decision makes no runtime or evaluation claim and does not
+resolve the professor's pending 10,000-case dataset-method guidance.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -167,19 +177,48 @@ with no selected release candidate. A prospective evidence-sufficiency
 successor must pass before public DNS/TLS, clean-host restore, and the public
 walkthrough can support release.
 
+Issue [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) now
+owns that successor. V10 implemented a provider-neutral open-set gate that keeps
+semantic scoring separate from the final answer/abstain policy and fails closed
+for incomplete, contradictory, ambiguous, malformed, or unknown-lineage
+evidence. A post-V9 review also corrected malformed plain-object verifier output
+so it now follows the same redacted fail-closed path as raised verifier errors.
+The deterministic 120-case synthetic-public decision draft is now authored:
+80 answerable and 40 abstain cases across nine slices, 40 source versions, and
+text, table, diagram, code, and equation evidence. All answer cases bind exact
+active-source claims and quotes; all abstain cases have empty authoritative
+lineage. Its exact hash passes automated structural validation, but independent
+advisory review and the 12-case priority packet remain pending. V12 now binds a
+deterministic review workflow: 12 blinded ten-case batches, six clean controls,
+six planted defect classes, strict judgment accounting, and a maximum 12-case
+priority packet. Its 132-judgment network-free simulation passes, but that is
+orchestration evidence rather than review evidence. Prospective review
+instrument `002` now binds exact OpenRouter Mistral Small 4 routing, current
+published pricing, synthetic-public inputs, and a USD 0.50 ceiling. The review
+preflight remains `blocked-not-authorized` because one-time execution is not
+authorized. The draft remains
+unfrozen and unopened; no exact verifier is selected, and calibration plus
+decision execution are unauthorized. V12 is the current **Refine** checkpoint
+with no selected implementation. Because its source tree differs from V8, the
+V8 image identities are historical evidence; the current source has no image
+or publication claim.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
 clean visual controls and 11/11 derived failure labels, but falsely rejected
 one correct cross-course abstention, so the local model remains advisory-only
 and is not an autonomous acceptance gate. Direct DeepSeek remains the retained
-path; an exact OpenRouter independent reviewer is prospective and uncalled.
+path; the exact OpenRouter Mistral reviewer is bound prospectively but uncalled.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 earlier foundation into `main` at `adf39af`. PR
 [#103](https://github.com/horiiiiii032929/digital-twin/pull/103) merged the
 deterministic factual-QA successor and repository-correctness corrections at
-`4657219`. The V7/V8 requalification remains a separate release checkpoint and
-does not promote the still-pending public deployment claim.
+`4657219`. PR
+[#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
+requalification. V12 remains preserved as a historical corrected build-only
+checkpoint. Reviewer-binding instrument `002` supersedes its current-tree match
+without promoting the still-pending product or public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
@@ -196,32 +235,34 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX | Keep as baseline | Professor and student conversation-first workspaces; responsive synthetic flows | Human workflow/usability evidence and complete real source/account lifecycle |
+| Product UX and autonomous tutoring | Keep T0 as baseline; T1/T2 pending | Professor and student conversation-first workspaces; responsive synthetic flows; accepted bounded tutoring-graph decision | Implement and confirm learner-state, pedagogical-intent, bounded-repair, and course-improvement loops; then obtain human workflow/usability evidence |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | Current images build and become healthy; operational commands and clean bootstrap work; V7 mechanics pass under an injected synthetic gate | Select a real evidence-sufficiency method, complete publication through current-image HTTPS, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, rebuild the same source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The current release blockers are a selected evidence-sufficiency
-method, professor-method guidance, separately authorized factual-QA
-confirmation, public host/domain selection, target-host operations evidence,
-professor-fidelity calibration, and one frozen end-to-end candidate decision.
+release-ready. The current release blockers are the unimplemented T1 autonomous
+tutoring graph, a selected evidence-sufficiency method, professor-method
+guidance, separately authorized factual-QA confirmation, public host/domain
+selection, target-host operations evidence, professor-fidelity calibration,
+and one frozen end-to-end candidate decision.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Prospectively select an open-set answerability gate without using AnyHit as a product shortcut |
-| 5 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
-| 6 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
-| 7 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
-| 8 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
+| 3 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / accepted design | Implement the network-free T1 graph contract, preserve T0 as rollback, and freeze one T0/T1 multi-turn confirmation method |
+| 4 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
+| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
+| 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
+| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
+| 9 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
@@ -232,9 +273,10 @@ attempt 002 and its completed 12-case cross-review as historical evidence. The
 active correction moves canonical questions, answers, actions, claim IDs, and
 citations into deterministic source truth while keeping model generation and
 review advisory. This remains method validation, not a model benchmark.
-Issue #88 remains active. Its current images are operational, but product
-publication is internally blocked by the unselected evidence-sufficiency
-component; a host rehearsal is premature until that gate is selected.
+Issue #88 remains active. V8 images are operational historical evidence, while
+the changed V12 source is intentionally unbuilt. Product publication remains
+blocked by the unselected evidence-sufficiency component; a host rehearsal is
+premature until that gate is selected and the same source revision is rebuilt.
 
 ## Known multimodal correction
 
@@ -385,8 +427,9 @@ stages remain unauthorized.
 Pipeline 002 implements that method-level correction rather than another prompt
 revision. Its truth content hash is
 `1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
-The provider-free build passes the full repository gate with 713 Python and 46
-frontend tests and a 465/465 complete audit. Pilot 003 is reviewed but not
+That merged provider-free checkpoint passed 713 Python and 46 frontend tests
+with a 465/465 complete audit. The current V12 checkpoint passes 754 Python and
+46 frontend tests with a 477/477 complete audit. Pilot 003 is reviewed but not
 frozen or allowlisted. The separate Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
 schema, and an empty 8-12-case calibration template. Fidelity judging and held-

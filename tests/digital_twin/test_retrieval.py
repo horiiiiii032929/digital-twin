@@ -6,10 +6,12 @@ from scripts.synthetic_course_corpus import build_retrieval_evaluation_chunks
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     BM25Retriever,
+    CalibratedOpenSetEvidenceGate,
     DenseRetriever,
     DocumentChunk,
     EmptyQueryError,
     EvidenceGatedRetriever,
+    EvidenceSupportSignals,
     InvalidRetrievalLimitError,
     LexicalCoverageEvidenceGate,
     MinimumRawScoreEvidenceGate,
@@ -236,6 +238,163 @@ def test_secondary_retriever_gate_can_require_source_level_agreement():
         [RetrievalHit(chunk=chunks[0], relevance_score=1, raw_score=1)],
     )
     assert mismatch.sufficient is False
+
+
+class StaticSupportVerifier:
+    implementation_id = "static-support-verifier"
+    version = "test-v1"
+
+    def __init__(self, signals: EvidenceSupportSignals) -> None:
+        self.signals = signals
+        self.calls: list[tuple[str, list[str]]] = []
+
+    def verify(self, query, hits):
+        self.calls.append((query, [hit.chunk.id for hit in hits]))
+        return self.signals
+
+
+def open_set_gate(verifier, **overrides):
+    configuration = {
+        "minimum_direct_support": 0.8,
+        "minimum_completeness": 0.8,
+        "maximum_contradiction": 0.1,
+        "maximum_ambiguity": 0.2,
+        "minimum_supporting_hits": 1,
+        "evidence_limit": 3,
+    }
+    configuration.update(overrides)
+    return CalibratedOpenSetEvidenceGate(verifier, **configuration)
+
+
+def support_signals(**overrides):
+    values = {
+        "direct_support": 0.95,
+        "completeness": 0.9,
+        "contradiction": 0.0,
+        "ambiguity": 0.05,
+        "supporting_hit_ids": ["support"],
+        "reason": "the supplied evidence directly and completely supports the query",
+    }
+    values.update(overrides)
+    return EvidenceSupportSignals(**values)
+
+
+def test_open_set_gate_keeps_semantic_scoring_separate_from_policy_decision():
+    hits = [
+        RetrievalHit(
+            chunk=chunk("support", "password reset revokes active sessions"),
+            relevance_score=1,
+            raw_score=2,
+        )
+    ]
+    verifier = StaticSupportVerifier(support_signals())
+
+    accepted = open_set_gate(verifier).assess("What happens after reset?", hits)
+    incomplete = open_set_gate(
+        StaticSupportVerifier(support_signals(completeness=0.4))
+    ).assess("What happens after reset?", hits)
+    contradicted = open_set_gate(
+        StaticSupportVerifier(support_signals(contradiction=0.5))
+    ).assess("What happens after reset?", hits)
+    ambiguous = open_set_gate(
+        StaticSupportVerifier(support_signals(ambiguity=0.5))
+    ).assess("What happens after reset?", hits)
+
+    assert accepted.sufficient is True
+    assert accepted.score == pytest.approx(0.9)
+    assert verifier.calls == [("What happens after reset?", ["support"])]
+    assert incomplete.sufficient is False
+    assert incomplete.features["completeness_passed"] is False
+    assert contradicted.sufficient is False
+    assert contradicted.features["contradiction_passed"] is False
+    assert ambiguous.sufficient is False
+    assert ambiguous.features["ambiguity_passed"] is False
+
+
+def test_open_set_gate_fails_closed_without_hits_or_valid_verifier_lineage():
+    verifier = StaticSupportVerifier(support_signals())
+
+    empty = open_set_gate(verifier).assess("unsupported question", [])
+    unknown = open_set_gate(
+        StaticSupportVerifier(support_signals(supporting_hit_ids=["invented"]))
+    ).assess(
+        "question",
+        [
+            RetrievalHit(
+                chunk=chunk("support", "eligible evidence"),
+                relevance_score=1,
+            )
+        ],
+    )
+
+    assert empty.sufficient is False
+    assert empty.features["verifier_called"] is False
+    assert verifier.calls == []
+    assert unknown.sufficient is False
+    assert unknown.features["verifier_output_valid"] is False
+
+
+def test_open_set_gate_fails_closed_on_verifier_error_and_bounds_evidence():
+    class FailingVerifier:
+        implementation_id = "failing-verifier"
+        version = "test-v1"
+
+        def verify(self, query, hits):
+            del query, hits
+            raise RuntimeError("sensitive provider detail")
+
+    hits = [
+        RetrievalHit(
+            chunk=chunk(f"hit-{index}", f"evidence {index}"),
+            relevance_score=1,
+        )
+        for index in range(4)
+    ]
+    decision = open_set_gate(FailingVerifier(), evidence_limit=2).assess(
+        "question",
+        hits,
+    )
+
+    assert decision.sufficient is False
+    assert decision.reason == "evidence verifier failed closed"
+    assert decision.features["hit_count"] == 2
+    assert decision.features["verifier_error"] is True
+    assert "sensitive provider detail" not in str(decision.model_dump())
+
+
+def test_open_set_gate_fails_closed_on_malformed_verifier_output():
+    class MalformedVerifier:
+        implementation_id = "malformed-verifier"
+        version = "test-v1"
+
+        def verify(self, query, hits):
+            del query, hits
+            return {"direct_support": "not-a-probability"}
+
+    decision = open_set_gate(MalformedVerifier()).assess(
+        "question",
+        [
+            RetrievalHit(
+                chunk=chunk("support", "eligible evidence"),
+                relevance_score=1,
+            )
+        ],
+    )
+
+    assert decision.sufficient is False
+    assert decision.reason == "evidence verifier failed closed"
+    assert decision.features["verifier_error"] is True
+
+
+def test_open_set_gate_rejects_invalid_configuration_and_signal_lineage():
+    verifier = StaticSupportVerifier(support_signals())
+
+    with pytest.raises(ValueError, match="minimum_direct_support"):
+        open_set_gate(verifier, minimum_direct_support=float("nan"))
+    with pytest.raises(ValueError, match="cannot exceed"):
+        open_set_gate(verifier, minimum_supporting_hits=4, evidence_limit=3)
+    with pytest.raises(ValueError, match="must be unique"):
+        support_signals(supporting_hit_ids=["support", "support"])
 
 
 def test_evidence_sufficiency_evaluator_keeps_abstention_and_ranking_visible(

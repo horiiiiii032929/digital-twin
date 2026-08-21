@@ -1,0 +1,251 @@
+{
+  "schema_version": 2,
+  "freeze_id": "deployable-product-foundation-freeze-v10",
+  "freeze_date": "2026-08-21",
+  "status": "refine-open-set-dataset-and-selection-required",
+  "implementation_revision": "c416f00f8b27ea46b7cd82d9da453fb6c62c39f6",
+  "evidence_revision": "87e96bd6361caa5824fd639264708e6303e83624",
+  "run_id": "deployable-product-foundation-v10-malformed-verifier-correction-001",
+  "baseline_id": "A1-V9-open-set-build-original-malformed-output-boundary",
+  "candidate_id": "A1-single-node-staging-v10-malformed-output-correction",
+  "decision": "refine",
+  "release_claim_authorized": false,
+  "public_deployment_authorized": false,
+  "model_policy": {
+    "policy_id": "current-model-policy-2026-08-21-v3",
+    "gemma_execution_allowed": false,
+    "claude_execution_allowed": false,
+    "retired_general_qwen_execution_allowed": false,
+    "product_generator": "deepseek-v4-flash",
+    "deterministic_generator_rollback": true,
+    "independent_reviewer": "openrouter/mistralai/mistral-small-2603",
+    "rejected_reviewer": "openrouter/qwen/qwen3.7-plus",
+    "local_general_model": "qwen3.5:9b-q4_K_M",
+    "local_general_model_digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "openrouter_allow_fallbacks": false,
+    "openrouter_require_parameters": true,
+    "model_called_during_policy_validation": false
+  },
+  "local_gates": {
+    "open_set_boundary_focused_passed": 30,
+    "open_set_boundary_focused_total": 30,
+    "v2_instrument_validated": true,
+    "v2_preflight_blocked_fail_closed": true,
+    "decision_dataset_frozen": false,
+    "candidate_model_bound": false,
+    "evidence_sufficiency_selected": false,
+    "current_source_image_built": false,
+    "publication_completed": false,
+    "external_provider_calls": 0,
+    "external_provider_cost_usd": 0.0,
+    "private_or_heldout_data_used": false
+  },
+  "external_gates": [
+    {
+      "id": "evidence-sufficiency-selection-and-live-publication",
+      "status": "pending",
+      "reason": "The v2 boundary is build-only; its new decision set, exact semantic candidate, calibration, selection, current image rebuild, and publication remain pending."
+    },
+    {
+      "id": "public-dns-and-certificate",
+      "status": "pending",
+      "reason": "A public host and domain have not been selected for trusted certificate issuance."
+    },
+    {
+      "id": "clean-host-restore",
+      "status": "pending",
+      "reason": "No clean restore has run on the eventual target host with the selected product profile."
+    },
+    {
+      "id": "staging-workflow-walkthrough",
+      "status": "pending",
+      "reason": "The credentialed public walkthrough requires a selected evidence gate and rebuilt immutable candidate."
+    }
+  ],
+  "container_build": {
+    "status": "current-source-images-unbuilt-v8-images-historical",
+    "compose_graph_validated": true,
+    "image_build_claimed": false,
+    "prior_v8_api_image_sha256": "a78a99e17e3a5b2bdba52aa6c490ca7aa532df9b46b2b9c9f136840360cde929",
+    "prior_v8_web_image_sha256": "242c39320e0acbee5f014854c430014501a716cbb7d055ca9884ad468f644028",
+    "containers_started": false,
+    "runtime_volumes_created": false
+  },
+  "tree_bindings": [
+    {
+      "path": "apps/web",
+      "git_tree_sha1": "a844426a789c793097808c7dd5f92f9fe4e62605"
+    },
+    {
+      "path": "deploy",
+      "git_tree_sha1": "0c87dc5b8127ee961fb1d36f354277c5d6406481"
+    },
+    {
+      "path": "services/api",
+      "git_tree_sha1": "597ad6ec907ae7db4b82d295ff13633ec6ab2869"
+    },
+    {
+      "path": "services/embeddings",
+      "git_tree_sha1": "eff49f3d52187529a96048403d0e03dc5dd8301f"
+    },
+    {
+      "path": "services/ingestion",
+      "git_tree_sha1": "c4940b79e7ac83989203f28b57db84515a5803fd"
+    },
+    {
+      "path": "services/llm",
+      "git_tree_sha1": "fdb020e3068f48426daf4b3f0c0b193d69f478c5"
+    },
+    {
+      "path": "services/operations",
+      "git_tree_sha1": "1f335c5e95904f72628ec5dfce2e528b12074319"
+    },
+    {
+      "path": "services/persistence",
+      "git_tree_sha1": "1f1cda456fda7dee330e3634cba66f6b58b32180"
+    },
+    {
+      "path": "services/reranking",
+      "git_tree_sha1": "5d6745ea1dbf959fcb90a3aeb29a47adbaa46256"
+    },
+    {
+      "path": "services/storage",
+      "git_tree_sha1": "ba5162d35e2285f2530e33f1c66a9ca22eeb79c6"
+    },
+    {
+      "path": "src/digital_twin",
+      "git_tree_sha1": "c6cacde5ba7980fee0ddd2a835373f1a9b467c4b"
+    },
+    {
+      "path": "tests/api",
+      "git_tree_sha1": "1d0773cd366953129921f9dda2663e75779a49a0"
+    },
+    {
+      "path": "tests/digital_twin",
+      "git_tree_sha1": "1c2a227a777717085464b3bc29c6f716049659ab"
+    },
+    {
+      "path": "tests/services",
+      "git_tree_sha1": "55e62b412d28fcc06e682149a6fb843bc4eb4dde"
+    }
+  ],
+  "file_bindings": [
+    {
+      "path": ".env.example",
+      "sha256": "021e8f00a01592f32a980273fc526b84cccf6fbf768d1ea956f60f4a9c44a43d",
+      "current_match_required": true
+    },
+    {
+      "path": "compose.staging.yml",
+      "sha256": "4019dae00dabe830db7e754b96ea38960185c28ce256ebc84398c390b85dce75",
+      "current_match_required": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "4ec6093dc92e25957f59f06353f413e8242088dc40bb9e6c6b488b98641cb33c",
+      "current_match_required": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "896d0c74b3abbcefac64a3667f42f32640cb1605eee387feb9bdad1485a3cef4",
+      "current_match_required": true
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "2d6e8003add2bf981663fdcb254d2a55d858fe6327ac601366bea45110c6590e",
+      "current_match_required": true
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1",
+      "current_match_required": true
+    },
+    {
+      "path": "scripts/verify_deployable_foundation.py",
+      "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b",
+      "current_match_required": true
+    },
+    {
+      "path": "scripts/verify_https_staging.py",
+      "sha256": "c21fefe2558a7d939c36944a552c0405c0992145ebec4ac3418643982fbb5daf",
+      "current_match_required": true
+    },
+    {
+      "path": "scripts/validate_model_policy.py",
+      "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6",
+      "current_match_required": true
+    },
+    {
+      "path": "scripts/validate_evidence_sufficiency_v2.py",
+      "sha256": "3c368f446fcfe93ce55055d71bffdedb8b8d00ce1c5be80da050d35760f6f085",
+      "current_match_required": true
+    },
+    {
+      "path": "tests/test_verify_deployable_foundation.py",
+      "sha256": "0ca49745a86b15546d00dc480547aa8fffd256438db66a31b81231e1a339b50b",
+      "current_match_required": true
+    },
+    {
+      "path": "tests/test_verify_https_staging.py",
+      "sha256": "b02284c22c3404fcee4ec82cde8c69980332ed2f50cdea853b08b71392037b46",
+      "current_match_required": true
+    },
+    {
+      "path": "tests/test_staging_compose.py",
+      "sha256": "d0b3260ae167afa513dd9916456ff1ec74a249578da400520574a00d6ab1d9d2",
+      "current_match_required": true
+    },
+    {
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
+      "sha256": "de02d9ccc963cb63c9844edd4f3d0e6f181848d09dad477d4c45ef0c0cc6391c",
+      "current_match_required": true
+    },
+    {
+      "path": "research/05_evaluation/deployable-product-foundation-v10-malformed-verifier-correction-001-results.md",
+      "sha256": "f25bb178e5743d922d1d975e49932f905abfcbb3527dc35d28b20b4986a978fe",
+      "current_match_required": false
+    },
+    {
+      "path": "research/05_evaluation/records/deployable-product-foundation-v10-malformed-verifier-correction-001.json",
+      "sha256": "706dbd0a1f81da0260728ac651e5d643c8ee37055747f6c487cc6565b5094a9e",
+      "current_match_required": false
+    },
+    {
+      "path": "research/00_admin/2026-08-21-current-model-policy-v3.md",
+      "sha256": "5dbb3058f63f8a0f8d52f97cb4f402bcb52a5ddc763a92080e560a8c516ae422",
+      "current_match_required": false
+    },
+    {
+      "path": "docs/deployment.md",
+      "sha256": "a6026ef8815cbc04f8de05128ea3c5f1688596c7397cca2400cb5d7d57a9f6f5",
+      "current_match_required": true
+    },
+    {
+      "path": "docs/deployment-threat-model.md",
+      "sha256": "473d02994987bf3303d980412604661e32f14dcd5cf31403936180782a399c18",
+      "current_match_required": true
+    }
+  ],
+  "reproduction_commands": [
+    "npm run check",
+    "npm run audit:dependencies",
+    "npm run verify:model-policy",
+    "npm run verify:evidence-sufficiency-v2",
+    "npm run preflight:evidence-sufficiency-v2",
+    "npm run verify:deployable-foundation",
+    "npm run benchmark:deployable-foundation-development",
+    "npm run staging:build",
+    "npm run verify:staging-https",
+    "npm run verify:deployable-freeze"
+  ],
+  "rollback": {
+    "product": "A0-local-demo",
+    "container": "V8 exact images remain historical diagnostic evidence; V10 current-source images are unbuilt",
+    "generator": "deterministic-grounded-generator-v1",
+    "retriever": "bm25-v1",
+    "publication": "fail closed while evidence sufficiency is unselected"
+  },
+  "change_control": "Any bound runtime tree, current-match file, v2 instrument, model policy, candidate identity, dataset state, or external-gate change requires a new freeze. V10 authorizes no evaluation execution, image/release claim, or public deployment.",
+  "private_or_heldout_data_read": false,
+  "external_model_called": false
+}
