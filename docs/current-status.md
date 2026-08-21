@@ -138,9 +138,10 @@ workflow is now named as the T0 grounded control. The build-only T1 successor
 now adds a typed learner-state contract, deterministic pedagogical-intent
 selection, a fixed LangGraph path, one-repair maximum, deterministic fallback,
 atomic SQLite state revisions, race rejection, restart recovery, and an
-explicit local demo/test mode. Its ten-trajectory instrument is network-free;
-provider, paid, held-out, and automatic-promotion execution remain
-unauthorized. Staging rejects T1 until a finite multi-turn confirmation and
+explicit local demo/test mode. Its ten-trajectory development method is now
+frozen for one network-free execution; provider, paid, held-out, and
+automatic-promotion execution remain unauthorized. Staging rejects T1 until a
+finite multi-turn confirmation and
 release-profile decision pass. T2 applies the professor-approved policy to the
 same graph and remains pending professor-profile guidance. This checkpoint does
 not resolve the professor's pending 10,000-case dataset-method guidance.

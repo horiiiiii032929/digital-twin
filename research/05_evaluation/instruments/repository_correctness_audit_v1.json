@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "ac2fbc307e576936074136a67877f1e22a51982511ff03005592eae7468ec7d1",
+      "sha256": "ac826c72cac289616847142ba8c5cba2c831f1a9da69f41d24dd8ec16de612e8",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Command review confirms separate validator and one-time network-free development execution entrypoints; neither command permits provider, paid, held-out, staging, or automatic-promotion execution.",
       "findings": []
     },
     {
@@ -4152,12 +4152,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; the deterministic truth-package builder, evidence-sufficiency draft builder, and pilot-003 runner are classified, pilot 003 is not allowlisted, historical paid authorizations remain revoked, and no decision, 1,000-, or 10,000-case execution is authorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; only the historical oracle and exact network-free autonomous-tutoring development run are bounded, while provider review, pilot 003, held-out, paid, 1,000-, and 10,000-case execution remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "81d10e65327bc79a417cccbdad003326dc63df3e2df0fb9a6749afb49c7e39e5"
+      "sha256": "8468c768bfdfa11c7350be5bb03eb4b4bb62d0a6c7ddb3308e7c7bc8fee5544e"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4438,12 +4438,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of rehearsals, completed qualifications 006/007, completed attempts 001/002, the 10,000-case pipeline, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle plus the network-free autonomous-tutoring development run, and explicit rejection of provider review, paid pilots, 10,000-case execution, and unknown successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "a54a2244cc4c705a4398792750b88071cc8228fd6c34cc01c1b5904f981d41cf"
+      "sha256": "dbecd0889d5929e062e45ac92290714ff91167800feb42f75b346bafef981a3b"
     },
     {
       "audit_status": "audited",
@@ -5261,24 +5261,35 @@
     },
     {
       "path": "research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json",
-      "sha256": "4b8d6bb8fbb25902c6a0dfd9e9d840a85c3157746a775a7f92a4d0d67e7c57f6",
+      "sha256": "64e54298b5419fa3e6d9d4a31f481201cd9fe1de73feeb5832b72d5e50cfaa33",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Frozen contract review confirms ten trajectories, 13 turns per condition, exact T0/T1 action and T1 intent expectations, provider-free authority, three terminal result states, and no automatic promotion.",
+      "findings": []
+    },
+    {
+      "path": "scripts/run_autonomous_tutoring_graph_development.py",
+      "sha256": "4335b45bbbc0926781ad97c9a4d7829ca863755a315dc0677b026e3b1dde47a7",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Manual fail-closed review and focused execution tests cover exact bounded-freeze authorization, clean-revision and exclusive-output preflight, identical synthetic T0/T1 inputs, actual SQLite persistence/restart, citation and claim validation, bounded failure control, complete per-turn accounting, and zero provider/token/cost usage.",
       "findings": []
     },
     {
       "path": "scripts/validate_autonomous_tutoring_graph_instrument.py",
-      "sha256": "3ffbdeb52734116612d2349e17b0c0a12f568de09d703baaa05ea2b4fa489b6f",
+      "sha256": "2dd005f045df0a7209f358a222650951687805dbff7104ce219f80612dec7f0b",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Validator review and mutation tests enforce the frozen network-free authority, action expectations, exact trajectory/turn counts, bounded graph settings, result states, and prohibition on provider, paid, held-out, or automatic-promotion execution.",
       "findings": []
     },
     {
@@ -5293,14 +5304,25 @@
       "findings": []
     },
     {
-      "path": "tests/test_validate_autonomous_tutoring_graph_instrument.py",
-      "sha256": "6806fe261e1ea725866bcb95a391a15a9645a3087f466d171a3eb30e27c0b907",
+      "path": "tests/test_run_autonomous_tutoring_graph_development.py",
+      "sha256": "9bd26bcb098527f64fa4c1986ef1eeff7545feab8fe15a567c74fa040ff68d24",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Focused regressions verify ready no-call preflight, complete passing T0/T1 execution, method-failure Refine behavior, invalid-execution preservation, zero external usage, and no automatic promotion.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_validate_autonomous_tutoring_graph_instrument.py",
+      "sha256": "a952792757415c47571c1032247d934147af3f757215a3943943b064db8ded1a",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomous-tutoring-graph",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Instrument regression tests reject provider authorization and incomplete condition-action expectations while preserving the frozen T0/T1 development contract.",
       "findings": []
     }
   ],

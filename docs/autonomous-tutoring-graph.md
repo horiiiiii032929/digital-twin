@@ -241,7 +241,7 @@ Still missing before release selection:
 - a provider-qualified autonomous T1 path, one frozen multi-turn confirmation,
   and the professor-approved T2 fidelity reference.
 
-## Build-only implementation checkpoint
+## Frozen network-free development checkpoint
 
 Issue #107 now implements the first T1 contract behind
 `APP_STUDENT_TUTORING_MODE=bounded-tutoring-graph` for local demo/test use. T0
@@ -256,9 +256,12 @@ remains the default and staging validation rejects T1. The implementation adds:
 - a ten-trajectory, provider-free development contract at
   `research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json`.
 
-This is implementation and network-free contract evidence only. It does not
-select T1 for release, prove model-based learner-state interpretation, establish
-professor fidelity, authorize provider use, or establish student learning.
+The ten-trajectory development execution is frozen and authorized only for the
+deterministic local T0/T1 comparison. Its runner requires a clean revision,
+creates one exclusive ignored output, and cannot call a provider or promote T1.
+This does not select T1 for release, prove model-based learner-state
+interpretation, establish professor fidelity, authorize provider use, or
+establish student learning.
 
 ## Evaluation question
 

@@ -17,3 +17,12 @@ def test_autonomous_tutoring_graph_instrument_fails_closed_on_authorization():
     payload["execution"]["provider_calls_authorized"] = True
 
     assert "provider calls enabled" in validate_instrument(payload)
+
+
+def test_autonomous_tutoring_graph_instrument_requires_frozen_action_expectations():
+    payload = json.loads(DEFAULT_PATH.read_text(encoding="utf-8"))
+    del payload["development_trajectories"][0]["turns"][0]["expected_t0_action"]
+
+    assert "condition action expectations are incomplete" in validate_instrument(
+        payload
+    )

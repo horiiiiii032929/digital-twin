@@ -49,8 +49,8 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
         "instrument ID drifted",
     )
     require(
-        payload.get("status") == "build-only-network-free",
-        "instrument must remain build-only and network-free",
+        payload.get("status") == "frozen-network-free-development",
+        "instrument must remain frozen and network-free",
     )
     conditions = payload.get("conditions", {})
     require(conditions.get("control") == "T0-grounded-assistant", "T0 is missing")
@@ -63,6 +63,10 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
     require(execution.get("paid_execution_authorized") is False, "paid run enabled")
     require(execution.get("held_out_execution_authorized") is False, "held-out run enabled")
     require(execution.get("network_required") is False, "network dependency introduced")
+    require(
+        execution.get("network_free_development_authorized") is True,
+        "network-free development execution is not authorized",
+    )
     require(execution.get("automatic_promotion") is False, "automatic promotion enabled")
     require(execution.get("maximum_repairs_per_turn") == 1, "repair bound drifted")
     require(execution.get("maximum_graph_steps_per_turn") == 12, "step bound drifted")
@@ -81,6 +85,14 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
     require(observed_intents <= EXPECTED_INTENTS, "unknown expected tutoring intent")
     require(EXPECTED_INTENTS <= observed_intents, "required intent coverage is incomplete")
     require(
+        all(
+            turn.get("expected_t0_action") and turn.get("expected_t1_action")
+            for trajectory in trajectories
+            for turn in trajectory.get("turns", [])
+        ),
+        "condition action expectations are incomplete",
+    )
+    require(
         any(turn.get("restart_before_turn") for item in trajectories for turn in item.get("turns", [])),
         "restart trajectory is missing",
     )
@@ -93,6 +105,21 @@ def validate_instrument(payload: dict[str, Any]) -> list[str]:
     require(
         payload.get("decision_rule", {}).get("prompt_only_repeat_loop_allowed") is False,
         "prompt-only repeat loop must remain prohibited",
+    )
+    result = payload.get("result_contract", {})
+    require(
+        result.get("run_id") == "autonomous-tutoring-graph-development-001",
+        "development run identity drifted",
+    )
+    require(result.get("expected_trajectory_count") == 10, "trajectory count drifted")
+    require(
+        result.get("expected_turn_count_per_condition") == 13,
+        "condition turn count drifted",
+    )
+    require(
+        set(result.get("allowed_statuses", []))
+        == {"invalid-execution", "completed-refine", "completed-go-deeper"},
+        "result status contract drifted",
     )
     return errors
 
