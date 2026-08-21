@@ -20,6 +20,13 @@
     "claim_count": 8000,
     "case_count": 10000
   },
+  "prospective_boundary_correction": {
+    "historical_upstream_unchanged": true,
+    "slice": "cross-course-confusion",
+    "upstream_action": "answer",
+    "authoritative_successor_action": "abstain",
+    "reason": "The frozen composition defines cross-course confusion as one of 2,000 boundary cases; the successor therefore forces empty lineage instead of answering from another course."
+  },
   "truth_package_contract": {
     "version": "factual-qa-v3-truth-package-v1",
     "authoritative_fields": [
@@ -31,7 +38,7 @@
       "citations",
       "boundary_reason"
     ],
-    "boundary_lineage_policy": "selected_claim_ids and citations are always empty when expected_action is abstain, clarify, or refuse",
+    "boundary_lineage_policy": "selected_claim_ids, citations, structured_target_claims, candidate_claims, and context_source_ids are always empty when expected_action is abstain, clarify, or refuse",
     "model_mutable_fields": [
       "question_variant"
     ],
@@ -42,8 +49,8 @@
     "answerable_count": 8000,
     "boundary_count": 2000,
     "action_counts": {
-      "answer": 8500,
-      "abstain": 500,
+      "answer": 8000,
+      "abstain": 1000,
       "clarify": 500,
       "refuse": 500
     },

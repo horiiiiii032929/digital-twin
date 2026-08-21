@@ -43,8 +43,8 @@ def test_all_truth_packages_are_exactly_distributed_and_byte_stable(
     assert summary["source_count"] == 1_000
     assert summary["claim_count"] == 8_000
     assert summary["action_counts"] == {
-        "abstain": 500,
-        "answer": 8_500,
+        "abstain": 1_000,
+        "answer": 8_000,
         "clarify": 500,
         "refuse": 500,
     }
@@ -77,7 +77,7 @@ def test_answer_truth_is_exactly_source_linked(artifact: dict) -> None:
         if package["expected_action"] == "answer"
     ]
 
-    assert len(answerable) == 8_500
+    assert len(answerable) == 8_000
     for package in answerable:
         assert package["selected_claim_ids"] == [
             claim["claim_id"] for claim in package["structured_target_claims"]
@@ -100,13 +100,15 @@ def test_boundary_actions_have_no_authoritative_lineage(artifact: dict) -> None:
         if package["expected_action"] in {"abstain", "clarify", "refuse"}
     ]
 
-    assert len(boundaries) == 1_500
+    assert len(boundaries) == 2_000
     assert Counter(package["expected_action"] for package in boundaries) == Counter(
-        {"abstain": 500, "clarify": 500, "refuse": 500}
+        {"abstain": 1_000, "clarify": 500, "refuse": 500}
     )
     assert all(package["selected_claim_ids"] == [] for package in boundaries)
     assert all(package["citations"] == [] for package in boundaries)
     assert all(package["structured_target_claims"] == [] for package in boundaries)
+    assert all(package["candidate_claims"] == [] for package in boundaries)
+    assert all(package["context_source_ids"] == [] for package in boundaries)
     assert all(package["boundary_reason"] for package in boundaries)
 
 
@@ -122,6 +124,7 @@ def test_cross_course_cases_never_select_distractor_lineage(artifact: dict) -> N
 
     assert len(cases) == 500
     for package in cases:
+        assert package["expected_action"] == "abstain"
         distractors = set(blueprints[package["blueprint_id"]]["distractor_unit_ids"])
         assert not distractors.intersection(
             citation["source_unit_id"] for citation in package["citations"]

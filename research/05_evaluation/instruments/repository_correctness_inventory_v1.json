@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cf175db38c1c046f1a1388e9d267f6e9f8a8b286ae9561f15a027bab40733f73",
+  "record_sha256": "d695452374a6b72fa957a9bcf0794964bef95701478336bfa16439391386b199",
   "records": [
     {
       "audit": {
@@ -1736,7 +1736,7 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Manual schema and hash review plus deterministic builder execution confirmed the successor preserves pipeline-001 immutability, binds authoritative truth fields, requires exact 10,000-case distributions, and authorizes no provider or dataset writes.",
+        "evidence": "Manual schema and hash review plus deterministic builder execution confirmed the successor preserves pipeline-001 immutability, prospectively corrects cross-course confusion to an empty-lineage boundary, binds authoritative truth fields, requires exactly 8,000 answerable and 2,000 boundary cases, and authorizes no provider or dataset writes.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -1747,7 +1747,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_10000_pipeline_002.json",
       "risk": "high",
-      "sha256": "9bbc2b39551f840dec04574f6ba494ffcbb91e30e83242027c77f4cc19aa1a84"
+      "sha256": "7a7a3eafd4ef70893056f362230836bd4bcd5d9aba5197e89f451aa09e49776e"
     },
     {
       "audit": {
@@ -1891,7 +1891,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
       "risk": "high",
-      "sha256": "16b8503a287a536c209603a9944e4bccc8edcd4a20777c670a7a6142deb93171"
+      "sha256": "847b91ca95896720d4ab1889001e59daed78a6756e198d7b70396516dd9c3a8f"
     },
     {
       "audit": {
@@ -3144,7 +3144,7 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Manual algorithm review plus repeat execution confirmed byte-stable 10,000-case truth packages, exact source and claim lineage, forced empty boundary lineage, unique normalized questions, deterministic hashes, no private inputs, and fail-closed write authorization.",
+        "evidence": "Manual algorithm review plus repeat execution confirmed byte-stable 10,000-case truth packages, exactly 8,000 answerable and 2,000 boundary actions, exact answer lineage, fully empty boundary lineage, unique normalized questions, deterministic hashes, no private inputs, and fail-closed write authorization.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -3157,7 +3157,7 @@
       ],
       "path": "scripts/build_factual_qa_v3_10000_truth_packages.py",
       "risk": "high",
-      "sha256": "ded5d9e28c78bb9b1c4a90c42dc37b756c97526789029535f1c80b5c96b68f9d"
+      "sha256": "a5f6a4c6e6b2986ccbb586c4491dbac9111b6e2cab738b79f0942f49b3e80ec9"
     },
     {
       "audit": {
@@ -3885,7 +3885,7 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Manual state-machine and accounting review plus normal, malformed, duplicate, canary-failure, identity-drift, maximum-dispute, and resume simulations confirmed deterministic assembly, explicit fallback provenance, atomic accounting, and unauthorized paid execution.",
+        "evidence": "Manual state-machine and accounting review plus normal, malformed, duplicate, canary-failure, identity-drift, maximum-dispute, and resume simulations confirmed successor truth is projected over immutable upstream structure, deterministic assembly and boundary actions remain authoritative, fallback provenance is explicit, accounting is atomic, and paid execution is unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -3902,7 +3902,7 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_pilot_100_003.py",
       "risk": "high",
-      "sha256": "8269324d51b3310fb7c627b197d92a4078c80bc902d897fc3cd4ff7282c28ec7"
+      "sha256": "1d59d608d6edc45b60c6ece6ac2b95d8d2e9af40bc1069ebeb9a55aa49358326"
     },
     {
       "audit": {
@@ -7068,7 +7068,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_10000_truth_packages.py",
       "risk": "medium",
-      "sha256": "23b64f146f575093b9265b9e9df0edc58b4b5254d0bdc56f3ddfd1f67b30fe1a"
+      "sha256": "8917684abe231860a65b444eb768ae30e7824e32f8adddfd94f9f3ba940bdb59"
     },
     {
       "audit": {

@@ -186,6 +186,19 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     return instrument
 
 
+def _authoritative_blueprint(
+    upstream: dict[str, Any],
+    truth_package: dict[str, Any],
+) -> dict[str, Any]:
+    """Project immutable upstream structure through the successor truth contract."""
+    return {
+        **upstream,
+        "expected_action": truth_package["expected_action"],
+        "target_claim_ids": list(truth_package["selected_claim_ids"]),
+        "evidence_unit_ids": list(truth_package["context_source_ids"]),
+    }
+
+
 def load_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     instrument = validate_instrument(instrument_path)
     artifact = build_truth_artifact()
@@ -206,14 +219,26 @@ def load_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     questions = [package["normalized_canonical_question"] for package in truth_packages]
     if len(questions) != len(set(questions)):
         raise ScalePilotError("successor pilot canonical questions are not unique")
-    blueprints = [
+    upstream_blueprints = [
         blueprint
         for blueprint in artifact["blueprints"]
         if blueprint["checkpoint_stage"] == PILOT_STAGE
     ]
-    blueprint_ids = {blueprint["blueprint_id"] for blueprint in blueprints}
+    blueprint_ids = {
+        blueprint["blueprint_id"] for blueprint in upstream_blueprints
+    }
     if blueprint_ids != {package["blueprint_id"] for package in truth_packages}:
         raise ScalePilotError("successor blueprint/truth package identities drifted")
+    truth_by_id = {
+        package["blueprint_id"]: package for package in truth_packages
+    }
+    blueprints = [
+        _authoritative_blueprint(
+            blueprint,
+            truth_by_id[blueprint["blueprint_id"]],
+        )
+        for blueprint in upstream_blueprints
+    ]
     source_map = {
         source["source_unit_id"]: source for source in artifact["sources"]
     }
@@ -226,9 +251,7 @@ def load_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "source_map": source_map,
         "blueprints": blueprints,
         "truth_packages": truth_packages,
-        "truth_by_id": {
-            package["blueprint_id"]: package for package in truth_packages
-        },
+        "truth_by_id": truth_by_id,
     }
 
 

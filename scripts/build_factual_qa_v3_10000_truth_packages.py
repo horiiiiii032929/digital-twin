@@ -145,8 +145,14 @@ def _canonical_question(
     blueprint: dict[str, Any],
     *,
     claims: list[dict[str, Any]],
+    action: str,
 ) -> str:
-    action = blueprint["expected_action"]
+    if blueprint["slice"] == "cross-course-confusion":
+        distractor = blueprint["distractor_unit_ids"][0]
+        return (
+            f"Using only {blueprint['course_id']}, what fact from {distractor} "
+            f"applies to request {blueprint['blueprint_id']}?"
+        )
     if action == "abstain":
         return (
             f"What value is assigned to unsupported item {blueprint['blueprint_id']} "
@@ -181,12 +187,20 @@ def _canonical_answer(action: str, claims: list[dict[str, Any]]) -> str:
     raise TruthPackageError(f"unsupported expected action: {action}")
 
 
-def _boundary_reason(blueprint: dict[str, Any]) -> str | None:
+def _authoritative_action(blueprint: dict[str, Any]) -> str:
+    if blueprint["slice"] == "cross-course-confusion":
+        return "abstain"
+    return blueprint["expected_action"]
+
+
+def _boundary_reason(blueprint: dict[str, Any], *, action: str) -> str | None:
+    if blueprint["slice"] == "cross-course-confusion":
+        return "requested-source-is-outside-course-scope"
     return {
         "abstain": "no-approved-evidence",
         "clarify": "multiple-supported-interpretations",
         "refuse": "academic-integrity-restriction",
-    }.get(blueprint["expected_action"])
+    }.get(action)
 
 
 def build_truth_package(
@@ -201,7 +215,7 @@ def build_truth_package(
         ]
     except KeyError as error:
         raise TruthPackageError(f"blueprint references an unknown claim: {error}") from error
-    action = blueprint["expected_action"]
+    action = _authoritative_action(blueprint)
     selected_claims = candidate_claims if action == ANSWER_ACTION else []
     citations = [
         {
@@ -210,7 +224,11 @@ def build_truth_package(
         }
         for claim in selected_claims
     ]
-    canonical_question = _canonical_question(blueprint, claims=candidate_claims)
+    canonical_question = _canonical_question(
+        blueprint,
+        claims=candidate_claims,
+        action=action,
+    )
     payload = {
         "truth_contract_version": TRUTH_CONTRACT_VERSION,
         "blueprint_id": blueprint["blueprint_id"],
@@ -219,20 +237,17 @@ def build_truth_package(
         "course_id": blueprint["course_id"],
         "expected_action": action,
         "structured_target_claims": selected_claims,
-        "candidate_claims": candidate_claims if action == "clarify" else [],
+        "candidate_claims": [],
         "selected_claim_ids": [claim["claim_id"] for claim in selected_claims],
         "citations": citations,
-        "context_source_ids": list(
-            dict.fromkeys(
-                [
-                    *blueprint["evidence_unit_ids"],
-                    *blueprint["distractor_unit_ids"],
-                ]
-            )
+        "context_source_ids": (
+            list(dict.fromkeys(blueprint["evidence_unit_ids"]))
+            if action == ANSWER_ACTION
+            else []
         ),
         "canonical_question": canonical_question,
         "canonical_answer": _canonical_answer(action, selected_claims),
-        "boundary_reason": _boundary_reason(blueprint),
+        "boundary_reason": _boundary_reason(blueprint, action=action),
         "normalized_canonical_question": normalize_question(canonical_question),
         "near_duplicate_signature": near_duplicate_signature(canonical_question),
         "configuration_sha256": configuration_sha256,
@@ -257,7 +272,7 @@ def validate_truth_packages(
     if Counter(package["slice"] for package in packages) != Counter(expected_slice_counts):
         raise TruthPackageError("truth-package slice distribution drifted")
     action_counts = Counter(package["expected_action"] for package in packages)
-    if action_counts != Counter({"answer": 8_500, "abstain": 500, "clarify": 500, "refuse": 500}):
+    if action_counts != Counter({"answer": 8_000, "abstain": 1_000, "clarify": 500, "refuse": 500}):
         raise TruthPackageError("truth-package action distribution drifted")
     for package in packages:
         payload = {key: value for key, value in package.items() if key != "truth_package_sha256"}
@@ -265,7 +280,13 @@ def validate_truth_packages(
             raise TruthPackageError("truth-package hash drifted")
         citations = package["citations"]
         if package["expected_action"] in BOUNDARY_ACTIONS:
-            if package["selected_claim_ids"] or citations or package["structured_target_claims"]:
+            if (
+                package["selected_claim_ids"]
+                or citations
+                or package["structured_target_claims"]
+                or package["candidate_claims"]
+                or package["context_source_ids"]
+            ):
                 raise TruthPackageError("boundary truth package contains authoritative lineage")
             if not package["boundary_reason"]:
                 raise TruthPackageError("boundary truth package has no reason")
@@ -284,12 +305,6 @@ def validate_truth_packages(
                 raise TruthPackageError("citation is not the exact claim evidence quote")
             if citation["quote"] not in source["source_truth"]:
                 raise TruthPackageError("citation quote is absent from source truth")
-        if package["slice"] == "cross-course-confusion":
-            if not all(
-                claim["course_id"] == package["course_id"]
-                for claim in package["structured_target_claims"]
-            ):
-                raise TruthPackageError("cross-course truth selected a distractor claim")
     signatures = Counter(package["near_duplicate_signature"] for package in packages)
     return {
         "truth_package_count": len(packages),
