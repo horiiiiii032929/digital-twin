@@ -2777,12 +2777,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "V7 freeze review confirmed revision ancestry, current runtime tree identities, file hashes, model-policy identity, four pending external gates, and fail-closed image/release claims; focused regressions passed with zero provider calls or private reads.",
       "findings": [],
       "path": "scripts/validate_deployable_foundation_freeze.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "845c5a82e3b6d01b3e62d37e0564b12438020849e29a1c8111e2d6a91f853b85"
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "f9dcd9bbec7f9f947bfaaccf9ddab4aa93c2337202042c05e34650ca131b7e30"
     },
     {
       "audit_status": "audited",
@@ -4548,12 +4548,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+      "evidence": "Focused V1-V7 freeze regressions verify the current 42/42 tree-bound package while rejecting tree drift, stale hashes, duplicate or promoted gates, changed model policy, and unearned container or release claims.",
       "findings": [],
       "path": "tests/test_deployable_foundation_freeze.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "55fc72363e92b906e6d2e6ff0bc0292392638049b0577e106e05f44dc0cf821b"
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "cc761f1ade79f9e676b65d11fef364e4a7b2789c0a5029ff794a19489dbc57c0"
     },
     {
       "audit_status": "audited",
@@ -5093,6 +5093,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "f59b10d56895a3508cd22dd8b86c88885a99c336df73cf5658ee8485da8ce967"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Reviewed V7 deployment freeze binds the clean post-correctness implementation and result revisions, 14 runtime trees, 17 critical files, the current model policy, and four unpassed external gates without claiming a container image, public deployment, or release.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-review",
+      "sha256": "d2d8fd676e747eed418d4d6968631772fac82f0cd2770b206e9b35f46d13d1ee"
     }
   ],
   "schema_version": 1

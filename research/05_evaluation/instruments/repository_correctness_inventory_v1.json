@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 463
+    "audited": 464
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 86,
+    "evaluation_configuration": 87,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 88
   },
-  "file_count": 463,
+  "file_count": 464,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7b5a202524d6fa8cadeac432364eecc55177383d49780b9e4defada28885126b",
+  "record_sha256": "c294d70823859ef418d95bd57c8e1b0c4d99d4f7962585473edd88f5d9e537aa",
   "records": [
     {
       "audit": {
@@ -2712,6 +2712,22 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
+        "evidence": "Reviewed V7 deployment freeze binds the clean post-correctness implementation and result revisions, 14 runtime trees, 17 critical files, the current model policy, and four unpassed external gates without claiming a container image, public deployment, or release.",
+        "findings": [],
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json",
+      "risk": "high",
+      "sha256": "d2d8fd676e747eed418d4d6968631772fac82f0cd2770b206e9b35f46d13d1ee"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
         "reviewed_at": "2026-08-20",
@@ -4351,10 +4367,10 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "V7 freeze review confirmed revision ancestry, current runtime tree identities, file hashes, model-policy identity, four pending external gates, and fail-closed image/release claims; focused regressions passed with zero provider calls or private reads.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4364,7 +4380,7 @@
       ],
       "path": "scripts/validate_deployable_foundation_freeze.py",
       "risk": "high",
-      "sha256": "845c5a82e3b6d01b3e62d37e0564b12438020849e29a1c8111e2d6a91f853b85"
+      "sha256": "f9dcd9bbec7f9f947bfaaccf9ddab4aa93c2337202042c05e34650ca131b7e30"
     },
     {
       "audit": {
@@ -6977,10 +6993,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "evidence": "Focused V1-V7 freeze regressions verify the current 42/42 tree-bound package while rejecting tree drift, stale hashes, duplicate or promoted gates, changed model policy, and unearned container or release claims.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-21",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -6988,7 +7004,7 @@
       "package_commands": [],
       "path": "tests/test_deployable_foundation_freeze.py",
       "risk": "medium",
-      "sha256": "55fc72363e92b906e6d2e6ff0bc0292392638049b0577e106e05f44dc0cf821b"
+      "sha256": "cc761f1ade79f9e676b65d11fef364e4a7b2789c0a5029ff794a19489dbc57c0"
     },
     {
       "audit": {
@@ -7616,7 +7632,7 @@
     }
   ],
   "risk_counts": {
-    "high": 361,
+    "high": 362,
     "medium": 102
   },
   "schema_version": 1,

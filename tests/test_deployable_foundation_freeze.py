@@ -32,6 +32,10 @@ V6_MANIFEST_PATH = (
     ROOT
     / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v6.json"
 )
+V7_MANIFEST_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json"
+)
 
 
 def _manifest() -> dict:
@@ -56,6 +60,10 @@ def _v5_manifest() -> dict:
 
 def _v6_manifest() -> dict:
     return json.loads(V6_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+
+def _v7_manifest() -> dict:
+    return json.loads(V7_MANIFEST_PATH.read_text(encoding="utf-8"))
 
 
 def test_current_deployable_foundation_freeze_validates() -> None:
@@ -134,6 +142,22 @@ def test_current_stable_boundary_container_freeze_validates() -> None:
     assert result["release_claim_authorized"] is False
 
 
+def test_post_correctness_current_tree_freeze_validates_without_image_claim() -> None:
+    result = validate_deployable_freeze(_v7_manifest(), root=ROOT)
+
+    assert result["status"] == "passed"
+    assert result["decision"] == "go-deeper"
+    assert result["local_gates"] == "42/42-current-in-process-container-pending"
+    assert result["external_gates_pending"] == 4
+    assert result["artifact_bindings"] == 31
+    assert result["tree_bindings"] == 14
+    assert result["file_bindings"] == 17
+    assert result["current_match_status"] == "enforced"
+    assert result["container_build_status"] == "blocked-local-docker-runtime"
+    assert result["image_build_claimed"] is False
+    assert result["release_claim_authorized"] is False
+
+
 def test_stable_boundary_excludes_append_only_registry_from_current_match() -> None:
     manifest = _v6_manifest()
     bindings = {item["path"]: item for item in manifest["artifact_bindings"]}
@@ -182,3 +206,25 @@ def test_deployable_freeze_rejects_duplicate_external_gate() -> None:
 
     with pytest.raises(ValueError, match="incomplete or duplicated"):
         validate_deployable_freeze(manifest, root=ROOT)
+
+
+def test_v7_freeze_rejects_tree_identity_drift() -> None:
+    manifest = _v7_manifest()
+    manifest["tree_bindings"][0]["git_tree_sha1"] = "0" * 40
+
+    with pytest.raises(ValueError, match="revision tree identity mismatch"):
+        validate_deployable_freeze(manifest, root=ROOT)
+
+
+def test_v7_freeze_rejects_unearned_image_or_release_claim() -> None:
+    image_manifest = _v7_manifest()
+    image_manifest["container_build"]["image_build_claimed"] = True
+
+    with pytest.raises(ValueError, match="container-build evidence drifted"):
+        validate_deployable_freeze(image_manifest, root=ROOT)
+
+    release_manifest = _v7_manifest()
+    release_manifest["release_claim_authorized"] = True
+
+    with pytest.raises(ValueError, match="cannot authorize a release claim"):
+        validate_deployable_freeze(release_manifest, root=ROOT)
