@@ -4955,12 +4955,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-configuration",
-      "evidence": "Manual gate and provider-binding review confirmed pilot 003 is reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, and the USD 3 emergency ceiling is fail-closed.",
+      "evidence": "Manual gate and provider-binding review confirmed pilot 003 is reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicitly frozen for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
       "findings": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "847b91ca95896720d4ab1889001e59daed78a6756e198d7b70396516dd9c3a8f"
+      "sha256": "5992e54260a6773b536299eb2721d89470d8c9a6278765cc7df16a4701a67cbe"
     },
     {
       "audit_status": "audited",
@@ -5021,12 +5021,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, and a 24-hour age bound without making inference calls.",
+      "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, DeepSeek account-linked retention/storage terms, Mistral 30-day/no-training policy, and a 24-hour age bound without making inference calls.",
       "findings": [],
       "path": "scripts/validate_factual_qa_provider_freshness.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "fe87c11881b223954772d244720633fbf3a585cfdb99e33090c9c11804e0ade7"
+      "sha256": "290641331fc391830233511018797ef288e78935d111530de2a3c332c40775b9"
     },
     {
       "audit_status": "audited",
@@ -5043,12 +5043,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused regressions cover snapshot expiry, future timestamps, exact model revisions and prices, routing restrictions, OpenRouter identity, and official metadata parsing.",
+      "evidence": "Focused regressions cover snapshot expiry, future timestamps, exact model revisions and prices, routing restrictions, OpenRouter identity, official metadata parsing, and fail-closed DeepSeek/OpenRouter retention-policy drift.",
       "findings": [],
       "path": "tests/test_factual_qa_provider_freshness.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "bf1777f61215cdc9eeee18a56ad66004fcb1f87d63ed9221f2cf6d48b8466137"
+      "sha256": "fd11ce226d3c2c9cd65c6fc084ff475ba690e2fec5c443bf9512cdea89e28fd6"
     },
     {
       "audit_status": "audited",
@@ -5065,12 +5065,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused regressions prove question-only model authority, deterministic metadata immutability, canonical fallback and quarantine behavior, duplicate rejection, canary/identity failure closure, cost and call ceilings, and exact resume binding.",
+      "evidence": "Focused regressions prove question-only model authority, deterministic metadata immutability, canonical fallback and quarantine behavior, duplicate rejection, canary/identity/retention-policy failure closure, cost and call ceilings, and exact resume binding.",
       "findings": [],
       "path": "tests/test_factual_qa_v3_scale_pilot_100_003.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "b26d0447fbf382a0a1e217f120b828412fdec8c6c6111b9286cdffd73fa4fb36"
+      "sha256": "be39ec94c304a6df3dc61ba1ad6893aa4f33954e27d762251a2c386fa19ab913"
     },
     {
       "audit_status": "audited",

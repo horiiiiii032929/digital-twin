@@ -90,12 +90,28 @@
     "verified_at": "2026-08-21T14:59:14+08:00",
     "maximum_age_hours_for_paid_execution": 24,
     "deepseek_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "deepseek_privacy_source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
     "openrouter_source": "https://openrouter.ai/api/v1/models",
+    "openrouter_provider_policy_source": "https://openrouter.ai/providers",
     "deepseek_context_length": 1000000,
     "deepseek_maximum_output_tokens": 393216,
     "openrouter_mistral_context_length": 262144,
     "routing_fallback_allowed": false,
     "provider_collection_boundary": "synthetic-public evaluation fixtures only",
+    "retention_policy": {
+      "deepseek": {
+        "policy_last_update": "Feb 10, 2026",
+        "input_retention": "retained-as-long-as-account-and-as-otherwise-necessary",
+        "storage_location": "People's Republic of China"
+      },
+      "openrouter_mistral_endpoint": {
+        "provider": "Mistral",
+        "trains_on_prompts": false,
+        "retention": "30 day retention",
+        "data_collection": "allow",
+        "zdr": false
+      }
+    },
     "paid_preflight_requires_live_match": true
   },
   "execution": {

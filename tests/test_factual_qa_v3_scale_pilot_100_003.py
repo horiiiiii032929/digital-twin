@@ -64,6 +64,22 @@ def _live_metadata(instrument: dict) -> dict:
                 "pricing_usd_per_million_output_tokens"
             ],
         },
+        "deepseek_retention": {
+            "source": instrument["freshness"]["deepseek_privacy_source"],
+            **instrument["freshness"]["retention_policy"]["deepseek"],
+        },
+        "openrouter_retention": {
+            "source": instrument["freshness"]["openrouter_provider_policy_source"],
+            "provider": instrument["freshness"]["retention_policy"][
+                "openrouter_mistral_endpoint"
+            ]["provider"],
+            "trains_on_prompts": instrument["freshness"]["retention_policy"][
+                "openrouter_mistral_endpoint"
+            ]["trains_on_prompts"],
+            "retention": instrument["freshness"]["retention_policy"][
+                "openrouter_mistral_endpoint"
+            ]["retention"],
+        },
     }
 
 

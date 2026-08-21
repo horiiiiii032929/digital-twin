@@ -25,6 +25,10 @@ INSTRUMENT_PATH = (
 INSTRUMENT_ID = "factual-qa-v3-scale-pilot-100-003"
 DEEPSEEK_URL = "https://api-docs.deepseek.com/quick_start/pricing/"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
+DEEPSEEK_PRIVACY_URL = (
+    "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html"
+)
+OPENROUTER_PROVIDERS_URL = "https://openrouter.ai/providers"
 MISTRAL_MODEL = "mistralai/mistral-small-2603"
 
 
@@ -163,6 +167,37 @@ def parse_openrouter_models(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def parse_deepseek_retention_policy(html: str) -> dict[str, Any]:
+    update_match = re.search(r"Last Update:\s*([^<]+)", html)
+    if update_match is None:
+        raise ProviderFreshnessError("DeepSeek privacy-policy date is absent")
+    normalized = " ".join(re.sub(r"<[^>]+>", " ", html).split())
+    if "as long as you have an account" not in normalized:
+        raise ProviderFreshnessError("DeepSeek account-linked retention term is absent")
+    if "People's Republic of China" not in normalized:
+        raise ProviderFreshnessError("DeepSeek storage location is absent")
+    return {
+        "source": DEEPSEEK_PRIVACY_URL,
+        "policy_last_update": update_match.group(1).strip(),
+        "input_retention": "retained-as-long-as-account-and-as-otherwise-necessary",
+        "storage_location": "People's Republic of China",
+    }
+
+
+def parse_openrouter_provider_retention(html: str) -> dict[str, Any]:
+    parser = _TableParser()
+    parser.feed(html)
+    row = next((item for item in parser.rows if item and item[0] == "Mistral"), None)
+    if row is None or len(row) < 3:
+        raise ProviderFreshnessError("OpenRouter Mistral provider policy is absent")
+    return {
+        "source": OPENROUTER_PROVIDERS_URL,
+        "provider": "Mistral",
+        "trains_on_prompts": row[1].casefold() == "yes",
+        "retention": row[2],
+    }
+
+
 def _fetch_text(url: str) -> str:
     request = Request(url, headers={"User-Agent": "digital-twin-evaluation-freshness/1"})
     with urlopen(request, timeout=20) as response:  # noqa: S310 - fixed official URLs
@@ -174,7 +209,13 @@ def fetch_live_provider_metadata() -> dict[str, Any]:
     openrouter_payload = json.loads(_fetch_text(OPENROUTER_MODELS_URL))
     return {
         "deepseek": deepseek,
+        "deepseek_retention": parse_deepseek_retention_policy(
+            _fetch_text(DEEPSEEK_PRIVACY_URL)
+        ),
         "openrouter": parse_openrouter_models(openrouter_payload),
+        "openrouter_retention": parse_openrouter_provider_retention(
+            _fetch_text(OPENROUTER_PROVIDERS_URL)
+        ),
     }
 
 
@@ -192,6 +233,12 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ProviderFreshnessError("paid freshness window must be exactly 24 hours")
     if freshness.get("paid_preflight_requires_live_match") is not True:
         raise ProviderFreshnessError("paid preflight must require a live provider match")
+    retention = freshness.get("retention_policy")
+    if not isinstance(retention, dict) or set(retention) != {
+        "deepseek",
+        "openrouter_mistral_endpoint",
+    }:
+        raise ProviderFreshnessError("provider retention snapshot is absent")
     reviewer_routing = instrument["model_roles"]["independent_reviewer"].get(
         "provider_routing", {}
     )
@@ -257,6 +304,26 @@ def compare_live_metadata(
         failures.append("openrouter-input-price-drift")
     if openrouter["output_per_million_usd"] != reviewer["pricing_usd_per_million_output_tokens"]:
         failures.append("openrouter-output-price-drift")
+    expected_deepseek_retention = {
+        "source": freshness["deepseek_privacy_source"],
+        **freshness["retention_policy"]["deepseek"],
+    }
+    if live.get("deepseek_retention") != expected_deepseek_retention:
+        failures.append("deepseek-retention-policy-drift")
+    expected_openrouter_retention = {
+        "source": freshness["openrouter_provider_policy_source"],
+        "provider": freshness["retention_policy"]["openrouter_mistral_endpoint"][
+            "provider"
+        ],
+        "trains_on_prompts": freshness["retention_policy"][
+            "openrouter_mistral_endpoint"
+        ]["trains_on_prompts"],
+        "retention": freshness["retention_policy"]["openrouter_mistral_endpoint"][
+            "retention"
+        ],
+    }
+    if live.get("openrouter_retention") != expected_openrouter_retention:
+        failures.append("openrouter-retention-policy-drift")
     return failures
 
 

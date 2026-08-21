@@ -10,7 +10,9 @@ from scripts.validate_factual_qa_provider_freshness import (
     compare_live_metadata,
     load_instrument,
     parse_deepseek_pricing,
+    parse_deepseek_retention_policy,
     parse_openrouter_models,
+    parse_openrouter_provider_retention,
     snapshot_age_hours,
     validate_snapshot,
 )
@@ -28,10 +30,24 @@ DEEPSEEK_HTML = """
 </table>
 """
 
+DEEPSEEK_PRIVACY_HTML = """
+<p>Last Update: Feb 10, 2026</p>
+<h4>How Long Do We Keep Your Personal Data</h4>
+<p>We keep this Personal Data for as long as you have an account.</p>
+<p>We store it in the People's Republic of China.</p>
+"""
+
+OPENROUTER_PROVIDERS_HTML = """
+<table><tr><td>Mistral</td><td>No</td><td>30 day retention</td><td>Yes</td><td>France</td></tr></table>
+"""
+
 
 def _live() -> dict:
     return {
         "deepseek": parse_deepseek_pricing(DEEPSEEK_HTML),
+        "deepseek_retention": parse_deepseek_retention_policy(
+            DEEPSEEK_PRIVACY_HTML
+        ),
         "openrouter": parse_openrouter_models(
             {
                 "data": [
@@ -46,6 +62,9 @@ def _live() -> dict:
                     }
                 ]
             }
+        ),
+        "openrouter_retention": parse_openrouter_provider_retention(
+            OPENROUTER_PROVIDERS_HTML
         ),
     }
 
@@ -73,6 +92,13 @@ def test_deepseek_and_openrouter_parsers_capture_identity_price_and_limits() -> 
     assert live["openrouter"]["model"] == "mistralai/mistral-small-2603"
     assert live["openrouter"]["input_per_million_usd"] == pytest.approx(0.15)
     assert live["openrouter"]["output_per_million_usd"] == pytest.approx(0.6)
+    assert live["deepseek_retention"]["policy_last_update"] == "Feb 10, 2026"
+    assert live["openrouter_retention"] == {
+        "source": "https://openrouter.ai/providers",
+        "provider": "Mistral",
+        "trains_on_prompts": False,
+        "retention": "30 day retention",
+    }
 
 
 def test_live_price_or_model_drift_fails_closed() -> None:
@@ -86,6 +112,18 @@ def test_live_price_or_model_drift_fails_closed() -> None:
     assert compare_live_metadata(instrument, live) == [
         "binding-drift:deepseek-v4-flash",
         "openrouter-model-drift",
+    ]
+
+
+def test_live_retention_policy_drift_fails_closed() -> None:
+    instrument = load_instrument()
+    live = _live()
+    live["deepseek_retention"]["policy_last_update"] = "changed"
+    live["openrouter_retention"]["retention"] = "changed"
+
+    assert compare_live_metadata(instrument, live) == [
+        "deepseek-retention-policy-drift",
+        "openrouter-retention-policy-drift",
     ]
 
 

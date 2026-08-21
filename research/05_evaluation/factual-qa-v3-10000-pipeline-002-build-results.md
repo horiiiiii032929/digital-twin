@@ -61,6 +61,14 @@ and V4 Pro 0813 at USD 1.32/3.96 per million input/output tokens. OpenRouter
 still exposes `mistralai/mistral-small-2603` at USD 0.15/0.60. Exact routing
 requires fallback disabled. Historical instruments and results were not edited.
 
+The same checkpoint records the actual retention boundary. The current
+DeepSeek policy says inputs may be retained for the account lifetime and as
+otherwise necessary, with storage in the People's Republic of China. The
+OpenRouter provider registry reports that the selected first-party Mistral
+endpoint does not train on prompts and retains them for 30 days. This build
+therefore remains limited to the explicitly authorized synthetic-public
+fixtures; it is not suitable for private course content.
+
 Freshness must be checked live again within 24 hours of any paid execution. The
 check queries provider metadata only and makes no inference call.
 

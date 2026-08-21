@@ -79,8 +79,11 @@ The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
 plus exact OpenRouter `mistralai/mistral-small-2603` routing with fallback
-disabled. Historical result bindings were not changed. Paid execution requires
-another live metadata check within 24 hours.
+disabled. The frozen policy snapshot records DeepSeek account-linked retention
+and PRC storage plus the OpenRouter registry's 30-day, no-training Mistral
+policy. Only synthetic-public fixtures are permitted. Historical result
+bindings were not changed. Paid execution requires another live metadata check
+within 24 hours.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
