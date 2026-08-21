@@ -449,3 +449,14 @@ Current utilities:
   `npm run verify:factual-qa-v3-10000-design`.
   `--write` is fail-closed under the repository freeze; neither dataset writing
   nor the 100, 1,000, or 10,000 paid stages is authorized by the draft design.
+- `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
+  100-case stage over the hash-bound 10,000-case design. Validation and
+  preflight make no provider calls; preflight must report
+  `blocked-not-authorized` in the build-only checkpoint. The network-free
+  simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
+  durable per-call checkpoints, safe resume, model identity, cost accounting,
+  aggregate/slice gates, and the 12-case priority packet with deterministic fake
+  transports. Use `npm run verify:factual-qa-v3-pilot-100`,
+  `npm run preflight:factual-qa-v3-pilot-100`, or
+  `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
+  intentionally rejected by both the draft instrument and repository freeze.

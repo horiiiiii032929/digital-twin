@@ -874,12 +874,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "execution-configuration",
-      "evidence": "Manual command/configuration review plus locked repository verification; bounded preflight and paid commands for Qwen3.7 Plus qualification 007 are explicit and separate, the 10,000-case design remains no-call, and the inventory gate requires zero pending or open audit findings.",
+      "evidence": "Manual command/configuration review plus locked repository verification; Qwen qualification and 100-case validation, simulation, preflight, and execution commands are explicit and separate; the 100-case paid command remains fail-closed; and the inventory gate requires zero pending or open audit findings.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "58dd59d50a75ee7ec1118a46c03e52364c0565480f5fc0a8ae65ee072e96878a"
+      "sha256": "e4730d4998aee81425d4d3715c296bc352537440953b8bd1ae56d3bfb77adf45"
     },
     {
       "audit_status": "audited",
@@ -1232,6 +1232,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-qwen-qualification-review",
       "sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-instruments-and-profiles",
+      "evidence": "Prospective build-only review confirmed an exact 100-case stage over the hash-bound 10,000-case design, 20 balanced mutation probes, at most 24 disputes, two canaries, 246 calls, zero retries, a USD 0.50 stop with USD 0.323842 maximum reservation, qualified Mistral fallback, deterministic ground truth, no automatic promotion, and explicit provider/dataset execution prohibition.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_001.json",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-pilot-review",
+      "sha256": "423b461290f8db02688836834e8770c4afb195574e868bc8969c0879abffd780"
     },
     {
       "audit_status": "audited",
@@ -2464,6 +2475,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-focused-reviewer-runner-review",
       "sha256": "310f0631474fc1ada5cd846b60bdfb15e492800fd1e8c0716743079d633eea78"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "tooling-and-execution-freeze",
+      "evidence": "Manual control-flow review, Ruff, direct validation/preflight, a 222-call network-free happy-path simulation, a 246-call bounded-dispute simulation, and focused regressions confirmed exact blueprint bindings, deterministic authority, durable per-call checkpoints and safe resume, complete malformed/provider accounting, exact model identity, cost reservation and live stop, exclusive output, 12-case priority packets, and fail-closed provider authorization.",
+      "findings": [],
+      "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-runner-review",
+      "sha256": "8c58830a89353e56551dfcb5620821b7676b5cf18253d3b2cfd38fb16d451274"
     },
     {
       "audit_status": "audited",
@@ -3866,12 +3888,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active; invalid rehearsal 005 and completed qualification 006 remain revoked; only the completed oracle and exact bounded qualification 007 are allowlisted; and no 100- or 10,000-case scale stage is authorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirmed the global freeze remains active; the new 100-case runner is explicitly covered as the 55th protected entrypoint but absent from the bounded allowlist; only the completed oracle and exact qualification 007 are allowlisted; and no scale stage is authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "baf72989a2607783a6907ff86b47d9fe993886d14e1b574f3c7bf6ca91995db3"
+      "sha256": "2f46c5ba235be53e6d92347d8de2823697d54e82b6fca703df3456ec0f68103d"
     },
     {
       "audit_status": "audited",
@@ -4554,6 +4576,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "ea1a9cc8f3510fcf66c19b32f9f570ab3a7a92d04b5a103abe9662e0270f47b0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Thirteen focused tests validate the exact 100-case/course/slice/source design, USD 0.50 reservation, blocked paid preflight, freeze rejection, Qwen qualification dependency, 222-call simulation, zero-bulk canary failure, malformed-output continuation, 24-dispute and 246-call ceilings, identity and cost stops, durable no-repeat resume, exclusive output, and binding-tamper rejection.",
+      "findings": [],
+      "path": "tests/test_factual_qa_v3_scale_pilot_100.py",
+      "reviewed_at": "2026-08-21",
+      "reviewer": "codex-primary-build-only-runner-review",
+      "sha256": "8a38ca514da2bba60e1e0411a0f00987e7fad569ac3e59da5b1dbb946d4a0897"
     },
     {
       "audit_status": "audited",

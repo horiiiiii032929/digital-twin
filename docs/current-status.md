@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 445 executable or execution-affecting
+the current branch extends it to all 448 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 54 protected entrypoints
+active for all general evaluation actions. It covers 55 protected entrypoints
 and retains exact bounded authorizations only for the completed
 `factual-qa-v3-oracle-pilot-001` and the synthetic-only, 49-call
 `factual-qa-v3-reviewer-qualification-007`. Manual review found material source-design
@@ -67,7 +67,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 661 Python tests and 46 frontend tests, frontend lint, and the
+check passes 674 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -87,9 +87,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 661-test Python suite.
+connections. These corrections pass the current 674-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 445-file audit. Evaluation
+artifacts are also fully dispositioned in the current 448-file audit. Evaluation
 execution remains frozen except for exact bounded qualification 007; no
 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -178,14 +178,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper; Qwen3.7 Plus qualification authorized | Qualification 006 passed every Mistral Small 4 gate; the deterministic 1,000-source / 10,000-case design is published at `be61e69` | Run the bounded USD 0.10 Qwen3.7 Plus qualification, then bind the passing reviewer to the separately frozen 100-case checkpoint |
+| Large factual QA | Go Deeper; build-only 100-case runner complete | Qualification 006 passed every Mistral Small 4 gate; the deterministic 1,000-source / 10,000-case design is published; qualification 007 and the unauthorized 100-case runner are prepared | Decide whether to run Qwen qualification 007, then freeze the selected reviewer and separately authorize the 100-case paid checkpoint |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | Repository correctness freeze | Keep / one bounded qualification open | The global freeze remains active with only the completed-oracle record and exact 49-call Qwen qualification 007 allowlisted; every scale stage is closed |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Publish the provider-free deterministic design, then freeze a separately authorized 100-case checkpoint before 1,000 or 10,000 cases |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Qualify the prospective reviewer, then freeze and authorize the already simulated 100-case runner before 1,000 or 10,000 cases |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -305,6 +305,16 @@ academic-integrity boundaries. The local builder passes exact grain, key,
 lineage, distribution, stage, determinism, and privacy checks with zero model
 calls. Dataset writing and every paid 100, 1,000, and 10,000 stage remain
 unauthorized pending separate frozen checkpoints.
+
+The build-only `factual-qa-v3-scale-pilot-100-001` runner now binds the first
+100 stratified blueprints and validates a maximum of 246 calls under a USD 0.50
+stop. Network-free simulations exercised the 222-call no-dispute path and the
+246-call maximum-dispute path, including deterministic acceptance, 20 mutation
+probes, malformed/provider failure accounting, exact model identity, atomic
+checkpoints, safe resume, aggregate and slice gates, and a 12-case priority
+packet. This is implementation verification only. The instrument remains
+unfrozen and provider execution is rejected by both its configuration and the
+repository freeze; no paid scale stage is authorized.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
