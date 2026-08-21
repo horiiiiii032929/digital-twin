@@ -458,7 +458,10 @@ Current utilities:
   defects; its authorization is revoked. Successor attempt 002 uses the full
   shared author schema, the exact qualification-006 strict reviewer contract,
   and deterministic canonical mutation controls that do not depend on author
-  success. The network-free
+  success. Its paid run completed as Refine with 93/100 deterministic validity,
+  97% reviewer agreement, and 20/20 mutation rejection, but ambiguity-boundary,
+  duplicate-question, one target-claim, and malformed-response gates failed.
+  Attempt 002 authorization is revoked. The network-free
   simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
   durable per-call checkpoints, safe resume, model identity, cost accounting,
   requested-versus-reported token-limit accounting, a USD 3 emergency stop,
@@ -466,5 +469,5 @@ Current utilities:
   transports. Use `npm run verify:factual-qa-v3-pilot-100`,
   `npm run preflight:factual-qa-v3-pilot-100`, or
   `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
-  rejected because attempt 002 is reviewed but execution-unauthorized. A
-  separate frozen authorization commit is required. Later stages remain blocked.
+  rejected because attempt 002 is completed and revoked. Any successor requires
+  a new instrument and separate frozen authorization. Later stages remain blocked.

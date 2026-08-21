@@ -340,11 +340,20 @@ author success. At clean revision `d5fe874`, the normal 222-call and maximum
 246-call network-free paths passed, and a total-author-malformation regression
 still constructed and reviewed all 20 mutations. The full repository gate
 passed with 682 Python and 46 frontend tests, and the audit is 449/449 complete.
-User authorization now freezes exactly attempt 002 for one bounded paid run.
-The authorization preserves the 246-call maximum, zero retries, USD 3 emergency
-ceiling, exact DeepSeek/Mistral bindings, and per-call checkpoints. The 1,000-
-and 10,000-case stages remain unauthorized and attempt 002 must be revoked after
-its result is registered.
+The paid attempt 002 completed as **Refine** at clean revision `1e2125b`. It
+improved deterministic validity from 4/100 to 93/100, restored 97% reviewer
+agreement, achieved 100% citation validity, and ran all 20 mutation probes with
+20/20 rejection. The valid run used 225 calls and USD 0.102517 with stable
+models, complete accounting, and zero token-limit violations. It still failed
+five gates: all five ambiguity cases violated the boundary contract, one
+multi-source claim/citation binding failed, one author and one review were
+malformed, and five exact duplicate questions remained. Codex cross-review
+confirmed seven quarantines and five retained controls; two Mistral false
+accepts were correctly rejected by deterministic checks and DeepSeek disputes.
+Attempt 002 authorization is revoked. The next method should deterministically
+assemble actions, claim IDs, and citations, quarantine null authors before model
+review, and enforce normalized question uniqueness. The 1,000- and 10,000-case
+stages remain unauthorized.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40

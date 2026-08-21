@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-pilot-100-002",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine-authorization-revoked",
   "issue": 87,
   "predecessor": "factual-qa-v3-scale-pilot-100-001",
   "method_version": "factual-qa-v3-staged-pipeline-v2",
@@ -73,7 +73,7 @@
     }
   },
   "execution": {
-    "provider_execution_authorized": true,
+    "provider_execution_authorized": false,
     "dataset_write_authorized": false,
     "automatic_stage_promotion": false,
     "provider_canary_call_limit": 2,

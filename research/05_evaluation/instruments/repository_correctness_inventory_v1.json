@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9aa66889b8f6806155c446afcd9907fd3553c004676a1d59375bc08d887516d5",
+  "record_sha256": "2914272506f0199b9c49c4733e0113f60828edb816b891f1a33b2b3dc015e7a7",
   "records": [
     {
       "audit": {
@@ -1848,7 +1848,7 @@
     {
       "audit": {
         "domain": "evaluation-instruments-and-profiles",
-        "evidence": "Authorization review freezes exactly attempt 002 after its full shared author schema, qualification-006 strict reviewer contract, and 20 author-independent canonical mutations passed network-free gates; the 246-call, zero-retry, USD 3, no-promotion, and no-1,000/10,000 boundaries remain explicit.",
+        "evidence": "Completed attempt-002 review preserves the valid Refine result and revoked authorization: 93/100 deterministic-valid, 100% citation validity, 97% reviewer agreement, 20/20 mutation rejection, 225 calls, USD 0.102517, and no authority for 1,000/10,000 stages.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-successor-contract-review"
@@ -1859,7 +1859,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_002.json",
       "risk": "high",
-      "sha256": "6dd41637cc001a6c038e23dbac77c4c83a2d1043a22d253b48c406e4b9330f6e"
+      "sha256": "39e5d7d069aaecb64df8111002dc863cb1deba50e4a2ef03788e03ee03135d10"
     },
     {
       "audit": {
@@ -5888,7 +5888,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; attempt 002 alone has a new exact bounded authorization alongside the historical oracle; qualifications and attempt 001 remain revoked; no 1,000- or 10,000-case stage is authorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; attempts 001/002 and qualifications 006/007 are revoked; only the historical oracle remains allowlisted; no 1,000- or 10,000-case stage is authorized.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -5899,7 +5899,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "5cb595f35a8167cffad4931460b2f1c5a4b88caa1f81eb39a5a1e2c7589077ed"
+      "sha256": "6afcceb158d032ec40004004d80bdea254aaf686c5e3792225fb44c39f64ebfa"
     },
     {
       "audit": {
@@ -6304,7 +6304,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of the historical oracle plus frozen attempt 002, and explicit rejection of rehearsals, completed qualifications 006/007, attempt 001, the 10,000-case pipeline, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of rehearsals, completed qualifications 006/007, completed attempts 001/002, the 10,000-case pipeline, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -6315,7 +6315,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "7cb8d3a12e7cde694ca4d87f153125d9e2a14d28dec6b1b7fafb10a4e7dbd806"
+      "sha256": "a54a2244cc4c705a4398792750b88071cc8228fd6c34cc01c1b5904f981d41cf"
     },
     {
       "audit": {
@@ -6928,7 +6928,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Twenty-one focused tests validate successor 002's frozen authorized state and ready preflight, shared full schemas and strict qualification prompt, observed malformed citation rejection, author-independent mutations, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
+        "evidence": "Twenty-one focused tests validate successor 002's completed/revoked state and blocked preflight, shared full schemas and strict qualification prompt, observed malformed citation rejection, author-independent mutations, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-build-only-runner-review"
@@ -6939,7 +6939,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_pilot_100.py",
       "risk": "medium",
-      "sha256": "0d2ac68a823b0f110a972de1dcb883dc2c11d645a199dd041b24116bbfdbf4e7"
+      "sha256": "02aa1bb30f7a602abcc88a16581821b02a35c95aa6d0b74004a2c64e60c6f1ca"
     },
     {
       "audit": {
