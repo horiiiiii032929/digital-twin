@@ -30,6 +30,27 @@ DEEPSEEK_HTML = """
 </table>
 """
 
+DEEPSEEK_HTML_WITH_VISION = DEEPSEEK_HTML.replace(
+    "<td>DeepSeek-V4-Pro-0813</td>",
+    "<td>DeepSeek-V4-Pro-0813</td><td>DeepSeek-V4-Flash-Vision-Exp</td>",
+).replace(
+    "<td>$0.66</td></tr>",
+    "<td>$0.66</td><td>$0.22</td></tr>",
+    1,
+).replace(
+    "<td>$1.32</td></tr>",
+    "<td>$1.32</td><td>$0.44</td></tr>",
+    1,
+).replace(
+    "<td>$1.98</td></tr>",
+    "<td>$1.98</td><td>$0.66</td></tr>",
+    1,
+).replace(
+    "<td>$3.96</td></tr>",
+    "<td>$3.96</td><td>$1.32</td></tr>",
+    1,
+).replace("TOKENS (", "TOKENS(")
+
 DEEPSEEK_PRIVACY_HTML = """
 <p>Last Update: Feb 10, 2026</p>
 <h4>How Long Do We Keep Your Personal Data</h4>
@@ -99,6 +120,12 @@ def test_deepseek_and_openrouter_parsers_capture_identity_price_and_limits() -> 
         "trains_on_prompts": False,
         "retention": "30 day retention",
     }
+
+
+def test_deepseek_parser_ignores_newer_unbound_model_columns() -> None:
+    parsed = parse_deepseek_pricing(DEEPSEEK_HTML_WITH_VISION)
+
+    assert parsed["models"] == parse_deepseek_pricing(DEEPSEEK_HTML)["models"]
 
 
 def test_live_price_or_model_drift_fails_closed() -> None:

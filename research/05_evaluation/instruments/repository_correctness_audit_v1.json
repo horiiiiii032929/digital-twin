@@ -3030,12 +3030,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, DeepSeek account-linked retention/storage terms, Mistral 30-day/no-training policy, and a 24-hour age bound without making inference calls.",
+      "evidence": "Manual parser review and mocked/live checks confirmed current multi-model DeepSeek pricing columns plus OpenRouter metadata are compared against exact revisions, prices, limits, routing, retention terms, and a 24-hour age bound without making inference calls.",
       "findings": [],
       "path": "scripts/validate_factual_qa_provider_freshness.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "290641331fc391830233511018797ef288e78935d111530de2a3c332c40775b9"
+      "sha256": "b7dd65275e612d90411d9e26d4276b2c98f7b404b65ba7c3fae34077513b19ee"
     },
     {
       "audit_status": "audited",
@@ -4834,12 +4834,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused regressions cover snapshot expiry, future timestamps, exact model revisions and prices, routing restrictions, OpenRouter identity, official metadata parsing, and fail-closed DeepSeek/OpenRouter retention-policy drift.",
+      "evidence": "Focused regressions cover snapshot expiry, exact revisions and prices, current three-model DeepSeek tables, routing restrictions, OpenRouter identity, and fail-closed retention-policy drift.",
       "findings": [],
       "path": "tests/test_factual_qa_provider_freshness.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "fd11ce226d3c2c9cd65c6fc084ff475ba690e2fec5c443bf9512cdea89e28fd6"
+      "sha256": "a45d580a82c1284f3766abd1999c9213884488f4b3bfac25c7249c494687b27b"
     },
     {
       "audit_status": "audited",

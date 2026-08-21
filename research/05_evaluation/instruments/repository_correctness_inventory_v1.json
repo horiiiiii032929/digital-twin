@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5eaf21d55c3b50acec459c98ed5db527e94c943d40b467f5a5cfeb5685cfb63c",
+  "record_sha256": "35f0551ca690c37327bbe55d4611530eb3d93a56a8a6798fe7e5c93a677a4774",
   "records": [
     {
       "audit": {
@@ -4591,7 +4591,7 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Manual parser review and mocked/live checks confirmed official DeepSeek and OpenRouter metadata are compared against exact revisions, prices, limits, routing, DeepSeek account-linked retention/storage terms, Mistral 30-day/no-training policy, and a 24-hour age bound without making inference calls.",
+        "evidence": "Manual parser review and mocked/live checks confirmed current multi-model DeepSeek pricing columns plus OpenRouter metadata are compared against exact revisions, prices, limits, routing, retention terms, and a 24-hour age bound without making inference calls.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -4604,7 +4604,7 @@
       ],
       "path": "scripts/validate_factual_qa_provider_freshness.py",
       "risk": "high",
-      "sha256": "290641331fc391830233511018797ef288e78935d111530de2a3c332c40775b9"
+      "sha256": "b7dd65275e612d90411d9e26d4276b2c98f7b404b65ba7c3fae34077513b19ee"
     },
     {
       "audit": {
@@ -7227,7 +7227,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused regressions cover snapshot expiry, future timestamps, exact model revisions and prices, routing restrictions, OpenRouter identity, official metadata parsing, and fail-closed DeepSeek/OpenRouter retention-policy drift.",
+        "evidence": "Focused regressions cover snapshot expiry, exact revisions and prices, current three-model DeepSeek tables, routing restrictions, OpenRouter identity, and fail-closed retention-policy drift.",
         "findings": [],
         "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
@@ -7238,7 +7238,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_provider_freshness.py",
       "risk": "medium",
-      "sha256": "fd11ce226d3c2c9cd65c6fc084ff475ba690e2fec5c443bf9512cdea89e28fd6"
+      "sha256": "a45d580a82c1284f3766abd1999c9213884488f4b3bfac25c7249c494687b27b"
     },
     {
       "audit": {
