@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "c294d70823859ef418d95bd57c8e1b0c4d99d4f7962585473edd88f5d9e537aa",
+  "record_sha256": "e4ba61471815bbae29d9abe3396b01b3d636cb451cac06f2a0ab9dd6f3c07294",
   "records": [
     {
       "audit": {
@@ -1240,9 +1240,9 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "All three bases are digest pinned; clean API/web images built; API image contains only the runtime worker script and active profile inputs.",
+        "evidence": "All three bases are digest pinned; the API image exposes only the five documented staging operational entrypoints plus active profile inputs, including clean administrator bootstrap, backup, restore, lifecycle, and worker commands.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1251,7 +1251,7 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "e7f82a3313c4f9c757b9c4b3a082faa2a380f1e51ca6b88e93fb0d6e18b691ee"
+      "sha256": "ca0e04d098a4d8d6311bf14198b4e8e5fab09e0e6da889b1d667c2ca84aca761"
     },
     {
       "audit": {
@@ -7345,9 +7345,9 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Five configuration regressions passed for CI pins, image digests, minimal runtime surface, interactive historical confirmation, Vite env binding, and security headers.",
+        "evidence": "Configuration regressions require digest-pinned bases, the exact documented operational scripts without copying the broad scripts tree, interactive historical confirmation, Vite env binding, and security headers.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-21",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7356,7 +7356,7 @@
       "package_commands": [],
       "path": "tests/test_repository_configuration.py",
       "risk": "medium",
-      "sha256": "d3ed727fcc0ac40d55942506adb11dae2b7733e37d4288b25227602c231aa977"
+      "sha256": "899d0c8762ea678580c599eb63e4d5dd3179d36656128bcdd6fefa40247052c5"
     },
     {
       "audit": {

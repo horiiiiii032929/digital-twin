@@ -34,7 +34,17 @@ def test_runtime_container_bases_are_digest_pinned_and_surface_is_minimal() -> N
     assert all(IMAGE_DIGEST.fullmatch(line) for line in from_lines)
     assert "COPY scripts scripts" not in dockerfile
     assert "COPY research/05_evaluation/records" not in dockerfile
-    assert "COPY scripts/run_ingestion_worker.py scripts/run_ingestion_worker.py" in dockerfile
+    for operational_script in (
+        "backup_runtime.py",
+        "bootstrap_admin.py",
+        "manage_runtime_data.py",
+        "restore_runtime.py",
+        "run_ingestion_worker.py",
+    ):
+        assert (
+            f"COPY scripts/{operational_script} scripts/{operational_script}"
+            in dockerfile
+        )
 
 
 def test_historical_review_commands_do_not_bake_in_reproduction_confirmation() -> None:
