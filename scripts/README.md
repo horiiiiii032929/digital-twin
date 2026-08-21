@@ -453,9 +453,12 @@ Current utilities:
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report
   `ready` only for an exact frozen instrument on a clean worktree with both
-  credentials and an unused output path. The completed attempt returned Refine
+  credentials and an unused output path. Completed attempt 001 returned Refine
   after 226 calls exposed author/reviewer contract and mutation-eligibility
-  defects; its authorization is revoked. The network-free
+  defects; its authorization is revoked. Successor attempt 002 uses the full
+  shared author schema, the exact qualification-006 strict reviewer contract,
+  and deterministic canonical mutation controls that do not depend on author
+  success. The network-free
   simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
   durable per-call checkpoints, safe resume, model identity, cost accounting,
   requested-versus-reported token-limit accounting, a USD 3 emergency stop,
@@ -463,5 +466,5 @@ Current utilities:
   transports. Use `npm run verify:factual-qa-v3-pilot-100`,
   `npm run preflight:factual-qa-v3-pilot-100`, or
   `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
-  rejected for completed attempt 001; any corrected successor requires a new
-  instrument and authorization. Later stages remain blocked.
+  rejected because attempt 002 is reviewed but execution-unauthorized. A
+  separate frozen authorization commit is required. Later stages remain blocked.

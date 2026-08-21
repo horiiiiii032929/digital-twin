@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 448 executable or execution-affecting
+the current branch extends it to all 449 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -94,7 +94,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections pass the current 674-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 448-file audit. Evaluation
+artifacts are also fully dispositioned in the current 449-file audit. Evaluation
 execution remains frozen except for exact bounded qualification 007; no
 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -311,7 +311,7 @@ lineage, distribution, stage, determinism, and privacy checks with zero model
 calls. Dataset writing and every paid 100, 1,000, and 10,000 stage remain
 unauthorized pending separate frozen checkpoints.
 
-The build-only `factual-qa-v3-scale-pilot-100-001` runner now binds the first
+The shared `factual-qa-v3-scale-pilot-100` runner binds the first
 100 stratified blueprints and validates a maximum of 246 calls under a USD 3.00
 emergency stop. Its USD 0.323842 prospective reservation is informational;
 actual provider-reported tokens and cost are checkpointed on every call, and
@@ -330,6 +330,18 @@ valid cases were boundary cases, zero answerable cases were eligible for the
 deterministic quarantines. This exposes prompt/schema and mutation-eligibility
 defects in the method, not a valid scale-quality result. Authorization is
 revoked; the 1,000- and 10,000-case stages remain closed.
+
+Successor `factual-qa-v3-scale-pilot-100-002` corrects those three method
+defects without making provider calls. Authoring now uses the full shared JSON
+schema plus an exact citation-object contract; scale review imports the same
+strict schema, prompts, and validator used by qualification 006; and all 20
+mutation probes are built from deterministic canonical controls independent of
+author success. At clean revision `d5fe874`, the normal 222-call and maximum
+246-call network-free paths passed, and a total-author-malformation regression
+still constructed and reviewed all 20 mutations. The full repository gate
+passed with 682 Python and 46 frontend tests, and the audit is 449/449 complete.
+The clean preflight remains `blocked-not-authorized`; no paid 002, 1,000-case,
+or 10,000-case execution is authorized.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
