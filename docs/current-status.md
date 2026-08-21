@@ -320,9 +320,9 @@ Network-free simulations exercised the 222-call no-dispute path and the
 246-call maximum-dispute path, including deterministic acceptance, 20 mutation
 probes, malformed/provider failure accounting, exact model identity, atomic
 checkpoints, safe resume, aggregate and slice gates, and a 12-case priority
-packet. This is implementation verification only. The instrument remains
-unfrozen and provider execution is rejected by both its configuration and the
-repository freeze; no paid scale stage is authorized.
+packet. The exact 100-case instrument is now frozen and one-time provider
+execution is authorized under the repository freeze. The 1,000- and
+10,000-case stages remain unauthorized and cannot be promoted automatically.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40

@@ -452,7 +452,8 @@ Current utilities:
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report
-  `blocked-not-authorized` in the build-only checkpoint. The network-free
+  `ready` only for the exact frozen instrument on a clean worktree with both
+  credentials and an unused output path. The network-free
   simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
   durable per-call checkpoints, safe resume, model identity, cost accounting,
   requested-versus-reported token-limit accounting, a USD 3 emergency stop,
@@ -460,4 +461,5 @@ Current utilities:
   transports. Use `npm run verify:factual-qa-v3-pilot-100`,
   `npm run preflight:factual-qa-v3-pilot-100`, or
   `npm run simulate:factual-qa-v3-pilot-100`. The paid `execute:` command is
-  intentionally rejected by both the draft instrument and repository freeze.
+  authorized only for `factual-qa-v3-scale-pilot-100-001`; later stages remain
+  blocked.

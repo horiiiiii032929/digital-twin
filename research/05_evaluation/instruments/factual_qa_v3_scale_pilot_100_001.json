@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-pilot-100-001",
-  "status": "draft-reviewed-provider-execution-unauthorized",
+  "status": "frozen-pending-execution",
   "issue": 87,
   "method_version": "factual-qa-v3-staged-pipeline-v1",
   "decision_question": "Can the fixed factual-QA v3 method produce and independently review the first 100 stratified cases with complete deterministic lineage, failure, latency, and cost accounting?",
@@ -66,7 +66,7 @@
     }
   },
   "execution": {
-    "provider_execution_authorized": false,
+    "provider_execution_authorized": true,
     "dataset_write_authorized": false,
     "automatic_stage_promotion": false,
     "provider_canary_call_limit": 2,
