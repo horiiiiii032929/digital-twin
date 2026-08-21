@@ -14,8 +14,16 @@ freeze records remain unchanged and authoritative for their own runs.
 ## Product goal
 
 Deliver a deployed, invite-only Course Digital Twin that a real professor can
-configure and publish and that authorized students can use for persistent,
-citation-grounded tutoring.
+configure and publish and that authorized students can use for autonomous,
+persistent, citation-grounded tutoring.
+
+The accepted
+[autonomous tutoring graph](../../docs/autonomous-tutoring-graph.md) defines the
+student-facing product method. A published Digital Twin autonomously traces a
+bounded learner state, retrieves approved evidence, chooses a pedagogical move,
+responds, verifies the response, and adapts on the next turn. The professor
+governs the published policy and consequential updates but does not approve
+normal student responses turn by turn.
 
 The merged local professor/student workspace is the product UX baseline, not
 the completed product. The release target is a real hosted pilot with
@@ -61,7 +69,10 @@ scope or rewriting existing evidence.
 
 - Sign in and access only assigned published courses.
 - Start and resume persistent single- and multi-turn tutoring conversations.
-- Receive grounded tutoring, clarification, refusal, or no-evidence actions.
+- Receive autonomous, adaptive tutoring that diagnoses understanding, selects
+  bounded teaching moves, and updates a transparent learner-state estimate.
+- Receive grounded explanation, questions, hints, examples, checks for
+  understanding, clarification, refusal, or no-evidence actions as appropriate.
 - Inspect source, version, page, region, and approved crop citations.
 - Recover from network, provider, ingestion, and stale-release failures without
   losing input or crossing a permission boundary.

@@ -2,7 +2,9 @@
 
 Evaluation-first product workspace for releasing an invite-only Course Digital
 Twin. Professors govern approved sources, teaching behaviour, publication, and
-rollback; authorized students receive persistent citation-grounded tutoring.
+rollback; authorized students receive autonomous, persistent,
+citation-grounded tutoring through the accepted
+[tutoring graph](docs/autonomous-tutoring-graph.md).
 
 The active outcome is a hosted, supervisor-reviewable release candidate followed
 by an approval-gated real-user pilot—not another local demo or model benchmark.
