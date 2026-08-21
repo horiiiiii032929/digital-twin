@@ -57,9 +57,13 @@ reviewer p95 latency was 42.46 seconds, and measured cost was USD 0.128239.
 The provider returned more output tokens than the requested cap, exposing that
 the prospective reservation did not enforce the USD 0.10 limit. Qwen is not
 selected, its one-time authorization is revoked, and qualified Mistral Small 4
-remains the 100-case fallback. Before any paid 100-case run, cost enforcement
-must be hardened and separately reviewed. The 100-, 1,000-, and 10,000-case
-stages remain unauthorized.
+remains the advisory reviewer. Cost enforcement was hardened before the two
+paid 100-case attempts. Corrected attempt 002 completed safely as **Refine**:
+93/100 cases passed deterministic validation, all 85 answerable cases had valid
+citations, reviewer agreement was 97/100, and all 20 mutations were rejected.
+Boundary handling, one multi-source claim binding, duplicate questions, and two
+malformed outcomes still failed their gates. Its authorization is revoked; the
+1,000- and 10,000-case stages remain unauthorized.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -72,7 +76,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The final local
-check passes 674 Python tests and 46 frontend tests, frontend lint, and the
+check passes 682 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -92,11 +96,11 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 674-test Python suite.
+connections. These corrections pass the current 682-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
 artifacts are also fully dispositioned in the current 449-file audit. Evaluation
-execution remains frozen except for exact bounded qualification 007; no
-100-, 1,000-, or 10,000-case stage is authorized.
+execution remains frozen; only the completed historical oracle pilot remains in
+the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
 ## Current outcome
 
@@ -183,14 +187,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper as single-host staging candidate | Earlier 19/19 publication slice, 41/41 in-process foundation checks, built images, 25/25 live local-HTTPS/recovery checks, deterministic preflight, and A0 demo rollback | Public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
-| Large factual QA | Go Deeper; build-only 100-case runner complete | Qualification 006 passed every Mistral Small 4 gate; the deterministic 1,000-source / 10,000-case design is published; qualification 007 and the unauthorized 100-case runner are prepared | Decide whether to run Qwen qualification 007, then freeze the selected reviewer and separately authorize the 100-case paid checkpoint |
+| Large factual QA | Refine after paid 100-case attempt 002 | Qualification 006 selected Mistral Small 4; Qwen qualification 007 failed; attempt 002 reached 93/100 deterministic validity, 85/85 citation validity, 97/100 reviewer agreement, and 20/20 mutation rejection | Move authoritative actions, claims, answers, and citations into deterministic truth packages; validate the provider-free successor before any new paid checkpoint |
 
 ## Immediate critical path
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | Repository correctness freeze | Keep / one bounded qualification open | The global freeze remains active with only the completed-oracle record and exact 49-call Qwen qualification 007 allowlisted; every scale stage is closed |
-| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Go Deeper | Qualify the prospective reviewer, then freeze and authorize the already simulated 100-case runner before 1,000 or 10,000 cases |
+| 1 | Repository correctness freeze | Keep / no prospective execution authorized | The global freeze remains active with only the completed historical oracle pilot allowlisted; every scale stage is closed |
+| 2 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / Refine | Build deterministic truth-package pipeline 002 and provider-unauthorized pilot 003; require professor-method guidance and separate paid authorization before execution |
 | 3 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper / blocked | Local 41/41 and 25/25 HTTPS/recovery checks passed; complete public DNS/TLS, target-host restore, and public staging walkthrough after host/domain selection |
 | 4 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine | Calibrate the automated evaluator against independent expert labels; keep this separate from factual QA |
 | 5 | [#9 Production operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Todo / blocked by #88 | Isolation, recovery, observability, backup/restore, security, latency, cost, and capacity evidence on the target host |
@@ -201,10 +205,11 @@ Issues #85 and #86 are complete and archived from the live Project view. PR #91 
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 preserves attempt
-002's passed machine gates and uncompleted audit as historical v2 evidence, but
-the active boundary is now the broader v3 no-model implementation over the
-eligible Academia Vault. This remains method validation, not a model benchmark.
+and the historical held-out split was not opened. Issue #87 preserves paid
+attempt 002 and its completed 12-case cross-review as historical evidence. The
+active correction moves canonical questions, answers, actions, claim IDs, and
+citations into deterministic source truth while keeping model generation and
+review advisory. This remains method validation, not a model benchmark.
 Issue #88 remains active but externally blocked; its implementation and local
 qualification are complete enough for a controlled host rehearsal, not for a
 real-user pilot.
@@ -237,8 +242,8 @@ The active model policy now blocks every Gemma and Claude call and all retired
 local general-Qwen calls before provider I/O. Direct DeepSeek V4 Flash/Pro and
 the selected task-specific Qwen3 Embedding binding remain current for their
 recorded roles. Mistral Small 4 is retained as the qualified advisory reviewer.
-Hosted Qwen3.7 Plus is registered only for bounded qualification 007 under a
-USD 0.10 hard stop; no local model is used. See
+Hosted Qwen3.7 Plus failed bounded qualification 007 and is not selected; its
+one-time authorization is revoked and no local model is used. See
 [the current model policy](../research/00_admin/2026-08-21-current-model-policy-v3.md).
 
 ## Large factual-QA interpretation
