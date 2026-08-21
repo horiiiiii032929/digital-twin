@@ -340,8 +340,11 @@ author success. At clean revision `d5fe874`, the normal 222-call and maximum
 246-call network-free paths passed, and a total-author-malformation regression
 still constructed and reviewed all 20 mutations. The full repository gate
 passed with 682 Python and 46 frontend tests, and the audit is 449/449 complete.
-The clean preflight remains `blocked-not-authorized`; no paid 002, 1,000-case,
-or 10,000-case execution is authorized.
+User authorization now freezes exactly attempt 002 for one bounded paid run.
+The authorization preserves the 246-call maximum, zero retries, USD 3 emergency
+ceiling, exact DeepSeek/Mistral bindings, and per-call checkpoints. The 1,000-
+and 10,000-case stages remain unauthorized and attempt 002 must be revoked after
+its result is registered.
 
 [Issue #102](https://github.com/horiiiiii032929/digital-twin/issues/102) now
 tracks the separate `factual-qa-v3-real-source-pilot-001`. Its draft defines 40
