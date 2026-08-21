@@ -140,7 +140,8 @@ product UX baseline; it does not establish human usability or production
 readiness.
 
 Issue [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) remains
-in progress with a **Go Deeper** result. The post-correctness V7 candidate at
+in progress. Its V7 in-process result was **Go Deeper**, while the later V8
+current-image result is **Refine**. The post-correctness V7 candidate at
 clean implementation revision `f553be5` passed 42/42 current in-process checks:
 credentialed professor/student journeys, server-owned ingestion lineage,
 policy approval and publication, grounded answers and citations, restart,
@@ -151,12 +152,20 @@ used no external model and no private data.
 
 `deployable-product-foundation-freeze-v7` now binds that result to 14 current
 runtime trees and 17 critical files. It makes no current container-image or
-release claim: the isolated image build stalled while Docker resolved pinned
-registry metadata, and Docker Desktop did not recover during the bounded retry.
-The current-image/local-HTTPS run, public DNS and certificate, clean-host
-restore, and public staging walkthrough therefore remain pending. Historical
-V1-V6 image and HTTPS evidence remains valid only for its recorded revisions;
-it is not silently promoted to V7.
+release claim. A later controlled Docker restart recovered the engine and
+exposed two release-critical facts in attempt V8. First, the image omitted the
+documented bootstrap, backup, restore, and lifecycle commands; the image now
+copies those exact operational entrypoints and no broad tooling tree. Second,
+the rebuilt API, worker, and Caddy containers became healthy, clean
+administrator bootstrap worked, and source ingestion reached release
+publication, but the real product profile correctly refused publication with
+`evidence_sufficiency_required`. Evidence-sufficiency v1 selected no safe
+method, while the 42/42 in-process harness explicitly injected an AnyHit test
+control. V7 therefore proves those mechanics only under its synthetic control;
+it does not prove a releasable product configuration. Attempt V8 is **Refine**
+with no selected release candidate. A prospective evidence-sufficiency
+successor must pass before public DNS/TLS, clean-host restore, and the public
+walkthrough can support release.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -169,8 +178,8 @@ PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 earlier foundation into `main` at `adf39af`. PR
 [#103](https://github.com/horiiiiii032929/digital-twin/pull/103) merged the
 deterministic factual-QA successor and repository-correctness corrections at
-`4657219`. The current V7 requalification remains a separate release checkpoint
-and does not promote the still-pending public deployment claim.
+`4657219`. The V7/V8 requalification remains a separate release checkpoint and
+does not promote the still-pending public deployment claim.
 
 GitHub Project 1 is reorganized around release goal
 [#8](https://github.com/horiiiiii032929/digital-twin/issues/8) and three active
@@ -192,26 +201,27 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Go Deeper as single-host staging candidate | Current V7 42/42 in-process qualification plus historical image/HTTPS/recovery evidence and A0 demo rollback | Current-image local HTTPS, public trusted HTTPS/target-host restore, real-workflow usability, representative source quality, and release-candidate evaluation |
+| Publication/student core | Refine; no current release candidate | Current images build and become healthy; operational commands and clean bootstrap work; V7 mechanics pass under an injected synthetic gate | Select a real evidence-sufficiency method, complete publication through current-image HTTPS, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The current release blockers are professor-method guidance,
-separately authorized factual-QA confirmation, public host/domain selection,
-target-host operations evidence, professor-fidelity calibration, and one frozen
-end-to-end candidate decision.
+release-ready. The current release blockers are a selected evidence-sufficiency
+method, professor-method guidance, separately authorized factual-QA
+confirmation, public host/domain selection, target-host operations evidence,
+professor-fidelity calibration, and one frozen end-to-end candidate decision.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
-| 4 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Go Deeper | Recover current-image qualification, select a host/domain, then pass trusted TLS, target-host restore, and public walkthrough |
-| 5 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
-| 6 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
-| 7 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
+| 4 | Evidence-sufficiency successor | Todo / Refine | Prospectively select an open-set answerability gate without using AnyHit as a product shortcut |
+| 5 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
+| 6 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
+| 7 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
+| 8 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
@@ -222,9 +232,9 @@ attempt 002 and its completed 12-case cross-review as historical evidence. The
 active correction moves canonical questions, answers, actions, claim IDs, and
 citations into deterministic source truth while keeping model generation and
 review advisory. This remains method validation, not a model benchmark.
-Issue #88 remains active but externally blocked; its implementation and local
-qualification are complete enough for a controlled host rehearsal, not for a
-real-user pilot.
+Issue #88 remains active. Its current images are operational, but product
+publication is internally blocked by the unselected evidence-sufficiency
+component; a host rehearsal is premature until that gate is selected.
 
 ## Known multimodal correction
 

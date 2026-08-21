@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "run_id": "deployable-product-foundation-v8-current-image-attempt-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "synthetic-deployable-foundation-v8-current-image",
+  "corpus_id": "synthetic-network-security-one-pdf-v8",
+  "code_revision": "7ff5a0e1ecaf9df9d2cc61fa92e1bdb658124fb3",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "a1-v7-in-process-any-hit-control",
+        "version": "v7-synthetic-control",
+        "configuration": {
+          "container_image_executed": false,
+          "evidence_sufficiency_gate": "any-hit-test-control",
+          "product_profile_selected": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "current-container-image-build-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "container-readiness-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "documented-operational-entrypoint-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "credentialed-publication-completion-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "selected-evidence-sufficiency-configuration-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-administrator-bootstrap",
+          "passed": false,
+          "evidence": "The in-process control did not exercise clean administrator bootstrap inside the image."
+        },
+        {
+          "name": "documented-operations-present",
+          "passed": false,
+          "evidence": "The in-process control did not inspect deployment operational modules inside the image."
+        },
+        {
+          "name": "local-https-and-durable-services-ready",
+          "passed": false,
+          "evidence": "The in-process control did not run API, worker, and web containers through Caddy HTTPS."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "AnyHit failed all no-evidence cases in evidence-sufficiency v1 and is not selected in the product profile."
+        },
+        {
+          "name": "credentialed-release-publication",
+          "passed": true,
+          "evidence": "V7 completed the in-process publication mechanics with an explicitly injected AnyHit test gate."
+        },
+        {
+          "name": "fail-closed-without-test-control",
+          "passed": false,
+          "evidence": "The control injected AnyHit and therefore cannot prove the product's no-selection refusal."
+        },
+        {
+          "name": "zero-model-private-data-and-credential-leakage",
+          "passed": true,
+          "evidence": "The control used generated synthetic data, zero provider calls, and emitted no credential."
+        }
+      ],
+      "failures_by_category": {
+        "evaluation": 1,
+        "integration": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "a1-single-node-staging-v8-current-image",
+        "version": "v8-current-image",
+        "configuration": {
+          "api_image_sha256": "a78a99e17e3a5b2bdba52aa6c490ca7aa532df9b46b2b9c9f136840360cde929",
+          "web_image_sha256": "242c39320e0acbee5f014854c430014501a716cbb7d055ca9884ad468f644028",
+          "generator_mode": "deterministic",
+          "evidence_sufficiency_profile_status": "pending-no-selection",
+          "test_only_gate_injected": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "current-container-image-build-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "container-readiness-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "documented-operational-entrypoint-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "credentialed-publication-completion-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "selected-evidence-sufficiency-configuration-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "external-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-administrator-bootstrap",
+          "passed": true,
+          "evidence": "The corrected current API image provisioned the first staging administrator from a process-only password without emitting it."
+        },
+        {
+          "name": "documented-operations-present",
+          "passed": true,
+          "evidence": "Bootstrap, backup, restore, and runtime lifecycle modules are present in the image and returned help successfully."
+        },
+        {
+          "name": "local-https-and-durable-services-ready",
+          "passed": true,
+          "evidence": "API, worker, and Caddy web containers became healthy in a new isolated Compose project and readiness reported every durable dependency true."
+        },
+        {
+          "name": "product-evidence-sufficiency-selected",
+          "passed": false,
+          "evidence": "The active student-tutor profile preserves evidence sufficiency as pending because v1 selected no safe method."
+        },
+        {
+          "name": "credentialed-release-publication",
+          "passed": false,
+          "evidence": "Publication returned HTTP 409 evidence_sufficiency_required after source ingestion and preflight."
+        },
+        {
+          "name": "fail-closed-without-test-control",
+          "passed": true,
+          "evidence": "The product refused publication rather than silently substituting the synthetic AnyHit control used by in-process tests."
+        },
+        {
+          "name": "zero-model-private-data-and-credential-leakage",
+          "passed": true,
+          "evidence": "The run used generated synthetic inputs, made zero provider calls, and the bounded log scan found no credential markers."
+        }
+      ],
+      "failures_by_category": {
+        "configuration": 1,
+        "integration": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The current images and operational entrypoints work, but the real product profile correctly refuses publication because no evidence-sufficiency method has passed selection. A synthetic AnyHit control cannot establish a releasable configuration.",
+    "limitations": [
+      "The verifier raises before writing a partial per-check JSON result, so this record retains the sanitized failing endpoint and refusal code rather than a complete request ledger.",
+      "The run used synthetic data, deterministic generation, local Caddy trust, and one development machine.",
+      "Public DNS, trusted TLS, clean-host restore, real-source quality, professor fidelity, and human usability remain pending.",
+      "The V7 42/42 result proves mechanics under an injected test control, not product evidence-sufficiency selection."
+    ]
+  }
+}
