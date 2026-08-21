@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "packet_id": "professor-fidelity-calibration-packet-v1-template",
+  "status": "template-awaiting-professor-guidance",
+  "purpose": "Calibrate automated Professor Digital Twin fidelity judgments against independent professor or expert labels.",
+  "case_count_min": 8,
+  "case_count_max": 12,
+  "conditions": [
+    "C0",
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "fixed_controls": [
+    "question",
+    "generator",
+    "decoding",
+    "token_budget",
+    "output_schema",
+    "C1-C2 oracle evidence"
+  ],
+  "hard_gates": [
+    "factual_correctness",
+    "citation_grounding",
+    "safety",
+    "boundary_action"
+  ],
+  "fidelity_dimensions": [
+    "teaching_style",
+    "explanation_depth",
+    "example_policy",
+    "misconception_handling",
+    "academic_integrity"
+  ],
+  "reference_policy": "No profile or dimension may be used as a fidelity reference until its professor approval is recorded and hash-bound.",
+  "cases": []
+}

@@ -34,6 +34,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_factual_qa_v3_10000_blueprints.py": (
             "dataset_generation",
         ),
+        "scripts/build_factual_qa_v3_10000_truth_packages.py": (
+            "dataset_generation",
+        ),
         "scripts/build_generator_qualification_dataset.py": ("dataset_generation",),
         "scripts/build_it5002_rapid_dataset.py": (
             "dataset_generation",
@@ -122,6 +125,11 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_factual_qa_v3_scale_pilot_100.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_factual_qa_v3_scale_pilot_100_003.py": (
             "dataset_generation",
             "external_model_evaluation",
             "method_evaluation_execution",
