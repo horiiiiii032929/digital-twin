@@ -40,6 +40,7 @@ def test_instrument_is_build_only_and_price_bounded(assets: dict) -> None:
     assert instrument["execution"]["dataset_write_authorized"] is False
     assert instrument["execution"]["automatic_stage_promotion"] is False
     assert instrument["execution"]["total_provider_call_limit"] == 246
+    assert instrument["execution"]["cost_stop_usd"] == 3.0
     assert _maximum_reserved_cost(instrument) < instrument["execution"]["cost_stop_usd"]
 
 
@@ -236,7 +237,7 @@ def test_cost_stop_is_fail_closed(assets: dict, tmp_path: Path) -> None:
     transports["author"] = SimulatedTransport(
         role="author",
         model=instrument["model_roles"]["author"]["provider_model"],
-        cost_per_call=0.51,
+        cost_per_call=3.0,
     )
     state = asyncio.run(
         execute(
@@ -249,7 +250,69 @@ def test_cost_stop_is_fail_closed(assets: dict, tmp_path: Path) -> None:
 
     assert state["status"] == "invalid-execution"
     assert state["accounting"]["calls_attempted"] == 1
-    assert state["accounting"]["external_cost_usd"] == pytest.approx(0.51)
+    assert state["accounting"]["external_cost_usd"] == pytest.approx(3.0)
+
+
+def test_pre_call_cost_guard_stops_resume_without_another_call(
+    assets: dict, tmp_path: Path
+) -> None:
+    output = tmp_path / "pre-call-cost.json"
+    with pytest.raises(PlannedInterruption):
+        asyncio.run(
+            execute(
+                assets,
+                transports=_simulation_transports(assets["instrument"]),
+                output_path=output,
+                simulation=True,
+                stop_after_calls=1,
+            )
+        )
+    checkpoint = json.loads(output.read_text(encoding="utf-8"))
+    checkpoint["accounting"]["external_cost_usd"] = 3.0
+    checkpoint["status"] = "running"
+    output.write_text(json.dumps(checkpoint), encoding="utf-8")
+    transports = _simulation_transports(assets["instrument"])
+
+    state = asyncio.run(
+        execute(
+            assets,
+            transports=transports,
+            output_path=output,
+            simulation=True,
+            resume=True,
+        )
+    )
+
+    assert state["status"] == "invalid-execution"
+    assert state["invalid_reason"] == "cost-stop-reached-before-call"
+    assert sum(transport.calls for transport in transports.values()) == 0
+
+
+def test_reported_token_limit_violations_are_recorded(
+    assets: dict, tmp_path: Path
+) -> None:
+    instrument = assets["instrument"]
+    transports = _simulation_transports(instrument)
+    transports["author"] = SimulatedTransport(
+        role="author",
+        model=instrument["model_roles"]["author"]["provider_model"],
+        output_tokens=701,
+    )
+    state = asyncio.run(
+        execute(
+            assets,
+            transports=transports,
+            output_path=tmp_path / "token-limit.json",
+            simulation=True,
+        )
+    )
+
+    assert state["accounting"]["output_token_limit_exceeded_count"] == 101
+    assert state["accounting"]["token_limit_exceeded_call_count"] == 101
+    call = state["canaries"]["author"]["call"]
+    assert call["requested_max_output_tokens"] == 700
+    assert call["output_tokens"] == 701
+    assert call["output_token_limit_exceeded"] is True
 
 
 def test_running_checkpoint_resumes_without_repeating_accounting(

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "run_id": "factual-qa-v3-reviewer-qualification-007",
+  "status": "completed",
+  "decision": "drop-qwen37plus-retain-mistral-small-4",
+  "code_revision": "9c97761d2863b0c3cbaccd86b789c101835a3e4a",
+  "instrument_sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f",
+  "raw_artifact_sha256": "c57e8ed6e825eae6be16bd5c5d42b5c88d4f02f9a66195115847038b5c833b75",
+  "data_boundary": "synthetic-public",
+  "provider_model": "qwen/qwen3.7-plus",
+  "provider_calls": 49,
+  "review_completion_rate": 0.8541666666666666,
+  "clean_specificity": 0.75,
+  "mutation_sensitivity": 0.8333333333333334,
+  "per_mutation_type_sensitivity": {
+    "extra-supported-claim": 0.75,
+    "invalid-claim-binding": 0.75,
+    "invalid-source-binding": 1.0,
+    "missing-citation": 0.75,
+    "paraphrased-citation": 0.75,
+    "truncated-citation": 1.0
+  },
+  "malformed_or_provider_error_count": 7,
+  "reviewer_p95_latency_ms": 42464.360792000116,
+  "elapsed_seconds": 249.6242284169998,
+  "external_cost_usd": 0.12823936,
+  "private_data_calls": 0,
+  "failed_gates": [
+    "review_completion_rate",
+    "clean_specificity",
+    "mutation_sensitivity",
+    "malformed_or_provider_error_count",
+    "reviewer_p95_latency_ms",
+    "external_cost_usd"
+  ],
+  "scale_to_10000_authorized": false
+}

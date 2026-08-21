@@ -14,9 +14,8 @@ files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 55 protected entrypoints
-and retains exact bounded authorizations only for the completed
-`factual-qa-v3-oracle-pilot-001` and the synthetic-only, 49-call
-`factual-qa-v3-reviewer-qualification-007`. Manual review found material source-design
+and retains an exact bounded authorization only for the completed
+`factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -51,10 +50,16 @@ clean controls and rejected all 24 defects, including 4/4 in every mutation
 class. All 49 calls completed in 16.04 seconds for USD 0.012175 with zero
 malformed/provider errors. The strict reviewer is kept as advisory quality
 control for the 10,000-case design; deterministic lineage remains authoritative.
-The one-time 006 authorization is revoked. A new 24-pair qualification will
-test hosted Qwen3.7 Plus under a 49-call and USD 0.10 ceiling; Mistral Small 4
-remains the qualified fallback. This does not authorize the 100-, 1,000-, or
-10,000-case stages.
+The one-time 006 authorization is revoked. The subsequent 24-pair hosted
+Qwen3.7 Plus qualification 007 failed six gates: only 41/48 reviews were
+contract-valid, clean specificity was 75.0%, mutation sensitivity was 83.3%,
+reviewer p95 latency was 42.46 seconds, and measured cost was USD 0.128239.
+The provider returned more output tokens than the requested cap, exposing that
+the prospective reservation did not enforce the USD 0.10 limit. Qwen is not
+selected, its one-time authorization is revoked, and qualified Mistral Small 4
+remains the 100-case fallback. Before any paid 100-case run, cost enforcement
+must be hardened and separately reviewed. The 100-, 1,000-, and 10,000-case
+stages remain unauthorized.
 
 The complete locked dependency set now reports zero known Python or JavaScript
 vulnerabilities and has no active exceptions. The optional retrieval stack was
@@ -307,8 +312,11 @@ calls. Dataset writing and every paid 100, 1,000, and 10,000 stage remain
 unauthorized pending separate frozen checkpoints.
 
 The build-only `factual-qa-v3-scale-pilot-100-001` runner now binds the first
-100 stratified blueprints and validates a maximum of 246 calls under a USD 0.50
-stop. Network-free simulations exercised the 222-call no-dispute path and the
+100 stratified blueprints and validates a maximum of 246 calls under a USD 3.00
+emergency stop. Its USD 0.323842 prospective reservation is informational;
+actual provider-reported tokens and cost are checkpointed on every call, and
+requested-versus-reported token-limit violations are counted explicitly.
+Network-free simulations exercised the 222-call no-dispute path and the
 246-call maximum-dispute path, including deterministic acceptance, 20 mutation
 probes, malformed/provider failure accounting, exact model identity, atomic
 checkpoints, safe resume, aggregate and slice gates, and a 12-case priority

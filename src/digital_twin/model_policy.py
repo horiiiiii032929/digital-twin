@@ -73,7 +73,7 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="factual-qa-independent-reviewer-candidate",
         provider_model=OPENROUTER_QWEN_REVIEW_MODEL,
-        status="prospective-qualification-pending",
+        status="qualification-failed-not-selected",
     ),
     CurrentModelBinding(
         role="selected-text-embedding",

@@ -183,8 +183,6 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ScalePilotError("unsupported scale-pilot instrument schema")
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise ScalePilotError("unexpected scale-pilot instrument ID")
-    if instrument.get("status") != "draft-reviewed-provider-execution-unauthorized":
-        raise ScalePilotError("build-only instrument status drifted")
     if instrument.get("model_leaderboard") is not False:
         raise ScalePilotError("the scale pilot cannot become a model leaderboard")
     design = instrument.get("blueprint_design", {})
@@ -193,8 +191,14 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     if design.get("stage_id") != PILOT_STAGE or design.get("case_count") != 100:
         raise ScalePilotError("pilot stage design drifted")
     execution = instrument.get("execution", {})
-    if execution.get("provider_execution_authorized") is not False:
-        raise ScalePilotError("provider execution must remain unauthorized")
+    authorized = execution.get("provider_execution_authorized")
+    expected_status = (
+        "frozen-pending-execution"
+        if authorized is True
+        else "draft-reviewed-provider-execution-unauthorized"
+    )
+    if authorized not in {True, False} or instrument.get("status") != expected_status:
+        raise ScalePilotError("instrument status and provider authorization drifted")
     if execution.get("dataset_write_authorized") is not False:
         raise ScalePilotError("dataset writing must remain unauthorized")
     if execution.get("automatic_stage_promotion") is not False:
@@ -204,8 +208,10 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     for field, expected in EXPECTED_CALL_LIMITS.items():
         if execution.get(field) != expected:
             raise ScalePilotError(f"execution call limit drifted: {field}")
-    if execution.get("cost_stop_usd") != 0.5:
+    if execution.get("cost_stop_usd") != 3.0:
         raise ScalePilotError("pilot cost stop drifted")
+    if instrument.get("quality_gates", {}).get("external_cost_usd_max") != 3.0:
+        raise ScalePilotError("pilot operational cost ceiling drifted")
     if instrument.get("mutation_design", {}).get("type_counts") != EXPECTED_MUTATIONS:
         raise ScalePilotError("mutation distribution drifted")
     roles = instrument.get("model_roles", {})
@@ -793,6 +799,8 @@ class SimulatedTransport:
         malformed_tasks: set[str] | None = None,
         invert_review_tasks: set[str] | None = None,
         cost_per_call: float = 0.0001,
+        input_tokens: int = 100,
+        output_tokens: int = 50,
     ) -> None:
         self.role = role
         self.model = model
@@ -800,6 +808,8 @@ class SimulatedTransport:
         self.malformed_tasks = malformed_tasks or set()
         self.invert_review_tasks = invert_review_tasks or set()
         self.cost_per_call = cost_per_call
+        self.input_tokens = input_tokens
+        self.output_tokens = output_tokens
         self.calls = 0
 
     async def call(
@@ -908,8 +918,8 @@ class SimulatedTransport:
             content=content,
             provider_model=self.model,
             provider_revision=f"simulated-{self.model}-revision",
-            input_tokens=100,
-            output_tokens=50,
+            input_tokens=self.input_tokens,
+            output_tokens=self.output_tokens,
             approximate_cost_usd=self.cost_per_call,
             latency_ms=1.0,
         )
@@ -969,6 +979,9 @@ def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any
             "input_tokens": 0,
             "output_tokens": 0,
             "external_cost_usd": 0.0,
+            "input_token_limit_exceeded_count": 0,
+            "output_token_limit_exceeded_count": 0,
+            "token_limit_exceeded_call_count": 0,
             "latency_ms": [],
         },
         "canaries": {},
@@ -990,23 +1003,38 @@ def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dic
     return state
 
 
-def _call_record(raw: RawCall) -> dict[str, Any]:
+def _call_record(raw: RawCall, binding: dict[str, Any]) -> dict[str, Any]:
+    input_limit = int(binding["max_input_tokens"])
+    output_limit = int(binding["max_output_tokens"])
     return {
         "provider_model": raw.provider_model,
         "provider_revision": raw.provider_revision,
         "input_tokens": raw.input_tokens,
         "output_tokens": raw.output_tokens,
+        "requested_max_input_tokens": input_limit,
+        "requested_max_output_tokens": output_limit,
+        "input_token_limit_exceeded": raw.input_tokens > input_limit,
+        "output_token_limit_exceeded": raw.output_tokens > output_limit,
         "approximate_cost_usd": raw.approximate_cost_usd,
         "latency_ms": raw.latency_ms,
     }
 
 
-def _record_raw_call(state: dict[str, Any], raw: RawCall) -> None:
+def _record_raw_call(
+    state: dict[str, Any], raw: RawCall, binding: dict[str, Any]
+) -> None:
     accounting = state["accounting"]
     accounting["calls_with_provider_response"] += 1
     accounting["input_tokens"] += raw.input_tokens
     accounting["output_tokens"] += raw.output_tokens
     accounting["external_cost_usd"] += raw.approximate_cost_usd
+    input_exceeded = raw.input_tokens > int(binding["max_input_tokens"])
+    output_exceeded = raw.output_tokens > int(binding["max_output_tokens"])
+    accounting["input_token_limit_exceeded_count"] += int(input_exceeded)
+    accounting["output_token_limit_exceeded_count"] += int(output_exceeded)
+    accounting["token_limit_exceeded_call_count"] += int(
+        input_exceeded or output_exceeded
+    )
     accounting["latency_ms"].append(raw.latency_ms)
 
 
@@ -1025,6 +1053,19 @@ async def _safe_call(
     stop_after_calls: int | None,
 ) -> dict[str, Any]:
     accounting = state["accounting"]
+    cost_stop = float(instrument["execution"]["cost_stop_usd"])
+    if accounting["external_cost_usd"] >= cost_stop:
+        state["status"] = "invalid-execution"
+        state["invalid_reason"] = "cost-stop-reached-before-call"
+        _checkpoint(output_path, state)
+        return {
+            "status": "budget-stop",
+            "error_type": None,
+            "provider_response_received": False,
+            "latency_ms": 0.0,
+            "value": None,
+            "call": None,
+        }
     if accounting["calls_attempted"] >= instrument["execution"]["total_provider_call_limit"]:
         raise ScalePilotError("provider call limit reached")
     if stop_after_calls is not None and accounting["calls_attempted"] >= stop_after_calls:
@@ -1049,12 +1090,13 @@ async def _safe_call(
             "call": None,
         }
         return outcome
-    _record_raw_call(state, raw)
-    expected_model = instrument["model_roles"][role]["provider_model"]
+    binding = instrument["model_roles"][role]
+    _record_raw_call(state, raw, binding)
+    expected_model = binding["provider_model"]
     if raw.provider_model != expected_model:
         state["status"] = "invalid-execution"
         state["invalid_reason"] = "provider-model-identity-drift"
-    if state["accounting"]["external_cost_usd"] > instrument["execution"]["cost_stop_usd"]:
+    if state["accounting"]["external_cost_usd"] >= cost_stop:
         state["status"] = "invalid-execution"
         state["invalid_reason"] = "cost-stop-exceeded"
     try:
@@ -1065,7 +1107,7 @@ async def _safe_call(
             "error_type": None,
             "provider_response_received": True,
             "value": value,
-            "call": _call_record(raw),
+            "call": _call_record(raw, binding),
         }
     except (json.JSONDecodeError, ScalePilotError, TypeError, ValueError) as error:
         outcome = {
@@ -1074,7 +1116,7 @@ async def _safe_call(
             "provider_response_received": True,
             "content_sha256": hashlib.sha256(raw.content.encode()).hexdigest(),
             "value": None,
-            "call": _call_record(raw),
+            "call": _call_record(raw, binding),
         }
     return outcome
 
@@ -1233,6 +1275,15 @@ def analyze_state(state: dict[str, Any], instrument: dict[str, Any]) -> dict[str
             for outcome in all_outcomes
         ),
         "external_cost_usd": accounting["external_cost_usd"],
+        "input_token_limit_exceeded_count": accounting[
+            "input_token_limit_exceeded_count"
+        ],
+        "output_token_limit_exceeded_count": accounting[
+            "output_token_limit_exceeded_count"
+        ],
+        "token_limit_exceeded_call_count": accounting[
+            "token_limit_exceeded_call_count"
+        ],
         "private_data_calls": 0,
         "provider_calls": accounting["calls_attempted"],
         "p95_latency_ms": _percentile(accounting["latency_ms"], 0.95),

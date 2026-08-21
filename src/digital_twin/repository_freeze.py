@@ -180,10 +180,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "factual-qa-v3-reviewer-qualification-007": (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
     }
 )
 

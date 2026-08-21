@@ -13,10 +13,10 @@ silent provider fallback. Direct DeepSeek remains the selected product and
 bounded-authoring transport. Mistral Small 4 remains the qualified advisory
 reviewer after `factual-qa-v3-reviewer-qualification-006` passed all gates.
 
-Register exact hosted `openrouter/qwen/qwen3.7-plus` only as a prospective
-factual-QA reviewer candidate. Registration permits a bounded synthetic-public
-qualification; it does not select Qwen3.7 Plus or authorize the 100, 1,000, or
-10,000-case stages.
+Qualification 007 did not select hosted `openrouter/qwen/qwen3.7-plus`: it
+failed completion, specificity, sensitivity, malformed-response, latency, and
+cost gates. Its one-time authorization is revoked. This result does not
+authorize the 100, 1,000, or 10,000-case stages.
 
 ## Current bindings
 
@@ -25,7 +25,7 @@ qualification; it does not select Qwen3.7 Plus or authorize the 100, 1,000, or
 | Product grounded generator | `deepseek-v4-flash` | Selected with deterministic rollback. |
 | Dataset author and bounded dispute evaluator | `deepseek-v4-pro` | Selected only for already authorized bounded workflows. |
 | Independent reviewer fallback | `openrouter/mistralai/mistral-small-2603` | Qualified advisory fallback from run 006. |
-| Independent reviewer candidate | `openrouter/qwen/qwen3.7-plus` | Run one new 24-pair qualification under a USD 0.10 hard stop before any role selection. |
+| Rejected independent reviewer candidate | `openrouter/qwen/qwen3.7-plus` | Qualification 007 failed six gates; do not bind it into the 100-case stage. |
 | Local general screening | `qwen3.5:9b-q4_K_M` at digest `6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7` | Prospective only; not used by the factual-QA scale pipeline. |
 | OpenRouter DeepSeek transport | `openrouter/deepseek/deepseek-v4-flash-0731` | Prospective gateway; direct DeepSeek remains selected. |
 | Selected text embedding | `Qwen/Qwen3-Embedding-0.6B` | Keep the project-selected retrieval implementation. |
@@ -44,8 +44,12 @@ qualification; it does not select Qwen3.7 Plus or authorize the 100, 1,000, or
   eight-call checkpoints.
 - Authority: deterministic validity is ground truth. Qwen's verdict is
   advisory and cannot repair a deterministic failure.
-- Decision: select the candidate only if every frozen quality and cost gate
-  passes. Otherwise retain Mistral Small 4 without model shopping.
+- Decision: **Drop for this role.** Qualification 007 failed six frozen gates;
+  retain Mistral Small 4 without model shopping.
+- Operational finding: the route returned up to 2,172 billed output tokens even
+  though 650 were requested. The prospective reservation therefore understated
+  actual cost and the run reached USD 0.128239 against a USD 0.10 gate. Harden
+  paid-run cost enforcement before authorizing the 100-case stage.
 
 ## Price basis
 

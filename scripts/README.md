@@ -437,10 +437,10 @@ Current utilities:
   durable checkpoints, zero retries, and complete malformed/provider failure
   accounting. Qualification 006 passed Mistral Small 4 at 49/49 calls and USD
   0.012175; its authorization is revoked and its result is registered.
-  Qualification 007 uses 24 new instances to test hosted Qwen3.7 Plus under a
-  USD 0.10 hard stop. Use `npm run preflight:factual-qa-v3-qwen-reviewer` for
-  the no-call check and the separately authorized `qualify:` command for paid
-  execution. Neither qualification authorizes a 10,000-case run.
+  Qualification 007 tested hosted Qwen3.7 Plus on 24 new instances and failed
+  completion, specificity, sensitivity, malformed-response, latency, and cost
+  gates. Its authorization is revoked; Mistral Small 4 remains qualified.
+  Neither qualification authorizes a 10,000-case run.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
@@ -455,6 +455,7 @@ Current utilities:
   `blocked-not-authorized` in the build-only checkpoint. The network-free
   simulator exercises 100 authors, 100 reviews, 20 mutations, bounded disputes,
   durable per-call checkpoints, safe resume, model identity, cost accounting,
+  requested-versus-reported token-limit accounting, a USD 3 emergency stop,
   aggregate/slice gates, and the 12-case priority packet with deterministic fake
   transports. Use `npm run verify:factual-qa-v3-pilot-100`,
   `npm run preflight:factual-qa-v3-pilot-100`, or
