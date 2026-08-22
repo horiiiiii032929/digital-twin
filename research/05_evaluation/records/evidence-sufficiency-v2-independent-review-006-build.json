@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-006-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "908605b5d5173703a86da342141ec8615a7486d8",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gemini-review-005",
+        "version": "unexecuted-build-control",
+        "configuration": {
+          "model": "google/gemini-3.7-flash",
+          "backend": "google/gemini-3.7-flash-20260813",
+          "provider": "google-ai-studio",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "live-endpoint-ready",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "exact-dated-backend-bound",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.39,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-snapshot-provider-binding",
+          "passed": true,
+          "evidence": "Review 005 records the exact dated Gemini backend and Google AI Studio route."
+        },
+        {
+          "name": "request-parameter-compatibility",
+          "passed": true,
+          "evidence": "Review 005's frozen temperature and strict-schema request matches its selected endpoint metadata."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "Review 005 completed all 13 simulated calls and 132 simulated judgments."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Review 005 remains provider-unauthorized and will not be used as an outcome-selected fallback."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Review 005 remains immutable, provider-unauthorized build evidence."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gpt-5-4-mini-review-006",
+        "version": "snapshot-provider-unauthorized-build",
+        "configuration": {
+          "model": "openai/gpt-5.4-mini",
+          "backend": "openai/gpt-5.4-mini-20260317",
+          "provider": "openai",
+          "temperature": "omitted",
+          "reasoning_effort": "none",
+          "seed": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "live-endpoint-ready",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "exact-dated-backend-bound",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.429,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-snapshot-provider-binding",
+          "passed": true,
+          "evidence": "Current official and OpenRouter metadata expose GPT-5.4 mini and the exact OpenAI standard backend with every requested parameter."
+        },
+        {
+          "name": "request-parameter-compatibility",
+          "passed": true,
+          "evidence": "The request omits unsupported temperature and fixes supported reasoning effort and seed fields."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "All 13 simulated calls and 132 judgments completed with exact accounting and all sensitivity gates passing."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Instrument, bounded freeze, and provider authorization locks remain closed."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "The successor introduces a new run identity without changing reviews 002 through 005."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "openrouter-gpt-5-4-mini-review-006",
+    "rationale": "Prospectively use the exact snapshot-pinned cross-family reviewer for one bounded confirmation because it satisfies the current structured-output, routing, reproducibility, and cost contract without relying on a nano-tier judge.",
+    "limitations": [
+      "No provider inference occurred, so reviewer quality and dataset quality remain unknown.",
+      "Endpoint metadata can drift and must be refreshed within 24 hours before execution.",
+      "Seeded output is not assumed byte-deterministic across provider infrastructure.",
+      "The decision dataset remains unfrozen and no evidence-sufficiency implementation is selected."
+    ]
+  }
+}

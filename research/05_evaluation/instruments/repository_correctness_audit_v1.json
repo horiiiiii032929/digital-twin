@@ -2018,7 +2018,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+  "evidence": "Independent CLI and tooling review, focused model-policy tests, guarded-entrypoint checks, and active freeze validation verify the current GPT-5.4 mini candidate is registered explicitly while prohibited models, unregistered execution, provider calls, and held-out reads remain blocked.",
       "findings": [],
       "path": "scripts/analyze_cross_course_retrieval_pilot.py",
       "reviewed_at": "2026-08-20",
@@ -3090,7 +3090,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "5fb6806764632c25ef1b33290a17082b80266e56721094aeff222334239b77af"
+  "sha256": "c1f1c76804ac835ba2270ed1ec4a5ac29a7f78b6dac6276d2c12e87ec34ecf44"
     },
     {
       "audit_status": "audited",
@@ -3987,12 +3987,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-and-model-provider-boundaries",
-      "evidence": "Manual model/message contract review verified registered current-model enforcement, safe task metadata, and response identity controls; focused model-policy tests passed.",
+  "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of unexecuted Gemini build history, and prospective provider-unauthorized GPT-5.4 mini registration.",
       "findings": [],
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "fb6ada13bdbc76b78cb7c3b5f965c6c6f72a054cb3446b73cea1476de864072b"
+  "sha256": "0ebd877935237aec78ac0ab0ab0ca2ccdce6985514fbc0e275995c5c4393579b"
     },
     {
       "audit_status": "audited",
@@ -4350,7 +4350,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-and-grounding-verification",
-      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+  "evidence": "Focused regression coverage verifies metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, profile activation, and exact registration of the prospective GPT-5.4 mini reviewer.",
       "findings": [],
       "path": "tests/digital_twin/test_evaluation_profile.py",
       "reviewed_at": "2026-08-20",
@@ -5037,7 +5037,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "6cf3a75deeff29fa41446e9bd3bfba65138472d3ccfe2d7179e6b38f8a9f6358"
+  "sha256": "ea071961bcb58fd0afe197794119d9ad3993630e5e1539eba6d5e0ff9f0cb6d0"
     },
     {
       "audit_status": "audited",
