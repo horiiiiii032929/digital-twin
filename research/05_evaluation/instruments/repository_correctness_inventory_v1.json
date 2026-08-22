@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 488
+    "audited": 489
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 98,
+    "evaluation_configuration": 99,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 94
   },
-  "file_count": 488,
+  "file_count": 489,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e659a6c0283c9dd8423fb4380f01d2709a97432b3ddd718c9d8d6e11ea583826",
+  "record_sha256": "008b49de4f68990fb03c2ce20dc655014a4ec9e68888d3ca34dcbb2cd6ee451b",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Command review confirms separate review-004 validation, simulation, live no-call preflight, and exact one-time execution commands; the paid command remains fail-closed outside the correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+        "evidence": "Command review confirms separate review-004 history and review-005 validation, simulation, live no-call preflight, and exact execution commands; the new Gemini binding remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "bb63dd156437a3c5e1a40acffdc248fd5f8719c7d8a75521cc4b60ac7bc554b8"
+      "sha256": "ce09a7ef268fe04c05cde9b3be0a06001e82eab7ee34565c1a9437b9fed9a693"
     },
     {
       "audit": {
@@ -1780,6 +1780,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_004.json",
       "risk": "high",
       "sha256": "0c75d3955177ad66b2e9800ef03bea62c866b575d1dc34eb9be7dea76f423c25"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "Manual prospective review and focused tests bind stable google/gemini-3.7-flash to the exact Google AI Studio standard endpoint, dated backend identity, strict schema, zero retries/fallbacks, 13-call and USD 0.50 ceilings, synthetic-public inputs, and explicit provider-unauthorized state.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_005.json",
+      "risk": "high",
+      "sha256": "2ca5f61d9165cdbd324f3eb1a273bca6aa6954023484991c7fb3a19c67b81002"
     },
     {
       "audit": {
@@ -3812,7 +3828,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual fail-closed review plus focused tests verify historical 002/003 and prospective 004 states, strict response-format, native OpenRouter endpoint bindings, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
+        "evidence": "Manual fail-closed review plus focused tests verify historical 002-004 and prospective 005 states, strict response formats, exact Mistral and Gemini endpoint bindings, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -3827,7 +3843,7 @@
       ],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "2a3cb691294f023abbfb8c08b2a58e53fb1ee683f14a80ffc0d344294d00cae9"
+      "sha256": "08fafff60687c6e872814ea60a9021c9a01bc4f6b8470e827cadab7694733926"
     },
     {
       "audit": {
@@ -4058,7 +4074,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm the official OpenRouter chat-completions payload, bearer authentication, top-level provider routing, strict JSON Schema, router-metadata opt-in, sanitized native HTTP/request/generation diagnostics, sensitivity-first stopping, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
+        "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, exact Google AI Studio routing, official OpenRouter chat-completions payload, strict JSON Schema, router diagnostics, sensitivity-first stopping, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -4068,18 +4084,22 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:evidence-sufficiency-v2-review-004",
+        "execute:evidence-sufficiency-v2-review-005",
         "execute:evidence-sufficiency-v2-review-runner",
         "preflight-live:evidence-sufficiency-v2-review-004",
+        "preflight-live:evidence-sufficiency-v2-review-005",
         "preflight-live:evidence-sufficiency-v2-review-runner",
         "preflight:evidence-sufficiency-v2-review-runner",
         "simulate:evidence-sufficiency-v2-review-004",
+        "simulate:evidence-sufficiency-v2-review-005",
         "simulate:evidence-sufficiency-v2-review-runner",
         "verify:evidence-sufficiency-v2-review-004",
+        "verify:evidence-sufficiency-v2-review-005",
         "verify:evidence-sufficiency-v2-review-runner"
       ],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "b62203a3926635a0db922e9860dcf9f056cb1e098691c657c80d8173fe30b685"
+      "sha256": "7ab93331365674540c44ee618bb76e27eae9631ef139f8b9bbc26d0a53839a32"
     },
     {
       "audit": {
@@ -7786,7 +7806,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions preserve revoked 002\u2013004 contracts, the exact official OpenRouter payload, router metadata and request IDs, sanitized upstream 401 evidence without credential leakage, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
+        "evidence": "Focused regressions preserve revoked 002-004 contracts and verify prospective 005's stable Gemini model, dated backend identity, exact Google AI Studio endpoint, USD 0.39 reservation, native OpenRouter payload, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7797,7 +7817,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "9afb16d6f138af3258b166a876ff6ffd75acfd18bcebace29626b0f3a9667a53"
+      "sha256": "d08dfb601482650a6c04ff49125ecfa6498cdd28c4107a47431ec9d9c57bf9a0"
     },
     {
       "audit": {
@@ -8041,7 +8061,7 @@
     }
   ],
   "risk_counts": {
-    "high": 380,
+    "high": 381,
     "medium": 108
   },
   "schema_version": 1,

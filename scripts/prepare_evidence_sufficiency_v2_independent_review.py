@@ -51,6 +51,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-005": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -142,14 +148,25 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         ),
         "maximum_cost_usd": safety.get("maximum_cost_usd"),
         "maximum_reserved_cost_usd": safety.get("maximum_reserved_cost_usd"),
-    } != {
-        "reviewer_provider": "openrouter",
-        "reviewer_model": "mistralai/mistral-small-2603",
-        "reviewer_litellm_model": "openrouter/mistralai/mistral-small-2603",
-        "credential_environment_variable": "OPENROUTER_API_KEY",
-        "maximum_cost_usd": 0.5,
-        "maximum_reserved_cost_usd": 0.0702,
-    }:
+    } != (
+        {
+            "reviewer_provider": "openrouter",
+            "reviewer_model": "google/gemini-3.7-flash",
+            "reviewer_litellm_model": "openrouter/google/gemini-3.7-flash",
+            "credential_environment_variable": "OPENROUTER_API_KEY",
+            "maximum_cost_usd": 0.5,
+            "maximum_reserved_cost_usd": 0.39,
+        }
+        if instrument_id.endswith("-005")
+        else {
+            "reviewer_provider": "openrouter",
+            "reviewer_model": "mistralai/mistral-small-2603",
+            "reviewer_litellm_model": "openrouter/mistralai/mistral-small-2603",
+            "credential_environment_variable": "OPENROUTER_API_KEY",
+            "maximum_cost_usd": 0.5,
+            "maximum_reserved_cost_usd": 0.0702,
+        }
+    ):
         raise IndependentReviewError("reviewer proposal binding drifted")
     elif {
         "metadata_maximum_age_hours": safety.get("metadata_maximum_age_hours"),
@@ -166,32 +183,57 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         ),
         "provider_routing": safety.get("provider_routing"),
         "provider_policy": safety.get("provider_policy"),
-    } != {
-        "metadata_maximum_age_hours": 24,
-        "metadata_source": "https://openrouter.ai/api/v1/models",
-        "provider_policy_source": "https://openrouter.ai/providers",
-        "temperature": 0,
-        "max_input_tokens_per_call": 20000,
-        "max_output_tokens_per_call": 4000,
-        "pricing_usd_per_million_input_tokens": 0.15,
-        "pricing_usd_per_million_output_tokens": 0.6,
-        "provider_routing": {
-            "order": ["Mistral"],
-            "allow_fallbacks": False,
-            "require_parameters": True,
-            "data_collection": "allow",
-            "zdr": False,
-        },
-        "provider_policy": {
-            "trains_on_prompts": False,
-            "retention": "30 day retention",
-            "data_boundary": "synthetic-public-evaluation-only",
-        },
-    }:
+    } != (
+        {
+            "metadata_maximum_age_hours": 24,
+            "metadata_source": "https://openrouter.ai/api/v1/models",
+            "provider_policy_source": "https://openrouter.ai/api/v1/providers",
+            "temperature": 0,
+            "max_input_tokens_per_call": 20000,
+            "max_output_tokens_per_call": 4000,
+            "pricing_usd_per_million_input_tokens": 0.75,
+            "pricing_usd_per_million_output_tokens": 3.75,
+            "provider_routing": {
+                "order": ["google-ai-studio"],
+                "allow_fallbacks": False,
+                "require_parameters": True,
+                "data_collection": "allow",
+                "zdr": False,
+            },
+            "provider_policy": {
+                "trains_on_prompts": False,
+                "retention": "provider-policy-controlled",
+                "data_boundary": "synthetic-public-evaluation-only",
+            },
+        }
+        if instrument_id.endswith("-005")
+        else {
+            "metadata_maximum_age_hours": 24,
+            "metadata_source": "https://openrouter.ai/api/v1/models",
+            "provider_policy_source": "https://openrouter.ai/providers",
+            "temperature": 0,
+            "max_input_tokens_per_call": 20000,
+            "max_output_tokens_per_call": 4000,
+            "pricing_usd_per_million_input_tokens": 0.15,
+            "pricing_usd_per_million_output_tokens": 0.6,
+            "provider_routing": {
+                "order": ["Mistral"],
+                "allow_fallbacks": False,
+                "require_parameters": True,
+                "data_collection": "allow",
+                "zdr": False,
+            },
+            "provider_policy": {
+                "trains_on_prompts": False,
+                "retention": "30 day retention",
+                "data_boundary": "synthetic-public-evaluation-only",
+            },
+        }
+    ):
         raise IndependentReviewError("reviewer metadata or routing drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument_id.endswith(("-003", "-004"))
+        if instrument_id.endswith(("-003", "-004", "-005"))
         else "json-object-prompt-schema"
     )
     if (
@@ -199,21 +241,33 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         != expected_response_format
     ):
         raise IndependentReviewError("reviewer response format drifted")
-    if instrument_id.endswith(("-003", "-004")) and {
+    if instrument_id.endswith(("-003", "-004", "-005")) and {
         "endpoint_metadata_source": safety.get("endpoint_metadata_source"),
         "structured_output_source": safety.get("structured_output_source"),
         "provider_context_window_tokens": safety.get("provider_context_window_tokens"),
-    } != {
-        "endpoint_metadata_source": (
-            "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
-        ),
-        "structured_output_source": (
-            "https://openrouter.ai/docs/guides/features/structured-outputs"
-        ),
-        "provider_context_window_tokens": 262144,
-    }:
+    } != (
+        {
+            "endpoint_metadata_source": (
+                "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints"
+            ),
+            "structured_output_source": (
+                "https://openrouter.ai/docs/guides/features/structured-outputs"
+            ),
+            "provider_context_window_tokens": 1048576,
+        }
+        if instrument_id.endswith("-005")
+        else {
+            "endpoint_metadata_source": (
+                "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
+            ),
+            "structured_output_source": (
+                "https://openrouter.ai/docs/guides/features/structured-outputs"
+            ),
+            "provider_context_window_tokens": 262144,
+        }
+    ):
         raise IndependentReviewError("reviewer endpoint metadata drifted")
-    if instrument_id.endswith("-004") and {
+    if instrument_id.endswith(("-004", "-005")) and {
         "reviewer_transport": safety.get("reviewer_transport"),
         "reviewer_api_url": safety.get("reviewer_api_url"),
         "router_metadata_source": safety.get("router_metadata_source"),

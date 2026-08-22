@@ -17,6 +17,10 @@ INSTRUMENT_004_PATH = Path(
     "research/05_evaluation/instruments/"
     "evidence_sufficiency_v2_independent_review_004.json"
 )
+INSTRUMENT_005_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_005.json"
+)
 
 
 @pytest.fixture
@@ -47,10 +51,16 @@ def _live_metadata(assets: dict) -> dict:
             "data": [
                 {
                     "id": safety["reviewer_model"],
-                    "context_length": 262_144,
+                    "context_length": safety["provider_context_window_tokens"],
                     "pricing": {
-                        "prompt": "0.00000015",
-                        "completion": "0.0000006",
+                        "prompt": str(
+                            safety["pricing_usd_per_million_input_tokens"]
+                            / 1_000_000
+                        ),
+                        "completion": str(
+                            safety["pricing_usd_per_million_output_tokens"]
+                            / 1_000_000
+                        ),
                     },
                     "supported_parameters": [
                         "max_tokens",
@@ -65,12 +75,21 @@ def _live_metadata(assets: dict) -> dict:
             "data": {
                 "endpoints": [
                     {
-                        "provider_name": "Mistral",
+                        "provider_name": safety.get(
+                            "reviewer_endpoint_provider_name", "Mistral"
+                        ),
+                        "tag": safety.get("reviewer_endpoint_tag"),
                         "status": 0,
-                        "context_length": 262_144,
+                        "context_length": safety["provider_context_window_tokens"],
                         "pricing": {
-                            "prompt": "0.00000015",
-                            "completion": "0.0000006",
+                            "prompt": str(
+                                safety["pricing_usd_per_million_input_tokens"]
+                                / 1_000_000
+                            ),
+                            "completion": str(
+                                safety["pricing_usd_per_million_output_tokens"]
+                                / 1_000_000
+                            ),
                         },
                         "supported_parameters": [
                             "max_tokens",
@@ -115,6 +134,29 @@ def test_native_openrouter_attempt_is_invalid_and_revoked() -> None:
     assert safety["reviewer_api_url"] == runner.OPENROUTER_CHAT_URL
     assert assets["packet"]["content_sha256"] == (
         "75fc54d28a708df7a36150f0519db6eb7429b6e625ebbde7feceecfa817f8fbd"
+    )
+
+
+def test_review_005_binds_stable_gemini_to_exact_google_endpoint() -> None:
+    assets = runner.load_assets(INSTRUMENT_005_PATH)
+    safety = assets["instrument"]["execution_safety"]
+
+    assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
+    assert safety["provider_execution_authorized"] is False
+    assert safety["reviewer_model"] == "google/gemini-3.7-flash"
+    assert safety["reviewer_backend_model"] == (
+        "google/gemini-3.7-flash-20260813"
+    )
+    assert safety["provider_routing"] == {
+        "order": ["google-ai-studio"],
+        "allow_fallbacks": False,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert safety["maximum_reserved_cost_usd"] == 0.39
+    assert assets["packet"]["content_sha256"] == (
+        "94fad389cdddbb6c1e10f45a8e6d18f11e84d570195855010c293009ab146efb"
     )
 
 
@@ -616,7 +658,7 @@ def test_preflight_detects_endpoint_context_drift(
         now=verified + timedelta(hours=1),
     )
 
-    assert "mistral-endpoint-context-drift" in result["live_provider_failures"]
+    assert "reviewer-endpoint-context-drift" in result["live_provider_failures"]
     assert "provider-metadata-not-current" in result["blockers"]
 
 
