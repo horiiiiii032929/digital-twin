@@ -64,9 +64,6 @@ INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-003"
 NATIVE_OPENROUTER_TRANSPORT = "openrouter-native-chat-completions-v1"
 OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_REGISTRY_URL = "https://openrouter.ai/api/v1/models"
-MODEL_ENDPOINTS_URL = (
-    "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
-)
 
 
 class ReviewRunnerError(ValueError):
@@ -124,7 +121,10 @@ def _provider_binding(instrument: dict[str, Any]) -> dict[str, Any]:
         "api_url": safety.get("reviewer_api_url"),
         "provider_routing": deepcopy(safety["provider_routing"]),
         "timeout_seconds": safety["timeout_seconds"],
-        "temperature": safety["temperature"],
+        "temperature": safety.get("temperature"),
+        "reasoning_effort": safety.get("reasoning_effort"),
+        "seed": safety.get("seed"),
+        "backend_model": safety.get("reviewer_backend_model"),
         "max_input_tokens": safety["max_input_tokens_per_call"],
         "max_output_tokens": safety["max_output_tokens_per_call"],
         "pricing_usd_per_million_input_tokens": safety[
@@ -158,7 +158,8 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review authorization fields disagree")
     if safety["maximum_calls"] != 13 or safety["retries"] != 0:
         raise ReviewRunnerError("review call or retry limit drifted")
-    if safety["maximum_cost_usd"] != 0.5:
+    expected_cost_ceiling = 1.5 if instrument["instrument_id"].endswith("-007") else 0.5
+    if safety["maximum_cost_usd"] != expected_cost_ceiling:
         raise ReviewRunnerError("review cost ceiling drifted")
     if safety["maximum_reserved_cost_usd"] > safety["maximum_cost_usd"]:
         raise ReviewRunnerError("review reservation exceeds cost ceiling")
@@ -171,9 +172,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "resume_requires_exact_bindings": True,
         "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
     }
-    if instrument["instrument_id"].endswith(("-003", "-004")):
+    if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006", "-007")):
         expected_runner["preserve_malformed_response_content"] = True
-    if instrument["instrument_id"].endswith("-004"):
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006", "-007")):
         expected_runner.update(
             {
                 "preserve_provider_error_details": True,
@@ -182,30 +183,53 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         )
     if safety.get("runner") != expected_runner:
         raise ReviewRunnerError("review runner binding drifted")
-    if safety["provider_routing"] != {
-        "order": ["Mistral"],
-        "allow_fallbacks": False,
+    expected_routing = {
+        "order": (
+            ["openai", "azure"]
+            if instrument["instrument_id"].endswith("-007")
+            else ["openai"]
+            if instrument["instrument_id"].endswith("-006")
+            else ["google-ai-studio"]
+            if instrument["instrument_id"].endswith("-005")
+            else ["Mistral"]
+        ),
+        "allow_fallbacks": instrument["instrument_id"].endswith("-007"),
         "require_parameters": True,
         "data_collection": "allow",
         "zdr": False,
-    }:
+    }
+    if safety["provider_routing"] != expected_routing:
         raise ReviewRunnerError("review routing drifted")
     binding = _provider_binding(instrument)
-    if binding["provider_model"] != "mistralai/mistral-small-2603":
+    expected_model = (
+        "openai/gpt-5.4-mini"
+        if instrument["instrument_id"].endswith(("-006", "-007"))
+        else "google/gemini-3.7-flash"
+        if instrument["instrument_id"].endswith("-005")
+        else "mistralai/mistral-small-2603"
+    )
+    if binding["provider_model"] != expected_model:
         raise ReviewRunnerError("review model drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument["instrument_id"].endswith(("-003", "-004"))
+        if instrument["instrument_id"].endswith(
+            ("-003", "-004", "-005", "-006", "-007")
+        )
         else "json-object-prompt-schema"
     )
     if binding["response_format_mode"] != expected_response_format:
         raise ReviewRunnerError("review response format drifted")
-    if (
-        instrument["instrument_id"].endswith(("-003", "-004"))
-        and safety.get("provider_context_window_tokens") != 262144
+    if instrument["instrument_id"].endswith(
+        ("-003", "-004", "-005", "-006", "-007")
+    ) and safety.get("provider_context_window_tokens") != (
+        400000
+        if instrument["instrument_id"].endswith(("-006", "-007"))
+        else 1048576
+        if instrument["instrument_id"].endswith("-005")
+        else 262144
     ):
         raise ReviewRunnerError("review provider context binding drifted")
-    if instrument["instrument_id"].endswith("-004") and {
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006", "-007")) and {
         "transport": binding["transport"],
         "api_url": binding["api_url"],
     } != {
@@ -514,13 +538,21 @@ class NativeOpenRouterReviewTransport:
                 {"role": "system", "content": system},
                 {"role": "user", "content": request},
             ],
-            "temperature": self.binding["temperature"],
             "max_tokens": self.binding["max_output_tokens"],
             "response_format": _response_format_for_call(self.binding, schema),
             "provider": deepcopy(self.binding["provider_routing"]),
             "usage": {"include": True},
             "metadata": {"task": task},
         }
+        if self.binding["temperature"] is not None:
+            payload["temperature"] = self.binding["temperature"]
+        if self.binding["reasoning_effort"] is not None:
+            payload["reasoning"] = {
+                "effort": self.binding["reasoning_effort"],
+                "exclude": True,
+            }
+        if self.binding["seed"] is not None:
+            payload["seed"] = self.binding["seed"]
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
@@ -1048,11 +1080,13 @@ def _fetch_json(url: str) -> dict[str, Any]:
     return value
 
 
-def fetch_live_metadata() -> dict[str, Any]:
+def fetch_live_metadata(instrument: dict[str, Any]) -> dict[str, Any]:
     return {
         "verified_at": datetime.now(timezone.utc).isoformat(),
         "registry": _fetch_json(MODEL_REGISTRY_URL),
-        "endpoints": _fetch_json(MODEL_ENDPOINTS_URL),
+        "endpoints": _fetch_json(
+            instrument["execution_safety"]["endpoint_metadata_source"]
+        ),
     }
 
 
@@ -1074,12 +1108,12 @@ def _live_metadata_failures(
     if model is None:
         return ["reviewer-model-missing"]
     pricing = model.get("pricing", {})
-    if (
+    if safety.get("pricing_binding_scope") != "selected-endpoint" and (
         float(pricing.get("prompt", -1)) * 1_000_000
         != safety["pricing_usd_per_million_input_tokens"]
     ):
         failures.append("reviewer-input-price-drift")
-    if (
+    if safety.get("pricing_binding_scope") != "selected-endpoint" and (
         float(pricing.get("completion", -1)) * 1_000_000
         != safety["pricing_usd_per_million_output_tokens"]
     ):
@@ -1092,22 +1126,32 @@ def _live_metadata_failures(
     ):
         failures.append("reviewer-context-limit-drift")
     parameters = set(model.get("supported_parameters", []))
-    required_parameters = {"max_tokens", "response_format", "temperature"}
+    required_parameters = {"max_tokens", "response_format"}
     if safety.get("response_format_mode") == "json-schema-strict":
         required_parameters.add("structured_outputs")
+    if safety.get("temperature") is not None:
+        required_parameters.add("temperature")
+    if safety.get("reasoning_effort") is not None:
+        required_parameters.add("reasoning_effort")
+    if safety.get("seed") is not None:
+        required_parameters.add("seed")
     if not required_parameters.issubset(parameters):
         failures.append("reviewer-required-parameters-missing")
     endpoints = live.get("endpoints", {}).get("data", {}).get("endpoints", [])
-    active_mistral = [
+    endpoint_provider_name = safety.get("reviewer_endpoint_provider_name", "Mistral")
+    endpoint_tag = safety.get("reviewer_endpoint_tag")
+    active_endpoints = [
         endpoint
         for endpoint in endpoints
-        if endpoint.get("provider_name") == "Mistral" and endpoint.get("status") == 0
+        if endpoint.get("provider_name") == endpoint_provider_name
+        and (endpoint_tag is None or endpoint.get("tag") == endpoint_tag)
+        and endpoint.get("status") == 0
     ]
-    if not active_mistral:
-        failures.append("mistral-endpoint-unavailable")
-    price_matching_mistral = [
+    if not active_endpoints:
+        failures.append("reviewer-endpoint-unavailable")
+    price_matching_endpoints = [
         endpoint
-        for endpoint in active_mistral
+        for endpoint in active_endpoints
         if (
             float(endpoint.get("pricing", {}).get("prompt", -1)) * 1_000_000
             == safety["pricing_usd_per_million_input_tokens"]
@@ -1115,21 +1159,27 @@ def _live_metadata_failures(
             == safety["pricing_usd_per_million_output_tokens"]
         )
     ]
-    if active_mistral and not price_matching_mistral:
-        failures.append("mistral-endpoint-price-drift")
-    matching_mistral = [
+    if active_endpoints and not price_matching_endpoints:
+        failures.append("reviewer-endpoint-price-drift")
+    matching_endpoints = [
         endpoint
-        for endpoint in price_matching_mistral
+        for endpoint in price_matching_endpoints
         if expected_context is None
         or int(endpoint.get("context_length", 0)) == expected_context
     ]
-    if price_matching_mistral and not matching_mistral:
-        failures.append("mistral-endpoint-context-drift")
+    if price_matching_endpoints and not matching_endpoints:
+        failures.append("reviewer-endpoint-context-drift")
+    expected_backend = safety.get("reviewer_backend_model")
+    if expected_backend is not None and not any(
+        endpoint.get("name", "").endswith(expected_backend)
+        for endpoint in matching_endpoints
+    ):
+        failures.append("reviewer-backend-model-drift")
     if safety.get("response_format_mode") == "json-schema-strict" and not any(
         "structured_outputs" in endpoint.get("supported_parameters", [])
-        for endpoint in matching_mistral
+        for endpoint in matching_endpoints
     ):
-        failures.append("mistral-structured-outputs-missing")
+        failures.append("reviewer-structured-outputs-missing")
     return failures
 
 
@@ -1293,7 +1343,11 @@ def main() -> int:
         )
         return 0
     if arguments.preflight or arguments.preflight_live:
-        live = fetch_live_metadata() if arguments.preflight_live else None
+        live = (
+            fetch_live_metadata(assets["instrument"])
+            if arguments.preflight_live
+            else None
+        )
         print(
             json.dumps(
                 build_preflight(
@@ -1320,7 +1374,7 @@ def main() -> int:
         print(json.dumps(result.get("summary", result), indent=2, sort_keys=True))
         return 0
     if arguments.execute:
-        live = fetch_live_metadata()
+        live = fetch_live_metadata(assets["instrument"])
         preflight = build_preflight(
             assets,
             output_path=output_path,

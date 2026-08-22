@@ -19,6 +19,8 @@ from src.digital_twin.model_policy import (
     LOCAL_GENERAL_MODEL,
     LOCAL_GENERAL_MODEL_DIGEST,
     OPENROUTER_DEEPSEEK_MODEL,
+    OPENROUTER_GEMINI_REVIEW_MODEL,
+    OPENROUTER_GPT_MINI_REVIEW_MODEL,
     OPENROUTER_INDEPENDENT_REVIEW_MODEL,
     OPENROUTER_QWEN_REVIEW_MODEL,
     POLICY_ID,
@@ -89,6 +91,8 @@ def validate() -> dict[str, Any]:
     require_registered_current_model(OPENROUTER_DEEPSEEK_MODEL)
     require_registered_current_model(OPENROUTER_INDEPENDENT_REVIEW_MODEL)
     require_registered_current_model(OPENROUTER_QWEN_REVIEW_MODEL)
+    require_registered_current_model(OPENROUTER_GEMINI_REVIEW_MODEL)
+    require_registered_current_model(OPENROUTER_GPT_MINI_REVIEW_MODEL)
     try:
         require_model_allowed(HISTORICAL_CLAUDE_MODEL)
     except ModelPolicyError:
@@ -152,6 +156,8 @@ def validate() -> dict[str, Any]:
             OPENROUTER_DEEPSEEK_MODEL,
             OPENROUTER_INDEPENDENT_REVIEW_MODEL,
             OPENROUTER_QWEN_REVIEW_MODEL,
+            OPENROUTER_GEMINI_REVIEW_MODEL,
+            OPENROUTER_GPT_MINI_REVIEW_MODEL,
         ],
         "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {

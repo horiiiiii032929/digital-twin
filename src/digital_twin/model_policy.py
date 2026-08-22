@@ -21,6 +21,8 @@ LOCAL_GENERAL_MODEL_DIGEST = (
 OPENROUTER_DEEPSEEK_MODEL = "openrouter/deepseek/deepseek-v4-flash-0731"
 OPENROUTER_INDEPENDENT_REVIEW_MODEL = "openrouter/mistralai/mistral-small-2603"
 OPENROUTER_QWEN_REVIEW_MODEL = "openrouter/qwen/qwen3.7-plus"
+OPENROUTER_GEMINI_REVIEW_MODEL = "openrouter/google/gemini-3.7-flash"
+OPENROUTER_GPT_MINI_REVIEW_MODEL = "openrouter/openai/gpt-5.4-mini"
 _OPENROUTER_PROVIDER_OPTIONS: dict[str, Any] = {
     "extra_body": {
         "provider": {
@@ -76,6 +78,16 @@ CURRENT_MODEL_BINDINGS = (
         status="qualification-failed-not-selected",
     ),
     CurrentModelBinding(
+        role="evidence-sufficiency-independent-reviewer-candidate",
+        provider_model=OPENROUTER_GEMINI_REVIEW_MODEL,
+        status="preserved-unexecuted-build-not-current",
+    ),
+    CurrentModelBinding(
+        role="evidence-sufficiency-independent-reviewer-candidate",
+        provider_model=OPENROUTER_GPT_MINI_REVIEW_MODEL,
+        status="reviews-006-007-invalid-openrouter-do-not-retry",
+    ),
+    CurrentModelBinding(
         role="selected-text-embedding",
         provider_model="Qwen/Qwen3-Embedding-0.6B",
         status="selected",
@@ -105,6 +117,8 @@ CURRENT_MODEL_IDS = frozenset(
         "deepseek/deepseek-v4-flash-0731",
         "mistralai/mistral-small-2603",
         "qwen/qwen3.7-plus",
+        "google/gemini-3.7-flash",
+        "openai/gpt-5.4-mini",
         f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )

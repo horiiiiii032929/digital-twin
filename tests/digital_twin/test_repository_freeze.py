@@ -55,6 +55,14 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
+            "evidence-sufficiency-v2-independent-review-006"
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "evidence-sufficiency-v2-independent-review-007"
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
             "autonomous-tutoring-graph-development-001"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):

@@ -99,6 +99,35 @@ Current utilities:
   before any provider response; the attempt is invalid and revoked. The exact
   execute command now fails closed. All dataset-freeze, candidate-evaluation,
   private-source, and later execution remains blocked.
+  Successor `005` changes only the dropped reviewer binding: it requests stable
+  `google/gemini-3.7-flash` through the exact `google-ai-studio` standard
+  endpoint, freezes the dated backend identity, and keeps strict schema, zero
+  retries, no fallbacks, native diagnostics, and synthetic-public inputs. Run
+  `npm run verify:evidence-sufficiency-v2-review-005`,
+  `npm run simulate:evidence-sufficiency-v2-review-005`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-005`. Provider
+  execution remains unauthorized, so the execute command fails closed.
+  Prospective successor `006` preserves review 005 as build-only evidence and
+  pins `openai/gpt-5.4-mini` to OpenRouter's exact `openai` standard endpoint
+  and dated backend `openai/gpt-5.4-mini-20260317`. It omits unsupported
+  `temperature`, fixes reasoning effort to `none`, fixes seed `0`, requires
+  strict structured output, and disables all fallback routing. Run
+  `npm run verify:evidence-sufficiency-v2-review-006`,
+  `npm run simulate:evidence-sufficiency-v2-review-006`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-006`. Its authorized
+  sensitivity request received HTTP 400 before any provider response, so the
+  attempt is invalid and revoked. The exact execute command now fails closed;
+  all dataset-freeze, candidate-evaluation, private-source, and later execution
+  remains blocked.
+  Successor `007` keeps the same GPT-5.4 mini snapshot and strict response
+  schema but removes nonessential reasoning and seed fields, permits
+  same-model OpenAI/Azure provider fallback, and uses a USD 1.50 emergency
+  ceiling. Run `npm run verify:evidence-sufficiency-v2-review-007`, `npm run
+  simulate:evidence-sufficiency-v2-review-007`, or `npm run
+  preflight-live:evidence-sufficiency-v2-review-007`. Its one authorized
+  sensitivity request returned HTTP 400 before a provider response; all bulk
+  calls were suppressed, authorization is revoked, and this OpenRouter path
+  must not be retried. Every dataset and downstream decision remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and
