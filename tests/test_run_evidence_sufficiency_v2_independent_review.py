@@ -241,8 +241,8 @@ def test_review_007_uses_resilient_same_model_routing_and_higher_ceiling() -> No
     assets = runner.load_assets(INSTRUMENT_007_PATH)
     safety = assets["instrument"]["execution_safety"]
 
-    assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
-    assert safety["provider_execution_authorized"] is False
+    assert assets["instrument"]["status"] == "frozen-pending-execution"
+    assert safety["provider_execution_authorized"] is True
     assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
     assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
     assert safety["reasoning_effort"] is None

@@ -101,7 +101,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Separately authorize resilient same-model review 007 after its build checkpoint | Researcher | Complete dataset review before selecting an answerability gate |
+| Execute the separately authorized resilient same-model review 007 once and adjudicate its bounded priority packet | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 

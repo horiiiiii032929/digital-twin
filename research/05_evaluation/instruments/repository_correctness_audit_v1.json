@@ -3987,12 +3987,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-and-model-provider-boundaries",
-  "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of invalid review 006 and unexecuted Gemini history, and prospective unauthorized review 007 status.",
+      "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of invalid review 006 and unexecuted Gemini history, and review 007 frozen for exactly one bounded execution.",
       "findings": [],
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-  "sha256": "02b2fa10dde060721d22906e1f7c884ce98ccb748344b2eea3ce57491de631d8"
+      "sha256": "0f60dfbb2717b1715c4c670c9df5e09aafbcceb554a5f7f3ca4fa5288e0f3827"
     },
     {
       "audit_status": "audited",
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 and 006 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 and 006 are revoked after invalid attempts, and only the historical oracle plus exact review 007 are bounded; all dataset-freeze, candidate, other paid-successor, and held-out stages remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "9e49b97c214587faf3189491b3dac76a62a9b17b0441d47c11e0a081f22b7ea9"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002–004 and 006, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of the historical oracle and review 007 only, and explicit rejection of revoked evidence reviews 002–004 and 006, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "aa33f004df07b12f6ae20a9282effd247225c2ce75c4476052818f13d2dbdca9"
+      "sha256": "13041f9f7eb0c89e56a4c425c03093a1e9001a9ce7e0cda2191832b55ca5128c"
     },
     {
       "audit_status": "audited",
@@ -4482,7 +4482,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-and-grounding-verification",
-      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+      "evidence": "Focused regression coverage verifies current-model acceptance, preservation of review 006, the exact frozen review-007 status, provider failures, source lineage, course isolation, multimodal ranking, and profile activation.",
       "findings": [],
       "path": "tests/digital_twin/test_retrieval_profile_activation.py",
       "reviewed_at": "2026-08-20",
@@ -5037,7 +5037,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-  "sha256": "3df43c62a5b57fc24e384ff534b5aae3ce0152c7232f42dd3bde3c5be4497314"
+      "sha256": "6c73629f237e4e382dd4360e04d0efb7be9b974184eb5cd8b891895b47b0bd7a"
     },
     {
       "audit_status": "audited",
@@ -5120,12 +5120,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-  "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006 contracts while verifying prospective 007 same-model fallback, omitted reasoning/seed fields, USD 1.50 ceiling, strict schemas, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and absent execution authority.",
+      "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006 contracts while verifying frozen review 007 same-model fallback, omitted reasoning/seed fields, USD 1.50 ceiling, strict schemas, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and correlated execution authority.",
       "findings": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-  "sha256": "d13ef95e6ced17e863fec7a31e217638990f7580b6e91f95f0bd6ea839459935"
+      "sha256": "6b4aed518b36f6bb266fe69dc373e0c9c83da9969fbd82a61741e91a9cb2968d"
     },
     {
       "audit_status": "audited",
@@ -5393,13 +5393,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_007.json",
-      "sha256": "8834d028b308a135cc8a6380d3d1e4088f28282afa4940d65c968fbcf4a0786f",
+      "sha256": "91dd02a32d91c0a19b6516399b3510734f25ac289960007af84ddfecd33f133c",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "evidence": "Manual method-level review, official OpenRouter routing guidance, live endpoint metadata, focused tests, and a 13-call simulation preserve the GPT model snapshot and strict schema while allowing same-model OpenAI/Azure provider fallback, removing nonessential reasoning and seed fields, raising the bounded ceiling to USD 1.50, and keeping execution unauthorized.",
+      "evidence": "Manual method-level review, official OpenRouter routing guidance, live endpoint metadata, focused tests, and a 13-call simulation preserve the GPT model snapshot and strict schema while allowing same-model OpenAI/Azure provider fallback, removing nonessential reasoning and seed fields, raising the bounded ceiling to USD 1.50, and authorizing exactly one bounded execution.",
       "findings": []
     }
   ],

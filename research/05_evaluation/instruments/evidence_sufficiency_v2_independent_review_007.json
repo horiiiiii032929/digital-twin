@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "evidence-sufficiency-v2-independent-review-007",
-  "status": "reviewer-bound-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "issue": 105,
   "predecessor": "evidence-sufficiency-v2-independent-review-006",
   "decision_dataset": {
@@ -59,7 +59,7 @@
     "priority_packet_count_max": 12
   },
   "execution_safety": {
-    "provider_execution_authorized": false,
+    "provider_execution_authorized": true,
     "reviewer_provider": "openrouter",
     "reviewer_model": "openai/gpt-5.4-mini",
     "reviewer_backend_model": "openai/gpt-5.4-mini-20260317",
@@ -127,7 +127,7 @@
     "all_review_gates_pass": "Produce a bounded priority packet and require a separately recorded no-call adjudication before freezing the corrected dataset.",
     "any_sensitivity_gate_fails": "Reject the review result as unreliable; do not use its case judgments.",
     "any_dataset_defect_found": "Correct the deterministic draft, assign a new content hash, and repeat independent review under a successor review ID.",
-    "authorize_provider_execution": false,
+    "authorize_provider_execution": true,
     "authorize_dataset_freeze": false,
     "authorize_candidate_evaluation": false
   }

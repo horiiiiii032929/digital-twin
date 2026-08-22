@@ -67,7 +67,9 @@ def test_gpt_evidence_reviewer_preserves_006_and_exposes_007_status():
         if item.provider_model == OPENROUTER_GPT_MINI_REVIEW_MODEL
     )
 
-    assert binding.status == ("review-006-invalid-review-007-prospective-unauthorized")
+    assert binding.status == (
+        "review-006-invalid-review-007-frozen-pending-execution"
+    )
 
 
 def test_retired_factual_qa_instrument_cannot_construct_local_transport():
