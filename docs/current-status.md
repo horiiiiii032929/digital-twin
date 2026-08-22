@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 484 executable or execution-affecting
+the current branch extends it to all 487 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 60 protected entrypoints
+active for all general evaluation actions. It covers 61 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -98,8 +98,8 @@ The runtime-boundary checkpoint is complete. Persistence updates are
 non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
-converge on one response with authoritative citation metadata. The final local
-check passes 771 Python tests and 46 frontend tests, frontend lint, and the
+converge on one response with authoritative citation metadata. The current local
+check passes 792 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -119,9 +119,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 771-test Python suite.
+connections. These corrections pass the current 792-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 484-file audit. Evaluation
+artifacts are also fully dispositioned in the current 487-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -219,11 +219,17 @@ the runner stopped before all 12 bulk batches. The invalid attempt used 3,861
 input and 1,519 output tokens, cost USD 0.00149055, and recorded no accepted
 judgment. Because the frozen runner did not preserve the malformed content or
 exact parser error, no reviewer- or dataset-quality conclusion is valid.
-Authorization is revoked, the unfavorable attempt is registered, and the
-prospective runner now preserves both fields for a separately authorized
-successor. The draft remains unfrozen and unopened; no exact evidence-sufficiency
+Authorization is revoked and the unfavorable attempt is registered. Successor
+`evidence-sufficiency-v2-independent-review-003` now requests a per-batch strict
+JSON Schema from an endpoint that advertises structured-output support, retains
+malformed response content and exact parser detail, and preserves immutable 002
+compatibility. Its 13-call/132-judgment network-free simulation, focused failure
+and resume regressions, 792-test repository gate, and clean live no-call
+preflight passed. The preflight is blocked only because 003 is provider-
+unauthorized, not frozen, and absent from the bounded allowlist. The draft
+remains unfrozen and unopened; no exact evidence-sufficiency
 verifier is selected, and candidate execution remains unauthorized. The runner
-build is **Go Deeper**, while the product decision remains **Refine** with no
+successor build is **Go Deeper**, while the product decision remains **Refine** with no
 selected implementation. Because its source tree differs from V8, the V8 image
 identities are historical evidence; the current source has no image or
 publication claim.
@@ -242,7 +248,7 @@ deterministic factual-QA successor and repository-correctness corrections at
 `4657219`. PR
 [#104](https://github.com/horiiiiii032929/digital-twin/pull/104) merged the V7/V8
 requalification. V12 remains preserved as a historical corrected build-only
-checkpoint. Reviewer-binding instrument `002` and the issue #107 T1 source
+checkpoint. Reviewer-binding instrument `003` and the issue #107 T1 source
 change supersede its current-tree match without promoting the still-pending
 product or public deployment claim.
 
@@ -266,7 +272,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; review 002 stopped safely as an invalid harness execution and is revoked | Bind and separately authorize a corrected review successor, adjudicate at most 12 priority cases, freeze a corrected decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; review 002 is invalid and revoked; provider-unauthorized review 003 passes strict-schema build and live no-call readiness | Separately authorize and run review 003 once, adjudicate at most 12 priority cases, freeze a corrected decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Keep; method milestone complete | Pilot 003 passed all gates: 100/100 deterministic-valid, 80/80 citation-valid, 99/100 reviewer agreement, and 20/20 mutation rejection; authorization revoked; #87 is complete | No current R1 blocker. #110 owns optional staged 1,000/9,000-case evidence and requires separate authorization |
 
 ## Release readiness and critical path
@@ -281,7 +287,7 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 002 invalid and revoked / Refine | Freeze and separately authorize one corrected review successor, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 003 build ready but unauthorized / Refine | Separately freeze and authorize review 003, execute it once, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 4 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 5 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Todo / Go Deeper | Design and separately authorize a 1,000-case checkpoint; require a complete pass before considering the remaining 9,000 cases |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |

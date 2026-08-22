@@ -64,13 +64,13 @@ not require model spending or private data:
    authorization. Keep T1 rejected by staging configuration while preparing,
    but not executing, one separately frozen confirmation.
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
-   build-only evidence-sufficiency workflow. Runner 002 now passes the complete
-   13-call/132-judgment simulation and a clean live no-call preflight. Its exact
-   Mistral review 002 then stopped safely after its first sensitivity response
-   was malformed. The invalid attempt is preserved and revoked; because the
-   frozen runner omitted the response content and exact parser error, a
-   corrected successor requires separate authorization. The changed source
-   revision has not been rebuilt.
+   build-only evidence-sufficiency workflow. Exact Mistral review 002 stopped
+   safely after one malformed sensitivity response and remains invalid and
+   revoked. Provider-unauthorized review 003 now requests endpoint-qualified
+   strict JSON Schema, preserves malformed content and parser detail, and passes
+   the complete 13-call/132-judgment simulation plus a clean live no-call
+   preflight. It still requires a separate frozen authorization before one paid
+   execution. The changed source revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
