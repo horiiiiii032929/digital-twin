@@ -49,9 +49,10 @@ professor-communication track.
 
 ## Critical path
 
-1. #87 — PR #103 contains the provider-free deterministic successor and
-   unauthorized pilot 003. The professor acknowledged the proposed direction;
-   refresh provider metadata and authorize the bounded confirmation separately.
+1. #87 — PR #103 contains the provider-free deterministic successor; PR #109
+   records the supervisor checkpoint and one-time pilot-003 authorization.
+   Execute the bounded confirmation, record the result, and revoke
+   authorization.
 2. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
