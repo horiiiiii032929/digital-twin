@@ -39,6 +39,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-003": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -93,10 +99,13 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise IndependentReviewError("independent-review authorization is not explicit")
     if (instrument.get("status") == "frozen-pending-execution") is not authorized:
         raise IndependentReviewError("independent-review authorization status drifted")
-    if instrument.get("decision_rule", {}).get(
-        "authorize_provider_execution"
-    ) is not authorized:
-        raise IndependentReviewError("independent-review decision authorization drifted")
+    if (
+        instrument.get("decision_rule", {}).get("authorize_provider_execution")
+        is not authorized
+    ):
+        raise IndependentReviewError(
+            "independent-review decision authorization drifted"
+        )
     required_false = {
         "fallback_routing_allowed",
         "private_source_execution_authorized",
@@ -108,10 +117,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     }
     if any(safety.get(key) is not False for key in required_false):
         raise IndependentReviewError("independent-review execution safety drifted")
-    if (
-        safety.get("retries") != 0
-        or safety.get("maximum_calls") != 13
-    ):
+    if safety.get("retries") != 0 or safety.get("maximum_calls") != 13:
         raise IndependentReviewError("reviewer execution bounds drifted")
     if instrument_id.endswith("-001"):
         if (
@@ -177,6 +183,30 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         },
     }:
         raise IndependentReviewError("reviewer metadata or routing drifted")
+    expected_response_format = (
+        "json-schema-strict"
+        if instrument_id.endswith("-003")
+        else "json-object-prompt-schema"
+    )
+    if (
+        safety.get("response_format_mode", "json-object-prompt-schema")
+        != expected_response_format
+    ):
+        raise IndependentReviewError("reviewer response format drifted")
+    if instrument_id.endswith("-003") and {
+        "endpoint_metadata_source": safety.get("endpoint_metadata_source"),
+        "structured_output_source": safety.get("structured_output_source"),
+        "provider_context_window_tokens": safety.get("provider_context_window_tokens"),
+    } != {
+        "endpoint_metadata_source": (
+            "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
+        ),
+        "structured_output_source": (
+            "https://openrouter.ai/docs/guides/features/structured-outputs"
+        ),
+        "provider_context_window_tokens": 262144,
+    }:
+        raise IndependentReviewError("reviewer endpoint metadata drifted")
     decision_rule = instrument.get("decision_rule", {})
     if any(
         decision_rule.get(key) is not False
@@ -276,9 +306,7 @@ def _mutation_items(
     )
     stale["item_id"] = "esv2-review-defect-03"
     stale["base_case_id"] = "esv2-permission-02"
-    stale["proposed_evidence"][0]["source_unit_id"] = stale_source[
-        "source_unit_id"
-    ]
+    stale["proposed_evidence"][0]["source_unit_id"] = stale_source["source_unit_id"]
     stale["proposed_evidence"][0]["quote"] = stale_source["content"]
 
     wrong_course = _review_item(case_map["esv2-direct-03"])
@@ -332,9 +360,10 @@ def build_review_packet(
     instrument = instrument or load_instrument()
     dataset_path = ROOT / instrument["decision_dataset"]["path"]
     draft_summary = load_and_validate_draft(dataset_path)
-    if draft_summary["content_sha256"] != instrument["decision_dataset"][
-        "content_sha256"
-    ]:
+    if (
+        draft_summary["content_sha256"]
+        != instrument["decision_dataset"]["content_sha256"]
+    ):
         raise IndependentReviewError("decision draft hash drifted")
     draft = json.loads(dataset_path.read_text(encoding="utf-8"))
     source_map = {source["source_unit_id"]: source for source in draft["sources"]}
@@ -391,7 +420,9 @@ def validate_review_packet(
 
     draft_path = ROOT / instrument["decision_dataset"]["path"]
     draft = json.loads(draft_path.read_text(encoding="utf-8"))
-    source_map = {source["source_unit_id"]: source for source in packet["source_catalog"]}
+    source_map = {
+        source["source_unit_id"]: source for source in packet["source_catalog"]
+    }
     if packet["source_catalog"] != draft["sources"] or len(source_map) != 40:
         raise IndependentReviewError("review source catalog drifted")
     expected_items = {case["case_id"]: _review_item(case) for case in draft["cases"]}
@@ -422,7 +453,10 @@ def validate_review_packet(
         for value in scoring_key.values()
         if value["expected_verdict"] == "revise"
     }
-    if counts != Counter({"approve": 6, "revise": 6}) or defect_classes != DEFECT_CLASSES:
+    if (
+        counts != Counter({"approve": 6, "revise": 6})
+        or defect_classes != DEFECT_CLASSES
+    ):
         raise IndependentReviewError("sensitivity scoring key drifted")
     if any(
         "expected_verdict" in item or "defect_class" in item
@@ -450,13 +484,12 @@ def validate_judgments(
     judgments: list[dict[str, Any]],
     *,
     simulation: bool,
+    instrument: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    instrument = load_instrument()
+    instrument = instrument or load_instrument()
     validate_review_packet(packet, instrument)
     expected_ids = {
-        item["item_id"]
-        for batch in packet["review_batches"]
-        for item in batch["items"]
+        item["item_id"] for batch in packet["review_batches"] for item in batch["items"]
     } | {item["item_id"] for item in packet["sensitivity_items"]}
     seen: set[str] = set()
     invalid_count = 0
@@ -482,15 +515,13 @@ def validate_judgments(
             or verdict not in VERDICTS
             or not isinstance(failed_dimensions, list)
             or any(
-                not isinstance(value, str)
-                or value not in allowed_dimensions
+                not isinstance(value, str) or value not in allowed_dimensions
                 for value in failed_dimensions
             )
             or len(failed_dimensions) != len(set(failed_dimensions))
             or not isinstance(reason, str)
-            or len(reason.strip()) < instrument["review_contract"][
-                "reason_minimum_characters"
-            ]
+            or len(reason.strip())
+            < instrument["review_contract"]["reason_minimum_characters"]
             or not isinstance(correction, str)
             or (verdict == "revise" and not correction.strip())
             or (verdict == "approve" and failed_dimensions)
@@ -517,9 +548,7 @@ def validate_judgments(
     )
     review_case_ids = expected_ids - set(scoring_key)
     review_judgments = [
-        judgment
-        for judgment in judgments
-        if judgment.get("item_id") in review_case_ids
+        judgment for judgment in judgments if judgment.get("item_id") in review_case_ids
     ]
     unresolved = [
         judgment.get("item_id")
@@ -551,7 +580,9 @@ def validate_judgments(
             if simulation and all(gates.values())
             else "simulation-refine-not-evidence"
             if simulation
-            else "review-complete" if all(gates.values()) else "review-refine"
+            else "review-complete"
+            if all(gates.values())
+            else "review-refine"
         ),
         "judgment_count": len(judgments),
         "invalid_judgment_count": invalid_count,
@@ -572,12 +603,8 @@ def validate_judgments(
 
 def simulated_judgments(packet: dict[str, Any]) -> list[dict[str, Any]]:
     scoring_key = packet["sensitivity_scoring_key"]
-    item_ids = [
-        item["item_id"] for item in packet["sensitivity_items"]
-    ] + [
-        item["item_id"]
-        for batch in packet["review_batches"]
-        for item in batch["items"]
+    item_ids = [item["item_id"] for item in packet["sensitivity_items"]] + [
+        item["item_id"] for batch in packet["review_batches"] for item in batch["items"]
     ]
     return [
         {
@@ -614,8 +641,7 @@ def preflight(
             verified_at = datetime.fromisoformat(safety["reviewer_verified_at"])
             current = now or datetime.now(timezone.utc)
             age_hours = (
-                current.astimezone(timezone.utc)
-                - verified_at.astimezone(timezone.utc)
+                current.astimezone(timezone.utc) - verified_at.astimezone(timezone.utc)
             ).total_seconds() / 3600
         except (TypeError, ValueError):
             blockers.append("reviewer-metadata-not-fresh")

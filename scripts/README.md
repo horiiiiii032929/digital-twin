@@ -64,23 +64,27 @@ Current utilities:
   provider preflight. Run
   `npm run verify:evidence-sufficiency-v2-independent-review`,
   `npm run simulate:evidence-sufficiency-v2-independent-review`, or
-  `npm run preflight:evidence-sufficiency-v2-independent-review`. Successor
+  `npm run preflight:evidence-sufficiency-v2-independent-review`. Historical
   instrument `002` binds exact OpenRouter routing to
   `mistralai/mistral-small-2603`, the published input/output prices, a USD 0.50
-  hard ceiling, and synthetic-public data only. Provider execution remains
-  unauthorized; the simulation is orchestration evidence only and cannot
-  freeze the dataset.
+  hard ceiling, and synthetic-public data only. Its one paid call ended as an
+  invalid execution and its authorization is revoked. The prepare command keeps
+  validating that historical packet; the successor runner below validates the
+  new packet independently.
 - `run_evidence_sufficiency_v2_independent_review.py`: executes only the exact
   reviewer-bound packet after a separate frozen authorization. It runs the
   six-clean/six-defect sensitivity call before the 12 review batches, stops
   bulk work when reviewer sensitivity is unreliable, disables retries and
   fallbacks, pins model identity, checkpoints after every call, enforces the
-  13-call and USD 0.50 ceilings, and supports binding-safe resume. Use
+  13-call and USD 0.50 ceilings, and supports binding-safe resume. Successor
+  instrument `003` uses endpoint-qualified strict JSON Schema output and
+  preserves malformed response content plus exact parser detail; response
+  healing is deliberately disabled. Use
   `npm run verify:evidence-sufficiency-v2-review-runner`,
   `npm run simulate:evidence-sufficiency-v2-review-runner`, or
   `npm run preflight-live:evidence-sufficiency-v2-review-runner`. The execute
-  command remains fail-closed until both the instrument and bounded repository
-  freeze receive one-time authorization.
+  command remains fail-closed: `003` is provider-unauthorized and absent from
+  the bounded repository allowlist until a separate one-time authorization.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

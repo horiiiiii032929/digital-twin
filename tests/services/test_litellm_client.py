@@ -70,6 +70,45 @@ async def test_litellm_adapter_requests_json_mode_only_when_configured():
 
 
 @pytest.mark.asyncio
+async def test_litellm_adapter_accepts_per_call_strict_json_schema_override():
+    captured = {}
+
+    async def completion(**kwargs):
+        captured.update(kwargs)
+        return {
+            "model": "deepseek-v4-flash",
+            "choices": [{"message": {"content": '{"answer":"ok"}'}}],
+        }
+
+    schema = {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "synthetic_answer",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["answer"],
+                "properties": {"answer": {"type": "string"}},
+            },
+        },
+    }
+    client = LiteLlmClient(
+        "deepseek/deepseek-v4-flash",
+        response_format={"type": "json_object"},
+        completion=completion,
+    )
+
+    await client.chat(
+        [LlmMessage(role="user", content="test")],
+        task="test",
+        response_format=schema,
+    )
+
+    assert captured["response_format"] == schema
+
+
+@pytest.mark.asyncio
 async def test_litellm_adapter_can_omit_temperature_for_thinking_models():
     captured = {}
 

@@ -48,6 +48,7 @@ def _live_metadata(assets: dict) -> dict:
                     "supported_parameters": [
                         "max_tokens",
                         "response_format",
+                        "structured_outputs",
                         "temperature",
                     ],
                 }
@@ -59,10 +60,17 @@ def _live_metadata(assets: dict) -> dict:
                     {
                         "provider_name": "Mistral",
                         "status": 0,
+                        "context_length": 262_144,
                         "pricing": {
                             "prompt": "0.00000015",
                             "completion": "0.0000006",
                         },
+                        "supported_parameters": [
+                            "max_tokens",
+                            "response_format",
+                            "structured_outputs",
+                            "temperature",
+                        ],
                     }
                 ]
             }
@@ -75,14 +83,14 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     safety = instrument["execution_safety"]
 
     assert assets["packet"]["content_sha256"] == (
-        "3bac86bede6b03d3d9963ff477d2c9dd4a6c4b06a58393ad77469be8c3bd4a67"
+        "90c177ae9dc158396af0e7be6bc393cc894b8f1b6cc278648682a86c9906215b"
     )
     assert len(assets["packet"]["review_batches"]) == 12
     assert len(assets["packet"]["sensitivity_items"]) == 12
     assert safety["maximum_calls"] == 13
     assert safety["maximum_reserved_cost_usd"] == 0.0702
     assert safety["maximum_cost_usd"] == 0.5
-    assert instrument["status"] == "invalid-execution-authorization-revoked"
+    assert instrument["status"] == "reviewer-bound-provider-unauthorized"
     assert safety["provider_execution_authorized"] is False
     assert instrument["decision_rule"]["authorize_provider_execution"] is False
 
@@ -100,6 +108,41 @@ def test_provider_transport_disables_retries_and_fallbacks(assets: dict) -> None
         "data_collection": "allow",
         "zdr": False,
     }
+    assert transport.client.response_format is None
+
+
+def test_strict_response_format_is_bound_to_each_batch_schema(assets: dict) -> None:
+    binding = runner._provider_binding(assets["instrument"])
+    schema = runner._response_schema(12)
+
+    response_format = runner._response_format_for_call(binding, schema)
+
+    assert response_format == {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "evidence_sufficiency_review_12",
+            "strict": True,
+            "schema": schema,
+        },
+    }
+
+
+def test_historical_review_002_remains_loadable() -> None:
+    historical_path = (
+        Path(__file__).resolve().parents[1] / "research/05_evaluation/instruments/"
+        "evidence_sufficiency_v2_independent_review_002.json"
+    )
+
+    historical = runner.load_assets(historical_path)
+
+    assert historical["instrument"]["instrument_id"].endswith("-002")
+    assert historical["packet"]["content_sha256"] == (
+        "3bac86bede6b03d3d9963ff477d2c9dd4a6c4b06a58393ad77469be8c3bd4a67"
+    )
+    assert (
+        runner._provider_binding(historical["instrument"])["response_format_mode"]
+        == "json-object-prompt-schema"
+    )
 
 
 def test_network_free_simulation_completes_all_13_calls(
@@ -211,9 +254,7 @@ def test_malformed_bulk_response_preserves_prior_accounting(
     assert state["batch_outcomes"][0]["error_detail"]
 
 
-def test_cost_overshoot_is_recorded_and_stops(
-    assets: dict, tmp_path: Path
-) -> None:
+def test_cost_overshoot_is_recorded_and_stops(assets: dict, tmp_path: Path) -> None:
     state = asyncio.run(
         runner.execute(
             assets,
@@ -297,12 +338,10 @@ def test_preflight_reports_authorization_boundaries(
 ) -> None:
     unauthorized = deepcopy(assets)
     unauthorized["instrument"]["status"] = "reviewer-bound-provider-unauthorized"
-    unauthorized["instrument"]["execution_safety"][
-        "provider_execution_authorized"
-    ] = False
-    unauthorized["instrument"]["decision_rule"][
-        "authorize_provider_execution"
-    ] = False
+    unauthorized["instrument"]["execution_safety"]["provider_execution_authorized"] = (
+        False
+    )
+    unauthorized["instrument"]["decision_rule"]["authorize_provider_execution"] = False
     monkeypatch.setenv("OPENROUTER_API_KEY", "test-only")
     monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
     monkeypatch.setattr(runner, "BOUNDED_PILOT_AUTHORIZATIONS", {})
@@ -333,12 +372,8 @@ def test_authorized_preflight_is_ready_only_with_every_gate(
 ) -> None:
     authorized = deepcopy(assets)
     authorized["instrument"]["status"] = "frozen-pending-execution"
-    authorized["instrument"]["execution_safety"][
-        "provider_execution_authorized"
-    ] = True
-    authorized["instrument"]["decision_rule"][
-        "authorize_provider_execution"
-    ] = True
+    authorized["instrument"]["execution_safety"]["provider_execution_authorized"] = True
+    authorized["instrument"]["decision_rule"]["authorize_provider_execution"] = True
     monkeypatch.setenv("OPENROUTER_API_KEY", "test-only")
     monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
     monkeypatch.setattr(
@@ -402,6 +437,28 @@ def test_preflight_detects_live_price_drift(
     )
 
     assert "reviewer-input-price-drift" in result["live_provider_failures"]
+    assert "provider-metadata-not-current" in result["blockers"]
+
+
+def test_preflight_detects_endpoint_context_drift(
+    assets: dict, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-only")
+    monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
+    live = _live_metadata(assets)
+    live["endpoints"]["data"]["endpoints"][0]["context_length"] = 131_072
+    verified = datetime.fromisoformat(
+        assets["instrument"]["execution_safety"]["reviewer_verified_at"]
+    )
+
+    result = runner.build_preflight(
+        assets,
+        output_path=tmp_path / "context-drift.json",
+        live_metadata=live,
+        now=verified + timedelta(hours=1),
+    )
+
+    assert "mistral-endpoint-context-drift" in result["live_provider_failures"]
     assert "provider-metadata-not-current" in result["blockers"]
 
 

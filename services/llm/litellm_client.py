@@ -33,7 +33,7 @@ class LiteLlmClient:
         timeout_seconds: float = 30,
         max_output_tokens: int = 600,
         temperature: float | None = 0,
-        response_format: dict[str, str] | None = None,
+        response_format: dict[str, Any] | None = None,
         provider_options: dict[str, Any] | None = None,
         expected_provider_model: str | None = None,
         expected_provider_revision: str | None = None,
@@ -82,7 +82,13 @@ class LiteLlmClient:
         self.completion = completion
         self.cost_calculator = cost_calculator
 
-    async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
+    async def chat(
+        self,
+        messages: list[LlmMessage],
+        task: str,
+        *,
+        response_format: dict[str, Any] | None = None,
+    ) -> LlmResponse:
         task = validate_llm_task(task)
         if not messages:
             raise ValueError("at least one LLM message is required")
@@ -96,8 +102,13 @@ class LiteLlmClient:
             }
             if self.temperature is not None:
                 completion_arguments["temperature"] = self.temperature
-            if self.response_format is not None:
-                completion_arguments["response_format"] = self.response_format
+            selected_response_format = (
+                response_format if response_format is not None else self.response_format
+            )
+            if selected_response_format is not None:
+                completion_arguments["response_format"] = deepcopy(
+                    selected_response_format
+                )
             completion_arguments.update(deepcopy(self.provider_options))
             response = await self.completion(
                 **completion_arguments,
