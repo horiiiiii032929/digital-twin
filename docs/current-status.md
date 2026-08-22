@@ -235,17 +235,19 @@ not exposed by the frozen adapter. Attempt 003 is therefore invalid operational
 evidence, not a reviewer- or dataset-quality result. Its authorization is
 revoked. The draft remains unfrozen and unopened; no exact evidence-sufficiency
 verifier is selected, and candidate execution remains unauthorized.
-Provider-unauthorized successor `evidence-sufficiency-v2-independent-review-004`
-now calls OpenRouter's official native chat-completions API rather than routing
+Successor `evidence-sufficiency-v2-independent-review-004` now calls
+OpenRouter's official native chat-completions API rather than routing
 inference through the opaque wrapper. It preserves sanitized upstream status,
 message, request and generation IDs, and routing attempts; its exact
 13-call/132-judgment network-free simulation, failure regressions, and clean
-live no-call preflight passed. The preflight is blocked only by its three
-deliberate authorization locks. No paid review 004 call has occurred. The
-native runner build is **Go Deeper**, while the product decision remains
-**Refine** with no selected implementation. Because its source tree differs
-from V8, the V8 image identities are historical evidence; the current source
-has no image or publication claim.
+live no-call preflight passed. The researcher then explicitly authorized
+exactly review 004; its provider flag, frozen status, and bounded allowlist
+entry are correlated for one run of at most 13 synthetic-public calls under the
+USD 0.50 emergency ceiling. No paid review 004 call had occurred at this
+authorization checkpoint. The native runner build is **Go Deeper**, while the
+product decision remains **Refine** with no selected implementation. Because
+its source tree differs from V8, the V8 image identities are historical
+evidence; the current source has no image or publication claim.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted

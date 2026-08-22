@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; review 003 is invalid/revoked; native OpenRouter review 004 is build-ready but provider-unauthorized; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; review 003 is invalid/revoked; native OpenRouter review 004 is authorized for one bounded run; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | #87 completed Keep after pilot 003 passed every 100-case gate; #110 owns optional 1,000/9,000-case scale, which remains unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -75,8 +75,9 @@ not require model spending or private data:
    produced. Attempt 003 is preserved as invalid and revoked. Review 004 now
    uses OpenRouter's documented native chat-completions transport, retains
    sanitized upstream status and router metadata, and passed its full
-   network-free simulation and clean live no-call preflight. It remains
-   unfrozen and provider-unauthorized.
+   network-free simulation and clean live no-call preflight. The researcher
+   separately authorized exactly one bounded review 004 run; execute it once,
+   register every outcome, and revoke authorization.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -85,7 +86,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Separately authorize one native OpenRouter evidence-sufficiency review 004 attempt | Researcher | Complete dataset review before selecting an answerability gate |
+| Execute and register the separately authorized native OpenRouter review 004 attempt | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 
