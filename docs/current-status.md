@@ -212,9 +212,13 @@ sensitivity-first execution runner passed a complete 13-call/132-judgment
 network-free simulation, checkpoint/resume and failure regressions, and the
 complete repository gate. A clean live no-call preflight found matching model
 metadata and pricing, an available credential, and an unused output path. It is
-blocked only by the three deliberate authorization locks: provider approval,
-instrument freeze, and the bounded freeze allowlist. No provider inference was
-made. The draft remains unfrozen and unopened; no exact evidence-sufficiency
+previously blocked only by the three deliberate authorization locks: provider
+approval, instrument freeze, and the bounded freeze allowlist. The user has now
+authorized exactly `evidence-sufficiency-v2-independent-review-002`; those
+three locks are frozen in a separate checkpoint for one run of at most 13
+synthetic-public calls under the USD 0.50 emergency ceiling. No provider
+inference had been made at this authorization checkpoint. The draft remains
+unfrozen and unopened; no exact evidence-sufficiency
 verifier is selected, and candidate execution remains unauthorized. The runner
 build is **Go Deeper**, while the product decision remains **Refine** with no
 selected implementation. Because its source tree differs from V8, the V8 image
@@ -274,7 +278,7 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / runner ready / Refine | Separately authorize the exact 13-call independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / review authorized / Refine | Execute the exact 13-call independent review once, revoke authorization, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 4 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 5 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Todo / Go Deeper | Design and separately authorize a 1,000-case checkpoint; require a complete pass before considering the remaining 9,000 cases |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |

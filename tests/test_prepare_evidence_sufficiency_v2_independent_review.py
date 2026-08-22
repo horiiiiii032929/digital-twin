@@ -167,6 +167,26 @@ def test_judgment_validator_fails_closed(packet: dict, mutation: str) -> None:
 
 
 def test_preflight_reports_exact_build_only_blockers(instrument: dict) -> None:
+    unauthorized = copy.deepcopy(instrument)
+    unauthorized["status"] = "reviewer-bound-provider-unauthorized"
+    unauthorized["execution_safety"]["provider_execution_authorized"] = False
+    unauthorized["decision_rule"]["authorize_provider_execution"] = False
+    verified_at = datetime.fromisoformat(
+        unauthorized["execution_safety"]["reviewer_verified_at"]
+    )
+    result = preflight(unauthorized, now=verified_at + timedelta(hours=1))
+
+    assert result == {
+        "instrument_id": "evidence-sufficiency-v2-independent-review-002",
+        "status": "blocked-not-authorized",
+        "blockers": ["provider-review-not-authorized"],
+        "provider_or_model_calls": 0,
+        "private_data_read": False,
+        "candidate_evaluation_opened": False,
+    }
+
+
+def test_active_instrument_preflight_is_authorized(instrument: dict) -> None:
     verified_at = datetime.fromisoformat(
         instrument["execution_safety"]["reviewer_verified_at"]
     )
@@ -174,8 +194,8 @@ def test_preflight_reports_exact_build_only_blockers(instrument: dict) -> None:
 
     assert result == {
         "instrument_id": "evidence-sufficiency-v2-independent-review-002",
-        "status": "blocked-not-authorized",
-        "blockers": ["provider-review-not-authorized"],
+        "status": "ready",
+        "blockers": [],
         "provider_or_model_calls": 0,
         "private_data_read": False,
         "candidate_evaluation_opened": False,
@@ -203,10 +223,7 @@ def test_bound_reviewer_metadata_expires_after_24_hours(instrument: dict) -> Non
     )
     result = preflight(instrument, now=verified_at + timedelta(hours=24, seconds=1))
 
-    assert result["blockers"] == [
-        "reviewer-metadata-not-fresh",
-        "provider-review-not-authorized",
-    ]
+    assert result["blockers"] == ["reviewer-metadata-not-fresh"]
 
 
 def test_write_mode_is_blocked_by_repository_execution_freeze(

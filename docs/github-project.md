@@ -49,8 +49,9 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — complete the bounded independent evidence-sufficiency review and
-   select the first production answerability gate.
+1. #105 — execute the currently authorized bounded independent
+   evidence-sufficiency review once, revoke authorization, and select the first
+   production answerability gate only after all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #110 — follow completed #87 by designing, but not authorizing, a separate

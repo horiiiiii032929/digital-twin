@@ -66,9 +66,10 @@ not require model spending or private data:
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
    build-only evidence-sufficiency workflow. Runner 002 now passes the complete
    13-call/132-judgment simulation and a clean live no-call preflight. Its exact
-   Mistral reviewer binding remains provider-unauthorized; simulation is not
-   independent-review evidence and the changed source revision has not been
-   rebuilt.
+   Mistral reviewer binding is now frozen for one explicitly authorized run of
+   at most 13 synthetic-public calls under the USD 0.50 emergency ceiling;
+   simulation is not independent-review evidence and the changed source
+   revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 

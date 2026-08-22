@@ -181,12 +181,13 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     if any(
         decision_rule.get(key) is not False
         for key in (
-            "authorize_provider_execution",
             "authorize_dataset_freeze",
             "authorize_candidate_evaluation",
         )
     ):
-        raise IndependentReviewError("review instrument cannot self-authorize")
+        raise IndependentReviewError(
+            "review instrument cannot authorize later evaluation stages"
+        )
     required_response_fields = set(
         instrument.get("review_contract", {}).get("required_response_fields", [])
     )

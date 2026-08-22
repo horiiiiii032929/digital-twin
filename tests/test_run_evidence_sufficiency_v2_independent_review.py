@@ -82,7 +82,9 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     assert safety["maximum_calls"] == 13
     assert safety["maximum_reserved_cost_usd"] == 0.0702
     assert safety["maximum_cost_usd"] == 0.5
-    assert safety["provider_execution_authorized"] is False
+    assert instrument["status"] == "frozen-pending-execution"
+    assert safety["provider_execution_authorized"] is True
+    assert instrument["decision_rule"]["authorize_provider_execution"] is True
 
 
 def test_provider_transport_disables_retries_and_fallbacks(assets: dict) -> None:
@@ -288,14 +290,23 @@ def test_resume_rejects_binding_drift(assets: dict, tmp_path: Path) -> None:
 def test_preflight_reports_authorization_boundaries(
     assets: dict, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    unauthorized = deepcopy(assets)
+    unauthorized["instrument"]["status"] = "reviewer-bound-provider-unauthorized"
+    unauthorized["instrument"]["execution_safety"][
+        "provider_execution_authorized"
+    ] = False
+    unauthorized["instrument"]["decision_rule"][
+        "authorize_provider_execution"
+    ] = False
     monkeypatch.setenv("OPENROUTER_API_KEY", "test-only")
     monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
+    monkeypatch.setattr(runner, "BOUNDED_PILOT_AUTHORIZATIONS", {})
     verified = datetime.fromisoformat(
-        assets["instrument"]["execution_safety"]["reviewer_verified_at"]
+        unauthorized["instrument"]["execution_safety"]["reviewer_verified_at"]
     )
 
     result = runner.build_preflight(
-        assets,
+        unauthorized,
         output_path=tmp_path / "unused.json",
         live_metadata=_live_metadata(assets),
         now=verified + timedelta(hours=1),
@@ -408,4 +419,3 @@ def test_preflight_detects_existing_output(
     )
 
     assert "output-path-already-exists" in result["blockers"]
-
