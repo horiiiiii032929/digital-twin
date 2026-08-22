@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "03becb679db5ba49a61ad6129c9d1d4b86c5dba99cfbe5f9dbe9021f281142b9",
+  "record_sha256": "468a273906320b84f6d14e5ec74d69a7f626b4c71156f5862d0967d118d9ce08",
   "records": [
     {
       "audit": {
@@ -1944,9 +1944,9 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Manual gate and provider-binding review confirmed pilot 003 is reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicitly frozen for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
+        "evidence": "Manual gate and 2026-08-22 official-provider metadata review confirmed pilot 003 remains reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicit for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1955,7 +1955,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
       "risk": "high",
-      "sha256": "5992e54260a6773b536299eb2721d89470d8c9a6278765cc7df16a4701a67cbe"
+      "sha256": "79eb4cb70b151f438555e8a2bc8392a010aa7d9f60eeeaf6001c549bfffe5174"
     },
     {
       "audit": {

@@ -1314,12 +1314,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-configuration",
-      "evidence": "Manual gate and provider-binding review confirmed pilot 003 is reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicitly frozen for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
+      "evidence": "Manual gate and 2026-08-22 official-provider metadata review confirmed pilot 003 remains reviewed but unauthorized, model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, provider retention terms are explicit for synthetic-public inputs, and the USD 3 emergency ceiling is fail-closed.",
       "findings": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "5992e54260a6773b536299eb2721d89470d8c9a6278765cc7df16a4701a67cbe"
+      "sha256": "79eb4cb70b151f438555e8a2bc8392a010aa7d9f60eeeaf6001c549bfffe5174"
     },
     {
       "audit_status": "audited",

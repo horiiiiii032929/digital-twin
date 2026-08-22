@@ -365,17 +365,18 @@ the transition policy, help ladder, evidence gate, or model role. It does not
 automatically create another numbered dataset, prompt revision, or model
 leaderboard.
 
-## Relationship to pending professor guidance
+## Relationship to supervisor guidance
 
-The unanswered professor question concerns how the larger canonical factual-QA
-dataset should be generated and cross-checked. This design does not assume that
-the professor approved deterministic-only Q&A generation. Deterministic source
-lineage remains useful under either dataset-generation option.
+On 2026-08-21 the professor replied “sounds good” after the deterministic
+source-linked Q&A with multi-model wording/review and the separate C0-C3
+Professor Digital Twin evaluation were proposed. The project therefore keeps
+deterministic source lineage as the working factual-QA authority without
+claiming approval of every evaluation parameter.
 
-Professor guidance is still required before freezing the 10,000-case method and
-before treating an explicit or inferred professor profile as the fidelity
-reference. It does not block discussion, network-free design, or implementation
-of the generic T0/T1 tutoring graph contracts.
+Professor guidance is still required before treating an explicit or inferred
+professor profile as the fidelity reference. That unresolved choice does not
+block the separately authorized factual-QA confirmation or implementation of
+the generic T0/T1 tutoring graph contracts.
 
 ## Research basis
 

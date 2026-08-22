@@ -145,8 +145,11 @@ restart checks were 100%, and no safety violation or provider use occurred. Its
 one-time authorization is revoked. Staging still rejects T1 until one
 separately frozen confirmation and release-profile decision pass. T2 applies
 the professor-approved policy to the
-same graph and remains pending professor-profile guidance. This checkpoint does
-not resolve the professor's pending 10,000-case dataset-method guidance.
+same graph and remains pending professor-profile guidance. On 2026-08-21 the
+professor replied “sounds good” after the deterministic source-linked Q&A and
+separate C0-C3 directions were proposed. This is recorded as acknowledgment of
+the working direction, not approval of every evaluation parameter or of the
+explicit-versus-inferred professor-profile method.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -249,14 +252,14 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
-| Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
+| Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation; the professor acknowledged the proposed deterministic-source/multi-model-review direction | Separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
 release-ready. The current release blockers are an unconfirmed T1 autonomous
-tutoring graph, a selected evidence-sufficiency method, professor-method
-guidance, separately authorized factual-QA confirmation, public host/domain
+tutoring graph, a selected evidence-sufficiency method, separately authorized
+factual-QA confirmation, public host/domain
 selection, target-host operations evidence, professor-fidelity calibration,
 and one frozen end-to-end candidate decision.
 
@@ -265,7 +268,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 4 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
+| 4 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / confirmation ready for authorization | Separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
 | 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
@@ -438,8 +441,9 @@ revision. Its truth content hash is
 That merged provider-free checkpoint passed 713 Python and 46 frontend tests
 with a 465/465 complete audit. The current pre-professor checkpoint passes 771
 Python and 46 frontend tests with a 484/484 complete audit. Pilot 003 is
-reviewed but not frozen or allowlisted. The separate Professor Digital Twin
-transition now has a
+reviewed, has a current provider metadata snapshot, and is ready for a separate
+authorization checkpoint, but is not frozen or allowlisted. The separate
+Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
 schema, and an empty 8-12-case calibration template. Fidelity judging and held-
 out access remain paused pending professor guidance.
