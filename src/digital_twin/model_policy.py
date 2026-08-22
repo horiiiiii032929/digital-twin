@@ -85,7 +85,7 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="evidence-sufficiency-independent-reviewer-candidate",
         provider_model=OPENROUTER_GPT_MINI_REVIEW_MODEL,
-        status="frozen-for-one-bounded-review",
+        status="invalid-execution-do-not-retry",
     ),
     CurrentModelBinding(
         role="selected-text-embedding",

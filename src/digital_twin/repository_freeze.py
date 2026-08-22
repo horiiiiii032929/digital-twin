@@ -197,9 +197,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "evidence-sufficiency-v2-independent-review-006": (
-            "external_model_evaluation",
-        ),
     }
 )
 

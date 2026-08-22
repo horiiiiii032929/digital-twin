@@ -114,10 +114,11 @@ Current utilities:
   strict structured output, and disables all fallback routing. Run
   `npm run verify:evidence-sufficiency-v2-review-006`,
   `npm run simulate:evidence-sufficiency-v2-review-006`, or
-  `npm run preflight-live:evidence-sufficiency-v2-review-006`. The researcher
-  separately authorized exactly one `npm run
-  execute:evidence-sufficiency-v2-review-006` attempt; all dataset-freeze,
-  candidate-evaluation, private-source, and later execution remains blocked.
+  `npm run preflight-live:evidence-sufficiency-v2-review-006`. Its authorized
+  sensitivity request received HTTP 400 before any provider response, so the
+  attempt is invalid and revoked. The exact execute command now fails closed;
+  all dataset-freeze, candidate-evaluation, private-source, and later execution
+  remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and
