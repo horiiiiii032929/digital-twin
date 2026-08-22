@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 486
+    "audited": 487
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 96,
+    "evaluation_configuration": 97,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 94
   },
-  "file_count": 486,
+  "file_count": 487,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "52a3925700f16f9e8cad53a9cfe85c15cc9d8df25648efa79867b17b096cdab9",
+  "record_sha256": "65b4dab7c880b24fdddf689b89643e045a27aa7ae2d3bd7cbb1c0212d67aa793",
   "records": [
     {
       "audit": {
@@ -1748,6 +1748,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_002.json",
       "risk": "high",
       "sha256": "f25a38dcc2bac25d97b5f1e7817e54aabea1ccb76f52b5544d848617ab5ff51d"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "Manual result review and focused regressions preserve the invalid 003 attempt after one authentication-class failure before a provider response, revoke its authorization, and retain the immutable packet, exact bindings, strict schema, zero-retry evidence, and closed dataset, candidate, and private-source permissions.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_003.json",
+      "risk": "high",
+      "sha256": "6d6311d107ffefbe56909200bf9c87855684dcae70609bece93b520e3903afed"
     },
     {
       "audit": {
@@ -3780,7 +3796,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual fail-closed review plus focused tests verify historical, reviewer-bound, authorized, and revoked states; correct correlated provider authorization without later-stage self-authorization; byte-stable packet reconstruction; strict judgment validation; bounded priority routing; metadata expiry; and guarded writes.",
+        "evidence": "Manual fail-closed review plus focused tests verify historical 002 and prospective 003 states, strict response-format and endpoint bindings, correlated provider authorization without later-stage self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -3795,7 +3811,7 @@
       ],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "f25cc3904172c014436bab568cb272bace7f8e31c68825ee53de8838481ef8bc"
+      "sha256": "7b7ea3db77ada3a78864c456163c1599875bafd0a07803f8cb98b9575754e781"
     },
     {
       "audit": {
@@ -4026,7 +4042,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual post-invalid state-machine review plus 13-call simulation and focused failure tests confirm sensitivity-first stopping, exact model/routing identity, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, preservation of malformed content and exact parser detail, exclusive output, and revoked execution authority.",
+        "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm endpoint-qualified strict JSON Schema requests, sensitivity-first stopping, exact model/routing identity, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, preservation of malformed content and parser detail, dynamic exclusive output, and absent execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -4043,7 +4059,7 @@
       ],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "9f2a840ad9951463da21a11c0b4bf6d64f281c27cfff650a1688f86ed59e8b51"
+      "sha256": "4131f87b10049312974ed54d7ea119070a9918c9c5144b85187ee563b31e42dc"
     },
     {
       "audit": {
@@ -5334,7 +5350,7 @@
     {
       "audit": {
         "domain": "runtime-provider-boundary",
-        "evidence": "Model policy, protected provider options, response/usage validation, error redaction, and credential boundaries reviewed; adapter tests passed without provider calls.",
+        "evidence": "Model policy, protected provider options, per-call strict JSON Schema overrides, response/usage validation, error redaction, and credential boundaries reviewed; adapter tests passed without provider calls.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -5345,7 +5361,7 @@
       "package_commands": [],
       "path": "services/llm/litellm_client.py",
       "risk": "high",
-      "sha256": "2d557b5ace1933c40d8a0c496bae3a90a9a2e62d63a6d29a1e06e5e394cfafcd"
+      "sha256": "c3cd880f5549c7473e5d3fef958f75e5c1167fbfdfb3ca289097420f2d3c90a6"
     },
     {
       "audit": {
@@ -6326,7 +6342,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence review 002 authorization is revoked, and only the historical oracle remains bounded; all dataset, candidate, paid-successor, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002 and 003 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6337,7 +6353,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8e9c683fe4fa4f8f690811d17fb7bde7b62ba12559779d2bfa6073d78023e542"
+      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
     },
     {
       "audit": {
@@ -6758,7 +6774,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence review 002, completed pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002 and 003, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6769,7 +6785,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "b26ca295dfc122171baf024ea0a31c9ae3fc12f53e4a54307016b2ecb0d67aab"
+      "sha256": "3500b450d368944aa9213ce9d9d7b9f35de29666efe87262be48f62b30e00476"
     },
     {
       "audit": {
@@ -6966,7 +6982,7 @@
     {
       "audit": {
         "domain": "runtime-verification",
-        "evidence": "Provider-neutral response, model policy, option protection, malformed usage/content, and redacted provider-error regressions reviewed and passed.",
+        "evidence": "Provider-neutral response, model policy, option protection, per-call strict JSON Schema override, malformed usage/content, and redacted provider-error regressions reviewed and passed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6977,7 +6993,7 @@
       "package_commands": [],
       "path": "tests/services/test_litellm_client.py",
       "risk": "medium",
-      "sha256": "f0c85070e8cf076f9b484e5ac13546efaa4d33e9c262b934225d530a0e487621"
+      "sha256": "1340b1ef3a3c248e29f8d321e92ee21a66272903bccd4364f0fc4f78eb6a8a7f"
     },
     {
       "audit": {
@@ -7750,7 +7766,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions cover the exact revoked 13-call contract, sensitivity stop, preservation of malformed content and parser detail, provider/identity/cost failures, prior accounting, interruption/resume, binding drift, authorization locks, metadata expiry, price drift, and output exclusivity.",
+        "evidence": "Focused regressions cover the exact revoked 003 contract and immutable 002 compatibility, strict per-batch JSON Schema, sensitivity stop, malformed-content preservation, provider/identity/cost failures, prior accounting, interruption/resume, all three authorization locks, endpoint capability/context freshness, price drift, and output exclusivity.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7761,7 +7777,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "e67002e099917aed56833351173444d85e483918fd81eb14021b6213406dfe0c"
+      "sha256": "14156eece7369a73ea77873748646cceec0b410e676da3b01f572cc68cea5d9c"
     },
     {
       "audit": {
@@ -8005,7 +8021,7 @@
     }
   ],
   "risk_counts": {
-    "high": 378,
+    "high": 379,
     "medium": 108
   },
   "schema_version": 1,

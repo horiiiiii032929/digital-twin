@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-003-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "18f593822a16202974bb6c013e37f4ba4808e24d",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-runner-v1",
+        "version": "attempt-002-historical-control",
+        "configuration": {
+          "response_format": "json-object-prompt-schema",
+          "preserve_malformed_response_content": false,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "malformed-response-evidence-preservation-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "strict-endpoint-qualified-output-contract",
+          "passed": false,
+          "evidence": "Historical attempt 002 requested JSON-object mode and relied on the prompt for the judgment schema."
+        },
+        {
+          "name": "malformed-response-evidence-preserved",
+          "passed": false,
+          "evidence": "Invalid attempt 002 did not preserve the malformed response content or exact parser detail."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": true,
+          "evidence": "The historical runner passed its network-free checkpoint and resume regressions."
+        },
+        {
+          "name": "live-provider-preflight",
+          "passed": true,
+          "evidence": "The historical build preflight matched then-current model and pricing metadata without an inference call."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Attempt 002 authorization is revoked and this comparison made no provider inference call."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were used."
+        },
+        {
+          "name": "historical-result-preserved",
+          "passed": true,
+          "evidence": "Attempt 002 remains immutable, revoked, registered, and loadable."
+        }
+      ],
+      "failures_by_category": {
+        "execution-harness": 2
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-runner-v2",
+        "version": "review-003-build-provider-unauthorized",
+        "configuration": {
+          "response_format": "json-schema-strict",
+          "preserve_malformed_response_content": true,
+          "maximum_calls": 13,
+          "retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "malformed-response-evidence-preservation-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "strict-endpoint-qualified-output-contract",
+          "passed": true,
+          "evidence": "Each batch binds its exact JSON Schema with strict mode and requires endpoint parameter support."
+        },
+        {
+          "name": "malformed-response-evidence-preserved",
+          "passed": true,
+          "evidence": "Regression failures retain exact response content and parser detail before fail-closed termination."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": true,
+          "evidence": "Focused tests pass for per-call checkpoints, interruption, exact-binding resume, and malformed bulk accounting."
+        },
+        {
+          "name": "live-provider-preflight",
+          "passed": true,
+          "evidence": "The clean no-call preflight matched exact model, endpoint, structured-output, context, and pricing metadata with no live failure."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "The three authorization locks remain closed and no provider inference occurred."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were used."
+        },
+        {
+          "name": "historical-result-preserved",
+          "passed": true,
+          "evidence": "Historical instrument and invalid result 002 remain unchanged, revoked, registered, and loadable."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bounded-independent-advisory-review-runner-v2",
+    "rationale": "The successor corrects the observable execution-harness defect and passes all network-free and live metadata-only readiness checks while provider execution stays separately gated.",
+    "limitations": [
+      "No provider inference was made, so reviewer and dataset quality remain unknown.",
+      "The 120-case draft remains unfrozen and unopened for candidate evaluation.",
+      "No evidence-sufficiency implementation or release candidate is selected.",
+      "Live provider metadata must be refreshed within 24 hours immediately before any separately authorized execution."
+    ]
+  }
+}

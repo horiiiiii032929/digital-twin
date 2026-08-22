@@ -47,24 +47,20 @@ from src.digital_twin.repository_freeze import (
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_PATH = (
-    ROOT
-    / "research/05_evaluation/instruments/"
-    "evidence_sufficiency_v2_independent_review_002.json"
+    ROOT / "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_003.json"
 )
 DEFAULT_OUTPUT = (
-    ROOT
-    / "reports/generated/evidence-sufficiency-v2-independent-review-002.json"
+    ROOT / "reports/generated/evidence-sufficiency-v2-independent-review-003.json"
 )
 DEFAULT_SIMULATION_OUTPUT = (
-    ROOT
-    / "reports/generated/"
-    "evidence-sufficiency-v2-independent-review-002-simulation.json"
+    ROOT / "reports/generated/"
+    "evidence-sufficiency-v2-independent-review-003-simulation.json"
 )
-INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-002"
+INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-003"
 MODEL_REGISTRY_URL = "https://openrouter.ai/api/v1/models"
 MODEL_ENDPOINTS_URL = (
-    "https://openrouter.ai/api/v1/models/"
-    "mistralai/mistral-small-2603/endpoints"
+    "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
 )
 
 
@@ -89,6 +85,9 @@ def _provider_binding(instrument: dict[str, Any]) -> dict[str, Any]:
         "pricing_usd_per_million_output_tokens": safety[
             "pricing_usd_per_million_output_tokens"
         ],
+        "response_format_mode": safety.get(
+            "response_format_mode", "json-object-prompt-schema"
+        ),
     }
 
 
@@ -117,16 +116,16 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review reservation exceeds cost ceiling")
     if safety.get("timeout_seconds") != 120:
         raise ReviewRunnerError("review timeout drifted")
-    if safety.get("runner") != {
+    expected_runner = {
         "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
         "sensitivity_first": True,
         "atomic_checkpoints": True,
         "resume_requires_exact_bindings": True,
-        "raw_output_path": (
-            "reports/generated/"
-            "evidence-sufficiency-v2-independent-review-002.json"
-        ),
-    }:
+        "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
+    }
+    if instrument["instrument_id"].endswith("-003"):
+        expected_runner["preserve_malformed_response_content"] = True
+    if safety.get("runner") != expected_runner:
         raise ReviewRunnerError("review runner binding drifted")
     if safety["provider_routing"] != {
         "order": ["Mistral"],
@@ -139,6 +138,18 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     binding = _provider_binding(instrument)
     if binding["provider_model"] != "mistralai/mistral-small-2603":
         raise ReviewRunnerError("review model drifted")
+    expected_response_format = (
+        "json-schema-strict"
+        if instrument["instrument_id"].endswith("-003")
+        else "json-object-prompt-schema"
+    )
+    if binding["response_format_mode"] != expected_response_format:
+        raise ReviewRunnerError("review response format drifted")
+    if (
+        instrument["instrument_id"].endswith("-003")
+        and safety.get("provider_context_window_tokens") != 262144
+    ):
+        raise ReviewRunnerError("review provider context binding drifted")
     for field in (
         "timeout_seconds",
         "max_input_tokens",
@@ -195,14 +206,30 @@ def _response_schema(expected_count: int) -> dict[str, Any]:
     }
 
 
-def _source_subset(packet: dict[str, Any], items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _response_format_for_call(
+    binding: dict[str, Any], schema: dict[str, Any]
+) -> dict[str, Any] | None:
+    if binding["response_format_mode"] != "json-schema-strict":
+        return None
+    expected_count = schema["properties"]["judgments"]["minItems"]
+    return {
+        "type": "json_schema",
+        "json_schema": {
+            "name": f"evidence_sufficiency_review_{expected_count}",
+            "strict": True,
+            "schema": deepcopy(schema),
+        },
+    }
+
+
+def _source_subset(
+    packet: dict[str, Any], items: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
     source_ids = {
         evidence["source_unit_id"]
         for item in items
         for evidence in item["proposed_evidence"]
-    } | {
-        source_id for item in items for source_id in item["tempting_source_ids"]
-    }
+    } | {source_id for item in items for source_id in item["tempting_source_ids"]}
     source_map = {
         source["source_unit_id"]: source for source in packet["source_catalog"]
     }
@@ -290,12 +317,17 @@ class ProviderReviewTransport:
 
     def __init__(self, binding: dict[str, Any]) -> None:
         self.binding = binding
+        response_format = (
+            {"type": "json_object"}
+            if binding["response_format_mode"] == "json-object-prompt-schema"
+            else None
+        )
         self.client = LiteLlmClient(
             binding["litellm_model"],
             timeout_seconds=binding["timeout_seconds"],
             max_output_tokens=binding["max_output_tokens"],
             temperature=binding["temperature"],
-            response_format={"type": "json_object"},
+            response_format=response_format,
             provider_options={
                 "extra_body": {"provider": deepcopy(binding["provider_routing"])},
                 "num_retries": 0,
@@ -314,6 +346,7 @@ class ProviderReviewTransport:
         request = "\n".join(
             (prompt, "OUTPUT JSON SCHEMA:", json.dumps(schema, sort_keys=True))
         )
+        response_format = _response_format_for_call(self.binding, schema)
         started = time.perf_counter()
         response = await self.client.chat(
             [
@@ -321,6 +354,7 @@ class ProviderReviewTransport:
                 LlmMessage(role="user", content=request),
             ],
             task=task,
+            response_format=response_format,
         )
         latency_ms = (time.perf_counter() - started) * 1000
         usage = response.usage
@@ -397,10 +431,16 @@ class SimulatedReviewTransport:
                     ),
                 }
             )
-        content = "not-json" if self.malformed_call == self.calls else json.dumps(
-            {"judgments": judgments}
+        content = (
+            "not-json"
+            if self.malformed_call == self.calls
+            else json.dumps({"judgments": judgments})
         )
-        model = "unexpected/reviewer" if self.identity_drift_call == self.calls else self.model
+        model = (
+            "unexpected/reviewer"
+            if self.identity_drift_call == self.calls
+            else self.model
+        )
         return RawCall(
             content=content,
             provider_model=model,
@@ -427,7 +467,7 @@ def _bindings(assets: dict[str, Any]) -> dict[str, Any]:
 def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
     return {
         "schema_version": 1,
-        "run_type": INSTRUMENT_ID,
+        "run_type": assets["instrument"]["instrument_id"],
         "status": "running",
         "simulation": simulation,
         "bindings": _bindings(assets),
@@ -451,7 +491,9 @@ def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any
     }
 
 
-def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
+def _load_resume(
+    path: Path, assets: dict[str, Any], *, simulation: bool
+) -> dict[str, Any]:
     state = _load_json(path)
     if state.get("status") != "running":
         raise ReviewRunnerError("only a running review checkpoint may resume")
@@ -491,14 +533,20 @@ async def _safe_call(
     safety = instrument["execution_safety"]
     accounting = state["accounting"]
     reservation_per_call = safety["maximum_reserved_cost_usd"] / safety["maximum_calls"]
-    if accounting["external_cost_usd"] + reservation_per_call > safety["maximum_cost_usd"]:
+    if (
+        accounting["external_cost_usd"] + reservation_per_call
+        > safety["maximum_cost_usd"]
+    ):
         state["status"] = "invalid-execution"
         state["invalid_reason"] = "cost-reservation-would-exceed-ceiling"
         _checkpoint(output_path, state)
         return {"status": "budget-stop", "value": None, "call": None}
     if accounting["calls_attempted"] >= safety["maximum_calls"]:
         raise ReviewRunnerError("review provider-call limit reached")
-    if stop_after_calls is not None and accounting["calls_attempted"] >= stop_after_calls:
+    if (
+        stop_after_calls is not None
+        and accounting["calls_attempted"] >= stop_after_calls
+    ):
         _checkpoint(output_path, state)
         raise PlannedInterruption("planned interruption after durable checkpoint")
     expected_ids = {item["item_id"] for item in items}
@@ -568,7 +616,9 @@ async def _safe_call(
     }
 
 
-def _sensitivity_passed(packet: dict[str, Any], judgments: list[dict[str, Any]]) -> bool:
+def _sensitivity_passed(
+    packet: dict[str, Any], judgments: list[dict[str, Any]]
+) -> bool:
     verdicts = {judgment["item_id"]: judgment["verdict"] for judgment in judgments}
     return all(
         (
@@ -580,7 +630,9 @@ def _sensitivity_passed(packet: dict[str, Any], judgments: list[dict[str, Any]])
     )
 
 
-def _priority_packet(packet: dict[str, Any], case_ids: list[str]) -> list[dict[str, Any]]:
+def _priority_packet(
+    packet: dict[str, Any], case_ids: list[str]
+) -> list[dict[str, Any]]:
     by_id = {
         item["item_id"]: item
         for batch in packet["review_batches"]
@@ -657,7 +709,12 @@ async def execute(
         if state["status"] != "running":
             return state
 
-    summary = validate_judgments(packet, state["judgments"], simulation=simulation)
+    summary = validate_judgments(
+        packet,
+        state["judgments"],
+        simulation=simulation,
+        instrument=instrument,
+    )
     summary.update(
         {
             "calls_attempted": state["accounting"]["calls_attempted"],
@@ -683,9 +740,7 @@ async def execute(
     )
     summary["status"] = state["status"]
     state["summary"] = summary
-    state["priority_packet"] = _priority_packet(
-        packet, summary["priority_case_ids"]
-    )
+    state["priority_packet"] = _priority_packet(packet, summary["priority_case_ids"])
     _checkpoint(output_path, state)
     return state
 
@@ -724,18 +779,28 @@ def _live_metadata_failures(
     if model is None:
         return ["reviewer-model-missing"]
     pricing = model.get("pricing", {})
-    if float(pricing.get("prompt", -1)) * 1_000_000 != safety[
-        "pricing_usd_per_million_input_tokens"
-    ]:
+    if (
+        float(pricing.get("prompt", -1)) * 1_000_000
+        != safety["pricing_usd_per_million_input_tokens"]
+    ):
         failures.append("reviewer-input-price-drift")
-    if float(pricing.get("completion", -1)) * 1_000_000 != safety[
-        "pricing_usd_per_million_output_tokens"
-    ]:
+    if (
+        float(pricing.get("completion", -1)) * 1_000_000
+        != safety["pricing_usd_per_million_output_tokens"]
+    ):
         failures.append("reviewer-output-price-drift")
-    if int(model.get("context_length", 0)) < safety["max_input_tokens_per_call"]:
+    expected_context = safety.get("provider_context_window_tokens")
+    actual_model_context = int(model.get("context_length", 0))
+    if (expected_context is not None and actual_model_context != expected_context) or (
+        expected_context is None
+        and actual_model_context < safety["max_input_tokens_per_call"]
+    ):
         failures.append("reviewer-context-limit-drift")
     parameters = set(model.get("supported_parameters", []))
-    if not {"max_tokens", "response_format", "temperature"}.issubset(parameters):
+    required_parameters = {"max_tokens", "response_format", "temperature"}
+    if safety.get("response_format_mode") == "json-schema-strict":
+        required_parameters.add("structured_outputs")
+    if not required_parameters.issubset(parameters):
         failures.append("reviewer-required-parameters-missing")
     endpoints = live.get("endpoints", {}).get("data", {}).get("endpoints", [])
     active_mistral = [
@@ -745,20 +810,48 @@ def _live_metadata_failures(
     ]
     if not active_mistral:
         failures.append("mistral-endpoint-unavailable")
-    elif not any(
-        float(endpoint.get("pricing", {}).get("prompt", -1)) * 1_000_000
-        == safety["pricing_usd_per_million_input_tokens"]
-        and float(endpoint.get("pricing", {}).get("completion", -1)) * 1_000_000
-        == safety["pricing_usd_per_million_output_tokens"]
+    price_matching_mistral = [
+        endpoint
         for endpoint in active_mistral
-    ):
+        if (
+            float(endpoint.get("pricing", {}).get("prompt", -1)) * 1_000_000
+            == safety["pricing_usd_per_million_input_tokens"]
+            and float(endpoint.get("pricing", {}).get("completion", -1)) * 1_000_000
+            == safety["pricing_usd_per_million_output_tokens"]
+        )
+    ]
+    if active_mistral and not price_matching_mistral:
         failures.append("mistral-endpoint-price-drift")
+    matching_mistral = [
+        endpoint
+        for endpoint in price_matching_mistral
+        if expected_context is None
+        or int(endpoint.get("context_length", 0)) == expected_context
+    ]
+    if price_matching_mistral and not matching_mistral:
+        failures.append("mistral-endpoint-context-drift")
+    if safety.get("response_format_mode") == "json-schema-strict" and not any(
+        "structured_outputs" in endpoint.get("supported_parameters", [])
+        for endpoint in matching_mistral
+    ):
+        failures.append("mistral-structured-outputs-missing")
     return failures
 
 
+def _default_output_path(instrument: dict[str, Any], *, simulation: bool) -> Path:
+    raw_path = ROOT / instrument["execution_safety"]["runner"]["raw_output_path"]
+    if not simulation:
+        return raw_path
+    return raw_path.with_name(f"{raw_path.stem}-simulation{raw_path.suffix}")
+
+
 def _metadata_age_hours(instrument: dict[str, Any], now: datetime) -> float:
-    verified = datetime.fromisoformat(instrument["execution_safety"]["reviewer_verified_at"])
-    return (now.astimezone(timezone.utc) - verified.astimezone(timezone.utc)).total_seconds() / 3600
+    verified = datetime.fromisoformat(
+        instrument["execution_safety"]["reviewer_verified_at"]
+    )
+    return (
+        now.astimezone(timezone.utc) - verified.astimezone(timezone.utc)
+    ).total_seconds() / 3600
 
 
 def build_preflight(
@@ -769,6 +862,7 @@ def build_preflight(
     now: datetime | None = None,
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
+    instrument_id = instrument["instrument_id"]
     safety = instrument["execution_safety"]
     current = now or datetime.now(timezone.utc)
     age_hours = _metadata_age_hours(instrument, current)
@@ -787,7 +881,7 @@ def build_preflight(
     credential_present = bool(os.getenv("OPENROUTER_API_KEY", "").strip())
     authorized = safety["provider_execution_authorized"] is True
     frozen = instrument["status"] == "frozen-pending-execution"
-    bounded = INSTRUMENT_ID in BOUNDED_PILOT_AUTHORIZATIONS
+    bounded = instrument_id in BOUNDED_PILOT_AUTHORIZATIONS
     blockers = []
     if not authorized:
         blockers.append("provider-review-not-authorized")
@@ -814,8 +908,8 @@ def build_preflight(
     else:
         status = "ready" if not blockers else "blocked-preflight"
     return {
-        "run_type": f"{INSTRUMENT_ID}-preflight",
-        "instrument_id": INSTRUMENT_ID,
+        "run_type": f"{instrument_id}-preflight",
+        "instrument_id": instrument_id,
         "status": status,
         "blockers": blockers,
         "provider_execution_authorized": authorized,
@@ -830,7 +924,7 @@ def build_preflight(
         "metadata_fresh": metadata_fresh,
         "live_provider_match_checked": live_metadata is not None,
         "live_provider_failures": live_failures,
-        "planned_calls": 13,
+        "planned_calls": safety["maximum_calls"],
         "maximum_planned_input_tokens": maximum_planned_input_tokens,
         "maximum_reserved_cost_usd": safety["maximum_reserved_cost_usd"],
         "maximum_cost_usd": safety["maximum_cost_usd"],
@@ -862,15 +956,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
-    if sum(
-        (
-            arguments.validate,
-            arguments.preflight,
-            arguments.preflight_live,
-            arguments.simulate,
-            arguments.execute,
+    if (
+        sum(
+            (
+                arguments.validate,
+                arguments.preflight,
+                arguments.preflight_live,
+                arguments.simulate,
+                arguments.execute,
+            )
         )
-    ) > 1:
+        > 1
+    ):
         parser.error("choose one validation, preflight, simulation, or execution mode")
     if arguments.resume and not (arguments.simulate or arguments.execute):
         parser.error("--resume requires --simulate or --execute")
@@ -881,8 +978,8 @@ def main() -> int:
     arguments = parse_args()
     load_dotenv(ROOT / ".env", override=False)
     assets = load_assets(arguments.instrument)
-    output_path = arguments.output or (
-        DEFAULT_SIMULATION_OUTPUT if arguments.simulate else DEFAULT_OUTPUT
+    output_path = arguments.output or _default_output_path(
+        assets["instrument"], simulation=arguments.simulate
     )
     if arguments.validate:
         print(
@@ -890,7 +987,9 @@ def main() -> int:
                 {
                     **validate_review_packet(assets["packet"], assets["instrument"]),
                     "runner_status": "validated-build-only",
-                    "planned_calls": 13,
+                    "planned_calls": assets["instrument"]["execution_safety"][
+                        "maximum_calls"
+                    ],
                     "provider_or_model_calls": 0,
                 },
                 indent=2,
@@ -936,7 +1035,7 @@ def main() -> int:
         if preflight["status"] != "ready":
             print(json.dumps(preflight, indent=2, sort_keys=True))
             return 2
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+        require_bounded_pilot_operation_allowed(assets["instrument"]["instrument_id"])
         result = asyncio.run(
             execute(
                 assets,

@@ -34,12 +34,8 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_evidence_sufficiency_v2_decision_draft.py": (
             "dataset_generation",
         ),
-        "scripts/build_factual_qa_v3_10000_blueprints.py": (
-            "dataset_generation",
-        ),
-        "scripts/build_factual_qa_v3_10000_truth_packages.py": (
-            "dataset_generation",
-        ),
+        "scripts/build_factual_qa_v3_10000_blueprints.py": ("dataset_generation",),
+        "scripts/build_factual_qa_v3_10000_truth_packages.py": ("dataset_generation",),
         "scripts/build_generator_qualification_dataset.py": ("dataset_generation",),
         "scripts/build_it5002_rapid_dataset.py": (
             "dataset_generation",
