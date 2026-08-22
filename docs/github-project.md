@@ -49,10 +49,10 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve invalid and revoked reviews 002 and 003, resolve 003's
-   authenticated-key inference rejection, and select the first production
-   answerability gate only after a new independently authorized review and all
-   later gates pass.
+1. #105 — preserve invalid and revoked reviews 002 and 003; keep native
+   OpenRouter review 004 provider-unauthorized until a separate decision; and
+   select the first production answerability gate only after that review and
+   all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #110 — follow completed #87 by designing, but not authorizing, a separate

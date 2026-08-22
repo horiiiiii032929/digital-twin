@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "instrument_id": "evidence-sufficiency-v2-independent-review-004",
+  "status": "reviewer-bound-provider-unauthorized",
+  "issue": 105,
+  "predecessor": "evidence-sufficiency-v2-independent-review-003",
+  "decision_dataset": {
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+    "path": "research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_001.json",
+    "content_sha256": "7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023",
+    "case_count": 120,
+    "opened_for_candidate_evaluation": false,
+    "frozen": false
+  },
+  "review_packet": {
+    "packet_id": "evidence-sufficiency-v2-independent-review-packet-004",
+    "expected_content_sha256": "75fc54d28a708df7a36150f0519db6eb7429b6e625ebbde7feceecfa817f8fbd",
+    "review_case_count": 120,
+    "batch_size": 10,
+    "batch_count": 12,
+    "sensitivity_clean_count": 6,
+    "sensitivity_defect_count": 6,
+    "priority_packet_max": 12
+  },
+  "review_contract": {
+    "role": "independent-advisory-data-quality-review",
+    "authoritative_ground_truth_owner": "deterministic-source-linked-draft",
+    "reviewer_can_override_ground_truth": false,
+    "dimensions": [
+      "question-naturalness",
+      "question-answerability",
+      "action-correctness",
+      "claim-support",
+      "evidence-exactness",
+      "course-and-version-boundary",
+      "boundary-reason-correctness",
+      "modality-representation-adequacy"
+    ],
+    "verdicts": ["approve", "revise", "escalate"],
+    "required_response_fields": [
+      "item_id",
+      "verdict",
+      "failed_dimensions",
+      "reason",
+      "suggested_correction"
+    ],
+    "reason_minimum_characters": 20,
+    "suggested_correction_required_for": ["revise"]
+  },
+  "quality_gates": {
+    "response_contract_valid_rate_min": 1.0,
+    "sensitivity_clean_specificity_min": 1.0,
+    "sensitivity_defect_detection_min": 1.0,
+    "review_case_coverage_min": 1.0,
+    "unresolved_case_count_max": 0,
+    "unreviewed_case_count_max": 0,
+    "duplicate_judgment_count_max": 0,
+    "ground_truth_override_count_max": 0,
+    "priority_packet_count_max": 12
+  },
+  "execution_safety": {
+    "provider_execution_authorized": false,
+    "reviewer_provider": "openrouter",
+    "reviewer_model": "mistralai/mistral-small-2603",
+    "reviewer_litellm_model": "openrouter/mistralai/mistral-small-2603",
+    "reviewer_transport": "openrouter-native-chat-completions-v1",
+    "reviewer_api_url": "https://openrouter.ai/api/v1/chat/completions",
+    "reviewer_verified_at": "2026-08-22T17:32:58+08:00",
+    "metadata_maximum_age_hours": 24,
+    "metadata_source": "https://openrouter.ai/api/v1/models",
+    "endpoint_metadata_source": "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints",
+    "chat_api_source": "https://openrouter.ai/docs/api/api-reference/chat/send-chat-completion-request",
+    "structured_output_source": "https://openrouter.ai/docs/guides/features/structured-outputs",
+    "router_metadata_source": "https://openrouter.ai/docs/guides/features/router-metadata",
+    "provider_policy_source": "https://openrouter.ai/providers",
+    "provider_context_window_tokens": 262144,
+    "credential_environment_variable": "OPENROUTER_API_KEY",
+    "temperature": 0,
+    "timeout_seconds": 120,
+    "max_input_tokens_per_call": 20000,
+    "max_output_tokens_per_call": 4000,
+    "pricing_usd_per_million_input_tokens": 0.15,
+    "pricing_usd_per_million_output_tokens": 0.6,
+    "maximum_reserved_cost_usd": 0.0702,
+    "maximum_cost_usd": 0.5,
+    "fallback_routing_allowed": false,
+    "response_format_mode": "json-schema-strict",
+    "provider_routing": {
+      "order": ["Mistral"],
+      "allow_fallbacks": false,
+      "require_parameters": true,
+      "data_collection": "allow",
+      "zdr": false
+    },
+    "runner": {
+      "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
+      "sensitivity_first": true,
+      "atomic_checkpoints": true,
+      "resume_requires_exact_bindings": true,
+      "preserve_malformed_response_content": true,
+      "preserve_provider_error_details": true,
+      "request_router_metadata": true,
+      "raw_output_path": "reports/generated/evidence-sufficiency-v2-independent-review-004.json"
+    },
+    "provider_policy": {
+      "trains_on_prompts": false,
+      "retention": "30 day retention",
+      "data_boundary": "synthetic-public-evaluation-only"
+    },
+    "retries": 0,
+    "maximum_calls": 13,
+    "private_source_execution_authorized": false,
+    "candidate_evaluation_authorized": false,
+    "automatic_dataset_freeze": false,
+    "automatic_ground_truth_mutation": false,
+    "gemma_allowed": false,
+    "claude_allowed": false
+  },
+  "decision_rule": {
+    "all_review_gates_pass": "Produce a bounded priority packet and require a separately recorded no-call adjudication before freezing the corrected dataset.",
+    "any_sensitivity_gate_fails": "Reject the review result as unreliable; do not use its case judgments.",
+    "any_dataset_defect_found": "Correct the deterministic draft, assign a new content hash, and repeat independent review under a successor review ID.",
+    "authorize_provider_execution": false,
+    "authorize_dataset_freeze": false,
+    "authorize_candidate_evaluation": false
+  }
+}

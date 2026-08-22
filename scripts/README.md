@@ -88,6 +88,14 @@ Current utilities:
   command is now fail-closed because the one-time `003` authorization is revoked;
   all dataset-freeze, candidate-evaluation, private-source, and later-stage
   execution remains blocked.
+  Successor `004` removes the LiteLLM wrapper from this review path and sends the
+  documented OpenRouter chat-completions payload directly. It opts into router
+  metadata and preserves sanitized HTTP status, request ID, generation ID,
+  error code/message, and routing attempts without recording credentials. Run
+  `npm run verify:evidence-sufficiency-v2-review-004`,
+  `npm run simulate:evidence-sufficiency-v2-review-004`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-004`. No paid `004`
+  command or authorization exists.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

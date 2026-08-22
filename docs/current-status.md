@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 487 executable or execution-affecting
+the current branch extends it to all 488 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -234,11 +234,18 @@ so the key existed and authenticated; the precise inference-path rejection was
 not exposed by the frozen adapter. Attempt 003 is therefore invalid operational
 evidence, not a reviewer- or dataset-quality result. Its authorization is
 revoked. The draft remains unfrozen and unopened; no exact evidence-sufficiency
-verifier is selected, and candidate execution remains unauthorized. The runner
-successor build is **Go Deeper**, while the product decision remains **Refine**
-with no selected implementation. Because its source tree differs from V8, the
-V8 image identities are historical evidence; the current source has no image
-or publication claim.
+verifier is selected, and candidate execution remains unauthorized.
+Provider-unauthorized successor `evidence-sufficiency-v2-independent-review-004`
+now calls OpenRouter's official native chat-completions API rather than routing
+inference through the opaque wrapper. It preserves sanitized upstream status,
+message, request and generation IDs, and routing attempts; its exact
+13-call/132-judgment network-free simulation, failure regressions, and clean
+live no-call preflight passed. The preflight is blocked only by its three
+deliberate authorization locks. No paid review 004 call has occurred. The
+native runner build is **Go Deeper**, while the product decision remains
+**Refine** with no selected implementation. Because its source tree differs
+from V8, the V8 image identities are historical evidence; the current source
+has no image or publication claim.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted

@@ -6,10 +6,17 @@ from datetime import datetime, timedelta
 import json
 from pathlib import Path
 
+import httpx
 import pytest
 
 import scripts.run_evidence_sufficiency_v2_independent_review as runner
 from scripts.run_factual_qa_v3_scale_pilot_100 import PlannedInterruption
+
+
+INSTRUMENT_004_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_004.json"
+)
 
 
 @pytest.fixture
@@ -93,6 +100,156 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     assert instrument["status"] == "invalid-execution-authorization-revoked"
     assert safety["provider_execution_authorized"] is False
     assert instrument["decision_rule"]["authorize_provider_execution"] is False
+
+
+def test_native_openrouter_successor_is_valid_and_unauthorized() -> None:
+    assets = runner.load_assets(INSTRUMENT_004_PATH)
+    instrument = assets["instrument"]
+    safety = instrument["execution_safety"]
+
+    assert instrument["instrument_id"].endswith("-004")
+    assert instrument["status"] == "reviewer-bound-provider-unauthorized"
+    assert safety["provider_execution_authorized"] is False
+    assert safety["reviewer_transport"] == runner.NATIVE_OPENROUTER_TRANSPORT
+    assert safety["reviewer_api_url"] == runner.OPENROUTER_CHAT_URL
+    assert assets["packet"]["content_sha256"] == (
+        "75fc54d28a708df7a36150f0519db6eb7429b6e625ebbde7feceecfa817f8fbd"
+    )
+
+
+@pytest.mark.asyncio
+async def test_native_openrouter_transport_matches_official_request_contract(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_004_PATH)
+    binding = runner._provider_binding(assets["instrument"])
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return httpx.Response(
+            200,
+            headers={
+                "X-Request-Id": "req-synthetic",
+                "X-Generation-Id": "gen-synthetic",
+            },
+            json={
+                "id": "gen-synthetic",
+                "model": "mistralai/mistral-small-2603",
+                "system_fingerprint": "fp-synthetic",
+                "choices": [{"message": {"content": '{"judgments": []}'}}],
+                "usage": {
+                    "prompt_tokens": 12,
+                    "completion_tokens": 3,
+                    "cost": 0.0000036,
+                },
+                "openrouter_metadata": {
+                    "requested": "mistralai/mistral-small-2603",
+                    "strategy": "direct",
+                    "attempt": 1,
+                    "endpoints": {
+                        "available": [{"provider": "Mistral", "selected": True}]
+                    },
+                },
+            },
+            request=httpx.Request("POST", runner.OPENROUTER_CHAT_URL),
+        )
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "synthetic-test-key")
+    transport = runner.NativeOpenRouterReviewTransport(binding, post=post)
+    schema = runner._response_schema(1)
+
+    raw = await transport.call(
+        system="Synthetic system message.",
+        prompt='{"items": []}',
+        task="synthetic_review",
+        schema=schema,
+    )
+
+    assert captured["url"] == runner.OPENROUTER_CHAT_URL
+    assert captured["headers"]["Authorization"] == "Bearer synthetic-test-key"
+    assert captured["headers"]["X-OpenRouter-Metadata"] == "enabled"
+    assert captured["json"]["model"] == "mistralai/mistral-small-2603"
+    assert captured["json"]["provider"] == {
+        "order": ["Mistral"],
+        "allow_fallbacks": False,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert captured["json"]["response_format"] == {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "evidence_sufficiency_review_1",
+            "strict": True,
+            "schema": schema,
+        },
+    }
+    assert raw.provider_model == "mistralai/mistral-small-2603"
+    assert raw.approximate_cost_usd == 0.0000036
+    assert raw.request_id == "req-synthetic"
+    assert raw.generation_id == "gen-synthetic"
+    assert raw.openrouter_metadata["attempt"] == 1
+
+
+@pytest.mark.asyncio
+async def test_native_openrouter_error_is_preserved_without_credentials(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_004_PATH)
+    binding = runner._provider_binding(assets["instrument"])
+
+    async def post(**kwargs):
+        assert kwargs["headers"]["Authorization"] == "Bearer synthetic-test-key"
+        return httpx.Response(
+            401,
+            headers={
+                "X-Request-Id": "req-error",
+                "X-Generation-Id": "gen-error",
+            },
+            json={
+                "error": {
+                    "code": 401,
+                    "message": "Upstream Mistral authentication failed",
+                },
+                "openrouter_metadata": {
+                    "requested": "mistralai/mistral-small-2603",
+                    "attempt": 1,
+                    "attempts": [{"provider": "Mistral", "status": 401}],
+                },
+            },
+            request=httpx.Request("POST", runner.OPENROUTER_CHAT_URL),
+        )
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "synthetic-test-key")
+    output = tmp_path / "native-error.json"
+    result = await runner.execute(
+        assets,
+        transport=runner.NativeOpenRouterReviewTransport(binding, post=post),
+        output_path=output,
+        simulation=False,
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["accounting"]["calls_attempted"] == 1
+    assert result["accounting"]["calls_with_provider_response"] == 0
+    assert result["sensitivity_outcome"] == {
+        "status": "provider-error",
+        "error_type": "OpenRouterRequestError",
+        "value": None,
+        "call": None,
+        "error_code": "401",
+        "error_detail": "Upstream Mistral authentication failed",
+        "http_status": 401,
+        "request_id": "req-error",
+        "generation_id": "gen-error",
+        "openrouter_metadata": {
+            "requested": "mistralai/mistral-small-2603",
+            "attempt": 1,
+            "attempts": [{"provider": "Mistral", "status": 401}],
+        },
+    }
+    assert "synthetic-test-key" not in output.read_text(encoding="utf-8")
 
 
 def test_provider_transport_disables_retries_and_fallbacks(assets: dict) -> None:
