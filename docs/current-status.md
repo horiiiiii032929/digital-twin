@@ -240,14 +240,19 @@ OpenRouter's official native chat-completions API rather than routing
 inference through the opaque wrapper. It preserves sanitized upstream status,
 message, request and generation IDs, and routing attempts; its exact
 13-call/132-judgment network-free simulation, failure regressions, and clean
-live no-call preflight passed. The researcher then explicitly authorized
-exactly review 004; its provider flag, frozen status, and bounded allowlist
-entry are correlated for one run of at most 13 synthetic-public calls under the
-USD 0.50 emergency ceiling. No paid review 004 call had occurred at this
-authorization checkpoint. The native runner build is **Go Deeper**, while the
-product decision remains **Refine** with no selected implementation. Because
-its source tree differs from V8, the V8 image identities are historical
-evidence; the current source has no image or publication claim.
+live no-call preflight passed. After separate authorization, its first native
+sensitivity request reached OpenRouter routing but produced no provider
+response: native router metadata recorded two first-party Mistral endpoint
+attempts with statuses 400 and 401, followed by HTTP 401 `Provider returned
+error`. All 12 bulk batches were suppressed. The same credential authenticated
+against OpenRouter's current-key endpoint with HTTP 200 immediately afterward.
+No judgment, reported token, or cost exists, so review 004 is invalid
+operational evidence and supports no reviewer- or dataset-quality conclusion.
+Authorization is revoked. The native runner build remains **Go Deeper**, while
+the exact OpenRouter/Mistral execution binding is **Drop** and the product
+decision remains **Refine** with no selected implementation. Because its source
+tree differs from V8, the V8 image identities are historical evidence; the
+current source has no image or publication claim.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
