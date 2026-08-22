@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "1d27cf54eb9ad45db92651c2ce80c3339ced3c9fd6d05045d71720e5280eaa5c",
+      "sha256": "488d9118bf7d6160ed0401cd0fae216a80f333f0cf77d5529fe9f6b1c71a8bcc",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms separate packet validation, network-free runner simulation, offline/live preflight, and fail-closed execution entrypoints; provider execution remains unauthorized and cannot bypass the repository freeze.",
+      "evidence": "Command review confirms separate review-004 validation, network-free simulation, and live no-call preflight commands while exposing no paid 004 execution shortcut; all provider execution remains unauthorized and cannot bypass the repository freeze.",
       "findings": []
     },
     {
@@ -2524,12 +2524,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Manual fail-closed review plus focused tests verify historical 002 and prospective 003 states, strict response-format and endpoint bindings, correlated provider authorization without later-stage self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
+      "evidence": "Manual fail-closed review plus focused tests verify historical 002/003 and prospective 004 states, strict response-format, native OpenRouter endpoint bindings, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
       "findings": [],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "sha256": "7b7ea3db77ada3a78864c456163c1599875bafd0a07803f8cb98b9575754e781"
+      "sha256": "2a3cb691294f023abbfb8c08b2a58e53fb1ee683f14a80ffc0d344294d00cae9"
     },
     {
       "audit_status": "audited",
@@ -2667,12 +2667,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-      "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm endpoint-qualified strict JSON Schema requests, sensitivity-first stopping, exact model/routing identity, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, preservation of malformed content and parser detail, dynamic exclusive output, and absent execution authority.",
+      "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm the official OpenRouter chat-completions payload, bearer authentication, top-level provider routing, strict JSON Schema, router-metadata opt-in, sanitized native HTTP/request/generation diagnostics, sensitivity-first stopping, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
       "findings": [],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "sha256": "4131f87b10049312974ed54d7ea119070a9918c9c5144b85187ee563b31e42dc"
+      "sha256": "b62203a3926635a0db922e9860dcf9f056cb1e098691c657c80d8173fe30b685"
     },
     {
       "audit_status": "audited",
@@ -5120,12 +5120,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-      "evidence": "Focused regressions cover the exact revoked 003 contract and immutable 002 compatibility, strict per-batch JSON Schema, sensitivity stop, malformed-content preservation, provider/identity/cost failures, prior accounting, interruption/resume, all three authorization locks, endpoint capability/context freshness, price drift, and output exclusivity.",
+      "evidence": "Focused regressions cover revoked 003 and immutable 002 compatibility plus unauthorized 004, the exact official OpenRouter payload, router metadata and request IDs, sanitized upstream 401 preservation without credential leakage, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
       "findings": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "sha256": "14156eece7369a73ea77873748646cceec0b410e676da3b01f572cc68cea5d9c"
+      "sha256": "08ef6c88e9162560d35a811554a1b3d3057372b55b7e9684f550d70c71d4b8e2"
     },
     {
       "audit_status": "audited",
@@ -5356,6 +5356,17 @@
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
       "evidence": "Manual result review and focused regressions preserve the invalid 003 attempt after one authentication-class failure before a provider response, revoke its authorization, and retain the immutable packet, exact bindings, strict schema, zero-retry evidence, and closed dataset, candidate, and private-source permissions.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_004.json",
+      "sha256": "f06ccb89084501e9c90e9b88efeb563470a0f224a49a1f117f8540da6dae957c",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency-review",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-data-quality-review",
+      "evidence": "Manual build-only review and focused regressions bind the unchanged synthetic-public decision draft to a new packet and native official OpenRouter chat transport with strict schema, router metadata, preserved sanitized provider failures, zero retries, no fallbacks, and every provider, dataset-freeze, candidate, private-source, and deployment permission false.",
       "findings": []
     }
   ],

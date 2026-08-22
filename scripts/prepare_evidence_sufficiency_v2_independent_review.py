@@ -45,6 +45,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-004": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -185,7 +191,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise IndependentReviewError("reviewer metadata or routing drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument_id.endswith("-003")
+        if instrument_id.endswith(("-003", "-004"))
         else "json-object-prompt-schema"
     )
     if (
@@ -193,7 +199,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         != expected_response_format
     ):
         raise IndependentReviewError("reviewer response format drifted")
-    if instrument_id.endswith("-003") and {
+    if instrument_id.endswith(("-003", "-004")) and {
         "endpoint_metadata_source": safety.get("endpoint_metadata_source"),
         "structured_output_source": safety.get("structured_output_source"),
         "provider_context_window_tokens": safety.get("provider_context_window_tokens"),
@@ -207,6 +213,18 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "provider_context_window_tokens": 262144,
     }:
         raise IndependentReviewError("reviewer endpoint metadata drifted")
+    if instrument_id.endswith("-004") and {
+        "reviewer_transport": safety.get("reviewer_transport"),
+        "reviewer_api_url": safety.get("reviewer_api_url"),
+        "router_metadata_source": safety.get("router_metadata_source"),
+    } != {
+        "reviewer_transport": "openrouter-native-chat-completions-v1",
+        "reviewer_api_url": "https://openrouter.ai/api/v1/chat/completions",
+        "router_metadata_source": (
+            "https://openrouter.ai/docs/guides/features/router-metadata"
+        ),
+    }:
+        raise IndependentReviewError("native OpenRouter binding drifted")
     decision_rule = instrument.get("decision_rule", {})
     if any(
         decision_rule.get(key) is not False

@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from collections.abc import Awaitable, Callable
 from copy import deepcopy
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import math
@@ -16,6 +18,7 @@ from typing import Any
 from urllib.request import urlopen
 
 from dotenv import load_dotenv
+import httpx
 
 from scripts.prepare_evidence_sufficiency_v2_independent_review import (
     RESPONSE_FIELDS,
@@ -58,6 +61,8 @@ DEFAULT_SIMULATION_OUTPUT = (
     "evidence-sufficiency-v2-independent-review-003-simulation.json"
 )
 INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-003"
+NATIVE_OPENROUTER_TRANSPORT = "openrouter-native-chat-completions-v1"
+OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_REGISTRY_URL = "https://openrouter.ai/api/v1/models"
 MODEL_ENDPOINTS_URL = (
     "https://openrouter.ai/api/v1/models/mistralai/mistral-small-2603/endpoints"
@@ -68,12 +73,55 @@ class ReviewRunnerError(ValueError):
     """Raised when the independent-review execution contract drifts."""
 
 
+@dataclass(frozen=True)
+class OpenRouterRawCall(RawCall):
+    """Raw call plus OpenRouter-native routing diagnostics."""
+
+    request_id: str | None = None
+    generation_id: str | None = None
+    openrouter_metadata: dict[str, Any] | None = None
+
+
+class OpenRouterRequestError(RuntimeError):
+    """Sanitized OpenRouter HTTP failure safe for ignored checkpoints."""
+
+    def __init__(
+        self,
+        *,
+        error_code: str,
+        error_message: str,
+        status_code: int | None = None,
+        request_id: str | None = None,
+        generation_id: str | None = None,
+        openrouter_metadata: dict[str, Any] | None = None,
+    ) -> None:
+        super().__init__(error_message)
+        self.error_code = error_code
+        self.error_message = error_message
+        self.status_code = status_code
+        self.request_id = request_id
+        self.generation_id = generation_id
+        self.openrouter_metadata = deepcopy(openrouter_metadata)
+
+    def record(self) -> dict[str, Any]:
+        return {
+            "error_code": self.error_code,
+            "error_detail": self.error_message,
+            "http_status": self.status_code,
+            "request_id": self.request_id,
+            "generation_id": self.generation_id,
+            "openrouter_metadata": deepcopy(self.openrouter_metadata),
+        }
+
+
 def _provider_binding(instrument: dict[str, Any]) -> dict[str, Any]:
     safety = instrument["execution_safety"]
     return {
         "provider": safety["reviewer_provider"],
         "provider_model": safety["reviewer_model"],
         "litellm_model": safety["reviewer_litellm_model"],
+        "transport": safety.get("reviewer_transport", "litellm-openrouter-v1"),
+        "api_url": safety.get("reviewer_api_url"),
         "provider_routing": deepcopy(safety["provider_routing"]),
         "timeout_seconds": safety["timeout_seconds"],
         "temperature": safety["temperature"],
@@ -123,8 +171,15 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "resume_requires_exact_bindings": True,
         "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
     }
-    if instrument["instrument_id"].endswith("-003"):
+    if instrument["instrument_id"].endswith(("-003", "-004")):
         expected_runner["preserve_malformed_response_content"] = True
+    if instrument["instrument_id"].endswith("-004"):
+        expected_runner.update(
+            {
+                "preserve_provider_error_details": True,
+                "request_router_metadata": True,
+            }
+        )
     if safety.get("runner") != expected_runner:
         raise ReviewRunnerError("review runner binding drifted")
     if safety["provider_routing"] != {
@@ -140,16 +195,24 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review model drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument["instrument_id"].endswith("-003")
+        if instrument["instrument_id"].endswith(("-003", "-004"))
         else "json-object-prompt-schema"
     )
     if binding["response_format_mode"] != expected_response_format:
         raise ReviewRunnerError("review response format drifted")
     if (
-        instrument["instrument_id"].endswith("-003")
+        instrument["instrument_id"].endswith(("-003", "-004"))
         and safety.get("provider_context_window_tokens") != 262144
     ):
         raise ReviewRunnerError("review provider context binding drifted")
+    if instrument["instrument_id"].endswith("-004") and {
+        "transport": binding["transport"],
+        "api_url": binding["api_url"],
+    } != {
+        "transport": NATIVE_OPENROUTER_TRANSPORT,
+        "api_url": OPENROUTER_CHAT_URL,
+    }:
+        raise ReviewRunnerError("native OpenRouter transport binding drifted")
     for field in (
         "timeout_seconds",
         "max_input_tokens",
@@ -375,6 +438,226 @@ class ProviderReviewTransport:
         )
 
 
+_OpenRouterPost = Callable[..., Awaitable[httpx.Response]]
+
+
+def _sanitized_text(value: Any, *, maximum_length: int = 2_000) -> str:
+    if not isinstance(value, str):
+        return "OpenRouter request failed without a textual message."
+    normalized = " ".join(value.split())
+    return normalized[:maximum_length] or "OpenRouter request failed."
+
+
+def _sanitized_router_metadata(value: Any) -> dict[str, Any] | None:
+    if not isinstance(value, dict):
+        return None
+    allowed = {
+        "requested",
+        "strategy",
+        "region",
+        "summary",
+        "attempt",
+        "is_byok",
+        "endpoints",
+        "attempts",
+        "pipeline",
+    }
+    return {key: deepcopy(value[key]) for key in allowed if key in value}
+
+
+def _non_negative_int(value: Any, field: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise OpenRouterRequestError(
+            error_code="malformed-usage",
+            error_message=f"OpenRouter response contained invalid {field}.",
+        )
+    return value
+
+
+class NativeOpenRouterReviewTransport:
+    """Direct official OpenRouter chat transport with observable failures."""
+
+    def __init__(
+        self,
+        binding: dict[str, Any],
+        *,
+        post: _OpenRouterPost | None = None,
+    ) -> None:
+        self.binding = binding
+        self._post = post or self._post_with_httpx
+
+    async def _post_with_httpx(self, **kwargs: Any) -> httpx.Response:
+        timeout = httpx.Timeout(self.binding["timeout_seconds"])
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            return await client.post(**kwargs)
+
+    async def call(
+        self,
+        *,
+        system: str,
+        prompt: str,
+        task: str,
+        schema: dict[str, Any],
+    ) -> RawCall:
+        api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+        if not api_key:
+            raise OpenRouterRequestError(
+                error_code="credential-missing",
+                error_message="OPENROUTER_API_KEY is not available.",
+            )
+        request = "\n".join(
+            (prompt, "OUTPUT JSON SCHEMA:", json.dumps(schema, sort_keys=True))
+        )
+        payload = {
+            "model": self.binding["provider_model"],
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": request},
+            ],
+            "temperature": self.binding["temperature"],
+            "max_tokens": self.binding["max_output_tokens"],
+            "response_format": _response_format_for_call(self.binding, schema),
+            "provider": deepcopy(self.binding["provider_routing"]),
+            "usage": {"include": True},
+            "metadata": {"task": task},
+        }
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://github.com/horiiiiii032929/digital-twin",
+            "X-Title": "Course Digital Twin evaluation",
+            "X-OpenRouter-Metadata": "enabled",
+        }
+        started = time.perf_counter()
+        try:
+            response = await self._post(
+                url=self.binding["api_url"],
+                headers=headers,
+                json=payload,
+            )
+        except httpx.TimeoutException as error:
+            raise OpenRouterRequestError(
+                error_code="timeout",
+                error_message="OpenRouter request timed out.",
+            ) from error
+        except httpx.HTTPError as error:
+            raise OpenRouterRequestError(
+                error_code="network-error",
+                error_message="OpenRouter network request failed.",
+            ) from error
+        latency_ms = (time.perf_counter() - started) * 1000
+        request_id = response.headers.get("x-request-id")
+        generation_id = response.headers.get("x-generation-id")
+        try:
+            value = response.json()
+        except ValueError as error:
+            raise OpenRouterRequestError(
+                error_code="non-json-response",
+                error_message="OpenRouter returned a non-JSON response.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+            ) from error
+        if not isinstance(value, dict):
+            raise OpenRouterRequestError(
+                error_code="invalid-response-root",
+                error_message="OpenRouter response root was not an object.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+            )
+        router_metadata = _sanitized_router_metadata(value.get("openrouter_metadata"))
+        error_value = value.get("error")
+        if response.is_error or error_value is not None:
+            error_object = error_value if isinstance(error_value, dict) else {}
+            raise OpenRouterRequestError(
+                error_code=str(error_object.get("code") or response.status_code),
+                error_message=_sanitized_text(error_object.get("message")),
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+                openrouter_metadata=router_metadata,
+            )
+        choices = value.get("choices")
+        if not isinstance(choices, list) or len(choices) != 1:
+            raise OpenRouterRequestError(
+                error_code="malformed-choices",
+                error_message="OpenRouter response did not contain exactly one choice.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+                openrouter_metadata=router_metadata,
+            )
+        message = choices[0].get("message") if isinstance(choices[0], dict) else None
+        content = message.get("content") if isinstance(message, dict) else None
+        if not isinstance(content, str) or not content.strip():
+            raise OpenRouterRequestError(
+                error_code="malformed-content",
+                error_message="OpenRouter response content was empty or invalid.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+                openrouter_metadata=router_metadata,
+            )
+        usage = value.get("usage") if isinstance(value.get("usage"), dict) else {}
+        input_tokens = _non_negative_int(usage.get("prompt_tokens", 0), "prompt_tokens")
+        output_tokens = _non_negative_int(
+            usage.get("completion_tokens", 0), "completion_tokens"
+        )
+        reported_cost = usage.get("cost")
+        if isinstance(reported_cost, bool) or not isinstance(
+            reported_cost, (int, float)
+        ):
+            reported_cost = (
+                input_tokens
+                * float(self.binding["pricing_usd_per_million_input_tokens"])
+                + output_tokens
+                * float(self.binding["pricing_usd_per_million_output_tokens"])
+            ) / 1_000_000
+        if not math.isfinite(float(reported_cost)) or float(reported_cost) < 0:
+            raise OpenRouterRequestError(
+                error_code="malformed-cost",
+                error_message="OpenRouter response contained invalid cost accounting.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+                openrouter_metadata=router_metadata,
+            )
+        provider_model = value.get("model")
+        if not isinstance(provider_model, str) or not provider_model.strip():
+            raise OpenRouterRequestError(
+                error_code="malformed-model",
+                error_message="OpenRouter response model identity was missing.",
+                status_code=response.status_code,
+                request_id=request_id,
+                generation_id=generation_id,
+                openrouter_metadata=router_metadata,
+            )
+        provider_revision = value.get("system_fingerprint")
+        return OpenRouterRawCall(
+            content=content,
+            provider_model=provider_model.strip(),
+            provider_revision=(
+                provider_revision.strip()
+                if isinstance(provider_revision, str) and provider_revision.strip()
+                else None
+            ),
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            approximate_cost_usd=float(reported_cost),
+            latency_ms=latency_ms,
+            request_id=request_id,
+            generation_id=generation_id,
+            openrouter_metadata=router_metadata,
+        )
+
+
+def _provider_transport(binding: dict[str, Any]) -> RawTransport:
+    if binding["transport"] == NATIVE_OPENROUTER_TRANSPORT:
+        return NativeOpenRouterReviewTransport(binding)
+    return ProviderReviewTransport(binding)
+
+
 class SimulatedReviewTransport:
     """Network-free reviewer double for checkpoint and failure testing."""
 
@@ -505,7 +788,7 @@ def _load_resume(
 
 
 def _call_record(raw: RawCall, binding: dict[str, Any]) -> dict[str, Any]:
-    return {
+    record = {
         "provider_model": raw.provider_model,
         "provider_revision": raw.provider_revision,
         "input_tokens": raw.input_tokens,
@@ -517,6 +800,15 @@ def _call_record(raw: RawCall, binding: dict[str, Any]) -> dict[str, Any]:
         "approximate_cost_usd": raw.approximate_cost_usd,
         "latency_ms": raw.latency_ms,
     }
+    if isinstance(raw, OpenRouterRawCall):
+        record.update(
+            {
+                "request_id": raw.request_id,
+                "generation_id": raw.generation_id,
+                "openrouter_metadata": deepcopy(raw.openrouter_metadata),
+            }
+        )
+    return record
 
 
 async def _safe_call(
@@ -566,12 +858,15 @@ async def _safe_call(
     except Exception as error:
         state["status"] = "invalid-execution"
         state["invalid_reason"] = "provider-error"
-        return {
+        outcome = {
             "status": "provider-error",
             "error_type": type(error).__name__,
             "value": None,
             "call": None,
         }
+        if isinstance(error, OpenRouterRequestError):
+            outcome.update(error.record())
+        return outcome
     accounting["calls_with_provider_response"] += 1
     accounting["input_tokens"] += raw.input_tokens
     accounting["output_tokens"] += raw.output_tokens
@@ -1039,9 +1334,7 @@ def main() -> int:
         result = asyncio.run(
             execute(
                 assets,
-                transport=ProviderReviewTransport(
-                    _provider_binding(assets["instrument"])
-                ),
+                transport=_provider_transport(_provider_binding(assets["instrument"])),
                 output_path=output_path,
                 simulation=False,
                 resume=arguments.resume,
