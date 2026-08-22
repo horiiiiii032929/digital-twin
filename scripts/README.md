@@ -119,6 +119,13 @@ Current utilities:
   attempt is invalid and revoked. The exact execute command now fails closed;
   all dataset-freeze, candidate-evaluation, private-source, and later execution
   remains blocked.
+  Successor `007` keeps the same GPT-5.4 mini snapshot and strict response
+  schema but removes nonessential reasoning and seed fields, permits
+  same-model OpenAI/Azure provider fallback, and uses a USD 1.50 emergency
+  ceiling. Run `npm run verify:evidence-sufficiency-v2-review-007`, `npm run
+  simulate:evidence-sufficiency-v2-review-007`, or `npm run
+  preflight-live:evidence-sufficiency-v2-review-007`. Paid execution remains
+  blocked pending a separate authorization checkpoint.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

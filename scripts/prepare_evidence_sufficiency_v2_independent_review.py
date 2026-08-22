@@ -63,6 +63,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-007": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -125,7 +131,6 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
             "independent-review decision authorization drifted"
         )
     required_false = {
-        "fallback_routing_allowed",
         "private_source_execution_authorized",
         "candidate_evaluation_authorized",
         "automatic_dataset_freeze",
@@ -135,6 +140,9 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     }
     if any(safety.get(key) is not False for key in required_false):
         raise IndependentReviewError("independent-review execution safety drifted")
+    expected_fallback = instrument_id.endswith("-007")
+    if safety.get("fallback_routing_allowed") is not expected_fallback:
+        raise IndependentReviewError("independent-review fallback policy drifted")
     if safety.get("retries") != 0 or safety.get("maximum_calls") != 13:
         raise IndependentReviewError("reviewer execution bounds drifted")
     if instrument_id.endswith("-001"):
@@ -156,6 +164,15 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "maximum_reserved_cost_usd": safety.get("maximum_reserved_cost_usd"),
     } != (
         {
+            "reviewer_provider": "openrouter",
+            "reviewer_model": "openai/gpt-5.4-mini",
+            "reviewer_litellm_model": "openrouter/openai/gpt-5.4-mini",
+            "credential_environment_variable": "OPENROUTER_API_KEY",
+            "maximum_cost_usd": 1.5,
+            "maximum_reserved_cost_usd": 0.858,
+        }
+        if instrument_id.endswith("-007")
+        else {
             "reviewer_provider": "openrouter",
             "reviewer_model": "openai/gpt-5.4-mini",
             "reviewer_litellm_model": "openrouter/openai/gpt-5.4-mini",
@@ -202,6 +219,31 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "provider_policy": safety.get("provider_policy"),
     } != (
         {
+            "metadata_maximum_age_hours": 24,
+            "metadata_source": "https://openrouter.ai/api/v1/models",
+            "provider_policy_source": "https://openrouter.ai/api/v1/providers",
+            "temperature": None,
+            "reasoning_effort": None,
+            "seed": None,
+            "max_input_tokens_per_call": 20000,
+            "max_output_tokens_per_call": 4000,
+            "pricing_usd_per_million_input_tokens": 1.5,
+            "pricing_usd_per_million_output_tokens": 9.0,
+            "provider_routing": {
+                "order": ["openai", "azure"],
+                "allow_fallbacks": True,
+                "require_parameters": True,
+                "data_collection": "allow",
+                "zdr": False,
+            },
+            "provider_policy": {
+                "trains_on_prompts": False,
+                "retention": "provider-policy-controlled",
+                "data_boundary": "synthetic-public-evaluation-only",
+            },
+        }
+        if instrument_id.endswith("-007")
+        else {
             "metadata_maximum_age_hours": 24,
             "metadata_source": "https://openrouter.ai/api/v1/models",
             "provider_policy_source": "https://openrouter.ai/api/v1/providers",
@@ -279,7 +321,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise IndependentReviewError("reviewer metadata or routing drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument_id.endswith(("-003", "-004", "-005", "-006"))
+        if instrument_id.endswith(("-003", "-004", "-005", "-006", "-007"))
         else "json-object-prompt-schema"
     )
     if (
@@ -287,7 +329,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         != expected_response_format
     ):
         raise IndependentReviewError("reviewer response format drifted")
-    if instrument_id.endswith(("-003", "-004", "-005", "-006")) and {
+    if instrument_id.endswith(("-003", "-004", "-005", "-006", "-007")) and {
         "endpoint_metadata_source": safety.get("endpoint_metadata_source"),
         "structured_output_source": safety.get("structured_output_source"),
         "provider_context_window_tokens": safety.get("provider_context_window_tokens"),
@@ -301,7 +343,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
             ),
             "provider_context_window_tokens": 400000,
         }
-        if instrument_id.endswith("-006")
+        if instrument_id.endswith(("-006", "-007"))
         else {
             "endpoint_metadata_source": (
                 "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints"
@@ -323,7 +365,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         }
     ):
         raise IndependentReviewError("reviewer endpoint metadata drifted")
-    if instrument_id.endswith(("-004", "-005", "-006")) and {
+    if instrument_id.endswith(("-004", "-005", "-006", "-007")) and {
         "reviewer_transport": safety.get("reviewer_transport"),
         "reviewer_api_url": safety.get("reviewer_api_url"),
         "router_metadata_source": safety.get("router_metadata_source"),

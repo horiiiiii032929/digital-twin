@@ -88,7 +88,11 @@ not require model spending or private data:
    standard endpoint and dated backend. Its separately authorized sensitivity
    request returned HTTP 400 before any provider response, judgment, reported
    token, or cost. Review 006 is invalid and revoked; do not retry this exact
-   binding or automatically fall back to review 005.
+   binding or automatically fall back to review 005. Review 007 keeps the same
+   GPT snapshot and strict schema but removes nonessential reasoning/seed
+   parameters, permits same-model OpenAI/Azure provider fallback, and raises
+   the emergency ceiling to USD 1.50. Its network-free simulation and live
+   metadata-only preflight pass; provider execution remains unauthorized.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -97,7 +101,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Choose a directly authenticated reviewer or a deterministic plus researcher audit after the invalid OpenRouter attempts | Researcher | Complete dataset review before selecting an answerability gate |
+| Separately authorize resilient same-model review 007 after its build checkpoint | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 

@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 490
+    "audited": 491
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 100,
+    "evaluation_configuration": 101,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 94
   },
-  "file_count": 490,
+  "file_count": 491,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1928bc9b5820cb4fe713e90719653d28aa17fd521cf27f6a031c91fd5786a80f",
+  "record_sha256": "94d6c7b09a814a4d358afdccb525b728830421798601bbd05d21cbbe0589ba8e",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Command review confirms historical review-005 commands remain reproducible while review-006 validation, simulation, live no-call preflight, and exact execution commands are separate; GPT-5.4 mini remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+        "evidence": "Command review confirms historical reviews remain reproducible while review-007 validation, simulation, live no-call preflight, and exact execution commands are separate; resilient GPT-5.4 mini review 007 remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "7a40a379286834fdfbee2b4d3bbe3b8f15331b13406b85905c60756abdc93509"
+      "sha256": "6f5ecdf41fdc95d8d39ce82a0dfd296c2563a528729468c907a02b50f4c799e5"
     },
     {
       "audit": {
@@ -1812,6 +1812,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_006.json",
       "risk": "high",
       "sha256": "730be867fe8718c477e4d5723ecf80195b9d471c2ede9955e5dc14b92e851e5f"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "Manual method-level review, official OpenRouter routing guidance, live endpoint metadata, focused tests, and a 13-call simulation preserve the GPT model snapshot and strict schema while allowing same-model OpenAI/Azure provider fallback, removing nonessential reasoning and seed fields, raising the bounded ceiling to USD 1.50, and keeping execution unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_007.json",
+      "risk": "high",
+      "sha256": "8834d028b308a135cc8a6380d3d1e4088f28282afa4940d65c968fbcf4a0786f"
     },
     {
       "audit": {
@@ -3844,7 +3860,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual fail-closed review plus focused tests verify historical 002-005 and prospective 006 states, strict response formats, exact endpoint bindings, optional temperature with fixed reasoning and seed controls, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
+        "evidence": "Manual fail-closed review plus focused tests verify historical 002-006 and prospective 007 states, strict response formats, resilient same-model fallback, optional sampling controls, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -3859,7 +3875,7 @@
       ],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "56dd35a81de6bf977a05b7a811199b400956f68988ef518aba8dc048eba6904a"
+      "sha256": "3e72b0e3036aa3cd5460f57d543c4dd0c94529f8f09f96902b7b3b4d95fb952b"
     },
     {
       "audit": {
@@ -4090,7 +4106,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual successor state-machine review plus the 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, exact OpenAI routing and dated backend, temperature omission, fixed reasoning and seed controls, strict JSON Schema, router diagnostics, sensitivity-first stopping, disabled retries and fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
+        "evidence": "Manual successor state-machine review plus the 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, dated GPT backend identity, omitted nonessential sampling controls, strict JSON Schema, resilient same-model OpenAI/Azure provider fallback, router diagnostics, sensitivity-first stopping, zero retries, atomic checkpoints, binding-safe resume, exclusive output, and absent execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -4102,24 +4118,28 @@
         "execute:evidence-sufficiency-v2-review-004",
         "execute:evidence-sufficiency-v2-review-005",
         "execute:evidence-sufficiency-v2-review-006",
+        "execute:evidence-sufficiency-v2-review-007",
         "execute:evidence-sufficiency-v2-review-runner",
         "preflight-live:evidence-sufficiency-v2-review-004",
         "preflight-live:evidence-sufficiency-v2-review-005",
         "preflight-live:evidence-sufficiency-v2-review-006",
+        "preflight-live:evidence-sufficiency-v2-review-007",
         "preflight-live:evidence-sufficiency-v2-review-runner",
         "preflight:evidence-sufficiency-v2-review-runner",
         "simulate:evidence-sufficiency-v2-review-004",
         "simulate:evidence-sufficiency-v2-review-005",
         "simulate:evidence-sufficiency-v2-review-006",
+        "simulate:evidence-sufficiency-v2-review-007",
         "simulate:evidence-sufficiency-v2-review-runner",
         "verify:evidence-sufficiency-v2-review-004",
         "verify:evidence-sufficiency-v2-review-005",
         "verify:evidence-sufficiency-v2-review-006",
+        "verify:evidence-sufficiency-v2-review-007",
         "verify:evidence-sufficiency-v2-review-runner"
       ],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "e735e9cd7f226fb014b2c4ba2503ce2e69523433671008fbbc087ca5352af408"
+      "sha256": "ff2b016f8a3aa6e9286ddab1053ac2ed25e0487e25bdb5fca4333a1d55ae9d87"
     },
     {
       "audit": {
@@ -6146,7 +6166,7 @@
     {
       "audit": {
         "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of unexecuted Gemini build history, and the invalid OpenRouter/GPT evidence-review binding marked do-not-retry.",
+        "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of invalid review 006 and unexecuted Gemini history, and prospective unauthorized review 007 status.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6157,7 +6177,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "a78979b57dcfb5f937e8e4c656334ad1efbc6db794e3fa10ae32405be91cdb46"
+      "sha256": "02b2fa10dde060721d22906e1f7c884ce98ccb748344b2eea3ce57491de631d8"
     },
     {
       "audit": {
@@ -6850,7 +6870,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, current-model acceptance, exact invalid/do-not-retry GPT evidence-review status, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, current-model acceptance, preserved invalid review 006 plus prospective review 007 status, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -7677,7 +7697,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "1cdcfe1510c605c6da1e30f630a7fd8e05013d2384c241cc20a8e23b3ff5427d"
+      "sha256": "3df43c62a5b57fc24e384ff534b5aae3ce0152c7232f42dd3bde3c5be4497314"
     },
     {
       "audit": {
@@ -7826,7 +7846,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006 contracts; verify the GPT snapshot identity, exact OpenAI endpoint, request contract, strict schemas, sensitivity stop, provider and cost failures, interruption and resume; and confirm review 006 can no longer execute.",
+        "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006 contracts while verifying prospective 007 same-model fallback, omitted reasoning/seed fields, USD 1.50 ceiling, strict schemas, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and absent execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7837,7 +7857,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "6c9e8e81ce8c29b8735126f0307cf0b74b44a30b51a44a1f7d334665202a9ec2"
+      "sha256": "d13ef95e6ced17e863fec7a31e217638990f7580b6e91f95f0bd6ea839459935"
     },
     {
       "audit": {
@@ -8081,7 +8101,7 @@
     }
   ],
   "risk_counts": {
-    "high": 382,
+    "high": 383,
     "medium": 108
   },
   "schema_version": 1,

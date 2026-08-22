@@ -158,7 +158,8 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review authorization fields disagree")
     if safety["maximum_calls"] != 13 or safety["retries"] != 0:
         raise ReviewRunnerError("review call or retry limit drifted")
-    if safety["maximum_cost_usd"] != 0.5:
+    expected_cost_ceiling = 1.5 if instrument["instrument_id"].endswith("-007") else 0.5
+    if safety["maximum_cost_usd"] != expected_cost_ceiling:
         raise ReviewRunnerError("review cost ceiling drifted")
     if safety["maximum_reserved_cost_usd"] > safety["maximum_cost_usd"]:
         raise ReviewRunnerError("review reservation exceeds cost ceiling")
@@ -171,9 +172,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "resume_requires_exact_bindings": True,
         "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
     }
-    if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006")):
+    if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006", "-007")):
         expected_runner["preserve_malformed_response_content"] = True
-    if instrument["instrument_id"].endswith(("-004", "-005", "-006")):
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006", "-007")):
         expected_runner.update(
             {
                 "preserve_provider_error_details": True,
@@ -184,13 +185,15 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review runner binding drifted")
     expected_routing = {
         "order": (
-            ["openai"]
+            ["openai", "azure"]
+            if instrument["instrument_id"].endswith("-007")
+            else ["openai"]
             if instrument["instrument_id"].endswith("-006")
             else ["google-ai-studio"]
             if instrument["instrument_id"].endswith("-005")
             else ["Mistral"]
         ),
-        "allow_fallbacks": False,
+        "allow_fallbacks": instrument["instrument_id"].endswith("-007"),
         "require_parameters": True,
         "data_collection": "allow",
         "zdr": False,
@@ -200,7 +203,7 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     binding = _provider_binding(instrument)
     expected_model = (
         "openai/gpt-5.4-mini"
-        if instrument["instrument_id"].endswith("-006")
+        if instrument["instrument_id"].endswith(("-006", "-007"))
         else "google/gemini-3.7-flash"
         if instrument["instrument_id"].endswith("-005")
         else "mistralai/mistral-small-2603"
@@ -209,24 +212,24 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review model drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006"))
+        if instrument["instrument_id"].endswith(
+            ("-003", "-004", "-005", "-006", "-007")
+        )
         else "json-object-prompt-schema"
     )
     if binding["response_format_mode"] != expected_response_format:
         raise ReviewRunnerError("review response format drifted")
-    if (
-        instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006"))
-        and safety.get("provider_context_window_tokens")
-        != (
-            400000
-            if instrument["instrument_id"].endswith("-006")
-            else 1048576
-            if instrument["instrument_id"].endswith("-005")
-            else 262144
-        )
+    if instrument["instrument_id"].endswith(
+        ("-003", "-004", "-005", "-006", "-007")
+    ) and safety.get("provider_context_window_tokens") != (
+        400000
+        if instrument["instrument_id"].endswith(("-006", "-007"))
+        else 1048576
+        if instrument["instrument_id"].endswith("-005")
+        else 262144
     ):
         raise ReviewRunnerError("review provider context binding drifted")
-    if instrument["instrument_id"].endswith(("-004", "-005", "-006")) and {
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006", "-007")) and {
         "transport": binding["transport"],
         "api_url": binding["api_url"],
     } != {
@@ -1340,7 +1343,11 @@ def main() -> int:
         )
         return 0
     if arguments.preflight or arguments.preflight_live:
-        live = fetch_live_metadata(assets["instrument"]) if arguments.preflight_live else None
+        live = (
+            fetch_live_metadata(assets["instrument"])
+            if arguments.preflight_live
+            else None
+        )
         print(
             json.dumps(
                 build_preflight(

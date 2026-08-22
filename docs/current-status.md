@@ -286,6 +286,15 @@ retried. Review 005 remains preserved and unexecuted rather than becoming an
 outcome-based fallback. Issue #105 now requires one explicit method-level
 decision instead of another OpenRouter prompt or routing refinement.
 
+Prospective review 007 applies that method-level correction without changing
+the reviewer model or dataset. It keeps GPT-5.4 mini, the dated model snapshot,
+strict structured output, deterministic authority, zero retries, and the
+sensitivity-first stop. It removes nonessential reasoning and seed parameters,
+allows OpenRouter to fall through from OpenAI to compatible Azure capacity for
+the same model, and raises the emergency ceiling to USD 1.50 using a USD 0.858
+worst-case reservation. The network-free 13-call/132-judgment simulation and
+live metadata-only match pass. Provider execution remains unauthorized.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6

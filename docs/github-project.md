@@ -50,10 +50,11 @@ professor-communication track.
 ## Critical path
 
 1. #105 — preserve invalid and revoked reviews 002–004 and 006 plus unexecuted
-   build 005, keep their bindings out of execution, and make one explicit
-   method-level reviewer decision rather than another OpenRouter refinement.
-   Select the first production answerability gate only after independent review
-   and all later gates pass.
+   build 005, keep their bindings out of execution, and advance only resilient
+   same-model review 007 after a separate authorization. It removes
+   nonessential request constraints and permits OpenAI/Azure provider fallback
+   without changing deterministic authority. Select the first production
+   answerability gate only after independent review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #110 — follow completed #87 by designing, but not authorizing, a separate

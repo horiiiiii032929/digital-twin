@@ -25,6 +25,10 @@ INSTRUMENT_006_PATH = Path(
     "research/05_evaluation/instruments/"
     "evidence_sufficiency_v2_independent_review_006.json"
 )
+INSTRUMENT_007_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_007.json"
+)
 
 
 @pytest.fixture
@@ -69,12 +73,10 @@ def _live_metadata(assets: dict) -> dict:
                     "context_length": safety["provider_context_window_tokens"],
                     "pricing": {
                         "prompt": str(
-                            safety["pricing_usd_per_million_input_tokens"]
-                            / 1_000_000
+                            safety["pricing_usd_per_million_input_tokens"] / 1_000_000
                         ),
                         "completion": str(
-                            safety["pricing_usd_per_million_output_tokens"]
-                            / 1_000_000
+                            safety["pricing_usd_per_million_output_tokens"] / 1_000_000
                         ),
                     },
                     "supported_parameters": supported_parameters,
@@ -153,9 +155,7 @@ def test_review_005_binds_stable_gemini_to_exact_google_endpoint() -> None:
     assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
     assert safety["provider_execution_authorized"] is False
     assert safety["reviewer_model"] == "google/gemini-3.7-flash"
-    assert safety["reviewer_backend_model"] == (
-        "google/gemini-3.7-flash-20260813"
-    )
+    assert safety["reviewer_backend_model"] == ("google/gemini-3.7-flash-20260813")
     assert safety["provider_routing"] == {
         "order": ["google-ai-studio"],
         "allow_fallbacks": False,
@@ -175,7 +175,9 @@ def test_review_006_is_invalid_revoked_and_binds_snapshot_gpt_endpoint() -> None
 
     assert assets["instrument"]["status"] == "invalid-execution-authorization-revoked"
     assert safety["provider_execution_authorized"] is False
-    assert assets["instrument"]["decision_rule"]["authorize_provider_execution"] is False
+    assert (
+        assets["instrument"]["decision_rule"]["authorize_provider_execution"] is False
+    )
     assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
     assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
     assert safety["temperature"] is None
@@ -233,6 +235,77 @@ async def test_review_006_native_request_omits_temperature_and_pins_reasoning(
     assert captured["json"]["reasoning"] == {"effort": "none", "exclude": True}
     assert captured["json"]["seed"] == 0
     assert captured["json"]["provider"]["order"] == ["openai"]
+
+
+def test_review_007_uses_resilient_same_model_routing_and_higher_ceiling() -> None:
+    assets = runner.load_assets(INSTRUMENT_007_PATH)
+    safety = assets["instrument"]["execution_safety"]
+
+    assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
+    assert safety["provider_execution_authorized"] is False
+    assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
+    assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
+    assert safety["reasoning_effort"] is None
+    assert safety["seed"] is None
+    assert safety["provider_routing"] == {
+        "order": ["openai", "azure"],
+        "allow_fallbacks": True,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert safety["maximum_reserved_cost_usd"] == 0.858
+    assert safety["maximum_cost_usd"] == 1.5
+    assert assets["packet"]["content_sha256"] == (
+        "a6cdda77cb824cc620577cc1fcab23ec17166fa78ba525faaf3ff811b062eed7"
+    )
+
+
+@pytest.mark.asyncio
+async def test_review_007_request_omits_nonessential_sampling_parameters(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_007_PATH)
+    binding = runner._provider_binding(assets["instrument"])
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return httpx.Response(
+            200,
+            json={
+                "id": "gen-synthetic",
+                "model": "openai/gpt-5.4-mini",
+                "system_fingerprint": "fp-synthetic",
+                "choices": [{"message": {"content": '{"judgments": []}'}}],
+                "usage": {
+                    "prompt_tokens": 12,
+                    "completion_tokens": 3,
+                    "cost": 0.0000225,
+                },
+            },
+            request=httpx.Request("POST", runner.OPENROUTER_CHAT_URL),
+        )
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "synthetic-test-key")
+    transport = runner.NativeOpenRouterReviewTransport(binding, post=post)
+    await transport.call(
+        system="Synthetic system message.",
+        prompt='{"items": []}',
+        task="synthetic_review",
+        schema=runner._response_schema(1),
+    )
+
+    assert "temperature" not in captured["json"]
+    assert "reasoning" not in captured["json"]
+    assert "seed" not in captured["json"]
+    assert captured["json"]["provider"] == {
+        "order": ["openai", "azure"],
+        "allow_fallbacks": True,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
 
 
 @pytest.mark.asyncio
