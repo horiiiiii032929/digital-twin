@@ -38,7 +38,7 @@ toward the release; none is the release by itself.
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; no evidence-sufficiency or multimodal method is selected | [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) and successor to #41 |
-| Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | 10,000 deterministic truth packages and pilot-003 simulation ready; paid stages unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87) |
+| Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | #87 completed Keep after pilot 003 passed every 100-case gate; #110 owns optional 1,000/9,000-case scale, which remains unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -47,15 +47,17 @@ toward the release; none is the release by itself.
 Any failed hard gate produces a registered `Refine`, `Go Deeper`, or `Drop`
 decision. Schedule pressure cannot convert a failure into a pass.
 
-## Work while professor guidance is pending
+## Work after the supervisor direction checkpoint
 
-The following work is reversible and does not require model spending, private
-data, or professor input:
+The professor acknowledged the deterministic source-linked Q&A and separate
+C0-C3 directions on 2026-08-21. The following work remains reversible and does
+not require model spending or private data:
 
 1. Preserve merged PR #103 as the deterministic factual-QA and correctness
    checkpoint.
-2. Keep the 100-case pilot-003, 1,000-case, and 9,000-case completion stages
-   unauthorized.
+2. Preserve closed #87 and pilot 003 as Keep evidence. Queue #110 to design a
+   separate 1,000-case checkpoint while its execution and the remaining 9,000
+   cases stay unauthorized.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked
@@ -72,11 +74,9 @@ data, or professor input:
 
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
-| Deterministic canonical Q&A with multi-model wording/review, or multi-model canonical generation under deterministic verification | Professor guidance | Freeze and authorize paid pilot 003 |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
 | Evidence-sufficiency v2 execution authorization after its build-only contract passes | Researcher | Select an answerability gate and unblock product publication |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
-| Paid pilot-003 authorization | Researcher, after fresh provider metadata and clean preflight | First provider call for pilot 003 |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 
 ## Release decision record

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-pilot-100-003",
-  "status": "draft-reviewed-provider-execution-unauthorized",
+  "status": "completed-keep-authorization-revoked",
   "issue": 87,
   "predecessor": "factual-qa-v3-scale-pilot-100-002",
   "method_version": "factual-qa-v3-deterministic-truth-pipeline-v1",
@@ -87,7 +87,7 @@
     }
   },
   "freshness": {
-    "verified_at": "2026-08-21T14:59:14+08:00",
+    "verified_at": "2026-08-22T13:02:53+08:00",
     "maximum_age_hours_for_paid_execution": 24,
     "deepseek_source": "https://api-docs.deepseek.com/quick_start/pricing/",
     "deepseek_privacy_source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",

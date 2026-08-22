@@ -66,14 +66,17 @@ malformed outcomes still failed their gates. Its authorization is revoked; the
 1,000- and 10,000-case stages remain unauthorized.
 
 The provider-free successor is now implemented as
-`factual-qa-v3-10000-pipeline-002` with unauthorized pilot 003. Deterministic
-code owns canonical questions and answers, actions, claims, exact quotes,
-citations, boundary reasons, and hashes; a model may propose only question
-wording. Historical pipeline 001 remains unchanged. Pipeline 002 corrects its
-cross-course boundary mismatch prospectively, producing exactly 8,000
+`factual-qa-v3-10000-pipeline-002`. On 2026-08-22 the researcher authorized and
+completed exactly pilot 003, then revoked its one-time authorization.
+Deterministic code owns canonical questions and answers, actions, claims, exact
+quotes, citations, boundary reasons, and hashes; a model may propose only
+question wording. Historical pipeline 001 remains unchanged. Pipeline 002
+corrects its cross-course boundary mismatch prospectively, producing exactly 8,000
 answerable and 2,000 empty-lineage boundary packages. All 10,000 are byte-stable
-and normalized-question unique. The normal 222-call network-free simulation
-passes every gate, while paid preflight remains `blocked-not-authorized`.
+and normalized-question unique. The paid confirmation passed every gate:
+100/100 deterministic-valid cases, 80/80 answerable citation-valid cases,
+99/100 reviewer agreement, 20/20 mutation rejection, zero exact duplicates,
+and zero malformed outcomes. The 1,000- and 10,000-case stages remain closed.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -145,8 +148,11 @@ restart checks were 100%, and no safety violation or provider use occurred. Its
 one-time authorization is revoked. Staging still rejects T1 until one
 separately frozen confirmation and release-profile decision pass. T2 applies
 the professor-approved policy to the
-same graph and remains pending professor-profile guidance. This checkpoint does
-not resolve the professor's pending 10,000-case dataset-method guidance.
+same graph and remains pending professor-profile guidance. On 2026-08-21 the
+professor replied “sounds good” after the deterministic source-linked Q&A and
+separate C0-C3 directions were proposed. This is recorded as acknowledgment of
+the working direction, not approval of every evaluation parameter or of the
+explicit-versus-inferred professor-profile method.
 
 PR [#83](https://github.com/horiiiiii032929/digital-twin/pull/83) merged the
 reviewed conversation-first professor and student workspaces into `main` at
@@ -249,14 +255,13 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate, exact 120-case draft, and bounded review workflow | Execute and adjudicate the independent review, freeze the decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
-| Large factual QA | Provider-free successor Keep; paid method still Refine | Attempt 002 remains preserved; pipeline 002 now creates exactly 8,000 answerable plus 2,000 boundary truth packages with deterministic actions/claims/answers/citations, zero normalized duplicates, and a passing 222-call simulation | Interpret professor guidance and separately authorize one paid pilot 003; only a full pass may open a separately authorized 1,000-case checkpoint |
+| Large factual QA | Keep; method milestone complete | Pilot 003 passed all gates: 100/100 deterministic-valid, 80/80 citation-valid, 99/100 reviewer agreement, and 20/20 mutation rejection; authorization revoked; #87 is complete | No current R1 blocker. #110 owns optional staged 1,000/9,000-case evidence and requires separate authorization |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
 release-ready. The current release blockers are an unconfirmed T1 autonomous
-tutoring graph, a selected evidence-sufficiency method, professor-method
-guidance, separately authorized factual-QA confirmation, public host/domain
+tutoring graph, a selected evidence-sufficiency method, public host/domain
 selection, target-host operations evidence, professor-fidelity calibration,
 and one frozen end-to-end candidate decision.
 
@@ -264,9 +269,9 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 4 | [#87 Factual-QA dataset quality](https://github.com/horiiiiii032929/digital-twin/issues/87) | In Progress / successor build ready | Interpret professor-method guidance, then separately authorize exactly one paid pilot 003; 1,000 and 10,000 remain closed |
-| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / bounded review ready / Refine | Bind and authorize the independent review, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 4 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
+| 5 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Todo / Go Deeper | Design and separately authorize a 1,000-case checkpoint; require a complete pass before considering the remaining 9,000 cases |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
@@ -276,11 +281,11 @@ Issues #85 and #86 are complete and archived from the live Project view. PR #91 
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
 all quality, safety, action, text-control, and lineage gates passed; relative
 warm p95 failed at 0.053 ms versus 0.023 ms. No multimodal profile was selected,
-and the historical held-out split was not opened. Issue #87 preserves paid
-attempt 002 and its completed 12-case cross-review as historical evidence. The
-active correction moves canonical questions, answers, actions, claim IDs, and
-citations into deterministic source truth while keeping model generation and
-review advisory. This remains method validation, not a model benchmark.
+and the historical held-out split was not opened. Completed issue #87 preserves
+paid attempt 002 and its completed 12-case cross-review as historical evidence.
+Its deterministic successor and passing pilot 003 establish the method-level
+Keep decision. Issue #110 owns separately authorized 1,000/9,000-case scale;
+that follow-up is supporting evidence, not the current publication blocker.
 Issue #88 remains active. V8 images are operational historical evidence, while
 the changed V12 source is intentionally unbuilt. Product publication remains
 blocked by the unselected evidence-sufficiency component; a host rehearsal is
@@ -318,10 +323,12 @@ Hosted Qwen3.7 Plus failed bounded qualification 007 and is not selected; its
 one-time authorization is revoked and no local model is used. See
 [the current model policy](../research/00_admin/2026-08-21-current-model-policy-v3.md).
 
-## Large factual-QA interpretation
+## Large factual-QA method and scale successor
 
-Issue #87 now adopts a product-first v3 interpretation of the professor's
-suggestion. The primary corpus is every eligible file in the canonical Academia
+Completed issue #87 records the product-first v3 interpretation of the
+professor's suggestion and the passing 100-case method confirmation. Issue #110
+now owns staged 1,000/9,000-case scale. The primary corpus is every eligible
+file in the canonical Academia
 Vault, not a large dummy corpus. A small deterministic dummy corpus with a
 hidden fact manifest remains only as an oracle control for extraction,
 retrieval, citation, boundary-action, and mutation mechanics. The refreshed
@@ -436,10 +443,12 @@ Pipeline 002 implements that method-level correction rather than another prompt
 revision. Its truth content hash is
 `1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c`.
 That merged provider-free checkpoint passed 713 Python and 46 frontend tests
-with a 465/465 complete audit. The current pre-professor checkpoint passes 771
-Python and 46 frontend tests with a 484/484 complete audit. Pilot 003 is
-reviewed but not frozen or allowlisted. The separate Professor Digital Twin
-transition now has a
+with a 465/465 complete audit. The pre-authorization checkpoint passed 771
+Python and 46 frontend tests with a 484/484 complete audit. Pilot 003 then
+completed Keep in 223 calls for USD 0.085406. Direct review retained all 12
+priority cases, including one independent-review false rejection. Its
+authorization is revoked, and no larger execution is open. The separate
+Professor Digital Twin transition now has a
 validated C0-C3 contract, approval-gated explicit/inferred professor-profile
 schema, and an empty 8-12-case calibration template. Fidelity judging and held-
 out access remain paused pending professor guidance.

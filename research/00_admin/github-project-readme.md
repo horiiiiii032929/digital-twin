@@ -1,6 +1,6 @@
 # Course Digital Twin Release
 
-Status date: 2026-08-21
+Status date: 2026-08-22
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -22,11 +22,11 @@ evidence, not competing end goals.
 
 - Product UX: merged baseline from PR #83; synthetic flows pass, human
   usability is not yet established.
-- Repository: 462/462 execution-relevant files audited; 707 Python and 46 web
+- Repository: 484/484 execution-relevant files audited; 771 Python and 46 web
   tests passed; the execution freeze remains active.
-- Factual quality: draft PR #103 builds 10,000 deterministic truth packages
-  and passes the 222-call network-free pilot-003 simulation. Paid pilot 003,
-  1,000-case, and 9,000-case stages are unauthorized.
+- Factual quality: #87 completed Keep after paid pilot 003 passed every gate at
+  100 cases. Its one-time authorization is revoked; #110 owns separately
+  authorized 1,000/9,000-case scale.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -38,23 +38,24 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Review PR #103 and interpret professor guidance before separately
-   authorizing one paid factual-QA pilot.
-3. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
-4. Calibrate #24 professor behavior separately from factual/citation hard
+2. Complete #105's bounded independent review and select the first production
+   evidence-sufficiency gate.
+3. Preserve T0 and prepare #107's separately frozen T0/T1 confirmation.
+4. Queue #110's 1,000-case scale design without authorizing provider calls.
+5. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
+6. Calibrate #24 professor behavior separately from factual/citation hard
    gates.
-5. Run #9 and #25 against the same immutable deployed revision.
-6. Run #10 only after the human-participant approval boundary is satisfied.
-7. Package the final evidence, demo, report, and rollback/no-release decision
+7. Run #9 and #25 against the same immutable deployed revision.
+8. Run #10 only after the human-participant approval boundary is satisfied.
+9. Package the final evidence, demo, report, and rollback/no-release decision
    in #13.
 
 ## Current blockers
 
 | Blocker | Unblocks |
 | --- | --- |
-| Professor dataset-method response | Pilot-003 method freeze |
 | Professor profile-authoring response | Fidelity calibration |
-| Explicit paid-run authorization after fresh provider checks | Pilot 003 |
+| Explicit evidence-sufficiency review authorization | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |
 | Consent/privacy/supervisor approval | Invite-only human pilot |
 

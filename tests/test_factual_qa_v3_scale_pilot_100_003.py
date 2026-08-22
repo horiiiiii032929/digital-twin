@@ -83,13 +83,11 @@ def _live_metadata(instrument: dict) -> dict:
     }
 
 
-def test_successor_is_reviewed_provider_unauthorized_and_frozen_out(
-    assets: dict,
-) -> None:
+def test_successor_keep_result_has_authorization_revoked(assets: dict) -> None:
     instrument = validate_instrument()
 
     assert instrument["instrument_id"] == INSTRUMENT_ID
-    assert instrument["status"] == "draft-reviewed-provider-execution-unauthorized"
+    assert instrument["status"] == "completed-keep-authorization-revoked"
     assert instrument["execution"]["provider_execution_authorized"] is False
     assert instrument["execution"]["automatic_stage_promotion"] is False
     assert assets["truth_artifact_sha256"] == instrument["truth_design"]["content_sha256"]
@@ -98,7 +96,7 @@ def test_successor_is_reviewed_provider_unauthorized_and_frozen_out(
         require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
 
 
-def test_preflight_is_blocked_before_live_or_paid_authorization(
+def test_preflight_is_blocked_after_authorization_revocation(
     assets: dict, tmp_path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-only")
@@ -112,6 +110,7 @@ def test_preflight_is_blocked_before_live_or_paid_authorization(
 
     assert preflight["status"] == "blocked-not-authorized"
     assert preflight["provider_execution_authorized"] is False
+    assert preflight["instrument_frozen"] is False
     assert preflight["live_provider_match_checked"] is False
     assert preflight["external_call_enabled"] is False
     assert preflight["checkpoint_1000_authorized"] is False
