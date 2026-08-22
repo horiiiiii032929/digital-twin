@@ -51,8 +51,8 @@ professor-communication track.
 
 1. #105 — preserve invalid and revoked reviews 002–004 and unexecuted build 005,
    keep their bindings out of execution, and advance only build-ready review
-   006 using snapshot-pinned GPT-5.4 mini on the exact OpenAI endpoint. Paid
-   execution remains separately authorized; select the first production
+   006 using snapshot-pinned GPT-5.4 mini on the exact OpenAI endpoint. Execute
+   its separately authorized bounded review once; select the first production
    answerability gate only after independent review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

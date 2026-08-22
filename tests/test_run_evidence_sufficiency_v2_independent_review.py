@@ -169,12 +169,13 @@ def test_review_005_binds_stable_gemini_to_exact_google_endpoint() -> None:
     )
 
 
-def test_review_006_binds_snapshot_gpt_5_4_mini_to_exact_openai_endpoint() -> None:
+def test_review_006_is_frozen_and_binds_snapshot_gpt_to_openai_endpoint() -> None:
     assets = runner.load_assets(INSTRUMENT_006_PATH)
     safety = assets["instrument"]["execution_safety"]
 
-    assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
-    assert safety["provider_execution_authorized"] is False
+    assert assets["instrument"]["status"] == "frozen-pending-execution"
+    assert safety["provider_execution_authorized"] is True
+    assert assets["instrument"]["decision_rule"]["authorize_provider_execution"] is True
     assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
     assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
     assert safety["temperature"] is None

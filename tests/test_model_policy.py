@@ -5,6 +5,7 @@ import pytest
 
 from scripts.run_factual_qa_quality_pilot import OllamaJsonTransport
 from src.digital_twin.model_policy import (
+    CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
@@ -57,6 +58,16 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
 )
 def test_registered_current_models_are_accepted(model):
     assert require_registered_current_model(model) == model
+
+
+def test_gpt_evidence_reviewer_is_frozen_for_one_bounded_review():
+    binding = next(
+        item
+        for item in CURRENT_MODEL_BINDINGS
+        if item.provider_model == OPENROUTER_GPT_MINI_REVIEW_MODEL
+    )
+
+    assert binding.status == "frozen-for-one-bounded-review"
 
 
 def test_retired_factual_qa_instrument_cannot_construct_local_transport():

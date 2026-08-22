@@ -3987,12 +3987,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-and-model-provider-boundaries",
-  "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of unexecuted Gemini build history, and prospective provider-unauthorized GPT-5.4 mini registration.",
+  "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of unexecuted Gemini build history, and GPT-5.4 mini frozen for exactly one bounded evidence review.",
       "findings": [],
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-  "sha256": "0ebd877935237aec78ac0ab0ab0ca2ccdce6985514fbc0e275995c5c4393579b"
+  "sha256": "da7ae9956ba1be4d1393cf96c786b4c55a4b58c5216f5eb72d829d53e263eb22"
     },
     {
       "audit_status": "audited",
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 are revoked after invalid attempts, and only the historical oracle plus exact review 006 are bounded; all dataset-freeze, candidate, other paid-successor, and held-out stages remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "f3093a93c28bf9e4318c39d5cb9071fd360feea6624c3e8d3fa59ff410ece5c1"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4372,7 +4372,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-and-grounding-verification",
-      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, current-model acceptance, exact GPT evidence-review status, course isolation, multimodal ranking, and profile activation passed.",
       "findings": [],
       "path": "tests/digital_twin/test_grounding_contracts.py",
       "reviewed_at": "2026-08-20",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002–004, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of the historical oracle and review 006 only, and explicit rejection of revoked evidence reviews 002–004, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "5d90eb9878fb2860fbfce2a0421c18c1480d15ef1ff571c1784c625d9f0d56d0"
+      "sha256": "8c7b9ec14c1a66bdd73f5000d9cec1e719e3b5814f9e5680856cce063ea18d29"
     },
     {
       "audit_status": "audited",
@@ -5037,7 +5037,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-  "sha256": "ea071961bcb58fd0afe197794119d9ad3993630e5e1539eba6d5e0ff9f0cb6d0"
+  "sha256": "4f8d97ed9810fb1f47c755835a6945dcf42f7efbb3fddb270bfb11fc4c592785"
     },
     {
       "audit_status": "audited",
@@ -5120,12 +5120,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-  "evidence": "Focused regressions preserve revoked 002-004 and unexecuted 005 contracts and verify prospective 006's GPT-5.4 mini snapshot identity, exact OpenAI endpoint, USD 0.429 reservation, temperature-free reasoning and seed request, native OpenRouter payload, strict schemas, sensitivity stop, provider, identity, backend, and cost failures, interruption and resume, authorization locks, endpoint freshness, and output exclusivity.",
+  "evidence": "Focused regressions preserve revoked 002-004 and unexecuted 005 contracts and verify frozen review 006's GPT-5.4 mini snapshot identity, exact OpenAI endpoint, USD 0.429 reservation, temperature-free reasoning and seed request, native OpenRouter payload, strict schemas, sensitivity stop, provider, identity, backend, and cost failures, interruption and resume, correlated authorization locks, endpoint freshness, and output exclusivity.",
       "findings": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-  "sha256": "d4440ed8380fb34378737a3e14554f804ccb5f02a53de9b6da9a02d21867ce97"
+  "sha256": "fd8870ca1817aa930103500e63935984ebd6aa4b06ac00f85d8b1720ace64643"
     },
     {
       "audit_status": "audited",
@@ -5382,13 +5382,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_006.json",
-      "sha256": "943a92d63bb1930b83b8e3bd7802487e2d862f79fad31258b61b5492bb6cee99",
+      "sha256": "76de1f17f1c86ab32aa28a2746f0e44a25881c85379123eab1b836ee8b662fc4",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-      "evidence": "Manual prospective review, official-model freshness research, exact live endpoint metadata, focused regressions, and a 13-call network-free simulation bind openai/gpt-5.4-mini to the exact OpenAI endpoint and dated backend, omit unsupported temperature, fix reasoning effort and seed, require strict schema, disable retries and fallbacks, preserve synthetic-public boundaries, and keep provider execution unauthorized.",
+      "evidence": "Manual prospective review, official-model freshness research, exact live endpoint metadata, focused regressions, and a 13-call network-free simulation bind openai/gpt-5.4-mini to the exact OpenAI endpoint and dated backend, omit unsupported temperature, fix reasoning effort and seed, require strict schema, disable retries and fallbacks, preserve synthetic-public boundaries, and authorize exactly one bounded review-006 execution.",
       "findings": []
     }
   ],
