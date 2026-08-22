@@ -85,7 +85,7 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="evidence-sufficiency-independent-reviewer-candidate",
         provider_model=OPENROUTER_GPT_MINI_REVIEW_MODEL,
-        status="review-006-invalid-review-007-frozen-pending-execution",
+        status="reviews-006-007-invalid-openrouter-do-not-retry",
     ),
     CurrentModelBinding(
         role="selected-text-embedding",

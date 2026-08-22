@@ -124,9 +124,10 @@ Current utilities:
   same-model OpenAI/Azure provider fallback, and uses a USD 1.50 emergency
   ceiling. Run `npm run verify:evidence-sufficiency-v2-review-007`, `npm run
   simulate:evidence-sufficiency-v2-review-007`, or `npm run
-  preflight-live:evidence-sufficiency-v2-review-007`. Exactly one bounded paid
-  execution is frozen and authorized; every dataset and downstream decision
-  remains blocked.
+  preflight-live:evidence-sufficiency-v2-review-007`. Its one authorized
+  sensitivity request returned HTTP 400 before a provider response; all bulk
+  calls were suppressed, authorization is revoked, and this OpenRouter path
+  must not be retried. Every dataset and downstream decision remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

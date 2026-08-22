@@ -60,16 +60,14 @@ def test_registered_current_models_are_accepted(model):
     assert require_registered_current_model(model) == model
 
 
-def test_gpt_evidence_reviewer_preserves_006_and_exposes_007_status():
+def test_gpt_evidence_reviewer_openrouter_path_is_invalid_and_not_retried():
     binding = next(
         item
         for item in CURRENT_MODEL_BINDINGS
         if item.provider_model == OPENROUTER_GPT_MINI_REVIEW_MODEL
     )
 
-    assert binding.status == (
-        "review-006-invalid-review-007-frozen-pending-execution"
-    )
+    assert binding.status == "reviews-006-007-invalid-openrouter-do-not-retry"
 
 
 def test_retired_factual_qa_instrument_cannot_construct_local_transport():

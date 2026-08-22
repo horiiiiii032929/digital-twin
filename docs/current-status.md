@@ -286,18 +286,21 @@ retried. Review 005 remains preserved and unexecuted rather than becoming an
 outcome-based fallback. Issue #105 now requires one explicit method-level
 decision instead of another OpenRouter prompt or routing refinement.
 
-Authorized review 007 applies that method-level correction without changing
+Review 007 applied that method-level correction without changing
 the reviewer model or dataset. It keeps GPT-5.4 mini, the dated model snapshot,
 strict structured output, deterministic authority, zero retries, and the
 sensitivity-first stop. It removes nonessential reasoning and seed parameters,
 allows OpenRouter to fall through from OpenAI to compatible Azure capacity for
 the same model, and raises the emergency ceiling to USD 1.50 using a USD 0.858
 worst-case reservation. The network-free 13-call/132-judgment simulation and
-live metadata-only match pass. The researcher separately authorized exactly
-one bounded synthetic-public run. Its provider flag, frozen status, and
-repository allowlist are correlated for at most 13 calls under the USD 1.50
-emergency ceiling; dataset freezing and every downstream decision remain
-unauthorized.
+live metadata-only match passed. Its separately authorized run again stopped
+on the first sensitivity request with HTTP 400 before any provider response.
+OpenRouter exposed only the OpenAI endpoint as compatible under the request
+contract and did not select it successfully; the Azure fallback did not become
+an available route. The current-key endpoint still returned HTTP 200. No bulk
+call, judgment, reported token, or cost occurred. Review 007 is invalid,
+authorization is revoked, and the OpenRouter reviewer path must not be retried.
+Dataset freezing and every downstream decision remain unauthorized.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted

@@ -237,12 +237,13 @@ async def test_review_006_native_request_omits_temperature_and_pins_reasoning(
     assert captured["json"]["provider"]["order"] == ["openai"]
 
 
-def test_review_007_uses_resilient_same_model_routing_and_higher_ceiling() -> None:
+def test_review_007_is_invalid_revoked_with_resilient_same_model_contract() -> None:
     assets = runner.load_assets(INSTRUMENT_007_PATH)
     safety = assets["instrument"]["execution_safety"]
 
-    assert assets["instrument"]["status"] == "frozen-pending-execution"
-    assert safety["provider_execution_authorized"] is True
+    assert assets["instrument"]["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert assets["instrument"]["decision_rule"]["authorize_provider_execution"] is False
     assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
     assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
     assert safety["reasoning_effort"] is None
