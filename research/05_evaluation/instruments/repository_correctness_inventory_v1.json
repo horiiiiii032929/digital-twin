@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "607714c431c503c3172fa73e2a5a35aa5d567bcd35a482252bd1b54cdbc4def2",
+  "record_sha256": "57dd60b0f9ada8d8cc65566d905ef82ab54c7df7bc1d55c7ee0538d373255fe6",
   "records": [
     {
       "audit": {
@@ -1752,7 +1752,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual instrument review and focused regressions bind the immutable 120-case synthetic-public packet, exact Mistral Small 4 endpoint metadata, strict JSON Schema mode, 13-call and USD 0.50 ceilings, response preservation, no retries or fallbacks, and all provider, dataset-freeze, candidate-evaluation, and private-source permissions false.",
+        "evidence": "Manual authorization review and focused regressions bind the immutable 120-case synthetic-public packet, exact Mistral Small 4 endpoint metadata, strict JSON Schema mode, one 13-call run under the USD 0.50 ceiling, response preservation, and no retries or fallbacks while dataset-freeze, candidate-evaluation, and private-source permissions remain false.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -1763,7 +1763,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_003.json",
       "risk": "high",
-      "sha256": "76eff8594df00bf2ea53de6317a36a028c8ef92edfd4eed3bfe8f7ff69eb4123"
+      "sha256": "69af36d49e2c5022057635b840d5b711767f80de261791d2c4717e9082f523e9"
     },
     {
       "audit": {
@@ -6342,7 +6342,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence review 002 authorization is revoked, and only the historical oracle remains bounded; all dataset, candidate, paid-successor, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence review 002 authorization is revoked, and only the historical oracle plus exact review 003 are bounded; all dataset-freeze, candidate, other paid-successor, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6353,7 +6353,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8e9c683fe4fa4f8f690811d17fb7bde7b62ba12559779d2bfa6073d78023e542"
+      "sha256": "beddd9778e196a9f61850cfa58cf4cd9d12c5d3683bf44bd7c3e4e4ef3526c91"
     },
     {
       "audit": {
@@ -6774,7 +6774,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence review 002, completed pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle plus review 003, and explicit rejection of revoked review 002, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6785,7 +6785,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "b26ca295dfc122171baf024ea0a31c9ae3fc12f53e4a54307016b2ecb0d67aab"
+      "sha256": "8cf3b36d2754fce4491065722c00af4d46d817edb0032c91817e930456664d21"
     },
     {
       "audit": {
@@ -7766,7 +7766,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions cover the unauthorized 003 contract and immutable 002 compatibility, strict per-batch JSON Schema, sensitivity stop, malformed-content preservation, provider/identity/cost failures, prior accounting, interruption/resume, authorization locks, endpoint capability/context freshness, price drift, and output exclusivity.",
+        "evidence": "Focused regressions cover the exact authorized 003 contract and immutable 002 compatibility, strict per-batch JSON Schema, sensitivity stop, malformed-content preservation, provider/identity/cost failures, prior accounting, interruption/resume, all three authorization locks, endpoint capability/context freshness, price drift, and output exclusivity.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7777,7 +7777,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "1e899c55381d1bab0e18cf942d936f0cccf181b2dba5d2544587c1b194e3711b"
+      "sha256": "6210099f67fd0bffa20087aa0e81f3ef3ba5d7af3ce7ae8d64b145878f0ade68"
     },
     {
       "audit": {

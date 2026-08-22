@@ -66,11 +66,12 @@ not require model spending or private data:
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
    build-only evidence-sufficiency workflow. Exact Mistral review 002 stopped
    safely after one malformed sensitivity response and remains invalid and
-   revoked. Provider-unauthorized review 003 now requests endpoint-qualified
+   revoked. Review 003 now requests endpoint-qualified
    strict JSON Schema, preserves malformed content and parser detail, and passes
    the complete 13-call/132-judgment simulation plus a clean live no-call
-   preflight. It still requires a separate frozen authorization before one paid
-   execution. The changed source revision has not been rebuilt.
+   preflight. The researcher separately authorized exactly one paid 003 run;
+   execute it once, revoke authorization, and preserve every outcome. The
+   changed source revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 

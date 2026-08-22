@@ -49,8 +49,8 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve invalid and revoked review 002, separately authorize the
-   strict-schema review 003 successor that now passes build-only readiness, and
+1. #105 — preserve invalid and revoked review 002, execute the separately
+   authorized strict-schema review 003 once, revoke its authorization, and
    select the first production answerability gate only after the independent
    review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

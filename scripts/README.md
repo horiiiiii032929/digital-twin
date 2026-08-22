@@ -83,8 +83,9 @@ Current utilities:
   `npm run verify:evidence-sufficiency-v2-review-runner`,
   `npm run simulate:evidence-sufficiency-v2-review-runner`, or
   `npm run preflight-live:evidence-sufficiency-v2-review-runner`. The execute
-  command remains fail-closed: `003` is provider-unauthorized and absent from
-  the bounded repository allowlist until a separate one-time authorization.
+  command remains fail-closed outside the exact one-time `003` authorization;
+  all dataset-freeze, candidate-evaluation, private-source, and later-stage
+  execution remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and
