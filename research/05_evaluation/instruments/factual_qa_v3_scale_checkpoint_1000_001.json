@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "instrument_id": "factual-qa-v3-scale-checkpoint-1000-001",
+  "status": "draft-reviewed-provider-execution-unauthorized",
+  "issue": 117,
+  "parent_issue": 110,
+  "predecessor": "factual-qa-v3-scale-pilot-100-003",
+  "method_version": "factual-qa-v3-deterministic-truth-pipeline-v1",
+  "decision_question": "Does the validated deterministic factual-QA method remain reliable across the next 900 cases, yielding cumulative evidence for 1,000 cases?",
+  "model_leaderboard": false,
+  "contract_design": {
+    "version": "factual-qa-v3-contract-v3",
+    "truth_package": "factual-qa-v3-truth-package-v1",
+    "author_schema": "question-variant-only",
+    "assembler": "deterministic-authoritative-metadata-v1",
+    "malformed_fallback": "canonical-question-not-model-authored",
+    "reviewer_contract": "qualification-006-strict-contract",
+    "mutation_basis": "deterministic-canonical-cases",
+    "normalized_question_uniqueness": "unicode-nfkc-casefold-alphanumeric-tokens"
+  },
+  "truth_design": {
+    "instrument_id": "factual-qa-v3-10000-pipeline-002",
+    "content_sha256": "1b4bd3febd79ce828300b42cc23b379de85f7bf92fa07fe8493f22d56e7f5c8c",
+    "configuration_sha256": "2b49861898c6bd1769f1ebd2b2f1f2cffef78ca7d70086cdcd6cdf33a81034ae",
+    "upstream_blueprint_sha256": "cd43954f51ceb559a2d95b57fd0b25d551c43c103d404bb5ce49bfbe33f5b2cb",
+    "stage_id": "checkpoint-1000",
+    "new_case_count": 900,
+    "cumulative_case_count": 1000,
+    "source_count": 1000,
+    "claim_count": 8000,
+    "carried_forward_result": "factual-qa-v3-scale-pilot-100-003",
+    "carried_forward_summary_sha256": "1d4f22b9b81168960ee78ea955cc3d4280db053ee464add753377dcccc79db1c"
+  },
+  "model_roles": {
+    "author": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-flash",
+      "provider_model": "deepseek-v4-flash",
+      "documented_revision": "DeepSeek-V4-Flash-0731",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "temperature": 0,
+      "thinking": "disabled",
+      "max_input_tokens": 5000,
+      "max_output_tokens": 220,
+      "timeout_seconds": 30,
+      "pricing_basis": "peak-cache-miss-conservative",
+      "pricing_usd_per_million_input_tokens": 0.44,
+      "pricing_usd_per_million_output_tokens": 1.32,
+      "revision_required": true
+    },
+    "independent_reviewer": {
+      "provider": "openrouter",
+      "litellm_model": "openrouter/mistralai/mistral-small-2603",
+      "provider_model": "mistralai/mistral-small-2603",
+      "documented_revision": "Mistral Small 4",
+      "credential_environment_variable": "OPENROUTER_API_KEY",
+      "qualification": "factual-qa-v3-reviewer-qualification-006",
+      "temperature": 0,
+      "max_input_tokens": 6000,
+      "max_output_tokens": 650,
+      "timeout_seconds": 30,
+      "pricing_basis": "openrouter-live-list",
+      "pricing_usd_per_million_input_tokens": 0.15,
+      "pricing_usd_per_million_output_tokens": 0.6,
+      "revision_required": false,
+      "provider_routing": {
+        "order": ["Mistral"],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "allow",
+        "zdr": false
+      }
+    },
+    "dispute_reviewer": {
+      "provider": "deepseek-official-api",
+      "litellm_model": "deepseek/deepseek-v4-pro",
+      "provider_model": "deepseek-v4-pro",
+      "documented_revision": "DeepSeek-V4-Pro-0813",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "temperature": 0,
+      "thinking": "disabled",
+      "max_input_tokens": 6000,
+      "max_output_tokens": 700,
+      "timeout_seconds": 60,
+      "pricing_basis": "peak-cache-miss-conservative",
+      "pricing_usd_per_million_input_tokens": 1.32,
+      "pricing_usd_per_million_output_tokens": 3.96,
+      "revision_required": true
+    }
+  },
+  "freshness": {
+    "verified_at": "2026-08-22T16:00:00+08:00",
+    "maximum_age_hours_for_paid_execution": 24,
+    "deepseek_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "deepseek_privacy_source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+    "openrouter_source": "https://openrouter.ai/api/v1/models",
+    "openrouter_provider_policy_source": "https://openrouter.ai/providers",
+    "deepseek_context_length": 1000000,
+    "deepseek_maximum_output_tokens": 393216,
+    "openrouter_mistral_context_length": 262144,
+    "routing_fallback_allowed": false,
+    "provider_collection_boundary": "synthetic-public evaluation fixtures only",
+    "retention_policy": {
+      "deepseek": {
+        "policy_last_update": "Feb 10, 2026",
+        "input_retention": "retained-as-long-as-account-and-as-otherwise-necessary",
+        "storage_location": "People's Republic of China"
+      },
+      "openrouter_mistral_endpoint": {
+        "provider": "Mistral",
+        "trains_on_prompts": false,
+        "retention": "30 day retention",
+        "data_collection": "allow",
+        "zdr": false
+      }
+    },
+    "paid_preflight_requires_live_match": true
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "dataset_write_authorized": false,
+    "automatic_stage_promotion": false,
+    "provider_canary_call_limit": 2,
+    "author_call_limit": 900,
+    "independent_review_call_limit": 900,
+    "mutation_review_call_limit": 180,
+    "dispute_review_call_limit": 9,
+    "total_provider_call_limit": 1991,
+    "retry_attempts": 0,
+    "checkpoint_every_calls": 1,
+    "cost_stop_usd": 10.0,
+    "clean_worktree_required": true,
+    "output_overwrite_allowed": false,
+    "resume_requires_exact_bindings": true
+  },
+  "mutation_design": {
+    "count": 180,
+    "source": "deterministic-canonical-cases",
+    "independent_of_author_success": true,
+    "type_counts": {
+      "missing-citation": 30,
+      "truncated-citation": 30,
+      "paraphrased-citation": 30,
+      "extra-supported-claim": 30,
+      "invalid-claim-binding": 30,
+      "invalid-source-binding": 30
+    }
+  },
+  "quality_gates": {
+    "provider_response_completion_rate_min": 0.995,
+    "model_question_variant_acceptance_rate_min": 0.95,
+    "deterministic_acceptance_rate_min": 1.0,
+    "reviewer_agreement_rate_min": 0.9,
+    "citation_validity_rate_min": 1.0,
+    "target_claim_completeness_rate_min": 1.0,
+    "boundary_action_accuracy_min": 1.0,
+    "exact_duplicate_question_rate_max": 0.0,
+    "unresolved_dispute_rate_max": 0.01,
+    "malformed_response_rate_max": 0.005,
+    "mutation_sensitivity_min": 0.9,
+    "model_identity_stable_required": true,
+    "cost_and_latency_accounting_complete_required": true,
+    "external_cost_usd_max": 10.0,
+    "private_data_calls_max": 0,
+    "human_priority_packet_max": 12
+  },
+  "decision_rule": {
+    "all_machine_gates_pass": "completed-keep",
+    "any_machine_gate_fails": "completed-refine",
+    "authorize_remaining_9000": false
+  },
+  "data_boundary": {
+    "content_class": "deterministic-synthetic-public",
+    "private_course_text": false,
+    "student_data": false,
+    "academia_vault_read_allowed": false,
+    "provider_collection_allowed_for_this_future_run": true
+  },
+  "excluded_models": ["gemma", "claude", "local-qwen", "qwen3:4b", "qwen3.5:4b"]
+}
