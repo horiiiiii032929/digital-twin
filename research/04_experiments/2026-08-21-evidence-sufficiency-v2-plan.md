@@ -67,7 +67,7 @@ frozen or opened. The preflight therefore remains
 `blocked-dataset-not-frozen`; this intentionally prevents a build-only draft
 from becoming evaluation authority.
 
-The independent-review workflow is separately versioned as
+The independent-review workflow began as
 `evidence-sufficiency-v2-independent-review-001`. It reconstructs 12 blinded
 ten-case batches and a separate six-clean/six-defect sensitivity control. The
 review contract checks question naturalness and answerability, action, claims,
@@ -75,8 +75,8 @@ exact evidence, course/version boundaries, boundary reasons, and modality
 representation. Advisory output cannot modify deterministic truth. Any dataset
 defect requires a corrected draft with a new hash and a successor review ID;
 any sensitivity failure invalidates the reviewer result. The network-free
-simulation is not review evidence, and provider/model identity, freshness,
-cost ceiling, and execution authorization remain deliberately unbound.
+simulation is not review evidence. Instrument `001` remains the historical
+provider-unbound predecessor.
 
 Prospective successor `evidence-sufficiency-v2-independent-review-002` binds
 the advisory reviewer to exact OpenRouter routing for
@@ -85,6 +85,16 @@ ceiling, zero retries, and synthetic-public inputs. The binding does not
 authorize a provider call, freeze the draft, or open candidate evaluation; its
 preflight must remain `blocked-not-authorized` until a separate one-time
 authorization is recorded against fresh metadata.
+
+Build result `evidence-sufficiency-v2-independent-review-002-build` adds the
+missing execution boundary without authorizing it. The runner executes the
+six-clean/six-defect sensitivity call first, stops before bulk review if that
+gate fails, checkpoints every call atomically, validates resume bindings, and
+accounts for model identity, tokens, latency, and cost. Its complete
+13-call/132-judgment network-free simulation passed. A clean live metadata-only
+preflight also matched the exact model and pricing and found the credential and
+output boundary ready; it remained blocked by provider authorization,
+instrument freeze, and the bounded allowlist exactly as designed.
 
 ## Metrics and gates
 

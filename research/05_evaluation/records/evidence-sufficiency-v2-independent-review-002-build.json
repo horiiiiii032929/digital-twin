@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-002-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "2a5409d49fde80c4e3ebbd201b00efeb40e8176c",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "review-workflow-without-execution-runner",
+        "version": "v12-build-only-control",
+        "configuration": {
+          "maximum_calls": 0,
+          "atomic_checkpoints": false,
+          "resume_validation": false,
+          "live_preflight": false,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "protected-entrypoint-coverage",
+          "value": 0.9836065574,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "sensitivity-first-fail-closed-execution",
+          "passed": false,
+          "evidence": "The V12 workflow had no provider execution runner."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": false,
+          "evidence": "The V12 workflow could build a packet but could not checkpoint or resume provider work."
+        },
+        {
+          "name": "live-identity-pricing-and-output-preflight",
+          "passed": false,
+          "evidence": "The V12 preflight did not check credential presence, exact live metadata, clean worktree, or output exclusivity."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "The control made no provider call and granted no authorization."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were used."
+        }
+      ],
+      "failures_by_category": {
+        "execution-readiness": 3
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-runner-v1",
+        "version": "build-001-provider-unauthorized",
+        "configuration": {
+          "maximum_calls": 13,
+          "atomic_checkpoints": true,
+          "resume_validation": true,
+          "live_preflight": true,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "protected-entrypoint-coverage",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "sensitivity-first-fail-closed-execution",
+          "passed": true,
+          "evidence": "Regression simulation stops before all 12 bulk batches when reviewer sensitivity fails."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": true,
+          "evidence": "Every simulated call checkpoints atomically and resume rejects instrument, packet, revision, runner, or model drift."
+        },
+        {
+          "name": "live-identity-pricing-and-output-preflight",
+          "passed": true,
+          "evidence": "Live no-call preflight matched exact model metadata and pricing, found the credential present, worktree clean, and output unused."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "The three authorization locks remain closed and no provider inference call occurred."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were read; private and held-out data stayed closed."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bounded-independent-advisory-review-runner-v1",
+    "rationale": "The finite runner and all fail-closed paths passed network-free verification, while provider execution remains separately authorization-gated.",
+    "limitations": [
+      "The simulation does not establish independent-review quality.",
+      "The 120-case draft remains unfrozen and unopened for candidate evaluation.",
+      "No evidence-sufficiency implementation or product release candidate is selected.",
+      "The exact provider metadata must be refreshed again if it becomes older than 24 hours before execution."
+    ]
+  }
+}
