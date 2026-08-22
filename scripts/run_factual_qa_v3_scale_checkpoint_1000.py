@@ -69,10 +69,10 @@ from src.digital_twin.model_policy import require_registered_current_model
 from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
 
 
-INSTRUMENT_PATH = ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json"
+INSTRUMENT_PATH = ROOT / "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json"
 PREVIOUS_SUMMARY_PATH = ROOT / "research/05_evaluation/judgments/factual-qa-v3-scale-pilot-100-003-summary.json"
-DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-checkpoint-1000-001.json"
-INSTRUMENT_ID = "factual-qa-v3-scale-checkpoint-1000-001"
+DEFAULT_OUTPUT = ROOT / "reports/generated/factual-qa-v3-scale-checkpoint-1000-002.json"
+INSTRUMENT_ID = "factual-qa-v3-scale-checkpoint-1000-002"
 TRUTH_INSTRUMENT_ID = "factual-qa-v3-10000-pipeline-002"
 STAGE = "checkpoint-1000"
 NEW_CASE_COUNT = 900
@@ -520,7 +520,7 @@ async def execute(
         outcome = await _safe_call(
             role=role, transport=transports[role],
             system="Return the exact requested synthetic-public health JSON.",
-            prompt='Return {"status":"ok"}.', task=f"{INSTRUMENT_ID}_{role}_health",
+            prompt='Return {"status":"ok"}.', task=f"fqa1000_{role}_health",
             schema=HEALTH_SCHEMA, validator=_health_validator, state=state,
             instrument=instrument, output_path=output_path, stop_after_calls=None,
         )
@@ -536,7 +536,7 @@ async def execute(
     for index, truth in enumerate(assets["truth_packages"][len(state["results"]):], start=len(state["results"]) + 1):
         outcome = await _safe_call(
             role="author", transport=transports["author"], system=author_system,
-            prompt=_author_prompt(truth), task=f"{INSTRUMENT_ID}_author",
+            prompt=_author_prompt(truth), task="fqa1000_author",
             schema=QUESTION_VARIANT_SCHEMA, validator=validate_question_variant,
             state=state, instrument=instrument, output_path=output_path, stop_after_calls=None,
         )
@@ -565,7 +565,7 @@ async def execute(
         result["review_outcome"] = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
-            task=f"{INSTRUMENT_ID}_independent_review", schema=REVIEW_SCHEMA,
+            task="fqa1000_independent_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
         )
@@ -586,7 +586,7 @@ async def execute(
         mutation["review_outcome"] = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, mutation["mutated_case"], source_map=source_map),
-            task=f"{INSTRUMENT_ID}_mutation_review", schema=REVIEW_SCHEMA,
+            task="fqa1000_mutation_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
         )
@@ -608,7 +608,7 @@ async def execute(
         result["dispute_outcome"] = await _safe_call(
             role="dispute_reviewer", transport=transports["dispute_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
-            task=f"{INSTRUMENT_ID}_dispute_review", schema=REVIEW_SCHEMA,
+            task="fqa1000_dispute_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
         )

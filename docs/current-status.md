@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 491 executable or execution-affecting
+the current branch extends it to all 492 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -79,9 +79,13 @@ and normalized-question unique. The paid confirmation passed every gate:
 and zero malformed outcomes. A separate provider-unauthorized checkpoint now
 selects exactly the additional 900 cases needed for cumulative 1,000-case
 evidence. Its complete network-free simulation passed every gate with 1,982
-simulated calls, and the researcher separately authorized exactly this paid
-checkpoint. The remaining 9,000 cases remain closed and cannot be promoted
-automatically.
+simulated calls. Paid attempt 001 then stopped safely before bulk work because
+its 67-character reviewer-canary task identifier exceeded the shared
+64-character local contract. DeepSeek returned one health response, no Mistral
+request or bulk call was made, and cost was USD 0.00004092. Attempt 001 is
+invalid and revoked; attempt 002 changes only the task identifiers and retains
+the researcher's authorization for the same additional-900 scope. The remaining
+9,000 cases remain closed and cannot be promoted automatically.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented

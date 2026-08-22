@@ -4168,7 +4168,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "a441a1f0303afdbca348cd6e75ccdef0ab80e9efed816b4d500c31f231e278dc"
+      "sha256": "2f095abb7b95844030955a0c38effd64b4a302ce22b54bc18c11d91752d19943"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4454,7 +4454,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "108a1cad3c180bc66f6557dd18a2e1e679199465cf395f8a24db44dd7d01f9b0"
+      "sha256": "c6f862e746241b0e428b74701bb4c461e7ee2107cc66b29f90eab921c5e9342b"
     },
     {
       "audit_status": "audited",
@@ -5371,24 +5371,24 @@
     },
     {
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json",
-      "sha256": "437869eaa23eae5fe8af005a5d68e442fe751ed2bf7282531da755d71a7f9861",
+      "sha256": "cc710dcf07256c3401c95fc42be45550c1b24a090f3aa061638902e577081bc6",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Manual contract review and network-free validation bind exactly 900 new checkpoint cases to the prior 100-case Keep result; the separately approved one-time execution is frozen at 1,991 calls and USD 10 with no promotion to the remaining 9,000 cases.",
+      "evidence": "Attempt 001 is preserved as invalid and authorization-revoked after its reviewer-canary task identifier exceeded the local contract before provider I/O; zero bulk calls occurred and no quality conclusion was drawn.",
       "findings": []
     },
     {
       "path": "scripts/run_factual_qa_v3_scale_checkpoint_1000.py",
-      "sha256": "9b3b42e83f51b1e1ae273f7acad0a513f2227b4e7a970264ff283cf3bcf59a6e",
+      "sha256": "24af44a57a37ff5f81f054b654a4fe202aae96c76d211b7cafbebb2cd11d2713",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code review and a complete 900-case network-free simulation verify deterministic authority, exact stage selection, balanced mutations, fail-closed canaries, per-call checkpoints, exact resume bindings, complete accounting, and no automatic 9,000-case promotion.",
+      "evidence": "Focused code review corrects attempt 001's overlong generated task labels to fixed identifiers under 64 characters; deterministic authority, stage selection, checkpoints, model bindings, gates, and the closed remaining-9,000 boundary are unchanged for attempt 002.",
       "findings": []
     },
     {
@@ -5400,6 +5400,17 @@
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
       "evidence": "Focused regressions verify the exact additional-900 slice, prior-result binding, balanced deterministic mutations, live-metadata preflight requirement, exact bounded authorization, and closed remaining-9,000 boundary.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json",
+      "sha256": "e9687f191d6ab25f742de7023d68a0b0596303a506d8388620a639b1c05ef5fe",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "factual-qa-scale",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Prospective harness-only successor keeps all 900 truth packages, model bindings, gates, call and cost limits unchanged while authorizing only attempt 002; the remaining 9,000 cases cannot be promoted automatically.",
       "findings": []
     }
   ],
