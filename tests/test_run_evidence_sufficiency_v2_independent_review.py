@@ -90,9 +90,9 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     assert safety["maximum_calls"] == 13
     assert safety["maximum_reserved_cost_usd"] == 0.0702
     assert safety["maximum_cost_usd"] == 0.5
-    assert instrument["status"] == "frozen-pending-execution"
-    assert safety["provider_execution_authorized"] is True
-    assert instrument["decision_rule"]["authorize_provider_execution"] is True
+    assert instrument["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert instrument["decision_rule"]["authorize_provider_execution"] is False
 
 
 def test_provider_transport_disables_retries_and_fallbacks(assets: dict) -> None:

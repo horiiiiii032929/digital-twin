@@ -77,13 +77,15 @@ Current utilities:
   bulk work when reviewer sensitivity is unreliable, disables retries and
   fallbacks, pins model identity, checkpoints after every call, enforces the
   13-call and USD 0.50 ceilings, and supports binding-safe resume. Successor
-  instrument `003` uses endpoint-qualified strict JSON Schema output and
-  preserves malformed response content plus exact parser detail; response
-  healing is deliberately disabled. Use
+  instrument `003` used endpoint-qualified strict JSON Schema output and
+  preserved malformed response content plus exact parser detail; response
+  healing was deliberately disabled. Its authorized sensitivity call stopped
+  before a provider response with an authentication-class transport error, so
+  the attempt is invalid and revoked with no review-quality conclusion. Use
   `npm run verify:evidence-sufficiency-v2-review-runner`,
   `npm run simulate:evidence-sufficiency-v2-review-runner`, or
   `npm run preflight-live:evidence-sufficiency-v2-review-runner`. The execute
-  command remains fail-closed outside the exact one-time `003` authorization;
+  command is now fail-closed because the one-time `003` authorization is revoked;
   all dataset-freeze, candidate-evaluation, private-source, and later-stage
   execution remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
