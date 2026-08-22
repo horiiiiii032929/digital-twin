@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1b4d45dad1d8f4dff623476319c2f868968c6d6e5893df6d4652fe23e2799850",
+  "record_sha256": "52a3925700f16f9e8cad53a9cfe85c15cc9d8df25648efa79867b17b096cdab9",
   "records": [
     {
       "audit": {
@@ -1736,7 +1736,7 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Manual authorization and live metadata review plus focused tests bind exactly one OpenRouter Mistral Small 4 review, sensitivity-first execution, atomic checkpoints, 13 calls maximum, zero retries, and a USD 0.50 ceiling while dataset-freeze and candidate-evaluation authority remain false.",
+        "evidence": "Manual invalid-result and revocation review plus focused tests preserve attempt 002, revoke provider authority, retain exact OpenRouter Mistral Small 4 routing and the 13-call/USD 0.50 historical bounds, and keep dataset-freeze and candidate-evaluation authority false.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -1747,7 +1747,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_002.json",
       "risk": "high",
-      "sha256": "30675e9a12c64df4f0e657a66596f5b7c7dd36eafb5ba75bd6cd5b13c68d9b43"
+      "sha256": "f25a38dcc2bac25d97b5f1e7817e54aabea1ccb76f52b5544d848617ab5ff51d"
     },
     {
       "audit": {
@@ -4026,7 +4026,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual state-machine review plus 13-call simulation and focused failure tests confirm sensitivity-first stopping, exact model/routing identity, disabled retries and fallbacks, atomic checkpoints, binding-safe resume, malformed/provider/token/cost fail-closed behavior, exclusive output, live metadata comparison, and no execution authority.",
+        "evidence": "Manual post-invalid state-machine review plus 13-call simulation and focused failure tests confirm sensitivity-first stopping, exact model/routing identity, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, preservation of malformed content and exact parser detail, exclusive output, and revoked execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -4043,7 +4043,7 @@
       ],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "9388557633c06497c0182c50c7af43baebaa2e47d8a71a4cdd598ecb353539c5"
+      "sha256": "9f2a840ad9951463da21a11c0b4bf6d64f281c27cfff650a1688f86ed59e8b51"
     },
     {
       "audit": {
@@ -6326,7 +6326,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active and only the historical oracle plus exact evidence-sufficiency review 002 are bounded; all later dataset, candidate, paid, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence review 002 authorization is revoked, and only the historical oracle remains bounded; all dataset, candidate, paid-successor, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6337,7 +6337,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "d938b904f3c821fd15f114ae3af20bfde6fbb050a4648a7aa3578c867c28fe15"
+      "sha256": "8e9c683fe4fa4f8f690811d17fb7bde7b62ba12559779d2bfa6073d78023e542"
     },
     {
       "audit": {
@@ -6758,7 +6758,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle and evidence review 002, and explicit rejection of completed pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence review 002, completed pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6769,7 +6769,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "da327fd1515bf09d178c02c6b903c1b7a6d09a4ff804913eb9787db59f43da75"
+      "sha256": "b26ca295dfc122171baf024ea0a31c9ae3fc12f53e4a54307016b2ecb0d67aab"
     },
     {
       "audit": {
@@ -7606,7 +7606,7 @@
     {
       "audit": {
         "domain": "evaluation-verification",
-        "evidence": "Focused regressions prove historical, unauthorized, and active-authorized state handling; packet binding, batch coverage, answer-key separation, six clean and six distinct defect controls, semantic-drift rejection, strict judgment accounting, metadata-expiry blocking, and freeze-guarded writes.",
+        "evidence": "Focused regressions prove historical, revoked, unauthorized, and synthetic authorized-state handling; packet binding, answer-key separation, clean/defect controls, semantic-drift rejection, strict judgment accounting, metadata-expiry blocking, and freeze-guarded writes.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7617,7 +7617,7 @@
       "package_commands": [],
       "path": "tests/test_prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "385333b03a18ece611f9e636e60955d2ba09aac44ddc1e3b269659ca867c6c4e"
+      "sha256": "7309d92f1c6af873932db6f394306cc65522600c76db916b3c31d2781ac45819"
     },
     {
       "audit": {
@@ -7750,7 +7750,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions cover the exact authorized 13-call contract, sensitivity stop, malformed/provider/identity/cost failures, prior-accounting preservation, interruption/resume, binding drift, credential secrecy, all three authorization locks, metadata expiry, price drift, and output exclusivity.",
+        "evidence": "Focused regressions cover the exact revoked 13-call contract, sensitivity stop, preservation of malformed content and parser detail, provider/identity/cost failures, prior accounting, interruption/resume, binding drift, authorization locks, metadata expiry, price drift, and output exclusivity.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7761,7 +7761,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "a965083a075cdf6b109d6f20b72e4ebbd81fc69fce79e3ca2385eb94313e0227"
+      "sha256": "e67002e099917aed56833351173444d85e483918fd81eb14021b6213406dfe0c"
     },
     {
       "audit": {

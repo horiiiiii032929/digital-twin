@@ -35,7 +35,6 @@ def test_repository_freeze_status_is_explicit() -> None:
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "factual-qa-v3-oracle-pilot-001",
-        "evidence-sufficiency-v2-independent-review-002",
     }
 
     for pilot_id in pilot_ids:

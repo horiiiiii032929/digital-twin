@@ -66,9 +66,10 @@ not require model spending or private data:
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
    build-only evidence-sufficiency workflow. Runner 002 now passes the complete
    13-call/132-judgment simulation and a clean live no-call preflight. Its exact
-   Mistral reviewer binding is now frozen for one explicitly authorized run of
-   at most 13 synthetic-public calls under the USD 0.50 emergency ceiling;
-   simulation is not independent-review evidence and the changed source
+   Mistral review 002 then stopped safely after its first sensitivity response
+   was malformed. The invalid attempt is preserved and revoked; because the
+   frozen runner omitted the response content and exact parser error, a
+   corrected successor requires separate authorization. The changed source
    revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
@@ -78,7 +79,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Evidence-sufficiency v2 execution authorization after its build-only contract passes | Researcher | Select an answerability gate and unblock product publication |
+| Corrected evidence-sufficiency review successor execution after its no-call contract passes | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 

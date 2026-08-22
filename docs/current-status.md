@@ -212,13 +212,16 @@ sensitivity-first execution runner passed a complete 13-call/132-judgment
 network-free simulation, checkpoint/resume and failure regressions, and the
 complete repository gate. A clean live no-call preflight found matching model
 metadata and pricing, an available credential, and an unused output path. It is
-previously blocked only by the three deliberate authorization locks: provider
-approval, instrument freeze, and the bounded freeze allowlist. The user has now
-authorized exactly `evidence-sufficiency-v2-independent-review-002`; those
-three locks are frozen in a separate checkpoint for one run of at most 13
-synthetic-public calls under the USD 0.50 emergency ceiling. No provider
-inference had been made at this authorization checkpoint. The draft remains
-unfrozen and unopened; no exact evidence-sufficiency
+then blocked only by the three deliberate authorization locks. After explicit
+authorization, attempt 002 made the sensitivity call once. The exact Mistral
+identity matched, but its response failed the strict JSON/schema contract, so
+the runner stopped before all 12 bulk batches. The invalid attempt used 3,861
+input and 1,519 output tokens, cost USD 0.00149055, and recorded no accepted
+judgment. Because the frozen runner did not preserve the malformed content or
+exact parser error, no reviewer- or dataset-quality conclusion is valid.
+Authorization is revoked, the unfavorable attempt is registered, and the
+prospective runner now preserves both fields for a separately authorized
+successor. The draft remains unfrozen and unopened; no exact evidence-sufficiency
 verifier is selected, and candidate execution remains unauthorized. The runner
 build is **Go Deeper**, while the product decision remains **Refine** with no
 selected implementation. Because its source tree differs from V8, the V8 image
@@ -263,7 +266,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; review runner 002 is build-ready and provider-unauthorized | Authorize and execute the bounded independent review, adjudicate at most 12 priority cases, freeze a corrected decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; review 002 stopped safely as an invalid harness execution and is revoked | Bind and separately authorize a corrected review successor, adjudicate at most 12 priority cases, freeze a corrected decision set, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Keep; method milestone complete | Pilot 003 passed all gates: 100/100 deterministic-valid, 80/80 citation-valid, 99/100 reviewer agreement, and 20/20 mutation rejection; authorization revoked; #87 is complete | No current R1 blocker. #110 owns optional staged 1,000/9,000-case evidence and requires separate authorization |
 
 ## Release readiness and critical path
@@ -278,7 +281,7 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / review authorized / Refine | Execute the exact 13-call independent review once, revoke authorization, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
+| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 002 invalid and revoked / Refine | Freeze and separately authorize one corrected review successor, adjudicate at most 12 priority cases, freeze the corrected 120-case set, then select an open-set answerability gate without using AnyHit |
 | 4 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 5 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Todo / Go Deeper | Design and separately authorize a 1,000-case checkpoint; require a complete pass before considering the remaining 9,000 cases |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |

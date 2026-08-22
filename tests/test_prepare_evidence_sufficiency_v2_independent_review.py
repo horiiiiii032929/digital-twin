@@ -186,11 +186,15 @@ def test_preflight_reports_exact_build_only_blockers(instrument: dict) -> None:
     }
 
 
-def test_active_instrument_preflight_is_authorized(instrument: dict) -> None:
+def test_authorized_instrument_preflight_is_ready(instrument: dict) -> None:
+    authorized = copy.deepcopy(instrument)
+    authorized["status"] = "frozen-pending-execution"
+    authorized["execution_safety"]["provider_execution_authorized"] = True
+    authorized["decision_rule"]["authorize_provider_execution"] = True
     verified_at = datetime.fromisoformat(
-        instrument["execution_safety"]["reviewer_verified_at"]
+        authorized["execution_safety"]["reviewer_verified_at"]
     )
-    result = preflight(instrument, now=verified_at + timedelta(hours=1))
+    result = preflight(authorized, now=verified_at + timedelta(hours=1))
 
     assert result == {
         "instrument_id": "evidence-sufficiency-v2-independent-review-002",
@@ -223,7 +227,10 @@ def test_bound_reviewer_metadata_expires_after_24_hours(instrument: dict) -> Non
     )
     result = preflight(instrument, now=verified_at + timedelta(hours=24, seconds=1))
 
-    assert result["blockers"] == ["reviewer-metadata-not-fresh"]
+    assert result["blockers"] == [
+        "reviewer-metadata-not-fresh",
+        "provider-review-not-authorized",
+    ]
 
 
 def test_write_mode_is_blocked_by_repository_execution_freeze(

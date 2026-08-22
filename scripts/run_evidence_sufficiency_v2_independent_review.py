@@ -555,6 +555,8 @@ async def _safe_call(
         return {
             "status": "malformed-response",
             "error_type": type(error).__name__,
+            "error_detail": str(error),
+            "raw_response_content": raw.content,
             "value": None,
             "call": _call_record(raw, binding),
         }

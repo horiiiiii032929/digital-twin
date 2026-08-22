@@ -82,9 +82,9 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     assert safety["maximum_calls"] == 13
     assert safety["maximum_reserved_cost_usd"] == 0.0702
     assert safety["maximum_cost_usd"] == 0.5
-    assert instrument["status"] == "frozen-pending-execution"
-    assert safety["provider_execution_authorized"] is True
-    assert instrument["decision_rule"]["authorize_provider_execution"] is True
+    assert instrument["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert instrument["decision_rule"]["authorize_provider_execution"] is False
 
 
 def test_provider_transport_disables_retries_and_fallbacks(assets: dict) -> None:
@@ -185,6 +185,9 @@ def test_sensitivity_operational_failure_stops_bulk(
     assert state["invalid_reason"] == expected_reason
     assert state["accounting"]["calls_attempted"] == 1
     assert state["batch_outcomes"] == []
+    if expected_reason == "malformed-review-response":
+        assert state["sensitivity_outcome"]["raw_response_content"] == "not-json"
+        assert state["sensitivity_outcome"]["error_detail"]
 
 
 def test_malformed_bulk_response_preserves_prior_accounting(
@@ -204,6 +207,8 @@ def test_malformed_bulk_response_preserves_prior_accounting(
     assert state["accounting"]["calls_attempted"] == 2
     assert state["accounting"]["calls_with_provider_response"] == 2
     assert len(state["judgments"]) == 12
+    assert state["batch_outcomes"][0]["raw_response_content"] == "not-json"
+    assert state["batch_outcomes"][0]["error_detail"]
 
 
 def test_cost_overshoot_is_recorded_and_stops(
