@@ -94,10 +94,11 @@ Current utilities:
   error code/message, and routing attempts without recording credentials. Run
   `npm run verify:evidence-sufficiency-v2-review-004`,
   `npm run simulate:evidence-sufficiency-v2-review-004`, or
-  `npm run preflight-live:evidence-sufficiency-v2-review-004`. The researcher
-  separately authorized exactly one `npm run
-  execute:evidence-sufficiency-v2-review-004` attempt; all dataset-freeze,
-  candidate-evaluation, private-source, and later execution remains blocked.
+  `npm run preflight-live:evidence-sufficiency-v2-review-004`. Its authorized
+  sensitivity request exposed first-party Mistral endpoint statuses 400 and 401
+  before any provider response; the attempt is invalid and revoked. The exact
+  execute command now fails closed. All dataset-freeze, candidate-evaluation,
+  private-source, and later execution remains blocked.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

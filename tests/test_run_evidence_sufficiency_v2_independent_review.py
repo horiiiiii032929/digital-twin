@@ -102,15 +102,15 @@ def test_runner_contract_binds_exact_packet_and_limits(assets: dict) -> None:
     assert instrument["decision_rule"]["authorize_provider_execution"] is False
 
 
-def test_native_openrouter_successor_is_frozen_and_authorized() -> None:
+def test_native_openrouter_attempt_is_invalid_and_revoked() -> None:
     assets = runner.load_assets(INSTRUMENT_004_PATH)
     instrument = assets["instrument"]
     safety = instrument["execution_safety"]
 
     assert instrument["instrument_id"].endswith("-004")
-    assert instrument["status"] == "frozen-pending-execution"
-    assert safety["provider_execution_authorized"] is True
-    assert instrument["decision_rule"]["authorize_provider_execution"] is True
+    assert instrument["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert instrument["decision_rule"]["authorize_provider_execution"] is False
     assert safety["reviewer_transport"] == runner.NATIVE_OPENROUTER_TRANSPORT
     assert safety["reviewer_api_url"] == runner.OPENROUTER_CHAT_URL
     assert assets["packet"]["content_sha256"] == (
