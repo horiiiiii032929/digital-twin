@@ -49,8 +49,8 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve invalid and revoked reviews 002 and 003; keep native
-   OpenRouter review 004 provider-unauthorized until a separate decision; and
+1. #105 — preserve invalid and revoked reviews 002 and 003; execute native
+   OpenRouter review 004 once under its separate bounded authorization; and
    select the first production answerability gate only after that review and
    all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "4f77ca7f5271b47b2fb6712a4a45858a0d3ff51ccea5c26add41b8b1755312ea",
+  "record_sha256": "bb0a9dc790814a236531a9c2ccd8966750415b3acdbff1f3656b0ffdd2f9890c",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Command review confirms separate review-004 validation, network-free simulation, and live no-call preflight commands while exposing no paid 004 execution shortcut; all provider execution remains unauthorized and cannot bypass the repository freeze.",
+        "evidence": "Command review confirms separate review-004 validation, simulation, live no-call preflight, and exact one-time execution commands; the paid command remains fail-closed outside the correlated instrument and repository-freeze authorization while every later stage stays blocked.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "488d9118bf7d6160ed0401cd0fae216a80f333f0cf77d5529fe9f6b1c71a8bcc"
+      "sha256": "bb63dd156437a3c5e1a40acffdc248fd5f8719c7d8a75521cc4b60ac7bc554b8"
     },
     {
       "audit": {
@@ -1768,7 +1768,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual build-only review and focused regressions bind the unchanged synthetic-public decision draft to a new packet and native official OpenRouter chat transport with strict schema, router metadata, preserved sanitized provider failures, zero retries, no fallbacks, and every provider, dataset-freeze, candidate, private-source, and deployment permission false.",
+        "evidence": "Manual authorization review and focused regressions bind one exact review-004 run over the unchanged synthetic-public packet to the native OpenRouter transport, strict schema, router metadata, zero retries, first-party routing, and USD 0.50 ceiling while dataset-freeze, candidate, private-source, and deployment permissions remain false.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_004.json",
       "risk": "high",
-      "sha256": "f06ccb89084501e9c90e9b88efeb563470a0f224a49a1f117f8540da6dae957c"
+      "sha256": "f128f037a040bf1a34c593603eba7db5d5a1f7a8ffbd1851249acd746b6a6f39"
     },
     {
       "audit": {
@@ -4067,6 +4067,7 @@
       "category": "active_or_unclassified_tooling",
       "disposition": "active_audited",
       "package_commands": [
+        "execute:evidence-sufficiency-v2-review-004",
         "execute:evidence-sufficiency-v2-review-runner",
         "preflight-live:evidence-sufficiency-v2-review-004",
         "preflight-live:evidence-sufficiency-v2-review-runner",
@@ -6361,7 +6362,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002 and 003 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, reviews 002 and 003 are revoked, and only the historical oracle plus exact review 004 are bounded; all dataset-freeze, candidate, other paid-successor, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6372,7 +6373,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "dbcae8cfe16773a40c795a8413eb7b823ee337800cd69eaf3b5e953f5c1d65a6"
     },
     {
       "audit": {
@@ -6793,7 +6794,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002 and 003, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle plus review 004, and explicit rejection of revoked reviews 002 and 003, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6804,7 +6805,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "3500b450d368944aa9213ce9d9d7b9f35de29666efe87262be48f62b30e00476"
+      "sha256": "9de94577b00d2b2292a2ac90788b78bbaa296dd66a0c4bc36321a8713dac1e05"
     },
     {
       "audit": {
@@ -7785,7 +7786,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions cover revoked 003 and immutable 002 compatibility plus unauthorized 004, the exact official OpenRouter payload, router metadata and request IDs, sanitized upstream 401 preservation without credential leakage, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
+        "evidence": "Focused regressions cover revoked 003 and immutable 002 compatibility plus exact authorized 004, the official OpenRouter payload, router metadata and request IDs, sanitized upstream 401 preservation without credential leakage, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7796,7 +7797,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "08ef6c88e9162560d35a811554a1b3d3057372b55b7e9684f550d70c71d4b8e2"
+      "sha256": "8b0b6439033a734ddf67eea06e2a3e98c70d5af429270ee73f06560720fa1ec5"
     },
     {
       "audit": {
