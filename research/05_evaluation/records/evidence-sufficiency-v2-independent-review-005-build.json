@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-005-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "2e91c87bb6b639ec08b3868ea254f010743ef069",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "openrouter-mistral-review-004",
+        "version": "invalid-revoked-control",
+        "configuration": {
+          "model": "mistralai/mistral-small-2603",
+          "provider": "Mistral",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "live-endpoint-ready",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-stable-provider-binding",
+          "passed": false,
+          "evidence": "Review 004 reached first-party Mistral endpoints but received statuses 400 and 401 without a provider response; the exact binding is dropped."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "The historical native runner completed its frozen network-free simulation and failure regressions."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Review 004 authorization is revoked."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Invalid reviews 002 through 004 remain immutable and registered."
+        }
+      ],
+      "failures_by_category": {
+        "provider-endpoint-readiness": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gemini-review-005",
+        "version": "stable-provider-unauthorized-build",
+        "configuration": {
+          "model": "google/gemini-3.7-flash",
+          "backend": "google/gemini-3.7-flash-20260813",
+          "provider": "google-ai-studio",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "live-endpoint-ready",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-stable-provider-binding",
+          "passed": true,
+          "evidence": "Current official metadata identifies Gemini 3.7 Flash as stable and exposes an active exact Google AI Studio endpoint with the required parameters."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "All 13 simulated calls and 132 judgments completed with exact accounting and all sensitivity gates passing."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Instrument, bounded freeze, and provider authorization locks remain closed."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "The successor introduces a new run identity without changing reviews 002 through 004."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "openrouter-gemini-review-005",
+    "rationale": "The stable cross-family Gemini binding passes current exact-endpoint metadata checks and the complete network-free contract while retaining every authorization and data boundary.",
+    "limitations": [
+      "No provider inference occurred, so reviewer quality and dataset quality remain unknown.",
+      "The live endpoint can still experience future operational failure and must be refreshed within 24 hours before execution.",
+      "The decision dataset remains unfrozen and no evidence-sufficiency implementation is selected."
+    ]
+  }
+}

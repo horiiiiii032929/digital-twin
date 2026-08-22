@@ -2007,7 +2007,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Independent CLI/tooling review and focused model-policy tests verify stable Gemini 3.7 Flash is registered only as a prospective provider-unauthorized evidence-sufficiency reviewer while Gemma, Claude, retired Qwen, silent fallback, and unregistered execution remain blocked.",
       "findings": [],
       "path": "scripts/analyze_cross_course_retrieval_heldout.py",
       "reviewed_at": "2026-08-20",
@@ -3090,7 +3090,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6"
+      "sha256": "5fb6806764632c25ef1b33290a17082b80266e56721094aeff222334239b77af"
     },
     {
       "audit_status": "audited",
@@ -3976,7 +3976,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-and-model-provider-boundaries",
-      "evidence": "Manual model/message contract review verified registered current-model enforcement, safe task metadata, and response identity controls; focused model-policy tests passed.",
+      "evidence": "Manual model-policy review verifies stable Gemini 3.7 Flash is registered with exact OpenRouter and provider slugs as prospective and unselected; existing prohibited-model and exact-registration controls remain unchanged and focused tests pass.",
       "findings": [],
       "path": "src/digital_twin/llm.py",
       "reviewed_at": "2026-08-20",
@@ -3992,7 +3992,7 @@
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "ac490596050108c31cd581b5feb0fddb408823d8af09acdc71c59c1761c77d22"
+      "sha256": "fb6ada13bdbc76b78cb7c3b5f965c6c6f72a054cb3446b73cea1476de864072b"
     },
     {
       "audit_status": "audited",
@@ -4339,7 +4339,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-and-grounding-verification",
-      "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+      "evidence": "Focused regression coverage confirms the prospective Gemini reviewer is accepted by exact registration while prohibited Gemma, Claude, retired local models, and package-command execution remain blocked.",
       "findings": [],
       "path": "tests/digital_twin/test_evaluation_instruments.py",
       "reviewed_at": "2026-08-20",
@@ -5037,7 +5037,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "bd682dd910c384d931a39ed31d1ad910e5736e0fbf529a0083fec8b55a7ade3c"
+      "sha256": "6cf3a75deeff29fa41446e9bd3bfba65138472d3ccfe2d7179e6b38f8a9f6358"
     },
     {
       "audit_status": "audited",

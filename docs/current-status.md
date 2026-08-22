@@ -254,6 +254,18 @@ decision remains **Refine** with no selected implementation. Because its source
 tree differs from V8, the V8 image identities are historical evidence; the
 current source has no image or publication claim.
 
+Prospective `evidence-sufficiency-v2-independent-review-005` replaces only that
+dropped reviewer binding. It pins stable `google/gemini-3.7-flash` to the exact
+Google AI Studio standard endpoint through native OpenRouter routing, records
+the dated backend identity `google/gemini-3.7-flash-20260813`, requires strict
+structured output, and disables retries and fallbacks. Its 13-call/132-judgment
+network-free simulation and complete repository gate pass. A clean live
+metadata-only preflight found no provider mismatch, a present credential, an
+unused output path, and exactly three deliberate locks: provider authorization,
+instrument freeze, and bounded-freeze allowlisting. The USD 0.39 maximum
+reservation remains below the USD 0.50 ceiling. No inference call occurred;
+review 005 is build-only and provider-unauthorized.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6

@@ -7,6 +7,7 @@ from scripts.run_factual_qa_quality_pilot import OllamaJsonTransport
 from src.digital_twin.model_policy import (
     LOCAL_GENERAL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
+    OPENROUTER_GEMINI_REVIEW_MODEL,
     OPENROUTER_INDEPENDENT_REVIEW_MODEL,
     OPENROUTER_QWEN_REVIEW_MODEL,
     ModelPolicyError,
@@ -45,6 +46,7 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
         OPENROUTER_DEEPSEEK_MODEL,
         OPENROUTER_INDEPENDENT_REVIEW_MODEL,
         OPENROUTER_QWEN_REVIEW_MODEL,
+        OPENROUTER_GEMINI_REVIEW_MODEL,
         "Qwen/Qwen3-Embedding-0.6B",
         "Qwen/Qwen3-Reranker-0.6B",
         "jina-embeddings-v5-text-small",

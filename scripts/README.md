@@ -99,6 +99,14 @@ Current utilities:
   before any provider response; the attempt is invalid and revoked. The exact
   execute command now fails closed. All dataset-freeze, candidate-evaluation,
   private-source, and later execution remains blocked.
+  Successor `005` changes only the dropped reviewer binding: it requests stable
+  `google/gemini-3.7-flash` through the exact `google-ai-studio` standard
+  endpoint, freezes the dated backend identity, and keeps strict schema, zero
+  retries, no fallbacks, native diagnostics, and synthetic-public inputs. Run
+  `npm run verify:evidence-sufficiency-v2-review-005`,
+  `npm run simulate:evidence-sufficiency-v2-review-005`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-005`. Provider
+  execution remains unauthorized, so the execute command fails closed.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and
