@@ -167,15 +167,39 @@ def test_judgment_validator_fails_closed(packet: dict, mutation: str) -> None:
 
 
 def test_preflight_reports_exact_build_only_blockers(instrument: dict) -> None:
+    unauthorized = copy.deepcopy(instrument)
+    unauthorized["status"] = "reviewer-bound-provider-unauthorized"
+    unauthorized["execution_safety"]["provider_execution_authorized"] = False
+    unauthorized["decision_rule"]["authorize_provider_execution"] = False
     verified_at = datetime.fromisoformat(
-        instrument["execution_safety"]["reviewer_verified_at"]
+        unauthorized["execution_safety"]["reviewer_verified_at"]
     )
-    result = preflight(instrument, now=verified_at + timedelta(hours=1))
+    result = preflight(unauthorized, now=verified_at + timedelta(hours=1))
 
     assert result == {
         "instrument_id": "evidence-sufficiency-v2-independent-review-002",
         "status": "blocked-not-authorized",
         "blockers": ["provider-review-not-authorized"],
+        "provider_or_model_calls": 0,
+        "private_data_read": False,
+        "candidate_evaluation_opened": False,
+    }
+
+
+def test_authorized_instrument_preflight_is_ready(instrument: dict) -> None:
+    authorized = copy.deepcopy(instrument)
+    authorized["status"] = "frozen-pending-execution"
+    authorized["execution_safety"]["provider_execution_authorized"] = True
+    authorized["decision_rule"]["authorize_provider_execution"] = True
+    verified_at = datetime.fromisoformat(
+        authorized["execution_safety"]["reviewer_verified_at"]
+    )
+    result = preflight(authorized, now=verified_at + timedelta(hours=1))
+
+    assert result == {
+        "instrument_id": "evidence-sufficiency-v2-independent-review-002",
+        "status": "ready",
+        "blockers": [],
         "provider_or_model_calls": 0,
         "private_data_read": False,
         "candidate_evaluation_opened": False,

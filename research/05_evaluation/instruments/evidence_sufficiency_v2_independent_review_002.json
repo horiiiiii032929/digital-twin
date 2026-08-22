@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "evidence-sufficiency-v2-independent-review-002",
-  "status": "reviewer-bound-provider-unauthorized",
+  "status": "invalid-execution-authorization-revoked",
   "issue": 105,
   "predecessor": "evidence-sufficiency-v2-independent-review-001",
   "decision_dataset": {
@@ -63,12 +63,13 @@
     "reviewer_provider": "openrouter",
     "reviewer_model": "mistralai/mistral-small-2603",
     "reviewer_litellm_model": "openrouter/mistralai/mistral-small-2603",
-    "reviewer_verified_at": "2026-08-22T01:03:58+08:00",
+    "reviewer_verified_at": "2026-08-22T14:58:42+08:00",
     "metadata_maximum_age_hours": 24,
     "metadata_source": "https://openrouter.ai/api/v1/models",
     "provider_policy_source": "https://openrouter.ai/providers",
     "credential_environment_variable": "OPENROUTER_API_KEY",
     "temperature": 0,
+    "timeout_seconds": 120,
     "max_input_tokens_per_call": 20000,
     "max_output_tokens_per_call": 4000,
     "pricing_usd_per_million_input_tokens": 0.15,
@@ -82,6 +83,13 @@
       "require_parameters": true,
       "data_collection": "allow",
       "zdr": false
+    },
+    "runner": {
+      "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
+      "sensitivity_first": true,
+      "atomic_checkpoints": true,
+      "resume_requires_exact_bindings": true,
+      "raw_output_path": "reports/generated/evidence-sufficiency-v2-independent-review-002.json"
     },
     "provider_policy": {
       "trains_on_prompts": false,

@@ -70,6 +70,17 @@ Current utilities:
   hard ceiling, and synthetic-public data only. Provider execution remains
   unauthorized; the simulation is orchestration evidence only and cannot
   freeze the dataset.
+- `run_evidence_sufficiency_v2_independent_review.py`: executes only the exact
+  reviewer-bound packet after a separate frozen authorization. It runs the
+  six-clean/six-defect sensitivity call before the 12 review batches, stops
+  bulk work when reviewer sensitivity is unreliable, disables retries and
+  fallbacks, pins model identity, checkpoints after every call, enforces the
+  13-call and USD 0.50 ceilings, and supports binding-safe resume. Use
+  `npm run verify:evidence-sufficiency-v2-review-runner`,
+  `npm run simulate:evidence-sufficiency-v2-review-runner`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-runner`. The execute
+  command remains fail-closed until both the instrument and bounded repository
+  freeze receive one-time authorization.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; no evidence-sufficiency or multimodal method is selected | [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) and successor to #41 |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; evidence-sufficiency review runner is build-ready but unauthorized and no method is selected; no multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | #87 completed Keep after pilot 003 passed every 100-case gate; #110 owns optional 1,000/9,000-case scale, which remains unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -64,9 +64,13 @@ not require model spending or private data:
    authorization. Keep T1 rejected by staging configuration while preparing,
    but not executing, one separately frozen confirmation.
 5. Preserve V8's historical current-image `Refine` result and V12's corrected
-   build-only evidence-sufficiency workflow. Its exact Mistral reviewer binding
-   remains provider-unauthorized; simulation is not independent-review evidence
-   and the changed source revision has not been rebuilt.
+   build-only evidence-sufficiency workflow. Runner 002 now passes the complete
+   13-call/132-judgment simulation and a clean live no-call preflight. Its exact
+   Mistral review 002 then stopped safely after its first sensitivity response
+   was malformed. The invalid attempt is preserved and revoked; because the
+   frozen runner omitted the response content and exact parser error, a
+   corrected successor requires separate authorization. The changed source
+   revision has not been rebuilt.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -75,7 +79,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Evidence-sufficiency v2 execution authorization after its build-only contract passes | Researcher | Select an answerability gate and unblock product publication |
+| Corrected evidence-sufficiency review successor execution after its no-call contract passes | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 

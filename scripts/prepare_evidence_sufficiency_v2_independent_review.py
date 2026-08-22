@@ -30,12 +30,15 @@ DEFAULT_OUTPUT = (
     / "reports/generated/evidence-sufficiency-v2-independent-review-packet-001.json"
 )
 SUPPORTED_INSTRUMENTS = {
-    "evidence-sufficiency-v2-independent-review-001": (
+    "evidence-sufficiency-v2-independent-review-001": {
         "build-only-provider-unauthorized"
-    ),
-    "evidence-sufficiency-v2-independent-review-002": (
-        "reviewer-bound-provider-unauthorized"
-    ),
+    },
+    "evidence-sufficiency-v2-independent-review-002": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -74,7 +77,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     instrument_id = instrument.get("instrument_id")
     if instrument_id not in SUPPORTED_INSTRUMENTS:
         raise IndependentReviewError("unexpected independent-review instrument ID")
-    if instrument.get("status") != SUPPORTED_INSTRUMENTS[instrument_id]:
+    if instrument.get("status") not in SUPPORTED_INSTRUMENTS[instrument_id]:
         raise IndependentReviewError("independent-review build status drifted")
     dataset = instrument.get("decision_dataset", {})
     if (
@@ -85,8 +88,16 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     ):
         raise IndependentReviewError("decision-dataset review boundary drifted")
     safety = instrument.get("execution_safety", {})
+    authorized = safety.get("provider_execution_authorized")
+    if authorized not in {True, False}:
+        raise IndependentReviewError("independent-review authorization is not explicit")
+    if (instrument.get("status") == "frozen-pending-execution") is not authorized:
+        raise IndependentReviewError("independent-review authorization status drifted")
+    if instrument.get("decision_rule", {}).get(
+        "authorize_provider_execution"
+    ) is not authorized:
+        raise IndependentReviewError("independent-review decision authorization drifted")
     required_false = {
-        "provider_execution_authorized",
         "fallback_routing_allowed",
         "private_source_execution_authorized",
         "candidate_evaluation_authorized",
@@ -170,12 +181,13 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     if any(
         decision_rule.get(key) is not False
         for key in (
-            "authorize_provider_execution",
             "authorize_dataset_freeze",
             "authorize_candidate_evaluation",
         )
     ):
-        raise IndependentReviewError("review instrument cannot self-authorize")
+        raise IndependentReviewError(
+            "review instrument cannot authorize later evaluation stages"
+        )
     required_response_fields = set(
         instrument.get("review_contract", {}).get("required_response_fields", [])
     )
