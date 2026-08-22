@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "factual-qa-v3-scale-pilot-100-003",
-  "status": "frozen-pending-execution",
+  "status": "completed-keep-authorization-revoked",
   "issue": 87,
   "predecessor": "factual-qa-v3-scale-pilot-100-002",
   "method_version": "factual-qa-v3-deterministic-truth-pipeline-v1",
@@ -115,7 +115,7 @@
     "paid_preflight_requires_live_match": true
   },
   "execution": {
-    "provider_execution_authorized": true,
+    "provider_execution_authorized": false,
     "dataset_write_authorized": false,
     "automatic_stage_promotion": false,
     "provider_canary_call_limit": 2,

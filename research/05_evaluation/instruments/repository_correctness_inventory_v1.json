@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "8cb27e53f8bcee221be2161317fb05ef143bb73d34ca159e64b41072eb7ffd7f",
+  "record_sha256": "9ebdc0f3ea1d774a23988971cbd7e3476db60f0fae3843833dac457d329dbba3",
   "records": [
     {
       "audit": {
@@ -1944,7 +1944,7 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Manual gate, current official-provider metadata review, and explicit researcher authorization confirmed exactly pilot 003 is frozen for one execution; model output is limited to question wording, deterministic truth remains authoritative, exact routing and zero retries are required, larger stages remain closed, and the USD 3 emergency ceiling is fail-closed.",
+        "evidence": "Pilot 003 completed Keep with all machine gates passed and its one-time authorization revoked; deterministic truth remained authoritative, exact routing and zero retries held, 223 responses were fully accounted, and the 1,000-/10,000-case stages remain closed.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1955,7 +1955,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_pilot_100_003.json",
       "risk": "high",
-      "sha256": "ac210b0b34691abfe694c035d9ef1e6efd95d37eae9aa3eca2bdf40711242139"
+      "sha256": "4804afef4ba5540db6701f5c8bc638a0291647bf9f840566b464004237f934a4"
     },
     {
       "audit": {
@@ -6304,7 +6304,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active; only the historical oracle and explicitly authorized pilot 003 are bounded, while provider review, held-out, 1,000-, 10,000-case, and all unknown execution remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active and pilot 003 authorization is revoked; only the historical oracle remains bounded, while provider review, held-out, paid successors, 1,000-, 10,000-case, and unknown execution remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6315,7 +6315,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9b66c59c561fcdc4491a46de79db56fe8a1a44aff100db44960e3fe915b5c5cd"
+      "sha256": "f15967c0fbf7a32292a8d334e786446ca369789871fc585aad0332d4ada34057"
     },
     {
       "audit": {
@@ -6736,7 +6736,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of the historical oracle plus one-time pilot 003, and explicit rejection of provider review, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of completed pilot 003, provider review, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6747,7 +6747,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "6e90f69ac0db2b24341defd1de8c39534755ab0bb892bf18c2eaf1184a318407"
+      "sha256": "626437b820c204aa660796b647f9ec59013b79b13d44bc74ab2b5c42266ba896"
     },
     {
       "audit": {
@@ -7440,7 +7440,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused regressions prove exact one-time freeze authorization, question-only model authority, deterministic metadata immutability, canonical fallback and quarantine behavior, duplicate rejection, canary/identity/retention-policy failure closure, cost and call ceilings, and exact resume binding.",
+        "evidence": "Focused regressions prove completed-Keep authorization revocation, question-only model authority, deterministic metadata immutability, canonical fallback and quarantine behavior, duplicate rejection, canary/identity/retention-policy failure closure, cost and call ceilings, and exact resume binding.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -7451,7 +7451,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_pilot_100_003.py",
       "risk": "medium",
-      "sha256": "82bd1679a7916919abbcefc0bd9b5d445b2f5aa27e442233e5f60fd62e498020"
+      "sha256": "32712c8df4a996cdef37a885798ed1f1b695518a8b425a4e42da1da0aaf0a583"
     },
     {
       "audit": {

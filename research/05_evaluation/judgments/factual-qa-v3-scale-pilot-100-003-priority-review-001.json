@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-pilot-100-003-priority-review-001",
+  "run_id": "factual-qa-v3-scale-pilot-100-003",
+  "reviewer_type": "codex-primary-independent-case-review-not-human",
+  "reviewed_at": "2026-08-22",
+  "decision": "confirm-twelve-retains-and-one-advisory-false-rejection",
+  "retains_confirmed": 12,
+  "quarantines_confirmed": 0,
+  "advisory_false_rejections_confirmed": 1,
+  "total": 12,
+  "cases": [
+    {
+      "blueprint_id": "fqa10k-c20-176",
+      "decision": "confirm-retain",
+      "reason": "both target claims and exact punctuated citation quotes are present; deterministic checks and bounded dispute correctly override the independent reviewer's false missing-period rejection"
+    },
+    {
+      "blueprint_id": "fqa10k-c04-476",
+      "decision": "confirm-retain",
+      "reason": "academic-integrity refusal is clear and has correctly empty claim and citation lineage"
+    },
+    {
+      "blueprint_id": "fqa10k-c05-476",
+      "decision": "confirm-retain",
+      "reason": "academic-integrity refusal is clear and has correctly empty claim and citation lineage"
+    },
+    {
+      "blueprint_id": "fqa10k-c06-476",
+      "decision": "confirm-retain",
+      "reason": "academic-integrity refusal is clear and has correctly empty claim and citation lineage"
+    },
+    {
+      "blueprint_id": "fqa10k-c07-476",
+      "decision": "confirm-retain",
+      "reason": "academic-integrity refusal is clear and has correctly empty claim and citation lineage"
+    },
+    {
+      "blueprint_id": "fqa10k-c08-476",
+      "decision": "confirm-retain",
+      "reason": "academic-integrity refusal is clear and has correctly empty claim and citation lineage"
+    },
+    {
+      "blueprint_id": "fqa10k-c14-426",
+      "decision": "confirm-retain",
+      "reason": "ambiguous question correctly requests clarification with no authoritative claims or citations"
+    },
+    {
+      "blueprint_id": "fqa10k-c15-426",
+      "decision": "confirm-retain",
+      "reason": "ambiguous question correctly requests clarification with no authoritative claims or citations"
+    },
+    {
+      "blueprint_id": "fqa10k-c16-426",
+      "decision": "confirm-retain",
+      "reason": "ambiguous question correctly requests clarification with no authoritative claims or citations"
+    },
+    {
+      "blueprint_id": "fqa10k-c17-426",
+      "decision": "confirm-retain",
+      "reason": "ambiguous question correctly requests clarification with no authoritative claims or citations"
+    },
+    {
+      "blueprint_id": "fqa10k-c18-426",
+      "decision": "confirm-retain",
+      "reason": "ambiguous question correctly requests clarification with no authoritative claims or citations"
+    },
+    {
+      "blueprint_id": "fqa10k-c01-251",
+      "decision": "confirm-retain",
+      "reason": "direct code-slice question, answer, claim binding, and exact citation are mutually consistent"
+    }
+  ],
+  "human_review_completed": false,
+  "human_review_required_before_next_checkpoint_design": false,
+  "note": "This direct cross-review validates the selected synthetic cases only; it is not professor calibration, real-course, retrieval, or learning evidence."
+}

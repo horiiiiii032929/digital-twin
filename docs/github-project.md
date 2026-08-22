@@ -49,18 +49,19 @@ professor-communication track.
 
 ## Critical path
 
-1. #87 — PR #103 contains the provider-free deterministic successor; PR #109
-   records the supervisor checkpoint and one-time pilot-003 authorization.
-   Execute the bounded confirmation, record the result, and revoke
-   authorization.
-2. #88 — externally blocked on host/domain selection; merged PR #93
+1. #105 — complete the bounded independent evidence-sufficiency review and
+   select the first production answerability gate.
+2. #87 — PR #109 records pilot 003 Keep: every 100-case gate passed and the
+   one-time authorization is revoked. Design, but do not authorize, the separate
+   1,000-case checkpoint.
+3. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-3. #24 — calibrate Professor Digital Twin fidelity against independent expert
+4. #24 — calibrate Professor Digital Twin fidelity against independent expert
    labels, separately from factual QA.
-4. #9 and #25 — production operations and deployed end-to-end validation after
+5. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
-5. #10 — approval-gated professor/student workflow and usability pilot.
+6. #10 — approval-gated professor/student workflow and usability pilot.
 
 Issues #85 and #86 are completed `Refine` history and are archived from the
 live board. Issues #13 and #44 remain parallel final-delivery and professor-
