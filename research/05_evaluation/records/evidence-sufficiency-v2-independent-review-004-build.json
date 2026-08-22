@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-004-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "36e73592e75aed4b1db54d55beaff8f654d68885",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-runner-v2",
+        "version": "review-003-invalid-wrapper-control",
+        "configuration": {
+          "transport": "litellm-openrouter-adapter",
+          "strict_json_schema": true,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "native-provider-error-detail-preservation-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "official-native-openrouter-request-contract",
+          "passed": false,
+          "evidence": "Review 003 used a third-party transport adapter rather than the documented native HTTP contract."
+        },
+        {
+          "name": "upstream-failure-remains-diagnosable",
+          "passed": false,
+          "evidence": "Invalid attempt 003 collapsed the first failure into an empty authentication-class wrapper exception."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": true,
+          "evidence": "The historical runner passed its network-free checkpoint and resume regressions."
+        },
+        {
+          "name": "live-provider-preflight",
+          "passed": true,
+          "evidence": "Review 003's build preflight matched then-current model and pricing metadata without an inference call."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Review 003 authorization is revoked and this comparison made no provider inference call."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were used."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Review 003 remains immutable, invalid, revoked, registered, and loadable."
+        }
+      ],
+      "failures_by_category": {
+        "transport-observability": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bounded-independent-advisory-review-runner-v3",
+        "version": "review-004-native-build-provider-unauthorized",
+        "configuration": {
+          "transport": "openrouter-native-chat-completions-v1",
+          "api_url": "https://openrouter.ai/api/v1/chat/completions",
+          "strict_json_schema": true,
+          "router_metadata_enabled": true,
+          "maximum_calls": 13,
+          "retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-call-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "native-provider-error-detail-preservation-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "official-native-openrouter-request-contract",
+          "passed": true,
+          "evidence": "Network-free request inspection proves the exact native endpoint, bearer header, strict response format, top-level provider routing, usage request, and router-metadata header."
+        },
+        {
+          "name": "upstream-failure-remains-diagnosable",
+          "passed": true,
+          "evidence": "A simulated upstream 401 preserves sanitized status, error message, request ID, generation ID, and router attempts without retaining the credential."
+        },
+        {
+          "name": "atomic-checkpoint-and-binding-safe-resume",
+          "passed": true,
+          "evidence": "Focused tests pass for per-call checkpoints, interruption, exact-binding resume, malformed bulk accounting, and failed sensitivity stopping."
+        },
+        {
+          "name": "live-provider-preflight",
+          "passed": true,
+          "evidence": "The clean no-call preflight matched exact model, endpoint, structured-output, context, and pricing metadata with no live failure."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "The three authorization locks remain closed and no provider inference occurred."
+        },
+        {
+          "name": "private-and-heldout-data-remain-closed",
+          "passed": true,
+          "evidence": "Only synthetic-public fixtures were used."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Historical instruments and invalid results 002 and 003 remain unchanged, revoked, registered, and loadable."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bounded-independent-advisory-review-runner-v3",
+    "rationale": "The native transport follows OpenRouter's official contract and preserves actionable sanitized upstream diagnostics while retaining the existing fail-closed execution and authorization boundaries.",
+    "limitations": [
+      "No provider inference was made, so reviewer and dataset quality remain unknown.",
+      "The 120-case draft remains unfrozen and unopened for candidate evaluation.",
+      "No evidence-sufficiency implementation or release candidate is selected.",
+      "Live provider metadata must be refreshed within 24 hours immediately before any separately authorized execution."
+    ]
+  }
+}
