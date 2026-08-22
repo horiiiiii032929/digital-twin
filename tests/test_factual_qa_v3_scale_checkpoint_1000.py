@@ -22,23 +22,24 @@ def assets() -> dict:
     return load_assets()
 
 
-def test_checkpoint_selects_only_the_additional_900_cases(assets: dict) -> None:
+def test_checkpoint_selects_and_authorizes_only_the_additional_900_cases(
+    assets: dict,
+) -> None:
     instrument = validate_instrument()
 
     assert instrument["instrument_id"] == INSTRUMENT_ID
-    assert instrument["status"] == "draft-reviewed-provider-execution-unauthorized"
-    assert instrument["execution"]["provider_execution_authorized"] is False
+    assert instrument["status"] == "frozen-pending-execution"
+    assert instrument["execution"]["provider_execution_authorized"] is True
     assert len(assets["truth_packages"]) == 900
     assert {item["checkpoint_stage"] for item in assets["truth_packages"]} == {
         "checkpoint-1000"
     }
     assert assets["previous_summary"]["case_count"] == 100
 
-    with pytest.raises(RepositoryFreezeError):
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+    require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
 
 
-def test_checkpoint_preflight_is_blocked_before_authorization(
+def test_checkpoint_preflight_requires_live_metadata_before_execution(
     assets: dict, tmp_path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-only")
@@ -50,7 +51,7 @@ def test_checkpoint_preflight_is_blocked_before_authorization(
 
     preflight = build_preflight(assets, output_path=tmp_path / "unused.json")
 
-    assert preflight["status"] == "blocked-not-authorized"
+    assert preflight["status"] == "blocked-provider-freshness"
     assert preflight["new_case_count"] == 900
     assert preflight["cumulative_case_count"] == 1000
     assert preflight["scale_10000_authorized"] is False

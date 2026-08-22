@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active and register the 1,000-case checkpoint entrypoint without authorizing it; the remaining 9,000 cases and all unrelated stages stay closed.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active while exactly the additional-900 checkpoint has one bounded authorization; the remaining 9,000 cases and all unrelated stages stay closed.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "7f321de498a5c6ac133c73e2a623d1977b649bfafb13784c4f0a61f368db73b6"
+      "sha256": "a441a1f0303afdbca348cd6e75ccdef0ab80e9efed816b4d500c31f231e278dc"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the provider-unauthorized 1,000-case checkpoint and all other revoked or future stages.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations and exact authorization of only the historical oracle plus the additional-900 checkpoint; every revoked or future stage remains rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "2d4da7a30895187e3ec9b7ea75f2a108d4ca4bd6f5a30ee2f8420e8d23e1eca2"
+      "sha256": "108a1cad3c180bc66f6557dd18a2e1e679199465cf395f8a24db44dd7d01f9b0"
     },
     {
       "audit_status": "audited",
@@ -5371,13 +5371,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json",
-      "sha256": "4e2a4428845a449588271bad36186c824e6c8ae6d3e86fa688dfcbe1e23c4fda",
+      "sha256": "437869eaa23eae5fe8af005a5d68e442fe751ed2bf7282531da755d71a7f9861",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Manual contract review and network-free validation bind exactly 900 new checkpoint cases to the prior 100-case Keep result, cap normal execution at 1,991 calls and USD 10, and prohibit automatic promotion to the remaining 9,000 cases.",
+      "evidence": "Manual contract review and network-free validation bind exactly 900 new checkpoint cases to the prior 100-case Keep result; the separately approved one-time execution is frozen at 1,991 calls and USD 10 with no promotion to the remaining 9,000 cases.",
       "findings": []
     },
     {
@@ -5393,13 +5393,13 @@
     },
     {
       "path": "tests/test_factual_qa_v3_scale_checkpoint_1000.py",
-      "sha256": "35da711e40615989aba12ebeb8c05b47dc38b42d72f9aefb63330c6f7a379f13",
+      "sha256": "38d6ef45965cbab4ed650af87fc9387795060a31ca15f0bf4575ef7e6f186ddb",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused regressions verify the exact additional-900 slice, prior-result binding, balanced deterministic mutations, blocked no-call preflight, and closed remaining-9,000 boundary.",
+      "evidence": "Focused regressions verify the exact additional-900 slice, prior-result binding, balanced deterministic mutations, live-metadata preflight requirement, exact bounded authorization, and closed remaining-9,000 boundary.",
       "findings": []
     }
   ],

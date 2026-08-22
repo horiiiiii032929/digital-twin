@@ -79,7 +79,8 @@ and normalized-question unique. The paid confirmation passed every gate:
 and zero malformed outcomes. A separate provider-unauthorized checkpoint now
 selects exactly the additional 900 cases needed for cumulative 1,000-case
 evidence. Its complete network-free simulation passed every gate with 1,982
-simulated calls. The remaining 9,000 cases remain closed and cannot be promoted
+simulated calls, and the researcher separately authorized exactly this paid
+checkpoint. The remaining 9,000 cases remain closed and cannot be promoted
 automatically.
 
 The current metadata checkpoint also found that older prospective DeepSeek
