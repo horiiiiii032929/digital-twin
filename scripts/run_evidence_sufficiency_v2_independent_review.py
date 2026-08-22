@@ -121,7 +121,10 @@ def _provider_binding(instrument: dict[str, Any]) -> dict[str, Any]:
         "api_url": safety.get("reviewer_api_url"),
         "provider_routing": deepcopy(safety["provider_routing"]),
         "timeout_seconds": safety["timeout_seconds"],
-        "temperature": safety["temperature"],
+        "temperature": safety.get("temperature"),
+        "reasoning_effort": safety.get("reasoning_effort"),
+        "seed": safety.get("seed"),
+        "backend_model": safety.get("reviewer_backend_model"),
         "max_input_tokens": safety["max_input_tokens_per_call"],
         "max_output_tokens": safety["max_output_tokens_per_call"],
         "pricing_usd_per_million_input_tokens": safety[
@@ -168,9 +171,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "resume_requires_exact_bindings": True,
         "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
     }
-    if instrument["instrument_id"].endswith(("-003", "-004", "-005")):
+    if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006")):
         expected_runner["preserve_malformed_response_content"] = True
-    if instrument["instrument_id"].endswith(("-004", "-005")):
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006")):
         expected_runner.update(
             {
                 "preserve_provider_error_details": True,
@@ -181,7 +184,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review runner binding drifted")
     expected_routing = {
         "order": (
-            ["google-ai-studio"]
+            ["openai"]
+            if instrument["instrument_id"].endswith("-006")
+            else ["google-ai-studio"]
             if instrument["instrument_id"].endswith("-005")
             else ["Mistral"]
         ),
@@ -194,7 +199,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review routing drifted")
     binding = _provider_binding(instrument)
     expected_model = (
-        "google/gemini-3.7-flash"
+        "openai/gpt-5.4-mini"
+        if instrument["instrument_id"].endswith("-006")
+        else "google/gemini-3.7-flash"
         if instrument["instrument_id"].endswith("-005")
         else "mistralai/mistral-small-2603"
     )
@@ -202,18 +209,24 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review model drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument["instrument_id"].endswith(("-003", "-004", "-005"))
+        if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006"))
         else "json-object-prompt-schema"
     )
     if binding["response_format_mode"] != expected_response_format:
         raise ReviewRunnerError("review response format drifted")
     if (
-        instrument["instrument_id"].endswith(("-003", "-004", "-005"))
+        instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006"))
         and safety.get("provider_context_window_tokens")
-        != (1048576 if instrument["instrument_id"].endswith("-005") else 262144)
+        != (
+            400000
+            if instrument["instrument_id"].endswith("-006")
+            else 1048576
+            if instrument["instrument_id"].endswith("-005")
+            else 262144
+        )
     ):
         raise ReviewRunnerError("review provider context binding drifted")
-    if instrument["instrument_id"].endswith(("-004", "-005")) and {
+    if instrument["instrument_id"].endswith(("-004", "-005", "-006")) and {
         "transport": binding["transport"],
         "api_url": binding["api_url"],
     } != {
@@ -522,13 +535,21 @@ class NativeOpenRouterReviewTransport:
                 {"role": "system", "content": system},
                 {"role": "user", "content": request},
             ],
-            "temperature": self.binding["temperature"],
             "max_tokens": self.binding["max_output_tokens"],
             "response_format": _response_format_for_call(self.binding, schema),
             "provider": deepcopy(self.binding["provider_routing"]),
             "usage": {"include": True},
             "metadata": {"task": task},
         }
+        if self.binding["temperature"] is not None:
+            payload["temperature"] = self.binding["temperature"]
+        if self.binding["reasoning_effort"] is not None:
+            payload["reasoning"] = {
+                "effort": self.binding["reasoning_effort"],
+                "exclude": True,
+            }
+        if self.binding["seed"] is not None:
+            payload["seed"] = self.binding["seed"]
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
@@ -1102,9 +1123,15 @@ def _live_metadata_failures(
     ):
         failures.append("reviewer-context-limit-drift")
     parameters = set(model.get("supported_parameters", []))
-    required_parameters = {"max_tokens", "response_format", "temperature"}
+    required_parameters = {"max_tokens", "response_format"}
     if safety.get("response_format_mode") == "json-schema-strict":
         required_parameters.add("structured_outputs")
+    if safety.get("temperature") is not None:
+        required_parameters.add("temperature")
+    if safety.get("reasoning_effort") is not None:
+        required_parameters.add("reasoning_effort")
+    if safety.get("seed") is not None:
+        required_parameters.add("seed")
     if not required_parameters.issubset(parameters):
         failures.append("reviewer-required-parameters-missing")
     endpoints = live.get("endpoints", {}).get("data", {}).get("endpoints", [])
@@ -1139,6 +1166,12 @@ def _live_metadata_failures(
     ]
     if price_matching_endpoints and not matching_endpoints:
         failures.append("reviewer-endpoint-context-drift")
+    expected_backend = safety.get("reviewer_backend_model")
+    if expected_backend is not None and not any(
+        endpoint.get("name", "").endswith(expected_backend)
+        for endpoint in matching_endpoints
+    ):
+        failures.append("reviewer-backend-model-drift")
     if safety.get("response_format_mode") == "json-schema-strict" and not any(
         "structured_outputs" in endpoint.get("supported_parameters", [])
         for endpoint in matching_endpoints

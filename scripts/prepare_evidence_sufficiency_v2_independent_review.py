@@ -57,6 +57,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-006": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -151,6 +157,15 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     } != (
         {
             "reviewer_provider": "openrouter",
+            "reviewer_model": "openai/gpt-5.4-mini",
+            "reviewer_litellm_model": "openrouter/openai/gpt-5.4-mini",
+            "credential_environment_variable": "OPENROUTER_API_KEY",
+            "maximum_cost_usd": 0.5,
+            "maximum_reserved_cost_usd": 0.429,
+        }
+        if instrument_id.endswith("-006")
+        else {
+            "reviewer_provider": "openrouter",
             "reviewer_model": "google/gemini-3.7-flash",
             "reviewer_litellm_model": "openrouter/google/gemini-3.7-flash",
             "credential_environment_variable": "OPENROUTER_API_KEY",
@@ -173,6 +188,8 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "metadata_source": safety.get("metadata_source"),
         "provider_policy_source": safety.get("provider_policy_source"),
         "temperature": safety.get("temperature"),
+        "reasoning_effort": safety.get("reasoning_effort"),
+        "seed": safety.get("seed"),
         "max_input_tokens_per_call": safety.get("max_input_tokens_per_call"),
         "max_output_tokens_per_call": safety.get("max_output_tokens_per_call"),
         "pricing_usd_per_million_input_tokens": safety.get(
@@ -188,7 +205,34 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
             "metadata_maximum_age_hours": 24,
             "metadata_source": "https://openrouter.ai/api/v1/models",
             "provider_policy_source": "https://openrouter.ai/api/v1/providers",
+            "temperature": None,
+            "reasoning_effort": "none",
+            "seed": 0,
+            "max_input_tokens_per_call": 20000,
+            "max_output_tokens_per_call": 4000,
+            "pricing_usd_per_million_input_tokens": 0.75,
+            "pricing_usd_per_million_output_tokens": 4.5,
+            "provider_routing": {
+                "order": ["openai"],
+                "allow_fallbacks": False,
+                "require_parameters": True,
+                "data_collection": "allow",
+                "zdr": False,
+            },
+            "provider_policy": {
+                "trains_on_prompts": False,
+                "retention": "provider-policy-controlled",
+                "data_boundary": "synthetic-public-evaluation-only",
+            },
+        }
+        if instrument_id.endswith("-006")
+        else {
+            "metadata_maximum_age_hours": 24,
+            "metadata_source": "https://openrouter.ai/api/v1/models",
+            "provider_policy_source": "https://openrouter.ai/api/v1/providers",
             "temperature": 0,
+            "reasoning_effort": None,
+            "seed": None,
             "max_input_tokens_per_call": 20000,
             "max_output_tokens_per_call": 4000,
             "pricing_usd_per_million_input_tokens": 0.75,
@@ -212,6 +256,8 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
             "metadata_source": "https://openrouter.ai/api/v1/models",
             "provider_policy_source": "https://openrouter.ai/providers",
             "temperature": 0,
+            "reasoning_effort": None,
+            "seed": None,
             "max_input_tokens_per_call": 20000,
             "max_output_tokens_per_call": 4000,
             "pricing_usd_per_million_input_tokens": 0.15,
@@ -233,7 +279,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise IndependentReviewError("reviewer metadata or routing drifted")
     expected_response_format = (
         "json-schema-strict"
-        if instrument_id.endswith(("-003", "-004", "-005"))
+        if instrument_id.endswith(("-003", "-004", "-005", "-006"))
         else "json-object-prompt-schema"
     )
     if (
@@ -241,12 +287,22 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         != expected_response_format
     ):
         raise IndependentReviewError("reviewer response format drifted")
-    if instrument_id.endswith(("-003", "-004", "-005")) and {
+    if instrument_id.endswith(("-003", "-004", "-005", "-006")) and {
         "endpoint_metadata_source": safety.get("endpoint_metadata_source"),
         "structured_output_source": safety.get("structured_output_source"),
         "provider_context_window_tokens": safety.get("provider_context_window_tokens"),
     } != (
         {
+            "endpoint_metadata_source": (
+                "https://openrouter.ai/api/v1/models/openai/gpt-5.4-mini/endpoints"
+            ),
+            "structured_output_source": (
+                "https://openrouter.ai/docs/guides/features/structured-outputs"
+            ),
+            "provider_context_window_tokens": 400000,
+        }
+        if instrument_id.endswith("-006")
+        else {
             "endpoint_metadata_source": (
                 "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints"
             ),
@@ -267,7 +323,7 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         }
     ):
         raise IndependentReviewError("reviewer endpoint metadata drifted")
-    if instrument_id.endswith(("-004", "-005")) and {
+    if instrument_id.endswith(("-004", "-005", "-006")) and {
         "reviewer_transport": safety.get("reviewer_transport"),
         "reviewer_api_url": safety.get("reviewer_api_url"),
         "router_metadata_source": safety.get("router_metadata_source"),

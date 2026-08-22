@@ -266,6 +266,19 @@ instrument freeze, and bounded-freeze allowlisting. The USD 0.39 maximum
 reservation remains below the USD 0.50 ceiling. No inference call occurred;
 review 005 is build-only and provider-unauthorized.
 
+Prospective `evidence-sufficiency-v2-independent-review-006` preserves review
+005 unchanged and replaces its unexecuted reviewer binding before any quality
+result exists. Current official-model and endpoint research selected the exact
+OpenRouter `openai/gpt-5.4-mini` standard route with dated backend
+`openai/gpt-5.4-mini-20260317`: it is cross-family from the DeepSeek generator,
+supports strict structured output, and fits the same 13-call boundary. Because
+the endpoint does not advertise `temperature`, review 006 omits it and instead
+fixes reasoning effort to `none` and seed to `0`. The USD 0.429 maximum
+reservation remains below the USD 0.50 ceiling. This is a prospective
+quality-first choice, not evidence that GPT-5.4 mini has passed the project
+rubric. Review 006 remains provider-unauthorized; review 005 will not be run or
+used as a fallback for this decision.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6

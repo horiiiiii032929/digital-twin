@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "ce09a7ef268fe04c05cde9b3be0a06001e82eab7ee34565c1a9437b9fed9a693",
+      "sha256": "7a40a379286834fdfbee2b4d3bbe3b8f15331b13406b85905c60756abdc93509",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms separate review-004 history and review-005 validation, simulation, live no-call preflight, and exact execution commands; the new Gemini binding remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+      "evidence": "Command review confirms historical review-005 commands remain reproducible while review-006 validation, simulation, live no-call preflight, and exact execution commands are separate; GPT-5.4 mini remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
       "findings": []
     },
     {
@@ -2524,12 +2524,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-  "evidence": "Manual fail-closed review plus focused tests verify historical 002-004 and prospective 005 states, strict response formats, exact Mistral and Gemini endpoint bindings, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
+  "evidence": "Manual fail-closed review plus focused tests verify historical 002-005 and prospective 006 states, strict response formats, exact endpoint bindings, optional temperature with fixed reasoning and seed controls, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
       "findings": [],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-  "sha256": "08fafff60687c6e872814ea60a9021c9a01bc4f6b8470e827cadab7694733926"
+  "sha256": "56dd35a81de6bf977a05b7a811199b400956f68988ef518aba8dc048eba6904a"
     },
     {
       "audit_status": "audited",
@@ -2667,12 +2667,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-  "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, exact Google AI Studio routing, official OpenRouter chat-completions payload, strict JSON Schema, router diagnostics, sensitivity-first stopping, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
+  "evidence": "Manual successor state-machine review plus the 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, exact OpenAI routing and dated backend, temperature omission, fixed reasoning and seed controls, strict JSON Schema, router diagnostics, sensitivity-first stopping, disabled retries and fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
       "findings": [],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-  "sha256": "7ab93331365674540c44ee618bb76e27eae9631ef139f8b9bbc26d0a53839a32"
+  "sha256": "e735e9cd7f226fb014b2c4ba2503ce2e69523433671008fbbc087ca5352af408"
     },
     {
       "audit_status": "audited",
@@ -5120,12 +5120,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency-review",
-  "evidence": "Focused regressions preserve revoked 002-004 contracts and verify prospective 005's stable Gemini model, dated backend identity, exact Google AI Studio endpoint, USD 0.39 reservation, native OpenRouter payload, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
+  "evidence": "Focused regressions preserve revoked 002-004 and unexecuted 005 contracts and verify prospective 006's GPT-5.4 mini snapshot identity, exact OpenAI endpoint, USD 0.429 reservation, temperature-free reasoning and seed request, native OpenRouter payload, strict schemas, sensitivity stop, provider, identity, backend, and cost failures, interruption and resume, authorization locks, endpoint freshness, and output exclusivity.",
       "findings": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
-  "sha256": "d08dfb601482650a6c04ff49125ecfa6498cdd28c4107a47431ec9d9c57bf9a0"
+  "sha256": "d4440ed8380fb34378737a3e14554f804ccb5f02a53de9b6da9a02d21867ce97"
     },
     {
       "audit_status": "audited",
@@ -5378,6 +5378,17 @@
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
       "evidence": "Manual prospective review and focused tests bind stable google/gemini-3.7-flash to the exact Google AI Studio standard endpoint, dated backend identity, strict schema, zero retries/fallbacks, 13-call and USD 0.50 ceilings, synthetic-public inputs, and explicit provider-unauthorized state.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_006.json",
+      "sha256": "943a92d63bb1930b83b8e3bd7802487e2d862f79fad31258b61b5492bb6cee99",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency-review",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-data-quality-review",
+      "evidence": "Manual prospective review, official-model freshness research, exact live endpoint metadata, focused regressions, and a 13-call network-free simulation bind openai/gpt-5.4-mini to the exact OpenAI endpoint and dated backend, omit unsupported temperature, fix reasoning effort and seed, require strict schema, disable retries and fallbacks, preserve synthetic-public boundaries, and keep provider execution unauthorized.",
       "findings": []
     }
   ],

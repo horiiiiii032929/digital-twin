@@ -49,10 +49,10 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve invalid and revoked reviews 002–004, keep their exact
-   OpenRouter/Mistral binding dropped, and advance the single build-ready review
-   005 path using stable Gemini 3.7 Flash on the exact Google AI Studio endpoint.
-   Paid execution remains separately authorized; select the first production
+1. #105 — preserve invalid and revoked reviews 002–004 and unexecuted build 005,
+   keep their bindings out of execution, and advance only build-ready review
+   006 using snapshot-pinned GPT-5.4 mini on the exact OpenAI endpoint. Paid
+   execution remains separately authorized; select the first production
    answerability gate only after independent review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 003 and 004 are invalid/revoked; their OpenRouter/Mistral binding is dropped; stable Gemini review 005 is build-ready but provider-unauthorized; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 003 and 004 are invalid/revoked; review 005 is preserved as an unexecuted Gemini build; snapshot-pinned GPT-5.4 mini review 006 is the provider-unauthorized confirmation candidate; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | #87 completed Keep after pilot 003 passed every 100-case gate; #110 owns optional 1,000/9,000-case scale, which remains unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -84,6 +84,10 @@ not require model spending or private data:
    and a USD 0.39 maximum reservation. Its network-free simulation, repository
    gate, and clean live metadata-only preflight pass. It remains build-only and
    provider-unauthorized.
+   Review 006 prospectively preserves 005 and pins GPT-5.4 mini to the exact
+   OpenAI standard endpoint and dated backend. Its request omits unsupported
+   temperature, fixes reasoning effort and seed, disables fallback, and remains
+   provider-unauthorized under the same 13-call and USD 0.50 ceilings.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 

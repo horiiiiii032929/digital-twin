@@ -107,6 +107,15 @@ Current utilities:
   `npm run simulate:evidence-sufficiency-v2-review-005`, or
   `npm run preflight-live:evidence-sufficiency-v2-review-005`. Provider
   execution remains unauthorized, so the execute command fails closed.
+  Prospective successor `006` preserves review 005 as build-only evidence and
+  pins `openai/gpt-5.4-mini` to OpenRouter's exact `openai` standard endpoint
+  and dated backend `openai/gpt-5.4-mini-20260317`. It omits unsupported
+  `temperature`, fixes reasoning effort to `none`, fixes seed `0`, requires
+  strict structured output, and disables all fallback routing. Run
+  `npm run verify:evidence-sufficiency-v2-review-006`,
+  `npm run simulate:evidence-sufficiency-v2-review-006`, or
+  `npm run preflight-live:evidence-sufficiency-v2-review-006`. Its paid execute
+  command remains blocked pending a separate authorization checkpoint.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and
