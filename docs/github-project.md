@@ -51,21 +51,24 @@ professor-communication track.
 
 1. #105 — complete the bounded independent evidence-sufficiency review and
    select the first production answerability gate.
-2. #87 — PR #109 records pilot 003 Keep: every 100-case gate passed and the
-   one-time authorization is revoked. Design, but do not authorize, the separate
-   1,000-case checkpoint.
-3. #88 — externally blocked on host/domain selection; merged PR #93
+2. #107 — preserve T0 as the release control and prepare one separately frozen
+   T0/T1 confirmation before staging promotion.
+3. #110 — follow completed #87 by designing, but not authorizing, a separate
+   1,000-case checkpoint; require its complete pass before the remaining 9,000.
+4. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-4. #24 — calibrate Professor Digital Twin fidelity against independent expert
+5. #24 — calibrate Professor Digital Twin fidelity against independent expert
    labels, separately from factual QA.
-5. #9 and #25 — production operations and deployed end-to-end validation after
+6. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
-6. #10 — approval-gated professor/student workflow and usability pilot.
+7. #10 — approval-gated professor/student workflow and usability pilot.
 
-Issues #85 and #86 are completed `Refine` history and are archived from the
-live board. Issues #13 and #44 remain parallel final-delivery and professor-
-communication work.
+Issue #87 is completed `Keep` history after pilot 003 passed every 100-case
+gate in PR #109. Issues #85 and #86 are completed `Refine` history. Issue #110
+retains the professor-requested staged scale without making it an active
+publication blocker. Issues #13 and #44 remain parallel final-delivery and
+professor-communication work.
 
 Issue #86 merged region-aware product ingestion, access-checked original-crop
 citations, and three registered prospective development attempts in PR #91.
