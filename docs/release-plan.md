@@ -38,7 +38,7 @@ toward the release; none is the release by itself.
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 003 and 004 are invalid/revoked; the exact OpenRouter/Mistral binding is dropped; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
-| Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | #87 completed Keep after pilot 003; #110's exact additional-900 checkpoint passed network-free verification but remains provider-unauthorized, and the remaining 9,000 stay closed | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
+| Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | Cumulative 1,000-case evidence passed: 1,000/1,000 deterministic-valid, 800/800 citation-valid, 997/1,000 reviewer agreement, 199/200 mutation detection, and zero exact duplicates; remaining 9,000 unauthorized | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -55,9 +55,9 @@ not require model spending or private data:
 
 1. Preserve merged PR #103 as the deterministic factual-QA and correctness
    checkpoint.
-2. Preserve closed #87 and pilot 003 as Keep evidence. Publish #110's prepared
-   additional-900 checkpoint, authorize it separately, and keep the remaining
-   9,000 cases unauthorized until the cumulative 1,000-case decision is known.
+2. Preserve closed #87, pilot 003, and checkpoint 002 as cumulative 1,000-case
+   Keep evidence. Keep the remaining 9,000 unauthorized until its supporting
+   research value is weighed against release-critical work.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

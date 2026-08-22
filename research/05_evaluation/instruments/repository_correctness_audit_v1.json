@@ -4168,7 +4168,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "2f095abb7b95844030955a0c38effd64b4a302ce22b54bc18c11d91752d19943"
+      "sha256": "7f321de498a5c6ac133c73e2a623d1977b649bfafb13784c4f0a61f368db73b6"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4454,7 +4454,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "c6f862e746241b0e428b74701bb4c461e7ee2107cc66b29f90eab921c5e9342b"
+      "sha256": "aae3a7e290c6faf4f7ac027bba031672ef6a4d11fea1ed26ac885e5becc97b13"
     },
     {
       "audit_status": "audited",
@@ -5393,24 +5393,24 @@
     },
     {
       "path": "tests/test_factual_qa_v3_scale_checkpoint_1000.py",
-      "sha256": "38d6ef45965cbab4ed650af87fc9387795060a31ca15f0bf4575ef7e6f186ddb",
+      "sha256": "72bae3cd651c1ca2f551d0f08ae4520b5fd193d22afedaa7c5b0688124a45701",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused regressions verify the exact additional-900 slice, prior-result binding, balanced deterministic mutations, live-metadata preflight requirement, exact bounded authorization, and closed remaining-9,000 boundary.",
+      "evidence": "Focused regressions verify the completed additional-900 slice, prior-result binding, balanced deterministic mutations, revoked authorization, blocked post-run preflight, and closed remaining-9,000 boundary.",
       "findings": []
     },
     {
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json",
-      "sha256": "e9687f191d6ab25f742de7023d68a0b0596303a506d8388620a639b1c05ef5fe",
+      "sha256": "ba97b165b2c24c319defdf5a3038fdd9ed096562e12cda17fc6d57e74f798525",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Prospective harness-only successor keeps all 900 truth packages, model bindings, gates, call and cost limits unchanged while authorizing only attempt 002; the remaining 9,000 cases cannot be promoted automatically.",
+      "evidence": "Completed Keep instrument preserves all 900 truth packages, exact bindings, gates, call and cost limits, records the passing result, revokes authorization, and leaves the remaining 9,000 cases closed.",
       "findings": []
     }
   ],

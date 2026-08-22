@@ -55,8 +55,8 @@ professor-communication track.
    answerability gate only after independent review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
-3. #110 — publish and separately authorize the verified additional-900
-   checkpoint; require its complete pass before the remaining 9,000.
+3. #110 — preserve the cumulative 1,000-case Keep result and stop for a
+   separate value/cost decision before the remaining 9,000.
 4. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
