@@ -143,6 +143,11 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_factual_qa_v3_scale_checkpoint_1000.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_factual_qa_v3_scale_rehearsal.py": (
             "dataset_generation",
             "external_model_evaluation",

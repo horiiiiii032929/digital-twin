@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "bb63dd156437a3c5e1a40acffdc248fd5f8719c7d8a75521cc4b60ac7bc554b8",
+      "sha256": "0a67970a079d75df6c59c0253d8e7e131204552e5569a5a581932ac6a6afbfdf",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evidence-sufficiency-review",
+      "domain": "factual-qa-scale",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms separate review-004 validation, simulation, live no-call preflight, and exact one-time execution commands; the paid command remains fail-closed outside the correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+      "evidence": "Command review confirms separate validation, no-call preflight, simulation, and exact execution commands for the additional-900 checkpoint; the remaining 9,000 cases cannot be promoted automatically.",
       "findings": []
     },
     {
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active while exactly the additional-900 checkpoint has one bounded authorization; the remaining 9,000 cases and all unrelated stages stay closed.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "7f321de498a5c6ac133c73e2a623d1977b649bfafb13784c4f0a61f368db73b6"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002–004, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations and exact authorization of only the historical oracle plus the additional-900 checkpoint; every revoked or future stage remains rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-review",
-      "sha256": "5d90eb9878fb2860fbfce2a0421c18c1480d15ef1ff571c1784c625d9f0d56d0"
+      "sha256": "aae3a7e290c6faf4f7ac027bba031672ef6a4d11fea1ed26ac885e5becc97b13"
     },
     {
       "audit_status": "audited",
@@ -5367,6 +5367,50 @@
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
       "evidence": "Manual result review and focused regressions preserve invalid review 004 after native router metadata recorded first-party Mistral endpoint statuses 400 and 401 without a provider response; authorization is revoked while the unchanged packet, exact bindings, zero-retry evidence, and closed dataset, candidate, private-source, and deployment permissions remain intact.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json",
+      "sha256": "cc710dcf07256c3401c95fc42be45550c1b24a090f3aa061638902e577081bc6",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "factual-qa-scale",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Attempt 001 is preserved as invalid and authorization-revoked after its reviewer-canary task identifier exceeded the local contract before provider I/O; zero bulk calls occurred and no quality conclusion was drawn.",
+      "findings": []
+    },
+    {
+      "path": "scripts/run_factual_qa_v3_scale_checkpoint_1000.py",
+      "sha256": "24af44a57a37ff5f81f054b654a4fe202aae96c76d211b7cafbebb2cd11d2713",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "factual-qa-scale",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code review corrects attempt 001's overlong generated task labels to fixed identifiers under 64 characters; deterministic authority, stage selection, checkpoints, model bindings, gates, and the closed remaining-9,000 boundary are unchanged for attempt 002.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_factual_qa_v3_scale_checkpoint_1000.py",
+      "sha256": "72bae3cd651c1ca2f551d0f08ae4520b5fd193d22afedaa7c5b0688124a45701",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "factual-qa-scale",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused regressions verify the completed additional-900 slice, prior-result binding, balanced deterministic mutations, revoked authorization, blocked post-run preflight, and closed remaining-9,000 boundary.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json",
+      "sha256": "ba97b165b2c24c319defdf5a3038fdd9ed096562e12cda17fc6d57e74f798525",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "factual-qa-scale",
+      "reviewed_at": "2026-08-22",
+      "reviewer": "codex-primary-review",
+      "evidence": "Completed Keep instrument preserves all 900 truth packages, exact bindings, gates, call and cost limits, records the passing result, revokes authorization, and leaves the remaining 9,000 cases closed.",
       "findings": []
     }
   ],

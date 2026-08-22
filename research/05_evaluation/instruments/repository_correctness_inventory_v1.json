@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 488
+    "audited": 492
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 106,
+    "active_or_unclassified_tooling": 107,
     "active_runtime": 97,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 98,
+    "evaluation_configuration": 100,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 94
+    "verification": 95
   },
-  "file_count": 488,
+  "file_count": 492,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e659a6c0283c9dd8423fb4380f01d2709a97432b3ddd718c9d8d6e11ea583826",
+  "record_sha256": "5386e0936a5c64b8169eceb3ed83328f21e4222a219200b1b512588cf70e1b70",
   "records": [
     {
       "audit": {
@@ -1287,8 +1287,8 @@
     },
     {
       "audit": {
-        "domain": "evidence-sufficiency-review",
-        "evidence": "Command review confirms separate review-004 validation, simulation, live no-call preflight, and exact one-time execution commands; the paid command remains fail-closed outside the correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+        "domain": "factual-qa-scale",
+        "evidence": "Command review confirms separate validation, no-call preflight, simulation, and exact execution commands for the additional-900 checkpoint; the remaining 9,000 cases cannot be promoted automatically.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "bb63dd156437a3c5e1a40acffdc248fd5f8719c7d8a75521cc4b60ac7bc554b8"
+      "sha256": "0a67970a079d75df6c59c0253d8e7e131204552e5569a5a581932ac6a6afbfdf"
     },
     {
       "audit": {
@@ -1940,6 +1940,38 @@
       "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json",
       "risk": "high",
       "sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Attempt 001 is preserved as invalid and authorization-revoked after its reviewer-canary task identifier exceeded the local contract before provider I/O; zero bulk calls occurred and no quality conclusion was drawn.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json",
+      "risk": "high",
+      "sha256": "cc710dcf07256c3401c95fc42be45550c1b24a090f3aa061638902e577081bc6"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Completed Keep instrument preserves all 900 truth packages, exact bindings, gates, call and cost limits, records the passing result, revokes authorization, and leaves the remaining 9,000 cases closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json",
+      "risk": "high",
+      "sha256": "ba97b165b2c24c319defdf5a3038fdd9ed096562e12cda17fc6d57e74f798525"
     },
     {
       "audit": {
@@ -4131,6 +4163,28 @@
       "path": "scripts/run_factual_qa_v3_reviewer_qualification.py",
       "risk": "high",
       "sha256": "310f0631474fc1ada5cd846b60bdfb15e492800fd1e8c0716743079d633eea78"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Focused code review corrects attempt 001's overlong generated task labels to fixed identifiers under 64 characters; deterministic authority, stage selection, checkpoints, model bindings, gates, and the closed remaining-9,000 boundary are unchanged for attempt 002.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:factual-qa-v3-checkpoint-1000",
+        "preflight-live:factual-qa-v3-checkpoint-1000",
+        "preflight:factual-qa-v3-checkpoint-1000",
+        "simulate:factual-qa-v3-checkpoint-1000",
+        "verify:factual-qa-v3-checkpoint-1000"
+      ],
+      "path": "scripts/run_factual_qa_v3_scale_checkpoint_1000.py",
+      "risk": "high",
+      "sha256": "24af44a57a37ff5f81f054b654a4fe202aae96c76d211b7cafbebb2cd11d2713"
     },
     {
       "audit": {
@@ -6362,7 +6416,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active while exactly the additional-900 checkpoint has one bounded authorization; the remaining 9,000 cases and all unrelated stages stay closed.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6373,7 +6427,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "7f321de498a5c6ac133c73e2a623d1977b649bfafb13784c4f0a61f368db73b6"
     },
     {
       "audit": {
@@ -6794,7 +6848,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations and exact authorization of only the historical oracle plus the additional-900 checkpoint; every revoked or future stage remains rejected.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-review"
@@ -6805,7 +6859,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "5d90eb9878fb2860fbfce2a0421c18c1480d15ef1ff571c1784c625d9f0d56d0"
+      "sha256": "aae3a7e290c6faf4f7ac027bba031672ef6a4d11fea1ed26ac885e5becc97b13"
     },
     {
       "audit": {
@@ -7481,6 +7535,22 @@
     },
     {
       "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Focused regressions verify the completed additional-900 slice, prior-result binding, balanced deterministic mutations, revoked authorization, blocked post-run preflight, and closed remaining-9,000 boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_v3_scale_checkpoint_1000.py",
+      "risk": "medium",
+      "sha256": "72bae3cd651c1ca2f551d0f08ae4520b5fd193d22afedaa7c5b0688124a45701"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Twenty-one focused tests validate successor 002's completed/revoked state and blocked preflight, shared full schemas and strict qualification prompt, observed malformed citation rejection, author-independent mutations, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
         "findings": [],
@@ -8041,8 +8111,8 @@
     }
   ],
   "risk_counts": {
-    "high": 380,
-    "medium": 108
+    "high": 383,
+    "medium": 109
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
