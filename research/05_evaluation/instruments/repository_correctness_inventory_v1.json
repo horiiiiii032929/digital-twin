@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "59ae04fd9ca74730b7b382c70600e43c9897ad4979eb09425ac3060a2a53d569",
+  "record_sha256": "22838f3ac2c106945ae04ccb322e91354de93b9e01f2d85fa611a24b70480533",
   "records": [
     {
       "audit": {
@@ -1976,7 +1976,7 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Prospective review confirms exactly 9,000 remaining truth packages, 1,800 balanced mutations, qualified advisory models, zero retries, no automatic promotion, conservative cost and call ceilings, synthetic-public boundaries, and provider execution disabled.",
+        "evidence": "Prospective review confirms exactly 9,000 remaining truth packages, live USD 3 DeepSeek and USD 7 OpenRouter balance minima, two bounded no-response credit continuations, zero ordinary retries, no automatic promotion, and provider execution disabled.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -1987,7 +1987,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_completion_10000_001.json",
       "risk": "high",
-      "sha256": "62929c585d507f2994754b05cb019f5ac4d3ee0de4cdacf58fcd78c66826ed40"
+      "sha256": "8c8ccd88136af731418cc7738f28f946bb0648845f795f2b95352f907573bb69"
     },
     {
       "audit": {
@@ -4183,7 +4183,7 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Focused review and regressions preserve the completed 1,000-case behavior while adding configurable stage counts and atomic SQLite journaling for the remaining-9,000 successor; the historical JSON result path remains unchanged.",
+        "evidence": "Focused review and regressions preserve completed 1,000-case behavior while the remaining-9,000 successor now validates live balance reserves, accepts only exact bound resumes, and leaves an insufficient-credit logical item unfinished for safe continuation.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -4200,12 +4200,12 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_checkpoint_1000.py",
       "risk": "high",
-      "sha256": "516bd7871eea151e94c28fb2b6f7e003c07181d3864386e88683d9677ca30b30"
+      "sha256": "a8e6408b7842299ded5b9a0b9863b388619dfbbe261319ab90816d76f769315b"
     },
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Focused wrapper review confirms the shared deterministic engine is bound to only the remaining-9,000 stage, a separate output, exact limits, short task identifiers, and no follow-on authorization.",
+        "evidence": "Focused wrapper review confirms the shared deterministic engine remains bound only to the remaining-9,000 stage and now permits at most two no-response credit continuations within the exact 19,894-attempt ceiling.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -4222,12 +4222,12 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_completion_10000.py",
       "risk": "high",
-      "sha256": "7f798c51bfd17ccc840f3a69b0df176387dcb948ff880690dd6856c5bddfe9c0"
+      "sha256": "d4b2b91e8e9f881643f2a915f12d56a29bdcf71e846e5faf9e2220caf82aa7ad"
     },
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual control-flow review and focused regressions preserve the historical pilot behavior while exposing an optional checkpoint callback used by the atomic completion-stage journal; default JSON checkpointing is unchanged.",
+        "evidence": "Manual control-flow review and focused regressions preserve historical pilot behavior while adding opt-in insufficient-credit classification for instruments with a bounded continuation limit; historical instruments retain ordinary zero-retry provider-error handling.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-build-only-runner-review"
@@ -4248,7 +4248,7 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
       "risk": "high",
-      "sha256": "c7565571762365671855552fe7b9d9ac2908c155004f193e47f25187c5a599f1"
+      "sha256": "893f5b64bc4416881fade42cbd91e4f3f5312dbfb12b6ba0f968616dafe905cf"
     },
     {
       "audit": {
@@ -7590,7 +7590,7 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Five focused tests verify exact stage and action distribution, blocked preflight, 1,800 deterministic mutations, atomic journal resume fidelity, and the complete 19,802-call network-free passing path.",
+        "evidence": "Seven focused tests verify exact stage distribution, balance-aware blocked preflight, exact live resume acceptance, 1,800 deterministic mutations, atomic journal fidelity, a full pause/resume 9,000-case simulation, and the two-continuation hard limit.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -7601,7 +7601,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_completion_10000.py",
       "risk": "medium",
-      "sha256": "6e963d9a0cb987c1e1086b29cc62d9e7c19a5496b50e0b26a8ecb16b04434087"
+      "sha256": "6e4ae55d1566e3a1d14141deb51bfa63b628ade7d3eb5a7c2ecb2cfa7dc7263b"
     },
     {
       "audit": {

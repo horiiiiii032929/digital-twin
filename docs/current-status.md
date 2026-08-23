@@ -100,13 +100,18 @@ deliverable. Build-only instrument
 truth packages: 7,200 answerable, 900 abstain, 450 clarify, and 450 refuse. Its
 full 19,802-call network-free normal-path simulation passes, including 9,000
 question variants, 9,000 independent reviews, and 1,800 balanced mutation
-reviews. The execution ceiling is 19,892 calls with at most 90 disputes, an
+reviews. The execution ceiling is 19,894 attempts with at most 90 disputes and
+at most two no-response insufficient-credit continuations, an
 expected cost near USD 7.37, a conservative maximum reservation of USD 37.31,
 and a USD 50 emergency stop. An atomic SQLite journal replaces quadratic JSON
 checkpoint rewrites while retaining per-result durability and exact resume
-bindings. Current live metadata matches the frozen DeepSeek and OpenRouter
+bindings. Paid preflight also requires at least USD 3 of DeepSeek balance and
+USD 7 of OpenRouter balance. If either provider reports insufficient credit
+after execution starts, the runner stops immediately and preserves the exact
+logical item for `--resume`; ordinary quality or transport failures are never
+retried. Current live metadata matches the frozen DeepSeek and OpenRouter
 bindings and both credentials are present, but the instrument remains draft,
-provider-unauthorized, and outside the bounded freeze allowlist. No provider
+provider-unauthorized, and outside the bounded freeze allowlist. No inference
 call has been made for this stage.
 
 The current metadata checkpoint also found that older prospective DeepSeek
@@ -130,7 +135,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 804 Python tests and 46 frontend tests, frontend lint, and the
+check passes 806 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 

@@ -127,15 +127,20 @@
     "independent_review_call_limit": 9000,
     "mutation_review_call_limit": 1800,
     "dispute_review_call_limit": 90,
-    "total_provider_call_limit": 19892,
+    "total_provider_call_limit": 19894,
     "retry_attempts": 0,
+    "credit_resume_continuation_limit": 2,
     "checkpoint_every_calls": 1,
     "expected_cost_usd": 7.37,
     "maximum_reserved_cost_usd": 37.3116604,
     "cost_stop_usd": 50,
     "clean_worktree_required": true,
     "output_overwrite_allowed": false,
-    "resume_requires_exact_bindings": true
+    "resume_requires_exact_bindings": true,
+    "minimum_provider_balance_usd": {
+      "deepseek-official-api": 3,
+      "openrouter": 7
+    }
   },
   "mutation_design": {
     "count": 1800,

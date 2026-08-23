@@ -16,6 +16,7 @@ from pathlib import Path
 import sqlite3
 import sys
 from typing import Any
+from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
 
@@ -111,6 +112,55 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ScalePilotError(f"JSON root must be an object: {path}")
     return value
+
+
+def fetch_live_provider_balances(instrument: dict[str, Any]) -> dict[str, float]:
+    requirements = instrument["execution"].get(
+        "minimum_provider_balance_usd", {}
+    )
+    if not requirements:
+        return {}
+    deepseek_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
+    openrouter_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+    if not deepseek_key or not openrouter_key:
+        return {}
+
+    def get_json(url: str, key: str) -> dict[str, Any]:
+        request = Request(
+            url,
+            headers={
+                "Accept": "application/json",
+                "Authorization": f"Bearer {key}",
+                "User-Agent": "digital-twin-evaluation-preflight/1",
+            },
+        )
+        with urlopen(request, timeout=20) as response:  # noqa: S310
+            payload = json.loads(response.read().decode("utf-8"))
+        if not isinstance(payload, dict):
+            raise ScalePilotError("provider balance response is malformed")
+        return payload
+
+    deepseek = get_json(
+        "https://api.deepseek.com/user/balance", deepseek_key
+    )
+    deepseek_usd = next(
+        (
+            float(item["total_balance"])
+            for item in deepseek.get("balance_infos", [])
+            if item.get("currency") == "USD"
+        ),
+        0.0,
+    )
+    openrouter = get_json(
+        "https://openrouter.ai/api/v1/credits", openrouter_key
+    ).get("data", {})
+    openrouter_remaining = float(openrouter.get("total_credits", 0)) - float(
+        openrouter.get("total_usage", 0)
+    )
+    return {
+        "deepseek-official-api": deepseek_usd,
+        "openrouter": openrouter_remaining,
+    }
 
 
 def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
@@ -430,8 +480,10 @@ def _load_journal(path: Path) -> dict[str, Any]:
 
 def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
     state = _load_journal(path) if _uses_sqlite_journal(path) else _load_json(path)
-    if state.get("status") != "running":
-        raise ScalePilotError("only a running checkpoint may be resumed")
+    if state.get("status") not in {"running", "paused-insufficient-credit"}:
+        raise ScalePilotError(
+            "only a running or insufficient-credit checkpoint may be resumed"
+        )
     if state.get("simulation") is not simulation or state.get("bindings") != _state_bindings(assets):
         raise ScalePilotError("checkpoint resume bindings drifted")
     if state.get("run_type") != INSTRUMENT_ID:
@@ -441,7 +493,10 @@ def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dic
 
 def build_preflight(
     assets: dict[str, Any], *, output_path: Path = DEFAULT_OUTPUT,
-    live_metadata: dict[str, Any] | None = None, now: datetime | None = None,
+    live_metadata: dict[str, Any] | None = None,
+    live_balances: dict[str, float] | None = None,
+    now: datetime | None = None,
+    resume: bool = False,
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     execution = instrument["execution"]
@@ -454,13 +509,30 @@ def build_preflight(
     fresh = age <= float(instrument["freshness"]["maximum_age_hours_for_paid_execution"])
     live_failures = compare_live_metadata(instrument, live_metadata) if live_metadata else ["live-provider-match-not-checked"]
     live_match = not live_failures
+    balance_requirements = execution.get("minimum_provider_balance_usd", {})
+    balance_failures = [
+        provider
+        for provider, minimum in balance_requirements.items()
+        if live_balances is None or live_balances.get(provider, 0.0) < minimum
+    ]
+    balances_sufficient = not balance_failures
     authorized = execution["provider_execution_authorized"] is True
     frozen = instrument["status"] == "frozen-pending-execution"
-    ready = all((authorized, frozen, fresh, live_match, all(credentials.values()), not _working_tree_dirty(), not output_path.exists()))
+    resume_checkpoint_valid = False
+    if resume and output_path.exists():
+        try:
+            _load_resume(output_path, assets, simulation=False)
+            resume_checkpoint_valid = True
+        except ScalePilotError:
+            resume_checkpoint_valid = False
+    output_ready = resume_checkpoint_valid if resume else not output_path.exists()
+    ready = all((authorized, frozen, fresh, live_match, balances_sufficient, all(credentials.values()), not _working_tree_dirty(), output_ready))
     status = "ready" if ready else (
         "blocked-not-authorized" if not authorized else
         "blocked-not-frozen" if not frozen else
         "blocked-provider-freshness" if not fresh or not live_match else
+        "blocked-insufficient-credit" if not balances_sufficient else
+        "blocked-invalid-resume" if resume and not resume_checkpoint_valid else
         "blocked-preflight"
     )
     return {
@@ -475,12 +547,19 @@ def build_preflight(
         "working_tree_dirty": _working_tree_dirty(),
         "credentials_present": credentials,
         "credential_values_emitted": False,
-        "output_available": not output_path.exists(),
+        "resume_requested": resume,
+        "resume_checkpoint_valid": resume_checkpoint_valid,
+        "output_ready": output_ready,
         "freshness_snapshot_age_hours": age,
         "freshness_snapshot_current": fresh,
         "live_provider_match_checked": live_metadata is not None,
         "live_provider_match": live_match,
         "live_provider_failures": live_failures,
+        "provider_balances_checked": live_balances is not None,
+        "provider_balances_usd": live_balances or {},
+        "minimum_provider_balances_usd": balance_requirements,
+        "provider_balance_failures": balance_failures,
+        "provider_balances_sufficient": balances_sufficient,
         "maximum_provider_calls": execution["total_provider_call_limit"],
         "maximum_reserved_cost_usd": _maximum_reserved_cost(instrument),
         "cost_stop_usd": execution["cost_stop_usd"],
@@ -680,6 +759,16 @@ async def execute(
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     state = _load_resume(output_path, assets, simulation=simulation) if resume else _initial_state(assets, simulation=simulation)
+    if resume and state["status"] == "paused-insufficient-credit":
+        state.setdefault("credit_pause_events", []).append(
+            {
+                "resumed_at": datetime.now(timezone.utc).isoformat(),
+                "role": state.pop("pause_role", None),
+                "reason": state.pop("pause_reason", None),
+            }
+        )
+        state["status"] = "running"
+        _checkpoint(output_path, state)
     if not resume:
         _write_initial(output_path, state)
     source_map = assets["source_map"]
@@ -696,6 +785,8 @@ async def execute(
             instrument=instrument, output_path=output_path, stop_after_calls=None,
             checkpoint_callback=_checkpoint,
         )
+        if outcome["status"] == "paused-insufficient-credit":
+            return state
         state["canaries"][role] = {"role": role, **outcome}
         _checkpoint(output_path, state, ("canary", role))
         if outcome["status"] != "complete" or state["status"] == "invalid-execution":
@@ -713,6 +804,8 @@ async def execute(
             state=state, instrument=instrument, output_path=output_path, stop_after_calls=None,
             checkpoint_callback=_checkpoint,
         )
+        if outcome["status"] == "paused-insufficient-credit":
+            return state
         variant = outcome["value"]["question_variant"] if outcome["status"] == "complete" else None
         authored, provenance = assemble_case(truth, question_variant=variant, used_normalized_questions=used)
         blueprint = blueprints_by_id[truth["blueprint_id"]]
@@ -735,7 +828,7 @@ async def execute(
         if result["review_outcome"] is not None:
             continue
         blueprint = blueprints_by_id[result["blueprint_id"]]
-        result["review_outcome"] = await _safe_call(
+        outcome = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
             task=f"{TASK_PREFIX}_independent_review", schema=REVIEW_SCHEMA,
@@ -743,6 +836,9 @@ async def execute(
             output_path=output_path, stop_after_calls=None,
             checkpoint_callback=_checkpoint,
         )
+        if outcome["status"] == "paused-insufficient-credit":
+            return state
+        result["review_outcome"] = outcome
         reviewed += 1
         _checkpoint(output_path, state, ("result", result_position))
         if not simulation and reviewed % 50 == 0:
@@ -757,7 +853,7 @@ async def execute(
         if mutation["review_outcome"] is not None:
             continue
         blueprint = blueprints_by_id[mutation["blueprint_id"]]
-        mutation["review_outcome"] = await _safe_call(
+        outcome = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, mutation["mutated_case"], source_map=source_map),
             task=f"{TASK_PREFIX}_mutation_review", schema=REVIEW_SCHEMA,
@@ -765,6 +861,9 @@ async def execute(
             output_path=output_path, stop_after_calls=None,
             checkpoint_callback=_checkpoint,
         )
+        if outcome["status"] == "paused-insufficient-credit":
+            return state
+        mutation["review_outcome"] = outcome
         mutation_done += 1
         _checkpoint(output_path, state, ("mutation", mutation_position))
         if not simulation and mutation_done % 30 == 0:
@@ -784,7 +883,7 @@ async def execute(
         if result["dispute_outcome"] is not None:
             continue
         blueprint = blueprints_by_id[result["blueprint_id"]]
-        result["dispute_outcome"] = await _safe_call(
+        outcome = await _safe_call(
             role="dispute_reviewer", transport=transports["dispute_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
             task=f"{TASK_PREFIX}_dispute_review", schema=REVIEW_SCHEMA,
@@ -792,6 +891,9 @@ async def execute(
             output_path=output_path, stop_after_calls=None,
             checkpoint_callback=_checkpoint,
         )
+        if outcome["status"] == "paused-insufficient-credit":
+            return state
+        result["dispute_outcome"] = outcome
         _checkpoint(
             output_path,
             state,
@@ -840,7 +942,18 @@ def main() -> int:
         return 0
     if args.preflight or args.preflight_live:
         live = fetch_live_provider_metadata() if args.preflight_live else None
-        print(json.dumps(build_preflight(assets, output_path=args.output, live_metadata=live, now=datetime.now(timezone.utc)), indent=2, sort_keys=True))
+        balances = (
+            fetch_live_provider_balances(assets["instrument"])
+            if args.preflight_live
+            else None
+        )
+        print(json.dumps(build_preflight(
+            assets,
+            output_path=args.output,
+            live_metadata=live,
+            live_balances=balances,
+            now=datetime.now(timezone.utc),
+        ), indent=2, sort_keys=True))
         return 0
     if args.simulate:
         result = asyncio.run(execute(assets, transports=_simulation_transports(assets["instrument"]), output_path=args.output, simulation=True, resume=args.resume))
@@ -848,7 +961,15 @@ def main() -> int:
         return 0
     if args.execute:
         live = fetch_live_provider_metadata()
-        preflight = build_preflight(assets, output_path=args.output, live_metadata=live, now=datetime.now(timezone.utc))
+        balances = fetch_live_provider_balances(assets["instrument"])
+        preflight = build_preflight(
+            assets,
+            output_path=args.output,
+            live_metadata=live,
+            live_balances=balances,
+            now=datetime.now(timezone.utc),
+            resume=args.resume,
+        )
         if preflight["status"] != "ready":
             print(json.dumps(preflight, indent=2, sort_keys=True))
             return 2
