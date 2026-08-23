@@ -13,6 +13,7 @@ import json
 import math
 import os
 from pathlib import Path
+import sqlite3
 import sys
 from typing import Any
 
@@ -38,7 +39,7 @@ from scripts.run_factual_qa_v3_scale_pilot_100 import (
     SimulatedTransport,
     _binding_snapshot,
     _canonical_sha256,
-    _checkpoint,
+    _checkpoint as _json_checkpoint,
     _code_revision,
     _health_validator,
     _maximum_reserved_cost,
@@ -48,7 +49,7 @@ from scripts.run_factual_qa_v3_scale_pilot_100 import (
     _sha256_file,
     _strict_review_system_prompt,
     _working_tree_dirty,
-    _write_initial,
+    _write_initial as _write_json_initial,
     canonical_authored_case,
     deterministic_record,
     validate_review,
@@ -76,6 +77,22 @@ INSTRUMENT_ID = "factual-qa-v3-scale-checkpoint-1000-002"
 TRUTH_INSTRUMENT_ID = "factual-qa-v3-10000-pipeline-002"
 STAGE = "checkpoint-1000"
 NEW_CASE_COUNT = 900
+CUMULATIVE_CASE_COUNT = 1000
+MUTATION_COUNT = 180
+MUTATIONS_PER_TYPE = 30
+TASK_PREFIX = "fqa1000"
+ENTRYPOINT_PATH = Path(__file__)
+NEXT_STAGE_AUTHORIZATION_FIELD = "scale_10000_authorized"
+KEEP_DECISION = "keep-and-prepare-separate-9000-stage"
+EXPECTED_LIMITS = {
+    "provider_canary_call_limit": 2,
+    "author_call_limit": 900,
+    "independent_review_call_limit": 900,
+    "mutation_review_call_limit": 180,
+    "dispute_review_call_limit": 9,
+    "total_provider_call_limit": 1991,
+    "retry_attempts": 0,
+}
 MUTATION_TYPES = (
     "missing-citation",
     "truncated-citation",
@@ -115,16 +132,7 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ScalePilotError("checkpoint authorization and frozen state differ")
     if execution.get("automatic_stage_promotion") is not False:
         raise ScalePilotError("automatic stage promotion must remain disabled")
-    expected_limits = {
-        "provider_canary_call_limit": 2,
-        "author_call_limit": 900,
-        "independent_review_call_limit": 900,
-        "mutation_review_call_limit": 180,
-        "dispute_review_call_limit": 9,
-        "total_provider_call_limit": 1991,
-        "retry_attempts": 0,
-    }
-    for name, expected in expected_limits.items():
+    for name, expected in EXPECTED_LIMITS.items():
         if execution.get(name) != expected:
             raise ScalePilotError(f"checkpoint limit drifted: {name}")
     truth = instrument.get("truth_design", {})
@@ -132,13 +140,13 @@ def validate_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         truth.get("instrument_id") != TRUTH_INSTRUMENT_ID
         or truth.get("stage_id") != STAGE
         or truth.get("new_case_count") != NEW_CASE_COUNT
-        or truth.get("cumulative_case_count") != 1000
+        or truth.get("cumulative_case_count") != CUMULATIVE_CASE_COUNT
     ):
         raise ScalePilotError("checkpoint truth design drifted")
     if _sha256_file(PREVIOUS_SUMMARY_PATH) != truth.get("carried_forward_summary_sha256"):
         raise ScalePilotError("carried-forward 100-case summary drifted")
     if instrument["mutation_design"].get("type_counts") != {
-        mutation_type: 30 for mutation_type in MUTATION_TYPES
+        mutation_type: MUTATIONS_PER_TYPE for mutation_type in MUTATION_TYPES
     }:
         raise ScalePilotError("checkpoint mutation design drifted")
     for role, model in {
@@ -194,7 +202,9 @@ def load_assets(instrument_path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         if blueprint["checkpoint_stage"] == STAGE
     ]
     if len(truth_packages) != NEW_CASE_COUNT or len(upstream) != NEW_CASE_COUNT:
-        raise ScalePilotError("checkpoint must contain exactly 900 new cases")
+        raise ScalePilotError(
+            f"checkpoint must contain exactly {NEW_CASE_COUNT} new cases"
+        )
     truth_by_id = {package["blueprint_id"]: package for package in truth_packages}
     if set(truth_by_id) != {item["blueprint_id"] for item in upstream}:
         raise ScalePilotError("checkpoint blueprint identities drifted")
@@ -222,7 +232,7 @@ def _state_bindings(assets: dict[str, Any]) -> dict[str, Any]:
         "truth_configuration_sha256": assets["truth_configuration_sha256"],
         "carried_forward_summary_sha256": _sha256_file(PREVIOUS_SUMMARY_PATH),
         "code_revision": _code_revision(),
-        "runner_sha256": _sha256_file(Path(__file__)),
+        "runner_sha256": _sha256_file(ENTRYPOINT_PATH),
         "model_pricing_and_freshness_sha256": _canonical_sha256({
             "model_roles": _binding_snapshot(assets["instrument"]),
             "freshness": assets["instrument"]["freshness"],
@@ -240,8 +250,8 @@ def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any
         "data_boundary": assets["instrument"]["data_boundary"],
         "private_data_read": False,
         "private_data_emitted": False,
-        "cumulative_case_count_if_completed": 1000,
-        "scale_10000_authorized": False,
+        "cumulative_case_count_if_completed": CUMULATIVE_CASE_COUNT,
+        NEXT_STAGE_AUTHORIZATION_FIELD: False,
         "accounting": {
             "calls_attempted": 0,
             "calls_with_provider_response": 0,
@@ -259,8 +269,167 @@ def _initial_state(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any
     }
 
 
+def _uses_sqlite_journal(path: Path) -> bool:
+    return path.suffix == ".sqlite3"
+
+
+def _journal_metadata(state: dict[str, Any]) -> dict[str, Any]:
+    metadata = {
+        key: value
+        for key, value in state.items()
+        if key not in {"canaries", "results", "mutations"}
+    }
+    accounting = dict(metadata["accounting"])
+    accounting.pop("latency_ms", None)
+    metadata["accounting"] = accounting
+    return metadata
+
+
+def _write_initial(path: Path, state: dict[str, Any]) -> None:
+    if not _uses_sqlite_journal(path):
+        _write_json_initial(path, state)
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    except FileExistsError as error:
+        raise ScalePilotError(
+            f"refusing to overwrite existing output: {path}"
+        ) from error
+    os.close(descriptor)
+    try:
+        with sqlite3.connect(path) as connection:
+            connection.executescript(
+                """
+                CREATE TABLE metadata (
+                    id INTEGER PRIMARY KEY CHECK (id = 1),
+                    payload TEXT NOT NULL
+                );
+                CREATE TABLE canaries (
+                    role TEXT PRIMARY KEY,
+                    payload TEXT NOT NULL
+                );
+                CREATE TABLE results (
+                    position INTEGER PRIMARY KEY,
+                    payload TEXT NOT NULL
+                );
+                CREATE TABLE mutations (
+                    position INTEGER PRIMARY KEY,
+                    payload TEXT NOT NULL
+                );
+                CREATE TABLE latencies (
+                    position INTEGER PRIMARY KEY,
+                    value REAL NOT NULL
+                );
+                """
+            )
+            connection.execute(
+                "INSERT INTO metadata(id, payload) VALUES(1, ?)",
+                (json.dumps(_journal_metadata(state), sort_keys=True),),
+            )
+    except Exception:
+        path.unlink(missing_ok=True)
+        raise
+
+
+def _checkpoint(
+    path: Path,
+    state: dict[str, Any],
+    event: tuple[str, str | int | None] | None = None,
+) -> None:
+    if not _uses_sqlite_journal(path):
+        _json_checkpoint(path, state)
+        return
+    with sqlite3.connect(path) as connection:
+        connection.execute(
+            "INSERT OR REPLACE INTO metadata(id, payload) VALUES(1, ?)",
+            (json.dumps(_journal_metadata(state), sort_keys=True),),
+        )
+        if event is not None:
+            kind, identity = event
+            if kind == "canary":
+                role = str(identity)
+                connection.execute(
+                    "INSERT OR REPLACE INTO canaries(role, payload) VALUES(?, ?)",
+                    (role, json.dumps(state["canaries"][role], sort_keys=True)),
+                )
+            elif kind == "result":
+                position = int(identity)
+                connection.execute(
+                    "INSERT OR REPLACE INTO results(position, payload) VALUES(?, ?)",
+                    (position, json.dumps(state["results"][position], sort_keys=True)),
+                )
+            elif kind == "mutations-all":
+                connection.executemany(
+                    "INSERT OR REPLACE INTO mutations(position, payload) VALUES(?, ?)",
+                    (
+                        (position, json.dumps(value, sort_keys=True))
+                        for position, value in enumerate(state["mutations"])
+                    ),
+                )
+            elif kind == "mutation":
+                position = int(identity)
+                connection.execute(
+                    "INSERT OR REPLACE INTO mutations(position, payload) VALUES(?, ?)",
+                    (position, json.dumps(state["mutations"][position], sort_keys=True)),
+                )
+            elif kind != "final":
+                raise ScalePilotError(f"unknown journal event: {kind}")
+        persisted_latency_count = connection.execute(
+            "SELECT COUNT(*) FROM latencies"
+        ).fetchone()[0]
+        pending_latencies = state["accounting"]["latency_ms"][
+            persisted_latency_count:
+        ]
+        connection.executemany(
+            "INSERT INTO latencies(position, value) VALUES(?, ?)",
+            (
+                (persisted_latency_count + offset, value)
+                for offset, value in enumerate(pending_latencies)
+            ),
+        )
+
+
+def _load_journal(path: Path) -> dict[str, Any]:
+    try:
+        with sqlite3.connect(path) as connection:
+            row = connection.execute(
+                "SELECT payload FROM metadata WHERE id = 1"
+            ).fetchone()
+            if row is None:
+                raise ScalePilotError("checkpoint journal metadata is missing")
+            state = json.loads(row[0])
+            state["canaries"] = {
+                role: json.loads(payload)
+                for role, payload in connection.execute(
+                    "SELECT role, payload FROM canaries ORDER BY role"
+                )
+            }
+            state["results"] = [
+                json.loads(payload)
+                for _, payload in connection.execute(
+                    "SELECT position, payload FROM results ORDER BY position"
+                )
+            ]
+            state["mutations"] = [
+                json.loads(payload)
+                for _, payload in connection.execute(
+                    "SELECT position, payload FROM mutations ORDER BY position"
+                )
+            ]
+            state["accounting"]["latency_ms"] = [
+                value
+                for _, value in connection.execute(
+                    "SELECT position, value FROM latencies ORDER BY position"
+                )
+            ]
+    except (OSError, sqlite3.DatabaseError, json.JSONDecodeError) as error:
+        raise ScalePilotError(f"cannot load checkpoint journal: {path}") from error
+    return state
+
+
 def _load_resume(path: Path, assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
-    state = _load_json(path)
+    state = _load_journal(path) if _uses_sqlite_journal(path) else _load_json(path)
     if state.get("status") != "running":
         raise ScalePilotError("only a running checkpoint may be resumed")
     if state.get("simulation") is not simulation or state.get("bindings") != _state_bindings(assets):
@@ -302,7 +471,7 @@ def build_preflight(
         "provider_execution_authorized": authorized,
         "instrument_frozen": frozen,
         "new_case_count": NEW_CASE_COUNT,
-        "cumulative_case_count": 1000,
+        "cumulative_case_count": CUMULATIVE_CASE_COUNT,
         "working_tree_dirty": _working_tree_dirty(),
         "credentials_present": credentials,
         "credential_values_emitted": False,
@@ -316,7 +485,7 @@ def build_preflight(
         "maximum_reserved_cost_usd": _maximum_reserved_cost(instrument),
         "cost_stop_usd": execution["cost_stop_usd"],
         "external_call_enabled": False,
-        "scale_10000_authorized": False,
+        NEXT_STAGE_AUTHORIZATION_FIELD: False,
     }
 
 
@@ -326,15 +495,17 @@ def _build_mutations(assets: dict[str, Any]) -> list[dict[str, Any]]:
     answerable = [item for item in blueprints if item["expected_action"] == ANSWER_ACTION]
     selected: list[dict[str, Any]] = []
     remaining = list(answerable)
-    while remaining and len(selected) < 180:
+    while remaining and len(selected) < MUTATION_COUNT:
         seen = Counter(item["slice"] for item in selected)
         choice = min(remaining, key=lambda item: (seen[item["slice"]], item["blueprint_id"]))
         selected.append(choice)
         remaining.remove(choice)
-    if len(selected) != 180:
+    if len(selected) != MUTATION_COUNT:
         raise ScalePilotError("insufficient checkpoint cases for mutations")
     mutations: list[dict[str, Any]] = []
-    sequence = [kind for kind in MUTATION_TYPES for _ in range(30)]
+    sequence = [
+        kind for kind in MUTATION_TYPES for _ in range(MUTATIONS_PER_TYPE)
+    ]
     for blueprint, mutation_type in zip(selected, sequence, strict=True):
         control = canonical_authored_case(blueprint, source_map=source_map)
         mutated = deepcopy(control)
@@ -460,7 +631,7 @@ def analyze(state: dict[str, Any], instrument: dict[str, Any]) -> dict[str, Any]
         "p95_latency_ms": latencies[max(0, math.ceil(0.95 * len(latencies)) - 1)] if latencies else 0.0,
         "private_data_calls": 0,
         "new_case_count": NEW_CASE_COUNT,
-        "cumulative_case_count": 1000,
+        "cumulative_case_count": CUMULATIVE_CASE_COUNT,
         "deterministic_fallback_count": NEW_CASE_COUNT - accepted,
         "near_duplicate_template_group_count": sum(count > 1 for count in Counter(near_duplicate_signature(item["authored_case"]["question"]) for item in results).values()),
     }
@@ -486,12 +657,12 @@ def analyze(state: dict[str, Any], instrument: dict[str, Any]) -> dict[str, Any]
     passed = all(checks.values())
     return {
         "status": "completed-keep" if passed else "completed-refine",
-        "decision": "keep-and-prepare-separate-9000-stage" if passed else "stop-scaling-and-decide-method",
+        "decision": KEEP_DECISION if passed else "stop-scaling-and-decide-method",
         "machine_gates_passed": passed,
         "metrics": metrics,
         "gate_results": checks,
         "failed_gates": sorted(name for name, value in checks.items() if not value),
-        "scale_10000_authorized": False,
+        NEXT_STAGE_AUTHORIZATION_FIELD: False,
     }
 
 
@@ -520,12 +691,13 @@ async def execute(
         outcome = await _safe_call(
             role=role, transport=transports[role],
             system="Return the exact requested synthetic-public health JSON.",
-            prompt='Return {"status":"ok"}.', task=f"fqa1000_{role}_health",
+            prompt='Return {"status":"ok"}.', task=f"{TASK_PREFIX}_{role}_health",
             schema=HEALTH_SCHEMA, validator=_health_validator, state=state,
             instrument=instrument, output_path=output_path, stop_after_calls=None,
+            checkpoint_callback=_checkpoint,
         )
         state["canaries"][role] = {"role": role, **outcome}
-        _checkpoint(output_path, state)
+        _checkpoint(output_path, state, ("canary", role))
         if outcome["status"] != "complete" or state["status"] == "invalid-execution":
             state["status"] = "invalid-execution"
             state["invalid_reason"] = state.get("invalid_reason", "provider-canary-failed")
@@ -536,9 +708,10 @@ async def execute(
     for index, truth in enumerate(assets["truth_packages"][len(state["results"]):], start=len(state["results"]) + 1):
         outcome = await _safe_call(
             role="author", transport=transports["author"], system=author_system,
-            prompt=_author_prompt(truth), task="fqa1000_author",
+            prompt=_author_prompt(truth), task=f"{TASK_PREFIX}_author",
             schema=QUESTION_VARIANT_SCHEMA, validator=validate_question_variant,
             state=state, instrument=instrument, output_path=output_path, stop_after_calls=None,
+            checkpoint_callback=_checkpoint,
         )
         variant = outcome["value"]["question_variant"] if outcome["status"] == "complete" else None
         authored, provenance = assemble_case(truth, question_variant=variant, used_normalized_questions=used)
@@ -551,49 +724,55 @@ async def execute(
             "deterministic": deterministic_record(blueprint, authored, source_map=source_map),
             "author_outcome": outcome, "review_outcome": None, "dispute_outcome": None,
         })
-        _checkpoint(output_path, state)
+        _checkpoint(output_path, state, ("result", len(state["results"]) - 1))
         if not simulation and index % 50 == 0:
             print(f"author progress {index}/{NEW_CASE_COUNT}", file=sys.stderr, flush=True)
         if state["status"] == "invalid-execution":
             return state
     review_system = _strict_review_system_prompt()
     reviewed = sum(item["review_outcome"] is not None for item in state["results"])
-    for result in state["results"]:
+    for result_position, result in enumerate(state["results"]):
         if result["review_outcome"] is not None:
             continue
         blueprint = blueprints_by_id[result["blueprint_id"]]
         result["review_outcome"] = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
-            task="fqa1000_independent_review", schema=REVIEW_SCHEMA,
+            task=f"{TASK_PREFIX}_independent_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
+            checkpoint_callback=_checkpoint,
         )
         reviewed += 1
-        _checkpoint(output_path, state)
+        _checkpoint(output_path, state, ("result", result_position))
         if not simulation and reviewed % 50 == 0:
             print(f"review progress {reviewed}/{NEW_CASE_COUNT}", file=sys.stderr, flush=True)
         if state["status"] == "invalid-execution":
             return state
     if not state["mutations"]:
         state["mutations"] = _build_mutations(assets)
-        _checkpoint(output_path, state)
+        _checkpoint(output_path, state, ("mutations-all", None))
     mutation_done = sum(item["review_outcome"] is not None for item in state["mutations"])
-    for mutation in state["mutations"]:
+    for mutation_position, mutation in enumerate(state["mutations"]):
         if mutation["review_outcome"] is not None:
             continue
         blueprint = blueprints_by_id[mutation["blueprint_id"]]
         mutation["review_outcome"] = await _safe_call(
             role="independent_reviewer", transport=transports["independent_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, mutation["mutated_case"], source_map=source_map),
-            task="fqa1000_mutation_review", schema=REVIEW_SCHEMA,
+            task=f"{TASK_PREFIX}_mutation_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
+            checkpoint_callback=_checkpoint,
         )
         mutation_done += 1
-        _checkpoint(output_path, state)
+        _checkpoint(output_path, state, ("mutation", mutation_position))
         if not simulation and mutation_done % 30 == 0:
-            print(f"mutation progress {mutation_done}/180", file=sys.stderr, flush=True)
+            print(
+                f"mutation progress {mutation_done}/{MUTATION_COUNT}",
+                file=sys.stderr,
+                flush=True,
+            )
         if state["status"] == "invalid-execution":
             return state
     disagreements = [
@@ -608,18 +787,23 @@ async def execute(
         result["dispute_outcome"] = await _safe_call(
             role="dispute_reviewer", transport=transports["dispute_reviewer"],
             system=review_system, prompt=_review_prompt(blueprint, result["authored_case"], source_map=source_map),
-            task="fqa1000_dispute_review", schema=REVIEW_SCHEMA,
+            task=f"{TASK_PREFIX}_dispute_review", schema=REVIEW_SCHEMA,
             validator=validate_review, state=state, instrument=instrument,
             output_path=output_path, stop_after_calls=None,
+            checkpoint_callback=_checkpoint,
         )
-        _checkpoint(output_path, state)
+        _checkpoint(
+            output_path,
+            state,
+            ("result", state["results"].index(result)),
+        )
         if state["status"] == "invalid-execution":
             return state
     summary = analyze(state, instrument)
     state["summary"] = summary
     state["human_priority_packet"] = _priority_packet(state, maximum=instrument["quality_gates"]["human_priority_packet_max"])
     state["status"] = summary["status"]
-    _checkpoint(output_path, state)
+    _checkpoint(output_path, state, ("final", None))
     return state
 
 
@@ -648,7 +832,8 @@ def main() -> int:
     if args.validate:
         print(json.dumps({
             "status": "passed", "instrument_id": INSTRUMENT_ID,
-            "new_case_count": NEW_CASE_COUNT, "cumulative_case_count": 1000,
+            "new_case_count": NEW_CASE_COUNT,
+            "cumulative_case_count": CUMULATIVE_CASE_COUNT,
             "maximum_reserved_cost_usd": _maximum_reserved_cost(assets["instrument"]),
             "provider_called": False, "private_data_read": False,
         }, indent=2, sort_keys=True))
