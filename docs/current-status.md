@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-22
+Status date: 2026-08-23
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 492 executable or execution-affecting
+the current branch extends it to all 495 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 62 protected entrypoints
+active for all general evaluation actions. It covers 63 protected entrypoints
 and retains an exact bounded authorization only for the completed
 `factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
@@ -93,6 +93,22 @@ is 800/800, reviewer agreement is 997/1,000, mutation detection is 199/200, and
 there are zero exact duplicates. Attempt 002 authorization is revoked. The
 remaining 9,000 cases remain closed and cannot be promoted automatically.
 
+The researcher has now confirmed that completing the professor-requested
+approximately 10,000-case dummy factual-QA dataset is the immediate evidence
+deliverable. Build-only instrument
+`factual-qa-v3-scale-completion-10000-001` selects exactly the remaining 9,000
+truth packages: 7,200 answerable, 900 abstain, 450 clarify, and 450 refuse. Its
+full 19,802-call network-free normal-path simulation passes, including 9,000
+question variants, 9,000 independent reviews, and 1,800 balanced mutation
+reviews. The execution ceiling is 19,892 calls with at most 90 disputes, an
+expected cost near USD 7.37, a conservative maximum reservation of USD 37.31,
+and a USD 50 emergency stop. An atomic SQLite journal replaces quadratic JSON
+checkpoint rewrites while retaining per-result durability and exact resume
+bindings. Current live metadata matches the frozen DeepSeek and OpenRouter
+bindings and both credentials are present, but the instrument remains draft,
+provider-unauthorized, and outside the bounded freeze allowlist. No provider
+call has been made for this stage.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
@@ -114,7 +130,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 792 Python tests and 46 frontend tests, frontend lint, and the
+check passes 804 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -134,9 +150,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 792-test Python suite.
+connections. These corrections pass the current 804-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 487-file audit. Evaluation
+artifacts are also fully dispositioned in the current 495-file audit. Evaluation
 execution remains frozen; only the completed historical oracle pilot remains in
 the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
 
@@ -308,7 +324,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; reviews 002 and 003 are invalid and revoked; 003 stopped before a provider response and produced no quality evidence | Resolve the exact OpenRouter inference-path rejection, freeze a successor review ID, complete independent review and at most 12 priority adjudications, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
-| Large factual QA | Keep through cumulative 1,000 cases | Pilot 003 plus checkpoint 002 produced 1,000/1,000 deterministic-valid cases, 800/800 valid answerable citations, 997/1,000 reviewer agreement, 199/200 mutation detection, and zero exact duplicates; authorization revoked | Decide separately whether the supporting value of the remaining synthetic 9,000 justifies execution; it is not a release blocker |
+| Large factual QA | Keep through cumulative 1,000 cases; 10,000 completion build ready | Pilot 003 plus checkpoint 002 produced 1,000/1,000 deterministic-valid cases, 800/800 valid answerable citations, 997/1,000 reviewer agreement, 199/200 mutation detection, and zero exact duplicates; the remaining-9,000 network-free simulation passes | Publish the provider-unauthorized completion checkpoint, then require one explicit paid-run authorization; this fulfills the professor-requested scale evidence but remains separate from real-source and product validation |
 
 ## Release readiness and critical path
 
@@ -322,9 +338,9 @@ and one frozen end-to-end candidate decision.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 003 invalid and revoked / Refine | Resolve the authenticated-key inference rejection, then use a new frozen review ID to complete independent review before selecting an open-set answerability gate without using AnyHit |
-| 4 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 5 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | In Progress / Keep at 1,000 | Record the passing cumulative result and stop for a separate value/cost decision before the remaining 9,000 cases |
+| 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | In Progress / Keep at 1,000 / completion build ready | Publish the bounded remaining-9,000 build, obtain explicit paid authorization, and register the cumulative 10,000-case result requested by the professor |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 003 invalid and revoked / Refine | Resolve the authenticated-key inference rejection, then use a new frozen review ID to complete independent review before selecting an open-set answerability gate without using AnyHit |
+| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |

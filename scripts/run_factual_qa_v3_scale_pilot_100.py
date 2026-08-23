@@ -1122,13 +1122,15 @@ async def _safe_call(
     instrument: dict[str, Any],
     output_path: Path,
     stop_after_calls: int | None,
+    checkpoint_callback: Any | None = None,
 ) -> dict[str, Any]:
+    checkpoint_writer = checkpoint_callback or _checkpoint
     accounting = state["accounting"]
     cost_stop = float(instrument["execution"]["cost_stop_usd"])
     if accounting["external_cost_usd"] >= cost_stop:
         state["status"] = "invalid-execution"
         state["invalid_reason"] = "cost-stop-reached-before-call"
-        _checkpoint(output_path, state)
+        checkpoint_writer(output_path, state)
         return {
             "status": "budget-stop",
             "error_type": None,
@@ -1140,7 +1142,7 @@ async def _safe_call(
     if accounting["calls_attempted"] >= instrument["execution"]["total_provider_call_limit"]:
         raise ScalePilotError("provider call limit reached")
     if stop_after_calls is not None and accounting["calls_attempted"] >= stop_after_calls:
-        _checkpoint(output_path, state)
+        checkpoint_writer(output_path, state)
         raise PlannedInterruption("planned interruption after durable checkpoint")
     accounting["calls_attempted"] += 1
     started = time.perf_counter()
