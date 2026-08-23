@@ -1109,6 +1109,26 @@ def _record_raw_call(
     accounting["latency_ms"].append(raw.latency_ms)
 
 
+def _is_insufficient_credit_error(error: Exception) -> bool:
+    current: BaseException | None = error
+    while current is not None:
+        if getattr(current, "status_code", None) == 402:
+            return True
+        message = str(current).casefold()
+        if any(
+            marker in message
+            for marker in (
+                "insufficient balance",
+                "insufficient credit",
+                "insufficient quota",
+                "credit balance",
+            )
+        ):
+            return True
+        current = current.__cause__ or current.__context__
+    return False
+
+
 async def _safe_call(
     *,
     role: str,
@@ -1154,6 +1174,36 @@ async def _safe_call(
             schema=schema,
         )
     except Exception as error:
+        credit_resume_limit = int(
+            instrument["execution"].get("credit_resume_continuation_limit", 0)
+        )
+        if _is_insufficient_credit_error(error) and credit_resume_limit > 0:
+            credit_pause_count = int(state.get("credit_pause_count", 0)) + 1
+            state["credit_pause_count"] = credit_pause_count
+            if credit_pause_count > credit_resume_limit:
+                state["status"] = "invalid-execution"
+                state["invalid_reason"] = "credit-resume-continuation-limit-reached"
+                checkpoint_writer(output_path, state)
+                return {
+                    "status": "provider-error",
+                    "error_type": type(error).__name__,
+                    "provider_response_received": False,
+                    "latency_ms": (time.perf_counter() - started) * 1000,
+                    "value": None,
+                    "call": None,
+                }
+            state["status"] = "paused-insufficient-credit"
+            state["pause_reason"] = "provider-reported-insufficient-credit"
+            state["pause_role"] = role
+            checkpoint_writer(output_path, state)
+            return {
+                "status": "paused-insufficient-credit",
+                "error_type": type(error).__name__,
+                "provider_response_received": False,
+                "latency_ms": (time.perf_counter() - started) * 1000,
+                "value": None,
+                "call": None,
+            }
         outcome = {
             "status": "provider-error",
             "error_type": type(error).__name__,

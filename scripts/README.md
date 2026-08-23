@@ -560,7 +560,12 @@ Current utilities:
   9,000 cases, 1,800 balanced mutation controls, and at most 90 disputes. Its
   normal 19,802-call path passes network-free simulation. The completion stage
   uses an atomic SQLite journal so each result is durable without repeatedly
-  rewriting the full growing output. Run `npm run
+  rewriting the full growing output. Live preflight requires minimum provider
+  balances of USD 3 for DeepSeek and USD 7 for OpenRouter. A provider-reported
+  insufficient-credit response pauses immediately without completing the
+  current logical item; after top-up, rerun the paid command with `--resume`.
+  At most two such no-response continuations are allowed, while ordinary
+  provider or quality failures retain zero retries. Run `npm run
   verify:factual-qa-v3-completion-10000`, `npm run
   preflight:factual-qa-v3-completion-10000`, `npm run
   preflight-live:factual-qa-v3-completion-10000`, or `npm run

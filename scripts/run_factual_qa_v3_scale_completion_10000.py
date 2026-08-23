@@ -43,8 +43,9 @@ CONFIGURATION = {
         "independent_review_call_limit": 9000,
         "mutation_review_call_limit": 1800,
         "dispute_review_call_limit": 90,
-        "total_provider_call_limit": 19892,
+        "total_provider_call_limit": 19894,
         "retry_attempts": 0,
+        "credit_resume_continuation_limit": 2,
     },
 }
 
