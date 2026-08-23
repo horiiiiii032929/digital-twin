@@ -55,7 +55,7 @@ def test_completion_selects_exact_remaining_9000_cases(configured_stage) -> None
     assert assets["previous_summary"]["cumulative_case_count"] == 1000
 
 
-def test_completion_preflight_reports_insufficient_balance(
+def test_completion_preflight_reports_revoked_authorization_and_balance(
     configured_stage, tmp_path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     assets = configured_stage.load_assets(completion.CONFIGURATION["INSTRUMENT_PATH"])
@@ -69,9 +69,9 @@ def test_completion_preflight_reports_insufficient_balance(
         live_balances={"deepseek-official-api": 9.25, "openrouter": 3.23},
     )
 
-    assert preflight["status"] == "blocked-provider-freshness"
-    assert preflight["provider_execution_authorized"] is True
-    assert preflight["instrument_frozen"] is True
+    assert preflight["status"] == "blocked-not-authorized"
+    assert preflight["provider_execution_authorized"] is False
+    assert preflight["instrument_frozen"] is False
     assert preflight["new_case_count"] == 9000
     assert preflight["cumulative_case_count"] == 10000
     assert preflight["further_scale_authorized"] is False
