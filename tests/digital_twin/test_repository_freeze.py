@@ -33,7 +33,10 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
-    pilot_ids = {"factual-qa-v3-oracle-pilot-001"}
+    pilot_ids = {
+        "factual-qa-v3-oracle-pilot-001",
+        "factual-qa-v3-scale-completion-10000-001",
+    }
 
     for pilot_id in pilot_ids:
         require_bounded_pilot_operation_allowed(pilot_id)
@@ -90,10 +93,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "factual-qa-v3-scale-checkpoint-1000-002"
-        )
-    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
-        require_bounded_pilot_operation_allowed(
-            "factual-qa-v3-scale-completion-10000-001"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-10000-pipeline-001")
