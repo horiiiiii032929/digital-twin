@@ -556,9 +556,9 @@ Current utilities:
 - `run_factual_qa_v3_scale_checkpoint_1000.py` and
   `run_factual_qa_v3_scale_completion_10000.py`: share the validated
   deterministic stage engine. Checkpoint 002 completed the cumulative 1,000
-  cases with a Keep decision. Completion 001 selects exactly the remaining
-  9,000 cases, 1,800 balanced mutation controls, and at most 90 disputes. Its
-  normal 19,802-call path passes network-free simulation. The completion stage
+  cases with a Keep decision. Completion 001 then completed exactly the
+  remaining 9,000 cases plus 1,800 balanced mutation controls as a cumulative
+  10,000-case Keep result. Its one-time authorization is revoked. The runner
   uses an atomic SQLite journal so each result is durable without repeatedly
   rewriting the full growing output. Live preflight requires minimum provider
   balances of USD 3 for DeepSeek and USD 4 for OpenRouter. A provider-reported
@@ -569,9 +569,9 @@ Current utilities:
   verify:factual-qa-v3-completion-10000`, `npm run
   preflight:factual-qa-v3-completion-10000`, `npm run
   preflight-live:factual-qa-v3-completion-10000`, or `npm run
-  simulate:factual-qa-v3-completion-10000`. The paid `execute:` command remains
-  blocked until the exact completion instrument is frozen and separately
-  authorized.
+  simulate:factual-qa-v3-completion-10000`. The paid `execute:` command is now
+  blocked by the revoked instrument and removed bounded authorization; the
+  completed run must not be repeated under the same ID.
 - `validate_factual_qa_provider_freshness.py`: validates the frozen 24-hour
   provider snapshot without network access by default. `--live` compares the
   instrument against the official DeepSeek pricing table and OpenRouter model

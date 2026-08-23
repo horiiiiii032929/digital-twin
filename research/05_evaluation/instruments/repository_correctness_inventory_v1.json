@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3780d495f70cef6773e473353f8b2e6da6330ccd0006fd83f815943c0209a56a",
+  "record_sha256": "453a163fd030459b065fbec3f9f7e389f6ee8f568f943c49e904c3a47afa28ae",
   "records": [
     {
       "audit": {
@@ -1976,7 +1976,7 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Authorization review confirms exactly 9,000 remaining truth packages, live USD 3 DeepSeek and USD 4 OpenRouter initial balance minima, two bounded no-response credit continuations, zero ordinary retries, no automatic promotion, and explicit provider execution authorization.",
+        "evidence": "Post-run review confirms completion 001 records a Keep result, revokes provider execution, retains exact historical limits and bindings, permits no automatic promotion, and links only to sanitized evidence while raw output remains ignored.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -1987,7 +1987,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/factual_qa_v3_scale_completion_10000_001.json",
       "risk": "high",
-      "sha256": "9be9b8c70a2f6f1f607ce59cae90b05640543efa2cf2f387e553daee4c58f2a2"
+      "sha256": "a418655c3595d433417ab487287ae878cb8f24ae2632aa3540318abe67a74972"
     },
     {
       "audit": {
@@ -6454,7 +6454,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active while exact bounded authorization is granted only to the historical oracle and the researcher-authorized remaining-9,000 completion stage.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active after completion 001 authorization was revoked and removed; only the historical oracle authorization remains.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6465,7 +6465,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "6097b3855cff32984383ed43197de9c8e490316ce53ec9779258fea1644006da"
+      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
     },
     {
       "audit": {
@@ -6886,7 +6886,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations and exact authorization of only the historical oracle plus completion 001; every revoked or unreviewed stage remains rejected.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and rejection of revoked completion 001 plus every other unreviewed stage.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6897,7 +6897,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "6e40f373b24a0f525fbd526d78b070b6f7fa7c9c516a1fb2c6516efffbf8f9f6"
+      "sha256": "2cdd89b27e8081006c64c5b76d80f274482379020b142219ea7881bced8f1f27"
     },
     {
       "audit": {
@@ -7590,9 +7590,9 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Seven focused tests verify exact stage distribution, balance-aware preflight under the frozen authorization, exact live resume acceptance, 1,800 deterministic mutations, atomic journal fidelity, a full pause/resume simulation, and the two-continuation hard limit.",
+        "evidence": "Seven focused tests verify exact stage distribution, revoked post-run preflight, exact live resume acceptance for eligible checkpoints, 1,800 deterministic mutations, atomic journal fidelity, a full pause/resume simulation, and the two-continuation hard limit.",
         "findings": [],
-        "reviewed_at": "2026-08-23",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7601,7 +7601,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_v3_scale_completion_10000.py",
       "risk": "medium",
-      "sha256": "457a78c8c63c717066fb9ebb4ef494c8e49e8a50b2abd95a01538b1aacf6ed05"
+      "sha256": "9ff2585f9214a9609755bde0dbda99f87dfd53c84cb32e61d54562ffb6ba6288"
     },
     {
       "audit": {
