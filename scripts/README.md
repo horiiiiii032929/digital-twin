@@ -561,7 +561,7 @@ Current utilities:
   normal 19,802-call path passes network-free simulation. The completion stage
   uses an atomic SQLite journal so each result is durable without repeatedly
   rewriting the full growing output. Live preflight requires minimum provider
-  balances of USD 3 for DeepSeek and USD 7 for OpenRouter. A provider-reported
+  balances of USD 3 for DeepSeek and USD 4 for OpenRouter. A provider-reported
   insufficient-credit response pauses immediately without completing the
   current logical item; after top-up, rerun the paid command with `--resume`.
   At most two such no-response continuations are allowed, while ordinary

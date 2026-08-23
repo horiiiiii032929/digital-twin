@@ -106,13 +106,16 @@ expected cost near USD 7.37, a conservative maximum reservation of USD 37.31,
 and a USD 50 emergency stop. An atomic SQLite journal replaces quadratic JSON
 checkpoint rewrites while retaining per-result durability and exact resume
 bindings. Paid preflight also requires at least USD 3 of DeepSeek balance and
-USD 7 of OpenRouter balance. If either provider reports insufficient credit
+USD 4 of OpenRouter balance. If either provider reports insufficient credit
 after execution starts, the runner stops immediately and preserves the exact
 logical item for `--resume`; ordinary quality or transport failures are never
 retried. Current live metadata matches the frozen DeepSeek and OpenRouter
-bindings and both credentials are present, but the instrument remains draft,
-provider-unauthorized, and outside the bounded freeze allowlist. No inference
-call has been made for this stage.
+bindings and both credentials are present. The researcher explicitly authorized
+starting with the current balance because the durable credit-pause path can
+continue after a top-up. The instrument is now frozen and is the only active
+factual-QA scale authorization in the bounded freeze allowlist. Its initial
+OpenRouter reserve gate is USD 4; no inference call had been made when this
+authorization checkpoint was recorded.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
