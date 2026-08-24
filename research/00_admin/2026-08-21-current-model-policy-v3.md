@@ -32,8 +32,9 @@ authorize the 100, 1,000, or 10,000-case stages.
 | Dataset author and bounded dispute evaluator | `deepseek-v4-pro` | Selected only for already authorized bounded workflows. |
 | Independent reviewer fallback | `openrouter/mistralai/mistral-small-2603` | Qualified advisory fallback from run 006. |
 | Rejected independent reviewer candidate | `openrouter/qwen/qwen3.7-plus` | Qualification 007 failed six gates; do not bind it into the 100-case stage. |
-| Evidence-sufficiency reviewer candidate | `openrouter/google/gemini-3.7-flash` through exact `google-ai-studio` routing | Stable cross-family candidate for review 005; build-only and provider-unauthorized. |
-| Current evidence-sufficiency reviewer candidate | `openrouter/openai/gpt-5.4-mini` through exact `openai` routing | Snapshot-pinned review 006 candidate; build-only and provider-unauthorized. Review 005 is preserved but will not be executed or used as fallback. |
+| Preserved evidence-sufficiency reviewer build | `openrouter/google/gemini-3.7-flash` through exact `google-ai-studio` routing | Review 005 remains unexecuted history and is not an outcome-based fallback. |
+| Dropped evidence-sufficiency reviewer path | `openrouter/openai/gpt-5.4-mini` | Reviews 006 and 007 are invalid/revoked; do not retry the OpenRouter path. |
+| Dropped evidence-sufficiency reviewer candidate | Direct official `deepseek-v4-pro` | Review 008 approved 6/6 clean controls but detected only 5/6 deliberate defects; authorization revoked and do not retry this contract. |
 | Local general screening | `qwen3.5:9b-q4_K_M` at digest `6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7` | Prospective only; not used by the factual-QA scale pipeline. |
 | OpenRouter DeepSeek transport | `openrouter/deepseek/deepseek-v4-flash-0731` | Prospective gateway; direct DeepSeek remains selected. |
 | Selected text embedding | `Qwen/Qwen3-Embedding-0.6B` | Keep the project-selected retrieval implementation. |
@@ -88,6 +89,20 @@ reservation is USD 0.429 under the unchanged USD 0.50 ceiling. This binding is
 prospective and does not claim reviewer quality before the frozen sensitivity
 call.
 
+Reviews 006 and 007 subsequently failed before a provider response and are
+revoked. Review 008 changes the method boundary to the directly authenticated
+DeepSeek API already proven operational in this repository. It binds exact
+`deepseek-v4-pro`, JSON-object mode with deterministic schema validation,
+thinking disabled, zero retries, no fallback, 13 calls maximum, a USD 0.15834
+reservation, and a USD 1.50 emergency ceiling. DeepSeek's public policy does
+not provide a project-specific zero-retention or zero-training guarantee, so
+this candidate may receive only synthetic-public evaluation inputs.
+The researcher separately authorized review 008 on 2026-08-24. Its exact-model
+sensitivity response was structurally valid but detected only five of six
+deliberate defects. The runner suppressed all bulk calls, the reviewer is
+dropped for this contract, and authorization is revoked. Dataset freezing,
+candidate evaluation, private sources, and product selection remain closed.
+
 ## Primary-source verification
 
 - [Alibaba Cloud current Qwen models](https://www.alibabacloud.com/help/en/model-studio/models)
@@ -97,3 +112,6 @@ call.
 - [Google stable Gemini models](https://ai.google.dev/gemini-api/docs/models)
 - [Google Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing)
 - [OpenAI GPT-5.4 mini specification](https://developers.openai.com/api/docs/models/gpt-5.4-mini)
+- [DeepSeek models and pricing](https://api-docs.deepseek.com/quick_start/pricing/)
+- [DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/)
+- [DeepSeek privacy policy](https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html)

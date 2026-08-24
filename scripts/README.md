@@ -128,6 +128,20 @@ Current utilities:
   sensitivity request returned HTTP 400 before a provider response; all bulk
   calls were suppressed, authorization is revoked, and this OpenRouter path
   must not be retried. Every dataset and downstream decision remains blocked.
+  Successor `008` leaves every OpenRouter attempt unchanged and uses the direct
+  official DeepSeek API path already proven by the 10,000-case factual-QA run.
+  It binds `deepseek-v4-pro`, JSON-object output with deterministic schema
+  validation, thinking disabled, zero retries, no fallback, 13 calls maximum,
+  a USD 0.15834 reservation, and a USD 1.50 emergency ceiling. Run `npm run
+  verify:evidence-sufficiency-v2-review-008`, `npm run
+  simulate:evidence-sufficiency-v2-review-008`, or `npm run
+  preflight-live:evidence-sufficiency-v2-review-008`. Live preflight reads only
+  the official model list. The authorized sensitivity call returned valid exact-
+  model output but detected only 5/6 deliberate defects, so all 12 bulk batches
+  were suppressed. Review 008 is completed, dropped for this contract, and
+  authorization is revoked; do not retry it. DeepSeek retention and model-
+  improvement use are not contractually excluded, so only synthetic-public
+  review inputs were permitted.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

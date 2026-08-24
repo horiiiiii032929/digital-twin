@@ -337,13 +337,27 @@ call, judgment, reported token, or cost occurred. Review 007 is invalid,
 authorization is revoked, and the OpenRouter reviewer path must not be retried.
 Dataset freezing and every downstream decision remain unauthorized.
 
+Review 008 completed its direct DeepSeek sensitivity call at clean revision
+`d55f256`. The exact model and fingerprint matched, the JSON contract was
+valid, and all six clean controls were approved, but the reviewer detected only
+5/6 deliberate defects. It incorrectly approved a wrong abstention for a
+directly answerable linearizability question, missing the prospective 100%
+sensitivity gate. The runner suppressed all 12 bulk batches after one provider
+response, 3,819 input and 1,282 output tokens, 12.63 seconds, and USD
+0.002776605. This is a valid reviewer-quality failure: review 008 is dropped for
+this contract and authorization is revoked. The 120-case draft remained
+unopened, so dataset freeze, candidate evaluation, and product selection remain
+unauthorized. Issue #105 now moves to deterministic checks plus a bounded
+researcher audit rather than another model or prompt search.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
 clean visual controls and 11/11 derived failure labels, but falsely rejected
 one correct cross-course abstention, so the local model remains advisory-only
-and is not an autonomous acceptance gate. Direct DeepSeek remains the retained
-path; the exact OpenRouter Mistral reviewer is bound prospectively but uncalled.
+and is not an autonomous acceptance gate. Direct DeepSeek review 008 is now the
+provider-unauthorized successor; every OpenRouter evidence-review binding is
+historical, revoked, or explicitly unexecuted.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 earlier foundation into `main` at `adf39af`. PR
 [#103](https://github.com/horiiiiii032929/digital-twin/pull/103) merged the
@@ -391,7 +405,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 003 invalid and revoked / Refine | Resolve the authenticated-key inference rejection, then use a new frozen review ID to complete independent review before selecting an open-set answerability gate without using AnyHit |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 008 dropped / Refine | Complete the bounded deterministic-plus-researcher audit, correct any confirmed defects under a successor hash, then select an open-set gate without AnyHit |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |

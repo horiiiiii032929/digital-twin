@@ -51,9 +51,11 @@ professor-communication track.
 
 1. #105 — preserve invalid and revoked reviews 002–004, 006, and 007 plus
    unexecuted build 005, keep their bindings out of execution, and stop the
-   OpenRouter reviewer path. Choose one non-OpenRouter review protocol without
-   changing deterministic authority. Select the first production answerability
-   gate only after independent review and all later gates pass.
+   OpenRouter reviewer path. Direct DeepSeek review 008 completed one valid
+   sensitivity call but detected only 5/6 deliberate defects, so it is dropped
+   and authorization is revoked. Complete the bounded deterministic-plus-
+   researcher audit without another reviewer-search loop, then select the first
+   production answerability gate only after all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93
