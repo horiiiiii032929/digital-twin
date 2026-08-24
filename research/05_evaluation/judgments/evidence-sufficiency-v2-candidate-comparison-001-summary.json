@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-candidate-comparison-001",
+  "status": "completed-refine",
+  "code_revision": "1da528e7974c9f96f8b1e17c98373adf50e3744a",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+  "case_count": 120,
+  "selected_candidate": null,
+  "provider_calls": 0,
+  "paid_cost_usd": 0,
+  "private_data_read": false,
+  "priority_audit_completed": 12,
+  "raw_result_file_sha256": "a622612c41f20268c7943bdd70ebfef5a2f9d9074edab1df6b77b40db58a4976",
+  "raw_result_canonical_sha256": "26b80b1e1a3d0ce4a92460d6c14e66f7382267184819eb97e450bb865db38da6",
+  "candidate_metrics": [
+    {
+      "candidate_id": "any-hit-control",
+      "selectable": false,
+      "false_answer_count": 39,
+      "answerable_recall": 1.0,
+      "balanced_accuracy": 0.5125,
+      "mutation_detection_rate": 0.05,
+      "hard_gates_passed": false
+    },
+    {
+      "candidate_id": "inspectable-feature-classifier-v2",
+      "selectable": true,
+      "false_answer_count": 0,
+      "answerable_recall": 0.0875,
+      "balanced_accuracy": 0.54375,
+      "mutation_detection_rate": 0.8571428571428571,
+      "hard_gates_passed": false
+    },
+    {
+      "candidate_id": "cross-encoder-support-verifier-v2",
+      "selectable": true,
+      "false_answer_count": 7,
+      "answerable_recall": 0.15,
+      "balanced_accuracy": 0.4875,
+      "mutation_detection_rate": 0.9166666666666666,
+      "verifier_p95_ms": 187.96008301433176,
+      "added_peak_memory_bytes": 464060416,
+      "hard_gates_passed": false
+    },
+    {
+      "candidate_id": "cross-encoder-nli-completeness-verifier-v2",
+      "selectable": true,
+      "false_answer_count": 7,
+      "answerable_recall": 0.15,
+      "balanced_accuracy": 0.4875,
+      "mutation_detection_rate": 0.9166666666666666,
+      "verifier_p95_ms": 244.6773749543354,
+      "added_peak_memory_bytes": 491700224,
+      "hard_gates_passed": false
+    }
+  ],
+  "decision": "refine",
+  "authorization_revoked": true,
+  "automatic_release_promotion": false
+}

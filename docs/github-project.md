@@ -49,13 +49,14 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve invalid and revoked reviews 002–004, 006, and 007 plus
-   unexecuted build 005, keep their bindings out of execution, and stop the
-   OpenRouter reviewer path. Direct DeepSeek review 008 completed one valid
-   sensitivity call but detected only 5/6 deliberate defects, so it is dropped
-   and authorization is revoked. Complete the bounded deterministic-plus-
-   researcher audit without another reviewer-search loop, then select the first
-   production answerability gate only after all later gates pass.
+1. #105 — preserve candidate comparison 001 as Refine. The corrected 120-case
+   split was opened once; the deterministic control retained only 8.8% answer
+   recall, while GTE and GTE-plus-NLI each produced seven false answers and 15%
+   recall. The 12-case audit confirmed method failures, no gate was selected,
+   and authorization is revoked. Make one explicit method decision: build a
+   claim-level post-generation support validator on fresh data, or keep
+   publication blocked. Do not tune these candidates or start another model
+   search.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

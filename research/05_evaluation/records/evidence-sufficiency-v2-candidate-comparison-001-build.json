@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-candidate-comparison-001-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002-unopened",
+  "corpus_id": "synthetic-public-six-course-source-universe-v2",
+  "code_revision": "1c6843417b80facadd4ad0d514394a95af358027",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "manual-candidate-comparison-control",
+        "version": "unimplemented-control-v1",
+        "configuration": {
+          "decision_split_opened": false,
+          "model_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-contract-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "decision-split-remains-unopened",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "repository-gate-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-candidate-contract",
+          "passed": false,
+          "evidence": "The control has no executable candidate contract."
+        },
+        {
+          "name": "fail-closed-authorization",
+          "passed": true,
+          "evidence": "No execution authority is present."
+        },
+        {
+          "name": "unsafe-control-unselectable",
+          "passed": false,
+          "evidence": "The control does not encode candidate eligibility."
+        }
+      ],
+      "failures_by_category": {
+        "missing-executable-comparison": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "evidence-sufficiency-candidate-comparison-runner-v1",
+        "version": "build-001",
+        "configuration": {
+          "case_count": 120,
+          "selectable_candidate_count": 3,
+          "model_execution_authorized": false,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-contract-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "decision-split-remains-unopened",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "repository-gate-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-candidate-contract",
+          "passed": true,
+          "evidence": "AnyHit is unselectable and three prospective methods have fixed implementations, model revisions, thresholds, and gates."
+        },
+        {
+          "name": "fail-closed-authorization",
+          "passed": true,
+          "evidence": "Preflight remains blocked and the runner is covered by the repository execution freeze."
+        },
+        {
+          "name": "unsafe-control-unselectable",
+          "passed": true,
+          "evidence": "Validation rejects any attempt to make AnyHit selectable."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "evidence-sufficiency-candidate-comparison-runner-v1",
+    "rationale": "The bounded comparison is inspectable, reproducible, network-free until explicitly authorized, and evaluates already-defined methods without another provider or prompt search.",
+    "limitations": [
+      "The 120-case decision split remains unopened, so no candidate-quality result exists.",
+      "The exact local model latency and peak memory have not yet been measured on this machine.",
+      "Model metadata must be refreshed within 24 hours immediately before execution.",
+      "No evidence-sufficiency implementation or release profile is selected."
+    ]
+  }
+}

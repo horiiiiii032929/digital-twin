@@ -142,6 +142,17 @@ Current utilities:
   authorization is revoked; do not retry it. DeepSeek retention and model-
   improvement use are not contractually excluded, so only synthetic-public
   review inputs were permitted.
+- `run_evidence_sufficiency_v2_candidate_comparison.py`: validates and simulates
+  the frozen 120-case answerability comparison without opening the decision
+  split or loading models. It fixes course-scoped eligible BM25 retrieval, keeps
+  AnyHit as an unselectable unsafe control, and compares an inspectable feature
+  control with revision-pinned GTE ModernBERT support and DeBERTa NLI-augmented
+  verifiers. Run `npm run verify:evidence-sufficiency-v2-candidate-comparison`,
+  `npm run simulate:evidence-sufficiency-v2-candidate-comparison`, or `npm run
+  preflight:evidence-sufficiency-v2-candidate-comparison`. Preflight must remain
+  `blocked-not-authorized` until a separate checkpoint authorizes local-model
+  execution and opens the exact decision split. The execute command is covered
+  by the repository freeze and makes no provider or paid calls.
 - `run_autonomous_tutoring_graph_development.py`: preserves the completed ten-
   trajectory T0/T1 comparison against committed synthetic fixtures. It records
   intents, actions, learner-state revisions, citation lineage, restart and

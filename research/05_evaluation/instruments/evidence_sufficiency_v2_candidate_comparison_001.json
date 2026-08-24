@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "instrument_id": "evidence-sufficiency-v2-candidate-comparison-001",
+  "status": "authorization-revoked",
+  "issue": 105,
+  "decision_question": "Which inspectable evidence-sufficiency method can permit grounded answers with zero false answers while preserving at least 90 percent answer recall?",
+  "model_leaderboard": false,
+  "decision_freeze": {
+    "freeze_id": "evidence-sufficiency-v2-decision-freeze-001",
+    "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_decision_freeze_001.json",
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+    "dataset_content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
+    "case_count": 120,
+    "opened": false
+  },
+  "fixed_retrieval": {
+    "implementation": "bm25-course-scoped-active-approved-v1",
+    "role": "controlled candidate input, not a retrieval benchmark",
+    "top_k": 5,
+    "minimum_score": 0.0,
+    "gold_evidence_injection": false,
+    "course_scope_before_retrieval": true,
+    "inactive_or_disallowed_sources_excluded": true
+  },
+  "candidates": [
+    {
+      "id": "any-hit-control",
+      "role": "unsafe-unselectable-control",
+      "selectable": false,
+      "model": null,
+      "gate": "any-hit-evidence-gate"
+    },
+    {
+      "id": "inspectable-feature-classifier-v2",
+      "role": "deterministic-development-control",
+      "selectable": true,
+      "model": null,
+      "verifier": "inspectable-feature-classifier-v2@2.0.0",
+      "thresholds": {
+        "supporting_hit": 0.5,
+        "minimum_direct_support": 0.5,
+        "minimum_completeness": 0.6,
+        "maximum_contradiction": 0.25,
+        "maximum_ambiguity": 0.45,
+        "minimum_supporting_hits": 1
+      }
+    },
+    {
+      "id": "cross-encoder-support-verifier-v2",
+      "role": "prospective-candidate",
+      "selectable": true,
+      "model": {
+        "model_id": "Alibaba-NLP/gte-reranker-modernbert-base",
+        "revision": "f7481e6055501a30fb19d090657df9ec1f79ab2c",
+        "license": "apache-2.0",
+        "parameter_count": 149605633,
+        "maximum_input_tokens": 8192,
+        "execution_max_length": 512,
+        "official_metadata_url": "https://huggingface.co/api/models/Alibaba-NLP/gte-reranker-modernbert-base",
+        "verified_at": "2026-08-24T18:41:29+08:00"
+      },
+      "verifier": "cross-encoder-support-verifier-v2@2.0.0",
+      "thresholds": {
+        "supporting_hit": 0.5,
+        "minimum_direct_support": 0.5,
+        "minimum_completeness": 0.6,
+        "maximum_contradiction": 0.25,
+        "maximum_ambiguity": 0.45,
+        "minimum_supporting_hits": 1
+      }
+    },
+    {
+      "id": "cross-encoder-nli-completeness-verifier-v2",
+      "role": "prospective-candidate",
+      "selectable": true,
+      "support_model_ref": "cross-encoder-support-verifier-v2",
+      "model": {
+        "model_id": "cross-encoder/nli-deberta-v3-base",
+        "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+        "license": "apache-2.0",
+        "parameter_count": 184424963,
+        "maximum_input_tokens": 512,
+        "execution_max_length": 512,
+        "label_order": [
+          "contradiction",
+          "entailment",
+          "neutral"
+        ],
+        "official_metadata_url": "https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-base",
+        "verified_at": "2026-08-24T18:41:29+08:00"
+      },
+      "verifier": "cross-encoder-nli-completeness-verifier-v2@2.0.0",
+      "thresholds": {
+        "supporting_hit": 0.5,
+        "minimum_direct_support": 0.5,
+        "minimum_completeness": 0.6,
+        "maximum_contradiction": 0.35,
+        "maximum_ambiguity": 0.45,
+        "minimum_supporting_hits": 1
+      }
+    }
+  ],
+  "freshness_policy": {
+    "metadata_max_age_hours": 24,
+    "official_source_required": true,
+    "exact_model_revision_required": true,
+    "license_required": "apache-2.0",
+    "refresh_before_execution": true,
+    "identity_drift_fails_closed": true
+  },
+  "hard_gates": {
+    "false_answer_count_max": 0,
+    "answerable_recall_min": 0.9,
+    "balanced_accuracy_min": 0.95,
+    "near_domain_accuracy_min": 1.0,
+    "multi_evidence_recall_min": 0.9,
+    "safety_violation_count_max": 0,
+    "citation_lineage_failure_count_max": 0,
+    "mutation_detection_rate_min": 1.0,
+    "verifier_p95_ms_max": 500,
+    "added_peak_memory_bytes_max": 2147483648
+  },
+  "execution_safety": {
+    "candidate_execution_authorized": false,
+    "local_model_execution_authorized": false,
+    "decision_split_execution_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "heldout_execution_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false,
+    "gemma_allowed": false,
+    "claude_allowed": false
+  },
+  "execution": {
+    "zero_provider_calls": true,
+    "zero_paid_calls": true,
+    "zero_retries": true,
+    "exclusive_output_creation": true,
+    "raw_output_path": "reports/generated/evidence-sufficiency-v2-candidate-comparison-001.json",
+    "priority_audit_max": 12
+  },
+  "decision_rule": {
+    "all_gates_pass": "Keep the simplest passing selectable candidate; bind it only after a separate profile update.",
+    "no_candidate_passes": "Refine at the method level and stop; do not tune against the opened decision split.",
+    "invalid_execution": "Register the invalid result and draw no quality conclusion.",
+    "tie_break_order": [
+      "fewer_false_answers",
+      "higher_balanced_accuracy",
+      "higher_answerable_recall",
+      "lower_verifier_p95_ms",
+      "lower_added_peak_memory_bytes",
+      "lower_method_complexity"
+    ],
+    "authorize_release": false
+  }
+}
