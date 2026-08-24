@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-deterministic-audit-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "a1307c9",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "evidence-sufficiency-decision-draft-001",
+        "version": "historical-preserved",
+        "configuration": {
+          "case_count": 120,
+          "content_sha256": "7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023",
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "structural-validity-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "distinct-source-multi-evidence-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "explicit-stale-version-distractor-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "high-risk-priority-slice-coverage-rate",
+          "value": 0.5714285714,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "normalized-question-uniqueness-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-120-cases-codex-reviewed",
+          "passed": true,
+          "evidence": "Every case question, expected action, claim, quote, course, version, and boundary lineage was inspected; no unsupported authoritative answer was found."
+        },
+        {
+          "name": "provider-and-private-data-free",
+          "passed": true,
+          "evidence": "The audit and correction used deterministic synthetic-public artifacts only, with zero provider calls and no private-source access."
+        },
+        {
+          "name": "automatic-freeze-blocked",
+          "passed": true,
+          "evidence": "The dataset, candidate evaluation, and product selection remain closed."
+        },
+        {
+          "name": "human-scope-confirmation-complete",
+          "passed": false,
+          "evidence": "Four decision-bearing examples remain explicitly pending user confirmation."
+        }
+      ],
+      "failures_by_category": {
+        "evaluation-data-design": 3
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "evidence-sufficiency-decision-draft-002",
+        "version": "corrected-pending-human-confirmation",
+        "configuration": {
+          "case_count": 120,
+          "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "structural-validity-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "distinct-source-multi-evidence-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "explicit-stale-version-distractor-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "high-risk-priority-slice-coverage-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-question-uniqueness-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-120-cases-codex-reviewed",
+          "passed": true,
+          "evidence": "Every case was inspected and the confirmed benchmark-design defects were corrected under a successor dataset identity and hash."
+        },
+        {
+          "name": "provider-and-private-data-free",
+          "passed": true,
+          "evidence": "The successor was generated deterministically from synthetic-public data with zero provider calls and no private-source access."
+        },
+        {
+          "name": "automatic-freeze-blocked",
+          "passed": true,
+          "evidence": "The corrected draft is explicitly not freeze-eligible and opens no candidate or product evaluation."
+        },
+        {
+          "name": "human-scope-confirmation-complete",
+          "passed": false,
+          "evidence": "The compact four-case confirmation packet remains pending."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Draft 002 corrects every deterministic benchmark-design defect found in the full Codex audit, but it must remain a draft until four scope and policy examples receive human confirmation.",
+    "limitations": [
+      "Codex review is not independent human researcher review.",
+      "The multimodal slice evaluates derived text representations, not raw visual ingestion or region grounding.",
+      "The four-case human confirmation is incomplete.",
+      "No product evidence-sufficiency candidate was executed or selected."
+    ]
+  }
+}

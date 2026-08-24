@@ -210,9 +210,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "evidence-sufficiency-v2-deterministic-audit-001": (
-            "dataset_generation",
-        ),
     }
 )
 

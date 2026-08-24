@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "audit_id": "evidence-sufficiency-v2-deterministic-audit-001",
-  "status": "frozen-pending-local-execution",
+  "status": "completed-correction-pending-human-confirmation",
   "issue": 105,
   "source_dataset": {
     "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
@@ -11,6 +11,7 @@
   },
   "successor_dataset": {
     "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+    "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
     "case_count": 120,
     "output_path": "research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_002.json",
     "freeze_eligible": false
@@ -29,7 +30,7 @@
     "independent_model_review_selected": false
   },
   "execution_safety": {
-    "local_dataset_correction_authorized": true,
+    "local_dataset_correction_authorized": false,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "private_source_execution_authorized": false,

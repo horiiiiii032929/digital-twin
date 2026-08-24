@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "21ee50fb46e8615a2b789bbbde88e79c11c17d1928d1826059e1930c6dbbcbdc",
+      "sha256": "3f3890abf1c6f1822d04965a0d993f4290234064340bb131e3609c99aea68208",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms the corrected evidence-sufficiency draft has separate deterministic validation and bounded local-write commands; historical scale and review commands remain reproducible, and provider execution remains unauthorized.",
+      "evidence": "Command review confirms the corrected evidence-sufficiency draft is now part of the complete local verification chain. The one-time deterministic write command is preserved for provenance but fails closed after authorization revocation and exclusive output creation.",
       "findings": []
     },
     {
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder is registered as a protected execution entrypoint; the historical oracle and the exact deterministic audit 001 local dataset-generation operation are bounded, while provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
+      "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder remains registered as a protected entrypoint, its one-time local authorization is revoked, and only the historical oracle remains bounded; provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "bcbed2fe23232f988cf9d6251650f39dd58f2f1d775a3e9b22fd9bf146266479"
+      "sha256": "dd2c1ccb7dcfef303052039f63243f4d71827cffb6303843074c944f9f7c1380"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact local dataset-generation authorization for deterministic audit 001, and explicit rejection of provider, paid, freeze, candidate, private-source, held-out, revoked, completed, and unknown operations.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of completed deterministic audit 001 plus provider, paid, freeze, candidate, private-source, held-out, revoked, and unknown operations.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "8580ddb31befb32f1a795b44653ab6dee018d04d6772774833f07e74675514a6"
+      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
     },
     {
       "audit_status": "audited",
@@ -5492,13 +5492,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_deterministic_audit_001.json",
-      "sha256": "bc0998e919e9133ac87342e6463e684ad9d2858f8c426f89c0acde228c2fc9d8",
+      "sha256": "e77769c1d489a3303cb6a748fab66fc8162df9205c152883058ea5b44ac2fc14",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "evidence": "Instrument review confirms only one deterministic local successor-draft write is authorized. Provider, paid, private-source, held-out, candidate, automatic-freeze, and product-selection operations remain explicitly unauthorized.",
+      "evidence": "Post-execution review confirms the deterministic successor draft was written once at clean revision a1307c9, its exact content hash is recorded, and local authorization is revoked. Provider, paid, private-source, held-out, candidate, automatic-freeze, and product-selection operations remain explicitly unauthorized.",
       "findings": []
     },
     {

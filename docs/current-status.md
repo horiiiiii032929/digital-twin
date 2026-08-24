@@ -231,12 +231,15 @@ semantic scoring separate from the final answer/abstain policy and fails closed
 for incomplete, contradictory, ambiguous, malformed, or unknown-lineage
 evidence. A post-V9 review also corrected malformed plain-object verifier output
 so it now follows the same redacted fail-closed path as raised verifier errors.
-The deterministic 120-case synthetic-public decision draft is now authored:
-80 answerable and 40 abstain cases across nine slices, 40 source versions, and
-text, table, diagram, code, and equation evidence. All answer cases bind exact
-active-source claims and quotes; all abstain cases have empty authoritative
-lineage. Its exact hash passes automated structural validation, but independent
-advisory review and the 12-case priority packet remain pending. V12 now binds a
+The historical deterministic 120-case synthetic-public decision draft contains
+80 answerable and 40 abstain cases across nine slices and 40 source versions.
+All answer cases bind exact active-source claims and quotes; all abstain cases
+have empty authoritative lineage. The later full Codex audit inspected all 120
+cases and found three benchmark-design gaps rather than answer-ground-truth
+errors: the multi-evidence cases reused one source, permission/version cases did
+not expose the stale pair, and the priority packet omitted three high-risk
+slices. Corrected successor draft 002 fixes those gaps under a new hash and
+remains unfrozen pending four human policy/scope confirmations. V12 binds a
 deterministic review workflow: 12 blinded ten-case batches, six clean controls,
 six planted defect classes, strict judgment accounting, and a maximum 12-case
 priority packet. Its 132-judgment network-free simulation passes, but that is
@@ -350,14 +353,23 @@ unopened, so dataset freeze, candidate evaluation, and product selection remain
 unauthorized. Issue #105 now moves to deterministic checks plus a bounded
 researcher audit rather than another model or prompt search.
 
+Deterministic audit 001 has now completed that bounded review. Draft 001 remains
+immutable, while draft 002 has 15/15 distinct-source multi-evidence cases,
+10/10 exact stale-version distractors, all seven high-risk slices in its
+12-case priority packet, and zero exact normalized duplicates. The audit used
+zero provider calls and no private data. Its one-time local-write authorization
+is revoked. Because Codex review is not independent human review, draft 002 is
+still `Refine`: four policy/scope examples remain pending confirmation before
+dataset freeze or candidate evaluation.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
 clean visual controls and 11/11 derived failure labels, but falsely rejected
 one correct cross-course abstention, so the local model remains advisory-only
-and is not an autonomous acceptance gate. Direct DeepSeek review 008 is now the
-provider-unauthorized successor; every OpenRouter evidence-review binding is
-historical, revoked, or explicitly unexecuted.
+and is not an autonomous acceptance gate. Every model-review authorization is
+now revoked; deterministic draft 002 is the only active data successor and it
+does not authorize provider or candidate execution.
 PR [#93](https://github.com/horiiiiii032929/digital-twin/pull/93) merged the
 earlier foundation into `main` at `adf39af`. PR
 [#103](https://github.com/horiiiiii032929/digital-twin/pull/103) merged the
@@ -389,7 +401,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the corrected gate and exact 120-case draft; reviews 002 and 003 are invalid and revoked; 003 stopped before a provider response and produced no quality evidence | Resolve the exact OpenRouter inference-path rejection, freeze a successor review ID, complete independent review and at most 12 priority adjudications, select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the fail-closed gate; review 008 is a valid sensitivity failure; deterministic audit 001 corrected the 120-case successor without provider or private-data use | Confirm four decision-bearing policy/scope cases, freeze the corrected dataset separately, evaluate and select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Keep at cumulative 10,000 cases | All 10,000 are deterministic-valid; all 8,000 answerable cases are citation-valid; reviewer agreement is 9,924/10,000; advisory mutation detection is 1,994/2,000 and deterministic mutation rejection is 2,000/2,000; zero exact duplicates; authorization revoked | Preserve this synthetic-public method result and move to separate real-source, product, and Professor Digital Twin evaluation |
 
 ## Release readiness and critical path
@@ -405,7 +417,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 008 dropped / Refine | Complete the bounded deterministic-plus-researcher audit, correct any confirmed defects under a successor hash, then select an open-set gate without AnyHit |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / corrected draft 002 / Refine | Confirm the four-case scope packet, then separately freeze the corrected decision data and select an open-set gate without AnyHit |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |

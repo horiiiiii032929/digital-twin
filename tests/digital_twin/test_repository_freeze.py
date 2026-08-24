@@ -33,10 +33,7 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
-    pilot_ids = {
-        "factual-qa-v3-oracle-pilot-001",
-        "evidence-sufficiency-v2-deterministic-audit-001",
-    }
+    pilot_ids = {"factual-qa-v3-oracle-pilot-001"}
 
     for pilot_id in pilot_ids:
         require_bounded_pilot_operation_allowed(pilot_id)
@@ -44,6 +41,10 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert set(BOUNDED_PILOT_AUTHORIZATIONS) == pilot_ids
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-oracle-pilot-002")
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "evidence-sufficiency-v2-deterministic-audit-001"
+        )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "evidence-sufficiency-v2-independent-review-002"
