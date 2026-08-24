@@ -358,9 +358,11 @@ immutable, while draft 002 has 15/15 distinct-source multi-evidence cases,
 10/10 exact stale-version distractors, all seven high-risk slices in its
 12-case priority packet, and zero exact normalized duplicates. The audit used
 zero provider calls and no private data. Its one-time local-write authorization
-is revoked. Because Codex review is not independent human review, draft 002 is
-still `Refine`: four policy/scope examples remain pending confirmation before
-dataset freeze or candidate evaluation.
+is revoked. The researcher subsequently confirmed all four policy/scope
+examples. Decision freeze 001 now binds immutable draft 002 and the confirmation
+packet by exact hashes. The 120 cases are frozen and unopened; candidate
+evaluation and every model, paid, private-source, and release authority remain
+closed.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -401,7 +403,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no current release candidate | V8 images built and became healthy; operational commands and clean bootstrap worked; historical V12 binds the fail-closed gate; review 008 is a valid sensitivity failure; deterministic audit 001 corrected the 120-case successor without provider or private-data use | Confirm four decision-bearing policy/scope cases, freeze the corrected dataset separately, evaluate and select a real evidence-sufficiency method, bind the T1 successor, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Go Deeper on frozen decision data; no current release candidate | V8 images built and became healthy; historical V12 binds the fail-closed gate; review 008 is a valid sensitivity failure; deterministic audit 001 corrected all confirmed decision-data defects; freeze 001 records 4/4 human confirmations without opening the 120 cases | Freeze exact candidates, run one authorized comparison, select a real evidence-sufficiency method if every gate passes, bind T1, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
 | Large factual QA | Keep at cumulative 10,000 cases | All 10,000 are deterministic-valid; all 8,000 answerable cases are citation-valid; reviewer agreement is 9,924/10,000; advisory mutation detection is 1,994/2,000 and deterministic mutation rejection is 2,000/2,000; zero exact duplicates; authorization revoked | Preserve this synthetic-public method result and move to separate real-source, product, and Professor Digital Twin evaluation |
 
 ## Release readiness and critical path
@@ -417,7 +419,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / corrected draft 002 / Refine | Confirm the four-case scope packet, then separately freeze the corrected decision data and select an open-set gate without AnyHit |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / decision data frozen / Go Deeper | Implement and freeze exact candidates, then request separate authorization for one 120-case comparison without selectable AnyHit |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |

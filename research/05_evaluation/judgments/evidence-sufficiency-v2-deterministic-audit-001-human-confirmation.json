@@ -3,7 +3,9 @@
   "packet_id": "evidence-sufficiency-v2-deterministic-audit-001-human-confirmation",
   "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
   "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
-  "reviewer_type": "human-user-confirmation-pending",
+  "reviewer_type": "human-user-confirmation",
+  "confirmed_by": "researcher-user",
+  "confirmed_at": "2026-08-24",
   "purpose": "Confirm four policy and scope boundaries that deterministic validation cannot decide.",
   "cases": [
     {
@@ -16,7 +18,7 @@
         "database-recovery-v2"
       ],
       "recommended_confirmation": "A multi-evidence case should require all evidence from two distinct active sources, not two claims from one source.",
-      "status": "pending"
+      "status": "confirmed"
     },
     {
       "case_id": "esv2-multimodal-01",
@@ -27,7 +29,7 @@
         "database-indexes-v2"
       ],
       "recommended_confirmation": "Count this only as evidence sufficiency over a deterministic text representation of a diagram; evaluate raw visual extraction and region grounding separately under issue 86.",
-      "status": "pending"
+      "status": "confirmed"
     },
     {
       "case_id": "esv2-permission-01",
@@ -41,7 +43,7 @@
         "secure-web-sessions-v1"
       ],
       "recommended_confirmation": "The current active version is authoritative and the paired inactive version must be an explicit distractor.",
-      "status": "pending"
+      "status": "confirmed"
     },
     {
       "case_id": "esv2-ambiguous-01",
@@ -54,12 +56,12 @@
         "database-indexes-v2"
       ],
       "recommended_confirmation": "The evidence-sufficiency gate should abstain because the request does not identify the intended topic; the tutoring layer may then ask a clarification question.",
-      "status": "pending"
+      "status": "confirmed"
     }
   ],
-  "confirmed_count": 0,
-  "pending_count": 4,
-  "human_review_completed": false,
+  "confirmed_count": 4,
+  "pending_count": 0,
+  "human_review_completed": true,
   "provider_or_model_calls": 0,
   "private_data_read": false
 }

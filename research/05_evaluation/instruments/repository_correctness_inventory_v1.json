@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 502
+    "audited": 505
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 109,
+    "active_or_unclassified_tooling": 110,
     "active_runtime": 97,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 106,
+    "evaluation_configuration": 107,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 97
+    "verification": 98
   },
-  "file_count": 502,
+  "file_count": 505,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "4cc5b3c80aee5e9fecd767631f95fd25a4fccc82bd525ff44894b567d864eda1",
+  "record_sha256": "71c606ab01f914f9da2f0485646499d1aef7f73d35df45184110be6b61f9e36f",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Command review confirms the corrected evidence-sufficiency draft is now part of the complete local verification chain. The one-time deterministic write command is preserved for provenance but fails closed after authorization revocation and exclusive output creation.",
+        "evidence": "Command review confirms the corrected draft and its separate human-confirmed decision freeze are part of the complete local verification chain. The one-time write remains revoked and candidate execution remains closed.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "3f3890abf1c6f1822d04965a0d993f4290234064340bb131e3609c99aea68208"
+      "sha256": "5444b2e84919c650990dfc5b0d92837d913d97d09d781af760525edcc1ca4eff"
     },
     {
       "audit": {
@@ -1716,6 +1716,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
       "risk": "high",
       "sha256": "f5f09c10e60cb54b7157ab219989744dd50f2301063b5a3f727e1a83c8cd141f"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Freeze review binds immutable draft 002 and all four completed human confirmations by exact content and file hashes while keeping candidate, provider, local-model, paid, private-source, held-out, automatic-selection, and release authorities closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_decision_freeze_001.json",
+      "risk": "high",
+      "sha256": "3cb3605855a40e2c0a156d9fa0ea62b14546967e8a7ddbda7556a2182fa657d4"
     },
     {
       "audit": {
@@ -4918,11 +4934,30 @@
       "disposition": "active_audited",
       "package_commands": [
         "preflight:evidence-sufficiency-v2",
-        "verify:evidence-sufficiency-v2"
+        "verify:evidence-sufficiency-v2",
+        "verify:evidence-sufficiency-v2-decision-freeze"
       ],
       "path": "scripts/validate_evidence_sufficiency_v2.py",
       "risk": "high",
       "sha256": "567787029f5450758757e50e4c84dd7f039712ec6a72b771e92fa3d7a897d946"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Validator review confirms exact draft and confirmation bindings, complete action/source counts, four confirmed boundaries, unopened decision data, and fail-closed downstream authority without model or private-data access.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:evidence-sufficiency-v2-decision-freeze"
+      ],
+      "path": "scripts/validate_evidence_sufficiency_v2_decision_freeze.py",
+      "risk": "high",
+      "sha256": "9e3c3b4b18204f1077ae28ad932b26f2bbdb1f00f6d0c8df3415d88dd7145612"
     },
     {
       "audit": {
@@ -8218,6 +8253,22 @@
     },
     {
       "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Focused tests verify the current frozen package and reject decision-data opening, candidate authorization, and automatic selection drift.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_validate_evidence_sufficiency_v2_decision_freeze.py",
+      "risk": "medium",
+      "sha256": "43a987e5dcd3ba75f5fd9db5f7e08923d335db4770fcac6a1940c6ff217d3452"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -8298,8 +8349,8 @@
     }
   ],
   "risk_counts": {
-    "high": 391,
-    "medium": 111
+    "high": 393,
+    "medium": 112
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

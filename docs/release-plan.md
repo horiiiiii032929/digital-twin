@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; direct review 008 failed sensitivity and is dropped; deterministic audit 001 corrected the 120-case decision draft under a successor hash, with four human scope confirmations pending; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; direct review 008 failed sensitivity and is dropped; deterministic audit 001 corrected the decision data and all four human boundaries are confirmed; the 120-case package is frozen and unopened; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | Cumulative 10,000-case synthetic-public evidence passed every gate: 10,000/10,000 deterministic-valid, 8,000/8,000 citation-valid, and zero exact duplicates; authorization revoked | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -101,9 +101,10 @@ not require model spending or private data:
    and valid JSON but detected only 5/6 deliberate defects; all 12 bulk calls
    were suppressed. Review 008 is dropped and authorization is revoked.
    Deterministic audit 001 subsequently inspected all 120 cases and generated
-   corrected draft 002 under a successor hash. The corrected draft passes its
-   structural and lineage checks but remains unfrozen pending four human
-   policy/scope confirmations; every downstream authority remains closed.
+   corrected draft 002 under a successor hash. The researcher confirmed all
+   four policy/scope boundaries, and decision freeze 001 now binds the immutable
+   draft and confirmation packet. The split remains unopened and every
+   downstream execution authority remains closed.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -112,7 +113,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Confirm the four decision-bearing scope examples in corrected draft 002 | Researcher | Freeze the corrected decision set before selecting an answerability gate |
+| Authorize the prospectively frozen 120-case candidate comparison after its clean preflight | Researcher | Open the decision set once and select or reject an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 
