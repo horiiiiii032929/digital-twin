@@ -56,16 +56,14 @@ professor-communication track.
    gate only after independent review and all later gates pass.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
-3. #110 — follow completed #87 by designing, but not authorizing, a separate
-   1,000-case checkpoint; require its complete pass before the remaining 9,000.
-4. #88 — externally blocked on host/domain selection; merged PR #93
+3. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-5. #24 — calibrate Professor Digital Twin fidelity against independent expert
+4. #24 — calibrate Professor Digital Twin fidelity against independent expert
    labels, separately from factual QA.
-6. #9 and #25 — production operations and deployed end-to-end validation after
+5. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
-7. #10 — approval-gated professor/student workflow and usability pilot.
+6. #10 — approval-gated professor/student workflow and usability pilot.
 
 Issue #87 is completed `Keep` history after pilot 003 passed every 100-case
 gate in PR #109. Issues #85 and #86 are completed `Refine` history. Issue #110

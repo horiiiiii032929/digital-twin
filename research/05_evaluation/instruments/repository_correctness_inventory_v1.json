@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 491
+    "audited": 498
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 106,
+    "active_or_unclassified_tooling": 108,
     "active_runtime": 97,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 101,
+    "evaluation_configuration": 104,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 94
+    "verification": 96
   },
-  "file_count": 491,
+  "file_count": 498,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "fc5d837e39d0166afaca506b2a04ac17c42278fc7856a5f0209730d6cbe7e52b",
+  "record_sha256": "8236cfc489d543db162f9e83ef3f98643093d588fd9b32e5477e5d610ef1a34c",
   "records": [
     {
       "audit": {
@@ -1287,10 +1287,10 @@
     },
     {
       "audit": {
-        "domain": "evidence-sufficiency-review",
-        "evidence": "Command review confirms historical reviews remain reproducible while review-007 validation, simulation, live no-call preflight, and exact execution commands are separate; resilient GPT-5.4 mini review 007 remains provider-unauthorized and fail-closed outside correlated instrument and repository-freeze authorization while every later stage stays blocked.",
+        "domain": "factual-qa-scale",
+        "evidence": "Command review confirms historical evidence reviews and factual-QA scale runs remain reproducible through separate validation, simulation, preflight, and execution commands; revoked reviews and completed factual-QA stages remain fail-closed outside correlated instrument and repository-freeze authorization.",
         "findings": [],
-        "reviewed_at": "2026-08-22",
+        "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "6f5ecdf41fdc95d8d39ce82a0dfd296c2563a528729468c907a02b50f4c799e5"
+      "sha256": "c3e2da10a666dd3b89969d22f0614e052ab13bfe2fd129f0e01725f4df04a2ea"
     },
     {
       "audit": {
@@ -1988,6 +1988,54 @@
       "path": "research/05_evaluation/instruments/factual_qa_v3_reviewer_qualification_007.json",
       "risk": "high",
       "sha256": "99899c7becda464d601927c6cd93f8cb6e636d3ec30ea686a2d38ee05156aa9f"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Attempt 001 is preserved as invalid and authorization-revoked after its reviewer-canary task identifier exceeded the local contract before provider I/O; zero bulk calls occurred and no quality conclusion was drawn.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_001.json",
+      "risk": "high",
+      "sha256": "cc710dcf07256c3401c95fc42be45550c1b24a090f3aa061638902e577081bc6"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Completed Keep instrument preserves all 900 truth packages, exact bindings, gates, call and cost limits, records the passing result, revokes authorization, and leaves the remaining 9,000 cases closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_checkpoint_1000_002.json",
+      "risk": "high",
+      "sha256": "ba97b165b2c24c319defdf5a3038fdd9ed096562e12cda17fc6d57e74f798525"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Post-run review confirms completion 001 records a Keep result, revokes provider execution, retains exact historical limits and bindings, permits no automatic promotion, and links only to sanitized evidence while raw output remains ignored.",
+        "findings": [],
+        "reviewed_at": "2026-08-23",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/factual_qa_v3_scale_completion_10000_001.json",
+      "risk": "high",
+      "sha256": "a418655c3595d433417ab487287ae878cb8f24ae2632aa3540318abe67a74972"
     },
     {
       "audit": {
@@ -4194,10 +4242,54 @@
     },
     {
       "audit": {
-        "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual control-flow review, direct validation/preflight, 222-call and 246-call network-free simulations, and focused regressions confirm deterministic authority, exact shared reviewer qualification contract reuse, strict author citation objects, mutation controls independent of author success, safe resume, complete accounting, USD 3 stopping, exact identity, exclusive output, and fail-closed provider authorization.",
+        "domain": "factual-qa-scale",
+        "evidence": "Focused review and regressions preserve completed 1,000-case behavior while the remaining-9,000 successor now validates live balance reserves, accepts only exact bound resumes, and leaves an insufficient-credit logical item unfinished for safe continuation.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-23",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:factual-qa-v3-checkpoint-1000",
+        "preflight-live:factual-qa-v3-checkpoint-1000",
+        "preflight:factual-qa-v3-checkpoint-1000",
+        "simulate:factual-qa-v3-checkpoint-1000",
+        "verify:factual-qa-v3-checkpoint-1000"
+      ],
+      "path": "scripts/run_factual_qa_v3_scale_checkpoint_1000.py",
+      "risk": "high",
+      "sha256": "a8e6408b7842299ded5b9a0b9863b388619dfbbe261319ab90816d76f769315b"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Focused wrapper review confirms the shared deterministic engine remains bound only to the remaining-9,000 stage and now permits at most two no-response credit continuations within the exact 19,894-attempt ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-23",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:factual-qa-v3-completion-10000",
+        "preflight-live:factual-qa-v3-completion-10000",
+        "preflight:factual-qa-v3-completion-10000",
+        "simulate:factual-qa-v3-completion-10000",
+        "verify:factual-qa-v3-completion-10000"
+      ],
+      "path": "scripts/run_factual_qa_v3_scale_completion_10000.py",
+      "risk": "high",
+      "sha256": "d4b2b91e8e9f881643f2a915f12d56a29bdcf71e846e5faf9e2220caf82aa7ad"
+    },
+    {
+      "audit": {
+        "domain": "tooling-and-execution-freeze",
+        "evidence": "Manual control-flow review and focused regressions preserve historical pilot behavior while adding opt-in insufficient-credit classification for instruments with a bounded continuation limit; historical instruments retain ordinary zero-retry provider-error handling.",
+        "findings": [],
+        "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-build-only-runner-review"
       },
       "audit_status": "audited",
@@ -4216,7 +4308,7 @@
       ],
       "path": "scripts/run_factual_qa_v3_scale_pilot_100.py",
       "risk": "high",
-      "sha256": "fce54a086f313e2597beef8680941db08f80bb463fc7561caf67c90d4d5d082d"
+      "sha256": "893f5b64bc4416881fade42cbd91e4f3f5312dbfb12b6ba0f968616dafe905cf"
     },
     {
       "audit": {
@@ -6422,9 +6514,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004, 006, and 007 are revoked after invalid attempts, and only the historical oracle remains bounded; all dataset-freeze, candidate, paid-successor, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004, 006, and 007 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, and held-out stages remain unauthorized.",
         "findings": [],
-        "reviewed_at": "2026-08-22",
+        "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6433,7 +6525,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "613695db07367b22b1874932867f7ab3c32b64bc23125b2aaf9d287a2bb3dbd8"
+      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
     },
     {
       "audit": {
@@ -6854,9 +6946,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004, 006, and 007, completed factual-QA pilot 003, other paid pilots, 1,000-/10,000-case execution, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004, 006, and 007, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
         "findings": [],
-        "reviewed_at": "2026-08-22",
+        "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6865,7 +6957,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "aa2d55bb05f92b5ad2292912eabc67b8994e558c3eb2d14acd53392f80ffbe58"
+      "sha256": "566a1e7d1e15ef40aedce6e0c32a8c0189c3a51654b237af5da60929b0349111"
     },
     {
       "audit": {
@@ -7541,6 +7633,38 @@
     },
     {
       "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Focused regressions verify the completed additional-900 slice, prior-result binding, balanced deterministic mutations, revoked authorization, blocked post-run preflight, and closed remaining-9,000 boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_v3_scale_checkpoint_1000.py",
+      "risk": "medium",
+      "sha256": "72bae3cd651c1ca2f551d0f08ae4520b5fd193d22afedaa7c5b0688124a45701"
+    },
+    {
+      "audit": {
+        "domain": "factual-qa-scale",
+        "evidence": "Seven focused tests verify exact stage distribution, revoked post-run preflight, exact live resume acceptance for eligible checkpoints, 1,800 deterministic mutations, atomic journal fidelity, a full pause/resume simulation, and the two-continuation hard limit.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_v3_scale_completion_10000.py",
+      "risk": "medium",
+      "sha256": "9ff2585f9214a9609755bde0dbda99f87dfd53c84cb32e61d54562ffb6ba6288"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Twenty-one focused tests validate successor 002's completed/revoked state and blocked preflight, shared full schemas and strict qualification prompt, observed malformed citation rejection, author-independent mutations, 222/246-call simulations, canary failure, accounting and cost stops, safe resume, exclusive output, and binding tamper rejection.",
         "findings": [],
@@ -8101,8 +8225,8 @@
     }
   ],
   "risk_counts": {
-    "high": 383,
-    "medium": 108
+    "high": 388,
+    "medium": 110
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

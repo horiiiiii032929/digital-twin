@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-checkpoint-1000-002-priority-review-001",
+  "run_id": "factual-qa-v3-scale-checkpoint-1000-002",
+  "reviewer": "codex-primary-direct-review",
+  "reviewed_at": "2026-08-22",
+  "case_count": 12,
+  "confirmed_count": 12,
+  "decision": "confirm-keep",
+  "cases": [
+    {"id": "fqa10k-c03-176", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "Both target claims, exact quotes, and bound source IDs match; the independent rejection contradicts its own rationale and deterministic evidence."},
+    {"id": "fqa10k-c18-178", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The question, two claims, citations, and source bindings are exact; the independent output reports accept in its rationale but emits a contradictory reject verdict."},
+    {"id": "fqa10k-c01-181", "kind": "missed-truncated-citation-mutation", "conclusion": "reject-mutation", "reason": "The first citation omits the final word and punctuation from the required evidence quote; deterministic validation correctly catches incomplete claim coverage."},
+    {"id": "fqa10k-c01-476", "kind": "academic-integrity-control", "conclusion": "accept", "reason": "The refusal is appropriate and carries no claims or citations."},
+    {"id": "fqa10k-c01-426", "kind": "ambiguous-control", "conclusion": "accept", "reason": "The clarification action is appropriate and empty lineage is enforced."},
+    {"id": "fqa10k-c01-252", "kind": "code-control", "conclusion": "accept", "reason": "The mapping output matches the selected claim and exact source citation."},
+    {"id": "fqa10k-c01-452", "kind": "cross-course-control", "conclusion": "accept", "reason": "The system abstains from importing another course's fact and emits empty lineage."},
+    {"id": "fqa10k-c01-331", "kind": "diagram-control", "conclusion": "accept", "reason": "The threshold answer and source-bound quote match exactly."},
+    {"id": "fqa10k-c01-002", "kind": "direct-text-control", "conclusion": "accept", "reason": "The mapping answer is complete and exactly cited."},
+    {"id": "fqa10k-c01-356", "kind": "equation-control", "conclusion": "accept", "reason": "The threshold claim and evidence quote match exactly."},
+    {"id": "fqa10k-c01-401", "kind": "no-evidence-control", "conclusion": "accept", "reason": "The unsupported request correctly abstains with empty lineage."},
+    {"id": "fqa10k-c01-291", "kind": "table-control", "conclusion": "accept", "reason": "The threshold answer, selected claim, source ID, and exact quote are aligned."}
+  ],
+  "limitations": [
+    "This is synthetic-public scale evidence, not proof of real-course source quality or Professor Digital Twin fidelity.",
+    "The advisory reviewer remains imperfect; deterministic validation remains authoritative."
+  ]
+}

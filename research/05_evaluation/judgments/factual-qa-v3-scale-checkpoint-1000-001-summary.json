@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "factual-qa-v3-scale-checkpoint-1000-001",
+  "status": "invalid-execution",
+  "decision": "correct-harness-prospectively-and-rerun-as-attempt-002",
+  "code_revision": "795fc2f48e3117a6f4e6f00b72b3e2e741481dae",
+  "instrument_sha256": "437869eaa23eae5fe8af005a5d68e442fe751ed2bf7282531da755d71a7f9861",
+  "runner_sha256": "9b3b42e83f51b1e1ae273f7acad0a513f2227b4e7a970264ff283cf3bcf59a6e",
+  "raw_artifact_sha256": "9749c4fbc48ade6d5307b76c9be249cccf77d6afbf2e63c0584cd3235696a4eb",
+  "calls_attempted": 2,
+  "provider_responses": 1,
+  "bulk_calls": 0,
+  "input_tokens": 78,
+  "output_tokens": 5,
+  "external_cost_usd": 0.00004092,
+  "deepseek_canary": "passed",
+  "mistral_canary": "local-validation-failure-before-provider-io",
+  "invalid_reason": "provider-canary-failed",
+  "root_cause": "The generated independent-reviewer canary task identifier was 67 characters, exceeding the repository's 64-character task contract.",
+  "quality_conclusion_allowed": false,
+  "authorization_revoked": true,
+  "remaining_9000_authorized": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "review_id": "factual-qa-v3-scale-completion-10000-001-priority-review-001",
+  "run_id": "factual-qa-v3-scale-completion-10000-001",
+  "reviewer": "codex-primary-direct-review",
+  "reviewed_at": "2026-08-24",
+  "case_count": 12,
+  "confirmed_count": 12,
+  "decision": "confirm-keep",
+  "cases": [
+    {"id": "fqa10k-c01-240", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "Question target, canonical answer, two claim IDs, source IDs, and exact quotes all match; the independent rejection is factually false."},
+    {"id": "fqa10k-c02-234", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "Both requested claims and both citations exactly match deterministic truth; the independent reviewer incorrectly alleged a claim mismatch."},
+    {"id": "fqa10k-c02-248", "kind": "reviewer-contract-contradiction", "conclusion": "accept", "reason": "The independent rationale ultimately says every check passes and reported accept, but emitted a contradictory reject verdict."},
+    {"id": "fqa10k-c03-232", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The authored case exactly equals the canonical answer, claims, sources, and quotes; the independent citation objections are false."},
+    {"id": "fqa10k-c04-184", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The two target facts and exact source-bound citations match the truth package without extra claims."},
+    {"id": "fqa10k-c04-191", "kind": "malformed-independent-review", "conclusion": "accept", "reason": "The independent review is unusable, but the question, canonical answer, claims, sources, and quotes all match exactly."},
+    {"id": "fqa10k-c04-208", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The question is faithful and every authoritative answer and citation field is an exact match."},
+    {"id": "fqa10k-c04-232", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The independent rationale invents a mismatch even though the displayed claim IDs, source IDs, and verbatim quotes match exactly."},
+    {"id": "fqa10k-c04-240", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "Both selected claims and citations are present and exact; the independent assertion that the second citation is absent is false."},
+    {"id": "fqa10k-c04-248", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The answer and both quotes exactly equal deterministic truth; the independent reviewer contradicts the visible evidence."},
+    {"id": "fqa10k-c05-232", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "The alleged punctuation mismatch does not exist; both citation quotes equal the authoritative quotes exactly."},
+    {"id": "fqa10k-c05-239", "kind": "reviewer-disagreement", "conclusion": "accept", "reason": "Both target claims are in the blueprint and both exact citations are present; the independent rejection is unsupported."}
+  ],
+  "mutation_failure_analysis": [
+    {"id": "fqa10k-c01-122", "mutation": "missing-citation", "conclusion": "reject-mutation", "reason": "The citation list is empty for a selected answer claim."},
+    {"id": "fqa10k-c01-042", "mutation": "missing-citation", "conclusion": "reject-mutation", "reason": "The citation list is empty for a selected answer claim."},
+    {"id": "fqa10k-c01-229", "mutation": "truncated-citation", "conclusion": "reject-mutation", "reason": "The first quote omits the required ending and fails complete-claim support."},
+    {"id": "fqa10k-c02-189", "mutation": "truncated-citation", "conclusion": "reject-mutation", "reason": "The first quote is truncated before the complete authoritative evidence."},
+    {"id": "fqa10k-c02-200", "mutation": "paraphrased-citation-provider-error", "conclusion": "reject-mutation", "reason": "The quote is a placeholder paraphrase rather than a verbatim source substring; deterministic rejection is correct despite the provider error."}
+  ],
+  "limitations": [
+    "This is synthetic-public scale evidence, not real-course or Professor Digital Twin validation.",
+    "The independent reviewer remains advisory because deterministic checks caught every reviewed model miss."
+  ]
+}
