@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-23
+Status date: 2026-08-24
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -9,13 +9,12 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 495 executable or execution-affecting
+the current branch extends it to all 517 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 63 protected entrypoints
-and retains an exact bounded authorization only for the completed
-`factual-qa-v3-oracle-pilot-001`. Manual review found material source-design
+active for all general evaluation actions. It covers 67 protected entrypoints,
+with no prospective evaluation currently authorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -156,9 +155,9 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections pass the current 804-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 495-file audit. Evaluation
-execution remains frozen; only the completed historical oracle pilot remains in
-the bounded allowlist. No 100-, 1,000-, or 10,000-case stage is authorized.
+artifacts are also fully dispositioned in the current 517-file audit. Evaluation
+execution remains frozen, with 67/67 protected entrypoints registered and no
+prospective evaluation in the bounded allowlist.
 
 ## Current outcome
 
@@ -393,6 +392,21 @@ be used for threshold tuning. Issue #105 now requires a method-level decision,
 with claim-level post-generation support validation as the recommended
 successor boundary.
 
+That successor is now implemented but not yet evaluated. Build checkpoint
+`evidence-sufficiency-v3-atomic-claim-confirmation-001-build` moves the release
+boundary after generation: the model may emit only structured atomic claims,
+while the server owns eligible retrieval lineage, claim-set completeness, and
+the final release-or-fallback decision. It compares an unselectable exact-quote
+control with the pinned DeBERTa NLI verifier on a fresh, unopened 120-case
+synthetic-public confirmation containing 40 supported and 80 reject cases over
+12 balanced slices. Prospective gates require zero false releases, at least 90%
+supported and multi-claim retention, complete mutation/lineage/malformed
+rejection, p95 latency at or below 500 ms, and less than 2 GiB added memory.
+The network-free simulation and complete repository gate pass at revision
+`94e8ac5`: 856 Python tests, 46 frontend tests, 517/517 audited files, and 67/67
+protected entrypoints. The split remains unopened, all local execution
+authorities remain false, and no method or product binding has been selected.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
@@ -432,7 +446,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Refine; no evidence-sufficiency gate selected | V8 images built and became healthy; corrected 120-case comparison completed once; deterministic control was safe but retained only 8.8% answers, while both learned candidates produced seven false answers and 15.0% recall; 12/12 priority audit confirmed method failure; authorization revoked | Approve one method-level successor based on post-generation atomic-claim support validation with fresh data; only a passing prospective result can bind a gate, rebuild one source revision, and resume HTTPS publication |
+| Publication/student core | Refine; atomic-claim confirmation build is Go Deeper but unexecuted | V8 images built and became healthy; failed query/evidence comparison preserved; fresh 120-case post-generation atomic-claim method, fixed gates, guarded runner, and deterministic release authority are implemented; 856 Python and 46 frontend tests pass; authorization remains closed | Separately authorize and run confirmation 001 once; only a passing prospective result can bind a gate, rebuild one source revision, and resume HTTPS publication |
 | Large factual QA | Keep at cumulative 10,000 cases | All 10,000 are deterministic-valid; all 8,000 answerable cases are citation-valid; reviewer agreement is 9,924/10,000; advisory mutation detection is 1,994/2,000 and deterministic mutation rejection is 2,000/2,000; zero exact duplicates; authorization revoked | Preserve this synthetic-public method result and move to separate real-source, product, and Professor Digital Twin evaluation |
 
 ## Release readiness and critical path
@@ -448,7 +462,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / comparison Refine / method decision needed | Preserve failed comparison 001 and choose whether to build a claim-level post-generation validator on fresh development and confirmation data |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / build Go Deeper / execution unauthorized | Preserve failed comparison 001 and execute the frozen fresh 120-case atomic-claim confirmation once after separate authorization; select nothing unless every prospective gate passes |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |

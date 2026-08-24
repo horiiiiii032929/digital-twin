@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001-unopened",
+  "corpus_id": "synthetic-public-atomic-claim-fixtures-v1",
+  "code_revision": "94e8ac56466417b70146f2fe2e3fc9f8fb0d73f7",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "query-evidence-boundary-no-successor-control",
+        "version": "consumed-comparison-001",
+        "configuration": {
+          "confirmation_case_count": 120,
+          "confirmation_split_opened": false,
+          "model_execution_authorized": false,
+          "product_binding_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-contract-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "confirmation-split-remains-unopened",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "repository-gate-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-final-authority",
+          "passed": false,
+          "evidence": "The consumed query/evidence comparison has no executable post-generation atomic-claim successor."
+        },
+        {
+          "name": "fresh-prospective-confirmation",
+          "passed": true,
+          "evidence": "The fresh 120-case confirmation remains unopened."
+        },
+        {
+          "name": "fail-closed-authorization",
+          "passed": true,
+          "evidence": "No execution authority is present."
+        }
+      ],
+      "failures_by_category": {
+        "missing-executable-successor": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "atomic-claim-confirmation-runner-v1",
+        "version": "build-001",
+        "configuration": {
+          "case_count": 120,
+          "supported_case_count": 40,
+          "reject_case_count": 80,
+          "slice_count": 12,
+          "model_execution_authorized": false,
+          "product_binding_authorized": false,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-contract-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "confirmation-split-remains-unopened",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "repository-gate-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-final-authority",
+          "passed": true,
+          "evidence": "The model cannot create eligible lineage or own the release decision."
+        },
+        {
+          "name": "fresh-prospective-confirmation",
+          "passed": true,
+          "evidence": "The 120 cases are new and do not reuse the consumed v2 split."
+        },
+        {
+          "name": "fail-closed-authorization",
+          "passed": true,
+          "evidence": "All local execution and product-binding authorities remain false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "atomic-claim-confirmation-runner-v1",
+    "rationale": "The claim-level method, fresh data, fixed gates, guarded runner, and deterministic product boundary are ready for one prospective local confirmation without reopening the failed model-search loop.",
+    "limitations": [
+      "The confirmation split remains unopened, so no candidate-quality result exists.",
+      "The exact local NLI latency and memory have not yet been measured on this revision.",
+      "The current product generator still uses the selected historical answer contract; the claim-only contract is prospective and unbound.",
+      "No evidence-sufficiency implementation, T1 configuration, deployment, or release is selected."
+    ]
+  }
+}
