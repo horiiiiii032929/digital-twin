@@ -92,6 +92,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_evidence_sufficiency_v2_candidate_comparison.py": (
+            "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/prepare_professor_fidelity_blinded_review.py": ("dataset_generation",),
         "scripts/qualify_professor_fidelity_judge_v4.py": (
             "external_model_evaluation",

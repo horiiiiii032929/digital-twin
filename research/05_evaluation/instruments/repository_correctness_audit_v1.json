@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "5444b2e84919c650990dfc5b0d92837d913d97d09d781af760525edcc1ca4eff",
+      "sha256": "3aef55dccbc9014fa0e223415da97c18d0e3e1497ac5f71b44109d2d45ef6ecb",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms the corrected draft and its separate human-confirmed decision freeze are part of the complete local verification chain. The one-time write remains revoked and candidate execution remains closed.",
+      "evidence": "Command review confirms the immutable decision freeze and the candidate-comparison validator, simulation, blocked preflight, and execution entrypoint are part of the complete local verification chain. Candidate and decision-split execution remain unauthorized.",
       "findings": []
     },
     {
@@ -3789,12 +3789,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Export review confirms the provider-neutral open-set gate, support signals, and verifier protocol are explicit without changing the historical controls.",
+      "evidence": "Export review confirms the provider-neutral open-set gate plus deterministic, cross-encoder, and NLI verifier adapters are explicit without changing the historical controls or transferring final-decision ownership to a model.",
       "findings": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "21e071bcfe172a8993d23929bc83b1894476e255e6cee2b114c174aacd0bd866"
+      "sha256": "36c88d6da888d6a4abe7b26f12059089f3374066e95c71d1558ac51b9082316a"
     },
     {
       "audit_status": "audited",
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder remains registered as a protected entrypoint, its one-time local authorization is revoked, and only the historical oracle remains bounded; provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
+      "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active and the new candidate-comparison entrypoint is covered for local-model and method execution. It has no bounded authorization; provider, paid, private-source, and held-out operations remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "dd2c1ccb7dcfef303052039f63243f4d71827cffb6303843074c944f9f7c1380"
+      "sha256": "e98fe61608fa4c508997639abc20626b7f9cc70bac24a1b621d0277014cfeb4a"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -5554,6 +5554,61 @@
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
       "evidence": "Focused tests verify the current frozen package and reject decision-data opening, candidate authorization, and automatic selection drift.",
+      "findings": []
+    },
+    {
+      "path": "src/digital_twin/grounding/evidence_verifiers.py",
+      "sha256": "4d93b42aaa89f646c72b64e331dda1f49379386d4146cd275a37f42dd4f40634",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Manual code review and focused tests confirm revision-pinned lazy local backends, bounded score validation, inspectable lexical completeness, pairwise evidence-only NLI contradiction checks, and no model ownership of final answer/abstain decisions.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_candidate_comparison_001.json",
+      "sha256": "c1f2347ffd5485ede58d0d15b4c422931ab6f36efa603f58a0842b6ff02a28cf",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Instrument review confirms exact dataset-freeze binding, fixed non-gold retrieval, one unsafe unselectable control, three selectable candidates, pinned Apache-2.0 model revisions, immutable hard gates, and closed local/provider/paid/release authority.",
+      "findings": []
+    },
+    {
+      "path": "scripts/run_evidence_sufficiency_v2_candidate_comparison.py",
+      "sha256": "9ab7bce0a478be079491ac3105df5d4d7cb859883993011065c40dcc9785c63d",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Code review and network-free simulation confirm exact instrument/freeze validation, course-scoped eligible BM25 retrieval without gold injection, fail-closed local execution guard, mutation and lineage accounting, latency/memory gates, exclusive output, and zero provider or paid calls.",
+      "findings": []
+    },
+    {
+      "path": "tests/digital_twin/test_evidence_verifiers.py",
+      "sha256": "a6b62b4ee6003a6f45afa71052c933c306fe6c03b7cb3d1f39764b977e8a42ea",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests cover deterministic support IDs, advisory cross-encoder scores, pairwise supporting-evidence NLI, invalid score shapes, and malformed probability rejection.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
+      "sha256": "bcfcc2d1241e2b787288d478f15f71a3000ad63f2589c0eb30756f232659b03d",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests verify blocked preflight, model-free simulation, AnyHit exclusion, coherent three-part local authorization, exact model revisions, and immutable hard gates.",
       "findings": []
     }
   ],
