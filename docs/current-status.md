@@ -378,6 +378,21 @@ provider calls. Its network-free simulation passes and its no-call preflight is
 blocked only by candidate, local-model, and decision-split authorization. The
 dataset remains unopened and no candidate is selected.
 
+The separately authorized comparison then opened the corrected 120-case split
+once at clean revision `1da528e` and completed validly as **Refine**. AnyHit
+remained unselectable and failed with 39 false answers. The deterministic
+feature control produced zero false answers but only 8.8% answer recall. GTE
+support and GTE-plus-NLI each produced seven false answers, 15.0% answer
+recall, 48.8% balanced accuracy, zero multi-evidence recall, and seven lineage
+failures. Both learned methods passed the local latency and memory gates, but
+NLI added no aggregate quality and produced false contradiction signals in the
+priority audit. Codex reviewed all 12 prioritized cases and confirmed the
+frozen labels and retrieval contract; no data or harness correction is needed.
+Authorization is revoked, no gate is selected, and this consumed split cannot
+be used for threshold tuning. Issue #105 now requires a method-level decision,
+with claim-level post-generation support validation as the recommended
+successor boundary.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6
@@ -417,7 +432,7 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Go Deeper; candidate comparison ready but unauthorized | V8 images built and became healthy; historical V12 binds the fail-closed gate; review 008 is a valid sensitivity failure; freeze 001 records 4/4 human confirmations; candidate build 001 pins three selectable methods plus unsafe AnyHit control and passes network-free checks without opening the 120 cases | Authorize and run the frozen comparison once; select a real evidence-sufficiency method only if every gate passes, bind T1, rebuild one source revision, complete HTTPS publication, then public trusted HTTPS/target-host restore and real-workflow evaluation |
+| Publication/student core | Refine; no evidence-sufficiency gate selected | V8 images built and became healthy; corrected 120-case comparison completed once; deterministic control was safe but retained only 8.8% answers, while both learned candidates produced seven false answers and 15.0% recall; 12/12 priority audit confirmed method failure; authorization revoked | Approve one method-level successor based on post-generation atomic-claim support validation with fresh data; only a passing prospective result can bind a gate, rebuild one source revision, and resume HTTPS publication |
 | Large factual QA | Keep at cumulative 10,000 cases | All 10,000 are deterministic-valid; all 8,000 answerable cases are citation-valid; reviewer agreement is 9,924/10,000; advisory mutation detection is 1,994/2,000 and deterministic mutation rejection is 2,000/2,000; zero exact duplicates; authorization revoked | Preserve this synthetic-public method result and move to separate real-source, product, and Professor Digital Twin evaluation |
 
 ## Release readiness and critical path
@@ -433,7 +448,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / candidate comparison ready / Go Deeper | Publish the build-only checkpoint, then request separate authorization to open and run the exact 120-case comparison once |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / comparison Refine / method decision needed | Preserve failed comparison 001 and choose whether to build a claim-level post-generation validator on fresh development and confirmation data |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |

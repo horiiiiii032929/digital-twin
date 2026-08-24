@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-candidate-comparison-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+  "corpus_id": "synthetic-public-six-course-source-universe-v2",
+  "code_revision": "1da528e7974c9f96f8b1e17c98373adf50e3744a",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "any-hit-evidence-gate",
+        "version": "unsafe-unselectable-control",
+        "configuration": {
+          "selectable": false,
+          "case_count": 120
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "false-answer-count", "value": 39.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false},
+        {"name": "answerable-recall", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "balanced-accuracy", "value": 0.5125, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "mutation-detection-rate", "value": 0.05, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "verifier-p95-ms", "value": 0.0010840012691915035, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 65536.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "near-domain-accuracy", "passed": false, "evidence": "Accuracy was 0.75 against a required 1.0."},
+        {"name": "multi-evidence-recall", "passed": true, "evidence": "Recall was 1.0, but permissiveness caused unsafe false answers."},
+        {"name": "citation-lineage", "passed": false, "evidence": "Forty-one accepted cases lacked valid required lineage."},
+        {"name": "safety-boundary", "passed": true, "evidence": "No disallowed source entered fixed retrieval."}
+      ],
+      "failures_by_category": {"false-answer": 39, "citation-lineage": 41}
+    },
+    {
+      "implementation": {
+        "implementation_id": "inspectable-feature-classifier-v2",
+        "version": "2.0.0",
+        "configuration": {
+          "supporting_hit_threshold": 0.5,
+          "case_count": 120
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "false-answer-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "answerable-recall", "value": 0.0875, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "balanced-accuracy", "value": 0.54375, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "mutation-detection-rate", "value": 0.8571428571428571, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "verifier-p95-ms", "value": 0.08045794675126672, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 196608.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "near-domain-accuracy", "passed": false, "evidence": "Accuracy was 0.25 against a required 1.0."},
+        {"name": "multi-evidence-recall", "passed": false, "evidence": "Recall was 0.0 against a required 0.9."},
+        {"name": "citation-lineage", "passed": true, "evidence": "No accepted case had invalid lineage."},
+        {"name": "safety-boundary", "passed": true, "evidence": "No disallowed source entered fixed retrieval."}
+      ],
+      "failures_by_category": {"false-abstention": 73}
+    },
+    {
+      "implementation": {
+        "implementation_id": "cross-encoder-support-verifier-v2",
+        "version": "2.0.0",
+        "configuration": {
+          "model": "Alibaba-NLP/gte-reranker-modernbert-base",
+          "revision": "f7481e6055501a30fb19d090657df9ec1f79ab2c",
+          "case_count": 120
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "false-answer-count", "value": 7.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false},
+        {"name": "answerable-recall", "value": 0.15, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "balanced-accuracy", "value": 0.4875, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "mutation-detection-rate", "value": 0.9166666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "verifier-p95-ms", "value": 187.96008301433176, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 464060416.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "near-domain-accuracy", "passed": false, "evidence": "Accuracy was 0.2 against a required 1.0."},
+        {"name": "multi-evidence-recall", "passed": false, "evidence": "Recall was 0.0 against a required 0.9."},
+        {"name": "citation-lineage", "passed": false, "evidence": "Seven accepted cases lacked valid required lineage."},
+        {"name": "safety-boundary", "passed": true, "evidence": "No disallowed source entered fixed retrieval."}
+      ],
+      "failures_by_category": {"false-answer": 7, "false-abstention": 68, "citation-lineage": 7}
+    },
+    {
+      "implementation": {
+        "implementation_id": "cross-encoder-nli-completeness-verifier-v2",
+        "version": "2.0.0",
+        "configuration": {
+          "support_model": "Alibaba-NLP/gte-reranker-modernbert-base",
+          "nli_model": "cross-encoder/nli-deberta-v3-base",
+          "case_count": 120
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "false-answer-count", "value": 7.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false},
+        {"name": "answerable-recall", "value": 0.15, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "balanced-accuracy", "value": 0.4875, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "mutation-detection-rate", "value": 0.9166666666666666, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "verifier-p95-ms", "value": 244.6773749543354, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 491700224.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "near-domain-accuracy", "passed": false, "evidence": "Accuracy was 0.2 against a required 1.0."},
+        {"name": "multi-evidence-recall", "passed": false, "evidence": "Recall was 0.0 against a required 0.9."},
+        {"name": "citation-lineage", "passed": false, "evidence": "Seven accepted cases lacked valid required lineage."},
+        {"name": "safety-boundary", "passed": true, "evidence": "No disallowed source entered fixed retrieval."}
+      ],
+      "failures_by_category": {"false-answer": 7, "false-abstention": 68, "citation-lineage": 7}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "No selectable method passed the zero-false-answer, recall, balanced-accuracy, near-domain, multi-evidence, lineage, or mutation gates; direct review confirmed genuine method failures rather than data or harness defects.",
+    "limitations": [
+      "The fixed BM25 input isolates answerability and is not the selected production hybrid retriever.",
+      "The decision split is now consumed and cannot be reused to tune thresholds or select a successor.",
+      "Pairwise NLI over independent evidence passages is not a valid completeness signal and produced false contradictions.",
+      "No product profile, deployment, or release decision is authorized."
+    ]
+  }
+}

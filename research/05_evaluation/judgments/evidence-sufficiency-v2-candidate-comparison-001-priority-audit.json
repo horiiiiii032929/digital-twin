@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "audit_id": "evidence-sufficiency-v2-candidate-comparison-001-priority-audit",
+  "run_id": "evidence-sufficiency-v2-candidate-comparison-001",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+  "dataset_content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
+  "raw_result_file_sha256": "a622612c41f20268c7943bdd70ebfef5a2f9d9074edab1df6b77b40db58a4976",
+  "raw_result_canonical_sha256": "26b80b1e1a3d0ce4a92460d6c14e66f7382267184819eb97e450bb865db38da6",
+  "reviewer": "codex-primary-review",
+  "reviewed_at": "2026-08-24",
+  "case_count": 12,
+  "all_ground_truth_confirmed": true,
+  "harness_defect_found": false,
+  "method_failure_confirmed": true,
+  "cases": [
+    {
+      "case_id": "esv2-cross-01",
+      "classification": "semantic-domain-false-positive",
+      "conclusion": "The database-scoped consistency question correctly requires abstention; the learned verifier accepted a generic same-course replication passage without direct support."
+    },
+    {
+      "case_id": "esv2-cross-02",
+      "classification": "semantic-domain-false-positive",
+      "conclusion": "The distributed-systems-scoped indexes question correctly requires abstention; the learned verifier assigned high support to an unrelated consistency passage."
+    },
+    {
+      "case_id": "esv2-cross-06",
+      "classification": "semantic-domain-false-positive",
+      "conclusion": "The software-testing-scoped consistency question correctly requires abstention; the learned verifier accepted an unrelated mutation-testing passage."
+    },
+    {
+      "case_id": "esv2-cross-07",
+      "classification": "semantic-domain-false-positive",
+      "conclusion": "The database-scoped feedback question correctly requires abstention; the learned verifier accepted an unrelated replication passage."
+    },
+    {
+      "case_id": "esv2-cross-08",
+      "classification": "semantic-domain-false-positive",
+      "conclusion": "The distributed-systems-scoped cognitive-load question correctly requires abstention; the learned verifier accepted an unrelated consistency passage."
+    },
+    {
+      "case_id": "esv2-near-abstain-01",
+      "classification": "near-domain-false-positive",
+      "conclusion": "Physical-training session duration is outside browser-session scope; the learned verifier accepted lexical session distractors."
+    },
+    {
+      "case_id": "esv2-near-abstain-05",
+      "classification": "near-domain-false-positive",
+      "conclusion": "Human focus-group consensus is outside distributed consensus scope; the learned verifier accepted topical vocabulary alone."
+    },
+    {
+      "case_id": "esv2-direct-01",
+      "classification": "deterministic-control-false-abstention",
+      "conclusion": "The answer and source lineage are valid. The lexical control missed because its fixed coverage threshold was too high; both learned verifiers accepted correctly."
+    },
+    {
+      "case_id": "esv2-direct-02",
+      "classification": "deterministic-control-false-abstention",
+      "conclusion": "The linearizability evidence is valid. The lexical control missed, while both learned verifiers accepted with valid lineage."
+    },
+    {
+      "case_id": "esv2-direct-03",
+      "classification": "learned-ambiguity-and-nli-false-abstention",
+      "conclusion": "The usability evidence is valid. The support verifier rejected it because multiple high-scoring same-course hits triggered the ambiguity proxy; NLI additionally produced a spurious contradiction across independent passages."
+    },
+    {
+      "case_id": "esv2-direct-04",
+      "classification": "all-candidate-false-abstention",
+      "conclusion": "The held-out test-split rule and lineage are valid. Fixed completeness and ambiguity calculations rejected it, and pairwise NLI added a false contradiction."
+    },
+    {
+      "case_id": "esv2-direct-05",
+      "classification": "clean-control-pass",
+      "conclusion": "All selectable candidates correctly accepted the session-rotation rule with valid lineage."
+    }
+  ],
+  "aggregate_findings": {
+    "semantic_or_near_domain_false_positive_cases": 7,
+    "confirmed_valid_answer_cases": 5,
+    "clean_control_pass_cases": 1,
+    "nli_incremental_quality_improvement": false,
+    "ground_truth_correction_required": false,
+    "harness_correction_required": false
+  },
+  "decision": "Refine the evidence-sufficiency method; do not tune thresholds or retry these candidates against the opened split."
+}
