@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 import time
 from typing import Any
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
 import httpx
@@ -64,6 +64,7 @@ INSTRUMENT_ID = "evidence-sufficiency-v2-independent-review-003"
 NATIVE_OPENROUTER_TRANSPORT = "openrouter-native-chat-completions-v1"
 OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_REGISTRY_URL = "https://openrouter.ai/api/v1/models"
+DEEPSEEK_MODEL_REGISTRY_URL = "https://api.deepseek.com/models"
 
 
 class ReviewRunnerError(ValueError):
@@ -158,7 +159,11 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         raise ReviewRunnerError("review authorization fields disagree")
     if safety["maximum_calls"] != 13 or safety["retries"] != 0:
         raise ReviewRunnerError("review call or retry limit drifted")
-    expected_cost_ceiling = 1.5 if instrument["instrument_id"].endswith("-007") else 0.5
+    expected_cost_ceiling = (
+        1.5
+        if instrument["instrument_id"].endswith(("-007", "-008"))
+        else 0.5
+    )
     if safety["maximum_cost_usd"] != expected_cost_ceiling:
         raise ReviewRunnerError("review cost ceiling drifted")
     if safety["maximum_reserved_cost_usd"] > safety["maximum_cost_usd"]:
@@ -172,7 +177,9 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "resume_requires_exact_bindings": True,
         "raw_output_path": (f"reports/generated/{instrument['instrument_id']}.json"),
     }
-    if instrument["instrument_id"].endswith(("-003", "-004", "-005", "-006", "-007")):
+    if instrument["instrument_id"].endswith(
+        ("-003", "-004", "-005", "-006", "-007", "-008")
+    ):
         expected_runner["preserve_malformed_response_content"] = True
     if instrument["instrument_id"].endswith(("-004", "-005", "-006", "-007")):
         expected_runner.update(
@@ -181,11 +188,15 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
                 "request_router_metadata": True,
             }
         )
+    if instrument["instrument_id"].endswith("-008"):
+        expected_runner["preserve_provider_error_details"] = True
     if safety.get("runner") != expected_runner:
         raise ReviewRunnerError("review runner binding drifted")
     expected_routing = {
         "order": (
-            ["openai", "azure"]
+            ["deepseek-official-api"]
+            if instrument["instrument_id"].endswith("-008")
+            else ["openai", "azure"]
             if instrument["instrument_id"].endswith("-007")
             else ["openai"]
             if instrument["instrument_id"].endswith("-006")
@@ -194,15 +205,22 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
             else ["Mistral"]
         ),
         "allow_fallbacks": instrument["instrument_id"].endswith("-007"),
-        "require_parameters": True,
-        "data_collection": "allow",
-        "zdr": False,
     }
+    if not instrument["instrument_id"].endswith("-008"):
+        expected_routing.update(
+            {
+                "require_parameters": True,
+                "data_collection": "allow",
+                "zdr": False,
+            }
+        )
     if safety["provider_routing"] != expected_routing:
         raise ReviewRunnerError("review routing drifted")
     binding = _provider_binding(instrument)
     expected_model = (
-        "openai/gpt-5.4-mini"
+        "deepseek-v4-pro"
+        if instrument["instrument_id"].endswith("-008")
+        else "openai/gpt-5.4-mini"
         if instrument["instrument_id"].endswith(("-006", "-007"))
         else "google/gemini-3.7-flash"
         if instrument["instrument_id"].endswith("-005")
@@ -220,9 +238,11 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
     if binding["response_format_mode"] != expected_response_format:
         raise ReviewRunnerError("review response format drifted")
     if instrument["instrument_id"].endswith(
-        ("-003", "-004", "-005", "-006", "-007")
+        ("-003", "-004", "-005", "-006", "-007", "-008")
     ) and safety.get("provider_context_window_tokens") != (
-        400000
+        1_000_000
+        if instrument["instrument_id"].endswith("-008")
+        else 400000
         if instrument["instrument_id"].endswith(("-006", "-007"))
         else 1048576
         if instrument["instrument_id"].endswith("-005")
@@ -237,6 +257,14 @@ def validate_runner_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "api_url": OPENROUTER_CHAT_URL,
     }:
         raise ReviewRunnerError("native OpenRouter transport binding drifted")
+    if instrument["instrument_id"].endswith("-008") and {
+        "transport": binding["transport"],
+        "api_url": binding["api_url"],
+    } != {
+        "transport": "litellm-deepseek-direct-v1",
+        "api_url": "https://api.deepseek.com/chat/completions",
+    }:
+        raise ReviewRunnerError("direct DeepSeek transport binding drifted")
     for field in (
         "timeout_seconds",
         "max_input_tokens",
@@ -400,7 +428,7 @@ def _validate_call_response(
 
 
 class ProviderReviewTransport:
-    """Identity-pinned OpenRouter transport with retries disabled."""
+    """Identity-pinned provider transport with retries disabled."""
 
     def __init__(self, binding: dict[str, Any]) -> None:
         self.binding = binding
@@ -409,16 +437,20 @@ class ProviderReviewTransport:
             if binding["response_format_mode"] == "json-object-prompt-schema"
             else None
         )
+        provider_options: dict[str, Any] = {"num_retries": 0}
+        if binding["provider"] == "openrouter":
+            provider_options["extra_body"] = {
+                "provider": deepcopy(binding["provider_routing"])
+            }
+        elif binding["provider"] == "deepseek-official-api":
+            provider_options["extra_body"] = {"thinking": {"type": "disabled"}}
         self.client = LiteLlmClient(
             binding["litellm_model"],
             timeout_seconds=binding["timeout_seconds"],
             max_output_tokens=binding["max_output_tokens"],
             temperature=binding["temperature"],
             response_format=response_format,
-            provider_options={
-                "extra_body": {"provider": deepcopy(binding["provider_routing"])},
-                "num_retries": 0,
-            },
+            provider_options=provider_options,
             expected_provider_model=binding["provider_model"],
         )
 
@@ -1072,8 +1104,9 @@ async def execute(
     return state
 
 
-def _fetch_json(url: str) -> dict[str, Any]:
-    with urlopen(url, timeout=20) as response:  # noqa: S310 - fixed official URLs
+def _fetch_json(url: str, *, headers: dict[str, str] | None = None) -> dict[str, Any]:
+    request = Request(url, headers=headers or {})
+    with urlopen(request, timeout=20) as response:  # noqa: S310 - fixed official URLs
         value = json.loads(response.read().decode("utf-8"))
     if not isinstance(value, dict):
         raise ReviewRunnerError("provider metadata root is not an object")
@@ -1081,6 +1114,19 @@ def _fetch_json(url: str) -> dict[str, Any]:
 
 
 def fetch_live_metadata(instrument: dict[str, Any]) -> dict[str, Any]:
+    safety = instrument["execution_safety"]
+    if safety["reviewer_provider"] == "deepseek-official-api":
+        api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
+        if not api_key:
+            raise ReviewRunnerError("DEEPSEEK_API_KEY is not available")
+        return {
+            "verified_at": datetime.now(timezone.utc).isoformat(),
+            "registry": _fetch_json(
+                DEEPSEEK_MODEL_REGISTRY_URL,
+                headers={"Authorization": f"Bearer {api_key}"},
+            ),
+            "endpoints": None,
+        }
     return {
         "verified_at": datetime.now(timezone.utc).isoformat(),
         "registry": _fetch_json(MODEL_REGISTRY_URL),
@@ -1107,6 +1153,8 @@ def _live_metadata_failures(
     failures: list[str] = []
     if model is None:
         return ["reviewer-model-missing"]
+    if safety["reviewer_provider"] == "deepseek-official-api":
+        return failures
     pricing = model.get("pricing", {})
     if safety.get("pricing_binding_scope") != "selected-endpoint" and (
         float(pricing.get("prompt", -1)) * 1_000_000
@@ -1223,7 +1271,8 @@ def build_preflight(
         _estimate_input_tokens(_review_prompt(assets["packet"], items), schema)
         for items, schema in prompts
     )
-    credential_present = bool(os.getenv("OPENROUTER_API_KEY", "").strip())
+    credential_name = safety["credential_environment_variable"]
+    credential_present = bool(os.getenv(credential_name, "").strip())
     authorized = safety["provider_execution_authorized"] is True
     frozen = instrument["status"] == "frozen-pending-execution"
     bounded = instrument_id in BOUNDED_PILOT_AUTHORIZATIONS
@@ -1235,7 +1284,7 @@ def build_preflight(
     if not bounded:
         blockers.append("bounded-freeze-authorization-missing")
     if not credential_present:
-        blockers.append("openrouter-credential-missing")
+        blockers.append("provider-credential-missing")
     if not metadata_fresh or live_failures:
         blockers.append("provider-metadata-not-current")
     if _working_tree_dirty():

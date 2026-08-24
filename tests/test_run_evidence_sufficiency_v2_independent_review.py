@@ -29,6 +29,10 @@ INSTRUMENT_007_PATH = Path(
     "research/05_evaluation/instruments/"
     "evidence_sufficiency_v2_independent_review_007.json"
 )
+INSTRUMENT_008_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_008.json"
+)
 
 
 @pytest.fixture
@@ -260,6 +264,70 @@ def test_review_007_is_invalid_revoked_with_resilient_same_model_contract() -> N
     assert assets["packet"]["content_sha256"] == (
         "a6cdda77cb824cc620577cc1fcab23ec17166fa78ba525faaf3ff811b062eed7"
     )
+
+
+def test_review_008_binds_direct_deepseek_without_authorizing_execution() -> None:
+    assets = runner.load_assets(INSTRUMENT_008_PATH)
+    instrument = assets["instrument"]
+    safety = instrument["execution_safety"]
+
+    assert instrument["status"] == "reviewer-bound-provider-unauthorized"
+    assert safety["provider_execution_authorized"] is False
+    assert instrument["decision_rule"]["authorize_provider_execution"] is False
+    assert safety["reviewer_provider"] == "deepseek-official-api"
+    assert safety["reviewer_model"] == "deepseek-v4-pro"
+    assert safety["reviewer_litellm_model"] == "deepseek/deepseek-v4-pro"
+    assert safety["credential_environment_variable"] == "DEEPSEEK_API_KEY"
+    assert safety["fallback_routing_allowed"] is False
+    assert safety["provider_routing"] == {
+        "order": ["deepseek-official-api"],
+        "allow_fallbacks": False,
+    }
+    assert safety["response_format_mode"] == "json-object-prompt-schema"
+    assert safety["maximum_reserved_cost_usd"] == 0.15834
+    assert safety["maximum_cost_usd"] == 1.5
+    assert assets["packet"]["content_sha256"] == (
+        "30f8070557083463e1a311479e95b30c62250f75bef1f40f3f10057482673011"
+    )
+
+
+def test_review_008_direct_transport_disables_retries_and_thinking() -> None:
+    assets = runner.load_assets(INSTRUMENT_008_PATH)
+    transport = runner.ProviderReviewTransport(
+        runner._provider_binding(assets["instrument"])
+    )
+
+    assert transport.client.provider_options == {
+        "num_retries": 0,
+        "extra_body": {"thinking": {"type": "disabled"}},
+    }
+    assert transport.client.response_format == {"type": "json_object"}
+
+
+def test_review_008_preflight_is_blocked_only_by_authorization_locks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_008_PATH)
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-only")
+    monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
+    verified = datetime.fromisoformat(
+        assets["instrument"]["execution_safety"]["reviewer_verified_at"]
+    )
+
+    result = runner.build_preflight(
+        assets,
+        output_path=tmp_path / "review-008.json",
+        live_metadata=_live_metadata(assets),
+        now=verified + timedelta(hours=1),
+    )
+
+    assert result["status"] == "blocked-not-authorized"
+    assert result["live_provider_failures"] == []
+    assert set(result["blockers"]) == {
+        "provider-review-not-authorized",
+        "instrument-not-frozen",
+        "bounded-freeze-authorization-missing",
+    }
 
 
 @pytest.mark.asyncio

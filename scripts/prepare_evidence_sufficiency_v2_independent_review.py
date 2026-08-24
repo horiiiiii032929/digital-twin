@@ -69,6 +69,12 @@ SUPPORTED_INSTRUMENTS = {
         "completed-review-authorization-revoked",
         "invalid-execution-authorization-revoked",
     },
+    "evidence-sufficiency-v2-independent-review-008": {
+        "reviewer-bound-provider-unauthorized",
+        "frozen-pending-execution",
+        "completed-review-authorization-revoked",
+        "invalid-execution-authorization-revoked",
+    },
 }
 VERDICTS = {"approve", "revise", "escalate"}
 RESPONSE_FIELDS = {
@@ -164,6 +170,16 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "maximum_reserved_cost_usd": safety.get("maximum_reserved_cost_usd"),
     } != (
         {
+            "reviewer_provider": "deepseek-official-api",
+            "reviewer_model": "deepseek-v4-pro",
+            "reviewer_litellm_model": "deepseek/deepseek-v4-pro",
+            "credential_environment_variable": "DEEPSEEK_API_KEY",
+            "maximum_cost_usd": 1.5,
+            "maximum_reserved_cost_usd": 0.15834,
+        }
+        if instrument_id.endswith("-008")
+        else
+        {
             "reviewer_provider": "openrouter",
             "reviewer_model": "openai/gpt-5.4-mini",
             "reviewer_litellm_model": "openrouter/openai/gpt-5.4-mini",
@@ -218,6 +234,33 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         "provider_routing": safety.get("provider_routing"),
         "provider_policy": safety.get("provider_policy"),
     } != (
+        {
+            "metadata_maximum_age_hours": 24,
+            "metadata_source": "https://api.deepseek.com/models",
+            "provider_policy_source": (
+                "https://cdn.deepseek.com/policies/en-US/"
+                "deepseek-privacy-policy.html"
+            ),
+            "temperature": 0,
+            "reasoning_effort": None,
+            "seed": None,
+            "max_input_tokens_per_call": 20000,
+            "max_output_tokens_per_call": 4000,
+            "pricing_usd_per_million_input_tokens": 0.435,
+            "pricing_usd_per_million_output_tokens": 0.87,
+            "provider_routing": {
+                "order": ["deepseek-official-api"],
+                "allow_fallbacks": False,
+            },
+            "provider_policy": {
+                "training_use": "not-contractually-excluded",
+                "retention": "provider-policy-controlled",
+                "storage_location": "People's Republic of China",
+                "data_boundary": "synthetic-public-evaluation-only",
+            },
+        }
+        if instrument_id.endswith("-008")
+        else
         {
             "metadata_maximum_age_hours": 24,
             "metadata_source": "https://openrouter.ai/api/v1/models",
@@ -377,6 +420,14 @@ def load_instrument(path: Path = INSTRUMENT_PATH) -> dict[str, Any]:
         ),
     }:
         raise IndependentReviewError("native OpenRouter binding drifted")
+    if instrument_id.endswith("-008") and {
+        "reviewer_transport": safety.get("reviewer_transport"),
+        "reviewer_api_url": safety.get("reviewer_api_url"),
+    } != {
+        "reviewer_transport": "litellm-deepseek-direct-v1",
+        "reviewer_api_url": "https://api.deepseek.com/chat/completions",
+    }:
+        raise IndependentReviewError("direct DeepSeek binding drifted")
     decision_rule = instrument.get("decision_rule", {})
     if any(
         decision_rule.get(key) is not False
