@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "audit_id": "evidence-sufficiency-v2-deterministic-audit-001",
+  "status": "completed-correction-pending-human-confirmation",
+  "issue": 105,
+  "source_dataset": {
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+    "content_sha256": "7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023",
+    "case_count": 120,
+    "opened_for_candidate_evaluation": false
+  },
+  "successor_dataset": {
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+    "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
+    "case_count": 120,
+    "output_path": "research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_002.json",
+    "freeze_eligible": false
+  },
+  "confirmed_corrections": [
+    "multi-evidence-cases-bind-two-distinct-active-source-units",
+    "permission-version-cases-expose-the-paired-stale-source",
+    "multimodal-cases-declare-derived-text-only-evaluation-scope",
+    "priority-packet-covers-all-high-risk-boundaries"
+  ],
+  "audit_scope": {
+    "case_count": 120,
+    "source_count": 40,
+    "semantic_review_owner": "codex-primary-data-quality-audit",
+    "human_confirmation_case_count": 4,
+    "independent_model_review_selected": false
+  },
+  "execution_safety": {
+    "local_dataset_correction_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "heldout_execution_authorized": false,
+    "candidate_evaluation_authorized": false,
+    "automatic_dataset_freeze": false,
+    "automatic_product_selection": false
+  },
+  "decision_rule": {
+    "all_deterministic_checks_pass": "Publish the corrected draft and a four-case human confirmation packet; do not freeze automatically.",
+    "any_semantic_uncertainty": "Defer only the named case and preserve every deterministic finding.",
+    "authorize_candidate_evaluation": false,
+    "authorize_dataset_freeze": false
+  }
+}

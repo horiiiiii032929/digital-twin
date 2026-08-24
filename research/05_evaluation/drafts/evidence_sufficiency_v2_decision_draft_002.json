@@ -1,0 +1,3726 @@
+{
+  "schema_version": 1,
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+  "status": "corrected-draft-pending-human-confirmation",
+  "synthetic_public_only": true,
+  "private_data_read": false,
+  "provider_or_model_calls": 0,
+  "ground_truth_authority": "deterministic-source-linked",
+  "decision_execution_authorized": false,
+  "opened_for_candidate_evaluation": false,
+  "sources": [
+    {
+      "source_unit_id": "secure-web-sessions-v2",
+      "logical_source_id": "secure-web-sessions",
+      "course_id": "secure-web",
+      "topic": "sessions",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "A session identifier must be rotated immediately after authentication to prevent session fixation. A password reset must revoke every active session for the account.",
+      "claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation.",
+          "evidence_quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        },
+        {
+          "claim_id": "secure-web-sessions-claim-2",
+          "statement": "A password reset must revoke every active session for the account.",
+          "evidence_quote": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-sessions-v1",
+      "logical_source_id": "secure-web-sessions",
+      "course_id": "secure-web",
+      "topic": "sessions",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Superseded guidance for sessions uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-cookies-v2",
+      "logical_source_id": "secure-web-cookies",
+      "course_id": "secure-web",
+      "topic": "cookies",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "The Secure cookie flag restricts transmission to HTTPS connections. The HttpOnly cookie flag prevents browser scripts from reading the cookie.",
+      "claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections.",
+          "evidence_quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        },
+        {
+          "claim_id": "secure-web-cookies-claim-2",
+          "statement": "The HttpOnly cookie flag prevents browser scripts from reading the cookie.",
+          "evidence_quote": "The HttpOnly cookie flag prevents browser scripts from reading the cookie."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-cookies-v1",
+      "logical_source_id": "secure-web-cookies",
+      "course_id": "secure-web",
+      "topic": "cookies",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Superseded guidance for cookies uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-xss-v2",
+      "logical_source_id": "secure-web-xss",
+      "course_id": "secure-web",
+      "topic": "xss",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "code",
+      "content": "Untrusted text must be inserted with textContent rather than interpreted as HTML. Output encoding must match the destination context such as HTML, attributes, CSS, or URLs.",
+      "claims": [
+        {
+          "claim_id": "secure-web-xss-claim-1",
+          "statement": "Untrusted text must be inserted with textContent rather than interpreted as HTML.",
+          "evidence_quote": "Untrusted text must be inserted with textContent rather than interpreted as HTML."
+        },
+        {
+          "claim_id": "secure-web-xss-claim-2",
+          "statement": "Output encoding must match the destination context such as HTML, attributes, CSS, or URLs.",
+          "evidence_quote": "Output encoding must match the destination context such as HTML, attributes, CSS, or URLs."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "code",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-oauth-v2",
+      "logical_source_id": "secure-web-oauth",
+      "course_id": "secure-web",
+      "topic": "oauth",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "The OAuth state value binds the authorization response to the browser flow that initiated it. A redirect URI must be matched exactly against the registered allowlist.",
+      "claims": [
+        {
+          "claim_id": "secure-web-oauth-claim-1",
+          "statement": "The OAuth state value binds the authorization response to the browser flow that initiated it.",
+          "evidence_quote": "The OAuth state value binds the authorization response to the browser flow that initiated it."
+        },
+        {
+          "claim_id": "secure-web-oauth-claim-2",
+          "statement": "A redirect URI must be matched exactly against the registered allowlist.",
+          "evidence_quote": "A redirect URI must be matched exactly against the registered allowlist."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "secure-web-authorization-v2",
+      "logical_source_id": "secure-web-authorization",
+      "course_id": "secure-web",
+      "topic": "authorization",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Authorization must be checked for the specific requested object on every request. A denied authorization decision must not reveal whether the protected object exists.",
+      "claims": [
+        {
+          "claim_id": "secure-web-authorization-claim-1",
+          "statement": "Authorization must be checked for the specific requested object on every request.",
+          "evidence_quote": "Authorization must be checked for the specific requested object on every request."
+        },
+        {
+          "claim_id": "secure-web-authorization-claim-2",
+          "statement": "A denied authorization decision must not reveal whether the protected object exists.",
+          "evidence_quote": "A denied authorization decision must not reveal whether the protected object exists."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-transactions-v2",
+      "logical_source_id": "database-transactions",
+      "course_id": "database",
+      "topic": "transactions",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "A transaction commits all of its changes together or rolls all of them back. A durable commit must survive a process restart after success is acknowledged.",
+      "claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back.",
+          "evidence_quote": "A transaction commits all of its changes together or rolls all of them back."
+        },
+        {
+          "claim_id": "database-transactions-claim-2",
+          "statement": "A durable commit must survive a process restart after success is acknowledged.",
+          "evidence_quote": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-transactions-v1",
+      "logical_source_id": "database-transactions",
+      "course_id": "database",
+      "topic": "transactions",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Superseded guidance for transactions uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-indexes-v2",
+      "logical_source_id": "database-indexes",
+      "course_id": "database",
+      "topic": "indexes",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "A B-tree index supports ordered range scans without reading every table row. An index can slow writes because each affected index entry must also be maintained.",
+      "claims": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "statement": "A B-tree index supports ordered range scans without reading every table row.",
+          "evidence_quote": "A B-tree index supports ordered range scans without reading every table row."
+        },
+        {
+          "claim_id": "database-indexes-claim-2",
+          "statement": "An index can slow writes because each affected index entry must also be maintained.",
+          "evidence_quote": "An index can slow writes because each affected index entry must also be maintained."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-indexes-v1",
+      "logical_source_id": "database-indexes",
+      "course_id": "database",
+      "topic": "indexes",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "Superseded guidance for indexes uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-isolation-v2",
+      "logical_source_id": "database-isolation",
+      "course_id": "database",
+      "topic": "isolation",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Serializable isolation prevents executions that cannot be ordered as serial transactions. Snapshot isolation can still permit write-skew anomalies across related rows.",
+      "claims": [
+        {
+          "claim_id": "database-isolation-claim-1",
+          "statement": "Serializable isolation prevents executions that cannot be ordered as serial transactions.",
+          "evidence_quote": "Serializable isolation prevents executions that cannot be ordered as serial transactions."
+        },
+        {
+          "claim_id": "database-isolation-claim-2",
+          "statement": "Snapshot isolation can still permit write-skew anomalies across related rows.",
+          "evidence_quote": "Snapshot isolation can still permit write-skew anomalies across related rows."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-replication-v2",
+      "logical_source_id": "database-replication",
+      "course_id": "database",
+      "topic": "replication",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "Synchronous replication waits for the required replica acknowledgement before confirming a write. Asynchronous replication can lose recently acknowledged writes during primary failure.",
+      "claims": [
+        {
+          "claim_id": "database-replication-claim-1",
+          "statement": "Synchronous replication waits for the required replica acknowledgement before confirming a write.",
+          "evidence_quote": "Synchronous replication waits for the required replica acknowledgement before confirming a write."
+        },
+        {
+          "claim_id": "database-replication-claim-2",
+          "statement": "Asynchronous replication can lose recently acknowledged writes during primary failure.",
+          "evidence_quote": "Asynchronous replication can lose recently acknowledged writes during primary failure."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "database-recovery-v2",
+      "logical_source_id": "database-recovery",
+      "course_id": "database",
+      "topic": "recovery",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Write-ahead log records must reach durable storage before their corresponding data pages. A recovery checkpoint limits how far the log must be replayed after restart.",
+      "claims": [
+        {
+          "claim_id": "database-recovery-claim-1",
+          "statement": "Write-ahead log records must reach durable storage before their corresponding data pages.",
+          "evidence_quote": "Write-ahead log records must reach durable storage before their corresponding data pages."
+        },
+        {
+          "claim_id": "database-recovery-claim-2",
+          "statement": "A recovery checkpoint limits how far the log must be replayed after restart.",
+          "evidence_quote": "A recovery checkpoint limits how far the log must be replayed after restart."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-splits-v2",
+      "logical_source_id": "machine-learning-splits",
+      "course_id": "machine-learning",
+      "topic": "splits",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "The test split must remain untouched until the final model decision. Hyperparameters are selected using development or validation data rather than test outcomes.",
+      "claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision.",
+          "evidence_quote": "The test split must remain untouched until the final model decision."
+        },
+        {
+          "claim_id": "machine-learning-splits-claim-2",
+          "statement": "Hyperparameters are selected using development or validation data rather than test outcomes.",
+          "evidence_quote": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-splits-v1",
+      "logical_source_id": "machine-learning-splits",
+      "course_id": "machine-learning",
+      "topic": "splits",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Superseded guidance for splits uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-metrics-v2",
+      "logical_source_id": "machine-learning-metrics",
+      "course_id": "machine-learning",
+      "topic": "metrics",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "equation",
+      "content": "Precision is the fraction of predicted positives that are truly positive. Recall is the fraction of true positives that the model retrieves.",
+      "claims": [
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "statement": "Precision is the fraction of predicted positives that are truly positive.",
+          "evidence_quote": "Precision is the fraction of predicted positives that are truly positive."
+        },
+        {
+          "claim_id": "machine-learning-metrics-claim-2",
+          "statement": "Recall is the fraction of true positives that the model retrieves.",
+          "evidence_quote": "Recall is the fraction of true positives that the model retrieves."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "equation",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-metrics-v1",
+      "logical_source_id": "machine-learning-metrics",
+      "course_id": "machine-learning",
+      "topic": "metrics",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "equation",
+      "content": "Superseded guidance for metrics uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "equation",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-regularization-v2",
+      "logical_source_id": "machine-learning-regularization",
+      "course_id": "machine-learning",
+      "topic": "regularization",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "equation",
+      "content": "L2 regularization adds a penalty proportional to squared parameter magnitude. Regularization strength must be selected on development data rather than the final test set.",
+      "claims": [
+        {
+          "claim_id": "machine-learning-regularization-claim-1",
+          "statement": "L2 regularization adds a penalty proportional to squared parameter magnitude.",
+          "evidence_quote": "L2 regularization adds a penalty proportional to squared parameter magnitude."
+        },
+        {
+          "claim_id": "machine-learning-regularization-claim-2",
+          "statement": "Regularization strength must be selected on development data rather than the final test set.",
+          "evidence_quote": "Regularization strength must be selected on development data rather than the final test set."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "equation",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-calibration-v2",
+      "logical_source_id": "machine-learning-calibration",
+      "course_id": "machine-learning",
+      "topic": "calibration",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "A calibrated 0.8 probability should be correct on about 80 percent of comparable predictions. Calibration quality must be reported separately from ranking discrimination.",
+      "claims": [
+        {
+          "claim_id": "machine-learning-calibration-claim-1",
+          "statement": "A calibrated 0.8 probability should be correct on about 80 percent of comparable predictions.",
+          "evidence_quote": "A calibrated 0.8 probability should be correct on about 80 percent of comparable predictions."
+        },
+        {
+          "claim_id": "machine-learning-calibration-claim-2",
+          "statement": "Calibration quality must be reported separately from ranking discrimination.",
+          "evidence_quote": "Calibration quality must be reported separately from ranking discrimination."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "machine-learning-embeddings-v2",
+      "logical_source_id": "machine-learning-embeddings",
+      "course_id": "machine-learning",
+      "topic": "embeddings",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "code",
+      "content": "Document and query embeddings must use the model instructions required for their distinct roles. Embedding similarity ranks candidates but is not a calibrated answerability probability.",
+      "claims": [
+        {
+          "claim_id": "machine-learning-embeddings-claim-1",
+          "statement": "Document and query embeddings must use the model instructions required for their distinct roles.",
+          "evidence_quote": "Document and query embeddings must use the model instructions required for their distinct roles."
+        },
+        {
+          "claim_id": "machine-learning-embeddings-claim-2",
+          "statement": "Embedding similarity ranks candidates but is not a calibrated answerability probability.",
+          "evidence_quote": "Embedding similarity ranks candidates but is not a calibrated answerability probability."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "code",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-usability-v2",
+      "logical_source_id": "human-computer-interaction-usability",
+      "course_id": "human-computer-interaction",
+      "topic": "usability",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "A usability test observes representative users attempting representative tasks. Task completion and observed breakdowns must be recorded separately from user preference.",
+      "claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks.",
+          "evidence_quote": "A usability test observes representative users attempting representative tasks."
+        },
+        {
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "statement": "Task completion and observed breakdowns must be recorded separately from user preference.",
+          "evidence_quote": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-usability-v1",
+      "logical_source_id": "human-computer-interaction-usability",
+      "course_id": "human-computer-interaction",
+      "topic": "usability",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Superseded guidance for usability uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-accessibility-v2",
+      "logical_source_id": "human-computer-interaction-accessibility",
+      "course_id": "human-computer-interaction",
+      "topic": "accessibility",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Keyboard focus must remain visible and follow the same logical order as the interface. Text and essential controls must satisfy the declared contrast requirement in every state.",
+      "claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface.",
+          "evidence_quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        },
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-2",
+          "statement": "Text and essential controls must satisfy the declared contrast requirement in every state.",
+          "evidence_quote": "Text and essential controls must satisfy the declared contrast requirement in every state."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-accessibility-v1",
+      "logical_source_id": "human-computer-interaction-accessibility",
+      "course_id": "human-computer-interaction",
+      "topic": "accessibility",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Superseded guidance for accessibility uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-feedback-v2",
+      "logical_source_id": "human-computer-interaction-feedback",
+      "course_id": "human-computer-interaction",
+      "topic": "feedback",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "A system must acknowledge a user action promptly even when completion is asynchronous. An error message must state what happened and provide a recoverable next action.",
+      "claims": [
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-1",
+          "statement": "A system must acknowledge a user action promptly even when completion is asynchronous.",
+          "evidence_quote": "A system must acknowledge a user action promptly even when completion is asynchronous."
+        },
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-2",
+          "statement": "An error message must state what happened and provide a recoverable next action.",
+          "evidence_quote": "An error message must state what happened and provide a recoverable next action."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-cognitive-load-v2",
+      "logical_source_id": "human-computer-interaction-cognitive-load",
+      "course_id": "human-computer-interaction",
+      "topic": "cognitive-load",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Progressive disclosure keeps advanced controls hidden until they are relevant. A workflow should not require users to remember information that the interface can display.",
+      "claims": [
+        {
+          "claim_id": "human-computer-interaction-cognitive-load-claim-1",
+          "statement": "Progressive disclosure keeps advanced controls hidden until they are relevant.",
+          "evidence_quote": "Progressive disclosure keeps advanced controls hidden until they are relevant."
+        },
+        {
+          "claim_id": "human-computer-interaction-cognitive-load-claim-2",
+          "statement": "A workflow should not require users to remember information that the interface can display.",
+          "evidence_quote": "A workflow should not require users to remember information that the interface can display."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "human-computer-interaction-research-v2",
+      "logical_source_id": "human-computer-interaction-research",
+      "course_id": "human-computer-interaction",
+      "topic": "research",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "Interview notes must distinguish direct observations from researcher interpretation. A research claim must identify the participant scope and tasks that support it.",
+      "claims": [
+        {
+          "claim_id": "human-computer-interaction-research-claim-1",
+          "statement": "Interview notes must distinguish direct observations from researcher interpretation.",
+          "evidence_quote": "Interview notes must distinguish direct observations from researcher interpretation."
+        },
+        {
+          "claim_id": "human-computer-interaction-research-claim-2",
+          "statement": "A research claim must identify the participant scope and tasks that support it.",
+          "evidence_quote": "A research claim must identify the participant scope and tasks that support it."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-consistency-v2",
+      "logical_source_id": "distributed-systems-consistency",
+      "course_id": "distributed-systems",
+      "topic": "consistency",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Linearizability requires each completed operation to appear at one instant between invocation and response. Eventual consistency allows replicas to diverge temporarily when no new updates occur.",
+      "claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response.",
+          "evidence_quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        },
+        {
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "statement": "Eventual consistency allows replicas to diverge temporarily when no new updates occur.",
+          "evidence_quote": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-consistency-v1",
+      "logical_source_id": "distributed-systems-consistency",
+      "course_id": "distributed-systems",
+      "topic": "consistency",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "text",
+      "content": "Superseded guidance for consistency uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "source-text",
+        "origin_modality": "text",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-replication-v2",
+      "logical_source_id": "distributed-systems-replication",
+      "course_id": "distributed-systems",
+      "topic": "replication",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "A quorum read and write configuration must overlap on at least one replica. A replication factor counts stored copies, not the number of failures automatically tolerated.",
+      "claims": [
+        {
+          "claim_id": "distributed-systems-replication-claim-1",
+          "statement": "A quorum read and write configuration must overlap on at least one replica.",
+          "evidence_quote": "A quorum read and write configuration must overlap on at least one replica."
+        },
+        {
+          "claim_id": "distributed-systems-replication-claim-2",
+          "statement": "A replication factor counts stored copies, not the number of failures automatically tolerated.",
+          "evidence_quote": "A replication factor counts stored copies, not the number of failures automatically tolerated."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-consensus-v2",
+      "logical_source_id": "distributed-systems-consensus",
+      "course_id": "distributed-systems",
+      "topic": "consensus",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "A consensus leader must step down when it observes a term higher than its own. A committed log entry must be preserved by future leaders.",
+      "claims": [
+        {
+          "claim_id": "distributed-systems-consensus-claim-1",
+          "statement": "A consensus leader must step down when it observes a term higher than its own.",
+          "evidence_quote": "A consensus leader must step down when it observes a term higher than its own."
+        },
+        {
+          "claim_id": "distributed-systems-consensus-claim-2",
+          "statement": "A committed log entry must be preserved by future leaders.",
+          "evidence_quote": "A committed log entry must be preserved by future leaders."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-failure-v2",
+      "logical_source_id": "distributed-systems-failure",
+      "course_id": "distributed-systems",
+      "topic": "failure",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "A timeout indicates missing timely evidence, not proof that a remote process has stopped. Retries require idempotency or deduplication because a timed-out operation may have completed.",
+      "claims": [
+        {
+          "claim_id": "distributed-systems-failure-claim-1",
+          "statement": "A timeout indicates missing timely evidence, not proof that a remote process has stopped.",
+          "evidence_quote": "A timeout indicates missing timely evidence, not proof that a remote process has stopped."
+        },
+        {
+          "claim_id": "distributed-systems-failure-claim-2",
+          "statement": "Retries require idempotency or deduplication because a timed-out operation may have completed.",
+          "evidence_quote": "Retries require idempotency or deduplication because a timed-out operation may have completed."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "distributed-systems-time-v2",
+      "logical_source_id": "distributed-systems-time",
+      "course_id": "distributed-systems",
+      "topic": "time",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "equation",
+      "content": "A monotonic clock measures elapsed duration without moving backward after wall-clock adjustment. Wall-clock timestamps require an explicit timezone and synchronization assumptions.",
+      "claims": [
+        {
+          "claim_id": "distributed-systems-time-claim-1",
+          "statement": "A monotonic clock measures elapsed duration without moving backward after wall-clock adjustment.",
+          "evidence_quote": "A monotonic clock measures elapsed duration without moving backward after wall-clock adjustment."
+        },
+        {
+          "claim_id": "distributed-systems-time-claim-2",
+          "statement": "Wall-clock timestamps require an explicit timezone and synchronization assumptions.",
+          "evidence_quote": "Wall-clock timestamps require an explicit timezone and synchronization assumptions."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "equation",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-unit-v2",
+      "logical_source_id": "software-testing-unit",
+      "course_id": "software-testing",
+      "topic": "unit",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "code",
+      "content": "A unit test isolates one behavior and controls external dependencies. A deterministic test must produce the same assertion result from the same controlled inputs.",
+      "claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies.",
+          "evidence_quote": "A unit test isolates one behavior and controls external dependencies."
+        },
+        {
+          "claim_id": "software-testing-unit-claim-2",
+          "statement": "A deterministic test must produce the same assertion result from the same controlled inputs.",
+          "evidence_quote": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "code",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-unit-v1",
+      "logical_source_id": "software-testing-unit",
+      "course_id": "software-testing",
+      "topic": "unit",
+      "version": 1,
+      "active": false,
+      "tutoring_allowed": true,
+      "modality": "code",
+      "content": "Superseded guidance for unit uses a different rule and must not support a current answer.",
+      "claims": [],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "code",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-integration-v2",
+      "logical_source_id": "software-testing-integration",
+      "course_id": "software-testing",
+      "topic": "integration",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "diagram",
+      "content": "An integration test verifies a contract across real component boundaries. Integration fixtures must be isolated so one test cannot depend on another test state.",
+      "claims": [
+        {
+          "claim_id": "software-testing-integration-claim-1",
+          "statement": "An integration test verifies a contract across real component boundaries.",
+          "evidence_quote": "An integration test verifies a contract across real component boundaries."
+        },
+        {
+          "claim_id": "software-testing-integration-claim-2",
+          "statement": "Integration fixtures must be isolated so one test cannot depend on another test state.",
+          "evidence_quote": "Integration fixtures must be isolated so one test cannot depend on another test state."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "diagram",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-property-v2",
+      "logical_source_id": "software-testing-property",
+      "course_id": "software-testing",
+      "topic": "property",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "equation",
+      "content": "A property test generates many inputs and checks an invariant rather than one example output. A failing generated case must be preserved with its seed or minimized counterexample.",
+      "claims": [
+        {
+          "claim_id": "software-testing-property-claim-1",
+          "statement": "A property test generates many inputs and checks an invariant rather than one example output.",
+          "evidence_quote": "A property test generates many inputs and checks an invariant rather than one example output."
+        },
+        {
+          "claim_id": "software-testing-property-claim-2",
+          "statement": "A failing generated case must be preserved with its seed or minimized counterexample.",
+          "evidence_quote": "A failing generated case must be preserved with its seed or minimized counterexample."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "equation",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-mutation-v2",
+      "logical_source_id": "software-testing-mutation",
+      "course_id": "software-testing",
+      "topic": "mutation",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "code",
+      "content": "Mutation testing checks whether tests fail after a deliberate fault is inserted. A surviving mutation indicates missing sensitivity but does not identify the correct replacement assertion.",
+      "claims": [
+        {
+          "claim_id": "software-testing-mutation-claim-1",
+          "statement": "Mutation testing checks whether tests fail after a deliberate fault is inserted.",
+          "evidence_quote": "Mutation testing checks whether tests fail after a deliberate fault is inserted."
+        },
+        {
+          "claim_id": "software-testing-mutation-claim-2",
+          "statement": "A surviving mutation indicates missing sensitivity but does not identify the correct replacement assertion.",
+          "evidence_quote": "A surviving mutation indicates missing sensitivity but does not identify the correct replacement assertion."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "code",
+        "raw_asset_present": false
+      }
+    },
+    {
+      "source_unit_id": "software-testing-observability-v2",
+      "logical_source_id": "software-testing-observability",
+      "course_id": "software-testing",
+      "topic": "observability",
+      "version": 2,
+      "active": true,
+      "tutoring_allowed": true,
+      "modality": "table",
+      "content": "A test failure record must include the case identity, stage, and sanitized failure category. Operational latency must report a distribution such as p50 and p95 rather than only a mean.",
+      "claims": [
+        {
+          "claim_id": "software-testing-observability-claim-1",
+          "statement": "A test failure record must include the case identity, stage, and sanitized failure category.",
+          "evidence_quote": "A test failure record must include the case identity, stage, and sanitized failure category."
+        },
+        {
+          "claim_id": "software-testing-observability-claim-2",
+          "statement": "Operational latency must report a distribution such as p50 and p95 rather than only a mean.",
+          "evidence_quote": "Operational latency must report a distribution such as p50 and p95 rather than only a mean."
+        }
+      ],
+      "evidence_representation": {
+        "kind": "deterministic-text-surrogate",
+        "origin_modality": "table",
+        "raw_asset_present": false
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "esv2-direct-01",
+      "slice": "direct",
+      "course_id": "database",
+      "question": "What atomicity rule applies to transaction changes?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-1",
+          "quote": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-02",
+      "slice": "direct",
+      "course_id": "distributed-systems",
+      "question": "What ordering does linearizability require?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-03",
+      "slice": "direct",
+      "course_id": "human-computer-interaction",
+      "question": "What does a usability test observe?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "quote": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-04",
+      "slice": "direct",
+      "course_id": "machine-learning",
+      "question": "When may the test split be used?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-1",
+          "quote": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-05",
+      "slice": "direct",
+      "course_id": "secure-web",
+      "question": "When must a session identifier be rotated?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-1",
+          "quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-06",
+      "slice": "direct",
+      "course_id": "software-testing",
+      "question": "What does a unit test isolate?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-1",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-07",
+      "slice": "direct",
+      "course_id": "database",
+      "question": "What must be true after a durable commit is acknowledged?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-2",
+          "statement": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-2",
+          "quote": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-08",
+      "slice": "direct",
+      "course_id": "distributed-systems",
+      "question": "What temporary state does eventual consistency allow?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "statement": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "quote": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-09",
+      "slice": "direct",
+      "course_id": "human-computer-interaction",
+      "question": "How must task performance and preference be recorded?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "statement": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "quote": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-10",
+      "slice": "direct",
+      "course_id": "machine-learning",
+      "question": "Which data should drive hyperparameter selection?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-2",
+          "statement": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-2",
+          "quote": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-11",
+      "slice": "direct",
+      "course_id": "secure-web",
+      "question": "What must a password reset do to active sessions?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-2",
+          "statement": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-2",
+          "quote": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-12",
+      "slice": "direct",
+      "course_id": "software-testing",
+      "question": "What makes a test deterministic?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-2",
+          "statement": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-2",
+          "quote": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-13",
+      "slice": "direct",
+      "course_id": "database",
+      "question": "What query pattern does a B-tree index support?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "statement": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-indexes-v2",
+          "claim_id": "database-indexes-claim-1",
+          "quote": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-14",
+      "slice": "direct",
+      "course_id": "distributed-systems",
+      "question": "What overlap must quorum reads and writes provide?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-replication-claim-1",
+          "statement": "A quorum read and write configuration must overlap on at least one replica."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-replication-v2",
+          "claim_id": "distributed-systems-replication-claim-1",
+          "quote": "A quorum read and write configuration must overlap on at least one replica."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-direct-15",
+      "slice": "direct",
+      "course_id": "human-computer-interaction",
+      "question": "What requirements apply to keyboard focus?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-01",
+      "slice": "paraphrase",
+      "course_id": "machine-learning",
+      "question": "Which data partition must stay sealed during model tuning?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-1",
+          "quote": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-02",
+      "slice": "paraphrase",
+      "course_id": "secure-web",
+      "question": "What should happen to the browser session ID as soon as login succeeds?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-1",
+          "quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-03",
+      "slice": "paraphrase",
+      "course_id": "software-testing",
+      "question": "How should a small test handle network or database dependencies?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-1",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-04",
+      "slice": "paraphrase",
+      "course_id": "database",
+      "question": "What happens if only part of a database operation can succeed?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-1",
+          "quote": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-05",
+      "slice": "paraphrase",
+      "course_id": "distributed-systems",
+      "question": "Where may a completed operation appear in a linearizable history?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-06",
+      "slice": "paraphrase",
+      "course_id": "human-computer-interaction",
+      "question": "Who should attempt which tasks during a usability study?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "quote": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-07",
+      "slice": "paraphrase",
+      "course_id": "machine-learning",
+      "question": "Where should threshold tuning occur before the final test?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-2",
+          "statement": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-2",
+          "quote": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-08",
+      "slice": "paraphrase",
+      "course_id": "secure-web",
+      "question": "After a user changes a compromised password, what happens to devices already signed in?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-2",
+          "statement": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-2",
+          "quote": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-09",
+      "slice": "paraphrase",
+      "course_id": "software-testing",
+      "question": "What outcome should repeated runs have when their controlled inputs do not change?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-2",
+          "statement": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-2",
+          "quote": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-10",
+      "slice": "paraphrase",
+      "course_id": "database",
+      "question": "Should acknowledged data remain after the database process restarts?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-2",
+          "statement": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-2",
+          "quote": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-11",
+      "slice": "paraphrase",
+      "course_id": "distributed-systems",
+      "question": "Can replicas return different values before updates have converged?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "statement": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "quote": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-12",
+      "slice": "paraphrase",
+      "course_id": "human-computer-interaction",
+      "question": "Why is liking an interface not the same as completing its workflow?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "statement": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "quote": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-13",
+      "slice": "paraphrase",
+      "course_id": "machine-learning",
+      "question": "Among items predicted positive, which fraction does precision count?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "statement": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-metrics-v2",
+          "claim_id": "machine-learning-metrics-claim-1",
+          "quote": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-14",
+      "slice": "paraphrase",
+      "course_id": "secure-web",
+      "question": "Which cookie setting prevents transmission over an unencrypted connection?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-cookies-v2",
+          "claim_id": "secure-web-cookies-claim-1",
+          "quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-paraphrase-15",
+      "slice": "paraphrase",
+      "course_id": "software-testing",
+      "question": "When should a test use the actual persistence or transport adapter?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-integration-claim-1",
+          "statement": "An integration test verifies a contract across real component boundaries."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-integration-v2",
+          "claim_id": "software-testing-integration-claim-1",
+          "quote": "An integration test verifies a contract across real component boundaries."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-01",
+      "slice": "multi-evidence",
+      "course_id": "database",
+      "question": "Answer both parts from distinct approved database sources: What atomicity rule applies to transaction changes; and what ordering does write-ahead logging require?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back."
+        },
+        {
+          "claim_id": "database-recovery-claim-1",
+          "statement": "Write-ahead log records must reach durable storage before their corresponding data pages."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "source_unit_id": "database-transactions-v2",
+          "quote": "A transaction commits all of its changes together or rolls all of them back."
+        },
+        {
+          "claim_id": "database-recovery-claim-1",
+          "source_unit_id": "database-recovery-v2",
+          "quote": "Write-ahead log records must reach durable storage before their corresponding data pages."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed-pending-human-confirmation",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-02",
+      "slice": "multi-evidence",
+      "course_id": "distributed-systems",
+      "question": "Answer both parts from distinct approved distributed-systems sources: What ordering does linearizability require; and what does a timeout establish?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        },
+        {
+          "claim_id": "distributed-systems-failure-claim-1",
+          "statement": "A timeout indicates missing timely evidence, not proof that a remote process has stopped."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        },
+        {
+          "claim_id": "distributed-systems-failure-claim-1",
+          "source_unit_id": "distributed-systems-failure-v2",
+          "quote": "A timeout indicates missing timely evidence, not proof that a remote process has stopped."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-03",
+      "slice": "multi-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "Answer both parts from distinct approved human-computer-interaction sources: What does a usability test observe; and when must a system acknowledge a user action?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks."
+        },
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-1",
+          "statement": "A system must acknowledge a user action promptly even when completion is asynchronous."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "quote": "A usability test observes representative users attempting representative tasks."
+        },
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-1",
+          "source_unit_id": "human-computer-interaction-feedback-v2",
+          "quote": "A system must acknowledge a user action promptly even when completion is asynchronous."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-04",
+      "slice": "multi-evidence",
+      "course_id": "machine-learning",
+      "question": "Answer both parts from distinct approved machine-learning sources: When may the test split be used; and what does precision measure?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        },
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "statement": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "source_unit_id": "machine-learning-splits-v2",
+          "quote": "The test split must remain untouched until the final model decision."
+        },
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "source_unit_id": "machine-learning-metrics-v2",
+          "quote": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-05",
+      "slice": "multi-evidence",
+      "course_id": "secure-web",
+      "question": "Answer both parts from distinct approved secure-web sources: When must a session identifier be rotated; and where must object authorization be checked?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        },
+        {
+          "claim_id": "secure-web-authorization-claim-1",
+          "statement": "Authorization must be checked for the specific requested object on every request."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "source_unit_id": "secure-web-sessions-v2",
+          "quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        },
+        {
+          "claim_id": "secure-web-authorization-claim-1",
+          "source_unit_id": "secure-web-authorization-v2",
+          "quote": "Authorization must be checked for the specific requested object on every request."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-06",
+      "slice": "multi-evidence",
+      "course_id": "software-testing",
+      "question": "Answer both parts from distinct approved software-testing sources: What does a unit test isolate; and what does an integration test verify?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        },
+        {
+          "claim_id": "software-testing-integration-claim-1",
+          "statement": "An integration test verifies a contract across real component boundaries."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "source_unit_id": "software-testing-unit-v2",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        },
+        {
+          "claim_id": "software-testing-integration-claim-1",
+          "source_unit_id": "software-testing-integration-v2",
+          "quote": "An integration test verifies a contract across real component boundaries."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-07",
+      "slice": "multi-evidence",
+      "course_id": "database",
+      "question": "Answer both parts from distinct approved database sources: What query pattern does a B-tree index support; and which anomaly can remain under snapshot isolation?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "statement": "A B-tree index supports ordered range scans without reading every table row."
+        },
+        {
+          "claim_id": "database-isolation-claim-2",
+          "statement": "Snapshot isolation can still permit write-skew anomalies across related rows."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "source_unit_id": "database-indexes-v2",
+          "quote": "A B-tree index supports ordered range scans without reading every table row."
+        },
+        {
+          "claim_id": "database-isolation-claim-2",
+          "source_unit_id": "database-isolation-v2",
+          "quote": "Snapshot isolation can still permit write-skew anomalies across related rows."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-08",
+      "slice": "multi-evidence",
+      "course_id": "distributed-systems",
+      "question": "Answer both parts from distinct approved distributed-systems sources: What overlap must quorum reads and writes provide; and what must happen to a committed log entry across leader changes?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-replication-claim-1",
+          "statement": "A quorum read and write configuration must overlap on at least one replica."
+        },
+        {
+          "claim_id": "distributed-systems-consensus-claim-2",
+          "statement": "A committed log entry must be preserved by future leaders."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "distributed-systems-replication-claim-1",
+          "source_unit_id": "distributed-systems-replication-v2",
+          "quote": "A quorum read and write configuration must overlap on at least one replica."
+        },
+        {
+          "claim_id": "distributed-systems-consensus-claim-2",
+          "source_unit_id": "distributed-systems-consensus-v2",
+          "quote": "A committed log entry must be preserved by future leaders."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-09",
+      "slice": "multi-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "Answer both parts from distinct approved human-computer-interaction sources: What requirements apply to keyboard focus; and what does progressive disclosure do?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        },
+        {
+          "claim_id": "human-computer-interaction-cognitive-load-claim-1",
+          "statement": "Progressive disclosure keeps advanced controls hidden until they are relevant."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        },
+        {
+          "claim_id": "human-computer-interaction-cognitive-load-claim-1",
+          "source_unit_id": "human-computer-interaction-cognitive-load-v2",
+          "quote": "Progressive disclosure keeps advanced controls hidden until they are relevant."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-10",
+      "slice": "multi-evidence",
+      "course_id": "machine-learning",
+      "question": "Answer both parts from distinct approved machine-learning sources: What penalty does L2 regularization add; and what does a calibrated probability of 0.8 mean?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-regularization-claim-1",
+          "statement": "L2 regularization adds a penalty proportional to squared parameter magnitude."
+        },
+        {
+          "claim_id": "machine-learning-calibration-claim-1",
+          "statement": "A calibrated 0.8 probability should be correct on about 80 percent of comparable predictions."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "machine-learning-regularization-claim-1",
+          "source_unit_id": "machine-learning-regularization-v2",
+          "quote": "L2 regularization adds a penalty proportional to squared parameter magnitude."
+        },
+        {
+          "claim_id": "machine-learning-calibration-claim-1",
+          "source_unit_id": "machine-learning-calibration-v2",
+          "quote": "A calibrated 0.8 probability should be correct on about 80 percent of comparable predictions."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-11",
+      "slice": "multi-evidence",
+      "course_id": "secure-web",
+      "question": "Answer both parts from distinct approved secure-web sources: What transport restriction does the Secure cookie flag impose; and what does the OAuth state value bind?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections."
+        },
+        {
+          "claim_id": "secure-web-oauth-claim-1",
+          "statement": "The OAuth state value binds the authorization response to the browser flow that initiated it."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "source_unit_id": "secure-web-cookies-v2",
+          "quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        },
+        {
+          "claim_id": "secure-web-oauth-claim-1",
+          "source_unit_id": "secure-web-oauth-v2",
+          "quote": "The OAuth state value binds the authorization response to the browser flow that initiated it."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-12",
+      "slice": "multi-evidence",
+      "course_id": "software-testing",
+      "question": "Answer both parts from distinct approved software-testing sources: What does a property test check; and what does mutation testing check?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-property-claim-1",
+          "statement": "A property test generates many inputs and checks an invariant rather than one example output."
+        },
+        {
+          "claim_id": "software-testing-mutation-claim-1",
+          "statement": "Mutation testing checks whether tests fail after a deliberate fault is inserted."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "software-testing-property-claim-1",
+          "source_unit_id": "software-testing-property-v2",
+          "quote": "A property test generates many inputs and checks an invariant rather than one example output."
+        },
+        {
+          "claim_id": "software-testing-mutation-claim-1",
+          "source_unit_id": "software-testing-mutation-v2",
+          "quote": "Mutation testing checks whether tests fail after a deliberate fault is inserted."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-13",
+      "slice": "multi-evidence",
+      "course_id": "database",
+      "question": "Answer both parts from distinct approved database sources: When does synchronous replication confirm a write; and what is the purpose of a recovery checkpoint?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-replication-claim-1",
+          "statement": "Synchronous replication waits for the required replica acknowledgement before confirming a write."
+        },
+        {
+          "claim_id": "database-recovery-claim-2",
+          "statement": "A recovery checkpoint limits how far the log must be replayed after restart."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "database-replication-claim-1",
+          "source_unit_id": "database-replication-v2",
+          "quote": "Synchronous replication waits for the required replica acknowledgement before confirming a write."
+        },
+        {
+          "claim_id": "database-recovery-claim-2",
+          "source_unit_id": "database-recovery-v2",
+          "quote": "A recovery checkpoint limits how far the log must be replayed after restart."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-14",
+      "slice": "multi-evidence",
+      "course_id": "distributed-systems",
+      "question": "Answer both parts from distinct approved distributed-systems sources: What property makes a monotonic clock suitable for elapsed time; and why must retried operations be idempotent or deduplicated?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-time-claim-1",
+          "statement": "A monotonic clock measures elapsed duration without moving backward after wall-clock adjustment."
+        },
+        {
+          "claim_id": "distributed-systems-failure-claim-2",
+          "statement": "Retries require idempotency or deduplication because a timed-out operation may have completed."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "distributed-systems-time-claim-1",
+          "source_unit_id": "distributed-systems-time-v2",
+          "quote": "A monotonic clock measures elapsed duration without moving backward after wall-clock adjustment."
+        },
+        {
+          "claim_id": "distributed-systems-failure-claim-2",
+          "source_unit_id": "distributed-systems-failure-v2",
+          "quote": "Retries require idempotency or deduplication because a timed-out operation may have completed."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multi-15",
+      "slice": "multi-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "Answer both parts from distinct approved human-computer-interaction sources: How must interview notes separate evidence and interpretation; and what information must an error message provide?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-research-claim-1",
+          "statement": "Interview notes must distinguish direct observations from researcher interpretation."
+        },
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-2",
+          "statement": "An error message must state what happened and provide a recoverable next action."
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "human-computer-interaction-research-claim-1",
+          "source_unit_id": "human-computer-interaction-research-v2",
+          "quote": "Interview notes must distinguish direct observations from researcher interpretation."
+        },
+        {
+          "claim_id": "human-computer-interaction-feedback-claim-2",
+          "source_unit_id": "human-computer-interaction-feedback-v2",
+          "quote": "An error message must state what happened and provide a recoverable next action."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-01",
+      "slice": "permission-version",
+      "course_id": "secure-web",
+      "question": "Using only the current approved source version, when must a session identifier be rotated?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-1",
+          "quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "secure-web-sessions-v1"
+      ],
+      "review_status": "codex-reviewed-pending-human-confirmation",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-02",
+      "slice": "permission-version",
+      "course_id": "secure-web",
+      "question": "Using only the current approved source version, what transport restriction does the Secure cookie flag impose?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-cookies-v2",
+          "claim_id": "secure-web-cookies-claim-1",
+          "quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "secure-web-cookies-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-03",
+      "slice": "permission-version",
+      "course_id": "database",
+      "question": "Using only the current approved source version, what atomicity rule applies to transaction changes?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-1",
+          "quote": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "database-transactions-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-04",
+      "slice": "permission-version",
+      "course_id": "database",
+      "question": "Using only the current approved source version, what query pattern does a B-tree index support?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "statement": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-indexes-v2",
+          "claim_id": "database-indexes-claim-1",
+          "quote": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "database-indexes-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-05",
+      "slice": "permission-version",
+      "course_id": "machine-learning",
+      "question": "Using only the current approved source version, when may the test split be used?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-1",
+          "quote": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "machine-learning-splits-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-06",
+      "slice": "permission-version",
+      "course_id": "machine-learning",
+      "question": "Using only the current approved source version, what does precision measure?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "statement": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-metrics-v2",
+          "claim_id": "machine-learning-metrics-claim-1",
+          "quote": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "machine-learning-metrics-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-07",
+      "slice": "permission-version",
+      "course_id": "human-computer-interaction",
+      "question": "Using only the current approved source version, what does a usability test observe?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "quote": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "human-computer-interaction-usability-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-08",
+      "slice": "permission-version",
+      "course_id": "human-computer-interaction",
+      "question": "Using only the current approved source version, what requirements apply to keyboard focus?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "human-computer-interaction-accessibility-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-09",
+      "slice": "permission-version",
+      "course_id": "distributed-systems",
+      "question": "Using only the current approved source version, what ordering does linearizability require?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "distributed-systems-consistency-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-permission-10",
+      "slice": "permission-version",
+      "course_id": "software-testing",
+      "question": "Using only the current approved source version, what does a unit test isolate?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-1",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [
+        "software-testing-unit-v1"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-multimodal-01",
+      "slice": "multimodal",
+      "course_id": "database",
+      "question": "From the approved diagram evidence, which index structure can serve an ordered range query efficiently?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-indexes-claim-1",
+          "statement": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-indexes-v2",
+          "claim_id": "database-indexes-claim-1",
+          "quote": "A B-tree index supports ordered range scans without reading every table row."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed-pending-human-confirmation",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-02",
+      "slice": "multimodal",
+      "course_id": "distributed-systems",
+      "question": "From the approved diagram evidence, why must the selected read and write replica sets intersect?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-replication-claim-1",
+          "statement": "A quorum read and write configuration must overlap on at least one replica."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-replication-v2",
+          "claim_id": "distributed-systems-replication-claim-1",
+          "quote": "A quorum read and write configuration must overlap on at least one replica."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-03",
+      "slice": "multimodal",
+      "course_id": "human-computer-interaction",
+      "question": "From the approved table evidence, how should focus visibility and order behave for keyboard users?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-04",
+      "slice": "multimodal",
+      "course_id": "machine-learning",
+      "question": "From the approved table evidence, which data partition must stay sealed during model tuning?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-1",
+          "quote": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-05",
+      "slice": "multimodal",
+      "course_id": "secure-web",
+      "question": "From the approved table evidence, which cookie setting prevents transmission over an unencrypted connection?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-cookies-v2",
+          "claim_id": "secure-web-cookies-claim-1",
+          "quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-06",
+      "slice": "multimodal",
+      "course_id": "software-testing",
+      "question": "From the approved code evidence, how should a small test handle network or database dependencies?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-1",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-07",
+      "slice": "multimodal",
+      "course_id": "database",
+      "question": "From the approved diagram evidence, what extra work does an insert perform when several indexes exist?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-indexes-claim-2",
+          "statement": "An index can slow writes because each affected index entry must also be maintained."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-indexes-v2",
+          "claim_id": "database-indexes-claim-2",
+          "quote": "An index can slow writes because each affected index entry must also be maintained."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-08",
+      "slice": "multimodal",
+      "course_id": "distributed-systems",
+      "question": "From the approved diagram evidence, why does three replicas not by itself prove tolerance of any two failures?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-replication-claim-2",
+          "statement": "A replication factor counts stored copies, not the number of failures automatically tolerated."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-replication-v2",
+          "claim_id": "distributed-systems-replication-claim-2",
+          "quote": "A replication factor counts stored copies, not the number of failures automatically tolerated."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-09",
+      "slice": "multimodal",
+      "course_id": "human-computer-interaction",
+      "question": "From the approved table evidence, do hover, disabled, and error states also need adequate contrast?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-2",
+          "statement": "Text and essential controls must satisfy the declared contrast requirement in every state."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "claim_id": "human-computer-interaction-accessibility-claim-2",
+          "quote": "Text and essential controls must satisfy the declared contrast requirement in every state."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-multimodal-10",
+      "slice": "multimodal",
+      "course_id": "machine-learning",
+      "question": "From the approved table evidence, where should threshold tuning occur before the final test?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-2",
+          "statement": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-2",
+          "quote": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "derived-text-from-modality-tagged-source"
+    },
+    {
+      "case_id": "esv2-near-answer-01",
+      "slice": "near-domain",
+      "course_id": "human-computer-interaction",
+      "question": "Within human-computer-interaction rather than an unrelated domain, who should attempt which tasks during a usability study?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "statement": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-1",
+          "quote": "A usability test observes representative users attempting representative tasks."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-02",
+      "slice": "near-domain",
+      "course_id": "machine-learning",
+      "question": "Within machine-learning rather than an unrelated domain, which data partition must stay sealed during model tuning?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-1",
+          "statement": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-1",
+          "quote": "The test split must remain untouched until the final model decision."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-03",
+      "slice": "near-domain",
+      "course_id": "secure-web",
+      "question": "Within secure-web rather than an unrelated domain, what should happen to the browser session ID as soon as login succeeds?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-1",
+          "statement": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-1",
+          "quote": "A session identifier must be rotated immediately after authentication to prevent session fixation."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-04",
+      "slice": "near-domain",
+      "course_id": "software-testing",
+      "question": "Within software-testing rather than an unrelated domain, how should a small test handle network or database dependencies?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-1",
+          "statement": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-1",
+          "quote": "A unit test isolates one behavior and controls external dependencies."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-05",
+      "slice": "near-domain",
+      "course_id": "database",
+      "question": "Within database rather than an unrelated domain, what happens if only part of a database operation can succeed?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-1",
+          "statement": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-1",
+          "quote": "A transaction commits all of its changes together or rolls all of them back."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-06",
+      "slice": "near-domain",
+      "course_id": "distributed-systems",
+      "question": "Within distributed-systems rather than an unrelated domain, where may a completed operation appear in a linearizable history?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "statement": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-1",
+          "quote": "Linearizability requires each completed operation to appear at one instant between invocation and response."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-07",
+      "slice": "near-domain",
+      "course_id": "human-computer-interaction",
+      "question": "Within human-computer-interaction rather than an unrelated domain, why is liking an interface not the same as completing its workflow?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "statement": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-usability-v2",
+          "claim_id": "human-computer-interaction-usability-claim-2",
+          "quote": "Task completion and observed breakdowns must be recorded separately from user preference."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-08",
+      "slice": "near-domain",
+      "course_id": "machine-learning",
+      "question": "Within machine-learning rather than an unrelated domain, where should threshold tuning occur before the final test?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-splits-claim-2",
+          "statement": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-splits-v2",
+          "claim_id": "machine-learning-splits-claim-2",
+          "quote": "Hyperparameters are selected using development or validation data rather than test outcomes."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-09",
+      "slice": "near-domain",
+      "course_id": "secure-web",
+      "question": "Within secure-web rather than an unrelated domain, after a user changes a compromised password, what happens to devices already signed in?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-sessions-claim-2",
+          "statement": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-sessions-v2",
+          "claim_id": "secure-web-sessions-claim-2",
+          "quote": "A password reset must revoke every active session for the account."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-10",
+      "slice": "near-domain",
+      "course_id": "software-testing",
+      "question": "Within software-testing rather than an unrelated domain, what outcome should repeated runs have when their controlled inputs do not change?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "software-testing-unit-claim-2",
+          "statement": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "software-testing-unit-v2",
+          "claim_id": "software-testing-unit-claim-2",
+          "quote": "A deterministic test must produce the same assertion result from the same controlled inputs."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-11",
+      "slice": "near-domain",
+      "course_id": "database",
+      "question": "Within database rather than an unrelated domain, should acknowledged data remain after the database process restarts?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "database-transactions-claim-2",
+          "statement": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "database-transactions-v2",
+          "claim_id": "database-transactions-claim-2",
+          "quote": "A durable commit must survive a process restart after success is acknowledged."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-12",
+      "slice": "near-domain",
+      "course_id": "distributed-systems",
+      "question": "Within distributed-systems rather than an unrelated domain, can replicas return different values before updates have converged?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "statement": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "distributed-systems-consistency-v2",
+          "claim_id": "distributed-systems-consistency-claim-2",
+          "quote": "Eventual consistency allows replicas to diverge temporarily when no new updates occur."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-13",
+      "slice": "near-domain",
+      "course_id": "human-computer-interaction",
+      "question": "Within human-computer-interaction rather than an unrelated domain, how should focus visibility and order behave for keyboard users?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "statement": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "human-computer-interaction-accessibility-v2",
+          "claim_id": "human-computer-interaction-accessibility-claim-1",
+          "quote": "Keyboard focus must remain visible and follow the same logical order as the interface."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-14",
+      "slice": "near-domain",
+      "course_id": "machine-learning",
+      "question": "Within machine-learning rather than an unrelated domain, among items predicted positive, which fraction does precision count?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "machine-learning-metrics-claim-1",
+          "statement": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "machine-learning-metrics-v2",
+          "claim_id": "machine-learning-metrics-claim-1",
+          "quote": "Precision is the fraction of predicted positives that are truly positive."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-answer-15",
+      "slice": "near-domain",
+      "course_id": "secure-web",
+      "question": "Within secure-web rather than an unrelated domain, which cookie setting prevents transmission over an unencrypted connection?",
+      "expected_action": "answer",
+      "required_claims": [
+        {
+          "claim_id": "secure-web-cookies-claim-1",
+          "statement": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "evidence": [
+        {
+          "source_unit_id": "secure-web-cookies-v2",
+          "claim_id": "secure-web-cookies-claim-1",
+          "quote": "The Secure cookie flag restricts transmission to HTTPS connections."
+        }
+      ],
+      "boundary_reason": null,
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-01",
+      "slice": "ambiguous",
+      "course_id": "database",
+      "question": "Within database, which current rule applies here: the transactions control or the indexes control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "database-transactions-v2",
+        "database-indexes-v2"
+      ],
+      "review_status": "codex-reviewed-pending-human-confirmation",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-02",
+      "slice": "ambiguous",
+      "course_id": "distributed-systems",
+      "question": "Within distributed-systems, which current rule applies here: the replication control or the consensus control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "distributed-systems-replication-v2",
+        "distributed-systems-consensus-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-03",
+      "slice": "ambiguous",
+      "course_id": "human-computer-interaction",
+      "question": "Within human-computer-interaction, which current rule applies here: the feedback control or the cognitive-load control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "human-computer-interaction-feedback-v2",
+        "human-computer-interaction-cognitive-load-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-04",
+      "slice": "ambiguous",
+      "course_id": "machine-learning",
+      "question": "Within machine-learning, which current rule applies here: the calibration control or the embeddings control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "machine-learning-calibration-v2",
+        "machine-learning-embeddings-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-05",
+      "slice": "ambiguous",
+      "course_id": "secure-web",
+      "question": "Within secure-web, which current rule applies here: the authorization control or the sessions control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "secure-web-authorization-v2",
+        "secure-web-sessions-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-06",
+      "slice": "ambiguous",
+      "course_id": "software-testing",
+      "question": "Within software-testing, which current rule applies here: the unit control or the integration control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "software-testing-unit-v2",
+        "software-testing-integration-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-07",
+      "slice": "ambiguous",
+      "course_id": "database",
+      "question": "Within database, which current rule applies here: the indexes control or the isolation control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "database-indexes-v2",
+        "database-isolation-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-08",
+      "slice": "ambiguous",
+      "course_id": "distributed-systems",
+      "question": "Within distributed-systems, which current rule applies here: the consensus control or the failure control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "distributed-systems-consensus-v2",
+        "distributed-systems-failure-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-09",
+      "slice": "ambiguous",
+      "course_id": "human-computer-interaction",
+      "question": "Within human-computer-interaction, which current rule applies here: the cognitive-load control or the research control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "human-computer-interaction-cognitive-load-v2",
+        "human-computer-interaction-research-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-ambiguous-10",
+      "slice": "ambiguous",
+      "course_id": "machine-learning",
+      "question": "Within machine-learning, which current rule applies here: the embeddings control or the splits control?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "multiple-in-scope-interpretations-not-resolved-by-question",
+      "tempting_source_ids": [
+        "machine-learning-embeddings-v2",
+        "machine-learning-splits-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-01",
+      "slice": "cross-course",
+      "course_id": "database",
+      "question": "For this database course, what rule applies to consistency?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "distributed-systems-consistency-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-02",
+      "slice": "cross-course",
+      "course_id": "distributed-systems",
+      "question": "For this distributed-systems course, what rule applies to indexes?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "database-indexes-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-03",
+      "slice": "cross-course",
+      "course_id": "human-computer-interaction",
+      "question": "For this human-computer-interaction course, what rule applies to isolation?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "database-isolation-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-04",
+      "slice": "cross-course",
+      "course_id": "machine-learning",
+      "question": "For this machine-learning course, what rule applies to replication?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "database-replication-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-05",
+      "slice": "cross-course",
+      "course_id": "secure-web",
+      "question": "For this secure-web course, what rule applies to recovery?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "database-recovery-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-06",
+      "slice": "cross-course",
+      "course_id": "software-testing",
+      "question": "For this software-testing course, what rule applies to consistency?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "distributed-systems-consistency-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-07",
+      "slice": "cross-course",
+      "course_id": "database",
+      "question": "For this database course, what rule applies to feedback?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "human-computer-interaction-feedback-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-08",
+      "slice": "cross-course",
+      "course_id": "distributed-systems",
+      "question": "For this distributed-systems course, what rule applies to cognitive-load?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "human-computer-interaction-cognitive-load-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-09",
+      "slice": "cross-course",
+      "course_id": "human-computer-interaction",
+      "question": "For this human-computer-interaction course, what rule applies to failure?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "distributed-systems-failure-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-cross-10",
+      "slice": "cross-course",
+      "course_id": "machine-learning",
+      "question": "For this machine-learning course, what rule applies to time?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "tempting-evidence-exists-only-outside-course-boundary",
+      "tempting_source_ids": [
+        "distributed-systems-time-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-abstain-01",
+      "slice": "near-domain",
+      "course_id": "secure-web",
+      "question": "How long should a physical-training session last?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "session vocabulary refers to exercise rather than browser authentication",
+      "tempting_source_ids": [
+        "secure-web-sessions-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-abstain-02",
+      "slice": "near-domain",
+      "course_id": "database",
+      "question": "What isolation period applies to an apartment escrow transaction?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "transaction and isolation vocabulary refers to real estate",
+      "tempting_source_ids": [
+        "database-transactions-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-abstain-03",
+      "slice": "near-domain",
+      "course_id": "machine-learning",
+      "question": "How should calibration adjust a laboratory pressure instrument?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "calibration refers to a physical instrument",
+      "tempting_source_ids": [
+        "machine-learning-calibration-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-abstain-04",
+      "slice": "near-domain",
+      "course_id": "human-computer-interaction",
+      "question": "Which accessibility standard applies to a public building ramp?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "accessibility refers to a physical building rather than an interface",
+      "tempting_source_ids": [
+        "human-computer-interaction-accessibility-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-near-abstain-05",
+      "slice": "near-domain",
+      "course_id": "distributed-systems",
+      "question": "Which consensus method should a focus group use to choose a logo?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "consensus refers to a human group decision",
+      "tempting_source_ids": [
+        "distributed-systems-consensus-v2"
+      ],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-01",
+      "slice": "no-evidence",
+      "course_id": "database",
+      "question": "What interest-rate target did the central bank announce?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-02",
+      "slice": "no-evidence",
+      "course_id": "distributed-systems",
+      "question": "Which antibiotic is recommended for a bacterial infection?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-03",
+      "slice": "no-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "How many grams of flour are required for the cake recipe?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-04",
+      "slice": "no-evidence",
+      "course_id": "machine-learning",
+      "question": "What is the train schedule between the two cities?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-05",
+      "slice": "no-evidence",
+      "course_id": "secure-web",
+      "question": "Which tax form reports foreign dividend income?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-06",
+      "slice": "no-evidence",
+      "course_id": "software-testing",
+      "question": "What is the tensile strength of the bridge cable?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-07",
+      "slice": "no-evidence",
+      "course_id": "database",
+      "question": "Who won the most recent football championship?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-08",
+      "slice": "no-evidence",
+      "course_id": "distributed-systems",
+      "question": "What temperature will it reach tomorrow afternoon?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-09",
+      "slice": "no-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "Which chord progression opens the jazz recording?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-10",
+      "slice": "no-evidence",
+      "course_id": "machine-learning",
+      "question": "How should the apartment lease allocate utility costs?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-11",
+      "slice": "no-evidence",
+      "course_id": "secure-web",
+      "question": "What fertilizer ratio is appropriate for tomato plants?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-12",
+      "slice": "no-evidence",
+      "course_id": "software-testing",
+      "question": "Which museum currently displays the sculpture?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-13",
+      "slice": "no-evidence",
+      "course_id": "database",
+      "question": "How does the telescope correct atmospheric distortion?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-14",
+      "slice": "no-evidence",
+      "course_id": "distributed-systems",
+      "question": "What dosage is printed on the medicine label?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    },
+    {
+      "case_id": "esv2-none-15",
+      "slice": "no-evidence",
+      "course_id": "human-computer-interaction",
+      "question": "Which customs code applies to the imported furniture?",
+      "expected_action": "abstain",
+      "required_claims": [],
+      "evidence": [],
+      "boundary_reason": "approved-course-corpus-contains-no-supporting-evidence",
+      "tempting_source_ids": [],
+      "review_status": "codex-reviewed",
+      "evidence_representation_scope": "retrieved-source-text"
+    }
+  ],
+  "priority_review_case_ids": [
+    "esv2-multi-01",
+    "esv2-multi-08",
+    "esv2-multimodal-01",
+    "esv2-multimodal-08",
+    "esv2-permission-01",
+    "esv2-permission-06",
+    "esv2-ambiguous-01",
+    "esv2-ambiguous-04",
+    "esv2-near-abstain-01",
+    "esv2-near-abstain-03",
+    "esv2-cross-01",
+    "esv2-none-01"
+  ],
+  "review": {
+    "structural_review": "passed",
+    "codex_full_semantic_review": "passed-with-four-deterministic-corrections",
+    "independent_advisory_review": "review-008-unreliable-no-dataset-conclusion",
+    "human_priority_review": "pending-four-case-confirmation",
+    "freeze_eligible": false
+  },
+  "predecessor": {
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+    "content_sha256": "7c43a9195ad95c660ec113e7499904439e5853ecf2653bf1025c32f233bcf023"
+  },
+  "audit_id": "evidence-sufficiency-v2-deterministic-audit-001",
+  "corrections": [
+    "multi-evidence-cases-bind-two-distinct-active-source-units",
+    "permission-version-cases-expose-the-paired-stale-source",
+    "multimodal-cases-declare-derived-text-only-evaluation-scope",
+    "priority-packet-covers-all-high-risk-boundaries"
+  ],
+  "evidence_representation_scope": {
+    "candidate_input": "retrieved-text-representation",
+    "modality_tagged_source_count": 23,
+    "raw_visual_assets_present": false,
+    "raw_visual_quality_evaluated": false,
+    "interpretation": "The multimodal slice tests evidence sufficiency after deterministic text representation of non-text sources; raw visual ingestion and region-grounding quality remain owned by issue 86."
+  },
+  "human_confirmation_case_ids": [
+    "esv2-multi-01",
+    "esv2-multimodal-01",
+    "esv2-permission-01",
+    "esv2-ambiguous-01"
+  ],
+  "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df"
+}

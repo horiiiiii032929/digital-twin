@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "freeze_id": "evidence-sufficiency-v2-decision-freeze-001",
+  "status": "frozen-not-opened",
+  "issue": 105,
+  "dataset": {
+    "dataset_id": "evidence-sufficiency-v2-decision-draft-002",
+    "path": "research/05_evaluation/drafts/evidence_sufficiency_v2_decision_draft_002.json",
+    "content_sha256": "ae367ed195a97e5144667f4936c799edcc64991a96ffbebeb505497ffc58c9df",
+    "file_sha256": "9fc8d984e0f0c43fbf683c6b984bf06d482c410761ca39862cab75d1686dd3c2",
+    "case_count": 120,
+    "source_count": 40,
+    "answer_count": 80,
+    "abstain_count": 40,
+    "opened_for_candidate_evaluation": false
+  },
+  "human_confirmation": {
+    "packet_id": "evidence-sufficiency-v2-deterministic-audit-001-human-confirmation",
+    "path": "research/05_evaluation/judgments/evidence-sufficiency-v2-deterministic-audit-001-human-confirmation.json",
+    "file_sha256": "a6e0446d624c9c14be361627fa001ee82b6917b2c5f1ca60f14cbc6dcb187f6c",
+    "confirmed_count": 4,
+    "pending_count": 0,
+    "confirmed_at": "2026-08-24"
+  },
+  "approved_boundaries": [
+    "multi-evidence-requires-two-distinct-active-source-units",
+    "multimodal-slice-is-derived-text-only-and-raw-visual-quality-remains-separate",
+    "active-version-is-authoritative-and-paired-inactive-version-is-an-explicit-distractor",
+    "ambiguous-evidence-abstains-and-the-tutoring-layer-may-clarify"
+  ],
+  "execution_safety": {
+    "dataset_frozen": true,
+    "candidate_evaluation_authorized": false,
+    "provider_execution_authorized": false,
+    "local_model_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "heldout_execution_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false
+  },
+  "next_gate": "Freeze exact candidates and execution limits, pass network-free preflight, then obtain separate authorization before opening the decision dataset."
+}

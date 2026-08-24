@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 499
+    "audited": 505
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 108,
+    "active_or_unclassified_tooling": 110,
     "active_runtime": 97,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 105,
+    "evaluation_configuration": 107,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 96
+    "verification": 98
   },
-  "file_count": 499,
+  "file_count": 505,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3fae407653e56e823241b7503ab43219bfb4d944c9c0917c6fdecf1279e96ec4",
+  "record_sha256": "71c606ab01f914f9da2f0485646499d1aef7f73d35df45184110be6b61f9e36f",
   "records": [
     {
       "audit": {
@@ -1287,8 +1287,8 @@
     },
     {
       "audit": {
-        "domain": "factual-qa-scale",
-        "evidence": "Command review confirms historical evidence reviews and factual-QA scale runs remain reproducible; review 008 adds separate direct-DeepSeek validation, simulation, read-only live preflight, and execution commands while every paid stage remains fail-closed outside correlated instrument and repository-freeze authorization.",
+        "domain": "evidence-sufficiency",
+        "evidence": "Command review confirms the corrected draft and its separate human-confirmed decision freeze are part of the complete local verification chain. The one-time write remains revoked and candidate execution remains closed.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "5363dfe83582817a9a76525a7d88342c9a5001485675a36f90c13230aed60bf4"
+      "sha256": "5444b2e84919c650990dfc5b0d92837d913d97d09d781af760525edcc1ca4eff"
     },
     {
       "audit": {
@@ -1716,6 +1716,38 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
       "risk": "high",
       "sha256": "f5f09c10e60cb54b7157ab219989744dd50f2301063b5a3f727e1a83c8cd141f"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Freeze review binds immutable draft 002 and all four completed human confirmations by exact content and file hashes while keeping candidate, provider, local-model, paid, private-source, held-out, automatic-selection, and release authorities closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_decision_freeze_001.json",
+      "risk": "high",
+      "sha256": "3cb3605855a40e2c0a156d9fa0ea62b14546967e8a7ddbda7556a2182fa657d4"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Post-execution review confirms the deterministic successor draft was written once at clean revision a1307c9, its exact content hash is recorded, and local authorization is revoked. Provider, paid, private-source, held-out, candidate, automatic-freeze, and product-selection operations remain explicitly unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_deterministic_audit_001.json",
+      "risk": "high",
+      "sha256": "e77769c1d489a3303cb6a748fab66fc8162df9205c152883058ea5b44ac2fc14"
     },
     {
       "audit": {
@@ -3440,11 +3472,32 @@
       "disposition": "active_audited",
       "package_commands": [
         "build:evidence-sufficiency-v2-draft",
-        "verify:evidence-sufficiency-v2-draft"
+        "build:evidence-sufficiency-v2-draft-002",
+        "verify:evidence-sufficiency-v2-draft",
+        "verify:evidence-sufficiency-v2-draft-002"
       ],
       "path": "scripts/build_evidence_sufficiency_v2_decision_draft.py",
       "risk": "high",
       "sha256": "6f81baf9fb58d1a2cca57a17b612966ec7d5979d89abb3d27bf2713096099698"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Code and semantic review confirm the immutable draft-001 binding, deterministic successor generation, two-source multi-evidence correction, exact inactive-version distractors, derived-text multimodal scope, bounded write authorization, byte-stable validation, and four-case human confirmation boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:evidence-sufficiency-v2-draft-002",
+        "verify:evidence-sufficiency-v2-draft-002"
+      ],
+      "path": "scripts/build_evidence_sufficiency_v2_decision_draft_002.py",
+      "risk": "high",
+      "sha256": "4131cdc33fa88774cde4d051086ff922beb0f3685a610afc0614a7fbf8dc550a"
     },
     {
       "audit": {
@@ -4881,11 +4934,30 @@
       "disposition": "active_audited",
       "package_commands": [
         "preflight:evidence-sufficiency-v2",
-        "verify:evidence-sufficiency-v2"
+        "verify:evidence-sufficiency-v2",
+        "verify:evidence-sufficiency-v2-decision-freeze"
       ],
       "path": "scripts/validate_evidence_sufficiency_v2.py",
       "risk": "high",
       "sha256": "567787029f5450758757e50e4c84dd7f039712ec6a72b771e92fa3d7a897d946"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Validator review confirms exact draft and confirmation bindings, complete action/source counts, four confirmed boundaries, unopened decision data, and fail-closed downstream authority without model or private-data access.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:evidence-sufficiency-v2-decision-freeze"
+      ],
+      "path": "scripts/validate_evidence_sufficiency_v2_decision_freeze.py",
+      "risk": "high",
+      "sha256": "9e3c3b4b18204f1077ae28ad932b26f2bbdb1f00f6d0c8df3415d88dd7145612"
     },
     {
       "audit": {
@@ -6534,9 +6606,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004 and 006\u2013008 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, private-source, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder remains registered as a protected entrypoint, its one-time local authorization is revoked, and only the historical oracle remains bounded; provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
         "findings": [],
-        "reviewed_at": "2026-08-23",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6545,7 +6617,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
+      "sha256": "dd2c1ccb7dcfef303052039f63243f4d71827cffb6303843074c944f9f7c1380"
     },
     {
       "audit": {
@@ -6966,9 +7038,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004 and 006\u2013008, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of completed deterministic audit 001 plus provider, paid, freeze, candidate, private-source, held-out, revoked, and unknown operations.",
         "findings": [],
-        "reviewed_at": "2026-08-23",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6977,7 +7049,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "a1493a197fd3cfe35cc508ce54732694d776dd2b442de90ee8c1e31a77df29e0"
+      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
     },
     {
       "audit": {
@@ -7410,6 +7482,22 @@
       "path": "tests/test_build_evidence_sufficiency_v2_decision_draft.py",
       "risk": "medium",
       "sha256": "b3251660b758e72b046084c7ab9f2028d3358c7b59243fe036a7e8d0043ec3d4"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Focused tests verify byte stability, the exact 120-case distribution, distinct active source lineage, stale-version pairing, derived-text multimodal scope, decision-packet coverage, and rejection of representative regressions.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_evidence_sufficiency_v2_decision_draft_002.py",
+      "risk": "medium",
+      "sha256": "a5585fc08477aaa14b91fe8bd3d88351da27cbe3a4300a9daf41b4fc45558ead"
     },
     {
       "audit": {
@@ -8165,6 +8253,22 @@
     },
     {
       "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Focused tests verify the current frozen package and reject decision-data opening, candidate authorization, and automatic selection drift.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_validate_evidence_sufficiency_v2_decision_freeze.py",
+      "risk": "medium",
+      "sha256": "43a987e5dcd3ba75f5fd9db5f7e08923d335db4770fcac6a1940c6ff217d3452"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -8245,8 +8349,8 @@
     }
   ],
   "risk_counts": {
-    "high": 389,
-    "medium": 110
+    "high": 393,
+    "medium": 112
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
