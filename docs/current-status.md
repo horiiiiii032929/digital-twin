@@ -289,6 +289,54 @@ decision remains **Refine** with no selected implementation. Because its source
 tree differs from V8, the V8 image identities are historical evidence; the
 current source has no image or publication claim.
 
+Prospective `evidence-sufficiency-v2-independent-review-005` replaces only that
+dropped reviewer binding. It pins stable `google/gemini-3.7-flash` to the exact
+Google AI Studio standard endpoint through native OpenRouter routing, records
+the dated backend identity `google/gemini-3.7-flash-20260813`, requires strict
+structured output, and disables retries and fallbacks. Its 13-call/132-judgment
+network-free simulation and complete repository gate pass. A clean live
+metadata-only preflight found no provider mismatch, a present credential, an
+unused output path, and exactly three deliberate locks: provider authorization,
+instrument freeze, and bounded-freeze allowlisting. The USD 0.39 maximum
+reservation remains below the USD 0.50 ceiling. No inference call occurred;
+review 005 is build-only and provider-unauthorized.
+
+`evidence-sufficiency-v2-independent-review-006` preserved review 005 unchanged
+and replaced its unexecuted reviewer binding before any quality result existed.
+Current official-model and endpoint research selected the exact
+OpenRouter `openai/gpt-5.4-mini` standard route with dated backend
+`openai/gpt-5.4-mini-20260317`: it is cross-family from the DeepSeek generator,
+supports strict structured output, and fits the same 13-call boundary. Because
+the endpoint does not advertise `temperature`, review 006 omits it and instead
+fixes reasoning effort to `none` and seed to `0`. The USD 0.429 maximum
+reservation remains below the USD 0.50 ceiling. This is a prospective
+quality-first choice, not evidence that GPT-5.4 mini has passed the project
+rubric. The separately authorized run stopped on its first sensitivity request:
+OpenRouter returned HTTP 400 `Provider returned error` before any provider
+response. No bulk call, judgment, reported token, or cost occurred; the current
+key endpoint returned HTTP 200 immediately afterward. The result is invalid
+operational evidence and supports no reviewer- or dataset-quality conclusion.
+Authorization is revoked and this exact OpenRouter/GPT binding must not be
+retried. Review 005 remains preserved and unexecuted rather than becoming an
+outcome-based fallback. Issue #105 now requires one explicit method-level
+decision instead of another OpenRouter prompt or routing refinement.
+
+Review 007 applied that method-level correction without changing
+the reviewer model or dataset. It keeps GPT-5.4 mini, the dated model snapshot,
+strict structured output, deterministic authority, zero retries, and the
+sensitivity-first stop. It removes nonessential reasoning and seed parameters,
+allows OpenRouter to fall through from OpenAI to compatible Azure capacity for
+the same model, and raises the emergency ceiling to USD 1.50 using a USD 0.858
+worst-case reservation. The network-free 13-call/132-judgment simulation and
+live metadata-only match passed. Its separately authorized run again stopped
+on the first sensitivity request with HTTP 400 before any provider response.
+OpenRouter exposed only the OpenAI endpoint as compatible under the request
+contract and did not select it successfully; the Azure fallback did not become
+an available route. The current-key endpoint still returned HTTP 200. No bulk
+call, judgment, reported token, or cost occurred. Review 007 is invalid,
+authorization is revoked, and the OpenRouter reviewer path must not be retried.
+Dataset freezing and every downstream decision remain unauthorized.
+
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
 defects and 6/6 visual defects at USD 0. The corrected attempt also passed 6/6

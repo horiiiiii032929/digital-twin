@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 495
+    "audited": 498
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 101,
+    "evaluation_configuration": 104,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 96
   },
-  "file_count": 495,
+  "file_count": 498,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "453a163fd030459b065fbec3f9f7e389f6ee8f568f943c49e904c3a47afa28ae",
+  "record_sha256": "8236cfc489d543db162f9e83ef3f98643093d588fd9b32e5477e5d610ef1a34c",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "factual-qa-scale",
-        "evidence": "Command review confirms separate validation, no-call and live preflight, full simulation, and exact execution commands for the provider-unauthorized remaining-9,000 completion stage.",
+        "evidence": "Command review confirms historical evidence reviews and factual-QA scale runs remain reproducible through separate validation, simulation, preflight, and execution commands; revoked reviews and completed factual-QA stages remain fail-closed outside correlated instrument and repository-freeze authorization.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "c14e5d2c682e293e40ab4d31a2a7dfce896c8c8057ba3b6dffe34f5fc5732737"
+      "sha256": "c3e2da10a666dd3b89969d22f0614e052ab13bfe2fd129f0e01725f4df04a2ea"
     },
     {
       "audit": {
@@ -1780,6 +1780,54 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_004.json",
       "risk": "high",
       "sha256": "0c75d3955177ad66b2e9800ef03bea62c866b575d1dc34eb9be7dea76f423c25"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "Manual prospective review and focused tests bind stable google/gemini-3.7-flash to the exact Google AI Studio standard endpoint, dated backend identity, strict schema, zero retries/fallbacks, 13-call and USD 0.50 ceilings, synthetic-public inputs, and explicit provider-unauthorized state.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_005.json",
+      "risk": "high",
+      "sha256": "2ca5f61d9165cdbd324f3eb1a273bca6aa6954023484991c7fb3a19c67b81002"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "The frozen review-006 sensitivity request returned HTTP 400 before any provider response; zero bulk calls, judgments, reported tokens, or cost occurred. Authorization is revoked, the exact OpenRouter/GPT binding is do-not-retry, and dataset freeze plus candidate evaluation remain blocked.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_006.json",
+      "risk": "high",
+      "sha256": "730be867fe8718c477e4d5723ecf80195b9d471c2ede9955e5dc14b92e851e5f"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency-review",
+        "evidence": "The frozen review-007 sensitivity request returned HTTP 400 before any provider response despite minimized parameters and same-model fallback; zero bulk calls, judgments, reported tokens, or cost occurred. Authorization is revoked, the OpenRouter reviewer path is do-not-retry, and dataset freeze plus candidate evaluation remain blocked.",
+        "findings": [],
+        "reviewed_at": "2026-08-22",
+        "reviewer": "codex-primary-data-quality-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_007.json",
+      "risk": "high",
+      "sha256": "32141e75cfadbc520f613147123ef3b09a868ca2ad4e960c6c7c756c9115e60f"
     },
     {
       "audit": {
@@ -3034,7 +3082,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Independent CLI/tooling review and focused model-policy tests verify stable Gemini 3.7 Flash is registered only as a prospective provider-unauthorized evidence-sufficiency reviewer while Gemma, Claude, retired Qwen, silent fallback, and unregistered execution remain blocked.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -3052,7 +3100,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Independent CLI and tooling review, focused model-policy tests, guarded-entrypoint checks, and active freeze validation verify the current GPT-5.4 mini candidate is registered explicitly while prohibited models, unregistered execution, provider calls, and held-out reads remain blocked.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -3860,7 +3908,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Manual fail-closed review plus focused tests verify historical 002/003 and prospective 004 states, strict response-format, native OpenRouter endpoint bindings, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
+        "evidence": "Manual fail-closed review plus focused tests verify historical 002-006 and prospective 007 states, strict response formats, resilient same-model fallback, optional sampling controls, correlated provider authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -3875,7 +3923,7 @@
       ],
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "2a3cb691294f023abbfb8c08b2a58e53fb1ee683f14a80ffc0d344294d00cae9"
+      "sha256": "3e72b0e3036aa3cd5460f57d543c4dd0c94529f8f09f96902b7b3b4d95fb952b"
     },
     {
       "audit": {
@@ -4106,7 +4154,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Manual successor state-machine review plus 13-call simulation and focused failure tests confirm the official OpenRouter chat-completions payload, bearer authentication, top-level provider routing, strict JSON Schema, router-metadata opt-in, sanitized native HTTP/request/generation diagnostics, sensitivity-first stopping, disabled retries/fallbacks, atomic checkpoints, binding-safe resume, dynamic exclusive output, and absent execution authority.",
+        "evidence": "Manual successor state-machine review plus the 13-call simulation and focused failure tests confirm model-specific live endpoint metadata, dated GPT backend identity, omitted nonessential sampling controls, strict JSON Schema, resilient same-model OpenAI/Azure provider fallback, router diagnostics, sensitivity-first stopping, zero retries, atomic checkpoints, binding-safe resume, exclusive output, and absent execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -4116,18 +4164,30 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:evidence-sufficiency-v2-review-004",
+        "execute:evidence-sufficiency-v2-review-005",
+        "execute:evidence-sufficiency-v2-review-006",
+        "execute:evidence-sufficiency-v2-review-007",
         "execute:evidence-sufficiency-v2-review-runner",
         "preflight-live:evidence-sufficiency-v2-review-004",
+        "preflight-live:evidence-sufficiency-v2-review-005",
+        "preflight-live:evidence-sufficiency-v2-review-006",
+        "preflight-live:evidence-sufficiency-v2-review-007",
         "preflight-live:evidence-sufficiency-v2-review-runner",
         "preflight:evidence-sufficiency-v2-review-runner",
         "simulate:evidence-sufficiency-v2-review-004",
+        "simulate:evidence-sufficiency-v2-review-005",
+        "simulate:evidence-sufficiency-v2-review-006",
+        "simulate:evidence-sufficiency-v2-review-007",
         "simulate:evidence-sufficiency-v2-review-runner",
         "verify:evidence-sufficiency-v2-review-004",
+        "verify:evidence-sufficiency-v2-review-005",
+        "verify:evidence-sufficiency-v2-review-006",
+        "verify:evidence-sufficiency-v2-review-007",
         "verify:evidence-sufficiency-v2-review-runner"
       ],
       "path": "scripts/run_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
-      "sha256": "b62203a3926635a0db922e9860dcf9f056cb1e098691c657c80d8173fe30b685"
+      "sha256": "ff2b016f8a3aa6e9286ddab1053ac2ed25e0487e25bdb5fca4333a1d55ae9d87"
     },
     {
       "audit": {
@@ -4877,7 +4937,7 @@
       ],
       "path": "scripts/validate_model_policy.py",
       "risk": "high",
-      "sha256": "6d4a72773695e27dc20ffd11ab4c563fab5cef1b390584ebbe00cbb1d35e82e6"
+      "sha256": "c1f1c76804ac835ba2270ed1ec4a5ac29a7f78b6dac6276d2c12e87ec34ecf44"
     },
     {
       "audit": {
@@ -6182,7 +6242,7 @@
     {
       "audit": {
         "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model/message contract review verified registered current-model enforcement, safe task metadata, and response identity controls; focused model-policy tests passed.",
+        "evidence": "Manual model-policy review verifies stable Gemini 3.7 Flash is registered with exact OpenRouter and provider slugs as prospective and unselected; existing prohibited-model and exact-registration controls remain unchanged and focused tests pass.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6198,7 +6258,7 @@
     {
       "audit": {
         "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model/message contract review verified registered current-model enforcement, safe task metadata, and response identity controls; focused model-policy tests passed.",
+        "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of invalid reviews 006 and 007 plus unexecuted Gemini history, and prohibition of another OpenRouter retry.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6209,7 +6269,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "ac490596050108c31cd581b5feb0fddb408823d8af09acdc71c59c1761c77d22"
+      "sha256": "68111d027847a9a4f82ba7bc5c6a4a121abeed7e6dfd6b9dab6c6e427dbbe768"
     },
     {
       "audit": {
@@ -6454,7 +6514,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active after completion 001 authorization was revoked and removed; only the historical oracle authorization remains.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004, 006, and 007 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6726,7 +6786,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage confirms the prospective Gemini reviewer is accepted by exact registration while prohibited Gemma, Claude, retired local models, and package-command execution remain blocked.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6742,7 +6802,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage verifies metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, profile activation, and exact registration of the prospective GPT-5.4 mini reviewer.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6774,7 +6834,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, current-model acceptance, exact GPT evidence-review status, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6886,7 +6946,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and rejection of revoked completion 001 plus every other unreviewed stage.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004, 006, and 007, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6897,12 +6957,12 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "2cdd89b27e8081006c64c5b76d80f274482379020b142219ea7881bced8f1f27"
+      "sha256": "566a1e7d1e15ef40aedce6e0c32a8c0189c3a51654b237af5da60929b0349111"
     },
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, current-model acceptance, preserved invalid review 006 plus prospective review 007 status, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6934,7 +6994,7 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "evidence": "Focused regression coverage verifies current-model acceptance, preservation of invalid reviews 006 and 007, prohibition of another OpenRouter retry, provider failures, source lineage, course isolation, multimodal ranking, and profile activation.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -7761,7 +7821,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "bd682dd910c384d931a39ed31d1ad910e5736e0fbf529a0083fec8b55a7ade3c"
+      "sha256": "b5d74e7f3d9708637db69094b0492aa4a1f67f7daf104ed5ec53b27b9a0787d2"
     },
     {
       "audit": {
@@ -7910,7 +7970,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions preserve revoked 002\u2013004 contracts, the exact official OpenRouter payload, router metadata and request IDs, sanitized upstream 401 evidence without credential leakage, strict schemas, sensitivity stop, provider/identity/cost failures, interruption/resume, authorization locks, endpoint freshness, and output exclusivity.",
+        "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006-007 contracts while verifying same-model fallback history, omitted reasoning/seed fields, USD 1.50 ceiling, strict schemas, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and revoked execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-22",
         "reviewer": "codex-primary-data-quality-review"
@@ -7921,7 +7981,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "9afb16d6f138af3258b166a876ff6ffd75acfd18bcebace29626b0f3a9667a53"
+      "sha256": "b36586824ad0ba1743db11c87fbdd7e6051bdcd9c4bd9460a275e8039e7d8eee"
     },
     {
       "audit": {
@@ -8165,7 +8225,7 @@
     }
   ],
   "risk_counts": {
-    "high": 385,
+    "high": 388,
     "medium": 110
   },
   "schema_version": 1,

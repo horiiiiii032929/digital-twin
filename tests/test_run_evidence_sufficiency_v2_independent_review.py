@@ -17,6 +17,18 @@ INSTRUMENT_004_PATH = Path(
     "research/05_evaluation/instruments/"
     "evidence_sufficiency_v2_independent_review_004.json"
 )
+INSTRUMENT_005_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_005.json"
+)
+INSTRUMENT_006_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_006.json"
+)
+INSTRUMENT_007_PATH = Path(
+    "research/05_evaluation/instruments/"
+    "evidence_sufficiency_v2_independent_review_007.json"
+)
 
 
 @pytest.fixture
@@ -41,23 +53,33 @@ def _transport(assets: dict, **kwargs) -> runner.SimulatedReviewTransport:
 
 def _live_metadata(assets: dict) -> dict:
     safety = assets["instrument"]["execution_safety"]
+    supported_parameters = [
+        "max_tokens",
+        "response_format",
+        "structured_outputs",
+    ]
+    if safety.get("temperature") is not None:
+        supported_parameters.append("temperature")
+    if safety.get("reasoning_effort") is not None:
+        supported_parameters.append("reasoning_effort")
+    if safety.get("seed") is not None:
+        supported_parameters.append("seed")
     return {
         "verified_at": "2026-08-22T06:30:00+00:00",
         "registry": {
             "data": [
                 {
                     "id": safety["reviewer_model"],
-                    "context_length": 262_144,
+                    "context_length": safety["provider_context_window_tokens"],
                     "pricing": {
-                        "prompt": "0.00000015",
-                        "completion": "0.0000006",
+                        "prompt": str(
+                            safety["pricing_usd_per_million_input_tokens"] / 1_000_000
+                        ),
+                        "completion": str(
+                            safety["pricing_usd_per_million_output_tokens"] / 1_000_000
+                        ),
                     },
-                    "supported_parameters": [
-                        "max_tokens",
-                        "response_format",
-                        "structured_outputs",
-                        "temperature",
-                    ],
+                    "supported_parameters": supported_parameters,
                 }
             ]
         },
@@ -65,19 +87,27 @@ def _live_metadata(assets: dict) -> dict:
             "data": {
                 "endpoints": [
                     {
-                        "provider_name": "Mistral",
+                        "provider_name": safety.get(
+                            "reviewer_endpoint_provider_name", "Mistral"
+                        ),
+                        "tag": safety.get("reviewer_endpoint_tag"),
+                        "name": (
+                            f"{safety.get('reviewer_endpoint_provider_name', 'Mistral')}"
+                            f" | {safety.get('reviewer_backend_model', safety['reviewer_model'])}"
+                        ),
                         "status": 0,
-                        "context_length": 262_144,
+                        "context_length": safety["provider_context_window_tokens"],
                         "pricing": {
-                            "prompt": "0.00000015",
-                            "completion": "0.0000006",
+                            "prompt": str(
+                                safety["pricing_usd_per_million_input_tokens"]
+                                / 1_000_000
+                            ),
+                            "completion": str(
+                                safety["pricing_usd_per_million_output_tokens"]
+                                / 1_000_000
+                            ),
                         },
-                        "supported_parameters": [
-                            "max_tokens",
-                            "response_format",
-                            "structured_outputs",
-                            "temperature",
-                        ],
+                        "supported_parameters": supported_parameters,
                     }
                 ]
             }
@@ -116,6 +146,167 @@ def test_native_openrouter_attempt_is_invalid_and_revoked() -> None:
     assert assets["packet"]["content_sha256"] == (
         "75fc54d28a708df7a36150f0519db6eb7429b6e625ebbde7feceecfa817f8fbd"
     )
+
+
+def test_review_005_binds_stable_gemini_to_exact_google_endpoint() -> None:
+    assets = runner.load_assets(INSTRUMENT_005_PATH)
+    safety = assets["instrument"]["execution_safety"]
+
+    assert assets["instrument"]["status"] == "reviewer-bound-provider-unauthorized"
+    assert safety["provider_execution_authorized"] is False
+    assert safety["reviewer_model"] == "google/gemini-3.7-flash"
+    assert safety["reviewer_backend_model"] == ("google/gemini-3.7-flash-20260813")
+    assert safety["provider_routing"] == {
+        "order": ["google-ai-studio"],
+        "allow_fallbacks": False,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert safety["maximum_reserved_cost_usd"] == 0.39
+    assert assets["packet"]["content_sha256"] == (
+        "94fad389cdddbb6c1e10f45a8e6d18f11e84d570195855010c293009ab146efb"
+    )
+
+
+def test_review_006_is_invalid_revoked_and_binds_snapshot_gpt_endpoint() -> None:
+    assets = runner.load_assets(INSTRUMENT_006_PATH)
+    safety = assets["instrument"]["execution_safety"]
+
+    assert assets["instrument"]["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert (
+        assets["instrument"]["decision_rule"]["authorize_provider_execution"] is False
+    )
+    assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
+    assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
+    assert safety["temperature"] is None
+    assert safety["reasoning_effort"] == "none"
+    assert safety["seed"] == 0
+    assert safety["provider_routing"] == {
+        "order": ["openai"],
+        "allow_fallbacks": False,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert safety["maximum_reserved_cost_usd"] == 0.429
+    assert assets["packet"]["content_sha256"] == (
+        "40c8bea9f9316a12b1a55fba8aadaac82a6a8434c70499c8ee0aafd8eb94a64e"
+    )
+
+
+@pytest.mark.asyncio
+async def test_review_006_native_request_omits_temperature_and_pins_reasoning(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_006_PATH)
+    binding = runner._provider_binding(assets["instrument"])
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return httpx.Response(
+            200,
+            json={
+                "id": "gen-synthetic",
+                "model": "openai/gpt-5.4-mini",
+                "system_fingerprint": "fp-synthetic",
+                "choices": [{"message": {"content": '{"judgments": []}'}}],
+                "usage": {
+                    "prompt_tokens": 12,
+                    "completion_tokens": 3,
+                    "cost": 0.0000225,
+                },
+            },
+            request=httpx.Request("POST", runner.OPENROUTER_CHAT_URL),
+        )
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "synthetic-test-key")
+    transport = runner.NativeOpenRouterReviewTransport(binding, post=post)
+    await transport.call(
+        system="Synthetic system message.",
+        prompt='{"items": []}',
+        task="synthetic_review",
+        schema=runner._response_schema(1),
+    )
+
+    assert "temperature" not in captured["json"]
+    assert captured["json"]["reasoning"] == {"effort": "none", "exclude": True}
+    assert captured["json"]["seed"] == 0
+    assert captured["json"]["provider"]["order"] == ["openai"]
+
+
+def test_review_007_is_invalid_revoked_with_resilient_same_model_contract() -> None:
+    assets = runner.load_assets(INSTRUMENT_007_PATH)
+    safety = assets["instrument"]["execution_safety"]
+
+    assert assets["instrument"]["status"] == "invalid-execution-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert assets["instrument"]["decision_rule"]["authorize_provider_execution"] is False
+    assert safety["reviewer_model"] == "openai/gpt-5.4-mini"
+    assert safety["reviewer_backend_model"] == "openai/gpt-5.4-mini-20260317"
+    assert safety["reasoning_effort"] is None
+    assert safety["seed"] is None
+    assert safety["provider_routing"] == {
+        "order": ["openai", "azure"],
+        "allow_fallbacks": True,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert safety["maximum_reserved_cost_usd"] == 0.858
+    assert safety["maximum_cost_usd"] == 1.5
+    assert assets["packet"]["content_sha256"] == (
+        "a6cdda77cb824cc620577cc1fcab23ec17166fa78ba525faaf3ff811b062eed7"
+    )
+
+
+@pytest.mark.asyncio
+async def test_review_007_request_omits_nonessential_sampling_parameters(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_007_PATH)
+    binding = runner._provider_binding(assets["instrument"])
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return httpx.Response(
+            200,
+            json={
+                "id": "gen-synthetic",
+                "model": "openai/gpt-5.4-mini",
+                "system_fingerprint": "fp-synthetic",
+                "choices": [{"message": {"content": '{"judgments": []}'}}],
+                "usage": {
+                    "prompt_tokens": 12,
+                    "completion_tokens": 3,
+                    "cost": 0.0000225,
+                },
+            },
+            request=httpx.Request("POST", runner.OPENROUTER_CHAT_URL),
+        )
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "synthetic-test-key")
+    transport = runner.NativeOpenRouterReviewTransport(binding, post=post)
+    await transport.call(
+        system="Synthetic system message.",
+        prompt='{"items": []}',
+        task="synthetic_review",
+        schema=runner._response_schema(1),
+    )
+
+    assert "temperature" not in captured["json"]
+    assert "reasoning" not in captured["json"]
+    assert "seed" not in captured["json"]
+    assert captured["json"]["provider"] == {
+        "order": ["openai", "azure"],
+        "allow_fallbacks": True,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
 
 
 @pytest.mark.asyncio
@@ -616,7 +807,32 @@ def test_preflight_detects_endpoint_context_drift(
         now=verified + timedelta(hours=1),
     )
 
-    assert "mistral-endpoint-context-drift" in result["live_provider_failures"]
+    assert "reviewer-endpoint-context-drift" in result["live_provider_failures"]
+    assert "provider-metadata-not-current" in result["blockers"]
+
+
+def test_preflight_detects_exact_backend_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assets = runner.load_assets(INSTRUMENT_006_PATH)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-only")
+    monkeypatch.setattr(runner, "_working_tree_dirty", lambda: False)
+    live = _live_metadata(assets)
+    live["endpoints"]["data"]["endpoints"][0]["name"] = (
+        "OpenAI | openai/gpt-5.4-mini-unexpected"
+    )
+    verified = datetime.fromisoformat(
+        assets["instrument"]["execution_safety"]["reviewer_verified_at"]
+    )
+
+    result = runner.build_preflight(
+        assets,
+        output_path=tmp_path / "backend-drift.json",
+        live_metadata=live,
+        now=verified + timedelta(hours=1),
+    )
+
+    assert "reviewer-backend-model-drift" in result["live_provider_failures"]
     assert "provider-metadata-not-current" in result["blockers"]
 
 

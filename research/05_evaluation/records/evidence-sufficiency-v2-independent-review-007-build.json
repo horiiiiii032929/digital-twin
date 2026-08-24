@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-007-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "3685697247fa2d75a277b621b4492033e5eb5903",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gpt-5-4-mini-review-006",
+        "version": "invalid-single-provider-control",
+        "configuration": {
+          "model": "openai/gpt-5.4-mini",
+          "backend": "openai/gpt-5.4-mini-20260317",
+          "provider_routes": 1,
+          "nonessential_optional_parameters": 2,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "compatible-same-model-provider-routes",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "nonessential-optional-request-parameters",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.429,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "same-model-provider-recovery",
+          "passed": false,
+          "evidence": "Review 006 restricted routing to one OpenAI endpoint and disabled fallback."
+        },
+        {
+          "name": "request-parameter-minimization",
+          "passed": false,
+          "evidence": "Review 006 sent nonessential reasoning and seed parameters and received HTTP 400 before a provider response."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "Review 006 completed its network-free 13-call and 132-judgment simulation."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Review 006 authorization was revoked after its invalid one-call execution."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "The invalid review 006 result remains registered and unchanged."
+        }
+      ],
+      "failures_by_category": {
+        "provider-routing": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gpt-5-4-mini-resilient-review-007",
+        "version": "same-model-fallback-provider-unauthorized-build",
+        "configuration": {
+          "model": "openai/gpt-5.4-mini",
+          "backend": "openai/gpt-5.4-mini-20260317",
+          "provider_routes": 2,
+          "nonessential_optional_parameters": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "compatible-same-model-provider-routes",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "nonessential-optional-request-parameters",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.858,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "same-model-provider-recovery",
+          "passed": true,
+          "evidence": "OpenRouter may use compatible OpenAI or Azure capacity while retaining the exact requested model."
+        },
+        {
+          "name": "request-parameter-minimization",
+          "passed": true,
+          "evidence": "Temperature, reasoning effort, and seed are omitted; strict JSON Schema remains required."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "All 13 simulated calls and 132 judgments completed with every sensitivity gate passing."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Instrument, bounded freeze, and provider authorization locks remain closed."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Review 007 has a new identity and leaves invalid review 006 and unexecuted review 005 unchanged."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "openrouter-gpt-5-4-mini-resilient-review-007",
+    "rationale": "Use one same-model resilient confirmation candidate because the prior failure cost USD 0 and occurred before a provider response; remove nonessential parameters and permit compatible provider capacity without weakening structured output or deterministic authority.",
+    "limitations": [
+      "No review-007 provider inference occurred, so reviewer quality and live route stability remain unknown.",
+      "Endpoint metadata can drift and must be refreshed within 24 hours before execution.",
+      "The higher ceiling protects completion but is not a quality criterion or target spend.",
+      "The decision dataset remains unfrozen and no evidence-sufficiency implementation is selected."
+    ]
+  }
+}

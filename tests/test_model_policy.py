@@ -5,8 +5,11 @@ import pytest
 
 from scripts.run_factual_qa_quality_pilot import OllamaJsonTransport
 from src.digital_twin.model_policy import (
+    CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
+    OPENROUTER_GEMINI_REVIEW_MODEL,
+    OPENROUTER_GPT_MINI_REVIEW_MODEL,
     OPENROUTER_INDEPENDENT_REVIEW_MODEL,
     OPENROUTER_QWEN_REVIEW_MODEL,
     ModelPolicyError,
@@ -45,6 +48,8 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
         OPENROUTER_DEEPSEEK_MODEL,
         OPENROUTER_INDEPENDENT_REVIEW_MODEL,
         OPENROUTER_QWEN_REVIEW_MODEL,
+        OPENROUTER_GEMINI_REVIEW_MODEL,
+        OPENROUTER_GPT_MINI_REVIEW_MODEL,
         "Qwen/Qwen3-Embedding-0.6B",
         "Qwen/Qwen3-Reranker-0.6B",
         "jina-embeddings-v5-text-small",
@@ -53,6 +58,16 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
 )
 def test_registered_current_models_are_accepted(model):
     assert require_registered_current_model(model) == model
+
+
+def test_gpt_evidence_reviewer_openrouter_path_is_invalid_and_not_retried():
+    binding = next(
+        item
+        for item in CURRENT_MODEL_BINDINGS
+        if item.provider_model == OPENROUTER_GPT_MINI_REVIEW_MODEL
+    )
+
+    assert binding.status == "reviews-006-007-invalid-openrouter-do-not-retry"
 
 
 def test_retired_factual_qa_instrument_cannot_construct_local_transport():
@@ -84,9 +99,12 @@ def test_controlled_openrouter_policy_is_strict_and_returned_by_value():
         }
     }
     options["extra_body"]["provider"]["allow_fallbacks"] = True
-    assert controlled_openrouter_provider_options()["extra_body"]["provider"][
-        "allow_fallbacks"
-    ] is False
+    assert (
+        controlled_openrouter_provider_options()["extra_body"]["provider"][
+            "allow_fallbacks"
+        ]
+        is False
+    )
 
 
 def test_package_commands_cannot_execute_retired_models():
