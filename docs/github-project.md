@@ -50,12 +50,12 @@ professor-communication track.
 ## Critical path
 
 1. #105 — preserve candidate comparison 001 as Refine and do not tune its
-   consumed split. The post-generation atomic-claim successor is now build-ready
-   on a fresh, unopened 120-case confirmation: deterministic code owns lineage
-   and release, while a pinned local NLI verifier supplies bounded claim-support
-   signals. The complete repository gate passes, but execution and product
-   binding remain unauthorized. Run this confirmation once after a separate
-   authorization; do not start another model search.
+   consumed split. The post-generation NLI atomic-claim successor passed every
+   frozen gate on a fresh 120-case confirmation: zero false releases, 95%
+   supported retention, complete mutation/lineage/malformed rejection, and
+   12/12 direct audit. Authorization is revoked. Bind the kept method to one
+   immutable T0 product revision, rebuild, and pass grounded publication and
+   student journeys; do not start another model search.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

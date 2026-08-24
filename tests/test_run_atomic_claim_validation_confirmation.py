@@ -21,13 +21,17 @@ def _write_instrument(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
-def test_confirmation_is_frozen_and_ready_after_authorization() -> None:
+def test_confirmation_is_completed_and_blocked_after_revocation() -> None:
     instrument = validate_instrument()
 
     result = preflight(instrument)
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert set(result["blockers"]) == {
+        "candidate-execution-authorized-false",
+        "local-model-execution-authorized-false",
+        "confirmation-split-execution-authorized-false",
+    }
     assert result["confirmation_split_opened"] is False
     assert result["model_loaded"] is False
     assert result["provider_calls"] == 0
@@ -47,13 +51,13 @@ def test_network_free_simulation_checks_release_reject_and_lineage() -> None:
 
 def test_authorities_must_move_together_with_frozen_status(tmp_path: Path) -> None:
     payload = json.loads(DEFAULT_INSTRUMENT.read_text(encoding="utf-8"))
-    payload["execution_safety"]["candidate_execution_authorized"] = False
+    payload["execution_safety"]["candidate_execution_authorized"] = True
     with pytest.raises(AtomicClaimConfirmationError, match="authorities disagree"):
         validate_instrument(_write_instrument(tmp_path, payload))
 
     authorized = copy.deepcopy(payload)
-    authorized["execution_safety"]["local_model_execution_authorized"] = False
-    authorized["execution_safety"]["confirmation_split_execution_authorized"] = False
+    authorized["execution_safety"]["local_model_execution_authorized"] = True
+    authorized["execution_safety"]["confirmation_split_execution_authorized"] = True
     with pytest.raises(AtomicClaimConfirmationError, match="status and local authority"):
         validate_instrument(_write_instrument(tmp_path, authorized))
 

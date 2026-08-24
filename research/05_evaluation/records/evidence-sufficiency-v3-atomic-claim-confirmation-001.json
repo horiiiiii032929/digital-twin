@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+  "corpus_id": "synthetic-public-atomic-claim-fixtures-v1",
+  "code_revision": "c9208cbffc4d058c6fbb0523c78eaad9388ef4f3",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "exact-quote-atomic-claim-control-v1",
+        "version": "1.0.0",
+        "configuration": {"selectable": false, "case_count": 120}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "false-release-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "supported-draft-retention", "value": 0.5, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "mutation-detection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "lineage-rejection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "malformed-rejection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "multi-claim-retention", "value": 0.5, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "verifier-p95-ms", "value": 0.040375045500695705, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 245760.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-false-release", "passed": true, "evidence": "Zero of 80 reject cases were released."},
+        {"name": "supported-retention", "passed": false, "evidence": "Retention was 50.0% against a required 90.0%."},
+        {"name": "mutation-lineage-malformed-rejection", "passed": true, "evidence": "All three rates were 100%."},
+        {"name": "multi-claim-retention", "passed": false, "evidence": "Retention was 50.0% against a required 90.0%."},
+        {"name": "operational-bounds", "passed": true, "evidence": "p95 and added memory remained within their fixed ceilings."}
+      ],
+      "failures_by_category": {"conservative-false-rejection": 20}
+    },
+    {
+      "implementation": {
+        "implementation_id": "nli-atomic-claim-verifier-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "model_id": "cross-encoder/nli-deberta-v3-base",
+          "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+          "minimum_entailment": 0.8,
+          "maximum_contradiction": 0.2,
+          "case_count": 120
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "false-release-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "supported-draft-retention", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "mutation-detection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "lineage-rejection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "malformed-rejection-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "multi-claim-retention", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "verifier-p95-ms", "value": 53.15479199634865, "unit": "ms", "direction": "lower-is-better", "threshold": 500.0, "passed": true},
+        {"name": "added-peak-memory-bytes", "value": 599932928.0, "unit": "bytes", "direction": "lower-is-better", "threshold": 2147483648.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-false-release", "passed": true, "evidence": "Zero of 80 reject cases were released."},
+        {"name": "supported-retention", "passed": true, "evidence": "Retention was 95.0% against a required 90.0%."},
+        {"name": "mutation-lineage-malformed-rejection", "passed": true, "evidence": "All three rates were 100%."},
+        {"name": "multi-claim-retention", "passed": true, "evidence": "Retention was 90.0%, meeting the required 90.0%."},
+        {"name": "operational-bounds", "passed": true, "evidence": "p95 was 53.15 ms and added memory was 599,932,928 bytes."}
+      ],
+      "failures_by_category": {"conservative-false-rejection": 2}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "nli-atomic-claim-verifier-v1",
+    "rationale": "The post-generation candidate passed every prospective quality and operational gate with deterministic lineage and final release authority; direct review confirmed the two errors were safe false rejections rather than false releases or data defects.",
+    "limitations": [
+      "The 120 cases are synthetic-public and do not represent complete product-generated prose or real-source retrieval.",
+      "Two supported multi-claim paraphrases were conservatively rejected.",
+      "Latency and memory measurements are machine-specific.",
+      "Product binding, T1 promotion, deployment, Professor Digital Twin fidelity, multimodal grounding, and human use remain unauthorized."
+    ]
+  }
+}

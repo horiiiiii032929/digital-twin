@@ -33,10 +33,7 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
-    pilot_ids = {
-        "evidence-sufficiency-v3-atomic-claim-confirmation-001",
-        "factual-qa-v3-oracle-pilot-001",
-    }
+    pilot_ids = {"factual-qa-v3-oracle-pilot-001"}
 
     for pilot_id in pilot_ids:
         require_bounded_pilot_operation_allowed(pilot_id)
