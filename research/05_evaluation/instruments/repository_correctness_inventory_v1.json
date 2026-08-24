@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "438b1c0c0214bf677aa06f8162692d5de6340e131ec4a2339e4713c280d568fb",
+  "record_sha256": "493d64439379eac4792f2ceb0a37cda48351ca7b0067b22796ca57890d90234b",
   "records": [
     {
       "audit": {
@@ -1896,7 +1896,7 @@
     {
       "audit": {
         "domain": "atomic-claim-evidence-validation",
-        "evidence": "Prospective instrument review confirms fresh 120-case binding, fixed thresholds and hard gates, exact pinned NLI revision, no automatic binding, and all model, provider, paid, private, held-out, and product authorities false.",
+        "evidence": "Authorization review confirms the fresh 120-case binding, fixed thresholds and hard gates, freshly verified pinned NLI revision, coherent three-part local authority, and continued prohibition of provider, paid, private, held-out, product-binding, and automatic-promotion authority.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1907,7 +1907,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v3_atomic_claim_confirmation_001.json",
       "risk": "high",
-      "sha256": "ee136c47d5452f99b2c9f71bece525a1d19a90074bebf6181d336f31dc85ff70"
+      "sha256": "97078512db1f2bdecd45a40019dd2cd3a449ce15d561b63bca770e16e044e714"
     },
     {
       "audit": {
@@ -6731,7 +6731,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 authorization stays revoked, and both atomic-claim dataset writing and local confirmation execution are registered but not allowlisted. Only the historical oracle remains bounded.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 authorization stays revoked, atomic-claim dataset writing remains blocked, and only the exact atomic-claim confirmation plus the historical oracle are bounded.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -6742,7 +6742,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
+      "sha256": "737907113ef3e60265324cfe7205f415de902a91dc79994754986db8584ffff8"
     },
     {
       "audit": {
@@ -7195,7 +7195,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the completed candidate comparison plus every unregistered, provider, paid, private-source, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the atomic-claim confirmation and historical oracle, and explicit rejection of the completed candidate comparison plus every unregistered, provider, paid, private-source, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7206,7 +7206,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
+      "sha256": "fc2f80f35aa4900e0382dc9fcb0edb4cdb43e12755d164d116862458b7d78bac"
     },
     {
       "audit": {
@@ -8219,7 +8219,7 @@
     {
       "audit": {
         "domain": "atomic-claim-evidence-validation",
-        "evidence": "Tests verify blocked authorization, model-free simulation, coherent three-part local authority, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+        "evidence": "Tests verify ready authorization, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -8230,7 +8230,7 @@
       "package_commands": [],
       "path": "tests/test_run_atomic_claim_validation_confirmation.py",
       "risk": "medium",
-      "sha256": "b9ce0eeedfb26e6b215bb5cad28d4783c3188e25c7c2e014386934940879c0d0"
+      "sha256": "b7d34675c1a4fe3100c95763ac7672c86de510fc1dd614b6bed609f6aefacbe2"
     },
     {
       "audit": {

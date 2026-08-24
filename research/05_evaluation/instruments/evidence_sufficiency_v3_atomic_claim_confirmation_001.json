@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
-  "status": "reviewed-not-authorized",
+  "status": "frozen-pending-execution",
   "issue": 105,
   "decision_question": "Can a post-generation atomic-claim validator release useful supported answers with zero unsupported releases on fresh prospective cases?",
   "prediction": "Using NLI in the evidence-premise and atomic-claim-hypothesis direction, behind deterministic lineage checks, will preserve at least 90 percent of supported drafts while rejecting every unsupported or malformed draft.",
@@ -56,7 +56,7 @@
           "neutral"
         ],
         "official_metadata_url": "https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-base",
-        "verified_at": "2026-08-24T18:41:29+08:00"
+        "verified_at": "2026-08-24T23:01:04+08:00"
       }
     }
   ],
@@ -90,9 +90,9 @@
     "refresh_before_execution": true
   },
   "execution_safety": {
-    "candidate_execution_authorized": false,
-    "local_model_execution_authorized": false,
-    "confirmation_split_execution_authorized": false,
+    "candidate_execution_authorized": true,
+    "local_model_execution_authorized": true,
+    "confirmation_split_execution_authorized": true,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "private_source_execution_authorized": false,
