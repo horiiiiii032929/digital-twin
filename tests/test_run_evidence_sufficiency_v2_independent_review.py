@@ -266,14 +266,14 @@ def test_review_007_is_invalid_revoked_with_resilient_same_model_contract() -> N
     )
 
 
-def test_review_008_binds_direct_deepseek_for_bounded_execution() -> None:
+def test_review_008_preserves_unreliable_result_with_authorization_revoked() -> None:
     assets = runner.load_assets(INSTRUMENT_008_PATH)
     instrument = assets["instrument"]
     safety = instrument["execution_safety"]
 
-    assert instrument["status"] == "frozen-pending-execution"
-    assert safety["provider_execution_authorized"] is True
-    assert instrument["decision_rule"]["authorize_provider_execution"] is True
+    assert instrument["status"] == "completed-review-authorization-revoked"
+    assert safety["provider_execution_authorized"] is False
+    assert instrument["decision_rule"]["authorize_provider_execution"] is False
     assert safety["reviewer_provider"] == "deepseek-official-api"
     assert safety["reviewer_model"] == "deepseek-v4-pro"
     assert safety["reviewer_litellm_model"] == "deepseek/deepseek-v4-pro"
@@ -304,7 +304,7 @@ def test_review_008_direct_transport_disables_retries_and_thinking() -> None:
     assert transport.client.response_format == {"type": "json_object"}
 
 
-def test_review_008_authorized_preflight_is_ready(
+def test_review_008_post_result_preflight_is_blocked_by_revoked_authority(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     assets = runner.load_assets(INSTRUMENT_008_PATH)
@@ -321,9 +321,13 @@ def test_review_008_authorized_preflight_is_ready(
         now=verified + timedelta(hours=1),
     )
 
-    assert result["status"] == "ready"
+    assert result["status"] == "blocked-not-authorized"
     assert result["live_provider_failures"] == []
-    assert result["blockers"] == []
+    assert set(result["blockers"]) == {
+        "provider-review-not-authorized",
+        "instrument-not-frozen",
+        "bounded-freeze-authorization-missing",
+    }
 
 
 @pytest.mark.asyncio

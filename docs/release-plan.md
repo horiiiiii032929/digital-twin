@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 002–004, 006, and 007 are invalid/revoked; OpenRouter is dropped; direct DeepSeek review 008 is build-ready but provider-unauthorized; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 002–004, 006, and 007 are invalid/revoked; direct DeepSeek review 008 returned valid output but failed sensitivity at 5/6 defects and is dropped; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | Cumulative 10,000-case synthetic-public evidence passed every gate: 10,000/10,000 deterministic-valid, 8,000/8,000 citation-valid, and zero exact duplicates; authorization revoked | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -97,9 +97,12 @@ not require model spending or private data:
    DeepSeek V4 Pro API, JSON-object output plus deterministic schema validation,
    zero retries/fallbacks, a USD 0.15834 reservation, and a USD 1.50 ceiling.
    Its 13-call/132-judgment simulation and read-only official model-list match
-   pass. The researcher authorized this exact 13-call execution on 2026-08-24;
-   only synthetic-public inputs are permitted and every downstream authority
-   remains closed.
+   pass. Its separately authorized sensitivity call returned the exact model
+   and valid JSON but detected only 5/6 deliberate defects; all 12 bulk calls
+   were suppressed. Review 008 is dropped and authorization is revoked. Move
+   to deterministic checks plus a bounded researcher audit; only
+   synthetic-public inputs are permitted and every downstream authority remains
+   closed.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -108,7 +111,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Complete direct DeepSeek review 008 and adjudicate its priority packet | Researcher | Freeze the corrected decision set before selecting an answerability gate |
+| Complete the bounded deterministic-plus-researcher audit after reviewer 008 failed sensitivity | Researcher | Freeze the corrected decision set before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 
