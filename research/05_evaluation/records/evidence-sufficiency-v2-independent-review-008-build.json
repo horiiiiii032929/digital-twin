@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "run_id": "evidence-sufficiency-v2-independent-review-008-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "evidence-sufficiency-v2-decision-draft-001",
+  "corpus_id": "synthetic-public-six-course-source-universe-v1",
+  "code_revision": "8280d72a242bdba2218f13dbadd2455f111f2c61",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "openrouter-gpt-5-4-mini-resilient-review-007",
+        "version": "invalid-revoked-control",
+        "configuration": {
+          "provider": "openrouter",
+          "model": "openai/gpt-5.4-mini",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "proven-direct-provider-path",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.858,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "non-openrouter-method-change",
+          "passed": false,
+          "evidence": "Review 007 retained the repeatedly failing OpenRouter inference path."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "Review 007 completed its network-free simulation before its invalid live attempt."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Review 007 authorization is revoked."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Review 007 remains registered as invalid operational evidence."
+        }
+      ],
+      "failures_by_category": {
+        "provider-transport": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-deepseek-v4-pro-review-008",
+        "version": "provider-unauthorized-build",
+        "configuration": {
+          "provider": "deepseek-official-api",
+          "model": "deepseek-v4-pro",
+          "maximum_calls": 13,
+          "retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-judgment-accounting-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "proven-direct-provider-path",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "maximum-reserved-cost-usd",
+          "value": 0.15834,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.5,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "non-openrouter-method-change",
+          "passed": true,
+          "evidence": "Review 008 uses the directly authenticated official DeepSeek API."
+        },
+        {
+          "name": "network-free-contract-complete",
+          "passed": true,
+          "evidence": "All 13 simulated calls and 132 judgments completed with every sensitivity gate passing."
+        },
+        {
+          "name": "paid-execution-remains-unauthorized",
+          "passed": true,
+          "evidence": "Instrument, bounded freeze, and provider authorization locks remain closed."
+        },
+        {
+          "name": "historical-results-preserved",
+          "passed": true,
+          "evidence": "Review 008 has a new identity and leaves every previous result unchanged."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "direct-deepseek-v4-pro-review-008",
+    "rationale": "Use one directly authenticated provider path already proven operational in this repository, while deterministic source and schema checks remain authoritative and model review remains advisory.",
+    "limitations": [
+      "No review-008 provider inference occurred, so reviewer quality remains unknown.",
+      "The direct reviewer is not provider-family independent from other bounded DeepSeek workflows.",
+      "Provider retention and model-improvement use are not contractually excluded; only synthetic-public inputs are permitted.",
+      "The decision dataset remains unfrozen and no product evidence-sufficiency implementation is selected."
+    ]
+  }
+}

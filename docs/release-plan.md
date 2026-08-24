@@ -37,7 +37,7 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 002–004, 006, and 007 are invalid/revoked; review 005 is preserved and unexecuted; the OpenRouter reviewer path is dropped; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Grounding | Text path remains a qualified fallback; evidence sufficiency must decide answer versus abstain; multimodal inputs either pass prospective gates or fail closed | Text retrieval fallback retained; reviews 002–004, 006, and 007 are invalid/revoked; OpenRouter is dropped; direct DeepSeek review 008 is build-ready but provider-unauthorized; no evidence-sufficiency or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
 | Factual quality | Deterministic source truth, citation integrity, boundary handling, deduplication, and staged large-dataset evidence receive a recorded decision | Cumulative 10,000-case synthetic-public evidence passed every gate: 10,000/10,000 deterministic-valid, 8,000/8,000 citation-valid, and zero exact duplicates; authorization revoked | [#87](https://github.com/horiiiiii032929/digital-twin/issues/87), [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
@@ -91,8 +91,14 @@ not require model spending or private data:
    binding or automatically fall back to review 005. Review 007 keeps the same
    GPT snapshot and strict schema but removes nonessential reasoning/seed
    parameters, permits same-model OpenAI/Azure provider fallback, and raises
-   the emergency ceiling to USD 1.50. Its network-free simulation and live
-   metadata-only preflight pass; provider execution remains unauthorized.
+   the emergency ceiling to USD 1.50. Its paid sensitivity request also failed
+   before a provider response, so review 007 is invalid/revoked and the
+   OpenRouter path is stopped. Review 008 instead uses the direct official
+   DeepSeek V4 Pro API, JSON-object output plus deterministic schema validation,
+   zero retries/fallbacks, a USD 0.15834 reservation, and a USD 1.50 ceiling.
+   Its 13-call/132-judgment simulation and read-only official model-list match
+   pass; provider execution remains unauthorized and only synthetic-public
+   inputs are permitted.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -101,7 +107,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Choose a non-OpenRouter independent-review protocol after invalid reviews 006 and 007 | Researcher | Complete dataset review before selecting an answerability gate |
+| Authorize the exact direct DeepSeek review 008 after its clean published build checkpoint | Researcher | Complete dataset review before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 
