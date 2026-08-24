@@ -34,7 +34,7 @@ authorize the 100, 1,000, or 10,000-case stages.
 | Rejected independent reviewer candidate | `openrouter/qwen/qwen3.7-plus` | Qualification 007 failed six gates; do not bind it into the 100-case stage. |
 | Preserved evidence-sufficiency reviewer build | `openrouter/google/gemini-3.7-flash` through exact `google-ai-studio` routing | Review 005 remains unexecuted history and is not an outcome-based fallback. |
 | Dropped evidence-sufficiency reviewer path | `openrouter/openai/gpt-5.4-mini` | Reviews 006 and 007 are invalid/revoked; do not retry the OpenRouter path. |
-| Current evidence-sufficiency reviewer candidate | Direct official `deepseek-v4-pro` | Review 008 build is ready but provider-unauthorized; synthetic-public inputs only. |
+| Current evidence-sufficiency reviewer candidate | Direct official `deepseek-v4-pro` | Review 008 is separately authorized for one bounded 13-call execution; synthetic-public inputs only. |
 | Local general screening | `qwen3.5:9b-q4_K_M` at digest `6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7` | Prospective only; not used by the factual-QA scale pipeline. |
 | OpenRouter DeepSeek transport | `openrouter/deepseek/deepseek-v4-flash-0731` | Prospective gateway; direct DeepSeek remains selected. |
 | Selected text embedding | `Qwen/Qwen3-Embedding-0.6B` | Keep the project-selected retrieval implementation. |
@@ -97,6 +97,9 @@ thinking disabled, zero retries, no fallback, 13 calls maximum, a USD 0.15834
 reservation, and a USD 1.50 emergency ceiling. DeepSeek's public policy does
 not provide a project-specific zero-retention or zero-training guarantee, so
 this candidate may receive only synthetic-public evaluation inputs.
+The researcher separately authorized review 008 on 2026-08-24. That authority
+does not extend to dataset freezing, candidate evaluation, private sources, or
+product selection and must be revoked after any terminal result.
 
 ## Primary-source verification
 

@@ -97,8 +97,9 @@ not require model spending or private data:
    DeepSeek V4 Pro API, JSON-object output plus deterministic schema validation,
    zero retries/fallbacks, a USD 0.15834 reservation, and a USD 1.50 ceiling.
    Its 13-call/132-judgment simulation and read-only official model-list match
-   pass; provider execution remains unauthorized and only synthetic-public
-   inputs are permitted.
+   pass. The researcher authorized this exact 13-call execution on 2026-08-24;
+   only synthetic-public inputs are permitted and every downstream authority
+   remains closed.
 6. Keep the Professor Digital Twin calibration packet empty and the held-out
    set closed until the profile-authoring guidance arrives.
 
@@ -107,7 +108,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
-| Authorize the exact direct DeepSeek review 008 after its clean published build checkpoint | Researcher | Complete dataset review before selecting an answerability gate |
+| Complete direct DeepSeek review 008 and adjudicate its priority packet | Researcher | Freeze the corrected decision set before selecting an answerability gate |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
 | Human pilot permission and consent boundary | Professor/institution and researcher | Recruit or expose real users |
 

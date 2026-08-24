@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "360554940336487a971e126ff958b56c3857077a6b30bbf018e14c4ec79aa0f9",
+  "record_sha256": "eef1b52377436bb2f69e0c7360b36285f4e0eb749cc82f810bf74dbba044f341",
   "records": [
     {
       "audit": {
@@ -1832,7 +1832,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Prospective review confirms exact direct DeepSeek V4 Pro binding, official model and pricing sources, synthetic-public-only retention boundary, 13-call and USD 1.50 ceilings, zero retries/fallbacks, deterministic schema validation, and explicit provider-unauthorized state.",
+        "evidence": "Authorization review confirms exact direct DeepSeek V4 Pro binding, official model and pricing sources, synthetic-public-only retention boundary, 13-call and USD 1.50 ceilings, zero retries/fallbacks, deterministic schema validation, and one explicit bounded provider authorization with every downstream authority closed.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-data-quality-review"
@@ -1843,7 +1843,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json",
       "risk": "high",
-      "sha256": "7db991c8d8d859e1e80155c4a73fafda3dbb63d910b3130d2a249e018954879f"
+      "sha256": "3581fa696ad6c24bc5252d63638bbee979f2a3ec27361f86b6f9e30e850717c6"
     },
     {
       "audit": {
@@ -6534,7 +6534,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004, 006, and 007 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004, 006, and 007 plus factual-QA completion 001 are revoked after execution, and only the historical oracle plus explicitly authorized review 008 are bounded; review 008 permits exactly external model and method evaluation while dataset-freeze, candidate, private-source, and held-out stages remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6545,7 +6545,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
+      "sha256": "b365110cce3c5c683de51c6db4ffaf4d3b756e43504a794e9561d891a7d5ccae"
     },
     {
       "audit": {
@@ -6966,7 +6966,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004, 006, and 007, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle and review 008, and explicit rejection of revoked evidence reviews 002\u2013004, 006, and 007, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
         "findings": [],
         "reviewed_at": "2026-08-23",
         "reviewer": "codex-primary-review"
@@ -6977,7 +6977,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "566a1e7d1e15ef40aedce6e0c32a8c0189c3a51654b237af5da60929b0349111"
+      "sha256": "f3185df3cdee1b7c74d1b32685264941d5684f7ae37faadc8ef63ff8f6043287"
     },
     {
       "audit": {
@@ -7990,7 +7990,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency-review",
-        "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006-007 contracts while verifying provider-unauthorized 008 direct routing, JSON mode, no fallback, cost bounds, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and absent execution authority.",
+        "evidence": "Focused regressions preserve revoked 002-004, unexecuted 005, and invalid/revoked 006-007 contracts while verifying authorized 008 direct routing, JSON mode, no fallback, cost bounds, sensitivity stop, provider and cost failures, interruption/resume, live metadata, and exact correlated execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-data-quality-review"
@@ -8001,7 +8001,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_independent_review.py",
       "risk": "medium",
-      "sha256": "ae26c0c0b181badd5487757fdbd80a76588b2fddd4af7c1647fcd09250bb442e"
+      "sha256": "942abfa205ba3f69d5e9be7ac7a80cca388772f9985a274ab01e3cdd9bc0d645"
     },
     {
       "audit": {

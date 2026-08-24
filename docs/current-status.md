@@ -347,9 +347,10 @@ output is validated against the deterministic schema; the reviewer cannot alter
 authoritative action, claim, evidence, or boundary labels. The USD 0.15834
 reservation is below the USD 1.50 emergency ceiling. Provider retention and
 model-improvement use are not contractually excluded, so only synthetic-public
-inputs are allowed. Provider execution, dataset freeze, candidate evaluation,
-and product selection remain unauthorized. The next decision is one explicit
-authorization for this exact bounded review, not another reviewer search.
+inputs are allowed. The researcher authorized exactly this 13-call review on
+2026-08-24; dataset freeze, candidate evaluation, and product selection remain
+unauthorized. The authorization checkpoint must pass before the first provider
+call and will be revoked after any completed or invalid outcome.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -406,7 +407,7 @@ and one frozen end-to-end candidate decision.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 008 build ready / Go Deeper | Separately authorize and execute direct review 008 once, adjudicate at most 12 priority cases, then freeze a corrected decision set before selecting an open-set gate without AnyHit |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / 008 authorized / Go Deeper | Execute direct review 008 once, adjudicate at most 12 priority cases, then freeze a corrected decision set before selecting an open-set gate without AnyHit |
 | 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
 | 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
