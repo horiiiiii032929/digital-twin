@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "5363dfe83582817a9a76525a7d88342c9a5001485675a36f90c13230aed60bf4",
+      "sha256": "21ee50fb46e8615a2b789bbbde88e79c11c17d1928d1826059e1930c6dbbcbdc",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "factual-qa-scale",
-  "reviewed_at": "2026-08-24",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms historical evidence reviews and factual-QA scale runs remain reproducible; review 008 adds separate direct-DeepSeek validation, simulation, read-only live preflight, and execution commands while every paid stage remains fail-closed outside correlated instrument and repository-freeze authorization.",
+      "evidence": "Command review confirms the corrected evidence-sufficiency draft has separate deterministic validation and bounded local-write commands; historical scale and review commands remain reproducible, and provider execution remains unauthorized.",
       "findings": []
     },
     {
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002–004 and 006–008 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, private-source, and held-out stages remain unauthorized.",
+      "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder is registered as a protected execution entrypoint; the historical oracle and the exact deterministic audit 001 local dataset-generation operation are bounded, while provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-  "reviewed_at": "2026-08-23",
+      "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
+      "sha256": "bcbed2fe23232f988cf9d6251650f39dd58f2f1d775a3e9b22fd9bf146266479"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002–004 and 006–008, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact local dataset-generation authorization for deterministic audit 001, and explicit rejection of provider, paid, freeze, candidate, private-source, held-out, revoked, completed, and unknown operations.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-  "reviewed_at": "2026-08-23",
+      "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "a1493a197fd3cfe35cc508ce54732694d776dd2b442de90ee8c1e31a77df29e0"
+      "sha256": "8580ddb31befb32f1a795b44653ab6dee018d04d6772774833f07e74675514a6"
     },
     {
       "audit_status": "audited",
@@ -5488,6 +5488,39 @@
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
       "evidence": "Seven focused tests verify exact stage distribution, revoked post-run preflight, exact live resume acceptance for eligible checkpoints, 1,800 deterministic mutations, atomic journal fidelity, a full pause/resume simulation, and the two-continuation hard limit.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_deterministic_audit_001.json",
+      "sha256": "bc0998e919e9133ac87342e6463e684ad9d2858f8c426f89c0acde228c2fc9d8",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Instrument review confirms only one deterministic local successor-draft write is authorized. Provider, paid, private-source, held-out, candidate, automatic-freeze, and product-selection operations remain explicitly unauthorized.",
+      "findings": []
+    },
+    {
+      "path": "scripts/build_evidence_sufficiency_v2_decision_draft_002.py",
+      "sha256": "4131cdc33fa88774cde4d051086ff922beb0f3685a610afc0614a7fbf8dc550a",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Code and semantic review confirm the immutable draft-001 binding, deterministic successor generation, two-source multi-evidence correction, exact inactive-version distractors, derived-text multimodal scope, bounded write authorization, byte-stable validation, and four-case human confirmation boundary.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_build_evidence_sufficiency_v2_decision_draft_002.py",
+      "sha256": "a5585fc08477aaa14b91fe8bd3d88351da27cbe3a4300a9daf41b4fc45558ead",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evidence-sufficiency",
+      "reviewed_at": "2026-08-24",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests verify byte stability, the exact 120-case distribution, distinct active source lineage, stale-version pairing, derived-text multimodal scope, decision-packet coverage, and rejection of representative regressions.",
       "findings": []
     }
   ],

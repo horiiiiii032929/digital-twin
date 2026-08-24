@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 499
+    "audited": 502
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 108,
+    "active_or_unclassified_tooling": 109,
     "active_runtime": 97,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 105,
+    "evaluation_configuration": 106,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 96
+    "verification": 97
   },
-  "file_count": 499,
+  "file_count": 502,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3fae407653e56e823241b7503ab43219bfb4d944c9c0917c6fdecf1279e96ec4",
+  "record_sha256": "2fe24b345e1070b3b2fd424ed9093694f432577d3f7216f94f32491a651dc8f4",
   "records": [
     {
       "audit": {
@@ -1287,8 +1287,8 @@
     },
     {
       "audit": {
-        "domain": "factual-qa-scale",
-        "evidence": "Command review confirms historical evidence reviews and factual-QA scale runs remain reproducible; review 008 adds separate direct-DeepSeek validation, simulation, read-only live preflight, and execution commands while every paid stage remains fail-closed outside correlated instrument and repository-freeze authorization.",
+        "domain": "evidence-sufficiency",
+        "evidence": "Command review confirms the corrected evidence-sufficiency draft has separate deterministic validation and bounded local-write commands; historical scale and review commands remain reproducible, and provider execution remains unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "5363dfe83582817a9a76525a7d88342c9a5001485675a36f90c13230aed60bf4"
+      "sha256": "21ee50fb46e8615a2b789bbbde88e79c11c17d1928d1826059e1930c6dbbcbdc"
     },
     {
       "audit": {
@@ -1716,6 +1716,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2.json",
       "risk": "high",
       "sha256": "f5f09c10e60cb54b7157ab219989744dd50f2301063b5a3f727e1a83c8cd141f"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Instrument review confirms only one deterministic local successor-draft write is authorized. Provider, paid, private-source, held-out, candidate, automatic-freeze, and product-selection operations remain explicitly unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_deterministic_audit_001.json",
+      "risk": "high",
+      "sha256": "bc0998e919e9133ac87342e6463e684ad9d2858f8c426f89c0acde228c2fc9d8"
     },
     {
       "audit": {
@@ -3440,11 +3456,32 @@
       "disposition": "active_audited",
       "package_commands": [
         "build:evidence-sufficiency-v2-draft",
-        "verify:evidence-sufficiency-v2-draft"
+        "build:evidence-sufficiency-v2-draft-002",
+        "verify:evidence-sufficiency-v2-draft",
+        "verify:evidence-sufficiency-v2-draft-002"
       ],
       "path": "scripts/build_evidence_sufficiency_v2_decision_draft.py",
       "risk": "high",
       "sha256": "6f81baf9fb58d1a2cca57a17b612966ec7d5979d89abb3d27bf2713096099698"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Code and semantic review confirm the immutable draft-001 binding, deterministic successor generation, two-source multi-evidence correction, exact inactive-version distractors, derived-text multimodal scope, bounded write authorization, byte-stable validation, and four-case human confirmation boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:evidence-sufficiency-v2-draft-002",
+        "verify:evidence-sufficiency-v2-draft-002"
+      ],
+      "path": "scripts/build_evidence_sufficiency_v2_decision_draft_002.py",
+      "risk": "high",
+      "sha256": "4131cdc33fa88774cde4d051086ff922beb0f3685a610afc0614a7fbf8dc550a"
     },
     {
       "audit": {
@@ -6534,9 +6571,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed policy review plus focused regressions confirm the global freeze remains active, evidence reviews 002\u2013004 and 006\u2013008 plus factual-QA completion 001 are revoked after execution, and only the historical oracle remains bounded; all unreviewed paid, dataset-freeze, candidate, private-source, and held-out stages remain unauthorized.",
+        "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active. The corrected builder is registered as a protected execution entrypoint; the historical oracle and the exact deterministic audit 001 local dataset-generation operation are bounded, while provider, paid, candidate, dataset-freeze, private-source, and held-out operations remain unauthorized.",
         "findings": [],
-        "reviewed_at": "2026-08-23",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6545,7 +6582,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3dd8ddc2363b321b554bcb4f5f7b79871021a29274b7a174c82d0b389bab63f6"
+      "sha256": "bcbed2fe23232f988cf9d6251650f39dd58f2f1d775a3e9b22fd9bf146266479"
     },
     {
       "audit": {
@@ -6966,9 +7003,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of revoked evidence reviews 002\u2013004 and 006\u2013008, completed factual-QA stages including completion 001, other paid pilots, and unknown successors.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact local dataset-generation authorization for deterministic audit 001, and explicit rejection of provider, paid, freeze, candidate, private-source, held-out, revoked, completed, and unknown operations.",
         "findings": [],
-        "reviewed_at": "2026-08-23",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6977,7 +7014,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "a1493a197fd3cfe35cc508ce54732694d776dd2b442de90ee8c1e31a77df29e0"
+      "sha256": "8580ddb31befb32f1a795b44653ab6dee018d04d6772774833f07e74675514a6"
     },
     {
       "audit": {
@@ -7410,6 +7447,22 @@
       "path": "tests/test_build_evidence_sufficiency_v2_decision_draft.py",
       "risk": "medium",
       "sha256": "b3251660b758e72b046084c7ab9f2028d3358c7b59243fe036a7e8d0043ec3d4"
+    },
+    {
+      "audit": {
+        "domain": "evidence-sufficiency",
+        "evidence": "Focused tests verify byte stability, the exact 120-case distribution, distinct active source lineage, stale-version pairing, derived-text multimodal scope, decision-packet coverage, and rejection of representative regressions.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_evidence_sufficiency_v2_decision_draft_002.py",
+      "risk": "medium",
+      "sha256": "a5585fc08477aaa14b91fe8bd3d88351da27cbe3a4300a9daf41b4fc45558ead"
     },
     {
       "audit": {
@@ -8245,8 +8298,8 @@
     }
   ],
   "risk_counts": {
-    "high": 389,
-    "medium": 110
+    "high": 391,
+    "medium": 111
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

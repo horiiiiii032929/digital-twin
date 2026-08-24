@@ -167,6 +167,8 @@
     "preflight-live:evidence-sufficiency-v2-review-007": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_007.json --preflight-live",
     "execute:evidence-sufficiency-v2-review-007": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_007.json --execute",
     "verify:evidence-sufficiency-v2-review-008": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json --validate",
+    "verify:evidence-sufficiency-v2-draft-002": "uv run python -m scripts.build_evidence_sufficiency_v2_decision_draft_002 --check",
+    "build:evidence-sufficiency-v2-draft-002": "uv run python -m scripts.build_evidence_sufficiency_v2_decision_draft_002 --write",
     "simulate:evidence-sufficiency-v2-review-008": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json --simulate",
     "preflight-live:evidence-sufficiency-v2-review-008": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json --preflight-live",
     "execute:evidence-sufficiency-v2-review-008": "uv run python -m scripts.run_evidence_sufficiency_v2_independent_review --instrument research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json --execute",
