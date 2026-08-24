@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed review confirms the global freeze remains active and candidate comparison 001 authorization is revoked after one completed local execution. Only the historical oracle remains bounded; provider, paid, private-source, held-out, and every candidate operation are unauthorized.",
+      "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 authorization stays revoked, and both atomic-claim dataset writing and local confirmation execution are registered but not allowlisted. Only the historical oracle remains bounded.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "e98fe61608fa4c508997639abc20626b7f9cc70bac24a1b621d0277014cfeb4a"
+      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
     },
     {
       "path": "src/digital_twin/student/__init__.py",

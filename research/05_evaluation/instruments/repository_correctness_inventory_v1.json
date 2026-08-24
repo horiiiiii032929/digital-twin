@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a1981a6a02118f9cf1ce53bc49d1bcc64d87d843570f5a8c32858feb4f2e0a20",
+  "record_sha256": "438b1c0c0214bf677aa06f8162692d5de6340e131ec4a2339e4713c280d568fb",
   "records": [
     {
       "audit": {
@@ -6731,7 +6731,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active and candidate comparison 001 authorization is revoked after one completed local execution. Only the historical oracle remains bounded; provider, paid, private-source, held-out, and every candidate operation are unauthorized.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 authorization stays revoked, and both atomic-claim dataset writing and local confirmation execution are registered but not allowlisted. Only the historical oracle remains bounded.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -6742,7 +6742,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e98fe61608fa4c508997639abc20626b7f9cc70bac24a1b621d0277014cfeb4a"
+      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
     },
     {
       "audit": {
