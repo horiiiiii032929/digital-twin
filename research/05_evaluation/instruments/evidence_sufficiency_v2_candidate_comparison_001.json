@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "evidence-sufficiency-v2-candidate-comparison-001",
-  "status": "reviewed-not-authorized",
+  "status": "frozen-pending-execution",
   "issue": 105,
   "decision_question": "Which inspectable evidence-sufficiency method can permit grounded answers with zero false answers while preserving at least 90 percent answer recall?",
   "model_leaderboard": false,
@@ -57,7 +57,7 @@
         "maximum_input_tokens": 8192,
         "execution_max_length": 512,
         "official_metadata_url": "https://huggingface.co/api/models/Alibaba-NLP/gte-reranker-modernbert-base",
-        "verified_at": "2026-08-24T18:10:52+08:00"
+        "verified_at": "2026-08-24T18:41:29+08:00"
       },
       "verifier": "cross-encoder-support-verifier-v2@2.0.0",
       "thresholds": {
@@ -87,7 +87,7 @@
           "neutral"
         ],
         "official_metadata_url": "https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-base",
-        "verified_at": "2026-08-24T18:10:52+08:00"
+        "verified_at": "2026-08-24T18:41:29+08:00"
       },
       "verifier": "cross-encoder-nli-completeness-verifier-v2@2.0.0",
       "thresholds": {
@@ -121,9 +121,9 @@
     "added_peak_memory_bytes_max": 2147483648
   },
   "execution_safety": {
-    "candidate_execution_authorized": false,
-    "local_model_execution_authorized": false,
-    "decision_split_execution_authorized": false,
+    "candidate_execution_authorized": true,
+    "local_model_execution_authorized": true,
+    "decision_split_execution_authorized": true,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "private_source_execution_authorized": false,

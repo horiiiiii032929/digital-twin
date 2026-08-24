@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "24829da07f6103025142d88d725772ca2dff8fa0f7e0eb0a8ef4d2cfc6aed42a",
+  "record_sha256": "711a2208aaa69f084b04711a96f4059368635c1ee0cb07d228ac5f838d696b6a",
   "records": [
     {
       "audit": {
@@ -1720,7 +1720,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Instrument review confirms exact dataset-freeze binding, fixed non-gold retrieval, one unsafe unselectable control, three selectable candidates, pinned Apache-2.0 model revisions, immutable hard gates, and closed local/provider/paid/release authority.",
+        "evidence": "Authorization review confirms exact dataset-freeze binding, fixed non-gold retrieval, one unsafe unselectable control, three selectable candidates, fresh pinned Apache-2.0 revisions, immutable hard gates, and one local-only decision execution. Provider, paid, private, held-out, automatic selection, and release authority remain closed.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1731,7 +1731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_candidate_comparison_001.json",
       "risk": "high",
-      "sha256": "c1f2347ffd5485ede58d0d15b4c422931ab6f36efa603f58a0842b6ff02a28cf"
+      "sha256": "6c9e892aa1acab9865dc614768ff08c76a8a251d56a6c378d19443f5dd68e14d"
     },
     {
       "audit": {
@@ -6659,7 +6659,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review and focused regressions confirm the global freeze remains active and the new candidate-comparison entrypoint is covered for local-model and method execution. It has no bounded authorization; provider, paid, private-source, and held-out operations remain unauthorized.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active and grants one exact bounded authorization to candidate comparison 001 for local-model and method execution only. Provider, paid, private-source, held-out, and every other candidate operation remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -6670,7 +6670,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e98fe61608fa4c508997639abc20626b7f9cc70bac24a1b621d0277014cfeb4a"
+      "sha256": "4a819e1293507525b39868c0d8832a80731fe33fddca1ed24f4083974a7ec27f"
     },
     {
       "audit": {
@@ -7107,7 +7107,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of completed deterministic audit 001 plus provider, paid, freeze, candidate, private-source, held-out, revoked, and unknown operations.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of the historical oracle plus the one current local candidate comparison, and rejection of every unregistered, provider, paid, private-source, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7118,7 +7118,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
+      "sha256": "d4911e973973d52787c7dfe77bd61cebad8f36be26da50cfb4ea4b71c6ea3ec0"
     },
     {
       "audit": {
@@ -8147,7 +8147,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Focused tests verify blocked preflight, model-free simulation, AnyHit exclusion, coherent three-part local authorization, exact model revisions, and immutable hard gates.",
+        "evidence": "Focused tests verify the exact frozen ready preflight, model-free simulation, AnyHit exclusion, coherent three-part local authorization and revocation states, exact model revisions, and immutable hard gates.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -8158,7 +8158,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
       "risk": "medium",
-      "sha256": "bcfcc2d1241e2b787288d478f15f71a3000ad63f2589c0eb30756f232659b03d"
+      "sha256": "1297ed45a31716928b34409ff9531565d2243b78573efb4667865188c058e3f2"
     },
     {
       "audit": {

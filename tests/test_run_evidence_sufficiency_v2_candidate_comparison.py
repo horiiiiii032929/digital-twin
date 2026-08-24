@@ -21,17 +21,13 @@ def write_instrument(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
-def test_candidate_comparison_is_valid_but_not_authorized() -> None:
+def test_candidate_comparison_is_frozen_and_ready_for_one_local_run() -> None:
     instrument = validate_instrument()
 
     result = preflight(instrument)
 
-    assert result["status"] == "blocked-not-authorized"
-    assert set(result["blockers"]) == {
-        "candidate-execution-authorized-false",
-        "local-model-execution-authorized-false",
-        "decision-split-execution-authorized-false",
-    }
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
     assert result["decision_split_opened"] is False
     assert result["model_loaded"] is False
     assert result["provider_calls"] == 0
@@ -60,14 +56,14 @@ def test_local_authorities_must_move_together_in_a_frozen_status(
     tmp_path: Path,
 ) -> None:
     payload = json.loads(DEFAULT_INSTRUMENT.read_text(encoding="utf-8"))
-    payload["execution_safety"]["candidate_execution_authorized"] = True
+    payload["execution_safety"]["candidate_execution_authorized"] = False
 
     with pytest.raises(CandidateComparisonError, match="authorities disagree"):
         validate_instrument(write_instrument(tmp_path, payload))
 
     authorized = copy.deepcopy(payload)
-    authorized["execution_safety"]["local_model_execution_authorized"] = True
-    authorized["execution_safety"]["decision_split_execution_authorized"] = True
+    authorized["execution_safety"]["local_model_execution_authorized"] = False
+    authorized["execution_safety"]["decision_split_execution_authorized"] = False
     with pytest.raises(CandidateComparisonError, match="status and local authority"):
         validate_instrument(write_instrument(tmp_path, authorized))
 
