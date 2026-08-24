@@ -1,0 +1,4316 @@
+{
+  "schema_version": 1,
+  "dataset_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+  "status": "frozen-unopened",
+  "data_boundary": "synthetic-public-only",
+  "case_count": 120,
+  "releasable_case_count": 40,
+  "reject_case_count": 80,
+  "slices": {
+    "supported-exact-single": 10,
+    "supported-paraphrase-single": 10,
+    "supported-exact-multi": 10,
+    "supported-paraphrase-multi": 10,
+    "unsupported-contradiction": 10,
+    "unsupported-addition": 10,
+    "wrong-lineage": 10,
+    "stale-source": 10,
+    "cross-course": 10,
+    "partial-multi-claim": 10,
+    "missing-citation": 10,
+    "malformed-claim-contract": 10
+  },
+  "cases": [
+    {
+      "case_id": "acv-01-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "Existing sessions stop working after a password reset.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-b-v2",
+          "text": "A reset token expires after fifteen minutes.",
+          "course_id": "course-1",
+          "source_id": "acv-01-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-01-b",
+          "text": "A reset token expires after fifteen minutes.",
+          "evidence_hit_ids": [
+            "acv-01-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-b-v2",
+          "text": "A reset token expires after fifteen minutes.",
+          "course_id": "course-1",
+          "source_id": "acv-01-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "Existing sessions stop working after a password reset.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-01-b",
+          "text": "Reset links remain valid for only fifteen minutes.",
+          "evidence_hit_ids": [
+            "acv-01-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-false",
+          "text": "A password reset deletes the user account.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-01-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-01-false",
+          "text": "A password reset deletes the user account.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-b-v2",
+          "text": "A reset token expires after fifteen minutes.",
+          "course_id": "course-1",
+          "source_id": "acv-01-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-a-v1",
+          "text": "A password reset deletes the user account.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-false",
+          "text": "A password reset deletes the user account.",
+          "evidence_hit_ids": [
+            "acv-01-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-cross-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-2",
+          "source_id": "acv-01-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-01-b-v2",
+          "text": "A reset token expires after fifteen minutes.",
+          "course_id": "course-1",
+          "source_id": "acv-01-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-01-false",
+          "text": "A password reset deletes the user account.",
+          "evidence_hit_ids": [
+            "acv-01-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-01-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-01-a-v2",
+          "text": "A password reset revokes every active session.",
+          "course_id": "course-1",
+          "source_id": "acv-01-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-01-a",
+          "text": "A password reset revokes every active session.",
+          "evidence_hit_ids": [
+            "acv-01-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "The order of columns is preserved in a composite index.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-b-v2",
+          "text": "A transaction rollback discards its uncommitted writes.",
+          "course_id": "course-2",
+          "source_id": "acv-02-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-02-b",
+          "text": "A transaction rollback discards its uncommitted writes.",
+          "evidence_hit_ids": [
+            "acv-02-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-b-v2",
+          "text": "A transaction rollback discards its uncommitted writes.",
+          "course_id": "course-2",
+          "source_id": "acv-02-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "The order of columns is preserved in a composite index.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-02-b",
+          "text": "Uncommitted changes are removed when a transaction rolls back.",
+          "evidence_hit_ids": [
+            "acv-02-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-false",
+          "text": "A rollback permanently deletes the database schema.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-02-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-02-false",
+          "text": "A rollback permanently deletes the database schema.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-b-v2",
+          "text": "A transaction rollback discards its uncommitted writes.",
+          "course_id": "course-2",
+          "source_id": "acv-02-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-a-v1",
+          "text": "A rollback permanently deletes the database schema.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-false",
+          "text": "A rollback permanently deletes the database schema.",
+          "evidence_hit_ids": [
+            "acv-02-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-cross-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-3",
+          "source_id": "acv-02-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-02-b-v2",
+          "text": "A transaction rollback discards its uncommitted writes.",
+          "course_id": "course-2",
+          "source_id": "acv-02-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-02-false",
+          "text": "A rollback permanently deletes the database schema.",
+          "evidence_hit_ids": [
+            "acv-02-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-02-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-02-a-v2",
+          "text": "A composite index stores keys in its declared column order.",
+          "course_id": "course-2",
+          "source_id": "acv-02-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-02-a",
+          "text": "A composite index stores keys in its declared column order.",
+          "evidence_hit_ids": [
+            "acv-02-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "Application data is sent by TCP only after connection establishment.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-b-v2",
+          "text": "A router forwards packets between distinct networks.",
+          "course_id": "course-3",
+          "source_id": "acv-03-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-03-b",
+          "text": "A router forwards packets between distinct networks.",
+          "evidence_hit_ids": [
+            "acv-03-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-b-v2",
+          "text": "A router forwards packets between distinct networks.",
+          "course_id": "course-3",
+          "source_id": "acv-03-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "Application data is sent by TCP only after connection establishment.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-03-b",
+          "text": "Routers move packets from one network to another.",
+          "evidence_hit_ids": [
+            "acv-03-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-false",
+          "text": "TCP encrypts every application payload by default.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-03-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-03-false",
+          "text": "TCP encrypts every application payload by default.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-b-v2",
+          "text": "A router forwards packets between distinct networks.",
+          "course_id": "course-3",
+          "source_id": "acv-03-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-a-v1",
+          "text": "TCP encrypts every application payload by default.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-false",
+          "text": "TCP encrypts every application payload by default.",
+          "evidence_hit_ids": [
+            "acv-03-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-cross-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-4",
+          "source_id": "acv-03-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-03-b-v2",
+          "text": "A router forwards packets between distinct networks.",
+          "course_id": "course-3",
+          "source_id": "acv-03-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-03-false",
+          "text": "TCP encrypts every application payload by default.",
+          "evidence_hit_ids": [
+            "acv-03-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-03-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-03-a-v2",
+          "text": "TCP establishes a connection before carrying application data.",
+          "course_id": "course-3",
+          "source_id": "acv-03-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-03-a",
+          "text": "TCP establishes a connection before carrying application data.",
+          "evidence_hit_ids": [
+            "acv-03-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "The input must be ordered before binary search is applicable.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-b-v2",
+          "text": "Merge sort has logarithmic recursion depth.",
+          "course_id": "course-4",
+          "source_id": "acv-04-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-04-b",
+          "text": "Merge sort has logarithmic recursion depth.",
+          "evidence_hit_ids": [
+            "acv-04-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-b-v2",
+          "text": "Merge sort has logarithmic recursion depth.",
+          "course_id": "course-4",
+          "source_id": "acv-04-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "The input must be ordered before binary search is applicable.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-04-b",
+          "text": "The recursive call stack of merge sort grows logarithmically.",
+          "evidence_hit_ids": [
+            "acv-04-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-false",
+          "text": "Binary search works correctly on any unsorted sequence.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-04-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-04-false",
+          "text": "Binary search works correctly on any unsorted sequence.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-b-v2",
+          "text": "Merge sort has logarithmic recursion depth.",
+          "course_id": "course-4",
+          "source_id": "acv-04-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-a-v1",
+          "text": "Binary search works correctly on any unsorted sequence.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-false",
+          "text": "Binary search works correctly on any unsorted sequence.",
+          "evidence_hit_ids": [
+            "acv-04-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-cross-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-1",
+          "source_id": "acv-04-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-04-b-v2",
+          "text": "Merge sort has logarithmic recursion depth.",
+          "course_id": "course-4",
+          "source_id": "acv-04-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-04-false",
+          "text": "Binary search works correctly on any unsorted sequence.",
+          "evidence_hit_ids": [
+            "acv-04-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-04-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-04-a-v2",
+          "text": "Binary search requires a sorted search space.",
+          "course_id": "course-4",
+          "source_id": "acv-04-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-04-a",
+          "text": "Binary search requires a sorted search space.",
+          "evidence_hit_ids": [
+            "acv-04-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "The current task state is preserved during a context switch.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-b-v2",
+          "text": "Virtual memory maps process addresses to physical storage.",
+          "course_id": "course-1",
+          "source_id": "acv-05-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-05-b",
+          "text": "Virtual memory maps process addresses to physical storage.",
+          "evidence_hit_ids": [
+            "acv-05-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-b-v2",
+          "text": "Virtual memory maps process addresses to physical storage.",
+          "course_id": "course-1",
+          "source_id": "acv-05-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "The current task state is preserved during a context switch.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-05-b",
+          "text": "Process addresses are translated through virtual-memory mappings.",
+          "evidence_hit_ids": [
+            "acv-05-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-false",
+          "text": "A context switch permanently terminates the running task.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-05-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-05-false",
+          "text": "A context switch permanently terminates the running task.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-b-v2",
+          "text": "Virtual memory maps process addresses to physical storage.",
+          "course_id": "course-1",
+          "source_id": "acv-05-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-a-v1",
+          "text": "A context switch permanently terminates the running task.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-false",
+          "text": "A context switch permanently terminates the running task.",
+          "evidence_hit_ids": [
+            "acv-05-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-cross-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-2",
+          "source_id": "acv-05-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-05-b-v2",
+          "text": "Virtual memory maps process addresses to physical storage.",
+          "course_id": "course-1",
+          "source_id": "acv-05-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-05-false",
+          "text": "A context switch permanently terminates the running task.",
+          "evidence_hit_ids": [
+            "acv-05-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-05-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-05-a-v2",
+          "text": "A context switch saves the running task state.",
+          "course_id": "course-1",
+          "source_id": "acv-05-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-05-a",
+          "text": "A context switch saves the running task state.",
+          "evidence_hit_ids": [
+            "acv-05-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "Unit tests focus on a single bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-b-v2",
+          "text": "A regression test preserves previously accepted behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-06-b",
+          "text": "A regression test preserves previously accepted behavior.",
+          "evidence_hit_ids": [
+            "acv-06-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-b-v2",
+          "text": "A regression test preserves previously accepted behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "Unit tests focus on a single bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-06-b",
+          "text": "Previously accepted behavior is protected by regression tests.",
+          "evidence_hit_ids": [
+            "acv-06-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-false",
+          "text": "A unit test proves the entire deployed system is correct.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-06-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-06-false",
+          "text": "A unit test proves the entire deployed system is correct.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-b-v2",
+          "text": "A regression test preserves previously accepted behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-a-v1",
+          "text": "A unit test proves the entire deployed system is correct.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-false",
+          "text": "A unit test proves the entire deployed system is correct.",
+          "evidence_hit_ids": [
+            "acv-06-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-cross-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-3",
+          "source_id": "acv-06-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-06-b-v2",
+          "text": "A regression test preserves previously accepted behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-06-false",
+          "text": "A unit test proves the entire deployed system is correct.",
+          "evidence_hit_ids": [
+            "acv-06-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-06-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-06-a-v2",
+          "text": "A unit test isolates one bounded behavior.",
+          "course_id": "course-2",
+          "source_id": "acv-06-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-06-a",
+          "text": "A unit test isolates one bounded behavior.",
+          "evidence_hit_ids": [
+            "acv-06-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "Repeated delivery of the same request is deduplicated by its idempotency key.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-b-v2",
+          "text": "A lease permits bounded temporary ownership of work.",
+          "course_id": "course-3",
+          "source_id": "acv-07-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-07-b",
+          "text": "A lease permits bounded temporary ownership of work.",
+          "evidence_hit_ids": [
+            "acv-07-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-b-v2",
+          "text": "A lease permits bounded temporary ownership of work.",
+          "course_id": "course-3",
+          "source_id": "acv-07-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "Repeated delivery of the same request is deduplicated by its idempotency key.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-07-b",
+          "text": "Work ownership is temporary and bounded when controlled by a lease.",
+          "evidence_hit_ids": [
+            "acv-07-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-false",
+          "text": "An idempotency key guarantees that a network request is delivered.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-3",
+          "source_id": "acv-07-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-07-false",
+          "text": "An idempotency key guarantees that a network request is delivered.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-b-v2",
+          "text": "A lease permits bounded temporary ownership of work.",
+          "course_id": "course-3",
+          "source_id": "acv-07-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-a-v1",
+          "text": "An idempotency key guarantees that a network request is delivered.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-false",
+          "text": "An idempotency key guarantees that a network request is delivered.",
+          "evidence_hit_ids": [
+            "acv-07-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-cross-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-4",
+          "source_id": "acv-07-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-07-b-v2",
+          "text": "A lease permits bounded temporary ownership of work.",
+          "course_id": "course-3",
+          "source_id": "acv-07-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-07-false",
+          "text": "An idempotency key guarantees that a network request is delivered.",
+          "evidence_hit_ids": [
+            "acv-07-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-07-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-07-a-v2",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "course_id": "course-3",
+          "source_id": "acv-07-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-07-a",
+          "text": "An idempotency key prevents duplicate processing of one request.",
+          "evidence_hit_ids": [
+            "acv-07-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "Model choices use validation data while the test data stays unopened.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-b-v2",
+          "text": "Data leakage makes evaluation results overly optimistic.",
+          "course_id": "course-4",
+          "source_id": "acv-08-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-08-b",
+          "text": "Data leakage makes evaluation results overly optimistic.",
+          "evidence_hit_ids": [
+            "acv-08-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-b-v2",
+          "text": "Data leakage makes evaluation results overly optimistic.",
+          "course_id": "course-4",
+          "source_id": "acv-08-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "Model choices use validation data while the test data stays unopened.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-08-b",
+          "text": "Evaluation can look better than reality when data leakage occurs.",
+          "evidence_hit_ids": [
+            "acv-08-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-false",
+          "text": "The validation split is the final unbiased test set.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-4",
+          "source_id": "acv-08-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-08-false",
+          "text": "The validation split is the final unbiased test set.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-b-v2",
+          "text": "Data leakage makes evaluation results overly optimistic.",
+          "course_id": "course-4",
+          "source_id": "acv-08-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-a-v1",
+          "text": "The validation split is the final unbiased test set.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-false",
+          "text": "The validation split is the final unbiased test set.",
+          "evidence_hit_ids": [
+            "acv-08-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-cross-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-1",
+          "source_id": "acv-08-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-08-b-v2",
+          "text": "Data leakage makes evaluation results overly optimistic.",
+          "course_id": "course-4",
+          "source_id": "acv-08-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-08-false",
+          "text": "The validation split is the final unbiased test set.",
+          "evidence_hit_ids": [
+            "acv-08-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-08-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-08-a-v2",
+          "text": "A validation split guides model selection without opening the test split.",
+          "course_id": "course-4",
+          "source_id": "acv-08-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-08-a",
+          "text": "A validation split guides model selection without opening the test split.",
+          "evidence_hit_ids": [
+            "acv-08-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "Some CSRF risk is reduced by applying the SameSite cookie attribute.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-b-v2",
+          "text": "Content Security Policy restricts permitted content sources.",
+          "course_id": "course-1",
+          "source_id": "acv-09-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-09-b",
+          "text": "Content Security Policy restricts permitted content sources.",
+          "evidence_hit_ids": [
+            "acv-09-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-b-v2",
+          "text": "Content Security Policy restricts permitted content sources.",
+          "course_id": "course-1",
+          "source_id": "acv-09-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "Some CSRF risk is reduced by applying the SameSite cookie attribute.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-09-b",
+          "text": "A Content Security Policy limits where page content may be loaded from.",
+          "evidence_hit_ids": [
+            "acv-09-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-false",
+          "text": "SameSite cookies encrypt all stored cookie values.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-1",
+          "source_id": "acv-09-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-09-false",
+          "text": "SameSite cookies encrypt all stored cookie values.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-b-v2",
+          "text": "Content Security Policy restricts permitted content sources.",
+          "course_id": "course-1",
+          "source_id": "acv-09-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-a-v1",
+          "text": "SameSite cookies encrypt all stored cookie values.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-false",
+          "text": "SameSite cookies encrypt all stored cookie values.",
+          "evidence_hit_ids": [
+            "acv-09-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-cross-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-2",
+          "source_id": "acv-09-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-09-b-v2",
+          "text": "Content Security Policy restricts permitted content sources.",
+          "course_id": "course-1",
+          "source_id": "acv-09-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-09-false",
+          "text": "SameSite cookies encrypt all stored cookie values.",
+          "evidence_hit_ids": [
+            "acv-09-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-09-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-09-a-v2",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "course_id": "course-1",
+          "source_id": "acv-09-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-09-a",
+          "text": "SameSite cookies reduce some cross-site request forgery exposure.",
+          "evidence_hit_ids": [
+            "acv-09-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-exact-single",
+      "slice": "supported-exact-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-paraphrase-single",
+      "slice": "supported-paraphrase-single",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "Durable data structures are changed through explicit schema migrations.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-exact-multi",
+      "slice": "supported-exact-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-b-v2",
+          "text": "A checkpoint records resumable processing progress.",
+          "course_id": "course-2",
+          "source_id": "acv-10-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-10-b",
+          "text": "A checkpoint records resumable processing progress.",
+          "evidence_hit_ids": [
+            "acv-10-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-paraphrase-multi",
+      "slice": "supported-paraphrase-multi",
+      "expected_releasable": true,
+      "mutation_class": null,
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-b-v2",
+          "text": "A checkpoint records resumable processing progress.",
+          "course_id": "course-2",
+          "source_id": "acv-10-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "Durable data structures are changed through explicit schema migrations.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-10-b",
+          "text": "Processing can resume from progress captured in a checkpoint.",
+          "evidence_hit_ids": [
+            "acv-10-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-contradiction",
+      "slice": "unsupported-contradiction",
+      "expected_releasable": false,
+      "mutation_class": "contradiction",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-false",
+          "text": "A checkpoint automatically repairs every malformed record.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-unsupported-addition",
+      "slice": "unsupported-addition",
+      "expected_releasable": false,
+      "mutation_class": "unsupported-addition",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-noise-v2",
+          "text": "The course calendar lists a review session on Friday.",
+          "course_id": "course-2",
+          "source_id": "acv-10-noise",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-10-false",
+          "text": "A checkpoint automatically repairs every malformed record.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-wrong-lineage",
+      "slice": "wrong-lineage",
+      "expected_releasable": false,
+      "mutation_class": "wrong-lineage",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-b-v2",
+          "text": "A checkpoint records resumable processing progress.",
+          "course_id": "course-2",
+          "source_id": "acv-10-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-stale-source",
+      "slice": "stale-source",
+      "expected_releasable": false,
+      "mutation_class": "stale-source",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-a-v1",
+          "text": "A checkpoint automatically repairs every malformed record.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 1,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-false",
+          "text": "A checkpoint automatically repairs every malformed record.",
+          "evidence_hit_ids": [
+            "acv-10-a-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-cross-course",
+      "slice": "cross-course",
+      "expected_releasable": false,
+      "mutation_class": "cross-course",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-cross-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-3",
+          "source_id": "acv-10-cross",
+          "source_version": 2,
+          "retrieval_allowed": false
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-cross-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-partial-multi",
+      "slice": "partial-multi-claim",
+      "expected_releasable": false,
+      "mutation_class": "partial-multi-claim",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        },
+        {
+          "hit_id": "acv-10-b-v2",
+          "text": "A checkpoint records resumable processing progress.",
+          "course_id": "course-2",
+          "source_id": "acv-10-b",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-10-false",
+          "text": "A checkpoint automatically repairs every malformed record.",
+          "evidence_hit_ids": [
+            "acv-10-b-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-missing-citation",
+      "slice": "missing-citation",
+      "expected_releasable": false,
+      "mutation_class": "missing-citation",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": []
+        }
+      ]
+    },
+    {
+      "case_id": "acv-10-duplicate-claim-id",
+      "slice": "malformed-claim-contract",
+      "expected_releasable": false,
+      "mutation_class": "duplicate-claim-id",
+      "hits": [
+        {
+          "hit_id": "acv-10-a-v2",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "course_id": "course-2",
+          "source_id": "acv-10-a",
+          "source_version": 2,
+          "retrieval_allowed": true
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        },
+        {
+          "claim_id": "claim-acv-10-a",
+          "text": "A schema migration changes the durable data structure explicitly.",
+          "evidence_hit_ids": [
+            "acv-10-a-v2"
+          ]
+        }
+      ]
+    }
+  ],
+  "content_sha256": "8ab041aa8434f3067e2de2ae1f82ab6d2a59f61bb69589ee928f76856af3c2e5"
+}

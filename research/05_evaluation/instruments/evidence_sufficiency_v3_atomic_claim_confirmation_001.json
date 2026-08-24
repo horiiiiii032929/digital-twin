@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "instrument_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+  "status": "reviewed-not-authorized",
+  "issue": 105,
+  "decision_question": "Can a post-generation atomic-claim validator release useful supported answers with zero unsupported releases on fresh prospective cases?",
+  "prediction": "Using NLI in the evidence-premise and atomic-claim-hypothesis direction, behind deterministic lineage checks, will preserve at least 90 percent of supported drafts while rejecting every unsupported or malformed draft.",
+  "method_change": {
+    "replaces": "pre-generation query-to-evidence answerability classification",
+    "new_boundary": "post-generation validation of every declared atomic factual claim against its server-resolved retrieved evidence",
+    "generator_authority": "claim text proposal and short citation identifiers only",
+    "deterministic_authority": [
+      "active retrieval lineage",
+      "claim and citation schema",
+      "exact claim-set coverage",
+      "final release or safe-fallback decision"
+    ],
+    "product_binding_authorized": false
+  },
+  "dataset": {
+    "dataset_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+    "path": "research/05_evaluation/datasets/evidence_sufficiency_v3_atomic_claim_confirmation_001.json",
+    "file_sha256": "7a11e65f26452a0d69f5f2ccb3b0ce9170fd560dab8ea41f77997079cba0af83",
+    "content_sha256": "8ab041aa8434f3067e2de2ae1f82ab6d2a59f61bb69589ee928f76856af3c2e5",
+    "case_count": 120,
+    "releasable_case_count": 40,
+    "reject_case_count": 80,
+    "status": "frozen-unopened",
+    "data_boundary": "synthetic-public-only",
+    "gold_evidence_injection": false,
+    "historical_120_case_split_reused": false
+  },
+  "candidates": [
+    {
+      "id": "exact-quote-atomic-claim-control-v1",
+      "role": "high-precision-development-control",
+      "selectable": false,
+      "model": null,
+      "verifier": "exact-quote-atomic-claim-verifier-v1@1.0.0"
+    },
+    {
+      "id": "nli-atomic-claim-verifier-v1",
+      "role": "prospective-candidate",
+      "selectable": true,
+      "verifier": "nli-atomic-claim-verifier-v1@1.0.0",
+      "model": {
+        "model_id": "cross-encoder/nli-deberta-v3-base",
+        "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+        "license": "apache-2.0",
+        "parameter_count": 184424963,
+        "maximum_input_tokens": 512,
+        "execution_max_length": 512,
+        "label_order": [
+          "contradiction",
+          "entailment",
+          "neutral"
+        ],
+        "official_metadata_url": "https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-base",
+        "verified_at": "2026-08-24T18:41:29+08:00"
+      }
+    }
+  ],
+  "thresholds": {
+    "minimum_entailment": 0.8,
+    "maximum_contradiction": 0.2,
+    "maximum_claims": 8,
+    "evidence_limit": 5
+  },
+  "hard_gates": {
+    "false_release_count_max": 0,
+    "supported_draft_retention_min": 0.9,
+    "mutation_detection_rate_min": 1.0,
+    "lineage_rejection_rate_min": 1.0,
+    "malformed_rejection_rate_min": 1.0,
+    "multi_claim_retention_min": 0.9,
+    "verifier_p95_ms_max": 500,
+    "added_peak_memory_bytes_max": 2147483648
+  },
+  "decision_rule": {
+    "keep_candidate_only_if_every_hard_gate_passes": true,
+    "failure_requires_method_level_decision": true,
+    "threshold_tuning_on_confirmation_data": false,
+    "automatic_product_binding": false,
+    "automatic_release_promotion": false
+  },
+  "freshness_policy": {
+    "metadata_max_age_hours": 24,
+    "exact_revision_required": true,
+    "license_match_required": true,
+    "refresh_before_execution": true
+  },
+  "execution_safety": {
+    "candidate_execution_authorized": false,
+    "local_model_execution_authorized": false,
+    "confirmation_split_execution_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "heldout_execution_authorized": false,
+    "product_binding_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false,
+    "gemma_allowed": false,
+    "claude_allowed": false
+  },
+  "output": {
+    "raw_ignored_path": "reports/generated/evidence-sufficiency-v3-atomic-claim-confirmation-001.json",
+    "priority_audit_max_cases": 12,
+    "publish_sanitized_aggregate_only": true
+  }
+}

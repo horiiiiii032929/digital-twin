@@ -3,6 +3,7 @@ from src.digital_twin.generation.citations import (
     DeterministicCitationValidator,
     authoritative_citation_for_chunk,
     citation_matches_chunk,
+    resolve_atomic_claim_lineage,
 )
 from src.digital_twin.generation.generator import (
     DeterministicGroundedGenerator,
@@ -17,7 +18,9 @@ from src.digital_twin.generation.evaluation import (
 )
 from src.digital_twin.generation.models import (
     EvidenceBinding,
+    ModelAtomicClaimOutput,
     ModelTutorOutput,
+    ModelTutorOutputV2,
     PolicyAction,
     PolicyDecision,
     PromptPackage,
@@ -47,12 +50,15 @@ __all__ = [
     "GroundedPromptBuilder",
     "LiveGroundedGenerator",
     "ModelTutorOutput",
+    "ModelAtomicClaimOutput",
+    "ModelTutorOutputV2",
     "PolicyAction",
     "PolicyDecision",
     "PromptPackage",
     "StrictEvidenceGroundedPromptBuilder",
     "authoritative_citation_for_chunk",
     "citation_matches_chunk",
+    "resolve_atomic_claim_lineage",
     "evaluate_generator",
     "load_generation_evaluation_set",
 ]

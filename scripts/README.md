@@ -638,3 +638,16 @@ Current utilities:
   professor approval gate, and the empty 8-12-case calibration template. It
   opens no held-out content and makes no model call; run `npm run
   verify:professor-digital-twin-transition`.
+- `build_atomic_claim_validation_dataset.py` and
+  `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
+  120-case synthetic-public successor to the failed query/evidence gate. The
+  generator may propose atomic claims, but deterministic code owns eligible
+  retrieval lineage and the final release decision. The exact-quote control
+  and pinned DeBERTa NLI candidate validate evidence as premise and each claim
+  as hypothesis. Network-free simulation exercises supported, unsupported,
+  malformed, and unknown-lineage paths without loading a model or opening the
+  confirmation split. Use `npm run
+  verify:evidence-sufficiency-v3-atomic-claim`, `npm run
+  simulate:evidence-sufficiency-v3-atomic-claim`, or `npm run
+  preflight:evidence-sufficiency-v3-atomic-claim`. Local execution and product
+  binding remain unauthorized until a separate checkpoint.

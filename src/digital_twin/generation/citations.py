@@ -1,4 +1,5 @@
-from src.digital_twin.generation.models import EvidenceBinding
+from src.digital_twin.generation.models import EvidenceBinding, ModelTutorOutputV2
+from src.digital_twin.grounding.claim_validation import AtomicAnswerClaim
 from src.digital_twin.grounding.models import DocumentChunk, SourceCitation
 
 
@@ -37,6 +38,37 @@ class DeterministicCitationValidator:
                 raise CitationValidationError("citation maps to unapproved evidence")
             citations.append(authoritative_citation_for_chunk(chunk))
         return citations
+
+
+def resolve_atomic_claim_lineage(
+    output: ModelTutorOutputV2,
+    evidence: list[EvidenceBinding],
+) -> list[AtomicAnswerClaim]:
+    """Resolve model-visible citation IDs to server-owned retrieved hit IDs."""
+
+    evidence_ids = [binding.citation_id for binding in evidence]
+    if len(evidence_ids) != len(set(evidence_ids)):
+        raise CitationValidationError("duplicate evidence citation identifier")
+    by_id = {binding.citation_id: binding for binding in evidence}
+    claims: list[AtomicAnswerClaim] = []
+    for claim in output.claims:
+        unknown = set(claim.citation_ids) - set(by_id)
+        if unknown:
+            raise CitationValidationError("claim citation does not map to evidence")
+        hit_ids: list[str] = []
+        for citation_id in claim.citation_ids:
+            hit = by_id[citation_id].hit
+            if not hit.chunk.retrieval_allowed:
+                raise CitationValidationError("claim citation maps to ineligible evidence")
+            hit_ids.append(hit.chunk.id)
+        claims.append(
+            AtomicAnswerClaim(
+                claim_id=claim.claim_id,
+                text=claim.text,
+                evidence_hit_ids=hit_ids,
+            )
+        )
+    return claims
 
 
 def authoritative_citation_for_chunk(chunk: DocumentChunk) -> SourceCitation:
