@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 510
+    "audited": 517
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 111,
-    "active_runtime": 98,
+    "active_or_unclassified_tooling": 113,
+    "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 108,
+    "evaluation_configuration": 109,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 100
+    "verification": 103
   },
-  "file_count": 510,
+  "file_count": 517,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "33110d31f4fe08f644fdeeacf6a3afa6e8f33814059e9efdab652ebde7f954da",
+  "record_sha256": "9b154e8b58d8eaf365e2b2ab9a81b9bfe876f8bac036004fae6cece6f7ec3e46",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Command review confirms the immutable decision freeze and the candidate-comparison validator, simulation, blocked preflight, and execution entrypoint are part of the complete local verification chain. Candidate and decision-split execution remain unauthorized.",
+        "evidence": "Command review confirms the atomic-claim dataset drift check, instrument validation, network-free simulation, blocked preflight, and separately guarded local execution entrypoint are in the complete local verification chain.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "3aef55dccbc9014fa0e223415da97c18d0e3e1497ac5f71b44109d2d45ef6ecb"
+      "sha256": "085a6dbca8d6f0e93b918651d658180e6d3bd89bb1d7a99d921020c416b34a41"
     },
     {
       "audit": {
@@ -1892,6 +1892,22 @@
       "path": "research/05_evaluation/instruments/evidence_sufficiency_v2_independent_review_008.json",
       "risk": "high",
       "sha256": "02295863d99729f89c20edeefff6d852bc1a3bf95f9b32ea9c70925cb088c7fe"
+    },
+    {
+      "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Post-run review confirms the fresh 120-case binding, fixed thresholds and hard gates, pinned NLI revision, coherent three-part revocation, and continued prohibition of provider, paid, private, held-out, product-binding, and automatic-promotion authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_sufficiency_v3_atomic_claim_confirmation_001.json",
+      "risk": "high",
+      "sha256": "551cbc46c9b9dc47a8e29b0cbc694d57940879afd7fac54ef497dca8ff97d46c"
     },
     {
       "audit": {
@@ -3459,6 +3475,25 @@
     },
     {
       "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Code review and deterministic rebuild tests confirm exactly 120 fresh synthetic-public cases across 12 balanced slices, stable hashes, no historical split reuse, and no model or provider access.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:evidence-sufficiency-v3-atomic-claim-dataset",
+        "verify:evidence-sufficiency-v3-atomic-claim-dataset"
+      ],
+      "path": "scripts/build_atomic_claim_validation_dataset.py",
+      "risk": "high",
+      "sha256": "f3690c4c1498bd9178148442a0647be6fe32852ab9d294f5c05872ec852906af"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -4145,6 +4180,27 @@
       "path": "scripts/review_generator_qualification_v2.py",
       "risk": "high",
       "sha256": "dffad8cd3b51f98c286ef81102b810eecc27388d56e04c8179bdc86528333074"
+    },
+    {
+      "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Code review and simulation confirm exact hash/model/gate checks, fail-closed malformed handling, bounded local execution, complete slice metrics, exclusive ignored output, and no provider or paid path.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:evidence-sufficiency-v3-atomic-claim",
+        "preflight:evidence-sufficiency-v3-atomic-claim",
+        "simulate:evidence-sufficiency-v3-atomic-claim",
+        "verify:evidence-sufficiency-v3-atomic-claim"
+      ],
+      "path": "scripts/run_atomic_claim_validation_confirmation.py",
+      "risk": "high",
+      "sha256": "30f75831c0a37e236bf1159f7e823ce3b6158904dbd7e982bd9316d6733c9ca8"
     },
     {
       "audit": {
@@ -5986,10 +6042,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Export review confirms the prospective claim-only response models and deterministic lineage resolver are explicit without changing the selected generator contract.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5998,14 +6054,14 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "77097ddce1bb002c02070943068f37f5ad7c5c1fee1b2829a256dd87371e9f7c"
+      "sha256": "94e059ad04a7a17c4dec9d5049f5791d91eff3878e062fb141ea4037012c721e"
     },
     {
       "audit": {
         "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
+        "evidence": "Manual review and focused tests confirm short citation IDs resolve only to server-owned eligible retrieved hit IDs before semantic claim validation.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6014,14 +6070,14 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/citations.py",
       "risk": "high",
-      "sha256": "bbcfb23ea87dc09120231ca5f435f63fa7ccfc59a631412e21b562b51ce4d98c"
+      "sha256": "faf9c0e82f4fa7342d44f70899a15b880941eaaafc4ba539e8870d5366aaecc4"
     },
     {
       "audit": {
         "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
+        "evidence": "Schema review and focused tests confirm the unselected v2 model output contains only bounded atomic claims with unique claim and citation IDs and no unrestricted answer field.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6062,7 +6118,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/models.py",
       "risk": "high",
-      "sha256": "25bfea9e36506a548ff2020a8fb3577bc02b78814c1618f882599d2c5af1594a"
+      "sha256": "8786138bb0d0864a5dc2cf7cf18a83c4bfa121d1e8c473c0f5076d6c8b66c434"
     },
     {
       "audit": {
@@ -6099,9 +6155,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Export review confirms the provider-neutral open-set gate plus deterministic, cross-encoder, and NLI verifier adapters are explicit without changing the historical controls or transferring final-decision ownership to a model.",
+        "evidence": "Export review confirms the new post-generation atomic-claim contract, exact control, NLI candidate, and deterministic final release owner are explicit without changing historical v2 controls.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6110,7 +6166,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "36c88d6da888d6a4abe7b26f12059089f3374066e95c71d1558ac51b9082316a"
+      "sha256": "7f4b4f0d4ac04ce6d3fbe32be85c59f2bedfd73077b2edf083b262fb5af2237f"
     },
     {
       "audit": {
@@ -6127,6 +6183,22 @@
       "path": "src/digital_twin/grounding/chunking.py",
       "risk": "high",
       "sha256": "1219c587b74c88dc2241e7c7aad9801b6b3e4aa83ab849aada72fa88d2f718c2"
+    },
+    {
+      "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Manual code review and focused tests confirm exact claim-set coverage, eligible lineage, bounded claims/evidence, verifier-output containment, evidence-premise NLI direction, and deterministic fail-closed release ownership.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/claim_validation.py",
+      "risk": "high",
+      "sha256": "8089a88ac420a00a307357b8f6f856100957191340f362b116e2917e1c1c75af"
     },
     {
       "audit": {
@@ -6659,7 +6731,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active and candidate comparison 001 authorization is revoked after one completed local execution. Only the historical oracle remains bounded; provider, paid, private-source, held-out, and every candidate operation are unauthorized.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 and atomic-claim confirmation authorizations are revoked, atomic-claim dataset writing remains blocked, and only the historical oracle remains bounded.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -6670,7 +6742,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e98fe61608fa4c508997639abc20626b7f9cc70bac24a1b621d0277014cfeb4a"
+      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
     },
     {
       "audit": {
@@ -6930,6 +7002,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Focused tests cover full-set release, one-claim rejection, unknown and ineligible lineage, correct NLI direction, contradiction/neutral rejection, malformed/backend failure, and server-owned citation resolution.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_claim_validation.py",
+      "risk": "medium",
+      "sha256": "9ab7a0b16c182e1794e44ced0356b4c0875d2adb083ad684a2a6b52f601afbb0"
+    },
+    {
+      "audit": {
         "domain": "evaluation-and-grounding-verification",
         "evidence": "Focused regression coverage confirms the prospective Gemini reviewer is accepted by exact registration while prohibited Gemma, Claude, retired local models, and package-command execution remain blocked.",
         "findings": [],
@@ -7107,7 +7195,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the completed candidate comparison plus every unregistered, provider, paid, private-source, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the completed atomic-claim confirmation, candidate comparison, and every unregistered, provider, paid, private-source, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7535,6 +7623,22 @@
       "path": "tests/test_audit_multimodal_v3_result.py",
       "risk": "medium",
       "sha256": "252738d4b048274da08b3de0540d5165ac119d4cafa025e1eda8ceab01b8d230"
+    },
+    {
+      "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Tests prove byte-stable generation, exact 40/80 distribution, 12 balanced slices, unique IDs, eligible lineage for every releasable case, and named failure classes for every reject case.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_atomic_claim_validation_dataset.py",
+      "risk": "medium",
+      "sha256": "6f6978b34bf3fceb2afa548901e08386f00579008889d1e4c9292e17c1ca456c"
     },
     {
       "audit": {
@@ -8114,6 +8218,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Tests verify completed revocation, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-24",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_run_atomic_claim_validation_confirmation.py",
+      "risk": "medium",
+      "sha256": "0eedbbe82ec7853daca2678761a2b4a3342567209e7af6557888430ab651d984"
+    },
+    {
+      "audit": {
         "domain": "autonomous-tutoring-graph",
         "evidence": "Focused regressions verify revoked post-result preflight, complete passing T0/T1 evaluation logic, method-failure Refine behavior, invalid-execution preservation, zero external usage, and no automatic promotion.",
         "findings": [],
@@ -8434,8 +8554,8 @@
     }
   ],
   "risk_counts": {
-    "high": 396,
-    "medium": 114
+    "high": 400,
+    "medium": 117
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

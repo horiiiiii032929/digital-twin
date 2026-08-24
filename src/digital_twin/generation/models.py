@@ -48,3 +48,47 @@ class ModelTutorOutput(BaseModel):
         if not answer:
             raise ValueError("answer must not be blank")
         return answer
+
+
+class ModelAtomicClaimOutput(BaseModel):
+    """Prospective v2 output: factual text exists only as declared claims."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    claim_id: str = Field(pattern=r"^claim-[a-z0-9-]+$")
+    text: str = Field(min_length=1)
+    citation_ids: list[str] = Field(min_length=1)
+
+    @field_validator("text")
+    @classmethod
+    def claim_text_must_not_be_blank(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized:
+            raise ValueError("claim text must not be blank")
+        return normalized
+
+    @field_validator("citation_ids")
+    @classmethod
+    def citation_ids_must_be_unique(cls, values: list[str]) -> list[str]:
+        if len(values) != len(set(values)):
+            raise ValueError("claim citation IDs must be unique")
+        return values
+
+
+class ModelTutorOutputV2(BaseModel):
+    """Candidate claim-only response contract; not selected by the profile."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    claims: list[ModelAtomicClaimOutput] = Field(min_length=1, max_length=8)
+
+    @field_validator("claims")
+    @classmethod
+    def claim_ids_must_be_unique(
+        cls,
+        values: list[ModelAtomicClaimOutput],
+    ) -> list[ModelAtomicClaimOutput]:
+        claim_ids = [claim.claim_id for claim in values]
+        if len(claim_ids) != len(set(claim_ids)):
+            raise ValueError("claim IDs must be unique")
+        return values

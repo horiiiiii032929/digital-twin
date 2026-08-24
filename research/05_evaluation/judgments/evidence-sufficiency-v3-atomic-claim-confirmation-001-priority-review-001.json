@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "review_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001-priority-review-001",
+  "run_id": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+  "reviewer": "codex-primary-review",
+  "reviewed_at": "2026-08-24",
+  "case_count": 12,
+  "confirmed_count": 12,
+  "unresolved_count": 0,
+  "cases": [
+    {
+      "case_id": "acv-08-paraphrase-multi",
+      "verdict": "ground-truth-confirmed-candidate-false-rejection",
+      "rationale": "Both claims are faithful paraphrases of their separately cited eligible evidence; rejecting the leakage claim is conservative but incorrect."
+    },
+    {
+      "case_id": "acv-09-paraphrase-multi",
+      "verdict": "ground-truth-confirmed-candidate-false-rejection",
+      "rationale": "Both security claims preserve the meaning of their separately cited eligible evidence; rejecting the CSP paraphrase is conservative but incorrect."
+    },
+    {
+      "case_id": "acv-01-exact-single",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The exact claim is fully supported by its declared active hit."
+    },
+    {
+      "case_id": "acv-01-paraphrase-single",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The claim is a faithful paraphrase of session revocation and uses the correct active lineage."
+    },
+    {
+      "case_id": "acv-01-exact-multi",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "Both exact claims are independently supported by their declared active hits."
+    },
+    {
+      "case_id": "acv-01-paraphrase-multi",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "Both paraphrased claims are independently supported by their declared active hits."
+    },
+    {
+      "case_id": "acv-01-contradiction",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "Account deletion is not supported by evidence about session revocation."
+    },
+    {
+      "case_id": "acv-01-unsupported-addition",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The extra account-deletion claim is unsupported, so the complete response must fail closed."
+    },
+    {
+      "case_id": "acv-01-wrong-lineage",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The session-revocation claim cites reset-token expiry evidence and must be rejected."
+    },
+    {
+      "case_id": "acv-01-stale-source",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The claim uses an explicitly ineligible stale source revision and must be rejected deterministically."
+    },
+    {
+      "case_id": "acv-01-cross-course",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "The matching text belongs to an ineligible cross-course hit and must be rejected deterministically."
+    },
+    {
+      "case_id": "acv-01-partial-multi",
+      "verdict": "candidate-decision-confirmed",
+      "rationale": "One of two claims is unsupported; all-claim coverage correctly rejects the complete response."
+    }
+  ],
+  "decision": "confirm-keep-with-two-conservative-false-rejections"
+}

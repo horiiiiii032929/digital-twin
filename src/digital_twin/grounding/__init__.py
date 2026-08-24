@@ -27,6 +27,15 @@ from src.digital_twin.grounding.evidence_verifiers import (
     NliScoreBackend,
     PairScoreBackend,
 )
+from src.digital_twin.grounding.claim_validation import (
+    AtomicAnswerClaim,
+    AtomicClaimEvidenceValidator,
+    AtomicClaimSupportSignal,
+    AtomicClaimSupportVerifier,
+    AtomicClaimValidationDecision,
+    ExactQuoteAtomicClaimVerifier,
+    NliAtomicClaimVerifier,
+)
 from src.digital_twin.grounding.ingestion import (
     EmptySourceError,
     IngestionError,
@@ -115,6 +124,11 @@ from src.digital_twin.grounding.reranking import PairwiseReranker, RerankingRetr
 
 __all__ = [
     "AnyHitEvidenceGate",
+    "AtomicAnswerClaim",
+    "AtomicClaimEvidenceValidator",
+    "AtomicClaimSupportSignal",
+    "AtomicClaimSupportVerifier",
+    "AtomicClaimValidationDecision",
     "ApprovalDecision",
     "ApprovalRecord",
     "BM25Retriever",
@@ -136,6 +150,7 @@ __all__ = [
     "EvidenceSufficiencyDecision",
     "EvidenceSufficiencyEvaluationSummary",
     "EvidenceSufficiencyGate",
+    "ExactQuoteAtomicClaimVerifier",
     "FallbackRetriever",
     "FigureAsset",
     "FigureDescription",
@@ -162,6 +177,7 @@ __all__ = [
     "OCRProvider",
     "OCRTextRegion",
     "NliProbabilities",
+    "NliAtomicClaimVerifier",
     "NliScoreBackend",
     "PairwiseReranker",
     "PairScoreBackend",
