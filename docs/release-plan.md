@@ -71,10 +71,12 @@ not require model spending or private data:
    human ground truth. Exact public sources, cases, controls, and the blinded
    packet are now built and hash-bound. Exact Codex, Mistral, and DeepSeek
    reviewer bindings and the calibration-first executor are also frozen and
-   pass the complete network-free simulation. Only the bounded 40-control
-   calibration is authorized. Product bindings, researcher audit, confirmation
-   execution, and the final tranche remain unopened; the next decision follows
-   calibration rather than another redesign.
+   pass the complete network-free simulation. Calibration attempt 001 is
+   preserved as invalid after its first Mistral call exposed incomplete failure
+   evidence; authority is revoked. Harden sanitized provider error and usage
+   accounting, then require separate authority for one corrective calibration.
+   Product bindings, researcher audit, confirmation execution, and the final
+   tranche remain unopened.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

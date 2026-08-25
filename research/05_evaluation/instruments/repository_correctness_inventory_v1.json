@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "63a7f927f3e1ee4e56905e06019daefbca81b2421a49270c460b7602d88b2c50",
+  "record_sha256": "6fc9926ae7db89fcebe8ab749187b245c7d76681bb84e9c8de6de1bcfb2d2308",
   "records": [
     {
       "audit": {
@@ -1528,7 +1528,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Protocol review verifies deterministic truth authority, three-family blinded review, exact reviewer bindings, planted-control calibration, unanimity, bounded researcher audit, and calibration-only authority while preserving confirmation 001 and blocking confirmation.",
+        "evidence": "Protocol review preserves deterministic truth, three-family calibration, unanimity, and bounded audit contracts while recording attempt 001 as invalid, one-call, revoked, and confirmation-unopened.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -1539,12 +1539,12 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
       "risk": "high",
-      "sha256": "bb663618b2177c92857afe66209393f6f7574a5c7731c7e2e6a29622f2b65240"
+      "sha256": "7bcdba1df15816a50e2a53836fc4675f4b309d25a3b2fac30f861fe95ff699b6"
     },
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual binding review and focused tests verify current Codex, Mistral, and DeepSeek identities, exact Mistral ZDR/no-fallback routing, current peak DeepSeek pricing, the 24-hour freshness window, calibration-only authority, 120-call ceiling, and USD 3 emergency stop.",
+        "evidence": "Manual binding review preserves current Codex, Mistral, and DeepSeek identities, exact Mistral ZDR/no-fallback routing, current peak pricing, the 24-hour freshness window, 120-call ceiling, and USD 3 stop while revoking attempt-001 authority.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1555,7 +1555,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
       "risk": "high",
-      "sha256": "9cb1809a37808adbc949ea6a067b5f0a43c658d7a0691efce1d71523941b7b61"
+      "sha256": "cdaa2de8fa7918051a5a1d8a76df7d57d3c35de056d4590c2fd167b7cba75a44"
     },
     {
       "audit": {
@@ -3959,7 +3959,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, calibration-only authority before separately authorized confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, and malformed preservation.",
+        "evidence": "Manual execution-path review and tests preserve invalid attempt 001, enforce revoked authority and separate confirmation, and add sanitized provider HTTP/error/request, returned usage/cost, and malformed-response hashes without retry.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -3975,7 +3975,7 @@
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "b91dcc25802c9efbd3254b28cb9d9a36d4cd1653e9a8093c572641fc5dc4df80"
+      "sha256": "108655e8ddf54aee56e38681c96bacdf570f0705cd38401d3ce585d840517b21"
     },
     {
       "audit": {
@@ -4363,7 +4363,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual freeze-registry review permits only the named confirmation-002 calibration operations while the repository-wide freeze and all unrelated execution blocks remain active.",
+        "evidence": "Manual freeze-registry review confirms attempt-001 authorization is removed and only the unchanged historical oracle pilot remains bounded while the global freeze stays active.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -4383,7 +4383,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual runner review and network-free scenario tests verify strict vote parsing, reviewer calibration, unanimity, nominal agreement, bounded audit packets, atomic accounting, exact resume bindings, calibration-only authority, blocked confirmation, and absence of a provider-execution mode.",
+        "evidence": "Manual runner review and network-free tests verify strict parsing, calibration, unanimity, bounded audit packets, atomic accounting, invalid-attempt authority revocation, blocked confirmation, and absence of provider execution in this legacy runner.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -4398,7 +4398,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "78343d1822010cbdfc686dc6cf70a7a79b98fcc349a0ba98aac5b1d255de71e6"
+      "sha256": "9b04c0d6ca77aa7edab3ead54dda53bb68980141501ef5b723d589182331364a"
     },
     {
       "audit": {
@@ -5115,7 +5115,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual validator review and focused drift tests enforce exact binding hashes, current model identities, panel diversity, reviewer calibration, cost/call limits, deterministic authority, calibration-only execution, and blocked confirmation.",
+        "evidence": "Manual validator review and drift tests enforce exact hashes, panel diversity, deterministic authority, the one-call invalid attempt state, fully revoked execution authority, and unopened confirmation.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -5129,7 +5129,7 @@
       ],
       "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
       "risk": "high",
-      "sha256": "20ef4b98660b3f37348c7676c6491954c63839b04e49e16fa78a7d64eadc6414"
+      "sha256": "ff2a28cfde65ce95de30362bb0725995b7d03bf218bca1568251ae6dcb38e839"
     },
     {
       "audit": {
@@ -7001,7 +7001,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "cb1c9daa8d9e9889189b686925675040a82af1433d378651c1252e0ea2a84bb5"
+      "sha256": "2e0e320b7ac1c30073cb92c5861a4b76f5a404cc9ef47e02274aae4caaa5cb37"
     },
     {
       "audit": {
@@ -7102,7 +7102,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Focused freeze tests verify the exact two-entry bounded authorization set, including confirmation-002 calibration, and reject unknown or superseded execution IDs.",
+        "evidence": "Focused freeze tests verify the authorization set returned to the unchanged historical oracle pilot only and reject confirmation-002 plus unknown or superseded execution IDs.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -7465,7 +7465,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "36ffc3c43023183afbdc831ba8bfe047b7cf81e381789cd107df1b4480970954"
+      "sha256": "4cb7f1b59a951c29b1b4cac86c8fb51834799b1b4f59ae3545173a1d0d4c5e6a"
     },
     {
       "audit": {
@@ -7758,7 +7758,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused tests cover three-family coverage, deterministic truth authority, unanimity, calibration and audit bounds, exact fresh bindings, isolated Codex runtime gating, calibration-only authority, and fail-closed confirmation.",
+        "evidence": "Focused tests cover deterministic truth, three-family review, calibration/audit bounds, exact bindings, isolated Codex gating, invalid-attempt accounting, revoked authority, and fail-closed confirmation.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -7769,7 +7769,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_confirmation_v2.py",
       "risk": "medium",
-      "sha256": "078e4721e8cac35377d2b1623df1c1a687373859b3d5f11548b0eed7685a6813"
+      "sha256": "80296f9ff234b59ed5395c79e72afa6dd55c75a964c709d655280eaf8e2b86d0"
     },
     {
       "audit": {
@@ -7806,7 +7806,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, calibration authority, and blocked-confirmation paths.",
+        "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, revoked invalid-attempt authority, and blocked confirmation paths.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -7817,7 +7817,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_panel_review_v2.py",
       "risk": "medium",
-      "sha256": "796dbe821671a89dd33f1532d4c8673bcfb699aadbf702e15ced5cc7cc8fc91a"
+      "sha256": "3c45e43b47d75af6a8e14bc2f0affd4411a349c91f040402cea69d88ed172c6b"
     },
     {
       "audit": {
@@ -8158,7 +8158,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, separate calibration and confirmation authorization, full 120-call simulation, and one-call malformed termination.",
+        "evidence": "Focused tests cover binding identity, strict vote parsing, isolated task identity, revoked attempt preflight, separate phase authority, full simulation, malformed returned-usage accounting, and sanitized provider HTTP failure evidence without retry.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -8169,7 +8169,7 @@
       "package_commands": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "risk": "medium",
-      "sha256": "47b5879e895e1d5f94beb26be34cecfdddd263f040a5977551af270f8ba73815"
+      "sha256": "b3a8f7646b1a65002bc776bf397ead4bbb8df9f5c72dcaa487c7f64b3c07a7d7"
     },
     {
       "audit": {

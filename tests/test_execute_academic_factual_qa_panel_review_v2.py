@@ -12,6 +12,7 @@ import scripts.execute_academic_factual_qa_panel_review_v2 as panel_executor
 from scripts.execute_academic_factual_qa_panel_review_v2 import (
     PanelExecutionError,
     ProviderBatchResult,
+    ProviderCallFailure,
     _maximum_call_cost,
     _simulated_codex_artifact,
     build_preflight,
@@ -165,13 +166,17 @@ def test_codex_phase_artifacts_require_one_constant_isolated_task(tmp_path: Path
         )
 
 
-def test_network_free_preflight_keeps_live_execution_blocked() -> None:
-    result = build_preflight(load_assets(), live=False)
+def test_network_free_preflight_preserves_revoked_invalid_attempt(
+    tmp_path: Path,
+) -> None:
+    result = build_preflight(
+        load_assets(), live=False, codex_votes_path=tmp_path / "missing-votes.json"
+    )
 
     assert result["status"] == "blocked-not-authorized"
-    assert "calibration-execution-not-authorized" not in result["blockers"]
-    assert "bounded-freeze-authorization-missing" not in result["blockers"]
-    assert "instrument-not-frozen-for-execution" not in result["blockers"]
+    assert "calibration-execution-not-authorized" in result["blockers"]
+    assert "bounded-freeze-authorization-missing" in result["blockers"]
+    assert "instrument-not-frozen-for-execution" in result["blockers"]
     assert "reviewer-metadata-not-current" in result["blockers"]
     assert "codex-calibration-votes-missing" in result["blockers"]
     assert result["provider_or_model_calls"] == 0
@@ -182,6 +187,7 @@ def test_execution_command_rechecks_authority_before_a_provider_call(
     tmp_path: Path,
 ) -> None:
     assets = load_assets()
+    assets["instrument"]["status"] = "frozen-pending-execution"
     assets["instrument"]["execution_safety"][
         "calibration_execution_authorized"
     ] = False
@@ -234,7 +240,10 @@ def test_calibration_authority_does_not_require_confirmation_authority(
     monkeypatch.setenv("DEEPSEEK_API_KEY", "present")
 
     result = build_preflight(
-        assets, live=True, output_path=tmp_path / "unused-ledger.json"
+        assets,
+        live=True,
+        output_path=tmp_path / "unused-ledger.json",
+        codex_votes_path=tmp_path / "missing-votes.json",
     )
 
     assert "calibration-execution-not-authorized" not in result["blockers"]
@@ -270,6 +279,21 @@ class _MalformedTransport:
         )
 
 
+class _ProviderErrorTransport:
+    async def call(self, **_: object) -> ProviderBatchResult:
+        raise ProviderCallFailure(
+            "provider-http-error",
+            {
+                "http_status": 400,
+                "request_id": "request-public-id",
+                "provider_error_code": "invalid_schema",
+                "provider_error_message": "Schema feature is unsupported.",
+                "latency_ms": 2.0,
+                "cost_accounting_status": "unavailable-provider-error",
+            },
+        )
+
+
 def test_malformed_provider_batch_is_recorded_once_without_retry(
     tmp_path: Path,
 ) -> None:
@@ -293,3 +317,37 @@ def test_malformed_provider_batch_is_recorded_once_without_retry(
     assert result["provider_calls"] == 1
     assert len(result["provider_call_records"]) == 1
     assert result["malformed_response_count"] == 1
+    assert result["input_tokens"] == 100
+    assert result["output_tokens"] == 10
+    assert result["reported_cost_usd"] == pytest.approx(0.001)
+    assert result["provider_call_records"][0]["cost_accounting_status"] == "complete"
+    assert result["provider_call_records"][0]["response_content_sha256"]
+
+
+def test_provider_http_failure_preserves_sanitized_diagnostics_without_retry(
+    tmp_path: Path,
+) -> None:
+    assets = load_assets()
+    codex = tmp_path / "codex-calibration.json"
+    ledger = tmp_path / "ledger.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+
+    result = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=ledger,
+            transport=_ProviderErrorTransport(),
+            simulation=True,
+            resume=False,
+        )
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["provider_calls"] == 1
+    record = result["provider_call_records"][0]
+    assert record["category"] == "provider-http-error"
+    assert record["http_status"] == 400
+    assert record["request_id"] == "request-public-id"
+    assert record["provider_error_code"] == "invalid_schema"
+    assert record["cost_accounting_status"] == "unavailable-provider-error"

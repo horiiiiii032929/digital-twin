@@ -20,7 +20,7 @@ def _write(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
-def test_llm_panel_protocol_authorizes_only_calibration() -> None:
+def test_llm_panel_protocol_preserves_invalid_attempt_with_authority_revoked() -> None:
     result = preflight(validate_instrument())
 
     assert result == {
@@ -28,6 +28,10 @@ def test_llm_panel_protocol_authorizes_only_calibration() -> None:
         "status": "blocked-build-only",
         "blockers": [
             "codex-isolated-runtime-not-verified",
+            "calibration-execution-authorized-false",
+            "codex-review-authorized-false",
+            "provider-review-authorized-false",
+            "paid-execution-authorized-false",
         ],
         "planned_case_count": 200,
         "planned_cluster_count": 100,
@@ -100,8 +104,8 @@ def test_historical_human_review_protocol_remains_preserved() -> None:
         (
             "execution_safety",
             "provider_review_authorized",
-            False,
-            "calibration execution authorities",
+            True,
+            "invalid-attempt execution authorities",
         ),
     ],
 )

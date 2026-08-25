@@ -525,15 +525,11 @@ def validate_build() -> dict[str, Any]:
     )
     if reviewer_ids != REVIEWER_IDS:
         raise PanelReviewError(f"reviewer binding drifted: {reviewer_ids}")
-    if not instrument["execution_safety"]["codex_review_authorized"]:
-        raise PanelReviewError("Codex calibration authority is missing")
-    if not instrument["execution_safety"]["provider_review_authorized"]:
-        raise PanelReviewError("provider calibration authority is missing")
-    if instrument["execution_safety"]["confirmation_execution_authorized"]:
-        raise PanelReviewError("confirmation must remain unauthorized")
+    if any(instrument["execution_safety"].values()):
+        raise PanelReviewError("invalid-attempt authority must remain revoked")
     return {
         "instrument_id": instrument["instrument_id"],
-        "status": "validated-calibration-authorized-no-execution-mode",
+        "status": "validated-attempt-001-invalid-authorization-revoked",
         "packet_item_count": len(packet["items"]),
         "provider_calls": 0,
     }

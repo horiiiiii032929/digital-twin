@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Prepare, preflight, simulate, or execute the confirmation-002 review panel.
 
-The committed checkpoint authorizes calibration only. Live preflight performs
-metadata reads only. Provider inference is split into calibration and
-confirmation phases so no confirmation vote is opened until all three
-reviewers pass the frozen calibration gates and confirmation receives separate
-authority.
+Calibration attempt 001 is preserved as invalid and its authority is revoked.
+Live preflight performs metadata reads only. Provider inference is split into
+calibration and confirmation phases so no confirmation vote is opened until
+all three reviewers pass the frozen calibration gates and confirmation receives
+separate authority.
 """
 
 from __future__ import annotations
@@ -81,6 +81,15 @@ PROVIDER_REVIEWERS = REVIEWER_IDS[1:]
 
 class PanelExecutionError(PanelReviewError):
     """Raised when execution or a live binding violates the frozen contract."""
+
+
+class ProviderCallFailure(PanelExecutionError):
+    """Provider failure carrying only sanitized, ledger-safe diagnostics."""
+
+    def __init__(self, category: str, details: dict[str, Any]) -> None:
+        super().__init__(category)
+        self.category = category
+        self.details = details
 
 
 @dataclass(frozen=True)
@@ -415,9 +424,41 @@ class HttpPanelTransport:
         try:
             value = response.json()
         except ValueError as error:
-            raise PanelExecutionError("provider returned non-JSON HTTP response") from error
+            raise ProviderCallFailure(
+                "provider-http-non-json",
+                {
+                    "http_status": response.status_code,
+                    "request_id": response.headers.get("x-request-id"),
+                    "latency_ms": latency_ms,
+                    "cost_accounting_status": "unavailable-provider-error",
+                },
+            ) from error
         if response.is_error or not isinstance(value, dict) or value.get("error"):
-            raise PanelExecutionError(f"provider request failed with HTTP {response.status_code}")
+            provider_error = value.get("error") if isinstance(value, dict) else None
+            error_code = (
+                provider_error.get("code") if isinstance(provider_error, dict) else None
+            )
+            error_message = (
+                provider_error.get("message")
+                if isinstance(provider_error, dict)
+                else None
+            )
+            raise ProviderCallFailure(
+                "provider-http-error",
+                {
+                    "http_status": response.status_code,
+                    "request_id": (
+                        value.get("id") if isinstance(value, dict) else None
+                    )
+                    or response.headers.get("x-request-id"),
+                    "provider_error_code": error_code,
+                    "provider_error_message": (
+                        str(error_message)[:500] if error_message is not None else None
+                    ),
+                    "latency_ms": latency_ms,
+                    "cost_accounting_status": "unavailable-provider-error",
+                },
+            )
         choices = value.get("choices")
         if not isinstance(choices, list) or len(choices) != 1:
             raise PanelExecutionError("provider response choices drifted")
@@ -690,6 +731,7 @@ async def _run_batches(
                 write_ledger_atomic(output_path, ledger)
                 return False
             schema = response_schema([row["review_item_id"] for row in batch])
+            raw: ProviderBatchResult | None = None
             try:
                 raw = await transport.call(reviewer=reviewer, items=batch, schema=schema)
                 contract = binding["execution_contract"]
@@ -712,20 +754,40 @@ async def _run_batches(
                 ledger["malformed_response_count"] += int(
                     isinstance(error, PanelExecutionError)
                 )
-                ledger["provider_failures"].append(
-                    {
-                        "reviewer_id": reviewer_id,
-                        "item_ids": [row["review_item_id"] for row in batch],
-                        "reason": type(error).__name__,
-                    }
-                )
-                ledger["provider_call_records"].append(
-                    {
-                        "reviewer_id": reviewer_id,
-                        "item_ids": [row["review_item_id"] for row in batch],
-                        "status": "failed",
-                    }
-                )
+                failure = {
+                    "reviewer_id": reviewer_id,
+                    "item_ids": [row["review_item_id"] for row in batch],
+                    "reason": type(error).__name__,
+                    "detail": str(error)[:500],
+                }
+                call_record: dict[str, Any] = {**failure, "status": "failed"}
+                if isinstance(error, ProviderCallFailure):
+                    failure["category"] = error.category
+                    call_record["category"] = error.category
+                    call_record.update(error.details)
+                elif raw is not None:
+                    ledger["input_tokens"] += raw.input_tokens
+                    ledger["output_tokens"] += raw.output_tokens
+                    ledger["reported_cost_usd"] = round(
+                        ledger["reported_cost_usd"] + raw.cost_usd, 9
+                    )
+                    call_record.update(
+                        {
+                            "provider_model": raw.provider_model,
+                            "provider_revision": raw.provider_revision,
+                            "provider_name": raw.provider_name,
+                            "input_tokens": raw.input_tokens,
+                            "output_tokens": raw.output_tokens,
+                            "reported_cost_usd": raw.cost_usd,
+                            "latency_ms": raw.latency_ms,
+                            "response_content_sha256": canonical_sha256(
+                                {"content": raw.content}
+                            ),
+                            "cost_accounting_status": "complete",
+                        }
+                    )
+                ledger["provider_failures"].append(failure)
+                ledger["provider_call_records"].append(call_record)
                 ledger["status"] = "invalid-execution"
                 write_ledger_atomic(output_path, ledger)
                 return False
@@ -979,7 +1041,11 @@ def live_metadata_failures(assets: dict[str, Any]) -> list[str]:
 
 
 def build_preflight(
-    assets: dict[str, Any], *, live: bool, output_path: Path = DEFAULT_LEDGER_PATH
+    assets: dict[str, Any],
+    *,
+    live: bool,
+    output_path: Path = DEFAULT_LEDGER_PATH,
+    codex_votes_path: Path | None = None,
 ) -> dict[str, Any]:
     instrument = assets["instrument"]
     binding = assets["binding"]
@@ -1024,7 +1090,10 @@ def build_preflight(
         blockers.append("working-tree-dirty")
     if output_path.exists():
         blockers.append("output-path-already-exists")
-    if not (ROOT / binding["reviewers"][0]["calibration_vote_path"]).exists():
+    expected_codex_votes = codex_votes_path or (
+        ROOT / binding["reviewers"][0]["calibration_vote_path"]
+    )
+    if not expected_codex_votes.exists():
         blockers.append("codex-calibration-votes-missing")
     return {
         "instrument_id": INSTRUMENT_ID,
@@ -1186,7 +1255,7 @@ def main() -> int:
     if args.validate:
         result = {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-calibration-authorized-confirmation-unauthorized",
+            "status": "validated-attempt-001-invalid-authorization-revoked",
             "binding_sha256": assets["binding"]["content_sha256"],
             "maximum_provider_calls": 120,
             "provider_or_model_calls": 0,

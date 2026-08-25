@@ -166,11 +166,17 @@ direct DeepSeek V4 Pro using current peak prices. Its two-phase executor
 requires all three reviewers to pass calibration before confirmation, allows
 120 provider calls with zero retries, checkpoints atomically, and enforces a
 USD 3 emergency stop. The full network-free 720-judgment simulation passes and
-the metadata-only live check reports no drift. The bounded 40-control Codex and
-provider calibration is now authorized under AFQC-017. The 200-case
-confirmation, product binding, researcher audit, private data, promotion, and
-final tranche remain unauthorized; calibration must pass before any of those
-boundaries can change.
+the metadata-only live check reports no drift. AFQC-017 authorized one bounded
+40-control calibration. The isolated Codex reviewer passed all four gates at
+1.00, but the first Mistral batch stopped at the strict transport/parser
+boundary before any provider vote was accepted; DeepSeek and confirmation were
+never opened. Attempt 001 is therefore **invalid execution**, not a quality
+failure. Its authority is revoked under AFQC-018. The ledger's USD 0 is
+incomplete accounting rather than verified zero spend because the old failure
+path retained neither provider usage nor exact error detail. A separately
+authorized corrective attempt may follow only after that evidence path is
+hardened. Confirmation, product binding, researcher audit, private data,
+promotion, and the final tranche remain unauthorized.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -193,7 +199,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 925 Python tests and 46 frontend tests, frontend lint, and the
+check passes 926 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 

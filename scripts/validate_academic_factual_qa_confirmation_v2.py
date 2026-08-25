@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the calibration-authorized LLM-panel factual-QA protocol."""
+"""Validate the revoked invalid-attempt LLM-panel factual-QA protocol."""
 
 from __future__ import annotations
 
@@ -34,8 +34,8 @@ PREDECESSOR_INSTRUMENT = (
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "frozen-pending-execution"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 18))
+STATUS = "calibration-attempt-001-invalid-authorization-revoked"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 19))
 REVIEWER_IDS = (
     "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
@@ -323,14 +323,8 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         "review cost guard drifted",
     )
     _require(
-        binding_artifact["authorization"]
-        == {
-            "codex_review_authorized": True,
-            "provider_review_authorized": True,
-            "paid_execution_authorized": True,
-            "confirmation_review_authorized": False,
-        },
-        "binding artifact calibration authority drifted",
+        all(value is False for value in binding_artifact["authorization"].values()),
+        "binding artifact authority must remain revoked",
     )
 
     analysis = instrument["analysis_plan"]
@@ -350,22 +344,8 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
 
     safety = instrument["execution_safety"]
     _require(
-        safety
-        == {
-            "source_download_authorized": False,
-            "question_construction_authorized": False,
-            "calibration_execution_authorized": True,
-            "codex_review_authorized": True,
-            "provider_review_authorized": True,
-            "paid_execution_authorized": True,
-            "private_source_execution_authorized": False,
-            "confirmation_execution_authorized": False,
-            "researcher_audit_authorized": False,
-            "final_execution_authorized": False,
-            "product_binding_authorized": False,
-            "automatic_promotion": False,
-        },
-        "calibration execution authorities drifted",
+        all(value is False for value in safety.values()),
+        "invalid-attempt execution authorities must remain revoked",
     )
     build = instrument["build_checkpoint"]
     _require(
@@ -389,10 +369,10 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         "build checkpoint counts drifted",
     )
     _require(
-        build["provider_calls"] == 0
+        build["provider_calls"] == 1
         and build["private_data_read"] is False
-        and build["review_execution_started"] is False,
-        "build-only execution boundary drifted",
+        and build["review_execution_started"] is True,
+        "invalid attempt accounting drifted",
     )
     progression = instrument["progression_rule"]
     _require(progression["external_human_ground_truth_may_be_claimed"] is False, "human ground truth claim must remain false")
@@ -462,7 +442,7 @@ def main() -> int:
     result = (
         {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-calibration-authorized-confirmation-unauthorized",
+            "status": "validated-attempt-001-invalid-authorization-revoked",
         }
         if args.validate
         else preflight(instrument)
