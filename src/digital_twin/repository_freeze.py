@@ -123,6 +123,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_academic_factual_qa_end_to_end_pilot.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_cross_course_retrieval_heldout.py": (
             "heldout_execution",
             "method_evaluation_execution",
@@ -218,6 +221,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # successor instrument requires a new code review and an explicit entry here.
 BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
+        "academic-factual-qa-end-to-end-pilot-002": (
+            "method_evaluation_execution",
+        ),
         "factual-qa-v3-oracle-pilot-001": (
             "dataset_generation",
             "external_model_evaluation",

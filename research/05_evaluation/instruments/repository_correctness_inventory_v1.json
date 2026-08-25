@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 521
+    "audited": 524
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 115,
+    "active_or_unclassified_tooling": 116,
     "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 110,
+    "evaluation_configuration": 111,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 104
+    "verification": 105
   },
-  "file_count": 521,
+  "file_count": 524,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "07f3b08dac7d3a5b4dae5babc34817bb72b5a2adccc63d6b17b3378bedaf7d57",
+  "record_sha256": "6f90027f0ea361c721f006187b98e1b0e3bcf955abcb860b5e8f5a0a1243d845",
   "records": [
     {
       "audit": {
@@ -1287,8 +1287,8 @@
     },
     {
       "audit": {
-        "domain": "academic-factual-qa-evaluation",
-        "evidence": "Command review confirms the academic factual-QA instrument validation and network-free real-service simulation are included in the complete local verification chain while external and development execution remain fail-closed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "52c15ae27d3b27e22dd25e0af37deacde44000b08f1b721b7d4922af25729f1e"
+      "sha256": "21a5b3396b269a3a4a6de8a7a839edaf9158ca510f37cdae060d0361d39a1940"
     },
     {
       "audit": {
@@ -1524,6 +1524,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_001.json",
       "risk": "high",
       "sha256": "59e25a6693a9bb3a695f0eb5a5c4733081e44235008055c75cca5911dd9a4d06"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_002.json",
+      "risk": "high",
+      "sha256": "7cbfc202fa5108da81557723f839fc675536ca8135f8e0d195923c58a83440f0"
     },
     {
       "audit": {
@@ -4226,13 +4242,36 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:academic-factual-qa-e2e-pilot",
+        "execute:academic-factual-qa-e2e-pilot-v2",
         "preflight:academic-factual-qa-e2e-pilot",
+        "preflight:academic-factual-qa-e2e-pilot-v2",
         "simulate:academic-factual-qa-e2e-pilot",
-        "verify:academic-factual-qa-e2e-pilot"
+        "verify:academic-factual-qa-e2e-pilot",
+        "verify:academic-factual-qa-e2e-pilot-v2"
       ],
       "path": "scripts/run_academic_factual_qa_end_to_end_pilot.py",
       "risk": "high",
       "sha256": "ad9e611065c729bb63eb46d79d44ade92de7d0636a4b325ba1a3dc6c327ad5af"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-e2e-pilot-v2",
+        "preflight:academic-factual-qa-e2e-pilot-v2",
+        "verify:academic-factual-qa-e2e-pilot-v2"
+      ],
+      "path": "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py",
+      "risk": "high",
+      "sha256": "c903be6879f09b8f673368241771ce4ff897daee156489b8f0ec20dea4ae85f2"
     },
     {
       "audit": {
@@ -5439,10 +5478,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5451,7 +5490,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "840e105398d6989f3ce56704f5bb489119a4559b7202007dd53639224eb5315f"
+      "sha256": "a14da0b6f2449aa1c6816fd7b7a1034d4a21cef47d4e9113827a32ae5f98e18b"
     },
     {
       "audit": {
@@ -6111,10 +6150,10 @@
     },
     {
       "audit": {
-        "domain": "grounded-generation-correctness",
-        "evidence": "Manual review and focused tests confirm short citation IDs resolve only to server-owned eligible retrieved hit IDs before semantic claim validation.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6123,7 +6162,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/citations.py",
       "risk": "high",
-      "sha256": "faf9c0e82f4fa7342d44f70899a15b880941eaaafc4ba539e8870d5366aaecc4"
+      "sha256": "629e9954e8884fde4662d0e31e21f55e60d846f14410f9c8d44fe4d5879c2977"
     },
     {
       "audit": {
@@ -6143,10 +6182,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6159,10 +6198,10 @@
     },
     {
       "audit": {
-        "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6175,10 +6214,10 @@
     },
     {
       "audit": {
-        "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6187,7 +6226,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/policy.py",
       "risk": "high",
-      "sha256": "ff37d86df4f006eb3b63f9d01d7c5969a51eb50eda12e98cb3cacac2fcc80e3c"
+      "sha256": "0e3f12bb9eddad05a9864834ac6db809f18bcc3a23623685335eb89b63c01650"
     },
     {
       "audit": {
@@ -6207,10 +6246,10 @@
     },
     {
       "audit": {
-        "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Export review confirms the new post-generation atomic-claim contract, exact control, NLI candidate, and deterministic final release owner are explicit without changing historical v2 controls.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6219,7 +6258,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "7f4b4f0d4ac04ce6d3fbe32be85c59f2bedfd73077b2edf083b262fb5af2237f"
+      "sha256": "f705fd59b04ce8c45bb13ce73f72f173569ccb4236668de94ca2991f1a4d120f"
     },
     {
       "audit": {
@@ -6239,10 +6278,10 @@
     },
     {
       "audit": {
-        "domain": "atomic-claim-evidence-validation",
-        "evidence": "Manual code review and focused tests confirm exact claim-set coverage, eligible lineage, bounded claims/evidence, verifier-output containment, evidence-premise NLI direction, and deterministic fail-closed release ownership.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6251,14 +6290,14 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/claim_validation.py",
       "risk": "high",
-      "sha256": "8089a88ac420a00a307357b8f6f856100957191340f362b116e2917e1c1c75af"
+      "sha256": "0814fff5c23885eb95197f6dfa4b9686b31927e5457a2a7e8fbce7a378a22d34"
     },
     {
       "audit": {
-        "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual boundary review plus 30 focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, malformed verifier output, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6267,7 +6306,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "a2a3af07a0f4d77d8eb43f8c9c1c2494a77c30d921f5bc61024390f4da3cb8b8"
+      "sha256": "e4c6c518fd138b10480c10644c7396d3ea18d15524bcca50e56faa031930af5c"
     },
     {
       "audit": {
@@ -6303,10 +6342,10 @@
     },
     {
       "audit": {
-        "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6315,7 +6354,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/models.py",
       "risk": "high",
-      "sha256": "90e9b5b376a29c3784879c08272ff66feed6bdffe2d2f3d47cfbac08fb69f512"
+      "sha256": "b997afc17c588a53a59d37f0646bf9a6ea46bed2ba3f91de7285e140ac5635a4"
     },
     {
       "audit": {
@@ -6335,10 +6374,10 @@
     },
     {
       "audit": {
-        "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6347,7 +6386,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/protocols.py",
       "risk": "high",
-      "sha256": "1b45b7bd632d2ff58722f68f665c9934b08a335d45405b104cf1934203d1a505"
+      "sha256": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915"
     },
     {
       "audit": {
@@ -6783,8 +6822,8 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, prior authorizations stay revoked, and the new academic factual-QA runner is registered for method-evaluation execution while its network-free simulation is the only permitted mode.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -6795,7 +6834,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "550a7a74fddc1dd292bd6a8f9e19f3659090430389f9963e276a0c3865b600a8"
+      "sha256": "febb1ad1ccaffef0c820b17493091cb07e5570ba66c1e2ad121139f981dbdc23"
     },
     {
       "audit": {
@@ -6895,10 +6934,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6907,7 +6946,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "ea7a3a0174a1fc3c4f366231206486c300f0278e191c983ccaf531774a585a0f"
+      "sha256": "0d24dabd2d17b941cdec970dc2ac78af1cc75d8fd3ad9d0c87cf4fe4507eef79"
     },
     {
       "audit": {
@@ -7039,10 +7078,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7051,7 +7090,7 @@
       "package_commands": [],
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
-      "sha256": "1179f76fb9adb92d31099d558d6eab69316c66273bd87b450b48af715e5c5128"
+      "sha256": "c02c466660fb53d8168798d6298cec3877f5a8fddf92355e89e2ab9c09973c8e"
     },
     {
       "audit": {
@@ -7119,10 +7158,10 @@
     },
     {
       "audit": {
-        "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused generation regressions cover T0 behavior, bounded T1 pedagogical plans, unchanged citation lineage, provider failures, and policy suppression.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7131,7 +7170,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "5f7a047fb8b879497101c382aeaf18b5781030d18eae959b0161245778a0a003"
+      "sha256": "3ef8a02ef4907c9948cd809e832d2ed952f8e47591642dcb9415d82245cb29f4"
     },
     {
       "audit": {
@@ -7247,10 +7286,10 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the completed atomic-claim confirmation, candidate comparison, and every unregistered, provider, paid, private-source, and held-out operation.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7259,7 +7298,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
+      "sha256": "3a20f93234da917f420febee1286ed752c02ddc77c5d816ee81df81381b437b0"
     },
     {
       "audit": {
@@ -7279,10 +7318,10 @@
     },
     {
       "audit": {
-        "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, raised and malformed verifier failure, redaction, bounded evidence, and invalid v2 configuration.",
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7291,7 +7330,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
-      "sha256": "8bbc7c873a908ef2b9c9e407e89f40f8948718851e41bf4eb6b638652380b3af"
+      "sha256": "8f7b81ceeecf4a72ad1554e03ded90943d5312a5d4bc4339a63e8cb14cb125be"
     },
     {
       "audit": {
@@ -7548,6 +7587,22 @@
       "path": "tests/test_academic_factual_qa_end_to_end_pilot.py",
       "risk": "medium",
       "sha256": "1bae1717e77287bc66a4068baaa694b2c83eb1c343949429bd147d1d05e232d1"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_end_to_end_pilot_v2.py",
+      "risk": "medium",
+      "sha256": "a0dafa897571cec86f3004ca898fa833d8b10bc17d6d1dd1f0a020059f486ee5"
     },
     {
       "audit": {
@@ -8623,8 +8678,8 @@
     }
   ],
   "risk_counts": {
-    "high": 403,
-    "medium": 118
+    "high": 405,
+    "medium": 119
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

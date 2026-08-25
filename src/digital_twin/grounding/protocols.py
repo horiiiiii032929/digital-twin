@@ -14,8 +14,12 @@ from src.digital_twin.tutor_policy import TutorPolicy
 
 
 if TYPE_CHECKING:
+    from src.digital_twin.grounding.models import AtomicAnswerClaim
     from src.digital_twin.grounding.evidence_sufficiency import (
         EvidenceSufficiencyDecision,
+    )
+    from src.digital_twin.grounding.claim_validation import (
+        AtomicClaimValidationDecision,
     )
 
 
@@ -73,6 +77,17 @@ class EvidenceSufficiencyGate(Protocol):
         hits: Sequence[RetrievalHit],
     ) -> "EvidenceSufficiencyDecision":
         """Decide whether retrieved evidence is strong enough for generation."""
+
+
+class PostGenerationClaimValidator(Protocol):
+    implementation_id: str
+
+    def validate(
+        self,
+        claims: Sequence["AtomicAnswerClaim"],
+        hits: Sequence[RetrievalHit],
+    ) -> "AtomicClaimValidationDecision":
+        """Decide whether every generated factual claim is evidence-supported."""
 
 
 class TextEmbedder(Protocol):

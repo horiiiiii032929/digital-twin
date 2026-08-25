@@ -15,6 +15,7 @@ from src.digital_twin.grounding.evidence_sufficiency import (
     LexicalCoverageEvidenceGate,
     MinimumRawScoreEvidenceGate,
     SecondaryRetrieverAgreementGate,
+    StructuredLexicalCoverageEvidenceGate,
     evaluate_evidence_sufficiency,
 )
 from src.digital_twin.grounding.evidence_verifiers import (
@@ -28,7 +29,6 @@ from src.digital_twin.grounding.evidence_verifiers import (
     PairScoreBackend,
 )
 from src.digital_twin.grounding.claim_validation import (
-    AtomicAnswerClaim,
     AtomicClaimEvidenceValidator,
     AtomicClaimSupportSignal,
     AtomicClaimSupportVerifier,
@@ -48,6 +48,7 @@ from src.digital_twin.grounding.ingestion import (
     source_artifact_from_path,
 )
 from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
     ApprovalDecision,
     ApprovalRecord,
     CourseDocument,
@@ -74,6 +75,7 @@ from src.digital_twin.grounding.protocols import (
     EvidenceSufficiencyGate,
     FigureStore,
     OCRProvider,
+    PostGenerationClaimValidator,
     RegionCropStore,
     RegionDescriptionProvider,
     Retriever,
@@ -181,6 +183,7 @@ __all__ = [
     "NliScoreBackend",
     "PairwiseReranker",
     "PairScoreBackend",
+    "PostGenerationClaimValidator",
     "InvalidRetrievalLimitError",
     "RelevantChunkReference",
     "RetrievalBenchmarkCorpus",
@@ -207,6 +210,7 @@ __all__ = [
     "SourceCitation",
     "SourcePermissions",
     "SourceSensitivity",
+    "StructuredLexicalCoverageEvidenceGate",
     "TutorAnswer",
     "TutorGenerator",
     "TermOverlapRetriever",

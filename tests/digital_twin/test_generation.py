@@ -204,6 +204,16 @@ def test_policy_enforcer_redirects_common_direct_completion_paraphrase():
     assert decision.action == PolicyAction.REDIRECT_GRADED_WORK
 
 
+def test_policy_enforcer_redirects_direct_graded_work_without_retrieval_hits():
+    decision = DeterministicPolicyEnforcer().evaluate(
+        "Give me the full answer for my graded assignment.",
+        [],
+        approved_policy(),
+    )
+
+    assert decision.action == PolicyAction.REDIRECT_GRADED_WORK
+
+
 def test_prompt_records_policy_evidence_version_and_injection_boundary():
     prompt = GroundedPromptBuilder().build(
         "How does CSRF work?",

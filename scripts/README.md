@@ -576,6 +576,17 @@ Current utilities:
   preflight:academic-factual-qa-e2e-pilot`. Development execution, independent
   gold opening, the atomic-claim candidate, product binding, and academic claims
   remain blocked.
+- `run_academic_factual_qa_end_to_end_pilot_v2.py`: runs the corrected paired
+  development comparison under issue #127. It compares the any-hit T0 control,
+  a structured question-to-evidence selection ablation, and the same ablation
+  plus post-generation atomic-claim validation. The latter two arms must use
+  identical draft hashes. The CLI records the exact Git revision and fails
+  closed on a dirty worktree; the instrument permits only the 160-case
+  synthetic-public network-free development run. Use `npm run
+  verify:academic-factual-qa-e2e-pilot-v2`, `npm run
+  preflight:academic-factual-qa-e2e-pilot-v2`, or the separately bounded
+  `npm run execute:academic-factual-qa-e2e-pilot-v2`. A development pass cannot
+  select the method, open independent gold, or promote the product.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
