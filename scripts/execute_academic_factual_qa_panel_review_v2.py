@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Prepare, preflight, simulate, or execute the confirmation-002 review panel.
 
-Calibration attempt 001 is preserved as invalid and its authority is revoked.
+Calibration attempt 001 is preserved as invalid. Corrective attempt 002 uses a
+new exclusive ledger and remains unauthorized.
 Live preflight performs metadata reads only. Provider inference is split into
 calibration and confirmation phases so no confirmation vote is opened until
 all three reviewers pass the frozen calibration gates and confirmation receives
@@ -63,7 +64,8 @@ BINDING_PATH = (
     "academic_factual_qa_confirmation_002_reviewer_bindings.json"
 )
 DEFAULT_LEDGER_PATH = (
-    ROOT / "reports/generated/academic-factual-qa-confirmation-002-panel-ledger.json"
+    ROOT
+    / "reports/generated/academic-factual-qa-confirmation-002-calibration-attempt-002-ledger.json"
 )
 DEFAULT_RESEARCHER_PACKET_PATH = (
     ROOT
@@ -562,6 +564,7 @@ def _initial_ledger(assets: dict[str, Any], *, simulation: bool) -> dict[str, An
         {
             "schema_version": 2,
             "instrument_id": INSTRUMENT_ID,
+            "attempt_id": "academic-factual-qa-confirmation-002-calibration-attempt-002",
             "status": "running-calibration",
             "simulation": simulation,
             "code_revision": _code_revision(),
@@ -587,6 +590,8 @@ def _validate_execution_resume(
     )
     if ledger.get("instrument_id") != INSTRUMENT_ID:
         raise PanelExecutionError("resume instrument identity drifted")
+    if ledger.get("attempt_id") != "academic-factual-qa-confirmation-002-calibration-attempt-002":
+        raise PanelExecutionError("resume attempt identity drifted")
     if ledger.get("code_revision") != _code_revision():
         raise PanelExecutionError("resume code revision drifted")
     if ledger.get("simulation") is not simulation:
@@ -1255,7 +1260,7 @@ def main() -> int:
     if args.validate:
         result = {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-attempt-001-invalid-authorization-revoked",
+            "status": "validated-corrective-calibration-002-prepared-authorization-required",
             "binding_sha256": assets["binding"]["content_sha256"],
             "maximum_provider_calls": 120,
             "provider_or_model_calls": 0,

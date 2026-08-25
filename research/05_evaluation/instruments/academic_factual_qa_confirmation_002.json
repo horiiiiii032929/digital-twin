@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-confirmation-002",
-  "status": "calibration-attempt-001-invalid-authorization-revoked",
+  "status": "corrective-calibration-attempt-002-prepared-authorization-required",
   "owner_issue": 127,
   "preregistered_at": "2026-08-25",
   "predecessor": {
@@ -9,9 +9,9 @@
     "disposition": "superseded-before-source-opening-or-execution",
     "reason": "No feasible external human reviewers were available; the replacement preserves deterministic truth and uses a diverse blinded LLM panel plus bounded researcher audit."
   },
-  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012", "AFQC-013", "AFQC-014", "AFQC-015", "AFQC-016", "AFQC-017", "AFQC-018"],
+  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012", "AFQC-013", "AFQC-014", "AFQC-015", "AFQC-016", "AFQC-017", "AFQC-018", "AFQC-019"],
   "decision_question": "On fresh source/question clusters, does the two-boundary T0 method reduce unsupported releases without materially reducing supported answers or citation completeness relative to any-hit T0?",
-  "claim_level": "deterministic-source-derived-llm-panel-reviewed-researcher-audited-silver-reference",
+  "claim_level": "deterministic-source-derived-three-llm-panel-codex-assisted-audit-researcher-adjudicated-silver-reference",
   "scope": {
     "purpose": "public-source method confirmation before a larger final tranche",
     "professor_fidelity": false,

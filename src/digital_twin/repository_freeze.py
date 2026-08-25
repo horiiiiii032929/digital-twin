@@ -37,6 +37,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_confirmation_v2.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_visual_supplement.py": (
+            "dataset_generation",
+        ),
         "scripts/build_evidence_sufficiency_v2_decision_draft.py": (
             "dataset_generation",
         ),
@@ -136,6 +139,15 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_academic_factual_qa_t0_confirmation.py": (
+            "external_model_evaluation",
+            "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_visual_checkpoint.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_cross_course_retrieval_heldout.py": (
             "heldout_execution",
             "method_evaluation_execution",
@@ -229,16 +241,7 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # One named, versioned pilot may execute while the wider pre-evaluation freeze
 # remains active. The authorization is intentionally not operation-generic: a
 # successor instrument requires a new code review and an explicit entry here.
-BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
-    {
-        "factual-qa-v3-oracle-pilot-001": (
-            "dataset_generation",
-            "external_model_evaluation",
-            "local_model_evaluation",
-            "method_evaluation_execution",
-        ),
-    }
-)
+BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType({})
 
 
 class RepositoryFreezeError(RuntimeError):

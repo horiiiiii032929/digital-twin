@@ -6,14 +6,29 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+The next professor-reportable checkpoint is now frozen as
+`academic-factual-qa-professor-checkpoint-001`. It preserves the prior 10,000
+rows only as engineering-scale evidence and prospectively evaluates the actual
+T0 product on 200 public-source cases plus a separate 30-cluster/60-case visual
+supplement. Product inputs contain only course ID and question; responses are
+persisted before gold labels open. The main comparison freezes any-hit,
+structured evidence coverage, and the same shared atomic draft plus
+post-generation claim validation. The visual track freezes ten tables, ten
+equations, ten original diagrams, balanced boundaries, and original-region
+citations. Gemini descriptions are question-independent and non-authoritative;
+facts not cleared deterministically require an explicit Codex-assisted audit.
+All network-free runners and failure paths are implemented, while each of the
+five paid checkpoints remains separately unauthorized. No result or professor
+message is claimed from these build simulations.
+
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 539 executable or execution-affecting
+the current branch extends it to all 548 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 72 protected entrypoints,
+active for all general evaluation actions. It covers 75 protected entrypoints,
 with no prospective evaluation currently authorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -221,8 +236,8 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 924-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 539-file audit. Evaluation
-execution remains frozen, with 72/72 protected entrypoints registered and no
+artifacts are also fully dispositioned in the current 548-file audit. Evaluation
+execution remains frozen, with 75/75 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
 ## Current outcome

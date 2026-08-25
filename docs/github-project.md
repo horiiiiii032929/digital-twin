@@ -50,13 +50,14 @@ professor-communication track.
 ## Critical path
 
 1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
-   result as provisional development evidence. The successor now binds four
-   exact public educational repositories, 100 non-overlapping confirmation
-   clusters, 200 deterministic cases, 40 disjoint controls, and one blinded
-   three-family packet. Current reviewer identities, routing, cost bounds, and
-   the calibration-first executor are frozen, but execution remains
-   unauthorized; after a passing panel/researcher audit, freeze the actual T0 product
-   comparison without exposing gold fields.
+   result as provisional development evidence. The successor binds four exact
+   public educational repositories, 100 non-overlapping confirmation clusters,
+   200 deterministic cases, 40 disjoint controls, one blinded three-family
+   packet, and a separate 30-cluster/60-case visual supplement. The actual T0
+   runner accepts only course ID and question and opens gold only after every
+   response is durable. Corrective calibration is the next checkpoint; panel,
+   Gemini qualification, visual pilot, and live T0 execution remain separately
+   unauthorized.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

@@ -9,6 +9,7 @@ from src.digital_twin.grounding.models import GenerationUsage
 from src.digital_twin.llm import (
     LlmAuthenticationError,
     LlmConfigurationError,
+    LlmIdentityDriftError,
     LlmMalformedResponseError,
     LlmMessage,
     LlmResponse,
@@ -216,11 +217,20 @@ def _validate_response_identity(
     try:
         require_registered_current_model(provider_model)
     except ValueError as error:
-        raise LlmMalformedResponseError() from error
+        raise LlmIdentityDriftError(
+            provider_model=provider_model,
+            provider_revision=provider_revision,
+        ) from error
     if _canonical_model_id(provider_model) != _canonical_model_id(expected_model):
-        raise LlmMalformedResponseError()
+        raise LlmIdentityDriftError(
+            provider_model=provider_model,
+            provider_revision=provider_revision,
+        )
     if expected_revision is not None and provider_revision != expected_revision:
-        raise LlmMalformedResponseError()
+        raise LlmIdentityDriftError(
+            provider_model=provider_model,
+            provider_revision=provider_revision,
+        )
 
 
 def _canonical_model_id(model: str) -> str:

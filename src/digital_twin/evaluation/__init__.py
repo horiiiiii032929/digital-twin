@@ -46,6 +46,12 @@ from src.digital_twin.evaluation.retrieval_runner import (
     evaluate_cases,
     evaluate_development_cases,
 )
+from src.digital_twin.evaluation.visual_description import (
+    VisualDescription,
+    VisualDescriptionError,
+    VisualDescriptionProvider,
+    VisualRegionLineage,
+)
 
 
 __all__ = [
@@ -75,6 +81,10 @@ __all__ = [
     "RetrievalMethod",
     "SealedDevelopmentError",
     "SystemReleaseProfile",
+    "VisualDescription",
+    "VisualDescriptionError",
+    "VisualDescriptionProvider",
+    "VisualRegionLineage",
     "aggregate_rows",
     "assign_boundary_courses",
     "build_course_scoped_ladders",

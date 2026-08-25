@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "binding_id": "academic-factual-qa-visual-provider-binding-001",
+  "instrument_id": "academic-factual-qa-professor-checkpoint-001",
+  "verified_at": "2026-08-25T18:39:18+00:00",
+  "maximum_age_hours_for_execution": 24,
+  "provider": "openrouter",
+  "provider_model": "google/gemini-3.7-flash",
+  "documented_revision": "google/gemini-3.7-flash-20260813",
+  "endpoint_provider": "Google",
+  "endpoint_tag": "google-vertex/global",
+  "context_window_tokens": 1048576,
+  "maximum_output_tokens": 65536,
+  "input_modalities": ["text", "image", "video", "file", "audio"],
+  "output_modalities": ["text"],
+  "pricing_usd_per_million_input_tokens": 0.375,
+  "pricing_usd_per_million_output_tokens": 1.875,
+  "pricing_usd_per_million_image_tokens": 0.375,
+  "structured_outputs_supported": true,
+  "response_format_supported": true,
+  "routing": {
+    "only": ["Google"],
+    "order": ["Google"],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "allow"
+  },
+  "input_scope": "public-open-license-and-synthetic-visuals-only",
+  "question_independent_description_required": true,
+  "description_is_authoritative_truth": false,
+  "citation_target": "original-visual-region",
+  "credential_environment_variable": "OPENROUTER_API_KEY",
+  "authorization": {
+    "gemini_qualification_authorized": false,
+    "visual_pilot_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "qualification_contract": {
+    "asset_count": 9,
+    "case_count": 21,
+    "maximum_provider_calls": 9,
+    "retries": 0,
+    "emergency_hard_stop_usd": 1.0
+  },
+  "visual_pilot_contract": {
+    "asset_count": 30,
+    "case_count": 60,
+    "maximum_provider_calls": 30,
+    "retries": 0,
+    "emergency_hard_stop_usd": 3.0
+  },
+  "sources": {
+    "model_registry": "https://openrouter.ai/api/v1/models",
+    "endpoint_registry": "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints",
+    "routing": "https://openrouter.ai/docs/guides/routing/provider-selection",
+    "image_inputs": "https://openrouter.ai/docs/guides/features/multimodal/images",
+    "retention": "https://openrouter.ai/docs/guides/privacy/provider-logging/"
+  },
+  "content_sha256": "1e911a562fe25b6158f8679eded9fd308120d2879f1c95599f7952424696f200"
+}

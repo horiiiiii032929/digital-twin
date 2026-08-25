@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the revoked invalid-attempt LLM-panel factual-QA protocol."""
+"""Validate the prepared corrective LLM-panel factual-QA protocol."""
 
 from __future__ import annotations
 
@@ -34,8 +34,8 @@ PREDECESSOR_INSTRUMENT = (
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "calibration-attempt-001-invalid-authorization-revoked"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 19))
+STATUS = "corrective-calibration-attempt-002-prepared-authorization-required"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 20))
 REVIEWER_IDS = (
     "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
@@ -72,7 +72,7 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     )
     _require(
         instrument["claim_level"]
-        == "deterministic-source-derived-llm-panel-reviewed-researcher-audited-silver-reference",
+        == "deterministic-source-derived-three-llm-panel-codex-assisted-audit-researcher-adjudicated-silver-reference",
         "claim level drifted",
     )
     _require(
@@ -442,7 +442,7 @@ def main() -> int:
     result = (
         {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-attempt-001-invalid-authorization-revoked",
+            "status": "validated-corrective-calibration-002-prepared-authorization-required",
         }
         if args.validate
         else preflight(instrument)

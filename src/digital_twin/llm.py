@@ -80,6 +80,20 @@ class LlmMalformedResponseError(LlmError):
     code = "malformed-response"
 
 
+class LlmIdentityDriftError(LlmError):
+    code = "identity-drift"
+
+    def __init__(
+        self,
+        *,
+        provider_model: str,
+        provider_revision: str | None,
+    ) -> None:
+        super().__init__(self.code)
+        self.provider_model = provider_model
+        self.provider_revision = provider_revision
+
+
 class LlmClient(Protocol):
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
         """Return a model response for a named application task."""

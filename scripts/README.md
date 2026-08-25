@@ -643,6 +643,34 @@ Current utilities:
   records sanitized provider error, identity, usage, cost, and response hashes
   before stopping without retry. A corrective calibration and confirmation each
   require new separate authority.
+- `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
+  separate 30-cluster/60-case public visual supplement. It freezes ten tables,
+  ten equations, ten original diagrams, one answerable and one balanced
+  boundary case per asset, original-region lineage, licenses, versions, and
+  source/render hashes. The committed metadata is reproducible; rendered and
+  upstream assets remain ignored. Use `npm run
+  build:academic-factual-qa-visual-supplement` only when intentionally updating
+  the prospective artifact and `npm run
+  verify:academic-factual-qa-professor-checkpoint` for the normal no-call gate.
+- `run_academic_factual_qa_visual_checkpoint.py`: validates, simulates, and
+  executes the separately authorized Gemini qualification and 30-cluster visual
+  pilot. The provider-neutral description contract is question-independent,
+  routes exactly to Google Gemini 3.7 Flash with fallback disabled, and keeps
+  descriptions non-authoritative while citations resolve to original regions.
+  Unsupported description facts that deterministic checks cannot clear produce
+  an explicit Codex audit packet and `ready-codex-audit` state; they are never
+  silently counted as supported. Qualification and pilot each require their own
+  authorization and use zero retries, atomic accounting, and independent cost
+  ceilings.
+- `run_academic_factual_qa_t0_confirmation.py`: runs the actual T0 service over
+  200 main and 60 visual cases using only course ID and question at the product
+  boundary. It compares any-hit, structured-coverage, and shared-draft
+  structured-plus-atomic-claim conditions, persists every response before
+  opening gold, and reports action, retrieval, claim, citation, persistence,
+  latency, cost, and seeded paired non-inferiority evidence. Its network-free
+  simulation is explicitly marked non-academic. Live execution is blocked until
+  the calibrated panel, assisted audit, visual pilot, clean revision, provider
+  freshness, and a fifth separate authorization are present.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

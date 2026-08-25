@@ -14,8 +14,14 @@ from scripts.validate_multimodal_retrieval_dataset import (
 def test_synthetic_multimodal_fixture_is_valid() -> None:
     summary = validate_dataset(load_json(DEFAULT_DATASET))
 
-    assert summary["assets"] == 6
-    assert summary["cases"] == 9
+    assert summary["assets"] == 9
+    assert summary["cases"] == 21
+    assert summary["slices"] == {
+        "adversarial_integrity": 2,
+        "no_evidence": 4,
+        "text_control": 2,
+        "visual_answerable": 13,
+    }
     assert summary["model_called"] is False
     assert summary["private_source_read"] is False
 

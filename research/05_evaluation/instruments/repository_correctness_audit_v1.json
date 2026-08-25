@@ -21,7 +21,7 @@
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "108655e8ddf54aee56e38681c96bacdf570f0705cd38401d3ce585d840517b21"
+      "sha256": "38b381ba9c6e16a47d8e607df06d76d807ddb58852a8fa0006596945b0492b56"
     },
     {
       "audit_status": "audited",
@@ -912,7 +912,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "c1baade5d4f43cf842d8b95bc028bcce354a7715ddd68ce931ffd74ca3ac6f7c"
+      "sha256": "808be38013b82456e9bbac191689fa78a1e23d2a4b106d0255d8f1f15e22235f"
     },
     {
       "audit_status": "audited",
@@ -1077,7 +1077,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "7bcdba1df15816a50e2a53836fc4675f4b309d25a3b2fac30f861fe95ff699b6"
+      "sha256": "29db8716f01482f24159a07dd1dc18de371a7b64ea3272697bc42b7d0df27222"
     },
     {
       "audit_status": "audited",
@@ -1132,7 +1132,7 @@
       "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "ff2a28cfde65ce95de30362bb0725995b7d03bf218bca1568251ae6dcb38e839"
+      "sha256": "7c4790feb73dfef0762c017dcbc69cd213d1960a7e21f685fc27fd3348106ee2"
     },
     {
       "audit_status": "audited",
@@ -3893,7 +3893,7 @@
       "path": "services/llm/litellm_client.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "c3cd880f5549c7473e5d3fef958f75e5c1167fbfdfb3ca289097420f2d3c90a6"
+      "sha256": "04a19bd9bfd93b0158e96ef6aead4bdf705766c124c01d01f04a43d28fb58c31"
     },
     {
       "audit_status": "audited",
@@ -4036,7 +4036,7 @@
       "path": "src/digital_twin/evaluation/__init__.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "ba00e9cde3b90971acbad333ebb7466dcedee30b6112ba6f5ecc33cb46beb448"
+      "sha256": "a1601e9d18b170d3302c1f55889c9d5db5c36756a569d8794a53be66617daed7"
     },
     {
       "audit_status": "audited",
@@ -4124,7 +4124,7 @@
       "path": "src/digital_twin/generation/__init__.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "94e059ad04a7a17c4dec9d5049f5791d91eff3878e062fb141ea4037012c721e"
+      "sha256": "cd729d93ca8a0a645bbf01b942d50e6495b0cb4cf72447e557b6be564bcc733d"
     },
     {
       "audit_status": "audited",
@@ -4157,7 +4157,7 @@
       "path": "src/digital_twin/generation/generator.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "936c92aa1957d1fc38fa46e81be83908f0960ff254e81556170311456b10f0e2"
+      "sha256": "6c880c9a56b26b8dfa000bc6ba90009890cad9fbd7e6188ab249dc926215bf8c"
     },
     {
       "audit_status": "audited",
@@ -4410,7 +4410,7 @@
       "path": "src/digital_twin/llm.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "b42bbba2bfce4e88edbc6127bafd0a9c438b0f23517241bcdfa8dd2c1f0ca92e"
+      "sha256": "bae10c0029f60797a9ff5d519758f357a34b96b0731a692e70c971d0be8f906e"
     },
     {
       "audit_status": "audited",
@@ -4597,7 +4597,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "2e0e320b7ac1c30073cb92c5861a4b76f5a404cc9ef47e02274aae4caaa5cb37"
+      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
     },
     {
       "audit_status": "audited",
@@ -4828,7 +4828,7 @@
       "path": "tests/digital_twin/test_generation.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "3ef8a02ef4907c9948cd809e832d2ed952f8e47591642dcb9415d82245cb29f4"
+      "sha256": "df7ecf2ee8eed53a2a058221a1324c3da3c0de7fd6a22f37eb479e2246d7b87c"
     },
     {
       "audit_status": "audited",
@@ -4916,7 +4916,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "4cb7f1b59a951c29b1b4cac86c8fb51834799b1b4f59ae3545173a1d0d4c5e6a"
+      "sha256": "a0767a76dbb968be5e379925b8e2e202593bedaa078fa1572b29ab7e19e4bef8"
     },
     {
       "audit_status": "audited",
@@ -5059,7 +5059,7 @@
       "path": "tests/services/test_litellm_client.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "1340b1ef3a3c248e29f8d321e92ee21a66272903bccd4364f0fc4f78eb6a8a7f"
+      "sha256": "54268189f3037d6ccf291f5573f8c30a0de889212eceaf65d01ca0bfa10f5366"
     },
     {
       "audit_status": "audited",
@@ -5818,7 +5818,7 @@
       "path": "tests/test_validate_multimodal_retrieval_dataset.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "cfc0fd668e760b89b7f2e4d73792094a76fc47bd90abc9b2eec4d8c1314b95bb"
+      "sha256": "7dcca6b51ae4cac98e534b49ffd5283e78786f10f8b5713a4392e4c12813e4c5"
     },
     {
       "audit_status": "audited",
@@ -5929,6 +5929,105 @@
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
       "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Prospective protocol review confirms deterministic truth authority, five separate authorization boundaries, fixed panel, visual, product, safety, cost, and progression gates, and no automatic profile selection or promotion.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_professor_checkpoint_001.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "e207b19be59be3811cc17c21e94d451cd67c6852184c5d6ae2498be6c7f33111"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Binding review confirms the exact DeepSeek V4 Flash model and revision, current official limits and peak pricing, account-linked retention disclosure, 24-hour freshness, no fallback, and separate authorization for the bounded T0 confirmation.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_t0_provider_binding_001.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "91ccbb903eadf0516bcad6b3c3b0fb68a1252aeb182f1969999e032b66f9140a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Binding review confirms exact Google-only Gemini 3.7 Flash routing, no fallback, question-independent structured output, public-source-only processing, non-authoritative descriptions, original-region citation authority, 24-hour freshness, and bounded call/cost contracts.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_visual_provider_binding_001.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "5056791f8347e43a132d4077a18ae5fb13f87e42aadfda67aa8130298a373662"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Builder review and reproducibility tests verify 30 balanced public visual assets, 60 paired answer/boundary cases, source/render/license/region hashes, parent-question disjointness, deterministic bytes, and a freeze-guarded write path.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_visual_supplement.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "e31b99b9b500edf89cade958481e8011e794359ebbcdb5f4928eba2d2a5ed821"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Runner review and full network-free service simulation verify course-and-question-only product input, full-corpus source reconstruction, shared atomic drafts, delayed gold join, authoritative claim/citation scoring, cluster-paired uncertainty, persistence, cost/call ceilings, and explicit non-academic simulation labeling.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_t0_confirmation.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "bdc825268b5bb9b2bd0d2a12039f414749733555d393a8f61ee32800daa68a22"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Runner review and simulations verify exact Gemini/Google identity, question-independent image payloads, original-region lineage, atomic ledgers, no retry, freshness and budget stops, fallback/candidate retrieval, boundary checks, and mandatory Codex audit for non-deterministically supported description facts.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_visual_checkpoint.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "c57ba8741e1b88e48d22daf76adebad62e415daa4ab80e808384aaede331a7c8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Contract review and tests enforce provider-neutral question-independent descriptions, stable provider identity, unique entities/relationships, source-image hashes, normalized original-region lineage, and non-authoritative retrieval text.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/visual_description.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "60f08ea4e413825cfe3326ec5e8319941800480e004dbb85aeb55aada0408fed"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Focused tests cover gold-field rejection, all 160 public source sections, blocked no-call preflight, all five T0/visual conditions through the real service, delayed gold access, cluster bootstrap, persistence, duplicate detection, and explicit simulation limitations.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_t0_confirmation.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "45d97b4a0a9a3f1412ad87a71fce1cb191df0a25760fc7edc8ab059e3ef31c6e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-ready-factual-and-visual-evaluation",
+      "evidence": "Focused tests cover deterministic supplement rebuild, balance and disjointness, hash/region contract rejection, fail-closed preflight, qualification and visual simulations, profile non-selection, and mandatory audit of unsupported visual facts.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_visual_checkpoint.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "1d5438d347d19d4d338c99f9e500c0f18bfc382291d7a1ea695741f2d27eeba3"
     }
   ],
   "schema_version": 1
