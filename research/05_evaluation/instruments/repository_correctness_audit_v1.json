@@ -1044,7 +1044,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_002.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "7cbfc202fa5108da81557723f839fc675536ca8135f8e0d195923c58a83440f0"
+      "sha256": "fd865f7c54a7b3f0456a8a116955e51c8e8a1a6ce9e2be20503f464defd8096f"
     },
     {
       "audit_status": "audited",
@@ -2848,7 +2848,7 @@
       "path": "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "c903be6879f09b8f673368241771ce4ff897daee156489b8f0ec20dea4ae85f2"
+      "sha256": "4a81498a824b5712e6c283b5957e64d9c0306a914a9bee1a1ebc1e54a5d5f937"
     },
     {
       "audit_status": "audited",
@@ -4498,7 +4498,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "febb1ad1ccaffef0c820b17493091cb07e5570ba66c1e2ad121139f981dbdc23"
+      "sha256": "2b3844076bff780c600ea53e0f366333ed618bdb0f9b366cabe028b748d5ecf1"
     },
     {
       "audit_status": "audited",
@@ -4817,7 +4817,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "3a20f93234da917f420febee1286ed752c02ddc77c5d816ee81df81381b437b0"
+      "sha256": "4cb7f1b59a951c29b1b4cac86c8fb51834799b1b4f59ae3545173a1d0d4c5e6a"
     },
     {
       "audit_status": "audited",
@@ -5026,7 +5026,7 @@
       "path": "tests/test_academic_factual_qa_end_to_end_pilot_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "a0dafa897571cec86f3004ca898fa833d8b10bc17d6d1dd1f0a020059f486ee5"
+      "sha256": "9869e124a55b5e28285c39bd17a2f525371eab6df62bf3e79b1053dea2936277"
     },
     {
       "audit_status": "audited",
@@ -5576,7 +5576,7 @@
       "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "206eb37e92161f3f9029d12b39bebdc8e5ae42eb3287e121b1ec05d72ee32350"
+      "sha256": "38c27147f6925a20e28a1d8d93d9b9c7e9074a37383088e5f82c05badebcb299"
     },
     {
       "audit_status": "audited",

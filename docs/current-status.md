@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 521 executable or execution-affecting
+the current branch extends it to all 524 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 68 protected entrypoints,
+active for all general evaluation actions. It covers 69 protected entrypoints,
 with no prospective evaluation currently authorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -118,16 +118,21 @@ and answered 10,000 questions, and the row count is not an academic
 independent-sample claim. It remains engineering evidence for deterministic
 dataset assembly, provider workflow, mutation checks, latency, and cost.
 
-Issue #127 now has a build-only leakage-free successor harness. Its 160
-synthetic-public development cases cover 32 source units, eight courses, and 80
-explicit clusters. Both unselectable controls execute through the normal T0
-student service with only question and course context crossing the product
-boundary. The fail-closed control produced zero unsupported releases but zero
-supported-answer retention; the any-hit control retained every supported answer
-but released 60% of boundary cases and missed complete claims/citations on all
-16 multi-source cases despite complete retrieval. This is harness evidence, not
-independent product-quality evidence. Provider calls, private data, method
-selection, and evaluation execution remain closed.
+Issue #127 now has a clean paired development result for the leakage-free
+successor. On 160 synthetic-public cases across 80 clusters, the any-hit control
+released 34/80 boundary requests as answers and achieved only 50% citation
+precision. The structured evidence-selection ablation and two-boundary candidate
+both passed 160/160 development cases, retained 80/80 supported answers, released
+zero boundary answers, and achieved complete expected claims and citations.
+All 160 ablation/candidate draft hashes matched, so the post-generation boundary
+was not confounded by different drafts. The run used clean revision `74dcf8c`,
+zero provider calls, zero cost, and no private or held-out data. The decision is
+**Go Deeper**, not Keep: questions and source aliases came from the same
+unblinded synthetic design, labels were not independently validated, and clean
+drafts did not measure naturally occurring claim errors. Authorization is
+revoked. The next academic checkpoint requires fresh independently validated
+source/question clusters with frozen gates; no product promotion follows from
+the 100% development score.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -150,7 +155,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 861 Python tests and 46 frontend tests, frontend lint, and the
+check passes 870 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -170,10 +175,10 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 861-test Python suite.
+connections. These corrections remain covered by the current 870-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 521-file audit. Evaluation
-execution remains frozen, with 68/68 protected entrypoints registered and no
+artifacts are also fully dispositioned in the current 524-file audit. Evaluation
+execution remains frozen, with 69/69 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
 ## Current outcome

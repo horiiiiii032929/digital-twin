@@ -37,8 +37,8 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The 120-row atomic-claim contract test passed its frozen synthetic gates, but analysis correction 001 found only ten fact groups, repeated templates, no independent annotation, and no real product retrieval/generation. NLI is provisional `Go Deeper`, not selected or bound. No multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The 10,000-row synthetic run is retained as engineering pipeline-scale evidence only. It does not estimate Digital Twin factual accuracy or retrieval because the author received gold metadata and final answers/citations came from truth packages | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
+| Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service now supports bounded evidence selection and optional post-generation atomic-claim validation. The clean 160-case synthetic development run passed its integration gates, but NLI/model binding and independent confirmation remain `Go Deeper`; no product profile or multimodal method is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The any-hit control released 34/80 synthetic boundaries; the two-boundary successor passed 160/160 paired development cases with complete claims/citations. Because source aliases and questions share one unblinded synthetic design, this is integration evidence only. Fresh independently validated source/question clusters are required before selection | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -58,9 +58,11 @@ not require model spending or private data:
 2. Preserve closed #87 and completed #110 as engineering evidence that the
    deterministic synthetic workflow processed 10,000 rows. Analysis correction
    001 supersedes any academic factual-accuracy or independent-sample
-   interpretation. The new #127 harness now runs 160 development cases through
-   the actual T0 product without gold injection; its two controls are
-   unselectable, so candidate integration and independent data remain next.
+   interpretation. The new #127 harness ran 160 development cases through the
+   actual T0 product without gold injection. Its clean paired result validates
+   evidence selection, atomic-claim release plumbing, and the any-hit failure,
+   but cannot select the method because the synthetic source aliases and
+   questions are aligned by construction. Fresh independent data remain next.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

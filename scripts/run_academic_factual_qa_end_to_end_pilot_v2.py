@@ -144,8 +144,8 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     dataset = build_development_dataset()
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise AcademicPilotError("instrument ID drifted")
-    if instrument.get("status") != "frozen-development-authorized":
-        raise AcademicPilotError("development authorization drifted")
+    if instrument.get("status") != "completed-development-go-deeper":
+        raise AcademicPilotError("completed development status drifted")
     if instrument.get("dataset", {}).get("dataset_id") != DATASET_ID:
         raise AcademicPilotError("dataset ID drifted")
     if instrument["dataset"].get("content_sha256") != dataset["content_sha256"]:
@@ -157,8 +157,11 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     ]:
         raise AcademicPilotError("condition contract drifted")
     safety = instrument.get("execution_safety", {})
-    if safety.get("network_free_development_execution_authorized") is not True:
-        raise AcademicPilotError("network-free development run is not authorized")
+    if (
+        safety.get("network_free_development_execution_authorized") is not False
+        or safety.get("authorization_revoked") is not True
+    ):
+        raise AcademicPilotError("completed development authorization is not revoked")
     if any(
         safety.get(key) is not False
         for key in (
@@ -181,7 +184,7 @@ def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
     revision, dirty = _repository_state()
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "blocked-dirty-worktree" if dirty else "ready-network-free-development",
+        "status": "blocked-completed-authorization-revoked",
         "code_revision": revision,
         "dirty_state": dirty,
         "provider_calls": 0,

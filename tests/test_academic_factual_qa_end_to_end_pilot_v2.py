@@ -16,15 +16,13 @@ def test_v2_instrument_freezes_fair_network_free_development_comparison() -> Non
     instrument = validate_instrument(DEFAULT_INSTRUMENT)
     readiness = preflight(instrument)
 
-    assert readiness["status"] in {
-        "ready-network-free-development",
-        "blocked-dirty-worktree",
-    }
+    assert readiness["status"] == "blocked-completed-authorization-revoked"
     assert isinstance(readiness["dirty_state"], bool)
     assert readiness["provider_calls"] == 0
     assert instrument["fairness_contract"]["paired_case_ids"] is True
     assert instrument["fairness_contract"]["selection_permitted"] is False
     assert instrument["decision_rule"]["failure_blocks_promotion_not_development"] is True
+    assert instrument["execution_safety"]["authorization_revoked"] is True
 
 
 def test_v2_development_run_is_paired_leakage_free_and_passes_fixed_gates() -> None:

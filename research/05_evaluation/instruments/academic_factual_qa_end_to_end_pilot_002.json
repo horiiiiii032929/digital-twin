@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-end-to-end-pilot-002",
-  "status": "frozen-development-authorized",
+  "status": "completed-development-go-deeper",
   "owner_issue": 127,
   "decision_question": "Does the two-boundary T0 successor improve boundary safety and complete source-grounded answering under a paired, leakage-free development comparison?",
   "research_question": "Relative to the any-hit T0 control, what is the paired change in unsupported release, supported-answer retention, claim completeness, and citation completeness when question-to-evidence selection and post-generation atomic-claim validation are applied?",
@@ -56,7 +56,8 @@
     "provider_calls_max": 0
   },
   "execution_safety": {
-    "network_free_development_execution_authorized": true,
+    "network_free_development_execution_authorized": false,
+    "authorization_revoked": true,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "private_source_execution_authorized": false,
