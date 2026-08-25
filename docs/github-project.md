@@ -49,11 +49,11 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI result as
-   a provisional development contract test, not a production selection. Freeze
-   an independently validated source-linked evaluation, run the actual T0
-   retrieval/generation path without gold-answer or evidence injection, and
-   select or reject the atomic-claim gate from that evidence.
+1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
+   result as provisional development evidence. The 160-case leakage-free T0
+   harness is built and its unselectable controls expose the expected safety
+   versus retention trade-off. Integrate the candidate, add independently
+   validated source-linked data, and only then freeze a selection run.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 517 executable or execution-affecting
+the current branch extends it to all 521 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 67 protected entrypoints,
+active for all general evaluation actions. It covers 68 protected entrypoints,
 with no prospective evaluation currently authorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -118,6 +118,17 @@ and answered 10,000 questions, and the row count is not an academic
 independent-sample claim. It remains engineering evidence for deterministic
 dataset assembly, provider workflow, mutation checks, latency, and cost.
 
+Issue #127 now has a build-only leakage-free successor harness. Its 160
+synthetic-public development cases cover 32 source units, eight courses, and 80
+explicit clusters. Both unselectable controls execute through the normal T0
+student service with only question and course context crossing the product
+boundary. The fail-closed control produced zero unsupported releases but zero
+supported-answer retention; the any-hit control retained every supported answer
+but released 60% of boundary cases and missed complete claims/citations on all
+16 multi-source cases despite complete retrieval. This is harness evidence, not
+independent product-quality evidence. Provider calls, private data, method
+selection, and evaluation execution remain closed.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
@@ -139,7 +150,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 806 Python tests and 46 frontend tests, frontend lint, and the
+check passes 861 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -152,17 +163,17 @@ server-owned ingestion job IDs from the browser. Rendered desktop navigation
 from tutor setup to course delivery passed without console errors; the broader
 frontend and cross-browser audit remains open.
 
-The active-runtime audit is now complete at 97/97 inventoried files. Identity
+The active-runtime audit is now complete at 99/99 inventoried files. Identity
 security mutations and their audit records commit atomically; course ownership
 creation is atomic; account, owner, and membership roles cannot drift; one
 published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections pass the current 804-test Python suite.
+connections. These corrections remain covered by the current 861-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 517-file audit. Evaluation
-execution remains frozen, with 67/67 protected entrypoints registered and no
+artifacts are also fully dispositioned in the current 521-file audit. Evaluation
+execution remains frozen, with 68/68 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
 ## Current outcome
@@ -480,7 +491,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Go Deeper | Freeze an independently validated source-linked evaluation and run the actual T0 retrieval/generation path without gold-answer or evidence injection |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Preserve the passing leakage-free T0 harness; integrate the #105 candidate, add independently validated source-linked data, then separately freeze development execution |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the provisional atomic-claim candidate and evaluate it inside that leakage-free T0 path before any product binding |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

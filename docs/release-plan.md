@@ -58,8 +58,9 @@ not require model spending or private data:
 2. Preserve closed #87 and completed #110 as engineering evidence that the
    deterministic synthetic workflow processed 10,000 rows. Analysis correction
    001 supersedes any academic factual-accuracy or independent-sample
-   interpretation. Run the actual T0 product without gold injection in a new
-   prospective evaluation.
+   interpretation. The new #127 harness now runs 160 development cases through
+   the actual T0 product without gold injection; its two controls are
+   unselectable, so candidate integration and independent data remain next.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked
