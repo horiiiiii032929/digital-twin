@@ -165,12 +165,15 @@ def test_codex_phase_artifacts_require_one_constant_isolated_task(tmp_path: Path
         )
 
 
-def test_network_free_preflight_is_blocked_before_model_calls() -> None:
+def test_network_free_preflight_keeps_live_execution_blocked() -> None:
     result = build_preflight(load_assets(), live=False)
 
     assert result["status"] == "blocked-not-authorized"
-    assert "calibration-execution-not-authorized" in result["blockers"]
-    assert "bounded-freeze-authorization-missing" in result["blockers"]
+    assert "calibration-execution-not-authorized" not in result["blockers"]
+    assert "bounded-freeze-authorization-missing" not in result["blockers"]
+    assert "instrument-not-frozen-for-execution" not in result["blockers"]
+    assert "reviewer-metadata-not-current" in result["blockers"]
+    assert "codex-calibration-votes-missing" in result["blockers"]
     assert result["provider_or_model_calls"] == 0
     assert result["credential_values_emitted"] is False
 
@@ -179,10 +182,13 @@ def test_execution_command_rechecks_authority_before_a_provider_call(
     tmp_path: Path,
 ) -> None:
     assets = load_assets()
+    assets["instrument"]["execution_safety"][
+        "calibration_execution_authorized"
+    ] = False
     codex = tmp_path / "codex-calibration.json"
     _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
 
-    with pytest.raises(PanelExecutionError, match="not frozen"):
+    with pytest.raises(PanelExecutionError, match="not authorized"):
         require_execution_authorized(
             assets,
             phase="calibration",

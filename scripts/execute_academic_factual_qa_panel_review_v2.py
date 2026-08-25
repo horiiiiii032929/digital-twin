@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Prepare, preflight, simulate, or execute the confirmation-002 review panel.
 
-The committed checkpoint is execution-unauthorized. Live preflight performs
+The committed checkpoint authorizes calibration only. Live preflight performs
 metadata reads only. Provider inference is split into calibration and
 confirmation phases so no confirmation vote is opened until all three
-reviewers pass the frozen calibration gates.
+reviewers pass the frozen calibration gates and confirmation receives separate
+authority.
 """
 
 from __future__ import annotations
@@ -1185,7 +1186,7 @@ def main() -> int:
     if args.validate:
         result = {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-execution-unauthorized",
+            "status": "validated-calibration-authorized-confirmation-unauthorized",
             "binding_sha256": assets["binding"]["content_sha256"],
             "maximum_provider_calls": 120,
             "provider_or_model_calls": 0,

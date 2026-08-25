@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the build-only LLM-panel academic factual-QA protocol."""
+"""Validate the calibration-authorized LLM-panel factual-QA protocol."""
 
 from __future__ import annotations
 
@@ -34,8 +34,8 @@ PREDECESSOR_INSTRUMENT = (
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "reviewer-bindings-frozen-execution-unauthorized"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 17))
+STATUS = "frozen-pending-execution"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 18))
 REVIEWER_IDS = (
     "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
@@ -323,8 +323,14 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         "review cost guard drifted",
     )
     _require(
-        all(value is False for value in binding_artifact["authorization"].values()),
-        "binding artifact must remain execution-unauthorized",
+        binding_artifact["authorization"]
+        == {
+            "codex_review_authorized": True,
+            "provider_review_authorized": True,
+            "paid_execution_authorized": True,
+            "confirmation_review_authorized": False,
+        },
+        "binding artifact calibration authority drifted",
     )
 
     analysis = instrument["analysis_plan"]
@@ -343,7 +349,24 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     )
 
     safety = instrument["execution_safety"]
-    _require(all(value is False for value in safety.values()), "all execution authorities must remain false")
+    _require(
+        safety
+        == {
+            "source_download_authorized": False,
+            "question_construction_authorized": False,
+            "calibration_execution_authorized": True,
+            "codex_review_authorized": True,
+            "provider_review_authorized": True,
+            "paid_execution_authorized": True,
+            "private_source_execution_authorized": False,
+            "confirmation_execution_authorized": False,
+            "researcher_audit_authorized": False,
+            "final_execution_authorized": False,
+            "product_binding_authorized": False,
+            "automatic_promotion": False,
+        },
+        "calibration execution authorities drifted",
+    )
     build = instrument["build_checkpoint"]
     _require(
         all(
@@ -407,8 +430,6 @@ def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
         blockers.append("provider-review-authorized-false")
     if not safety["paid_execution_authorized"]:
         blockers.append("paid-execution-authorized-false")
-    if not safety["confirmation_execution_authorized"]:
-        blockers.append("confirmation-execution-authorized-false")
     if audit["researcher_audit_complete"]:
         blockers.append("unexpected-researcher-audit-state")
     return {
@@ -441,7 +462,7 @@ def main() -> int:
     result = (
         {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-reviewer-bindings-frozen-execution-unauthorized",
+            "status": "validated-calibration-authorized-confirmation-unauthorized",
         }
         if args.validate
         else preflight(instrument)

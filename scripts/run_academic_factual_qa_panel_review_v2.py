@@ -525,13 +525,15 @@ def validate_build() -> dict[str, Any]:
     )
     if reviewer_ids != REVIEWER_IDS:
         raise PanelReviewError(f"reviewer binding drifted: {reviewer_ids}")
-    if instrument["execution_safety"]["codex_review_authorized"]:
-        raise PanelReviewError("Codex review must remain unauthorized at build checkpoint")
-    if instrument["execution_safety"]["provider_review_authorized"]:
-        raise PanelReviewError("provider review must remain unauthorized at build checkpoint")
+    if not instrument["execution_safety"]["codex_review_authorized"]:
+        raise PanelReviewError("Codex calibration authority is missing")
+    if not instrument["execution_safety"]["provider_review_authorized"]:
+        raise PanelReviewError("provider calibration authority is missing")
+    if instrument["execution_safety"]["confirmation_execution_authorized"]:
+        raise PanelReviewError("confirmation must remain unauthorized")
     return {
         "instrument_id": instrument["instrument_id"],
-        "status": "validated-build-only",
+        "status": "validated-calibration-authorized-no-execution-mode",
         "packet_item_count": len(packet["items"]),
         "provider_calls": 0,
     }
@@ -552,9 +554,11 @@ def preflight() -> dict[str, Any]:
         blockers.append("paid-execution-not-authorized")
     if not instrument["reviewer_calibration_contract"]["calibration_controls_sealed"]:
         blockers.append("calibration-controls-not-sealed")
+    if not safety["confirmation_execution_authorized"]:
+        blockers.append("confirmation-execution-not-authorized")
     return {
         "instrument_id": instrument["instrument_id"],
-        "status": "blocked-not-authorized" if blockers else "ready",
+        "status": "blocked-confirmation-not-authorized" if blockers else "ready",
         "blockers": blockers,
         "planned_review_items_per_reviewer": 240,
         "planned_provider_review_items": 480,

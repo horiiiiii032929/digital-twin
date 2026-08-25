@@ -231,6 +231,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # successor instrument requires a new code review and an explicit entry here.
 BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
+        "academic-factual-qa-confirmation-002": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "factual-qa-v3-oracle-pilot-001": (
             "dataset_generation",
             "external_model_evaluation",

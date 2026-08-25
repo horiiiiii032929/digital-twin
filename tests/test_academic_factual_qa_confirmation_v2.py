@@ -20,7 +20,7 @@ def _write(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
-def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
+def test_llm_panel_protocol_authorizes_only_calibration() -> None:
     result = preflight(validate_instrument())
 
     assert result == {
@@ -28,11 +28,6 @@ def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
         "status": "blocked-build-only",
         "blockers": [
             "codex-isolated-runtime-not-verified",
-            "calibration-execution-authorized-false",
-            "codex-review-authorized-false",
-            "provider-review-authorized-false",
-            "paid-execution-authorized-false",
-            "confirmation-execution-authorized-false",
         ],
         "planned_case_count": 200,
         "planned_cluster_count": 100,
@@ -102,7 +97,12 @@ def test_historical_human_review_protocol_remains_preserved() -> None:
         ("truth_authority_contract", "model_question_paraphrase_allowed", True, "paraphrasing"),
         ("reviewer_panel_contract", "panel_size", 2, "panel size"),
         ("consensus_and_researcher_audit", "majority_vote_is_authoritative", True, "majority vote"),
-        ("execution_safety", "provider_review_authorized", True, "execution authorities"),
+        (
+            "execution_safety",
+            "provider_review_authorized",
+            False,
+            "calibration execution authorities",
+        ),
     ],
 )
 def test_protocol_drift_fails_closed(

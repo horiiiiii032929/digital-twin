@@ -197,14 +197,10 @@ def test_malformed_output_produces_invalid_execution() -> None:
     assert result["malformed_response_count"] == 1
 
 
-def test_preflight_stops_before_any_reviewer_or_paid_call() -> None:
+def test_preflight_reports_calibration_authorized_and_confirmation_blocked() -> None:
     result = preflight()
-    assert result["status"] == "blocked-not-authorized"
-    assert set(result["blockers"]) == {
-        "codex-review-not-authorized",
-        "provider-review-not-authorized",
-        "paid-execution-not-authorized",
-    }
+    assert result["status"] == "blocked-confirmation-not-authorized"
+    assert result["blockers"] == ["confirmation-execution-not-authorized"]
     assert result["planned_review_items_per_reviewer"] == 240
     assert result["planned_provider_review_items"] == 480
     assert result["provider_calls"] == 0

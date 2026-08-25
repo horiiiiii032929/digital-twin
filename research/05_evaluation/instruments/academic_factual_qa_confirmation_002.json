@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-confirmation-002",
-  "status": "reviewer-bindings-frozen-execution-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 127,
   "preregistered_at": "2026-08-25",
   "predecessor": {
@@ -9,7 +9,7 @@
     "disposition": "superseded-before-source-opening-or-execution",
     "reason": "No feasible external human reviewers were available; the replacement preserves deterministic truth and uses a diverse blinded LLM panel plus bounded researcher audit."
   },
-  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012", "AFQC-013", "AFQC-014", "AFQC-015", "AFQC-016"],
+  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012", "AFQC-013", "AFQC-014", "AFQC-015", "AFQC-016", "AFQC-017"],
   "decision_question": "On fresh source/question clusters, does the two-boundary T0 method reduce unsupported releases without materially reducing supported answers or citation completeness relative to any-hit T0?",
   "claim_level": "deterministic-source-derived-llm-panel-reviewed-researcher-audited-silver-reference",
   "scope": {
@@ -229,7 +229,7 @@
   "reviewer_binding_contract": {
     "binding_id": "academic-factual-qa-confirmation-002-reviewer-bindings-001",
     "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
-    "content_sha256": "b1a383ec2901ae1efae421a85d1289b828f2bdc3716cdcd1b3777a1cff40f34c",
+    "content_sha256": "08c1aaae275063b1c400b668d6a94b1abf95136d9891f54b2f52828138f5971c",
     "maximum_age_hours_for_execution": 24,
     "live_provider_match_required": true,
     "fresh_isolated_codex_task_required": true,
@@ -275,10 +275,10 @@
   "execution_safety": {
     "source_download_authorized": false,
     "question_construction_authorized": false,
-    "calibration_execution_authorized": false,
-    "codex_review_authorized": false,
-    "provider_review_authorized": false,
-    "paid_execution_authorized": false,
+    "calibration_execution_authorized": true,
+    "codex_review_authorized": true,
+    "provider_review_authorized": true,
+    "paid_execution_authorized": true,
     "private_source_execution_authorized": false,
     "confirmation_execution_authorized": false,
     "researcher_audit_authorized": false,

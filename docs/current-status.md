@@ -166,9 +166,11 @@ direct DeepSeek V4 Pro using current peak prices. Its two-phase executor
 requires all three reviewers to pass calibration before confirmation, allows
 120 provider calls with zero retries, checkpoints atomically, and enforces a
 USD 3 emergency stop. The full network-free 720-judgment simulation passes and
-the metadata-only live check reports no drift. All reviewer, paid,
-product-binding, researcher-audit, and final-tranche authority remains false;
-preflight is correctly `blocked-not-authorized`.
+the metadata-only live check reports no drift. The bounded 40-control Codex and
+provider calibration is now authorized under AFQC-017. The 200-case
+confirmation, product binding, researcher audit, private data, promotion, and
+final tranche remain unauthorized; calibration must pass before any of those
+boundaries can change.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented

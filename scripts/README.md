@@ -639,8 +639,8 @@ Current utilities:
   emergency stop. Use `npm run
   verify:academic-factual-qa-confirmation-v2-review-execution` and the simulated
   command for no-call verification. The committed instrument and repository
-  freeze intentionally block both provider phases until separate authority is
-  recorded.
+  freeze authorize only the bounded calibration. Confirmation remains blocked
+  until all reviewers pass calibration and a separate authority is recorded.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
