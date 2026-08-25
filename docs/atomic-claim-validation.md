@@ -1,6 +1,7 @@
 # Post-generation atomic-claim validation
 
-Status: build-ready; confirmation execution and product binding unauthorized.
+Status: provisional development candidate; confirmation complete, production
+selection and product binding unauthorized.
 
 ## Decision
 
@@ -90,5 +91,13 @@ authorize a human pilot.
 5. Bind the method to one immutable product profile, then run the untouched
    T0/T1 confirmation and publication workflow on that same revision.
 
-No current product profile or release claim changes before the confirmation
-passes and a separate binding checkpoint is approved.
+The confirmation passed its frozen synthetic contract gates, but retrospective
+analysis found that 120 rows came from ten fact groups crossed with twelve
+templates, were not independent, had no independent expert annotation, and did
+not exercise real product retrieval or generation. The current decision is
+therefore `Go Deeper`, not production `Keep`.
+
+No current product profile or release claim changes until a leakage-free
+end-to-end T0 evaluation runs on independently validated source-linked examples.
+The system under test must receive only the question and indexed corpus; gold
+answers, actions, claims, source spans, and citations remain evaluator-only.

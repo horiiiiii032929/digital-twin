@@ -49,13 +49,11 @@ professor-communication track.
 
 ## Critical path
 
-1. #105 — preserve candidate comparison 001 as Refine and do not tune its
-   consumed split. The post-generation NLI atomic-claim successor passed every
-   frozen gate on a fresh 120-case confirmation: zero false releases, 95%
-   supported retention, complete mutation/lineage/malformed rejection, and
-   12/12 direct audit. Authorization is revoked. Bind the kept method to one
-   immutable T0 product revision, rebuild, and pass grounded publication and
-   student journeys; do not start another model search.
+1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI result as
+   a provisional development contract test, not a production selection. Freeze
+   an independently validated source-linked evaluation, run the actual T0
+   retrieval/generation path without gold-answer or evidence injection, and
+   select or reject the atomic-claim gate from that evidence.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93
@@ -67,11 +65,12 @@ professor-communication track.
    their platform/fidelity dependencies clear.
 6. #10 — approval-gated professor/student workflow and usability pilot.
 
-Issue #87 is completed `Keep` history after pilot 003 passed every 100-case
-gate in PR #109. Issues #85 and #86 are completed `Refine` history. Issue #110
-retains the professor-requested staged scale without making it an active
-publication blocker. Issues #13 and #44 remain parallel final-delivery and
-professor-communication work.
+Issue #87 is completed historical method-building work. Issues #85 and #86 are
+completed `Refine` history. Issue #110 is complete only as a 10,000-row
+engineering pipeline-scale milestone; analysis correction 001 prevents it from
+being used as Digital Twin factual-accuracy or independent-sample evidence.
+Issues #13 and #44 remain parallel final-delivery and professor-communication
+work.
 
 Issue #86 merged region-aware product ingestion, access-checked original-crop
 citations, and three registered prospective development attempts in PR #91.

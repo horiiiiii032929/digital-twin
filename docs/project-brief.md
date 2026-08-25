@@ -39,10 +39,10 @@ authoritative for the results they document.
 3. Can the deployed system complete administrator, professor, and student
    journeys with correct authorization, citation lineage, publication control,
    recovery, observability, and bounded capacity?
-4. Can a source-linked generation and review method produce a trustworthy
-   factual-QA dataset approaching 10,000 cases while exposing quality,
-   abstention, isolation, latency, and cost failures that the verified 100-case
-   benchmark cannot estimate?
+4. Can the actual Course Digital Twin answer a large, independently validated,
+   source-linked question set with correct factual claims, complete citations,
+   and safe boundary actions when it receives only the question and indexed
+   corpus?
 
 ## Delivery phases
 
@@ -65,11 +65,12 @@ registered 19 checks. These are useful baselines, not production evidence.
 
 Issue #85 corrected and audited the multimodal evaluator. Issue #86 provides
 the prospective region-aware ingestion and citation foundation, with a
-registered Refine decision and no selected multimodal profile. Draft PR #103
-contains the deterministic 10,000-package factual-QA successor and an
-unauthorized simulated pilot. The active phase is release integration: close
-the factual-quality, professor-fidelity, target-host, operations, and deployed
-journey gates against one immutable candidate.
+registered Refine decision and no selected multimodal profile. The completed
+10,000-row deterministic factual-QA workflow is engineering pipeline evidence,
+not an end-to-end accuracy result. The active phase is to build academically
+valid, leakage-free factual and grounding evidence before closing the
+professor-fidelity, target-host, operations, and deployed-journey gates against
+one immutable candidate.
 
 ## Claim boundary
 
