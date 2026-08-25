@@ -27,10 +27,12 @@ The professor configures, previews, approves, publishes, updates, withdraws,
 and rolls back the Digital Twin. Once a version is published, normal student
 interaction is autonomous. The professor does not approve each response.
 
-The 10,000-case factual-QA programme evaluates knowledge coverage, source
-lineage, answerability, and citation behavior. It is one input to product
-quality; it does not evaluate the autonomous tutoring loop or establish that
-students learn.
+The completed 10,000-row factual-QA programme validates deterministic dataset
+and provider-pipeline behavior, not product knowledge coverage: the author was
+given gold metadata and the final answer/citations came from truth packages. A
+separate leakage-free evaluation must test retrieval, answerability, factual
+claims, and citation behavior. Neither track evaluates the autonomous tutoring
+loop or establishes that students learn.
 
 ## Why a graph rather than one agent prompt
 

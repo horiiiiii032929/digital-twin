@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-24
+Status date: 2026-08-25
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -92,8 +92,9 @@ is 800/800, reviewer agreement is 997/1,000, mutation detection is 199/200, and
 there are zero exact duplicates. Attempt 002 authorization is revoked; its
 separately authorized successor result is recorded below.
 
-The professor-requested approximately 10,000-case dummy factual-QA milestone is
-now complete. `factual-qa-v3-scale-completion-10000-001` finished as **Keep** on
+The professor-requested approximately 10,000-row dummy factual-QA pipeline
+milestone is complete. `factual-qa-v3-scale-completion-10000-001` finished as
+**Keep for engineering pipeline scale** on
 the exact remaining 9,000 truth packages: 7,200 answerable, 900 abstain, 450
 clarify, and 450 refuse. All 9,000 were deterministic-valid, all 7,200
 answerable cases had valid citations, boundary accuracy was 1,800/1,800,
@@ -108,9 +109,14 @@ caught. Across all 10,000 cases, deterministic validity is 10,000/10,000,
 citation validity is 8,000/8,000, reviewer agreement is 9,924/10,000, and
 advisory mutation detection is 1,994/2,000. The one-time authorization is
 revoked, the completion instrument is removed from the bounded allowlist, and
-no further factual-QA scale is authorized. This remains synthetic-public method
-evidence, not real-source, Professor Digital Twin, autonomous tutoring, or
-deployment validation.
+no further factual-QA scale is authorized. Analysis correction 001 establishes
+that the author received canonical answers, claims, and citations and only
+varied question wording; final answer metadata was copied from the truth
+package. The rows derive from eight claim grammars and correlated template
+families. This is not evidence that the Digital Twin independently retrieved
+and answered 10,000 questions, and the row count is not an academic
+independent-sample claim. It remains engineering evidence for deterministic
+dataset assembly, provider workflow, mutation checks, latency, and cost.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -392,7 +398,7 @@ be used for threshold tuning. Issue #105 now requires a method-level decision,
 with claim-level post-generation support validation as the recommended
 successor boundary.
 
-That successor is now implemented and prospectively confirmed. Build checkpoint
+That successor is implemented and has a completed development confirmation. Build checkpoint
 `evidence-sufficiency-v3-atomic-claim-confirmation-001-build` moved the release
 boundary after generation: the model may emit only structured atomic claims,
 while the server owns eligible retrieval lineage, claim-set completeness, and
@@ -412,8 +418,13 @@ peak memory. The exact-quote control remained safe but retained only 50% of
 supported drafts and is not selectable. Direct review confirmed all 12 priority
 cases; the two candidate errors were conservative false rejections of valid
 multi-claim paraphrases, not unsafe releases or label defects. Authorization is
-revoked. The NLI atomic-claim method is selected for a separate product-binding
-checkpoint, but it is not yet bound to the release profile or rebuilt product.
+revoked. Analysis correction 001 reclassifies the result as a provisional
+development contract test: its 120 rows are ten fact groups crossed with twelve
+templates, the rows are not independent, the direct Codex review is not
+independent annotation, and the actual product retrieval/generation path was
+not exercised. The NLI candidate is therefore **Go Deeper**, is not selected
+for product binding, and must be evaluated in a leakage-free end-to-end T0 run
+before any release-profile decision.
 
 The exact local `qwen3.5:9b-q4_K_M` reviewer completed two 22-probe
 synthetic-public method-development attempts. Both detected 11/11 planted
@@ -454,28 +465,29 @@ continues to hold report, presentation, and professor-communication work.
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
-| Publication/student core | Keep atomic-claim method; product binding pending | V8 images built and became healthy; failed query/evidence comparison preserved; fresh 120-case confirmation passed every gate with zero false releases, 95% supported retention, complete mutation/lineage/malformed rejection, and 12/12 direct audit; authorization revoked | Bind the selected NLI atomic-claim validator to one immutable T0 product revision, preserve safe fallback, rebuild it, and rerun complete HTTPS publication/student journeys |
-| Large factual QA | Keep at cumulative 10,000 cases | All 10,000 are deterministic-valid; all 8,000 answerable cases are citation-valid; reviewer agreement is 9,924/10,000; advisory mutation detection is 1,994/2,000 and deterministic mutation rejection is 2,000/2,000; zero exact duplicates; authorization revoked | Preserve this synthetic-public method result and move to separate real-source, product, and Professor Digital Twin evaluation |
+| Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
+| Large factual QA | Engineering pipeline Keep; academic product evidence pending | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting | Run a leakage-free end-to-end evaluation where the Digital Twin sees only each question and the indexed corpus; independently validate a stratified gold subset and report cluster-aware uncertainty |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The current release blockers are an unconfirmed T1 autonomous
-tutoring graph, a selected evidence-sufficiency method, public host/domain
-selection, target-host operations evidence, professor-fidelity calibration,
-and one frozen end-to-end candidate decision.
+release-ready. The immediate correction is to obtain academically valid
+end-to-end factual and evidence-sufficiency evidence before selecting a
+grounding gate. T1 confirmation, host/domain selection, target-host operations,
+professor-fidelity calibration, and human workflow evidence remain separate.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#110 Factual-QA staged scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / Keep at 10,000 | Preserve the registered result and revoked authorization; no further synthetic scale is planned |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / method Keep / binding pending | Preserve failed comparison 001, bind the passing atomic-claim validator to one immutable T0 product revision, and pass grounded publication/student regression before closing the blocker |
-| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 6 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete current-image publication with the selected gate, then select a host/domain and pass trusted TLS, restore, and walkthrough |
-| 7 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
-| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
-| 9 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Go Deeper | Freeze an independently validated source-linked evaluation and run the actual T0 retrieval/generation path without gold-answer or evidence injection |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the provisional atomic-claim candidate and evaluate it inside that leakage-free T0 path before any product binding |
+| 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
+| 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
+| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
+| 8 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
+| 9 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
+| 10 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:
