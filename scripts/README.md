@@ -629,6 +629,18 @@ Current utilities:
   clean scenario and `npm run
   preflight:academic-factual-qa-confirmation-v2-review-runner` to confirm that
   live review remains unauthorized.
+- `execute_academic_factual_qa_panel_review_v2.py`: binds the actual review
+  checkpoint to a fresh isolated `gpt-5.6-sol` Codex task, exact Mistral Small
+  4 zero-data-retention routing through OpenRouter, and direct DeepSeek V4 Pro.
+  It prepares a gold-free two-phase Codex workspace, performs metadata-only
+  live preflight, and runs calibration before confirmation in batches of four.
+  The executor has zero retries, a 120-call ceiling, atomic resume, stable
+  identity checks, a conservative USD 1.563034 peak reservation, and a USD 3
+  emergency stop. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-execution` and the simulated
+  command for no-call verification. The committed instrument and repository
+  freeze intentionally block both provider phases until separate authority is
+  recorded.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

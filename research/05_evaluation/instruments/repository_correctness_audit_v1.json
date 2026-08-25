@@ -4,6 +4,39 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual binding review and focused tests verify current Codex, Mistral, and DeepSeek identities, exact Mistral ZDR/no-fallback routing, current peak DeepSeek pricing, the 24-hour freshness window, 120-call ceiling, and USD 3 emergency stop.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "cdaa2de8fa7918051a5a1d8a76df7d57d3c35de056d4590c2fd167b7cba75a44"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, calibration-before-confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, malformed preservation, and absent authorization.",
+      "findings": [],
+      "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "0ef9e6a95bf224cd5a049f56ad12cdabc78d69411d8c6af8f16d7e4e133ff1d8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, fail-closed authorization, full 120-call simulation, and one-call malformed termination.",
+      "findings": [],
+      "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "705bca538a2ef11a92a8e27bd6f6c63e4f0430452d1e81de746d9c451996bbcc"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "configuration-and-deployment",
       "evidence": "Manual build-context review confirmed private, generated, model, run, and local environment material is excluded.",
       "findings": [],
@@ -874,12 +907,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+      "evidence": "Manual command-surface review and focused factual-QA panel tests verify the bound reviewer validator, no-call simulation, live metadata-only preflight, and guarded execution commands are included in the repository gate.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "211ae01c8ed5b5e63c764845bf937ba83ad933a751977ffce4ba2b7812b2e0d1"
+      "sha256": "c1baade5d4f43cf842d8b95bc028bcce354a7715ddd68ce931ffd74ca3ac6f7c"
     },
     {
       "audit_status": "audited",
@@ -1039,12 +1072,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Protocol review verifies deterministic truth authority, three-family blinded review, planted-control calibration, unanimity, bounded researcher audit, claim ceilings, and complete execution prohibition while preserving confirmation 001.",
+      "evidence": "Protocol review verifies deterministic truth authority, three-family blinded review, exact reviewer bindings, planted-control calibration, unanimity, bounded researcher audit, and complete execution prohibition while preserving confirmation 001.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "c68acad14422b431d5f91c0b031101f793b341f39e274ddc94e48f0b94932e6e"
+      "sha256": "34b6a8cb8470a9b6927ff2a4bd01e832d4b190eea83687138708cb296da5eeaf"
     },
     {
       "audit_status": "audited",
@@ -1094,12 +1127,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual validator review and focused drift tests enforce panel diversity, reviewer calibration, deterministic authority, bounded researcher workload, historical preservation, and blocked build-only preflight.",
+      "evidence": "Manual validator review and focused drift tests enforce exact binding hashes, current model identities, panel diversity, reviewer calibration, cost/call limits, deterministic authority, and blocked execution preflight.",
       "findings": [],
       "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "39b8450c74a64147b6cf1627eec5424e6ae056e1160903ae5e72c096f65684fb"
+      "sha256": "8024d698b7d53089ec74e7861e47e6c841b6425aad5167d1a407239fb9042b80"
     },
     {
       "audit_status": "audited",
@@ -2227,12 +2260,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover three-family coverage, deterministic truth authority, unanimity, calibration and audit bounds, historical protocol preservation, stale bindings, and fail-closed execution authorities.",
+      "evidence": "Focused tests cover three-family coverage, deterministic truth authority, unanimity, calibration and audit bounds, exact fresh bindings, isolated Codex runtime gating, and fail-closed execution authorities.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_confirmation_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "698aa722c606a666066335ae6e4b4eea8efd129f76ded08a7531e3b727515d97"
+      "sha256": "fb10669756d4018121ed1c18ec563210187beb065da30ab73ae7855ebc5285b9"
     },
     {
       "audit_status": "audited",
@@ -3503,12 +3536,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope.",
+      "evidence": "Manual registry/AST review and focused tests confirm the new provider panel executor is protected and all 72 execution-sensitive entrypoints retain reachable fail-closed guards.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "bcb4c4fc49d60d9b927fde886947d71962856c932191450e5e9c5bcce7d5bbe4"
+      "sha256": "afd9481c124803cf7dadebbbe6d7a154962720148b312ebb29984dbebc1ee96f"
     },
     {
       "audit_status": "audited",
@@ -3635,7 +3668,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+      "evidence": "Manual freeze-registry review confirms the provider panel executor is registered for external-model and method-evaluation operations while no bounded authorization is present.",
       "findings": [],
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-08-25",
@@ -4564,7 +4597,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "e0e8b5f287b1c78f63f13a78bc9b21a2405c705323eba0175ba089198892f88c"
+      "sha256": "2e0e320b7ac1c30073cb92c5861a4b76f5a404cc9ef47e02274aae4caaa5cb37"
     },
     {
       "audit_status": "audited",
@@ -5604,12 +5637,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "atomic-claim-evidence-validation",
-      "evidence": "Tests verify completed revocation, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+      "evidence": "Tests verify completed revocation, model-free simulation, coherent local authority and revocation states, explicit stale-model-metadata blocking, immutable model/threshold/gate bindings, and prohibition of product or external execution authority.",
       "findings": [],
       "path": "tests/test_run_atomic_claim_validation_confirmation.py",
-      "reviewed_at": "2026-08-24",
+      "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "0eedbbe82ec7853daca2678761a2b4a3342567209e7af6557888430ab651d984"
+      "sha256": "78677b1cdca272ae920640d874c7b12f7e94fc9c2c5841648b4d69501a391af6"
     },
     {
       "audit_status": "audited",
@@ -5862,7 +5895,7 @@
       "path": "tests/test_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "81d842f2984536709b1ab5805f393bd3ee47137963ffd76e71a31a266f42e598"
+      "sha256": "7b7ec21065ded14b630a1ca5bc866038206b9bba9a2d1d4520822d7d9c951a82"
     },
     {
       "audit_status": "audited",

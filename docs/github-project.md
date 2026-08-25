@@ -53,8 +53,9 @@ professor-communication track.
    result as provisional development evidence. The successor now binds four
    exact public educational repositories, 100 non-overlapping confirmation
    clusters, 200 deterministic cases, 40 disjoint controls, and one blinded
-   three-family packet. Reviewer execution remains unauthorized; after fresh
-   binding and a passing panel/researcher audit, freeze the actual T0 product
+   three-family packet. Current reviewer identities, routing, cost bounds, and
+   the calibration-first executor are frozen, but execution remains
+   unauthorized; after a passing panel/researcher audit, freeze the actual T0 product
    comparison without exposing gold fields.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

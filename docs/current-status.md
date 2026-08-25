@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-25
+Status date: 2026-08-26
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 530 executable or execution-affecting
+the current branch extends it to all 539 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 69 protected entrypoints,
+active for all general evaluation actions. It covers 72 protected entrypoints,
 with no prospective evaluation currently authorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -160,8 +160,15 @@ remain ignored under `data/external/`, and no Academia Vault or private data was
 read. The blinded 240-item reviewer packet and atomic resume/accounting runner
 pass clean, calibration-failure, disagreement-overflow, malformed-output, and
 resume-drift simulations. These are build checks, not reviewer or product
-results. All reviewer, paid, product-binding, researcher-audit, and final-tranche
-authority remains false; preflight is correctly `blocked-not-authorized`.
+results. The reviewer-binding successor now freezes a fresh isolated
+`gpt-5.6-sol` Codex task, exact Mistral Small 4 ZDR/no-fallback routing, and
+direct DeepSeek V4 Pro using current peak prices. Its two-phase executor
+requires all three reviewers to pass calibration before confirmation, allows
+120 provider calls with zero retries, checkpoints atomically, and enforces a
+USD 3 emergency stop. The full network-free 720-judgment simulation passes and
+the metadata-only live check reports no drift. All reviewer, paid,
+product-binding, researcher-audit, and final-tranche authority remains false;
+preflight is correctly `blocked-not-authorized`.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -184,7 +191,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 893 Python tests and 46 frontend tests, frontend lint, and the
+check passes 924 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -204,10 +211,10 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 893-test Python suite.
+connections. These corrections remain covered by the current 924-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 530-file audit. Evaluation
-execution remains frozen, with 69/69 protected entrypoints registered and no
+artifacts are also fully dispositioned in the current 539-file audit. Evaluation
+execution remains frozen, with 72/72 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
 ## Current outcome
