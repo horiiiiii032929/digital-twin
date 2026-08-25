@@ -48,8 +48,8 @@ PROTECTED_NAME_PREFIXES = (
 ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",
-    # This build-only module has no provider execution mode. It validates and
-    # simulates already-sealed review records without reading held-out data.
+    # This analysis-only module has no provider execution mode. Provider calls
+    # live in the separately guarded execute_academic_* entrypoint.
     "run_academic_factual_qa_panel_review_v2.py",
     "run_ingestion_worker.py",
 }

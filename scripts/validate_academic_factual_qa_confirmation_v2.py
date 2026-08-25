@@ -23,14 +23,19 @@ DEFAULT_INSTRUMENT = (
     ROOT
     / "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json"
 )
+REVIEWER_BINDINGS = (
+    ROOT
+    / "research/05_evaluation/instruments/"
+    "academic_factual_qa_confirmation_002_reviewer_bindings.json"
+)
 PREDECESSOR_INSTRUMENT = (
     ROOT
     / "research/05_evaluation/instruments/academic_factual_qa_confirmation_001.json"
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "source-cases-controls-and-blinded-packet-built-review-pending"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 16))
+STATUS = "reviewer-bindings-frozen-execution-unauthorized"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 17))
 REVIEWER_IDS = (
     "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
@@ -174,7 +179,7 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     _require(tuple(row["model_family"] for row in reviewers) == MODEL_FAMILIES, "model-family diversity drifted")
     _require(len(set(MODEL_FAMILIES)) == panel["minimum_distinct_model_families"] == 3, "reviewer families are not distinct")
     _require(all(row["planned_case_count"] == 200 for row in reviewers), "reviewer coverage drifted")
-    _require(all(row["binding_fresh"] is False for row in reviewers), "reviewer bindings cannot be fresh at build-only stage")
+    _require(all(row["binding_fresh"] is True for row in reviewers), "reviewer bindings are not frozen")
     _require(
         all(
             panel[key] is True
@@ -191,7 +196,24 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     )
     _require(reviewers[0]["designer_conflict_disclosed"] is True, "Codex design conflict must be disclosed")
     _require(reviewers[0]["exact_api_snapshot_reproducible"] is False, "Codex reproducibility limitation must be disclosed")
+    _require(
+        reviewers[0]["provider_model"] == "gpt-5.6-sol"
+        and reviewers[0]["reasoning_effort"] == "medium"
+        and reviewers[0]["runtime_identity_verification_pending"] is True,
+        "Codex runtime binding drifted",
+    )
+    _require(
+        reviewers[1]["provider_model"] == "mistralai/mistral-small-2603"
+        and reviewers[1]["endpoint_provider"] == "Mistral"
+        and reviewers[1]["endpoint_tag"] == "mistral/zdr",
+        "Mistral reviewer binding drifted",
+    )
     _require(reviewers[2]["same_family_as_product_generator"] is True, "DeepSeek dependence must be disclosed")
+    _require(
+        reviewers[2]["provider_model"] == "deepseek-v4-pro"
+        and reviewers[2]["documented_revision"] == "DeepSeek-V4-Pro-0813",
+        "DeepSeek reviewer binding drifted",
+    )
     _require(panel["reviewer_confidence_is_authoritative"] is False, "confidence cannot be authoritative")
     _require(panel["reviewer_votes_are_ground_truth"] is False, "panel votes cannot be ground truth")
 
@@ -251,8 +273,58 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     _require(
         system["product_revision_bound"] is False
         and system["profile_hash_bound"] is False
-        and system["reviewer_bindings_bound"] is False,
-        "system bindings must remain open at build-only stage",
+        and system["reviewer_bindings_bound"] is True,
+        "system reviewer binding state drifted",
+    )
+    binding_contract = instrument["reviewer_binding_contract"]
+    binding_artifact = json.loads(REVIEWER_BINDINGS.read_text(encoding="utf-8"))
+    _require(
+        binding_contract["path"]
+        == "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
+        "reviewer binding path drifted",
+    )
+    _require(
+        binding_artifact["content_sha256"]
+        == binding_contract["content_sha256"]
+        == canonical_sha256(
+            {
+                key: value
+                for key, value in binding_artifact.items()
+                if key != "content_sha256"
+            }
+        ),
+        "reviewer binding content hash drifted",
+    )
+    _require(
+        binding_artifact["binding_id"] == binding_contract["binding_id"]
+        and binding_artifact["instrument_id"] == INSTRUMENT_ID
+        and binding_contract["maximum_age_hours_for_execution"] == 24,
+        "reviewer binding identity or freshness window drifted",
+    )
+    execution_contract = binding_artifact["execution_contract"]
+    _require(
+        execution_contract["provider_batch_size"]
+        == binding_contract["provider_batch_size"]
+        == 4
+        and execution_contract["maximum_provider_calls"]
+        == binding_contract["maximum_provider_calls"]
+        == 120
+        and execution_contract["retries"] == binding_contract["retries"] == 0,
+        "review execution limits drifted",
+    )
+    cost = binding_artifact["cost_guard"]
+    _require(
+        cost["conservative_peak_reservation_usd"]
+        == binding_contract["conservative_peak_reservation_usd"]
+        == 1.563034
+        and cost["emergency_hard_stop_usd"]
+        == binding_contract["emergency_hard_stop_usd"]
+        == 3.0,
+        "review cost guard drifted",
+    )
+    _require(
+        all(value is False for value in binding_artifact["authorization"].values()),
+        "binding artifact must remain execution-unauthorized",
     )
 
     analysis = instrument["analysis_plan"]
@@ -282,6 +354,7 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
                 "deterministic_case_construction_completed",
                 "calibration_control_construction_completed",
                 "blinded_packet_construction_completed",
+                "reviewer_bindings_frozen",
             )
         ),
         "build checkpoint is incomplete",
@@ -322,16 +395,18 @@ def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
         blockers.append("reviewer-bindings-not-fresh")
     if not calibration["calibration_controls_sealed"]:
         blockers.append("calibration-controls-not-sealed")
-    if not system["product_revision_bound"] or not system["profile_hash_bound"]:
-        blockers.append("product-revision-and-profile-not-frozen")
     if not system["reviewer_bindings_bound"]:
         blockers.append("reviewer-bindings-not-frozen")
+    if panel["reviewers"][0]["runtime_identity_verification_pending"]:
+        blockers.append("codex-isolated-runtime-not-verified")
     if not safety["calibration_execution_authorized"]:
         blockers.append("calibration-execution-authorized-false")
     if not safety["codex_review_authorized"]:
         blockers.append("codex-review-authorized-false")
     if not safety["provider_review_authorized"]:
         blockers.append("provider-review-authorized-false")
+    if not safety["paid_execution_authorized"]:
+        blockers.append("paid-execution-authorized-false")
     if not safety["confirmation_execution_authorized"]:
         blockers.append("confirmation-execution-authorized-false")
     if audit["researcher_audit_complete"]:
@@ -345,6 +420,9 @@ def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
         "planned_reviewer_count": 3,
         "planned_reviewer_judgments": 600,
         "planned_calibration_judgments": 120,
+        "maximum_provider_calls": 120,
+        "conservative_peak_reservation_usd": 1.563034,
+        "emergency_hard_stop_usd": 3.0,
         "maximum_researcher_packet_case_count": 60,
         "provider_calls": 0,
         "private_data_read": False,
@@ -361,7 +439,10 @@ def main() -> int:
     args = parser.parse_args()
     instrument = validate_instrument()
     result = (
-        {"instrument_id": INSTRUMENT_ID, "status": "validated-build-only"}
+        {
+            "instrument_id": INSTRUMENT_ID,
+            "status": "validated-reviewer-bindings-frozen-execution-unauthorized",
+        }
         if args.validate
         else preflight(instrument)
     )

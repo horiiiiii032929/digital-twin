@@ -201,7 +201,6 @@ def test_preflight_stops_before_any_reviewer_or_paid_call() -> None:
     result = preflight()
     assert result["status"] == "blocked-not-authorized"
     assert set(result["blockers"]) == {
-        "reviewer-bindings-not-fresh",
         "codex-review-not-authorized",
         "provider-review-not-authorized",
         "paid-execution-not-authorized",

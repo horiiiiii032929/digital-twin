@@ -27,12 +27,11 @@ def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
         "instrument_id": "academic-factual-qa-confirmation-002",
         "status": "blocked-build-only",
         "blockers": [
-            "reviewer-bindings-not-fresh",
-            "product-revision-and-profile-not-frozen",
-            "reviewer-bindings-not-frozen",
+            "codex-isolated-runtime-not-verified",
             "calibration-execution-authorized-false",
             "codex-review-authorized-false",
             "provider-review-authorized-false",
+            "paid-execution-authorized-false",
             "confirmation-execution-authorized-false",
         ],
         "planned_case_count": 200,
@@ -40,6 +39,9 @@ def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
         "planned_reviewer_count": 3,
         "planned_reviewer_judgments": 600,
         "planned_calibration_judgments": 120,
+        "maximum_provider_calls": 120,
+        "conservative_peak_reservation_usd": 1.563034,
+        "emergency_hard_stop_usd": 3.0,
         "maximum_researcher_packet_case_count": 60,
         "provider_calls": 0,
         "private_data_read": False,
@@ -127,11 +129,11 @@ def test_reviewer_family_reuse_fails_closed(tmp_path: Path) -> None:
         validate_instrument(_write(tmp_path, mutated))
 
 
-def test_unfresh_bindings_remain_visible_preflight_blocker() -> None:
+def test_fresh_bindings_still_require_an_isolated_codex_runtime() -> None:
     instrument = validate_instrument()
 
     assert all(
-        row["binding_fresh"] is False
+        row["binding_fresh"] is True
         for row in instrument["reviewer_panel_contract"]["reviewers"]
     )
-    assert "reviewer-bindings-not-fresh" in preflight(instrument)["blockers"]
+    assert "codex-isolated-runtime-not-verified" in preflight(instrument)["blockers"]
