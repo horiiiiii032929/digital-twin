@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 from typing import Any
 
+from scripts.build_academic_factual_qa_confirmation_v2 import canonical_sha256
 from scripts.validate_academic_factual_qa_confirmation import (
     ANSWERABLE_STRATA,
     BOUNDARY_STRATA,
@@ -28,10 +29,10 @@ PREDECESSOR_INSTRUMENT = (
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "protocol-frozen-llm-panel-source-and-review-pending"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 13))
+STATUS = "source-cases-controls-and-blinded-packet-built-review-pending"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 16))
 REVIEWER_IDS = (
-    "codex-current-task-blinded-reviewer",
+    "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
     "deepseek-v4-pro-blinded-reviewer",
 )
@@ -139,11 +140,22 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         "source scope drifted",
     )
     _require(source["academia_vault_opening_authorized"] is False, "private source opening must remain closed")
-    _require(
-        source["source_manifest_bound"] is False
-        and source["source_manifest_path"] is None,
-        "source manifest must remain unopened",
-    )
+    _require(source["source_manifest_bound"] is True, "source manifest must be bound")
+    for path_key, hash_key in (
+        ("source_manifest_path", "source_manifest_sha256"),
+        ("confirmation_dataset_path", "confirmation_dataset_sha256"),
+    ):
+        artifact = json.loads((ROOT / source[path_key]).read_text(encoding="utf-8"))
+        _require(artifact["content_sha256"] == source[hash_key], f"{path_key} binding drifted")
+        _require(
+            artifact["content_sha256"]
+            == canonical_sha256(
+                {key: value for key, value in artifact.items() if key != "content_sha256"}
+            ),
+            f"{path_key} content hash is invalid",
+        )
+    _require(source["full_raw_source_artifacts_committed"] is False, "raw sources cannot be committed")
+    _require(source["source_and_question_family_overlap_count"] == 0, "source-family overlap detected")
 
     truth = instrument["truth_authority_contract"]
     _require(
@@ -198,7 +210,13 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     ):
         _require(calibration[key] == 0.9, f"{key} drifted")
     _require(calibration["failed_reviewer_may_vote"] is False, "failed reviewer cannot vote")
-    _require(calibration["calibration_controls_sealed"] is False, "controls cannot be sealed at build-only stage")
+    _require(calibration["calibration_controls_sealed"] is True, "controls must be sealed")
+    for path_key, hash_key in (
+        ("calibration_dataset_path", "calibration_dataset_sha256"),
+        ("blinded_packet_path", "blinded_packet_sha256"),
+    ):
+        artifact = json.loads((ROOT / calibration[path_key]).read_text(encoding="utf-8"))
+        _require(artifact["content_sha256"] == calibration[hash_key], f"{path_key} binding drifted")
 
     audit = instrument["consensus_and_researcher_audit"]
     _require(audit["automatic_semantic_acceptance_requires_unanimity"] is True, "unanimity rule drifted")
@@ -254,6 +272,32 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
 
     safety = instrument["execution_safety"]
     _require(all(value is False for value in safety.values()), "all execution authorities must remain false")
+    build = instrument["build_checkpoint"]
+    _require(
+        all(
+            build[key] is True
+            for key in (
+                "source_download_completed",
+                "source_license_and_revision_validation_completed",
+                "deterministic_case_construction_completed",
+                "calibration_control_construction_completed",
+                "blinded_packet_construction_completed",
+            )
+        ),
+        "build checkpoint is incomplete",
+    )
+    _require(
+        build["confirmation_case_count"] == 200
+        and build["calibration_control_count"] == 40
+        and build["source_section_count"] == 160,
+        "build checkpoint counts drifted",
+    )
+    _require(
+        build["provider_calls"] == 0
+        and build["private_data_read"] is False
+        and build["review_execution_started"] is False,
+        "build-only execution boundary drifted",
+    )
     progression = instrument["progression_rule"]
     _require(progression["external_human_ground_truth_may_be_claimed"] is False, "human ground truth claim must remain false")
     _require(progression["failed_confirmation_tuning_permitted"] is False, "confirmation tuning must remain prohibited")
@@ -300,10 +344,11 @@ def preflight(instrument: dict[str, Any]) -> dict[str, Any]:
         "planned_cluster_count": 100,
         "planned_reviewer_count": 3,
         "planned_reviewer_judgments": 600,
+        "planned_calibration_judgments": 120,
         "maximum_researcher_packet_case_count": 60,
         "provider_calls": 0,
         "private_data_read": False,
-        "source_manifest_opened": False,
+        "source_manifest_opened": True,
         "reviewer_outputs_opened": False,
     }
 

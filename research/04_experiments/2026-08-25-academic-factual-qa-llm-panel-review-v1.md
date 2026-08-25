@@ -2,8 +2,8 @@
 
 Date: 2026-08-25
 
-Status: protocol frozen; sources, cases, reviewer calls, and researcher audit
-unopened
+Status: sources, 200 cases, 40 controls, and blinded packet built; reviewer
+execution and researcher audit unopened
 
 Owner issue: [#127](https://github.com/horiiiiii032929/digital-twin/issues/127)
 
@@ -56,7 +56,7 @@ canonical labels, other votes, or researcher decision.
 
 | Reviewer | Family | Coverage | Role and limitation |
 | --- | --- | ---: | --- |
-| Codex task reviewer | OpenAI | 200 | Primary semantic audit. The runtime identity and task revision are recorded, but it is not an API-snapshot-reproducible judge and its design involvement is disclosed. |
+| Isolated Codex task reviewer | OpenAI | 200 | Primary semantic audit in a fresh task receiving only the blinded packet. It is not API-snapshot reproducible; model-family design involvement remains disclosed. |
 | Mistral Small 4 (`mistral-small-2603`) | Mistral | 200 | Independent primary semantic vote through exact OpenRouter routing with fallback disabled, subject to fresh metadata and identity checks. |
 | DeepSeek V4 Pro (`deepseek-v4-pro`) | DeepSeek | 200 | Adversarial sensitivity vote through the official API. It shares a vendor family with the product generator, so that dependence is reported and it never acts as a sole tie-breaker. |
 
@@ -64,9 +64,11 @@ The Mistral and DeepSeek identities reflect the official
 [Mistral Small 4 model card](https://docs.mistral.ai/models/mistral-small-4-0-26-03)
 and [DeepSeek model list](https://api-docs.deepseek.com/api/list-models/)
 checked on 2026-08-25. They must be checked again within 24 hours of any
-execution. The Codex reviewer is the current project task, not a substitute name
-for an OpenAI API model. If an exact API reviewer later replaces it, that change
-requires a new instrument revision. Current official OpenAI guidance identifies
+execution. The Codex reviewer must run in a fresh isolated task because the
+design task constructed the source and control artifacts and therefore cannot
+honestly be called blinded. It is not a substitute name for an OpenAI API
+model. If an exact API reviewer later replaces it, that change requires a new
+instrument revision. Current official OpenAI guidance identifies
 GPT-5.6 Terra as the cost/capability-balanced API option, but it is not silently
 substituted for the Codex task reviewer and no OpenAI API call is part of this
 protocol.
@@ -136,9 +138,23 @@ The professor report must state exactly how truth was constructed, which model
 families reviewed it, how many cases the researcher audited, disagreement and
 calibration results, and that correlated judge errors remain possible.
 
+## Built source and packet checkpoint
+
+The bound build contains 160 non-overlapping section sources: 120 used by the
+100 confirmation clusters and 40 used only by calibration. The 200 confirmation
+cases comprise 100 answerable and 100 boundary cases across the preregistered
+strata. The 40 controls comprise 20 clean and 20 planted defects. Raw public
+repositories remain ignored; the committed manifest binds exact revisions,
+licenses, section ranges, file/section hashes, and local dependent assets.
+
+Network-free simulations prove reviewer calibration failure, malformed output,
+identity/resume drift, and more than 40 disagreements fail closed. A clean
+simulation produces the fixed balanced 20-case researcher packet. Simulation
+is harness evidence only and is not a review result.
+
 ## Current stopping boundary
 
-This checkpoint changes the review method only. It authorizes no source
-download, case construction, Codex review, provider call, spending, private
-source, confirmation execution, researcher audit, final tranche, product
-binding, or release promotion.
+Source download and deterministic construction are complete and their temporary
+authority is closed. This checkpoint authorizes no Codex review, provider call,
+spending, private source, confirmation product execution, researcher audit,
+final tranche, product binding, or release promotion.

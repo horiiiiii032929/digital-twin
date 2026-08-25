@@ -603,13 +603,32 @@ Current utilities:
 - `validate_academic_factual_qa_confirmation_v2.py`: validates the feasible
   successor review design without changing or deleting confirmation 001. It
   keeps deterministic source-derived truth authoritative, requires blinded
-  Codex, Mistral Small 4, and DeepSeek V4 Pro reviews for all 200 cases,
+  isolated Codex, Mistral Small 4, and DeepSeek V4 Pro reviews for all 200 cases,
   qualifies each reviewer on 40 planted controls, requires unanimity for
   automatic semantic acceptance, and bounds the researcher packet to at most
   60 cases. Use `npm run verify:academic-factual-qa-confirmation-v2` or `npm run
-  preflight:academic-factual-qa-confirmation-v2`. Preflight remains
-  `blocked-build-only`; no source download, Codex review, provider call,
-  researcher audit, or confirmation execution is authorized.
+  preflight:academic-factual-qa-confirmation-v2`. The source/case build is now
+  bound, but preflight remains blocked; no Codex review, provider call,
+  researcher audit, product execution, or final tranche is authorized.
+- `build_academic_factual_qa_confirmation_v2.py`: reads four locally cached,
+  exact public repository revisions and deterministically rebuilds the
+  160-section source manifest, 200 confirmation cases, and 40 disjoint planted
+  controls. Complete upstream repositories remain ignored. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-data`; this makes zero provider
+  calls and opens no private source.
+- `prepare_academic_factual_qa_panel_review_v2.py`: creates the deterministic
+  240-item packet while removing case IDs, strata, gold provenance, planted
+  mutation labels, conditions, generator identity, and other votes. Use `npm
+  run verify:academic-factual-qa-confirmation-v2-review-packet`.
+- `run_academic_factual_qa_panel_review_v2.py`: validates reviewer JSON,
+  calibration gates, unanimity, nominal Krippendorff alpha, immutable votes,
+  atomic resume/accounting, the 40-disagreement stop, and the bounded researcher
+  packet. The current CLI exposes only validation, simulation, and blocked
+  preflight; it contains no paid execution mode. Use `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-runner` for the no-call
+  clean scenario and `npm run
+  preflight:academic-factual-qa-confirmation-v2-review-runner` to confirm that
+  live review remains unauthorized.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

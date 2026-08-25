@@ -198,6 +198,13 @@
     "verify:academic-factual-qa-confirmation": "uv run python -m scripts.validate_academic_factual_qa_confirmation --validate",
     "preflight:academic-factual-qa-confirmation": "uv run python -m scripts.validate_academic_factual_qa_confirmation --preflight",
     "verify:academic-factual-qa-confirmation-v2": "uv run python -m scripts.validate_academic_factual_qa_confirmation_v2 --validate",
+    "build:academic-factual-qa-confirmation-v2": "uv run python -m scripts.build_academic_factual_qa_confirmation_v2 --write",
+    "verify:academic-factual-qa-confirmation-v2-data": "uv run python -m scripts.build_academic_factual_qa_confirmation_v2 --check",
+    "build:academic-factual-qa-confirmation-v2-review-packet": "uv run python -m scripts.prepare_academic_factual_qa_panel_review_v2 --write",
+    "verify:academic-factual-qa-confirmation-v2-review-packet": "uv run python -m scripts.prepare_academic_factual_qa_panel_review_v2 --check",
+    "verify:academic-factual-qa-confirmation-v2-review-runner": "uv run python -m scripts.run_academic_factual_qa_panel_review_v2 --validate",
+    "simulate:academic-factual-qa-confirmation-v2-review-runner": "uv run python -m scripts.run_academic_factual_qa_panel_review_v2 --simulate --scenario pass",
+    "preflight:academic-factual-qa-confirmation-v2-review-runner": "uv run python -m scripts.run_academic_factual_qa_panel_review_v2 --preflight",
     "preflight:academic-factual-qa-confirmation-v2": "uv run python -m scripts.validate_academic_factual_qa_confirmation_v2 --preflight"
   }
 }

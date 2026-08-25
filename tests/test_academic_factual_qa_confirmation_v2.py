@@ -27,9 +27,7 @@ def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
         "instrument_id": "academic-factual-qa-confirmation-002",
         "status": "blocked-build-only",
         "blockers": [
-            "source-manifest-not-bound",
             "reviewer-bindings-not-fresh",
-            "calibration-controls-not-sealed",
             "product-revision-and-profile-not-frozen",
             "reviewer-bindings-not-frozen",
             "calibration-execution-authorized-false",
@@ -41,10 +39,11 @@ def test_llm_panel_protocol_is_frozen_but_execution_is_blocked() -> None:
         "planned_cluster_count": 100,
         "planned_reviewer_count": 3,
         "planned_reviewer_judgments": 600,
+        "planned_calibration_judgments": 120,
         "maximum_researcher_packet_case_count": 60,
         "provider_calls": 0,
         "private_data_read": False,
-        "source_manifest_opened": False,
+        "source_manifest_opened": True,
         "reviewer_outputs_opened": False,
     }
 

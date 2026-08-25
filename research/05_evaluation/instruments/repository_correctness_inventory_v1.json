@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 530
+    "audited": 536
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 118,
+    "active_or_unclassified_tooling": 121,
     "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 107
+    "verification": 110
   },
-  "file_count": 530,
+  "file_count": 536,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "8c3c3b5daedfb5977dbf0b23affa18ee9aca61d46cbc5a0cae84c2900fc0ddd6",
+  "record_sha256": "d62d57fbb316cef63bbf88cc4a22484e62a4e647c1d5deffe5d6ebda9638fed4",
   "records": [
     {
       "audit": {
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "295500bed190db907c44c51c4b36258dba84649a684d586f6fe02a67178997ad"
+      "sha256": "211ae01c8ed5b5e63c764845bf937ba83ad933a751977ffce4ba2b7812b2e0d1"
     },
     {
       "audit": {
@@ -1539,7 +1539,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
       "risk": "high",
-      "sha256": "8ebf9c3dbdf1670fd5e9c25f21223cdcfe27df8c15af00b21e55445d05006b86"
+      "sha256": "c68acad14422b431d5f91c0b031101f793b341f39e274ddc94e48f0b94932e6e"
     },
     {
       "audit": {
@@ -3276,7 +3276,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Manual scope review and regression tests confirm Markdown validation covers tracked and reviewable untracked files while excluding Git-ignored external snapshots and generated data.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -3552,6 +3552,25 @@
       "path": "scripts/bootstrap_admin.py",
       "risk": "high",
       "sha256": "f5c4d5232466648ae65c374c6448141b5986fe6fce9d84dc0955dffef357fae9"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual implementation review and focused tests verify deterministic commit-pinned public-source parsing, non-overlapping exact evidence spans, modality checks, stable allocation, duplicate rejection, and freeze-guarded writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation-v2-data"
+      ],
+      "path": "scripts/build_academic_factual_qa_confirmation_v2.py",
+      "risk": "high",
+      "sha256": "c85bbc8daad72039428af51eade1ddc6a39d50274f6af28b93b757d04c406120"
     },
     {
       "audit": {
@@ -4089,6 +4108,25 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual packet-boundary review and focused tests verify sealed deterministic ordering, exact 40-control and 200-confirmation composition, omitted gold metadata, visible evidence, and freeze-guarded writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:academic-factual-qa-confirmation-v2-review-packet",
+        "verify:academic-factual-qa-confirmation-v2-review-packet"
+      ],
+      "path": "scripts/prepare_academic_factual_qa_panel_review_v2.py",
+      "risk": "high",
+      "sha256": "5e89a3e034f3638e6128a2686a554c8c5590cb0354c3a5c3590cd3e09f5e2fc5"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -4304,6 +4342,26 @@
       "path": "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py",
       "risk": "high",
       "sha256": "4a81498a824b5712e6c283b5957e64d9c0306a914a9bee1a1ebc1e54a5d5f937"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual runner review and network-free scenario tests verify strict vote parsing, reviewer calibration, unanimity, nominal agreement, bounded audit packets, atomic accounting, exact resume bindings, and absence of a provider-execution mode.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation-v2-review-runner",
+        "simulate:academic-factual-qa-confirmation-v2-review-runner",
+        "verify:academic-factual-qa-confirmation-v2-review-runner"
+      ],
+      "path": "scripts/run_academic_factual_qa_panel_review_v2.py",
+      "risk": "high",
+      "sha256": "e54fdfc051221281fe84b5422d3008bcabe9bed218df3181e4a75f68c8843270"
     },
     {
       "audit": {
@@ -5034,7 +5092,7 @@
       ],
       "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
       "risk": "high",
-      "sha256": "6ee38a0e31311615439db87ec83c17eafa59c848e45e4eb3d4cb95c835b31a37"
+      "sha256": "39b8450c74a64147b6cf1627eec5424e6ae056e1160903ae5e72c096f65684fb"
     },
     {
       "audit": {
@@ -5257,8 +5315,8 @@
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5268,7 +5326,7 @@
       ],
       "path": "scripts/validate_markdown_links.py",
       "risk": "high",
-      "sha256": "df460d7fecab20671772e0ae363f4e7f94e7d8320502038a7df5327891994312"
+      "sha256": "0a6628cdb137a0eb1d9d6cfcf067c7b509633ab1f3f5b4412da9826ddeb21b56"
     },
     {
       "audit": {
@@ -5358,7 +5416,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "3b83329ec3936e0b9cbf1f3c9033fabbea329fdd183b95ee8c215f9531052615"
+      "sha256": "bcb4c4fc49d60d9b927fde886947d71962856c932191450e5e9c5bcce7d5bbe4"
     },
     {
       "audit": {
@@ -6906,7 +6964,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2b3844076bff780c600ea53e0f366333ed618bdb0f9b366cabe028b748d5ecf1"
+      "sha256": "e0e8b5f287b1c78f63f13a78bc9b21a2405c705323eba0175ba089198892f88c"
     },
     {
       "audit": {
@@ -7674,7 +7732,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_confirmation_v2.py",
       "risk": "medium",
-      "sha256": "cae5c93b9f860efd61b5f30e595e4212bba32304958a3b51e02200d1653c4fb2"
+      "sha256": "698aa722c606a666066335ae6e4b4eea8efd129f76ded08a7531e3b727515d97"
     },
     {
       "audit": {
@@ -7707,6 +7765,22 @@
       "path": "tests/test_academic_factual_qa_end_to_end_pilot_v2.py",
       "risk": "medium",
       "sha256": "9869e124a55b5e28285c39bd17a2f525371eab6df62bf3e79b1053dea2936277"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, and exclusive-output paths with zero model/provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_panel_review_v2.py",
+      "risk": "medium",
+      "sha256": "81d842f2984536709b1ab5805f393bd3ee47137963ffd76e71a31a266f42e598"
     },
     {
       "audit": {
@@ -7851,6 +7925,22 @@
       "path": "tests/test_audit_multimodal_v3_result.py",
       "risk": "medium",
       "sha256": "252738d4b048274da08b3de0540d5165ac119d4cafa025e1eda8ceab01b8d230"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused builder tests verify exact case/control allocations, source and asset lineage, evidence offsets and hashes, modality markers, source disjointness, normalized uniqueness, deterministic bytes, and ignored raw snapshots.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_confirmation_v2.py",
+      "risk": "medium",
+      "sha256": "072ea543def4764009592c4eec7a2a6189ef777fa16c02bc05aa59fc3223d0e9"
     },
     {
       "audit": {
@@ -8702,6 +8792,22 @@
     },
     {
       "audit": {
+        "domain": "repository-correctness-controls",
+        "evidence": "Regression tests prove ignored external Markdown is excluded, reviewable untracked Markdown remains checked, and broken local links are still reported.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_validate_markdown_links.py",
+      "risk": "medium",
+      "sha256": "05ead4ece27b33bbcffe44708321d99a3d1f676ecb12def7534135c137fa3ac4"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -8782,8 +8888,8 @@
     }
   ],
   "risk_counts": {
-    "high": 409,
-    "medium": 121
+    "high": 412,
+    "medium": 124
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

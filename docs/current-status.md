@@ -140,16 +140,28 @@ or executed and is preserved unchanged. Because external review of all 200
 cases is not feasible within the schedule, confirmation 002 now supersedes only
 its review method. The sampling, product conditions, metrics, gates, and
 cluster-aware analysis remain fixed. Deterministic source-derived fields remain
-authoritative; blinded Codex, Mistral Small 4, and DeepSeek V4 Pro reviewers
-cover all 200 cases after passing 40 planted controls. Automatic semantic
+authoritative; an isolated blinded Codex task, Mistral Small 4, and DeepSeek V4
+Pro reviewers cover all 200 cases after passing 40 planted controls. Automatic semantic
 acceptance requires three-model unanimity, every disagreement goes to the
 researcher, and a seeded balanced 20-case unanimous sample is also audited. If
 disagreements exceed 40, the panel fails, bounding researcher review at 60
 cases. This can produce only LLM-panel-reviewed, researcher-audited silver
-evidence, not independent human ground truth. Four candidate open educational
-collections remain metadata-only; no source content, reference label, reviewer
-call, product binding, or execution has been opened. Preflight is correctly
-`blocked-build-only`.
+evidence, not independent human ground truth.
+
+The public-source build checkpoint is now complete. Four exact educational
+repository revisions contribute 160 non-overlapping section sources: 120 for
+100 confirmation clusters and 40 reserved for disjoint calibration controls.
+The deterministic set contains 200 cases—100 answerable and 100 boundary—with
+the frozen text, code, table, diagram, equation, ambiguity, scope, integrity,
+permission, and unsupported-premise allocations. Exact normalized duplicates
+and selected source-range overlap are both zero. File, section, dependent-asset,
+license, dataset, and packet hashes are bound; complete public repositories
+remain ignored under `data/external/`, and no Academia Vault or private data was
+read. The blinded 240-item reviewer packet and atomic resume/accounting runner
+pass clean, calibration-failure, disagreement-overflow, malformed-output, and
+resume-drift simulations. These are build checks, not reviewer or product
+results. All reviewer, paid, product-binding, researcher-audit, and final-tranche
+authority remains false; preflight is correctly `blocked-not-authorized`.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -513,7 +525,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Bind an eligible 100-cluster public-source manifest, seal reviewer controls, and freeze the three-family LLM panel for the 200-case confirmation; then separately authorize review and researcher audit |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Public-source manifest, 200 cases, 40 controls, blinded packet, and no-call runner are built; freeze fresh reviewer/provider bindings and obtain separate authority before the three-family review |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

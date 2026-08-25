@@ -34,6 +34,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_atomic_claim_validation_dataset.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_confirmation_v2.py": (
+            "dataset_generation",
+        ),
         "scripts/build_evidence_sufficiency_v2_decision_draft.py": (
             "dataset_generation",
         ),
@@ -88,6 +91,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "dataset_generation",
         ),
         "scripts/prepare_course_tutor_authoring_review.py": ("dataset_generation",),
+        "scripts/prepare_academic_factual_qa_panel_review_v2.py": (
+            "dataset_generation",
+        ),
         "scripts/prepare_evidence_sufficiency_v2_independent_review.py": (
             "dataset_generation",
         ),

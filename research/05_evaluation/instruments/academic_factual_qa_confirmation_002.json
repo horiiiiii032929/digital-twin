@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-confirmation-002",
-  "status": "protocol-frozen-llm-panel-source-and-review-pending",
+  "status": "source-cases-controls-and-blinded-packet-built-review-pending",
   "owner_issue": 127,
   "preregistered_at": "2026-08-25",
   "predecessor": {
@@ -9,7 +9,7 @@
     "disposition": "superseded-before-source-opening-or-execution",
     "reason": "No feasible external human reviewers were available; the replacement preserves deterministic truth and uses a diverse blinded LLM panel plus bounded researcher audit."
   },
-  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012"],
+  "decision_memory_ids": ["AFQC-007", "AFQC-008", "AFQC-009", "AFQC-010", "AFQC-011", "AFQC-012", "AFQC-013", "AFQC-014", "AFQC-015"],
   "decision_question": "On fresh source/question clusters, does the two-boundary T0 method reduce unsupported releases without materially reducing supported answers or citation completeness relative to any-hit T0?",
   "claim_level": "deterministic-source-derived-llm-panel-reviewed-researcher-audited-silver-reference",
   "scope": {
@@ -74,9 +74,13 @@
     "student_or_participant_data_allowed": false,
     "academia_vault_opening_authorized": false,
     "raw_source_text_committed": false,
-    "source_manifest_bound": false,
-    "source_manifest_path": null,
-    "source_manifest_sha256": null
+    "source_manifest_bound": true,
+    "source_manifest_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_source_manifest.json",
+    "source_manifest_sha256": "4bc49215c919e3d609eb589b87ca0630154438a1bc524aecb02afbd20b0a13b7",
+    "confirmation_dataset_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_cases.json",
+    "confirmation_dataset_sha256": "e80624994f6454d5fae9f2dbf11c84b2992185178bfea9c1cde60d20fe6c1fe3",
+    "full_raw_source_artifacts_committed": false,
+    "source_and_question_family_overlap_count": 0
   },
   "truth_authority_contract": {
     "canonical_truth_method": "deterministic-source-derived-construction",
@@ -107,9 +111,9 @@
     "answer_order_randomized_where_pairwise": true,
     "reviewers": [
       {
-        "reviewer_id": "codex-current-task-blinded-reviewer",
+        "reviewer_id": "codex-isolated-task-blinded-reviewer",
         "model_family": "openai",
-        "provider": "codex-desktop-runtime",
+        "provider": "codex-isolated-task-runtime",
         "provider_model": "runtime-reported-codex-model",
         "planned_case_count": 200,
         "role": "primary-semantic-audit-vote",
@@ -166,7 +170,11 @@
     "each_reviewer_specificity_min": 0.9,
     "each_reviewer_citation_defect_sensitivity_min": 0.9,
     "failed_reviewer_may_vote": false,
-    "calibration_controls_sealed": false
+    "calibration_controls_sealed": true,
+    "calibration_dataset_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_calibration_controls.json",
+    "calibration_dataset_sha256": "e0a7870739a4f1a080d1c0c1ab96230abec8ddea4597add96d27b49d10c2d1eb",
+    "blinded_packet_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_blinded_review_packet.json",
+    "blinded_packet_sha256": "8ba652e718ec2cdeb3e718413f45975d0abd99a5adf0ef36bf071409e1f5bf8c"
   },
   "consensus_and_researcher_audit": {
     "automatic_semantic_acceptance_requires_unanimity": true,
@@ -259,6 +267,19 @@
     "final_execution_authorized": false,
     "product_binding_authorized": false,
     "automatic_promotion": false
+  },
+  "build_checkpoint": {
+    "source_download_completed": true,
+    "source_license_and_revision_validation_completed": true,
+    "deterministic_case_construction_completed": true,
+    "calibration_control_construction_completed": true,
+    "blinded_packet_construction_completed": true,
+    "confirmation_case_count": 200,
+    "calibration_control_count": 40,
+    "source_section_count": 160,
+    "provider_calls": 0,
+    "private_data_read": false,
+    "review_execution_started": false
   },
   "progression_rule": {
     "all_product_panel_and_audit_gates_pass": "keep-provisional-with-llm-panel-and-researcher-audit-caveat",

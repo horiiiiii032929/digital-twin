@@ -50,10 +50,12 @@ professor-communication track.
 ## Critical path
 
 1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
-   result as provisional development evidence. The 160-case leakage-free T0
-   harness is built and its unselectable controls expose the expected safety
-   versus retention trade-off. Integrate the candidate, add independently
-   validated source-linked data, and only then freeze a selection run.
+   result as provisional development evidence. The successor now binds four
+   exact public educational repositories, 100 non-overlapping confirmation
+   clusters, 200 deterministic cases, 40 disjoint controls, and one blinded
+   three-family packet. Reviewer execution remains unauthorized; after fresh
+   binding and a passing panel/researcher audit, freeze the actual T0 product
+   comparison without exposing gold fields.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93
