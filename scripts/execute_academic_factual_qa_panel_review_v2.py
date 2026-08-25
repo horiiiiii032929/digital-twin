@@ -994,17 +994,23 @@ def build_preflight(
         if "credential_environment_variable" in row
     }
     blockers = []
-    if not all(binding["authorization"].values()) or not all(
+    if not all(
+        binding["authorization"][key]
+        for key in (
+            "codex_review_authorized",
+            "provider_review_authorized",
+            "paid_execution_authorized",
+        )
+    ) or not all(
         safety[key]
         for key in (
             "calibration_execution_authorized",
             "codex_review_authorized",
             "provider_review_authorized",
             "paid_execution_authorized",
-            "confirmation_execution_authorized",
         )
     ):
-        blockers.append("review-execution-not-authorized")
+        blockers.append("calibration-execution-not-authorized")
     if INSTRUMENT_ID not in BOUNDED_PILOT_AUTHORIZATIONS:
         blockers.append("bounded-freeze-authorization-missing")
     if instrument["status"] != "frozen-pending-execution":
@@ -1049,18 +1055,25 @@ def require_execution_authorized(
     instrument = assets["instrument"]
     binding = assets["binding"]
     safety = instrument["execution_safety"]
-    required_authorities = (
+    required_authorities = [
         "calibration_execution_authorized",
         "codex_review_authorized",
         "provider_review_authorized",
         "paid_execution_authorized",
-        "confirmation_execution_authorized",
-    )
+    ]
+    binding_authorities = [
+        "codex_review_authorized",
+        "provider_review_authorized",
+        "paid_execution_authorized",
+    ]
+    if phase == "confirmation":
+        required_authorities.append("confirmation_execution_authorized")
+        binding_authorities.append("confirmation_review_authorized")
     if instrument["status"] != "frozen-pending-execution":
         raise PanelExecutionError("instrument is not frozen for execution")
     if not all(safety[key] for key in required_authorities):
         raise PanelExecutionError("instrument review execution is not authorized")
-    if not all(binding["authorization"].values()):
+    if not all(binding["authorization"][key] for key in binding_authorities):
         raise PanelExecutionError("reviewer binding execution is not authorized")
     if binding_age_hours(binding) > binding["maximum_age_hours_for_execution"]:
         raise PanelExecutionError("reviewer binding is stale")

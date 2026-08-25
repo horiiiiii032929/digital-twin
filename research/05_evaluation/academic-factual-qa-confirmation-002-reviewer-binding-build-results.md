@@ -56,9 +56,11 @@ workspace preparation.
 The live metadata-only preflight found no model, price, or endpoint drift and
 confirmed both provider credentials without exposing their values. It made no
 inference call. Execution remains blocked by the absent bounded authorization,
-false review authorities, and missing fresh Codex calibration votes.
+false review authorities, and missing fresh Codex calibration votes. Calibration
+and confirmation have separate authorities: calibration can be authorized first,
+while confirmation remains locked until every calibration gate passes.
 
-The complete repository gate passed with 924 Python tests, 46 frontend tests,
+The complete repository gate passed with 925 Python tests, 46 frontend tests,
 frontend lint and production build, 539/539 audited execution-relevant files,
 and 72/72 protected entrypoints.
 

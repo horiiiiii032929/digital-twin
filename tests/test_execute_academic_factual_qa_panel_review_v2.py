@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+from copy import deepcopy
 import json
 from pathlib import Path
 
 import pytest
+
+import scripts.execute_academic_factual_qa_panel_review_v2 as panel_executor
 
 from scripts.execute_academic_factual_qa_panel_review_v2 import (
     PanelExecutionError,
@@ -166,7 +169,7 @@ def test_network_free_preflight_is_blocked_before_model_calls() -> None:
     result = build_preflight(load_assets(), live=False)
 
     assert result["status"] == "blocked-not-authorized"
-    assert "review-execution-not-authorized" in result["blockers"]
+    assert "calibration-execution-not-authorized" in result["blockers"]
     assert "bounded-freeze-authorization-missing" in result["blockers"]
     assert result["provider_or_model_calls"] == 0
     assert result["credential_values_emitted"] is False
@@ -187,6 +190,51 @@ def test_execution_command_rechecks_authority_before_a_provider_call(
             codex_votes_path=codex,
             resume=False,
         )
+
+
+def test_calibration_authority_does_not_require_confirmation_authority(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assets = deepcopy(load_assets())
+    assets["instrument"]["status"] = "frozen-pending-execution"
+    for key in (
+        "calibration_execution_authorized",
+        "codex_review_authorized",
+        "provider_review_authorized",
+        "paid_execution_authorized",
+    ):
+        assets["instrument"]["execution_safety"][key] = True
+    assert (
+        assets["instrument"]["execution_safety"][
+            "confirmation_execution_authorized"
+        ]
+        is False
+    )
+    for key in (
+        "codex_review_authorized",
+        "provider_review_authorized",
+        "paid_execution_authorized",
+    ):
+        assets["binding"]["authorization"][key] = True
+    assert assets["binding"]["authorization"]["confirmation_review_authorized"] is False
+    monkeypatch.setattr(
+        panel_executor,
+        "BOUNDED_PILOT_AUTHORIZATIONS",
+        {panel_executor.INSTRUMENT_ID: ("external_model_evaluation",)},
+    )
+    monkeypatch.setattr(panel_executor, "live_metadata_failures", lambda _: [])
+    monkeypatch.setattr(panel_executor, "_working_tree_dirty", lambda: False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "present")
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "present")
+
+    result = build_preflight(
+        assets, live=True, output_path=tmp_path / "unused-ledger.json"
+    )
+
+    assert "calibration-execution-not-authorized" not in result["blockers"]
+    assert "instrument-not-frozen-for-execution" not in result["blockers"]
+    assert "bounded-freeze-authorization-missing" not in result["blockers"]
+    assert result["blockers"] == ["codex-calibration-votes-missing"]
 
 
 def test_full_network_free_execution_simulation_reaches_bounded_audit(

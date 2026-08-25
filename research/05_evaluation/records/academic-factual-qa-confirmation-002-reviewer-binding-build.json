@@ -135,7 +135,7 @@
         {
           "name": "calibration-before-confirmation",
           "passed": true,
-          "evidence": "The state machine cannot open confirmation until the same Codex task and both provider reviewers pass all frozen control gates."
+          "evidence": "Calibration and confirmation have separate authorities, and the state machine cannot open confirmation until the same Codex task and both provider reviewers pass all frozen control gates."
         },
         {
           "name": "fail-closed-execution-authority",

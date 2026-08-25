@@ -16,23 +16,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, calibration-before-confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, malformed preservation, and absent authorization.",
+      "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, independently authorized calibration-before-confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, malformed preservation, and absent authorization.",
       "findings": [],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "0ef9e6a95bf224cd5a049f56ad12cdabc78d69411d8c6af8f16d7e4e133ff1d8"
+      "sha256": "e745229eaf9280bfe16775df253363e3a743745c262422aaf9d37d4d116e55d2"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, fail-closed authorization, full 120-call simulation, and one-call malformed termination.",
+      "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, separate calibration and confirmation authorization, full 120-call simulation, and one-call malformed termination.",
       "findings": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "705bca538a2ef11a92a8e27bd6f6c63e4f0430452d1e81de746d9c451996bbcc"
+      "sha256": "53385689ed5090473c802bc259bfae335a24bd866437729fc0d2a648dfef417d"
     },
     {
       "audit_status": "audited",

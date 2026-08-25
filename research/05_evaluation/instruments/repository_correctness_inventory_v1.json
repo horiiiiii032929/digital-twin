@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9d34c368daa1627dcea52c854b0d1d349f83cefd73156692320c426a2f3efb2a",
+  "record_sha256": "e2eeb2afd58e9e5ce80ecb589eef2ec3d218aa6459c3c586994df06e1717aa62",
   "records": [
     {
       "audit": {
@@ -3959,7 +3959,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, calibration-before-confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, malformed preservation, and absent authorization.",
+        "evidence": "Manual execution-path review and network-free tests verify blinded phase packets, strict schemas, independently authorized calibration-before-confirmation, exact task/provider identities, live metadata checks, atomic resume, zero retries, token/cost guards, malformed preservation, and absent authorization.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -3975,7 +3975,7 @@
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "0ef9e6a95bf224cd5a049f56ad12cdabc78d69411d8c6af8f16d7e4e133ff1d8"
+      "sha256": "e745229eaf9280bfe16775df253363e3a743745c262422aaf9d37d4d116e55d2"
     },
     {
       "audit": {
@@ -8158,7 +8158,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, fail-closed authorization, full 120-call simulation, and one-call malformed termination.",
+        "evidence": "Focused tests cover binding identity and cost math, input sizing, strict vote parsing, gold-free Codex workspace creation, constant task identity, separate calibration and confirmation authorization, full 120-call simulation, and one-call malformed termination.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -8169,7 +8169,7 @@
       "package_commands": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "risk": "medium",
-      "sha256": "705bca538a2ef11a92a8e27bd6f6c63e4f0430452d1e81de746d9c451996bbcc"
+      "sha256": "53385689ed5090473c802bc259bfae335a24bd866437729fc0d2a648dfef417d"
     },
     {
       "audit": {
