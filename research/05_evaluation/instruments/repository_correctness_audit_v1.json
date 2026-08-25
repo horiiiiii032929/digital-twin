@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "085a6dbca8d6f0e93b918651d658180e6d3bd89bb1d7a99d921020c416b34a41",
+      "sha256": "52c15ae27d3b27e22dd25e0af37deacde44000b08f1b721b7d4922af25729f1e",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evidence-sufficiency",
-      "reviewed_at": "2026-08-24",
+      "domain": "academic-factual-qa-evaluation",
+      "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms the atomic-claim dataset drift check, instrument validation, network-free simulation, blocked preflight, and separately guarded local execution entrypoint are in the complete local verification chain.",
+      "evidence": "Command review confirms the academic factual-QA instrument validation and network-free real-service simulation are included in the complete local verification chain while external and development execution remain fail-closed.",
       "findings": []
     },
     {
@@ -4163,12 +4163,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 and atomic-claim confirmation authorizations are revoked, atomic-claim dataset writing remains blocked, and only the historical oracle remains bounded.",
+      "evidence": "Manual fail-closed review confirms the global freeze remains active, prior authorizations stay revoked, and the new academic factual-QA runner is registered for method-evaluation execution while its network-free simulation is the only permitted mode.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-24",
+      "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
+      "sha256": "550a7a74fddc1dd292bd6a8f9e19f3659090430389f9963e276a0c3865b600a8"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
@@ -5686,6 +5686,50 @@
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
       "evidence": "Tests verify completed revocation, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_001.json",
+      "sha256": "59e25a6693a9bb3a695f0eb5a5c4733081e44235008055c75cca5911dd9a4d06",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-evaluation",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "evidence": "Instrument review confirms development-synthetic scope, explicit cluster sampling, evaluator-only gold, unselectable diagnostic controls, fixed metrics, and mechanical blocks on provider, paid, private, held-out, and method-selection authority.",
+      "findings": []
+    },
+    {
+      "path": "scripts/academic_factual_qa_pilot_data.py",
+      "sha256": "9159753a8fe3c630b25d72f3566f577bd1835f2facb1ccb3f56369402b715320",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-evaluation",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "evidence": "Manual review and deterministic tests confirm a byte-stable 160-case synthetic-public development set, exact answerable and boundary strata, explicit 80-cluster structure, source-linked claims, and no private or held-out material.",
+      "findings": []
+    },
+    {
+      "path": "scripts/run_academic_factual_qa_end_to_end_pilot.py",
+      "sha256": "ad9e611065c729bb63eb46d79d44ade92de7d0636a4b325ba1a3dc6c327ad5af",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-evaluation",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "evidence": "Code review and focused execution confirm ProductCaseInput contains no gold fields, both diagnostics traverse StudentTutoringService and persistence, cluster-bootstrap uncertainty is reproducible, output creation is exclusive, and all non-simulation execution is freeze-guarded.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_academic_factual_qa_end_to_end_pilot.py",
+      "sha256": "1bae1717e77287bc66a4068baaa694b2c83eb1c343949429bd147d1d05e232d1",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-evaluation",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
       "findings": []
     }
   ],

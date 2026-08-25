@@ -558,6 +558,24 @@ Current utilities:
   completion, specificity, sensitivity, malformed-response, latency, and cost
   gates. Its authorization is revoked; Mistral Small 4 remains qualified.
   Neither qualification authorizes a 10,000-case run.
+- `academic_factual_qa_pilot_data.py` and
+  `run_academic_factual_qa_end_to_end_pilot.py`: define the corrected
+  leakage-free development harness for issue #127. The in-memory dataset has
+  160 synthetic-public cases, 32 source units, eight courses, and 80 explicit
+  source/question clusters; it is marked unblinded and not independently
+  validated. Both unselectable controls run through the normal T0
+  `StudentTutoringService`, selected retriever with BM25 fallback, generator,
+  citation persistence, and course boundary. A strict input model permits only
+  case/request identity, course identity, and the student question to cross the
+  product boundary; expected actions, claims, source IDs, slices, and rationales
+  remain evaluator-only until after persistence. The simulation reports
+  cluster-bootstrap intervals, slices, retrieval, expected-claim completeness,
+  citations, actions, latency, persistence, and zero provider usage. Use
+  `npm run verify:academic-factual-qa-e2e-pilot`, `npm run
+  simulate:academic-factual-qa-e2e-pilot`, or `npm run
+  preflight:academic-factual-qa-e2e-pilot`. Development execution, independent
+  gold opening, the atomic-claim candidate, product binding, and academic claims
+  remain blocked.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

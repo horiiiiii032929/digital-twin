@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-end-to-end-pilot-001",
+  "status": "reviewed-build-only",
+  "owner_issue": 127,
+  "decision_question": "Can the actual T0 product retrieve eligible evidence, choose the correct boundary action, and produce complete source-grounded answers without receiving evaluator gold fields?",
+  "dataset": {
+    "dataset_id": "academic-factual-qa-end-to-end-pilot-001-development",
+    "builder": "scripts.academic_factual_qa_pilot_data.build_development_dataset",
+    "content_sha256": "09b684cc2efaad32936fdd6d6222c539501c4b1b38ab1f5228a9949de0cbf18b",
+    "status": "development-synthetic-unblinded",
+    "case_count": 160,
+    "source_count": 32,
+    "course_count": 8,
+    "cluster_count": 80,
+    "answerable_count": 80,
+    "boundary_count": 80,
+    "independent_gold": false,
+    "final_evaluation_split": false,
+    "private_data": false
+  },
+  "system_input_contract": {
+    "allowed_case_fields": [
+      "case_id",
+      "client_request_id",
+      "course_id",
+      "question"
+    ],
+    "forbidden_case_fields": [
+      "expected_action",
+      "expected_claims",
+      "required_source_ids",
+      "rationale",
+      "slice"
+    ],
+    "gold_available_only_after_persisted_response": true,
+    "course_scope_before_retrieval": true,
+    "normal_student_service_required": true,
+    "normal_retriever_required": true,
+    "normal_generator_contract_required": true
+  },
+  "development_conditions": [
+    {
+      "condition_id": "T0-FAIL-CLOSED-CONTROL",
+      "selectable": false,
+      "tutoring_mode": "grounded-assistant",
+      "generator": "deterministic-grounded-generator-v1",
+      "evidence_gate": "always-reject-recording-control",
+      "purpose": "Verify the current fail-closed product mechanics and leakage firewall."
+    },
+    {
+      "condition_id": "T0-ANY-HIT-CONTROL",
+      "selectable": false,
+      "tutoring_mode": "grounded-assistant",
+      "generator": "deterministic-grounded-generator-v1",
+      "evidence_gate": "any-hit-evidence-gate",
+      "purpose": "Expose the unsafe and incomplete behavior of permitting any ranked hit."
+    }
+  ],
+  "required_future_condition": {
+    "condition_id": "T0-ATOMIC-CLAIM-CANDIDATE",
+    "status": "not-product-integrated-not-executable",
+    "owner_issue": 105,
+    "must_use_same_questions_sources_retrieval_and_generator": true,
+    "selection_requires_independent_gold": true
+  },
+  "metrics": {
+    "primary": [
+      "action_accuracy",
+      "unsupported_release_rate",
+      "supported_answer_retention",
+      "expected_claim_complete_rate",
+      "citation_precision",
+      "citation_recall",
+      "complete_retrieval_evidence_rate"
+    ],
+    "operational": [
+      "latency_p50_ms",
+      "latency_p95_ms",
+      "provider_calls",
+      "input_tokens",
+      "output_tokens",
+      "cost_usd",
+      "persistence_consistency_rate"
+    ],
+    "unavailable_in_deterministic_simulation": [
+      "claim_precision",
+      "semantic_factual_f1"
+    ],
+    "uncertainty": {
+      "method": "cluster-bootstrap-percentile",
+      "confidence_level": 0.95,
+      "cluster_field": "cluster_id",
+      "seed": 127,
+      "replicates": 2000
+    }
+  },
+  "simulation_acceptance": {
+    "case_count": 160,
+    "condition_count": 2,
+    "system_input_gold_field_count_max": 0,
+    "provider_calls_max": 0,
+    "private_data_read": false,
+    "independent_gold_claimed": false,
+    "automatic_selection": false
+  },
+  "execution_safety": {
+    "network_free_simulation_authorized": true,
+    "development_execution_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "independent_gold_opening_authorized": false,
+    "heldout_execution_authorized": false,
+    "product_binding_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false
+  },
+  "decision_rule": {
+    "simulation_can_select_method": false,
+    "development_dataset_can_support_academic_claim": false,
+    "next_state_after_build": "blocked-pending-independent-data-and-candidate-product-integration"
+  }
+}

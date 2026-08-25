@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 517
+    "audited": 521
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 113,
+    "active_or_unclassified_tooling": 115,
     "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 109,
+    "evaluation_configuration": 110,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 103
+    "verification": 104
   },
-  "file_count": 517,
+  "file_count": 521,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9b154e8b58d8eaf365e2b2ab9a81b9bfe876f8bac036004fae6cece6f7ec3e46",
+  "record_sha256": "07f3b08dac7d3a5b4dae5babc34817bb72b5a2adccc63d6b17b3378bedaf7d57",
   "records": [
     {
       "audit": {
@@ -1287,10 +1287,10 @@
     },
     {
       "audit": {
-        "domain": "evidence-sufficiency",
-        "evidence": "Command review confirms the atomic-claim dataset drift check, instrument validation, network-free simulation, blocked preflight, and separately guarded local execution entrypoint are in the complete local verification chain.",
+        "domain": "academic-factual-qa-evaluation",
+        "evidence": "Command review confirms the academic factual-QA instrument validation and network-free real-service simulation are included in the complete local verification chain while external and development execution remain fail-closed.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "085a6dbca8d6f0e93b918651d658180e6d3bd89bb1d7a99d921020c416b34a41"
+      "sha256": "52c15ae27d3b27e22dd25e0af37deacde44000b08f1b721b7d4922af25729f1e"
     },
     {
       "audit": {
@@ -1508,6 +1508,22 @@
       "path": "research/05_evaluation/instruments/README.md",
       "risk": "high",
       "sha256": "6b93f9d4050fede40f3df3bcf3f9255c76ae743e9dc965af935179c7dc291654"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-evaluation",
+        "evidence": "Instrument review confirms development-synthetic scope, explicit cluster sampling, evaluator-only gold, unselectable diagnostic controls, fixed metrics, and mechanical blocks on provider, paid, private, held-out, and method-selection authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_001.json",
+      "risk": "high",
+      "sha256": "59e25a6693a9bb3a695f0eb5a5c4733081e44235008055c75cca5911dd9a4d06"
     },
     {
       "audit": {
@@ -3143,6 +3159,22 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-evaluation",
+        "evidence": "Manual review and deterministic tests confirm a byte-stable 160-case synthetic-public development set, exact answerable and boundary strata, explicit 80-cluster structure, source-linked claims, and no private or held-out material.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/academic_factual_qa_pilot_data.py",
+      "risk": "high",
+      "sha256": "9159753a8fe3c630b25d72f3566f577bd1835f2facb1ccb3f56369402b715320"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Post-correctness release requalification review corrected stale onboarding approval order, mandatory course binding, server-owned ingestion lineage, and failure diagnostics; the 42-gate synthetic deployment journey and focused regressions pass with zero provider/private-data access.",
         "findings": [],
@@ -4180,6 +4212,27 @@
       "path": "scripts/review_generator_qualification_v2.py",
       "risk": "high",
       "sha256": "dffad8cd3b51f98c286ef81102b810eecc27388d56e04c8179bdc86528333074"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-evaluation",
+        "evidence": "Code review and focused execution confirm ProductCaseInput contains no gold fields, both diagnostics traverse StudentTutoringService and persistence, cluster-bootstrap uncertainty is reproducible, output creation is exclusive, and all non-simulation execution is freeze-guarded.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-e2e-pilot",
+        "preflight:academic-factual-qa-e2e-pilot",
+        "simulate:academic-factual-qa-e2e-pilot",
+        "verify:academic-factual-qa-e2e-pilot"
+      ],
+      "path": "scripts/run_academic_factual_qa_end_to_end_pilot.py",
+      "risk": "high",
+      "sha256": "ad9e611065c729bb63eb46d79d44ade92de7d0636a4b325ba1a3dc6c327ad5af"
     },
     {
       "audit": {
@@ -6731,9 +6784,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, v2 and atomic-claim confirmation authorizations are revoked, atomic-claim dataset writing remains blocked, and only the historical oracle remains bounded.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, prior authorizations stay revoked, and the new academic factual-QA runner is registered for method-evaluation execution while its network-free simulation is the only permitted mode.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6742,7 +6795,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8580f87590e386553a66315ef0b8794e09040fc736d5e4eb2a846b016d6856da"
+      "sha256": "550a7a74fddc1dd292bd6a8f9e19f3659090430389f9963e276a0c3865b600a8"
     },
     {
       "audit": {
@@ -7479,6 +7532,22 @@
       "path": "tests/services/test_runtime_lifecycle.py",
       "risk": "medium",
       "sha256": "581ccab0577597cdb0d2d2c2280154d80a5c706ed3311bcf1d4259c1d65207ca"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-evaluation",
+        "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_end_to_end_pilot.py",
+      "risk": "medium",
+      "sha256": "1bae1717e77287bc66a4068baaa694b2c83eb1c343949429bd147d1d05e232d1"
     },
     {
       "audit": {
@@ -8554,8 +8623,8 @@
     }
   ],
   "risk_counts": {
-    "high": 400,
-    "medium": 117
+    "high": 403,
+    "medium": 118
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

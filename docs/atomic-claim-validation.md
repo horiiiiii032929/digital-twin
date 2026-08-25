@@ -101,3 +101,9 @@ No current product profile or release claim changes until a leakage-free
 end-to-end T0 evaluation runs on independently validated source-linked examples.
 The system under test must receive only the question and indexed corpus; gold
 answers, actions, claims, source spans, and citations remain evaluator-only.
+
+Issue #127 now enforces that input boundary in
+`academic-factual-qa-end-to-end-pilot-001`. The network-free controls pass the
+harness but cannot execute this NLI candidate because the claim-only generator
+and post-generation release boundary are not yet integrated into the T0 product
+service. That integration remains the next #105 implementation checkpoint.

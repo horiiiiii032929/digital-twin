@@ -2,7 +2,8 @@
 
 Date: 2026-08-25
 
-Status: prospective design; no dataset generation or execution authorized
+Status: build-only development harness complete; candidate integration,
+independent data, and evaluation execution unauthorized
 
 Owner issue: [#127](https://github.com/horiiiiii032929/digital-twin/issues/127)
 
@@ -130,3 +131,13 @@ learning outcomes, or authorizes deployment or a human pilot.
 
 This staged design is for catching invalid methodology and runtime defects. It
 must not become repeated prompt tuning on consumed evaluation cases.
+
+## Build checkpoint
+
+`academic-factual-qa-end-to-end-pilot-001-build` implements the strict product
+input firewall and runs two unselectable network-free controls through the
+normal T0 service on 160 synthetic-public development cases. The simulation
+demonstrates that retrieval success, answer completeness, citation completeness,
+and boundary safety are measured separately. It does not open independent gold
+data or select a method. The atomic-claim product path and independent labels
+remain prerequisites for a separately frozen development execution.
