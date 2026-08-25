@@ -600,6 +600,16 @@ Current utilities:
   `blocked-build-only` until an eligible source manifest, complete independent
   labels, an immutable product/profile binding, and separate execution
   authorization exist.
+- `validate_academic_factual_qa_confirmation_v2.py`: validates the feasible
+  successor review design without changing or deleting confirmation 001. It
+  keeps deterministic source-derived truth authoritative, requires blinded
+  Codex, Mistral Small 4, and DeepSeek V4 Pro reviews for all 200 cases,
+  qualifies each reviewer on 40 planted controls, requires unanimity for
+  automatic semantic acceptance, and bounds the researcher packet to at most
+  60 cases. Use `npm run verify:academic-factual-qa-confirmation-v2` or `npm run
+  preflight:academic-factual-qa-confirmation-v2`. Preflight remains
+  `blocked-build-only`; no source download, Codex review, provider call,
+  researcher audit, or confirmation execution is authorized.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

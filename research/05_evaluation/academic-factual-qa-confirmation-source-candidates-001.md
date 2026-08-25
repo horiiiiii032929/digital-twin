@@ -8,7 +8,9 @@ bound to the confirmation instrument
 ## Purpose
 
 This shortlist makes the public-source decision concrete while preserving the
-build-only boundary of `academic-factual-qa-confirmation-001`. The four
+build-only boundary of `academic-factual-qa-confirmation-002`. It was first
+prepared for confirmation 001 and carries forward unchanged because no source
+content was opened before the reviewer-method revision. The four
 collections cover distinct computing-course strata and expose text, code,
 tables, diagrams, and equations. A later source-manifest checkpoint must choose
 exact sections, resolve versions and licenses, hash every artifact, and verify

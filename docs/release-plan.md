@@ -63,10 +63,13 @@ not require model spending or private data:
    evidence selection, atomic-claim release plumbing, and the any-hit failure,
    but cannot select the method because the synthetic source aliases and
    questions are aligned by construction. Fresh independent data remain next.
-   Confirmation protocol 001 now freezes 200 cases in 100 public-source
-   clusters, fixed strata and gates, cluster-aware analysis, and independent
-   human reference requirements. Its metadata-only source shortlist is ready,
-   but sources, labels, product/model bindings, and execution remain unopened.
+   Confirmation protocol 001 preserves the unexecuted external-human design.
+   Protocol 002 replaces only that infeasible review layer with three blinded
+   LLM families plus a maximum 60-case researcher packet. Deterministic source
+   truth, 200 cases/100 clusters, fixed strata and gates, and cluster-aware
+   analysis remain unchanged. This is silver reference evidence, not external
+   human ground truth. Sources, cases, reviewer calls, product bindings, and
+   execution remain unopened.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

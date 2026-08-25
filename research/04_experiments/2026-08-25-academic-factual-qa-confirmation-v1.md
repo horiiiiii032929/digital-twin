@@ -2,8 +2,12 @@
 
 Date: 2026-08-25
 
-Status: protocol frozen; sources, questions, reference labels, models, and
-execution unopened
+Status: superseded before source opening or execution; preserved as the
+external-human review alternative
+
+Successor: `academic-factual-qa-confirmation-002`, which preserves this
+sampling/product design and replaces only the infeasible reviewer workflow with
+a disclosed three-family LLM panel plus bounded researcher audit
 
 Owner issue: [#127](https://github.com/horiiiiii032929/digital-twin/issues/127)
 

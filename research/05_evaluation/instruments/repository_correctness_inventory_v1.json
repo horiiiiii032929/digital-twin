@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 527
+    "audited": 530
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 117,
+    "active_or_unclassified_tooling": 118,
     "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 112,
+    "evaluation_configuration": 113,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 106
+    "verification": 107
   },
-  "file_count": 527,
+  "file_count": 530,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "f0c4e1f2fa16551bc7fa392ada75d081cf48e1b3a509b0c71f24bd57d1d3f24d",
+  "record_sha256": "8c3c3b5daedfb5977dbf0b23affa18ee9aca61d46cbc5a0cae84c2900fc0ddd6",
   "records": [
     {
       "audit": {
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "e92a4fc445dd789d4748785c61aeefeba9e37f656831f20b468c1be6625c2004"
+      "sha256": "295500bed190db907c44c51c4b36258dba84649a684d586f6fe02a67178997ad"
     },
     {
       "audit": {
@@ -1524,6 +1524,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_001.json",
       "risk": "high",
       "sha256": "8ae2a7d185d00dc0a272a7d54dff43bafa076ec73f67122e23e32eebf8713e5a"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Protocol review verifies deterministic truth authority, three-family blinded review, planted-control calibration, unanimity, bounded researcher audit, claim ceilings, and complete execution prohibition while preserving confirmation 001.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
+      "risk": "high",
+      "sha256": "8ebf9c3dbdf1670fd5e9c25f21223cdcfe27df8c15af00b21e55445d05006b86"
     },
     {
       "audit": {
@@ -4993,11 +5009,32 @@
       "disposition": "active_audited",
       "package_commands": [
         "preflight:academic-factual-qa-confirmation",
-        "verify:academic-factual-qa-confirmation"
+        "preflight:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation",
+        "verify:academic-factual-qa-confirmation-v2"
       ],
       "path": "scripts/validate_academic_factual_qa_confirmation.py",
       "risk": "high",
       "sha256": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual validator review and focused drift tests enforce panel diversity, reviewer calibration, deterministic authority, bounded researcher workload, historical preservation, and blocked build-only preflight.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation-v2"
+      ],
+      "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
+      "risk": "high",
+      "sha256": "6ee38a0e31311615439db87ec83c17eafa59c848e45e4eb3d4cb95c835b31a37"
     },
     {
       "audit": {
@@ -7625,6 +7662,22 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused tests cover three-family coverage, deterministic truth authority, unanimity, calibration and audit bounds, historical protocol preservation, stale bindings, and fail-closed execution authorities.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_confirmation_v2.py",
+      "risk": "medium",
+      "sha256": "cae5c93b9f860efd61b5f30e595e4212bba32304958a3b51e02200d1653c4fb2"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
         "findings": [],
@@ -8729,8 +8782,8 @@
     }
   ],
   "risk_counts": {
-    "high": 407,
-    "medium": 120
+    "high": 409,
+    "medium": 121
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

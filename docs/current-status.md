@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 527 executable or execution-affecting
+the current branch extends it to all 530 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -134,17 +134,22 @@ revoked. The next academic checkpoint requires fresh independently validated
 source/question clusters with frozen gates; no product promotion follows from
 the 100% development score.
 
-That next protocol is now preregistered as
-`academic-factual-qa-confirmation-001`. It fixes 200 cases in 100 independent
-source/question-family clusters, with one answerable and one boundary case per
-cluster across four public computing-course strata. It separates retrieval
-relevance, action, atomic-claim, citation, retention, duplicate, and operational
-outcomes; freezes 10,000-replicate cluster bootstrap analysis; and requires one
-independent human to validate all 200 cases plus a second human to double-label
-a fixed balanced 60 and every escalation. LLM review remains advisory. Four
-candidate open educational collections have metadata-only eligibility records,
-but no source content, reference label, product revision, model, or execution
-has been opened or bound. Preflight is correctly `blocked-build-only`.
+Confirmation 001 preregistered 200 cases in 100 independent source/question-
+family clusters and an external two-human review workflow. It was never opened
+or executed and is preserved unchanged. Because external review of all 200
+cases is not feasible within the schedule, confirmation 002 now supersedes only
+its review method. The sampling, product conditions, metrics, gates, and
+cluster-aware analysis remain fixed. Deterministic source-derived fields remain
+authoritative; blinded Codex, Mistral Small 4, and DeepSeek V4 Pro reviewers
+cover all 200 cases after passing 40 planted controls. Automatic semantic
+acceptance requires three-model unanimity, every disagreement goes to the
+researcher, and a seeded balanced 20-case unanimous sample is also audited. If
+disagreements exceed 40, the panel fails, bounding researcher review at 60
+cases. This can produce only LLM-panel-reviewed, researcher-audited silver
+evidence, not independent human ground truth. Four candidate open educational
+collections remain metadata-only; no source content, reference label, reviewer
+call, product binding, or execution has been opened. Preflight is correctly
+`blocked-build-only`.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -167,7 +172,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 880 Python tests and 46 frontend tests, frontend lint, and the
+check passes 893 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -187,9 +192,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 880-test Python suite.
+connections. These corrections remain covered by the current 893-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 527-file audit. Evaluation
+artifacts are also fully dispositioned in the current 530-file audit. Evaluation
 execution remains frozen, with 69/69 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
@@ -494,7 +499,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; academic product evidence pending | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting | Run a leakage-free end-to-end evaluation where the Digital Twin sees only each question and the indexed corpus; independently validate a stratified gold subset and report cluster-aware uncertainty |
+| Large factual QA | Engineering pipeline Keep; academic product evidence pending | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting | Run a leakage-free end-to-end evaluation where the Digital Twin sees only each question and the indexed corpus; use deterministic source truth, three blinded LLM families, bounded researcher audit, and cluster-aware uncertainty |
 
 ## Release readiness and critical path
 
@@ -508,7 +513,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Bind an eligible 100-cluster public-source manifest and independent reviewer arrangement to the frozen 200-case confirmation protocol; then separately freeze execution |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Bind an eligible 100-cluster public-source manifest, seal reviewer controls, and freeze the three-family LLM panel for the 200-case confirmation; then separately authorize review and researcher audit |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

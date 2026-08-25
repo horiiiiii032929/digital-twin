@@ -879,7 +879,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "e92a4fc445dd789d4748785c61aeefeba9e37f656831f20b468c1be6625c2004"
+      "sha256": "295500bed190db907c44c51c4b36258dba84649a684d586f6fe02a67178997ad"
     },
     {
       "audit_status": "audited",
@@ -1038,6 +1038,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Protocol review verifies deterministic truth authority, three-family blinded review, planted-control calibration, unanimity, bounded researcher audit, claim ceilings, and complete execution prohibition while preserving confirmation 001.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "8ebf9c3dbdf1670fd5e9c25f21223cdcfe27df8c15af00b21e55445d05006b86"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "academic-factual-qa-evaluation",
       "evidence": "Instrument review confirms development-synthetic scope, explicit cluster sampling, evaluator-only gold, unselectable diagnostic controls, fixed metrics, and mechanical blocks on provider, paid, private, held-out, and method-selection authority.",
       "findings": [],
@@ -1078,6 +1089,17 @@
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
       "sha256": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual validator review and focused drift tests enforce panel diversity, reviewer calibration, deterministic authority, bounded researcher workload, historical preservation, and blocked build-only preflight.",
+      "findings": [],
+      "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "6ee38a0e31311615439db87ec83c17eafa59c848e45e4eb3d4cb95c835b31a37"
     },
     {
       "audit_status": "audited",
@@ -2200,6 +2222,17 @@
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
       "sha256": "bff9dccf3810c175f8d5880a8ba5cef845af1e1e837f82a832b49a9b5da99ef1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Focused tests cover three-family coverage, deterministic truth authority, unanimity, calibration and audit bounds, historical protocol preservation, stale bindings, and fail-closed execution authorities.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_confirmation_v2.py",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "cae5c93b9f860efd61b5f30e595e4212bba32304958a3b51e02200d1653c4fb2"
     },
     {
       "audit_status": "audited",
