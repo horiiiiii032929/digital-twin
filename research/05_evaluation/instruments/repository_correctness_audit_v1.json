@@ -879,7 +879,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "21a5b3396b269a3a4a6de8a7a839edaf9158ca510f37cdae060d0361d39a1940"
+      "sha256": "e92a4fc445dd789d4748785c61aeefeba9e37f656831f20b468c1be6625c2004"
     },
     {
       "audit_status": "audited",
@@ -1027,6 +1027,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Protocol review verifies the 200-case/100-cluster allocation, human-reference authority, public-source boundary, prospective gates, cluster-aware analysis, and complete execution prohibition.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_001.json",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "8ae2a7d185d00dc0a272a7d54dff43bafa076ec73f67122e23e32eebf8713e5a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "academic-factual-qa-evaluation",
       "evidence": "Instrument review confirms development-synthetic scope, explicit cluster sampling, evaluator-only gold, unselectable diagnostic controls, fixed metrics, and mechanical blocks on provider, paid, private, held-out, and method-selection authority.",
       "findings": [],
@@ -1056,6 +1067,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "cf753f0d1cbe9146abd330c6d5ac3c98d16cd669fee2f13644e94e5489d367c0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual validator review and focused mutation tests verify fixed sampling, reference-label independence, exact zero-event bounds, durable decision memory, and fail-closed build-only preflight.",
+      "findings": [],
+      "path": "scripts/validate_academic_factual_qa_confirmation.py",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19"
     },
     {
       "audit_status": "audited",
@@ -2167,6 +2189,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "4e6822230e2a544a44f427cdca5c31be16693d03b82cb8a331ace510edbd2b31"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Focused tests cover frozen allocation, independent-label authority, private-source closure, provider and execution closure, decision-memory completeness, and the exact sample-precision calculations.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_confirmation.py",
+      "reviewed_at": "2026-08-25",
+      "reviewer": "codex-primary-review",
+      "sha256": "bff9dccf3810c175f8d5880a8ba5cef845af1e1e837f82a832b49a9b5da99ef1"
     },
     {
       "audit_status": "audited",

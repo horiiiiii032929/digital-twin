@@ -589,6 +589,17 @@ Current utilities:
   run is complete and its authorization is revoked, so the execution command is
   now blocked. Its pass cannot select the method, open independent gold, or
   promote the product.
+- `validate_academic_factual_qa_confirmation.py`: validates the preregistered
+  200-case public-source confirmation design without opening a source manifest
+  or reference labels. It freezes 100 source/question-family clusters, one
+  answerable and one boundary case per cluster, the three paired T0 conditions,
+  independent-human review requirements, cluster-aware analysis, numeric gates,
+  and a later unauthorized 600-case final tranche. Use `npm run
+  verify:academic-factual-qa-confirmation` or `npm run
+  preflight:academic-factual-qa-confirmation`. Preflight must remain
+  `blocked-build-only` until an eligible source manifest, complete independent
+  labels, an immutable product/profile binding, and separate execution
+  authorization exist.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000

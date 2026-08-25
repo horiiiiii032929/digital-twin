@@ -63,6 +63,10 @@ not require model spending or private data:
    evidence selection, atomic-claim release plumbing, and the any-hit failure,
    but cannot select the method because the synthetic source aliases and
    questions are aligned by construction. Fresh independent data remain next.
+   Confirmation protocol 001 now freezes 200 cases in 100 public-source
+   clusters, fixed strata and gates, cluster-aware analysis, and independent
+   human reference requirements. Its metadata-only source shortlist is ready,
+   but sources, labels, product/model bindings, and execution remain unopened.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

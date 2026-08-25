@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 524
+    "audited": 527
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 116,
+    "active_or_unclassified_tooling": 117,
     "active_runtime": 99,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 111,
+    "evaluation_configuration": 112,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 105
+    "verification": 106
   },
-  "file_count": 524,
+  "file_count": 527,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "166069d2fc076d748fca8acda5e3baf7027f8870237b0ef693e5353c203a4a59",
+  "record_sha256": "f0c4e1f2fa16551bc7fa392ada75d081cf48e1b3a509b0c71f24bd57d1d3f24d",
   "records": [
     {
       "audit": {
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "21a5b3396b269a3a4a6de8a7a839edaf9158ca510f37cdae060d0361d39a1940"
+      "sha256": "e92a4fc445dd789d4748785c61aeefeba9e37f656831f20b468c1be6625c2004"
     },
     {
       "audit": {
@@ -1508,6 +1508,22 @@
       "path": "research/05_evaluation/instruments/README.md",
       "risk": "high",
       "sha256": "6b93f9d4050fede40f3df3bcf3f9255c76ae743e9dc965af935179c7dc291654"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Protocol review verifies the 200-case/100-cluster allocation, human-reference authority, public-source boundary, prospective gates, cluster-aware analysis, and complete execution prohibition.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_001.json",
+      "risk": "high",
+      "sha256": "8ae2a7d185d00dc0a272a7d54dff43bafa076ec73f67122e23e32eebf8713e5a"
     },
     {
       "audit": {
@@ -4966,6 +4982,25 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual validator review and focused mutation tests verify fixed sampling, reference-label independence, exact zero-event bounds, durable decision memory, and fail-closed build-only preflight.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation",
+        "verify:academic-factual-qa-confirmation"
+      ],
+      "path": "scripts/validate_academic_factual_qa_confirmation.py",
+      "risk": "high",
+      "sha256": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19"
+    },
+    {
+      "audit": {
         "domain": "autonomous-tutoring-graph",
         "evidence": "Validator review and mutation tests enforce the completed result state, revoked network-free authority, action expectations, exact trajectory/turn counts, bounded graph settings, and prohibition on provider, paid, held-out, or automatic-promotion execution.",
         "findings": [],
@@ -7574,6 +7609,22 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused tests cover frozen allocation, independent-label authority, private-source closure, provider and execution closure, decision-memory completeness, and the exact sample-precision calculations.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_confirmation.py",
+      "risk": "medium",
+      "sha256": "bff9dccf3810c175f8d5880a8ba5cef845af1e1e837f82a832b49a9b5da99ef1"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
         "findings": [],
@@ -8678,8 +8729,8 @@
     }
   ],
   "risk_counts": {
-    "high": 405,
-    "medium": 119
+    "high": 407,
+    "medium": 120
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
