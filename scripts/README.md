@@ -657,6 +657,16 @@ Current utilities:
   live run is preserved as invalid after Gemini completed the first canary and
   direct DeepSeek returned empty content on the second. Authority is revoked;
   any successor calibration and later confirmation require separate decisions.
+  Attempt 004 is that finite build-only successor: its reviewer sequence is
+  immutable Codex plus exact Gemini only, it imports no attempt-003 Gemini
+  votes, and it schedules all 40 controls as ten fresh batches. Only timeout,
+  connection failure, HTTP 429/5xx, or empty content may retry, once per batch
+  and twice globally. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-attempt-004`, `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-attempt-004`, and the
+  separate live preflight/execute commands. The maximum reservation is USD
+  0.211968 under the USD 3 stop. Paid calibration and the sealed 200-case panel
+  remain unauthorized.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,
   ten equations, ten original diagrams, one answerable and one balanced

@@ -52,15 +52,18 @@ professor-communication track.
 1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
    result as provisional development evidence. The successor binds four exact
    public educational repositories, 100 non-overlapping confirmation clusters,
-   200 deterministic cases, 40 disjoint controls, one blinded three-family
+   200 deterministic cases, 40 disjoint controls, one blinded multi-family
    packet, and a separate 30-cluster/60-case visual supplement. The actual T0
    runner accepts only course ID and question and opens gold only after every
    response is durable. Corrective calibration attempt 002 is preserved as an
    invalid one-call Mistral HTTP 400 result. Attempt 003 replaced only that
    reviewer slot with exact Gemini 3.7 Flash through Google AI Studio. Its live
    run is also invalid: Gemini completed the first canary, but direct DeepSeek
-   returned empty content on the second canary. Authority is revoked; the
-   200-case panel, visual pilot, and live T0 execution remain closed.
+   returned empty content on the second canary. Attempt 004 removes DeepSeek
+   from this panel, binds immutable Codex plus fresh Gemini review, and passes
+   its network-free two-reviewer and bounded-retry checks. It remains
+   provider-unauthorized; the 200-case panel, visual pilot, and live T0
+   execution remain closed.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

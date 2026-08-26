@@ -17,17 +17,19 @@ post-generation claim validation. The visual track freezes ten tables, ten
 equations, ten original diagrams, balanced boundaries, and original-region
 citations. Gemini descriptions are question-independent and non-authoritative;
 facts not cleared deterministically require an explicit Codex-assisted audit.
-All network-free runners and failure paths are implemented. Corrective
-40-control calibration attempt 002 stopped after the first Mistral batch
-returned HTTP 400. It is an invalid execution, all authority is revoked, and
-the 200-case panel plus the remaining visual and product checkpoints stay
-unauthorized. No product-quality result is claimed from the failed calibration
-or the build simulations.
+All network-free runners and failure paths are implemented. Calibration
+attempts 001–003 remain immutable invalid operational evidence. Build-only
+attempt 004 now removes DeepSeek from this panel and binds the immutable 40/40
+Codex votes to ten fresh Gemini batches, with at most two transport-only
+retries. Its complete no-call simulation passes and live metadata shows no
+drift, but execution remains unauthorized. The 200-case panel plus every visual
+and product checkpoint stays closed. No product-quality result is claimed from
+the invalid calibrations or build simulations.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 548 executable or execution-affecting
+the current branch extends it to all 552 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -246,6 +248,19 @@ so the Gemini amount is known partial cost rather than complete accounting.
 This result supports no reviewer, factual-QA, product, or release-quality claim.
 No evaluation execution is currently authorized.
 
+AFQC-026 records the finite reviewer-method successor. Attempt 004 contains
+only two reviewer families: immutable calibrated Codex `gpt-5.6-sol` votes and
+exact Gemini 3.7 Flash through Google AI Studio. DeepSeek has no reviewer,
+credential, pricing, route, call, or tie-break role in this attempt. Gemini must
+review all 40 controls in ten fresh four-case batches; no attempt-003 vote is
+imported. Only timeout, connection failure, HTTP 429/5xx, or empty content may
+retry, once per batch and at most twice globally, with every failed call kept
+in the ledger. The network-free pass and failure simulations succeed, and the
+metadata-only live check reports zero drift and zero inference calls. The
+maximum reservation is USD 0.211968 under the existing USD 3 stop. Attempt 004
+is build-only and provider-unauthorized; any terminal live result must stop the
+reviewer search and keep the 200 cases sealed pending a separate decision.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
@@ -267,7 +282,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 926 Python tests and 46 frontend tests, frontend lint, and the
+check passes 963 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -287,9 +302,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 924-test Python suite.
+connections. These corrections remain covered by the current 963-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 548-file audit. Evaluation
+artifacts are also fully dispositioned in the current 552-file audit. Evaluation
 execution remains frozen, with 75/75 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
@@ -608,7 +623,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Public-source manifest, 200 cases, 40 controls, blinded packet, and no-call runner are built; freeze fresh reviewer/provider bindings and obtain separate authority before the three-family review |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Public-source manifest, 200 cases, 40 controls, and blinded packet are built; two-family Codex + Gemini attempt 004 passes no-call verification but remains unauthorized, and the 200-case panel stays sealed |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
