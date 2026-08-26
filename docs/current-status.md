@@ -27,10 +27,21 @@ its sole retry both returned HTTP 429; zero Gemini votes or later batches were
 accepted. Authority is revoked. The 200-case panel plus every visual and product
 checkpoint stays closed, and no product-quality result is claimed.
 
+AFQC-029 records the researcher-directed reliability correction. Attempt 005
+keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
+the failed single AI Studio route with a bounded OpenRouter allowlist: Vertex
+global priority/default followed by AI Studio priority/default. The runner
+records the actual provider and service tier for every completed call while
+holding model identity fixed. Its 40-control network-free simulation passes;
+the live metadata-only preflight finds all four routes, at least two healthy
+endpoints, no model/price/policy drift, and the existing credential. No provider
+inference has occurred. Paid calibration, the sealed 200 cases, visual work,
+product execution, private data, and larger academic stages remain unauthorized.
+
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 552 executable or execution-affecting
+the current branch extends it to all 554 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -307,9 +318,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 963-test Python suite.
+connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 552-file audit. Evaluation
+artifacts are also fully dispositioned in the current 554-file audit. Evaluation
 execution remains frozen, with 75/75 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
@@ -628,7 +639,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Public-source manifest, 200 cases, 40 controls, and blinded packet are built; attempts 001–004 are invalid operational evidence, reviewer search is stopped, and the 200-case panel stays sealed pending a supervisor-facing method decision |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Attempts 001–004 remain unfavorable evidence; attempt 005 fixes only transport reliability with a four-route, fixed-model build and is provider-unauthorized; the 200-case panel stays sealed |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

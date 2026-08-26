@@ -669,7 +669,18 @@ Current utilities:
   first Gemini batch and its sole retry both returned HTTP 429. No Gemini vote,
   later batch, or confirmation case opened; provider usage/cost were
   unavailable. Authority is revoked, attempt 004 cannot be rerun, and the
-  reviewer search is stopped.
+  single-endpoint reviewer path is stopped. Researcher-directed attempt 005
+  keeps the exact Gemini revision but uses OpenRouter's bounded health-aware
+  transport: Vertex global priority/default followed by AI Studio
+  priority/default. It uses seed 0 and the parameter subset shared by all four
+  routes, records the actual provider and service tier per completion, requires
+  at least two healthy endpoints at live preflight, and keeps model identity
+  fixed across fallback. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-attempt-005`, `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-attempt-005`, and its
+  separate live preflight/execute commands. Ten primary calls plus two bounded
+  retries reserve USD 0.3815424 under the USD 3 stop. Attempt 005 is currently
+  provider-unauthorized and cannot open the sealed 200 cases.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,
   ten equations, ten original diagrams, one answerable and one balanced
