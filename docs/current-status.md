@@ -63,12 +63,14 @@ the current branch extends it to all 574 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 79 protected entrypoints.
-One bounded authorization is active for
-`academic-factual-qa-open-10000-v1`: source-plan construction, public-source
-question construction, and the 500-case development candidate plus frozen
-100-case control. The sealed final 10,000-case stage and held-out scoring remain
-unauthorized. Manual review found material source-design
+active for all general evaluation actions. It covers 79 protected entrypoints,
+with no bounded authorization currently active. The first open-benchmark
+construction attempt is preserved as operationally invalid: its first DeepSeek
+canary returned the requested model but a different runtime fingerprint, so the
+executor stopped before Gemini or any bulk call. Zero development clusters were
+processed; provider usage and cost are unavailable rather than claimed as zero.
+The sealed final 10,000-case stage and held-out scoring remain unauthorized.
+Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual

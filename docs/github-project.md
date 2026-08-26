@@ -58,9 +58,11 @@ professor-communication track.
    data-structures allocation impossible under the five-per-section cap. A
    deterministic feasible 2,100-cluster correction is build-verified and frozen
    under AFQC-035 after excluding tiny markup fragments and mid-token windows.
-   Dataset construction and the 500-case development run now have a clean,
-   isolated bounded authorization at PR #130. The 10,000-case final
-   run remains unauthorized. Issue #131 separately
+   Construction attempt 001 failed closed on its first DeepSeek canary because
+   the runtime fingerprint differed from the frozen binding; no bulk case ran
+   and authorization is revoked. A prospective identity-binding successor is
+   required before the 500-case development run. The 10,000-case final run
+   remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

@@ -59,8 +59,10 @@ The source scan identified a preregistration correction before data creation:
 The recommendation yields exactly 2,100 non-overlapping source windows and has
 enough source-matched windows for 735 code, 256 equation, and 53 table clusters
 across development and final splits. AFQC-035 freezes this allocation while
-retaining the source-diversity cap. AFQC-036 separately authorizes only the
-construction and development checkpoint; the final split remains sealed.
+retaining the source-diversity cap. AFQC-036 separately authorized only the
+construction and development checkpoint. Attempt 001 then failed closed on the
+first DeepSeek canary because its runtime fingerprint differed from the frozen
+binding; AFQC-037 revokes that authority. The final split remains sealed.
 
 ## Product comparison
 
@@ -93,8 +95,9 @@ required for `completed-keep`.
 
 ## Stop points
 
-1. Execute the separately authorized dataset construction plus 500-case
-   development run against the AFQC-035 frozen allocation.
+1. Freeze and separately authorize a prospective provider-identity correction,
+   then execute dataset construction plus the 500-case development run against
+   the unchanged AFQC-035 allocation.
 2. Review the development result and projected cost. Only a complete pass can
    request separate authorization for the sealed 10,000-case run.
 3. Do not tune and rerun against the same final set after a valid quality

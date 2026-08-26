@@ -69,14 +69,14 @@ def test_recommended_plan_is_stable_stratified_and_non_overlapping() -> None:
         ranges[key].append(candidate)
 
 
-def test_frozen_allocation_and_authorized_development_preflight_are_ready() -> None:
+def test_frozen_allocation_passes_but_revoked_preflight_is_blocked() -> None:
     validation = validate_design()
     live = preflight()
 
     assert validation["status"] == "passed-build-only-allocation-frozen"
-    assert live["status"] == "ready"
+    assert live["status"] == "blocked-not-authorized"
     assert "source-allocation-not-approved" not in live["blockers"]
-    assert live["blockers"] == []
+    assert "dataset-construction-authorized-false" in live["blockers"]
     assert live["provider_calls"] == 0
 
 

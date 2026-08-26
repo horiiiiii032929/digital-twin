@@ -163,11 +163,11 @@
     "final_candidate_case_count": 10000,
     "final_control_case_count": 1000,
     "final_cost_rule": "1.5 times projected p99 cost, rounded upward to USD 5, capped at USD 150",
-    "dataset_construction_authorized": true,
-    "development_execution_authorized": true,
+    "dataset_construction_authorized": false,
+    "development_execution_authorized": false,
     "final_execution_authorized": false,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "automatic_promotion": false
   },
   "primary_metrics": [

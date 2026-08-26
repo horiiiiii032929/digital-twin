@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0e251dbc62c50df2313776faf1c96c8679a50f0b1fc178114c43892ea560e286",
+  "record_sha256": "9145b9efae049d1e70445b0ca98939bd0a586b41270c303acc563d4876eb219a",
   "records": [
     {
       "audit": {
@@ -1699,7 +1699,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json",
       "risk": "high",
-      "sha256": "bb273b386d25c3d67231b40be4e37f09e3ec404a53d4a58ab4375d34cbd62aa6"
+      "sha256": "8192cbbf2d5698dfa84ae5d2496ed56678d0206fff2803552810ed0b6c071300"
     },
     {
       "audit": {
@@ -1715,7 +1715,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "risk": "high",
-      "sha256": "88c22115afc3b31a664b917dd40c2b40ec922ff0d7456072065b7952eb666576"
+      "sha256": "844b9173cf5fc7694a41e39c6bd4cad226442e92db89f3a5942e7c558f415b34"
     },
     {
       "audit": {
@@ -7502,7 +7502,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "ac807ad1f02cfc20a0ee0bbbf1322580fa7118ecf9dc1915c9ce99844cf5a5a8"
+      "sha256": "3a2320199accbf6438ab5d351d1a105f955a2dc2dd2a0b3db4debe3bf7922385"
     },
     {
       "audit": {
@@ -7966,7 +7966,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "cf8aef9bc924f1cbd848ac7f162f1263c8c9c3d9e88377da79fbe0a1be5913e1"
+      "sha256": "ba66795fdff69cfb6a26b43c5741456a0c37c1cb5496b17b0a91232baa791f10"
     },
     {
       "audit": {
@@ -8542,7 +8542,7 @@
       "package_commands": [],
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "risk": "medium",
-      "sha256": "833e829cd09c8b1d3a6c902c05e4ae2f7b8c45cee9947aae6897bd78d8548a47"
+      "sha256": "be6578733494c672040470f3b2f82ed6e58698a2a379b5098ce88dd1d321d6c2"
     },
     {
       "audit": {
