@@ -100,10 +100,10 @@
     }
   ],
   "authorization": {
-    "codex_review_authorized": false,
-    "provider_review_authorized": false,
-    "paid_execution_authorized": false,
+    "codex_review_authorized": true,
+    "provider_review_authorized": true,
+    "paid_execution_authorized": true,
     "confirmation_review_authorized": false
   },
-  "content_sha256": "7d5d3b260038889c2107acda8009a16833d0d59ec71bcf20056421eb04729674"
+  "content_sha256": "d24fa694e8ec092da7abdd7064421c812da1832d445c1f407ff3c8687fca5a3a"
 }

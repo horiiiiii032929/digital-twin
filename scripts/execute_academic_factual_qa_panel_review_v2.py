@@ -1664,7 +1664,11 @@ def main() -> int:
         result = {
             "instrument_id": assets["attempt_id"],
             "status": (
-                "validated-attempt-004-provider-unauthorized"
+                (
+                    "validated-attempt-004-frozen-pending-execution"
+                    if assets["instrument"]["status"] == "frozen-pending-execution"
+                    else "validated-attempt-004-provider-unauthorized"
+                )
                 if assets["attempt_id"] == ATTEMPT_004_ID
                 else (
                     "validated-attempt-003"

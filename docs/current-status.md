@@ -258,8 +258,9 @@ retry, once per batch and at most twice globally, with every failed call kept
 in the ledger. The network-free pass and failure simulations succeed, and the
 metadata-only live check reports zero drift and zero inference calls. The
 maximum reservation is USD 0.211968 under the existing USD 3 stop. Attempt 004
-is build-only and provider-unauthorized; any terminal live result must stop the
-reviewer search and keep the 200 cases sealed pending a separate decision.
+is now separately frozen under AFQC-027 for exactly one paid 40-control
+calibration; any terminal live result must revoke that authority, stop the
+reviewer search, and keep the 200 cases sealed pending a separate decision.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented

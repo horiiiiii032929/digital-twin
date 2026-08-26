@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ad121796083377d9266cd946a27625db59af37fe1989d2a91b66eb8690cd831b",
+  "record_sha256": "f6ba625609c9a6bd5bc8297b2757ea71a6a760be07a0af5968cf19f7505a9f7f",
   "records": [
     {
       "audit": {
@@ -1560,7 +1560,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual attempt review verifies immutable parent, packet, control, binding, and Codex-vote hashes; ten fresh Gemini batches; two bounded transport retries; USD 0.211968 reservation; revoked authority; and explicit downstream locks.",
+        "evidence": "Manual authorization review verifies immutable parent, packet, controls, and Codex votes; exactly one Gemini calibration is frozen; ten primary plus two retry calls are bounded; confirmation and every downstream authority remain false.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1571,7 +1571,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_004.json",
       "risk": "high",
-      "sha256": "ae04a261fa1825751acce2454f01abc5b37ca898704151e7bace54ad4dfb2fe8"
+      "sha256": "672ea1b7fdc408cc8872d14e115999f2f8eb9ef9ef2bf27d7a641e53ffa231fe"
     },
     {
       "audit": {
@@ -1608,7 +1608,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual binding and live metadata review verify exactly two reviewers, exact Gemini 3.7 Flash revision 20260813 through Google AI Studio, fallback disabled, disclosed retention, no DeepSeek binding or credential, and transport-only retry classes.",
+        "evidence": "Manual binding and live metadata review verify exactly two reviewers, exact Gemini 3.7 Flash revision 20260813 through Google AI Studio, fallback disabled, disclosed retention, no DeepSeek binding or credential, transport-only retry classes, and calibration-only authority.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1619,7 +1619,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_003.json",
       "risk": "high",
-      "sha256": "1921ccc2d2fcb631acf70602b8c248a2f6584707e66398b1c6c15f66dd7c3b7a"
+      "sha256": "9b93145434a02f172c66d112337d248ebc76bac238e86e3503e916f20bf824c5"
     },
     {
       "audit": {
@@ -1640,9 +1640,9 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "evidence": "Manual freeze review verifies only attempt 004 receives the external-model-evaluation exception while the repository-wide freeze and all other instruments remain blocked.",
         "findings": [],
-        "reviewed_at": "2026-08-25",
+        "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -4114,7 +4114,7 @@
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "733a44ed5f2465bc5d97b813948176b2a29c57d22a6ead2998468c4a36c46e2b"
+      "sha256": "bbf5dbb927b23c00ec8f4449e410cda1bea0996b174ab1747d0f1dcf0035afdc"
     },
     {
       "audit": {
@@ -7202,7 +7202,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
+      "sha256": "afc27f9db43bab85ebb9383aaef2eaf071ae3739148c21f23d11ddd302b88f58"
     },
     {
       "audit": {
@@ -7447,9 +7447,9 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "evidence": "Focused freeze tests verify the exact attempt-004 identifier is allowed and every historical, product, evidence-review, and scale instrument remains denied.",
         "findings": [],
-        "reviewed_at": "2026-08-25",
+        "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7666,7 +7666,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
+      "sha256": "6e3baf0d96c61d0452f63c36dbae3037afdd18338459a0ead2f1fc3b01ba8b49"
     },
     {
       "audit": {
