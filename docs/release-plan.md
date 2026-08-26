@@ -38,7 +38,7 @@ toward the release; none is the release by itself.
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. A separate 30-cluster visual supplement now binds 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It is build-only and remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The successor checkpoint binds 100 fresh source/question-family clusters, 200 deterministic cases, 40 disjoint controls, agent-assisted audit, and a live T0 comparison whose product input is only course ID plus question. Attempts 001–003 remain invalid operational history. Attempt 004 binds immutable calibrated Codex plus fresh Gemini review and passes network-free verification, but paid calibration and all product execution remain unauthorized | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The successor checkpoint binds 100 fresh source/question-family clusters, 200 deterministic cases, 40 disjoint controls, agent-assisted audit, and a live T0 comparison whose product input is only course ID plus question. Attempts 001–004 are invalid operational history. Attempt 004 used immutable Codex plus Gemini only, but its first Gemini batch and sole retry returned HTTP 429, producing zero Gemini votes. Authority is revoked and the reviewer search is stopped pending a supervisor-facing method decision | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -79,13 +79,14 @@ not require model spending or private data:
    but its live second canary returned empty DeepSeek content after Gemini
    completed. It is preserved as invalid with authority revoked. Attempt 004
    removes DeepSeek from this panel, reuses the immutable calibrated Codex
-   votes, and requires Gemini to rerun all 40 controls. Its network-free pass,
-   quality-failure, retry, malformed, and identity simulations pass under a
-   12-call ceiling, but provider execution is unauthorized. The prospective
+   votes, and required Gemini to rerun all 40 controls. Its network-free paths
+   passed, but the paid first batch and sole retry both returned HTTP 429. No
+   Gemini vote was accepted; authority is revoked and the reviewer search is
+   stopped. The prospective
    checkpoint also adds a separate 30-cluster
    true-visual supplement and a question-only 200+60-case T0 runner. Every
-   network-free path is built. Separate authority is required before attempt
-   004 calibration; panel
+   network-free path is built. A supervisor-facing method decision is required
+   before any new panel design; panel
    confirmation, Gemini qualification, visual execution, and live T0 execution
    remain closed and never auto-promote.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,

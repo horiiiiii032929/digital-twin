@@ -1667,7 +1667,13 @@ def main() -> int:
                 (
                     "validated-attempt-004-frozen-pending-execution"
                     if assets["instrument"]["status"] == "frozen-pending-execution"
-                    else "validated-attempt-004-provider-unauthorized"
+                    else (
+                        "validated-attempt-004-invalid-authorization-revoked"
+                        if assets["instrument"]["status"].startswith(
+                            "invalid-execution"
+                        )
+                        else "validated-attempt-004-provider-unauthorized"
+                    )
                 )
                 if assets["attempt_id"] == ATTEMPT_004_ID
                 else (

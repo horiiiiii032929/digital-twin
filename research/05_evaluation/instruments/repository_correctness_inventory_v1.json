@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "f6ba625609c9a6bd5bc8297b2757ea71a6a760be07a0af5968cf19f7505a9f7f",
+  "record_sha256": "d90d532f64fd72e0ec3604516ef9484c2ec16dcc02638efe558b996a904914d6",
   "records": [
     {
       "audit": {
@@ -1560,7 +1560,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual authorization review verifies immutable parent, packet, controls, and Codex votes; exactly one Gemini calibration is frozen; ten primary plus two retry calls are bounded; confirmation and every downstream authority remain false.",
+        "evidence": "Manual result review verifies attempt 004 is immutable invalid operational evidence after two HTTP 429 calls, all authority is revoked, no Gemini or confirmation vote was accepted, and every downstream stage remains closed.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1571,7 +1571,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_004.json",
       "risk": "high",
-      "sha256": "672ea1b7fdc408cc8872d14e115999f2f8eb9ef9ef2bf27d7a641e53ffa231fe"
+      "sha256": "fd55105d1030cd976d8fb7a3b8ac45eda44935b4aa832cf364d1ed5a19f633b6"
     },
     {
       "audit": {
@@ -1608,7 +1608,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual binding and live metadata review verify exactly two reviewers, exact Gemini 3.7 Flash revision 20260813 through Google AI Studio, fallback disabled, disclosed retention, no DeepSeek binding or credential, transport-only retry classes, and calibration-only authority.",
+        "evidence": "Manual binding and result review preserve exactly two reviewers, the exact Gemini route and retention disclosure, no DeepSeek role, the historical retry contract, and complete revocation of calibration and confirmation authority.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1619,7 +1619,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_003.json",
       "risk": "high",
-      "sha256": "9b93145434a02f172c66d112337d248ebc76bac238e86e3503e916f20bf824c5"
+      "sha256": "1921ccc2d2fcb631acf70602b8c248a2f6584707e66398b1c6c15f66dd7c3b7a"
     },
     {
       "audit": {
@@ -1640,7 +1640,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual freeze review verifies only attempt 004 receives the external-model-evaluation exception while the repository-wide freeze and all other instruments remain blocked.",
+        "evidence": "Manual freeze review verifies the attempt-004 exception is revoked and the repository-wide freeze again blocks every evaluation instrument.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -4114,7 +4114,7 @@
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "bbf5dbb927b23c00ec8f4449e410cda1bea0996b174ab1747d0f1dcf0035afdc"
+      "sha256": "aedfbf5f5595c836e1fefe101d2f3df9f905203390949613458c42f49d3b01dd"
     },
     {
       "audit": {
@@ -7202,7 +7202,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "afc27f9db43bab85ebb9383aaef2eaf071ae3739148c21f23d11ddd302b88f58"
+      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
     },
     {
       "audit": {
@@ -7447,7 +7447,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Focused freeze tests verify the exact attempt-004 identifier is allowed and every historical, product, evidence-review, and scale instrument remains denied.",
+        "evidence": "Focused freeze tests verify attempt 004 and every historical, product, evidence-review, and scale instrument are denied after revocation.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -7666,7 +7666,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "6e3baf0d96c61d0452f63c36dbae3037afdd18338459a0ead2f1fc3b01ba8b49"
+      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
     },
     {
       "audit": {

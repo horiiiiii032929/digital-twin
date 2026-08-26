@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-calibration-attempt-004-invalid",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "31bbc4ec8dbe8a7f4dc12d22b6f8ba67c87d6f92",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "codex-gemini-two-reviewer-calibration-simulation-v1",
+        "version": "attempt-004-network-free-build",
+        "configuration": {
+          "control_count": 40,
+          "maximum_primary_provider_calls": 10,
+          "maximum_transport_retries": 2,
+          "real_provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "gemini-calibration-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "calibrated-reviewers",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "unrecovered-transport-failures",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "opened-confirmation-cases",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-source-and-vote-evidence",
+          "passed": true,
+          "evidence": "The simulation used the sealed controls, deterministic truth, and immutable Codex votes."
+        },
+        {
+          "name": "complete-two-reviewer-calibration",
+          "passed": true,
+          "evidence": "The no-call simulation produced 40 votes and passing calibration metrics for each reviewer."
+        },
+        {
+          "name": "transport-policy-completed",
+          "passed": true,
+          "evidence": "The simulation completed without a transport failure."
+        },
+        {
+          "name": "complete-provider-accounting",
+          "passed": true,
+          "evidence": "Every simulated call had complete synthetic identity, token, latency, and cost fields."
+        },
+        {
+          "name": "downstream-access-closed",
+          "passed": true,
+          "evidence": "The build simulation stopped after calibration and opened no confirmation case."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "codex-gemini-two-reviewer-calibration-v1",
+        "version": "attempt-004-live-invalid",
+        "configuration": {
+          "control_count": 40,
+          "maximum_primary_provider_calls": 10,
+          "maximum_transport_retries": 2,
+          "real_provider_calls": 2
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "gemini-calibration-votes",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "calibrated-reviewers",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "unrecovered-transport-failures",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "opened-confirmation-cases",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-source-and-vote-evidence",
+          "passed": true,
+          "evidence": "The live ledger is bound to the frozen packet, instrument, binding, price, code revision, and Codex task."
+        },
+        {
+          "name": "complete-two-reviewer-calibration",
+          "passed": false,
+          "evidence": "No Gemini vote was accepted after the primary batch and its one permitted retry returned HTTP 429."
+        },
+        {
+          "name": "transport-policy-completed",
+          "passed": false,
+          "evidence": "The first batch exhausted its one retry and remained unrecovered."
+        },
+        {
+          "name": "complete-provider-accounting",
+          "passed": false,
+          "evidence": "The two HTTP 429 responses supplied no authoritative usage or cost fields."
+        },
+        {
+          "name": "downstream-access-closed",
+          "passed": true,
+          "evidence": "No later calibration batch or sealed confirmation case opened."
+        }
+      ],
+      "failures_by_category": {
+        "provider-http-429": 2
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The live attempt is operationally invalid after the exact Google AI Studio route returned HTTP 429 on the primary batch and its sole retry, so no reviewer or product-quality interpretation is valid.",
+    "limitations": [
+      "No Gemini calibration vote was accepted.",
+      "The 429 responses did not report authoritative token usage or cost.",
+      "LLM panel evidence would remain silver rather than independent human ground truth even after a valid execution.",
+      "The sealed 200 cases and actual T0 product remain unopened."
+    ]
+  }
+}

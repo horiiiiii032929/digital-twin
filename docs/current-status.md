@@ -19,12 +19,13 @@ citations. Gemini descriptions are question-independent and non-authoritative;
 facts not cleared deterministically require an explicit Codex-assisted audit.
 All network-free runners and failure paths are implemented. Calibration
 attempts 001–003 remain immutable invalid operational evidence. Build-only
-attempt 004 now removes DeepSeek from this panel and binds the immutable 40/40
+attempt 004 removed DeepSeek from this panel and bound the immutable 40/40
 Codex votes to ten fresh Gemini batches, with at most two transport-only
-retries. Its complete no-call simulation passes and live metadata shows no
-drift, but execution remains unauthorized. The 200-case panel plus every visual
-and product checkpoint stays closed. No product-quality result is claimed from
-the invalid calibrations or build simulations.
+retries. Its complete no-call simulation passed and live metadata showed no
+drift. The paid run then stopped as invalid after the first Gemini batch and
+its sole retry both returned HTTP 429; zero Gemini votes or later batches were
+accepted. Authority is revoked. The 200-case panel plus every visual and product
+checkpoint stays closed, and no product-quality result is claimed.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
@@ -257,10 +258,13 @@ imported. Only timeout, connection failure, HTTP 429/5xx, or empty content may
 retry, once per batch and at most twice globally, with every failed call kept
 in the ledger. The network-free pass and failure simulations succeed, and the
 metadata-only live check reports zero drift and zero inference calls. The
-maximum reservation is USD 0.211968 under the existing USD 3 stop. Attempt 004
-is now separately frozen under AFQC-027 for exactly one paid 40-control
-calibration; any terminal live result must revoke that authority, stop the
-reviewer search, and keep the 200 cases sealed pending a separate decision.
+maximum reservation is USD 0.211968 under the existing USD 3 stop. AFQC-027
+authorized exactly one paid calibration. AFQC-028 records that run as invalid:
+the first Gemini batch and its one permitted retry both returned HTTP 429.
+There were two attempted calls, zero provider completions, zero accepted Gemini
+votes, zero later batches, and no confirmation access. Provider usage and cost
+were unavailable, so the ledger's USD 0 is not proof of zero charge. Authority
+is revoked, attempt 004 cannot be rerun, and the reviewer search is stopped.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -624,7 +628,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Public-source manifest, 200 cases, 40 controls, and blinded packet are built; two-family Codex + Gemini attempt 004 passes no-call verification but remains unauthorized, and the 200-case panel stays sealed |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Public-source manifest, 200 cases, 40 controls, and blinded packet are built; attempts 001–004 are invalid operational evidence, reviewer search is stopped, and the 200-case panel stays sealed pending a supervisor-facing method decision |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

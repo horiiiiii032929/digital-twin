@@ -665,8 +665,11 @@ Current utilities:
   verify:academic-factual-qa-confirmation-v2-review-attempt-004`, `npm run
   simulate:academic-factual-qa-confirmation-v2-review-attempt-004`, and the
   separate live preflight/execute commands. The maximum reservation is USD
-  0.211968 under the USD 3 stop. Paid calibration and the sealed 200-case panel
-  remain unauthorized.
+  0.211968 under the USD 3 stop. Its paid run is preserved as invalid after the
+  first Gemini batch and its sole retry both returned HTTP 429. No Gemini vote,
+  later batch, or confirmation case opened; provider usage/cost were
+  unavailable. Authority is revoked, attempt 004 cannot be rerun, and the
+  reviewer search is stopped.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,
   ten equations, ten original diagrams, one answerable and one balanced

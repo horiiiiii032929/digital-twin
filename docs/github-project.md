@@ -60,10 +60,11 @@ professor-communication track.
    reviewer slot with exact Gemini 3.7 Flash through Google AI Studio. Its live
    run is also invalid: Gemini completed the first canary, but direct DeepSeek
    returned empty content on the second canary. Attempt 004 removes DeepSeek
-   from this panel, binds immutable Codex plus fresh Gemini review, and passes
-   its network-free two-reviewer and bounded-retry checks. It remains
-   provider-unauthorized; the 200-case panel, visual pilot, and live T0
-   execution remain closed.
+   from this panel, bound immutable Codex plus fresh Gemini review, and passed
+   its network-free checks. Its paid run is invalid after the first Gemini
+   batch and its sole retry both returned HTTP 429. No Gemini vote or later
+   batch was accepted. Authority is revoked, the reviewer search is stopped,
+   and the 200-case panel, visual pilot, and live T0 execution remain closed.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

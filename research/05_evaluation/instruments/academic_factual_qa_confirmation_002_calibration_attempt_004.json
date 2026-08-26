@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "attempt_id": "academic-factual-qa-confirmation-002-calibration-attempt-004",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "owner_issue": 127,
-  "decision_memory_id": "AFQC-027",
+  "decision_memory_id": "AFQC-028",
   "parent_instrument": {
     "instrument_id": "academic-factual-qa-confirmation-002",
     "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
@@ -14,15 +14,15 @@
   "reviewer_binding_contract": {
     "binding_id": "academic-factual-qa-confirmation-002-reviewer-bindings-003",
     "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_003.json",
-    "content_sha256": "d24fa694e8ec092da7abdd7064421c812da1832d445c1f407ff3c8687fca5a3a"
+    "content_sha256": "7d5d3b260038889c2107acda8009a16833d0d59ec71bcf20056421eb04729674"
   },
   "execution_safety": {
     "source_download_authorized": false,
     "question_construction_authorized": false,
-    "calibration_execution_authorized": true,
-    "codex_review_authorized": true,
-    "provider_review_authorized": true,
-    "paid_execution_authorized": true,
+    "calibration_execution_authorized": false,
+    "codex_review_authorized": false,
+    "provider_review_authorized": false,
+    "paid_execution_authorized": false,
     "private_source_execution_authorized": false,
     "confirmation_execution_authorized": false,
     "researcher_audit_authorized": false,
@@ -63,5 +63,5 @@
     "visual_or_product_execution_automatic": false,
     "academic_10000_execution_automatic": false
   },
-  "content_sha256": "7ef2f45955cd922a397202db765220486246083811ef31142df5eda3b37bda2d"
+  "content_sha256": "489d128b2202d1960b0beed6012398aff0d1002c40b912e39cc0a7ef81b394d9"
 }
