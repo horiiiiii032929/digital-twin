@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e17669e141ee14bfb7834e94bfffdb185baeb3276f1bba0db18e8caa56d37dc2",
+  "record_sha256": "c36c1a81c492f6182576c33aa6cc026e02823cae738f9ea85578d12c196d322b",
   "records": [
     {
       "audit": {
@@ -1747,7 +1747,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_candidate_manifest.json",
       "risk": "high",
-      "sha256": "04feeb0a879c0707bd8cda8ae94e7af1da879e2bc9a93e2ec304483930aa4470"
+      "sha256": "9c035d6e045af8cebef1e9ce3406cb230c8922ed0fdc3a87876cd4a52c27b136"
     },
     {
       "audit": {
@@ -1763,7 +1763,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_control_manifest.json",
       "risk": "high",
-      "sha256": "2b3f52ede677b59a1bbd28f2fa031054c8f1b9fb7eb22710edc4cd35b49c5d6b"
+      "sha256": "f1247875cbecd028d223ff5f27a7728aa144ee5171ffe5ded5ffff49e45b1a59"
     },
     {
       "audit": {
