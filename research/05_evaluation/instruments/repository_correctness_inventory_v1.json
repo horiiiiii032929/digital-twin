@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 574
+    "audited": 575
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 127,
+    "evaluation_configuration": 128,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 118
   },
-  "file_count": 574,
+  "file_count": 575,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9145b9efae049d1e70445b0ca98939bd0a586b41270c303acc563d4876eb219a",
+  "record_sha256": "e17669e141ee14bfb7834e94bfffdb185baeb3276f1bba0db18e8caa56d37dc2",
   "records": [
     {
       "audit": {
@@ -1704,6 +1704,22 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
+        "evidence": "Manual successor-binding review verifies exact documented DeepSeek and Gemini slugs, exact Google AI Studio routing, current pricing and retention references, required diagnostic DeepSeek fingerprint capture, binding-level authorization defaults, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json",
+      "risk": "high",
+      "sha256": "128390cfa392e7357aebf484d9806d5571cad5abafd5cf16e41e30ebc271a25c"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
         "evidence": "Manual AFQC-035 review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, exact split/slice totals, provider and cost bounds, authorization separation, and closed final execution.",
         "findings": [],
         "reviewed_at": "2026-08-27",
@@ -1715,7 +1731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "risk": "high",
-      "sha256": "844b9173cf5fc7694a41e39c6bd4cad226442e92db89f3a5942e7c558f415b34"
+      "sha256": "56831971ae79e89f5a8cc638845a174944daa3a704afe70b28a9ea76c9d3aaa5"
     },
     {
       "audit": {
@@ -3446,7 +3462,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "02e524ada4a7d34fc177147d85c9efd16d5064b1e9df3989f1156951036914b2"
+      "sha256": "c6abe45ddf84446e15c5a2d0f5788c3fa9d9553cae440f156ef0715feb1618e6"
     },
     {
       "audit": {
@@ -4121,7 +4137,7 @@
       ],
       "path": "scripts/construct_academic_factual_qa_open_10000.py",
       "risk": "high",
-      "sha256": "928c57d4d728f5f70cc66269c01f0b33986bd04013115aa7d9d7e162e7cc254a"
+      "sha256": "eae2a58f0d8e4febb7e48084ee3f757aba19d8d64f8853c6424fe9240ddb2e17"
     },
     {
       "audit": {
@@ -4700,7 +4716,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_10000.py",
       "risk": "high",
-      "sha256": "27be7996770a36bf480d70e04b8d35a6649a60d64395e3ff6c9444850b4553c7"
+      "sha256": "8a6547ae7b6fca4b6724d5ed21e44fcc983c7e107e7e64b725b7109dafc9337e"
     },
     {
       "audit": {
@@ -6734,7 +6750,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/provider_json.py",
       "risk": "high",
-      "sha256": "060240e901d3b5da608c1f6751451687b41e7537fe4ede281c6be3972e7ff973"
+      "sha256": "ef45a3818c25bcf1b7107aec957407d3a6f0738c19c7291ff4b4bc2b04c6103c"
     },
     {
       "audit": {
@@ -8318,7 +8334,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_construction.py",
       "risk": "medium",
-      "sha256": "fb54a681bc41d4587dee26a89ffe040cb63e1155787c77acd6b49a66e213ab32"
+      "sha256": "e9c89e681cf6203b18c1f07c2dd4af0ede6b928ca4d6da3c217c7c4525722c27"
     },
     {
       "audit": {
@@ -9554,7 +9570,7 @@
     }
   ],
   "risk_counts": {
-    "high": 442,
+    "high": 443,
     "medium": 132
   },
   "schema_version": 1,

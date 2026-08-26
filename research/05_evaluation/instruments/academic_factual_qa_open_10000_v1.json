@@ -145,6 +145,8 @@
     }
   },
   "execution": {
+    "construction_attempt": "002-build-only",
+    "provider_binding_id": "academic-factual-qa-open-10000-provider-binding-002",
     "response_process_can_import_gold_module": false,
     "response_process_can_load_gold_path": false,
     "gold_join_after_all_responses_persisted": true,

@@ -63,7 +63,7 @@ DEFAULT_STATE = (
 )
 PROVIDER_BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json"
 )
 
 
@@ -226,6 +226,30 @@ def preflight(
     else:
         binding = _load_json(PROVIDER_BINDING_PATH)
         try:
+            expected_binding_hash = canonical_json_sha256(
+                {
+                    key: value
+                    for key, value in binding.items()
+                    if key != "content_sha256"
+                }
+            )
+            if binding.get("content_sha256") != expected_binding_hash:
+                blockers.append("provider-binding-hash-drifted")
+            binding_authorization = binding.get("authorization", {})
+            binding_keys = [
+                "provider_execution_authorized",
+                "paid_execution_authorized",
+                (
+                    "development_execution_authorized"
+                    if stage == "development"
+                    else "final_execution_authorized"
+                ),
+            ]
+            for key in binding_keys:
+                if not binding_authorization.get(key, False):
+                    blockers.append(
+                        f"provider-binding-{key.replace('_', '-')}-false"
+                    )
             verified_at = datetime.fromisoformat(binding["verified_at"])
             age = (
                 datetime.now(timezone.utc) - verified_at.astimezone(timezone.utc)

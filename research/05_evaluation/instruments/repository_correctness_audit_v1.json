@@ -27,6 +27,17 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
+      "evidence": "Manual successor-binding review verifies exact documented DeepSeek and Gemini slugs, exact Google AI Studio routing, current pricing and retention references, required diagnostic DeepSeek fingerprint capture, binding-level authorization defaults, and closed final execution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "128390cfa392e7357aebf484d9806d5571cad5abafd5cf16e41e30ebc271a25c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
       "evidence": "Manual system-manifest review binds the candidate to build revision 636d689, the selected profile hash, exact hybrid retrieval, DeepSeek generator fingerprint, local NLI revision, structured evidence gate, public-source boundary, and first-use benchmark status.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_candidate_manifest.json",
@@ -54,7 +65,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "02e524ada4a7d34fc177147d85c9efd16d5064b1e9df3989f1156951036914b2"
+      "sha256": "c6abe45ddf84446e15c5a2d0f5788c3fa9d9553cae440f156ef0715feb1618e6"
     },
     {
       "audit_status": "audited",
@@ -65,7 +76,7 @@
       "path": "scripts/construct_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "928c57d4d728f5f70cc66269c01f0b33986bd04013115aa7d9d7e162e7cc254a"
+      "sha256": "eae2a58f0d8e4febb7e48084ee3f757aba19d8d64f8853c6424fe9240ddb2e17"
     },
     {
       "audit_status": "audited",
@@ -76,7 +87,7 @@
       "path": "src/digital_twin/evaluation/provider_json.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "060240e901d3b5da608c1f6751451687b41e7537fe4ede281c6be3972e7ff973"
+      "sha256": "ef45a3818c25bcf1b7107aec957407d3a6f0738c19c7291ff4b4bc2b04c6103c"
     },
     {
       "audit_status": "audited",
@@ -87,7 +98,7 @@
       "path": "tests/test_academic_factual_qa_open_construction.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "fb54a681bc41d4587dee26a89ffe040cb63e1155787c77acd6b49a66e213ab32"
+      "sha256": "e9c89e681cf6203b18c1f07c2dd4af0ede6b928ca4d6da3c217c7c4525722c27"
     },
     {
       "audit_status": "audited",
@@ -98,7 +109,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "844b9173cf5fc7694a41e39c6bd4cad226442e92db89f3a5942e7c558f415b34"
+      "sha256": "56831971ae79e89f5a8cc638845a174944daa3a704afe70b28a9ea76c9d3aaa5"
     },
     {
       "audit_status": "audited",
@@ -120,7 +131,7 @@
       "path": "scripts/run_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "27be7996770a36bf480d70e04b8d35a6649a60d64395e3ff6c9444850b4553c7"
+      "sha256": "8a6547ae7b6fca4b6724d5ed21e44fcc983c7e107e7e64b725b7109dafc9337e"
     },
     {
       "audit_status": "audited",

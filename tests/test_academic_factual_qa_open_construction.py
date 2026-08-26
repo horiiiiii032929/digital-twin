@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sqlite3
 from pathlib import Path
 
 import pytest
@@ -8,6 +9,7 @@ from scripts.construct_academic_factual_qa_open_10000 import (
     AUTHOR_SCHEMA,
     VERIFIER_SCHEMA,
     simulate,
+    preflight as construction_preflight,
     validate,
 )
 from src.digital_twin.evaluation import (
@@ -136,6 +138,23 @@ def test_construction_validate_and_simulation_are_network_free() -> None:
     assert result["provider_calls"] == 0
 
 
+def test_successor_preflight_requires_instrument_and_binding_authorization() -> None:
+    result = construction_preflight(
+        stage="development",
+        ledger_path=Path(
+            "data/interim/academic_factual_qa_open_10000_v1_test-do-not-create.sqlite3"
+        ),
+        resume=False,
+    )
+
+    assert result["status"] == "blocked-not-authorized"
+    assert "dataset-construction-authorized-false" in result["blockers"]
+    assert (
+        "provider-binding-dataset-construction-authorized-false"
+        in result["blockers"]
+    )
+
+
 def test_provider_ledger_binds_resume_and_budget(tmp_path: Path) -> None:
     path = tmp_path / "provider.sqlite3"
     ledger = ProviderCallLedgerV1(
@@ -164,3 +183,34 @@ def test_provider_ledger_binds_resume_and_budget(tmp_path: Path) -> None:
             maximum_cost_usd=1,
             resume=True,
         )
+
+
+def test_provider_ledger_preserves_sanitized_failure_detail(tmp_path: Path) -> None:
+    path = tmp_path / "provider-failure.sqlite3"
+    ledger = ProviderCallLedgerV1(
+        path,
+        run_binding={"run": "failure"},
+        maximum_calls=1,
+        maximum_cost_usd=1,
+        resume=False,
+    )
+    ledger.record_failed(
+        request_key="canary:deepseek",
+        request_sha256="a" * 64,
+        provider_role="canary",
+        failure_type="ProviderJsonError",
+        failure_detail="expected='old' observed='new'",
+        latency_ms=12.5,
+    )
+    ledger.close()
+
+    connection = sqlite3.connect(path)
+    row = connection.execute(
+        "SELECT failure_type, failure_detail FROM calls"
+    ).fetchone()
+    connection.close()
+
+    assert row == (
+        "ProviderJsonError",
+        "expected='old' observed='new'",
+    )

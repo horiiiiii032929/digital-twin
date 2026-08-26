@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "binding_id": "academic-factual-qa-open-10000-provider-binding-002",
+  "successor_of": "academic-factual-qa-open-10000-provider-binding-001",
+  "verified_at": "2026-08-26T16:28:02+00:00",
+  "maximum_age_hours_for_execution": 24,
+  "data_boundary": "pinned-public-open-educational-sources-only",
+  "identity_policy": "exact documented model slug and route are hard gates; runtime fingerprint is required, recorded, and diagnostic because it is not independently pinnable through the provider model registry",
+  "providers": {
+    "deepseek-v4-flash": {
+      "binding_id": "academic-open-10000-deepseek-v4-flash-002",
+      "provider": "deepseek",
+      "api_url": "https://api.deepseek.com/chat/completions",
+      "credential_environment_variable": "DEEPSEEK_API_KEY",
+      "provider_model": "deepseek-v4-flash",
+      "documented_revision": "DeepSeek-V4-Flash-0731",
+      "expected_provider_revision": null,
+      "require_provider_revision": true,
+      "runtime_revision_policy": "required-recorded-diagnostic-not-selection-gate",
+      "context_window_tokens": 1000000,
+      "max_output_tokens": 3072,
+      "temperature": 0,
+      "timeout_seconds": 120,
+      "provider_user_id": "academic-open-10000-construction-002",
+      "pricing_usd_per_million_input_tokens": 0.44,
+      "pricing_usd_per_million_output_tokens": 1.32,
+      "model_registry_source": "https://api.deepseek.com/models",
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "retention_source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html"
+    },
+    "gemini-3.7-flash": {
+      "binding_id": "academic-open-10000-gemini-3.7-flash-002",
+      "provider": "openrouter",
+      "api_url": "https://openrouter.ai/api/v1/chat/completions",
+      "credential_environment_variable": "OPENROUTER_API_KEY",
+      "provider_model": "google/gemini-3.7-flash",
+      "documented_revision": "google/gemini-3.7-flash-20260813",
+      "expected_provider_revision": null,
+      "context_window_tokens": 1048576,
+      "max_output_tokens": 3072,
+      "temperature": 0,
+      "seed": 20260827,
+      "timeout_seconds": 120,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 3.75,
+      "runtime_provider_names": [
+        "Google AI Studio"
+      ],
+      "runtime_service_tiers": [
+        "default",
+        null
+      ],
+      "routing": {
+        "order": [
+          "Google AI Studio"
+        ],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "allow"
+      },
+      "model_registry_source": "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints",
+      "routing_source": "https://openrouter.ai/docs/guides/routing/provider-selection",
+      "retention_source": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  },
+  "authorization": {
+    "dataset_construction_authorized": false,
+    "development_execution_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "cdc59ea92cb30e50ba5488ef2feadda84e0ac2929171e799997ffff23e7e14bd"
+}

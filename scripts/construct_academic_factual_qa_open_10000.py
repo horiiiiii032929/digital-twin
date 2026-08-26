@@ -52,7 +52,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json"
 )
 DATASET_ROOT = ROOT / "research/05_evaluation/datasets"
 DEVELOPMENT_CASES_PATH = (
@@ -73,7 +73,7 @@ FINAL_CASES_PATH = DATASET_ROOT / "academic_factual_qa_open_10000_v1_final_cases
 FINAL_GOLD_PATH = DATASET_ROOT / "academic_factual_qa_open_10000_v1_final_gold.json"
 DEFAULT_LEDGER = (
     ROOT
-    / "data/interim/academic_factual_qa_open_10000_v1_development_construction.sqlite3"
+    / "data/interim/academic_factual_qa_open_10000_v1_development_construction_attempt_002.sqlite3"
 )
 DEVELOPMENT_MAXIMUM_CALLS = 202
 FINAL_MAXIMUM_CALLS = 4002
@@ -742,6 +742,20 @@ def preflight(*, stage: str, ledger_path: Path, resume: bool) -> dict[str, Any]:
     if _repo_dirty():
         blockers.append("working-tree-dirty")
     if binding is not None:
+        binding_authorization = binding.get("authorization", {})
+        binding_keys = [
+            "dataset_construction_authorized",
+            "provider_execution_authorized",
+            "paid_execution_authorized",
+            (
+                "development_execution_authorized"
+                if stage == "development"
+                else "final_execution_authorized"
+            ),
+        ]
+        for key in binding_keys:
+            if not binding_authorization.get(key, False):
+                blockers.append(f"provider-binding-{key.replace('_', '-')}-false")
         for provider in binding["providers"].values():
             if not os.getenv(provider["credential_environment_variable"], "").strip():
                 blockers.append(
@@ -775,6 +789,16 @@ def validate() -> dict[str, Any]:
         raise ConstructionError("author schema drifted")
     if "expected_action" in json.dumps(AUTHOR_SCHEMA):
         raise ConstructionError("author output schema may not define source truth")
+    binding = _binding()
+    deepseek = binding["providers"]["deepseek-v4-flash"]
+    if (
+        deepseek["provider_model"] != "deepseek-v4-flash"
+        or deepseek.get("expected_provider_revision") is not None
+        or deepseek.get("require_provider_revision") is not True
+        or deepseek.get("runtime_revision_policy")
+        != "required-recorded-diagnostic-not-selection-gate"
+    ):
+        raise ConstructionError("DeepSeek successor identity policy drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
         "status": "passed",

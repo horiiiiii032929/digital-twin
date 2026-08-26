@@ -100,6 +100,7 @@ class ProviderCallLedgerV1:
                 status TEXT NOT NULL,
                 response_json TEXT,
                 failure_type TEXT,
+                failure_detail TEXT,
                 input_tokens INTEGER NOT NULL DEFAULT 0,
                 output_tokens INTEGER NOT NULL DEFAULT 0,
                 cost_usd REAL NOT NULL DEFAULT 0,
@@ -206,6 +207,7 @@ class ProviderCallLedgerV1:
         request_sha256: str,
         provider_role: str,
         failure_type: str,
+        failure_detail: str,
         latency_ms: float,
     ) -> None:
         with self.connection:
@@ -213,14 +215,15 @@ class ProviderCallLedgerV1:
                 """
                 INSERT INTO calls(
                     request_key, request_sha256, provider_role, status,
-                    failure_type, latency_ms
-                ) VALUES (?, ?, ?, 'failed', ?, ?)
+                    failure_type, failure_detail, latency_ms
+                ) VALUES (?, ?, ?, 'failed', ?, ?, ?)
                 """,
                 (
                     request_key,
                     request_sha256,
                     provider_role,
                     failure_type,
+                    failure_detail[:500],
                     latency_ms,
                 ),
             )
@@ -357,18 +360,33 @@ class OpenAiCompatibleJsonTransport:
             raise ProviderJsonError(f"provider HTTP failure: {detail}")
         model = value.get("model")
         if model != self.binding["provider_model"]:
-            raise ProviderJsonError("provider response model identity drifted")
+            raise ProviderJsonError(
+                "provider response model identity drifted: "
+                f"expected={self.binding['provider_model']!r} observed={model!r}"
+            )
         endpoint_provider = value.get("provider")
         service_tier = value.get("service_tier")
         if provider == "openrouter":
             if endpoint_provider not in self.binding["runtime_provider_names"]:
-                raise ProviderJsonError("OpenRouter endpoint provider identity drifted")
+                raise ProviderJsonError(
+                    "OpenRouter endpoint provider identity drifted: "
+                    f"observed={endpoint_provider!r}"
+                )
             if service_tier not in self.binding["runtime_service_tiers"]:
-                raise ProviderJsonError("OpenRouter service tier drifted")
+                raise ProviderJsonError(
+                    f"OpenRouter service tier drifted: observed={service_tier!r}"
+                )
         revision = value.get("system_fingerprint")
+        if self.binding.get("require_provider_revision") and not isinstance(
+            revision, str
+        ):
+            raise ProviderJsonError("provider response omitted required revision")
         expected_revision = self.binding.get("expected_provider_revision")
         if expected_revision is not None and revision != expected_revision:
-            raise ProviderJsonError("provider response revision identity drifted")
+            raise ProviderJsonError(
+                "provider response revision identity drifted: "
+                f"expected={expected_revision!r} observed={revision!r}"
+            )
         choices = value.get("choices")
         if not isinstance(choices, list) or len(choices) != 1:
             raise ProviderJsonError("provider response choices drifted")
@@ -448,6 +466,7 @@ class OpenAiCompatibleJsonTransport:
                 request_sha256=request_sha256,
                 provider_role=provider_role,
                 failure_type=type(error).__name__,
+                failure_detail=str(error),
                 latency_ms=(time.perf_counter() - started) * 1000,
             )
             raise

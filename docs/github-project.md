@@ -60,8 +60,10 @@ professor-communication track.
    under AFQC-035 after excluding tiny markup fragments and mid-token windows.
    Construction attempt 001 failed closed on its first DeepSeek canary because
    the runtime fingerprint differed from the frozen binding; no bulk case ran
-   and authorization is revoked. A prospective identity-binding successor is
-   required before the 500-case development run. The 10,000-case final run
+   and authorization is revoked. Provider binding 002 is the build-only
+   successor: exact model slug and route remain hard gates while the required
+   runtime fingerprint is recorded diagnostically. It needs separate paid
+   authorization before the 500-case development run. The 10,000-case final run
    remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

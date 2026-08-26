@@ -59,7 +59,7 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 574 executable or execution-affecting
+the current branch extends it to all 575 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -70,6 +70,10 @@ canary returned the requested model but a different runtime fingerprint, so the
 executor stopped before Gemini or any bulk call. Zero development clusters were
 processed; provider usage and cost are unavailable rather than claimed as zero.
 The sealed final 10,000-case stage and held-out scoring remain unauthorized.
+Provider binding 002 is now a build-only successor: it keeps the exact
+documented DeepSeek V4 Flash slug as the hard identity, requires and records a
+runtime fingerprint diagnostically, improves sanitized failure evidence, and
+uses a fresh exclusive ledger. It is not authorized for a provider call.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -364,7 +368,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 574-file audit. Evaluation
+artifacts are also fully dispositioned in the current 575-file audit. Evaluation
 execution remains frozen, with 78/78 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 

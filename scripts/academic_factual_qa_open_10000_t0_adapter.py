@@ -58,7 +58,7 @@ PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
 SOURCE_PLAN_PATH = ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json"
 BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json"
 )
 ATOMIC_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",

@@ -735,7 +735,11 @@ Current utilities:
   mid-token fragments and freezes 2,100 context-bearing windows. The constructor
   derives gold before any model call, limits DeepSeek/Gemini to question wording
   and independent verification, and keeps raw responses in an ignored SQLite
-  ledger. The response runner accepts only `EvaluationCaseV1`,
+  ledger. Construction attempt 001 is preserved as invalid after its first
+  DeepSeek canary exposed a mutable runtime-fingerprint binding. Build-only
+  binding 002 retains exact model/route gates, requires and records the runtime
+  fingerprint diagnostically, and adds binding-level authorization checks plus
+  sanitized failure details. The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden
   gold. The scorer opens `EvaluationGoldV1` only after durable completion and
