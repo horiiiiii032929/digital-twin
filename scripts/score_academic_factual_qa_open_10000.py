@@ -465,9 +465,23 @@ def main() -> int:
         "--control-responses", type=Path, default=DEFAULT_CONTROL_RESPONSES
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--stage", choices=("development", "final"), default="final")
     arguments = parser.parse_args()
     if arguments.score or arguments.compare:
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "heldout_execution")
+        require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+        instrument = _load_json(INSTRUMENT_PATH)
+        if arguments.stage == "development":
+            require_bounded_pilot_operation_allowed(
+                INSTRUMENT_ID, "method_evaluation_execution"
+            )
+            if not instrument["execution"]["development_execution_authorized"]:
+                raise OpenBenchmarkScoringError(
+                    "development scoring is not authorized"
+                )
+        else:
+            require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "heldout_execution")
+            if not instrument["execution"]["final_execution_authorized"]:
+                raise OpenBenchmarkScoringError("final scoring is not authorized")
         if arguments.output.exists():
             raise OpenBenchmarkScoringError("result output already exists")
         candidate = score_packages(

@@ -60,11 +60,11 @@
     }
   },
   "authorization": {
-    "dataset_construction_authorized": false,
-    "development_execution_authorized": false,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "dataset_construction_authorized": true,
+    "development_execution_authorized": true,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "a7f04b920520fc71bd10eeb150c0350d14a119fb9c8db402cfcaa554e645aa99"
+  "content_sha256": "440c681e6968d15eb0af9fa79db8c657511de5cb68673e43d0d9fe82081cc49d"
 }

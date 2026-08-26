@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "flow_id": "t0-structured-two-boundary-candidate",
+  "adapter_version": "v1",
+  "code_revision": "636d6898a022b979e6d409bca2e6e2db3a8672ed",
+  "profile_sha256": "4ebc43d468b5ceec52552986de9a20389ce81485917c3918ec8fbcc1194c4bad",
+  "retriever": "qwen3-hybrid-v1@cross-course-retrieval-v1",
+  "generator": "deepseek-v4-flash-live-atomic",
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+  "model_bindings": {
+    "embedding": "Qwen/Qwen3-Embedding-0.6B@97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "generator": "deepseek-v4-flash@fp_a18b46594c_prod0820_fp8_kvcache_20260402",
+    "claim-validator": "cross-encoder/nli-deberta-v3-base@6c749ce3425cd33b46d187e45b92bbf96ee12ec7"
+  },
+  "known_benchmark": false
+}

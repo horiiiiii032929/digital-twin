@@ -256,7 +256,15 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # One named, versioned pilot may execute while the wider pre-evaluation freeze
 # remains active. The authorization is intentionally not operation-generic: a
 # successor instrument requires a new code review and an explicit entry here.
-BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType({})
+BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
+    {
+        "academic-factual-qa-open-10000-v1": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        )
+    }
+)
 
 
 class RepositoryFreezeError(RuntimeError):

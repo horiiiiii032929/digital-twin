@@ -21,7 +21,29 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "8192cbbf2d5698dfa84ae5d2496ed56678d0206fff2803552810ed0b6c071300"
+      "sha256": "bb273b386d25c3d67231b40be4e37f09e3ec404a53d4a58ab4375d34cbd62aa6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Manual system-manifest review binds the candidate to build revision 636d689, the selected profile hash, exact hybrid retrieval, DeepSeek generator fingerprint, local NLI revision, structured evidence gate, public-source boundary, and first-use benchmark status.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_candidate_manifest.json",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "04feeb0a879c0707bd8cda8ae94e7af1da879e2bc9a93e2ec304483930aa4470"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Manual paired-control manifest review verifies the same code, profile, corpus, retriever, generator, policy, and model bindings as the candidate while changing only the evidence gate to the any-hit rollback control.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_control_manifest.json",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "2b3f52ede677b59a1bbd28f2fa031054c8f1b9fb7eb22710edc4cd35b49c5d6b"
     },
     {
       "audit_status": "audited",
@@ -76,7 +98,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "844b9173cf5fc7694a41e39c6bd4cad226442e92db89f3a5942e7c558f415b34"
+      "sha256": "88c22115afc3b31a664b917dd40c2b40ec922ff0d7456072065b7952eb666576"
     },
     {
       "audit_status": "audited",
@@ -109,7 +131,7 @@
       "path": "scripts/score_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f00f82c1d6896ce02cee1e90e3529a9a14aaf827cb47760855663b2915ce4764"
+      "sha256": "d269a1467eb49be0c94d19f1eedcc1a083a4f92db4229c3c8068637783498d02"
     },
     {
       "audit_status": "audited",
@@ -164,7 +186,7 @@
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "b1f6839c32b779ac2c6e51cb7d4c34c9d4fdd6d36c57a18e8d97fea406393c90"
+      "sha256": "833e829cd09c8b1d3a6c902c05e4ae2f7b8c45cee9947aae6897bd78d8548a47"
     },
     {
       "audit_status": "audited",
@@ -1176,7 +1198,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f7bc41f9ec2979b4c8b8cc4cbba6e2a7454f7025031523e5949db4779ffdc3f5"
+      "sha256": "8476029b80817cc20741aa31ecc4de3371d21d85523a462b9cb655024387ac92"
     },
     {
       "audit_status": "audited",
@@ -4861,7 +4883,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "3a2320199accbf6438ab5d351d1a105f955a2dc2dd2a0b3db4debe3bf7922385"
+      "sha256": "ac807ad1f02cfc20a0ee0bbbf1322580fa7118ecf9dc1915c9ce99844cf5a5a8"
     },
     {
       "audit_status": "audited",
@@ -5175,12 +5197,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+      "evidence": "Focused bounded-freeze tests verify the open benchmark is the only active authorization, allows exactly construction, external-model, and development method operations, and rejects held-out execution.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-25",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
+      "sha256": "cf8aef9bc924f1cbd848ac7f162f1263c8c9c3d9e88377da79fbe0a1be5913e1"
     },
     {
       "audit_status": "audited",

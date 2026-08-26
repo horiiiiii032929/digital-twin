@@ -59,12 +59,16 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 572 executable or execution-affecting
+the current branch extends it to all 574 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 78 protected entrypoints,
-with no bounded evaluation authorization currently active. Manual review found material source-design
+active for all general evaluation actions. It covers 79 protected entrypoints.
+One bounded authorization is active for
+`academic-factual-qa-open-10000-v1`: source-plan construction, public-source
+question construction, and the 500-case development candidate plus frozen
+100-case control. The sealed final 10,000-case stage and held-out scoring remain
+unauthorized. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -358,7 +362,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 572-file audit. Evaluation
+artifacts are also fully dispositioned in the current 574-file audit. Evaluation
 execution remains frozen, with 78/78 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
