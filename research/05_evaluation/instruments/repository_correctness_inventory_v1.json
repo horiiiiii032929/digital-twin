@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 548
+    "audited": 550
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 117,
+    "evaluation_configuration": 119,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 113
   },
-  "file_count": 548,
+  "file_count": 550,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "c62ba5370932f3e7a81ab3dc57afdea8110b9d5ea89b95a1f829969557db2491",
+  "record_sha256": "2c0ad92878244d18dbbc639af5eaa3dfda8f2e664884cf62de485ff166823252",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual command-surface review and focused factual-QA panel tests verify the bound reviewer validator, no-call simulation, live metadata-only preflight, and guarded execution commands are included in the repository gate.",
+        "evidence": "Manual command-surface review and focused factual-QA panel tests verify historical validation plus attempt-003 validate, no-call simulation, live metadata-only preflight, and guarded execution commands are explicit while paid execution remains outside the repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "808be38013b82456e9bbac191689fa78a1e23d2a4b106d0255d8f1f15e22235f"
+      "sha256": "a670600c5f63315a6336a430c983b250191c596a43764f46461a64cf78605b51"
     },
     {
       "audit": {
@@ -1544,6 +1544,22 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual attempt review verifies immutable parent/packet/Codex-vote hashes, calibration-only authority, 20-call and zero-retry limits, complete prospective gates, and explicit prohibition of confirmation, product, visual, private, and scale execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_003.json",
+      "risk": "high",
+      "sha256": "1b9ec96c652e50a9fc727f2fa329ffa17bff7f5887f86e38fe40ef3e1a19b76d"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual binding review preserves the exact Codex, Mistral, and DeepSeek identities, routing, pricing, and bounds from invalid attempt 002 while revoking all execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-26",
@@ -1556,6 +1572,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
       "risk": "high",
       "sha256": "cdaa2de8fa7918051a5a1d8a76df7d57d3c35de056d4590c2fd167b7cba75a44"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual binding and live metadata review verify exact Gemini 3.7 Flash revision 20260813 on the standard Google AI Studio endpoint, fallback-disabled routing, public-only 55-day retention disclosure, direct DeepSeek V4 Pro, and the USD 0.406426 reservation.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_002.json",
+      "risk": "high",
+      "sha256": "5cd211cab442f2a34f5bc32979bbe2af52fdc5bc1062ed9cf799490edafe9630"
     },
     {
       "audit": {
@@ -4026,7 +4058,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual execution-path review and tests preserve invalid attempts 001 and 002, enforce revoked authority and separate confirmation, and retain sanitized provider HTTP/error/request, usage/cost availability, and malformed-response hashes without retry.",
+        "evidence": "Manual execution-path review and focused tests preserve invalid attempts 001 and 002 while adding immutable attempt 003, exact Gemini and DeepSeek canaries, conservative provider schema plus deterministic post-validation, atomic accounting, stable identity, bounded cost, and fail-closed authorization without opening confirmation.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -4035,14 +4067,18 @@
       "category": "active_or_unclassified_tooling",
       "disposition": "active_audited",
       "package_commands": [
+        "execute:academic-factual-qa-confirmation-v2-review-attempt-003",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-003",
         "preflight-live:academic-factual-qa-confirmation-v2-review-execution",
         "prepare:academic-factual-qa-confirmation-v2-codex-workspace",
+        "simulate:academic-factual-qa-confirmation-v2-review-attempt-003",
         "simulate:academic-factual-qa-confirmation-v2-review-execution",
+        "verify:academic-factual-qa-confirmation-v2-review-attempt-003",
         "verify:academic-factual-qa-confirmation-v2-review-execution"
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "8a49c8cd2d2bce73e2678541e13d10413bcbc00298d94e6fd701ed060c690a8f"
+      "sha256": "1c305b0748494e1ea392f9543b6679eb9b4ca524091c27e50fc88843efb9ff77"
     },
     {
       "audit": {
@@ -4450,7 +4486,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual runner review and network-free tests verify strict parsing, calibration, unanimity, bounded audit packets, atomic accounting, invalid-attempt authority revocation, blocked confirmation, and absence of provider execution in this legacy runner.",
+        "evidence": "Manual runner review and network-free tests verify strict local vote validation accepts both historical and Gemini reviewer identities while preserving calibration, unanimity, bounded audit, atomic accounting, and historical behavior.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -4465,7 +4501,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "9b04c0d6ca77aa7edab3ead54dda53bb68980141501ef5b723d589182331364a"
+      "sha256": "2b7414b01a0d311f8faf5095a8b5bac1c660d33b73b201c7edb075f0d6b38bda"
     },
     {
       "audit": {
@@ -8319,7 +8355,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused tests cover binding identity, strict vote parsing, isolated task identity, revoked invalid-attempt preflight, separate phase authority, full simulation, malformed returned-usage accounting, and sanitized provider HTTP failure evidence without retry.",
+        "evidence": "Focused tests cover historical and Gemini binding identity, supported provider schema, deterministic uniqueness and lineage checks, two-canary ordering, calibration-only simulation, canary failure, identity drift, budget stop, malformed accounting, resume, and sanitized provider failures without retry.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -8330,7 +8366,7 @@
       "package_commands": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "risk": "medium",
-      "sha256": "b3a8f7646b1a65002bc776bf397ead4bbb8df9f5c72dcaa487c7f64b3c07a7d7"
+      "sha256": "21d54a6d5d3cc7dcbf7d2840fc31d38c12e66d360945523722c8b272240bb5af"
     },
     {
       "audit": {
@@ -9102,7 +9138,7 @@
     }
   ],
   "risk_counts": {
-    "high": 421,
+    "high": 423,
     "medium": 127
   },
   "schema_version": 1,

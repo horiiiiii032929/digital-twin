@@ -215,6 +215,21 @@ USD 0.406 for calibration and USD 2.44 for the complete panel. This decision
 authorizes no provider call. Promotional pricing and endpoint metadata must be
 refreshed within 24 hours of any separately authorized execution.
 
+AFQC-023 records the immutable build for calibration attempt 003. The existing
+40 controls, 200-case sealed packet, deterministic truth, and 40/40 Codex votes
+are unchanged. Only the failed Mistral reviewer slot is replaced by exact
+Gemini 3.7 Flash revision `20260813` through the standard Google AI Studio
+endpoint; direct DeepSeek V4 Pro remains the third reviewer. The Gemini request
+uses the documented schema subset, with completeness, identity, uniqueness,
+visible-evidence lineage, and semantic consistency enforced locally. The
+20-call network-free simulation runs one Gemini and one DeepSeek canary first,
+passes all calibration gates, and stops without opening confirmation. A fresh
+metadata-only preflight found both credentials and zero model, endpoint,
+pricing, routing, parameter, or retention drift; only the deliberate execution
+locks remain. Google AI Studio currently retains these public evaluation inputs
+for up to 55 days and does not train on them. No paid call has occurred at this
+build checkpoint.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,

@@ -630,8 +630,9 @@ Current utilities:
   preflight:academic-factual-qa-confirmation-v2-review-runner` to confirm that
   live review remains unauthorized.
 - `execute_academic_factual_qa_panel_review_v2.py`: binds the actual review
-  checkpoint to a fresh isolated `gpt-5.6-sol` Codex task, exact Mistral Small
-  4 zero-data-retention routing through OpenRouter, and direct DeepSeek V4 Pro.
+  checkpoint to a fresh isolated `gpt-5.6-sol` Codex task, a versioned external
+  reviewer route, and direct DeepSeek V4 Pro. Historical attempts 001/002 keep
+  their exact Mistral Small 4 zero-data-retention routing through OpenRouter.
   It prepares a gold-free two-phase Codex workspace, performs metadata-only
   live preflight, and runs calibration before confirmation in batches of four.
   The executor has zero retries, a 120-call ceiling, atomic resume, stable
@@ -642,9 +643,18 @@ Current utilities:
   preserved as invalid one-call Mistral results and their authority is revoked.
   Attempt 002's corrected harness records sanitized HTTP/provider error,
   latency, affected items, explicit unavailable usage/cost, and response hashes
-  before stopping without retry. The repeated operational failure requires a
-  reviewer-method redesign; any successor calibration and confirmation each
-  require new separate authority.
+  without retry. Successor attempt 003 reuses the sealed packet and immutable
+  40/40 Codex votes, replaces only the failed Mistral slot with exact Gemini
+  3.7 Flash revision `20260813` through the standard `google-ai-studio`
+  endpoint, and ends after calibration. Its provider schema uses only the
+  documented Gemini subset while complete IDs, uniqueness, visible-evidence
+  lineage, and action consistency remain local deterministic checks. Use
+  `npm run verify:academic-factual-qa-confirmation-v2-review-attempt-003`,
+  `npm run simulate:academic-factual-qa-confirmation-v2-review-attempt-003`,
+  and the separately authorized live preflight/execute commands. Attempt 003
+  permits at most 20 calls, zero retries, USD 0.406426 conservative reservation,
+  and the existing USD 3 emergency stop; it never opens the 200-case panel.
+  Any later 200-case confirmation requires new separate authority.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,
   ten equations, ten original diagrams, one answerable and one balanced
