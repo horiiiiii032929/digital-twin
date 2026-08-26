@@ -725,6 +725,21 @@ Current utilities:
   distribution, source lineage, boundary-empty lineage, normalized question
   uniqueness, byte stability, and zero private/provider access. `--write`
   remains blocked by the repository freeze.
+- `build_academic_factual_qa_open_10000.py`,
+  `run_academic_factual_qa_open_10000.py`, and
+  `score_academic_factual_qa_open_10000.py`: define the flow-independent
+  professor-facing successor. The builder inventories pinned open educational
+  sources and proves the originally requested course allocation is impossible
+  under the five-cluster source-family cap; its feasible correction remains
+  researcher-unapproved. The response runner accepts only `EvaluationCaseV1`,
+  supports T0/T1/T2/HTTP/control adapters, and persists responses in an
+  exclusive resume-bound SQLite ledger without importing or reading hidden
+  gold. The scorer opens `EvaluationGoldV1` only after durable completion and
+  computes source-range retrieval, atomic-claim, citation, boundary, and
+  source-family bootstrap metrics. Run `npm run
+  verify:academic-factual-qa-open-10000`, `npm run
+  simulate:academic-factual-qa-open-10000`, or the development/final preflight
+  commands. Dataset writing and every provider/final action remain blocked.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

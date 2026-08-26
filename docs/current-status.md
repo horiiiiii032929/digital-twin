@@ -6,26 +6,33 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The next professor-reportable checkpoint is now frozen as
-`academic-factual-qa-professor-checkpoint-001`. It preserves the prior 10,000
-rows only as engineering-scale evidence and prospectively evaluates the actual
-T0 product on 200 public-source cases plus a separate 30-cluster/60-case visual
-supplement. Product inputs contain only course ID and question; responses are
-persisted before gold labels open. The main comparison freezes any-hit,
-structured evidence coverage, and the same shared atomic draft plus
-post-generation claim validation. The visual track freezes ten tables, ten
-equations, ten original diagrams, balanced boundaries, and original-region
-citations. Gemini descriptions are question-independent and non-authoritative;
-facts not cleared deterministically require an explicit Codex-assisted audit.
-All network-free runners and failure paths are implemented. Calibration
-attempts 001–005 remain immutable invalid operational evidence. Attempt 004
-removed DeepSeek from the panel but stopped after the first Gemini batch and its
-sole retry both returned HTTP 429. Attempt 005 fixed transport reliability with
-bounded Google Vertex/AI Studio routing; three Vertex priority calls completed,
-the first two produced 8 accepted Gemini votes, and the third response failed a
-frozen boundary-vote invariant. Its USD 0.024632775 cost and complete accounting
-are recorded. Authority is revoked. The 200-case panel plus every visual and
-product checkpoint stays closed, and no product-quality result is claimed.
+The active #127 successor is now
+`academic-factual-qa-open-10000-v1`: a flow-independent 500-case development
+and sealed 10,000-case final evaluation of the actual T0 product. The response
+process receives only a versioned public case, retrieves from the course corpus,
+and persists its normalized response before a separate process may open hidden
+gold. Canonical evidence uses source artifact hashes and character/region
+coordinates rather than runtime chunk IDs, so the same cases can compare T0,
+future T1/T2 graphs, an HTTP deployment, and the any-hit control under separate
+system manifests. The prior 10,000 rows remain engineering-scale history.
+
+The build-only source scan found that the requested course allocation cannot
+satisfy its own five-clusters-per-original-section cap: networking requests
+1,075 development-plus-final clusters but permits at most 495; data structures
+requests 425 but permits at most 400. No dataset was written and no threshold
+was weakened. The tested feasible correction is 400 operating-systems, 450
+networking, 350 data-structures, and 900 Python clusters including 25
+development clusters per course. It produces exactly 2,100 non-overlapping
+source windows and 10,500 prospective cases with the requested code, equation,
+table, answerable, and boundary strata. The allocation remains pending
+researcher approval. Dataset construction, the 500-case paid development run,
+and the sealed 10,000-case run are unauthorized.
+
+Historical professor-checkpoint reviewer attempts 001–005 remain immutable
+invalid operational evidence. Reviewer calibration is no longer the blocker
+for #127 and none of those attempts is being retried. Issue
+[#131](https://github.com/horiiiiii032929/digital-twin/issues/131) now owns the
+separate provider-unauthorized true-visual 30-cluster/60-case supplement.
 
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
@@ -36,18 +43,18 @@ holding model identity fixed. Its network-free simulation and live preflight
 passed, but AFQC-031 records the live run as invalid after the third batch
 violated a deterministic semantic invariant. Only 8/40 Gemini votes were
 accepted, so no calibration metric is valid. No execution is now authorized.
-The immediate checkpoint is one reviewer-method decision, not another automatic
-model search. The sealed 200 cases, visual work, product execution, private data,
-and larger academic stages remain unauthorized.
+This is historical evidence and no longer defines the immediate checkpoint.
+The sealed 200-case panel is not being opened; visual work and private data
+remain unauthorized.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 554 executable or execution-affecting
+the current branch extends it to all 567 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 75 protected entrypoints,
+active for all general evaluation actions. It covers 78 protected entrypoints,
 with no bounded evaluation authorization currently active. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -342,8 +349,8 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 554-file audit. Evaluation
-execution remains frozen, with 75/75 protected entrypoints registered and no
+artifacts are also fully dispositioned in the current 567-file audit. Evaluation
+execution remains frozen, with 78/78 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
 ## Current outcome
@@ -647,7 +654,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; academic product evidence pending | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting | Run a leakage-free end-to-end evaluation where the Digital Twin sees only each question and the indexed corpus; use deterministic source truth, three blinded LLM families, bounded researcher audit, and cluster-aware uncertainty |
+| Large factual QA | Engineering pipeline Keep; flow-independent academic product evaluation build ready | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting. The successor now has stable public-case, hidden-gold, adapter, SUT-manifest, atomic response-ledger, source-range scoring, and source-family bootstrap contracts | Approve the feasible 2,100-cluster course allocation, then separately authorize source construction and the 500-case development execution. The sealed 10,000 cases remain a second stop point |
 
 ## Release readiness and critical path
 
@@ -661,7 +668,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Attempts 001–005 remain unfavorable invalid evidence; transport is no longer the blocker, but Gemini did not complete semantic calibration. Decide the reviewer method before opening the sealed 200-case panel |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Approve the feasible source allocation, freeze the author/verifier bindings, and separately authorize dataset construction plus the 500-case development run. Reviewer calibration is not the blocker |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

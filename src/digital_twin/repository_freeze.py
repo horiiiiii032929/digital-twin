@@ -37,6 +37,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_confirmation_v2.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_open_10000.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_visual_supplement.py": (
             "dataset_generation",
         ),
@@ -139,6 +142,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_academic_factual_qa_open_10000.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_academic_factual_qa_t0_confirmation.py": (
             "external_model_evaluation",
             "local_model_evaluation",
@@ -146,6 +153,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         ),
         "scripts/run_academic_factual_qa_visual_checkpoint.py": (
             "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/score_academic_factual_qa_open_10000.py": (
+            "heldout_execution",
             "method_evaluation_execution",
         ),
         "scripts/run_cross_course_retrieval_heldout.py": (

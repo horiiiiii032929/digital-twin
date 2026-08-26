@@ -37,8 +37,8 @@ toward the release; none is the release by itself.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. A separate 30-cluster visual supplement now binds 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It is build-only and remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The successor checkpoint binds 100 fresh source/question-family clusters, 200 deterministic cases, 40 disjoint controls, agent-assisted audit, and a live T0 comparison whose product input is only course ID plus question. Attempts 001–005 are preserved as invalid operational evidence. Attempt 005 resolved the earlier 429 transport failure, but only 8/40 Gemini votes were accepted before a boundary-vote invariant failed. Authority is revoked; a reviewer-method decision is required before the 200 cases may open | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
+| Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The flow-independent successor defines 500 development and 10,000 sealed final cases, stable T0/T1/T2/HTTP/control adapters, source-range gold, isolated atomic response persistence, and source-family uncertainty. The requested course allocation is mathematically infeasible under its source-reuse cap; a tested 2,100-cluster correction awaits researcher approval before the first paid construction/development checkpoint | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -90,11 +90,14 @@ not require model spending or private data:
    accepted; the third batch violated a deterministic boundary-vote invariant,
    so the run is invalid and authorization is revoked. The prospective
    checkpoint also adds a separate 30-cluster
-   true-visual supplement and a question-only 200+60-case T0 runner. Every
-   network-free path is built. A reviewer-method decision is now required before
-   any further model substitution or execution. Panel confirmation, Gemini
-   visual qualification, visual execution, and live T0 execution remain closed
-   and never auto-promote.
+   true-visual supplement, now tracked by #131, and a question-only
+   200+60-case T0 runner. Every
+   network-free path is built. These reviewer attempts remain historical and
+   are not being retried. The flow-independent 10,000-case successor now owns
+   #127; its first stop is approval of the feasible course allocation followed
+   by separate authorization for dataset construction and the 500-case
+   development run. Panel confirmation, Gemini visual qualification, visual
+   execution, and live T0 execution remain closed and never auto-promote.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

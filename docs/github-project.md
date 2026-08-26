@@ -49,25 +49,17 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
-   result as provisional development evidence. The successor binds four exact
-   public educational repositories, 100 non-overlapping confirmation clusters,
-   200 deterministic cases, 40 disjoint controls, one blinded multi-family
-   packet, and a separate 30-cluster/60-case visual supplement. The actual T0
-   runner accepts only course ID and question and opens gold only after every
-   response is durable. Corrective calibration attempt 002 is preserved as an
-   invalid one-call Mistral HTTP 400 result. Attempt 003 replaced only that
-   reviewer slot with exact Gemini 3.7 Flash through Google AI Studio. Its live
-   run is also invalid: Gemini completed the first canary, but direct DeepSeek
-   returned empty content on the second canary. Attempt 004 removes DeepSeek
-   from this panel, bound immutable Codex plus fresh Gemini review, and passed
-   its network-free checks. Its paid run is invalid after the first Gemini
-   batch and its sole retry both returned HTTP 429. No Gemini vote or later
-   batch was accepted, and authority is revoked. Attempt 005 now keeps the same
-   Gemini revision but uses a bounded OpenRouter allowlist over Vertex global
-   priority/default and AI Studio priority/default. Its simulation and live
-   metadata checks pass with no inference calls; paid authority remains false,
-   and the 200-case panel, visual pilot, and live T0 execution remain closed.
+1. #127 flow-independent 10,000-case product evaluation and #105 — preserve the
+   120-row NLI result as provisional development evidence and the completed
+   10,000-row pipeline as engineering history. The active successor binds
+   public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,
+   and source-range scoring contracts across T0, T1/T2, HTTP, and any-hit flows.
+   Its source inventory proves the originally requested networking and
+   data-structures allocation impossible under the five-per-section cap. A
+   deterministic feasible 2,100-cluster correction is build-verified but awaits
+   researcher approval. Dataset construction, the 500-case development run,
+   and the 10,000-case final run remain unauthorized. Issue #131 separately
+   owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93
