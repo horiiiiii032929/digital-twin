@@ -38,7 +38,7 @@ toward the release; none is the release by itself.
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. A separate 30-cluster visual supplement now binds 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It is build-only and remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The successor checkpoint binds 100 fresh source/question-family clusters, 200 deterministic cases, 40 disjoint controls, agent-assisted audit, and a live T0 comparison whose product input is only course ID plus question. Attempts 001–004 remain invalid operational history. Attempt 005 keeps the exact Codex/Gemini method but replaces the failed single endpoint with four bounded Google Vertex/AI Studio routes; its simulation and metadata preflight pass, provider execution is unauthorized, and the 200 cases remain sealed | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The successor checkpoint binds 100 fresh source/question-family clusters, 200 deterministic cases, 40 disjoint controls, agent-assisted audit, and a live T0 comparison whose product input is only course ID plus question. Attempts 001–005 are preserved as invalid operational evidence. Attempt 005 resolved the earlier 429 transport failure, but only 8/40 Gemini votes were accepted before a boundary-vote invariant failed. Authority is revoked; a reviewer-method decision is required before the 200 cases may open | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -83,17 +83,18 @@ not require model spending or private data:
    passed, but the paid first batch and sole retry both returned HTTP 429. No
    Gemini vote was accepted and authority was revoked. The researcher then
    selected a reliability correction rather than another model search.
-   Attempt 005 fixes the Gemini revision while allowing health-aware fallback
-   across Vertex global priority/default and AI Studio priority/default. It
-   passes the network-free simulation and live metadata checks, records the
-   actual provider/tier per completion, and remains provider-unauthorized. The prospective
+   Attempt 005 fixed the Gemini revision while allowing health-aware fallback
+   across Vertex global priority/default and AI Studio priority/default. Its
+   network-free simulation and live metadata checks passed, and all three paid
+   calls completed through Vertex priority. The first 8 Gemini votes were
+   accepted; the third batch violated a deterministic boundary-vote invariant,
+   so the run is invalid and authorization is revoked. The prospective
    checkpoint also adds a separate 30-cluster
    true-visual supplement and a question-only 200+60-case T0 runner. Every
-   network-free path is built. A supervisor-facing method decision is required
-   before any further model substitution; the separately authorized attempt-005
-   calibration is the next finite checkpoint. Panel confirmation, Gemini visual
-   qualification, visual execution, and live T0 execution remain closed and
-   never auto-promote.
+   network-free path is built. A reviewer-method decision is now required before
+   any further model substitution or execution. Panel confirmation, Gemini
+   visual qualification, visual execution, and live T0 execution remain closed
+   and never auto-promote.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
    and blocker labels around this plan.
 4. Preserve the completed network-free T0/T1 development result and its revoked

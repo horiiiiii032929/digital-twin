@@ -18,25 +18,27 @@ equations, ten original diagrams, balanced boundaries, and original-region
 citations. Gemini descriptions are question-independent and non-authoritative;
 facts not cleared deterministically require an explicit Codex-assisted audit.
 All network-free runners and failure paths are implemented. Calibration
-attempts 001–003 remain immutable invalid operational evidence. Build-only
-attempt 004 removed DeepSeek from this panel and bound the immutable 40/40
-Codex votes to ten fresh Gemini batches, with at most two transport-only
-retries. Its complete no-call simulation passed and live metadata showed no
-drift. The paid run then stopped as invalid after the first Gemini batch and
-its sole retry both returned HTTP 429; zero Gemini votes or later batches were
-accepted. Authority is revoked. The 200-case panel plus every visual and product
-checkpoint stays closed, and no product-quality result is claimed.
+attempts 001–005 remain immutable invalid operational evidence. Attempt 004
+removed DeepSeek from the panel but stopped after the first Gemini batch and its
+sole retry both returned HTTP 429. Attempt 005 fixed transport reliability with
+bounded Google Vertex/AI Studio routing; three Vertex priority calls completed,
+the first two produced 8 accepted Gemini votes, and the third response failed a
+frozen boundary-vote invariant. Its USD 0.024632775 cost and complete accounting
+are recorded. Authority is revoked. The 200-case panel plus every visual and
+product checkpoint stays closed, and no product-quality result is claimed.
 
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
 the failed single AI Studio route with a bounded OpenRouter allowlist: Vertex
 global priority/default followed by AI Studio priority/default. The runner
 records the actual provider and service tier for every completed call while
-holding model identity fixed. Its 40-control network-free simulation passes;
-the live metadata-only preflight finds all four routes, at least two healthy
-endpoints, no model/price/policy drift, and the existing credential. No provider
-inference has occurred. Paid calibration, the sealed 200 cases, visual work,
-product execution, private data, and larger academic stages remain unauthorized.
+holding model identity fixed. Its network-free simulation and live preflight
+passed, but AFQC-031 records the live run as invalid after the third batch
+violated a deterministic semantic invariant. Only 8/40 Gemini votes were
+accepted, so no calibration metric is valid. No execution is now authorized.
+The immediate checkpoint is one reviewer-method decision, not another automatic
+model search. The sealed 200 cases, visual work, product execution, private data,
+and larger academic stages remain unauthorized.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
@@ -659,7 +661,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Attempts 001–004 remain unfavorable evidence; attempt 005 fixes only transport reliability with a four-route, fixed-model build and is provider-unauthorized; the 200-case panel stays sealed |
+| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Attempts 001–005 remain unfavorable invalid evidence; transport is no longer the blocker, but Gemini did not complete semantic calibration. Decide the reviewer method before opening the sealed 200-case panel |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
