@@ -17,11 +17,12 @@ post-generation claim validation. The visual track freezes ten tables, ten
 equations, ten original diagrams, balanced boundaries, and original-region
 citations. Gemini descriptions are question-independent and non-authoritative;
 facts not cleared deterministically require an explicit Codex-assisted audit.
-All network-free runners and failure paths are implemented. AFQC-020 now
-authorizes only corrective 40-control calibration attempt 002; the 200-case
-panel and the remaining visual and product checkpoints stay separately
-unauthorized. No result or professor message is claimed from the build
-simulations.
+All network-free runners and failure paths are implemented. Corrective
+40-control calibration attempt 002 stopped after the first Mistral batch
+returned HTTP 400. It is an invalid execution, all authority is revoked, and
+the 200-case panel plus the remaining visual and product checkpoints stay
+unauthorized. No product-quality result is claimed from the failed calibration
+or the build simulations.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
@@ -31,8 +32,7 @@ files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 75 protected entrypoints,
-with only `academic-factual-qa-confirmation-002` admitted for the bounded
-calibration. Manual review found material source-design
+with no bounded evaluation authorization currently active. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -191,10 +191,16 @@ boundary before any provider vote was accepted; DeepSeek and confirmation were
 never opened. Attempt 001 is therefore **invalid execution**, not a quality
 failure. Its authority is revoked under AFQC-018. The ledger's USD 0 is
 incomplete accounting rather than verified zero spend because the old failure
-path retained neither provider usage nor exact error detail. A separately
-authorized corrective attempt may follow only after that evidence path is
-hardened. Confirmation, product binding, researcher audit, private data,
-promotion, and the final tranche remain unauthorized.
+path retained neither provider usage nor exact error detail. After hardening
+that path, AFQC-020 authorized corrective attempt 002 at clean revision
+`d79bda5`. Its first Mistral batch again failed before any vote was accepted,
+this time with a durable sanitized HTTP 400 record, 1.437-second latency, and
+explicit unavailable usage/cost accounting. There was one provider call, zero
+retries, zero DeepSeek calls, and no confirmation access. Attempt 002 is also
+**invalid execution**, not a quality failure. AFQC-021 revokes all authority and
+requires a reviewer-method redesign rather than another Mistral retry.
+Confirmation, product binding, researcher audit, private data, promotion, and
+the final tranche remain unauthorized.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented

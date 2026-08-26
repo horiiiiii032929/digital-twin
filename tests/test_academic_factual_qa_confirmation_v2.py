@@ -20,13 +20,18 @@ def _write(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
-def test_llm_panel_protocol_authorizes_only_corrective_calibration() -> None:
+def test_llm_panel_protocol_preserves_invalid_attempt_with_authority_revoked() -> None:
     result = preflight(validate_instrument())
 
     assert result == {
         "instrument_id": "academic-factual-qa-confirmation-002",
-        "status": "ready",
-        "blockers": [],
+        "status": "blocked-build-only",
+        "blockers": [
+            "calibration-execution-authorized-false",
+            "codex-review-authorized-false",
+            "provider-review-authorized-false",
+            "paid-execution-authorized-false",
+        ],
         "planned_case_count": 200,
         "planned_cluster_count": 100,
         "planned_reviewer_count": 3,
@@ -97,9 +102,9 @@ def test_historical_human_review_protocol_remains_preserved() -> None:
         ("consensus_and_researcher_audit", "majority_vote_is_authoritative", True, "majority vote"),
         (
             "execution_safety",
-            "confirmation_execution_authorized",
+            "provider_review_authorized",
             True,
-            "calibration-only execution authority",
+            "invalid-attempt execution authorities",
         ),
     ],
 )
@@ -127,11 +132,11 @@ def test_reviewer_family_reuse_fails_closed(tmp_path: Path) -> None:
         validate_instrument(_write(tmp_path, mutated))
 
 
-def test_fresh_bindings_record_the_completed_isolated_codex_runtime() -> None:
+def test_fresh_bindings_remain_recorded_after_authority_revocation() -> None:
     instrument = validate_instrument()
 
     assert all(
         row["binding_fresh"] is True
         for row in instrument["reviewer_panel_contract"]["reviewers"]
     )
-    assert preflight(instrument)["status"] == "ready"
+    assert preflight(instrument)["status"] == "blocked-build-only"

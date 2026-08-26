@@ -638,10 +638,12 @@ Current utilities:
   identity checks, a conservative USD 1.563034 peak reservation, and a USD 3
   emergency stop. Use `npm run
   verify:academic-factual-qa-confirmation-v2-review-execution` and the simulated
-  command for no-call verification. Calibration attempt 001 is preserved as an
-  invalid one-call result and its authority is revoked. The corrected harness
-  records sanitized provider error, identity, usage, cost, and response hashes
-  before stopping without retry. A corrective calibration and confirmation each
+  command for no-call verification. Calibration attempts 001 and 002 are
+  preserved as invalid one-call Mistral results and their authority is revoked.
+  Attempt 002's corrected harness records sanitized HTTP/provider error,
+  latency, affected items, explicit unavailable usage/cost, and response hashes
+  before stopping without retry. The repeated operational failure requires a
+  reviewer-method redesign; any successor calibration and confirmation each
   require new separate authority.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,

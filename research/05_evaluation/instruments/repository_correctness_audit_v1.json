@@ -5,34 +5,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual binding review preserves current Codex, Mistral, and DeepSeek identities, exact Mistral ZDR/no-fallback routing, current peak pricing, the 24-hour freshness window, 120-call ceiling, and USD 3 stop while opening only calibration attempt 002.",
+      "evidence": "Manual binding review preserves the exact Codex, Mistral, and DeepSeek identities, routing, pricing, and bounds from invalid attempt 002 while revoking all execution authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "9cb1809a37808adbc949ea6a067b5f0a43c658d7a0691efce1d71523941b7b61"
+      "sha256": "cdaa2de8fa7918051a5a1d8a76df7d57d3c35de056d4590c2fd167b7cba75a44"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual execution-path review and tests preserve invalid attempt 001, enforce calibration-only authority and separate confirmation, and retain sanitized provider HTTP/error/request, returned usage/cost, and malformed-response hashes without retry.",
+      "evidence": "Manual execution-path review and tests preserve invalid attempts 001 and 002, enforce revoked authority and separate confirmation, and retain sanitized provider HTTP/error/request, usage/cost availability, and malformed-response hashes without retry.",
       "findings": [],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "1b3b81dc9206e8a6d08dc42e5e1fc913790fcecca4ed57cdabe68b0aa2ab789b"
+      "sha256": "8a49c8cd2d2bce73e2678541e13d10413bcbc00298d94e6fd701ed060c690a8f"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover binding identity, strict vote parsing, isolated task identity, calibration-only authorization preflight, separate phase authority, full simulation, malformed returned-usage accounting, and sanitized provider HTTP failure evidence without retry.",
+      "evidence": "Focused tests cover binding identity, strict vote parsing, isolated task identity, revoked invalid-attempt preflight, separate phase authority, full simulation, malformed returned-usage accounting, and sanitized provider HTTP failure evidence without retry.",
       "findings": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "c57472d99d5040fe38d266664ccc7fc17dc6a2fc8111c9f45f784ec50e2789ea"
+      "sha256": "b3a8f7646b1a65002bc776bf397ead4bbb8df9f5c72dcaa487c7f64b3c07a7d7"
     },
     {
       "audit_status": "audited",
@@ -1072,12 +1072,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Protocol review preserves deterministic truth, three-family calibration, unanimity, and bounded audit contracts while authorizing only corrective calibration attempt 002 and keeping confirmation unopened.",
+      "evidence": "Protocol review preserves deterministic truth, three-family calibration, unanimity, and bounded audit contracts while recording invalid attempt 002, revoking authority, and keeping confirmation unopened.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "52095c00222de875551380865aaa1435d33aa11bad681205d97e0f6dd68a1180"
+      "sha256": "7bc88e6ed1f97b6df680b8b7a1e5596f4fc0ab6a40b9cda89d57585bf02e12a9"
     },
     {
       "audit_status": "audited",
@@ -1127,12 +1127,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual validator review and drift tests enforce exact hashes, panel diversity, deterministic authority, calibration-only execution authority, and unopened confirmation.",
+      "evidence": "Manual validator review and drift tests enforce exact hashes, panel diversity, deterministic authority, revoked invalid-attempt authority, and unopened confirmation.",
       "findings": [],
       "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "e57ac43116820d102b91a98b1433cba3ac1b84907c88a05d861dcc875700ba7a"
+      "sha256": "d0e18ed5f7f42e7ed6b564190fb5aea9abaa997712fbf8185d6adb37d7b18ad1"
     },
     {
       "audit_status": "audited",
@@ -2260,12 +2260,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover deterministic truth, three-family review, calibration/audit bounds, exact bindings, completed isolated Codex calibration, calibration-only authority, and fail-closed confirmation.",
+      "evidence": "Focused tests cover deterministic truth, three-family review, calibration/audit bounds, exact bindings, completed isolated Codex calibration, revoked authority, and fail-closed confirmation.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_confirmation_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "5ca718608f21137f995c0a94818188dc6042476ab671ca00c0ac8bde7181f8e2"
+      "sha256": "3a2b8cd584bd0f1e0697f1efea94ef1fd00a7bc545ed10c0b8aa37dff171db3a"
     },
     {
       "audit_status": "audited",
@@ -4597,7 +4597,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "65d7166e0e9d9abd14502517f78bee4e7e7a64a6ad6ea41efbe6738dc05134eb"
+      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
     },
     {
       "audit_status": "audited",
@@ -4916,7 +4916,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "4c7f36341f83d785cce1d815c61063ef11914e5bb0727cecb5aa2962970d9435"
+      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
     },
     {
       "audit_status": "audited",
@@ -5890,12 +5890,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, calibration-only authority, and blocked confirmation paths.",
+      "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, revoked authority, and blocked confirmation paths.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "3ac4ba4de530d1447e2a1774b280a62878ebc1c0f00381a4fdbfd8a322df802e"
+      "sha256": "3c45e43b47d75af6a8e14bc2f0affd4411a349c91f040402cea69d88ed172c6b"
     },
     {
       "audit_status": "audited",
