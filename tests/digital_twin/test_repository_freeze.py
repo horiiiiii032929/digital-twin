@@ -33,7 +33,9 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
-    pilot_ids: set[str] = set()
+    pilot_ids = {
+        "academic-factual-qa-confirmation-002-calibration-attempt-005"
+    }
 
     for pilot_id in pilot_ids:
         require_bounded_pilot_operation_allowed(pilot_id)

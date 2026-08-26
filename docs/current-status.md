@@ -277,6 +277,15 @@ votes, zero later batches, and no confirmation access. Provider usage and cost
 were unavailable, so the ledger's USD 0 is not proof of zero charge. Authority
 is revoked, attempt 004 cannot be rerun, and the reviewer search is stopped.
 
+AFQC-029 records the fixed-model resilient transport successor. Attempt 005
+keeps the immutable 40/40 Codex votes and exact Gemini 3.7 Flash revision, but
+uses a bounded OpenRouter allowlist across Google Vertex global priority/default
+and Google AI Studio priority/default routes. AFQC-030 now freezes and authorizes
+only this 40-control calibration for at most ten primary calls plus two
+transport-only retries, a USD 0.3815424 reservation, and the existing USD 3
+emergency stop. The sealed 200 cases, visual and live-product evaluations,
+private data, and 600/10,000-case academic stages remain unauthorized.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
