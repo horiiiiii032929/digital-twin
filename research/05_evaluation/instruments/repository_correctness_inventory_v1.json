@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 552
+    "audited": 554
   },
   "category_counts": {
     "active_frontend": 68,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 121,
+    "evaluation_configuration": 123,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 113
   },
-  "file_count": 552,
+  "file_count": 554,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d90d532f64fd72e0ec3604516ef9484c2ec16dcc02638efe558b996a904914d6",
+  "record_sha256": "5783a7a950315c3291fb7790f5743b095312b17f986bc7931bf8fc3037e07578",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual command-surface review and focused panel tests verify attempt-004 validation, network-free simulation, metadata-only preflight, and guarded execution commands are explicit while paid calibration and every downstream stage remain outside the repository gate.",
+        "evidence": "Manual command-surface review and focused panel tests verify attempt-005 validation, network-free simulation, live metadata-only preflight, and guarded execution commands are explicit while paid calibration and every downstream stage remain outside the repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "7570a73eef04e8e3dab3cedae388912c05ec7a6be1305a94766dcb3612702cae"
+      "sha256": "b922aa19fe64beb3f6bc0dcf145f34fc7b9928fb363f3d4b2752673d427f0e6d"
     },
     {
       "audit": {
@@ -1576,6 +1576,22 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual attempt review verifies immutable controls and Codex votes, four bounded Google transport routes, two healthy endpoints required at preflight, complete route accounting, no DeepSeek role, calibration-only progression, and all provider authority false.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_005.json",
+      "risk": "high",
+      "sha256": "5a8d6cfeff18d971224215651f54cca3110b1fd8170b3bdcb079147b81bb2d61"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual binding review preserves the exact Codex, Mistral, and DeepSeek identities, routing, pricing, and bounds from invalid attempt 002 while revoking all execution authority.",
         "findings": [],
         "reviewed_at": "2026-08-26",
@@ -1620,6 +1636,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_003.json",
       "risk": "high",
       "sha256": "1921ccc2d2fcb631acf70602b8c248a2f6584707e66398b1c6c15f66dd7c3b7a"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual binding and live metadata review verify the fixed Gemini 3.7 Flash revision, Vertex global priority/default plus AI Studio priority/default allowlist, health-aware fallback, seeded shared parameter subset, per-route pricing and retention, and a conservative USD 0.3815424 reservation.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_004.json",
+      "risk": "high",
+      "sha256": "3013e8900d1d3ded6164ef4369ffa111f5cdb2525ff12ae936eca30b0347d67e"
     },
     {
       "audit": {
@@ -4090,7 +4122,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual execution-path review and focused tests preserve attempts 001-003 while adding a versioned two-reviewer sequence, fresh attempt-004 Gemini batches, transport-only bounded retries, complete failure accounting, stable identity, exact cost guards, and fail-closed authority without opening confirmation.",
+        "evidence": "Manual execution-path review and focused tests preserve attempts 001-004 while adding attempt-005 bounded OpenRouter failover across exact Google Vertex and AI Studio routes, seeded request compatibility, per-call route accounting, stable model identity, exact cost guards, and fail-closed authority without opening confirmation.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -4101,20 +4133,24 @@
       "package_commands": [
         "execute:academic-factual-qa-confirmation-v2-review-attempt-003",
         "execute:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "execute:academic-factual-qa-confirmation-v2-review-attempt-005",
         "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-003",
         "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-005",
         "preflight-live:academic-factual-qa-confirmation-v2-review-execution",
         "prepare:academic-factual-qa-confirmation-v2-codex-workspace",
         "simulate:academic-factual-qa-confirmation-v2-review-attempt-003",
         "simulate:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "simulate:academic-factual-qa-confirmation-v2-review-attempt-005",
         "simulate:academic-factual-qa-confirmation-v2-review-execution",
         "verify:academic-factual-qa-confirmation-v2-review-attempt-003",
         "verify:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "verify:academic-factual-qa-confirmation-v2-review-attempt-005",
         "verify:academic-factual-qa-confirmation-v2-review-execution"
       ],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "risk": "high",
-      "sha256": "aedfbf5f5595c836e1fefe101d2f3df9f905203390949613458c42f49d3b01dd"
+      "sha256": "8bbf2cd2f23f83e8c4e17f88aa75ed9fd7b4923124817edf0d9604b2ff540aa5"
     },
     {
       "audit": {
@@ -8391,7 +8427,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, retry eligibility and bounds, malformed output, identity drift, cost stops, resume, accounting, and no DeepSeek route in attempt 004.",
+        "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, bounded retries, malformed output, identity drift, cost stops, resume, and attempt-005 provider fallback with complete route accounting.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -8402,7 +8438,7 @@
       "package_commands": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "risk": "medium",
-      "sha256": "49db50cafdf625259ff9ecfaaeefd79547593a53cd422305cb7a12a3f5e709fd"
+      "sha256": "71a9474124a1df71bc3435b40908d24c03edc41f6c58896e284002978bba1754"
     },
     {
       "audit": {
@@ -9174,7 +9210,7 @@
     }
   ],
   "risk_counts": {
-    "high": 425,
+    "high": 427,
     "medium": 127
   },
   "schema_version": 1,

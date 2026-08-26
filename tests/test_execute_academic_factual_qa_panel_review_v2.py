@@ -12,6 +12,7 @@ import scripts.execute_academic_factual_qa_panel_review_v2 as panel_executor
 from scripts.execute_academic_factual_qa_panel_review_v2 import (
     ATTEMPT_003_PATH,
     ATTEMPT_004_PATH,
+    ATTEMPT_005_PATH,
     PanelExecutionError,
     ProviderBatchResult,
     ProviderCallFailure,
@@ -56,9 +57,7 @@ def test_reviewer_binding_freezes_current_models_routing_and_peak_cost() -> None
         "data_collection": "deny",
         "zdr": True,
     }
-    assert reviewers[REVIEWER_IDS[2]]["documented_revision"] == (
-        "DeepSeek-V4-Pro-0813"
-    )
+    assert reviewers[REVIEWER_IDS[2]]["documented_revision"] == ("DeepSeek-V4-Pro-0813")
     maximum = sum(
         _maximum_call_cost(binding, reviewer_id) * 60
         for reviewer_id in REVIEWER_IDS[1:]
@@ -117,6 +116,39 @@ def test_attempt_004_binding_has_only_codex_and_gemini_with_bounded_retries() ->
     } == {"OPENROUTER_API_KEY"}
 
 
+def test_attempt_005_binding_uses_bounded_google_high_availability_routes() -> None:
+    assets = load_assets(ATTEMPT_005_PATH)
+    binding = assets["binding"]
+    gemini = binding["reviewers"][1]
+
+    assert assets["reviewer_ids"] == TWO_REVIEWER_IDS
+    assert gemini["routing"] == {
+        "only": [
+            "google-vertex/global/priority",
+            "google-vertex/global",
+            "google-ai-studio/priority",
+            "google-ai-studio",
+        ],
+        "order": [
+            "google-vertex/global/priority",
+            "google-vertex/global",
+            "google-ai-studio/priority",
+            "google-ai-studio",
+        ],
+        "allow_fallbacks": True,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert gemini["runtime_provider_names"] == ["Google", "Google AI Studio"]
+    assert gemini["runtime_service_tiers"] == ["priority", "default"]
+    assert binding["execution_contract"]["minimum_healthy_endpoint_count"] == 2
+    assert binding["cost_guard"]["conservative_peak_reservation_usd"] == (
+        pytest.approx(0.3815424)
+    )
+    assert "deepseek" not in json.dumps(binding, sort_keys=True).lower()
+
+
 @pytest.mark.parametrize(
     ("error", "expected"),
     [
@@ -140,9 +172,7 @@ def test_attempt_004_retry_eligibility_is_transport_only(
 def test_every_frozen_batch_fits_the_conservative_input_limit() -> None:
     assets = load_assets()
     items = assets["packet"]["items"]
-    maximum = assets["binding"]["execution_contract"][
-        "maximum_input_tokens_per_call"
-    ]
+    maximum = assets["binding"]["execution_contract"]["maximum_input_tokens_per_call"]
 
     estimates = [
         estimate_input_tokens(items[index : index + 4])
@@ -250,7 +280,9 @@ def test_codex_workspace_contains_only_blinded_phase_packets(tmp_path: Path) -> 
         assert forbidden not in serialized
 
 
-def test_codex_phase_artifacts_require_one_constant_isolated_task(tmp_path: Path) -> None:
+def test_codex_phase_artifacts_require_one_constant_isolated_task(
+    tmp_path: Path,
+) -> None:
     assets = load_assets()
     calibration = tmp_path / "calibration.json"
     confirmation = tmp_path / "confirmation.json"
@@ -271,7 +303,9 @@ def test_codex_phase_artifacts_require_one_constant_isolated_task(tmp_path: Path
 
     changed = json.loads(confirmation.read_text())
     changed["task_id"] = "different-task"
-    without_hash = {key: value for key, value in changed.items() if key != "content_sha256"}
+    without_hash = {
+        key: value for key, value in changed.items() if key != "content_sha256"
+    }
     from scripts.build_academic_factual_qa_confirmation_v2 import canonical_sha256
 
     changed["content_sha256"] = canonical_sha256(without_hash)
@@ -307,9 +341,7 @@ def test_execution_command_rechecks_authority_before_a_provider_call(
 ) -> None:
     assets = load_assets()
     assets["instrument"]["status"] = "frozen-pending-execution"
-    assets["instrument"]["execution_safety"][
-        "calibration_execution_authorized"
-    ] = False
+    assets["instrument"]["execution_safety"]["calibration_execution_authorized"] = False
     codex = tmp_path / "codex-calibration.json"
     _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
 
@@ -336,9 +368,7 @@ def test_calibration_authority_does_not_require_confirmation_authority(
     ):
         assets["instrument"]["execution_safety"][key] = True
     assert (
-        assets["instrument"]["execution_safety"][
-            "confirmation_execution_authorized"
-        ]
+        assets["instrument"]["execution_safety"]["confirmation_execution_authorized"]
         is False
     )
     for key in (
@@ -393,9 +423,9 @@ def test_attempt_003_simulation_runs_two_canaries_then_stops_after_calibration(
 
     assert result["status"] == "completed-go-deeper"
     assert result["provider_calls"] == 20
-    assert [
-        row["reviewer_id"] for row in result["provider_call_records"][:2]
-    ] == list(GEMINI_REVIEWER_IDS[1:])
+    assert [row["reviewer_id"] for row in result["provider_call_records"][:2]] == list(
+        GEMINI_REVIEWER_IDS[1:]
+    )
     assert set(result["calibration"]) == set(GEMINI_REVIEWER_IDS)
     assert all(row["passed"] for row in result["calibration"].values())
     assert result["aggregate"] is None
@@ -413,12 +443,11 @@ def test_attempt_004_simulation_reruns_all_40_gemini_controls(
     assert result["recovered_transport_failure_count"] == 0
     assert set(result["calibration"]) == set(TWO_REVIEWER_IDS)
     assert all(row["passed"] for row in result["calibration"].values())
-    assert sum(
-        row["reviewer_id"] == TWO_REVIEWER_IDS[1] for row in result["votes"]
-    ) == 40
+    assert (
+        sum(row["reviewer_id"] == TWO_REVIEWER_IDS[1] for row in result["votes"]) == 40
+    )
     assert all(
-        "attempt-003" not in json.dumps(row)
-        for row in result["provider_call_records"]
+        "attempt-003" not in json.dumps(row) for row in result["provider_call_records"]
     )
 
 
@@ -465,9 +494,7 @@ class _ProviderErrorTransport:
 
 class _AttemptTransport:
     def __init__(self, *, identity_drift: bool = False) -> None:
-        _, ledger = build_simulated_ledger(
-            "pass", reviewer_ids=GEMINI_REVIEWER_IDS
-        )
+        _, ledger = build_simulated_ledger("pass", reviewer_ids=GEMINI_REVIEWER_IDS)
         self.ideal = {
             row["review_item_id"]: {
                 key: value for key, value in row.items() if key != "reviewer_id"
@@ -516,6 +543,7 @@ class _Attempt004Transport:
         *,
         failure_calls: dict[int, ProviderCallFailure] | None = None,
         quality_failure: bool = False,
+        provider_sequence: list[tuple[str, str | None]] | None = None,
     ) -> None:
         _, ledger = build_simulated_ledger("pass", reviewer_ids=TWO_REVIEWER_IDS)
         self.ideal = {
@@ -527,6 +555,7 @@ class _Attempt004Transport:
         }
         self.failure_calls = failure_calls or {}
         self.quality_failure = quality_failure
+        self.provider_sequence = provider_sequence or []
         self.calls = 0
 
     async def call(
@@ -544,19 +573,31 @@ class _Attempt004Transport:
         if self.quality_failure:
             for vote in votes:
                 vote["case_semantically_valid"] = False
+        option = reviewer.get("endpoint_options", [{}])[0]
+        provider_name, service_tier = (
+            self.provider_sequence[(self.calls - 1) % len(self.provider_sequence)]
+            if self.provider_sequence
+            else (
+                str(option.get("endpoint_provider") or reviewer["endpoint_provider"]),
+                option.get("service_tier"),
+            )
+        )
         return ProviderBatchResult(
             content=json.dumps({"votes": votes}),
             provider_model=str(reviewer["provider_model"]),
             provider_revision=str(reviewer.get("documented_revision")),
-            provider_name=str(reviewer["endpoint_provider"]),
+            provider_name=provider_name,
             input_tokens=500,
             output_tokens=250,
             cost_usd=0.001,
             latency_ms=1.0,
+            service_tier=service_tier,
         )
 
 
-def _transport_failure(category: str, *, status: int | None = None) -> ProviderCallFailure:
+def _transport_failure(
+    category: str, *, status: int | None = None
+) -> ProviderCallFailure:
     details: dict[str, object] = {
         "cost_accounting_status": "unavailable-transport-failure"
     }
@@ -583,12 +624,54 @@ def _run_attempt_004(
     )
 
 
+def _run_attempt_005(
+    tmp_path: Path, transport: _Attempt004Transport
+) -> dict[str, object]:
+    assets = load_assets(ATTEMPT_005_PATH)
+    codex = tmp_path / "codex-calibration-005.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+    return asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "ledger-005.json",
+            transport=transport,
+            simulation=True,
+            resume=False,
+        )
+    )
+
+
+def test_attempt_005_records_allowed_provider_fallback_without_identity_drift(
+    tmp_path: Path,
+) -> None:
+    result = _run_attempt_005(
+        tmp_path,
+        _Attempt004Transport(
+            provider_sequence=[
+                ("Google", "priority"),
+                ("Google AI Studio", "default"),
+            ]
+        ),
+    )
+
+    assert result["status"] == "completed-go-deeper"
+    assert result["provider_calls"] == 10
+    assert result["operational_gates"]["complete_route_accounting"] is True
+    assert {
+        (row["provider_name"], row["service_tier"])
+        for row in result["provider_call_records"]
+    } == {("Google", "priority"), ("Google AI Studio", "default")}
+    assert result["provider_identities"][TWO_REVIEWER_IDS[1]] == {
+        "provider_model": "google/gemini-3.7-flash",
+        "provider_revision": "google/gemini-3.7-flash-20260813",
+    }
+
+
 def test_attempt_004_valid_quality_failure_is_refine_without_retry(
     tmp_path: Path,
 ) -> None:
-    result = _run_attempt_004(
-        tmp_path, _Attempt004Transport(quality_failure=True)
-    )
+    result = _run_attempt_004(tmp_path, _Attempt004Transport(quality_failure=True))
 
     assert result["status"] == "completed-refine"
     assert result["provider_calls"] == 10
@@ -612,7 +695,9 @@ def test_attempt_004_recovers_two_distinct_transport_failures(
     assert result["transport_retry_count"] == 2
     assert result["recovered_transport_failure_count"] == 2
     assert [
-        row["retry_scheduled"] for row in result["provider_call_records"] if row["status"] == "failed"
+        row["retry_scheduled"]
+        for row in result["provider_call_records"]
+        if row["status"] == "failed"
     ] == [True, True]
 
 

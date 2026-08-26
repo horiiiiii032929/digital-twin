@@ -16,12 +16,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Manual execution-path review and focused tests preserve attempts 001-003 while adding a versioned two-reviewer sequence, fresh attempt-004 Gemini batches, transport-only bounded retries, complete failure accounting, stable identity, exact cost guards, and fail-closed authority without opening confirmation.",
+      "evidence": "Manual execution-path review and focused tests preserve attempts 001-004 while adding attempt-005 bounded OpenRouter failover across exact Google Vertex and AI Studio routes, seeded request compatibility, per-call route accounting, stable model identity, exact cost guards, and fail-closed authority without opening confirmation.",
       "findings": [],
       "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "aedfbf5f5595c836e1fefe101d2f3df9f905203390949613458c42f49d3b01dd"
+      "sha256": "8bbf2cd2f23f83e8c4e17f88aa75ed9fd7b4923124817edf0d9604b2ff540aa5"
     },
     {
       "audit_status": "audited",
@@ -60,6 +60,28 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual attempt review verifies immutable controls and Codex votes, four bounded Google transport routes, two healthy endpoints required at preflight, complete route accounting, no DeepSeek role, calibration-only progression, and all provider authority false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_005.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "5a8d6cfeff18d971224215651f54cca3110b1fd8170b3bdcb079147b81bb2d61"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
+      "evidence": "Manual binding and live metadata review verify the fixed Gemini 3.7 Flash revision, Vertex global priority/default plus AI Studio priority/default allowlist, health-aware fallback, seeded shared parameter subset, per-route pricing and retention, and a conservative USD 0.3815424 reservation.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_004.json",
+      "reviewed_at": "2026-08-26",
+      "reviewer": "codex-primary-review",
+      "sha256": "3013e8900d1d3ded6164ef4369ffa111f5cdb2525ff12ae936eca30b0347d67e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "academic-factual-qa-confirmation",
       "evidence": "Manual binding and live metadata review verify exact Gemini 3.7 Flash revision 20260813 on the standard Google AI Studio endpoint, fallback-disabled routing, public-only 55-day retention disclosure, direct DeepSeek V4 Pro, and the USD 0.406426 reservation.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_002.json",
@@ -71,12 +93,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, retry eligibility and bounds, malformed output, identity drift, cost stops, resume, accounting, and no DeepSeek route in attempt 004.",
+      "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, bounded retries, malformed output, identity drift, cost stops, resume, and attempt-005 provider fallback with complete route accounting.",
       "findings": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "49db50cafdf625259ff9ecfaaeefd79547593a53cd422305cb7a12a3f5e709fd"
+      "sha256": "71a9474124a1df71bc3435b40908d24c03edc41f6c58896e284002978bba1754"
     },
     {
       "audit_status": "audited",
@@ -951,12 +973,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual command-surface review and focused panel tests verify attempt-004 validation, network-free simulation, metadata-only preflight, and guarded execution commands are explicit while paid calibration and every downstream stage remain outside the repository gate.",
+      "evidence": "Manual command-surface review and focused panel tests verify attempt-005 validation, network-free simulation, live metadata-only preflight, and guarded execution commands are explicit while paid calibration and every downstream stage remain outside the repository gate.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "7570a73eef04e8e3dab3cedae388912c05ec7a6be1305a94766dcb3612702cae"
+      "sha256": "b922aa19fe64beb3f6bc0dcf145f34fc7b9928fb363f3d4b2752673d427f0e6d"
     },
     {
       "audit_status": "audited",
