@@ -55,9 +55,9 @@ professor-communication track.
    200 deterministic cases, 40 disjoint controls, one blinded three-family
    packet, and a separate 30-cluster/60-case visual supplement. The actual T0
    runner accepts only course ID and question and opens gold only after every
-   response is durable. Corrective calibration is the next checkpoint; panel,
-   Gemini qualification, visual pilot, and live T0 execution remain separately
-   unauthorized.
+   response is durable. Corrective calibration attempt 002 is now the only
+   bounded authorization; the panel, Gemini qualification, visual pilot, and
+   live T0 execution remain separately unauthorized.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

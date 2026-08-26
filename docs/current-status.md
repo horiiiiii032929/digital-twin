@@ -17,9 +17,11 @@ post-generation claim validation. The visual track freezes ten tables, ten
 equations, ten original diagrams, balanced boundaries, and original-region
 citations. Gemini descriptions are question-independent and non-authoritative;
 facts not cleared deterministically require an explicit Codex-assisted audit.
-All network-free runners and failure paths are implemented, while each of the
-five paid checkpoints remains separately unauthorized. No result or professor
-message is claimed from these build simulations.
+All network-free runners and failure paths are implemented. AFQC-020 now
+authorizes only corrective 40-control calibration attempt 002; the 200-case
+panel and the remaining visual and product checkpoints stay separately
+unauthorized. No result or professor message is claimed from the build
+simulations.
 
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
@@ -29,7 +31,8 @@ files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 75 protected entrypoints,
-with no prospective evaluation currently authorized. Manual review found material source-design
+with only `academic-factual-qa-confirmation-002` admitted for the bounded
+calibration. Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual

@@ -34,8 +34,8 @@ PREDECESSOR_INSTRUMENT = (
 )
 DECISION_LOG = ROOT / "research/00_admin/decision-log.md"
 INSTRUMENT_ID = "academic-factual-qa-confirmation-002"
-STATUS = "corrective-calibration-attempt-002-prepared-authorization-required"
-DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 20))
+STATUS = "frozen-pending-execution"
+DECISION_IDS = tuple(f"AFQC-{index:03d}" for index in range(7, 21))
 REVIEWER_IDS = (
     "codex-isolated-task-blinded-reviewer",
     "mistral-small-4-blinded-reviewer",
@@ -199,7 +199,7 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
     _require(
         reviewers[0]["provider_model"] == "gpt-5.6-sol"
         and reviewers[0]["reasoning_effort"] == "medium"
-        and reviewers[0]["runtime_identity_verification_pending"] is True,
+        and reviewers[0]["runtime_identity_verification_pending"] is False,
         "Codex runtime binding drifted",
     )
     _require(
@@ -323,8 +323,14 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
         "review cost guard drifted",
     )
     _require(
-        all(value is False for value in binding_artifact["authorization"].values()),
-        "binding artifact authority must remain revoked",
+        binding_artifact["authorization"]
+        == {
+            "codex_review_authorized": True,
+            "provider_review_authorized": True,
+            "paid_execution_authorized": True,
+            "confirmation_review_authorized": False,
+        },
+        "binding artifact calibration authority drifted",
     )
 
     analysis = instrument["analysis_plan"]
@@ -344,8 +350,22 @@ def validate_instrument(path: Path = DEFAULT_INSTRUMENT) -> dict[str, Any]:
 
     safety = instrument["execution_safety"]
     _require(
-        all(value is False for value in safety.values()),
-        "invalid-attempt execution authorities must remain revoked",
+        safety
+        == {
+            "source_download_authorized": False,
+            "question_construction_authorized": False,
+            "calibration_execution_authorized": True,
+            "codex_review_authorized": True,
+            "provider_review_authorized": True,
+            "paid_execution_authorized": True,
+            "private_source_execution_authorized": False,
+            "confirmation_execution_authorized": False,
+            "researcher_audit_authorized": False,
+            "final_execution_authorized": False,
+            "product_binding_authorized": False,
+            "automatic_promotion": False,
+        },
+        "calibration-only execution authority drifted",
     )
     build = instrument["build_checkpoint"]
     _require(
@@ -442,7 +462,7 @@ def main() -> int:
     result = (
         {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-corrective-calibration-002-prepared-authorization-required",
+            "status": "validated-frozen-pending-calibration-execution",
         }
         if args.validate
         else preflight(instrument)

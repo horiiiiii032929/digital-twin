@@ -1260,7 +1260,7 @@ def main() -> int:
     if args.validate:
         result = {
             "instrument_id": INSTRUMENT_ID,
-            "status": "validated-corrective-calibration-002-prepared-authorization-required",
+            "status": "validated-frozen-pending-calibration-execution",
             "binding_sha256": assets["binding"]["content_sha256"],
             "maximum_provider_calls": 120,
             "provider_or_model_calls": 0,

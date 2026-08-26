@@ -166,7 +166,7 @@ def test_codex_phase_artifacts_require_one_constant_isolated_task(tmp_path: Path
         )
 
 
-def test_network_free_preflight_preserves_revoked_invalid_attempt(
+def test_network_free_preflight_recognizes_calibration_only_authority(
     tmp_path: Path,
 ) -> None:
     result = build_preflight(
@@ -174,9 +174,9 @@ def test_network_free_preflight_preserves_revoked_invalid_attempt(
     )
 
     assert result["status"] == "blocked-not-authorized"
-    assert "calibration-execution-not-authorized" in result["blockers"]
-    assert "bounded-freeze-authorization-missing" in result["blockers"]
-    assert "instrument-not-frozen-for-execution" in result["blockers"]
+    assert "calibration-execution-not-authorized" not in result["blockers"]
+    assert "bounded-freeze-authorization-missing" not in result["blockers"]
+    assert "instrument-not-frozen-for-execution" not in result["blockers"]
     assert "reviewer-metadata-not-current" in result["blockers"]
     assert "codex-calibration-votes-missing" in result["blockers"]
     assert result["provider_or_model_calls"] == 0
