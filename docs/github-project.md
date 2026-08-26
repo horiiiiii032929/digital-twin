@@ -56,11 +56,11 @@ professor-communication track.
    packet, and a separate 30-cluster/60-case visual supplement. The actual T0
    runner accepts only course ID and question and opens gold only after every
    response is durable. Corrective calibration attempt 002 is preserved as an
-   invalid one-call Mistral HTTP 400 result. Attempt 003 now replaces only that
-   reviewer slot with exact Gemini 3.7 Flash through Google AI Studio, passes
-   the complete 20-call network-free calibration simulation, and has a clean
-   metadata-only live preflight. Paid calibration, the 200-case panel, visual
-   pilot, and live T0 execution remain separately controlled.
+   invalid one-call Mistral HTTP 400 result. Attempt 003 replaced only that
+   reviewer slot with exact Gemini 3.7 Flash through Google AI Studio. Its live
+   run is also invalid: Gemini completed the first canary, but direct DeepSeek
+   returned empty content on the second canary. Authority is revoked; the
+   200-case panel, visual pilot, and live T0 execution remain closed.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

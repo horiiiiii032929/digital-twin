@@ -32,7 +32,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_003.json",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "e93f051d3fc59fd1467fde1f4b4c446e3177470cd66e894506e2e8a048203ad2"
+      "sha256": "21e5a763f160d7b657e56ca2f401f408c8da4bdd9c1dda8ecbc902b733e785b2"
     },
     {
       "audit_status": "audited",
@@ -43,7 +43,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_002.json",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "aeb600dc4324c3dcb1f2fc2c41bbc4da739f1d757dbe4a7187ef6948f060cf59"
+      "sha256": "5cd211cab442f2a34f5bc32979bbe2af52fdc5bc1062ed9cf799490edafe9630"
     },
     {
       "audit_status": "audited",
@@ -4619,7 +4619,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "994ee76c1fa1a1e0fcedd7ead950556f0a69587dbc0c1dc66301bd7e04121091"
+      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
     },
     {
       "audit_status": "audited",
@@ -4938,7 +4938,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "743d4c07afc6cd54af3ca878bea82066d25f5275956f3c931813dfa4aea23b23"
+      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
     },
     {
       "audit_status": "audited",

@@ -236,6 +236,16 @@ reservation, and USD 3 emergency stop. The 200-case panel, visual work, live T0
 product execution, private data, and 600/10,000-case stages remain locked. This
 authority must be revoked after a pass, quality failure, or invalid execution.
 
+AFQC-025 records attempt 003 as **invalid execution** and revokes AFQC-024.
+Gemini completed its four-control canary through the exact Google AI Studio
+route, reporting 2,656 input tokens, 1,551 output tokens, 5.193 seconds, and USD
+0.00780825. The direct DeepSeek V4 Pro canary then returned empty content. The
+runner stopped after two calls with zero retries and zero bulk calls; all 200
+confirmation cases remained sealed. DeepSeek usage and cost are unavailable,
+so the Gemini amount is known partial cost rather than complete accounting.
+This result supports no reviewer, factual-QA, product, or release-quality claim.
+No evaluation execution is currently authorized.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,

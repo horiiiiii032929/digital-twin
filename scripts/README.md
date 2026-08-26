@@ -653,8 +653,10 @@ Current utilities:
   `npm run simulate:academic-factual-qa-confirmation-v2-review-attempt-003`,
   and the separately authorized live preflight/execute commands. Attempt 003
   permits at most 20 calls, zero retries, USD 0.406426 conservative reservation,
-  and the existing USD 3 emergency stop; it never opens the 200-case panel.
-  Any later 200-case confirmation requires new separate authority.
+  and the existing USD 3 emergency stop; it never opens the 200-case panel. Its
+  live run is preserved as invalid after Gemini completed the first canary and
+  direct DeepSeek returned empty content on the second. Authority is revoked;
+  any successor calibration and later confirmation require separate decisions.
 - `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
   separate 30-cluster/60-case public visual supplement. It freezes ten tables,
   ten equations, ten original diagrams, one answerable and one balanced
