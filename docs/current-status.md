@@ -203,14 +203,17 @@ Confirmation, product binding, researcher audit, private data, promotion, and
 the final tranche remain unauthorized.
 
 AFQC-022 records the prospective successor research decision. OpenRouter
-Gemini 3.7 Flash revision `20260813` is the build-only default because it is a
-separate model family, currently inexpensive, supports structured output, and
-can also serve the later visual qualification. The transport must use only the
-documented Gemini JSON-Schema subset and move uniqueness plus full semantic
-validation into deterministic local code. Qwen remains rejected by
-qualification 007; Gemini 3.6 and Kimi remain fallbacks. This decision
-authorizes no provider call. Current promotional pricing and endpoint metadata
-must be refreshed within 24 hours of any separately authorized execution.
+Gemini 3.7 Flash revision `20260813` through Google AI Studio is the build-only
+default because it is a separate model family, currently reports 99.94% uptime,
+1.71-second median latency, and 193 tokens/second, supports structured output,
+and can also serve the later visual qualification. Google Vertex is cheaper but
+currently slower and less available. The transport must use only the documented
+Gemini JSON-Schema subset and move uniqueness plus full semantic validation
+into deterministic local code. Qwen remains rejected by qualification 007;
+Gemini 3.6 and Kimi remain fallbacks. Current conservative reservations are
+USD 0.406 for calibration and USD 2.44 for the complete panel. This decision
+authorizes no provider call. Promotional pricing and endpoint metadata must be
+refreshed within 24 hours of any separately authorized execution.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented

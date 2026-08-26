@@ -16,10 +16,10 @@ diversity and an auditable structured-output contract?
 
 Use OpenRouter `google/gemini-3.7-flash`, exact documented revision
 `google/gemini-3.7-flash-20260813`, as the prospective third-family reviewer.
-Pin a Google-operated endpoint, require every request parameter, prohibit
-cross-vendor fallback, and record the returned provider/model identity. Keep
-DeepSeek V4 Pro as the other provider reviewer and reuse the immutable 40/40
-Codex calibration votes.
+Pin Google AI Studio, require every request parameter, prohibit cross-vendor
+fallback, and record the returned provider/model identity. Keep DeepSeek V4
+Pro as the other provider reviewer and reuse the immutable 40/40 Codex
+calibration votes.
 
 This selection is prospective. It does not authorize a canary, calibration,
 200-case panel, visual run, product run, or later academic tranche.
@@ -29,12 +29,14 @@ This selection is prospective. It does not authorize a canary, calibration,
 The live OpenRouter registry reported:
 
 - Gemini 3.7 Flash: 1,048,576-token context, 65,536-token maximum completion,
-  structured outputs, and current model-level prices of USD 0.375/M input and
-  USD 1.875/M output tokens.
-- The public model page reported 100% three-day uptime and 99.90% three-day
-  availability. The Google AI Studio endpoint reported 99.9768% uptime over
-  its live 30-minute window when checked; this short-window observation is
-  operational context, not a durable quality claim.
+  and structured outputs. The cheapest current Google Vertex route is USD
+  0.375/M input and USD 1.875/M output, while the selected Google AI Studio
+  route is USD 0.75/M input and USD 3.75/M output.
+- The refreshed public model page reported 100% three-day uptime and 99.94%
+  three-day availability. Google AI Studio reported 99.94% provider uptime,
+  1.71-second median latency, and 193 output tokens/second, versus 99.63%, 2.17
+  seconds, and 64 tokens/second for Google Vertex. The higher-cost AI Studio
+  route is selected for operational stability and speed, not minimum price.
 - Gemini 3.6 Flash supports the same relevant parameters but costs USD 0.75/M
   input and USD 3.75/M output. It is retained only as a fallback candidate.
 - Qwen3.7 Plus is cheaper and operationally available, but repository
@@ -73,17 +75,17 @@ the deterministic truth, cases, controls, gates, or product method.
 
 ## Cost bound
 
-At the current model-level prices and the frozen maximum of 8,192 input plus
-3,072 output tokens per call:
+At the selected Google AI Studio prices and the frozen maximum of 8,192 input
+plus 3,072 output tokens per call:
 
-- Gemini maximum reservation is USD 0.008832 per call;
-- ten Gemini calibration batches reserve USD 0.08832;
+- Gemini maximum reservation is USD 0.017664 per call;
+- ten Gemini calibration batches reserve USD 0.17664;
 - ten DeepSeek calibration batches retain their existing USD 0.229786 maximum;
 - total 40-control provider calibration reservation is approximately USD
-  0.318106 before any pricing change.
+  0.406426 before any pricing change.
 
 A later complete calibration-plus-200-case panel would reserve approximately
-USD 1.91 at current prices. This is informational only. The emergency stop and
+USD 2.44 at current prices. This is informational only. The emergency stop and
 reservation must be recomputed after the mandatory live metadata refresh.
 
 ## Evidence and claim boundary
