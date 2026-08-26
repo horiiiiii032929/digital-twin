@@ -56,8 +56,8 @@ professor-communication track.
    and source-range scoring contracts across T0, T1/T2, HTTP, and any-hit flows.
    Its source inventory proves the originally requested networking and
    data-structures allocation impossible under the five-per-section cap. A
-   deterministic feasible 2,100-cluster correction is build-verified but awaits
-   researcher approval. Dataset construction, the 500-case development run,
+   deterministic feasible 2,100-cluster correction is build-verified and frozen
+   under AFQC-034. Dataset construction, the 500-case development run,
    and the 10,000-case final run remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

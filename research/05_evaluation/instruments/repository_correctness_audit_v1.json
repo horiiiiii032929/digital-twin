@@ -16,12 +16,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual source-capacity, allocation, non-overlap, modality, hash, write-guard, and no-call preflight review; focused builder tests and the 2,100-cluster network-free validation passed.",
+      "evidence": "Manual source-capacity, frozen AFQC-034 allocation, non-overlap, modality, hash, write-guard, and no-call preflight review; focused builder tests and the 2,100-cluster network-free validation passed while execution authority remained false.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "288c3b202cfd7ce067530755f0c323658e974abdd552c5c6e8311e5b8c0b43b9"
+      "sha256": "62fe51efe656f956bea7967d69be40b21bc424a82f43ee5ea4df66ee3d27946e"
     },
     {
       "audit_status": "audited",
@@ -32,7 +32,7 @@
       "path": "scripts/build_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "e6c9354c27a479323330cb20c942927073c44afe21c7cf2a528a89b026d2e8ad"
+      "sha256": "1fe23fbf1eca0e84bd7e9cabac1a074019158097a21fb387341d61f7a40c815a"
     },
     {
       "audit_status": "audited",
@@ -104,12 +104,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Focused tests verify requested-allocation rejection, feasible corrected allocation, deterministic 2,100-cluster plan, course and slice distributions, modality binding, reuse limits, non-overlap, and blocked paid preflight.",
+      "evidence": "Focused tests verify requested-allocation rejection, frozen feasible allocation, deterministic 2,100-cluster plan, course and slice distributions, modality binding, reuse limits, non-overlap, and separately blocked construction and paid preflight.",
       "findings": [],
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "3e20bb3678552cd1c09adc5bed15534d07b0073d5343177f60e910aa2a59f14e"
+      "sha256": "3c32154ea651e8b279af126b50617c0b83157536a72ed4236a19a8e9f1debbc5"
     },
     {
       "audit_status": "audited",
@@ -236,12 +236,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-confirmation",
-      "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, bounded retries, malformed output, identity drift, cost stops, resume, and attempt-005 provider fallback with complete route accounting.",
+      "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, bounded retries, malformed output, identity drift, cost stops, resume, and attempt-005 provider fallback with complete route accounting. The isolated authority test now freezes binding age explicitly so wall-clock expiry cannot make it flaky.",
       "findings": [],
       "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
-      "sha256": "71a9474124a1df71bc3435b40908d24c03edc41f6c58896e284002978bba1754"
+      "sha256": "ab391a1979084bfc8755351d07eb745eb635f0f338e29a1dcace082e1abbff31"
     },
     {
       "audit_status": "audited",

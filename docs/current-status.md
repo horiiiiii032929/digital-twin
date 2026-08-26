@@ -24,9 +24,11 @@ was weakened. The tested feasible correction is 400 operating-systems, 450
 networking, 350 data-structures, and 900 Python clusters including 25
 development clusters per course. It produces exactly 2,100 non-overlapping
 source windows and 10,500 prospective cases with the requested code, equation,
-table, answerable, and boundary strata. The allocation remains pending
-researcher approval. Dataset construction, the 500-case paid development run,
-and the sealed 10,000-case run are unauthorized.
+table, answerable, and boundary strata. AFQC-034 freezes this correction because
+it preserves the academically important source-diversity cap instead of
+inflating the row count through repeated use of a few sections. Dataset
+construction, the 500-case paid development run, and the sealed 10,000-case run
+remain unauthorized.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker

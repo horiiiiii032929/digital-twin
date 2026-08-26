@@ -464,7 +464,7 @@ def build_recommended_source_plan() -> dict[str, Any]:
         "allocation": {
             "development": DEVELOPMENT_ALLOCATION,
             "final": RECOMMENDED_FINAL_ALLOCATION,
-            "researcher_approved": False,
+            "researcher_approved": True,
         },
         "cluster_count": len(clusters),
         "case_count_after_accepted_generation": len(clusters) * 5,
@@ -480,7 +480,7 @@ def build_recommended_source_plan() -> dict[str, Any]:
 def validate_design() -> dict[str, Any]:
     instrument = _load_instrument()
     report = feasibility_report()
-    if instrument["allocation"]["status"] != "pending-researcher-decision":
+    if instrument["allocation"]["status"] != "frozen-approved":
         raise OpenBenchmarkBuildError("unexpected allocation status")
     if report["requested_feasible"]:
         raise OpenBenchmarkBuildError("requested allocation unexpectedly became feasible")
@@ -503,7 +503,7 @@ def validate_design() -> dict[str, Any]:
         ranges[key].append(candidate)
     return {
         **report,
-        "status": "passed-build-only-allocation-pending",
+        "status": "passed-build-only-allocation-frozen",
         "prospective_cluster_count": plan["cluster_count"],
         "prospective_case_count": plan["case_count_after_accepted_generation"],
         "source_plan_sha256": plan["content_sha256"],

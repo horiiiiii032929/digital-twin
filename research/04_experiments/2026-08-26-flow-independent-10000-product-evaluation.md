@@ -54,8 +54,8 @@ The source scan identified a preregistration correction before data creation:
 
 The recommendation yields exactly 2,100 non-overlapping source windows and has
 enough source-matched windows for 735 code, 262 equation, and 53 table clusters
-across development and final splits. It remains explicitly unapproved until the
-researcher confirms the correction.
+across development and final splits. AFQC-034 freezes this allocation while
+retaining the source-diversity cap; execution authority remains separate.
 
 ## Product comparison
 
@@ -88,8 +88,8 @@ required for `completed-keep`.
 
 ## Stop points
 
-1. Approve the feasible course allocation and separately authorize dataset
-   construction plus the 500-case development run.
+1. Separately authorize dataset construction plus the 500-case development run
+   against the AFQC-034 frozen allocation.
 2. Review the development result and projected cost. Only a complete pass can
    request separate authorization for the sealed 10,000-case run.
 3. Do not tune and rerun against the same final set after a valid quality

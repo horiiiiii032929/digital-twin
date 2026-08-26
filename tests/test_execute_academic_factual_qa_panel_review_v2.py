@@ -384,6 +384,7 @@ def test_calibration_authority_does_not_require_confirmation_authority(
         {panel_executor.INSTRUMENT_ID: ("external_model_evaluation",)},
     )
     monkeypatch.setattr(panel_executor, "live_metadata_failures", lambda _: [])
+    monkeypatch.setattr(panel_executor, "binding_age_hours", lambda _: 0.0)
     monkeypatch.setattr(panel_executor, "_working_tree_dirty", lambda: False)
     monkeypatch.setenv("OPENROUTER_API_KEY", "present")
     monkeypatch.setenv("DEEPSEEK_API_KEY", "present")

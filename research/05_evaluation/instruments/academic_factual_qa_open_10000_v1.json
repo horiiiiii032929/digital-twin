@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-v1",
-  "status": "draft-build-only-allocation-decision-required",
+  "status": "frozen-allocation-pending-execution-authorization",
   "owner_issue": 127,
   "decision_question": "Can the selected T0 Digital Twin retrieve, answer, cite, and abstain over 10,000 source-linked questions without gold leakage?",
   "claim_scope": {
@@ -34,7 +34,9 @@
     "final_split_opened_for_development": false
   },
   "allocation": {
-    "status": "pending-researcher-decision",
+    "status": "frozen-approved",
+    "approved_at": "2026-08-26",
+    "approval_record": "AFQC-034",
     "requested_final": {
       "operating-systems": 100,
       "computer-networking": 1050,
@@ -62,7 +64,7 @@
       "python-programming": 900
     },
     "selection_rule": "course-stratified deterministic selection, first cluster per section before reuse, then successive disjoint windows up to five",
-    "freeze_requirement": "The allocation status must become frozen-approved before source-plan writing or provider execution."
+    "freeze_requirement": "Satisfied by AFQC-034. Any allocation change requires a versioned successor before source-plan writing or provider execution."
   },
   "final_case_distribution": {
     "actions": {
