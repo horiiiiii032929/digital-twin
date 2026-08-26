@@ -43,7 +43,15 @@ GEMINI_REVIEWER_IDS = (
     "gemini-3.7-flash-blinded-reviewer",
     "deepseek-v4-pro-blinded-reviewer",
 )
-VALID_REVIEWER_IDS = frozenset(REVIEWER_IDS) | frozenset(GEMINI_REVIEWER_IDS)
+TWO_REVIEWER_IDS = (
+    "codex-isolated-task-blinded-reviewer",
+    "gemini-3.7-flash-blinded-reviewer",
+)
+VALID_REVIEWER_IDS = (
+    frozenset(REVIEWER_IDS)
+    | frozenset(GEMINI_REVIEWER_IDS)
+    | frozenset(TWO_REVIEWER_IDS)
+)
 VALID_ACTIONS = {"answer", "abstain", "clarify", "refuse"}
 VALID_CLAIM_SUPPORT = {
     "fully-supported",
@@ -331,8 +339,10 @@ def aggregate_panel(
     *,
     ledger: dict[str, Any],
     packet: dict[str, Any],
-    reviewer_ids: tuple[str, str, str] = REVIEWER_IDS,
+    reviewer_ids: tuple[str, ...] = REVIEWER_IDS,
 ) -> dict[str, Any]:
+    if len(reviewer_ids) < 2 or len(reviewer_ids) != len(set(reviewer_ids)):
+        raise PanelReviewError("panel requires at least two unique reviewers")
     case_truth, control_truth = _truth_maps()
     malformed = ledger["malformed_response_count"]
     by_reviewer: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -358,7 +368,7 @@ def aggregate_panel(
             "malformed_response_count": malformed,
             "calibration": calibration_metrics,
         }
-    if len(passing_reviewers) != 3:
+    if len(passing_reviewers) != len(reviewer_ids):
         return {
             "status": "panel-calibration-failed",
             "passing_reviewer_count": len(passing_reviewers),
@@ -370,7 +380,9 @@ def aggregate_panel(
         for vote in by_reviewer[reviewer_id]:
             if vote["review_item_id"] in case_truth:
                 votes_by_item[vote["review_item_id"]].append(vote)
-    if len(votes_by_item) != 200 or any(len(rows) != 3 for rows in votes_by_item.values()):
+    if len(votes_by_item) != 200 or any(
+        len(rows) != len(reviewer_ids) for rows in votes_by_item.values()
+    ):
         return {
             "status": "invalid-execution",
             "reason": "incomplete-confirmation-coverage",
@@ -398,20 +410,23 @@ def aggregate_panel(
     rng.shuffle(unanimous_boundary)
     seeded_audit = unanimous_answerable[:10] + unanimous_boundary[:10]
     researcher_ids = disagreements + seeded_audit
-    status = (
-        "panel-disagreement-overflow"
-        if len(disagreements) > 40
-        else "ready-researcher-audit"
-    )
+    agreement_rate = len(unanimous) / 200
+    alpha = _nominal_alpha(action_rows)
+    status = "ready-researcher-audit"
+    if len(disagreements) > 40:
+        status = "panel-disagreement-overflow"
+    elif agreement_rate < 0.8 or alpha < 0.67:
+        status = "panel-agreement-gate-failed"
     return {
         "status": status,
         "calibration": calibration_metrics,
-        "passing_reviewer_count": 3,
+        "passing_reviewer_count": len(reviewer_ids),
+        "reviewer_ids": list(reviewer_ids),
         "confirmation_case_count": 200,
         "unanimous_case_count": len(unanimous),
-        "unanimous_semantic_agreement_rate": len(unanimous) / 200,
+        "unanimous_semantic_agreement_rate": agreement_rate,
         "disagreement_case_count": len(disagreements),
-        "action_krippendorff_alpha": _nominal_alpha(action_rows),
+        "action_krippendorff_alpha": alpha,
         "researcher_packet_case_count": len(researcher_ids),
         "researcher_packet_review_item_ids": researcher_ids,
         "researcher_packet_bounded": len(researcher_ids) <= 60,
@@ -442,7 +457,7 @@ def build_researcher_packet(
     cases = []
     for review_id in review_ids:
         item_votes = sorted(votes[review_id], key=lambda row: row["reviewer_id"])
-        if len(item_votes) != 3:
+        if len(item_votes) != aggregate["passing_reviewer_count"]:
             raise PanelReviewError("researcher packet is missing immutable reviewer votes")
         cases.append(
             {
@@ -476,7 +491,7 @@ def build_researcher_packet(
 def build_simulated_ledger(
     scenario: str,
     *,
-    reviewer_ids: tuple[str, str, str] = REVIEWER_IDS,
+    reviewer_ids: tuple[str, ...] = REVIEWER_IDS,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     packet = _load(PACKET_PATH)
     validate_packet(packet)
@@ -504,7 +519,7 @@ def build_simulated_ledger(
                 if reviewer_id == reviewer_ids[0]:
                     confirmation_index += 1
                 item_position = list(case_truth).index(item["review_item_id"]) if item["review_item_id"] in case_truth else -1
-                if scenario == "disagreement-overflow" and reviewer_id == reviewer_ids[2] and item_position < 41:
+                if scenario == "disagreement-overflow" and reviewer_id == reviewer_ids[-1] and item_position < 41:
                     vote["expected_action"] = "clarify" if vote["expected_action"] != "clarify" else "abstain"
             if scenario == "malformed" and reviewer_id == reviewer_ids[1] and item == packet["items"][0]:
                 ledger["malformed_response_count"] += 1

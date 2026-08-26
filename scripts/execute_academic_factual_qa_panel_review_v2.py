@@ -34,6 +34,7 @@ from scripts.run_academic_factual_qa_panel_review_v2 import (
     GEMINI_REVIEWER_IDS,
     PanelReviewError,
     REVIEWER_IDS,
+    TWO_REVIEWER_IDS,
     _calibration_metrics,
     _load,
     _truth_maps,
@@ -65,10 +66,16 @@ BINDING_PATH = (
     "academic_factual_qa_confirmation_002_reviewer_bindings.json"
 )
 ATTEMPT_003_ID = "academic-factual-qa-confirmation-002-calibration-attempt-003"
+ATTEMPT_004_ID = "academic-factual-qa-confirmation-002-calibration-attempt-004"
 ATTEMPT_003_PATH = (
     ROOT
     / "research/05_evaluation/instruments/"
     "academic_factual_qa_confirmation_002_calibration_attempt_003.json"
+)
+ATTEMPT_004_PATH = (
+    ROOT
+    / "research/05_evaluation/instruments/"
+    "academic_factual_qa_confirmation_002_calibration_attempt_004.json"
 )
 DEFAULT_LEDGER_PATH = (
     ROOT
@@ -78,6 +85,11 @@ ATTEMPT_003_LEDGER_PATH = (
     ROOT
     / "reports/generated/"
     "academic-factual-qa-confirmation-002-calibration-attempt-003-ledger.json"
+)
+ATTEMPT_004_LEDGER_PATH = (
+    ROOT
+    / "reports/generated/"
+    "academic-factual-qa-confirmation-002-calibration-attempt-004-ledger.json"
 )
 DEFAULT_RESEARCHER_PACKET_PATH = (
     ROOT
@@ -104,6 +116,12 @@ class ProviderCallFailure(PanelExecutionError):
         super().__init__(category)
         self.category = category
         self.details = details
+
+
+RETRYABLE_HTTP_STATUSES = frozenset({429, 500, 501, 502, 503, 504})
+RETRYABLE_PROVIDER_CATEGORIES = frozenset(
+    {"provider-timeout", "provider-connection-failure", "provider-empty-content"}
+)
 
 
 @dataclass(frozen=True)
@@ -156,29 +174,67 @@ def load_binding(path: Path = BINDING_PATH) -> dict[str, Any]:
     )
     if binding.get("content_sha256") != expected_hash:
         raise PanelExecutionError("reviewer binding content hash drifted")
-    if binding.get("instrument_id") not in {INSTRUMENT_ID, ATTEMPT_003_ID}:
+    if binding.get("instrument_id") not in {
+        INSTRUMENT_ID,
+        ATTEMPT_003_ID,
+        ATTEMPT_004_ID,
+    }:
         raise PanelExecutionError("reviewer binding instrument drifted")
     if binding.get("maximum_age_hours_for_execution") != 24:
         raise PanelExecutionError("reviewer binding freshness window drifted")
     contract = binding["execution_contract"]
     reviewers = {row["reviewer_id"]: row for row in binding["reviewers"]}
     reviewer_ids = tuple(reviewers)
-    if reviewer_ids not in {REVIEWER_IDS, GEMINI_REVIEWER_IDS}:
+    if reviewer_ids not in {REVIEWER_IDS, GEMINI_REVIEWER_IDS, TWO_REVIEWER_IDS}:
         raise PanelExecutionError("reviewer binding order or identity drifted")
-    maximum_calls = 20 if reviewer_ids == GEMINI_REVIEWER_IDS else 120
+    if reviewer_ids == TWO_REVIEWER_IDS:
+        expected_limits = {
+            "provider_batch_size": 4,
+            "maximum_provider_calls": 12,
+            "retries": 2,
+            "maximum_input_tokens_per_call": 8192,
+            "maximum_output_tokens_per_call": 3072,
+        }
+        if {
+            "maximum_primary_provider_calls": contract.get(
+                "maximum_primary_provider_calls"
+            ),
+            "maximum_transport_retries": contract.get(
+                "maximum_transport_retries"
+            ),
+            "maximum_retries_per_batch": contract.get(
+                "maximum_retries_per_batch"
+            ),
+            "retryable_http_statuses": contract.get("retryable_http_statuses"),
+            "retryable_failure_categories": contract.get(
+                "retryable_failure_categories"
+            ),
+        } != {
+            "maximum_primary_provider_calls": 10,
+            "maximum_transport_retries": 2,
+            "maximum_retries_per_batch": 1,
+            "retryable_http_statuses": sorted(RETRYABLE_HTTP_STATUSES),
+            "retryable_failure_categories": sorted(
+                RETRYABLE_PROVIDER_CATEGORIES
+            ),
+        }:
+            raise PanelExecutionError("review retry contract drifted")
+    else:
+        maximum_calls = 20 if reviewer_ids == GEMINI_REVIEWER_IDS else 120
+        expected_limits = {
+            "provider_batch_size": 4,
+            "maximum_provider_calls": maximum_calls,
+            "retries": 0,
+            "maximum_input_tokens_per_call": 8192,
+            "maximum_output_tokens_per_call": 3072,
+        }
     if {
         "provider_batch_size": contract["provider_batch_size"],
         "maximum_provider_calls": contract["maximum_provider_calls"],
         "retries": contract["retries"],
         "maximum_input_tokens_per_call": contract["maximum_input_tokens_per_call"],
         "maximum_output_tokens_per_call": contract["maximum_output_tokens_per_call"],
-    } != {
-        "provider_batch_size": 4,
-        "maximum_provider_calls": maximum_calls,
-        "retries": 0,
-        "maximum_input_tokens_per_call": 8192,
-        "maximum_output_tokens_per_call": 3072,
-    }:
+    } != expected_limits:
         raise PanelExecutionError("review execution limits drifted")
     if reviewers[reviewer_ids[0]]["provider_model"] != "gpt-5.6-sol":
         raise PanelExecutionError("Codex model binding drifted")
@@ -217,14 +273,24 @@ def load_binding(path: Path = BINDING_PATH) -> dict[str, Any]:
         }
     ):
         raise PanelExecutionError("Gemini routing binding drifted")
-    deepseek = reviewers[reviewer_ids[2]]
-    if (
-        deepseek["provider_model"] != "deepseek-v4-pro"
-        or deepseek["documented_revision"] != "DeepSeek-V4-Pro-0813"
+    if reviewer_ids in {REVIEWER_IDS, GEMINI_REVIEWER_IDS}:
+        deepseek = reviewers[reviewer_ids[2]]
+        if (
+            deepseek["provider_model"] != "deepseek-v4-pro"
+            or deepseek["documented_revision"] != "DeepSeek-V4-Pro-0813"
+        ):
+            raise PanelExecutionError("DeepSeek model binding drifted")
+    elif any(
+        "deepseek" in json.dumps(row, sort_keys=True).lower()
+        for row in binding["reviewers"]
     ):
-        raise PanelExecutionError("DeepSeek model binding drifted")
+        raise PanelExecutionError("attempt 004 must not contain a DeepSeek binding")
     cost = binding["cost_guard"]
-    expected_reservation = 0.406426 if reviewer_ids == GEMINI_REVIEWER_IDS else 1.563034
+    expected_reservation = {
+        REVIEWER_IDS: 1.563034,
+        GEMINI_REVIEWER_IDS: 0.406426,
+        TWO_REVIEWER_IDS: 0.211968,
+    }[reviewer_ids]
     if (
         cost["conservative_peak_reservation_usd"] != expected_reservation
         or cost["emergency_hard_stop_usd"] != 3.0
@@ -271,7 +337,7 @@ def load_assets(attempt_path: Path | None = None) -> dict[str, Any]:
         unhashed = {key: value for key, value in instrument.items() if key != "content_sha256"}
         if content_hash != canonical_sha256(unhashed):
             raise PanelExecutionError("attempt instrument content hash drifted")
-        if instrument.get("attempt_id") != ATTEMPT_003_ID:
+        if instrument.get("attempt_id") not in {ATTEMPT_003_ID, ATTEMPT_004_ID}:
             raise PanelExecutionError("attempt instrument identity drifted")
         parent = instrument.get("parent_instrument", {})
         if (
@@ -476,7 +542,7 @@ def _non_negative_int(value: Any, field: str) -> int:
 
 
 class HttpPanelTransport:
-    """Direct no-retry transport for the two frozen provider reviewers."""
+    """Single-call transport; bounded retry policy lives in the ledger runner."""
 
     async def call(
         self,
@@ -527,17 +593,28 @@ class HttpPanelTransport:
                 f"credential missing: {reviewer['credential_environment_variable']}"
             )
         started = time.perf_counter()
-        async with httpx.AsyncClient(timeout=httpx.Timeout(120)) as client:
-            response = await client.post(
-                url,
-                headers={
-                    "Authorization": f"Bearer {key}",
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": "https://github.com/horiiiiii032929/digital-twin",
-                    "X-OpenRouter-Title": "Course Digital Twin evaluation",
-                },
-                json=payload,
-            )
+        try:
+            async with httpx.AsyncClient(timeout=httpx.Timeout(120)) as client:
+                response = await client.post(
+                    url,
+                    headers={
+                        "Authorization": f"Bearer {key}",
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": "https://github.com/horiiiiii032929/digital-twin",
+                        "X-OpenRouter-Title": "Course Digital Twin evaluation",
+                    },
+                    json=payload,
+                )
+        except httpx.TimeoutException as error:
+            raise ProviderCallFailure(
+                "provider-timeout",
+                {"cost_accounting_status": "unavailable-transport-failure"},
+            ) from error
+        except httpx.ConnectError as error:
+            raise ProviderCallFailure(
+                "provider-connection-failure",
+                {"cost_accounting_status": "unavailable-transport-failure"},
+            ) from error
         latency_ms = (time.perf_counter() - started) * 1000
         try:
             value = response.json()
@@ -577,13 +654,6 @@ class HttpPanelTransport:
                     "cost_accounting_status": "unavailable-provider-error",
                 },
             )
-        choices = value.get("choices")
-        if not isinstance(choices, list) or len(choices) != 1:
-            raise PanelExecutionError("provider response choices drifted")
-        message = choices[0].get("message") if isinstance(choices[0], dict) else None
-        content = message.get("content") if isinstance(message, dict) else None
-        if not isinstance(content, str) or not content.strip():
-            raise PanelExecutionError("provider response content is empty")
         model = value.get("model")
         if model != reviewer["provider_model"]:
             raise PanelExecutionError("provider response model identity drifted")
@@ -612,6 +682,29 @@ class HttpPanelTransport:
             ) / 1_000_000
         if isinstance(reported, bool) or not isinstance(reported, (int, float)):
             raise PanelExecutionError("provider response cost is invalid")
+        choices = value.get("choices")
+        if not isinstance(choices, list) or len(choices) != 1:
+            raise PanelExecutionError("provider response choices drifted")
+        message = choices[0].get("message") if isinstance(choices[0], dict) else None
+        content = message.get("content") if isinstance(message, dict) else None
+        if not isinstance(content, str) or not content.strip():
+            raise ProviderCallFailure(
+                "provider-empty-content",
+                {
+                    "provider_model": model,
+                    "provider_revision": (
+                        value.get("system_fingerprint")
+                        if isinstance(value.get("system_fingerprint"), str)
+                        else None
+                    ),
+                    "provider_name": str(provider_name),
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens,
+                    "reported_cost_usd": float(reported),
+                    "latency_ms": latency_ms,
+                    "cost_accounting_status": "complete",
+                },
+            )
         return ProviderBatchResult(
             content=content,
             provider_model=model,
@@ -672,6 +765,18 @@ def _maximum_call_cost(binding: dict[str, Any], reviewer_id: str) -> float:
     return (input_tokens * input_price + output_tokens * output_price) / 1_000_000
 
 
+def _failure_is_retryable(
+    error: Exception, contract: dict[str, Any]
+) -> bool:
+    if not isinstance(error, ProviderCallFailure):
+        return False
+    return error.category in contract.get("retryable_failure_categories", []) or (
+        error.category == "provider-http-error"
+        and error.details.get("http_status")
+        in contract.get("retryable_http_statuses", [])
+    )
+
+
 def _initial_ledger(assets: dict[str, Any], *, simulation: bool) -> dict[str, Any]:
     ledger = initialize_ledger(
         packet_sha256=assets["packet"]["content_sha256"],
@@ -689,6 +794,8 @@ def _initial_ledger(assets: dict[str, Any], *, simulation: bool) -> dict[str, An
             "code_revision": _code_revision(),
             "provider_call_records": [],
             "provider_failures": [],
+            "transport_retry_count": 0,
+            "recovered_transport_failure_count": 0,
             "provider_identities": {},
             "codex_task_id": None,
             "aggregate": None,
@@ -717,6 +824,9 @@ def _validate_execution_resume(
         raise PanelExecutionError("resume simulation state drifted")
     if ledger["provider_calls"] != len(ledger.get("provider_call_records", [])):
         raise PanelExecutionError("resume provider-call accounting drifted")
+    for key in ("transport_retry_count", "recovered_transport_failure_count"):
+        if not isinstance(ledger.get(key), int) or ledger[key] < 0:
+            raise PanelExecutionError(f"resume {key} accounting drifted")
 
 
 def _load_or_create_ledger(
@@ -850,8 +960,18 @@ async def _run_batches(
         for batch in batches[1:]
     ]
     for reviewer_id, batch in schedule:
-            reviewer = _reviewer(binding, reviewer_id)
-            if ledger["provider_calls"] >= binding["execution_contract"]["maximum_provider_calls"]:
+        reviewer = _reviewer(binding, reviewer_id)
+        item_ids = [row["review_item_id"] for row in batch]
+        prior_failures = [
+            row
+            for row in ledger["provider_call_records"]
+            if row["reviewer_id"] == reviewer_id
+            and row["item_ids"] == item_ids
+            and row["status"] == "failed"
+        ]
+        while True:
+            contract = binding["execution_contract"]
+            if ledger["provider_calls"] >= contract["maximum_provider_calls"]:
                 ledger["status"] = "invalid-execution"
                 ledger["provider_failures"].append({"reason": "provider-call-limit"})
                 write_ledger_atomic(output_path, ledger)
@@ -863,21 +983,27 @@ async def _run_batches(
                 ledger["provider_failures"].append({"reason": "pre-call-budget-stop"})
                 write_ledger_atomic(output_path, ledger)
                 return False
-            if estimate_input_tokens(batch) > binding["execution_contract"]["maximum_input_tokens_per_call"]:
+            if estimate_input_tokens(batch) > contract["maximum_input_tokens_per_call"]:
                 ledger["status"] = "invalid-execution"
                 ledger["provider_failures"].append({"reason": "planned-input-limit"})
                 write_ledger_atomic(output_path, ledger)
                 return False
             schema = response_schema(
-                [row["review_item_id"] for row in batch],
+                item_ids,
                 gemini_compatible=(
                     reviewer.get("response_format") == "gemini-json-schema-subset"
                 ),
             )
+            call_number = ledger["provider_calls"] + 1
+            attempt_number = len(prior_failures) + 1
+            retry_of = (
+                prior_failures[0].get("provider_call_number")
+                if prior_failures
+                else None
+            )
             raw: ProviderBatchResult | None = None
             try:
                 raw = await transport.call(reviewer=reviewer, items=batch, schema=schema)
-                contract = binding["execution_contract"]
                 if (
                     raw.input_tokens > contract["maximum_input_tokens_per_call"]
                     or raw.output_tokens > contract["maximum_output_tokens_per_call"]
@@ -892,7 +1018,7 @@ async def _run_batches(
                 if previous_identity is not None and previous_identity != identity:
                     raise PanelExecutionError("provider runtime identity drifted")
                 votes = parse_votes(raw.content, batch)
-            except Exception as error:  # one no-retry failure is durable and terminal
+            except Exception as error:
                 ledger["provider_calls"] += 1
                 ledger["malformed_response_count"] += int(
                     isinstance(error, PanelExecutionError)
@@ -900,15 +1026,44 @@ async def _run_batches(
                 )
                 failure = {
                     "reviewer_id": reviewer_id,
-                    "item_ids": [row["review_item_id"] for row in batch],
+                    "item_ids": item_ids,
                     "reason": type(error).__name__,
                     "detail": str(error)[:500],
+                    "provider_call_number": call_number,
+                    "attempt_number": attempt_number,
                 }
                 call_record: dict[str, Any] = {**failure, "status": "failed"}
+                if retry_of is not None:
+                    call_record["retry_of_provider_call"] = retry_of
                 if isinstance(error, ProviderCallFailure):
                     failure["category"] = error.category
                     call_record["category"] = error.category
                     call_record.update(error.details)
+                    if error.details.get("cost_accounting_status") == "complete":
+                        ledger["input_tokens"] += int(error.details["input_tokens"])
+                        ledger["output_tokens"] += int(error.details["output_tokens"])
+                        ledger["reported_cost_usd"] = round(
+                            ledger["reported_cost_usd"]
+                            + float(error.details["reported_cost_usd"]),
+                            9,
+                        )
+                        failed_identity = {
+                            "provider_model": error.details["provider_model"],
+                            "provider_revision": error.details["provider_revision"],
+                            "provider_name": error.details["provider_name"],
+                        }
+                        previous_identity = ledger["provider_identities"].get(
+                            reviewer_id
+                        )
+                        if (
+                            previous_identity is not None
+                            and previous_identity != failed_identity
+                        ):
+                            failure["retry_identity_drift"] = True
+                        else:
+                            ledger["provider_identities"].setdefault(
+                                reviewer_id, failed_identity
+                            )
                 elif raw is not None:
                     ledger["input_tokens"] += raw.input_tokens
                     ledger["output_tokens"] += raw.output_tokens
@@ -930,8 +1085,26 @@ async def _run_batches(
                             "cost_accounting_status": "complete",
                         }
                     )
+                retryable = _failure_is_retryable(error, contract)
+                can_retry = (
+                    retryable
+                    and not failure.get("retry_identity_drift")
+                    and len(prior_failures)
+                    < contract.get("maximum_retries_per_batch", 0)
+                    and ledger["transport_retry_count"]
+                    < contract.get("maximum_transport_retries", 0)
+                )
+                failure["retry_eligible"] = retryable
+                failure["retry_scheduled"] = can_retry
+                call_record["retry_eligible"] = retryable
+                call_record["retry_scheduled"] = can_retry
                 ledger["provider_failures"].append(failure)
                 ledger["provider_call_records"].append(call_record)
+                if can_retry:
+                    ledger["transport_retry_count"] += 1
+                    prior_failures.append(call_record)
+                    write_ledger_atomic(output_path, ledger)
+                    continue
                 ledger["status"] = "invalid-execution"
                 write_ledger_atomic(output_path, ledger)
                 return False
@@ -942,20 +1115,25 @@ async def _run_batches(
             ledger["reported_cost_usd"] = round(
                 ledger["reported_cost_usd"] + raw.cost_usd, 9
             )
-            ledger["provider_call_records"].append(
-                {
-                    "reviewer_id": reviewer_id,
-                    "item_ids": [row["review_item_id"] for row in batch],
-                    "status": "completed",
-                    "provider_model": raw.provider_model,
-                    "provider_revision": raw.provider_revision,
-                    "provider_name": raw.provider_name,
-                    "input_tokens": raw.input_tokens,
-                    "output_tokens": raw.output_tokens,
-                    "reported_cost_usd": raw.cost_usd,
-                    "latency_ms": raw.latency_ms,
-                }
-            )
+            call_record = {
+                "reviewer_id": reviewer_id,
+                "item_ids": item_ids,
+                "status": "completed",
+                "provider_call_number": call_number,
+                "attempt_number": attempt_number,
+                "provider_model": raw.provider_model,
+                "provider_revision": raw.provider_revision,
+                "provider_name": raw.provider_name,
+                "input_tokens": raw.input_tokens,
+                "output_tokens": raw.output_tokens,
+                "reported_cost_usd": raw.cost_usd,
+                "latency_ms": raw.latency_ms,
+                "cost_accounting_status": "complete",
+            }
+            if retry_of is not None:
+                call_record["retry_of_provider_call"] = retry_of
+                ledger["recovered_transport_failure_count"] += 1
+            ledger["provider_call_records"].append(call_record)
             for vote in votes:
                 append_vote(
                     ledger,
@@ -969,11 +1147,12 @@ async def _run_batches(
                 write_ledger_atomic(output_path, ledger)
                 return False
             write_ledger_atomic(output_path, ledger)
+            break
     return True
 
 
 def _all_calibration_metrics(
-    ledger: dict[str, Any], reviewer_ids: tuple[str, str, str]
+    ledger: dict[str, Any], reviewer_ids: tuple[str, ...]
 ) -> dict[str, Any]:
     _, control_truth = _truth_maps()
     result = {}
@@ -1023,8 +1202,35 @@ async def execute_calibration(
         return ledger
     metrics = _all_calibration_metrics(ledger, assets["reviewer_ids"])
     ledger["calibration"] = metrics
-    passed = all(row["passed"] for row in metrics.values())
-    if assets["attempt_id"] == ATTEMPT_003_ID:
+    operational_gates = {
+        "all_reviewers_have_40_votes": all(
+            sum(
+                row["reviewer_id"] == reviewer_id
+                and row["review_item_id"]
+                in {item["review_item_id"] for item in assets["packet"]["items"] if item["item_kind"] == "calibration"}
+                for row in ledger["votes"]
+            )
+            == 40
+            for reviewer_id in assets["reviewer_ids"]
+        ),
+        "zero_accepted_malformed_votes": ledger["malformed_response_count"] == 0,
+        "stable_runtime_identity": len(ledger["provider_identities"])
+        == len(assets["reviewer_ids"][1:]),
+        "complete_call_accounting": ledger["provider_calls"]
+        == len(ledger["provider_call_records"]),
+        "bounded_recovered_transport_failures": ledger[
+            "recovered_transport_failure_count"
+        ]
+        == ledger["transport_retry_count"]
+        <= assets["binding"]["execution_contract"].get(
+            "maximum_transport_retries", 0
+        ),
+    }
+    ledger["operational_gates"] = operational_gates
+    passed = all(row["passed"] for row in metrics.values()) and all(
+        operational_gates.values()
+    )
+    if assets["attempt_id"] in {ATTEMPT_003_ID, ATTEMPT_004_ID}:
         ledger["status"] = "completed-go-deeper" if passed else "completed-refine"
     else:
         ledger["status"] = (
@@ -1106,7 +1312,7 @@ def prepare_codex_workspace(assets: dict[str, Any], output: Path) -> dict[str, A
         "external knowledge, or inspect the source repository. Produce the exact vote "
         "schema specified by the packet contract. First complete calibration only and "
         "wait. Continue to confirmation only after the researcher reports that all "
-        "three reviewers passed calibration. Keep the same task and report the runtime "
+        "configured reviewers passed calibration. Keep the same task and report the runtime "
         "model as `gpt-5.6-sol` with reasoning effort `medium`.\n",
         encoding="utf-8",
     )
@@ -1173,7 +1379,7 @@ def live_metadata_failures(assets: dict[str, Any]) -> list[str]:
     )
     if endpoint is None:
         failures.append("openrouter-endpoint-missing")
-    elif reviewer_ids == GEMINI_REVIEWER_IDS:
+    elif reviewer_ids in {GEMINI_REVIEWER_IDS, TWO_REVIEWER_IDS}:
         endpoint_pricing = endpoint.get("pricing", {})
         required_parameters = {"max_tokens", "temperature", "response_format", "structured_outputs"}
         if (
@@ -1199,29 +1405,30 @@ def live_metadata_failures(assets: dict[str, Any]) -> list[str]:
         )
         if provider is None or provider.get("dataPolicy") != primary["provider_policy"]:
             failures.append("gemini-provider-policy-drift")
-    deepseek = _reviewer(binding, reviewer_ids[2])
-    key = os.getenv(deepseek["credential_environment_variable"], "").strip()
-    models = (
-        _fetch_json(DEEPSEEK_MODELS_URL, headers={"Authorization": f"Bearer {key}"})
-        if key
-        else {"data": []}
-    )
-    if deepseek["provider_model"] not in {
-        row.get("id") for row in models.get("data", [])
-    }:
-        failures.append("deepseek-model-missing")
-    pricing = parse_deepseek_pricing(_fetch_text(DEEPSEEK_PRICING_URL))
-    current = pricing["models"].get(deepseek["provider_model"])
-    if current != {
-        "documented_revision": deepseek["documented_revision"],
-        "peak_cache_miss_input_per_million_usd": deepseek[
-            "pricing_usd_per_million_cache_miss_input_tokens_peak"
-        ],
-        "peak_output_per_million_usd": deepseek[
-            "pricing_usd_per_million_output_tokens_peak"
-        ],
-    }:
-        failures.append("deepseek-model-or-price-drift")
+    if reviewer_ids in {REVIEWER_IDS, GEMINI_REVIEWER_IDS}:
+        deepseek = _reviewer(binding, reviewer_ids[2])
+        key = os.getenv(deepseek["credential_environment_variable"], "").strip()
+        models = (
+            _fetch_json(DEEPSEEK_MODELS_URL, headers={"Authorization": f"Bearer {key}"})
+            if key
+            else {"data": []}
+        )
+        if deepseek["provider_model"] not in {
+            row.get("id") for row in models.get("data", [])
+        }:
+            failures.append("deepseek-model-missing")
+        pricing = parse_deepseek_pricing(_fetch_text(DEEPSEEK_PRICING_URL))
+        current = pricing["models"].get(deepseek["provider_model"])
+        if current != {
+            "documented_revision": deepseek["documented_revision"],
+            "peak_cache_miss_input_per_million_usd": deepseek[
+                "pricing_usd_per_million_cache_miss_input_tokens_peak"
+            ],
+            "peak_output_per_million_usd": deepseek[
+                "pricing_usd_per_million_output_tokens_peak"
+            ],
+        }:
+            failures.append("deepseek-model-or-price-drift")
     return failures
 
 
@@ -1410,7 +1617,7 @@ async def simulate_full(assets: dict[str, Any], output_dir: Path) -> dict[str, A
         simulation=True,
         resume=False,
     )
-    if assets["attempt_id"] == ATTEMPT_003_ID:
+    if assets["attempt_id"] in {ATTEMPT_003_ID, ATTEMPT_004_ID}:
         return calibrated
     if calibrated["status"] != "calibration-completed-confirmation-not-started":
         return calibrated
@@ -1443,9 +1650,13 @@ def main() -> int:
     load_dotenv(ROOT / ".env")
     assets = load_assets(args.attempt)
     output_path = args.output or (
-        ATTEMPT_003_LEDGER_PATH
-        if assets["attempt_id"] == ATTEMPT_003_ID
-        else DEFAULT_LEDGER_PATH
+        ATTEMPT_004_LEDGER_PATH
+        if assets["attempt_id"] == ATTEMPT_004_ID
+        else (
+            ATTEMPT_003_LEDGER_PATH
+            if assets["attempt_id"] == ATTEMPT_003_ID
+            else DEFAULT_LEDGER_PATH
+        )
     )
     if args.execute_calibration or args.execute_confirmation:
         require_bounded_pilot_operation_allowed(assets["attempt_id"])
@@ -1453,9 +1664,13 @@ def main() -> int:
         result = {
             "instrument_id": assets["attempt_id"],
             "status": (
-                "validated-attempt-003"
-                if assets["attempt_id"] == ATTEMPT_003_ID
-                else "validated-attempt-002-invalid-authorization-revoked"
+                "validated-attempt-004-provider-unauthorized"
+                if assets["attempt_id"] == ATTEMPT_004_ID
+                else (
+                    "validated-attempt-003"
+                    if assets["attempt_id"] == ATTEMPT_003_ID
+                    else "validated-attempt-002-invalid-authorization-revoked"
+                )
             ),
             "binding_sha256": assets["binding"]["content_sha256"],
             "maximum_provider_calls": assets["binding"]["execution_contract"][

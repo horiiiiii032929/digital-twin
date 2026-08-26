@@ -11,9 +11,11 @@ import scripts.execute_academic_factual_qa_panel_review_v2 as panel_executor
 
 from scripts.execute_academic_factual_qa_panel_review_v2 import (
     ATTEMPT_003_PATH,
+    ATTEMPT_004_PATH,
     PanelExecutionError,
     ProviderBatchResult,
     ProviderCallFailure,
+    _failure_is_retryable,
     _maximum_call_cost,
     _simulated_codex_artifact,
     build_preflight,
@@ -31,6 +33,8 @@ from scripts.execute_academic_factual_qa_panel_review_v2 import (
 from scripts.run_academic_factual_qa_panel_review_v2 import (
     GEMINI_REVIEWER_IDS,
     REVIEWER_IDS,
+    TWO_REVIEWER_IDS,
+    aggregate_panel,
     build_simulated_ledger,
 )
 
@@ -90,6 +94,47 @@ def test_attempt_003_binding_pins_gemini_standard_endpoint_and_cost() -> None:
     )
     assert maximum == pytest.approx(0.4064256)
     assert maximum <= binding["cost_guard"]["conservative_peak_reservation_usd"]
+
+
+def test_attempt_004_binding_has_only_codex_and_gemini_with_bounded_retries() -> None:
+    assets = load_assets(ATTEMPT_004_PATH)
+    binding = assets["binding"]
+
+    assert assets["reviewer_ids"] == TWO_REVIEWER_IDS
+    assert binding["execution_contract"]["maximum_primary_provider_calls"] == 10
+    assert binding["execution_contract"]["maximum_transport_retries"] == 2
+    assert binding["execution_contract"]["maximum_retries_per_batch"] == 1
+    assert binding["execution_contract"]["maximum_provider_calls"] == 12
+    assert binding["cost_guard"]["conservative_peak_reservation_usd"] == (
+        pytest.approx(0.211968)
+    )
+    serialized = json.dumps(binding, sort_keys=True).lower()
+    assert "deepseek" not in serialized
+    assert {
+        row.get("credential_environment_variable")
+        for row in binding["reviewers"]
+        if row.get("credential_environment_variable")
+    } == {"OPENROUTER_API_KEY"}
+
+
+@pytest.mark.parametrize(
+    ("error", "expected"),
+    [
+        (ProviderCallFailure("provider-timeout", {}), True),
+        (ProviderCallFailure("provider-connection-failure", {}), True),
+        (ProviderCallFailure("provider-empty-content", {}), True),
+        (ProviderCallFailure("provider-http-error", {"http_status": 429}), True),
+        (ProviderCallFailure("provider-http-error", {"http_status": 503}), True),
+        (ProviderCallFailure("provider-http-error", {"http_status": 400}), False),
+        (PanelExecutionError("provider response is not JSON"), False),
+        (PanelExecutionError("provider runtime identity drifted"), False),
+    ],
+)
+def test_attempt_004_retry_eligibility_is_transport_only(
+    error: Exception, expected: bool
+) -> None:
+    contract = load_assets(ATTEMPT_004_PATH)["binding"]["execution_contract"]
+    assert _failure_is_retryable(error, contract) is expected
 
 
 def test_every_frozen_batch_fits_the_conservative_input_limit() -> None:
@@ -356,6 +401,39 @@ def test_attempt_003_simulation_runs_two_canaries_then_stops_after_calibration(
     assert result["aggregate"] is None
 
 
+def test_attempt_004_simulation_reruns_all_40_gemini_controls(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "simulation-004"
+    result = asyncio.run(simulate_full(load_assets(ATTEMPT_004_PATH), output))
+
+    assert result["status"] == "completed-go-deeper"
+    assert result["provider_calls"] == 10
+    assert result["transport_retry_count"] == 0
+    assert result["recovered_transport_failure_count"] == 0
+    assert set(result["calibration"]) == set(TWO_REVIEWER_IDS)
+    assert all(row["passed"] for row in result["calibration"].values())
+    assert sum(
+        row["reviewer_id"] == TWO_REVIEWER_IDS[1] for row in result["votes"]
+    ) == 40
+    assert all(
+        "attempt-003" not in json.dumps(row)
+        for row in result["provider_call_records"]
+    )
+
+
+def test_two_reviewer_confirmation_aggregation_applies_frozen_agreement_gates() -> None:
+    packet, ledger = build_simulated_ledger("pass", reviewer_ids=TWO_REVIEWER_IDS)
+    result = aggregate_panel(
+        ledger=ledger, packet=packet, reviewer_ids=TWO_REVIEWER_IDS
+    )
+
+    assert result["status"] == "ready-researcher-audit"
+    assert result["passing_reviewer_count"] == 2
+    assert result["unanimous_semantic_agreement_rate"] == 1.0
+    assert result["action_krippendorff_alpha"] == 1.0
+
+
 class _MalformedTransport:
     async def call(self, **_: object) -> ProviderBatchResult:
         return ProviderBatchResult(
@@ -430,6 +508,165 @@ class _AttemptTransport:
             cost_usd=0.001,
             latency_ms=1.0,
         )
+
+
+class _Attempt004Transport:
+    def __init__(
+        self,
+        *,
+        failure_calls: dict[int, ProviderCallFailure] | None = None,
+        quality_failure: bool = False,
+    ) -> None:
+        _, ledger = build_simulated_ledger("pass", reviewer_ids=TWO_REVIEWER_IDS)
+        self.ideal = {
+            row["review_item_id"]: {
+                key: value for key, value in row.items() if key != "reviewer_id"
+            }
+            for row in ledger["votes"]
+            if row["reviewer_id"] == TWO_REVIEWER_IDS[1]
+        }
+        self.failure_calls = failure_calls or {}
+        self.quality_failure = quality_failure
+        self.calls = 0
+
+    async def call(
+        self,
+        *,
+        reviewer: dict[str, object],
+        items: list[dict[str, object]],
+        schema: dict[str, object],
+    ) -> ProviderBatchResult:
+        del schema
+        self.calls += 1
+        if self.calls in self.failure_calls:
+            raise self.failure_calls[self.calls]
+        votes = [deepcopy(self.ideal[str(row["review_item_id"])]) for row in items]
+        if self.quality_failure:
+            for vote in votes:
+                vote["case_semantically_valid"] = False
+        return ProviderBatchResult(
+            content=json.dumps({"votes": votes}),
+            provider_model=str(reviewer["provider_model"]),
+            provider_revision=str(reviewer.get("documented_revision")),
+            provider_name=str(reviewer["endpoint_provider"]),
+            input_tokens=500,
+            output_tokens=250,
+            cost_usd=0.001,
+            latency_ms=1.0,
+        )
+
+
+def _transport_failure(category: str, *, status: int | None = None) -> ProviderCallFailure:
+    details: dict[str, object] = {
+        "cost_accounting_status": "unavailable-transport-failure"
+    }
+    if status is not None:
+        details["http_status"] = status
+    return ProviderCallFailure(category, details)
+
+
+def _run_attempt_004(
+    tmp_path: Path, transport: _Attempt004Transport
+) -> dict[str, object]:
+    assets = load_assets(ATTEMPT_004_PATH)
+    codex = tmp_path / "codex-calibration.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+    return asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "ledger.json",
+            transport=transport,
+            simulation=True,
+            resume=False,
+        )
+    )
+
+
+def test_attempt_004_valid_quality_failure_is_refine_without_retry(
+    tmp_path: Path,
+) -> None:
+    result = _run_attempt_004(
+        tmp_path, _Attempt004Transport(quality_failure=True)
+    )
+
+    assert result["status"] == "completed-refine"
+    assert result["provider_calls"] == 10
+    assert result["transport_retry_count"] == 0
+    assert result["calibration"][TWO_REVIEWER_IDS[1]]["passed"] is False
+
+
+def test_attempt_004_recovers_two_distinct_transport_failures(
+    tmp_path: Path,
+) -> None:
+    transport = _Attempt004Transport(
+        failure_calls={
+            1: _transport_failure("provider-timeout"),
+            3: _transport_failure("provider-http-error", status=429),
+        }
+    )
+    result = _run_attempt_004(tmp_path, transport)
+
+    assert result["status"] == "completed-go-deeper"
+    assert result["provider_calls"] == 12
+    assert result["transport_retry_count"] == 2
+    assert result["recovered_transport_failure_count"] == 2
+    assert [
+        row["retry_scheduled"] for row in result["provider_call_records"] if row["status"] == "failed"
+    ] == [True, True]
+
+
+def test_attempt_004_does_not_retry_a_second_failure_for_one_batch(
+    tmp_path: Path,
+) -> None:
+    result = _run_attempt_004(
+        tmp_path,
+        _Attempt004Transport(
+            failure_calls={
+                1: _transport_failure("provider-timeout"),
+                2: _transport_failure("provider-timeout"),
+            }
+        ),
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["provider_calls"] == 2
+    assert result["transport_retry_count"] == 1
+    assert result["provider_call_records"][1]["retry_eligible"] is True
+    assert result["provider_call_records"][1]["retry_scheduled"] is False
+
+
+def test_attempt_004_does_not_retry_malformed_or_identity_failures(
+    tmp_path: Path,
+) -> None:
+    assets = load_assets(ATTEMPT_004_PATH)
+    codex = tmp_path / "codex-calibration.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+    malformed = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "malformed-ledger.json",
+            transport=_MalformedTransport(),
+            simulation=True,
+            resume=False,
+        )
+    )
+    identity = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "identity-ledger.json",
+            transport=_AttemptTransport(identity_drift=True),
+            simulation=True,
+            resume=False,
+        )
+    )
+
+    assert malformed["provider_calls"] == 1
+    assert malformed["transport_retry_count"] == 0
+    assert identity["status"] == "invalid-execution"
+    assert identity["transport_retry_count"] == 0
 
 
 def test_malformed_provider_batch_is_recorded_once_without_retry(
