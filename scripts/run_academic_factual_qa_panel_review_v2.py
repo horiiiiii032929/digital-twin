@@ -38,6 +38,12 @@ REVIEWER_IDS = (
     "mistral-small-4-blinded-reviewer",
     "deepseek-v4-pro-blinded-reviewer",
 )
+GEMINI_REVIEWER_IDS = (
+    "codex-isolated-task-blinded-reviewer",
+    "gemini-3.7-flash-blinded-reviewer",
+    "deepseek-v4-pro-blinded-reviewer",
+)
+VALID_REVIEWER_IDS = frozenset(REVIEWER_IDS) | frozenset(GEMINI_REVIEWER_IDS)
 VALID_ACTIONS = {"answer", "abstain", "clarify", "refuse"}
 VALID_CLAIM_SUPPORT = {
     "fully-supported",
@@ -100,6 +106,8 @@ def validate_vote(vote: dict[str, Any], *, expected_item_id: str) -> dict[str, A
         isinstance(value, str) for value in vote["defect_types"]
     ):
         raise PanelReviewError("defect types must be a string list")
+    if len(vote["defect_types"]) != len(set(vote["defect_types"])):
+        raise PanelReviewError("defect types must be unique")
     rationale = vote["concise_rationale"]
     if not isinstance(rationale, str) or not rationale.strip() or len(rationale.split()) > 80:
         raise PanelReviewError("rationale must contain 1-80 words")
@@ -185,7 +193,7 @@ def append_vote(
     output_tokens: int = 0,
     reported_cost_usd: float = 0.0,
 ) -> None:
-    if reviewer_id not in REVIEWER_IDS:
+    if reviewer_id not in VALID_REVIEWER_IDS:
         raise PanelReviewError("unknown reviewer identity")
     identity = (reviewer_id, vote["review_item_id"])
     if any(
@@ -323,6 +331,7 @@ def aggregate_panel(
     *,
     ledger: dict[str, Any],
     packet: dict[str, Any],
+    reviewer_ids: tuple[str, str, str] = REVIEWER_IDS,
 ) -> dict[str, Any]:
     case_truth, control_truth = _truth_maps()
     malformed = ledger["malformed_response_count"]
@@ -331,7 +340,7 @@ def aggregate_panel(
         by_reviewer[vote["reviewer_id"]].append(vote)
     calibration_metrics: dict[str, Any] = {}
     passing_reviewers = []
-    for reviewer_id in REVIEWER_IDS:
+    for reviewer_id in reviewer_ids:
         controls = [
             vote for vote in by_reviewer[reviewer_id] if vote["review_item_id"] in control_truth
         ]
@@ -464,7 +473,11 @@ def build_researcher_packet(
     return result
 
 
-def build_simulated_ledger(scenario: str) -> tuple[dict[str, Any], dict[str, Any]]:
+def build_simulated_ledger(
+    scenario: str,
+    *,
+    reviewer_ids: tuple[str, str, str] = REVIEWER_IDS,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     packet = _load(PACKET_PATH)
     validate_packet(packet)
     instrument = _load(INSTRUMENT_PATH)
@@ -476,7 +489,7 @@ def build_simulated_ledger(scenario: str) -> tuple[dict[str, Any], dict[str, Any
         pricing_sha256="simulated-pricing",
     )
     confirmation_index = 0
-    for reviewer_id in REVIEWER_IDS:
+    for reviewer_id in reviewer_ids:
         for item in packet["items"]:
             truth = (
                 control_truth[item["review_item_id"]]
@@ -484,16 +497,16 @@ def build_simulated_ledger(scenario: str) -> tuple[dict[str, Any], dict[str, Any
                 else case_truth[item["review_item_id"]]
             )
             vote = _ideal_vote(item, truth)
-            if scenario == "calibration-failure" and reviewer_id == REVIEWER_IDS[0] and item["item_kind"] == "calibration" and len([row for row in ledger["votes"] if row["reviewer_id"] == reviewer_id]) < 5:
+            if scenario == "calibration-failure" and reviewer_id == reviewer_ids[0] and item["item_kind"] == "calibration" and len([row for row in ledger["votes"] if row["reviewer_id"] == reviewer_id]) < 5:
                 vote["expected_action"] = "abstain"
                 vote["case_semantically_valid"] = False
             if item["item_kind"] == "confirmation":
-                if reviewer_id == REVIEWER_IDS[0]:
+                if reviewer_id == reviewer_ids[0]:
                     confirmation_index += 1
                 item_position = list(case_truth).index(item["review_item_id"]) if item["review_item_id"] in case_truth else -1
-                if scenario == "disagreement-overflow" and reviewer_id == REVIEWER_IDS[2] and item_position < 41:
+                if scenario == "disagreement-overflow" and reviewer_id == reviewer_ids[2] and item_position < 41:
                     vote["expected_action"] = "clarify" if vote["expected_action"] != "clarify" else "abstain"
-            if scenario == "malformed" and reviewer_id == REVIEWER_IDS[1] and item == packet["items"][0]:
+            if scenario == "malformed" and reviewer_id == reviewer_ids[1] and item == packet["items"][0]:
                 ledger["malformed_response_count"] += 1
                 continue
             validate_vote(vote, expected_item_id=item["review_item_id"])

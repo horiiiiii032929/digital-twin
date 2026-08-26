@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "attempt_id": "academic-factual-qa-confirmation-002-calibration-attempt-003",
+  "status": "reviewed-provider-unauthorized",
+  "owner_issue": 127,
+  "decision_memory_id": "AFQC-023",
+  "parent_instrument": {
+    "instrument_id": "academic-factual-qa-confirmation-002",
+    "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
+    "content_sha256": "e1dc32bf7edb240bdffe1f7d5c36590aa4c47d1f29b986321e6245c85ea2262b",
+    "packet_sha256": "8ba652e718ec2cdeb3e718413f45975d0abd99a5adf0ef36bf071409e1f5bf8c",
+    "calibration_controls_sha256": "e0a7870739a4f1a080d1c0c1ab96230abec8ddea4597add96d27b49d10c2d1eb"
+  },
+  "reviewer_binding_contract": {
+    "binding_id": "academic-factual-qa-confirmation-002-reviewer-bindings-002",
+    "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_002.json",
+    "content_sha256": "bdeb126c4ee4876ad5bac24459042b3fc95fc7d4bcdf6e10fa67cd522dcd7e32"
+  },
+  "execution_safety": {
+    "source_download_authorized": false,
+    "question_construction_authorized": false,
+    "calibration_execution_authorized": false,
+    "codex_review_authorized": false,
+    "provider_review_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "confirmation_execution_authorized": false,
+    "researcher_audit_authorized": false,
+    "final_execution_authorized": false,
+    "product_binding_authorized": false,
+    "automatic_promotion": false
+  },
+  "execution_contract": {
+    "sealed_control_count": 40,
+    "immutable_codex_vote_count": 40,
+    "provider_reviewer_count": 2,
+    "maximum_provider_calls": 20,
+    "retries": 0,
+    "conservative_peak_reservation_usd": 0.406426,
+    "emergency_hard_stop_usd": 3.0,
+    "exclusive_output_path": "reports/generated/academic-factual-qa-confirmation-002-calibration-attempt-003-ledger.json"
+  },
+  "quality_gates": {
+    "action_accuracy_min_per_reviewer": 0.9,
+    "mutation_sensitivity_min_per_reviewer": 0.9,
+    "specificity_min_per_reviewer": 0.9,
+    "citation_defect_sensitivity_min_per_reviewer": 0.9,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0,
+    "complete_accounting_required": true
+  },
+  "progression_rule": {
+    "invalid_execution": "preserve-invalid-result-and-stop-without-retry",
+    "valid_quality_failure": "completed-refine-and-stop-for-reviewer-method-decision",
+    "all_gates_pass": "completed-go-deeper-and-require-separate-200-case-panel-authorization",
+    "confirmation_automatic": false,
+    "visual_or_product_execution_automatic": false,
+    "academic_10000_execution_automatic": false
+  },
+  "content_sha256": "d468c2b8bd4205cdc8d80af3dfbb4fc335e57f62b3de1b27d2805577192a7c58"
+}

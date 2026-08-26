@@ -31,6 +31,7 @@ import httpx
 from scripts.build_academic_factual_qa_confirmation_v2 import canonical_sha256
 from scripts.prepare_academic_factual_qa_panel_review_v2 import PACKET_PATH, validate_packet
 from scripts.run_academic_factual_qa_panel_review_v2 import (
+    GEMINI_REVIEWER_IDS,
     PanelReviewError,
     REVIEWER_IDS,
     _calibration_metrics,
@@ -63,9 +64,20 @@ BINDING_PATH = (
     / "research/05_evaluation/instruments/"
     "academic_factual_qa_confirmation_002_reviewer_bindings.json"
 )
+ATTEMPT_003_ID = "academic-factual-qa-confirmation-002-calibration-attempt-003"
+ATTEMPT_003_PATH = (
+    ROOT
+    / "research/05_evaluation/instruments/"
+    "academic_factual_qa_confirmation_002_calibration_attempt_003.json"
+)
 DEFAULT_LEDGER_PATH = (
     ROOT
     / "reports/generated/academic-factual-qa-confirmation-002-calibration-attempt-002-ledger.json"
+)
+ATTEMPT_003_LEDGER_PATH = (
+    ROOT
+    / "reports/generated/"
+    "academic-factual-qa-confirmation-002-calibration-attempt-003-ledger.json"
 )
 DEFAULT_RESEARCHER_PACKET_PATH = (
     ROOT
@@ -78,7 +90,7 @@ OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 DEEPSEEK_MODELS_URL = "https://api.deepseek.com/models"
 DEEPSEEK_PRICING_URL = "https://api-docs.deepseek.com/quick_start/pricing/"
-PROVIDER_REVIEWERS = REVIEWER_IDS[1:]
+GOOGLE_PROVIDER_POLICY_URL = "https://openrouter.ai/api/frontend/v1/all-providers"
 
 
 class PanelExecutionError(PanelReviewError):
@@ -144,11 +156,16 @@ def load_binding(path: Path = BINDING_PATH) -> dict[str, Any]:
     )
     if binding.get("content_sha256") != expected_hash:
         raise PanelExecutionError("reviewer binding content hash drifted")
-    if binding.get("instrument_id") != INSTRUMENT_ID:
+    if binding.get("instrument_id") not in {INSTRUMENT_ID, ATTEMPT_003_ID}:
         raise PanelExecutionError("reviewer binding instrument drifted")
     if binding.get("maximum_age_hours_for_execution") != 24:
         raise PanelExecutionError("reviewer binding freshness window drifted")
     contract = binding["execution_contract"]
+    reviewers = {row["reviewer_id"]: row for row in binding["reviewers"]}
+    reviewer_ids = tuple(reviewers)
+    if reviewer_ids not in {REVIEWER_IDS, GEMINI_REVIEWER_IDS}:
+        raise PanelExecutionError("reviewer binding order or identity drifted")
+    maximum_calls = 20 if reviewer_ids == GEMINI_REVIEWER_IDS else 120
     if {
         "provider_batch_size": contract["provider_batch_size"],
         "maximum_provider_calls": contract["maximum_provider_calls"],
@@ -157,36 +174,59 @@ def load_binding(path: Path = BINDING_PATH) -> dict[str, Any]:
         "maximum_output_tokens_per_call": contract["maximum_output_tokens_per_call"],
     } != {
         "provider_batch_size": 4,
-        "maximum_provider_calls": 120,
+        "maximum_provider_calls": maximum_calls,
         "retries": 0,
         "maximum_input_tokens_per_call": 8192,
         "maximum_output_tokens_per_call": 3072,
     }:
         raise PanelExecutionError("review execution limits drifted")
-    reviewers = {row["reviewer_id"]: row for row in binding["reviewers"]}
-    if tuple(reviewers) != REVIEWER_IDS:
-        raise PanelExecutionError("reviewer binding order or identity drifted")
-    if reviewers[REVIEWER_IDS[0]]["provider_model"] != "gpt-5.6-sol":
+    if reviewers[reviewer_ids[0]]["provider_model"] != "gpt-5.6-sol":
         raise PanelExecutionError("Codex model binding drifted")
-    mistral = reviewers[REVIEWER_IDS[1]]
-    if (
-        mistral["provider_model"] != "mistralai/mistral-small-2603"
-        or mistral["endpoint_provider"] != "Mistral"
-        or mistral["endpoint_tag"] != "mistral/zdr"
-        or mistral["routing"]["allow_fallbacks"] is not False
-        or mistral["routing"]["data_collection"] != "deny"
-        or mistral["routing"]["zdr"] is not True
+    primary = reviewers[reviewer_ids[1]]
+    if reviewer_ids == REVIEWER_IDS:
+        if (
+            primary["provider_model"] != "mistralai/mistral-small-2603"
+            or primary["endpoint_provider"] != "Mistral"
+            or primary["endpoint_tag"] != "mistral/zdr"
+            or primary["routing"]["allow_fallbacks"] is not False
+            or primary["routing"]["data_collection"] != "deny"
+            or primary["routing"]["zdr"] is not True
+        ):
+            raise PanelExecutionError("Mistral routing binding drifted")
+    elif (
+        primary["provider_model"] != "google/gemini-3.7-flash"
+        or primary["documented_revision"] != "google/gemini-3.7-flash-20260813"
+        or primary["endpoint_provider"] != "Google AI Studio"
+        or primary["endpoint_tag"] != "google-ai-studio"
+        or primary["response_format"] != "gemini-json-schema-subset"
+        or primary["context_window_tokens"] != 1048576
+        or primary["maximum_output_tokens"] != 65536
+        or primary["pricing_usd_per_million_input_tokens"] != 0.75
+        or primary["pricing_usd_per_million_output_tokens"] != 3.75
+        or primary["provider_policy"].get("training") is not False
+        or primary["provider_policy"].get("retainsPrompts") is not True
+        or primary["provider_policy"].get("retentionDays") != 55
+        or primary["routing"]
+        != {
+            "only": ["google-ai-studio"],
+            "order": ["google-ai-studio"],
+            "allow_fallbacks": False,
+            "require_parameters": True,
+            "data_collection": "allow",
+            "zdr": False,
+        }
     ):
-        raise PanelExecutionError("Mistral routing binding drifted")
-    deepseek = reviewers[REVIEWER_IDS[2]]
+        raise PanelExecutionError("Gemini routing binding drifted")
+    deepseek = reviewers[reviewer_ids[2]]
     if (
         deepseek["provider_model"] != "deepseek-v4-pro"
         or deepseek["documented_revision"] != "DeepSeek-V4-Pro-0813"
     ):
         raise PanelExecutionError("DeepSeek model binding drifted")
     cost = binding["cost_guard"]
+    expected_reservation = 0.406426 if reviewer_ids == GEMINI_REVIEWER_IDS else 1.563034
     if (
-        cost["conservative_peak_reservation_usd"] != 1.563034
+        cost["conservative_peak_reservation_usd"] != expected_reservation
         or cost["emergency_hard_stop_usd"] != 3.0
         or cost["pre_call_reservation_required"] is not True
         or cost["post_call_reported_cost_check_required"] is not True
@@ -213,15 +253,51 @@ def binding_age_hours(
     return age
 
 
-def load_assets() -> dict[str, Any]:
-    instrument = validate_instrument(INSTRUMENT_PATH)
-    binding = load_binding()
+def load_assets(attempt_path: Path | None = None) -> dict[str, Any]:
+    parent_instrument = validate_instrument(INSTRUMENT_PATH)
     packet = _load(PACKET_PATH)
     validate_packet(packet)
-    contract = instrument["reviewer_binding_contract"]
-    if binding["content_sha256"] != contract["content_sha256"]:
-        raise PanelExecutionError("instrument reviewer binding hash drifted")
-    return {"instrument": instrument, "binding": binding, "packet": packet}
+    if attempt_path is None:
+        instrument = parent_instrument
+        contract = instrument["reviewer_binding_contract"]
+        binding_path = ROOT / contract["path"]
+        binding = load_binding(binding_path)
+        if binding["content_sha256"] != contract["content_sha256"]:
+            raise PanelExecutionError("instrument reviewer binding hash drifted")
+        attempt_id = INSTRUMENT_ID
+    else:
+        instrument = _load(attempt_path)
+        content_hash = instrument.get("content_sha256")
+        unhashed = {key: value for key, value in instrument.items() if key != "content_sha256"}
+        if content_hash != canonical_sha256(unhashed):
+            raise PanelExecutionError("attempt instrument content hash drifted")
+        if instrument.get("attempt_id") != ATTEMPT_003_ID:
+            raise PanelExecutionError("attempt instrument identity drifted")
+        parent = instrument.get("parent_instrument", {})
+        if (
+            parent.get("instrument_id") != INSTRUMENT_ID
+            or parent.get("content_sha256") != canonical_sha256(parent_instrument)
+            or parent.get("packet_sha256") != packet["content_sha256"]
+        ):
+            raise PanelExecutionError("attempt parent binding drifted")
+        contract = instrument["reviewer_binding_contract"]
+        binding_path = ROOT / contract["path"]
+        binding = load_binding(binding_path)
+        if (
+            binding["binding_id"] != contract["binding_id"]
+            or binding["content_sha256"] != contract["content_sha256"]
+        ):
+            raise PanelExecutionError("attempt reviewer binding hash drifted")
+        attempt_id = instrument["attempt_id"]
+    reviewer_ids = tuple(row["reviewer_id"] for row in binding["reviewers"])
+    return {
+        "instrument": instrument,
+        "parent_instrument": parent_instrument,
+        "binding": binding,
+        "packet": packet,
+        "attempt_id": attempt_id,
+        "reviewer_ids": reviewer_ids,
+    }
 
 
 def _reviewer(binding: dict[str, Any], reviewer_id: str) -> dict[str, Any]:
@@ -232,7 +308,9 @@ def _chunks(items: list[dict[str, Any]], size: int) -> list[list[dict[str, Any]]
     return [items[index : index + size] for index in range(0, len(items), size)]
 
 
-def response_schema(item_ids: list[str]) -> dict[str, Any]:
+def response_schema(
+    item_ids: list[str], *, gemini_compatible: bool = False
+) -> dict[str, Any]:
     vote = {
         "type": "object",
         "additionalProperties": False,
@@ -287,7 +365,7 @@ def response_schema(item_ids: list[str]) -> dict[str, Any]:
             "concise_rationale": {"type": "string", "minLength": 1, "maxLength": 600},
         },
     }
-    return {
+    schema = {
         "type": "object",
         "additionalProperties": False,
         "required": ["votes"],
@@ -300,6 +378,17 @@ def response_schema(item_ids: list[str]) -> dict[str, Any]:
             }
         },
     }
+    if gemini_compatible:
+        # Gemini supports a documented JSON-Schema subset. Keep the provider
+        # contract deliberately small and enforce these constraints locally in
+        # parse_votes/validate_vote instead.
+        vote["properties"]["evidence_ids"].pop("uniqueItems")
+        vote["properties"]["defect_types"].pop("uniqueItems")
+        vote["properties"]["concise_rationale"].pop("minLength")
+        vote["properties"]["concise_rationale"].pop("maxLength")
+        schema["properties"]["votes"].pop("minItems")
+        schema["properties"]["votes"].pop("maxItems")
+    return schema
 
 
 SYSTEM_PROMPT = """You are a blinded academic factual-QA reviewer. Use only the supplied question, candidate record, and supplied public-source evidence. Do not infer hidden labels, use external knowledge, identify experimental conditions, or modify the source-derived truth. Judge every item exactly once and return only strict JSON matching the schema. A rationale must be concise (at most 80 words)."""
@@ -347,7 +436,34 @@ def parse_votes(content: str, items: list[dict[str, Any]]) -> list[dict[str, Any
         item_id = vote.get("review_item_id")
         if item_id not in expected_ids or item_id in by_id:
             raise PanelExecutionError("provider response identity drifted")
-        by_id[item_id] = validate_vote(vote, expected_item_id=item_id)
+        try:
+            validated = validate_vote(vote, expected_item_id=item_id)
+        except PanelReviewError as error:
+            raise PanelExecutionError(str(error)) from error
+        visible_item = next(row for row in items if row["review_item_id"] == item_id)
+        visible_evidence_ids = {
+            row["evidence_id"] for row in visible_item["provided_sources"]
+        }
+        if not set(validated["evidence_ids"]).issubset(visible_evidence_ids):
+            raise PanelExecutionError("provider vote cites an unknown visible evidence ID")
+        if validated["expected_action"] == "answer":
+            if (
+                validated["question_answerable_from_supplied_sources"] is not True
+                or validated["boundary_reason"] is not None
+                or validated["atomic_claim_support"] == "not-applicable"
+                or validated["citation_support"] == "not-applicable"
+            ):
+                raise PanelExecutionError("provider answer vote is internally inconsistent")
+        elif (
+            validated["question_answerable_from_supplied_sources"] is not False
+            or not isinstance(validated["boundary_reason"], str)
+            or not validated["boundary_reason"].strip()
+            or validated["atomic_claim_support"] != "not-applicable"
+            or validated["citation_support"] != "not-applicable"
+            or validated["evidence_ids"]
+        ):
+            raise PanelExecutionError("provider boundary vote is internally inconsistent")
+        by_id[item_id] = validated
     if set(by_id) != set(expected_ids):
         raise PanelExecutionError("provider response coverage drifted")
     return [by_id[item_id] for item_id in expected_ids]
@@ -418,7 +534,7 @@ class HttpPanelTransport:
                     "Authorization": f"Bearer {key}",
                     "Content-Type": "application/json",
                     "HTTP-Referer": "https://github.com/horiiiiii032929/digital-twin",
-                    "X-Title": "Course Digital Twin evaluation",
+                    "X-OpenRouter-Title": "Course Digital Twin evaluation",
                 },
                 json=payload,
             )
@@ -472,7 +588,10 @@ class HttpPanelTransport:
         if model != reviewer["provider_model"]:
             raise PanelExecutionError("provider response model identity drifted")
         provider_name = value.get("provider", reviewer["provider"])
-        if reviewer["provider"] == "openrouter" and provider_name != "Mistral":
+        if (
+            reviewer["provider"] == "openrouter"
+            and provider_name != reviewer["endpoint_provider"]
+        ):
             raise PanelExecutionError("OpenRouter endpoint provider drifted")
         usage = value.get("usage") if isinstance(value.get("usage"), dict) else {}
         input_tokens = _non_negative_int(usage.get("prompt_tokens"), "prompt_tokens")
@@ -564,7 +683,7 @@ def _initial_ledger(assets: dict[str, Any], *, simulation: bool) -> dict[str, An
         {
             "schema_version": 2,
             "instrument_id": INSTRUMENT_ID,
-            "attempt_id": "academic-factual-qa-confirmation-002-calibration-attempt-002",
+            "attempt_id": assets["attempt_id"],
             "status": "running-calibration",
             "simulation": simulation,
             "code_revision": _code_revision(),
@@ -590,7 +709,7 @@ def _validate_execution_resume(
     )
     if ledger.get("instrument_id") != INSTRUMENT_ID:
         raise PanelExecutionError("resume instrument identity drifted")
-    if ledger.get("attempt_id") != "academic-factual-qa-confirmation-002-calibration-attempt-002":
+    if ledger.get("attempt_id") != assets["attempt_id"]:
         raise PanelExecutionError("resume attempt identity drifted")
     if ledger.get("code_revision") != _code_revision():
         raise PanelExecutionError("resume code revision drifted")
@@ -712,12 +831,26 @@ async def _run_batches(
     completed = {
         (row["reviewer_id"], row["review_item_id"]) for row in ledger["votes"]
     }
-    for reviewer_id in PROVIDER_REVIEWERS:
+    queued: dict[str, list[list[dict[str, Any]]]] = {}
+    for reviewer_id in assets["reviewer_ids"][1:]:
         reviewer = _reviewer(binding, reviewer_id)
         remaining = [
             row for row in items if (reviewer_id, row["review_item_id"]) not in completed
         ]
-        for batch in _chunks(remaining, binding["execution_contract"]["provider_batch_size"]):
+        queued[reviewer_id] = _chunks(
+            remaining, binding["execution_contract"]["provider_batch_size"]
+        )
+    schedule = [
+        (reviewer_id, batches[0])
+        for reviewer_id, batches in queued.items()
+        if batches
+    ] + [
+        (reviewer_id, batch)
+        for reviewer_id, batches in queued.items()
+        for batch in batches[1:]
+    ]
+    for reviewer_id, batch in schedule:
+            reviewer = _reviewer(binding, reviewer_id)
             if ledger["provider_calls"] >= binding["execution_contract"]["maximum_provider_calls"]:
                 ledger["status"] = "invalid-execution"
                 ledger["provider_failures"].append({"reason": "provider-call-limit"})
@@ -735,7 +868,12 @@ async def _run_batches(
                 ledger["provider_failures"].append({"reason": "planned-input-limit"})
                 write_ledger_atomic(output_path, ledger)
                 return False
-            schema = response_schema([row["review_item_id"] for row in batch])
+            schema = response_schema(
+                [row["review_item_id"] for row in batch],
+                gemini_compatible=(
+                    reviewer.get("response_format") == "gemini-json-schema-subset"
+                ),
+            )
             raw: ProviderBatchResult | None = None
             try:
                 raw = await transport.call(reviewer=reviewer, items=batch, schema=schema)
@@ -758,6 +896,7 @@ async def _run_batches(
                 ledger["provider_calls"] += 1
                 ledger["malformed_response_count"] += int(
                     isinstance(error, PanelExecutionError)
+                    and not isinstance(error, ProviderCallFailure)
                 )
                 failure = {
                     "reviewer_id": reviewer_id,
@@ -833,10 +972,12 @@ async def _run_batches(
     return True
 
 
-def _all_calibration_metrics(ledger: dict[str, Any]) -> dict[str, Any]:
+def _all_calibration_metrics(
+    ledger: dict[str, Any], reviewer_ids: tuple[str, str, str]
+) -> dict[str, Any]:
     _, control_truth = _truth_maps()
     result = {}
-    for reviewer_id in REVIEWER_IDS:
+    for reviewer_id in reviewer_ids:
         votes = [
             row
             for row in ledger["votes"]
@@ -880,13 +1021,17 @@ async def execute_calibration(
         item_kind="calibration",
     ):
         return ledger
-    metrics = _all_calibration_metrics(ledger)
+    metrics = _all_calibration_metrics(ledger, assets["reviewer_ids"])
     ledger["calibration"] = metrics
-    ledger["status"] = (
-        "calibration-completed-confirmation-not-started"
-        if all(row["passed"] for row in metrics.values())
-        else "panel-calibration-failed"
-    )
+    passed = all(row["passed"] for row in metrics.values())
+    if assets["attempt_id"] == ATTEMPT_003_ID:
+        ledger["status"] = "completed-go-deeper" if passed else "completed-refine"
+    else:
+        ledger["status"] = (
+            "calibration-completed-confirmation-not-started"
+            if passed
+            else "panel-calibration-failed"
+        )
     write_ledger_atomic(output_path, ledger)
     return ledger
 
@@ -921,7 +1066,11 @@ async def execute_confirmation(
         item_kind="confirmation",
     ):
         return ledger
-    aggregate = aggregate_panel(ledger=ledger, packet=assets["packet"])
+    aggregate = aggregate_panel(
+        ledger=ledger,
+        packet=assets["packet"],
+        reviewer_ids=assets["reviewer_ids"],
+    )
     ledger["aggregate"] = aggregate
     ledger["status"] = aggregate["status"]
     write_ledger_atomic(output_path, ledger)
@@ -988,38 +1137,69 @@ def _fetch_text(url: str) -> str:
 def live_metadata_failures(assets: dict[str, Any]) -> list[str]:
     binding = assets["binding"]
     failures: list[str] = []
-    mistral = _reviewer(binding, REVIEWER_IDS[1])
+    reviewer_ids = assets["reviewer_ids"]
+    primary = _reviewer(binding, reviewer_ids[1])
     registry = _fetch_json(OPENROUTER_MODELS_URL)
     model = next(
-        (row for row in registry.get("data", []) if row.get("id") == mistral["provider_model"]),
+        (row for row in registry.get("data", []) if row.get("id") == primary["provider_model"]),
         None,
     )
     if model is None:
-        failures.append("mistral-model-missing")
+        failures.append("openrouter-model-missing")
     else:
         pricing = model.get("pricing", {})
         if (
-            int(model.get("context_length", 0)) != mistral["context_window_tokens"]
+            int(model.get("context_length", 0)) != primary["context_window_tokens"]
             or float(pricing.get("prompt", -1)) * 1_000_000
-            != mistral["pricing_usd_per_million_input_tokens"]
+            > primary["pricing_usd_per_million_input_tokens"]
             or float(pricing.get("completion", -1)) * 1_000_000
-            != mistral["pricing_usd_per_million_output_tokens"]
+            > primary["pricing_usd_per_million_output_tokens"]
         ):
-            failures.append("mistral-model-metadata-drift")
-    endpoints = _fetch_json(mistral["endpoint_registry_source"])
+            failures.append("openrouter-model-metadata-drift")
+        if primary.get("documented_revision") and model.get("canonical_slug") != primary[
+            "documented_revision"
+        ]:
+            failures.append("openrouter-model-revision-drift")
+    endpoints = _fetch_json(primary["endpoint_registry_source"])
     endpoint = next(
         (
             row
             for row in endpoints.get("data", {}).get("endpoints", [])
-            if row.get("provider_name") == mistral["endpoint_provider"]
-            and row.get("tag") == mistral["endpoint_tag"]
+            if row.get("provider_name") == primary["endpoint_provider"]
+            and row.get("tag") == primary["endpoint_tag"]
             and row.get("status") == 0
         ),
         None,
     )
     if endpoint is None:
-        failures.append("mistral-zdr-endpoint-missing")
-    deepseek = _reviewer(binding, REVIEWER_IDS[2])
+        failures.append("openrouter-endpoint-missing")
+    elif reviewer_ids == GEMINI_REVIEWER_IDS:
+        endpoint_pricing = endpoint.get("pricing", {})
+        required_parameters = {"max_tokens", "temperature", "response_format", "structured_outputs"}
+        if (
+            endpoint.get("name") != primary["endpoint_name"]
+            or int(endpoint.get("context_length", 0)) != primary["context_window_tokens"]
+            or int(endpoint.get("max_completion_tokens", 0))
+            != primary["maximum_output_tokens"]
+            or float(endpoint_pricing.get("prompt", -1)) * 1_000_000
+            != primary["pricing_usd_per_million_input_tokens"]
+            or float(endpoint_pricing.get("completion", -1)) * 1_000_000
+            != primary["pricing_usd_per_million_output_tokens"]
+            or not required_parameters.issubset(endpoint.get("supported_parameters", []))
+        ):
+            failures.append("gemini-endpoint-metadata-drift")
+        policies = _fetch_json(GOOGLE_PROVIDER_POLICY_URL)
+        provider = next(
+            (
+                row
+                for row in policies.get("data", [])
+                if row.get("displayName") == primary["endpoint_provider"]
+            ),
+            None,
+        )
+        if provider is None or provider.get("dataPolicy") != primary["provider_policy"]:
+            failures.append("gemini-provider-policy-drift")
+    deepseek = _reviewer(binding, reviewer_ids[2])
     key = os.getenv(deepseek["credential_environment_variable"], "").strip()
     models = (
         _fetch_json(DEEPSEEK_MODELS_URL, headers={"Authorization": f"Bearer {key}"})
@@ -1083,7 +1263,7 @@ def build_preflight(
         )
     ):
         blockers.append("calibration-execution-not-authorized")
-    if INSTRUMENT_ID not in BOUNDED_PILOT_AUTHORIZATIONS:
+    if assets["attempt_id"] not in BOUNDED_PILOT_AUTHORIZATIONS:
         blockers.append("bounded-freeze-authorization-missing")
     if instrument["status"] != "frozen-pending-execution":
         blockers.append("instrument-not-frozen-for-execution")
@@ -1101,7 +1281,7 @@ def build_preflight(
     if not expected_codex_votes.exists():
         blockers.append("codex-calibration-votes-missing")
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": assets["attempt_id"],
         "status": "ready" if not blockers else "blocked-not-authorized",
         "blockers": blockers,
         "binding_age_hours": age,
@@ -1178,11 +1358,13 @@ def require_execution_authorized(
 def _simulated_codex_artifact(
     assets: dict[str, Any], *, item_kind: str, path: Path
 ) -> None:
-    packet, ledger = build_simulated_ledger("pass")
+    packet, ledger = build_simulated_ledger(
+        "pass", reviewer_ids=assets["reviewer_ids"]
+    )
     votes = [
         {key: value for key, value in row.items() if key != "reviewer_id"}
         for row in ledger["votes"]
-        if row["reviewer_id"] == REVIEWER_IDS[0]
+        if row["reviewer_id"] == assets["reviewer_ids"][0]
         and any(
             item["review_item_id"] == row["review_item_id"]
             and item["item_kind"] == item_kind
@@ -1208,14 +1390,16 @@ async def simulate_full(assets: dict[str, Any], output_dir: Path) -> dict[str, A
     researcher_path = output_dir / "researcher.json"
     _simulated_codex_artifact(assets, item_kind="calibration", path=calibration)
     _simulated_codex_artifact(assets, item_kind="confirmation", path=confirmation)
-    packet, ideal = build_simulated_ledger("pass")
+    packet, ideal = build_simulated_ledger(
+        "pass", reviewer_ids=assets["reviewer_ids"]
+    )
     del packet
     ideal_votes = {
         row["review_item_id"]: {
             key: value for key, value in row.items() if key != "reviewer_id"
         }
         for row in ideal["votes"]
-        if row["reviewer_id"] == REVIEWER_IDS[1]
+        if row["reviewer_id"] == assets["reviewer_ids"][1]
     }
     transport = SimulatedPanelTransport(ideal_votes)
     calibrated = await execute_calibration(
@@ -1226,6 +1410,8 @@ async def simulate_full(assets: dict[str, Any], output_dir: Path) -> dict[str, A
         simulation=True,
         resume=False,
     )
+    if assets["attempt_id"] == ATTEMPT_003_ID:
+        return calibrated
     if calibrated["status"] != "calibration-completed-confirmation-not-started":
         return calibrated
     return await execute_confirmation(
@@ -1249,35 +1435,49 @@ def main() -> int:
     mode.add_argument("--execute-calibration", action="store_true")
     mode.add_argument("--execute-confirmation", action="store_true")
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--output", type=Path, default=DEFAULT_LEDGER_PATH)
+    parser.add_argument("--attempt", type=Path)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--codex-votes", type=Path)
     parser.add_argument("--codex-workspace", type=Path, default=DEFAULT_CODEX_WORKSPACE)
     args = parser.parse_args()
     load_dotenv(ROOT / ".env")
-    assets = load_assets()
+    assets = load_assets(args.attempt)
+    output_path = args.output or (
+        ATTEMPT_003_LEDGER_PATH
+        if assets["attempt_id"] == ATTEMPT_003_ID
+        else DEFAULT_LEDGER_PATH
+    )
     if args.execute_calibration or args.execute_confirmation:
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID)
+        require_bounded_pilot_operation_allowed(assets["attempt_id"])
     if args.validate:
         result = {
-            "instrument_id": INSTRUMENT_ID,
-            "status": "validated-attempt-002-invalid-authorization-revoked",
+            "instrument_id": assets["attempt_id"],
+            "status": (
+                "validated-attempt-003"
+                if assets["attempt_id"] == ATTEMPT_003_ID
+                else "validated-attempt-002-invalid-authorization-revoked"
+            ),
             "binding_sha256": assets["binding"]["content_sha256"],
-            "maximum_provider_calls": 120,
+            "maximum_provider_calls": assets["binding"]["execution_contract"][
+                "maximum_provider_calls"
+            ],
             "provider_or_model_calls": 0,
         }
     elif args.preflight or args.preflight_live:
-        result = build_preflight(assets, live=args.preflight_live, output_path=args.output)
+        result = build_preflight(
+            assets, live=args.preflight_live, output_path=output_path
+        )
     elif args.prepare_codex_workspace:
         result = prepare_codex_workspace(assets, args.codex_workspace)
     elif args.simulate:
-        result = asyncio.run(simulate_full(assets, args.output))
+        result = asyncio.run(simulate_full(assets, output_path))
     elif args.execute_calibration:
         if args.codex_votes is None:
             raise PanelExecutionError("--codex-votes is required for calibration")
         require_execution_authorized(
             assets,
             phase="calibration",
-            output_path=args.output,
+            output_path=output_path,
             codex_votes_path=args.codex_votes,
             resume=args.resume,
         )
@@ -1285,7 +1485,7 @@ def main() -> int:
             execute_calibration(
                 assets,
                 codex_votes_path=args.codex_votes,
-                output_path=args.output,
+                output_path=output_path,
                 transport=HttpPanelTransport(),
                 simulation=False,
                 resume=args.resume,
@@ -1297,7 +1497,7 @@ def main() -> int:
         require_execution_authorized(
             assets,
             phase="confirmation",
-            output_path=args.output,
+            output_path=output_path,
             codex_votes_path=args.codex_votes,
             resume=True,
         )
@@ -1305,7 +1505,7 @@ def main() -> int:
             execute_confirmation(
                 assets,
                 codex_votes_path=args.codex_votes,
-                output_path=args.output,
+                output_path=output_path,
                 researcher_packet_path=DEFAULT_RESEARCHER_PACKET_PATH,
                 transport=HttpPanelTransport(),
                 simulation=False,

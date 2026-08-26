@@ -10,6 +10,7 @@ import pytest
 import scripts.execute_academic_factual_qa_panel_review_v2 as panel_executor
 
 from scripts.execute_academic_factual_qa_panel_review_v2 import (
+    ATTEMPT_003_PATH,
     PanelExecutionError,
     ProviderBatchResult,
     ProviderCallFailure,
@@ -27,7 +28,11 @@ from scripts.execute_academic_factual_qa_panel_review_v2 import (
     validate_codex_votes,
     execute_calibration,
 )
-from scripts.run_academic_factual_qa_panel_review_v2 import REVIEWER_IDS
+from scripts.run_academic_factual_qa_panel_review_v2 import (
+    GEMINI_REVIEWER_IDS,
+    REVIEWER_IDS,
+    build_simulated_ledger,
+)
 
 
 def test_reviewer_binding_freezes_current_models_routing_and_peak_cost() -> None:
@@ -59,6 +64,34 @@ def test_reviewer_binding_freezes_current_models_routing_and_peak_cost() -> None
     assert maximum < binding["cost_guard"]["emergency_hard_stop_usd"]
 
 
+def test_attempt_003_binding_pins_gemini_standard_endpoint_and_cost() -> None:
+    assets = load_assets(ATTEMPT_003_PATH)
+    binding = assets["binding"]
+    reviewers = {row["reviewer_id"]: row for row in binding["reviewers"]}
+
+    assert assets["attempt_id"] == panel_executor.ATTEMPT_003_ID
+    assert assets["reviewer_ids"] == GEMINI_REVIEWER_IDS
+    gemini = reviewers[GEMINI_REVIEWER_IDS[1]]
+    assert gemini["provider_model"] == "google/gemini-3.7-flash"
+    assert gemini["documented_revision"] == "google/gemini-3.7-flash-20260813"
+    assert gemini["endpoint_tag"] == "google-ai-studio"
+    assert gemini["routing"] == {
+        "only": ["google-ai-studio"],
+        "order": ["google-ai-studio"],
+        "allow_fallbacks": False,
+        "require_parameters": True,
+        "data_collection": "allow",
+        "zdr": False,
+    }
+    assert gemini["provider_policy"]["retentionDays"] == 55
+    maximum = sum(
+        _maximum_call_cost(binding, reviewer_id) * 10
+        for reviewer_id in GEMINI_REVIEWER_IDS[1:]
+    )
+    assert maximum == pytest.approx(0.4064256)
+    assert maximum <= binding["cost_guard"]["conservative_peak_reservation_usd"]
+
+
 def test_every_frozen_batch_fits_the_conservative_input_limit() -> None:
     assets = load_assets()
     items = assets["packet"]["items"]
@@ -88,15 +121,23 @@ def test_vote_response_parser_is_strict_and_order_stable() -> None:
         "citation_support": "complete-valid",
         "boundary_reason": None,
         "ambiguity_detected": False,
-        "evidence_ids": ["evidence-1"],
+        "evidence_ids": [],
         "defect_types": [],
         "concise_rationale": "The visible source supports the candidate record.",
     }
     content = json.dumps(
         {
             "votes": [
-                {"review_item_id": item_ids[1], **vote},
-                {"review_item_id": item_ids[0], **vote},
+                {
+                    "review_item_id": item_ids[1],
+                    **vote,
+                    "evidence_ids": [items[1]["provided_sources"][0]["evidence_id"]],
+                },
+                {
+                    "review_item_id": item_ids[0],
+                    **vote,
+                    "evidence_ids": [items[0]["provided_sources"][0]["evidence_id"]],
+                },
             ]
         }
     )
@@ -104,6 +145,39 @@ def test_vote_response_parser_is_strict_and_order_stable() -> None:
     assert [row["review_item_id"] for row in parse_votes(content, items)] == item_ids
     with pytest.raises(PanelExecutionError, match="vote count"):
         parse_votes(json.dumps({"votes": []}), items)
+
+
+def test_gemini_schema_defers_unsupported_constraints_to_local_validation() -> None:
+    schema = response_schema(["review-1", "review-2"], gemini_compatible=True)
+    serialized = json.dumps(schema)
+
+    for forbidden in ("uniqueItems", "minItems", "maxItems", "minLength", "maxLength"):
+        assert forbidden not in serialized
+
+
+def test_local_vote_validation_rejects_duplicate_defects_and_unknown_evidence() -> None:
+    items = load_assets(ATTEMPT_003_PATH)["packet"]["items"][:1]
+    item_id = items[0]["review_item_id"]
+    vote = {
+        "review_item_id": item_id,
+        "case_semantically_valid": False,
+        "expected_action": "answer",
+        "question_answerable_from_supplied_sources": True,
+        "atomic_claim_support": "unsupported",
+        "citation_support": "invalid",
+        "boundary_reason": None,
+        "ambiguity_detected": False,
+        "evidence_ids": ["unknown-evidence"],
+        "defect_types": ["citation"],
+        "concise_rationale": "The visible citation does not support the answer.",
+    }
+    with pytest.raises(PanelExecutionError, match="unknown visible evidence"):
+        parse_votes(json.dumps({"votes": [vote]}), items)
+
+    vote["evidence_ids"] = [items[0]["provided_sources"][0]["evidence_id"]]
+    vote["defect_types"] = ["citation", "citation"]
+    with pytest.raises(PanelExecutionError, match="defect types must be unique"):
+        parse_votes(json.dumps({"votes": [vote]}), items)
 
 
 def test_codex_workspace_contains_only_blinded_phase_packets(tmp_path: Path) -> None:
@@ -265,6 +339,23 @@ def test_full_network_free_execution_simulation_reaches_bounded_audit(
     assert result["aggregate"]["researcher_packet_case_count"] == 20
 
 
+def test_attempt_003_simulation_runs_two_canaries_then_stops_after_calibration(
+    tmp_path: Path,
+) -> None:
+    result = asyncio.run(
+        simulate_full(load_assets(ATTEMPT_003_PATH), tmp_path / "simulation-003")
+    )
+
+    assert result["status"] == "completed-go-deeper"
+    assert result["provider_calls"] == 20
+    assert [
+        row["reviewer_id"] for row in result["provider_call_records"][:2]
+    ] == list(GEMINI_REVIEWER_IDS[1:])
+    assert set(result["calibration"]) == set(GEMINI_REVIEWER_IDS)
+    assert all(row["passed"] for row in result["calibration"].values())
+    assert result["aggregate"] is None
+
+
 class _MalformedTransport:
     async def call(self, **_: object) -> ProviderBatchResult:
         return ProviderBatchResult(
@@ -291,6 +382,53 @@ class _ProviderErrorTransport:
                 "latency_ms": 2.0,
                 "cost_accounting_status": "unavailable-provider-error",
             },
+        )
+
+
+class _AttemptTransport:
+    def __init__(self, *, identity_drift: bool = False) -> None:
+        _, ledger = build_simulated_ledger(
+            "pass", reviewer_ids=GEMINI_REVIEWER_IDS
+        )
+        self.ideal = {
+            row["review_item_id"]: {
+                key: value for key, value in row.items() if key != "reviewer_id"
+            }
+            for row in ledger["votes"]
+            if row["reviewer_id"] == GEMINI_REVIEWER_IDS[1]
+        }
+        self.calls = 0
+        self.identity_drift = identity_drift
+
+    async def call(
+        self,
+        *,
+        reviewer: dict[str, object],
+        items: list[dict[str, object]],
+        schema: dict[str, object],
+    ) -> ProviderBatchResult:
+        del schema
+        self.calls += 1
+        revision = reviewer.get("documented_revision")
+        if (
+            self.identity_drift
+            and reviewer["reviewer_id"] == GEMINI_REVIEWER_IDS[1]
+            and self.calls >= 3
+        ):
+            revision = "unexpected-revision"
+        return ProviderBatchResult(
+            content=json.dumps(
+                {"votes": [self.ideal[str(row["review_item_id"])] for row in items]}
+            ),
+            provider_model=str(reviewer["provider_model"]),
+            provider_revision=str(revision),
+            provider_name=str(
+                reviewer.get("endpoint_provider") or reviewer["provider"]
+            ),
+            input_tokens=500,
+            output_tokens=250,
+            cost_usd=0.001,
+            latency_ms=1.0,
         )
 
 
@@ -351,3 +489,79 @@ def test_provider_http_failure_preserves_sanitized_diagnostics_without_retry(
     assert record["request_id"] == "request-public-id"
     assert record["provider_error_code"] == "invalid_schema"
     assert record["cost_accounting_status"] == "unavailable-provider-error"
+
+
+def test_attempt_003_first_canary_failure_suppresses_deepseek_and_bulk(
+    tmp_path: Path,
+) -> None:
+    assets = load_assets(ATTEMPT_003_PATH)
+    codex = tmp_path / "codex-calibration.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+
+    result = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "ledger.json",
+            transport=_ProviderErrorTransport(),
+            simulation=True,
+            resume=False,
+        )
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["provider_calls"] == 1
+    assert result["provider_call_records"][0]["reviewer_id"] == GEMINI_REVIEWER_IDS[1]
+    assert not any(
+        row["reviewer_id"] == GEMINI_REVIEWER_IDS[2]
+        for row in result["provider_call_records"]
+    )
+
+
+def test_attempt_003_runtime_identity_drift_stops_after_two_canaries(
+    tmp_path: Path,
+) -> None:
+    assets = load_assets(ATTEMPT_003_PATH)
+    codex = tmp_path / "codex-calibration.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+
+    result = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "ledger.json",
+            transport=_AttemptTransport(identity_drift=True),
+            simulation=True,
+            resume=False,
+        )
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["provider_calls"] == 3
+    assert result["provider_failures"][0]["detail"] == (
+        "provider runtime identity drifted"
+    )
+
+
+def test_attempt_003_pre_call_budget_stop_makes_zero_provider_calls(
+    tmp_path: Path,
+) -> None:
+    assets = deepcopy(load_assets(ATTEMPT_003_PATH))
+    assets["binding"]["cost_guard"]["emergency_hard_stop_usd"] = 0.01
+    codex = tmp_path / "codex-calibration.json"
+    _simulated_codex_artifact(assets, item_kind="calibration", path=codex)
+
+    result = asyncio.run(
+        execute_calibration(
+            assets,
+            codex_votes_path=codex,
+            output_path=tmp_path / "ledger.json",
+            transport=_AttemptTransport(),
+            simulation=True,
+            resume=False,
+        )
+    )
+
+    assert result["status"] == "invalid-execution"
+    assert result["provider_calls"] == 0
+    assert result["provider_failures"] == [{"reason": "pre-call-budget-stop"}]
