@@ -286,6 +286,17 @@ transport-only retries, a USD 0.3815424 reservation, and the existing USD 3
 emergency stop. The sealed 200 cases, visual and live-product evaluations,
 private data, and 600/10,000-case academic stages remain unauthorized.
 
+AFQC-031 records attempt 005 as **invalid execution** and revokes AFQC-030.
+OpenRouter successfully routed three calls to Google Vertex priority with exact
+model identity and complete accounting. The first two batches produced 8
+accepted Gemini votes. The third response completed at the provider but failed
+the frozen deterministic semantic validator because one boundary vote was
+internally inconsistent; malformed semantic output is deliberately
+non-retryable. The run stopped after 3 calls, 10,393 input tokens, 5,220 output
+tokens, and USD 0.024632775 reported cost. No confirmation case opened. This
+result supports no Gemini calibration or product-quality claim, and no
+evaluation execution is currently authorized.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
@@ -307,7 +318,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 963 Python tests and 46 frontend tests, frontend lint, and the
+check passes 965 Python tests and 46 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 

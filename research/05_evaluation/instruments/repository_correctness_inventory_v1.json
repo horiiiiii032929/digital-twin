@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b3c827b62728a1b13412543b6bed3d41511d0d9d917906586afbf50bfe16f5e7",
+  "record_sha256": "ebc8a66ce2e18056f931e58804e333911e737827d942c706ff4fe127c053a2c0",
   "records": [
     {
       "audit": {
@@ -1576,7 +1576,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual authorization review verifies immutable controls and Codex votes, four bounded Google transport routes, two healthy endpoints required at preflight, complete route accounting, no DeepSeek role, and authority limited to the 40-control calibration.",
+        "evidence": "Post-run review preserves the invalid three-call attempt, 8 accepted Gemini votes, one non-retryable semantic boundary inconsistency, complete accounting, revoked authority, and closed confirmation plus downstream stages.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1587,7 +1587,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_005.json",
       "risk": "high",
-      "sha256": "85215a22c32ab4c058c2a5c761fe555e6e16276885e931031867f0b145d8b5a5"
+      "sha256": "a17e9cb9eff7438cd39cfd201828c7a600cecef4e6a3c74e5583e5aabf5239d8"
     },
     {
       "audit": {
@@ -1640,7 +1640,7 @@
     {
       "audit": {
         "domain": "academic-factual-qa-confirmation",
-        "evidence": "Manual binding and live metadata review verify the fixed Gemini 3.7 Flash revision, bounded Vertex and AI Studio failover, per-route pricing and retention, the USD 0.3815424 reservation, and calibration-only provider authority.",
+        "evidence": "Post-run binding review preserves the fixed Gemini model and bounded Vertex/AI Studio route contract while revoking Codex, provider, paid, and confirmation authority after invalid execution.",
         "findings": [],
         "reviewed_at": "2026-08-26",
         "reviewer": "codex-primary-review"
@@ -1651,7 +1651,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_004.json",
       "risk": "high",
-      "sha256": "123f936d14438605b74e7631285a202bdae0a637d6cc08fc7d04f7e13201440a"
+      "sha256": "3013e8900d1d3ded6164ef4369ffa111f5cdb2525ff12ae936eca30b0347d67e"
     },
     {
       "audit": {
@@ -6555,7 +6555,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual freeze review verifies only attempt 005 receives the external-model-evaluation exception while the repository-wide freeze and all later evaluation stages remain blocked.",
+        "evidence": "Post-run freeze review verifies the attempt-005 exception was removed and the repository-wide freeze again blocks every provider, product, visual, private-data, and scale evaluation stage.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -7238,7 +7238,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "66516d388df9ff72ebc440b433e8c94841a493a285d293434e0d8ce468f0e144"
+      "sha256": "3d4f9c61340afb78c492970093c75f3d350f79de19268d34de5a99893e5688a0"
     },
     {
       "audit": {
@@ -7563,7 +7563,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Focused freeze tests verify the exact attempt-005 identifier is allowed and every historical, product, visual, private-data, and scale instrument remains denied.",
+        "evidence": "Focused freeze tests verify the bounded authorization set is empty after attempt 005 and every historical, product, visual, private-data, and scale instrument is denied.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -7702,7 +7702,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "739aa55f1f49a91373e33379f3bd12a7b39d8f567c6ec8933ca6b3f602d8b60a"
+      "sha256": "ec7cda748251b052d2be3fc5a0c2c71191cffc9f237b13546a1db2c38bf90a25"
     },
     {
       "audit": {
