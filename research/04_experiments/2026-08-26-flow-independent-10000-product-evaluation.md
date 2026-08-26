@@ -35,11 +35,13 @@ for a fresh confirmatory claim.
 
 The prospective dataset contains 100 development and 2,000 final source
 clusters. Each contributes four answerable questions and one boundary question,
-for 500 development and 10,000 untouched final cases. DeepSeek V4 Flash and
-Gemini 3.7 Flash alternate authoring; the other family independently answers
-and classifies each question without seeing the author's answer. Deterministic
-code accepts only exact author/verifier agreement with valid source hashes,
-licences, source coordinates, unique wording, and no private data.
+for 500 development and 10,000 untouched final cases. Deterministic code derives
+canonical answers, claims, actions, and exact source ranges before any provider
+call. DeepSeek V4 Flash and Gemini 3.7 Flash alternate question wording; the
+other family independently answers and classifies each question without seeing
+the author's answer. Neither model can modify gold. Acceptance requires
+verifier agreement with deterministic truth, valid source hashes, licences,
+source coordinates, unique wording, and no private data.
 
 The source scan identified a preregistration correction before data creation:
 
@@ -48,13 +50,15 @@ The source scan identified a preregistration correction before data creation:
 - the requested 425 data-structures clusters exceed its theoretical maximum of
   400;
 - no dataset has been written and no acceptance threshold has been lowered;
-- the feasible recommendation is 400 operating-systems, 450 networking, 350
-  data-structures, and 900 Python clusters including 25 development clusters
-  per course.
+- the first feasible recommendation was corrected before provider execution
+  because it counted tiny markup/import fragments and mid-token cuts;
+- AFQC-035 requires token-aligned windows of at least 100 characters and four
+  tokens, producing 396 operating-systems, 450 networking, 350 data-structures,
+  and 904 Python clusters including 25 development clusters per course.
 
 The recommendation yields exactly 2,100 non-overlapping source windows and has
-enough source-matched windows for 735 code, 262 equation, and 53 table clusters
-across development and final splits. AFQC-034 freezes this allocation while
+enough source-matched windows for 735 code, 256 equation, and 53 table clusters
+across development and final splits. AFQC-035 freezes this allocation while
 retaining the source-diversity cap; execution authority remains separate.
 
 ## Product comparison
@@ -89,7 +93,7 @@ required for `completed-keep`.
 ## Stop points
 
 1. Separately authorize dataset construction plus the 500-case development run
-   against the AFQC-034 frozen allocation.
+   against the AFQC-035 frozen allocation.
 2. Review the development result and projected cost. Only a complete pass can
    request separate authorization for the sealed 10,000-case run.
 3. Do not tune and rerun against the same final set after a valid quality

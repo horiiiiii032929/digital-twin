@@ -7,9 +7,12 @@ import argparse
 from collections import Counter
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
+import random
 import sqlite3
+import statistics
 import sys
 import tempfile
 from typing import Any
@@ -57,6 +60,16 @@ DEFAULT_RESPONSES = (
 )
 DEFAULT_OUTPUT = (
     ROOT / "reports/generated/academic-factual-qa-open-10000-v1-result.json"
+)
+DEFAULT_CONTROL_CASES = (
+    DATASET_ROOT / "academic_factual_qa_open_10000_v1_development_control_cases.json"
+)
+DEFAULT_CONTROL_GOLD = (
+    DATASET_ROOT / "academic_factual_qa_open_10000_v1_development_control_gold.json"
+)
+DEFAULT_CONTROL_RESPONSES = (
+    ROOT
+    / "reports/generated/academic-factual-qa-open-10000-v1-development-control-responses.sqlite3"
 )
 
 
@@ -222,6 +235,115 @@ def score_packages(
     }
 
 
+def paired_comparison(
+    candidate: dict[str, Any],
+    control: dict[str, Any],
+    *,
+    lower_delta_gate: float,
+    boundary_not_worse: bool,
+    replicates: int = 10_000,
+    seed: int = 20260826,
+) -> dict[str, Any]:
+    """Compare the candidate with a frozen control subset by source family."""
+
+    candidate_scores = {
+        row["case_id"]: FactualQaCaseScoreV1.model_validate(row)
+        for row in candidate["case_scores"]
+    }
+    control_scores = {
+        row["case_id"]: FactualQaCaseScoreV1.model_validate(row)
+        for row in control["case_scores"]
+    }
+    if not control_scores or not set(control_scores).issubset(candidate_scores):
+        raise OpenBenchmarkScoringError(
+            "control identities must be a non-empty subset of candidate identities"
+        )
+    pairs = [
+        (candidate_scores[case_id], control_scores[case_id])
+        for case_id in sorted(control_scores)
+    ]
+    for candidate_row, control_row in pairs:
+        if (
+            candidate_row.source_family_id != control_row.source_family_id
+            or candidate_row.expected_action != control_row.expected_action
+        ):
+            raise OpenBenchmarkScoringError("paired control metadata drifted")
+
+    answerable = [pair for pair in pairs if pair[0].answerable]
+    boundary = [pair for pair in pairs if not pair[0].answerable]
+    if not answerable or not boundary:
+        raise OpenBenchmarkScoringError(
+            "paired comparison requires answerable and boundary cases"
+        )
+
+    family_deltas: dict[str, list[float]] = {}
+    for candidate_row, control_row in answerable:
+        family_deltas.setdefault(candidate_row.source_family_id, []).append(
+            float(candidate_row.fully_grounded_success)
+            - float(control_row.fully_grounded_success)
+        )
+    family_means = [
+        statistics.fmean(values) for _, values in sorted(family_deltas.items())
+    ]
+    rng = random.Random(seed)
+    samples = sorted(
+        statistics.fmean(rng.choice(family_means) for _ in family_means)
+        for _ in range(replicates)
+    )
+    candidate_boundary = statistics.fmean(
+        float(candidate_row.boundary_safe) for candidate_row, _ in boundary
+    )
+    control_boundary = statistics.fmean(
+        float(control_row.boundary_safe) for _, control_row in boundary
+    )
+    lower_95 = samples[math.floor(0.025 * (replicates - 1))]
+    paired_gates = {
+        "supported_answer_retention_lower_95": lower_95 >= lower_delta_gate,
+        "boundary_safety_not_worse": (
+            candidate_boundary >= control_boundary if boundary_not_worse else True
+        ),
+    }
+    candidate_gates = candidate["gate_results"]
+    return {
+        "schema_version": 1,
+        "instrument_id": INSTRUMENT_ID,
+        "status": (
+            "completed-keep"
+            if all(candidate_gates.values()) and all(paired_gates.values())
+            else "completed-refine"
+        ),
+        "decision": (
+            "Keep"
+            if all(candidate_gates.values()) and all(paired_gates.values())
+            else "Refine"
+        ),
+        "candidate_status": candidate["status"],
+        "control_status": control["status"],
+        "paired_case_count": len(pairs),
+        "paired_answerable_count": len(answerable),
+        "paired_boundary_count": len(boundary),
+        "supported_answer_retention": {
+            "estimate": statistics.fmean(family_means),
+            "lower_95": lower_95,
+            "upper_95": samples[math.ceil(0.975 * (replicates - 1))],
+            "source_family_count": len(family_means),
+            "replicates": replicates,
+            "seed": seed,
+        },
+        "boundary_safety": {
+            "candidate": candidate_boundary,
+            "control": control_boundary,
+            "delta": candidate_boundary - control_boundary,
+        },
+        "candidate_gate_results": candidate_gates,
+        "paired_gate_results": paired_gates,
+        "failed_gates": sorted(
+            [key for key, passed in candidate_gates.items() if not passed]
+            + [key for key, passed in paired_gates.items() if not passed]
+        ),
+    }
+
+
 def _synthetic_packages(directory: Path) -> tuple[Path, Path, Path]:
     reference = CanonicalEvidenceRefV1(
         source_artifact_id="source-001",
@@ -333,20 +455,43 @@ def main() -> int:
     mode.add_argument("--validate", action="store_true")
     mode.add_argument("--simulate", action="store_true")
     mode.add_argument("--score", action="store_true")
+    mode.add_argument("--compare", action="store_true")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
     parser.add_argument("--gold", type=Path, default=DEFAULT_GOLD)
     parser.add_argument("--responses", type=Path, default=DEFAULT_RESPONSES)
+    parser.add_argument("--control-cases", type=Path, default=DEFAULT_CONTROL_CASES)
+    parser.add_argument("--control-gold", type=Path, default=DEFAULT_CONTROL_GOLD)
+    parser.add_argument(
+        "--control-responses", type=Path, default=DEFAULT_CONTROL_RESPONSES
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     arguments = parser.parse_args()
-    if arguments.score:
+    if arguments.score or arguments.compare:
         require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "heldout_execution")
         if arguments.output.exists():
             raise OpenBenchmarkScoringError("result output already exists")
-        result = score_packages(
+        candidate = score_packages(
             cases_path=arguments.cases,
             gold_path=arguments.gold,
             responses_path=arguments.responses,
         )
+        if arguments.compare:
+            control = score_packages(
+                cases_path=arguments.control_cases,
+                gold_path=arguments.control_gold,
+                responses_path=arguments.control_responses,
+            )
+            gates = _load_json(INSTRUMENT_PATH)["hard_gates"]
+            result = paired_comparison(
+                candidate,
+                control,
+                lower_delta_gate=gates[
+                    "paired_supported_retention_delta_lower_95_min"
+                ],
+                boundary_not_worse=gates["paired_boundary_safety_not_worse"],
+            )
+        else:
+            result = candidate
         arguments.output.parent.mkdir(parents=True, exist_ok=True)
         descriptor = os.open(
             arguments.output, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600

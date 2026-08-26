@@ -21,6 +21,7 @@ from src.digital_twin.evaluation.factual_qa_adapters import (
     HttpTutorEvaluationAdapterV1,
     StudentTutoringServiceAdapterV1,
 )
+from scripts.score_academic_factual_qa_open_10000 import paired_comparison
 from src.digital_twin.student.models import Citation, Message, TutorTurn
 
 
@@ -242,3 +243,57 @@ def test_bootstrap_uses_source_families_not_case_rows() -> None:
 
     assert interval["source_family_count"] == 2
     assert interval["estimate"] == 0.5
+
+
+def test_paired_comparison_uses_matching_case_ids_and_source_families() -> None:
+    citation = EvaluationCitationV1(
+        source_artifact_id="source-001",
+        source_version=1,
+        source_sha256=SOURCE_HASH,
+        char_start=20,
+        char_end=60,
+    )
+    answerable = score_case(_case(), _gold(), _response(citation=citation))
+    boundary = answerable.model_copy(
+        update={
+            "case_id": "case-002",
+            "expected_action": EvaluationAction.ABSTAIN,
+            "actual_action": EvaluationAction.ABSTAIN,
+            "answerable": False,
+            "fully_grounded_success": False,
+            "boundary_safe": True,
+        }
+    )
+    candidate = {
+        "status": "completed-keep",
+        "gate_results": {"candidate-quality": True},
+        "case_scores": [
+            answerable.model_dump(mode="json"),
+            boundary.model_dump(mode="json"),
+        ],
+    }
+    control = {
+        "status": "completed-refine",
+        "gate_results": {"unused-control-gate": False},
+        "case_scores": [
+            answerable.model_dump(mode="json"),
+            boundary.model_dump(mode="json"),
+        ],
+    }
+
+    result = paired_comparison(
+        candidate,
+        control,
+        lower_delta_gate=-0.03,
+        boundary_not_worse=True,
+        replicates=100,
+        seed=7,
+    )
+
+    assert result["status"] == "completed-keep"
+    assert result["paired_case_count"] == 2
+    assert result["supported_answer_retention"]["lower_95"] == 0
+    assert result["paired_gate_results"] == {
+        "supported_answer_retention_lower_95": True,
+        "boundary_safety_not_worse": True,
+    }

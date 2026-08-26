@@ -726,12 +726,16 @@ Current utilities:
   uniqueness, byte stability, and zero private/provider access. `--write`
   remains blocked by the repository freeze.
 - `build_academic_factual_qa_open_10000.py`,
+  `construct_academic_factual_qa_open_10000.py`,
   `run_academic_factual_qa_open_10000.py`, and
   `score_academic_factual_qa_open_10000.py`: define the flow-independent
   professor-facing successor. The builder inventories pinned open educational
   sources and proves the originally requested course allocation is impossible
-  under the five-cluster source-family cap; its feasible correction remains
-  researcher-unapproved. The response runner accepts only `EvaluationCaseV1`,
+  under the five-cluster source-family cap. AFQC-035 removes tiny markup and
+  mid-token fragments and freezes 2,100 context-bearing windows. The constructor
+  derives gold before any model call, limits DeepSeek/Gemini to question wording
+  and independent verification, and keeps raw responses in an ignored SQLite
+  ledger. The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden
   gold. The scorer opens `EvaluationGoldV1` only after durable completion and
@@ -739,7 +743,11 @@ Current utilities:
   source-family bootstrap metrics. Run `npm run
   verify:academic-factual-qa-open-10000`, `npm run
   simulate:academic-factual-qa-open-10000`, or the development/final preflight
-  commands. Dataset writing and every provider/final action remain blocked.
+  commands. The development scoring and comparison commands open hidden gold
+  only after both response ledgers are complete and evaluate the frozen paired
+  100-case control using a source-family bootstrap. The researcher has authorized construction and the 500-case
+  development run, but execution remains blocked until the separate clean
+  authorization commit; final 10,000-case execution remains closed.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

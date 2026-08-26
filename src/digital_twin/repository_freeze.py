@@ -43,6 +43,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_visual_supplement.py": (
             "dataset_generation",
         ),
+        "scripts/construct_academic_factual_qa_open_10000.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+        ),
         "scripts/build_evidence_sufficiency_v2_decision_draft.py": (
             "dataset_generation",
         ),
@@ -288,7 +292,10 @@ def require_pre_evaluation_operation_allowed(operation: str) -> None:
         )
 
 
-def require_bounded_pilot_operation_allowed(instrument_id: str) -> None:
+def require_bounded_pilot_operation_allowed(
+    instrument_id: str,
+    operation: str | None = None,
+) -> None:
     """Authorize only an exact, reviewed pilot while retaining the global freeze."""
 
     operations = BOUNDED_PILOT_AUTHORIZATIONS.get(instrument_id)
@@ -297,8 +304,13 @@ def require_bounded_pilot_operation_allowed(instrument_id: str) -> None:
             f"{instrument_id!r} is not a bounded authorization under {FREEZE_ID}"
         )
     if not operations or any(
-        operation not in BLOCKED_OPERATIONS for operation in operations
+        allowed_operation not in BLOCKED_OPERATIONS
+        for allowed_operation in operations
     ):
         raise RepositoryFreezeError(
             f"{instrument_id!r} has an invalid bounded authorization"
+        )
+    if operation is not None and operation not in operations:
+        raise RepositoryFreezeError(
+            f"{instrument_id!r} is not authorized for {operation!r}"
         )

@@ -9,6 +9,10 @@ from scripts.build_academic_factual_qa_open_10000 import (
     preflight,
     validate_design,
 )
+from src.digital_twin.evaluation import (
+    SourceClusterV1,
+    build_deterministic_cluster_truth,
+)
 
 
 def test_requested_allocation_is_rejected_and_correction_is_feasible() -> None:
@@ -35,11 +39,13 @@ def test_recommended_plan_is_stable_stratified_and_non_overlapping() -> None:
         "final": 2000,
     }
     assert Counter(row["course_id"] for row in clusters) == {
-        "operating-systems": 400,
+        "operating-systems": 396,
         "computer-networking": 450,
         "data-structures": 350,
-        "python-programming": 900,
+        "python-programming": 904,
     }
+    assert min(len(row["text"]) for row in clusters) >= 100
+    assert min(len(row["text"].split()) for row in clusters) >= 4
     assert Counter(row["answerable_slices"][-1] for row in clusters if row["split"] == "final") == {
         "multi-evidence": 1000,
         "structured-code": 700,
@@ -72,3 +78,23 @@ def test_frozen_allocation_passes_but_paid_preflight_stays_blocked() -> None:
     assert "source-allocation-not-approved" not in live["blockers"]
     assert "dataset-construction-authorized-false" in live["blockers"]
     assert live["provider_calls"] == 0
+
+
+def test_all_2100_source_windows_yield_deterministic_truth_without_provider_calls() -> None:
+    plan = build_recommended_source_plan()
+    cases = 0
+    for payload in plan["clusters"]:
+        cluster = SourceClusterV1.model_validate(payload)
+        truth = build_deterministic_cluster_truth(
+            cluster,
+            course_ids=(
+                "operating-systems",
+                "computer-networking",
+                "data-structures",
+                "python-programming",
+            ),
+        )
+        assert len(truth.questions) == 5
+        cases += len(truth.questions)
+
+    assert cases == 10_500

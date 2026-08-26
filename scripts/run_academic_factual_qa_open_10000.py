@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 from typing import Any, Callable
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
@@ -53,6 +54,16 @@ DEFAULT_MANIFEST = (
 )
 DEFAULT_OUTPUT = (
     ROOT / "reports/generated/academic-factual-qa-open-10000-v1-responses.sqlite3"
+)
+DEFAULT_PROVIDER_LEDGER = (
+    ROOT / "reports/generated/academic-factual-qa-open-10000-v1-provider.sqlite3"
+)
+DEFAULT_STATE = (
+    ROOT / "reports/generated/academic-factual-qa-open-10000-v1-product-state.sqlite3"
+)
+PROVIDER_BINDING_PATH = (
+    ROOT
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json"
 )
 
 
@@ -136,6 +147,7 @@ def _load_adapter(
     *,
     manifest: SystemUnderTestManifestV1,
     cases: list[EvaluationCaseV1],
+    runtime: dict[str, Any],
 ) -> TutorEvaluationAdapterV1:
     module_name, separator, function_name = factory_path.partition(":")
     if not separator or not module_name or not function_name:
@@ -145,7 +157,7 @@ def _load_adapter(
     factory: Callable[..., TutorEvaluationAdapterV1] = getattr(
         importlib.import_module(module_name), function_name
     )
-    adapter = factory(manifest=manifest, cases=cases)
+    adapter = factory(manifest=manifest, cases=cases, runtime=runtime)
     if adapter.flow_id != manifest.flow_id or adapter.adapter_version != manifest.adapter_version:
         raise OpenBenchmarkExecutionError("adapter and system manifest identities differ")
     return adapter
@@ -179,6 +191,8 @@ def preflight(
     cases_path: Path,
     manifest_path: Path,
     output: Path,
+    provider_ledger: Path,
+    state_path: Path,
     resume: bool,
 ) -> dict[str, Any]:
     validate_contract()
@@ -207,10 +221,28 @@ def preflight(
         blockers.append("working-tree-dirty")
     if not os.getenv("DEEPSEEK_API_KEY", "").strip():
         blockers.append("deepseek-credential-missing")
-    if resume and not output.is_file():
-        blockers.append("resume-output-missing")
-    if not resume and output.exists():
-        blockers.append("exclusive-output-path-used")
+    if not PROVIDER_BINDING_PATH.is_file():
+        blockers.append("provider-binding-missing")
+    else:
+        binding = _load_json(PROVIDER_BINDING_PATH)
+        try:
+            verified_at = datetime.fromisoformat(binding["verified_at"])
+            age = (
+                datetime.now(timezone.utc) - verified_at.astimezone(timezone.utc)
+            ).total_seconds() / 3600
+            if age > instrument["execution"]["provider_metadata_freshness_hours"]:
+                blockers.append("provider-metadata-stale")
+        except (KeyError, TypeError, ValueError):
+            blockers.append("provider-binding-invalid")
+    runtime_outputs = (output, provider_ledger, state_path)
+    if resume:
+        for path in runtime_outputs:
+            if not path.is_file():
+                blockers.append(f"resume-{path.stem}-missing")
+    else:
+        for path in runtime_outputs:
+            if path.exists():
+                blockers.append(f"exclusive-{path.stem}-used")
     return {
         "instrument_id": INSTRUMENT_ID,
         "stage": stage,
@@ -296,11 +328,23 @@ async def execute(
     manifest_path: Path,
     output: Path,
     adapter_factory: str,
+    provider_ledger: Path,
+    state_path: Path,
     resume: bool,
 ) -> dict[str, Any]:
     public_package, cases = _load_public_cases(cases_path)
     manifest = _load_manifest(manifest_path)
-    adapter = _load_adapter(adapter_factory, manifest=manifest, cases=cases)
+    runtime = {
+        "instrument_id": INSTRUMENT_ID,
+        "cases_sha256": public_package["content_sha256"],
+        "code_revision": _repo_revision(),
+        "provider_ledger_path": str(provider_ledger),
+        "state_path": str(state_path),
+        "resume": resume,
+    }
+    adapter = _load_adapter(
+        adapter_factory, manifest=manifest, cases=cases, runtime=runtime
+    )
     run_configuration = {
         "instrument_id": INSTRUMENT_ID,
         "dataset_id": public_package["dataset_id"],
@@ -344,6 +388,8 @@ def main() -> int:
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--provider-ledger", type=Path, default=DEFAULT_PROVIDER_LEDGER)
+    parser.add_argument("--state-path", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--adapter-factory")
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
@@ -356,6 +402,8 @@ def main() -> int:
             cases_path=arguments.cases,
             manifest_path=arguments.manifest,
             output=arguments.output,
+            provider_ledger=arguments.provider_ledger,
+            state_path=arguments.state_path,
             resume=arguments.resume,
         )
         if ready["status"] != "ready":
@@ -370,6 +418,8 @@ def main() -> int:
                 manifest_path=arguments.manifest,
                 output=arguments.output,
                 adapter_factory=arguments.adapter_factory,
+                provider_ledger=arguments.provider_ledger,
+                state_path=arguments.state_path,
                 resume=arguments.resume,
             )
         )
@@ -379,6 +429,8 @@ def main() -> int:
             cases_path=arguments.cases,
             manifest_path=arguments.manifest,
             output=arguments.output,
+            provider_ledger=arguments.provider_ledger,
+            state_path=arguments.state_path,
             resume=arguments.resume,
         )
     elif arguments.simulate:

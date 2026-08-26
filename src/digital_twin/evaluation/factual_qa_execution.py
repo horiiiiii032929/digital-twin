@@ -177,8 +177,17 @@ async def execute_cases(
                     trace={"failure_type": type(error).__name__},
                 )
             ledger.record(response)
+        validate_completion = getattr(adapter, "validate_completion", None)
+        if callable(validate_completion):
+            validate_completion()
         ledger.mark_complete(expected_count=len(rows))
+        finalize = getattr(adapter, "finalize", None)
+        if callable(finalize):
+            finalize()
         return ledger.snapshot()
     except BaseException:
         ledger.mark_interrupted()
+        interrupt = getattr(adapter, "interrupt", None)
+        if callable(interrupt):
+            interrupt()
         raise

@@ -35,8 +35,8 @@
   },
   "allocation": {
     "status": "frozen-approved",
-    "approved_at": "2026-08-26",
-    "approval_record": "AFQC-034",
+    "approved_at": "2026-08-27",
+    "approval_record": "AFQC-035",
     "requested_final": {
       "operating-systems": 100,
       "computer-networking": 1050,
@@ -52,19 +52,20 @@
     "requested_allocation_feasible": false,
     "infeasibility_reason": "The pinned networking snapshot exposes 99 eligible original sections, so the five-cluster cap permits at most 495 networking clusters; 1,075 requested development-plus-final networking clusters is impossible. Data structures similarly permits at most 400 original-section clusters but requests 425.",
     "recommended_final": {
-      "operating-systems": 375,
+      "operating-systems": 371,
       "computer-networking": 425,
       "data-structures": 325,
-      "python-programming": 875
+      "python-programming": 879
     },
     "recommended_total_with_development": {
-      "operating-systems": 400,
+      "operating-systems": 396,
       "computer-networking": 450,
       "data-structures": 350,
-      "python-programming": 900
+      "python-programming": 904
     },
-    "selection_rule": "course-stratified deterministic selection, first cluster per section before reuse, then successive disjoint windows up to five",
-    "freeze_requirement": "Satisfied by AFQC-034. Any allocation change requires a versioned successor before source-plan writing or provider execution."
+    "selection_rule": "course-stratified deterministic selection over token-aligned source windows of at least 100 characters and four tokens, first cluster per section before reuse, then successive disjoint windows up to five",
+    "amendment_reason": "AFQC-035 removes tiny markup and mid-token fragments discovered during the pre-spend source audit. Four operating-systems clusters move to Python while all final case and slice totals remain unchanged.",
+    "freeze_requirement": "Satisfied prospectively by AFQC-035 before source-plan writing or provider execution. Any further allocation change requires a versioned successor."
   },
   "final_case_distribution": {
     "actions": {
@@ -88,6 +89,8 @@
     }
   },
   "construction": {
+    "truth_authority": "deterministic-source-linked-before-provider-calls",
+    "model_may_modify_truth": false,
     "author_families": [
       "deepseek-v4-flash",
       "gemini-3.7-flash"
@@ -95,6 +98,8 @@
     "alternate_author_by_cluster": true,
     "other_family_independent_verifier": true,
     "verifier_sees_author_answer": false,
+    "author_output_scope": "natural-language-question-wording-only",
+    "verifier_output_scope": "independent-answer-and-action-check-against-deterministic-truth",
     "acceptance_requires": [
       "exact answer and evidence spans in pinned source",
       "author-verifier action and answer agreement",
@@ -150,6 +155,9 @@
     "model_identity_checks": true,
     "complete_usage_accounting": true,
     "provider_metadata_freshness_hours": 24,
+    "development_construction_maximum_calls": 202,
+    "final_construction_maximum_calls": 4002,
+    "construction_emergency_cost_stop_usd": 3.0,
     "development_candidate_case_count": 500,
     "development_control_case_count": 100,
     "final_candidate_case_count": 10000,

@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-26
+Status date: 2026-08-27
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -20,15 +20,22 @@ The build-only source scan found that the requested course allocation cannot
 satisfy its own five-clusters-per-original-section cap: networking requests
 1,075 development-plus-final clusters but permits at most 495; data structures
 requests 425 but permits at most 400. No dataset was written and no threshold
-was weakened. The tested feasible correction is 400 operating-systems, 450
-networking, 350 data-structures, and 900 Python clusters including 25
+was weakened. A pre-spend source audit then found that the first frozen plan
+counted tiny markup/import fragments and mid-token cuts as clusters. No provider
+call was made. AFQC-035 corrects the allocator to require token-aligned windows
+of at least 100 characters and four tokens. The tested feasible allocation is
+396 operating-systems, 450 networking, 350 data-structures, and 904 Python
+clusters including 25
 development clusters per course. It produces exactly 2,100 non-overlapping
 source windows and 10,500 prospective cases with the requested code, equation,
-table, answerable, and boundary strata. AFQC-034 freezes this correction because
+table, answerable, and boundary strata. AFQC-035 freezes this correction because
 it preserves the academically important source-diversity cap instead of
-inflating the row count through repeated use of a few sections. Dataset
-construction, the 500-case paid development run, and the sealed 10,000-case run
-remain unauthorized.
+inflating the row count through repeated use of a few sections. The deterministic
+source/claim layer is now authoritative before model calls; DeepSeek and Gemini
+can author wording and independently verify it but cannot define or mutate
+gold. Dataset construction and the 500-case paid development run have researcher
+authorization but remain unexecuted until the bounded clean checkpoint is
+published. The sealed 10,000-case product run remains unauthorized.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -52,7 +59,7 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 567 executable or execution-affecting
+the current branch extends it to all 572 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -351,7 +358,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 567-file audit. Evaluation
+artifacts are also fully dispositioned in the current 572-file audit. Evaluation
 execution remains frozen, with 78/78 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 

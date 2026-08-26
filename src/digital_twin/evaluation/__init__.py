@@ -75,17 +75,25 @@ from src.digital_twin.evaluation.factual_qa_scoring import (
     summarize_scores,
 )
 from src.digital_twin.evaluation.factual_qa_dataset import (
+    AuthoredClusterVariantsV1,
+    AuthoredQuestionVariantV1,
     ClusterDraftV1,
+    DeterministicClusterTruthV1,
+    DeterministicQuestionTruthV1,
     DraftEvidenceSpanV1,
     DraftQuestionV1,
     SourceClusterV1,
+    assemble_deterministic_verified_cluster,
     assemble_verified_cluster,
+    build_deterministic_cluster_truth,
     normalize_question,
     source_cluster_hash,
 )
 
 
 __all__ = [
+    "AuthoredClusterVariantsV1",
+    "AuthoredQuestionVariantV1",
     "CandidateEvaluation",
     "CanonicalEvidenceRefV1",
     "ClusterDraftV1",
@@ -96,6 +104,8 @@ __all__ = [
     "ComponentProfileEntry",
     "ComponentStatus",
     "DecisionOutcome",
+    "DeterministicClusterTruthV1",
+    "DeterministicQuestionTruthV1",
     "DraftEvidenceSpanV1",
     "DraftQuestionV1",
     "EvaluationDecision",
@@ -134,9 +144,11 @@ __all__ = [
     "VisualDescriptionProvider",
     "VisualRegionLineage",
     "aggregate_rows",
+    "assemble_deterministic_verified_cluster",
     "assemble_verified_cluster",
     "assign_boundary_courses",
     "build_course_scoped_ladders",
+    "build_deterministic_cluster_truth",
     "development_thresholds",
     "evaluate_cases",
     "evaluate_development_cases",

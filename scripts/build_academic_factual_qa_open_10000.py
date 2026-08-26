@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.build_academic_factual_qa_confirmation_v2 import (
+from scripts.build_academic_factual_qa_confirmation_v2 import (  # noqa: E402
     COURSES,
     SNAPSHOT_ROOT,
     Section,
@@ -33,8 +33,10 @@ from scripts.build_academic_factual_qa_confirmation_v2 import (
     canonical_sha256,
     file_sha256,
 )
-from src.digital_twin.evaluation import EvaluationSplit, SourceClusterV1
-from src.digital_twin.repository_freeze import require_pre_evaluation_operation_allowed
+from src.digital_twin.evaluation import EvaluationSplit, SourceClusterV1  # noqa: E402
+from src.digital_twin.repository_freeze import (  # noqa: E402
+    require_bounded_pilot_operation_allowed,
+)
 
 
 INSTRUMENT_ID = "academic-factual-qa-open-10000-v1"
@@ -59,13 +61,13 @@ REQUESTED_FINAL_ALLOCATION = {
     "python-programming": 450,
 }
 RECOMMENDED_FINAL_ALLOCATION = {
-    "operating-systems": 375,
+    "operating-systems": 371,
     "computer-networking": 425,
     "data-structures": 325,
-    "python-programming": 875,
+    "python-programming": 879,
 }
 MAX_CLUSTERS_PER_SECTION = 5
-MIN_TEXT_WINDOW_CHARACTERS = 80
+MIN_TEXT_WINDOW_CHARACTERS = 100
 BOUNDARY_SLICES = ("no-evidence", "cross-course", "ambiguity", "academic-integrity")
 
 SEMANTIC_PATTERNS: dict[str, tuple[str, ...]] = {
@@ -184,30 +186,41 @@ def _text_fill_ranges(
 
 
 def _windows_for_section(section: Section) -> list[SourceWindow]:
-    candidates = _semantic_ranges(section.text)
+    window_count = min(
+        MAX_CLUSTERS_PER_SECTION,
+        len(section.text) // MIN_TEXT_WINDOW_CHARACTERS,
+    )
+    if window_count == 0:
+        return []
+    token_starts = [match.start() for match in re.finditer(r"\S+", section.text)]
+    cuts = [0]
+    for index in range(1, window_count):
+        target = round(index * len(section.text) / window_count)
+        later = [start for start in token_starts if start >= target]
+        cuts.append(later[0] if later else target)
+    cuts.append(len(section.text))
+    semantic = _semantic_ranges(section.text)
     priority = {
         "structured-table": 0,
         "structured-equation": 1,
         "structured-code": 2,
+        "text": 3,
     }
-    candidates.sort(key=lambda row: (priority[row[2]], row[0], -(row[1] - row[0])))
     selected: list[tuple[int, int, str]] = []
-    for start, end, modality in candidates:
-        if any(max(start, left) < min(end, right) for left, right, _ in selected):
+    for start, end in zip(cuts, cuts[1:]):
+        window_text = section.text[start:end]
+        if (
+            len(window_text) < MIN_TEXT_WINDOW_CHARACTERS
+            or len(re.findall(r"\S+", window_text)) < 4
+        ):
             continue
+        overlapping = [
+            modality
+            for semantic_start, semantic_end, modality in semantic
+            if max(start, semantic_start) < min(end, semantic_end)
+        ]
+        modality = min(overlapping, key=lambda row: priority[row]) if overlapping else "text"
         selected.append((start, end, modality))
-        if len(selected) == MAX_CLUSTERS_PER_SECTION:
-            break
-    selected.extend(
-        _text_fill_ranges(
-            section.text,
-            selected,
-            MAX_CLUSTERS_PER_SECTION - len(selected),
-        )
-    )
-    if not selected:
-        selected = [(0, len(section.text), "text")]
-    selected.sort(key=lambda row: row[0])
     return [
         SourceWindow(
             course_id=section.course_id,
@@ -310,9 +323,9 @@ def _slice_assignments(cluster_count: int, *, split: EvaluationSplit) -> list[tu
         if cluster_count != 100:
             raise OpenBenchmarkBuildError("development slice assignment requires 100 clusters")
         extended = (
-            ["multi-evidence"] * 50
+            ["multi-evidence"] * 56
             + ["structured-code"] * 35
-            + ["structured-equation"] * 12
+            + ["structured-equation"] * 6
             + ["structured-table"] * 3
         )
     return [
@@ -368,7 +381,21 @@ def _allocate_windows_for_slices(
         )
         if not available[course_id]:
             raise OpenBenchmarkBuildError(f"{course_id} exhausted before its quota")
-        chosen = available[course_id].pop(0)
+        chosen = min(
+            available[course_id],
+            key=lambda row: (
+                {
+                    "text": 0,
+                    "structured-code": 1,
+                    "structured-equation": 2,
+                    "structured-table": 3,
+                }[row.modality],
+                row.window_index,
+                row.section.path,
+                row.relative_start,
+            ),
+        )
+        available[course_id].remove(chosen)
         remaining_quota[course_id] -= 1
         selected[index] = chosen
     if any(remaining_quota.values()):
@@ -437,7 +464,6 @@ def build_recommended_source_plan() -> dict[str, Any]:
     final_pairs = _allocate_windows_for_slices(
         remaining, RECOMMENDED_FINAL_ALLOCATION, final_slices
     )
-    final = [row for row, _ in final_pairs]
     clusters = [
         _cluster_record(
             row,
@@ -543,7 +569,7 @@ def main() -> int:
     mode.add_argument("--write-source-plan", action="store_true")
     arguments = parser.parse_args()
     if arguments.write_source_plan:
-        require_pre_evaluation_operation_allowed("dataset_generation")
+        require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "dataset_generation")
         instrument = _load_instrument()
         if instrument["allocation"]["status"] != "frozen-approved" or not instrument[
             "execution"
