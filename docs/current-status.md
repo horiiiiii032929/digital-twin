@@ -230,6 +230,12 @@ locks remain. Google AI Studio currently retains these public evaluation inputs
 for up to 55 days and does not train on them. No paid call has occurred at this
 build checkpoint.
 
+AFQC-024 is the one-time execution checkpoint. It authorizes only the 40-control
+attempt-003 calibration under the existing 20-call, zero-retry, USD 0.406426
+reservation, and USD 3 emergency stop. The 200-case panel, visual work, live T0
+product execution, private data, and 600/10,000-case stages remain locked. This
+authority must be revoked after a pass, quality failure, or invalid execution.
+
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
 DeepSeek V4 Flash 0731 and V4 Pro 0813 revisions using conservative peak prices,
