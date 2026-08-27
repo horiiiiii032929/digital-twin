@@ -4,6 +4,7 @@ import pytest
 from services.llm import LiteLlmClient
 from src.digital_twin.llm import (
     LlmAuthenticationError,
+    LlmIdentityDriftError,
     LlmMalformedResponseError,
     LlmMessage,
     LlmTimeoutError,
@@ -310,5 +311,7 @@ async def test_litellm_adapter_rejects_model_or_revision_drift():
         completion=completion,
     )
 
-    with pytest.raises(LlmMalformedResponseError):
+    with pytest.raises(LlmIdentityDriftError) as captured:
         await client.chat([LlmMessage(role="user", content="test")], task="test")
+    assert captured.value.provider_model == "deepseek-v4-pro"
+    assert captured.value.provider_revision == "unexpected"

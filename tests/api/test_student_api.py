@@ -7,6 +7,12 @@ from fastapi.testclient import TestClient
 from services.api.app.config import AppSettings, StudentTutoringMode
 from services.api.app.factory import create_app
 from src.digital_twin.generation import authoritative_citation_for_chunk
+from src.digital_twin.grounding import (
+    AnyHitEvidenceGate,
+    AtomicAnswerClaim,
+    AtomicClaimEvidenceValidator,
+    ExactQuoteAtomicClaimVerifier,
+)
 from src.digital_twin.grounding.models import (
     GenerationTrace,
     GenerationUsage,
@@ -14,7 +20,6 @@ from src.digital_twin.grounding.models import (
     SourceCitation,
     TutorAnswer,
 )
-from src.digital_twin.grounding import AnyHitEvidenceGate
 from src.digital_twin.student import (
     SQLiteStudentRepository,
     StudentReleaseStatus,
@@ -142,6 +147,44 @@ class BarrierGenerator:
         )
 
 
+class AtomicClaimGenerator:
+    implementation_id = "atomic-claim-test-generator"
+
+    def __init__(self, *, supported: bool) -> None:
+        self.supported = supported
+
+    async def generate(self, question, hits, policy):
+        del question, policy
+        hit = hits[0]
+        claim_text = (
+            hit.chunk.text
+            if self.supported
+            else "This factual claim does not occur in the approved evidence."
+        )
+        return TutorAnswer(
+            content=claim_text,
+            citations=[authoritative_citation_for_chunk(hit.chunk)],
+            atomic_claims=[
+                AtomicAnswerClaim(
+                    claim_id="claim-test",
+                    text=claim_text,
+                    evidence_hit_ids=[hit.chunk.id],
+                )
+            ],
+            trace=GenerationTrace(
+                generator_id=self.implementation_id,
+                provider_model="synthetic/atomic-claim",
+                prompt_version="synthetic-v1",
+                policy_action="answer",
+                latency_ms=3,
+                usage=GenerationUsage(
+                    input_tokens=11,
+                    output_tokens=7,
+                    total_tokens=18,
+                    approximate_cost_usd=0.001,
+                ),
+            ),
+        )
 def _headers(account_id: str) -> dict[str, str]:
     return {"X-Account-ID": account_id}
 
@@ -151,6 +194,7 @@ def _client(
     *,
     embedder=None,
     generator=None,
+    claim_evidence_validator=None,
     tutoring_mode: StudentTutoringMode = StudentTutoringMode.GROUNDED_ASSISTANT,
 ) -> tuple[TestClient, SQLiteStudentRepository, object]:
     repository = SQLiteStudentRepository(tmp_path / "student.sqlite3")
@@ -160,10 +204,19 @@ def _client(
         student_embedder=embedder,
         student_generator=generator,
         student_evidence_gate=AnyHitEvidenceGate(),
+        student_claim_evidence_validator=claim_evidence_validator,
         region_crop_root=tmp_path / "region-crops",
         settings=AppSettings(student_tutoring_mode=tutoring_mode),
     )
     return TestClient(app), repository, fixture
+
+
+def _exact_claim_validator() -> AtomicClaimEvidenceValidator:
+    return AtomicClaimEvidenceValidator(
+        ExactQuoteAtomicClaimVerifier(),
+        minimum_entailment=1,
+        maximum_contradiction=0,
+    )
 
 
 def test_bounded_tutoring_graph_persists_intent_and_learner_state(tmp_path):
@@ -691,6 +744,88 @@ def test_altered_generator_citation_lineage_fails_closed(tmp_path):
     assert response.status_code == 200
     assert response.json()["tutor_message"]["action"] == "safe-citation-failure"
     assert response.json()["citations"] == []
+
+
+def test_post_generation_claim_boundary_releases_supported_claims(tmp_path):
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        generator=AtomicClaimGenerator(supported=True),
+        claim_evidence_validator=_exact_claim_validator(),
+    )
+    conversation = _create_conversation(client, fixture)
+
+    response = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain cache coherence.", "request_id": "claim-pass"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["tutor_message"]["action"] == "answer"
+    assert response.json()["citations"]
+    event = next(
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "post-generation-claim-validation"
+    )
+    assert event.details["releasable"] is True
+    assert event.details["claim_count"] == event.details["supported_claim_count"] == 1
+
+
+def test_post_generation_claim_boundary_rejects_without_losing_accounting(tmp_path):
+    client, repository, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        generator=AtomicClaimGenerator(supported=False),
+        claim_evidence_validator=_exact_claim_validator(),
+    )
+    conversation = _create_conversation(client, fixture)
+
+    response = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain cache coherence.", "request_id": "claim-fail"},
+    )
+
+    assert response.status_code == 200
+    tutor = response.json()["tutor_message"]
+    assert tutor["action"] == "safe-claim-validation-failure"
+    assert tutor["trace"]["provider_model"] == "synthetic/atomic-claim"
+    assert tutor["trace"]["usage"] == {
+        "input_tokens": 11,
+        "output_tokens": 7,
+        "total_tokens": 18,
+        "approximate_cost_usd": 0.001,
+    }
+    assert response.json()["citations"] == []
+    event = next(
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "post-generation-claim-validation"
+    )
+    assert event.details["releasable"] is False
+    assert event.details["claim_count"] == 1
+    assert event.details["supported_claim_count"] == 0
+
+
+def test_post_generation_claim_boundary_is_inert_when_unselected(tmp_path):
+    client, _, fixture = _client(
+        tmp_path,
+        embedder=KeywordEmbedder(),
+        generator=AtomicClaimGenerator(supported=False),
+    )
+    conversation = _create_conversation(client, fixture)
+
+    response = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain cache coherence.", "request_id": "claim-control"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["tutor_message"]["action"] == "answer"
+    assert response.json()["citations"]
 
 
 def test_conversation_survives_repository_and_application_restart(tmp_path):

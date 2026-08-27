@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-calibration-attempt-005-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "df9c0adf391262276d2cf2fad96e35a58f7e3a23",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "codex-gemini-single-endpoint-calibration",
+        "version": "attempt-004-invalid",
+        "configuration": {
+          "control_count": 40,
+          "reviewer_count": 2,
+          "allowed_endpoint_count": 1,
+          "minimum_healthy_endpoint_count": 1,
+          "real_provider_calls": 2
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "simulated-gemini-control-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "allowed-endpoint-count",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "minimum-healthy-endpoint-count",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-inference-call-count",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-predecessor-evidence",
+          "passed": true,
+          "evidence": "Attempt 004 and its two HTTP 429 failures remain unchanged."
+        },
+        {
+          "name": "fixed-reviewer-model-revision",
+          "passed": true,
+          "evidence": "The control fixed Gemini revision google/gemini-3.7-flash-20260813."
+        },
+        {
+          "name": "bounded-provider-fallback",
+          "passed": false,
+          "evidence": "The control pinned one AI Studio endpoint and disabled fallback."
+        },
+        {
+          "name": "complete-route-accounting",
+          "passed": false,
+          "evidence": "No control call completed, so there is no successful runtime route record."
+        },
+        {
+          "name": "downstream-execution-closed",
+          "passed": true,
+          "evidence": "Attempt 004 did not open confirmation, visual, product, private-data, or scale execution."
+        }
+      ],
+      "failures_by_category": {
+        "provider-http-429": 2
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "codex-gemini-high-availability-calibration",
+        "version": "attempt-005-build",
+        "configuration": {
+          "control_count": 40,
+          "reviewer_count": 2,
+          "allowed_endpoint_count": 4,
+          "minimum_healthy_endpoint_count": 2,
+          "maximum_provider_calls": 12,
+          "conservative_peak_reservation_usd": 0.3815424,
+          "emergency_hard_stop_usd": 3.0,
+          "real_provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "simulated-gemini-control-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "allowed-endpoint-count",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "minimum-healthy-endpoint-count",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-predecessor-evidence",
+          "passed": true,
+          "evidence": "Attempts 001-004, controls, deterministic truth, packet, and Codex votes remain unchanged."
+        },
+        {
+          "name": "fixed-reviewer-model-revision",
+          "passed": true,
+          "evidence": "Every eligible route serves the exact Gemini revision google/gemini-3.7-flash-20260813."
+        },
+        {
+          "name": "bounded-provider-fallback",
+          "passed": true,
+          "evidence": "Fallback is restricted to four named Google Vertex and AI Studio routes for the same model revision."
+        },
+        {
+          "name": "complete-route-accounting",
+          "passed": true,
+          "evidence": "The runner records provider and service tier for every completed call while enforcing stable model identity."
+        },
+        {
+          "name": "downstream-execution-closed",
+          "passed": true,
+          "evidence": "Calibration, confirmation, visual, product, private-data, and scale authorities remain false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "codex-gemini-high-availability-calibration",
+    "rationale": "A fixed Gemini snapshot with bounded health-aware transport fallback removes the single-endpoint failure mode without starting another reviewer-model search.",
+    "limitations": [
+      "Gemini has not produced an attempt-005 live calibration vote.",
+      "Provider fallback improves availability but may use different Google service tiers across calls; each route is therefore recorded.",
+      "Codex is an immutable reviewer artifact rather than a new API call.",
+      "LLM agreement remains silver evidence, and the 200-case product panel is unopened."
+    ]
+  }
+}

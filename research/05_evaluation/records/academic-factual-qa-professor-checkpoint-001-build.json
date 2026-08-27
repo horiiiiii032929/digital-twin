@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-professor-checkpoint-001-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-plus-visual-supplement-001",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "a6301ca140b6057199dd3d68b3fea87325d82c3c",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "academic-factual-qa-confirmation-v2-panel-only",
+        "version": "build-001",
+        "configuration": {
+          "product_cases": 0,
+          "visual_clusters": 0,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "live-product-harness-ready",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "true-visual-harness-ready",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-failure-paths-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "paid-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gold-leakage-firewall",
+          "passed": false,
+          "evidence": "The preceding panel build did not yet execute the actual T0 product from course ID and question only."
+        },
+        {
+          "name": "original-visual-region-lineage",
+          "passed": false,
+          "evidence": "The preceding panel build did not contain a true-visual paired supplement or visual-description contract."
+        },
+        {
+          "name": "separate-paid-authorities",
+          "passed": false,
+          "evidence": "The preceding build separated panel stages but did not define all five professor-checkpoint authorities."
+        },
+        {
+          "name": "repository-gate",
+          "passed": false,
+          "evidence": "The professor-ready visual and product runners were not yet part of the complete repository gate."
+        }
+      ],
+      "failures_by_category": {
+        "missing-product-and-visual-build": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "professor-ready-factual-and-visual-checkpoint-build",
+        "version": "001",
+        "configuration": {
+          "main_product_cases": 200,
+          "visual_clusters": 30,
+          "visual_cases": 60,
+          "visual_qualification_assets": 9,
+          "paid_provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "live-product-harness-ready",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "true-visual-harness-ready",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-failure-paths-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "paid-provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "gold-leakage-firewall",
+          "passed": true,
+          "evidence": "The T0 runner accepts only course ID and question, persists every response, and joins evaluator-only gold afterward."
+        },
+        {
+          "name": "original-visual-region-lineage",
+          "passed": true,
+          "evidence": "Thirty visual clusters bind source, version, license, original or deterministic render hash, crop, and region lineage; descriptions remain non-authoritative."
+        },
+        {
+          "name": "separate-paid-authorities",
+          "passed": true,
+          "evidence": "All five paid stages have distinct false authorities and cannot automatically promote one another."
+        },
+        {
+          "name": "repository-gate",
+          "passed": true,
+          "evidence": "The complete gate passed with 941 Python tests, 46 frontend tests, lint, production build, 548/548 audited files, and 75/75 protected entrypoints."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "professor-ready-factual-and-visual-checkpoint-build",
+    "rationale": "The prospective panel, true-visual, and leakage-free T0 product workflows are reproducible and ready for five separately authorized checkpoints without another method redesign.",
+    "limitations": [
+      "No paid reviewer, visual, or product result has been produced by this build.",
+      "Network-free simulation outcomes test harness behavior and have no academic interpretation.",
+      "The reference remains deterministic source truth plus LLM-panel review and researcher adjudication, not independent human ground truth.",
+      "No T0 profile change, T1 promotion, Professor Digital Twin fidelity claim, deployment, or release follows from build readiness."
+    ]
+  }
+}

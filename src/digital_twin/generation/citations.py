@@ -1,6 +1,9 @@
 from src.digital_twin.generation.models import EvidenceBinding, ModelTutorOutputV2
-from src.digital_twin.grounding.claim_validation import AtomicAnswerClaim
-from src.digital_twin.grounding.models import DocumentChunk, SourceCitation
+from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
+    DocumentChunk,
+    SourceCitation,
+)
 
 
 class CitationValidationError(ValueError):

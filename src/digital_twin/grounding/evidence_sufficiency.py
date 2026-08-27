@@ -47,6 +47,26 @@ _STOP_WORDS = {
     "why",
     "with",
 }
+_QUESTION_CONTEXT_WORDS = {
+    "according",
+    "answer",
+    "approved",
+    "assignment",
+    "earlier",
+    "explain",
+    "full",
+    "graded",
+    "note",
+    "notes",
+    "only",
+    "previous",
+    "require",
+    "requires",
+    "rule",
+    "say",
+    "says",
+    "using",
+}
 
 
 class EvidenceSufficiencyDecision(BaseModel):
@@ -54,6 +74,16 @@ class EvidenceSufficiencyDecision(BaseModel):
     score: float = Field(ge=0, le=1, allow_inf_nan=False)
     reason: str = Field(min_length=1)
     features: dict[str, float | int | bool] = Field(default_factory=dict)
+    selected_hit_ids: list[str] = Field(default_factory=list)
+
+    @field_validator("selected_hit_ids")
+    @classmethod
+    def selected_hit_ids_must_be_unique(cls, values: list[str]) -> list[str]:
+        if any(not value.strip() for value in values):
+            raise ValueError("selected_hit_ids cannot contain blank IDs")
+        if len(values) != len(set(values)):
+            raise ValueError("selected_hit_ids must be unique")
+        return values
 
 
 class EvidenceSufficiencyCaseResult(BaseModel):
@@ -250,6 +280,15 @@ class CalibratedOpenSetEvidenceGate:
                 "verifier_output_valid": True,
                 **checks,
             },
+            selected_hit_ids=(
+                [
+                    hit.chunk.id
+                    for hit in bounded_hits
+                    if hit.chunk.id in supporting_hit_ids
+                ]
+                if sufficient
+                else []
+            ),
         )
 
     @staticmethod
@@ -413,6 +452,80 @@ class LexicalCoverageEvidenceGate:
                 "minimum_matching_terms": self.minimum_matching_terms,
                 "evidence_limit": self.evidence_limit,
             },
+        )
+
+
+class StructuredLexicalCoverageEvidenceGate:
+    """Select evidence using source aliases plus inspectable lexical support.
+
+    This is a deterministic development control, not a semantic verifier. Source
+    aliases must come from search metadata and never from evaluator labels.
+    """
+
+    implementation_id = "structured-lexical-coverage-evidence-gate-v1"
+
+    def __init__(
+        self,
+        *,
+        minimum_content_matching_terms: int = 2,
+        evidence_limit: int = 5,
+    ) -> None:
+        if (
+            isinstance(minimum_content_matching_terms, bool)
+            or minimum_content_matching_terms < 1
+        ):
+            raise ValueError("minimum_content_matching_terms must be at least 1")
+        if isinstance(evidence_limit, bool) or evidence_limit < 1:
+            raise ValueError("evidence_limit must be at least 1")
+        self.minimum_content_matching_terms = minimum_content_matching_terms
+        self.evidence_limit = evidence_limit
+
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSufficiencyDecision:
+        query_terms = {
+            token
+            for token in lexical_tokens(query)
+            if token not in _STOP_WORDS and token not in _QUESTION_CONTEXT_WORDS
+        }
+        alias_selected: list[RetrievalHit] = []
+        content_selected: list[RetrievalHit] = []
+        matched_terms: set[str] = set()
+        for hit in hits[: self.evidence_limit]:
+            content_overlap = query_terms & set(lexical_tokens(hit.chunk.text))
+            alias_terms = set(
+                lexical_tokens(hit.chunk.metadata.get("search_description", ""))
+            )
+            alias_overlap = query_terms & alias_terms
+            if alias_overlap:
+                alias_selected.append(hit)
+                matched_terms.update(alias_overlap)
+            elif len(content_overlap) >= self.minimum_content_matching_terms:
+                content_selected.append(hit)
+                matched_terms.update(content_overlap)
+        selected = alias_selected or content_selected
+        score = len(matched_terms) / len(query_terms) if query_terms else 0.0
+        sufficient = bool(selected)
+        return EvidenceSufficiencyDecision(
+            sufficient=sufficient,
+            score=score,
+            reason=(
+                "source aliases or content terms support the question"
+                if sufficient
+                else "no source alias or content-term support was found"
+            ),
+            features={
+                "candidate_hit_count": min(len(hits), self.evidence_limit),
+                "selected_hit_count": len(selected),
+                "query_term_count": len(query_terms),
+                "matching_term_count": len(matched_terms),
+                "alias_match_count": len(alias_selected),
+                "minimum_content_matching_terms": self.minimum_content_matching_terms,
+                "evidence_limit": self.evidence_limit,
+            },
+            selected_hit_ids=[hit.chunk.id for hit in selected],
         )
 
 

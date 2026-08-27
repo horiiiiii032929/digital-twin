@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "binding_id": "academic-factual-qa-confirmation-002-reviewer-bindings-003",
+  "instrument_id": "academic-factual-qa-confirmation-002-calibration-attempt-004",
+  "verified_at": "2026-08-26T08:48:38+00:00",
+  "maximum_age_hours_for_execution": 24,
+  "execution_contract": {
+    "calibration_first": true,
+    "calibration_items_per_reviewer": 40,
+    "confirmation_items_per_reviewer": 0,
+    "provider_batch_size": 4,
+    "maximum_primary_provider_calls": 10,
+    "maximum_transport_retries": 2,
+    "maximum_retries_per_batch": 1,
+    "maximum_provider_calls": 12,
+    "retries": 2,
+    "retryable_http_statuses": [429, 500, 501, 502, 503, 504],
+    "retryable_failure_categories": [
+      "provider-connection-failure",
+      "provider-empty-content",
+      "provider-timeout"
+    ],
+    "maximum_input_tokens_per_call": 8192,
+    "maximum_output_tokens_per_call": 3072,
+    "exclusive_output_creation": true,
+    "atomic_checkpoint_after_each_call": true,
+    "resume_requires_exact_packet_instrument_binding_pricing_and_code": true,
+    "failed_calibration_opens_confirmation": false,
+    "provider_calls_parallelized": false,
+    "canary_order": ["gemini-3.7-flash-blinded-reviewer"]
+  },
+  "cost_guard": {
+    "currency": "USD",
+    "conservative_peak_reservation_usd": 0.211968,
+    "emergency_hard_stop_usd": 3.0,
+    "gemini_primary_maximum_reservation_usd": 0.17664,
+    "gemini_retry_maximum_reservation_usd": 0.035328,
+    "codex_incremental_api_cost_accounting": "not-applicable-immutable-existing-votes",
+    "pre_call_reservation_required": true,
+    "post_call_reported_cost_check_required": true
+  },
+  "reviewers": [
+    {
+      "reviewer_id": "codex-isolated-task-blinded-reviewer",
+      "model_family": "openai",
+      "provider": "codex-isolated-task-runtime",
+      "provider_model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "configured_runtime": "codex-cli 0.146.0-alpha.10.1",
+      "execution_mode": "reuse-immutable-calibration-votes-only",
+      "runtime_reported_model_must_match": true,
+      "task_identity_must_remain_constant": true,
+      "exact_api_snapshot_reproducible": false,
+      "designer_conflict_disclosed": true,
+      "calibration_vote_path": "reports/generated/academic-factual-qa-confirmation-002-codex-calibration-votes.json",
+      "calibration_vote_content_sha256": "785efb4d38f28822bc3563c90dc0f987131614dc3ebe5790906a0922dd9e373e",
+      "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+    },
+    {
+      "reviewer_id": "gemini-3.7-flash-blinded-reviewer",
+      "model_family": "google",
+      "provider": "openrouter",
+      "provider_model": "google/gemini-3.7-flash",
+      "documented_revision": "google/gemini-3.7-flash-20260813",
+      "endpoint_provider": "Google AI Studio",
+      "endpoint_tag": "google-ai-studio",
+      "endpoint_name": "Google AI Studio | google/gemini-3.7-flash-20260813",
+      "context_window_tokens": 1048576,
+      "maximum_output_tokens": 65536,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 3.75,
+      "temperature": 0.0,
+      "response_format": "gemini-json-schema-subset",
+      "routing": {
+        "only": ["google-ai-studio"],
+        "order": ["google-ai-studio"],
+        "allow_fallbacks": false,
+        "require_parameters": true,
+        "data_collection": "allow",
+        "zdr": false
+      },
+      "provider_policy": {
+        "training": false,
+        "trainingOpenRouter": false,
+        "retainsPrompts": true,
+        "retentionDays": 55,
+        "canPublish": false,
+        "termsOfServiceURL": "https://cloud.google.com/terms/",
+        "privacyPolicyURL": "https://cloud.google.com/terms/cloud-privacy-notice",
+        "requiresUserIDs": false
+      },
+      "credential_environment_variable": "OPENROUTER_API_KEY",
+      "model_registry_source": "https://openrouter.ai/api/v1/models",
+      "endpoint_registry_source": "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints",
+      "provider_policy_source": "https://openrouter.ai/api/frontend/v1/all-providers",
+      "structured_output_source": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "routing_source": "https://openrouter.ai/docs/guides/routing/provider-selection",
+      "retention_source": "https://openrouter.ai/docs/guides/privacy/provider-logging/",
+      "input_scope": "public-open-license-evaluation-content-only"
+    }
+  ],
+  "authorization": {
+    "codex_review_authorized": false,
+    "provider_review_authorized": false,
+    "paid_execution_authorized": false,
+    "confirmation_review_authorized": false
+  },
+  "content_sha256": "7d5d3b260038889c2107acda8009a16833d0d59ec71bcf20056421eb04729674"
+}

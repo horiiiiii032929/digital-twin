@@ -7,6 +7,7 @@ from src.digital_twin.generation.citations import (
 )
 from src.digital_twin.generation.generator import (
     DeterministicGroundedGenerator,
+    LiveAtomicGroundedGenerator,
     LiveGroundedGenerator,
 )
 from src.digital_twin.generation.evaluation import (
@@ -42,6 +43,7 @@ __all__ = [
     "ConservativeGroundedPromptBuilder",
     "DeterministicCitationValidator",
     "DeterministicGroundedGenerator",
+    "LiveAtomicGroundedGenerator",
     "DeterministicPolicyEnforcer",
     "EvidenceBinding",
     "GenerationEvaluationCase",
