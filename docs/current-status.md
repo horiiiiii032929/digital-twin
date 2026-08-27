@@ -92,10 +92,10 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 594 executable or execution-affecting
+the current branch now extends it to 606 executable or execution-affecting
 files, all audited with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 83 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 85 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
@@ -134,6 +134,12 @@ and separate paid authority are still required before product execution, but
 they are no longer the first blocker: AFQC-046 keeps the corrected reference
 layer, and the next bounded work is wording-only paraphrase/review before any
 paid T0 run.
+The proactive-outreach branch adds the A1 network-free development and
+publication-integrated confirmation. Development completed as **Go Deeper**;
+confirmation completed as **Refine** after 59/60 actions and reasons passed but
+one supported paraphrase was missed by the lexical support gate. Both one-time
+authorizations are revoked. No provider, paid, private-data, external-delivery,
+or real-student operation is authorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -405,8 +411,8 @@ The runtime-boundary checkpoint is complete. Persistence updates are
 non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
-converge on one response with authoritative citation metadata. The current local
-check passes 965 Python tests and 46 frontend tests, frontend lint, and the
+converge on one response with authoritative citation metadata. The merged local
+gate passes 1,054 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -426,11 +432,13 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 965-test Python suite.
+connections. These corrections remain covered by the 1,054-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 576-file audit. Evaluation
-execution remains frozen, with 78/78 protected entrypoints registered and no
-prospective evaluation in the bounded allowlist.
+artifacts are also fully dispositioned in the current 606-file audit.
+Evaluation execution remains frozen, with 85/85 protected entrypoints registered
+and no prospective evaluation in the bounded allowlist. The completed A1 runs
+have been removed from the bounded allowlist; no proactive-outreach execution is
+authorized.
 
 ## Current outcome
 
@@ -440,6 +448,56 @@ candidate, an approval-gated R2 invite-only pilot, and an R3 final project
 release. The [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 continues to define the product; evaluation tracks are evidence gates toward
 that release.
+
+On 2026-08-27, the project owner clarified that a Professor Digital Twin must
+also be able to initiate an interaction rather than only respond to a student
+turn. Issue [#134](https://github.com/horiiiiii032929/digital-twin/issues/134)
+and [`proactive-outreach-001`](proactive-outreach.md) now own this core product
+track. The build-only vertical slice provides opt-in private in-app check-ins,
+source-linked deterministic triggers, quiet-hour/snooze/frequency suppression,
+atomic idempotent materialization, withdrawal cancellation, and a disabled
+Discord private-destination adapter. It makes no external-delivery or
+real-student claim; the component remains `Go Deeper` pending a frozen synthetic
+evaluation and separately gated worker/channel activation.
+
+The 2026-08-27
+[mixed-initiative tutoring review](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
+narrows the next research step. Professor-scheduled outreach is autonomy level
+A0; deterministic evidence-recovery is the first A1 autonomous candidate.
+Learner-state or misconception triggers remain shadow-mode-only until their
+precision and interruption cost are measured. `No action` is a valid decision.
+The current branch now implements the A1 detector in shadow-by-default mode: it
+finds persisted no-evidence turns, searches only evidence lineage newly added by
+the current release, applies a deterministic lexical support gate, and preserves
+consent, snooze, membership, idempotency, and citation authority. Active mode
+fails closed unless explicitly enabled. The Discord request builder is corrected
+to emit only a generic alert and authenticated in-app deep link. Neither A1 nor
+Discord is selected or enabled for real delivery. The frozen development
+execution completed as **Go Deeper**: 12/12 P0 checks, 20/20 expected actions
+and reasons, and 10/10 supported current-release lineage checks passed, with
+zero provider calls, private-data reads, external deliveries, persisted shadow
+triggers, tokens, or cost. This is synthetic mechanism evidence around one
+source topic, not evidence of useful real-student intervention or learning
+improvement. The one-time authorization is revoked; A0 remains the release
+control and A1 requires a method-level support successor on fresh cases.
+
+The next build-only integration now invokes A1 exactly once in shadow mode after
+a new release is durably published. It does not run on rollback. A scanner
+failure cannot reverse or falsely fail the completed publication; instead, the
+system records a redacted failure type with no question or exception text. The
+hook creates no trigger, message, outbox item, provider call, or external
+delivery. Confirmation 002 executed 12 synthetic source clusters across
+operating systems, networking, data structures, and Python, expanding to 60
+cases (24 expected proposals and 36 no-actions). It completed as **Refine**:
+59/60 actions and reasons, all 36 no-actions, all 12 integration checks, every
+observed source-lineage check, and every zero-side-effect boundary passed. The
+single failure was a supported hash-collision paraphrase: retrieval found the
+correct source, but raw-token query coverage was 4/9 rather than the frozen 50%
+minimum because the method does not normalize inflections or semantic
+equivalence. The failure was conservative and released nothing. Authorization
+is revoked; A0 remains the release control and A1 remains shadow-only. This is
+synthetic integration evidence, not a representative student or learning
+study.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the

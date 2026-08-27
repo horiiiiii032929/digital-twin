@@ -397,7 +397,7 @@
         "rule-based-trigger",
         "classifier-trigger"
       ],
-      "notes": "Trigger precision, recall, and interruption cost belong to iteration 3."
+      "notes": "Issue #134 now implements the deterministic, opt-in in-app trigger and outbox vertical slice plus a disabled Discord adapter. The component remains pending until trigger precision/recall, suppression correctness, grounding, duplicate prevention, withdrawal, and interruption cost are evaluated."
     },
     {
       "component": "learning-gap-analytics",

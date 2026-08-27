@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "instrument_id": "proactive-outreach-a1-development-001",
+  "status": "completed-go-deeper",
+  "decision_question": "Can deterministic evidence-recovery identify newly supportable prior no-evidence turns while preserving consent, no-action, lineage, idempotency, and external-channel privacy boundaries?",
+  "implementation": {
+    "candidate": "deterministic-evidence-recovery-a1-v1",
+    "control": "no-autonomous-outreach",
+    "retriever": "bm25-new-lineage-only",
+    "evidence_gate": {
+      "implementation": "lexical-coverage-evidence-gate",
+      "minimum_query_coverage": 0.5,
+      "minimum_matching_terms": 2,
+      "evidence_limit": 3
+    },
+    "default_mode": "shadow",
+    "active_mode_selected": false
+  },
+  "execution": {
+    "network_free_execution_authorized": false,
+    "provider_calls_authorized": false,
+    "paid_execution_authorized": false,
+    "private_data_authorized": false,
+    "real_student_delivery_authorized": false,
+    "external_channel_delivery_authorized": false,
+    "automatic_promotion": false
+  },
+  "p0_mechanism_checks": [
+    "shadow-zero-side-effects",
+    "zero-provider-usage",
+    "active-mode-fails-closed",
+    "active-idempotency",
+    "current-release-citation-lineage",
+    "consent-enforcement",
+    "snooze-enforcement",
+    "inactive-account-enforcement",
+    "inactive-membership-enforcement",
+    "unchanged-evidence-no-action",
+    "unsupported-question-no-action",
+    "discord-generic-deep-link-only"
+  ],
+  "p1_shadow_cases": [
+    {"id": "supported-01", "question": "Why is cache coherence needed for replicated processor data?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-02", "question": "How does cache coherence keep processor data consistent?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-03", "question": "What keeps replicated processor cache data consistent?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-04", "question": "Why must replicated data remain consistent across processor caches?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-05", "question": "Explain cache coherence for processor data consistency.", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-06", "question": "Which mechanism keeps replicated processor data consistent?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-07", "question": "What keeps processor data copies consistent?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-08", "question": "Why do replicated processor caches need coherence?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-09", "question": "How are replicated processor data kept consistent by cache coherence?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "supported-10", "question": "What role does cache coherence play for replicated processor data?", "expected_action": "propose", "expected_reason": "new-evidence-supported"},
+    {"id": "unsupported-01", "question": "How does a B-tree split its root node?", "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"},
+    {"id": "unsupported-02", "question": "What is the TCP congestion window?", "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"},
+    {"id": "unsupported-03", "question": "Explain Python context managers.", "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"},
+    {"id": "unchanged-01", "question": "Why is cache coherence needed for replicated processor data?", "previous_contains_current_evidence": true, "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"},
+    {"id": "consent-01", "question": "Why is cache coherence needed for replicated processor data?", "consent_enabled": false, "expected_action": "no-action", "expected_reason": "consent-disabled"},
+    {"id": "snooze-01", "question": "Why is cache coherence needed for replicated processor data?", "snoozed": true, "expected_action": "no-action", "expected_reason": "student-snoozed"},
+    {"id": "account-01", "question": "Why is cache coherence needed for replicated processor data?", "student_active": false, "expected_action": "no-action", "expected_reason": "student-inactive"},
+    {"id": "membership-01", "question": "Why is cache coherence needed for replicated processor data?", "membership_active": false, "expected_action": "no-action", "expected_reason": "membership-inactive"},
+    {"id": "symbols-01", "question": "???", "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"},
+    {"id": "same-topic-01", "question": "How does virtual memory map process addresses to physical pages?", "expected_action": "no-action", "expected_reason": "insufficient-new-evidence"}
+  ],
+  "hard_gates": {
+    "p0_mechanism_pass_rate": 1.0,
+    "p1_action_accuracy": 1.0,
+    "p1_reason_accuracy": 1.0,
+    "supported_source_lineage_validity": 1.0,
+    "shadow_side_effect_count": 0,
+    "provider_calls": 0,
+    "external_deliveries": 0,
+    "private_data_reads": 0
+  },
+  "result_contract": {
+    "run_id": "proactive-outreach-a1-development-001",
+    "passing_state": "completed-go-deeper",
+    "quality_failure_state": "completed-refine",
+    "harness_failure_state": "invalid-execution",
+    "automatic_release_selection": false
+  }
+}

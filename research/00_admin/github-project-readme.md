@@ -1,6 +1,6 @@
 # Course Digital Twin Release
 
-Status date: 2026-08-22
+Status date: 2026-08-27
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -22,6 +22,9 @@ evidence, not competing end goals.
 
 - Product UX: merged baseline from PR #83; synthetic flows pass, human
   usability is not yet established.
+- Proactive tutoring: #134 restores opt-in asynchronous initiation as a core
+  product track. The deterministic private in-app vertical slice is build-only;
+  external Discord delivery and real-student use remain disabled.
 - Repository: 484/484 execution-relevant files audited; 771 Python and 46 web
   tests passed; the execution freeze remains active.
 - Factual quality: #87 completed Keep after paid pilot 003 passed every gate at
@@ -41,13 +44,15 @@ evidence, not competing end goals.
 2. Complete #105's bounded independent review and select the first production
    evidence-sufficiency gate.
 3. Preserve T0 and prepare #107's separately frozen T0/T1 confirmation.
-4. Queue #110's 1,000-case scale design without authorizing provider calls.
-5. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
-6. Calibrate #24 professor behavior separately from factual/citation hard
+4. Freeze #134's deterministic trigger/suppression evaluation; keep Discord
+   network delivery disabled until its privacy and operations gates pass.
+5. Queue #110's 1,000-case scale design without authorizing provider calls.
+6. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
+7. Calibrate #24 professor behavior separately from factual/citation hard
    gates.
-7. Run #9 and #25 against the same immutable deployed revision.
-8. Run #10 only after the human-participant approval boundary is satisfied.
-9. Package the final evidence, demo, report, and rollback/no-release decision
+8. Run #9 and #25 against the same immutable deployed revision.
+9. Run #10 only after the human-participant approval boundary is satisfied.
+10. Package the final evidence, demo, report, and rollback/no-release decision
    in #13.
 
 ## Current blockers

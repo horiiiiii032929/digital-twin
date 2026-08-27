@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "run_id": "proactive-outreach-a1-development-001",
+  "component": "proactive-trigger",
+  "dataset_id": "proactive-outreach-a1-development-synthetic-20",
+  "corpus_id": "synthetic-cache-coherence-release-v1",
+  "code_revision": "6a76585963ef5a5d5885d05d45d24e3d2a1614ca",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-autonomous-outreach-control",
+        "version": "a0-control-v1",
+        "configuration": {
+          "policy": "always-no-action",
+          "cases": 20,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "p0-mechanism-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "p1-action-accuracy", "value": 0.5, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "p1-reason-accuracy", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "supported-source-lineage-validity", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "shadow-side-effect-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "external-deliveries", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "private-data-reads", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "mechanism-and-suppression-safety", "passed": true, "evidence": "The fixed no-action control cannot create a trigger or delivery."},
+        {"name": "supported-recovery-detection", "passed": false, "evidence": "The fixed control proposes none of the ten newly supportable cases."},
+        {"name": "lineage-and-privacy-safety", "passed": true, "evidence": "The control performs no retrieval, provider call, private-data read, or external delivery."},
+        {"name": "bounded-development-execution", "passed": true, "evidence": "The control is a deterministic policy specified by the frozen instrument."}
+      ],
+      "failures_by_category": {"missed-supported-recovery": 10}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "deterministic-evidence-recovery-a1",
+        "version": "a1-v1",
+        "configuration": {
+          "mode": "shadow",
+          "retriever": "bm25-new-lineage-only",
+          "minimum-query-coverage": 0.5,
+          "minimum-matching-terms": 2,
+          "cases": 20,
+          "provider_calls": 0,
+          "automatic-promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "p0-mechanism-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "p1-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "p1-reason-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "supported-source-lineage-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "shadow-side-effect-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "external-deliveries", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "private-data-reads", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "mechanism-and-suppression-safety", "passed": true, "evidence": "12/12 mechanism checks and all consent, snooze, membership, no-evidence, and idempotency checks passed."},
+        {"name": "supported-recovery-detection", "passed": true, "evidence": "All ten supported cases proposed outreach and all ten no-action cases remained suppressed for the expected reason."},
+        {"name": "lineage-and-privacy-safety", "passed": true, "evidence": "10/10 proposals referenced current-release source lineage; provider calls, private-data reads, and external deliveries were zero."},
+        {"name": "bounded-development-execution", "passed": true, "evidence": "The clean network-free run completed at the frozen instrument hash with no persisted shadow trigger or automatic promotion."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "deterministic-evidence-recovery-a1",
+    "rationale": "Advance A1 only to a separately frozen representative shadow confirmation because every synthetic development gate passed. Keep A0 as the release control and leave active delivery disabled.",
+    "limitations": [
+      "The twenty cases are synthetic development cases built around one cache-coherence source and are not an untouched or representative confirmation set.",
+      "The evaluation verifies trigger mechanics and source lineage, not message usefulness, interruption cost, student learning, professor fidelity, or real delivery reliability.",
+      "The fixed no-action control is derived directly from the frozen control policy rather than executed through a separate product path.",
+      "Automatic post-publication invocation, production scheduling, Discord network delivery, and release-profile selection remain unimplemented or disabled."
+    ]
+  }
+}

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Header, HTTPException, Query, Request, Response, 
 from services.api.app.config import RuntimeMode
 from services.api.app.dependencies import (
     IngestionJobServiceDependency,
+    ProactiveOutreachServiceDependency,
     ProfessorAccountDependency,
     PublicationServiceDependency,
     SessionRepositoryDependency,
@@ -17,6 +18,7 @@ from services.api.app.schemas import (
     ReleaseCreateRequest,
     ReleaseEvaluationRequest,
     StudentAssignmentRequest,
+    ProactiveTriggerRequest,
 )
 from services.ingestion import IngestionJobError
 from src.digital_twin.grounding import IngestionError, SourcePermissions
@@ -31,6 +33,9 @@ from src.digital_twin.student import (
     CourseMembership,
     DigitalTwinRelease,
     ProfessorCourseView,
+    ProactiveOutreachError,
+    ProactiveProcessResult,
+    ProactiveTrigger,
     PublicationError,
     ReleaseEvaluationStatus,
     ReleasePreflightResult,
@@ -134,6 +139,69 @@ def assign_student(
         )
     except PublicationError as error:
         raise _http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/proactive-triggers",
+    response_model=ProactiveTrigger,
+    status_code=status.HTTP_201_CREATED,
+)
+def schedule_proactive_trigger(
+    course_id: str,
+    request: ProactiveTriggerRequest,
+    account_id: ProfessorAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    try:
+        return outreach.schedule_trigger(
+            account_id,
+            course_id,
+            student_id=request.student_account_id,
+            channel=request.channel,
+            kind=request.kind,
+            scheduled_for=request.scheduled_for,
+            expires_at=request.expires_at,
+            topic=request.topic,
+            prompt=request.prompt,
+            source_chunk_id=request.source_chunk_id,
+            idempotency_key=request.idempotency_key,
+        )
+    except ProactiveOutreachError as error:
+        raise _proactive_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/proactive-triggers/{trigger_id}/process",
+    response_model=ProactiveProcessResult,
+)
+def process_proactive_trigger_for_local_verification(
+    course_id: str,
+    trigger_id: str,
+    account_id: ProfessorAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+    publication: PublicationServiceDependency,
+    settings: SettingsDependency,
+):
+    if settings.mode == RuntimeMode.STAGING:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "code": "manual_trigger_execution_disabled",
+                "message": "Staging requires the separately gated outreach worker.",
+            },
+        )
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        trigger = outreach.repository.get_proactive_trigger(trigger_id)
+        if trigger is None or trigger.course_id != course_id:
+            raise ProactiveOutreachError(
+                "proactive_trigger_not_found", "The proactive trigger was not found."
+            )
+        return outreach.process_trigger(trigger_id)
+    except (PublicationError, ProactiveOutreachError) as error:
+        if isinstance(error, PublicationError):
+            raise _http_error(error) from error
+        raise _proactive_http_error(error) from error
 
 
 @router.put(
@@ -450,6 +518,22 @@ def _http_error(error: PublicationError) -> HTTPException:
         else status.HTTP_403_FORBIDDEN
         if error.code in forbidden
         else status.HTTP_409_CONFLICT
+    )
+    return HTTPException(
+        status_code=code,
+        detail={"code": error.code, "message": error.message},
+    )
+
+
+def _proactive_http_error(error: ProactiveOutreachError) -> HTTPException:
+    code = (
+        status.HTTP_404_NOT_FOUND
+        if error.code == "proactive_trigger_not_found"
+        else status.HTTP_403_FORBIDDEN
+        if error.code in {"professor_course_forbidden", "course_forbidden"}
+        else status.HTTP_409_CONFLICT
+        if error.code == "trigger_idempotency_conflict"
+        else status.HTTP_422_UNPROCESSABLE_CONTENT
     )
     return HTTPException(
         status_code=code,

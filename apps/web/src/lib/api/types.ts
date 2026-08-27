@@ -208,6 +208,42 @@ export type StudentTutorTurn = {
   duplicate: boolean
 }
 
+export type OutreachChannel = "in-app" | "discord"
+
+export type StudentOutreachPreference = {
+  student_id: string
+  course_id: string
+  channel: OutreachChannel
+  enabled: boolean
+  timezone: string
+  quiet_hours_start: string
+  quiet_hours_end: string
+  max_messages_per_7_days: number
+  snoozed_until?: string | null
+  destination_ref?: string | null
+  private_destination: boolean
+  updated_at: string
+}
+
+export type StudentProactiveMessage = {
+  id: string
+  trigger_id: string
+  student_id: string
+  course_id: string
+  release_id: string
+  channel: OutreachChannel
+  content: string
+  status: "queued" | "delivered" | "read" | "dismissed" | "cancelled" | "failed"
+  created_at: string
+  read_at?: string | null
+  dismissed_at?: string | null
+}
+
+export type StudentProactiveMessageView = {
+  message: StudentProactiveMessage
+  citations: StudentCitation[]
+}
+
 export type AccountRole = "admin" | "professor" | "student"
 
 export type IdentityProfile = {

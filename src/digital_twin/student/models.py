@@ -2,6 +2,7 @@ import math
 import re
 from enum import StrEnum
 from typing import Literal
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -229,3 +230,218 @@ class TutorTurn(BaseModel):
     tutoring_mode: str = "grounded-assistant"
     tutoring_intent: str | None = None
     learner_state_revision: int | None = Field(default=None, ge=0)
+
+
+class OutreachChannel(StrEnum):
+    IN_APP = "in-app"
+    DISCORD = "discord"
+
+
+class ProactiveTriggerKind(StrEnum):
+    SCHEDULED_RETRIEVAL_PRACTICE = "scheduled-retrieval-practice"
+    STUDENT_FOLLOW_UP = "student-follow-up"
+    MISCONCEPTION_FOLLOW_UP = "misconception-follow-up"
+    EVIDENCE_RECOVERY = "evidence-recovery"
+
+
+class EvidenceRecoveryMode(StrEnum):
+    SHADOW = "shadow"
+    ACTIVE = "active"
+
+
+class ProactiveTriggerStatus(StrEnum):
+    PENDING = "pending"
+    MATERIALIZED = "materialized"
+    SUPPRESSED = "suppressed"
+    CANCELLED = "cancelled"
+
+
+class ProactiveMessageStatus(StrEnum):
+    QUEUED = "queued"
+    DELIVERED = "delivered"
+    READ = "read"
+    DISMISSED = "dismissed"
+    CANCELLED = "cancelled"
+    FAILED = "failed"
+
+
+class DeliveryAttemptStatus(StrEnum):
+    PENDING = "pending"
+    DELIVERED = "delivered"
+    FAILED = "failed"
+    CANCELLED = "cancelled"
+
+
+class OutreachPreference(BaseModel):
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    channel: OutreachChannel
+    enabled: bool = False
+    timezone: str = Field(default="UTC", min_length=1, max_length=64)
+    quiet_hours_start: str = "22:00"
+    quiet_hours_end: str = "08:00"
+    max_messages_per_7_days: int = Field(default=3, ge=1, le=14)
+    snoozed_until: str | None = None
+    destination_ref: str | None = Field(default=None, max_length=128)
+    private_destination: bool = False
+    updated_at: str = Field(default_factory=timestamp_now)
+
+    @field_validator("timezone")
+    @classmethod
+    def timezone_must_exist(cls, value: str) -> str:
+        try:
+            ZoneInfo(value)
+        except ZoneInfoNotFoundError as error:
+            raise ValueError("timezone must be a valid IANA timezone") from error
+        return value
+
+    @field_validator("quiet_hours_start", "quiet_hours_end")
+    @classmethod
+    def quiet_hour_must_be_hhmm(cls, value: str) -> str:
+        if not re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", value):
+            raise ValueError("quiet hours must use HH:MM in 24-hour time")
+        return value
+
+    @field_validator("destination_ref")
+    @classmethod
+    def destination_ref_must_be_opaque(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        normalized = value.strip()
+        if (
+            not normalized
+            or "://" in normalized
+            or not re.fullmatch(r"[A-Za-z0-9._:-]+", normalized)
+        ):
+            raise ValueError("destination_ref must be an opaque identifier, not a URL")
+        return normalized
+
+    @model_validator(mode="after")
+    def enabled_channel_must_have_safe_destination(self) -> "OutreachPreference":
+        if self.channel == OutreachChannel.IN_APP and self.destination_ref is not None:
+            raise ValueError("in-app outreach cannot use an external destination")
+        if self.channel == OutreachChannel.DISCORD and self.enabled and (
+            not self.destination_ref or not self.private_destination
+        ):
+            raise ValueError(
+                "enabled Discord outreach requires a linked private destination"
+            )
+        return self
+
+
+class ProactiveTrigger(BaseModel):
+    id: str = Field(min_length=1, max_length=128)
+    idempotency_key: str = Field(min_length=1, max_length=128)
+    professor_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    channel: OutreachChannel
+    kind: ProactiveTriggerKind
+    scheduled_for: str
+    expires_at: str
+    topic: str = Field(min_length=1, max_length=240)
+    prompt: str = Field(min_length=1, max_length=2_000)
+    source_chunk_id: str = Field(min_length=1, max_length=256)
+    status: ProactiveTriggerStatus = ProactiveTriggerStatus.PENDING
+    suppression_reason: str | None = Field(default=None, max_length=128)
+    created_at: str = Field(default_factory=timestamp_now)
+    updated_at: str = Field(default_factory=timestamp_now)
+
+
+class ProactiveMessage(BaseModel):
+    id: str = Field(min_length=1, max_length=128)
+    trigger_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    channel: OutreachChannel
+    content: str = Field(min_length=1, max_length=8_000)
+    status: ProactiveMessageStatus
+    created_at: str = Field(default_factory=timestamp_now)
+    read_at: str | None = None
+    dismissed_at: str | None = None
+
+
+class ProactiveMessageView(BaseModel):
+    message: ProactiveMessage
+    citations: list[Citation] = Field(default_factory=list)
+
+
+class DeliveryOutboxItem(BaseModel):
+    id: str = Field(min_length=1, max_length=128)
+    message_id: str = Field(min_length=1, max_length=128)
+    channel: OutreachChannel
+    destination_ref: str = Field(min_length=1, max_length=128)
+    status: DeliveryAttemptStatus = DeliveryAttemptStatus.PENDING
+    attempts: int = Field(default=0, ge=0, le=3)
+    last_error: str | None = Field(default=None, max_length=500)
+    available_at: str = Field(default_factory=timestamp_now)
+    created_at: str = Field(default_factory=timestamp_now)
+    updated_at: str = Field(default_factory=timestamp_now)
+
+
+class ProactiveProcessResult(BaseModel):
+    outcome: Literal[
+        "not-due",
+        "deferred-quiet-hours",
+        "suppressed",
+        "delivered",
+        "queued",
+        "duplicate",
+    ]
+    trigger: ProactiveTrigger
+    message: ProactiveMessageView | None = None
+
+
+class NoEvidenceTurn(BaseModel):
+    student_message_id: str = Field(min_length=1, max_length=128)
+    tutor_message_id: str = Field(min_length=1, max_length=128)
+    conversation_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    question: str = Field(min_length=1, max_length=100_000)
+    created_at: str = Field(min_length=1)
+
+
+class EvidenceRecoveryDecision(BaseModel):
+    student_message_id: str = Field(min_length=1, max_length=128)
+    tutor_message_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    previous_release_id: str = Field(min_length=1, max_length=128)
+    current_release_id: str = Field(min_length=1, max_length=128)
+    action: Literal["propose", "no-action", "duplicate"]
+    reason: str = Field(min_length=1, max_length=128)
+    evidence_score: float = Field(ge=0, le=1, allow_inf_nan=False)
+    source_chunk_id: str | None = Field(default=None, max_length=256)
+    idempotency_key: str = Field(min_length=1, max_length=128)
+    trigger_id: str | None = Field(default=None, max_length=128)
+
+
+class EvidenceRecoveryScanResult(BaseModel):
+    mode: EvidenceRecoveryMode
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    decisions: list[EvidenceRecoveryDecision] = Field(default_factory=list)
+    proposed_count: int = Field(ge=0)
+    no_action_count: int = Field(ge=0)
+    duplicate_count: int = Field(ge=0)
+    trigger_count: int = Field(ge=0)
+    provider_calls: int = Field(default=0, ge=0, le=0)
+
+    @model_validator(mode="after")
+    def counts_must_match_decisions(self) -> "EvidenceRecoveryScanResult":
+        expected = {
+            "propose": self.proposed_count,
+            "no-action": self.no_action_count,
+            "duplicate": self.duplicate_count,
+        }
+        actual = {
+            action: sum(decision.action == action for decision in self.decisions)
+            for action in expected
+        }
+        if expected != actual or self.trigger_count > self.proposed_count:
+            raise ValueError("evidence-recovery counts do not match decisions")
+        return self

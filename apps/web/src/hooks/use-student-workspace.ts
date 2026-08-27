@@ -5,15 +5,22 @@ import {
   StudentApiError,
   createStudentConversation,
   getStudentConversation,
+  dismissStudentOutreach,
+  listStudentOutreach,
+  listStudentOutreachPreferences,
   listStudentCourses,
   listStudentMessageCitations,
+  markStudentOutreachRead,
   submitStudentMessage,
+  updateStudentInAppOutreachPreference,
 } from "@/lib/api"
 import type {
   StudentChatMessage,
   StudentCitation,
   StudentConversation,
   StudentCourse,
+  StudentOutreachPreference,
+  StudentProactiveMessageView,
 } from "@/lib/api"
 import {
   forgetStudentConversation,
@@ -44,6 +51,11 @@ export type StudentWorkspaceController = {
   isLoadingCourses: boolean
   isLoadingConversation: boolean
   isSubmitting: boolean
+  outreachMessages: StudentProactiveMessageView[]
+  inAppOutreachEnabled: boolean
+  isLoadingOutreach: boolean
+  isUpdatingOutreach: boolean
+  outreachError: string | null
   requiresNewConversation: boolean
   setDraft: (value: string) => void
   reload: () => Promise<void>
@@ -51,6 +63,10 @@ export type StudentWorkspaceController = {
   startNewConversation: () => Promise<void>
   startCurrentRelease: () => Promise<void>
   sendMessage: () => Promise<void>
+  refreshOutreach: () => Promise<void>
+  setInAppOutreachEnabled: (enabled: boolean) => Promise<void>
+  markOutreachRead: (messageId: string) => Promise<void>
+  dismissOutreach: (messageId: string) => Promise<void>
   selectCitation: (messageId: string, citationId: string) => void
 }
 
@@ -77,9 +93,19 @@ export function useStudentWorkspace(
   const [isLoadingCourses, setIsLoadingCourses] = useState(true)
   const [isLoadingConversation, setIsLoadingConversation] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [outreachMessages, setOutreachMessages] = useState<
+    StudentProactiveMessageView[]
+  >([])
+  const [outreachPreferences, setOutreachPreferences] = useState<
+    StudentOutreachPreference[]
+  >([])
+  const [isLoadingOutreach, setIsLoadingOutreach] = useState(false)
+  const [isUpdatingOutreach, setIsUpdatingOutreach] = useState(false)
+  const [outreachError, setOutreachError] = useState<string | null>(null)
   const startedRef = useRef(false)
   const operationRef = useRef(0)
   const pendingRequestRef = useRef<PendingRequest | null>(null)
+  const outreachOperationRef = useRef(0)
   const indexRef = useRef(
     typeof window === "undefined"
       ? {
@@ -232,6 +258,45 @@ export function useStudentWorkspace(
     void reload()
   }, [reload])
 
+  const loadOutreach = useCallback(
+    async (courseId: string, silent = false) => {
+      const operation = ++outreachOperationRef.current
+      if (!silent) setIsLoadingOutreach(true)
+      setOutreachError(null)
+      try {
+        const [nextMessages, nextPreferences] = await Promise.all([
+          listStudentOutreach(courseId, accountId),
+          listStudentOutreachPreferences(courseId, accountId),
+        ])
+        if (operation !== outreachOperationRef.current) return
+        setOutreachMessages(nextMessages)
+        setOutreachPreferences(nextPreferences)
+      } catch (caught) {
+        if (operation !== outreachOperationRef.current) return
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      } finally {
+        if (operation === outreachOperationRef.current) {
+          setIsLoadingOutreach(false)
+        }
+      }
+    },
+    [accountId],
+  )
+
+  useEffect(() => {
+    const courseId = activeCourse?.course_id
+    if (!courseId) {
+      setOutreachMessages([])
+      setOutreachPreferences([])
+      return
+    }
+    void loadOutreach(courseId)
+    const interval = window.setInterval(() => {
+      void loadOutreach(courseId, true)
+    }, 30_000)
+    return () => window.clearInterval(interval)
+  }, [activeCourse?.course_id, loadOutreach])
+
   const selectCourse = useCallback(
     async (courseId: string) => {
       if (isSubmitting) return
@@ -346,6 +411,65 @@ export function useStudentWorkspace(
     [citationsByMessage],
   )
 
+  const refreshOutreach = useCallback(async () => {
+    if (!activeCourse) return
+    await loadOutreach(activeCourse.course_id)
+  }, [activeCourse, loadOutreach])
+
+  const setInAppOutreachEnabled = useCallback(
+    async (enabled: boolean) => {
+      if (!activeCourse || isUpdatingOutreach) return
+      setIsUpdatingOutreach(true)
+      setOutreachError(null)
+      try {
+        const preference = await updateStudentInAppOutreachPreference(
+          activeCourse.course_id,
+          enabled,
+          accountId,
+        )
+        setOutreachPreferences((current) => [
+          ...current.filter((item) => item.channel !== "in-app"),
+          preference,
+        ])
+      } catch (caught) {
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      } finally {
+        setIsUpdatingOutreach(false)
+      }
+    },
+    [accountId, activeCourse, isUpdatingOutreach],
+  )
+
+  const markOutreachRead = useCallback(
+    async (messageId: string) => {
+      try {
+        const updated = await markStudentOutreachRead(messageId, accountId)
+        setOutreachMessages((current) =>
+          current.map((item) =>
+            item.message.id === messageId ? updated : item,
+          ),
+        )
+      } catch (caught) {
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      }
+    },
+    [accountId],
+  )
+
+  const dismissOutreach = useCallback(
+    async (messageId: string) => {
+      try {
+        await dismissStudentOutreach(messageId, accountId)
+        setOutreachMessages((current) =>
+          current.filter((item) => item.message.id !== messageId),
+        )
+      } catch (caught) {
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      }
+    },
+    [accountId],
+  )
+
   return {
     accountId,
     courses,
@@ -359,6 +483,13 @@ export function useStudentWorkspace(
     isLoadingCourses,
     isLoadingConversation,
     isSubmitting,
+    outreachMessages,
+    inAppOutreachEnabled:
+      outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
+      false,
+    isLoadingOutreach,
+    isUpdatingOutreach,
+    outreachError,
     requiresNewConversation:
       error?.code === "release_unavailable" || error?.code === "profile_mismatch",
     setDraft,
@@ -367,6 +498,10 @@ export function useStudentWorkspace(
     startNewConversation,
     startCurrentRelease,
     sendMessage,
+    refreshOutreach,
+    setInAppOutreachEnabled,
+    markOutreachRead,
+    dismissOutreach,
     selectCitation,
   }
 }

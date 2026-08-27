@@ -3,7 +3,12 @@ import json
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.digital_twin.grounding.models import DocumentChunk
-from src.digital_twin.student.models import AccountRole, ReleaseEvaluationStatus
+from src.digital_twin.student.models import (
+    AccountRole,
+    OutreachChannel,
+    ProactiveTriggerKind,
+    ReleaseEvaluationStatus,
+)
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     PreviewDecisionValue,
@@ -99,6 +104,42 @@ class StudentMessageRequest(BaseModel):
     @classmethod
     def required_text_must_be_nonblank(cls, value: str) -> str:
         return _nonblank(value, "student request identifier")
+
+
+class OutreachPreferenceRequest(BaseModel):
+    enabled: bool
+    timezone: str = Field(default="UTC", min_length=1, max_length=64)
+    quiet_hours_start: str = "22:00"
+    quiet_hours_end: str = "08:00"
+    max_messages_per_7_days: int = Field(default=3, ge=1, le=14)
+    snoozed_until: str | None = Field(default=None, max_length=64)
+    destination_ref: str | None = Field(default=None, max_length=128)
+    private_destination: bool = False
+
+
+class ProactiveTriggerRequest(BaseModel):
+    student_account_id: str = Field(min_length=1, max_length=128)
+    channel: OutreachChannel = OutreachChannel.IN_APP
+    kind: ProactiveTriggerKind
+    scheduled_for: str = Field(min_length=1, max_length=64)
+    expires_at: str = Field(min_length=1, max_length=64)
+    topic: str = Field(min_length=1, max_length=240)
+    prompt: str = Field(min_length=1, max_length=2_000)
+    source_chunk_id: str = Field(min_length=1, max_length=256)
+    idempotency_key: str = Field(min_length=1, max_length=128)
+
+    @field_validator(
+        "student_account_id",
+        "scheduled_for",
+        "expires_at",
+        "topic",
+        "prompt",
+        "source_chunk_id",
+        "idempotency_key",
+    )
+    @classmethod
+    def proactive_text_must_be_nonblank(cls, value: str) -> str:
+        return _nonblank(value, "proactive trigger field")
 
 
 class ReleaseCreateRequest(BaseModel):

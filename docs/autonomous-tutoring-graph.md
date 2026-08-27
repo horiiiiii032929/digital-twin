@@ -133,10 +133,12 @@ the learning objective has been reached. It may decrease or increase
 scaffolding, change representation, ask for self-explanation, provide practice,
 or revisit a misconception.
 
-The first release supports autonomous proactivity **inside an active tutoring
-session**. Unsolicited reminders or messages outside the application require a
-later opt-in notification and consent design; they are not implied by this
-decision.
+This decision originally limited autonomous proactivity to an active tutoring
+session. On 2026-08-27, the project owner promoted asynchronous, opt-in outreach
+to a core product direction. Its separate trigger, consent, delivery, and
+evaluation boundary is recorded in
+[`proactive-outreach-001`](proactive-outreach.md). The turn graph still cannot
+schedule or deliver messages by itself.
 
 ### Course-improvement loop
 

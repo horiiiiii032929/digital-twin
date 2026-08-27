@@ -4,6 +4,8 @@ import type {
   StudentConversation,
   StudentConversationView,
   StudentCourse,
+  StudentOutreachPreference,
+  StudentProactiveMessageView,
   StudentTutorTurn,
 } from "@/lib/api/types"
 
@@ -36,6 +38,67 @@ export function listStudentCourses(
   return studentRequest<StudentCourse[]>("/api/student/courses", {
     headers: studentHeaders(accountId),
   })
+}
+
+export function listStudentOutreach(
+  courseId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentProactiveMessageView[]> {
+  return studentRequest<StudentProactiveMessageView[]>(
+    `/api/student/outreach?course_id=${encodeURIComponent(courseId)}`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
+export function listStudentOutreachPreferences(
+  courseId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentOutreachPreference[]> {
+  return studentRequest<StudentOutreachPreference[]>(
+    `/api/student/courses/${pathSegment(courseId)}/outreach-preferences`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
+export function updateStudentInAppOutreachPreference(
+  courseId: string,
+  enabled: boolean,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentOutreachPreference> {
+  return studentRequest<StudentOutreachPreference>(
+    `/api/student/courses/${pathSegment(courseId)}/outreach-preferences/in-app`,
+    {
+      method: "PUT",
+      headers: studentHeaders(accountId),
+      body: JSON.stringify({
+        enabled,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
+        quiet_hours_start: "22:00",
+        quiet_hours_end: "08:00",
+        max_messages_per_7_days: 3,
+      }),
+    },
+  )
+}
+
+export function markStudentOutreachRead(
+  messageId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentProactiveMessageView> {
+  return studentRequest<StudentProactiveMessageView>(
+    `/api/student/outreach/${pathSegment(messageId)}/read`,
+    { method: "POST", headers: studentHeaders(accountId) },
+  )
+}
+
+export function dismissStudentOutreach(
+  messageId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentProactiveMessageView> {
+  return studentRequest<StudentProactiveMessageView>(
+    `/api/student/outreach/${pathSegment(messageId)}/dismiss`,
+    { method: "POST", headers: studentHeaders(accountId) },
+  )
 }
 
 export function createStudentConversation(
