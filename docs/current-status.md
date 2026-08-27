@@ -41,7 +41,10 @@ fitness-for-use gate before spending: 227/400 answerable cases across 68/100
 clusters triggered conservative fragment, raw-artifact, or structured-modality
 diagnostics. A 12-case Codex-assisted audit confirmed material reference defects.
 The package is retained as deterministic scaffolding but is blocked from product
-execution until a prospective extraction and wording successor passes. Future
+execution until a prospective source-plan, extraction, and wording successor
+passes. The same allocation cannot be patched only in the answer parser: just
+16/35 code-labelled development windows and 2/3 table-labelled windows contain
+a complete detected region; equations are 6/6. Future
 models may paraphrase wording and provide advisory review but cannot define or
 mutate gold. The 500-case T0 product run and sealed 10,000-case final run remain
 unauthorized.

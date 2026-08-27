@@ -60,6 +60,13 @@ start or end mid-sentence. Finally, all 500 questions are deterministic
 development templates; several cues are understandable but not realistic
 student wording.
 
+A follow-up containment check confirms that this cannot be corrected only in
+the answer parser. Of the development windows labelled for structured cases,
+only 16/35 code windows and 2/3 table windows contain one complete detected
+region; all 6/6 equation windows do. The remaining code/table labels are based
+on overlap with a region cut by the window boundary. The development source
+allocation therefore needs a prospective identity too.
+
 Executing T0 now would confound Digital Twin quality with defective reference
 answers and artificial questions. A failure could be caused by bad gold, while
 a pass on a mislabeled structured case would not demonstrate the intended
@@ -70,13 +77,15 @@ capability. Provider reliability or budget cannot correct this validity issue.
 Preserve AFQC-044 and this unfavorable audit unchanged. Build one prospective
 development successor that:
 
-1. aligns text evidence to complete source statements;
-2. binds structured cases to the exact detected code, equation, or table region;
-3. rejects fragment, markup/runtime, and modality mismatches before writing;
-4. keeps actions, answers, claims, citations, and boundary reasons deterministic;
-5. applies provider-neutral question paraphrasing only after the truth package
+1. reselects the 100 development source clusters under a new immutable source
+   plan with complete-statement and complete-region boundaries;
+2. aligns text evidence to complete source statements;
+3. binds structured cases to the exact detected code, equation, or table region;
+4. rejects fragment, markup/runtime, and modality mismatches before writing;
+5. keeps actions, answers, claims, citations, and boundary reasons deterministic;
+6. applies provider-neutral question paraphrasing only after the truth package
    passes, with canonical fallback and duplicate/leakage quarantine; and
-6. reruns this same audit plus a bounded model-assisted semantic packet before
+7. reruns this same audit plus a bounded model-assisted semantic packet before
    requesting paid product execution.
 
 The sealed final 10,000 cases, paid provider calls, private data, visual work,
@@ -88,7 +97,8 @@ Professor Digital Twin fidelity, and deployment remain closed.
 - Audit implementation revision: `d6d0419`.
 - Audit scope: committed 500 public cases, separate 500 hidden-gold rows, frozen
   100-cluster public source plan, and 12 priority examples.
-- Provider calls, tokens, cost, private-data access, and final-split access: zero.
+- Provider calls, tokens, cost, private-data access, and final case/gold access:
+  zero. The already-built source allocation plan was inspected.
 - The diagnostic rules are deliberately high-recall. Their aggregate counts
   establish a pre-spend risk gate; they are not substitutes for future semantic
   validation of the corrected package.
