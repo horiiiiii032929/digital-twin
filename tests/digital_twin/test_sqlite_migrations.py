@@ -27,6 +27,10 @@ def test_clean_database_applies_all_ordered_migrations(tmp_path):
         "identity_credentials",
         "identity_sessions",
         "conversation_learner_states",
+        "outreach_preferences",
+        "proactive_triggers",
+        "proactive_messages",
+        "proactive_delivery_outbox",
         "schema_migrations",
     }
     repository.close()

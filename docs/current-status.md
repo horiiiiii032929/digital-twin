@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-25
+Status date: 2026-08-27
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -184,6 +184,17 @@ candidate, an approval-gated R2 invite-only pilot, and an R3 final project
 release. The [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 continues to define the product; evaluation tracks are evidence gates toward
 that release.
+
+On 2026-08-27, the project owner clarified that a Professor Digital Twin must
+also be able to initiate an interaction rather than only respond to a student
+turn. Issue [#134](https://github.com/horiiiiii032929/digital-twin/issues/134)
+and [`proactive-outreach-001`](proactive-outreach.md) now own this core product
+track. The build-only vertical slice provides opt-in private in-app check-ins,
+source-linked deterministic triggers, quiet-hour/snooze/frequency suppression,
+atomic idempotent materialization, withdrawal cancellation, and a disabled
+Discord private-destination adapter. It makes no external-delivery or
+real-student claim; the component remains `Go Deeper` pending a frozen synthetic
+evaluation and separately gated worker/channel activation.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the

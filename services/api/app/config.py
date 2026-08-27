@@ -47,6 +47,7 @@ class AppSettings:
     student_tutoring_mode: StudentTutoringMode = (
         StudentTutoringMode.GROUNDED_ASSISTANT
     )
+    proactive_outreach_worker_enabled: bool = False
     provider_max_calls_per_process: int = 1_000
     provider_cost_cap_usd: float = 5.0
 
@@ -95,6 +96,9 @@ class AppSettings:
                     "APP_STUDENT_TUTORING_MODE",
                     StudentTutoringMode.GROUNDED_ASSISTANT.value,
                 )
+            ),
+            proactive_outreach_worker_enabled=_boolean(
+                "APP_PROACTIVE_OUTREACH_WORKER_ENABLED", default=False
             ),
             provider_max_calls_per_process=_positive_int(
                 "APP_PROVIDER_MAX_CALLS_PER_PROCESS", 1_000

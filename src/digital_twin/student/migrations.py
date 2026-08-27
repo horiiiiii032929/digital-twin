@@ -346,6 +346,97 @@ RELEASE_INVARIANT_STATEMENTS = (
 )
 
 
+PROACTIVE_OUTREACH_SCHEMA_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS outreach_preferences (
+           student_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           channel TEXT NOT NULL CHECK(channel IN ('in-app', 'discord')),
+           enabled INTEGER NOT NULL DEFAULT 0,
+           timezone TEXT NOT NULL,
+           quiet_hours_start TEXT NOT NULL,
+           quiet_hours_end TEXT NOT NULL,
+           max_messages_per_7_days INTEGER NOT NULL,
+           snoozed_until TEXT,
+           destination_ref TEXT,
+           private_destination INTEGER NOT NULL DEFAULT 0,
+           updated_at TEXT NOT NULL,
+           PRIMARY KEY (student_id, course_id, channel)
+       )""",
+    """CREATE TABLE IF NOT EXISTS proactive_triggers (
+           id TEXT PRIMARY KEY,
+           idempotency_key TEXT NOT NULL UNIQUE,
+           professor_id TEXT NOT NULL REFERENCES accounts(id),
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           channel TEXT NOT NULL CHECK(channel IN ('in-app', 'discord')),
+           kind TEXT NOT NULL,
+           scheduled_for TEXT NOT NULL,
+           expires_at TEXT NOT NULL,
+           topic TEXT NOT NULL,
+           prompt TEXT NOT NULL,
+           source_chunk_id TEXT NOT NULL,
+           status TEXT NOT NULL,
+           suppression_reason TEXT,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS proactive_triggers_due_idx
+       ON proactive_triggers(status, scheduled_for, id)""",
+    """CREATE INDEX IF NOT EXISTS proactive_triggers_student_idx
+       ON proactive_triggers(student_id, course_id, created_at)""",
+    """CREATE TABLE IF NOT EXISTS proactive_messages (
+           id TEXT PRIMARY KEY,
+           trigger_id TEXT NOT NULL UNIQUE
+               REFERENCES proactive_triggers(id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           channel TEXT NOT NULL CHECK(channel IN ('in-app', 'discord')),
+           content TEXT NOT NULL,
+           status TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           read_at TEXT,
+           dismissed_at TEXT
+       )""",
+    """CREATE INDEX IF NOT EXISTS proactive_messages_inbox_idx
+       ON proactive_messages(student_id, course_id, created_at DESC)""",
+    """CREATE TABLE IF NOT EXISTS proactive_citations (
+           id TEXT PRIMARY KEY,
+           message_id TEXT NOT NULL
+               REFERENCES proactive_messages(id) ON DELETE CASCADE,
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           source_artifact_id TEXT NOT NULL,
+           source_document_id TEXT NOT NULL,
+           source_version INTEGER NOT NULL,
+           title TEXT NOT NULL,
+           locator TEXT NOT NULL,
+           source_checksum TEXT,
+           page INTEGER,
+           region_id TEXT,
+           region_kind TEXT,
+           bounding_box_json TEXT,
+           crop_ref TEXT
+       )""",
+    """CREATE TABLE IF NOT EXISTS proactive_delivery_outbox (
+           id TEXT PRIMARY KEY,
+           message_id TEXT NOT NULL UNIQUE
+               REFERENCES proactive_messages(id) ON DELETE CASCADE,
+           channel TEXT NOT NULL CHECK(channel = 'discord'),
+           destination_ref TEXT NOT NULL,
+           status TEXT NOT NULL,
+           attempts INTEGER NOT NULL DEFAULT 0,
+           last_error TEXT,
+           available_at TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS proactive_outbox_pending_idx
+       ON proactive_delivery_outbox(status, available_at, id)""",
+)
+
+
 DEFAULT_MIGRATIONS = (
     SQLiteMigration(
         version=1,
@@ -416,5 +507,13 @@ DEFAULT_MIGRATIONS = (
             "add message tutoring metadata and conversation_learner_states"
         ),
         operation=_add_bounded_tutoring_state,
+    ),
+    SQLiteMigration(
+        version=10,
+        name="opt-in-proactive-outreach",
+        definition="\n".join(PROACTIVE_OUTREACH_SCHEMA_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, PROACTIVE_OUTREACH_SCHEMA_STATEMENTS
+        ),
     ),
 )

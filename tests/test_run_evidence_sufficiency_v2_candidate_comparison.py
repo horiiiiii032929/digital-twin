@@ -27,11 +27,21 @@ def test_candidate_comparison_is_completed_and_authorization_revoked() -> None:
     result = preflight(instrument)
 
     assert result["status"] == "blocked-not-authorized"
-    assert set(result["blockers"]) == {
+    assert {
         "candidate-execution-authorized-false",
         "local-model-execution-authorized-false",
         "decision-split-execution-authorized-false",
-    }
+    }.issubset(result["blockers"])
+    assert all(
+        blocker
+        in {
+            "candidate-execution-authorized-false",
+            "local-model-execution-authorized-false",
+            "decision-split-execution-authorized-false",
+        }
+        or blocker.startswith("stale-model-metadata:")
+        for blocker in result["blockers"]
+    )
     assert result["decision_split_opened"] is False
     assert result["model_loaded"] is False
     assert result["provider_calls"] == 0

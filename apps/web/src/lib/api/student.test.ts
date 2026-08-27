@@ -4,10 +4,15 @@ import {
   StudentApiError,
   createStudentConversation,
   getStudentConversation,
+  dismissStudentOutreach,
+  listStudentOutreach,
+  listStudentOutreachPreferences,
   listStudentCourses,
   listStudentMessageCitations,
   loadStudentCitationCrop,
+  markStudentOutreachRead,
   submitStudentMessage,
+  updateStudentInAppOutreachPreference,
 } from "@/lib/api/student"
 
 describe("student API client", () => {
@@ -103,6 +108,42 @@ describe("student API client", () => {
         409,
         "release_unavailable",
       ),
+    )
+  })
+
+  it("uses private outreach preference and inbox routes", async () => {
+    const fetchMock = stubFetch({})
+
+    await listStudentOutreach("course a", "student-a")
+    await listStudentOutreachPreferences("course a", "student-a")
+    await updateStudentInAppOutreachPreference("course a", true, "student-a")
+    await markStudentOutreachRead("message a", "student-a")
+    await dismissStudentOutreach("message a", "student-a")
+
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      "/api/student/outreach?course_id=course%20a",
+      expect.any(Object),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/api/student/courses/course%20a/outreach-preferences",
+      expect.any(Object),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      3,
+      "/api/student/courses/course%20a/outreach-preferences/in-app",
+      expect.objectContaining({ method: "PUT" }),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      4,
+      "/api/student/outreach/message%20a/read",
+      expect.objectContaining({ method: "POST" }),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      5,
+      "/api/student/outreach/message%20a/dismiss",
+      expect.objectContaining({ method: "POST" }),
     )
   })
 

@@ -280,12 +280,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "8871982c799844db680f6effbef3bf3f824f1243ff3fd14041ed361ca1de3791"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "7d5c107d0ab68c65b257112bbd94d73879c8a663d29c0fd420c36f08c21fbd83"
     },
     {
       "audit_status": "audited",
@@ -489,12 +489,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "e40f69923862ce3a0d98906d88528e71e70e582877785aea970301903c204158"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "50b33470db46687c41bee285e8283cd1b87e49ca3ebd2418e91d720fa9651ff3"
     },
     {
       "audit_status": "audited",
@@ -588,34 +588,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/lib/api/student.test.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "4e1cbc5ecdb3ab4e3da2f0a9ebe9cdda547e576f94b498cc9edfd5ebf4c82ad4"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "fb95f2fc33c0e4750511f297c875aaf2c7666131a7d3cb84fee6510e2618af31"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/lib/api/student.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "ac6dd43375dbfbf5b23eff67f0cca1b219fb753a2eb3cdc7555914fa37ba9a2b"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "06cfefe8991531df1fb4d4cf538083dc88464d3f756bf2f93807a97b1711fb58"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness",
-      "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/lib/api/types.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "repository-maintenance",
-      "sha256": "2cc1e9dbed1846cd89aee938f6df46896822014f594c0047d4c8a7153d8b9d09"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "c11706174490f239cee8bb4e78ad0adfbe452ee5a4826c6c4c931806f8e747ed"
     },
     {
       "audit_status": "audited",
@@ -850,13 +850,13 @@
     },
     {
       "path": "deploy/staging.env.example",
-      "sha256": "00b13e3a7322859e390d36db455ac53c1b796f7a06550296a2f7571423ea06ba",
+      "sha256": "3a46ded5a25420d1102fa5db0e01e84691936597afbf375e98e165a28c2db5c3",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "52c15ae27d3b27e22dd25e0af37deacde44000b08f1b721b7d4922af25729f1e",
+      "sha256": "15f35658630756e5c27fbb8049d4bb853c5ca04c4b2684a8dc3ae780fb8b2473",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "academic-factual-qa-evaluation",
-      "reviewed_at": "2026-08-25",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Command review confirms the academic factual-QA instrument validation and network-free real-service simulation are included in the complete local verification chain while external and development execution remain fail-closed.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -1974,12 +1974,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
-      "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "research/05_evaluation/profiles/student-tutor-v1.json",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "4ebc43d468b5ceec52552986de9a20389ce81485917c3918ec8fbcc1194c4bad"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "49605552988a32302ccc28a3e144fa11ab03b2ef3867598a38d9d5b43972f798"
     },
     {
       "audit_status": "audited",
@@ -3237,35 +3237,35 @@
     },
     {
       "path": "services/api/app/config.py",
-      "sha256": "c81c5e6dc8ed2fb22275e6326d5634a56b6f65a84f9bc3c361a9c36525ca96ba",
+      "sha256": "d23fcf98e96f95b1fc4ac6e2887fc8cb4c34f9f9d7ddc9f2b3c27bb8ebf1a444",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "api-authentication-and-scope",
-      "evidence": "Manual dependency-boundary review verified staging cookie identity, demo-header isolation, professor-owned onboarding scope, and fail-closed authentication; API and complete Python suites passed.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "services/api/app/dependencies.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "15e08dd49a05234f27136108b49f23fc8a2226113c717d152b7f30197f97988d"
+      "sha256": "45100904614ea1b2cb78689db3e887fe7737f996ad28737228c29b92a94ab5f5"
     },
     {
       "path": "services/api/app/factory.py",
-      "sha256": "840e105398d6989f3ce56704f5bb489119a4559b7202007dd53639224eb5315f",
+      "sha256": "e8ecb9eb26d0b62d589eb604f59b9c894b486d35b7de946a78c97e084c044136",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -3349,34 +3349,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-api-boundaries",
-      "evidence": "Professor ownership, one-course onboarding binding, bounded upload, server-bound source provenance, preflight, publication, and error mapping reviewed; focused API and rendered-flow tests passed.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "services/api/app/routers/publication.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "6981fd922205a6a0508b302739cfcb14f170fd4deef12580df1a5518726fa06e"
+      "sha256": "1efbd650b34346838c623cac6389c1e56d3491ca34308bdf0ddb9ece650843b6"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-api-boundaries",
-      "evidence": "Student authorization, turn errors, citation scope, and crop path/symlink handling reviewed; focused API tests passed.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "services/api/app/routers/student.py",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "b28506ad738123f12668c1f0cc4156f8b44f587c59bbd9e9deb4dc43c15ac6a2"
+      "sha256": "7aef5cfdeef1c25b547ea9dcbf1ff2720ebdd46e149d7f61ed20d45e2e01d5ce"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness",
-      "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "services/api/app/schemas.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "repository-maintenance",
-      "sha256": "1730b77df9db1d7abb25f8d22de415dfe90b00e9fce4c1b1d7ff5dd31b8ecf9d"
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "3cfcf8f30d0f0e4e5c18541390e793dc1f16cca45abb026f2e0dcdcf455e2ffd"
     },
     {
       "audit_status": "audited",
@@ -4172,13 +4172,13 @@
     },
     {
       "path": "src/digital_twin/student/__init__.py",
-      "sha256": "72aba3b1c60a722925d068a58b0ccf458215c106478cd0d8a2f8bf6da7e974e5",
+      "sha256": "771ad30c6fc0bfb7eaea03b067e273e24916f34cd22f94cbff67180c86d5edff",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -4194,24 +4194,24 @@
     },
     {
       "path": "src/digital_twin/student/migrations.py",
-      "sha256": "36ece71f4ae759cbe95524e03cb16bc4ce2764589200d281a9b8eb55ea5f2b63",
+      "sha256": "1d8f87908c2515cf52caddd163d3042ce436a2c7d08839f230f09d822ed7a7b2",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
       "path": "src/digital_twin/student/models.py",
-      "sha256": "f60f0da9f962bf78796fcf1153311334c54ac6b59e92f55ac61764a90f9d95b5",
+      "sha256": "cef41c2c060aeafa05d5e1d739cfaf833b21d307b32b1b4928a769de7e2bb63d",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -4227,13 +4227,13 @@
     },
     {
       "path": "src/digital_twin/student/repository.py",
-      "sha256": "b25f8b7541f0a4ea877a991f880e6ea8ecb38be52fba101574ff594e7dc3b44b",
+      "sha256": "a568ce1d41029224a98ef1716d6892b635b19a9451750f57018087e5d89f6809",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -4513,13 +4513,13 @@
     },
     {
       "path": "tests/digital_twin/test_sqlite_migrations.py",
-      "sha256": "9093dbec532046022c7122cf7da92252b1eb31cbca8e0394849a868b9b496e59",
+      "sha256": "8f600568b71c58c9659b3d8647399eade567a0ba86bbff7e933878ea10b3a557",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-tutoring-graph",
-      "reviewed_at": "2026-08-21",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": []
     },
     {
@@ -5602,13 +5602,13 @@
     },
     {
       "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
-      "sha256": "206eb37e92161f3f9029d12b39bebdc8e5ae42eb3287e121b1ec05d72ee32350",
+      "sha256": "4708ea987e9077cd8448deff130518410fb8221c6c760c8205e6fb52cca88d0d",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evidence-sufficiency",
-      "reviewed_at": "2026-08-24",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused tests verify the completed revoked preflight, model-free simulation, AnyHit exclusion, coherent three-part authorization and revocation states, exact model revisions, and immutable hard gates.",
+      "evidence": "Focused tests verify the completed revoked preflight, including optional stale-metadata blockers after the 24-hour window, model-free simulation, AnyHit exclusion, coherent three-part authorization and revocation states, exact model revisions, and immutable hard gates.",
       "findings": []
     },
     {
@@ -5679,13 +5679,13 @@
     },
     {
       "path": "tests/test_run_atomic_claim_validation_confirmation.py",
-      "sha256": "0eedbbe82ec7853daca2678761a2b4a3342567209e7af6557888430ab651d984",
+      "sha256": "19a0286401e67ae8f0ef4c895620bdf26bd485e9b020e1ed927fba26cc8edf51",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "atomic-claim-evidence-validation",
-      "reviewed_at": "2026-08-24",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Tests verify completed revocation, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+      "evidence": "Tests verify completed revocation, including the optional stale-metadata blocker after the 24-hour window, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
       "findings": []
     },
     {
@@ -5730,6 +5730,50 @@
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
       "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
+      "findings": []
+    },
+    {
+      "path": "scripts/proactive_outreach_worker.py",
+      "sha256": "589c43f6f9625eee0ff6eb96fc320e627eeb4ccf15de26d6bfad0708467c7e2f",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "Manual entrypoint review confirms staging-only execution, explicit disabled-by-default worker authority, bounded batches, no provider or external delivery calls, and clean repository closure.",
+      "findings": []
+    },
+    {
+      "path": "src/digital_twin/student/proactive.py",
+      "sha256": "d0916bdaa57eb1776ecd0561707705765f1d8244937e39602ae3c0d32649ee8b",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused code and threat-boundary review plus network-free regressions cover opt-in defaults, ownership, release and evidence revalidation, quiet hours, snooze, frequency caps, idempotency, citation lineage, and disabled Discord transport.",
+      "findings": []
+    },
+    {
+      "path": "tests/api/test_proactive_outreach_api.py",
+      "sha256": "2ca1c4943562c31917eb2857f37e64460d4d4e2fe744494bc556f1a51dd81e9c",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, and cross-course rejection with no external calls.",
+      "findings": []
+    },
+    {
+      "path": "tests/digital_twin/test_proactive_outreach.py",
+      "sha256": "3b962895ccb239199ec6d029ac4e9113cee6472f9cfbe685e8b50e6d935574e5",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "Domain regressions verify fail-closed consent, source lineage, duplicate prevention, quiet-hour deferral, student controls, withdrawal cancellation, private Discord routing, mention suppression, and disabled delivery.",
       "findings": []
     }
   ],

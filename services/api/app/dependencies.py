@@ -8,7 +8,11 @@ from src.digital_twin.identity import IdentityError, IdentityService
 from src.digital_twin.grounding import LocalCourseSourceIngestionService
 from src.digital_twin.onboarding import ScopedSessionRepository, SessionRepository
 from src.digital_twin.student import AccountRole
-from src.digital_twin.student import ReleaseLifecycleService, StudentTutoringService
+from src.digital_twin.student import (
+    ProactiveOutreachService,
+    ReleaseLifecycleService,
+    StudentTutoringService,
+)
 
 
 def get_session_repository(request: Request) -> SessionRepository:
@@ -47,6 +51,10 @@ def get_student_service(request: Request) -> StudentTutoringService:
 
 def get_publication_service(request: Request) -> ReleaseLifecycleService:
     return request.app.state.publication_service
+
+
+def get_proactive_outreach_service(request: Request) -> ProactiveOutreachService:
+    return request.app.state.proactive_outreach_service
 
 
 def get_source_ingestion_service(request: Request) -> LocalCourseSourceIngestionService:
@@ -110,6 +118,10 @@ CurrentAccountDependency = Annotated[str, Depends(get_current_account_id)]
 PublicationServiceDependency = Annotated[
     ReleaseLifecycleService,
     Depends(get_publication_service),
+]
+ProactiveOutreachServiceDependency = Annotated[
+    ProactiveOutreachService,
+    Depends(get_proactive_outreach_service),
 ]
 SourceIngestionServiceDependency = Annotated[
     LocalCourseSourceIngestionService,

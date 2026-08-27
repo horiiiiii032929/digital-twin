@@ -56,14 +56,16 @@ professor-communication track.
    validated source-linked data, and only then freeze a selection run.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
-3. #88 — externally blocked on host/domain selection; merged PR #93
+3. #134 — evaluate the deterministic opt-in proactive trigger and in-app
+   delivery baseline; external Discord delivery remains a later gated adapter.
+4. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-4. #24 — calibrate Professor Digital Twin fidelity against independent expert
+5. #24 — calibrate Professor Digital Twin fidelity against independent expert
    labels, separately from factual QA.
-5. #9 and #25 — production operations and deployed end-to-end validation after
+6. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
-6. #10 — approval-gated professor/student workflow and usability pilot.
+7. #10 — approval-gated professor/student workflow and usability pilot.
 
 Issue #87 is completed historical method-building work. Issues #85 and #86 are
 completed `Refine` history. Issue #110 is complete only as a 10,000-row

@@ -60,6 +60,10 @@ from src.digital_twin.student import (
     SQLiteStudentRepository,
     StudentRepository,
 )
+from src.digital_twin.student.proactive import (
+    DiscordWebhookDeliveryAdapter,
+    ProactiveOutreachService,
+)
 from src.digital_twin.student.service import StudentTutoringService
 
 
@@ -160,6 +164,10 @@ def create_app(
         evidence_gate=student_evidence_gate,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
     )
+    app.state.proactive_outreach_service = ProactiveOutreachService(
+        app.state.student_repository
+    )
+    app.state.discord_delivery_adapter = DiscordWebhookDeliveryAdapter(enabled=False)
     app.state.publication_service = ReleaseLifecycleService(
         app.state.student_repository,
         profile_id=profile.profile_id,

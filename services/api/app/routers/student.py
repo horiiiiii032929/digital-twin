@@ -4,14 +4,19 @@ from fastapi import APIRouter, HTTPException, Request, status
 from fastapi.responses import FileResponse
 
 from services.api.app.dependencies import (
+    ProactiveOutreachServiceDependency,
     StudentAccountDependency,
     StudentServiceDependency,
 )
-from services.api.app.schemas import StudentMessageRequest
+from services.api.app.schemas import OutreachPreferenceRequest, StudentMessageRequest
 from src.digital_twin.student import (
     Citation,
     Conversation,
     ConversationView,
+    OutreachChannel,
+    OutreachPreference,
+    ProactiveMessageView,
+    ProactiveOutreachError,
     StudentCourse,
     StudentWorkflowError,
     TutorTurn,
@@ -27,6 +32,71 @@ def list_student_courses(
     service: StudentServiceDependency,
 ):
     return _call(service.list_courses, account_id)
+
+
+@router.get(
+    "/courses/{course_id}/outreach-preferences",
+    response_model=list[OutreachPreference],
+)
+def list_outreach_preferences(
+    course_id: str,
+    account_id: StudentAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    return _outreach_call(outreach.list_preferences, account_id, course_id)
+
+
+@router.put(
+    "/courses/{course_id}/outreach-preferences/{channel}",
+    response_model=OutreachPreference,
+)
+def update_outreach_preference(
+    course_id: str,
+    channel: OutreachChannel,
+    request: OutreachPreferenceRequest,
+    account_id: StudentAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    return _outreach_call(
+        outreach.update_preference,
+        account_id,
+        course_id,
+        channel=channel,
+        **request.model_dump(),
+    )
+
+
+@router.get("/outreach", response_model=list[ProactiveMessageView])
+def list_outreach_inbox(
+    account_id: StudentAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+    course_id: str | None = None,
+):
+    return _outreach_call(
+        outreach.list_inbox, account_id, course_id=course_id
+    )
+
+
+@router.post(
+    "/outreach/{message_id}/read", response_model=ProactiveMessageView
+)
+def mark_outreach_read(
+    message_id: str,
+    account_id: StudentAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    return _outreach_call(outreach.mark_read, account_id, message_id)
+
+
+@router.post(
+    "/outreach/{message_id}/dismiss", response_model=ProactiveMessageView
+)
+def dismiss_outreach(
+    message_id: str,
+    account_id: StudentAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    return _outreach_call(outreach.dismiss, account_id, message_id)
 
 
 @router.post(
@@ -137,6 +207,36 @@ def _call(operation, *args):
         return operation(*args)
     except StudentWorkflowError as error:
         raise _http_error(error) from error
+
+
+def _outreach_call(operation, *args, **kwargs):
+    try:
+        return operation(*args, **kwargs)
+    except ProactiveOutreachError as error:
+        not_found = {
+            "account_not_found",
+            "proactive_message_not_found",
+            "proactive_trigger_not_found",
+        }
+        conflict = {
+            "release_unavailable",
+            "proactive_message_state_invalid",
+            "trigger_idempotency_conflict",
+        }
+        status_code = (
+            status.HTTP_404_NOT_FOUND
+            if error.code in not_found
+            else status.HTTP_409_CONFLICT
+            if error.code in conflict
+            else status.HTTP_403_FORBIDDEN
+            if error.code.endswith("forbidden")
+            or error.code in {"student_account_required", "course_forbidden"}
+            else status.HTTP_422_UNPROCESSABLE_CONTENT
+        )
+        raise HTTPException(
+            status_code=status_code,
+            detail={"code": error.code, "message": error.message},
+        ) from error
 
 
 def _http_error(error: StudentWorkflowError) -> HTTPException:

@@ -32,7 +32,7 @@ remains immutable historical evidence.
 | Evaluation-before-publication | Durable draft/deterministic preflight/publication/withdrawal/rollback plus credentialed professor-upload-to-student-citation workflow | 41/41 local foundation checks / Go Deeper | Bind immutable release-candidate evaluation and complete public staging rehearsal |
 | Audit/operations | Redacted request/audit events, health/readiness, admin p50/p95/error/alert/provider-budget metrics, backup/restore, retention/export/deletion, Docker/Caddy package | A1 staging candidate / Go Deeper | Add approved external log/alert sink and off-host encrypted backup before broader use |
 | Learning-gap analytics | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
-| Proactive intervention | Design scaffold only | Deferred | Reconsider after core Digital Twin evidence freeze |
+| Proactive intervention | Deterministic, opt-in in-app vertical slice with source-linked triggers, atomic outbox, suppression controls, and a disabled Discord adapter | Go Deeper | Freeze and run the synthetic trigger/suppression evaluation before selecting the component or enabling an external worker |
 
 ## Evidence already retained
 

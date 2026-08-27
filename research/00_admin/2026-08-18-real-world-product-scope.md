@@ -25,6 +25,14 @@ responds, verifies the response, and adapts on the next turn. The professor
 governs the published policy and consequential updates but does not approve
 normal student responses turn by turn.
 
+The 2026-08-27
+[proactive outreach amendment](../../docs/proactive-outreach.md) makes
+asynchronous, opt-in initiation part of the product goal. The professor governs
+allowed trigger types and frequency; the student controls each delivery channel,
+quiet hours, snooze, and opt-out. Deterministic code authorizes delivery, while a
+model may only compose bounded wording from approved evidence. Private in-app
+delivery is core; Discord and later channels remain optional adapters.
+
 The merged local professor/student workspace is the product UX baseline, not
 the completed product. The release target is a real hosted pilot with
 credentialed roles, governed multimodal source ingestion, durable state,
@@ -71,6 +79,11 @@ scope or rewriting existing evidence.
 - Start and resume persistent single- and multi-turn tutoring conversations.
 - Receive autonomous, adaptive tutoring that diagnoses understanding, selects
   bounded teaching moves, and updates a transparent learner-state estimate.
+- Opt in to private, source-grounded tutor check-ins initiated by the published
+  Digital Twin, with quiet hours, snooze, frequency limits, and immediate
+  opt-out.
+- Keep learner-specific outreach in a private in-app or explicitly linked
+  private destination; shared channels receive course-wide notices only.
 - Receive grounded explanation, questions, hints, examples, checks for
   understanding, clarification, refusal, or no-evidence actions as appropriate.
 - Inspect source, version, page, region, and approved crop citations.

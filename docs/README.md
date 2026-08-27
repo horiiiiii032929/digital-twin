@@ -12,6 +12,8 @@ design records.
 - [Frozen claim-to-evidence matrix](../reports/claim-to-evidence-matrix.md)
 - [Project brief](project-brief.md)
 - [Digital Twin architecture](architecture.md)
+- [Autonomous tutoring graph](autonomous-tutoring-graph.md)
+- [Proactive Professor Digital Twin outreach](proactive-outreach.md)
 - [Component inventory](component-inventory.md)
 - [Quality and learning plan](quality-and-learning-plan.md)
 - [GitHub Project workflow](github-project.md)

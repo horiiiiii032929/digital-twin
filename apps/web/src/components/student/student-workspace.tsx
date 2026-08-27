@@ -14,6 +14,8 @@
 import { useEffect, useRef, useState, type RefObject } from "react"
 import {
   AlertCircle,
+  Bell,
+  BellOff,
   BookOpen,
   FileText,
   Menu,
@@ -31,6 +33,7 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   ChatContainerContent,
   ChatContainerRoot,
@@ -47,6 +50,7 @@ import type {
   StudentChatMessage,
   StudentCitation,
   StudentCourse,
+  StudentProactiveMessageView,
 } from "@/lib/api"
 import { loadStudentCitationCrop } from "@/lib/api"
 import { cn } from "@/lib/utils"
@@ -62,8 +66,10 @@ export function StudentWorkspace({
   const [citationSheetOpen, setCitationSheetOpen] = useState(false)
   const [citationPanelOpen, setCitationPanelOpen] = useState(false)
   const [courseMenuOpen, setCourseMenuOpen] = useState(false)
+  const [outreachOpen, setOutreachOpen] = useState(false)
   const citationTriggerRef = useRef<HTMLButtonElement | null>(null)
   const courseMenuTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const outreachTriggerRef = useRef<HTMLButtonElement | null>(null)
   const {
     courses,
     activeCourse,
@@ -76,6 +82,11 @@ export function StudentWorkspace({
     isLoadingCourses,
     isLoadingConversation,
     isSubmitting,
+    outreachMessages,
+    inAppOutreachEnabled,
+    isLoadingOutreach,
+    isUpdatingOutreach,
+    outreachError,
     requiresNewConversation,
     setDraft,
     reload,
@@ -83,6 +94,10 @@ export function StudentWorkspace({
     startNewConversation,
     startCurrentRelease,
     sendMessage,
+    refreshOutreach,
+    setInAppOutreachEnabled,
+    markOutreachRead,
+    dismissOutreach,
     selectCitation,
   } = controller
 
@@ -145,10 +160,17 @@ export function StudentWorkspace({
             activeCourse={activeCourse}
             citationAvailable={Boolean(selectedCitation)}
             citationPanelOpen={citationPanelOpen}
+            unreadOutreachCount={
+              outreachMessages.filter(
+                (item) => item.message.status === "delivered",
+              ).length
+            }
             menuTriggerRef={courseMenuTriggerRef}
             onOpenMenu={() => setCourseMenuOpen(true)}
             onOpenMobileCitation={() => setCitationSheetOpen(true)}
             onToggleCitation={() => setCitationPanelOpen((open) => !open)}
+            outreachTriggerRef={outreachTriggerRef}
+            onOpenOutreach={() => setOutreachOpen(true)}
           />
 
           {isLoadingCourses ? (
@@ -272,6 +294,32 @@ export function StudentWorkspace({
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
       </DialogPrimitive.Root>
+
+      <DialogPrimitive.Root open={outreachOpen} onOpenChange={setOutreachOpen}>
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-20 bg-black/15" />
+          <DialogPrimitive.Content
+            onCloseAutoFocus={(event) => {
+              event.preventDefault()
+              outreachTriggerRef.current?.focus()
+            }}
+            className="fixed inset-y-0 right-0 z-30 flex w-[min(94vw,420px)] flex-col border-l bg-white shadow-[-12px_0_40px_rgba(32,33,35,0.14)] outline-none"
+          >
+            <OutreachPanel
+              messages={outreachMessages}
+              enabled={inAppOutreachEnabled}
+              isLoading={isLoadingOutreach}
+              isUpdating={isUpdatingOutreach}
+              error={outreachError}
+              onClose={() => setOutreachOpen(false)}
+              onRefresh={refreshOutreach}
+              onEnabledChange={setInAppOutreachEnabled}
+              onMarkRead={markOutreachRead}
+              onDismiss={dismissOutreach}
+            />
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
     </main>
   )
 }
@@ -280,18 +328,24 @@ function StudentHeader({
   activeCourse,
   citationAvailable,
   citationPanelOpen,
+  unreadOutreachCount,
   menuTriggerRef,
   onOpenMenu,
   onOpenMobileCitation,
   onToggleCitation,
+  outreachTriggerRef,
+  onOpenOutreach,
 }: {
   activeCourse: StudentCourse | null
   citationAvailable: boolean
   citationPanelOpen: boolean
+  unreadOutreachCount: number
   menuTriggerRef: RefObject<HTMLButtonElement | null>
   onOpenMenu: () => void
   onOpenMobileCitation: () => void
   onToggleCitation: () => void
+  outreachTriggerRef: RefObject<HTMLButtonElement | null>
+  onOpenOutreach: () => void
 }) {
   return (
     <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white px-3 sm:px-5">
@@ -333,6 +387,26 @@ function StudentHeader({
           </Button>
         ) : null}
         <Button
+          ref={outreachTriggerRef}
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="relative"
+          aria-label={
+            unreadOutreachCount > 0
+              ? `Open tutor check-ins, ${unreadOutreachCount} unread`
+              : "Open tutor check-ins"
+          }
+          onClick={onOpenOutreach}
+        >
+          <Bell aria-hidden="true" />
+          {unreadOutreachCount > 0 ? (
+            <span className="absolute top-1 right-1 flex min-w-4 items-center justify-center rounded-full bg-[var(--accent-strong)] px-1 text-[10px] leading-4 font-bold text-white">
+              {Math.min(unreadOutreachCount, 9)}
+            </span>
+          ) : null}
+        </Button>
+        <Button
           type="button"
           variant="outline"
           size="sm"
@@ -364,6 +438,196 @@ function StudentHeader({
       </div>
     </header>
   )
+}
+
+function OutreachPanel({
+  messages,
+  enabled,
+  isLoading,
+  isUpdating,
+  error,
+  onClose,
+  onRefresh,
+  onEnabledChange,
+  onMarkRead,
+  onDismiss,
+}: {
+  messages: StudentProactiveMessageView[]
+  enabled: boolean
+  isLoading: boolean
+  isUpdating: boolean
+  error: string | null
+  onClose: () => void
+  onRefresh: () => Promise<void>
+  onEnabledChange: (enabled: boolean) => Promise<void>
+  onMarkRead: (messageId: string) => Promise<void>
+  onDismiss: (messageId: string) => Promise<void>
+}) {
+  return (
+    <>
+      <div className="flex min-h-14 items-center justify-between gap-3 border-b px-5">
+        <div className="min-w-0">
+          <DialogPrimitive.Title className="text-sm font-semibold">
+            Tutor check-ins
+          </DialogPrimitive.Title>
+          <DialogPrimitive.Description className="mt-0.5 text-xs text-muted-foreground">
+            Private messages initiated by your course Digital Twin
+          </DialogPrimitive.Description>
+        </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          aria-label="Close tutor check-ins"
+          onClick={onClose}
+        >
+          <X aria-hidden="true" />
+        </Button>
+      </div>
+
+      <div className="border-b bg-[var(--shell)] p-4">
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border bg-white p-3.5">
+          <Checkbox
+            checked={enabled}
+            disabled={isUpdating}
+            aria-label="Allow private tutor check-ins"
+            onCheckedChange={(checked) =>
+              void onEnabledChange(checked === true)
+            }
+          />
+          <span className="min-w-0">
+            <span className="block text-sm font-semibold">
+              Allow private in-app check-ins
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+              At most three per week, with quiet hours from 10 PM to 8 AM. You
+              can turn this off at any time.
+            </span>
+          </span>
+        </label>
+        <p className="mt-2.5 px-1 text-xs leading-5 text-muted-foreground">
+          Discord delivery is not connected yet. Individual learning details
+          will never be posted to a shared channel.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between gap-3 px-5 py-3">
+        <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Inbox
+        </h2>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          disabled={isLoading}
+          onClick={() => void onRefresh()}
+        >
+          <RefreshCcw data-icon="inline-start" />
+          Refresh
+        </Button>
+      </div>
+
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-5">
+        {error ? (
+          <Alert variant="destructive" className="mb-3">
+            <AlertCircle aria-hidden="true" />
+            <AlertTitle>Check-ins unavailable</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        ) : null}
+        {isLoading && messages.length === 0 ? (
+          <div className="space-y-3" aria-label="Loading tutor check-ins">
+            <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
+            <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
+          </div>
+        ) : messages.length === 0 ? (
+          <div className="flex min-h-64 flex-col items-center justify-center px-8 text-center">
+            <span className="flex size-11 items-center justify-center rounded-full bg-[var(--subtle)] text-muted-foreground">
+              {enabled ? (
+                <Bell className="size-5" aria-hidden="true" />
+              ) : (
+                <BellOff className="size-5" aria-hidden="true" />
+              )}
+            </span>
+            <h3 className="mt-3 text-sm font-semibold">
+              {enabled ? "No check-ins yet" : "Check-ins are off"}
+            </h3>
+            <p className="mt-1.5 max-w-64 text-xs leading-5 text-muted-foreground">
+              {enabled
+                ? "When your professor-approved tutor schedules a useful review, it will appear here."
+                : "Turn them on above if you want the tutor to initiate occasional study follow-ups."}
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {messages.map(({ message, citations }) => (
+              <article
+                key={message.id}
+                className={cn(
+                  "rounded-xl border p-4",
+                  message.status === "delivered"
+                    ? "border-[var(--accent-strong)]/25 bg-[var(--accent-soft)]/40"
+                    : "bg-white",
+                )}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                    <Sparkles className="size-3.5" aria-hidden="true" />
+                    Professor Digital Twin
+                  </span>
+                  <time
+                    dateTime={message.created_at}
+                    className="shrink-0 text-[11px] text-muted-foreground"
+                  >
+                    {formatOutreachTime(message.created_at)}
+                  </time>
+                </div>
+                <p className="mt-3 whitespace-pre-line text-sm leading-6">
+                  {message.content}
+                </p>
+                {citations[0] ? (
+                  <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                    Source: {citations[0].title} · {citations[0].locator}
+                  </p>
+                ) : null}
+                <div className="mt-3 flex items-center justify-end gap-2">
+                  {message.status === "delivered" ? (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => void onMarkRead(message.id)}
+                    >
+                      Mark read
+                    </Button>
+                  ) : null}
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => void onDismiss(message.id)}
+                  >
+                    Dismiss
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+
+function formatOutreachTime(value: string): string {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return "Recently"
+  return new Intl.DateTimeFormat(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date)
 }
 
 function CourseRail({
