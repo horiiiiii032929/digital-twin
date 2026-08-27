@@ -14,3 +14,9 @@ system is designed a certain way.
 - `05_evaluation/`: rubrics, datasets, validated component records, release
   profiles, and evaluation results
 - `06_reports/`: weekly summaries and final deliverables
+
+## Current architecture research
+
+- [Proactive mixed-initiative tutoring](01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
+  records the learning-science, interruption, governance, runtime, channel, and
+  evaluation basis for issue #134.

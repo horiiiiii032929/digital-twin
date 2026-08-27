@@ -10,6 +10,9 @@ unauthorized
 
 Implementation owner: [GitHub issue #134](https://github.com/horiiiiii032929/digital-twin/issues/134)
 
+Research basis:
+[`2026-08-27-proactive-mixed-initiative-tutoring`](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
+
 ## Decision question
 
 How can the Professor Digital Twin initiate a useful student interaction without
@@ -105,6 +108,28 @@ The implemented vertical slice supports professor-scheduled, source-linked
 practice. The other trigger types are contracts only until their event signals and
 evaluation sets are frozen. No free-running model may invent a trigger.
 
+### Research amendment: autonomy ladder
+
+The 2026-08-27 literature and prior-art review reframes this capability as
+mixed-initiative, just-in-time tutoring and separates four permissible autonomy
+levels:
+
+- A0: professor- or student-scheduled delivery;
+- A1: deterministic event-driven delivery, such as notifying a student after a
+  previous no-evidence condition is resolved;
+- A2: a model proposes a learner-state trigger while deterministic code retains
+  delivery authority; and
+- A3: a learned policy ranks already eligible intervention options.
+
+Open-ended autonomy in which a model invents the goal, recipient, timing, and
+action is prohibited. The current implementation is A0. A1 evidence recovery is
+the recommended first autonomous candidate. A2 must first run in shadow mode,
+and A3 requires prospective intervention evidence.
+
+Every decision point includes `no action` as an explicit valid outcome. Each
+trigger type must declare a proximal learning or task outcome before execution;
+message opens and clicks are diagnostics, not learning evidence.
+
 ## Consent and interruption controls
 
 Consent is absent by default. A trigger fails closed unless the exact student,
@@ -140,6 +165,13 @@ adapter rejects non-Discord URLs, shared destinations, unexpected mentions, and
 all delivery while disabled. A two-way Discord bot is a later adapter, not part
 of this vertical slice.
 
+The research amendment further narrows the prospective Discord payload. The
+initial external message should contain a generic notification and deep link to
+the authenticated in-app inbox, not the tutoring content, learner-state label,
+grade, misconception, source excerpt, or interaction history. The current
+disabled request builder still prepares full message text and therefore must be
+revised before external delivery can be enabled.
+
 ## Evaluation plan
 
 ### Decision question
@@ -163,6 +195,22 @@ snooze, opt-out, inactive membership, release replacement, missing evidence,
 frequency ceilings, duplicate workers, restart, delivery failure, Discord privacy,
 cross-course attempts, academic-integrity prompts, and malformed provider output.
 
+### Evaluation stages
+
+Separate four claims rather than combining them in one pass:
+
+1. deterministic safety simulation validates enforcement but not usefulness;
+2. shadow mode validates trigger proposals without sending messages;
+3. an approved opt-in usability pilot measures control, trust, and interruption
+   burden without claiming learning improvement; and
+4. a prospective randomized or micro-randomized study estimates proximal benefit,
+   followed by delayed retention or transfer only if earlier gates pass.
+
+For any causal comparison, account for repeated observations within students and
+concepts. Students selected for help are more likely to be struggling, so an
+observational comparison of helped versus unhelped cases is not a fair estimate
+of intervention benefit.
+
 ### Metrics and hard gates
 
 - eligible-trigger precision and recall;
@@ -173,6 +221,11 @@ cross-course attempts, academic-integrity prompts, and malformed provider output
 - opt-out, snooze, withdrawal, and quiet-hours enforcement;
 - delivery success, latency, retry count, and provider cost; and
 - student usefulness/dismissal feedback only after an approved human pilot.
+
+Also report productive-response and trigger-specific proximal-outcome success,
+help appropriateness, help avoidance, notification-fatigue trends, perceived
+pressure, and perceived control. Dismissal, snooze, frequency reduction, opt-out,
+and ignored messages are costs rather than missing data.
 
 Before any real-student or external-channel pilot, require 100% consent,
 suppression, release-withdrawal, citation-lineage, cross-course, privacy, and

@@ -56,8 +56,10 @@ professor-communication track.
    validated source-linked data, and only then freeze a selection run.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
-3. #134 — evaluate the deterministic opt-in proactive trigger and in-app
-   delivery baseline; external Discord delivery remains a later gated adapter.
+3. #134 — evaluate the A0 opt-in in-app baseline and A1 deterministic
+   evidence-recovery trigger. Keep learner-state inference in shadow mode and
+   external Discord delivery disabled until its payload is reduced to a generic
+   alert and authenticated deep link.
 4. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.

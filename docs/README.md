@@ -14,6 +14,7 @@ design records.
 - [Digital Twin architecture](architecture.md)
 - [Autonomous tutoring graph](autonomous-tutoring-graph.md)
 - [Proactive Professor Digital Twin outreach](proactive-outreach.md)
+- [Proactive mixed-initiative tutoring research](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
 - [Component inventory](component-inventory.md)
 - [Quality and learning plan](quality-and-learning-plan.md)
 - [GitHub Project workflow](github-project.md)

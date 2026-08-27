@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 521 executable or execution-affecting
+the current branch extends it to all 525 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -150,7 +150,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 861 Python tests and 46 frontend tests, frontend lint, and the
+check passes 870 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -170,9 +170,9 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 861-test Python suite.
+connections. These corrections remain covered by the current 870-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 521-file audit. Evaluation
+artifacts are also fully dispositioned in the current 525-file audit. Evaluation
 execution remains frozen, with 68/68 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 
@@ -195,6 +195,16 @@ atomic idempotent materialization, withdrawal cancellation, and a disabled
 Discord private-destination adapter. It makes no external-delivery or
 real-student claim; the component remains `Go Deeper` pending a frozen synthetic
 evaluation and separately gated worker/channel activation.
+
+The 2026-08-27
+[mixed-initiative tutoring review](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
+narrows the next research step. Professor-scheduled outreach is autonomy level
+A0; deterministic evidence-recovery is the first A1 autonomous candidate.
+Learner-state or misconception triggers remain shadow-mode-only until their
+precision and interruption cost are measured. `No action` is a valid decision,
+and external channels must initially carry only a generic alert and authenticated
+deep link. The disabled Discord request builder still prepares full tutoring
+text and therefore cannot be enabled without a privacy correction.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the
