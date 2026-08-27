@@ -1,6 +1,6 @@
 # R1 OpenAI release path
 
-Status date: 2026-08-27
+Status date: 2026-08-28
 
 ## Current checkpoint
 
@@ -20,18 +20,21 @@ router, fallback, retry, or alternate-provider path. Historical DeepSeek,
 Gemini, Mistral, OpenRouter, and local-model evidence is preserved but cannot be
 selected by the active R1 profile or its paid preflight.
 
-The 500-case wording simulation and the flow-independent adapter simulation pass
-without network access. The live preflights correctly report
-`blocked-not-authorized`. No OpenAI inference call or product-quality claim has
-been made at this checkpoint.
+PR #136 merged this direct-provider base. Checkpoint 003 now adds a mandatory
+40-control GPT-5.4 calibration before wording, 500 candidate cases, 100 paired
+controls, and deterministic scoring. Pass, calibration-failure,
+wording-failure, and product-failure simulations all stop correctly without
+network access. The checkpoint remains `blocked-not-authorized`; no OpenAI
+inference call or product-quality claim has been made.
 
 ## Finite critical path
 
-1. Revoke the OpenAI key exposed in chat and place only its replacement in the
-   ignored repository-root `.env` as `OPENAI_API_KEY`.
+1. Keep the rotated replacement key only in the ignored repository-root `.env`
+   as `OPENAI_API_KEY`.
 2. Refresh official model identity, pricing, limits, and data-control metadata;
-   freeze and explicitly authorize the 500-case development checkpoint.
-3. Run 500 candidate cases and the paired 100-case any-hit control, score hidden
+   freeze and explicitly authorize checkpoint 003 once.
+3. Qualify GPT-5.4, then conditionally run 500 candidate cases and the paired
+   100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
 4. If development passes, separately freeze and authorize the untouched
@@ -51,13 +54,13 @@ been made at this checkpoint.
 
 ## Human stop points
 
-Work stops for five inputs only:
+Work stops for four inputs only:
 
-1. confirmation that the exposed key was revoked and its replacement installed;
-2. explicit authorization for the revised 500-case paid run;
-3. explicit authorization for the sealed 10,000-case paid run after development;
-4. professor approval of the explicit teaching profile;
-5. production domain/DNS access and deployment authorization.
+1. explicit authorization for checkpoint 003 calibration plus the conditional
+   500+100 paid development run;
+2. explicit authorization for the sealed 10,000-case paid run after development;
+3. professor approval of the explicit teaching profile;
+4. production domain/DNS access and deployment authorization.
 
 True visual evaluation #131, real-source work #102, an external student pilot
 #10, and the final report #13 remain post-R1 and do not block this release.

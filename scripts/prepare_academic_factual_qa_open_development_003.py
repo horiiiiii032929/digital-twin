@@ -211,6 +211,9 @@ def main() -> int:
     mode.add_argument("--write", action="store_true")
     arguments = parser.parse_args()
     if arguments.write:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
         result = write()
     elif arguments.simulate:
         result = simulate()

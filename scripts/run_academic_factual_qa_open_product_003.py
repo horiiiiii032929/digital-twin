@@ -114,6 +114,9 @@ def preflight(*, condition: str, resume: bool = False) -> dict[str, Any]:
 
 async def execute(*, condition: str, resume: bool) -> dict[str, Any]:
     require_bounded_pilot_operation_allowed(
+        INSTRUMENT_ID, "external_model_evaluation"
+    )
+    require_bounded_pilot_operation_allowed(
         INSTRUMENT_ID, "method_evaluation_execution"
     )
     readiness = preflight(condition=condition, resume=resume)
@@ -145,6 +148,12 @@ def main() -> int:
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
     if arguments.execute:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
         result = asyncio.run(
             execute(condition=arguments.condition, resume=arguments.resume)
         )

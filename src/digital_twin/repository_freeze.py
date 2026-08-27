@@ -117,6 +117,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/prepare_academic_factual_qa_panel_review_v2.py": (
             "dataset_generation",
         ),
+        "scripts/prepare_academic_factual_qa_open_development_003.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/prepare_evidence_sufficiency_v2_independent_review.py": (
             "dataset_generation",
         ),
@@ -165,11 +168,27 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_academic_factual_qa_open_development_checkpoint_003.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_open_product_003.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_academic_factual_qa_open_wording.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
         "scripts/run_academic_factual_qa_open_wording_v2.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_open_wording_v3.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_openai_reviewer_calibration.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),

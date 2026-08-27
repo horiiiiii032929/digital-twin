@@ -78,8 +78,12 @@ professor-communication track.
    historical build evidence. AFQC-048 binds the active path to dated direct
    OpenAI GPT-5.4 mini generation and GPT-5.4 advisory review, explicitly
    disclosed as one provider family. Complete wording and adapter simulations
-   pass without network access. The next #127 checkpoint is the separately
-   authorized 500-case candidate plus 100-case control development run.
+   pass without network access. AFQC-049 adds the missing exact GPT-5.4
+   40-control calibration and one finite 660-call orchestrator. It can proceed
+   to wording, 500 candidate cases, 100 paired controls, and scoring only after
+   calibration passes. Four stage-stop simulations pass with zero calls. The
+   next #127 checkpoint is one separately authorized combined run after a clean
+   live no-call preflight.
    The 10,000-case final run remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

@@ -602,6 +602,13 @@ def main() -> int:
     mode.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
+    if arguments.execute:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
     if arguments.validate:
         result = validate()
     elif arguments.simulate:

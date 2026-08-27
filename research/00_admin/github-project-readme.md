@@ -1,6 +1,6 @@
 # Course Digital Twin Release
 
-Status date: 2026-08-27
+Status date: 2026-08-28
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -26,10 +26,12 @@ evidence, not competing end goals.
   product track. The deterministic private in-app vertical slice is build-only;
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
-  and execution freeze remain active and are rebuilt at each R1 checkpoint.
+  and execution freeze remain active. PR #136 merged the direct OpenAI base;
+  checkpoint 003 now covers 627/627 audited files and 91/91 frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
-  leakage-free product evaluation; its OpenAI-only 500-case development path is
-  build-ready and provider-unauthorized.
+  leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
+  GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
+  cases. The complete path is build-ready and provider-unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -41,8 +43,9 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Run #127's separately authorized 500-case candidate and paired 100-case
-   control; authorize the sealed 10,000 cases only after a complete pass.
+2. Run #127's separately authorized GPT-5.4 calibration and conditional
+   500-case candidate plus paired 100-case control; authorize the sealed 10,000
+   cases only after a complete pass.
 3. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 4. Preserve T0 and run #107's separately frozen T0/T1 confirmation.

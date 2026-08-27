@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 616
+    "audited": 627
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 140,
+    "active_or_unclassified_tooling": 146,
     "active_runtime": 111,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 141,
+    "evaluation_configuration": 145,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 131
+    "verification": 132
   },
-  "file_count": 616,
+  "file_count": 627,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "2837d9211451b3581e11ff7f2ac71870ddb525f7d91c898d5081172036757160",
+  "record_sha256": "6586cef58690b91f8d6b97f636fe0d4b7636d4049865f049fa20bde3ba55fbec",
   "records": [
     {
       "audit": {
@@ -1290,7 +1290,7 @@
         "domain": "r1-openai-configuration-and-deployment",
         "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "fd921ca58be53c3c0bbb2882a28d1d53cb6f18f8f987f222ff26141034f18d27"
+      "sha256": "ef6ab23839bfb6563a9a22eda2d6500a5439a4def082316915deffa26ecbe7d9"
     },
     {
       "audit": {
@@ -1719,6 +1719,22 @@
     },
     {
       "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Manual contract review plus network-free validation verified exact OpenAI snapshots, bounded stage budgets, hidden-label and hidden-gold separation, zero fallback, and provider execution disabled.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_003.json",
+      "risk": "high",
+      "sha256": "a87301e6b4f6e1fcec1ffd6b8c72c12538a772ade70e539f3b47d6a409d4f1f9"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Manual direct-provider binding review verifies first-party OpenAI and Mistral endpoints, exact dated or release model identities, official prices and limits checked on 2026-08-27, strict structured-output intent, runtime-only credentials, transport-only bounded retry, public-source boundary, and all provider/paid/development/final authority false.",
         "findings": [],
@@ -1748,6 +1764,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_002.json",
       "risk": "high",
       "sha256": "babe6fbf010eb958385bdf17beb123fa207a1b8a2dea1c48aa103ddc0238068b"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Manual provider-binding review verified direct Responses API use, exact dated identities, store false, zero fallback and retries, fresh official metadata, and all execution authorizations false.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_003.json",
+      "risk": "high",
+      "sha256": "4f11d564c2b952be0a91055df1c2d9926aed6fd720b80cf1a3aaf745755a7312"
     },
     {
       "audit": {
@@ -1863,6 +1895,22 @@
     },
     {
       "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Manifest review verified the candidate exposes only stable product inputs, binds the selected T0 evidence gate, and records the exact OpenAI generator without embedding hidden gold.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_003.json",
+      "risk": "high",
+      "sha256": "96bfceac022da012209e5d1e76d3961e9bf09626474fa364590e70472f3946bb"
+    },
+    {
+      "audit": {
         "domain": "r1-openai-evaluation-contracts",
         "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
@@ -1876,6 +1924,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_002.json",
       "risk": "high",
       "sha256": "b9f0a82647c465eb476cc5d64894a02290d37b46ab9b8b26ccd0fe0d0a73bf8e"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Manifest review verified the paired any-hit control differs only at the preregistered evidence-release boundary and contains no hidden-gold fields.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_003.json",
+      "risk": "high",
+      "sha256": "d3afb8dbe73fb8e7ba98bef8e928bcac3111b1e6596859c984fb7212652423c4"
     },
     {
       "audit": {
@@ -4762,6 +4826,22 @@
     },
     {
       "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review and regression tests verified runtime package IDs and splits are paired without exposing gold to wording or product execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_academic_factual_qa_open_development_003.py",
+      "risk": "high",
+      "sha256": "4066d45231b38e42a9543ef1406ebdd28d95364657cf7f0c9592e56f23ded775"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual packet-boundary review and focused tests verify sealed deterministic ordering, exact 40-control and 200-confirmation composition, omitted gold metadata, visible evidence, and freeze-guarded writes.",
         "findings": [],
@@ -5040,6 +5120,44 @@
     },
     {
       "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review and pass/failure simulations verified finite stage ordering, authorization checks, fail-closed transitions, resume binding, aggregate budgets, and zero automatic promotion.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-development-003",
+        "preflight:academic-factual-qa-open-development-003",
+        "resume:academic-factual-qa-open-development-003",
+        "simulate:academic-factual-qa-open-development-003",
+        "verify:academic-factual-qa-open-development-003"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_development_checkpoint_003.py",
+      "risk": "high",
+      "sha256": "fc4bb688cd0f73daea501674988dcc782f5287d3d982e1747056eac90e4702bb"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review verified product response execution cannot import scoring or hidden-gold modules and preserves exact candidate/control manifests and atomic ledgers.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_academic_factual_qa_open_product_003.py",
+      "risk": "high",
+      "sha256": "e4a4f32477c93d355a7b905ee2d11a47439c4d0ddf9fbc29e13037112059b582"
+    },
+    {
+      "audit": {
         "domain": "r1-openai-evaluation-tooling",
         "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
@@ -5082,6 +5200,38 @@
       "path": "scripts/run_academic_factual_qa_open_wording_v2.py",
       "risk": "high",
       "sha256": "360695ce0a7b331006b0f0daf5cce32c9332828ac771cbad583d641ee9ca6457"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review and simulation verified the existing immutable wording contract is reused under the new exact OpenAI binding with separate outputs and no provider authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_academic_factual_qa_open_wording_v3.py",
+      "risk": "high",
+      "sha256": "85dc8a12e90de36d800e59bbfc4621cd7e9406c0f9c05e88c2e3dbda4589bb6c"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review verified hidden calibration labels remain unopened until 40 votes are persisted, strict semantic validation, exact GPT-5.4 identity, store false, and deterministic gate scoring.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration.py",
+      "risk": "high",
+      "sha256": "9c78c60595d1ca2d413075acd1cb80d5740309f3e8563a51b1a8def071c5bee8"
     },
     {
       "audit": {
@@ -5729,6 +5879,22 @@
       "path": "scripts/score_academic_factual_qa_open_10000.py",
       "risk": "high",
       "sha256": "d269a1467eb49be0c94d19f1eedcc1a083a4f92db4229c3c8068637783498d02"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint",
+        "evidence": "Focused review verified scoring opens neither hidden-gold package until both product ledgers are complete and then applies the frozen candidate and paired-control metrics.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/score_academic_factual_qa_open_development_003.py",
+      "risk": "high",
+      "sha256": "5c70136e96858426ccc1e544a1a6113cce4a8f5ce001aeece747c0e26ccb4d8b"
     },
     {
       "audit": {
@@ -7961,7 +8127,7 @@
         "domain": "r1-openai-runtime",
         "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7970,7 +8136,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "dd1f4db1795f16b0078d270093d8af6d0533afed9f57395e03e794f52bcbbc3d"
+      "sha256": "1d146e190807f9090c0ef449afb18e067c80c5a533623ee0495e90b8737aaffd"
     },
     {
       "audit": {
@@ -8883,6 +9049,22 @@
       "path": "tests/test_academic_factual_qa_open_construction.py",
       "risk": "medium",
       "sha256": "58daf6d152e44a0e33f1effe2ff04f69f95f2ab67cf3a94741cbcf1658a5fc8f"
+    },
+    {
+      "audit": {
+        "domain": "openai-development-checkpoint-verification",
+        "evidence": "Fourteen focused tests cover hidden-label separation, immutable hashes, authorization, stage-stop behavior, clean pass/failure simulations, and zero-network preflight behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
+      "risk": "medium",
+      "sha256": "677b02a3bff8dc00f7973b5c49a2ca1bb1c4d053e4825d3d7a9ad0174036e9be"
     },
     {
       "audit": {
@@ -10262,8 +10444,8 @@
     }
   ],
   "risk_counts": {
-    "high": 471,
-    "medium": 145
+    "high": 481,
+    "medium": 146
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
