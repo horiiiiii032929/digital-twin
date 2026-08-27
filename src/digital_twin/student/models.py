@@ -244,6 +244,11 @@ class ProactiveTriggerKind(StrEnum):
     EVIDENCE_RECOVERY = "evidence-recovery"
 
 
+class EvidenceRecoveryMode(StrEnum):
+    SHADOW = "shadow"
+    ACTIVE = "active"
+
+
 class ProactiveTriggerStatus(StrEnum):
     PENDING = "pending"
     MATERIALIZED = "materialized"
@@ -387,3 +392,56 @@ class ProactiveProcessResult(BaseModel):
     ]
     trigger: ProactiveTrigger
     message: ProactiveMessageView | None = None
+
+
+class NoEvidenceTurn(BaseModel):
+    student_message_id: str = Field(min_length=1, max_length=128)
+    tutor_message_id: str = Field(min_length=1, max_length=128)
+    conversation_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    question: str = Field(min_length=1, max_length=100_000)
+    created_at: str = Field(min_length=1)
+
+
+class EvidenceRecoveryDecision(BaseModel):
+    student_message_id: str = Field(min_length=1, max_length=128)
+    tutor_message_id: str = Field(min_length=1, max_length=128)
+    student_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    previous_release_id: str = Field(min_length=1, max_length=128)
+    current_release_id: str = Field(min_length=1, max_length=128)
+    action: Literal["propose", "no-action", "duplicate"]
+    reason: str = Field(min_length=1, max_length=128)
+    evidence_score: float = Field(ge=0, le=1, allow_inf_nan=False)
+    source_chunk_id: str | None = Field(default=None, max_length=256)
+    idempotency_key: str = Field(min_length=1, max_length=128)
+    trigger_id: str | None = Field(default=None, max_length=128)
+
+
+class EvidenceRecoveryScanResult(BaseModel):
+    mode: EvidenceRecoveryMode
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    decisions: list[EvidenceRecoveryDecision] = Field(default_factory=list)
+    proposed_count: int = Field(ge=0)
+    no_action_count: int = Field(ge=0)
+    duplicate_count: int = Field(ge=0)
+    trigger_count: int = Field(ge=0)
+    provider_calls: int = Field(default=0, ge=0, le=0)
+
+    @model_validator(mode="after")
+    def counts_must_match_decisions(self) -> "EvidenceRecoveryScanResult":
+        expected = {
+            "propose": self.proposed_count,
+            "no-action": self.no_action_count,
+            "duplicate": self.duplicate_count,
+        }
+        actual = {
+            action: sum(decision.action == action for decision in self.decisions)
+            for action in expected
+        }
+        if expected != actual or self.trigger_count > self.proposed_count:
+            raise ValueError("evidence-recovery counts do not match decisions")
+        return self

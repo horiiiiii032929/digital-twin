@@ -9,12 +9,14 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 525 executable or execution-affecting
+the current branch extends it to all 528 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 68 protected entrypoints,
-with no prospective evaluation currently authorized. Manual review found material source-design
+active for all general evaluation actions. It covers 69 protected entrypoints.
+The exact A1 network-free development run is temporarily authorized; no provider,
+paid, private-data, external-delivery, or real-student operation is authorized.
+Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
 `factual-qa-v3-scale-rehearsal-002` source and evaluation logic completed manual
@@ -150,7 +152,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 870 Python tests and 47 frontend tests, frontend lint, and the
+check passes 877 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -170,11 +172,11 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 870-test Python suite.
+connections. These corrections remain covered by the current 877-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 525-file audit. Evaluation
-execution remains frozen, with 68/68 protected entrypoints registered and no
-prospective evaluation in the bounded allowlist.
+artifacts are also fully dispositioned in the current 528-file audit. Evaluation
+execution remains frozen, with 69/69 protected entrypoints registered and only
+the finite A1 network-free development run in the bounded allowlist.
 
 ## Current outcome
 
@@ -201,10 +203,15 @@ The 2026-08-27
 narrows the next research step. Professor-scheduled outreach is autonomy level
 A0; deterministic evidence-recovery is the first A1 autonomous candidate.
 Learner-state or misconception triggers remain shadow-mode-only until their
-precision and interruption cost are measured. `No action` is a valid decision,
-and external channels must initially carry only a generic alert and authenticated
-deep link. The disabled Discord request builder still prepares full tutoring
-text and therefore cannot be enabled without a privacy correction.
+precision and interruption cost are measured. `No action` is a valid decision.
+The current branch now implements the A1 detector in shadow-by-default mode: it
+finds persisted no-evidence turns, searches only evidence lineage newly added by
+the current release, applies a deterministic lexical support gate, and preserves
+consent, snooze, membership, idempotency, and citation authority. Active mode
+fails closed unless explicitly enabled. The Discord request builder is corrected
+to emit only a generic alert and authenticated in-app deep link. Neither A1 nor
+Discord is selected or enabled for real delivery. The frozen 12-check P0 and
+20-case P1 network-free development execution is pending.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the

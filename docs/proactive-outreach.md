@@ -243,11 +243,26 @@ Implemented now:
   frequency validation;
 - atomic idempotent materialization and source citations;
 - read/dismiss controls and release-withdrawal cancellation;
-- disabled Discord request adapter and private-destination outbox; and
+- disabled Discord request adapter that emits only a generic alert and secure
+  in-app deep link, plus a private-destination outbox;
+- shadow-by-default A1 evidence-recovery scanning over persisted no-evidence
+  turns and genuinely new release lineage;
+- explicit active-mode authorization, deterministic idempotency, and current
+  release citation checks; and
 - network-free unit, repository, API, and frontend-client checks.
+
+The frozen development command is:
+
+```bash
+npm run verify:proactive-outreach-a1
+```
+
+The named P0/P1 execution remains separately recorded from normal verification.
 
 Not yet implemented or authorized:
 
+- automatic invocation of evidence-recovery scans after publication;
+- selection or production activation of A1 outreach;
 - a production scheduler/worker;
 - LLM-composed proactive wording;
 - inferred misconception triggers;

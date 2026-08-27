@@ -116,6 +116,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_autonomous_tutoring_graph_development.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_proactive_outreach_a1_development.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_atomic_claim_validation_confirmation.py": (
             "local_model_evaluation",
             "method_evaluation_execution",
@@ -222,6 +225,9 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "dataset_generation",
             "external_model_evaluation",
             "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "proactive-outreach-a1-development-001": (
             "method_evaluation_execution",
         ),
     }

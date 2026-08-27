@@ -4,8 +4,11 @@ import pytest
 from pydantic import SecretStr, ValidationError
 
 from src.digital_twin.student import (
+    Conversation,
     DiscordWebhookDeliveryAdapter,
     DiscordWebhookRoute,
+    EvidenceRecoveryMode,
+    Message,
     OutreachChannel,
     ProactiveMessageStatus,
     ProactiveOutreachError,
@@ -62,6 +65,61 @@ def _schedule(service, fixture, **overrides):
         fixture.course_a_id,
         **values,
     )
+
+
+def _record_prior_no_evidence_turn(
+    repository,
+    fixture,
+    *,
+    question="Why is cache coherence needed for replicated processor data?",
+):
+    current = repository.get_release(fixture.release_a_id)
+    previous = current.model_copy(
+        update={
+            "id": "release-a-v0-without-cache",
+            "status": StudentReleaseStatus.WITHDRAWN,
+            "chunks": [current.chunks[1]],
+            "created_at": "2026-08-01T00:00:00+00:00",
+        },
+        deep=True,
+    )
+    repository.save_release(previous)
+    conversation = repository.save_conversation(
+        Conversation(
+            id="conversation-prior-no-evidence",
+            student_id=fixture.student_a_id,
+            course_id=fixture.course_a_id,
+            release_id=previous.id,
+            created_at="2026-08-10T00:00:00+00:00",
+            updated_at="2026-08-10T00:00:00+00:00",
+        )
+    )
+    student_message = Message(
+        id="message-prior-question",
+        conversation_id=conversation.id,
+        role="student",
+        content=question,
+        action="question",
+        client_request_id="prior-no-evidence-request",
+        created_at="2026-08-10T00:00:00+00:00",
+    )
+    tutor_message = Message(
+        id="message-prior-no-evidence",
+        conversation_id=conversation.id,
+        role="tutor",
+        content="I do not have enough approved evidence.",
+        action="no-evidence",
+        response_to_message_id=student_message.id,
+        created_at="2026-08-10T00:00:01+00:00",
+    )
+    repository.save_turn(
+        conversation,
+        student_message,
+        tutor_message,
+        [],
+        [],
+    )
+    return conversation
 
 
 def test_consent_defaults_fail_closed_and_records_suppression(tmp_path):
@@ -222,11 +280,113 @@ def test_discord_request_builder_suppresses_mentions_and_keeps_secret_masked(tmp
         private_destination=True,
     )
     adapter = DiscordWebhookDeliveryAdapter(
-        enabled=True, routes={route.destination_ref: route}
+        enabled=True,
+        routes={route.destination_ref: route},
+        in_app_base_url="https://tutor.example.edu",
     )
 
     prepared = adapter.prepare(outbox, result.message.message)
 
     assert prepared.payload["allowed_mentions"] == {"parse": []}
     assert prepared.payload["flags"] == 4
+    assert result.message.message.content not in prepared.payload["content"]
+    assert "cache coherence" not in prepared.payload["content"].casefold()
+    assert prepared.payload["content"].startswith(
+        "You have a new private message from your AI course tutor."
+    )
+    assert "https://tutor.example.edu/student?" in prepared.payload["content"]
     assert "token-secret" not in repr(prepared)
+
+
+def test_evidence_recovery_shadow_scan_proposes_only_genuinely_new_evidence(tmp_path):
+    repository, fixture, service = _service(tmp_path)
+    _enable_in_app(service, fixture)
+    _record_prior_no_evidence_turn(repository, fixture)
+
+    result = service.scan_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        mode=EvidenceRecoveryMode.SHADOW,
+        now=NOW,
+    )
+
+    assert result.proposed_count == 1
+    assert result.no_action_count == 0
+    assert result.trigger_count == 0
+    assert result.provider_calls == 0
+    assert result.decisions[0].source_chunk_id == "chunk-cache-synthetic"
+    assert result.decisions[0].reason == "new-evidence-supported"
+    assert repository.list_due_proactive_triggers(NOW.isoformat()) == []
+
+
+def test_evidence_recovery_active_mode_is_gated_and_idempotent(tmp_path):
+    repository, fixture, shadow_service = _service(tmp_path)
+    _enable_in_app(shadow_service, fixture)
+    _record_prior_no_evidence_turn(repository, fixture)
+
+    with pytest.raises(ProactiveOutreachError, match="not authorized"):
+        shadow_service.scan_evidence_recovery(
+            fixture.professor_id,
+            fixture.course_a_id,
+            mode=EvidenceRecoveryMode.ACTIVE,
+            now=NOW,
+        )
+
+    active_service = ProactiveOutreachService(
+        repository, evidence_recovery_active=True
+    )
+    first = active_service.scan_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        mode=EvidenceRecoveryMode.ACTIVE,
+        now=NOW,
+    )
+    second = active_service.scan_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        mode=EvidenceRecoveryMode.ACTIVE,
+        now=NOW,
+    )
+
+    assert first.proposed_count == 1
+    assert first.trigger_count == 1
+    assert first.decisions[0].trigger_id is not None
+    assert second.duplicate_count == 1
+    assert second.trigger_count == 0
+    delivered = active_service.process_trigger(
+        first.decisions[0].trigger_id, now=NOW
+    )
+    assert delivered.outcome == "delivered"
+    assert delivered.message is not None
+    assert delivered.message.citations[0].source_document_id == "document-cache"
+
+
+def test_evidence_recovery_treats_missing_consent_and_unchanged_evidence_as_no_action(
+    tmp_path,
+):
+    repository, fixture, service = _service(tmp_path)
+    _record_prior_no_evidence_turn(repository, fixture)
+
+    without_consent = service.scan_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        now=NOW,
+    )
+    assert without_consent.no_action_count == 1
+    assert without_consent.decisions[0].reason == "consent-disabled"
+
+    _enable_in_app(service, fixture)
+    second_repository, second_fixture, second_service = _service(tmp_path / "same")
+    _enable_in_app(second_service, second_fixture)
+    _record_prior_no_evidence_turn(
+        second_repository,
+        second_fixture,
+        question="How does virtual memory map process addresses to physical pages?",
+    )
+    unchanged = second_service.scan_evidence_recovery(
+        second_fixture.professor_id,
+        second_fixture.course_a_id,
+        now=NOW,
+    )
+    assert unchanged.no_action_count == 1
+    assert unchanged.decisions[0].reason == "insufficient-new-evidence"

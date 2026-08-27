@@ -17,6 +17,7 @@ from src.digital_twin.student.models import (
     CourseMembership,
     DeliveryOutboxItem,
     DigitalTwinRelease,
+    NoEvidenceTurn,
     Message,
     MembershipRole,
     OutreachChannel,
@@ -83,6 +84,14 @@ class StudentRepository(Protocol):
     def get_learner_state(self, conversation_id: str) -> LearnerState | None: ...
 
     def list_messages(self, conversation_id: str) -> list[Message]: ...
+
+    def list_no_evidence_turns(
+        self,
+        course_id: str,
+        *,
+        excluding_release_id: str,
+        limit: int = 100,
+    ) -> list[NoEvidenceTurn]: ...
 
     def get_message(self, message_id: str) -> Message | None: ...
 
@@ -522,6 +531,41 @@ class SQLiteStudentRepository:
     def get_message(self, message_id: str) -> Message | None:
         row = self._one("SELECT * FROM messages WHERE id = ?", (message_id,))
         return self._message(row) if row else None
+
+    def list_no_evidence_turns(
+        self,
+        course_id: str,
+        *,
+        excluding_release_id: str,
+        limit: int = 100,
+    ) -> list[NoEvidenceTurn]:
+        if isinstance(limit, bool) or not 1 <= limit <= 500:
+            raise ValueError("no-evidence turn limit must be between 1 and 500")
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT student.id AS student_message_id,
+                          tutor.id AS tutor_message_id,
+                          conversation.id AS conversation_id,
+                          conversation.student_id AS student_id,
+                          conversation.course_id AS course_id,
+                          conversation.release_id AS release_id,
+                          student.content AS question,
+                          tutor.created_at AS created_at
+                   FROM messages AS tutor
+                   JOIN messages AS student
+                     ON student.id = tutor.response_to_message_id
+                    AND student.role = 'student'
+                   JOIN conversations AS conversation
+                     ON conversation.id = tutor.conversation_id
+                   WHERE tutor.role = 'tutor'
+                     AND tutor.action = 'no-evidence'
+                     AND conversation.course_id = ?
+                     AND conversation.release_id != ?
+                   ORDER BY tutor.created_at, tutor.rowid
+                   LIMIT ?""",
+                (course_id, excluding_release_id, limit),
+            ).fetchall()
+        return [NoEvidenceTurn.model_validate(dict(row)) for row in rows]
 
     def find_turn(
         self, conversation_id: str, client_request_id: str

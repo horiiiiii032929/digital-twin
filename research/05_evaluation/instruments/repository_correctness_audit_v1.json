@@ -872,13 +872,13 @@
     },
     {
       "path": "package.json",
-      "sha256": "15f35658630756e5c27fbb8049d4bb853c5ca04c4b2684a8dc3ae780fb8b2473",
+      "sha256": "cc3f5c8b37df0474c861cd40e48a69fe442e8b33fed3775f961e8677a450018f",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "academic-factual-qa-evaluation",
+      "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+      "evidence": "A1 proactive-outreach command registration reviewed with the frozen network-free instrument, bounded authorization, focused regressions, and full repository gate.",
       "findings": []
     },
     {
@@ -4163,22 +4163,22 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual fail-closed review confirms the global freeze remains active, prior authorizations stay revoked, and the new academic factual-QA runner is registered for method-evaluation execution while its network-free simulation is the only permitted mode.",
+      "evidence": "Manual fail-closed review confirms the global freeze remains active and only the exact A1 network-free development run receives bounded execution authority; provider, paid, private, external-delivery, and real-student operations remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-25",
       "reviewer": "codex-primary-review",
-      "sha256": "550a7a74fddc1dd292bd6a8f9e19f3659090430389f9963e276a0c3865b600a8"
+      "sha256": "36e0deb09e38216d8b1762c7004b0ab90de208eca05caf4f92c45d1e1ac019f5"
     },
     {
       "path": "src/digital_twin/student/__init__.py",
-      "sha256": "771ad30c6fc0bfb7eaea03b067e273e24916f34cd22f94cbff67180c86d5edff",
+      "sha256": "de7eaa944d9f567e9df495ee9088f5b3b0901eed22e336e5b9d75b5fcd9c1276",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomous-tutoring-graph",
+      "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+      "evidence": "Public exports for the versioned evidence-recovery contracts were checked against service, repository, runner, and focused import regressions.",
       "findings": []
     },
     {
@@ -4205,13 +4205,13 @@
     },
     {
       "path": "src/digital_twin/student/models.py",
-      "sha256": "cef41c2c060aeafa05d5e1d739cfaf833b21d307b32b1b4928a769de7e2bb63d",
+      "sha256": "4bc5ec9035a9d36304832a3c5c5b1aae45169d12948b0e86cdb3af7717eb6c51",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomous-tutoring-graph",
+      "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+      "evidence": "Evidence-recovery opportunity, decision, mode, and scan-result contracts were reviewed for bounded fields, count invariants, zero-provider declaration, and stable no-action taxonomy.",
       "findings": []
     },
     {
@@ -4227,13 +4227,13 @@
     },
     {
       "path": "src/digital_twin/student/repository.py",
-      "sha256": "a568ce1d41029224a98ef1716d6892b635b19a9451750f57018087e5d89f6809",
+      "sha256": "19b5c2e9cc88cccb7920dd3c10482577d59bba4385ceafc6341a30d6a08c54ec",
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomous-tutoring-graph",
+      "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+      "evidence": "The bounded no-evidence-turn query was reviewed for exact tutor/student linkage, course and release scope, deterministic ordering, input limits, and synthetic repository coverage.",
       "findings": []
     },
     {
@@ -4449,12 +4449,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact authorization of only the historical oracle, and explicit rejection of the completed atomic-claim confirmation, candidate comparison, and every unregistered, provider, paid, private-source, and held-out operation.",
+      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact bounded authorization of the historical oracle and A1 network-free development run, and rejection of every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "8b2f381a80d4bf57e26ab9575155b5770f3bb4e206a952e669873c6ae86b3cf7"
+      "sha256": "bb45362fefd6c5258fe1f6a66142b29a7ea2c84f044c94138b9a4f05019b635e"
     },
     {
       "audit_status": "audited",
@@ -5745,13 +5745,13 @@
     },
     {
       "path": "src/digital_twin/student/proactive.py",
-      "sha256": "d0916bdaa57eb1776ecd0561707705765f1d8244937e39602ae3c0d32649ee8b",
+      "sha256": "8414b4551f41ad59d4526246e7e31265e12ce2b88d491dc542a7dfad357cf5de",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Focused code and threat-boundary review plus network-free regressions cover opt-in defaults, ownership, release and evidence revalidation, quiet hours, snooze, frequency caps, idempotency, citation lineage, and disabled Discord transport.",
+      "evidence": "Focused code and threat-boundary review plus network-free regressions cover new-lineage-only evidence recovery, lexical support, consent and snooze, active-mode fail-closed authority, idempotency, current-release citation lineage, and generic Discord deep links with no learner-state content.",
       "findings": []
     },
     {
@@ -5767,13 +5767,46 @@
     },
     {
       "path": "tests/digital_twin/test_proactive_outreach.py",
-      "sha256": "3b962895ccb239199ec6d029ac4e9113cee6472f9cfbe685e8b50e6d935574e5",
+      "sha256": "410c8a11b2471323db4f06ee4e294c5a5ce1bc3b1b1bff176b41c0084a343c65",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "proactive-outreach",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "evidence": "Domain regressions verify fail-closed consent, source lineage, duplicate prevention, quiet-hour deferral, student controls, withdrawal cancellation, private Discord routing, mention suppression, and disabled delivery.",
+      "evidence": "Domain regressions verify fail-closed consent, new evidence detection, no-action on unchanged evidence, active-mode authorization, idempotency, citation lineage, and privacy-safe generic Discord deep links.",
+      "findings": []
+    },
+    {
+      "path": "scripts/run_proactive_outreach_a1_development.py",
+      "sha256": "8d11d6e415d2a272f4971a2db68a6cc8ae885a368ecfe9dd355a6986a0255d4d",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach-evaluation",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "The finite runner was reviewed for exact instrument binding, clean exclusive preflight, bounded freeze guard, twenty isolated synthetic cases, twelve mechanism checks, zero provider or external delivery paths, and durable per-case output.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_run_proactive_outreach_a1_development.py",
+      "sha256": "875ebaf8fe4e1db8d5ed0e87840ba8b415ebf796bf6bf4bf89974e26d93902ba",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach-evaluation",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests cover frozen cardinality and authority, exclusive output preflight, complete P0/P1 gate execution, zero side effects, and duplicate-case rejection.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/proactive_outreach_a1_development_001.json",
+      "sha256": "2029be99aaef07e6fba3bfa045fa27a4764d922f763b7768410ab62515025d7f",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "proactive-outreach-evaluation",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "evidence": "Prospective review confirmed a finite 12-check P0 and 20-case P1 synthetic design, predeclared exact gates, shadow default, no-action controls, and no provider, private-data, real-student, or external-delivery authority.",
       "findings": []
     }
   ],

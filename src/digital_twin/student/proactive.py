@@ -1,21 +1,32 @@
 from __future__ import annotations
 
+import hashlib
 import re
 from datetime import UTC, datetime, timedelta
-from typing import Mapping
-from urllib.parse import urlsplit
+from typing import Literal, Mapping
+from urllib.parse import urlencode, urlsplit, urlunsplit
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, Field, SecretStr, field_validator, model_validator
 
+from src.digital_twin.grounding import (
+    BM25Retriever,
+    DocumentChunk,
+    EmptyQueryError,
+    LexicalCoverageEvidenceGate,
+)
 from src.digital_twin.student.models import (
     AccountRole,
     AccountStatus,
     AuditEvent,
     Citation,
     DeliveryOutboxItem,
+    EvidenceRecoveryDecision,
+    EvidenceRecoveryMode,
+    EvidenceRecoveryScanResult,
     MembershipRole,
+    NoEvidenceTurn,
     OutreachChannel,
     OutreachPreference,
     ProactiveMessage,
@@ -80,9 +91,11 @@ class DiscordWebhookDeliveryAdapter:
         *,
         enabled: bool = False,
         routes: Mapping[str, DiscordWebhookRoute] | None = None,
+        in_app_base_url: str | None = None,
     ) -> None:
         self.enabled = enabled
         self.routes = dict(routes or {})
+        self.in_app_base_url = in_app_base_url
 
     def prepare(
         self, item: DeliveryOutboxItem, message: ProactiveMessage
@@ -103,21 +116,237 @@ class DiscordWebhookDeliveryAdapter:
                 "discord_destination_unavailable",
                 "The linked private Discord destination is unavailable.",
             )
+        deep_link = self._in_app_deep_link(message)
         return DiscordPreparedRequest(
             webhook_url=route.webhook_url,
             payload={
-                "content": message.content[:2_000],
+                "content": (
+                    "You have a new private message from your AI course tutor. "
+                    f"Open it in the secure course workspace: {deep_link}"
+                ),
                 "allowed_mentions": {"parse": []},
                 "flags": 4,
             },
         )
 
+    def _in_app_deep_link(self, message: ProactiveMessage) -> str:
+        if self.in_app_base_url is None:
+            raise ProactiveOutreachError(
+                "discord_deep_link_unavailable",
+                "Discord delivery requires an authenticated in-app destination.",
+            )
+        parsed = urlsplit(self.in_app_base_url)
+        if (
+            parsed.scheme != "https"
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.query
+            or parsed.fragment
+        ):
+            raise ProactiveOutreachError(
+                "discord_deep_link_invalid",
+                "The in-app Discord destination must be a plain HTTPS URL.",
+            )
+        path = f"{parsed.path.rstrip('/')}/student"
+        query = urlencode(
+            {
+                "course_id": message.course_id,
+                "outreach_id": message.id,
+            }
+        )
+        return urlunsplit((parsed.scheme, parsed.netloc, path, query, ""))
+
 
 class ProactiveOutreachService:
     """Deterministic consent, trigger, and in-app delivery authority."""
 
-    def __init__(self, repository: StudentRepository) -> None:
+    def __init__(
+        self,
+        repository: StudentRepository,
+        *,
+        evidence_recovery_active: bool = False,
+    ) -> None:
         self.repository = repository
+        self.evidence_recovery_active = evidence_recovery_active
+
+    def scan_evidence_recovery(
+        self,
+        professor_id: str,
+        course_id: str,
+        *,
+        mode: EvidenceRecoveryMode = EvidenceRecoveryMode.SHADOW,
+        now: datetime | None = None,
+        limit: int = 100,
+    ) -> EvidenceRecoveryScanResult:
+        """Find newly supportable no-evidence turns without calling a model."""
+
+        instant = _as_utc(now or datetime.now(UTC))
+        release = self._authorize_professor_course(professor_id, course_id)
+        if mode == EvidenceRecoveryMode.ACTIVE and not self.evidence_recovery_active:
+            raise ProactiveOutreachError(
+                "evidence_recovery_not_authorized",
+                "Active evidence-recovery outreach is not authorized.",
+            )
+        opportunities = self.repository.list_no_evidence_turns(
+            course_id,
+            excluding_release_id=release.id,
+            limit=limit,
+        )
+        decisions: list[EvidenceRecoveryDecision] = []
+        trigger_count = 0
+        for opportunity in opportunities:
+            key = _evidence_recovery_key(
+                course_id,
+                release.id,
+                opportunity.student_message_id,
+            )
+            existing = self.repository.find_proactive_trigger_by_key(key)
+            if existing is not None:
+                decisions.append(
+                    _recovery_decision(
+                        opportunity,
+                        release.id,
+                        key,
+                        action="duplicate",
+                        reason="already-proposed",
+                        trigger_id=existing.id,
+                    )
+                )
+                continue
+            availability_reason = self._recovery_availability_reason(
+                opportunity, instant
+            )
+            if availability_reason is not None:
+                decisions.append(
+                    _recovery_decision(
+                        opportunity,
+                        release.id,
+                        key,
+                        action="no-action",
+                        reason=availability_reason,
+                    )
+                )
+                continue
+            previous_release = self.repository.get_release(opportunity.release_id)
+            if previous_release is None:
+                decisions.append(
+                    _recovery_decision(
+                        opportunity,
+                        release.id,
+                        key,
+                        action="no-action",
+                        reason="previous-release-unavailable",
+                    )
+                )
+                continue
+            previous_lineage = {
+                _chunk_lineage(chunk) for chunk in previous_release.chunks
+            }
+            new_chunks = [
+                chunk
+                for chunk in release.chunks
+                if chunk.retrieval_allowed
+                and _chunk_lineage(chunk) not in previous_lineage
+            ]
+            try:
+                hits = BM25Retriever(new_chunks).retrieve(opportunity.question, limit=3)
+            except EmptyQueryError:
+                hits = []
+            gate = LexicalCoverageEvidenceGate(
+                minimum_query_coverage=0.5,
+                minimum_matching_terms=2,
+                evidence_limit=3,
+            )
+            support = gate.assess(opportunity.question, hits)
+            if not support.sufficient:
+                decisions.append(
+                    _recovery_decision(
+                        opportunity,
+                        release.id,
+                        key,
+                        action="no-action",
+                        reason="insufficient-new-evidence",
+                        evidence_score=support.score,
+                    )
+                )
+                continue
+            source = hits[0].chunk
+            title = source.metadata.get("title")
+            if not isinstance(title, str) or not title.strip():
+                decisions.append(
+                    _recovery_decision(
+                        opportunity,
+                        release.id,
+                        key,
+                        action="no-action",
+                        reason="evidence-title-missing",
+                        evidence_score=support.score,
+                    )
+                )
+                continue
+            trigger_id = None
+            if mode == EvidenceRecoveryMode.ACTIVE:
+                trigger = self.schedule_trigger(
+                    professor_id,
+                    course_id,
+                    student_id=opportunity.student_id,
+                    channel=OutreachChannel.IN_APP,
+                    kind=ProactiveTriggerKind.EVIDENCE_RECOVERY,
+                    scheduled_for=instant.isoformat(),
+                    expires_at=(instant + timedelta(days=14)).isoformat(),
+                    topic="New approved course evidence is available",
+                    prompt=(
+                        "You previously asked: "
+                        f"{opportunity.question.strip()[:1_500]}\n\n"
+                        "The course tutor can now revisit this using newly approved "
+                        "material. Open the course when you are ready."
+                    ),
+                    source_chunk_id=source.id,
+                    idempotency_key=key,
+                )
+                trigger_id = trigger.id
+                trigger_count += 1
+            decisions.append(
+                _recovery_decision(
+                    opportunity,
+                    release.id,
+                    key,
+                    action="propose",
+                    reason="new-evidence-supported",
+                    evidence_score=support.score,
+                    source_chunk_id=source.id,
+                    trigger_id=trigger_id,
+                )
+            )
+        result = EvidenceRecoveryScanResult(
+            mode=mode,
+            course_id=course_id,
+            release_id=release.id,
+            decisions=decisions,
+            proposed_count=sum(item.action == "propose" for item in decisions),
+            no_action_count=sum(item.action == "no-action" for item in decisions),
+            duplicate_count=sum(item.action == "duplicate" for item in decisions),
+            trigger_count=trigger_count,
+        )
+        self.repository.save_audit_event(
+            self._event(
+                "evidence-recovery-scan-completed",
+                account_id=professor_id,
+                course_id=course_id,
+                release_id=release.id,
+                details={
+                    "mode": mode.value,
+                    "opportunity_count": len(decisions),
+                    "proposed_count": result.proposed_count,
+                    "no_action_count": result.no_action_count,
+                    "duplicate_count": result.duplicate_count,
+                    "trigger_count": result.trigger_count,
+                    "provider_calls": 0,
+                },
+            )
+        )
+        return result
 
     def list_preferences(
         self, account_id: str, course_id: str
@@ -510,26 +739,66 @@ class ProactiveOutreachService:
             return "release-unavailable"
         return None
 
-    def _authorize_professor_schedule(self, professor_id: str, student_id: str, course_id: str):
+    def _recovery_availability_reason(
+        self, opportunity: NoEvidenceTurn, now: datetime
+    ) -> str | None:
+        account = self.repository.get_account(opportunity.student_id)
+        if (
+            account is None
+            or account.role != AccountRole.STUDENT
+            or account.status != AccountStatus.ACTIVE
+        ):
+            return "student-inactive"
+        membership = self.repository.get_membership(
+            opportunity.student_id, opportunity.course_id
+        )
+        if (
+            membership is None
+            or membership.role != MembershipRole.STUDENT
+            or not membership.active
+        ):
+            return "membership-inactive"
+        preference = self.repository.get_outreach_preference(
+            opportunity.student_id,
+            opportunity.course_id,
+            OutreachChannel.IN_APP,
+        )
+        if preference is None or not preference.enabled:
+            return "consent-disabled"
+        if preference.snoozed_until is not None and _parse_instant(
+            preference.snoozed_until, "snoozed_until"
+        ) > now:
+            return "student-snoozed"
+        return None
+
+    def _authorize_professor_course(self, professor_id: str, course_id: str):
         professor = self.repository.get_account(professor_id)
         course = self.repository.get_course(course_id)
+        membership = self.repository.get_membership(professor_id, course_id)
         if (
             professor is None
             or professor.role != AccountRole.PROFESSOR
             or professor.status != AccountStatus.ACTIVE
             or course is None
             or course.owner_professor_id != professor_id
+            or membership is None
+            or membership.role != MembershipRole.PROFESSOR
+            or not membership.active
         ):
             raise ProactiveOutreachError(
                 "professor_course_forbidden",
-                "Only the active course owner may schedule proactive tutoring.",
+                "Only the active course owner may evaluate proactive tutoring.",
             )
-        self._authorize_student(student_id, course_id)
         release = self.repository.get_published_release(course_id)
         if release is None:
             raise ProactiveOutreachError(
                 "release_unavailable", "The course Digital Twin is not published."
             )
+        return release
+
+    def _authorize_professor_schedule(self, professor_id: str, student_id: str, course_id: str):
+        release = self._authorize_professor_course(professor_id, course_id)
+        self._authorize_student(student_id, course_id)
         return release
 
     def _authorize_student(self, account_id: str, course_id: str) -> None:
@@ -606,3 +875,47 @@ def _inside_quiet_hours(now: datetime, preference: OutreachPreference) -> bool:
     if start < end:
         return start <= current < end
     return current >= start or current < end
+
+
+def _chunk_lineage(chunk: DocumentChunk) -> tuple[str, int, str]:
+    return (
+        chunk.source_artifact_id or chunk.document_id,
+        chunk.source_version,
+        chunk.source_checksum or chunk.id,
+    )
+
+
+def _evidence_recovery_key(
+    course_id: str, release_id: str, student_message_id: str
+) -> str:
+    digest = hashlib.sha256(
+        f"{course_id}\0{release_id}\0{student_message_id}".encode()
+    ).hexdigest()
+    return f"evidence-recovery:{digest[:48]}"
+
+
+def _recovery_decision(
+    opportunity: NoEvidenceTurn,
+    current_release_id: str,
+    idempotency_key: str,
+    *,
+    action: Literal["propose", "no-action", "duplicate"],
+    reason: str,
+    evidence_score: float = 0.0,
+    source_chunk_id: str | None = None,
+    trigger_id: str | None = None,
+) -> EvidenceRecoveryDecision:
+    return EvidenceRecoveryDecision(
+        student_message_id=opportunity.student_message_id,
+        tutor_message_id=opportunity.tutor_message_id,
+        student_id=opportunity.student_id,
+        course_id=opportunity.course_id,
+        previous_release_id=opportunity.release_id,
+        current_release_id=current_release_id,
+        action=action,
+        reason=reason,
+        evidence_score=evidence_score,
+        source_chunk_id=source_chunk_id,
+        idempotency_key=idempotency_key,
+        trigger_id=trigger_id,
+    )
