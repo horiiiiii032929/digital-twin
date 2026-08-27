@@ -11,7 +11,10 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 from src.digital_twin.evaluation.factual_qa_wording import (
     QuestionWordingRequestV1,
     QuestionWordingResponseV1,
+    QuestionWordingReviewResponseV1,
+    apply_reviewed_wording_responses,
     apply_wording_responses,
+    wording_review_requests,
     wording_requests,
 )
 
@@ -97,3 +100,56 @@ def test_leak_duplicate_and_missing_response_fail_back_to_canonical() -> None:
         "canonical-fallback",
     ]
     assert [row.question for row in output] == [row.question for row in cases]
+
+
+def test_review_boundary_contains_only_public_question_wording() -> None:
+    cases, _ = _rows()
+    responses = [
+        QuestionWordingResponseV1(
+            case_id=row.case_id,
+            question=f"Could a student ask this naturally for case {index}?",
+        )
+        for index, row in enumerate(cases, start=1)
+    ]
+
+    requests = wording_review_requests(cases=cases, responses=responses)
+
+    assert set(requests[0].model_dump()) == {
+        "case_id",
+        "canonical_question",
+        "candidate_question",
+    }
+    assert "canonical_answer" not in requests[0].model_dump_json()
+    assert "claims" not in requests[0].model_dump_json()
+
+
+def test_reviewer_rejection_forces_canonical_fallback() -> None:
+    cases, gold = _rows()
+    responses = [
+        QuestionWordingResponseV1(
+            case_id=row.case_id,
+            question=f"Could you explain the requested concept for case {index}?",
+        )
+        for index, row in enumerate(cases, start=1)
+    ]
+    reviews = [
+        QuestionWordingReviewResponseV1(
+            case_id=row.case_id,
+            accept=index != 2,
+            faithfulness="faithful" if index != 2 else "meaning-shift",
+            naturalness="acceptable",
+            rationale="Bounded advisory review.",
+        )
+        for index, row in enumerate(cases, start=1)
+    ]
+
+    output, decisions = apply_reviewed_wording_responses(
+        cases=cases,
+        gold=gold,
+        responses=responses,
+        reviews=reviews,
+    )
+
+    assert decisions[1].status == "canonical-fallback"
+    assert decisions[1].reason == "review-rejected-or-missing"
+    assert output[1].question == cases[1].question

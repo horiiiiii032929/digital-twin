@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 590
+    "audited": 594
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 135,
+    "active_or_unclassified_tooling": 136,
     "active_runtime": 108,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 132,
+    "evaluation_configuration": 134,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 122
+    "verification": 123
   },
-  "file_count": 590,
+  "file_count": 594,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1be976d5a30880198013a0e96c1f517679ea07a127cb7e3246008b47b5e281db",
+  "record_sha256": "8d352f6f7a770fdc2ef0ecec9d0db33a52f28159369f1ba162784a83c219dc6f",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual command-surface review verifies open-10,000 validation preserves the historical deterministic package and unfavorable audit while adding the complete-region source plan, corrected package, and second no-call audit. Write, product, control, and final execution remain separate and cannot auto-promote.",
+        "evidence": "Manual command-surface review verifies open-10,000 validation preserves historical evidence while adding the corrected source plan, package, audit, and public-only wording validation. Wording simulation, preflight, execution, scoring, product, control, and final commands remain separate and cannot auto-promote.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "234aff7f5de26fbe764fd43902685eadde90404bc9ca3928bf4a4342f1136b6e"
+      "sha256": "ea6c72604a08dc475de97d1391a99e1fcf73d01839995a6ff9324daf82df56e9"
     },
     {
       "audit": {
@@ -1828,6 +1828,38 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_control_manifest.json",
       "risk": "high",
       "sha256": "f1247875cbecd028d223ff5f27a7728aa144ee5171ffe5ded5ffff49e45b1a59"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 binding review verifies exact first-party OpenAI and Mistral endpoints, dated/release model identities, official pricing and limits checked on 2026-08-27, OpenAI store=false, public-only inputs, moving-alias rejection rationale, runtime-only credentials, two global transport retries, and all execution authority false.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_binding_001.json",
+      "risk": "high",
+      "sha256": "a6bfd713774d43a88e00ab04841c997450fabb1481e4bf473334f602ef19e048"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 instrument review verifies 500 public cases, 25 batches, 50 logical calls, 52 physical attempts, a USD 3 stop, canary-first ordering, public-only author/reviewer fields, separate post-ledger gold scoring, canonical fallback, prospective quality gates, zero automatic promotion, and fully revoked authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_001.json",
+      "risk": "high",
+      "sha256": "f262a51330a1949898b0e764719461aece12ce6c29e9880211fb04f6ce751a7e"
     },
     {
       "audit": {
@@ -4878,6 +4910,28 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 runner review verifies strict first-party schemas, exact ordered IDs, public-only provider execution, canary-first batching, exclusive resume-bound ledger, bounded global retries, complete call/token/latency/cost accounting, terminal failure handling, post-completion hidden-gold scoring, candidate leak/duplicate detection, canonical fallback, and fail-closed freeze/preflight behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-wording",
+        "preflight:academic-factual-qa-open-10000-wording",
+        "score:academic-factual-qa-open-10000-wording",
+        "simulate:academic-factual-qa-open-10000-wording",
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_wording.py",
+      "risk": "high",
+      "sha256": "d0e85dc8424d8c02f4edc0c5ec32034118d5927ae600ee3d499d7d3e841f69e2"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual runner review and network-free tests verify a versioned reviewer sequence supports both two- and three-reviewer calibration, agreement, alpha, bounded audit, atomic accounting, and historical behavior without weakening deterministic truth.",
         "findings": [],
@@ -6849,7 +6903,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual wording-boundary review verifies providers receive only public question fields, may return wording only, cannot mutate truth or citations, and trigger deterministic canonical fallback on missing, duplicate, or answer-leaking output.",
+        "evidence": "Manual wording-boundary review verifies authors receive only public question fields, reviewers receive only canonical/candidate wording, neither can mutate truth or citations, and reviewer rejection, missing/duplicate responses, or answer leakage trigger deterministic canonical fallback.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6860,7 +6914,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_wording.py",
       "risk": "high",
-      "sha256": "119bfdacf7fec477a6c6ed486c68dda933e1e718d17eed1c963cc86b1f65d29f"
+      "sha256": "3a42ecc6363d8f6735184fb0e35316cd5b49ba97f2d6111dc7caa8011d81415c"
     },
     {
       "audit": {
@@ -6929,7 +6983,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual provider transport and accounting review verifies historical OpenRouter behavior plus direct first-party OpenAI/Mistral endpoints, runtime-only credentials, strict local schema validation, exact model identity, transport-only bounded retry, conservative retry cost reservation, durable physical-attempt accounting, replay binding, and fail-closed call/cost handling.",
+        "evidence": "Manual provider transport and accounting review verifies historical OpenRouter behavior plus direct first-party OpenAI/Mistral endpoints, runtime-only credentials, strict local schema validation, exact model identity, OpenAI store=false, transport-only bounded retry, retry-inclusive prospective cost reservation, durable physical-attempt accounting, replay binding, and fail-closed call/cost handling.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6940,7 +6994,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/provider_json.py",
       "risk": "high",
-      "sha256": "b1187f81d4d2480323bfda3623172652b07c0bd8ecbb2e14c8a1c2be0e0417db"
+      "sha256": "49125bbb843b404d04df8b31cbae5841e6738ccd8486ce7b4c9e14811e8bfb4b"
     },
     {
       "audit": {
@@ -7697,7 +7751,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual AFQC-046 freeze review verifies the one-time corrected provider-free construction authority was revoked after exclusive outputs were written. Only historical development-001 remains allowlisted; all provider, paid, method, held-out, product, and final operations stay blocked.",
+        "evidence": "Manual AFQC-047 freeze review verifies the new wording runner is registered across external-model and method-evaluation operations but has no bounded authorization. Only historical development-001 remains allowlisted; all provider, paid, wording, method, held-out, product, and final operations stay blocked.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -7708,7 +7762,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8e2648d0a81763765ba912d88c6bb03398ce66bc670c8b4164b87e04aa6a29a3"
+      "sha256": "cb6d17b91ec1fce00f443ec3261df281f9298c48bc6555ab05a6a62115329d67"
     },
     {
       "audit": {
@@ -8560,6 +8614,22 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused AFQC-047 tests verify exact first-party identities, revoked authorization, 500-case no-call simulation, gold separation from provider execution, blocked preflight/freeze behavior, OpenAI store=false, retry-inclusive reservation, and rejection of reordered batch IDs.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_wording.py",
+      "risk": "medium",
+      "sha256": "49d6482d5ad20436765afb695f4f47130b7afa05f955d2b037c9981c055f25d7"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, revoked authority, and blocked confirmation paths.",
         "findings": [],
@@ -9233,7 +9303,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Focused tests verify the wording request excludes gold and source lineage, accepted wording changes only the public question, and leak, duplicate-ID, or missing responses fail closed to canonical wording.",
+        "evidence": "Focused tests verify author and reviewer requests exclude gold and source lineage, accepted wording changes only the public question, and reviewer rejection, leakage, duplicate IDs, or missing responses fail closed to canonical wording.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -9244,7 +9314,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_wording.py",
       "risk": "medium",
-      "sha256": "f4fbebe4cfd7988aec354f05d86ecbf34c805416e625111028f5ce0c51cbf7f3"
+      "sha256": "45c28bed97447a56173e0e01418a4631ac840b973f68d75fde5694999c15f2ad"
     },
     {
       "audit": {
@@ -9824,8 +9894,8 @@
     }
   ],
   "risk_counts": {
-    "high": 454,
-    "medium": 136
+    "high": 457,
+    "medium": 137
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

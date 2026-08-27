@@ -33,6 +33,28 @@ class QuestionWordingResponseV1(BaseModel):
     question: str = Field(min_length=1, max_length=500)
 
 
+class QuestionWordingReviewRequestV1(BaseModel):
+    """Public-only comparison supplied to the independent wording reviewer."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    case_id: str = Field(min_length=1)
+    canonical_question: str = Field(min_length=1, max_length=500)
+    candidate_question: str = Field(min_length=1, max_length=500)
+
+
+class QuestionWordingReviewResponseV1(BaseModel):
+    """Advisory judgment that cannot alter deterministic source truth."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    case_id: str = Field(min_length=1)
+    accept: bool
+    faithfulness: str = Field(pattern=r"^(?:faithful|meaning-shift|unclear)$")
+    naturalness: str = Field(pattern=r"^(?:acceptable|awkward)$")
+    rationale: str = Field(min_length=1, max_length=240)
+
+
 class QuestionWordingDecisionV1(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -61,6 +83,35 @@ def wording_requests(cases: list[EvaluationCaseV1]) -> list[QuestionWordingReque
             canonical_question=row.question,
         )
         for row in cases
+    ]
+
+
+def wording_review_requests(
+    *,
+    cases: list[EvaluationCaseV1],
+    responses: list[QuestionWordingResponseV1],
+) -> list[QuestionWordingReviewRequestV1]:
+    """Create reviewer inputs without source text, answers, actions, or lineage."""
+
+    case_by_id = {row.case_id: row for row in cases}
+    if len(case_by_id) != len(cases):
+        raise ValueError("public cases contain duplicate IDs")
+    response_by_id: dict[str, QuestionWordingResponseV1] = {}
+    for row in responses:
+        if row.case_id in response_by_id:
+            raise ValueError("wording responses contain duplicate IDs")
+        if row.case_id not in case_by_id:
+            raise ValueError("wording response references an unknown public case")
+        response_by_id[row.case_id] = row
+    if set(response_by_id) != set(case_by_id):
+        raise ValueError("wording responses are incomplete")
+    return [
+        QuestionWordingReviewRequestV1(
+            case_id=case.case_id,
+            canonical_question=case.question,
+            candidate_question=response_by_id[case.case_id].question,
+        )
+        for case in cases
     ]
 
 
@@ -131,3 +182,44 @@ def apply_wording_responses(
             )
         )
     return output, decisions
+
+
+def apply_reviewed_wording_responses(
+    *,
+    cases: list[EvaluationCaseV1],
+    gold: list[EvaluationGoldV1],
+    responses: list[QuestionWordingResponseV1],
+    reviews: list[QuestionWordingReviewResponseV1],
+) -> tuple[list[EvaluationCaseV1], list[QuestionWordingDecisionV1]]:
+    """Apply only reviewer-accepted variants, then enforce deterministic safety."""
+
+    review_by_id: dict[str, QuestionWordingReviewResponseV1] = {}
+    duplicate_review_ids: set[str] = set()
+    for row in reviews:
+        if row.case_id in review_by_id:
+            duplicate_review_ids.add(row.case_id)
+        review_by_id[row.case_id] = row
+    eligible: list[QuestionWordingResponseV1] = []
+    for row in responses:
+        review = review_by_id.get(row.case_id)
+        if (
+            review is not None
+            and row.case_id not in duplicate_review_ids
+            and review.accept
+            and review.faithfulness == "faithful"
+            and review.naturalness == "acceptable"
+        ):
+            eligible.append(row)
+    output, decisions = apply_wording_responses(
+        cases=cases,
+        gold=gold,
+        responses=eligible,
+    )
+    eligible_ids = {row.case_id for row in eligible}
+    revised = [
+        decision
+        if decision.case_id in eligible_ids
+        else decision.model_copy(update={"reason": "review-rejected-or-missing"})
+        for decision in decisions
+    ]
+    return output, revised

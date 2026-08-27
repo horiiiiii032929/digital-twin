@@ -772,6 +772,17 @@ Current utilities:
   verify:academic-factual-qa-open-10000` validates both historical evidence and
   the corrected package without network access.
 
+  `run_academic_factual_qa_open_wording.py` implements AFQC-047 as a separate
+  public-only wording checkpoint. The author receives case ID, course, slice,
+  and canonical question; the reviewer receives only the canonical and proposed
+  question. The provider execution function cannot open hidden gold. The scorer
+  opens it only after the exclusive SQLite ledger is complete, then applies
+  answer-leak, duplicate, reviewer, and canonical-fallback gates. Run `npm run
+  simulate:academic-factual-qa-open-10000-wording` for the 500-case no-network
+  simulation and `npm run preflight:academic-factual-qa-open-10000-wording` for
+  the fail-closed paid readiness report. Execute and score commands remain
+  blocked until the exact instrument receives separate authorization.
+
   The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden

@@ -532,12 +532,13 @@ class DirectProviderJsonTransport:
 
     def estimated_cost(self, *, prompt: str) -> float:
         estimated_input = math.ceil(len(prompt) / 4)
-        return (
+        one_attempt = (
             estimated_input
             * float(self.binding["pricing_usd_per_million_input_tokens"])
             + int(self.binding["max_output_tokens"])
             * float(self.binding["pricing_usd_per_million_output_tokens"])
         ) / 1_000_000
+        return one_attempt * (1 + int(self.binding["maximum_transport_retries"]))
 
     def _payload(
         self,
@@ -551,6 +552,7 @@ class DirectProviderJsonTransport:
         if provider == "openai":
             return {
                 "model": self.binding["provider_model"],
+                "store": False,
                 "input": [
                     {
                         "role": "system",

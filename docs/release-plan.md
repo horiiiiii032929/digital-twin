@@ -95,10 +95,13 @@ not require model spending or private data:
    network-free path is built. These reviewer attempts remain historical and
    are not being retried. The flow-independent 10,000-case successor now owns
    #127. AFQC-046 now keeps the prospective complete-region reference layer
-   after all 224 text and 176 structured targets pass. A provider-neutral
-   wording contract is built but unbound; question-only paraphrasing and review
-   must finish before a provider binding and separate 500-case paid
-   authorization are requested. Panel
+   after all 224 text and 176 structured targets pass. AFQC-047 now binds the
+   public-only wording pass to the dated OpenAI GPT-5.4 mini snapshot and exact
+   Mistral Small 4 release through first-party endpoints. Its 500-case
+   network-free simulation passes; the paid wording run remains separately
+   unauthorized. The scorer cannot open hidden gold until all 50 logical calls
+   are durably complete. A valid wording result is required before the separate
+   500-case candidate plus 100-case control authorization. Panel
    confirmation, Gemini visual qualification, visual
    execution, and live T0 execution remain closed and never auto-promote.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
