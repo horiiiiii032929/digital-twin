@@ -10,7 +10,6 @@ from services.api.app.config import (
     StudentTutoringMode,
 )
 from services.api.app.factory import (
-    DEFAULT_STUDENT_PROFILE,
     _configured_generator,
     create_app,
 )
@@ -35,6 +34,10 @@ ADMIN_ID = "admin-synthetic"
 ADMIN_PASSWORD = "Admin-password-42"
 PROFESSOR_PASSWORD = "Professor-pass-42"
 PROFESSOR_NEW_PASSWORD = "Professor-new-pass-43"
+CANDIDATE_PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+)
 
 
 def _settings(
@@ -325,29 +328,40 @@ def test_configuration_rejects_nonfinite_or_boolean_direct_limits(tmp_path):
 def test_live_generator_configuration_requires_environment_credential(
     tmp_path, monkeypatch
 ):
-    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
-    with pytest.raises(ValueError, match="DEEPSEEK_API_KEY"):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    with pytest.raises(ValueError, match="OPENAI_API_KEY"):
         AppSettings(
             mode=RuntimeMode.STAGING,
             database_path=tmp_path / "db.sqlite3",
             data_root=tmp_path,
             allowed_origins=(ORIGIN,),
             secure_cookies=True,
-            generator_mode="deepseek-v4-flash",
+            generator_mode="openai-gpt-5.4-mini",
+            student_profile_path=CANDIDATE_PROFILE,
         ).validate()
 
 
-def test_live_generator_is_bound_to_selected_profile_model_and_revision():
-    profile = load_release_profile(DEFAULT_STUDENT_PROFILE)
-    settings = AppSettings(generator_mode=GeneratorMode.DEEPSEEK_V4_FLASH)
+def test_historical_deepseek_runtime_mode_is_rejected(tmp_path):
+    with pytest.raises(ValueError, match="historical"):
+        AppSettings(
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            generator_mode=GeneratorMode.DEEPSEEK_V4_FLASH,
+        ).validate()
+
+
+def test_live_generator_is_bound_to_openai_snapshot_and_responses_api():
+    profile = load_release_profile(CANDIDATE_PROFILE)
+    settings = AppSettings(
+        generator_mode=GeneratorMode.OPENAI_GPT_5_4_MINI,
+        student_profile_path=CANDIDATE_PROFILE,
+    )
 
     generator, budget = _configured_generator(settings, profile)
 
     assert generator.client is budget
-    assert budget.client.expected_provider_model == "deepseek-v4-flash"
-    assert budget.client.expected_provider_revision == (
-        "fp_a18b46594c_prod0820_fp8_kvcache_20260402"
-    )
+    assert budget.client.model == "gpt-5.4-mini-2026-03-17"
+    assert budget.client.API_URL == "https://api.openai.com/v1/responses"
 
     payload = profile.model_dump(mode="json")
     component = next(
@@ -355,10 +369,10 @@ def test_live_generator_is_bound_to_selected_profile_model_and_revision():
         for entry in payload["components"]
         if entry["component"] == ComponentKind.GENERATOR
     )
-    component["implementation"]["configuration"]["provider_revision"] = ""
+    component["implementation"]["configuration"]["reasoning_effort"] = "high"
     drifted = SystemReleaseProfile.model_validate(payload)
 
-    with pytest.raises(ValueError, match="provider_revision is invalid"):
+    with pytest.raises(ValueError, match="reasoning effort none"):
         _configured_generator(settings, drifted)
 
 

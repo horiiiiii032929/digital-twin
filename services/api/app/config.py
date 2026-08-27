@@ -22,6 +22,7 @@ class RuntimeMode(StrEnum):
 class GeneratorMode(StrEnum):
     DETERMINISTIC = "deterministic"
     DEEPSEEK_V4_FLASH = "deepseek-v4-flash"
+    OPENAI_GPT_5_4_MINI = "openai-gpt-5.4-mini"
 
 
 class StudentTutoringMode(StrEnum):
@@ -44,6 +45,10 @@ class AppSettings:
     authenticated_requests_per_minute: int = 120
     log_level: str = "INFO"
     generator_mode: GeneratorMode = GeneratorMode.DETERMINISTIC
+    student_profile_path: Path = (
+        ROOT
+        / "research/05_evaluation/profiles/student-tutor-v1.json"
+    )
     student_tutoring_mode: StudentTutoringMode = (
         StudentTutoringMode.GROUNDED_ASSISTANT
     )
@@ -90,6 +95,15 @@ class AppSettings:
             log_level=os.getenv("APP_LOG_LEVEL", "INFO").upper(),
             generator_mode=GeneratorMode(
                 os.getenv("APP_GENERATOR_MODE", GeneratorMode.DETERMINISTIC.value)
+            ),
+            student_profile_path=_repository_path(
+                os.getenv(
+                    "APP_STUDENT_PROFILE_PATH",
+                    str(
+                        ROOT
+                        / "research/05_evaluation/profiles/student-tutor-v1.json"
+                    ),
+                )
             ),
             student_tutoring_mode=StudentTutoringMode(
                 os.getenv(
@@ -195,13 +209,21 @@ class AppSettings:
                 raise ValueError(
                     "staging APP_MAX_UPLOAD_BYTES cannot exceed the proxy 64 MiB cap"
                 )
+        if self.generator_mode == GeneratorMode.DEEPSEEK_V4_FLASH:
+            raise ValueError(
+                "APP_GENERATOR_MODE=deepseek-v4-flash is historical and cannot "
+                "be selected by the prospective R1 runtime"
+            )
         if (
-            self.generator_mode == GeneratorMode.DEEPSEEK_V4_FLASH
-            and not os.getenv("DEEPSEEK_API_KEY", "").strip()
+            self.generator_mode == GeneratorMode.OPENAI_GPT_5_4_MINI
+            and not os.getenv("OPENAI_API_KEY", "").strip()
         ):
             raise ValueError(
-                "DEEPSEEK_API_KEY is required when APP_GENERATOR_MODE=deepseek-v4-flash"
+                "OPENAI_API_KEY is required when "
+                "APP_GENERATOR_MODE=openai-gpt-5.4-mini"
             )
+        if not self.student_profile_path.is_file():
+            raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")
 
 
 def _positive_int(name: str, default: int) -> int:
@@ -230,3 +252,8 @@ def _positive_float(name: str, default: float) -> float:
     if not math.isfinite(value) or value <= 0:
         raise ValueError(f"{name} must be positive")
     return value
+
+
+def _repository_path(value: str) -> Path:
+    path = Path(value).expanduser()
+    return path if path.is_absolute() else ROOT / path

@@ -7,6 +7,10 @@ from scripts.run_factual_qa_quality_pilot import OllamaJsonTransport
 from src.digital_twin.model_policy import (
     CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
+    OPENAI_HIGH_VOLUME_MODEL,
+    OPENAI_HIGH_VOLUME_LITELLM_MODEL,
+    OPENAI_SEMANTIC_REVIEW_MODEL,
+    OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
     OPENROUTER_GPT_MINI_REVIEW_MODEL,
@@ -14,6 +18,7 @@ from src.digital_twin.model_policy import (
     OPENROUTER_QWEN_REVIEW_MODEL,
     ModelPolicyError,
     controlled_openrouter_provider_options,
+    require_active_release_model,
     require_model_allowed,
     require_registered_current_model,
 )
@@ -50,6 +55,10 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
         OPENROUTER_QWEN_REVIEW_MODEL,
         OPENROUTER_GEMINI_REVIEW_MODEL,
         OPENROUTER_GPT_MINI_REVIEW_MODEL,
+        OPENAI_HIGH_VOLUME_MODEL,
+        OPENAI_HIGH_VOLUME_LITELLM_MODEL,
+        OPENAI_SEMANTIC_REVIEW_MODEL,
+        OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
         "Qwen/Qwen3-Embedding-0.6B",
         "Qwen/Qwen3-Reranker-0.6B",
         "jina-embeddings-v5-text-small",
@@ -68,6 +77,32 @@ def test_gpt_evidence_reviewer_openrouter_path_is_invalid_and_not_retried():
     )
 
     assert binding.status == "reviews-006-007-invalid-openrouter-do-not-retry"
+
+
+@pytest.mark.parametrize(
+    "model",
+    (
+        OPENAI_HIGH_VOLUME_MODEL,
+        OPENAI_HIGH_VOLUME_LITELLM_MODEL,
+        OPENAI_SEMANTIC_REVIEW_MODEL,
+        OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
+    ),
+)
+def test_openai_snapshots_are_the_only_active_r1_models(model):
+    assert require_active_release_model(model) == model
+
+
+@pytest.mark.parametrize(
+    "model",
+    (
+        "deepseek-v4-flash",
+        OPENROUTER_INDEPENDENT_REVIEW_MODEL,
+        LOCAL_GENERAL_MODEL,
+    ),
+)
+def test_historical_or_advisory_models_cannot_enter_active_r1(model):
+    with pytest.raises(ModelPolicyError, match="OpenAI-only"):
+        require_active_release_model(model)
 
 
 def test_retired_factual_qa_instrument_cannot_construct_local_transport():

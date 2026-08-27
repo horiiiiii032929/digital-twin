@@ -13,7 +13,11 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-21-v3"
+POLICY_ID = "current-model-policy-2026-08-27-v4"
+OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
+OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
+OPENAI_SEMANTIC_REVIEW_MODEL = "gpt-5.4-2026-03-05"
+OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_SEMANTIC_REVIEW_MODEL}"
 LOCAL_GENERAL_MODEL = "qwen3.5:9b-q4_K_M"
 LOCAL_GENERAL_MODEL_DIGEST = (
     "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7"
@@ -49,13 +53,23 @@ class CurrentModelBinding:
 CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="product-generator",
-        provider_model="deepseek-v4-flash",
-        status="selected",
+        provider_model=OPENAI_HIGH_VOLUME_MODEL,
+        status="prospective-r1-openai-only-pending-development-evaluation",
     ),
     CurrentModelBinding(
-        role="author-and-primary-evaluator",
+        role="semantic-reviewer",
+        provider_model=OPENAI_SEMANTIC_REVIEW_MODEL,
+        status="prospective-r1-openai-only-pending-development-evaluation",
+    ),
+    CurrentModelBinding(
+        role="historical-product-generator",
+        provider_model="deepseek-v4-flash",
+        status="historical-selected-profile-not-active-for-r1",
+    ),
+    CurrentModelBinding(
+        role="historical-author-and-primary-evaluator",
         provider_model="deepseek-v4-pro",
-        status="selected-for-bounded-workflows",
+        status="historical-bounded-workflows-not-active-for-r1",
     ),
     CurrentModelBinding(
         role="local-general-sensitivity-reviewer",
@@ -119,7 +133,20 @@ CURRENT_MODEL_IDS = frozenset(
         "qwen/qwen3.7-plus",
         "google/gemini-3.7-flash",
         "openai/gpt-5.4-mini",
+        OPENAI_HIGH_VOLUME_MODEL,
+        OPENAI_HIGH_VOLUME_LITELLM_MODEL,
+        OPENAI_SEMANTIC_REVIEW_MODEL,
+        OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
         f"ollama/{LOCAL_GENERAL_MODEL}",
+    }
+)
+
+ACTIVE_RELEASE_MODEL_IDS = frozenset(
+    {
+        OPENAI_HIGH_VOLUME_MODEL.casefold(),
+        OPENAI_HIGH_VOLUME_LITELLM_MODEL.casefold(),
+        OPENAI_SEMANTIC_REVIEW_MODEL.casefold(),
+        OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL.casefold(),
     }
 )
 
@@ -172,5 +199,17 @@ def require_registered_current_model(model: str) -> str:
         raise ModelPolicyError(
             f"{normalized} is not registered by {POLICY_ID}; verify and record "
             "the exact provider identity before execution"
+        )
+    return normalized
+
+
+def require_active_release_model(model: str) -> str:
+    """Allow only the two direct OpenAI snapshots frozen for prospective R1."""
+
+    normalized = require_registered_current_model(model)
+    if normalized.casefold() not in ACTIVE_RELEASE_MODEL_IDS:
+        raise ModelPolicyError(
+            f"{normalized} is historical or inactive under {POLICY_ID}; the "
+            "prospective R1 path is OpenAI-only"
         )
     return normalized

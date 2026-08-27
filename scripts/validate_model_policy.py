@@ -15,9 +15,12 @@ from scripts.second_review_multimodal_benchmark import (
 from services.embeddings.jina_client import DEFAULT_MODEL as JINA_EMBEDDING_MODEL
 from services.reranking.jina_client import DEFAULT_MODEL as JINA_RERANKER_MODEL
 from src.digital_twin.model_policy import (
+    ACTIVE_RELEASE_MODEL_IDS,
     CURRENT_MODEL_BINDINGS,
     LOCAL_GENERAL_MODEL,
     LOCAL_GENERAL_MODEL_DIGEST,
+    OPENAI_HIGH_VOLUME_MODEL,
+    OPENAI_SEMANTIC_REVIEW_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
     OPENROUTER_GPT_MINI_REVIEW_MODEL,
@@ -26,6 +29,7 @@ from src.digital_twin.model_policy import (
     POLICY_ID,
     ModelPolicyError,
     controlled_openrouter_provider_options,
+    require_active_release_model,
     require_model_allowed,
     require_registered_current_model,
 )
@@ -33,8 +37,11 @@ from src.digital_twin.model_policy import (
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_PATH = ROOT / "package.json"
-PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
-POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-21-current-model-policy-v3.md"
+PROFILE_PATH = ROOT / (
+    "research/05_evaluation/profiles/"
+    "student-tutor-r1-openai-candidate-v1.json"
+)
+POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-27-current-model-policy-v4.md"
 
 PROHIBITED_COMMAND_MARKERS = (
     "gemma",
@@ -84,7 +91,9 @@ def validate() -> dict[str, Any]:
     embedding_model = components["retriever"]["implementation"]["configuration"][
         "embedding_model"
     ]
-    require_registered_current_model(generator_model)
+    require_active_release_model(generator_model)
+    require_active_release_model(OPENAI_HIGH_VOLUME_MODEL)
+    require_active_release_model(OPENAI_SEMANTIC_REVIEW_MODEL)
     require_registered_current_model(embedding_model)
     require_registered_current_model(JINA_EMBEDDING_MODEL)
     require_registered_current_model(JINA_RERANKER_MODEL)
@@ -159,6 +168,7 @@ def validate() -> dict[str, Any]:
             OPENROUTER_GEMINI_REVIEW_MODEL,
             OPENROUTER_GPT_MINI_REVIEW_MODEL,
         ],
+        "active_release_models": sorted(ACTIVE_RELEASE_MODEL_IDS),
         "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {
             "generator": generator_model,
