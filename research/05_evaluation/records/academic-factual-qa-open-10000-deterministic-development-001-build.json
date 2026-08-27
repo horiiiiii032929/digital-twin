@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-deterministic-development-001-build",
+  "component": "source-adapter",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development",
+  "corpus_id": "four-public-open-educational-source-families-afqc-035",
+  "code_revision": "fdf571ce99eaaa451e97bb2fa27533cf2ae07483",
+  "dirty_state": false,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "deterministic-source-linked-v1",
+        "version": "historical-control",
+        "configuration": {
+          "source_clusters": 100,
+          "development_cases": 500,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "development-case-count",
+          "value": 500.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "canonical-answer-leak-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "answerable-lineage-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "boundary-empty-lineage-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "public-gold-field-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-development-case-count",
+          "passed": true,
+          "evidence": "Historical v1 derives 500 rows from the same 100 development clusters."
+        },
+        {
+          "name": "public-hidden-gold-separation",
+          "passed": true,
+          "evidence": "Historical v1 keeps public case inputs separate from source-derived hidden gold."
+        },
+        {
+          "name": "deterministic-source-lineage",
+          "passed": true,
+          "evidence": "Historical v1 derives answer lineage and empty boundary lineage from the same source clusters."
+        },
+        {
+          "name": "uniqueness-and-leakage",
+          "passed": false,
+          "evidence": "Historical v1 leaves four normalized duplicate questions across the development package."
+        },
+        {
+          "name": "final-split-closed",
+          "passed": true,
+          "evidence": "The v1 control comparison derives only the 100 development clusters."
+        },
+        {
+          "name": "provider-free-build",
+          "passed": true,
+          "evidence": "Historical v1 truth construction makes no provider call."
+        }
+      ],
+      "failures_by_category": {
+        "normalized-question-duplicate": 4
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "deterministic-source-linked-v2",
+        "version": "development-001",
+        "configuration": {
+          "source_clusters": 100,
+          "development_cases": 500,
+          "control_clusters": 20,
+          "control_cases": 100,
+          "answerable_cases": 400,
+          "boundary_cases": 100,
+          "provider_calls": 0,
+          "final_cases_constructed": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "development-case-count",
+          "value": 500.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "canonical-answer-leak-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "answerable-lineage-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "boundary-empty-lineage-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "public-gold-field-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-development-case-count",
+          "passed": true,
+          "evidence": "The package contains exactly the frozen 500 public cases and 500 hidden-gold rows."
+        },
+        {
+          "name": "public-hidden-gold-separation",
+          "passed": true,
+          "evidence": "All 500 public rows exclude expected action, answer, claims, citations, and boundary reason."
+        },
+        {
+          "name": "deterministic-source-lineage",
+          "passed": true,
+          "evidence": "All 400 answerable rows carry exact source-range claim lineage; all 100 boundary rows carry none."
+        },
+        {
+          "name": "uniqueness-and-leakage",
+          "passed": true,
+          "evidence": "There are 500 unique case IDs, 500 unique normalized questions, and zero canonical-answer leaks."
+        },
+        {
+          "name": "final-split-closed",
+          "passed": true,
+          "evidence": "No final case or final hidden gold was constructed or opened."
+        },
+        {
+          "name": "provider-free-build",
+          "passed": true,
+          "evidence": "Construction and direct-provider contract simulation made zero network or inference calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "artifacts": {
+    "source_plan_file_sha256": "a1bc0211cfdfc4f22adb87b989454bd019065b1662df96dbaa23064db6a53f92",
+    "development_cases_file_sha256": "c6f20d4fdf7f555669cb748f791d64b2396fe256dbfe9e5fa3944f1714fcc6cd",
+    "development_gold_file_sha256": "8b7a57e8af58554bf4fd37e91910ca2aa38790633b4599801c4805bf17c4eca8",
+    "control_cases_file_sha256": "84cfb3ee03d4db96747e2a9f9f858bc528830d1809d8a53f9eba439b519c261b",
+    "control_gold_file_sha256": "4dca451b8432f79477829d7d93db76722a8f669cb6142f947235c0ce967649ae"
+  },
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "deterministic-source-linked-v2",
+    "rationale": "The development package passes every deterministic construction, separation, lineage, uniqueness, and no-call gate. It is retained for a separately authorized product development run.",
+    "limitations": [
+      "This build does not measure Digital Twin retrieval, answer, citation, or boundary quality.",
+      "Canonical development questions are deterministic templates rather than validated natural student wording.",
+      "No final 10,000-case, visual, professor-fidelity, private-course, or usability evidence was produced."
+    ]
+  }
+}

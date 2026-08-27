@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-end-to-end-pilot-002",
+  "status": "completed-development-go-deeper",
+  "owner_issue": 127,
+  "decision_question": "Does the two-boundary T0 successor improve boundary safety and complete source-grounded answering under a paired, leakage-free development comparison?",
+  "research_question": "Relative to the any-hit T0 control, what is the paired change in unsupported release, supported-answer retention, claim completeness, and citation completeness when question-to-evidence selection and post-generation atomic-claim validation are applied?",
+  "dataset": {
+    "dataset_id": "academic-factual-qa-end-to-end-pilot-001-development",
+    "content_sha256": "09b684cc2efaad32936fdd6d6222c539501c4b1b38ab1f5228a9949de0cbf18b",
+    "status": "development-synthetic-unblinded",
+    "case_count": 160,
+    "cluster_count": 80,
+    "independent_gold": false,
+    "final_evaluation_split": false,
+    "private_data": false
+  },
+  "conditions": [
+    {
+      "condition_id": "T0-ANY-HIT-V2-CONTROL",
+      "role": "control",
+      "evidence_gate": "any-hit-evidence-gate",
+      "post_generation_claim_validator": null
+    },
+    {
+      "condition_id": "T0-STRUCTURED-COVERAGE-ABLATION",
+      "role": "ablation",
+      "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+      "post_generation_claim_validator": null
+    },
+    {
+      "condition_id": "T0-TWO-BOUNDARY-ATOMIC-CANDIDATE",
+      "role": "candidate",
+      "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+      "post_generation_claim_validator": "atomic-claim-evidence-validator-v1"
+    }
+  ],
+  "fairness_contract": {
+    "paired_case_ids": true,
+    "identical_course_scoped_corpus": true,
+    "identical_retriever_profile": true,
+    "identical_generator": "development-atomic-draft-generator-v1",
+    "identical_draft_required_between_ablation_and_candidate": true,
+    "gold_fields_available_only_after_persistence": true,
+    "clustered_uncertainty": "cluster-bootstrap-percentile-95",
+    "selection_permitted": false
+  },
+  "prospective_development_gates": {
+    "unsupported_release_rate_max": 0.0,
+    "supported_answer_retention_min": 1.0,
+    "expected_claim_complete_rate_min": 1.0,
+    "citation_precision_min": 1.0,
+    "citation_recall_min": 1.0,
+    "persistence_consistency_min": 1.0,
+    "paired_draft_mismatch_count_max": 0,
+    "provider_calls_max": 0
+  },
+  "execution_safety": {
+    "network_free_development_execution_authorized": false,
+    "authorization_revoked": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "independent_gold_opening_authorized": false,
+    "heldout_execution_authorized": false,
+    "product_binding_authorized": false,
+    "automatic_selection": false,
+    "automatic_release_promotion": false
+  },
+  "decision_rule": {
+    "all_development_gates_pass": "completed-go-deeper",
+    "genuine_method_failure": "completed-refine",
+    "harness_or_runtime_defect": "invalid-execution",
+    "development_pass_can_select_or_promote": false,
+    "failure_blocks_promotion_not_development": true,
+    "consumed_split_may_not_be_used_for_confirmation_tuning": true
+  }
+}

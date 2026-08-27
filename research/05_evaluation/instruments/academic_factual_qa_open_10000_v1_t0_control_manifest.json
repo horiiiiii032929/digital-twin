@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "flow_id": "t0-any-hit-control",
+  "adapter_version": "v1",
+  "code_revision": "9a7f7cc3ed7f78a36d791258595b83e83067c2c0",
+  "profile_sha256": "4ebc43d468b5ceec52552986de9a20389ce81485917c3918ec8fbcc1194c4bad",
+  "retriever": "qwen3-hybrid-v1@cross-course-retrieval-v1",
+  "generator": "deepseek-v4-flash-live-atomic",
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "evidence_gate": "any-hit-evidence-gate-v1",
+  "model_bindings": {
+    "embedding": "Qwen/Qwen3-Embedding-0.6B@97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "generator": "deepseek-v4-flash@DeepSeek-V4-Flash-0731;runtime-fingerprint-required-recorded",
+    "claim-validator": "cross-encoder/nli-deberta-v3-base@6c749ce3425cd33b46d187e45b92bbf96ee12ec7"
+  },
+  "known_benchmark": false
+}

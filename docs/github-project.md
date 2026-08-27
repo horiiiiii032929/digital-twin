@@ -49,11 +49,39 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 academic end-to-end factual QA and #105 — preserve the 120-row NLI
-   result as provisional development evidence. The 160-case leakage-free T0
-   harness is built and its unselectable controls expose the expected safety
-   versus retention trade-off. Integrate the candidate, add independently
-   validated source-linked data, and only then freeze a selection run.
+1. #127 flow-independent 10,000-case product evaluation and #105 — preserve the
+   120-row NLI result as provisional development evidence and the completed
+   10,000-row pipeline as engineering history. The active successor binds
+   public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,
+   and source-range scoring contracts across T0, T1/T2, HTTP, and any-hit flows.
+   Its source inventory proves the originally requested networking and
+   data-structures allocation impossible under the five-per-section cap. A
+   deterministic feasible 2,100-cluster correction is build-verified and frozen
+   under AFQC-035 after excluding tiny markup fragments and mid-token windows.
+   Construction attempt 001 failed closed on its first DeepSeek canary because
+   the runtime fingerprint differed from the frozen binding; no bulk case ran
+   and authorization is revoked. Provider binding 002 passed both exact-route
+   canaries, but the first bulk DeepSeek response violated the frozen author
+   schema. Attempt 002 is preserved as invalid with three recorded calls, zero
+   accepted clusters, and revoked authority. The runner also exposed a gap in
+   its preregistered malformed-output fallback; that correction must be built
+   prospectively before any successor authorization. Attempt 003
+   quarantines malformed author content, labels deterministic canonical
+   fallback wording, and retains independent verification. Its run is invalid:
+   Google AI Studio failed one verifier call after 15 completed responses, while
+   repeated DeepSeek schema drift produced four author fallbacks and three
+   verifier rejections. AFQC-043 revokes authority and stops another operational
+   retry. AFQC-044 resolves the method decision with a provider-free 500-case
+   package and 100-case paired control. AFQC-046 replaces its defective
+   reference windows with complete semantic regions and passes all source,
+   lineage, uniqueness, leakage, and byte-stability gates. AFQC-047 then binds
+   public-only wording to the dated OpenAI GPT-5.4 mini snapshot and independent
+   Mistral Small 4 review through first-party endpoints. Its complete 500-case
+   network-free simulation passes; paid wording remains unauthorized. The next
+   #127 checkpoint is this finite wording run, followed only after a valid result
+   by the separately authorized 500-case candidate plus 100-case control run.
+   The 10,000-case final run remains unauthorized. Issue #131 separately
+   owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
 3. #88 — externally blocked on host/domain selection; merged PR #93

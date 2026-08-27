@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+  <rect width="720" height="420" fill="#fff"/>
+  <text x="40" y="48" font-family="sans-serif" font-size="26" font-weight="700">Operation complexity</text>
+  <g font-family="sans-serif" font-size="21" text-anchor="middle">
+    <rect x="80" y="90" width="560" height="240" fill="none" stroke="#263238" stroke-width="3"/>
+    <path d="M80 150 H640 M80 210 H640 M80 270 H640 M300 90 V330 M470 90 V330" stroke="#263238" stroke-width="2"/>
+    <text x="190" y="128" font-weight="700">Structure</text><text x="385" y="128" font-weight="700">Search</text><text x="555" y="128" font-weight="700">Insert</text>
+    <text x="190" y="188">Array</text><text x="385" y="188">O(n)</text><text x="555" y="188">O(1)*</text>
+    <text x="190" y="248">Balanced tree</text><text x="385" y="248">O(log n)</text><text x="555" y="248">O(log n)</text>
+    <text x="190" y="308">Hash table</text><text x="385" y="308">O(1) avg.</text><text x="555" y="308">O(1) avg.</text>
+  </g>
+</svg>

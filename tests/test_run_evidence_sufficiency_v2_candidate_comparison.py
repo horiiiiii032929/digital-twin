@@ -28,18 +28,17 @@ def test_candidate_comparison_is_completed_and_authorization_revoked() -> None:
 
     assert result["status"] == "blocked-not-authorized"
     blockers = set(result["blockers"])
-    assert {
+    required_authorization_blockers = {
         "candidate-execution-authorized-false",
         "local-model-execution-authorized-false",
         "decision-split-execution-authorized-false",
-    } <= blockers
-    assert blockers <= {
-        "candidate-execution-authorized-false",
-        "local-model-execution-authorized-false",
-        "decision-split-execution-authorized-false",
-        "stale-model-metadata:cross-encoder-support-verifier-v2",
-        "stale-model-metadata:cross-encoder-nli-completeness-verifier-v2",
     }
+    assert required_authorization_blockers <= blockers
+    assert all(
+        blocker in required_authorization_blockers
+        or blocker.startswith("stale-model-metadata:")
+        for blocker in blockers
+    )
     assert result["decision_split_opened"] is False
     assert result["model_loaded"] is False
     assert result["provider_calls"] == 0

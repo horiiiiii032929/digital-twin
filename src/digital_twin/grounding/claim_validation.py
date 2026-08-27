@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field, field_validator
 from src.digital_twin.grounding.evidence_verifiers import (
     NliScoreBackend,
 )
-from src.digital_twin.grounding.models import RetrievalHit
+from src.digital_twin.grounding.models import AtomicAnswerClaim, RetrievalHit
 
 
 _SPACE = re.compile(r"\s+")
@@ -35,31 +35,6 @@ def _probability(value: float, name: str) -> float:
 def _normalized_text(value: str) -> str:
     lowered = value.casefold().replace("-", " ")
     return _SPACE.sub(" ", _NON_WORD.sub(" ", lowered)).strip()
-
-
-class AtomicAnswerClaim(BaseModel):
-    """One factual claim plus server-resolved retrieved evidence lineage."""
-
-    claim_id: str = Field(pattern=r"^claim-[a-z0-9-]+$")
-    text: str = Field(min_length=1)
-    evidence_hit_ids: list[str] = Field(min_length=1)
-
-    @field_validator("text")
-    @classmethod
-    def text_must_not_be_blank(cls, value: str) -> str:
-        normalized = value.strip()
-        if not normalized:
-            raise ValueError("claim text must not be blank")
-        return normalized
-
-    @field_validator("evidence_hit_ids")
-    @classmethod
-    def evidence_ids_must_be_unique(cls, values: list[str]) -> list[str]:
-        if any(not value.strip() for value in values):
-            raise ValueError("evidence_hit_ids cannot contain blank IDs")
-        if len(values) != len(set(values)):
-            raise ValueError("evidence_hit_ids must be unique")
-        return values
 
 
 class AtomicClaimSupportSignal(BaseModel):

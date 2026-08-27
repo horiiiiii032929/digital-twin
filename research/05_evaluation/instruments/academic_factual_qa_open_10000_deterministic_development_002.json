@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-deterministic-development-002",
+  "successor_of": "academic-factual-qa-open-10000-deterministic-development-001",
+  "owner_issue": 127,
+  "status": "completed-build-only-authority-revoked",
+  "decision_question": "Can complete source statements and full structured regions produce a fit-for-use 500-case development reference package without provider calls or final-split access?",
+  "method": {
+    "source_planner": "complete-semantic-region-planner-v1",
+    "truth_builder": "deterministic-source-linked-v3",
+    "question_author_family": "deterministic-canonical-development-v3",
+    "truth_verifier": "deterministic-complete-region-verifier-v3",
+    "provider_calls": 0,
+    "provider_output_authoritative": false,
+    "future_model_scope": "question-wording paraphrase and advisory review only"
+  },
+  "dataset": {
+    "source_plan_id": "academic-factual-qa-open-10000-development-sources-002",
+    "source_plan_content_sha256": "95a0f6f3a1c277b45cecf348e84dc91bc8a1abb798eb70f25a56792aa38e1376",
+    "development_cases_content_sha256": "fcc535fc857aceaaedea6b7e88093fc61937d8edb26666480154551ad58ff298",
+    "development_gold_content_sha256": "e3ff66722500fb45401c2d9bd690d8ef96d7bf1c84218c1bdfffba6756c9b0d2",
+    "control_cases_content_sha256": "1d7ff5ce0f734b1a880c1d549cc37c9cb72d1bc449623e29124eb6d89ec645b3",
+    "control_gold_content_sha256": "151dea10528d3cb56ea2f56c0c5c71063dc7576a43e3a1bf6d61b850e2cae277",
+    "development_cluster_count": 100,
+    "development_case_count": 500,
+    "development_control_cluster_count": 20,
+    "development_control_case_count": 100,
+    "answerable_case_count": 400,
+    "boundary_case_count": 100,
+    "course_clusters_each": 25,
+    "structured_code_clusters": 35,
+    "structured_equation_clusters": 6,
+    "structured_table_clusters": 3,
+    "final_case_count_constructed": 0,
+    "private_data_used": false,
+    "raw_source_committed": false
+  },
+  "acceptance": {
+    "exact_case_count": 500,
+    "exact_control_case_count": 100,
+    "complete_statement_rate_min": 1.0,
+    "structured_region_containment_rate_min": 1.0,
+    "answerable_source_lineage_rate_min": 1.0,
+    "boundary_empty_lineage_rate_min": 1.0,
+    "normalized_duplicate_count_max": 0,
+    "canonical_answer_leak_count_max": 0,
+    "provider_call_count_max": 0,
+    "byte_stable_rebuild_required": true,
+    "public_cases_and_hidden_gold_separate": true
+  },
+  "authorization": {
+    "deterministic_development_construction_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_product_execution_authorized": false,
+    "final_construction_authorized": false,
+    "final_product_execution_authorized": false,
+    "automatic_promotion": false
+  },
+  "content_sha256": "2918733edf62525dc4dcecca584e04ae7557886390a4ff19e90fca5ba8743055"
+}

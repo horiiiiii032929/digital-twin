@@ -22,8 +22,6 @@ _DIRECT_COMPLETION = re.compile(
     r"give me (?:the|a) answer)\b",
     re.IGNORECASE,
 )
-
-
 class DeterministicPolicyEnforcer:
     """Apply inspectable academic-integrity and evidence rules before generation."""
 
@@ -48,12 +46,6 @@ class DeterministicPolicyEnforcer:
                 reason="The professor has not approved this tutor policy for release.",
                 matched_rules=["professor-release-approval-required"],
             )
-        if not hits:
-            return PolicyDecision(
-                action=PolicyAction.NO_EVIDENCE,
-                reason="No approved retrieval evidence is available.",
-                matched_rules=["approved-evidence-required"],
-            )
         if _GRADED_CONTEXT.search(question) and _DIRECT_COMPLETION.search(question):
             policy_field = next(
                 (
@@ -72,6 +64,12 @@ class DeterministicPolicyEnforcer:
                 action=PolicyAction.REDIRECT_GRADED_WORK,
                 reason="The request asks for direct completion of graded work.",
                 matched_rules=["attempt-first", policy_rule],
+            )
+        if not hits:
+            return PolicyDecision(
+                action=PolicyAction.NO_EVIDENCE,
+                reason="No approved retrieval evidence is available.",
+                matched_rules=["approved-evidence-required"],
             )
         return PolicyDecision(
             action=PolicyAction.ANSWER,

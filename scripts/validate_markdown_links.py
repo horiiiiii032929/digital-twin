@@ -3,21 +3,34 @@
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-IGNORED_DIRECTORIES = {".git", ".venv", "dist", "node_modules"}
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
 
-def iter_markdown_files() -> list[Path]:
-    return sorted(
-        path
-        for path in REPOSITORY_ROOT.rglob("*.md")
-        if not IGNORED_DIRECTORIES.intersection(path.parts)
+def iter_markdown_files(root: Path = REPOSITORY_ROOT) -> list[Path]:
+    """Return tracked and reviewable untracked Markdown, excluding ignored data."""
+
+    result = subprocess.run(
+        [
+            "git",
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "-z",
+            "--",
+            "*.md",
+        ],
+        cwd=root,
+        check=True,
+        capture_output=True,
     )
+    return sorted(root / path for path in result.stdout.decode().split("\0") if path)
 
 
 def local_target(raw_target: str) -> str | None:
@@ -37,11 +50,11 @@ def local_target(raw_target: str) -> str | None:
     return target
 
 
-def find_broken_links() -> tuple[int, list[str]]:
+def find_broken_links(root: Path = REPOSITORY_ROOT) -> tuple[int, list[str]]:
     checked_links = 0
     broken_links: list[str] = []
 
-    for path in iter_markdown_files():
+    for path in iter_markdown_files(root):
         content = path.read_text(encoding="utf-8")
         for raw_target in LINK_PATTERN.findall(content):
             target = local_target(raw_target)
@@ -51,7 +64,7 @@ def find_broken_links() -> tuple[int, list[str]]:
             checked_links += 1
             destination = (path.parent / target).resolve()
             if not destination.exists():
-                relative_path = path.relative_to(REPOSITORY_ROOT)
+                relative_path = path.relative_to(root)
                 broken_links.append(f"{relative_path}: {target}")
 
     return checked_links, broken_links

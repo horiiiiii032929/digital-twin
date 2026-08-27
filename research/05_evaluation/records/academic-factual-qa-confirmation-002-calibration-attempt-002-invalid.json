@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-calibration-attempt-002-invalid",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "d79bda5f3725eb1f58e7bbd3e78571b286f5a30e",
+  "dirty_state": false,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "network-free-three-family-failure-simulation-v2",
+        "version": "build-control",
+        "configuration": {
+          "control_case_count": 40,
+          "reviewer_count": 3,
+          "simulated_provider_calls": 20,
+          "real_provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "codex-calibration-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-diagnostics-preserved",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-cost-accounting-complete",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": true,
+          "evidence": "The network-free build control was bound to the reviewed code, packet, binding, pricing, and instrument configuration."
+        },
+        {
+          "name": "isolated-codex-calibration",
+          "passed": true,
+          "evidence": "The simulation supplied the same schema-valid, task-bound 40-vote Codex calibration artifact."
+        },
+        {
+          "name": "sanitized-provider-failure-evidence",
+          "passed": true,
+          "evidence": "The simulation exercised HTTP status, provider category, latency, affected-item, usage, cost-status, and no-retry recording."
+        },
+        {
+          "name": "complete-three-reviewer-calibration",
+          "passed": true,
+          "evidence": "The simulated state machine completed all three reviewer calibrations."
+        },
+        {
+          "name": "complete-call-token-cost-accounting",
+          "passed": true,
+          "evidence": "The network-free transport supplied complete deterministic call, token, latency, and cost values."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "three-family-calibration-executor-v2",
+        "version": "attempt-002-invalid",
+        "configuration": {
+          "control_case_count": 40,
+          "reviewer_count": 3,
+          "planned_provider_calls": 20,
+          "completed_provider_calls": 0,
+          "failed_provider_calls": 1,
+          "retries": 0,
+          "emergency_hard_stop_usd": 3.0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "codex-calibration-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-diagnostics-preserved",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-cost-accounting-complete",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": true,
+          "evidence": "Execution was bound to clean revision d79bda5 and the frozen packet, binding, pricing, and instrument hashes."
+        },
+        {
+          "name": "isolated-codex-calibration",
+          "passed": true,
+          "evidence": "The immutable isolated Codex reviewer artifact contains 40/40 controls and had passed all four preregistered dimensions at 1.00."
+        },
+        {
+          "name": "complete-three-reviewer-calibration",
+          "passed": false,
+          "evidence": "The first Mistral batch returned HTTP 400 before votes were accepted; DeepSeek was never called."
+        },
+        {
+          "name": "sanitized-provider-failure-evidence",
+          "passed": true,
+          "evidence": "The ledger retained HTTP 400, provider category, latency, affected item IDs, and explicit unavailable usage/cost status."
+        },
+        {
+          "name": "complete-call-token-cost-accounting",
+          "passed": false,
+          "evidence": "OpenRouter returned no request ID, token usage, or authoritative cost with the failed HTTP response; reported USD 0 is not verified zero spend."
+        }
+      ],
+      "failures_by_category": {
+        "provider-http-error": 1,
+        "provider-usage-and-cost-unavailable": 1,
+        "repeated-mistral-operational-failure": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 002 is operationally invalid. The same Mistral reviewer path has now terminated both bounded calibration attempts before a vote was accepted, so the reviewer method must be redesigned instead of retried.",
+    "limitations": [
+      "The sanitized provider response identifies HTTP 400 but intentionally omits unrestricted provider text.",
+      "Reported USD 0 is unavailable provider accounting rather than verified zero spend.",
+      "No Mistral or DeepSeek calibration metric and no 200-case confirmation metric is available.",
+      "LLM calibration would remain silver evidence even after a valid successor run."
+    ]
+  }
+}

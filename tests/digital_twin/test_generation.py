@@ -20,6 +20,7 @@ from src.digital_twin.generation import (
     DeterministicPolicyEnforcer,
     GenerationEvaluationSet,
     GroundedPromptBuilder,
+    LiveAtomicGroundedGenerator,
     LiveGroundedGenerator,
     PolicyAction,
     StrictEvidenceGroundedPromptBuilder,
@@ -204,6 +205,16 @@ def test_policy_enforcer_redirects_common_direct_completion_paraphrase():
     assert decision.action == PolicyAction.REDIRECT_GRADED_WORK
 
 
+def test_policy_enforcer_redirects_direct_graded_work_without_retrieval_hits():
+    decision = DeterministicPolicyEnforcer().evaluate(
+        "Give me the full answer for my graded assignment.",
+        [],
+        approved_policy(),
+    )
+
+    assert decision.action == PolicyAction.REDIRECT_GRADED_WORK
+
+
 def test_prompt_records_policy_evidence_version_and_injection_boundary():
     prompt = GroundedPromptBuilder().build(
         "How does CSRF work?",
@@ -345,6 +356,49 @@ async def test_live_generator_uses_structured_output_and_records_usage():
     assert answer.trace is not None
     assert answer.trace.provider_model == "fixture-live/v1"
     assert answer.trace.usage.approximate_cost_usd == 0.001
+
+
+@pytest.mark.asyncio
+async def test_live_atomic_generator_resolves_claim_and_citation_lineage():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "claims": [
+                    {
+                        "claim_id": "claim-csrf-session",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    },
+                    {
+                        "claim_id": "claim-csrf-defense",
+                        "text": "SameSite cookies are a common defense.",
+                        "citation_ids": ["S1"],
+                    },
+                ]
+            }
+        ),
+        provider_model="fixture-live/v1",
+        usage=GenerationUsage(input_tokens=100, output_tokens=40, total_tokens=140),
+    )
+    client = RecordingClient(response)
+
+    answer = await LiveAtomicGroundedGenerator(client).generate(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert client.calls[0][1] == "grounded_tutor_atomic_claims"
+    assert [claim.claim_id for claim in answer.atomic_claims] == [
+        "claim-csrf-session",
+        "claim-csrf-defense",
+    ]
+    assert all(
+        claim.evidence_hit_ids == ["chunk-csrf-1"]
+        for claim in answer.atomic_claims
+    )
+    assert len(answer.citations) == 1
+    assert answer.citations[0].source_id == "document-csrf"
 
 
 @pytest.mark.asyncio

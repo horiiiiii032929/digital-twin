@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-end-to-end-pilot-002",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-end-to-end-pilot-001-development",
+  "corpus_id": "synthetic-public-academic-factual-qa-development-v1",
+  "code_revision": "74dcf8ca973a4b253f1b39fcf401370467984a37",
+  "dirty_state": false,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "t0-any-hit-v2-control",
+        "version": "1.0.0",
+        "configuration": {"case_count": 160, "cluster_count": 80, "provider_calls": 0}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "action-accuracy", "value": 0.7875, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "unsupported-release-rate", "value": 0.425, "unit": "ratio", "direction": "lower-is-better", "threshold": 0.0, "passed": false},
+        {"name": "supported-answer-retention", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "claim-complete-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-precision", "value": 0.5, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "citation-recall", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-inference-cost-usd", "value": 0.0, "unit": "usd", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-release", "passed": false, "evidence": "34 of 80 boundary cases were released as answers."},
+        {"name": "complete-supported-answer-retention", "passed": true, "evidence": "80 of 80 answerable cases were retained."},
+        {"name": "complete-claims-and-citations", "passed": false, "evidence": "Citation precision was 50% because irrelevant retrieved sources were also cited."},
+        {"name": "paired-clean-reproducible-execution", "passed": true, "evidence": "The run used one clean revision with zero provider/private/held-out use."}
+      ],
+      "failures_by_category": {"unsupported-boundary-release": 34, "irrelevant-citation": 80}
+    },
+    {
+      "implementation": {
+        "implementation_id": "two-boundary-t0-development-candidate-v1",
+        "version": "1.0.0",
+        "configuration": {"case_count": 160, "cluster_count": 80, "provider_calls": 0}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "unsupported-release-rate", "value": 0.0, "unit": "ratio", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "supported-answer-retention", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "claim-complete-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-precision", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-recall", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-inference-cost-usd", "value": 0.0, "unit": "usd", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-release", "passed": true, "evidence": "Zero of 80 boundary cases were released as answers."},
+        {"name": "complete-supported-answer-retention", "passed": true, "evidence": "80 of 80 answerable cases were retained."},
+        {"name": "complete-claims-and-citations", "passed": true, "evidence": "All 80 answerable cases had complete claims and 100% citation precision/recall."},
+        {"name": "paired-clean-reproducible-execution", "passed": true, "evidence": "All 160 ablation/candidate draft hashes matched on clean revision 74dcf8c with zero provider/private/held-out use."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "two-boundary-t0-development-candidate-v1",
+    "rationale": "The candidate passed every fixed synthetic development gate and corrected the any-hit failure, but the unblinded source-alias-assisted data cannot support method selection or a real-world quality claim.",
+    "limitations": [
+      "The labels are deterministic development labels, not independently validated gold.",
+      "Source aliases and questions originate from the same synthetic design.",
+      "The clean paired draft did not measure naturally occurring post-generation claim failures.",
+      "The all-pass percentile bootstrap is degenerate and does not establish zero population risk.",
+      "No provider, private source, held-out, multimodal product, T1 promotion, or professor-fidelity evaluation occurred."
+    ]
+  }
+}

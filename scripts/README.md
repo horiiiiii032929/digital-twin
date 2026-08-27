@@ -576,6 +576,139 @@ Current utilities:
   preflight:academic-factual-qa-e2e-pilot`. Development execution, independent
   gold opening, the atomic-claim candidate, product binding, and academic claims
   remain blocked.
+- `run_academic_factual_qa_end_to_end_pilot_v2.py`: runs the corrected paired
+  development comparison under issue #127. It compares the any-hit T0 control,
+  a structured question-to-evidence selection ablation, and the same ablation
+  plus post-generation atomic-claim validation. The latter two arms must use
+  identical draft hashes. The CLI records the exact Git revision and fails
+  closed on a dirty worktree; the instrument permits only the 160-case
+  synthetic-public network-free development run. Use `npm run
+  verify:academic-factual-qa-e2e-pilot-v2`, `npm run
+  preflight:academic-factual-qa-e2e-pilot-v2`, or the separately bounded
+  `npm run execute:academic-factual-qa-e2e-pilot-v2`. The one-time development
+  run is complete and its authorization is revoked, so the execution command is
+  now blocked. Its pass cannot select the method, open independent gold, or
+  promote the product.
+- `validate_academic_factual_qa_confirmation.py`: validates the preregistered
+  200-case public-source confirmation design without opening a source manifest
+  or reference labels. It freezes 100 source/question-family clusters, one
+  answerable and one boundary case per cluster, the three paired T0 conditions,
+  independent-human review requirements, cluster-aware analysis, numeric gates,
+  and a later unauthorized 600-case final tranche. Use `npm run
+  verify:academic-factual-qa-confirmation` or `npm run
+  preflight:academic-factual-qa-confirmation`. Preflight must remain
+  `blocked-build-only` until an eligible source manifest, complete independent
+  labels, an immutable product/profile binding, and separate execution
+  authorization exist.
+- `validate_academic_factual_qa_confirmation_v2.py`: validates the feasible
+  successor review design without changing or deleting confirmation 001. It
+  keeps deterministic source-derived truth authoritative, requires blinded
+  isolated Codex, Mistral Small 4, and DeepSeek V4 Pro reviews for all 200 cases,
+  qualifies each reviewer on 40 planted controls, requires unanimity for
+  automatic semantic acceptance, and bounds the researcher packet to at most
+  60 cases. Use `npm run verify:academic-factual-qa-confirmation-v2` or `npm run
+  preflight:academic-factual-qa-confirmation-v2`. The source/case build is now
+  bound, but preflight remains blocked; no Codex review, provider call,
+  researcher audit, product execution, or final tranche is authorized.
+- `build_academic_factual_qa_confirmation_v2.py`: reads four locally cached,
+  exact public repository revisions and deterministically rebuilds the
+  160-section source manifest, 200 confirmation cases, and 40 disjoint planted
+  controls. Complete upstream repositories remain ignored. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-data`; this makes zero provider
+  calls and opens no private source.
+- `prepare_academic_factual_qa_panel_review_v2.py`: creates the deterministic
+  240-item packet while removing case IDs, strata, gold provenance, planted
+  mutation labels, conditions, generator identity, and other votes. Use `npm
+  run verify:academic-factual-qa-confirmation-v2-review-packet`.
+- `run_academic_factual_qa_panel_review_v2.py`: validates reviewer JSON,
+  calibration gates, unanimity, nominal Krippendorff alpha, immutable votes,
+  atomic resume/accounting, the 40-disagreement stop, and the bounded researcher
+  packet. The current CLI exposes only validation, simulation, and blocked
+  preflight; it contains no paid execution mode. Use `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-runner` for the no-call
+  clean scenario and `npm run
+  preflight:academic-factual-qa-confirmation-v2-review-runner` to confirm that
+  live review remains unauthorized.
+- `execute_academic_factual_qa_panel_review_v2.py`: binds the actual review
+  checkpoint to a fresh isolated `gpt-5.6-sol` Codex task, a versioned external
+  reviewer route, and direct DeepSeek V4 Pro. Historical attempts 001/002 keep
+  their exact Mistral Small 4 zero-data-retention routing through OpenRouter.
+  It prepares a gold-free two-phase Codex workspace, performs metadata-only
+  live preflight, and runs calibration before confirmation in batches of four.
+  The executor has zero retries, a 120-call ceiling, atomic resume, stable
+  identity checks, a conservative USD 1.563034 peak reservation, and a USD 3
+  emergency stop. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-execution` and the simulated
+  command for no-call verification. Calibration attempts 001 and 002 are
+  preserved as invalid one-call Mistral results and their authority is revoked.
+  Attempt 002's corrected harness records sanitized HTTP/provider error,
+  latency, affected items, explicit unavailable usage/cost, and response hashes
+  without retry. Successor attempt 003 reuses the sealed packet and immutable
+  40/40 Codex votes, replaces only the failed Mistral slot with exact Gemini
+  3.7 Flash revision `20260813` through the standard `google-ai-studio`
+  endpoint, and ends after calibration. Its provider schema uses only the
+  documented Gemini subset while complete IDs, uniqueness, visible-evidence
+  lineage, and action consistency remain local deterministic checks. Use
+  `npm run verify:academic-factual-qa-confirmation-v2-review-attempt-003`,
+  `npm run simulate:academic-factual-qa-confirmation-v2-review-attempt-003`,
+  and the separately authorized live preflight/execute commands. Attempt 003
+  permits at most 20 calls, zero retries, USD 0.406426 conservative reservation,
+  and the existing USD 3 emergency stop; it never opens the 200-case panel. Its
+  live run is preserved as invalid after Gemini completed the first canary and
+  direct DeepSeek returned empty content on the second. Authority is revoked;
+  any successor calibration and later confirmation require separate decisions.
+  Attempt 004 is that finite build-only successor: its reviewer sequence is
+  immutable Codex plus exact Gemini only, it imports no attempt-003 Gemini
+  votes, and it schedules all 40 controls as ten fresh batches. Only timeout,
+  connection failure, HTTP 429/5xx, or empty content may retry, once per batch
+  and twice globally. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-attempt-004`, `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-attempt-004`, and the
+  separate live preflight/execute commands. The maximum reservation is USD
+  0.211968 under the USD 3 stop. Its paid run is preserved as invalid after the
+  first Gemini batch and its sole retry both returned HTTP 429. No Gemini vote,
+  later batch, or confirmation case opened; provider usage/cost were
+  unavailable. Authority is revoked, attempt 004 cannot be rerun, and the
+  single-endpoint reviewer path is stopped. Researcher-directed attempt 005
+  keeps the exact Gemini revision but uses OpenRouter's bounded health-aware
+  transport: Vertex global priority/default followed by AI Studio
+  priority/default. It uses seed 0 and the parameter subset shared by all four
+  routes, records the actual provider and service tier per completion, requires
+  at least two healthy endpoints at live preflight, and keeps model identity
+  fixed across fallback. Use `npm run
+  verify:academic-factual-qa-confirmation-v2-review-attempt-005`, `npm run
+  simulate:academic-factual-qa-confirmation-v2-review-attempt-005`, and its
+  separate live preflight/execute commands. Ten primary calls plus two bounded
+  retries reserve USD 0.3815424 under the USD 3 stop. Attempt 005 is currently
+  provider-unauthorized and cannot open the sealed 200 cases.
+- `build_academic_factual_qa_visual_supplement.py`: deterministically builds the
+  separate 30-cluster/60-case public visual supplement. It freezes ten tables,
+  ten equations, ten original diagrams, one answerable and one balanced
+  boundary case per asset, original-region lineage, licenses, versions, and
+  source/render hashes. The committed metadata is reproducible; rendered and
+  upstream assets remain ignored. Use `npm run
+  build:academic-factual-qa-visual-supplement` only when intentionally updating
+  the prospective artifact and `npm run
+  verify:academic-factual-qa-professor-checkpoint` for the normal no-call gate.
+- `run_academic_factual_qa_visual_checkpoint.py`: validates, simulates, and
+  executes the separately authorized Gemini qualification and 30-cluster visual
+  pilot. The provider-neutral description contract is question-independent,
+  routes exactly to Google Gemini 3.7 Flash with fallback disabled, and keeps
+  descriptions non-authoritative while citations resolve to original regions.
+  Unsupported description facts that deterministic checks cannot clear produce
+  an explicit Codex audit packet and `ready-codex-audit` state; they are never
+  silently counted as supported. Qualification and pilot each require their own
+  authorization and use zero retries, atomic accounting, and independent cost
+  ceilings.
+- `run_academic_factual_qa_t0_confirmation.py`: runs the actual T0 service over
+  200 main and 60 visual cases using only course ID and question at the product
+  boundary. It compares any-hit, structured-coverage, and shared-draft
+  structured-plus-atomic-claim conditions, persists every response before
+  opening gold, and reports action, retrieval, claim, citation, persistence,
+  latency, cost, and seeded paired non-inferiority evidence. Its network-free
+  simulation is explicitly marked non-academic. Live execution is blocked until
+  the calibrated panel, assisted audit, visual pilot, clean revision, provider
+  freshness, and a fifth separate authorization are present.
 - `build_factual_qa_v3_10000_blueprints.py`: builds the supervisor-requested
   dummy factual-QA scale design from deterministic source truth. Its default
   mode validates 1,000 synthetic source units, 8,000 atomic claims, and 10,000
@@ -592,6 +725,80 @@ Current utilities:
   distribution, source lineage, boundary-empty lineage, normalized question
   uniqueness, byte stability, and zero private/provider access. `--write`
   remains blocked by the repository freeze.
+- `build_academic_factual_qa_open_10000.py`,
+  `build_academic_factual_qa_open_development_v2.py`,
+  `build_academic_factual_qa_open_source_plan_v2.py`,
+  `build_academic_factual_qa_open_development_v3.py`,
+  `audit_academic_factual_qa_open_development_v2.py`,
+  `construct_academic_factual_qa_open_10000.py`,
+  `run_academic_factual_qa_open_10000.py`, and
+  `score_academic_factual_qa_open_10000.py`: define the flow-independent
+  professor-facing successor. The builder inventories pinned open educational
+  sources and proves the originally requested course allocation is impossible
+  under the five-cluster source-family cap. AFQC-035 removes tiny markup and
+  mid-token fragments and freezes 2,100 context-bearing windows. The constructor
+  derives gold before any model call, limits DeepSeek/Gemini to question wording
+  and independent verification, and keeps raw responses in an ignored SQLite
+  ledger. Construction attempt 001 is preserved as invalid after its first
+  DeepSeek canary exposed a mutable runtime-fingerprint binding. Build-only
+  binding 002 retains exact model/route gates, requires and records the runtime
+  fingerprint diagnostically, and adds binding-level authorization checks plus
+  sanitized failure details. Attempts 001–003 remain immutable invalid
+  evidence. AFQC-044 then resolves the method-level construction decision in
+  `build_academic_factual_qa_open_development_v2.py`: it writes exactly 500
+  provider-free development cases, separate hidden gold, and a 100-case paired
+  control from deterministic source truth. Its validation checks source-range
+  lineage, boundary-empty lineage, answer leakage, normalized duplicates, and
+  byte stability. It also simulates strict direct OpenAI and Mistral transport
+  contracts with zero network calls.
+  `audit_academic_factual_qa_open_development.py` adds a separate pre-spend
+  fitness check over the written package. It preserves the structural build
+  result while flagging likely answer fragments, raw markup/runtime artifacts,
+  and structured slices whose selected answer does not contain evidence of the
+  claimed modality. These diagnostics are a product-execution gate, not a
+  replacement for semantic review and not permission to mutate historical
+  packages.
+
+  AFQC-046 supersedes that defective development reference layer without
+  changing its historical artifacts.
+  `build_academic_factual_qa_open_source_plan_v2.py` plans 100 non-overlapping
+  complete semantic regions; `build_academic_factual_qa_open_development_v3.py`
+  writes 500 public cases, separate hidden gold, and the fixed 100-case control;
+  and `audit_academic_factual_qa_open_development_v2.py` verifies complete
+  text statements, exact structured-region lineage, uniqueness, leakage, and a
+  seeded 12-case semantic packet. The recorded `npm run
+  write:academic-factual-qa-open-10000-development-v3` command now fails closed
+  because its one-time provider-free build authority was revoked. `npm run
+  verify:academic-factual-qa-open-10000` validates both historical evidence and
+  the corrected package without network access.
+
+  `run_academic_factual_qa_open_wording.py` implements AFQC-047 as a separate
+  public-only wording checkpoint. The author receives case ID, course, slice,
+  and canonical question; the reviewer receives only the canonical and proposed
+  question. The provider execution function cannot open hidden gold. The scorer
+  opens it only after the exclusive SQLite ledger is complete, then applies
+  answer-leak, duplicate, reviewer, and canonical-fallback gates. Run `npm run
+  simulate:academic-factual-qa-open-10000-wording` for the 500-case no-network
+  simulation and `npm run preflight:academic-factual-qa-open-10000-wording` for
+  the fail-closed paid readiness report. Execute and score commands remain
+  blocked until the exact instrument receives separate authorization.
+
+  The response runner accepts only `EvaluationCaseV1`,
+  supports T0/T1/T2/HTTP/control adapters, and persists responses in an
+  exclusive resume-bound SQLite ledger without importing or reading hidden
+  gold. The scorer opens `EvaluationGoldV1` only after durable completion and
+  computes source-range retrieval, atomic-claim, citation, boundary, and
+  source-family bootstrap metrics. Run `npm run
+  verify:academic-factual-qa-open-10000`, `npm run
+  simulate:academic-factual-qa-open-10000`, or the development/final preflight
+  commands. Use `npm run
+  preflight:academic-factual-qa-open-10000-development-v2` to confirm direct
+  provider execution remains blocked. The development scoring and comparison commands open hidden gold
+  only after both response ledgers are complete and evaluate the frozen paired
+  100-case control using a source-family bootstrap. The deterministic package
+  is complete, but the 500-case product run still requires fresh provider
+  metadata, credentials, and separate paid authority; final 10,000-case
+  execution remains closed.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

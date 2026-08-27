@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-deterministic-development-001",
+  "successor_of": "academic-factual-qa-open-10000-v1-construction-attempt-003",
+  "owner_issue": 127,
+  "status": "frozen-build-only-deterministic-construction-authorized",
+  "decision_question": "Can code construct the complete 500-case development input and hidden-gold packages without provider dependence or gold leakage?",
+  "method": {
+    "truth_builder": "deterministic-source-linked-v2",
+    "question_author_family": "deterministic-canonical-development-v2",
+    "truth_verifier": "deterministic-exact-source-verifier-v2",
+    "provider_calls": 0,
+    "provider_output_authoritative": false,
+    "canonical_wording_is_final_naturalness_evidence": false,
+    "future_model_scope": "wording-paraphrase-and-independent-advisory-review-only"
+  },
+  "dataset": {
+    "source_plan_id": "academic-factual-qa-open-10000-v1-sources",
+    "source_plan_content_sha256": "7fec6dec698231453d29a06220f7434833f32ecfd7e77913ab6500aee885453b",
+    "development_cluster_count": 100,
+    "development_case_count": 500,
+    "development_control_cluster_count": 20,
+    "development_control_case_count": 100,
+    "answerable_case_count": 400,
+    "boundary_case_count": 100,
+    "final_case_count_constructed": 0,
+    "private_data_used": false,
+    "raw_source_committed": false
+  },
+  "acceptance": {
+    "exact_case_count": 500,
+    "exact_control_case_count": 100,
+    "normalized_duplicate_count_max": 0,
+    "answerable_source_lineage_rate_min": 1.0,
+    "boundary_empty_lineage_rate_min": 1.0,
+    "canonical_answer_leak_count_max": 0,
+    "provider_call_count_max": 0,
+    "byte_stable_rebuild_required": true,
+    "public_cases_and_hidden_gold_separate": true
+  },
+  "direct_provider_successor": {
+    "binding_id": "academic-factual-qa-open-10000-direct-provider-binding-001",
+    "execution_authorized": false,
+    "required_before_execution": [
+      "professor or researcher provider decision",
+      "fresh first-party model pricing and retention verification",
+      "local credentials",
+      "clean live preflight",
+      "separate paid-run authorization"
+    ]
+  },
+  "authorization": {
+    "deterministic_development_construction_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_product_execution_authorized": false,
+    "final_construction_authorized": false,
+    "final_product_execution_authorized": false,
+    "automatic_promotion": false
+  },
+  "content_sha256": "3a67bbf581c3d6935101ed4267979735994d3f91625c664d0f0a765e695fb607"
+}

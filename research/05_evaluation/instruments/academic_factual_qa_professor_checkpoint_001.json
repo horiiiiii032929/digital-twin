@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-professor-checkpoint-001",
+  "status": "frozen-build-only-five-authorizations-required",
+  "owner_issue": 127,
+  "decision_memory_ids": ["AFQC-019"],
+  "decision_question": "Does the actual T0 product meet factual, citation, boundary, and true-visual gates without gold leakage?",
+  "claim_contract": {
+    "main_reference": "deterministic-source-derived + three-LLM panel + Codex-assisted audit + researcher adjudication of unresolved cases",
+    "independent_human_ground_truth": false,
+    "full_personal_researcher_audit": false,
+    "deterministic_source_truth_authoritative": true,
+    "panel_votes_authoritative": false
+  },
+  "main_confirmation": {
+    "instrument_id": "academic-factual-qa-confirmation-002",
+    "case_count": 200,
+    "cluster_count": 100,
+    "calibration_control_count": 40,
+    "calibration_attempt_001_immutable": true,
+    "corrective_calibration_attempt": 2,
+    "codex_calibration_reused_immutable": true,
+    "confirmation_vote_count": 600,
+    "maximum_confirmation_provider_calls": 100,
+    "researcher_packet_case_count_max": 60
+  },
+  "visual_supplement": {
+    "dataset_path": "research/05_evaluation/datasets/academic_factual_qa_visual_supplement_001.json",
+    "content_sha256": "7263ae7d61d43b82d24cddd1073daeb821ad9c70f4dbe40786a1e7bb9beb7916",
+    "cluster_count": 30,
+    "case_count": 60,
+    "modality_counts": {"table": 10, "diagram": 10, "equation": 10},
+    "paired_answerable_boundary": true,
+    "raw_assets_committed": false,
+    "private_data_used": false
+  },
+  "visual_provider_binding": {
+    "path": "research/05_evaluation/instruments/academic_factual_qa_visual_provider_binding_001.json",
+    "content_sha256": "1e911a562fe25b6158f8679eded9fd308120d2879f1c95599f7952424696f200",
+    "provider_model": "google/gemini-3.7-flash",
+    "provider": "Google via exact OpenRouter routing",
+    "question_independent": true,
+    "description_authoritative": false,
+    "citation_target": "original-visual-region"
+  },
+  "product_contract": {
+    "mode": "T0-grounded-assistant",
+    "input_fields": ["course_id", "question"],
+    "gold_fields_available_to_product": [],
+    "course_scoped_full_corpus_retrieval": true,
+    "generator_model": "deepseek-v4-flash",
+    "generator_profile": "selected-experimental-profile",
+    "strict_grounded_prompt": true,
+    "conditions": [
+      "T0-ANY-HIT-CONFIRMATION-CONTROL",
+      "T0-STRUCTURED-COVERAGE-CONFIRMATION-ABLATION",
+      "T0-TWO-BOUNDARY-CONFIRMATION-CANDIDATE"
+    ],
+    "shared_ablation_candidate_draft": true,
+    "gold_opened_only_after_response_persistence": true,
+    "maximum_provider_calls": 520,
+    "retries": 0,
+    "emergency_hard_stop_usd": 10.0
+  },
+  "product_provider_binding": {
+    "path": "research/05_evaluation/instruments/academic_factual_qa_t0_provider_binding_001.json",
+    "content_sha256": "b5d5b978fa6d55a0cb63505ed2de6e8e49e3645e1bf8a54d64d887a833d36e0b",
+    "provider_model": "deepseek-v4-flash",
+    "provider": "DeepSeek official API",
+    "freshness_window_hours": 24
+  },
+  "execution_checkpoints": [
+    {"order": 1, "checkpoint_id": "corrective-reviewer-calibration-002", "authorized": false, "paid": true},
+    {"order": 2, "checkpoint_id": "blinded-200-case-panel-001", "authorized": false, "paid": true},
+    {"order": 3, "checkpoint_id": "gemini-visual-description-qualification-001", "authorized": false, "paid": true},
+    {"order": 4, "checkpoint_id": "true-visual-30-cluster-pilot-001", "authorized": false, "paid": true},
+    {"order": 5, "checkpoint_id": "live-t0-product-confirmation-001", "authorized": false, "paid": true}
+  ],
+  "calibration_gates": {
+    "each_reviewer_action_accuracy_min": 0.9,
+    "each_reviewer_mutation_sensitivity_min": 0.9,
+    "each_reviewer_specificity_min": 0.9,
+    "each_reviewer_citation_defect_sensitivity_min": 0.9
+  },
+  "panel_gates": {
+    "unanimous_semantic_agreement_min": 0.8,
+    "krippendorff_alpha_min": 0.67,
+    "disagreement_case_count_max": 40,
+    "complete_accounting_required": true,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0
+  },
+  "gemini_qualification_gates": {
+    "complete_structured_response_rate_min": 1.0,
+    "visual_fact_recall_min": 0.9,
+    "unsupported_visual_fact_count_max": 0,
+    "modality_coverage_required": ["table", "diagram", "equation"],
+    "original_region_lineage_rate_min": 1.0
+  },
+  "visual_pilot_gates": {
+    "complete_visual_evidence_at_3_min_count": 27,
+    "complete_visual_evidence_at_3_denominator": 30,
+    "atomic_evidence_recall_at_5_min_count": 29,
+    "atomic_evidence_recall_at_5_denominator": 30,
+    "boundary_release_count_max": 0,
+    "original_region_citation_count_min": 30,
+    "unsupported_accepted_description_count_max": 0,
+    "boundary_release_minimum_matching_terms": 2,
+    "text_control_regression_allowed": false,
+    "complete_accounting_required": true
+  },
+  "product_gates": {
+    "severe_unsupported_release_count_max": 0,
+    "source_version_valid_citation_rate_min": 1.0,
+    "supported_answer_retention_min": 0.95,
+    "action_accuracy_overall_min": 0.95,
+    "action_accuracy_answerable_min": 0.9,
+    "action_accuracy_boundary_min": 0.9,
+    "atomic_claim_precision_min": 0.98,
+    "atomic_claim_recall_min": 0.95,
+    "citation_precision_min": 0.98,
+    "citation_recall_min": 0.95,
+    "complete_evidence_rate_min": 0.95,
+    "evidence_recall_at_5_min": 0.95,
+    "all_evidence_at_3_min": 0.9,
+    "exact_normalized_duplicate_count_max": 0,
+    "persistence_mismatch_count_max": 0,
+    "supported_retention_paired_delta_lower_95_min": -0.03
+  },
+  "analysis": {
+    "bootstrap_unit": "source-and-question-family-cluster",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260825,
+    "paired_noninferiority_comparison": "T0-TWO-BOUNDARY-CONFIRMATION-CANDIDATE minus T0-STRUCTURED-COVERAGE-CONFIRMATION-ABLATION",
+    "paired_noninferiority_metric": "supported-answer-retention",
+    "interval": "seeded-percentile-95"
+  },
+  "progression": {
+    "valid_quality_failure_is_publishable": true,
+    "operationally_invalid_run_has_academic_interpretation": false,
+    "visual_pass_selects_profile": false,
+    "visual_pass_decision": "Go Deeper",
+    "main_t0_pass_experimental_selection": "structured-evidence-coverage-plus-atomic-claim-validation",
+    "rollback": "fail-closed-any-hit-control",
+    "automatic_deployment": false,
+    "automatic_t1_promotion": false,
+    "automatic_next_checkpoint": false
+  },
+  "execution_safety": {
+    "global_freeze_active": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "private_source_execution_authorized": false,
+    "academia_vault_opening_authorized": false,
+    "raw_provider_output_committed": false,
+    "automatic_promotion": false
+  }
+}
