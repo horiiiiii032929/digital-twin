@@ -230,6 +230,9 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
+        "proactive-outreach-a1-shadow-confirmation-002": (
+            "method_evaluation_execution",
+        ),
     }
 )
 

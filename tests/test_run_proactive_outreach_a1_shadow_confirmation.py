@@ -14,12 +14,12 @@ from scripts.run_proactive_outreach_a1_shadow_confirmation import (
 )
 
 
-def test_confirmation_instrument_is_finite_stratified_and_unauthorized():
+def test_confirmation_instrument_is_finite_stratified_and_authorized():
     instrument = load_instrument()
     cases = expand_cases(instrument)
 
-    assert instrument["status"] == "reviewed-pending-network-free-authorization"
-    assert instrument["execution"]["network_free_execution_authorized"] is False
+    assert instrument["status"] == "frozen-pending-network-free-execution"
+    assert instrument["execution"]["network_free_execution_authorized"] is True
     assert len(instrument["clusters"]) == 12
     assert len(cases) == 60
     assert len({case["id"] for case in cases}) == 60
@@ -33,18 +33,15 @@ def test_confirmation_instrument_is_finite_stratified_and_unauthorized():
     }
 
 
-def test_confirmation_preflight_fails_closed_before_authorization(tmp_path):
+def test_confirmation_preflight_is_ready_after_bounded_authorization(tmp_path):
     preflight = validate_preflight(
         load_instrument(),
         output=tmp_path / "unused.json",
         require_clean=False,
     )
 
-    assert preflight["status"] == "blocked-not-authorized"
-    assert preflight["blockers"] == [
-        "instrument-not-frozen-pending",
-        "network-free-execution-not-authorized",
-    ]
+    assert preflight["status"] == "ready"
+    assert preflight["blockers"] == []
     assert preflight["provider_calls"] == 0
     assert preflight["external_deliveries"] == 0
     assert preflight["private_data_reads"] == 0

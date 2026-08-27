@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "proactive-outreach-a1-shadow-confirmation-002",
-  "status": "reviewed-pending-network-free-authorization",
+  "status": "frozen-pending-network-free-execution",
   "decision_question": "Does the publication-integrated A1 shadow loop detect newly supportable prior no-evidence turns across multiple computing topics while preserving no-action, publication, consent, lineage, idempotency, and zero-delivery boundaries?",
   "implementation": {
     "candidate": "deterministic-evidence-recovery-a1-v1",
@@ -15,7 +15,7 @@
     "evidence_limit": 3
   },
   "execution": {
-    "network_free_execution_authorized": false,
+    "network_free_execution_authorized": true,
     "provider_calls_authorized": false,
     "paid_execution_authorized": false,
     "private_data_authorized": false,

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "f4113413a9811b65574fe4673362e9bd25a0e5f5eff5c6a80f7e1c8815db5b5f",
+  "record_sha256": "02829ef46127a381f7c2e59fd9fc24b838aef2d48ea54ccd9729f39d38ada6ca",
   "records": [
     {
       "audit": {
@@ -2600,7 +2600,7 @@
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "Prospective review confirms 12 topic clusters, 60 deterministic cases, 24 proposal and 36 no-action labels, publication integration checks, exact zero-side-effect gates, synthetic limitations, and no execution authority.",
+        "evidence": "Prospective review confirms 12 topic clusters, 60 deterministic cases, 24 proposal and 36 no-action labels, publication integration checks, exact zero-side-effect gates, synthetic limitations, and one explicit network-free execution authorization with every provider, paid, private-data, delivery, and promotion authority still false.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -2611,7 +2611,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/proactive_outreach_a1_shadow_confirmation_002.json",
       "risk": "high",
-      "sha256": "9550db9b5a6993469e6dba6b1fdc3c3caca52f0695a1fa34a43f8aa395c411a4"
+      "sha256": "07f2faa9180fb70d0d9f3c6d896f9a7100f542c9db3c9b43599efc79e61cbf42"
     },
     {
       "audit": {
@@ -6873,7 +6873,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, protects the new 60-case confirmation runner, keeps confirmation 002 unauthorized, and continues to block provider, paid, private, external-delivery, and real-student operations.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active and grants only confirmation 002 a bounded method-evaluation exception for its explicitly authorized network-free run; provider, paid, private, external-delivery, real-student, and every other frozen operation remain blocked.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -6884,7 +6884,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a5bcbd13152444d9b0ee653f95b4b151bcbd6150ec97ffd66ee2214315aee362"
+      "sha256": "ce38f5662894285bd8cca83de4538d72c8cadca4cc56d741d5d0c4ca75df6cc9"
     },
     {
       "audit": {
@@ -7385,7 +7385,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify both A1 development revocation and confirmation-002 denial, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain the historical oracle authorization plus only the bounded confirmation-002 method-evaluation exception, verify A1 development revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7396,7 +7396,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "b83a7c72b04e9cedbf6f5137557c35d190610b83bfd797178b1acadb81db86e7"
+      "sha256": "996956eb19fbbc880ef34a73000c31f00d2032c84bdf73f9f5126d41d7ef3717"
     },
     {
       "audit": {
@@ -8521,7 +8521,7 @@
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "Focused tests verify source-family and action cardinality, revoked authority, fail-closed preflight, one network-free canary with zero side effects, and duplicate-cluster rejection without opening the complete confirmation.",
+        "evidence": "Focused tests verify source-family and action cardinality, the exact bounded network-free authorization, ready isolated preflight, one network-free canary with zero side effects, and duplicate-cluster rejection without permitting provider, private-data, or delivery authority.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8532,7 +8532,7 @@
       "package_commands": [],
       "path": "tests/test_run_proactive_outreach_a1_shadow_confirmation.py",
       "risk": "medium",
-      "sha256": "be3086e0055d19567a8bc95e5f6fce9798618c5b28d4622693f9e728570e2d12"
+      "sha256": "fba3390a6e4787ac20901a23cec8c30ebed9db3c64db6385e5c46de0f06a5b66"
     },
     {
       "audit": {
