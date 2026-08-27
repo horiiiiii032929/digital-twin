@@ -78,13 +78,16 @@ first bulk DeepSeek author response used `items` instead of the frozen
 accepted development clusters or cases. Authorization is revoked. The result
 does not evaluate dataset or T0 quality, and the final 10,000-case execution
 remains unauthorized.
-Attempt 003 now corrects the exposed harness gap without weakening
+Attempt 003 corrected the exposed harness gap without weakening
 the schema: malformed author content remains rejected and hash-recorded, while
 the cluster uses explicitly labelled deterministic canonical wording before the
-independent verifier. More than 5% fallback clusters fails construction. No
-final execution is authorized. AFQC-042 separately authorizes only attempt-003
-construction and, after a passing construction gate, the 500-case candidate
-plus paired 100-case control development run.
+independent verifier. Its bounded execution is preserved as `invalid-execution`:
+16 calls were attempted, 15 completed, Google AI Studio failed one verifier
+request, and USD 0.04438559 was reported. Four of seven author responses needed
+canonical fallback and three DeepSeek verifier responses violated the schema.
+No dataset package or product run was produced. AFQC-043 revokes authority and
+requires a method-level construction decision rather than attempt 004. The
+final 10,000-case execution remains unauthorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected

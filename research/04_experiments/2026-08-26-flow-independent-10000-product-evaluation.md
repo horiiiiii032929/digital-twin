@@ -78,6 +78,15 @@ received separate AFQC-042 authority for construction and, only after a passing
 construction gate, the 500-case candidate plus paired 100-case control. The
 final split remains sealed and unauthorized.
 
+Attempt 003 is preserved under AFQC-043 as operationally invalid. Google AI
+Studio failed the seventh cluster's verifier request after 15 completed
+responses. Offline reconstruction found two assemblable clusters, four rejected
+clusters, four deterministic author fallbacks among seven attempted authors,
+and three malformed DeepSeek verifier responses. No dataset package was written
+and no product execution began. These incomplete diagnostics are not an
+academic quality estimate; they trigger a method-level construction decision
+instead of another provider-transport retry.
+
 ## Product comparison
 
 The candidate is selected hybrid BM25 plus Qwen3 retrieval, structured evidence

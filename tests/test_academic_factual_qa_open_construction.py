@@ -195,7 +195,7 @@ def test_construction_validate_and_simulation_are_network_free() -> None:
     assert result["provider_calls"] == 0
 
 
-def test_attempt_003_authorization_allows_clean_preflight(
+def test_attempt_003_terminal_result_revokes_preflight(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
@@ -210,8 +210,12 @@ def test_attempt_003_authorization_allows_clean_preflight(
         resume=False,
     )
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert "dataset-construction-authorized-false" in result["blockers"]
+    assert (
+        "provider-binding-dataset-construction-authorized-false"
+        in result["blockers"]
+    )
     assert result["final_product_execution_authorized"] is False
 
 

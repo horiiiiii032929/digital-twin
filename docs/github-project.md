@@ -65,11 +65,13 @@ professor-communication track.
    schema. Attempt 002 is preserved as invalid with three recorded calls, zero
    accepted clusters, and revoked authority. The runner also exposed a gap in
    its preregistered malformed-output fallback; that correction must be built
-   prospectively before any successor authorization. Attempt 003 now
+   prospectively before any successor authorization. Attempt 003
    quarantines malformed author content, labels deterministic canonical
-   fallback wording, retains independent verification, and fails above 5%
-   fallback clusters. AFQC-042 authorizes only its construction and the gated
-   500-candidate/100-control development run. The 10,000-case final run
+   fallback wording, and retains independent verification. Its run is invalid:
+   Google AI Studio failed one verifier call after 15 completed responses, while
+   repeated DeepSeek schema drift produced four author fallbacks and three
+   verifier rejections. AFQC-043 revokes authority and stops another operational
+   retry pending a method-level construction decision. The 10,000-case final run
    remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
