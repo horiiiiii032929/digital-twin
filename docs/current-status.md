@@ -6,20 +6,140 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+The active #127 successor is now
+`academic-factual-qa-open-10000-v1`: a flow-independent 500-case development
+and sealed 10,000-case final evaluation of the actual T0 product. The response
+process receives only a versioned public case, retrieves from the course corpus,
+and persists its normalized response before a separate process may open hidden
+gold. Canonical evidence uses source artifact hashes and character/region
+coordinates rather than runtime chunk IDs, so the same cases can compare T0,
+future T1/T2 graphs, an HTTP deployment, and the any-hit control under separate
+system manifests. The prior 10,000 rows remain engineering-scale history.
+
+The build-only source scan found that the requested course allocation cannot
+satisfy its own five-clusters-per-original-section cap: networking requests
+1,075 development-plus-final clusters but permits at most 495; data structures
+requests 425 but permits at most 400. No dataset was written and no threshold
+was weakened. A pre-spend source audit then found that the first frozen plan
+counted tiny markup/import fragments and mid-token cuts as clusters. No provider
+call was made. AFQC-035 corrects the allocator to require token-aligned windows
+of at least 100 characters and four tokens. The tested feasible allocation is
+396 operating-systems, 450 networking, 350 data-structures, and 904 Python
+clusters including 25
+development clusters per course. It produces exactly 2,100 non-overlapping
+source windows and 10,500 prospective cases with the requested code, equation,
+table, answerable, and boundary strata. AFQC-035 freezes this correction because
+it preserves the academically important source-diversity cap instead of
+inflating the row count through repeated use of a few sections. The deterministic
+source/claim layer is authoritative before model calls. AFQC-044 has now
+produced the provider-free development package: 500 public cases and separate
+hidden gold over 100 source clusters, including 400 answerable and 100 boundary
+cases, plus a fixed 100-case control subset. Every construction, separation,
+lineage, uniqueness, and leakage gate passed with zero provider calls. This is
+build evidence, not a product-quality result. AFQC-045 then added the missing
+fitness-for-use gate before spending: 227/400 answerable cases across 68/100
+clusters triggered conservative fragment, raw-artifact, or structured-modality
+diagnostics. A 12-case Codex-assisted audit confirmed material reference defects.
+The package is retained as deterministic scaffolding but is blocked from product
+execution until a prospective source-plan, extraction, and wording successor
+passes. The same allocation cannot be patched only in the answer parser: just
+16/35 code-labelled development windows and 2/3 table-labelled windows contain
+a complete detected region; equations are 6/6. Future
+models may paraphrase wording and provide advisory review but cannot define or
+mutate gold. The 500-case T0 product run and sealed 10,000-case final run remain
+unauthorized. AFQC-046 now closes the reference-quality correction
+prospectively: a development-only source plan selects complete semantic regions
+before constructing 100 non-overlapping clusters. The rebuilt package retains
+400 answerable and 100 boundary cases plus the fixed 100-case control. All
+224 text targets and 176 structured targets pass exact source and
+original-region lineage checks with zero defects, duplicates, answer leakage,
+provider calls, private-data reads, or final-split access. A 12-case
+Codex-assisted packet found 12/12 usable source truths and 10/12 serviceable
+development questions; two template cues still require wording refinement.
+The corrected reference layer is Keep, while provider-neutral wording is Go
+Deeper. AFQC-047 now binds that wording checkpoint prospectively without
+executing it. The wording author is exact first-party OpenAI
+`gpt-5.4-mini-2026-03-17`; the independent advisory reviewer is exact
+first-party Mistral `mistral-small-2603`. The newer GPT-5.6 Luna moving alias is
+not selected because its official model page exposed no dated immutable
+snapshot at the 2026-08-27 verification. Twenty-five public-only batches cover
+all 500 cases, with 50 logical calls, at most 52 physical attempts, two global
+transport retries, and a USD 3 stop. The execution path can load only public
+case wording; hidden gold opens only in the scorer after the complete durable
+ledger. Network-free validation and the 500-case simulation pass with zero
+calls, while preflight correctly remains `blocked-not-authorized`. No T0
+product-quality claim exists yet.
+
+Historical professor-checkpoint reviewer attempts 001–005 remain immutable
+invalid operational evidence. Reviewer calibration is no longer the blocker
+for #127 and none of those attempts is being retried. Issue
+[#131](https://github.com/horiiiiii032929/digital-twin/issues/131) now owns the
+separate provider-unauthorized true-visual 30-cluster/60-case supplement.
+
+AFQC-029 records the researcher-directed reliability correction. Attempt 005
+keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
+the failed single AI Studio route with a bounded OpenRouter allowlist: Vertex
+global priority/default followed by AI Studio priority/default. The runner
+records the actual provider and service tier for every completed call while
+holding model identity fixed. Its network-free simulation and live preflight
+passed, but AFQC-031 records the live run as invalid after the third batch
+violated a deterministic semantic invariant. Only 8/40 Gemini votes were
+accepted, so no calibration metric is valid. No execution is now authorized.
+This is historical evidence and no longer defines the immediate checkpoint.
+The sealed 200-case panel is not being opened; visual work and private data
+remain unauthorized.
+
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 531 executable or execution-affecting
-files, which are hash-bound and audited,
-with zero pending files and zero open findings. The canonical verification gate
+the current branch now extends it to 606 executable or execution-affecting
+files, all audited with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 70 protected entrypoints.
-The A1 network-free development run completed as **Go Deeper**. Its 60-case
-publication-integrated confirmation subsequently completed as **Refine** after
-59/60 actions and reasons passed but one semantically supported paraphrase was
-missed by the raw-token lexical gate. Both one-time authorizations are revoked.
-No provider, paid, private-data, external-delivery, or real-student operation is
-authorized.
+active for all general evaluation actions across 85 protected entrypoints. It protects the corrected deterministic
+reference-package builders; no
+provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
+construction attempt is preserved as operationally invalid: its first DeepSeek
+canary returned the requested model but a different runtime fingerprint, so the
+executor stopped before Gemini or any bulk call. Zero development clusters were
+processed; provider usage and cost are unavailable rather than claimed as zero.
+The sealed final 10,000-case stage and held-out scoring remain unauthorized.
+Provider binding 002 kept exact model and route checks while recording the
+DeepSeek runtime fingerprint diagnostically. Both canaries passed, but the
+first bulk DeepSeek author response used `items` instead of the frozen
+`questions` field. Attempt 002 is therefore preserved as `invalid-execution`:
+3 completed calls, 2,206 input and 477 output tokens, USD 0.00213626, and zero
+accepted development clusters or cases. Authorization is revoked. The result
+does not evaluate dataset or T0 quality, and the final 10,000-case execution
+remains unauthorized.
+Attempt 003 corrected the exposed harness gap without weakening
+the schema: malformed author content remains rejected and hash-recorded, while
+the cluster uses explicitly labelled deterministic canonical wording before the
+independent verifier. Its bounded execution is preserved as `invalid-execution`:
+16 calls were attempted, 15 completed, Google AI Studio failed one verifier
+request, and USD 0.04438559 was reported. Four of seven author responses needed
+canonical fallback and three DeepSeek verifier responses violated the schema.
+No dataset package or product run was produced. AFQC-043 revokes authority and
+requires a method-level construction decision rather than attempt 004. The
+final 10,000-case execution remains unauthorized.
+AFQC-044 resolves that method decision prospectively: deterministic v2
+construction produced all 500 development cases, hidden gold, and the paired
+100-case control without a provider call. The first validation caught 15
+question cues that repeated their complete canonical answer; the fail-closed
+cue logic was corrected before any output was written. The final package has
+zero such leaks and zero normalized duplicates. Direct first-party OpenAI
+`gpt-5.4-mini-2026-03-17` and Mistral `mistral-small-2603` contracts are
+network-free tested with strict schema, exact identity, bounded transport-only
+retry, and durable accounting. Credentials, fresh retention/pricing checks,
+and separate paid authority are still required before product execution, but
+they are no longer the first blocker: AFQC-046 keeps the corrected reference
+layer, and the next bounded work is wording-only paraphrase/review before any
+paid T0 run.
+The proactive-outreach branch adds the A1 network-free development and
+publication-integrated confirmation. Development completed as **Go Deeper**;
+confirmation completed as **Refine** after 59/60 actions and reasons passed but
+one supported paraphrase was missed by the lexical support gate. Both one-time
+authorizations are revoked. No provider, paid, private-data, external-delivery,
+or real-student operation is authorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -124,16 +244,152 @@ and answered 10,000 questions, and the row count is not an academic
 independent-sample claim. It remains engineering evidence for deterministic
 dataset assembly, provider workflow, mutation checks, latency, and cost.
 
-Issue #127 now has a build-only leakage-free successor harness. Its 160
-synthetic-public development cases cover 32 source units, eight courses, and 80
-explicit clusters. Both unselectable controls execute through the normal T0
-student service with only question and course context crossing the product
-boundary. The fail-closed control produced zero unsupported releases but zero
-supported-answer retention; the any-hit control retained every supported answer
-but released 60% of boundary cases and missed complete claims/citations on all
-16 multi-source cases despite complete retrieval. This is harness evidence, not
-independent product-quality evidence. Provider calls, private data, method
-selection, and evaluation execution remain closed.
+Issue #127 now has a clean paired development result for the leakage-free
+successor. On 160 synthetic-public cases across 80 clusters, the any-hit control
+released 34/80 boundary requests as answers and achieved only 50% citation
+precision. The structured evidence-selection ablation and two-boundary candidate
+both passed 160/160 development cases, retained 80/80 supported answers, released
+zero boundary answers, and achieved complete expected claims and citations.
+All 160 ablation/candidate draft hashes matched, so the post-generation boundary
+was not confounded by different drafts. The run used clean revision `74dcf8c`,
+zero provider calls, zero cost, and no private or held-out data. The decision is
+**Go Deeper**, not Keep: questions and source aliases came from the same
+unblinded synthetic design, labels were not independently validated, and clean
+drafts did not measure naturally occurring claim errors. Authorization is
+revoked. The next academic checkpoint requires fresh independently validated
+source/question clusters with frozen gates; no product promotion follows from
+the 100% development score.
+
+Confirmation 001 preregistered 200 cases in 100 independent source/question-
+family clusters and an external two-human review workflow. It was never opened
+or executed and is preserved unchanged. Because external review of all 200
+cases is not feasible within the schedule, confirmation 002 now supersedes only
+its review method. The sampling, product conditions, metrics, gates, and
+cluster-aware analysis remain fixed. Deterministic source-derived fields remain
+authoritative; an isolated blinded Codex task, Mistral Small 4, and DeepSeek V4
+Pro reviewers cover all 200 cases after passing 40 planted controls. Automatic semantic
+acceptance requires three-model unanimity, every disagreement goes to the
+researcher, and a seeded balanced 20-case unanimous sample is also audited. If
+disagreements exceed 40, the panel fails, bounding researcher review at 60
+cases. This can produce only LLM-panel-reviewed, researcher-audited silver
+evidence, not independent human ground truth.
+
+The public-source build checkpoint is now complete. Four exact educational
+repository revisions contribute 160 non-overlapping section sources: 120 for
+100 confirmation clusters and 40 reserved for disjoint calibration controls.
+The deterministic set contains 200 cases—100 answerable and 100 boundary—with
+the frozen text, code, table, diagram, equation, ambiguity, scope, integrity,
+permission, and unsupported-premise allocations. Exact normalized duplicates
+and selected source-range overlap are both zero. File, section, dependent-asset,
+license, dataset, and packet hashes are bound; complete public repositories
+remain ignored under `data/external/`, and no Academia Vault or private data was
+read. The blinded 240-item reviewer packet and atomic resume/accounting runner
+pass clean, calibration-failure, disagreement-overflow, malformed-output, and
+resume-drift simulations. These are build checks, not reviewer or product
+results. The reviewer-binding successor now freezes a fresh isolated
+`gpt-5.6-sol` Codex task, exact Mistral Small 4 ZDR/no-fallback routing, and
+direct DeepSeek V4 Pro using current peak prices. Its two-phase executor
+requires all three reviewers to pass calibration before confirmation, allows
+120 provider calls with zero retries, checkpoints atomically, and enforces a
+USD 3 emergency stop. The full network-free 720-judgment simulation passes and
+the metadata-only live check reports no drift. AFQC-017 authorized one bounded
+40-control calibration. The isolated Codex reviewer passed all four gates at
+1.00, but the first Mistral batch stopped at the strict transport/parser
+boundary before any provider vote was accepted; DeepSeek and confirmation were
+never opened. Attempt 001 is therefore **invalid execution**, not a quality
+failure. Its authority is revoked under AFQC-018. The ledger's USD 0 is
+incomplete accounting rather than verified zero spend because the old failure
+path retained neither provider usage nor exact error detail. After hardening
+that path, AFQC-020 authorized corrective attempt 002 at clean revision
+`d79bda5`. Its first Mistral batch again failed before any vote was accepted,
+this time with a durable sanitized HTTP 400 record, 1.437-second latency, and
+explicit unavailable usage/cost accounting. There was one provider call, zero
+retries, zero DeepSeek calls, and no confirmation access. Attempt 002 is also
+**invalid execution**, not a quality failure. AFQC-021 revokes all authority and
+requires a reviewer-method redesign rather than another Mistral retry.
+Confirmation, product binding, researcher audit, private data, promotion, and
+the final tranche remain unauthorized.
+
+AFQC-022 records the prospective successor research decision. OpenRouter
+Gemini 3.7 Flash revision `20260813` through Google AI Studio is the build-only
+default because it is a separate model family, currently reports 99.94% uptime,
+1.71-second median latency, and 193 tokens/second, supports structured output,
+and can also serve the later visual qualification. Google Vertex is cheaper but
+currently slower and less available. The transport must use only the documented
+Gemini JSON-Schema subset and move uniqueness plus full semantic validation
+into deterministic local code. Qwen remains rejected by qualification 007;
+Gemini 3.6 and Kimi remain fallbacks. Current conservative reservations are
+USD 0.406 for calibration and USD 2.44 for the complete panel. This decision
+authorizes no provider call. Promotional pricing and endpoint metadata must be
+refreshed within 24 hours of any separately authorized execution.
+
+AFQC-023 records the immutable build for calibration attempt 003. The existing
+40 controls, 200-case sealed packet, deterministic truth, and 40/40 Codex votes
+are unchanged. Only the failed Mistral reviewer slot is replaced by exact
+Gemini 3.7 Flash revision `20260813` through the standard Google AI Studio
+endpoint; direct DeepSeek V4 Pro remains the third reviewer. The Gemini request
+uses the documented schema subset, with completeness, identity, uniqueness,
+visible-evidence lineage, and semantic consistency enforced locally. The
+20-call network-free simulation runs one Gemini and one DeepSeek canary first,
+passes all calibration gates, and stops without opening confirmation. A fresh
+metadata-only preflight found both credentials and zero model, endpoint,
+pricing, routing, parameter, or retention drift; only the deliberate execution
+locks remain. Google AI Studio currently retains these public evaluation inputs
+for up to 55 days and does not train on them. No paid call has occurred at this
+build checkpoint.
+
+AFQC-024 is the one-time execution checkpoint. It authorizes only the 40-control
+attempt-003 calibration under the existing 20-call, zero-retry, USD 0.406426
+reservation, and USD 3 emergency stop. The 200-case panel, visual work, live T0
+product execution, private data, and 600/10,000-case stages remain locked. This
+authority must be revoked after a pass, quality failure, or invalid execution.
+
+AFQC-025 records attempt 003 as **invalid execution** and revokes AFQC-024.
+Gemini completed its four-control canary through the exact Google AI Studio
+route, reporting 2,656 input tokens, 1,551 output tokens, 5.193 seconds, and USD
+0.00780825. The direct DeepSeek V4 Pro canary then returned empty content. The
+runner stopped after two calls with zero retries and zero bulk calls; all 200
+confirmation cases remained sealed. DeepSeek usage and cost are unavailable,
+so the Gemini amount is known partial cost rather than complete accounting.
+This result supports no reviewer, factual-QA, product, or release-quality claim.
+No evaluation execution is currently authorized.
+
+AFQC-026 records the finite reviewer-method successor. Attempt 004 contains
+only two reviewer families: immutable calibrated Codex `gpt-5.6-sol` votes and
+exact Gemini 3.7 Flash through Google AI Studio. DeepSeek has no reviewer,
+credential, pricing, route, call, or tie-break role in this attempt. Gemini must
+review all 40 controls in ten fresh four-case batches; no attempt-003 vote is
+imported. Only timeout, connection failure, HTTP 429/5xx, or empty content may
+retry, once per batch and at most twice globally, with every failed call kept
+in the ledger. The network-free pass and failure simulations succeed, and the
+metadata-only live check reports zero drift and zero inference calls. The
+maximum reservation is USD 0.211968 under the existing USD 3 stop. AFQC-027
+authorized exactly one paid calibration. AFQC-028 records that run as invalid:
+the first Gemini batch and its one permitted retry both returned HTTP 429.
+There were two attempted calls, zero provider completions, zero accepted Gemini
+votes, zero later batches, and no confirmation access. Provider usage and cost
+were unavailable, so the ledger's USD 0 is not proof of zero charge. Authority
+is revoked, attempt 004 cannot be rerun, and the reviewer search is stopped.
+
+AFQC-029 records the fixed-model resilient transport successor. Attempt 005
+keeps the immutable 40/40 Codex votes and exact Gemini 3.7 Flash revision, but
+uses a bounded OpenRouter allowlist across Google Vertex global priority/default
+and Google AI Studio priority/default routes. AFQC-030 now freezes and authorizes
+only this 40-control calibration for at most ten primary calls plus two
+transport-only retries, a USD 0.3815424 reservation, and the existing USD 3
+emergency stop. The sealed 200 cases, visual and live-product evaluations,
+private data, and 600/10,000-case academic stages remain unauthorized.
+
+AFQC-031 records attempt 005 as **invalid execution** and revokes AFQC-030.
+OpenRouter successfully routed three calls to Google Vertex priority with exact
+model identity and complete accounting. The first two batches produced 8
+accepted Gemini votes. The third response completed at the provider but failed
+the frozen deterministic semantic validator because one boundary vote was
+internally inconsistent; malformed semantic output is deliberately
+non-retryable. The run stopped after 3 calls, 10,393 input tokens, 5,220 output
+tokens, and USD 0.024632775 reported cost. No confirmation case opened. This
+result supports no Gemini calibration or product-quality claim, and no
+evaluation execution is currently authorized.
 
 The current metadata checkpoint also found that older prospective DeepSeek
 prices in the repository were stale. Pilot 003 binds the current documented
@@ -155,8 +411,8 @@ The runtime-boundary checkpoint is complete. Persistence updates are
 non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
-converge on one response with authoritative citation metadata. The current local
-check passes 883 Python tests and 47 frontend tests, frontend lint, and the
+converge on one response with authoritative citation metadata. The merged local
+gate passes 1,054 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -176,12 +432,13 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 883-test Python suite.
+connections. These corrections remain covered by the 1,054-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 531-file audit. Evaluation
-execution remains frozen, with 70/70 protected entrypoints registered. The
-completed A1 runs have been removed from the bounded allowlist; no prospective
-proactive-outreach execution is authorized.
+artifacts are also fully dispositioned in the current 606-file audit.
+Evaluation execution remains frozen, with 85/85 protected entrypoints registered
+and no prospective evaluation in the bounded allowlist. The completed A1 runs
+have been removed from the bounded allowlist; no proactive-outreach execution is
+authorized.
 
 ## Current outcome
 
@@ -534,7 +791,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; academic product evidence pending | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting | Run a leakage-free end-to-end evaluation where the Digital Twin sees only each question and the indexed corpus; independently validate a stratified gold subset and report cluster-aware uncertainty |
+| Large factual QA | Engineering pipeline Keep; corrected development reference layer Keep; wording build ready / unauthorized | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-046 rebuilds the leakage-free 500-case development package from complete semantic regions: 224/224 text and 176/176 structured targets pass. AFQC-047 binds exact first-party OpenAI wording and Mistral review over public-only inputs; its full network-free simulation passes, but no provider call has run | Separately authorize the bounded wording checkpoint, score after the durable ledger, then authorize the 500-case candidate plus 100-case control product run only if wording passes. The sealed 10,000 cases remain a later stop point |
 
 ## Release readiness and critical path
 
@@ -548,11 +805,11 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Academic end-to-end factual QA](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Preserve the passing leakage-free T0 harness; integrate the #105 candidate, add independently validated source-linked data, then separately freeze development execution |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the provisional atomic-claim candidate and evaluate it inside that leakage-free T0 path before any product binding |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / wording ready, unauthorized | AFQC-047 is the finite next checkpoint: separately authorize the public-only 500-case wording/review pass, then proceed to the 500-case candidate plus 100-case control T0 run only after a valid wording result |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
-| 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
+| 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
+| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 8 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
 | 9 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
 | 10 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |

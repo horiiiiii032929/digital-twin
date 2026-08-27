@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 531
+    "audited": 606
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 118,
-    "active_runtime": 100,
+    "active_or_unclassified_tooling": 139,
+    "active_runtime": 110,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 112,
+    "evaluation_configuration": 136,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 108
+    "verification": 128
   },
-  "file_count": 531,
+  "file_count": 606,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "adb7bbcffb5e573d1df0771af489edb830d4006bede62886d640ce3bc5eb1ad2",
+  "record_sha256": "dc97527bef9ce3e9549827a5ab3a53b2fe508556468e5835ab1460e8e4ac2691",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "A1 development and confirmation commands are explicit; normal checks validate contracts only, the 60-case run remains unauthorized, and focused plus full repository gates cover the publication hook.",
+        "evidence": "A1 development and confirmation commands are explicit; normal checks validate contracts only, the 60-case run remains unauthorized, and focused plus full repository gates cover the publication hook. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,14 +1299,14 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "4ee2a3f4a6ac3b51b40fbbf06f2b813ac1207d6064f1245e7bc289e909bf403e"
+      "sha256": "3ca75566e48066398b752a35d4ee75f2ec712fba5613ba5cda4b0076f4e9ad44"
     },
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Current package metadata review, secure optional retrieval upgrades, locked resolution, zero-vulnerability audit, and complete Python suite.",
+        "evidence": "Current package metadata review, secure optional retrieval upgrades, locked resolution, zero-vulnerability audit, and complete Python suite. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1315,7 +1315,7 @@
       "package_commands": [],
       "path": "pyproject.toml",
       "risk": "medium",
-      "sha256": "2d6e8003add2bf981663fdcb254d2a55d858fe6327ac601366bea45110c6590e"
+      "sha256": "21ae48417290ed17634b39fc910c60b1ce1ff04a6c1e50ffcc0a30fb836e3e34"
     },
     {
       "audit": {
@@ -1511,6 +1511,150 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Protocol review verifies the 200-case/100-cluster allocation, human-reference authority, public-source boundary, prospective gates, cluster-aware analysis, and complete execution prohibition.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_001.json",
+      "risk": "high",
+      "sha256": "8ae2a7d185d00dc0a272a7d54dff43bafa076ec73f67122e23e32eebf8713e5a"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Protocol review preserves deterministic truth, three-family calibration, unanimity, and bounded audit contracts while recording invalid attempt 002, revoking authority, and keeping confirmation unopened.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002.json",
+      "risk": "high",
+      "sha256": "7bc88e6ed1f97b6df680b8b7a1e5596f4fc0ab6a40b9cda89d57585bf02e12a9"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual attempt review verifies immutable parent/packet/Codex-vote hashes, calibration-only authority, 20-call and zero-retry limits, complete prospective gates, and explicit prohibition of confirmation, product, visual, private, and scale execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_003.json",
+      "risk": "high",
+      "sha256": "21e5a763f160d7b657e56ca2f401f408c8da4bdd9c1dda8ecbc902b733e785b2"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual result review verifies attempt 004 is immutable invalid operational evidence after two HTTP 429 calls, all authority is revoked, no Gemini or confirmation vote was accepted, and every downstream stage remains closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_004.json",
+      "risk": "high",
+      "sha256": "fd55105d1030cd976d8fb7a3b8ac45eda44935b4aa832cf364d1ed5a19f633b6"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Post-run review preserves the invalid three-call attempt, 8 accepted Gemini votes, one non-retryable semantic boundary inconsistency, complete accounting, revoked authority, and closed confirmation plus downstream stages.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_calibration_attempt_005.json",
+      "risk": "high",
+      "sha256": "a17e9cb9eff7438cd39cfd201828c7a600cecef4e6a3c74e5583e5aabf5239d8"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual binding review preserves the exact Codex, Mistral, and DeepSeek identities, routing, pricing, and bounds from invalid attempt 002 while revoking all execution authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings.json",
+      "risk": "high",
+      "sha256": "cdaa2de8fa7918051a5a1d8a76df7d57d3c35de056d4590c2fd167b7cba75a44"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual binding and live metadata review verify exact Gemini 3.7 Flash revision 20260813 on the standard Google AI Studio endpoint, fallback-disabled routing, public-only 55-day retention disclosure, direct DeepSeek V4 Pro, and the USD 0.406426 reservation.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_002.json",
+      "risk": "high",
+      "sha256": "5cd211cab442f2a34f5bc32979bbe2af52fdc5bc1062ed9cf799490edafe9630"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual binding and result review preserve exactly two reviewers, the exact Gemini route and retention disclosure, no DeepSeek role, the historical retry contract, and complete revocation of calibration and confirmation authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_003.json",
+      "risk": "high",
+      "sha256": "1921ccc2d2fcb631acf70602b8c248a2f6584707e66398b1c6c15f66dd7c3b7a"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Post-run binding review preserves the fixed Gemini model and bounded Vertex/AI Studio route contract while revoking Codex, provider, paid, and confirmation authority after invalid execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_confirmation_002_reviewer_bindings_004.json",
+      "risk": "high",
+      "sha256": "3013e8900d1d3ded6164ef4369ffa111f5cdb2525ff12ae936eca30b0347d67e"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Instrument review confirms development-synthetic scope, explicit cluster sampling, evaluator-only gold, unselectable diagnostic controls, fixed metrics, and mechanical blocks on provider, paid, private, held-out, and method-selection authority.",
         "findings": [],
@@ -1524,6 +1668,246 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_001.json",
       "risk": "high",
       "sha256": "59e25a6693a9bb3a695f0eb5a5c4733081e44235008055c75cca5911dd9a4d06"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual freeze review verifies the attempt-004 exception is revoked and the repository-wide freeze again blocks every evaluation instrument.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_end_to_end_pilot_002.json",
+      "risk": "high",
+      "sha256": "fd865f7c54a7b3f0456a8a116955e51c8e8a1a6ce9e2be20503f464defd8096f"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-044 instrument review verifies exact 100-cluster/500-case development scope, 400 answerable plus 100 boundary composition, deterministic source truth, separate hidden gold, zero provider/final/private execution, and an explicit no-automatic-promotion boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_deterministic_development_001.json",
+      "risk": "high",
+      "sha256": "927ff92c2668832c8039171574746e13096eb6552c46071322cb97e543285e6e"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual instrument review verifies the prospective source-plan and package hashes, exact 100/500/100 cardinalities, complete-region acceptance gates, zero-provider method, revoked one-time construction authority, and closed product/final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_deterministic_development_002.json",
+      "risk": "high",
+      "sha256": "7e08809d8146834304fdc419697b936c28a5513e29ec0aed3d677ea13d79327a"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual direct-provider binding review verifies first-party OpenAI and Mistral endpoints, exact dated or release model identities, official prices and limits checked on 2026-08-27, strict structured-output intent, runtime-only credentials, transport-only bounded retry, public-source boundary, and all provider/paid/development/final authority false.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_direct_provider_binding_001.json",
+      "risk": "high",
+      "sha256": "b96d2349c3716f91e6ddf731376e9cb89f5702ba9532aa860ae1a576831beb1d"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual exact-provider binding review verifies current DeepSeek and Google AI Studio model identities, revision and provider-route expectations, pricing, retention scope, freshness timestamps, authorization defaults, and final-stage closure.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_001.json",
+      "risk": "high",
+      "sha256": "8192cbbf2d5698dfa84ae5d2496ed56678d0206fff2803552810ed0b6c071300"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-040 historical-binding review verifies exact documented DeepSeek and Gemini slugs, Google AI Studio default-tier routing with fallback disabled, complete attempt-002 identity/accounting evidence, revoked development authority, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json",
+      "risk": "high",
+      "sha256": "ab9262b2fd2091f7dd99c456cfa267b6794b7fd9eb2a6fd35a285a1c3e446e54"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-043 historical-binding review verifies exact documented DeepSeek and Gemini slugs, Google AI Studio default-tier routing with fallback disabled, complete attempt-003 identity/accounting evidence, revoked development authority, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json",
+      "risk": "high",
+      "sha256": "63daf63920628fd9a63f35e71cdefc17641441f53ff09a401e8e8e5ea23a5b3f"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-043 instrument review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, strict malformed-author quarantine, immutable invalid attempt-003 status, revoked development authority, automatic-promotion prohibition, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
+      "risk": "high",
+      "sha256": "ed9f8d771482853a3b69ad0fef4559d520926c446489297ac413cfdb56113807"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual system-manifest review binds the candidate to provider-identity build revision 9a7f7cc, the selected profile hash, exact hybrid retrieval, documented DeepSeek revision plus required runtime fingerprint recording, local NLI revision, structured evidence gate, public-source boundary, and first-use benchmark status.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_candidate_manifest.json",
+      "risk": "high",
+      "sha256": "9c035d6e045af8cebef1e9ce3406cb230c8922ed0fdc3a87876cd4a52c27b136"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual paired-control manifest review verifies the same code, profile, corpus, retriever, generator, policy, and model bindings as the candidate while changing only the evidence gate to the any-hit rollback control.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_control_manifest.json",
+      "risk": "high",
+      "sha256": "f1247875cbecd028d223ff5f27a7728aa144ee5171ffe5ded5ffff49e45b1a59"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 binding review verifies exact first-party OpenAI and Mistral endpoints, dated/release model identities, official pricing and limits checked on 2026-08-27, OpenAI store=false, public-only inputs, moving-alias rejection rationale, runtime-only credentials, two global transport retries, and all execution authority false.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_binding_001.json",
+      "risk": "high",
+      "sha256": "a6bfd713774d43a88e00ab04841c997450fabb1481e4bf473334f602ef19e048"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 instrument review verifies 500 public cases, 25 batches, 50 logical calls, 52 physical attempts, a USD 3 stop, canary-first ordering, public-only author/reviewer fields, separate post-ledger gold scoring, canonical fallback, prospective quality gates, zero automatic promotion, and fully revoked authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_001.json",
+      "risk": "high",
+      "sha256": "f262a51330a1949898b0e764719461aece12ce6c29e9880211fb04f6ce751a7e"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Prospective protocol review confirms deterministic truth authority, five separate authorization boundaries, fixed panel, visual, product, safety, cost, and progression gates, and no automatic profile selection or promotion.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_professor_checkpoint_001.json",
+      "risk": "high",
+      "sha256": "e207b19be59be3811cc17c21e94d451cd67c6852184c5d6ae2498be6c7f33111"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Binding review confirms the exact DeepSeek V4 Flash model and revision, current official limits and peak pricing, account-linked retention disclosure, 24-hour freshness, no fallback, and separate authorization for the bounded T0 confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_t0_provider_binding_001.json",
+      "risk": "high",
+      "sha256": "91ccbb903eadf0516bcad6b3c3b0fb68a1252aeb182f1969999e032b66f9140a"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Binding review confirms exact Google-only Gemini 3.7 Flash routing, no fallback, question-independent structured output, public-source-only processing, non-authoritative descriptions, original-region citation authority, 24-hour freshness, and bounded call/cost contracts.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_visual_provider_binding_001.json",
+      "risk": "high",
+      "sha256": "5056791f8347e43a132d4077a18ae5fb13f87e42aadfda67aa8130298a373662"
     },
     {
       "audit": {
@@ -3191,6 +3575,25 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual live T0 adapter review verifies course-only full-corpus loading, candidate/control isolation, canonical source-range mapping, selected hybrid retrieval, structured evidence gating, local claim validation, explicit historical DeepSeek or prospective direct OpenAI generator selection from the system manifest, and no gold import.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-development-candidate",
+        "execute:academic-factual-qa-open-10000-development-control"
+      ],
+      "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
+      "risk": "high",
+      "sha256": "689477fb23447d8b0825fa2f5281a7df2166cd63f1a5f15bfe6040cf27fdf422"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Manual review and deterministic tests confirm a byte-stable 160-case synthetic-public development set, exact answerable and boundary strata, explicit 80-cluster structure, source-linked claims, and no private or held-out material.",
         "findings": [],
@@ -3396,6 +3799,42 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual audit-code review verifies the command reads only the committed development public/gold packages and frozen public source plan, rechecks exact source-range lineage and public/gold separation, emits conservative reference-answer and structured-modality risk flags, opens no final split, makes no provider call, and mutates no historical evidence.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/audit_academic_factual_qa_open_development.py",
+      "risk": "high",
+      "sha256": "8d18ce1365411d85334191cf8ccebe3aec5f659f710fa0e9669914642e154967"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual audit review verifies separate public/gold accounting, complete text-statement checks, full structured-region containment, original-region lineage, boundary-empty lineage, a fixed 12-case packet, and explicit no-product/no-naturalness interpretation.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/audit_academic_factual_qa_open_development_v2.py",
+      "risk": "high",
+      "sha256": "5ea6bb270e0a3fb40a4f59a5218fccb6d84f41e107acd136c7e82ea136da13cf"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -3536,6 +3975,122 @@
       "path": "scripts/bootstrap_admin.py",
       "risk": "high",
       "sha256": "f5c4d5232466648ae65c374c6448141b5986fe6fce9d84dc0955dffef357fae9"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual implementation review and focused tests verify deterministic commit-pinned public-source parsing, non-overlapping exact evidence spans, modality checks, stable allocation, duplicate rejection, and freeze-guarded writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation-v2-data"
+      ],
+      "path": "scripts/build_academic_factual_qa_confirmation_v2.py",
+      "risk": "high",
+      "sha256": "c85bbc8daad72039428af51eade1ddc6a39d50274f6af28b93b757d04c406120"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual corrected source-window allocator review verifies token-aligned context-bearing ranges, exact pinned-source lineage, feasible course quotas, structured modality matching, five-per-section reuse, non-overlap, exclusive local writes, and bounded operation authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000",
+        "write:academic-factual-qa-open-10000-source-plan"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_10000.py",
+      "risk": "high",
+      "sha256": "4451fbbc63c49bdd17ab3c0f52eca22e0126e924d6ffa0dea5dd02757a82f225"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual builder review verifies it loads only the frozen 100 development clusters, assembles deterministic v2 public and hidden-gold packages, rejects answer leakage and normalized duplicates, creates an exact 20-cluster control, uses exclusive writes, performs no provider calls, closes final construction, and emits a fail-closed paid preflight.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-open-10000-development-v2",
+        "simulate:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000",
+        "write:academic-factual-qa-open-10000-development-v2"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_development_v2.py",
+      "risk": "high",
+      "sha256": "d24a5cacbb247b9ef0e1f7a67f809684d2fffd42caae2904456b3e2696dff4a4"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual corrected-package review verifies deterministic 500-case assembly, exact 400/100 actions, separate hidden gold, fixed 20-cluster control, token-sequence leakage rejection, deterministic duplicate disambiguation, exclusive outputs, zero provider calls, and zero final access.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000",
+        "write:academic-factual-qa-open-10000-development-v3"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_development_v3.py",
+      "risk": "high",
+      "sha256": "9db49c3b02c27f5fb680d5156adfb53058c0028e447b6bd7e8a358284cb5a453"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual source-planner review verifies complete statements and detected code/equation/table regions precede cluster construction, exact course and modality allocation, non-overlap, stable source hashes, development-only scope, deterministic rebuilds, and fail-closed exclusive writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_source_plan_v2.py",
+      "risk": "high",
+      "sha256": "ee93bad386183476af927558fe01d30a67898583e622167af39e9bdab334ca76"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Builder review and reproducibility tests verify 30 balanced public visual assets, 60 paired answer/boundary cases, source/render/license/region hashes, parent-question disjointness, deterministic bytes, and a freeze-guarded write path.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:academic-factual-qa-visual-supplement",
+        "verify:academic-factual-qa-professor-checkpoint"
+      ],
+      "path": "scripts/build_academic_factual_qa_visual_supplement.py",
+      "risk": "high",
+      "sha256": "e31b99b9b500edf89cade958481e8011e794359ebbcdb5f4928eba2d2a5ed821"
     },
     {
       "audit": {
@@ -3787,6 +4342,27 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-041 construction-runner review verifies deterministic truth precedes provider calls, malformed author output is hash-recorded and replaced only by labelled canonical wording, fallback prevalence above 5% fails, independent verification cannot mutate truth, verifier failures are retained, terminal harness defects are explicit, public/gold packages remain separate, ledgers are exclusive and resume-bound, and final construction remains unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-construction",
+        "preflight:academic-factual-qa-open-10000-construction",
+        "simulate:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/construct_academic_factual_qa_open_10000.py",
+      "risk": "high",
+      "sha256": "131f61717d43e6fe166032828c3a249a8e4ff29d570e31f03bf84966120b5bd8"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -3904,6 +4480,39 @@
       "path": "scripts/evaluate_retrieval.py",
       "risk": "high",
       "sha256": "77e98d1aca193f5720f3a89d836931c8c5e38baecb515d48b7076fd9d13ddc97"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual execution-path review and focused tests preserve attempts 001-004 while adding attempt-005 bounded OpenRouter failover across exact Google Vertex and AI Studio routes, seeded request compatibility, per-call route accounting, stable model identity, exact cost guards, and fail-closed authority without opening confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-confirmation-v2-review-attempt-003",
+        "execute:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "execute:academic-factual-qa-confirmation-v2-review-attempt-005",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-003",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-attempt-005",
+        "preflight-live:academic-factual-qa-confirmation-v2-review-execution",
+        "prepare:academic-factual-qa-confirmation-v2-codex-workspace",
+        "simulate:academic-factual-qa-confirmation-v2-review-attempt-003",
+        "simulate:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "simulate:academic-factual-qa-confirmation-v2-review-attempt-005",
+        "simulate:academic-factual-qa-confirmation-v2-review-execution",
+        "verify:academic-factual-qa-confirmation-v2-review-attempt-003",
+        "verify:academic-factual-qa-confirmation-v2-review-attempt-004",
+        "verify:academic-factual-qa-confirmation-v2-review-attempt-005",
+        "verify:academic-factual-qa-confirmation-v2-review-execution"
+      ],
+      "path": "scripts/execute_academic_factual_qa_panel_review_v2.py",
+      "risk": "high",
+      "sha256": "8bbf2cd2f23f83e8c4e17f88aa75ed9fd7b4923124817edf0d9604b2ff540aa5"
     },
     {
       "audit": {
@@ -4070,6 +4679,25 @@
       "path": "scripts/manage_runtime_data.py",
       "risk": "high",
       "sha256": "9d972ee8efc0357e3f52acc2def3543b3f05dc395227255033028b41ef1980ce"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual packet-boundary review and focused tests verify sealed deterministic ordering, exact 40-control and 200-confirmation composition, omitted gold metadata, visible evidence, and freeze-guarded writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:academic-factual-qa-confirmation-v2-review-packet",
+        "verify:academic-factual-qa-confirmation-v2-review-packet"
+      ],
+      "path": "scripts/prepare_academic_factual_qa_panel_review_v2.py",
+      "risk": "high",
+      "sha256": "5e89a3e034f3638e6128a2686a554c8c5590cb0354c3a5c3590cd3e09f5e2fc5"
     },
     {
       "audit": {
@@ -4276,13 +4904,147 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:academic-factual-qa-e2e-pilot",
+        "execute:academic-factual-qa-e2e-pilot-v2",
         "preflight:academic-factual-qa-e2e-pilot",
+        "preflight:academic-factual-qa-e2e-pilot-v2",
         "simulate:academic-factual-qa-e2e-pilot",
-        "verify:academic-factual-qa-e2e-pilot"
+        "verify:academic-factual-qa-e2e-pilot",
+        "verify:academic-factual-qa-e2e-pilot-v2"
       ],
       "path": "scripts/run_academic_factual_qa_end_to_end_pilot.py",
       "risk": "high",
       "sha256": "ad9e611065c729bb63eb46d79d44ade92de7d0636a4b325ba1a3dc6c327ad5af"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual freeze-registry review confirms attempt-001 authorization is removed and only the unchanged historical oracle pilot remains bounded while the global freeze stays active.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-e2e-pilot-v2",
+        "preflight:academic-factual-qa-e2e-pilot-v2",
+        "verify:academic-factual-qa-e2e-pilot-v2"
+      ],
+      "path": "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py",
+      "risk": "high",
+      "sha256": "4a81498a824b5712e6c283b5957e64d9c0306a914a9bee1a1ebc1e54a5d5f937"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual product-input firewall, attempt-003 adapter-factory context, provider metadata freshness, exclusive response/provider/state paths, resume, failure-recording, credential, freeze, and authority review passed without loading hidden gold.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-development-candidate",
+        "execute:academic-factual-qa-open-10000-development-control",
+        "preflight:academic-factual-qa-open-10000-development",
+        "preflight:academic-factual-qa-open-10000-final",
+        "simulate:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_10000.py",
+      "risk": "high",
+      "sha256": "09127c296811b124a7b219fd67b9db58ec20a4a2720ee7babed1246570e851e8"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual AFQC-047 runner review verifies strict first-party schemas, exact ordered IDs, public-only provider execution, canary-first batching, exclusive resume-bound ledger, bounded global retries, complete call/token/latency/cost accounting, terminal failure handling, post-completion hidden-gold scoring, candidate leak/duplicate detection, canonical fallback, and fail-closed freeze/preflight behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-wording",
+        "preflight:academic-factual-qa-open-10000-wording",
+        "score:academic-factual-qa-open-10000-wording",
+        "simulate:academic-factual-qa-open-10000-wording",
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_wording.py",
+      "risk": "high",
+      "sha256": "d0e85dc8424d8c02f4edc0c5ec32034118d5927ae600ee3d499d7d3e841f69e2"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual runner review and network-free tests verify a versioned reviewer sequence supports both two- and three-reviewer calibration, agreement, alpha, bounded audit, atomic accounting, and historical behavior without weakening deterministic truth.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation-v2-review-runner",
+        "simulate:academic-factual-qa-confirmation-v2-review-runner",
+        "verify:academic-factual-qa-confirmation-v2-review-runner"
+      ],
+      "path": "scripts/run_academic_factual_qa_panel_review_v2.py",
+      "risk": "high",
+      "sha256": "6587516744876df6550ab660e5806a7ec3800d0240e48ec06a7f105c6d047966"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Runner review and full network-free service simulation verify course-and-question-only product input, full-corpus source reconstruction, shared atomic drafts, delayed gold join, authoritative claim/citation scoring, cluster-paired uncertainty, persistence, cost/call ceilings, and explicit non-academic simulation labeling.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-t0-confirmation",
+        "preflight-live:academic-factual-qa-t0-confirmation",
+        "preflight:academic-factual-qa-t0-confirmation",
+        "simulate:academic-factual-qa-t0-confirmation",
+        "verify:academic-factual-qa-professor-checkpoint"
+      ],
+      "path": "scripts/run_academic_factual_qa_t0_confirmation.py",
+      "risk": "high",
+      "sha256": "bdc825268b5bb9b2bd0d2a12039f414749733555d393a8f61ee32800daa68a22"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Runner review and simulations verify exact Gemini/Google identity, question-independent image payloads, original-region lineage, atomic ledgers, no retry, freshness and budget stops, fallback/candidate retrieval, boundary checks, and mandatory Codex audit for non-deterministically supported description facts.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-visual-pilot",
+        "execute:academic-factual-qa-visual-qualification",
+        "preflight-live:academic-factual-qa-visual-pilot",
+        "preflight-live:academic-factual-qa-visual-qualification",
+        "simulate:academic-factual-qa-visual-pilot",
+        "simulate:academic-factual-qa-visual-qualification",
+        "verify:academic-factual-qa-professor-checkpoint"
+      ],
+      "path": "scripts/run_academic_factual_qa_visual_checkpoint.py",
+      "risk": "high",
+      "sha256": "c57ba8741e1b88e48d22daf76adebad62e415daa4ab80e808384aaede331a7c8"
     },
     {
       "audit": {
@@ -4846,6 +5608,27 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual post-persistence gold-opening, package/hash/identity join, source-family bootstrap, hard gates, duplicate handling, and paired candidate/control review verifies supported-retention confidence bounds and boundary non-regression without treating the control's standalone gates as candidate requirements.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "compare:academic-factual-qa-open-10000-development",
+        "score:academic-factual-qa-open-10000-development",
+        "simulate:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/score_academic_factual_qa_open_10000.py",
+      "risk": "high",
+      "sha256": "d269a1467eb49be0c94d19f1eedcc1a083a4f92db4229c3c8068637783498d02"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -5013,6 +5796,46 @@
       "path": "scripts/triage_factual_qa_v3_semantic_roles.py",
       "risk": "high",
       "sha256": "f588f0251994976c3ba844a38879267a6df0d8091582038366e8855def36ca66"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual validator review and focused mutation tests verify fixed sampling, reference-label independence, exact zero-event bounds, durable decision memory, and fail-closed build-only preflight.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation",
+        "preflight:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation",
+        "verify:academic-factual-qa-confirmation-v2"
+      ],
+      "path": "scripts/validate_academic_factual_qa_confirmation.py",
+      "risk": "high",
+      "sha256": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Manual validator review and drift tests enforce exact hashes, panel diversity, deterministic authority, revoked invalid-attempt authority, and unopened confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:academic-factual-qa-confirmation-v2",
+        "verify:academic-factual-qa-confirmation-v2"
+      ],
+      "path": "scripts/validate_academic_factual_qa_confirmation_v2.py",
+      "risk": "high",
+      "sha256": "d0e18ed5f7f42e7ed6b564190fb5aea9abaa997712fbf8185d6adb37d7b18ad1"
     },
     {
       "audit": {
@@ -5233,10 +6056,10 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5246,7 +6069,7 @@
       ],
       "path": "scripts/validate_markdown_links.py",
       "risk": "high",
-      "sha256": "df460d7fecab20671772e0ae363f4e7f94e7d8320502038a7df5327891994312"
+      "sha256": "0a6628cdb137a0eb1d9d6cfcf067c7b509633ab1f3f5b4412da9826ddeb21b56"
     },
     {
       "audit": {
@@ -5323,9 +6146,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope.",
+        "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5336,7 +6159,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "3b83329ec3936e0b9cbf1f3c9033fabbea329fdd183b95ee8c215f9531052615"
+      "sha256": "afd9481c124803cf7dadebbbe6d7a154962720148b312ebb29984dbebc1ee96f"
     },
     {
       "audit": {
@@ -5529,7 +6352,7 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "Factory wiring invokes deterministic evidence recovery in shadow mode only after successful new-release publication; focused API tests prove zero-trigger operation and no external channel activation.",
+        "evidence": "Factory wiring invokes deterministic evidence recovery in shadow mode only after successful new-release publication; focused API tests prove zero-trigger operation and no external channel activation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -5540,7 +6363,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "5ea63d549d4743039bc2428c63cf8fd5062ed319f94cc10d0c146a44972ae784"
+      "sha256": "d00108a1bd29c345b3899377df15e79115c92c96d2ffcff1f46313bc03e028a6"
     },
     {
       "audit": {
@@ -5849,9 +6672,9 @@
     {
       "audit": {
         "domain": "runtime-provider-boundary",
-        "evidence": "Model policy, protected provider options, per-call strict JSON Schema overrides, response/usage validation, error redaction, and credential boundaries reviewed; adapter tests passed without provider calls.",
+        "evidence": "Model policy, protected provider options, per-call strict JSON Schema overrides, response/usage validation, error redaction, and credential boundaries reviewed; adapter tests passed without provider calls. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5860,7 +6683,7 @@
       "package_commands": [],
       "path": "services/llm/litellm_client.py",
       "risk": "high",
-      "sha256": "c3cd880f5549c7473e5d3fef958f75e5c1167fbfdfb3ca289097420f2d3c90a6"
+      "sha256": "04a19bd9bfd93b0158e96ef6aead4bdf705766c124c01d01f04a43d28fb58c31"
     },
     {
       "audit": {
@@ -6057,9 +6880,9 @@
     {
       "audit": {
         "domain": "evaluation-runtime-correctness",
-        "evidence": "Manual metric, split, course-isolation, profile, model-binding, and threshold review corrected duplicate-gain, zero-score, spoofed-lineage, and malformed-input cases; focused evaluation tests passed.",
+        "evidence": "Manual metric, split, course-isolation, profile, model-binding, and threshold review corrected duplicate-gain, zero-score, spoofed-lineage, and malformed-input cases; focused evaluation tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6068,7 +6891,119 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "ba00e9cde3b90971acbad333ebb7466dcedee30b6112ba6f5ecc33cb46beb448"
+      "sha256": "757a6445c3d59f12d93393e354333138447f5c0ca2823693e061e941e529ff1b"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual dependency-boundary and adapter review verifies student-runtime imports are isolated from the pure evaluation schemas, preventing grounding/evaluation circular imports while preserving T0/T1/control/HTTP normalization and lineage hooks.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_adapters.py",
+      "risk": "high",
+      "sha256": "4a93684cfe5b056c7f3a4c399e9bbfee4688012eaeb64d7a907dd3d78e251249"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual schema and adapter review verifies forbidden gold fields, stable actions, exact source hashes/ranges, optional T0/T1/HTTP mappings, atomic claims, retrieval diagnostics, and strict lineage matching.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_contract.py",
+      "risk": "high",
+      "sha256": "e82ee8042f390c23b90c144522846c89256cdf9640a380d1e835431ab1de1ba2"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual deterministic-truth construction review verifies historical v1 reproducibility and prospective v2 source-derived cues, exact source spans, authoritative action/claim/lineage invariants, answer-leak prevention, global uniqueness support, and separate public-case/hidden-gold assembly.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_dataset.py",
+      "risk": "high",
+      "sha256": "31922a1997e9548ec5410676bffa0eea0750d4ab9a29a12a6bc45fac19a4afe4"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual persistence review verifies exclusive creation, WAL/FULL synchronization, one-row transactions, exact resume hashes, duplicate rejection, terminal completion counts, adapter completion/interruption hooks, and absence of scorer/gold imports.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_execution.py",
+      "risk": "high",
+      "sha256": "b45f6f8c180fb6c32b8899796533755be93267adfb6094e83f769c08df7762cb"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual reference-contract review verifies exact quote/range validation, short deterministic claims, complete text and structured extraction, modality/target invariants, stable source-region IDs, separate boundary construction, and provider-independent public/gold assembly.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_references.py",
+      "risk": "high",
+      "sha256": "d780da3d1e2a8777dc7ff18a9d63f616d4cc071a469d7e4c89ebf6d3a1e0c4fe"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual metric review verifies exact answer spans, claim-to-lineage matching, citation precision/recall, strict source hashes, source-range retrieval at 3/5, boundary safety, operational accounting, and source-family bootstrap uncertainty.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_scoring.py",
+      "risk": "high",
+      "sha256": "251984bc0a226f0549918afe5b45010588c0a0225c2b352b6a0492d8fe2dc805"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual wording-boundary review verifies authors receive only public question fields, reviewers receive only canonical/candidate wording, neither can mutate truth or citations, and reviewer rejection, missing/duplicate responses, or answer leakage trigger deterministic canonical fallback.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_wording.py",
+      "risk": "high",
+      "sha256": "3a42ecc6363d8f6735184fb0e35316cd5b49ba97f2d6111dc7caa8011d81415c"
     },
     {
       "audit": {
@@ -6136,6 +7071,22 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual provider transport and accounting review verifies historical OpenRouter behavior plus direct first-party OpenAI/Mistral endpoints, runtime-only credentials, strict local schema validation, exact model identity, OpenAI store=false, transport-only bounded retry, retry-inclusive prospective cost reservation, durable physical-attempt accounting, replay binding, and fail-closed call/cost handling.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/provider_json.py",
+      "risk": "high",
+      "sha256": "49125bbb843b404d04df8b31cbae5841e6738ccd8486ce7b4c9e14811e8bfb4b"
+    },
+    {
+      "audit": {
         "domain": "evaluation-runtime-correctness",
         "evidence": "Manual metric, split, course-isolation, profile, model-binding, and threshold review corrected duplicate-gain, zero-score, spoofed-lineage, and malformed-input cases; focused evaluation tests passed.",
         "findings": [],
@@ -6184,10 +7135,26 @@
     },
     {
       "audit": {
-        "domain": "atomic-claim-evidence-validation",
-        "evidence": "Export review confirms the prospective claim-only response models and deterministic lineage resolver are explicit without changing the selected generator contract.",
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Contract review and tests enforce provider-neutral question-independent descriptions, stable provider identity, unique entities/relationships, source-image hashes, normalized original-region lineage, and non-authoritative retrieval text.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/visual_description.py",
+      "risk": "high",
+      "sha256": "60f08ea4e413825cfe3326ec5e8319941800480e004dbb85aeb55aada0408fed"
+    },
+    {
+      "audit": {
+        "domain": "atomic-claim-evidence-validation",
+        "evidence": "Export review confirms the prospective claim-only response models and deterministic lineage resolver are explicit without changing the selected generator contract. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6196,14 +7163,14 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "94e059ad04a7a17c4dec9d5049f5791d91eff3878e062fb141ea4037012c721e"
+      "sha256": "cd729d93ca8a0a645bbf01b942d50e6495b0cb4cf72447e557b6be564bcc733d"
     },
     {
       "audit": {
         "domain": "grounded-generation-correctness",
-        "evidence": "Manual review and focused tests confirm short citation IDs resolve only to server-owned eligible retrieved hit IDs before semantic claim validation.",
+        "evidence": "Manual review and focused tests confirm short citation IDs resolve only to server-owned eligible retrieved hit IDs before semantic claim validation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6212,7 +7179,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/citations.py",
       "risk": "high",
-      "sha256": "faf9c0e82f4fa7342d44f70899a15b880941eaaafc4ba539e8870d5366aaecc4"
+      "sha256": "629e9954e8884fde4662d0e31e21f55e60d846f14410f9c8d44fe4d5879c2977"
     },
     {
       "audit": {
@@ -6233,9 +7200,9 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6244,7 +7211,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "936c92aa1957d1fc38fa46e81be83908f0960ff254e81556170311456b10f0e2"
+      "sha256": "6c880c9a56b26b8dfa000bc6ba90009890cad9fbd7e6188ab249dc926215bf8c"
     },
     {
       "audit": {
@@ -6265,9 +7232,9 @@
     {
       "audit": {
         "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed.",
+        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6276,7 +7243,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/policy.py",
       "risk": "high",
-      "sha256": "ff37d86df4f006eb3b63f9d01d7c5969a51eb50eda12e98cb3cacac2fcc80e3c"
+      "sha256": "0e3f12bb9eddad05a9864834ac6db809f18bcc3a23623685335eb89b63c01650"
     },
     {
       "audit": {
@@ -6297,9 +7264,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Export review confirms the new post-generation atomic-claim contract, exact control, NLI candidate, and deterministic final release owner are explicit without changing historical v2 controls.",
+        "evidence": "Export review confirms the new post-generation atomic-claim contract, exact control, NLI candidate, and deterministic final release owner are explicit without changing historical v2 controls. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6308,7 +7275,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "7f4b4f0d4ac04ce6d3fbe32be85c59f2bedfd73077b2edf083b262fb5af2237f"
+      "sha256": "f705fd59b04ce8c45bb13ce73f72f173569ccb4236668de94ca2991f1a4d120f"
     },
     {
       "audit": {
@@ -6329,9 +7296,9 @@
     {
       "audit": {
         "domain": "atomic-claim-evidence-validation",
-        "evidence": "Manual code review and focused tests confirm exact claim-set coverage, eligible lineage, bounded claims/evidence, verifier-output containment, evidence-premise NLI direction, and deterministic fail-closed release ownership.",
+        "evidence": "Manual code review and focused tests confirm exact claim-set coverage, eligible lineage, bounded claims/evidence, verifier-output containment, evidence-premise NLI direction, and deterministic fail-closed release ownership. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6340,14 +7307,14 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/claim_validation.py",
       "risk": "high",
-      "sha256": "8089a88ac420a00a307357b8f6f856100957191340f362b116e2917e1c1c75af"
+      "sha256": "0814fff5c23885eb95197f6dfa4b9686b31927e5457a2a7e8fbce7a378a22d34"
     },
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual boundary review plus 30 focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, malformed verifier output, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed.",
+        "evidence": "Manual boundary review plus 30 focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, malformed verifier output, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6356,7 +7323,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "a2a3af07a0f4d77d8eb43f8c9c1c2494a77c30d921f5bc61024390f4da3cb8b8"
+      "sha256": "e4c6c518fd138b10480c10644c7396d3ea18d15524bcca50e56faa031930af5c"
     },
     {
       "audit": {
@@ -6393,9 +7360,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6404,7 +7371,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/models.py",
       "risk": "high",
-      "sha256": "90e9b5b376a29c3784879c08272ff66feed6bdffe2d2f3d47cfbac08fb69f512"
+      "sha256": "b997afc17c588a53a59d37f0646bf9a6ea46bed2ba3f91de7285e140ac5635a4"
     },
     {
       "audit": {
@@ -6425,9 +7392,9 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6436,7 +7403,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/protocols.py",
       "risk": "high",
-      "sha256": "1b45b7bd632d2ff58722f68f665c9934b08a335d45405b104cf1934203d1a505"
+      "sha256": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915"
     },
     {
       "audit": {
@@ -6601,9 +7568,9 @@
     {
       "audit": {
         "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model-policy review verifies stable Gemini 3.7 Flash is registered with exact OpenRouter and provider slugs as prospective and unselected; existing prohibited-model and exact-registration controls remain unchanged and focused tests pass.",
+        "evidence": "Manual model-policy review verifies stable Gemini 3.7 Flash is registered with exact OpenRouter and provider slugs as prospective and unselected; existing prohibited-model and exact-registration controls remain unchanged and focused tests pass. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6612,7 +7579,7 @@
       "package_commands": [],
       "path": "src/digital_twin/llm.py",
       "risk": "high",
-      "sha256": "b42bbba2bfce4e88edbc6127bafd0a9c438b0f23517241bcdfa8dd2c1f0ca92e"
+      "sha256": "bae10c0029f60797a9ff5d519758f357a34b96b0731a692e70c971d0be8f906e"
     },
     {
       "audit": {
@@ -6873,9 +7840,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, the completed confirmation-002 exception is revoked after its valid Refine result, and provider, paid, private, external-delivery, real-student, and every other unregistered operation remain blocked.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, the completed confirmation-002 exception is revoked after its valid Refine result, and provider, paid, private, external-delivery, real-student, and every other unregistered operation remain blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-25",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6884,12 +7851,12 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a5bcbd13152444d9b0ee653f95b4b151bcbd6150ec97ffd66ee2214315aee362"
+      "sha256": "5b1cbd22c59cda2b319f2341c6d03219198b04724cfc1d2d0a978bc0f5d9ec79"
     },
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "Public exports for the versioned evidence-recovery contracts were checked against service, repository, runner, and focused import regressions.",
+        "evidence": "Public exports for the versioned evidence-recovery contracts were checked against service, repository, runner, and focused import regressions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6900,7 +7867,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "de7eaa944d9f567e9df495ee9088f5b3b0901eed22e336e5b9d75b5fcd9c1276"
+      "sha256": "7c15f79a74e4f2e9566c96e094445ed565528f9ba6c0509e77029c1d7808e41f"
     },
     {
       "audit": {
@@ -6920,8 +7887,24 @@
     },
     {
       "audit": {
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Manual contract review and focused tests cover strong-secret HMAC pseudonymization, raw-content exclusion, UTC retention, cross-scope rejection, small-cell suppression, deterministic aggregation, and professor-review-only drafts.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/learning_gap.py",
+      "risk": "high",
+      "sha256": "894af0f01e8baa96857836f91903fa8fc0fe472394e4cfba17f1fdbda994fe60"
+    },
+    {
+      "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6932,7 +7915,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/migrations.py",
       "risk": "high",
-      "sha256": "1d8f87908c2515cf52caddd163d3042ce436a2c7d08839f230f09d822ed7a7b2"
+      "sha256": "1fea55e842d589a49897ac2547a7cac89f4cab506386bdeff213b9bceedc696b"
     },
     {
       "audit": {
@@ -6985,7 +7968,7 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "The bounded no-evidence-turn query was reviewed for exact tutor/student linkage, course and release scope, deterministic ordering, input limits, and synthetic repository coverage.",
+        "evidence": "The bounded no-evidence-turn query was reviewed for exact tutor/student linkage, course and release scope, deterministic ordering, input limits, and synthetic repository coverage. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6996,14 +7979,14 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "19b5c2e9cc88cccb7920dd3c10482577d59bba4385ceafc6341a30d6a08c54ec"
+      "sha256": "034b3743430acdbb4c75faa6446e6d9925a7816cc9503d87ce99f76f7c413fe1"
     },
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7012,7 +7995,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "ea7a3a0174a1fc3c4f366231206486c300f0278e191c983ccaf531774a585a0f"
+      "sha256": "0d24dabd2d17b941cdec970dc2ac78af1cc75d8fd3ad9d0c87cf4fe4507eef79"
     },
     {
       "audit": {
@@ -7161,9 +8144,9 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7172,7 +8155,7 @@
       "package_commands": [],
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
-      "sha256": "1179f76fb9adb92d31099d558d6eab69316c66273bd87b450b48af715e5c5128"
+      "sha256": "c02c466660fb53d8168798d6298cec3877f5a8fddf92355e89e2ab9c09973c8e"
     },
     {
       "audit": {
@@ -7241,9 +8224,9 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused generation regressions cover T0 behavior, bounded T1 pedagogical plans, unchanged citation lineage, provider failures, and policy suppression.",
+        "evidence": "Focused generation regressions cover T0 behavior, bounded T1 pedagogical plans, unchanged citation lineage, provider failures, and policy suppression. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7252,7 +8235,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "5f7a047fb8b879497101c382aeaf18b5781030d18eae959b0161245778a0a003"
+      "sha256": "df7ecf2ee8eed53a2a058221a1324c3da3c0de7fd6a22f37eb479e2246d7b87c"
     },
     {
       "audit": {
@@ -7269,6 +8252,22 @@
       "path": "tests/digital_twin/test_grounding_contracts.py",
       "risk": "medium",
       "sha256": "09f712dcfe6f01bdc72007024061e58537cf6f02ed1be1ff96c0ccbb30dd26da"
+    },
+    {
+      "audit": {
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Focused regressions cover strong-secret requirements, non-retention of raw IDs/content, timestamp normalization, idempotency, cross-scope isolation, expiry, minimum-cohort suppression, deterministic drafts, and duplicate resistance.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_learning_gap.py",
+      "risk": "medium",
+      "sha256": "ac71b5c5cadb19ed353212b93c8202bebad1d62e5001ebbbf3dbcd5fc1f7f79e"
     },
     {
       "audit": {
@@ -7385,9 +8384,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify both A1 development and confirmation-002 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify both A1 development and confirmation-002 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7396,7 +8395,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "b83a7c72b04e9cedbf6f5137557c35d190610b83bfd797178b1acadb81db86e7"
+      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
     },
     {
       "audit": {
@@ -7417,9 +8416,9 @@
     {
       "audit": {
         "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, raised and malformed verifier failure, redaction, bounded evidence, and invalid v2 configuration.",
+        "evidence": "Focused regression tests cover accepted support, incomplete evidence, contradiction, ambiguity, unknown lineage, raised and malformed verifier failure, redaction, bounded evidence, and invalid v2 configuration. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7428,7 +8427,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
-      "sha256": "8bbc7c873a908ef2b9c9e407e89f40f8948718851e41bf4eb6b638652380b3af"
+      "sha256": "8f7b81ceeecf4a72ad1554e03ded90943d5312a5d4bc4339a63e8cb14cb125be"
     },
     {
       "audit": {
@@ -7481,7 +8480,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -7492,7 +8491,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_sqlite_migrations.py",
       "risk": "medium",
-      "sha256": "8f600568b71c58c9659b3d8647399eade567a0ba86bbff7e933878ea10b3a557"
+      "sha256": "831da7e0aa8ed8001490807de1aa0bf614b0ff1135da83672b7615cdb0ed6c7f"
     },
     {
       "audit": {
@@ -7593,9 +8592,9 @@
     {
       "audit": {
         "domain": "runtime-verification",
-        "evidence": "Provider-neutral response, model policy, option protection, per-call strict JSON Schema override, malformed usage/content, and redacted provider-error regressions reviewed and passed.",
+        "evidence": "Provider-neutral response, model policy, option protection, per-call strict JSON Schema override, malformed usage/content, and redacted provider-error regressions reviewed and passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7604,7 +8603,7 @@
       "package_commands": [],
       "path": "tests/services/test_litellm_client.py",
       "risk": "medium",
-      "sha256": "1340b1ef3a3c248e29f8d321e92ee21a66272903bccd4364f0fc4f78eb6a8a7f"
+      "sha256": "54268189f3037d6ccf291f5573f8c30a0de889212eceaf65d01ca0bfa10f5366"
     },
     {
       "audit": {
@@ -7672,6 +8671,38 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused tests cover frozen allocation, independent-label authority, private-source closure, provider and execution closure, decision-memory completeness, and the exact sample-precision calculations.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_confirmation.py",
+      "risk": "medium",
+      "sha256": "bff9dccf3810c175f8d5880a8ba5cef845af1e1e837f82a832b49a9b5da99ef1"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused tests cover deterministic truth, three-family review, calibration/audit bounds, exact bindings, completed isolated Codex calibration, revoked authority, and fail-closed confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_confirmation_v2.py",
+      "risk": "medium",
+      "sha256": "3a2b8cd584bd0f1e0697f1efea94ef1fd00a7bc545ed10c0b8aa37dff171db3a"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Focused tests prove dataset stability and distribution, strict rejection of every gold field at the product boundary, blocked preflight and execution, real-service diagnostics, persistence accounting, and zero provider/private/held-out use.",
         "findings": [],
@@ -7685,6 +8716,134 @@
       "path": "tests/test_academic_factual_qa_end_to_end_pilot.py",
       "risk": "medium",
       "sha256": "1bae1717e77287bc66a4068baaa694b2c83eb1c343949429bd147d1d05e232d1"
+    },
+    {
+      "audit": {
+        "domain": "fair-factual-qa-evaluation",
+        "evidence": "Manual two-boundary runtime and academic-evaluation review; focused service, policy, retrieval, claim-lineage, paired-harness, freeze, and regression tests passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_end_to_end_pilot_v2.py",
+      "risk": "medium",
+      "sha256": "9869e124a55b5e28285c39bd17a2f525371eab6df62bf3e79b1053dea2936277"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused construction tests verify deterministic truth authority, exact source spans, answer-leak rejection, malformed author quarantine with labelled canonical provenance, revoked attempt-003 preflight, explicit OpenRouter default-tier transport, terminal invalid-ledger handling, exclusive resume binding, and complete 2,100-cluster truth-package construction without unintended provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_construction.py",
+      "risk": "medium",
+      "sha256": "58daf6d152e44a0e33f1effe2ff04f69f95f2ab67cf3a94741cbcf1658a5fc8f"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify exact package size and split, deterministic rebuild hashes, public/gold separation, source-lineage policy, 20-cluster control identity, direct endpoint and manifest selection, strict OpenAI/Mistral schema parsing, exact identity, transport-only retry, durable physical-attempt accounting, dirty-repository rejection, and blocked paid execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_development_v2.py",
+      "risk": "medium",
+      "sha256": "e50e84880dd14dbee40db914ce8122c52a605b9d5dd7e6be054d4755f7cc31d0"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify source-plan balance and byte stability, complete target contracts, 500/100 package separation and hashes, zero leaks or duplicates, and a zero-defect no-call reference audit with a fixed 12-case packet.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_development_v3.py",
+      "risk": "medium",
+      "sha256": "d0f7c8b88b51e949325d670fbf3c3f21a795b86da48a7affa5be7e5c9941ae81"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused AFQC-047 tests verify exact first-party identities, revoked authorization, 500-case no-call simulation, gold separation from provider execution, blocked preflight/freeze behavior, OpenAI store=false, retry-inclusive reservation, and rejection of reordered batch IDs.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_wording.py",
+      "risk": "medium",
+      "sha256": "49d6482d5ad20436765afb695f4f47130b7afa05f955d2b037c9981c055f25d7"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused runner tests cover clean, calibration-failure, disagreement-overflow, malformed, resume, accounting, identity, exclusive-output, revoked authority, and blocked confirmation paths.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_panel_review_v2.py",
+      "risk": "medium",
+      "sha256": "3c45e43b47d75af6a8e14bc2f0affd4411a349c91f040402cea69d88ed172c6b"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Focused tests cover gold-field rejection, all 160 public source sections, blocked no-call preflight, all five T0/visual conditions through the real service, delayed gold access, cluster bootstrap, persistence, duplicate detection, and explicit simulation limitations.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_t0_confirmation.py",
+      "risk": "medium",
+      "sha256": "45d97b4a0a9a3f1412ad87a71fce1cb191df0a25760fc7edc8ab059e3ef31c6e"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Focused tests cover deterministic supplement rebuild, balance and disjointness, hash/region contract rejection, fail-closed preflight, qualification and visual simulations, profile non-selection, and mandatory audit of unsupported visual facts.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_visual_checkpoint.py",
+      "risk": "medium",
+      "sha256": "1d5438d347d19d4d338c99f9e500c0f18bfc382291d7a1ea695741f2d27eeba3"
     },
     {
       "audit": {
@@ -7800,6 +8959,22 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_audit_academic_factual_qa_open_development.py",
+      "risk": "medium",
+      "sha256": "e26934b4a3afc94e42bc583ba6d705d855841152baf32c9db34a11ed4be7c2cc"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -7829,6 +9004,38 @@
       "path": "tests/test_audit_multimodal_v3_result.py",
       "risk": "medium",
       "sha256": "252738d4b048274da08b3de0540d5165ac119d4cafa025e1eda8ceab01b8d230"
+    },
+    {
+      "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused builder tests verify exact case/control allocations, source and asset lineage, evidence offsets and hashes, modality markers, source disjointness, normalized uniqueness, deterministic bytes, and ignored raw snapshots.",
+        "findings": [],
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_confirmation_v2.py",
+      "risk": "medium",
+      "sha256": "072ea543def4764009592c4eec7a2a6189ef777fa16c02bc05aa59fc3223d0e9"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify undersized-fragment rejection, corrected feasible allocation, deterministic 2,100-cluster plan and 10,500 truth packages, course/slice distributions, modality binding, reuse limits, non-overlap, and the AFQC-043 revoked attempt-003 boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_open_10000.py",
+      "risk": "medium",
+      "sha256": "49fc7530a47bc379fb34231e19d93086ea13f0608997f5aa3bef7eed41b7afcf"
     },
     {
       "audit": {
@@ -8008,6 +9215,54 @@
     },
     {
       "audit": {
+        "domain": "academic-factual-qa-confirmation",
+        "evidence": "Focused tests cover historical and two-reviewer binding identity, Gemini schema post-validation, fresh 40-control coverage, aggregation, pass and quality-failure outcomes, bounded retries, malformed output, identity drift, cost stops, resume, and attempt-005 provider fallback with complete route accounting. The isolated authority test now freezes binding age explicitly so wall-clock expiry cannot make it flaky.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_execute_academic_factual_qa_panel_review_v2.py",
+      "risk": "medium",
+      "sha256": "ab391a1979084bfc8755351d07eb745eb635f0f338e29a1dcace082e1abbff31"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify gold-field rejection, canonical range/hash matching, wrong-range rejection, T0 claim/citation mapping, HTTP input isolation, source-family bootstrap units, and paired supported-retention/boundary comparison semantics.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_flow_contract.py",
+      "risk": "medium",
+      "sha256": "e5da376dbd40914fee8944bb47634fcc209a1b96b396f1853a3ba3334e3092f2"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify public/gold physical separation, exact source-coordinate derivation, author/verifier disagreement rejection, and rejection of non-exact evidence spans.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_open_dataset_contract.py",
+      "risk": "medium",
+      "sha256": "8678ee4fe86a14913df9ec81a48bffdd7c2e12f0f9fce0866d974d3db97cbf18"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Focused regressions cover snapshot expiry, exact revisions and prices, current three-model DeepSeek tables, routing restrictions, OpenRouter identity, and fail-closed retention-policy drift.",
         "findings": [],
@@ -8037,6 +9292,22 @@
       "path": "tests/test_factual_qa_quality_pilot.py",
       "risk": "medium",
       "sha256": "ecf3585e61d77767401bcf14157ec42045668fae634b2beb19744b2d96a81d42"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify exclusive atomic response execution, interruption-safe resume without duplicate calls, existing-output and hash-drift rejection, and absence of hidden-gold/scorer imports.",
+        "findings": [],
+        "reviewed_at": "2026-08-26",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_response_execution.py",
+      "risk": "medium",
+      "sha256": "4941c8a48738aeb6380ac21d5caa711ad4067f7406211f5a55399ecbfa88658f"
     },
     {
       "audit": {
@@ -8197,6 +9468,22 @@
       "path": "tests/test_factual_qa_v3_scale_rehearsal.py",
       "risk": "medium",
       "sha256": "eb9edf0b707ccb49e5d3a829622a45022dd723cd05ae3952282cbec59b9f1a7a"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify author and reviewer requests exclude gold and source lineage, accepted wording changes only the public question, and reviewer rejection, leakage, duplicate IDs, or missing responses fail closed to canonical wording.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_wording.py",
+      "risk": "medium",
+      "sha256": "45c28bed97447a56173e0e01418a4631ac840b973f68d75fde5694999c15f2ad"
     },
     {
       "audit": {
@@ -8425,7 +9712,7 @@
     {
       "audit": {
         "domain": "atomic-claim-evidence-validation",
-        "evidence": "Tests verify completed revocation, including the optional stale-metadata blocker after the 24-hour window, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+        "evidence": "Tests verify completed revocation, including the optional stale-metadata blocker after the 24-hour window, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8436,7 +9723,7 @@
       "package_commands": [],
       "path": "tests/test_run_atomic_claim_validation_confirmation.py",
       "risk": "medium",
-      "sha256": "19a0286401e67ae8f0ef4c895620bdf26bd485e9b020e1ed927fba26cc8edf51"
+      "sha256": "79c801ca66b19e677922608dff5e6c54a84e01feb0636a6b2929076998bfc91f"
     },
     {
       "audit": {
@@ -8473,7 +9760,7 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Focused tests verify the completed revoked preflight, including optional stale-metadata blockers after the 24-hour window, model-free simulation, AnyHit exclusion, coherent three-part authorization and revocation states, exact model revisions, and immutable hard gates.",
+        "evidence": "Focused tests verify the completed revoked preflight, including optional stale-metadata blockers after the 24-hour window, model-free simulation, AnyHit exclusion, coherent three-part authorization and revocation states, exact model revisions, and immutable hard gates. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8484,7 +9771,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
       "risk": "medium",
-      "sha256": "4708ea987e9077cd8448deff130518410fb8221c6c760c8205e6fb52cca88d0d"
+      "sha256": "01ab297b0a45bb34f87623479a2a1609fa401af43d25d5333a382d989cdf338a"
     },
     {
       "audit": {
@@ -8712,11 +9999,27 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "domain": "repository-correctness-controls",
+        "evidence": "Regression tests prove ignored external Markdown is excluded, reviewable untracked Markdown remains checked, and broken local links are still reported.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-25",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_validate_markdown_links.py",
+      "risk": "medium",
+      "sha256": "05ead4ece27b33bbcffe44708321d99a3d1f676ecb12def7534135c137fa3ac4"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -8724,7 +10027,7 @@
       "package_commands": [],
       "path": "tests/test_validate_multimodal_retrieval_dataset.py",
       "risk": "medium",
-      "sha256": "cfc0fd668e760b89b7f2e4d73792094a76fc47bd90abc9b2eec4d8c1314b95bb"
+      "sha256": "7dcca6b51ae4cac98e534b49ffd5283e78786f10f8b5713a4392e4c12813e4c5"
     },
     {
       "audit": {
@@ -8777,9 +10080,9 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "uv locked resolution passed; complete dependency audit reported zero known vulnerabilities and zero exceptions.",
+        "evidence": "uv locked resolution passed; complete dependency audit reported zero known vulnerabilities and zero exceptions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -8788,12 +10091,12 @@
       "package_commands": [],
       "path": "uv.lock",
       "risk": "medium",
-      "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1"
+      "sha256": "a730c31642dae7502a38f4dc5e1f97cce1d2a9143763d71d6449a5800536c0f3"
     }
   ],
   "risk_counts": {
-    "high": 409,
-    "medium": 122
+    "high": 464,
+    "medium": 142
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

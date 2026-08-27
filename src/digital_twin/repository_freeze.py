@@ -34,6 +34,28 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_atomic_claim_validation_dataset.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_confirmation_v2.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_open_10000.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_open_development_v2.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_open_development_v3.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_open_source_plan_v2.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_visual_supplement.py": (
+            "dataset_generation",
+        ),
+        "scripts/construct_academic_factual_qa_open_10000.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+        ),
         "scripts/build_evidence_sufficiency_v2_decision_draft.py": (
             "dataset_generation",
         ),
@@ -77,6 +99,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/execute_academic_factual_qa_panel_review_v2.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/judge_generator_qualification_v3.py": ("external_model_evaluation",),
         "scripts/judge_professor_fidelity.py": (
             "external_model_evaluation",
@@ -88,6 +114,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "dataset_generation",
         ),
         "scripts/prepare_course_tutor_authoring_review.py": ("dataset_generation",),
+        "scripts/prepare_academic_factual_qa_panel_review_v2.py": (
+            "dataset_generation",
+        ),
         "scripts/prepare_evidence_sufficiency_v2_independent_review.py": (
             "dataset_generation",
         ),
@@ -127,6 +156,30 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_academic_factual_qa_end_to_end_pilot.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_open_10000.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_open_wording.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_t0_confirmation.py": (
+            "external_model_evaluation",
+            "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_visual_checkpoint.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/score_academic_factual_qa_open_10000.py": (
+            "heldout_execution",
             "method_evaluation_execution",
         ),
         "scripts/run_cross_course_retrieval_heldout.py": (
@@ -224,11 +277,8 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # successor instrument requires a new code review and an explicit entry here.
 BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
-        "factual-qa-v3-oracle-pilot-001": (
+        "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
-            "external_model_evaluation",
-            "local_model_evaluation",
-            "method_evaluation_execution",
         ),
     }
 )
@@ -267,7 +317,10 @@ def require_pre_evaluation_operation_allowed(operation: str) -> None:
         )
 
 
-def require_bounded_pilot_operation_allowed(instrument_id: str) -> None:
+def require_bounded_pilot_operation_allowed(
+    instrument_id: str,
+    operation: str | None = None,
+) -> None:
     """Authorize only an exact, reviewed pilot while retaining the global freeze."""
 
     operations = BOUNDED_PILOT_AUTHORIZATIONS.get(instrument_id)
@@ -276,8 +329,13 @@ def require_bounded_pilot_operation_allowed(instrument_id: str) -> None:
             f"{instrument_id!r} is not a bounded authorization under {FREEZE_ID}"
         )
     if not operations or any(
-        operation not in BLOCKED_OPERATIONS for operation in operations
+        allowed_operation not in BLOCKED_OPERATIONS
+        for allowed_operation in operations
     ):
         raise RepositoryFreezeError(
             f"{instrument_id!r} has an invalid bounded authorization"
+        )
+    if operation is not None and operation not in operations:
+        raise RepositoryFreezeError(
+            f"{instrument_id!r} is not authorized for {operation!r}"
         )

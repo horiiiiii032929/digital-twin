@@ -449,9 +449,35 @@ class GenerationTrace(BaseModel):
     usage: GenerationUsage = Field(default_factory=GenerationUsage)
 
 
+class AtomicAnswerClaim(BaseModel):
+    """One factual claim plus server-resolved retrieved evidence lineage."""
+
+    claim_id: str = Field(pattern=r"^claim-[a-z0-9-]+$")
+    text: str = Field(min_length=1)
+    evidence_hit_ids: list[str] = Field(min_length=1)
+
+    @field_validator("text")
+    @classmethod
+    def text_must_not_be_blank(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized:
+            raise ValueError("claim text must not be blank")
+        return normalized
+
+    @field_validator("evidence_hit_ids")
+    @classmethod
+    def evidence_ids_must_be_unique(cls, values: list[str]) -> list[str]:
+        if any(not value.strip() for value in values):
+            raise ValueError("evidence_hit_ids cannot contain blank IDs")
+        if len(values) != len(set(values)):
+            raise ValueError("evidence_hit_ids must be unique")
+        return values
+
+
 class TutorAnswer(BaseModel):
     content: str = Field(min_length=1)
     citations: list[SourceCitation] = Field(default_factory=list)
+    atomic_claims: list[AtomicAnswerClaim] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
     trace: GenerationTrace | None = None
 
@@ -467,3 +493,14 @@ class TutorAnswer(BaseModel):
         if len(relationships) != len(set(relationships)):
             raise ValueError("duplicate source citation")
         return citations
+
+    @field_validator("atomic_claims")
+    @classmethod
+    def claim_ids_must_be_unique(
+        cls,
+        claims: list[AtomicAnswerClaim],
+    ) -> list[AtomicAnswerClaim]:
+        claim_ids = [claim.claim_id for claim in claims]
+        if len(claim_ids) != len(set(claim_ids)):
+            raise ValueError("duplicate atomic claim identifier")
+        return claims

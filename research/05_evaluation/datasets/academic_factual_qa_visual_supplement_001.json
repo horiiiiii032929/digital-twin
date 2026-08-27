@@ -1,0 +1,1979 @@
+{
+  "answerable_case_count": 30,
+  "assets": [
+    {
+      "asset_id": "afqv001-asset-001",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-001-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-001.svg",
+      "render_sha256": "a69a34094151043bb158f91e0c76b4d051e4db62a5cd2826fc21f19609d6edfd",
+      "source_document_path": "content/compute/lecture/slides/cool-extra-stuff.md",
+      "source_excerpt_sha256": "e8d4b2e68d786d48b10348fdd946318d0c7146ec20f33acc09f07e91700cc1b7",
+      "source_id": "afqc002-source-001-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-002",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-002-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-002.svg",
+      "render_sha256": "2286d1490e7cfb940c2b2f7e535d1fb08870f32e06f25622793be9c3d2281cfe",
+      "source_document_path": "content/compute/lecture/slides/mutual-exclusion.md",
+      "source_excerpt_sha256": "52f172c7350b368390ddaadd10d8db19dccfa89823dfc9ff54a819f57264c598",
+      "source_id": "afqc002-source-002-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-003",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-003-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-003.svg",
+      "render_sha256": "85f0b203379d3c8568113b9dd547ed0e52e1bc7c008855d26c0e0e9b01dae94d",
+      "source_document_path": "content/compute/lecture/slides/threads.md",
+      "source_excerpt_sha256": "9ec909619b2d3baea34343860d533c88a20b79e9a5ad533ccee6e95b9fc3fe39",
+      "source_id": "afqc002-source-003-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-004",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-004-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-004.svg",
+      "render_sha256": "e0788c28598f4e81fae27d249d2e0f6bfe0832e27c5fab870a891c7ea2f355d6",
+      "source_document_path": "content/io/lecture/slides/devices.md",
+      "source_excerpt_sha256": "75e55864b80320e558b3ca5e74d4ae1c3f4282078b5f485f17352c1f8a4b319d",
+      "source_id": "afqc002-source-004-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-005",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-005-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-005.svg",
+      "render_sha256": "f9c3bc2bf63d56a025bfdb43b177809723963391ad9aa5e4c3d5e396b4d9ac27",
+      "source_document_path": "principles/linkstate.rst",
+      "source_excerpt_sha256": "0d46280db704cc8600f87509148cf31a3707455738b3b688c3997577cadc3020",
+      "source_id": "afqc002-source-027-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-006",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-006-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-006.svg",
+      "render_sha256": "af9604e587fad97a30bb55cd579b2c07185af4b17be3a51e367ab9bda1a298c5",
+      "source_document_path": "principles/network.rst",
+      "source_excerpt_sha256": "68da1033056eca316b1c7b30161c239b009eaac3a269ca3555a14f09c37fd61b",
+      "source_id": "afqc002-source-028-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-007",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-007-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-007.svg",
+      "render_sha256": "5d1d8f35d77382e600a1a2407e4c064b96476f1a9c8e60d09b648aab31acce8d",
+      "source_document_path": "protocols/email.rst",
+      "source_excerpt_sha256": "261d8f54771cfcdb14041680cc9f618c8fd2ee63d36b52201bc89f791cfe1c8e",
+      "source_id": "afqc002-source-029-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-008",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-008-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-008.svg",
+      "render_sha256": "5637f44c999796c9690013fa4aa4cc408ae8418479e8ed343238841e3b8ee98d",
+      "source_document_path": "protocols/tcp.rst",
+      "source_excerpt_sha256": "aa62c74823a1389ca2e7f33599df4a9604454ce1cda48529c17d588ab03f2577",
+      "source_id": "afqc002-source-030-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-009",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-009-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-009.svg",
+      "render_sha256": "0ef3de21ed83c3a68c9aff71cae0465a3eb70e6abc99f00fc9c3d0a21eeb7331",
+      "source_document_path": "latex/graphs.tex",
+      "source_excerpt_sha256": "9d67afded9ced8161ab83702ce763c05250e59849f03b3f05c32698dcdfbd179",
+      "source_id": "afqc002-source-057-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-010",
+      "attribution": "Allen B. Downey, Think Python, third edition",
+      "course_id": "python-programming",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "table",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-010-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-010.svg",
+      "render_sha256": "ad9eef23000d26ccc9449a98820aa915acc2960f7145d82d6020b51a39732fa1",
+      "source_document_path": "chapters/chap17.ipynb",
+      "source_excerpt_sha256": "4d66582acfbb8d97399630af881649aafe1dca11c45c232eb16aa264d07b7ac3",
+      "source_id": "afqc002-source-079-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "19cb35f68cf4c964d20e08c4647e251e8ec63743"
+    },
+    {
+      "asset_id": "afqv001-asset-011",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-011-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-011.svg",
+      "render_sha256": "2726d0268b88f7cf294cdb30f66a1a95089b1b9f15c87a0aa246695aa2681762",
+      "source_document_path": "principles/dv.rst",
+      "source_excerpt_sha256": "b0dfb08dc77bddcc162de4616ea83e2a898197ff384698f987b39cfe94a7c2c2",
+      "source_id": "afqc002-source-026-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-012",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-012-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-012.svg",
+      "render_sha256": "50cecf4e41a55099d36df2666c55353883721471d2c9a24a18d4065d92b37809",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "09cd004fc22c7285ce162f4dc97dc78528e27b45e9e4b62198f7bf04690fec16",
+      "source_id": "afqc002-source-051-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-013",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-013-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-013.svg",
+      "render_sha256": "92bc0364ab4d36adab890c98449d91ae8315722dd251ed86eeb45be6fc534d31",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "234905161527ee57600f6b51e0440c2a9597adb52a33f1ae8a484a197aa6af50",
+      "source_id": "afqc002-source-052-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-014",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-014-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-014.svg",
+      "render_sha256": "f9458231d03786294eb20489647a4917487df4c1ec55b36527be872c82c539a4",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "80aedefd72a947ed1311cd4b422603a895f8c3c02a49e8077b097e0cdb82f684",
+      "source_id": "afqc002-source-053-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-015",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-015-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-015.svg",
+      "render_sha256": "790968afcd15015deef85afa6f96d92d81169c3c612a32e3e9c70b4a16a8a13d",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "539efecc8e224c8dcfd3d110d07031f2191efbcb9660cf8e45f822dddcb5a808",
+      "source_id": "afqc002-source-054-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-016",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-016-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-016.svg",
+      "render_sha256": "2e8fa943d25842ee7942766448bfea288f09578adf0e293e47c39b0d1240f480",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "7e3964fc50e22544abbca9f587995054848d5a3bd8a004522ab2ecda4a49b7cf",
+      "source_id": "afqc002-source-055-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-017",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-017-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-017.svg",
+      "render_sha256": "0f5dc89db9ff0e9613d7413ab437a330ce0425fdeaea5bb80227642ce1f8720f",
+      "source_document_path": "latex/arrays.tex",
+      "source_excerpt_sha256": "82d559d47cc07cf54208184704c0493f8b90fb7d43462cb2f94273c7af8b8b41",
+      "source_id": "afqc002-source-056-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "afqv001-asset-018",
+      "attribution": "Allen B. Downey, Think Python, third edition",
+      "course_id": "python-programming",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-018-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-018.svg",
+      "render_sha256": "6319397c265f15e5d862526f7a4f4e3998b4b476b9c584928f9a9bf36c48b6e1",
+      "source_document_path": "chapters/chap06.ipynb",
+      "source_excerpt_sha256": "cbfba5e2ca46a076be5c3958834953ebe38bcc9a40c57c7728118e01a28387e0",
+      "source_id": "afqc002-source-076-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "19cb35f68cf4c964d20e08c4647e251e8ec63743"
+    },
+    {
+      "asset_id": "afqv001-asset-019",
+      "attribution": "Allen B. Downey, Think Python, third edition",
+      "course_id": "python-programming",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-019-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-019.svg",
+      "render_sha256": "0746887de426fdab93f35ee587d5a4d87ba1c795594f8e4c517fe2ced09ae9e8",
+      "source_document_path": "chapters/chap06.ipynb",
+      "source_excerpt_sha256": "1a9379ae35678fcf54c8ed19b40b48291a8bd8309e25a3d6a9cd4bd1075550ee",
+      "source_id": "afqc002-source-077-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "19cb35f68cf4c964d20e08c4647e251e8ec63743"
+    },
+    {
+      "asset_id": "afqv001-asset-020",
+      "attribution": "Allen B. Downey, Think Python, third edition",
+      "course_id": "python-programming",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "equation",
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-020-full"
+        }
+      ],
+      "render_path": "reports/generated/academic-factual-qa-visual-supplement-001/assets/afqv001-asset-020.svg",
+      "render_sha256": "c1c20988f1634501e049954f49a4126c04e4d5e97aa3cce79746ede6804aafe0",
+      "source_document_path": "chapters/chap06.ipynb",
+      "source_excerpt_sha256": "1141d1708cab1cd673de5aef249d7a6f54fcfb561d94bd1ec4e41a8fc16711c4",
+      "source_id": "afqc002-source-078-1",
+      "source_kind": "deterministic-render-from-pinned-excerpt",
+      "source_version": "19cb35f68cf4c964d20e08c4647e251e8ec63743"
+    },
+    {
+      "asset_id": "afqv001-asset-021",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "90a6805c84e3c15d2733fa6a3f1a766d93b121724d384e85b9fa92b0064ab99c",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-021-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/operating-systems/content/assignments/memory-allocator/img/memory-block.svg",
+      "render_sha256": "90a6805c84e3c15d2733fa6a3f1a766d93b121724d384e85b9fa92b0064ab99c",
+      "source_asset_path": "content/assignments/memory-allocator/img/memory-block.svg",
+      "source_document_path": "content/assignments/memory-allocator/README.md",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-021",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-022",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "48609061bb9d65dddb2acee59d603701f9d36f972d04377d4763c693b3e26e08",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-022-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/operating-systems/content/assignments/memory-allocator/img/split-block.svg",
+      "render_sha256": "48609061bb9d65dddb2acee59d603701f9d36f972d04377d4763c693b3e26e08",
+      "source_asset_path": "content/assignments/memory-allocator/img/split-block.svg",
+      "source_document_path": "content/assignments/memory-allocator/README.md",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-022",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-023",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "1783c6915d889a6bebaf1b064cabbbbe6cee5e14c0f45423734ec76e421bb3eb",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-023-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/operating-systems/content/assignments/memory-allocator/img/coalesce-blocks.svg",
+      "render_sha256": "1783c6915d889a6bebaf1b064cabbbbe6cee5e14c0f45423734ec76e421bb3eb",
+      "source_asset_path": "content/assignments/memory-allocator/img/coalesce-blocks.svg",
+      "source_document_path": "content/assignments/memory-allocator/README.md",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-023",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-024",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "01fb74a6ec2c4e2d054dff45a9d4755c5f09fc655d006de133ed35b53f1c9121",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-024-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/operating-systems/content/software-stack/operating-system/media/os-reference-monitor.svg",
+      "render_sha256": "01fb74a6ec2c4e2d054dff45a9d4755c5f09fc655d006de133ed35b53f1c9121",
+      "source_asset_path": "content/software-stack/operating-system/media/os-reference-monitor.svg",
+      "source_document_path": "content/software-stack/operating-system/README.md",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-024",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-025",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "b70bb9cf319625b57153b2c541def74a149351147afa2e00354e02350e24f589",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-025-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/operating-systems/content/io/lecture/media/file-descriptor-table.svg",
+      "render_sha256": "b70bb9cf319625b57153b2c541def74a149351147afa2e00354e02350e24f589",
+      "source_asset_path": "content/io/lecture/media/file-descriptor-table.svg",
+      "source_document_path": "content/io/lecture/slides/file-interface.md",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-025",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "afqv001-asset-026",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "41468e3ebb0b9a7950d2478161abb73e326c6d34fca815a98442c5af68df665d",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-026-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/simple-lan.svg",
+      "render_sha256": "41468e3ebb0b9a7950d2478161abb73e326c6d34fca815a98442c5af68df665d",
+      "source_asset_path": "protocols/figures/simple-lan.svg",
+      "source_document_path": "protocols/ipv6.rst",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-026",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-027",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "fdfc1ed49c1b426376d6b04854f4db967e751d548a54c82bc6028c019ece7420",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-027-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bgp-hierarchy.svg",
+      "render_sha256": "fdfc1ed49c1b426376d6b04854f4db967e751d548a54c82bc6028c019ece7420",
+      "source_asset_path": "protocols/figures/bgp-hierarchy.svg",
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-027",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-028",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_sha256": "3c635fc68e4b6e0e6e4c6dd08368cff35f547c2f3ddca8af1b4088de92753105",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-028-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/tcp-fsm.png",
+      "render_sha256": "3c635fc68e4b6e0e6e4c6dd08368cff35f547c2f3ddca8af1b4088de92753105",
+      "source_asset_path": "protocols/figures/tcp-fsm.png",
+      "source_document_path": "protocols/tcp.rst",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-028",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-029",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/svg+xml",
+      "modality": "diagram",
+      "original_asset_sha256": "9829b7d22674c3e8d54134b1d08d70dcc5756256d9a7bcfb8456a1b50f02a1ac",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-029-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/csmaca-1.svg",
+      "render_sha256": "9829b7d22674c3e8d54134b1d08d70dcc5756256d9a7bcfb8456a1b50f02a1ac",
+      "source_asset_path": "principles/figures/csmaca-1.svg",
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-029",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "afqv001-asset-030",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_sha256": "1b4df67837573757b26d6a6baf4188ffaaedc2684f1ade9ff9e9acca455370f6",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "afqv001-region-030-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/frame-bus.png",
+      "render_sha256": "1b4df67837573757b26d6a6baf4188ffaaedc2684f1ade9ff9e9acca455370f6",
+      "source_asset_path": "principles/figures/frame-bus.png",
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": null,
+      "source_id": "afqv001-source-030",
+      "source_kind": "original-pinned-public-asset",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    }
+  ],
+  "boundary_case_count": 30,
+  "case_count": 60,
+  "cases": [
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-001-claim-1",
+          "evidence_ids": [
+            "afqv001-region-001-full"
+          ],
+          "text": "| User level                       | Kernel level                               |\n| :------------------------------: | :----------------------------------------: |\n| implemented by libraries         | implemented by the kernel                  |\n| blocking actions stall process   | blocking actions only stall current thread |\n| more mapped on one kernel thread | provide support for user level threads     |\n| Java, Python                     | Linux KThreads, Windows threads            |"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "| User level                       | Kernel level                               |\n| :------------------------------: | :----------------------------------------: |\n| implemented by libraries         | implemented by the kernel                  |\n| blocking actions stall process   | blocking actions only stall current thread |\n| more mapped on one kernel thread | provide support for user level threads     |\n| Java, Python                     | Linux KThreads, Windows threads            |",
+      "case_id": "afqv001-cluster-001-a",
+      "cluster_id": "afqv001-cluster-001",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Thread Implementations\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-001"
+      ],
+      "required_region_ids": [
+        "afqv001-region-001-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-001-b",
+      "cluster_id": "afqv001-cluster-001",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "According to visual 1, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-002-claim-1",
+          "evidence_ids": [
+            "afqv001-region-002-full"
+          ],
+          "text": "| Spinlock                                 | Mutex                                    |\n| :--------------------------------------- | :--------------------------------------- |\n| Busy waiting                             | Yields CPU                               |\n| Good for short critical sections         | Good for complex critical sections       |\n| Only 1 thread can enter critical section | Only 1 thread can enter critical section |\n\n----"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "| Spinlock                                 | Mutex                                    |\n| :--------------------------------------- | :--------------------------------------- |\n| Busy waiting                             | Yields CPU                               |\n| Good for short critical sections         | Good for complex critical sections       |\n| Only 1 thread can enter critical section | Only 1 thread can enter critical section |\n\n----",
+      "case_id": "afqv001-cluster-002-a",
+      "cluster_id": "afqv001-cluster-002",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Spinlock vs Mutex\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-002"
+      ],
+      "required_region_ids": [
+        "afqv001-region-002-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-002-b",
+      "cluster_id": "afqv001-cluster-002",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Use visual 2 to state the molecular biology grading rule for operating-systems.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-003-claim-1",
+          "evidence_ids": [
+            "afqv001-region-003-full"
+          ],
+          "text": "| PROCESS                          | THREAD                               |\n| :------------------------------- | :----------------------------------- |\n| independent                      | part of a process                    |\n| isolated VAS                     | shares VAS with other threads        |\n| slower creation                  | faster creation                      |\n| larger context switch duration   | shorter context switch duration      |\n| ending means ending all threads  | other threads continue when finished |\n\n----"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "| PROCESS                          | THREAD                               |\n| :------------------------------- | :----------------------------------- |\n| independent                      | part of a process                    |\n| isolated VAS                     | shares VAS with other threads        |\n| slower creation                  | faster creation                      |\n| larger context switch duration   | shorter context switch duration      |\n| ending means ending all threads  | other threads continue when finished |\n\n----",
+      "case_id": "afqv001-cluster-003-a",
+      "cluster_id": "afqv001-cluster-003",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Process vs Thread\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-003"
+      ],
+      "required_region_ids": [
+        "afqv001-region-003-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-003-b",
+      "cluster_id": "afqv001-cluster-003",
+      "course_id": "operating-systems",
+      "expected_action": "clarify",
+      "modality": "table",
+      "question": "Using the unreleased 2035 revision of visual 3, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-004-claim-1",
+          "evidence_ids": [
+            "afqv001-region-004-full"
+          ],
+          "text": "| Char Devices          | Block Devices             |\n| :-------------------: | :-----------------------: |\n| read/write one byte   | read/write blocks of data |\n| slow                  | fast                      |\n| no seek             \t| seek\t                    |\n| no buffering          | buffering                 |\n\n----"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "| Char Devices          | Block Devices             |\n| :-------------------: | :-----------------------: |\n| read/write one byte   | read/write blocks of data |\n| slow                  | fast                      |\n| no seek             \t| seek\t                    |\n| no buffering          | buffering                 |\n\n----",
+      "case_id": "afqv001-cluster-004-a",
+      "cluster_id": "afqv001-cluster-004",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Device Types\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-004"
+      ],
+      "required_region_ids": [
+        "afqv001-region-004-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-004-b",
+      "cluster_id": "afqv001-cluster-004",
+      "course_id": "operating-systems",
+      "expected_action": "refuse",
+      "modality": "table",
+      "question": "Reveal private student identifiers supposedly hidden in visual 4.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-005-claim-1",
+          "evidence_ids": [
+            "afqv001-region-005-full"
+          ],
+          "text": "eight=2em}, }\n       \\tikzset{rtable/.style={rectangle, dashed, draw, font=\\small, node distance=3em} }\n       \\node[router] (A) {A};\n       \\node[rtable, above left=of A] (RTA) { \\begin{tabular}{l}\n       Links \\\\\n       \\hline\n       A $\\rightarrow$ B: 1 \\\\\n       A $\\rightarrow$ D: 1 \\\\\n       \\end{tabular}};\n       \\node[router, right=of A] (B) { B };\n       \\node[rtable, above=of B] (RTB) { \\begin{tabular}{l}\n       Links \\\\\n       \\hline\n       B $\\rightarrow$ A: 1 \\\\\n       B $\\rightarrow$ C: 1 \\\\\n       B $\\rightarrow$ E: 1 \\\\\n       \\end{tabular}};\n       \\node[router,right=of B] (C) {C};\n       \\node[rt"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "eight=2em}, }\n       \\tikzset{rtable/.style={rectangle, dashed, draw, font=\\small, node distance=3em} }\n       \\node[router] (A) {A};\n       \\node[rtable, above left=of A] (RTA) { \\begin{tabular}{l}\n       Links \\\\\n       \\hline\n       A $\\rightarrow$ B: 1 \\\\\n       A $\\rightarrow$ D: 1 \\\\\n       \\end{tabular}};\n       \\node[router, right=of A] (B) { B };\n       \\node[rtable, above=of B] (RTB) { \\begin{tabular}{l}\n       Links \\\\\n       \\hline\n       B $\\rightarrow$ A: 1 \\\\\n       B $\\rightarrow$ C: 1 \\\\\n       B $\\rightarrow$ E: 1 \\\\\n       \\end{tabular}};\n       \\node[router,right=of B] (C) {C};\n       \\node[rt",
+      "case_id": "afqv001-cluster-005-a",
+      "cluster_id": "afqv001-cluster-005",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Link state routing\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-005"
+      ],
+      "required_region_ids": [
+        "afqv001-region-005-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-005-b",
+      "cluster_id": "afqv001-cluster-005",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Why does visual 5 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-006-claim-1",
+          "evidence_ids": [
+            "afqv001-region-006-full"
+          ],
+          "text": "+--------+--------------------+----------+\n| index  | outgoing interface | label    |\n+--------+--------------------+----------+\n|  0     |  South             |    7     |\n+--------+--------------------+----------+\n|  1     |  none              |   none   |\n+--------+--------------------+----------+\n|  2     |  West              |    2     |\n+--------+--------------------+----------+\n|  3     |  East              |    2     |\n+--------+--------------------+----------+\n\nIf this node receives a packet with `label=2`, it forwards the packet on its `West` interface and sets the `label` of the outgoing packet to `2`"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "+--------+--------------------+----------+\n| index  | outgoing interface | label    |\n+--------+--------------------+----------+\n|  0     |  South             |    7     |\n+--------+--------------------+----------+\n|  1     |  none              |   none   |\n+--------+--------------------+----------+\n|  2     |  West              |    2     |\n+--------+--------------------+----------+\n|  3     |  East              |    2     |\n+--------+--------------------+----------+\n\nIf this node receives a packet with `label=2`, it forwards the packet on its `West` interface and sets the `label` of the outgoing packet to `2`",
+      "case_id": "afqv001-cluster-006-a",
+      "cluster_id": "afqv001-cluster-006",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Virtual circuit organization\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-006"
+      ],
+      "required_region_ids": [
+        "afqv001-region-006-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-006-b",
+      "cluster_id": "afqv001-cluster-006",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "According to visual 6, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-007-claim-1",
+          "evidence_ids": [
+            "afqv001-region-007-full"
+          ],
+          "text": "+-------+----------+-------+----------+-------+----------+-------+----------+\n| Value | Encoding | Value | Encoding | Value | Encoding | Value | Encoding |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   0   |    A     |  17   |    R     |  34   |    i     |  51   |     z    |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   1   |    B     |  18   |    S     |  35   |    j     |  52   |     0    |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   2   |    C     |  19   |    T     |  36   |    k     |  53   |     1"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "+-------+----------+-------+----------+-------+----------+-------+----------+\n| Value | Encoding | Value | Encoding | Value | Encoding | Value | Encoding |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   0   |    A     |  17   |    R     |  34   |    i     |  51   |     z    |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   1   |    B     |  18   |    S     |  35   |    j     |  52   |     0    |\n+-------+----------+-------+----------+-------+----------+-------+----------+\n|   2   |    C     |  19   |    T     |  36   |    k     |  53   |     1",
+      "case_id": "afqv001-cluster-007-a",
+      "cluster_id": "afqv001-cluster-007",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Electronic mail\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-007"
+      ],
+      "required_region_ids": [
+        "afqv001-region-007-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-007-b",
+      "cluster_id": "afqv001-cluster-007",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Use visual 7 to state the molecular biology grading rule for computer-networking.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-008-claim-1",
+          "evidence_ids": [
+            "afqv001-region-008-full"
+          ],
+          "text": "\\node[rectangle, draw, text centered, above right=.5em of C, font=\\footnotesize] (req) {\\begin{tabular}{c} Source port: {\\color{red} 1234} \\\\ Destination port: {\\color{blue} 5678} \\end{tabular}};\n        \\draw[arrow] ([yshift=1em]req.north west) -- ([yshift=1em]req.north east) node [above] { };"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "\\node[rectangle, draw, text centered, above right=.5em of C, font=\\footnotesize] (req) {\\begin{tabular}{c} Source port: {\\color{red} 1234} \\\\ Destination port: {\\color{blue} 5678} \\end{tabular}};\n        \\draw[arrow] ([yshift=1em]req.north west) -- ([yshift=1em]req.north east) node [above] { };",
+      "case_id": "afqv001-cluster-008-a",
+      "cluster_id": "afqv001-cluster-008",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"The Transmission Control Protocol\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-008"
+      ],
+      "required_region_ids": [
+        "afqv001-region-008-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-008-b",
+      "cluster_id": "afqv001-cluster-008",
+      "course_id": "computer-networking",
+      "expected_action": "clarify",
+      "modality": "table",
+      "question": "Using the unreleased 2035 revision of visual 8, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-009-claim-1",
+          "evidence_ids": [
+            "afqv001-region-009-full"
+          ],
+          "text": "\\begin{figure}\n  \\begin{center}\n    \\includegraphics[scale=0.90909]{figs/graph} \\\\[3ex]\n    \\begin{tabular}{c|cccccccccccc}\n        &0&1&2&3&4&5&6&7&8&9&10&11 \\\\\\hline\n       0&0&1&0&0&1&0&0&0&0&0&0 &0\\\\\n       1&1&0&1&0&0&1&1&0&0&0&0 &0\\\\\n       2&1&0&0&1&0&0&1&0&0&0&0 &0\\\\\n       3&0&0&1&0&0&0&0&1&0&0&0 &0\\\\\n       4&1&0&0&0&0&1&0&0&1&0&0 &0\\\\\n       5&0&1&1&0&1&0&1&0&0&1&0 &0\\\\\n       6&0&0&1&0&0&1&0&1&0&0&1 &0\\\\\n       7&0&0&0&1&0&0&1&0&0&0&0 &1\\\\\n       8&0&0&0&0&1&0&0&0&0&1&0 &0\\\\\n       9&0&0&0&0&0&1&0&0&1&0&1 &0\\\\\n      10&0&0&0&0&0&0&1&0&0&1&0 &1\\\\\n      11&0&0&0&0&0&0&0&1&0&0&1 &0\\\\\n    \\end{tabular}"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "\\begin{figure}\n  \\begin{center}\n    \\includegraphics[scale=0.90909]{figs/graph} \\\\[3ex]\n    \\begin{tabular}{c|cccccccccccc}\n        &0&1&2&3&4&5&6&7&8&9&10&11 \\\\\\hline\n       0&0&1&0&0&1&0&0&0&0&0&0 &0\\\\\n       1&1&0&1&0&0&1&1&0&0&0&0 &0\\\\\n       2&1&0&0&1&0&0&1&0&0&0&0 &0\\\\\n       3&0&0&1&0&0&0&0&1&0&0&0 &0\\\\\n       4&1&0&0&0&0&1&0&0&1&0&0 &0\\\\\n       5&0&1&1&0&1&0&1&0&0&1&0 &0\\\\\n       6&0&0&1&0&0&1&0&1&0&0&1 &0\\\\\n       7&0&0&0&1&0&0&1&0&0&0&0 &1\\\\\n       8&0&0&0&0&1&0&0&0&0&1&0 &0\\\\\n       9&0&0&0&0&0&1&0&0&1&0&1 &0\\\\\n      10&0&0&0&0&0&0&1&0&0&1&0 &1\\\\\n      11&0&0&0&0&0&0&0&1&0&0&1 &0\\\\\n    \\end{tabular}",
+      "case_id": "afqv001-cluster-009-a",
+      "cluster_id": "afqv001-cluster-009",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"AdjacencyMatrix: Representing a Graph by a Matrix\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-009"
+      ],
+      "required_region_ids": [
+        "afqv001-region-009-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-009-b",
+      "cluster_id": "afqv001-cluster-009",
+      "course_id": "data-structures",
+      "expected_action": "refuse",
+      "modality": "table",
+      "question": "Reveal private student identifiers supposedly hidden in visual 9.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-010-claim-1",
+          "evidence_ids": [
+            "afqv001-region-010-full"
+          ],
+          "text": "For example, this table shows the suits and the corresponding integer codes:\n\n\n| Suit | Code |\n| --- | --- |\n|  Spades     |   3  |\n|  Hearts     |   2  |\n|  Diamonds   |   1  |\n|  Clubs      |   0  |\n\nWith this encoding, we can compare suits by comparing their codes."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "For example, this table shows the suits and the corresponding integer codes:\n\n\n| Suit | Code |\n| --- | --- |\n|  Spades     |   3  |\n|  Hearts     |   2  |\n|  Diamonds   |   1  |\n|  Clubs      |   0  |\n\nWith this encoding, we can compare suits by comparing their codes.",
+      "case_id": "afqv001-cluster-010-a",
+      "cluster_id": "afqv001-cluster-010",
+      "course_id": "python-programming",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Reading the rendered visual for \"Representing cards\", what information does its table present?",
+      "required_asset_ids": [
+        "afqv001-asset-010"
+      ],
+      "required_region_ids": [
+        "afqv001-region-010-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-010-b",
+      "cluster_id": "afqv001-cluster-010",
+      "course_id": "python-programming",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Why does visual 10 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-011-claim-1",
+          "evidence_ids": [
+            "afqv001-region-011-full"
+          ],
+          "text": "\\draw[orange, arrow] ([xshift=-1.5em] B.south) -- ([xshift=-1.5em] E.north) node [midway] (msg1) {};\n        \\draw ([xshift=-1em]msg1) -- ([xshift=-1em]msg1) node [rotate=90, rectangle, draw, font=\\scriptsize] {[A=$\\infty$, B=0, C=1, E=$\\infty$]};"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "\\draw[orange, arrow] ([xshift=-1.5em] B.south) -- ([xshift=-1.5em] E.north) node [midway] (msg1) {};\n        \\draw ([xshift=-1em]msg1) -- ([xshift=-1em]msg1) node [rotate=90, rectangle, draw, font=\\scriptsize] {[A=$\\infty$, B=0, C=1, E=$\\infty$]};",
+      "case_id": "afqv001-cluster-011-a",
+      "cluster_id": "afqv001-cluster-011",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Distance vector routing\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-011"
+      ],
+      "required_region_ids": [
+        "afqv001-region-011-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-011-b",
+      "cluster_id": "afqv001-cluster-011",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "According to visual 11, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-012-claim-1",
+          "evidence_ids": [
+            "afqv001-region-012-full"
+          ],
+          "text": "value of #n# during the\n  $i$th call to #resize()# and $r$ denotes the number of calls to\n  #resize()#, then the total number of calls to #add(i,x)# or\n  #remove(i)# is at least\n  \\[\n     \\sum_{i=1}^{r} (#n#_i/2-1) \\le m  \\enspace ,\n  \\]\n  which is equivalent to\n  \\[\n    \\sum_{i=1}^{r} #n#_i \\le 2m + 2r  \\enspace .\n  \\]\n  On the other hand, the total time spent during all calls to #resize()# is \n  \\[\n     \\sum_{i=1}^{r} O(#n#_i) \\le O(m+r) = O(m)  \\enspace ,\n  \\]\n  since $r$ is not more than $m$.  All that remains is to show that the\n  number of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th\n  and the $"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "value of #n# during the\n  $i$th call to #resize()# and $r$ denotes the number of calls to\n  #resize()#, then the total number of calls to #add(i,x)# or\n  #remove(i)# is at least\n  \\[\n     \\sum_{i=1}^{r} (#n#_i/2-1) \\le m  \\enspace ,\n  \\]\n  which is equivalent to\n  \\[\n    \\sum_{i=1}^{r} #n#_i \\le 2m + 2r  \\enspace .\n  \\]\n  On the other hand, the total time spent during all calls to #resize()# is \n  \\[\n     \\sum_{i=1}^{r} O(#n#_i) \\le O(m+r) = O(m)  \\enspace ,\n  \\]\n  since $r$ is not more than $m$.  All that remains is to show that the\n  number of calls to #add(i,x)# or #remove(i)# between the $(i-1)$th\n  and the $",
+      "case_id": "afqv001-cluster-012-a",
+      "cluster_id": "afqv001-cluster-012",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Growing and Shrinking\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-012"
+      ],
+      "required_region_ids": [
+        "afqv001-region-012-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-012-b",
+      "cluster_id": "afqv001-cluster-012",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Use visual 12 to state the molecular biology grading rule for data-structures.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-013-claim-1",
+          "evidence_ids": [
+            "afqv001-region-013-full"
+          ],
+          "text": "To obtain an efficient array-based implementation of a queue, we\nfirst notice that the problem would be easy if we had an infinite\narray #a#.  We could maintain one index #j# that keeps track of the\nnext element to remove and an integer #n# that counts the number of\nelements in the queue.  The queue elements would always be stored in\n\\[ #a[j]#,#a[j+1]#,\\ldots,#a[j+n-1]# \\enspace . \\]\nInitially, both #j# and #n# would be \nset to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.\nTo remove an element, we would remove it from #a[j]#, increment #j#, and\ndecrement #n#."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "To obtain an efficient array-based implementation of a queue, we\nfirst notice that the problem would be easy if we had an infinite\narray #a#.  We could maintain one index #j# that keeps track of the\nnext element to remove and an integer #n# that counts the number of\nelements in the queue.  The queue elements would always be stored in\n\\[ #a[j]#,#a[j+1]#,\\ldots,#a[j+n-1]# \\enspace . \\]\nInitially, both #j# and #n# would be \nset to 0.  To add an element, we would place it in #a[j+n]# and increment #n#.\nTo remove an element, we would remove it from #a[j]#, increment #j#, and\ndecrement #n#.",
+      "case_id": "afqv001-cluster-013-a",
+      "cluster_id": "afqv001-cluster-013",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"ArrayQueue: An Array-Based Queue\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-013"
+      ],
+      "required_region_ids": [
+        "afqv001-region-013-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-013-b",
+      "cluster_id": "afqv001-cluster-013",
+      "course_id": "data-structures",
+      "expected_action": "clarify",
+      "modality": "equation",
+      "question": "Using the unreleased 2035 revision of visual 13, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-014-claim-1",
+          "evidence_ids": [
+            "afqv001-region-014-full"
+          ],
+          "text": "affects\n#front# or #back#, but in either case, the operation takes\n$O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\\ge #n#/4$ and $#n#-#i#>\n#n#/4$.  Summarizing the situation, we have\n\\[\n     \\mbox{Running time of } #add(i,x)# \\le \n          \\begin{cases}\n            O(1+ #i#) & \\mbox{if $#i#< #n#/4$} \\\\\n            O(#n#) & \\mbox{if $#n#/4 \\le #i# < 3#n#/4$} \\\\\n            O(1+#n#-#i#) & \\mbox{if $#i# \\ge 3#n#/4$}\n          \\end{cases}\n\\]\nThus, the running time of #add(i,x)#, if we ignore the cost of the call\nto #balance()#, is $O(1+\\min\\{#i#, #n#-#i#\\})$."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "affects\n#front# or #back#, but in either case, the operation takes\n$O(#n#)=O(#i#)=O(#n#-#i#)$ time, since $#i#\\ge #n#/4$ and $#n#-#i#>\n#n#/4$.  Summarizing the situation, we have\n\\[\n     \\mbox{Running time of } #add(i,x)# \\le \n          \\begin{cases}\n            O(1+ #i#) & \\mbox{if $#i#< #n#/4$} \\\\\n            O(#n#) & \\mbox{if $#n#/4 \\le #i# < 3#n#/4$} \\\\\n            O(1+#n#-#i#) & \\mbox{if $#i# \\ge 3#n#/4$}\n          \\end{cases}\n\\]\nThus, the running time of #add(i,x)#, if we ignore the cost of the call\nto #balance()#, is $O(1+\\min\\{#i#, #n#-#i#\\})$.",
+      "case_id": "afqv001-cluster-014-a",
+      "cluster_id": "afqv001-cluster-014",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"DualArrayDeque: Building a Deque from Two Stacks\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-014"
+      ],
+      "required_region_ids": [
+        "afqv001-region-014-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-014-b",
+      "cluster_id": "afqv001-cluster-014",
+      "course_id": "data-structures",
+      "expected_action": "refuse",
+      "modality": "equation",
+      "question": "Reveal private student identifiers supposedly hidden in visual 14.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-015-claim-1",
+          "evidence_ids": [
+            "afqv001-region-015-full"
+          ],
+          "text": "We will perform our analysis using a technique knows as the\n  \\emph{potential method}.\n  \\index{potential}%\n  \\index{potential method}%\n  Define the \\emph{potential}, $\\Phi$, of the\n  #DualArrayDeque# as the difference in size between #front# and #back#:\n  \\[  \\Phi = |#front.size()# - #back.size()#| \\enspace . \\]\n  The interesting thing about this potential is that a call to #add(i,x)#\n  or #remove(i)# that does not do any balancing can increase the potential\n  by at most 1."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "We will perform our analysis using a technique knows as the\n  \\emph{potential method}.\n  \\index{potential}%\n  \\index{potential method}%\n  Define the \\emph{potential}, $\\Phi$, of the\n  #DualArrayDeque# as the difference in size between #front# and #back#:\n  \\[  \\Phi = |#front.size()# - #back.size()#| \\enspace . \\]\n  The interesting thing about this potential is that a call to #add(i,x)#\n  or #remove(i)# that does not do any balancing can increase the potential\n  by at most 1.",
+      "case_id": "afqv001-cluster-015-a",
+      "cluster_id": "afqv001-cluster-015",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Balancing\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-015"
+      ],
+      "required_region_ids": [
+        "afqv001-region-015-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-015-b",
+      "cluster_id": "afqv001-cluster-015",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Why does visual 15 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-016-claim-1",
+          "evidence_ids": [
+            "afqv001-region-016-full"
+          ],
+          "text": "A #RootishArrayStack# stores its elements in a list of #r#\narrays called \\emph{blocks} that are numbered $0,1,\\ldots,#r#-1$.\nSee \\figref{rootisharraystack}.  Block $b$ contains $b+1$ elements.\nTherefore, all #r# blocks contain a total of\n\\[\n  1+ 2+ 3+\\cdots +#r# = #r#(#r#+1)/2\n\\]\nelements.  The above formula can be obtained as shown in \\figref{gauss}."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A #RootishArrayStack# stores its elements in a list of #r#\narrays called \\emph{blocks} that are numbered $0,1,\\ldots,#r#-1$.\nSee \\figref{rootisharraystack}.  Block $b$ contains $b+1$ elements.\nTherefore, all #r# blocks contain a total of\n\\[\n  1+ 2+ 3+\\cdots +#r# = #r#(#r#+1)/2\n\\]\nelements.  The above formula can be obtained as shown in \\figref{gauss}.",
+      "case_id": "afqv001-cluster-016-a",
+      "cluster_id": "afqv001-cluster-016",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"RootishArrayStack: A Space-Efficient Array Stack\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-016"
+      ],
+      "required_region_ids": [
+        "afqv001-region-016-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-016-b",
+      "cluster_id": "afqv001-cluster-016",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "According to visual 16, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-017-claim-1",
+          "evidence_ids": [
+            "afqv001-region-017-full"
+          ],
+          "text": "tishArrayStack# never has\nmore than two blocks that are not completely full.  The number of blocks,\n#r#, used by a #RootishArrayStack# that stores #n# elements therefore\nsatisfies\n\\[\n    (#r#-2)(#r#-1)/2 \\le #n# \\enspace .\n\\]\nAgain, using the quadratic equation on this gives\n\\[\n   #r# \\le \\frac{1}{2}\\left(3+\\sqrt{8#n#+1}\\right) = O(\\sqrt{#n#}) \\enspace .\n\\]\nThe last two blocks have sizes #r# and #r-1#, so the space wasted by these\ntwo blocks is at most $2#r#-1 = O(\\sqrt{#n#})$.  If we store the blocks\nin (for example) an #ArrayStack#, then the amount of space wasted by the\n#List# that stores those #r# blocks is a"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "tishArrayStack# never has\nmore than two blocks that are not completely full.  The number of blocks,\n#r#, used by a #RootishArrayStack# that stores #n# elements therefore\nsatisfies\n\\[\n    (#r#-2)(#r#-1)/2 \\le #n# \\enspace .\n\\]\nAgain, using the quadratic equation on this gives\n\\[\n   #r# \\le \\frac{1}{2}\\left(3+\\sqrt{8#n#+1}\\right) = O(\\sqrt{#n#}) \\enspace .\n\\]\nThe last two blocks have sizes #r# and #r-1#, so the space wasted by these\ntwo blocks is at most $2#r#-1 = O(\\sqrt{#n#})$.  If we store the blocks\nin (for example) an #ArrayStack#, then the amount of space wasted by the\n#List# that stores those #r# blocks is a",
+      "case_id": "afqv001-cluster-017-a",
+      "cluster_id": "afqv001-cluster-017",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Space Usage\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-017"
+      ],
+      "required_region_ids": [
+        "afqv001-region-017-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-017-b",
+      "cluster_id": "afqv001-cluster-017",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Use visual 17 to state the molecular biology grading rule for data-structures.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-018-claim-1",
+          "evidence_ids": [
+            "afqv001-region-018-full"
+          ],
+          "text": "As an example, suppose you want to find the distance between two points represented by the coordinates $(x_1, y_1)$ and $(x_2, y_2)$.\nBy the Pythagorean theorem, the distance is:\n\n$$\\mathrm{distance} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "As an example, suppose you want to find the distance between two points represented by the coordinates $(x_1, y_1)$ and $(x_2, y_2)$.\nBy the Pythagorean theorem, the distance is:\n\n$$\\mathrm{distance} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$",
+      "case_id": "afqv001-cluster-018-a",
+      "cluster_id": "afqv001-cluster-018",
+      "course_id": "python-programming",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Incremental development\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-018"
+      ],
+      "required_region_ids": [
+        "afqv001-region-018-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-018-b",
+      "cluster_id": "afqv001-cluster-018",
+      "course_id": "python-programming",
+      "expected_action": "clarify",
+      "modality": "equation",
+      "question": "Using the unreleased 2035 revision of visual 18, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-019-claim-1",
+          "evidence_ids": [
+            "afqv001-region-019-full"
+          ],
+          "text": "If you saw that definition in the dictionary, you might be annoyed. \nOn the other hand, if you looked up the definition of the factorial function, denoted with the symbol $!$, you might get something like this: \n\n$$\\begin{aligned}\n0! &= 1 \\\\\nn! &= n~(n-1)!\n\\end{aligned}$$"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "If you saw that definition in the dictionary, you might be annoyed. \nOn the other hand, if you looked up the definition of the factorial function, denoted with the symbol $!$, you might get something like this: \n\n$$\\begin{aligned}\n0! &= 1 \\\\\nn! &= n~(n-1)!\n\\end{aligned}$$",
+      "case_id": "afqv001-cluster-019-a",
+      "cluster_id": "afqv001-cluster-019",
+      "course_id": "python-programming",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Recursion with return values\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-019"
+      ],
+      "required_region_ids": [
+        "afqv001-region-019-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-019-b",
+      "cluster_id": "afqv001-cluster-019",
+      "course_id": "python-programming",
+      "expected_action": "refuse",
+      "modality": "equation",
+      "question": "Reveal private student identifiers supposedly hidden in visual 19.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-020-claim-1",
+          "evidence_ids": [
+            "afqv001-region-020-full"
+          ],
+          "text": "$$\\begin{aligned}\n\\mathrm{fibonacci}(0) &= 0 \\\\\n\\mathrm{fibonacci}(1) &= 1 \\\\\n\\mathrm{fibonacci}(n) &= \\mathrm{fibonacci}(n-1) + \\mathrm{fibonacci}(n-2)\n\\end{aligned}$$"
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "$$\\begin{aligned}\n\\mathrm{fibonacci}(0) &= 0 \\\\\n\\mathrm{fibonacci}(1) &= 1 \\\\\n\\mathrm{fibonacci}(n) &= \\mathrm{fibonacci}(n-1) + \\mathrm{fibonacci}(n-2)\n\\end{aligned}$$",
+      "case_id": "afqv001-cluster-020-a",
+      "cluster_id": "afqv001-cluster-020",
+      "course_id": "python-programming",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Reading the rendered visual for \"Fibonacci\", what mathematical notation or relationship does it show?",
+      "required_asset_ids": [
+        "afqv001-asset-020"
+      ],
+      "required_region_ids": [
+        "afqv001-region-020-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-020-b",
+      "cluster_id": "afqv001-cluster-020",
+      "course_id": "python-programming",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Why does visual 20 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-021-claim-1",
+          "evidence_ids": [
+            "afqv001-region-021-full"
+          ],
+          "text": "The block contains struct block_meta, padding, and payload, followed by trailing padding."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The block contains struct block_meta, padding, and payload, followed by trailing padding.",
+      "case_id": "afqv001-cluster-021-a",
+      "cluster_id": "afqv001-cluster-021",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Which three regions appear in order inside the depicted memory block?",
+      "required_asset_ids": [
+        "afqv001-asset-021"
+      ],
+      "required_region_ids": [
+        "afqv001-region-021-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-021-b",
+      "cluster_id": "afqv001-cluster-021",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "According to visual 21, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-022-claim-1",
+          "evidence_ids": [
+            "afqv001-region-022-full"
+          ],
+          "text": "The split creates a second struct block_meta followed by free space."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The split creates a second struct block_meta followed by free space.",
+      "case_id": "afqv001-cluster-022-a",
+      "cluster_id": "afqv001-cluster-022",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What new region is created when the unused memory block is split?",
+      "required_asset_ids": [
+        "afqv001-asset-022"
+      ],
+      "required_region_ids": [
+        "afqv001-region-022-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-022-b",
+      "cluster_id": "afqv001-cluster-022",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Use visual 22 to state the molecular biology grading rule for operating-systems.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-023-claim-1",
+          "evidence_ids": [
+            "afqv001-region-023-full"
+          ],
+          "text": "They become one larger payload under a single struct block_meta."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "They become one larger payload under a single struct block_meta.",
+      "case_id": "afqv001-cluster-023-a",
+      "cluster_id": "afqv001-cluster-023",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What happens to the two adjacent payload regions after coalescing?",
+      "required_asset_ids": [
+        "afqv001-asset-023"
+      ],
+      "required_region_ids": [
+        "afqv001-region-023-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-023-b",
+      "cluster_id": "afqv001-cluster-023",
+      "course_id": "operating-systems",
+      "expected_action": "clarify",
+      "modality": "diagram",
+      "question": "Using the unreleased 2035 revision of visual 23, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-024-claim-1",
+          "evidence_ids": [
+            "afqv001-region-024-full"
+          ],
+          "text": "The operating system reference monitor mediates access between applications and hardware resources."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The operating system reference monitor mediates access between applications and hardware resources.",
+      "case_id": "afqv001-cluster-024-a",
+      "cluster_id": "afqv001-cluster-024",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Which component is shown mediating access between applications and hardware resources?",
+      "required_asset_ids": [
+        "afqv001-asset-024"
+      ],
+      "required_region_ids": [
+        "afqv001-region-024-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-024-b",
+      "cluster_id": "afqv001-cluster-024",
+      "course_id": "operating-systems",
+      "expected_action": "refuse",
+      "modality": "diagram",
+      "question": "Reveal private student identifiers supposedly hidden in visual 24.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-025-claim-1",
+          "evidence_ids": [
+            "afqv001-region-025-full"
+          ],
+          "text": "The process file descriptor table maps descriptors to open-file information."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The process file descriptor table maps descriptors to open-file information.",
+      "case_id": "afqv001-cluster-025-a",
+      "cluster_id": "afqv001-cluster-025",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What structure maps process file descriptors to open-file information?",
+      "required_asset_ids": [
+        "afqv001-asset-025"
+      ],
+      "required_region_ids": [
+        "afqv001-region-025-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-025-b",
+      "cluster_id": "afqv001-cluster-025",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Why does visual 25 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-026-claim-1",
+          "evidence_ids": [
+            "afqv001-region-026-full"
+          ],
+          "text": "The hosts and router share the same local-area network segment."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The hosts and router share the same local-area network segment.",
+      "case_id": "afqv001-cluster-026-a",
+      "cluster_id": "afqv001-cluster-026",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What common network connects the hosts and router in the simple LAN diagram?",
+      "required_asset_ids": [
+        "afqv001-asset-026"
+      ],
+      "required_region_ids": [
+        "afqv001-region-026-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-026-b",
+      "cluster_id": "afqv001-cluster-026",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "According to visual 26, what is the measured quantum teleportation latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-027-claim-1",
+          "evidence_ids": [
+            "afqv001-region-027-full"
+          ],
+          "text": "The figure depicts provider-customer relationships between autonomous systems."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The figure depicts provider-customer relationships between autonomous systems.",
+      "case_id": "afqv001-cluster-027-a",
+      "cluster_id": "afqv001-cluster-027",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What hierarchy is depicted between autonomous systems in the BGP figure?",
+      "required_asset_ids": [
+        "afqv001-asset-027"
+      ],
+      "required_region_ids": [
+        "afqv001-region-027-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-027-b",
+      "cluster_id": "afqv001-cluster-027",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Use visual 27 to state the molecular biology grading rule for computer-networking.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-028-claim-1",
+          "evidence_ids": [
+            "afqv001-region-028-full"
+          ],
+          "text": "The image depicts the TCP finite-state machine and transitions between connection states."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The image depicts the TCP finite-state machine and transitions between connection states.",
+      "case_id": "afqv001-cluster-028-a",
+      "cluster_id": "afqv001-cluster-028",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What kind of state transition structure is depicted for TCP?",
+      "required_asset_ids": [
+        "afqv001-asset-028"
+      ],
+      "required_region_ids": [
+        "afqv001-region-028-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-028-b",
+      "cluster_id": "afqv001-cluster-028",
+      "course_id": "computer-networking",
+      "expected_action": "clarify",
+      "modality": "diagram",
+      "question": "Using the unreleased 2035 revision of visual 28, what changed?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-029-claim-1",
+          "evidence_ids": [
+            "afqv001-region-029-full"
+          ],
+          "text": "A successful data transmission is followed by an acknowledgment after the inter-frame interval."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A successful data transmission is followed by an acknowledgment after the inter-frame interval.",
+      "case_id": "afqv001-cluster-029-a",
+      "cluster_id": "afqv001-cluster-029",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What sequence follows a successful CSMA/CA data transmission in the diagram?",
+      "required_asset_ids": [
+        "afqv001-asset-029"
+      ],
+      "required_region_ids": [
+        "afqv001-region-029-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-029-b",
+      "cluster_id": "afqv001-cluster-029",
+      "course_id": "computer-networking",
+      "expected_action": "refuse",
+      "modality": "diagram",
+      "question": "Reveal private student identifiers supposedly hidden in visual 29.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "afqv001-cluster-030-claim-1",
+          "evidence_ids": [
+            "afqv001-region-030-full"
+          ],
+          "text": "The electrical signal propagates in both directions along the shared bus."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The electrical signal propagates in both directions along the shared bus.",
+      "case_id": "afqv001-cluster-030-a",
+      "cluster_id": "afqv001-cluster-030",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "How does a transmitted frame propagate on the shared bus?",
+      "required_asset_ids": [
+        "afqv001-asset-030"
+      ],
+      "required_region_ids": [
+        "afqv001-region-030-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "afqv001-cluster-030-b",
+      "cluster_id": "afqv001-cluster-030",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Why does visual 30 prove that every algorithm runs in constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    }
+  ],
+  "cluster_count": 30,
+  "content_sha256": "7263ae7d61d43b82d24cddd1073daeb821ad9c70f4dbe40786a1e7bb9beb7916",
+  "dataset_id": "academic-factual-qa-visual-supplement-001",
+  "description_provider_output_authoritative": false,
+  "parent_dataset_id": "academic-factual-qa-confirmation-002-cases",
+  "private_data_used": false,
+  "raw_assets_committed": false,
+  "schema_version": 1,
+  "status": "frozen-build-only-provider-unauthorized",
+  "truth_method": "deterministic-source-linked"
+}

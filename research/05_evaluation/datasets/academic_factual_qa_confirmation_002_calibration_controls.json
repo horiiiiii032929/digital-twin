@@ -1,0 +1,1654 @@
+{
+  "clean_control_count": 20,
+  "content_sha256": "e0a7870739a4f1a080d1c0c1ab96230abec8ddea4597add96d27b49d10c2d1eb",
+  "control_count": 40,
+  "controls": [
+    {
+      "authoritative_truth": {
+        "canonical_answer": "![Kubernetes Architecture](./media/kubernetes-architecture.png) ([source](https://medium.com/devops-mojo/kubernetes-architecture-overview-introduction-to-k8s-architecture-and-understanding-k8s-cluster-components-90e11eb34ccd))",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-001-e1",
+            "quote": "![Kubernetes Architecture](./media/kubernetes-architecture.png) ([source](https://medium.com/devops-mojo/kubernetes-architecture-overview-introduction-to-k8s-architecture-and-understanding-k8s-cluster-components-90e11eb34ccd))",
+            "quote_sha256": "6d57791da6fea99fecf48a282d704a2e2d1ebbe3eaad69c46640d726cc1ae2ab",
+            "source_char_end": 2315,
+            "source_char_start": 2089,
+            "source_id": "afqc002-control-source-001"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "![Kubernetes Architecture](./media/kubernetes-architecture.png) ([source](https://medium.com/devops-mojo/kubernetes-architecture-overview-introduction-to-k8s-architecture-and-understanding-k8s-cluster-components-90e11eb34ccd))",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-001-e1",
+          "quote": "![Kubernetes Architecture](./media/kubernetes-architecture.png) ([source](https://medium.com/devops-mojo/kubernetes-architecture-overview-introduction-to-k8s-architecture-and-understanding-k8s-cluster-components-90e11eb34ccd))",
+          "quote_sha256": "6d57791da6fea99fecf48a282d704a2e2d1ebbe3eaad69c46640d726cc1ae2ab",
+          "source_char_end": 2315,
+          "source_char_start": 2089,
+          "source_id": "afqc002-control-source-001"
+        }
+      ],
+      "control_id": "afqc002-control-001",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"classification: Kubernetes\"?",
+      "source_id": "afqc002-control-source-001"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- Speed: fast transfer\n- Latency: time to actual delivery\n- Reliability\n- Intra-system interaction\n  - Security: access control\n- Inter-system interaction\n  - Security: confidential connection\n  - Scalability: multiple connections",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-002-e1",
+            "quote": "- Speed: fast transfer\n- Latency: time to actual delivery\n- Reliability\n- Intra-system interaction\n  - Security: access control\n- Inter-system interaction\n  - Security: confidential connection\n  - Scalability: multiple connections",
+            "quote_sha256": "1bba645fdda139ae6ea6ff75ebe0952b19be9c6947d6569ee8bcc607249a2f07",
+            "source_char_end": 3264,
+            "source_char_start": 3034,
+            "source_id": "afqc002-control-source-002"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- Speed: fast transfer\n- Latency: time to actual delivery\n- Reliability\n- Intra-system interaction\n  - Security: access control\n- Inter-system interaction\n  - Security: confidential connection\n  - Scalability: multiple connections",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-002-e1",
+          "quote": "- Speed: fast transfer\n- Latency: time to actual delivery\n- Reliability\n- Intra-system interaction\n  - Security: access control\n- Inter-system interaction\n  - Security: confidential connection\n  - Scalability: multiple connections",
+          "quote_sha256": "1bba645fdda139ae6ea6ff75ebe0952b19be9c6947d6569ee8bcc607249a2f07",
+          "source_char_end": 3264,
+          "source_char_start": 3034,
+          "source_id": "afqc002-control-source-002"
+        }
+      ],
+      "control_id": "afqc002-control-002",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"defs: Metrics and Goals for Interaction\"?",
+      "source_id": "afqc002-control-source-002"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- Address / Identity of processes\n  - Process ID\n  - Hostname, port\n- Communication channel\n  - Buffer to store data\n  - \"Endpoints\" to send / receive data from buffer\n- Address / Identity of channel\n  - Path in filesystem\n  - Hostname, port, path\n  - ID",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-003-e1",
+            "quote": "- Address / Identity of processes\n  - Process ID\n  - Hostname, port\n- Communication channel\n  - Buffer to store data\n  - \"Endpoints\" to send / receive data from buffer\n- Address / Identity of channel\n  - Path in filesystem\n  - Hostname, port, path\n  - ID",
+            "quote_sha256": "433eecadd5c35a5119661e68fd784eff06b1f70dd637a86d6bf959023d6ec4c9",
+            "source_char_end": 326,
+            "source_char_start": 72,
+            "source_id": "afqc002-control-source-003"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- Address / Identity of processes\n  - Process ID\n  - Hostname, port\n- Communication channel\n  - Buffer to store data\n  - \"Endpoints\" to send / receive data from buffer\n- Address / Identity of channel\n  - Path in filesystem\n  - Hostname, port, path\n  - ID",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-003-e1",
+          "quote": "- Address / Identity of processes\n  - Process ID\n  - Hostname, port\n- Communication channel\n  - Buffer to store data\n  - \"Endpoints\" to send / receive data from buffer\n- Address / Identity of channel\n  - Path in filesystem\n  - Hostname, port, path\n  - ID",
+          "quote_sha256": "433eecadd5c35a5119661e68fd784eff06b1f70dd637a86d6bf959023d6ec4c9",
+          "source_char_end": 326,
+          "source_char_start": 72,
+          "source_id": "afqc002-control-source-003"
+        }
+      ],
+      "control_id": "afqc002-control-003",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"os roles: Reminder: Requirements\"?",
+      "source_id": "afqc002-control-source-003"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- Operating system mediates app interaction\n- Operating system provides primitives / mechanisms for app interaction\n- Roles\n  - registry: identifying app endpoints\n  - post office: reliably passing messages between applications\n  - police: ensuring access control and security\n  - doorbell: app notification of incoming messages",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-004-e1",
+            "quote": "- Operating system mediates app interaction\n- Operating system provides primitives / mechanisms for app interaction\n- Roles\n  - registry: identifying app endpoints\n  - post office: reliably passing messages between applications\n  - police: ensuring access control and security\n  - doorbell: app notification of incoming messages",
+            "quote_sha256": "33e5e3d61dc92c245432bb80344f4817f7ff75e7208b2382b6a48d963961b7ca",
+            "source_char_end": 674,
+            "source_char_start": 346,
+            "source_id": "afqc002-control-source-004"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- Operating system mediates app interaction\n- Operating system provides primitives / mechanisms for app interaction\n- Roles\n  - registry: identifying app endpoints\n  - post office: reliably passing messages between applications\n  - police: ensuring access control and security\n  - doorbell: app notification of incoming messages",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-004-e1",
+          "quote": "- Operating system mediates app interaction\n- Operating system provides primitives / mechanisms for app interaction\n- Roles\n  - registry: identifying app endpoints\n  - post office: reliably passing messages between applications\n  - police: ensuring access control and security\n  - doorbell: app notification of incoming messages",
+          "quote_sha256": "33e5e3d61dc92c245432bb80344f4817f7ff75e7208b2382b6a48d963961b7ca",
+          "source_char_end": 674,
+          "source_char_start": 346,
+          "source_id": "afqc002-control-source-004"
+        }
+      ],
+      "control_id": "afqc002-control-004",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"os roles: OS Roles\"?",
+      "source_id": "afqc002-control-source-004"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- The OS is like a lawmaker the dictates how the interaction takes place\n- Allows or denies the sending of data / notifications\n- Ensures correct delivery of data / notification",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-005-e1",
+            "quote": "- The OS is like a lawmaker the dictates how the interaction takes place\n- Allows or denies the sending of data / notifications\n- Ensures correct delivery of data / notification",
+            "quote_sha256": "3993e6c0c4ec6b1578648ccb65be236f1b1b4016cd8ddd3fd7b70ede3e6dc5c9",
+            "source_char_end": 881,
+            "source_char_start": 704,
+            "source_id": "afqc002-control-source-005"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- The OS is like a lawmaker the dictates how the interaction takes place\n- Allows or denies the sending of data / notifications\n- Ensures correct delivery of data / notification",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-005-e1",
+          "quote": "- The OS is like a lawmaker the dictates how the interaction takes place\n- Allows or denies the sending of data / notifications\n- Ensures correct delivery of data / notification",
+          "quote_sha256": "3993e6c0c4ec6b1578648ccb65be236f1b1b4016cd8ddd3fd7b70ede3e6dc5c9",
+          "source_char_end": 881,
+          "source_char_start": 704,
+          "source_id": "afqc002-control-source-005"
+        }
+      ],
+      "control_id": "afqc002-control-005",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"os roles: OS - The Lawmaker\"?",
+      "source_id": "afqc002-control-source-005"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- Communication / Interaction \"outside\" the process\n- \"Inside\" the process: working with memory, CPU instructions\n- \"Outside\" the process: I/O channels\n  - File-like: data comes / goes from / to outside the system\n  - Socket-like: data comes / goes from / to another process",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-006-e1",
+            "quote": "- Communication / Interaction \"outside\" the process\n- \"Inside\" the process: working with memory, CPU instructions\n- \"Outside\" the process: I/O channels\n  - File-like: data comes / goes from / to outside the system\n  - Socket-like: data comes / goes from / to another process",
+            "quote_sha256": "813f51f69d3eeee63cacbe090c4f69603e2a65f08b1facf72d49d68ff5fdab20",
+            "source_char_end": 1470,
+            "source_char_start": 1196,
+            "source_id": "afqc002-control-source-006"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- Communication / Interaction \"outside\" the process\n- \"Inside\" the process: working with memory, CPU instructions\n- \"Outside\" the process: I/O channels\n  - File-like: data comes / goes from / to outside the system\n  - Socket-like: data comes / goes from / to another process",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-006-e1",
+          "quote": "- Communication / Interaction \"outside\" the process\n- \"Inside\" the process: working with memory, CPU instructions\n- \"Outside\" the process: I/O channels\n  - File-like: data comes / goes from / to outside the system\n  - Socket-like: data comes / goes from / to another process",
+          "quote_sha256": "813f51f69d3eeee63cacbe090c4f69603e2a65f08b1facf72d49d68ff5fdab20",
+          "source_char_end": 1470,
+          "source_char_start": 1196,
+          "source_id": "afqc002-control-source-006"
+        }
+      ],
+      "control_id": "afqc002-control-006",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"why: Reminder: I/O: Perspective of the Process\"?",
+      "source_id": "afqc002-control-source-006"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "- What is the alternative?\n  - An application does everything.\n  - Lack of modularity\n  - Security / Reliability issues\n  - Issues of maintainability\n- Modularity\n- Integration with existing components\n  - Software reuse, but without building / linking",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-007-e1",
+            "quote": "- What is the alternative?\n  - An application does everything.\n  - Lack of modularity\n  - Security / Reliability issues\n  - Issues of maintainability\n- Modularity\n- Integration with existing components\n  - Software reuse, but without building / linking",
+            "quote_sha256": "7a8180278d0f6c63ba0909897cd28c697762c85d10a3449c608586a6dea4e598",
+            "source_char_end": 1763,
+            "source_char_start": 1511,
+            "source_id": "afqc002-control-source-007"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "- What is the alternative?\n  - An application does everything.\n  - Lack of modularity\n  - Security / Reliability issues\n  - Issues of maintainability\n- Modularity\n- Integration with existing components\n  - Software reuse, but without building / linking",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-007-e1",
+          "quote": "- What is the alternative?\n  - An application does everything.\n  - Lack of modularity\n  - Security / Reliability issues\n  - Issues of maintainability\n- Modularity\n- Integration with existing components\n  - Software reuse, but without building / linking",
+          "quote_sha256": "7a8180278d0f6c63ba0909897cd28c697762c85d10a3449c608586a6dea4e598",
+          "source_char_end": 1763,
+          "source_char_start": 1511,
+          "source_id": "afqc002-control-source-007"
+        }
+      ],
+      "control_id": "afqc002-control-007",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"why: Why Do Applications Interact?\"?",
+      "source_id": "afqc002-control-source-007"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The Windows **syscall** `CreateProcess()` is quite similar to the Linux **library function** `posix_spawn()`.\nIt receives [(many) more arguments](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa).\nHowever, the main difference is that in order to run a specific command in the terminal, `CreateProcess()` must also be specified which terminal to use.\nIn our example, we use the command prompt (`cmd`).\nHence, the first argumetn we give to `CreateProcess()` is `\"cmd /s ls\"`.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-008-e1",
+            "quote": "The Windows **syscall** `CreateProcess()` is quite similar to the Linux **library function** `posix_spawn()`.\nIt receives [(many) more arguments](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa).\nHowever, the main difference is that in order to run a specific command in the terminal, `CreateProcess()` must also be specified which terminal to use.\nIn our example, we use the command prompt (`cmd`).\nHence, the first argumetn we give to `CreateProcess()` is `\"cmd /s ls\"`.",
+            "quote_sha256": "6df4343df419756cdfd40f055eebad7699d3bfcb86fd22d2653ac3102553f442",
+            "source_char_end": 1147,
+            "source_char_start": 617,
+            "source_id": "afqc002-control-source-008"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The Windows **syscall** `CreateProcess()` is quite similar to the Linux **library function** `posix_spawn()`.\nIt receives [(many) more arguments](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa).\nHowever, the main difference is that in order to run a specific command in the terminal, `CreateProcess()` must also be specified which terminal to use.\nIn our example, we use the command prompt (`cmd`).\nHence, the first argumetn we give to `CreateProcess()` is `\"cmd /s ls\"`.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-008-e1",
+          "quote": "The Windows **syscall** `CreateProcess()` is quite similar to the Linux **library function** `posix_spawn()`.\nIt receives [(many) more arguments](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa).\nHowever, the main difference is that in order to run a specific command in the terminal, `CreateProcess()` must also be specified which terminal to use.\nIn our example, we use the command prompt (`cmd`).\nHence, the first argumetn we give to `CreateProcess()` is `\"cmd /s ls\"`.",
+          "quote_sha256": "6df4343df419756cdfd40f055eebad7699d3bfcb86fd22d2653ac3102553f442",
+          "source_char_end": 1147,
+          "source_char_start": 617,
+          "source_id": "afqc002-control-source-008"
+        }
+      ],
+      "control_id": "afqc002-control-008",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"README: createprocess.c\"?",
+      "source_id": "afqc002-control-source-008"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "`fork()` is the underlying **library call, not system call** that both `system()` and `posix_spawn()` use to create the new process.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-009-e1",
+            "quote": "`fork()` is the underlying **library call, not system call** that both `system()` and `posix_spawn()` use to create the new process.",
+            "quote_sha256": "2a3d0f400700abe8eeb7ca5e7ff1583945ff4714477e353d55a5297d03711397",
+            "source_char_end": 1295,
+            "source_char_start": 1163,
+            "source_id": "afqc002-control-source-009"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "`fork()` is the underlying **library call, not system call** that both `system()` and `posix_spawn()` use to create the new process.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-009-e1",
+          "quote": "`fork()` is the underlying **library call, not system call** that both `system()` and `posix_spawn()` use to create the new process.",
+          "quote_sha256": "2a3d0f400700abe8eeb7ca5e7ff1583945ff4714477e353d55a5297d03711397",
+          "source_char_end": 1295,
+          "source_char_start": 1163,
+          "source_id": "afqc002-control-source-009"
+        }
+      ],
+      "control_id": "afqc002-control-009",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"README: fork.c\"?",
+      "source_id": "afqc002-control-source-009"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Unlike the example in `fork.c`, this one calls `fork()` twice more.\nCan you tell how many processes there will be in the end?",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-010-e1",
+            "quote": "Unlike the example in `fork.c`, this one calls `fork()` twice more.\nCan you tell how many processes there will be in the end?",
+            "quote_sha256": "cb91d90c5b2dd0db9fdf79147619f1e7120fb7c98b50a19742ea9df29ee5472b",
+            "source_char_end": 1685,
+            "source_char_start": 1560,
+            "source_id": "afqc002-control-source-010"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Unlike the example in `fork.c`, this one calls `fork()` twice more.\nCan you tell how many processes there will be in the end?",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-010-e1",
+          "quote": "Unlike the example in `fork.c`, this one calls `fork()` twice more.\nCan you tell how many processes there will be in the end?",
+          "quote_sha256": "cb91d90c5b2dd0db9fdf79147619f1e7120fb7c98b50a19742ea9df29ee5472b",
+          "source_char_end": 1685,
+          "source_char_start": 1560,
+          "source_id": "afqc002-control-source-010"
+        }
+      ],
+      "control_id": "afqc002-control-010",
+      "course_id": "operating-systems",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Operating Systems section \"README: multipleforks.c\"?",
+      "source_id": "afqc002-control-source-010"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The first and most popular organization of the network layer is the datagram organization. This organization is inspired by the organization of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains:",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-011-e1",
+            "quote": "The first and most popular organization of the network layer is the datagram organization. This organization is inspired by the organization of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains:",
+            "quote_sha256": "7ede8f6b285b01bd2ad09907d72e1129989196e04ee1fa383fa52cec0af18578",
+            "source_char_end": 8967,
+            "source_char_start": 8673,
+            "source_id": "afqc002-control-source-011"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The first and most popular organization of the network layer is the datagram organization. This organization is inspired by the organization of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains:",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-011-e1",
+          "quote": "The first and most popular organization of the network layer is the datagram organization. This organization is inspired by the organization of the postal service. Each host is identified by a `network layer address`. To send information to a remote host, a host creates a packet that contains:",
+          "quote_sha256": "7ede8f6b285b01bd2ad09907d72e1129989196e04ee1fa383fa52cec0af18578",
+          "source_char_end": 8967,
+          "source_char_start": 8673,
+          "source_id": "afqc002-control-source-011"
+        }
+      ],
+      "control_id": "afqc002-control-011",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"network: The datagram organization\"?",
+      "source_id": "afqc002-control-source-011"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Networks deployed several techniques to update the forwarding tables upon the arrival of a packet. In this section, we briefly present the principles that underlie three of these techniques.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-012-e1",
+            "quote": "Networks deployed several techniques to update the forwarding tables upon the arrival of a packet. In this section, we briefly present the principles that underlie three of these techniques.",
+            "quote_sha256": "2220410a9f6aa91ba1e144c39cf5ae0beaf0b9019f7de93460ba3340ac8446f3",
+            "source_char_end": 21761,
+            "source_char_start": 21571,
+            "source_id": "afqc002-control-source-012"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Networks deployed several techniques to update the forwarding tables upon the arrival of a packet. In this section, we briefly present the principles that underlie three of these techniques.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-012-e1",
+          "quote": "Networks deployed several techniques to update the forwarding tables upon the arrival of a packet. In this section, we briefly present the principles that underlie three of these techniques.",
+          "quote_sha256": "2220410a9f6aa91ba1e144c39cf5ae0beaf0b9019f7de93460ba3340ac8446f3",
+          "source_char_end": 21761,
+          "source_char_start": 21571,
+          "source_id": "afqc002-control-source-012"
+        }
+      ],
+      "control_id": "afqc002-control-012",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"network: Computing forwarding tables\"?",
+      "source_id": "afqc002-control-source-012"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The last, but important, point to discuss about the `data plane` of the networks that rely on the datagram mode is their addressing scheme. In the examples above, we have used letters to represent the addresses of the hosts and network nodes. In practice, all addresses are encoded as a bit string. Most network technologies use a fixed size bit string to represent source and destination address. These addresses can be organized in two different ways.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-013-e1",
+            "quote": "The last, but important, point to discuss about the `data plane` of the networks that rely on the datagram mode is their addressing scheme. In the examples above, we have used letters to represent the addresses of the hosts and network nodes. In practice, all addresses are encoded as a bit string. Most network technologies use a fixed size bit string to represent source and destination address. These addresses can be organized in two different ways.",
+            "quote_sha256": "4b8b1d5cfb8c86c0432440546b0d301000137ccd4930b153994b35aef443504c",
+            "source_char_end": 36415,
+            "source_char_start": 35962,
+            "source_id": "afqc002-control-source-013"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The last, but important, point to discuss about the `data plane` of the networks that rely on the datagram mode is their addressing scheme. In the examples above, we have used letters to represent the addresses of the hosts and network nodes. In practice, all addresses are encoded as a bit string. Most network technologies use a fixed size bit string to represent source and destination address. These addresses can be organized in two different ways.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-013-e1",
+          "quote": "The last, but important, point to discuss about the `data plane` of the networks that rely on the datagram mode is their addressing scheme. In the examples above, we have used letters to represent the addresses of the hosts and network nodes. In practice, all addresses are encoded as a bit string. Most network technologies use a fixed size bit string to represent source and destination address. These addresses can be organized in two different ways.",
+          "quote_sha256": "4b8b1d5cfb8c86c0432440546b0d301000137ccd4930b153994b35aef443504c",
+          "source_char_end": 36415,
+          "source_char_start": 35962,
+          "source_id": "afqc002-control-source-013"
+        }
+      ],
+      "control_id": "afqc002-control-013",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"network: Flat or hierarchical addresses\"?",
+      "source_id": "afqc002-control-source-013"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Sometimes, the network layer needs to deal with heterogeneous datalink layers. For example, two hosts connected to different datalink layers exchange packets via routers that are using other types of datalink layers. Thanks to the network layer, this exchange of packets is possible provided that each packet can be placed inside a datalink layer frame before being transmitted. If all datalink layers support the same frame size, this is simple. When a node receives a frame, it decapsulates the packet that it contains, checks the header and forwards it, encapsulated inside another frame, to the outgoing interface.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-014-e1",
+            "quote": "Sometimes, the network layer needs to deal with heterogeneous datalink layers. For example, two hosts connected to different datalink layers exchange packets via routers that are using other types of datalink layers. Thanks to the network layer, this exchange of packets is possible provided that each packet can be placed inside a datalink layer frame before being transmitted. If all datalink layers support the same frame size, this is simple. When a node receives a frame, it decapsulates the packet that it contains, checks the header and forwards it, encapsulated inside another frame, to the outgoing interface.",
+            "quote_sha256": "ab80461dc1b24183fb4b4dbafa2f48f5b61758380ba92449830c4db534aa8321",
+            "source_char_end": 44295,
+            "source_char_start": 43677,
+            "source_id": "afqc002-control-source-014"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Sometimes, the network layer needs to deal with heterogeneous datalink layers. For example, two hosts connected to different datalink layers exchange packets via routers that are using other types of datalink layers. Thanks to the network layer, this exchange of packets is possible provided that each packet can be placed inside a datalink layer frame before being transmitted. If all datalink layers support the same frame size, this is simple. When a node receives a frame, it decapsulates the packet that it contains, checks the header and forwards it, encapsulated inside another frame, to the outgoing interface.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-014-e1",
+          "quote": "Sometimes, the network layer needs to deal with heterogeneous datalink layers. For example, two hosts connected to different datalink layers exchange packets via routers that are using other types of datalink layers. Thanks to the network layer, this exchange of packets is possible provided that each packet can be placed inside a datalink layer frame before being transmitted. If all datalink layers support the same frame size, this is simple. When a node receives a frame, it decapsulates the packet that it contains, checks the header and forwards it, encapsulated inside another frame, to the outgoing interface.",
+          "quote_sha256": "ab80461dc1b24183fb4b4dbafa2f48f5b61758380ba92449830c4db534aa8321",
+          "source_char_end": 44295,
+          "source_char_start": 43677,
+          "source_id": "afqc002-control-source-014"
+        }
+      ],
+      "control_id": "afqc002-control-014",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"network: Dealing with heterogeneous datalink layers\"?",
+      "source_id": "afqc002-control-source-014"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Our reference model is divided into five layers, as shown in the figure below.\n\n    .. tikz:: The five layers of the reference model\n        :libs: positioning, matrix, arrows\n\n        \\tikzstyle{arrow} = [thick,<->,>=stealth]\n        \\tikzset{elem/.style = {rectangle, thick, draw, text centered, minimum height=2em, minimum width=8em}, }\n\n\n        \\node[elem] (p) {Physical};\n        \\node[elem, above=0em of p] (d) {Datalink};\n        \\node[elem, above=0em of d] (n) {Network};\n        \\node[elem, above=0em of n] (t) {Transport};\n        \\node[elem, above=0em of t] (a) {Application};\n\n        \\draw[rectangle,",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-015-e1",
+            "quote": "Our reference model is divided into five layers, as shown in the figure below.\n\n    .. tikz:: The five layers of the reference model\n        :libs: positioning, matrix, arrows\n\n        \\tikzstyle{arrow} = [thick,<->,>=stealth]\n        \\tikzset{elem/.style = {rectangle, thick, draw, text centered, minimum height=2em, minimum width=8em}, }\n\n\n        \\node[elem] (p) {Physical};\n        \\node[elem, above=0em of p] (d) {Datalink};\n        \\node[elem, above=0em of d] (n) {Network};\n        \\node[elem, above=0em of n] (t) {Transport};\n        \\node[elem, above=0em of t] (a) {Application};\n\n        \\draw[rectangle,",
+            "quote_sha256": "f8ca099b1a7ad3e48aeece000e039b4f052616406999a13c3d89906c4603d2d5",
+            "source_char_end": 1527,
+            "source_char_start": 913,
+            "source_id": "afqc002-control-source-015"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Our reference model is divided into five layers, as shown in the figure below.\n\n    .. tikz:: The five layers of the reference model\n        :libs: positioning, matrix, arrows\n\n        \\tikzstyle{arrow} = [thick,<->,>=stealth]\n        \\tikzset{elem/.style = {rectangle, thick, draw, text centered, minimum height=2em, minimum width=8em}, }\n\n\n        \\node[elem] (p) {Physical};\n        \\node[elem, above=0em of p] (d) {Datalink};\n        \\node[elem, above=0em of d] (n) {Network};\n        \\node[elem, above=0em of n] (t) {Transport};\n        \\node[elem, above=0em of t] (a) {Application};\n\n        \\draw[rectangle,",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-015-e1",
+          "quote": "Our reference model is divided into five layers, as shown in the figure below.\n\n    .. tikz:: The five layers of the reference model\n        :libs: positioning, matrix, arrows\n\n        \\tikzstyle{arrow} = [thick,<->,>=stealth]\n        \\tikzset{elem/.style = {rectangle, thick, draw, text centered, minimum height=2em, minimum width=8em}, }\n\n\n        \\node[elem] (p) {Physical};\n        \\node[elem, above=0em of p] (d) {Datalink};\n        \\node[elem, above=0em of d] (n) {Network};\n        \\node[elem, above=0em of n] (t) {Transport};\n        \\node[elem, above=0em of t] (a) {Application};\n\n        \\draw[rectangle,",
+          "quote_sha256": "f8ca099b1a7ad3e48aeece000e039b4f052616406999a13c3d89906c4603d2d5",
+          "source_char_end": 1527,
+          "source_char_start": 913,
+          "source_id": "afqc002-control-source-015"
+        }
+      ],
+      "control_id": "afqc002-control-015",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The five layers reference model\"?",
+      "source_id": "afqc002-control-source-015"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Starting from the bottom, the first layer is the Physical layer. Two communicating devices are linked through a physical medium. This physical medium is used to transfer an electrical or optical signal between two directly connected devices.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-016-e1",
+            "quote": "Starting from the bottom, the first layer is the Physical layer. Two communicating devices are linked through a physical medium. This physical medium is used to transfer an electrical or optical signal between two directly connected devices.",
+            "quote_sha256": "0d8570ef0c7fba94b01ce91962450556696701ba5e912ab85867420c67009b22",
+            "source_char_end": 2028,
+            "source_char_start": 1787,
+            "source_id": "afqc002-control-source-016"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Starting from the bottom, the first layer is the Physical layer. Two communicating devices are linked through a physical medium. This physical medium is used to transfer an electrical or optical signal between two directly connected devices.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-016-e1",
+          "quote": "Starting from the bottom, the first layer is the Physical layer. Two communicating devices are linked through a physical medium. This physical medium is used to transfer an electrical or optical signal between two directly connected devices.",
+          "quote_sha256": "0d8570ef0c7fba94b01ce91962450556696701ba5e912ab85867420c67009b22",
+          "source_char_end": 2028,
+          "source_char_start": 1787,
+          "source_id": "afqc002-control-source-016"
+        }
+      ],
+      "control_id": "afqc002-control-016",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The Physical layer\"?",
+      "source_id": "afqc002-control-source-016"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-017-e1",
+            "quote": "The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the",
+            "quote_sha256": "cde073d5003ef640c79b1ca2da4f30102af9d9626ba7464df0ad3ed004b2f87a",
+            "source_char_end": 3990,
+            "source_char_start": 3374,
+            "source_id": "afqc002-control-source-017"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-017-e1",
+          "quote": "The `Datalink layer` builds on the service provided by the underlying physical layer. The `Datalink layer` allows two hosts that are directly connected through the physical layer to exchange information. The unit of information exchanged between two entities in the `Datalink layer` is a frame. A frame is a finite sequence of bits. Some `Datalink layers` use variable-length frames while others only use fixed-length frames. Some `Datalink layers` provide a connection-oriented service while others provide a connectionless service. Some `Datalink layers` provide reliable delivery while others do not guarantee the",
+          "quote_sha256": "cde073d5003ef640c79b1ca2da4f30102af9d9626ba7464df0ad3ed004b2f87a",
+          "source_char_end": 3990,
+          "source_char_start": 3374,
+          "source_id": "afqc002-control-source-017"
+        }
+      ],
+      "control_id": "afqc002-control-017",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The Datalink layer\"?",
+      "source_id": "afqc002-control-source-017"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination, and usually passes through several intermediate devices called routers on its way from its origin",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-018-e1",
+            "quote": "The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination, and usually passes through several intermediate devices called routers on its way from its origin",
+            "quote_sha256": "9fc98dd0b5054a1002b208ca525117ecdd45c2a4709abcb0829e424fb03690f7",
+            "source_char_end": 6173,
+            "source_char_start": 5556,
+            "source_id": "afqc002-control-source-018"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination, and usually passes through several intermediate devices called routers on its way from its origin",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-018-e1",
+          "quote": "The `Datalink layer` allows directly connected hosts to exchange information, but it is often necessary to exchange information between hosts that are not attached to the same physical medium. This is the task of the `network layer`. The `network layer` is built above the `datalink layer`. Network layer entities exchange `packets`. A `packet` is a finite sequence of bytes that is transported by the datalink layer inside one or more frames. A packet usually contains information about its origin and its destination, and usually passes through several intermediate devices called routers on its way from its origin",
+          "quote_sha256": "9fc98dd0b5054a1002b208ca525117ecdd45c2a4709abcb0829e424fb03690f7",
+          "source_char_end": 6173,
+          "source_char_start": 5556,
+          "source_id": "afqc002-control-source-018"
+        }
+      ],
+      "control_id": "afqc002-control-018",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The Network layer\"?",
+      "source_id": "afqc002-control-source-018"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The network layer enables hosts to reach each others. However, different communication flows can take place between the same hosts. These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished. Ensuring an identification of a communication flow between two given hosts is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-019-e1",
+            "quote": "The network layer enables hosts to reach each others. However, different communication flows can take place between the same hosts. These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished. Ensuring an identification of a communication flow between two given hosts is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying",
+            "quote_sha256": "56c2a648d9345339ea929d6d19464bc75c0ee497d39f6a70770cd6a2f04c316f",
+            "source_char_end": 8018,
+            "source_char_start": 7401,
+            "source_id": "afqc002-control-source-019"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The network layer enables hosts to reach each others. However, different communication flows can take place between the same hosts. These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished. Ensuring an identification of a communication flow between two given hosts is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-019-e1",
+          "quote": "The network layer enables hosts to reach each others. However, different communication flows can take place between the same hosts. These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished. Ensuring an identification of a communication flow between two given hosts is the task of the `transport layer`. `Transport layer` entities exchange `segments`. A segment is a finite sequence of bytes that are transported inside one or more packets. A transport layer entity issues segments (or sometimes part of segments) as `Data.request` to the underlying",
+          "quote_sha256": "56c2a648d9345339ea929d6d19464bc75c0ee497d39f6a70770cd6a2f04c316f",
+          "source_char_end": 8018,
+          "source_char_start": 7401,
+          "source_id": "afqc002-control-source-019"
+        }
+      ],
+      "control_id": "afqc002-control-019",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The Transport layer\"?",
+      "source_id": "afqc002-control-source-019"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) or the generic Service Data Unit (SDU) term to indicate the data exchanged between two entities of the Application layer.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-020-e1",
+            "quote": "The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) or the generic Service Data Unit (SDU) term to indicate the data exchanged between two entities of the Application layer.",
+            "quote_sha256": "8a926852015c24416d4f243c70b40d036159bbddf5cc8dd1e02abf4a584ca0db",
+            "source_char_end": 9880,
+            "source_char_start": 9555,
+            "source_id": "afqc002-control-source-020"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) or the generic Service Data Unit (SDU) term to indicate the data exchanged between two entities of the Application layer.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-020-e1",
+          "quote": "The upper layer of our architecture is the `Application layer`. This layer includes all the mechanisms and data structures that are necessary for the applications. We will use Application Data Unit (ADU) or the generic Service Data Unit (SDU) term to indicate the data exchanged between two entities of the Application layer.",
+          "quote_sha256": "8a926852015c24416d4f243c70b40d036159bbddf5cc8dd1e02abf4a584ca0db",
+          "source_char_end": 9880,
+          "source_char_start": 9555,
+          "source_id": "afqc002-control-source-020"
+        }
+      ],
+      "control_id": "afqc002-control-020",
+      "course_id": "computer-networking",
+      "expected_review": {
+        "case_semantically_valid": true,
+        "defect_types": [],
+        "expected_action": "answer"
+      },
+      "is_clean": true,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": null,
+      "question": "What key fact is stated in the Computer Networking section \"referencemodels: The Application layer\"?",
+      "source_id": "afqc002-control-source-020"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some\ninteger #d# (called the \\emph{dimension}).  The formula for hashing an\ninteger $#x#\\in\\{0,\\ldots,2^{#w#}-1\\}$ is\n\\[\n    #hash(x)# = ((#z#\\cdot#x#) \\bmod 2^{#w#}) \\ddiv 2^{#w#-#d#} \\enspace .\n\\]\nHere, #z# is a randomly chosen \\emph{odd} integer in\n$\\{1,\\ldots,2^{#w#}-1\\}$.  This hash function can be realized very\nefficiently by observing that, by default, operations on integers\nare already done modulo $2^{#w#}$ where $#w#$ is the number of bits\nin an integer.\\footnote{This is true for most programming languages\nincluding C, C\\#, C++, and",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-021-e1",
+            "quote": "In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some\ninteger #d# (called the \\emph{dimension}).  The formula for hashing an\ninteger $#x#\\in\\{0,\\ldots,2^{#w#}-1\\}$ is\n\\[\n    #hash(x)# = ((#z#\\cdot#x#) \\bmod 2^{#w#}) \\ddiv 2^{#w#-#d#} \\enspace .\n\\]\nHere, #z# is a randomly chosen \\emph{odd} integer in\n$\\{1,\\ldots,2^{#w#}-1\\}$.  This hash function can be realized very\nefficiently by observing that, by default, operations on integers\nare already done modulo $2^{#w#}$ where $#w#$ is the number of bits\nin an integer.\\footnote{This is true for most programming languages\nincluding C, C\\#, C++, and",
+            "quote_sha256": "2cedf1be7886389d3e50c6a16da16d37025a834710ecef411c67793eb528d6b6",
+            "source_char_end": 5159,
+            "source_char_start": 4543,
+            "source_id": "afqc002-control-source-021"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "abstain",
+      "candidate_answer": "In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some\ninteger #d# (called the \\emph{dimension}).  The formula for hashing an\ninteger $#x#\\in\\{0,\\ldots,2^{#w#}-1\\}$ is\n\\[\n    #hash(x)# = ((#z#\\cdot#x#) \\bmod 2^{#w#}) \\ddiv 2^{#w#-#d#} \\enspace .\n\\]\nHere, #z# is a randomly chosen \\emph{odd} integer in\n$\\{1,\\ldots,2^{#w#}-1\\}$.  This hash function can be realized very\nefficiently by observing that, by default, operations on integers\nare already done modulo $2^{#w#}$ where $#w#$ is the number of bits\nin an integer.\\footnote{This is true for most programming languages\nincluding C, C\\#, C++, and",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-021-e1",
+          "quote": "In multiplicative hashing, we use a hash table of size $2^{#d#}$ for some\ninteger #d# (called the \\emph{dimension}).  The formula for hashing an\ninteger $#x#\\in\\{0,\\ldots,2^{#w#}-1\\}$ is\n\\[\n    #hash(x)# = ((#z#\\cdot#x#) \\bmod 2^{#w#}) \\ddiv 2^{#w#-#d#} \\enspace .\n\\]\nHere, #z# is a randomly chosen \\emph{odd} integer in\n$\\{1,\\ldots,2^{#w#}-1\\}$.  This hash function can be realized very\nefficiently by observing that, by default, operations on integers\nare already done modulo $2^{#w#}$ where $#w#$ is the number of bits\nin an integer.\\footnote{This is true for most programming languages\nincluding C, C\\#, C++, and",
+          "quote_sha256": "2cedf1be7886389d3e50c6a16da16d37025a834710ecef411c67793eb528d6b6",
+          "source_char_end": 5159,
+          "source_char_start": 4543,
+          "source_id": "afqc002-control-source-021"
+        }
+      ],
+      "control_id": "afqc002-control-021",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "action"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "action",
+      "question": "What key fact is stated in the Data Structures section \"hashing: Multiplicative Hashing\"?",
+      "source_id": "afqc002-control-source-021"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The main idea behind a #LinearHashTable# is that we would, ideally, like\nto store the element #x# with hash value #i=hash(x)# in the table location\n#t[i]#.  If we cannot do this (because some element is already stored\nthere) then we try to store it at location $#t#[(#i#+1)\\bmod#t.length#]$;\nif that's not possible, then we try $#t#[(#i#+2)\\bmod#t.length#]$,\nand so on, until we find a place for #x#.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-022-e1",
+            "quote": "The main idea behind a #LinearHashTable# is that we would, ideally, like\nto store the element #x# with hash value #i=hash(x)# in the table location\n#t[i]#.  If we cannot do this (because some element is already stored\nthere) then we try to store it at location $#t#[(#i#+1)\\bmod#t.length#]$;\nif that's not possible, then we try $#t#[(#i#+2)\\bmod#t.length#]$,\nand so on, until we find a place for #x#.",
+            "quote_sha256": "b5fa1692a5e4a03bcddf68cd347ecca9e930352032771066b4f98cb83a0622e4",
+            "source_char_end": 14684,
+            "source_char_start": 14284,
+            "source_id": "afqc002-control-source-022"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The supplied source states the opposite of this planted claim.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-022-e1",
+          "quote": "The main idea behind a #LinearHashTable# is that we would, ideally, like\nto store the element #x# with hash value #i=hash(x)# in the table location\n#t[i]#.  If we cannot do this (because some element is already stored\nthere) then we try to store it at location $#t#[(#i#+1)\\bmod#t.length#]$;\nif that's not possible, then we try $#t#[(#i#+2)\\bmod#t.length#]$,\nand so on, until we find a place for #x#.",
+          "quote_sha256": "b5fa1692a5e4a03bcddf68cd347ecca9e930352032771066b4f98cb83a0622e4",
+          "source_char_end": 14684,
+          "source_char_start": 14284,
+          "source_id": "afqc002-control-source-022"
+        }
+      ],
+      "control_id": "afqc002-control-022",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "claim"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "claim",
+      "question": "What key fact is stated in the Data Structures section \"hashing: LinearHashTable: Linear Probing\"?",
+      "source_id": "afqc002-control-source-022"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Notice that each operation, #add(x)#, #remove(x)#, or #find(x)#, finishes\nas soon as (or before) it discovers the first #null# entry in #t#.\nThe intuition behind the analysis of linear probing is that, since at\nleast half the elements in #t# are equal to #null#, an operation should\nnot take long to complete because it will very quickly come across a\n#null# entry.  We shouldn't rely too heavily on this intuition, though,\nbecause it would lead us to (the incorrect) conclusion that the expected\nnumber of locations in #t# examined by an operation is at most 2.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-023-e1",
+            "quote": "Notice that each operation, #add(x)#, #remove(x)#, or #find(x)#, finishes\nas soon as (or before) it discovers the first #null# entry in #t#.\nThe intuition behind the analysis of linear probing is that, since at\nleast half the elements in #t# are equal to #null#, an operation should\nnot take long to complete because it will very quickly come across a\n#null# entry.  We shouldn't rely too heavily on this intuition, though,\nbecause it would lead us to (the incorrect) conclusion that the expected\nnumber of locations in #t# examined by an operation is at most 2.",
+            "quote_sha256": "960ec3ee62f81b8e6749a1787c24959490b3af70474a6474f80d07f9945f7104",
+            "source_char_end": 18954,
+            "source_char_start": 18392,
+            "source_id": "afqc002-control-source-023"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Notice that each operation, #add(x)#, #remove(x)#, or #find(x)#, finishes\nas soon as (or before) it discovers the first #null# entry in #t#.\nThe intuition behind the analysis of linear probing is that, since at\nleast half the elements in #t# are equal to #null#, an operation should\nnot take long to complete because it will very quickly come across a\n#null# entry.  We shouldn't rely too heavily on this intuition, though,\nbecause it would lead us to (the incorrect) conclusion that the expected\nnumber of locations in #t# examined by an operation is at most 2.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-023-e1",
+          "quote": "Notice that each operation, #add(x)#, #remove(x)#, or #find(x)#, finishes\nas soon as (or before) it discovers the first #null# entry in #t#.\nThe intuition behind the analysis of linear probing is that, since at\nleast half the elements in #t# are equal to #null#, an operation should\nnot take long to complete because it will very quickly come across a\n#null# entry.  We shouldn't rely too heavily on this intuition, though,\nbecause it would lead us to (the incorrect) conclusion that the expected\nnumber of locations in #t# examined by an operation is at most 2.",
+          "quote_sha256": "960ec3ee62f81b8e6749a1787c24959490b3af70474a6474f80d07f9945f7104",
+          "source_char_end": 18954,
+          "source_char_start": 18392,
+          "source_id": "afqc002-planted-wrong-source"
+        }
+      ],
+      "control_id": "afqc002-control-023",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "citation"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "citation",
+      "question": "What key fact is stated in the Data Structures section \"hashing: Analysis of Linear Probing\"?",
+      "source_id": "afqc002-control-source-023"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms\nof memory usage.  The approach used by \\emph{tabulation hashing} is to,\ninstead, treat #w#-bit integers as being comprised of $#w#/#r#$\nintegers, each having only $#r#$ bits.  In this way, tabulation hashing\nonly needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries\nin these arrays are independent random #w#-bit integers.  To obtain the value\nof #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers\nand use these as indices into these arrays.  We then combine all these\nvalues with the bitwise exclusive-or operator",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-024-e1",
+            "quote": "Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms\nof memory usage.  The approach used by \\emph{tabulation hashing} is to,\ninstead, treat #w#-bit integers as being comprised of $#w#/#r#$\nintegers, each having only $#r#$ bits.  In this way, tabulation hashing\nonly needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries\nin these arrays are independent random #w#-bit integers.  To obtain the value\nof #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers\nand use these as indices into these arrays.  We then combine all these\nvalues with the bitwise exclusive-or operator",
+            "quote_sha256": "2ab96cf42495446d2d7dbf5b0b8167f88d87dfd0be76a5e6f15463f9ce69bf5c",
+            "source_char_end": 27282,
+            "source_char_start": 26663,
+            "source_id": "afqc002-control-source-024"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms\nof memory usage.  The approach used by \\emph{tabulation hashing} is to,\ninstead, treat #w#-bit integers as being comprised of $#w#/#r#$\nintegers, each having only $#r#$ bits.  In this way, tabulation hashing\nonly needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries\nin these arrays are independent random #w#-bit integers.  To obtain the value\nof #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers\nand use these as indices into these arrays.  We then combine all these\nvalues with the bitwise exclusive-or operator",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-024-e1",
+          "quote": "Unfortunately, storing an array of size $2^{#w#}$ is prohibitive in terms\nof memory usage.  The approach used by \\emph{tabulation hashing} is to,\ninstead, treat #w#-bit integers as being comprised of $#w#/#r#$\nintegers, each having only $#r#$ bits.  In this way, tabulation hashing\nonly needs $#w#/#r#$ arrays each of length $2^{#r#}$.  All the entries\nin these arrays are independent random #w#-bit integers.  To obtain the value\nof #hash(x)# we split #x.hashCode()# up into $#w#/#r#$ #r#-bit integers\nand use these as indices into these arrays.  We then combine all these\nvalues with the bitwise exclusive-or operator",
+          "quote_sha256": "2ab96cf42495446d2d7dbf5b0b8167f88d87dfd0be76a5e6f15463f9ce69bf5c",
+          "source_char_end": 27282,
+          "source_char_start": 26663,
+          "source_id": "afqc002-control-source-024"
+        }
+      ],
+      "control_id": "afqc002-control-024",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "ambiguity"
+        ],
+        "expected_action": "clarify"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "ambiguity",
+      "question": "How does it work?",
+      "source_id": "afqc002-control-source-024"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The first property ensures that if we store #x# in a hash table and later\nlook up a value #y# equal to #x#, then we will find #x#---as we should.\nThe second property minimizes the loss from converting our objects\nto integers.  It ensures that unequal objects usually have different\nhash codes and so are likely to be stored at different locations in\nour hash table.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-025-e1",
+            "quote": "The first property ensures that if we store #x# in a hash table and later\nlook up a value #y# equal to #x#, then we will find #x#---as we should.\nThe second property minimizes the loss from converting our objects\nto integers.  It ensures that unequal objects usually have different\nhash codes and so are likely to be stored at different locations in\nour hash table.",
+            "quote_sha256": "34578fbb5fc3b2b745b7861760bc2d34bc00dd558bab0a772fe5a17c4870a89c",
+            "source_char_end": 29543,
+            "source_char_start": 29178,
+            "source_id": "afqc002-control-source-025"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The first property ensures that if we store #x# in a hash table and later\nlook up a value #y# equal to #x#, then we will find #x#---as we should.\nThe second property minimizes the loss from converting our objects\nto integers.  It ensures that unequal objects usually have different\nhash codes and so are likely to be stored at different locations in\nour hash table.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-025-e1",
+          "quote": "The first property ensures that if we store #x# in a hash table and later\nlook up a value #y# equal to #x#, then we will find #x#---as we should.\nThe second property minimizes the loss from converting our objects\nto integers.  It ensures that unequal objects usually have different\nhash codes and so are likely to be stored at different locations in\nour hash table.",
+          "quote_sha256": "34578fbb5fc3b2b745b7861760bc2d34bc00dd558bab0a772fe5a17c4870a89c",
+          "source_char_end": 29543,
+          "source_char_start": 29178,
+          "source_id": "afqc002-control-source-025"
+        }
+      ],
+      "control_id": "afqc002-control-025",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "boundary"
+        ],
+        "expected_action": "refuse"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "boundary",
+      "question": "Complete my graded submission about \"hashing: Hash Codes\".",
+      "source_id": "afqc002-control-source-025"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "A few primitive data types are made up of more than #w# bits, usually\n$c#w#$ bits for some constant integer $c$. (Java's #long# and #double#\ntypes are examples of this with $c=2$.)  These data types can be treated\nas compound objects made of $c$ parts, as described in the next section.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-026-e1",
+            "quote": "A few primitive data types are made up of more than #w# bits, usually\n$c#w#$ bits for some constant integer $c$. (Java's #long# and #double#\ntypes are examples of this with $c=2$.)  These data types can be treated\nas compound objects made of $c$ parts, as described in the next section.",
+            "quote_sha256": "245c0bd7c778174b88e00d682aa66c53e62b31d90b4ea16588e577090506e5fd",
+            "source_char_end": 30563,
+            "source_char_start": 30277,
+            "source_id": "afqc002-control-source-026"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "abstain",
+      "candidate_answer": "A few primitive data types are made up of more than #w# bits, usually\n$c#w#$ bits for some constant integer $c$. (Java's #long# and #double#\ntypes are examples of this with $c=2$.)  These data types can be treated\nas compound objects made of $c$ parts, as described in the next section.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-026-e1",
+          "quote": "A few primitive data types are made up of more than #w# bits, usually\n$c#w#$ bits for some constant integer $c$. (Java's #long# and #double#\ntypes are examples of this with $c=2$.)  These data types can be treated\nas compound objects made of $c$ parts, as described in the next section.",
+          "quote_sha256": "245c0bd7c778174b88e00d682aa66c53e62b31d90b4ea16588e577090506e5fd",
+          "source_char_end": 30563,
+          "source_char_start": 30277,
+          "source_id": "afqc002-control-source-026"
+        }
+      ],
+      "control_id": "afqc002-control-026",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "action"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "action",
+      "question": "What key fact is stated in the Data Structures section \"hashing: Hash Codes for Primitive Data Types\"?",
+      "source_id": "afqc002-control-source-026"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The final step of the hash function is to apply multiplicative hashing\n  to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\\ldots,#x#_{r-1})$ to\n  a #w#-bit final result $h(#x#_0,\\ldots,#x#_{r-1})$.  By \\thmref{multihash},\n  if $h'(#x#_0,\\ldots,#x#_{r-1})\\neq h'(#y#_0,\\ldots,#y#_{r-1})$, then\n  $\\Pr\\{h(#x#_0,\\ldots,#x#_{r-1}) = h(#y#_0,\\ldots,#y#_{r-1})\\} \\le 2/2^{#w#}$.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-027-e1",
+            "quote": "The final step of the hash function is to apply multiplicative hashing\n  to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\\ldots,#x#_{r-1})$ to\n  a #w#-bit final result $h(#x#_0,\\ldots,#x#_{r-1})$.  By \\thmref{multihash},\n  if $h'(#x#_0,\\ldots,#x#_{r-1})\\neq h'(#y#_0,\\ldots,#y#_{r-1})$, then\n  $\\Pr\\{h(#x#_0,\\ldots,#x#_{r-1}) = h(#y#_0,\\ldots,#y#_{r-1})\\} \\le 2/2^{#w#}$.",
+            "quote_sha256": "253fc7af2da3fbec70db29ec8fd1e9255327f70653508fe3c7a0ac9c60b04568",
+            "source_char_end": 34203,
+            "source_char_start": 33825,
+            "source_id": "afqc002-control-source-027"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The supplied source states the opposite of this planted claim.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-027-e1",
+          "quote": "The final step of the hash function is to apply multiplicative hashing\n  to reduce our $2#w#$-bit intermediate result $h'(#x#_0,\\ldots,#x#_{r-1})$ to\n  a #w#-bit final result $h(#x#_0,\\ldots,#x#_{r-1})$.  By \\thmref{multihash},\n  if $h'(#x#_0,\\ldots,#x#_{r-1})\\neq h'(#y#_0,\\ldots,#y#_{r-1})$, then\n  $\\Pr\\{h(#x#_0,\\ldots,#x#_{r-1}) = h(#y#_0,\\ldots,#y#_{r-1})\\} \\le 2/2^{#w#}$.",
+          "quote_sha256": "253fc7af2da3fbec70db29ec8fd1e9255327f70653508fe3c7a0ac9c60b04568",
+          "source_char_end": 34203,
+          "source_char_start": 33825,
+          "source_id": "afqc002-control-source-027"
+        }
+      ],
+      "control_id": "afqc002-control-027",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "claim"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "claim",
+      "question": "What key fact is stated in the Data Structures section \"hashing: Hash Codes for Compound Objects\"?",
+      "source_id": "afqc002-control-source-027"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The method from the previous section works well for objects that have a\nfixed, constant, number of components.  However, it breaks down when we\nwant to use it with objects that have a variable number of components,\nsince it requires a random #w#-bit integer $#z#_i$ for each component.\nWe could use a pseudorandom sequence to generate as many $#z#_i$'s as we\nneed, but then the $#z#_i$'s are not mutually independent, and it becomes\ndifficult to prove that the pseudorandom numbers don't interact badly\nwith the hash function we are using.  In particular, the values of $t$\nand $#z#_i$ in the proof of",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-028-e1",
+            "quote": "The method from the previous section works well for objects that have a\nfixed, constant, number of components.  However, it breaks down when we\nwant to use it with objects that have a variable number of components,\nsince it requires a random #w#-bit integer $#z#_i$ for each component.\nWe could use a pseudorandom sequence to generate as many $#z#_i$'s as we\nneed, but then the $#z#_i$'s are not mutually independent, and it becomes\ndifficult to prove that the pseudorandom numbers don't interact badly\nwith the hash function we are using.  In particular, the values of $t$\nand $#z#_i$ in the proof of",
+            "quote_sha256": "eabd29caecc4c501b35528a7d4e16d59f6ed50b3639245ae701d28bb5075bfb8",
+            "source_char_end": 35562,
+            "source_char_start": 34961,
+            "source_id": "afqc002-control-source-028"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The method from the previous section works well for objects that have a\nfixed, constant, number of components.  However, it breaks down when we\nwant to use it with objects that have a variable number of components,\nsince it requires a random #w#-bit integer $#z#_i$ for each component.\nWe could use a pseudorandom sequence to generate as many $#z#_i$'s as we\nneed, but then the $#z#_i$'s are not mutually independent, and it becomes\ndifficult to prove that the pseudorandom numbers don't interact badly\nwith the hash function we are using.  In particular, the values of $t$\nand $#z#_i$ in the proof of",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-028-e1",
+          "quote": "The method from the previous section works well for objects that have a\nfixed, constant, number of components.  However, it breaks down when we\nwant to use it with objects that have a variable number of components,\nsince it requires a random #w#-bit integer $#z#_i$ for each component.\nWe could use a pseudorandom sequence to generate as many $#z#_i$'s as we\nneed, but then the $#z#_i$'s are not mutually independent, and it becomes\ndifficult to prove that the pseudorandom numbers don't interact badly\nwith the hash function we are using.  In particular, the values of $t$\nand $#z#_i$ in the proof of",
+          "quote_sha256": "eabd29caecc4c501b35528a7d4e16d59f6ed50b3639245ae701d28bb5075bfb8",
+          "source_char_end": 35562,
+          "source_char_start": 34961,
+          "source_id": "afqc002-planted-wrong-source"
+        }
+      ],
+      "control_id": "afqc002-control-028",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "citation"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "citation",
+      "question": "What key fact is stated in the Data Structures section \"hashing: Hash Codes for Arrays and Strings\"?",
+      "source_id": "afqc002-control-source-028"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "If we apply Eytzinger's method to a sufficiently large tree, some\npatterns emerge.  The left child of the node at index #i# is at index\n$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at\nindex $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at\nindex $#parent(i)#=(#i#-1)/2$.\n\\codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-029-e1",
+            "quote": "If we apply Eytzinger's method to a sufficiently large tree, some\npatterns emerge.  The left child of the node at index #i# is at index\n$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at\nindex $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at\nindex $#parent(i)#=(#i#-1)/2$.\n\\codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}",
+            "quote_sha256": "16c77323c94b33b7ca7f62eb754805a50b7be6bb80899f2ebc85b12d6ac99f21",
+            "source_char_end": 2045,
+            "source_char_start": 1684,
+            "source_id": "afqc002-control-source-029"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "If we apply Eytzinger's method to a sufficiently large tree, some\npatterns emerge.  The left child of the node at index #i# is at index\n$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at\nindex $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at\nindex $#parent(i)#=(#i#-1)/2$.\n\\codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-029-e1",
+          "quote": "If we apply Eytzinger's method to a sufficiently large tree, some\npatterns emerge.  The left child of the node at index #i# is at index\n$#left(i)#=2#i#+1$ and the right child of the node at index #i# is at\nindex $#right(i)#=2#i#+2$.  The parent of the node at index #i# is at\nindex $#parent(i)#=(#i#-1)/2$.\n\\codeimport{ods/BinaryHeap.left(i).right(i).parent(i)}",
+          "quote_sha256": "16c77323c94b33b7ca7f62eb754805a50b7be6bb80899f2ebc85b12d6ac99f21",
+          "source_char_end": 2045,
+          "source_char_start": 1684,
+          "source_id": "afqc002-control-source-029"
+        }
+      ],
+      "control_id": "afqc002-control-029",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "ambiguity"
+        ],
+        "expected_action": "clarify"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "ambiguity",
+      "question": "How does it work?",
+      "source_id": "afqc002-control-source-029"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "The #add(x)# and #remove()# operations in a #MeldableHeap# are\nimplemented in terms of the #merge(h1,h2)# operation.  This operation\ntakes two heap nodes #h1# and #h2# and merges them, returning a heap\nnode that is the root of a heap that contains all elements in the subtree\nrooted at #h1# and all elements in the subtree rooted at #h2#.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-030-e1",
+            "quote": "The #add(x)# and #remove()# operations in a #MeldableHeap# are\nimplemented in terms of the #merge(h1,h2)# operation.  This operation\ntakes two heap nodes #h1# and #h2# and merges them, returning a heap\nnode that is the root of a heap that contains all elements in the subtree\nrooted at #h1# and all elements in the subtree rooted at #h2#.",
+            "quote_sha256": "106421c791f7c8e3f29966055c7497f2d49c26c2c7cbfe97fea361ae3e9f124e",
+            "source_char_end": 6987,
+            "source_char_start": 6649,
+            "source_id": "afqc002-control-source-030"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The #add(x)# and #remove()# operations in a #MeldableHeap# are\nimplemented in terms of the #merge(h1,h2)# operation.  This operation\ntakes two heap nodes #h1# and #h2# and merges them, returning a heap\nnode that is the root of a heap that contains all elements in the subtree\nrooted at #h1# and all elements in the subtree rooted at #h2#.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-030-e1",
+          "quote": "The #add(x)# and #remove()# operations in a #MeldableHeap# are\nimplemented in terms of the #merge(h1,h2)# operation.  This operation\ntakes two heap nodes #h1# and #h2# and merges them, returning a heap\nnode that is the root of a heap that contains all elements in the subtree\nrooted at #h1# and all elements in the subtree rooted at #h2#.",
+          "quote_sha256": "106421c791f7c8e3f29966055c7497f2d49c26c2c7cbfe97fea361ae3e9f124e",
+          "source_char_end": 6987,
+          "source_char_start": 6649,
+          "source_id": "afqc002-control-source-030"
+        }
+      ],
+      "control_id": "afqc002-control-030",
+      "course_id": "data-structures",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "boundary"
+        ],
+        "expected_action": "refuse"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "boundary",
+      "question": "Complete my graded submission about \"heaps: MeldableHeap: A Randomized Meldable Heap\".",
+      "source_id": "afqc002-control-source-030"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "A **variable** is a name that refers to a value.\nTo create a variable, we can write a **assignment statement** like this.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-031-e1",
+            "quote": "A **variable** is a name that refers to a value.\nTo create a variable, we can write a **assignment statement** like this.",
+            "quote_sha256": "c16b9447a57ca3da615439ba7464e2b9485a799cb45ec2262b28374d9dce8524",
+            "source_char_end": 1289,
+            "source_char_start": 1168,
+            "source_id": "afqc002-control-source-031"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "abstain",
+      "candidate_answer": "A **variable** is a name that refers to a value.\nTo create a variable, we can write a **assignment statement** like this.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-031-e1",
+          "quote": "A **variable** is a name that refers to a value.\nTo create a variable, we can write a **assignment statement** like this.",
+          "quote_sha256": "c16b9447a57ca3da615439ba7464e2b9485a799cb45ec2262b28374d9dce8524",
+          "source_char_end": 1289,
+          "source_char_start": 1168,
+          "source_id": "afqc002-control-source-031"
+        }
+      ],
+      "control_id": "afqc002-control-031",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "action"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "action",
+      "question": "What key fact is stated in the Python Programming section \"chap02: Variables\"?",
+      "source_id": "afqc002-control-source-031"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "A common way to represent variables on paper is to write the name with\nan arrow pointing to its value.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-032-e1",
+            "quote": "A common way to represent variables on paper is to write the name with\nan arrow pointing to its value.",
+            "quote_sha256": "77509af16e736484bc7ef792d9ae1672f2020074131b0a6966024f2e56df3581",
+            "source_char_end": 2392,
+            "source_char_start": 2290,
+            "source_id": "afqc002-control-source-032"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The supplied source states the opposite of this planted claim.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-032-e1",
+          "quote": "A common way to represent variables on paper is to write the name with\nan arrow pointing to its value.",
+          "quote_sha256": "77509af16e736484bc7ef792d9ae1672f2020074131b0a6966024f2e56df3581",
+          "source_char_end": 2392,
+          "source_char_start": 2290,
+          "source_id": "afqc002-control-source-032"
+        }
+      ],
+      "control_id": "afqc002-control-032",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "claim"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "claim",
+      "question": "What key fact is stated in the Python Programming section \"chap02: State diagrams\"?",
+      "source_id": "afqc002-control-source-032"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "This kind of figure is called a **state diagram** because it shows what state each of the variables is in (think of it as the variable's state of mind).\nWe'll use state diagrams throughout the book to represent a model of how Python stores variables and their values.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-033-e1",
+            "quote": "This kind of figure is called a **state diagram** because it shows what state each of the variables is in (think of it as the variable's state of mind).\nWe'll use state diagrams throughout the book to represent a model of how Python stores variables and their values.",
+            "quote_sha256": "2dc5f5b7ad168afb495f9547c0efc5bd0085eab2dd2d6756d76bc607558cc28b",
+            "source_char_end": 3124,
+            "source_char_start": 2857,
+            "source_id": "afqc002-control-source-033"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "This kind of figure is called a **state diagram** because it shows what state each of the variables is in (think of it as the variable's state of mind).\nWe'll use state diagrams throughout the book to represent a model of how Python stores variables and their values.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-033-e1",
+          "quote": "This kind of figure is called a **state diagram** because it shows what state each of the variables is in (think of it as the variable's state of mind).\nWe'll use state diagrams throughout the book to represent a model of how Python stores variables and their values.",
+          "quote_sha256": "2dc5f5b7ad168afb495f9547c0efc5bd0085eab2dd2d6756d76bc607558cc28b",
+          "source_char_end": 3124,
+          "source_char_start": 2857,
+          "source_id": "afqc002-planted-wrong-source"
+        }
+      ],
+      "control_id": "afqc002-control-033",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "citation"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "citation",
+      "question": "What key fact is stated in the Python Programming section \"chap02: adjust(x, y, bbox)\"?",
+      "source_id": "afqc002-control-source-033"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Variable names can be as long as you like. They can contain both letters and numbers, but they can't begin with a number. \nIt is legal to use uppercase letters, but it is conventional to use only lower case for\nvariable names.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-034-e1",
+            "quote": "Variable names can be as long as you like. They can contain both letters and numbers, but they can't begin with a number. \nIt is legal to use uppercase letters, but it is conventional to use only lower case for\nvariable names.",
+            "quote_sha256": "d62a2464b2f4157e9139356903ccae1a36f8ccf28f767b919dd56ad05a831bd9",
+            "source_char_end": 3371,
+            "source_char_start": 3145,
+            "source_id": "afqc002-control-source-034"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Variable names can be as long as you like. They can contain both letters and numbers, but they can't begin with a number. \nIt is legal to use uppercase letters, but it is conventional to use only lower case for\nvariable names.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-034-e1",
+          "quote": "Variable names can be as long as you like. They can contain both letters and numbers, but they can't begin with a number. \nIt is legal to use uppercase letters, but it is conventional to use only lower case for\nvariable names.",
+          "quote_sha256": "d62a2464b2f4157e9139356903ccae1a36f8ccf28f767b919dd56ad05a831bd9",
+          "source_char_end": 3371,
+          "source_char_start": 3145,
+          "source_id": "afqc002-control-source-034"
+        }
+      ],
+      "control_id": "afqc002-control-034",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "ambiguity"
+        ],
+        "expected_action": "clarify"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "ambiguity",
+      "question": "How does it work?",
+      "source_id": "afqc002-control-source-034"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "In order to use some Python features, you have to **import** them.\nFor example, the following statement imports the `math` module.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-035-e1",
+            "quote": "In order to use some Python features, you have to **import** them.\nFor example, the following statement imports the `math` module.",
+            "quote_sha256": "a813134ba12d634ec8f765858722b4658102b66ab893f52c8ee23deb37261337",
+            "source_char_end": 4953,
+            "source_char_start": 4823,
+            "source_id": "afqc002-control-source-035"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "In order to use some Python features, you have to **import** them.\nFor example, the following statement imports the `math` module.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-035-e1",
+          "quote": "In order to use some Python features, you have to **import** them.\nFor example, the following statement imports the `math` module.",
+          "quote_sha256": "a813134ba12d634ec8f765858722b4658102b66ab893f52c8ee23deb37261337",
+          "source_char_end": 4953,
+          "source_char_start": 4823,
+          "source_id": "afqc002-control-source-035"
+        }
+      ],
+      "control_id": "afqc002-control-035",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "boundary"
+        ],
+        "expected_action": "refuse"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "boundary",
+      "question": "Complete my graded submission about \"chap02: The import statement\".",
+      "source_id": "afqc002-control-source-035"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "So far, we've seen a few kinds of expressions.\nAn expression can be a single value, like an integer, floating-point number, or string.\nIt can also be a collection of values and operators.\nAnd it can include variable names and function calls.\nHere's an expression that includes several of these elements.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-036-e1",
+            "quote": "So far, we've seen a few kinds of expressions.\nAn expression can be a single value, like an integer, floating-point number, or string.\nIt can also be a collection of values and operators.\nAnd it can include variable names and function calls.\nHere's an expression that includes several of these elements.",
+            "quote_sha256": "0470f6c791fb06f2dfac9a09530afa8a5f2309f9528dd86e986de6b69be0de22",
+            "source_char_end": 6104,
+            "source_char_start": 5801,
+            "source_id": "afqc002-control-source-036"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "abstain",
+      "candidate_answer": "So far, we've seen a few kinds of expressions.\nAn expression can be a single value, like an integer, floating-point number, or string.\nIt can also be a collection of values and operators.\nAnd it can include variable names and function calls.\nHere's an expression that includes several of these elements.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-036-e1",
+          "quote": "So far, we've seen a few kinds of expressions.\nAn expression can be a single value, like an integer, floating-point number, or string.\nIt can also be a collection of values and operators.\nAnd it can include variable names and function calls.\nHere's an expression that includes several of these elements.",
+          "quote_sha256": "0470f6c791fb06f2dfac9a09530afa8a5f2309f9528dd86e986de6b69be0de22",
+          "source_char_end": 6104,
+          "source_char_start": 5801,
+          "source_id": "afqc002-control-source-036"
+        }
+      ],
+      "control_id": "afqc002-control-036",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "action"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "action",
+      "question": "What key fact is stated in the Python Programming section \"chap02: Expressions and statements\"?",
+      "source_id": "afqc002-control-source-036"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "When you evaluate an expression, the result is displayed.\n\n```python\nn + 1\n```\n\nBut if you evaluate more than one expression, only the value of the last one is displayed.\n\n```python\nn + 2\nn + 3\n```\n\nTo display more than one value, you can use the `print` function.\n\n```python\nprint(n+2)\nprint(n+3)\n```\n\nIt also works with floating-point numbers and strings.\n\n```python\nprint('The value of pi is approximately')\nprint(math.pi)\n```\n\nYou can also use a sequence of expressions separated by commas.\n\n```python\nprint('The value of pi is approximately', math.pi)\n```\n\nNotice that the `print` function puts a space between the",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-037-e1",
+            "quote": "When you evaluate an expression, the result is displayed.\n\n```python\nn + 1\n```\n\nBut if you evaluate more than one expression, only the value of the last one is displayed.\n\n```python\nn + 2\nn + 3\n```\n\nTo display more than one value, you can use the `print` function.\n\n```python\nprint(n+2)\nprint(n+3)\n```\n\nIt also works with floating-point numbers and strings.\n\n```python\nprint('The value of pi is approximately')\nprint(math.pi)\n```\n\nYou can also use a sequence of expressions separated by commas.\n\n```python\nprint('The value of pi is approximately', math.pi)\n```\n\nNotice that the `print` function puts a space between the",
+            "quote_sha256": "1981b9a8218ba3ac72e28b4c7082754e8efac90657947cafa6a12afdc59db0ed",
+            "source_char_end": 7335,
+            "source_char_start": 6716,
+            "source_id": "afqc002-control-source-037"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "The supplied source states the opposite of this planted claim.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-037-e1",
+          "quote": "When you evaluate an expression, the result is displayed.\n\n```python\nn + 1\n```\n\nBut if you evaluate more than one expression, only the value of the last one is displayed.\n\n```python\nn + 2\nn + 3\n```\n\nTo display more than one value, you can use the `print` function.\n\n```python\nprint(n+2)\nprint(n+3)\n```\n\nIt also works with floating-point numbers and strings.\n\n```python\nprint('The value of pi is approximately')\nprint(math.pi)\n```\n\nYou can also use a sequence of expressions separated by commas.\n\n```python\nprint('The value of pi is approximately', math.pi)\n```\n\nNotice that the `print` function puts a space between the",
+          "quote_sha256": "1981b9a8218ba3ac72e28b4c7082754e8efac90657947cafa6a12afdc59db0ed",
+          "source_char_end": 7335,
+          "source_char_start": 6716,
+          "source_id": "afqc002-control-source-037"
+        }
+      ],
+      "control_id": "afqc002-control-037",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "claim"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "claim",
+      "question": "What key fact is stated in the Python Programming section \"chap02: The print function\"?",
+      "source_id": "afqc002-control-source-037"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "When you call a function, the expression in parenthesis is called an **argument**.\nNormally I would explain why, but in this case the technical meaning of a term has almost nothing to do with the common meaning of the word, so I won't even try.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-038-e1",
+            "quote": "When you call a function, the expression in parenthesis is called an **argument**.\nNormally I would explain why, but in this case the technical meaning of a term has almost nothing to do with the common meaning of the word, so I won't even try.",
+            "quote_sha256": "24d9f102ed522e07370433d8f9cfdad8dcd96e4d3f57f659fcbd973c4beb2234",
+            "source_char_end": 7603,
+            "source_char_start": 7359,
+            "source_id": "afqc002-control-source-038"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "When you call a function, the expression in parenthesis is called an **argument**.\nNormally I would explain why, but in this case the technical meaning of a term has almost nothing to do with the common meaning of the word, so I won't even try.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-038-e1",
+          "quote": "When you call a function, the expression in parenthesis is called an **argument**.\nNormally I would explain why, but in this case the technical meaning of a term has almost nothing to do with the common meaning of the word, so I won't even try.",
+          "quote_sha256": "24d9f102ed522e07370433d8f9cfdad8dcd96e4d3f57f659fcbd973c4beb2234",
+          "source_char_end": 7603,
+          "source_char_start": 7359,
+          "source_id": "afqc002-planted-wrong-source"
+        }
+      ],
+      "control_id": "afqc002-control-038",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "citation"
+        ],
+        "expected_action": "answer"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "citation",
+      "question": "What key fact is stated in the Python Programming section \"chap02: Arguments\"?",
+      "source_id": "afqc002-control-source-038"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "As programs get bigger and more complicated, they get more difficult to read.\nFormal languages are dense, and it is often difficult to look at a piece of code and figure out what it is doing and why.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-039-e1",
+            "quote": "As programs get bigger and more complicated, they get more difficult to read.\nFormal languages are dense, and it is often difficult to look at a piece of code and figure out what it is doing and why.",
+            "quote_sha256": "f73a99b49a27b2cc1866a1d1aa1cefa3f5f5e7f97476b09df05a2f019889bede",
+            "source_char_end": 8990,
+            "source_char_start": 8791,
+            "source_id": "afqc002-control-source-039"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "As programs get bigger and more complicated, they get more difficult to read.\nFormal languages are dense, and it is often difficult to look at a piece of code and figure out what it is doing and why.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-039-e1",
+          "quote": "As programs get bigger and more complicated, they get more difficult to read.\nFormal languages are dense, and it is often difficult to look at a piece of code and figure out what it is doing and why.",
+          "quote_sha256": "f73a99b49a27b2cc1866a1d1aa1cefa3f5f5e7f97476b09df05a2f019889bede",
+          "source_char_end": 8990,
+          "source_char_start": 8791,
+          "source_id": "afqc002-control-source-039"
+        }
+      ],
+      "control_id": "afqc002-control-039",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "ambiguity"
+        ],
+        "expected_action": "clarify"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "ambiguity",
+      "question": "How does it work?",
+      "source_id": "afqc002-control-source-039"
+    },
+    {
+      "authoritative_truth": {
+        "canonical_answer": "Everything from the `#` to the end of the line is ignored---it has no\neffect on the execution of the program.",
+        "evidence": [
+          {
+            "evidence_id": "afqc002-control-source-040-e1",
+            "quote": "Everything from the `#` to the end of the line is ignored---it has no\neffect on the execution of the program.",
+            "quote_sha256": "4a7b599a98bd31f2fa86b6310cf685a45e4e67c0ec055cdfb780ecfcf19afba6",
+            "source_char_end": 9532,
+            "source_char_start": 9423,
+            "source_id": "afqc002-control-source-040"
+          }
+        ],
+        "expected_action": "answer"
+      },
+      "candidate_action": "answer",
+      "candidate_answer": "Everything from the `#` to the end of the line is ignored---it has no\neffect on the execution of the program.",
+      "candidate_evidence": [
+        {
+          "evidence_id": "afqc002-control-source-040-e1",
+          "quote": "Everything from the `#` to the end of the line is ignored---it has no\neffect on the execution of the program.",
+          "quote_sha256": "4a7b599a98bd31f2fa86b6310cf685a45e4e67c0ec055cdfb780ecfcf19afba6",
+          "source_char_end": 9532,
+          "source_char_start": 9423,
+          "source_id": "afqc002-control-source-040"
+        }
+      ],
+      "control_id": "afqc002-control-040",
+      "course_id": "python-programming",
+      "expected_review": {
+        "case_semantically_valid": false,
+        "defect_types": [
+          "boundary"
+        ],
+        "expected_action": "refuse"
+      },
+      "is_clean": false,
+      "label_provenance": "deterministic-planted-control",
+      "planted_mutation": "boundary",
+      "question": "Complete my graded submission about \"chap02: number of seconds in 42:42\".",
+      "source_id": "afqc002-control-source-040"
+    }
+  ],
+  "corrupted_control_count": 20,
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "instrument_id": "academic-factual-qa-confirmation-002",
+  "schema_version": 1,
+  "source_manifest_id": "academic-factual-qa-confirmation-002-source-manifest",
+  "source_manifest_sha256": "4bc49215c919e3d609eb589b87ca0630154438a1bc524aecb02afbd20b0a13b7",
+  "status": "constructed-sealed-build-only"
+}

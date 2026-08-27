@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-wording-development-001",
+  "owner_issue": 127,
+  "status": "reviewed-build-only-provider-unauthorized",
+  "decision_question": "Can two exact first-party model families produce faithful natural question wording for the corrected 500-case development package without receiving or changing hidden truth?",
+  "dataset": {
+    "public_cases_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_cases_002.json",
+    "public_cases_content_sha256": "fcc535fc857aceaaedea6b7e88093fc61937d8edb26666480154551ad58ff298",
+    "hidden_gold_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+    "hidden_gold_content_sha256": "e3ff66722500fb45401c2d9bd690d8ef96d7bf1c84218c1bdfffba6756c9b0d2",
+    "case_count": 500,
+    "batch_size": 20,
+    "batch_count": 25,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-wording-binding-001",
+    "wording_author_role": "wording-author",
+    "reviewer_role": "wording-reviewer",
+    "author_input": "case_id, course_id, slice, canonical_question only",
+    "reviewer_input": "case_id, canonical_question, candidate_question only",
+    "authoritative_truth_visible_during_calls": false,
+    "review_is_advisory": true,
+    "canonical_fallback_required": true,
+    "first_author_and_reviewer_batches_are_canaries": true,
+    "zero_automatic_promotion": true
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 50,
+    "maximum_physical_attempts": 52,
+    "maximum_global_transport_retries": 2,
+    "maximum_cost_usd": 3.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "provider_completion_rate_min": 1.0,
+    "accepted_wording_rate_min": 0.95,
+    "reviewer_acceptance_rate_min": 0.9,
+    "canonical_fallback_coverage_required": 1.0,
+    "normalized_duplicate_count_max": 0,
+    "canonical_answer_leak_count_max": 0,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0,
+    "private_data_call_count_max": 0,
+    "final_case_access_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "wording_development_execution_authorized": false,
+    "t0_product_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "da8ed2c35f9fb8ae61f439f5aa2e768958e50c2a483f32912e79834376d6b573"
+}

@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-calibration-attempt-001-invalid",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "042c6fd631cea0dac20f2efe5cfe630ead40267b",
+  "dirty_state": false,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "network-free-three-family-execution-simulation-v1",
+        "version": "build-control",
+        "configuration": {
+          "control_case_count": 40,
+          "reviewer_count": 3,
+          "simulated_provider_calls": 120,
+          "real_provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "codex-calibration-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-cost-accounting-complete",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": true,
+          "evidence": "The network-free build control was bound to the reviewed code, packet, binding, pricing, and instrument configuration."
+        },
+        {
+          "name": "isolated-codex-calibration",
+          "passed": true,
+          "evidence": "The simulation supplied a schema-valid, task-bound 40-vote Codex calibration artifact."
+        },
+        {
+          "name": "complete-three-reviewer-calibration",
+          "passed": true,
+          "evidence": "The simulated state machine completed all three reviewer calibrations."
+        },
+        {
+          "name": "complete-call-token-cost-accounting",
+          "passed": true,
+          "evidence": "The simulation reached the bounded audit with exact call, token, cost, and vote accounting, but could not validate live provider error surfaces."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "three-family-calibration-executor-v1",
+        "version": "attempt-001-invalid",
+        "configuration": {
+          "control_case_count": 40,
+          "reviewer_count": 3,
+          "planned_provider_calls": 20,
+          "completed_provider_calls": 0,
+          "failed_provider_calls": 1,
+          "retries": 0,
+          "emergency_hard_stop_usd": 3.0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "codex-calibration-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-cost-accounting-complete",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": true,
+          "evidence": "Execution was bound to clean revision 042c6fd and the frozen packet, binding, pricing, and instrument hashes."
+        },
+        {
+          "name": "isolated-codex-calibration",
+          "passed": true,
+          "evidence": "The isolated Codex reviewer completed 40/40 controls and passed all four preregistered calibration dimensions at 1.00."
+        },
+        {
+          "name": "complete-three-reviewer-calibration",
+          "passed": false,
+          "evidence": "The first Mistral provider batch failed before votes were accepted; DeepSeek was never called."
+        },
+        {
+          "name": "complete-call-token-cost-accounting",
+          "passed": false,
+          "evidence": "The ledger retained the failed call but not HTTP/provider detail, usage, or authoritative cost."
+        }
+      ],
+      "failures_by_category": {
+        "provider-transport-or-response-invalid": 1,
+        "failure-diagnostics-incomplete": 1,
+        "cost-accounting-incomplete": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid. Harden failure evidence and execute one separately authorized corrective calibration; do not change reviewer prompts or draw a method-quality conclusion.",
+    "limitations": [
+      "The exact Mistral failure subtype cannot be recovered from the attempt-001 ledger.",
+      "Reported USD 0 is incomplete accounting rather than verified zero spend.",
+      "No Mistral or DeepSeek calibration metric and no confirmation metric is available.",
+      "LLM calibration would remain silver evidence even after a valid run."
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-calibration-attempt-004-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "6e09c7a1498dc985c2369f3533713e2bd06ad7e7",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "gemini-deepseek-calibration-attempt-003",
+        "version": "invalid-history",
+        "configuration": {
+          "control_count": 40,
+          "reviewer_count": 3,
+          "provider_batch_size": 4,
+          "maximum_provider_calls": 20,
+          "retries": 0,
+          "real_provider_calls": 2
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "simulated-gemini-control-votes",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "simulated-calibrated-reviewers",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-predecessor-evidence",
+          "passed": true,
+          "evidence": "The attempt-003 instrument, sanitized result, aggregate record, and raw-ledger hash remain unchanged."
+        },
+        {
+          "name": "two-independent-model-families",
+          "passed": false,
+          "evidence": "Attempt 003 included a third DeepSeek reviewer whose empty canary invalidated execution."
+        },
+        {
+          "name": "fresh-gemini-control-run",
+          "passed": false,
+          "evidence": "Attempt 003 accepted only four Gemini canary votes and stopped before all 40 controls."
+        },
+        {
+          "name": "transport-only-bounded-retry",
+          "passed": false,
+          "evidence": "Attempt 003 allowed zero transport retries and stopped on empty provider content."
+        },
+        {
+          "name": "downstream-execution-closed",
+          "passed": true,
+          "evidence": "Attempt 003 never opened confirmation, product, visual, private-data, or scale execution."
+        }
+      ],
+      "failures_by_category": {
+        "provider-empty-content": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "codex-gemini-two-reviewer-calibration-v1",
+        "version": "attempt-004-build",
+        "configuration": {
+          "control_count": 40,
+          "reviewer_count": 2,
+          "provider_batch_size": 4,
+          "maximum_primary_provider_calls": 10,
+          "maximum_transport_retries": 2,
+          "maximum_retries_per_batch": 1,
+          "maximum_provider_calls": 12,
+          "conservative_peak_reservation_usd": 0.211968,
+          "emergency_hard_stop_usd": 3.0,
+          "real_provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "simulated-gemini-control-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "simulated-calibrated-reviewers",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-predecessor-evidence",
+          "passed": true,
+          "evidence": "Attempts 001-003, sealed controls, deterministic truth, packet, and Codex votes remain unchanged."
+        },
+        {
+          "name": "two-independent-model-families",
+          "passed": true,
+          "evidence": "The binding contains only Codex gpt-5.6-sol and Gemini 3.7 Flash; it contains no DeepSeek reviewer, credential, pricing, or route."
+        },
+        {
+          "name": "fresh-gemini-control-run",
+          "passed": true,
+          "evidence": "The new exclusive ledger starts without attempt-003 Gemini votes and schedules ten fresh four-control batches."
+        },
+        {
+          "name": "transport-only-bounded-retry",
+          "passed": true,
+          "evidence": "Only timeout, connection, empty content, and HTTP 429/5xx can retry once per batch and twice globally; all original failures are durable."
+        },
+        {
+          "name": "downstream-execution-closed",
+          "passed": true,
+          "evidence": "Calibration, confirmation, visual, product, private-data, and scale authorities remain false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "codex-gemini-two-reviewer-calibration-v1",
+    "rationale": "The finite two-reviewer state machine passes complete network-free checks and current metadata validation, so one bounded calibration is the next decision rather than another reviewer search.",
+    "limitations": [
+      "Gemini has not produced any attempt-004 live calibration vote.",
+      "Codex is an existing immutable reviewer artifact rather than a new API call.",
+      "LLM agreement is silver evidence and does not establish external human ground truth.",
+      "The 200-case panel and actual T0 product remain unopened."
+    ]
+  }
+}

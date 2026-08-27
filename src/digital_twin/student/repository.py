@@ -7,6 +7,10 @@ from threading import RLock
 from typing import Protocol
 
 from src.digital_twin.grounding.models import DocumentChunk, GenerationTrace
+from src.digital_twin.student.learning_gap import (
+    LearningGapSignalV1,
+    normalize_learning_gap_timestamp,
+)
 from src.digital_twin.student.models import (
     Account,
     AccountRole,
@@ -82,6 +86,14 @@ class StudentRepository(Protocol):
     def get_conversation(self, conversation_id: str) -> Conversation | None: ...
 
     def get_learner_state(self, conversation_id: str) -> LearnerState | None: ...
+
+    def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool: ...
+
+    def list_learning_gap_signals(
+        self, course_id: str, release_id: str, *, active_at: str
+    ) -> list[LearningGapSignalV1]: ...
+
+    def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int: ...
 
     def list_messages(self, conversation_id: str) -> list[Message]: ...
 
@@ -518,6 +530,90 @@ class SQLiteStudentRepository:
             (conversation_id,),
         )
         return LearnerState.model_validate_json(row["state_json"]) if row else None
+
+    def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool:
+        """Persist an idempotent privacy-minimized signal within its release scope."""
+
+        signal = LearningGapSignalV1.model_validate(signal.model_dump(mode="python"))
+        with self._lock, self._connection:
+            release = self._connection.execute(
+                "SELECT course_id FROM releases WHERE id = ?", (signal.release_id,)
+            ).fetchone()
+            if release is None:
+                raise KeyError("release_not_found")
+            if release["course_id"] != signal.course_id:
+                raise ValueError("learning-gap signal has cross-course release scope")
+            existing = self._connection.execute(
+                """SELECT signal_json FROM learning_gap_signals
+                   WHERE source_turn_key = ? AND topic_key = ? AND signal_kind = ?""",
+                (
+                    signal.source_turn_key,
+                    signal.topic_key,
+                    signal.signal_kind.value,
+                ),
+            ).fetchone()
+            if existing is not None:
+                stored = LearningGapSignalV1.model_validate_json(
+                    existing["signal_json"]
+                )
+                if stored != signal:
+                    raise ValueError("learning-gap signal idempotency conflict")
+                return False
+            try:
+                self._connection.execute(
+                    """INSERT INTO learning_gap_signals
+                       (signal_id, source_turn_key, learner_key, course_id,
+                        release_id, topic_key, signal_kind, observed_at,
+                        expires_at, signal_json)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        signal.signal_id,
+                        signal.source_turn_key,
+                        signal.learner_key,
+                        signal.course_id,
+                        signal.release_id,
+                        signal.topic_key,
+                        signal.signal_kind.value,
+                        signal.observed_at,
+                        signal.expires_at,
+                        signal.model_dump_json(),
+                    ),
+                )
+            except sqlite3.IntegrityError as error:
+                raise ValueError("learning-gap signal identifier conflict") from error
+        return True
+
+    def list_learning_gap_signals(
+        self, course_id: str, release_id: str, *, active_at: str
+    ) -> list[LearningGapSignalV1]:
+        active_at = normalize_learning_gap_timestamp(active_at)
+        with self._lock:
+            release = self._connection.execute(
+                "SELECT course_id FROM releases WHERE id = ?", (release_id,)
+            ).fetchone()
+            if release is None:
+                raise KeyError("release_not_found")
+            if release["course_id"] != course_id:
+                raise ValueError("learning-gap query has cross-course release scope")
+            rows = self._connection.execute(
+                """SELECT signal_json FROM learning_gap_signals
+                   WHERE course_id = ? AND release_id = ? AND expires_at > ?
+                   ORDER BY observed_at, signal_id""",
+                (course_id, release_id, active_at),
+            ).fetchall()
+        return [
+            LearningGapSignalV1.model_validate_json(row["signal_json"])
+            for row in rows
+        ]
+
+    def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int:
+        expired_at = normalize_learning_gap_timestamp(expired_at)
+        with self._lock, self._connection:
+            cursor = self._connection.execute(
+                "DELETE FROM learning_gap_signals WHERE expires_at <= ?",
+                (expired_at,),
+            )
+        return int(cursor.rowcount)
 
     def list_messages(self, conversation_id: str) -> list[Message]:
         with self._lock:

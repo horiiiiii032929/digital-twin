@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "binding_id": "academic-factual-qa-t0-provider-binding-001",
+  "verified_at": "2026-08-25T20:04:41.485222+00:00",
+  "maximum_age_hours_for_execution": 24,
+  "provider": "DeepSeek official API",
+  "credential_environment_variable": "DEEPSEEK_API_KEY",
+  "litellm_model": "deepseek/deepseek-v4-flash",
+  "provider_model": "deepseek-v4-flash",
+  "documented_revision": "DeepSeek-V4-Flash-0731",
+  "selected_profile_revision": "fp_a18b46594c_prod0820_fp8_kvcache_20260402",
+  "context_window_tokens": 1000000,
+  "maximum_output_tokens": 393216,
+  "pricing_usd_per_million_cache_miss_input_tokens_peak": 0.44,
+  "pricing_usd_per_million_output_tokens_peak": 1.32,
+  "model_registry_source": "https://api.deepseek.com/models",
+  "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "retention_policy": {
+    "source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+    "policy_last_update": "Feb 10, 2026",
+    "input_retention": "retained-as-long-as-account-and-as-otherwise-necessary",
+    "storage_location": "People's Republic of China"
+  },
+  "data_boundary": "public-source-evaluation-only",
+  "retries": 0,
+  "maximum_provider_calls": 520,
+  "emergency_hard_stop_usd": 10.0,
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "live_t0_confirmation_authorized": false
+  },
+  "content_sha256": "b5d5b978fa6d55a0cb63505ed2de6e8e49e3645e1bf8a54d64d887a833d36e0b"
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "7a4ed8b50f28eaf9556bddd1cd9684510a16dd51",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "academic-factual-qa-confirmation-v2-protocol-only",
+        "version": "pre-build",
+        "configuration": {
+          "source_sections": 0,
+          "confirmation_cases": 0,
+          "calibration_controls": 0,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "source-manifest-complete",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "deterministic-data-contract-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-review-harness-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-public-source-lineage",
+          "passed": false,
+          "evidence": "The preregistered protocol did not yet bind exact source revisions, sections, evidence offsets, assets, or licenses."
+        },
+        {
+          "name": "confirmation-calibration-disjointness",
+          "passed": false,
+          "evidence": "No confirmation or calibration source allocation existed before the build."
+        },
+        {
+          "name": "fail-closed-review-authority",
+          "passed": true,
+          "evidence": "All review, paid, researcher-audit, product-binding, and promotion authorities were false."
+        },
+        {
+          "name": "repository-gate",
+          "passed": false,
+          "evidence": "The source builder, packet builder, runner, and focused regressions did not yet exist."
+        }
+      ],
+      "failures_by_category": {
+        "missing-built-evidence": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "public-source-academic-factual-qa-confirmation-v2-build",
+        "version": "build-001",
+        "configuration": {
+          "source_sections": 160,
+          "confirmation_clusters": 100,
+          "confirmation_cases": 200,
+          "calibration_controls": 40,
+          "blinded_review_items": 240,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "source-manifest-complete",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "deterministic-data-contract-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-review-harness-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-public-source-lineage",
+          "passed": true,
+          "evidence": "Every selected section binds repository, commit, path, heading, byte offsets, excerpt hash, license, and any dependent visual asset."
+        },
+        {
+          "name": "confirmation-calibration-disjointness",
+          "passed": true,
+          "evidence": "The 120 confirmation sources and 40 calibration sources are disjoint; selected source ranges do not overlap."
+        },
+        {
+          "name": "fail-closed-review-authority",
+          "passed": true,
+          "evidence": "Preflight blocks on stale reviewer bindings and false Codex, provider, and paid-review authorities."
+        },
+        {
+          "name": "repository-gate",
+          "passed": true,
+          "evidence": "The complete gate passed with 915 Python tests, 46 frontend tests, lint, production build, 536/536 audited files, and 71/71 freeze coverage."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "public-source-academic-factual-qa-confirmation-v2-build",
+    "rationale": "The independently sourced, deterministic confirmation package and blinded panel workflow are reproducible and ready for a separately bound review checkpoint without reopening the method design.",
+    "limitations": [
+      "No LLM reviewer has evaluated the 200 confirmation cases, so no semantic-quality result exists.",
+      "The reference is deterministic source-derived silver evidence, not independent human ground truth.",
+      "The current Codex task has seen the controls and cannot act as the blinded Codex reviewer; a fresh isolated task is required.",
+      "No product method, professor-fidelity condition, deployment, or release is selected by this build."
+    ]
+  }
+}

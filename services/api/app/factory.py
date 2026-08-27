@@ -41,6 +41,7 @@ from src.digital_twin.grounding import LocalCourseSourceIngestionService
 from src.digital_twin.grounding.protocols import (
     EvidenceSufficiencyGate,
     OCRProvider,
+    PostGenerationClaimValidator,
     RegionDescriptionProvider,
     TextEmbedder,
     TutorGenerator,
@@ -81,6 +82,7 @@ def create_app(
     student_embedder: TextEmbedder | None = None,
     student_generator: TutorGenerator | None = None,
     student_evidence_gate: EvidenceSufficiencyGate | None = None,
+    student_claim_evidence_validator: PostGenerationClaimValidator | None = None,
     student_profile_path: Path = DEFAULT_STUDENT_PROFILE,
     region_crop_root: Path | None = None,
     source_root: Path | None = None,
@@ -163,6 +165,7 @@ def create_app(
         embedder=student_embedder,
         generator=student_generator or configured_generator,
         evidence_gate=student_evidence_gate,
+        claim_evidence_validator=student_claim_evidence_validator,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(

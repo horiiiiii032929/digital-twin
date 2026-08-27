@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-confirmation-002-reviewer-binding-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-confirmation-002",
+  "corpus_id": "four-public-educational-repositories-commit-pinned-2026-08-25",
+  "code_revision": "be43067d3bdbde06e030e1755689f68e36727b37",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "unbound-three-family-review-plan",
+        "version": "build-001",
+        "configuration": {
+          "reviewer_bindings_frozen": false,
+          "provider_execution_path_present": false,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "reviewer-bindings-complete",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-execution-state-machine-pass",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "real-provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "current-provider-bindings",
+          "passed": false,
+          "evidence": "The prior build did not bind a current Codex runtime or current provider price and routing snapshot."
+        },
+        {
+          "name": "calibration-before-confirmation",
+          "passed": false,
+          "evidence": "No executable two-phase reviewer state machine was present."
+        },
+        {
+          "name": "fail-closed-execution-authority",
+          "passed": true,
+          "evidence": "Every reviewer and paid execution authority was false."
+        },
+        {
+          "name": "bounded-cost-and-call-accounting",
+          "passed": false,
+          "evidence": "The provider review did not yet bind call, retry, token, or cost limits."
+        }
+      ],
+      "failures_by_category": {
+        "reviewer-binding-missing": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bound-three-family-review-executor-v1",
+        "version": "build-002",
+        "configuration": {
+          "reviewer_bindings_frozen": true,
+          "provider_batch_size": 4,
+          "maximum_provider_calls": 120,
+          "retries": 0,
+          "conservative_peak_reservation_usd": 1.563034,
+          "emergency_hard_stop_usd": 3.0,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "reviewer-bindings-complete",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-execution-state-machine-pass",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "live-metadata-drift-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "real-provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "current-provider-bindings",
+          "passed": true,
+          "evidence": "Codex, Mistral, and DeepSeek identities plus provider routing, prices, limits, and the 24-hour freshness rule are hash-bound."
+        },
+        {
+          "name": "calibration-before-confirmation",
+          "passed": true,
+          "evidence": "Calibration and confirmation have separate authorities, and the state machine cannot open confirmation until the same Codex task and both provider reviewers pass all frozen control gates."
+        },
+        {
+          "name": "fail-closed-execution-authority",
+          "passed": true,
+          "evidence": "The global freeze remains active, no bounded authorization exists, and execution commands re-check authorization and live metadata themselves."
+        },
+        {
+          "name": "bounded-cost-and-call-accounting",
+          "passed": true,
+          "evidence": "Simulation verifies 120 calls maximum, zero retries, per-call atomic accounting, USD 1.563034 conservative reservation, and USD 3 hard stop."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bound-three-family-review-executor-v1",
+    "rationale": "The current reviewer identities and provider routes are frozen and the complete no-call state machine passes, so the next decision is the separately authorized calibration rather than another method redesign.",
+    "limitations": [
+      "No reviewer has yet produced a real semantic judgment.",
+      "LLM-panel agreement is silver evidence and cannot be called independent human ground truth.",
+      "A fresh isolated Codex task is required because the design task has seen hidden controls.",
+      "The 24-hour metadata snapshot must be refreshed immediately before execution."
+    ]
+  }
+}

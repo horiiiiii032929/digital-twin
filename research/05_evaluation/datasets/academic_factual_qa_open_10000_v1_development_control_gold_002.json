@@ -1,0 +1,2296 @@
+{
+  "canonical_wording_status": "development-template-not-final-naturalness-evidence",
+  "case_count": 100,
+  "construction_instrument_id": "academic-factual-qa-open-10000-deterministic-development-002",
+  "construction_method": "deterministic-complete-region-v3",
+  "content_sha256": "151dea10528d3cb56ea2f56c0c5c71063dc7576a43e3a1bf6d61b850e2cae277",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-control-gold-002",
+  "final_split_opened": false,
+  "gold": [
+    {
+      "boundary_reason": null,
+      "canonical_answer": "SMTP is a text-based protocol like many other application-layer protocols on the Internet.",
+      "case_id": "academic-open-dev2-0001-q1",
+      "claims": [
+        {
+          "answer_span": "SMTP is a text-based protocol like many other application-layer protocols on the Internet.",
+          "claim_id": "academic-open-dev2-0001-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29218,
+              "char_start": 29128,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It relies on the byte-stream service.",
+      "case_id": "academic-open-dev2-0001-q2",
+      "claims": [
+        {
+          "answer_span": "It relies on the byte-stream service.",
+          "claim_id": "academic-open-dev2-0001-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29256,
+              "char_start": 29219,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Servers listen on port 25.",
+      "case_id": "academic-open-dev2-0001-q3",
+      "claims": [
+        {
+          "answer_span": "Servers listen on port 25.",
+          "claim_id": "academic-open-dev2-0001-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29285,
+              "char_start": 29257,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "SMTP is a text-based protocol like many other application-layer protocols on the Internet. It relies on the byte-stream service.",
+      "case_id": "academic-open-dev2-0001-q4",
+      "claims": [
+        {
+          "answer_span": "SMTP is a text-based protocol like many other application-layer protocols on the Internet.",
+          "claim_id": "academic-open-dev2-0001-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29218,
+              "char_start": 29128,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "It relies on the byte-stream service.",
+          "claim_id": "academic-open-dev2-0001-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 29256,
+              "char_start": 29219,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev2-0001-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This system was initially called the mesh.",
+      "case_id": "academic-open-dev2-0002-q1",
+      "claims": [
+        {
+          "answer_span": "This system was initially called the mesh.",
+          "claim_id": "academic-open-dev2-0002-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1894,
+              "char_start": 1850,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/http.rst",
+              "source_sha256": "38fc7b8c0f7867bcaaa2451a7d73b72cd9b725d3692fbcd0e0e73f68d29d946e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It was quickly renamed the world wide web.",
+      "case_id": "academic-open-dev2-0002-q2",
+      "claims": [
+        {
+          "answer_span": "It was quickly renamed the world wide web.",
+          "claim_id": "academic-open-dev2-0002-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1939,
+              "char_start": 1895,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/http.rst",
+              "source_sha256": "38fc7b8c0f7867bcaaa2451a7d73b72cd9b725d3692fbcd0e0e73f68d29d946e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The starting point for the world wide web are hypertext documents.",
+      "case_id": "academic-open-dev2-0002-q3",
+      "claims": [
+        {
+          "answer_span": "The starting point for the world wide web are hypertext documents.",
+          "claim_id": "academic-open-dev2-0002-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2008,
+              "char_start": 1940,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/http.rst",
+              "source_sha256": "38fc7b8c0f7867bcaaa2451a7d73b72cd9b725d3692fbcd0e0e73f68d29d946e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This system was initially called the mesh. It was quickly renamed the world wide web.",
+      "case_id": "academic-open-dev2-0002-q4",
+      "claims": [
+        {
+          "answer_span": "This system was initially called the mesh.",
+          "claim_id": "academic-open-dev2-0002-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1894,
+              "char_start": 1850,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/http.rst",
+              "source_sha256": "38fc7b8c0f7867bcaaa2451a7d73b72cd9b725d3692fbcd0e0e73f68d29d946e",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "It was quickly renamed the world wide web.",
+          "claim_id": "academic-open-dev2-0002-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1939,
+              "char_start": 1895,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/http.rst",
+              "source_sha256": "38fc7b8c0f7867bcaaa2451a7d73b72cd9b725d3692fbcd0e0e73f68d29d946e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev2-0002-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A wide range of techniques have been defined.",
+      "case_id": "academic-open-dev2-0003-q1",
+      "claims": [
+        {
+          "answer_span": "A wide range of techniques have been defined.",
+          "claim_id": "academic-open-dev2-0003-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13259,
+              "char_start": 13214,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The first techniques relied on their secrecy to operate.",
+      "case_id": "academic-open-dev2-0003-q2",
+      "claims": [
+        {
+          "answer_span": "The first techniques relied on their secrecy to operate.",
+          "claim_id": "academic-open-dev2-0003-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13316,
+              "char_start": 13260,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "One of the first encryption schemes is attributed to Julius Caesar.",
+      "case_id": "academic-open-dev2-0003-q3",
+      "claims": [
+        {
+          "answer_span": "One of the first encryption schemes is attributed to Julius Caesar.",
+          "claim_id": "academic-open-dev2-0003-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13384,
+              "char_start": 13317,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A wide range of techniques have been defined. The first techniques relied on their secrecy to operate.",
+      "case_id": "academic-open-dev2-0003-q4",
+      "claims": [
+        {
+          "answer_span": "A wide range of techniques have been defined.",
+          "claim_id": "academic-open-dev2-0003-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13259,
+              "char_start": 13214,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The first techniques relied on their secrecy to operate.",
+          "claim_id": "academic-open-dev2-0003-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 13316,
+              "char_start": 13260,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev2-0003-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The deployed versions of TLS have also changed.",
+      "case_id": "academic-open-dev2-0004-q1",
+      "claims": [
+        {
+          "answer_span": "The deployed versions of TLS have also changed.",
+          "claim_id": "academic-open-dev2-0004-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 20912,
+              "char_start": 20865,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tls.rst",
+              "source_sha256": "4972d5cf5f9ef9b4ea183acce12b383edeb24e93e59e811fbda529c75dda35e3",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "TLS 1.0 and TLS 1.1 are now rarely used.",
+      "case_id": "academic-open-dev2-0004-q2",
+      "claims": [
+        {
+          "answer_span": "TLS 1.0 and TLS 1.1 are now rarely used.",
+          "claim_id": "academic-open-dev2-0004-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 20953,
+              "char_start": 20913,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tls.rst",
+              "source_sha256": "4972d5cf5f9ef9b4ea183acce12b383edeb24e93e59e811fbda529c75dda35e3",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The deployment of TLS 1.2 started in 2013 and reached 70% of the connections in 2015.",
+      "case_id": "academic-open-dev2-0004-q3",
+      "claims": [
+        {
+          "answer_span": "The deployment of TLS 1.2 started in 2013 and reached 70% of the connections in 2015.",
+          "claim_id": "academic-open-dev2-0004-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 21039,
+              "char_start": 20954,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tls.rst",
+              "source_sha256": "4972d5cf5f9ef9b4ea183acce12b383edeb24e93e59e811fbda529c75dda35e3",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The deployed versions of TLS have also changed. TLS 1.0 and TLS 1.1 are now rarely used.",
+      "case_id": "academic-open-dev2-0004-q4",
+      "claims": [
+        {
+          "answer_span": "The deployed versions of TLS have also changed.",
+          "claim_id": "academic-open-dev2-0004-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 20912,
+              "char_start": 20865,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tls.rst",
+              "source_sha256": "4972d5cf5f9ef9b4ea183acce12b383edeb24e93e59e811fbda529c75dda35e3",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "TLS 1.0 and TLS 1.1 are now rarely used.",
+          "claim_id": "academic-open-dev2-0004-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 20953,
+              "char_start": 20913,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tls.rst",
+              "source_sha256": "4972d5cf5f9ef9b4ea183acce12b383edeb24e93e59e811fbda529c75dda35e3",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev2-0004-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "RIP routers periodically exchange RIP messages.",
+      "case_id": "academic-open-dev2-0005-q1",
+      "claims": [
+        {
+          "answer_span": "RIP routers periodically exchange RIP messages.",
+          "claim_id": "academic-open-dev2-0005-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4028,
+              "char_start": 3981,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The format of these messages is shown below.",
+      "case_id": "academic-open-dev2-0005-q2",
+      "claims": [
+        {
+          "answer_span": "The format of these messages is shown below.",
+          "claim_id": "academic-open-dev2-0005-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4073,
+              "char_start": 4029,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A RIP message is sent inside a UDP segment whose destination port is set to 521.",
+      "case_id": "academic-open-dev2-0005-q3",
+      "claims": [
+        {
+          "answer_span": "A RIP message is sent inside a UDP segment whose destination port is set to 521.",
+          "claim_id": "academic-open-dev2-0005-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4156,
+              "char_start": 4074,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "RIP routers periodically exchange RIP messages. The format of these messages is shown below.",
+      "case_id": "academic-open-dev2-0005-q4",
+      "claims": [
+        {
+          "answer_span": "RIP routers periodically exchange RIP messages.",
+          "claim_id": "academic-open-dev2-0005-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4028,
+              "char_start": 3981,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The format of these messages is shown below.",
+          "claim_id": "academic-open-dev2-0005-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 4073,
+              "char_start": 4029,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev2-0005-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It can be a transport layer header (e.g.",
+      "case_id": "academic-open-dev2-0006-q1",
+      "claims": [
+        {
+          "answer_span": "It can be a transport layer header (e.g.",
+          "claim_id": "academic-open-dev2-0006-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 31477,
+              "char_start": 31437,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ipv6.rst",
+              "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "6 for TCP or 17` for UDP) or an IPv6 option.",
+      "case_id": "academic-open-dev2-0006-q2",
+      "claims": [
+        {
+          "answer_span": "6 for TCP or 17` for UDP) or an IPv6 option.",
+          "claim_id": "academic-open-dev2-0006-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 31525,
+              "char_start": 31479,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ipv6.rst",
+              "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Hop Limit` : this 8-bit field indicates the number of routers that can forward the packet.",
+      "case_id": "academic-open-dev2-0006-q3",
+      "claims": [
+        {
+          "answer_span": "Hop Limit` : this 8-bit field indicates the number of routers that can forward the packet.",
+          "claim_id": "academic-open-dev2-0006-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 31620,
+              "char_start": 31530,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ipv6.rst",
+              "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It can be a transport layer header (e.g. 6 for TCP or 17` for UDP) or an IPv6 option.",
+      "case_id": "academic-open-dev2-0006-q4",
+      "claims": [
+        {
+          "answer_span": "It can be a transport layer header (e.g.",
+          "claim_id": "academic-open-dev2-0006-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 31477,
+              "char_start": 31437,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ipv6.rst",
+              "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "6 for TCP or 17` for UDP) or an IPv6 option.",
+          "claim_id": "academic-open-dev2-0006-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 31525,
+              "char_start": 31479,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ipv6.rst",
+              "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev2-0006-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Similarly, the receiver issues a DATA.ind(SDU) upon receipt of a recvd(SDU).",
+      "case_id": "academic-open-dev2-0007-q1",
+      "claims": [
+        {
+          "answer_span": "Similarly, the receiver issues a DATA.ind(SDU) upon receipt of a recvd(SDU).",
+          "claim_id": "academic-open-dev2-0007-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29452,
+              "char_start": 29372,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Such a simple protocol is sufficient when a single SDU is sent.",
+      "case_id": "academic-open-dev2-0007-q2",
+      "claims": [
+        {
+          "answer_span": "Such a simple protocol is sufficient when a single SDU is sent.",
+          "claim_id": "academic-open-dev2-0007-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29516,
+              "char_start": 29453,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is illustrated in the figure below.",
+      "case_id": "academic-open-dev2-0007-q3",
+      "claims": [
+        {
+          "answer_span": "This is illustrated in the figure below.",
+          "claim_id": "academic-open-dev2-0007-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29557,
+              "char_start": 29517,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Similarly, the receiver issues a DATA.ind(SDU) upon receipt of a recvd(SDU). Such a simple protocol is sufficient when a single SDU is sent.",
+      "case_id": "academic-open-dev2-0007-q4",
+      "claims": [
+        {
+          "answer_span": "Similarly, the receiver issues a DATA.ind(SDU) upon receipt of a recvd(SDU).",
+          "claim_id": "academic-open-dev2-0007-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29452,
+              "char_start": 29372,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Such a simple protocol is sufficient when a single SDU is sent.",
+          "claim_id": "academic-open-dev2-0007-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 29516,
+              "char_start": 29453,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev2-0007-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The figure below shows the basic operation of CSMA/CA devices.",
+      "case_id": "academic-open-dev2-0008-q1",
+      "claims": [
+        {
+          "answer_span": "The figure below shows the basic operation of CSMA/CA devices.",
+          "claim_id": "academic-open-dev2-0008-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 71355,
+              "char_start": 71293,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Before transmitting, host A verifies that the channel is empty for a long enough period.",
+      "case_id": "academic-open-dev2-0008-q2",
+      "claims": [
+        {
+          "answer_span": "Before transmitting, host A verifies that the channel is empty for a long enough period.",
+          "claim_id": "academic-open-dev2-0008-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 71446,
+              "char_start": 71356,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Then, its sends its data frame.",
+      "case_id": "academic-open-dev2-0008-q3",
+      "claims": [
+        {
+          "answer_span": "Then, its sends its data frame.",
+          "claim_id": "academic-open-dev2-0008-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 71478,
+              "char_start": 71447,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The figure below shows the basic operation of CSMA/CA devices. Before transmitting, host A verifies that the channel is empty for a long enough period.",
+      "case_id": "academic-open-dev2-0008-q4",
+      "claims": [
+        {
+          "answer_span": "The figure below shows the basic operation of CSMA/CA devices.",
+          "claim_id": "academic-open-dev2-0008-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 71355,
+              "char_start": 71293,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Before transmitting, host A verifies that the channel is empty for a long enough period.",
+          "claim_id": "academic-open-dev2-0008-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 71446,
+              "char_start": 71356,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev2-0008-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We describe POP briefly in this section.",
+      "case_id": "academic-open-dev2-0009-q1",
+      "claims": [
+        {
+          "answer_span": "We describe POP briefly in this section.",
+          "claim_id": "academic-open-dev2-0009-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 39134,
+              "char_start": 39094,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:3501.",
+      "case_id": "academic-open-dev2-0009-q2",
+      "claims": [
+        {
+          "answer_span": "The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:3501.",
+          "claim_id": "academic-open-dev2-0009-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 39226,
+              "char_start": 39135,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "IMAP is more powerful, but also more complex than POP.",
+      "case_id": "academic-open-dev2-0009-q3",
+      "claims": [
+        {
+          "answer_span": "IMAP is more powerful, but also more complex than POP.",
+          "claim_id": "academic-open-dev2-0009-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 39281,
+              "char_start": 39227,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We describe POP briefly in this section. The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:3501.",
+      "case_id": "academic-open-dev2-0009-q4",
+      "claims": [
+        {
+          "answer_span": "We describe POP briefly in this section.",
+          "claim_id": "academic-open-dev2-0009-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 39134,
+              "char_start": 39094,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The second protocol is the Internet Message Access Protocol (IMAP), defined in :rfc:3501.",
+          "claim_id": "academic-open-dev2-0009-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 39226,
+              "char_start": 39135,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/email.rst",
+              "source_sha256": "dad30cc2561ec0b24079e2ae5ca23c91a7c9ccc04a6749dc320b487e230b8437",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev2-0009-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "There is no significant propagation delay in this network.",
+      "case_id": "academic-open-dev2-0010-q1",
+      "claims": [
+        {
+          "answer_span": "There is no significant propagation delay in this network.",
+          "claim_id": "academic-open-dev2-0010-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 108814,
+              "char_start": 108756,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "For simplicity, assume that hosts A and B send 1000 bits packets.",
+      "case_id": "academic-open-dev2-0010-q2",
+      "claims": [
+        {
+          "answer_span": "For simplicity, assume that hosts A and B send 1000 bits packets.",
+          "claim_id": "academic-open-dev2-0010-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 108884,
+              "char_start": 108815,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The transmission of such a packet on a host-router (resp.",
+      "case_id": "academic-open-dev2-0010-q3",
+      "claims": [
+        {
+          "answer_span": "The transmission of such a packet on a host-router (resp.",
+          "claim_id": "academic-open-dev2-0010-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 108944,
+              "char_start": 108885,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "There is no significant propagation delay in this network. For simplicity, assume that hosts A and B send 1000 bits packets.",
+      "case_id": "academic-open-dev2-0010-q4",
+      "claims": [
+        {
+          "answer_span": "There is no significant propagation delay in this network.",
+          "claim_id": "academic-open-dev2-0010-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 108814,
+              "char_start": 108756,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "For simplicity, assume that hosts A and B send 1000 bits packets.",
+          "claim_id": "academic-open-dev2-0010-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 108884,
+              "char_start": 108815,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev2-0010-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this network, the STP will compute the following spanning tree.",
+      "case_id": "academic-open-dev2-0011-q1",
+      "claims": [
+        {
+          "answer_span": "In this network, the STP will compute the following spanning tree.",
+          "claim_id": "academic-open-dev2-0011-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34343,
+              "char_start": 34277,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Switch1` will be the root of the tree.",
+      "case_id": "academic-open-dev2-0011-q2",
+      "claims": [
+        {
+          "answer_span": "Switch1` will be the root of the tree.",
+          "claim_id": "academic-open-dev2-0011-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34383,
+              "char_start": 34345,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "All the interfaces of Switch1, Switch2 and Switch7 are part of the spanning tree.",
+      "case_id": "academic-open-dev2-0011-q3",
+      "claims": [
+        {
+          "answer_span": "All the interfaces of Switch1, Switch2 and Switch7 are part of the spanning tree.",
+          "claim_id": "academic-open-dev2-0011-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34471,
+              "char_start": 34384,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this network, the STP will compute the following spanning tree. Switch1` will be the root of the tree.",
+      "case_id": "academic-open-dev2-0011-q4",
+      "claims": [
+        {
+          "answer_span": "In this network, the STP will compute the following spanning tree.",
+          "claim_id": "academic-open-dev2-0011-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34343,
+              "char_start": 34277,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Switch1` will be the root of the tree.",
+          "claim_id": "academic-open-dev2-0011-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 34383,
+              "char_start": 34345,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev2-0011-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "CSMA/CA uses acknowledgments like CSMA.",
+      "case_id": "academic-open-dev2-0012-q1",
+      "claims": [
+        {
+          "answer_span": "CSMA/CA uses acknowledgments like CSMA.",
+          "claim_id": "academic-open-dev2-0012-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 69977,
+              "char_start": 69938,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Each frame contains a sequence number and a CRC.",
+      "case_id": "academic-open-dev2-0012-q2",
+      "claims": [
+        {
+          "answer_span": "Each frame contains a sequence number and a CRC.",
+          "claim_id": "academic-open-dev2-0012-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 70026,
+              "char_start": 69978,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The CRC is used to detect transmission errors while the sequence number is used to avoid frame duplication.",
+      "case_id": "academic-open-dev2-0012-q3",
+      "claims": [
+        {
+          "answer_span": "The CRC is used to detect transmission errors while the sequence number is used to avoid frame duplication.",
+          "claim_id": "academic-open-dev2-0012-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 70134,
+              "char_start": 70027,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "CSMA/CA uses acknowledgments like CSMA. Each frame contains a sequence number and a CRC.",
+      "case_id": "academic-open-dev2-0012-q4",
+      "claims": [
+        {
+          "answer_span": "CSMA/CA uses acknowledgments like CSMA.",
+          "claim_id": "academic-open-dev2-0012-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 69977,
+              "char_start": 69938,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Each frame contains a sequence number and a CRC.",
+          "claim_id": "academic-open-dev2-0012-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 70026,
+              "char_start": 69978,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev2-0012-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The figure below illustrates the operation of the sliding window.",
+      "case_id": "academic-open-dev2-0013-q1",
+      "claims": [
+        {
+          "answer_span": "The figure below illustrates the operation of the sliding window.",
+          "claim_id": "academic-open-dev2-0013-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 63709,
+              "char_start": 63644,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It uses a sliding window of three frames.",
+      "case_id": "academic-open-dev2-0013-q2",
+      "claims": [
+        {
+          "answer_span": "It uses a sliding window of three frames.",
+          "claim_id": "academic-open-dev2-0013-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 63751,
+              "char_start": 63710,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The sender can thus transmit three frames before being forced to wait for an acknowledgment.",
+      "case_id": "academic-open-dev2-0013-q3",
+      "claims": [
+        {
+          "answer_span": "The sender can thus transmit three frames before being forced to wait for an acknowledgment.",
+          "claim_id": "academic-open-dev2-0013-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 63844,
+              "char_start": 63752,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The figure below illustrates the operation of the sliding window. It uses a sliding window of three frames.",
+      "case_id": "academic-open-dev2-0013-q4",
+      "claims": [
+        {
+          "answer_span": "The figure below illustrates the operation of the sliding window.",
+          "claim_id": "academic-open-dev2-0013-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 63709,
+              "char_start": 63644,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "It uses a sliding window of three frames.",
+          "claim_id": "academic-open-dev2-0013-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 63751,
+              "char_start": 63710,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev2-0013-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "There are several intradomain routing protocols.",
+      "case_id": "academic-open-dev2-0014-q1",
+      "claims": [
+        {
+          "answer_span": "There are several intradomain routing protocols.",
+          "claim_id": "academic-open-dev2-0014-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1353,
+              "char_start": 1305,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Some domains use :term:RIP, which is a distance vector protocol.",
+      "case_id": "academic-open-dev2-0014-q2",
+      "claims": [
+        {
+          "answer_span": "Some domains use :term:RIP, which is a distance vector protocol.",
+          "claim_id": "academic-open-dev2-0014-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1420,
+              "char_start": 1354,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Other domains use link-state routing protocols such as :term:OSPF or :term:IS-IS.",
+      "case_id": "academic-open-dev2-0014-q3",
+      "claims": [
+        {
+          "answer_span": "Other domains use link-state routing protocols such as :term:OSPF or :term:IS-IS.",
+          "claim_id": "academic-open-dev2-0014-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1506,
+              "char_start": 1421,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "There are several intradomain routing protocols. Some domains use :term:RIP, which is a distance vector protocol.",
+      "case_id": "academic-open-dev2-0014-q4",
+      "claims": [
+        {
+          "answer_span": "There are several intradomain routing protocols.",
+          "claim_id": "academic-open-dev2-0014-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1353,
+              "char_start": 1305,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Some domains use :term:RIP, which is a distance vector protocol.",
+          "claim_id": "academic-open-dev2-0014-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1420,
+              "char_start": 1354,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev2-0014-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A RIP message contains several fields.",
+      "case_id": "academic-open-dev2-0015-q1",
+      "claims": [
+        {
+          "answer_span": "A RIP message contains several fields.",
+          "claim_id": "academic-open-dev2-0015-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4195,
+              "char_start": 4157,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The command field indicates whether the RIP message is a request or a response.",
+      "case_id": "academic-open-dev2-0015-q2",
+      "claims": [
+        {
+          "answer_span": "The command field indicates whether the RIP message is a request or a response.",
+          "claim_id": "academic-open-dev2-0015-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4277,
+              "char_start": 4196,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When a router boots, its routing table is empty and it cannot forward any packet.",
+      "case_id": "academic-open-dev2-0015-q3",
+      "claims": [
+        {
+          "answer_span": "When a router boots, its routing table is empty and it cannot forward any packet.",
+          "claim_id": "academic-open-dev2-0015-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4359,
+              "char_start": 4278,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A RIP message contains several fields. The command field indicates whether the RIP message is a request or a response.",
+      "case_id": "academic-open-dev2-0015-q4",
+      "claims": [
+        {
+          "answer_span": "A RIP message contains several fields.",
+          "claim_id": "academic-open-dev2-0015-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4195,
+              "char_start": 4157,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The command field indicates whether the RIP message is a request or a response.",
+          "claim_id": "academic-open-dev2-0015-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 4277,
+              "char_start": 4196,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/routing.rst",
+              "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev2-0015-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In particular, its transmission is protected by the retransmission timer.",
+      "case_id": "academic-open-dev2-0016-q1",
+      "claims": [
+        {
+          "answer_span": "In particular, its transmission is protected by the retransmission timer.",
+          "claim_id": "academic-open-dev2-0016-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 55930,
+              "char_start": 55857,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "At this point, the TCP connection enters the CLOSE\\_WAIT state.",
+      "case_id": "academic-open-dev2-0016-q2",
+      "claims": [
+        {
+          "answer_span": "At this point, the TCP connection enters the CLOSE\\_WAIT state.",
+          "claim_id": "academic-open-dev2-0016-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 55996,
+              "char_start": 55931,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this state, the host can still send data to the remote host.",
+      "case_id": "academic-open-dev2-0016-q3",
+      "claims": [
+        {
+          "answer_span": "In this state, the host can still send data to the remote host.",
+          "claim_id": "academic-open-dev2-0016-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 56060,
+              "char_start": 55997,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In particular, its transmission is protected by the retransmission timer. At this point, the TCP connection enters the CLOSE\\_WAIT state.",
+      "case_id": "academic-open-dev2-0016-q4",
+      "claims": [
+        {
+          "answer_span": "In particular, its transmission is protected by the retransmission timer.",
+          "claim_id": "academic-open-dev2-0016-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 55930,
+              "char_start": 55857,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "At this point, the TCP connection enters the CLOSE\\_WAIT state.",
+          "claim_id": "academic-open-dev2-0016-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 55996,
+              "char_start": 55931,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev2-0016-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this example, prefix 2001:db8:cafe::/48 is announced by AS1.",
+      "case_id": "academic-open-dev2-0017-q1",
+      "claims": [
+        {
+          "answer_span": "In this example, prefix 2001:db8:cafe::/48 is announced by AS1.",
+          "claim_id": "academic-open-dev2-0017-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13092,
+              "char_start": 13025,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/bgp.rst",
+              "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "AS1 advertises a BGP route towards this prefix to AS2`.",
+      "case_id": "academic-open-dev2-0017-q2",
+      "claims": [
+        {
+          "answer_span": "AS1 advertises a BGP route towards this prefix to AS2`.",
+          "claim_id": "academic-open-dev2-0017-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13151,
+              "char_start": 13094,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/bgp.rst",
+              "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The AS-Path of this route indicates that AS1 is the originator of the prefix.",
+      "case_id": "academic-open-dev2-0017-q3",
+      "claims": [
+        {
+          "answer_span": "The AS-Path of this route indicates that AS1 is the originator of the prefix.",
+          "claim_id": "academic-open-dev2-0017-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13231,
+              "char_start": 13152,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/bgp.rst",
+              "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this example, prefix 2001:db8:cafe::/48 is announced by AS1. AS1 advertises a BGP route towards this prefix to AS2`.",
+      "case_id": "academic-open-dev2-0017-q4",
+      "claims": [
+        {
+          "answer_span": "In this example, prefix 2001:db8:cafe::/48 is announced by AS1.",
+          "claim_id": "academic-open-dev2-0017-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13092,
+              "char_start": 13025,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/bgp.rst",
+              "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "AS1 advertises a BGP route towards this prefix to AS2`.",
+          "claim_id": "academic-open-dev2-0017-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 13151,
+              "char_start": 13094,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/bgp.rst",
+              "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev2-0017-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "XDR also supports 64 bits integers and booleans.",
+      "case_id": "academic-open-dev2-0018-q1",
+      "claims": [
+        {
+          "answer_span": "XDR also supports 64 bits integers and booleans.",
+          "claim_id": "academic-open-dev2-0018-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4351,
+              "char_start": 4303,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/rpc.rst",
+              "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The booleans are mapped onto integers (0 for false and 1 for true).",
+      "case_id": "academic-open-dev2-0018-q2",
+      "claims": [
+        {
+          "answer_span": "The booleans are mapped onto integers (0 for false and 1 for true).",
+          "claim_id": "academic-open-dev2-0018-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4427,
+              "char_start": 4352,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/rpc.rst",
+              "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "For the floating point numbers, the encoding defined in the IEEE standard is used.",
+      "case_id": "academic-open-dev2-0018-q3",
+      "claims": [
+        {
+          "answer_span": "For the floating point numbers, the encoding defined in the IEEE standard is used.",
+          "claim_id": "academic-open-dev2-0018-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4510,
+              "char_start": 4428,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/rpc.rst",
+              "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "XDR also supports 64 bits integers and booleans. The booleans are mapped onto integers (0 for false and 1 for true).",
+      "case_id": "academic-open-dev2-0018-q4",
+      "claims": [
+        {
+          "answer_span": "XDR also supports 64 bits integers and booleans.",
+          "claim_id": "academic-open-dev2-0018-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4351,
+              "char_start": 4303,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/rpc.rst",
+              "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The booleans are mapped onto integers (0 for false and 1 for true).",
+          "claim_id": "academic-open-dev2-0018-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 4427,
+              "char_start": 4352,
+              "region_id": null,
+              "source_artifact_id": "computer-networking:protocols/rpc.rst",
+              "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev2-0018-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is the easiest case to treat.",
+      "case_id": "academic-open-dev2-0019-q1",
+      "claims": [
+        {
+          "answer_span": "This is the easiest case to treat.",
+          "claim_id": "academic-open-dev2-0019-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 21101,
+              "char_start": 21067,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We recolour u to be black (this does not violate any of the red-black tree properties).",
+      "case_id": "academic-open-dev2-0019-q2",
+      "claims": [
+        {
+          "answer_span": "We recolour u to be black (this does not violate any of the red-black tree properties).",
+          "claim_id": "academic-open-dev2-0019-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 21192,
+              "char_start": 21103,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Case 1: u's sibling, v, is red.",
+      "case_id": "academic-open-dev2-0019-q3",
+      "claims": [
+        {
+          "answer_span": "Case 1: u's sibling, v, is red.",
+          "claim_id": "academic-open-dev2-0019-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 21240,
+              "char_start": 21205,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is the easiest case to treat. We recolour u to be black (this does not violate any of the red-black tree properties).",
+      "case_id": "academic-open-dev2-0019-q4",
+      "claims": [
+        {
+          "answer_span": "This is the easiest case to treat.",
+          "claim_id": "academic-open-dev2-0019-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 21101,
+              "char_start": 21067,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "We recolour u to be black (this does not violate any of the red-black tree properties).",
+          "claim_id": "academic-open-dev2-0019-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 21192,
+              "char_start": 21103,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev2-0019-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Analyzing the actual cost of the resize() operation is easy.",
+      "case_id": "academic-open-dev2-0020-q1",
+      "claims": [
+        {
+          "answer_span": "Analyzing the actual cost of the resize() operation is easy.",
+          "claim_id": "academic-open-dev2-0020-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 6259,
+              "char_start": 6197,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It allocates an array b of size $2n$ and copies the n elements of a into b.",
+      "case_id": "academic-open-dev2-0020-q2",
+      "claims": [
+        {
+          "answer_span": "It allocates an array b of size $2n$ and copies the n elements of a into b.",
+          "claim_id": "academic-open-dev2-0020-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 6345,
+              "char_start": 6260,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This takes $O(n)$ time.",
+      "case_id": "academic-open-dev2-0020-q3",
+      "claims": [
+        {
+          "answer_span": "This takes $O(n)$ time.",
+          "claim_id": "academic-open-dev2-0020-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 6372,
+              "char_start": 6347,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Analyzing the actual cost of the resize() operation is easy. It allocates an array b of size $2n$ and copies the n elements of a into b.",
+      "case_id": "academic-open-dev2-0020-q4",
+      "claims": [
+        {
+          "answer_span": "Analyzing the actual cost of the resize() operation is easy.",
+          "claim_id": "academic-open-dev2-0020-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 6259,
+              "char_start": 6197,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "It allocates an array b of size $2n$ and copies the n elements of a into b.",
+          "claim_id": "academic-open-dev2-0020-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 6345,
+              "char_start": 6260,
+              "region_id": null,
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev2-0020-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    }
+  ],
+  "private_data_used": false,
+  "provider_calls": 0,
+  "schema_version": 1,
+  "source_plan_sha256": "95a0f6f3a1c277b45cecf348e84dc91bc8a1abb798eb70f25a56792aa38e1376",
+  "split": "development-control-gold"
+}

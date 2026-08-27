@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-pre-spend-audit-002",
+  "component": "source-adapter",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "7583def05a07adf104efb202d1792b122dfc6c14",
+  "dirty_state": true,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "approximate-window-reference-layer-v1",
+        "version": "development-001-historical-control",
+        "configuration": {
+          "source_clusters": 100,
+          "development_cases": 500,
+          "structured_clusters": 44,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "high-risk-reference-case-count", "value": 227.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false},
+        {"name": "complete-structured-cluster-rate", "value": 0.5454545454545454, "unit": "proportion", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "normalized-duplicate-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "canonical-answer-leak-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "final-split-open-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "exact-development-cardinality", "passed": true, "evidence": "Historical package 001 contains 500 public cases and separate 500-row hidden gold."},
+        {"name": "public-hidden-gold-separation", "passed": true, "evidence": "Historical public rows exclude expected actions, answers, claims, and citations."},
+        {"name": "complete-reference-regions", "passed": false, "evidence": "AFQC-045 flagged 227/400 answerable cases; only 16/35 code and 2/3 table clusters contained complete detected regions."},
+        {"name": "uniqueness-and-leakage", "passed": true, "evidence": "Historical package 001 has zero normalized duplicates and zero canonical-answer leaks."},
+        {"name": "final-split-closed", "passed": true, "evidence": "The historical development audit did not open or construct final cases."},
+        {"name": "provider-free-reference-audit", "passed": true, "evidence": "AFQC-045 made zero provider calls and read no private data."}
+      ],
+      "failures_by_category": {
+        "high-risk-reference": 227,
+        "incomplete-structured-cluster": 20
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "complete-region-reference-layer-v2",
+        "version": "development-002",
+        "configuration": {
+          "source_clusters": 100,
+          "development_cases": 500,
+          "control_cases": 100,
+          "text_targets": 224,
+          "structured_targets": 176,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "high-risk-reference-case-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "complete-structured-cluster-rate", "value": 1.0, "unit": "proportion", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "normalized-duplicate-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "canonical-answer-leak-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "final-split-open-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "exact-development-cardinality", "passed": true, "evidence": "Package 002 contains 500 public cases, 500 hidden-gold rows, and a fixed 100-case control."},
+        {"name": "public-hidden-gold-separation", "passed": true, "evidence": "All public rows exclude expected action, answer, claims, citations, and source lineage."},
+        {"name": "complete-reference-regions", "passed": true, "evidence": "All 224 text targets and all 176 structured targets pass exact complete-region checks."},
+        {"name": "uniqueness-and-leakage", "passed": true, "evidence": "Package 002 has zero normalized duplicates and zero canonical-answer leaks."},
+        {"name": "final-split-closed", "passed": true, "evidence": "No final case, final source plan, or final hidden gold was constructed or opened."},
+        {"name": "provider-free-reference-audit", "passed": true, "evidence": "Construction and audit made zero provider calls and read no private data."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "complete-region-reference-layer-v2",
+    "rationale": "The prospective complete-region layer passes every reference, separation, lineage, uniqueness, and no-call gate. Keep it as the reference source for provider-neutral wording and later product evaluation.",
+    "limitations": [
+      "This result evaluates source/reference fitness, not T0 retrieval or answer quality.",
+      "A 12-case Codex-assisted packet found two deterministic template cues needing wording refinement; this is not independent external human annotation.",
+      "No provider, private-data, product, final 10,000-case, visual, fidelity, or usability execution occurred."
+    ]
+  }
+}

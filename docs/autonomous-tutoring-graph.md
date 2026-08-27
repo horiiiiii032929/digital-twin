@@ -241,9 +241,30 @@ Reusable foundations:
 
 Still missing before release selection:
 
-- privacy-preserving learning-gap aggregation; and
+- live post-commit integration, professor APIs/UI, and evaluation for the
+  privacy-preserving learning-gap aggregation core built under
+  [#132](https://github.com/horiiiiii032929/digital-twin/issues/132); and
 - a provider-qualified autonomous T1 path, one frozen multi-turn confirmation,
   and the professor-approved T2 fidelity reference.
+
+## Course-improvement loop checkpoint
+
+The autonomous product has two deliberately separated loops:
+
+1. The online T1 tutoring graph interprets one authenticated turn, retrieves
+   eligible evidence, selects one bounded intent, generates and validates a
+   response, performs at most one repair, and commits the response plus learner
+   state atomically.
+2. The asynchronous course-improvement loop receives only privacy-minimized
+   post-commit signals. It stores keyed learner/turn pseudonyms, suppresses
+   groups below a minimum of five distinct learners, aggregates counts within
+   one course and release, and creates non-executable professor-review drafts.
+
+The first #132 checkpoint implements the second loop's domain and persistence
+core. It contains no provider call and cannot read raw student content or
+change learner state, policy, sources, prompts, releases, or the selected T0/T1
+profile. Live emission, professor authorization, UI, deletion/key rotation,
+and utility/privacy evaluation remain prospective checkpoints.
 
 ## Completed network-free development checkpoint
 

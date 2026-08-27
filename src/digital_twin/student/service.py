@@ -19,6 +19,7 @@ from src.digital_twin.grounding.models import (
 )
 from src.digital_twin.grounding.protocols import (
     EvidenceSufficiencyGate,
+    PostGenerationClaimValidator,
     TextEmbedder,
     TutorGenerator,
 )
@@ -67,6 +68,7 @@ class StudentTutoringService:
         embedder: TextEmbedder | None = None,
         generator: TutorGenerator | None = None,
         evidence_gate: EvidenceSufficiencyGate | None = None,
+        claim_evidence_validator: PostGenerationClaimValidator | None = None,
         tutoring_mode: str = TutoringMode.T0,
     ) -> None:
         self.repository = repository
@@ -81,6 +83,7 @@ class StudentTutoringService:
         self.embedder = embedder
         self.generator = generator or DeterministicGroundedGenerator()
         self.evidence_gate = evidence_gate
+        self.claim_evidence_validator = claim_evidence_validator
         if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1}:
             raise ValueError("unsupported student tutoring mode")
         self.tutoring_mode = tutoring_mode
@@ -237,6 +240,13 @@ class StudentTutoringService:
             answer = graph_result.answer
             learner_state = graph_result.learner_state
             tutoring_intent = graph_result.intent
+        answer, claim_validation_events = self._validate_answer_claims(
+            answer,
+            hits,
+            account_id=account_id,
+            conversation=conversation,
+        )
+        generation_events.extend(claim_validation_events)
         now = timestamp_now()
         student_message = Message(
             id=f"message-{uuid4()}",
@@ -590,10 +600,35 @@ class StudentTutoringService:
                     "candidate_hit_count": len(hits),
                     "sufficient": decision.sufficient,
                     "score": decision.score,
+                    "selected_hit_count": len(decision.selected_hit_ids),
                 },
             )
         )
-        return (hits if decision.sufficient else []), events
+        if not decision.sufficient:
+            return [], events
+        if not decision.selected_hit_ids:
+            return hits, events
+        eligible_by_id = {hit.chunk.id: hit for hit in hits}
+        if not set(decision.selected_hit_ids).issubset(eligible_by_id):
+            events.append(
+                self._event(
+                    "evidence-sufficiency-failure",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                    details={
+                        "implementation": getattr(
+                            self.evidence_gate,
+                            "implementation_id",
+                            "evidence-gate",
+                        ),
+                        "failure_type": "unknown-selected-hit",
+                    },
+                )
+            )
+            return [], events
+        return [eligible_by_id[hit_id] for hit_id in decision.selected_hit_ids], events
 
     def _graph_retrieve(
         self, graph_input: TutoringGraphInput
@@ -726,6 +761,74 @@ class StudentTutoringService:
                 details={"failure_type": type(error).__name__},
             )
             return answer, [event]
+
+    def _validate_answer_claims(
+        self,
+        answer: TutorAnswer,
+        hits: list[RetrievalHit],
+        *,
+        account_id: str,
+        conversation: Conversation,
+    ) -> tuple[TutorAnswer, list[AuditEvent]]:
+        """Apply the optional post-generation release boundary fail closed."""
+
+        if (
+            self.claim_evidence_validator is None
+            or answer.trace is None
+            or answer.trace.policy_action != "answer"
+        ):
+            return answer, []
+        try:
+            decision = self.claim_evidence_validator.validate(
+                answer.atomic_claims,
+                hits,
+            )
+        except (RuntimeError, ValueError, ValidationError) as error:
+            decision = None
+            failure_type = type(error).__name__
+        else:
+            failure_type = None
+
+        details: dict[str, str | int | float | bool | None] = {
+            "implementation": getattr(
+                self.claim_evidence_validator,
+                "implementation_id",
+                "post-generation-claim-validator",
+            ),
+            "releasable": bool(decision and decision.releasable),
+            "claim_count": decision.claim_count if decision is not None else 0,
+            "supported_claim_count": (
+                decision.supported_claim_count if decision is not None else 0
+            ),
+            "score": decision.score if decision is not None else 0.0,
+            "validator_failure_type": failure_type,
+        }
+        event = self._event(
+            "post-generation-claim-validation",
+            account_id=account_id,
+            course_id=conversation.course_id,
+            release_id=conversation.release_id,
+            conversation_id=conversation.id,
+            details=details,
+        )
+        if decision is not None and decision.releasable:
+            return answer, [event]
+
+        trace = answer.trace.model_copy(
+            update={"policy_action": "safe-claim-validation-failure"}
+        )
+        return (
+            TutorAnswer(
+                content=(
+                    "The tutor could not verify every factual claim against the "
+                    "approved course evidence. Please refine the question or ask "
+                    "the instructor."
+                ),
+                warnings=["Post-generation claim validation failed safely."],
+                trace=trace,
+            ),
+            [event],
+        )
 
     def _generation_failure_answer(self, error: Exception) -> TutorAnswer:
         del error

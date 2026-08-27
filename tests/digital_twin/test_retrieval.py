@@ -19,6 +19,7 @@ from src.digital_twin.grounding import (
     RetrievalHit,
     RetrievalFailureCause,
     SecondaryRetrieverAgreementGate,
+    StructuredLexicalCoverageEvidenceGate,
     ReciprocalRankFusionRetriever,
     TermOverlapRetriever,
     evaluate_evidence_sufficiency,
@@ -173,6 +174,38 @@ def test_evidence_gates_are_swappable_and_keep_the_control_explicit():
     gated = EvidenceGatedRetriever(retriever, lexical_gate)
     assert gated.retrieve("monetary policy") == []
     assert gated.retrieve("course policy for graded work")
+
+
+def test_structured_lexical_gate_selects_only_alias_or_content_supported_hits():
+    cache = chunk("cache", "A shared line must be invalidated before a write.")
+    cache.metadata["search_description"] = "MESI cache coherence"
+    log = chunk("log", "Recovery replays durable records after a crash.")
+    log.metadata["search_description"] = "write ahead log WAL"
+    gate = StructuredLexicalCoverageEvidenceGate()
+
+    decision = gate.assess(
+        "According to the notes, explain both MESI and WAL.",
+        [
+            RetrievalHit(chunk=cache, relevance_score=1, raw_score=3),
+            RetrievalHit(chunk=log, relevance_score=0.8, raw_score=2),
+        ],
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["cache", "log"]
+    assert decision.features["alias_match_count"] == 2
+
+
+def test_structured_lexical_gate_rejects_context_only_overlap():
+    source = chunk("security", "Use only the permissions needed for security.")
+    source.metadata["search_description"] = "least privilege"
+    decision = StructuredLexicalCoverageEvidenceGate().assess(
+        "Using only Web Security, explain database normalization.",
+        [RetrievalHit(chunk=source, relevance_score=1, raw_score=1)],
+    )
+
+    assert decision.sufficient is False
+    assert decision.selected_hit_ids == []
 
 
 def test_evidence_gate_configuration_rejects_invalid_thresholds():

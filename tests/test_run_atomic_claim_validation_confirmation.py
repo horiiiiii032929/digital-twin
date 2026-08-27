@@ -27,12 +27,13 @@ def test_confirmation_is_completed_and_blocked_after_revocation() -> None:
     result = preflight(instrument)
 
     assert result["status"] == "blocked-not-authorized"
+    blockers = set(result["blockers"])
     assert {
         "candidate-execution-authorized-false",
         "local-model-execution-authorized-false",
         "confirmation-split-execution-authorized-false",
-    }.issubset(result["blockers"])
-    assert set(result["blockers"]) <= {
+    } <= blockers
+    assert blockers <= {
         "candidate-execution-authorized-false",
         "local-model-execution-authorized-false",
         "confirmation-split-execution-authorized-false",

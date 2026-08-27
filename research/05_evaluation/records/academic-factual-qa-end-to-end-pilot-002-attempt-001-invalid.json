@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-end-to-end-pilot-002-attempt-001-invalid",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-end-to-end-pilot-001-development",
+  "corpus_id": "synthetic-public-academic-factual-qa-development-v1",
+  "code_revision": "4ffe9f4",
+  "dirty_state": true,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "t0-any-hit-v2-control",
+        "version": "attempt-001-dirty",
+        "configuration": {
+          "case_count": 160,
+          "condition_count": 1,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": false,
+          "evidence": "The shared execution used a dirty worktree."
+        },
+        {
+          "name": "no-external-or-private-execution",
+          "passed": true,
+          "evidence": "Zero provider calls, zero cost, and no private or held-out data access were recorded."
+        }
+      ],
+      "failures_by_category": {
+        "procedural-dirty-worktree": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "two-boundary-t0-development-candidate-v1",
+        "version": "attempt-001-dirty",
+        "configuration": {
+          "case_count": 160,
+          "condition_count": 3,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "execution-valid",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "clean-frozen-revision",
+          "passed": false,
+          "evidence": "The runner recorded the repository as dirty and had not yet enforced the clean-worktree preflight."
+        },
+        {
+          "name": "no-external-or-private-execution",
+          "passed": true,
+          "evidence": "Zero provider calls, zero cost, and no private or held-out data access were recorded."
+        }
+      ],
+      "failures_by_category": {
+        "procedural-dirty-worktree": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Invalid execution: the worktree was not clean, so neither condition can be bound to one reproducible code revision. The schema-level Refine outcome means correct the harness and rerun, not refine the model from these measurements.",
+    "limitations": [
+      "Internal quality metrics are intentionally not used as method evidence.",
+      "The synthetic-public development set is not independent gold.",
+      "The raw output remains ignored and is referenced only by hash."
+    ]
+  }
+}
