@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "c36c1a81c492f6182576c33aa6cc026e02823cae738f9ea85578d12c196d322b",
+  "record_sha256": "3b49f1ba8bb6403b272693e3efbb69e36cd4517f36dfa171ffa2858729389c6e",
   "records": [
     {
       "audit": {
@@ -1704,7 +1704,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual successor-binding review verifies exact documented DeepSeek and Gemini slugs, exact Google AI Studio routing, current pricing and retention references, required diagnostic DeepSeek fingerprint capture, binding-level authorization defaults, and closed final execution.",
+        "evidence": "Manual AFQC-039 binding review verifies exact documented DeepSeek and Gemini slugs, fresh official metadata, Google AI Studio default-tier routing with fallback disabled, current pricing and retention references, diagnostic DeepSeek fingerprint capture, development-only authority, and closed final execution.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1715,12 +1715,12 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json",
       "risk": "high",
-      "sha256": "128390cfa392e7357aebf484d9806d5571cad5abafd5cf16e41e30ebc271a25c"
+      "sha256": "bd370efff44b13d6d9082212004f74e1a88dd348d62015131c894d7b8a553232"
     },
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual AFQC-035 review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, exact split/slice totals, provider and cost bounds, authorization separation, and closed final execution.",
+        "evidence": "Manual AFQC-039 instrument review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, exact split/slice totals, bounded construction plus candidate/control development authority, automatic-promotion prohibition, and closed final execution.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1731,12 +1731,12 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "risk": "high",
-      "sha256": "56831971ae79e89f5a8cc638845a174944daa3a704afe70b28a9ea76c9d3aaa5"
+      "sha256": "46dbcbd4f0ea036d0c1dec2c170a5ae2197132412cb9a3b0c445948c7aef5a89"
     },
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual system-manifest review binds the candidate to build revision 636d689, the selected profile hash, exact hybrid retrieval, DeepSeek generator fingerprint, local NLI revision, structured evidence gate, public-source boundary, and first-use benchmark status.",
+        "evidence": "Manual system-manifest review binds the candidate to provider-identity build revision 9a7f7cc, the selected profile hash, exact hybrid retrieval, documented DeepSeek revision plus required runtime fingerprint recording, local NLI revision, structured evidence gate, public-source boundary, and first-use benchmark status.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -4121,7 +4121,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual construction-runner review verifies deterministic truth precedes provider calls, author output is wording-only, independent verification cannot mutate truth, public/gold packages remain separate, exact duplicates and leakage fail closed, ledgers are exclusive and resume-bound, and final construction remains unauthorized.",
+        "evidence": "Manual AFQC-039 construction-runner review verifies deterministic truth precedes provider calls, author output is wording-only, independent verification cannot mutate truth, public/gold packages remain separate, exact duplicates and leakage fail closed, ledgers are exclusive and resume-bound, Gemini default-tier routing is frozen, and final construction remains unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -4137,7 +4137,7 @@
       ],
       "path": "scripts/construct_academic_factual_qa_open_10000.py",
       "risk": "high",
-      "sha256": "eae2a58f0d8e4febb7e48084ee3f757aba19d8d64f8853c6424fe9240ddb2e17"
+      "sha256": "bed6a5a1762bb0eb401d2ce2155afbdafefbff33e1b60273572a804b1ef2320a"
     },
     {
       "audit": {
@@ -6739,7 +6739,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual provider transport and accounting review verifies credentials are runtime-only, OpenRouter metadata is enabled for exact provider identity, fallback is binding-controlled, model/revision/tier drift fails closed, every call is durably accounted, and hard call/cost stops apply before and after calls.",
+        "evidence": "Manual provider transport and accounting review verifies credentials are runtime-only, OpenRouter metadata is enabled for exact provider identity, requested default service tier and fallback are binding-controlled, model/revision/tier drift fails closed, every call is durably accounted, and hard call/cost stops apply before and after calls.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6750,7 +6750,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/provider_json.py",
       "risk": "high",
-      "sha256": "ef45a3818c25bcf1b7107aec957407d3a6f0738c19c7291ff4b4bc2b04c6103c"
+      "sha256": "a1f73118d09d127d24e5a04463277e9c845f93620d4d8a92c0f1747a66a156e4"
     },
     {
       "audit": {
@@ -7518,7 +7518,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3a2320199accbf6438ab5d351d1a105f955a2dc2dd2a0b3db4debe3bf7922385"
+      "sha256": "ac807ad1f02cfc20a0ee0bbbf1322580fa7118ecf9dc1915c9ce99844cf5a5a8"
     },
     {
       "audit": {
@@ -7982,7 +7982,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "ba66795fdff69cfb6a26b43c5741456a0c37c1cb5496b17b0a91232baa791f10"
+      "sha256": "18b24531964b47089cc68ead7d615b5b48c8558e918400dc284edb8b1d7663ec"
     },
     {
       "audit": {
@@ -8323,7 +8323,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Focused construction tests verify deterministic truth authority, exact source spans, answer-leak rejection, malformed and mutated metadata rejection, exclusive resume-bound ledgers, and complete 2,100-cluster truth-package construction without provider calls.",
+        "evidence": "Focused construction tests verify deterministic truth authority, exact source spans, answer-leak rejection, malformed and mutated metadata rejection, authorized-development preflight, explicit OpenRouter default-tier transport, exclusive resume-bound ledgers, and complete 2,100-cluster truth-package construction without unintended provider calls.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8334,7 +8334,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_construction.py",
       "risk": "medium",
-      "sha256": "e9c89e681cf6203b18c1f07c2dd4af0ede6b928ca4d6da3c217c7c4525722c27"
+      "sha256": "67ce74089d8e4162557939fce364507f6cc8c5aef9c573b46671fc2cb65fae80"
     },
     {
       "audit": {
@@ -8547,7 +8547,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Focused tests verify undersized-fragment rejection, corrected feasible allocation, deterministic 2,100-cluster plan and 10,500 truth packages, course/slice distributions, modality binding, reuse limits, non-overlap, and separately blocked construction and paid preflight.",
+        "evidence": "Focused tests verify undersized-fragment rejection, corrected feasible allocation, deterministic 2,100-cluster plan and 10,500 truth packages, course/slice distributions, modality binding, reuse limits, non-overlap, and the AFQC-039 source-plan authorization boundary.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8558,7 +8558,7 @@
       "package_commands": [],
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "risk": "medium",
-      "sha256": "be6578733494c672040470f3b2f82ed6e58698a2a379b5098ce88dd1d321d6c2"
+      "sha256": "004af143d2c25ae58e2782714a4f28a03e8730e60a90a1d5bb722653de8fb2ee"
     },
     {
       "audit": {

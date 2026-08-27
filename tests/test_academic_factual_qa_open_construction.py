@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sqlite3
 from pathlib import Path
 
@@ -21,7 +22,11 @@ from src.digital_twin.evaluation import (
     assemble_deterministic_verified_cluster,
     build_deterministic_cluster_truth,
 )
-from src.digital_twin.evaluation.provider_json import ProviderCallLedgerV1
+from src.digital_twin.evaluation import provider_json
+from src.digital_twin.evaluation.provider_json import (
+    OpenAiCompatibleJsonTransport,
+    ProviderCallLedgerV1,
+)
 
 
 def _cluster(*, boundary_slice: str = "cross-course") -> SourceClusterV1:
@@ -138,21 +143,84 @@ def test_construction_validate_and_simulation_are_network_free() -> None:
     assert result["provider_calls"] == 0
 
 
-def test_successor_preflight_requires_instrument_and_binding_authorization() -> None:
+def test_successor_preflight_is_ready_for_authorized_development(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-openrouter-key")
+    monkeypatch.setattr(
+        "scripts.construct_academic_factual_qa_open_10000._repo_dirty",
+        lambda: False,
+    )
     result = construction_preflight(
         stage="development",
-        ledger_path=Path(
-            "data/interim/academic_factual_qa_open_10000_v1_test-do-not-create.sqlite3"
-        ),
+        ledger_path=tmp_path / "unused.sqlite3",
         resume=False,
     )
 
-    assert result["status"] == "blocked-not-authorized"
-    assert "dataset-construction-authorized-false" in result["blockers"]
-    assert (
-        "provider-binding-dataset-construction-authorized-false"
-        in result["blockers"]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
+    assert result["final_product_execution_authorized"] is False
+
+
+@pytest.mark.asyncio
+async def test_openrouter_transport_pins_default_service_tier(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    binding = json.loads(
+        Path(
+            "research/05_evaluation/instruments/"
+            "academic_factual_qa_open_10000_provider_binding_002.json"
+        ).read_text(encoding="utf-8")
+    )["providers"]["gemini-3.7-flash"]
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        is_error = False
+        headers: dict[str, str] = {}
+
+        @staticmethod
+        def json() -> dict[str, object]:
+            return {
+                "model": "google/gemini-3.7-flash",
+                "provider": "Google AI Studio",
+                "service_tier": "default",
+                "system_fingerprint": "google/gemini-3.7-flash-20260813",
+                "choices": [{"message": {"content": '{"accepted": true}'}}],
+                "usage": {
+                    "prompt_tokens": 10,
+                    "completion_tokens": 5,
+                    "cost": 0.0001,
+                },
+            }
+
+    class FakeClient:
+        async def __aenter__(self) -> "FakeClient":
+            return self
+
+        async def __aexit__(self, *args: object) -> None:
+            return None
+
+        async def post(self, *args: object, **kwargs: object) -> FakeResponse:
+            captured.update(kwargs["json"])
+            return FakeResponse()
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-openrouter-key")
+    monkeypatch.setattr(
+        provider_json.httpx,
+        "AsyncClient",
+        lambda **kwargs: FakeClient(),
     )
+
+    result = await OpenAiCompatibleJsonTransport(binding).call(
+        system="Return JSON.",
+        prompt="Test prompt",
+        task="test-default-tier",
+        schema={"type": "object"},
+    )
+
+    assert captured["service_tier"] == "default"
+    assert result.service_tier == "default"
 
 
 def test_provider_ledger_binds_resume_and_budget(tmp_path: Path) -> None:

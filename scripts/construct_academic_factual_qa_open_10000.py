@@ -799,6 +799,14 @@ def validate() -> dict[str, Any]:
         != "required-recorded-diagnostic-not-selection-gate"
     ):
         raise ConstructionError("DeepSeek successor identity policy drifted")
+    gemini = binding["providers"]["gemini-3.7-flash"]
+    if (
+        gemini["provider_model"] != "google/gemini-3.7-flash"
+        or gemini.get("requested_service_tier") != "default"
+        or gemini.get("routing", {}).get("allow_fallbacks") is not False
+        or gemini.get("routing", {}).get("order") != ["Google AI Studio"]
+    ):
+        raise ConstructionError("Gemini exact default-tier route drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
         "status": "passed",

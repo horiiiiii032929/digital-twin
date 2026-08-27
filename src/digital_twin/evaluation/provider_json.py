@@ -317,6 +317,9 @@ class OpenAiCompatibleJsonTransport:
                     "seed": self.binding["seed"],
                 }
             )
+            requested_service_tier = self.binding.get("requested_service_tier")
+            if requested_service_tier is not None:
+                payload["service_tier"] = requested_service_tier
         else:
             payload.update(
                 {

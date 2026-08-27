@@ -70,10 +70,13 @@ canary returned the requested model but a different runtime fingerprint, so the
 executor stopped before Gemini or any bulk call. Zero development clusters were
 processed; provider usage and cost are unavailable rather than claimed as zero.
 The sealed final 10,000-case stage and held-out scoring remain unauthorized.
-Provider binding 002 is now a build-only successor: it keeps the exact
+Provider binding 002 is now the separately authorized development successor: it keeps the exact
 documented DeepSeek V4 Flash slug as the hard identity, requires and records a
 runtime fingerprint diagnostically, improves sanitized failure evidence, and
-uses a fresh exclusive ledger. It is not authorized for a provider call.
+uses a fresh exclusive ledger. AFQC-039 authorizes only construction attempt
+002 and, if it succeeds, the 500-case candidate plus paired 100-case control.
+Gemini is pinned to Google AI Studio default service with fallback disabled.
+The final 10,000-case execution remains unauthorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected

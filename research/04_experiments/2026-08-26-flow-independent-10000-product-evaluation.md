@@ -62,7 +62,10 @@ across development and final splits. AFQC-035 freezes this allocation while
 retaining the source-diversity cap. AFQC-036 separately authorized only the
 construction and development checkpoint. Attempt 001 then failed closed on the
 first DeepSeek canary because its runtime fingerprint differed from the frozen
-binding; AFQC-037 revokes that authority. The final split remains sealed.
+binding; AFQC-037 revoked that authority. AFQC-039 now authorizes immutable
+binding 002 for construction attempt 002 and, only after construction passes,
+the 500-case candidate plus paired 100-case control. The final split remains
+sealed.
 
 ## Product comparison
 
