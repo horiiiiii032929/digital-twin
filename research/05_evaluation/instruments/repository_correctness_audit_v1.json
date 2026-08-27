@@ -1215,12 +1215,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual command-surface review verifies explicit open-10,000 validation and simulation include the deterministic v2 package and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
+      "evidence": "Manual command-surface review verifies explicit open-10,000 validation includes the deterministic v2 package, its no-call pre-spend fitness audit, and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "cfcda588c38c621f6155824a099c86acfb2780aca150db17948b50113457385f"
+      "sha256": "b236a612719367d6d0a3ec2b18a0be4e2f526bafdcb71e28335ae535c3e253ba"
     },
     {
       "audit_status": "audited",
@@ -6363,12 +6363,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
+      "evidence": "Manual audit-code review verifies the command reads only the committed development public/gold packages and frozen public source plan, rechecks exact source-range lineage and public/gold separation, emits conservative reference-answer and structured-modality risk flags, opens no final split, makes no provider call, and mutates no historical evidence.",
+      "findings": [],
+      "path": "scripts/audit_academic_factual_qa_open_development.py",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "8d18ce1365411d85334191cf8ccebe3aec5f659f710fa0e9669914642e154967"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
       "evidence": "Manual builder review verifies it loads only the frozen 100 development clusters, assembles deterministic v2 public and hidden-gold packages, rejects answer leakage and normalized duplicates, creates an exact 20-cluster control, uses exclusive writes, performs no provider calls, closes final construction, and emits a fail-closed paid preflight.",
       "findings": [],
       "path": "scripts/build_academic_factual_qa_open_development_v2.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "d24a5cacbb247b9ef0e1f7a67f809684d2fffd42caae2904456b3e2696dff4a4"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
+      "findings": [],
+      "path": "tests/test_audit_academic_factual_qa_open_development.py",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "e26934b4a3afc94e42bc583ba6d705d855841152baf32c9db34a11ed4be7c2cc"
     },
     {
       "audit_status": "audited",

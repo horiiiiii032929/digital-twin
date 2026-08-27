@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 580
+    "audited": 582
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 131,
+    "active_or_unclassified_tooling": 132,
     "active_runtime": 106,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 119
+    "verification": 120
   },
-  "file_count": 580,
+  "file_count": 582,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d52d5261da007f2bee5a752f7d1dd53b5de0ae33a6ae222bc3a0024945546705",
+  "record_sha256": "44779af9c74365ce45d1af43b57039542bcd391a71a1c0df44678cf00b1f733b",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual command-surface review verifies explicit open-10,000 validation and simulation include the deterministic v2 package and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
+        "evidence": "Manual command-surface review verifies explicit open-10,000 validation includes the deterministic v2 package, its no-call pre-spend fitness audit, and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "cfcda588c38c621f6155824a099c86acfb2780aca150db17948b50113457385f"
+      "sha256": "b236a612719367d6d0a3ec2b18a0be4e2f526bafdcb71e28335ae535c3e253ba"
     },
     {
       "audit": {
@@ -3716,6 +3716,24 @@
       "path": "scripts/apply_multimodal_researcher_review.py",
       "risk": "high",
       "sha256": "1445d07e0b6b8fec5c5afd83bd066c1abf1e50b83c36ee54cf533fca5b430505"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual audit-code review verifies the command reads only the committed development public/gold packages and frozen public source plan, rechecks exact source-range lineage and public/gold separation, emits conservative reference-answer and structured-modality risk flags, opens no final split, makes no provider call, and mutates no historical evidence.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/audit_academic_factual_qa_open_development.py",
+      "risk": "high",
+      "sha256": "8d18ce1365411d85334191cf8ccebe3aec5f659f710fa0e9669914642e154967"
     },
     {
       "audit": {
@@ -8583,6 +8601,22 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_audit_academic_factual_qa_open_development.py",
+      "risk": "medium",
+      "sha256": "e26934b4a3afc94e42bc583ba6d705d855841152baf32c9db34a11ed4be7c2cc"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -9655,8 +9689,8 @@
     }
   ],
   "risk_counts": {
-    "high": 447,
-    "medium": 133
+    "high": 448,
+    "medium": 134
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

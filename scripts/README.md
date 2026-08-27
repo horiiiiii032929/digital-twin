@@ -747,7 +747,14 @@ Current utilities:
   control from deterministic source truth. Its validation checks source-range
   lineage, boundary-empty lineage, answer leakage, normalized duplicates, and
   byte stability. It also simulates strict direct OpenAI and Mistral transport
-  contracts with zero network calls. The response runner accepts only `EvaluationCaseV1`,
+  contracts with zero network calls.
+  `audit_academic_factual_qa_open_development.py` adds a separate pre-spend
+  fitness check over the written package. It preserves the structural build
+  result while flagging likely answer fragments, raw markup/runtime artifacts,
+  and structured slices whose selected answer does not contain evidence of the
+  claimed modality. These diagnostics are a product-execution gate, not a
+  replacement for semantic review and not permission to mutate historical
+  packages. The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden
   gold. The scorer opens `EvaluationGoldV1` only after durable completion and
