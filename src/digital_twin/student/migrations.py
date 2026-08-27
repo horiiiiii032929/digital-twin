@@ -166,6 +166,26 @@ def _add_bounded_tutoring_state(connection: sqlite3.Connection) -> None:
     )
 
 
+LEARNING_GAP_SIGNAL_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS learning_gap_signals (
+           signal_id TEXT PRIMARY KEY,
+           source_turn_key TEXT NOT NULL,
+           learner_key TEXT NOT NULL,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           release_id TEXT NOT NULL REFERENCES releases(id) ON DELETE CASCADE,
+           topic_key TEXT NOT NULL,
+           signal_kind TEXT NOT NULL,
+           observed_at TEXT NOT NULL,
+           expires_at TEXT NOT NULL,
+           signal_json TEXT NOT NULL,
+           UNIQUE(source_turn_key, topic_key, signal_kind)
+       )""",
+    """CREATE INDEX IF NOT EXISTS learning_gap_signals_scope_idx
+       ON learning_gap_signals(course_id, release_id, expires_at, topic_key,
+                               signal_kind)""",
+)
+
+
 CORE_SCHEMA_STATEMENTS = (
     """CREATE TABLE IF NOT EXISTS accounts (
            id TEXT PRIMARY KEY,
@@ -416,5 +436,13 @@ DEFAULT_MIGRATIONS = (
             "add message tutoring metadata and conversation_learner_states"
         ),
         operation=_add_bounded_tutoring_state,
+    ),
+    SQLiteMigration(
+        version=10,
+        name="privacy-preserving-learning-gap-signals",
+        definition="\n".join(LEARNING_GAP_SIGNAL_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, LEARNING_GAP_SIGNAL_STATEMENTS
+        ),
     ),
 )
