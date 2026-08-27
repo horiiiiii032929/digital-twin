@@ -14,8 +14,9 @@ files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
 active for all general evaluation actions. It covers 69 protected entrypoints.
-The exact A1 network-free development run is temporarily authorized; no provider,
-paid, private-data, external-delivery, or real-student operation is authorized.
+The A1 network-free development run completed as **Go Deeper** and its one-time
+authorization is revoked. No provider, paid, private-data, external-delivery,
+or real-student operation is authorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -175,8 +176,9 @@ stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 877-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
 artifacts are also fully dispositioned in the current 528-file audit. Evaluation
-execution remains frozen, with 69/69 protected entrypoints registered and only
-the finite A1 network-free development run in the bounded allowlist.
+execution remains frozen, with 69/69 protected entrypoints registered. The
+completed A1 run has been removed from the bounded allowlist; no prospective
+proactive-outreach execution is authorized.
 
 ## Current outcome
 
@@ -210,8 +212,14 @@ the current release, applies a deterministic lexical support gate, and preserves
 consent, snooze, membership, idempotency, and citation authority. Active mode
 fails closed unless explicitly enabled. The Discord request builder is corrected
 to emit only a generic alert and authenticated in-app deep link. Neither A1 nor
-Discord is selected or enabled for real delivery. The frozen 12-check P0 and
-20-case P1 network-free development execution is pending.
+Discord is selected or enabled for real delivery. The frozen development
+execution completed as **Go Deeper**: 12/12 P0 checks, 20/20 expected actions
+and reasons, and 10/10 supported current-release lineage checks passed, with
+zero provider calls, private-data reads, external deliveries, persisted shadow
+triggers, tokens, or cost. This is synthetic mechanism evidence around one
+source topic, not evidence of useful real-student intervention or learning
+improvement. The one-time authorization is revoked; A0 remains the release
+control and A1 requires a separately frozen representative shadow confirmation.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the

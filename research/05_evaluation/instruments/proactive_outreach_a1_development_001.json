@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "proactive-outreach-a1-development-001",
-  "status": "frozen-pending-network-free-execution",
+  "status": "completed-go-deeper",
   "decision_question": "Can deterministic evidence-recovery identify newly supportable prior no-evidence turns while preserving consent, no-action, lineage, idempotency, and external-channel privacy boundaries?",
   "implementation": {
     "candidate": "deterministic-evidence-recovery-a1-v1",
@@ -17,7 +17,7 @@
     "active_mode_selected": false
   },
   "execution": {
-    "network_free_execution_authorized": true,
+    "network_free_execution_authorized": false,
     "provider_calls_authorized": false,
     "paid_execution_authorized": false,
     "private_data_authorized": false,

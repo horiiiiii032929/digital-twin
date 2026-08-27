@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "31c60f90c9d8a0578da0070405b0d2a6517c2703c39584fd09525ea4563f3c39",
+  "record_sha256": "bbd89a935967e318ebcb0ed4313e78be79d4dd593f5c16f7b51eaa09ff864903",
   "records": [
     {
       "audit": {
@@ -2584,7 +2584,7 @@
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "Prospective review confirmed a finite 12-check P0 and 20-case P1 synthetic design, predeclared exact gates, shadow default, no-action controls, and no provider, private-data, real-student, or external-delivery authority.",
+        "evidence": "The immutable executed hash is preserved in the result; the instrument now records completed-go-deeper, revoked network-free authority, the finite 12-check P0 and 20-case P1 design, and no provider, private-data, real-student, or external-delivery authority.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -2595,7 +2595,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/proactive_outreach_a1_development_001.json",
       "risk": "high",
-      "sha256": "2029be99aaef07e6fba3bfa045fa27a4764d922f763b7768410ab62515025d7f"
+      "sha256": "3a106e78d2a9cd843fa2bfd5bde3dd6aa4a7ad23cf6f7eba2a1d9c7f3e858708"
     },
     {
       "audit": {
@@ -6836,7 +6836,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active and only the exact A1 network-free development run receives bounded execution authority; provider, paid, private, external-delivery, and real-student operations remain blocked.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, the completed A1 network-free authorization is revoked, and provider, paid, private, external-delivery, and real-student operations remain blocked.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -6847,7 +6847,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "36e0deb09e38216d8b1762c7004b0ab90de208eca05caf4f92c45d1e1ac019f5"
+      "sha256": "000aadd614df27ad0ae910ddf4a7297b854742e3b4633df47e7e20f3a7898529"
     },
     {
       "audit": {
@@ -7348,7 +7348,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, exact bounded authorization of the historical oracle and A1 network-free development run, and rejection of every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify A1 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7359,7 +7359,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "bb45362fefd6c5258fe1f6a66142b29a7ea2c84f044c94138b9a4f05019b635e"
+      "sha256": "dde64f2c767835e8f2f3a3b29371f26516e8436367022b6c0ab76d128273865f"
     },
     {
       "audit": {
@@ -8468,7 +8468,7 @@
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "Focused tests cover frozen cardinality and authority, exclusive output preflight, complete P0/P1 gate execution, zero side effects, and duplicate-case rejection.",
+        "evidence": "Focused tests cover frozen cardinality, revoked authority and blocked rerun preflight, exclusive output handling, complete P0/P1 gate execution, zero side effects, and duplicate-case rejection.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8479,7 +8479,7 @@
       "package_commands": [],
       "path": "tests/test_run_proactive_outreach_a1_development.py",
       "risk": "medium",
-      "sha256": "875ebaf8fe4e1db8d5ed0e87840ba8b415ebf796bf6bf4bf89974e26d93902ba"
+      "sha256": "805b81ad1fb6597801b9b2ff41807b6c7c8eb3e3e9122fd0488031b0ab92a1db"
     },
     {
       "audit": {

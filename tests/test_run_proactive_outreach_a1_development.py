@@ -11,26 +11,29 @@ from scripts.run_proactive_outreach_a1_development import (
 )
 
 
-def test_frozen_instrument_has_finite_network_free_contract():
+def test_completed_instrument_has_finite_revoked_network_free_contract():
     instrument = load_instrument()
 
     assert len(instrument["p0_mechanism_checks"]) == 12
     assert len(instrument["p1_shadow_cases"]) == 20
-    assert instrument["execution"]["network_free_execution_authorized"] is True
+    assert instrument["status"] == "completed-go-deeper"
+    assert instrument["execution"]["network_free_execution_authorized"] is False
     assert instrument["execution"]["provider_calls_authorized"] is False
     assert instrument["execution"]["real_student_delivery_authorized"] is False
     assert instrument["implementation"]["active_mode_selected"] is False
 
 
-def test_preflight_is_exclusive_and_can_require_clean_tree(tmp_path):
+def test_completed_preflight_is_blocked_and_output_remains_exclusive(tmp_path):
     instrument = load_instrument()
     output = tmp_path / "result.json"
 
-    ready = validate_preflight(instrument, output=output, require_clean=False)
+    revoked = validate_preflight(instrument, output=output, require_clean=False)
     output.write_text("occupied", encoding="utf-8")
     blocked = validate_preflight(instrument, output=output, require_clean=False)
 
-    assert ready["status"] == "ready"
+    assert revoked["status"] == "blocked"
+    assert "instrument-not-pending" in revoked["blockers"]
+    assert "network-free-execution-not-authorized" in revoked["blockers"]
     assert blocked["status"] == "blocked"
     assert "exclusive-output-already-exists" in blocked["blockers"]
 

@@ -227,9 +227,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
-        "proactive-outreach-a1-development-001": (
-            "method_evaluation_execution",
-        ),
     }
 )
 

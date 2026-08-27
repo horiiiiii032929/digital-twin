@@ -257,7 +257,10 @@ The frozen development command is:
 npm run verify:proactive-outreach-a1
 ```
 
-The named P0/P1 execution remains separately recorded from normal verification.
+The named P0/P1 execution is separately recorded in
+[`proactive-outreach-a1-development-001`](../research/05_evaluation/proactive-outreach-a1-development-001-results.md).
+It passed all frozen synthetic development gates and remains **Go Deeper**; the
+one-time authorization is revoked and the result does not select A1 for release.
 
 Not yet implemented or authorized:
 
@@ -270,3 +273,9 @@ Not yet implemented or authorized:
 - professor/student configuration screens beyond the in-app opt-in panel;
 - real-student, interruption-cost, or learning-outcome claims; and
 - release-profile selection.
+
+The next evidence checkpoint is a separately frozen representative shadow
+confirmation over stratified prior no-evidence turns and changed releases. It
+must audit every proposal and a seeded no-action sample without sending a real
+message. Any real student or external-channel pilot remains a later,
+approval-gated stage.
