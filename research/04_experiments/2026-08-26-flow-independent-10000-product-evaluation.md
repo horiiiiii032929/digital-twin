@@ -62,10 +62,19 @@ across development and final splits. AFQC-035 freezes this allocation while
 retaining the source-diversity cap. AFQC-036 separately authorized only the
 construction and development checkpoint. Attempt 001 then failed closed on the
 first DeepSeek canary because its runtime fingerprint differed from the frozen
-binding; AFQC-037 revoked that authority. AFQC-039 now authorizes immutable
-binding 002 for construction attempt 002 and, only after construction passes,
-the 500-case candidate plus paired 100-case control. The final split remains
-sealed.
+binding; AFQC-037 revoked that authority. AFQC-039 authorized immutable binding
+002. Both canaries passed, but the first bulk author response violated the
+frozen output schema, so AFQC-040 records attempt 002 as invalid and revokes its
+authority. Zero clusters were accepted. The preregistered deterministic
+malformed-output fallback must be implemented prospectively before any
+successor. The final split remains sealed.
+
+AFQC-041 implements that correction prospectively in build-only attempt 003:
+malformed author output is never accepted, its response hash and reason are
+recorded, and deterministic canonical wording is explicitly labelled before
+the unchanged independent verifier. More than five fallback clusters in the
+100-cluster development construction produces `completed-refine`. Attempt 003
+has no provider authority.
 
 ## Product comparison
 

@@ -52,7 +52,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
 )
 DATASET_ROOT = ROOT / "research/05_evaluation/datasets"
 DEVELOPMENT_CASES_PATH = (
@@ -73,7 +73,7 @@ FINAL_CASES_PATH = DATASET_ROOT / "academic_factual_qa_open_10000_v1_final_cases
 FINAL_GOLD_PATH = DATASET_ROOT / "academic_factual_qa_open_10000_v1_final_gold.json"
 DEFAULT_LEDGER = (
     ROOT
-    / "data/interim/academic_factual_qa_open_10000_v1_development_construction_attempt_002.sqlite3"
+    / "data/interim/academic_factual_qa_open_10000_v1_development_construction_attempt_003.sqlite3"
 )
 DEVELOPMENT_MAXIMUM_CALLS = 202
 FINAL_MAXIMUM_CALLS = 4002
@@ -406,6 +406,35 @@ def _parse_authored(value: dict[str, Any]) -> AuthoredClusterVariantsV1:
         raise ConstructionError("author response violates the construction schema") from error
 
 
+def _parse_authored_or_fallback(
+    *,
+    cluster: SourceClusterV1,
+    truth: DeterministicClusterTruthV1,
+    value: dict[str, Any],
+) -> tuple[AuthoredClusterVariantsV1, dict[str, str] | None]:
+    try:
+        return _parse_authored(value), None
+    except ConstructionError as error:
+        return (
+            AuthoredClusterVariantsV1(
+                cluster_id=cluster.cluster_id,
+                questions=[
+                    {
+                        "case_id": row.case_id,
+                        "question": row.canonical_question,
+                    }
+                    for row in truth.questions
+                ],
+            ),
+            {
+                "cluster_id": cluster.cluster_id,
+                "reason": str(error),
+                "provider_response_sha256": canonical_json_sha256(value),
+                "fallback_author_family": "deterministic-canonical-fallback",
+            },
+        )
+
+
 def _parse_verifier(value: dict[str, Any]) -> ClusterDraftV1:
     try:
         return ClusterDraftV1.model_validate(value)
@@ -493,6 +522,7 @@ async def execute(
     cases: list[Any] = []
     gold: list[Any] = []
     rejected: list[dict[str, str]] = []
+    author_fallbacks: list[dict[str, str]] = []
     try:
         transports = _transports(binding)
         await _canaries(transports, ledger)
@@ -506,7 +536,17 @@ async def execute(
                 prompt=_author_prompt(cluster, truth),
                 schema=AUTHOR_SCHEMA,
             )
-            authored = _parse_authored(author_response.content)
+            authored, author_fallback = _parse_authored_or_fallback(
+                cluster=cluster,
+                truth=truth,
+                value=author_response.content,
+            )
+            assembly_cluster = cluster
+            if author_fallback is not None:
+                author_fallbacks.append(author_fallback)
+                assembly_cluster = cluster.model_copy(
+                    update={"author_family": "deterministic-canonical-fallback"}
+                )
             verifier_response = await _call(
                 transport=transports[cluster.verifier_family],
                 ledger=ledger,
@@ -515,10 +555,19 @@ async def execute(
                 prompt=_verifier_prompt(cluster, authored),
                 schema=VERIFIER_SCHEMA,
             )
-            verifier = _parse_verifier(verifier_response.content)
+            try:
+                verifier = _parse_verifier(verifier_response.content)
+            except ConstructionError as error:
+                rejected.append(
+                    {
+                        "cluster_id": cluster.cluster_id,
+                        "reason": str(error)[:300],
+                    }
+                )
+                continue
             try:
                 cluster_cases, cluster_gold = assemble_deterministic_verified_cluster(
-                    cluster, truth, authored, verifier
+                    assembly_cluster, truth, authored, verifier
                 )
             except ValueError as error:
                 rejected.append(
@@ -539,7 +588,13 @@ async def execute(
         near_duplicates = _near_duplicate_pairs(
             [(row.case_id, row.question) for row in cases]
         )
-        if rejected or len(cases) != expected or duplicate_count:
+        maximum_author_fallbacks = max(1, int(len(clusters) * 0.05))
+        if (
+            rejected
+            or len(cases) != expected
+            or duplicate_count
+            or len(author_fallbacks) > maximum_author_fallbacks
+        ):
             ledger.mark_complete()
             return {
                 "instrument_id": INSTRUMENT_ID,
@@ -552,6 +607,9 @@ async def execute(
                 "exact_duplicate_count": duplicate_count,
                 "near_duplicate_pair_count": len(near_duplicates),
                 "rejections": rejected,
+                "author_fallback_count": len(author_fallbacks),
+                "maximum_author_fallback_count": maximum_author_fallbacks,
+                "author_fallbacks": author_fallbacks,
                 "provider_ledger": ledger.snapshot(),
             }
 
@@ -620,6 +678,9 @@ async def execute(
             "course_distribution": dict(Counter(row.course_id for row in cases)),
             "slice_distribution": dict(Counter(row.slice for row in cases)),
             "author_distribution": dict(Counter(row.author_family for row in cases)),
+            "author_fallback_count": len(author_fallbacks),
+            "maximum_author_fallback_count": maximum_author_fallbacks,
+            "author_fallbacks": author_fallbacks,
             "public_cases_path": str(cases_path),
             "public_cases_sha256": cases_payload["content_sha256"],
             "hidden_gold_path": str(gold_path),
@@ -628,6 +689,10 @@ async def execute(
             "private_data_read": False,
             **control_details,
         }
+    except ConstructionError:
+        if ledger.snapshot().get("status") == "running":
+            ledger.mark_invalid_execution()
+        raise
     except BaseException:
         if ledger.snapshot().get("status") == "running":
             ledger.mark_interrupted()

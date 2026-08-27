@@ -63,7 +63,7 @@ DEFAULT_STATE = (
 )
 PROVIDER_BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_002.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
 )
 
 

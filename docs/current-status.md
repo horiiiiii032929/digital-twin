@@ -59,7 +59,7 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 575 executable or execution-affecting
+the current branch extends it to all 576 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
@@ -70,13 +70,19 @@ canary returned the requested model but a different runtime fingerprint, so the
 executor stopped before Gemini or any bulk call. Zero development clusters were
 processed; provider usage and cost are unavailable rather than claimed as zero.
 The sealed final 10,000-case stage and held-out scoring remain unauthorized.
-Provider binding 002 is now the separately authorized development successor: it keeps the exact
-documented DeepSeek V4 Flash slug as the hard identity, requires and records a
-runtime fingerprint diagnostically, improves sanitized failure evidence, and
-uses a fresh exclusive ledger. AFQC-039 authorizes only construction attempt
-002 and, if it succeeds, the 500-case candidate plus paired 100-case control.
-Gemini is pinned to Google AI Studio default service with fallback disabled.
-The final 10,000-case execution remains unauthorized.
+Provider binding 002 kept exact model and route checks while recording the
+DeepSeek runtime fingerprint diagnostically. Both canaries passed, but the
+first bulk DeepSeek author response used `items` instead of the frozen
+`questions` field. Attempt 002 is therefore preserved as `invalid-execution`:
+3 completed calls, 2,206 input and 477 output tokens, USD 0.00213626, and zero
+accepted development clusters or cases. Authorization is revoked. The result
+does not evaluate dataset or T0 quality, and the final 10,000-case execution
+remains unauthorized.
+Build-only attempt 003 now corrects the exposed harness gap without weakening
+the schema: malformed author content remains rejected and hash-recorded, while
+the cluster uses explicitly labelled deterministic canonical wording before the
+independent verifier. More than 5% fallback clusters fails construction. No
+attempt-003 provider or product execution is authorized.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -371,7 +377,7 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the current 965-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 575-file audit. Evaluation
+artifacts are also fully dispositioned in the current 576-file audit. Evaluation
 execution remains frozen, with 78/78 protected entrypoints registered and no
 prospective evaluation in the bounded allowlist.
 

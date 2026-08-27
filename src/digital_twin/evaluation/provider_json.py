@@ -232,6 +232,11 @@ class ProviderCallLedgerV1:
     def mark_interrupted(self) -> None:
         self._set_metadata("status", "interrupted")
 
+    def mark_invalid_execution(self) -> None:
+        """Close a running ledger after a deterministic harness failure."""
+
+        self._set_metadata("status", "invalid-execution")
+
     def mark_complete(self) -> None:
         if dict(self.connection.execute("SELECT key, value FROM metadata")).get(
             "status"

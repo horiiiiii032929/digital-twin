@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "binding_id": "academic-factual-qa-open-10000-provider-binding-002",
-  "successor_of": "academic-factual-qa-open-10000-provider-binding-001",
+  "binding_id": "academic-factual-qa-open-10000-provider-binding-003",
+  "successor_of": "academic-factual-qa-open-10000-provider-binding-002",
   "verified_at": "2026-08-27T02:22:29+00:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-sources-only",
   "identity_policy": "exact documented model slug and route are hard gates; runtime fingerprint is required, recorded, and diagnostic because it is not independently pinnable through the provider model registry",
   "providers": {
     "deepseek-v4-flash": {
-      "binding_id": "academic-open-10000-deepseek-v4-flash-002",
+      "binding_id": "academic-open-10000-deepseek-v4-flash-003",
       "provider": "deepseek",
       "api_url": "https://api.deepseek.com/chat/completions",
       "credential_environment_variable": "DEEPSEEK_API_KEY",
@@ -21,7 +21,7 @@
       "max_output_tokens": 3072,
       "temperature": 0,
       "timeout_seconds": 120,
-      "provider_user_id": "academic-open-10000-construction-002",
+      "provider_user_id": "academic-open-10000-construction-003",
       "pricing_usd_per_million_input_tokens": 0.44,
       "pricing_usd_per_million_output_tokens": 1.32,
       "model_registry_source": "https://api.deepseek.com/models",
@@ -29,7 +29,7 @@
       "retention_source": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html"
     },
     "gemini-3.7-flash": {
-      "binding_id": "academic-open-10000-gemini-3.7-flash-002",
+      "binding_id": "academic-open-10000-gemini-3.7-flash-003",
       "provider": "openrouter",
       "api_url": "https://openrouter.ai/api/v1/chat/completions",
       "credential_environment_variable": "OPENROUTER_API_KEY",
@@ -71,5 +71,5 @@
     "paid_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "7f7cca698590eea78f8959b74551bfeb5879c777f93259342d64fe38b9f30b86"
+  "content_sha256": "8fb14b3f780771f22d7cb051c024f24f7974c290e692caba619d5acf8329dabb"
 }

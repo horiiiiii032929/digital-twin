@@ -9,6 +9,7 @@ import pytest
 from scripts.construct_academic_factual_qa_open_10000 import (
     AUTHOR_SCHEMA,
     VERIFIER_SCHEMA,
+    _parse_authored_or_fallback,
     simulate,
     preflight as construction_preflight,
     validate,
@@ -135,6 +136,57 @@ def test_provider_output_schemas_do_not_let_author_define_gold() -> None:
     }
 
 
+def test_malformed_author_output_is_quarantined_with_labelled_fallback() -> None:
+    cluster = _cluster()
+    truth, _, _ = _assembled_inputs(cluster)
+
+    authored, diagnostic = _parse_authored_or_fallback(
+        cluster=cluster,
+        truth=truth,
+        value={
+            "cluster_id": cluster.cluster_id,
+            "items": [
+                {"case_id": row.case_id, "question": "Malformed provider wording"}
+                for row in truth.questions
+            ],
+        },
+    )
+
+    assert [row.question for row in authored.questions] == [
+        row.canonical_question for row in truth.questions
+    ]
+    assert diagnostic is not None
+    assert diagnostic["cluster_id"] == cluster.cluster_id
+    assert diagnostic["fallback_author_family"] == "deterministic-canonical-fallback"
+    assert len(diagnostic["provider_response_sha256"]) == 64
+
+    assembly_cluster = cluster.model_copy(
+        update={"author_family": diagnostic["fallback_author_family"]}
+    )
+    verifier = ClusterDraftV1(
+        cluster_id=cluster.cluster_id,
+        questions=[
+            {
+                "case_id": row.case_id,
+                "question": authored.questions[index].question,
+                "action": row.action,
+                "answer": row.canonical_answer,
+                "evidence_spans": [
+                    span.model_dump() for span in row.evidence_spans
+                ],
+                "boundary_reason": row.boundary_reason,
+            }
+            for index, row in enumerate(truth.questions)
+        ],
+    )
+    cases, _ = assemble_deterministic_verified_cluster(
+        assembly_cluster, truth, authored, verifier
+    )
+    assert {row.author_family for row in cases} == {
+        "deterministic-canonical-fallback"
+    }
+
+
 def test_construction_validate_and_simulation_are_network_free() -> None:
     assert validate()["provider_calls"] == 0
     result = simulate()
@@ -143,7 +195,7 @@ def test_construction_validate_and_simulation_are_network_free() -> None:
     assert result["provider_calls"] == 0
 
 
-def test_successor_preflight_is_ready_for_authorized_development(
+def test_invalid_attempt_revokes_successor_authorization(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
@@ -158,8 +210,12 @@ def test_successor_preflight_is_ready_for_authorized_development(
         resume=False,
     )
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert "dataset-construction-authorized-false" in result["blockers"]
+    assert (
+        "provider-binding-dataset-construction-authorized-false"
+        in result["blockers"]
+    )
     assert result["final_product_execution_authorized"] is False
 
 
@@ -170,7 +226,7 @@ async def test_openrouter_transport_pins_default_service_tier(
     binding = json.loads(
         Path(
             "research/05_evaluation/instruments/"
-            "academic_factual_qa_open_10000_provider_binding_002.json"
+            "academic_factual_qa_open_10000_provider_binding_003.json"
         ).read_text(encoding="utf-8")
     )["providers"]["gemini-3.7-flash"]
     captured: dict[str, object] = {}
@@ -282,3 +338,17 @@ def test_provider_ledger_preserves_sanitized_failure_detail(tmp_path: Path) -> N
         "ProviderJsonError",
         "expected='old' observed='new'",
     )
+
+
+def test_provider_ledger_can_close_a_harness_failure_as_invalid(tmp_path: Path) -> None:
+    ledger = ProviderCallLedgerV1(
+        tmp_path / "harness-failure.sqlite3",
+        run_binding={"run": "harness-failure"},
+        maximum_calls=1,
+        maximum_cost_usd=1,
+        resume=False,
+    )
+    ledger.mark_invalid_execution()
+
+    assert ledger.snapshot()["status"] == "invalid-execution"
+    ledger.close()

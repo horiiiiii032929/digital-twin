@@ -60,11 +60,15 @@ professor-communication track.
    under AFQC-035 after excluding tiny markup fragments and mid-token windows.
    Construction attempt 001 failed closed on its first DeepSeek canary because
    the runtime fingerprint differed from the frozen binding; no bulk case ran
-   and authorization is revoked. Provider binding 002 is the authorized development
-   successor: exact model slug and route remain hard gates while the required
-   runtime fingerprint is recorded diagnostically. AFQC-039 permits only
-   construction attempt 002 and, after a successful construction gate, the
-   500-case candidate plus paired 100-case control. The 10,000-case final run
+   and authorization is revoked. Provider binding 002 passed both exact-route
+   canaries, but the first bulk DeepSeek response violated the frozen author
+   schema. Attempt 002 is preserved as invalid with three recorded calls, zero
+   accepted clusters, and revoked authority. The runner also exposed a gap in
+   its preregistered malformed-output fallback; that correction must be built
+   prospectively before any successor authorization. Build-only attempt 003 now
+   quarantines malformed author content, labels deterministic canonical
+   fallback wording, retains independent verification, and fails above 5%
+   fallback clusters. It is not provider-authorized. The 10,000-case final run
    remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
