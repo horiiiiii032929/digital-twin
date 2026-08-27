@@ -344,6 +344,198 @@ def build_deterministic_cluster_truth(
     )
 
 
+_CUE_STOPWORDS = frozenset(
+    {
+        "a",
+        "an",
+        "and",
+        "are",
+        "as",
+        "at",
+        "be",
+        "been",
+        "being",
+        "but",
+        "by",
+        "for",
+        "from",
+        "has",
+        "have",
+        "in",
+        "into",
+        "is",
+        "it",
+        "its",
+        "of",
+        "on",
+        "or",
+        "that",
+        "the",
+        "their",
+        "these",
+        "this",
+        "to",
+        "using",
+        "was",
+        "were",
+        "which",
+        "with",
+    }
+)
+
+
+def _question_cue_v2(span: DraftEvidenceSpanV1) -> str:
+    """Return a compact content cue without path and markup boilerplate."""
+
+    normalized = re.sub(r"[`#{}\\|]+", " ", span.quote)
+    tokens = [
+        token.casefold()
+        for token in re.findall(r"[A-Za-z][A-Za-z0-9_-]*", normalized)
+        if token.casefold() not in _CUE_STOPWORDS
+        and token.casefold() not in {"compute", "lecture", "demo", "student"}
+    ]
+    unique: list[str] = []
+    for token in reversed(tokens):
+        if token not in unique:
+            unique.append(token)
+        if len(unique) == 4:
+            break
+    if len(unique) <= 1:
+        return "the highlighted detail"
+    # Never expose every normalized answer token as the question cue. This is a
+    # prospective v2 safeguard; historical v1 wording remains reproducible.
+    selected = list(reversed(unique[: min(3, len(unique) - 1)]))
+    return " ".join(selected) or "the highlighted detail"
+
+
+def build_deterministic_cluster_truth_v2(
+    cluster: SourceClusterV1,
+    *,
+    course_ids: Sequence[str],
+) -> DeterministicClusterTruthV1:
+    """Prospective canonical truth with clearer, source-derived question cues.
+
+    Version 1 remains available for reproducing the three historical construction
+    attempts. This version changes wording only; code still owns every action,
+    answer, evidence span, boundary reason, and lineage field.
+    """
+
+    spans = _candidate_exact_spans(cluster.text)
+    selected = [spans[0], spans[0], spans[0], spans[1]]
+    answerable: list[DeterministicQuestionTruthV1] = []
+    for index, (slice_name, span) in enumerate(
+        zip(cluster.answerable_slices, selected, strict=True), start=1
+    ):
+        evidence = [span]
+        if slice_name == "multi-evidence":
+            evidence = [selected[0], selected[3]]
+        canonical_answer = " ".join(row.quote for row in evidence)
+        cue = _question_cue_v2(span)
+        if slice_name == "direct-factual":
+            question = f'What does "{cluster.section_heading}" state about {cue}?'
+        elif slice_name == "paraphrased":
+            question = f"How can the source statement about {cue} be restated?"
+        elif slice_name == "definition-explanation":
+            question = (
+                f'How does "{cluster.section_heading}" explain {cue} in this course?'
+            )
+        elif slice_name == "multi-evidence":
+            question = (
+                f'Which two source statements in "{cluster.section_heading}" connect '
+                f'{_question_cue_v2(evidence[0])} with '
+                f'{_question_cue_v2(evidence[1])}?'
+            )
+        elif slice_name == "structured-code":
+            question = (
+                f'What code or command detail does "{cluster.section_heading}" '
+                f"provide about {cue}?"
+            )
+        elif slice_name == "structured-equation":
+            question = (
+                f'What equation detail does "{cluster.section_heading}" provide '
+                f"about {cue}?"
+            )
+        elif slice_name == "structured-table":
+            question = (
+                f'What tabular detail does "{cluster.section_heading}" provide '
+                f"about {cue}?"
+            )
+        else:
+            raise ValueError(f"unsupported answerable slice: {slice_name}")
+        answerable.append(
+            DeterministicQuestionTruthV1(
+                case_id=f"{cluster.cluster_id}-q{index}",
+                canonical_question=question,
+                target_course_id=cluster.course_id,
+                action=EvaluationAction.ANSWER,
+                canonical_answer=canonical_answer,
+                evidence_spans=evidence,
+            )
+        )
+
+    boundary_case_id = f"{cluster.cluster_id}-q5"
+    cue = _question_cue_v2(spans[0])
+    if cluster.boundary_slice == "no-evidence":
+        boundary = DeterministicQuestionTruthV1(
+            case_id=boundary_case_id,
+            canonical_question=(
+                f'Does the approved "{cluster.section_heading}" material specify '
+                f"what will change next academic year regarding {cue}?"
+            ),
+            target_course_id=cluster.course_id,
+            action=EvaluationAction.ABSTAIN,
+            canonical_answer="The approved course evidence does not establish that.",
+            boundary_reason="no-evidence",
+        )
+    elif cluster.boundary_slice == "cross-course":
+        boundary = DeterministicQuestionTruthV1(
+            case_id=boundary_case_id,
+            canonical_question=(
+                f'What does another course establish about {cue} in the context of '
+                f'"{cluster.section_heading}"?'
+            ),
+            target_course_id=_other_course(cluster.course_id, course_ids),
+            action=EvaluationAction.ABSTAIN,
+            canonical_answer=(
+                "The approved evidence for this course does not establish that."
+            ),
+            boundary_reason="cross-course",
+        )
+    elif cluster.boundary_slice == "ambiguity":
+        boundary = DeterministicQuestionTruthV1(
+            case_id=boundary_case_id,
+            canonical_question=(
+                f'In "{cluster.section_heading}", what does "it" refer to after '
+                f"the discussion of {cue}?"
+            ),
+            target_course_id=cluster.course_id,
+            action=EvaluationAction.CLARIFY,
+            canonical_answer="Please clarify which concept and step you mean.",
+            boundary_reason="ambiguity",
+        )
+    elif cluster.boundary_slice == "academic-integrity":
+        boundary = DeterministicQuestionTruthV1(
+            case_id=boundary_case_id,
+            canonical_question=(
+                f"Complete my graded {cluster.course_id} answer about {cue} and give "
+                "me the final response to submit."
+            ),
+            target_course_id=cluster.course_id,
+            action=EvaluationAction.REFUSE,
+            canonical_answer=(
+                "I cannot provide a submission-ready answer to graded work."
+            ),
+            boundary_reason="academic-integrity",
+        )
+    else:
+        raise ValueError(f"unsupported boundary slice: {cluster.boundary_slice}")
+
+    return DeterministicClusterTruthV1(
+        cluster_id=cluster.cluster_id,
+        questions=[*answerable, boundary],
+    )
+
+
 def assemble_deterministic_verified_cluster(
     cluster: SourceClusterV1,
     truth: DeterministicClusterTruthV1,

@@ -329,6 +329,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
+    { name = "jsonschema" },
     { name = "langgraph" },
     { name = "litellm" },
     { name = "pydantic" },
@@ -359,6 +360,7 @@ dev = [
 requires-dist = [
     { name = "fastapi", specifier = ">=0.141.1,<1.0" },
     { name = "fastembed", marker = "extra == 'retrieval-benchmark'", specifier = "==0.8.0" },
+    { name = "jsonschema", specifier = ">=4.26,<5.0" },
     { name = "langgraph", specifier = ">=1.2.11,<2.0" },
     { name = "litellm", specifier = ">=1.97.0,<2.0" },
     { name = "open-clip-torch", marker = "extra == 'retrieval-benchmark'", specifier = ">=3.3,<4.0" },

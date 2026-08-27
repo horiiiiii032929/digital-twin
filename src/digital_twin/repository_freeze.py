@@ -40,6 +40,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_open_10000.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_open_development_v2.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_visual_supplement.py": (
             "dataset_generation",
         ),
@@ -256,7 +259,13 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # One named, versioned pilot may execute while the wider pre-evaluation freeze
 # remains active. The authorization is intentionally not operation-generic: a
 # successor instrument requires a new code review and an explicit entry here.
-BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType({})
+BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
+    {
+        "academic-factual-qa-open-10000-deterministic-development-001": (
+            "dataset_generation",
+        ),
+    }
+)
 
 
 class RepositoryFreezeError(RuntimeError):

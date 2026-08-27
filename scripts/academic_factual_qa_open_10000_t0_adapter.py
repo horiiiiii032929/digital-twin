@@ -19,6 +19,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
     SystemUnderTestManifestV1,
 )
 from src.digital_twin.evaluation.provider_json import (
+    DirectProviderJsonTransport,
     OpenAiCompatibleJsonTransport,
     ProviderCallLedgerV1,
 )
@@ -59,6 +60,11 @@ SOURCE_PLAN_PATH = ROOT / "data/processed/academic_factual_qa_open_10000_v1_sour
 BINDING_PATH = (
     ROOT
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
+)
+DIRECT_BINDING_PATH = (
+    ROOT
+    / "research/05_evaluation/instruments/"
+    "academic_factual_qa_open_10000_direct_provider_binding_001.json"
 )
 ATOMIC_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -159,7 +165,7 @@ class _BoundedProductLlmClient:
     def __init__(
         self,
         *,
-        transport: OpenAiCompatibleJsonTransport,
+        transport: OpenAiCompatibleJsonTransport | DirectProviderJsonTransport,
         ledger: ProviderCallLedgerV1,
         flow_id: str,
     ) -> None:
@@ -197,6 +203,39 @@ class _BoundedProductLlmClient:
                 approximate_cost_usd=response.cost_usd,
             ),
         )
+
+
+def _generator_transport(
+    manifest: SystemUnderTestManifestV1,
+) -> tuple[
+    dict[str, Any],
+    OpenAiCompatibleJsonTransport | DirectProviderJsonTransport,
+]:
+    """Resolve only an explicitly manifested historical or direct generator."""
+
+    if manifest.generator == "deepseek-v4-flash-live-atomic":
+        provider_binding = _load(BINDING_PATH)
+        binding = deepcopy(provider_binding["providers"]["deepseek-v4-flash"])
+        binding.update(
+            {
+                "binding_id": f"{binding['binding_id']}-product",
+                "max_output_tokens": 600,
+                "timeout_seconds": 15,
+            }
+        )
+        return binding, OpenAiCompatibleJsonTransport(binding)
+    if manifest.generator == "openai-gpt-5.4-mini-live-atomic":
+        provider_binding = _load(DIRECT_BINDING_PATH)
+        binding = deepcopy(provider_binding["providers"]["openai-gpt-5.4-mini"])
+        binding.update(
+            {
+                "binding_id": f"{binding['binding_id']}-product",
+                "max_output_tokens": 600,
+                "timeout_seconds": 30,
+            }
+        )
+        return binding, DirectProviderJsonTransport(binding)
+    raise LiveT0AdapterError("system manifest generator drifted")
 
 
 class _RecordingGate:
@@ -363,17 +402,7 @@ def build_live_t0_adapter(
     runtime: dict[str, Any],
 ) -> StudentTutoringServiceAdapterV1:
     del cases
-    if manifest.generator != "deepseek-v4-flash-live-atomic":
-        raise LiveT0AdapterError("system manifest generator drifted")
-    binding = _load(BINDING_PATH)
-    deepseek = deepcopy(binding["providers"]["deepseek-v4-flash"])
-    deepseek.update(
-        {
-            "binding_id": f"{deepseek['binding_id']}-product",
-            "max_output_tokens": 600,
-            "timeout_seconds": 15,
-        }
-    )
+    generator_binding, generator_transport = _generator_transport(manifest)
     flow_id = manifest.flow_id
     maximum_calls = 500 if "candidate" in flow_id else 100
     maximum_cost = 8.0 if "candidate" in flow_id else 2.0
@@ -383,7 +412,7 @@ def build_live_t0_adapter(
             "instrument_id": runtime["instrument_id"],
             "flow_id": flow_id,
             "manifest": manifest.model_dump(mode="json"),
-            "binding": deepseek,
+            "binding": generator_binding,
             "cases_sha256": runtime["cases_sha256"],
             "code_revision": runtime["code_revision"],
         },
@@ -392,7 +421,7 @@ def build_live_t0_adapter(
         resume=bool(runtime["resume"]),
     )
     client = _BoundedProductLlmClient(
-        transport=OpenAiCompatibleJsonTransport(deepseek),
+        transport=generator_transport,
         ledger=provider_ledger,
         flow_id=flow_id,
     )
