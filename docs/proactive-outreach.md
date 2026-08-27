@@ -247,6 +247,9 @@ Implemented now:
   in-app deep link, plus a private-destination outbox;
 - shadow-by-default A1 evidence-recovery scanning over persisted no-evidence
   turns and genuinely new release lineage;
+- one shadow-only scan after a successful new-release publication, after the
+  release is durably current, with rollback excluded and redacted non-blocking
+  failure audit;
 - explicit active-mode authorization, deterministic idempotency, and current
   release citation checks; and
 - network-free unit, repository, API, and frontend-client checks.
@@ -262,11 +265,20 @@ The named P0/P1 execution is separately recorded in
 It passed all frozen synthetic development gates and remains **Go Deeper**; the
 one-time authorization is revoked and the result does not select A1 for release.
 
+The prospective confirmation command is:
+
+```bash
+npm run preflight:proactive-outreach-a1-confirmation
+```
+
+It covers 12 synthetic topic clusters and 60 cases. The full run remains
+blocked because the instrument is reviewed but not frozen or authorized. Only
+one non-recorded network-free canary is opened by the self-test.
+
 Not yet implemented or authorized:
 
-- automatic invocation of evidence-recovery scans after publication;
 - selection or production activation of A1 outreach;
-- a production scheduler/worker;
+- a durable production scheduler or retry worker for failed shadow scans;
 - LLM-composed proactive wording;
 - inferred misconception triggers;
 - a real Discord bot/webhook secret registry or network call;
@@ -274,8 +286,9 @@ Not yet implemented or authorized:
 - real-student, interruption-cost, or learning-outcome claims; and
 - release-profile selection.
 
-The next evidence checkpoint is a separately frozen representative shadow
-confirmation over stratified prior no-evidence turns and changed releases. It
-must audit every proposal and a seeded no-action sample without sending a real
-message. Any real student or external-channel pilot remains a later,
+The next evidence checkpoint is the separately frozen 60-case synthetic
+integration confirmation. A later representative shadow study must use
+approved real or independently sourced prior no-evidence opportunities and
+changed releases, audit every proposal and a seeded no-action sample, and send
+no real message. Any real student or external-channel pilot remains a later,
 approval-gated stage.

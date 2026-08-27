@@ -6,6 +6,9 @@ from services.api.app.factory import create_app
 from src.digital_twin.grounding import AnyHitEvidenceGate, OCRTextRegion
 from src.digital_twin.onboarding import InMemorySessionRepository, create_session
 from src.digital_twin.student import (
+    Conversation,
+    Message,
+    OutreachChannel,
     ReleaseEvaluationStatus,
     SQLiteStudentRepository,
     StudentReleaseStatus,
@@ -96,6 +99,50 @@ def _set_evaluation(
         headers=_headers(fixture.professor_id),
         json={"status": status},
     )
+
+
+def _record_prior_no_evidence_turn(repository, fixture) -> None:
+    current = repository.get_release(fixture.release_a_id)
+    assert current is not None
+    previous = current.model_copy(
+        update={
+            "id": "release-a-prior-without-cache",
+            "status": StudentReleaseStatus.WITHDRAWN,
+            "chunks": [current.chunks[1]],
+            "created_at": "2026-08-01T00:00:00+00:00",
+        },
+        deep=True,
+    )
+    repository.save_release(previous)
+    conversation = repository.save_conversation(
+        Conversation(
+            id="conversation-publication-recovery",
+            student_id=fixture.student_a_id,
+            course_id=fixture.course_a_id,
+            release_id=previous.id,
+            created_at="2026-08-10T00:00:00+00:00",
+            updated_at="2026-08-10T00:00:01+00:00",
+        )
+    )
+    student_message = Message(
+        id="message-publication-recovery-question",
+        conversation_id=conversation.id,
+        role="student",
+        content="Why is cache coherence needed for replicated processor data?",
+        action="question",
+        client_request_id="publication-recovery-request",
+        created_at="2026-08-10T00:00:00+00:00",
+    )
+    tutor_message = Message(
+        id="message-publication-recovery-no-evidence",
+        conversation_id=conversation.id,
+        role="tutor",
+        content="I do not have enough approved course evidence.",
+        action="no-evidence",
+        response_to_message_id=student_message.id,
+        created_at="2026-08-10T00:00:01+00:00",
+    )
+    repository.save_turn(conversation, student_message, tutor_message, [], [])
 
 
 def test_publication_requires_evaluation_and_resolved_policy(tmp_path):
@@ -333,6 +380,80 @@ def test_publish_replaces_current_release_and_denies_stale_conversation(tmp_path
     )
     assert stale_turn.status_code == 409
     assert stale_turn.json()["detail"]["code"] == "release_unavailable"
+
+
+def test_publish_runs_evidence_recovery_in_shadow_without_creating_trigger(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    _record_prior_no_evidence_turn(repository, fixture)
+    client.app.state.proactive_outreach_service.update_preference(
+        fixture.student_a_id,
+        fixture.course_a_id,
+        channel=OutreachChannel.IN_APP,
+        enabled=True,
+        timezone="UTC",
+        quiet_hours_start="23:00",
+        quiet_hours_end="06:00",
+        max_messages_per_7_days=3,
+    )
+    draft = _create_draft(
+        client, repository, sessions, fixture, "release-a-v2-shadow-recovery"
+    )
+    assert _set_evaluation(client, fixture, draft["id"]).status_code == 200
+
+    published = client.post(
+        f"/api/professor/releases/{draft['id']}/publish",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert published.status_code == 200
+    recovery_events = [
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "evidence-recovery-scan-completed"
+    ]
+    assert len(recovery_events) == 1
+    assert recovery_events[0].release_id == draft["id"]
+    assert recovery_events[0].details == {
+        "mode": "shadow",
+        "opportunity_count": 1,
+        "proposed_count": 1,
+        "no_action_count": 0,
+        "duplicate_count": 0,
+        "trigger_count": 0,
+        "provider_calls": 0,
+    }
+    assert repository.list_due_proactive_triggers("9999-12-31T00:00:00+00:00") == []
+
+
+def test_publish_preserves_release_and_audits_shadow_hook_failure(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    draft = _create_draft(
+        client, repository, sessions, fixture, "release-a-v2-hook-failure"
+    )
+    assert _set_evaluation(client, fixture, draft["id"]).status_code == 200
+
+    def fail_after_publish(_professor_id: str, _course_id: str) -> None:
+        raise RuntimeError("synthetic shadow failure with private-looking text")
+
+    client.app.state.publication_service.post_publish_hook = fail_after_publish
+    published = client.post(
+        f"/api/professor/releases/{draft['id']}/publish",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert published.status_code == 200
+    assert repository.get_published_release(fixture.course_a_id).id == draft["id"]
+    failure = next(
+        event
+        for event in repository.list_audit_events()
+        if event.event_type == "release.post_publish_hook_failed"
+    )
+    assert failure.details == {
+        "hook": "proactive-evidence-recovery-shadow",
+        "error_type": "RuntimeError",
+        "publication_preserved": True,
+    }
+    assert "private-looking" not in repr(failure)
 
 
 def test_withdraw_and_rollback_restore_previous_release(tmp_path):

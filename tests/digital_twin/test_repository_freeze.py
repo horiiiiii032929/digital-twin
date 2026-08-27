@@ -78,6 +78,10 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
             "proactive-outreach-a1-development-001"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "proactive-outreach-a1-shadow-confirmation-002"
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-scale-rehearsal-001")
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-scale-rehearsal-002")

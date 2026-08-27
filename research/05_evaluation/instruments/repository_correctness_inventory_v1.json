@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 528
+    "audited": 531
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 117,
+    "active_or_unclassified_tooling": 118,
     "active_runtime": 100,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 111,
+    "evaluation_configuration": 112,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 107
+    "verification": 108
   },
-  "file_count": 528,
+  "file_count": 531,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bbd89a935967e318ebcb0ed4313e78be79d4dd593f5c16f7b51eaa09ff864903",
+  "record_sha256": "f4113413a9811b65574fe4673362e9bd25a0e5f5eff5c6a80f7e1c8815db5b5f",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "A1 proactive-outreach command registration reviewed with the frozen network-free instrument, bounded authorization, focused regressions, and full repository gate.",
+        "evidence": "A1 development and confirmation commands are explicit; normal checks validate contracts only, the 60-case run remains unauthorized, and focused plus full repository gates cover the publication hook.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "cc3f5c8b37df0474c861cd40e48a69fe442e8b33fed3775f961e8677a450018f"
+      "sha256": "4ee2a3f4a6ac3b51b40fbbf06f2b813ac1207d6064f1245e7bc289e909bf403e"
     },
     {
       "audit": {
@@ -2596,6 +2596,22 @@
       "path": "research/05_evaluation/instruments/proactive_outreach_a1_development_001.json",
       "risk": "high",
       "sha256": "3a106e78d2a9cd843fa2bfd5bde3dd6aa4a7ad23cf6f7eba2a1d9c7f3e858708"
+    },
+    {
+      "audit": {
+        "domain": "proactive-outreach-evaluation",
+        "evidence": "Prospective review confirms 12 topic clusters, 60 deterministic cases, 24 proposal and 36 no-action labels, publication integration checks, exact zero-side-effect gates, synthetic limitations, and no execution authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/proactive_outreach_a1_shadow_confirmation_002.json",
+      "risk": "high",
+      "sha256": "9550db9b5a6993469e6dba6b1fdc3c3caca52f0695a1fa34a43f8aa395c411a4"
     },
     {
       "audit": {
@@ -4773,6 +4789,27 @@
     },
     {
       "audit": {
+        "domain": "proactive-outreach-evaluation",
+        "evidence": "Runner review covers exact 12-cluster and 60-case expansion, publication-integrated shadow execution, exclusive output, clean blocked preflight, current-lineage validation, suppression slices, zero side effects, and bounded freeze enforcement.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:proactive-outreach-a1-confirmation",
+        "preflight:proactive-outreach-a1-confirmation",
+        "self-test:proactive-outreach-a1-confirmation",
+        "verify:proactive-outreach-a1-confirmation"
+      ],
+      "path": "scripts/run_proactive_outreach_a1_shadow_confirmation.py",
+      "risk": "high",
+      "sha256": "6339b5491e38c1de447857837502756b28853208b31503f5c600ed9a877b1554"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -5491,8 +5528,8 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "proactive-outreach",
+        "evidence": "Factory wiring invokes deterministic evidence recovery in shadow mode only after successful new-release publication; focused API tests prove zero-trigger operation and no external channel activation.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -5503,7 +5540,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "e8ecb9eb26d0b62d589eb604f59b9c894b486d35b7de946a78c97e084c044136"
+      "sha256": "5ea63d549d4743039bc2428c63cf8fd5062ed319f94cc10d0c146a44972ae784"
     },
     {
       "audit": {
@@ -6836,7 +6873,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, the completed A1 network-free authorization is revoked, and provider, paid, private, external-delivery, and real-student operations remain blocked.",
+        "evidence": "Manual fail-closed review confirms the global freeze remains active, protects the new 60-case confirmation runner, keeps confirmation 002 unauthorized, and continues to block provider, paid, private, external-delivery, and real-student operations.",
         "findings": [],
         "reviewed_at": "2026-08-25",
         "reviewer": "codex-primary-review"
@@ -6847,7 +6884,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "000aadd614df27ad0ae910ddf4a7297b854742e3b4633df47e7e20f3a7898529"
+      "sha256": "a5bcbd13152444d9b0ee653f95b4b151bcbd6150ec97ffd66ee2214315aee362"
     },
     {
       "audit": {
@@ -6932,7 +6969,7 @@
     {
       "audit": {
         "domain": "runtime-publication",
-        "evidence": "Professor/course ownership, one-course onboarding scope, immutable draft identity, profile, policy, evidence, lineage, preflight, publish, withdraw, and rollback gates reviewed; publication tests passed.",
+        "evidence": "Publication review covers ownership, immutable release gates, post-commit shadow observation, rollback exclusion, and redacted non-blocking hook failure so a completed publication is never reversed or falsely reported failed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -6943,7 +6980,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/publication.py",
       "risk": "high",
-      "sha256": "dbd0380a4c3967d7c979b6163f890a4baa8856d6c07a2d81bb8d86523bc3d087"
+      "sha256": "7731baf402520fb149f34a74574b101c42222fd5b2218aaa59cca6dc4874f889"
     },
     {
       "audit": {
@@ -7092,7 +7129,7 @@
     {
       "audit": {
         "domain": "onboarding-and-policy-verification",
-        "evidence": "Course binding, release scope, source ingestion, preflight, publication, stale conversations, withdrawal, and rollback regressions reviewed and passed.",
+        "evidence": "Publication API regressions now also prove the shadow hook runs after the release is current, creates no trigger, persists redacted aggregate audit only, and preserves successful publication when the observer fails.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -7103,7 +7140,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "8e35e03bc3422a2979ee6a3e4cee652f66e8944f6ce6532f244a97fe5b968dd6"
+      "sha256": "4da82ac4b990e18c202d4704fca5b8804932314a986c523446dac684c06985a4"
     },
     {
       "audit": {
@@ -7348,7 +7385,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify A1 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify both A1 development revocation and confirmation-002 denial, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-24",
         "reviewer": "codex-primary-review"
@@ -7359,7 +7396,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "dde64f2c767835e8f2f3a3b29371f26516e8436367022b6c0ab76d128273865f"
+      "sha256": "b83a7c72b04e9cedbf6f5137557c35d190610b83bfd797178b1acadb81db86e7"
     },
     {
       "audit": {
@@ -8483,6 +8520,22 @@
     },
     {
       "audit": {
+        "domain": "proactive-outreach-evaluation",
+        "evidence": "Focused tests verify source-family and action cardinality, revoked authority, fail-closed preflight, one network-free canary with zero side effects, and duplicate-cluster rejection without opening the complete confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_run_proactive_outreach_a1_shadow_confirmation.py",
+      "risk": "medium",
+      "sha256": "be3086e0055d19567a8bc95e5f6fce9798618c5b28d4622693f9e728570e2d12"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -8739,8 +8792,8 @@
     }
   ],
   "risk_counts": {
-    "high": 407,
-    "medium": 121
+    "high": 409,
+    "medium": 122
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

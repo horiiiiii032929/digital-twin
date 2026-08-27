@@ -62,6 +62,7 @@ from src.digital_twin.student import (
 )
 from src.digital_twin.student.proactive import (
     DiscordWebhookDeliveryAdapter,
+    EvidenceRecoveryMode,
     ProactiveOutreachService,
 )
 from src.digital_twin.student.service import StudentTutoringService
@@ -167,12 +168,24 @@ def create_app(
     app.state.proactive_outreach_service = ProactiveOutreachService(
         app.state.student_repository
     )
+
+    def scan_evidence_recovery_after_publish(
+        professor_id: str,
+        course_id: str,
+    ) -> None:
+        app.state.proactive_outreach_service.scan_evidence_recovery(
+            professor_id,
+            course_id,
+            mode=EvidenceRecoveryMode.SHADOW,
+        )
+
     app.state.discord_delivery_adapter = DiscordWebhookDeliveryAdapter(enabled=False)
     app.state.publication_service = ReleaseLifecycleService(
         app.state.student_repository,
         profile_id=profile.profile_id,
         profile_version=profile.profile_version,
         evidence_sufficiency_ready=student_evidence_gate is not None,
+        post_publish_hook=scan_evidence_recovery_after_publish,
     )
 
     app.add_middleware(

@@ -9,11 +9,11 @@ remain authoritative for the historical runs and claims they document.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 528 executable or execution-affecting
+the current branch extends it to all 531 executable or execution-affecting
 files, which are hash-bound and audited,
 with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 69 protected entrypoints.
+active for all general evaluation actions. It covers 70 protected entrypoints.
 The A1 network-free development run completed as **Go Deeper** and its one-time
 authorization is revoked. No provider, paid, private-data, external-delivery,
 or real-student operation is authorized.
@@ -153,7 +153,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The current local
-check passes 877 Python tests and 47 frontend tests, frontend lint, and the
+check passes 883 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -173,10 +173,10 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the current 877-test Python suite.
+connections. These corrections remain covered by the current 883-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 528-file audit. Evaluation
-execution remains frozen, with 69/69 protected entrypoints registered. The
+artifacts are also fully dispositioned in the current 531-file audit. Evaluation
+execution remains frozen, with 70/70 protected entrypoints registered. The
 completed A1 run has been removed from the bounded allowlist; no prospective
 proactive-outreach execution is authorized.
 
@@ -220,6 +220,18 @@ triggers, tokens, or cost. This is synthetic mechanism evidence around one
 source topic, not evidence of useful real-student intervention or learning
 improvement. The one-time authorization is revoked; A0 remains the release
 control and A1 requires a separately frozen representative shadow confirmation.
+
+The next build-only integration now invokes A1 exactly once in shadow mode after
+a new release is durably published. It does not run on rollback. A scanner
+failure cannot reverse or falsely fail the completed publication; instead, the
+system records a redacted failure type with no question or exception text. The
+hook creates no trigger, message, outbox item, provider call, or external
+delivery. Prospective confirmation 002 is reviewed but unauthorized: 12
+synthetic source clusters across operating systems, networking, data structures,
+and Python expand to 60 cases (24 expected proposals and 36 no-actions). Its
+single canary self-test passes, while the full 60-case preflight remains blocked
+pending a separate network-free execution decision. This is still synthetic
+integration evidence, not a representative student or learning study.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the

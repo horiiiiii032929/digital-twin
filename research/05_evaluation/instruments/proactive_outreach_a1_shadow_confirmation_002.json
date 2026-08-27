@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "instrument_id": "proactive-outreach-a1-shadow-confirmation-002",
+  "status": "reviewed-pending-network-free-authorization",
+  "decision_question": "Does the publication-integrated A1 shadow loop detect newly supportable prior no-evidence turns across multiple computing topics while preserving no-action, publication, consent, lineage, idempotency, and zero-delivery boundaries?",
+  "implementation": {
+    "candidate": "deterministic-evidence-recovery-a1-v1",
+    "control": "no-autonomous-outreach",
+    "invocation": "successful-new-release-publication-hook",
+    "rollback_invocation": false,
+    "mode": "shadow",
+    "retriever": "bm25-new-lineage-only",
+    "minimum_query_coverage": 0.5,
+    "minimum_matching_terms": 2,
+    "evidence_limit": 3
+  },
+  "execution": {
+    "network_free_execution_authorized": false,
+    "provider_calls_authorized": false,
+    "paid_execution_authorized": false,
+    "private_data_authorized": false,
+    "real_student_delivery_authorized": false,
+    "external_channel_delivery_authorized": false,
+    "automatic_promotion": false
+  },
+  "case_construction": {
+    "cluster_count": 12,
+    "cases_per_cluster": 5,
+    "case_count": 60,
+    "expected_propose_count": 24,
+    "expected_no_action_count": 36,
+    "variants": [
+      "direct-supported",
+      "paraphrase-supported",
+      "unsupported-adjacent",
+      "unchanged-lineage",
+      "suppression"
+    ],
+    "suppression_cycle": [
+      "consent-disabled",
+      "student-snoozed",
+      "student-inactive",
+      "membership-inactive"
+    ]
+  },
+  "clusters": [
+    {
+      "id": "os-cache-coherence",
+      "course_family": "operating-systems",
+      "title": "Cache coherence",
+      "evidence": "Cache coherence keeps replicated processor cache data consistent.",
+      "direct_question": "How does cache coherence keep replicated processor cache data consistent?",
+      "paraphrase_question": "Which mechanism keeps replicated processor cache copies consistent?",
+      "unsupported_question": "How does a page replacement algorithm choose a victim frame?"
+    },
+    {
+      "id": "os-virtual-memory",
+      "course_family": "operating-systems",
+      "title": "Virtual memory",
+      "evidence": "Virtual memory maps process virtual addresses to physical memory pages.",
+      "direct_question": "How does virtual memory map process virtual addresses to physical memory pages?",
+      "paraphrase_question": "What maps process virtual addresses onto physical memory pages?",
+      "unsupported_question": "Why can a scheduler preempt a running thread?"
+    },
+    {
+      "id": "os-round-robin",
+      "course_family": "operating-systems",
+      "title": "Round-robin scheduling",
+      "evidence": "Round-robin scheduling gives each runnable process a fixed time quantum.",
+      "direct_question": "What does round-robin scheduling give each runnable process?",
+      "paraphrase_question": "Which scheduling policy assigns every runnable process a fixed time quantum?",
+      "unsupported_question": "How does copy-on-write reduce memory duplication?"
+    },
+    {
+      "id": "net-tcp-congestion",
+      "course_family": "networking",
+      "title": "TCP congestion window",
+      "evidence": "The TCP congestion window limits how much unacknowledged data a sender may transmit.",
+      "direct_question": "What does the TCP congestion window limit for a sender?",
+      "paraphrase_question": "Which TCP window limits how much unacknowledged data a sender may transmit?",
+      "unsupported_question": "How does an Ethernet switch learn MAC addresses?"
+    },
+    {
+      "id": "net-dns-cache",
+      "course_family": "networking",
+      "title": "DNS caching",
+      "evidence": "DNS resolvers cache records until their time-to-live expires.",
+      "direct_question": "How long do DNS resolvers cache records?",
+      "paraphrase_question": "What time-to-live controls how long DNS resolvers cache records?",
+      "unsupported_question": "Why does TCP use a three-way handshake?"
+    },
+    {
+      "id": "net-link-state",
+      "course_family": "networking",
+      "title": "Link-state routing",
+      "evidence": "Link-state routers compute shortest paths from a synchronized topology database.",
+      "direct_question": "What database do link-state routers use to compute shortest paths?",
+      "paraphrase_question": "How are shortest paths computed by link-state routers?",
+      "unsupported_question": "What information is carried in an ARP reply?"
+    },
+    {
+      "id": "ds-btree-split",
+      "course_family": "data-structures",
+      "title": "B-tree splitting",
+      "evidence": "A B-tree split promotes the median key and divides an overflowing node.",
+      "direct_question": "What does a B-tree split do to an overflowing node and its median key?",
+      "paraphrase_question": "Which key is promoted when an overflowing B-tree node is divided?",
+      "unsupported_question": "How does path compression change disjoint-set trees?"
+    },
+    {
+      "id": "ds-hash-collision",
+      "course_family": "data-structures",
+      "title": "Hash collisions",
+      "evidence": "Separate chaining resolves hash collisions by storing colliding entries in a bucket list.",
+      "direct_question": "How does separate chaining resolve hash collisions?",
+      "paraphrase_question": "Where does separate chaining store entries that collide in a hash table?",
+      "unsupported_question": "Why is an AVL rotation needed after insertion?"
+    },
+    {
+      "id": "ds-binary-heap",
+      "course_family": "data-structures",
+      "title": "Binary heap",
+      "evidence": "In a min-heap every parent key is no greater than its child keys.",
+      "direct_question": "What ordering holds between parent and child keys in a min-heap?",
+      "paraphrase_question": "How does a min-heap constrain each parent key relative to its children?",
+      "unsupported_question": "How does in-order traversal visit a binary search tree?"
+    },
+    {
+      "id": "python-context-manager",
+      "course_family": "python",
+      "title": "Python context managers",
+      "evidence": "A Python context manager guarantees setup and cleanup around a with block.",
+      "direct_question": "What does a Python context manager guarantee around a with block?",
+      "paraphrase_question": "Which Python construct provides setup and cleanup for a with block?",
+      "unsupported_question": "How does a list comprehension filter input values?"
+    },
+    {
+      "id": "python-generator",
+      "course_family": "python",
+      "title": "Python generators",
+      "evidence": "A Python generator yields values lazily and preserves execution state between yields.",
+      "direct_question": "How does a Python generator produce values and preserve execution state?",
+      "paraphrase_question": "What yields Python values lazily while keeping state between yields?",
+      "unsupported_question": "Why does a dataclass generate an equality method?"
+    },
+    {
+      "id": "python-exceptions",
+      "course_family": "python",
+      "title": "Python exception handling",
+      "evidence": "A Python finally block runs whether or not an exception is raised.",
+      "direct_question": "When does a Python finally block run?",
+      "paraphrase_question": "Which Python block runs whether or not an exception is raised?",
+      "unsupported_question": "How does an iterator signal that iteration is complete?"
+    }
+  ],
+  "integration_checks": [
+    "hook-runs-after-release-is-current",
+    "hook-runs-once-per-publish-call",
+    "rollback-does-not-run-hook",
+    "hook-failure-preserves-publication",
+    "hook-failure-audit-is-redacted",
+    "shadow-creates-zero-triggers",
+    "shadow-creates-zero-messages",
+    "shadow-creates-zero-outbox-items",
+    "current-release-lineage-only",
+    "consent-and-account-suppression",
+    "zero-provider-usage",
+    "zero-external-delivery"
+  ],
+  "hard_gates": {
+    "integration_check_pass_rate": 1.0,
+    "action_accuracy": 1.0,
+    "reason_accuracy": 1.0,
+    "supported_source_lineage_validity": 1.0,
+    "publication_success_rate": 1.0,
+    "shadow_side_effect_count": 0,
+    "provider_calls": 0,
+    "external_deliveries": 0,
+    "private_data_reads": 0
+  },
+  "limitations": [
+    "The cases are synthetic and stratified across computing topics; they are not real student interactions or independent academic samples.",
+    "The confirmation tests trigger mechanics and integration, not intervention usefulness, interruption burden, learning outcomes, professor fidelity, or production reliability.",
+    "A later representative shadow study requires approved real or independently sourced historical opportunities and a separate protocol."
+  ]
+}

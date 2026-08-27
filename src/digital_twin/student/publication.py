@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from uuid import uuid4
 
 from src.digital_twin.grounding.models import DocumentChunk
@@ -47,11 +48,13 @@ class ReleaseLifecycleService:
         profile_id: str = "student-tutor",
         profile_version: str = "v1",
         evidence_sufficiency_ready: bool = False,
+        post_publish_hook: Callable[[str, str], None] | None = None,
     ) -> None:
         self.repository = repository
         self.profile_id = profile_id
         self.profile_version = profile_version
         self.evidence_sufficiency_ready = evidence_sufficiency_ready
+        self.post_publish_hook = post_publish_hook
 
     def create_draft_from_onboarding(
         self,
@@ -344,7 +347,9 @@ class ReleaseLifecycleService:
         release = self._require_owned_release(professor_id, release_id)
         self._require_publishable(release)
         self.repository.publish_release(release.id)
-        return self._require_release(release.id)
+        published = self._require_release(release.id)
+        self._run_post_publish_hook(professor_id, published)
+        return published
 
     def withdraw(self, professor_id: str, release_id: str) -> DigitalTwinRelease:
         release = self._require_owned_release(professor_id, release_id)
@@ -366,6 +371,33 @@ class ReleaseLifecycleService:
         self._require_publishable(release)
         self.repository.publish_release(release.id)
         return self._require_release(release.id)
+
+    def _run_post_publish_hook(
+        self,
+        professor_id: str,
+        release: DigitalTwinRelease,
+    ) -> None:
+        """Observe a completed publication without changing its transaction result."""
+
+        if self.post_publish_hook is None:
+            return
+        try:
+            self.post_publish_hook(professor_id, release.course_id)
+        except Exception as error:
+            self.repository.save_audit_event(
+                AuditEvent(
+                    id=f"audit-{uuid4()}",
+                    event_type="release.post_publish_hook_failed",
+                    account_id=professor_id,
+                    course_id=release.course_id,
+                    release_id=release.id,
+                    details={
+                        "hook": "proactive-evidence-recovery-shadow",
+                        "error_type": type(error).__name__,
+                        "publication_preserved": True,
+                    },
+                )
+            )
 
     def _require_publishable(self, release: DigitalTwinRelease) -> None:
         if (
