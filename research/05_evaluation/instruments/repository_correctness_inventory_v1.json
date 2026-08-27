@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 606
+    "audited": 616
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 139,
-    "active_runtime": 110,
+    "active_or_unclassified_tooling": 140,
+    "active_runtime": 111,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 136,
+    "evaluation_configuration": 141,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 128
+    "verification": 131
   },
-  "file_count": 606,
+  "file_count": 616,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "dc97527bef9ce3e9549827a5ab3a53b2fe508556468e5835ab1460e8e4ac2691",
+  "record_sha256": "2837d9211451b3581e11ff7f2ac71870ddb525f7d91c898d5081172036757160",
   "records": [
     {
       "audit": {
@@ -39,10 +39,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "r1-openai-configuration-and-deployment",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -51,7 +51,7 @@
       "package_commands": [],
       "path": ".env.example",
       "risk": "medium",
-      "sha256": "d11492a635d2779b21c0f2c1d95dcd606f9da64b9db15ee03228fdf1c98b2997"
+      "sha256": "44fbaa8f37186e7676cd15234fe0326877a97548f7345937130c7f82ef64f73f"
     },
     {
       "audit": {
@@ -1207,10 +1207,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "r1-openai-configuration-and-deployment",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1219,7 +1219,7 @@
       "package_commands": [],
       "path": "compose.staging.yml",
       "risk": "high",
-      "sha256": "fa7bc1ec8240689c33dc3608a55c58bda7d6dfea5701807e41a17c89304202b7"
+      "sha256": "5ae0904ec8b72a9e44b580dd265dc915cf26baf449cae92e7c0b222ffbb0c865"
     },
     {
       "audit": {
@@ -1255,8 +1255,8 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-openai-configuration-and-deployment",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1267,7 +1267,7 @@
       "package_commands": [],
       "path": "deploy/staging.env.example",
       "risk": "high",
-      "sha256": "3a46ded5a25420d1102fa5db0e01e84691936597afbf375e98e165a28c2db5c3"
+      "sha256": "f3827d49b036fe127e8cd8c9d2230fb55255a6a761606d278cc31d18f9e1e0ab"
     },
     {
       "audit": {
@@ -1287,8 +1287,8 @@
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "A1 development and confirmation commands are explicit; normal checks validate contracts only, the 60-case run remains unauthorized, and focused plus full repository gates cover the publication hook. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-openai-configuration-and-deployment",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "3ca75566e48066398b752a35d4ee75f2ec712fba5613ba5cda4b0076f4e9ad44"
+      "sha256": "fd921ca58be53c3c0bbb2882a28d1d53cb6f18f8f987f222ff26141034f18d27"
     },
     {
       "audit": {
@@ -1735,6 +1735,22 @@
     },
     {
       "audit": {
+        "domain": "r1-openai-evaluation-contracts",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_002.json",
+      "risk": "high",
+      "sha256": "babe6fbf010eb958385bdf17beb123fa207a1b8a2dea1c48aa103ddc0238068b"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Manual exact-provider binding review verifies current DeepSeek and Google AI Studio model identities, revision and provider-route expectations, pricing, retention scope, freshness timestamps, authorization defaults, and final-stage closure.",
         "findings": [],
@@ -1831,6 +1847,38 @@
     },
     {
       "audit": {
+        "domain": "r1-openai-evaluation-contracts",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_002.json",
+      "risk": "high",
+      "sha256": "6190a23c8efd48e35ddc7bf74e5628338083eee6d037f1aa3f6b449020618bf1"
+    },
+    {
+      "audit": {
+        "domain": "r1-openai-evaluation-contracts",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_002.json",
+      "risk": "high",
+      "sha256": "b9f0a82647c465eb476cc5d64894a02290d37b46ab9b8b26ccd0fe0d0a73bf8e"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Manual AFQC-047 binding review verifies exact first-party OpenAI and Mistral endpoints, dated/release model identities, official pricing and limits checked on 2026-08-27, OpenAI store=false, public-only inputs, moving-alias rejection rationale, runtime-only credentials, two global transport retries, and all execution authority false.",
         "findings": [],
@@ -1860,6 +1908,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_001.json",
       "risk": "high",
       "sha256": "f262a51330a1949898b0e764719461aece12ce6c29e9880211fb04f6ce751a7e"
+    },
+    {
+      "audit": {
+        "domain": "r1-openai-evaluation-contracts",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_002.json",
+      "risk": "high",
+      "sha256": "df94ed034d109df61274a9eac0c5717ed226c026fbaaa0bdca2b7b291aaef06a"
     },
     {
       "audit": {
@@ -3527,6 +3591,22 @@
     },
     {
       "audit": {
+        "domain": "r1-openai-evaluation-contracts",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json",
+      "risk": "high",
+      "sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -3575,8 +3655,8 @@
     },
     {
       "audit": {
-        "domain": "flow-independent-factual-qa",
-        "evidence": "Manual live T0 adapter review verifies course-only full-corpus loading, candidate/control isolation, canonical source-range mapping, selected hybrid retrieval, structured evidence gating, local claim validation, explicit historical DeepSeek or prospective direct OpenAI generator selection from the system manifest, and no gold import.",
+        "domain": "r1-openai-evaluation-tooling",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -3590,7 +3670,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "689477fb23447d8b0825fa2f5281a7df2166cd63f1a5f15bfe6040cf27fdf422"
+      "sha256": "f0cccef66e3dc9dc2f2e7a3f8d21a458a402f19fbd15b23637acee5fbfb5e7b5"
     },
     {
       "audit": {
@@ -4937,8 +5017,8 @@
     },
     {
       "audit": {
-        "domain": "flow-independent-factual-qa",
-        "evidence": "Manual product-input firewall, attempt-003 adapter-factory context, provider metadata freshness, exclusive response/provider/state paths, resume, failure-recording, credential, freeze, and authority review passed without loading hidden gold.",
+        "domain": "r1-openai-evaluation-tooling",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -4956,12 +5036,35 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_10000.py",
       "risk": "high",
-      "sha256": "09127c296811b124a7b219fd67b9db58ec20a4a2720ee7babed1246570e851e8"
+      "sha256": "ed3a53c9bbefe17a9157982fde0f041f9c9bfc3c2630037f7e3dc0569c8d408e"
     },
     {
       "audit": {
-        "domain": "flow-independent-factual-qa",
-        "evidence": "Manual AFQC-047 runner review verifies strict first-party schemas, exact ordered IDs, public-only provider execution, canary-first batching, exclusive resume-bound ledger, bounded global retries, complete call/token/latency/cost accounting, terminal failure handling, post-completion hidden-gold scoring, candidate leak/duplicate detection, canonical fallback, and fail-closed freeze/preflight behavior.",
+        "domain": "r1-openai-evaluation-tooling",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-10000-wording",
+        "preflight:academic-factual-qa-open-10000-wording",
+        "score:academic-factual-qa-open-10000-wording",
+        "simulate:academic-factual-qa-open-10000-wording",
+        "verify:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-10000-wording-v1"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_wording.py",
+      "risk": "high",
+      "sha256": "1d5b3c38a4e490f0eb53cf538886ba7f59c8edbc9ec7097f5d7e8e2cd599b59e"
+    },
+    {
+      "audit": {
+        "domain": "r1-openai-evaluation-tooling",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -4976,9 +5079,9 @@
         "simulate:academic-factual-qa-open-10000-wording",
         "verify:academic-factual-qa-open-10000"
       ],
-      "path": "scripts/run_academic_factual_qa_open_wording.py",
+      "path": "scripts/run_academic_factual_qa_open_wording_v2.py",
       "risk": "high",
-      "sha256": "d0e85dc8424d8c02f4edc0c5ec32034118d5927ae600ee3d499d7d3e841f69e2"
+      "sha256": "360695ce0a7b331006b0f0daf5cce32c9332828ac771cbad583d641ee9ca6457"
     },
     {
       "audit": {
@@ -6073,11 +6176,11 @@
     },
     {
       "audit": {
-        "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "domain": "r1-openai-evaluation-tooling",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -6087,7 +6190,7 @@
       ],
       "path": "scripts/validate_model_policy.py",
       "risk": "high",
-      "sha256": "c1f1c76804ac835ba2270ed1ec4a5ac29a7f78b6dac6276d2c12e87ec34ecf44"
+      "sha256": "55756b9c0cd41582732a6dafd98fd12e18b1a1967842c9d1ec7a612e4686eb84"
     },
     {
       "audit": {
@@ -6319,8 +6422,8 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6331,7 +6434,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "d23fcf98e96f95b1fc4ac6e2887fc8cb4c34f9f9d7ddc9f2b3c27bb8ebf1a444"
+      "sha256": "39ff870606ccb8d8c4770780dea148ea5a43b454b9e6154638e030c2295301f5"
     },
     {
       "audit": {
@@ -6351,8 +6454,8 @@
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "Factory wiring invokes deterministic evidence recovery in shadow mode only after successful new-release publication; focused API tests prove zero-trigger operation and no external channel activation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6363,7 +6466,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "d00108a1bd29c345b3899377df15e79115c92c96d2ffcff1f46313bc03e028a6"
+      "sha256": "e555c5bc89bf098a301199c30bc543d32bedb2551727f2d2fe01be1ed1ff3e11"
     },
     {
       "audit": {
@@ -6639,10 +6742,10 @@
     },
     {
       "audit": {
-        "domain": "runtime-package-surface",
-        "evidence": "Manual public-export review confirmed only budgeted and profile-bound current LLM adapters are exposed; provider-free tests passed.",
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6651,7 +6754,7 @@
       "package_commands": [],
       "path": "services/llm/__init__.py",
       "risk": "high",
-      "sha256": "cab14657b96672a7a242d23037b4f44371d3ae94c99bb4f069764baacc78c023"
+      "sha256": "fac9e68cec03e434aca1f0a3f2e2ead17aaf72304e2bcc429fe21bbb051e1fec"
     },
     {
       "audit": {
@@ -6684,6 +6787,22 @@
       "path": "services/llm/litellm_client.py",
       "risk": "high",
       "sha256": "04a19bd9bfd93b0158e96ef6aead4bdf705766c124c01d01f04a43d28fb58c31"
+    },
+    {
+      "audit": {
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "services/llm/openai_responses_client.py",
+      "risk": "high",
+      "sha256": "790090830148dbe18774b2e68643982b2508a63614fa24bd7f6ed68b8cad6b1b"
     },
     {
       "audit": {
@@ -7583,10 +7702,10 @@
     },
     {
       "audit": {
-        "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model and message contract review plus focused tests verify registered current-model enforcement, safe task metadata, response identity controls, preservation of invalid reviews 006 and 007 plus unexecuted Gemini history, and prohibition of another OpenRouter retry.",
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7595,7 +7714,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "68111d027847a9a4f82ba7bc5c6a4a121abeed7e6dfd6b9dab6c6e427dbbe768"
+      "sha256": "94a9b1293945431ac0d28c6ab4a805427a87c3d2d1ea9cf0e22b5d6cbc32dd44"
     },
     {
       "audit": {
@@ -7839,8 +7958,8 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Manual fail-closed review confirms the global freeze remains active, the completed confirmation-002 exception is revoked after its valid Refine result, and provider, paid, private, external-delivery, real-student, and every other unregistered operation remain blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-openai-runtime",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -7851,7 +7970,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "5b1cbd22c59cda2b319f2341c6d03219198b04724cfc1d2d0a978bc0f5d9ec79"
+      "sha256": "dd1f4db1795f16b0078d270093d8af6d0533afed9f57395e03e794f52bcbbc3d"
     },
     {
       "audit": {
@@ -8031,10 +8150,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "r1-openai-verification",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -8043,7 +8162,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "2d933bafee00552337f1c74d70d87bd27ec12672cae01e5072903113afb8c69f"
+      "sha256": "ec09ecfb83052fc2d4f393681ecbbdfc8a33fb072e8731dfa1d61f4de3cd4289"
     },
     {
       "audit": {
@@ -8623,6 +8742,22 @@
     },
     {
       "audit": {
+        "domain": "r1-openai-verification",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/services/test_openai_responses_client.py",
+      "risk": "medium",
+      "sha256": "2f674977e946920ae20f2ff8d80d17719560a949f8e7cff8a958297f40c7e4c4"
+    },
+    {
+      "audit": {
         "domain": "evaluation-and-grounding-verification",
         "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
@@ -8783,6 +8918,22 @@
     },
     {
       "audit": {
+        "domain": "r1-openai-verification",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_t0_openai.py",
+      "risk": "medium",
+      "sha256": "951c991af994ae8dcb90007549065795e285add3ab7a9288f8f5744dd94c73db"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Focused AFQC-047 tests verify exact first-party identities, revoked authorization, 500-case no-call simulation, gold separation from provider execution, blocked preflight/freeze behavior, OpenAI store=false, retry-inclusive reservation, and rejection of reordered batch IDs.",
         "findings": [],
@@ -8796,6 +8947,22 @@
       "path": "tests/test_academic_factual_qa_open_wording.py",
       "risk": "medium",
       "sha256": "49d6482d5ad20436765afb695f4f47130b7afa05f955d2b037c9981c055f25d7"
+    },
+    {
+      "audit": {
+        "domain": "r1-openai-verification",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_wording_v2.py",
+      "risk": "medium",
+      "sha256": "d48e95641b74278514fdb2c6aaf6b0b3d9657a75de62cb85fc682ac694df516e"
     },
     {
       "audit": {
@@ -9583,10 +9750,10 @@
     },
     {
       "audit": {
-        "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
+        "domain": "r1-openai-verification",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9595,7 +9762,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "b5d74e7f3d9708637db69094b0492aa4a1f67f7daf104ed5ec53b27b9a0787d2"
+      "sha256": "adff72545fd710b2a5fbabeddff0d7820bc14c5bca275b7851ae26f8c6802384"
     },
     {
       "audit": {
@@ -10095,8 +10262,8 @@
     }
   ],
   "risk_counts": {
-    "high": 464,
-    "medium": 142
+    "high": 471,
+    "medium": 145
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

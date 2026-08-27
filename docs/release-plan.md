@@ -43,7 +43,7 @@ toward the release; none is the release by itself.
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T0 remains the release control; T1 passed all ten network-free development trajectories and may advance only to one separately frozen confirmation | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | A0 in-app baseline retained. A1 runs shadow-only after successful publication and passed all integration, suppression, lineage, and zero-side-effect checks, but its 60-case confirmation completed Refine after one supported paraphrase was conservatively missed (59/60). A1 delivery remains disabled pending a method-level support successor on fresh cases | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | AFQC-046 prospectively replaces the defective reference layer: 100 complete-region development clusters produce 500 separated public/hidden-gold cases and a fixed 100-case control. All 224 text and 176 structured targets pass exact source/original-region checks with zero reference defects, duplicates, answer leakage, provider calls, private data, or final access. A 12-case Codex-assisted packet retained two template-wording limitations, so references are Keep while wording is Go Deeper. No T0 product result exists yet; the sealed 10,000-case run remains unauthorized | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The complete-region 500-case reference package is retained. AFQC-048 replaces the active provider boundary with direct, snapshot-pinned OpenAI: GPT-5.4 mini for wording/product generation and GPT-5.4 for advisory review. Both no-call simulations pass; paid development and the sealed 10,000-case run remain unauthorized | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), with [#110](https://github.com/horiiiiii032929/digital-twin/issues/110) preserved as engineering history |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Build-only C0–C3/profile contract ready; professor guidance pending | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Current images build and become healthy; clean bootstrap works; publication fails closed until evidence sufficiency is selected | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
@@ -100,13 +100,14 @@ not require model spending or private data:
    network-free path is built. These reviewer attempts remain historical and
    are not being retried. The flow-independent 10,000-case successor now owns
    #127. AFQC-046 now keeps the prospective complete-region reference layer
-   after all 224 text and 176 structured targets pass. AFQC-047 now binds the
-   public-only wording pass to the dated OpenAI GPT-5.4 mini snapshot and exact
-   Mistral Small 4 release through first-party endpoints. Its 500-case
-   network-free simulation passes; the paid wording run remains separately
-   unauthorized. The scorer cannot open hidden gold until all 50 logical calls
-   are durably complete. A valid wording result is required before the separate
-   500-case candidate plus 100-case control authorization. Panel
+   after all 224 text and 176 structured targets pass. AFQC-047 remains
+   historical build evidence. AFQC-048 binds the active path to exact direct
+   OpenAI GPT-5.4 mini generation and GPT-5.4 advisory review. These are two
+   models from one provider family. Its 500-case wording and flow-adapter
+   simulations pass with zero calls; paid wording/product development remains
+   separately unauthorized. The scorer cannot open hidden gold until all
+   responses are durably complete. A valid development result is required
+   before any sealed 10,000-case authorization. Panel
    confirmation, Gemini visual qualification, visual
    execution, and live T0 execution remain closed and never auto-promote.
 3. Reconcile the release documentation, GitHub parent issue, Project fields,
@@ -163,6 +164,9 @@ not require model spending or private data:
 
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
+| Revoke the exposed OpenAI key and install only its replacement in ignored `.env` | Researcher | Clean OpenAI development preflight |
+| Authorize the 500-case candidate plus paired 100-case control | Researcher after ready preflight | First paid R1 product-quality development result |
+| Authorize the sealed 10,000-case run | Researcher only after complete development pass | Professor-reportable actual-product final result |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
 | Select or reject the provisional atomic-claim method using leakage-free end-to-end evidence | Researcher/evaluation checkpoint | Product binding and grounded publication/student journeys |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
