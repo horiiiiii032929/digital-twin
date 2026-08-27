@@ -74,7 +74,9 @@ malformed author output is never accepted, its response hash and reason are
 recorded, and deterministic canonical wording is explicitly labelled before
 the unchanged independent verifier. More than five fallback clusters in the
 100-cluster development construction produces `completed-refine`. Attempt 003
-has no provider authority.
+received separate AFQC-042 authority for construction and, only after a passing
+construction gate, the 500-case candidate plus paired 100-case control. The
+final split remains sealed and unauthorized.
 
 ## Product comparison
 

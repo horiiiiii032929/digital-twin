@@ -38,12 +38,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual AFQC-041 successor-binding review verifies exact documented DeepSeek and Gemini slugs, Google AI Studio default-tier routing with fallback disabled, current pricing and retention references, diagnostic DeepSeek fingerprint capture, a fresh exclusive attempt-003 identity, closed provider authority, and closed final execution.",
+      "evidence": "Manual AFQC-042 binding review verifies exact documented DeepSeek and Gemini slugs, Google AI Studio default-tier routing with fallback disabled, current pricing and retention references, diagnostic DeepSeek fingerprint capture, fresh attempt-003 identity, development-only authority, and closed final execution.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "63daf63920628fd9a63f35e71cdefc17641441f53ff09a401e8e8e5ea23a5b3f"
+      "sha256": "5179dcc347d5ce813e5b629a125bafaedcde7426db0634b579ba23ad9f3e3a97"
     },
     {
       "audit_status": "audited",
@@ -104,23 +104,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Focused construction tests verify deterministic truth authority, exact source spans, answer-leak rejection, malformed author quarantine with labelled canonical provenance, revoked preflight, explicit OpenRouter default-tier transport, terminal invalid-ledger handling, exclusive resume binding, and complete 2,100-cluster truth-package construction without unintended provider calls.",
+      "evidence": "Focused construction tests verify deterministic truth authority, exact source spans, answer-leak rejection, malformed author quarantine with labelled canonical provenance, authorized attempt-003 preflight, explicit OpenRouter default-tier transport, terminal invalid-ledger handling, exclusive resume binding, and complete 2,100-cluster truth-package construction without unintended provider calls.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_construction.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "2a4d3ab5f3efe624eb68479a8022120f783fc81a0c69a069779684f8347075b8"
+      "sha256": "5648438d75e0db30c2eaef20cd470596c28e4f2b3cda4d09a07a2a93e64934f0"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual AFQC-041 instrument review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, exact split/slice totals, strict malformed-author quarantine and labelled fallback with a 5% gate, automatic-promotion prohibition, revoked development authority, and closed final execution.",
+      "evidence": "Manual AFQC-042 instrument review verifies context-bearing token-aligned windows, corrected feasible allocation, deterministic truth authority, exact split/slice totals, strict malformed-author quarantine and labelled fallback with a 5% gate, development-only authority, automatic-promotion prohibition, and closed final execution.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "a665095600437616b50cd483e087295092b4f92d8e5f9c62ad7b801660724b71"
+      "sha256": "905071a2a322f0bf8605abb1688d3c80b3a7eb5872d50a4bcd6a9f20b7b55064"
     },
     {
       "audit_status": "audited",
@@ -203,12 +203,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Focused tests verify undersized-fragment rejection, corrected feasible allocation, deterministic 2,100-cluster plan and 10,500 truth packages, course/slice distributions, modality binding, reuse limits, non-overlap, and the revoked attempt-002 plus build-only attempt-003 authorization boundary.",
+      "evidence": "Focused tests verify undersized-fragment rejection, corrected feasible allocation, deterministic 2,100-cluster plan and 10,500 truth packages, course/slice distributions, modality binding, reuse limits, non-overlap, and the AFQC-042 attempt-003 development authorization boundary.",
       "findings": [],
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f1046ae5a93f8dd308f9edeaf7b660b425057528d86656ff6c4a58567ee3d27f"
+      "sha256": "89ada1f60610cbda34f1e6019190ebd8cce2eb9f3f8f2aab67dbb91196776f1d"
     },
     {
       "audit_status": "audited",
@@ -4900,12 +4900,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual bounded-authorization review verifies attempt-002 authority is fully revoked, no successor operation is allowlisted, and repository-wide plus final-stage freezes remain active.",
+      "evidence": "Manual AFQC-042 bounded-authorization review verifies only attempt-003 dataset generation, external model evaluation, and development method execution are allowlisted while repository-wide and final-stage freezes remain active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "3a2320199accbf6438ab5d351d1a105f955a2dc2dd2a0b3db4debe3bf7922385"
+      "sha256": "ac807ad1f02cfc20a0ee0bbbf1322580fa7118ecf9dc1915c9ce99844cf5a5a8"
     },
     {
       "audit_status": "audited",
@@ -5219,12 +5219,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Focused bounded-freeze tests verify no open benchmark or other evaluation has active execution authority and all construction, external-model, development-method, and held-out operations fail closed.",
+      "evidence": "Focused bounded-freeze tests verify the open benchmark is the only active authorization, permits exactly construction, external-model, and development-method operations, and rejects held-out execution.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "ba66795fdff69cfb6a26b43c5741456a0c37c1cb5496b17b0a91232baa791f10"
+      "sha256": "18b24531964b47089cc68ead7d615b5b48c8558e918400dc284edb8b1d7663ec"
     },
     {
       "audit_status": "audited",

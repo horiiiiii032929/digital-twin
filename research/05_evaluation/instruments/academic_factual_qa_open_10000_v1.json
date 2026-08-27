@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-v1",
-  "status": "frozen-allocation-attempt-003-build-only",
+  "status": "frozen-allocation-attempt-003-pending-execution",
   "owner_issue": 127,
   "decision_question": "Can the selected T0 Digital Twin retrieve, answer, cite, and abstain over 10,000 source-linked questions without gold leakage?",
   "claim_scope": {
@@ -148,7 +148,7 @@
     }
   },
   "execution": {
-    "construction_attempt": "003-build-only",
+    "construction_attempt": "003-authorized-pending-execution",
     "provider_binding_id": "academic-factual-qa-open-10000-provider-binding-003",
     "response_process_can_import_gold_module": false,
     "response_process_can_load_gold_path": false,
@@ -168,11 +168,11 @@
     "final_candidate_case_count": 10000,
     "final_control_case_count": 1000,
     "final_cost_rule": "1.5 times projected p99 cost, rounded upward to USD 5, capped at USD 150",
-    "dataset_construction_authorized": false,
-    "development_execution_authorized": false,
+    "dataset_construction_authorized": true,
+    "development_execution_authorized": true,
     "final_execution_authorized": false,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_promotion": false
   },
   "primary_metrics": [

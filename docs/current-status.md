@@ -78,11 +78,13 @@ first bulk DeepSeek author response used `items` instead of the frozen
 accepted development clusters or cases. Authorization is revoked. The result
 does not evaluate dataset or T0 quality, and the final 10,000-case execution
 remains unauthorized.
-Build-only attempt 003 now corrects the exposed harness gap without weakening
+Attempt 003 now corrects the exposed harness gap without weakening
 the schema: malformed author content remains rejected and hash-recorded, while
 the cluster uses explicitly labelled deterministic canonical wording before the
 independent verifier. More than 5% fallback clusters fails construction. No
-attempt-003 provider or product execution is authorized.
+final execution is authorized. AFQC-042 separately authorizes only attempt-003
+construction and, after a passing construction gate, the 500-case candidate
+plus paired 100-case control development run.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected

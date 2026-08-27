@@ -33,15 +33,23 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
-    pilot_ids: set[str] = set()
+    pilot_ids = {"academic-factual-qa-open-10000-v1"}
 
     for pilot_id in pilot_ids:
         require_bounded_pilot_operation_allowed(pilot_id)
 
     assert set(BOUNDED_PILOT_AUTHORIZATIONS) == pilot_ids
-    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+    for operation in (
+        "dataset_generation",
+        "external_model_evaluation",
+        "method_evaluation_execution",
+    ):
         require_bounded_pilot_operation_allowed(
-            "academic-factual-qa-open-10000-v1", "dataset_generation"
+            "academic-factual-qa-open-10000-v1", operation
+        )
+    with pytest.raises(RepositoryFreezeError, match="not authorized"):
+        require_bounded_pilot_operation_allowed(
+            "academic-factual-qa-open-10000-v1", "heldout_execution"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
