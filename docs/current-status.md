@@ -47,7 +47,17 @@ passes. The same allocation cannot be patched only in the answer parser: just
 a complete detected region; equations are 6/6. Future
 models may paraphrase wording and provide advisory review but cannot define or
 mutate gold. The 500-case T0 product run and sealed 10,000-case final run remain
-unauthorized.
+unauthorized. AFQC-046 now closes the reference-quality correction
+prospectively: a development-only source plan selects complete semantic regions
+before constructing 100 non-overlapping clusters. The rebuilt package retains
+400 answerable and 100 boundary cases plus the fixed 100-case control. All
+224 text targets and 176 structured targets pass exact source and
+original-region lineage checks with zero defects, duplicates, answer leakage,
+provider calls, private-data reads, or final-split access. A 12-case
+Codex-assisted packet found 12/12 usable source truths and 10/12 serviceable
+development questions; two template cues still require wording refinement.
+The corrected reference layer is Keep, while provider-neutral wording is Go
+Deeper. No T0 product-quality claim exists yet.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -71,11 +81,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 582 executable or execution-affecting
+the current branch now extends it to 590 executable or execution-affecting
 files, all audited with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 80 protected entrypoints. It protects the new deterministic
-builder and grants only provider-free AFQC-044 dataset construction; no
+active for all general evaluation actions across 82 protected entrypoints. It protects the corrected deterministic
+reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
 canary returned the requested model but a different runtime fingerprint, so the
@@ -110,8 +120,9 @@ zero such leaks and zero normalized duplicates. Direct first-party OpenAI
 network-free tested with strict schema, exact identity, bounded transport-only
 retry, and durable accounting. Credentials, fresh retention/pricing checks,
 and separate paid authority are still required before product execution, but
-they are no longer the first blocker: AFQC-045 requires a corrected
-reference-quality successor before any paid T0 run.
+they are no longer the first blocker: AFQC-046 keeps the corrected reference
+layer, and the next bounded work is wording-only paraphrase/review before any
+paid T0 run.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -711,7 +722,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; deterministic package structurally Keep but fitness Refine | The earlier synthetic workflow processed 10,000 correlated template rows. The leakage-free successor has 500 separated public/hidden-gold development rows, a 100-case paired control, stable adapters, source-range scoring, zero duplicates/leaks, and provider-free construction evidence. AFQC-045 found material reference-answer and structured-modality defects before spend | Build and re-audit one prospective reference-quality successor, then select a provider and separately authorize the 500-case candidate plus 100-case control product run. The sealed 10,000 cases remain a later stop point |
+| Large factual QA | Engineering pipeline Keep; corrected development reference layer Keep; wording Go Deeper | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-046 rebuilds the leakage-free 500-case development package from complete semantic regions: 224/224 text and 176/176 structured targets pass, with zero reference defects, duplicates, leaks, provider calls, or final access. The 12-case model-assisted packet retains two wording limitations and is not external-human evidence | Bind and evaluate question-only paraphrasing, then separately authorize the 500-case candidate plus 100-case control product run. The sealed 10,000 cases remain a later stop point |
 
 ## Release readiness and critical path
 
@@ -725,11 +736,11 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Preserve the structural package, correct complete-statement and structured-region reference extraction, pass the pre-spend audit, then finalize provider metadata and separately authorize the 500-case candidate plus 100-case control run. Reviewer calibration is not the blocker |
-| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper wording | Keep AFQC-046's corrected complete-region references, bind question-only paraphrasing/review without exposing gold, then separately authorize the 500-case candidate plus 100-case control run. Reviewer calibration is not the blocker |
+| 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
-| 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
+| 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
+| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
 | 8 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
 | 9 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
 | 10 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |

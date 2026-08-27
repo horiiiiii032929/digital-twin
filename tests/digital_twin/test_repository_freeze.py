@@ -44,6 +44,11 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "academic-factual-qa-open-10000-deterministic-development-002",
+            "dataset_generation",
+        )
     with pytest.raises(RepositoryFreezeError, match="not authorized"):
         require_bounded_pilot_operation_allowed(
             "academic-factual-qa-open-10000-deterministic-development-001",

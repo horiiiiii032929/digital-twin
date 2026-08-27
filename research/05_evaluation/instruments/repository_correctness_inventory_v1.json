@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 582
+    "audited": 590
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 132,
-    "active_runtime": 106,
+    "active_or_unclassified_tooling": 135,
+    "active_runtime": 108,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 131,
+    "evaluation_configuration": 132,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 120
+    "verification": 122
   },
-  "file_count": 582,
+  "file_count": 590,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "44779af9c74365ce45d1af43b57039542bcd391a71a1c0df44678cf00b1f733b",
+  "record_sha256": "1be976d5a30880198013a0e96c1f517679ea07a127cb7e3246008b47b5e281db",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual command-surface review verifies explicit open-10,000 validation includes the deterministic v2 package, its no-call pre-spend fitness audit, and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
+        "evidence": "Manual command-surface review verifies open-10,000 validation preserves the historical deterministic package and unfavorable audit while adding the complete-region source plan, corrected package, and second no-call audit. Write, product, control, and final execution remain separate and cannot auto-promote.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "b236a612719367d6d0a3ec2b18a0be4e2f526bafdcb71e28335ae535c3e253ba"
+      "sha256": "234aff7f5de26fbe764fd43902685eadde90404bc9ca3928bf4a4342f1136b6e"
     },
     {
       "audit": {
@@ -1700,6 +1700,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_deterministic_development_001.json",
       "risk": "high",
       "sha256": "927ff92c2668832c8039171574746e13096eb6552c46071322cb97e543285e6e"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual instrument review verifies the prospective source-plan and package hashes, exact 100/500/100 cardinalities, complete-region acceptance gates, zero-provider method, revoked one-time construction authority, and closed product/final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_deterministic_development_002.json",
+      "risk": "high",
+      "sha256": "7e08809d8146834304fdc419697b936c28a5513e29ec0aed3d677ea13d79327a"
     },
     {
       "audit": {
@@ -3737,6 +3753,24 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual audit review verifies separate public/gold accounting, complete text-statement checks, full structured-region containment, original-region lineage, boundary-empty lineage, a fixed 12-case packet, and explicit no-product/no-naturalness interpretation.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/audit_academic_factual_qa_open_development_v2.py",
+      "risk": "high",
+      "sha256": "5ea6bb270e0a3fb40a4f59a5218fccb6d84f41e107acd136c7e82ea136da13cf"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -3937,6 +3971,43 @@
       "path": "scripts/build_academic_factual_qa_open_development_v2.py",
       "risk": "high",
       "sha256": "d24a5cacbb247b9ef0e1f7a67f809684d2fffd42caae2904456b3e2696dff4a4"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual corrected-package review verifies deterministic 500-case assembly, exact 400/100 actions, separate hidden gold, fixed 20-cluster control, token-sequence leakage rejection, deterministic duplicate disambiguation, exclusive outputs, zero provider calls, and zero final access.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000",
+        "write:academic-factual-qa-open-10000-development-v3"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_development_v3.py",
+      "risk": "high",
+      "sha256": "9db49c3b02c27f5fb680d5156adfb53058c0028e447b6bd7e8a358284cb5a453"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual source-planner review verifies complete statements and detected code/equation/table regions precede cluster construction, exact course and modality allocation, non-overlap, stable source hashes, development-only scope, deterministic rebuilds, and fail-closed exclusive writes.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-open-10000"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_source_plan_v2.py",
+      "risk": "high",
+      "sha256": "ee93bad386183476af927558fe01d30a67898583e622167af39e9bdab334ca76"
     },
     {
       "audit": {
@@ -6746,6 +6817,22 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
+        "evidence": "Manual reference-contract review verifies exact quote/range validation, short deterministic claims, complete text and structured extraction, modality/target invariants, stable source-region IDs, separate boundary construction, and provider-independent public/gold assembly.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_references.py",
+      "risk": "high",
+      "sha256": "d780da3d1e2a8777dc7ff18a9d63f616d4cc071a469d7e4c89ebf6d3a1e0c4fe"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
         "evidence": "Manual metric review verifies exact answer spans, claim-to-lineage matching, citation precision/recall, strict source hashes, source-range retrieval at 3/5, boundary safety, operational accounting, and source-family bootstrap uncertainty.",
         "findings": [],
         "reviewed_at": "2026-08-26",
@@ -6758,6 +6845,22 @@
       "path": "src/digital_twin/evaluation/factual_qa_scoring.py",
       "risk": "high",
       "sha256": "251984bc0a226f0549918afe5b45010588c0a0225c2b352b6a0492d8fe2dc805"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Manual wording-boundary review verifies providers receive only public question fields, may return wording only, cannot mutate truth or citations, and trigger deterministic canonical fallback on missing, duplicate, or answer-leaking output.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/factual_qa_wording.py",
+      "risk": "high",
+      "sha256": "119bfdacf7fec477a6c6ed486c68dda933e1e718d17eed1c963cc86b1f65d29f"
     },
     {
       "audit": {
@@ -7594,7 +7697,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Manual AFQC-044 bounded-authorization review verifies only deterministic provider-free development construction is allowlisted, the new builder is protected, and all provider, paid, method-evaluation, held-out, and final-stage operations remain blocked.",
+        "evidence": "Manual AFQC-046 freeze review verifies the one-time corrected provider-free construction authority was revoked after exclusive outputs were written. Only historical development-001 remains allowlisted; all provider, paid, method, held-out, product, and final operations stay blocked.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -7605,7 +7708,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "af63686951f524bc4b3a8a37d91faaac74f98a6a603177e8f0e8f0c6c8db067a"
+      "sha256": "8e2648d0a81763765ba912d88c6bb03398ce66bc670c8b4164b87e04aa6a29a3"
     },
     {
       "audit": {
@@ -8058,7 +8161,7 @@
     {
       "audit": {
         "domain": "fair-factual-qa-evaluation",
-        "evidence": "Focused bounded-freeze tests verify the exact AFQC-044 instrument may perform dataset generation only, cannot perform external-model evaluation, and every unlisted construction, method, held-out, or historical authorization fails closed.",
+        "evidence": "Focused bounded-freeze tests verify AFQC-046 construction authority is revoked, the historical development-001 builder remains dataset-generation-only, and every unlisted provider, method, held-out, product, or final operation fails closed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8069,7 +8172,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "9e7c34fc3ab83cc188af84e6b189f8fc8c1193d65d202741a4220870b2df7656"
+      "sha256": "4c7ed19714b463268d7ffc1ef1aeb7256be0f990b55f3c80f5f483a70d124ef4"
     },
     {
       "audit": {
@@ -8438,6 +8541,22 @@
       "path": "tests/test_academic_factual_qa_open_development_v2.py",
       "risk": "medium",
       "sha256": "e50e84880dd14dbee40db914ce8122c52a605b9d5dd7e6be054d4755f7cc31d0"
+    },
+    {
+      "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify source-plan balance and byte stability, complete target contracts, 500/100 package separation and hashes, zero leaks or duplicates, and a zero-defect no-call reference audit with a fixed 12-case packet.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_development_v3.py",
+      "risk": "medium",
+      "sha256": "d0f7c8b88b51e949325d670fbf3c3f21a795b86da48a7affa5be7e5c9941ae81"
     },
     {
       "audit": {
@@ -9113,6 +9232,22 @@
     },
     {
       "audit": {
+        "domain": "flow-independent-factual-qa",
+        "evidence": "Focused tests verify the wording request excludes gold and source lineage, accepted wording changes only the public question, and leak, duplicate-ID, or missing responses fail closed to canonical wording.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_factual_qa_wording.py",
+      "risk": "medium",
+      "sha256": "f4fbebe4cfd7988aec354f05d86ecbf34c805416e625111028f5ce0c51cbf7f3"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -9689,8 +9824,8 @@
     }
   ],
   "risk_counts": {
-    "high": 448,
-    "medium": 134
+    "high": 454,
+    "medium": 136
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

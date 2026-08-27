@@ -727,6 +727,9 @@ Current utilities:
   remains blocked by the repository freeze.
 - `build_academic_factual_qa_open_10000.py`,
   `build_academic_factual_qa_open_development_v2.py`,
+  `build_academic_factual_qa_open_source_plan_v2.py`,
+  `build_academic_factual_qa_open_development_v3.py`,
+  `audit_academic_factual_qa_open_development_v2.py`,
   `construct_academic_factual_qa_open_10000.py`,
   `run_academic_factual_qa_open_10000.py`, and
   `score_academic_factual_qa_open_10000.py`: define the flow-independent
@@ -754,7 +757,22 @@ Current utilities:
   and structured slices whose selected answer does not contain evidence of the
   claimed modality. These diagnostics are a product-execution gate, not a
   replacement for semantic review and not permission to mutate historical
-  packages. The response runner accepts only `EvaluationCaseV1`,
+  packages.
+
+  AFQC-046 supersedes that defective development reference layer without
+  changing its historical artifacts.
+  `build_academic_factual_qa_open_source_plan_v2.py` plans 100 non-overlapping
+  complete semantic regions; `build_academic_factual_qa_open_development_v3.py`
+  writes 500 public cases, separate hidden gold, and the fixed 100-case control;
+  and `audit_academic_factual_qa_open_development_v2.py` verifies complete
+  text statements, exact structured-region lineage, uniqueness, leakage, and a
+  seeded 12-case semantic packet. The recorded `npm run
+  write:academic-factual-qa-open-10000-development-v3` command now fails closed
+  because its one-time provider-free build authority was revoked. `npm run
+  verify:academic-factual-qa-open-10000` validates both historical evidence and
+  the corrected package without network access.
+
+  The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden
   gold. The scorer opens `EvaluationGoldV1` only after durable completion and

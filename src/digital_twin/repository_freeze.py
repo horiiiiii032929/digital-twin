@@ -43,6 +43,12 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_open_development_v2.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_open_development_v3.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_open_source_plan_v2.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_visual_supplement.py": (
             "dataset_generation",
         ),
