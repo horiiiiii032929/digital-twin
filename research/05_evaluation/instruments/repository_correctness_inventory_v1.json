@@ -1,11 +1,11 @@
 {
   "audit_status_counts": {
-    "audited": 521
+    "audited": 523
   },
   "category_counts": {
     "active_frontend": 68,
     "active_or_unclassified_tooling": 115,
-    "active_runtime": 99,
+    "active_runtime": 100,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 104
+    "verification": 105
   },
-  "file_count": 521,
+  "file_count": 523,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "07f3b08dac7d3a5b4dae5babc34817bb72b5a2adccc63d6b17b3378bedaf7d57",
+  "record_sha256": "75a1663853c78e16e6406a044eedd64bfd0665921e82895be0529f10714ec41c",
   "records": [
     {
       "audit": {
@@ -1287,10 +1287,10 @@
     },
     {
       "audit": {
-        "domain": "academic-factual-qa-evaluation",
-        "evidence": "Command review confirms the academic factual-QA instrument validation and network-free real-service simulation are included in the complete local verification chain while external and development execution remain fail-closed.",
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Command review confirms the focused learning-gap privacy, storage, aggregation, and draft-contract regressions are included in the complete local verification chain without provider calls or T1 promotion.",
         "findings": [],
-        "reviewed_at": "2026-08-25",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "52c15ae27d3b27e22dd25e0af37deacde44000b08f1b721b7d4922af25729f1e"
+      "sha256": "e22a408768d24768d83ef4429a10fa23365030f609c5a8694d06d97b37265172"
     },
     {
       "audit": {
@@ -6799,10 +6799,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Public exports were reviewed with focused privacy, pseudonymization, aggregation, persistence, retention, migration, and non-executable-draft regressions; T0 remains selected.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6811,7 +6811,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "72aba3b1c60a722925d068a58b0ccf458215c106478cd0d8a2f8bf6da7e974e5"
+      "sha256": "19c0f9dd601d85d3a8451f365ab3f675612dcc2ccd2a93eacd0894aef18febc1"
     },
     {
       "audit": {
@@ -6831,10 +6831,26 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Manual contract review and focused tests cover strong-secret HMAC pseudonymization, raw-content exclusion, UTC retention, cross-scope rejection, small-cell suppression, deterministic aggregation, and professor-review-only drafts.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/learning_gap.py",
+      "risk": "high",
+      "sha256": "894af0f01e8baa96857836f91903fa8fc0fe472394e4cfba17f1fdbda994fe60"
+    },
+    {
+      "audit": {
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Migration review and clean/legacy/restart regressions confirm the privacy-minimized signal table, scope indexes, uniqueness constraints, retention fields, and ordered checksum behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6843,7 +6859,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/migrations.py",
       "risk": "high",
-      "sha256": "36ece71f4ae759cbe95524e03cb16bc4ce2764589200d281a9b8eb55ea5f2b63"
+      "sha256": "a9d5229a8c6e1d419b6502d2577e59d14c7b2bcc3f4a63ae54a4cc86f304a328"
     },
     {
       "audit": {
@@ -6879,10 +6895,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Repository review and focused tests confirm idempotent signal insertion, conflicting replay rejection, immutable course/release scope, active-only listing, UTC-safe expiry, and deletion without direct student identifiers.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6891,7 +6907,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "b25f8b7541f0a4ea877a991f880e6ea8ecb38be52fba101574ff594e7dc3b44b"
+      "sha256": "99301f20b49ea00948049c655cf4a35b2080ba0a8f74ff84f473b0bc530a4874"
     },
     {
       "audit": {
@@ -7151,6 +7167,22 @@
     },
     {
       "audit": {
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Focused regressions cover strong-secret requirements, non-retention of raw IDs/content, timestamp normalization, idempotency, cross-scope isolation, expiry, minimum-cohort suppression, deterministic drafts, and duplicate resistance.",
+        "findings": [],
+        "reviewed_at": "2026-08-27",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_learning_gap.py",
+      "risk": "medium",
+      "sha256": "ac71b5c5cadb19ed353212b93c8202bebad1d62e5001ebbbf3dbcd5fc1f7f79e"
+    },
+    {
+      "audit": {
         "domain": "evaluation-and-grounding-verification",
         "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
@@ -7343,10 +7375,10 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "privacy-preserving-course-improvement-loop",
+        "evidence": "Migration regressions verify the new learning-gap table is present in a clean complete schema while ordered, rollback, checksum, empty-set, and unknown-version guards remain intact.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -7355,7 +7387,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_sqlite_migrations.py",
       "risk": "medium",
-      "sha256": "9093dbec532046022c7122cf7da92252b1eb31cbca8e0394849a868b9b496e59"
+      "sha256": "ed533fc04b43af85eb97e009600b635c333daf753f4a6939e95fc9e2c4c3d9e0"
     },
     {
       "audit": {
@@ -8288,9 +8320,9 @@
     {
       "audit": {
         "domain": "atomic-claim-evidence-validation",
-        "evidence": "Tests verify completed revocation, model-free simulation, coherent three-part local authority and revocation states, immutable model/threshold/gate bindings, and mechanical prohibition of product or external execution authority.",
+        "evidence": "Tests verify completed revocation and permanent authorization blockers while allowing the valid time-dependent stale-metadata blocker, plus model-free simulation, immutable bindings, and prohibition of product or external execution authority.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -8299,7 +8331,7 @@
       "package_commands": [],
       "path": "tests/test_run_atomic_claim_validation_confirmation.py",
       "risk": "medium",
-      "sha256": "0eedbbe82ec7853daca2678761a2b4a3342567209e7af6557888430ab651d984"
+      "sha256": "79c801ca66b19e677922608dff5e6c54a84e01feb0636a6b2929076998bfc91f"
     },
     {
       "audit": {
@@ -8336,9 +8368,9 @@
     {
       "audit": {
         "domain": "evidence-sufficiency",
-        "evidence": "Focused tests verify the completed revoked preflight, model-free simulation, AnyHit exclusion, coherent three-part authorization and revocation states, exact model revisions, and immutable hard gates.",
+        "evidence": "Focused tests verify permanent authorization blockers remain mandatory while valid time-dependent model-freshness blockers may appear, alongside model-free simulation, AnyHit exclusion, coherent authority states, exact revisions, and immutable gates.",
         "findings": [],
-        "reviewed_at": "2026-08-24",
+        "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -8347,7 +8379,7 @@
       "package_commands": [],
       "path": "tests/test_run_evidence_sufficiency_v2_candidate_comparison.py",
       "risk": "medium",
-      "sha256": "206eb37e92161f3f9029d12b39bebdc8e5ae42eb3287e121b1ec05d72ee32350"
+      "sha256": "cbf060e787d111501ae3b4014fe913b07421754b25a474764ce27d7beec13f62"
     },
     {
       "audit": {
@@ -8623,8 +8655,8 @@
     }
   ],
   "risk_counts": {
-    "high": 403,
-    "medium": 118
+    "high": 404,
+    "medium": 119
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

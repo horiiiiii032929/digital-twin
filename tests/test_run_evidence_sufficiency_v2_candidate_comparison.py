@@ -27,10 +27,18 @@ def test_candidate_comparison_is_completed_and_authorization_revoked() -> None:
     result = preflight(instrument)
 
     assert result["status"] == "blocked-not-authorized"
-    assert set(result["blockers"]) == {
+    blockers = set(result["blockers"])
+    assert {
         "candidate-execution-authorized-false",
         "local-model-execution-authorized-false",
         "decision-split-execution-authorized-false",
+    } <= blockers
+    assert blockers <= {
+        "candidate-execution-authorized-false",
+        "local-model-execution-authorized-false",
+        "decision-split-execution-authorized-false",
+        "stale-model-metadata:cross-encoder-support-verifier-v2",
+        "stale-model-metadata:cross-encoder-nli-completeness-verifier-v2",
     }
     assert result["decision_split_opened"] is False
     assert result["model_loaded"] is False
