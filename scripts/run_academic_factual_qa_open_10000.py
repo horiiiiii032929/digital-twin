@@ -47,10 +47,12 @@ INSTRUMENT_PATH = (
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1.json"
 )
 DATASET_ROOT = ROOT / "research/05_evaluation/datasets"
-DEFAULT_CASES = DATASET_ROOT / "academic_factual_qa_open_10000_v1_cases.json"
+DEFAULT_CASES = (
+    DATASET_ROOT / "academic_factual_qa_open_10000_v1_development_cases_002.json"
+)
 DEFAULT_MANIFEST = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_candidate_manifest.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_002.json"
 )
 DEFAULT_OUTPUT = (
     ROOT / "reports/generated/academic-factual-qa-open-10000-v1-responses.sqlite3"
@@ -63,8 +65,10 @@ DEFAULT_STATE = (
 )
 PROVIDER_BINDING_PATH = (
     ROOT
-    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
+    / "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_002.json"
 )
+ACTIVE_GENERATOR = "openai-gpt-5.4-mini-live-atomic"
+ACTIVE_GENERATOR_MODEL = "gpt-5.4-mini-2026-03-17"
 
 
 class OpenBenchmarkExecutionError(RuntimeError):
@@ -217,10 +221,19 @@ def preflight(
         blockers.append("public-input-package-missing")
     if not manifest_path.is_file():
         blockers.append("system-manifest-missing")
+    else:
+        try:
+            manifest = _load_manifest(manifest_path)
+            if manifest.generator != ACTIVE_GENERATOR:
+                blockers.append("active-generator-not-openai-gpt-5.4-mini")
+            if manifest.model_bindings.get("generator") != ACTIVE_GENERATOR_MODEL:
+                blockers.append("active-generator-model-identity-drifted")
+        except (OSError, ValueError, TypeError):
+            blockers.append("system-manifest-invalid")
     if _repo_dirty():
         blockers.append("working-tree-dirty")
-    if not os.getenv("DEEPSEEK_API_KEY", "").strip():
-        blockers.append("deepseek-credential-missing")
+    if not os.getenv("OPENAI_API_KEY", "").strip():
+        blockers.append("openai-credential-missing")
     if not PROVIDER_BINDING_PATH.is_file():
         blockers.append("provider-binding-missing")
     else:
@@ -240,7 +253,7 @@ def preflight(
                 "provider_execution_authorized",
                 "paid_execution_authorized",
                 (
-                    "development_execution_authorized"
+                    "product_development_execution_authorized"
                     if stage == "development"
                     else "final_execution_authorized"
                 ),

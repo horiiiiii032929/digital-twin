@@ -55,16 +55,19 @@ from src.digital_twin.tutor_policy import SourceLabel
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
+PROFILE_PATH = (
+    ROOT
+    / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+)
 SOURCE_PLAN_PATH = ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json"
-BINDING_PATH = (
+HISTORICAL_BINDING_PATH = (
     ROOT
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
 )
-DIRECT_BINDING_PATH = (
+OPENAI_BINDING_PATH = (
     ROOT
     / "research/05_evaluation/instruments/"
-    "academic_factual_qa_open_10000_direct_provider_binding_001.json"
+    "academic_factual_qa_open_10000_openai_binding_002.json"
 )
 ATOMIC_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -214,7 +217,7 @@ def _generator_transport(
     """Resolve only an explicitly manifested historical or direct generator."""
 
     if manifest.generator == "deepseek-v4-flash-live-atomic":
-        provider_binding = _load(BINDING_PATH)
+        provider_binding = _load(HISTORICAL_BINDING_PATH)
         binding = deepcopy(provider_binding["providers"]["deepseek-v4-flash"])
         binding.update(
             {
@@ -225,8 +228,8 @@ def _generator_transport(
         )
         return binding, OpenAiCompatibleJsonTransport(binding)
     if manifest.generator == "openai-gpt-5.4-mini-live-atomic":
-        provider_binding = _load(DIRECT_BINDING_PATH)
-        binding = deepcopy(provider_binding["providers"]["openai-gpt-5.4-mini"])
+        provider_binding = _load(OPENAI_BINDING_PATH)
+        binding = deepcopy(provider_binding["providers"]["high-volume-generator"])
         binding.update(
             {
                 "binding_id": f"{binding['binding_id']}-product",
@@ -311,6 +314,7 @@ def _setup_service(
     database_path: Path,
 ) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
     repository = SQLiteStudentRepository(database_path)
+    profile = _load(PROFILE_PATH)
     professor_id = "academic-open-professor"
     student_id = "academic-open-student"
     repository.save_account(Account(id=professor_id, role=AccountRole.PROFESSOR))
@@ -341,8 +345,8 @@ def _setup_service(
             DigitalTwinRelease(
                 id=f"{course_id}-academic-open-release",
                 course_id=course_id,
-                profile_id="student-tutor",
-                profile_version="v1",
+                profile_id=str(profile["profile_id"]),
+                profile_version=str(profile["profile_version"]),
                 policy_version=1,
                 policy=approved_synthetic_policy(),
                 chunks=chunks,
@@ -350,7 +354,6 @@ def _setup_service(
                 evaluation_status=ReleaseEvaluationStatus.PASSED,
             )
         )
-    profile = _load(PROFILE_PATH)
     retriever = next(
         row for row in profile["components"] if row["component"] == "retriever"
     )["implementation"]["configuration"]

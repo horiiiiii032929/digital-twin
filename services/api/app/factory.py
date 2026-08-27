@@ -31,10 +31,10 @@ from services.api.app.routers.student import router as student_router
 from services.ingestion import IngestionJobService
 from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
-from services.llm import BudgetedLlmClient, LiteLlmClient
+from services.llm import BudgetedLlmClient, OpenAiResponsesClient
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
-    LiveGroundedGenerator,
+    LiveAtomicGroundedGenerator,
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import LocalCourseSourceIngestionService
@@ -83,7 +83,7 @@ def create_app(
     student_generator: TutorGenerator | None = None,
     student_evidence_gate: EvidenceSufficiencyGate | None = None,
     student_claim_evidence_validator: PostGenerationClaimValidator | None = None,
-    student_profile_path: Path = DEFAULT_STUDENT_PROFILE,
+    student_profile_path: Path | None = None,
     region_crop_root: Path | None = None,
     source_root: Path | None = None,
     source_ocr_provider: OCRProvider | None = None,
@@ -153,7 +153,10 @@ def create_app(
         app.state.source_ingestion_service,
         max_upload_bytes=runtime_settings.max_upload_bytes,
     )
-    profile = load_release_profile(student_profile_path)
+    resolved_student_profile_path = (
+        student_profile_path or runtime_settings.student_profile_path
+    )
+    profile = load_release_profile(resolved_student_profile_path)
     configured_generator, provider_budget = _configured_generator(
         runtime_settings,
         profile,
@@ -161,7 +164,7 @@ def create_app(
     app.state.provider_budget = provider_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
-        profile_path=student_profile_path,
+        profile_path=resolved_student_profile_path,
         embedder=student_embedder,
         generator=student_generator or configured_generator,
         evidence_gate=student_evidence_gate,
@@ -224,6 +227,8 @@ def _configured_generator(
 ):
     if settings.generator_mode == GeneratorMode.DETERMINISTIC:
         return None, None
+    if settings.generator_mode != GeneratorMode.OPENAI_GPT_5_4_MINI:
+        raise ValueError("historical generator modes cannot be selected for R1")
     generator = next(
         entry
         for entry in profile.components
@@ -236,7 +241,7 @@ def _configured_generator(
         generator.status != ComponentStatus.SELECTED
         or generator.implementation is None
         or generator.implementation.implementation_id
-        != "litellm-deepseek-v4-flash-nonthinking-v1"
+        != "openai-responses-gpt-5-4-mini-atomic-v1"
         or prompt.status != ComponentStatus.SELECTED
         or prompt.implementation is None
         or prompt.implementation.implementation_id
@@ -245,14 +250,10 @@ def _configured_generator(
         raise ValueError("active profile does not select the supported live generator")
     configuration = generator.implementation.configuration
     provider_model = _required_profile_string(configuration, "provider_model")
-    provider_revision = _required_profile_string(
-        configuration,
-        "provider_revision",
-    )
-    if provider_model != "deepseek-v4-flash":
+    if provider_model != "gpt-5.4-mini-2026-03-17":
         raise ValueError("active profile generator model is unsupported")
-    if configuration.get("thinking") is not False:
-        raise ValueError("active profile generator must disable thinking")
+    if configuration.get("reasoning_effort") != "none":
+        raise ValueError("active profile generator must use reasoning effort none")
     if configuration.get("max_attempts") != 1:
         raise ValueError("active profile generator must use one attempt")
     timeout_seconds = _required_profile_number(configuration, "timeout_seconds")
@@ -260,22 +261,12 @@ def _configured_generator(
         configuration,
         "max_output_tokens",
     )
-    temperature = _required_profile_number(configuration, "temperature")
     client = BudgetedLlmClient(
-        LiteLlmClient(
-            "deepseek/deepseek-v4-flash",
+        OpenAiResponsesClient(
+            provider_model,
             timeout_seconds=timeout_seconds,
             max_output_tokens=max_output_tokens,
-            temperature=temperature,
-            response_format={"type": "json_object"},
-            expected_provider_model=provider_model,
-            expected_provider_revision=provider_revision,
-            provider_options={
-                "extra_body": {
-                    "thinking": {"type": "disabled"},
-                    "user_id": "course-digital-twin-staging",
-                }
-            },
+            reasoning_effort="none",
         ),
         max_calls=settings.provider_max_calls_per_process,
         max_cost_usd=settings.provider_cost_cap_usd,
@@ -287,7 +278,7 @@ def _configured_generator(
         else StrictEvidenceGroundedPromptBuilder()
     )
     return (
-        LiveGroundedGenerator(
+        LiveAtomicGroundedGenerator(
             client,
             prompt_builder=prompt_builder,
         ),

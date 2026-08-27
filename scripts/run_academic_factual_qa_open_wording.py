@@ -272,13 +272,18 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
     instrument = _instrument()
     binding = _binding()
     cases = _public_cases()
+    author_role = instrument["method"]["wording_author_role"]
+    reviewer_role = instrument["method"]["reviewer_role"]
     if len({row.case_id for row in cases}) != 500:
         raise WordingCheckpointError("public case IDs are not unique")
-    if set(binding["providers"]) != {"wording-author", "wording-reviewer"}:
+    if set(binding["providers"]) != {author_role, reviewer_role}:
         raise WordingCheckpointError("wording provider roles drifted")
-    author = binding["providers"]["wording-author"]
-    reviewer = binding["providers"]["wording-reviewer"]
-    if author["provider"] != "openai" or reviewer["provider"] != "mistral":
+    author = binding["providers"][author_role]
+    reviewer = binding["providers"][reviewer_role]
+    if author["provider"] != "openai" or reviewer["provider"] not in {
+        "openai",
+        "mistral",
+    }:
         raise WordingCheckpointError("wording provider families drifted")
     transports = {
         role: DirectProviderJsonTransport(row)
@@ -288,7 +293,7 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
     author_system, author_prompt = _author_prompt(
         [row.model_dump(mode="json") for row in sample]
     )
-    author_payload = transports["wording-author"]._payload(  # noqa: SLF001
+    author_payload = transports[author_role]._payload(  # noqa: SLF001
         system=author_system,
         prompt=author_prompt,
         task="wording-author-network-free-contract",
@@ -305,7 +310,7 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
     review_system, review_prompt = _review_prompt(
         [row.model_dump(mode="json") for row in review_rows]
     )
-    review_payload = transports["wording-reviewer"]._payload(  # noqa: SLF001
+    review_payload = transports[reviewer_role]._payload(  # noqa: SLF001
         system=review_system,
         prompt=review_prompt,
         task="wording-review-network-free-contract",
@@ -318,6 +323,8 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         raise WordingCheckpointError("router or retired provider leaked into binding")
     if author_payload.get("store") is not False:
         raise WordingCheckpointError("OpenAI wording request does not set store=false")
+    if reviewer["provider"] == "openai" and review_payload.get("store") is not False:
+        raise WordingCheckpointError("OpenAI review request does not set store=false")
     if require_unauthorized and (
         any(binding["authorization"].values())
         or any(instrument["authorization"].values())
@@ -336,6 +343,8 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         "public_reviewer_fields": sorted(review_rows[0].model_dump()),
         "strict_schema_requested": "json_schema" in serialized,
         "openai_store": author_payload["store"],
+        "reviewer_provider": reviewer["provider"],
+        "reviewer_store": review_payload.get("store"),
         "provider_calls": 0,
         "gold_loaded": False,
         "final_split_opened": False,
@@ -428,9 +437,9 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
     ).total_seconds() / 3600
     if age_hours < 0 or age_hours > binding["maximum_age_hours_for_execution"]:
         blockers.append("provider-metadata-stale")
-    if instrument["authorization"]["t0_product_execution_authorized"]:
+    if instrument["authorization"].get("t0_product_execution_authorized", False):
         blockers.append("t0-product-execution-must-remain-unauthorized")
-    if instrument["authorization"]["final_execution_authorized"]:
+    if instrument["authorization"].get("final_execution_authorized", False):
         blockers.append("final-execution-must-remain-unauthorized")
     return {
         "instrument_id": INSTRUMENT_ID,
@@ -476,6 +485,8 @@ async def execute(*, resume: bool) -> dict[str, Any]:
     requests = wording_requests(cases)
     case_by_id = {row.case_id: row for row in cases}
     batch_size = instrument["dataset"]["batch_size"]
+    author_role = instrument["method"]["wording_author_role"]
+    reviewer_role = instrument["method"]["reviewer_role"]
     run_binding = {
         "instrument_id": INSTRUMENT_ID,
         "instrument_sha256": instrument["content_sha256"],
@@ -499,7 +510,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             expected_ids = [row.case_id for row in batch]
             recovered = int(ledger.snapshot()["recovered_transport_failures"])
             author_transport = _transport_for_role(
-                role="wording-author",
+                role=author_role,
                 binding=binding,
                 recovered_failures=recovered,
                 retry_limit=retry_limit,
@@ -510,7 +521,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             authored = await author_transport.call_with_ledger(
                 ledger=ledger,
                 request_key=f"author-{batch_number:03d}",
-                provider_role="wording-author",
+                provider_role=author_role,
                 system=system,
                 prompt=prompt,
                 task="academic-factual-qa-public-question-wording",
@@ -524,7 +535,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             )
             recovered = int(ledger.snapshot()["recovered_transport_failures"])
             reviewer_transport = _transport_for_role(
-                role="wording-reviewer",
+                role=reviewer_role,
                 binding=binding,
                 recovered_failures=recovered,
                 retry_limit=retry_limit,
@@ -535,7 +546,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             reviewed = await reviewer_transport.call_with_ledger(
                 ledger=ledger,
                 request_key=f"review-{batch_number:03d}",
-                provider_role="wording-reviewer",
+                provider_role=reviewer_role,
                 system=review_system,
                 prompt=review_prompt,
                 task="academic-factual-qa-public-question-wording-review",
@@ -594,13 +605,15 @@ def score() -> dict[str, Any]:
     if len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]:
         raise WordingCheckpointError("wording ledger call count is incomplete")
     cases = _public_cases()
+    author_role = instrument["method"]["wording_author_role"]
+    reviewer_role = instrument["method"]["reviewer_role"]
     responses: list[QuestionWordingResponseV1] = []
     reviews: list[QuestionWordingReviewResponseV1] = []
     for _, role, response in rows:
-        if role == "wording-author":
+        if role == author_role:
             items = response.content.get("items", [])
             responses.extend(QuestionWordingResponseV1.model_validate(row) for row in items)
-        elif role == "wording-reviewer":
+        elif role == reviewer_role:
             items = response.content.get("items", [])
             reviews.extend(
                 QuestionWordingReviewResponseV1.model_validate(row) for row in items

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "flow_id": "t0-r1-openai-structured-two-boundary-candidate",
+  "adapter_version": "v1",
+  "code_revision": "7e79e3a49590236bb3fb426ff823f252ba0e7c3e",
+  "profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+  "retriever": "qwen3-hybrid-v1@cross-course-retrieval-v1",
+  "generator": "openai-gpt-5.4-mini-live-atomic",
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+  "model_bindings": {
+    "embedding": "Qwen/Qwen3-Embedding-0.6B@97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "generator": "gpt-5.4-mini-2026-03-17",
+    "claim-validator": "cross-encoder/nli-deberta-v3-base@6c749ce3425cd33b46d187e45b92bbf96ee12ec7"
+  },
+  "known_benchmark": false
+}

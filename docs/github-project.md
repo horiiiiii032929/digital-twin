@@ -74,12 +74,12 @@ professor-communication track.
    retry. AFQC-044 resolves the method decision with a provider-free 500-case
    package and 100-case paired control. AFQC-046 replaces its defective
    reference windows with complete semantic regions and passes all source,
-   lineage, uniqueness, leakage, and byte-stability gates. AFQC-047 then binds
-   public-only wording to the dated OpenAI GPT-5.4 mini snapshot and independent
-   Mistral Small 4 review through first-party endpoints. Its complete 500-case
-   network-free simulation passes; paid wording remains unauthorized. The next
-   #127 checkpoint is this finite wording run, followed only after a valid result
-   by the separately authorized 500-case candidate plus 100-case control run.
+   lineage, uniqueness, leakage, and byte-stability gates. AFQC-047 remains
+   historical build evidence. AFQC-048 binds the active path to dated direct
+   OpenAI GPT-5.4 mini generation and GPT-5.4 advisory review, explicitly
+   disclosed as one provider family. Complete wording and adapter simulations
+   pass without network access. The next #127 checkpoint is the separately
+   authorized 500-case candidate plus 100-case control development run.
    The 10,000-case final run remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

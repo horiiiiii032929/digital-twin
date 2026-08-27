@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "run_id": "r1-openai-only-build-001",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "82347c0067e10504c8e66bc60188ad8673b12d7d",
+  "dirty_state": false,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "historical-multi-provider-r1-boundary",
+        "version": "historical-control",
+        "configuration": {
+          "active_for_r1": false,
+          "historical_evidence_preserved": true
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "active-provider-family-count",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-wording-case-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "repository-test-pass-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1124.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-version-locked-models",
+          "passed": false,
+          "evidence": "Historical workflows used multiple bindings and are not one prospective R1 model contract."
+        },
+        {
+          "name": "single-active-credential",
+          "passed": false,
+          "evidence": "Historical prospective workflows referenced multiple provider credentials."
+        },
+        {
+          "name": "no-router-fallback-or-storage",
+          "passed": false,
+          "evidence": "Historical evidence includes routed or fallback-capable provider paths."
+        },
+        {
+          "name": "gold-leakage-boundary",
+          "passed": true,
+          "evidence": "The flow-independent public-input and hidden-gold separation remains unchanged."
+        },
+        {
+          "name": "paid-execution-closed",
+          "passed": true,
+          "evidence": "Historical active authorizations were revoked before this checkpoint."
+        }
+      ],
+      "failures_by_category": {
+        "operational-provider-fragmentation": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-r1-boundary",
+        "version": "build-001",
+        "configuration": {
+          "generator_model": "gpt-5.4-mini-2026-03-17",
+          "semantic_reviewer_model": "gpt-5.4-2026-03-05",
+          "api": "responses",
+          "request_store": false,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "active-provider-family-count",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-wording-case-count",
+          "value": 500.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "repository-test-pass-count",
+          "value": 1124.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1124.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "exact-version-locked-models",
+          "passed": true,
+          "evidence": "Active generator and reviewer bind exact dated OpenAI snapshots and verify returned identities."
+        },
+        {
+          "name": "single-active-credential",
+          "passed": true,
+          "evidence": "Active wording, product, and review bindings require only OPENAI_API_KEY."
+        },
+        {
+          "name": "no-router-fallback-or-storage",
+          "passed": true,
+          "evidence": "Direct Responses API payloads set store false and expose no router, fallback, or alternate-provider path."
+        },
+        {
+          "name": "gold-leakage-boundary",
+          "passed": true,
+          "evidence": "Wording and product execution load public cases only; hidden gold opens in separate scoring."
+        },
+        {
+          "name": "paid-execution-closed",
+          "passed": true,
+          "evidence": "All active authorization fields are false and the bounded freeze allowlist excludes the checkpoint."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "direct-openai-r1-boundary",
+    "rationale": "Use one direct, version-locked OpenAI boundary for the next separately authorized development checkpoint while deterministic truth remains authoritative.",
+    "limitations": [
+      "The two reviewer/generator models share one provider family and are not independent providers.",
+      "This is build and simulation evidence, not product-quality evidence.",
+      "No provider, paid, private-data, final 10,000-case, professor-fidelity, visual, promotion, or deployment execution occurred."
+    ]
+  }
+}

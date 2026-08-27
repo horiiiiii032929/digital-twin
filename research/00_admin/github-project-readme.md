@@ -25,11 +25,11 @@ evidence, not competing end goals.
 - Proactive tutoring: #134 restores opt-in asynchronous initiation as a core
   product track. The deterministic private in-app vertical slice is build-only;
   external Discord delivery and real-student use remain disabled.
-- Repository: 484/484 execution-relevant files audited; 771 Python and 46 web
-  tests passed; the execution freeze remains active.
-- Factual quality: #87 completed Keep after paid pilot 003 passed every gate at
-  100 cases. Its one-time authorization is revoked; #110 owns separately
-  authorized 1,000/9,000-case scale.
+- Repository: PRs #130, #133, and #135 are merged. The correctness inventory
+  and execution freeze remain active and are rebuilt at each R1 checkpoint.
+- Factual quality: #110 remains engineering-scale history. #127 is the active
+  leakage-free product evaluation; its OpenAI-only 500-case development path is
+  build-ready and provider-unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -41,12 +41,13 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Complete #105's bounded independent review and select the first production
-   evidence-sufficiency gate.
-3. Preserve T0 and prepare #107's separately frozen T0/T1 confirmation.
-4. Freeze #134's deterministic trigger/suppression evaluation; keep Discord
+2. Run #127's separately authorized 500-case candidate and paired 100-case
+   control; authorize the sealed 10,000 cases only after a complete pass.
+3. Complete #105 from that leakage-free evidence and select the production
+   grounding gate.
+4. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
+5. Complete #132 and #134; keep Discord
    network delivery disabled until its privacy and operations gates pass.
-5. Queue #110's 1,000-case scale design without authorizing provider calls.
 6. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
 7. Calibrate #24 professor behavior separately from factual/citation hard
    gates.
@@ -59,8 +60,9 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
+| Replacement OpenAI key and explicit 500-case authority | #127 development execution |
 | Professor profile-authoring response | Fidelity calibration |
-| Explicit evidence-sufficiency review authorization | Production answerability-gate selection |
+| Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |
 | Consent/privacy/supervisor approval | Invite-only human pilot |
 
