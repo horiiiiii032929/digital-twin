@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "run_id": "proactive-outreach-a1-shadow-confirmation-002",
+  "component": "proactive-trigger",
+  "dataset_id": "proactive-outreach-a1-shadow-confirmation-synthetic-60",
+  "corpus_id": "synthetic-four-family-release-clusters-v1",
+  "code_revision": "c41b68062235c348a4ada13d7c1de43bd61a8d7a",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-autonomous-outreach-control",
+        "version": "a0-control-v1",
+        "configuration": {
+          "policy": "always-no-action",
+          "cases": 60,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "integration-check-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "action-accuracy", "value": 0.6, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "reason-accuracy", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "supported-source-lineage-validity", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "publication-success-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "shadow-side-effect-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "external-deliveries", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "private-data-reads", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "publication-integration-safety", "passed": true, "evidence": "The fixed control cannot create an autonomous trigger; publication remains independently durable."},
+        {"name": "supported-recovery-detection", "passed": false, "evidence": "The no-autonomous-outreach control misses all 24 newly supportable opportunities."},
+        {"name": "lineage-and-privacy-safety", "passed": true, "evidence": "The control performs no provider call, private-data read, trigger, message, outbox write, or external delivery."},
+        {"name": "bounded-confirmation-execution", "passed": true, "evidence": "The control is the fixed no-action policy specified by the frozen instrument."}
+      ],
+      "failures_by_category": {"missed-supported-recovery": 24}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "deterministic-evidence-recovery-a1",
+        "version": "a1-v1-publication-hook",
+        "configuration": {
+          "mode": "shadow",
+          "retriever": "bm25-new-lineage-only",
+          "minimum-query-coverage": 0.5,
+          "minimum-matching-terms": 2,
+          "cases": 60,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "integration-check-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "action-accuracy", "value": 0.9833333333333333, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "reason-accuracy", "value": 0.9833333333333333, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "supported-source-lineage-validity", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "publication-success-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "shadow-side-effect-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "provider-calls", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "external-deliveries", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "private-data-reads", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "publication-integration-safety", "passed": true, "evidence": "All 12 integration checks and all 60 publication checks passed; hook failures remained redacted and non-blocking."},
+        {"name": "supported-recovery-detection", "passed": false, "evidence": "The candidate detected 23/24 supported opportunities and conservatively missed one paraphrase because raw-token query coverage was 4/9 rather than the required 50%."},
+        {"name": "lineage-and-privacy-safety", "passed": true, "evidence": "Every observed proposal used current-release lineage; side effects, provider calls, private reads, and deliveries were zero."},
+        {"name": "bounded-confirmation-execution", "passed": true, "evidence": "The clean 60-case network-free run completed at the frozen instrument hash with exclusive output and no automatic promotion."}
+      ],
+      "failures_by_category": {"lexical-inflection-false-negative": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Preserve the safe publication integration and shadow boundaries, but do not select A1 because the raw-token lexical gate missed a semantically supported paraphrase. Keep A0 as the release control and require a method-level support successor on fresh cases.",
+    "limitations": [
+      "The 60 cases are synthetic and stratified rather than an independent sample of real student opportunities.",
+      "The run evaluates trigger detection and publication integration, not intervention usefulness, interruption cost, learning outcomes, professor fidelity, production scheduling, or external-channel reliability.",
+      "The fixed no-action control metrics are derived from its frozen policy rather than a separate product execution path.",
+      "Active A1 delivery, provider-composed wording, private data, real students, and Discord transport remain disabled and unevaluated."
+    ]
+  }
+}

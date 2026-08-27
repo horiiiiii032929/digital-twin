@@ -265,15 +265,21 @@ The named P0/P1 execution is separately recorded in
 It passed all frozen synthetic development gates and remains **Go Deeper**; the
 one-time authorization is revoked and the result does not select A1 for release.
 
-The prospective confirmation command is:
+The confirmation preflight command is:
 
 ```bash
 npm run preflight:proactive-outreach-a1-confirmation
 ```
 
-It covers 12 synthetic topic clusters and 60 cases. The full run remains
-blocked because the instrument is reviewed but not frozen or authorized. Only
-one non-recorded network-free canary is opened by the self-test.
+The separately authorized network-free run covered 12 synthetic topic clusters
+and 60 cases. It completed as **Refine** with 59/60 correct actions and reasons,
+23/24 supported detections, 36/36 correct no-actions, 12/12 integration checks,
+valid current-release lineage, and zero side effects. One hash-collision
+paraphrase retrieved the right evidence but scored only 4/9 raw-token query
+coverage, below the frozen 50% gate. The system safely took no action. The
+authorization is revoked; the generated per-case artifact remains ignored and
+the durable result is recorded in
+[`proactive-outreach-a1-shadow-confirmation-002`](../research/05_evaluation/proactive-outreach-a1-shadow-confirmation-002-results.md).
 
 Not yet implemented or authorized:
 
@@ -286,9 +292,9 @@ Not yet implemented or authorized:
 - real-student, interruption-cost, or learning-outcome claims; and
 - release-profile selection.
 
-The next evidence checkpoint is the separately frozen 60-case synthetic
-integration confirmation. A later representative shadow study must use
-approved real or independently sourced prior no-evidence opportunities and
-changed releases, audit every proposal and a seeded no-action sample, and send
-no real message. Any real student or external-channel pilot remains a later,
-approval-gated stage.
+The next method checkpoint must not lower the lexical threshold or rerun the
+same 60 cases. It should compare deterministic normalized lexical support with
+a bounded semantic-support candidate on fresh, independently sourced prior
+no-evidence opportunities and changed releases, audit every proposal and a
+seeded no-action sample, and send no real message. Any real student or
+external-channel pilot remains a later, approval-gated stage.
