@@ -491,6 +491,7 @@ def main() -> int:
     mode.add_argument("--preflight", action="store_true")
     arguments = parser.parse_args()
     if arguments.write_development:
+        require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "dataset_generation")
         result = write_development_packages()
     elif arguments.simulate_direct_providers:
         result = validate_direct_provider_contracts()

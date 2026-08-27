@@ -71,12 +71,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual live T0 adapter review verifies course-only full-corpus loading, candidate/control isolation, canonical source-range mapping, selected hybrid retrieval, structured evidence gating, local claim validation, exact attempt-003 DeepSeek generation binding, and no gold import.",
+      "evidence": "Manual live T0 adapter review verifies course-only full-corpus loading, candidate/control isolation, canonical source-range mapping, selected hybrid retrieval, structured evidence gating, local claim validation, explicit historical DeepSeek or prospective direct OpenAI generator selection from the system manifest, and no gold import.",
       "findings": [],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "750e3c6a0f5e86a159a61e1cf7fbbcde96740e2cdeef262fb16a432f6756c16c"
+      "sha256": "689477fb23447d8b0825fa2f5281a7df2166cd63f1a5f15bfe6040cf27fdf422"
     },
     {
       "audit_status": "audited",
@@ -93,12 +93,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual provider transport and accounting review verifies credentials are runtime-only, OpenRouter metadata is enabled for exact provider identity, requested default service tier and fallback are binding-controlled, model/revision/tier drift fails closed, every call is durably accounted, hard call/cost stops apply before and after calls, and deterministic harness failures can close ledgers explicitly as invalid execution.",
+      "evidence": "Manual provider transport and accounting review verifies historical OpenRouter behavior plus direct first-party OpenAI/Mistral endpoints, runtime-only credentials, strict local schema validation, exact model identity, transport-only bounded retry, conservative retry cost reservation, durable physical-attempt accounting, replay binding, and fail-closed call/cost handling.",
       "findings": [],
       "path": "src/digital_twin/evaluation/provider_json.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "77d29961571c8253b930f32e6ce40402be096832cb0435d0516d638d4f66ae60"
+      "sha256": "b1187f81d4d2480323bfda3623172652b07c0bd8ecbb2e14c8a1c2be0e0417db"
     },
     {
       "audit_status": "audited",
@@ -170,12 +170,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual deterministic-truth construction review verifies exact source spans, authoritative action/claim/lineage invariants, question-only model authorship, independent verifier agreement, answer-leak prevention, uniqueness, and separate public-case/hidden-gold assembly.",
+      "evidence": "Manual deterministic-truth construction review verifies historical v1 reproducibility and prospective v2 source-derived cues, exact source spans, authoritative action/claim/lineage invariants, answer-leak prevention, global uniqueness support, and separate public-case/hidden-gold assembly.",
       "findings": [],
       "path": "src/digital_twin/evaluation/factual_qa_dataset.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "0eea5917fab3e5ca5cc83e6259c8521fbac7f839b25a2374b78852216ef9ce5c"
+      "sha256": "31922a1997e9548ec5410676bffa0eea0750d4ab9a29a12a6bc45fac19a4afe4"
     },
     {
       "audit_status": "audited",
@@ -1215,23 +1215,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual command-surface review verifies explicit open-10,000 validation, simulation, construction, development candidate/control, separate scoring, paired comparison, and closed final preflight commands with no implicit promotion.",
+      "evidence": "Manual command-surface review verifies explicit open-10,000 validation and simulation include the deterministic v2 package and direct-provider contracts, while write and preflight remain distinct and candidate/control/final execution cannot be promoted implicitly.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "8476029b80817cc20741aa31ecc4de3371d21d85523a462b9cb655024387ac92"
+      "sha256": "cfcda588c38c621f6155824a099c86acfb2780aca150db17948b50113457385f"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Current package metadata review, secure optional retrieval upgrades, locked resolution, zero-vulnerability audit, and complete Python suite.",
+      "evidence": "Package metadata review verifies jsonschema is an explicit bounded runtime dependency for direct-provider post-validation, the Python range remains pinned, and uv resolves the locked dependency graph.",
       "findings": [],
       "path": "pyproject.toml",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "2d6e8003add2bf981663fdcb254d2a55d858fe6327ac601366bea45110c6590e"
+      "sha256": "21ae48417290ed17634b39fc910c60b1ce1ff04a6c1e50ffcc0a30fb836e3e34"
     },
     {
       "audit_status": "audited",
@@ -4900,12 +4900,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Manual AFQC-043 bounded-authorization review verifies attempt-003 authority is fully revoked, no successor operation is allowlisted, and repository-wide plus final-stage freezes remain active.",
+      "evidence": "Manual AFQC-044 bounded-authorization review verifies only deterministic provider-free development construction is allowlisted, the new builder is protected, and all provider, paid, method-evaluation, held-out, and final-stage operations remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "3a2320199accbf6438ab5d351d1a105f955a2dc2dd2a0b3db4debe3bf7922385"
+      "sha256": "af63686951f524bc4b3a8a37d91faaac74f98a6a603177e8f0e8f0c6c8db067a"
     },
     {
       "audit_status": "audited",
@@ -5219,12 +5219,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "fair-factual-qa-evaluation",
-      "evidence": "Focused bounded-freeze tests verify no open benchmark or other evaluation has active execution authority and all construction, external-model, development-method, and held-out operations fail closed.",
+      "evidence": "Focused bounded-freeze tests verify the exact AFQC-044 instrument may perform dataset generation only, cannot perform external-model evaluation, and every unlisted construction, method, held-out, or historical authorization fails closed.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "ba66795fdff69cfb6a26b43c5741456a0c37c1cb5496b17b0a91232baa791f10"
+      "sha256": "9e7c34fc3ab83cc188af84e6b189f8fc8c1193d65d202741a4220870b2df7656"
     },
     {
       "audit_status": "audited",
@@ -6231,12 +6231,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "uv locked resolution passed; complete dependency audit reported zero known vulnerabilities and zero exceptions.",
+      "evidence": "uv locked resolution includes the explicit jsonschema runtime dependency without changing unrelated package versions; lock verification passes.",
       "findings": [],
       "path": "uv.lock",
-      "reviewed_at": "2026-08-19",
+      "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "d009179de5915913362ec8cd055a39064b2d770b0095029c1fb1c7f821f10de1"
+      "sha256": "a730c31642dae7502a38f4dc5e1f97cce1d2a9143763d71d6449a5800536c0f3"
     },
     {
       "audit_status": "audited",
@@ -6336,6 +6336,50 @@
       "reviewed_at": "2026-08-26",
       "reviewer": "codex-primary-review",
       "sha256": "1d5438d347d19d4d338c99f9e500c0f18bfc382291d7a1ea695741f2d27eeba3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Manual AFQC-044 instrument review verifies exact 100-cluster/500-case development scope, 400 answerable plus 100 boundary composition, deterministic source truth, separate hidden gold, zero provider/final/private execution, and an explicit no-automatic-promotion boundary.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_deterministic_development_001.json",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "927ff92c2668832c8039171574746e13096eb6552c46071322cb97e543285e6e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Manual direct-provider binding review verifies first-party OpenAI and Mistral endpoints, exact dated or release model identities, official prices and limits checked on 2026-08-27, strict structured-output intent, runtime-only credentials, transport-only bounded retry, public-source boundary, and all provider/paid/development/final authority false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_direct_provider_binding_001.json",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "b96d2349c3716f91e6ddf731376e9cb89f5702ba9532aa860ae1a576831beb1d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Manual builder review verifies it loads only the frozen 100 development clusters, assembles deterministic v2 public and hidden-gold packages, rejects answer leakage and normalized duplicates, creates an exact 20-cluster control, uses exclusive writes, performs no provider calls, closes final construction, and emits a fail-closed paid preflight.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_open_development_v2.py",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "d24a5cacbb247b9ef0e1f7a67f809684d2fffd42caae2904456b3e2696dff4a4"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "flow-independent-factual-qa",
+      "evidence": "Focused tests verify exact package size and split, deterministic rebuild hashes, public/gold separation, source-lineage policy, 20-cluster control identity, direct endpoint and manifest selection, strict OpenAI/Mistral schema parsing, exact identity, transport-only retry, durable physical-attempt accounting, dirty-repository rejection, and blocked paid execution.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_development_v2.py",
+      "reviewed_at": "2026-08-27",
+      "reviewer": "codex-primary-review",
+      "sha256": "e50e84880dd14dbee40db914ce8122c52a605b9d5dd7e6be054d4755f7cc31d0"
     }
   ],
   "schema_version": 1

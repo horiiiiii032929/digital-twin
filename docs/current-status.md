@@ -31,11 +31,14 @@ source windows and 10,500 prospective cases with the requested code, equation,
 table, answerable, and boundary strata. AFQC-035 freezes this correction because
 it preserves the academically important source-diversity cap instead of
 inflating the row count through repeated use of a few sections. The deterministic
-source/claim layer is now authoritative before model calls; DeepSeek and Gemini
-can author wording and independently verify it but cannot define or mutate
-gold. Dataset construction and the 500-case paid development run have researcher
-authorization but remain unexecuted until the bounded clean checkpoint is
-published. The sealed 10,000-case product run remains unauthorized.
+source/claim layer is authoritative before model calls. AFQC-044 has now
+produced the provider-free development package: 500 public cases and separate
+hidden gold over 100 source clusters, including 400 answerable and 100 boundary
+cases, plus a fixed 100-case control subset. Every construction, separation,
+lineage, uniqueness, and leakage gate passed with zero provider calls. This is
+build evidence, not a product-quality result. Future models may paraphrase
+wording and provide advisory review but cannot define or mutate gold. The
+500-case T0 product run and sealed 10,000-case final run remain unauthorized.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -59,12 +62,12 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch extends it to all 576 executable or execution-affecting
-files, which are hash-bound and audited,
-with zero pending files and zero open findings. The canonical verification gate
+the current branch now extends it to 580 executable or execution-affecting
+files, all audited with zero pending files and zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions. It covers 79 protected entrypoints,
-with no bounded authorization currently active. The first open-benchmark
+active for all general evaluation actions across 80 protected entrypoints. It protects the new deterministic
+builder and grants only provider-free AFQC-044 dataset construction; no
+provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
 canary returned the requested model but a different runtime fingerprint, so the
 executor stopped before Gemini or any bulk call. Zero development clusters were
@@ -88,6 +91,16 @@ canonical fallback and three DeepSeek verifier responses violated the schema.
 No dataset package or product run was produced. AFQC-043 revokes authority and
 requires a method-level construction decision rather than attempt 004. The
 final 10,000-case execution remains unauthorized.
+AFQC-044 resolves that method decision prospectively: deterministic v2
+construction produced all 500 development cases, hidden gold, and the paired
+100-case control without a provider call. The first validation caught 15
+question cues that repeated their complete canonical answer; the fail-closed
+cue logic was corrected before any output was written. The final package has
+zero such leaks and zero normalized duplicates. Direct first-party OpenAI
+`gpt-5.4-mini-2026-03-17` and Mistral `mistral-small-2603` contracts are
+network-free tested with strict schema, exact identity, bounded transport-only
+retry, and durable accounting. Credentials, fresh retention/pricing checks,
+and separate paid authority are still required before product execution.
 Manual review found material source-design
 defects in the unexecuted `factual-qa-v3-scale-rehearsal-001`, so its bounded
 authorization was revoked. The corrected
@@ -687,7 +700,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Historical experimental selection plus later Refine evidence | Versioned DeepSeek and deterministic boundaries and unfavorable results preserved | Stable currently available candidate, independently calibrated semantic review, and release binding |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; flow-independent academic product evaluation build ready | The deterministic synthetic workflow processed 10,000 correlated template rows with complete lineage and accounting. The successor now has stable public-case, hidden-gold, adapter, SUT-manifest, atomic response-ledger, source-range scoring, and source-family bootstrap contracts | Approve the feasible 2,100-cluster course allocation, then separately authorize source construction and the 500-case development execution. The sealed 10,000 cases remain a second stop point |
+| Large factual QA | Engineering pipeline Keep; deterministic academic development package Keep | The earlier synthetic workflow processed 10,000 correlated template rows. The leakage-free successor now has 500 separated public/hidden-gold development rows, a 100-case paired control, stable adapters, source-range scoring, zero duplicates/leaks, and provider-free construction evidence | Select and separately authorize the 500-case candidate plus 100-case control product run. The sealed 10,000 cases remain a later stop point |
 
 ## Release readiness and critical path
 
@@ -701,7 +714,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Approve the feasible source allocation, freeze the author/verifier bindings, and separately authorize dataset construction plus the 500-case development run. Reviewer calibration is not the blocker |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Preserve the passed deterministic package, finalize direct-provider credentials/metadata, and separately authorize the 500-case candidate plus 100-case control product run. Reviewer calibration is not the blocker |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

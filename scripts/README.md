@@ -726,6 +726,7 @@ Current utilities:
   uniqueness, byte stability, and zero private/provider access. `--write`
   remains blocked by the repository freeze.
 - `build_academic_factual_qa_open_10000.py`,
+  `build_academic_factual_qa_open_development_v2.py`,
   `construct_academic_factual_qa_open_10000.py`,
   `run_academic_factual_qa_open_10000.py`, and
   `score_academic_factual_qa_open_10000.py`: define the flow-independent
@@ -739,7 +740,14 @@ Current utilities:
   DeepSeek canary exposed a mutable runtime-fingerprint binding. Build-only
   binding 002 retains exact model/route gates, requires and records the runtime
   fingerprint diagnostically, and adds binding-level authorization checks plus
-  sanitized failure details. The response runner accepts only `EvaluationCaseV1`,
+  sanitized failure details. Attempts 001–003 remain immutable invalid
+  evidence. AFQC-044 then resolves the method-level construction decision in
+  `build_academic_factual_qa_open_development_v2.py`: it writes exactly 500
+  provider-free development cases, separate hidden gold, and a 100-case paired
+  control from deterministic source truth. Its validation checks source-range
+  lineage, boundary-empty lineage, answer leakage, normalized duplicates, and
+  byte stability. It also simulates strict direct OpenAI and Mistral transport
+  contracts with zero network calls. The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden
   gold. The scorer opens `EvaluationGoldV1` only after durable completion and
@@ -747,11 +755,14 @@ Current utilities:
   source-family bootstrap metrics. Run `npm run
   verify:academic-factual-qa-open-10000`, `npm run
   simulate:academic-factual-qa-open-10000`, or the development/final preflight
-  commands. The development scoring and comparison commands open hidden gold
+  commands. Use `npm run
+  preflight:academic-factual-qa-open-10000-development-v2` to confirm direct
+  provider execution remains blocked. The development scoring and comparison commands open hidden gold
   only after both response ledgers are complete and evaluate the frozen paired
-  100-case control using a source-family bootstrap. The researcher has authorized construction and the 500-case
-  development run, but execution remains blocked until the separate clean
-  authorization commit; final 10,000-case execution remains closed.
+  100-case control using a source-family bootstrap. The deterministic package
+  is complete, but the 500-case product run still requires fresh provider
+  metadata, credentials, and separate paid authority; final 10,000-case
+  execution remains closed.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

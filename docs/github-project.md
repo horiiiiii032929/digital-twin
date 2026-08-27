@@ -71,8 +71,13 @@ professor-communication track.
    Google AI Studio failed one verifier call after 15 completed responses, while
    repeated DeepSeek schema drift produced four author fallbacks and three
    verifier rejections. AFQC-043 revokes authority and stops another operational
-   retry pending a method-level construction decision. The 10,000-case final run
-   remains unauthorized. Issue #131 separately
+   retry. AFQC-044 resolves the method decision with a provider-free 500-case
+   package and 100-case paired control. The package passes deterministic
+   separation, lineage, uniqueness, leakage, and byte-stability gates; it is
+   not a product result. Direct first-party OpenAI and Mistral bindings are
+   network-free tested and remain unauthorized. The next #127 checkpoint is the
+   separately authorized 500-case candidate plus 100-case control product run.
+   The 10,000-case final run remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

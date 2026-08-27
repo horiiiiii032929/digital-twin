@@ -87,6 +87,14 @@ and no product execution began. These incomplete diagnostics are not an
 academic quality estimate; they trigger a method-level construction decision
 instead of another provider-transport retry.
 
+AFQC-044 resolves that method decision without creating attempt 004. The 500
+development public cases and separate hidden gold are now constructed directly
+from the pinned source ranges. Model providers cannot author or verify gold;
+they may later paraphrase deterministic questions and provide advisory review.
+The package is a passed build checkpoint only. It does not open the T0 product
+run or the final 10,000 cases. Direct first-party OpenAI and Mistral bindings are
+prepared but remain provider- and paid-execution unauthorized.
+
 ## Product comparison
 
 The candidate is selected hybrid BM25 plus Qwen3 retrieval, structured evidence
