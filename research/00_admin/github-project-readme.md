@@ -44,10 +44,11 @@ evidence, not competing end goals.
   checkpoint 005 with no new wording stage. AFQC-061 keeps mini generation,
   uses nano for routine review, caps full-model truth escalation at 12 cases,
   and lowers the emergency ceiling to USD 8. Its five network-free outcomes pass;
-  AFQC-062 authorizes the 500+100 product run once. Attempt 001 stopped before
-  provider I/O on a missing locked retrieval extra; AFQC-063 preserves it and
-  permits one harness-only correction. The sealed 10,000 cases remain
-  unauthorized.
+  AFQC-062 authorized the 500+100 product run once. Attempt 001 stopped before
+  provider I/O on a missing locked retrieval extra; AFQC-063 corrected that
+  invocation. The sole corrective attempt then failed operationally before case
+  1 after 2 h 15 min of on-demand indexing. AFQC-064 revokes authority and
+  requires a prebuilt-index successor. The sealed 10,000 cases remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,

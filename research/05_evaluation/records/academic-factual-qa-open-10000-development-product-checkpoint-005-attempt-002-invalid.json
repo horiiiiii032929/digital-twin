@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-005-attempt-002-invalid",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "2f72e2a5ce9082eca8c572e3fa6e4b848581ef56",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "completed-checkpoint-runtime-contract",
+        "version": "network-free-control",
+        "configuration": {
+          "expected_response_count": 600,
+          "maximum_provider_calls": 666,
+          "maximum_cost_usd": 8.0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 600.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 666.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": true
+        },
+        {
+          "name": "checkpoint-completed",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "checkpoint-completion",
+          "passed": true,
+          "evidence": "The control defines the required completed 500 candidate plus 100 control response package."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "The network-free control makes no provider call."
+        },
+        {
+          "name": "hidden-gold-separation",
+          "passed": true,
+          "evidence": "The control keeps hidden gold closed until responses are durable."
+        },
+        {
+          "name": "no-invalid-quality-interpretation",
+          "passed": true,
+          "evidence": "The control does not infer quality from incomplete execution."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-t0-product-checkpoint-005-attempt-002",
+        "version": "attempt-002-invalid",
+        "configuration": {
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "retriever": "hybrid-bm25-qwen3-on-demand-index",
+          "embedding_device": "mps",
+          "embedding_dtype": "float16",
+          "embedding_batch_size": 16,
+          "embedding_max_length": 2048,
+          "source_region_count": 2100,
+          "elapsed_before_termination_seconds_min": 8100,
+          "sampled_physical_footprint_gib": 14.7,
+          "reported_cost_usd": 0.0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 666.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": true
+        },
+        {
+          "name": "checkpoint-completed",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "checkpoint-completion",
+          "passed": false,
+          "evidence": "The first course index did not finish after more than 2 hours 15 minutes; zero product responses were persisted."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "Provider and response ledgers contain zero calls, tokens, responses, and cost."
+        },
+        {
+          "name": "hidden-gold-separation",
+          "passed": true,
+          "evidence": "Hidden gold never opened because no response stage completed."
+        },
+        {
+          "name": "no-invalid-quality-interpretation",
+          "passed": true,
+          "evidence": "No factual, grounding, citation, or boundary-quality conclusion is reported from the incomplete run."
+        }
+      ],
+      "failures_by_category": {
+        "on-demand-dense-index-memory-saturation": 1,
+        "incomplete-product-execution": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The sole corrective attempt is operationally invalid before provider I/O. Stop checkpoint 005 and replace on-demand dense index construction with an independently qualified immutable prebuilt-index lifecycle before any new actual-product evaluation.",
+    "limitations": [
+      "No factual-quality metric can be interpreted from this attempt.",
+      "The run was manually terminated after more than 2 hours 15 minutes without a first response.",
+      "Physical footprint was sampled once rather than continuously profiled.",
+      "No provider call or paid usage occurred, and the final 10,000-case split remained closed."
+    ]
+  }
+}

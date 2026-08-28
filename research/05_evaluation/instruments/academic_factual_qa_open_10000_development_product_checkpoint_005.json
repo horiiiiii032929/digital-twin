@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-product-checkpoint-005",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-checkpoint-004",
   "decision_question": "Does the actual leakage-free T0 candidate satisfy the preregistered deterministic grounding and safety gates on the frozen mixed-wording 500-case development package while retaining supported answers relative to the fixed 100-case any-hit control?",
   "dataset": {
@@ -83,9 +83,9 @@
     "candidate_maximum_cost_usd": 5.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 1.0,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "development_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_execution_authorized": false,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -128,11 +128,11 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "product_development_execution_authorized": true,
-    "semantic_review_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "60e7f700a76076b8614cc705caa84245b31d0ef28684020fb111199c4266fa2f"
+  "content_sha256": "c156008fc4ab858bfd8a70c4d656ddd98b3973fe0df323e37ed9c3d22cf15047"
 }

@@ -172,12 +172,14 @@ nano audits routine failures and the seeded sample, while exact full GPT-5.4 is
 reserved for at most 12 possible source-truth defects. Five finite simulations
 and the complete gate pass. The maximum is 666 calls, zero retries, and USD 8.
 AFQC-062 records the researcher's one-time authorization for checkpoint 005.
-Execution attempt 001 stopped before provider I/O because the package command
-omitted the locked Qwen3 retrieval extra: zero calls, tokens, cost, or product
-responses occurred, and hidden gold stayed sealed. AFQC-063 preserves that
-invalid evidence and corrects only the runtime invocation for the single
-permitted fresh attempt. Final 10,000-case, promotion, and deployment authority
-remains false.
+Attempt 001 stopped before provider I/O because the package command omitted the
+locked Qwen3 retrieval extra. AFQC-063 corrected only that invocation. The sole
+corrective attempt then loaded Qwen3 but did not finish the first course index
+after more than 2 hours 15 minutes; a process sample showed a 14.7 GB footprint
+on the 16 GB host. Both attempts recorded zero provider calls, responses,
+tokens, or cost, and hidden gold stayed sealed. AFQC-064 revokes authority and
+stops checkpoint 005. No product-quality conclusion or final 10,000-case claim
+is available.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -901,7 +903,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; checkpoint 005 corrective attempt pending | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the wording Refine; AFQC-059/060 freeze the 452-model/48-canonical 500+100 comparison; AFQC-061 sets the USD 8 cascade; attempt 001 was invalid before provider I/O and AFQC-063 corrects only the missing locked retrieval extra | Execute the single fresh corrective attempt. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run; another invalid execution stops |
+| Large factual QA | Engineering pipeline Keep; actual-product checkpoint 005 invalid and stopped | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the wording Refine; AFQC-059/060 freeze the 452-model/48-canonical package; AFQC-061 sets the USD 8 cascade. Attempts 001/002 both ended before provider I/O, with the corrective run exposing an on-demand Qwen3 index footprint of 14.7 GB and no first response after 2 h 15 min | Qualify immutable hash-bound prebuilt index loading before a new product checkpoint. Do not open the sealed 10,000 cases or run a third checkpoint-005 attempt |
 
 ## Release readiness and critical path
 

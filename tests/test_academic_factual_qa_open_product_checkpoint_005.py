@@ -75,8 +75,8 @@ def test_mixed_wording_rematerialization_is_revoked() -> None:
         materializer.write()
 
 
-def test_product_checkpoint_is_authorized_once_and_has_no_wording_stage() -> None:
-    result = checkpoint.validate(require_unauthorized=False)
+def test_product_checkpoint_is_revoked_and_has_no_wording_stage() -> None:
+    result = checkpoint.validate()
     assert result["status"] == "passed-build-only"
     assert result["maximum_calls"] == 666
     assert result["maximum_cost_usd"] == 8.0
@@ -91,10 +91,10 @@ def test_product_checkpoint_is_authorized_once_and_has_no_wording_stage() -> Non
         "bounded-critical-truth-escalation",
     ]
     assert instrument["authorization"] == {
-        "provider_execution_authorized": True,
-        "paid_execution_authorized": True,
-        "product_development_execution_authorized": True,
-        "semantic_review_execution_authorized": True,
+        "provider_execution_authorized": False,
+        "paid_execution_authorized": False,
+        "product_development_execution_authorized": False,
+        "semantic_review_execution_authorized": False,
         "final_execution_authorized": False,
     }
     assert instrument["execution"]["final_execution_authorized"] is False
@@ -219,16 +219,19 @@ def test_product_checkpoint_simulations_are_finite(
     assert result["deterministic_result_changed_by_advisory"] is False
 
 
-def test_product_preflight_is_ready_with_bounded_authority(
+def test_product_preflight_is_blocked_after_authority_revocation(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
     result = checkpoint.preflight()
-    assert result["status"] == "ready"
+    assert result["status"] == "blocked-not-authorized"
     assert result["wording_provider_calls"] == 0
     assert result["final_execution_authorized"] is False
-    assert result["blockers"] == []
+    assert "instrument-paid-execution-authorized-false" in result["blockers"]
+    assert "freeze-external_model_evaluation-authorization-missing" in result[
+        "blockers"
+    ]
     assert not any("wording" in blocker for blocker in result["blockers"])
 
 
