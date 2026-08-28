@@ -109,6 +109,15 @@ Only its 40-control GPT-5.4 semantic review is allowlisted: at most ten calls,
 zero retries, and the USD 3 emergency stop. Product development, the paired
 control, private data, and the sealed 10,000-case run remain unauthorized.
 
+AFQC-055 records calibration 004 as invalid and revokes AFQC-054. Three exact
+GPT-5.4 calls covered 12 controls before a `clarify` vote omitted the mandatory
+boundary reason. The first eight votes passed deterministic semantics, but the
+third batch was rejected before hidden labels opened. The ledger records 7,036
+input and 1,443 output tokens, 15.511 seconds aggregate latency, and USD
+0.039235 cost. No later calibration, wording, product, control, private, or
+final call occurred. Reviewer quality remains unmeasured; the next action is a
+method-level decision rather than another silent contract revision.
+
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
 for #127 and none of those attempts is being retried. Issue
@@ -831,7 +840,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation and GPT-5.4 advisory review pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; corrected development reference layer Keep; calibration 004 build ready | The earlier synthetic workflow processed 10,000 correlated template rows. Both checkpoint-003 attempts remain invalid. AFQC-053 removes provider-owned overall validity, preserves atomic judgments and all historical evidence, and passes three network-free terminal simulations | Refresh metadata and authorize only the 40-control calibration 004. A pass can prepare a separately frozen 500+100 successor; the sealed 10,000 cases remain closed |
+| Large factual QA | Engineering pipeline Keep; corrected development reference layer Keep; calibration 004 invalid and revoked | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-055 preserves the third invalid reviewer execution: 3 calls/12 controls, with a missing boundary reason in batch three; hidden labels and every product stage stayed closed | Make one explicit reviewer-method decision without revising the same contract again. The 500+100 and sealed 10,000 cases remain closed |
 
 ## Release readiness and critical path
 
@@ -845,7 +854,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / calibration 004 ready | Authorize the isolated ten-call reviewer calibration after a fresh preflight. Only a pass can prepare a separately frozen 500+100 product checkpoint; keep the sealed 10,000 cases closed |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / reviewer-method decision | Preserve calibration 004 as invalid and choose a finite evaluation method that does not depend on repeated strict-output calibration. Keep the 500+100 and sealed 10,000 cases closed until that decision |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

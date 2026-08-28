@@ -164,7 +164,7 @@ not require model spending or private data:
 
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
-| Authorize build-ready reviewer calibration 004 after fresh metadata and clean preflight | Researcher | One 40-control reviewer result; no automatic 500+100 progression |
+| Select a finite reviewer method after invalid calibration 004 | Researcher | A separately frozen 500+100 checkpoint without another strict-output calibration loop |
 | Authorize the sealed 10,000-case run | Researcher only after complete development pass | Professor-reportable actual-product final result |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
 | Select or reject the provisional atomic-claim method using leakage-free end-to-end evidence | Researcher/evaluation checkpoint | Product binding and grounded publication/student journeys |

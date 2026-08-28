@@ -88,9 +88,11 @@ professor-communication track.
    revokes authority, and requires one explicit reviewer-method decision.
    AFQC-053 completes that build-only decision: calibration 004 removes the
    provider-owned overall-validity field, derives validity deterministically,
-   passes three terminal simulations, and has no product or paid authority.
-   The next gate is authorization for calibration 004 only. The 10,000-case
-   final run remains unauthorized. Issue #131 separately
+   and passes three terminal simulations. AFQC-055 preserves its paid execution
+   as invalid after three calls because a clarify vote omitted a mandatory
+   boundary reason; authority is revoked and product quality remains unmeasured.
+   The next gate is one reviewer-method decision. The 10,000-case final run
+   remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

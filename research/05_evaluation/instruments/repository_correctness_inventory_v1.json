@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "059bb88e6754f30b37853f6921177bd10f0acbb3a4282a0cd25c493cb483885d",
+  "record_sha256": "87491fc4b231b79434536f9fec05261651d02f3666fe38700e56729cf5c6f9b7",
   "records": [
     {
       "audit": {
@@ -1208,7 +1208,7 @@
     {
       "audit": {
         "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused OpenAI-only R1 authorization review; the calibration-004 verification command accepts the reviewed live authorization state while exact-model, no-fallback, store-false, gold-separation, freeze, and simulation checks remain active.",
+        "evidence": "Focused OpenAI-only R1 post-run review; the calibration-004 verification command again requires the fully unauthorized state while exact-model, no-fallback, store-false, gold-separation, freeze, and simulation checks remain active.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "8a0141c397d5e3cb5be28313d7fa34940b0a0b1e704ad9d2636a28f954c3be0b"
+      "sha256": "cb2c2ee4fdc9588d3804d1e02bc8e4d9b4cff90695839764d4c5fe7eda685e3e"
     },
     {
       "audit": {
@@ -1784,7 +1784,7 @@
     {
       "audit": {
         "domain": "openai-reviewer-calibration-004",
-        "evidence": "Manual authorization review verified exact direct GPT-5.4 snapshot use, public calibration data only, store false, no router/fallback/retry, bounded pricing metadata, and only the calibration and semantic-review authorization flags enabled.",
+        "evidence": "Manual result review verified the exact direct GPT-5.4 snapshot, public calibration data only, store false, no router/fallback/retry, preserved pricing metadata, and complete post-run authorization revocation.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1795,7 +1795,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_004.json",
       "risk": "high",
-      "sha256": "a186c40de7ec6da03db69ad11dbeef0b18167ea6802fe72bae5f50d5488045b8"
+      "sha256": "bb6af6c7b2270ab9b344753d2a2b06ae1895bb44ac220b501d258db9751d668c"
     },
     {
       "audit": {
@@ -1848,7 +1848,7 @@
     {
       "audit": {
         "domain": "openai-reviewer-calibration-004",
-        "evidence": "Manual authorization review verified immutable 40-control reuse, no imported provider votes, deterministic overall-validity ownership, five atomic defect dimensions, ten-call/USD 3 limits, no product progression, and only the calibration and semantic-review authorization flags enabled.",
+        "evidence": "Manual result review verified calibration 004 is immutable invalid evidence, all authorization is revoked, the ten-call/USD 3 historical limits remain visible, no product progression exists, and the final 10,000 stage remains closed.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1859,7 +1859,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reviewer_calibration_004.json",
       "risk": "high",
-      "sha256": "56b19d3b2fdfa0c8165de71bb6f8beea94808b36d4434733eb42c8d1a2d655a7"
+      "sha256": "f00886c5402a87665fd46c5ba81737acb9aa51c25da0caedbf19944ecbc109ff"
     },
     {
       "audit": {
@@ -1912,7 +1912,7 @@
     {
       "audit": {
         "domain": "r1-openai-evaluation-contracts",
-        "evidence": "Focused freeze review verified that calibration 004 alone may perform external-model and method-evaluation operations while the deterministic dataset builder keeps its historical dataset-generation authorization and all other operations remain blocked.",
+        "evidence": "Focused post-run freeze review verified calibration 004 has been removed from the bounded allowlist; only the historical deterministic dataset builder remains authorized and all external-model and method-evaluation operations are blocked.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8196,7 +8196,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "dfbce34280b2db28c246aa62f237117bef3c5b1dd9e414b49bc9d604973ef766"
+      "sha256": "aa95bde8921682ff857d27fa7e0bdab6b40ab5b7a4f45ba5c89532e8612cba8a"
     },
     {
       "audit": {
@@ -8729,7 +8729,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain the historical deterministic-builder authorization, authorize only calibration-004 external-model and method evaluation, and reject every other unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical deterministic-builder authorization, verify calibration-004 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8740,7 +8740,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "219a4d47fc4e0ebec471f950c6f51c4faa048de0be5354e8852b399d84a1b799"
+      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
     },
     {
       "audit": {
@@ -9113,7 +9113,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint-verification",
-        "evidence": "Focused tests cover hidden-label separation, immutable hashes, the ready calibration-004 authorization preflight, harness-owned overall validity, normalized defect-schema enforcement, fresh outputs, closed product/final authority, and pass/quality-failure/malformed simulations.",
+        "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked calibration-004 preflight behavior, harness-owned overall validity, normalized defect-schema enforcement, closed product/final authority, and pass/quality-failure/malformed simulations.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9124,7 +9124,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "medium",
-      "sha256": "f0efcb3c705780ab549079209e08b9dd2c76b70369c971157a92fb0f4589c7e9"
+      "sha256": "e9741cd11c6955be0ae7f99fce0c3478c5eadd8fe491b0d075a9cc6eb16b1653"
     },
     {
       "audit": {

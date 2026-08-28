@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reviewer-calibration-004",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "completed-invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-checkpoint-003",
   "decision_question": "Can exact GPT-5.4 reliably judge the atomic action, claim, citation, ambiguity, and boundary dimensions when overall semantic validity is derived deterministically rather than requested from the model?",
   "prediction": "Removing the redundant overall-validity field will eliminate the two observed self-contradictions while preserving sensitivity to all five planted defect classes.",
@@ -58,8 +58,8 @@
     }
   },
   "execution": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "development_execution_authorized": false,
     "final_execution_authorized": false,
     "maximum_calls": 10,
@@ -68,13 +68,13 @@
     "automatic_product_progression": false
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "calibration_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "calibration_execution_authorized": false,
     "wording_development_execution_authorized": false,
     "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": true,
+    "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "9b2b1fb72face6e0c458028e507d11db3232f44ce7a97f9eb3030ebc1a307e52"
+  "content_sha256": "3501fd73dc609d44dfadb7eca2e624d7317d26c5d666c346ebe8679f46c52ea8"
 }

@@ -35,15 +35,18 @@ AFQC-053 now freezes a standalone method successor: calibration 004 removes the
 provider-owned overall-validity field and derives it deterministically from the
 five atomic defect judgments. It reuses the same 40 controls and gates without
 importing either invalid attempt. Three network-free terminal simulations pass;
-all paid authority is false and no product progression is available.
+all paid authority was initially false and no product progression was available.
+AFQC-055 now preserves its paid result as invalid: three exact GPT-5.4 calls
+covered 12 controls before a clarify vote omitted the mandatory boundary reason.
+Authority is revoked, hidden labels remain closed, and no product evidence exists.
 
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Refresh exact GPT-5.4 metadata and explicitly authorize only the standalone
-   calibration 004 ten-call checkpoint.
-3. If calibration 004 passes, freeze and separately authorize a successor with
+2. Make one explicit reviewer-method decision that avoids another strict-output
+   calibration loop while retaining deterministic source truth.
+3. Once that decision is frozen, separately authorize a successor with
    500 candidate cases and the paired 100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
@@ -66,7 +69,7 @@ all paid authority is false and no product progression is available.
 
 Work stops for four inputs only:
 
-1. explicit authorization for the build-ready 40-control calibration 004;
+1. explicit selection of the reviewer method after invalid calibration 004;
 2. explicit authorization for the sealed 10,000-case paid run after development;
 3. professor approval of the explicit teaching profile;
 4. production domain/DNS access and deployment authorization.

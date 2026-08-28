@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reviewer-calibration-004-invalid",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "forty-public-source-planted-controls",
+  "code_revision": "26ac3c634371e3e721b1b785d4b6450c626a3833",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "network-free-deterministic-atomic-contract-004",
+        "version": "v4",
+        "configuration": {
+          "provider_calls": 0,
+          "control_count": 40
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "normalized-defect-schema",
+          "passed": true,
+          "evidence": "The deterministic control emits only the frozen normalized defect taxonomy."
+        },
+        {
+          "name": "atomic-semantic-invariants",
+          "passed": true,
+          "evidence": "The deterministic control emits complete, internally consistent atomic judgments for all forty controls."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "The deterministic control requires no provider identity."
+        },
+        {
+          "name": "hidden-label-and-later-stage-closure",
+          "passed": true,
+          "evidence": "The control does not open hidden labels or make provider or later-stage calls."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-gpt-5-4-reviewer-calibration-004",
+        "version": "v4-invalid",
+        "configuration": {
+          "provider_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 10,
+          "attempted_calls": 3,
+          "completed_provider_responses": 3,
+          "accepted_votes_before_failure": 8,
+          "controls_with_provider_responses": 12,
+          "zero_retries": true,
+          "input_tokens": 7036,
+          "output_tokens": 1443,
+          "reported_cost_usd": 0.039235,
+          "latency_ms": 15510.87
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 8.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 3.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.039235,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "normalized-defect-schema",
+          "passed": true,
+          "evidence": "All three provider responses used the frozen atomic schema and normalized defect taxonomy."
+        },
+        {
+          "name": "atomic-semantic-invariants",
+          "passed": false,
+          "evidence": "A clarify vote marked ambiguity and unanswerability but omitted the mandatory boundary reason."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "All three completed calls returned the exact gpt-5.4-2026-03-05 identity."
+        },
+        {
+          "name": "hidden-label-and-later-stage-closure",
+          "passed": true,
+          "evidence": "Expected labels remained unopened and no wording, product, control, private, or final call occurred."
+        }
+      ],
+      "failures_by_category": {
+        "missing-required-boundary-reason": 1,
+        "incomplete-calibration": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Calibration 004 is operationally invalid because a completed provider response violated the frozen atomic boundary invariant. Revoke authority and stop for an explicit reviewer-method decision rather than revising the same contract again.",
+    "limitations": [
+      "Only twelve of forty controls received provider responses and only eight votes passed deterministic semantics before the stop.",
+      "Reviewer quality cannot be estimated because expected labels remained sealed.",
+      "No wording, T0 product, paired-control, or final 10,000-case evidence was produced."
+    ]
+  }
+}

@@ -34,9 +34,11 @@ evidence, not competing end goals.
   cases. AFQC-050 authorized this path once, but both calibration attempts
   stopped after their first exact GPT-5.4 batch on evaluator-contract
   inconsistencies. AFQC-052 revokes authority; the 500+100 product run and
-  sealed 10,000 cases remain unopened. AFQC-053 adds build-ready calibration
-  004 with deterministic overall validity, unchanged atomic judgments, fresh
-  outputs, three passing simulations, and no paid or product authority.
+  sealed 10,000 cases remain unopened. AFQC-055 preserves calibration 004 as
+  invalid after three exact GPT-5.4 calls because one clarify vote omitted its
+  mandatory boundary reason. Authority is revoked, hidden labels stayed closed,
+  and the next step is a reviewer-method decision rather than another contract
+  refinement.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
