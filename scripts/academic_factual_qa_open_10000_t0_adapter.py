@@ -34,7 +34,9 @@ from src.digital_twin.grounding import (
     LocalNliCrossEncoderBackend,
     NliAtomicClaimVerifier,
     RetrievalHit,
+    RetrievalIndexStoreV1,
     StructuredLexicalCoverageEvidenceGate,
+    build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.models import GenerationUsage, TutorAnswer
 from src.digital_twin.llm import LlmMessage, LlmResponse
@@ -55,6 +57,10 @@ from src.digital_twin.tutor_policy import SourceLabel
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RETRIEVAL_INDEX_ROOT = (
+    ROOT
+    / "reports/generated/academic-factual-qa-open-10000-v1-retrieval-indexes-001"
+)
 PROFILE_PATH = (
     ROOT
     / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
@@ -314,6 +320,7 @@ def _setup_service(
     generator: _RecordingGenerator,
     gate: _RecordingGate,
     database_path: Path,
+    index_root: Path,
 ) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
     repository = SQLiteStudentRepository(database_path)
     profile = _load(PROFILE_PATH)
@@ -360,6 +367,23 @@ def _setup_service(
         row for row in profile["components"] if row["component"] == "retriever"
     )["implementation"]["configuration"]
     revision = str(retriever["embedding_revision"])
+    chunker = next(
+        row for row in profile["components"] if row["component"] == "chunker"
+    )["implementation"]
+    index_store = RetrievalIndexStoreV1(index_root)
+    for course_id, course_chunks in chunks_by_course.items():
+        release_id = f"{course_id}-academic-open-release"
+        index_binding = build_retrieval_index_binding(
+            course_id=course_id,
+            release_id=release_id,
+            profile_id=str(profile["profile_id"]),
+            profile_version=str(profile["profile_version"]),
+            chunker_id=str(chunker["implementation_id"]),
+            chunker_version=str(chunker["version"]),
+            chunks=course_chunks,
+            configuration=retriever,
+        )
+        index_store.verify_bound(index_binding)
     embedder = Qwen3TextEmbedder(
         ROOT
         / "data/external/huggingface/hub/models--Qwen--Qwen3-Embedding-0.6B/snapshots"
@@ -392,6 +416,9 @@ def _setup_service(
         evidence_gate=gate,
         claim_evidence_validator=validator,
         tutoring_mode="grounded-assistant",
+        retrieval_index_store=index_store,
+        retrieval_index_chunker_id=str(chunker["implementation_id"]),
+        retrieval_index_chunker_version=str(chunker["version"]),
     )
     conversations = {
         course_id: service.create_conversation(student_id, course_id).id
@@ -449,6 +476,7 @@ def build_live_t0_adapter(
         generator=recording_generator,
         gate=gate,
         database_path=state_path,
+        index_root=RETRIEVAL_INDEX_ROOT,
     )
 
     async def execute_turn(case: EvaluationCaseV1):

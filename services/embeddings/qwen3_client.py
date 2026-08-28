@@ -145,6 +145,10 @@ class Qwen3TextEmbedder:
                 values=batch,
                 estimated_input_tokens=estimated_tokens,
             )
+            del normalized, pooled, hidden, encoded
+            if self.device == "mps":
+                self._torch.mps.synchronize()
+                self._torch.mps.empty_cache()
         return vectors
 
     def usage_snapshot(self) -> ProviderUsage:

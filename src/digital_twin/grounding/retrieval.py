@@ -106,6 +106,93 @@ class BM25Retriever:
         )
         self._document_frequencies = self._build_document_frequencies()
 
+    @classmethod
+    def from_index(
+        cls,
+        chunks: Sequence[DocumentChunk],
+        *,
+        term_frequencies: Mapping[str, Mapping[str, int]],
+        document_lengths: Mapping[str, int],
+        document_frequencies: Mapping[str, int],
+        average_document_length: float,
+        k1: float = 1.2,
+        b: float = 0.75,
+        minimum_score: float = 0.0,
+    ) -> "BM25Retriever":
+        """Load a validated lexical index without tokenizing the corpus again."""
+
+        instance = cls([], k1=k1, b=b, minimum_score=minimum_score)
+        eligible = _eligible_chunks(chunks, None)
+        identifiers = [chunk.id for chunk in eligible]
+        if len(identifiers) != len(chunks) or len(identifiers) != len(set(identifiers)):
+            raise ValueError("indexed chunks must be unique and retrieval-eligible")
+        expected = set(identifiers)
+        if (
+            set(term_frequencies) != expected
+            or set(document_lengths) != expected
+        ):
+            raise ValueError("lexical index chunk identifiers do not match the corpus")
+
+        normalized_frequencies: dict[str, Counter[str]] = {}
+        normalized_lengths: dict[str, int] = {}
+        recomputed_document_frequencies: Counter[str] = Counter()
+        for identifier in identifiers:
+            frequencies = term_frequencies[identifier]
+            if any(
+                not isinstance(term, str)
+                or not term
+                or isinstance(count, bool)
+                or not isinstance(count, int)
+                or count < 1
+                for term, count in frequencies.items()
+            ):
+                raise ValueError("lexical index contains an invalid term frequency")
+            counter = Counter(frequencies)
+            length = document_lengths[identifier]
+            if (
+                isinstance(length, bool)
+                or not isinstance(length, int)
+                or length != sum(counter.values())
+            ):
+                raise ValueError("lexical index document length is inconsistent")
+            normalized_frequencies[identifier] = counter
+            normalized_lengths[identifier] = length
+            recomputed_document_frequencies.update(counter.keys())
+
+        if any(
+            not isinstance(term, str)
+            or not term
+            or isinstance(count, bool)
+            or not isinstance(count, int)
+            or count < 1
+            for term, count in document_frequencies.items()
+        ):
+            raise ValueError("lexical index contains an invalid document frequency")
+        if Counter(document_frequencies) != recomputed_document_frequencies:
+            raise ValueError("lexical index document frequencies are inconsistent")
+        recomputed_average = (
+            sum(normalized_lengths.values()) / len(normalized_lengths)
+            if normalized_lengths
+            else 0.0
+        )
+        if (
+            not math.isfinite(average_document_length)
+            or not math.isclose(
+                average_document_length,
+                recomputed_average,
+                rel_tol=0,
+                abs_tol=1e-12,
+            )
+        ):
+            raise ValueError("lexical index average document length is inconsistent")
+
+        instance.chunks = eligible
+        instance._term_frequencies = normalized_frequencies
+        instance._document_lengths = normalized_lengths
+        instance._average_document_length = recomputed_average
+        instance._document_frequencies = recomputed_document_frequencies
+        return instance
+
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         _validate_limit(limit)
         query_terms = sorted(set(lexical_tokens(query)))
@@ -193,6 +280,37 @@ class DenseRetriever:
                 strict=True,
             )
         )
+
+    @classmethod
+    def from_index(
+        cls,
+        chunks: Sequence[DocumentChunk],
+        embedder: TextEmbedder,
+        *,
+        vectors: Mapping[str, Sequence[float]],
+        minimum_similarity: float = -1.0,
+    ) -> "DenseRetriever":
+        """Load document vectors while retaining the embedder only for queries."""
+
+        instance = cls([], embedder, minimum_similarity=minimum_similarity)
+        eligible = _eligible_chunks(chunks, None)
+        identifiers = [chunk.id for chunk in eligible]
+        if len(identifiers) != len(chunks) or len(identifiers) != len(set(identifiers)):
+            raise ValueError("indexed chunks must be unique and retrieval-eligible")
+        if set(vectors) != set(identifiers):
+            raise ValueError("dense index chunk identifiers do not match the corpus")
+        normalized_vectors = {
+            identifier: _normalized_vector(vectors[identifier])
+            for identifier in identifiers
+        }
+        dimensions = {len(vector) for vector in normalized_vectors.values()}
+        if len(dimensions) > 1:
+            raise ValueError("dense index contains inconsistent vector dimensions")
+
+        instance.chunks = eligible
+        instance._dimension = next(iter(dimensions), None)
+        instance._vectors = normalized_vectors
+        return instance
 
     def retrieve(self, query: str, *, limit: int = 5) -> list[RetrievalHit]:
         _validate_limit(limit)

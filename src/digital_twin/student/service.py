@@ -10,7 +10,13 @@ from src.digital_twin.generation import (
     DeterministicGroundedGenerator,
     citation_matches_chunk,
 )
-from src.digital_twin.grounding import FallbackRetriever, build_selected_retriever
+from src.digital_twin.grounding import (
+    FallbackRetriever,
+    RetrievalIndexError,
+    RetrievalIndexStoreV1,
+    build_retrieval_index_binding,
+    build_selected_retriever,
+)
 from src.digital_twin.grounding.models import (
     GenerationTrace,
     GenerationUsage,
@@ -70,6 +76,9 @@ class StudentTutoringService:
         evidence_gate: EvidenceSufficiencyGate | None = None,
         claim_evidence_validator: PostGenerationClaimValidator | None = None,
         tutoring_mode: str = TutoringMode.T0,
+        retrieval_index_store: RetrievalIndexStoreV1 | None = None,
+        retrieval_index_chunker_id: str = "page-bounded-heading-paragraph-chunker",
+        retrieval_index_chunker_version: str = "v1",
     ) -> None:
         self.repository = repository
         profile = load_release_profile(profile_path)
@@ -84,10 +93,14 @@ class StudentTutoringService:
         self.generator = generator or DeterministicGroundedGenerator()
         self.evidence_gate = evidence_gate
         self.claim_evidence_validator = claim_evidence_validator
+        self.retrieval_index_store = retrieval_index_store
+        self.retrieval_index_chunker_id = retrieval_index_chunker_id
+        self.retrieval_index_chunker_version = retrieval_index_chunker_version
         if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1}:
             raise ValueError("unsupported student tutoring mode")
         self.tutoring_mode = tutoring_mode
         self._retrievers: dict[str, object] = {}
+        self._retrieval_artifact_ids: dict[str, str] = {}
         self.tutoring_graph = (
             BoundedTutoringGraph(
                 retrieve=self._graph_retrieve,
@@ -490,12 +503,53 @@ class StudentTutoringService:
                     chunk.source_version,
                     active_versions.get(source_id, 0),
                 )
-            retriever = build_selected_retriever(
-                self.retriever_selection,
-                release.chunks,
-                active_source_versions=active_versions,
-                embedder=self.embedder,
-            )
+            if self.retrieval_index_store is not None:
+                try:
+                    if self.embedder is None:
+                        raise RetrievalIndexError(
+                            "published dense index requires a query embedder"
+                        )
+                    implementation = self.retriever_selection.implementation
+                    if implementation is None:
+                        raise RetrievalIndexError(
+                            "published dense index requires a selected retriever"
+                        )
+                    binding = build_retrieval_index_binding(
+                        course_id=release.course_id,
+                        release_id=release.id,
+                        profile_id=release.profile_id,
+                        profile_version=release.profile_version,
+                        chunker_id=self.retrieval_index_chunker_id,
+                        chunker_version=self.retrieval_index_chunker_version,
+                        chunks=release.chunks,
+                        configuration=implementation.configuration,
+                    )
+                    loaded = self.retrieval_index_store.load_bound(
+                        binding,
+                        self.embedder,
+                    )
+                    retriever = loaded.retriever
+                    self._retrieval_artifact_ids[release.id] = (
+                        loaded.manifest.artifact_id
+                    )
+                except RetrievalIndexError as error:
+                    return [], [
+                        self._event(
+                            "retrieval-index-unavailable",
+                            account_id=account_id,
+                            course_id=conversation.course_id,
+                            release_id=release.id,
+                            conversation_id=conversation.id,
+                            details={"failure_type": type(error).__name__},
+                        )
+                    ]
+            else:
+                retriever = build_selected_retriever(
+                    self.retriever_selection,
+                    release.chunks,
+                    active_source_versions=active_versions,
+                    embedder=self.embedder,
+                )
             self._retrievers[release.id] = retriever
         fallback_before = (
             retriever.fallback_count if isinstance(retriever, FallbackRetriever) else 0
@@ -511,6 +565,21 @@ class StudentTutoringService:
             if isinstance(retriever, FallbackRetriever)
             else True
         )
+        retrieval_details: dict[str, str | int | float | bool | None] = {
+            "implementation": (
+                retriever.fallback_implementation_id
+                if isinstance(retriever, FallbackRetriever)
+                and (fallback_used or not primary_available)
+                else retriever.primary_implementation_id
+                if isinstance(retriever, FallbackRetriever)
+                else getattr(retriever, "implementation_id", "retriever")
+            ),
+            "primary_available": primary_available,
+            "hit_count": len(hits),
+        }
+        artifact_id = self._retrieval_artifact_ids.get(release.id)
+        if artifact_id is not None:
+            retrieval_details["index_artifact_id"] = artifact_id
         events.append(
             self._event(
                 "retrieval-completed",
@@ -518,18 +587,7 @@ class StudentTutoringService:
                 course_id=conversation.course_id,
                 release_id=release.id,
                 conversation_id=conversation.id,
-                details={
-                    "implementation": (
-                        retriever.fallback_implementation_id
-                        if isinstance(retriever, FallbackRetriever)
-                        and (fallback_used or not primary_available)
-                        else retriever.primary_implementation_id
-                        if isinstance(retriever, FallbackRetriever)
-                        else getattr(retriever, "implementation_id", "retriever")
-                    ),
-                    "primary_available": primary_available,
-                    "hit_count": len(hits),
-                },
+                details=retrieval_details,
             )
         )
         if isinstance(retriever, FallbackRetriever) and fallback_used:

@@ -49,12 +49,20 @@ class ReleaseLifecycleService:
         profile_version: str = "v1",
         evidence_sufficiency_ready: bool = False,
         post_publish_hook: Callable[[str, str], None] | None = None,
+        retrieval_index_ready: Callable[[DigitalTwinRelease], bool] | None = None,
+        retrieval_index_preparer: Callable[[DigitalTwinRelease], None] | None = None,
     ) -> None:
         self.repository = repository
         self.profile_id = profile_id
         self.profile_version = profile_version
         self.evidence_sufficiency_ready = evidence_sufficiency_ready
         self.post_publish_hook = post_publish_hook
+        if (retrieval_index_ready is None) != (retrieval_index_preparer is None):
+            raise ValueError(
+                "retrieval index readiness and preparation must be configured together"
+            )
+        self.retrieval_index_ready = retrieval_index_ready
+        self.retrieval_index_preparer = retrieval_index_preparer
 
     def create_draft_from_onboarding(
         self,
@@ -223,6 +231,15 @@ class ReleaseLifecycleService:
         """Run deterministic release gates and persist their aggregate outcome."""
 
         release = self._require_owned_release(professor_id, release_id)
+        index_preparation_failed = False
+        if (
+            self.retrieval_index_ready is not None
+            and self.retrieval_index_preparer is not None
+        ):
+            try:
+                self._prepare_retrieval_index(release)
+            except PublicationError:
+                index_preparation_failed = True
         checks = [
             ReleasePreflightCheck(
                 id="active-profile",
@@ -313,6 +330,26 @@ class ReleaseLifecycleService:
                 ),
             ),
         ]
+        if self.retrieval_index_ready is not None:
+            try:
+                index_ready = (
+                    not index_preparation_failed
+                    and bool(self.retrieval_index_ready(release))
+                )
+            except Exception:
+                index_ready = False
+            checks.append(
+                ReleasePreflightCheck(
+                    id="retrieval-index",
+                    label="Immutable retrieval index",
+                    passed=index_ready,
+                    detail=(
+                        "The exact release-bound retrieval index is available."
+                        if index_ready
+                        else "Build and verify the exact release-bound retrieval index."
+                    ),
+                )
+            )
         passed = all(check.passed for check in checks)
         evaluation_persisted = release.status != StudentReleaseStatus.PUBLISHED
         if evaluation_persisted:
@@ -346,6 +383,7 @@ class ReleaseLifecycleService:
     def publish(self, professor_id: str, release_id: str) -> DigitalTwinRelease:
         release = self._require_owned_release(professor_id, release_id)
         self._require_publishable(release)
+        self._prepare_retrieval_index(release)
         self.repository.publish_release(release.id)
         published = self._require_release(release.id)
         self._run_post_publish_hook(professor_id, published)
@@ -369,6 +407,7 @@ class ReleaseLifecycleService:
                 "Rollback requires a previously withdrawn release.",
             )
         self._require_publishable(release)
+        self._prepare_retrieval_index(release)
         self.repository.publish_release(release.id)
         return self._require_release(release.id)
 
@@ -398,6 +437,17 @@ class ReleaseLifecycleService:
                     },
                 )
             )
+
+    def _prepare_retrieval_index(self, release: DigitalTwinRelease) -> None:
+        if self.retrieval_index_preparer is None:
+            return
+        try:
+            self.retrieval_index_preparer(release)
+        except Exception as error:
+            raise PublicationError(
+                "retrieval_index_not_ready",
+                "The immutable retrieval index could not be prepared for this release.",
+            ) from error
 
     def _require_publishable(self, release: DigitalTwinRelease) -> None:
         if (
