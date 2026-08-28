@@ -27,7 +27,8 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  checkpoint 005 now covers 644/644 audited files and 96/96 frozen entrypoints.
+  the retrieval-index successor now covers 649/649 audited files and 97/97
+  frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
@@ -48,7 +49,10 @@ evidence, not competing end goals.
   provider I/O on a missing locked retrieval extra; AFQC-063 corrected that
   invocation. The sole corrective attempt then failed operationally before case
   1 after 2 h 15 min of on-demand indexing. AFQC-064 revokes authority and
-  requires a prebuilt-index successor. The sealed 10,000 cases remain closed.
+  requires a prebuilt-index successor. AFQC-065 passes the immutable lifecycle
+  simulation with zero runtime document embeddings and exact ranking/restart
+  equivalence. #139 is now the active P0 real-Qwen qualification; #127 remains
+  Refine and blocked. The sealed 10,000 cases remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -60,27 +64,30 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Separately authorize checkpoint 005's 500-case candidate plus paired
-   100-case control; authorize the sealed 10,000 cases only after a complete
-   development pass.
-3. Complete #105 from that leakage-free evidence and select the production
+2. Separately authorize #139's resumable local-Qwen 2,100-region index
+   qualification; it opens no product or final case.
+3. After #139 passes, freeze and separately authorize one new 500-case
+   candidate plus paired 100-case control; authorize the sealed 10,000 cases
+   only after a complete development pass.
+4. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
-4. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
-5. Complete #132 and #134; keep Discord
+5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
+6. Complete #132 and #134; keep Discord
    network delivery disabled until its privacy and operations gates pass.
-6. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
-7. Calibrate #24 professor behavior separately from factual/citation hard
+7. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.
+8. Calibrate #24 professor behavior separately from factual/citation hard
    gates.
-8. Run #9 and #25 against the same immutable deployed revision.
-9. Run #10 only after the human-participant approval boundary is satisfied.
-10. Package the final evidence, demo, report, and rollback/no-release decision
+9. Run #9 and #25 against the same immutable deployed revision.
+10. Run #10 only after the human-participant approval boundary is satisfied.
+11. Package the final evidence, demo, report, and rollback/no-release decision
    in #13.
 
 ## Current blockers
 
 | Blocker | Unblocks |
 | --- | --- |
-| Explicit authorization for product checkpoint 005 | #127 T0 development execution |
+| Explicit authorization for #139 local-Qwen qualification | Real retrieval-index resource evidence and successor design |
+| Passing #139 result plus successor authorization | #127 T0 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

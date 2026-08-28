@@ -49,7 +49,8 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 flow-independent 10,000-case product evaluation and #105 — preserve the
+1. #139 persisted retrieval indexes, then #127 flow-independent 10,000-case
+   product evaluation and #105 — preserve the
    120-row NLI result as provisional development evidence and the completed
    10,000-row pipeline as engineering history. The active successor binds
    public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,
@@ -104,6 +105,12 @@ professor-communication track.
    corrected that invocation, but the sole corrective attempt did not finish
    the first on-demand index after 2 h 15 min and also made zero provider calls.
    AFQC-064 revokes authority and requires a prebuilt-index method successor.
+   AFQC-065 completes the network-free lifecycle checkpoint: immutable
+   artifacts are hash-bound to release, source set, profile, chunker, embedding
+   revision, and retrieval configuration; 2,100 synthetic regions and 40
+   queries pass with zero runtime document embeddings. Issue #139 now owns the
+   separately authorized real-Qwen resource qualification, while #127 is
+   blocked/Refine.
    The final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
