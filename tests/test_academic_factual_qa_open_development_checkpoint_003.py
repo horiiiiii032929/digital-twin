@@ -17,7 +17,7 @@ from src.digital_twin.evaluation.provider_json import DirectProviderJsonTranspor
 
 
 def test_openai_checkpoint_freezes_exact_models_and_zero_retries() -> None:
-    result = checkpoint.validate()
+    result = checkpoint.validate(require_unauthorized=False)
     assert result["status"] == "passed-build-only"
     assert result["maximum_calls"] == 660
     assert result["maximum_cost_usd"] == 18.0
@@ -44,7 +44,7 @@ def test_calibration_packet_is_blinded_and_balanced() -> None:
     assert "expected_review" not in serialized
     assert "planted_mutation" not in serialized
     assert "is_clean" not in serialized
-    result = calibration.validate()
+    result = calibration.validate(require_unauthorized=False)
     assert result["clean_control_count"] == 20
     assert result["corrupted_control_count"] == 20
     assert result["expected_labels_visible_to_provider"] is False
@@ -106,7 +106,7 @@ def test_calibration_simulations_distinguish_quality_from_execution() -> None:
 
 
 def test_wording_and_runtime_packages_preserve_case_pairing() -> None:
-    assert wording.validate()["status"] == "passed-build-only"
+    assert wording.validate(require_unauthorized=False)["status"] == "passed-build-only"
     source = json.loads(
         (
             packages.DATASET_ROOT
@@ -194,18 +194,15 @@ def test_combined_simulation_stops_at_the_correct_stage(
     assert result["provider_calls"] == 0
 
 
-def test_combined_preflight_fails_closed_before_authorization(
+def test_combined_preflight_is_ready_after_bounded_authorization(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
     monkeypatch.setattr(checkpoint, "validate", lambda **_: {"status": "passed"})
     result = checkpoint.preflight()
-    assert result["status"] == "blocked-not-authorized"
-    assert "instrument-paid-execution-authorized-false" in result["blockers"]
-    assert "freeze-external_model_evaluation-authorization-missing" in result[
-        "blockers"
-    ]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
     assert result["provider_calls"] == 0
 
 

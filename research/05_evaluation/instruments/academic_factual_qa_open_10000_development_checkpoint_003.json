@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-checkpoint-003",
   "owner_issue": 127,
-  "status": "frozen-build-only-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "successor_of": "r1-openai-only-build-001",
   "decision_question": "Can the exact direct-OpenAI reviewer pass planted controls and then support one leakage-free 500-case candidate plus 100-case control T0 development evaluation?",
   "dataset": {
@@ -104,9 +104,9 @@
     "candidate_maximum_cost_usd": 8.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 2.0,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "development_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "development_execution_authorized": true,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -149,13 +149,13 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "calibration_execution_authorized": false,
-    "wording_development_execution_authorized": false,
-    "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "calibration_execution_authorized": true,
+    "wording_development_execution_authorized": true,
+    "product_development_execution_authorized": true,
+    "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "56c2cfe5f4d50561f3605a46b389dbf943adc6bad78f6752bf349c70ebc5ec93"
+  "content_sha256": "a18781937c788f90e37007c6745400450ce5b171af68aec11ef2c511756e8462"
 }

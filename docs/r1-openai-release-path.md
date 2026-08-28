@@ -24,8 +24,9 @@ PR #136 merged this direct-provider base. Checkpoint 003 now adds a mandatory
 40-control GPT-5.4 calibration before wording, 500 candidate cases, 100 paired
 controls, and deterministic scoring. Pass, calibration-failure,
 wording-failure, and product-failure simulations all stop correctly without
-network access. The checkpoint remains `blocked-not-authorized`; no OpenAI
-inference call or product-quality claim has been made.
+network access. AFQC-050 authorizes exactly this checkpoint once; no OpenAI
+inference call or product-quality claim has yet been made. The sealed 10,000
+cases remain unauthorized.
 
 ## Finite critical path
 

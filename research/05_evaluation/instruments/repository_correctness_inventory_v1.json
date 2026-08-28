@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6586cef58690b91f8d6b97f636fe0d4b7636d4049865f049fa20bde3ba55fbec",
+  "record_sha256": "e26aa2f9832982e556185e7801fe199b1c1c104b2d6b28a99b1792bc8263da7f",
   "records": [
     {
       "audit": {
@@ -1720,7 +1720,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Manual contract review plus network-free validation verified exact OpenAI snapshots, bounded stage budgets, hidden-label and hidden-gold separation, zero fallback, and provider execution disabled.",
+        "evidence": "Authorization review verified exact OpenAI snapshots, bounded stage budgets, hidden-label and hidden-gold separation, zero fallback, one-time development authority, and final 10,000-case execution disabled.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1731,7 +1731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_003.json",
       "risk": "high",
-      "sha256": "a87301e6b4f6e1fcec1ffd6b8c72c12538a772ade70e539f3b47d6a409d4f1f9"
+      "sha256": "d82d406f99e37b2a927fa7f2f31cb80bf51c25b4b0c3b33d772174c82c3651cb"
     },
     {
       "audit": {
@@ -1768,7 +1768,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Manual provider-binding review verified direct Responses API use, exact dated identities, store false, zero fallback and retries, fresh official metadata, and all execution authorizations false.",
+        "evidence": "Authorization review verified direct Responses API use, exact dated identities, store false, zero fallback and retries, refreshed official metadata, bounded development authority, and final execution false.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_003.json",
       "risk": "high",
-      "sha256": "4f11d564c2b952be0a91055df1c2d9926aed6fd720b80cf1a3aaf745755a7312"
+      "sha256": "9e2e88696dadb22708f4260450424e963b0fd996c5470d15c2a2bd0978955f07"
     },
     {
       "audit": {
@@ -8136,14 +8136,14 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1d146e190807f9090c0ef449afb18e067c80c5a533623ee0495e90b8737aaffd"
+      "sha256": "3bf02c8706c596ffae1758e415d2c3f61ad878489611eb50098d5b9d6f0d3777"
     },
     {
       "audit": {
         "domain": "proactive-outreach",
         "evidence": "Public exports for the versioned evidence-recovery contracts were checked against service, repository, runner, and focused import regressions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -8669,7 +8669,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical oracle authorization, verify both A1 development and confirmation-002 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain the historical deterministic-builder authorization plus the one-time academic-factual-qa-open-10000-development-checkpoint-003 authorization, verify both A1 development and confirmation-002 revocation, and reject every other unregistered provider, paid, private-source, external-delivery, and held-out operation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8680,7 +8680,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
+      "sha256": "47619fd6f5686d01b83c45f2dc98cb2086204fb4387d93bcaa0f3ab340d8e833"
     },
     {
       "audit": {
@@ -9053,7 +9053,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint-verification",
-        "evidence": "Fourteen focused tests cover hidden-label separation, immutable hashes, authorization, stage-stop behavior, clean pass/failure simulations, and zero-network preflight behavior.",
+        "evidence": "Fourteen focused tests cover hidden-label separation, immutable hashes, bounded authorization, ready preflight behavior, stage stops, and clean pass/failure simulations.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9064,7 +9064,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "medium",
-      "sha256": "677b02a3bff8dc00f7973b5c49a2ca1bb1c4d053e4825d3d7a9ad0174036e9be"
+      "sha256": "a6b300dc3155e9ea651ce1a29e5533203a0149ddaa143b2e4cc2da5be0c9a071"
     },
     {
       "audit": {
