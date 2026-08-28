@@ -104,6 +104,11 @@ Calibration 004 has fresh exclusive outputs, a ten-call/USD 3 ceiling, no
 product-progression command, and no execution authority. The next human input
 is authorization for this calibration only after a fresh clean preflight.
 
+AFQC-054 records the researcher's explicit authorization for calibration 004.
+Only its 40-control GPT-5.4 semantic review is allowlisted: at most ten calls,
+zero retries, and the USD 3 emergency stop. Product development, the paired
+control, private data, and the sealed 10,000-case run remain unauthorized.
+
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
 for #127 and none of those attempts is being retried. Issue

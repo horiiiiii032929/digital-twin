@@ -128,10 +128,10 @@ def test_calibration_parser_rejects_missing_and_reordered_votes() -> None:
         calibration._parse_votes({"votes": provider_owned}, items)
 
 
-def test_calibration_004_is_fresh_build_only_and_cannot_open_product_work(
+def test_calibration_004_is_fresh_authorized_and_cannot_open_product_work(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    result = calibration_004.validate()
+    result = calibration_004.validate(require_unauthorized=False)
     assert result["instrument_id"] == calibration_004.INSTRUMENT_ID
     assert result["status"] == "passed-build-only"
     assert result["control_count"] == 40
@@ -139,14 +139,18 @@ def test_calibration_004_is_fresh_build_only_and_cannot_open_product_work(
     instrument = json.loads(calibration_004.INSTRUMENT_PATH.read_text(encoding="utf-8"))
     assert instrument["method"]["provider_returns_overall_validity"] is False
     assert instrument["method"]["automatic_product_progression"] is False
-    assert not any(instrument["authorization"].values())
+    assert instrument["authorization"]["provider_execution_authorized"] is True
+    assert instrument["authorization"]["paid_execution_authorized"] is True
+    assert instrument["authorization"]["calibration_execution_authorized"] is True
+    assert instrument["authorization"]["semantic_review_execution_authorized"] is True
+    assert instrument["authorization"]["wording_development_execution_authorized"] is False
+    assert instrument["authorization"]["product_development_execution_authorized"] is False
+    assert instrument["authorization"]["final_execution_authorized"] is False
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     monkeypatch.setattr(calibration, "_repo_dirty", lambda: False)
     preflight = calibration_004.preflight()
-    assert preflight["status"] == "blocked-not-authorized"
-    assert "freeze-external_model_evaluation-authorization-missing" in preflight[
-        "blockers"
-    ]
+    assert preflight["status"] == "ready"
+    assert preflight["blockers"] == []
 
 
 def test_calibration_simulations_distinguish_quality_from_execution() -> None:

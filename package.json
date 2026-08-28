@@ -234,7 +234,7 @@
     "preflight:academic-factual-qa-open-development-003": "uv run python -m scripts.run_academic_factual_qa_open_development_checkpoint_003 --preflight",
     "execute:academic-factual-qa-open-development-003": "uv run python -m scripts.run_academic_factual_qa_open_development_checkpoint_003 --execute",
     "resume:academic-factual-qa-open-development-003": "uv run python -m scripts.run_academic_factual_qa_open_development_checkpoint_003 --execute --resume",
-    "verify:academic-factual-qa-open-reviewer-calibration-004": "uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --validate",
+    "verify:academic-factual-qa-open-reviewer-calibration-004": "uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --validate-live",
     "simulate:academic-factual-qa-open-reviewer-calibration-004": "uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --simulate pass && uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --simulate quality-failure && uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --simulate malformed",
     "preflight:academic-factual-qa-open-reviewer-calibration-004": "uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --preflight",
     "execute:academic-factual-qa-open-reviewer-calibration-004": "uv run python -m scripts.run_academic_factual_qa_openai_reviewer_calibration_004 --execute",
