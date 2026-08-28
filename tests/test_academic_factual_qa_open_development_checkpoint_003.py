@@ -69,6 +69,16 @@ def test_calibration_payload_is_direct_strict_and_non_stored() -> None:
     assert payload["text"]["format"]["strict"] is True
     assert "uniqueItems" not in json.dumps(payload)
     assert "openrouter" not in json.dumps(payload).casefold()
+    defect_schema = payload["text"]["format"]["schema"]["properties"]["votes"][
+        "items"
+    ]["properties"]["defect_types"]["items"]
+    assert set(defect_schema["enum"]) == {
+        "action",
+        "ambiguity",
+        "boundary",
+        "citation",
+        "claim",
+    }
 
 
 def test_calibration_parser_rejects_missing_and_reordered_votes() -> None:

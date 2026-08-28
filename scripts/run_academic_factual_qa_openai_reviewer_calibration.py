@@ -54,11 +54,11 @@ CONTROLS_PATH = ROOT / (
 )
 LEDGER_PATH = ROOT / (
     "reports/generated/academic-factual-qa-open-10000-openai-"
-    "reviewer-calibration-001.sqlite3"
+    "reviewer-calibration-002.sqlite3"
 )
 RESULT_PATH = ROOT / (
     "reports/generated/academic-factual-qa-open-10000-openai-"
-    "reviewer-calibration-001-result.json"
+    "reviewer-calibration-002-result.json"
 )
 
 
@@ -174,7 +174,10 @@ def _vote_schema(count: int) -> dict[str, Any]:
             },
             "defect_types": {
                 "type": "array",
-                "items": {"type": "string"},
+                "items": {
+                    "type": "string",
+                    "enum": ["action", "ambiguity", "boundary", "citation", "claim"],
+                },
             },
             "concise_rationale": {"type": "string", "minLength": 1, "maxLength": 240},
         },
@@ -199,6 +202,7 @@ def _prompt(items: list[dict[str, Any]], instructions: Any) -> tuple[str, str]:
         "Act as a strict blinded factual-QA reviewer. Judge only the visible "
         "question, candidate record, supplied sources, claims, and citations. "
         "Detect unsupported claims, incorrect actions, and citation defects. "
+        "Use only action, ambiguity, boundary, citation, or claim in defect_types. "
         "Do not assume hidden ground truth or repair the candidate. Return only "
         "the requested schema."
     )

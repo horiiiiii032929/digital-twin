@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e26aa2f9832982e556185e7801fe199b1c1c104b2d6b28a99b1792bc8263da7f",
+  "record_sha256": "db59450e3bf17a4e7505065e7fe801aded23543bce0a88927bfc895881834eaa",
   "records": [
     {
       "audit": {
@@ -5121,7 +5121,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Focused review and pass/failure simulations verified finite stage ordering, authorization checks, fail-closed transitions, resume binding, aggregate budgets, and zero automatic promotion.",
+        "evidence": "Focused review and pass/failure simulations verified finite stage ordering, authorization checks, fail-closed transitions, resume binding, aggregate budgets, zero automatic promotion, and a fresh attempt-002 state path that preserves the invalid attempt-001 evidence.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -5138,7 +5138,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "high",
-      "sha256": "fc4bb688cd0f73daea501674988dcc782f5287d3d982e1747056eac90e4702bb"
+      "sha256": "42bfe4c500b0cff2d963bc4582d014f5f1c0821aa5105ba75f5aac1c6863c347"
     },
     {
       "audit": {
@@ -5220,7 +5220,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Focused review verified hidden calibration labels remain unopened until 40 votes are persisted, strict semantic validation, exact GPT-5.4 identity, store false, and deterministic gate scoring.",
+        "evidence": "Focused review verified hidden calibration labels remain unopened until 40 votes are persisted, the provider schema and post-parser share the same five-label defect taxonomy, exact GPT-5.4 identity, store false, fresh attempt-002 outputs, and deterministic gate scoring.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -5231,7 +5231,7 @@
       "package_commands": [],
       "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration.py",
       "risk": "high",
-      "sha256": "9c78c60595d1ca2d413075acd1cb80d5740309f3e8563a51b1a8def071c5bee8"
+      "sha256": "4a952c4eaa65d139abc12a5f5c618a6240f8c775eee3e139005d0891182fa414"
     },
     {
       "audit": {
@@ -9053,7 +9053,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint-verification",
-        "evidence": "Fourteen focused tests cover hidden-label separation, immutable hashes, bounded authorization, ready preflight behavior, stage stops, and clean pass/failure simulations.",
+        "evidence": "Focused tests cover hidden-label separation, immutable hashes, bounded authorization, ready preflight behavior, normalized defect-schema enforcement, stage stops, and clean pass/failure simulations.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9064,7 +9064,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "medium",
-      "sha256": "a6b300dc3155e9ea651ce1a29e5533203a0149ddaa143b2e4cc2da5be0c9a071"
+      "sha256": "87cd73b6c47450db006715412587d2e4f8829e53b4c5f163e35796a4b705f3c2"
     },
     {
       "audit": {
