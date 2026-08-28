@@ -132,7 +132,6 @@ def _vote_schema(count: int) -> dict[str, Any]:
         "additionalProperties": False,
         "required": [
             "review_item_id",
-            "case_semantically_valid",
             "expected_action",
             "question_answerable_from_supplied_sources",
             "atomic_claim_support",
@@ -145,7 +144,6 @@ def _vote_schema(count: int) -> dict[str, Any]:
         ],
         "properties": {
             "review_item_id": {"type": "string", "minLength": 1},
-            "case_semantically_valid": {"type": "boolean"},
             "expected_action": {
                 "type": "string",
                 "enum": ["answer", "abstain", "clarify", "refuse"],
@@ -203,6 +201,8 @@ def _prompt(items: list[dict[str, Any]], instructions: Any) -> tuple[str, str]:
         "question, candidate record, supplied sources, claims, and citations. "
         "Detect unsupported claims, incorrect actions, and citation defects. "
         "Use only action, ambiguity, boundary, citation, or claim in defect_types. "
+        "Do not return an overall validity field; the harness derives it from "
+        "the normalized defect judgments. "
         "Do not assume hidden ground truth or repair the candidate. Return only "
         "the requested schema."
     )
@@ -267,12 +267,30 @@ def _parse_votes(
     rows = content.get("votes")
     if not isinstance(rows, list) or len(rows) != len(expected_items):
         raise OpenAiReviewerCalibrationError("reviewer vote coverage drifted")
-    return [
-        _validate_semantics(
-            validate_vote(dict(row), expected_item_id=item["review_item_id"]), item
+    parsed: list[dict[str, Any]] = []
+    for row, item in zip(rows, expected_items, strict=True):
+        if not isinstance(row, dict):
+            raise OpenAiReviewerCalibrationError("reviewer vote is not an object")
+        if "case_semantically_valid" in row:
+            raise OpenAiReviewerCalibrationError(
+                "provider returned the harness-owned semantic validity field"
+            )
+        defect_types = row.get("defect_types")
+        if not isinstance(defect_types, list):
+            raise OpenAiReviewerCalibrationError("reviewer defect types are malformed")
+        normalized = {
+            **row,
+            "case_semantically_valid": not bool(defect_types),
+        }
+        parsed.append(
+            _validate_semantics(
+                validate_vote(
+                    normalized, expected_item_id=item["review_item_id"]
+                ),
+                item,
+            )
         )
-        for row, item in zip(rows, expected_items, strict=True)
-    ]
+    return parsed
 
 
 def _repo_dirty() -> bool:

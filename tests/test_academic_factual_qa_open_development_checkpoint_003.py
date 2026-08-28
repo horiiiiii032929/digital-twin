@@ -11,6 +11,9 @@ from scripts import run_academic_factual_qa_open_development_checkpoint_003 as c
 from scripts import run_academic_factual_qa_open_product_003 as product
 from scripts import run_academic_factual_qa_open_wording_v3 as wording
 from scripts import run_academic_factual_qa_openai_reviewer_calibration as calibration
+from scripts import (
+    run_academic_factual_qa_openai_reviewer_calibration_004 as calibration_004,
+)
 from scripts import score_academic_factual_qa_open_development_003 as scoring
 from scripts.run_academic_factual_qa_panel_review_v2 import _ideal_vote, _truth_maps
 from src.digital_twin.evaluation.provider_json import DirectProviderJsonTransport
@@ -69,9 +72,11 @@ def test_calibration_payload_is_direct_strict_and_non_stored() -> None:
     assert payload["text"]["format"]["strict"] is True
     assert "uniqueItems" not in json.dumps(payload)
     assert "openrouter" not in json.dumps(payload).casefold()
-    defect_schema = payload["text"]["format"]["schema"]["properties"]["votes"][
+    vote_properties = payload["text"]["format"]["schema"]["properties"]["votes"][
         "items"
-    ]["properties"]["defect_types"]["items"]
+    ]["properties"]
+    assert "case_semantically_valid" not in vote_properties
+    defect_schema = vote_properties["defect_types"]["items"]
     assert set(defect_schema["enum"]) == {
         "action",
         "ambiguity",
@@ -85,8 +90,22 @@ def test_calibration_parser_rejects_missing_and_reordered_votes() -> None:
     packet = calibration._packet()
     _, truth = _truth_maps()
     items = packet["items"][:4]
-    votes = [_ideal_vote(row, truth[row["review_item_id"]]) for row in items]
-    assert len(calibration._parse_votes({"votes": votes}, items)) == 4
+    votes = [
+        {
+            key: value
+            for key, value in _ideal_vote(
+                row, truth[row["review_item_id"]]
+            ).items()
+            if key != "case_semantically_valid"
+        }
+        for row in items
+    ]
+    parsed = calibration._parse_votes({"votes": votes}, items)
+    assert len(parsed) == 4
+    assert all(
+        row["case_semantically_valid"] is (not bool(row["defect_types"]))
+        for row in parsed
+    )
     malformed = deepcopy(votes)
     malformed[0].pop("citation_support")
     with pytest.raises(Exception):
@@ -103,6 +122,31 @@ def test_calibration_parser_rejects_missing_and_reordered_votes() -> None:
     ]["question_answerable_from_supplied_sources"]
     with pytest.raises(Exception, match="answerability and action conflict"):
         calibration._parse_votes({"votes": contradictory}, items)
+    provider_owned = deepcopy(votes)
+    provider_owned[0]["case_semantically_valid"] = True
+    with pytest.raises(Exception, match="harness-owned semantic validity"):
+        calibration._parse_votes({"votes": provider_owned}, items)
+
+
+def test_calibration_004_is_fresh_build_only_and_cannot_open_product_work(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    result = calibration_004.validate()
+    assert result["instrument_id"] == calibration_004.INSTRUMENT_ID
+    assert result["status"] == "passed-build-only"
+    assert result["control_count"] == 40
+    assert result["prior_provider_votes_imported"] is False
+    instrument = json.loads(calibration_004.INSTRUMENT_PATH.read_text(encoding="utf-8"))
+    assert instrument["method"]["provider_returns_overall_validity"] is False
+    assert instrument["method"]["automatic_product_progression"] is False
+    assert not any(instrument["authorization"].values())
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    monkeypatch.setattr(calibration, "_repo_dirty", lambda: False)
+    preflight = calibration_004.preflight()
+    assert preflight["status"] == "blocked-not-authorized"
+    assert "freeze-external_model_evaluation-authorization-missing" in preflight[
+        "blockers"
+    ]
 
 
 def test_calibration_simulations_distinguish_quality_from_execution() -> None:

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 627
+    "audited": 630
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 146,
+    "active_or_unclassified_tooling": 147,
     "active_runtime": 111,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 145,
+    "evaluation_configuration": 147,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 132
   },
-  "file_count": 627,
+  "file_count": 630,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3c1bd53508fb9c30647aab48dfc70916e05b52954db19fa324baef3c98b72d61",
+  "record_sha256": "991ed9389e69ec6b0ebc54f7550cb7dbec7396cadd8f0522472a43e5f5e7b779",
   "records": [
     {
       "audit": {
@@ -40,7 +40,7 @@
     {
       "audit": {
         "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused OpenAI-only R1 review plus calibration-004 command review; exact-model, no-fallback, store-false, gold separation, build-only validation, three simulations, staging, and targeted regressions passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "ef6ab23839bfb6563a9a22eda2d6500a5439a4def082316915deffa26ecbe7d9"
+      "sha256": "cb2c2ee4fdc9588d3804d1e02bc8e4d9b4cff90695839764d4c5fe7eda685e3e"
     },
     {
       "audit": {
@@ -1752,7 +1752,7 @@
     {
       "audit": {
         "domain": "r1-openai-evaluation-contracts",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, targeted regressions, and checkpoint-003 authorization revocation passed.",
+        "evidence": "Focused OpenAI-only R1 code and contract review; checkpoint-003 remains revoked, calibration-004 is protected but absent from bounded authorizations, and exact-model, no-fallback, store-false, gold-separation, staging, and network-free regressions passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1780,6 +1780,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_003.json",
       "risk": "high",
       "sha256": "bffd8770c9dff94980ae9bae1903801db055fdf98caa24f53f7acc103a16fb53"
+    },
+    {
+      "audit": {
+        "domain": "openai-reviewer-calibration-004",
+        "evidence": "Manual binding review verified exact direct GPT-5.4 snapshot use, public calibration data only, store false, no router/fallback/retry, bounded pricing metadata, and every execution authorization false.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_004.json",
+      "risk": "high",
+      "sha256": "2265419cacb52e7672d2ba193563d9d38f6a8430212ff70b6534388fb35737ce"
     },
     {
       "audit": {
@@ -1828,6 +1844,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json",
       "risk": "high",
       "sha256": "63daf63920628fd9a63f35e71cdefc17641441f53ff09a401e8e8e5ea23a5b3f"
+    },
+    {
+      "audit": {
+        "domain": "openai-reviewer-calibration-004",
+        "evidence": "Manual instrument review verified immutable 40-control reuse, no imported provider votes, deterministic overall-validity ownership, five atomic defect dimensions, ten-call/USD 3 limits, no product progression, and all authorization flags false.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reviewer_calibration_004.json",
+      "risk": "high",
+      "sha256": "0a3df48b197c6c13d59dab082bfa74da0fb78dafd2b9526a4d524c85b4d49893"
     },
     {
       "audit": {
@@ -5220,7 +5252,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Focused review verified hidden calibration labels remain unopened until 40 votes are persisted, the provider schema and post-parser share the same five-label defect taxonomy, exact GPT-5.4 identity, store false, fresh attempt-002 outputs, and deterministic gate scoring.",
+        "evidence": "Focused review verified hidden labels remain unopened until 40 votes are persisted, the provider returns only atomic judgments, overall validity is derived deterministically from normalized defects, exact GPT-5.4 identity and store false remain enforced, and deterministic gate scoring is unchanged.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -5228,10 +5260,38 @@
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
       "disposition": "active_audited",
-      "package_commands": [],
+      "package_commands": [
+        "execute:academic-factual-qa-open-reviewer-calibration-004",
+        "preflight:academic-factual-qa-open-reviewer-calibration-004",
+        "resume:academic-factual-qa-open-reviewer-calibration-004",
+        "simulate:academic-factual-qa-open-reviewer-calibration-004",
+        "verify:academic-factual-qa-open-reviewer-calibration-004"
+      ],
       "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration.py",
       "risk": "high",
-      "sha256": "4a952c4eaa65d139abc12a5f5c618a6240f8c775eee3e139005d0891182fa414"
+      "sha256": "62d1a63821f641f53654afc4ebd82c85ebf747ba0f33e7b714601f440ac3b900"
+    },
+    {
+      "audit": {
+        "domain": "openai-reviewer-calibration-004",
+        "evidence": "Focused runner review verified fresh exclusive outputs, temporary configuration isolation, build-only validation, fail-closed freeze checks, pass/quality-failure/malformed simulations, and no product-stage command.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-reviewer-calibration-004",
+        "preflight:academic-factual-qa-open-reviewer-calibration-004",
+        "resume:academic-factual-qa-open-reviewer-calibration-004",
+        "simulate:academic-factual-qa-open-reviewer-calibration-004",
+        "verify:academic-factual-qa-open-reviewer-calibration-004"
+      ],
+      "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration_004.py",
+      "risk": "high",
+      "sha256": "9e973e8e02b4dd4471526791ceeb4203593d3b004bbd8346822eaa81a0d97a10"
     },
     {
       "audit": {
@@ -8136,7 +8196,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1d146e190807f9090c0ef449afb18e067c80c5a533623ee0495e90b8737aaffd"
+      "sha256": "aa95bde8921682ff857d27fa7e0bdab6b40ab5b7a4f45ba5c89532e8612cba8a"
     },
     {
       "audit": {
@@ -9053,7 +9113,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint-verification",
-        "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked-authorization preflight behavior, normalized defect-schema enforcement, stage stops, and clean pass/failure simulations.",
+        "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked-authorization preflight behavior, harness-owned overall validity, normalized defect-schema enforcement, fresh calibration-004 outputs, and pass/quality-failure/malformed simulations.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9064,7 +9124,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "medium",
-      "sha256": "6d644b997eaaa2fa458f3b851a3bffaeb8f2df894a73172d17a393f7371a23eb"
+      "sha256": "ef0c97ce1700c0e1e2585b412862198d4cacf71a5da3667856ac57f416ca52e0"
     },
     {
       "audit": {
@@ -10444,7 +10504,7 @@
     }
   ],
   "risk_counts": {
-    "high": 481,
+    "high": 484,
     "medium": 146
   },
   "schema_version": 1,

@@ -192,6 +192,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_academic_factual_qa_openai_reviewer_calibration_004.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_academic_factual_qa_t0_confirmation.py": (
             "external_model_evaluation",
             "local_model_evaluation",

@@ -4,6 +4,39 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "openai-reviewer-calibration-004",
+      "evidence": "Manual instrument review verified immutable 40-control reuse, no imported provider votes, deterministic overall-validity ownership, five atomic defect dimensions, ten-call/USD 3 limits, no product progression, and all authorization flags false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reviewer_calibration_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "0a3df48b197c6c13d59dab082bfa74da0fb78dafd2b9526a4d524c85b4d49893"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "openai-reviewer-calibration-004",
+      "evidence": "Manual binding review verified exact direct GPT-5.4 snapshot use, public calibration data only, store false, no router/fallback/retry, bounded pricing metadata, and every execution authorization false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "2265419cacb52e7672d2ba193563d9d38f6a8430212ff70b6534388fb35737ce"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "openai-reviewer-calibration-004",
+      "evidence": "Focused runner review verified fresh exclusive outputs, temporary configuration isolation, build-only validation, fail-closed freeze checks, pass/quality-failure/malformed simulations, and no product-stage command.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "9e973e8e02b4dd4471526791ceeb4203593d3b004bbd8346822eaa81a0d97a10"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "configuration-and-deployment",
       "evidence": "Manual build-context review confirmed private, generated, model, run, and local environment material is excluded.",
       "findings": [],
@@ -16,7 +49,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused OpenAI-only R1 review plus calibration-004 command review; exact-model, no-fallback, store-false, gold separation, build-only validation, three simulations, staging, and targeted regressions passed.",
       "findings": [],
       "path": ".env.example",
       "reviewed_at": "2026-08-27",
@@ -879,7 +912,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "ef6ab23839bfb6563a9a22eda2d6500a5439a4def082316915deffa26ecbe7d9"
+      "sha256": "cb2c2ee4fdc9588d3804d1e02bc8e4d9b4cff90695839764d4c5fe7eda685e3e"
     },
     {
       "audit_status": "audited",
@@ -951,12 +984,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "openai-development-checkpoint",
-      "evidence": "Focused review verified hidden calibration labels remain unopened until 40 votes are persisted, the provider schema and post-parser share the same five-label defect taxonomy, exact GPT-5.4 identity, store false, fresh attempt-002 outputs, and deterministic gate scoring.",
+      "evidence": "Focused review verified hidden labels remain unopened until 40 votes are persisted, the provider returns only atomic judgments, overall validity is derived deterministically from normalized defects, exact GPT-5.4 identity and store false remain enforced, and deterministic gate scoring is unchanged.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_openai_reviewer_calibration.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "4a952c4eaa65d139abc12a5f5c618a6240f8c775eee3e139005d0891182fa414"
+      "sha256": "62d1a63821f641f53654afc4ebd82c85ebf747ba0f33e7b714601f440ac3b900"
     },
     {
       "audit_status": "audited",
@@ -995,12 +1028,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "openai-development-checkpoint-verification",
-      "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked-authorization preflight behavior, normalized defect-schema enforcement, stage stops, and clean pass/failure simulations.",
+      "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked-authorization preflight behavior, harness-owned overall validity, normalized defect-schema enforcement, fresh calibration-004 outputs, and pass/quality-failure/malformed simulations.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "6d644b997eaaa2fa458f3b851a3bffaeb8f2df894a73172d17a393f7371a23eb"
+      "sha256": "ef0c97ce1700c0e1e2585b412862198d4cacf71a5da3667856ac57f416ca52e0"
     },
     {
       "audit_status": "audited",
@@ -1303,7 +1336,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-contracts",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, targeted regressions, and checkpoint-003 authorization revocation passed.",
+      "evidence": "Focused OpenAI-only R1 code and contract review; checkpoint-003 remains revoked, calibration-004 is protected but absent from bounded authorizations, and exact-model, no-fallback, store-false, gold-separation, staging, and network-free regressions passed.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_002.json",
       "reviewed_at": "2026-08-27",
@@ -5323,7 +5356,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "1d146e190807f9090c0ef449afb18e067c80c5a533623ee0495e90b8737aaffd"
+      "sha256": "aa95bde8921682ff857d27fa7e0bdab6b40ab5b7a4f45ba5c89532e8612cba8a"
     },
     {
       "audit_status": "audited",
