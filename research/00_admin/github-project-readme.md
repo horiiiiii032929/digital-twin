@@ -27,14 +27,16 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  checkpoint 003 now covers 627/627 audited files and 91/91 frozen entrypoints.
+  calibration 004 now covers 630/630 audited files and 92/92 frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
   cases. AFQC-050 authorized this path once, but both calibration attempts
   stopped after their first exact GPT-5.4 batch on evaluator-contract
   inconsistencies. AFQC-052 revokes authority; the 500+100 product run and
-  sealed 10,000 cases remain unopened.
+  sealed 10,000 cases remain unopened. AFQC-053 adds build-ready calibration
+  004 with deterministic overall validity, unchanged atomic judgments, fresh
+  outputs, three passing simulations, and no paid or product authority.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,

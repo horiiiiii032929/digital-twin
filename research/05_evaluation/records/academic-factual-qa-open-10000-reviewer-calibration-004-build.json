@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reviewer-calibration-004-build",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "forty-public-source-planted-controls",
+  "code_revision": "cb2781f32c410118b72580507d64e8e7f239aae2",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "provider-owned-overall-validity-contract-v3",
+        "version": "v3-historical-invalid",
+        "configuration": {
+          "provider_owned_overall_validity_fields": 1,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-owned-overall-validity-fields",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 3.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 3.0,
+          "passed": true
+        },
+        {
+          "name": "provider-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-overall-validity-ownership",
+          "passed": false,
+          "evidence": "The historical contract requested a redundant overall-validity field from the provider."
+        },
+        {
+          "name": "historical-evidence-preserved",
+          "passed": true,
+          "evidence": "Both invalid checkpoint-003 attempts and ledgers remain immutable."
+        },
+        {
+          "name": "paid-authority-disabled",
+          "passed": true,
+          "evidence": "The historical checkpoint authorization is revoked."
+        },
+        {
+          "name": "automatic-product-progression-disabled",
+          "passed": true,
+          "evidence": "The historical checkpoint stopped before every product stage."
+        }
+      ],
+      "failures_by_category": {
+        "redundant-provider-owned-validity": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "deterministic-overall-validity-contract-v4",
+        "version": "v4-build",
+        "configuration": {
+          "provider_owned_overall_validity_fields": 0,
+          "atomic_defect_dimensions": 5,
+          "maximum_calls": 10,
+          "provider_calls": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-owned-overall-validity-fields",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 3.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 3.0,
+          "passed": true
+        },
+        {
+          "name": "provider-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-overall-validity-ownership",
+          "passed": true,
+          "evidence": "The schema omits overall validity and the harness derives it from the normalized defect set."
+        },
+        {
+          "name": "historical-evidence-preserved",
+          "passed": true,
+          "evidence": "Calibration 004 uses fresh outputs and imports no historical provider vote."
+        },
+        {
+          "name": "paid-authority-disabled",
+          "passed": true,
+          "evidence": "Every calibration-004 execution authorization remains false."
+        },
+        {
+          "name": "automatic-product-progression-disabled",
+          "passed": true,
+          "evidence": "Calibration 004 has no wording, product, control, or final-stage command."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "deterministic-overall-validity-contract-v4",
+    "rationale": "The candidate removes the exact redundant field that produced both checkpoint-003 contradictions while preserving atomic reviewer judgments, deterministic invariants, and historical evidence.",
+    "limitations": [
+      "No paid calibration has executed, so GPT-5.4 quality under the corrected contract is unknown.",
+      "The build uses one provider model plus deterministic truth, not independent provider families.",
+      "No wording, T0 product, paired-control, final 10,000-case, private-data, or release evidence was produced."
+    ]
+  }
+}

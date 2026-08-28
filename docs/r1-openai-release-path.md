@@ -31,13 +31,19 @@ the corrected second returned defect-bearing records marked semantically valid.
 AFQC-052 records both as invalid and revokes authority. No product-quality claim
 exists, and the sealed 10,000 cases remain unauthorized.
 
+AFQC-053 now freezes a standalone method successor: calibration 004 removes the
+provider-owned overall-validity field and derives it deterministically from the
+five atomic defect judgments. It reuses the same 40 controls and gates without
+importing either invalid attempt. Three network-free terminal simulations pass;
+all paid authority is false and no product progression is available.
+
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Make one explicit reviewer-method decision after the two invalid GPT-5.4
-   calibration attempts; do not silently revise checkpoint 003 again.
-3. Freeze a successor evaluator contract, qualify it, then conditionally run
+2. Refresh exact GPT-5.4 metadata and explicitly authorize only the standalone
+   calibration 004 ten-call checkpoint.
+3. If calibration 004 passes, freeze and separately authorize a successor with
    500 candidate cases and the paired 100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
@@ -60,8 +66,7 @@ exists, and the sealed 10,000 cases remain unauthorized.
 
 Work stops for four inputs only:
 
-1. explicit reviewer-method selection and authorization for a newly frozen
-   500+100 paid development checkpoint;
+1. explicit authorization for the build-ready 40-control calibration 004;
 2. explicit authorization for the sealed 10,000-case paid run after development;
 3. professor approval of the explicit teaching profile;
 4. production domain/DNS access and deployment authorization.

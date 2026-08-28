@@ -164,7 +164,7 @@ not require model spending or private data:
 
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
-| Select a successor evaluator contract after invalid checkpoint 003 | Researcher/project method decision | Newly frozen 500+100 development checkpoint; no silent third calibration revision |
+| Authorize build-ready reviewer calibration 004 after fresh metadata and clean preflight | Researcher | One 40-control reviewer result; no automatic 500+100 progression |
 | Authorize the sealed 10,000-case run | Researcher only after complete development pass | Professor-reportable actual-product final result |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
 | Select or reject the provisional atomic-claim method using leakage-free end-to-end evidence | Researcher/evaluation checkpoint | Product binding and grounded publication/student journeys |
