@@ -10,7 +10,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_004.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "2c9b3c506ddb62343f0223a8dc1bb98a90d1872e10f7d6c8594896f2666e6248"
+      "sha256": "d4ad39be0c78f20ae6b7ed863ef86acd8a8a8f41f0c18f5db49a8f3fa5af7f75"
     },
     {
       "audit_status": "audited",
@@ -21,7 +21,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_005.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "577d32a25dcfecd776cf863c8dc83b81c49fbd0c78ae860f790bd74eaecab03d"
+      "sha256": "6d0dbdbb7f72b8056d418d56c3ee87890a5ef49d5d963bfb64976d126473f24e"
     },
     {
       "audit_status": "audited",
@@ -32,7 +32,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_004.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "a94bfbad323e6f0b7819b32095d16b365ed7e0035337efcb9bee3b6a05cd42f3"
+      "sha256": "25213b43e776313819cd4ee206dafb85437e75a4d35fc49a24d346e464f71d83"
     },
     {
       "audit_status": "audited",
@@ -43,7 +43,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_004.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "6f2413af862d93f3271e785b17031740d3f8551f6a7a77bb110587cca9e972df"
+      "sha256": "4c01e22219c9e3cbd07ca2c529d3f2b443278edb6a2d958f11f33c097cbfeb2f"
     },
     {
       "audit_status": "audited",
@@ -65,7 +65,7 @@
       "path": "scripts/run_academic_factual_qa_open_development_checkpoint_004.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "fe8269c43f7776665a191ef66cf1429e0e7d62e1d8ed9fb72f84e67d43b7bdf5"
+      "sha256": "adaa846125772204fa7f53b3104665d0882728104e0cadc3740c4aa547fbd865"
     },
     {
       "audit_status": "audited",
@@ -76,7 +76,7 @@
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_004.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "70a738827bff0b94009bba71a4e9e031c09b1e0a2212a78f9b98525458b7ff9f"
+      "sha256": "445478aeddb473a24376842be8b9a0032266773b5e05a96fcb934d9d1fde7ffd"
     },
     {
       "audit_status": "audited",
@@ -5433,7 +5433,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "45ffeeac7c795792e64c9a3b2fb52263033801a2dd9992205358d81ebbaa7c28"
+      "sha256": "b35059d9dfe71c8d8ca57eaa506f7c512c18a70eecaafca4cf2b39bdad766694"
     },
     {
       "audit_status": "audited",
@@ -5807,7 +5807,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
+      "sha256": "54a4a60f4b06846fd26b75008334861067926d64ffa293498745c4ad0992c801"
     },
     {
       "audit_status": "audited",

@@ -12,8 +12,8 @@ from scripts import run_academic_factual_qa_open_10000 as product_runner
 from src.digital_twin.evaluation.provider_json import DirectProviderJsonTransport
 
 
-def test_checkpoint_004_is_deterministic_primary_and_build_only() -> None:
-    result = checkpoint.validate()
+def test_checkpoint_004_is_deterministic_primary_and_bounded_authorized() -> None:
+    result = checkpoint.validate(require_unauthorized=False)
     assert result["status"] == "passed-build-only"
     assert result["maximum_calls"] == 704
     assert result["maximum_cost_usd"] == 23.0
@@ -21,7 +21,16 @@ def test_checkpoint_004_is_deterministic_primary_and_build_only() -> None:
     assert result["advisory_failure_invalidates_deterministic_measurement"] is False
     instrument = json.loads(checkpoint.INSTRUMENT_PATH.read_text(encoding="utf-8"))
     assert "reviewer-calibration" not in instrument["combined_checkpoint"]["stage_order"]
-    assert not any(instrument["authorization"].values())
+    assert all(
+        instrument["authorization"][key]
+        for key in (
+            "provider_execution_authorized",
+            "paid_execution_authorized",
+            "wording_development_execution_authorized",
+            "product_development_execution_authorized",
+            "semantic_review_execution_authorized",
+        )
+    )
     assert instrument["execution"]["final_execution_authorized"] is False
 
 
@@ -71,7 +80,12 @@ def test_advisory_payload_is_strict_non_stored_and_non_authoritative() -> None:
     assert payload["store"] is False
     assert payload["text"]["format"]["strict"] is True
     assert "potential_authoritative_truth_defect" in json.dumps(payload)
-    assert advisory.validate()["advisory_failure_invalidates_deterministic_measurement"] is False
+    assert (
+        advisory.validate(require_unauthorized=False)[
+            "advisory_failure_invalidates_deterministic_measurement"
+        ]
+        is False
+    )
 
 
 def test_advisory_selection_covers_every_failure_and_seeded_passes() -> None:
@@ -166,18 +180,15 @@ def test_simulations_have_finite_decision_boundaries(
     assert result["deterministic_result_changed_by_advisory"] is False
 
 
-def test_build_preflight_is_blocked_without_paid_authorization(
+def test_authorized_preflight_is_ready_without_final_authority(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
     monkeypatch.setattr(checkpoint, "validate", lambda **_: {"status": "passed"})
     result = checkpoint.preflight()
-    assert result["status"] == "blocked-not-authorized"
-    assert "instrument-paid-execution-authorized-false" in result["blockers"]
-    assert "freeze-external_model_evaluation-authorization-missing" in result[
-        "blockers"
-    ]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
     assert result["final_execution_authorized"] is False
 
 

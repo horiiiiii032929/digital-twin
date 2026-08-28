@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "binding_id": "academic-factual-qa-open-10000-openai-binding-005",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "successor_of": "academic-factual-qa-open-10000-openai-binding-004",
-  "verified_at": "2026-08-28T13:08:00+08:00",
+  "verified_at": "2026-08-28T13:40:00+08:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-development-inputs-only",
   "routing_policy": "direct-openai-responses-api-only-no-router-no-fallback",
@@ -60,19 +60,19 @@
     }
   },
   "retention": {
-    "source": "https://platform.openai.com/docs/models/default-usage-policies-by-endpoint",
+    "source": "https://developers.openai.com/api/docs/guides/your-data",
     "training_default": "api-data-not-used-for-training-unless-opted-in",
     "default_abuse_monitoring_retention_days_max": 30,
     "responses_application_state": "store-false-no-application-state-retention-subject-to-documented-exceptions",
     "production_private_data_authorized": false
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "wording_development_execution_authorized": false,
-    "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "wording_development_execution_authorized": true,
+    "product_development_execution_authorized": true,
+    "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "7a8814a3f3d2ec591981fcc4862bddaeab89e5e9a3f4f3cac163c09f66302b62"
+  "content_sha256": "78769f1cf98ffc3c7da2a4ae3b6a903829ce0cc043239468d0c63a1b425e95a6"
 }

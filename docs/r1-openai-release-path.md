@@ -39,38 +39,41 @@ all paid authority was initially false and no product progression was available.
 AFQC-055 now preserves its paid result as invalid: three exact GPT-5.4 calls
 covered 12 controls before a clarify vote omitted the mandatory boundary reason.
 Authority is revoked, hidden labels remain closed, and no product evidence exists.
+AFQC-056 therefore removes calibration as a product prerequisite while keeping
+deterministic truth authoritative and GPT-5.4 review advisory. AFQC-057 records
+the one-time authorization for checkpoint 004 after refreshing both exact model
+snapshots, pricing, Responses API support, and retention documentation. The
+sealed 10,000 cases remain unauthorized.
 
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Make one explicit reviewer-method decision that avoids another strict-output
-   calibration loop while retaining deterministic source truth.
-3. Once that decision is frozen, separately authorize a successor with
+2. Execute the authorized deterministic-primary checkpoint with
    500 candidate cases and the paired 100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
-4. If development passes, separately freeze and authorize the untouched
+3. If development passes, separately freeze and authorize the untouched
    10,000-case final run. A valid quality failure receives one method-level
    decision and is not tuned against the sealed set.
-5. Use the leakage-free result to select or reject #105's production grounding
+4. Use the leakage-free result to select or reject #105's production grounding
    gate, then run #107's untouched T0/T1 confirmation with T0 retained as
    rollback.
-6. Complete #132 learning-gap API/UI/deletion/key-rotation evidence and #134's
+5. Complete #132 learning-gap API/UI/deletion/key-rotation evidence and #134's
    fresh outreach-method comparison. In-app outreach stays disabled until it
    passes; Discord stays outside R1.
-7. Obtain professor approval for an explicit profile and complete #24's C0-C3
+6. Obtain professor approval for an explicit profile and complete #24's C0-C3
    behavior evaluation separately from factual hard gates.
-8. Deploy one immutable revision, verify HTTPS, roles, persistence, monitoring,
+7. Deploy one immutable revision, verify HTTPS, roles, persistence, monitoring,
    backup/restore, rollback, and complete professor/student journeys, then close
    #88, #9, #25, and parent #8 in that order.
 
 ## Human stop points
 
-Work stops for four inputs only:
+Work stops for four remaining inputs only:
 
-1. explicit selection of the reviewer method after invalid calibration 004;
-2. explicit authorization for the sealed 10,000-case paid run after development;
+1. explicit authorization for the sealed 10,000-case paid run after development;
+2. explicit authorization for the paid T0/T1 confirmation;
 3. professor approval of the explicit teaching profile;
 4. production domain/DNS access and deployment authorization.
 

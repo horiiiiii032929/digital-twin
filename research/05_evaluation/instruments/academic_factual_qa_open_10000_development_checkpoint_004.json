@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-checkpoint-004",
   "owner_issue": 127,
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "successor_of": "academic-factual-qa-open-10000-development-checkpoint-003",
   "decision_question": "Does the leakage-free T0 candidate satisfy the preregistered deterministic grounding and safety gates on 500 development cases while retaining supported answers relative to the fixed 100-case any-hit control?",
   "dataset": {
@@ -104,9 +104,9 @@
     "candidate_maximum_cost_usd": 8.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 2.0,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "development_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "development_execution_authorized": true,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -149,12 +149,12 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "wording_development_execution_authorized": false,
-    "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "wording_development_execution_authorized": true,
+    "product_development_execution_authorized": true,
+    "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "f1488c27224defbf6135179c379601d53f323493c9a66c8bfbd6b275ae40b070"
+  "content_sha256": "a9f389fe1dad19c9de3cf099145305f94a30aef2f4ac1b74765085ce781eaa1a"
 }

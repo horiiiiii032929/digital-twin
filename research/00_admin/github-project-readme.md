@@ -27,7 +27,7 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  calibration 004 now covers 630/630 audited files and 92/92 frozen entrypoints.
+  checkpoint 004 now covers 637/637 audited files and 94/94 frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
@@ -37,8 +37,9 @@ evidence, not competing end goals.
   sealed 10,000 cases remain unopened. AFQC-055 preserves calibration 004 as
   invalid after three exact GPT-5.4 calls because one clarify vote omitted its
   mandatory boundary reason. Authority is revoked, hidden labels stayed closed,
-  and the next step is a reviewer-method decision rather than another contract
-  refinement.
+  and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-057
+  authorizes exactly the 500 candidate plus 100 control run; the sealed 10,000
+  cases remain unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -50,8 +51,8 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Run #127's separately authorized GPT-5.4 calibration and conditional
-   500-case candidate plus paired 100-case control; authorize the sealed 10,000
+2. Run #127's authorized deterministic-primary 500-case candidate plus paired
+   100-case control; authorize the sealed 10,000
    cases only after a complete pass.
 3. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
@@ -70,7 +71,7 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Replacement OpenAI key and explicit 500-case authority | #127 development execution |
+| Completed checkpoint-004 execution and published result | #127 sealed-run decision |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

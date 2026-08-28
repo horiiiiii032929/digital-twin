@@ -91,8 +91,10 @@ professor-communication track.
    and passes three terminal simulations. AFQC-055 preserves its paid execution
    as invalid after three calls because a clarify vote omitted a mandatory
    boundary reason; authority is revoked and product quality remains unmeasured.
-   The next gate is one reviewer-method decision. The 10,000-case final run
-   remains unauthorized. Issue #131 separately
+   AFQC-056 resolves that decision with deterministic-primary checkpoint 004;
+   AFQC-057 authorizes exactly its 500 candidate and 100 control execution after
+   a fresh official OpenAI metadata check. The 10,000-case final run remains
+   unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
