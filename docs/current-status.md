@@ -166,9 +166,12 @@ wording calls entirely and prepares only the actual T0 product comparison: 500
 structured-evidence candidate cases and the fixed paired 100-case any-hit
 control. Both use the same corpus, retriever, exact GPT-5.4 mini generator,
 policy, decoding, and public inputs. Hidden gold opens only after both response
-ledgers are durable; deterministic scoring controls the decision and exact
-GPT-5.4 review remains non-blocking. Five finite simulations pass. The maximum
-is 654 calls, zero retries, and USD 18, but all provider, paid, method, final
+ledgers are durable; deterministic scoring controls the decision. AFQC-061
+replaces the overallocated routine review budget prospectively: exact GPT-5.4
+nano audits routine failures and the seeded sample, while exact full GPT-5.4 is
+reserved for at most 12 possible source-truth defects. Five finite simulations
+and the complete gate pass. The maximum is 666 calls, zero retries, and USD 8,
+but all provider, paid, method, final
 10,000-case, promotion, and deployment authority remains false. This is build
 readiness, not product-quality evidence. The next input is one explicit paid
 authorization for checkpoint 005.
@@ -892,10 +895,10 @@ continues to hold report, presentation, and professor-communication work.
 | Product UX and autonomous tutoring | Keep T0 as release baseline; T1 development Go Deeper | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free development passed every gate | Design and separately authorize one untouched T0/T1 confirmation; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
-| Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation and GPT-5.4 advisory review pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
+| Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; checkpoint 005 product run build-ready | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the checkpoint-004 wording Refine. AFQC-059/060 prospectively freeze the explicit 452-model/48-canonical package and a product-only 500+100 comparison with no new wording calls | Explicitly authorize checkpoint 005. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run |
+| Large factual QA | Engineering pipeline Keep; checkpoint 005 product run build-ready | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the checkpoint-004 wording Refine. AFQC-059/060 freeze the explicit 452-model/48-canonical package and product-only 500+100 comparison; AFQC-061 reduces its emergency ceiling to USD 8 without changing any quality gate | Explicitly authorize checkpoint 005. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run |
 
 ## Release readiness and critical path
 

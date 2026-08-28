@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "de41222ddd2f13a214ef22ce05f4b5336b9cf30c9ece36155d1e74be025959b4",
+  "record_sha256": "7f2ce6279d18df5045f62a636c2bbb968e387752b038cd10f7f4ea891b167718",
   "records": [
     {
       "audit": {
@@ -3816,7 +3816,7 @@
     {
       "audit": {
         "domain": "r1-openai-evaluation-contracts",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused current-policy validator review verified the active direct-OpenAI mini, nano, and bounded full-model identities, prohibited historical providers, exact registration, and network-free execution.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -6622,7 +6622,7 @@
       ],
       "path": "scripts/validate_model_policy.py",
       "risk": "high",
-      "sha256": "55756b9c0cd41582732a6dafd98fd12e18b1a1967842c9d1ec7a612e4686eb84"
+      "sha256": "c833680a9dee3cf457c903a9e87292288e460d5a3c0ca1ab794b6cf11e3cf3aa"
     },
     {
       "audit": {
@@ -7175,7 +7175,7 @@
     {
       "audit": {
         "domain": "r1-openai-runtime",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused model-policy review verified only the exact direct-OpenAI mini, nano, and full snapshots are active for prospective R1, while historical providers remain registered but inactive and prohibited families fail closed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8146,7 +8146,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "94a9b1293945431ac0d28c6ab4a805427a87c3d2d1ea9cf0e22b5d6cbc32dd44"
+      "sha256": "6b972fcf82591ab0d5fcd3281f2b85d3f1b9b295eb1a0dd99ab0fd1fe6ec0508"
     },
     {
       "audit": {
@@ -8391,7 +8391,7 @@
     {
       "audit": {
         "domain": "r1-openai-runtime",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused model-policy regressions verify exact mini, nano, and full direct-OpenAI snapshots are active, unregistered and historical models remain blocked, and prohibited model families fail closed.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -10242,7 +10242,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "adff72545fd710b2a5fbabeddff0d7820bc14c5bca275b7851ae26f8c6802384"
+      "sha256": "267a54c6006f97553e21e307c1143cde8559f895636012632884a70047151897"
     },
     {
       "audit": {

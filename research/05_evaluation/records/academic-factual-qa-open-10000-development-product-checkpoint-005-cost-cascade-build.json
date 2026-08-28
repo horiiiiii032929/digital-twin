@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-005-cost-cascade-build",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "0988d31b839a7178727a0e0b1469826be33cba2e",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "full-reviewer-product-checkpoint-budget",
+        "version": "005-build-historical",
+        "configuration": {
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "routine_advisory_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 654,
+          "maximum_cost_usd": 18.0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "emergency-cost-ceiling-usd",
+          "value": 18.0,
+          "unit": "USD",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regression-count",
+          "value": 15.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 17.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-product-gates-unchanged",
+          "passed": true,
+          "evidence": "The historical build already fixed deterministic source, action, claim, citation, boundary, and paired-comparison gates."
+        },
+        {
+          "name": "proportionate-advisory-allocation",
+          "passed": false,
+          "evidence": "Exact full GPT-5.4 was allocated to every routine advisory batch despite advisory judgments being non-authoritative."
+        },
+        {
+          "name": "advisory-cannot-change-truth",
+          "passed": true,
+          "evidence": "The historical build already kept model review non-authoritative."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "The historical build remained provider-unauthorized and final execution was false."
+        }
+      ],
+      "failures_by_category": {
+        "overallocated-advisory-budget": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "bounded-openai-cost-cascade",
+        "version": "005-cost-cascade-build",
+        "configuration": {
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "routine_advisory_model": "gpt-5.4-nano-2026-03-17",
+          "critical_truth_reviewer_model": "gpt-5.4-2026-03-05",
+          "critical_truth_case_limit": 12,
+          "maximum_calls": 666,
+          "maximum_cost_usd": 8.0,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "emergency-cost-ceiling-usd",
+          "value": 8.0,
+          "unit": "USD",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regression-count",
+          "value": 17.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 17.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-product-gates-unchanged",
+          "passed": true,
+          "evidence": "The benchmark, product conditions, gold boundary, and all preregistered product-quality thresholds are unchanged."
+        },
+        {
+          "name": "proportionate-advisory-allocation",
+          "passed": true,
+          "evidence": "Mini generates product answers, nano performs routine structured audit, and full GPT-5.4 is limited to at most 12 possible truth defects."
+        },
+        {
+          "name": "advisory-cannot-change-truth",
+          "passed": true,
+          "evidence": "Both advisory stages are non-authoritative; unresolved source-truth findings stop for researcher review."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "The build remains provider-unauthorized and the sealed final 10,000-case execution flag is false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "bounded-openai-cost-cascade",
+    "rationale": "Use the lower-cost exact nano snapshot for routine structured advisory classification while reserving exact full GPT-5.4 for at most 12 potentially decision-changing source-truth cases; deterministic scoring remains authoritative.",
+    "limitations": [
+      "This is network-free build evidence, not product-quality evidence.",
+      "All three configurations use one provider family and model-assisted review is not independent human annotation.",
+      "No paid, private-data, final 10,000-case, T1, fidelity, promotion, or deployment execution occurred."
+    ]
+  }
+}

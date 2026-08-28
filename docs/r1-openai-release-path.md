@@ -54,10 +54,12 @@ AFQC-059 resolves the prospective method decision by retaining the immutable
 452 accepted variants and labelling 48 exact canonical fallbacks. AFQC-060
 builds product checkpoint 005 around that fixed package. It has no wording
 stage: 500 candidate and 100 fixed paired control product responses must be
-durable before deterministic scoring opens hidden gold. Exact GPT-5.4 review is
-post-score and non-blocking. Five network-free outcomes pass under a 654-call,
-zero-retry, USD 18 ceiling. All paid, provider, final, promotion, and deployment
-authority remains false.
+durable before deterministic scoring opens hidden gold. AFQC-061 keeps exact
+GPT-5.4 mini for product answers, assigns routine non-blocking review to exact
+GPT-5.4 nano, and limits exact full GPT-5.4 to 12 possible truth-defect
+escalations. Five network-free outcomes pass under a 666-call, zero-retry, USD
+8 ceiling. All paid, provider, final, promotion, and deployment authority
+remains false.
 
 ## Finite critical path
 

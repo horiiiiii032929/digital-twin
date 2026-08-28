@@ -41,7 +41,9 @@ evidence, not competing end goals.
   preserves its valid wording-stage Refine result: 452/500 accepted variants,
   48 canonical fallbacks, 50/50 exact calls, USD 0.555499, and zero T0 product
   calls. AFQC-059/060 reuse that immutable mixed package and build product-only
-  checkpoint 005 with no new wording stage. Its five network-free outcomes pass;
+  checkpoint 005 with no new wording stage. AFQC-061 keeps mini generation,
+  uses nano for routine review, caps full-model truth escalation at 12 cases,
+  and lowers the emergency ceiling to USD 8. Its five network-free outcomes pass;
   the 500+100 product run and sealed 10,000 cases remain unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
