@@ -20,6 +20,7 @@
     "preflight:retrieval-index-lifecycle": "uv run --extra retrieval-benchmark python -m scripts.qualify_retrieval_index_lifecycle --preflight",
     "execute:retrieval-index-lifecycle": "uv run --extra retrieval-benchmark python -m scripts.qualify_retrieval_index_lifecycle --execute-local",
     "resume:retrieval-index-lifecycle": "uv run --extra retrieval-benchmark python -m scripts.qualify_retrieval_index_lifecycle --execute-local --resume",
+    "verify-runtime:retrieval-index-lifecycle": "uv run --extra retrieval-benchmark python -m scripts.qualify_retrieval_index_lifecycle --verify-real-runtime",
     "verify:autonomous-tutoring-graph": "uv run python -m scripts.validate_autonomous_tutoring_graph_instrument",
     "verify:learning-gap-core": "uv run pytest tests/digital_twin/test_learning_gap.py -q",
     "verify:proactive-outreach": "uv run pytest tests/digital_twin/test_proactive_outreach.py tests/api/test_proactive_outreach_api.py -q",

@@ -2,13 +2,28 @@ from __future__ import annotations
 
 import inspect
 
+import pytest
+
 from scripts.academic_factual_qa_open_10000_t0_adapter import _setup_service
 import scripts.qualify_retrieval_index_lifecycle as qualification
 from scripts.qualify_retrieval_index_lifecycle import (
+    QueryOnlyEmbedder,
     preflight,
+    runtime_preflight,
     simulate,
     validate,
 )
+
+
+def test_query_only_embedder_rejects_runtime_document_embedding() -> None:
+    delegate = qualification.SyntheticEmbedder()
+    runtime = QueryOnlyEmbedder(delegate)
+
+    assert runtime.embed_query("bounded query")
+    with pytest.raises(qualification.IndexQualificationError):
+        runtime.embed_documents(["must not execute"])
+    assert runtime.query_calls == 1
+    assert runtime.document_calls == 1
 
 
 def test_authorized_instrument_is_local_only_and_bounded() -> None:
@@ -41,13 +56,16 @@ def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     assert result["metrics"]["corruption_detection_accuracy"] == 1
 
 
-def test_live_preflight_is_ready_for_the_exact_local_qualification() -> None:
+def test_completed_build_blocks_reexecution_but_runtime_check_is_ready() -> None:
     readiness = preflight()
 
-    assert readiness["status"] == "ready"
-    assert readiness["blockers"] == []
+    assert readiness["status"] == "blocked-not-authorized"
+    assert readiness["blockers"] == ["exclusive-output-already-exists"]
     assert readiness["provider_calls"] == 0
     assert readiness["final_cases_opened"] is False
+    runtime_readiness = runtime_preflight()
+    assert runtime_readiness["status"] == "ready"
+    assert runtime_readiness["blockers"] == []
 
 
 def test_resume_preflight_reuses_partial_index_root(

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3a049c04d1ece543645846fae2710b99e66ed658a80c4608ab61c559e62b5b5b",
+  "record_sha256": "cb0babf409820c722cb21f09c8b820464a53d7fba010198de4baf8ade0fb2b42",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused command review verified the immutable retrieval-index lifecycle validate, network-free simulate, blocked preflight, execute, and resume commands; npm check includes the validation hook, and all local/model evaluation remains freeze-guarded and unauthorized.",
+        "evidence": "Focused command review verified immutable retrieval-index validate, simulate, preflight, execute, resume, and real-runtime query/restart commands; npm check retains the validation hook and every execution mode remains exact-instrument freeze guarded.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "079b15c749976e12091bd24854358256b4bd59dbb448aa5359f4bb2dfb10f79c"
+      "sha256": "7892c9712e39c3fd5a19249c93c22de63fb363179a354bb1f171286c3636bb33"
     },
     {
       "audit": {
@@ -5164,7 +5164,7 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle",
-        "evidence": "Runner review verified deterministic 2,100-region simulation, immutable binding/corruption checks, ranking/restart equivalence, zero runtime document embeddings, bounded resource metrics, ready exact local-only preflight, guarded resumable qualification, and no provider/final-case access.",
+        "evidence": "Runner review verified deterministic simulation, immutable binding/corruption checks, real 2,100-region Qwen build metrics, exclusive result handling, and a separate query-only restart check that fails on runtime document embedding; no provider/final-case access is possible.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -5177,11 +5177,12 @@
         "preflight:retrieval-index-lifecycle",
         "resume:retrieval-index-lifecycle",
         "simulate:retrieval-index-lifecycle",
+        "verify-runtime:retrieval-index-lifecycle",
         "verify:retrieval-index-lifecycle"
       ],
       "path": "scripts/qualify_retrieval_index_lifecycle.py",
       "risk": "high",
-      "sha256": "3ec7c141b987b0bfa5a682b5b899480c3697b6e641a2c57b45a6b017c4b713a7"
+      "sha256": "81d8e4cf5485dd00cad5739ebff97c14034f7697fa063961d1164e1529dd395f"
     },
     {
       "audit": {
@@ -10413,7 +10414,7 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle-verification",
-        "evidence": "Runner tests prove the exact local-only authority, 2,100-region network-free lifecycle invariants, ready preflight, safe partial-root resume handling, and the actual-product adapter's verify-only prebuilt-index boundary.",
+        "evidence": "Runner tests prove exact local-only authority, query-only wrapper rejection of runtime document embeddings, lifecycle invariants, completed-build exclusivity, ready supplemental runtime preflight, safe resume handling, and the product adapter's verify-only boundary.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -10424,7 +10425,7 @@
       "package_commands": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "risk": "medium",
-      "sha256": "1def5deadc49317b43b2de98cc284ef56b70c17a4014ba2e809e2abea18c7ac1"
+      "sha256": "699e78dbf8524cd905009af23de24fc2665f001f3fb92cac0bba4922c68d3114"
     },
     {
       "audit": {
