@@ -4,6 +4,83 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manual instrument review verified deterministic source, action, claim, citation, and policy scoring remains authoritative; GPT-5.4 review is post-score and non-blocking; final 10,000-case execution remains unauthorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "2c9b3c506ddb62343f0223a8dc1bb98a90d1872e10f7d6c8594896f2666e6248"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manual binding review verified direct OpenAI Responses API usage, exact version-locked GPT-5.4 mini and GPT-5.4 identities, store false, no fallback, zero retries, public inputs only, and provider execution disabled.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_005.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "577d32a25dcfecd776cf863c8dc83b81c49fbd0c78ae860f790bd74eaecab03d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manifest review verified the 500-case candidate binds the selected T0 retrieval, structured evidence, two-boundary policy, atomic-claim validation, exact generator identity, and build-only code revision without embedding hidden gold.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "a94bfbad323e6f0b7819b32095d16b365ed7e0035337efcb9bee3b6a05cd42f3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manifest review verified the fixed 100-case control differs only in any-hit evidence release, preserves the same corpus, retriever, generator, decoding, policy, and build-only code revision, and contains no hidden gold.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "6f2413af862d93f3271e785b17031740d3f8551f6a7a77bb110587cca9e972df"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused runner review verified deterministic sample selection, atomic SQLite persistence, exact advisory identity, strict schema parsing, non-blocking malformed or missing review limitations, and escalation only for a potential authoritative truth defect.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_advisory_audit_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "99244d0204558aa566a91a3ff50d700ac2936256bb82bf80b1bb8beb4fc42708"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused orchestrator review and five network-free terminal simulations verified hidden-gold separation, atomic resume bindings, stage stop behavior, fixed 500+100 execution, deterministic authority, advisory isolation, hard call and cost ceilings, and fail-closed authorization guards.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_development_checkpoint_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "fe8269c43f7776665a191ef66cf1429e0e7d62e1d8ed9fb72f84e67d43b7bdf5"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Fourteen focused regressions cover build-only validation, pass, wording failure, product failure, malformed advisory review, truth-defect escalation, authorization guards, hidden-gold separation, exact manifests, and all hard call and cost ceilings.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_development_checkpoint_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "70a738827bff0b94009bba71a4e9e031c09b1e0a2212a78f9b98525458b7ff9f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "openai-reviewer-calibration-004",
       "evidence": "Manual result review verified calibration 004 is immutable invalid evidence, all authorization is revoked, the ten-call/USD 3 historical limits remain visible, no product progression exists, and the final 10,000 stage remains closed.",
       "findings": [],
@@ -884,8 +961,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused command-surface review verified checkpoint-004 validation, five terminal network-free simulations, blocked live preflight, and inclusion in the complete repository gate without authorizing provider or final-set execution.",
       "findings": [],
       "path": "deploy/staging.env.example",
       "reviewed_at": "2026-08-27",
@@ -912,7 +989,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "cb2c2ee4fdc9588d3804d1e02bc8e4d9b4cff90695839764d4c5fe7eda685e3e"
+      "sha256": "32ba897d65c9dc87e9e9395f87f69b6345e255f9edd25c0976f2365324797f67"
     },
     {
       "audit_status": "audited",
@@ -4294,8 +4371,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Freeze review verified both checkpoint-004 entrypoints are protected, the checkpoint is absent from every bounded authorization map, the repository-wide freeze remains active, and live execution fails closed.",
       "findings": [],
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-08-27",
@@ -5356,7 +5433,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "aa95bde8921682ff857d27fa7e0bdab6b40ab5b7a4f45ba5c89532e8612cba8a"
+      "sha256": "45ffeeac7c795792e64c9a3b2fb52263033801a2dd9992205358d81ebbaa7c28"
     },
     {
       "audit_status": "audited",

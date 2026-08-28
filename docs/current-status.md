@@ -118,6 +118,22 @@ input and 1,443 output tokens, 15.511 seconds aggregate latency, and USD
 final call occurred. Reviewer quality remains unmeasured; the next action is a
 method-level decision rather than another silent contract revision.
 
+AFQC-056 implements that method-level decision without starting another
+reviewer-calibration loop. The build-only successor
+`academic-factual-qa-open-10000-development-checkpoint-004` makes deterministic
+source, action, claim, citation, boundary, and policy scoring the decision
+authority. Exact `gpt-5.4-mini-2026-03-17` remains the public-question wording
+and T0 generation model. Exact `gpt-5.4-2026-03-05` reviews wording and, only
+after both response ledgers and deterministic scoring are complete, audits
+every deterministic failure plus a seeded 40-case passing sample. Missing or
+malformed post-score reviews are recorded as limitations and cannot change the
+deterministic metrics; only a potential authoritative source-truth defect opens
+researcher review. Five network-free terminal simulations pass, product inputs
+remain physically separated from hidden gold, and all provider, paid, final
+10,000-case, promotion, and deployment authority remains false. The next human
+input is one explicit authorization for this 500-case candidate plus 100-case
+control checkpoint after a fresh clean no-call preflight.
+
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
 for #127 and none of those attempts is being retried. Issue
@@ -140,11 +156,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 630 executable or execution-affecting
-files, including checkpoint 003. All are audited with zero pending files and
+the current branch now extends it to 637 executable or execution-affecting
+files, including checkpoint 004. All are audited with zero pending files and
 zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 91 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 94 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
@@ -461,7 +477,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The merged local
-gate passes 1,054 Python tests and 47 frontend tests, frontend lint, and the
+gate passes 1,106 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -481,10 +497,10 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the 1,054-test Python suite.
+connections. These corrections remain covered by the 1,106-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 630-file audit.
-Evaluation execution remains frozen, with 92/92 protected entrypoints registered
+artifacts are also fully dispositioned in the current 637-file audit.
+Evaluation execution remains frozen, with 94/94 protected entrypoints registered
 and no prospective evaluation in the bounded allowlist. The completed A1 runs
 have been removed from the bounded allowlist; no proactive-outreach execution is
 authorized.
