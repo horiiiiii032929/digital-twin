@@ -5,23 +5,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, zero automatic promotion, and disabled provider/final execution.",
+      "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, the USD 8 mini/nano/bounded-full cascade, zero automatic promotion, and disabled provider/final execution.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_005.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "e502eda56830d30b230e008fe0afd20ebb3274eddcb85fc44b6752d513cae0e7"
+      "sha256": "940418b7d0c87d78e47dcb758ca2d7abda31b55843943ed48fba94243a5c5c94"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Manual binding review verified direct OpenAI Responses API use, exact dated GPT-5.4 mini and GPT-5.4 identities, store false, zero retries/fallback, current official pricing and limits, public inputs only, and disabled paid authority.",
+      "evidence": "Manual binding review verified direct OpenAI Responses API use, exact dated GPT-5.4 mini, nano, and full identities, role-bounded escalation, store false, zero retries/fallback, current official pricing and limits, public inputs only, and disabled paid authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_006.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "2334d70185c7d9ac4f41bec9e3936c55e6b3bcbf9cf8382c39653a01c21312ce"
+      "sha256": "a005e163373d67cd3cf04918f0a8950c274364fdac5fef13b18ea5bfb5e0a2e2"
     },
     {
       "audit_status": "audited",
@@ -60,23 +60,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Focused runner review verified no wording execution path, public-input-only product calls, both response ledgers durable before gold scoring, atomic resume bindings, exact cost/call ceilings, advisory isolation, and fail-closed authorization.",
+      "evidence": "Focused runner review verified no wording execution path, public-input-only product calls, both response ledgers durable before gold scoring, atomic resume bindings, the USD 8 mini/nano/bounded-full cascade, non-authoritative escalation, and fail-closed authorization.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_005.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "d78220522ea71c6930e0b511b37c097f7dbc7d7b4a1b60f7f9a3166e8826bd52"
+      "sha256": "8d91a8e579d29d53628725c118741df747495e997c3727504f57df51c0db25be"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization, exact models, paired manifests, physical gold separation, five finite simulations, authorization-only preflight blockers, and resume binding drift.",
+      "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization, exact three-model cascade roles, USD 8 stage budgets, paired manifests, physical gold separation, five finite simulations, authorization-only preflight blockers, and resume binding drift.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_005.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "6002ca33af57bfefd658300dd89a5cb4eccc441a7d9dd0c5874f27ca6abdcb57"
+      "sha256": "0af5d68a41a89960d3082f09757972cf876926b78fc36a683d20adbbba7d99c2"
     },
     {
       "audit_status": "audited",
@@ -126,12 +126,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "deterministic-primary-development-checkpoint",
-      "evidence": "Focused runner review verified deterministic sample selection, atomic SQLite persistence, exact advisory identity, strict schema parsing, non-blocking malformed or missing review limitations, and escalation only for a potential authoritative truth defect.",
+      "evidence": "Focused runner review verified deterministic sample selection, atomic SQLite persistence, configurable exact direct-OpenAI reviewer identity, strict schema parsing, non-blocking malformed or missing review limitations, and no authority to rewrite deterministic truth.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_advisory_audit_004.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "99244d0204558aa566a91a3ff50d700ac2936256bb82bf80b1bb8beb4fc42708"
+      "sha256": "428a4272a2ef237f7147f47ee2015eb9b28b6b5d5eb33ad74433c061f49334e1"
     },
     {
       "audit_status": "audited",
@@ -1611,7 +1611,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-contracts",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused OpenAI-only adapter review verified exact-model direct transport, no fallback, store false, configurable per-condition call/cost ceilings, gold separation, and unchanged T0 behavior under targeted regressions.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_002.json",
       "reviewed_at": "2026-08-27",
@@ -2815,7 +2815,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f0cccef66e3dc9dc2f2e7a3f8d21a458a402f19fbd15b23637acee5fbfb5e7b5"
+      "sha256": "e6da02d43f849c30acfdb02c6a6f9ede53c4c5a7984895b5cc1acb7f823f5849"
     },
     {
       "audit_status": "audited",

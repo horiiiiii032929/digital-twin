@@ -69,6 +69,8 @@ OPENAI_BINDING_PATH = (
     / "research/05_evaluation/instruments/"
     "academic_factual_qa_open_10000_openai_binding_002.json"
 )
+PRODUCT_MAXIMUM_CALLS = {"candidate": 500, "control": 100}
+PRODUCT_MAXIMUM_COST_USD = {"candidate": 8.0, "control": 2.0}
 ATOMIC_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",
     "additionalProperties": False,
@@ -407,8 +409,9 @@ def build_live_t0_adapter(
     del cases
     generator_binding, generator_transport = _generator_transport(manifest)
     flow_id = manifest.flow_id
-    maximum_calls = 500 if "candidate" in flow_id else 100
-    maximum_cost = 8.0 if "candidate" in flow_id else 2.0
+    condition = "candidate" if "candidate" in flow_id else "control"
+    maximum_calls = PRODUCT_MAXIMUM_CALLS[condition]
+    maximum_cost = PRODUCT_MAXIMUM_COST_USD[condition]
     provider_ledger = ProviderCallLedgerV1(
         Path(runtime["provider_ledger_path"]),
         run_binding={

@@ -28,7 +28,8 @@
     "binding_id": "academic-factual-qa-open-10000-openai-binding-006",
     "decision_authority": "deterministic-source-claim-citation-action-and-policy-scoring",
     "product_generator_role": "high-volume-generator",
-    "post_score_auditor_role": "semantic-reviewer",
+    "post_score_auditor_role": "routine-advisory-reviewer",
+    "critical_truth_escalation_role": "critical-truth-reviewer",
     "wording_provider_calls": 0,
     "wording_package_policy": "reuse-immutable-452-accepted-model-variants-plus-48-explicit-canonical-fallbacks",
     "authoritative_truth_visible_during_product_calls": false,
@@ -43,10 +44,20 @@
     "passing_sample_seed": 20260828,
     "batch_size": 10,
     "maximum_calls": 54,
-    "maximum_cost_usd": 8.0,
+    "maximum_cost_usd": 1.0,
     "maximum_transport_retries": 0,
     "malformed_or_missing_policy": "record-as-limitation-without-changing-deterministic-result",
     "potential_truth_defect_policy": "require-researcher-review-before-final-method-decision"
+  },
+  "critical_truth_escalation": {
+    "selection_policy": "only-cases-flagged-as-potential-authoritative-truth-defects-by-routine-review",
+    "maximum_cases": 12,
+    "batch_size": 1,
+    "maximum_calls": 12,
+    "maximum_cost_usd": 1.0,
+    "maximum_transport_retries": 0,
+    "overflow_or_missing_policy": "mark-unresolved-and-require-researcher-review",
+    "model_cannot_override_deterministic_truth": true
   },
   "allocation": {
     "status": "frozen-approved",
@@ -69,9 +80,9 @@
     "development_candidate_case_count": 500,
     "development_control_case_count": 100,
     "candidate_maximum_calls": 500,
-    "candidate_maximum_cost_usd": 8.0,
+    "candidate_maximum_cost_usd": 5.0,
     "control_maximum_calls": 100,
-    "control_maximum_cost_usd": 2.0,
+    "control_maximum_cost_usd": 1.0,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "development_execution_authorized": false,
@@ -83,10 +94,11 @@
       "candidate-500",
       "control-100",
       "deterministic-score-and-compare",
-      "non-blocking-advisory-audit"
+      "routine-nano-advisory-audit",
+      "bounded-critical-truth-escalation"
     ],
-    "maximum_calls": 654,
-    "maximum_cost_usd": 18.0,
+    "maximum_calls": 666,
+    "maximum_cost_usd": 8.0,
     "deterministic_result_remains_authoritative": true,
     "wording_stage_reexecuted": false,
     "final_10000_execution_authorized": false
@@ -122,5 +134,5 @@
     "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "1df9c147b0468d928223935bee856d3366e63af5c42dcffd337f3c4dcc744e90"
+  "content_sha256": "fa48a95bfaf8b80358a8da032b66d48746087fdb4f5a94c82a041dd817e1f6a8"
 }

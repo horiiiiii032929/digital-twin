@@ -65,6 +65,7 @@ LEDGER_PATH = GENERATED / (
 RESULT_PATH = GENERATED / (
     "academic-factual-qa-open-10000-v1-development-004-advisory-audit-result.json"
 )
+REVIEWER_ROLE = "semantic-reviewer"
 
 
 class AdvisoryAuditError(RuntimeError):
@@ -438,7 +439,7 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         INSTRUMENT_PATH, identity_key="instrument_id", identity=INSTRUMENT_ID
     )
     binding = _load_hashed(BINDING_PATH, identity_key="binding_id", identity=BINDING_ID)
-    reviewer = binding["providers"]["semantic-reviewer"]
+    reviewer = binding["providers"][REVIEWER_ROLE]
     transport = DirectProviderJsonTransport(reviewer)
     system, prompt = _prompt(
         [
@@ -458,7 +459,10 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         task="network-free-advisory-audit",
         schema=_schema(1),
     )
-    if payload.get("store") is not False or payload.get("model") != "gpt-5.4-2026-03-05":
+    if (
+        payload.get("store") is not False
+        or payload.get("model") != reviewer["provider_model"]
+    ):
         raise AdvisoryAuditError("advisory OpenAI payload drifted")
     if require_unauthorized and (
         any(instrument["authorization"].values()) or any(binding["authorization"].values())
@@ -551,7 +555,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
     binding = _load_hashed(BINDING_PATH, identity_key="binding_id", identity=BINDING_ID)
     rows, failures, sample = build_audit_rows()
     selection_sha256 = canonical_sha256(rows)
-    reviewer = binding["providers"]["semantic-reviewer"]
+    reviewer = binding["providers"][REVIEWER_ROLE]
     transport = DirectProviderJsonTransport(reviewer)
     run_binding = {
         "instrument_id": INSTRUMENT_ID,
@@ -650,7 +654,10 @@ def score(
         "potential_truth_defect_count": len(truth_defects),
         "potential_truth_defect_case_ids": truth_defects,
         "deterministic_result_changed": False,
-        "reviewer_model": "gpt-5.4-2026-03-05",
+        "reviewer_model": _load_hashed(
+            BINDING_PATH, identity_key="binding_id", identity=BINDING_ID
+        )["providers"][REVIEWER_ROLE]["provider_model"],
+        "reviewer_role": REVIEWER_ROLE,
         "same_provider_model_review": True,
     }
     if RESULT_PATH.exists():

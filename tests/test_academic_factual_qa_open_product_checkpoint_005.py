@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from collections import Counter
 import json
 from pathlib import Path
@@ -77,8 +78,8 @@ def test_mixed_wording_rematerialization_is_revoked() -> None:
 def test_product_checkpoint_is_build_only_and_has_no_wording_stage() -> None:
     result = checkpoint.validate()
     assert result["status"] == "passed-build-only"
-    assert result["maximum_calls"] == 654
-    assert result["maximum_cost_usd"] == 18.0
+    assert result["maximum_calls"] == 666
+    assert result["maximum_cost_usd"] == 8.0
     assert result["wording_provider_calls"] == 0
     assert result["hidden_gold_visible_to_product"] is False
     instrument = _load(checkpoint.INSTRUMENT_PATH)
@@ -86,7 +87,8 @@ def test_product_checkpoint_is_build_only_and_has_no_wording_stage() -> None:
         "candidate-500",
         "control-100",
         "deterministic-score-and-compare",
-        "non-blocking-advisory-audit",
+        "routine-nano-advisory-audit",
+        "bounded-critical-truth-escalation",
     ]
     assert not any(instrument["authorization"].values())
     assert instrument["execution"]["final_execution_authorized"] is False
@@ -94,11 +96,18 @@ def test_product_checkpoint_is_build_only_and_has_no_wording_stage() -> None:
 
 def test_product_checkpoint_uses_only_exact_direct_openai_models() -> None:
     binding = _load(checkpoint.BINDING_PATH)
-    assert set(binding["providers"]) == {"high-volume-generator", "semantic-reviewer"}
+    assert set(binding["providers"]) == {
+        "high-volume-generator",
+        "routine-advisory-reviewer",
+        "critical-truth-reviewer",
+    }
     assert binding["providers"]["high-volume-generator"]["provider_model"] == (
         "gpt-5.4-mini-2026-03-17"
     )
-    assert binding["providers"]["semantic-reviewer"]["provider_model"] == (
+    assert binding["providers"]["routine-advisory-reviewer"]["provider_model"] == (
+        "gpt-5.4-nano-2026-03-17"
+    )
+    assert binding["providers"]["critical-truth-reviewer"]["provider_model"] == (
         "gpt-5.4-2026-03-05"
     )
     assert all(
@@ -111,6 +120,56 @@ def test_product_checkpoint_uses_only_exact_direct_openai_models() -> None:
     serialized = json.dumps(binding).casefold()
     for retired in ("openrouter", "deepseek", "gemini", "mistral", "codex"):
         assert retired not in serialized
+
+
+def test_cost_cascade_is_bounded_and_review_cannot_change_truth() -> None:
+    instrument = _load(checkpoint.INSTRUMENT_PATH)
+    assert instrument["execution"]["candidate_maximum_cost_usd"] == 5.0
+    assert instrument["execution"]["control_maximum_cost_usd"] == 1.0
+    assert instrument["advisory_audit"]["maximum_cost_usd"] == 1.0
+    assert instrument["critical_truth_escalation"]["maximum_cost_usd"] == 1.0
+    assert instrument["critical_truth_escalation"]["maximum_cases"] == 12
+    assert instrument["critical_truth_escalation"]["maximum_calls"] == 12
+    assert instrument["critical_truth_escalation"][
+        "model_cannot_override_deterministic_truth"
+    ] is True
+
+
+def test_empty_critical_escalation_is_network_free_and_terminal(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(
+        checkpoint, "CRITICAL_REVIEW_LEDGER", tmp_path / "critical.sqlite3"
+    )
+    monkeypatch.setattr(
+        checkpoint, "CRITICAL_REVIEW_RESULT", tmp_path / "critical-result.json"
+    )
+    result = asyncio.run(checkpoint._execute_critical_review([], resume=False))
+    assert result["status"] == "completed"
+    assert result["selected_case_count"] == 0
+    assert result["reviewed_case_count"] == 0
+    assert result["unresolved_case_ids"] == []
+    assert not checkpoint.CRITICAL_REVIEW_LEDGER.exists()
+
+
+def test_critical_escalation_overflow_requires_researcher_review(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(
+        checkpoint, "CRITICAL_REVIEW_LEDGER", tmp_path / "critical.sqlite3"
+    )
+    monkeypatch.setattr(
+        checkpoint, "CRITICAL_REVIEW_RESULT", tmp_path / "critical-result.json"
+    )
+    result = checkpoint._score_critical_review(
+        selected_ids=[],
+        overflow_ids=["case-overflow"],
+        reviewer_model="gpt-5.4-2026-03-05",
+    )
+    assert result["status"] == "needs-human-review"
+    assert result["overflow_case_count"] == 1
+    assert result["unresolved_case_ids"] == ["case-overflow"]
+    assert result["deterministic_result_changed"] is False
 
 
 def test_candidate_and_control_manifests_differ_only_by_condition() -> None:
