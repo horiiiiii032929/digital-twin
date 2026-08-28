@@ -82,8 +82,10 @@ professor-communication track.
    40-control calibration and one finite 660-call orchestrator. It can proceed
    to wording, 500 candidate cases, 100 paired controls, and scoring only after
    calibration passes. Four stage-stop simulations pass with zero calls. The
-   AFQC-050 now authorizes this combined run once after a clean live no-call
-   preflight.
+   AFQC-050 authorized this combined run once. Attempts 001 and 002 each stopped
+   after one exact GPT-5.4 batch on evaluator-contract inconsistencies, before
+   hidden labels or product calls. AFQC-052 preserves both invalid outcomes,
+   revokes authority, and requires one explicit reviewer-method decision.
    The 10,000-case final run remains unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

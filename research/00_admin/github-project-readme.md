@@ -31,8 +31,10 @@ evidence, not competing end goals.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
-  cases. AFQC-050 authorizes this complete path once; the sealed 10,000 cases
-  remain unauthorized.
+  cases. AFQC-050 authorized this path once, but both calibration attempts
+  stopped after their first exact GPT-5.4 batch on evaluator-contract
+  inconsistencies. AFQC-052 revokes authority; the 500+100 product run and
+  sealed 10,000 cases remain unopened.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,

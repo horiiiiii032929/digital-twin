@@ -22,6 +22,8 @@ def test_professor_can_schedule_and_student_controls_private_in_app_outreach(
     app = create_app(student_repository=repository, settings=AppSettings())
     client = TestClient(app)
     now = datetime.now(UTC)
+    quiet_hours_start = (now + timedelta(hours=1)).strftime("%H:%M")
+    quiet_hours_end = (now + timedelta(hours=2)).strftime("%H:%M")
 
     preference = client.put(
         f"/api/student/courses/{fixture.course_a_id}/outreach-preferences/in-app",
@@ -29,8 +31,8 @@ def test_professor_can_schedule_and_student_controls_private_in_app_outreach(
         json={
             "enabled": True,
             "timezone": "UTC",
-            "quiet_hours_start": "23:00",
-            "quiet_hours_end": "06:00",
+            "quiet_hours_start": quiet_hours_start,
+            "quiet_hours_end": quiet_hours_end,
             "max_messages_per_7_days": 3,
         },
     )

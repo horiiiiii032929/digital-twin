@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "binding_id": "academic-factual-qa-open-10000-openai-binding-003",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-openai-binding-002",
   "verified_at": "2026-08-28T10:36:14+08:00",
   "maximum_age_hours_for_execution": 24,
@@ -67,13 +67,13 @@
     "production_private_data_authorized": false
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "calibration_execution_authorized": true,
-    "wording_development_execution_authorized": true,
-    "product_development_execution_authorized": true,
-    "semantic_review_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "calibration_execution_authorized": false,
+    "wording_development_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "e81dfdb310be1f7789f2bf773e7a5547c30de3e16f260d57120a5565c9c793fe"
+  "content_sha256": "67dd81b6ed0a94947b0f3fdc6dd55c74b2b8072561f3d4767d743f12f080f6cb"
 }

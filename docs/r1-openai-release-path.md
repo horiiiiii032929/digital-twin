@@ -24,18 +24,21 @@ PR #136 merged this direct-provider base. Checkpoint 003 now adds a mandatory
 40-control GPT-5.4 calibration before wording, 500 candidate cases, 100 paired
 controls, and deterministic scoring. Pass, calibration-failure,
 wording-failure, and product-failure simulations all stop correctly without
-network access. AFQC-050 authorizes exactly this checkpoint once; no OpenAI
-inference call or product-quality claim has yet been made. The sealed 10,000
-cases remain unauthorized.
+network access. AFQC-050 authorized exactly this checkpoint once. Two fresh
+calibration attempts each made one exact GPT-5.4 call and stopped before hidden
+labels or later stages: the first exposed a schema/parser taxonomy mismatch;
+the corrected second returned defect-bearing records marked semantically valid.
+AFQC-052 records both as invalid and revokes authority. No product-quality claim
+exists, and the sealed 10,000 cases remain unauthorized.
 
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Refresh official model identity, pricing, limits, and data-control metadata;
-   freeze and explicitly authorize checkpoint 003 once.
-3. Qualify GPT-5.4, then conditionally run 500 candidate cases and the paired
-   100-case any-hit control; score hidden
+2. Make one explicit reviewer-method decision after the two invalid GPT-5.4
+   calibration attempts; do not silently revise checkpoint 003 again.
+3. Freeze a successor evaluator contract, qualify it, then conditionally run
+   500 candidate cases and the paired 100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
 4. If development passes, separately freeze and authorize the untouched
@@ -57,8 +60,8 @@ cases remain unauthorized.
 
 Work stops for four inputs only:
 
-1. explicit authorization for checkpoint 003 calibration plus the conditional
-   500+100 paid development run;
+1. explicit reviewer-method selection and authorization for a newly frozen
+   500+100 paid development checkpoint;
 2. explicit authorization for the sealed 10,000-case paid run after development;
 3. professor approval of the explicit teaching profile;
 4. production domain/DNS access and deployment authorization.

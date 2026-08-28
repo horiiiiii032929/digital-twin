@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "db59450e3bf17a4e7505065e7fe801aded23543bce0a88927bfc895881834eaa",
+  "record_sha256": "3c1bd53508fb9c30647aab48dfc70916e05b52954db19fa324baef3c98b72d61",
   "records": [
     {
       "audit": {
@@ -1720,7 +1720,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Authorization review verified exact OpenAI snapshots, bounded stage budgets, hidden-label and hidden-gold separation, zero fallback, one-time development authority, and final 10,000-case execution disabled.",
+        "evidence": "Terminal review verified both invalid calibration attempts are preserved, all provider, paid, calibration, wording, product, and semantic-review authority is revoked, and final 10,000-case execution remains disabled.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1731,7 +1731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_003.json",
       "risk": "high",
-      "sha256": "d82d406f99e37b2a927fa7f2f31cb80bf51c25b4b0c3b33d772174c82c3651cb"
+      "sha256": "f1d564ea805f07c1f694306fc9dacfb042222e418ba524ca48b060d1f190c429"
     },
     {
       "audit": {
@@ -1752,7 +1752,7 @@
     {
       "audit": {
         "domain": "r1-openai-evaluation-contracts",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, targeted regressions, and checkpoint-003 authorization revocation passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -1768,7 +1768,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint",
-        "evidence": "Authorization review verified direct Responses API use, exact dated identities, store false, zero fallback and retries, refreshed official metadata, bounded development authority, and final execution false.",
+        "evidence": "Terminal review verified direct Responses API use, exact dated identity on both completed calls, store false, zero fallback and retries, complete accounting, full authorization revocation, and final execution false.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_003.json",
       "risk": "high",
-      "sha256": "9e2e88696dadb22708f4260450424e963b0fd996c5470d15c2a2bd0978955f07"
+      "sha256": "bffd8770c9dff94980ae9bae1903801db055fdf98caa24f53f7acc103a16fb53"
     },
     {
       "audit": {
@@ -8136,7 +8136,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3bf02c8706c596ffae1758e415d2c3f61ad878489611eb50098d5b9d6f0d3777"
+      "sha256": "1d146e190807f9090c0ef449afb18e067c80c5a533623ee0495e90b8737aaffd"
     },
     {
       "audit": {
@@ -8381,7 +8381,7 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, and cross-course rejection with no external calls.",
+        "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, cross-course rejection, and time-independent quiet-hour behavior with no external calls.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8392,7 +8392,7 @@
       "package_commands": [],
       "path": "tests/api/test_proactive_outreach_api.py",
       "risk": "medium",
-      "sha256": "2ca1c4943562c31917eb2857f37e64460d4d4e2fe744494bc556f1a51dd81e9c"
+      "sha256": "be0f5cdf598bdb559e99c997f03ea2d9fd8b4accd93c0f447d21ffa178e9b5f4"
     },
     {
       "audit": {
@@ -8669,7 +8669,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain the historical deterministic-builder authorization plus the one-time academic-factual-qa-open-10000-development-checkpoint-003 authorization, verify both A1 development and confirmation-002 revocation, and reject every other unregistered provider, paid, private-source, external-delivery, and held-out operation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical deterministic-builder authorization, verify checkpoint-003, A1 development, and confirmation-002 revocation, and reject every other unregistered provider, paid, private-source, external-delivery, and held-out operation. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8680,7 +8680,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "47619fd6f5686d01b83c45f2dc98cb2086204fb4387d93bcaa0f3ab340d8e833"
+      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
     },
     {
       "audit": {
@@ -9053,7 +9053,7 @@
     {
       "audit": {
         "domain": "openai-development-checkpoint-verification",
-        "evidence": "Focused tests cover hidden-label separation, immutable hashes, bounded authorization, ready preflight behavior, normalized defect-schema enforcement, stage stops, and clean pass/failure simulations.",
+        "evidence": "Focused tests cover hidden-label separation, immutable hashes, revoked-authorization preflight behavior, normalized defect-schema enforcement, stage stops, and clean pass/failure simulations.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9064,7 +9064,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_003.py",
       "risk": "medium",
-      "sha256": "87cd73b6c47450db006715412587d2e4f8829e53b4c5f163e35796a4b705f3c2"
+      "sha256": "6d644b997eaaa2fa458f3b851a3bffaeb8f2df894a73172d17a393f7371a23eb"
     },
     {
       "audit": {
