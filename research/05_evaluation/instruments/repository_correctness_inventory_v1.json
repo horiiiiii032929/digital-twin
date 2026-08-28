@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 644
+    "audited": 649
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 151,
-    "active_runtime": 111,
+    "active_or_unclassified_tooling": 152,
+    "active_runtime": 112,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 155,
+    "evaluation_configuration": 156,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 134
+    "verification": 136
   },
-  "file_count": 644,
+  "file_count": 649,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1720b2819a95ac259f35fdc12e2a4f3aae54fa796467f4a098263cfb2655c0a8",
+  "record_sha256": "9e1a70ff536a0db3b032ae59226b6273f2b786ea7478398057801d9184cbcf61",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and invokes the locked retrieval-benchmark extra for preflight, execution, and resume after preserving the zero-call invalid attempt.",
+        "evidence": "Focused command review verified immutable retrieval-index validate, simulate, preflight, execute, resume, and real-runtime query/restart commands; npm check retains the validation hook and every execution mode remains exact-instrument freeze guarded.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "05c82e30a127c2fef4b6b599d8c9e3af972be0aa2a7eefeabc37accde67f75d7"
+      "sha256": "7892c9712e39c3fd5a19249c93c22de63fb363179a354bb1f171286c3636bb33"
     },
     {
       "audit": {
@@ -3431,6 +3431,22 @@
     },
     {
       "audit": {
+        "domain": "retrieval-index-lifecycle",
+        "evidence": "Terminal instrument review verified completed Keep status, exact 2,100-region/four-course Qwen3 scope, every execution authority false, finite progression, preserved product/final locks, and no automatic promotion.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/retrieval_index_lifecycle_001.json",
+      "risk": "high",
+      "sha256": "64912878a0ed1571b01537e18e8f037c43eabe818968f6a917aacb656857e37c"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -3880,9 +3896,9 @@
     {
       "audit": {
         "domain": "r1-openai-evaluation-tooling",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused adapter review verified the actual-product path requires exact prebuilt release-bound retrieval artifacts before Qwen loads, performs no runtime document embedding, shares the qualified artifact across candidate/control, and preserves gold separation and provider accounting.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -3894,7 +3910,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "e6da02d43f849c30acfdb02c6a6f9ede53c4c5a7984895b5cc1acb7f823f5849"
+      "sha256": "45dd4252ab01e3ddb56b54f8d8562b4a54be56d3c9dbe6a3039f480cba0f2e87"
     },
     {
       "audit": {
@@ -5144,6 +5160,29 @@
       "path": "scripts/qualify_professor_fidelity_judge_v4.py",
       "risk": "high",
       "sha256": "ad36cf7353f5b0fe46113d1bca62b1c80be5a7eb17c8bb9c36c5ca9740c5405a"
+    },
+    {
+      "audit": {
+        "domain": "retrieval-index-lifecycle",
+        "evidence": "Runner review verified deterministic simulation, immutable binding/corruption checks, real 2,100-region Qwen build metrics, exclusive result handling, and a separate query-only restart check that fails on runtime document embedding; no provider/final-case access is possible.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:retrieval-index-lifecycle",
+        "preflight:retrieval-index-lifecycle",
+        "resume:retrieval-index-lifecycle",
+        "simulate:retrieval-index-lifecycle",
+        "verify-runtime:retrieval-index-lifecycle",
+        "verify:retrieval-index-lifecycle"
+      ],
+      "path": "scripts/qualify_retrieval_index_lifecycle.py",
+      "risk": "high",
+      "sha256": "c35d29ddd743a8ec0cc89410865e0c2ec406cf1a307c55ec72b36feae205db0a"
     },
     {
       "audit": {
@@ -6887,9 +6926,9 @@
     {
       "audit": {
         "domain": "r1-openai-runtime",
-        "evidence": "Focused freeze review verified checkpoint 004 authorization was removed after its terminal result while the repository-wide block, historical evidence, and unauthorized product/final stages remain fail closed.",
+        "evidence": "Focused API composition review verified exact profile/chunker binding, publication-time index build and verification, runtime query-only loading, optional backwards-compatible activation, and fail-closed behavior when an embedder or exact artifact is unavailable.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6898,7 +6937,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "e555c5bc89bf098a301199c30bc543d32bedb2551727f2d2fe01be1ed1ff3e11"
+      "sha256": "51a3c490ed2db9d72df8a7eede92149dae4553a80a2314e2e69ce51c2ff21c59"
     },
     {
       "audit": {
@@ -7079,7 +7118,7 @@
     {
       "audit": {
         "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual adapter and transport review covered finite dimensions/scores, exact model identity, revision binding, HTTPS, sanitized errors, cost accounting, and malformed responses; focused provider tests passed.",
+        "evidence": "Manual local-embedding review verified exact model identity and revision binding, finite vector checks, bounded per-batch usage accounting, and explicit MPS synchronization/cache release after each completed batch; focused provider and retrieval-index tests passed.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -7138,7 +7177,7 @@
       "package_commands": [],
       "path": "services/embeddings/qwen3_client.py",
       "risk": "high",
-      "sha256": "236df009a7b9a4564d11faf10bbfbcd9ba593694514d0889ece69c5ca7645a95"
+      "sha256": "4286b9118f9811a2a6426bf97ce5f3c68e8646ac1f1a2af29ada7dd396f0c00e"
     },
     {
       "audit": {
@@ -7815,7 +7854,7 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Export review confirms the new post-generation atomic-claim contract, exact control, NLI candidate, and deterministic final release owner are explicit without changing historical v2 controls. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Public-export review verified every immutable retrieval-index binding, manifest, error, store, load, and source-hash contract is explicit alongside existing grounding interfaces; focused import, retrieval, product, and publication tests passed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -7826,12 +7865,12 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "f705fd59b04ce8c45bb13ce73f72f173569ccb4236668de94ca2991f1a4d120f"
+      "sha256": "4ffb287b06c5c6dd2b46542ce63f5fd1ab9625bd09c815c5296ab4eb0d282265"
     },
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed.",
+        "evidence": "Manual retriever review and focused tests verified precomputed BM25 and dense loaders recompute lexical invariants, validate identifiers/dimensions, never embed documents at runtime, and preserve live hybrid ranking behavior.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -8002,7 +8041,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/retrieval.py",
       "risk": "high",
-      "sha256": "d6528d4ba3414d799f41c0ffde1fe70819ea7357702db676cdb3ff8610951384"
+      "sha256": "d3bf06c47b5904e17b0b44890b2381e52f3dbbcbe1c451c3114126cb038c5af8"
     },
     {
       "audit": {
@@ -8035,6 +8074,22 @@
       "path": "src/digital_twin/grounding/retrieval_factory.py",
       "risk": "high",
       "sha256": "7b033a9b558f05b8b509d62da9add6ca15a4e43829b12fc054ef67cef9c383ce"
+    },
+    {
+      "audit": {
+        "domain": "retrieval-index-lifecycle",
+        "evidence": "Code review and focused adversarial tests verified immutable content-addressed artifacts, exact release/source/profile/chunker/model bindings, atomic pointers, checksum verification, strict numeric configuration, source-version/course isolation, idempotent build, query-only runtime load, and fail-closed corruption behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/retrieval_index.py",
+      "risk": "high",
+      "sha256": "49e6e8b48e04da1911f37c6c952f9d0b637f43814b29742ea19946ab27dcf7c3"
     },
     {
       "audit": {
@@ -8391,7 +8446,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review verified checkpoint-005 external/model authority was revoked after the sole corrective attempt and only deterministic development construction remains allowlisted; the global freeze remains active for every other operation.",
+        "evidence": "Focused freeze review verifies retrieval-index-lifecycle-development-001 authority is revoked after the terminal Keep result; checkpoint 005 and every provider, paid, private-data, product, final, and unregistered operation remain blocked while the repository freeze stays active.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -8402,7 +8457,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2471cfa0b07b3e36c06752a35bd39d62da2c41ccb332af0eb53bc7be0a06c4ad"
+      "sha256": "3e77bd0ee3a27b5dd805c687acfa6796ab1ea9eb90ce73389c5cf900210b135b"
     },
     {
       "audit": {
@@ -8503,7 +8558,7 @@
     {
       "audit": {
         "domain": "runtime-publication",
-        "evidence": "Publication review covers ownership, immutable release gates, post-commit shadow observation, rollback exclusion, and redacted non-blocking hook failure so a completed publication is never reversed or falsely reported failed.",
+        "evidence": "Publication review and focused tests verify exact retrieval-index preparation and readiness are configured as a pair, preflight fails closed, publish/rollback prepare before state mutation, repeated preparation is idempotent, and errors remain sanitized.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-review"
@@ -8514,7 +8569,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/publication.py",
       "risk": "high",
-      "sha256": "7731baf402520fb149f34a74574b101c42222fd5b2218aaa59cca6dc4874f889"
+      "sha256": "abf25a776a1c22eacd28ead6b4bbec4a77a0ab84b7ec986746cc19513a7b0644"
     },
     {
       "audit": {
@@ -8535,7 +8590,7 @@
     {
       "audit": {
         "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Focused tutoring-service review and tests verify exact release/profile/source/chunker/model index binding, zero runtime document embedding, artifact traceability, safe no-evidence behavior on missing/stale/corrupt indexes, and unchanged legacy behavior when the index store is not configured.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8546,7 +8601,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "0d24dabd2d17b941cdec970dc2ac78af1cc75d8fd3ad9d0c87cf4fe4507eef79"
+      "sha256": "61e42b5ffdeec4eaa04a544b3fb18e60433ee3c546d33f7e0b50ec5c87181ba6"
     },
     {
       "audit": {
@@ -8935,7 +8990,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify checkpoint-005 authority is revoked and continue rejecting every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
+        "evidence": "Focused freeze-policy tests verify retrieval-index authority is revoked and checkpoint 005 plus every unregistered provider, paid, private-source, external-delivery, product, and held-out operation remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8946,7 +9001,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "f0faba4411f1c792469d18b5be8b156561158449245811684ca1ab6c61a41611"
+      "sha256": "47803224475efd60cba4756af71247b35d0e99a2a269df9cb00d5a8e36ac00a0"
     },
     {
       "audit": {
@@ -8979,6 +9034,22 @@
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
       "sha256": "8f7b81ceeecf4a72ad1554e03ded90943d5312a5d4bc4339a63e8cb14cb125be"
+    },
+    {
+      "audit": {
+        "domain": "retrieval-index-lifecycle-verification",
+        "evidence": "Focused tests cover idempotent build, no runtime document embedding, ranking equivalence, checksum and pointer tampering, changed release/source rejection, mixed-version/course boundaries, atomic publish/rollback, runtime fail-closed behavior, and publication preparation reuse.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_retrieval_index.py",
+      "risk": "medium",
+      "sha256": "783123eb14eb6694627b23528d307f72e5a3431948f35376ff411a03e9932c62"
     },
     {
       "audit": {
@@ -10342,6 +10413,22 @@
     },
     {
       "audit": {
+        "domain": "retrieval-index-lifecycle-verification",
+        "evidence": "Runner tests prove terminal authority revocation, query-only wrapper rejection of runtime document embeddings, lifecycle invariants, exclusive completed outputs, blocked reexecution, safe resume behavior, and the product adapter's verify-only boundary.",
+        "findings": [],
+        "reviewed_at": "2026-08-28",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_retrieval_index_lifecycle.py",
+      "risk": "medium",
+      "sha256": "3e7a21185543c535e2c24b859e324dfabbfa1da3fb155fd6f82a8f9ef8ccb662"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -10742,8 +10829,8 @@
     }
   ],
   "risk_counts": {
-    "high": 496,
-    "medium": 148
+    "high": 499,
+    "medium": 150
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

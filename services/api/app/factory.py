@@ -37,7 +37,11 @@ from src.digital_twin.generation import (
     LiveAtomicGroundedGenerator,
     StrictEvidenceGroundedPromptBuilder,
 )
-from src.digital_twin.grounding import LocalCourseSourceIngestionService
+from src.digital_twin.grounding import (
+    LocalCourseSourceIngestionService,
+    RetrievalIndexStoreV1,
+    build_retrieval_index_binding,
+)
 from src.digital_twin.grounding.protocols import (
     EvidenceSufficiencyGate,
     OCRProvider,
@@ -89,6 +93,7 @@ def create_app(
     source_ocr_provider: OCRProvider | None = None,
     source_description_provider: RegionDescriptionProvider | None = None,
     identity_repository: IdentityRepository | None = None,
+    retrieval_index_store: RetrievalIndexStoreV1 | None = None,
     settings: AppSettings | None = None,
 ) -> FastAPI:
     runtime_settings = settings or AppSettings()
@@ -157,6 +162,12 @@ def create_app(
         student_profile_path or runtime_settings.student_profile_path
     )
     profile = load_release_profile(resolved_student_profile_path)
+    retriever = next(
+        entry for entry in profile.components if entry.component == ComponentKind.RETRIEVER
+    )
+    chunker = next(
+        entry for entry in profile.components if entry.component == ComponentKind.CHUNKER
+    )
     configured_generator, provider_budget = _configured_generator(
         runtime_settings,
         profile,
@@ -170,6 +181,17 @@ def create_app(
         evidence_gate=student_evidence_gate,
         claim_evidence_validator=student_claim_evidence_validator,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
+        retrieval_index_store=retrieval_index_store,
+        retrieval_index_chunker_id=(
+            chunker.implementation.implementation_id
+            if chunker.implementation is not None
+            else "page-bounded-heading-paragraph-chunker"
+        ),
+        retrieval_index_chunker_version=(
+            chunker.implementation.version
+            if chunker.implementation is not None
+            else "v1"
+        ),
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
         app.state.student_repository
@@ -186,12 +208,49 @@ def create_app(
         )
 
     app.state.discord_delivery_adapter = DiscordWebhookDeliveryAdapter(enabled=False)
+    def release_index_binding(release):
+        if retriever.implementation is None or chunker.implementation is None:
+            raise ValueError("release profile lacks an indexable retrieval selection")
+        return build_retrieval_index_binding(
+            course_id=release.course_id,
+            release_id=release.id,
+            profile_id=release.profile_id,
+            profile_version=release.profile_version,
+            chunker_id=chunker.implementation.implementation_id,
+            chunker_version=chunker.implementation.version,
+            chunks=release.chunks,
+            configuration=retriever.implementation.configuration,
+        )
+
+    def retrieval_index_ready(release) -> bool:
+        if retrieval_index_store is None:
+            return True
+        retrieval_index_store.verify_bound(release_index_binding(release))
+        return True
+
+    def prepare_retrieval_index(release) -> None:
+        if retrieval_index_store is None:
+            return
+        if student_embedder is None:
+            raise ValueError("retrieval index preparation requires an embedder")
+        retrieval_index_store.build(
+            release_index_binding(release),
+            release.chunks,
+            student_embedder,
+        )
+
     app.state.publication_service = ReleaseLifecycleService(
         app.state.student_repository,
         profile_id=profile.profile_id,
         profile_version=profile.profile_version,
         evidence_sufficiency_ready=student_evidence_gate is not None,
         post_publish_hook=scan_evidence_recovery_after_publish,
+        retrieval_index_ready=(
+            retrieval_index_ready if retrieval_index_store is not None else None
+        ),
+        retrieval_index_preparer=(
+            prepare_retrieval_index if retrieval_index_store is not None else None
+        ),
     )
 
     app.add_middleware(
