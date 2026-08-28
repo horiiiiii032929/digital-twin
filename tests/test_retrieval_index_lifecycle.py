@@ -2,25 +2,21 @@ from __future__ import annotations
 
 import inspect
 
-import pytest
-
 from scripts.academic_factual_qa_open_10000_t0_adapter import _setup_service
 import scripts.qualify_retrieval_index_lifecycle as qualification
 from scripts.qualify_retrieval_index_lifecycle import (
-    execute_local,
     preflight,
     simulate,
     validate,
 )
-from src.digital_twin.repository_freeze import RepositoryFreezeError
 
 
-def test_build_only_instrument_keeps_every_execution_authority_false() -> None:
+def test_authorized_instrument_is_local_only_and_bounded() -> None:
     result = validate()
 
     assert result == {
         "instrument_id": "retrieval-index-lifecycle-development-001",
-        "status": "passed-build-only",
+        "status": "passed-authorized-local-only",
         "source_region_count": 2100,
         "provider_calls": 0,
         "local_model_loaded": False,
@@ -45,24 +41,16 @@ def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     assert result["metrics"]["corruption_detection_accuracy"] == 1
 
 
-def test_live_preflight_and_local_execution_fail_closed() -> None:
+def test_live_preflight_is_ready_for_the_exact_local_qualification() -> None:
     readiness = preflight()
 
-    assert readiness["status"] == "blocked-not-authorized"
-    assert "instrument-local-model-execution-authorized-false" in readiness[
-        "blockers"
-    ]
-    assert "instrument-method-evaluation-execution-authorized-false" in readiness[
-        "blockers"
-    ]
+    assert readiness["status"] == "ready"
+    assert readiness["blockers"] == []
     assert readiness["provider_calls"] == 0
     assert readiness["final_cases_opened"] is False
 
-    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
-        execute_local()
 
-
-def test_resume_preflight_reuses_partial_index_root_without_authorizing_execution(
+def test_resume_preflight_reuses_partial_index_root(
     tmp_path,
     monkeypatch,
 ) -> None:
@@ -73,7 +61,7 @@ def test_resume_preflight_reuses_partial_index_root_without_authorizing_executio
 
     readiness = qualification.preflight(resume=True)
 
-    assert readiness["status"] == "blocked-not-authorized"
+    assert readiness["status"] == "ready"
     assert "exclusive-output-already-exists" not in readiness["blockers"]
 
 

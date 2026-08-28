@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bf7647a686cad30a64403e46a2a2ad5103082c301ef429192add1283b88c12e0",
+  "record_sha256": "3a049c04d1ece543645846fae2710b99e66ed658a80c4608ab61c559e62b5b5b",
   "records": [
     {
       "audit": {
@@ -3432,7 +3432,7 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle",
-        "evidence": "Prospective instrument review verified the exact 2,100-region/four-course scope, immutable Qwen3 binding, network-free lifecycle gates, zero provider/final-case access, false execution authorities, finite progression, and no automatic product promotion.",
+        "evidence": "Authorization review verified the exact 2,100-region/four-course scope, immutable Qwen3 binding, local-model and method-evaluation authority only, zero provider/paid/product/final-case authority, finite progression, and no automatic promotion.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -3443,7 +3443,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/retrieval_index_lifecycle_001.json",
       "risk": "high",
-      "sha256": "9707c3f7791731a60d044c03beeea2e83a881e25170f609945d7ebdf2592b2d7"
+      "sha256": "34677455b5c6f891f87f6e09b9e727c541a07fbd64ba8f2ddfccb15de36521c4"
     },
     {
       "audit": {
@@ -5164,7 +5164,7 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle",
-        "evidence": "Runner review and network-free execution verified deterministic 2,100-region simulation, immutable binding/corruption checks, ranking/restart equivalence, zero runtime document embeddings, bounded resource metrics, blocked preflight, guarded resumable local qualification, and no provider/final-case access.",
+        "evidence": "Runner review verified deterministic 2,100-region simulation, immutable binding/corruption checks, ranking/restart equivalence, zero runtime document embeddings, bounded resource metrics, ready exact local-only preflight, guarded resumable qualification, and no provider/final-case access.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -5181,7 +5181,7 @@
       ],
       "path": "scripts/qualify_retrieval_index_lifecycle.py",
       "risk": "high",
-      "sha256": "0c9a42a48675019d51b5cee9a0334fb25ff95ae7c911a1349c60c8b3b4961e23"
+      "sha256": "3ec7c141b987b0bfa5a682b5b899480c3697b6e641a2c57b45a6b017c4b713a7"
     },
     {
       "audit": {
@@ -8445,7 +8445,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review registered the retrieval-index qualification entrypoint for local-model and method-evaluation operations while leaving it absent from bounded authorizations; 97/97 guarded entrypoints and the repository-wide freeze pass.",
+        "evidence": "Focused freeze review authorizes exactly retrieval-index-lifecycle-development-001 for local-model and method-evaluation operations while every provider, paid, product, private-data, and final operation remains blocked; the repository-wide freeze remains active.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -8456,7 +8456,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3e77bd0ee3a27b5dd805c687acfa6796ab1ea9eb90ce73389c5cf900210b135b"
+      "sha256": "37e61c59a241cda5f71a0a06bec189a7fc6634763136d0fa1062a4bb99f4487d"
     },
     {
       "audit": {
@@ -8989,7 +8989,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify checkpoint-005 authority is revoked and continue rejecting every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
+        "evidence": "Focused freeze-policy tests verify the exact two-operation local retrieval-index authority while checkpoint 005 and every unregistered provider, paid, private-source, external-delivery, product, and held-out operation remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -9000,7 +9000,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "f0faba4411f1c792469d18b5be8b156561158449245811684ca1ab6c61a41611"
+      "sha256": "8484b53ad4e3bb0ab9792bd1e37a397ea2a704f54db6d9d8b226e219216e8642"
     },
     {
       "audit": {
@@ -10413,7 +10413,7 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle-verification",
-        "evidence": "Runner tests prove build-only authority, 2,100-region network-free lifecycle invariants, blocked live preflight/execution, safe partial-root resume handling, and the actual-product adapter's verify-only prebuilt-index boundary.",
+        "evidence": "Runner tests prove the exact local-only authority, 2,100-region network-free lifecycle invariants, ready preflight, safe partial-root resume handling, and the actual-product adapter's verify-only prebuilt-index boundary.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -10424,7 +10424,7 @@
       "package_commands": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "risk": "medium",
-      "sha256": "4c3f3ef5b5044a0137bdf9ec7356a89e46554ee99e2906bb1856c252b81db7f9"
+      "sha256": "1def5deadc49317b43b2de98cc284ef56b70c17a4014ba2e809e2abea18c7ac1"
     },
     {
       "audit": {

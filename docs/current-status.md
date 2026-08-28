@@ -199,6 +199,12 @@ for #127 and none of those attempts is being retried. Issue
 [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) now owns the
 separate provider-unauthorized true-visual 30-cluster/60-case supplement.
 
+AFQC-066 now authorizes exactly the resumable local-Qwen qualification over the
+2,100 public regions. The authority covers only local-model and method
+evaluation: provider, paid, product-checkpoint, private-data, and final-case
+execution remain false. The result must revoke this authority regardless of
+outcome.
+
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
 the failed single AI Studio route with a bounded OpenRouter allowlist: Vertex
