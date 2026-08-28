@@ -1,6 +1,6 @@
 # R1 OpenAI release path
 
-Status date: 2026-08-27
+Status date: 2026-08-28
 
 ## Current checkpoint
 
@@ -20,18 +20,34 @@ router, fallback, retry, or alternate-provider path. Historical DeepSeek,
 Gemini, Mistral, OpenRouter, and local-model evidence is preserved but cannot be
 selected by the active R1 profile or its paid preflight.
 
-The 500-case wording simulation and the flow-independent adapter simulation pass
-without network access. The live preflights correctly report
-`blocked-not-authorized`. No OpenAI inference call or product-quality claim has
-been made at this checkpoint.
+PR #136 merged this direct-provider base. Checkpoint 003 now adds a mandatory
+40-control GPT-5.4 calibration before wording, 500 candidate cases, 100 paired
+controls, and deterministic scoring. Pass, calibration-failure,
+wording-failure, and product-failure simulations all stop correctly without
+network access. AFQC-050 authorized exactly this checkpoint once. Two fresh
+calibration attempts each made one exact GPT-5.4 call and stopped before hidden
+labels or later stages: the first exposed a schema/parser taxonomy mismatch;
+the corrected second returned defect-bearing records marked semantically valid.
+AFQC-052 records both as invalid and revokes authority. No product-quality claim
+exists, and the sealed 10,000 cases remain unauthorized.
+
+AFQC-053 now freezes a standalone method successor: calibration 004 removes the
+provider-owned overall-validity field and derives it deterministically from the
+five atomic defect judgments. It reuses the same 40 controls and gates without
+importing either invalid attempt. Three network-free terminal simulations pass;
+all paid authority was initially false and no product progression was available.
+AFQC-055 now preserves its paid result as invalid: three exact GPT-5.4 calls
+covered 12 controls before a clarify vote omitted the mandatory boundary reason.
+Authority is revoked, hidden labels remain closed, and no product evidence exists.
 
 ## Finite critical path
 
-1. Revoke the OpenAI key exposed in chat and place only its replacement in the
-   ignored repository-root `.env` as `OPENAI_API_KEY`.
-2. Refresh official model identity, pricing, limits, and data-control metadata;
-   freeze and explicitly authorize the 500-case development checkpoint.
-3. Run 500 candidate cases and the paired 100-case any-hit control, score hidden
+1. Keep the rotated replacement key only in the ignored repository-root `.env`
+   as `OPENAI_API_KEY`.
+2. Make one explicit reviewer-method decision that avoids another strict-output
+   calibration loop while retaining deterministic source truth.
+3. Once that decision is frozen, separately authorize a successor with
+   500 candidate cases and the paired 100-case any-hit control; score hidden
    gold only after responses are durable, and publish either Keep, Refine, or
    invalid-execution.
 4. If development passes, separately freeze and authorize the untouched
@@ -51,13 +67,12 @@ been made at this checkpoint.
 
 ## Human stop points
 
-Work stops for five inputs only:
+Work stops for four inputs only:
 
-1. confirmation that the exposed key was revoked and its replacement installed;
-2. explicit authorization for the revised 500-case paid run;
-3. explicit authorization for the sealed 10,000-case paid run after development;
-4. professor approval of the explicit teaching profile;
-5. production domain/DNS access and deployment authorization.
+1. explicit selection of the reviewer method after invalid calibration 004;
+2. explicit authorization for the sealed 10,000-case paid run after development;
+3. professor approval of the explicit teaching profile;
+4. production domain/DNS access and deployment authorization.
 
 True visual evaluation #131, real-source work #102, an external student pilot
 #10, and the final report #13 remain post-R1 and do not block this release.

@@ -783,6 +783,22 @@ Current utilities:
   the fail-closed paid readiness report. Execute and score commands remain
   blocked until the exact instrument receives separate authorization.
 
+  `run_academic_factual_qa_open_development_checkpoint_003.py` is the finite
+  direct-OpenAI successor. It first runs exact GPT-5.4 over the immutable 20
+  clean and 20 planted-defect controls in ten four-item batches. Only a pass on
+  action accuracy, mutation sensitivity, clean specificity, citation-defect
+  sensitivity, vote coverage, schema, and identity permits the existing 25
+  wording-author plus 25 wording-review batches. Accepted wording is then
+  materialized as a paired runtime package before separate gold-free subprocesses
+  run the 500-case structured-evidence candidate and 100-case any-hit control.
+  Both response ledgers must be complete before the scorer can load either gold
+  package. The combined checkpoint has zero retries, a 660-call ceiling, and
+  separate USD 3/5/8/2 stage stops. Run `npm run
+  verify:academic-factual-qa-open-development-003` and `npm run
+  simulate:academic-factual-qa-open-development-003` without network access.
+  The preflight and execute commands remain blocked until one explicit bounded
+  authorization; final 10,000-case execution remains unauthorized.
+
   The response runner accepts only `EvaluationCaseV1`,
   supports T0/T1/T2/HTTP/control adapters, and persists responses in an
   exclusive resume-bound SQLite ledger without importing or reading hidden

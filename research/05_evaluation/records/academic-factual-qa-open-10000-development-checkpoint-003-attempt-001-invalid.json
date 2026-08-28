@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-checkpoint-003-attempt-001-invalid",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "forty-public-source-planted-controls",
+  "code_revision": "b076e322a0f6e4d94757ed7d443ef159afdf2766",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "network-free-calibration-contract-control-attempt-001",
+        "version": "v1",
+        "configuration": {
+          "provider_calls": 0,
+          "control_count": 40
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "reviewer-contract-consistency",
+          "passed": true,
+          "evidence": "The deterministic control emits the normalized contract directly."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "The network-free control requires no provider identity."
+        },
+        {
+          "name": "hidden-label-separation",
+          "passed": true,
+          "evidence": "The control simulation does not open hidden labels during vote construction."
+        },
+        {
+          "name": "later-stages-closed",
+          "passed": true,
+          "evidence": "The control makes no wording, product, control, or final call."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-gpt-5-4-reviewer-calibration-attempt-001",
+        "version": "v1-invalid",
+        "configuration": {
+          "provider_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 10,
+          "attempted_calls": 1,
+          "completed_provider_responses": 1,
+          "zero_retries": true,
+          "input_tokens": 2147,
+          "output_tokens": 530,
+          "reported_cost_usd": 0.0133175,
+          "latency_ms": 5972.915458
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0133175,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "reviewer-contract-consistency",
+          "passed": false,
+          "evidence": "The provider schema allowed arbitrary defect labels while the post-parser accepted only five normalized labels."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "The completed call returned the exact gpt-5.4-2026-03-05 identity."
+        },
+        {
+          "name": "hidden-label-separation",
+          "passed": true,
+          "evidence": "Expected control labels remained unopened because calibration did not complete."
+        },
+        {
+          "name": "later-stages-closed",
+          "passed": true,
+          "evidence": "No wording, product-development, control, or final execution call occurred."
+        }
+      ],
+      "failures_by_category": {
+        "provider-schema-post-parser-contract-mismatch": 1,
+        "incomplete-calibration": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid because two harness validation layers contradicted each other. Preserve it and correct only the prospective schema contract under a fresh ledger.",
+    "limitations": [
+      "Only four of forty controls received a provider response.",
+      "Reviewer quality cannot be estimated because hidden labels remained sealed.",
+      "No wording, T0 product, paired-control, or final 10,000-case evidence was produced."
+    ]
+  }
+}

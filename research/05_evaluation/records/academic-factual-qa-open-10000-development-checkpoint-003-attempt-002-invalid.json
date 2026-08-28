@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-checkpoint-003-attempt-002-invalid",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-confirmation-002-calibration-controls",
+  "corpus_id": "forty-public-source-planted-controls",
+  "code_revision": "bd1f7d4eb53a7c521402a22641f75f6dc5560bd1",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "network-free-calibration-contract-control-attempt-002",
+        "version": "v2",
+        "configuration": {
+          "provider_calls": 0,
+          "control_count": 40
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "normalized-defect-schema",
+          "passed": true,
+          "evidence": "The deterministic control emits only the five frozen defect labels."
+        },
+        {
+          "name": "semantic-invariant-consistency",
+          "passed": true,
+          "evidence": "The deterministic control marks every defect-bearing record semantically invalid."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "The network-free control requires no provider identity."
+        },
+        {
+          "name": "hidden-label-and-later-stage-closure",
+          "passed": true,
+          "evidence": "The control does not open hidden labels or make a later-stage call."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-gpt-5-4-reviewer-calibration-attempt-002",
+        "version": "v2-invalid",
+        "configuration": {
+          "provider_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 10,
+          "attempted_calls": 1,
+          "completed_provider_responses": 1,
+          "zero_retries": true,
+          "input_tokens": 2177,
+          "output_tokens": 506,
+          "reported_cost_usd": 0.0130325,
+          "latency_ms": 4869.396375
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "valid-calibration-votes",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "completed-provider-calls",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0130325,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 3.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "normalized-defect-schema",
+          "passed": true,
+          "evidence": "The provider returned only the five frozen normalized defect labels."
+        },
+        {
+          "name": "semantic-invariant-consistency",
+          "passed": false,
+          "evidence": "Two votes detected claim or citation defects while marking the candidate record semantically valid."
+        },
+        {
+          "name": "stable-provider-identity",
+          "passed": true,
+          "evidence": "The completed call returned the exact gpt-5.4-2026-03-05 identity."
+        },
+        {
+          "name": "hidden-label-and-later-stage-closure",
+          "passed": true,
+          "evidence": "Hidden labels remained unopened and no wording, product, control, or final call occurred."
+        }
+      ],
+      "failures_by_category": {
+        "semantic-validity-defect-contradiction": 2,
+        "incomplete-calibration": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 002 is invalid because the reviewer output contradicted a frozen semantic invariant. Stop the checkpoint and require an explicit reviewer-method decision instead of another silent contract revision.",
+    "limitations": [
+      "Only four of forty controls received a provider response.",
+      "Reviewer quality cannot be estimated because hidden labels remained sealed.",
+      "No wording, T0 product, paired-control, or final 10,000-case evidence was produced."
+    ]
+  }
+}

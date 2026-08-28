@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reviewer-calibration-004",
+  "owner_issue": 127,
+  "status": "completed-invalid-execution-authorization-revoked",
+  "successor_of": "academic-factual-qa-open-10000-development-checkpoint-003",
+  "decision_question": "Can exact GPT-5.4 reliably judge the atomic action, claim, citation, ambiguity, and boundary dimensions when overall semantic validity is derived deterministically rather than requested from the model?",
+  "prediction": "Removing the redundant overall-validity field will eliminate the two observed self-contradictions while preserving sensitivity to all five planted defect classes.",
+  "method": {
+    "deterministic_truth_authoritative": true,
+    "model_review_advisory": true,
+    "provider_returns_overall_validity": false,
+    "overall_validity_derivation": "case_semantically_valid equals true if and only if normalized defect_types is empty",
+    "provider_defect_taxonomy": [
+      "action",
+      "ambiguity",
+      "boundary",
+      "citation",
+      "claim"
+    ],
+    "post_parse_invariants": [
+      "answerability-matches-expected-action",
+      "answer-support-fields-are-applicable",
+      "boundary-support-fields-are-not-applicable",
+      "boundary-lineage-is-empty",
+      "clarify-matches-ambiguity",
+      "evidence-ids-are-visible",
+      "citation-support-requires-citation-defect",
+      "claim-support-requires-claim-defect"
+    ],
+    "prior_attempt_votes_imported": false,
+    "prior_invalid_ledgers_preserved": true,
+    "automatic_product_progression": false
+  },
+  "calibration": {
+    "packet_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_blinded_review_packet.json",
+    "packet_content_sha256": "8ba652e718ec2cdeb3e718413f45975d0abd99a5adf0ef36bf071409e1f5bf8c",
+    "hidden_controls_path": "research/05_evaluation/datasets/academic_factual_qa_confirmation_002_calibration_controls.json",
+    "hidden_controls_content_sha256": "e0a7870739a4f1a080d1c0c1ab96230abec8ddea4597add96d27b49d10c2d1eb",
+    "control_count": 40,
+    "clean_control_count": 20,
+    "corrupted_control_count": 20,
+    "batch_size": 4,
+    "maximum_calls": 10,
+    "maximum_cost_usd": 3.0,
+    "maximum_transport_retries": 0,
+    "reviewer_role": "semantic-reviewer",
+    "prior_provider_votes_imported": false,
+    "expected_labels_visible_during_calls": false,
+    "gates": {
+      "action_accuracy_min": 0.9,
+      "mutation_sensitivity_min": 0.9,
+      "specificity_min": 0.9,
+      "citation_defect_sensitivity_min": 0.9,
+      "valid_vote_count_required": 40,
+      "malformed_response_count_max": 0,
+      "identity_drift_count_max": 0
+    }
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_execution_authorized": false,
+    "final_execution_authorized": false,
+    "maximum_calls": 10,
+    "maximum_cost_usd": 3.0,
+    "maximum_transport_retries": 0,
+    "automatic_product_progression": false
+  },
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "calibration_execution_authorized": false,
+    "wording_development_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "semantic_review_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "3501fd73dc609d44dfadb7eca2e624d7317d26c5d666c346ebe8679f46c52ea8"
+}

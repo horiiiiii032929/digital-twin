@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-checkpoint-003-build",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "3dfc3bdf6e13d167394384546c62d3a29a3f5f46",
+  "dirty_state": true,
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-r1-boundary",
+        "version": "build-001",
+        "configuration": {
+          "finite_sequential_checkpoint": false,
+          "reviewer_calibration_bound": false,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "network-free-failure-scenario-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 4.0,
+          "passed": false
+        },
+        {
+          "name": "calibration-control-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": false
+        },
+        {
+          "name": "repository-audited-file-count",
+          "value": 616.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 627.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "calibration-before-development",
+          "passed": false,
+          "evidence": "The predecessor established the OpenAI transport but did not bind a reviewer calibration to one sequential development checkpoint."
+        },
+        {
+          "name": "hidden-label-separation",
+          "passed": false,
+          "evidence": "The predecessor did not include the immutable planted-control calibration packet."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "The existing flow-independent case and hidden-gold boundary remains valid."
+        },
+        {
+          "name": "finite-budget-and-stage-stops",
+          "passed": false,
+          "evidence": "The predecessor did not provide one finite calibration-to-scoring stage machine or failure simulations."
+        },
+        {
+          "name": "paid-execution-closed",
+          "passed": true,
+          "evidence": "All predecessor execution authorizations remained false."
+        }
+      ],
+      "failures_by_category": {
+        "missing-finite-calibration-to-product-orchestration": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-development-checkpoint",
+        "version": "003-build",
+        "configuration": {
+          "wording_and_generator_model": "gpt-5.4-mini-2026-03-17",
+          "semantic_reviewer_model": "gpt-5.4-2026-03-05",
+          "api": "responses",
+          "request_store": false,
+          "maximum_calls": 660,
+          "maximum_retries": 0,
+          "maximum_cost_usd": 18.0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-failure-scenario-count",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 4.0,
+          "passed": true
+        },
+        {
+          "name": "calibration-control-count",
+          "value": 40.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 40.0,
+          "passed": true
+        },
+        {
+          "name": "repository-audited-file-count",
+          "value": 627.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 627.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "calibration-before-development",
+          "passed": true,
+          "evidence": "The finite orchestrator makes calibration the first stage and stops with zero development calls unless every reviewer-quality and operational gate passes."
+        },
+        {
+          "name": "hidden-label-separation",
+          "passed": true,
+          "evidence": "Expected calibration labels cannot be opened until the complete ten-call vote ledger is persisted."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "Product response execution imports no scoring or hidden-gold module; scoring opens gold only after both response ledgers are complete."
+        },
+        {
+          "name": "finite-budget-and-stage-stops",
+          "passed": true,
+          "evidence": "Four network-free pass/failure simulations enforce 660 calls, zero retries, per-stage ceilings, and no automatic promotion."
+        },
+        {
+          "name": "paid-execution-closed",
+          "passed": true,
+          "evidence": "All authorization fields are false and the bounded freeze allowlist excludes checkpoint 003."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "direct-openai-development-checkpoint",
+    "rationale": "Use the finite direct-OpenAI checkpoint for one separately authorized calibration and 500+100 development run while deterministic truth remains authoritative.",
+    "limitations": [
+      "This is build and simulation evidence, not calibration or product-quality evidence.",
+      "The two active models share one provider family and are not independent providers.",
+      "No provider, paid, private-data, final 10,000-case, professor-fidelity, visual, promotion, or deployment execution occurred."
+    ]
+  }
+}
