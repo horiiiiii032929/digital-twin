@@ -44,38 +44,45 @@ deterministic truth authoritative and GPT-5.4 review advisory. AFQC-057 records
 the one-time authorization for checkpoint 004 after refreshing both exact model
 snapshots, pricing, Responses API support, and retention documentation. The
 sealed 10,000 cases remain unauthorized.
+AFQC-058 records the valid paid outcome: all 50 wording calls completed, but
+only 452/500 model variants passed the frozen 95% acceptance gate. Forty-eight
+canonical fallbacks remain available, with zero duplicates or leaks. The runner
+stopped before every product and scoring stage, USD 0.555499 was reported, and
+all authority is revoked. This is a wording-layer failure, not a T0 result.
 
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Execute the authorized deterministic-primary checkpoint with
-   500 candidate cases and the paired 100-case any-hit control; score hidden
-   gold only after responses are durable, and publish either Keep, Refine, or
-   invalid-execution.
-3. If development passes, separately freeze and authorize the untouched
+2. Make one prospective method-level decision for the wording layer. Do not
+   rerun the same prompt or reviewer; prefer reusing the immutable
+   452-model/48-canonical package with explicit composition reporting.
+3. Freeze and separately authorize the resulting 500 candidate plus 100 control
+   T0 checkpoint; score hidden gold only after responses are durable.
+4. If development passes, separately freeze and authorize the untouched
    10,000-case final run. A valid quality failure receives one method-level
    decision and is not tuned against the sealed set.
-4. Use the leakage-free result to select or reject #105's production grounding
+5. Use the leakage-free result to select or reject #105's production grounding
    gate, then run #107's untouched T0/T1 confirmation with T0 retained as
    rollback.
-5. Complete #132 learning-gap API/UI/deletion/key-rotation evidence and #134's
+6. Complete #132 learning-gap API/UI/deletion/key-rotation evidence and #134's
    fresh outreach-method comparison. In-app outreach stays disabled until it
    passes; Discord stays outside R1.
-6. Obtain professor approval for an explicit profile and complete #24's C0-C3
+7. Obtain professor approval for an explicit profile and complete #24's C0-C3
    behavior evaluation separately from factual hard gates.
-7. Deploy one immutable revision, verify HTTPS, roles, persistence, monitoring,
+8. Deploy one immutable revision, verify HTTPS, roles, persistence, monitoring,
    backup/restore, rollback, and complete professor/student journeys, then close
    #88, #9, #25, and parent #8 in that order.
 
 ## Human stop points
 
-Work stops for four remaining inputs only:
+Work stops for five remaining inputs only:
 
-1. explicit authorization for the sealed 10,000-case paid run after development;
-2. explicit authorization for the paid T0/T1 confirmation;
-3. professor approval of the explicit teaching profile;
-4. production domain/DNS access and deployment authorization.
+1. explicit selection of the wording-layer successor after checkpoint 004;
+2. explicit authorization for the sealed 10,000-case paid run after development;
+3. explicit authorization for the paid T0/T1 confirmation;
+4. professor approval of the explicit teaching profile;
+5. production domain/DNS access and deployment authorization.
 
 True visual evaluation #131, real-source work #102, an external student pilot
 #10, and the final report #13 remain post-R1 and do not block this release.

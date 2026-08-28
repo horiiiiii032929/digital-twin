@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-checkpoint-004-wording-refine",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "76796f0b18bea136f642044ba0bc50f8052ba749",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "deterministic-canonical-question-fallback",
+        "version": "development-002",
+        "configuration": {
+          "case_count": 500,
+          "provider_calls": 0,
+          "canonical_fallback_available": 500
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-completion-rate",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "accepted-model-wording-rate",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "reviewer-acceptance-rate",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": false
+        },
+        {
+          "name": "canonical-fallback-coverage",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "canonical-answer-leak-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "accepted-wording-rate",
+          "passed": false,
+          "evidence": "The deterministic control has no model-authored wording and therefore does not satisfy the candidate wording-rate gate."
+        },
+        {
+          "name": "stable-provider-identities",
+          "passed": true,
+          "evidence": "The deterministic control makes no provider call and has no provider identity to drift."
+        },
+        {
+          "name": "zero-malformed-duplicate-or-leakage-defects",
+          "passed": true,
+          "evidence": "All 500 canonical questions are available with zero duplicates or answer leakage."
+        },
+        {
+          "name": "later-stage-closure",
+          "passed": true,
+          "evidence": "The deterministic control makes no product, scoring, private-data, or final-set call."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-wording-and-review-004",
+        "version": "checkpoint-004-wording-refine",
+        "configuration": {
+          "author_model": "gpt-5.4-mini-2026-03-17",
+          "reviewer_model": "gpt-5.4-2026-03-05",
+          "author_calls": 25,
+          "reviewer_calls": 25,
+          "zero_retries": true,
+          "request_store": false,
+          "input_tokens": 61974,
+          "output_tokens": 41705,
+          "reported_cost_usd": 0.555499,
+          "latency_ms": 345361.21
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-completion-rate",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "accepted-model-wording-rate",
+          "value": 0.904,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "reviewer-acceptance-rate",
+          "value": 0.904,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "canonical-fallback-coverage",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "canonical-answer-leak-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.555499,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "accepted-wording-rate",
+          "passed": false,
+          "evidence": "452 of 500 model-written questions were accepted, below the required 475."
+        },
+        {
+          "name": "stable-provider-identities",
+          "passed": true,
+          "evidence": "All 25 author and 25 reviewer calls returned the two exact dated OpenAI model identities."
+        },
+        {
+          "name": "zero-malformed-duplicate-or-leakage-defects",
+          "passed": true,
+          "evidence": "All responses parsed; normalized duplicates and canonical-answer leaks were zero."
+        },
+        {
+          "name": "later-stage-closure",
+          "passed": true,
+          "evidence": "No product, control, scoring, advisory-audit, private-data, or final-set call occurred."
+        }
+      ],
+      "failures_by_category": {
+        "reviewer-meaning-shift-rejection": 46,
+        "reviewer-integrity-wording-rejection": 1,
+        "deterministically-rejected-inconsistent-review": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The prospective wording stage validly failed its 95% accepted-model-wording gate and stopped before product execution. Preserve the result, revoke authority, and make one method-level decision rather than tuning the same wording prompt or reviewer.",
+    "limitations": [
+      "This result evaluates question wording only and contains no T0 product-quality measurement.",
+      "The author and reviewer are separate models from the same provider family, not independent providers.",
+      "No independent external human annotation was used; deterministic source-linked truth remains authoritative.",
+      "Several rejections reflect strict interpretation of repairs to awkward canonical fragments, but the frozen outcome is not overridden."
+    ]
+  }
+}

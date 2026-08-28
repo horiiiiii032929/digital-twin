@@ -37,9 +37,10 @@ evidence, not competing end goals.
   sealed 10,000 cases remain unopened. AFQC-055 preserves calibration 004 as
   invalid after three exact GPT-5.4 calls because one clarify vote omitted its
   mandatory boundary reason. Authority is revoked, hidden labels stayed closed,
-  and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-057
-  authorizes exactly the 500 candidate plus 100 control run; the sealed 10,000
-  cases remain unauthorized.
+  and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-058
+  preserves its valid wording-stage Refine result: 452/500 accepted variants,
+  48 canonical fallbacks, 50/50 exact calls, USD 0.555499, and zero T0 product
+  calls. Authority is revoked; the sealed 10,000 cases remain unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -51,8 +52,8 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Run #127's authorized deterministic-primary 500-case candidate plus paired
-   100-case control; authorize the sealed 10,000
+2. Make one wording-layer method decision, then separately freeze the
+   500-case candidate plus paired 100-case control; authorize the sealed 10,000
    cases only after a complete pass.
 3. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
@@ -71,7 +72,7 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Completed checkpoint-004 execution and published result | #127 sealed-run decision |
+| Wording-layer successor after checkpoint-004 Refine | #127 T0 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

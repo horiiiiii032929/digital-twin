@@ -92,8 +92,10 @@ professor-communication track.
    as invalid after three calls because a clarify vote omitted a mandatory
    boundary reason; authority is revoked and product quality remains unmeasured.
    AFQC-056 resolves that decision with deterministic-primary checkpoint 004;
-   AFQC-057 authorizes exactly its 500 candidate and 100 control execution after
-   a fresh official OpenAI metadata check. The 10,000-case final run remains
+   AFQC-057 authorizes it, and AFQC-058 preserves the valid wording-stage
+   Refine result: 452/500 accepted variants, 48 canonical fallbacks, 50/50 exact
+   calls, USD 0.555499, and zero product calls. Authority is revoked. The next
+   gate is one wording-layer method decision; the 10,000-case final run remains
    unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

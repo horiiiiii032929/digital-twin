@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7d6c2f23d3dcc1b509a4cf9978babcb777e57c4659fb87cfc1fd0ee06cf7dde1",
+  "record_sha256": "ed0c97c43217fcfd55771240a641a645833bfeb9b3ef394af85f0e32351df537",
   "records": [
     {
       "audit": {
@@ -1736,7 +1736,7 @@
     {
       "audit": {
         "domain": "deterministic-primary-development-checkpoint",
-        "evidence": "Manual instrument review verified deterministic source, action, claim, citation, and policy scoring remains authoritative; GPT-5.4 review is post-score and non-blocking; final 10,000-case execution remains unauthorized.",
+        "evidence": "Post-execution review verified checkpoint 004 is immutable completed-refine evidence, the one-time provider authorization is revoked, execution stopped after the wording gate, and product plus final 10,000-case execution remain unauthorized.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1747,7 +1747,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_004.json",
       "risk": "high",
-      "sha256": "d4ad39be0c78f20ae6b7ed863ef86acd8a8a8f41f0c18f5db49a8f3fa5af7f75"
+      "sha256": "3462cc133f72cc16f58163d5537a488ff57f902f7d26841afc11e29807e83d20"
     },
     {
       "audit": {
@@ -1816,7 +1816,7 @@
     {
       "audit": {
         "domain": "deterministic-primary-development-checkpoint",
-        "evidence": "Manual binding review verified direct OpenAI Responses API usage, exact version-locked GPT-5.4 mini and GPT-5.4 identities, store false, no fallback, zero retries, public inputs only, and provider execution disabled.",
+        "evidence": "Post-execution binding review verified direct OpenAI Responses API usage, exact version-locked GPT-5.4 mini and GPT-5.4 identities, store false, no fallback, public inputs only, complete wording-call accounting, and revoked provider authorization.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1827,7 +1827,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_005.json",
       "risk": "high",
-      "sha256": "6d0dbdbb7f72b8056d418d56c3ee87890a5ef49d5d963bfb64976d126473f24e"
+      "sha256": "b57db62de7f577035b7b621774db0938742bcbc86ddd8a5584629d9aad56b38e"
     },
     {
       "audit": {
@@ -6783,7 +6783,7 @@
     {
       "audit": {
         "domain": "r1-openai-runtime",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Focused freeze review verified checkpoint 004 authorization was removed after its terminal result while the repository-wide block, historical evidence, and unauthorized product/final stages remain fail closed.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8298,7 +8298,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "b35059d9dfe71c8d8ca57eaa506f7c512c18a70eecaafca4cf2b39bdad766694"
+      "sha256": "45ffeeac7c795792e64c9a3b2fb52263033801a2dd9992205358d81ebbaa7c28"
     },
     {
       "audit": {
@@ -8831,7 +8831,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical deterministic-builder authorization, verify calibration-004 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+        "evidence": "Focused freeze-policy tests verify checkpoint 004 revocation after its terminal result and reject every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
         "findings": [],
         "reviewed_at": "2026-08-27",
         "reviewer": "codex-primary-review"
@@ -8842,7 +8842,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "54a4a60f4b06846fd26b75008334861067926d64ffa293498745c4ad0992c801"
+      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
     },
     {
       "audit": {
@@ -9231,7 +9231,7 @@
     {
       "audit": {
         "domain": "deterministic-primary-development-checkpoint",
-        "evidence": "Fourteen focused regressions cover build-only validation, pass, wording failure, product failure, malformed advisory review, truth-defect escalation, authorization guards, hidden-gold separation, exact manifests, and all hard call and cost ceilings.",
+        "evidence": "Focused regressions cover revoked post-result authorization, pass, wording failure, product failure, malformed advisory review, truth-defect escalation, hidden-gold separation, exact manifests, and all hard call and cost ceilings.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -9242,7 +9242,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_checkpoint_004.py",
       "risk": "medium",
-      "sha256": "445478aeddb473a24376842be8b9a0032266773b5e05a96fcb934d9d1fde7ffd"
+      "sha256": "e13509116cc8e6ea522a5983fcccd04eb8cca6869841d75207f4919ff8acb1e4"
     },
     {
       "audit": {
