@@ -27,7 +27,7 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  checkpoint 004 now covers 637/637 audited files and 94/94 frozen entrypoints.
+  checkpoint 005 now covers 644/644 audited files and 96/96 frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
@@ -40,7 +40,9 @@ evidence, not competing end goals.
   and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-058
   preserves its valid wording-stage Refine result: 452/500 accepted variants,
   48 canonical fallbacks, 50/50 exact calls, USD 0.555499, and zero T0 product
-  calls. Authority is revoked; the sealed 10,000 cases remain unauthorized.
+  calls. AFQC-059/060 reuse that immutable mixed package and build product-only
+  checkpoint 005 with no new wording stage. Its five network-free outcomes pass;
+  the 500+100 product run and sealed 10,000 cases remain unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -52,9 +54,9 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Make one wording-layer method decision, then separately freeze the
-   500-case candidate plus paired 100-case control; authorize the sealed 10,000
-   cases only after a complete pass.
+2. Separately authorize checkpoint 005's 500-case candidate plus paired
+   100-case control; authorize the sealed 10,000 cases only after a complete
+   development pass.
 3. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 4. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
@@ -72,7 +74,7 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Wording-layer successor after checkpoint-004 Refine | #127 T0 development execution |
+| Explicit authorization for product checkpoint 005 | #127 T0 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

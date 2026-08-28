@@ -11,8 +11,11 @@ evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. The prospective R1 continuation
 is now one finite OpenAI-only path. PR #136 merged the direct-provider base at
 revision `492979e`; checkpoint 003 then added the exact GPT-5.4 calibration and
-bounded 500+100 development orchestrator at revision `3dfc3bd`. No provider
-call has been made. Issue #127 remains the active P0 evaluation, while #132 and #134 stay
+bounded development path. Checkpoint 004 spent USD 0.555499 on 50 wording calls,
+accepted 452/500 variants, and stopped before product execution. Checkpoint 005
+now reuses those 452 variants plus 48 explicit canonical fallbacks and is
+build-ready but provider-unauthorized. Issue #127 remains the active P0
+evaluation, while #132 and #134 stay
 open for their API/UI, method-confirmation, and activation gates rather than
 being treated as completed products.
 
@@ -148,8 +151,27 @@ fallbacks, zero duplicates, and zero answer leaks. Reported use was 61,974
 input tokens, 41,705 output tokens, 345.361 seconds aggregate provider latency,
 and USD 0.555499. The runner stopped before any T0 candidate, control, scoring,
 advisory-audit, private-data, or final-set call. All checkpoint-004 authority is
-revoked. The next action is one explicit wording-layer method decision, not
-another prompt or reviewer tuning loop.
+revoked. The wording result remains immutable and is not being rerun or
+reinterpreted as a pass.
+
+AFQC-059 records the researcher's decision to reuse that immutable mixed
+wording package rather than rerun or retune the wording stage. The 452 accepted
+model variants remain labelled as such; all 48 rejected cases use explicit,
+byte-checked canonical fallbacks. This decision does not reinterpret checkpoint
+004 as a pass.
+
+AFQC-060 builds
+`academic-factual-qa-open-10000-development-product-checkpoint-005`. It removes
+wording calls entirely and prepares only the actual T0 product comparison: 500
+structured-evidence candidate cases and the fixed paired 100-case any-hit
+control. Both use the same corpus, retriever, exact GPT-5.4 mini generator,
+policy, decoding, and public inputs. Hidden gold opens only after both response
+ledgers are durable; deterministic scoring controls the decision and exact
+GPT-5.4 review remains non-blocking. Five finite simulations pass. The maximum
+is 654 calls, zero retries, and USD 18, but all provider, paid, method, final
+10,000-case, promotion, and deployment authority remains false. This is build
+readiness, not product-quality evidence. The next input is one explicit paid
+authorization for checkpoint 005.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -173,11 +195,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 637 executable or execution-affecting
-files, including checkpoint 004. All are audited with zero pending files and
+the current branch now extends it to 644 executable or execution-affecting
+files, including checkpoint 005. All are audited with zero pending files and
 zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 94 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 96 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
@@ -516,8 +538,8 @@ gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
 connections. These corrections remain covered by the 1,106-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 637-file audit.
-Evaluation execution remains frozen, with 94/94 protected entrypoints registered
+artifacts are also fully dispositioned in the current 644-file audit.
+Evaluation execution remains frozen, with 96/96 protected entrypoints registered
 and no prospective evaluation in the bounded allowlist. The completed A1 runs
 have been removed from the bounded allowlist; no proactive-outreach execution is
 authorized.
@@ -873,7 +895,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation and GPT-5.4 advisory review pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; checkpoint 004 wording stage Refine | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves 452/500 accepted model variants, 48 explicit canonical fallbacks, complete accounting, zero product calls, and revoked authority | Make one method-level wording decision without rerunning the same prompt/reviewer. The sealed 10,000 cases remain closed |
+| Large factual QA | Engineering pipeline Keep; checkpoint 005 product run build-ready | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the checkpoint-004 wording Refine. AFQC-059/060 prospectively freeze the explicit 452-model/48-canonical package and a product-only 500+100 comparison with no new wording calls | Explicitly authorize checkpoint 005. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run |
 
 ## Release readiness and critical path
 
@@ -887,7 +909,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / wording Refine | Preserve checkpoint 004, select one prospective successor that uses the immutable mixed wording package without another wording run, and keep the sealed 10,000 cases closed |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / product checkpoint ready | Authorize and execute checkpoint 005 once; keep the sealed 10,000 cases closed until the complete 500+100 result passes |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

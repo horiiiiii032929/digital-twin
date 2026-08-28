@@ -32,7 +32,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_005.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "3a46be744cc07ff3aee130230949ac9a1e582279d456f7648d98b282dd94f386"
+      "sha256": "949d08da3841ff1f8854b61b7c04c59c07c6496dd386be5c65987a7044e25deb"
     },
     {
       "audit_status": "audited",
@@ -43,7 +43,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_005.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "453b9eccf99d760c68bf6797078545fad601cbfb29be93b2b92207712073b6f1"
+      "sha256": "01aa2d3988b3e488b472e51eb6c9f183b99e41c94c574aa701ab5b6fde3bf096"
     },
     {
       "audit_status": "audited",

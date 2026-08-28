@@ -50,15 +50,23 @@ canonical fallbacks remain available, with zero duplicates or leaks. The runner
 stopped before every product and scoring stage, USD 0.555499 was reported, and
 all authority is revoked. This is a wording-layer failure, not a T0 result.
 
+AFQC-059 resolves the prospective method decision by retaining the immutable
+452 accepted variants and labelling 48 exact canonical fallbacks. AFQC-060
+builds product checkpoint 005 around that fixed package. It has no wording
+stage: 500 candidate and 100 fixed paired control product responses must be
+durable before deterministic scoring opens hidden gold. Exact GPT-5.4 review is
+post-score and non-blocking. Five network-free outcomes pass under a 654-call,
+zero-retry, USD 18 ceiling. All paid, provider, final, promotion, and deployment
+authority remains false.
+
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Make one prospective method-level decision for the wording layer. Do not
-   rerun the same prompt or reviewer; prefer reusing the immutable
-   452-model/48-canonical package with explicit composition reporting.
-3. Freeze and separately authorize the resulting 500 candidate plus 100 control
-   T0 checkpoint; score hidden gold only after responses are durable.
+2. Preserve the frozen 452-model/48-canonical mixed-wording package; do not
+   rerun or reinterpret checkpoint 004.
+3. Separately authorize checkpoint 005's 500 candidate plus 100 control T0 run;
+   score hidden gold only after both response ledgers are durable.
 4. If development passes, separately freeze and authorize the untouched
    10,000-case final run. A valid quality failure receives one method-level
    decision and is not tuned against the sealed set.
@@ -78,7 +86,7 @@ all authority is revoked. This is a wording-layer failure, not a T0 result.
 
 Work stops for five remaining inputs only:
 
-1. explicit selection of the wording-layer successor after checkpoint 004;
+1. explicit authorization for product checkpoint 005;
 2. explicit authorization for the sealed 10,000-case paid run after development;
 3. explicit authorization for the paid T0/T1 confirmation;
 4. professor approval of the explicit teaching profile;

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "flow_id": "t0-r1-openai-structured-two-boundary-candidate-005",
   "adapter_version": "v1",
-  "code_revision": "00c8d1f6e6c76ed04ce20b42a57192d391e863fe",
+  "code_revision": "2dd150cb80717c0e38bdc11f44d7e8fc1534e8ec",
   "profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
   "retriever": "qwen3-hybrid-v1@cross-course-retrieval-v1",
   "generator": "openai-gpt-5.4-mini-live-atomic",

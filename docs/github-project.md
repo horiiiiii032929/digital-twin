@@ -94,9 +94,10 @@ professor-communication track.
    AFQC-056 resolves that decision with deterministic-primary checkpoint 004;
    AFQC-057 authorizes it, and AFQC-058 preserves the valid wording-stage
    Refine result: 452/500 accepted variants, 48 canonical fallbacks, 50/50 exact
-   calls, USD 0.555499, and zero product calls. Authority is revoked. The next
-   gate is one wording-layer method decision; the 10,000-case final run remains
-   unauthorized. Issue #131 separately
+   calls, USD 0.555499, and zero product calls. AFQC-059/060 prospectively reuse
+   that immutable 452-model/48-canonical package and build product-only
+   checkpoint 005. Five network-free outcomes pass with zero new wording calls;
+   the 500+100 run and final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.
