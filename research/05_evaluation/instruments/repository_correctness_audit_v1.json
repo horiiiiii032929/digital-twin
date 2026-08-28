@@ -5,23 +5,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, the USD 8 mini/nano/bounded-full cascade, zero automatic promotion, and disabled provider/final execution.",
+      "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, the USD 8 mini/nano/bounded-full cascade, one-time development authority, zero automatic promotion, and disabled final execution.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_005.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "940418b7d0c87d78e47dcb758ca2d7abda31b55843943ed48fba94243a5c5c94"
+      "sha256": "329be3a475b60c58d4bdbcd404ab04208a4fbb2c4f1bbe198a9648eafb44c498"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Manual binding review verified direct OpenAI Responses API use, exact dated GPT-5.4 mini, nano, and full identities, role-bounded escalation, store false, zero retries/fallback, current official pricing and limits, public inputs only, and disabled paid authority.",
+      "evidence": "Manual binding review verified direct OpenAI Responses API use, exact dated GPT-5.4 mini, nano, and full identities, role-bounded escalation, store false, zero retries/fallback, current official pricing and limits, public inputs only, one-time development authority, and disabled final authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_006.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "a005e163373d67cd3cf04918f0a8950c274364fdac5fef13b18ea5bfb5e0a2e2"
+      "sha256": "c6221a8fc6e2dcebc444cf6562b68f673f6fb029b9e7749140b3f94ee633e2c1"
     },
     {
       "audit_status": "audited",
@@ -71,12 +71,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "mixed-wording-product-checkpoint",
-      "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization, exact three-model cascade roles, USD 8 stage budgets, paired manifests, physical gold separation, five finite simulations, authorization-only preflight blockers, and resume binding drift.",
+      "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization, exact three-model cascade roles, USD 8 stage budgets, paired manifests, physical gold separation, five finite simulations, the exact one-time bounded authorization, a ready clean preflight, disabled final execution, and resume binding drift.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_005.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "0af5d68a41a89960d3082f09757972cf876926b78fc36a683d20adbbba7d99c2"
+      "sha256": "f64b3486c148ce39cd9daf7f95e4a1bcea42ad9cb9696dfbecf7d587b42815e9"
     },
     {
       "audit_status": "audited",
@@ -4702,7 +4702,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused model-policy review verified only the exact direct-OpenAI mini, nano, and full snapshots are active for prospective R1, while historical providers remain registered but inactive and prohibited families fail closed.",
       "findings": [],
       "path": "services/llm/openai_responses_client.py",
       "reviewed_at": "2026-08-27",
@@ -5504,13 +5504,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-runtime",
-      "evidence": "Focused model-policy regressions verify exact mini, nano, and full direct-OpenAI snapshots are active, unregistered and historical models remain blocked, and prohibited model families fail closed.",
+      "domain": "repository-correctness-controls",
+      "evidence": "Focused freeze review verified only deterministic development construction and the exact one-time checkpoint-005 external/method operations are authorized; the global freeze remains active for every other operation.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "2471cfa0b07b3e36c06752a35bd39d62da2c41ccb332af0eb53bc7be0a06c4ad"
+      "sha256": "7d804afd6d83f02c0becd7df2b9402ccd9ccab4cd13a8a6bdb8ffad5b517c850"
     },
     {
       "audit_status": "audited",
@@ -5879,12 +5879,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify checkpoint 004 revocation after its terminal result and reject every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
+      "evidence": "Focused freeze-policy tests verify the exact checkpoint-005 operation tuple and continue rejecting every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
+      "sha256": "4676d6fa035d4f8c4e1b47316d8aad2de3aade5d4389695d95c7740806b43e6c"
     },
     {
       "audit_status": "audited",

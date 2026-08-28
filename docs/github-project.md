@@ -98,8 +98,9 @@ professor-communication track.
    that immutable 452-model/48-canonical package and build product-only
    checkpoint 005. AFQC-061 retains mini generation, moves routine advisory
    review to nano, bounds full-model truth escalation to 12 cases, and reduces
-   the ceiling to USD 8. Five network-free outcomes pass with zero new wording calls;
-   the 500+100 run and final 10,000 cases remain unauthorized. Issue #131 separately
+   the ceiling to USD 8. Five network-free outcomes pass with zero new wording calls.
+   AFQC-062 authorizes the 500+100 run once; the final 10,000 cases remain
+   unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

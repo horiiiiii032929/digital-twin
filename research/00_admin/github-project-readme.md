@@ -44,7 +44,8 @@ evidence, not competing end goals.
   checkpoint 005 with no new wording stage. AFQC-061 keeps mini generation,
   uses nano for routine review, caps full-model truth escalation at 12 cases,
   and lowers the emergency ceiling to USD 8. Its five network-free outcomes pass;
-  the 500+100 product run and sealed 10,000 cases remain unauthorized.
+  AFQC-062 authorizes the 500+100 product run once, while the sealed 10,000
+  cases remain unauthorized.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,

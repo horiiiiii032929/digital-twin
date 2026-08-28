@@ -170,11 +170,12 @@ ledgers are durable; deterministic scoring controls the decision. AFQC-061
 replaces the overallocated routine review budget prospectively: exact GPT-5.4
 nano audits routine failures and the seeded sample, while exact full GPT-5.4 is
 reserved for at most 12 possible source-truth defects. Five finite simulations
-and the complete gate pass. The maximum is 666 calls, zero retries, and USD 8,
-but all provider, paid, method, final
-10,000-case, promotion, and deployment authority remains false. This is build
-readiness, not product-quality evidence. The next input is one explicit paid
-authorization for checkpoint 005.
+and the complete gate pass. The maximum is 666 calls, zero retries, and USD 8.
+AFQC-062 records the researcher's one-time authorization for checkpoint 005;
+only its development provider and method operations are allowlisted. Final
+10,000-case, promotion, and deployment authority remains false. This is still
+build readiness, not product-quality evidence, until the clean preflight and
+paid run complete.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -898,7 +899,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; checkpoint 005 product run build-ready | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the checkpoint-004 wording Refine. AFQC-059/060 freeze the explicit 452-model/48-canonical package and product-only 500+100 comparison; AFQC-061 reduces its emergency ceiling to USD 8 without changing any quality gate | Explicitly authorize checkpoint 005. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run |
+| Large factual QA | Engineering pipeline Keep; checkpoint 005 authorized pending clean execution | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the checkpoint-004 wording Refine. AFQC-059/060 freeze the explicit 452-model/48-canonical package and product-only 500+100 comparison; AFQC-061 reduces its emergency ceiling to USD 8; AFQC-062 grants one-time development authority | Execute checkpoint 005 once. A complete pass may prepare—but cannot authorize—the sealed 10,000-case run |
 
 ## Release readiness and critical path
 

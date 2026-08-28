@@ -75,8 +75,8 @@ def test_mixed_wording_rematerialization_is_revoked() -> None:
         materializer.write()
 
 
-def test_product_checkpoint_is_build_only_and_has_no_wording_stage() -> None:
-    result = checkpoint.validate()
+def test_product_checkpoint_is_authorized_once_and_has_no_wording_stage() -> None:
+    result = checkpoint.validate(require_unauthorized=False)
     assert result["status"] == "passed-build-only"
     assert result["maximum_calls"] == 666
     assert result["maximum_cost_usd"] == 8.0
@@ -90,7 +90,13 @@ def test_product_checkpoint_is_build_only_and_has_no_wording_stage() -> None:
         "routine-nano-advisory-audit",
         "bounded-critical-truth-escalation",
     ]
-    assert not any(instrument["authorization"].values())
+    assert instrument["authorization"] == {
+        "provider_execution_authorized": True,
+        "paid_execution_authorized": True,
+        "product_development_execution_authorized": True,
+        "semantic_review_execution_authorized": True,
+        "final_execution_authorized": False,
+    }
     assert instrument["execution"]["final_execution_authorized"] is False
 
 
@@ -213,21 +219,17 @@ def test_product_checkpoint_simulations_are_finite(
     assert result["deterministic_result_changed_by_advisory"] is False
 
 
-def test_product_preflight_is_blocked_only_by_missing_authority(
+def test_product_preflight_is_ready_with_bounded_authority(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
     result = checkpoint.preflight()
-    assert result["status"] == "blocked-not-authorized"
+    assert result["status"] == "ready"
     assert result["wording_provider_calls"] == 0
     assert result["final_execution_authorized"] is False
-    assert "instrument-paid-execution-authorized-false" in result["blockers"]
-    assert "freeze-external_model_evaluation-authorization-missing" in result[
-        "blockers"
-    ]
+    assert result["blockers"] == []
     assert not any("wording" in blocker for blocker in result["blockers"])
-    assert not any("missing" in blocker and "authorization" not in blocker for blocker in result["blockers"])
 
 
 def test_resume_is_bound_to_dataset_instrument_binding_and_revision(
