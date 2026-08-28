@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-checkpoint-004-build",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "0679d4b1da7ef3d5ef4ebc176d08f6463b5e8a4e",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "strict-reviewer-calibration-prerequisite",
+        "version": "checkpoint-003-and-calibration-004-historical",
+        "configuration": {
+          "reviewer_calibration_prerequisite_count": 1,
+          "provider_calls_in_this_build": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "reviewer-calibration-prerequisite-count",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 3.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": false
+        },
+        {
+          "name": "deterministic-decision-authority",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-truth-controls-decision",
+          "passed": false,
+          "evidence": "The historical path blocked product execution on a strict reviewer calibration result."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "The historical product executor already excluded hidden gold."
+        },
+        {
+          "name": "advisory-failure-is-non-blocking",
+          "passed": false,
+          "evidence": "Historical calibration failures invalidated progression before deterministic product measurement."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "Historical execution authority is revoked and final execution remains false."
+        }
+      ],
+      "failures_by_category": {
+        "reviewer-calibration-blocked-product-evidence": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "deterministic-primary-development-checkpoint",
+        "version": "004-build",
+        "configuration": {
+          "wording_and_generator_model": "gpt-5.4-mini-2026-03-17",
+          "advisory_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 704,
+          "maximum_cost_usd": 23.0,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "reviewer-calibration-prerequisite-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "deterministic-decision-authority",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-truth-controls-decision",
+          "passed": true,
+          "evidence": "The successor derives Keep or Refine exclusively from deterministic source-linked scoring and the fixed paired comparison."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "Product execution loads only public cases; hidden gold opens after both response ledgers are complete."
+        },
+        {
+          "name": "advisory-failure-is-non-blocking",
+          "passed": true,
+          "evidence": "Malformed or missing post-score reviews are durable limitations and cannot alter deterministic metrics."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "The build has zero bounded authorization and the final 10,000-case flag remains false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "deterministic-primary-development-checkpoint",
+    "rationale": "Proceed to one bounded 500+100 run because the product decision no longer depends on a brittle reviewer calibration and all source-linked scoring remains deterministic and leakage-separated.",
+    "limitations": [
+      "This is build and simulation evidence, not a product-quality result.",
+      "GPT-5.4 and GPT-5.4 mini share one provider family and advisory review is not independent ground truth.",
+      "No paid, private-data, final 10,000-case, T1, professor-profile, promotion, or deployment execution occurred."
+    ]
+  }
+}

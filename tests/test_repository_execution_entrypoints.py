@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
     [
         ("scripts.analyze_it5002_rapid_result", []),
         ("scripts.build_course_tutor_splits", []),
+        ("scripts.build_academic_factual_qa_open_mixed_wording_005", ["--write"]),
         ("scripts.build_generator_qualification_dataset", []),
         ("scripts.build_it5002_rapid_dataset", []),
         ("scripts.finalize_factual_qa_v3_conversion", []),

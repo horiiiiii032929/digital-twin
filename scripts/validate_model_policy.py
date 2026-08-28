@@ -20,6 +20,7 @@ from src.digital_twin.model_policy import (
     LOCAL_GENERAL_MODEL,
     LOCAL_GENERAL_MODEL_DIGEST,
     OPENAI_HIGH_VOLUME_MODEL,
+    OPENAI_ROUTINE_REVIEW_MODEL,
     OPENAI_SEMANTIC_REVIEW_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
@@ -41,7 +42,7 @@ PROFILE_PATH = ROOT / (
     "research/05_evaluation/profiles/"
     "student-tutor-r1-openai-candidate-v1.json"
 )
-POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-27-current-model-policy-v4.md"
+POLICY_DOC_PATH = ROOT / "research/00_admin/2026-08-28-current-model-policy-v5.md"
 
 PROHIBITED_COMMAND_MARKERS = (
     "gemma",
@@ -93,6 +94,7 @@ def validate() -> dict[str, Any]:
     ]
     require_active_release_model(generator_model)
     require_active_release_model(OPENAI_HIGH_VOLUME_MODEL)
+    require_active_release_model(OPENAI_ROUTINE_REVIEW_MODEL)
     require_active_release_model(OPENAI_SEMANTIC_REVIEW_MODEL)
     require_registered_current_model(embedding_model)
     require_registered_current_model(JINA_EMBEDDING_MODEL)

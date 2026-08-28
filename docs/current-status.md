@@ -11,8 +11,11 @@ evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. The prospective R1 continuation
 is now one finite OpenAI-only path. PR #136 merged the direct-provider base at
 revision `492979e`; checkpoint 003 then added the exact GPT-5.4 calibration and
-bounded 500+100 development orchestrator at revision `3dfc3bd`. No provider
-call has been made. Issue #127 remains the active P0 evaluation, while #132 and #134 stay
+bounded development path. Checkpoint 004 spent USD 0.555499 on 50 wording calls,
+accepted 452/500 variants, and stopped before product execution. Checkpoint 005
+now reuses those 452 variants plus 48 explicit canonical fallbacks and is
+build-ready but provider-unauthorized. Issue #127 remains the active P0
+evaluation, while #132 and #134 stay
 open for their API/UI, method-confirmation, and activation gates rather than
 being treated as completed products.
 
@@ -118,6 +121,66 @@ input and 1,443 output tokens, 15.511 seconds aggregate latency, and USD
 final call occurred. Reviewer quality remains unmeasured; the next action is a
 method-level decision rather than another silent contract revision.
 
+AFQC-056 implements that method-level decision without starting another
+reviewer-calibration loop. The build-only successor
+`academic-factual-qa-open-10000-development-checkpoint-004` makes deterministic
+source, action, claim, citation, boundary, and policy scoring the decision
+authority. Exact `gpt-5.4-mini-2026-03-17` remains the public-question wording
+and T0 generation model. Exact `gpt-5.4-2026-03-05` reviews wording and, only
+after both response ledgers and deterministic scoring are complete, audits
+every deterministic failure plus a seeded 40-case passing sample. Missing or
+malformed post-score reviews are recorded as limitations and cannot change the
+deterministic metrics; only a potential authoritative source-truth defect opens
+researcher review. Five network-free terminal simulations pass, product inputs
+remain physically separated from hidden gold, and all provider, paid, final
+10,000-case, promotion, and deployment authority was initially false.
+
+AFQC-057 records the researcher's explicit one-time authorization for this
+500-case candidate plus 100-case control checkpoint. Official OpenAI metadata
+was refreshed on 2026-08-28: both exact snapshots, recorded prices, Responses
+API structured output, and `store: false` remain documented. Only checkpoint
+004 now has bounded external-model and method-evaluation authority. The
+untouched 10,000 cases, T1 confirmation, professor profile, promotion, and
+deployment remain unauthorized.
+
+AFQC-058 records checkpoint 004 as a valid wording-stage **Refine**. All 50
+planned calls completed with exact identities and zero retries: 25 GPT-5.4 mini
+author calls and 25 GPT-5.4 reviews. The stage accepted 452/500 questions
+(90.4%), below the frozen 95% gate, while preserving 48 deterministic canonical
+fallbacks, zero duplicates, and zero answer leaks. Reported use was 61,974
+input tokens, 41,705 output tokens, 345.361 seconds aggregate provider latency,
+and USD 0.555499. The runner stopped before any T0 candidate, control, scoring,
+advisory-audit, private-data, or final-set call. All checkpoint-004 authority is
+revoked. The wording result remains immutable and is not being rerun or
+reinterpreted as a pass.
+
+AFQC-059 records the researcher's decision to reuse that immutable mixed
+wording package rather than rerun or retune the wording stage. The 452 accepted
+model variants remain labelled as such; all 48 rejected cases use explicit,
+byte-checked canonical fallbacks. This decision does not reinterpret checkpoint
+004 as a pass.
+
+AFQC-060 builds
+`academic-factual-qa-open-10000-development-product-checkpoint-005`. It removes
+wording calls entirely and prepares only the actual T0 product comparison: 500
+structured-evidence candidate cases and the fixed paired 100-case any-hit
+control. Both use the same corpus, retriever, exact GPT-5.4 mini generator,
+policy, decoding, and public inputs. Hidden gold opens only after both response
+ledgers are durable; deterministic scoring controls the decision. AFQC-061
+replaces the overallocated routine review budget prospectively: exact GPT-5.4
+nano audits routine failures and the seeded sample, while exact full GPT-5.4 is
+reserved for at most 12 possible source-truth defects. Five finite simulations
+and the complete gate pass. The maximum is 666 calls, zero retries, and USD 8.
+AFQC-062 records the researcher's one-time authorization for checkpoint 005.
+Attempt 001 stopped before provider I/O because the package command omitted the
+locked Qwen3 retrieval extra. AFQC-063 corrected only that invocation. The sole
+corrective attempt then loaded Qwen3 but did not finish the first course index
+after more than 2 hours 15 minutes; a process sample showed a 14.7 GB footprint
+on the 16 GB host. Both attempts recorded zero provider calls, responses,
+tokens, or cost, and hidden gold stayed sealed. AFQC-064 revokes authority and
+stops checkpoint 005. No product-quality conclusion or final 10,000-case claim
+is available.
+
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
 for #127 and none of those attempts is being retried. Issue
@@ -140,11 +203,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 630 executable or execution-affecting
-files, including checkpoint 003. All are audited with zero pending files and
+the current branch now extends it to 644 executable or execution-affecting
+files, including checkpoint 005. All are audited with zero pending files and
 zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 91 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 96 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
@@ -461,7 +524,7 @@ non-destructive, release content is immutable, staging evidence is resolved
 from successful server-side ingestion jobs, storage deletion is durable and
 retryable, backup/restore is bounded and atomic, and concurrent student turns
 converge on one response with authoritative citation metadata. The merged local
-gate passes 1,054 Python tests and 47 frontend tests, frontend lint, and the
+gate passes 1,106 Python tests and 47 frontend tests, frontend lint, and the
 production build. This is a correctness closure, not a renewed deployment or
 model-selection claim.
 
@@ -481,10 +544,10 @@ published release per course is enforced in SQLite; and repository writes
 revalidate copied domain models. Publication cannot bypass evaluation/policy
 gates, expired ingestion workers cannot finalize jobs, chunked uploads are
 stream-bounded, rate-limit storage is bounded, and readiness checks all durable
-connections. These corrections remain covered by the 1,054-test Python suite.
+connections. These corrections remain covered by the 1,106-test Python suite.
 Frontend, verification, tooling, evaluation configuration, and historical
-artifacts are also fully dispositioned in the current 630-file audit.
-Evaluation execution remains frozen, with 92/92 protected entrypoints registered
+artifacts are also fully dispositioned in the current 644-file audit.
+Evaluation execution remains frozen, with 96/96 protected entrypoints registered
 and no prospective evaluation in the bounded allowlist. The completed A1 runs
 have been removed from the bounded allowlist; no proactive-outreach execution is
 authorized.
@@ -837,10 +900,10 @@ continues to hold report, presentation, and professor-communication work.
 | Product UX and autonomous tutoring | Keep T0 as release baseline; T1 development Go Deeper | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free development passed every gate | Design and separately authorize one untouched T0/T1 confirmation; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
 | Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
-| Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation and GPT-5.4 advisory review pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
+| Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; corrected development reference layer Keep; calibration 004 invalid and revoked | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-055 preserves the third invalid reviewer execution: 3 calls/12 controls, with a missing boundary reason in batch three; hidden labels and every product stage stayed closed | Make one explicit reviewer-method decision without revising the same contract again. The 500+100 and sealed 10,000 cases remain closed |
+| Large factual QA | Engineering pipeline Keep; actual-product checkpoint 005 invalid and stopped | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the wording Refine; AFQC-059/060 freeze the 452-model/48-canonical package; AFQC-061 sets the USD 8 cascade. Attempts 001/002 both ended before provider I/O, with the corrective run exposing an on-demand Qwen3 index footprint of 14.7 GB and no first response after 2 h 15 min | Qualify immutable hash-bound prebuilt index loading before a new product checkpoint. Do not open the sealed 10,000 cases or run a third checkpoint-005 attempt |
 
 ## Release readiness and critical path
 
@@ -854,7 +917,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / reviewer-method decision | Preserve calibration 004 as invalid and choose a finite evaluation method that does not depend on repeated strict-output calibration. Keep the 500+100 and sealed 10,000 cases closed until that decision |
+| 3 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / product checkpoint ready | Authorize and execute checkpoint 005 once; keep the sealed 10,000 cases closed until the complete 500+100 result passes |
 | 4 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 5 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 6 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |

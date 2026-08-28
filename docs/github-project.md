@@ -91,8 +91,20 @@ professor-communication track.
    and passes three terminal simulations. AFQC-055 preserves its paid execution
    as invalid after three calls because a clarify vote omitted a mandatory
    boundary reason; authority is revoked and product quality remains unmeasured.
-   The next gate is one reviewer-method decision. The 10,000-case final run
-   remains unauthorized. Issue #131 separately
+   AFQC-056 resolves that decision with deterministic-primary checkpoint 004;
+   AFQC-057 authorizes it, and AFQC-058 preserves the valid wording-stage
+   Refine result: 452/500 accepted variants, 48 canonical fallbacks, 50/50 exact
+   calls, USD 0.555499, and zero product calls. AFQC-059/060 prospectively reuse
+   that immutable 452-model/48-canonical package and build product-only
+   checkpoint 005. AFQC-061 retains mini generation, moves routine advisory
+   review to nano, bounds full-model truth escalation to 12 cases, and reduces
+   the ceiling to USD 8. Five network-free outcomes pass with zero new wording calls.
+   AFQC-062 authorized the 500+100 run once. Attempt 001 stopped before provider
+   I/O because the command omitted the locked Qwen3 retrieval extra. AFQC-063
+   corrected that invocation, but the sole corrective attempt did not finish
+   the first on-demand index after 2 h 15 min and also made zero provider calls.
+   AFQC-064 revokes authority and requires a prebuilt-index method successor.
+   The final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

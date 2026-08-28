@@ -27,7 +27,7 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  calibration 004 now covers 630/630 audited files and 92/92 frozen entrypoints.
+  checkpoint 005 now covers 644/644 audited files and 96/96 frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
   GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
@@ -37,8 +37,18 @@ evidence, not competing end goals.
   sealed 10,000 cases remain unopened. AFQC-055 preserves calibration 004 as
   invalid after three exact GPT-5.4 calls because one clarify vote omitted its
   mandatory boundary reason. Authority is revoked, hidden labels stayed closed,
-  and the next step is a reviewer-method decision rather than another contract
-  refinement.
+  and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-058
+  preserves its valid wording-stage Refine result: 452/500 accepted variants,
+  48 canonical fallbacks, 50/50 exact calls, USD 0.555499, and zero T0 product
+  calls. AFQC-059/060 reuse that immutable mixed package and build product-only
+  checkpoint 005 with no new wording stage. AFQC-061 keeps mini generation,
+  uses nano for routine review, caps full-model truth escalation at 12 cases,
+  and lowers the emergency ceiling to USD 8. Its five network-free outcomes pass;
+  AFQC-062 authorized the 500+100 product run once. Attempt 001 stopped before
+  provider I/O on a missing locked retrieval extra; AFQC-063 corrected that
+  invocation. The sole corrective attempt then failed operationally before case
+  1 after 2 h 15 min of on-demand indexing. AFQC-064 revokes authority and
+  requires a prebuilt-index successor. The sealed 10,000 cases remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -50,9 +60,9 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Run #127's separately authorized GPT-5.4 calibration and conditional
-   500-case candidate plus paired 100-case control; authorize the sealed 10,000
-   cases only after a complete pass.
+2. Separately authorize checkpoint 005's 500-case candidate plus paired
+   100-case control; authorize the sealed 10,000 cases only after a complete
+   development pass.
 3. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 4. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
@@ -70,7 +80,7 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Replacement OpenAI key and explicit 500-case authority | #127 development execution |
+| Explicit authorization for product checkpoint 005 | #127 T0 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

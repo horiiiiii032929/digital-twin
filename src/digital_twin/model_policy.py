@@ -13,9 +13,11 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-27-v4"
+POLICY_ID = "current-model-policy-2026-08-28-v5"
 OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
 OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
+OPENAI_ROUTINE_REVIEW_MODEL = "gpt-5.4-nano-2026-03-17"
+OPENAI_ROUTINE_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_ROUTINE_REVIEW_MODEL}"
 OPENAI_SEMANTIC_REVIEW_MODEL = "gpt-5.4-2026-03-05"
 OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_SEMANTIC_REVIEW_MODEL}"
 LOCAL_GENERAL_MODEL = "qwen3.5:9b-q4_K_M"
@@ -57,7 +59,12 @@ CURRENT_MODEL_BINDINGS = (
         status="prospective-r1-openai-only-pending-development-evaluation",
     ),
     CurrentModelBinding(
-        role="semantic-reviewer",
+        role="routine-advisory-reviewer",
+        provider_model=OPENAI_ROUTINE_REVIEW_MODEL,
+        status="prospective-r1-openai-only-pending-development-evaluation",
+    ),
+    CurrentModelBinding(
+        role="critical-truth-reviewer",
         provider_model=OPENAI_SEMANTIC_REVIEW_MODEL,
         status="prospective-r1-openai-only-pending-development-evaluation",
     ),
@@ -135,6 +142,8 @@ CURRENT_MODEL_IDS = frozenset(
         "openai/gpt-5.4-mini",
         OPENAI_HIGH_VOLUME_MODEL,
         OPENAI_HIGH_VOLUME_LITELLM_MODEL,
+        OPENAI_ROUTINE_REVIEW_MODEL,
+        OPENAI_ROUTINE_REVIEW_LITELLM_MODEL,
         OPENAI_SEMANTIC_REVIEW_MODEL,
         OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
         f"ollama/{LOCAL_GENERAL_MODEL}",
@@ -145,6 +154,8 @@ ACTIVE_RELEASE_MODEL_IDS = frozenset(
     {
         OPENAI_HIGH_VOLUME_MODEL.casefold(),
         OPENAI_HIGH_VOLUME_LITELLM_MODEL.casefold(),
+        OPENAI_ROUTINE_REVIEW_MODEL.casefold(),
+        OPENAI_ROUTINE_REVIEW_LITELLM_MODEL.casefold(),
         OPENAI_SEMANTIC_REVIEW_MODEL.casefold(),
         OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL.casefold(),
     }
@@ -204,7 +215,7 @@ def require_registered_current_model(model: str) -> str:
 
 
 def require_active_release_model(model: str) -> str:
-    """Allow only the two direct OpenAI snapshots frozen for prospective R1."""
+    """Allow only the direct OpenAI snapshots frozen for prospective R1."""
 
     normalized = require_registered_current_model(model)
     if normalized.casefold() not in ACTIVE_RELEASE_MODEL_IDS:

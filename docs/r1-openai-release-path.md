@@ -39,17 +39,36 @@ all paid authority was initially false and no product progression was available.
 AFQC-055 now preserves its paid result as invalid: three exact GPT-5.4 calls
 covered 12 controls before a clarify vote omitted the mandatory boundary reason.
 Authority is revoked, hidden labels remain closed, and no product evidence exists.
+AFQC-056 therefore removes calibration as a product prerequisite while keeping
+deterministic truth authoritative and GPT-5.4 review advisory. AFQC-057 records
+the one-time authorization for checkpoint 004 after refreshing both exact model
+snapshots, pricing, Responses API support, and retention documentation. The
+sealed 10,000 cases remain unauthorized.
+AFQC-058 records the valid paid outcome: all 50 wording calls completed, but
+only 452/500 model variants passed the frozen 95% acceptance gate. Forty-eight
+canonical fallbacks remain available, with zero duplicates or leaks. The runner
+stopped before every product and scoring stage, USD 0.555499 was reported, and
+all authority is revoked. This is a wording-layer failure, not a T0 result.
+
+AFQC-059 resolves the prospective method decision by retaining the immutable
+452 accepted variants and labelling 48 exact canonical fallbacks. AFQC-060
+builds product checkpoint 005 around that fixed package. It has no wording
+stage: 500 candidate and 100 fixed paired control product responses must be
+durable before deterministic scoring opens hidden gold. AFQC-061 keeps exact
+GPT-5.4 mini for product answers, assigns routine non-blocking review to exact
+GPT-5.4 nano, and limits exact full GPT-5.4 to 12 possible truth-defect
+escalations. Five network-free outcomes pass under a 666-call, zero-retry, USD
+8 ceiling. All paid, provider, final, promotion, and deployment authority
+remains false.
 
 ## Finite critical path
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.
-2. Make one explicit reviewer-method decision that avoids another strict-output
-   calibration loop while retaining deterministic source truth.
-3. Once that decision is frozen, separately authorize a successor with
-   500 candidate cases and the paired 100-case any-hit control; score hidden
-   gold only after responses are durable, and publish either Keep, Refine, or
-   invalid-execution.
+2. Preserve the frozen 452-model/48-canonical mixed-wording package; do not
+   rerun or reinterpret checkpoint 004.
+3. Separately authorize checkpoint 005's 500 candidate plus 100 control T0 run;
+   score hidden gold only after both response ledgers are durable.
 4. If development passes, separately freeze and authorize the untouched
    10,000-case final run. A valid quality failure receives one method-level
    decision and is not tuned against the sealed set.
@@ -67,12 +86,13 @@ Authority is revoked, hidden labels remain closed, and no product evidence exist
 
 ## Human stop points
 
-Work stops for four inputs only:
+Work stops for five remaining inputs only:
 
-1. explicit selection of the reviewer method after invalid calibration 004;
+1. explicit authorization for product checkpoint 005;
 2. explicit authorization for the sealed 10,000-case paid run after development;
-3. professor approval of the explicit teaching profile;
-4. production domain/DNS access and deployment authorization.
+3. explicit authorization for the paid T0/T1 confirmation;
+4. professor approval of the explicit teaching profile;
+5. production domain/DNS access and deployment authorization.
 
 True visual evaluation #131, real-source work #102, an external student pilot
 #10, and the final report #13 remain post-R1 and do not block this release.

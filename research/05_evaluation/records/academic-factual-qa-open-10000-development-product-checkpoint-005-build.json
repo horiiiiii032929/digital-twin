@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-005-build",
+  "component": "generator",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "2dd150cb80717c0e38bdc11f44d7e8fc1534e8ec",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "checkpoint-004-wording-prerequisite",
+        "version": "004-refine-historical",
+        "configuration": {
+          "accepted_model_questions": 452,
+          "canonical_fallback_questions": 48,
+          "wording_provider_calls_required_before_product": 50,
+          "product_checkpoint_ready": false,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "product-checkpoint-ready",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "new-wording-provider-call-count",
+          "value": 50.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-wording-result-reused",
+          "passed": false,
+          "evidence": "Checkpoint 004 retained the questions but its frozen stage order stopped product progression when the wording gate failed."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "The historical product executor excluded hidden gold before durable response completion."
+        },
+        {
+          "name": "deterministic-truth-controls-decision",
+          "passed": true,
+          "evidence": "Checkpoint 004 already retained deterministic source-linked product scoring after wording."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "Checkpoint 004 authority is revoked and final execution remains false."
+        }
+      ],
+      "failures_by_category": {
+        "wording-gate-blocked-product-measurement": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "mixed-wording-t0-product-checkpoint",
+        "version": "005-build",
+        "configuration": {
+          "accepted_model_questions": 452,
+          "canonical_fallback_questions": 48,
+          "wording_provider_calls": 0,
+          "candidate_product_cases": 500,
+          "paired_control_cases": 100,
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "advisory_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 654,
+          "maximum_cost_usd": 18.0,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "product-checkpoint-ready",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "new-wording-provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenario-count",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "immutable-wording-result-reused",
+          "passed": true,
+          "evidence": "The package verifies and reuses exactly 452 accepted model variants and 48 canonical fallbacks from checkpoint 004 without a new wording call."
+        },
+        {
+          "name": "hidden-gold-process-separation",
+          "passed": true,
+          "evidence": "Product execution loads public cases only; scoring can open hidden gold only after candidate and control response ledgers are durable."
+        },
+        {
+          "name": "deterministic-truth-controls-decision",
+          "passed": true,
+          "evidence": "Source, action, claim, citation, boundary, policy, and paired-comparison gates remain deterministic and authoritative."
+        },
+        {
+          "name": "paid-and-final-execution-closed",
+          "passed": true,
+          "evidence": "The build has no bounded authorization and the final 10,000-case execution flag remains false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "mixed-wording-t0-product-checkpoint",
+    "rationale": "Proceed to one bounded product run because the immutable mixed wording package is explicit, hash-bound, and leakage-separated, while the new checkpoint removes the already-failed wording stage instead of rerunning it.",
+    "limitations": [
+      "This is build and simulation evidence, not a product-quality result.",
+      "The development set is a known benchmark after checkpoint 004 informed the mixed-wording composition.",
+      "GPT-5.4 and GPT-5.4 mini share one provider family and advisory review is not independent ground truth.",
+      "No paid, private-data, final 10,000-case, T1, professor-profile, promotion, or deployment execution occurred."
+    ]
+  }
+}

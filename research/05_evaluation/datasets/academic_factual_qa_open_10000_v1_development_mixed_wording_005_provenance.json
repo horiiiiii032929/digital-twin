@@ -1,0 +1,2520 @@
+{
+  "accepted_model_wording_count": 452,
+  "candidate_cases_content_sha256": "ad323a8b6a633ccd10570027cdd71ce49dc0a6b1ea7d7481175b224d6a1af3b2",
+  "canonical_fallback_count": 48,
+  "case_count": 500,
+  "content_sha256": "44a89ccd5d358edabd891169e543eeee5453d341fb81d17628c72c4f7d35f664",
+  "control_case_count": 100,
+  "control_cases_content_sha256": "0fcf4b2780bb092dbc62cc78ca270d32b38f764393e2ea2386663bfe0d15110c",
+  "final_split_opened": false,
+  "hidden_gold_loaded": false,
+  "private_data_used": false,
+  "provenance_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "provider_calls_required_to_materialize": 0,
+  "schema_version": 1,
+  "source_instrument_id": "academic-factual-qa-open-10000-development-checkpoint-004",
+  "source_result_content_sha256": "2d1585794fc065dc70ef86bc7ad8f5bcf7417559611d7aa4e83e9ffb33282afe",
+  "source_result_sha256": "864664af671bdb0881cb0ea60f72f7821d1b9488a112307dcc41191df323c436",
+  "wording_by_case": [
+    {
+      "case_id": "academic-open-dev2-0001-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0001-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0001-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0001-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0001-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0002-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0002-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0002-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0002-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0002-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0003-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0003-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0003-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0003-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0003-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0004-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0004-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0004-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0004-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0004-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0005-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0005-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0005-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0005-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0005-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0006-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0006-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0006-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0006-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0006-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0007-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0007-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0007-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0007-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0007-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0008-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0008-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0008-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0008-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0008-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0009-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0009-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0009-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0009-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0009-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0010-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0010-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0010-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0010-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0010-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0011-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0011-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0011-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0011-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0011-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0012-q1",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0012-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0012-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0012-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0012-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0013-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0013-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0013-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0013-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0013-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0014-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0014-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0014-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0014-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0014-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0015-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0015-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0015-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0015-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0015-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0016-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0016-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0016-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0016-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0016-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0017-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0017-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0017-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0017-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0017-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0018-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0018-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0018-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0018-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0018-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0019-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0019-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0019-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0019-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0019-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0020-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0020-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0020-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0020-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0020-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0021-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0021-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0021-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0021-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0021-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0022-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0022-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0022-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0022-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0022-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0023-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0023-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0023-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0023-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0023-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0024-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0024-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0024-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0024-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0024-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0025-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0025-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0025-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0025-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0025-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0026-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0026-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0026-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0026-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0026-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0027-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0027-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0027-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0027-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0027-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0028-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0028-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0028-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0028-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0028-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0029-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0029-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0029-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0029-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0029-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0030-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0030-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0030-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0030-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0030-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0031-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0031-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0031-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0031-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0031-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0032-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0032-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0032-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0032-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0032-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0033-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0033-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0033-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0033-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0033-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0034-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0034-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0034-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0034-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0034-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0035-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0035-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0035-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0035-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0035-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0036-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0036-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0036-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0036-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0036-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0037-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0037-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0037-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0037-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0037-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0038-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0038-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0038-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0038-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0038-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0039-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0039-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0039-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0039-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0039-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0040-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0040-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0040-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0040-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0040-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0041-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0041-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0041-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0041-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0041-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0042-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0042-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0042-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0042-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0042-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0043-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0043-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0043-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0043-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0043-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0044-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0044-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0044-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0044-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0044-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0045-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0045-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0045-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0045-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0045-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0046-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0046-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0046-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0046-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0046-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0047-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0047-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0047-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0047-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0047-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0048-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0048-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0048-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0048-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0048-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0049-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0049-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0049-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0049-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0049-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0050-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0050-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0050-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0050-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0050-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0051-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0051-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0051-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0051-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0051-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0052-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0052-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0052-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0052-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0052-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0053-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0053-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0053-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0053-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0053-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0054-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0054-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0054-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0054-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0054-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0055-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0055-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0055-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0055-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0055-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0056-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0056-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0056-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0056-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0056-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0057-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0057-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0057-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0057-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0057-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0058-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0058-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0058-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0058-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0058-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0059-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0059-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0059-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0059-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0059-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0060-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0060-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0060-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0060-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0060-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0061-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0061-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0061-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0061-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0061-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0062-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0062-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0062-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0062-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0062-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0063-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0063-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0063-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0063-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0063-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0064-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0064-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0064-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0064-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0064-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0065-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0065-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0065-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0065-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0065-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0066-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0066-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0066-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0066-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0066-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0067-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0067-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0067-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0067-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0067-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0068-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0068-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0068-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0068-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0068-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0069-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0069-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0069-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0069-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0069-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0070-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0070-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0070-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0070-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0070-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0071-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0071-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0071-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0071-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0071-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0072-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0072-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0072-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0072-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0072-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0073-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0073-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0073-q3",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0073-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0073-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0074-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0074-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0074-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0074-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0074-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0075-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0075-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0075-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0075-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0075-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0076-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0076-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0076-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0076-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0076-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0077-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0077-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0077-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0077-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0077-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0078-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0078-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0078-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0078-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0078-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0079-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0079-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0079-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0079-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0079-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0080-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0080-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0080-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0080-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0080-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0081-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0081-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0081-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0081-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0081-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0082-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0082-q2",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0082-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0082-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0082-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0083-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0083-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0083-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0083-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0083-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0084-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0084-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0084-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0084-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0084-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0085-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0085-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0085-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0085-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0085-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0086-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0086-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0086-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0086-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0086-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0087-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0087-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0087-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0087-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0087-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0088-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0088-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0088-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0088-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0088-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0089-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0089-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0089-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0089-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0089-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0090-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0090-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0090-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0090-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0090-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0091-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0091-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0091-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0091-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0091-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0092-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0092-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0092-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0092-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0092-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0093-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0093-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0093-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0093-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0093-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0094-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0094-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0094-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0094-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0094-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0095-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0095-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0095-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0095-q4",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0095-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0096-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0096-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0096-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0096-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0096-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0097-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0097-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0097-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0097-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0097-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0098-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0098-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0098-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0098-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0098-q5",
+      "decision_reason": "review-rejected-or-missing",
+      "wording_source": "canonical-fallback"
+    },
+    {
+      "case_id": "academic-open-dev2-0099-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0099-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0099-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0099-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0099-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0100-q1",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0100-q2",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0100-q3",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0100-q4",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    },
+    {
+      "case_id": "academic-open-dev2-0100-q5",
+      "decision_reason": "accepted",
+      "wording_source": "accepted-model-wording"
+    }
+  ]
+}

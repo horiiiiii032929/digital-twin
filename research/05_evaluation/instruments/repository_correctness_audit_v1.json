@@ -4,6 +4,160 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, the USD 8 mini/nano/bounded-full cascade, preserved invalid status, revoked development authority, zero automatic promotion, and disabled final execution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_005.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "edee5271f780e03d3d5a75cf7611893a8805748f31aced62dac065e67cf57899"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Manual binding review verified direct OpenAI Responses API use, exact dated GPT-5.4 mini, nano, and full identities, role-bounded escalation, store false, zero retries/fallback, preserved invalid status, revoked provider and development authority, and disabled final authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_006.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "332e841b391932828dbdaf38711501615fcedc5042bbf3a531dc6986be1a4303"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Manifest review verified the known development benchmark binds the current T0 hybrid retriever, exact OpenAI mini generator, structured lexical coverage gate, atomic-claim validator, and fixed approved profile.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_005.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "949d08da3841ff1f8854b61b7c04c59c07c6496dd386be5c65987a7044e25deb"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Manifest review verified the paired control matches the candidate retriever, generator, policy, validator, profile, and code binding and differs only by flow identity and any-hit evidence release.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_005.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "01aa2d3988b3e488b472e51eb6c9f183b99e41c94c574aa701ab5b6fde3bf096"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Focused materializer review verified exact source-result file and content hashes, 452/48 composition, canonical fallback equality, fixed 100-case control extraction, no hidden-gold read, exclusive writes, and revoked rematerialization authority.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_open_mixed_wording_005.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "69d1820211d384f5790de6bea6e01b4b85940b7b04fd112751910f9b42ff8b69"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Focused runner review verified no wording execution path, public-input-only product calls, both response ledgers durable before gold scoring, atomic resume bindings, the USD 8 mini/nano/bounded-full cascade, non-authoritative escalation, and fail-closed authorization.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_product_checkpoint_005.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "8d91a8e579d29d53628725c118741df747495e997c3727504f57df51c0db25be"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "mixed-wording-product-checkpoint",
+      "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization and execution authority, exact three-model cascade roles, USD 8 stage budgets, paired manifests, physical gold separation, five finite simulations, blocked post-result preflight, disabled final execution, and resume binding drift.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_product_checkpoint_005.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "798d1beef2d1bf82f0cbb18c3bd297e3d4149fd59c880351a6f3c4a27cade343"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Post-execution review verified checkpoint 004 is immutable completed-refine evidence, the one-time provider authorization is revoked, execution stopped after the wording gate, and product plus final 10,000-case execution remain unauthorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_checkpoint_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "3462cc133f72cc16f58163d5537a488ff57f902f7d26841afc11e29807e83d20"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Post-execution binding review verified direct OpenAI Responses API usage, exact version-locked GPT-5.4 mini and GPT-5.4 identities, store false, no fallback, public inputs only, complete wording-call accounting, and revoked provider authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_005.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "b57db62de7f577035b7b621774db0938742bcbc86ddd8a5584629d9aad56b38e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manifest review verified the 500-case candidate binds the selected T0 retrieval, structured evidence, two-boundary policy, atomic-claim validation, exact generator identity, and build-only code revision without embedding hidden gold.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "25213b43e776313819cd4ee206dafb85437e75a4d35fc49a24d346e464f71d83"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Manifest review verified the fixed 100-case control differs only in any-hit evidence release, preserves the same corpus, retriever, generator, decoding, policy, and build-only code revision, and contains no hidden gold.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_004.json",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "4c01e22219c9e3cbd07ca2c529d3f2b443278edb6a2d958f11f33c097cbfeb2f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused runner review verified deterministic sample selection, atomic SQLite persistence, configurable exact direct-OpenAI reviewer identity, strict schema parsing, non-blocking malformed or missing review limitations, and no authority to rewrite deterministic truth.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_advisory_audit_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "428a4272a2ef237f7147f47ee2015eb9b28b6b5d5eb33ad74433c061f49334e1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused orchestrator review and five network-free terminal simulations verified hidden-gold separation, atomic resume bindings, stage stop behavior, fixed 500+100 execution, deterministic authority, advisory isolation, hard call and cost ceilings, and fail-closed authorization guards.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_development_checkpoint_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "adaa846125772204fa7f53b3104665d0882728104e0cadc3740c4aa547fbd865"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused regressions cover revoked post-result authorization, pass, wording failure, product failure, malformed advisory review, truth-defect escalation, hidden-gold separation, exact manifests, and all hard call and cost ceilings.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_development_checkpoint_004.py",
+      "reviewed_at": "2026-08-28",
+      "reviewer": "codex-primary-review",
+      "sha256": "e13509116cc8e6ea522a5983fcccd04eb8cca6869841d75207f4919ff8acb1e4"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "openai-reviewer-calibration-004",
       "evidence": "Manual result review verified calibration 004 is immutable invalid evidence, all authorization is revoked, the ten-call/USD 3 historical limits remain visible, no product progression exists, and the final 10,000 stage remains closed.",
       "findings": [],
@@ -884,8 +1038,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Focused command-surface review verified checkpoint-004 validation, five terminal network-free simulations, blocked live preflight, and inclusion in the complete repository gate without authorizing provider or final-set execution.",
       "findings": [],
       "path": "deploy/staging.env.example",
       "reviewed_at": "2026-08-27",
@@ -907,12 +1061,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and invokes the locked retrieval-benchmark extra for preflight, execution, and resume after preserving the zero-call invalid attempt.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "cb2c2ee4fdc9588d3804d1e02bc8e4d9b4cff90695839764d4c5fe7eda685e3e"
+      "sha256": "05c82e30a127c2fef4b6b599d8c9e3af972be0aa2a7eefeabc37accde67f75d7"
     },
     {
       "audit_status": "audited",
@@ -1424,7 +1578,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-contracts",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused freeze review registered the mixed-wording materializer and product-only runner while leaving both materialization and paid checkpoint execution outside the bounded allowlist.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_002.json",
       "reviewed_at": "2026-08-27",
@@ -1457,7 +1611,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-contracts",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused OpenAI-only adapter review verified exact-model direct transport, no fallback, store false, configurable per-condition call/cost ceilings, gold separation, and unchanged T0 behavior under targeted regressions.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_wording_development_002.json",
       "reviewed_at": "2026-08-27",
@@ -2612,7 +2766,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-contracts",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused current-policy validator review verified the active direct-OpenAI mini, nano, and bounded full-model identities, prohibited historical providers, exact registration, and network-free execution.",
       "findings": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json",
       "reviewed_at": "2026-08-27",
@@ -2661,7 +2815,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f0cccef66e3dc9dc2f2e7a3f8d21a458a402f19fbd15b23637acee5fbfb5e7b5"
+      "sha256": "e6da02d43f849c30acfdb02c6a6f9ede53c4c5a7984895b5cc1acb7f823f5849"
     },
     {
       "audit_status": "audited",
@@ -4146,7 +4300,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "55756b9c0cd41582732a6dafd98fd12e18b1a1967842c9d1ec7a612e4686eb84"
+      "sha256": "c833680a9dee3cf457c903a9e87292288e460d5a3c0ca1ab794b6cf11e3cf3aa"
     },
     {
       "audit_status": "audited",
@@ -4294,8 +4448,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "domain": "deterministic-primary-development-checkpoint",
+      "evidence": "Freeze review verified both checkpoint-004 entrypoints are protected, the checkpoint is absent from every bounded authorization map, the repository-wide freeze remains active, and live execution fails closed.",
       "findings": [],
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-08-27",
@@ -4317,7 +4471,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused freeze review verified checkpoint 004 authorization was removed after its terminal result while the repository-wide block, historical evidence, and unauthorized product/final stages remain fail closed.",
       "findings": [],
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-08-27",
@@ -4515,7 +4669,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused model-policy review verified only the exact direct-OpenAI mini, nano, and full snapshots are active for prospective R1, while historical providers remain registered but inactive and prohibited families fail closed.",
       "findings": [],
       "path": "services/llm/__init__.py",
       "reviewed_at": "2026-08-27",
@@ -4548,7 +4702,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Focused model-policy review verified only the exact direct-OpenAI mini, nano, and full snapshots are active for prospective R1, while historical providers remain registered but inactive and prohibited families fail closed.",
       "findings": [],
       "path": "services/llm/openai_responses_client.py",
       "reviewed_at": "2026-08-27",
@@ -5180,7 +5334,7 @@
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "94a9b1293945431ac0d28c6ab4a805427a87c3d2d1ea9cf0e22b5d6cbc32dd44"
+      "sha256": "6b972fcf82591ab0d5fcd3281f2b85d3f1b9b295eb1a0dd99ab0fd1fe6ec0508"
     },
     {
       "audit_status": "audited",
@@ -5350,13 +5504,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-openai-runtime",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "domain": "repository-correctness-controls",
+      "evidence": "Focused freeze review verified checkpoint-005 external/model authority was revoked after the sole corrective attempt and only deterministic development construction remains allowlisted; the global freeze remains active for every other operation.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "aa95bde8921682ff857d27fa7e0bdab6b40ab5b7a4f45ba5c89532e8612cba8a"
+      "sha256": "2471cfa0b07b3e36c06752a35bd39d62da2c41ccb332af0eb53bc7be0a06c4ad"
     },
     {
       "audit_status": "audited",
@@ -5725,12 +5879,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests pass for globally blocked and unknown operations, retain only the historical deterministic-builder authorization, verify calibration-004 revocation, and reject every unregistered provider, paid, private-source, external-delivery, and held-out operation.",
+      "evidence": "Focused freeze-policy tests verify checkpoint-005 authority is revoked and continue rejecting every unregistered provider, paid, private-source, external-delivery, product, and held-out operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "1a918d56dcfb45aaaef897d2a8a48ec2b9d893007cd99a807b0a6b0400121de3"
+      "sha256": "f0faba4411f1c792469d18b5be8b156561158449245811684ca1ab6c61a41611"
     },
     {
       "audit_status": "audited",
@@ -6588,7 +6742,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "adff72545fd710b2a5fbabeddff0d7820bc14c5bca275b7851ae26f8c6802384"
+      "sha256": "267a54c6006f97553e21e307c1143cde8559f895636012632884a70047151897"
     },
     {
       "audit_status": "audited",
@@ -6649,12 +6803,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Sixteen representative CLI subprocesses failed with the active freeze identifier before prohibited execution.",
+      "evidence": "Seventeen representative CLI subprocesses, including mixed-wording rematerialization, failed with the active freeze identifier before prohibited execution.",
       "findings": [],
       "path": "tests/test_repository_execution_entrypoints.py",
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
-      "sha256": "4e22a06de20d52cb91db6174325bec0c5e2e9266c62156f7bf52e5a2da4d3292"
+      "sha256": "2d1c90771934b76773461d594aa50279a3a71d1f6cfa7e95da84d5b50ee7a845"
     },
     {
       "audit_status": "audited",
