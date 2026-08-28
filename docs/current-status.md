@@ -206,6 +206,14 @@ now authorized. Issue #139 may close after PR #140 merges; #127 may prepare one
 new 500+100 actual-product checkpoint but cannot execute it without separate
 authorization.
 
+AFQC-069 now builds that finite successor as
+`academic-factual-qa-open-10000-development-product-checkpoint-006`. It reuses
+the unchanged 500 candidate and 100 control cases, verifies and loads the exact
+four AFQC-068 artifacts, prohibits runtime document embedding, preserves the
+hidden-gold opening order, and passes five network-free terminal simulations.
+Official OpenAI metadata was refreshed on 2026-08-28. All provider, paid,
+product, semantic-review, and final execution authority remains false.
+
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
 the failed single AI Studio route with a bounded OpenRouter allowlist: Vertex
@@ -922,7 +930,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Immutable retrieval lifecycle Keep; actual-product checkpoint 005 invalid and stopped | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passes the real 2,100-region Qwen qualification within every resource gate, with 40/40 non-empty restart-stable queries and zero runtime document embeddings | Design one new 500+100 actual-product checkpoint using the immutable indexes, then seek separate execution authorization. Do not open the sealed 10,000 cases or rerun checkpoint 005 |
+| Large factual QA | Checkpoint 006 build ready; execution unauthorized | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passes the real 2,100-region Qwen qualification, and AFQC-069 binds the unchanged 500+100 actual-product comparison to those exact indexes with zero runtime document embedding | Complete the repository gate and clean no-call preflight, then seek one-time checkpoint-006 paid authorization. Do not open the sealed 10,000 cases or rerun checkpoint 005 |
 
 ## Release readiness and critical path
 

@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-build",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "d899b26fdc622dd6f5a1d5f8ac7f969869c6594a",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "runtime-on-demand-hybrid-index",
+        "version": "checkpoint-005-historical-control",
+        "configuration": {
+          "candidate_case_count": 500,
+          "control_case_count": 100,
+          "document_embedding_stage": "first-product-request",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "runtime-document-embedding-requests",
+          "value": 1.0,
+          "unit": "minimum-observed-count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "exact-verified-index-artifacts",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 4.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": false
+        },
+        {
+          "name": "focused-regressions",
+          "value": 0.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 33.0,
+          "passed": false
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "query-only-product-runtime",
+          "passed": false,
+          "evidence": "Checkpoint 005 attempted to construct document embeddings during product startup and was stopped before case 1."
+        },
+        {
+          "name": "same-retrieval-candidate-control",
+          "passed": false,
+          "evidence": "Checkpoint 005 did not reach a durable paired product comparison because runtime index construction blocked case 1."
+        },
+        {
+          "name": "gold-and-history-boundary",
+          "passed": true,
+          "evidence": "Both invalid checkpoint-005 attempts and their zero-call evidence remain unchanged; hidden gold stayed sealed."
+        },
+        {
+          "name": "provider-and-final-execution-closed",
+          "passed": true,
+          "evidence": "The historical attempts made zero provider calls and never opened final execution."
+        }
+      ],
+      "failures_by_category": {
+        "runtime-corpus-embedding": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "immutable-index-product-checkpoint",
+        "version": "006-build",
+        "configuration": {
+          "candidate_case_count": 500,
+          "control_case_count": 100,
+          "retrieval_index_qualification": "retrieval-index-lifecycle-development-001",
+          "retrieval_index_artifact_count": 4,
+          "source_region_count": 2100,
+          "runtime_document_embedding_requests_max": 0,
+          "maximum_calls": 666,
+          "maximum_cost_usd": 8.0,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "runtime-document-embedding-requests",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "exact-verified-index-artifacts",
+          "value": 4.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 4.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regressions",
+          "value": 33.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 33.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "query-only-product-runtime",
+          "passed": true,
+          "evidence": "The successor verifies and loads the exact four AFQC-068 artifacts and exposes no document-index build path."
+        },
+        {
+          "name": "same-retrieval-candidate-control",
+          "passed": true,
+          "evidence": "Both manifests bind the same immutable retrieval lifecycle; only flow ID and evidence gate differ."
+        },
+        {
+          "name": "gold-and-history-boundary",
+          "passed": true,
+          "evidence": "The 500/100 packages and hidden-gold order are unchanged, checkpoint 005 is untouched, and final cases remain closed."
+        },
+        {
+          "name": "provider-and-final-execution-closed",
+          "passed": true,
+          "evidence": "All provider, paid, product, semantic-review, and final authorization flags are false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "immutable-index-product-checkpoint",
+    "rationale": "The qualified index lifecycle removes the checkpoint-005 startup blocker while preserving the dataset, T0 conditions, deterministic gates, hidden-gold boundary, finite failure states, and USD 8 ceiling.",
+    "limitations": [
+      "This is build-only evidence and does not measure product answer, citation, claim, boundary, or comparative quality.",
+      "The 500/100 package is a known development benchmark over open educational sources.",
+      "The advisory reviewers are separate OpenAI models from one provider family and are not independent external human annotation.",
+      "No provider, paid, private-data, final 10,000-case, T1, fidelity, visual, promotion, or deployment execution occurred."
+    ]
+  }
+}
