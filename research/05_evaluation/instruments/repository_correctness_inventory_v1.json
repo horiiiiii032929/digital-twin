@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "2f50f72eb4f55fd892a8d5e5a232c5c680bef4fedf4778ab2bec6fa94639f5ce",
+  "record_sha256": "c301680f3e8e8b82877d0a6b000bf6ad0428167ee96026a0d8dd6d4e1dc11ce8",
   "records": [
     {
       "audit": {
@@ -1288,7 +1288,7 @@
     {
       "audit": {
         "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and remains provider-unauthorized.",
+        "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and invokes the locked retrieval-benchmark extra for preflight, execution, and resume after preserving the zero-call invalid attempt.",
         "findings": [],
         "reviewed_at": "2026-08-28",
         "reviewer": "codex-primary-review"
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "432ff26c01f8d58bb6bfbf9ca9ef49ba8263d47e173f5908f258f9c941298a44"
+      "sha256": "05c82e30a127c2fef4b6b599d8c9e3af972be0aa2a7eefeabc37accde67f75d7"
     },
     {
       "audit": {

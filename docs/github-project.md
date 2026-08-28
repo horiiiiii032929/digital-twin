@@ -99,8 +99,10 @@ professor-communication track.
    checkpoint 005. AFQC-061 retains mini generation, moves routine advisory
    review to nano, bounds full-model truth escalation to 12 cases, and reduces
    the ceiling to USD 8. Five network-free outcomes pass with zero new wording calls.
-   AFQC-062 authorizes the 500+100 run once; the final 10,000 cases remain
-   unauthorized. Issue #131 separately
+   AFQC-062 authorizes the 500+100 run once. Attempt 001 stopped before provider
+   I/O because the command omitted the locked Qwen3 retrieval extra; AFQC-063
+   preserves that invalid result and permits one harness-only corrective attempt.
+   The final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen
    T0/T1 confirmation before staging promotion.

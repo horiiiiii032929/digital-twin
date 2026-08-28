@@ -1061,12 +1061,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and remains provider-unauthorized.",
+      "evidence": "Focused command review verified the product-only checkpoint validates the immutable mixed-wording package, simulates every finite outcome, exposes no wording execution command, and invokes the locked retrieval-benchmark extra for preflight, execution, and resume after preserving the zero-call invalid attempt.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "432ff26c01f8d58bb6bfbf9ca9ef49ba8263d47e173f5908f258f9c941298a44"
+      "sha256": "05c82e30a127c2fef4b6b599d8c9e3af972be0aa2a7eefeabc37accde67f75d7"
     },
     {
       "audit_status": "audited",
