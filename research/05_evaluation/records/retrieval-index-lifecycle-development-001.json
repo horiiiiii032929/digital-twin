@@ -2,9 +2,9 @@
   "schema_version": 1,
   "run_id": "retrieval-index-lifecycle-development-001",
   "component": "retriever",
-  "dataset_id": "retrieval-index-lifecycle-synthetic-2100-v1",
-  "corpus_id": "four-synthetic-course-indexes-2100-regions",
-  "code_revision": "c63f7815eb9de9d6b61af64efbe5755ed2ed7f40",
+  "dataset_id": "academic-factual-qa-open-10000-v1-retrieval-index-qualification",
+  "corpus_id": "four-public-course-indexes-2100-regions",
+  "code_revision": "aa64641adc2ad55bedf874ef77670fdaa215ba08",
   "candidates": [
     {
       "implementation": {
@@ -93,12 +93,25 @@
     {
       "implementation": {
         "implementation_id": "immutable-release-bound-hybrid-index",
-        "version": "development-001",
+        "version": "development-001-real-qwen-qualified",
         "configuration": {
           "artifact_format": "float32-little-endian-row-major",
           "course_count": 4,
           "source_region_count": 2100,
           "query_count": 40,
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "device": "mps",
+          "dtype": "float16",
+          "build_revision": "2424e058f07c961fe7fcd1248400c65652f7735f",
+          "runtime_verification_revision": "aa64641adc2ad55bedf874ef77670fdaa215ba08",
+          "qualification_build_seconds": 532.4083171230004,
+          "qualification_cold_load_seconds": 0.37195391800014477,
+          "qualification_build_peak_process_memory_mib": 1808.484375,
+          "qualification_artifact_size_mib": 12.65925407409668,
+          "qualification_nonempty_queries": 40,
+          "qualification_matching_restart_rankings": 40,
+          "qualification_runtime_document_embedding_requests": 0,
           "local_model_execution_authorized": false,
           "provider_calls": 0,
           "final_cases_opened": 0
@@ -159,7 +172,7 @@
         {
           "name": "query-only-product-runtime",
           "passed": true,
-          "evidence": "All 40 loaded retrieval queries completed with zero document-embedding calls and exact live-ranking equivalence."
+          "evidence": "All 40 real-Qwen loaded retrieval queries returned evidence, repeated with 40/40 identical rankings through a fresh index store, and the query-only wrapper recorded zero document-embedding calls."
         },
         {
           "name": "immutable-lineage-and-corruption-boundary",
@@ -169,20 +182,25 @@
         {
           "name": "freeze-and-final-boundary",
           "passed": true,
-          "evidence": "The run was network-free, the live preflight remains blocked, and no local model, provider, hidden gold, or final case was opened."
+          "evidence": "The qualification used only the pinned local model over public source regions; provider, paid, private-data, product, hidden-gold, and final-case counts are zero, and its one-time authority is revoked."
         }
       ],
       "failures_by_category": {}
     }
   ],
   "decision": {
-    "outcome": "go-deeper",
+    "outcome": "keep",
     "selected_implementation_id": "immutable-release-bound-hybrid-index",
-    "rationale": "The candidate removes corpus embedding from the product request path while preserving ranking behavior and enforcing exact immutable lineage. It is selected only for one real local-Qwen resource qualification.",
+    "rationale": "The real-Qwen qualification built all four immutable indexes within every prospective resource gate, then produced non-empty results with identical restart rankings and zero runtime document embedding. The lifecycle is retained for one separately authorized actual-product checkpoint.",
     "limitations": [
-      "The measured resource values use deterministic synthetic 64-dimensional vectors, not the selected Qwen3 embedding model.",
-      "No product answer, citation, boundary-safety, private-data, provider, paid, or final 10,000-case evaluation occurred.",
-      "The real 2,100-region Qwen3 artifact must pass a separately authorized resumable local qualification before a successor product checkpoint can be designed."
-    ]
+      "The public open-source corpus is not private course material or an external student sample.",
+      "No product answer, citation, boundary-safety, professor-fidelity, usability, learning-outcome, provider, paid, or final 10,000-case evaluation occurred.",
+      "The restart check used a fresh index store and loaded retrievers but retained the exact model process; process-level recovery remains for the product checkpoint."
+    ],
+    "generated_evidence": {
+      "build_result_sha256": "5c96e8d86402020f451ee7480761d0cff89050c97b6bf98bb16baffeef11ca27",
+      "runtime_result_sha256": "d993003fc4b840810c3dcd9bb4901d8ff9ab82b56c566076bed697294c1c8b29",
+      "raw_outputs_committed": false
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "retrieval-index-lifecycle-development-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-keep-authorization-revoked",
   "decision_question": "Can the selected hybrid retriever load immutable release-bound indexes without runtime corpus re-embedding, stale lineage, cross-release reuse, or unbounded cold-start resources?",
   "scope": {
     "source_region_count": 2100,
@@ -42,8 +42,8 @@
     "simulated_artifact_size_mib_max": 20.0
   },
   "authorization": {
-    "local_model_execution_authorized": true,
-    "method_evaluation_execution_authorized": true,
+    "local_model_execution_authorized": false,
+    "method_evaluation_execution_authorized": false,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
     "product_checkpoint_execution_authorized": false,

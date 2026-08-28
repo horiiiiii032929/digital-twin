@@ -193,21 +193,21 @@ def validate() -> dict[str, Any]:
         raise IndexQualificationError("retrieval-index instrument scope drifted")
     authorization = instrument.get("authorization", {})
     if authorization != {
-        "local_model_execution_authorized": True,
-        "method_evaluation_execution_authorized": True,
+        "local_model_execution_authorized": False,
+        "method_evaluation_execution_authorized": False,
         "provider_execution_authorized": False,
         "paid_execution_authorized": False,
         "product_checkpoint_execution_authorized": False,
         "final_execution_authorized": False,
     }:
         raise IndexQualificationError(
-            "retrieval-index authority must remain local-only and bounded"
+            "retrieval-index authority must be revoked after the result"
         )
-    if instrument.get("status") != "frozen-pending-execution":
-        raise IndexQualificationError("retrieval-index instrument must be frozen")
+    if instrument.get("status") != "completed-keep-authorization-revoked":
+        raise IndexQualificationError("retrieval-index terminal status drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-authorized-local-only",
+        "status": "passed-terminal-authorization-revoked",
         "source_region_count": 2100,
         "provider_calls": 0,
         "local_model_loaded": False,

@@ -105,12 +105,12 @@ professor-communication track.
    corrected that invocation, but the sole corrective attempt did not finish
    the first on-demand index after 2 h 15 min and also made zero provider calls.
    AFQC-064 revokes authority and requires a prebuilt-index method successor.
-   AFQC-065 completes the network-free lifecycle checkpoint: immutable
-   artifacts are hash-bound to release, source set, profile, chunker, embedding
-   revision, and retrieval configuration; 2,100 synthetic regions and 40
-   queries pass with zero runtime document embeddings. Issue #139 now owns the
-   separately authorized real-Qwen resource qualification, while #127 is
-   blocked/Refine.
+   AFQC-065 completes the network-free lifecycle checkpoint, and AFQC-068
+   records the real-Qwen result as Keep: four immutable indexes over 2,100
+   public regions pass every resource gate, while 40/40 queries remain non-empty
+   and ranking-identical after restart with zero runtime document embeddings.
+   Close #139 after PR #140 and return #127 to one new build-only 500+100
+   checkpoint design.
    The final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

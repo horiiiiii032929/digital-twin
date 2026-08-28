@@ -2,68 +2,77 @@
 
 ## Outcome
 
-**Go Deeper** with immutable, release-bound retrieval indexes. The network-free
-development qualification passed every lifecycle gate and removes document
-embedding from the product request path. This result selects the lifecycle for
-one real local-Qwen qualification; it does not select a release profile or
-authorize another 500+100 product run.
+**Keep** the immutable, release-bound retrieval-index lifecycle for the next
+actual-product checkpoint. The real local-Qwen qualification passed every
+prospective resource gate, and the supplemental runtime check verified that a
+loaded index answers queries without re-embedding documents. This result does
+not authorize the 500+100 product checkpoint or the sealed 10,000 cases.
 
 ## Decision question
 
-Can the selected hybrid retriever load a precomputed index matching the exact
-course release, source set, component profile, chunker, embedding model,
-revision, query instruction, and retrieval parameters without re-embedding the
-corpus at runtime?
+Can the selected Qwen3 hybrid retriever build, load, restart, and query an
+immutable index matching the exact course release, source set, component
+profile, chunker, embedding revision, query instruction, and retrieval
+parameters within the bounded local resource envelope?
 
-## Result
+## Real-Qwen result
 
-At clean implementation revision `c63f7815eb9de9d6b61af64efbe5755ed2ed7f40`,
-the deterministic simulation built four immutable indexes over 2,100 synthetic
-source regions and issued 40 retrieval queries.
+At clean authorization revision `2424e05`, the pinned local
+`Qwen/Qwen3-Embedding-0.6B` revision built four indexes over 2,100 public source
+regions.
 
-- Runtime document-embedding calls: **0**.
-- Loaded-versus-live top-five ranking equivalence: **40/40**.
-- Restart retrieval consistency: **40/40**.
-- Stale binding rejection: **passed**.
-- Corruption detection: **passed**.
-- Synthetic cold load: **1.072 seconds** in aggregate across four indexes.
-- Synthetic artifact size: **2.391 MiB**.
-- Peak traced Python allocation: **8.370 MiB**.
-- Provider calls, private-data reads, and final-case access: **0**.
+- Build time: **532.408 seconds** (gate: at most 1,800 seconds).
+- Aggregate cold load: **0.372 seconds** (gate: at most 10 seconds).
+- Peak process RSS: **1,808.484 MiB** (gate: at most 8,192 MiB).
+- Artifact size: **12.659 MiB** (gate: at most 500 MiB).
+- Build-time embedding batches: **133**.
+- Artifacts and source regions: **4/4** and **2,100/2,100**.
 
-The actual-product adapter now verifies that every exact artifact already
-exists before loading Qwen. It cannot build document vectors during product
-startup. Publication may prepare an index before state mutation, and missing,
-stale, mixed-version, cross-course, or corrupt artifacts fail closed.
+The first run exposed a harness evidence omission: it loaded each index but did
+not issue the promised real-Qwen queries. AFQC-067 corrected only that
+measurement at clean revision `aa64641`; it reused the immutable artifacts and
+made no document embeddings.
 
-## Verification
+- Query cases: **40**.
+- Non-empty retrieval results: **40/40**.
+- Identical rankings after a fresh store restart: **40/40**.
+- Runtime document-embedding requests: **0**.
+- Query-embedding requests: **40 + 40** across the original and restarted
+  stores.
+- First and restarted load-plus-query time: **6.322** and **5.763 seconds**.
+- Supplemental peak process RSS: **2,897.922 MiB**.
 
-- The focused retrieval, product, publication, API, provider, runner, and freeze
-  suite passed **120 tests**.
-- The complete repository gate passed **1,145 Python tests**, **47 frontend
+Provider calls, paid cost, private-data reads, product responses, hidden gold,
+and final-case access were all **zero**. The one-time local authority was
+revoked after the result.
+
+## Durable evidence
+
+- Generated build result SHA-256:
+  `5c96e8d86402020f451ee7480761d0cff89050c97b6bf98bb16baffeef11ca27`.
+- Generated runtime result SHA-256:
+  `d993003fc4b840810c3dcd9bb4901d8ff9ab82b56c566076bed697294c1c8b29`.
+- The four local artifact identifiers are recorded in the machine-readable
+  result. Generated indexes and unrestricted runtime output remain ignored.
+
+## Verification and limitations
+
+- The preceding complete gate passed **1,145 Python tests**, **47 frontend
   tests**, frontend lint, and the production build.
-- Repository correctness is **649/649 audited** with zero pending findings.
-- Execution-freeze coverage is **97/97** entrypoints.
-- The live preflight is correctly `blocked-not-authorized`; no local model or
-  provider was called.
+- Repository correctness remained **649/649 audited**, and execution-freeze
+  coverage remained **97/97**.
+- The corpus is the public open-source benchmark corpus, not private course
+  material. The run establishes retrieval-index lifecycle and resource
+  feasibility, not answer quality, citation quality, boundary safety,
+  professor fidelity, usability, or learning outcomes.
+- The restart check reused the same exact Qwen model instance but a fresh index
+  store and separately loaded retrievers. Model-process restart recovery remains
+  covered structurally, while process-level persistence will be exercised in
+  the next product checkpoint.
 
-## Limitations
+## Decision
 
-- The simulation uses deterministic 64-dimensional synthetic vectors. Its
-  memory, build time, load time, and artifact size are not measurements of the
-  real Qwen3 0.6B index.
-- The earlier 14.7 GB process sample includes the local model and on-demand
-  construction and is not directly comparable with Python allocation tracing.
-- Product answer quality, citations, boundary safety, and the sealed 10,000
-  cases were not evaluated here.
-- The local artifact remains unbuilt. Its exact build time, process RSS,
-  artifact size, and loaded-query behavior must pass a separately authorized
-  qualification before a successor product checkpoint is designed.
-
-## Next action
-
-Authorize exactly `retrieval-index-lifecycle-development-001` for a resumable,
-local-only Qwen3 build over the 2,100 public source regions. The run makes no
-paid/provider call and opens no final case. A pass permits design review of one
-new 500+100 product checkpoint; it does not authorize that checkpoint or the
-final 10,000-case execution.
+Close issue #139 as **Done / Keep** after PR #140 merges. The next finite step is
+to prepare one new 500-case candidate plus 100-case control actual-product
+checkpoint using these prebuilt indexes. That checkpoint requires a separate
+authorization and must pass before any sealed 10,000-case execution is opened.

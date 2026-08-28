@@ -5505,12 +5505,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze review authorizes exactly retrieval-index-lifecycle-development-001 for local-model and method-evaluation operations while every provider, paid, product, private-data, and final operation remains blocked; the repository-wide freeze remains active.",
+      "evidence": "Focused freeze review verifies retrieval-index-lifecycle-development-001 authority is revoked after the terminal Keep result; checkpoint 005 and every provider, paid, private-data, product, final, and unregistered operation remain blocked while the repository freeze stays active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "37e61c59a241cda5f71a0a06bec189a7fc6634763136d0fa1062a4bb99f4487d"
+      "sha256": "3e77bd0ee3a27b5dd805c687acfa6796ab1ea9eb90ce73389c5cf900210b135b"
     },
     {
       "audit_status": "audited",
@@ -5879,12 +5879,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the exact two-operation local retrieval-index authority while checkpoint 005 and every unregistered provider, paid, private-source, external-delivery, product, and held-out operation remain rejected.",
+      "evidence": "Focused freeze-policy tests verify retrieval-index authority is revoked and checkpoint 005 plus every unregistered provider, paid, private-source, external-delivery, product, and held-out operation remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "8484b53ad4e3bb0ab9792bd1e37a397ea2a704f54db6d9d8b226e219216e8642"
+      "sha256": "47803224475efd60cba4756af71247b35d0e99a2a269df9cb00d5a8e36ac00a0"
     },
     {
       "audit_status": "audited",
@@ -7089,12 +7089,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-index-lifecycle",
-      "evidence": "Authorization review verified the exact 2,100-region/four-course scope, immutable Qwen3 binding, local-model and method-evaluation authority only, zero provider/paid/product/final-case authority, finite progression, and no automatic promotion.",
+      "evidence": "Terminal instrument review verified completed Keep status, exact 2,100-region/four-course Qwen3 scope, every execution authority false, finite progression, preserved product/final locks, and no automatic promotion.",
       "findings": [],
       "path": "research/05_evaluation/instruments/retrieval_index_lifecycle_001.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "34677455b5c6f891f87f6e09b9e727c541a07fbd64ba8f2ddfccb15de36521c4"
+      "sha256": "64912878a0ed1571b01537e18e8f037c43eabe818968f6a917aacb656857e37c"
     },
     {
       "audit_status": "audited",
@@ -7105,7 +7105,7 @@
       "path": "scripts/qualify_retrieval_index_lifecycle.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "81d8e4cf5485dd00cad5739ebff97c14034f7697fa063961d1164e1529dd395f"
+      "sha256": "c35d29ddd743a8ec0cc89410865e0c2ec406cf1a307c55ec72b36feae205db0a"
     },
     {
       "audit_status": "audited",
@@ -7133,12 +7133,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "retrieval-index-lifecycle-verification",
-      "evidence": "Runner tests prove exact local-only authority, query-only wrapper rejection of runtime document embeddings, lifecycle invariants, completed-build exclusivity, ready supplemental runtime preflight, safe resume handling, and the product adapter's verify-only boundary.",
+      "evidence": "Runner tests prove terminal authority revocation, query-only wrapper rejection of runtime document embeddings, lifecycle invariants, exclusive completed outputs, blocked reexecution, safe resume behavior, and the product adapter's verify-only boundary.",
       "findings": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "699e78dbf8524cd905009af23de24fc2665f001f3fb92cac0bba4922c68d3114"
+      "sha256": "3e7a21185543c535e2c24b859e324dfabbfa1da3fb155fd6f82a8f9ef8ccb662"
     }
   ],
   "schema_version": 1

@@ -49,10 +49,12 @@ evidence, not competing end goals.
   provider I/O on a missing locked retrieval extra; AFQC-063 corrected that
   invocation. The sole corrective attempt then failed operationally before case
   1 after 2 h 15 min of on-demand indexing. AFQC-064 revokes authority and
-  requires a prebuilt-index successor. AFQC-065 passes the immutable lifecycle
-  simulation with zero runtime document embeddings and exact ranking/restart
-  equivalence. #139 is now the active P0 real-Qwen qualification; #127 remains
-  Refine and blocked. The sealed 10,000 cases remain closed.
+  requires a prebuilt-index successor. AFQC-068 now qualifies that lifecycle on
+  real local Qwen: four indexes over 2,100 public regions pass every resource
+  gate, and 40/40 queries remain non-empty and ranking-identical after restart
+  with zero runtime document embeddings. Close #139 after PR #140; #127 may
+  prepare one new 500+100 checkpoint but remains unauthorized. The sealed
+  10,000 cases remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,

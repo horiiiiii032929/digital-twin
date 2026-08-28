@@ -26,12 +26,12 @@ def test_query_only_embedder_rejects_runtime_document_embedding() -> None:
     assert runtime.document_calls == 1
 
 
-def test_authorized_instrument_is_local_only_and_bounded() -> None:
+def test_completed_instrument_has_all_execution_authority_revoked() -> None:
     result = validate()
 
     assert result == {
         "instrument_id": "retrieval-index-lifecycle-development-001",
-        "status": "passed-authorized-local-only",
+        "status": "passed-terminal-authorization-revoked",
         "source_region_count": 2100,
         "provider_calls": 0,
         "local_model_loaded": False,
@@ -56,16 +56,26 @@ def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     assert result["metrics"]["corruption_detection_accuracy"] == 1
 
 
-def test_completed_build_blocks_reexecution_but_runtime_check_is_ready() -> None:
+def test_completed_result_blocks_every_reexecution() -> None:
     readiness = preflight()
 
     assert readiness["status"] == "blocked-not-authorized"
-    assert readiness["blockers"] == ["exclusive-output-already-exists"]
+    assert "instrument-local-model-execution-authorized-false" in readiness["blockers"]
+    assert "instrument-method-evaluation-execution-authorized-false" in readiness[
+        "blockers"
+    ]
+    assert "freeze-local_model_evaluation-authorization-missing" in readiness[
+        "blockers"
+    ]
+    assert "exclusive-output-already-exists" in readiness["blockers"]
     assert readiness["provider_calls"] == 0
     assert readiness["final_cases_opened"] is False
     runtime_readiness = runtime_preflight()
-    assert runtime_readiness["status"] == "ready"
-    assert runtime_readiness["blockers"] == []
+    assert runtime_readiness["status"] == "blocked-not-authorized"
+    assert "instrument-local-model-execution-authorized-false" in runtime_readiness[
+        "blockers"
+    ]
+    assert "exclusive-runtime-result-already-exists" in runtime_readiness["blockers"]
 
 
 def test_resume_preflight_reuses_partial_index_root(
@@ -79,7 +89,7 @@ def test_resume_preflight_reuses_partial_index_root(
 
     readiness = qualification.preflight(resume=True)
 
-    assert readiness["status"] == "ready"
+    assert readiness["status"] == "blocked-not-authorized"
     assert "exclusive-output-already-exists" not in readiness["blockers"]
 
 

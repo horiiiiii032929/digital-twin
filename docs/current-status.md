@@ -182,16 +182,16 @@ tokens, or cost, and hidden gold stayed sealed. AFQC-064 revokes authority and
 stops checkpoint 005. No product-quality conclusion or final 10,000-case claim
 is available.
 
-AFQC-065 selects an immutable, content-addressed retrieval-index lifecycle for
-one real local-Qwen qualification. Its clean network-free run built four
-indexes over 2,100 synthetic regions and passed 40/40 loaded-versus-live
-rankings, 40/40 restart checks, stale-binding rejection, and corruption
-detection with zero runtime document embeddings. Aggregate synthetic cold load
-was 1.072 seconds. The actual-product adapter now verifies prebuilt artifacts
-and cannot construct document vectors at startup. This is lifecycle evidence,
-not a real-Qwen resource or product-quality result. Local qualification remains
-unauthorized; checkpoint 005 stays terminal and the final 10,000 cases remain
-closed.
+AFQC-065 selects an immutable, content-addressed retrieval-index lifecycle, and
+AFQC-068 records its real local-Qwen qualification as `Keep`. Four exact
+release-bound indexes over 2,100 public regions built in 532.408 seconds with
+1,808.484 MiB peak RSS and 12.659 MiB of artifacts. Aggregate cold load was
+0.372 seconds. A supplemental query-only check returned non-empty evidence for
+40/40 queries with 40/40 identical rankings after a fresh index-store restart
+and zero runtime document embeddings. The actual-product adapter verifies
+prebuilt artifacts and cannot construct document vectors at startup.
+Authorization is revoked; checkpoint 005 stays terminal and the final 10,000
+cases remain closed.
 
 Historical professor-checkpoint reviewer attempts 001–005 remain immutable
 invalid operational evidence. Reviewer calibration is no longer the blocker
@@ -199,11 +199,12 @@ for #127 and none of those attempts is being retried. Issue
 [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) now owns the
 separate provider-unauthorized true-visual 30-cluster/60-case supplement.
 
-AFQC-066 now authorizes exactly the resumable local-Qwen qualification over the
-2,100 public regions. The authority covers only local-model and method
-evaluation: provider, paid, product-checkpoint, private-data, and final-case
-execution remain false. The result must revoke this authority regardless of
-outcome.
+AFQC-066 was the one-time local authority, and AFQC-067 corrected a runtime
+measurement omission before interpretation. Both generated result hashes are
+registered, provider/private/product/final access was zero, and no execution is
+now authorized. Issue #139 may close after PR #140 merges; #127 may prepare one
+new 500+100 actual-product checkpoint but cannot execute it without separate
+authorization.
 
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
@@ -921,7 +922,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Engineering pipeline Keep; actual-product checkpoint 005 invalid and stopped | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-058 preserves the wording Refine; AFQC-059/060 freeze the 452-model/48-canonical package. Attempts 001/002 both ended before provider I/O. AFQC-065 passes the immutable-index lifecycle simulation with zero runtime document embeddings and exact ranking/restart equivalence | Run one separately authorized resumable local-Qwen qualification over the 2,100 public regions. Do not open the sealed 10,000 cases, run checkpoint 005 again, or design a product successor before that resource result |
+| Large factual QA | Immutable retrieval lifecycle Keep; actual-product checkpoint 005 invalid and stopped | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passes the real 2,100-region Qwen qualification within every resource gate, with 40/40 non-empty restart-stable queries and zero runtime document embeddings | Design one new 500+100 actual-product checkpoint using the immutable indexes, then seek separate execution authorization. Do not open the sealed 10,000 cases or rerun checkpoint 005 |
 
 ## Release readiness and critical path
 
