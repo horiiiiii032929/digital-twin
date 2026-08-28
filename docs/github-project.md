@@ -109,8 +109,11 @@ professor-communication track.
    records the real-Qwen result as Keep: four immutable indexes over 2,100
    public regions pass every resource gate, while 40/40 queries remain non-empty
    and ranking-identical after restart with zero runtime document embeddings.
-   Close #139 after PR #140 and return #127 to one new build-only 500+100
-   checkpoint design.
+   #139 is Done / Keep. AFQC-069 completes the new build-only 500+100 design as
+   checkpoint 006: both conditions load the exact qualified artifacts, runtime
+   document embedding is prohibited, and every provider or paid flag remains
+   false. The next gate is one explicit execution authorization after a clean
+   no-call preflight.
    The final 10,000 cases remain unauthorized. Issue #131 separately
    owns the provider-unauthorized true-visual supplement.
 2. #107 — preserve T0 as the release control and prepare one separately frozen

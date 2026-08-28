@@ -52,8 +52,9 @@ evidence, not competing end goals.
   requires a prebuilt-index successor. AFQC-068 now qualifies that lifecycle on
   real local Qwen: four indexes over 2,100 public regions pass every resource
   gate, and 40/40 queries remain non-empty and ranking-identical after restart
-  with zero runtime document embeddings. Close #139 after PR #140; #127 may
-  prepare one new 500+100 checkpoint but remains unauthorized. The sealed
+  with zero runtime document embeddings. #139 is now Done / Keep. AFQC-069
+  prepares checkpoint 006 under #127 with exact artifact verification, five
+  finite simulations, and no provider authority. The sealed
   10,000 cases remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
