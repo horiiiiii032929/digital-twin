@@ -26,6 +26,7 @@ COPY scripts/bootstrap_admin.py scripts/bootstrap_admin.py
 COPY scripts/manage_runtime_data.py scripts/manage_runtime_data.py
 COPY scripts/restore_runtime.py scripts/restore_runtime.py
 COPY scripts/run_ingestion_worker.py scripts/run_ingestion_worker.py
+COPY scripts/proactive_outreach_worker.py scripts/proactive_outreach_worker.py
 COPY research/05_evaluation/profiles research/05_evaluation/profiles
 RUN uv sync --locked --no-dev \
     && useradd --create-home --uid 10001 app \

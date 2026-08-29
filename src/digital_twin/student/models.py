@@ -65,6 +65,10 @@ class DigitalTwinRelease(BaseModel):
     profile_version: str = Field(min_length=1)
     policy_version: int = Field(ge=1)
     policy: TutorPolicy
+    teaching_profile_id: str | None = None
+    teaching_profile_sha256: str | None = Field(
+        default=None, pattern=r"^[0-9a-f]{64}$"
+    )
     chunks: list[DocumentChunk]
     status: StudentReleaseStatus = StudentReleaseStatus.DRAFT
     evaluation_status: ReleaseEvaluationStatus = ReleaseEvaluationStatus.PENDING
@@ -83,6 +87,10 @@ class DigitalTwinRelease(BaseModel):
             raise ValueError(
                 "published releases require passed evaluation, evidence, and policy"
             )
+        if (self.teaching_profile_id is None) != (
+            self.teaching_profile_sha256 is None
+        ):
+            raise ValueError("release teaching-profile ID and hash must be paired")
         return self
 
 

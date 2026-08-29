@@ -457,6 +457,36 @@ PROACTIVE_OUTREACH_SCHEMA_STATEMENTS = (
 )
 
 
+TEACHING_PROFILE_SCHEMA_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS teaching_profiles (
+           profile_id TEXT PRIMARY KEY,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           version INTEGER NOT NULL,
+           status TEXT NOT NULL,
+           content_sha256 TEXT NOT NULL,
+           preview_sha256 TEXT,
+           profile_json TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           approved_at TEXT,
+           withdrawn_at TEXT,
+           UNIQUE(course_id, version)
+       )""",
+    """CREATE UNIQUE INDEX IF NOT EXISTS teaching_profiles_one_approved
+       ON teaching_profiles(course_id) WHERE status = 'approved'""",
+    """CREATE INDEX IF NOT EXISTS teaching_profiles_course_idx
+       ON teaching_profiles(course_id, version DESC)""",
+)
+
+
+def _add_teaching_profiles(connection: sqlite3.Connection) -> None:
+    _execute_statements(connection, TEACHING_PROFILE_SCHEMA_STATEMENTS)
+    columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(releases)")}
+    if "teaching_profile_id" not in columns:
+        connection.execute("ALTER TABLE releases ADD COLUMN teaching_profile_id TEXT")
+    if "teaching_profile_sha256" not in columns:
+        connection.execute("ALTER TABLE releases ADD COLUMN teaching_profile_sha256 TEXT")
+
+
 DEFAULT_MIGRATIONS = (
     SQLiteMigration(
         version=1,
@@ -543,5 +573,13 @@ DEFAULT_MIGRATIONS = (
         operation=lambda connection: _execute_statements(
             connection, PROACTIVE_OUTREACH_SCHEMA_STATEMENTS
         ),
+    ),
+    SQLiteMigration(
+        version=12,
+        name="explicit-professor-teaching-profiles",
+        definition=(
+            "create versioned teaching profiles and bind approved profile hashes to releases"
+        ),
+        operation=_add_teaching_profiles,
     ),
 )

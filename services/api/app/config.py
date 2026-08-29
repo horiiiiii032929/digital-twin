@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import math
 import os
-from dataclasses import dataclass
+import hashlib
+import json
+from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -23,6 +25,7 @@ class GeneratorMode(StrEnum):
     DETERMINISTIC = "deterministic"
     DEEPSEEK_V4_FLASH = "deepseek-v4-flash"
     OPENAI_GPT_5_4_MINI = "openai-gpt-5.4-mini"
+    OPENAI_PROFILE_SELECTED = "openai-profile-selected"
 
 
 class StudentTutoringMode(StrEnum):
@@ -53,6 +56,8 @@ class AppSettings:
         StudentTutoringMode.GROUNDED_ASSISTANT
     )
     proactive_outreach_worker_enabled: bool = False
+    learning_gap_hmac_secret: bytes | None = field(default=None, repr=False)
+    t1_qualification_result_path: Path | None = None
     provider_max_calls_per_process: int = 1_000
     provider_cost_cap_usd: float = 5.0
 
@@ -113,6 +118,20 @@ class AppSettings:
             ),
             proactive_outreach_worker_enabled=_boolean(
                 "APP_PROACTIVE_OUTREACH_WORKER_ENABLED", default=False
+            ),
+            learning_gap_hmac_secret=(
+                value.encode("utf-8")
+                if (value := os.getenv("APP_LEARNING_GAP_HMAC_SECRET", "").strip())
+                else None
+            ),
+            t1_qualification_result_path=(
+                _repository_path(value)
+                if (
+                    value := os.getenv(
+                        "APP_T1_QUALIFICATION_RESULT_PATH", ""
+                    ).strip()
+                )
+                else None
             ),
             provider_max_calls_per_process=_positive_int(
                 "APP_PROVIDER_MAX_CALLS_PER_PROCESS", 1_000
@@ -192,8 +211,9 @@ class AppSettings:
                 self.student_tutoring_mode
                 == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
             ):
-                raise ValueError(
-                    "bounded tutoring graph is not yet selected for staging release"
+                _validate_t1_qualification_result(
+                    self.t1_qualification_result_path,
+                    self.student_profile_path,
                 )
             if not self.secure_cookies:
                 raise ValueError("staging requires APP_SECURE_COOKIES=true")
@@ -209,18 +229,33 @@ class AppSettings:
                 raise ValueError(
                     "staging APP_MAX_UPLOAD_BYTES cannot exceed the proxy 64 MiB cap"
                 )
+            if (
+                self.student_tutoring_mode
+                == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+                and (
+                    self.learning_gap_hmac_secret is None
+                    or len(self.learning_gap_hmac_secret) < 32
+                )
+            ):
+                raise ValueError(
+                    "staging T1 requires APP_LEARNING_GAP_HMAC_SECRET with at least 32 bytes"
+                )
         if self.generator_mode == GeneratorMode.DEEPSEEK_V4_FLASH:
             raise ValueError(
                 "APP_GENERATOR_MODE=deepseek-v4-flash is historical and cannot "
                 "be selected by the prospective R1 runtime"
             )
         if (
-            self.generator_mode == GeneratorMode.OPENAI_GPT_5_4_MINI
+            self.generator_mode
+            in {
+                GeneratorMode.OPENAI_GPT_5_4_MINI,
+                GeneratorMode.OPENAI_PROFILE_SELECTED,
+            }
             and not os.getenv("OPENAI_API_KEY", "").strip()
         ):
             raise ValueError(
                 "OPENAI_API_KEY is required when "
-                "APP_GENERATOR_MODE=openai-gpt-5.4-mini"
+                "APP_GENERATOR_MODE selects an OpenAI profile model"
             )
         if not self.student_profile_path.is_file():
             raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")
@@ -232,6 +267,55 @@ def _positive_int(name: str, default: int) -> int:
     if not math.isfinite(value) or value <= 0:
         raise ValueError(f"{name} must be positive")
     return value
+
+
+def _validate_t1_qualification_result(
+    result_path: Path | None,
+    profile_path: Path,
+) -> None:
+    if result_path is None or not result_path.is_file():
+        raise ValueError(
+            "staging T1 requires APP_T1_QUALIFICATION_RESULT_PATH"
+        )
+    try:
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError("staging T1 qualification evidence is unreadable") from error
+    expected_hash = hashlib.sha256(
+        json.dumps(
+            {key: value for key, value in result.items() if key != "content_sha256"},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest()
+    generator = next(
+        (
+            row
+            for row in profile.get("components", [])
+            if row.get("component") == "generator"
+        ),
+        None,
+    )
+    configuration = (
+        generator.get("implementation", {}).get("configuration", {})
+        if isinstance(generator, dict)
+        else {}
+    )
+    if (
+        result.get("instrument_id")
+        != "autonomous-tutoring-r1-confirmation-001"
+        or result.get("status") != "completed-keep"
+        or result.get("decision") != "Keep"
+        or result.get("hard_gates_passed") is not True
+        or result.get("t0_rollback_available") is not True
+        or result.get("selected_model") != configuration.get("provider_model")
+        or result.get("profile_sha256")
+        != hashlib.sha256(profile_path.read_bytes()).hexdigest()
+        or result.get("content_sha256") != expected_hash
+    ):
+        raise ValueError("staging T1 qualification evidence does not bind this release")
 
 
 def _boolean(name: str, *, default: bool) -> bool:

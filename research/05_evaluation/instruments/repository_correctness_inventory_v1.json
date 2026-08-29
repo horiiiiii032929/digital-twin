@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 672
+    "audited": 687
   },
   "category_counts": {
-    "active_frontend": 68,
-    "active_or_unclassified_tooling": 156,
-    "active_runtime": 113,
+    "active_frontend": 69,
+    "active_or_unclassified_tooling": 159,
+    "active_runtime": 116,
     "ci_configuration": 1,
     "deferred_tooling": 2,
-    "deployment_configuration": 4,
-    "evaluation_configuration": 170,
+    "deployment_configuration": 6,
+    "evaluation_configuration": 172,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 140
+    "verification": 144
   },
-  "file_count": 672,
+  "file_count": 687,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "8214b2fc1a73a1443aacce12edfe4ec35503ba6c57d78ecc28162750194be3aa",
+  "record_sha256": "73e3670b866f1b6755b9faf61dd1d0f42a88ef0b52b55c34204e9859197e0980",
   "records": [
     {
       "audit": {
@@ -39,11 +39,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused OpenAI-only R1 review plus calibration-004 command review; exact-model, no-fallback, store-false, gold separation, build-only validation, three simulations, staging, and targeted regressions passed.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -51,7 +51,7 @@
       "package_commands": [],
       "path": ".env.example",
       "risk": "medium",
-      "sha256": "44fbaa8f37186e7676cd15234fe0326877a97548f7345937130c7f82ef64f73f"
+      "sha256": "550b054b956a86743a87599b4f0f1a9372c86e6f2531406105d3602845613644"
     },
     {
       "audit": {
@@ -391,11 +391,27 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness",
-        "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "repository-maintenance"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_frontend",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
+      "risk": "high",
+      "sha256": "444a6be445cca43750fe5537183e83bc07c6d192dcf638ecd44d6c7c187b622d"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -403,7 +419,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "ac4821107d854b31b000ed6ce348cbbd792a64666ea57856214be583439d3412"
+      "sha256": "542eebea94029dc6883c67183d1ad8c3a70aba451f2bbfcd1ed90d999053b01c"
     },
     {
       "audit": {
@@ -855,11 +871,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness",
-        "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "repository-maintenance"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -867,7 +883,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.ts",
       "risk": "high",
-      "sha256": "efd0dad6d469900653ceb63f7ce48118a7dd53d338c4e65fb5548fce762970d3"
+      "sha256": "5ce6236347d7c77eddb3a545a8d44973e0c5b9e326ab7ab944a33ec03c7df16c"
     },
     {
       "audit": {
@@ -903,11 +919,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -915,7 +931,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/types.ts",
       "risk": "high",
-      "sha256": "c11706174490f239cee8bb4e78ad0adfbe452ee5a4826c6c4c931806f8e747ed"
+      "sha256": "ed01a4861b07cc3afffeac963bb3fc686ea98e2bcf1e3476c426e18353c85dc3"
     },
     {
       "audit": {
@@ -1207,11 +1223,27 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Focused OpenAI-only R1 post-run review; the calibration-004 verification command again requires the fully unauthorized state while exact-model, no-fallback, store-false, gold-separation, freeze, and simulation checks remain active.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "compose.preview.yml",
+      "risk": "high",
+      "sha256": "2db557455c6d181ec5cb8bef35fb505c868ac02c6c933c692a5332dc2265e16d"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, Compose validation, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1219,7 +1251,7 @@
       "package_commands": [],
       "path": "compose.staging.yml",
       "risk": "high",
-      "sha256": "5ae0904ec8b72a9e44b580dd265dc915cf26baf449cae92e7c0b222ffbb0c865"
+      "sha256": "14a8f8a9c7bb43bda1347ed236d29552d05950c30efb4eea74f19271f7f8aced"
     },
     {
       "audit": {
@@ -1239,11 +1271,27 @@
     },
     {
       "audit": {
-        "domain": "configuration-and-deployment",
-        "evidence": "All three bases are digest pinned; the API image exposes only the five documented staging operational entrypoints plus active profile inputs, including clean administrator bootstrap, backup, restore, lifecycle, and worker commands.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "deploy/Caddyfile.preview",
+      "risk": "high",
+      "sha256": "be662eaea43a109039e7d27afc0ec5d2d273827213c6737a60e5f5a1559b26c0"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1251,15 +1299,15 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "ca0e04d098a4d8d6311bf14198b4e8e5fab09e0e6da889b1d667c2ca84aca761"
+      "sha256": "78ac7d9fa01908c9e53d5f7a895c23b17aa5d65d4406ae9ef46f93a016c1ab22"
     },
     {
       "audit": {
-        "domain": "deterministic-primary-development-checkpoint",
-        "evidence": "Focused command-surface review verified checkpoint-004 validation, five terminal network-free simulations, blocked live preflight, and inclusion in the complete repository gate without authorizing provider or final-set execution.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1267,7 +1315,7 @@
       "package_commands": [],
       "path": "deploy/staging.env.example",
       "risk": "high",
-      "sha256": "f3827d49b036fe127e8cd8c9d2230fb55255a6a761606d278cc31d18f9e1e0ab"
+      "sha256": "14221e482bd26c6a9d493adf98f313ac36d3fabcb84b9b3b87de9171eb154ead"
     },
     {
       "audit": {
@@ -1287,11 +1335,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-configuration-and-deployment",
-        "evidence": "Command review verifies separate attempt-001 history and explicit attempt-002 validation, simulation, preflight, execution, resume, scoring, and materialization commands; attempt 002 remains freeze blocked and the normal repository gate includes its build validation.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1299,7 +1347,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "b83ffdd7743859a4c7c07aae5432badb25cf7c6dadcd1803610d2e147bac8761"
+      "sha256": "5ee77f30654f23ccb4aa779041880782b8cfe44e832444db7d2c58ad6d419c04"
     },
     {
       "audit": {
@@ -2391,6 +2439,22 @@
     },
     {
       "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
+      "risk": "high",
+      "sha256": "a2195eb47850e87c9a476f29a39f606130529cc66e418a9bdf0cf38c45bf0957"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Binding review confirms the exact DeepSeek V4 Flash model and revision, current official limits and peak pricing, account-linked retention disclosure, 24-hour freshness, no fallback, and separate authorization for the bounded T0 confirmation.",
         "findings": [],
@@ -2452,6 +2516,22 @@
       "path": "research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json",
       "risk": "high",
       "sha256": "7c54f94a64a7a91993aaa98efb4c15b3a958faa1b0a4e3e02f953e5082644310"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_001.json",
+      "risk": "high",
+      "sha256": "7778d0e140866e235423cc4ea4fd27372d0028d5f69fd2857e53b72d3c41d927"
     },
     {
       "audit": {
@@ -4119,11 +4199,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-evaluation-tooling",
-        "evidence": "Focused adapter review verified the actual-product path requires exact prebuilt release-bound retrieval artifacts before Qwen loads, performs no runtime document embedding, shares the qualified artifact across candidate/control, and preserves gold separation and provider accounting.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4134,7 +4214,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "5d5be81303bd7c6373ee016ba7d77bbc139da467cabed4b82f08df0ebb6df429"
+      "sha256": "ecddb96801d7af003dbb018d30dcc3b60b9550d89bfe5910b2eb93a6b70dae05"
     },
     {
       "audit": {
@@ -4890,11 +4970,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Manual code review, deterministic regeneration, stale-hash rejection, explicit hidden runtime/build coverage, and a fail-closed completeness gate for pending/open findings.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -4905,7 +4985,7 @@
       ],
       "path": "scripts/build_repository_correctness_inventory.py",
       "risk": "high",
-      "sha256": "3f563ff0fc94ae64e22ebcb00225754edd1adbf87d82ddb13ffa384bcc4f72dd"
+      "sha256": "3598f6c6b9eb7ebc77dd64a0cd8b2cd0c3da31f81ac84806c715d2935b2436c7"
     },
     {
       "audit": {
@@ -5880,6 +5960,28 @@
     },
     {
       "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:r1-model-cascade",
+        "preflight:r1-model-cascade",
+        "resume:r1-model-cascade",
+        "simulate:r1-model-cascade",
+        "verify:r1-model-cascade"
+      ],
+      "path": "scripts/run_academic_factual_qa_r1_model_cascade.py",
+      "risk": "high",
+      "sha256": "eaf36bb2203fedec1ae477451fdf1157eda08d84632f2246932c23a54eee87e9"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Runner review and full network-free service simulation verify course-and-question-only product input, full-corpus source reconstruction, shared atomic drafts, delayed gold join, authoritative claim/citation scoring, cluster-paired uncertainty, persistence, cost/call ceilings, and explicit non-academic simulation labeling.",
         "findings": [],
@@ -5963,6 +6065,26 @@
       "path": "scripts/run_autonomous_tutoring_graph_development.py",
       "risk": "high",
       "sha256": "d5f393819e98337a7f319b44e38b2c8b733dd20c4095b9c42881a501ef3f8c0b"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "preflight:autonomous-tutoring-r1-confirmation",
+        "simulate:autonomous-tutoring-r1-confirmation",
+        "verify:autonomous-tutoring-r1-confirmation"
+      ],
+      "path": "scripts/run_autonomous_tutoring_r1_confirmation.py",
+      "risk": "high",
+      "sha256": "9dbcb0a72b19c5d368f9c5117be862ac21d4ec024e784a46a616a36367a32cba"
     },
     {
       "audit": {
@@ -6465,6 +6587,26 @@
       "path": "scripts/run_professor_fidelity_experiment.py",
       "risk": "high",
       "sha256": "753a6785a00c9d11ab245f23bbe22d291f575b64fc3671777f8f6a40df683f22"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "start:r1-preview",
+        "stop:r1-preview",
+        "verify:r1-preview"
+      ],
+      "path": "scripts/run_r1_public_preview.py",
+      "risk": "high",
+      "sha256": "999f142d0df7799c9db417a8c0b89fe51c71fb1efcd18335a2357d5d6a8a0c3c"
     },
     {
       "audit": {
@@ -7039,11 +7181,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Manual registry and AST review confirms the pure network-free reference-pool builder is explicitly exempt while its separate paid runner remains registered and reachable-guarded; freeze validation reports complete 100/100 coverage.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7053,7 +7195,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "ae6077b15542fdfdd119607b38cb585c73831e68c43df195f131c33b04c0af74"
+      "sha256": "55a65ac9788e3e22102524b720cc2eb7a9a12e8089e04efcfc4eb45ee8a757ef"
     },
     {
       "audit": {
@@ -7111,11 +7253,11 @@
     },
     {
       "audit": {
-        "domain": "tooling-and-execution-freeze",
-        "evidence": "Post-correctness live-HTTPS workflow review corrected policy-before-preview ordering, course binding, and server-owned ingestion lineage while preserving secure credentials, source ownership, and no-provider boundaries; focused tests pass.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
-        "reviewer": "codex-primary-release-requalification"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7125,7 +7267,7 @@
       ],
       "path": "scripts/verify_https_staging.py",
       "risk": "high",
-      "sha256": "c21fefe2558a7d939c36944a552c0405c0992145ebec4ac3418643982fbb5daf"
+      "sha256": "4b0452b61e161c2ed0d9657f88ca17d8aa59470544cce9aa176fe4804461f6db"
     },
     {
       "audit": {
@@ -7213,11 +7355,11 @@
     },
     {
       "audit": {
-        "domain": "deterministic-primary-development-checkpoint",
-        "evidence": "Freeze review verified both checkpoint-004 entrypoints are protected, the checkpoint is absent from every bounded authorization map, the repository-wide freeze remains active, and live execution fails closed.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7225,15 +7367,15 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "39ff870606ccb8d8c4770780dea148ea5a43b454b9e6154638e030c2295301f5"
+      "sha256": "bf1f2bf8c73af75a9ddf94431f4815fe609c33c06d7351f1a25731b82d7d0283"
     },
     {
       "audit": {
-        "domain": "api-authentication-and-scope",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7241,15 +7383,15 @@
       "package_commands": [],
       "path": "services/api/app/dependencies.py",
       "risk": "high",
-      "sha256": "45100904614ea1b2cb78689db3e887fe7737f996ad28737228c29b92a94ab5f5"
+      "sha256": "8f70d915c2a27330c23f0adf9b729153f268d9d481e144a06499a3bd21a2fa6d"
     },
     {
       "audit": {
-        "domain": "r1-openai-runtime",
-        "evidence": "Focused API composition review verified exact profile/chunker binding, publication-time index build and verification, runtime query-only loading, optional backwards-compatible activation, and fail-closed behavior when an embedder or exact artifact is unavailable.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7257,7 +7399,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "51a3c490ed2db9d72df8a7eede92149dae4553a80a2314e2e69ce51c2ff21c59"
+      "sha256": "65007ec09333b802a396172ba0219272ba385ca016f396843dc7f79a53e28e19"
     },
     {
       "audit": {
@@ -7373,11 +7515,11 @@
     },
     {
       "audit": {
-        "domain": "runtime-api-boundaries",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7385,7 +7527,7 @@
       "package_commands": [],
       "path": "services/api/app/routers/publication.py",
       "risk": "high",
-      "sha256": "1efbd650b34346838c623cac6389c1e56d3491ca34308bdf0ddb9ece650843b6"
+      "sha256": "b226d8e03c833912634a4a08ce42c1e1282e335a926c85f6eaf13dab36a9dcf8"
     },
     {
       "audit": {
@@ -7405,11 +7547,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7417,7 +7559,7 @@
       "package_commands": [],
       "path": "services/api/app/schemas.py",
       "risk": "high",
-      "sha256": "3cfcf8f30d0f0e4e5c18541390e793dc1f16cca45abb026f2e0dcdcf455e2ffd"
+      "sha256": "46d5a2bd67c7fd05fdde28245c42f9a4fb6b80fa529c5e683d5a5274521d3632"
     },
     {
       "audit": {
@@ -7581,11 +7723,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-runtime",
-        "evidence": "Focused model-policy review verified only the exact direct-OpenAI mini, nano, and full snapshots are active for prospective R1, while historical providers remain registered but inactive and prohibited families fail closed.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7593,7 +7735,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "790090830148dbe18774b2e68643982b2508a63614fa24bd7f6ed68b8cad6b1b"
+      "sha256": "17d5ec3af2b0aea0c79954e1a6ddf05e58dafda27328324550d644b80613ec55"
     },
     {
       "audit": {
@@ -7789,11 +7931,11 @@
     },
     {
       "audit": {
-        "domain": "evaluation-runtime-correctness",
-        "evidence": "Manual metric, split, course-isolation, profile, model-binding, and threshold review corrected duplicate-gain, zero-score, spoofed-lineage, and malformed-input cases; focused evaluation tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -7801,7 +7943,23 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "757a6445c3d59f12d93393e354333138447f5c0ca2823693e061e941e529ff1b"
+      "sha256": "0495fd39bf2300863dcd03f89cba98fa536210951750769512676150b7be97eb"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/cascade_v2.py",
+      "risk": "high",
+      "sha256": "e83ece0ea983b5e2a2d3b8d327f6b8687901ec497b14c3413ffe83f142635fc7"
     },
     {
       "audit": {
@@ -7997,11 +8155,11 @@
     },
     {
       "audit": {
-        "domain": "flow-independent-factual-qa",
-        "evidence": "Manual provider transport and accounting review verifies historical OpenRouter behavior plus direct first-party OpenAI/Mistral endpoints, runtime-only credentials, strict local schema validation, exact model identity, OpenAI store=false, transport-only bounded retry, retry-inclusive prospective cost reservation, durable physical-attempt accounting, replay binding, and fail-closed call/cost handling.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8009,7 +8167,23 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/provider_json.py",
       "risk": "high",
-      "sha256": "49125bbb843b404d04df8b31cbae5841e6738ccd8486ce7b4c9e14811e8bfb4b"
+      "sha256": "195cdd27e8fb04d4b9c4161323af87bc60b74cdb06d22cc4095802dee71dc8cf"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/retrieval_materialization.py",
+      "risk": "high",
+      "sha256": "3a8d7dfcdea09e5c00ecf82caf0e4c0e6612a55af9347ccbd3487d76a9889c98"
     },
     {
       "audit": {
@@ -8125,11 +8299,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8137,7 +8311,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "42fc5cc466de8ffd7c818abcf580970c78ac1ace420f4fa175133a8c1c4fc705"
+      "sha256": "ce028ead9df1f9b0e0956ac13608c623b1bf54dd59c0c4fafce83f56d7eb2d0d"
     },
     {
       "audit": {
@@ -8173,11 +8347,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8185,7 +8359,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "05c2b56c73f7f217b196a63a59b8a9d4281234ac7d898ec91d79b043cc13bb8f"
+      "sha256": "7f4e6d417c57f01fea5c86acf1b1ee73186d680a213dab2245d586d97a960f44"
     },
     {
       "audit": {
@@ -8525,11 +8699,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-runtime",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8537,7 +8711,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "6b972fcf82591ab0d5fcd3281f2b85d3f1b9b295eb1a0dd99ab0fd1fe6ec0508"
+      "sha256": "77bf0119c0ec9f3e74cfe0ee693e3c399b4e7c7fb033cf6af6cde7f988bd5950"
     },
     {
       "audit": {
@@ -8781,11 +8955,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review revokes attempt-002 external-model and method authority after the invalid result while retaining only the historical deterministic-development dataset-generation allowance.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8793,15 +8967,15 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a2b5e60c348a36795efd8365efbc5afd4ccd89f77853c4353cc7e9af8ef491f5"
+      "sha256": "7d1cb898f90a21b46ac7b1df1e9e95e06f6ef0fc32b84bfd560272146518be97"
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "Public exports for the versioned evidence-recovery contracts were checked against service, repository, runner, and focused import regressions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8809,7 +8983,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "7c15f79a74e4f2e9566c96e094445ed565528f9ba6c0509e77029c1d7808e41f"
+      "sha256": "30f35bacc8872562cea7ad52fdfc655a2a9e675af3abcfd739afceaabcf48fd0"
     },
     {
       "audit": {
@@ -8845,11 +9019,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8857,15 +9031,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/migrations.py",
       "risk": "high",
-      "sha256": "1fea55e842d589a49897ac2547a7cac89f4cab506386bdeff213b9bceedc696b"
+      "sha256": "63ad7d5a9a8587170a3fec72f4ec121e3daa529bd47e887119b2a3dd74174972"
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "Evidence-recovery opportunity, decision, mode, and scan-result contracts were reviewed for bounded fields, count invariants, zero-provider declaration, and stable no-action taxonomy.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8873,15 +9047,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/models.py",
       "risk": "high",
-      "sha256": "4bc5ec9035a9d36304832a3c5c5b1aae45169d12948b0e86cdb3af7717eb6c51"
+      "sha256": "68ad23b018181bfdd8eec2c669b4978e0fe9328ef6d6b90e86e036ee8c2d0ac6"
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "Focused code and threat-boundary review plus network-free regressions cover new-lineage-only evidence recovery, lexical support, consent and snooze, active-mode fail-closed authority, idempotency, current-release citation lineage, and generic Discord deep links with no learner-state content.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8889,15 +9063,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/proactive.py",
       "risk": "high",
-      "sha256": "8414b4551f41ad59d4526246e7e31265e12ce2b88d491dc542a7dfad357cf5de"
+      "sha256": "bb62878ee2ebc565abe36489df1bcab3adbfabb039d7134a301993a166fa848b"
     },
     {
       "audit": {
-        "domain": "runtime-publication",
-        "evidence": "Publication review and focused tests verify exact retrieval-index preparation and readiness are configured as a pair, preflight fails closed, publish/rollback prepare before state mutation, repeated preparation is idempotent, and errors remain sanitized.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8905,15 +9079,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/publication.py",
       "risk": "high",
-      "sha256": "abf25a776a1c22eacd28ead6b4bbec4a77a0ab84b7ec986746cc19513a7b0644"
+      "sha256": "714cd67839e00a0551f22f68c3e56acf4fdce42d7993b97855b032e7bbdcd03b"
     },
     {
       "audit": {
-        "domain": "proactive-outreach",
-        "evidence": "The bounded no-evidence-turn query was reviewed for exact tutor/student linkage, course and release scope, deterministic ordering, input limits, and synthetic repository coverage. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8921,15 +9095,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "034b3743430acdbb4c75faa6446e6d9925a7816cc9503d87ce99f76f7c413fe1"
+      "sha256": "6f2eacdbdd951e713fc76196e9236989e406e28689210b36a3ff6503e6da5db0"
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused tutoring-service review and tests verify exact release/profile/source/chunker/model index binding, zero runtime document embedding, artifact traceability, safe no-evidence behavior on missing/stale/corrupt indexes, and unchanged legacy behavior when the index store is not configured.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8937,7 +9111,23 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "61e42b5ffdeec4eaa04a544b3fb18e60433ee3c546d33f7e0b50ec5c87181ba6"
+      "sha256": "b3b295779eaa2e18bbad0e80f35904250c3ef8dc1335cf01bd1dcf5bae43ff50"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/teaching_profile.py",
+      "risk": "high",
+      "sha256": "17e7ed09d954f3c6b09fd3ce551527e3db21ac7581fb1e992eab0321413c305b"
     },
     {
       "audit": {
@@ -8973,11 +9163,11 @@
     },
     {
       "audit": {
-        "domain": "r1-openai-verification",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -8985,7 +9175,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "ec09ecfb83052fc2d4f393681ecbbdfc8a33fb072e8731dfa1d61f4de3cd4289"
+      "sha256": "8931eafe5a165c054312afdb80467fa603b098aba4a7c12d739e6c7bf52d0ec2"
     },
     {
       "audit": {
@@ -9053,11 +9243,11 @@
     },
     {
       "audit": {
-        "domain": "onboarding-and-policy-verification",
-        "evidence": "Publication API regressions now also prove the shadow hook runs after the release is current, creates no trigger, persists redacted aggregate audit only, and preserves successful publication when the observer fails.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -9065,7 +9255,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "4da82ac4b990e18c202d4704fca5b8804932314a986c523446dac684c06985a4"
+      "sha256": "6a7ed1e3e59a3e37ef340ea4d237a8d8d5d5aa2abc6f1e6aa211de46fe99f844"
     },
     {
       "audit": {
@@ -9085,11 +9275,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -9097,7 +9287,7 @@
       "package_commands": [],
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
-      "sha256": "c02c466660fb53d8168798d6298cec3877f5a8fddf92355e89e2ab9c09973c8e"
+      "sha256": "3ff5aea4f923cf4675c447406c669541073cca209c21cd762c4cf651852cb6c6"
     },
     {
       "audit": {
@@ -9165,11 +9355,11 @@
     },
     {
       "audit": {
-        "domain": "evaluation-and-grounding-verification",
-        "evidence": "Focused generation regressions cover T0 behavior, bounded T1 pedagogical plans, unchanged citation lineage, provider failures, and policy suppression. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -9177,7 +9367,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "2f17b00c8f687951d38b2130309dbd7fd31dcf9a3e89d5e83aa7c4d381aef300"
+      "sha256": "3cc6136f72916bb31532936c622f9a525818cef95e49ec1443addd6c860d580c"
     },
     {
       "audit": {
@@ -9757,11 +9947,11 @@
     },
     {
       "audit": {
-        "domain": "flow-independent-factual-qa",
-        "evidence": "Focused tests verify exact package size and split, deterministic rebuild hashes, public/gold separation, source-lineage policy, 20-cluster control identity, direct endpoint and manifest selection, strict OpenAI/Mistral schema parsing, exact identity, transport-only retry, durable physical-attempt accounting, dirty-repository rejection, and blocked paid execution.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -9769,7 +9959,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_v2.py",
       "risk": "medium",
-      "sha256": "e50e84880dd14dbee40db914ce8122c52a605b9d5dd7e6be054d4755f7cc31d0"
+      "sha256": "6a28966b43e3a2927f90ea49509bed0c0e6f2c6791c5253e1b3a41f5f0b22e84"
     },
     {
       "audit": {
@@ -9822,7 +10012,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, terminal invalid state and complete accounting, revoked preflight blocking, no runtime document embedding, five finite simulations, no further correction, and resume binding drift.",
+        "evidence": "Self-contained regression fixtures plus focused tests and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9833,7 +10023,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "medium",
-      "sha256": "4fbb7886715843d5903b1da056e1c1fb6954f62d5085a19c43a74b6f1dfb4f3d"
+      "sha256": "82fac628df370ef05cae609267a0bbb85718d6c4b8c212641974f445473c2b97"
     },
     {
       "audit": {
@@ -9933,10 +10123,26 @@
     },
     {
       "audit": {
-        "domain": "professor-ready-factual-and-visual-evaluation",
-        "evidence": "Focused tests cover gold-field rejection, all 160 public source sections, blocked no-call preflight, all five T0/visual conditions through the real service, delayed gold access, cluster bootstrap, persistence, duplicate detection, and explicit simulation limitations.",
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-26",
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_r1_model_cascade.py",
+      "risk": "medium",
+      "sha256": "e102e2fbfc55711f53038f10809118b755c7f098e5591b2cc6009e3abc390203"
+    },
+    {
+      "audit": {
+        "domain": "professor-ready-factual-and-visual-evaluation",
+        "evidence": "Self-contained regression fixtures plus focused tests and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9945,14 +10151,14 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_t0_confirmation.py",
       "risk": "medium",
-      "sha256": "45d97b4a0a9a3f1412ad87a71fce1cb191df0a25760fc7edc8ab059e3ef31c6e"
+      "sha256": "3c30d0b4b91ce1f75605bf404d3d9f933b012b1fb9c1974a0e8dd277413135e1"
     },
     {
       "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
-        "evidence": "Focused tests cover deterministic supplement rebuild, balance and disjointness, hash/region contract rejection, fail-closed preflight, qualification and visual simulations, profile non-selection, and mandatory audit of unsupported visual facts.",
+        "evidence": "Self-contained regression fixtures plus focused tests and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-26",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9961,7 +10167,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_visual_checkpoint.py",
       "risk": "medium",
-      "sha256": "1d5438d347d19d4d338c99f9e500c0f18bfc382291d7a1ea695741f2d27eeba3"
+      "sha256": "4ddbcbb6c8ac2ee8aeb55a94092b6b1dceddb1ce019161d7975439286fed0496"
     },
     {
       "audit": {
@@ -10122,6 +10328,22 @@
       "path": "tests/test_audit_multimodal_v3_result.py",
       "risk": "medium",
       "sha256": "252738d4b048274da08b3de0540d5165ac119d4cafa025e1eda8ceab01b8d230"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_autonomous_tutoring_r1_confirmation.py",
+      "risk": "medium",
+      "sha256": "fe6396b4cce51d1301976eceb5a3a9dfb1fa7d192e0babc6ed5cb149d52756fa"
     },
     {
       "audit": {
@@ -10314,6 +10536,22 @@
       "path": "tests/test_draft_cross_course_benchmark_v2.py",
       "risk": "medium",
       "sha256": "17d8b845de4db469288aeb898770a96de6e8529f2f18c4e09bd8de8af709cfb8"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_evaluation_cascade_v2.py",
+      "risk": "medium",
+      "sha256": "75b0fbaf65e912c5eaefda9fccd34847a954d3e041c09ce032d52bbea31203a7"
     },
     {
       "audit": {
@@ -10814,9 +11052,9 @@
     {
       "audit": {
         "domain": "retrieval-index-lifecycle-verification",
-        "evidence": "Runner tests prove terminal authority revocation, query-only wrapper rejection of runtime document embeddings, lifecycle invariants, exclusive completed outputs, blocked reexecution, safe resume behavior, and the product adapter's verify-only boundary.",
+        "evidence": "Self-contained regression fixtures plus focused tests and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -10825,7 +11063,23 @@
       "package_commands": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "risk": "medium",
-      "sha256": "3e7a21185543c535e2c24b859e324dfabbfa1da3fb155fd6f82a8f9ef8ccb662"
+      "sha256": "37c7ecb673e9bedb86f1b299075bfdaa377ab58a5e06d9b75e4704eb14e56f66"
+    },
+    {
+      "audit": {
+        "domain": "r1-demo-build-and-evaluation-v2",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex repository correctness sweep"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_retrieval_materialization.py",
+      "risk": "medium",
+      "sha256": "758c45df8206bfc06af3157a4c5c734c076a8fb0db603c748b1f51895495d276"
     },
     {
       "audit": {
@@ -11229,8 +11483,8 @@
     }
   ],
   "risk_counts": {
-    "high": 518,
-    "medium": 154
+    "high": 529,
+    "medium": 158
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

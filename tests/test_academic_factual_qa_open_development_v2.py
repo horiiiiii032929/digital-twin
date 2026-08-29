@@ -348,6 +348,103 @@ async def test_direct_retry_is_durable_in_provider_accounting(
 
 
 @pytest.mark.asyncio
+async def test_direct_retry_cap_is_enforced_before_the_second_attempt(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    binding = _providers()["openai-gpt-5.4-mini"]
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    captured: list[dict[str, Any]] = []
+    _install_fake_client(
+        monkeypatch,
+        [
+            _FakeResponse({"error": {"message": "temporary"}}, status_code=500),
+            _FakeResponse(_openai_value()),
+        ],
+        captured,
+    )
+    ledger = ProviderCallLedgerV1(
+        tmp_path / "no-retries.sqlite3",
+        run_binding={"binding": binding},
+        maximum_calls=1,
+        maximum_cost_usd=1,
+        maximum_transport_retries_total=0,
+        resume=False,
+    )
+
+    with pytest.raises(ProviderJsonError, match="HTTP 500"):
+        await DirectProviderJsonTransport(binding).call_with_ledger(
+            ledger=ledger,
+            request_key="case-001",
+            provider_role="test",
+            system="Return JSON.",
+            prompt="Return ok=true.",
+            task="retry-cap",
+            schema={
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["ok"],
+                "properties": {"ok": {"type": "boolean"}},
+            },
+        )
+    snapshot = ledger.snapshot()
+    ledger.close()
+
+    assert len(captured) == 1
+    assert snapshot["provider_attempts"] == 1
+    assert snapshot["recovered_transport_failures"] == 0
+
+
+@pytest.mark.asyncio
+async def test_failed_retry_attempts_remain_durable_in_accounting(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    binding = _providers()["openai-gpt-5.4-mini"]
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    captured: list[dict[str, Any]] = []
+    _install_fake_client(
+        monkeypatch,
+        [
+            _FakeResponse({"error": {"message": "temporary"}}, status_code=500),
+            _FakeResponse({"error": {"message": "still down"}}, status_code=500),
+        ],
+        captured,
+    )
+    ledger = ProviderCallLedgerV1(
+        tmp_path / "failed-retry.sqlite3",
+        run_binding={"binding": binding},
+        maximum_calls=1,
+        maximum_cost_usd=1,
+        maximum_transport_retries_total=1,
+        resume=False,
+    )
+
+    with pytest.raises(ProviderJsonError, match="HTTP 500"):
+        await DirectProviderJsonTransport(binding).call_with_ledger(
+            ledger=ledger,
+            request_key="case-001",
+            provider_role="test",
+            system="Return JSON.",
+            prompt="Return ok=true.",
+            task="failed-retry-accounting",
+            schema={
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["ok"],
+                "properties": {"ok": {"type": "boolean"}},
+            },
+        )
+    snapshot = ledger.snapshot()
+    ledger.close()
+
+    assert len(captured) == 2
+    assert snapshot["provider_attempts"] == 2
+    assert snapshot["recovered_transport_failures"] == 1
+    assert snapshot["failed_calls"] == 1
+
+
+@pytest.mark.asyncio
 async def test_direct_transport_does_not_retry_schema_or_identity_failure(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

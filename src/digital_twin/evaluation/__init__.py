@@ -89,12 +89,21 @@ from src.digital_twin.evaluation.factual_qa_dataset import (
     normalize_question,
     source_cluster_hash,
 )
+from src.digital_twin.evaluation.cascade_v2 import (
+    CaseBatchReconciliationV2,
+    ModelCandidateManifestV2,
+    QuarantinedCaseV2,
+    ReconciledCaseV2,
+    TransportRetryBudgetV2,
+    reconcile_case_batch,
+)
 
 
 __all__ = [
     "AuthoredClusterVariantsV1",
     "AuthoredQuestionVariantV1",
     "CandidateEvaluation",
+    "CaseBatchReconciliationV2",
     "CanonicalEvidenceRefV1",
     "ClusterDraftV1",
     "CourseIsolationViolation",
@@ -123,6 +132,7 @@ __all__ = [
     "ImplementationRef",
     "MetricDirection",
     "MetricResult",
+    "ModelCandidateManifestV2",
     "MultimodalSealError",
     "POSITIVE_SLICES",
     "ProfileStage",
@@ -132,6 +142,8 @@ __all__ = [
     "ProviderQualificationConfig",
     "ProviderRole",
     "ProviderUsage",
+    "QuarantinedCaseV2",
+    "ReconciledCaseV2",
     "RetrievalLadderConfig",
     "RetrievalMethod",
     "SealedDevelopmentError",
@@ -139,6 +151,7 @@ __all__ = [
     "SourceClusterV1",
     "SystemUnderTestManifestV1",
     "TutorEvaluationAdapterV1",
+    "TransportRetryBudgetV2",
     "VisualDescription",
     "VisualDescriptionError",
     "VisualDescriptionProvider",
@@ -160,6 +173,7 @@ __all__ = [
     "load_sealed_multimodal_development",
     "normalize_question",
     "normalize_text",
+    "reconcile_case_batch",
     "score_case",
     "source_family_bootstrap_interval",
     "source_cluster_hash",

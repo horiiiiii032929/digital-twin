@@ -50,6 +50,7 @@ EXECUTION_CONFIG_NAMES = {
     ".node-version",
     ".python-version",
     "compose.staging.yml",
+    "compose.preview.yml",
     "package-lock.json",
     "package.json",
     "pyproject.toml",

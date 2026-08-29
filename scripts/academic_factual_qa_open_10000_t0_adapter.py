@@ -5,6 +5,7 @@ from __future__ import annotations
 from contextvars import ContextVar
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -42,7 +43,7 @@ from src.digital_twin.grounding import (
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.models import GenerationUsage, TutorAnswer
-from src.digital_twin.llm import LlmMessage, LlmResponse
+from src.digital_twin.llm import LlmMessage, LlmResponse, LlmUnavailableError
 from src.digital_twin.student import (
     Account,
     AccountRole,
@@ -57,18 +58,32 @@ from src.digital_twin.student import (
     approved_synthetic_policy,
 )
 from src.digital_twin.tutor_policy import SourceLabel
+from src.digital_twin.model_policy import (
+    OPENAI_MODEL_PRICING_USD_PER_MILLION,
+    OPENAI_PRODUCT_CANDIDATE_MODELS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RETRIEVAL_INDEX_ROOT = (
-    ROOT
-    / "reports/generated/academic-factual-qa-open-10000-v1-retrieval-indexes-001"
+RETRIEVAL_INDEX_ROOT = Path(
+    os.getenv(
+        "ACADEMIC_EVAL_INDEX_ROOT",
+        str(
+            ROOT
+            / "reports/generated/academic-factual-qa-open-10000-v1-retrieval-indexes-001"
+        ),
+    )
 )
 PROFILE_PATH = (
     ROOT
     / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 )
-SOURCE_PLAN_PATH = ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json"
+SOURCE_PLAN_PATH = Path(
+    os.getenv(
+        "ACADEMIC_EVAL_SOURCE_PLAN_PATH",
+        str(ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json"),
+    )
+)
 HISTORICAL_BINDING_PATH = (
     ROOT
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
@@ -214,16 +229,22 @@ class _BoundedProductLlmClient:
         ledger: ProviderCallLedgerV1,
         flow_id: str,
         response_schema: dict[str, Any] | None = None,
+        quarantine_failures: bool = False,
+        forced_failure_case_ids: set[str] | None = None,
     ) -> None:
         self.transport = transport
         self.ledger = ledger
         self.flow_id = flow_id
         self.response_schema = response_schema or ATOMIC_RESPONSE_SCHEMA
+        self.quarantine_failures = quarantine_failures
+        self.forced_failure_case_ids = forced_failure_case_ids or set()
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
         case_id = _CURRENT_CASE_ID.get()
         if not case_id:
             raise LiveT0AdapterError("provider call escaped the active evaluation case")
+        if case_id in self.forced_failure_case_ids:
+            raise LlmUnavailableError("frozen provider-failure injection")
         system = "\n\n".join(
             row.content for row in messages if row.role == "system"
         ) or "Return only the requested grounded JSON object."
@@ -238,6 +259,7 @@ class _BoundedProductLlmClient:
             prompt=prompt,
             task=task,
             schema=self.response_schema,
+            quarantine_failures=self.quarantine_failures,
         )
         return LlmResponse(
             content=json.dumps(response.content, sort_keys=True),
@@ -254,11 +276,14 @@ class _BoundedProductLlmClient:
 
 def _generator_transport(
     manifest: SystemUnderTestManifestV1,
+    runtime: dict[str, Any] | None = None,
 ) -> tuple[
     dict[str, Any],
     OpenAiCompatibleJsonTransport | DirectProviderJsonTransport,
 ]:
     """Resolve only an explicitly manifested historical or direct generator."""
+
+    runtime = runtime or {}
 
     if manifest.generator == "deepseek-v4-flash-live-atomic":
         provider_binding = _load(HISTORICAL_BINDING_PATH)
@@ -274,14 +299,46 @@ def _generator_transport(
     if manifest.generator in {
         "openai-gpt-5.4-mini-live-atomic",
         "openai-gpt-5.4-mini-live-extractive-boundary",
+        "openai-responses-live-atomic-v2",
     }:
-        provider_binding = _load(OPENAI_BINDING_PATH)
-        binding = deepcopy(provider_binding["providers"]["high-volume-generator"])
+        candidate = runtime.get("model_candidate_manifest")
+        if candidate is None:
+            provider_binding = _load(OPENAI_BINDING_PATH)
+            binding = deepcopy(
+                provider_binding["providers"]["high-volume-generator"]
+            )
+        else:
+            if not isinstance(candidate, dict):
+                raise LiveT0AdapterError("model candidate manifest is invalid")
+            provider_model = str(candidate.get("provider_model", ""))
+            if provider_model not in OPENAI_PRODUCT_CANDIDATE_MODELS:
+                raise LiveT0AdapterError("model candidate is not allowlisted")
+            input_price, output_price = OPENAI_MODEL_PRICING_USD_PER_MILLION[
+                provider_model
+            ]
+            binding = {
+                "binding_id": f"r1-cascade-v2-{candidate['candidate_id']}",
+                "provider": "openai",
+                "provider_display_name": "OpenAI",
+                "first_party_endpoint": True,
+                "api_url": "https://api.openai.com/v1/responses",
+                "credential_environment_variable": "OPENAI_API_KEY",
+                "provider_model": provider_model,
+                "documented_revision": provider_model,
+                "reasoning_effort": candidate["reasoning_effort"],
+                "max_output_tokens": int(candidate["max_output_tokens"]),
+                "temperature": 0,
+                "seed": 20260829,
+                "timeout_seconds": 45,
+                "maximum_transport_retries": 1,
+                "pricing_usd_per_million_input_tokens": input_price,
+                "pricing_usd_per_million_output_tokens": output_price,
+            }
         binding.update(
             {
                 "binding_id": f"{binding['binding_id']}-product",
-                "max_output_tokens": 600,
-                "timeout_seconds": 30,
+                "max_output_tokens": int(binding.get("max_output_tokens", 600)),
+                "timeout_seconds": float(binding.get("timeout_seconds", 30)),
             }
         )
         return binding, DirectProviderJsonTransport(binding)
@@ -316,6 +373,32 @@ class _RecordingGenerator:
             self.answers_by_case[case_id] = answer.model_copy(deep=True)
         return answer
 
+    async def generate_for_intent(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: Any,
+        *,
+        intent: str,
+        help_level: int,
+        repair_reason: str | None = None,
+    ) -> TutorAnswer:
+        generate = getattr(self.generator, "generate_for_intent", None)
+        if not callable(generate):
+            raise LiveT0AdapterError("T1 generator lacks intent-aware generation")
+        answer = await generate(
+            question,
+            hits,
+            policy,
+            intent=intent,
+            help_level=help_level,
+            repair_reason=repair_reason,
+        )
+        case_id = _CURRENT_CASE_ID.get()
+        if case_id:
+            self.answers_by_case[case_id] = answer.model_copy(deep=True)
+        return answer
+
 
 class _ManagedAdapter(StudentTutoringServiceAdapterV1):
     def __init__(
@@ -323,16 +406,20 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
         *,
         provider_ledger: ProviderCallLedgerV1,
         repository: SQLiteStudentRepository,
+        maximum_quarantined_failures: int = 0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         self.provider_ledger = provider_ledger
         self.repository = repository
+        self.maximum_quarantined_failures = maximum_quarantined_failures
         self._closed = False
 
     def validate_completion(self) -> None:
         snapshot = self.provider_ledger.snapshot()
-        if snapshot.get("status") != "running" or snapshot.get("failed_calls"):
+        if snapshot.get("status") != "running" or int(
+            snapshot.get("failed_calls", 0)
+        ) > self.maximum_quarantined_failures:
             raise LiveT0AdapterError("product provider ledger is not valid for completion")
 
     def finalize(self) -> None:
@@ -361,6 +448,8 @@ def _setup_service(
     database_path: Path,
     index_root: Path,
     claim_evidence_validator: Any,
+    tutoring_mode: str = "grounded-assistant",
+    conversation_courses: dict[str, str] | None = None,
 ) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
     repository = SQLiteStudentRepository(database_path)
     profile = _load(PROFILE_PATH)
@@ -424,10 +513,18 @@ def _setup_service(
             configuration=retriever,
         )
         index_store.verify_bound(index_binding)
+    model_root = Path(
+        os.getenv(
+            "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
+            str(
+                ROOT
+                / "data/external/huggingface/hub/"
+                "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
+            ),
+        )
+    )
     embedder = Qwen3TextEmbedder(
-        ROOT
-        / "data/external/huggingface/hub/models--Qwen--Qwen3-Embedding-0.6B/snapshots"
-        / revision,
+        model_root / revision,
         instruction=str(retriever["query_instruction"]),
         device=str(retriever["device"]),
         dtype=str(retriever["dtype"]),
@@ -442,14 +539,17 @@ def _setup_service(
         generator=generator,
         evidence_gate=gate,
         claim_evidence_validator=claim_evidence_validator,
-        tutoring_mode="grounded-assistant",
+        tutoring_mode=tutoring_mode,
         retrieval_index_store=index_store,
         retrieval_index_chunker_id=str(chunker["implementation_id"]),
         retrieval_index_chunker_version=str(chunker["version"]),
     )
+    requested = conversation_courses or {
+        course_id: course_id for course_id in chunks_by_course
+    }
     conversations = {
-        course_id: service.create_conversation(student_id, course_id).id
-        for course_id in chunks_by_course
+        key: service.create_conversation(student_id, course_id).id
+        for key, course_id in sorted(requested.items())
     }
     return repository, service, conversations
 
@@ -460,13 +560,23 @@ def build_live_t0_adapter(
     cases: list[EvaluationCaseV1],
     runtime: dict[str, Any],
 ) -> StudentTutoringServiceAdapterV1:
-    del cases
-    generator_binding, generator_transport = _generator_transport(manifest)
+    generator_binding, generator_transport = _generator_transport(manifest, runtime)
     flow_id = manifest.flow_id
-    condition = "candidate" if "candidate" in flow_id else "control"
-    maximum_calls = PRODUCT_MAXIMUM_CALLS[condition]
-    maximum_cost = PRODUCT_MAXIMUM_COST_USD[condition]
-    if manifest.generator == "openai-gpt-5.4-mini-live-extractive-boundary":
+    if manifest.evidence_gate == "structured-lexical-coverage-evidence-gate-v1":
+        condition = "candidate"
+    elif manifest.evidence_gate == "any-hit-evidence-gate-v1":
+        condition = "control"
+    else:
+        raise LiveT0AdapterError("system manifest evidence gate is unsupported")
+    maximum_calls = int(runtime.get("maximum_calls", PRODUCT_MAXIMUM_CALLS[condition]))
+    maximum_cost = float(
+        runtime.get("maximum_cost_usd", PRODUCT_MAXIMUM_COST_USD[condition])
+    )
+    cascade_v2 = runtime.get("model_candidate_manifest") is not None
+    if manifest.generator in {
+        "openai-gpt-5.4-mini-live-extractive-boundary",
+        "openai-responses-live-atomic-v2",
+    }:
         response_schema = EXTRACTIVE_BOUNDARY_RESPONSE_SCHEMA
         live_generator = LiveExtractiveBoundaryGroundedGenerator
         prompt_builder = ExtractiveBoundaryGroundedPromptBuilder()
@@ -507,12 +617,17 @@ def build_live_t0_adapter(
         maximum_calls=maximum_calls,
         maximum_cost_usd=maximum_cost,
         resume=bool(runtime["resume"]),
+        maximum_transport_retries_total=(
+            maximum_calls * 2 // 100 if cascade_v2 else None
+        ),
     )
     client = _BoundedProductLlmClient(
         transport=generator_transport,
         ledger=provider_ledger,
         flow_id=flow_id,
         response_schema=response_schema,
+        quarantine_failures=cascade_v2,
+        forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
     )
     recording_generator = _RecordingGenerator(
         live_generator(
@@ -522,11 +637,20 @@ def build_live_t0_adapter(
     )
     gate = _RecordingGate(
         StructuredLexicalCoverageEvidenceGate()
-        if "candidate" in flow_id
+        if condition == "candidate"
         else AnyHitEvidenceGate()
     )
     chunks_by_course, chunks_by_id = _chunks_by_course()
     state_path = Path(runtime["state_path"])
+    tutoring_mode = str(runtime.get("tutoring_mode", "grounded-assistant"))
+    conversation_scope = str(runtime.get("conversation_scope", "course"))
+    if conversation_scope not in {"course", "cluster"}:
+        raise LiveT0AdapterError("unsupported evaluation conversation scope")
+    conversation_courses = (
+        {case.cluster_id: case.course_id for case in cases}
+        if conversation_scope == "cluster"
+        else None
+    )
     repository, service, conversations = _setup_service(
         chunks_by_course=chunks_by_course,
         generator=recording_generator,
@@ -534,16 +658,21 @@ def build_live_t0_adapter(
         database_path=state_path,
         index_root=RETRIEVAL_INDEX_ROOT,
         claim_evidence_validator=claim_evidence_validator,
+        tutoring_mode=tutoring_mode,
+        conversation_courses=conversation_courses,
     )
 
     async def execute_turn(case: EvaluationCaseV1):
-        if case.course_id not in conversations:
+        conversation_key = (
+            case.cluster_id if conversation_scope == "cluster" else case.course_id
+        )
+        if conversation_key not in conversations:
             raise LiveT0AdapterError("evaluation case references an unknown course")
         token = _CURRENT_CASE_ID.set(case.case_id)
         try:
             return await service.submit_message(
                 "academic-open-student",
-                conversations[case.course_id],
+                conversations[conversation_key],
                 content=case.question,
                 client_request_id=f"{flow_id}:{case.case_id}",
             )
@@ -586,4 +715,5 @@ def build_live_t0_adapter(
         resolve_retrieved=resolve_retrieved,
         provider_ledger=provider_ledger,
         repository=repository,
+        maximum_quarantined_failures=(maximum_calls // 100 if cascade_v2 else 0),
     )

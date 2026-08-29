@@ -21,6 +21,7 @@ from src.digital_twin.grounding.models import (
     TutorAnswer,
 )
 from src.digital_twin.student import (
+    LearningGapPseudonymizer,
     SQLiteStudentRepository,
     StudentReleaseStatus,
     StudentWorkflowError,
@@ -196,6 +197,7 @@ def _client(
     generator=None,
     claim_evidence_validator=None,
     tutoring_mode: StudentTutoringMode = StudentTutoringMode.GROUNDED_ASSISTANT,
+    learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
 ) -> tuple[TestClient, SQLiteStudentRepository, object]:
     repository = SQLiteStudentRepository(tmp_path / "student.sqlite3")
     fixture = seed_synthetic_student_workflow(repository)
@@ -205,6 +207,7 @@ def _client(
         student_generator=generator,
         student_evidence_gate=AnyHitEvidenceGate(),
         student_claim_evidence_validator=claim_evidence_validator,
+        learning_gap_pseudonymizer=learning_gap_pseudonymizer,
         region_crop_root=tmp_path / "region-crops",
         settings=AppSettings(student_tutoring_mode=tutoring_mode),
     )
@@ -224,6 +227,9 @@ def test_bounded_tutoring_graph_persists_intent_and_learner_state(tmp_path):
         tmp_path,
         embedder=KeywordEmbedder(),
         tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"synthetic-learning-gap-secret-32-bytes-minimum"
+        ),
     )
     conversation = _create_conversation(client, fixture)
     url = f"/api/student/conversations/{conversation['id']}/messages"
@@ -255,6 +261,16 @@ def test_bounded_tutoring_graph_persists_intent_and_learner_state(tmp_path):
     assert state.prior_intent == "give_hint"
     assert state.latest_signals is not None and state.latest_signals.confusion == 0.8
     assert state.help_level == 1
+    signals = repository.list_learning_gap_signals(
+        fixture.course_a_id,
+        fixture.release_a_id,
+        active_at="2026-09-01T00:00:00+00:00",
+    )
+    assert len(signals) == 1
+    assert signals[0].signal_kind.value == "confusion"
+    serialized = signals[0].model_dump_json()
+    assert fixture.student_a_id not in serialized
+    assert "I am confused" not in serialized
 
 
 def test_bounded_tutoring_graph_short_circuits_ambiguous_and_integrity_turns(

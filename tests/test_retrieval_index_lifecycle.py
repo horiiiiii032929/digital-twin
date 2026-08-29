@@ -56,7 +56,19 @@ def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     assert result["metrics"]["corruption_detection_accuracy"] == 1
 
 
-def test_completed_result_blocks_every_reexecution() -> None:
+def test_completed_result_blocks_every_reexecution(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    output = tmp_path / "indexes"
+    output.mkdir()
+    result_path = tmp_path / "result.json"
+    runtime_result_path = tmp_path / "runtime-result.json"
+    result_path.write_text("{}", encoding="utf-8")
+    runtime_result_path.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(qualification, "OUTPUT_ROOT", output)
+    monkeypatch.setattr(qualification, "RESULT_PATH", result_path)
+    monkeypatch.setattr(qualification, "RUNTIME_RESULT_PATH", runtime_result_path)
     readiness = preflight()
 
     assert readiness["status"] == "blocked-not-authorized"

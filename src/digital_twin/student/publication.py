@@ -48,6 +48,7 @@ class ReleaseLifecycleService:
         profile_id: str = "student-tutor",
         profile_version: str = "v1",
         evidence_sufficiency_ready: bool = False,
+        teaching_profile_required: bool = False,
         post_publish_hook: Callable[[str, str], None] | None = None,
         retrieval_index_ready: Callable[[DigitalTwinRelease], bool] | None = None,
         retrieval_index_preparer: Callable[[DigitalTwinRelease], None] | None = None,
@@ -56,6 +57,7 @@ class ReleaseLifecycleService:
         self.profile_id = profile_id
         self.profile_version = profile_version
         self.evidence_sufficiency_ready = evidence_sufficiency_ready
+        self.teaching_profile_required = teaching_profile_required
         self.post_publish_hook = post_publish_hook
         if (retrieval_index_ready is None) != (retrieval_index_preparer is None):
             raise ValueError(
@@ -73,6 +75,8 @@ class ReleaseLifecycleService:
         chunks: list[DocumentChunk],
         profile_id: str,
         profile_version: str,
+        teaching_profile_id: str | None = None,
+        teaching_profile_sha256: str | None = None,
         release_id: str | None = None,
     ) -> DigitalTwinRelease:
         self._require_course_owner(professor_id, course_id)
@@ -111,6 +115,8 @@ class ReleaseLifecycleService:
             course_id=course_id,
             profile_id=profile_id,
             profile_version=profile_version,
+            teaching_profile_id=teaching_profile_id,
+            teaching_profile_sha256=teaching_profile_sha256,
             policy_version=session.policy_version,
             policy=session.policy,
             chunks=[chunk.model_copy(deep=True) for chunk in chunks],
@@ -270,6 +276,22 @@ class ReleaseLifecycleService:
                     "The policy has explicit professor approval."
                     if release.policy.release_status == ReleaseStatus.APPROVED
                     else "The policy still has unresolved review or approval blockers."
+                ),
+            ),
+            ReleasePreflightCheck(
+                id="approved-teaching-profile",
+                label="Approved professor teaching profile",
+                passed=(
+                    not self.teaching_profile_required
+                    or (
+                        release.teaching_profile_id is not None
+                        and release.teaching_profile_sha256 is not None
+                    )
+                ),
+                detail=(
+                    "The release is hash-bound to an explicitly approved teaching profile."
+                    if release.teaching_profile_id is not None
+                    else "The qualified autonomous profile requires professor-approved teaching behavior."
                 ),
             ),
             ReleasePreflightCheck(
@@ -462,6 +484,14 @@ class ReleaseLifecycleService:
             raise PublicationError(
                 "evidence_sufficiency_required",
                 "Select and configure an evidence-sufficiency method before publication.",
+            )
+        if self.teaching_profile_required and (
+            release.teaching_profile_id is None
+            or release.teaching_profile_sha256 is None
+        ):
+            raise PublicationError(
+                "teaching_profile_required",
+                "Attach an approved professor teaching profile before publication.",
             )
         if release.evaluation_status == ReleaseEvaluationStatus.PENDING:
             raise PublicationError(

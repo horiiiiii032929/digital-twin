@@ -32,6 +32,10 @@ from services.ingestion import IngestionJobService
 from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
+from src.digital_twin.model_policy import (
+    OPENAI_MODEL_PRICING_USD_PER_MILLION,
+    OPENAI_PRODUCT_CANDIDATE_MODELS,
+)
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
     LiveAtomicGroundedGenerator,
@@ -61,9 +65,11 @@ from src.digital_twin.identity import (
     SQLiteIdentityRepository,
 )
 from src.digital_twin.student import (
+    LearningGapPseudonymizer,
     ReleaseLifecycleService,
     SQLiteStudentRepository,
     StudentRepository,
+    TeachingProfileService,
 )
 from src.digital_twin.student.proactive import (
     DiscordWebhookDeliveryAdapter,
@@ -94,6 +100,7 @@ def create_app(
     source_description_provider: RegionDescriptionProvider | None = None,
     identity_repository: IdentityRepository | None = None,
     retrieval_index_store: RetrievalIndexStoreV1 | None = None,
+    learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
     settings: AppSettings | None = None,
 ) -> FastAPI:
     runtime_settings = settings or AppSettings()
@@ -192,8 +199,19 @@ def create_app(
             if chunker.implementation is not None
             else "v1"
         ),
+        learning_gap_pseudonymizer=(
+            learning_gap_pseudonymizer
+            or (
+                LearningGapPseudonymizer(runtime_settings.learning_gap_hmac_secret)
+                if runtime_settings.learning_gap_hmac_secret is not None
+                else None
+            )
+        ),
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
+        app.state.student_repository
+    )
+    app.state.teaching_profile_service = TeachingProfileService(
         app.state.student_repository
     )
 
@@ -244,6 +262,10 @@ def create_app(
         profile_id=profile.profile_id,
         profile_version=profile.profile_version,
         evidence_sufficiency_ready=student_evidence_gate is not None,
+        teaching_profile_required=(
+            runtime_settings.student_tutoring_mode
+            == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+        ),
         post_publish_hook=scan_evidence_recovery_after_publish,
         retrieval_index_ready=(
             retrieval_index_ready if retrieval_index_store is not None else None
@@ -286,7 +308,10 @@ def _configured_generator(
 ):
     if settings.generator_mode == GeneratorMode.DETERMINISTIC:
         return None, None
-    if settings.generator_mode != GeneratorMode.OPENAI_GPT_5_4_MINI:
+    if settings.generator_mode not in {
+        GeneratorMode.OPENAI_GPT_5_4_MINI,
+        GeneratorMode.OPENAI_PROFILE_SELECTED,
+    }:
         raise ValueError("historical generator modes cannot be selected for R1")
     generator = next(
         entry
@@ -299,8 +324,10 @@ def _configured_generator(
     if (
         generator.status != ComponentStatus.SELECTED
         or generator.implementation is None
-        or generator.implementation.implementation_id
-        != "openai-responses-gpt-5-4-mini-atomic-v1"
+        or not generator.implementation.implementation_id.startswith(
+            "openai-responses-"
+        )
+        or not generator.implementation.implementation_id.endswith("-atomic-v1")
         or prompt.status != ComponentStatus.SELECTED
         or prompt.implementation is None
         or prompt.implementation.implementation_id
@@ -309,10 +336,11 @@ def _configured_generator(
         raise ValueError("active profile does not select the supported live generator")
     configuration = generator.implementation.configuration
     provider_model = _required_profile_string(configuration, "provider_model")
-    if provider_model != "gpt-5.4-mini-2026-03-17":
+    if provider_model not in OPENAI_PRODUCT_CANDIDATE_MODELS:
         raise ValueError("active profile generator model is unsupported")
-    if configuration.get("reasoning_effort") != "none":
-        raise ValueError("active profile generator must use reasoning effort none")
+    reasoning_effort = configuration.get("reasoning_effort")
+    if reasoning_effort not in {"none", "low"}:
+        raise ValueError("active profile generator reasoning effort is unsupported")
     if configuration.get("max_attempts") != 1:
         raise ValueError("active profile generator must use one attempt")
     timeout_seconds = _required_profile_number(configuration, "timeout_seconds")
@@ -325,7 +353,13 @@ def _configured_generator(
             provider_model,
             timeout_seconds=timeout_seconds,
             max_output_tokens=max_output_tokens,
-            reasoning_effort="none",
+            reasoning_effort=str(reasoning_effort),
+            input_price_usd_per_million=(
+                OPENAI_MODEL_PRICING_USD_PER_MILLION[provider_model][0]
+            ),
+            output_price_usd_per_million=(
+                OPENAI_MODEL_PRICING_USD_PER_MILLION[provider_model][1]
+            ),
         ),
         max_calls=settings.provider_max_calls_per_process,
         max_cost_usd=settings.provider_cost_cap_usd,

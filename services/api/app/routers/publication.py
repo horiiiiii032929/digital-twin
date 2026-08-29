@@ -6,6 +6,7 @@ from services.api.app.config import RuntimeMode
 from services.api.app.dependencies import (
     IngestionJobServiceDependency,
     ProactiveOutreachServiceDependency,
+    TeachingProfileServiceDependency,
     ProfessorAccountDependency,
     PublicationServiceDependency,
     SessionRepositoryDependency,
@@ -19,6 +20,9 @@ from services.api.app.schemas import (
     ReleaseEvaluationRequest,
     StudentAssignmentRequest,
     ProactiveTriggerRequest,
+    TeachingProfileDraftRequest,
+    TeachingProfileApprovalRequest,
+    LearningGapReviewRequest,
 )
 from services.ingestion import IngestionJobError
 from src.digital_twin.grounding import IngestionError, SourcePermissions
@@ -36,14 +40,175 @@ from src.digital_twin.student import (
     ProactiveOutreachError,
     ProactiveProcessResult,
     ProactiveTrigger,
+    TeachingProfileError,
+    TeachingProfilePreviewV1,
+    TeachingProfileV1,
+    LearningGapPrivacyPolicyV1,
+    LearningGapAggregationResultV1,
+    CourseImprovementDraftV1,
+    aggregate_learning_gap_signals,
+    build_course_improvement_drafts,
+    AuditEvent,
     PublicationError,
     ReleaseEvaluationStatus,
     ReleasePreflightResult,
 )
-from src.digital_twin.tutor_policy import SourceLabel
+from src.digital_twin.tutor_policy import SourceLabel, timestamp_now
 
 
 router = APIRouter(prefix="/professor", tags=["professor-publication"])
+
+
+def _now() -> str:
+    return timestamp_now()
+
+
+@router.get(
+    "/courses/{course_id}/teaching-profiles",
+    response_model=list[TeachingProfileV1],
+)
+def list_teaching_profiles(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    profiles: TeachingProfileServiceDependency,
+):
+    try:
+        return profiles.list(account_id, course_id)
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/teaching-profiles",
+    response_model=TeachingProfileV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_teaching_profile(
+    course_id: str,
+    request: TeachingProfileDraftRequest,
+    account_id: ProfessorAccountDependency,
+    profiles: TeachingProfileServiceDependency,
+):
+    try:
+        return profiles.create_draft(
+            account_id, course_id, request.model_dump(mode="python")
+        )
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/teaching-profiles/{profile_id}/preview",
+    response_model=TeachingProfilePreviewV1,
+)
+def preview_teaching_profile(
+    course_id: str,
+    profile_id: str,
+    account_id: ProfessorAccountDependency,
+    profiles: TeachingProfileServiceDependency,
+):
+    try:
+        return profiles.preview(account_id, course_id, profile_id)
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/teaching-profiles/{profile_id}/approve",
+    response_model=TeachingProfileV1,
+)
+def approve_teaching_profile(
+    course_id: str,
+    profile_id: str,
+    request: TeachingProfileApprovalRequest,
+    account_id: ProfessorAccountDependency,
+    profiles: TeachingProfileServiceDependency,
+):
+    try:
+        return profiles.approve(
+            account_id,
+            course_id,
+            profile_id,
+            preview_sha256=request.preview_sha256,
+        )
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/teaching-profiles/{profile_id}/withdraw",
+    response_model=TeachingProfileV1,
+)
+def withdraw_teaching_profile(
+    course_id: str,
+    profile_id: str,
+    account_id: ProfessorAccountDependency,
+    profiles: TeachingProfileServiceDependency,
+):
+    try:
+        return profiles.withdraw(account_id, course_id, profile_id)
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
+
+
+@router.get("/courses/{course_id}/learning-gaps")
+def list_learning_gaps(
+    course_id: str,
+    release_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+) -> dict[str, LearningGapAggregationResultV1 | list[CourseImprovementDraftV1]]:
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        signals = publication.repository.list_learning_gap_signals(
+            course_id, release_id, active_at=_now()
+        )
+        aggregate = aggregate_learning_gap_signals(
+            signals,
+            course_id=course_id,
+            release_id=release_id,
+            policy=LearningGapPrivacyPolicyV1(),
+            computed_at=_now(),
+        )
+        return {
+            "aggregation": aggregate,
+            "proposals": build_course_improvement_drafts(aggregate),
+        }
+    except (PublicationError, KeyError, ValueError) as error:
+        if isinstance(error, PublicationError):
+            raise _http_error(error) from error
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={"code": "learning_gap_unavailable", "message": str(error)},
+        ) from error
+
+
+@router.post("/courses/{course_id}/learning-gaps/review")
+def review_learning_gap_proposal(
+    course_id: str,
+    request: LearningGapReviewRequest,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+) -> dict[str, str]:
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        publication.repository.save_audit_event(
+            AuditEvent(
+                id=f"learning-gap-review-{request.proposal_id[:16]}-{request.decision}",
+                event_type="learning-gap-proposal-reviewed",
+                account_id=account_id,
+                course_id=course_id,
+                details={
+                    "proposal_id": request.proposal_id,
+                    "decision": request.decision,
+                    "rationale_supplied": bool(request.rationale.strip()),
+                    "executable_change_created": False,
+                },
+            )
+        )
+        return {"proposal_id": request.proposal_id, "decision": request.decision}
+    except PublicationError as error:
+        raise _http_error(error) from error
 
 
 @router.get("/courses", response_model=list[ProfessorCourseView])
@@ -166,6 +331,37 @@ def schedule_proactive_trigger(
             source_chunk_id=request.source_chunk_id,
             idempotency_key=request.idempotency_key,
         )
+    except ProactiveOutreachError as error:
+        raise _proactive_http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/proactive-triggers",
+    response_model=list[ProactiveTrigger],
+)
+def list_proactive_triggers(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    try:
+        return outreach.list_triggers(account_id, course_id)
+    except ProactiveOutreachError as error:
+        raise _proactive_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/proactive-triggers/{trigger_id}/cancel",
+    response_model=ProactiveTrigger,
+)
+def cancel_proactive_trigger(
+    course_id: str,
+    trigger_id: str,
+    account_id: ProfessorAccountDependency,
+    outreach: ProactiveOutreachServiceDependency,
+):
+    try:
+        return outreach.cancel_trigger(account_id, course_id, trigger_id)
     except ProactiveOutreachError as error:
         raise _proactive_http_error(error) from error
 
@@ -371,6 +567,7 @@ def create_release_draft(
     account_id: ProfessorAccountDependency,
     sessions: SessionRepositoryDependency,
     service: PublicationServiceDependency,
+    profiles: TeachingProfileServiceDependency,
     jobs: IngestionJobServiceDependency,
     settings: SettingsDependency,
 ):
@@ -400,6 +597,13 @@ def create_release_draft(
             )
         else:
             chunks = request.chunks
+        teaching_profile = (
+            profiles.require_approved(
+                account_id, course_id, request.teaching_profile_id
+            )
+            if request.teaching_profile_id is not None
+            else None
+        )
         return service.create_draft_from_onboarding(
             account_id,
             course_id,
@@ -407,12 +611,20 @@ def create_release_draft(
             chunks=chunks,
             profile_id=request.profile_id,
             profile_version=request.profile_version,
+            teaching_profile_id=(
+                teaching_profile.profile_id if teaching_profile is not None else None
+            ),
+            teaching_profile_sha256=(
+                teaching_profile.content_sha256 if teaching_profile is not None else None
+            ),
             release_id=request.release_id,
         )
     except PublicationError as error:
         raise _http_error(error) from error
     except IngestionJobError as error:
         raise _job_http_error(error) from error
+    except TeachingProfileError as error:
+        raise _teaching_profile_http_error(error) from error
 
 
 @router.patch(
@@ -532,7 +744,31 @@ def _proactive_http_error(error: ProactiveOutreachError) -> HTTPException:
         else status.HTTP_403_FORBIDDEN
         if error.code in {"professor_course_forbidden", "course_forbidden"}
         else status.HTTP_409_CONFLICT
-        if error.code == "trigger_idempotency_conflict"
+        if error.code in {
+            "trigger_idempotency_conflict",
+            "proactive_trigger_not_cancellable",
+        }
+        else status.HTTP_422_UNPROCESSABLE_CONTENT
+    )
+    return HTTPException(
+        status_code=code,
+        detail={"code": error.code, "message": error.message},
+    )
+
+
+def _teaching_profile_http_error(error: TeachingProfileError) -> HTTPException:
+    code = (
+        status.HTTP_404_NOT_FOUND
+        if error.code == "teaching_profile_not_found"
+        else status.HTTP_403_FORBIDDEN
+        if error.code == "course_forbidden"
+        else status.HTTP_409_CONFLICT
+        if error.code in {
+            "teaching_profile_not_draft",
+            "teaching_profile_not_approved",
+            "teaching_profile_not_withdrawable",
+            "teaching_profile_preview_drifted",
+        }
         else status.HTTP_422_UNPROCESSABLE_CONTENT
     )
     return HTTPException(

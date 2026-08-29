@@ -12,6 +12,28 @@ evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
 produced a valid product-quality estimate.
 
+The active Sunday R1-demo successor starts from merged PR #145 and replaces the
+brittle batch-order contract prospectively rather than reinterpreting any prior
+result. Evaluation-v2 reconciles provider output by unique case ID, rejects
+duplicate/missing/unknown IDs, deterministically restores order, quarantines a
+malformed case without discarding valid peers, and limits retry to transport
+failures. A four-model direct-OpenAI cascade is build-verified over the same
+stratified 200-case screen, 500-case development package, and 100-case paired
+control. It remains provider- and paid-execution unauthorized; no product-model
+result exists yet.
+
+The product track is also build-complete but not yet release-qualified. It now
+includes a versioned professor profile with a hash-bound ten-case preview,
+privacy-minimized post-turn learning-gap signals and professor aggregates, and
+professor-scheduled A0 in-app outreach with durable worker, consent, expiry,
+deduplication, and cancellation. T1 generation preserves authoritative atomic
+claim lineage and adds pedagogical wording in deterministic code. A prospective
+50-trajectory/200-turn-per-condition T0/T1 confirmation is frozen without model
+or paid authority; it binds the model selected by the cascade and keeps T0 as
+rollback. The preview Compose boundary is ready for a temporary Cloudflare
+Quick Tunnel, but no public URL or production claim exists yet. The next stop is
+one clean authorization for `academic-factual-qa-r1-model-cascade-001`.
+
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
 594 calls and USD 1.13834545, and retained exact provider identities. Its

@@ -13,13 +13,30 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-28-v5"
+POLICY_ID = "current-model-policy-2026-08-29-v6"
 OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
 OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
 OPENAI_ROUTINE_REVIEW_MODEL = "gpt-5.4-nano-2026-03-17"
 OPENAI_ROUTINE_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_ROUTINE_REVIEW_MODEL}"
 OPENAI_SEMANTIC_REVIEW_MODEL = "gpt-5.4-2026-03-05"
 OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_SEMANTIC_REVIEW_MODEL}"
+OPENAI_GPT_5_6_LUNA_MODEL = "gpt-5.6-luna"
+OPENAI_GPT_5_6_TERRA_MODEL = "gpt-5.6-terra"
+OPENAI_GPT_5_6_SOL_MODEL = "gpt-5.6-sol"
+OPENAI_PRODUCT_CANDIDATE_MODELS = (
+    OPENAI_HIGH_VOLUME_MODEL,
+    OPENAI_GPT_5_6_LUNA_MODEL,
+    OPENAI_GPT_5_6_TERRA_MODEL,
+    OPENAI_GPT_5_6_SOL_MODEL,
+)
+OPENAI_MODEL_PRICING_USD_PER_MILLION: dict[str, tuple[float, float]] = {
+    OPENAI_HIGH_VOLUME_MODEL: (0.75, 4.50),
+    OPENAI_ROUTINE_REVIEW_MODEL: (0.20, 1.25),
+    OPENAI_SEMANTIC_REVIEW_MODEL: (2.50, 15.00),
+    OPENAI_GPT_5_6_LUNA_MODEL: (0.20, 1.20),
+    OPENAI_GPT_5_6_TERRA_MODEL: (2.00, 12.00),
+    OPENAI_GPT_5_6_SOL_MODEL: (4.00, 20.00),
+}
 LOCAL_GENERAL_MODEL = "qwen3.5:9b-q4_K_M"
 LOCAL_GENERAL_MODEL_DIGEST = (
     "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7"
@@ -67,6 +84,21 @@ CURRENT_MODEL_BINDINGS = (
         role="critical-truth-reviewer",
         provider_model=OPENAI_SEMANTIC_REVIEW_MODEL,
         status="prospective-r1-openai-only-pending-development-evaluation",
+    ),
+    CurrentModelBinding(
+        role="product-generator-candidate-high-volume",
+        provider_model=OPENAI_GPT_5_6_LUNA_MODEL,
+        status="prospective-r1-four-model-funnel-not-selected",
+    ),
+    CurrentModelBinding(
+        role="product-generator-candidate-balanced",
+        provider_model=OPENAI_GPT_5_6_TERRA_MODEL,
+        status="prospective-r1-four-model-funnel-not-selected",
+    ),
+    CurrentModelBinding(
+        role="product-generator-candidate-frontier-and-advisory-reviewer",
+        provider_model=OPENAI_GPT_5_6_SOL_MODEL,
+        status="prospective-r1-four-model-funnel-not-selected",
     ),
     CurrentModelBinding(
         role="historical-product-generator",
@@ -146,6 +178,9 @@ CURRENT_MODEL_IDS = frozenset(
         OPENAI_ROUTINE_REVIEW_LITELLM_MODEL,
         OPENAI_SEMANTIC_REVIEW_MODEL,
         OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
+        OPENAI_GPT_5_6_LUNA_MODEL,
+        OPENAI_GPT_5_6_TERRA_MODEL,
+        OPENAI_GPT_5_6_SOL_MODEL,
         f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )
@@ -158,6 +193,9 @@ ACTIVE_RELEASE_MODEL_IDS = frozenset(
         OPENAI_ROUTINE_REVIEW_LITELLM_MODEL.casefold(),
         OPENAI_SEMANTIC_REVIEW_MODEL.casefold(),
         OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL.casefold(),
+        OPENAI_GPT_5_6_LUNA_MODEL.casefold(),
+        OPENAI_GPT_5_6_TERRA_MODEL.casefold(),
+        OPENAI_GPT_5_6_SOL_MODEL.casefold(),
     }
 )
 

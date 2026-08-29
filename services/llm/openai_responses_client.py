@@ -24,6 +24,7 @@ from src.digital_twin.llm import (
     validate_llm_task,
 )
 from src.digital_twin.model_policy import require_active_release_model
+from src.digital_twin.model_policy import OPENAI_MODEL_PRICING_USD_PER_MILLION
 
 
 _Post = Callable[..., Awaitable[httpx.Response]]
@@ -46,8 +47,8 @@ class OpenAiResponsesClient:
         timeout_seconds: float = 30,
         max_output_tokens: int = 600,
         reasoning_effort: str = "none",
-        input_price_usd_per_million: float = 0.75,
-        output_price_usd_per_million: float = 4.5,
+        input_price_usd_per_million: float | None = None,
+        output_price_usd_per_million: float | None = None,
         credential_environment_variable: str = "OPENAI_API_KEY",
         post: _Post | None = None,
     ) -> None:
@@ -58,10 +59,23 @@ class OpenAiResponsesClient:
             raise ValueError("max_output_tokens must be positive")
         if reasoning_effort not in {"none", "low", "medium", "high", "xhigh"}:
             raise ValueError("reasoning_effort is unsupported")
-        for value in (
-            input_price_usd_per_million,
-            output_price_usd_per_million,
+        catalog_prices = OPENAI_MODEL_PRICING_USD_PER_MILLION.get(self.model)
+        if catalog_prices is None and (
+            input_price_usd_per_million is None
+            or output_price_usd_per_million is None
         ):
+            raise ValueError("OpenAI model pricing must be supplied or catalogued")
+        resolved_input_price = (
+            catalog_prices[0]
+            if input_price_usd_per_million is None
+            else input_price_usd_per_million
+        )
+        resolved_output_price = (
+            catalog_prices[1]
+            if output_price_usd_per_million is None
+            else output_price_usd_per_million
+        )
+        for value in (resolved_input_price, resolved_output_price):
             if not math.isfinite(value) or value < 0:
                 raise ValueError("OpenAI prices must be finite and non-negative")
         if credential_environment_variable != "OPENAI_API_KEY":
@@ -69,8 +83,8 @@ class OpenAiResponsesClient:
         self.timeout_seconds = timeout_seconds
         self.max_output_tokens = max_output_tokens
         self.reasoning_effort = reasoning_effort
-        self.input_price = input_price_usd_per_million
-        self.output_price = output_price_usd_per_million
+        self.input_price = resolved_input_price
+        self.output_price = resolved_output_price
         self.credential_environment_variable = credential_environment_variable
         self._post = post or self._post_direct
 

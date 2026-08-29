@@ -205,7 +205,9 @@ not invent an unrestricted intent.
   second orchestration framework.
 - Retain Pydantic models for graph state, tool inputs, tool outputs, and
   provider responses.
-- Retain LiteLLM behind the existing provider-neutral model interface.
+- Retain the provider-neutral model interface, while the R1 candidate uses the
+  direct OpenAI Responses API with exact allowlisted model identities,
+  `store: false`, bounded budgets, and no router fallback.
 - Keep retrieval, evidence sufficiency, learner-state interpretation,
   pedagogical intent selection, generation, and validation as separately
   testable contracts.
@@ -219,15 +221,16 @@ not invent an unrestricted intent.
 
 ## Current repository mapping
 
-The existing student workflow is the **T0 control**, not the completed
-autonomous Digital Twin. It already provides release-bound conversations,
+The existing student workflow remains the **T0 control and rollback**. It
+already provides release-bound conversations,
 course isolation, selected retrieval with fallback, professor-policy loading,
 citation validation, idempotent turns, persistence, and safe generation
 failure. Its accepted path still uses a deterministic grounded generator.
 
-LangGraph first orchestrated only the professor onboarding workflow. Issue #107
-now adds the build-only student T1 graph described below; T0 remains selected
-for release.
+LangGraph now runs the bounded student T1 graph behind an explicit mode. Its
+live generator can produce only source-bound atomic claims; deterministic code
+owns the pedagogical teaching move, policy, citations, and learner-state
+mutation. T0 remains selected until confirmation passes.
 
 Reusable foundations:
 
@@ -239,13 +242,11 @@ Reusable foundations:
 - provider-neutral model, embedding, and reranking interfaces; and
 - student/professor conversation-first web workspaces.
 
-Still missing before release selection:
-
-- live post-commit integration, professor APIs/UI, and evaluation for the
-  privacy-preserving learning-gap aggregation core built under
-  [#132](https://github.com/horiiiiii032929/digital-twin/issues/132); and
-- a provider-qualified autonomous T1 path, one frozen multi-turn confirmation,
-  and the professor-approved T2 fidelity reference.
+Still missing before release selection is execution evidence: the selected
+product model, the frozen 50-trajectory T0/T1 confirmation, and the public
+workflow/recovery qualification. Professor-profile, learning-gap, and A0
+outreach APIs/UI are implemented; the real professor-approved T2 fidelity
+reference remains outside the demo claim.
 
 ## Course-improvement loop checkpoint
 

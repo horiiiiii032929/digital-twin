@@ -320,6 +320,96 @@ export type ProfessorRelease = ProfessorReleaseSummary & {
   profile_version: string
   policy: TutorPolicy
   chunks: Record<string, unknown>[]
+  teaching_profile_id?: string | null
+  teaching_profile_sha256?: string | null
+}
+
+export type TeachingProfileStatus =
+  | "draft"
+  | "approved"
+  | "superseded"
+  | "withdrawn"
+
+export type ProfessorTeachingProfile = {
+  schema_version: "1.0.0"
+  profile_id: string
+  course_id: string
+  version: number
+  status: TeachingProfileStatus
+  tone: string
+  depth: "concise" | "balanced" | "detailed"
+  explanation_structure: string[]
+  example_preferences: string[]
+  misconception_handling: string
+  integrity_limits: string
+  help_ladder: string[]
+  outreach_policy: string
+  content_sha256: string
+  preview_sha256?: string | null
+  created_at: string
+  approved_at?: string | null
+  withdrawn_at?: string | null
+}
+
+export type ProfessorTeachingProfilePreview = {
+  schema_version: "1.0.0"
+  profile_id: string
+  profile_content_sha256: string
+  cases: Array<{
+    case_id: string
+    student_situation: string
+    expected_behavior: string
+  }>
+  preview_sha256: string
+}
+
+export type ProfessorLearningGapAggregate = {
+  aggregate_id: string
+  topic_key: string
+  signal_kind: string
+  distinct_learners: number
+  signal_count: number
+  limitations: string[]
+}
+
+export type ProfessorLearningGapResult = {
+  aggregation: {
+    minimum_distinct_learners: number
+    visible_aggregates: ProfessorLearningGapAggregate[]
+    suppressed_group_count: number
+    computed_at: string
+  }
+  proposals: Array<{
+    proposal_id: string
+    topic_key: string
+    signal_kind: string
+    observed_pattern: string
+    suggested_follow_up: string
+    distinct_learners: number
+    signal_count: number
+  }>
+}
+
+export type ProfessorProactiveTrigger = {
+  id: string
+  student_id: string
+  course_id: string
+  release_id: string
+  channel: "in-app" | "discord"
+  kind:
+    | "scheduled-retrieval-practice"
+    | "student-follow-up"
+    | "misconception-follow-up"
+    | "evidence-recovery"
+  scheduled_for: string
+  expires_at: string
+  topic: string
+  prompt: string
+  source_chunk_id: string
+  status: "pending" | "materialized" | "suppressed" | "cancelled"
+  suppression_reason?: string | null
+  created_at: string
+  updated_at: string
 }
 
 export type ReleasePreflightCheck = {

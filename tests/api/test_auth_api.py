@@ -1,4 +1,6 @@
 from pathlib import Path
+import hashlib
+import json
 
 import pytest
 from fastapi.testclient import TestClient
@@ -281,7 +283,7 @@ def test_staging_configuration_cannot_exceed_proxy_upload_cap(tmp_path):
 
 
 def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):
-    with pytest.raises(ValueError, match="not yet selected for staging"):
+    with pytest.raises(ValueError, match="T1_QUALIFICATION_RESULT_PATH"):
         AppSettings(
             mode=RuntimeMode.STAGING,
             database_path=tmp_path / "db.sqlite3",
@@ -290,6 +292,43 @@ def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):
             secure_cookies=True,
             student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
         ).validate()
+
+
+def test_staging_configuration_accepts_hash_bound_t1_qualification(tmp_path):
+    core = {
+        "instrument_id": "autonomous-tutoring-r1-confirmation-001",
+        "status": "completed-keep",
+        "decision": "Keep",
+        "hard_gates_passed": True,
+        "t0_rollback_available": True,
+        "selected_model": "gpt-5.4-mini-2026-03-17",
+        "profile_sha256": hashlib.sha256(CANDIDATE_PROFILE.read_bytes()).hexdigest(),
+    }
+    result = {
+        **core,
+        "content_sha256": hashlib.sha256(
+            json.dumps(
+                core,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ).encode("utf-8")
+        ).hexdigest(),
+    }
+    result_path = tmp_path / "t1-result.json"
+    result_path.write_text(json.dumps(result), encoding="utf-8")
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+        learning_gap_hmac_secret=b"x" * 32,
+        student_profile_path=CANDIDATE_PROFILE,
+        t1_qualification_result_path=result_path,
+    ).validate()
 
 
 @pytest.mark.parametrize(
@@ -372,7 +411,7 @@ def test_live_generator_is_bound_to_openai_snapshot_and_responses_api():
     component["implementation"]["configuration"]["reasoning_effort"] = "high"
     drifted = SystemReleaseProfile.model_validate(payload)
 
-    with pytest.raises(ValueError, match="reasoning effort none"):
+    with pytest.raises(ValueError, match="reasoning effort is unsupported"):
         _configured_generator(settings, drifted)
 
 

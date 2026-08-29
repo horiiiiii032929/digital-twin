@@ -1,8 +1,36 @@
 # R1 OpenAI release path
 
-Status date: 2026-08-28
+Status date: 2026-08-29
 
 ## Current checkpoint
+
+PR #145 is merged as immutable historical evidence. The active build-only
+successor removes provider-array ordering from the correctness boundary and
+uses one finite direct-OpenAI product funnel:
+
+- `gpt-5.4-mini-2026-03-17`, `gpt-5.6-luna`, `gpt-5.6-terra`, and
+  `gpt-5.6-sol` answer the same 200 development cases;
+- at most two safe/complete models advance to all 500 cases;
+- one passing model is selected by grounded success, then p95 latency and cost
+  when results are practically equivalent;
+- the selected model alone runs the fixed 100-case any-hit control;
+- `gpt-5.6-sol` supplies non-authoritative review of deterministic failures and
+  a seeded passing sample.
+
+Responses are joined by unique case ID, malformed cases are quarantined, and
+only transport failures may consume the bounded retry allowance. Source-linked
+truth and scoring remain deterministic. The cascade has no paid authority and
+the sealed 10,000-case run remains post-demo.
+
+The same branch adds the product release boundary: profile-selected exact model
+configuration, source-bound atomic T1 generation, a prospective 50-trajectory
+T0/T1 confirmation, explicit professor-profile lifecycle, privacy-minimized
+learning-gap review, A0 in-app outreach, and a pinned Quick Tunnel preview. T0
+and deterministic generation remain the safe defaults until their successors
+pass.
+
+The sections below preserve the earlier OpenAI checkpoint history; they do not
+describe the active next action.
 
 The flow-independent evaluation, privacy-preserving learning-gap core, and
 proactive-outreach core are consolidated on `main` through PRs #130, #133, and
@@ -69,6 +97,19 @@ verify-only. A real local-Qwen build/load qualification under #139 is the next
 stop; no successor 500+100 run is designed or authorized yet.
 
 ## Finite critical path
+
+The current finite path supersedes the historical list below:
+
+1. authorize and execute `academic-factual-qa-r1-model-cascade-001` once;
+2. bind a passing selected model, or retain deterministic generation with no
+   LLM-quality claim;
+3. separately authorize the frozen T0/T1 confirmation and select T1 only on a
+   complete pass;
+4. run local container/HTTPS/recovery and public Quick Tunnel journeys;
+5. publish the demo evidence, then build the separately authorized sealed
+   10,000-case run.
+
+No reviewer calibration or wording-loop rerun precedes this path.
 
 1. Keep the rotated replacement key only in the ignored repository-root `.env`
    as `OPENAI_API_KEY`.

@@ -312,14 +312,17 @@ def test_bounded_pedagogical_prompt_carries_only_code_selected_plan():
     )
     payload = json.loads(prompt.messages[1].content)
 
-    assert prompt.version == "t1-v1"
+    assert prompt.version == "t1-v2-atomic"
     assert payload["pedagogical_plan"] == {
         "help_level": 1,
         "intent": "give_hint",
         "repair_reason": None,
     }
     assert payload["approved_evidence"][0]["citation_id"] == "S1"
-    assert "do not choose a different teaching move" in prompt.messages[0].content
+    assert "application—not you—applies the selected teaching move" in (
+        prompt.messages[0].content
+    )
+    assert '"claims"' in prompt.messages[0].content
 
 
 @pytest.mark.asyncio
@@ -413,6 +416,44 @@ async def test_live_atomic_generator_resolves_claim_and_citation_lineage():
         for claim in answer.atomic_claims
     )
     assert len(answer.citations) == 1
+    assert answer.citations[0].source_id == "document-csrf"
+
+
+@pytest.mark.asyncio
+async def test_live_atomic_t1_keeps_teaching_move_code_owned_and_claims_source_bound():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "claims": [
+                    {
+                        "claim_id": "claim-csrf-session",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    }
+                ]
+            }
+        ),
+        provider_model="fixture-live/v1",
+    )
+    client = RecordingClient(response)
+
+    answer = await LiveAtomicGroundedGenerator(
+        client,
+        prompt_builder=BoundedPedagogicalPromptBuilder(),
+    ).generate_for_intent(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+        intent="give_hint",
+        help_level=1,
+    )
+
+    assert client.calls[0][1] == "grounded_tutor_atomic_claims"
+    assert answer.content.startswith("Hint: focus on this approved course statement.")
+    assert [claim.text for claim in answer.atomic_claims] == [
+        "CSRF abuses an authenticated browser session."
+    ]
+    assert answer.atomic_claims[0].evidence_hit_ids == ["chunk-csrf-1"]
     assert answer.citations[0].source_id == "document-csrf"
 
 

@@ -34,6 +34,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { WorkspaceBrand } from "@/components/workspace/workspace-brand"
+import { ProfessorAutonomyPanel } from "@/components/professor/professor-autonomy-panel"
 import type { OnboardingController } from "@/hooks/use-onboarding-session"
 import {
   assignProfessorCourseStudent,
@@ -72,6 +73,7 @@ export function ProfessorDeliveryWorkspace({
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
   const [preflight, setPreflight] = useState<ReleasePreflightResult | null>(null)
+  const [approvedTeachingProfileId, setApprovedTeachingProfileId] = useState<string | null>(null)
   const selectedCourseIdRef = useRef<string | null>(null)
   const inlineJobsByCourseRef = useRef(
     new Map<string, ProfessorIngestionJob[]>(),
@@ -87,6 +89,14 @@ export function ProfessorDeliveryWorkspace({
   )
   const hasActiveJob = jobs.some(
     (job) => job.status === "pending" || job.status === "running",
+  )
+  const evidenceChunks = successfulJobs.flatMap((job) =>
+    (job.result?.chunks ?? []).flatMap((chunk) => {
+      const id = typeof chunk.id === "string" ? chunk.id : null
+      if (!id) return []
+      const title = typeof chunk.document_id === "string" ? chunk.document_id : id
+      return [{ id, label: title }]
+    }),
   )
 
   const refreshCourses = useCallback(async (preferredCourseId?: string) => {
@@ -134,6 +144,7 @@ export function ProfessorDeliveryWorkspace({
   useEffect(() => {
     selectedCourseIdRef.current = selectedCourseId
     setJobs([])
+    setApprovedTeachingProfileId(null)
     if (!selectedCourseId) {
       return
     }
@@ -308,11 +319,15 @@ export function ProfessorDeliveryWorkspace({
         return
       }
       const chunks = successfulJobs.flatMap((job) => job.result?.chunks ?? [])
+      if (!approvedTeachingProfileId) {
+        throw new Error("Approve the professor teaching profile before creating a release.")
+      }
       await createProfessorRelease({
         courseId: selectedCourse.course_id,
         sessionId: session.session_id,
         chunks,
         ingestionJobIds: successfulJobs.map((job) => job.id),
+        teachingProfileId: approvedTeachingProfileId,
       })
       await refreshCourses(selectedCourse.course_id)
       setPreflight(null)
@@ -456,11 +471,18 @@ export function ProfessorDeliveryWorkspace({
                         }
                         onSubmit={uploadSource}
                       />
+                      <ProfessorAutonomyPanel
+                        course={selectedCourse}
+                        evidenceChunks={evidenceChunks}
+                        releaseId={selectedRelease?.id}
+                        onApprovedProfileChange={setApprovedTeachingProfileId}
+                      />
                       <ReleaseCard
                         busy={busy}
                         onboardingReady={
                           controller.session?.policy?.release_status === "approved"
                         }
+                        profileReady={approvedTeachingProfileId !== null}
                         preflight={preflight}
                         release={selectedRelease}
                         sourceCount={successfulJobs.length}
@@ -722,6 +744,7 @@ function EvidenceCard({
 function ReleaseCard({
   busy,
   onboardingReady,
+  profileReady,
   preflight,
   release,
   sourceCount,
@@ -732,6 +755,7 @@ function ReleaseCard({
 }: {
   busy: string | null
   onboardingReady: boolean
+  profileReady: boolean
   preflight: ReleasePreflightResult | null
   release: ProfessorReleaseSummary | null
   sourceCount: number
@@ -749,8 +773,9 @@ function ReleaseCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <ol className="grid gap-2 sm:grid-cols-3">
+        <ol className="grid gap-2 sm:grid-cols-4">
           <ReleaseStep done={onboardingReady} label="Tutor approved" />
+          <ReleaseStep done={profileReady} label="Profile approved" />
           <ReleaseStep done={sourceCount > 0} label="Evidence ready" />
           <ReleaseStep done={release?.status === "published"} label="Published" />
         </ol>
@@ -806,7 +831,7 @@ function ReleaseCard({
           ) : null}
           {(!release || release.status !== "draft") && onboardingReady ? (
             <Button
-              disabled={busy !== null || sourceCount === 0}
+              disabled={busy !== null || sourceCount === 0 || !profileReady}
               onClick={onCreateDraft}
             >
               <Plus aria-hidden="true" />
