@@ -8,6 +8,68 @@
   "candidates": [
     {
       "implementation": {
+        "implementation_id": "checkpoint-007-network-free-preflight-control",
+        "version": "pre-execution-control",
+        "configuration": {
+          "retrieval_index_artifact_count": 4,
+          "runtime_document_embedding_requests": 0,
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": false
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "candidate-stage-preflight-ready",
+          "passed": false,
+          "evidence": "The top-level preflight was ready, but the nested candidate-stage preflight rejected the stale generator assertion."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "No provider or response ledger was created; calls, tokens, and cost are zero."
+        },
+        {
+          "name": "hidden-gold-separation",
+          "passed": true,
+          "evidence": "The no-call preflight could not load hidden gold."
+        },
+        {
+          "name": "final-stage-closure",
+          "passed": true,
+          "evidence": "The final 10,000-case stage remained unopened and unauthorized."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
         "implementation_id": "direct-openai-t0-product-checkpoint-007-attempt-001",
         "version": "attempt-001-invalid",
         "configuration": {

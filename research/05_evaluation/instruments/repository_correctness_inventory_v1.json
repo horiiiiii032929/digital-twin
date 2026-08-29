@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5d10c7a1f945013c34a9c1f4844deb1b45dd4672c39ba65584a2b585505a807e",
+  "record_sha256": "ec315fbf03ca9e772e8911b71c5099691319749f20109a25303d1017725c201c",
   "records": [
     {
       "audit": {
@@ -1816,7 +1816,7 @@
     {
       "audit": {
         "domain": "finite-product-checkpoint",
-        "evidence": "Corrective instrument review preserves one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, one-time development authority, final authority false, and records the sole harness correction without another correction allowance.",
+        "evidence": "Terminal instrument review preserves one method successor, unchanged 500+100 inputs and gates, complete response execution, two confirmed reference-question defects, diagnostic Refine metrics, revoked development and review authority, final authority false, and no further correction allowance.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -1827,7 +1827,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_007.json",
       "risk": "high",
-      "sha256": "3e5f632f95c1faf4bea4c0ad474ac88a5090ac098da24017d9b12928c8f229db"
+      "sha256": "7af36c681a8793b695974d25a343699d1678d1cfe348d2ab674e0080e762d56b"
     },
     {
       "audit": {
@@ -1944,7 +1944,7 @@
     {
       "audit": {
         "domain": "finite-product-checkpoint",
-        "evidence": "Authorization review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or retry, complete cost accounting, one-time development and semantic-review authority, final authority false, and the unchanged product/audit role split.",
+        "evidence": "Post-run binding review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or product retry, complete role-bounded accounting, revoked development and semantic-review authority, final authority false, and the unchanged product/audit role split.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -1955,7 +1955,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_008.json",
       "risk": "high",
-      "sha256": "542abd3b9fb6a6c597cbc0386c2b1bedd0e23576e0896b39bd5c02038187d671"
+      "sha256": "57ef7a456be725f3896d6fe4882721cb2e014746591da81869df6b92e29480b6"
     },
     {
       "audit": {
@@ -8652,7 +8652,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review grants only checkpoint 007 bounded external-model and method-evaluation authority; the repository-wide freeze continues blocking final 10,000, private-data, promotion, deployment, and every unregistered operation.",
+        "evidence": "Focused post-run freeze review verifies checkpoint 007 authority is revoked; the repository-wide freeze blocks provider evaluation, final 10,000, private-data, promotion, deployment, and every unregistered operation.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -8663,7 +8663,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3ad22f1e62a3f4782ad6ea8d1658c3c74df31b383f324b718a7fb689dd932c67"
+      "sha256": "738ec49f54ee3362a1b80255c0338baf036c370c84f2995aab3bf02c4ffa476c"
     },
     {
       "audit": {
@@ -9196,7 +9196,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify only checkpoint 007 has bounded external-model and method-evaluation authority while checkpoint 006, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+        "evidence": "Focused freeze-policy tests verify checkpoint 007 and earlier checkpoint authority are revoked while final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9207,7 +9207,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "3f33476124c093584f18f9d32cb2821a430c775aae83e4b6ef79eab115a05d8f"
+      "sha256": "b0d532b4158be77af48ea1c97d3ca3ebf82b0efb52e70693f6d27b8dfb86e914"
     },
     {
       "audit": {
@@ -9708,7 +9708,7 @@
     {
       "audit": {
         "domain": "finite-product-checkpoint",
-        "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, scoped nested-generator identity and restoration, exact bounded authority, and a ready top-level preflight when repository and credential state are clean.",
+        "evidence": "Focused post-run tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, scoped nested-generator identity and restoration, revoked bounded authority, and a blocked preflight after terminal publication.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9719,7 +9719,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_007.py",
       "risk": "medium",
-      "sha256": "0da1f1c866ad60f73165cc47ef0a9bcda0bf66a2c27f0ba8b1767913ec8bb46d"
+      "sha256": "77a9b05bd8cb81a59a14bd6755b0af508bee401225427a3b72e6ff2632411dbf"
     },
     {
       "audit": {

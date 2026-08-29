@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-product-checkpoint-007",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authority-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-006",
   "decision_question": "Does one finite extractive-boundary successor satisfy the unchanged 500+100 actual-product grounding and safety gates after prospectively repairing package pairing and generation/runtime schema alignment?",
   "dataset": {
@@ -89,7 +89,7 @@
     "model_cannot_override_deterministic_truth": true
   },
   "allocation": {
-    "status": "frozen-approved",
+    "status": "completed-invalid-reference",
     "authorization_record": "AFQC-074",
     "execution_correction_record": "AFQC-076",
     "development_case_count": 500,
@@ -113,9 +113,9 @@
     "candidate_maximum_cost_usd": 5.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 1.0,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "development_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_execution_authorized": false,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -158,10 +158,10 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "product_development_execution_authorized": true,
-    "semantic_review_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
   "finite_refinement": {
@@ -183,5 +183,18 @@
     "fresh_exclusive_outputs_required": true,
     "further_harness_correction_authorized": false
   },
-  "content_sha256": "0945f41a59a1a8875bb30d423fccb74392bdda224fc77197aa4a81da6c389192"
+  "terminal_execution": {
+    "result_id": "academic-factual-qa-open-10000-development-product-checkpoint-007-attempt-002-invalid",
+    "execution_state": "invalid-reference-after-complete-response-execution",
+    "candidate_response_count": 500,
+    "control_response_count": 100,
+    "provider_call_count": 594,
+    "reported_cost_usd": 1.13834545,
+    "confirmed_reference_defect_count": 2,
+    "deterministic_diagnostic_decision": "Refine",
+    "academic_quality_interpretation_allowed": false,
+    "authorization_revoked": true,
+    "final_10000_execution_authorized": false
+  },
+  "content_sha256": "078aed587c41d896db532f7b29c920c0dfbc3e62de267b73f7083e91ef9841c3"
 }

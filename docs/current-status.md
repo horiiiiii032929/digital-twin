@@ -36,6 +36,19 @@ that assertion to the extractive generator already frozen in both checkpoint
 unchanged. The next execution uses fresh outputs; no further harness correction
 is allowed.
 
+AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
+corrective execution completed 500 candidate and 100 control responses, used
+594 calls and USD 1.13834545, and retained exact provider identities. Its
+deterministic diagnostic result was Refine: 4.5% fully grounded factual success,
+28.5% answerable action accuracy, 84% boundary action accuracy, 44% Evidence
+Recall@5, and three severe unsupported releases. Those rates are not promoted
+as a valid academic estimate because bounded critical review and direct pinned-
+source audit confirmed two ambiguous reference questions. All checkpoint 007
+authority is revoked; the sealed 10,000 cases, T1, fidelity, promotion, and
+deployment remain closed. The next method decision must independently validate
+or replace the reference-question layer on a fresh confirmation set, not patch
+or rerun these 500 cases.
+
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
 

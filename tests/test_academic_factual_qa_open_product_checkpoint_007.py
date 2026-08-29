@@ -79,7 +79,7 @@ def test_successor_simulations_remain_finite(scenario: str, expected: str) -> No
     assert result["pairing_contract"] == "explicit-package-pairing-v1"
 
 
-def test_clean_preflight_is_ready_under_exact_bounded_authority(
+def test_post_run_preflight_is_blocked_after_authority_revocation(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(historical, "_repo_dirty", lambda: False)
@@ -87,10 +87,14 @@ def test_clean_preflight_is_ready_under_exact_bounded_authority(
 
     result = checkpoint.preflight()
 
-    assert result["status"] == "ready"
+    assert result["status"] == "blocked-not-authorized"
     assert result["provider_calls"] == 0
     assert result["maximum_method_successors"] == 1
-    assert result["blockers"] == []
+    assert "freeze-external_model_evaluation-authorization-missing" in result[
+        "blockers"
+    ]
+    assert "instrument-provider-execution-authorized-false" in result["blockers"]
+    assert "binding-provider-execution-authorized-false" in result["blockers"]
 
 
 def test_pairing_manifests_are_hash_bound_to_distinct_packages() -> None:
