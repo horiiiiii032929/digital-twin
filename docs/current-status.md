@@ -45,9 +45,12 @@ existing terminal-question-mark rule to the strict provider schema, uses fresh
 instrument, binding, ledger, result, and package identities, and changes no
 source, case, gold, prompt, model, quota, gate, call, retry, or cost decision.
 Its eight focused tests and network-free 100-cluster/500-case selection pass.
-Attempt 002 remains provider-unauthorized and absent from the bounded execution
-allowlist. Fresh 500+100 product confirmation, sealed 10,000 execution, T1,
-fidelity, promotion, and deployment remain unauthorized.
+AFQC-082 now authorizes only attempt 002 for at most 80 direct OpenAI calls,
+zero retries, and the unchanged USD 12 stop after official snapshot, pricing,
+endpoint, and Structured Outputs support were reverified. Fresh 500+100 product
+confirmation, sealed 10,000 execution, T1, fidelity, promotion, and deployment
+remain unauthorized. The immediate action is a clean preflight, one execution,
+scoring, and mandatory authorization revocation.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
