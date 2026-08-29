@@ -1653,13 +1653,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
-      "sha256": "a2195eb47850e87c9a476f29a39f606130529cc66e418a9bdf0cf38c45bf0957",
+      "sha256": "058d3da3b5909ef649832282c1dde05ae94e451919aff938afaa0b03aca066b8",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Authorization review confirms the exact four direct-OpenAI candidates, current official pricing metadata, unchanged quality/call/cost gates, one-time local/provider/paid authority, and sealed-final authority false.",
       "findings": []
     },
     {
@@ -3908,13 +3908,13 @@
     },
     {
       "path": "scripts/run_academic_factual_qa_r1_model_cascade.py",
-      "sha256": "eaf36bb2203fedec1ae477451fdf1157eda08d84632f2246932c23a54eee87e9",
+      "sha256": "7e2cf708831346a6422e88f11d41cfb2eacb02f232e44ff6149a833061478a10",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Authorization-state regression review confirms the preflight reports the correlated instrument authority accurately while retaining all call, cost, identity, resume, and final-stage guards.",
       "findings": []
     },
     {
@@ -5829,13 +5829,13 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "7d1cb898f90a21b46ac7b1df1e9e95e06f6ef0fc32b84bfd560272146518be97"
+      "sha256": "6e7fa17528283cf009130da3ed33701803a81fadbe103555a4161e8b083eaff8"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Bounded-authorization review permits only the named R1 cascade operations while the repository-wide freeze and sealed-final prohibition remain active.",
       "findings": [],
       "path": "src/digital_twin/student/__init__.py",
       "reviewed_at": "2026-08-29",
@@ -6209,12 +6209,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify reference validations 001/002 and all product, final-scale, private-source, external-delivery, promotion, and held-out operations remain rejected.",
+      "evidence": "Focused freeze-policy tests verify only the named R1 cascade gains external/local/method authority; held-out, sealed-final, private-source, external-delivery, promotion, and unrelated operations remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "93807e3022c384e0869e12652e34d1668c63e75435f963b844f76bb98dd6c82d"
+      "sha256": "b2259a405b4eca5a69ae8417fa87539bb41ed8dbd327478b28a46140d3631525"
     },
     {
       "audit_status": "audited",
@@ -6625,13 +6625,13 @@
     },
     {
       "path": "tests/test_academic_factual_qa_r1_model_cascade.py",
-      "sha256": "e102e2fbfc55711f53038f10809118b755c7f098e5591b2cc6009e3abc390203",
+      "sha256": "7f4207b1157336f6f4681c370bbc397941f83729ff485e7d404f9bf9e77d1f7e",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Focused authorization-state test verifies the exact four models, 200-case screen, and correlated paid-authority report before live preflight.",
       "findings": []
     },
     {

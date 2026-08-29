@@ -1,10 +1,11 @@
 from scripts import run_academic_factual_qa_r1_model_cascade as cascade
 
 
-def test_cascade_build_is_exactly_four_models_and_200_cases():
+def test_authorized_cascade_is_exactly_four_models_and_200_cases():
     result = cascade.validate()
 
-    assert result["status"] == "passed-build-only"
+    assert result["status"] == "passed-authorized"
+    assert result["paid_execution_authorized"] is True
     assert result["development_case_count"] == 500
     assert result["screening_case_count"] == 200
     assert result["candidate_models"] == [

@@ -20,8 +20,10 @@ duplicate/missing/unknown IDs, deterministically restores order, quarantines a
 malformed case without discarding valid peers, and limits retry to transport
 failures. A four-model direct-OpenAI cascade is build-verified over the same
 stratified 200-case screen, 500-case development package, and 100-case paired
-control. It remains provider- and paid-execution unauthorized; no product-model
-result exists yet.
+control. AFQC-084 now freezes and authorizes exactly this bounded cascade after
+the official model IDs, Responses API support, structured outputs, and current
+prices were reverified. No product-model result exists yet, and the sealed
+10,000-case run remains unauthorized.
 
 The product track is also build-complete but not yet release-qualified. It now
 includes a versioned professor profile with a hash-bound ten-case preview,
@@ -32,8 +34,8 @@ claim lineage and adds pedagogical wording in deterministic code. A prospective
 50-trajectory/200-turn-per-condition T0/T1 confirmation is frozen without model
 or paid authority; it binds the model selected by the cascade and keeps T0 as
 rollback. The preview Compose boundary is ready for a temporary Cloudflare
-Quick Tunnel, but no public URL or production claim exists yet. The next stop is
-one clean authorization for `academic-factual-qa-r1-model-cascade-001`.
+Quick Tunnel, but no public URL or production claim exists yet. The immediate
+action is the clean paid cascade execution followed by mandatory revocation.
 
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used

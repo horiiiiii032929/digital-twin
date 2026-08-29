@@ -219,7 +219,7 @@ def validate() -> dict[str, Any]:
             [row.case_id for row in screening]
         ),
         "provider_calls": 0,
-        "paid_execution_authorized": False,
+        "paid_execution_authorized": all(authorization),
         "sealed_final_execution_authorized": False,
     }
 

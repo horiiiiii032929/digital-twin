@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0.0",
   "instrument_id": "academic-factual-qa-r1-model-cascade-001",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "decision_question": "Which allowlisted OpenAI model is the lowest-latency, lowest-cost model that passes the same grounded T0 product gates?",
   "public_cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
   "hidden_gold": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
@@ -75,9 +75,9 @@
     "emergency_cost_stop_usd": 50.0,
     "atomic_sqlite_checkpoints": true,
     "safe_resume": true,
-    "local_index_materialization_authorized": false,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "local_index_materialization_authorized": true,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "sealed_final_execution_authorized": false
   },
   "candidates": [
@@ -113,7 +113,7 @@
     "same_provider_limitation": true
   },
   "metadata": {
-    "verified_at": "2026-08-29T18:30:00+08:00",
+    "verified_at": "2026-08-29T20:05:03+08:00",
     "freshness_hours": 24,
     "official_model_source": "https://developers.openai.com/api/docs/models",
     "official_responses_source": "https://developers.openai.com/api/reference/resources/responses/methods/create"
