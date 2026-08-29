@@ -75,7 +75,7 @@ def test_author_sees_truth_but_blind_reviewer_contract_does_not(
     assert answerable["required_answer_spans"]
     assert boundary["canonical_answer"] is None
     assert boundary["required_answer_spans"] == []
-    assert runner.validate(require_unauthorized=False)["status"] == "passed-build-only"
+    assert runner.validate()["status"] == "passed-build-only"
 
 
 def test_network_free_simulation_selects_exact_complete_quota() -> None:
@@ -148,15 +148,21 @@ def test_duplicate_questions_are_rejected_before_selection(
     assert failed == {mutated[0].case_id, mutated[1].case_id}
 
 
-def test_preflight_is_ready_under_exact_bounded_authority(
-    monkeypatch: pytest.MonkeyPatch,
+def test_preflight_is_blocked_after_authority_revocation(
+    monkeypatch: pytest.MonkeyPatch, tmp_path,
 ) -> None:
     monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
+    monkeypatch.setattr(runner, "LEDGER_PATH", tmp_path / "unused.sqlite3")
+    monkeypatch.setattr(runner, "RESULT_PATH", tmp_path / "unused.json")
     monkeypatch.setenv("OPENAI_API_KEY", "test-only-redacted")
     result = runner.preflight()
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert "freeze-external_model_evaluation-authorization-missing" in result[
+        "blockers"
+    ]
+    assert "instrument-provider-execution-authorized-false" in result["blockers"]
+    assert "binding-provider-execution-authorized-false" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["product_calls"] == 0
     assert result["final_split_opened"] is False

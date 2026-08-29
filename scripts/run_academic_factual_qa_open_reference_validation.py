@@ -749,7 +749,7 @@ def main() -> int:
     if arguments.score:
         require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "method_evaluation_execution")
     if arguments.validate:
-        result = validate(require_unauthorized=False)
+        result = validate()
     elif arguments.simulate:
         result = simulate()
     elif arguments.preflight:

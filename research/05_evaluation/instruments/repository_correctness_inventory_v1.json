@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d4d9f906fb9bcdd89fb430b6270dfc58d748b2d425869cddd8b802ddfa62291a",
+  "record_sha256": "e2d872511251c0c446c800c11ffddaf9d758b13b3f6d870dd7841c405c4005cb",
   "records": [
     {
       "audit": {
@@ -2008,7 +2008,7 @@
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Binding review verifies fresh official metadata, exact dated direct OpenAI snapshots, store=false, no router or fallback, separate author and target-blind reviewer roles, public sources only, zero retries, an 80-call ceiling, and one-time reference-validation authority only.",
+        "evidence": "Binding review preserves the exact dated direct OpenAI snapshots, store=false, no router or fallback, separate author and target-blind reviewer roles, public sources only, zero retries, and the historical 80-call ceiling while revoking all execution authority after the invalid run.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -2019,12 +2019,12 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_001.json",
       "risk": "high",
-      "sha256": "20603e4b79dc8740c3b4e08b68bf1fc58d46ad0f69f60203f1b64fc59166dc4f"
+      "sha256": "563e36ee4caf1a57ab1e32fd56ff34590617935120e4441859cd3c5d06b171af"
     },
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Instrument review verifies 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, deterministic authority, one-time 80-call execution authority, and closed product/final execution.",
+        "evidence": "Instrument review preserves the 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, and deterministic authority while recording invalid execution and revoked provider, paid, validation, product, and final authority.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -2035,7 +2035,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_001.json",
       "risk": "high",
-      "sha256": "79f7df71d9f30d6562aab23c8c23cfde9b9d193d895d707f86e8324538bd22b0"
+      "sha256": "a848052e0436db5c94530faf194471d3aa5af9cee9489c342d8163056d287652"
     },
     {
       "audit": {
@@ -5692,7 +5692,7 @@
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Runner review verifies source-visible construction, target-blind review inputs, strict schemas, exact identity and cost accounting, atomic resume, deterministic scoring, exclusive materialization, zero automatic product calls, and credential-aware authorized preflight.",
+        "evidence": "Runner review verifies source-visible construction, target-blind review inputs, strict schemas, exact identity and cost accounting, atomic resume, deterministic scoring, exclusive materialization, zero automatic product calls, and build-only validation after authorization revocation.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -5711,7 +5711,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
-      "sha256": "53eaae7f086a508018db3c32434c69a431c9392933a7459c4508496dc87306cb"
+      "sha256": "8392d4d6f7b1927e51ad79c786756027793a9efa2090274ce00a9c99edb4f1af"
     },
     {
       "audit": {
@@ -8742,7 +8742,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review grants only reference-question-validation-001 bounded external-model and method authority; checkpoint 007, product, final 10,000, private-data, promotion, and deployment authority remain false.",
+        "evidence": "Focused freeze review confirms reference-question-validation-001 authority was removed after its terminal invalid execution; product, final 10,000, private-data, promotion, and deployment authority remain false.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -8753,7 +8753,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "521427172474ddaed3efa38efc599885dc149fee7829adff851a2deb4fc5777c"
+      "sha256": "a2b5e60c348a36795efd8365efbc5afd4ccd89f77853c4353cc7e9af8ef491f5"
     },
     {
       "audit": {
@@ -9286,7 +9286,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify only reference-question-validation-001 has bounded author/reviewer execution authority; checkpoint 007, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+        "evidence": "Focused freeze-policy tests verify reference-question-validation-001 is no longer a bounded authorization after its invalid execution; final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9297,7 +9297,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "26b43275b14fb01e94346c23df5e832279366272eb049ed287bcc17814634f9f"
+      "sha256": "967596f0e7b0fffa229a97ba7189e1238e248fc92b96ca804d448e94e6a16ec6"
     },
     {
       "audit": {
@@ -9814,7 +9814,7 @@
     {
       "audit": {
         "domain": "reference-question-validation-verification",
-        "evidence": "Six focused tests cover source disjointness, byte stability, truth-visible authoring, blind review separation, exact 500-case selection, quota shortfall, ambiguity and duplicate rejection, and clean bounded-authority preflight readiness.",
+        "evidence": "Focused tests cover source disjointness, byte stability, truth-visible authoring, blind review separation, exact 500-case selection, quota shortfall, ambiguity and duplicate rejection, plus fail-closed preflight after authorization revocation.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9825,7 +9825,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_reference_validation.py",
       "risk": "medium",
-      "sha256": "709ef1f2b703b684a24b2b1743722d9d8376274089652538e96461c915249acd"
+      "sha256": "7c2dcf67435b8b1ddc08a0c0cbf68762ab96de495624b6f0610dcefa2ba47b86"
     },
     {
       "audit": {

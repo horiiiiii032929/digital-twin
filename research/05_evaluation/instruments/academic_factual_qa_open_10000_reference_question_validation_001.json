@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-001",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-007",
   "decision_question": "Can a source-visible author and a target-blind reviewer produce a fresh 500-case reference set whose intended action and exact source answer are independently recoverable before product evaluation?",
   "dataset": {
@@ -78,11 +78,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "2459d030b9eb669f468755d8f249955adc20fc79e161234f081263b8d5f66408"
+  "content_sha256": "627b21f100a7e1b42eed5159c50306cd3ca374e56b637cd82193c9e4f126b1b7"
 }
