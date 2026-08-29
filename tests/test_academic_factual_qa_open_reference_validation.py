@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import replace
 
 import pytest
 
@@ -33,9 +34,7 @@ def _score(
     reviewers: list[ReferenceQuestionReviewerResponseV1],
 ) -> dict[str, object]:
     return score_reference_questions(
-        base_cases=[
-            EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]
-        ],
+        base_cases=[EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]],
         gold=[EvaluationGoldV1.model_validate(row) for row in pool["gold"]],
         cluster_modalities={
             row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
@@ -116,9 +115,7 @@ def test_blind_ambiguity_rejection_cannot_relax_modality_quota(
     result = _score(pool, authors, mutated)
 
     assert result["status"] == "completed-refine"
-    assert result["allocation_shortfalls"] == {
-        "operating-systems:structured-table": 1
-    }
+    assert result["allocation_shortfalls"] == {"operating-systems:structured-table": 1}
     assert result["selected_cluster_count"] == 99
     assert all(
         not row["passed"]
@@ -149,20 +146,81 @@ def test_duplicate_questions_are_rejected_before_selection(
 
 
 def test_preflight_is_blocked_after_authority_revocation(
-    monkeypatch: pytest.MonkeyPatch, tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path,
 ) -> None:
     monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
-    monkeypatch.setattr(runner, "LEDGER_PATH", tmp_path / "unused.sqlite3")
-    monkeypatch.setattr(runner, "RESULT_PATH", tmp_path / "unused.json")
     monkeypatch.setenv("OPENAI_API_KEY", "test-only-redacted")
-    result = runner.preflight()
+    attempt = replace(
+        runner.ATTEMPT_001,
+        ledger_path=tmp_path / "unused.sqlite3",
+        result_path=tmp_path / "unused.json",
+    )
+    result = runner.preflight(attempt=attempt)
 
     assert result["status"] == "blocked-not-authorized"
-    assert "freeze-external_model_evaluation-authorization-missing" in result[
-        "blockers"
-    ]
+    assert (
+        "freeze-external_model_evaluation-authorization-missing" in result["blockers"]
+    )
     assert "instrument-provider-execution-authorized-false" in result["blockers"]
     assert "binding-provider-execution-authorized-false" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["product_calls"] == 0
     assert result["final_split_opened"] is False
+
+
+def test_attempt_002_aligns_provider_schema_with_local_question_invariant() -> None:
+    result = runner.validate(attempt=runner.ATTEMPT_002)
+    question_schema = runner._author_schema(20, attempt=runner.ATTEMPT_002)[  # noqa: SLF001
+        "properties"
+    ]["items"]["items"]["properties"]["question"]
+
+    assert result["status"] == "passed-build-only"
+    assert result["author_question_pattern"] == r"\?$"
+    assert question_schema["pattern"] == r"\?$"
+    assert (
+        "pattern"
+        not in runner._author_schema(20)["properties"]["items"][  # noqa: SLF001
+            "items"
+        ]["properties"]["question"]
+    )
+    ReferenceQuestionAuthorResponseV1(
+        case_id="aligned-case",
+        question="Which exact claim does the source establish?",
+    )
+    with pytest.raises(ValueError, match="question mark"):
+        ReferenceQuestionAuthorResponseV1(
+            case_id="misaligned-case",
+            question="The source establishes the exact requested claim",
+        )
+
+
+def test_attempt_002_has_fresh_outputs_and_revoked_authority(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path,
+) -> None:
+    monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
+    monkeypatch.setenv("OPENAI_API_KEY", "test-only-redacted")
+    attempt = replace(
+        runner.ATTEMPT_002,
+        ledger_path=tmp_path / "attempt-002.sqlite3",
+        result_path=tmp_path / "attempt-002-result.json",
+    )
+
+    simulation = runner.simulate(attempt=attempt)
+    preflight = runner.preflight(attempt=attempt)
+
+    assert attempt.ledger_path != runner.ATTEMPT_001.ledger_path
+    assert attempt.result_path != runner.ATTEMPT_001.result_path
+    assert simulation["selected_cluster_count"] == 100
+    assert simulation["selected_case_count"] == 500
+    assert preflight["status"] == "blocked-not-authorized"
+    assert (
+        "freeze-external_model_evaluation-authorization-missing"
+        in preflight["blockers"]
+    )
+    assert "instrument-provider-execution-authorized-false" in preflight["blockers"]
+    assert "binding-provider-execution-authorized-false" in preflight["blockers"]
+    assert preflight["provider_calls"] == 0
+    assert preflight["product_calls"] == 0
+    assert preflight["final_split_opened"] is False

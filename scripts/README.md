@@ -815,6 +815,17 @@ Current utilities:
   is complete, but the 500-case product run still requires fresh provider
   metadata, credentials, and separate paid authority; final 10,000-case
   execution remains closed.
+
+  `build_academic_factual_qa_open_reference_validation.py` and
+  `run_academic_factual_qa_open_reference_validation.py` own the fresh
+  source-disjoint reference-question gate. Historical attempt 001 remains the
+  default immutable command target. Attempt 002 is selected explicitly with
+  `--attempt academic-factual-qa-open-10000-reference-question-validation-002`
+  or the `*:academic-factual-qa-reference-validation-002` package commands. It
+  adds only the provider-side terminal-question pattern required by the local
+  validator and uses distinct ledger, result, and materialized-package paths.
+  Validation, simulation, and preflight are network-free; execute and score
+  remain freeze blocked until attempt 002 receives separate authorization.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report
