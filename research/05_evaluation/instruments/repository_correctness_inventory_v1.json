@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d68923d56d7f9987facc51c73611a071fee7f1356ed5ccb64418d610d3735614",
+  "record_sha256": "5030486df8aaed374a79fbb32aa60b2e04e5850e876f14fcc15458f544385ddf",
   "records": [
     {
       "audit": {
@@ -1768,9 +1768,9 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Manual instrument review verified unchanged 500/100 packages, exact AFQC-068 artifact identities, load-only runtime policy, deterministic decision authority, hidden-gold ordering, bounded costs and calls, false provider/final authorization, and no automatic promotion.",
+        "evidence": "Terminal-result review verifies 600 durable responses, complete 540-call accounting, the post-response package-pairing failure, false quality interpretation, revoked provider/development/review/final authority, no automatic promotion, and no further harness correction.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_006.json",
       "risk": "high",
-      "sha256": "0c48fb0762fcedd5e645d4bdf866402b53e9eefdaff66c286f68a09f5a8894dc"
+      "sha256": "6c9278c9c40c1d41289d593a1c19e71e777a6f74fedfe80e5a57fe4a301263b6"
     },
     {
       "audit": {
@@ -1880,9 +1880,9 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Manual binding review verified direct OpenAI Responses API use, current exact GPT-5.4 mini, nano, and full snapshots and prices, store false, zero retries/fallback, public inputs only, and false provider, paid, product, review, and final authority.",
+        "evidence": "Post-execution binding review preserves direct OpenAI Responses API identities and historical prices while revoking every provider, paid, development, semantic-review, and final authorization after terminal invalid execution.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -1891,7 +1891,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_007.json",
       "risk": "high",
-      "sha256": "5b94bd4c18b2ccbcbb014fe69f2b3504576f29d1e41ceb1f49a67feebe138138"
+      "sha256": "872f2344de7a3c34837c890a55aa2e25b5ce96aa1a009bb682218d4f207ee790"
     },
     {
       "audit": {
@@ -5501,9 +5501,9 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Focused runner review verified successor-only identities and outputs, exact local artifact verification, no index build path, unchanged historical checkpoint behavior, hidden-gold ordering, finite simulations, resume artifact binding, and fail-closed execution authority.",
+        "evidence": "Focused runner review verified successor-only identities and outputs, exact local artifact verification, no index build path, unchanged historical checkpoint behavior, hidden-gold ordering, finite simulations, resume artifact binding, authorized-state validation, and fail-closed execution authority.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -5518,7 +5518,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "high",
-      "sha256": "c82ef980c0dc67d96d604c0c7a659418caff78f8ef8e894270bcbbc7ede86c2c"
+      "sha256": "14ee8845989a518a19159bf61efe28579e9ababfc195ebd5f940f79bde4bd21a"
     },
     {
       "audit": {
@@ -8533,9 +8533,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review registers checkpoint 006 as an execution-capable entrypoint while granting it no bounded authorization; checkpoint 005, final 10,000 execution, and every unregistered provider, paid, private-data, product, or final operation remain blocked.",
+        "evidence": "Focused freeze review removes checkpoint 006 after terminal invalid execution; the repository-wide freeze remains active and all provider, product, final 10,000, private-data, promotion, and unregistered operations are blocked.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9077,9 +9077,9 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify retrieval-index authority is revoked and checkpoint 005 plus every unregistered provider, paid, private-source, external-delivery, product, and held-out operation remain rejected.",
+        "evidence": "Focused freeze-policy tests verify checkpoint 006 authority is revoked and retrieval-index, checkpoint 005, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9088,7 +9088,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "47803224475efd60cba4756af71247b35d0e99a2a269df9cb00d5a8e36ac00a0"
+      "sha256": "61cf5e29bd9391e29d0334c30da0dcc7df729b8aa3773f4e520b6ef6a9d6204c"
     },
     {
       "audit": {
@@ -9557,9 +9557,9 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, no runtime document embedding, unavailable-index failure, five finite outcomes, authorization-only clean preflight, and resume binding drift.",
+        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, terminal invalid state and complete accounting, revoked preflight blocking, no runtime document embedding, five finite simulations, no further correction, and resume binding drift.",
         "findings": [],
-        "reviewed_at": "2026-08-28",
+        "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -9568,7 +9568,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "medium",
-      "sha256": "b708af26e914f68aa7c18e51f3ba36e6f79be6d21dc5c36a52eccad1b0d52737"
+      "sha256": "4fbb7886715843d5903b1da056e1c1fb6954f62d5085a19c43a74b6f1dfb4f3d"
     },
     {
       "audit": {

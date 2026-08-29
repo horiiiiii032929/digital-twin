@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "binding_id": "academic-factual-qa-open-10000-openai-binding-007",
-  "status": "reviewed-provider-unauthorized",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-openai-binding-006",
-  "verified_at": "2026-08-28T23:42:05+08:00",
+  "verified_at": "2026-08-29T12:11:34+08:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-development-inputs-only",
   "routing_policy": "direct-openai-responses-api-only-no-router-no-fallback",
@@ -97,5 +97,5 @@
     "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "e3f2c112c45c68b25f6e4a98254a4c57b1fc398bb8df71c49123ee6e8e98ec2b"
+  "content_sha256": "006b2a2b5bdea0812220bb590f8817d0a85da301d76f09b3a8bcfe0c5f583390"
 }

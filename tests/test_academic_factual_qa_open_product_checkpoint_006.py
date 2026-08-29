@@ -14,7 +14,7 @@ def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_successor_is_build_only_and_binds_qualified_indexes() -> None:
+def test_terminal_successor_binds_qualified_indexes() -> None:
     result = checkpoint.validate()
     assert result["status"] == "passed-build-only"
     assert result["case_count"] == 500
@@ -33,13 +33,41 @@ def test_successor_is_build_only_and_binds_qualified_indexes() -> None:
         "verify-and-load-exact-artifacts-only-never-build"
     )
     assert len(lifecycle["artifact_ids"]) == 4
-    assert not any(instrument["authorization"].values())
+    assert instrument["status"] == "invalid-execution-authorization-revoked"
+    assert instrument["allocation"]["status"] == "frozen-approved"
+    assert instrument["allocation"]["execution_correction_record"] == "AFQC-071"
+    assert instrument["corrective_attempt"] == {
+        "attempt_number": 2,
+        "predecessor_result_id": (
+            "academic-factual-qa-open-10000-development-product-checkpoint-006-"
+            "attempt-001-invalid"
+        ),
+        "permitted_change": (
+            "correct-allocation-state-from-frozen-build-only-to-frozen-approved"
+        ),
+        "dataset_changed": False,
+        "product_method_changed": False,
+        "provider_binding_changed": False,
+        "budget_changed": False,
+        "fresh_exclusive_outputs_required": True,
+        "further_harness_correction_authorized": False,
+    }
+    assert instrument["authorization"]["provider_execution_authorized"] is False
+    assert instrument["authorization"]["paid_execution_authorized"] is False
+    assert (
+        instrument["authorization"]["product_development_execution_authorized"]
+        is False
+    )
+    assert instrument["authorization"]["semantic_review_execution_authorized"] is False
     assert instrument["execution"]["final_execution_authorized"] is False
+    assert instrument["terminal_execution"]["provider_call_count"] == 540
+    assert instrument["terminal_execution"]["persisted_response_count"] == 600
+    assert instrument["terminal_execution"]["further_correction_authorized"] is False
 
 
 def test_successor_does_not_mutate_historical_checkpoint() -> None:
     before = historical.validate()
-    checkpoint.validate()
+    checkpoint.validate(require_unauthorized=False)
     after = historical.validate()
     assert before == after
     assert historical.INSTRUMENT_ID.endswith("checkpoint-005")
@@ -108,7 +136,7 @@ def test_successor_simulations_are_finite(scenario: str, expected: str) -> None:
     assert result["hidden_gold_visible_to_product"] is False
 
 
-def test_clean_preflight_is_blocked_by_authority_only(
+def test_clean_terminal_preflight_is_blocked(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
@@ -120,14 +148,11 @@ def test_clean_preflight_is_blocked_by_authority_only(
         blocker.startswith("retrieval-index-verification-failed:")
         for blocker in result["blockers"]
     )
-    assert not any(
-        blocker in {"repository-dirty", "openai-api-key-missing", "provider-metadata-stale"}
-        for blocker in result["blockers"]
-    )
-    assert all(
-        "authorization" in blocker or blocker.endswith("-false")
-        for blocker in result["blockers"]
-    )
+    assert "freeze-external_model_evaluation-authorization-missing" in result[
+        "blockers"
+    ]
+    assert "instrument-provider-execution-authorized-false" in result["blockers"]
+    assert "binding-provider-execution-authorized-false" in result["blockers"]
 
 
 def test_resume_binds_exact_retrieval_artifacts(

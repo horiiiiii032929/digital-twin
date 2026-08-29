@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-product-checkpoint-006",
   "owner_issue": 127,
-  "status": "reviewed-provider-unauthorized",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-005",
   "decision_question": "Does the actual leakage-free T0 candidate satisfy the preregistered deterministic grounding and safety gates on the frozen mixed-wording 500-case development package when both conditions load the exact qualified immutable retrieval indexes?",
   "dataset": {
@@ -80,8 +80,9 @@
     "model_cannot_override_deterministic_truth": true
   },
   "allocation": {
-    "status": "frozen-build-only",
+    "status": "frozen-approved",
     "approval_record": "AFQC-069",
+    "execution_correction_record": "AFQC-071",
     "development_case_count": 500,
     "development_control_case_count": 100
   },
@@ -123,6 +124,17 @@
     "wording_stage_reexecuted": false,
     "final_10000_execution_authorized": false
   },
+  "corrective_attempt": {
+    "attempt_number": 2,
+    "predecessor_result_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-attempt-001-invalid",
+    "permitted_change": "correct-allocation-state-from-frozen-build-only-to-frozen-approved",
+    "dataset_changed": false,
+    "product_method_changed": false,
+    "provider_binding_changed": false,
+    "budget_changed": false,
+    "fresh_exclusive_outputs_required": true,
+    "further_harness_correction_authorized": false
+  },
   "hard_gates": {
     "fully_grounded_factual_success_min": 0.95,
     "fully_grounded_source_family_lower_95_min": 0.93,
@@ -154,5 +166,25 @@
     "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "064622e167361c2d59da99ba1c0b23fa072f4c74d442616ab40d92ebb5651f22"
+  "terminal_execution": {
+    "result_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-attempt-002-invalid",
+    "status": "invalid-execution",
+    "completed_stages": [
+      "candidate-500",
+      "control-100"
+    ],
+    "failure_stage": "deterministic-score-and-compare",
+    "failure_type": "OpenBenchmarkScoringError",
+    "failure_detail": "public and hidden packages are not paired",
+    "persisted_response_count": 600,
+    "provider_call_count": 540,
+    "provider_failure_count": 0,
+    "input_tokens": 1173119,
+    "output_tokens": 44703,
+    "reported_cost_usd": 1.08100275,
+    "quality_interpretation_authorized": false,
+    "further_correction_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "cd3c3733377bd391afeeab5a4c925abee2975bbe0c5ee63616801c9eae7fdd38"
 }

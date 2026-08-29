@@ -323,7 +323,7 @@ def main() -> int:
             INSTRUMENT_ID, "method_evaluation_execution"
         )
     if arguments.validate:
-        result = validate()
+        result = validate(require_unauthorized=False)
     elif arguments.simulate:
         result = simulate(scenario=arguments.simulate)
     elif arguments.preflight:
