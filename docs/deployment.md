@@ -57,6 +57,23 @@ then recreates API and worker services with that exact allowed origin. The URL
 is written to the ignored `reports/generated/r1-preview-url.txt` for the local
 walkthrough; it is not a production endpoint or repository artifact.
 
+## Operational R1 production boundary
+
+The production path uses `compose.staging.yml` on one durable Docker host with
+a stable domain and Caddy-managed HTTPS. It is qualified only when the exact
+image tag and profile hashes used in the walkthrough also pass health,
+role/isolation, persistence, backup/restore, restart, and rollback checks on
+that host. A Quick Tunnel may be used to demonstrate the same revision while
+host access is being arranged, but its URL and uptime are not production
+evidence.
+
+The four-model cascade selected no OpenAI generator. The first operational R1
+therefore remains on `APP_GENERATOR_MODE=deterministic` and
+`APP_STUDENT_TUTORING_MODE=grounded-assistant` unless the network-free T1
+graph/policy confirmation passes. Even after a T1 mechanics pass, the release
+must not claim LLM-backed tutoring quality. The sealed 10,000-case academic run
+and a future retrieval/evidence successor remain separate post-release work.
+
 ## Build and start
 
 Validate before touching runtime state:

@@ -38,6 +38,17 @@ policy behavior, but not LLM-backed autonomy. The preview Compose boundary is
 ready for a temporary Cloudflare Quick Tunnel, but no public URL or production
 claim exists yet.
 
+AFQC-088 changes the immediate operating priority after the valid cascade
+failure. The 2026-08-30 hard stop is now an operational invite-only R1, not
+another academic evaluation attempt. The release uses deterministic generation
+and the conservative grounded-assistant control; T1 may replace that control
+only after its network-free graph/policy confirmation passes. Issues #88, #9,
+and #25 move onto the active critical path for durable hosting, recovery, and
+complete deployed journeys. Issue #127 and the sealed 10,000-case run move to
+post-release research. A Quick Tunnel remains an emergency walkthrough and
+cannot support a production claim; a stable host and domain are required for
+that claim.
+
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
 594 calls and USD 1.13834545, and retained exact provider identities. Its
@@ -1032,14 +1043,14 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
-| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Preserve the valid four-model screen: no candidate passed, shared retrieval missed required evidence, deterministic fallback retained, and the sealed 10,000 execution closed pending one retrieval/evidence method successor |
-| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Refine | Do not select structured evidence coverage from the unopened paired control; address the shared retrieval/evidence failure prospectively before academic scaling |
-| 6 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
-| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Rebind the prospective confirmation to the explicit deterministic fallback, run it network-free, and describe any pass as graph/policy evidence rather than LLM-backed autonomy; preserve T0 as rollback |
-| 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through the local and public demo journeys; keep A1 and Discord disabled |
-| 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Keep durable hosting open; the Sunday Quick Tunnel is a temporary release-candidate walkthrough, not production |
-| 10 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
-| 11 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Preserve durable-host operations and deployed end-to-end validation as post-demo work |
+| 4 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration; do not infer an academic quality claim from it |
+| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / Go Deeper | Run the deterministic-fallback T0/T1 confirmation network-free; promote T1 only for a complete graph/policy pass and preserve T0 rollback |
+| 6 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through complete journeys; keep A1 and Discord disabled |
+| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Build and run one immutable deterministic-fallback revision on the selected durable host and stable HTTPS domain |
+| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / Pending | Pass isolation, monitoring, persistence, backup/restore, restart, capacity, and rollback on that host |
+| 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / Pending | Pass administrator, professor, and student journeys through the deployed URL on the same revision |
+| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Refine | Preserve the cascade result and design one prospective retrieval/evidence successor after the operational release; keep the sealed 10,000 run closed |
+| 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product

@@ -26,13 +26,15 @@ invite-only pilot release only after the approval-gated real-workflow checks
 pass. A local demo, a 10,000-case dataset, or a successful model run is evidence
 toward the release; none is the release by itself.
 
-## Sunday public-demo checkpoint
+## Sunday operational-R1 checkpoint
 
-The immediate target is a temporary, invite-only public R1 demo through a
-Cloudflare Quick Tunnel by 2026-08-30 23:59 Singapore time. It is a release
-candidate, not durable production: the URL is random, has no uptime SLA, and is
-not used for an external student pilot. The final sealed 10,000-case execution
-is deliberately post-demo.
+The immediate target is an invite-only operational R1 by 2026-08-30 23:59
+Singapore time. A production claim requires a durable host, stable domain,
+trusted HTTPS, persistent storage, backup/restore, monitoring, and rollback on
+the exact released revision. A random Cloudflare Quick Tunnel remains an
+emergency walkthrough fallback only; it cannot satisfy the production gate.
+The final sealed 10,000-case execution is deliberately post-release and does
+not block this product checkpoint.
 
 The finite order is:
 
@@ -41,12 +43,16 @@ The finite order is:
 3. rebind the 50-trajectory T0/T1 confirmation to that fallback, run it
    network-free, and keep T0 when T1 fails;
 4. qualify the professor-profile, learning-gap, and A0 outreach workflows;
-5. pass container, HTTPS, persistence, backup/restore, and rollback checks;
-6. publish the temporary URL and walkthrough.
+5. pass container, HTTPS, persistence, backup/restore, monitoring, and rollback
+   checks on one immutable release revision;
+6. deploy that revision to a durable host and pass the administrator,
+   professor, and student journeys through its stable HTTPS URL.
 
 Critical safety, grounding, privacy, persistence, or workflow failures block
-the demo. A model-quality failure may fall back to deterministic T0, but cannot
-be described as LLM-backed autonomy.
+release. A model-quality failure may fall back to deterministic T0, but cannot
+be described as LLM-backed autonomy. If host or domain access is unavailable,
+the same build may be reported only as a locally qualified public demo or
+release candidate.
 
 ## Release stages
 
