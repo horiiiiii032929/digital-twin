@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ad2947aa1dbd92da74d221f857fe98b16f86e03ef7d3e4a633ab254d936cd91c",
+  "record_sha256": "f66c9bbbe2a8e2d5363198eb87e7919f19e6474a573dc550f1a5064d2f90e1f0",
   "records": [
     {
       "audit": {
@@ -8652,7 +8652,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review removes checkpoint 006 after terminal invalid execution; the repository-wide freeze remains active and all provider, product, final 10,000, private-data, promotion, and unregistered operations are blocked.",
+        "evidence": "Focused freeze review registers checkpoint 007 as an explicitly guarded but unauthorized external-model and method-evaluation entrypoint; the repository-wide freeze continues blocking every provider, final 10,000, private-data, promotion, and unregistered operation.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -8663,7 +8663,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "25c497e176f9e7b308302d52bff2682d23ba7e2c6938db85f12debb6852e88a8"
+      "sha256": "738ec49f54ee3362a1b80255c0338baf036c370c84f2995aab3bf02c4ffa476c"
     },
     {
       "audit": {

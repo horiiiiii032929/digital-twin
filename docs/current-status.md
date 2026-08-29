@@ -8,17 +8,26 @@ remain authoritative for the historical runs and claims they document.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
-#135 merged the opt-in proactive-outreach core. The prospective R1 continuation
-is now one finite OpenAI-only path. PR #136 merged the direct-provider base at
-revision `492979e`; checkpoint 003 then added the exact GPT-5.4 calibration and
-bounded development path. Checkpoint 004 spent USD 0.555499 on 50 wording calls,
-accepted 452/500 variants, and stopped before product execution. Checkpoint 005
-reused those 452 variants plus 48 explicit canonical fallbacks but is now
-terminal after two invalid zero-provider-call attempts. Issue #139 is the active
-P0 retrieval-index qualification; #127 is Refine and blocked until it passes.
-Issues #132 and #134 stay
-open for their API/UI, method-confirmation, and activation gates rather than
-being treated as completed products.
+#135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
+closed #139. Checkpoint 006 then completed 500 candidate and 100 control
+responses, but scoring was operationally invalid because public and hidden-gold
+packages intentionally use distinct identities and had no explicit pairing
+manifest. Its 570 abstentions and 30 integrity refusals are diagnostic only and
+are not product-quality evidence.
+
+AFQC-073 is the one finite method-level successor. Checkpoint 007 keeps the
+same 500+100 cases, immutable retrieval, exact OpenAI mini generator, academic
+gates, USD 8 stop, and 666-call ceiling. It adds hash-bound public/gold pairing,
+a strict `answer`/`abstain`/`clarify` response schema, and deterministic release
+only when every claim is a literal contiguous quote from one server-resolved
+cited evidence region. Eighty-eight focused tests and five network-free terminal
+simulations pass. Provider, paid, final 10,000-case, T1 promotion, fidelity, and
+deployment authority remain false. Issue #127 is the active P0 item; the next
+required input after publication and a clean preflight is explicit paid
+authorization for checkpoint 007. No further method successor is permitted.
+
+Issues #132 and #134 remain open for their API/UI, method-confirmation, and
+activation gates rather than being treated as completed products.
 
 The active #127 successor is now
 `academic-factual-qa-open-10000-v1`: a flow-independent 500-case development
