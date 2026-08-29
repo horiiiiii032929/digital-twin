@@ -32,18 +32,16 @@ the release-critical path.
 
 ## Active Sunday checkpoint
 
-The current P0 result is #127's valid four-model `Refine` screen in draft PR
-#146. All four OpenAI candidates were operationally stable, but none passed the
-frozen safety screen; the shared retrieval/evidence path and ambiguous-boundary
-handling failed. The one-time authority is revoked and deterministic generation
-is retained for the demo without an LLM-quality claim. In parallel, #107, #132,
-and #134 have integrated
-build-only product work on the active R1 demo PR, but remain open until their
-T0/T1, privacy/workflow, and public-demo evidence passes. #105 is decided by a
-new prospective retrieval/evidence method because no model reached the paired
-100-case control. #24 remains open because a synthetic
-demo-professor approval is not the real fidelity reference. #88, #9, #25, and
-parent #8 remain open because a Quick Tunnel is not durable production.
+The local Sunday milestone is complete as `local-r1-release-qualification-001`
+on immutable revision `c235e56`. The exact local images passed 24/24 clean HTTPS
+journey checks, restart and clean-restore checks, and both the T0 rollback and
+T1 restoration checks. #107, #132, and #134 are therefore `Done / Keep` for
+their local R1 scopes. #88, #9, #25, and parent #8 remain open only for durable
+hosting, target-host operations, and external workflow evidence. #105 remains
+`Refine` because the four-model factual screen did not select an LLM path; the
+qualified local release explicitly uses the deterministic fail-closed fallback
+and makes no LLM-quality claim. #24 remains open because the synthetic demo
+professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
 checkpoint and requires a separate authorization.

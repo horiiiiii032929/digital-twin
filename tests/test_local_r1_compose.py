@@ -84,3 +84,11 @@ def test_local_caddy_uses_internal_https_and_release_headers() -> None:
     assert 'Strict-Transport-Security "max-age=31536000"' in caddyfile
     assert "script-src 'self'" in caddyfile
     assert "reverse_proxy api:8000" in caddyfile
+
+
+def test_local_runbook_writes_backup_to_durable_host_mount() -> None:
+    runbook = (ROOT / "docs/local-r1-runbook.md").read_text(encoding="utf-8")
+
+    assert '"$(pwd)/reports/generated:/host-output"' in runbook
+    assert "--output /host-output/local-r1-runtime-backup.zip" in runbook
+    assert "cp api:/tmp/local-r1-runtime.zip" not in runbook

@@ -96,11 +96,11 @@ the workers:
 ```bash
 docker compose --env-file .env.local-r1 -f compose.local-r1.yml \
   stop ingestion-worker outreach-worker
-docker compose --env-file .env.local-r1 -f compose.local-r1.yml exec api \
-  python -m scripts.backup_runtime --output /tmp/local-r1-runtime.zip
 docker compose --env-file .env.local-r1 -f compose.local-r1.yml \
-  cp api:/tmp/local-r1-runtime.zip \
-  reports/generated/local-r1-runtime-backup.zip
+  run --rm --no-deps \
+  -v "$(pwd)/reports/generated:/host-output" \
+  api python -m scripts.backup_runtime \
+  --output /host-output/local-r1-runtime-backup.zip
 chmod 600 reports/generated/local-r1-runtime-backup.zip
 docker compose --env-file .env.local-r1 -f compose.local-r1.yml \
   start ingestion-worker outreach-worker

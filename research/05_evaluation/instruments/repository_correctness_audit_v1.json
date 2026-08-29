@@ -7265,12 +7265,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+      "evidence": "Focused Compose and runbook tests verify the qualified offline T1 profile, local-only HTTPS exposure, least-privileged restart-safe services, release headers, and durable host-mounted backup procedure.",
       "findings": [],
       "path": "tests/test_local_r1_compose.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex local R1 release qualification",
-      "sha256": "8faa3446a35d952d3798cd60f62cc9b1e8a97d1b2037cb63094e6820f67facff"
+      "sha256": "4d53dae33516d8039d0e4db07591034d65ba04a1a1c9621584fef526b686aa89"
     },
     {
       "audit_status": "audited",

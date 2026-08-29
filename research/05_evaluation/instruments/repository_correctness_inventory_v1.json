@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "704bc1797185ef6d02bf6fb09cc16dc11c1a49a426e5165f9e63a7d452d7f39f",
+  "record_sha256": "123344ee8b02dc46b0968939f971d4129c6cf8e9d6553183f702c3070ec18aaa",
   "records": [
     {
       "audit": {
@@ -11057,7 +11057,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "evidence": "Focused Compose and runbook tests verify the qualified offline T1 profile, local-only HTTPS exposure, least-privileged restart-safe services, release headers, and durable host-mounted backup procedure.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex local R1 release qualification"
@@ -11068,7 +11068,7 @@
       "package_commands": [],
       "path": "tests/test_local_r1_compose.py",
       "risk": "medium",
-      "sha256": "8faa3446a35d952d3798cd60f62cc9b1e8a97d1b2037cb63094e6820f67facff"
+      "sha256": "4d53dae33516d8039d0e4db07591034d65ba04a1a1c9621584fef526b686aa89"
     },
     {
       "audit": {

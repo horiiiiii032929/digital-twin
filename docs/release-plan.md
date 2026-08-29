@@ -53,6 +53,12 @@ release. A model-quality failure may fall back to deterministic T0, but cannot
 be described as LLM-backed autonomy. This checkpoint may be reported as a
 qualified local R1; it is not hosted-production evidence.
 
+Status: **qualified local R1 / Keep** on revision `c235e56`. The exact images
+passed 24/24 clean live HTTPS checks, 6/6 after restart, 6/6 after clean
+backup/restore, and 3/3 checks in both T0 rollback and restored T1 modes. The
+complete repository gate passed 1,221 Python and 47 frontend tests. Durable
+hosting and the sealed 10,000-case academic run remain open.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |
@@ -66,14 +72,14 @@ qualified local R1; it is not hosted-production evidence.
 
 | Gate | Release requirement | Current state | Owner issue |
 | --- | --- | --- | --- |
-| Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | UX baseline kept; full hosted journey pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
+| Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | Complete local HTTPS journey passed 24/24 on `c235e56`; external hosted journey remains pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | Confirmation 002 passed 50 trajectories and 200 turns per condition with every hard gate at 100%, zero provider calls, and zero cost. T1 is selected for the hash-bound local R1; T0 remains rollback | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | A0 professor-scheduled in-app creation/list/cancel/status, worker delivery, consent, expiry, deduplication, and restart boundaries are implemented for release qualification. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
+| Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | Local R1 verified A0 creation, worker delivery, student consent, citation, expiry, deduplication, and restart behavior. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
 | Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Evaluation-v2 produced valid unfavorable evidence: all four models completed, none passed, grounded success was 15.0–18.1%, shared all-evidence@3 was 57.5%, and every model had a severe unsupported release. Deterministic fallback is retained; final 10,000 stays closed pending a retrieval/evidence method successor | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Draft/preview/approval/withdrawal workflow and ten-case preview are implemented. Synthetic demo approval is not the professor-fidelity reference, so C0–C3 remains open | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
-| Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Preview Compose now includes API, ingestion, outreach, web, and pinned Cloudflare tunnel services. Public workflow and recovery qualification remain pending | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
-| Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
+| Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Local Compose API, ingestion worker, outreach worker, web, internal HTTPS, roles, and exact result binding passed; durable public host remains pending | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
+| Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local restart, checksum backup, clean restore, and T0/T1 rollback passed; target-host operations remain pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
 | Privacy and security | No credentials or unrestricted private data enter Git; source rights, retention, access, deletion, and incident boundaries are reviewed | Repository controls active; production review pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
 
 Any failed hard gate produces a registered `Refine`, `Go Deeper`, or `Drop`
