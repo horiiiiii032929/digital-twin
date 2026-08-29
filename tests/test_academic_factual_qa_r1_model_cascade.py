@@ -29,6 +29,21 @@ def test_cascade_simulation_is_finite_and_never_authorizes_final_set():
     assert failed["provider_calls"] == 0
 
 
+def test_empty_index_directories_are_not_reported_as_materialized(tmp_path):
+    for name in ("active", "artifacts", "bindings"):
+        (tmp_path / name).mkdir()
+
+    assert cascade._retrieval_index_materialized(tmp_path) is False  # noqa: SLF001
+
+    for index in range(4):
+        (tmp_path / "bindings" / f"course-{index}.json").write_text("{}")
+        artifact = tmp_path / "artifacts" / f"artifact-{index}"
+        artifact.mkdir()
+        (artifact / "manifest.json").write_text("{}")
+
+    assert cascade._retrieval_index_materialized(tmp_path) is True  # noqa: SLF001
+
+
 def test_screening_selection_matches_every_frozen_slice_quota():
     selected = cascade._screening_cases(cascade._development_cases())  # noqa: SLF001
     targets = cascade._load(cascade.INSTRUMENT_PATH)["screening"][  # noqa: SLF001

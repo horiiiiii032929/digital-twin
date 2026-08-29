@@ -99,6 +99,24 @@ def _repo_dirty() -> bool:
     )
 
 
+def _retrieval_index_materialized(index_root: Path) -> bool:
+    """Require four durable binding pointers and four immutable manifests."""
+
+    if not index_root.is_dir() or index_root.is_symlink():
+        return False
+    bindings = [
+        path
+        for path in (index_root / "bindings").glob("*.json")
+        if path.is_file() and not path.is_symlink()
+    ]
+    manifests = [
+        path
+        for path in (index_root / "artifacts").glob("*/manifest.json")
+        if path.is_file() and not path.is_symlink()
+    ]
+    return len(bindings) == 4 and len(manifests) == 4
+
+
 def _package(path: Path, key: str) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     payload = _load(path)
     expected = canonical_json_sha256(
@@ -301,7 +319,9 @@ def preflight(*, require_authorized: bool) -> dict[str, Any]:
         "authorization_blockers": sorted(set(blockers)),
         "credential_value_emitted": False,
         "retrieval_index_state": (
-            "ready" if index_root.is_dir() else "build-on-authorized-execution"
+            "ready"
+            if _retrieval_index_materialized(index_root)
+            else "build-on-authorized-execution"
         ),
         "provider_calls": 0,
     }
@@ -317,7 +337,7 @@ def _ensure_retrieval_indexes() -> dict[str, Any]:
             ),
         )
     )
-    if index_root.is_dir():
+    if _retrieval_index_materialized(index_root):
         return {
             "status": "already-present",
             "provider_calls": 0,

@@ -1653,13 +1653,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
-      "sha256": "058d3da3b5909ef649832282c1dde05ae94e451919aff938afaa0b03aca066b8",
+      "sha256": "99490e206e600c84da7bed65565c585d3ba9755f192af310e20ab29b1a24bf91",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Authorization review confirms the exact four direct-OpenAI candidates, current official pricing metadata, unchanged quality/call/cost gates, one-time local/provider/paid authority, and sealed-final authority false.",
+      "evidence": "Attempt-002 correction review preserves the exact candidates and gates while adding only a fresh attempt identity after the registered zero-call index-readiness failure; sealed-final authority remains false.",
       "findings": []
     },
     {
@@ -3908,13 +3908,13 @@
     },
     {
       "path": "scripts/run_academic_factual_qa_r1_model_cascade.py",
-      "sha256": "7e2cf708831346a6422e88f11d41cfb2eacb02f232e44ff6149a833061478a10",
+      "sha256": "fcd253b1470e5265bda6a2670e26e4f556b6b03e8da297ff405d4a0de2e30eb4",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Authorization-state regression review confirms the preflight reports the correlated instrument authority accurately while retaining all call, cost, identity, resume, and final-stage guards.",
+      "evidence": "Harness-only correction review verifies preflight now requires four durable binding pointers and four immutable manifests, otherwise using the already-authorized local materializer; provider and final-stage guards are unchanged.",
       "findings": []
     },
     {
@@ -6625,13 +6625,13 @@
     },
     {
       "path": "tests/test_academic_factual_qa_r1_model_cascade.py",
-      "sha256": "7f4207b1157336f6f4681c370bbc397941f83729ff485e7d404f9bf9e77d1f7e",
+      "sha256": "bb32cb44ae85c03d69b91d14f0d089dfccd1896c54b1d4c1c0ed6da3f76f6495",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused authorization-state test verifies the exact four models, 200-case screen, and correlated paid-authority report before live preflight.",
+      "evidence": "Focused regressions verify the exact four-model authorized state and prove empty index directories cannot be reported as materialized.",
       "findings": []
     },
     {
