@@ -1653,13 +1653,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
-      "sha256": "99490e206e600c84da7bed65565c585d3ba9755f192af310e20ab29b1a24bf91",
+      "sha256": "4535feeb4636f72b030c52b836a6a22c7a864336acadeee6f5fb923b5a6a6a90",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Attempt-002 correction review preserves the exact candidates and gates while adding only a fresh attempt identity after the registered zero-call index-readiness failure; sealed-final authority remains false.",
+      "evidence": "Terminal-result review confirms the valid Refine decision, exact four-model evidence, revoked local/provider/paid authority, retained deterministic fallback, and sealed-final closure.",
       "findings": []
     },
     {
@@ -3745,7 +3745,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-evaluation-tooling",
-      "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+      "evidence": "Current-policy review confirms the immutable OpenAI candidate profile remains reproducible while deterministic generation is the selected release fallback after the valid cascade Refine result.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
@@ -4575,7 +4575,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "c833680a9dee3cf457c903a9e87292288e460d5a3c0ca1ab794b6cf11e3cf3aa"
+      "sha256": "bfc52b19bf61b5fb30eba266c46bf1c61b0e26cf6b7a91a323547e69dc0b83cf"
     },
     {
       "audit_status": "audited",
@@ -5648,12 +5648,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Policy v7 records all four screened product generators as quality-failed/not-selected, preserves unexecuted advisory roles, and retains deterministic generation for release without enabling provider execution.",
       "findings": [],
       "path": "src/digital_twin/model_policy.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "77bf0119c0ec9f3e74cfe0ee693e3c399b4e7c7fb033cf6af6cde7f988bd5950"
+      "sha256": "223106a7ab0bddefcf103a006c8b36bcec62be18cc885a4b40463a23c1741bc2"
     },
     {
       "audit_status": "audited",
@@ -5829,7 +5829,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "6e7fa17528283cf009130da3ed33701803a81fadbe103555a4161e8b083eaff8"
+      "sha256": "7d1cb898f90a21b46ac7b1df1e9e95e06f6ef0fc32b84bfd560272146518be97"
     },
     {
       "audit_status": "audited",
@@ -5868,7 +5868,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Focused freeze tests confirm the completed cascade authority is revoked while the repository-wide evaluation freeze and unrelated bounded authorization remain intact.",
       "findings": [],
       "path": "src/digital_twin/student/migrations.py",
       "reviewed_at": "2026-08-29",
@@ -6209,12 +6209,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify only the named R1 cascade gains external/local/method authority; held-out, sealed-final, private-source, external-delivery, promotion, and unrelated operations remain rejected.",
+      "evidence": "Focused freeze-policy tests verify the completed R1 cascade has no bounded authority and every held-out, final, private-source, external-delivery, promotion, and unrelated operation remains rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "b2259a405b4eca5a69ae8417fa87539bb41ed8dbd327478b28a46140d3631525"
+      "sha256": "85a5fe9ba6be0d581457369db948ef51e95f2e144b6ea911150f087be0419751"
     },
     {
       "audit_status": "audited",
@@ -6625,13 +6625,13 @@
     },
     {
       "path": "tests/test_academic_factual_qa_r1_model_cascade.py",
-      "sha256": "bb32cb44ae85c03d69b91d14f0d089dfccd1896c54b1d4c1c0ed6da3f76f6495",
+      "sha256": "e4c9fe82df844b63b6dffa0944863bc857aed3e89816cdb61a0838672d7ec0d2",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused regressions verify the exact four-model authorized state and prove empty index directories cannot be reported as materialized.",
+      "evidence": "Focused regressions verify the exact four-model contract is now build-only after terminal revocation and prove empty index directories cannot be reported as materialized.",
       "findings": []
     },
     {

@@ -13,29 +13,30 @@ closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
 produced a valid product-quality estimate.
 
 The active Sunday R1-demo successor starts from merged PR #145 and is published
-for review in draft PR #146. It replaces the
-brittle batch-order contract prospectively rather than reinterpreting any prior
-result. Evaluation-v2 reconciles provider output by unique case ID, rejects
-duplicate/missing/unknown IDs, deterministically restores order, quarantines a
-malformed case without discarding valid peers, and limits retry to transport
-failures. A four-model direct-OpenAI cascade is build-verified over the same
-stratified 200-case screen, 500-case development package, and 100-case paired
-control. AFQC-084 now freezes and authorizes exactly this bounded cascade after
-the official model IDs, Responses API support, structured outputs, and current
-prices were reverified. No product-model result exists yet, and the sealed
-10,000-case run remains unauthorized.
+for review in draft PR #146. Evaluation-v2 completed its corrected four-model
+screen as valid unfavorable evidence. GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6
+Terra, and GPT-5.6 Sol each persisted the same 200 cases with 181/181 successful
+provider calls, but none passed the frozen safety screen. Grounded factual
+success ranged from 15.0% to 18.1%; shared all-evidence@3 was 57.5%, Evidence
+Recall@5 was 66.6%, and every model released at least one severe unsupported
+answer to an ambiguous question. The result is `completed-refine`; no model,
+500-case stage, paired control, or advisory audit was selected. All cascade
+authority is revoked, the deterministic grounded generator remains the release
+fallback, and the sealed 10,000-case run remains unauthorized.
 
 The product track is also build-complete but not yet release-qualified. It now
 includes a versioned professor profile with a hash-bound ten-case preview,
 privacy-minimized post-turn learning-gap signals and professor aggregates, and
 professor-scheduled A0 in-app outreach with durable worker, consent, expiry,
 deduplication, and cancellation. T1 generation preserves authoritative atomic
-claim lineage and adds pedagogical wording in deterministic code. A prospective
-50-trajectory/200-turn-per-condition T0/T1 confirmation is frozen without model
-or paid authority; it binds the model selected by the cascade and keeps T0 as
-rollback. The preview Compose boundary is ready for a temporary Cloudflare
-Quick Tunnel, but no public URL or production claim exists yet. The immediate
-action is the clean paid cascade execution followed by mandatory revocation.
+claim lineage and adds pedagogical wording in deterministic code. The
+prospective 50-trajectory/200-turn-per-condition T0/T1 confirmation remains
+provider-unauthorized and still assumes a selected model, so it must now be
+bound prospectively to the explicit deterministic fallback before a network-
+free graph confirmation. This may qualify graph mechanics, persistence, and
+policy behavior, but not LLM-backed autonomy. The preview Compose boundary is
+ready for a temporary Cloudflare Quick Tunnel, but no public URL or production
+claim exists yet.
 
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
@@ -1011,12 +1012,12 @@ continues to hold report, presentation, and professor-communication work.
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
 | Product UX and autonomous tutoring | Keep T0 as release baseline; T1 development Go Deeper | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free development passed every gate | Design and separately authorize one untouched T0/T1 confirmation; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
-| Text retrieval | Keep experimentally | M2 hybrid BM25 plus local Qwen3 dense RRF selected on the one-time cross-course held-out comparison; BM25 rollback | Release-candidate end-to-end quality against realistic workload |
+| Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
-| Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
+| Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Reference validation 001 invalid / authority revoked | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passed retrieval-index qualification. Checkpoints 006/007 remain invalid evidence. The fresh reference method is built, but its first paid validation stopped after seven calls on a provider-schema/local-validator mismatch; no quality estimate exists | Decide whether to build one prospective schema-aligned validation attempt. Do not retry 001, run a fresh 500+100 product confirmation, open the sealed 10,000 cases, or claim release readiness |
+| Large factual QA | Valid 200-case product Refine / final closed | The earlier 10,000 correlated template rows remain engineering evidence. Evaluation-v2 produced a valid leakage-free four-model product screen, selected no model, and stopped before 500/control/advisory stages | Preserve the result, keep the sealed 10,000 cases closed, and make one prospective retrieval/evidence method decision before another academic execution |
 
 ## Release readiness and critical path
 
@@ -1031,10 +1032,10 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
-| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / build-ready | Execute the authorized four-model 200-to-500 cascade once, select the product model and paired-control grounding result, then keep the sealed 10,000 execution closed until after the demo and a separate authorization |
-| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Select or reject structured evidence coverage from the cascade's fixed 100-case paired control; do not close from build evidence alone |
+| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Preserve the valid four-model screen: no candidate passed, shared retrieval missed required evidence, deterministic fallback retained, and the sealed 10,000 execution closed pending one retrieval/evidence method successor |
+| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Refine | Do not select structured evidence coverage from the unopened paired control; address the shared retrieval/evidence failure prospectively before academic scaling |
 | 6 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
-| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Run the frozen 50-trajectory T0/T1 confirmation with the selected model; preserve T0 as rollback until every autonomous gate passes |
+| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Rebind the prospective confirmation to the explicit deterministic fallback, run it network-free, and describe any pass as graph/policy evidence rather than LLM-backed autonomy; preserve T0 as rollback |
 | 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through the local and public demo journeys; keep A1 and Discord disabled |
 | 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Keep durable hosting open; the Sunday Quick Tunnel is a temporary release-candidate walkthrough, not production |
 | 10 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |

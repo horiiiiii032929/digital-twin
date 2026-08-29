@@ -1,8 +1,9 @@
 {
   "schema_version": "2.0.0",
   "instrument_id": "academic-factual-qa-r1-model-cascade-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine",
   "execution_attempt_id": "002",
+  "result_id": "academic-factual-qa-r1-model-cascade-001-attempt-002-refine",
   "supersedes_invalid_attempt": "academic-factual-qa-r1-model-cascade-001-attempt-001-invalid",
   "decision_question": "Which allowlisted OpenAI model is the lowest-latency, lowest-cost model that passes the same grounded T0 product gates?",
   "public_cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
@@ -77,9 +78,9 @@
     "emergency_cost_stop_usd": 50.0,
     "atomic_sqlite_checkpoints": true,
     "safe_resume": true,
-    "local_index_materialization_authorized": true,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "local_index_materialization_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "sealed_final_execution_authorized": false
   },
   "candidates": [

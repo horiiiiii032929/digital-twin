@@ -32,13 +32,16 @@ the release-critical path.
 
 ## Active Sunday checkpoint
 
-The current P0 card is #127's build-verified four-model development cascade in
-draft PR #146.
-It replaces the stopped batch-order attempts with evaluation-v2 and is waiting
-for one paid authorization. In parallel, #107, #132, and #134 have integrated
+The current P0 result is #127's valid four-model `Refine` screen in draft PR
+#146. All four OpenAI candidates were operationally stable, but none passed the
+frozen safety screen; the shared retrieval/evidence path and ambiguous-boundary
+handling failed. The one-time authority is revoked and deterministic generation
+is retained for the demo without an LLM-quality claim. In parallel, #107, #132,
+and #134 have integrated
 build-only product work on the active R1 demo PR, but remain open until their
-T0/T1, privacy/workflow, and public-demo evidence passes. #105 is decided by the
-selected model's paired 100-case control. #24 remains open because a synthetic
+T0/T1, privacy/workflow, and public-demo evidence passes. #105 is decided by a
+new prospective retrieval/evidence method because no model reached the paired
+100-case control. #24 remains open because a synthetic
 demo-professor approval is not the real fidelity reference. #88, #9, #25, and
 parent #8 remain open because a Quick Tunnel is not durable production.
 

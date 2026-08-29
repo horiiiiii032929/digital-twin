@@ -173,7 +173,9 @@ def validate() -> dict[str, Any]:
         "active_release_models": sorted(ACTIVE_RELEASE_MODEL_IDS),
         "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {
-            "generator": generator_model,
+            "generator": "deterministic-grounded-generator-v1",
+            "candidate_generator": generator_model,
+            "candidate_status": "r1-cascade-001-quality-failed-not-selected",
             "embedding": embedding_model,
         },
         "registered_models": registered,

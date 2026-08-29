@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-29-v6"
+POLICY_ID = "current-model-policy-2026-08-29-v7"
 OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
 OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
 OPENAI_ROUTINE_REVIEW_MODEL = "gpt-5.4-nano-2026-03-17"
@@ -73,32 +73,32 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="product-generator",
         provider_model=OPENAI_HIGH_VOLUME_MODEL,
-        status="prospective-r1-openai-only-pending-development-evaluation",
+        status="r1-cascade-001-quality-failed-not-selected",
     ),
     CurrentModelBinding(
         role="routine-advisory-reviewer",
         provider_model=OPENAI_ROUTINE_REVIEW_MODEL,
-        status="prospective-r1-openai-only-pending-development-evaluation",
+        status="prospective-r1-advisory-not-run",
     ),
     CurrentModelBinding(
         role="critical-truth-reviewer",
         provider_model=OPENAI_SEMANTIC_REVIEW_MODEL,
-        status="prospective-r1-openai-only-pending-development-evaluation",
+        status="prospective-r1-advisory-not-run",
     ),
     CurrentModelBinding(
         role="product-generator-candidate-high-volume",
         provider_model=OPENAI_GPT_5_6_LUNA_MODEL,
-        status="prospective-r1-four-model-funnel-not-selected",
+        status="r1-cascade-001-quality-failed-not-selected",
     ),
     CurrentModelBinding(
         role="product-generator-candidate-balanced",
         provider_model=OPENAI_GPT_5_6_TERRA_MODEL,
-        status="prospective-r1-four-model-funnel-not-selected",
+        status="r1-cascade-001-quality-failed-not-selected",
     ),
     CurrentModelBinding(
         role="product-generator-candidate-frontier-and-advisory-reviewer",
         provider_model=OPENAI_GPT_5_6_SOL_MODEL,
-        status="prospective-r1-four-model-funnel-not-selected",
+        status="r1-cascade-001-quality-failed-not-selected",
     ),
     CurrentModelBinding(
         role="historical-product-generator",

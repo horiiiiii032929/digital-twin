@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-r1-model-cascade-001-attempt-002-refine",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005-screen-200",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "c6338a9b5a9e641d472325434f954d4b33d5e6ec",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "gpt-5-4-mini-low",
+        "version": "gpt-5.4-mini-2026-03-17",
+        "configuration": {
+          "reasoning_effort": "low",
+          "maximum_output_tokens": 600,
+          "request_store": false,
+          "provider_calls": 181,
+          "input_tokens": 350043,
+          "output_tokens": 30994,
+          "reported_cost_usd": 0.40200525,
+          "latency_ms_p95": 3007.62575,
+          "provider_ledger_sha256": "e82dc7d54ef605b452c71eb79ba017df0533e3eabe7ac8e14db45f9909e3bbc9"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.16875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.5125, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "source-version-validity", "value": 0.95, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "canonical-all-evidence-at-3", "value": 0.575, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.665625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "Three severe unsupported boundary releases."},
+        {"name": "provider-completion", "passed": true, "evidence": "181/181 provider calls completed with no malformed response or retry."}
+      ],
+      "failures_by_category": {"severe-unsupported-release": 3, "incomplete-evidence-at-3": 68, "incomplete-evidence-at-5": 54}
+    },
+    {
+      "implementation": {
+        "implementation_id": "gpt-5-6-luna-low",
+        "version": "gpt-5.6-luna",
+        "configuration": {
+          "reasoning_effort": "low",
+          "maximum_output_tokens": 600,
+          "request_store": false,
+          "provider_calls": 181,
+          "input_tokens": 350043,
+          "output_tokens": 23705,
+          "reported_cost_usd": 0.0984546,
+          "latency_ms_p95": 3149.125208,
+          "provider_ledger_sha256": "5ce76b1fd8ea21398a4ba606969548e859a8b342cad423e0414aa48c134a6e0a"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.15, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.51875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.925, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "source-version-validity", "value": 0.95625, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "canonical-all-evidence-at-3", "value": 0.575, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.665625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One severe unsupported boundary release."},
+        {"name": "provider-completion", "passed": true, "evidence": "181/181 provider calls completed with no malformed response or retry."}
+      ],
+      "failures_by_category": {"severe-unsupported-release": 1, "incomplete-evidence-at-3": 68, "incomplete-evidence-at-5": 54}
+    },
+    {
+      "implementation": {
+        "implementation_id": "gpt-5-6-terra-low",
+        "version": "gpt-5.6-terra",
+        "configuration": {
+          "reasoning_effort": "low",
+          "maximum_output_tokens": 600,
+          "request_store": false,
+          "provider_calls": 181,
+          "input_tokens": 350043,
+          "output_tokens": 16297,
+          "reported_cost_usd": 0.89565,
+          "latency_ms_p95": 2912.082333,
+          "provider_ledger_sha256": "50fa41d106f5f3bf70f20e59017ad76a6830d078a50b01c740c9f6bda28a817e"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.18125, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.525, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.925, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "source-version-validity", "value": 0.98125, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "canonical-all-evidence-at-3", "value": 0.575, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.665625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "Two severe unsupported boundary releases."},
+        {"name": "provider-completion", "passed": true, "evidence": "181/181 provider calls completed with no malformed response or retry."}
+      ],
+      "failures_by_category": {"severe-unsupported-release": 2, "incomplete-evidence-at-3": 68, "incomplete-evidence-at-5": 54}
+    },
+    {
+      "implementation": {
+        "implementation_id": "gpt-5-6-sol-low",
+        "version": "gpt-5.6-sol",
+        "configuration": {
+          "reasoning_effort": "low",
+          "maximum_output_tokens": 600,
+          "request_store": false,
+          "provider_calls": 181,
+          "input_tokens": 350043,
+          "output_tokens": 17000,
+          "reported_cost_usd": 1.740172,
+          "latency_ms_p95": 3997.594667,
+          "provider_ledger_sha256": "4bb5f379bd99d665001e31e977d271c1ab8d299081e25a266ed579131802e407"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.1625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.575, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.95, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "source-version-validity", "value": 0.96875, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "canonical-all-evidence-at-3", "value": 0.575, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.665625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One severe unsupported boundary release."},
+        {"name": "provider-completion", "passed": true, "evidence": "181/181 provider calls completed with no malformed response or retry."}
+      ],
+      "failures_by_category": {"severe-unsupported-release": 1, "incomplete-evidence-at-3": 68, "incomplete-evidence-at-5": 54}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "No model passed the frozen 200-case screening gate. Shared retrieval evidence coverage was materially below the preregistered target and every generator released at least one severe unsupported answer to an ambiguous question.",
+    "limitations": [
+      "This is a development screen, not the sealed 10,000-case result.",
+      "The 500-case, paired-control, and advisory-review stages did not open because no model was eligible.",
+      "The benchmark uses open educational sources and does not establish professor fidelity, usability, learning outcomes, or true visual reasoning."
+    ],
+    "retained_fallback": "deterministic-grounded-generator"
+  },
+  "operational_summary": {
+    "persisted_responses": 800,
+    "provider_calls": 724,
+    "provider_completion": 1.0,
+    "malformed_responses": 0,
+    "transport_retries": 0,
+    "input_tokens": 1400172,
+    "output_tokens": 87996,
+    "reported_cost_usd": 3.13628185,
+    "cascade_state_sha256": "43d41d008b7462d5b2a50bb9a5a0cd0a5a8bf2fda3554c0ed23f7feb0693788d",
+    "retrieval_index_build_seconds": 641.75459,
+    "retrieval_index_artifact_count": 4,
+    "retrieval_source_region_count": 2100,
+    "sealed_final_execution_authorized": false
+  }
+}

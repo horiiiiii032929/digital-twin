@@ -4,9 +4,9 @@ Status date: 2026-08-29
 
 ## Current checkpoint
 
-PR #145 is merged as immutable historical evidence. The active build-only
-successor removes provider-array ordering from the correctness boundary and
-uses one finite direct-OpenAI product funnel:
+PR #145 is merged as immutable historical evidence. The evaluation-v2
+successor removed provider-array ordering from the correctness boundary and
+completed one finite direct-OpenAI product funnel:
 
 - `gpt-5.4-mini-2026-03-17`, `gpt-5.6-luna`, `gpt-5.6-terra`, and
   `gpt-5.6-sol` answer the same 200 development cases;
@@ -17,10 +17,13 @@ uses one finite direct-OpenAI product funnel:
 - `gpt-5.6-sol` supplies non-authoritative review of deterministic failures and
   a seeded passing sample.
 
-Responses are joined by unique case ID, malformed cases are quarantined, and
-only transport failures may consume the bounded retry allowance. Source-linked
-truth and scoring remain deterministic. The cascade has no paid authority and
-the sealed 10,000-case run remains post-demo.
+Responses were joined by unique case ID and source-linked truth remained
+deterministic. All 724 calls completed without malformed output or retry, but no
+model passed the screening gate. Grounded success was 15.0–18.1%, shared all-
+evidence@3 was 57.5%, and every model produced a severe unsupported boundary
+release. The result is `completed-refine`; authority is revoked, deterministic
+generation is retained, and the sealed 10,000-case run remains post-demo and
+unauthorized.
 
 The same branch adds the product release boundary: profile-selected exact model
 configuration, source-bound atomic T1 generation, a prospective 50-trajectory
@@ -100,11 +103,10 @@ stop; no successor 500+100 run is designed or authorized yet.
 
 The current finite path supersedes the historical list below:
 
-1. authorize and execute `academic-factual-qa-r1-model-cascade-001` once;
-2. bind a passing selected model, or retain deterministic generation with no
-   LLM-quality claim;
-3. separately authorize the frozen T0/T1 confirmation and select T1 only on a
-   complete pass;
+1. preserve `academic-factual-qa-r1-model-cascade-001` as valid `Refine`;
+2. retain deterministic generation with no LLM-quality claim;
+3. rebind and run the T0/T1 confirmation network-free under that fallback,
+   selecting T1 only on a complete graph/policy pass;
 4. run local container/HTTPS/recovery and public Quick Tunnel journeys;
 5. publish the demo evidence, then build the separately authorized sealed
    10,000-case run.

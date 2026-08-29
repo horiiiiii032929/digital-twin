@@ -36,12 +36,10 @@ is deliberately post-demo.
 
 The finite order is:
 
-1. run the authorized four-model 200→500 development cascade and paired
-   100-case grounding control once;
-2. bind a passing model, or explicitly retain the deterministic generator when
-   no model passes;
-3. run one separately authorized 50-trajectory T0/T1 confirmation and keep T0
-   when T1 fails;
+1. preserve the completed four-model `Refine` result and revoked authority;
+2. retain the deterministic generator and make no LLM-quality claim;
+3. rebind the 50-trajectory T0/T1 confirmation to that fallback, run it
+   network-free, and keep T0 when T1 fails;
 4. qualify the professor-profile, learning-gap, and A0 outreach workflows;
 5. pass container, HTTPS, persistence, backup/restore, and rollback checks;
 6. publish the temporary URL and walkthrough.
@@ -67,7 +65,7 @@ be described as LLM-backed autonomy.
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | T1 now uses source-bound atomic claims and deterministic pedagogical composition. The 50-trajectory confirmation is build-verified and unauthorized; T0 remains rollback | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | A0 professor-scheduled in-app creation/list/cancel/status, worker delivery, consent, expiry, deduplication, and restart boundaries are implemented for release qualification. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Historical invalid results remain preserved. Evaluation-v2 and the four-model cascade are build-verified with ID reconciliation, per-case quarantine, atomic resume, and deterministic authority. Paid execution is the next gate; the sealed 10,000 run stays post-demo | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Evaluation-v2 produced valid unfavorable evidence: all four models completed, none passed, grounded success was 15.0–18.1%, shared all-evidence@3 was 57.5%, and every model had a severe unsupported release. Deterministic fallback is retained; final 10,000 stays closed pending a retrieval/evidence method successor | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Draft/preview/approval/withdrawal workflow and ten-case preview are implemented. Synthetic demo approval is not the professor-fidelity reference, so C0–C3 remains open | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Preview Compose now includes API, ingestion, outreach, web, and pinned Cloudflare tunnel services. Public workflow and recovery qualification remain pending | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local evidence exists; target-host evidence pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |

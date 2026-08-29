@@ -26,12 +26,11 @@ chmod 600 .env.staging
 ```
 
 Set `APP_DOMAIN`, `TLS_EMAIL`, and a random bootstrap password. Keep
-`APP_GENERATOR_MODE=deterministic` for network-free staging. After the R1 model
-cascade passes, set `APP_GENERATOR_MODE=openai-profile-selected`, set
-`OPENAI_PROFILE_SELECTED` to the exact selected allowlisted model, and provide
-`OPENAI_API_KEY` only through the deployment environment. The direct Responses
-API binding uses `store: false`, structured output, exact identity checks, and
-process-local call/cost caps. Never put real secrets in the example file or Git.
+`APP_GENERATOR_MODE=deterministic` for the R1 demo: the four-model cascade did
+not select an OpenAI generator. Do not set `OPENAI_PROFILE_SELECTED` or claim
+LLM-backed autonomy. Any future direct Responses API profile still requires a
+new passing result, `store: false`, exact identity checks, and process-local
+call/cost caps. Never put real secrets in the example file or Git.
 
 Keep `APP_STUDENT_TUTORING_MODE=grounded-assistant` in staging. The bounded T1
 tutoring graph is implemented behind an explicit local demo/test mode, but the
