@@ -1,0 +1,37 @@
+{
+	admin off
+}
+
+localhost {
+	tls internal
+	encode zstd gzip
+	request_body {
+		max_size 64MB
+	}
+
+	@api path /api/*
+	handle @api {
+		reverse_proxy api:8000
+	}
+
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+
+	header {
+		-Server
+		Content-Security-Policy "default-src 'self'; connect-src 'self'; font-src 'self'; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+		Strict-Transport-Security "max-age=31536000"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Referrer-Policy "no-referrer"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}

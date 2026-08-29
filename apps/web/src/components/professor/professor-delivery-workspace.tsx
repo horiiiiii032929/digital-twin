@@ -394,7 +394,7 @@ export function ProfessorDeliveryWorkspace({
         </aside>
 
         <section className="flex min-h-0 min-w-0 flex-col">
-          <header className="flex min-h-14 items-center gap-3 border-b px-3 pr-16 sm:px-5 sm:pr-20">
+          <header className="flex min-h-14 items-center gap-3 border-b pl-3 pr-14 sm:pl-5 xl:pr-56">
             <Button
               className="lg:hidden"
               size="icon"
@@ -449,8 +449,8 @@ export function ProfessorDeliveryWorkspace({
                 </label>
               ) : null}
 
-              <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
-                <div className="space-y-5">
+              <section className="grid grid-cols-[minmax(0,1fr)] gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
+                <div className="min-w-0 space-y-5">
                   <CourseHeader course={selectedCourse} loading={loading} />
                   {selectedCourse ? (
                     <>
@@ -495,7 +495,7 @@ export function ProfessorDeliveryWorkspace({
                   ) : null}
                 </div>
 
-                <aside className="space-y-5">
+                <aside className="min-w-0 space-y-5">
                   <CreateCourseCard busy={busy} onSubmit={createCourse} />
                   {selectedCourse ? (
                     <StudentsCard
@@ -543,12 +543,12 @@ function CourseHeader({
   const published = course.releases.find((release) => release.status === "published")
   return (
     <header className="rounded-xl border bg-white px-5 py-5 sm:px-6">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:justify-between">
+        <div className="min-w-0">
           <p className="text-xs font-medium text-muted-foreground">Selected course</p>
-          <h2 className="mt-1 text-2xl font-semibold tracking-[-0.03em]">{course.title}</h2>
+          <h2 className="mt-1 break-words text-2xl font-semibold tracking-[-0.03em]">{course.title}</h2>
         </div>
-        <Badge variant={published ? "default" : "outline"}>
+        <Badge className="shrink-0" variant={published ? "default" : "outline"}>
           {published ? "Published" : "Not published"}
         </Badge>
       </div>

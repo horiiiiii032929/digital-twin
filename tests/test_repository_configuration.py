@@ -33,7 +33,7 @@ def test_runtime_container_bases_are_digest_pinned_and_surface_is_minimal() -> N
     assert len(from_lines) == 3
     assert all(IMAGE_DIGEST.fullmatch(line) for line in from_lines)
     assert "COPY scripts scripts" not in dockerfile
-    assert "COPY research/05_evaluation/records" not in dockerfile
+    assert "COPY research/05_evaluation/records research/05_evaluation/records" not in dockerfile
     for operational_script in (
         "backup_runtime.py",
         "bootstrap_admin.py",
@@ -45,6 +45,12 @@ def test_runtime_container_bases_are_digest_pinned_and_surface_is_minimal() -> N
             f"COPY scripts/{operational_script} scripts/{operational_script}"
             in dockerfile
         )
+    assert (
+        "COPY research/05_evaluation/records/"
+        "autonomous-tutoring-r1-confirmation-002.json "
+        "research/05_evaluation/records/"
+        "autonomous-tutoring-r1-confirmation-002.json"
+    ) in dockerfile
 
 
 def test_historical_review_commands_do_not_bake_in_reproduction_confirmation() -> None:
@@ -61,6 +67,19 @@ def test_vite_reads_the_documented_repository_root_environment() -> None:
     vite_config = (ROOT / "apps/web/vite.config.ts").read_text()
 
     assert "envDir: path.resolve(import.meta.dirname, '../..')" in vite_config
+
+
+def test_vite_does_not_force_a_cyclic_vendor_bundle() -> None:
+    vite_config = (ROOT / "apps/web/vite.config.ts").read_text()
+
+    assert "codeSplitting" not in vite_config
+    assert "name: 'vendor'" not in vite_config
+
+
+def test_browser_qa_state_is_ignored_because_it_can_contain_session_cookies() -> None:
+    gitignore = (ROOT / ".gitignore").read_text()
+
+    assert ".playwright-cli/" in gitignore
 
 
 def test_caddy_security_headers_include_transport_and_script_boundaries() -> None:

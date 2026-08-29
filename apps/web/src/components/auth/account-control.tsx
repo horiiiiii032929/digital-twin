@@ -48,26 +48,22 @@ export function AccountControl({
   }
 
   return (
-    <details className="group fixed top-3 right-3 z-50">
-      <summary className="flex cursor-pointer list-none items-center gap-2 rounded-xl border bg-white/95 p-1.5 pl-3 shadow-sm backdrop-blur marker:hidden">
-        <div className="hidden min-w-0 text-right sm:block">
-          <p className="max-w-40 truncate text-xs font-medium">
-            {profile.display_name}
-          </p>
-          <p className="text-[0.68rem] capitalize text-muted-foreground">
-            {profile.role}
-          </p>
-        </div>
+    <details className="group fixed top-3 right-3 z-20">
+      <summary
+        aria-label={`Open account menu for ${profile.display_name}`}
+        className="flex cursor-pointer list-none items-center rounded-xl border bg-white/95 p-1.5 shadow-sm backdrop-blur marker:hidden"
+        title={profile.display_name}
+      >
         <span className="flex size-7 items-center justify-center rounded-md bg-muted">
           <UserRound className="size-3.5" aria-hidden="true" />
         </span>
       </summary>
 
       <div className="absolute top-[calc(100%+0.5rem)] right-0 w-[min(22rem,calc(100vw-1.5rem))] rounded-xl border bg-white p-4 shadow-lg">
-        <p className="text-sm font-semibold">Account security</p>
-        <p className="mt-1 truncate text-xs text-muted-foreground">
-          {profile.email}
-        </p>
+        <p className="truncate text-sm font-semibold">{profile.display_name}</p>
+        <p className="mt-0.5 text-xs capitalize text-muted-foreground">{profile.role}</p>
+        <p className="mt-3 text-sm font-semibold">Account security</p>
+        <p className="mt-1 truncate text-xs text-muted-foreground">{profile.email}</p>
         <form className="mt-4 space-y-3" onSubmit={submitPassword}>
           <PasswordField label="Current password" name="current_password" />
           <PasswordField label="New password" name="new_password" />

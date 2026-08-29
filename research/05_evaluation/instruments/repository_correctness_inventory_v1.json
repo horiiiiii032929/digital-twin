@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 692
+    "audited": 696
   },
   "category_counts": {
     "active_frontend": 69,
@@ -8,18 +8,18 @@
     "active_runtime": 116,
     "ci_configuration": 1,
     "deferred_tooling": 2,
-    "deployment_configuration": 6,
+    "deployment_configuration": 9,
     "evaluation_configuration": 174,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 146
+    "verification": 147
   },
-  "file_count": 692,
+  "file_count": 696,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b28777cdec0f643ca0a698f95ca7538e4bc7d4574d9148b5c525dfce543278a7",
+  "record_sha256": "46058f4d86c77628398f4f6ef0d83789034d0edc2b7219e1139febd09a44c93f",
   "records": [
     {
       "audit": {
@@ -83,7 +83,7 @@
       "package_commands": [],
       "path": ".gitignore",
       "risk": "medium",
-      "sha256": "ae1b666a6eef702107e5446c6aecb49e2c43f4e609c23123b54f8e9355331774"
+      "sha256": "acb89553cb79fce1b215708799ae2f576cf5d44ec9fa99aabdd8ddee263f1e4e"
     },
     {
       "audit": {
@@ -195,7 +195,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/auth/account-control.tsx",
       "risk": "high",
-      "sha256": "f0c4edb3a67c6a3852d1b1c2db2084583a7eaf041f9d87776aaa450185d0d80f"
+      "sha256": "91fb271a0ccedb43a8c1777af9e19c97354f12aa8491269556d1da4a0a0059b1"
     },
     {
       "audit": {
@@ -211,7 +211,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/auth/admin-workspace.tsx",
       "risk": "high",
-      "sha256": "54558706eae4f6d1fa01488f63e273529cb0e7f94b8377caf4642d5f9c506c3f"
+      "sha256": "6cc4b189f7a8328a294a7f2384b829edec4b88104131e568eade3c9b72bb22dd"
     },
     {
       "audit": {
@@ -403,7 +403,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "444a6be445cca43750fe5537183e83bc07c6d192dcf638ecd44d6c7c187b622d"
+      "sha256": "99ab9dd539cb1e645051ee94c86040b3ad0a6cf645739820d869c6ea69500475"
     },
     {
       "audit": {
@@ -419,7 +419,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "542eebea94029dc6883c67183d1ad8c3a70aba451f2bbfcd1ed90d999053b01c"
+      "sha256": "21691e23143faf2d33144dc6dcb6e869c5636b661278c67f077eeb469f6c991d"
     },
     {
       "audit": {
@@ -451,7 +451,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "risk": "high",
-      "sha256": "7d5c107d0ab68c65b257112bbd94d73879c8a663d29c0fd420c36f08c21fbd83"
+      "sha256": "dd37e40ab2dfc3408c798548ffe5b3822f845cfaf7b3e2d4825117043ae72e1d"
     },
     {
       "audit": {
@@ -1219,7 +1219,23 @@
       "package_commands": [],
       "path": "apps/web/vite.config.ts",
       "risk": "high",
-      "sha256": "3c6382ce8b703bb2912b33d2db9fb24bab467699cad6de567b244bc120de277c"
+      "sha256": "71ce5eb9be049699c97584542a8194c61d42d288b1ac93f13f6fbeb59be6f0f3"
+    },
+    {
+      "audit": {
+        "domain": "local-r1-release",
+        "evidence": "Dedicated local HTTPS topology reviewed with focused Compose tests, credentialed journey, restart, clean restore, rollback, and complete repository gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex local R1 release qualification"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "compose.local-r1.yml",
+      "risk": "high",
+      "sha256": "51d887ca05fe8c9056c06d763f110d0a88874ece031bdfaab4488386c8243f71"
     },
     {
       "audit": {
@@ -1271,6 +1287,22 @@
     },
     {
       "audit": {
+        "domain": "local-r1-release",
+        "evidence": "Internal localhost HTTPS, reverse proxy, HSTS, CSP, and least-privilege local release boundary passed Compose and live browser checks.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex local R1 release qualification"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "deploy/Caddyfile.local",
+      "risk": "high",
+      "sha256": "210f0b679609ccbced06ce744c35e42f3421eb0ca7c5a799d6447ecb0441e8a6"
+    },
+    {
+      "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
@@ -1299,7 +1331,23 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "78ac7d9fa01908c9e53d5f7a895c23b17aa5d65d4406ae9ef46f93a016c1ab22"
+      "sha256": "c5c52ac6d746f8650d00ba81ed4bd018ed6fe5ea5eef16f32f3d007899375b04"
+    },
+    {
+      "audit": {
+        "domain": "local-r1-release",
+        "evidence": "Example local settings expose no credential and retain safe deterministic T1, budget, and localhost defaults.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex local R1 release qualification"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "deploy/local-r1.env.example",
+      "risk": "high",
+      "sha256": "7f829fa594470fd798d7850afe2efbb055663f6921d7474c2fd6dc6fa2b780d1"
     },
     {
       "audit": {
@@ -1347,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d2eae1ba0e28d45420648c1250ab31baeef14166db240bb08fcbc15cd7856c9d"
+      "sha256": "5a0d535324cce8a25166b8646655b7b6fa12e53e2ee44933b993eec9b2bee64d"
     },
     {
       "audit": {
@@ -5017,7 +5065,7 @@
       ],
       "path": "scripts/build_repository_correctness_inventory.py",
       "risk": "high",
-      "sha256": "3598f6c6b9eb7ebc77dd64a0cd8b2cd0c3da31f81ac84806c715d2935b2436c7"
+      "sha256": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998"
     },
     {
       "audit": {
@@ -6121,7 +6169,7 @@
     {
       "audit": {
         "domain": "r1-local-release-qualification",
-        "evidence": "Code review, strict contract validation, pass simulation, and focused tests verify exclusive output, repository-freeze authorization, actual SQLite persistence and restart, duplicate protection, deterministic citation and claim checks, and zero provider/token/cost paths.",
+        "evidence": "Code review, strict contract validation, standardized result-record validation, pass simulation, and focused tests verify exclusive output, repository-freeze authorization, actual SQLite persistence and restart, duplicate protection, deterministic citation and claim checks, and zero provider/token/cost paths.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -6137,7 +6185,7 @@
       ],
       "path": "scripts/run_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "high",
-      "sha256": "dde8c60033c7f8eea52aa99a209aa4b185211db41479ff69c344a288b1a231f0"
+      "sha256": "6f4557a23df7b954bf80684566e762053366c38c6d3b8ffdefd409ee0972dac7"
     },
     {
       "audit": {
@@ -7320,7 +7368,7 @@
       ],
       "path": "scripts/verify_https_staging.py",
       "risk": "high",
-      "sha256": "4b0452b61e161c2ed0d9657f88ca17d8aa59470544cce9aa176fe4804461f6db"
+      "sha256": "b726e7be65083e72aa51e6d540fe0a0d3b64e3ee1f245cd1b79f6aeae29ae45f"
     },
     {
       "audit": {
@@ -10417,7 +10465,7 @@
     {
       "audit": {
         "domain": "r1-local-release-qualification",
-        "evidence": "Focused tests prove the confirmation remains finite and balanced at 50 trajectories and 200 turns per condition, with unique source namespaces and deterministic zero-cost model binding.",
+        "evidence": "Focused tests prove the confirmation remains finite and balanced at 50 trajectories and 200 turns per condition, with unique source namespaces, deterministic zero-cost model binding, and fail-closed detection of standardized record drift.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -10428,7 +10476,7 @@
       "package_commands": [],
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
-      "sha256": "6c2accc0dbbdd3871c2ef24128d15d3005510c085b5f2106f6e72dc20a3e1d21"
+      "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
     },
     {
       "audit": {
@@ -10556,7 +10604,7 @@
       "package_commands": [],
       "path": "tests/test_build_repository_correctness_inventory.py",
       "risk": "medium",
-      "sha256": "6c041b9b525be1d48b57f13bd0045bee892b7fa88b8b5731e97904bab22f73b1"
+      "sha256": "e8fd26680f0b7dceef66998b517fe00d1a63e14c3e32dd2d64fe3bff50e71630"
     },
     {
       "audit": {
@@ -11011,6 +11059,22 @@
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "Codex local R1 release qualification"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_local_r1_compose.py",
+      "risk": "medium",
+      "sha256": "8faa3446a35d952d3798cd60f62cc9b1e8a97d1b2037cb63094e6820f67facff"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
       },
@@ -11116,7 +11180,7 @@
       "package_commands": [],
       "path": "tests/test_repository_configuration.py",
       "risk": "medium",
-      "sha256": "899d0c8762ea678580c599eb63e4d5dd3179d36656128bcdd6fefa40247052c5"
+      "sha256": "f08ad1c2436a79fc0f75e5d4d40649ca69f97b560a06cc9f32af58b7e9fd85d3"
     },
     {
       "audit": {
@@ -11548,7 +11612,7 @@
       "package_commands": [],
       "path": "tests/test_verify_https_staging.py",
       "risk": "medium",
-      "sha256": "b02284c22c3404fcee4ec82cde8c69980332ed2f50cdea853b08b71392037b46"
+      "sha256": "1c2d523f09d1421585e82fdd84f21544405341c104c8cf20fecbde42e35c6e0b"
     },
     {
       "audit": {
@@ -11568,8 +11632,8 @@
     }
   ],
   "risk_counts": {
-    "high": 532,
-    "medium": 160
+    "high": 535,
+    "medium": 161
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

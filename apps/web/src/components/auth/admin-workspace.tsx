@@ -45,7 +45,7 @@ export function AdminWorkspace() {
   return (
     <main className="min-h-dvh bg-[var(--shell)]">
       <header className="border-b bg-white">
-        <div className="mx-auto flex max-w-6xl items-center px-5 sm:px-8">
+        <div className="mx-auto flex max-w-6xl items-center pl-5 pr-16 sm:pl-8 xl:pr-56">
           <WorkspaceBrand className="border-0 px-0" />
           <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
             Administration

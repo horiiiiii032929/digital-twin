@@ -20,6 +20,7 @@ htmlcov/
 # Editor and tool state
 .idea/
 .vscode/
+.playwright-cli/
 *.tsbuildinfo
 
 # Notebook runtime state

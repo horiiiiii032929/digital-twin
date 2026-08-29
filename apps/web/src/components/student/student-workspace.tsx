@@ -348,7 +348,7 @@ function StudentHeader({
   onOpenOutreach: () => void
 }) {
   return (
-    <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white px-3 sm:px-5">
+    <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white pl-3 pr-14 sm:pl-5 xl:pr-56">
       <div className="flex min-w-0 items-center gap-2.5">
         <Button
           ref={menuTriggerRef}
@@ -465,7 +465,7 @@ function OutreachPanel({
 }) {
   return (
     <>
-      <div className="flex min-h-14 items-center justify-between gap-3 border-b px-5">
+      <div className="flex min-h-14 items-center justify-between gap-3 border-b pl-5 pr-14">
         <div className="min-w-0">
           <DialogPrimitive.Title className="text-sm font-semibold">
             Tutor check-ins

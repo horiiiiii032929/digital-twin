@@ -49,6 +49,7 @@ EXECUTION_CONFIG_NAMES = {
     ".gitignore",
     ".node-version",
     ".python-version",
+    "compose.local-r1.yml",
     "compose.staging.yml",
     "compose.preview.yml",
     "package-lock.json",

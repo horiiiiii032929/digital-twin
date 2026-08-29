@@ -104,6 +104,13 @@ cookies or substitute an HTTP staging origin.
 
 ## Local container and HTTPS qualification
 
+The Sunday local R1 has a dedicated operator runbook at
+[Local R1 operator runbook](local-r1-runbook.md). It uses
+`compose.local-r1.yml`, localhost port 8443, the qualified deterministic T1
+profile, the A0 outreach worker, and no provider credential. The generic
+staging commands below remain the public-host foundation and are not the
+recommended Sunday workflow.
+
 Before using a public host, the same images and secure-cookie path can be
 qualified on `localhost` with Caddy's private local certificate authority. This
 does not replace the public DNS/certificate gate, but it exercises the built

@@ -47,6 +47,9 @@ DEFAULT_OUTPUT = ROOT / (
     "autonomous-tutoring-r1-confirmation-002.json"
 )
 CONDITIONS = {"T0": TutoringMode.T0, "T1": TutoringMode.T1}
+EXECUTED_INSTRUMENT_SHA256 = (
+    "217b86c9c9c1cf4bc9751e356a83c06b2e52690e566bca301b45ba7a6a48ac60"
+)
 
 
 class LocalR1ConfirmationError(RuntimeError):
@@ -288,6 +291,57 @@ def build_trajectories() -> list[dict[str, Any]]:
     return trajectories
 
 
+def _validate_published_result(
+    result: dict[str, Any],
+    *,
+    profile_sha256: str,
+    instrument_sha256: str,
+) -> None:
+    """Validate the standardized durable record for the completed qualification."""
+
+    if (
+        result.get("run_id") != INSTRUMENT_ID
+        or result.get("component") != "conversation-orchestration"
+        or result.get("dataset_id")
+        != "autonomous-tutoring-r1-confirmation-002-synthetic-trajectories"
+    ):
+        raise LocalR1ConfirmationError("published qualification identity drifted")
+    candidates = result.get("candidates")
+    if not isinstance(candidates, list) or len(candidates) != 2:
+        raise LocalR1ConfirmationError("published qualification candidates drifted")
+    expected = {
+        "control": "deterministic-grounded-assistant-t0",
+        "candidate": "deterministic-bounded-tutoring-graph-t1",
+    }
+    for candidate in candidates:
+        role = candidate.get("role")
+        implementation = candidate.get("implementation", {})
+        configuration = implementation.get("configuration", {})
+        if (
+            role not in expected
+            or implementation.get("implementation_id") != expected[role]
+            or configuration.get("profile_sha256") != profile_sha256
+            or configuration.get("instrument_sha256") != instrument_sha256
+            or configuration.get("provider_calls") != 0
+            or not all(
+                metric.get("passed") is True
+                for metric in candidate.get("metrics", [])
+            )
+            or not all(
+                gate.get("passed") is True
+                for gate in candidate.get("hard_gates", [])
+            )
+        ):
+            raise LocalR1ConfirmationError("published qualification result drifted")
+    decision = result.get("decision", {})
+    if (
+        decision.get("outcome") != "keep"
+        or decision.get("selected_implementation_id")
+        != "deterministic-bounded-tutoring-graph-t1"
+    ):
+        raise LocalR1ConfirmationError("published qualification decision drifted")
+
+
 def validate() -> dict[str, Any]:
     instrument = _load(INSTRUMENT_PATH)
     if instrument.get("instrument_id") != INSTRUMENT_ID:
@@ -331,19 +385,15 @@ def validate() -> dict[str, Any]:
     provider_model = generator["implementation"]["configuration"]["provider_model"]
     if provider_model != instrument["result_contract"]["selected_model"]:
         raise LocalR1ConfirmationError("deterministic generator binding drifted")
+    profile_sha256 = hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest()
     result_exists = DEFAULT_OUTPUT.is_file()
     if result_exists:
         result = _load(DEFAULT_OUTPUT)
-        expected = _canonical_sha256(
-            {key: value for key, value in result.items() if key != "content_sha256"}
+        _validate_published_result(
+            result,
+            profile_sha256=profile_sha256,
+            instrument_sha256=EXECUTED_INSTRUMENT_SHA256,
         )
-        if (
-            result.get("instrument_id") != INSTRUMENT_ID
-            or result.get("profile_sha256")
-            != hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest()
-            or result.get("content_sha256") != expected
-        ):
-            raise LocalR1ConfirmationError("published qualification result drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
         "status": "validated",
@@ -353,7 +403,7 @@ def validate() -> dict[str, Any]:
             {row["source_namespace"] for row in trajectories}
         ),
         "trajectory_sha256": _canonical_sha256(trajectories),
-        "profile_sha256": hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
+        "profile_sha256": profile_sha256,
         "selected_model": provider_model,
         "result_exists": result_exists,
         "provider_calls": 0,

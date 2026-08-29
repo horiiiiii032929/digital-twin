@@ -28,9 +28,10 @@ COPY scripts/restore_runtime.py scripts/restore_runtime.py
 COPY scripts/run_ingestion_worker.py scripts/run_ingestion_worker.py
 COPY scripts/proactive_outreach_worker.py scripts/proactive_outreach_worker.py
 COPY research/05_evaluation/profiles research/05_evaluation/profiles
+COPY research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
 RUN uv sync --locked --no-dev \
     && useradd --create-home --uid 10001 app \
-    && install -d -o app -g app /var/lib/digital-twin
+    && install -d -o app -g app /var/lib/digital-twin /var/lib/digital-twin-parent
 USER app
 EXPOSE 8000
 CMD ["uvicorn", "services.api.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips=*"]
