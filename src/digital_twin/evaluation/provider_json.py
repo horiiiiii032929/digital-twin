@@ -596,8 +596,12 @@ class DirectProviderJsonTransport:
             raise ProviderJsonError("direct provider retry limit is invalid")
         self.binding = binding
 
-    def estimated_cost(self, *, prompt: str) -> float:
-        estimated_input = math.ceil(len(prompt) / 4)
+    def estimated_cost(
+        self, *, prompt: str, estimated_image_tokens: int = 0
+    ) -> float:
+        if estimated_image_tokens < 0:
+            raise ValueError("estimated image tokens cannot be negative")
+        estimated_input = math.ceil(len(prompt) / 4) + estimated_image_tokens
         one_attempt = (
             estimated_input
             * float(self.binding["pricing_usd_per_million_input_tokens"])
@@ -613,9 +617,19 @@ class DirectProviderJsonTransport:
         prompt: str,
         task: str,
         schema: dict[str, Any],
+        image_data_urls: list[str] | None = None,
     ) -> dict[str, Any]:
         provider = self.binding["provider"]
         if provider == "openai":
+            user_content: list[dict[str, str]] = [
+                {"type": "input_text", "text": prompt}
+            ]
+            for image_data_url in image_data_urls or []:
+                if not image_data_url.startswith("data:image/"):
+                    raise ProviderJsonError("visual input must be an image data URL")
+                user_content.append(
+                    {"type": "input_image", "image_url": image_data_url}
+                )
             return {
                 "model": self.binding["provider_model"],
                 "store": False,
@@ -626,7 +640,7 @@ class DirectProviderJsonTransport:
                     },
                     {
                         "role": "user",
-                        "content": [{"type": "input_text", "text": prompt}],
+                        "content": user_content,
                     },
                 ],
                 "max_output_tokens": self.binding["max_output_tokens"],
@@ -738,13 +752,18 @@ class DirectProviderJsonTransport:
         task: str,
         schema: dict[str, Any],
         maximum_transport_retries: int | None = None,
+        image_data_urls: list[str] | None = None,
     ) -> ProviderJsonResponse:
         credential_name = self.binding["credential_environment_variable"]
         api_key = os.getenv(credential_name, "").strip()
         if not api_key:
             raise ProviderJsonError(f"credential missing: {credential_name}")
         payload = self._payload(
-            system=system, prompt=prompt, task=task, schema=schema
+            system=system,
+            prompt=prompt,
+            task=task,
+            schema=schema,
+            image_data_urls=image_data_urls,
         )
         headers = self._headers(api_key)
         recovered: list[str] = []
@@ -851,6 +870,7 @@ class DirectProviderJsonTransport:
         task: str,
         schema: dict[str, Any],
         quarantine_failures: bool = False,
+        image_data_urls: list[str] | None = None,
     ) -> ProviderJsonResponse:
         request = {
             "binding_id": self.binding["binding_id"],
@@ -860,13 +880,23 @@ class DirectProviderJsonTransport:
             "task": task,
             "schema": schema,
         }
+        if image_data_urls:
+            request["image_data_urls_sha256"] = [
+                hashlib.sha256(value.encode("utf-8")).hexdigest()
+                for value in image_data_urls
+            ]
         request_sha256 = canonical_sha256(request)
         replayed = ledger.replay(
             request_key=request_key, request_sha256=request_sha256
         )
         if replayed is not None:
             return replayed
-        ledger.reserve(estimated_cost_usd=self.estimated_cost(prompt=prompt))
+        ledger.reserve(
+            estimated_cost_usd=self.estimated_cost(
+                prompt=prompt,
+                estimated_image_tokens=1_500 * len(image_data_urls or []),
+            )
+        )
         started = time.perf_counter()
         try:
             result = await self.call(
@@ -875,6 +905,7 @@ class DirectProviderJsonTransport:
                 task=task,
                 schema=schema,
                 maximum_transport_retries=ledger.remaining_transport_retries(),
+                image_data_urls=image_data_urls,
             )
         except Exception as error:
             ledger.record_failed(

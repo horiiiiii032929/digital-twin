@@ -489,6 +489,33 @@ async def test_direct_transport_does_not_retry_schema_or_identity_failure(
     assert len(captured) == 1
 
 
+@pytest.mark.asyncio
+async def test_direct_openai_transport_sends_visual_input_without_logging_bytes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    binding = _providers()["openai-gpt-5.4-mini"]
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    captured: list[dict[str, Any]] = []
+    _install_fake_client(monkeypatch, [_FakeResponse(_openai_value())], captured)
+
+    await DirectProviderJsonTransport(binding).call(
+        system="Transcribe the public visual.",
+        prompt="Return ok=true.",
+        task="test-visual-input",
+        schema={
+            "type": "object",
+            "additionalProperties": False,
+            "required": ["ok"],
+            "properties": {"ok": {"type": "boolean"}},
+        },
+        image_data_urls=["data:image/png;base64,ZmFrZS1wdWJsaWMtaW1hZ2U="],
+    )
+
+    user_content = captured[0]["input"][1]["content"]
+    assert [row["type"] for row in user_content] == ["input_text", "input_image"]
+    assert user_content[1]["image_url"].startswith("data:image/png;base64,")
+
+
 def test_build_only_validation_does_not_write_outputs() -> None:
     existing = {
         path: path.exists()

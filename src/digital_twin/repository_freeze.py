@@ -152,6 +152,12 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "local_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_course_digital_twin_evaluation_program.py": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_autonomous_tutoring_graph_development.py": (
             "method_evaluation_execution",
         ),

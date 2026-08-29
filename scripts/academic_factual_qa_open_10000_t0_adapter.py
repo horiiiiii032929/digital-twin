@@ -13,6 +13,7 @@ from services.embeddings import Qwen3TextEmbedder
 from src.digital_twin.evaluation.factual_qa_adapters import (
     StudentTutoringServiceAdapterV1,
 )
+from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
 from src.digital_twin.evaluation.factual_qa_contract import (
     EvaluationAtomicClaimV1,
     EvaluationCaseV1,
@@ -33,12 +34,14 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
+    CaseBoundPrecomputedRetriever,
     ContiguousQuoteAtomicClaimVerifier,
     DocumentChunk,
     LocalNliCrossEncoderBackend,
     NliAtomicClaimVerifier,
     RetrievalHit,
     RetrievalIndexStoreV1,
+    StructuredHierarchicalCoverageEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
     build_retrieval_index_binding,
 )
@@ -562,7 +565,10 @@ def build_live_t0_adapter(
 ) -> StudentTutoringServiceAdapterV1:
     generator_binding, generator_transport = _generator_transport(manifest, runtime)
     flow_id = manifest.flow_id
-    if manifest.evidence_gate == "structured-lexical-coverage-evidence-gate-v1":
+    if manifest.evidence_gate in {
+        "structured-lexical-coverage-evidence-gate-v1",
+        "structured-hierarchical-coverage-evidence-gate-v1",
+    }:
         condition = "candidate"
     elif manifest.evidence_gate == "any-hit-evidence-gate-v1":
         condition = "control"
@@ -636,7 +642,12 @@ def build_live_t0_adapter(
         )
     )
     gate = _RecordingGate(
-        StructuredLexicalCoverageEvidenceGate()
+        (
+            StructuredHierarchicalCoverageEvidenceGate()
+            if manifest.evidence_gate
+            == "structured-hierarchical-coverage-evidence-gate-v1"
+            else StructuredLexicalCoverageEvidenceGate()
+        )
         if condition == "candidate"
         else AnyHitEvidenceGate()
     )
@@ -661,6 +672,48 @@ def build_live_t0_adapter(
         tutoring_mode=tutoring_mode,
         conversation_courses=conversation_courses,
     )
+    precomputed_path_value = runtime.get("precomputed_retrieval_path")
+    if precomputed_path_value is not None:
+        precomputed_path = Path(str(precomputed_path_value))
+        payload = _load(precomputed_path)
+        rankings = payload.get("ranked_chunk_ids")
+        if (
+            payload.get("schema_version") != 1
+            or payload.get("program_id")
+            != "course-digital-twin-evaluation-program-001"
+            or not isinstance(rankings, dict)
+            or payload.get("content_sha256")
+            != canonical_json_sha256(
+                {
+                    key: value
+                    for key, value in payload.items()
+                    if key != "content_sha256"
+                }
+            )
+        ):
+            raise LiveT0AdapterError("precomputed retrieval package is invalid")
+        expected_case_ids = {case.case_id for case in cases}
+        if set(rankings) != expected_case_ids:
+            raise LiveT0AdapterError("precomputed retrieval case identities drifted")
+        normalized_rankings: dict[str, list[str]] = {}
+        for case_id, identifiers in rankings.items():
+            if not isinstance(identifiers, list) or not all(
+                isinstance(identifier, str) for identifier in identifiers
+            ):
+                raise LiveT0AdapterError("precomputed retrieval ranking is malformed")
+            normalized_rankings[str(case_id)] = list(identifiers)
+        for course_id, course_chunks in chunks_by_course.items():
+            release_id = f"{course_id}-academic-open-release"
+            scoped = {
+                case.case_id: normalized_rankings[case.case_id]
+                for case in cases
+                if case.course_id == course_id
+            }
+            service._retrievers[release_id] = CaseBoundPrecomputedRetriever(
+                chunks=course_chunks,
+                ranked_chunk_ids=scoped,
+                current_case_id=_CURRENT_CASE_ID.get,
+            )
 
     async def execute_turn(case: EvaluationCaseV1):
         conversation_key = (

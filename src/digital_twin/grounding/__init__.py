@@ -136,6 +136,19 @@ from src.digital_twin.grounding.retrieval_factory import (
     build_selected_retriever,
 )
 from src.digital_twin.grounding.reranking import PairwiseReranker, RerankingRetriever
+from src.digital_twin.grounding.hierarchical_retrieval import (
+    CaseBoundPrecomputedRetriever,
+    EvidenceRetrievalPlan,
+    HierarchicalRetrievalError,
+    StructuredHierarchicalCoverageEvidenceGate,
+    StructuredHierarchicalRetriever,
+    concept_tokens,
+    deterministic_boundary_action,
+    p95,
+    requires_clarification,
+    should_use_semantic_reranking,
+    structured_tokens,
+)
 
 
 __all__ = [
@@ -149,6 +162,7 @@ __all__ = [
     "ApprovalRecord",
     "BM25Retriever",
     "CalibratedOpenSetEvidenceGate",
+    "CaseBoundPrecomputedRetriever",
     "CrossEncoderNliCompletenessVerifier",
     "CrossEncoderSupportVerifier",
     "CourseDocument",
@@ -160,6 +174,7 @@ __all__ = [
     "DocumentSegment",
     "DenseRetriever",
     "EmptyQueryError",
+    "EvidenceRetrievalPlan",
     "EvidenceGatedRetriever",
     "EvidenceSupportSignals",
     "EvidenceSupportVerifier",
@@ -175,6 +190,7 @@ __all__ = [
     "GenerationTrace",
     "GenerationUsage",
     "HeadingParagraphChunker",
+    "HierarchicalRetrievalError",
     "PageBoundedHeadingParagraphChunker",
     "RegionAwareChunker",
     "EmptySourceError",
@@ -235,6 +251,8 @@ __all__ = [
     "SourcePermissions",
     "SourceSensitivity",
     "StructuredLexicalCoverageEvidenceGate",
+    "StructuredHierarchicalCoverageEvidenceGate",
+    "StructuredHierarchicalRetriever",
     "TutorAnswer",
     "TutorGenerator",
     "TermOverlapRetriever",
@@ -244,12 +262,18 @@ __all__ = [
     "build_selected_retriever",
     "build_retrieval_index_binding",
     "classify_region_query",
+    "concept_tokens",
+    "deterministic_boundary_action",
     "evaluate_retriever",
     "evaluate_evidence_sufficiency",
     "lexical_tokens",
+    "p95",
     "retrieval_text",
+    "requires_clarification",
+    "should_use_semantic_reranking",
     "source_set_sha256",
     "load_retrieval_evaluation_set",
     "load_retrieval_benchmark_corpus",
     "source_artifact_from_path",
+    "structured_tokens",
 ]
