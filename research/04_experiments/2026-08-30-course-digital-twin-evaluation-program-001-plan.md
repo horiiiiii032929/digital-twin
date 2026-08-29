@@ -79,6 +79,23 @@ sealed final set.
 All calls use the direct OpenAI Responses API, strict structured output,
 `store: false`, exact returned identities, and no router fallback. The global
 absolute stop is USD 50. Stage budgets are hash-bound in the program manifest.
+The frozen token-envelope p99 projection is USD 44.60: each stage projection
+must fit its reserve and the aggregate must remain below the program ceiling
+before paid execution can begin.
+
+Official model pages were refreshed on 2026-08-30 for
+[GPT-5.4 nano](https://developers.openai.com/api/docs/models/gpt-5.4-nano),
+[GPT-5.4 mini](https://developers.openai.com/api/docs/models/gpt-5.4-mini),
+[GPT-5.4](https://developers.openai.com/api/docs/models/gpt-5.4), and
+[GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna).
+The recorded prices, Responses API support, structured-output support, and
+dated snapshots match the official pages; Luna remains an undated alias and
+therefore requires exact returned-identity recording plus package freezing.
+OpenAI's [data-control documentation](https://platform.openai.com/docs/models/default-usage-policies-by-endpoint)
+states that API content is not used for training unless the customer opts in,
+but default abuse-monitoring logs may be retained for up to 30 days. Therefore
+the program uses public/synthetic inputs only, sets `store: false`, does not use
+background mode, and makes no zero-data-retention claim.
 
 ## Gates and decisions
 

@@ -44,7 +44,15 @@ and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
-checkpoint and requires a separate authorization.
+checkpoint. AFQC-092 now consolidates that work and its prerequisite retrieval,
+500+100 product, visual, synthetic-profile, and conditional T0/T1 evaluations
+into one finite program under #127. The build is complete and no paid stage is
+authorized. After one program-level authorization, passing stages advance
+automatically; a valid quality failure stops the dependent branch, and a stage
+may receive at most one harness-only correction. #127 is therefore the active
+`In Progress / Go Deeper / priority:p0` research package. #105 and #131 are
+cross-linked evidence consumers; #24 and #10 retain their professor-approval
+and external-human boundaries.
 
 ## Release stages and product gates
 
@@ -65,8 +73,11 @@ professor-communication track.
 
 ## Critical path
 
-1. #139 persisted retrieval indexes, then #127 flow-independent 10,000-case
-   product evaluation and #105 — preserve the
+1. #127 finite evaluation program reuses the #139 persisted retrieval indexes
+   and owns the flow-independent 10,000-case product evaluation plus #105
+   evidence decision. Build revision `f267fb0` binds nine stages, a USD 44.60
+   p99 projection, a USD 50 absolute stop, one correction maximum per stage,
+   and automatic progression after one program-level authorization. Preserve the
    120-row NLI result as provisional development evidence and the completed
    10,000-row pipeline as engineering history. The active successor binds
    public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,

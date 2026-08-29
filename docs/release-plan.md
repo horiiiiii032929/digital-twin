@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-29
+Status date: 2026-08-30
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -58,6 +58,22 @@ passed 24/24 clean live HTTPS checks, 6/6 after restart, 6/6 after clean
 backup/restore, and 3/3 checks in both T0 rollback and restored T1 modes. The
 complete repository gate passed 1,221 Python and 47 frontend tests. Durable
 hosting and the sealed 10,000-case academic run remain open.
+
+## Active finite academic program
+
+AFQC-092 replaces the fragmented post-release evaluation queue with one
+prospective, finite, provider-unauthorized program owned by #127. It preserves
+the qualified local R1 until a successor method passes, compares retrieval on
+the untouched 300 development cases, evaluates the actual product on 500+100,
+constructs and seals 10,000 questions, evaluates 10,000 candidate plus 1,000
+paired control responses, and then produces visual, synthetic C0-C3, and
+conditional provider-backed T0/T1 diagnostics. It does not alter hosted-release,
+professor-approval, or external-human boundaries.
+
+The program has nine automatic stages, one harness-only correction per stage,
+no valid-result tuning loop, a USD 44.60 p99 projection, and a USD 50 absolute
+stop. Build revision `f267fb0` passes the complete local gate. Provider and paid
+authority remain false, so no execution result is claimed yet.
 
 ## Release stages
 
