@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "flow_id": "t0-r1-openai-extractive-boundary-control-007",
+  "adapter_version": "v1",
+  "code_revision": "de3cf8d",
+  "profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+  "retriever": "qwen3-hybrid-v1@immutable-release-bound-development-001",
+  "generator": "openai-gpt-5.4-mini-live-extractive-boundary",
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "evidence_gate": "any-hit-evidence-gate-v1",
+  "model_bindings": {
+    "embedding": "Qwen/Qwen3-Embedding-0.6B@97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "retrieval-index-lifecycle": "retrieval-index-lifecycle-development-001@AFQC-068",
+    "generator": "gpt-5.4-mini-2026-03-17",
+    "response-contract": "extractive-boundary-output-v1",
+    "claim-validator": "contiguous-quote-atomic-claim-verifier-v1@1.0.0"
+  },
+  "known_benchmark": true
+}

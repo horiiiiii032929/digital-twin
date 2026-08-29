@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "pairing_id": "academic-factual-qa-open-10000-development-candidate-pairing-007",
+  "public_package": {
+    "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+    "split": "development",
+    "content_sha256": "ad323a8b6a633ccd10570027cdd71ce49dc0a6b1ea7d7481175b224d6a1af3b2"
+  },
+  "hidden_gold_package": {
+    "dataset_id": "academic-factual-qa-open-10000-v1-development-gold-002",
+    "split": "development-gold",
+    "content_sha256": "e3ff66722500fb45401c2d9bd690d8ef96d7bf1c84218c1bdfffba6756c9b0d2"
+  },
+  "case_count": 500,
+  "case_ids_sha256": "e40de86655ab9dce0849ddd40301454a3540c718e11cee76dcbbc438f06197bc",
+  "content_sha256": "9983d1cf658a1a503ddac6c916d2bc720b7837b2e3316527a29e1c2f3c959452"
+}

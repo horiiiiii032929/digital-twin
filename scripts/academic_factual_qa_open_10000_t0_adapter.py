@@ -24,12 +24,15 @@ from src.digital_twin.evaluation.provider_json import (
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
+    ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
+    LiveExtractiveBoundaryGroundedGenerator,
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
+    ContiguousQuoteAtomicClaimVerifier,
     DocumentChunk,
     LocalNliCrossEncoderBackend,
     NliAtomicClaimVerifier,
@@ -102,6 +105,37 @@ ATOMIC_RESPONSE_SCHEMA: dict[str, Any] = {
                 },
             },
         }
+    },
+}
+EXTRACTIVE_BOUNDARY_RESPONSE_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["action", "claims"],
+    "properties": {
+        "action": {"type": "string", "enum": ["answer", "abstain", "clarify"]},
+        "claims": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 8,
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "required": ["claim_id", "text", "citation_ids"],
+                "properties": {
+                    "claim_id": {
+                        "type": "string",
+                        "pattern": "^claim-[a-z0-9-]+$",
+                    },
+                    "text": {"type": "string"},
+                    "citation_ids": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 5,
+                        "items": {"type": "string", "pattern": "^S[1-9][0-9]*$"},
+                    },
+                },
+            },
+        },
     },
 }
 
@@ -179,10 +213,12 @@ class _BoundedProductLlmClient:
         transport: OpenAiCompatibleJsonTransport | DirectProviderJsonTransport,
         ledger: ProviderCallLedgerV1,
         flow_id: str,
+        response_schema: dict[str, Any] | None = None,
     ) -> None:
         self.transport = transport
         self.ledger = ledger
         self.flow_id = flow_id
+        self.response_schema = response_schema or ATOMIC_RESPONSE_SCHEMA
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
         case_id = _CURRENT_CASE_ID.get()
@@ -201,7 +237,7 @@ class _BoundedProductLlmClient:
             system=system,
             prompt=prompt,
             task=task,
-            schema=ATOMIC_RESPONSE_SCHEMA,
+            schema=self.response_schema,
         )
         return LlmResponse(
             content=json.dumps(response.content, sort_keys=True),
@@ -235,7 +271,10 @@ def _generator_transport(
             }
         )
         return binding, OpenAiCompatibleJsonTransport(binding)
-    if manifest.generator == "openai-gpt-5.4-mini-live-atomic":
+    if manifest.generator in {
+        "openai-gpt-5.4-mini-live-atomic",
+        "openai-gpt-5.4-mini-live-extractive-boundary",
+    }:
         provider_binding = _load(OPENAI_BINDING_PATH)
         binding = deepcopy(provider_binding["providers"]["high-volume-generator"])
         binding.update(
@@ -321,6 +360,7 @@ def _setup_service(
     gate: _RecordingGate,
     database_path: Path,
     index_root: Path,
+    claim_evidence_validator: Any,
 ) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
     repository = SQLiteStudentRepository(database_path)
     profile = _load(PROFILE_PATH)
@@ -395,26 +435,13 @@ def _setup_service(
         max_length=int(retriever["embedding_max_length"]),
         model_revision=revision,
     )
-    validator = AtomicClaimEvidenceValidator(
-        NliAtomicClaimVerifier(
-            LocalNliCrossEncoderBackend(
-                model_id="cross-encoder/nli-deberta-v3-base",
-                revision="6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
-                local_files_only=True,
-            )
-        ),
-        minimum_entailment=0.8,
-        maximum_contradiction=0.2,
-        maximum_claims=8,
-        evidence_limit=5,
-    )
     service = StudentTutoringService(
         repository,
         profile_path=PROFILE_PATH,
         embedder=embedder,
         generator=generator,
         evidence_gate=gate,
-        claim_evidence_validator=validator,
+        claim_evidence_validator=claim_evidence_validator,
         tutoring_mode="grounded-assistant",
         retrieval_index_store=index_store,
         retrieval_index_chunker_id=str(chunker["implementation_id"]),
@@ -439,6 +466,34 @@ def build_live_t0_adapter(
     condition = "candidate" if "candidate" in flow_id else "control"
     maximum_calls = PRODUCT_MAXIMUM_CALLS[condition]
     maximum_cost = PRODUCT_MAXIMUM_COST_USD[condition]
+    if manifest.generator == "openai-gpt-5.4-mini-live-extractive-boundary":
+        response_schema = EXTRACTIVE_BOUNDARY_RESPONSE_SCHEMA
+        live_generator = LiveExtractiveBoundaryGroundedGenerator
+        prompt_builder = ExtractiveBoundaryGroundedPromptBuilder()
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            ContiguousQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
+    else:
+        response_schema = ATOMIC_RESPONSE_SCHEMA
+        live_generator = LiveAtomicGroundedGenerator
+        prompt_builder = StrictEvidenceGroundedPromptBuilder()
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            NliAtomicClaimVerifier(
+                LocalNliCrossEncoderBackend(
+                    model_id="cross-encoder/nli-deberta-v3-base",
+                    revision="6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+                    local_files_only=True,
+                )
+            ),
+            minimum_entailment=0.8,
+            maximum_contradiction=0.2,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
     provider_ledger = ProviderCallLedgerV1(
         Path(runtime["provider_ledger_path"]),
         run_binding={
@@ -457,11 +512,12 @@ def build_live_t0_adapter(
         transport=generator_transport,
         ledger=provider_ledger,
         flow_id=flow_id,
+        response_schema=response_schema,
     )
     recording_generator = _RecordingGenerator(
-        LiveAtomicGroundedGenerator(
+        live_generator(
             client,
-            prompt_builder=StrictEvidenceGroundedPromptBuilder(),
+            prompt_builder=prompt_builder,
         )
     )
     gate = _RecordingGate(
@@ -477,6 +533,7 @@ def build_live_t0_adapter(
         gate=gate,
         database_path=state_path,
         index_root=RETRIEVAL_INDEX_ROOT,
+        claim_evidence_validator=claim_evidence_validator,
     )
 
     async def execute_turn(case: EvaluationCaseV1):

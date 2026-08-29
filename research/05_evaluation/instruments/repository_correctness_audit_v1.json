@@ -4,6 +4,105 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Manual pairing review verifies the 500 public package and distinct hidden-gold package are bound by exact IDs, splits, content hashes, case count, and the complete case-ID-set hash without exposing gold to product execution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_candidate_pairing_007.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "e1d986607dc33e551210f5b3ccaa95c5fe8bf1eadced0ef30b861b0f84b53474"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Manual pairing review verifies the fixed 100-case public control and distinct hidden-gold control are bound by exact IDs, splits, content hashes, case count, and the complete case-ID-set hash.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_control_pairing_007.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "cb142148ca1e23cb6893d5c9ba372f94679130f96b2b03aa9fa6f7def9f8614d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Prospective instrument review verifies one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, revoked authority, and a maximum one harness-only correction.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_007.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "f4ca83f21b31f4a46ca722ba5eb5b314989251335c838a125e012e817d44e573"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Binding review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or retry, complete cost accounting, revoked execution authority, and the unchanged product/audit role split.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_008.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "57ef7a456be725f3896d6fe4882721cb2e014746591da81869df6b92e29480b6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Manifest review verifies the candidate binds immutable qualified retrieval, structured lexical coverage, exact OpenAI mini generation, extractive boundary output, literal contiguous-quote validation, fixed policy/profile, and no gold fields.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_007.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "4eb1e6c9bde9d1680921926fbfa8b642bde9b2ceab9aea19737c7d41cb1e6b54"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Manifest review verifies the control shares the candidate corpus, retriever, generator, policy, profile, response contract, and claim validator and differs only in flow identity and any-hit evidence release.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_007.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "e6ec69a0ef2275912ac710f8aba96f2b6ac475b40ddba1f988382f8b5ee820df"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Focused runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, fail-closed authorization, and restoration of checkpoint-006 state after every operation.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_product_checkpoint_007.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "1ee09e2c22b7e8f6e36f1ec3574167691087d612e448b4f321f566d89df5fb0e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Focused tests verify distinct public/gold identities are accepted only through a content- and case-set-bound pairing manifest and any package hash drift fails closed.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_pairing_contract.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "c8a8b40494c808daa4cfb964348497b7d20128ea609b375d04fb2151ffce21c1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-product-checkpoint",
+      "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, revoked authority, and a preflight blocked only by execution authorization when environment state is clean.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_product_checkpoint_007.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "1ef861bbfaab3608ebefa69bb411a86397f2c755f3c13e39f1160acec13380ed"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "immutable-index-product-checkpoint",
       "evidence": "Terminal-result review verifies 600 durable responses, complete 540-call accounting, the post-response package-pairing failure, false quality interpretation, revoked provider/development/review/final authority, no automatic promotion, and no further harness correction.",
       "findings": [],
@@ -54,7 +153,7 @@
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_006.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "14ee8845989a518a19159bf61efe28579e9ababfc195ebd5f940f79bde4bd21a"
+      "sha256": "7f34c9a32185576dd0e5a7fe71a42b091452b925b3888f4ae5e90c7e61b9af6b"
     },
     {
       "audit_status": "audited",
@@ -131,7 +230,7 @@
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_005.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "8d91a8e579d29d53628725c118741df747495e997c3727504f57df51c0db25be"
+      "sha256": "f151caa5eb415c88ad27b5b1c6a1d92da4d47aaafbdc32e9cc9b4c26eeae8be9"
     },
     {
       "audit_status": "audited",
@@ -1132,7 +1231,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "d44937d64a2594163380896dbd06648a0fce909d19a954917d40def35224d8f5"
+      "sha256": "12b5f6f1336c91d144725b92e31b581fc8b3f54eb4e17b6c42f9c41a05fdf121"
     },
     {
       "audit_status": "audited",
@@ -2881,7 +2980,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
-      "sha256": "45dd4252ab01e3ddb56b54f8d8562b4a54be56d3c9dbe6a3039f480cba0f2e87"
+      "sha256": "5d5be81303bd7c6373ee016ba7d77bbc139da467cabed4b82f08df0ebb6df429"
     },
     {
       "audit_status": "audited",
@@ -4080,7 +4179,7 @@
       "path": "scripts/score_academic_factual_qa_open_10000.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "d269a1467eb49be0c94d19f1eedcc1a083a4f92db4229c3c8068637783498d02"
+      "sha256": "a2c3e59dc59746912734a4b5b183382cf01f94bac95e86b8feccc028401219c8"
     },
     {
       "audit_status": "audited",
@@ -5103,7 +5202,7 @@
       "path": "src/digital_twin/generation/__init__.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "cd729d93ca8a0a645bbf01b942d50e6495b0cb4cf72447e557b6be564bcc733d"
+      "sha256": "48432e2fd4ae42673dc869e35ab564ec8b61861bac570b317ce66075b5695c87"
     },
     {
       "audit_status": "audited",
@@ -5136,7 +5235,7 @@
       "path": "src/digital_twin/generation/generator.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "6c880c9a56b26b8dfa000bc6ba90009890cad9fbd7e6188ab249dc926215bf8c"
+      "sha256": "42fc5cc466de8ffd7c818abcf580970c78ac1ace420f4fa175133a8c1c4fc705"
     },
     {
       "audit_status": "audited",
@@ -5147,7 +5246,7 @@
       "path": "src/digital_twin/generation/models.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "8786138bb0d0864a5dc2cf7cf18a83c4bfa121d1e8c473c0f5076d6c8b66c434"
+      "sha256": "298fd972e9f932ac982fdd7ba8fcede98acb435a85fc936dc234c88cdaf13286"
     },
     {
       "audit_status": "audited",
@@ -5169,7 +5268,7 @@
       "path": "src/digital_twin/generation/prompt.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "6b2ff9dcb5461199dc58e8e064fcd3e4e9bb941f02207ecae414753fad4dcda2"
+      "sha256": "05c2b56c73f7f217b196a63a59b8a9d4281234ac7d898ec91d79b043cc13bb8f"
     },
     {
       "audit_status": "audited",
@@ -5180,7 +5279,7 @@
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "4ffb287b06c5c6dd2b46542ce63f5fd1ab9625bd09c815c5296ab4eb0d282265"
+      "sha256": "539fe3d737eb6a88a658f7901f2f380542a0117837ac970d86cda9ad23c80f5d"
     },
     {
       "audit_status": "audited",
@@ -5202,7 +5301,7 @@
       "path": "src/digital_twin/grounding/claim_validation.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "0814fff5c23885eb95197f6dfa4b9686b31927e5457a2a7e8fbce7a378a22d34"
+      "sha256": "abe3fe52c840f05afb137bf3db602940ad2e3faf813c468e97dd7539d812d97e"
     },
     {
       "audit_status": "audited",
@@ -5796,7 +5895,7 @@
       "path": "tests/digital_twin/test_claim_validation.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "9ab7a0b16c182e1794e44ced0356b4c0875d2adb083ad684a2a6b52f601afbb0"
+      "sha256": "f952c9459301823e8e4086085ee197a0fdab03303e99f2842c10298435f49c04"
     },
     {
       "audit_status": "audited",
@@ -5840,7 +5939,7 @@
       "path": "tests/digital_twin/test_generation.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "df7ecf2ee8eed53a2a058221a1324c3da3c0de7fd6a22f37eb479e2246d7b87c"
+      "sha256": "2f17b00c8f687951d38b2130309dbd7fd31dcf9a3e89d5e83aa7c4d381aef300"
     },
     {
       "audit_status": "audited",

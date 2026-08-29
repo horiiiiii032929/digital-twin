@@ -104,6 +104,38 @@ class ExactQuoteAtomicClaimVerifier:
         return signals
 
 
+class ContiguousQuoteAtomicClaimVerifier:
+    """Require each claim to be a literal contiguous span of one cited hit."""
+
+    implementation_id = "contiguous-quote-atomic-claim-verifier-v1"
+    version = "1.0.0"
+
+    def verify(
+        self,
+        claims: Sequence[AtomicAnswerClaim],
+        hits: Sequence[RetrievalHit],
+    ) -> list[AtomicClaimSupportSignal]:
+        by_id = {hit.chunk.id: hit for hit in hits}
+        signals: list[AtomicClaimSupportSignal] = []
+        for claim in claims:
+            supporting_hit_ids = [
+                hit_id
+                for hit_id in claim.evidence_hit_ids
+                if claim.text in by_id[hit_id].chunk.text
+            ]
+            supported = bool(supporting_hit_ids)
+            signals.append(
+                AtomicClaimSupportSignal(
+                    claim_id=claim.claim_id,
+                    entailment=1.0 if supported else 0.0,
+                    contradiction=0.0,
+                    supporting_hit_ids=supporting_hit_ids,
+                    reason="literal contiguous claim containment in cited evidence",
+                )
+            )
+        return signals
+
+
 class NliAtomicClaimVerifier:
     """Apply NLI in its intended evidence-premise, claim-hypothesis direction."""
 

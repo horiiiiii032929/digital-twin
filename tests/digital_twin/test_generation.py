@@ -21,8 +21,10 @@ from src.digital_twin.generation import (
     GenerationEvaluationSet,
     GroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
+    LiveExtractiveBoundaryGroundedGenerator,
     LiveGroundedGenerator,
     PolicyAction,
+    ExtractiveBoundaryGroundedPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
     authoritative_citation_for_chunk,
     citation_matches_chunk,
@@ -286,6 +288,19 @@ def test_clarification_first_prompt_freezes_narrow_ambiguity_repair():
     assert "at most 60 words" in prompt.messages[0].content
 
 
+def test_extractive_boundary_prompt_freezes_action_and_quote_contract():
+    prompt = ExtractiveBoundaryGroundedPromptBuilder().build(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert prompt.version == "v5"
+    assert "answer|abstain|clarify" in prompt.messages[0].content
+    assert "copied exactly as one contiguous span" in prompt.messages[0].content
+    assert "claim-[a-z0-9-]+" in prompt.messages[0].content
+
+
 def test_bounded_pedagogical_prompt_carries_only_code_selected_plan():
     prompt = BoundedPedagogicalPromptBuilder().build_for_intent(
         "How does CSRF work?",
@@ -403,6 +418,80 @@ async def test_live_atomic_generator_resolves_claim_and_citation_lineage():
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
+    ("action", "claims", "expected_action"),
+    [
+        (
+            "answer",
+            [
+                {
+                    "claim_id": "claim-csrf-session",
+                    "text": "CSRF abuses an authenticated browser session.",
+                    "citation_ids": ["S1"],
+                }
+            ],
+            "answer",
+        ),
+        ("abstain", [], "no-evidence"),
+        ("clarify", [], "clarify"),
+    ],
+)
+async def test_extractive_boundary_generator_returns_bounded_actions(
+    action,
+    claims,
+    expected_action,
+):
+    response = LlmResponse(
+        content=json.dumps({"action": action, "claims": claims}),
+        provider_model="fixture-live/v1",
+    )
+    answer = await LiveExtractiveBoundaryGroundedGenerator(
+        RecordingClient(response),
+        prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
+    ).generate(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.trace is not None
+    assert answer.trace.policy_action == expected_action
+    assert bool(answer.atomic_claims) is (action == "answer")
+    assert bool(answer.citations) is (action == "answer")
+
+
+@pytest.mark.asyncio
+async def test_extractive_boundary_generator_rejects_claim_id_outside_schema_contract():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "action": "answer",
+                "claims": [
+                    {
+                        "claim_id": "c1",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    }
+                ],
+            }
+        ),
+        provider_model="fixture-live/v1",
+    )
+    answer = await LiveExtractiveBoundaryGroundedGenerator(
+        RecordingClient(response),
+        prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
+    ).generate(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "safe-provider-failure"
+    assert answer.atomic_claims == []
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
     ("question", "hits", "expected_action"),
     [
         (
@@ -483,6 +572,8 @@ async def test_malformed_or_invented_live_output_fails_closed(response):
     assert answer.citations == []
     assert answer.warnings == ["The tutor model returned an invalid grounded answer."]
     assert "not-json" not in answer.content
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "safe-provider-failure"
 
 
 @pytest.mark.asyncio

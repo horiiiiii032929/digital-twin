@@ -38,6 +38,8 @@ CONTROL_MANIFEST = ROOT / (
     "research/05_evaluation/instruments/"
     "academic_factual_qa_open_10000_v1_t0_openai_control_manifest_006.json"
 )
+CANDIDATE_PAIRING: Path | None = None
+CONTROL_PAIRING: Path | None = None
 INDEX_QUALIFICATION_RECORD = ROOT / (
     "research/05_evaluation/records/retrieval-index-lifecycle-development-001.json"
 )
@@ -123,6 +125,9 @@ ALL_OUTPUTS = (
     CRITICAL_REVIEW_LEDGER,
     CRITICAL_REVIEW_RESULT,
 )
+EXPECTED_PRODUCT_GENERATOR = "openai-gpt-5.4-mini-live-atomic"
+EXPECTED_CANDIDATE_EVIDENCE_GATE = "structured-lexical-coverage-evidence-gate-v1"
+EXPECTED_CONTROL_EVIDENCE_GATE = "any-hit-evidence-gate-v1"
 
 ProductCheckpointError = base.ProductCheckpointError
 _BASE_REPO_DIRTY = base._repo_dirty  # noqa: SLF001
@@ -148,6 +153,8 @@ def configured_checkpoint() -> Iterator[None]:
         "BINDING_PATH": BINDING_PATH,
         "CANDIDATE_MANIFEST": CANDIDATE_MANIFEST,
         "CONTROL_MANIFEST": CONTROL_MANIFEST,
+        "CANDIDATE_PAIRING": CANDIDATE_PAIRING,
+        "CONTROL_PAIRING": CONTROL_PAIRING,
         "CANDIDATE_RESPONSES": CANDIDATE_RESPONSES,
         "CANDIDATE_PROVIDER": CANDIDATE_PROVIDER,
         "CANDIDATE_STATE": CANDIDATE_STATE,
@@ -164,6 +171,9 @@ def configured_checkpoint() -> Iterator[None]:
         "PRODUCT_CONFIG": PRODUCT_CONFIG,
         "PROVIDER_LEDGERS": PROVIDER_LEDGERS,
         "ALL_OUTPUTS": ALL_OUTPUTS,
+        "EXPECTED_PRODUCT_GENERATOR": EXPECTED_PRODUCT_GENERATOR,
+        "EXPECTED_CANDIDATE_EVIDENCE_GATE": EXPECTED_CANDIDATE_EVIDENCE_GATE,
+        "EXPECTED_CONTROL_EVIDENCE_GATE": EXPECTED_CONTROL_EVIDENCE_GATE,
         "_repo_dirty": _repo_dirty,
         "_repo_revision": _repo_revision,
     }

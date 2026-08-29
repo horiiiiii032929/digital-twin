@@ -33,6 +33,7 @@ from src.digital_twin.grounding.claim_validation import (
     AtomicClaimSupportSignal,
     AtomicClaimSupportVerifier,
     AtomicClaimValidationDecision,
+    ContiguousQuoteAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     NliAtomicClaimVerifier,
 )
@@ -152,6 +153,7 @@ __all__ = [
     "CrossEncoderSupportVerifier",
     "CourseDocument",
     "CourseSourceIngestionResult",
+    "ContiguousQuoteAtomicClaimVerifier",
     "DocumentChunk",
     "DocumentChunker",
     "DocumentRegion",
