@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-product-checkpoint-007",
   "owner_issue": 127,
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-006",
   "decision_question": "Does one finite extractive-boundary successor satisfy the unchanged 500+100 actual-product grounding and safety gates after prospectively repairing package pairing and generation/runtime schema alignment?",
   "dataset": {
@@ -89,7 +89,7 @@
     "model_cannot_override_deterministic_truth": true
   },
   "allocation": {
-    "status": "reviewed-build-only",
+    "status": "frozen-approved",
     "development_case_count": 500,
     "development_control_case_count": 100
   },
@@ -111,9 +111,9 @@
     "candidate_maximum_cost_usd": 5.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 1.0,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "development_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "development_execution_authorized": true,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -156,10 +156,10 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "product_development_execution_authorized": true,
+    "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
   "finite_refinement": {
@@ -169,5 +169,5 @@
     "valid_quality_failure_policy": "register-completed-refine-and-stop-without-another-method-successor",
     "historical_response_reuse_policy": "diagnostic-only-never-confirmatory"
   },
-  "content_sha256": "8a9953ca5eb2cb373665d99227cf59edba3b0b1e449eb53433f8be2161259ce8"
+  "content_sha256": "93d64852031998605faf29bcd471bf0b26c8a7e2cc1c1dff5e6102c72728c37f"
 }

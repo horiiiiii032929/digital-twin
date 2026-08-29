@@ -27,23 +27,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Prospective instrument review verifies one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, revoked authority, and a maximum one harness-only correction.",
+      "evidence": "Authorization review verifies one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, one-time development authority, final authority false, and at most one harness-only correction.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_007.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "f4ca83f21b31f4a46ca722ba5eb5b314989251335c838a125e012e817d44e573"
+      "sha256": "2baa2e31e5e9a7507afb296594d1baf3dbd1a768a0f53a1995dab05b2dded1ea"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Binding review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or retry, complete cost accounting, revoked execution authority, and the unchanged product/audit role split.",
+      "evidence": "Authorization review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or retry, complete cost accounting, one-time development and semantic-review authority, final authority false, and the unchanged product/audit role split.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_008.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "57ef7a456be725f3896d6fe4882721cb2e014746591da81869df6b92e29480b6"
+      "sha256": "542abd3b9fb6a6c597cbc0386c2b1bedd0e23576e0896b39bd5c02038187d671"
     },
     {
       "audit_status": "audited",
@@ -71,12 +71,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Focused runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, fail-closed authorization, and restoration of checkpoint-006 state after every operation.",
+      "evidence": "Focused runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, authorization-aware validation, fail-closed execution, and restoration of checkpoint-006 state after every operation.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_007.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "1ee09e2c22b7e8f6e36f1ec3574167691087d612e448b4f321f566d89df5fb0e"
+      "sha256": "2c559af0a6990fa9e62cead3548c5c5fffb6032b35aef1200859e27e919d4533"
     },
     {
       "audit_status": "audited",
@@ -93,12 +93,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, revoked authority, and a preflight blocked only by execution authorization when environment state is clean.",
+      "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, exact bounded authority, and a ready preflight when repository and credential state are clean.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_007.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "1ef861bbfaab3608ebefa69bb411a86397f2c755f3c13e39f1160acec13380ed"
+      "sha256": "3545bf8d5d576a0eaaafd9c7b83d03460a2e8aae2b4f6e7c1c015bbc21408c33"
     },
     {
       "audit_status": "audited",
@@ -5670,12 +5670,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze review registers checkpoint 007 as an explicitly guarded but unauthorized external-model and method-evaluation entrypoint; the repository-wide freeze continues blocking every provider, final 10,000, private-data, promotion, and unregistered operation.",
+      "evidence": "Focused freeze review grants only checkpoint 007 bounded external-model and method-evaluation authority; the repository-wide freeze continues blocking final 10,000, private-data, promotion, deployment, and every unregistered operation.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "738ec49f54ee3362a1b80255c0338baf036c370c84f2995aab3bf02c4ffa476c"
+      "sha256": "3ad22f1e62a3f4782ad6ea8d1658c3c74df31b383f324b718a7fb689dd932c67"
     },
     {
       "audit_status": "audited",
@@ -6044,12 +6044,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify checkpoint 006 authority is revoked and retrieval-index, checkpoint 005, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+      "evidence": "Focused freeze-policy tests verify only checkpoint 007 has bounded external-model and method-evaluation authority while checkpoint 006, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "61cf5e29bd9391e29d0334c30da0dcc7df729b8aa3773f4e520b6ef6a9d6204c"
+      "sha256": "3f33476124c093584f18f9d32cb2821a430c775aae83e4b6ef79eab115a05d8f"
     },
     {
       "audit_status": "audited",

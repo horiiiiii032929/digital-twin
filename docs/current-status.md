@@ -21,10 +21,11 @@ gates, USD 8 stop, and 666-call ceiling. It adds hash-bound public/gold pairing,
 a strict `answer`/`abstain`/`clarify` response schema, and deterministic release
 only when every claim is a literal contiguous quote from one server-resolved
 cited evidence region. Eighty-eight focused tests and five network-free terminal
-simulations pass. Provider, paid, final 10,000-case, T1 promotion, fidelity, and
-deployment authority remain false. Issue #127 is the active P0 item; the next
-required input after publication and a clean preflight is explicit paid
-authorization for checkpoint 007. No further method successor is permitted.
+simulations pass. AFQC-074 records one-time provider and paid authority for
+checkpoint 007 only. Final 10,000-case, T1 promotion, fidelity, and deployment
+authority remain false. Issue #127 is the active P0 item; the immediate action
+is the clean preflight and bounded 500+100 execution. No further method
+successor is permitted.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.

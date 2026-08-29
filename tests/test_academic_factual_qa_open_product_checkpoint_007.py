@@ -11,7 +11,7 @@ from scripts import run_academic_factual_qa_open_product_checkpoint_007 as check
 
 
 def test_finite_successor_binds_pairing_and_extractive_contract() -> None:
-    result = checkpoint.validate()
+    result = checkpoint.validate(require_unauthorized=False)
 
     assert result["status"] == "passed-build-only"
     assert result["explicit_pairing_manifest_count"] == 2
@@ -43,7 +43,7 @@ def test_extractive_provider_schema_enforces_runtime_claim_identifiers() -> None
 
 def test_successor_does_not_mutate_checkpoint_006() -> None:
     before = historical.validate()
-    checkpoint.validate()
+    checkpoint.validate(require_unauthorized=False)
     after = historical.validate()
 
     assert before == after
@@ -69,7 +69,7 @@ def test_successor_simulations_remain_finite(scenario: str, expected: str) -> No
     assert result["pairing_contract"] == "explicit-package-pairing-v1"
 
 
-def test_clean_preflight_blocks_only_external_authority(
+def test_clean_preflight_is_ready_under_exact_bounded_authority(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(historical, "_repo_dirty", lambda: False)
@@ -77,14 +77,10 @@ def test_clean_preflight_blocks_only_external_authority(
 
     result = checkpoint.preflight()
 
-    assert result["status"] == "blocked-not-authorized"
+    assert result["status"] == "ready"
     assert result["provider_calls"] == 0
     assert result["maximum_method_successors"] == 1
-    assert "freeze-external_model_evaluation-authorization-missing" in result[
-        "blockers"
-    ]
-    assert "instrument-provider-execution-authorized-false" in result["blockers"]
-    assert not any("pairing" in blocker for blocker in result["blockers"])
+    assert result["blockers"] == []
 
 
 def test_pairing_manifests_are_hash_bound_to_distinct_packages() -> None:
