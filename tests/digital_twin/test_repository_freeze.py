@@ -35,7 +35,6 @@ def test_repository_freeze_status_is_explicit() -> None:
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
-        "academic-factual-qa-open-10000-development-product-checkpoint-006",
     }
 
     for pilot_id in pilot_ids:
@@ -45,9 +44,11 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)
-    assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "academic-factual-qa-open-10000-development-product-checkpoint-006"
-    ] == ("external_model_evaluation", "method_evaluation_execution")
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "academic-factual-qa-open-10000-development-product-checkpoint-006",
+            "external_model_evaluation",
+        )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "retrieval-index-lifecycle-development-001",

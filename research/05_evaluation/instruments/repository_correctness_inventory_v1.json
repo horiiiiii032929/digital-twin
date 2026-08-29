@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d8d5e40a0ade4b156f8223bb0cbc700c11fe1d30984022e4d7db10fdffd53356",
+  "record_sha256": "5030486df8aaed374a79fbb32aa60b2e04e5850e876f14fcc15458f544385ddf",
   "records": [
     {
       "audit": {
@@ -1768,7 +1768,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Manual corrective-attempt review verified unchanged 500/100 packages, exact AFQC-068 artifact identities, load-only runtime policy, deterministic decision authority, hidden-gold ordering, bounded costs and calls, a prospectively approved allocation marker, true one-time development/provider/review authority, false final authority, and no further harness correction.",
+        "evidence": "Terminal-result review verifies 600 durable responses, complete 540-call accounting, the post-response package-pairing failure, false quality interpretation, revoked provider/development/review/final authority, no automatic promotion, and no further harness correction.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_006.json",
       "risk": "high",
-      "sha256": "3e74a4a85d66a87b6dec15b3a76e6bb48de07f7fe21e669ba30b9a33effcce2f"
+      "sha256": "6c9278c9c40c1d41289d593a1c19e71e777a6f74fedfe80e5a57fe4a301263b6"
     },
     {
       "audit": {
@@ -1880,7 +1880,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Manual authorization review verified direct OpenAI Responses API use, current exact GPT-5.4 mini, nano, and full snapshots and prices, account access, store false, zero retries/fallback, public inputs only, true one-time development/provider/review authority, and false final authority.",
+        "evidence": "Post-execution binding review preserves direct OpenAI Responses API identities and historical prices while revoking every provider, paid, development, semantic-review, and final authorization after terminal invalid execution.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -1891,7 +1891,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_007.json",
       "risk": "high",
-      "sha256": "5a9c01e60edf1220832a18c01ed008c2b69b4bf5404e321d98204a4a5f02a99d"
+      "sha256": "872f2344de7a3c34837c890a55aa2e25b5ce96aa1a009bb682218d4f207ee790"
     },
     {
       "audit": {
@@ -8533,7 +8533,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review grants only checkpoint 006 external-model and method-evaluation authority while the repository-wide freeze remains active; checkpoint 005, final 10,000 execution, private data, promotion, and every unregistered operation remain blocked.",
+        "evidence": "Focused freeze review removes checkpoint 006 after terminal invalid execution; the repository-wide freeze remains active and all provider, product, final 10,000, private-data, promotion, and unregistered operations are blocked.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -8544,7 +8544,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "09b239605837f4103ad61bde4caef5fcbb2c29e719b58d6e73ad73d574499d5d"
+      "sha256": "25c497e176f9e7b308302d52bff2682d23ba7e2c6938db85f12debb6852e88a8"
     },
     {
       "audit": {
@@ -9077,7 +9077,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify only checkpoint 006 has external-model and method-evaluation authority while retrieval-index authority, checkpoint 005, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+        "evidence": "Focused freeze-policy tests verify checkpoint 006 authority is revoked and retrieval-index, checkpoint 005, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9088,7 +9088,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "fd08261ea665a0276c9235d397d2cbf2992c2e4772c8f6bec91c503569f3eaee"
+      "sha256": "61cf5e29bd9391e29d0334c30da0dcc7df729b8aa3773f4e520b6ef6a9d6204c"
     },
     {
       "audit": {
@@ -9557,7 +9557,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, approved allocation state, no runtime document embedding, unavailable-index failure, five finite outcomes, clean authorized preflight readiness, sole-correction scope, and resume binding drift.",
+        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, terminal invalid state and complete accounting, revoked preflight blocking, no runtime document embedding, five finite simulations, no further correction, and resume binding drift.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9568,7 +9568,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "medium",
-      "sha256": "67dc72417f55aa03a4918252ed2d1233c8e214a91f8357955cac591dea238bc2"
+      "sha256": "4fbb7886715843d5903b1da056e1c1fb6954f62d5085a19c43a74b6f1dfb4f3d"
     },
     {
       "audit": {

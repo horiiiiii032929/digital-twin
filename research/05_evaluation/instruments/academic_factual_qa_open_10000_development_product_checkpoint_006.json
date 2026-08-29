@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-development-product-checkpoint-006",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-005",
   "decision_question": "Does the actual leakage-free T0 candidate satisfy the preregistered deterministic grounding and safety gates on the frozen mixed-wording 500-case development package when both conditions load the exact qualified immutable retrieval indexes?",
   "dataset": {
@@ -104,9 +104,9 @@
     "candidate_maximum_cost_usd": 5.0,
     "control_maximum_calls": 100,
     "control_maximum_cost_usd": 1.0,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "development_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "development_execution_authorized": false,
     "final_execution_authorized": false,
     "automatic_promotion": false
   },
@@ -160,11 +160,31 @@
     "paired_boundary_safety_not_worse": true
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "product_development_execution_authorized": true,
-    "semantic_review_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "semantic_review_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "2801b7ccbab2c81cee9b369bc320e605b1453a257e990d4523b2634720996bed"
+  "terminal_execution": {
+    "result_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-attempt-002-invalid",
+    "status": "invalid-execution",
+    "completed_stages": [
+      "candidate-500",
+      "control-100"
+    ],
+    "failure_stage": "deterministic-score-and-compare",
+    "failure_type": "OpenBenchmarkScoringError",
+    "failure_detail": "public and hidden packages are not paired",
+    "persisted_response_count": 600,
+    "provider_call_count": 540,
+    "provider_failure_count": 0,
+    "input_tokens": 1173119,
+    "output_tokens": 44703,
+    "reported_cost_usd": 1.08100275,
+    "quality_interpretation_authorized": false,
+    "further_correction_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "cd3c3733377bd391afeeab5a4c925abee2975bbe0c5ee63616801c9eae7fdd38"
 }

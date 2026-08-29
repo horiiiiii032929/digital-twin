@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-attempt-002-invalid",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "6ba1a2d1912384b14910003f248d0acf0be31b46",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "t0-r1-openai-any-hit-control-006",
+        "version": "checkpoint-006-attempt-002-invalid",
+        "configuration": {
+          "model": "gpt-5.4-mini-2026-03-17",
+          "retriever": "immutable-hybrid-bm25-qwen3",
+          "evidence_gate": "any-hit-evidence-gate-v1",
+          "response_ledger_sha256": "5ecddae990e70987fe87e391101139d163e0a61b38b1e1cef67873bc85d5ff24",
+          "provider_ledger_sha256": "04e581571aff3fe8a901f0fcec2ddc1ee3733c1fc2c02c78963c292fe57b4797",
+          "input_tokens": 325869,
+          "output_tokens": 8068,
+          "aggregate_provider_latency_ms": 136319.957,
+          "reported_cost_usd": 0.28070775,
+          "descriptive_abstain_count": 95,
+          "descriptive_refuse_count": 5,
+          "descriptive_answer_count": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 100.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "provider-completion",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.995,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 95.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.28070775,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "released-answer-count-descriptive",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-responses-durable-before-gold",
+          "passed": true,
+          "evidence": "The control ledger reached completed with 100/100 responses before scoring opened hidden gold."
+        },
+        {
+          "name": "zero-provider-failures",
+          "passed": true,
+          "evidence": "All 95 provider calls completed; five policy actions required no provider call."
+        },
+        {
+          "name": "deterministic-scoring-completed",
+          "passed": false,
+          "evidence": "The scorer rejected the intentionally distinct public and hidden package IDs and split labels as unpaired."
+        },
+        {
+          "name": "hidden-gold-opening-order",
+          "passed": true,
+          "evidence": "Hidden gold opened only after both product ledgers were durable."
+        },
+        {
+          "name": "final-stage-closure",
+          "passed": true,
+          "evidence": "The sealed 10,000-case stage remained unopened and unauthorized."
+        }
+      ],
+      "failures_by_category": {
+        "public-hidden-package-pairing-contract": 1,
+        "zero-answer-release-descriptive-warning": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "t0-r1-openai-structured-two-boundary-candidate-006",
+        "version": "checkpoint-006-attempt-002-invalid",
+        "configuration": {
+          "model": "gpt-5.4-mini-2026-03-17",
+          "retriever": "immutable-hybrid-bm25-qwen3",
+          "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+          "response_ledger_sha256": "fcc21868f495b52d16fb1580e27f51040c5b2a8d5e36852ef744af31100923d5",
+          "provider_ledger_sha256": "55766e1dc7242df99afa39a5dfeee885bb01deb1d922afc715ed1f52cfa9651c",
+          "input_tokens": 847250,
+          "output_tokens": 36635,
+          "aggregate_provider_latency_ms": 625022.03,
+          "reported_cost_usd": 0.800295,
+          "descriptive_abstain_count": 475,
+          "descriptive_refuse_count": 25,
+          "descriptive_answer_count": 0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 500.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "provider-completion",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.995,
+          "passed": true
+        },
+        {
+          "name": "provider-inference-call-count",
+          "value": 445.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.800295,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "released-answer-count-descriptive",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-responses-durable-before-gold",
+          "passed": true,
+          "evidence": "The candidate ledger reached completed with 500/500 responses before scoring opened hidden gold."
+        },
+        {
+          "name": "zero-provider-failures",
+          "passed": true,
+          "evidence": "All 445 provider calls completed; 55 policy actions required no provider call."
+        },
+        {
+          "name": "deterministic-scoring-completed",
+          "passed": false,
+          "evidence": "The scorer rejected the intentionally distinct public and hidden package IDs and split labels as unpaired."
+        },
+        {
+          "name": "hidden-gold-opening-order",
+          "passed": true,
+          "evidence": "Hidden gold opened only after both product ledgers were durable."
+        },
+        {
+          "name": "final-stage-closure",
+          "passed": true,
+          "evidence": "The sealed 10,000-case stage remained unopened and unauthorized."
+        }
+      ],
+      "failures_by_category": {
+        "public-hidden-package-pairing-contract": 1,
+        "zero-answer-release-descriptive-warning": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The sole corrective execution completed both product conditions but the preregistered deterministic scorer did not complete. Checkpoint 006 is operationally invalid, and the zero-answer response distribution is retained only as a method-level warning.",
+    "limitations": [
+      "No deterministic factual, citation, claim, retrieval, boundary, or paired quality metric is valid from this run.",
+      "The response distribution is descriptive and must not be reported as an accuracy estimate.",
+      "No independent external human annotation was performed.",
+      "No further checkpoint-006 correction or sealed 10,000-case execution is authorized."
+    ]
+  }
+}
