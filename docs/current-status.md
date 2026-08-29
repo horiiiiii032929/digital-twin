@@ -40,9 +40,14 @@ calls because the provider schema allowed a question without the terminal
 question mark required by the local validator. The ledger records 17,042 input
 and 7,807 output tokens, USD 0.110227, and zero retries. This is an operational
 contract mismatch, not a question-quality result. AFQC-080 revokes authority;
-a new schema-aligned attempt requires a fresh immutable instrument and separate
-authorization. Fresh 500+100 product confirmation, sealed 10,000 execution,
-T1, fidelity, promotion, and deployment remain unauthorized.
+AFQC-081 now builds exactly one schema-aligned successor. Attempt 002 adds the
+existing terminal-question-mark rule to the strict provider schema, uses fresh
+instrument, binding, ledger, result, and package identities, and changes no
+source, case, gold, prompt, model, quota, gate, call, retry, or cost decision.
+Its eight focused tests and network-free 100-cluster/500-case selection pass.
+Attempt 002 remains provider-unauthorized and absent from the bounded execution
+allowlist. Fresh 500+100 product confirmation, sealed 10,000 execution, T1,
+fidelity, promotion, and deployment remain unauthorized.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.

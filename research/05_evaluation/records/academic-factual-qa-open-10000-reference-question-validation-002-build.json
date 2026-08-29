@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-question-validation-002-build",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-reference-validation-pool-001",
+  "corpus_id": "four-public-open-educational-source-families-fresh-complete-regions-003",
+  "code_revision": "6c74a0e",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "reference-question-provider-schema-misaligned",
+        "version": "reference-question-validation-001",
+        "configuration": {
+          "author_question_pattern_enforced": false,
+          "fresh_output_identity": false,
+          "maximum_calls": 80,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-local-question-contract-alignment",
+          "value": 0.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-selected-cases",
+          "value": 500.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regressions",
+          "value": 6.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-call-count",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "provider-local-output-set-equality",
+          "passed": false,
+          "evidence": "Attempt 001 provider schema omitted the local terminal-question-mark invariant and the live run stopped after a provider-valid question failed local validation."
+        },
+        {
+          "name": "fresh-exclusive-successor-identity",
+          "passed": false,
+          "evidence": "Attempt 001 ledger and result identities are consumed historical artifacts and cannot be reused for a successor."
+        },
+        {
+          "name": "method-and-data-remain-frozen",
+          "passed": true,
+          "evidence": "The historical instrument preserves its original pool, prompts, models, quotas, gates, and operational bounds."
+        },
+        {
+          "name": "paid-and-product-execution-remain-closed",
+          "passed": true,
+          "evidence": "Attempt 001 authority is revoked and product and final execution remain false."
+        }
+      ],
+      "failures_by_category": {
+        "provider-local-schema-mismatch": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "reference-question-provider-schema-aligned",
+        "version": "reference-question-validation-002-build",
+        "configuration": {
+          "author_question_pattern_enforced": true,
+          "fresh_output_identity": true,
+          "maximum_calls": 80,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-local-question-contract-alignment",
+          "value": 1.0,
+          "unit": "binary",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-selected-cases",
+          "value": 500.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regressions",
+          "value": 8.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-call-count",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "provider-local-output-set-equality",
+          "passed": true,
+          "evidence": "The strict provider schema now requires question strings to match \\?$ and the unchanged local validator requires normalized questions to end with ?."
+        },
+        {
+          "name": "fresh-exclusive-successor-identity",
+          "passed": true,
+          "evidence": "Attempt 002 has distinct instrument, binding, ledger, result, cases, and gold paths and cannot import attempt-001 votes."
+        },
+        {
+          "name": "method-and-data-remain-frozen",
+          "passed": true,
+          "evidence": "The source pool hash, prompts, model snapshots, cases, gold, quotas, acceptance gates, 80-call ceiling, zero retries, and USD 12 stop are unchanged."
+        },
+        {
+          "name": "paid-and-product-execution-remain-closed",
+          "passed": true,
+          "evidence": "Attempt 002 is absent from the bounded freeze allowlist and every provider, paid, product, and final authorization flag is false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "reference-question-provider-schema-aligned",
+    "rationale": "The sole prospective correction makes provider-side and local validation enforce the same already-frozen question invariant while preserving all method, data, model, gate, and budget decisions. It is ready for a separately authorized live validation, not for product or final execution.",
+    "limitations": [
+      "This is network-free build evidence and does not establish reference-question or product quality.",
+      "The exact 80-call reference validation remains separately unauthorized.",
+      "Both model roles use OpenAI snapshots from one provider family and are not independent external human annotation.",
+      "No 500+100 product confirmation, sealed 10,000-case run, T1 promotion, professor-fidelity evaluation, visual evaluation, or deployment occurred."
+    ]
+  }
+}

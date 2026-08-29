@@ -1226,12 +1226,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Command review verifies the finite reference-validation build, simulation, preflight, execution, resume, scoring, and materialization commands are explicit; provider execution stays exact-instrument freeze guarded and the normal repository gate remains unchanged.",
+      "evidence": "Command review verifies separate attempt-001 history and explicit attempt-002 validation, simulation, preflight, execution, resume, scoring, and materialization commands; attempt 002 remains freeze blocked and the normal repository gate includes its build validation.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "f47ec936a3704fdd0fb38178da9739ae2d93ce746df3fb72867dd412d6371481"
+      "sha256": "b83ffdd7743859a4c7c07aae5432badb25cf7c6dadcd1803610d2e147bac8761"
     },
     {
       "audit_status": "audited",
@@ -6044,12 +6044,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify reference-question-validation-001 is no longer a bounded authorization after its invalid execution; final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+      "evidence": "Focused freeze-policy tests verify reference-question-validation-001 remains revoked and build-only attempt 002 is not a bounded authorization; final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "967596f0e7b0fffa229a97ba7189e1238e248fc92b96ca804d448e94e6a16ec6"
+      "sha256": "93807e3022c384e0869e12652e34d1668c63e75435f963b844f76bb98dd6c82d"
     },
     {
       "audit_status": "audited",
@@ -7320,12 +7320,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "reference-question-validation",
+      "evidence": "Attempt-002 binding review keeps the exact dated direct OpenAI snapshots, store=false, no router or fallback, public-source roles, zero retries, 80-call and USD 12 bounds, and records the supported terminal-question pattern while all execution authority remains false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_002.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "c0fbbc6c30d0315bb7a8ca1793f7f9378937d3ee95194ec953adf76832d59ca0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
       "evidence": "Instrument review preserves the 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, and deterministic authority while recording invalid execution and revoked provider, paid, validation, product, and final authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_001.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
       "sha256": "a848052e0436db5c94530faf194471d3aa5af9cee9489c342d8163056d287652"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Attempt-002 instrument review changes only provider-schema enforcement of the existing terminal-question invariant, uses fresh exclusive identities, preserves the source pool, prompts, models, quotas, gates, calls, retries, and budget, and leaves provider, product, and final execution unauthorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_002.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "c67600e79231f8838452cc80d3318b5f0c4704cd58e344b893401c2f215b23c4"
     },
     {
       "audit_status": "audited",
@@ -7342,12 +7364,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "reference-question-validation",
-      "evidence": "Runner review verifies source-visible construction, target-blind review inputs, strict schemas, exact identity and cost accounting, atomic resume, deterministic scoring, exclusive materialization, zero automatic product calls, and build-only validation after authorization revocation.",
+      "evidence": "Runner review verifies immutable attempt selection, source-visible construction, target-blind inputs, aligned strict question schemas, distinct ledgers/results/packages, exact accounting, atomic resume, deterministic scoring, zero automatic product calls, and build-only fail-closed preflight.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "8392d4d6f7b1927e51ad79c786756027793a9efa2090274ce00a9c99edb4f1af"
+      "sha256": "273dd050548253ac5168cf6fb30704ffab662f02448d4fb703a5de27c1f38b37"
     },
     {
       "audit_status": "audited",
@@ -7364,12 +7386,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "reference-question-validation-verification",
-      "evidence": "Focused tests cover source disjointness, byte stability, truth-visible authoring, blind review separation, exact 500-case selection, quota shortfall, ambiguity and duplicate rejection, plus fail-closed preflight after authorization revocation.",
+      "evidence": "Eight focused tests cover source disjointness, byte stability, truth-visible authoring, blind review separation, exact selection, quota shortfall, ambiguity and duplicate rejection, provider/local question-schema equality, fresh attempt outputs, and unauthorized preflight.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_reference_validation.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "7c2dcf67435b8b1ddc08a0c0cbf68762ab96de495624b6f0610dcefa2ba47b86"
+      "sha256": "6308ce7c1ab9fbffed61d90ca359c66d160ceda486769bcb7b7a7615b4a8e7c1"
     }
   ],
   "schema_version": 1

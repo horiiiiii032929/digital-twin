@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-002",
+  "owner_issue": 127,
+  "status": "frozen-build-only-provider-unauthorized",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-001",
+  "decision_question": "Can the unchanged source-visible author and target-blind reviewer method complete the fresh 500-case reference validation when its provider schema and local question invariant accept exactly the same outputs?",
+  "dataset": {
+    "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
+    "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
+    "candidate_cluster_count": 160,
+    "candidate_case_count": 800,
+    "selected_cluster_count": 100,
+    "selected_case_count": 500,
+    "clusters_per_batch": 4,
+    "batch_count": 40,
+    "source_disjoint_from_checkpoint_007": true,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-002",
+    "author_role": "source-visible-question-author",
+    "reviewer_role": "target-blind-answer-reviewer",
+    "author_receives": [
+      "public source context",
+      "course and section identity",
+      "expected action",
+      "canonical answer and exact spans for answerable construction cases",
+      "boundary reason for boundary construction cases"
+    ],
+    "reviewer_receives": [
+      "public source context",
+      "course and section identity",
+      "candidate question"
+    ],
+    "reviewer_never_receives": [
+      "expected action",
+      "canonical answer",
+      "required evidence spans",
+      "author rationale"
+    ],
+    "deterministic_authority": "Compare the blind recovered action and exact answer spans with pinned source-linked gold after all votes are durable.",
+    "complete_cluster_selection": true,
+    "quota_relaxation_allowed": false,
+    "canonical_fallback_allowed": false,
+    "automatic_product_execution_allowed": false
+  },
+  "schema_alignment": {
+    "historical_failure": "Attempt 001 omitted the local terminal-question-mark invariant from the provider schema, allowing a provider-valid response that local validation rejected.",
+    "author_question_pattern": "\\?$",
+    "provider_and_local_output_sets_aligned": true,
+    "local_normalization_allowed": false,
+    "prompt_changed": false,
+    "source_pool_changed": false,
+    "cases_or_gold_changed": false,
+    "models_changed": false,
+    "quality_gates_changed": false,
+    "official_structured_outputs_source": "https://developers.openai.com/api/docs/guides/structured-outputs"
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 80,
+    "maximum_physical_attempts": 80,
+    "maximum_global_transport_retries": 0,
+    "maximum_cost_usd": 12.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "selected_case_count_required": 500,
+    "selected_cluster_count_required": 100,
+    "selected_case_action_recovery_required": 1.0,
+    "selected_case_answer_span_recovery_required": 1.0,
+    "selected_case_unambiguous_required": 1.0,
+    "selected_case_naturalness_required": 1.0,
+    "selected_case_gold_hint_leak_count_max": 0,
+    "selected_case_normalized_duplicate_count_max": 0,
+    "allocation_shortfall_count_max": 0,
+    "provider_completion_rate_required": 1.0,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "319e6644b3474f7280c19eb7b95c3b082976cd7529c92f4ff9e668064be13b01"
+}

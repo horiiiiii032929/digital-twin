@@ -51,6 +51,11 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
+            "academic-factual-qa-open-10000-reference-question-validation-002",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
             "academic-factual-qa-open-10000-development-product-checkpoint-007",
             "external_model_evaluation",
         )
@@ -84,9 +89,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
             "academic-factual-qa-open-10000-v1", "dataset_generation"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
-        require_bounded_pilot_operation_allowed(
-            "academic-factual-qa-confirmation-002"
-        )
+        require_bounded_pilot_operation_allowed("academic-factual-qa-confirmation-002")
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed("factual-qa-v3-oracle-pilot-001")
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
@@ -128,9 +131,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
             "autonomous-tutoring-graph-development-001"
         )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
-        require_bounded_pilot_operation_allowed(
-            "proactive-outreach-a1-development-001"
-        )
+        require_bounded_pilot_operation_allowed("proactive-outreach-a1-development-001")
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "proactive-outreach-a1-shadow-confirmation-002"

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import os
@@ -22,7 +23,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.build_academic_factual_qa_open_reference_validation import (  # noqa: E402
-    INSTRUMENT_ID,
     TARGET_ALLOCATION,
     author_requests,
     build_reference_pool,
@@ -53,33 +53,79 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 )
 
 
-BINDING_ID = "academic-factual-qa-open-10000-reference-question-binding-001"
-INSTRUMENT_PATH = ROOT / (
-    "research/05_evaluation/instruments/"
-    "academic_factual_qa_open_10000_reference_question_validation_001.json"
-)
-BINDING_PATH = ROOT / (
-    "research/05_evaluation/instruments/"
-    "academic_factual_qa_open_10000_reference_question_binding_001.json"
-)
-LEDGER_PATH = ROOT / (
-    "reports/generated/academic-factual-qa-open-10000-reference-question-"
-    "validation-001.sqlite3"
-)
-RESULT_PATH = ROOT / (
-    "reports/generated/academic-factual-qa-open-10000-reference-question-"
-    "validation-001-result.json"
-)
-CASES_PATH = ROOT / (
-    "research/05_evaluation/datasets/"
-    "academic_factual_qa_open_10000_v1_development_reference_validated_001_cases.json"
-)
-GOLD_PATH = ROOT / (
-    "research/05_evaluation/datasets/"
-    "academic_factual_qa_open_10000_v1_development_reference_validated_001_gold.json"
-)
 AUTHOR_ROLE = "source-visible-question-author"
 REVIEWER_ROLE = "target-blind-answer-reviewer"
+
+
+@dataclass(frozen=True)
+class ReferenceQuestionAttempt:
+    instrument_id: str
+    binding_id: str
+    instrument_path: Path
+    binding_path: Path
+    ledger_path: Path
+    result_path: Path
+    cases_path: Path
+    gold_path: Path
+    author_question_pattern: str | None = None
+
+
+def _attempt(*, suffix: str, question_pattern: str | None) -> ReferenceQuestionAttempt:
+    return ReferenceQuestionAttempt(
+        instrument_id=(
+            "academic-factual-qa-open-10000-reference-question-validation-" + suffix
+        ),
+        binding_id=(
+            "academic-factual-qa-open-10000-reference-question-binding-" + suffix
+        ),
+        instrument_path=ROOT
+        / (
+            "research/05_evaluation/instruments/"
+            "academic_factual_qa_open_10000_reference_question_validation_"
+            + suffix
+            + ".json"
+        ),
+        binding_path=ROOT
+        / (
+            "research/05_evaluation/instruments/"
+            "academic_factual_qa_open_10000_reference_question_binding_"
+            + suffix
+            + ".json"
+        ),
+        ledger_path=ROOT
+        / (
+            "reports/generated/academic-factual-qa-open-10000-reference-question-"
+            "validation-" + suffix + ".sqlite3"
+        ),
+        result_path=ROOT
+        / (
+            "reports/generated/academic-factual-qa-open-10000-reference-question-"
+            "validation-" + suffix + "-result.json"
+        ),
+        cases_path=ROOT
+        / (
+            "research/05_evaluation/datasets/"
+            "academic_factual_qa_open_10000_v1_development_reference_validated_"
+            + suffix
+            + "_cases.json"
+        ),
+        gold_path=ROOT
+        / (
+            "research/05_evaluation/datasets/"
+            "academic_factual_qa_open_10000_v1_development_reference_validated_"
+            + suffix
+            + "_gold.json"
+        ),
+        author_question_pattern=question_pattern,
+    )
+
+
+ATTEMPT_001 = _attempt(suffix="001", question_pattern=None)
+ATTEMPT_002 = _attempt(suffix="002", question_pattern=r"\?$")
+ATTEMPTS = {
+    ATTEMPT_001.instrument_id: ATTEMPT_001,
+    ATTEMPT_002.instrument_id: ATTEMPT_002,
+}
 
 
 class ReferenceQuestionCheckpointError(RuntimeError):
@@ -89,7 +135,9 @@ class ReferenceQuestionCheckpointError(RuntimeError):
 def _load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
-        raise ReferenceQuestionCheckpointError(f"JSON root is not an object: {path.name}")
+        raise ReferenceQuestionCheckpointError(
+            f"JSON root is not an object: {path.name}"
+        )
     return value
 
 
@@ -105,12 +153,20 @@ def _load_hashed(path: Path, *, key: str, identity: str) -> dict[str, Any]:
     return value
 
 
-def _instrument() -> dict[str, Any]:
-    return _load_hashed(INSTRUMENT_PATH, key="instrument_id", identity=INSTRUMENT_ID)
+def _instrument(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
+    return _load_hashed(
+        attempt.instrument_path,
+        key="instrument_id",
+        identity=attempt.instrument_id,
+    )
 
 
-def _binding() -> dict[str, Any]:
-    return _load_hashed(BINDING_PATH, key="binding_id", identity=BINDING_ID)
+def _binding(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
+    return _load_hashed(
+        attempt.binding_path,
+        key="binding_id",
+        identity=attempt.binding_id,
+    )
 
 
 def _batches(rows: list[Any], size: int) -> Iterable[list[Any]]:
@@ -118,8 +174,10 @@ def _batches(rows: list[Any], size: int) -> Iterable[list[Any]]:
         yield rows[start : start + size]
 
 
-def _author_schema(count: int) -> dict[str, Any]:
-    return {
+def _author_schema(
+    count: int, *, attempt: ReferenceQuestionAttempt = ATTEMPT_001
+) -> dict[str, Any]:
+    schema: dict[str, Any] = {
         "type": "object",
         "additionalProperties": False,
         "required": ["items"],
@@ -144,6 +202,11 @@ def _author_schema(count: int) -> dict[str, Any]:
             }
         },
     }
+    if attempt.author_question_pattern is not None:
+        schema["properties"]["items"]["items"]["properties"]["question"]["pattern"] = (
+            attempt.author_question_pattern
+        )
+    return schema
 
 
 def _review_schema(count: int) -> dict[str, Any]:
@@ -290,9 +353,13 @@ def _repo_dirty() -> bool:
     )
 
 
-def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
-    instrument = _instrument()
-    binding = _binding()
+def validate(
+    *,
+    require_unauthorized: bool = True,
+    attempt: ReferenceQuestionAttempt = ATTEMPT_001,
+) -> dict[str, Any]:
+    instrument = _instrument(attempt)
+    binding = _binding(attempt)
     pool = build_reference_pool()
     if pool["content_sha256"] != instrument["dataset"]["source_pool_sha256"]:
         raise ReferenceQuestionCheckpointError("fresh source-pool hash drifted")
@@ -324,16 +391,16 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         }
         for row in authors
     ]
-    review_system, review_prompt = _review_prompt(
-        clusters=clusters, items=review_items
-    )
+    review_system, review_prompt = _review_prompt(clusters=clusters, items=review_items)
     author_transport = DirectProviderJsonTransport(binding["providers"][AUTHOR_ROLE])
-    reviewer_transport = DirectProviderJsonTransport(binding["providers"][REVIEWER_ROLE])
+    reviewer_transport = DirectProviderJsonTransport(
+        binding["providers"][REVIEWER_ROLE]
+    )
     author_payload = author_transport._payload(  # noqa: SLF001
         system=author_system,
         prompt=author_prompt,
         task="reference-question-author-contract",
-        schema=_author_schema(len(requests)),
+        schema=_author_schema(len(requests), attempt=attempt),
     )
     review_payload = reviewer_transport._payload(  # noqa: SLF001
         system=review_system,
@@ -341,26 +408,41 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         task="reference-question-review-contract",
         schema=_review_schema(len(requests)),
     )
-    if author_payload.get("store") is not False or review_payload.get("store") is not False:
+    if (
+        author_payload.get("store") is not False
+        or review_payload.get("store") is not False
+    ):
         raise ReferenceQuestionCheckpointError("reference request store=false drifted")
     serialized = json.dumps(
         {"author": author_payload, "reviewer": review_payload}, sort_keys=True
     ).casefold()
-    if any(name in serialized for name in ("openrouter", "deepseek", "gemini", "mistral")):
-        raise ReferenceQuestionCheckpointError("retired provider leaked into checkpoint")
+    if any(
+        name in serialized for name in ("openrouter", "deepseek", "gemini", "mistral")
+    ):
+        raise ReferenceQuestionCheckpointError(
+            "retired provider leaked into checkpoint"
+        )
     if any(
         key in review_items[0]
         for key in ("expected_action", "canonical_answer", "required_answer_spans")
     ):
         raise ReferenceQuestionCheckpointError("blind reviewer input exposes truth")
+    question_schema = author_payload["text"]["format"]["schema"]["properties"]["items"][
+        "items"
+    ]["properties"]["question"]
+    if (
+        attempt.author_question_pattern is not None
+        and question_schema.get("pattern") != attempt.author_question_pattern
+    ):
+        raise ReferenceQuestionCheckpointError("author question schema pattern drifted")
     if require_unauthorized and (
         any(instrument["authorization"].values())
         or any(binding["authorization"].values())
     ):
         raise ReferenceQuestionCheckpointError("build-only authority drifted")
     return {
-        "instrument_id": INSTRUMENT_ID,
-        "binding_id": BINDING_ID,
+        "instrument_id": attempt.instrument_id,
+        "binding_id": attempt.binding_id,
         "status": "passed-build-only",
         "candidate_cluster_count": pool["candidate_cluster_count"],
         "candidate_case_count": pool["candidate_case_count"],
@@ -370,6 +452,7 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
         "maximum_calls": instrument["operational_bounds"]["maximum_logical_calls"],
         "source_disjoint_from_checkpoint_007": True,
         "strict_schema_requested": True,
+        "author_question_pattern": attempt.author_question_pattern,
         "openai_store": False,
         "provider_calls": 0,
         "product_calls": 0,
@@ -411,7 +494,7 @@ def _simulated_votes() -> tuple[
     return pool, authors, reviewers
 
 
-def simulate() -> dict[str, Any]:
+def simulate(*, attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
     pool, authors, reviewers = _simulated_votes()
     score = score_reference_questions(
         base_cases=[EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]],
@@ -424,7 +507,7 @@ def simulate() -> dict[str, Any]:
         target_allocation=TARGET_ALLOCATION,
     )
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": attempt.instrument_id,
         "status": "simulated-network-free",
         "decision": score["status"],
         "candidate_case_count": score["candidate_case_count"],
@@ -439,23 +522,27 @@ def simulate() -> dict[str, Any]:
     }
 
 
-def preflight(*, resume: bool = False) -> dict[str, Any]:
-    instrument = _instrument()
-    binding = _binding()
+def preflight(
+    *,
+    resume: bool = False,
+    attempt: ReferenceQuestionAttempt = ATTEMPT_001,
+) -> dict[str, Any]:
+    instrument = _instrument(attempt)
+    binding = _binding(attempt)
     blockers: list[str] = []
     try:
-        validate(require_unauthorized=False)
+        validate(require_unauthorized=False, attempt=attempt)
     except Exception as error:  # noqa: BLE001
         blockers.append(f"build-validation-failed:{type(error).__name__}")
     if _repo_dirty():
         blockers.append("repository-dirty")
-    if resume and not LEDGER_PATH.is_file():
+    if resume and not attempt.ledger_path.is_file():
         blockers.append("resume-ledger-missing")
-    if not resume and LEDGER_PATH.exists():
+    if not resume and attempt.ledger_path.exists():
         blockers.append("exclusive-ledger-path-used")
-    if RESULT_PATH.exists():
+    if attempt.result_path.exists():
         blockers.append("exclusive-result-path-used")
-    operations = set(BOUNDED_PILOT_AUTHORIZATIONS.get(INSTRUMENT_ID, ()))
+    operations = set(BOUNDED_PILOT_AUTHORIZATIONS.get(attempt.instrument_id, ()))
     for operation in ("external_model_evaluation", "method_evaluation_execution"):
         if operation not in operations:
             blockers.append(f"freeze-{operation}-authorization-missing")
@@ -483,7 +570,7 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
     if instrument["authorization"]["final_execution_authorized"]:
         blockers.append("final-execution-must-remain-unauthorized")
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": attempt.instrument_id,
         "status": "ready" if not blockers else "blocked-not-authorized",
         "blockers": sorted(set(blockers)),
         "maximum_calls": instrument["operational_bounds"]["maximum_logical_calls"],
@@ -495,10 +582,14 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
     }
 
 
-async def execute(*, resume: bool) -> dict[str, Any]:
-    require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "external_model_evaluation")
-    instrument = _instrument()
-    binding = _binding()
+async def execute(
+    *, resume: bool, attempt: ReferenceQuestionAttempt = ATTEMPT_001
+) -> dict[str, Any]:
+    require_bounded_pilot_operation_allowed(
+        attempt.instrument_id, "external_model_evaluation"
+    )
+    instrument = _instrument(attempt)
+    binding = _binding(attempt)
     for record in (instrument, binding):
         if not all(
             record["authorization"][key]
@@ -508,8 +599,10 @@ async def execute(*, resume: bool) -> dict[str, Any]:
                 "reference_question_validation_authorized",
             )
         ):
-            raise ReferenceQuestionCheckpointError("reference execution is unauthorized")
-    readiness = preflight(resume=resume)
+            raise ReferenceQuestionCheckpointError(
+                "reference execution is unauthorized"
+            )
+    readiness = preflight(resume=resume, attempt=attempt)
     if readiness["status"] != "ready":
         raise ReferenceQuestionCheckpointError(
             "reference preflight blocked: " + ", ".join(readiness["blockers"])
@@ -521,15 +614,15 @@ async def execute(*, resume: bool) -> dict[str, Any]:
     for row in requests:
         requests_by_cluster.setdefault(row["cluster_id"], []).append(row)
     run_binding = {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": attempt.instrument_id,
         "instrument_sha256": instrument["content_sha256"],
-        "binding_id": BINDING_ID,
+        "binding_id": attempt.binding_id,
         "binding_sha256": binding["content_sha256"],
         "source_pool_sha256": pool["content_sha256"],
         "code_revision": _git_revision(),
     }
     ledger = ProviderCallLedgerV1(
-        LEDGER_PATH,
+        attempt.ledger_path,
         run_binding=run_binding,
         maximum_calls=instrument["operational_bounds"]["maximum_logical_calls"],
         maximum_cost_usd=instrument["operational_bounds"]["maximum_cost_usd"],
@@ -548,7 +641,9 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             author_system, author_prompt = _author_prompt(
                 clusters=cluster_batch, requests=batch_requests
             )
-            author_transport = DirectProviderJsonTransport(binding["providers"][AUTHOR_ROLE])
+            author_transport = DirectProviderJsonTransport(
+                binding["providers"][AUTHOR_ROLE]
+            )
             authored = await author_transport.call_with_ledger(
                 ledger=ledger,
                 request_key=f"author-{batch_number:03d}",
@@ -556,7 +651,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
                 system=author_system,
                 prompt=author_prompt,
                 task="academic-reference-question-authoring",
-                schema=_author_schema(len(expected_ids)),
+                schema=_author_schema(len(expected_ids), attempt=attempt),
             )
             author_rows = _parse_authors(authored.content, expected_ids)
             request_by_id = {row["case_id"]: row for row in batch_requests}
@@ -586,13 +681,14 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             )
             _parse_reviews(reviewed.content, expected_ids)
         snapshot = ledger.snapshot()
-        if snapshot["provider_calls"] != instrument["operational_bounds"][
-            "maximum_logical_calls"
-        ]:
+        if (
+            snapshot["provider_calls"]
+            != instrument["operational_bounds"]["maximum_logical_calls"]
+        ):
             ledger.mark_invalid_execution()
             raise ReferenceQuestionCheckpointError("reference call count drifted")
         ledger.mark_complete()
-        return {**ledger.snapshot(), "instrument_id": INSTRUMENT_ID}
+        return {**ledger.snapshot(), "instrument_id": attempt.instrument_id}
     except KeyboardInterrupt:
         ledger.mark_interrupted()
         raise
@@ -603,10 +699,12 @@ async def execute(*, resume: bool) -> dict[str, Any]:
         ledger.close()
 
 
-def _ledger_rows() -> tuple[dict[str, str], list[tuple[str, ProviderJsonResponse]]]:
-    if not LEDGER_PATH.is_file():
+def _ledger_rows(
+    attempt: ReferenceQuestionAttempt = ATTEMPT_001,
+) -> tuple[dict[str, str], list[tuple[str, ProviderJsonResponse]]]:
+    if not attempt.ledger_path.is_file():
         raise ReferenceQuestionCheckpointError("reference ledger does not exist")
-    connection = sqlite3.connect(LEDGER_PATH)
+    connection = sqlite3.connect(attempt.ledger_path)
     try:
         metadata = dict(connection.execute("SELECT key, value FROM metadata"))
         rows = connection.execute(
@@ -621,10 +719,12 @@ def _ledger_rows() -> tuple[dict[str, str], list[tuple[str, ProviderJsonResponse
     ]
 
 
-def score() -> dict[str, Any]:
-    require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "method_evaluation_execution")
-    instrument = _instrument()
-    metadata, rows = _ledger_rows()
+def score(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
+    require_bounded_pilot_operation_allowed(
+        attempt.instrument_id, "method_evaluation_execution"
+    )
+    instrument = _instrument(attempt)
+    metadata, rows = _ledger_rows(attempt)
     if metadata.get("status") != "completed":
         raise ReferenceQuestionCheckpointError("reference ledger is not complete")
     if len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]:
@@ -657,8 +757,8 @@ def score() -> dict[str, Any]:
     )
     payload: dict[str, Any] = {
         "schema_version": 1,
-        "instrument_id": INSTRUMENT_ID,
-        "binding_id": BINDING_ID,
+        "instrument_id": attempt.instrument_id,
+        "binding_id": attempt.binding_id,
         "source_pool_sha256": pool["content_sha256"],
         **scored,
         "provider_calls": len(rows),
@@ -667,10 +767,12 @@ def score() -> dict[str, Any]:
         "final_split_opened": False,
     }
     payload["content_sha256"] = canonical_json_sha256(payload)
-    if RESULT_PATH.exists():
+    if attempt.result_path.exists():
         raise ReferenceQuestionCheckpointError("reference result path already exists")
-    RESULT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    descriptor = os.open(RESULT_PATH, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    attempt.result_path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor = os.open(
+        attempt.result_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600
+    )
     with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, sort_keys=True)
         handle.write("\n")
@@ -681,11 +783,17 @@ def score() -> dict[str, Any]:
     }
 
 
-def _package(*, dataset_id: str, rows_key: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
+def _package(
+    *,
+    dataset_id: str,
+    rows_key: str,
+    rows: list[dict[str, Any]],
+    attempt: ReferenceQuestionAttempt = ATTEMPT_001,
+) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "schema_version": 1,
         "dataset_id": dataset_id,
-        "construction_instrument_id": INSTRUMENT_ID,
+        "construction_instrument_id": attempt.instrument_id,
         "case_count": len(rows),
         rows_key: rows,
         "private_data_used": False,
@@ -695,37 +803,54 @@ def _package(*, dataset_id: str, rows_key: str, rows: list[dict[str, Any]]) -> d
     return payload
 
 
-def materialize() -> dict[str, Any]:
-    result = _load_hashed(RESULT_PATH, key="instrument_id", identity=INSTRUMENT_ID)
+def materialize(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
+    result = _load_hashed(
+        attempt.result_path,
+        key="instrument_id",
+        identity=attempt.instrument_id,
+    )
     if result.get("status") != "completed-go-deeper":
-        raise ReferenceQuestionCheckpointError("only a passing reference result can materialize")
+        raise ReferenceQuestionCheckpointError(
+            "only a passing reference result can materialize"
+        )
     if result.get("selected_case_count") != 500:
         raise ReferenceQuestionCheckpointError("selected reference set is incomplete")
     packages = {
-        CASES_PATH: _package(
-            dataset_id="academic-factual-qa-open-10000-v1-development-reference-validated-001",
+        attempt.cases_path: _package(
+            dataset_id=(
+                "academic-factual-qa-open-10000-v1-development-reference-validated-"
+                + attempt.instrument_id.rsplit("-", 1)[-1]
+            ),
             rows_key="cases",
             rows=result["selected_cases"],
+            attempt=attempt,
         ),
-        GOLD_PATH: _package(
-            dataset_id="academic-factual-qa-open-10000-v1-development-reference-validated-001-gold",
+        attempt.gold_path: _package(
+            dataset_id=(
+                "academic-factual-qa-open-10000-v1-development-reference-validated-"
+                + attempt.instrument_id.rsplit("-", 1)[-1]
+                + "-gold"
+            ),
             rows_key="gold",
             rows=result["selected_gold"],
+            attempt=attempt,
         ),
     }
     if any(path.exists() for path in packages):
-        raise ReferenceQuestionCheckpointError("reference package output already exists")
+        raise ReferenceQuestionCheckpointError(
+            "reference package output already exists"
+        )
     for path, payload in packages.items():
         descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
         with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
             json.dump(payload, handle, indent=2, sort_keys=True)
             handle.write("\n")
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": attempt.instrument_id,
         "status": "materialized",
         "case_count": 500,
-        "cases_content_sha256": packages[CASES_PATH]["content_sha256"],
-        "gold_content_sha256": packages[GOLD_PATH]["content_sha256"],
+        "cases_content_sha256": packages[attempt.cases_path]["content_sha256"],
+        "gold_content_sha256": packages[attempt.gold_path]["content_sha256"],
         "provider_calls": 0,
         "product_calls": 0,
         "final_split_opened": False,
@@ -742,24 +867,34 @@ def main() -> int:
     mode.add_argument("--execute", action="store_true")
     mode.add_argument("--score", action="store_true")
     mode.add_argument("--materialize", action="store_true")
+    parser.add_argument(
+        "--attempt",
+        choices=sorted(ATTEMPTS),
+        default=ATTEMPT_001.instrument_id,
+    )
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
+    attempt = ATTEMPTS[arguments.attempt]
     if arguments.execute:
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "external_model_evaluation")
+        require_bounded_pilot_operation_allowed(
+            attempt.instrument_id, "external_model_evaluation"
+        )
     if arguments.score:
-        require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "method_evaluation_execution")
+        require_bounded_pilot_operation_allowed(
+            attempt.instrument_id, "method_evaluation_execution"
+        )
     if arguments.validate:
-        result = validate()
+        result = validate(attempt=attempt)
     elif arguments.simulate:
-        result = simulate()
+        result = simulate(attempt=attempt)
     elif arguments.preflight:
-        result = preflight(resume=arguments.resume)
+        result = preflight(resume=arguments.resume, attempt=attempt)
     elif arguments.execute:
-        result = asyncio.run(execute(resume=arguments.resume))
+        result = asyncio.run(execute(resume=arguments.resume, attempt=attempt))
     elif arguments.score:
-        result = score()
+        result = score(attempt)
     else:
-        result = materialize()
+        result = materialize(attempt)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
