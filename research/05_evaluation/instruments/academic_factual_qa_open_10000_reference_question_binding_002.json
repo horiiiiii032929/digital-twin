@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "binding_id": "academic-factual-qa-open-10000-reference-question-binding-002",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "verified_at": "2026-08-29T17:41:51+08:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-development-inputs-only",
@@ -72,11 +72,11 @@
     "production_private_data_authorized": false
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "5b62784d9f8eb92584de9620067689ca93643f1a6d1eb8bb4a372769581fa351"
+  "content_sha256": "1a309628321d9558c8778c89b4ab42c4b02b3c7b29be87b8852b8b16c7aaa62f"
 }

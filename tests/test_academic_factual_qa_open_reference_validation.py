@@ -170,7 +170,7 @@ def test_preflight_is_blocked_after_authority_revocation(
 
 
 def test_attempt_002_aligns_provider_schema_with_local_question_invariant() -> None:
-    result = runner.validate(require_unauthorized=False, attempt=runner.ATTEMPT_002)
+    result = runner.validate(attempt=runner.ATTEMPT_002)
     question_schema = runner._author_schema(20, attempt=runner.ATTEMPT_002)[  # noqa: SLF001
         "properties"
     ]["items"]["items"]["properties"]["question"]
@@ -195,7 +195,7 @@ def test_attempt_002_aligns_provider_schema_with_local_question_invariant() -> N
         )
 
 
-def test_attempt_002_has_fresh_outputs_and_exact_bounded_authority(
+def test_attempt_002_has_fresh_outputs_and_revoked_authority(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path,
 ) -> None:
@@ -214,8 +214,13 @@ def test_attempt_002_has_fresh_outputs_and_exact_bounded_authority(
     assert attempt.result_path != runner.ATTEMPT_001.result_path
     assert simulation["selected_cluster_count"] == 100
     assert simulation["selected_case_count"] == 500
-    assert preflight["status"] == "ready"
-    assert preflight["blockers"] == []
+    assert preflight["status"] == "blocked-not-authorized"
+    assert (
+        "freeze-external_model_evaluation-authorization-missing"
+        in preflight["blockers"]
+    )
+    assert "instrument-provider-execution-authorized-false" in preflight["blockers"]
+    assert "binding-provider-execution-authorized-false" in preflight["blockers"]
     assert preflight["provider_calls"] == 0
     assert preflight["product_calls"] == 0
     assert preflight["final_split_opened"] is False

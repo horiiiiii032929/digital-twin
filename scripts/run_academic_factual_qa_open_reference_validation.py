@@ -884,7 +884,7 @@ def main() -> int:
             attempt.instrument_id, "method_evaluation_execution"
         )
     if arguments.validate:
-        result = validate(require_unauthorized=False, attempt=attempt)
+        result = validate(attempt=attempt)
     elif arguments.simulate:
         result = simulate(attempt=attempt)
     elif arguments.preflight:

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-002",
   "owner_issue": 127,
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-reference-question-validation-001",
   "decision_question": "Can the unchanged source-visible author and target-blind reviewer method complete the fresh 500-case reference validation when its provider schema and local question invariant accept exactly the same outputs?",
   "dataset": {
@@ -90,11 +90,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "aa8d35395038f5031dd5d84d0850f26553f033f162faa5eb0945c520d1a82c40"
+  "content_sha256": "591b0fd86e9fe219685b317922f9576a3c65bab73fb987b593b2e8694ef52b1e"
 }

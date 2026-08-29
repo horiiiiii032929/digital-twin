@@ -45,12 +45,17 @@ existing terminal-question-mark rule to the strict provider schema, uses fresh
 instrument, binding, ledger, result, and package identities, and changes no
 source, case, gold, prompt, model, quota, gate, call, retry, or cost decision.
 Its eight focused tests and network-free 100-cluster/500-case selection pass.
-AFQC-082 now authorizes only attempt 002 for at most 80 direct OpenAI calls,
-zero retries, and the unchanged USD 12 stop after official snapshot, pricing,
-endpoint, and Structured Outputs support were reverified. Fresh 500+100 product
-confirmation, sealed 10,000 execution, T1, fidelity, promotion, and deployment
-remain unauthorized. The immediate action is a clean preflight, one execution,
-scoring, and mandatory authorization revocation.
+AFQC-082 authorized only attempt 002 for at most 80 direct OpenAI calls, zero
+retries, and the unchanged USD 12 stop. AFQC-083 records the result as
+`invalid-execution`: 18 paired batches completed, then author batch 19 returned
+all 20 expected IDs exactly once but reordered them relative to the frozen
+request. The strict runner rejected the batch before review or scoring. The
+ledger records 37 successful calls, 93,609 input and 44,527 output tokens, USD
+0.65079725, and zero retries or transport failures. No reference-question
+quality estimate is valid. Attempt-002 authority is revoked, and the finite
+schema-aligned successor track stops without an automatic third attempt. Fresh
+500+100 product confirmation, sealed 10,000 execution, T1, fidelity, promotion,
+and deployment remain unauthorized pending an explicit method decision.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
