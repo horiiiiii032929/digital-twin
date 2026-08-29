@@ -482,6 +482,50 @@ class ProactiveOutreachService:
         )
         return saved
 
+    def list_triggers(
+        self, professor_id: str, course_id: str
+    ) -> list[ProactiveTrigger]:
+        self._authorize_professor_owner(professor_id, course_id)
+        return self.repository.list_proactive_triggers(course_id)
+
+    def cancel_trigger(
+        self, professor_id: str, course_id: str, trigger_id: str
+    ) -> ProactiveTrigger:
+        self._authorize_professor_owner(professor_id, course_id)
+        trigger = self.repository.get_proactive_trigger(trigger_id)
+        if (
+            trigger is None
+            or trigger.course_id != course_id
+            or trigger.professor_id != professor_id
+        ):
+            raise ProactiveOutreachError(
+                "proactive_trigger_not_found", "The proactive trigger was not found."
+            )
+        if trigger.status == ProactiveTriggerStatus.CANCELLED:
+            return trigger
+        if trigger.status != ProactiveTriggerStatus.PENDING:
+            raise ProactiveOutreachError(
+                "proactive_trigger_not_cancellable",
+                "Only a pending proactive trigger can be cancelled.",
+            )
+        changed_at = datetime.now(UTC).isoformat()
+        cancelled = self.repository.set_proactive_trigger_status(
+            trigger.id,
+            ProactiveTriggerStatus.CANCELLED,
+            suppression_reason="professor-cancelled",
+            updated_at=changed_at,
+        )
+        self.repository.save_audit_event(
+            self._event(
+                "proactive-trigger-cancelled",
+                account_id=professor_id,
+                course_id=course_id,
+                release_id=trigger.release_id,
+                details={"trigger_id": trigger.id},
+            )
+        )
+        return cancelled
+
     def process_due(
         self, *, now: datetime | None = None, limit: int = 100
     ) -> list[ProactiveProcessResult]:
@@ -771,7 +815,7 @@ class ProactiveOutreachService:
             return "student-snoozed"
         return None
 
-    def _authorize_professor_course(self, professor_id: str, course_id: str):
+    def _authorize_professor_owner(self, professor_id: str, course_id: str) -> None:
         professor = self.repository.get_account(professor_id)
         course = self.repository.get_course(course_id)
         membership = self.repository.get_membership(professor_id, course_id)
@@ -789,6 +833,9 @@ class ProactiveOutreachService:
                 "professor_course_forbidden",
                 "Only the active course owner may evaluate proactive tutoring.",
             )
+
+    def _authorize_professor_course(self, professor_id: str, course_id: str):
+        self._authorize_professor_owner(professor_id, course_id)
         release = self.repository.get_published_release(course_id)
         if release is None:
             raise ProactiveOutreachError(

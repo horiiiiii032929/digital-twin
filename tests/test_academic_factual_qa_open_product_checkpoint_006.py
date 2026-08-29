@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -87,8 +88,26 @@ def test_candidate_and_control_share_exact_index_lifecycle() -> None:
         assert candidate[key] == control[key]
 
 
-def test_local_index_preflight_verifies_all_exact_artifacts() -> None:
+def test_local_index_preflight_verifies_all_exact_artifacts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     instrument = _load(checkpoint.INSTRUMENT_PATH)
+    expected = instrument["retrieval_index_lifecycle"]["artifact_ids"]
+
+    class FakeStore:
+        def __init__(self, _root: Path) -> None:
+            pass
+
+        def verify(self, artifact_id: str):
+            course_id = next(
+                key for key, value in expected.items() if value == artifact_id
+            )
+            return SimpleNamespace(
+                artifact_id=artifact_id,
+                binding=SimpleNamespace(course_id=course_id),
+            )
+
+    monkeypatch.setattr(checkpoint, "RetrievalIndexStoreV1", FakeStore)
     assert checkpoint._verify_local_indexes(instrument) == instrument[
         "retrieval_index_lifecycle"
     ]["artifact_ids"]
@@ -140,6 +159,11 @@ def test_clean_terminal_preflight_is_blocked(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
+    monkeypatch.setattr(
+        checkpoint,
+        "_verify_local_indexes",
+        lambda instrument: instrument["retrieval_index_lifecycle"]["artifact_ids"],
+    )
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     result = checkpoint.preflight()
     assert result["status"] == "blocked-not-authorized"

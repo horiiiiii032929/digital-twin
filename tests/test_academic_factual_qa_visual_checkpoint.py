@@ -105,6 +105,7 @@ def test_visual_preflight_is_network_free_and_fail_closed(tmp_path: Path) -> Non
 def test_visual_simulations_preserve_gates_and_never_select_profile(
     tmp_path: Path,
 ) -> None:
+    build_dataset(write_assets=True)
     checkpoint = validate_checkpoint()
     qualification = asyncio.run(
         run_stage(

@@ -1,0 +1,124 @@
+{
+  "schema_version": "2.0.0",
+  "instrument_id": "academic-factual-qa-r1-model-cascade-001",
+  "status": "completed-refine",
+  "execution_attempt_id": "002",
+  "result_id": "academic-factual-qa-r1-model-cascade-001-attempt-002-refine",
+  "supersedes_invalid_attempt": "academic-factual-qa-r1-model-cascade-001-attempt-001-invalid",
+  "decision_question": "Which allowlisted OpenAI model is the lowest-latency, lowest-cost model that passes the same grounded T0 product gates?",
+  "public_cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
+  "hidden_gold": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+  "paired_control_cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_control_mixed_wording_005_cases.json",
+  "paired_control_gold": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_control_gold_002.json",
+  "screening": {
+    "case_count": 200,
+    "slice_targets": {
+      "direct-factual": 35,
+      "paraphrased": 35,
+      "definition-explanation": 35,
+      "multi-evidence": 31,
+      "structured-code": 15,
+      "structured-equation": 6,
+      "structured-table": 3,
+      "no-evidence": 10,
+      "cross-course": 10,
+      "ambiguity": 10,
+      "academic-integrity": 10
+    },
+    "advance_maximum": 2,
+    "gates": {
+      "severe_unsupported_release_count_max": 0,
+      "source_version_validity_min": 1.0,
+      "boundary_action_accuracy_min": 0.98,
+      "provider_completion_min": 0.99,
+      "malformed_output_max": 0.01
+    }
+  },
+  "full_development": {
+    "candidate_case_count": 500,
+    "control_case_count": 100,
+    "gates": {
+      "fully_grounded_factual_success_min": 0.95,
+      "action_accuracy_answerable_min": 0.95,
+      "boundary_action_accuracy_min": 0.98,
+      "atomic_claim_precision_min": 0.98,
+      "atomic_claim_recall_min": 0.95,
+      "citation_precision_min": 0.98,
+      "citation_recall_min": 0.95,
+      "source_version_validity_min": 1.0,
+      "severe_unsupported_release_count_max": 0
+    }
+  },
+  "paired_control": {
+    "case_count": 100,
+    "gates": {
+      "supported_answer_retention_delta_lower_95_min": -0.03,
+      "boundary_safety_not_worse": true
+    }
+  },
+  "selection": {
+    "primary_metric": "fully_grounded_factual_success",
+    "practical_equivalence_points": 0.02,
+    "tie_breakers": [
+      "latency_ms_p95",
+      "cost_usd"
+    ],
+    "fallback": "deterministic-grounded-generator"
+  },
+  "execution": {
+    "provider": "openai",
+    "api": "responses",
+    "request_store": false,
+    "structured_output": true,
+    "maximum_output_tokens": 600,
+    "reasoning_effort": "low",
+    "maximum_logical_calls": 3200,
+    "maximum_transport_retry_fraction": 0.02,
+    "maximum_retry_per_request": 1,
+    "emergency_cost_stop_usd": 50.0,
+    "atomic_sqlite_checkpoints": true,
+    "safe_resume": true,
+    "local_index_materialization_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "sealed_final_execution_authorized": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "gpt-5-4-mini-low",
+      "provider_model": "gpt-5.4-mini-2026-03-17",
+      "input_price_usd_per_million": 0.75,
+      "output_price_usd_per_million": 4.5
+    },
+    {
+      "candidate_id": "gpt-5-6-luna-low",
+      "provider_model": "gpt-5.6-luna",
+      "input_price_usd_per_million": 0.2,
+      "output_price_usd_per_million": 1.2
+    },
+    {
+      "candidate_id": "gpt-5-6-terra-low",
+      "provider_model": "gpt-5.6-terra",
+      "input_price_usd_per_million": 2.0,
+      "output_price_usd_per_million": 12.0
+    },
+    {
+      "candidate_id": "gpt-5-6-sol-low",
+      "provider_model": "gpt-5.6-sol",
+      "input_price_usd_per_million": 4.0,
+      "output_price_usd_per_million": 20.0
+    }
+  ],
+  "advisory_review": {
+    "provider_model": "gpt-5.6-sol",
+    "coverage": "all deterministic failures plus a seeded ten-percent passing sample",
+    "authoritative": false,
+    "same_provider_limitation": true
+  },
+  "metadata": {
+    "verified_at": "2026-08-29T20:05:03+08:00",
+    "freshness_hours": 24,
+    "official_model_source": "https://developers.openai.com/api/docs/models",
+    "official_responses_source": "https://developers.openai.com/api/reference/resources/responses/methods/create"
+  }
+}

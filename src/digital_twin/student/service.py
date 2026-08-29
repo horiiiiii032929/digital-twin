@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 from uuid import uuid4
 
@@ -45,6 +46,14 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
     TutorTurn,
 )
+from src.digital_twin.student.learning_gap import (
+    LearningGapEvidenceStatus,
+    LearningGapPrivacyPolicyV1,
+    LearningGapPseudonymizer,
+    LearningGapSignalKind,
+    LearningGapSignalV1,
+    build_learning_gap_signal,
+)
 from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
 from src.digital_twin.student.repository import LearnerStateConflictError
 from src.digital_twin.student.tutoring_graph import (
@@ -79,6 +88,8 @@ class StudentTutoringService:
         retrieval_index_store: RetrievalIndexStoreV1 | None = None,
         retrieval_index_chunker_id: str = "page-bounded-heading-paragraph-chunker",
         retrieval_index_chunker_version: str = "v1",
+        learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
+        learning_gap_policy: LearningGapPrivacyPolicyV1 | None = None,
     ) -> None:
         self.repository = repository
         profile = load_release_profile(profile_path)
@@ -96,6 +107,8 @@ class StudentTutoringService:
         self.retrieval_index_store = retrieval_index_store
         self.retrieval_index_chunker_id = retrieval_index_chunker_id
         self.retrieval_index_chunker_version = retrieval_index_chunker_version
+        self.learning_gap_pseudonymizer = learning_gap_pseudonymizer
+        self.learning_gap_policy = learning_gap_policy or LearningGapPrivacyPolicyV1()
         if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1}:
             raise ValueError("unsupported student tutoring mode")
         self.tutoring_mode = tutoring_mode
@@ -327,6 +340,15 @@ class StudentTutoringService:
                 "tutoring_intent": tutoring_intent,
             },
         )
+        learning_gap_signal = self._learning_gap_signal(
+            account_id=account_id,
+            conversation=conversation,
+            tutor_message=tutor_message,
+            hits=hits,
+            learner_state=learner_state,
+            tutoring_intent=tutoring_intent,
+            observed_at=now,
+        )
         try:
             self.repository.save_turn(
                 conversation,
@@ -336,6 +358,7 @@ class StudentTutoringService:
                 [*retrieval_events, *generation_events, completed],
                 learner_state,
                 expected_learner_state_revision,
+                learning_gap_signal,
             )
         except DuplicateTurnError:
             existing = self.repository.find_turn(conversation.id, client_request_id)
@@ -377,6 +400,73 @@ class StudentTutoringService:
             learner_state_revision=(
                 learner_state.revision if learner_state is not None else None
             ),
+        )
+
+    def _learning_gap_signal(
+        self,
+        *,
+        account_id: str,
+        conversation: Conversation,
+        tutor_message: Message,
+        hits: list[RetrievalHit],
+        learner_state: LearnerState | None,
+        tutoring_intent: str | None,
+        observed_at: str,
+    ) -> LearningGapSignalV1 | None:
+        """Build a content-free T1 signal that commits atomically with the turn."""
+
+        if (
+            self.tutoring_mode != TutoringMode.T1
+            or self.learning_gap_pseudonymizer is None
+            or learner_state is None
+            or tutoring_intent is None
+            or learner_state.latest_signals is None
+        ):
+            return None
+        signals = learner_state.latest_signals
+        action = tutor_message.action
+        if action == "redirect-graded-work":
+            signal_kind = LearningGapSignalKind.INTEGRITY_REDIRECT
+            evidence_status = LearningGapEvidenceStatus.REFUSED
+        elif action == "no-evidence" or not hits:
+            signal_kind = LearningGapSignalKind.NO_EVIDENCE
+            evidence_status = LearningGapEvidenceStatus.NO_EVIDENCE
+        elif action.startswith("safe-"):
+            signal_kind = LearningGapSignalKind.VALIDATION_FALLBACK
+            evidence_status = LearningGapEvidenceStatus.VALIDATION_FALLBACK
+        elif signals.misconception_observed:
+            signal_kind = LearningGapSignalKind.MISCONCEPTION
+            evidence_status = LearningGapEvidenceStatus.SUPPORTED
+        elif signals.confusion >= 0.7:
+            signal_kind = (
+                LearningGapSignalKind.REPEATED_HELP
+                if learner_state.help_level >= 2
+                else LearningGapSignalKind.CONFUSION
+            )
+            evidence_status = LearningGapEvidenceStatus.SUPPORTED
+        else:
+            return None
+        if hits:
+            source_identity = hits[0].chunk.source_artifact_id or hits[0].chunk.document_id
+            topic_key = "source-" + hashlib.sha256(
+                source_identity.encode("utf-8")
+            ).hexdigest()[:16]
+        else:
+            topic_key = "course-boundary"
+        return build_learning_gap_signal(
+            pseudonymizer=self.learning_gap_pseudonymizer,
+            policy=self.learning_gap_policy,
+            account_id=account_id,
+            tutor_message_id=tutor_message.id,
+            course_id=conversation.course_id,
+            release_id=conversation.release_id,
+            topic_key=topic_key,
+            signal_kind=signal_kind,
+            tutoring_intent=tutoring_intent.replace("_", "-"),
+            help_level=learner_state.help_level,
+            confusion=signals.confusion,
+            evidence_status=evidence_status,
+            observed_at=observed_at,
         )
 
     def list_citations(self, account_id: str, message_id: str) -> list[Citation]:

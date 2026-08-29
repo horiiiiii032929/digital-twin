@@ -26,17 +26,53 @@ chmod 600 .env.staging
 ```
 
 Set `APP_DOMAIN`, `TLS_EMAIL`, and a random bootstrap password. Keep
-`APP_GENERATOR_MODE=deterministic` for network-free staging. To activate the
-qualified experimental generator, set `APP_GENERATOR_MODE=deepseek-v4-flash`
-and provide `DEEPSEEK_API_KEY` through the deployment environment. The exact
-binding uses DeepSeek V4 Flash, strict-evidence prompt v3, non-thinking mode,
-temperature zero, a 600-token ceiling, a 15-second timeout, and process-local
+`APP_GENERATOR_MODE=deterministic` for the R1 demo: the four-model cascade did
+not select an OpenAI generator. Do not set `OPENAI_PROFILE_SELECTED` or claim
+LLM-backed autonomy. Any future direct Responses API profile still requires a
+new passing result, `store: false`, exact identity checks, and process-local
 call/cost caps. Never put real secrets in the example file or Git.
 
 Keep `APP_STUDENT_TUTORING_MODE=grounded-assistant` in staging. The bounded T1
 tutoring graph is implemented behind an explicit local demo/test mode, but the
 runtime validator rejects it in staging until its finite multi-turn evaluation
 and release-profile decision are complete.
+
+## Temporary public R1 demo
+
+The Sunday release candidate uses `compose.preview.yml` and a pinned
+`cloudflared` image to expose the loopback web origin through a random
+`trycloudflare.com` URL. Quick Tunnels are development/testing infrastructure,
+do not provide an uptime SLA, and are not durable hosting. The preview disables
+SSE, limits the runtime to 250 provider calls/USD 5, uses synthetic accounts and
+open-licensed sources only, and preserves private Docker volumes when stopped.
+
+```bash
+npm run verify:r1-preview
+npm run start:r1-preview
+npm run stop:r1-preview
+```
+
+The start command launches the origin first, obtains the generated HTTPS URL,
+then recreates API and worker services with that exact allowed origin. The URL
+is written to the ignored `reports/generated/r1-preview-url.txt` for the local
+walkthrough; it is not a production endpoint or repository artifact.
+
+## Operational R1 production boundary
+
+The production path uses `compose.staging.yml` on one durable Docker host with
+a stable domain and Caddy-managed HTTPS. It is qualified only when the exact
+image tag and profile hashes used in the walkthrough also pass health,
+role/isolation, persistence, backup/restore, restart, and rollback checks on
+that host. A Quick Tunnel may be used to demonstrate the same revision while
+host access is being arranged, but its URL and uptime are not production
+evidence.
+
+The four-model cascade selected no OpenAI generator. The first operational R1
+therefore remains on `APP_GENERATOR_MODE=deterministic` and
+`APP_STUDENT_TUTORING_MODE=grounded-assistant` unless the network-free T1
+graph/policy confirmation passes. Even after a T1 mechanics pass, the release
+must not claim LLM-backed tutoring quality. The sealed 10,000-case academic run
+and a future retrieval/evidence successor remain separate post-release work.
 
 ## Build and start
 

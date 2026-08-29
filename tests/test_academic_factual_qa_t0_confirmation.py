@@ -17,6 +17,7 @@ from scripts.run_academic_factual_qa_t0_confirmation import (
     preflight,
     validate_instrument,
 )
+from scripts.build_academic_factual_qa_visual_supplement import build_dataset
 from src.digital_twin.grounding.models import GenerationUsage
 from src.digital_twin.llm import LlmIdentityDriftError, LlmMessage, LlmResponse
 
@@ -67,6 +68,7 @@ def test_t0_preflight_stops_before_any_provider_call(tmp_path: Path) -> None:
 def test_network_free_t0_simulation_exercises_real_service_without_academic_claim(
     tmp_path: Path,
 ) -> None:
+    build_dataset(write_assets=True)
     output = tmp_path / "t0-simulation.json"
     result = asyncio.run(
         execute(

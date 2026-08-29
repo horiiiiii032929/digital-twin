@@ -35,6 +35,10 @@ from src.digital_twin.student.models import (
 )
 from src.digital_twin.student.migrations import apply_migrations
 from src.digital_twin.student.tutoring_graph import LearnerState
+from src.digital_twin.student.teaching_profile import (
+    TeachingProfileStatus,
+    TeachingProfileV1,
+)
 from src.digital_twin.tutor_policy import TutorPolicy, timestamp_now
 
 
@@ -95,6 +99,21 @@ class StudentRepository(Protocol):
 
     def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int: ...
 
+    def save_teaching_profile(self, profile: TeachingProfileV1) -> TeachingProfileV1: ...
+
+    def get_teaching_profile(self, profile_id: str) -> TeachingProfileV1 | None: ...
+
+    def list_teaching_profiles(self, course_id: str) -> list[TeachingProfileV1]: ...
+
+    def set_teaching_profile_status(
+        self,
+        profile_id: str,
+        status: TeachingProfileStatus,
+        *,
+        preview_sha256: str | None,
+        changed_at: str,
+    ) -> TeachingProfileV1: ...
+
     def list_messages(self, conversation_id: str) -> list[Message]: ...
 
     def list_no_evidence_turns(
@@ -120,6 +139,7 @@ class StudentRepository(Protocol):
         audit_events: list[AuditEvent],
         learner_state: LearnerState | None = None,
         expected_learner_state_revision: int | None = None,
+        learning_gap_signal: LearningGapSignalV1 | None = None,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -157,6 +177,8 @@ class StudentRepository(Protocol):
     def find_proactive_trigger_by_key(
         self, idempotency_key: str
     ) -> ProactiveTrigger | None: ...
+
+    def list_proactive_triggers(self, course_id: str) -> list[ProactiveTrigger]: ...
 
     def list_due_proactive_triggers(
         self, due_at: str, *, limit: int = 100
@@ -381,8 +403,9 @@ class SQLiteStudentRepository:
                 self._connection.execute(
                     """INSERT INTO releases
                        (id, course_id, profile_id, profile_version, policy_version,
-                        policy_json, status, evaluation_status, created_at)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                        policy_json, teaching_profile_id, teaching_profile_sha256,
+                        status, evaluation_status, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (
                         release.id,
                         release.course_id,
@@ -390,6 +413,8 @@ class SQLiteStudentRepository:
                         release.profile_version,
                         release.policy_version,
                         release.policy.model_dump_json(),
+                        release.teaching_profile_id,
+                        release.teaching_profile_sha256,
                         release.status.value,
                         release.evaluation_status.value,
                         release.created_at,
@@ -536,51 +561,50 @@ class SQLiteStudentRepository:
 
         signal = LearningGapSignalV1.model_validate(signal.model_dump(mode="python"))
         with self._lock, self._connection:
-            release = self._connection.execute(
-                "SELECT course_id FROM releases WHERE id = ?", (signal.release_id,)
-            ).fetchone()
-            if release is None:
-                raise KeyError("release_not_found")
-            if release["course_id"] != signal.course_id:
-                raise ValueError("learning-gap signal has cross-course release scope")
-            existing = self._connection.execute(
-                """SELECT signal_json FROM learning_gap_signals
-                   WHERE source_turn_key = ? AND topic_key = ? AND signal_kind = ?""",
+            return self._insert_learning_gap_signal(signal)
+
+    def _insert_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool:
+        """Insert inside the caller's transaction; the caller owns locking."""
+
+        release = self._connection.execute(
+            "SELECT course_id FROM releases WHERE id = ?", (signal.release_id,)
+        ).fetchone()
+        if release is None:
+            raise KeyError("release_not_found")
+        if release["course_id"] != signal.course_id:
+            raise ValueError("learning-gap signal has cross-course release scope")
+        existing = self._connection.execute(
+            """SELECT signal_json FROM learning_gap_signals
+               WHERE source_turn_key = ? AND topic_key = ? AND signal_kind = ?""",
+            (signal.source_turn_key, signal.topic_key, signal.signal_kind.value),
+        ).fetchone()
+        if existing is not None:
+            stored = LearningGapSignalV1.model_validate_json(existing["signal_json"])
+            if stored != signal:
+                raise ValueError("learning-gap signal idempotency conflict")
+            return False
+        try:
+            self._connection.execute(
+                """INSERT INTO learning_gap_signals
+                   (signal_id, source_turn_key, learner_key, course_id,
+                    release_id, topic_key, signal_kind, observed_at,
+                    expires_at, signal_json)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
+                    signal.signal_id,
                     signal.source_turn_key,
+                    signal.learner_key,
+                    signal.course_id,
+                    signal.release_id,
                     signal.topic_key,
                     signal.signal_kind.value,
+                    signal.observed_at,
+                    signal.expires_at,
+                    signal.model_dump_json(),
                 ),
-            ).fetchone()
-            if existing is not None:
-                stored = LearningGapSignalV1.model_validate_json(
-                    existing["signal_json"]
-                )
-                if stored != signal:
-                    raise ValueError("learning-gap signal idempotency conflict")
-                return False
-            try:
-                self._connection.execute(
-                    """INSERT INTO learning_gap_signals
-                       (signal_id, source_turn_key, learner_key, course_id,
-                        release_id, topic_key, signal_kind, observed_at,
-                        expires_at, signal_json)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                    (
-                        signal.signal_id,
-                        signal.source_turn_key,
-                        signal.learner_key,
-                        signal.course_id,
-                        signal.release_id,
-                        signal.topic_key,
-                        signal.signal_kind.value,
-                        signal.observed_at,
-                        signal.expires_at,
-                        signal.model_dump_json(),
-                    ),
-                )
-            except sqlite3.IntegrityError as error:
-                raise ValueError("learning-gap signal identifier conflict") from error
+            )
+        except sqlite3.IntegrityError as error:
+            raise ValueError("learning-gap signal identifier conflict") from error
         return True
 
     def list_learning_gap_signals(
@@ -614,6 +638,126 @@ class SQLiteStudentRepository:
                 (expired_at,),
             )
         return int(cursor.rowcount)
+
+    def save_teaching_profile(self, profile: TeachingProfileV1) -> TeachingProfileV1:
+        profile = TeachingProfileV1.model_validate(profile.model_dump(mode="python"))
+        with self._lock, self._connection:
+            course = self._connection.execute(
+                "SELECT 1 FROM courses WHERE id = ?", (profile.course_id,)
+            ).fetchone()
+            if course is None:
+                raise KeyError("course_not_found")
+            existing = self._connection.execute(
+                "SELECT profile_json FROM teaching_profiles WHERE profile_id = ?",
+                (profile.profile_id,),
+            ).fetchone()
+            if existing is not None:
+                stored = TeachingProfileV1.model_validate_json(existing["profile_json"])
+                if stored != profile:
+                    raise ValueError("teaching profile content is immutable")
+                return stored
+            self._connection.execute(
+                """INSERT INTO teaching_profiles
+                   (profile_id, course_id, version, status, content_sha256,
+                    preview_sha256, profile_json, created_at, approved_at,
+                    withdrawn_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    profile.profile_id,
+                    profile.course_id,
+                    profile.version,
+                    profile.status.value,
+                    profile.content_sha256,
+                    profile.preview_sha256,
+                    profile.model_dump_json(),
+                    profile.created_at,
+                    profile.approved_at,
+                    profile.withdrawn_at,
+                ),
+            )
+        return profile.model_copy(deep=True)
+
+    def get_teaching_profile(self, profile_id: str) -> TeachingProfileV1 | None:
+        row = self._one(
+            "SELECT profile_json FROM teaching_profiles WHERE profile_id = ?",
+            (profile_id,),
+        )
+        return TeachingProfileV1.model_validate_json(row["profile_json"]) if row else None
+
+    def list_teaching_profiles(self, course_id: str) -> list[TeachingProfileV1]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT profile_json FROM teaching_profiles
+                   WHERE course_id = ? ORDER BY version DESC""",
+                (course_id,),
+            ).fetchall()
+        return [TeachingProfileV1.model_validate_json(row["profile_json"]) for row in rows]
+
+    def set_teaching_profile_status(
+        self,
+        profile_id: str,
+        status: TeachingProfileStatus,
+        *,
+        preview_sha256: str | None,
+        changed_at: str,
+    ) -> TeachingProfileV1:
+        with self._lock, self._connection:
+            row = self._connection.execute(
+                "SELECT profile_json FROM teaching_profiles WHERE profile_id = ?",
+                (profile_id,),
+            ).fetchone()
+            if row is None:
+                raise KeyError("teaching_profile_not_found")
+            profile = TeachingProfileV1.model_validate_json(row["profile_json"])
+            allowed = {
+                TeachingProfileStatus.DRAFT: {
+                    TeachingProfileStatus.APPROVED,
+                    TeachingProfileStatus.WITHDRAWN,
+                },
+                TeachingProfileStatus.APPROVED: {
+                    TeachingProfileStatus.SUPERSEDED,
+                    TeachingProfileStatus.WITHDRAWN,
+                },
+                TeachingProfileStatus.SUPERSEDED: set(),
+                TeachingProfileStatus.WITHDRAWN: set(),
+            }
+            if status not in allowed[profile.status]:
+                raise ValueError("teaching profile status transition is not allowed")
+            updated = profile.model_copy(
+                update={
+                    "status": status,
+                    "preview_sha256": (
+                        preview_sha256
+                        if status == TeachingProfileStatus.APPROVED
+                        else profile.preview_sha256
+                    ),
+                    "approved_at": (
+                        changed_at
+                        if status == TeachingProfileStatus.APPROVED
+                        else profile.approved_at
+                    ),
+                    "withdrawn_at": (
+                        changed_at
+                        if status == TeachingProfileStatus.WITHDRAWN
+                        else profile.withdrawn_at
+                    ),
+                }
+            )
+            updated = TeachingProfileV1.model_validate(updated.model_dump(mode="python"))
+            self._connection.execute(
+                """UPDATE teaching_profiles SET status = ?, preview_sha256 = ?,
+                   profile_json = ?, approved_at = ?, withdrawn_at = ?
+                   WHERE profile_id = ?""",
+                (
+                    updated.status.value,
+                    updated.preview_sha256,
+                    updated.model_dump_json(),
+                    updated.approved_at,
+                    updated.withdrawn_at,
+                    profile_id,
+                ),
+            )
+        return updated
 
     def list_messages(self, conversation_id: str) -> list[Message]:
         with self._lock:
@@ -692,6 +836,7 @@ class SQLiteStudentRepository:
         audit_events: list[AuditEvent],
         learner_state: LearnerState | None = None,
         expected_learner_state_revision: int | None = None,
+        learning_gap_signal: LearningGapSignalV1 | None = None,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -708,6 +853,15 @@ class SQLiteStudentRepository:
             AuditEvent.model_validate(event.model_dump(mode="python"))
             for event in audit_events
         ]
+        if learning_gap_signal is not None:
+            learning_gap_signal = LearningGapSignalV1.model_validate(
+                learning_gap_signal.model_dump(mode="python")
+            )
+            if (
+                learning_gap_signal.course_id != conversation.course_id
+                or learning_gap_signal.release_id != conversation.release_id
+            ):
+                raise ValueError("learning-gap signal has inconsistent turn scope")
         if learner_state is not None:
             learner_state = LearnerState.model_validate(
                 learner_state.model_dump(mode="python")
@@ -812,6 +966,8 @@ class SQLiteStudentRepository:
                             learner_state.updated_at,
                         ),
                     )
+                if learning_gap_signal is not None:
+                    self._insert_learning_gap_signal(learning_gap_signal)
                 self._connection.execute(
                     "UPDATE conversations SET updated_at = ? WHERE id = ?",
                     (conversation.updated_at, conversation.id),
@@ -947,6 +1103,15 @@ class SQLiteStudentRepository:
             (idempotency_key,),
         )
         return ProactiveTrigger.model_validate(dict(row)) if row else None
+
+    def list_proactive_triggers(self, course_id: str) -> list[ProactiveTrigger]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT * FROM proactive_triggers
+                   WHERE course_id = ? ORDER BY scheduled_for DESC, id""",
+                (course_id,),
+            ).fetchall()
+        return [ProactiveTrigger.model_validate(dict(row)) for row in rows]
 
     def list_due_proactive_triggers(
         self, due_at: str, *, limit: int = 100
@@ -1327,6 +1492,8 @@ class SQLiteStudentRepository:
             profile_version=row["profile_version"],
             policy_version=row["policy_version"],
             policy=TutorPolicy.model_validate_json(row["policy_json"]),
+            teaching_profile_id=row["teaching_profile_id"],
+            teaching_profile_sha256=row["teaching_profile_sha256"],
             chunks=[
                 DocumentChunk.model_validate_json(item["chunk_json"])
                 for item in chunk_rows

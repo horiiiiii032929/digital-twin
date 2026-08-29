@@ -10,6 +10,7 @@ from pathlib import Path
 import ssl
 import tempfile
 import time
+from datetime import UTC, datetime, timedelta
 from typing import Any
 from urllib.parse import urlsplit
 from uuid import uuid4
@@ -30,6 +31,10 @@ def main() -> None:
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--ca-file", type=Path)
     parser.add_argument("--admin-email", default="admin@foundation.local")
+    parser.add_argument(
+        "--profile-id", default="student-tutor-r1-openai-candidate"
+    )
+    parser.add_argument("--profile-version", default="v1-build-only")
     parser.add_argument("--output", type=Path)
     parser.add_argument(
         "--resume",
@@ -62,6 +67,8 @@ def main() -> None:
                 admin_email=args.admin_email,
                 passwords=passwords,
                 timeout_seconds=args.timeout_seconds,
+                profile_id=args.profile_id,
+                profile_version=args.profile_version,
             )
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(
@@ -82,6 +89,8 @@ def run_journey(
     admin_email: str,
     passwords: dict[str, str],
     timeout_seconds: float,
+    profile_id: str,
+    profile_version: str,
 ) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
     run_token = uuid4().hex[:10]
@@ -201,6 +210,59 @@ def run_journey(
         "professor-policy-approved",
         session["policy"]["release_status"] == "approved",
     )
+    teaching_profile = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course_id}/teaching-profiles",
+            headers={"Origin": origin},
+            json={
+                "tone": "Clear, encouraging, and concise",
+                "depth": "balanced",
+                "explanation_structure": [
+                    "State the core concept",
+                    "Connect it to approved evidence",
+                    "Check the student's next step",
+                ],
+                "example_preferences": ["Use compact systems examples"],
+                "misconception_handling": (
+                    "Name the mismatch, point to evidence, and ask for a revision."
+                ),
+                "integrity_limits": (
+                    "Do not complete graded work; request an attempt and give one hint."
+                ),
+                "help_ladder": [
+                    "Ask what the student already understands",
+                    "Give one evidence-linked hint",
+                    "Explain the relevant source statement",
+                ],
+                "outreach_policy": (
+                    "Only professor-scheduled, consented, private in-app messages."
+                ),
+            },
+        ),
+        201,
+    )
+    profile_preview = _expect_json(
+        client.get(
+            f"/api/professor/courses/{course_id}/teaching-profiles/"
+            f"{teaching_profile['profile_id']}/preview"
+        ),
+        200,
+    )
+    teaching_profile = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course_id}/teaching-profiles/"
+            f"{teaching_profile['profile_id']}/approve",
+            headers={"Origin": origin},
+            json={"preview_sha256": profile_preview["preview_sha256"]},
+        ),
+        200,
+    )
+    _record(
+        checks,
+        "professor-teaching-profile-approved",
+        teaching_profile["status"] == "approved"
+        and len(profile_preview["cases"]) == 10,
+    )
 
     with tempfile.TemporaryDirectory(prefix="digital-twin-https-") as temporary:
         pdf_path = Path(temporary) / "synthetic-lecture.pdf"
@@ -238,8 +300,9 @@ def run_journey(
             headers={"Origin": origin},
             json={
                 "session_id": session["session_id"],
-                "profile_id": "student-tutor",
-                "profile_version": "v1",
+                "profile_id": profile_id,
+                "profile_version": profile_version,
+                "teaching_profile_id": teaching_profile["profile_id"],
                 "release_id": release_id,
                 "ingestion_job_ids": [queued["id"]],
             },
@@ -269,6 +332,64 @@ def run_journey(
     _expect_status(client.post("/api/auth/logout", headers={"Origin": origin}), 204)
 
     _expect_status(_login(client, student_email, passwords["student"]), 200)
+    now = datetime.now(UTC)
+    preference = _expect_json(
+        client.put(
+            f"/api/student/courses/{course_id}/outreach-preferences/in-app",
+            headers={"Origin": origin},
+            json={
+                "enabled": True,
+                "timezone": "UTC",
+                "quiet_hours_start": (now + timedelta(hours=1)).strftime("%H:%M"),
+                "quiet_hours_end": (now + timedelta(hours=2)).strftime("%H:%M"),
+                "max_messages_per_7_days": 3,
+            },
+        ),
+        200,
+    )
+    _record(checks, "student-consented-in-app-outreach", preference["enabled"] is True)
+    _expect_status(client.post("/api/auth/logout", headers={"Origin": origin}), 204)
+    _expect_status(_login(client, professor_email, passwords["professor"]), 200)
+    source_chunk_id = release["chunks"][0]["id"]
+    trigger = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course_id}/proactive-triggers",
+            headers={"Origin": origin},
+            json={
+                "student_account_id": student["account_id"],
+                "channel": "in-app",
+                "kind": "scheduled-retrieval-practice",
+                "scheduled_for": (now - timedelta(minutes=1)).isoformat(),
+                "expires_at": (now + timedelta(hours=1)).isoformat(),
+                "topic": "Synthetic security retrieval check",
+                "prompt": "What does the approved source say about CSRF?",
+                "source_chunk_id": source_chunk_id,
+                "idempotency_key": f"https-outreach-{run_token}",
+            },
+        ),
+        201,
+    )
+    trigger_list = _expect_json(
+        client.get(f"/api/professor/courses/{course_id}/proactive-triggers"),
+        200,
+    )
+    _record(
+        checks,
+        "professor-scheduled-private-outreach",
+        any(row["id"] == trigger["id"] for row in trigger_list),
+    )
+    _expect_status(client.post("/api/auth/logout", headers={"Origin": origin}), 204)
+    _expect_status(_login(client, student_email, passwords["student"]), 200)
+    inbox = _wait_for_outreach(
+        client,
+        course_id=course_id,
+        timeout_seconds=timeout_seconds,
+    )
+    _record(
+        checks,
+        "scheduled-outreach-worker-delivered",
+        len(inbox) == 1 and bool(inbox[0]["citations"]),
+    )
     courses = _expect_json(client.get("/api/student/courses"), 200)
     _record(
         checks,
@@ -302,6 +423,29 @@ def run_journey(
         and citation.get("page") is not None
         and citation.get("bounding_box") is not None,
     )
+    adaptive_turn = _expect_json(
+        client.post(
+            f"/api/student/conversations/{conversation['id']}/messages",
+            headers={"Origin": origin},
+            json={
+                "content": "I am confused why this matters.",
+                "request_id": f"https-turn-confused-{run_token}",
+            },
+        ),
+        200,
+    )
+    _record(
+        checks,
+        "bounded-tutoring-state-visible",
+        adaptive_turn["tutoring_mode"] in {
+            "grounded-assistant",
+            "bounded-tutoring-graph",
+        }
+        and (
+            adaptive_turn["tutoring_mode"] == "grounded-assistant"
+            or adaptive_turn["learner_state_revision"] == 2
+        ),
+    )
     crop = client.get(
         f"/api/student/messages/{turn['tutor_message']['id']}/citations/"
         f"{citation['id']}/crop"
@@ -323,6 +467,23 @@ def run_journey(
     durations.sort()
     p95 = durations[max(0, int(len(durations) * 0.95) - 1)]
     _record(checks, "live-api-p95", p95 <= 750.0)
+    _expect_status(client.post("/api/auth/logout", headers={"Origin": origin}), 204)
+    _expect_status(_login(client, professor_email, passwords["professor"]), 200)
+    learning_gaps = _expect_json(
+        client.get(
+            f"/api/professor/courses/{course_id}/learning-gaps",
+            params={"release_id": release_id},
+        ),
+        200,
+    )
+    aggregation = learning_gaps["aggregation"]
+    _record(
+        checks,
+        "privacy-preserving-learning-gap-view",
+        aggregation["minimum_distinct_learners"] == 5
+        and aggregation["visible_aggregates"] == []
+        and learning_gaps["proposals"] == [],
+    )
     _assert_all_passed(checks)
 
     return {
@@ -331,7 +492,7 @@ def run_journey(
         "mode": "new-live-https-journey",
         "base_url": str(client.base_url).rstrip("/"),
         "synthetic_data_only": True,
-        "external_model_calls": 0,
+        "external_model_calls": "recorded-by-runtime-provider-budget",
         "started_at_epoch": started_at,
         "duration_ms": round((time.time() - started_at) * 1000, 3),
         "checks": checks,
@@ -351,6 +512,8 @@ def run_journey(
             "session_id": session["session_id"],
             "job_id": job["id"],
             "release_id": release_id,
+            "teaching_profile_id": teaching_profile["profile_id"],
+            "proactive_trigger_id": trigger["id"],
             "conversation_id": conversation["id"],
             "tutor_message_id": turn["tutor_message"]["id"],
             "citation_id": citation["id"],
@@ -463,6 +626,24 @@ def _wait_for_job(
             raise RuntimeError(f"ingestion job ended as {job['status']}")
         time.sleep(0.25)
     raise TimeoutError("ingestion job did not finish before the live HTTPS deadline")
+
+
+def _wait_for_outreach(
+    client: httpx.Client,
+    *,
+    course_id: str,
+    timeout_seconds: float,
+) -> list[dict[str, Any]]:
+    deadline = time.monotonic() + timeout_seconds
+    while time.monotonic() < deadline:
+        inbox = _expect_json(
+            client.get(f"/api/student/outreach?course_id={course_id}"),
+            200,
+        )
+        if inbox:
+            return inbox
+        time.sleep(0.25)
+    raise TimeoutError("scheduled outreach did not arrive before the HTTPS deadline")
 
 
 def _approve_session(

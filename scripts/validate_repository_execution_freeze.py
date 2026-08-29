@@ -54,6 +54,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This analysis-only module has no provider execution mode. Provider calls
     # live in the separately guarded execute_academic_* entrypoint.
     "run_academic_factual_qa_panel_review_v2.py",
+    # This prospective contract currently exposes validation/simulation and a
+    # blocked preflight only. The paid executor is added after model selection.
+    "run_autonomous_tutoring_r1_confirmation.py",
     "run_ingestion_worker.py",
 }
 EXEMPT_SCRIPTS = {

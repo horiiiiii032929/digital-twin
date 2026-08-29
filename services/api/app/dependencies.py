@@ -12,6 +12,7 @@ from src.digital_twin.student import (
     ProactiveOutreachService,
     ReleaseLifecycleService,
     StudentTutoringService,
+    TeachingProfileService,
 )
 
 
@@ -55,6 +56,10 @@ def get_publication_service(request: Request) -> ReleaseLifecycleService:
 
 def get_proactive_outreach_service(request: Request) -> ProactiveOutreachService:
     return request.app.state.proactive_outreach_service
+
+
+def get_teaching_profile_service(request: Request) -> TeachingProfileService:
+    return request.app.state.teaching_profile_service
 
 
 def get_source_ingestion_service(request: Request) -> LocalCourseSourceIngestionService:
@@ -122,6 +127,10 @@ PublicationServiceDependency = Annotated[
 ProactiveOutreachServiceDependency = Annotated[
     ProactiveOutreachService,
     Depends(get_proactive_outreach_service),
+]
+TeachingProfileServiceDependency = Annotated[
+    TeachingProfileService,
+    Depends(get_teaching_profile_service),
 ]
 SourceIngestionServiceDependency = Annotated[
     LocalCourseSourceIngestionService,

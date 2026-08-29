@@ -79,6 +79,17 @@ from src.digital_twin.student.tutoring_graph import (
     TutoringIntent,
     TutoringMode,
 )
+from src.digital_twin.student.teaching_profile import (
+    TeachingProfileDepth,
+    TeachingProfileError,
+    TeachingProfilePreviewCaseV1,
+    TeachingProfilePreviewV1,
+    TeachingProfileService,
+    TeachingProfileStatus,
+    TeachingProfileV1,
+    build_teaching_profile_preview,
+    new_teaching_profile,
+)
 
 
 __all__ = [
@@ -139,6 +150,13 @@ __all__ = [
     "StudentTutoringService",
     "StudentWorkflowError",
     "SyntheticStudentFixture",
+    "TeachingProfileDepth",
+    "TeachingProfileError",
+    "TeachingProfilePreviewCaseV1",
+    "TeachingProfilePreviewV1",
+    "TeachingProfileService",
+    "TeachingProfileStatus",
+    "TeachingProfileV1",
     "TutorTurn",
     "TutoringGraphInput",
     "TutoringGraphResult",
@@ -148,6 +166,8 @@ __all__ = [
     "aggregate_learning_gap_signals",
     "build_course_improvement_drafts",
     "build_learning_gap_signal",
+    "build_teaching_profile_preview",
+    "new_teaching_profile",
     "normalize_learning_gap_timestamp",
     "seed_synthetic_student_workflow",
 ]

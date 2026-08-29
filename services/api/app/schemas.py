@@ -9,6 +9,7 @@ from src.digital_twin.student.models import (
     ProactiveTriggerKind,
     ReleaseEvaluationStatus,
 )
+from src.digital_twin.student.teaching_profile import TeachingProfileDepth
 from src.digital_twin.tutor_policy import (
     FieldStatus,
     PreviewDecisionValue,
@@ -142,15 +143,43 @@ class ProactiveTriggerRequest(BaseModel):
         return _nonblank(value, "proactive trigger field")
 
 
+class TeachingProfileDraftRequest(BaseModel):
+    tone: str = Field(min_length=1, max_length=240)
+    depth: TeachingProfileDepth
+    explanation_structure: list[str] = Field(min_length=1, max_length=6)
+    example_preferences: list[str] = Field(default_factory=list, max_length=8)
+    misconception_handling: str = Field(min_length=1, max_length=1_000)
+    integrity_limits: str = Field(min_length=1, max_length=1_000)
+    help_ladder: list[str] = Field(min_length=2, max_length=6)
+    outreach_policy: str = Field(min_length=1, max_length=1_000)
+
+
+class TeachingProfileApprovalRequest(BaseModel):
+    preview_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class LearningGapReviewRequest(BaseModel):
+    proposal_id: str = Field(pattern=r"^[0-9a-f]{64}$")
+    decision: str = Field(pattern=r"^(consider-for-next-release|dismissed)$")
+    rationale: str = Field(default="", max_length=1_000)
+
+
 class ReleaseCreateRequest(BaseModel):
     session_id: str = Field(min_length=1, max_length=128)
     profile_id: str = Field(min_length=1, max_length=128)
     profile_version: str = Field(min_length=1, max_length=128)
     chunks: list[DocumentChunk] = Field(default_factory=list)
     ingestion_job_ids: list[str] = Field(default_factory=list, max_length=100)
+    teaching_profile_id: str | None = Field(default=None, min_length=1, max_length=128)
     release_id: str | None = Field(default=None, min_length=1, max_length=128)
 
-    @field_validator("session_id", "profile_id", "profile_version", "release_id")
+    @field_validator(
+        "session_id",
+        "profile_id",
+        "profile_version",
+        "teaching_profile_id",
+        "release_id",
+    )
     @classmethod
     def identifiers_must_be_nonblank(cls, value: str | None) -> str | None:
         return None if value is None else _nonblank(value, "release identifier")

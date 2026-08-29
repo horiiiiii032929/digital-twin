@@ -68,18 +68,32 @@ class ProviderCallLedgerV1:
         maximum_calls: int,
         maximum_cost_usd: float,
         resume: bool,
+        maximum_transport_retries_total: int | None = None,
     ) -> None:
         if maximum_calls < 1 or not math.isfinite(maximum_cost_usd) or maximum_cost_usd <= 0:
             raise ValueError("provider ledger limits must be positive")
+        if (
+            maximum_transport_retries_total is not None
+            and (
+                isinstance(maximum_transport_retries_total, bool)
+                or maximum_transport_retries_total < 0
+            )
+        ):
+            raise ValueError("provider transport retry cap must be non-negative")
         self.path = path
         self.maximum_calls = maximum_calls
         self.maximum_cost_usd = maximum_cost_usd
+        self.maximum_transport_retries_total = maximum_transport_retries_total
         expected = {
             "schema_version": "1",
             "run_binding_sha256": canonical_sha256(run_binding),
             "maximum_calls": str(maximum_calls),
             "maximum_cost_usd": str(maximum_cost_usd),
         }
+        if maximum_transport_retries_total is not None:
+            expected["maximum_transport_retries_total"] = str(
+                maximum_transport_retries_total
+            )
         if resume and not path.is_file():
             raise ProviderJsonError("provider resume ledger does not exist")
         if not resume and path.exists():
@@ -108,10 +122,25 @@ class ProviderCallLedgerV1:
                 input_tokens INTEGER NOT NULL DEFAULT 0,
                 output_tokens INTEGER NOT NULL DEFAULT 0,
                 cost_usd REAL NOT NULL DEFAULT 0,
-                latency_ms REAL NOT NULL DEFAULT 0
+                latency_ms REAL NOT NULL DEFAULT 0,
+                attempt_count INTEGER NOT NULL DEFAULT 1,
+                recovered_transport_failures_json TEXT NOT NULL DEFAULT '[]'
             )
             """
         )
+        columns = {
+            row[1]
+            for row in self.connection.execute("PRAGMA table_info(calls)")
+        }
+        if "attempt_count" not in columns:
+            self.connection.execute(
+                "ALTER TABLE calls ADD COLUMN attempt_count INTEGER NOT NULL DEFAULT 1"
+            )
+        if "recovered_transport_failures_json" not in columns:
+            self.connection.execute(
+                "ALTER TABLE calls ADD COLUMN recovered_transport_failures_json "
+                "TEXT NOT NULL DEFAULT '[]'"
+            )
         if resume:
             actual = dict(self.connection.execute("SELECT key, value FROM metadata"))
             if any(actual.get(key) != value for key, value in expected.items()):
@@ -172,6 +201,18 @@ class ProviderCallLedgerV1:
         if cost + estimated_cost_usd > self.maximum_cost_usd:
             raise ProviderJsonError("provider cost limit reached before request")
 
+    def remaining_transport_retries(self) -> int | None:
+        """Return the retry attempts still available to the next logical call."""
+
+        if self.maximum_transport_retries_total is None:
+            return None
+        used = int(
+            self.connection.execute(
+                "SELECT COALESCE(SUM(attempt_count - 1), 0) FROM calls"
+            ).fetchone()[0]
+        )
+        return max(0, self.maximum_transport_retries_total - used)
+
     def record_completed(
         self,
         *,
@@ -185,8 +226,9 @@ class ProviderCallLedgerV1:
                 """
                 INSERT INTO calls(
                     request_key, request_sha256, provider_role, status,
-                    response_json, input_tokens, output_tokens, cost_usd, latency_ms
-                ) VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?)
+                    response_json, input_tokens, output_tokens, cost_usd, latency_ms,
+                    attempt_count, recovered_transport_failures_json
+                ) VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     request_key,
@@ -197,12 +239,21 @@ class ProviderCallLedgerV1:
                     response.output_tokens,
                     response.cost_usd,
                     response.latency_ms,
+                    response.attempt_count,
+                    json.dumps(response.recovered_transport_failures),
                 ),
             )
         _, cost = self.totals()
         if cost > self.maximum_cost_usd:
             self._set_metadata("status", "invalid-execution")
             raise ProviderJsonError("provider cost limit exceeded after request")
+        if self.maximum_transport_retries_total is not None:
+            recovered = self.snapshot()["recovered_transport_failures"]
+            if recovered > self.maximum_transport_retries_total:
+                self._set_metadata("status", "invalid-execution")
+                raise ProviderJsonError(
+                    "provider transport retry cap exceeded after request"
+                )
 
     def record_failed(
         self,
@@ -213,14 +264,20 @@ class ProviderCallLedgerV1:
         failure_type: str,
         failure_detail: str,
         latency_ms: float,
+        terminal: bool = True,
+        attempt_count: int = 1,
+        recovered_transport_failures: list[str] | None = None,
     ) -> None:
+        if attempt_count < 1:
+            raise ValueError("failed provider attempt count must be positive")
         with self.connection:
             self.connection.execute(
                 """
                 INSERT INTO calls(
                     request_key, request_sha256, provider_role, status,
-                    failure_type, failure_detail, latency_ms
-                ) VALUES (?, ?, ?, 'failed', ?, ?, ?)
+                    failure_type, failure_detail, latency_ms, attempt_count,
+                    recovered_transport_failures_json
+                ) VALUES (?, ?, ?, 'failed', ?, ?, ?, ?, ?)
                 """,
                 (
                     request_key,
@@ -229,9 +286,12 @@ class ProviderCallLedgerV1:
                     failure_type,
                     failure_detail[:500],
                     latency_ms,
+                    attempt_count,
+                    json.dumps(recovered_transport_failures or []),
                 ),
             )
-        self._set_metadata("status", "invalid-execution")
+        if terminal:
+            self._set_metadata("status", "invalid-execution")
 
     def mark_interrupted(self) -> None:
         self._set_metadata("status", "interrupted")
@@ -258,22 +318,15 @@ class ProviderCallLedgerV1:
             "SELECT COALESCE(SUM(input_tokens), 0), COALESCE(SUM(output_tokens), 0), "
             "COALESCE(MAX(latency_ms), 0) FROM calls"
         ).fetchone()
-        completed_responses = self.connection.execute(
-            "SELECT response_json FROM calls "
-            "WHERE status = 'completed' AND response_json IS NOT NULL"
-        ).fetchall()
-        parsed_responses = [
-            ProviderJsonResponse.model_validate_json(row[0])
-            for row in completed_responses
-        ]
+        attempt_usage = self.connection.execute(
+            "SELECT COALESCE(SUM(attempt_count), 0), "
+            "COALESCE(SUM(attempt_count - 1), 0) FROM calls"
+        ).fetchone()
         return {
             **metadata,
             "provider_calls": calls,
-            "provider_attempts": sum(row.attempt_count for row in parsed_responses)
-            + int(failures),
-            "recovered_transport_failures": sum(
-                len(row.recovered_transport_failures) for row in parsed_responses
-            ),
+            "provider_attempts": int(attempt_usage[0]),
+            "recovered_transport_failures": int(attempt_usage[1]),
             "failed_calls": int(failures),
             "input_tokens": int(usage[0]),
             "output_tokens": int(usage[1]),
@@ -465,6 +518,7 @@ class OpenAiCompatibleJsonTransport:
         prompt: str,
         task: str,
         schema: dict[str, Any],
+        quarantine_failures: bool = False,
     ) -> ProviderJsonResponse:
         request = {
             "binding_id": self.binding["binding_id"],
@@ -494,6 +548,7 @@ class OpenAiCompatibleJsonTransport:
                 failure_type=type(error).__name__,
                 failure_detail=str(error),
                 latency_ms=(time.perf_counter() - started) * 1000,
+                terminal=not quarantine_failures,
             )
             raise
         ledger.record_completed(
@@ -507,6 +562,17 @@ class OpenAiCompatibleJsonTransport:
 
 class _RetryableDirectProviderError(ProviderJsonError):
     """A direct first-party transport failure eligible for a bounded retry."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        attempt_count: int = 1,
+        recovered_transport_failures: list[str] | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.attempt_count = attempt_count
+        self.recovered_transport_failures = recovered_transport_failures or []
 
 
 class DirectProviderJsonTransport:
@@ -671,6 +737,7 @@ class DirectProviderJsonTransport:
         prompt: str,
         task: str,
         schema: dict[str, Any],
+        maximum_transport_retries: int | None = None,
     ) -> ProviderJsonResponse:
         credential_name = self.binding["credential_environment_variable"]
         api_key = os.getenv(credential_name, "").strip()
@@ -683,14 +750,23 @@ class DirectProviderJsonTransport:
         recovered: list[str] = []
         started = time.perf_counter()
         response: httpx.Response | None = None
-        maximum_attempts = 1 + int(self.binding["maximum_transport_retries"])
+        request_retry_limit = int(self.binding["maximum_transport_retries"])
+        if maximum_transport_retries is not None:
+            request_retry_limit = min(
+                request_retry_limit, maximum_transport_retries
+            )
+        maximum_attempts = 1 + request_retry_limit
         for attempt in range(1, maximum_attempts + 1):
             try:
                 response = await self._post_once(headers=headers, payload=payload)
                 break
             except _RetryableDirectProviderError as error:
                 if attempt == maximum_attempts:
-                    raise
+                    raise _RetryableDirectProviderError(
+                        str(error),
+                        attempt_count=attempt,
+                        recovered_transport_failures=recovered,
+                    ) from error
                 recovered.append(str(error))
         if response is None:
             raise ProviderJsonError("direct provider returned no response")
@@ -774,6 +850,7 @@ class DirectProviderJsonTransport:
         prompt: str,
         task: str,
         schema: dict[str, Any],
+        quarantine_failures: bool = False,
     ) -> ProviderJsonResponse:
         request = {
             "binding_id": self.binding["binding_id"],
@@ -793,7 +870,11 @@ class DirectProviderJsonTransport:
         started = time.perf_counter()
         try:
             result = await self.call(
-                system=system, prompt=prompt, task=task, schema=schema
+                system=system,
+                prompt=prompt,
+                task=task,
+                schema=schema,
+                maximum_transport_retries=ledger.remaining_transport_retries(),
             )
         except Exception as error:
             ledger.record_failed(
@@ -803,6 +884,11 @@ class DirectProviderJsonTransport:
                 failure_type=type(error).__name__,
                 failure_detail=str(error),
                 latency_ms=(time.perf_counter() - started) * 1000,
+                terminal=not quarantine_failures,
+                attempt_count=int(getattr(error, "attempt_count", 1)),
+                recovered_transport_failures=list(
+                    getattr(error, "recovered_transport_failures", [])
+                ),
             )
             raise
         ledger.record_completed(

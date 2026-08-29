@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "instrument_id": "autonomous-tutoring-r1-confirmation-001",
+  "status": "reviewed-pending-model-selection",
+  "issue": 107,
+  "decision_question": "Can the bounded LangGraph T1 tutor improve pedagogical state transitions without weakening the selected T0 product grounding and safety controls?",
+  "upstream_result": {
+    "instrument_id": "academic-factual-qa-r1-model-cascade-001",
+    "required_status": "completed-keep",
+    "path": "reports/generated/r1-model-cascade-001/cascade-state.json"
+  },
+  "conditions": {
+    "control": "T0-grounded-assistant",
+    "candidate": "T1-bounded-tutoring-graph",
+    "fixed": [
+      "50 source-family-disjoint trajectories",
+      "200 ordered student turns per condition",
+      "course releases",
+      "retrieval indexes",
+      "selected exact OpenAI model",
+      "decoding and response schema",
+      "evidence gate and claim validator",
+      "policy"
+    ]
+  },
+  "trajectory_contract": {
+    "source_package": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
+    "trajectory_count": 50,
+    "turns_per_trajectory": 4,
+    "turn_count_per_condition": 200,
+    "selection_seed": 20260829,
+    "course_distribution": {
+      "computer-networking": 13,
+      "data-structures": 13,
+      "operating-systems": 12,
+      "python-programming": 12
+    },
+    "failure_and_restart_injections": {
+      "provider_failure_trajectories": 5,
+      "restart_before_third_turn_trajectories": 5,
+      "release_change_checks": 5
+    }
+  },
+  "execution": {
+    "provider_calls_authorized": false,
+    "paid_execution_authorized": false,
+    "held_out_execution_authorized": false,
+    "automatic_promotion": false,
+    "maximum_logical_calls": 650,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 20.0,
+    "maximum_repairs_per_turn": 1,
+    "maximum_graph_steps_per_turn": 12
+  },
+  "hard_gates": {
+    "unsupported_releases_max": 0,
+    "permission_violations_max": 0,
+    "invalid_citations_max": 0,
+    "duplicate_turns_max": 0,
+    "unbounded_loops_max": 0,
+    "model_authoritative_mutations_max": 0,
+    "forced_failure_safe_fallback_rate_min": 1.0,
+    "restart_consistency_min": 1.0,
+    "t1_transition_validity_min": 0.95,
+    "grounded_success_delta_min": -0.03
+  },
+  "advisory_review": {
+    "model": "gpt-5.6-sol",
+    "scope": "all deterministic failures plus 40 seeded passing turns",
+    "authoritative": false,
+    "missing_review_is_a_limitation": true
+  },
+  "decision_rule": {
+    "pass": "bind T1 to the demo profile and retain one-setting T0 rollback",
+    "valid_failure": "keep T0 selected and stop for one graph-method decision",
+    "invalid_execution": "permit one harness-only correction",
+    "automatic_promotion": false
+  },
+  "limitations": [
+    "Synthetic open-source trajectories do not establish professor fidelity.",
+    "The advisory reviewer is another model from the same provider.",
+    "A passing result does not establish learning outcomes or external usability."
+  ]
+}

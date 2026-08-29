@@ -350,16 +350,21 @@ class LiveAtomicGroundedGenerator(LiveGroundedGenerator):
         try:
             response = await self.client.chat(
                 prompt.messages,
-                task="bounded_pedagogical_tutor_answer",
+                task="grounded_tutor_atomic_claims",
             )
         except LlmError as error:
             return _provider_failure(error, started=started, clock=self.clock)
         try:
-            output = ModelTutorOutput.model_validate_json(response.content)
-            citations = self.citation_validator.validate(
-                output.citation_ids,
-                prompt.evidence,
+            output = ModelTutorOutputV2.model_validate_json(response.content)
+            citation_ids = list(
+                dict.fromkeys(
+                    citation_id
+                    for claim in output.claims
+                    for citation_id in claim.citation_ids
+                )
             )
+            citations = self.citation_validator.validate(citation_ids, prompt.evidence)
+            claims = resolve_atomic_claim_lineage(output, prompt.evidence)
         except (ValidationError, ValueError):
             return _provider_failure(
                 LlmMalformedResponseError(),
@@ -369,8 +374,13 @@ class LiveAtomicGroundedGenerator(LiveGroundedGenerator):
                 usage=response.usage,
             )
         return TutorAnswer(
-            content=output.answer,
+            content=_deterministic_pedagogical_response(
+                intent,
+                help_level,
+                " ".join(claim.text for claim in claims),
+            ),
             citations=citations,
+            atomic_claims=claims,
             trace=_trace(
                 generator_id=self.implementation_id,
                 provider_model=response.provider_model,

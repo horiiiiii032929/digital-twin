@@ -101,6 +101,136 @@ def _set_evaluation(
     )
 
 
+def _teaching_profile_payload() -> dict:
+    return {
+        "tone": "Encouraging, precise, and concise",
+        "depth": "balanced",
+        "explanation_structure": ["Concept", "Example", "Check understanding"],
+        "example_preferences": ["Use small Python examples"],
+        "misconception_handling": "Name the misconception, then contrast it with evidence.",
+        "integrity_limits": "Use hints for assessed work and never provide a submission.",
+        "help_ladder": ["Focused hint", "Worked analogous example", "Full explanation"],
+        "outreach_policy": "Send only professor-scheduled review prompts to opted-in students.",
+    }
+
+
+def test_approved_teaching_profile_is_hash_bound_to_release(tmp_path):
+    client, repository, sessions, fixture = _client(tmp_path, approved=True)
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles",
+        headers=_headers(fixture.professor_id),
+        json=_teaching_profile_payload(),
+    )
+    assert created.status_code == 201
+    profile = created.json()
+
+    rejected = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": "onboarding-release-synthetic",
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "teaching_profile_id": profile["profile_id"],
+            "release_id": "release-with-draft-teaching-profile",
+            "chunks": [
+                chunk.model_dump(mode="json")
+                for chunk in repository.get_release(fixture.release_a_id).chunks
+            ],
+        },
+    )
+    assert rejected.status_code == 409
+    assert rejected.json()["detail"]["code"] == "teaching_profile_not_approved"
+
+    preview = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{profile['profile_id']}/preview",
+        headers=_headers(fixture.professor_id),
+    )
+    assert preview.status_code == 200
+    approved = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{profile['profile_id']}/approve",
+        headers=_headers(fixture.professor_id),
+        json={"preview_sha256": preview.json()["preview_sha256"]},
+    )
+    assert approved.status_code == 200
+
+    draft = _create_draft(
+        client,
+        repository,
+        sessions,
+        fixture,
+        "release-with-approved-teaching-profile",
+    )
+    request = {
+        "session_id": "onboarding-release-synthetic",
+        "profile_id": "student-tutor",
+        "profile_version": "v1",
+        "teaching_profile_id": profile["profile_id"],
+        "release_id": "release-with-approved-teaching-profile-bound",
+        "chunks": [
+            chunk.model_dump(mode="json")
+            for chunk in repository.get_release(fixture.release_a_id).chunks
+        ],
+    }
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json=request,
+    )
+    assert draft["teaching_profile_id"] is None
+    assert response.status_code == 201
+    bound = response.json()
+    assert bound["teaching_profile_id"] == profile["profile_id"]
+    assert bound["teaching_profile_sha256"] == approved.json()["content_sha256"]
+
+
+def test_professor_can_list_and_cancel_pending_scheduled_outreach(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+    release = repository.get_release(fixture.release_a_id)
+    assert release is not None
+    source_chunk = next(chunk for chunk in release.chunks if chunk.retrieval_allowed)
+    scheduled = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/proactive-triggers",
+        headers=_headers(fixture.professor_id),
+        json={
+            "student_account_id": fixture.student_a_id,
+            "channel": "in-app",
+            "kind": "scheduled-retrieval-practice",
+            "scheduled_for": "2026-09-01T09:00:00+00:00",
+            "expires_at": "2026-09-08T09:00:00+00:00",
+            "topic": "Review cache coherence",
+            "prompt": "Revisit the evidence and explain the invariant in your own words.",
+            "source_chunk_id": source_chunk.id,
+            "idempotency_key": "scheduled-outreach-list-cancel-test",
+        },
+    )
+    assert scheduled.status_code == 201
+
+    listed = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/proactive-triggers",
+        headers=_headers(fixture.professor_id),
+    )
+    assert listed.status_code == 200
+    assert [item["id"] for item in listed.json()] == [scheduled.json()["id"]]
+
+    cancelled = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/proactive-triggers/"
+        f"{scheduled.json()['id']}/cancel",
+        headers=_headers(fixture.professor_id),
+    )
+    assert cancelled.status_code == 200
+    assert cancelled.json()["status"] == "cancelled"
+    assert cancelled.json()["suppression_reason"] == "professor-cancelled"
+    repeated = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/proactive-triggers/"
+        f"{scheduled.json()['id']}/cancel",
+        headers=_headers(fixture.professor_id),
+    )
+    assert repeated.status_code == 200
+
+
 def _record_prior_no_evidence_turn(repository, fixture) -> None:
     current = repository.get_release(fixture.release_a_id)
     assert current is not None
