@@ -14,8 +14,8 @@ def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_successor_is_build_only_and_binds_qualified_indexes() -> None:
-    result = checkpoint.validate()
+def test_authorized_successor_binds_qualified_indexes() -> None:
+    result = checkpoint.validate(require_unauthorized=False)
     assert result["status"] == "passed-build-only"
     assert result["case_count"] == 500
     assert result["control_case_count"] == 100
@@ -33,13 +33,20 @@ def test_successor_is_build_only_and_binds_qualified_indexes() -> None:
         "verify-and-load-exact-artifacts-only-never-build"
     )
     assert len(lifecycle["artifact_ids"]) == 4
-    assert not any(instrument["authorization"].values())
+    assert instrument["status"] == "frozen-pending-execution"
+    assert instrument["authorization"]["provider_execution_authorized"] is True
+    assert instrument["authorization"]["paid_execution_authorized"] is True
+    assert (
+        instrument["authorization"]["product_development_execution_authorized"]
+        is True
+    )
+    assert instrument["authorization"]["semantic_review_execution_authorized"] is True
     assert instrument["execution"]["final_execution_authorized"] is False
 
 
 def test_successor_does_not_mutate_historical_checkpoint() -> None:
     before = historical.validate()
-    checkpoint.validate()
+    checkpoint.validate(require_unauthorized=False)
     after = historical.validate()
     assert before == after
     assert historical.INSTRUMENT_ID.endswith("checkpoint-005")
@@ -108,13 +115,13 @@ def test_successor_simulations_are_finite(scenario: str, expected: str) -> None:
     assert result["hidden_gold_visible_to_product"] is False
 
 
-def test_clean_preflight_is_blocked_by_authority_only(
+def test_clean_authorized_preflight_is_ready(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(checkpoint, "_repo_dirty", lambda: False)
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     result = checkpoint.preflight()
-    assert result["status"] == "blocked-not-authorized"
+    assert result["status"] == "ready"
     assert result["runtime_document_embedding_requests"] == 0
     assert not any(
         blocker.startswith("retrieval-index-verification-failed:")
@@ -124,10 +131,7 @@ def test_clean_preflight_is_blocked_by_authority_only(
         blocker in {"repository-dirty", "openai-api-key-missing", "provider-metadata-stale"}
         for blocker in result["blockers"]
     )
-    assert all(
-        "authorization" in blocker or blocker.endswith("-false")
-        for blocker in result["blockers"]
-    )
+    assert result["blockers"] == []
 
 
 def test_resume_binds_exact_retrieval_artifacts(

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "binding_id": "academic-factual-qa-open-10000-openai-binding-007",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "successor_of": "academic-factual-qa-open-10000-openai-binding-006",
-  "verified_at": "2026-08-28T23:42:05+08:00",
+  "verified_at": "2026-08-29T12:11:34+08:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-development-inputs-only",
   "routing_policy": "direct-openai-responses-api-only-no-router-no-fallback",
@@ -91,11 +91,11 @@
     "production_private_data_authorized": false
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "product_development_execution_authorized": false,
-    "semantic_review_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "product_development_execution_authorized": true,
+    "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "e3f2c112c45c68b25f6e4a98254a4c57b1fc398bb8df71c49123ee6e8e98ec2b"
+  "content_sha256": "ec5ca54f8767384d7502bcd9fe9b1e7843d1ce275a103b66fcc47a681530e9fa"
 }
