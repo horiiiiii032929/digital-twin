@@ -11,6 +11,10 @@ from enum import StrEnum
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from pydantic import ValidationError
+
+from src.digital_twin.evaluation import ComponentEvaluationRecord
+
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -33,6 +37,11 @@ class StudentTutoringMode(StrEnum):
     BOUNDED_TUTORING_GRAPH = "bounded-tutoring-graph"
 
 
+class EvidenceGateMode(StrEnum):
+    UNSELECTED = "unselected"
+    STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
+
+
 @dataclass(frozen=True, slots=True)
 class AppSettings:
     mode: RuntimeMode = RuntimeMode.DEMO
@@ -48,6 +57,7 @@ class AppSettings:
     authenticated_requests_per_minute: int = 120
     log_level: str = "INFO"
     generator_mode: GeneratorMode = GeneratorMode.DETERMINISTIC
+    evidence_gate_mode: EvidenceGateMode = EvidenceGateMode.UNSELECTED
     student_profile_path: Path = (
         ROOT
         / "research/05_evaluation/profiles/student-tutor-v1.json"
@@ -100,6 +110,12 @@ class AppSettings:
             log_level=os.getenv("APP_LOG_LEVEL", "INFO").upper(),
             generator_mode=GeneratorMode(
                 os.getenv("APP_GENERATOR_MODE", GeneratorMode.DETERMINISTIC.value)
+            ),
+            evidence_gate_mode=EvidenceGateMode(
+                os.getenv(
+                    "APP_EVIDENCE_GATE_MODE",
+                    EvidenceGateMode.UNSELECTED.value,
+                )
             ),
             student_profile_path=_repository_path(
                 os.getenv(
@@ -282,14 +298,6 @@ def _validate_t1_qualification_result(
         profile = json.loads(profile_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         raise ValueError("staging T1 qualification evidence is unreadable") from error
-    expected_hash = hashlib.sha256(
-        json.dumps(
-            {key: value for key, value in result.items() if key != "content_sha256"},
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=True,
-        ).encode("utf-8")
-    ).hexdigest()
     generator = next(
         (
             row
@@ -303,16 +311,72 @@ def _validate_t1_qualification_result(
         if isinstance(generator, dict)
         else {}
     )
+    profile_sha256 = hashlib.sha256(profile_path.read_bytes()).hexdigest()
+    if "run_id" in result:
+        try:
+            record = ComponentEvaluationRecord.model_validate(result)
+        except ValidationError as error:
+            raise ValueError(
+                "staging T1 qualification evidence is invalid"
+            ) from error
+        selected_id = record.decision.selected_implementation_id
+        selected = next(
+            (
+                candidate
+                for candidate in record.candidates
+                if candidate.implementation.implementation_id == selected_id
+            ),
+            None,
+        )
+        all_passed = all(
+            all(metric.passed for metric in candidate.metrics)
+            and all(gate.passed for gate in candidate.hard_gates)
+            for candidate in record.candidates
+        )
+        selected_configuration = (
+            selected.implementation.configuration if selected is not None else {}
+        )
+        if (
+            record.run_id
+            not in {
+                "autonomous-tutoring-r1-confirmation-001",
+                "autonomous-tutoring-r1-confirmation-002",
+            }
+            or record.component.value != "conversation-orchestration"
+            or record.decision.outcome.value != "keep"
+            or selected is None
+            or not all_passed
+            or selected_configuration.get("t0_rollback_available") is not True
+            or selected_configuration.get("generator")
+            != configuration.get("provider_model")
+            or selected_configuration.get("profile_sha256") != profile_sha256
+        ):
+            raise ValueError(
+                "staging T1 qualification evidence does not bind this release"
+            )
+        return
+
+    expected_hash = hashlib.sha256(
+        json.dumps(
+            {key: value for key, value in result.items() if key != "content_sha256"},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode("utf-8")
+    ).hexdigest()
     if (
         result.get("instrument_id")
-        != "autonomous-tutoring-r1-confirmation-001"
+        not in {
+            "autonomous-tutoring-r1-confirmation-001",
+            "autonomous-tutoring-r1-confirmation-002",
+        }
         or result.get("status") != "completed-keep"
         or result.get("decision") != "Keep"
         or result.get("hard_gates_passed") is not True
         or result.get("t0_rollback_available") is not True
         or result.get("selected_model") != configuration.get("provider_model")
         or result.get("profile_sha256")
-        != hashlib.sha256(profile_path.read_bytes()).hexdigest()
+        != profile_sha256
         or result.get("content_sha256") != expected_hash
     ):
         raise ValueError("staging T1 qualification evidence does not bind this release")

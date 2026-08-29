@@ -8,7 +8,23 @@ from scripts.verify_https_staging import (
     _passwords_from_env,
     _validate_https_url,
     _write_synthetic_pdf,
+    verify_tutoring_mode,
 )
+
+
+def test_live_verifier_defaults_target_the_qualified_local_profile() -> None:
+    source = (Path(__file__).parents[1] / "scripts/verify_https_staging.py").read_text()
+
+    assert 'default="student-tutor-r1-local-candidate"' in source
+    assert 'default="v1"' in source
+    assert 'default="bounded-tutoring-graph"' in source
+
+
+def test_live_verifier_requires_every_readiness_subsystem() -> None:
+    source = (Path(__file__).parents[1] / "scripts/verify_https_staging.py").read_text()
+
+    assert 'all(readiness["checks"].values())' in source
+    assert "time.sleep(1.0)" in source
 
 
 def test_live_verifier_requires_an_https_origin() -> None:
@@ -60,3 +76,40 @@ def test_live_verifier_emits_a_real_synthetic_pdf(tmp_path: Path) -> None:
     _write_synthetic_pdf(path)
 
     assert path.read_bytes().startswith(b"%PDF")
+
+
+def test_mode_check_requires_the_selected_runtime_mode(tmp_path: Path) -> None:
+    result = tmp_path / "result.json"
+    result.write_text(
+        '{"run_id":"run-1","accounts":{"student_email":"student@example.edu"},'
+        '"workflow":{"course_id":"course-1"}}'
+    )
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/api/auth/login":
+            return httpx.Response(200, json={"role": "student"})
+        if request.url.path.endswith("/conversations"):
+            return httpx.Response(201, json={"id": "conversation-1"})
+        return httpx.Response(
+            200,
+            json={
+                "tutoring_mode": "bounded-tutoring-graph",
+                "learner_state_revision": 1,
+                "tutor_message": {"action": "answer"},
+                "citations": [{"id": "citation-1"}],
+            },
+        )
+
+    with httpx.Client(
+        base_url="https://localhost:8443",
+        transport=httpx.MockTransport(handler),
+    ) as client:
+        checked = verify_tutoring_mode(
+            client,
+            result,
+            "student-password-123",
+            expected_tutoring_mode="bounded-tutoring-graph",
+            origin="https://localhost:8443",
+        )
+
+    assert checked["passed_checks"] == 3

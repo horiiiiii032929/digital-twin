@@ -219,10 +219,10 @@ class DeterministicIntentSelector:
     ) -> str:
         if signals.direct_solution_request:
             return TutoringIntent.REFUSE_AND_REDIRECT
-        if not hits:
-            return TutoringIntent.ABSTAIN_NO_EVIDENCE
         if signals.ambiguous:
             return TutoringIntent.CLARIFY_REQUEST
+        if not hits:
+            return TutoringIntent.ABSTAIN_NO_EVIDENCE
         if signals.misconception_observed:
             return TutoringIntent.CORRECT_MISCONCEPTION
         if signals.confusion >= 0.7:

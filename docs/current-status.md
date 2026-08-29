@@ -24,19 +24,16 @@ answer to an ambiguous question. The result is `completed-refine`; no model,
 authority is revoked, the deterministic grounded generator remains the release
 fallback, and the sealed 10,000-case run remains unauthorized.
 
-The product track is also build-complete but not yet release-qualified. It now
-includes a versioned professor profile with a hash-bound ten-case preview,
-privacy-minimized post-turn learning-gap signals and professor aggregates, and
-professor-scheduled A0 in-app outreach with durable worker, consent, expiry,
-deduplication, and cancellation. T1 generation preserves authoritative atomic
-claim lineage and adds pedagogical wording in deterministic code. The
-prospective 50-trajectory/200-turn-per-condition T0/T1 confirmation remains
-provider-unauthorized and still assumes a selected model, so it must now be
-bound prospectively to the explicit deterministic fallback before a network-
-free graph confirmation. This may qualify graph mechanics, persistence, and
-policy behavior, but not LLM-backed autonomy. The preview Compose boundary is
-ready for a temporary Cloudflare Quick Tunnel, but no public URL or production
-claim exists yet.
+The local product track is now release-qualified on immutable revision
+`c235e5633d58191cf10bca797dbc669814037b85`. It includes a versioned professor
+profile with a hash-bound ten-case preview, privacy-minimized post-turn
+learning-gap signals and professor aggregates, professor-scheduled A0 in-app
+outreach with a durable worker, and the bounded T1 tutoring graph with one-
+setting T0 rollback. The final clean local HTTPS journey passed 24/24 checks;
+restart, clean restore, T0 rollback, and T1 restoration each passed their
+dedicated checks. The runtime uses deterministic generation and makes no
+LLM-quality, hosted-production, professor-fidelity, learning-outcome, or
+external-usability claim.
 
 AFQC-088 changes the immediate operating priority after the valid cascade
 failure. The 2026-08-30 hard stop is now an operational invite-only R1, not
@@ -48,6 +45,39 @@ complete deployed journeys. Issue #127 and the sealed 10,000-case run move to
 post-release research. A Quick Tunnel remains an emergency walkthrough and
 cannot support a production claim; a stable host and domain are required for
 that claim.
+
+AFQC-089 narrows the Sunday delivery boundary at the researcher's direction:
+domain, DNS, public tunnel, and durable-host work no longer block 2026-08-30.
+The target is one polished production-like local R1 on the development Mac.
+The exact revision must pass local HTTPS, credentialed professor/student
+journeys, deterministic T0 rollback, optional network-free-qualified T1,
+profile approval, learning-gap review, A0 in-app outreach, persistence,
+restart, backup/restore, and image rollback. The result must be described as a
+qualified local release, not hosted production.
+
+AFQC-090 records the finite local T0/T1 confirmation as `completed-keep`.
+Across 50 isolated synthetic trajectories and 200 turns per condition, T0 and
+T1 achieved 100% grounded success, T1 achieved 100% transition validity, and
+all citation, claim, state, persistence, restart, duplicate, and forced-failure
+gates passed. The run made zero provider calls and cost USD 0. T1 is selected
+only for the exact hash-bound local profile; T0 remains the immediate rollback.
+This does not establish LLM answer quality, professor fidelity, learning
+outcomes, external usability, or hosted reliability.
+
+AFQC-091 records `local-r1-release-qualification-001` as `completed-keep` for
+the local Sunday boundary. The exact API and web images built from `c235e56`
+passed 24/24 clean live HTTPS journey checks, 6/6 restart checks, 6/6 clean
+restore checks, 3/3 T0 rollback checks, and 3/3 T1 restoration checks. The
+journey covered invite-only roles, ingestion, professor policy and profile
+approval, publication, consent-gated A0 outreach, bounded T1 tutoring,
+inspectable citation lineage, and privacy-thresholded learning-gap insights.
+The complete repository gate passed 1,221 Python tests, 47 frontend tests,
+lint, production build, active execution freeze, and 696/696 audited files.
+The first backup procedure attempted to copy from container temporary storage;
+that operational procedure failed without data loss and was corrected before
+the successful checksum-verified host-mounted backup and clean restore. Domain,
+public tunnel, durable hosting, and the sealed 10,000-case academic evaluation
+remain separate post-Sunday work.
 
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
@@ -94,8 +124,10 @@ schema-aligned successor track stops without an automatic third attempt. Fresh
 500+100 product confirmation, sealed 10,000 execution, T1, fidelity, promotion,
 and deployment remain unauthorized pending an explicit method decision.
 
-Issues #132 and #134 remain open for their API/UI, method-confirmation, and
-activation gates rather than being treated as completed products.
+Issues #132 and #134 are complete for the qualified local R1: the live journey
+verified privacy-thresholded learning-gap review and professor-scheduled,
+consent-gated in-app outreach. A1 automatic outreach and Discord remain outside
+the release and are not implied by those closures.
 
 The active #127 successor is now
 `academic-factual-qa-open-10000-v1`: a flow-independent 500-case development
@@ -1044,11 +1076,11 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration; do not infer an academic quality claim from it |
-| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / Go Deeper | Run the deterministic-fallback T0/T1 confirmation network-free; promote T1 only for a complete graph/policy pass and preserve T0 rollback |
-| 6 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through complete journeys; keep A1 and Discord disabled |
-| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Build and run one immutable deterministic-fallback revision on the selected durable host and stable HTTPS domain |
-| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / Pending | Pass isolation, monitoring, persistence, backup/restore, restart, capacity, and rollback on that host |
-| 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / Pending | Pass administrator, professor, and student journeys through the deployed URL on the same revision |
+| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
+| 6 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |
+| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
+| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
+| 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
 | 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Refine | Preserve the cascade result and design one prospective retrieval/evidence successor after the operational release; keep the sealed 10,000 run closed |
 | 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |

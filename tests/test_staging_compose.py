@@ -13,6 +13,10 @@ def test_worker_reuses_the_single_api_image_build() -> None:
     assert services["api"]["build"]["target"] == "api"
     assert services["worker"]["image"] == services["api"]["image"]
     assert "build" not in services["worker"]
+    assert (
+        compose["x-runtime-environment"]["APP_EVIDENCE_GATE_MODE"]
+        == "${APP_EVIDENCE_GATE_MODE:-unselected}"
+    )
 
 
 def test_staging_services_share_only_the_durable_runtime_volume() -> None:

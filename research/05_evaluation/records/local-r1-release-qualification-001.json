@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-release-qualification-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "local-r1-live-synthetic-journey-v1",
+  "corpus_id": "synthetic-https-security-open-demo-v1",
+  "code_revision": "c235e5633d58191cf10bca797dbc669814037b85",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "local-r1-build-only-baseline",
+        "version": "pre-live-qualification-v1",
+        "configuration": {
+          "generator": "deterministic/v1",
+          "tutoring_mode": "bounded-tutoring-graph",
+          "live_execution": false
+        }
+      },
+      "metrics": [
+        {"name": "live-https-journey-pass-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "restart-resume-pass-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "clean-restore-resume-pass-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "t0-rollback-pass-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "t1-restoration-pass-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "repository-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "role-and-session-boundaries", "passed": false, "evidence": "Build-only baseline had no clean live role journey."},
+        {"name": "grounded-tutoring-citation-lineage", "passed": false, "evidence": "Build-only baseline had no clean live citation journey."},
+        {"name": "professor-autonomous-workflows", "passed": false, "evidence": "Build-only baseline had no clean live profile, learning-gap, or outreach journey."},
+        {"name": "restart-backup-restore", "passed": false, "evidence": "Build-only baseline had no same-revision operational recovery evidence."},
+        {"name": "bounded-rollback", "passed": false, "evidence": "Build-only baseline had no live T0 rollback and T1 restoration check."},
+        {"name": "repository-integrity", "passed": true, "evidence": "The complete local repository gate passed before live qualification."}
+      ],
+      "failures_by_category": {"unverified-operational-gate": 5}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "local-r1-qualified-compose-release",
+        "version": "c235e56",
+        "configuration": {
+          "https_origin": "https://localhost:9443",
+          "api_image": "sha256:f82047ad5c6c59b176f6b479a16e652dda2593cb4dc8a301e8e309304bb54a9f",
+          "web_image": "sha256:7c13df6cd830238358dfdaf4dbee535fd8bdbfed3aed2d6b10551142f4f024e3",
+          "generator": "deterministic/v1",
+          "tutoring_mode": "bounded-tutoring-graph",
+          "rollback_mode": "grounded-assistant",
+          "evidence_gate": "structured-lexical-v1",
+          "provider_calls": 0
+        }
+      },
+      "metrics": [
+        {"name": "live-https-journey-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "clean-restore-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "t0-rollback-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "t1-restoration-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "repository-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "role-and-session-boundaries", "passed": true, "evidence": "Invite-only administrator, professor, and student sessions passed through local HTTPS."},
+        {"name": "grounded-tutoring-citation-lineage", "passed": true, "evidence": "Grounded T1 response, valid citation, and original authorized citation region passed."},
+        {"name": "professor-autonomous-workflows", "passed": true, "evidence": "Profile approval, privacy-thresholded learning gaps, and consent-gated scheduled A0 outreach passed."},
+        {"name": "restart-backup-restore", "passed": true, "evidence": "6/6 checks passed after full restart and 6/6 after checksum-verified clean restore."},
+        {"name": "bounded-rollback", "passed": true, "evidence": "3/3 checks passed in T0 rollback mode and 3/3 after restoring T1."},
+        {"name": "repository-integrity", "passed": true, "evidence": "1,221 Python tests, 47 frontend tests, lint, build, freeze, and 696/696 audit passed."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "local-r1-qualified-compose-release",
+    "rationale": "Keep the immutable local Compose release for the Sunday local-R1 boundary because every clean live journey, restart, restore, rollback, T1 restoration, and repository gate passed. This does not promote the system to hosted production.",
+    "limitations": [
+      "The release is reachable only on the development Mac through an internal-CA HTTPS origin.",
+      "The journey uses synthetic accounts and open demonstration material, not real professor or student data.",
+      "Deterministic generation is selected after the four-model product screen failed; no LLM answer-quality claim is made.",
+      "Professor fidelity, external usability, learning outcomes, true visual reasoning, durable hosting, and the sealed 10,000-case product evaluation remain unproven."
+    ]
+  }
+}

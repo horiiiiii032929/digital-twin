@@ -31,15 +31,23 @@ def main() -> None:
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--ca-file", type=Path)
     parser.add_argument("--admin-email", default="admin@foundation.local")
+    parser.add_argument("--profile-id", default="student-tutor-r1-local-candidate")
+    parser.add_argument("--profile-version", default="v1")
     parser.add_argument(
-        "--profile-id", default="student-tutor-r1-openai-candidate"
+        "--expected-tutoring-mode",
+        default="bounded-tutoring-graph",
+        choices=("grounded-assistant", "bounded-tutoring-graph"),
     )
-    parser.add_argument("--profile-version", default="v1-build-only")
     parser.add_argument("--output", type=Path)
     parser.add_argument(
         "--resume",
         type=Path,
         help="Verify a previous workflow after restart or clean restore.",
+    )
+    parser.add_argument(
+        "--mode-check",
+        action="store_true",
+        help="Create one new grounded turn and verify the selected tutoring mode.",
     )
     parser.add_argument("--timeout-seconds", type=float, default=45.0)
     args = parser.parse_args()
@@ -57,7 +65,17 @@ def main() -> None:
         trust_env=False,
     ) as client:
         if args.resume is not None:
-            result = verify_resume(client, args.resume, passwords["student"])
+            result = (
+                verify_tutoring_mode(
+                    client,
+                    args.resume,
+                    passwords["student"],
+                    expected_tutoring_mode=args.expected_tutoring_mode,
+                    origin=origin,
+                )
+                if args.mode_check
+                else verify_resume(client, args.resume, passwords["student"])
+            )
         else:
             if args.output is None:
                 parser.error("--output is required for a new staging journey")
@@ -69,6 +87,7 @@ def main() -> None:
                 timeout_seconds=args.timeout_seconds,
                 profile_id=args.profile_id,
                 profile_version=args.profile_version,
+                expected_tutoring_mode=args.expected_tutoring_mode,
             )
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(
@@ -91,6 +110,7 @@ def run_journey(
     timeout_seconds: float,
     profile_id: str,
     profile_version: str,
+    expected_tutoring_mode: str,
 ) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
     run_token = uuid4().hex[:10]
@@ -100,10 +120,9 @@ def run_journey(
     _record(
         checks,
         "https-readiness",
-        readiness == {
-            "status": "ready",
-            "checks": {"database": True, "object_store": True},
-        },
+        readiness.get("status") == "ready"
+        and bool(readiness.get("checks"))
+        and all(readiness["checks"].values()),
     )
 
     admin_response = _login(client, admin_email, passwords["admin"])
@@ -408,12 +427,18 @@ def run_journey(
             f"/api/student/conversations/{conversation['id']}/messages",
             headers={"Origin": origin},
             json={
-                "content": "What does CSRF abuse?",
+                "content": "How does CSRF abuse an authenticated browser session?",
                 "request_id": f"https-turn-{run_token}",
             },
         ),
         200,
     )
+    _record(
+        checks,
+        "grounded-answer-released",
+        turn["tutor_message"]["action"] == "answer" and bool(turn["citations"]),
+    )
+    _assert_all_passed(checks)
     citation = turn["citations"][0]
     _record(
         checks,
@@ -436,15 +461,15 @@ def run_journey(
     )
     _record(
         checks,
+        "selected-tutoring-mode-active",
+        turn["tutoring_mode"] == expected_tutoring_mode
+        and adaptive_turn["tutoring_mode"] == expected_tutoring_mode,
+    )
+    _record(
+        checks,
         "bounded-tutoring-state-visible",
-        adaptive_turn["tutoring_mode"] in {
-            "grounded-assistant",
-            "bounded-tutoring-graph",
-        }
-        and (
-            adaptive_turn["tutoring_mode"] == "grounded-assistant"
-            or adaptive_turn["learner_state_revision"] == 2
-        ),
+        expected_tutoring_mode != "bounded-tutoring-graph"
+        or adaptive_turn["learner_state_revision"] == 2,
     )
     crop = client.get(
         f"/api/student/messages/{turn['tutor_message']['id']}/citations/"
@@ -502,6 +527,7 @@ def run_journey(
             "ingestion_queue_to_complete_ms": round(ingestion_ms, 3),
             "live_api_p95_ms": round(p95, 3),
             "live_api_requests": len(durations),
+            "tutoring_mode": adaptive_turn["tutoring_mode"],
         },
         "accounts": {
             "professor_email": professor_email,
@@ -515,6 +541,7 @@ def run_journey(
             "teaching_profile_id": teaching_profile["profile_id"],
             "proactive_trigger_id": trigger["id"],
             "conversation_id": conversation["id"],
+            "conversation_message_count": 4,
             "tutor_message_id": turn["tutor_message"]["id"],
             "citation_id": citation["id"],
             "citation_crop_sha256": crop_sha256,
@@ -548,7 +575,26 @@ def verify_resume(
         ),
         200,
     )
-    _record(checks, "restored-conversation", len(conversation["messages"]) == 2)
+    expected_message_count = recorded["workflow"].get("conversation_message_count", 4)
+    _record(
+        checks,
+        "restored-conversation",
+        len(conversation["messages"]) == expected_message_count,
+    )
+    tutor_messages = [
+        message for message in conversation["messages"] if message["role"] == "tutor"
+    ]
+    expected_mode = recorded.get("metrics", {}).get("tutoring_mode")
+    _record(
+        checks,
+        "restored-tutoring-state",
+        bool(tutor_messages)
+        and all(message["tutoring_mode"] == expected_mode for message in tutor_messages)
+        and (
+            expected_mode != "bounded-tutoring-graph"
+            or tutor_messages[-1]["learner_state_revision"] == 2
+        ),
+    )
     citations = _expect_json(
         client.get(
             f"/api/student/messages/{recorded['workflow']['tutor_message_id']}/citations"
@@ -577,6 +623,72 @@ def verify_resume(
         "schema_version": 1,
         "run_id": recorded["run_id"],
         "mode": "resume-live-https-journey",
+        "checks": checks,
+        "passed_checks": len(checks),
+        "total_checks": len(checks),
+    }
+
+
+def verify_tutoring_mode(
+    client: httpx.Client,
+    result_path: Path,
+    student_password: str,
+    *,
+    expected_tutoring_mode: str,
+    origin: str,
+) -> dict[str, Any]:
+    recorded = json.loads(result_path.read_text(encoding="utf-8"))
+    checks: list[dict[str, Any]] = []
+    _expect_status(
+        _login(client, recorded["accounts"]["student_email"], student_password),
+        200,
+    )
+    conversation = _expect_json(
+        client.post(
+            f"/api/student/courses/{recorded['workflow']['course_id']}/conversations",
+            headers={"Origin": origin},
+        ),
+        201,
+    )
+    turn = _expect_json(
+        client.post(
+            f"/api/student/conversations/{conversation['id']}/messages",
+            headers={"Origin": origin},
+            json={
+                "content": "How does CSRF abuse an authenticated browser session?",
+                "request_id": f"mode-check-{uuid4().hex}",
+            },
+        ),
+        200,
+    )
+    _record(
+        checks,
+        "selected-tutoring-mode",
+        turn["tutoring_mode"] == expected_tutoring_mode,
+    )
+    _record(
+        checks,
+        "mode-check-grounded-answer",
+        turn["tutor_message"]["action"] == "answer" and bool(turn["citations"]),
+    )
+    _record(
+        checks,
+        "mode-check-state-boundary",
+        (
+            expected_tutoring_mode == "grounded-assistant"
+            and turn["learner_state_revision"] is None
+        )
+        or (
+            expected_tutoring_mode == "bounded-tutoring-graph"
+            and turn["learner_state_revision"] == 1
+        ),
+    )
+    _assert_all_passed(checks)
+    return {
+        "schema_version": 1,
+        "run_id": recorded["run_id"],
+        "mode": "live-tutoring-mode-check",
+        "expected_tutoring_mode": expected_tutoring_mode,
         "checks": checks,
         "passed_checks": len(checks),
         "total_checks": len(checks),
@@ -642,7 +754,7 @@ def _wait_for_outreach(
         )
         if inbox:
             return inbox
-        time.sleep(0.25)
+        time.sleep(1.0)
     raise TimeoutError("scheduled outreach did not arrive before the HTTPS deadline")
 
 

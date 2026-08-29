@@ -26,6 +26,7 @@ def test_inventory_accounts_for_execution_files_and_ignores_prose(tmp_path: Path
         "scripts/historical.py",
         "scripts/ocr.swift",
         "tests/test_core.py",
+        "compose.local-r1.yml",
         ".github/workflows/ci.yml",
         "research/05_evaluation/profiles/runtime.json",
         "reports/snapshot/query.sql",
@@ -42,12 +43,13 @@ def test_inventory_accounts_for_execution_files_and_ignores_prose(tmp_path: Path
     )
     by_path = {record["path"]: record for record in inventory["records"]}
 
-    assert inventory["file_count"] == 11
+    assert inventory["file_count"] == 12
     assert "docs/readme.md" not in by_path
     assert by_path["src/pkg/core.py"]["category"] == "active_runtime"
     assert by_path["scripts/historical.py"]["category"] == "historical_tooling"
     assert by_path["scripts/ocr.swift"]["category"] == "active_or_unclassified_tooling"
     assert by_path[".github/workflows/ci.yml"]["category"] == "ci_configuration"
+    assert by_path["compose.local-r1.yml"]["category"] == "deployment_configuration"
     assert (
         by_path["research/05_evaluation/profiles/runtime.json"]["category"]
         == "evaluation_configuration"

@@ -164,17 +164,22 @@ export function ProfessorAutonomyPanel({
             </div>
           ) : (
             <form className="grid gap-3 sm:grid-cols-2" onSubmit={createProfile}>
-              <Input label="Tone" name="tone" defaultValue="Encouraging, precise, and concise" />
-              <Select label="Depth" name="depth" options={["concise", "balanced", "detailed"]} />
-              <Input label="Explanation structure" name="explanation_structure" defaultValue="Concept, Example, Check understanding" />
-              <Input label="Example preferences" name="example_preferences" defaultValue="Small worked example, Course terminology" />
-              <Input label="Misconception handling" name="misconception_handling" defaultValue="Name the misconception, contrast it with evidence, then check understanding." />
-              <Input label="Integrity limits" name="integrity_limits" defaultValue="Use attempt-first hints for assessed work; never provide a submission." />
-              <Input label="Help ladder" name="help_ladder" defaultValue="Focused hint, Analogous example, Full explanation" />
-              <Input label="Outreach policy" name="outreach_policy" defaultValue="Only send professor-scheduled, cited prompts to opted-in students." />
+              <p className="sm:col-span-2 text-xs text-muted-foreground">
+                {approved
+                  ? "Edit the approved settings below to create a new reviewable version. The active release remains unchanged until the new version is approved."
+                  : "Define the teaching behavior that the professor will review before it can be attached to a release."}
+              </p>
+              <Input label="Tone" name="tone" defaultValue={approved?.tone ?? "Encouraging, precise, and concise"} />
+              <Select label="Depth" name="depth" options={["concise", "balanced", "detailed"]} defaultValue={approved?.depth ?? "balanced"} />
+              <Input label="Explanation structure" name="explanation_structure" defaultValue={approved?.explanation_structure.join(", ") ?? "Concept, Example, Check understanding"} />
+              <Input label="Example preferences" name="example_preferences" defaultValue={approved?.example_preferences.join(", ") ?? "Small worked example, Course terminology"} />
+              <Input label="Misconception handling" name="misconception_handling" defaultValue={approved?.misconception_handling ?? "Name the misconception, contrast it with evidence, then check understanding."} />
+              <Input label="Integrity limits" name="integrity_limits" defaultValue={approved?.integrity_limits ?? "Use attempt-first hints for assessed work; never provide a submission."} />
+              <Input label="Help ladder" name="help_ladder" defaultValue={approved?.help_ladder.join(", ") ?? "Focused hint, Analogous example, Full explanation"} />
+              <Input label="Outreach policy" name="outreach_policy" defaultValue={approved?.outreach_policy ?? "Only send professor-scheduled, cited prompts to opted-in students."} />
               <Button className="sm:col-span-2" disabled={busy !== null} type="submit">
                 {busy === "profile" ? <LoaderCircle className="animate-spin" /> : <ShieldCheck />}
-                Create reviewable profile
+                {approved ? "Create updated draft" : "Create reviewable profile"}
               </Button>
             </form>
           )}
@@ -204,7 +209,7 @@ export function ProfessorAutonomyPanel({
         </section>
 
         <section className="space-y-3 border-t pt-5" aria-labelledby="outreach-heading">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h3 id="outreach-heading" className="flex items-center gap-2 text-sm font-semibold"><BellRing className="size-4" /> Scheduled in-app outreach</h3>
             <Badge variant="outline">A1 automatic outreach remains shadow-only</Badge>
           </div>
@@ -248,8 +253,8 @@ function Input({ label, ...props }: { label: string } & React.ComponentProps<"in
   return <label className="block"><span className="mb-1.5 block text-xs font-medium">{label}</span><input className="h-10 w-full rounded-lg border bg-white px-3 text-sm outline-none focus:border-[var(--accent-strong)] focus:ring-3 focus:ring-[var(--accent-soft)]" required {...props} /></label>
 }
 
-function Select({ label, name, options }: { label: string; name: string; options: string[] }) {
-  return <label className="block"><span className="mb-1.5 block text-xs font-medium">{label}</span><select className="h-10 w-full rounded-lg border bg-white px-3 text-sm" name={name} required defaultValue=""><option value="" disabled>Select…</option>{options.map((option) => <option key={option} value={option}>{format(option)}</option>)}</select></label>
+function Select({ label, name, options, defaultValue = "" }: { label: string; name: string; options: string[]; defaultValue?: string }) {
+  return <label className="block"><span className="mb-1.5 block text-xs font-medium">{label}</span><select className="h-10 w-full rounded-lg border bg-white px-3 text-sm" name={name} required defaultValue={defaultValue}><option value="" disabled>Select…</option>{options.map((option) => <option key={option} value={option}>{format(option)}</option>)}</select></label>
 }
 
 function text(data: FormData, name: string): string {

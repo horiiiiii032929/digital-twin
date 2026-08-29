@@ -342,7 +342,9 @@ Current utilities:
   student answer/original-region citation journey against a live HTTPS origin.
   It reads all passwords from environment variables, supports a private CA
   file for local Caddy qualification, emits no credentials, and can replay a
-  sanitized result after container restart or clean restore.
+  sanitized result after container restart or clean restore. The optional
+  `--mode-check` path creates a fresh grounded turn and proves that the selected
+  T0 or T1 runtime mode is active rather than silently falling back.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run

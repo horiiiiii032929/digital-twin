@@ -1,10 +1,10 @@
-name: digital-twin-r1-preview
+name: digital-twin-r1-local
 
 x-runtime-environment: &runtime-environment
   APP_MODE: staging
-  APP_DATABASE_PATH: /var/lib/digital-twin/digital-twin.sqlite3
-  APP_DATA_ROOT: /var/lib/digital-twin
-  APP_ALLOWED_ORIGINS: ${DEMO_PUBLIC_ORIGIN:-https://preview.invalid}
+  APP_DATABASE_PATH: /var/lib/digital-twin-parent/runtime/digital-twin.sqlite3
+  APP_DATA_ROOT: /var/lib/digital-twin-parent/runtime
+  APP_ALLOWED_ORIGINS: https://localhost:${LOCAL_R1_HTTPS_PORT:-8443}
   APP_SECURE_COOKIES: "true"
   APP_SESSION_TTL_SECONDS: ${APP_SESSION_TTL_SECONDS:-14400}
   APP_MAX_UPLOAD_BYTES: ${APP_MAX_UPLOAD_BYTES:-52428800}
@@ -12,20 +12,19 @@ x-runtime-environment: &runtime-environment
   APP_LOGIN_ATTEMPTS_PER_MINUTE: ${APP_LOGIN_ATTEMPTS_PER_MINUTE:-10}
   APP_AUTHENTICATED_REQUESTS_PER_MINUTE: ${APP_AUTHENTICATED_REQUESTS_PER_MINUTE:-120}
   APP_LOG_LEVEL: ${APP_LOG_LEVEL:-INFO}
-  APP_GENERATOR_MODE: ${APP_GENERATOR_MODE:-deterministic}
-  APP_EVIDENCE_GATE_MODE: ${APP_EVIDENCE_GATE_MODE:-unselected}
-  APP_STUDENT_PROFILE_PATH: ${APP_STUDENT_PROFILE_PATH:-/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json}
-  APP_STUDENT_TUTORING_MODE: ${APP_STUDENT_TUTORING_MODE:-grounded-assistant}
-  APP_PROACTIVE_OUTREACH_WORKER_ENABLED: ${APP_PROACTIVE_OUTREACH_WORKER_ENABLED:-true}
-  APP_LEARNING_GAP_HMAC_SECRET: ${APP_LEARNING_GAP_HMAC_SECRET:-}
-  APP_T1_QUALIFICATION_RESULT_PATH: ${APP_T1_QUALIFICATION_RESULT_PATH:-}
+  APP_GENERATOR_MODE: deterministic
+  APP_EVIDENCE_GATE_MODE: structured-lexical-v1
+  APP_STUDENT_PROFILE_PATH: /app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json
+  APP_STUDENT_TUTORING_MODE: ${APP_STUDENT_TUTORING_MODE:-bounded-tutoring-graph}
+  APP_PROACTIVE_OUTREACH_WORKER_ENABLED: "true"
+  APP_LEARNING_GAP_HMAC_SECRET: ${APP_LEARNING_GAP_HMAC_SECRET:?APP_LEARNING_GAP_HMAC_SECRET is required}
+  APP_T1_QUALIFICATION_RESULT_PATH: /app/research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
   APP_PROVIDER_MAX_CALLS_PER_PROCESS: ${APP_PROVIDER_MAX_CALLS_PER_PROCESS:-250}
   APP_PROVIDER_COST_CAP_USD: ${APP_PROVIDER_COST_CAP_USD:-5.0}
-  OPENAI_API_KEY: ${OPENAI_API_KEY:-}
 
 services:
   api:
-    image: digital-twin-api:${APP_IMAGE_TAG:-r1-preview}
+    image: digital-twin-api:${APP_IMAGE_TAG:-r1-local}
     build:
       context: .
       dockerfile: deploy/Dockerfile
@@ -33,14 +32,13 @@ services:
     environment: *runtime-environment
     init: true
     read_only: true
-    tmpfs:
-      - /tmp:size=64m,mode=1777
+    tmpfs: ["/tmp:size=64m,mode=1777"]
     security_opt: [no-new-privileges:true]
     cap_drop: [ALL]
     pids_limit: 256
     restart: unless-stopped
     volumes:
-      - runtime-data:/var/lib/digital-twin
+      - runtime-data:/var/lib/digital-twin-parent
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/ready', timeout=3)"]
       interval: 10s
@@ -49,39 +47,39 @@ services:
       start_period: 20s
 
   ingestion-worker:
-    image: digital-twin-api:${APP_IMAGE_TAG:-r1-preview}
+    image: digital-twin-api:${APP_IMAGE_TAG:-r1-local}
     command: [python, -m, scripts.run_ingestion_worker]
     environment: *runtime-environment
     init: true
     read_only: true
-    tmpfs: [/tmp:size=64m,mode=1777]
+    tmpfs: ["/tmp:size=64m,mode=1777"]
     security_opt: [no-new-privileges:true]
     cap_drop: [ALL]
     pids_limit: 256
     restart: unless-stopped
     volumes:
-      - runtime-data:/var/lib/digital-twin
+      - runtime-data:/var/lib/digital-twin-parent
     depends_on:
       api: {condition: service_healthy}
 
   outreach-worker:
-    image: digital-twin-api:${APP_IMAGE_TAG:-r1-preview}
-    command: [python, -m, scripts.proactive_outreach_worker]
+    image: digital-twin-api:${APP_IMAGE_TAG:-r1-local}
+    command: [python, -m, scripts.proactive_outreach_worker, --poll-seconds, "2"]
     environment: *runtime-environment
     init: true
     read_only: true
-    tmpfs: [/tmp:size=64m,mode=1777]
+    tmpfs: ["/tmp:size=64m,mode=1777"]
     security_opt: [no-new-privileges:true]
     cap_drop: [ALL]
     pids_limit: 128
     restart: unless-stopped
     volumes:
-      - runtime-data:/var/lib/digital-twin
+      - runtime-data:/var/lib/digital-twin-parent
     depends_on:
       api: {condition: service_healthy}
 
   web:
-    image: digital-twin-web:${APP_IMAGE_TAG:-r1-preview}
+    image: digital-twin-web:${APP_IMAGE_TAG:-r1-local}
     build:
       context: .
       dockerfile: deploy/Dockerfile
@@ -91,29 +89,28 @@ services:
         VITE_API_BASE_URL: ""
     init: true
     read_only: true
-    tmpfs: [/tmp:size=64m,mode=1777]
+    tmpfs: ["/tmp:size=64m,mode=1777"]
     security_opt: [no-new-privileges:true]
     cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
     pids_limit: 128
     restart: unless-stopped
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:${LOCAL_R1_HTTPS_PORT:-8443}:443
     volumes:
-      - ./deploy/Caddyfile.preview:/etc/caddy/Caddyfile:ro
+      - ./deploy/Caddyfile.local:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
     depends_on:
       api: {condition: service_healthy}
-
-  tunnel:
-    image: cloudflare/cloudflared:2026.8.0@sha256:2535e54b16adf1d50630f99d0886471926c5ef3f6b328100ec6589f731c48969
-    command: [tunnel, --no-autoupdate, --protocol, http2, --url, http://web:8080]
-    init: true
-    read_only: true
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    pids_limit: 64
-    restart: unless-stopped
-    depends_on:
-      web: {condition: service_started}
+    healthcheck:
+      test: [CMD, wget, -q, --no-check-certificate, -O, /dev/null, https://localhost/api/health/ready]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+      start_period: 10s
 
 volumes:
   runtime-data:
+  caddy-data:
+  caddy-config:

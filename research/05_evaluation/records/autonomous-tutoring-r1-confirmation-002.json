@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "run_id": "autonomous-tutoring-r1-confirmation-002",
+  "component": "conversation-orchestration",
+  "dataset_id": "autonomous-tutoring-r1-confirmation-002-synthetic-trajectories",
+  "corpus_id": "synthetic-isolated-course-evidence-namespaces-v1",
+  "code_revision": "fafe1eaf389cb5afabf72ce953cf636dee86523d",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "deterministic-grounded-assistant-t0",
+        "version": "r1-local-candidate-v1",
+        "configuration": {
+          "mode": "grounded-assistant",
+          "trajectories": 50,
+          "turns": 200,
+          "source_namespaces": 50,
+          "generator": "deterministic/v1",
+          "profile_id": "student-tutor-r1-local-candidate",
+          "profile_sha256": "1b3257e80e2bcb6f49871a537d022a6c65f0bf43fe1a37a535cf5b6eb8d34eec",
+          "instrument_sha256": "217b86c9c9c1cf4bc9751e356a83c06b2e52690e566bca301b45ba7a6a48ac60",
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "grounded-success-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "action-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "citation-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "forced-failure-safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-releases", "passed": true, "evidence": "Zero unsupported releases across 200 T0 turns."},
+        {"name": "zero-permission-or-citation-violations", "passed": true, "evidence": "Zero permission violations and 100% valid citations where citations applied."},
+        {"name": "bounded-idempotent-persistence", "passed": true, "evidence": "No duplicate persisted turns and 100% restart consistency."},
+        {"name": "zero-authoritative-model-mutations", "passed": true, "evidence": "The deterministic control made no model-owned authoritative mutations."},
+        {"name": "zero-provider-use", "passed": true, "evidence": "Zero provider calls, tokens, or cost."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "deterministic-bounded-tutoring-graph-t1",
+        "version": "r1-local-candidate-v1",
+        "configuration": {
+          "mode": "bounded-tutoring-graph",
+          "trajectories": 50,
+          "turns": 200,
+          "source_namespaces": 50,
+          "generator": "deterministic/v1",
+          "profile_id": "student-tutor-r1-local-candidate",
+          "profile_sha256": "1b3257e80e2bcb6f49871a537d022a6c65f0bf43fe1a37a535cf5b6eb8d34eec",
+          "instrument_sha256": "217b86c9c9c1cf4bc9751e356a83c06b2e52690e566bca301b45ba7a6a48ac60",
+          "maximum_repairs_per_turn": 1,
+          "t0_rollback_available": true,
+          "provider_calls": 0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "grounded-success-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "action-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "citation-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "forced-failure-safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-releases", "passed": true, "evidence": "Zero unsupported releases across 200 T1 turns."},
+        {"name": "zero-permission-or-citation-violations", "passed": true, "evidence": "Zero permission violations and 100% valid citations where citations applied."},
+        {"name": "bounded-idempotent-persistence", "passed": true, "evidence": "No duplicate turns or unbounded loops; persistence and restart checks passed."},
+        {"name": "zero-authoritative-model-mutations", "passed": true, "evidence": "Zero model-owned authoritative state mutations."},
+        {"name": "zero-provider-use", "passed": true, "evidence": "Zero provider calls, tokens, or cost."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "deterministic-bounded-tutoring-graph-t1",
+    "rationale": "Select the bounded T1 tutoring graph for the local R1 profile because it matched the grounded T0 control while passing every transition, safety, persistence, restart, and loop-boundedness gate. Retain T0 as the immediate rollback.",
+    "limitations": [
+      "This is a network-free synthetic release qualification, not an estimate of learning outcomes or professor fidelity.",
+      "The 50 source namespaces are isolated synthetic fixtures rather than 50 independently authored course sources.",
+      "A pass supports the local R1 workflow claim only and does not repair the failed academic model cascade."
+    ]
+  }
+}

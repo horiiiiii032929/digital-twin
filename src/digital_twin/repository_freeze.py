@@ -155,6 +155,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_autonomous_tutoring_graph_development.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_autonomous_tutoring_r1_local_confirmation.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_proactive_outreach_a1_development.py": (
             "method_evaluation_execution",
         ),
