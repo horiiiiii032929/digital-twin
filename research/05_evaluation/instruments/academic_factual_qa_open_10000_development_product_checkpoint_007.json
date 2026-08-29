@@ -90,6 +90,8 @@
   },
   "allocation": {
     "status": "frozen-approved",
+    "authorization_record": "AFQC-074",
+    "execution_correction_record": "AFQC-076",
     "development_case_count": 500,
     "development_control_case_count": 100
   },
@@ -169,5 +171,17 @@
     "valid_quality_failure_policy": "register-completed-refine-and-stop-without-another-method-successor",
     "historical_response_reuse_policy": "diagnostic-only-never-confirmatory"
   },
-  "content_sha256": "93d64852031998605faf29bcd471bf0b26c8a7e2cc1c1dff5e6102c72728c37f"
+  "corrective_attempt": {
+    "attempt_number": 2,
+    "predecessor_result_id": "academic-factual-qa-open-10000-development-product-checkpoint-007-attempt-001-invalid",
+    "permitted_change": "bind-the-nested-product-preflight-to-the-already-frozen-extractive-generator-identity",
+    "dataset_changed": false,
+    "product_method_changed": false,
+    "provider_binding_changed": false,
+    "prompt_changed": false,
+    "budget_changed": false,
+    "fresh_exclusive_outputs_required": true,
+    "further_harness_correction_authorized": false
+  },
+  "content_sha256": "0945f41a59a1a8875bb30d423fccb74392bdda224fc77197aa4a81da6c389192"
 }

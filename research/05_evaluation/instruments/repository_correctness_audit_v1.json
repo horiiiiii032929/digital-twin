@@ -27,12 +27,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Authorization review verifies one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, one-time development authority, final authority false, and at most one harness-only correction.",
+      "evidence": "Corrective instrument review preserves one and only one method successor, unchanged 500+100 inputs and gates, explicit package pairing, extractive boundary output, literal contiguous-quote release validation, immutable retrieval, USD 8/666-call limits, one-time development authority, final authority false, and records the sole harness correction without another correction allowance.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_007.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "2baa2e31e5e9a7507afb296594d1baf3dbd1a768a0f53a1995dab05b2dded1ea"
+      "sha256": "3e5f632f95c1faf4bea4c0ad474ac88a5090ac098da24017d9b12928c8f229db"
     },
     {
       "audit_status": "audited",
@@ -71,12 +71,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Focused runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, authorization-aware validation, fail-closed execution, and restoration of checkpoint-006 state after every operation.",
+      "evidence": "Focused corrective runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, authorization-aware validation, explicit nested extractive-generator binding, fail-closed execution, and restoration of checkpoint-006 state after every operation.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_007.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "2c559af0a6990fa9e62cead3548c5c5fffb6032b35aef1200859e27e919d4533"
+      "sha256": "ae62dc15d973ab94a31310130070970801add172de999973e683b05bd22863ae"
     },
     {
       "audit_status": "audited",
@@ -93,12 +93,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-product-checkpoint",
-      "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, exact bounded authority, and a ready preflight when repository and credential state are clean.",
+      "evidence": "Focused tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, scoped nested-generator identity and restoration, exact bounded authority, and a ready top-level preflight when repository and credential state are clean.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_007.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "3545bf8d5d576a0eaaafd9c7b83d03460a2e8aae2b4f6e7c1c015bbc21408c33"
+      "sha256": "0da1f1c866ad60f73165cc47ef0a9bcda0bf66a2c27f0ba8b1767913ec8bb46d"
     },
     {
       "audit_status": "audited",

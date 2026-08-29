@@ -164,13 +164,16 @@ def configured_successor() -> Iterator[None]:
         "EXPECTED_CONTROL_EVIDENCE_GATE": EXPECTED_CONTROL_EVIDENCE_GATE,
     }
     original = {name: getattr(previous, name) for name in configuration}
+    original_active_generator = base.product.ACTIVE_GENERATOR
     try:
         for name, value in configuration.items():
             setattr(previous, name, value)
+        base.product.ACTIVE_GENERATOR = EXPECTED_PRODUCT_GENERATOR
         yield
     finally:
         for name, value in original.items():
             setattr(previous, name, value)
+        base.product.ACTIVE_GENERATOR = original_active_generator
 
 
 def _load(path: Path) -> dict[str, Any]:

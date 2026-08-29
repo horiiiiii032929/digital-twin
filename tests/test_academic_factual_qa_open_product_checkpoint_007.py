@@ -50,6 +50,16 @@ def test_successor_does_not_mutate_checkpoint_006() -> None:
     assert historical.INSTRUMENT_ID.endswith("checkpoint-006")
 
 
+def test_successor_scopes_nested_product_generator_identity() -> None:
+    product = historical.base.product
+    original = product.ACTIVE_GENERATOR
+
+    with checkpoint.configured_successor():
+        assert product.ACTIVE_GENERATOR == checkpoint.EXPECTED_PRODUCT_GENERATOR
+
+    assert product.ACTIVE_GENERATOR == original
+
+
 @pytest.mark.parametrize(
     ("scenario", "expected"),
     [

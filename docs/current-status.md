@@ -27,6 +27,15 @@ authority remain false. Issue #127 is the active P0 item; the immediate action
 is the clean preflight and bounded 500+100 execution. No further method
 successor is permitted.
 
+Checkpoint 007 attempt 001 then stopped safely before case 1 with zero provider
+calls or cost because its nested product preflight still asserted checkpoint
+006's historical atomic-generator identity. AFQC-075 preserves this invalid
+execution. AFQC-076 applies the plan's sole harness-only correction by binding
+that assertion to the extractive generator already frozen in both checkpoint
+007 manifests. Cases, truth, retrieval, prompt, model, gates, and budget are
+unchanged. The next execution uses fresh outputs; no further harness correction
+is allowed.
+
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
 
