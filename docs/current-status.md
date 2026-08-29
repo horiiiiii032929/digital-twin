@@ -12,7 +12,8 @@ evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
 produced a valid product-quality estimate.
 
-The active Sunday R1-demo successor starts from merged PR #145 and replaces the
+The active Sunday R1-demo successor starts from merged PR #145 and is published
+for review in draft PR #146. It replaces the
 brittle batch-order contract prospectively rather than reinterpreting any prior
 result. Evaluation-v2 reconciles provider output by unique case ID, rejects
 duplicate/missing/unknown IDs, deterministically restores order, quarantines a
@@ -1028,14 +1029,15 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
-| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Preserve invalid validation 001 and decide on one prospective schema-aligned attempt; prepare a fresh 500+100 product confirmation only after a complete pass; keep sealed 10,000 execution closed |
-| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
+| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / build-ready | Execute the authorized four-model 200-to-500 cascade once, select the product model and paired-control grounding result, then keep the sealed 10,000 execution closed until after the demo and a separate authorization |
+| 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Select or reject structured evidence coverage from the cascade's fixed 100-case paired control; do not close from build evidence alone |
 | 6 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
-| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
-| 8 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Complete publication only after a grounding gate has academically valid end-to-end evidence, then select a host/domain and pass trusted TLS, restore, and walkthrough |
-| 9 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / Refine / professor input | Approve the profile-authoring method and calibrate behavior labels separately from factual hard gates |
-| 10 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Qualify one immutable deployed revision for isolation, recovery, observability, latency, cost, complete journeys, and rollback |
-| 11 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
+| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / development Go Deeper | Run the frozen 50-trajectory T0/T1 confirmation with the selected model; preserve T0 as rollback until every autonomous gate passes |
+| 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through the local and public demo journeys; keep A1 and Discord disabled |
+| 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Todo / Refine | Keep durable hosting open; the Sunday Quick Tunnel is a temporary release-candidate walkthrough, not production |
+| 10 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
+| 11 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) and [#25 end-to-end](https://github.com/horiiiiii032929/digital-twin/issues/25) | Todo / blocked | Preserve durable-host operations and deployed end-to-end validation as post-demo work |
+| 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:

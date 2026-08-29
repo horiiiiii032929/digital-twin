@@ -32,7 +32,8 @@ the release-critical path.
 
 ## Active Sunday checkpoint
 
-The current P0 card is #127's build-verified four-model development cascade.
+The current P0 card is #127's build-verified four-model development cascade in
+draft PR #146.
 It replaces the stopped batch-order attempts with evaluation-v2 and is waiting
 for one paid authorization. In parallel, #107, #132, and #134 have integrated
 build-only product work on the active R1 demo PR, but remain open until their
