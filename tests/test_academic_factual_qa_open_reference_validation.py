@@ -75,7 +75,7 @@ def test_author_sees_truth_but_blind_reviewer_contract_does_not(
     assert answerable["required_answer_spans"]
     assert boundary["canonical_answer"] is None
     assert boundary["required_answer_spans"] == []
-    assert runner.validate()["status"] == "passed-build-only"
+    assert runner.validate(require_unauthorized=False)["status"] == "passed-build-only"
 
 
 def test_network_free_simulation_selects_exact_complete_quota() -> None:
@@ -148,12 +148,15 @@ def test_duplicate_questions_are_rejected_before_selection(
     assert failed == {mutated[0].case_id, mutated[1].case_id}
 
 
-def test_preflight_fails_closed_before_authorization() -> None:
+def test_preflight_is_ready_under_exact_bounded_authority(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
+    monkeypatch.setenv("OPENAI_API_KEY", "test-only-redacted")
     result = runner.preflight()
 
-    assert result["status"] == "blocked-not-authorized"
-    assert "freeze-external_model_evaluation-authorization-missing" in result["blockers"]
-    assert "freeze-method_evaluation_execution-authorization-missing" in result["blockers"]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
     assert result["provider_calls"] == 0
     assert result["product_calls"] == 0
     assert result["final_split_opened"] is False

@@ -35,9 +35,11 @@ spans, and code compares those values with pinned truth. Only complete clusters
 may satisfy the exact 100-cluster/500-case course and modality allocation; no
 fallback or quota relaxation is allowed. Six focused tests and the complete
 network-free simulation pass with zero provider calls. Paid reference
-validation, fresh 500+100 product confirmation, sealed 10,000 execution, T1,
-fidelity, promotion, and deployment all remain unauthorized. The immediate
-boundary is explicit authority for the 80-call reference validation only.
+validation is now authorized once under AFQC-079 for at most 80 direct OpenAI
+calls, zero retries, and the USD 12 emergency stop. Fresh 500+100 product
+confirmation, sealed 10,000 execution, T1, fidelity, promotion, and deployment
+remain unauthorized. The immediate action is a clean preflight followed by the
+reference-validation run and mandatory authority revocation.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
