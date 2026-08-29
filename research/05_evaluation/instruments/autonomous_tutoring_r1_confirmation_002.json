@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "autonomous-tutoring-r1-confirmation-002",
-  "status": "frozen-network-free-authorized",
+  "status": "completed-keep",
   "issue": 107,
   "decision_question": "Does the deterministic bounded T1 graph preserve the local R1 grounding and policy boundaries while adding restart-safe pedagogical state?",
   "release_profile": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json",
@@ -43,7 +43,7 @@
     "paid_execution_authorized": false,
     "held_out_execution_authorized": false,
     "network_required": false,
-    "network_free_local_release_authorized": true,
+    "network_free_local_release_authorized": false,
     "automatic_promotion": false,
     "maximum_repairs_per_turn": 1,
     "maximum_graph_steps_per_turn": 12

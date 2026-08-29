@@ -58,6 +58,15 @@ profile approval, learning-gap review, A0 in-app outreach, persistence,
 restart, backup/restore, and image rollback. The result must be described as a
 qualified local release, not hosted production.
 
+AFQC-090 records the finite local T0/T1 confirmation as `completed-keep`.
+Across 50 isolated synthetic trajectories and 200 turns per condition, T0 and
+T1 achieved 100% grounded success, T1 achieved 100% transition validity, and
+all citation, claim, state, persistence, restart, duplicate, and forced-failure
+gates passed. The run made zero provider calls and cost USD 0. T1 is selected
+only for the exact hash-bound local profile; T0 remains the immediate rollback.
+This does not establish LLM answer quality, professor fidelity, learning
+outcomes, external usability, or hosted reliability.
+
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
 594 calls and USD 1.13834545, and retained exact provider identities. Its
@@ -1053,7 +1062,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration; do not infer an academic quality claim from it |
-| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | In Progress / Go Deeper | Run the deterministic-fallback T0/T1 confirmation network-free; promote T1 only for a complete graph/policy pass and preserve T0 rollback |
+| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
 | 6 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | In Progress / build-ready | Qualify privacy-minimized aggregates and professor-scheduled in-app delivery through complete journeys; keep A1 and Discord disabled |
 | 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / Refine | Build and run one immutable deterministic-fallback revision through local Docker and HTTPS; defer domain and durable host |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / Pending | Pass local isolation, monitoring, persistence, backup/restore, restart, bounded capacity, and rollback |
