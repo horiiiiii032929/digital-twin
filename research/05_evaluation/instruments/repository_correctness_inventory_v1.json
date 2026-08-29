@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 655
+    "audited": 664
   },
   "category_counts": {
     "active_frontend": 68,
-    "active_or_unclassified_tooling": 153,
+    "active_or_unclassified_tooling": 154,
     "active_runtime": 112,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 4,
-    "evaluation_configuration": 160,
+    "evaluation_configuration": 166,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 137
+    "verification": 139
   },
-  "file_count": 655,
+  "file_count": 664,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5030486df8aaed374a79fbb32aa60b2e04e5850e876f14fcc15458f544385ddf",
+  "record_sha256": "ec315fbf03ca9e772e8911b71c5099691319749f20109a25303d1017725c201c",
   "records": [
     {
       "audit": {
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d44937d64a2594163380896dbd06648a0fce909d19a954917d40def35224d8f5"
+      "sha256": "12b5f6f1336c91d144725b92e31b581fc8b3f54eb4e17b6c42f9c41a05fdf121"
     },
     {
       "audit": {
@@ -1719,6 +1719,22 @@
     },
     {
       "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Manual pairing review verifies the 500 public package and distinct hidden-gold package are bound by exact IDs, splits, content hashes, case count, and the complete case-ID-set hash without exposing gold to product execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_candidate_pairing_007.json",
+      "risk": "high",
+      "sha256": "e1d986607dc33e551210f5b3ccaa95c5fe8bf1eadced0ef30b861b0f84b53474"
+    },
+    {
+      "audit": {
         "domain": "openai-development-checkpoint",
         "evidence": "Terminal review verified both invalid calibration attempts are preserved, all provider, paid, calibration, wording, product, and semantic-review authority is revoked, and final 10,000-case execution remains disabled.",
         "findings": [],
@@ -1751,6 +1767,22 @@
     },
     {
       "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Manual pairing review verifies the fixed 100-case public control and distinct hidden-gold control are bound by exact IDs, splits, content hashes, case count, and the complete case-ID-set hash.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_control_pairing_007.json",
+      "risk": "high",
+      "sha256": "cb142148ca1e23cb6893d5c9ba372f94679130f96b2b03aa9fa6f7def9f8614d"
+    },
+    {
+      "audit": {
         "domain": "mixed-wording-product-checkpoint",
         "evidence": "Manual instrument review verified the immutable 452-model/48-canonical composition, product-only 500+100 stage order, deterministic scoring authority, hidden-gold separation, fixed hard gates, the USD 8 mini/nano/bounded-full cascade, preserved invalid status, revoked development authority, zero automatic promotion, and disabled final execution.",
         "findings": [],
@@ -1780,6 +1812,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_006.json",
       "risk": "high",
       "sha256": "6c9278c9c40c1d41289d593a1c19e71e777a6f74fedfe80e5a57fe4a301263b6"
+    },
+    {
+      "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Terminal instrument review preserves one method successor, unchanged 500+100 inputs and gates, complete response execution, two confirmed reference-question defects, diagnostic Refine metrics, revoked development and review authority, final authority false, and no further correction allowance.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_007.json",
+      "risk": "high",
+      "sha256": "7af36c681a8793b695974d25a343699d1678d1cfe348d2ab674e0080e762d56b"
     },
     {
       "audit": {
@@ -1892,6 +1940,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_007.json",
       "risk": "high",
       "sha256": "872f2344de7a3c34837c890a55aa2e25b5ce96aa1a009bb682218d4f207ee790"
+    },
+    {
+      "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Post-run binding review verifies exact direct OpenAI dated snapshots, store false, strict schema, no fallback or product retry, complete role-bounded accounting, revoked development and semantic-review authority, final authority false, and the unchanged product/audit role split.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_openai_binding_008.json",
+      "risk": "high",
+      "sha256": "57ef7a456be725f3896d6fe4882721cb2e014746591da81869df6b92e29480b6"
     },
     {
       "audit": {
@@ -2087,6 +2151,22 @@
     },
     {
       "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Manifest review verifies the candidate binds immutable qualified retrieval, structured lexical coverage, exact OpenAI mini generation, extractive boundary output, literal contiguous-quote validation, fixed policy/profile, and no gold fields.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_007.json",
+      "risk": "high",
+      "sha256": "4eb1e6c9bde9d1680921926fbfa8b642bde9b2ceab9aea19737c7d41cb1e6b54"
+    },
+    {
+      "audit": {
         "domain": "r1-openai-evaluation-contracts",
         "evidence": "Focused freeze review registered the mixed-wording materializer and product-only runner while leaving both materialization and paid checkpoint execution outside the bounded allowlist.",
         "findings": [],
@@ -2164,6 +2244,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_006.json",
       "risk": "high",
       "sha256": "61a45bfa7dfdcb175f43900c284977fff6d33bd2d635879e426bd8257311875b"
+    },
+    {
+      "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Manifest review verifies the control shares the candidate corpus, retriever, generator, policy, profile, response contract, and claim validator and differs only in flow identity and any-hit evidence release.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_t0_openai_control_manifest_007.json",
+      "risk": "high",
+      "sha256": "e6ec69a0ef2275912ac710f8aba96f2b6ac475b40ddba1f988382f8b5ee820df"
     },
     {
       "audit": {
@@ -3974,7 +4070,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "45dd4252ab01e3ddb56b54f8d8562b4a54be56d3c9dbe6a3039f480cba0f2e87"
+      "sha256": "5d5be81303bd7c6373ee016ba7d77bbc139da467cabed4b82f08df0ebb6df429"
     },
     {
       "audit": {
@@ -4452,7 +4548,8 @@
       "disposition": "active_audited",
       "package_commands": [
         "verify:academic-factual-qa-open-product-005",
-        "verify:academic-factual-qa-open-product-006"
+        "verify:academic-factual-qa-open-product-006",
+        "verify:academic-factual-qa-open-product-007"
       ],
       "path": "scripts/build_academic_factual_qa_open_mixed_wording_005.py",
       "risk": "high",
@@ -5496,7 +5593,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_005.py",
       "risk": "high",
-      "sha256": "8d91a8e579d29d53628725c118741df747495e997c3727504f57df51c0db25be"
+      "sha256": "f151caa5eb415c88ad27b5b1c6a1d92da4d47aaafbdc32e9cc9b4c26eeae8be9"
     },
     {
       "audit": {
@@ -5518,7 +5615,29 @@
       ],
       "path": "scripts/run_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "high",
-      "sha256": "14ee8845989a518a19159bf61efe28579e9ababfc195ebd5f940f79bde4bd21a"
+      "sha256": "7f34c9a32185576dd0e5a7fe71a42b091452b925b3888f4ae5e90c7e61b9af6b"
+    },
+    {
+      "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Focused corrective runner review verifies successor-scoped globals, fresh exclusive outputs, exact pairing validation, strict component identity, finite simulations, authorization-aware validation, explicit nested extractive-generator binding, fail-closed execution, and restoration of checkpoint-006 state after every operation.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-open-product-007",
+        "preflight:academic-factual-qa-open-product-007",
+        "resume:academic-factual-qa-open-product-007",
+        "simulate:academic-factual-qa-open-product-007",
+        "verify:academic-factual-qa-open-product-007"
+      ],
+      "path": "scripts/run_academic_factual_qa_open_product_checkpoint_007.py",
+      "risk": "high",
+      "sha256": "ae62dc15d973ab94a31310130070970801add172de999973e683b05bd22863ae"
     },
     {
       "audit": {
@@ -6270,7 +6389,7 @@
       ],
       "path": "scripts/score_academic_factual_qa_open_10000.py",
       "risk": "high",
-      "sha256": "d269a1467eb49be0c94d19f1eedcc1a083a4f92db4229c3c8068637783498d02"
+      "sha256": "a2c3e59dc59746912734a4b5b183382cf01f94bac95e86b8feccc028401219c8"
     },
     {
       "audit": {
@@ -7840,7 +7959,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "cd729d93ca8a0a645bbf01b942d50e6495b0cb4cf72447e557b6be564bcc733d"
+      "sha256": "48432e2fd4ae42673dc869e35ab564ec8b61861bac570b317ce66075b5695c87"
     },
     {
       "audit": {
@@ -7888,7 +8007,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "6c880c9a56b26b8dfa000bc6ba90009890cad9fbd7e6188ab249dc926215bf8c"
+      "sha256": "42fc5cc466de8ffd7c818abcf580970c78ac1ace420f4fa175133a8c1c4fc705"
     },
     {
       "audit": {
@@ -7904,7 +8023,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/models.py",
       "risk": "high",
-      "sha256": "8786138bb0d0864a5dc2cf7cf18a83c4bfa121d1e8c473c0f5076d6c8b66c434"
+      "sha256": "298fd972e9f932ac982fdd7ba8fcede98acb435a85fc936dc234c88cdaf13286"
     },
     {
       "audit": {
@@ -7936,7 +8055,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "6b2ff9dcb5461199dc58e8e064fcd3e4e9bb941f02207ecae414753fad4dcda2"
+      "sha256": "05c2b56c73f7f217b196a63a59b8a9d4281234ac7d898ec91d79b043cc13bb8f"
     },
     {
       "audit": {
@@ -7952,7 +8071,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "4ffb287b06c5c6dd2b46542ce63f5fd1ab9625bd09c815c5296ab4eb0d282265"
+      "sha256": "539fe3d737eb6a88a658f7901f2f380542a0117837ac970d86cda9ad23c80f5d"
     },
     {
       "audit": {
@@ -7984,7 +8103,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/claim_validation.py",
       "risk": "high",
-      "sha256": "0814fff5c23885eb95197f6dfa4b9686b31927e5457a2a7e8fbce7a378a22d34"
+      "sha256": "abe3fe52c840f05afb137bf3db602940ad2e3faf813c468e97dd7539d812d97e"
     },
     {
       "audit": {
@@ -8533,7 +8652,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze review removes checkpoint 006 after terminal invalid execution; the repository-wide freeze remains active and all provider, product, final 10,000, private-data, promotion, and unregistered operations are blocked.",
+        "evidence": "Focused post-run freeze review verifies checkpoint 007 authority is revoked; the repository-wide freeze blocks provider evaluation, final 10,000, private-data, promotion, deployment, and every unregistered operation.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -8544,7 +8663,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "25c497e176f9e7b308302d52bff2682d23ba7e2c6938db85f12debb6852e88a8"
+      "sha256": "738ec49f54ee3362a1b80255c0338baf036c370c84f2995aab3bf02c4ffa476c"
     },
     {
       "audit": {
@@ -8864,7 +8983,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_claim_validation.py",
       "risk": "medium",
-      "sha256": "9ab7a0b16c182e1794e44ced0356b4c0875d2adb083ad684a2a6b52f601afbb0"
+      "sha256": "f952c9459301823e8e4086085ee197a0fdab03303e99f2842c10298435f49c04"
     },
     {
       "audit": {
@@ -8928,7 +9047,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "df7ecf2ee8eed53a2a058221a1324c3da3c0de7fd6a22f37eb479e2246d7b87c"
+      "sha256": "2f17b00c8f687951d38b2130309dbd7fd31dcf9a3e89d5e83aa7c4d381aef300"
     },
     {
       "audit": {
@@ -9077,7 +9196,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify checkpoint 006 authority is revoked and retrieval-index, checkpoint 005, final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
+        "evidence": "Focused freeze-policy tests verify checkpoint 007 and earlier checkpoint authority are revoked while final scale, private-source, external-delivery, product-promotion, and held-out operations remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9088,7 +9207,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "61cf5e29bd9391e29d0334c30da0dcc7df729b8aa3773f4e520b6ef6a9d6204c"
+      "sha256": "b0d532b4158be77af48ea1c97d3ca3ebf82b0efb52e70693f6d27b8dfb86e914"
     },
     {
       "audit": {
@@ -9540,6 +9659,22 @@
     },
     {
       "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Focused tests verify distinct public/gold identities are accepted only through a content- and case-set-bound pairing manifest and any package hash drift fails closed.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_pairing_contract.py",
+      "risk": "medium",
+      "sha256": "c8a8b40494c808daa4cfb964348497b7d20128ea609b375d04fb2151ffce21c1"
+    },
+    {
+      "audit": {
         "domain": "mixed-wording-product-checkpoint",
         "evidence": "Focused regressions verify package composition and fallback equality, revoked rematerialization and execution authority, exact three-model cascade roles, USD 8 stage budgets, paired manifests, physical gold separation, five finite simulations, blocked post-result preflight, disabled final execution, and resume binding drift.",
         "findings": [],
@@ -9569,6 +9704,22 @@
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "medium",
       "sha256": "4fbb7886715843d5903b1da056e1c1fb6954f62d5085a19c43a74b6f1dfb4f3d"
+    },
+    {
+      "audit": {
+        "domain": "finite-product-checkpoint",
+        "evidence": "Focused post-run tests verify the strict provider schema, exact pairing, finite outcome states, historical checkpoint preservation, scoped nested-generator identity and restoration, revoked bounded authority, and a blocked preflight after terminal publication.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_product_checkpoint_007.py",
+      "risk": "medium",
+      "sha256": "77a9b05bd8cb81a59a14bd6755b0af508bee401225427a3b72e6ff2632411dbf"
     },
     {
       "audit": {
@@ -10932,8 +11083,8 @@
     }
   ],
   "risk_counts": {
-    "high": 504,
-    "medium": 151
+    "high": 511,
+    "medium": 153
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

@@ -121,6 +121,44 @@ def _load_completed_responses(path: Path) -> tuple[dict[str, str], list[Evaluati
     return metadata, responses
 
 
+def _validate_pairing_manifest(
+    path: Path,
+    *,
+    cases_package: dict[str, Any],
+    gold_package: dict[str, Any],
+) -> dict[str, Any]:
+    pairing = _load_json(path)
+    expected_hash = canonical_json_sha256(
+        {key: value for key, value in pairing.items() if key != "content_sha256"}
+    )
+    if pairing.get("content_sha256") != expected_hash:
+        raise OpenBenchmarkScoringError("pairing manifest hash drifted")
+    expected_public = {
+        "dataset_id": cases_package.get("dataset_id"),
+        "split": cases_package.get("split"),
+        "content_sha256": cases_package.get("content_sha256"),
+    }
+    expected_gold = {
+        "dataset_id": gold_package.get("dataset_id"),
+        "split": gold_package.get("split"),
+        "content_sha256": gold_package.get("content_sha256"),
+    }
+    if pairing.get("public_package") != expected_public:
+        raise OpenBenchmarkScoringError("pairing manifest public package drifted")
+    if pairing.get("hidden_gold_package") != expected_gold:
+        raise OpenBenchmarkScoringError("pairing manifest hidden package drifted")
+    case_ids = sorted(row["case_id"] for row in cases_package["cases"])
+    gold_ids = sorted(row["case_id"] for row in gold_package["gold"])
+    if case_ids != gold_ids:
+        raise OpenBenchmarkScoringError("paired public and hidden identities drifted")
+    if (
+        pairing.get("case_count") != len(case_ids)
+        or pairing.get("case_ids_sha256") != canonical_json_sha256(case_ids)
+    ):
+        raise OpenBenchmarkScoringError("pairing manifest case identities drifted")
+    return pairing
+
+
 def _gate_results(
     summary: dict[str, Any],
     scores: list[FactualQaCaseScoreV1],
@@ -172,18 +210,27 @@ def score_packages(
     cases_path: Path,
     gold_path: Path,
     responses_path: Path,
+    pairing_path: Path | None = None,
 ) -> dict[str, Any]:
     # The completed response ledger is opened first. Hidden gold is loaded only
     # after this durable completion check succeeds.
     ledger_metadata, responses = _load_completed_responses(responses_path)
     cases_package = _validated_package(cases_path, rows_key="cases")
     gold_package = _validated_package(gold_path, rows_key="gold")
-    if (
-        cases_package.get("dataset_id") != gold_package.get("dataset_id")
-        or cases_package.get("split") != gold_package.get("split")
-        or cases_package.get("case_count") != gold_package.get("case_count")
-    ):
-        raise OpenBenchmarkScoringError("public and hidden packages are not paired")
+    pairing = None
+    if pairing_path is None:
+        if (
+            cases_package.get("dataset_id") != gold_package.get("dataset_id")
+            or cases_package.get("split") != gold_package.get("split")
+            or cases_package.get("case_count") != gold_package.get("case_count")
+        ):
+            raise OpenBenchmarkScoringError("public and hidden packages are not paired")
+    else:
+        pairing = _validate_pairing_manifest(
+            pairing_path,
+            cases_package=cases_package,
+            gold_package=gold_package,
+        )
     if ledger_metadata.get("cases_sha256") != cases_package["content_sha256"]:
         raise OpenBenchmarkScoringError("response ledger is bound to different public inputs")
     cases = [EvaluationCaseV1.model_validate(row) for row in cases_package["cases"]]
@@ -230,6 +277,10 @@ def score_packages(
         "response_ledger_sha256": hashlib.sha256(responses_path.read_bytes()).hexdigest(),
         "public_cases_sha256": cases_package["content_sha256"],
         "hidden_gold_sha256": gold_package["content_sha256"],
+        "pairing_id": pairing.get("pairing_id") if pairing else None,
+        "pairing_manifest_sha256": (
+            pairing.get("content_sha256") if pairing else None
+        ),
         "model_assisted_evaluation": True,
         "independent_external_human_annotation": False,
     }

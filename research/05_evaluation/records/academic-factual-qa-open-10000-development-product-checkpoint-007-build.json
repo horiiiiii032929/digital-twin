@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-007-build",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "46dcf07d90275f2e745758156a31ea0679facc74",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "checkpoint-006-nli-unpaired-contract",
+        "version": "historical-invalid-control",
+        "configuration": {
+          "candidate_case_count": 500,
+          "control_case_count": 100,
+          "explicit_pairing_manifest_count": 0,
+          "claim_release_validator": "nli-atomic-claim-verifier-v1",
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "focused-regressions",
+          "value": 0.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 88.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": false
+        },
+        {
+          "name": "explicit-pairing-manifests",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": false
+        },
+        {
+          "name": "provider-call-count",
+          "value": 540.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 666.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "explicit-public-gold-pairing",
+          "passed": false,
+          "evidence": "Checkpoint 006 reached scoring but its scorer rejected intentionally distinct public/gold package identities without an explicit pairing contract."
+        },
+        {
+          "name": "response-runtime-schema-alignment",
+          "passed": false,
+          "evidence": "Diagnostic replay found provider claim identifiers did not satisfy the runtime claim model."
+        },
+        {
+          "name": "deterministic-claim-release",
+          "passed": false,
+          "evidence": "The selected local NLI verifier was unsuitable for the extractive product response contract."
+        },
+        {
+          "name": "finite-refinement-boundary",
+          "passed": false,
+          "evidence": "Checkpoint 006 ended before AFQC-073 fixed the one-successor stop rule."
+        },
+        {
+          "name": "provider-and-final-execution-closed",
+          "passed": true,
+          "evidence": "Checkpoint 006 authority is revoked and final 10,000-case execution stayed closed."
+        }
+      ],
+      "failures_by_category": {
+        "package-pairing-contract": 1,
+        "response-runtime-contract": 1,
+        "claim-release-method": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "finite-extractive-boundary-product-checkpoint",
+        "version": "007-build",
+        "configuration": {
+          "candidate_case_count": 500,
+          "control_case_count": 100,
+          "explicit_pairing_manifest_count": 2,
+          "response_contract": "extractive-boundary-output-v1",
+          "claim_release_validator": "contiguous-quote-atomic-claim-verifier-v1@1.0.0",
+          "maximum_method_successors": 1,
+          "maximum_calls": 666,
+          "maximum_cost_usd": 8.0,
+          "maximum_retries": 0,
+          "provider_execution_authorized": false,
+          "final_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "focused-regressions",
+          "value": 88.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 88.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-scenarios",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "explicit-pairing-manifests",
+          "value": 2.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 666.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "explicit-public-gold-pairing",
+          "passed": true,
+          "evidence": "Both conditions require content- and complete-case-set-bound pairing manifests while preserving product/gold process separation."
+        },
+        {
+          "name": "response-runtime-schema-alignment",
+          "passed": true,
+          "evidence": "Provider and runtime schemas enforce identical action, claim ID, citation ID, count, uniqueness, and action/claim invariants."
+        },
+        {
+          "name": "deterministic-claim-release",
+          "passed": true,
+          "evidence": "Every answer claim must be a literal contiguous substring of one declared, server-resolved, eligible evidence region."
+        },
+        {
+          "name": "finite-refinement-boundary",
+          "passed": true,
+          "evidence": "The instrument fixes method successor one of one and prohibits another method successor after a valid failure."
+        },
+        {
+          "name": "provider-and-final-execution-closed",
+          "passed": true,
+          "evidence": "All provider, paid, development, semantic-review, promotion, and final authorization flags are false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "finite-extractive-boundary-product-checkpoint",
+    "rationale": "The single successor repairs the demonstrated pairing, schema, and claim-release method defects while preserving the benchmark, retrieval, provider, gates, budget, and finite decision policy.",
+    "limitations": [
+      "This is build-only evidence and does not measure product answer, citation, claim, boundary, or paired comparative quality.",
+      "The 500/100 package is a known development benchmark over open educational sources.",
+      "Literal extractive answers trade naturalness for inspectable support in this confirmation checkpoint.",
+      "Advisory reviewers are OpenAI models from one provider family and are not independent external human annotation.",
+      "No provider, paid, private-data, final 10,000-case, T1, fidelity, visual, promotion, or deployment execution occurred."
+    ]
+  }
+}

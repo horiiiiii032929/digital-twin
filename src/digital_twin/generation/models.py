@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.llm import LlmMessage
@@ -8,10 +8,20 @@ from src.digital_twin.llm import LlmMessage
 
 class PolicyAction(StrEnum):
     ANSWER = "answer"
+    CLARIFY = "clarify"
     REDIRECT_GRADED_WORK = "redirect-graded-work"
     NO_EVIDENCE = "no-evidence"
     POLICY_NOT_APPROVED = "policy-not-approved"
     INVALID_REQUEST = "invalid-request"
+    SAFE_PROVIDER_FAILURE = "safe-provider-failure"
+
+
+class ModelBoundaryAction(StrEnum):
+    """Bounded actions a grounded model may propose after code-owned policy."""
+
+    ANSWER = "answer"
+    ABSTAIN = "abstain"
+    CLARIFY = "clarify"
 
 
 class PolicyDecision(BaseModel):
@@ -92,3 +102,23 @@ class ModelTutorOutputV2(BaseModel):
         if len(claim_ids) != len(set(claim_ids)):
             raise ValueError("claim IDs must be unique")
         return values
+
+
+class ModelTutorOutputV3(BaseModel):
+    """Boundary-aware extractive output with deterministic semantic invariants."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    action: ModelBoundaryAction
+    claims: list[ModelAtomicClaimOutput] = Field(max_length=8)
+
+    @model_validator(mode="after")
+    def action_and_claims_must_agree(self) -> "ModelTutorOutputV3":
+        if self.action == ModelBoundaryAction.ANSWER and not self.claims:
+            raise ValueError("answer action requires at least one claim")
+        if self.action != ModelBoundaryAction.ANSWER and self.claims:
+            raise ValueError("non-answer action cannot include claims")
+        claim_ids = [claim.claim_id for claim in self.claims]
+        if len(claim_ids) != len(set(claim_ids)):
+            raise ValueError("claim IDs must be unique")
+        return self

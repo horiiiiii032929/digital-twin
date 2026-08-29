@@ -56,6 +56,8 @@ CANDIDATE_GOLD = DATASET_ROOT / (
 CONTROL_GOLD = DATASET_ROOT / (
     "academic_factual_qa_open_10000_v1_development_control_gold_002.json"
 )
+CANDIDATE_PAIRING: Path | None = None
+CONTROL_PAIRING: Path | None = None
 CANDIDATE_MANIFEST = ROOT / (
     "research/05_evaluation/instruments/"
     "academic_factual_qa_open_10000_v1_t0_openai_candidate_manifest_005.json"
@@ -103,6 +105,9 @@ CRITICAL_REVIEW_RESULT = GENERATED / (
 CHECKPOINT_STATE = GENERATED / (
     "academic-factual-qa-open-10000-development-product-checkpoint-005-state.json"
 )
+EXPECTED_PRODUCT_GENERATOR = "openai-gpt-5.4-mini-live-atomic"
+EXPECTED_CANDIDATE_EVIDENCE_GATE = "structured-lexical-coverage-evidence-gate-v1"
+EXPECTED_CONTROL_EVIDENCE_GATE = "any-hit-evidence-gate-v1"
 PRODUCT_CONFIG = {
     "candidate": (
         CANDIDATE_CASES,
@@ -377,11 +382,11 @@ def validate(*, require_unauthorized: bool = True) -> dict[str, Any]:
     )
     if critical_payload.get("store") is not False:
         raise ProductCheckpointError("critical reviewer store policy drifted")
-    if not all(row.generator == "openai-gpt-5.4-mini-live-atomic" for row in manifests):
+    if not all(row.generator == EXPECTED_PRODUCT_GENERATOR for row in manifests):
         raise ProductCheckpointError("product generator manifest drifted")
-    if manifests[0].evidence_gate != "structured-lexical-coverage-evidence-gate-v1":
+    if manifests[0].evidence_gate != EXPECTED_CANDIDATE_EVIDENCE_GATE:
         raise ProductCheckpointError("candidate evidence gate drifted")
-    if manifests[1].evidence_gate != "any-hit-evidence-gate-v1":
+    if manifests[1].evidence_gate != EXPECTED_CONTROL_EVIDENCE_GATE:
         raise ProductCheckpointError("control evidence gate drifted")
     if require_unauthorized:
         if any(instrument["authorization"].values()) or any(binding["authorization"].values()):
@@ -638,11 +643,13 @@ def _score() -> dict[str, Any]:
             cases_path=CANDIDATE_CASES,
             gold_path=CANDIDATE_GOLD,
             responses_path=CANDIDATE_RESPONSES,
+            pairing_path=CANDIDATE_PAIRING,
         )
         control = scorer.score_packages(
             cases_path=CONTROL_CASES,
             gold_path=CONTROL_GOLD,
             responses_path=CONTROL_RESPONSES,
+            pairing_path=CONTROL_PAIRING,
         )
         gates = _load(INSTRUMENT_PATH)["hard_gates"]
         paired = scorer.paired_comparison(

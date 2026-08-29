@@ -8,17 +8,49 @@ remain authoritative for the historical runs and claims they document.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
-#135 merged the opt-in proactive-outreach core. The prospective R1 continuation
-is now one finite OpenAI-only path. PR #136 merged the direct-provider base at
-revision `492979e`; checkpoint 003 then added the exact GPT-5.4 calibration and
-bounded development path. Checkpoint 004 spent USD 0.555499 on 50 wording calls,
-accepted 452/500 variants, and stopped before product execution. Checkpoint 005
-reused those 452 variants plus 48 explicit canonical fallbacks but is now
-terminal after two invalid zero-provider-call attempts. Issue #139 is the active
-P0 retrieval-index qualification; #127 is Refine and blocked until it passes.
-Issues #132 and #134 stay
-open for their API/UI, method-confirmation, and activation gates rather than
-being treated as completed products.
+#135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
+closed #139. Checkpoint 006 then completed 500 candidate and 100 control
+responses, but scoring was operationally invalid because public and hidden-gold
+packages intentionally use distinct identities and had no explicit pairing
+manifest. Its 570 abstentions and 30 integrity refusals are diagnostic only and
+are not product-quality evidence.
+
+AFQC-073 is the one finite method-level successor. Checkpoint 007 keeps the
+same 500+100 cases, immutable retrieval, exact OpenAI mini generator, academic
+gates, USD 8 stop, and 666-call ceiling. It adds hash-bound public/gold pairing,
+a strict `answer`/`abstain`/`clarify` response schema, and deterministic release
+only when every claim is a literal contiguous quote from one server-resolved
+cited evidence region. Eighty-eight focused tests and five network-free terminal
+simulations pass. AFQC-074 records one-time provider and paid authority for
+checkpoint 007 only. Final 10,000-case, T1 promotion, fidelity, and deployment
+authority remain false. Issue #127 is the active P0 item; the immediate action
+is the clean preflight and bounded 500+100 execution. No further method
+successor is permitted.
+
+Checkpoint 007 attempt 001 then stopped safely before case 1 with zero provider
+calls or cost because its nested product preflight still asserted checkpoint
+006's historical atomic-generator identity. AFQC-075 preserves this invalid
+execution. AFQC-076 applies the plan's sole harness-only correction by binding
+that assertion to the extractive generator already frozen in both checkpoint
+007 manifests. Cases, truth, retrieval, prompt, model, gates, and budget are
+unchanged. The next execution uses fresh outputs; no further harness correction
+is allowed.
+
+AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
+corrective execution completed 500 candidate and 100 control responses, used
+594 calls and USD 1.13834545, and retained exact provider identities. Its
+deterministic diagnostic result was Refine: 4.5% fully grounded factual success,
+28.5% answerable action accuracy, 84% boundary action accuracy, 44% Evidence
+Recall@5, and three severe unsupported releases. Those rates are not promoted
+as a valid academic estimate because bounded critical review and direct pinned-
+source audit confirmed two ambiguous reference questions. All checkpoint 007
+authority is revoked; the sealed 10,000 cases, T1, fidelity, promotion, and
+deployment remain closed. The next method decision must independently validate
+or replace the reference-question layer on a fresh confirmation set, not patch
+or rerun these 500 cases.
+
+Issues #132 and #134 remain open for their API/UI, method-confirmation, and
+activation gates rather than being treated as completed products.
 
 The active #127 successor is now
 `academic-factual-qa-open-10000-v1`: a flow-independent 500-case development

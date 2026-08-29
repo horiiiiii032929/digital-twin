@@ -11,6 +11,7 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     AtomicAnswerClaim,
     AtomicClaimEvidenceValidator,
+    ContiguousQuoteAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     NliAtomicClaimVerifier,
     NliProbabilities,
@@ -98,6 +99,37 @@ def test_exact_quote_control_releases_only_fully_supported_claim_sets() -> None:
     assert decision.releasable is True
     assert decision.supported_claim_count == 2
     assert decision.unsupported_claim_ids == []
+
+
+def test_contiguous_quote_control_rejects_normalized_or_cross_hit_matches() -> None:
+    candidate = AtomicClaimEvidenceValidator(
+        ContiguousQuoteAtomicClaimVerifier(),
+        minimum_entailment=1.0,
+        maximum_contradiction=0.0,
+    )
+    hits = [
+        hit("chunk-a", "A reset token expires"),
+        hit("chunk-b", "after fifteen minutes."),
+    ]
+
+    punctuation_drift = candidate.validate(
+        [claim("claim-drift", "A reset token expires after fifteen minutes", "chunk-b")],
+        hits,
+    )
+    cross_hit_join = candidate.validate(
+        [
+            claim(
+                "claim-joined",
+                "A reset token expires after fifteen minutes.",
+                "chunk-a",
+                "chunk-b",
+            )
+        ],
+        hits,
+    )
+
+    assert punctuation_drift.releasable is False
+    assert cross_hit_join.releasable is False
 
 
 def test_one_unsupported_claim_rejects_the_whole_answer() -> None:

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "pairing_id": "academic-factual-qa-open-10000-development-control-pairing-007",
+  "public_package": {
+    "dataset_id": "academic-factual-qa-open-10000-v1-development-control-mixed-wording-005",
+    "split": "development-control",
+    "content_sha256": "0fcf4b2780bb092dbc62cc78ca270d32b38f764393e2ea2386663bfe0d15110c"
+  },
+  "hidden_gold_package": {
+    "dataset_id": "academic-factual-qa-open-10000-v1-development-control-gold-002",
+    "split": "development-control-gold",
+    "content_sha256": "151dea10528d3cb56ea2f56c0c5c71063dc7576a43e3a1bf6d61b850e2cae277"
+  },
+  "case_count": 100,
+  "case_ids_sha256": "fdb4ae2bd22fd2355c7b3f90d0ad33d749d8da0d7e2ab003d7327640f70cc864",
+  "content_sha256": "4c392de85eda6d4c3db91d2e66dcd56187c7aac43e262b52e4ad8703c2c38771"
+}

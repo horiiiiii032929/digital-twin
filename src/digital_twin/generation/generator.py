@@ -8,8 +8,10 @@ from src.digital_twin.generation.citations import (
     resolve_atomic_claim_lineage,
 )
 from src.digital_twin.generation.models import (
+    ModelBoundaryAction,
     ModelTutorOutput,
     ModelTutorOutputV2,
+    ModelTutorOutputV3,
     PolicyAction,
 )
 from src.digital_twin.generation.policy import DeterministicPolicyEnforcer
@@ -76,7 +78,6 @@ class DeterministicGroundedGenerator:
                 clock=self.clock,
             ),
         )
-
     async def generate_for_intent(
         self,
         question: str,
@@ -313,6 +314,7 @@ class LiveAtomicGroundedGenerator(LiveGroundedGenerator):
             ),
         )
 
+
     async def generate_for_intent(
         self,
         question: str,
@@ -375,6 +377,100 @@ class LiveAtomicGroundedGenerator(LiveGroundedGenerator):
                 provider_revision=response.provider_revision,
                 prompt_version=prompt.version,
                 policy_action=decision.action,
+                started=started,
+                clock=self.clock,
+                usage=response.usage,
+            ),
+        )
+
+
+class LiveExtractiveBoundaryGroundedGenerator(LiveGroundedGenerator):
+    """Boundary-aware generator whose releasable facts remain extractive."""
+
+    implementation_id = "live-extractive-boundary-grounded-generator"
+    version = "v1"
+
+    async def generate(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+    ) -> TutorAnswer:
+        started = self.clock()
+        approved_hits = _approved_hits(hits)
+        decision = self.policy_enforcer.evaluate(question, approved_hits, policy)
+        short_circuit = _policy_answer(
+            decision.action,
+            generator_id=self.implementation_id,
+            started=started,
+            clock=self.clock,
+        )
+        if short_circuit is not None:
+            return short_circuit
+
+        prompt = self.prompt_builder.build(question, approved_hits, policy)
+        try:
+            response = await self.client.chat(
+                prompt.messages,
+                task="grounded_tutor_extractive_boundary",
+            )
+        except LlmError as error:
+            return _provider_failure(error, started=started, clock=self.clock)
+
+        try:
+            output = ModelTutorOutputV3.model_validate_json(response.content)
+            if output.action != ModelBoundaryAction.ANSWER:
+                action = (
+                    PolicyAction.CLARIFY
+                    if output.action == ModelBoundaryAction.CLARIFY
+                    else PolicyAction.NO_EVIDENCE
+                )
+                content = (
+                    "Which concept or referent do you mean?"
+                    if action == PolicyAction.CLARIFY
+                    else "I do not have enough approved course evidence to answer that question."
+                )
+                return TutorAnswer(
+                    content=content,
+                    trace=_trace(
+                        generator_id=self.implementation_id,
+                        provider_model=response.provider_model,
+                        provider_revision=response.provider_revision,
+                        prompt_version=prompt.version,
+                        policy_action=action,
+                        started=started,
+                        clock=self.clock,
+                        usage=response.usage,
+                    ),
+                )
+            citation_ids = list(
+                dict.fromkeys(
+                    citation_id
+                    for claim in output.claims
+                    for citation_id in claim.citation_ids
+                )
+            )
+            citations = self.citation_validator.validate(citation_ids, prompt.evidence)
+            claims = resolve_atomic_claim_lineage(output, prompt.evidence)
+        except (ValidationError, ValueError):
+            return _provider_failure(
+                LlmMalformedResponseError(),
+                started=started,
+                clock=self.clock,
+                provider_model=response.provider_model,
+                usage=response.usage,
+            )
+
+        return TutorAnswer(
+            content=" ".join(claim.text for claim in claims),
+            citations=citations,
+            atomic_claims=claims,
+            trace=_trace(
+                generator_id=self.implementation_id,
+                provider_model=response.provider_model,
+                provider_revision=response.provider_revision,
+                prompt_version=prompt.version,
+                policy_action=PolicyAction.ANSWER,
                 started=started,
                 clock=self.clock,
                 usage=response.usage,
@@ -503,7 +599,7 @@ def _provider_failure(
             generator_id=LiveGroundedGenerator.implementation_id,
             provider_model=provider_model,
             prompt_version=GroundedPromptBuilder.version,
-            policy_action=PolicyAction.ANSWER,
+            policy_action=PolicyAction.SAFE_PROVIDER_FAILURE,
             started=started,
             clock=clock,
             usage=usage,

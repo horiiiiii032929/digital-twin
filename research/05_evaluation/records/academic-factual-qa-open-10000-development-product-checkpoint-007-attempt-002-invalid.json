@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-development-product-checkpoint-007-attempt-002-invalid",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-mixed-wording-005",
+  "corpus_id": "four-public-open-educational-source-families-complete-regions-002",
+  "code_revision": "e1bcc3454d962756a1a059025f65ed2b13e7b4e2",
+  "execution_state": "invalid-reference-after-complete-response-execution",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-t0-any-hit-control-checkpoint-007",
+        "version": "corrective-attempt-002-invalid-reference",
+        "configuration": {
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "retriever": "immutable-hybrid-bm25-qwen3",
+          "evidence_gate": "any-hit-evidence-gate-v1",
+          "response_count": 100,
+          "provider_call_count": 95,
+          "reported_cost_usd": 0.26980875,
+          "confirmed_reference_defect_count": 2,
+          "academic_quality_interpretation_allowed": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 100.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "boundary-safety",
+          "value": 0.95,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "product-generation-cost-usd",
+          "value": 0.26980875,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "zero-authoritative-reference-defects",
+          "passed": false,
+          "evidence": "The fixed paired subset contains both directly confirmed ambiguous reference questions."
+        },
+        {
+          "name": "hidden-gold-separation",
+          "passed": true,
+          "evidence": "All 100 control responses were durable before hidden-gold scoring."
+        },
+        {
+          "name": "complete-accounting",
+          "passed": true,
+          "evidence": "All 95 control provider calls and USD 0.26980875 are accounted."
+        },
+        {
+          "name": "final-stage-closure",
+          "passed": true,
+          "evidence": "The sealed 10,000-case stage remained unopened and unauthorized."
+        }
+      ],
+      "failures_by_category": {
+        "authoritative-question-ambiguity": 2
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "direct-openai-t0-extractive-boundary-checkpoint-007",
+        "version": "corrective-attempt-002-invalid-reference",
+        "configuration": {
+          "instrument_sha256_at_execution": "0945f41a59a1a8875bb30d423fccb74392bdda224fc77197aa4a81da6c389192",
+          "binding_sha256_at_execution": "395eb4d8f3607b492124263b8b150bd27666aec89319ce262dad130295282544",
+          "product_model": "gpt-5.4-mini-2026-03-17",
+          "routine_advisory_model": "gpt-5.4-nano-2026-03-17",
+          "critical_review_model": "gpt-5.4-2026-03-05",
+          "retriever": "immutable-hybrid-bm25-qwen3",
+          "candidate_response_count": 500,
+          "control_response_count": 100,
+          "provider_call_count": 594,
+          "reported_cost_usd": 1.13834545,
+          "provider_identity_drift_count": 0,
+          "product_retry_count": 0,
+          "confirmed_reference_defect_count": 2,
+          "academic_quality_interpretation_allowed": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "persisted-product-responses",
+          "value": 500.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "boundary-safety",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "product-generation-cost-usd",
+          "value": 0.7658115,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 5.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "zero-authoritative-reference-defects",
+          "passed": false,
+          "evidence": "Direct source audit confirmed two ambiguous or malformed questions whose expected answer action is not uniquely supported."
+        },
+        {
+          "name": "hidden-gold-separation",
+          "passed": true,
+          "evidence": "Both 600-response ledgers were durable before hidden-gold scoring."
+        },
+        {
+          "name": "complete-accounting",
+          "passed": true,
+          "evidence": "594 provider calls and USD 1.13834545 are accounted across product, advisory, and critical-review ledgers."
+        },
+        {
+          "name": "final-stage-closure",
+          "passed": true,
+          "evidence": "The sealed 10,000-case stage remained unopened and unauthorized."
+        }
+      ],
+      "failures_by_category": {
+        "authoritative-question-ambiguity": 2,
+        "diagnostic-quality-gate-failure": 14,
+        "severe-unsupported-release": 3,
+        "advisory-malformed-batch": 1
+      }
+    }
+  ],
+  "reference_adjudication": {
+    "method": "codex-assisted-direct-pinned-source-audit",
+    "independent_external_human_annotation": false,
+    "cases": [
+      {
+        "case_id": "academic-open-dev2-0011-q4",
+        "finding": "confirmed-question-ambiguity",
+        "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+        "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+        "rationale": "The two intended spans exist, but the phrase connect spanning tree with the root tree is malformed and does not define a unique requested relation."
+      },
+      {
+        "case_id": "academic-open-dev2-0016-q2",
+        "finding": "confirmed-question-ambiguity",
+        "source_artifact_id": "computer-networking:protocols/tcp.rst",
+        "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+        "rationale": "The source contains both CLOSE_WAIT and TIME_WAIT passages, while the question identifies only a wait state and the gold uniquely requires CLOSE_WAIT."
+      }
+    ]
+  },
+  "generated_evidence": {
+    "candidate_responses_sha256": "512251a00dff66a676a801b48e51768afb2ca8ef325a4301be6c9e50b3a77727",
+    "control_responses_sha256": "476e3ba4a35b351f4a7f4e8dae088fcc5c69abea1497dae7dfb800aff8a6d8a2",
+    "candidate_result_sha256": "1941ef0224a41c770dc50fd5c6f2f432a427b20998fba6e7422174dc896a8d20",
+    "paired_result_sha256": "540df6ae19619e55dddc9c86618561eb9c3bb045f5d3884e4415a876eae488e2",
+    "advisory_result_sha256": "24631bf96de7c51a89f5125aed04af2a1f876a56ee2d40cb8b42143a8bdb2e6e",
+    "critical_review_result_sha256": "64abf8fdd2d717a4f8df03fcfc0e562b8786f734e7faa8c5f63190af0e3e06d9",
+    "terminal_state_sha256": "98190a891d13f7509e15eba4ae49b9ccefe8395874495ce29b227a91524148b8"
+  },
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The corrective execution is invalid for academic product interpretation because two authoritative reference questions are ambiguous. Diagnostic product rates also fail broadly, but they cannot be promoted as the clean confirmation estimate.",
+    "limitations": [
+      "The run used public open educational sources rather than professor-owned course material.",
+      "Semantic review used separate models from one provider family and no independent external human annotator.",
+      "One advisory batch was malformed and ten selected cases lacked routine advisory votes.",
+      "The final 10,000-case split was not opened.",
+      "The finite checkpoint policy permits no additional correction or rerun against these development cases."
+    ]
+  }
+}
