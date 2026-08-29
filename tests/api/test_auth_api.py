@@ -47,6 +47,10 @@ LOCAL_R1_PROFILE = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json"
 )
+LOCAL_R1_RESULT = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json"
+)
 
 
 def _settings(
@@ -355,28 +359,8 @@ def test_staging_configuration_accepts_hash_bound_t1_qualification(tmp_path):
 
 
 def test_staging_configuration_accepts_local_deterministic_t1_qualification(tmp_path):
-    core = {
-        "instrument_id": "autonomous-tutoring-r1-confirmation-002",
-        "status": "completed-keep",
-        "decision": "Keep",
-        "hard_gates_passed": True,
-        "t0_rollback_available": True,
-        "selected_model": "deterministic/v1",
-        "profile_sha256": hashlib.sha256(LOCAL_R1_PROFILE.read_bytes()).hexdigest(),
-    }
-    result = {
-        **core,
-        "content_sha256": hashlib.sha256(
-            json.dumps(
-                core,
-                sort_keys=True,
-                separators=(",", ":"),
-                ensure_ascii=True,
-            ).encode("utf-8")
-        ).hexdigest(),
-    }
     result_path = tmp_path / "local-t1-result.json"
-    result_path.write_text(json.dumps(result), encoding="utf-8")
+    result_path.write_bytes(LOCAL_R1_RESULT.read_bytes())
 
     AppSettings(
         mode=RuntimeMode.STAGING,

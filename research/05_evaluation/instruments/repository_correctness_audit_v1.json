@@ -4795,7 +4795,7 @@
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "7653b6631ddac0bce26370ed8b577b73f9f29d77cad089933b39f4544e9ea1dd"
+      "sha256": "a25b4fa57490e4e01a774a4b89b236c21a7eeff8f86b53a9027da4bda444f78d"
     },
     {
       "audit_status": "audited",
@@ -6049,7 +6049,7 @@
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "aad2ba77908dcc9edb20fae9fdf06034bc4b03be21553163b28a45968f86c44b"
+      "sha256": "86b7d05a0d42c79bf2562e2f165326542fbf493aca520b54bb12b348dd902094"
     },
     {
       "audit_status": "audited",
