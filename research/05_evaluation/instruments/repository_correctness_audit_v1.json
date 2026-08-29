@@ -21,7 +21,7 @@
       "path": ".env.example",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "550b054b956a86743a87599b4f0f1a9372c86e6f2531406105d3602845613644"
+      "sha256": "c1f83ca1969e2971c91dc866a86839542c11f302964941af973dd9eae95201bb"
     },
     {
       "audit_status": "audited",
@@ -828,7 +828,7 @@
     },
     {
       "path": "compose.preview.yml",
-      "sha256": "2db557455c6d181ec5cb8bef35fb505c868ac02c6c933c692a5332dc2265e16d",
+      "sha256": "e72ca8dbc0eac696ddb37916be27c2287fe61f96b66a1fac140de03f0de88f9d",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
@@ -846,7 +846,7 @@
       "path": "compose.staging.yml",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "14a8f8a9c7bb43bda1347ed236d29552d05950c30efb4eea74f19271f7f8aced"
+      "sha256": "4deab9b9784521a919019e475a95e0e12dd852397adf2714d7aa8d497bd33326"
     },
     {
       "audit_status": "audited",
@@ -890,7 +890,7 @@
       "path": "deploy/staging.env.example",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "14221e482bd26c6a9d493adf98f313ac36d3fabcb84b9b3b87de9171eb154ead"
+      "sha256": "76e83e6f7e6b3f0375d443f387122cce5778e3b3eaa4b33b286ff301e02f3e5a"
     },
     {
       "audit_status": "audited",
@@ -912,7 +912,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "5ee77f30654f23ccb4aa779041880782b8cfe44e832444db7d2c58ad6d419c04"
+      "sha256": "d2eae1ba0e28d45420648c1250ab31baeef14166db240bb08fcbc15cd7856c9d"
     },
     {
       "audit_status": "audited",
@@ -1716,6 +1716,28 @@
       "reviewer": "Codex repository correctness sweep",
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
       "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_002.json",
+      "sha256": "217b86c9c9c1cf4bc9751e356a83c06b2e52690e566bca301b45ba7a6a48ac60",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "r1-local-release-qualification",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "evidence": "Finite network-free contract review verified 50 isolated trajectories, 200 turns per condition, deterministic generation, the real conservative evidence gate, explicit T0 rollback, zero provider authority, and no automatic promotion.",
+      "findings": []
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "r1-local-release-qualification",
+      "evidence": "Profile review and explicit validator execution verified the deterministic generator, conservative structured lexical evidence gate, bounded T1 candidate, T0 rollback, in-app A0 scope, privacy-minimized learning gaps, and preserved unfavorable cascade evidence.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "1b3257e80e2bcb6f49871a537d022a6c65f0bf43fe1a37a535cf5b6eb8d34eec"
     },
     {
       "audit_status": "audited",
@@ -3973,6 +3995,17 @@
       "findings": []
     },
     {
+      "path": "scripts/run_autonomous_tutoring_r1_local_confirmation.py",
+      "sha256": "dde8c60033c7f8eea52aa99a209aa4b185211db41479ff69c344a288b1a231f0",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "r1-local-release-qualification",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "evidence": "Code review, strict contract validation, pass simulation, and focused tests verify exclusive output, repository-freeze authorization, actual SQLite persistence and restart, duplicate protection, deterministic citation and claim checks, and zero provider/token/cost paths.",
+      "findings": []
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
@@ -4729,7 +4762,7 @@
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "bf1f2bf8c73af75a9ddf94431f4815fe609c33c06d7351f1a25731b82d7d0283"
+      "sha256": "7653b6631ddac0bce26370ed8b577b73f9f29d77cad089933b39f4544e9ea1dd"
     },
     {
       "audit_status": "audited",
@@ -4751,7 +4784,7 @@
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "65007ec09333b802a396172ba0219272ba385ca016f396843dc7f79a53e28e19"
+      "sha256": "98d396e5e9e65b1bcd3db4e60eaa5603c5a8b9ef76c2e07b399e9ff396d05466"
     },
     {
       "audit_status": "audited",
@@ -5658,6 +5691,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "r1-local-release-qualification",
+      "evidence": "Focused regression verifies ambiguous requests map to clarification before no-evidence handling, including the zero-hit boundary introduced for the conservative local release gate.",
+      "findings": [],
+      "path": "tests/digital_twin/test_tutoring_graph.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "c91843458cc43c317a699c22410e99b49c2f0953adaf4b8f57805706b0238f2a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "onboarding-and-policy-domain",
       "evidence": "Compatibility facade reviewed for exact modular API binding; export regression passed.",
       "findings": [],
@@ -5829,7 +5873,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "7d1cb898f90a21b46ac7b1df1e9e95e06f6ef0fc32b84bfd560272146518be97"
+      "sha256": "277cf6d437dabd0044c609bb5d425540bf71b8ccb00f4d285607f957c183ded1"
     },
     {
       "audit_status": "audited",
@@ -5851,7 +5895,7 @@
       "path": "src/digital_twin/student/fixtures.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "5c8420768cd8f65f0d8124e411fd1a6c7c25d1093d72ee2186c36134f3e3f811"
+      "sha256": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5"
     },
     {
       "audit_status": "audited",
@@ -5950,7 +5994,7 @@
       "path": "src/digital_twin/student/tutoring_graph.py",
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
-      "sha256": "d859981c3cf97a5086c845b4fa76d81fe5bd8d44b419137e32af718e4561b525"
+      "sha256": "ca9d85d554b30ad7e3bb9056353b8b86232fc79da2ac09158225b8cfd5ea66ea"
     },
     {
       "audit_status": "audited",
@@ -5972,7 +6016,7 @@
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "8931eafe5a165c054312afdb80467fa603b098aba4a7c12d739e6c7bf52d0ec2"
+      "sha256": "aad2ba77908dcc9edb20fae9fdf06034bc4b03be21553163b28a45968f86c44b"
     },
     {
       "audit_status": "audited",
@@ -6214,7 +6258,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "85a5fe9ba6be0d581457369db948ef51e95f2e144b6ea911150f087be0419751"
+      "sha256": "4b64c8654ecc77fe016bc09bff1d0b38f420939b07838c1772e6b51d71de8ae9"
     },
     {
       "audit_status": "audited",
@@ -6775,6 +6819,17 @@
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "findings": []
+    },
+    {
+      "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
+      "sha256": "6c2accc0dbbdd3871c2ef24128d15d3005510c085b5f2106f6e72dc20a3e1d21",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "r1-local-release-qualification",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "evidence": "Focused tests prove the confirmation remains finite and balanced at 50 trajectories and 200 turns per condition, with unique source namespaces and deterministic zero-cost model binding.",
       "findings": []
     },
     {
@@ -7446,7 +7501,7 @@
       "path": "tests/test_staging_compose.py",
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
-      "sha256": "d0b3260ae167afa513dd9916456ff1ec74a249578da400520574a00d6ab1d9d2"
+      "sha256": "4196c7bccf26bbbd4c3f0ed06bb3525dab76b52b67aa3f2be919909ad319c467"
     },
     {
       "audit_status": "audited",

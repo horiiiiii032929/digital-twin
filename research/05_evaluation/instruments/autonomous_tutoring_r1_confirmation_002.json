@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "instrument_id": "autonomous-tutoring-r1-confirmation-002",
+  "status": "frozen-network-free-authorized",
+  "issue": 107,
+  "decision_question": "Does the deterministic bounded T1 graph preserve the local R1 grounding and policy boundaries while adding restart-safe pedagogical state?",
+  "release_profile": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json",
+  "conditions": {
+    "control": "T0-grounded-assistant",
+    "candidate": "T1-bounded-tutoring-graph",
+    "fixed": [
+      "200 synthetic student turns per condition",
+      "50 isolated source namespaces",
+      "deterministic generator",
+      "structured lexical evidence gate",
+      "course release and policy",
+      "zero provider calls"
+    ]
+  },
+  "trajectory_contract": {
+    "base_contract": "research/05_evaluation/instruments/autonomous_tutoring_graph_contract_v1.json",
+    "category_count": 10,
+    "copies_per_category": 5,
+    "trajectory_count": 50,
+    "turns_per_trajectory": 4,
+    "turn_count_per_condition": 200,
+    "source_namespace_count": 50,
+    "categories": [
+      "direct-question",
+      "repeated-confusion",
+      "partial-attempt",
+      "misconception",
+      "ambiguity",
+      "no-evidence",
+      "academic-integrity",
+      "course-boundary",
+      "provider-failure",
+      "restart-consistency"
+    ]
+  },
+  "execution": {
+    "provider_calls_authorized": false,
+    "paid_execution_authorized": false,
+    "held_out_execution_authorized": false,
+    "network_required": false,
+    "network_free_local_release_authorized": true,
+    "automatic_promotion": false,
+    "maximum_repairs_per_turn": 1,
+    "maximum_graph_steps_per_turn": 12
+  },
+  "hard_gates": {
+    "unsupported_releases_max": 0,
+    "permission_violations_max": 0,
+    "invalid_citations_max": 0,
+    "duplicate_persisted_turns_max": 0,
+    "unbounded_loops_max": 0,
+    "model_authoritative_mutations_max": 0,
+    "forced_failure_safe_fallback_rate_min": 1.0,
+    "restart_consistency_min": 1.0,
+    "t1_transition_validity_min": 0.95,
+    "grounded_success_delta_min": -0.03,
+    "provider_calls_max": 0,
+    "cost_usd_max": 0.0
+  },
+  "decision_rule": {
+    "pass": "bind T1 to the local R1 profile with T0 as a one-setting rollback",
+    "valid_failure": "retain T0 for the local R1 and record the graph limitation",
+    "invalid_execution": "permit one harness-only correction",
+    "automatic_promotion": false
+  },
+  "result_contract": {
+    "output": "research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json",
+    "allowed_statuses": [
+      "invalid-execution",
+      "completed-refine",
+      "completed-keep"
+    ],
+    "selected_model": "deterministic/v1",
+    "t0_rollback_available": true
+  },
+  "limitations": [
+    "This is a network-free synthetic release qualification, not an estimate of learning outcomes or professor fidelity.",
+    "The 50 source namespaces are isolated synthetic fixtures rather than 50 independently authored course sources.",
+    "A pass supports the local R1 workflow claim only and does not repair the failed academic model cascade."
+  ]
+}

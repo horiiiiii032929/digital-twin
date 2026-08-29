@@ -26,15 +26,15 @@ invite-only pilot release only after the approval-gated real-workflow checks
 pass. A local demo, a 10,000-case dataset, or a successful model run is evidence
 toward the release; none is the release by itself.
 
-## Sunday operational-R1 checkpoint
+## Sunday local-R1 checkpoint
 
-The immediate target is an invite-only operational R1 by 2026-08-30 23:59
-Singapore time. A production claim requires a durable host, stable domain,
-trusted HTTPS, persistent storage, backup/restore, monitoring, and rollback on
-the exact released revision. A random Cloudflare Quick Tunnel remains an
-emergency walkthrough fallback only; it cannot satisfy the production gate.
-The final sealed 10,000-case execution is deliberately post-release and does
-not block this product checkpoint.
+The immediate target is a polished, production-like local R1 by 2026-08-30
+23:59 Singapore time. The same immutable Docker revision must pass local HTTPS,
+credentialed roles, persistent storage, backup/restore, monitoring, rollback,
+and complete administrator, professor, and student journeys on the development
+Mac. Domain, DNS, public tunnel, and durable-host deployment are explicitly
+post-Sunday work. The final sealed 10,000-case execution is also post-release
+and does not block this product checkpoint.
 
 The finite order is:
 
@@ -45,14 +45,13 @@ The finite order is:
 4. qualify the professor-profile, learning-gap, and A0 outreach workflows;
 5. pass container, HTTPS, persistence, backup/restore, monitoring, and rollback
    checks on one immutable release revision;
-6. deploy that revision to a durable host and pass the administrator,
-   professor, and student journeys through its stable HTTPS URL.
+6. pass the administrator, professor, and student journeys through the local
+   HTTPS origin and record a walkthrough.
 
 Critical safety, grounding, privacy, persistence, or workflow failures block
 release. A model-quality failure may fall back to deterministic T0, but cannot
-be described as LLM-backed autonomy. If host or domain access is unavailable,
-the same build may be reported only as a locally qualified public demo or
-release candidate.
+be described as LLM-backed autonomy. This checkpoint may be reported as a
+qualified local R1; it is not hosted-production evidence.
 
 ## Release stages
 

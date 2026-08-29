@@ -7,11 +7,13 @@ from fastapi.testclient import TestClient
 
 from services.api.app.config import (
     AppSettings,
+    EvidenceGateMode,
     GeneratorMode,
     RuntimeMode,
     StudentTutoringMode,
 )
 from services.api.app.factory import (
+    _configured_evidence_gate,
     _configured_generator,
     create_app,
 )
@@ -21,6 +23,7 @@ from src.digital_twin.evaluation import (
     load_release_profile,
 )
 from src.digital_twin.identity import IdentityService, SQLiteIdentityRepository
+from src.digital_twin.grounding import StructuredLexicalCoverageEvidenceGate
 from src.digital_twin.onboarding import create_session
 from src.digital_twin.student import (
     AccountRole,
@@ -39,6 +42,10 @@ PROFESSOR_NEW_PASSWORD = "Professor-new-pass-43"
 CANDIDATE_PROFILE = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+)
+LOCAL_R1_PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json"
 )
 
 
@@ -282,6 +289,22 @@ def test_staging_configuration_cannot_exceed_proxy_upload_cap(tmp_path):
         ).validate()
 
 
+def test_conservative_local_release_gate_is_explicit_and_deterministic() -> None:
+    settings = AppSettings(
+        evidence_gate_mode=EvidenceGateMode.STRUCTURED_LEXICAL_V1,
+    )
+
+    gate = _configured_evidence_gate(settings)
+
+    assert isinstance(gate, StructuredLexicalCoverageEvidenceGate)
+    assert gate.minimum_content_matching_terms == 2
+    assert gate.evidence_limit == 3
+
+
+def test_unselected_evidence_gate_remains_fail_closed() -> None:
+    assert _configured_evidence_gate(AppSettings()) is None
+
+
 def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):
     with pytest.raises(ValueError, match="T1_QUALIFICATION_RESULT_PATH"):
         AppSettings(
@@ -327,6 +350,43 @@ def test_staging_configuration_accepts_hash_bound_t1_qualification(tmp_path):
         student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
         learning_gap_hmac_secret=b"x" * 32,
         student_profile_path=CANDIDATE_PROFILE,
+        t1_qualification_result_path=result_path,
+    ).validate()
+
+
+def test_staging_configuration_accepts_local_deterministic_t1_qualification(tmp_path):
+    core = {
+        "instrument_id": "autonomous-tutoring-r1-confirmation-002",
+        "status": "completed-keep",
+        "decision": "Keep",
+        "hard_gates_passed": True,
+        "t0_rollback_available": True,
+        "selected_model": "deterministic/v1",
+        "profile_sha256": hashlib.sha256(LOCAL_R1_PROFILE.read_bytes()).hexdigest(),
+    }
+    result = {
+        **core,
+        "content_sha256": hashlib.sha256(
+            json.dumps(
+                core,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=True,
+            ).encode("utf-8")
+        ).hexdigest(),
+    }
+    result_path = tmp_path / "local-t1-result.json"
+    result_path.write_text(json.dumps(result), encoding="utf-8")
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+        learning_gap_hmac_secret=b"x" * 32,
+        student_profile_path=LOCAL_R1_PROFILE,
         t1_qualification_result_path=result_path,
     ).validate()
 

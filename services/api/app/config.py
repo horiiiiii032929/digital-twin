@@ -33,6 +33,11 @@ class StudentTutoringMode(StrEnum):
     BOUNDED_TUTORING_GRAPH = "bounded-tutoring-graph"
 
 
+class EvidenceGateMode(StrEnum):
+    UNSELECTED = "unselected"
+    STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
+
+
 @dataclass(frozen=True, slots=True)
 class AppSettings:
     mode: RuntimeMode = RuntimeMode.DEMO
@@ -48,6 +53,7 @@ class AppSettings:
     authenticated_requests_per_minute: int = 120
     log_level: str = "INFO"
     generator_mode: GeneratorMode = GeneratorMode.DETERMINISTIC
+    evidence_gate_mode: EvidenceGateMode = EvidenceGateMode.UNSELECTED
     student_profile_path: Path = (
         ROOT
         / "research/05_evaluation/profiles/student-tutor-v1.json"
@@ -100,6 +106,12 @@ class AppSettings:
             log_level=os.getenv("APP_LOG_LEVEL", "INFO").upper(),
             generator_mode=GeneratorMode(
                 os.getenv("APP_GENERATOR_MODE", GeneratorMode.DETERMINISTIC.value)
+            ),
+            evidence_gate_mode=EvidenceGateMode(
+                os.getenv(
+                    "APP_EVIDENCE_GATE_MODE",
+                    EvidenceGateMode.UNSELECTED.value,
+                )
             ),
             student_profile_path=_repository_path(
                 os.getenv(
@@ -305,7 +317,10 @@ def _validate_t1_qualification_result(
     )
     if (
         result.get("instrument_id")
-        != "autonomous-tutoring-r1-confirmation-001"
+        not in {
+            "autonomous-tutoring-r1-confirmation-001",
+            "autonomous-tutoring-r1-confirmation-002",
+        }
         or result.get("status") != "completed-keep"
         or result.get("decision") != "Keep"
         or result.get("hard_gates_passed") is not True

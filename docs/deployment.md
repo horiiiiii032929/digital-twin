@@ -74,6 +74,12 @@ graph/policy confirmation passes. Even after a T1 mechanics pass, the release
 must not claim LLM-backed tutoring quality. The sealed 10,000-case academic run
 and a future retrieval/evidence successor remain separate post-release work.
 
+For the 2026-08-30 checkpoint, host and domain work is deferred. The exact same
+Compose services and immutable images are qualified locally through the
+loopback origin, with production-like authentication, persistence, workers,
+backup/restore, restart, and rollback. Passing that checkpoint establishes a
+local R1 only; it does not establish public availability or a hosting SLA.
+
 ## Build and start
 
 Validate before touching runtime state:

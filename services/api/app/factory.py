@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from services.api.app.config import (
     AppSettings,
+    EvidenceGateMode,
     GeneratorMode,
     RuntimeMode,
     StudentTutoringMode,
@@ -44,6 +45,7 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     LocalCourseSourceIngestionService,
     RetrievalIndexStoreV1,
+    StructuredLexicalCoverageEvidenceGate,
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.protocols import (
@@ -179,13 +181,18 @@ def create_app(
         runtime_settings,
         profile,
     )
+    configured_evidence_gate = (
+        student_evidence_gate
+        if student_evidence_gate is not None
+        else _configured_evidence_gate(runtime_settings)
+    )
     app.state.provider_budget = provider_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=resolved_student_profile_path,
         embedder=student_embedder,
         generator=student_generator or configured_generator,
-        evidence_gate=student_evidence_gate,
+        evidence_gate=configured_evidence_gate,
         claim_evidence_validator=student_claim_evidence_validator,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
         retrieval_index_store=retrieval_index_store,
@@ -261,7 +268,7 @@ def create_app(
         app.state.student_repository,
         profile_id=profile.profile_id,
         profile_version=profile.profile_version,
-        evidence_sufficiency_ready=student_evidence_gate is not None,
+        evidence_sufficiency_ready=configured_evidence_gate is not None,
         teaching_profile_required=(
             runtime_settings.student_tutoring_mode
             == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
@@ -377,6 +384,17 @@ def _configured_generator(
         ),
         client,
     )
+
+
+def _configured_evidence_gate(settings: AppSettings):
+    if settings.evidence_gate_mode == EvidenceGateMode.UNSELECTED:
+        return None
+    if settings.evidence_gate_mode == EvidenceGateMode.STRUCTURED_LEXICAL_V1:
+        return StructuredLexicalCoverageEvidenceGate(
+            minimum_content_matching_terms=2,
+            evidence_limit=3,
+        )
+    raise ValueError("unsupported evidence gate mode")
 
 
 def _required_profile_string(

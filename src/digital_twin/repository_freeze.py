@@ -155,6 +155,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_autonomous_tutoring_graph_development.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_autonomous_tutoring_r1_local_confirmation.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_proactive_outreach_a1_development.py": (
             "method_evaluation_execution",
         ),
@@ -345,6 +348,9 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
         "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
+        ),
+        "autonomous-tutoring-r1-confirmation-002": (
+            "method_evaluation_execution",
         ),
     }
 )

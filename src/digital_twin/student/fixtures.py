@@ -53,6 +53,10 @@ def approved_synthetic_policy() -> TutorPolicy:
 
 def seed_synthetic_student_workflow(
     repository: StudentRepository,
+    *,
+    profile_id: str = "student-tutor",
+    profile_version: str = "v1",
+    source_namespace: str = "synthetic",
 ) -> SyntheticStudentFixture:
     fixture = SyntheticStudentFixture()
     accounts = [
@@ -113,8 +117,8 @@ def seed_synthetic_student_workflow(
     release_a = DigitalTwinRelease(
         id=fixture.release_a_id,
         course_id=fixture.course_a_id,
-        profile_id="student-tutor",
-        profile_version="v1",
+        profile_id=profile_id,
+        profile_version=profile_version,
         policy_version=1,
         policy=policy,
         status=StudentReleaseStatus.PUBLISHED,
@@ -126,6 +130,7 @@ def seed_synthetic_student_workflow(
                 "Cache coherence keeps replicated processor data consistent.",
                 "page 2",
                 fixture.course_a_id,
+                source_namespace,
             ),
             _chunk(
                 "memory",
@@ -133,14 +138,15 @@ def seed_synthetic_student_workflow(
                 "Virtual memory maps process addresses to physical memory pages.",
                 "page 4",
                 fixture.course_a_id,
+                source_namespace,
             ),
         ],
     )
     release_b = DigitalTwinRelease(
         id=fixture.release_b_id,
         course_id=fixture.course_b_id,
-        profile_id="student-tutor",
-        profile_version="v1",
+        profile_id=profile_id,
+        profile_version=profile_version,
         policy_version=1,
         policy=policy,
         status=StudentReleaseStatus.PUBLISHED,
@@ -152,6 +158,7 @@ def seed_synthetic_student_workflow(
                 "A release policy defines approval and withdrawal controls.",
                 "section 1",
                 fixture.course_b_id,
+                source_namespace,
             )
         ],
     )
@@ -175,13 +182,18 @@ def _chunk(
     text: str,
     locator: str,
     course_id: str,
+    source_namespace: str,
 ) -> DocumentChunk:
     return DocumentChunk(
-        id=f"chunk-{identifier}-synthetic",
-        document_id=document_id,
+        id=f"chunk-{identifier}-{source_namespace}",
+        document_id=(
+            document_id
+            if source_namespace == "synthetic"
+            else f"{document_id}-{source_namespace}"
+        ),
         text=text,
         ordinal=0,
-        source_artifact_id=f"source-{identifier}-synthetic",
+        source_artifact_id=f"source-{identifier}-{source_namespace}",
         source_version=1,
         source_checksum="a" * 64,
         source_label=SourceLabel.COURSE_APPROVED,

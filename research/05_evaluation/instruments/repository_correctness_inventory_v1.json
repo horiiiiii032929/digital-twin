@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 687
+    "audited": 692
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 159,
+    "active_or_unclassified_tooling": 160,
     "active_runtime": 116,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 6,
-    "evaluation_configuration": 172,
+    "evaluation_configuration": 174,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 144
+    "verification": 146
   },
-  "file_count": 687,
+  "file_count": 692,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "989d0d434bebdb669990dd742612de34bbf88afed31cd5ccc22a17a5190957d2",
+  "record_sha256": "b380dc2a507ec30a2eff94432fb62697f412bbcf1394945b74d2203c14e7e681",
   "records": [
     {
       "audit": {
@@ -51,7 +51,7 @@
       "package_commands": [],
       "path": ".env.example",
       "risk": "medium",
-      "sha256": "550b054b956a86743a87599b4f0f1a9372c86e6f2531406105d3602845613644"
+      "sha256": "c1f83ca1969e2971c91dc866a86839542c11f302964941af973dd9eae95201bb"
     },
     {
       "audit": {
@@ -1235,7 +1235,7 @@
       "package_commands": [],
       "path": "compose.preview.yml",
       "risk": "high",
-      "sha256": "2db557455c6d181ec5cb8bef35fb505c868ac02c6c933c692a5332dc2265e16d"
+      "sha256": "e72ca8dbc0eac696ddb37916be27c2287fe61f96b66a1fac140de03f0de88f9d"
     },
     {
       "audit": {
@@ -1251,7 +1251,7 @@
       "package_commands": [],
       "path": "compose.staging.yml",
       "risk": "high",
-      "sha256": "14a8f8a9c7bb43bda1347ed236d29552d05950c30efb4eea74f19271f7f8aced"
+      "sha256": "4deab9b9784521a919019e475a95e0e12dd852397adf2714d7aa8d497bd33326"
     },
     {
       "audit": {
@@ -1315,7 +1315,7 @@
       "package_commands": [],
       "path": "deploy/staging.env.example",
       "risk": "high",
-      "sha256": "14221e482bd26c6a9d493adf98f313ac36d3fabcb84b9b3b87de9171eb154ead"
+      "sha256": "76e83e6f7e6b3f0375d443f387122cce5778e3b3eaa4b33b286ff301e02f3e5a"
     },
     {
       "audit": {
@@ -1347,7 +1347,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "5ee77f30654f23ccb4aa779041880782b8cfe44e832444db7d2c58ad6d419c04"
+      "sha256": "d2eae1ba0e28d45420648c1250ab31baeef14166db240bb08fcbc15cd7856c9d"
     },
     {
       "audit": {
@@ -2532,6 +2532,22 @@
       "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_001.json",
       "risk": "high",
       "sha256": "7778d0e140866e235423cc4ea4fd27372d0028d5f69fd2857e53b72d3c41d927"
+    },
+    {
+      "audit": {
+        "domain": "r1-local-release-qualification",
+        "evidence": "Finite network-free contract review verified 50 isolated trajectories, 200 turns per condition, deterministic generation, the real conservative evidence gate, explicit T0 rollback, zero provider authority, and no automatic promotion.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_002.json",
+      "risk": "high",
+      "sha256": "217b86c9c9c1cf4bc9751e356a83c06b2e52690e566bca301b45ba7a6a48ac60"
     },
     {
       "audit": {
@@ -4132,6 +4148,22 @@
       "path": "research/05_evaluation/profiles/professor-fidelity-anchor-v4-p3-candidate.json",
       "risk": "high",
       "sha256": "786dfd1b09a1891c4ff93733def6326267ce2f03d5e54003209a65bc19dbcc45"
+    },
+    {
+      "audit": {
+        "domain": "r1-local-release-qualification",
+        "evidence": "Profile review and explicit validator execution verified the deterministic generator, conservative structured lexical evidence gate, bounded T1 candidate, T0 rollback, in-app A0 scope, privacy-minimized learning gaps, and preserved unfavorable cascade evidence.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json",
+      "risk": "high",
+      "sha256": "1b3257e80e2bcb6f49871a537d022a6c65f0bf43fe1a37a535cf5b6eb8d34eec"
     },
     {
       "audit": {
@@ -6088,6 +6120,27 @@
     },
     {
       "audit": {
+        "domain": "r1-local-release-qualification",
+        "evidence": "Code review, strict contract validation, pass simulation, and focused tests verify exclusive output, repository-freeze authorization, actual SQLite persistence and restart, duplicate protection, deterministic citation and claim checks, and zero provider/token/cost paths.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:autonomous-tutoring-r1-local-confirmation",
+        "preflight:autonomous-tutoring-r1-local-confirmation",
+        "simulate:autonomous-tutoring-r1-local-confirmation",
+        "verify:autonomous-tutoring-r1-local-confirmation"
+      ],
+      "path": "scripts/run_autonomous_tutoring_r1_local_confirmation.py",
+      "risk": "high",
+      "sha256": "dde8c60033c7f8eea52aa99a209aa4b185211db41479ff69c344a288b1a231f0"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -7367,7 +7420,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "bf1f2bf8c73af75a9ddf94431f4815fe609c33c06d7351f1a25731b82d7d0283"
+      "sha256": "7653b6631ddac0bce26370ed8b577b73f9f29d77cad089933b39f4544e9ea1dd"
     },
     {
       "audit": {
@@ -7399,7 +7452,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "65007ec09333b802a396172ba0219272ba385ca016f396843dc7f79a53e28e19"
+      "sha256": "98d396e5e9e65b1bcd3db4e60eaa5603c5a8b9ef76c2e07b399e9ff396d05466"
     },
     {
       "audit": {
@@ -8967,7 +9020,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "7d1cb898f90a21b46ac7b1df1e9e95e06f6ef0fc32b84bfd560272146518be97"
+      "sha256": "277cf6d437dabd0044c609bb5d425540bf71b8ccb00f4d285607f957c183ded1"
     },
     {
       "audit": {
@@ -8999,7 +9052,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/fixtures.py",
       "risk": "high",
-      "sha256": "5c8420768cd8f65f0d8124e411fd1a6c7c25d1093d72ee2186c36134f3e3f811"
+      "sha256": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5"
     },
     {
       "audit": {
@@ -9143,7 +9196,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "d859981c3cf97a5086c845b4fa76d81fe5bd8d44b419137e32af718e4561b525"
+      "sha256": "ca9d85d554b30ad7e3bb9056353b8b86232fc79da2ac09158225b8cfd5ea66ea"
     },
     {
       "audit": {
@@ -9175,7 +9228,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "8931eafe5a165c054312afdb80467fa603b098aba4a7c12d739e6c7bf52d0ec2"
+      "sha256": "aad2ba77908dcc9edb20fae9fdf06034bc4b03be21553163b28a45968f86c44b"
     },
     {
       "audit": {
@@ -9527,7 +9580,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "85a5fe9ba6be0d581457369db948ef51e95f2e144b6ea911150f087be0419751"
+      "sha256": "4b64c8654ecc77fe016bc09bff1d0b38f420939b07838c1772e6b51d71de8ae9"
     },
     {
       "audit": {
@@ -9672,6 +9725,22 @@
       "path": "tests/digital_twin/test_tutor_policy.py",
       "risk": "medium",
       "sha256": "5d01f2819f96a797f54b1a016e85a5ae449a755dcf0ebc86f146a8b30d49d0a2"
+    },
+    {
+      "audit": {
+        "domain": "r1-local-release-qualification",
+        "evidence": "Focused regression verifies ambiguous requests map to clarification before no-evidence handling, including the zero-hit boundary introduced for the conservative local release gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_tutoring_graph.py",
+      "risk": "medium",
+      "sha256": "c91843458cc43c317a699c22410e99b49c2f0953adaf4b8f57805706b0238f2a"
     },
     {
       "audit": {
@@ -10344,6 +10413,22 @@
       "path": "tests/test_autonomous_tutoring_r1_confirmation.py",
       "risk": "medium",
       "sha256": "fe6396b4cce51d1301976eceb5a3a9dfb1fa7d192e0babc6ed5cb149d52756fa"
+    },
+    {
+      "audit": {
+        "domain": "r1-local-release-qualification",
+        "evidence": "Focused tests prove the confirmation remains finite and balanced at 50 trajectories and 200 turns per condition, with unique source namespaces and deterministic zero-cost model binding.",
+        "findings": [],
+        "reviewed_at": "2026-08-29",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
+      "risk": "medium",
+      "sha256": "6c2accc0dbbdd3871c2ef24128d15d3005510c085b5f2106f6e72dc20a3e1d21"
     },
     {
       "audit": {
@@ -11319,7 +11404,7 @@
       "package_commands": [],
       "path": "tests/test_staging_compose.py",
       "risk": "medium",
-      "sha256": "d0b3260ae167afa513dd9916456ff1ec74a249578da400520574a00d6ab1d9d2"
+      "sha256": "4196c7bccf26bbbd4c3f0ed06bb3525dab76b52b67aa3f2be919909ad319c467"
     },
     {
       "audit": {
@@ -11483,8 +11568,8 @@
     }
   ],
   "risk_counts": {
-    "high": 529,
-    "medium": 158
+    "high": 532,
+    "medium": 160
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
