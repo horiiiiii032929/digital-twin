@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bf1685dcd18f2d3df7e56b837708fe3e8ddd76d768f9920ecd664e72be38a925",
+  "record_sha256": "d8d5e40a0ade4b156f8223bb0cbc700c11fe1d30984022e4d7db10fdffd53356",
   "records": [
     {
       "audit": {
@@ -1768,7 +1768,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Manual authorization review verified unchanged 500/100 packages, exact AFQC-068 artifact identities, load-only runtime policy, deterministic decision authority, hidden-gold ordering, bounded costs and calls, true one-time development/provider/review authority, false final authority, and no automatic promotion.",
+        "evidence": "Manual corrective-attempt review verified unchanged 500/100 packages, exact AFQC-068 artifact identities, load-only runtime policy, deterministic decision authority, hidden-gold ordering, bounded costs and calls, a prospectively approved allocation marker, true one-time development/provider/review authority, false final authority, and no further harness correction.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -1779,7 +1779,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_development_product_checkpoint_006.json",
       "risk": "high",
-      "sha256": "ff861e2fa816122a4db402fdd513a9bf2389e0e137fa9a1226df1247a9174221"
+      "sha256": "3e74a4a85d66a87b6dec15b3a76e6bb48de07f7fe21e669ba30b9a33effcce2f"
     },
     {
       "audit": {
@@ -9557,7 +9557,7 @@
     {
       "audit": {
         "domain": "immutable-index-product-checkpoint",
-        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, no runtime document embedding, unavailable-index failure, five finite outcomes, clean authorized preflight readiness, and resume binding drift.",
+        "evidence": "Focused regressions verify exact artifact binding, historical checkpoint preservation, matched candidate/control retrieval, approved allocation state, no runtime document embedding, unavailable-index failure, five finite outcomes, clean authorized preflight readiness, sole-correction scope, and resume binding drift.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "codex-primary-review"
@@ -9568,7 +9568,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_product_checkpoint_006.py",
       "risk": "medium",
-      "sha256": "958d05bde408ce346c79f406889e41d85f52281f7365423140aca6b91bfe18f6"
+      "sha256": "67dc72417f55aa03a4918252ed2d1233c8e214a91f8357955cac591dea238bc2"
     },
     {
       "audit": {

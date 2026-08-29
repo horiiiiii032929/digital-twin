@@ -34,6 +34,24 @@ def test_authorized_successor_binds_qualified_indexes() -> None:
     )
     assert len(lifecycle["artifact_ids"]) == 4
     assert instrument["status"] == "frozen-pending-execution"
+    assert instrument["allocation"]["status"] == "frozen-approved"
+    assert instrument["allocation"]["execution_correction_record"] == "AFQC-071"
+    assert instrument["corrective_attempt"] == {
+        "attempt_number": 2,
+        "predecessor_result_id": (
+            "academic-factual-qa-open-10000-development-product-checkpoint-006-"
+            "attempt-001-invalid"
+        ),
+        "permitted_change": (
+            "correct-allocation-state-from-frozen-build-only-to-frozen-approved"
+        ),
+        "dataset_changed": False,
+        "product_method_changed": False,
+        "provider_binding_changed": False,
+        "budget_changed": False,
+        "fresh_exclusive_outputs_required": True,
+        "further_harness_correction_authorized": False,
+    }
     assert instrument["authorization"]["provider_execution_authorized"] is True
     assert instrument["authorization"]["paid_execution_authorized"] is True
     assert (

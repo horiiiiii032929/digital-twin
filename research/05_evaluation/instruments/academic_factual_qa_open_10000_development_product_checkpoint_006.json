@@ -80,8 +80,9 @@
     "model_cannot_override_deterministic_truth": true
   },
   "allocation": {
-    "status": "frozen-build-only",
+    "status": "frozen-approved",
     "approval_record": "AFQC-069",
+    "execution_correction_record": "AFQC-071",
     "development_case_count": 500,
     "development_control_case_count": 100
   },
@@ -123,6 +124,17 @@
     "wording_stage_reexecuted": false,
     "final_10000_execution_authorized": false
   },
+  "corrective_attempt": {
+    "attempt_number": 2,
+    "predecessor_result_id": "academic-factual-qa-open-10000-development-product-checkpoint-006-attempt-001-invalid",
+    "permitted_change": "correct-allocation-state-from-frozen-build-only-to-frozen-approved",
+    "dataset_changed": false,
+    "product_method_changed": false,
+    "provider_binding_changed": false,
+    "budget_changed": false,
+    "fresh_exclusive_outputs_required": true,
+    "further_harness_correction_authorized": false
+  },
   "hard_gates": {
     "fully_grounded_factual_success_min": 0.95,
     "fully_grounded_source_family_lower_95_min": 0.93,
@@ -154,5 +166,5 @@
     "semantic_review_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "01a47b66a83702897d7a9e9ae4398ca2327131b98b5c9743bec27fefe61f97ef"
+  "content_sha256": "2801b7ccbab2c81cee9b369bc320e605b1453a257e990d4523b2634720996bed"
 }

@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-28
+Status date: 2026-08-29
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -213,8 +213,14 @@ four AFQC-068 artifacts, prohibits runtime document embedding, preserves the
 hidden-gold opening order, and passes five network-free terminal simulations.
 AFQC-070 records one-time authorization for only this checkpoint after the
 exact OpenAI snapshots, prices, account access, local artifacts, and clean
-no-call preflight were rechecked on 2026-08-29. Final 10,000-case execution,
-private data, automatic promotion, and deployment remain unauthorized.
+no-call preflight were rechecked on 2026-08-29. Attempt 001 then stopped before
+case 1 and before provider I/O because the nested product preflight still saw
+the prospective allocation as `frozen-build-only`. AFQC-071 preserves that
+zero-call invalid result and corrects only the allocation-state marker to
+`frozen-approved` for the plan's sole harness-corrective attempt. The 500+100
+cases, product method, provider binding, budgets, and quality gates are
+unchanged. Final 10,000-case execution, private data, automatic promotion, and
+deployment remain unauthorized.
 
 AFQC-029 records the researcher-directed reliability correction. Attempt 005
 keeps the exact Gemini 3.7 Flash revision and immutable Codex votes but replaces
@@ -932,7 +938,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Checkpoint 006 authorized pending clean execution | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passes the real 2,100-region Qwen qualification; AFQC-069 freezes the unchanged 500+100 product comparison; AFQC-070 grants one-time bounded authority | Execute checkpoint 006 once, publish every outcome, and revoke authority. Do not open the sealed 10,000 cases or rerun checkpoint 005 |
+| Large factual QA | Checkpoint 006 sole corrective attempt authorized | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passes the real 2,100-region Qwen qualification; AFQC-069 freezes the unchanged 500+100 product comparison; AFQC-070 grants one-time bounded authority; AFQC-071 preserves a zero-call nested-preflight failure and corrects only its allocation-state marker | Execute the one fresh corrective attempt, publish every outcome, and revoke authority. Do not open the sealed 10,000 cases or perform another harness correction |
 
 ## Release readiness and critical path
 
@@ -947,7 +953,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | In Progress / Go Deeper | Authorize and complete one real local-Qwen 2,100-region build/load qualification with bounded time, memory, artifact size, exact bindings, and zero product/provider calls |
-| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / checkpoint 006 authorized | Execute the exact 500+100 successor once; keep checkpoint 005 terminal and the sealed 10,000 cases closed until a complete successor passes |
+| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / checkpoint 006 corrective attempt | Execute the exact 500+100 successor once after AFQC-071's allocation-state-only correction; stop after any second invalid execution and keep the sealed 10,000 cases closed until a complete successor passes |
 | 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 6 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
