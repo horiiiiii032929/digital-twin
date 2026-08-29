@@ -1226,12 +1226,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-openai-configuration-and-deployment",
-      "evidence": "Focused command review verified checkpoint-006 validate, simulate, preflight, execute, and resume commands use the locked retrieval extra where needed; npm check includes the build-only validator and every execution mode remains exact-instrument freeze guarded.",
+      "evidence": "Command review verifies the finite reference-validation build, simulation, preflight, execution, resume, scoring, and materialization commands are explicit; provider execution stays exact-instrument freeze guarded and the normal repository gate remains unchanged.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-08-28",
+      "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "12b5f6f1336c91d144725b92e31b581fc8b3f54eb4e17b6c42f9c41a05fdf121"
+      "sha256": "f47ec936a3704fdd0fb38178da9739ae2d93ce746df3fb72867dd412d6371481"
     },
     {
       "audit_status": "audited",
@@ -4504,12 +4504,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual registry/AST review and focused tests confirmed both the global fail-closed guard and the one exact bounded-pilot guard are recognized only at reachable main-entrypoint scope. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+      "evidence": "Manual registry and AST review confirms the pure network-free reference-pool builder is explicitly exempt while its separate paid runner remains registered and reachable-guarded; freeze validation reports complete 100/100 coverage.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
-      "reviewed_at": "2026-08-27",
+      "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "afd9481c124803cf7dadebbbe6d7a154962720148b312ebb29984dbebc1ee96f"
+      "sha256": "ae6077b15542fdfdd119607b38cb585c73831e68c43df195f131c33b04c0af74"
     },
     {
       "audit_status": "audited",
@@ -5670,12 +5670,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused post-run freeze review verifies checkpoint 007 authority is revoked; the repository-wide freeze blocks provider evaluation, final 10,000, private-data, promotion, deployment, and every unregistered operation.",
+      "evidence": "Focused freeze review registers the reference-validation runner for external-model and method execution while granting it no bounded authorization; checkpoint 007, product, final 10,000, private-data, promotion, and deployment authority remain false.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
-      "sha256": "738ec49f54ee3362a1b80255c0338baf036c370c84f2995aab3bf02c4ffa476c"
+      "sha256": "a2b5e60c348a36795efd8365efbc5afd4ccd89f77853c4353cc7e9af8ef491f5"
     },
     {
       "audit_status": "audited",
@@ -7304,6 +7304,72 @@
       "reviewed_at": "2026-08-28",
       "reviewer": "codex-primary-review",
       "sha256": "3e7a21185543c535e2c24b859e324dfabbfa1da3fb155fd6f82a8f9ef8ccb662"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Binding review verifies exact dated direct OpenAI snapshots, store=false, no router or fallback, separate author and target-blind reviewer roles, public sources only, zero retries, an 80-call ceiling, and all execution authority false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_001.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "e6161664469cae621c11e3a3d4d25cbda9af4f2cdcd46137aabedb90f79deac4"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Instrument review verifies 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, deterministic authority, finite outcomes, and closed product/final execution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_001.json",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "4ef7cb8d9535ad9860fd958e7f571e3a01c2660d6b508ebcffe0f02f4360305f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Builder review and repeat execution prove a byte-stable 160-cluster, 800-case public-source pool with exact reserve and target allocations, no overlap with checkpoint 007, no private data, no final access, and zero provider calls.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_open_reference_validation.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "f3e1845754871ed1581a93d31cb59cb47e19cd21df7813783abdbe2114988270"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Runner review verifies source-visible construction, target-blind review inputs, strict schemas, exact identity and cost accounting, atomic resume, deterministic scoring, exclusive materialization, zero automatic product calls, and fail-closed unauthorized preflight.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "8392d4d6f7b1927e51ad79c786756027793a9efa2090274ce00a9c99edb4f1af"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation",
+      "evidence": "Algorithm review verifies exact model response schemas, deterministic action and answer-span comparison, ambiguity, naturalness, leakage and duplicate rejection, complete-cluster selection, and immutable course/modality quotas.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/factual_qa_reference_questions.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "85cfcd9d772684abd1802560eed64e58ce2f077e094b3619dc8f5480dd3f9145"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "reference-question-validation-verification",
+      "evidence": "Six focused tests cover source disjointness, byte stability, truth-visible authoring, blind review separation, exact 500-case selection, quota shortfall, ambiguity and duplicate rejection, and unauthorized preflight closure.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_open_reference_validation.py",
+      "reviewed_at": "2026-08-29",
+      "reviewer": "codex-primary-review",
+      "sha256": "07ca752ccad9788daf16fe58c3c66a5d2625573e92ddb9bf84bb9505aff334ae"
     }
   ],
   "schema_version": 1
