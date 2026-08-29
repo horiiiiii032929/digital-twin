@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-question-validation-001-build",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-reference-validation-pool-001",
+  "corpus_id": "four-public-open-educational-source-families-fresh-complete-regions-003",
+  "code_revision": "f3ca8c366acac93fe2b3d96b1bf781f36ef2f5c0",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "canonical-question-naturalness-review",
+        "version": "checkpoint-007-terminal",
+        "configuration": {
+          "fresh_source_disjoint_clusters": 0,
+          "target_blind_answer_recovery_cases": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "fresh-source-disjoint-candidate-clusters",
+          "value": 0.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 160.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-selected-clusters",
+          "value": 0.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-selected-cases",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "focused-regressions",
+          "value": 0.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": false
+        },
+        {
+          "name": "provider-call-count",
+          "value": 594.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "fresh-source-disjointness",
+          "passed": false,
+          "evidence": "Checkpoint 007 used the known development package and direct audit confirmed two ambiguous reference questions."
+        },
+        {
+          "name": "reviewer-truth-isolation",
+          "passed": false,
+          "evidence": "The prior naturalness reviewer did not independently recover the intended action and exact answer spans from source evidence."
+        },
+        {
+          "name": "deterministic-action-and-span-authority",
+          "passed": false,
+          "evidence": "The prior wording gate did not compare an independently recovered action and source spans with pinned deterministic gold."
+        },
+        {
+          "name": "complete-cluster-quota-selection",
+          "passed": false,
+          "evidence": "No fresh complete-cluster reserve pool or exact post-review course and modality allocation existed."
+        },
+        {
+          "name": "execution-remains-closed",
+          "passed": true,
+          "evidence": "Checkpoint 007 authority is revoked and the sealed final stage remains closed."
+        }
+      ],
+      "failures_by_category": {
+        "ambiguous-reference-question": 2,
+        "missing-independent-answer-recovery": 500
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "source-visible-author-target-blind-reviewer",
+        "version": "reference-question-validation-001-build",
+        "configuration": {
+          "candidate_clusters": 160,
+          "candidate_cases": 800,
+          "target_clusters": 100,
+          "target_cases": 500,
+          "maximum_calls": 80,
+          "maximum_retries": 0,
+          "maximum_cost_usd": 12.0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "fresh-source-disjoint-candidate-clusters",
+          "value": 160.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 160.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-selected-clusters",
+          "value": 100.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-selected-cases",
+          "value": 500.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": true
+        },
+        {
+          "name": "focused-regressions",
+          "value": 6.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "fresh-source-disjointness",
+          "passed": true,
+          "evidence": "The builder deterministically selects 160 complete source clusters disjoint from checkpoint 007 and the sealed final split."
+        },
+        {
+          "name": "reviewer-truth-isolation",
+          "passed": true,
+          "evidence": "The reviewer sees source evidence and candidate wording but not expected action, canonical answer, required spans, or author rationale."
+        },
+        {
+          "name": "deterministic-action-and-span-authority",
+          "passed": true,
+          "evidence": "Code compares independently recovered reviewer action and exact source spans with pinned gold; model output cannot mutate truth."
+        },
+        {
+          "name": "complete-cluster-quota-selection",
+          "passed": true,
+          "evidence": "Only complete five-question clusters may satisfy the exact 100-cluster course and modality allocation; no fallback or quota relaxation is permitted."
+        },
+        {
+          "name": "execution-remains-closed",
+          "passed": true,
+          "evidence": "All paid, provider, product, final, T1, fidelity, promotion, and deployment authority remains false."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "source-visible-author-target-blind-reviewer",
+    "rationale": "The successor directly tests whether a source-grounded question identifies the pinned action and exact answer spans while keeping the reviewer blind to those targets. It passes deterministic build and simulation gates without opening the sealed final set or making a provider call.",
+    "limitations": [
+      "This is build-only evidence and does not establish reference-question quality or product quality.",
+      "The paid 40-batch author/reviewer validation remains separately unauthorized.",
+      "Both prospective model roles use OpenAI snapshots from one provider family and are not independent external human annotation.",
+      "The fresh pool uses open educational sources; Academia Vault, student data, and private materials remain excluded.",
+      "No 500+100 product confirmation, sealed 10,000-case run, T1 promotion, professor-fidelity evaluation, visual evaluation, or deployment occurred."
+    ]
+  }
+}

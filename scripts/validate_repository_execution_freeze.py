@@ -46,6 +46,9 @@ PROTECTED_NAME_PREFIXES = (
     "second_review_",
 )
 ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
+    # This builder is pure and network-free. Provider execution lives in the
+    # separately guarded run_academic_* reference-validation entrypoint.
+    "build_academic_factual_qa_open_reference_validation.py",
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",
     # This analysis-only module has no provider execution mode. Provider calls

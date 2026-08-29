@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-001",
+  "owner_issue": 127,
+  "status": "invalid-execution-authorization-revoked",
+  "successor_of": "academic-factual-qa-open-10000-development-product-checkpoint-007",
+  "decision_question": "Can a source-visible author and a target-blind reviewer produce a fresh 500-case reference set whose intended action and exact source answer are independently recoverable before product evaluation?",
+  "dataset": {
+    "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
+    "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
+    "candidate_cluster_count": 160,
+    "candidate_case_count": 800,
+    "selected_cluster_count": 100,
+    "selected_case_count": 500,
+    "clusters_per_batch": 4,
+    "batch_count": 40,
+    "source_disjoint_from_checkpoint_007": true,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-001",
+    "author_role": "source-visible-question-author",
+    "reviewer_role": "target-blind-answer-reviewer",
+    "author_receives": [
+      "public source context",
+      "course and section identity",
+      "expected action",
+      "canonical answer and exact spans for answerable construction cases",
+      "boundary reason for boundary construction cases"
+    ],
+    "reviewer_receives": [
+      "public source context",
+      "course and section identity",
+      "candidate question"
+    ],
+    "reviewer_never_receives": [
+      "expected action",
+      "canonical answer",
+      "required evidence spans",
+      "author rationale"
+    ],
+    "deterministic_authority": "Compare the blind recovered action and exact answer spans with pinned source-linked gold after all votes are durable.",
+    "complete_cluster_selection": true,
+    "quota_relaxation_allowed": false,
+    "canonical_fallback_allowed": false,
+    "automatic_product_execution_allowed": false
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 80,
+    "maximum_physical_attempts": 80,
+    "maximum_global_transport_retries": 0,
+    "maximum_cost_usd": 12.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "selected_case_count_required": 500,
+    "selected_cluster_count_required": 100,
+    "selected_case_action_recovery_required": 1.0,
+    "selected_case_answer_span_recovery_required": 1.0,
+    "selected_case_unambiguous_required": 1.0,
+    "selected_case_naturalness_required": 1.0,
+    "selected_case_gold_hint_leak_count_max": 0,
+    "selected_case_normalized_duplicate_count_max": 0,
+    "allocation_shortfall_count_max": 0,
+    "provider_completion_rate_required": 1.0,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "627b21f100a7e1b42eed5159c50306cd3ca374e56b637cd82193c9e4f126b1b7"
+}

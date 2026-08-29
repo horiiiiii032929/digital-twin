@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-question-validation-001-invalid",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-reference-validation-pool-001",
+  "corpus_id": "four-public-open-educational-source-families-fresh-complete-regions-003",
+  "code_revision": "f974e5d5ad04963c83450c0029e1c071173bd99a",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "reference-validation-network-free-build-control",
+        "version": "reference-question-validation-001-build",
+        "configuration": {
+          "candidate_clusters": 160,
+          "candidate_cases": 800,
+          "simulated_selected_clusters": 100,
+          "simulated_selected_cases": 500,
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "completed-provider-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "higher-is-better",
+          "threshold": 80.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 12.0,
+          "passed": true
+        },
+        {
+          "name": "transport-retries",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "product-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-reference-validation",
+          "passed": false,
+          "evidence": "The build control is network-free and cannot complete live reference validation."
+        },
+        {
+          "name": "accepted-malformed-response-count-zero",
+          "passed": true,
+          "evidence": "No provider response was produced or accepted in the network-free control."
+        },
+        {
+          "name": "zero-retries",
+          "passed": true,
+          "evidence": "The network-free control used no retry."
+        },
+        {
+          "name": "cost-bound",
+          "passed": true,
+          "evidence": "The network-free control cost was zero."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product call, private-data call, or sealed 10,000-case access occurred."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "source-visible-author-target-blind-reviewer",
+        "version": "reference-question-validation-001-invalid",
+        "configuration": {
+          "author_model": "gpt-5.4-mini-2026-03-17",
+          "reviewer_model": "gpt-5.4-2026-03-05",
+          "maximum_calls": 80,
+          "maximum_retries": 0,
+          "maximum_cost_usd": 12.0,
+          "completed_calls": 7,
+          "completed_author_calls": 4,
+          "completed_reviewer_calls": 3,
+          "input_tokens": 17042,
+          "output_tokens": 7807,
+          "reported_cost_usd": 0.110227,
+          "total_latency_ms": 50364.8822100076,
+          "failure_stage": "author-batch-004-post-response-parse",
+          "failure_type": "provider-schema-local-validator-contract-mismatch",
+          "ignored_ledger_sha256": "63a80bdab3fc1d060368e1aa93b6a6820ac3827dd1e3579c3a20847157193323"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "completed-provider-calls",
+          "value": 7.0,
+          "unit": "calls",
+          "direction": "higher-is-better",
+          "threshold": 80.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.110227,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 12.0,
+          "passed": true
+        },
+        {
+          "name": "transport-retries",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "product-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-reference-validation",
+          "passed": false,
+          "evidence": "Execution stopped after seven completed calls when an author response passed provider schema but failed the local terminal-question-mark invariant."
+        },
+        {
+          "name": "accepted-malformed-response-count-zero",
+          "passed": true,
+          "evidence": "The locally invalid author response was rejected and never entered deterministic scoring."
+        },
+        {
+          "name": "zero-retries",
+          "passed": true,
+          "evidence": "No retry or silent normalization occurred."
+        },
+        {
+          "name": "cost-bound",
+          "passed": true,
+          "evidence": "Reported cost was USD 0.110227 under the USD 12 emergency stop."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product call, private-data call, or sealed 10,000-case access occurred."
+        }
+      ],
+      "failures_by_category": {
+        "provider-schema-local-validator-contract-mismatch": 1,
+        "incomplete-reference-validation": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid, so its question quality cannot be interpreted. Revoke authority and consider only a prospective schema-aligned successor under a new immutable attempt and fresh authorization.",
+    "limitations": [
+      "Only seven of at most 80 calls completed.",
+      "No 500-case reference package or quality metric was produced.",
+      "Provider output remains ignored and unrestricted content is not committed.",
+      "Both reviewer roles use one provider family and no independent human annotation.",
+      "The fresh product confirmation and sealed 10,000-case execution remained closed."
+    ]
+  }
+}

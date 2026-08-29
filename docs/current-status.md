@@ -9,32 +9,8 @@ remain authoritative for the historical runs and claims they document.
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
-closed #139. Checkpoint 006 then completed 500 candidate and 100 control
-responses, but scoring was operationally invalid because public and hidden-gold
-packages intentionally use distinct identities and had no explicit pairing
-manifest. Its 570 abstentions and 30 integrity refusals are diagnostic only and
-are not product-quality evidence.
-
-AFQC-073 is the one finite method-level successor. Checkpoint 007 keeps the
-same 500+100 cases, immutable retrieval, exact OpenAI mini generator, academic
-gates, USD 8 stop, and 666-call ceiling. It adds hash-bound public/gold pairing,
-a strict `answer`/`abstain`/`clarify` response schema, and deterministic release
-only when every claim is a literal contiguous quote from one server-resolved
-cited evidence region. Eighty-eight focused tests and five network-free terminal
-simulations pass. AFQC-074 records one-time provider and paid authority for
-checkpoint 007 only. Final 10,000-case, T1 promotion, fidelity, and deployment
-authority remain false. Issue #127 is the active P0 item; the immediate action
-is the clean preflight and bounded 500+100 execution. No further method
-successor is permitted.
-
-Checkpoint 007 attempt 001 then stopped safely before case 1 with zero provider
-calls or cost because its nested product preflight still asserted checkpoint
-006's historical atomic-generator identity. AFQC-075 preserves this invalid
-execution. AFQC-076 applies the plan's sole harness-only correction by binding
-that assertion to the extractive generator already frozen in both checkpoint
-007 manifests. Cases, truth, retrieval, prompt, model, gates, and budget are
-unchanged. The next execution uses fresh outputs; no further harness correction
-is allowed.
+closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
+produced a valid product-quality estimate.
 
 AFQC-077 closes checkpoint 007 as an invalid-reference stop. The sole
 corrective execution completed 500 candidate and 100 control responses, used
@@ -48,6 +24,25 @@ authority is revoked; the sealed 10,000 cases, T1, fidelity, promotion, and
 deployment remain closed. The next method decision must independently validate
 or replace the reference-question layer on a fresh confirmation set, not patch
 or rerun these 500 cases.
+
+AFQC-078 implements that prospective method decision without rerunning the
+failed questions. It constructs 160 fresh, source-disjoint complete clusters
+(800 cases). GPT-5.4 mini may author wording from source evidence and the
+deterministic target; GPT-5.4 reviews the wording from source evidence while
+remaining blind to the expected action, answer, required spans, and author
+rationale. The reviewer must independently recover the action and exact source
+spans, and code compares those values with pinned truth. Only complete clusters
+may satisfy the exact 100-cluster/500-case course and modality allocation; no
+fallback or quota relaxation is allowed. Six focused tests and the complete
+network-free simulation pass with zero provider calls. AFQC-079 then authorized
+one bounded run. Attempt 001 stopped as `invalid-execution` after seven completed
+calls because the provider schema allowed a question without the terminal
+question mark required by the local validator. The ledger records 17,042 input
+and 7,807 output tokens, USD 0.110227, and zero retries. This is an operational
+contract mismatch, not a question-quality result. AFQC-080 revokes authority;
+a new schema-aligned attempt requires a fresh immutable instrument and separate
+authorization. Fresh 500+100 product confirmation, sealed 10,000 execution,
+T1, fidelity, promotion, and deployment remain unauthorized.
 
 Issues #132 and #134 remain open for their API/UI, method-confirmation, and
 activation gates rather than being treated as completed products.
@@ -983,7 +978,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | OpenAI R1 candidate Go Deeper; deterministic rollback retained | Historical provider evidence remains immutable. Exact GPT-5.4 mini generation, GPT-5.4 nano routine review, and bounded full GPT-5.4 escalation pass active network-free contracts with direct Responses API, one credential, and no fallback | Separately authorized 500-case product development result before profile selection |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Checkpoint 006 terminal invalid / authority revoked | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passed retrieval-index qualification. Checkpoint 006 persisted all 600 responses over 540 successful calls, but its sole corrective execution failed at the public/hidden package-pairing check; descriptive outputs were 570 abstentions and 30 refusals | Make one explicit method-level decision about the scorer/package contract and all-answer abstention pattern. Do not rerun 006, open the sealed 10,000 cases, or claim release readiness |
+| Large factual QA | Reference validation 001 invalid / authority revoked | The earlier synthetic workflow processed 10,000 correlated template rows. AFQC-068 passed retrieval-index qualification. Checkpoints 006/007 remain invalid evidence. The fresh reference method is built, but its first paid validation stopped after seven calls on a provider-schema/local-validator mismatch; no quality estimate exists | Decide whether to build one prospective schema-aligned validation attempt. Do not retry 001, run a fresh 500+100 product confirmation, open the sealed 10,000 cases, or claim release readiness |
 
 ## Release readiness and critical path
 
@@ -997,8 +992,8 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
-| 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | In Progress / Go Deeper | Authorize and complete one real local-Qwen 2,100-region build/load qualification with bounded time, memory, artifact size, exact bindings, and zero product/provider calls |
-| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Blocked / checkpoint 006 terminal invalid | Preserve the complete 600-response evidence and decide the next method prospectively; no third 006 attempt or sealed 10,000 execution |
+| 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
+| 4 | [#127 Flow-independent 10,000-case product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Refine | Preserve invalid validation 001 and decide on one prospective schema-aligned attempt; prepare a fresh 500+100 product confirmation only after a complete pass; keep sealed 10,000 execution closed |
 | 5 | [#105 Evidence-sufficiency successor](https://github.com/horiiiiii032929/digital-twin/issues/105) | Todo / Go Deeper | Preserve the product-integrated two-boundary candidate and select or reject it only after the independent confirmation |
 | 6 | [#110 Synthetic pipeline scale](https://github.com/horiiiiii032929/digital-twin/issues/110) | Done / engineering Keep | Preserve the 10,000-row pipeline result and correction; make no Digital Twin accuracy or independent-sample claim from it |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Todo / development Go Deeper | Preserve T0 as rollback and design one separately frozen T0/T1 multi-turn confirmation before staging selection |
