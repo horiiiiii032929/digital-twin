@@ -21,6 +21,9 @@ INSTRUMENT_006 = ROOT / (
 INSTRUMENT_007 = ROOT / (
     "research/05_evaluation/instruments/course_digital_twin_evaluation_program_007.json"
 )
+INSTRUMENT_008 = ROOT / (
+    "research/05_evaluation/instruments/course_digital_twin_evaluation_program_008.json"
+)
 
 
 def test_program_006_is_terminal_and_preserved() -> None:
@@ -60,6 +63,34 @@ def test_question_targeted_successor_adapter_smoke_is_network_free() -> None:
 
     assert result == {
         "program_id": "course-digital-twin-evaluation-program-007",
+        "status": "passed-network-free-smoke",
+        "response_count": 1,
+        "scored_case_count": 1,
+        "provider_calls": 0,
+        "network_calls": 0,
+        "gold_loaded_after_response_persistence": True,
+    }
+
+
+def test_question_stratified_program_008_is_frozen_and_exactly_matchable() -> None:
+    manifest = load_program_manifest(INSTRUMENT_008)
+    result = runner.validate(INSTRUMENT_008)
+
+    assert manifest.program_id == "course-digital-twin-evaluation-program-008"
+    assert manifest.status == "frozen-authorized"
+    assert manifest.provider_execution_authorized is True
+    assert manifest.paid_execution_authorized is True
+    assert "reference_aggregate_007_cases" in manifest.development_cases_path
+    assert result["status"] == "passed-build-only"
+    assert result["development_required_reference_count"] == 450
+    assert result["development_missing_reference_count"] == 0
+
+
+def test_question_stratified_program_008_adapter_smoke_is_network_free() -> None:
+    result = runner.smoke(INSTRUMENT_008)
+
+    assert result == {
+        "program_id": "course-digital-twin-evaluation-program-008",
         "status": "passed-network-free-smoke",
         "response_count": 1,
         "scored_case_count": 1,

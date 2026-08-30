@@ -40,6 +40,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_open_10000.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_open_reference_aggregate_007.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_development_v2.py": (
             "dataset_generation",
         ),
@@ -399,7 +402,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
         ),
-        "academic-factual-qa-open-10000-reference-question-validation-006": (
+        "academic-factual-qa-open-10000-reference-aggregate-007": (
+            "dataset_generation",
+        ),
+        "course-digital-twin-evaluation-program-008": (
+            "dataset_generation",
             "external_model_evaluation",
             "method_evaluation_execution",
         ),

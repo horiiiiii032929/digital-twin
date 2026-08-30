@@ -362,6 +362,29 @@ closed #139. Checkpoint 006 is terminal invalid evidence; program 007 is a valid
 development `Refine` result whose estimate is explicitly limited by confirmed
 reference-package defects.
 
+AFQC-129 records reference validation 006 as valid `completed-refine` evidence.
+The provider-resilient run completed 106/107 calls at USD 3.19243675. It found
+1,028 passing candidates and at least one passing wording for 449/640 answerable
+targets, but the all-five complete-cluster rule yielded only 71 eligible clusters
+and 315/500 quota-selected cases. Attempt 006 authority is revoked. No product,
+private source, or sealed final split was opened.
+
+AFQC-130 records one explicit sampling-method correction. Aggregate 007 selects
+questions—not complete five-question clusters—from immutable accepted votes in
+attempts 003–006. The resulting 500-case development package contains 400
+answerable and 100 boundary cases, exactly 125 per course and 100 per question
+position, plus a frozen balanced 100-case control. The package spans 134 source
+clusters, which remain the hierarchical uncertainty unit. Reuse of completed
+candidate evidence from the two operationally invalid attempts is disclosed, so
+this is development evidence rather than untouched confirmation.
+
+AFQC-131 freezes `course-digital-twin-evaluation-program-008` under the existing
+USD 50 program authority. It runs the fresh 500+100 actual-product checkpoint and
+automatically proceeds to final construction and 10,000+1,000 only after every
+frozen development gate passes. Repeated approval pauses are removed; privacy,
+gold isolation, exact model identity, ledger integrity, valid-quality stops, and
+the global emergency ceiling remain fail-closed.
+
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
 screen as valid unfavorable evidence. GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6

@@ -1,0 +1,2277 @@
+{
+  "case_count": 100,
+  "construction_instrument_id": "academic-factual-qa-open-10000-reference-aggregate-007",
+  "content_sha256": "c82bc415c2af2690aa35b0a745b12cf31dab222cb886a8a4f19c1f99bbb9d67c",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-reference-aggregate-007-control-gold",
+  "final_split_opened": false,
+  "gold": [
+    {
+      "boundary_reason": null,
+      "canonical_answer": "CSMA improves channel utilization compared to ALOHA.",
+      "case_id": "academic-open-dev3-0001-q1",
+      "claims": [
+        {
+          "answer_span": "CSMA improves channel utilization compared to ALOHA.",
+          "claim_id": "academic-open-dev3-0001-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 56905,
+              "char_start": 56853,
+              "region_id": "source-region-fed595720af15318970004f763de942ca064db7246e74a7a46daba925492c287",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is point (1) in the figure below.",
+      "case_id": "academic-open-dev3-0002-q1",
+      "claims": [
+        {
+          "answer_span": "This is point (1) in the figure below.",
+          "claim_id": "academic-open-dev3-0002-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 57630,
+              "char_start": 57590,
+              "region_id": "source-region-2de7cc14ba1b6b615d53311512d060906c460e139c2e5c159c1f529a3fc9f6f4",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This specification defines several important parameters for Ethernet networks.",
+      "case_id": "academic-open-dev3-0003-q1",
+      "claims": [
+        {
+          "answer_span": "This specification defines several important parameters for Ethernet networks.",
+          "claim_id": "academic-open-dev3-0003-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 641,
+              "char_start": 563,
+              "region_id": "source-region-1cf4e21ecd27d4f92033e7cdede32bb1159599f2e9b05afaacdea1becbf057be",
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "DNS messages are composed of five parts that are named sections in :rfc:1035.",
+      "case_id": "academic-open-dev3-0004-q1",
+      "claims": [
+        {
+          "answer_span": "DNS messages are composed of five parts that are named sections in :rfc:1035.",
+          "claim_id": "academic-open-dev3-0004-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 982,
+              "char_start": 903,
+              "region_id": "source-region-50b671165c0b5733e58160c06d1412902ebd40aba937ffe03acfb0d9f0fae4ea",
+              "source_artifact_id": "computer-networking:protocols/dns.rst",
+              "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "B)=\\log(g^{b} \\mod p)=b`).",
+      "case_id": "academic-open-dev3-0005-q1",
+      "claims": [
+        {
+          "answer_span": "B)=\\log(g^{b} \\mod p)=b`).",
+          "claim_id": "academic-open-dev3-0005-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 43981,
+              "char_start": 43955,
+              "region_id": "source-region-08c96d56cda8f4971f71492ec653752343d0e351789d04abac547cf063db7b3a",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "However, the performance can still be improved, especially in wired networks.",
+      "case_id": "academic-open-dev3-0001-q2",
+      "claims": [
+        {
+          "answer_span": "However, the performance can still be improved, especially in wired networks.",
+          "claim_id": "academic-open-dev3-0001-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 56983,
+              "char_start": 56906,
+              "region_id": "source-region-a1484897ff73349e435113d1cb0b91e17deca188175c0f7fed549e1c069c7778",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This electrical signal will travel along the cable.",
+      "case_id": "academic-open-dev3-0002-q2",
+      "claims": [
+        {
+          "answer_span": "This electrical signal will travel along the cable.",
+          "claim_id": "academic-open-dev3-0002-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 57682,
+              "char_start": 57631,
+              "region_id": "source-region-3f403ead53d6a1ee326ad4170e79441eed69f99322447e41ecfa25b3a32da1b0",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The first decision was to standardize the commercial Ethernet at 10 Mbps.",
+      "case_id": "academic-open-dev3-0003-q2",
+      "claims": [
+        {
+          "answer_span": "The first decision was to standardize the commercial Ethernet at 10 Mbps.",
+          "claim_id": "academic-open-dev3-0003-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 715,
+              "char_start": 642,
+              "region_id": "source-region-9566b205431229734fbbeba6733f4578a7512263bcebeea923f6caba22848e92",
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The first three sections are mandatory and the last two sections are optional.",
+      "case_id": "academic-open-dev3-0004-q2",
+      "claims": [
+        {
+          "answer_span": "The first three sections are mandatory and the last two sections are optional.",
+          "claim_id": "academic-open-dev3-0004-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1061,
+              "char_start": 983,
+              "region_id": "source-region-852c713e5fdef2decf3dac8ecd564a9a8f381d9a60162c69d22ec50abd62614b",
+              "source_artifact_id": "computer-networking:protocols/dns.rst",
+              "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "An example of the utilization of the Diffie-Hellman key exchange is shown below.",
+      "case_id": "academic-open-dev3-0005-q2",
+      "claims": [
+        {
+          "answer_span": "An example of the utilization of the Diffie-Hellman key exchange is shown below.",
+          "claim_id": "academic-open-dev3-0005-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 44063,
+              "char_start": 43983,
+              "region_id": "source-region-0238d1ef9841a6e1e259d2429a3ebe6559ec99accf6a8f071f93757b921e6d13",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Consider the situation of two terminals that are connected to the same cable.",
+      "case_id": "academic-open-dev3-0001-q3",
+      "claims": [
+        {
+          "answer_span": "Consider the situation of two terminals that are connected to the same cable.",
+          "claim_id": "academic-open-dev3-0001-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 57061,
+              "char_start": 56984,
+              "region_id": "source-region-c5cbfd47e7b0e3207e55ec5b8db27e8f65c293b0dfc1fed7f2085a43bec285ab",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The second decision was the duration of the slot time.",
+      "case_id": "academic-open-dev3-0003-q3",
+      "claims": [
+        {
+          "answer_span": "The second decision was the duration of the slot time.",
+          "claim_id": "academic-open-dev3-0003-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 772,
+              "char_start": 716,
+              "region_id": "source-region-9a2194aea90817611b22cac615680132a5bf643e35e55649f7a048d738aec0d9",
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The first section of a DNS message is its Header.",
+      "case_id": "academic-open-dev3-0004-q3",
+      "claims": [
+        {
+          "answer_span": "The first section of a DNS message is its Header.",
+          "claim_id": "academic-open-dev3-0004-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1113,
+              "char_start": 1062,
+              "region_id": "source-region-f11aaf96fb102def9443623d9a3a995389b5dbf9812c7e8fe4902c14ae00c0c0",
+              "source_artifact_id": "computer-networking:protocols/dns.rst",
+              "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Before starting the exchange, Alice and Bob agree on a modulus (:math:p=23) and a base (:math:g=5).",
+      "case_id": "academic-open-dev3-0005-q3",
+      "claims": [
+        {
+          "answer_span": "Before starting the exchange, Alice and Bob agree on a modulus (:math:p=23) and a base (:math:g=5).",
+          "claim_id": "academic-open-dev3-0005-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 44167,
+              "char_start": 44064,
+              "region_id": "source-region-03092d4373bd09726ddbdadb76dbd045a0732af47ab784da9fca1b11b747e080",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Host A stops sending segments when its window is full.",
+      "case_id": "academic-open-dev3-0006-q3",
+      "claims": [
+        {
+          "answer_span": "Host A stops sending segments when its window is full.",
+          "claim_id": "academic-open-dev3-0006-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 91911,
+              "char_start": 91855,
+              "region_id": "source-region-d7af8e2bb50f55cf530a1070368f0bb1a32a1873ab29b916652f51de0643bb73",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "CSMA improves channel utilization compared to ALOHA. However, the performance can still be improved, especially in wired networks.",
+      "case_id": "academic-open-dev3-0001-q4",
+      "claims": [
+        {
+          "answer_span": "CSMA improves channel utilization compared to ALOHA.",
+          "claim_id": "academic-open-dev3-0001-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 56905,
+              "char_start": 56853,
+              "region_id": "source-region-fed595720af15318970004f763de942ca064db7246e74a7a46daba925492c287",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "However, the performance can still be improved, especially in wired networks.",
+          "claim_id": "academic-open-dev3-0001-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 56983,
+              "char_start": 56906,
+              "region_id": "source-region-a1484897ff73349e435113d1cb0b91e17deca188175c0f7fed549e1c069c7778",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is point (1) in the figure below. This electrical signal will travel along the cable.",
+      "case_id": "academic-open-dev3-0002-q4",
+      "claims": [
+        {
+          "answer_span": "This is point (1) in the figure below.",
+          "claim_id": "academic-open-dev3-0002-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 57630,
+              "char_start": 57590,
+              "region_id": "source-region-2de7cc14ba1b6b615d53311512d060906c460e139c2e5c159c1f529a3fc9f6f4",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "This electrical signal will travel along the cable.",
+          "claim_id": "academic-open-dev3-0002-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 57682,
+              "char_start": 57631,
+              "region_id": "source-region-3f403ead53d6a1ee326ad4170e79441eed69f99322447e41ecfa25b3a32da1b0",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This specification defines several important parameters for Ethernet networks. The first decision was to standardize the commercial Ethernet at 10 Mbps.",
+      "case_id": "academic-open-dev3-0003-q4",
+      "claims": [
+        {
+          "answer_span": "This specification defines several important parameters for Ethernet networks.",
+          "claim_id": "academic-open-dev3-0003-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 641,
+              "char_start": 563,
+              "region_id": "source-region-1cf4e21ecd27d4f92033e7cdede32bb1159599f2e9b05afaacdea1becbf057be",
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The first decision was to standardize the commercial Ethernet at 10 Mbps.",
+          "claim_id": "academic-open-dev3-0003-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 715,
+              "char_start": 642,
+              "region_id": "source-region-9566b205431229734fbbeba6733f4578a7512263bcebeea923f6caba22848e92",
+              "source_artifact_id": "computer-networking:protocols/ethernet.rst",
+              "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "DNS messages are composed of five parts that are named sections in :rfc:1035. The first three sections are mandatory and the last two sections are optional.",
+      "case_id": "academic-open-dev3-0004-q4",
+      "claims": [
+        {
+          "answer_span": "DNS messages are composed of five parts that are named sections in :rfc:1035.",
+          "claim_id": "academic-open-dev3-0004-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 982,
+              "char_start": 903,
+              "region_id": "source-region-50b671165c0b5733e58160c06d1412902ebd40aba937ffe03acfb0d9f0fae4ea",
+              "source_artifact_id": "computer-networking:protocols/dns.rst",
+              "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The first three sections are mandatory and the last two sections are optional.",
+          "claim_id": "academic-open-dev3-0004-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1061,
+              "char_start": 983,
+              "region_id": "source-region-852c713e5fdef2decf3dac8ecd564a9a8f381d9a60162c69d22ec50abd62614b",
+              "source_artifact_id": "computer-networking:protocols/dns.rst",
+              "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "B)=\\log(g^{b} \\mod p)=b`). An example of the utilization of the Diffie-Hellman key exchange is shown below.",
+      "case_id": "academic-open-dev3-0005-q4",
+      "claims": [
+        {
+          "answer_span": "B)=\\log(g^{b} \\mod p)=b`).",
+          "claim_id": "academic-open-dev3-0005-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 43981,
+              "char_start": 43955,
+              "region_id": "source-region-08c96d56cda8f4971f71492ec653752343d0e351789d04abac547cf063db7b3a",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "An example of the utilization of the Diffie-Hellman key exchange is shown below.",
+          "claim_id": "academic-open-dev3-0005-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 44063,
+              "char_start": 43983,
+              "region_id": "source-region-0238d1ef9841a6e1e259d2429a3ebe6559ec99accf6a8f071f93757b921e6d13",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev3-0001-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev3-0003-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-open-dev3-0004-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-open-dev3-0005-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-open-dev3-0007-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Compared to sorting, merging the two sorted arrays a0 and a1 is fairly easy.",
+      "case_id": "academic-open-dev3-0041-q1",
+      "claims": [
+        {
+          "answer_span": "Compared to sorting, merging the two sorted arrays a0 and a1 is fairly easy.",
+          "claim_id": "academic-open-dev3-0041-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3672,
+              "char_start": 3592,
+              "region_id": "source-region-d93599baeac8129373c62122c50dfb3c22a0bce572adcecd32cd7ded84ac2c6c",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This isn't a big job; there is only one node, namely u, whose depth exceeds $\\log_{3/2} q$.",
+      "case_id": "academic-open-dev3-0042-q1",
+      "claims": [
+        {
+          "answer_span": "This isn't a big job; there is only one node, namely u, whose depth exceeds $\\log_{3/2} q$.",
+          "claim_id": "academic-open-dev3-0042-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3408,
+              "char_start": 3313,
+              "region_id": "source-region-6dc8d85c22f7033bb26b3c170e8106e8537b362c9264153c679f4672bffeaaf0",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We'll very shortly prove that a scapegoat exists.",
+      "case_id": "academic-open-dev3-0043-q1",
+      "claims": [
+        {
+          "answer_span": "We'll very shortly prove that a scapegoat exists.",
+          "claim_id": "academic-open-dev3-0043-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3805,
+              "char_start": 3756,
+              "region_id": "source-region-ab1d9e961c08363739d9cd8ed7a512eb26dc95a3eb470bf65abeadc395428760",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "To add an element, we would place it in a[j+n] and increment n.",
+      "case_id": "academic-open-dev3-0044-q1",
+      "claims": [
+        {
+          "answer_span": "To add an element, we would place it in a[j+n] and increment n.",
+          "claim_id": "academic-open-dev3-0044-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13194,
+              "char_start": 13127,
+              "region_id": "source-region-20caa913f730d48bddaaa8d83b94ca47e3865d23151cbe977c16f73d2d2e0b9a",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Next, we analyze the amount of extra space used by a RootishArrayStack.",
+      "case_id": "academic-open-dev3-0049-q1",
+      "claims": [
+        {
+          "answer_span": "Next, we analyze the amount of extra space used by a RootishArrayStack.",
+          "claim_id": "academic-open-dev3-0049-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34886,
+              "char_start": 34813,
+              "region_id": "source-region-38638b537824d94db36affef079431bd19617cc44089bf002281ecd57c163448",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We add elements to a one at a time.",
+      "case_id": "academic-open-dev3-0041-q2",
+      "claims": [
+        {
+          "answer_span": "We add elements to a one at a time.",
+          "claim_id": "academic-open-dev3-0041-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3711,
+              "char_start": 3674,
+              "region_id": "source-region-d39fb45af0015516326500817269ae3e88bd5eab59e2c6caa47e9db3b4e93c93",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "For now, we can take it for granted.",
+      "case_id": "academic-open-dev3-0043-q2",
+      "claims": [
+        {
+          "answer_span": "For now, we can take it for granted.",
+          "claim_id": "academic-open-dev3-0043-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3843,
+              "char_start": 3807,
+              "region_id": "source-region-7f3db6049ab6d889bdf97ead9a336104b8f785a94813d89a5570f7aa56b52f60",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "To remove an element, we would remove it from a[j], increment j, and decrement n.",
+      "case_id": "academic-open-dev3-0044-q2",
+      "claims": [
+        {
+          "answer_span": "To remove an element, we would remove it from a[j], increment j, and decrement n.",
+          "claim_id": "academic-open-dev3-0044-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13282,
+              "char_start": 13195,
+              "region_id": "source-region-334ac15114ce05e4cf36debbfdbf98a8c5b7d89ed206c7057bff2cd0b081afb4",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is the kind of arithmetic used when we are talking about the time of day.",
+      "case_id": "academic-open-dev3-0045-q2",
+      "claims": [
+        {
+          "answer_span": "This is the kind of arithmetic used when we are talking about the time of day.",
+          "claim_id": "academic-open-dev3-0045-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13562,
+              "char_start": 13484,
+              "region_id": "source-region-21ee9474c5ce7f39477f92ca716f81386572711712ed6214e0a21273646a0edb",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In particular, we want to count any space used by a RootishArrayStack that is not an array element currently used to hold a list element.",
+      "case_id": "academic-open-dev3-0049-q2",
+      "claims": [
+        {
+          "answer_span": "In particular, we want to count any space used by a RootishArrayStack that is not an array element currently used to hold a list element.",
+          "claim_id": "academic-open-dev3-0049-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 35026,
+              "char_start": 34887,
+              "region_id": "source-region-913396c89aa0b15d499ecdee57c061a82395a348afe6fde21eb499bd170cc1c5",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If a0 or a1 is empty, then we add the next elements from the other (non-empty) array.",
+      "case_id": "academic-open-dev3-0041-q3",
+      "claims": [
+        {
+          "answer_span": "If a0 or a1 is empty, then we add the next elements from the other (non-empty) array.",
+          "claim_id": "academic-open-dev3-0041-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3802,
+              "char_start": 3713,
+              "region_id": "source-region-73d8af63fb64aa3c2a1bf39f47b983452260dbc4dc9a2a0d2efb9c746d8dbed1",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The scapegoat, w, is a very unbalanced node.",
+      "case_id": "academic-open-dev3-0042-q3",
+      "claims": [
+        {
+          "answer_span": "The scapegoat, w, is a very unbalanced node.",
+          "claim_id": "academic-open-dev3-0042-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3543,
+              "char_start": 3497,
+              "region_id": "source-region-2f56d5da42d1b579045149387a004983c2b7384f956b4fc99376b6e32f555086",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Once we've found the scapegoat w, we completely destroy the subtree rooted at w and rebuild it into a perfectly balanced binary search tree.",
+      "case_id": "academic-open-dev3-0043-q3",
+      "claims": [
+        {
+          "answer_span": "Once we've found the scapegoat w, we completely destroy the subtree rooted at w and rebuild it into a perfectly balanced binary search tree.",
+          "claim_id": "academic-open-dev3-0043-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3989,
+              "char_start": 3845,
+              "region_id": "source-region-f58b252cdd5b7395a050d22c07df573cdd552b54410963e9808f0d90d9365745",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Of course, the problem with this solution is that it requires an infinite array.",
+      "case_id": "academic-open-dev3-0044-q3",
+      "claims": [
+        {
+          "answer_span": "Of course, the problem with this solution is that it requires an infinite array.",
+          "claim_id": "academic-open-dev3-0044-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13364,
+              "char_start": 13284,
+              "region_id": "source-region-05944e3fe246e001267af39304dcd579adbd9cd6e7cb479afc2fdec1afb81cf0",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "For example 10:00 plus five hours gives 3:00.",
+      "case_id": "academic-open-dev3-0045-q3",
+      "claims": [
+        {
+          "answer_span": "For example 10:00 plus five hours gives 3:00.",
+          "claim_id": "academic-open-dev3-0045-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13609,
+              "char_start": 13564,
+              "region_id": "source-region-1ff84b0b3e54e01cc39b27ff4ae0dd384134f925d765843fda64e0a4412d5637",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Compared to sorting, merging the two sorted arrays a0 and a1 is fairly easy. We add elements to a one at a time.",
+      "case_id": "academic-open-dev3-0041-q4",
+      "claims": [
+        {
+          "answer_span": "Compared to sorting, merging the two sorted arrays a0 and a1 is fairly easy.",
+          "claim_id": "academic-open-dev3-0041-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3672,
+              "char_start": 3592,
+              "region_id": "source-region-d93599baeac8129373c62122c50dfb3c22a0bce572adcecd32cd7ded84ac2c6c",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "We add elements to a one at a time.",
+          "claim_id": "academic-open-dev3-0041-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 3711,
+              "char_start": 3674,
+              "region_id": "source-region-d39fb45af0015516326500817269ae3e88bd5eab59e2c6caa47e9db3b4e93c93",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We'll very shortly prove that a scapegoat exists. For now, we can take it for granted.",
+      "case_id": "academic-open-dev3-0043-q4",
+      "claims": [
+        {
+          "answer_span": "We'll very shortly prove that a scapegoat exists.",
+          "claim_id": "academic-open-dev3-0043-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3805,
+              "char_start": 3756,
+              "region_id": "source-region-ab1d9e961c08363739d9cd8ed7a512eb26dc95a3eb470bf65abeadc395428760",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "For now, we can take it for granted.",
+          "claim_id": "academic-open-dev3-0043-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 3843,
+              "char_start": 3807,
+              "region_id": "source-region-7f3db6049ab6d889bdf97ead9a336104b8f785a94813d89a5570f7aa56b52f60",
+              "source_artifact_id": "data-structures:latex/scapegoat.tex",
+              "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "To add an element, we would place it in a[j+n] and increment n. To remove an element, we would remove it from a[j], increment j, and decrement n.",
+      "case_id": "academic-open-dev3-0044-q4",
+      "claims": [
+        {
+          "answer_span": "To add an element, we would place it in a[j+n] and increment n.",
+          "claim_id": "academic-open-dev3-0044-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13194,
+              "char_start": 13127,
+              "region_id": "source-region-20caa913f730d48bddaaa8d83b94ca47e3865d23151cbe977c16f73d2d2e0b9a",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "To remove an element, we would remove it from a[j], increment j, and decrement n.",
+          "claim_id": "academic-open-dev3-0044-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 13282,
+              "char_start": 13195,
+              "region_id": "source-region-334ac15114ce05e4cf36debbfdbf98a8c5b7d89ed206c7057bff2cd0b081afb4",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Next, we analyze the amount of extra space used by a RootishArrayStack. In particular, we want to count any space used by a RootishArrayStack that is not an array element currently used to hold a list element.",
+      "case_id": "academic-open-dev3-0049-q4",
+      "claims": [
+        {
+          "answer_span": "Next, we analyze the amount of extra space used by a RootishArrayStack.",
+          "claim_id": "academic-open-dev3-0049-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 34886,
+              "char_start": 34813,
+              "region_id": "source-region-38638b537824d94db36affef079431bd19617cc44089bf002281ecd57c163448",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "In particular, we want to count any space used by a RootishArrayStack that is not an array element currently used to hold a list element.",
+          "claim_id": "academic-open-dev3-0049-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 35026,
+              "char_start": 34887,
+              "region_id": "source-region-913396c89aa0b15d499ecdee57c061a82395a348afe6fde21eb499bd170cc1c5",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The important point about the priority values in a Treap is that they are unique and assigned at random. Because of this, there are two equivalent ways we can think about a Treap.",
+      "case_id": "academic-open-dev3-0051-q4",
+      "claims": [
+        {
+          "answer_span": "The important point about the priority values in a Treap is that they are unique and assigned at random.",
+          "claim_id": "academic-open-dev3-0051-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 12548,
+              "char_start": 12442,
+              "region_id": "source-region-f1bd737db95a6e8d0bcf4c802f6b0ffc773024eab5312ff8bddab56c5c6581ab",
+              "source_artifact_id": "data-structures:latex/rbs.tex",
+              "source_sha256": "17a3340403671b4b5f6c5e6d8ef23ab7a1049fc8857d6849b89981b0b0b41b53",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Because of this, there are two equivalent ways we can think about a Treap.",
+          "claim_id": "academic-open-dev3-0051-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 12626,
+              "char_start": 12550,
+              "region_id": "source-region-7f789d92c1d588a6aa672f696bc172dbd80903f680994c3352fc7b666b6a3c08",
+              "source_artifact_id": "data-structures:latex/rbs.tex",
+              "source_sha256": "17a3340403671b4b5f6c5e6d8ef23ab7a1049fc8857d6849b89981b0b0b41b53",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0002-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0006-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0010-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0014-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0018-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We use **UNIX stream sockets** to send a message to a server and wait for it to response with the exact same string.",
+      "case_id": "academic-open-dev3-0081-q1",
+      "claims": [
+        {
+          "answer_span": "We use **UNIX stream sockets** to send a message to a server and wait for it to response with the exact same string.",
+          "claim_id": "academic-open-dev3-0081-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1004,
+              "char_start": 888,
+              "region_id": "source-region-edb6cb5f84ba5d2eed3376d4864b31c6fe33b555451f14ee381da3750d0d0f2d",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We open a file write some bytes, make a jump using lseek() and repeat two times.",
+      "case_id": "academic-open-dev3-0083-q1",
+      "claims": [
+        {
+          "answer_span": "We open a file write some bytes, make a jump using lseek() and repeat two times.",
+          "claim_id": "academic-open-dev3-0083-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 232,
+              "char_start": 150,
+              "region_id": "source-region-09381322dc544e0ed643309fb96ab7b8f20a1bc6f719beed945f5dcc55e0ec8e",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Let us investigate using strace.",
+      "case_id": "academic-open-dev3-0084-q1",
+      "claims": [
+        {
+          "answer_span": "Let us investigate using strace.",
+          "claim_id": "academic-open-dev3-0084-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 569,
+              "char_start": 535,
+              "region_id": "source-region-24a78c3b9a3027e6231dde3ac9b0da45a484da794c9dd1c147bc1f062362bd67",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We open a my_stdout.txt, close the stdout and then use dup() to duplicate the file descriptor.",
+      "case_id": "academic-open-dev3-0085-q1",
+      "claims": [
+        {
+          "answer_span": "We open a my_stdout.txt, close the stdout and then use dup() to duplicate the file descriptor.",
+          "claim_id": "academic-open-dev3-0085-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3096,
+              "char_start": 2996,
+              "region_id": "source-region-e46083e4df3fa9cb8108d292eef1df2a06d6a6d3ce068171b28e7dbeae5dab01",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Unlike the example in fork.c, this one calls fork() twice more.",
+      "case_id": "academic-open-dev3-0086-q1",
+      "claims": [
+        {
+          "answer_span": "Unlike the example in fork.c, this one calls fork() twice more.",
+          "claim_id": "academic-open-dev3-0086-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1627,
+              "char_start": 1560,
+              "region_id": "source-region-bd8863aabf488f77c67449d2faad3422ac2682737e3b6862da718fd7546d0ac6",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This example is best followed using two terminals.",
+      "case_id": "academic-open-dev3-0081-q2",
+      "claims": [
+        {
+          "answer_span": "This example is best followed using two terminals.",
+          "claim_id": "academic-open-dev3-0081-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1055,
+              "char_start": 1005,
+              "region_id": "source-region-b9500b3c2e505317c543c59cbbb930f8126934103a2a770c12fa1f53ff7f0ba2",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The parent will write at one end of the pipe and the child will read from the other.",
+      "case_id": "academic-open-dev3-0082-q2",
+      "claims": [
+        {
+          "answer_span": "The parent will write at one end of the pipe and the child will read from the other.",
+          "claim_id": "academic-open-dev3-0082-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 583,
+              "char_start": 499,
+              "region_id": "source-region-2f0296a70775375004e87223bc33f068f150bc351ae73826c76b6d9391d8b6bf",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Zones between writes are empty, yet the total size of the sparse.dat keeps track of them.",
+      "case_id": "academic-open-dev3-0083-q2",
+      "claims": [
+        {
+          "answer_span": "Zones between writes are empty, yet the total size of the sparse.dat keeps track of them.",
+          "claim_id": "academic-open-dev3-0083-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 324,
+              "char_start": 233,
+              "region_id": "source-region-223e6fd818077d3928344ad703ba36095359cb287ba4fe461531002f2e889430",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We observe that strings meant for stdout are collected and printed only once.",
+      "case_id": "academic-open-dev3-0084-q2",
+      "claims": [
+        {
+          "answer_span": "We observe that strings meant for stdout are collected and printed only once.",
+          "claim_id": "academic-open-dev3-0084-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 926,
+              "char_start": 847,
+              "region_id": "source-region-3f922da5dc4b85a76f36feb146dea6c00ac05774adb4a6304bb714468505e393",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Can you tell how many processes there will be in the end?",
+      "case_id": "academic-open-dev3-0086-q2",
+      "claims": [
+        {
+          "answer_span": "Can you tell how many processes there will be in the end?",
+          "claim_id": "academic-open-dev3-0086-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1685,
+              "char_start": 1628,
+              "region_id": "source-region-afac101a62c4c25e66a9548dc4388d956361c4fe768451491ea03ae1506f8c3a",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "First we start the server, which will block waiting for a connection.",
+      "case_id": "academic-open-dev3-0081-q3",
+      "claims": [
+        {
+          "answer_span": "First we start the server, which will block waiting for a connection.",
+          "claim_id": "academic-open-dev3-0081-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1126,
+              "char_start": 1057,
+              "region_id": "source-region-38f1914c819583e3ff227eef5849ed33cb2b51937f07127b43648e4361544b40",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "After the calling dup(), the output will be redirected to my_stdout.txt.",
+      "case_id": "academic-open-dev3-0085-q3",
+      "claims": [
+        {
+          "answer_span": "After the calling dup(), the output will be redirected to my_stdout.txt.",
+          "claim_id": "academic-open-dev3-0085-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3503,
+              "char_start": 3427,
+              "region_id": "source-region-42f4dcff551350cecf629b74086bcb5e05dbc8b818eaca986876476686c179f8",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Note that after they're created, the processes act independently.",
+      "case_id": "academic-open-dev3-0086-q3",
+      "claims": [
+        {
+          "answer_span": "Note that after they're created, the processes act independently.",
+          "claim_id": "academic-open-dev3-0086-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2394,
+              "char_start": 2329,
+              "region_id": "source-region-8a99e4c398167115ba25915260919c44c9a528becd1e5619df4a2ae51967fe95",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Thread 2: locked resource 2. Waiting for resource 1...",
+      "case_id": "academic-open-dev3-0090-q3",
+      "claims": [
+        {
+          "answer_span": "Thread 2: locked resource 2. Waiting for resource 1...",
+          "claim_id": "academic-open-dev3-0090-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4351,
+              "char_start": 4297,
+              "region_id": "source-region-65d97f421f4b8d4eb628538d00c8236d3e72f6d03b2f228bfbe62d9acb1a4ce4",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/mutual-exclusion.md",
+              "source_sha256": "d50562c5c7dced12b4bbff1f7b18d31a779fdc164cc80c9169603c1a6e8ea028",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Total space 300.132 GB",
+      "case_id": "academic-open-dev3-0091-q3",
+      "claims": [
+        {
+          "answer_span": "Total space 300.132 GB",
+          "claim_id": "academic-open-dev3-0091-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1280,
+              "char_start": 1258,
+              "region_id": "source-region-33b6e7ec3ea66281f62baf60e6efbd64c6bb464c61637b60573d8d11d0009a42",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/devices/README.md",
+              "source_sha256": "b4cc4131c82d0c127bda26f73b757ec49111081974cb576d15b446b9c6301fe0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We use **UNIX stream sockets** to send a message to a server and wait for it to response with the exact same string. This example is best followed using two terminals.",
+      "case_id": "academic-open-dev3-0081-q4",
+      "claims": [
+        {
+          "answer_span": "We use **UNIX stream sockets** to send a message to a server and wait for it to response with the exact same string.",
+          "claim_id": "academic-open-dev3-0081-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1004,
+              "char_start": 888,
+              "region_id": "source-region-edb6cb5f84ba5d2eed3376d4864b31c6fe33b555451f14ee381da3750d0d0f2d",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "This example is best followed using two terminals.",
+          "claim_id": "academic-open-dev3-0081-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1055,
+              "char_start": 1005,
+              "region_id": "source-region-b9500b3c2e505317c543c59cbbb930f8126934103a2a770c12fa1f53ff7f0ba2",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We use the mkfifo() to create a pipe and then proceed to open it from two processes. The parent will write at one end of the pipe and the child will read from the other.",
+      "case_id": "academic-open-dev3-0082-q4",
+      "claims": [
+        {
+          "answer_span": "We use the mkfifo() to create a pipe and then proceed to open it from two processes.",
+          "claim_id": "academic-open-dev3-0082-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 498,
+              "char_start": 412,
+              "region_id": "source-region-9386233d0b129a003fb214f2ee41498853c53e654cc2e67d0f08b299d2c17d35",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The parent will write at one end of the pipe and the child will read from the other.",
+          "claim_id": "academic-open-dev3-0082-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 583,
+              "char_start": 499,
+              "region_id": "source-region-2f0296a70775375004e87223bc33f068f150bc351ae73826c76b6d9391d8b6bf",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/IPC/README.md",
+              "source_sha256": "857eea68332b36b2cf7e758d66b01ffbb34a5d045a425e734cd74a88541f9737",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We open a file write some bytes, make a jump using lseek() and repeat two times. Zones between writes are empty, yet the total size of the sparse.dat keeps track of them.",
+      "case_id": "academic-open-dev3-0083-q4",
+      "claims": [
+        {
+          "answer_span": "We open a file write some bytes, make a jump using lseek() and repeat two times.",
+          "claim_id": "academic-open-dev3-0083-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 232,
+              "char_start": 150,
+              "region_id": "source-region-09381322dc544e0ed643309fb96ab7b8f20a1bc6f719beed945f5dcc55e0ec8e",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Zones between writes are empty, yet the total size of the sparse.dat keeps track of them.",
+          "claim_id": "academic-open-dev3-0083-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 324,
+              "char_start": 233,
+              "region_id": "source-region-223e6fd818077d3928344ad703ba36095359cb287ba4fe461531002f2e889430",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/file-interface/README.md",
+              "source_sha256": "60fdf6b3da4417b393074837747b7969a316dd7800e66655413d9b1dbc4ef0a8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Unlike the example in fork.c, this one calls fork() twice more. Can you tell how many processes there will be in the end?",
+      "case_id": "academic-open-dev3-0086-q4",
+      "claims": [
+        {
+          "answer_span": "Unlike the example in fork.c, this one calls fork() twice more.",
+          "claim_id": "academic-open-dev3-0086-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1627,
+              "char_start": 1560,
+              "region_id": "source-region-bd8863aabf488f77c67449d2faad3422ac2682737e3b6862da718fd7546d0ac6",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Can you tell how many processes there will be in the end?",
+          "claim_id": "academic-open-dev3-0086-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1685,
+              "char_start": 1628,
+              "region_id": "source-region-afac101a62c4c25e66a9548dc4388d956361c4fe768451491ea03ae1506f8c3a",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~/.../compute/lecture/demo/deadlock$ python3 deadlock.py",
+      "case_id": "academic-open-dev3-0090-q4",
+      "claims": [
+        {
+          "answer_span": "student@os:~/.../compute/lecture/demo/deadlock$ python3 deadlock.py",
+          "claim_id": "academic-open-dev3-0090-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4355,
+              "char_start": 4163,
+              "region_id": "source-region-b3ae3d9d14d00b27271812c1c4d61da9b8b1a66286cc6e323948aacfc4fa3a21",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/mutual-exclusion.md",
+              "source_sha256": "d50562c5c7dced12b4bbff1f7b18d31a779fdc164cc80c9169603c1a6e8ea028",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0042-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0046-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0050-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0054-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0058-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This statement checks whether x is positive.",
+      "case_id": "academic-open-dev3-0121-q1",
+      "claims": [
+        {
+          "answer_span": "This statement checks whether x is positive.",
+          "claim_id": "academic-open-dev3-0121-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11031,
+              "char_start": 10985,
+              "region_id": "source-region-01081684731e989469f21164eb73e4be58abe62f74b1d51e4141706be3c4c668",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Jupyter doesn't show it.",
+      "case_id": "academic-open-dev3-0122-q1",
+      "claims": [
+        {
+          "answer_span": "Jupyter doesn't show it.",
+          "claim_id": "academic-open-dev3-0122-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3552,
+              "char_start": 3528,
+              "region_id": "source-region-6ac7b6d60f36ed3ca4a700bd5d2a92d4f04bb209da5ce2bfdc68985a73f590d9",
+              "source_artifact_id": "python-programming:chapters/chap06.ipynb",
+              "source_sha256": "4f0152c49afd2832099b548d6a865563a1967b4c693f4a23e6c5076ca0acabf8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We can repeat this process to generate as many words as we want.",
+      "case_id": "academic-open-dev3-0123-q1",
+      "claims": [
+        {
+          "answer_span": "We can repeat this process to generate as many words as we want.",
+          "claim_id": "academic-open-dev3-0123-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 22389,
+              "char_start": 22325,
+              "region_id": "source-region-91c98567e45bfaef15b0b1b2464fd7266b2c8a9dc52402dda9fe629e0e170603",
+              "source_artifact_id": "python-programming:chapters/chap12.ipynb",
+              "source_sha256": "baf6945c0793089b589574e57ee5e3e5ecdc10adef5897ff6da95072b30bbb27",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "An expression that calls a function is a **function call**.",
+      "case_id": "academic-open-dev3-0124-q1",
+      "claims": [
+        {
+          "answer_span": "An expression that calls a function is a **function call**.",
+          "claim_id": "academic-open-dev3-0124-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5815,
+              "char_start": 5756,
+              "region_id": "source-region-cb11cff94ed6a78279f71f22549adcaa80c963bb3e32b8c96f32f20dbd63c96e",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "I suggest you avoid them when you can.",
+      "case_id": "academic-open-dev3-0125-q1",
+      "claims": [
+        {
+          "answer_span": "I suggest you avoid them when you can.",
+          "claim_id": "academic-open-dev3-0125-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8151,
+              "char_start": 8113,
+              "region_id": "source-region-db4bb2f04006302cc368ce515eab5d2a1d65e029591299d8da11e50478aa2943",
+              "source_artifact_id": "python-programming:chapters/chap05.ipynb",
+              "source_sha256": "90162c847dfb4697c3d95e68a47602d8b6610f8801fd5a610ea048ed1b8d7824",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If so, it computes its logarithm.",
+      "case_id": "academic-open-dev3-0121-q2",
+      "claims": [
+        {
+          "answer_span": "If so, it computes its logarithm.",
+          "claim_id": "academic-open-dev3-0121-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11065,
+              "char_start": 11032,
+              "region_id": "source-region-64ed0e220311cb7d0f8a341359632f34a4d946b2803422c07c1880725ce99073",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "As an example, let's start with the word 'although'.",
+      "case_id": "academic-open-dev3-0123-q2",
+      "claims": [
+        {
+          "answer_span": "As an example, let's start with the word 'although'.",
+          "claim_id": "academic-open-dev3-0123-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 22444,
+              "char_start": 22390,
+              "region_id": "source-region-61dcb445eb187f3f06d1cc4d37e0a5ffd01d1a1029cac0dbb2e3c1abc3148d39",
+              "source_artifact_id": "python-programming:chapters/chap12.ipynb",
+              "source_sha256": "baf6945c0793089b589574e57ee5e3e5ecdc10adef5897ff6da95072b30bbb27",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When you call a function, the parentheses are required.",
+      "case_id": "academic-open-dev3-0124-q2",
+      "claims": [
+        {
+          "answer_span": "When you call a function, the parentheses are required.",
+          "claim_id": "academic-open-dev3-0124-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5872,
+              "char_start": 5817,
+              "region_id": "source-region-f047f867d034eefffbaca7b9acc8df38180a31f3b8b0de086f936b65925df491",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Logical operators often provide a way to simplify nested conditional statements.",
+      "case_id": "academic-open-dev3-0125-q2",
+      "claims": [
+        {
+          "answer_span": "Logical operators often provide a way to simplify nested conditional statements.",
+          "claim_id": "academic-open-dev3-0125-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8233,
+              "char_start": 8153,
+              "region_id": "source-region-203fb19473a7c1eaf440b5273fa22653117d622a4d39e0af397869503a42364d",
+              "source_artifact_id": "python-programming:chapters/chap05.ipynb",
+              "source_sha256": "90162c847dfb4697c3d95e68a47602d8b6610f8801fd5a610ea048ed1b8d7824",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The type of a floating-point number is float.",
+      "case_id": "academic-open-dev3-0126-q2",
+      "claims": [
+        {
+          "answer_span": "The type of a floating-point number is float.",
+          "claim_id": "academic-open-dev3-0126-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8884,
+              "char_start": 8837,
+              "region_id": "source-region-e227db46fc4be4779782c47dfb0f5a8df4e510a5d4ba2944b190f2a8dc81e56a",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If not, math.log would raise a ValueError.",
+      "case_id": "academic-open-dev3-0121-q3",
+      "claims": [
+        {
+          "answer_span": "If not, math.log would raise a ValueError.",
+          "claim_id": "academic-open-dev3-0121-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11111,
+              "char_start": 11067,
+              "region_id": "source-region-24fc9a43345db1f6798fde49fa74070658ba7a26dbaf466d28db93f5863eb62f",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The return value from repeat is None.",
+      "case_id": "academic-open-dev3-0122-q3",
+      "claims": [
+        {
+          "answer_span": "The return value from repeat is None.",
+          "claim_id": "academic-open-dev3-0122-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3662,
+              "char_start": 3621,
+              "region_id": "source-region-e0d87a4c715c6d712236a710b91f7a257f47ae5033674b09c96ea3f4f478f293",
+              "source_artifact_id": "python-programming:chapters/chap06.ipynb",
+              "source_sha256": "4f0152c49afd2832099b548d6a865563a1967b4c693f4a23e6c5076ca0acabf8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Here are the words that can follow it.",
+      "case_id": "academic-open-dev3-0123-q3",
+      "claims": [
+        {
+          "answer_span": "Here are the words that can follow it.",
+          "claim_id": "academic-open-dev3-0123-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 22483,
+              "char_start": 22445,
+              "region_id": "source-region-46f232458b960df35ff8d397266d07739270bd91e954e6ebcddf8cd2a6ae0a92",
+              "source_artifact_id": "python-programming:chapters/chap12.ipynb",
+              "source_sha256": "baf6945c0793089b589574e57ee5e3e5ecdc10adef5897ff6da95072b30bbb27",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If you leave them out, you get an error message.",
+      "case_id": "academic-open-dev3-0124-q3",
+      "claims": [
+        {
+          "answer_span": "If you leave them out, you get an error message.",
+          "claim_id": "academic-open-dev3-0124-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5921,
+              "char_start": 5873,
+              "region_id": "source-region-2ea447a240e5debeeee7a0515b1686513123d2d74af83ca19510806e5eb52ca9",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Here's an example with a nested conditional.",
+      "case_id": "academic-open-dev3-0125-q3",
+      "claims": [
+        {
+          "answer_span": "Here's an example with a nested conditional.",
+          "claim_id": "academic-open-dev3-0125-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8278,
+              "char_start": 8234,
+              "region_id": "source-region-26e1e4141fe80fcd8abf66d07c800b37e381a9624ccdba7ea54bc550d02fa789",
+              "source_artifact_id": "python-programming:chapters/chap05.ipynb",
+              "source_sha256": "90162c847dfb4697c3d95e68a47602d8b6610f8801fd5a610ea048ed1b8d7824",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This statement checks whether x is positive. If so, it computes its logarithm.",
+      "case_id": "academic-open-dev3-0121-q4",
+      "claims": [
+        {
+          "answer_span": "This statement checks whether x is positive.",
+          "claim_id": "academic-open-dev3-0121-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11031,
+              "char_start": 10985,
+              "region_id": "source-region-01081684731e989469f21164eb73e4be58abe62f74b1d51e4141706be3c4c668",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "If so, it computes its logarithm.",
+          "claim_id": "academic-open-dev3-0121-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 11065,
+              "char_start": 11032,
+              "region_id": "source-region-64ed0e220311cb7d0f8a341359632f34a4d946b2803422c07c1880725ce99073",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We can repeat this process to generate as many words as we want. As an example, let's start with the word 'although'.",
+      "case_id": "academic-open-dev3-0123-q4",
+      "claims": [
+        {
+          "answer_span": "We can repeat this process to generate as many words as we want.",
+          "claim_id": "academic-open-dev3-0123-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 22389,
+              "char_start": 22325,
+              "region_id": "source-region-91c98567e45bfaef15b0b1b2464fd7266b2c8a9dc52402dda9fe629e0e170603",
+              "source_artifact_id": "python-programming:chapters/chap12.ipynb",
+              "source_sha256": "baf6945c0793089b589574e57ee5e3e5ecdc10adef5897ff6da95072b30bbb27",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "As an example, let's start with the word 'although'.",
+          "claim_id": "academic-open-dev3-0123-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 22444,
+              "char_start": 22390,
+              "region_id": "source-region-61dcb445eb187f3f06d1cc4d37e0a5ffd01d1a1029cac0dbb2e3c1abc3148d39",
+              "source_artifact_id": "python-programming:chapters/chap12.ipynb",
+              "source_sha256": "baf6945c0793089b589574e57ee5e3e5ecdc10adef5897ff6da95072b30bbb27",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "An expression that calls a function is a **function call**. When you call a function, the parentheses are required.",
+      "case_id": "academic-open-dev3-0124-q4",
+      "claims": [
+        {
+          "answer_span": "An expression that calls a function is a **function call**.",
+          "claim_id": "academic-open-dev3-0124-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5815,
+              "char_start": 5756,
+              "region_id": "source-region-cb11cff94ed6a78279f71f22549adcaa80c963bb3e32b8c96f32f20dbd63c96e",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "When you call a function, the parentheses are required.",
+          "claim_id": "academic-open-dev3-0124-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 5872,
+              "char_start": 5817,
+              "region_id": "source-region-f047f867d034eefffbaca7b9acc8df38180a31f3b8b0de086f936b65925df491",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "I suggest you avoid them when you can. Logical operators often provide a way to simplify nested conditional statements.",
+      "case_id": "academic-open-dev3-0125-q4",
+      "claims": [
+        {
+          "answer_span": "I suggest you avoid them when you can.",
+          "claim_id": "academic-open-dev3-0125-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8151,
+              "char_start": 8113,
+              "region_id": "source-region-db4bb2f04006302cc368ce515eab5d2a1d65e029591299d8da11e50478aa2943",
+              "source_artifact_id": "python-programming:chapters/chap05.ipynb",
+              "source_sha256": "90162c847dfb4697c3d95e68a47602d8b6610f8801fd5a610ea048ed1b8d7824",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Logical operators often provide a way to simplify nested conditional statements.",
+          "claim_id": "academic-open-dev3-0125-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 8233,
+              "char_start": 8153,
+              "region_id": "source-region-203fb19473a7c1eaf440b5273fa22653117d622a4d39e0af397869503a42364d",
+              "source_artifact_id": "python-programming:chapters/chap05.ipynb",
+              "source_sha256": "90162c847dfb4697c3d95e68a47602d8b6610f8801fd5a610ea048ed1b8d7824",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The type of an integer is int. The type of a floating-point number is float.",
+      "case_id": "academic-open-dev3-0126-q4",
+      "claims": [
+        {
+          "answer_span": "The type of an integer is int.",
+          "claim_id": "academic-open-dev3-0126-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8812,
+              "char_start": 8780,
+              "region_id": "source-region-ab4734a45eb95baf9db8eb323742f1dfbb0dc7a0d32d850091521f7581dd3b53",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The type of a floating-point number is float.",
+          "claim_id": "academic-open-dev3-0126-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 8884,
+              "char_start": 8837,
+              "region_id": "source-region-e227db46fc4be4779782c47dfb0f5a8df4e510a5d4ba2944b190f2a8dc81e56a",
+              "source_artifact_id": "python-programming:chapters/chap01.ipynb",
+              "source_sha256": "3a3839a16a46fa52e5e486cf3a4c052a598bde242cf1b13aace98496bc1e1aba",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0082-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0086-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0090-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0094-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-open-dev3-0098-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    }
+  ],
+  "private_data_used": false,
+  "schema_version": 1
+}

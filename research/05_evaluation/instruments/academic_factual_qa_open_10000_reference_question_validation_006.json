@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-006",
   "owner_issue": 127,
-  "status": "frozen-authorized",
+  "status": "completed-refine-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-reference-question-validation-005",
   "decision_question": "Can the unchanged three-candidate method produce 100 complete source-linked clusters when isolated non-completed provider batches are quarantined rather than terminating all valid evidence?",
   "dataset": {
@@ -75,11 +75,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "9856201c6dca6ccf7d0d4404a17d7ba941e767588d2c7a669d168335a3ae4d6c"
+  "content_sha256": "d4500b034c4131ff770bdc0813694c8c770257c449276a4280175c2dc5fd9742"
 }

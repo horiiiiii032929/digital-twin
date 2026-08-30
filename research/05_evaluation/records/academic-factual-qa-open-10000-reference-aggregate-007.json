@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-aggregate-007",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-reference-aggregate-007",
+  "corpus_id": "four-public-open-educational-source-families-question-stratified-development",
+  "code_revision": "59bfa85b4d5f952800b0bb0117e287f07267cdb9",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "complete-five-question-cluster-selection",
+        "version": "reference-validation-006",
+        "configuration": {
+          "candidate_case_count": 800,
+          "eligible_cluster_count": 71,
+          "quota_selected_case_count": 315,
+          "provider_calls": 107,
+          "reported_cost_usd": 3.19243675
+        }
+      },
+      "metrics": [
+        {
+          "name": "complete-case-count",
+          "value": 315,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500,
+          "passed": false
+        },
+        {
+          "name": "accepted-answer-question-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 0,
+          "unit": "questions",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "balanced-question-level-package",
+          "passed": false,
+          "evidence": "Complete-cluster selection produced only 315 of 500 quota-selected cases."
+        },
+        {
+          "name": "authoritative-lineage",
+          "passed": true,
+          "evidence": "Every selected control question retained the original source-linked truth checks."
+        },
+        {
+          "name": "private-and-final-closure",
+          "passed": true,
+          "evidence": "The control used public development sources and did not open product or final stages."
+        }
+      ],
+      "failures_by_category": {
+        "complete-cluster-shortfall": 37
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "question-stratified-source-linked-reference-package",
+        "version": "aggregate-007",
+        "configuration": {
+          "case_count": 500,
+          "answerable_count": 400,
+          "boundary_count": 100,
+          "source_cluster_count": 134,
+          "course_count_each": 125,
+          "question_position_count_each": 100,
+          "control_case_count": 100,
+          "cases_sha256": "5ab1401f9676394888ca5c851cc272f6a40a3c56082b4aa696d33da6d2063807",
+          "gold_sha256": "8b8aceb020f9550df54d67d06989fd6a58e68a878ad64c3e7670d567aedb04ec",
+          "sources_sha256": "96e80678533eccd557526119bc51e2049daffaa57e0bf203a04e83a33f2ea841",
+          "provider_calls": 0,
+          "product_calls": 0,
+          "reported_cost_usd": 0.0
+        }
+      },
+      "metrics": [
+        {
+          "name": "complete-case-count",
+          "value": 500,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500,
+          "passed": true
+        },
+        {
+          "name": "accepted-answer-question-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-count",
+          "value": 0,
+          "unit": "questions",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "balanced-question-level-package",
+          "passed": true,
+          "evidence": "Four courses and five question positions satisfy the frozen aggregate quotas."
+        },
+        {
+          "name": "authoritative-lineage",
+          "passed": true,
+          "evidence": "Answerable cases retain exact source claims; boundary cases contain no evidence lineage."
+        },
+        {
+          "name": "private-and-final-closure",
+          "passed": true,
+          "evidence": "No private data, product execution, or final split was opened."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "question-stratified-source-linked-reference-package",
+    "rationale": "Use aggregate 007 for one actual-product 500+100 development confirmation; retain source clusters as the uncertainty unit and keep the final split sealed.",
+    "limitations": [
+      "Post-hoc development-package aggregation after complete-cluster failures.",
+      "Accepted candidate-level evidence includes completed calls from operationally invalid attempts, with provenance retained.",
+      "Same-provider model review and no external human annotation.",
+      "Not a confirmatory or professor-fidelity result."
+    ]
+  }
+}
