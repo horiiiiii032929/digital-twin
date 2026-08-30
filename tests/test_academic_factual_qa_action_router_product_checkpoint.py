@@ -25,6 +25,9 @@ def test_action_router_checkpoint_is_finite_and_bounded_authorized() -> None:
     assert binding["authorization"]["final_execution_authorized"] is False
     assert binding["metadata_status"] == "fresh"
     assert binding["data_controls"]["responses_store"] is False
+    assert binding["providers"]["embedding"]["batch_size"] == 64
+    assert instrument["execution"]["harness_corrections_used"] == 1
+    assert instrument["execution"]["maximum_harness_corrections"] == 1
 
 
 def test_action_router_candidate_is_an_explicit_method_level_successor() -> None:

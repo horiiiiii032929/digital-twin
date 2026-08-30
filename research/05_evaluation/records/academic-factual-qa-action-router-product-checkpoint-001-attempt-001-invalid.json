@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-action-router-product-checkpoint-001-attempt-001-invalid",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001",
+  "corpus_id": "four-pinned-open-educational-source-families-action-router-001",
+  "code_revision": "f9f282711bfe0d84ba6fbf9690ee17f359c1303a",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "action-router-targeted-atomic-product-checkpoint",
+        "version": "attempt-001-invalid",
+        "configuration": {
+          "failure_stage": "embedding-materialization-construction",
+          "failure_type": "ValueError",
+          "failure_detail": "batch_size must be between 1 and 64",
+          "configured_embedding_batch_size": 128,
+          "client_maximum_embedding_batch_size": 64,
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0,
+          "hidden_gold_loaded": false,
+          "final_10000_opened": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 620.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": true
+        },
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "embedding-client-contract",
+          "passed": false,
+          "evidence": "The configured batch size 128 exceeded the client maximum 64."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "Construction stopped before the first provider call."
+        },
+        {
+          "name": "gold-and-final-closure",
+          "passed": true,
+          "evidence": "Hidden gold and the sealed 10,000 cases remained unopened."
+        }
+      ],
+      "failures_by_category": {
+        "embedding-batch-contract-defect": 1,
+        "incomplete-product-execution": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid before provider I/O. Preserve it and apply the single harness-only correction by reducing the embedding batch from 128 to 64.",
+    "limitations": [
+      "No product-quality metric can be interpreted from this attempt.",
+      "No provider call or paid usage occurred.",
+      "Attempt 002 is the final permitted execution attempt."
+    ]
+  }
+}

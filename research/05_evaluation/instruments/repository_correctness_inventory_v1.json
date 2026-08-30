@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cedd62d8e262cc8fc7912a36717802d4a86a03c00991e53bf3563b5b858fd022",
+  "record_sha256": "85e99e6cb6bde03eba5bc7283bd1d2f33548e9fcb14ad5d258ac54d15be95c1d",
   "records": [
     {
       "audit": {
@@ -1635,7 +1635,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_checkpoint_001.json",
       "risk": "high",
-      "sha256": "bd0b44b9bc7a4d30f68444cf18a7845b30d7145048b8059602693ad6e4f98bc2"
+      "sha256": "64dedd7742ecb8b0d4572f2b9598f5a708bf95cda57c54d84de10f65e83f6396"
     },
     {
       "audit": {
@@ -1667,7 +1667,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
       "risk": "high",
-      "sha256": "e2e92e35e0c789ca56b02853ee3ef29e9ff2ce31bea783341a35e8b79ad99555"
+      "sha256": "5f49b50045c3caa5e90e6b281fa57060aaf05ccbd79f229f87f7904793e0fd14"
     },
     {
       "audit": {
@@ -4986,7 +4986,7 @@
       ],
       "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "high",
-      "sha256": "7132abadfb3869799077849a85e1f9f7b0eddc23e6f207bce2980a48322adfa6"
+      "sha256": "8c309a049c9d835685a60c37741c1eda43cb7aefda295f530f1cc7942842ac0d"
     },
     {
       "audit": {
@@ -10813,7 +10813,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "medium",
-      "sha256": "b9efb39810f81d5b4cbc0b9557829d21737bfe9f5d1d96e9ef87096de73c1a70"
+      "sha256": "c0780ac2a79ea861e6f0da4dc8eb6e81824181d3b4d816d5fba337d80a4e0934"
     },
     {
       "audit": {

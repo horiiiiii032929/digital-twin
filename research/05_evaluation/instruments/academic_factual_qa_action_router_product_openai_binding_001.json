@@ -5,7 +5,7 @@
     "provider_execution_authorized": true
   },
   "binding_id": "academic-factual-qa-action-router-product-openai-binding-001",
-  "content_sha256": "2685214626d9caf909088ccb336adbd20b3120f49a24f697e2a29735c21ad473",
+  "content_sha256": "35ee8ba31dee942cdba4af2bc6ead355025d502a267767904dde9f51f6342974",
   "data_controls": {
     "abuse_monitoring_retention_days_max": 30,
     "api_training_default": "not-used-unless-explicitly-opted-in",
@@ -24,7 +24,7 @@
   ],
   "providers": {
     "embedding": {
-      "batch_size": 128,
+      "batch_size": 64,
       "dimensions": 1536,
       "input_price_usd_per_million": 0.02,
       "maximum_transport_retries": 0,

@@ -14,7 +14,7 @@
     "generator": "openai-gpt-5.4-mini-question-targeted-atomic-v1",
     "retriever": "atomic-bm25-openai-small-rrf-v1"
   },
-  "content_sha256": "5667676981aba1b641cf472f952d1f170d7fa919cf532248981ed8d31c60a67c",
+  "content_sha256": "103802963a9dc2cb33645dfc456e462a2791ee33abc0819a5ea7189130ac432f",
   "control_method": {
     "action_router": "none-historical-control",
     "evidence_gate": "atomic-structured-coverage-control-v1",
@@ -38,12 +38,16 @@
   "execution": {
     "atomic_sqlite_checkpoints": true,
     "automatic_final_10000_progression": false,
+    "execution_attempt_id": "academic-factual-qa-action-router-product-checkpoint-001-attempt-002",
+    "harness_corrections_used": 1,
     "hidden_gold_after_both_response_ledgers": true,
     "maximum_cost_usd": 8.0,
     "maximum_embedding_calls": 20,
+    "maximum_harness_corrections": 1,
     "maximum_product_calls": 600,
     "maximum_total_calls": 620,
     "maximum_transport_retries": 0,
+    "predecessor_result_id": "academic-factual-qa-action-router-product-checkpoint-001-attempt-001-invalid",
     "safe_resume": true,
     "stage_order": [
       "embedding-materialization",
@@ -76,7 +80,7 @@
   "instrument_id": "academic-factual-qa-action-router-product-checkpoint-001",
   "owner_issue": 127,
   "provider_binding": {
-    "content_sha256": "2685214626d9caf909088ccb336adbd20b3120f49a24f697e2a29735c21ad473",
+    "content_sha256": "35ee8ba31dee942cdba4af2bc6ead355025d502a267767904dde9f51f6342974",
     "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json"
   },
   "schema_version": 1,

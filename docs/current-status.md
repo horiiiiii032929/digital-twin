@@ -197,6 +197,14 @@ is an explicit limitation. The build and terminal network-free simulations
 pass, but OpenAI metadata refresh, repository authorization, and paid execution
 remain deliberately unfrozen. No new quality result exists yet.
 
+AFQC-111 records the first authorized execution attempt as operationally
+invalid before provider I/O. The frozen embedding batch size was 128 while the
+repository OpenAI client enforces a maximum of 64, so construction stopped
+before creating an output directory, reading hidden gold, or making a call.
+The one permitted harness-only correction changes only that batch size to 64;
+models, methods, prompts, cases, gold, gates, call limits, and budget remain
+unchanged. Attempt 002 is the final permitted execution attempt.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

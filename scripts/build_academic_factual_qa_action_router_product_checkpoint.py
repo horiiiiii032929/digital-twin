@@ -215,7 +215,7 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
                     "provider": "openai",
                     "provider_model": "text-embedding-3-small",
                     "dimensions": 1536,
-                    "batch_size": 128,
+                    "batch_size": 64,
                     "request_token_limit": 250000,
                     "input_price_usd_per_million": 0.02,
                     "maximum_transport_retries": 0,
@@ -294,6 +294,16 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
                 "content_sha256": binding["content_sha256"],
             },
             "execution": {
+                "execution_attempt_id": (
+                    "academic-factual-qa-action-router-product-checkpoint-001-"
+                    "attempt-002"
+                ),
+                "predecessor_result_id": (
+                    "academic-factual-qa-action-router-product-checkpoint-001-"
+                    "attempt-001-invalid"
+                ),
+                "harness_corrections_used": 1,
+                "maximum_harness_corrections": 1,
                 "stage_order": [
                     "embedding-materialization",
                     "candidate-500",
