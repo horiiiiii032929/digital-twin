@@ -44,21 +44,19 @@ and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
-goal. AFQC-093 authorized the finite program, but AFQC-094 terminated it
-as operationally invalid before case execution: Apple MPS stalled, and the one
-permitted CPU/float16 correction exceeded the practical memory envelope. The
-program made zero provider calls, spent USD 0, scored zero cases, and opened no
-hidden gold. Its authority is revoked and it cannot be retried. AFQC-095 makes
-#127 `In Progress / Refine / priority:p0` with one completed API-first method
-boundary: direct OpenAI small/large embeddings and optional bounded reranking,
-with repository-owned source registration, BM25, immutable vectors, citations,
-gold, and scoring. AFQC-100 records its valid `Refine` result: M4 was best at
-38.7% complete evidence@3 and 44.7% Recall@5, boundary accuracy was 96.9%, and
-one severe ambiguity release occurred. No method is selected; the USD
-0.0593379/83-call authority is revoked. The next bounded package is one joint
-structured-source, reference-question, and retrieval-matching redesign on a
-fresh source-disjoint tranche. It must pass before 500+100 or sealed
-10,000+1,000 execution can reopen. #105 and #131 remain blocked evidence
+goal. AFQC-105 selected the unchanged small hybrid retriever over unique atomic
+evidence, but AFQC-109 then validly showed that the actual T0 product was not
+usable: 44.25% fully grounded success, 75% overall action accuracy, 89%
+boundary accuracy, and five unsafe ambiguity releases. That authority is
+revoked and the consumed 500 cases cannot be tuned or rerun. AFQC-110 built one
+finite successor with deterministic action routing and question-targeted atomic
+generation over fresh source ranges. AFQC-111/112 preserve its two permitted
+execution attempts as operationally invalid: attempt 001 stopped before calls
+on an embedding batch/client mismatch; attempt 002 completed 15 embedding calls
+for USD 0.00057488, then stopped before product case 1 on a missing `binding_id`
+runtime contract. Authorization is revoked, no quality result exists, and the
+sealed 10,000 cases remain unopened. #127 stays In Progress / Refine /
+priority:p0. #105 and #131 remain evidence
 consumers; #24 and #10 retain their professor-approval and external-human
 boundaries. The qualified local R1 remains unchanged.
 
@@ -81,105 +79,20 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must preserve AFQC-100 as valid unfavorable evidence and design one
-   prospective source/question/indexing successor. The terminated
-   program is immutable invalid evidence: two operational attempts, one exact
-   harness correction, zero provider calls, USD 0, and no scored cases. Its
-   successor registered direct OpenAI embedding candidates, atomically
-   checkpointed bounded API batches, and completed the preregistered comparison
-   on 300 cases, but none passed. The next action is method redesign, not an
-   embedding-model swap or rerun. A fresh confirmation pass is required to
-   restore the flow-independent 500+100 and 10,000+1,000 evaluation path. The
-   successor
-   retains the flow-independent
-   10,000-case product contract and #105 evidence-decision boundary. Terminated
+1. #127 must preserve AFQC-109 as valid unfavorable quality evidence and
+   AFQC-111/112 as terminal invalid execution evidence. Do not retry AFQC-110.
+   Make one explicit harness/method decision before any new factual checkpoint;
+   the qualified local R1 and deterministic rollback remain unchanged.
 
-   AFQC-101 now owns the successor as one automatically progressing non-human
-   program. Passing stages require no additional researcher approval; only the
-   frozen quality/safety/budget stops and the later real-human boundary can stop
-   it. The immediate correction is shared source-derived region identity,
-   corpus/gold hash alignment, context-complete questions, and fresh
-   source-family-disjoint retrieval confirmation—not another embedding-only
-   swap.
-   build revision `f267fb0` remains reproducible historical evidence for the
-   nine-stage control plane, USD 44.60 p99 projection, USD 50 absolute stop,
-   and one-correction limit. Preserve the
-   120-row NLI result as provisional development evidence and the completed
-   10,000-row pipeline as engineering history. The active successor binds
-   public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,
-   and source-range scoring contracts across T0, T1/T2, HTTP, and any-hit flows.
-   Its source inventory proves the originally requested networking and
-   data-structures allocation impossible under the five-per-section cap. A
-   deterministic feasible 2,100-cluster correction is build-verified and frozen
-   under AFQC-035 after excluding tiny markup fragments and mid-token windows.
-   Construction attempt 001 failed closed on its first DeepSeek canary because
-   the runtime fingerprint differed from the frozen binding; no bulk case ran
-   and authorization is revoked. Provider binding 002 passed both exact-route
-   canaries, but the first bulk DeepSeek response violated the frozen author
-   schema. Attempt 002 is preserved as invalid with three recorded calls, zero
-   accepted clusters, and revoked authority. The runner also exposed a gap in
-   its preregistered malformed-output fallback; that correction must be built
-   prospectively before any successor authorization. Attempt 003
-   quarantines malformed author content, labels deterministic canonical
-   fallback wording, and retains independent verification. Its run is invalid:
-   Google AI Studio failed one verifier call after 15 completed responses, while
-   repeated DeepSeek schema drift produced four author fallbacks and three
-   verifier rejections. AFQC-043 revokes authority and stops another operational
-   retry. AFQC-044 resolves the method decision with a provider-free 500-case
-   package and 100-case paired control. AFQC-046 replaces its defective
-   reference windows with complete semantic regions and passes all source,
-   lineage, uniqueness, leakage, and byte-stability gates. AFQC-047 remains
-   historical build evidence. AFQC-048 binds the active path to dated direct
-   OpenAI GPT-5.4 mini generation and GPT-5.4 advisory review, explicitly
-   disclosed as one provider family. Complete wording and adapter simulations
-   pass without network access. AFQC-049 adds the missing exact GPT-5.4
-   40-control calibration and one finite 660-call orchestrator. It can proceed
-   to wording, 500 candidate cases, 100 paired controls, and scoring only after
-   calibration passes. Four stage-stop simulations pass with zero calls. The
-   AFQC-050 authorized this combined run once. Attempts 001 and 002 each stopped
-   after one exact GPT-5.4 batch on evaluator-contract inconsistencies, before
-   hidden labels or product calls. AFQC-052 preserves both invalid outcomes,
-   revokes authority, and requires one explicit reviewer-method decision.
-   AFQC-053 completes that build-only decision: calibration 004 removes the
-   provider-owned overall-validity field, derives validity deterministically,
-   and passes three terminal simulations. AFQC-055 preserves its paid execution
-   as invalid after three calls because a clarify vote omitted a mandatory
-   boundary reason; authority is revoked and product quality remains unmeasured.
-   AFQC-056 resolves that decision with deterministic-primary checkpoint 004;
-   AFQC-057 authorizes it, and AFQC-058 preserves the valid wording-stage
-   Refine result: 452/500 accepted variants, 48 canonical fallbacks, 50/50 exact
-   calls, USD 0.555499, and zero product calls. AFQC-059/060 prospectively reuse
-   that immutable 452-model/48-canonical package and build product-only
-   checkpoint 005. AFQC-061 retains mini generation, moves routine advisory
-   review to nano, bounds full-model truth escalation to 12 cases, and reduces
-   the ceiling to USD 8. Five network-free outcomes pass with zero new wording calls.
-   AFQC-062 authorized the 500+100 run once. Attempt 001 stopped before provider
-   I/O because the command omitted the locked Qwen3 retrieval extra. AFQC-063
-   corrected that invocation, but the sole corrective attempt did not finish
-   the first on-demand index after 2 h 15 min and also made zero provider calls.
-   AFQC-064 revokes authority and requires a prebuilt-index method successor.
-   AFQC-065 completes the network-free lifecycle checkpoint, and AFQC-068
-   records the real-Qwen result as Keep: four immutable indexes over 2,100
-   public regions pass every resource gate, while 40/40 queries remain non-empty
-   and ranking-identical after restart with zero runtime document embeddings.
-   #139 is Done / Keep. AFQC-069 completes the new build-only 500+100 design as
-   checkpoint 006: both conditions load the exact qualified artifacts, runtime
-   document embedding is prohibited, and every provider or paid flag remains
-   false. The next gate is one explicit execution authorization after a clean
-   no-call preflight.
-   The final 10,000 cases remain unauthorized. Issue #131 separately
-   owns the provider-unauthorized true-visual supplement.
-2. #107 — preserve T0 as the release control and prepare one separately frozen
-   T0/T1 confirmation before staging promotion.
-3. #134 — evaluate the A0 opt-in in-app baseline and A1 deterministic
-   evidence-recovery trigger. Keep learner-state inference in shadow mode and
-   external Discord delivery disabled until its payload is reduced to a generic
-   alert and authenticated deep link.
-4. #88 — externally blocked on host/domain selection; merged PR #93
+2. Keep #105 and sealed 10,000+1,000 execution closed until a new prospective
+   checkpoint produces a valid leakage-free actual-product result.
+3. #24 — obtain real professor approval for the profile and calibrate fidelity
+   separately from factual QA.
+4. #131 — retain the terminal visual diagnostic and design a separate true-
+   visual successor; text/OCR remains the release fallback.
+5. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-5. #24 — calibrate Professor Digital Twin fidelity against independent expert
-   labels, separately from factual QA.
 6. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
 7. #10 — approval-gated professor/student workflow and usability pilot.

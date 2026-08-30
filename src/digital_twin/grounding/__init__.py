@@ -15,6 +15,7 @@ from src.digital_twin.grounding.evidence_sufficiency import (
     LexicalCoverageEvidenceGate,
     MinimumRawScoreEvidenceGate,
     SecondaryRetrieverAgreementGate,
+    QuestionTargetedAtomicEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
     evaluate_evidence_sufficiency,
 )
@@ -223,6 +224,7 @@ __all__ = [
     "NliAtomicClaimVerifier",
     "NliScoreBackend",
     "PairwiseReranker",
+    "QuestionTargetedAtomicEvidenceGate",
     "PairScoreBackend",
     "PostGenerationClaimValidator",
     "PublishedRetrievalIndexV1",

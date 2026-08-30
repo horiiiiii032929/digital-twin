@@ -183,6 +183,37 @@ method-level decision is a deterministic boundary/action router plus
 question-targeted generation on a fresh tranche, not another run over these
 known cases.
 
+AFQC-110 implements that one finite method-level successor. A deterministic
+pre-generation router now handles explicit ambiguity, cross-course, unsupported
+future, and direct graded-work requests before any model call. The candidate
+then narrows already-approved evidence to the one or two atomic facts requested
+by the public question and requires the exact corresponding claim/citation
+count. Its fresh package contains 100 clusters, 500 candidate cases, and a
+fixed 100-case control; all selected character ranges are disjoint from every
+prior development package, all 452 required references map exactly, and the
+sealed 10,000 set remains unopened. The pinned repositories cannot provide
+another fully source-family-disjoint 100-cluster portfolio, so family overlap
+is an explicit limitation. The build and terminal network-free simulations
+pass, but OpenAI metadata refresh, repository authorization, and paid execution
+remain deliberately unfrozen. No new quality result exists yet.
+
+AFQC-111 records the first authorized execution attempt as operationally
+invalid before provider I/O. The frozen embedding batch size was 128 while the
+repository OpenAI client enforces a maximum of 64, so construction stopped
+before creating an output directory, reading hidden gold, or making a call.
+The one permitted harness-only correction changes only that batch size to 64;
+models, methods, prompts, cases, gold, gates, call limits, and budget remain
+unchanged. Attempt 002 is the final permitted execution attempt.
+
+AFQC-112 terminates attempt 002 as `invalid-execution`. The corrected public
+embedding materialization completed in 15 calls for USD 0.00057488, with four
+immutable course indexes and 500 query vectors. Candidate execution then
+stopped before case 1 on a missing `binding_id` runtime contract. No GPT product
+response, control response, hidden-gold score, or final-10,000 access occurred.
+Because this is the second operationally invalid attempt, no further correction
+or retry is authorized. The checkpoint supports no product-quality conclusion;
+#127 remains `Refine` and now requires an explicit harness/method decision.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

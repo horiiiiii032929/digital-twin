@@ -15,6 +15,7 @@ from src.digital_twin.grounding import (
     InvalidRetrievalLimitError,
     LexicalCoverageEvidenceGate,
     MinimumRawScoreEvidenceGate,
+    QuestionTargetedAtomicEvidenceGate,
     RelevantChunkReference,
     RetrievalHit,
     RetrievalFailureCause,
@@ -206,6 +207,52 @@ def test_structured_lexical_gate_rejects_context_only_overlap():
 
     assert decision.sufficient is False
     assert decision.selected_hit_ids == []
+
+
+def test_question_targeted_gate_narrows_supported_context_to_requested_atom():
+    session = chunk(
+        "session",
+        "CSRF abuses an authenticated browser session.",
+        ordinal=0,
+    )
+    session.metadata["search_description"] = "CSRF browser session"
+    defense = chunk(
+        "defense",
+        "SameSite cookies are a common defense against CSRF.",
+        ordinal=1,
+    )
+    defense.metadata["search_description"] = "CSRF SameSite defense"
+
+    decision = QuestionTargetedAtomicEvidenceGate().assess(
+        "What does CSRF abuse?",
+        [
+            RetrievalHit(chunk=session, relevance_score=0.9, raw_score=2),
+            RetrievalHit(chunk=defense, relevance_score=1, raw_score=3),
+        ],
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["session"]
+    assert decision.features["target_claim_count"] == 1
+
+
+def test_question_targeted_gate_keeps_two_atoms_only_for_explicit_pair_question():
+    first = chunk("first", "Cache invalidation happens before a write.")
+    first.metadata["search_description"] = "cache invalidation write"
+    second = chunk("second", "Exclusive access permits the write.")
+    second.metadata["search_description"] = "exclusive access write"
+
+    decision = QuestionTargetedAtomicEvidenceGate().assess(
+        "Which two statements connect cache invalidation with exclusive write access?",
+        [
+            RetrievalHit(chunk=first, relevance_score=1, raw_score=3),
+            RetrievalHit(chunk=second, relevance_score=0.9, raw_score=2),
+        ],
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["first", "second"]
+    assert decision.features["target_claim_count"] == 2
 
 
 def test_evidence_gate_configuration_rejects_invalid_thresholds():

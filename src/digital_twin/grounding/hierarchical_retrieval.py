@@ -15,6 +15,10 @@ from dataclasses import dataclass
 import math
 import re
 
+from src.digital_twin.action_router import (
+    deterministic_boundary_action,
+    requires_clarification,
+)
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.evidence_sufficiency import (
     EvidenceSufficiencyDecision,
@@ -29,28 +33,6 @@ from src.digital_twin.grounding.retrieval import (
 _WORD = re.compile(r"[A-Za-z][A-Za-z0-9]*(?:[_-][A-Za-z0-9]+)*|\d+(?:\.\d+)?")
 _LATEX = re.compile(r"\\[A-Za-z]+|\$+|\^|_")
 _OPERATORS = re.compile(r"==|!=|<=|>=|->|=>|::|:=|\+\+|--|[+*/%&|<>]=?")
-_DEICTIC = re.compile(
-    r"\b(?:it|this|that|these|those|there|the former|the latter)\b",
-    re.IGNORECASE,
-)
-_DEICTIC_ACTION_QUESTION = re.compile(
-    r"\bwhat\s+does\s+[\"'“”]?(?:it|this|that|these|those)[\"'“”]?\s+do\b",
-    re.IGNORECASE,
-)
-_EXPLICIT_REFERENT = re.compile(
-    r"\b(?:algorithm|equation|table|figure|function|method|protocol|process|"
-    r"system|statement|step|variable|concept|section|cache|network|tree|graph)\b",
-    re.IGNORECASE,
-)
-_INTEGRITY = re.compile(
-    r"\b(?:graded|assignment|exam|quiz|submit|submission-ready|final answer)\b",
-    re.IGNORECASE,
-)
-_UNSUPPORTED_FUTURE = re.compile(
-    r"\b(?:next academic year|unreleased|future version|2035 revision|will be added)\b",
-    re.IGNORECASE,
-)
-_CROSS_COURSE = re.compile(r"\b(?:another|other) course\b", re.IGNORECASE)
 _STOPWORDS = frozenset(
     "a an and are as at be by can does for from how in is it of on or that the "
     "this to was what when where which who why with".split()
@@ -76,26 +58,6 @@ def concept_tokens(value: str) -> set[str]:
         for token in structured_tokens(value)
         if token not in _STOPWORDS and (len(token) > 1 or not token.isalpha())
     }
-
-
-def requires_clarification(question: str) -> bool:
-    """Fail closed for unresolved deictic questions before generation."""
-
-    return bool(_DEICTIC_ACTION_QUESTION.search(question)) or bool(
-        _DEICTIC.search(question)
-    ) and not bool(
-        _EXPLICIT_REFERENT.search(question)
-    )
-
-
-def deterministic_boundary_action(question: str) -> str | None:
-    if _INTEGRITY.search(question):
-        return "refuse"
-    if requires_clarification(question):
-        return "clarify"
-    if _UNSUPPORTED_FUTURE.search(question) or _CROSS_COURSE.search(question):
-        return "abstain"
-    return None
 
 
 def should_use_semantic_reranking(

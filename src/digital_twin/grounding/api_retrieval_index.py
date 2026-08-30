@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import array
 from collections import Counter
-from collections.abc import Iterator, Mapping, Sequence
+from collections.abc import Iterator, Sequence
 from dataclasses import dataclass
 from datetime import datetime
 import hashlib

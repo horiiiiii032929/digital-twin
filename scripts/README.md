@@ -930,6 +930,21 @@ Current utilities:
   only paid authority; execution is capped at 20 calls, zero retries, and USD 1.
   Use the `verify:`, `simulate:`, `preflight:`, `execute:`, and `resume:` package
   commands ending in `academic-factual-qa-atomic-m2-confirmation`.
+- `build_academic_factual_qa_action_router_confirmation.py`,
+  `build_academic_factual_qa_action_router_product_checkpoint.py`, and
+  `run_academic_factual_qa_action_router_product_checkpoint.py`: implement the
+  single method-level successor to the valid atomic-M2 product failure. The
+  package contains 100 new clusters and 500 questions whose exact source ranges
+  do not overlap any earlier development package. Because the four pinned
+  repositories cannot supply another fully source-family-disjoint portfolio,
+  source-family overlap is disclosed and uncertainty remains clustered by
+  family. The candidate adds deterministic ambiguity, cross-course, future,
+  and graded-work routing, narrows approved evidence to the one or two facts
+  requested by the public question, and requires the generator to return the
+  matching atomic-claim count. The fixed 100-case control retains the historical
+  structured gate and extractive generator. Network-free validation and all
+  terminal simulations are available through package commands ending in
+  `academic-factual-qa-action-router-product`; paid execution is not authorized.
 - `run_course_digital_twin_nonhuman_supplements.py`: executes the two independent
   non-human supplements under program 002 without reusing the terminated
   program-001 dispatcher. Stage A compares text fallback with course-scoped

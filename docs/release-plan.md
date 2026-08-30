@@ -113,6 +113,25 @@ confirm on new source-disjoint data. Independent visual, synthetic-profile,
 and local product checks may continue without reopening the factual or final
 split.
 
+AFQC-105 subsequently selected unchanged small hybrid retrieval over unique
+atomic evidence, but AFQC-109's actual T0 500+100 checkpoint validly failed:
+44.25% fully grounded success, 75% overall action accuracy, 89% boundary
+accuracy, and five unsafe ambiguity releases. AFQC-110 is the only prospective
+method-level successor. It adds deterministic boundary routing and narrows
+approved evidence and answers to the one or two atoms requested by the public
+question. Its fresh 500+100 package is source-range-disjoint from prior
+development, while unavoidable source-family overlap is disclosed. It remains
+provider-unauthorized; the final 10,000 cases remain unopened.
+
+AFQC-111/112 subsequently exhausted the two permitted executions without a
+quality estimate. Attempt 001 stopped before calls because embedding batch 128
+exceeded the client maximum 64. The sole correction completed 15 embedding
+calls for USD 0.00057488, then attempt 002 stopped before product case 1 on a
+missing `binding_id` runtime contract. Authorization is revoked and the sealed
+10,000 cases remain unopened. A new checkpoint requires an explicit
+harness/method decision; this terminal invalid result does not alter the
+qualified local R1.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

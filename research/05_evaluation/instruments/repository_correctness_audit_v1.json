@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "f983580e424a73c13dbf724519f9972ee8242de622c6d37097536e96a93250a5"
+      "sha256": "b2adaa15978bdf697ae956bbefbc0c08092f6dea215864789528430f53b54fe2"
     },
     {
       "audit_status": "audited",
@@ -2936,7 +2936,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "f61d41018d1abaeaa5d66507e42a26ecf6538d104828aef411522b574347f335"
+      "sha256": "cfeb2f7376e57923926f7f3a59c429d674f810850261a4983916e888a1d3e8f6"
     },
     {
       "audit_status": "audited",
@@ -5411,7 +5411,7 @@
       "path": "src/digital_twin/generation/__init__.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "48432e2fd4ae42673dc869e35ab564ec8b61861bac570b317ce66075b5695c87"
+      "sha256": "a3ebfb17dae9dfebaa93f494a5d251194da0f368bbfaee2f4e3d70a6a3f5c581"
     },
     {
       "audit_status": "audited",
@@ -5444,7 +5444,7 @@
       "path": "src/digital_twin/generation/generator.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "ce028ead9df1f9b0e0956ac13608c623b1bf54dd59c0c4fafce83f56d7eb2d0d"
+      "sha256": "9a10714a779a122914888acfeb2a3c0a83c63b2aed1d45b4fc90a15b0dfb8fc2"
     },
     {
       "audit_status": "audited",
@@ -5466,7 +5466,7 @@
       "path": "src/digital_twin/generation/policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "0e3f12bb9eddad05a9864834ac6db809f18bcc3a23623685335eb89b63c01650"
+      "sha256": "8456766ecc9dc613a7d861ca7d998c99b6bcea6b83d57274c3c42fd196c817f5"
     },
     {
       "audit_status": "audited",
@@ -5477,7 +5477,7 @@
       "path": "src/digital_twin/generation/prompt.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "7f4e6d417c57f01fea5c86acf1b1ee73186d680a213dab2245d586d97a960f44"
+      "sha256": "205e81b0742c3000d646eb3502076cf63b1fa18e0bd0472f9e881c1c47cdf05c"
     },
     {
       "audit_status": "audited",
@@ -5488,7 +5488,7 @@
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "55c8c182509b82b91ffce028814f6a64a39577cfd729f02f73d72878c7ded72b"
+      "sha256": "22db9d6c349d094217e01ccc541fe368c74714efb2722058bae327e1f2e9a91b"
     },
     {
       "audit_status": "audited",
@@ -5521,7 +5521,7 @@
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "e4c6c518fd138b10480c10644c7396d3ea18d15524bcca50e56faa031930af5c"
+      "sha256": "40f17ea942d6508451293e1b725fd0d42e43deceb357f1ec902cef60d38a49fd"
     },
     {
       "audit_status": "audited",
@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "9a49d5ed2904d0c5e1ef4a20848d88448f8b03626ae50250b443daef8a9d8546"
+      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
     },
     {
       "audit_status": "audited",
@@ -6181,7 +6181,7 @@
       "path": "tests/digital_twin/test_generation.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "3cc6136f72916bb31532936c622f9a525818cef95e49ec1443addd6c860d580c"
+      "sha256": "fcc66d9d15b976b6608da59c07e5828802cf90a9ad56aae0b0ec20776beaf85d"
     },
     {
       "audit_status": "audited",
@@ -6357,7 +6357,7 @@
       "path": "tests/digital_twin/test_retrieval.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "8f7b81ceeecf4a72ad1554e03ded90943d5312a5d4bc4339a63e8cb14cb125be"
+      "sha256": "26744b79b71919688d3ab42329a99904e9d45a01c66bdcb7d250fe8d2ee01ff4"
     },
     {
       "audit_status": "audited",
@@ -7798,7 +7798,7 @@
       "path": "src/digital_twin/grounding/hierarchical_retrieval.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "59f88fbd1d8ed988cfb7faa1544e7268e0f5ab2ebc1045a4589e7ca235fb3770"
+      "sha256": "15488b215b82e4e5041d5f8aa099131156ec1e05e21a534070bf0a5ad9b3e227"
     },
     {
       "audit_status": "audited",
@@ -7864,7 +7864,7 @@
       "path": "src/digital_twin/grounding/api_retrieval_index.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
-      "sha256": "1bc4c036fe975225942dc5224918e9fd25dab3cca786952fdaffa79e9b55d781"
+      "sha256": "d04cf11be306d294f38ed9217672c8a1b0418dc6654959f58062394cca97889d"
     },
     {
       "audit_status": "audited",
@@ -8194,7 +8194,7 @@
       "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-product-checkpoint-review",
-      "sha256": "58eca6d0eea39f082890fdc74172970cc4bacfc49c8743790893527f0f967c4e"
+      "sha256": "2413be9dcddcc826c06955209ca6e5581ea9e2d5d85b3c0badd2f02e3fdc2f08"
     },
     {
       "audit_status": "audited",
@@ -8228,6 +8228,116 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-product-checkpoint-review",
       "sha256": "0f1ffa38600926ab9657cac03a0ba084945ba7118abaacbb86909f854577a72e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Manifest review binds the finite candidate to deterministic action routing, question-targeted evidence, exact atomic claims, fresh source ranges, direct OpenAI snapshots, hidden-gold isolation, and provider-unauthorized execution.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_candidate_manifest_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "ca44f09002bcadc95f669bf5a8b743221a642d562a8dad9e4fc0e1f328ab2e93"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Instrument review verifies one finite method-level decision, 500 candidate and 100 paired control cases, 620-call and USD 8 ceilings, zero retries, atomic resume, exact hard gates, and unopened final data.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_checkpoint_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "a47debe0cdc6c5cbb71386ecf1024a73aa637851e3b6aba8d8a44dee212b1bcc"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Control-manifest review retains the historical structured evidence gate and extractive generator over the same retriever and model for an inspectable method-level comparison.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_control_manifest_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "27bd2aedf31435c583167a6011314a92210b5787f339bb5ae5c29e0408b40ff9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Provider-binding review preserves fresh official OpenAI prices and data controls, exact models, store false, zero fallback/retries, and terminal revocation after the second invalid attempt.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "5b78489eb6dd70c4c83f57d11293a53a397ce7da2074bd1aea4532e3da096f4c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-fresh-dataset",
+      "evidence": "Builder tests prove byte stability, 100 clusters, 500 unique questions, 300 non-overlapping atoms, 452/452 reference matchability, balanced boundaries, prior-range exclusion, and no final/private/provider access.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_action_router_confirmation.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "3ba9c7ffd285fb7072948dfe7818210fa60cd07839a31da2507e454d15abf289"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, the sole batch-size correction, immutable hashes, and terminal authorization revocation.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "7cbc69d5a6ec23a9171cd358c67478edc60bf0eb21034a9d6fdcb9decc4a06a5"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint",
+      "evidence": "Runner review verifies bounded streamed index materialization, exact bindings, atomic resume, exclusive outputs, hidden-gold opening after both ledgers, terminal simulations, accounting, and fail-closed authorization.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_action_router_product_checkpoint.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "aae73b367718af97ac344459a4db77a7e00a57dd0016b195c27ed96744c4a515"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-runtime",
+      "evidence": "Focused tests verify explicit ambiguity, cross-course, future, and direct graded-work routing; ordinary conceptual questions remain answerable and multi-evidence claim count is public-question-derived.",
+      "findings": [],
+      "path": "src/digital_twin/action_router.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "1444440f6ed07dc093c44a2de466d1430948225d3183ab068d9da930491955a5"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-product-checkpoint-verification",
+      "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, terminal simulations, the sole batch-size correction, and blocked preflight after terminal revocation.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "3ff7330b05fcf99f5389777ba3ab3a335e14d3501c084f47215eb5caff5a558c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "action-router-fresh-dataset-verification",
+      "evidence": "Tests independently recompute prior-range exclusion, allocation, boundary balance, atom non-overlap, normalized uniqueness, exact reference matchability, byte stability, and no-call boundaries.",
+      "findings": [],
+      "path": "tests/test_build_academic_factual_qa_action_router_confirmation.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-action-router-review",
+      "sha256": "49350a9f471009ce0b17fe822dacebc705bbb33ef5ab52004429fad4e6dd2f5e"
     }
   ],
   "schema_version": 1

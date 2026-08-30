@@ -1,5 +1,6 @@
 import re
 
+from src.digital_twin.action_router import DeterministicActionRouterV1
 from src.digital_twin.generation.models import PolicyAction, PolicyDecision
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.tutor_policy import (
@@ -28,6 +29,13 @@ class DeterministicPolicyEnforcer:
     implementation_id = "deterministic-policy-rules"
     version = "v1"
 
+    def __init__(
+        self,
+        *,
+        action_router: DeterministicActionRouterV1 | None = None,
+    ) -> None:
+        self.action_router = action_router
+
     def evaluate(
         self,
         question: str,
@@ -46,6 +54,17 @@ class DeterministicPolicyEnforcer:
                 reason="The professor has not approved this tutor policy for release.",
                 matched_rules=["professor-release-approval-required"],
             )
+        if self.action_router is not None:
+            route = self.action_router.route(question)
+            if route is not None:
+                return PolicyDecision(
+                    action=PolicyAction(route.action),
+                    reason=route.reason,
+                    matched_rules=[
+                        f"action-router:{self.action_router.implementation_id}",
+                        route.matched_rule,
+                    ],
+                )
         if _GRADED_CONTEXT.search(question) and _DIRECT_COMPLETION.search(question):
             policy_field = next(
                 (

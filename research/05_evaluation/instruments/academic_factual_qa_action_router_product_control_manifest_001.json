@@ -1,0 +1,19 @@
+{
+  "adapter_version": "v2-action-router",
+  "code_revision": "2c18d9e",
+  "evidence_gate": "atomic-structured-coverage-control-v1",
+  "flow_id": "t0-atomic-m2-structured-control-002",
+  "generator": "openai-gpt-5.4-mini-live-extractive-boundary",
+  "known_benchmark": false,
+  "model_bindings": {
+    "action-router": "none-historical-control",
+    "claim-validator": "contiguous-quote-atomic-claim-verifier-v1@1.0.0",
+    "embedding": "text-embedding-3-small",
+    "generator": "gpt-5.4-mini-2026-03-17",
+    "response-contract": "extractive-boundary-output-v1"
+  },
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+  "retriever": "atomic-bm25-openai-small-rrf-v1@academic-factual-qa-action-router-confirmation-001",
+  "schema_version": 1
+}

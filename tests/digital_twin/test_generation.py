@@ -23,13 +23,16 @@ from src.digital_twin.generation import (
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
     LiveGroundedGenerator,
+    LiveQuestionTargetedAtomicGroundedGenerator,
     PolicyAction,
     ExtractiveBoundaryGroundedPromptBuilder,
+    QuestionTargetedAtomicPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
     authoritative_citation_for_chunk,
     citation_matches_chunk,
     load_generation_evaluation_set,
 )
+from src.digital_twin.action_router import DeterministicActionRouterV1
 from src.digital_twin.grounding import DocumentChunk, GenerationUsage, RetrievalHit
 from src.digital_twin.llm import (
     LlmClient,
@@ -217,6 +220,50 @@ def test_policy_enforcer_redirects_direct_graded_work_without_retrieval_hits():
     assert decision.action == PolicyAction.REDIRECT_GRADED_WORK
 
 
+@pytest.mark.parametrize(
+    ("question", "expected_action"),
+    [
+        ('After the discussion, what does "it" do next?', PolicyAction.CLARIFY),
+        (
+            "What does another course establish about cache coherence?",
+            PolicyAction.NO_EVIDENCE,
+        ),
+        (
+            "What will change next academic year about cache coherence?",
+            PolicyAction.NO_EVIDENCE,
+        ),
+        (
+            "Complete my graded assignment and give me the final answer to submit.",
+            PolicyAction.REDIRECT_GRADED_WORK,
+        ),
+    ],
+)
+def test_successor_action_router_short_circuits_explicit_boundaries_with_hits(
+    question,
+    expected_action,
+):
+    decision = DeterministicPolicyEnforcer(
+        action_router=DeterministicActionRouterV1()
+    ).evaluate(question, [approved_hit()], approved_policy())
+
+    assert decision.action == expected_action
+    assert "action-router:deterministic-tutor-action-router-v1" in (
+        decision.matched_rules
+    )
+
+
+def test_successor_action_router_does_not_refuse_conceptual_integrity_question():
+    decision = DeterministicPolicyEnforcer(
+        action_router=DeterministicActionRouterV1()
+    ).evaluate(
+        "What academic-integrity rule applies to this exam?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert decision.action == PolicyAction.ANSWER
+
+
 def test_prompt_records_policy_evidence_version_and_injection_boundary():
     prompt = GroundedPromptBuilder().build(
         "How does CSRF work?",
@@ -299,6 +346,33 @@ def test_extractive_boundary_prompt_freezes_action_and_quote_contract():
     assert "answer|abstain|clarify" in prompt.messages[0].content
     assert "copied exactly as one contiguous span" in prompt.messages[0].content
     assert "claim-[a-z0-9-]+" in prompt.messages[0].content
+
+
+@pytest.mark.parametrize(
+    ("question", "expected"),
+    [
+        ("What does CSRF abuse?", "exactly 1 atomic claim"),
+        (
+            "Which two statements connect CSRF with browser sessions?",
+            "exactly 2 atomic claims",
+        ),
+    ],
+)
+def test_question_targeted_prompt_freezes_public_question_claim_count(
+    question,
+    expected,
+):
+    prompt = QuestionTargetedAtomicPromptBuilder().build(
+        question,
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert prompt.version == "v6-targeted"
+    assert expected in prompt.messages[0].content
+    assert "Do not include definitions, examples, context" in (
+        prompt.messages[0].content
+    )
 
 
 def test_bounded_pedagogical_prompt_carries_only_code_selected_plan():
@@ -522,6 +596,76 @@ async def test_extractive_boundary_generator_rejects_claim_id_outside_schema_con
         prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
     ).generate(
         "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "safe-provider-failure"
+    assert answer.atomic_claims == []
+
+
+@pytest.mark.asyncio
+async def test_question_targeted_generator_accepts_exactly_one_cited_claim():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "action": "answer",
+                "claims": [
+                    {
+                        "claim_id": "claim-csrf-session",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    }
+                ],
+            }
+        ),
+        provider_model="fixture-live/v1",
+    )
+    answer = await LiveQuestionTargetedAtomicGroundedGenerator(
+        RecordingClient(response),
+        prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+    ).generate(
+        "What does CSRF abuse?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "answer"
+    assert [claim.text for claim in answer.atomic_claims] == [
+        "CSRF abuses an authenticated browser session."
+    ]
+    assert len(answer.citations) == 1
+
+
+@pytest.mark.asyncio
+async def test_question_targeted_generator_fails_closed_on_extra_claim():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "action": "answer",
+                "claims": [
+                    {
+                        "claim_id": "claim-csrf-session",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    },
+                    {
+                        "claim_id": "claim-csrf-defense",
+                        "text": "SameSite cookies are common defenses.",
+                        "citation_ids": ["S1"],
+                    },
+                ],
+            }
+        ),
+        provider_model="fixture-live/v1",
+    )
+    answer = await LiveQuestionTargetedAtomicGroundedGenerator(
+        RecordingClient(response),
+        prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+    ).generate(
+        "What does CSRF abuse?",
         [approved_hit()],
         approved_policy(),
     )

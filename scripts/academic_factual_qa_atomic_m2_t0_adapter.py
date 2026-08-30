@@ -21,15 +21,20 @@ from src.digital_twin.evaluation.factual_qa_contract import (
     SystemUnderTestManifestV1,
 )
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
+from src.digital_twin.action_router import DeterministicActionRouterV1
 from src.digital_twin.generation import (
+    DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveExtractiveBoundaryGroundedGenerator,
+    LiveQuestionTargetedAtomicGroundedGenerator,
+    QuestionTargetedAtomicPromptBuilder,
 )
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
     ContiguousQuoteAtomicClaimVerifier,
     DocumentChunk,
+    QuestionTargetedAtomicEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
 )
 from src.digital_twin.grounding.api_retrieval_index import (
@@ -54,6 +59,8 @@ from src.digital_twin.student import (
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = ROOT / "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-sources.json"
 RETRIEVAL_RUNTIME_PATH = ROOT / "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_retrieval_runtime_001.json"
+ACTION_ROUTER_SOURCE_PATH = ROOT / "research/05_evaluation/datasets/academic-factual-qa-action-router-confirmation-001-sources.json"
+ACTION_ROUTER_RETRIEVAL_RUNTIME_PATH = ROOT / "reports/generated/academic-factual-qa-action-router-product-checkpoint-001/retrieval-runtime.json"
 PROFILE_PATH = ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 
 
@@ -71,8 +78,10 @@ def _load_hashed(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _chunks_by_course() -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
-    payload = _load_hashed(SOURCE_PATH)
+def _chunks_by_course(
+    source_path: Path = SOURCE_PATH,
+) -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
+    payload = _load_hashed(source_path)
     chunks = [DocumentChunk.model_validate(row) for row in payload["chunks"]]
     grouped: dict[str, list[DocumentChunk]] = {}
     by_id: dict[str, DocumentChunk] = {}
@@ -87,8 +96,11 @@ def _chunks_by_course() -> tuple[dict[str, list[DocumentChunk]], dict[str, Docum
     return grouped, by_id
 
 
-def _query_embedder(cases: list[EvaluationCaseV1]) -> _CachedQueryEmbedder:
-    runtime = _load_hashed(RETRIEVAL_RUNTIME_PATH)
+def _query_embedder(
+    cases: list[EvaluationCaseV1],
+    runtime_path: Path = RETRIEVAL_RUNTIME_PATH,
+) -> _CachedQueryEmbedder:
+    runtime = _load_hashed(runtime_path)
     query_cache = ROOT / runtime["query_cache"]["path"]
     if hashlib.sha256(query_cache.read_bytes()).hexdigest() != runtime["query_cache"]["file_sha256"]:
         raise AtomicM2ProductAdapterError("atomic query cache file drifted")
@@ -130,9 +142,12 @@ def _query_embedder(cases: list[EvaluationCaseV1]) -> _CachedQueryEmbedder:
 
 
 def _retrievers(
-    *, chunks_by_course: dict[str, list[DocumentChunk]], embedder: _CachedQueryEmbedder
+    *,
+    chunks_by_course: dict[str, list[DocumentChunk]],
+    embedder: _CachedQueryEmbedder,
+    runtime_path: Path = RETRIEVAL_RUNTIME_PATH,
 ) -> dict[str, Any]:
-    runtime = _load_hashed(RETRIEVAL_RUNTIME_PATH)
+    runtime = _load_hashed(runtime_path)
     index_root = ROOT / runtime["index_root"]
     store = StreamingRetrievalIndexMaterializerV2(index_root)
     loaded: dict[str, Any] = {}
@@ -210,17 +225,44 @@ def build_atomic_m2_t0_adapter(
     cases: list[EvaluationCaseV1],
     runtime: dict[str, Any],
 ) -> StudentTutoringServiceAdapterV1:
-    if manifest.retriever != (
+    historical_retriever = (
         "atomic-bm25-openai-small-rrf-v1@"
         "academic-factual-qa-atomic-m2-confirmation-001"
-    ):
+    )
+    successor_retriever = (
+        "atomic-bm25-openai-small-rrf-v1@"
+        "academic-factual-qa-action-router-confirmation-001"
+    )
+    if manifest.retriever == historical_retriever:
+        source_path = SOURCE_PATH
+        runtime_path = RETRIEVAL_RUNTIME_PATH
+        successor = False
+    elif manifest.retriever == successor_retriever:
+        source_path = ACTION_ROUTER_SOURCE_PATH
+        runtime_path = ACTION_ROUTER_RETRIEVAL_RUNTIME_PATH
+        successor = True
+    else:
         raise AtomicM2ProductAdapterError("product retriever manifest drifted")
-    if manifest.evidence_gate == "atomic-structured-coverage-evidence-gate-v1":
+    if successor and manifest.evidence_gate == (
+        "question-targeted-atomic-evidence-gate-v1"
+    ):
         condition = "candidate"
-        gate_impl: Any = StructuredLexicalCoverageEvidenceGate()
-    elif manifest.evidence_gate == "atomic-any-hit-evidence-gate-v1":
+        gate_impl = QuestionTargetedAtomicEvidenceGate()
+        generator_kind = "targeted"
+    elif successor and manifest.evidence_gate == (
+        "atomic-structured-coverage-control-v1"
+    ):
+        condition = "control"
+        gate_impl = StructuredLexicalCoverageEvidenceGate()
+        generator_kind = "historical"
+    elif not successor and manifest.evidence_gate == "atomic-structured-coverage-evidence-gate-v1":
+        condition = "candidate"
+        gate_impl = StructuredLexicalCoverageEvidenceGate()
+        generator_kind = "historical"
+    elif not successor and manifest.evidence_gate == "atomic-any-hit-evidence-gate-v1":
         condition = "control"
         gate_impl = AnyHitEvidenceGate()
+        generator_kind = "historical"
     else:
         raise AtomicM2ProductAdapterError("product evidence gate drifted")
     generator_binding, generator_transport = base._generator_transport(manifest)  # noqa: SLF001
@@ -248,15 +290,27 @@ def build_atomic_m2_t0_adapter(
         response_schema=base.EXTRACTIVE_BOUNDARY_RESPONSE_SCHEMA,
         quarantine_failures=True,
     )
-    recording_generator = base._RecordingGenerator(  # noqa: SLF001
-        LiveExtractiveBoundaryGroundedGenerator(
+    if generator_kind == "targeted":
+        generator_impl: Any = LiveQuestionTargetedAtomicGroundedGenerator(
+            client,
+            prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV1()
+            ),
+        )
+    else:
+        generator_impl = LiveExtractiveBoundaryGroundedGenerator(
             client, prompt_builder=ExtractiveBoundaryGroundedPromptBuilder()
         )
-    )
+    recording_generator = base._RecordingGenerator(generator_impl)  # noqa: SLF001
     gate = base._RecordingGate(gate_impl)  # noqa: SLF001
-    chunks_by_course, chunks_by_id = _chunks_by_course()
-    embedder = _query_embedder(cases)
-    retrievers = _retrievers(chunks_by_course=chunks_by_course, embedder=embedder)
+    chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
+    embedder = _query_embedder(cases, runtime_path)
+    retrievers = _retrievers(
+        chunks_by_course=chunks_by_course,
+        embedder=embedder,
+        runtime_path=runtime_path,
+    )
     repository, service, identities = _setup_service(
         chunks_by_course=chunks_by_course,
         retrievers=retrievers,
