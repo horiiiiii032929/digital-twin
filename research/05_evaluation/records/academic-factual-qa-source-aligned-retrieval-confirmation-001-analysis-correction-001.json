@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-source-aligned-retrieval-confirmation-001-analysis-correction-001",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-source-aligned-wording-002-known-diagnostic",
+  "corpus_id": "academic-factual-qa-source-aligned-public-100-clusters",
+  "code_revision": "712e0941b14112daca6daaa102ef859cc249fd69",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "m2-exact-region-identity-scoring-v1",
+        "version": "frozen-control",
+        "configuration": {
+          "answerable_case_count": 400,
+          "reported_failure_count": 41,
+          "prospective": true
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "complete-supporting-evidence-at-3",
+          "value": 0.8975,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": false
+        },
+        {
+          "name": "scorer-false-negative-rate",
+          "value": 0.0925,
+          "unit": "rate",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-reproduction",
+          "passed": true,
+          "evidence": "The frozen exact-region rule reproduces 359/400 complete evidence@3."
+        },
+        {
+          "name": "valid-supporting-evidence-semantics",
+          "passed": false,
+          "evidence": "The rule rejects equivalent nested parent and answer-bearing child evidence."
+        },
+        {
+          "name": "prospective-selection-eligible",
+          "passed": false,
+          "evidence": "The frozen metric does not validly measure supporting-evidence presence for overlapping regions."
+        }
+      ],
+      "failures_by_category": {
+        "equivalent-parent-region-rejected": 28,
+        "answer-bearing-child-region-rejected": 9,
+        "genuine-top-three-retrieval-miss": 4
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "m2-nested-region-equivalence-diagnostic-v1",
+        "version": "post-hoc-analysis",
+        "configuration": {
+          "answerable_case_count": 400,
+          "supported_case_count": 396,
+          "prospective": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "complete-supporting-evidence-at-3",
+          "value": 0.99,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "scorer-false-negative-rate",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "deterministic-reproduction",
+          "passed": true,
+          "evidence": "Direct source-range and answer-span analysis reproduces 37 scoring false negatives and four genuine misses."
+        },
+        {
+          "name": "valid-supporting-evidence-semantics",
+          "passed": true,
+          "evidence": "The diagnostic recognizes same-source containing parents and answer-bearing children."
+        },
+        {
+          "name": "prospective-selection-eligible",
+          "passed": false,
+          "evidence": "The equivalence rule was defined after opening the known result and cannot select a method."
+        }
+      ],
+      "failures_by_category": {
+        "genuine-top-three-retrieval-miss": 4,
+        "post-hoc-rule": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The original Refine decision remains, but the dominant defect is exact-region scoring over overlapping evidence units rather than M2 retrieval. Build one prospective atomic-evidence successor on fresh source-disjoint data.",
+    "limitations": [
+      "The 99.00% nested-region diagnostic is post-hoc and not selection eligible.",
+      "No product response, final split, private data, provider call, or human participant was involved in this correction.",
+      "The successor must use non-overlapping authoritative evidence atoms and a fresh confirmation tranche."
+    ]
+  }
+}

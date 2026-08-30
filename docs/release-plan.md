@@ -102,15 +102,16 @@ USD 0.8352885. This advances automatically to fresh multi-method retrieval;
 it does not itself reopen product or final-set claims.
 
 AFQC-103 validly stops the fresh factual branch before product generation. M2
-small hybrid and M3 large dense each reached 89.75% complete evidence@3 versus
-the 90% gate, with 99.25% Recall@5, 99% boundary accuracy, zero severe
-releases, and zero course/version violations. The run cost USD 0.00717285 and
-opened gold only after all 500 public rankings were durable. No method is
-selected. A single prospective successor may add deterministic coverage
-selection over a broader pool and must confirm on new source-disjoint data;
-the current cases cannot be reused as fresh evidence. Independent visual,
-synthetic-profile, and local product checks may continue without reopening
-the factual or final split.
+small hybrid and M3 large dense each reached 89.75% exact-region evidence@3
+versus the 90% gate, with 99.25% Recall@5, 99% boundary accuracy, zero severe
+releases, and zero course/version violations. AFQC-104 corrects the diagnosis:
+37 of M2's 41 failures contained equivalent nested evidence, so the post-hoc
+supporting-evidence diagnostic is 99.00% with four genuine misses. That
+diagnostic cannot select M2. One prospective successor must freeze unique
+non-overlapping evidence atoms, add deterministic coverage selection, and
+confirm on new source-disjoint data. Independent visual, synthetic-profile,
+and local product checks may continue without reopening the factual or final
+split.
 
 ## Release stages
 

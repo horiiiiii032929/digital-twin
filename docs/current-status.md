@@ -108,16 +108,17 @@ human-participant execution remain unopened at this checkpoint.
 
 AFQC-103 records the valid source-aligned retrieval confirmation as
 `completed-refine`. Six methods completed 500 cases through 32 direct OpenAI
-embedding calls at USD 0.00717285. M2 small hybrid and M3 large dense were best
-at 89.75% complete evidence@3, against the 90% gate; both reached 99.25%
-Evidence Recall@5. Boundary accuracy was 99%, with zero severe releases and
-zero course or source-version violations. M4 reached the best recall at
-99.75%. All rankings were durable before hidden gold opened. No method is
-selected and the 500+100 product and sealed 10,000+1,000 stages remain closed.
-Thirty-seven of M2's 41 top-three misses were complete by rank four, which
-supports one finite method-level successor using deterministic coverage
-selection over a broader candidate pool on a fresh source-disjoint tranche;
-it does not justify lowering the gate or rerunning these known 500 cases.
+embedding calls at USD 0.00717285. M2 small hybrid and M3 large dense scored
+89.75% exact-region evidence@3 against the 90% gate; both reached 99.25%
+Recall@5. Boundary accuracy was 99%, with zero severe releases and zero course
+or source-version violations. All rankings were durable before hidden gold
+opened. AFQC-104 then corrects the interpretation: 37 of M2's 41 exact-region
+failures contained equivalent parent or answer-bearing child evidence, giving
+a non-selection-eligible post-hoc supporting-evidence diagnostic of 99.00% and
+four genuine misses. No method is retroactively selected. The 500+100 product
+and sealed 10,000+1,000 stages remain closed while one fresh successor freezes
+unique non-overlapping evidence atoms and confirms deterministic coverage
+selection on new source-disjoint data.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR

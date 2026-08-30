@@ -6,6 +6,12 @@
 gate, so the AFQC-101 factual branch stops before product generation and before
 the 10,000-case final split.
 
+> Analysis correction: subsequent cross-review found that 37 of M2's 41
+> exact-region failures contained equivalent parent or answer-bearing child
+> evidence. The frozen score remains valid under its preregistered rubric, but
+> it is not a valid estimate of supporting-evidence presence. See
+> `academic-factual-qa-source-aligned-retrieval-confirmation-001-analysis-correction-001`.
+
 The run was valid and complete. It used 32 direct OpenAI embedding calls, zero
 retries, 95,638 input tokens, and USD 0.00717285. All 500 public rankings were
 persisted before hidden gold opened. There was no private data, human
@@ -30,14 +36,13 @@ of 400 answerable cases.
 
 ## Failure diagnosis
 
-This is a genuine top-three evidence-selection failure rather than an
-operational or source-binding failure. For M2, 41 answerable cases missed
-complete evidence@3; 37 of those had every required region by rank four, 38 by
-rank five, and three still lacked a required region at rank five. The misses
-were concentrated in paraphrased, definition, direct-factual, and structured
-code questions. M2 and M3 shared only 15 of their 41 misses, so a deterministic
-coverage selector over a broader candidate pool is a plausible method-level
-successor; changing only the embedding model is not supported.
+The run is operationally valid, but its exact-region metric is structurally
+confounded by overlapping parent and child evidence units. For M2, 28 failures
+had a top-three parent containing the gold range and nine had a top-three child
+containing the canonical answer; only four were genuine top-three misses. The
+post-hoc nested-region diagnostic is 99.00%, but cannot retroactively pass the
+run. The successor must make citable evidence atoms non-overlapping and unique,
+then confirm on fresh data; changing only the embedding model is not supported.
 
 One cross-course boundary case was classified as `clarify` instead of the gold
 `abstain`. It released no answer and therefore was not severe, but it keeps the
@@ -46,11 +51,11 @@ boundary result below 100%.
 ## Next boundary
 
 Do not relax the gate, score product answers, or open the final 10,000 cases
-from this result. A successor may make one explicit method-level change:
-retrieve a broader source-aligned pool and select the top three regions by
-deterministic question-concept and required-coverage signals, then confirm it
-on a new source-family-disjoint development tranche. The current 500 cases are
-known diagnostic evidence and cannot become fresh confirmation data.
+from this result. The successor must freeze unique non-overlapping evidence
+atoms, retain parent context as search-only metadata, retrieve a broader M2
+pool, and select three atoms by deterministic question-concept and marginal-
+coverage signals on a new source-family-disjoint tranche. The current 500
+cases are known diagnostic evidence and cannot become fresh confirmation data.
 
 The independent non-human visual, synthetic-profile, local workflow, and
 policy evaluations may continue. Real professor/student evaluation remains a
