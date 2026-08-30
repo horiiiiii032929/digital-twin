@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 761
+    "audited": 762
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 192,
+    "evaluation_configuration": 193,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 164
   },
-  "file_count": 761,
+  "file_count": 762,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a232462078796cd3ca42e11595f68cb716c00b423ea0e77786a30584a165302e",
+  "record_sha256": "3f8a8c2f3b628d6639077fa1e15c561bee3079da8a7a36df6ab46319dca32b64",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "7d097db0a6eee45700847bbce49205167aa5ac7d7bc5567bf6ad3f338f3f1c4a"
+      "sha256": "c8bcd79b7ee9eb3e01a760438506d2e92adef4c24d318f8cfb71f41a007e30c6"
     },
     {
       "audit": {
@@ -2868,6 +2868,22 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_003.json",
       "risk": "high",
       "sha256": "e7fee3b5a0df115661fe2d3b681f13b5cc86da6fefff4c3e5ba56ac422c7570b"
+    },
+    {
+      "audit": {
+        "domain": "api-first-finite-evaluation-program",
+        "evidence": "Stable successor review verifies explicit exclusion of the operationally unstable nano reranker, unchanged cases/gold/gates, three deterministic retrieval comparisons, reused document indexes, and the USD 50 emergency ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_004.json",
+      "risk": "high",
+      "sha256": "fbfbd6c83ce2c7ec20994ad7c44c301aa8955317c9a062131b22c20096dbd1a4"
     },
     {
       "audit": {
@@ -5535,7 +5551,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Factual-stage review verified question-only retrieval, immutable reuse of the paid program-002 document index, fresh manifest-bound query vectors, bounded reranking, physically delayed gold opening, deterministic scoring, fixed paired control, and atomic provider/product ledgers.",
+        "evidence": "Factual-stage review verified question-only retrieval, immutable reuse of the paid program-002 document index, fresh manifest-bound query vectors, stable deterministic method comparison after the nano operational failure, delayed gold opening, deterministic scoring, and atomic ledgers.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -5546,7 +5562,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "992d6113072c6fe90a39fa76f025ac6494de3dea4edd4498ae670f9836b115a9"
+      "sha256": "1bfe278c83f6fe82dac8d105017036d37223660cbfc5e27b98a49086b3218346"
     },
     {
       "audit": {
@@ -6798,18 +6814,23 @@
         "execute:finite-evaluation-program",
         "execute:finite-evaluation-program-002",
         "execute:finite-evaluation-program-003",
+        "execute:finite-evaluation-program-004",
         "preflight:finite-evaluation-program",
         "preflight:finite-evaluation-program-002",
         "preflight:finite-evaluation-program-003",
+        "preflight:finite-evaluation-program-004",
         "resume:finite-evaluation-program",
         "resume:finite-evaluation-program-002",
         "resume:finite-evaluation-program-003",
+        "resume:finite-evaluation-program-004",
         "simulate:finite-evaluation-program",
         "smoke:finite-evaluation-program-002",
         "smoke:finite-evaluation-program-003",
+        "smoke:finite-evaluation-program-004",
         "verify:finite-evaluation-program",
         "verify:finite-evaluation-program-002",
-        "verify:finite-evaluation-program-003"
+        "verify:finite-evaluation-program-003",
+        "verify:finite-evaluation-program-004"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
@@ -8892,7 +8913,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Control-plane review verified immutable manifest validation, safe repository-relative embedding-artifact reuse bound to its original instrument, exact budget sums, exclusive SQLite creation, revision/hash-bound resume, one invalid correction, and global termination.",
+        "evidence": "Control-plane review verified immutable manifest validation, safe repository-relative embedding-artifact reuse, an explicit hash-bound nano-reranking availability decision, exact budgets, exclusive outputs, revision/hash-bound resume, and global termination.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -8903,7 +8924,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "risk": "high",
-      "sha256": "3d7d711bbe7169e03147ca626090a54351328b26eede803c16a646de6ff6317e"
+      "sha256": "f814115cd25c6e833b520c1b8b1ec85d4db4500c59903efe277bd0b7be120cf1"
     },
     {
       "audit": {
@@ -9900,7 +9921,7 @@
     {
       "audit": {
         "domain": "atomic-m2-confirmation",
-        "evidence": "Freeze review preserves the repository-wide block, revokes failed program 002, and grants only dataset, external-model, and method-evaluation capabilities to the hash-bound corrective program 003.",
+        "evidence": "Freeze review preserves the repository-wide block, revokes failed programs 002/003, and grants only dataset, external-model, and method-evaluation capabilities to stable corrective program 004.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-three-agent-cross-review"
@@ -9911,7 +9932,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9f62826d029e17ef9f1da195b06a3463294f3721cb96c62cf772c62578d419e0"
+      "sha256": "881dc6807bad77ebfff7445bc927434237a1e597be8df31ae9886990f28bb9ca"
     },
     {
       "audit": {
@@ -10492,7 +10513,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify historical authorities including failed program 002 remain revoked, program 003 receives only dataset, external-model, and method-evaluation capabilities, and unrelated instruments remain rejected.",
+        "evidence": "Focused freeze-policy tests verify historical authorities including failed programs 002/003 remain revoked, program 004 receives only bounded evaluation capabilities, and unrelated instruments remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-three-agent-cross-review"
@@ -10503,7 +10524,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "ee6d5020e6129273ea16a63cc99a052049c3539d84c979010cbe3cb098cb68c5"
+      "sha256": "628ad1b508cb045022ac61ca31b3278d594a025e4012373fbf38986f1f5a8211"
     },
     {
       "audit": {
@@ -11612,7 +11633,7 @@
     {
       "audit": {
         "domain": "api-first-finite-evaluation-program-verification",
-        "evidence": "Tests validate exact bounded authority, paid-index reuse, network-free product scoring, freeze revocation of program 002, and complete response plus embedding-batch failure accounting.",
+        "evidence": "Tests validate exact program-004 authority, revocation of failed successors, explicit reranker exclusion, paid-index reuse, network-free product scoring, and embedding-batch failure accounting.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-first-program-review"
@@ -11621,9 +11642,9 @@
       "category": "verification",
       "disposition": "active_audited",
       "package_commands": [],
-      "path": "tests/test_course_digital_twin_evaluation_program_003.py",
+      "path": "tests/test_course_digital_twin_evaluation_program_004.py",
       "risk": "medium",
-      "sha256": "93cc249e1ec5b33c4dfd4c01c566b197c39b3629a2fba002326d10753605a68a"
+      "sha256": "36314b1059b95a2be88489c31ae5bb7aba2b84036ec9a1cffbfd843030672b49"
     },
     {
       "audit": {
@@ -12747,7 +12768,7 @@
     }
   ],
   "risk_counts": {
-    "high": 583,
+    "high": 584,
     "medium": 178
   },
   "schema_version": 1,

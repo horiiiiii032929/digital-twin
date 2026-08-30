@@ -536,19 +536,28 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
     _, bm25, hybrid, hierarchical, embedding_snapshot = _retrievers(
         context, cases
     )
-    nano_rankings, nano_snapshot = asyncio.run(
-        _nano_rankings(
-            context=context,
-            cases=cases,
-            hierarchical=hierarchical,
-            ledger_path=context.output_root / "nano-reranking-provider.sqlite3",
-            maximum_cost_usd=context.remaining_stage_budget_usd,
-            resume=context.resume,
+    nano_enabled = context.manifest.retrieval_nano_reranking_enabled is not False
+    if nano_enabled:
+        nano_rankings, nano_snapshot = asyncio.run(
+            _nano_rankings(
+                context=context,
+                cases=cases,
+                hierarchical=hierarchical,
+                ledger_path=context.output_root / "nano-reranking-provider.sqlite3",
+                maximum_cost_usd=context.remaining_stage_budget_usd,
+                resume=context.resume,
+            )
         )
-    )
+    else:
+        nano_rankings = {}
+        nano_snapshot = {
+            "provider_calls": 0,
+            "reported_cost_usd": 0.0,
+            "status": "disabled-after-program-003-operational-failure",
+        }
     methods = []
     observations: dict[str, list[dict[str, Any]]] = {}
-    for method_id, retrievers, use_hierarchy, rerank in (
+    method_contracts = [
         ("bm25-v1", bm25, False, None),
         (
             "openai-small-hybrid-v2"
@@ -559,20 +568,24 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
             None,
         ),
         ("hierarchical-deterministic-v1", hierarchical, True, None),
-        (
-            "hierarchical-nano-rerank-v1",
-            hierarchical,
-            True,
-            lambda question, hits: nano_rankings.get(
-                next(
-                    row.case_id
-                    for row in selected_cases
-                    if row.question == question
+    ]
+    if nano_enabled:
+        method_contracts.append(
+            (
+                "hierarchical-nano-rerank-v1",
+                hierarchical,
+                True,
+                lambda question, hits: nano_rankings.get(
+                    next(
+                        row.case_id
+                        for row in selected_cases
+                        if row.question == question
+                    ),
+                    [hit.chunk.id for hit in hits],
                 ),
-                [hit.chunk.id for hit in hits],
-            ),
-        ),
-    ):
+            )
+        )
+    for method_id, retrievers, use_hierarchy, rerank in method_contracts:
         rows, summary = evaluate_retrieval_method(
             method_id=method_id,
             cases=selected_cases,
@@ -655,6 +668,15 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
             "result_sha256": file_sha256(result_path),
             "rankings_sha256": file_sha256(ranking_path),
         },
+        limitations=(
+            [
+                "Nano-assisted retrieval was excluded prospectively after program "
+                "003 returned an incomplete response. Stable deterministic methods "
+                "remain compared under unchanged cases, gold, and gates."
+            ]
+            if not nano_enabled
+            else []
+        ),
     )
 
 

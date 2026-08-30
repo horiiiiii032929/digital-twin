@@ -169,6 +169,7 @@ class ProgramManifestV1(BaseModel):
     retrieval_execution_device: Literal["cpu"] = "cpu"
     retrieval_execution_dtype: Literal["float16"] = "float16"
     retrieval_embedding: ProgramEmbeddingBindingV1 | None = None
+    retrieval_nano_reranking_enabled: bool | None = None
     models: list[ProgramModelBindingV1] = Field(min_length=4, max_length=4)
     stages: list[ProgramStageV1] = Field(min_length=9, max_length=9)
     metadata_verified_at: datetime
