@@ -11,6 +11,7 @@ from scripts.run_cross_course_retrieval_qualification import (
     preflight_provider,
 )
 from services.embeddings.jina_client import JinaTextEmbedder
+from services.embeddings.openai_client import OpenAITextEmbedder
 from services.embeddings.fastembed_client import FastEmbedTextEmbedder
 from services.embeddings.qwen3_client import Qwen3TextEmbedder
 from services.reranking.jina_client import JinaReranker
@@ -283,6 +284,83 @@ def test_jina_embedding_contract_records_provider_usage() -> None:
     assert usage.request_count == 2
     assert usage.input_tokens == 12
     assert usage.approximate_cost_usd == pytest.approx(0.000012)
+
+
+def test_openai_embedding_contract_requires_exact_identity_and_indexes() -> None:
+    requests = []
+
+    def transport(url, headers, body, timeout):
+        requests.append((url, headers, body, timeout))
+        return {
+            "object": "list",
+            "model": body["model"],
+            "usage": {"prompt_tokens": 7, "total_tokens": 7},
+            "data": [
+                {"index": 1, "embedding": [0.0, 2.0]},
+                {"index": 0, "embedding": [1.0, 0.0]},
+            ],
+        }
+
+    ledger = RetrievalUsageLedger(
+        max_cost_usd=1,
+        price_per_million_input_tokens_usd=0.02,
+    )
+    embedder = OpenAITextEmbedder(
+        "secret-token",
+        ledger=ledger,
+        dimensions=2,
+        batch_size=2,
+        transport=transport,
+    )
+
+    assert embedder.embed_documents(["first", "second"]) == [
+        [1.0, 0.0],
+        [0.0, 2.0],
+    ]
+    assert requests[0][0] == "https://api.openai.com/v1/embeddings"
+    assert requests[0][2] == {
+        "model": "text-embedding-3-small",
+        "input": ["first", "second"],
+        "encoding_format": "float",
+        "dimensions": 2,
+    }
+    assert ledger.usage_snapshot().input_tokens == 7
+
+
+def test_openai_embedding_contract_rejects_identity_and_token_drift() -> None:
+    ledger = RetrievalUsageLedger(
+        max_cost_usd=1,
+        price_per_million_input_tokens_usd=0.02,
+    )
+
+    def wrong_identity(url, headers, body, timeout):
+        del url, headers, timeout
+        return {
+            "model": "text-embedding-3-large",
+            "data": [{"index": 0, "embedding": [1.0, 0.0]}],
+        }
+
+    embedder = OpenAITextEmbedder(
+        "secret-token",
+        ledger=ledger,
+        dimensions=2,
+        transport=wrong_identity,
+    )
+    with pytest.raises(RetrievalProviderError, match="identity drifted"):
+        embedder.embed_query("question")
+
+    bounded = OpenAITextEmbedder(
+        "secret-token",
+        ledger=RetrievalUsageLedger(
+            max_cost_usd=1,
+            price_per_million_input_tokens_usd=0.02,
+        ),
+        dimensions=2,
+        request_token_limit=1,
+        transport=wrong_identity,
+    )
+    with pytest.raises(RetrievalProviderError, match="request token"):
+        bounded.embed_documents(["more than three characters"])
 
 
 def test_jina_reranker_restores_original_document_order() -> None:

@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-api-retrieval-selection-001-build",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-selected-development-300",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-source-clusters",
+  "code_revision": "a954d62a48bf04f7127e6ae1b836a6104ca4843b",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "historical-local-qwen3-hybrid-control",
+        "version": "historical-control",
+        "configuration": {
+          "local_model_loading": true,
+          "streamed_api_index_materialization": false,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "frozen-method-count",
+          "value": 1.0,
+          "unit": "methods",
+          "direction": "higher-is-better",
+          "threshold": 7.0,
+          "passed": false
+        },
+        {
+          "name": "network-free-terminal-simulations",
+          "value": 0.0,
+          "unit": "scenarios",
+          "direction": "higher-is-better",
+          "threshold": 3.0,
+          "passed": false
+        },
+        {
+          "name": "repository-correctness-audited-files",
+          "value": 711.0,
+          "unit": "files",
+          "direction": "higher-is-better",
+          "threshold": 717.0,
+          "passed": false
+        },
+        {
+          "name": "repository-test-count",
+          "value": 1282.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 1295.0,
+          "passed": false
+        },
+        {
+          "name": "build-provider-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "memory-bounded-materialization",
+          "passed": false,
+          "evidence": "AFQC-094 terminated before scoring because the local model path exceeded the usable memory envelope on this host."
+        },
+        {
+          "name": "exact-provider-binding",
+          "passed": true,
+          "evidence": "The historical local-model binding remains versioned and unchanged."
+        },
+        {
+          "name": "resume-and-corruption-safety",
+          "passed": false,
+          "evidence": "The historical local path did not complete a corpus materialization to exercise immutable resume and corruption checks."
+        },
+        {
+          "name": "gold-opening-order",
+          "passed": true,
+          "evidence": "The historical run stopped before scoring and did not open the selected hidden-gold tranche."
+        },
+        {
+          "name": "provider-and-paid-execution-closed",
+          "passed": true,
+          "evidence": "The historical local execution required no paid provider call and its authority is revoked."
+        }
+      ],
+      "failures_by_category": {
+        "local-model-memory": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "api-first-retrieval-comparison-v1",
+        "version": "001-build",
+        "configuration": {
+          "method_ids": "M0-bm25;M1-openai-small-dense;M2-openai-small-hybrid;M3-openai-large-dense;M4-openai-large-hybrid;M5-openai-large-hybrid-hierarchical;M6-openai-large-hybrid-hierarchical-nano-rerank",
+          "source_cluster_count": 2100,
+          "selected_development_case_count": 300,
+          "maximum_embedding_batch_size": 64,
+          "maximum_total_calls": 104,
+          "maximum_cost_usd": 2.0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "frozen-method-count",
+          "value": 7.0,
+          "unit": "methods",
+          "direction": "higher-is-better",
+          "threshold": 7.0,
+          "passed": true
+        },
+        {
+          "name": "network-free-terminal-simulations",
+          "value": 3.0,
+          "unit": "scenarios",
+          "direction": "higher-is-better",
+          "threshold": 3.0,
+          "passed": true
+        },
+        {
+          "name": "repository-correctness-audited-files",
+          "value": 717.0,
+          "unit": "files",
+          "direction": "higher-is-better",
+          "threshold": 717.0,
+          "passed": true
+        },
+        {
+          "name": "repository-test-count",
+          "value": 1295.0,
+          "unit": "tests",
+          "direction": "higher-is-better",
+          "threshold": 1295.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "memory-bounded-materialization",
+          "passed": true,
+          "evidence": "Each embedding batch is written transactionally to SQLite and released before the next batch; immutable dense output is streamed in source order."
+        },
+        {
+          "name": "exact-provider-binding",
+          "passed": true,
+          "evidence": "The adapter validates exact model identity, dimensions, ordered indices, finite vectors, usage, batch size, and token limits."
+        },
+        {
+          "name": "resume-and-corruption-safety",
+          "passed": true,
+          "evidence": "Focused tests cover interruption, immutable binding, idempotence, checksum rejection, and query-cache resume."
+        },
+        {
+          "name": "gold-opening-order",
+          "passed": true,
+          "evidence": "All method rankings must be durably persisted before hidden gold can be loaded for scoring."
+        },
+        {
+          "name": "provider-and-paid-execution-closed",
+          "passed": true,
+          "evidence": "The instrument and repository allowlist both keep provider and paid execution unauthorized; build verification made zero calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "api-first-retrieval-comparison-v1",
+    "rationale": "The successor removes the local model-memory blocker while retaining repository-owned source registration, BM25, immutable vector artifacts, citation lineage, hidden gold, and deterministic scoring. It is ready for one separately authorized 300-case method decision without changing the active product profile.",
+    "limitations": [
+      "This is build-only evidence and does not establish retrieval quality or select an embedding model.",
+      "The comparison uses public open educational sources and excludes the private Academia Vault and student data.",
+      "M5 is prospectively fixed to the large-hybrid base so hidden gold cannot choose its parent method after execution.",
+      "M6 uses bounded GPT-5.4 nano reranking on at most 40 percent of difficult cases and remains unselected.",
+      "The local R1 release profile and the 500+100 and sealed 10,000 product runs remain unchanged and unauthorized."
+    ]
+  }
+}

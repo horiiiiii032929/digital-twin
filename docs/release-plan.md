@@ -70,11 +70,22 @@ in the first long-context batch. Both ledgers record zero provider calls, zero
 tokens, USD 0, zero scored cases, and no hidden-gold access.
 
 Program authority is revoked and the instrument cannot be retried. The
-qualified local R1 remains selected. The academic critical path is one new
-memory-bounded, checkpointed retrieval-materialization instrument under #127;
-only after its network-free resource envelope passes may the 500+100 and sealed
-10,000+1,000 factual path be reopened. Visual, C0-C3, and provider T0/T1 stages
-did not execute and retain their existing evidence boundaries.
+qualified local R1 remains selected. AFQC-095 moved the academic critical path
+to one API-first retrieval successor under #127. Direct OpenAI embeddings
+replaced local-model inference, while deterministic source registration, BM25,
+immutable vector artifacts, canonical citation ranges, hidden gold, and scoring
+remained repository-owned.
+
+AFQC-100 closes that 300-case comparison as valid `completed-refine` evidence.
+M4 was best at 38.7% complete evidence@3 and 44.7% Recall@5, far below the
+90%/95% gates. Boundary accuracy was 96.9% with one severe unsupported release;
+M6 failed its semantic response contract. The run used 83 calls, zero retries,
+USD 0.0593379, and no private data. No product profile changes. The next
+academic package must jointly correct structured source registration,
+context-complete reference questions, and retrieval matching, then confirm on
+a fresh source-disjoint tranche. Only that pass may reopen 500+100 and sealed
+10,000+1,000 execution. Visual, C0-C3, and provider T0/T1 stages retain their
+existing boundaries.
 
 ## Release stages
 

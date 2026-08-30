@@ -22,6 +22,8 @@ from src.digital_twin.model_policy import (
     OPENAI_HIGH_VOLUME_MODEL,
     OPENAI_ROUTINE_REVIEW_MODEL,
     OPENAI_SEMANTIC_REVIEW_MODEL,
+    OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
+    OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
     OPENROUTER_GPT_MINI_REVIEW_MODEL,
@@ -96,6 +98,8 @@ def validate() -> dict[str, Any]:
     require_active_release_model(OPENAI_HIGH_VOLUME_MODEL)
     require_active_release_model(OPENAI_ROUTINE_REVIEW_MODEL)
     require_active_release_model(OPENAI_SEMANTIC_REVIEW_MODEL)
+    require_registered_current_model(OPENAI_TEXT_EMBEDDING_SMALL_MODEL)
+    require_registered_current_model(OPENAI_TEXT_EMBEDDING_LARGE_MODEL)
     require_registered_current_model(embedding_model)
     require_registered_current_model(JINA_EMBEDDING_MODEL)
     require_registered_current_model(JINA_RERANKER_MODEL)
@@ -171,6 +175,10 @@ def validate() -> dict[str, Any]:
             OPENROUTER_GPT_MINI_REVIEW_MODEL,
         ],
         "active_release_models": sorted(ACTIVE_RELEASE_MODEL_IDS),
+        "prospective_embedding_models": [
+            OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
+            OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
+        ],
         "openrouter_provider_options": controlled_openrouter_provider_options(),
         "active_profile": {
             "generator": "deterministic-grounded-generator-v1",

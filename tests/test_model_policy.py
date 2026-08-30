@@ -13,6 +13,8 @@ from src.digital_twin.model_policy import (
     OPENAI_ROUTINE_REVIEW_LITELLM_MODEL,
     OPENAI_SEMANTIC_REVIEW_MODEL,
     OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
+    OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
+    OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
     OPENROUTER_GEMINI_REVIEW_MODEL,
     OPENROUTER_GPT_MINI_REVIEW_MODEL,
@@ -67,6 +69,8 @@ def test_model_policy_rejects_gemma_and_retired_general_reviewers(model):
         "Qwen/Qwen3-Reranker-0.6B",
         "jina-embeddings-v5-text-small",
         "jina-reranker-v3",
+        OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
+        OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
     ),
 )
 def test_registered_current_models_are_accepted(model):

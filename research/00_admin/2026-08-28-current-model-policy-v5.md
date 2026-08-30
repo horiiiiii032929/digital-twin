@@ -1,7 +1,8 @@
-# Current model policy v5
+# Current model policy v9
 
-Status: prospective R1, build-only, provider execution unauthorized  
-Verified: 2026-08-28 (Asia/Singapore)
+Status: local R1 retained; API-first retrieval selection completed Refine and
+provider execution revoked
+Verified: 2026-08-30 (Asia/Singapore)
 
 ## Decision
 
@@ -21,9 +22,16 @@ DeepSeek, Gemini, Mistral, OpenRouter, Codex review, and local general models
 remain visible only in immutable historical evidence or separately closed
 experiments. They cannot be selected by the active R1 evaluation checkpoint.
 
+The AFQC-095 retrieval successor additionally registered direct OpenAI
+`text-embedding-3-small` and `text-embedding-3-large`. AFQC-100 evaluated their
+dense and BM25-hybrid configurations on 300 development cases; none passed and
+neither model is selected as a release component. Historical local Qwen3
+remains reproducible control evidence, while the active local R1 is unchanged.
+
 ## Provider boundary
 
 - Endpoint: `https://api.openai.com/v1/responses`.
+- Embedding endpoint: `https://api.openai.com/v1/embeddings`.
 - Credential: repository-ignored `OPENAI_API_KEY` only.
 - Exact dated snapshot identity is required in every response.
 - Structured output is strict and server-owned.
@@ -33,6 +41,9 @@ experiments. They cannot be selected by the active R1 evaluation checkpoint.
   ledgers. Checkpoint 005 has zero retries and a USD 8 aggregate emergency stop.
 - Every paid run requires model/pricing/retention metadata verified within 24
   hours, a clean worktree, a fresh exclusive ledger, and separate authority.
+- Embedding requests are limited locally to 64 inputs and 50,000 estimated
+  tokens, require exact returned model identity and dimensions, and persist
+  each completed vector batch before continuing.
 
 The API is not used for training by default. Standard abuse-monitoring logs may
 retain customer content for up to 30 days unless an approved retention control
@@ -45,6 +56,9 @@ privacy review explicitly permits another data boundary.
 - [GPT-5.4 nano model](https://developers.openai.com/api/docs/models/gpt-5.4-nano)
 - [GPT-5.4 model](https://developers.openai.com/api/docs/models/gpt-5.4)
 - [OpenAI API data controls](https://platform.openai.com/docs/models/default-usage-policies-by-endpoint)
+- [Create embeddings API](https://developers.openai.com/api/reference/resources/embeddings/methods/create)
+- [text-embedding-3-small](https://developers.openai.com/api/docs/models/text-embedding-3-small)
+- [text-embedding-3-large](https://developers.openai.com/api/docs/models/text-embedding-3-large)
 
 Any model, price, API behavior, or retention change creates a new prospective
 binding. Historical evidence is never rewritten.

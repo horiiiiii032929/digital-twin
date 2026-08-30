@@ -262,7 +262,7 @@
       "domain": "r1-demo-build-and-evaluation-v2",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Command-surface review verified the API-first retrieval validator, finite simulations, blocked no-call preflight, authority-gated execution/resume commands, and all retained repository gates.",
       "findings": []
     },
     {
@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "fa01771a57552bc7e69d80785bceb6041e020e9d5f922b3e41811ac39dc7e56d"
+      "sha256": "ae7d39d0cbe812be37d3ac903d727f768e109d4d5a7d92eb0da7ba6a60e9601c"
     },
     {
       "audit_status": "audited",
@@ -4641,7 +4641,7 @@
       "path": "scripts/validate_model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "bfc52b19bf61b5fb30eba266c46bf1c61b0e26cf6b7a91a323547e69dc0b83cf"
+      "sha256": "2134c5674f758eb8b6c0d768cd3212b78cfbe5b5ee32395867ad7028a04d7fdb"
     },
     {
       "audit_status": "audited",
@@ -4949,7 +4949,7 @@
       "path": "services/embeddings/__init__.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "1e245c3d8d36f199c29c8f3912edc26cc4901ba5b53388a99fa0afb2d289c5fd"
+      "sha256": "ce99f17d2858d4b9700a2cb805d73a1c31f54eb8b4292cdf3ad6ef064393f57f"
     },
     {
       "audit_status": "audited",
@@ -5488,7 +5488,7 @@
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "b6ccf624da95f7693b41c7f3b96c4f63d4e2909d86997d04d281e6c0e66ca266"
+      "sha256": "55c8c182509b82b91ffce028814f6a64a39577cfd729f02f73d72878c7ded72b"
     },
     {
       "audit_status": "audited",
@@ -5714,12 +5714,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Policy v7 records all four screened product generators as quality-failed/not-selected, preserves unexecuted advisory roles, and retains deterministic generation for release without enabling provider execution.",
+      "evidence": "Policy v9 preserves deterministic release selection and historical bindings while marking both OpenAI embedding candidates AFQC-100 quality-failed/not-selected after the valid comparison.",
       "findings": [],
       "path": "src/digital_twin/model_policy.py",
-      "reviewed_at": "2026-08-29",
+      "reviewed_at": "2026-08-30",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "223106a7ab0bddefcf103a006c8b36bcec62be18cc885a4b40463a23c1741bc2"
+      "sha256": "0cf8966fe10be462bc39cb27142c58ca65ed590e60f0962aa2ae3ee9099bb34d"
     },
     {
       "audit_status": "audited",
@@ -5901,12 +5901,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Revocation review verified the terminated finite program is absent from bounded authorizations while the repository-wide freeze remains active. The unrelated deterministic development authorization is unchanged.",
+      "evidence": "Freeze review verifies AFQC-100 revoked the API-first retrieval instrument and leaves dataset, held-out, private, product, provider, and final execution blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "1d7c26a45971597852d9d562af0904ce0f6f8017a3a9a523a02a7c58c4c4e946"
+      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the terminated finite program is rejected for every former operation class while held-out, private-source, external-delivery, promotion, and unrelated execution remain rejected.",
+      "evidence": "Focused freeze-policy tests verify the completed API-first retrieval instrument no longer has external-model or method authority and all unrelated execution remains rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-authorization-review",
-      "sha256": "9b962874c319469bfba232fbb3f59cf5eed745bb193dd23b6e7235c398b033be"
+      "sha256": "9851e13de9a70c2451083a67c56d9271bd22c57c035a81d9a34c8fdc1f4ce9c4"
     },
     {
       "audit_status": "audited",
@@ -6478,7 +6478,7 @@
       "path": "tests/services/test_retrieval_provider.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "c132ef54ecc2680f478c61998926f45aa499e5ce1badfbc7e822d5e46dee73d0"
+      "sha256": "6d13cf2a6739cd16bb6d950cbcbf2768ad3c0e63b2a13ea9904d71d02a2c8369"
     },
     {
       "audit_status": "audited",
@@ -7292,7 +7292,7 @@
       "path": "tests/test_model_policy.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "267a54c6006f97553e21e307c1143cde8559f895636012632884a70047151897"
+      "sha256": "e5b722137d3ecc880aa9a0256c18e3f79d1bd1ea801f1b237201acdda6522f92"
     },
     {
       "audit_status": "audited",
@@ -7821,6 +7821,72 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
       "sha256": "547a0a71ee85f8769f4a5969ded19e051e5eb01704654d687898a9ab2c3462b1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor",
+      "evidence": "Terminal instrument review verifies the immutable public source/package hashes, completed 300-case M0-M6 comparison, hidden-gold order, AFQC-100 Refine state, and revoked provider/paid authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "8928a07b48a03da917d6836b5db3384c46c181521575e08db5cbf0c5aa561082"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor",
+      "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, optional-method fail isolation, and fail-closed terminal validation after authority revocation.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "e3c66e01fd3e6fdb6fb87decd191549c75354ed215fd3aa39b284850a13aa12f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor",
+      "evidence": "Adapter review verified direct HTTPS-only OpenAI embeddings, model registration, exact returned identity and indexes, dimensions, finite vectors, per-input/request limits, usage accounting, and fail-before-budget behavior with zero internal retries.",
+      "findings": [],
+      "path": "services/embeddings/openai_client.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "8c6a9d8fe8bd35fd6aa17263f519aef318400c43113edab67b6944342347edc5"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor",
+      "evidence": "Index-lifecycle review verified prospective v2 bindings, course/source/version isolation, item-and-token-bounded vector batches, SQLite checkpoints, stable resume partitioning, streamed dense publication, immutable hashes, corruption rejection, and query-only runtime loading.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/api_retrieval_index.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "1bc4c036fe975225942dc5224918e9fd25dab3cca786952fdaffa79e9b55d781"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor-verification",
+      "evidence": "Focused tests cover item-and-token-bounded immutable materialization, idempotency, runtime loading, interruption/resume, resume binding drift, embedder drift, and artifact checksum corruption.",
+      "findings": [],
+      "path": "tests/digital_twin/test_api_retrieval_index.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "e12cde40a7f0e3f563b441808e7d480d56a0c2606366884a933bac1d4a164e9c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-retrieval-successor-verification",
+      "evidence": "Focused tests cover terminal validation, blocked post-run preflight, revoked authority, finite simulations, hash-bound query replay, and no-retry isolation of optional reranker semantic failure.",
+      "findings": [],
+      "path": "tests/test_api_retrieval_selection.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-retrieval-review",
+      "sha256": "a8c42f4ba3fbb07c6610b5856c17a2ac5657a976bb2f3f7b8c6843f253a1ab40"
     }
   ],
   "schema_version": 1

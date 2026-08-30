@@ -1,6 +1,14 @@
 # Course Digital Twin Release
 
-Status date: 2026-08-28
+Status date: 2026-08-30
+
+Issue #127 is the active P0 research item at `In Progress / Refine`. AFQC-100
+completed the exact API-first M0–M6 comparison on 300 cases. No method passed:
+the best result was 38.7% complete evidence@3 and 44.7% Recall@5, boundary
+accuracy was 96.9%, and one severe ambiguity release occurred. The 83-call,
+USD 0.0593379 authority is revoked. The next Project transition is one joint
+source-registration, reference-question, and retrieval-matching redesign on a
+fresh source-disjoint tranche. The qualified local R1 is unchanged.
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -27,35 +35,17 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  the retrieval-index successor now covers 649/649 audited files and 97/97
+  the retrieval-index successor now covers 717/717 audited files and 105/105
   frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
-  leakage-free product evaluation. Its OpenAI-only checkpoint first qualifies
-  GPT-5.4 on 40 controls, then conditionally runs 500 candidate and 100 control
-  cases. AFQC-050 authorized this path once, but both calibration attempts
-  stopped after their first exact GPT-5.4 batch on evaluator-contract
-  inconsistencies. AFQC-052 revokes authority; the 500+100 product run and
-  sealed 10,000 cases remain unopened. AFQC-055 preserves calibration 004 as
-  invalid after three exact GPT-5.4 calls because one clarify vote omitted its
-  mandatory boundary reason. Authority is revoked, hidden labels stayed closed,
-  and AFQC-056 replaces it with deterministic-primary checkpoint 004. AFQC-058
-  preserves its valid wording-stage Refine result: 452/500 accepted variants,
-  48 canonical fallbacks, 50/50 exact calls, USD 0.555499, and zero T0 product
-  calls. AFQC-059/060 reuse that immutable mixed package and build product-only
-  checkpoint 005 with no new wording stage. AFQC-061 keeps mini generation,
-  uses nano for routine review, caps full-model truth escalation at 12 cases,
-  and lowers the emergency ceiling to USD 8. Its five network-free outcomes pass;
-  AFQC-062 authorized the 500+100 product run once. Attempt 001 stopped before
-  provider I/O on a missing locked retrieval extra; AFQC-063 corrected that
-  invocation. The sole corrective attempt then failed operationally before case
-  1 after 2 h 15 min of on-demand indexing. AFQC-064 revokes authority and
-  requires a prebuilt-index successor. AFQC-068 now qualifies that lifecycle on
-  real local Qwen: four indexes over 2,100 public regions pass every resource
-  gate, and 40/40 queries remain non-empty and ranking-identical after restart
-  with zero runtime document embeddings. #139 is now Done / Keep. AFQC-069
-  prepares checkpoint 006 under #127 with exact artifact verification, five
-  finite simulations, and no provider authority. The sealed
-  10,000 cases remain closed.
+  leakage-free actual-product evaluation. AFQC-094 preserves the finite
+  program as invalid after local Qwen3 materialization failed twice before any
+  provider or product call. AFQC-095 now selects an API-first retrieval
+  successor: BM25, direct OpenAI small/large dense and hybrid retrieval,
+  deterministic hierarchy, and bounded API reranking were compared on 300
+  development cases. Source registration, vectors, citation ranges, hidden
+  gold, and scoring stayed repository-owned. The result is valid `Refine`, no
+  method is selected, and 500+100 plus sealed 10,000+1,000 remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -67,11 +57,11 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Separately authorize #139's resumable local-Qwen 2,100-region index
-   qualification; it opens no product or final case.
-3. After #139 passes, freeze and separately authorize one new 500-case
-   candidate plus paired 100-case control; authorize the sealed 10,000 cases
-   only after a complete development pass.
+2. Preserve #127's completed API-first comparison and its unfavorable result.
+3. Build one joint structured-source, context-complete question, and retrieval
+   successor, then confirm it on a fresh source-disjoint tranche. Only its pass
+   may prepare 500+100; only a complete development pass may prepare sealed
+   10,000+1,000 execution.
 4. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
@@ -89,8 +79,8 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Explicit authorization for #139 local-Qwen qualification | Real retrieval-index resource evidence and successor design |
-| Passing #139 result plus successor authorization | #127 T0 development execution |
+| Joint source/question/indexing successor and fresh confirmation | Passing #127 retrieval-method decision |
+| Passing fresh #127 result plus successor authorization | #127 T0 500+100 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

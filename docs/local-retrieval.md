@@ -1,6 +1,36 @@
 # Local retrieval and source evidence
 
-## Decision
+## API-first successor result
+
+AFQC-095 left the historical Qwen3 selection and local R1 untouched but removed
+local model inference from the next academic evaluation. AFQC-100 completed the
+frozen comparison of BM25, direct OpenAI small/large dense and hybrid retrieval,
+a prospectively bound hierarchical method, and optional bounded GPT-5.4 nano
+reranking on 300 development cases.
+
+The API creates vectors only. Approved source registration, deterministic
+chunk/range identities, BM25, immutable vector files, citations, hidden gold,
+and scoring remain repository-owned. The v2 materializer writes one API batch
+at a time to a hash-bound SQLite checkpoint and streams the final `dense.f32`
+artifact without retaining the full provider vector set as Python objects.
+Every ranking was durable before hidden gold opened. M4, BM25 plus
+`text-embedding-3-large`, was best descriptively at 38.7% complete evidence@3
+and 44.7% Recall@5, but failed the 90%/95% gates. Boundary accuracy was 96.9%
+with one severe unsupported ambiguity release. M6 failed its semantic output
+contract. No API method is selected, authority is revoked, and this path is not
+the active release profile. The next candidate must jointly address structured
+source representation, context-complete questions, and retrieval matching on a
+fresh source-disjoint tranche.
+
+Reproducible validation commands:
+
+```bash
+npm run verify:api-retrieval-selection
+npm run simulate:api-retrieval-selection
+npm run preflight:api-retrieval-selection
+```
+
+## Historical local decision
 
 Sprint 2 established the inspectable term-overlap and Okapi BM25 rankers over
 the same approved chunks. BM25 remains the explicit rollback baseline.

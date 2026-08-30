@@ -18,12 +18,69 @@ hidden-gold or final-set access. Authorization is revoked, this instrument
 cannot be retried, and no factual, visual, synthetic-profile, or provider-backed
 T0/T1 quality claim follows from it.
 
-The qualified local R1 remains unchanged. Issue #127 stays the P0 academic
-track but now requires one new, prospectively frozen memory-bounded retrieval
-materialization successor before 500+100 or 10,000+1,000 product evaluation can
-resume. The successor must prove its resource envelope on public development
-data before any paid or sealed execution. This is a finite method-level action,
-not permission to reopen repeated prompt, model, or evaluator tuning.
+The qualified local R1 remains unchanged. AFQC-095 replaces the proposed local
+memory-bounded retry with an API-first retrieval successor under issue #127.
+All prospective retrieval ML inference moves to direct OpenAI APIs; source
+registration, canonical ranges, BM25, vector snapshots, citation lineage,
+hidden gold, and scoring remain deterministic repository-owned authority. The
+successor compared BM25, OpenAI small/large dense and hybrid retrieval,
+deterministic hierarchy, and bounded API reranking on the previously untouched
+300 development cases. Historical Qwen3 evidence is preserved but the local
+model leaves the active path. The one-time comparison authority is now revoked;
+500+100 and sealed 10,000+1,000 execution remain unauthorized.
+
+AFQC-096 implements and freezes that build-only successor on draft PR #149.
+Direct OpenAI small/large embedding adapters now fail closed on identity,
+index, dimension, finite-value, per-input, per-request, and budget drift. A
+separate v2 index lifecycle checkpoints bounded batches in SQLite, streams the
+final float32 artifact, verifies hashes, and resumes without loading a local
+model. The M0–M6 instrument binds the exact public 2,100-region corpus and
+untouched 300-case split; all rankings must be persisted before hidden gold
+opens. Network-free pass, quality-failure, and identity-drift paths are
+implemented. The live preflight remains blocked by authority only after a clean
+checkout; no API call or selection has occurred.
+
+AFQC-097 records the researcher's one-time paid authorization for exactly
+`academic-factual-qa-api-retrieval-selection-001`. Official OpenAI model,
+endpoint, request-limit, pricing, and retention documentation was refreshed on
+2026-08-30 before freezing the authorization. The bounded allowlist exposes
+only external-model and method-evaluation execution for this instrument under
+104 calls and a USD 2 emergency stop. The global freeze remains active; private
+data, product execution, 500+100, and sealed 10,000+1,000 execution remain
+unauthorized.
+
+AFQC-098 records a recoverable first-execution interruption after six successful
+small-embedding batches. The ledger contains 384 vectors, 158,555 reported
+input tokens, and USD 0.0031711; no rankings, hidden gold, result, reranking,
+product, private, or final data was opened. The seventh local materializer batch
+exceeded the stricter frozen 50,000-token request cap and was rejected before
+that request was sent. The harness correction partitions source batches by both
+the unchanged 64-item and 50,000-token limits. It changes no source, case,
+model, method, prompt, gold, gate, or budget and permits an atomic resume from
+the six durable batches.
+
+AFQC-099 records the optional M6 reranker failure without discarding the
+completed retrieval methods. Its first and only GPT-5.4 nano call returned all
+ten case IDs but omitted one or more supplied chunk IDs for several cases. The
+strict semantic invariant rejected that output; the ledger records one call,
+10,748 input tokens, 826 output tokens, USD 0.0031821, exact identity, and zero
+retry. M6 is therefore failed and non-selectable. The fail-isolated completion
+path makes no further M6 call, preserves the response, retains M5 rankings only
+as diagnostic placeholders for M6, and proceeds to score M0-M5 after all
+rankings are durable.
+
+AFQC-100 records the terminal valid `completed-refine` result. M4, BM25 plus
+`text-embedding-3-large`, was best descriptively but reached only 38.7%
+complete evidence@3 and 44.7% Evidence Recall@5 against gates of 90% and 95%.
+Boundary accuracy was 96.9% against 98%, with one severe unsupported ambiguity
+release. M6 remained failed/non-selectable after its single semantic-output
+defect. The run completed 83 exact provider calls with zero retries, no private
+data, and USD 0.0593379 reported cost. No method is selected and authority is
+revoked. The zero-result structured code/equation/table slices and weak,
+deictic reference questions show that the next step must jointly redesign
+structured source registration, context-complete reference questions, and
+retrieval matching on a fresh source-disjoint tranche. A model-only swap or a
+rerun of these known 300 cases is not justified.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR

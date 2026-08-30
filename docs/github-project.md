@@ -44,16 +44,23 @@ and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
-checkpoint. AFQC-093 authorized the finite program, but AFQC-094 terminated it
+goal. AFQC-093 authorized the finite program, but AFQC-094 terminated it
 as operationally invalid before case execution: Apple MPS stalled, and the one
 permitted CPU/float16 correction exceeded the practical memory envelope. The
 program made zero provider calls, spent USD 0, scored zero cases, and opened no
-hidden gold. Its authority is revoked and it cannot be retried. #127 is now
-`In Progress / Refine / priority:p0`, with one concrete next method boundary:
-build and network-free qualify a memory-bounded, checkpointed retrieval-index
-materializer in a new prospective instrument. #105 and #131 remain blocked
-evidence consumers; #24 and #10 retain their professor-approval and
-external-human boundaries. The qualified local R1 remains unchanged.
+hidden gold. Its authority is revoked and it cannot be retried. AFQC-095 makes
+#127 `In Progress / Refine / priority:p0` with one completed API-first method
+boundary: direct OpenAI small/large embeddings and optional bounded reranking,
+with repository-owned source registration, BM25, immutable vectors, citations,
+gold, and scoring. AFQC-100 records its valid `Refine` result: M4 was best at
+38.7% complete evidence@3 and 44.7% Recall@5, boundary accuracy was 96.9%, and
+one severe ambiguity release occurred. No method is selected; the USD
+0.0593379/83-call authority is revoked. The next bounded package is one joint
+structured-source, reference-question, and retrieval-matching redesign on a
+fresh source-disjoint tranche. It must pass before 500+100 or sealed
+10,000+1,000 execution can reopen. #105 and #131 remain blocked evidence
+consumers; #24 and #10 retain their professor-approval and external-human
+boundaries. The qualified local R1 remains unchanged.
 
 ## Release stages and product gates
 
@@ -74,13 +81,17 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must replace the failed finite-program retrieval materializer before it
-   can reuse or rebuild the #139 persisted retrieval indexes. The terminated
+1. #127 must preserve AFQC-100 as valid unfavorable evidence and design one
+   prospective source/question/indexing successor. The terminated
    program is immutable invalid evidence: two operational attempts, one exact
    harness correction, zero provider calls, USD 0, and no scored cases. Its
-   successor must stream or checkpoint index construction within a proven
-   memory envelope before restoring the flow-independent 500+100 and 10,000+
-   1,000 evaluation path. The successor will retain the flow-independent
+   successor registered direct OpenAI embedding candidates, atomically
+   checkpointed bounded API batches, and completed the preregistered comparison
+   on 300 cases, but none passed. The next action is method redesign, not an
+   embedding-model swap or rerun. A fresh confirmation pass is required to
+   restore the flow-independent 500+100 and 10,000+1,000 evaluation path. The
+   successor
+   retains the flow-independent
    10,000-case product contract and #105 evidence-decision boundary. Terminated
    build revision `f267fb0` remains reproducible historical evidence for the
    nine-stage control plane, USD 44.60 p99 projection, USD 50 absolute stop,
