@@ -240,13 +240,20 @@ def _api_retrievers(
         batch_size=embedding.batch_size,
         request_token_limit=embedding.request_token_limit,
     )
-    shared_root = context.output_root.parent / "_shared-api-retrieval-index-v2"
+    shared_root = (
+        context.root / embedding.artifact_root_path
+        if embedding.artifact_root_path is not None
+        else context.output_root.parent / "_shared-api-retrieval-index-v2"
+    )
+    artifact_instrument_id = (
+        embedding.artifact_instrument_id or context.manifest.program_id
+    )
     store = StreamingRetrievalIndexMaterializerV2(shared_root)
     bindings: dict[str, ApiRetrievalIndexBindingV2] = {}
     artifact_ids: dict[str, str] = {}
     for course_id, chunks in sorted(chunks_by_course.items()):
         binding = ApiRetrievalIndexBindingV2(
-            instrument_id=context.manifest.program_id,
+            instrument_id=artifact_instrument_id,
             course_id=course_id,
             release_id=f"{course_id}-academic-open-release-api-v2",
             profile_id="course-digital-twin-api-retrieval-v2",
@@ -290,6 +297,8 @@ def _api_retrievers(
         model=embedding.model,
         dimensions=embedding.dimensions,
         vectors=vectors,
+        batch_size=embedding.batch_size,
+        request_token_limit=embedding.request_token_limit,
     )
     bm25 = {
         course_id: BM25Retriever(chunks)

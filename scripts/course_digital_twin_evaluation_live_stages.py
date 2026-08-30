@@ -52,18 +52,32 @@ def _observed_usage(context: StageExecutionContext) -> tuple[int, float]:
         connection: sqlite3.Connection | None = None
         try:
             connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
-            row = connection.execute(
-                "SELECT COUNT(*), COALESCE(SUM(cost_usd), 0) FROM calls"
-            ).fetchone()
+            table_names = {
+                str(row[0])
+                for row in connection.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table'"
+                ).fetchall()
+            }
+            rows = []
+            for table_name in ("calls", "batches"):
+                if table_name not in table_names:
+                    continue
+                rows.append(
+                    connection.execute(
+                        f"SELECT COUNT(*), COALESCE(SUM(cost_usd), 0) "
+                        f"FROM {table_name}"
+                    ).fetchone()
+                )
         except sqlite3.Error:
             continue
         finally:
             if connection is not None:
                 connection.close()
-        if row is None:
-            continue
-        calls += int(row[0])
-        cost += float(row[1])
+        for row in rows:
+            if row is None:
+                continue
+            calls += int(row[0])
+            cost += float(row[1])
     return calls, cost
 
 

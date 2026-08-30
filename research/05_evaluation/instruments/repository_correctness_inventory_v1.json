@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 760
+    "audited": 761
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 191,
+    "evaluation_configuration": 192,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 164
   },
-  "file_count": 760,
+  "file_count": 761,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "43068358d78e3e38bbd10e7b153743c780675fd41ca7a80c1a0c58ab3b5fb28e",
+  "record_sha256": "a232462078796cd3ca42e11595f68cb716c00b423ea0e77786a30584a165302e",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "30d076850bd07f67dfe8baab1070bf1b948af0c61c8f075351949c487b842d15"
+      "sha256": "7d097db0a6eee45700847bbce49205167aa5ac7d7bc5567bf6ad3f338f3f1c4a"
     },
     {
       "audit": {
@@ -2852,6 +2852,22 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_002.json",
       "risk": "high",
       "sha256": "e20b592f985b78970ac1b9d6a7962138b1bae1b377ca8f5256b29954eb57a839"
+    },
+    {
+      "audit": {
+        "domain": "api-first-finite-evaluation-program",
+        "evidence": "Corrective manifest review verifies immutable reuse of program 002 document indexes, fresh program-003 outputs, exact OpenAI bindings, automatic finite progression, hidden-gold separation, and the retained USD 50 emergency ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_003.json",
+      "risk": "high",
+      "sha256": "e7fee3b5a0df115661fe2d3b681f13b5cc86da6fefff4c3e5ba56ac422c7570b"
     },
     {
       "audit": {
@@ -4552,7 +4568,7 @@
     {
       "audit": {
         "domain": "atomic-m2-actual-product-checkpoint",
-        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case conversation isolation, bounded provider accounting, and no gold or scorer dependency.",
+        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case isolation, no gold dependency, and exact cached API-embedding batch/token bindings.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-product-checkpoint-review"
@@ -4563,7 +4579,7 @@
       "package_commands": [],
       "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
       "risk": "high",
-      "sha256": "2413be9dcddcc826c06955209ca6e5581ea9e2d5d85b3c0badd2f02e3fdc2f08"
+      "sha256": "4bd44825b16733332c2d756ed9b5cd820c171c5a8624d507137d4b097e93256e"
     },
     {
       "audit": {
@@ -5503,7 +5519,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Executor-bundle review verified all nine manifest stages have an exact callable binding and hard-stop inspection before and after every stage.",
+        "evidence": "Executor-bundle review verified all nine stages have exact callable bindings and that exception accounting includes both response-call and embedding-batch ledgers before hard-stop classification.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -5514,12 +5530,12 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_evaluation_live_stages.py",
       "risk": "high",
-      "sha256": "c67fcddf1dd20ea8c11dd60deb144c3e22029e8f4f32fc3cb764f3854d175591"
+      "sha256": "1754ea45365615e901766cbb8dffcb75f42bce9c97f637b901254161b4993cd8"
     },
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Factual-stage review verified question-only retrieval, manifest-bound CPU/float16 embedding execution after the MPS stall, bounded reranking, physically delayed gold opening, deterministic scoring, labelled canonical fallback, fixed paired control, advisory-only review, and atomic provider/product ledgers.",
+        "evidence": "Factual-stage review verified question-only retrieval, immutable reuse of the paid program-002 document index, fresh manifest-bound query vectors, bounded reranking, physically delayed gold opening, deterministic scoring, fixed paired control, and atomic provider/product ledgers.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -5530,7 +5546,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "246fec9f74f7395eec7f8b56de026404f3c02b6b6f6b275d599baaed3ce6e0a4"
+      "sha256": "992d6113072c6fe90a39fa76f025ac6494de3dea4edd4498ae670f9836b115a9"
     },
     {
       "audit": {
@@ -6140,7 +6156,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor",
-        "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, optional-method fail isolation, and fail-closed terminal validation after authority revocation.",
+        "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, and cached-query embedders carrying the exact batch and token-limit binding of their persisted API index.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -6157,7 +6173,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
       "risk": "high",
-      "sha256": "e3c66e01fd3e6fdb6fb87decd191549c75354ed215fd3aa39b284850a13aa12f"
+      "sha256": "8486164e4f2ea3e57ee1db582e4d94f76a714b6e812ef8c65cf34cee994d43b9"
     },
     {
       "audit": {
@@ -6781,14 +6797,19 @@
       "package_commands": [
         "execute:finite-evaluation-program",
         "execute:finite-evaluation-program-002",
+        "execute:finite-evaluation-program-003",
         "preflight:finite-evaluation-program",
         "preflight:finite-evaluation-program-002",
+        "preflight:finite-evaluation-program-003",
         "resume:finite-evaluation-program",
         "resume:finite-evaluation-program-002",
+        "resume:finite-evaluation-program-003",
         "simulate:finite-evaluation-program",
         "smoke:finite-evaluation-program-002",
+        "smoke:finite-evaluation-program-003",
         "verify:finite-evaluation-program",
-        "verify:finite-evaluation-program-002"
+        "verify:finite-evaluation-program-002",
+        "verify:finite-evaluation-program-003"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
@@ -8871,7 +8892,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Control-plane review verified immutable manifest validation including terminal authority revocation, the frozen retrieval execution device/dtype, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
+        "evidence": "Control-plane review verified immutable manifest validation, safe repository-relative embedding-artifact reuse bound to its original instrument, exact budget sums, exclusive SQLite creation, revision/hash-bound resume, one invalid correction, and global termination.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -8882,7 +8903,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "risk": "high",
-      "sha256": "755203b4fab205efbec197943d3972383b42cec12585e1f08ae54eff1d7771c8"
+      "sha256": "3d7d711bbe7169e03147ca626090a54351328b26eede803c16a646de6ff6317e"
     },
     {
       "audit": {
@@ -9879,7 +9900,7 @@
     {
       "audit": {
         "domain": "atomic-m2-confirmation",
-        "evidence": "Freeze review registers the atomic package builder and confirmation runner under the existing finite non-human program while preserving the repository-wide freeze and excluding private or human-participant execution.",
+        "evidence": "Freeze review preserves the repository-wide block, revokes failed program 002, and grants only dataset, external-model, and method-evaluation capabilities to the hash-bound corrective program 003.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-three-agent-cross-review"
@@ -9890,7 +9911,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "11af3d64dd1b34171755fa9ac8ddc1da904dcfe585ced338c500ae7146d18e3b"
+      "sha256": "9f62826d029e17ef9f1da195b06a3463294f3721cb96c62cf772c62578d419e0"
     },
     {
       "audit": {
@@ -10471,7 +10492,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify historical authorities remain revoked, program 002 receives only dataset, external-model, and method-evaluation capabilities, and unrelated instruments remain rejected.",
+        "evidence": "Focused freeze-policy tests verify historical authorities including failed program 002 remain revoked, program 003 receives only dataset, external-model, and method-evaluation capabilities, and unrelated instruments remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-three-agent-cross-review"
@@ -10482,7 +10503,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "85d1bfc189992a524106da4e4bdbb1e72c42a3e130522353da0b67224ca3e5b0"
+      "sha256": "ee6d5020e6129273ea16a63cc99a052049c3539d84c979010cbe3cb098cb68c5"
     },
     {
       "audit": {
@@ -11591,7 +11612,7 @@
     {
       "audit": {
         "domain": "api-first-finite-evaluation-program-verification",
-        "evidence": "Tests validate the exact bounded authority, API-only retrieval binding, reusable successor schema, and a complete fake-provider adapter, response-ledger, hidden-gold scoring round trip with zero network calls.",
+        "evidence": "Tests validate exact bounded authority, paid-index reuse, network-free product scoring, freeze revocation of program 002, and complete response plus embedding-batch failure accounting.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-first-program-review"
@@ -11600,9 +11621,9 @@
       "category": "verification",
       "disposition": "active_audited",
       "package_commands": [],
-      "path": "tests/test_course_digital_twin_evaluation_program_002.py",
+      "path": "tests/test_course_digital_twin_evaluation_program_003.py",
       "risk": "medium",
-      "sha256": "5afa8c19e1c0682acedc2f8a6e8cf258590012bb085b9ceb14413e3f779698dd"
+      "sha256": "93cc249e1ec5b33c4dfd4c01c566b197c39b3629a2fba002326d10753605a68a"
     },
     {
       "audit": {
@@ -12726,7 +12747,7 @@
     }
   ],
   "risk_counts": {
-    "high": 582,
+    "high": 583,
     "medium": 178
   },
   "schema_version": 1,

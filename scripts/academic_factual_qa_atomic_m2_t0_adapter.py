@@ -136,8 +136,14 @@ def _query_embedder(
         vectors[question] = _unpack_vector(vector_blob)
     if any(case.question not in vectors for case in cases):
         raise AtomicM2ProductAdapterError("product question escaped frozen query cache")
+    first_course = next(iter(runtime["courses"].values()))
+    cached_binding = first_course["binding"]
     return _CachedQueryEmbedder(
-        model="text-embedding-3-small", dimensions=1536, vectors=vectors
+        model="text-embedding-3-small",
+        dimensions=1536,
+        vectors=vectors,
+        batch_size=int(cached_binding["embedding_batch_size"]),
+        request_token_limit=int(cached_binding["embedding_request_token_limit"]),
     )
 
 

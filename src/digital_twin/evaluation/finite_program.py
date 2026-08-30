@@ -100,6 +100,22 @@ class ProgramEmbeddingBindingV1(BaseModel):
     request_token_limit: int = Field(ge=1, le=300_000)
     input_price_usd_per_million: float = Field(ge=0, allow_inf_nan=False)
     exact_identity_required: Literal[True] = True
+    artifact_instrument_id: str | None = Field(
+        default=None, pattern=PROGRAM_ID_PATTERN
+    )
+    artifact_root_path: str | None = None
+
+    @model_validator(mode="after")
+    def validate_artifact_reuse(self) -> "ProgramEmbeddingBindingV1":
+        if (self.artifact_instrument_id is None) != (self.artifact_root_path is None):
+            raise ValueError(
+                "embedding artifact instrument and root must be supplied together"
+            )
+        if self.artifact_root_path is not None:
+            path = Path(self.artifact_root_path)
+            if path.is_absolute() or ".." in path.parts:
+                raise ValueError("embedding artifact root must be repository relative")
+        return self
 
 
 class ProgramStageV1(BaseModel):
