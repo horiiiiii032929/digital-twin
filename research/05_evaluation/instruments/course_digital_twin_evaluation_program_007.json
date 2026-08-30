@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
-  "program_id": "course-digital-twin-evaluation-program-006",
-  "status": "terminated",
+  "program_id": "course-digital-twin-evaluation-program-007",
+  "status": "frozen-authorized",
   "owner_issue": 127,
   "total_budget_usd": 50.0,
   "credential_environment_variable": "OPENAI_API_KEY",
   "provider_api": "responses",
   "provider_endpoint": "https://api.openai.com/v1/responses",
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
   "automatic_stage_progression": true,
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
@@ -210,7 +210,7 @@
     "exact_identity_required": true
   },
   "retrieval_nano_reranking_enabled": false,
-  "content_sha256": "80be4f0f3e1cc4a99d8d8724abf71a8341c1021b2d7692afef304ca29b92dbef",
+  "content_sha256": "8e11c3a967aa5acf99ece9c1303beb38b7fc02692df40cd7f5228a41c2fe498f",
   "product_candidate_generator": "openai-gpt-5.4-question-targeted-extraction-v2",
   "product_candidate_evidence_gate": "any-hit-evidence-gate-v1",
   "product_candidate_model_role": "independent-question-action-verifier"

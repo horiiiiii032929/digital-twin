@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 766
+    "audited": 767
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 195,
+    "evaluation_configuration": 196,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 166
   },
-  "file_count": 766,
+  "file_count": 767,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d403b6543c7e6115e3e6b14afd307ceabd04ddfd49c1d0227a9b2b4d71b3a55d",
+  "record_sha256": "1959546adc18ba7c67b985021a787c414f2200bafce4e944abb1c13d188726ba",
   "records": [
     {
       "audit": {
@@ -1386,7 +1386,7 @@
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "1c286ba1caa3ce2765cdbd15a1caa86ffbcd88f1b799af4c2f268dc268e862e8"
+      "sha256": "0b8dc9547bd0678d27701a1b978c44f188eed646758e2907ead8c533b4691e4f"
     },
     {
       "audit": {
@@ -2915,7 +2915,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_006.json",
       "risk": "high",
-      "sha256": "ffaa53015316c651479679ee4560a083a78a3843df2c29f83ba5e1ab7c212472"
+      "sha256": "4f78870ea0a95738e85906eece9f2833d21fd34e43072fc8a93b2f0d57b19a6d"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Manifest review confirms program 007 changes only per-case provider-failure classification and immutable resume budgets while preserving method, cases, models, gold, gates, and finite automatic progression.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_007.json",
+      "risk": "high",
+      "sha256": "eccfdde69c5c073cd9cc10202771c10e5277809b074a40687b872d1d72d58f91"
     },
     {
       "audit": {
@@ -4634,7 +4650,7 @@
         "domain": "finite-evaluation-program",
         "evidence": "Adapter review verified precomputed hierarchical retrieval is public-question-only, hash-bound, source-authorized, and evaluated through the existing flow-independent response contract.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
@@ -4646,7 +4662,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "f888525e0ccaa0a35eba8d82cc6e9c0c584323eedb2790590eb31bb80891170a"
+      "sha256": "6a1e0dfe2e462c0d74c9e273c573911d6163ff21713f21abbf7fe9d2741a9358"
     },
     {
       "audit": {
@@ -5585,7 +5601,7 @@
         "domain": "finite-evaluation-program",
         "evidence": "Factual-stage review verified question-only retrieval, immutable reuse of the paid program-002 document index, fresh manifest-bound query vectors, stable deterministic method comparison after the nano operational failure, delayed gold opening, deterministic scoring, and atomic ledgers.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
@@ -5594,7 +5610,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "09c4b973bb3152ffbb1adc740f0e9e562274382cf384d3900400cf9b6547d717"
+      "sha256": "7b1a271a042b86275cb5000df79eb2551b05cb22fe574b6c7e43b93e5f6d2c98"
     },
     {
       "audit": {
@@ -6849,30 +6865,35 @@
         "execute:finite-evaluation-program-004",
         "execute:finite-evaluation-program-005",
         "execute:finite-evaluation-program-006",
+        "execute:finite-evaluation-program-007",
         "preflight:finite-evaluation-program",
         "preflight:finite-evaluation-program-002",
         "preflight:finite-evaluation-program-003",
         "preflight:finite-evaluation-program-004",
         "preflight:finite-evaluation-program-005",
         "preflight:finite-evaluation-program-006",
+        "preflight:finite-evaluation-program-007",
         "resume:finite-evaluation-program",
         "resume:finite-evaluation-program-002",
         "resume:finite-evaluation-program-003",
         "resume:finite-evaluation-program-004",
         "resume:finite-evaluation-program-005",
         "resume:finite-evaluation-program-006",
+        "resume:finite-evaluation-program-007",
         "simulate:finite-evaluation-program",
         "smoke:finite-evaluation-program-002",
         "smoke:finite-evaluation-program-003",
         "smoke:finite-evaluation-program-004",
         "smoke:finite-evaluation-program-005",
         "smoke:finite-evaluation-program-006",
+        "smoke:finite-evaluation-program-007",
         "verify:finite-evaluation-program",
         "verify:finite-evaluation-program-002",
         "verify:finite-evaluation-program-003",
         "verify:finite-evaluation-program-004",
         "verify:finite-evaluation-program-005",
-        "verify:finite-evaluation-program-006"
+        "verify:finite-evaluation-program-006",
+        "verify:finite-evaluation-program-007"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
@@ -9965,8 +9986,8 @@
         "domain": "atomic-m2-confirmation",
         "evidence": "Freeze review preserves the repository-wide block and revokes all finite-program 002/003/004 execution capabilities after the valid program-004 result.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-plus-three-agent-cross-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9974,7 +9995,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "09acbc4d45bbdae755a471a1eb01ccec97917955bcb517ac5b53e5fca0a28d48"
+      "sha256": "2895dcb2cf1aeb41fe7ee94902bcf3501355cbb7a4c5936da2d2b0e15697df01"
     },
     {
       "audit": {
@@ -10557,8 +10578,8 @@
         "domain": "repository-correctness-controls",
         "evidence": "Focused freeze-policy tests verify programs 002/003/004 and unrelated historical instruments are all rejected after terminal result publication.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-plus-three-agent-cross-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10566,7 +10587,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "08dd4f022b751f16dce42554ff11da2ea561c3b02d5978a8935993a06d0c684f"
+      "sha256": "aa11836e35f3b6c06dd02121d5f0797666bbc8335f531195b294ce3d92394554"
     },
     {
       "audit": {
@@ -11718,7 +11739,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
       "risk": "medium",
-      "sha256": "117fa8de84eb5473caead0f9b0a470902d91f4c6956c6e4099f24651bedad25c"
+      "sha256": "511a55ae0f94a0d1319efaaa4397315c0e00d752aba093a7109ffe1da8b72915"
     },
     {
       "audit": {
@@ -12842,7 +12863,7 @@
     }
   ],
   "risk_counts": {
-    "high": 586,
+    "high": 587,
     "medium": 180
   },
   "schema_version": 1,

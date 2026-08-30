@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-30
+Status date: 2026-08-31
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -260,6 +260,22 @@ contiguous claims with original citations. It cannot author actions, source
 truth, or citation lineage. This reruns the now-known development checkpoint
 once. A pass automatically opens the untouched 10,000+1,000 confirmation; a
 valid failure terminates the factual branch.
+
+AFQC-119 records program 006 as `invalid-execution`, not a quality failure. It
+persisted all 500 candidate and 100 control responses, but three non-completed
+control responses triggered an obsolete whole-run failure rule. The automatic
+correction then changed the provider-ledger budget binding on resume and failed
+closed before another call. Hidden gold and the sealed 10,000+1,000 stage never
+opened. The immutable ledger records 512 calls/batches and USD 1.51091188;
+authority is revoked.
+
+AFQC-120 freezes program 007 as the sole harness-only successor under the
+existing program-level authority. It does not change cases, source truth,
+method, prompts, models, gates, or budgets. Persisted provider failures now
+remain measurable cases, and provider ceilings stay immutable across resume.
+Valid stages advance automatically without further approval; only privacy,
+gold leakage, identity, ledger/security integrity, and the global USD 50 hard
+stop remain blocking controls.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR

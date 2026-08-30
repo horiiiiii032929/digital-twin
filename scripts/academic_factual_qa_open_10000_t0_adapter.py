@@ -445,7 +445,7 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
         *,
         provider_ledger: ProviderCallLedgerV1,
         repository: SQLiteStudentRepository,
-        maximum_quarantined_failures: int = 0,
+        maximum_quarantined_failures: int | None = 0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
@@ -456,10 +456,11 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
 
     def validate_completion(self) -> None:
         snapshot = self.provider_ledger.snapshot()
-        if (
-            snapshot.get("status") != "running"
-            or int(snapshot.get("failed_calls", 0)) > self.maximum_quarantined_failures
-        ):
+        too_many_failures = (
+            self.maximum_quarantined_failures is not None
+            and int(snapshot.get("failed_calls", 0)) > self.maximum_quarantined_failures
+        )
+        if snapshot.get("status") != "running" or too_many_failures:
             raise LiveT0AdapterError(
                 "product provider ledger is not valid for completion"
             )
@@ -927,5 +928,8 @@ def build_live_t0_adapter(
         resolve_retrieved=resolve_retrieved,
         provider_ledger=provider_ledger,
         repository=repository,
-        maximum_quarantined_failures=(maximum_calls // 100 if cascade_v2 else 0),
+        # Evaluation-v2 persists every failed provider response as an explicit
+        # operational-failure case. Completion and malformed-response rates are
+        # quality metrics; an individual failure is not a corrupt execution.
+        maximum_quarantined_failures=(None if cascade_v2 else 0),
     )

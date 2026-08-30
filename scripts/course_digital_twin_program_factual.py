@@ -127,8 +127,7 @@ def _rows(root: Path, context: StageExecutionContext):
 
 def _development_source_path(context: StageExecutionContext) -> Path:
     return context.root / (
-        context.manifest.development_source_path
-        or context.manifest.source_plan_path
+        context.manifest.development_source_path or context.manifest.source_plan_path
     )
 
 
@@ -147,8 +146,7 @@ def _qwen_embedder(selection, *, execution_device: str, execution_dtype: str):
         os.getenv(
             "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
             str(
-                Path(__file__).resolve().parents[1]
-                / "data/external/huggingface/hub/"
+                Path(__file__).resolve().parents[1] / "data/external/huggingface/hub/"
                 "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
             ),
         )
@@ -177,8 +175,7 @@ def _local_retrievers(context: StageExecutionContext, *, source_path: Path):
         os.getenv(
             "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
             str(
-                Path(__file__).resolve().parents[1]
-                / "data/external/huggingface/hub/"
+                Path(__file__).resolve().parents[1] / "data/external/huggingface/hub/"
                 "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
             ),
         )
@@ -197,9 +194,7 @@ def _local_retrievers(context: StageExecutionContext, *, source_path: Path):
     if implementation is None:
         raise FactualStageError("hybrid retrieval selection is missing")
     chunker = next(
-        row
-        for row in profile_payload["components"]
-        if row["component"] == "chunker"
+        row for row in profile_payload["components"] if row["component"] == "chunker"
     )["implementation"]
     store = RetrievalIndexStoreV1(RETRIEVAL_INDEX_ROOT)
     hybrid = {}
@@ -219,11 +214,17 @@ def _local_retrievers(context: StageExecutionContext, *, source_path: Path):
         course_id: StructuredHierarchicalRetriever(hybrid[course_id], chunks)
         for course_id, chunks in chunks_by_course.items()
     }
-    return chunks_by_course, bm25, hybrid, hierarchical, {
-        "provider_calls": 0,
-        "reported_cost_usd": 0.0,
-        "input_tokens": 0,
-    }
+    return (
+        chunks_by_course,
+        bm25,
+        hybrid,
+        hierarchical,
+        {
+            "provider_calls": 0,
+            "reported_cost_usd": 0.0,
+            "input_tokens": 0,
+        },
+    )
 
 
 def _api_retrievers(
@@ -238,9 +239,7 @@ def _api_retrievers(
     chunks_by_course, _ = _chunks_by_course(source_path)
     ledger = RetrievalUsageLedger(
         max_cost_usd=max(0.01, context.remaining_stage_budget_usd),
-        price_per_million_input_tokens_usd=(
-            embedding.input_price_usd_per_million
-        ),
+        price_per_million_input_tokens_usd=(embedding.input_price_usd_per_million),
     )
     embedder = OpenAITextEmbedder(
         os.environ[context.manifest.credential_environment_variable],
@@ -327,12 +326,18 @@ def _api_retrievers(
         for course_id, chunks in chunks_by_course.items()
     }
     usage = ledger.usage_snapshot()
-    return chunks_by_course, bm25, hybrid, hierarchical, {
-        "provider_calls": usage.request_count,
-        "reported_cost_usd": usage.approximate_cost_usd,
-        "input_tokens": usage.input_tokens,
-        "failure_count": usage.failure_count,
-    }
+    return (
+        chunks_by_course,
+        bm25,
+        hybrid,
+        hierarchical,
+        {
+            "provider_calls": usage.request_count,
+            "reported_cost_usd": usage.approximate_cost_usd,
+            "input_tokens": usage.input_tokens,
+            "failure_count": usage.failure_count,
+        },
+    )
 
 
 def _retrievers(
@@ -491,10 +496,9 @@ async def _nano_rankings(
                 raise FactualStageError("nano reranker case IDs drifted")
             for row in rows:
                 identifiers = list(row["ranked_chunk_ids"])
-                if (
-                    len(identifiers) != len(set(identifiers))
-                    or not set(identifiers) <= set(expected[row["case_id"]])
-                ):
+                if len(identifiers) != len(set(identifiers)) or not set(
+                    identifiers
+                ) <= set(expected[row["case_id"]]):
                     raise FactualStageError("nano reranker chunk IDs drifted")
                 rankings[row["case_id"]] = identifiers
         ledger.mark_complete()
@@ -769,10 +773,10 @@ async def _product_arm(
             if precomputed_retrieval_path is not None
             else "qwen3-hybrid-v1"
         ),
-        generator=generator_id or (
+        generator=generator_id
+        or (
             "openai-gpt-5.4-mini-question-targeted-atomic-v1"
-            if context.manifest.retrieval_embedding is not None
-            and name == "candidate"
+            if context.manifest.retrieval_embedding is not None and name == "candidate"
             else "openai-gpt-5.4-mini-live-extractive-boundary"
             if context.manifest.retrieval_embedding is not None
             else "openai-responses-live-atomic-v2"
@@ -782,9 +786,7 @@ async def _product_arm(
         model_bindings={"product-generator": model.model},
         known_benchmark=False,
     )
-    rows_hash = canonical_json_sha256(
-        [row.model_dump(mode="json") for row in cases]
-    )
+    rows_hash = canonical_json_sha256([row.model_dump(mode="json") for row in cases])
     provider_path = output / "provider.sqlite3"
     response_path = output / "responses.sqlite3"
     state_path = output / "student-state.sqlite3"
@@ -835,9 +837,7 @@ async def _product_arm(
     ledger = ResponseLedgerV1(
         response_path,
         cases_sha256=rows_hash,
-        system_manifest_sha256=canonical_json_sha256(
-            manifest.model_dump(mode="json")
-        ),
+        system_manifest_sha256=canonical_json_sha256(manifest.model_dump(mode="json")),
         run_configuration_sha256=canonical_json_sha256(
             {
                 "program_manifest_sha256": context.manifest.content_sha256,
@@ -849,10 +849,16 @@ async def _product_arm(
         resume=resume,
     )
     try:
-        await execute_cases(cases=cases, adapter=adapter, manifest=manifest, ledger=ledger)
+        await execute_cases(
+            cases=cases, adapter=adapter, manifest=manifest, ledger=ledger
+        )
     finally:
         ledger.close()
-    return _completed_responses(response_path), _provider_snapshot(provider_path), manifest
+    return (
+        _completed_responses(response_path),
+        _provider_snapshot(provider_path),
+        manifest,
+    )
 
 
 def _read_case_gold_packages(
@@ -988,8 +994,7 @@ async def _run_advisory_audit(
     ):
         raise FactualStageError("advisory audit identities drifted")
     batches = [
-        selected_ids[index : index + 10]
-        for index in range(0, len(selected_ids), 10)
+        selected_ids[index : index + 10] for index in range(0, len(selected_ids), 10)
     ]
     binding = model_binding(
         context.manifest,
@@ -1067,9 +1072,7 @@ async def _run_advisory_audit(
                 {
                     "case": case_by_id[case_id].model_dump(mode="json"),
                     "canonical_truth": gold_by_id[case_id].model_dump(mode="json"),
-                    "product_response": response_by_id[case_id].model_dump(
-                        mode="json"
-                    ),
+                    "product_response": response_by_id[case_id].model_dump(mode="json"),
                     "deterministic_score": score_by_id[case_id],
                 }
                 for case_id in identifiers
@@ -1109,9 +1112,7 @@ async def _run_advisory_audit(
     finally:
         ledger.close()
     concerns = sorted(
-        case_id
-        for case_id, row in votes.items()
-        if bool(row["source_truth_concern"])
+        case_id for case_id, row in votes.items() if bool(row["source_truth_concern"])
     )
     return (
         {
@@ -1139,9 +1140,13 @@ def _run_product_stage(
     final: bool,
 ) -> StageResultEnvelopeV1:
     context.output_root.mkdir(parents=True, exist_ok=True)
-    candidate_budget = context.remaining_stage_budget_usd * 0.82
-    control_budget = context.remaining_stage_budget_usd * 0.10
-    advisory_budget = context.remaining_stage_budget_usd * 0.08
+    # Provider ledgers bind their ceilings on first creation. A harness-only
+    # resume must retain those frozen ceilings even after the control-plane
+    # ledger has recorded earlier spend.
+    frozen_stage_budget = context.manifest.stage(context.stage).budget_usd
+    candidate_budget = frozen_stage_budget * 0.82
+    control_budget = frozen_stage_budget * 0.10
+    advisory_budget = frozen_stage_budget * 0.08
     ranking_payload = load_json_object(rankings_path)
     all_rankings = ranking_payload.get("ranked_chunk_ids")
     if not isinstance(all_rankings, dict):
@@ -1184,9 +1189,7 @@ def _run_product_stage(
             source_package_path=source_package_path,
             maximum_output_tokens=400,
             generator_id=context.manifest.product_candidate_generator,
-            model_role=(
-                context.manifest.product_candidate_model_role or MINI_ROLE
-            ),
+            model_role=(context.manifest.product_candidate_model_role or MINI_ROLE),
         )
     )
     control_responses, control_provider, control_manifest = asyncio.run(
@@ -1245,12 +1248,16 @@ def _run_product_stage(
     }
     result_path = context.output_root / "product-result.json"
     atomic_write_json(result_path, result)
-    calls = int(candidate_provider["provider_calls"]) + int(
-        control_provider["provider_calls"]
-    ) + int(advisory_provider["provider_calls"])
-    cost = float(candidate_provider["reported_cost_usd"]) + float(
-        control_provider["reported_cost_usd"]
-    ) + float(advisory_provider["reported_cost_usd"])
+    calls = (
+        int(candidate_provider["provider_calls"])
+        + int(control_provider["provider_calls"])
+        + int(advisory_provider["provider_calls"])
+    )
+    cost = (
+        float(candidate_provider["reported_cost_usd"])
+        + float(control_provider["reported_cost_usd"])
+        + float(advisory_provider["reported_cost_usd"])
+    )
     return build_stage_result(
         manifest=context.manifest,
         stage=context.stage,
@@ -1269,9 +1276,7 @@ def _run_product_stage(
             "paired_retention_lower_95": paired[
                 "supported_answer_retention_delta_lower_95"
             ],
-            "paired_boundary_non_regression": paired[
-                "boundary_non_regression_passed"
-            ],
+            "paired_boundary_non_regression": paired["boundary_non_regression_passed"],
         },
         artifacts={
             "result": str(result_path.relative_to(context.root)),
@@ -1329,7 +1334,11 @@ def _wording_schema(case_ids: list[str]) -> dict[str, Any]:
                     "required": ["case_id", "question"],
                     "properties": {
                         "case_id": {"type": "string", "enum": case_ids},
-                        "question": {"type": "string", "minLength": 8, "maxLength": 400},
+                        "question": {
+                            "type": "string",
+                            "minLength": 8,
+                            "maxLength": 400,
+                        },
                     },
                 },
             }
@@ -1398,9 +1407,7 @@ async def _construct_wording(
         for path in (nano_path, luna_path):
             connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
             try:
-                metadata = dict(
-                    connection.execute("SELECT key, value FROM metadata")
-                )
+                metadata = dict(connection.execute("SELECT key, value FROM metadata"))
                 if metadata.get("status") != "completed":
                     complete = False
                     completed_contents.append([])
@@ -1636,7 +1643,10 @@ def run_final_construction(context: StageExecutionContext) -> StageResultEnvelop
         "wording_provenance": provenance,
         "provider": {"nano": nano, "luna": luna},
         "packages": {
-            key: {"path": str(path.relative_to(context.root)), "sha256": file_sha256(path)}
+            key: {
+                "path": str(path.relative_to(context.root)),
+                "sha256": file_sha256(path),
+            }
             for key, path in paths.items()
         },
     }
@@ -1692,7 +1702,8 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
                 context=context,
                 cases=cases,
                 hierarchical=hierarchical,
-                ledger_path=context.output_root / "final-nano-reranking-provider.sqlite3",
+                ledger_path=context.output_root
+                / "final-nano-reranking-provider.sqlite3",
                 maximum_cost_usd=context.remaining_stage_budget_usd * 0.10,
                 resume=context.resume,
             )

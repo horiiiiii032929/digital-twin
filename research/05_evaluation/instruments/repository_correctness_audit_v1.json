@@ -943,9 +943,9 @@
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-08-30",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "1c286ba1caa3ce2765cdbd15a1caa86ffbcd88f1b799af4c2f268dc268e862e8"
+      "sha256": "0b8dc9547bd0678d27701a1b978c44f188eed646758e2907ead8c533b4691e4f"
     },
     {
       "audit_status": "audited",
@@ -2934,9 +2934,9 @@
       "evidence": "Adapter review verified precomputed hierarchical retrieval is public-question-only, hash-bound, source-authorized, and evaluated through the existing flow-independent response contract.",
       "findings": [],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
-      "reviewed_at": "2026-08-30",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "f888525e0ccaa0a35eba8d82cc6e9c0c584323eedb2790590eb31bb80891170a"
+      "sha256": "6a1e0dfe2e462c0d74c9e273c573911d6163ff21713f21abbf7fe9d2741a9358"
     },
     {
       "audit_status": "audited",
@@ -5904,9 +5904,9 @@
       "evidence": "Freeze review preserves the repository-wide block and revokes all finite-program 002/003/004 execution capabilities after the valid program-004 result.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "09acbc4d45bbdae755a471a1eb01ccec97917955bcb517ac5b53e5fca0a28d48"
+      "reviewed_at": "2026-08-31",
+      "reviewer": "codex-primary-finite-program-review",
+      "sha256": "2895dcb2cf1aeb41fe7ee94902bcf3501355cbb7a4c5936da2d2b0e15697df01"
     },
     {
       "audit_status": "audited",
@@ -6289,9 +6289,9 @@
       "evidence": "Focused freeze-policy tests verify programs 002/003/004 and unrelated historical instruments are all rejected after terminal result publication.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "08dd4f022b751f16dce42554ff11da2ea561c3b02d5978a8935993a06d0c684f"
+      "reviewed_at": "2026-08-31",
+      "reviewer": "codex-primary-finite-program-review",
+      "sha256": "aa11836e35f3b6c06dd02121d5f0797666bbc8335f531195b294ce3d92394554"
     },
     {
       "audit_status": "audited",
@@ -7686,9 +7686,9 @@
       "evidence": "Factual-stage review verified question-only retrieval, immutable reuse of the paid program-002 document index, fresh manifest-bound query vectors, stable deterministic method comparison after the nano operational failure, delayed gold opening, deterministic scoring, and atomic ledgers.",
       "findings": [],
       "path": "scripts/course_digital_twin_program_factual.py",
-      "reviewed_at": "2026-08-30",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "09c4b973bb3152ffbb1adc740f0e9e562274382cf384d3900400cf9b6547d717"
+      "sha256": "7b1a271a042b86275cb5000df79eb2551b05cb22fe574b6c7e43b93e5f6d2c98"
     },
     {
       "audit_status": "audited",
@@ -8414,7 +8414,7 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_006.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "ffaa53015316c651479679ee4560a083a78a3843df2c29f83ba5e1ab7c212472"
+      "sha256": "4f78870ea0a95738e85906eece9f2833d21fd34e43072fc8a93b2f0d57b19a6d"
     },
     {
       "audit_status": "audited",
@@ -8425,7 +8425,18 @@
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "117fa8de84eb5473caead0f9b0a470902d91f4c6956c6e4099f24651bedad25c"
+      "sha256": "511a55ae0f94a0d1319efaaa4397315c0e00d752aba093a7109ffe1da8b72915"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "finite-evaluation-program",
+      "evidence": "Manifest review confirms program 007 changes only per-case provider-failure classification and immutable resume budgets while preserving method, cases, models, gold, gates, and finite automatic progression.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_007.json",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "codex-primary-finite-program-review",
+      "sha256": "eccfdde69c5c073cd9cc10202771c10e5277809b074a40687b872d1d72d58f91"
     }
   ],
   "schema_version": 1
