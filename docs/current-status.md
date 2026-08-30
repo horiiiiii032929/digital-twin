@@ -82,6 +82,107 @@ structured source registration, context-complete reference questions, and
 retrieval matching on a fresh source-disjoint tranche. A model-only swap or a
 rerun of these known 300 cases is not justified.
 
+AFQC-101 freezes
+`course-digital-twin-nonhuman-evaluation-program-002` as the finite successor.
+The researcher authorized all public-source and synthetic non-human stages once
+under a USD 50 global ceiling, so passing stages no longer pause for separate
+approval. Quality, privacy, leakage, identity, accounting, security, and one-
+correction hard stops remain active. Cross-review also identified the decisive
+AFQC-100 binding defect: 101/235 answerable cases required region IDs absent
+from runtime chunks, and corpus and gold used different source-plan hashes. The
+successor now uses source-derived region IDs shared by runtime and gold, exact
+pre-ranking matchability, contextual search-only metadata, and a fresh source-
+family-disjoint confirmation. Deterministic graders remain authoritative;
+GPT-5.4 nano, GPT-5.6 Terra, and fresh Codex audits are advisory. Real
+professor/student participation and professor-profile approval remain excluded.
+
+AFQC-102 records the successful source-aligned wording checkpoint. Attempt 002
+completed 50/50 direct OpenAI calls at USD 0.8352885 and assembled all 500
+fresh questions without duplicate wording or mutation of deterministic truth.
+GPT-5.4 nano wording was accepted for 148 cases; the other 352 use explicit
+context-complete deterministic fallbacks after advisory or batch-level
+rejection. The high fallback share is disclosed and does not establish natural-
+language quality. It does provide a complete, source-linked package for the
+automatic fresh retrieval confirmation. Product, final-set, private-data, and
+human-participant execution remain unopened at this checkpoint.
+
+AFQC-103 records the valid source-aligned retrieval confirmation as
+`completed-refine`. Six methods completed 500 cases through 32 direct OpenAI
+embedding calls at USD 0.00717285. M2 small hybrid and M3 large dense scored
+89.75% exact-region evidence@3 against the 90% gate; both reached 99.25%
+Recall@5. Boundary accuracy was 99%, with zero severe releases and zero course
+or source-version violations. All rankings were durable before hidden gold
+opened. AFQC-104 then corrects the interpretation: 37 of M2's 41 exact-region
+failures contained equivalent parent or answer-bearing child evidence, giving
+a non-selection-eligible post-hoc supporting-evidence diagnostic of 99.00% and
+four genuine misses. No method is retroactively selected. The 500+100 product
+and sealed 10,000+1,000 stages remain closed while one fresh successor freezes
+unique non-overlapping evidence atoms and confirms deterministic coverage
+selection on new source-disjoint data.
+
+AFQC-105 records that one prospective successor as `completed-keep`. The fresh
+package contains 100 source-family-disjoint clusters, 500 cases, and 300 unique
+non-overlapping authoritative evidence atoms; its public source payload excludes
+reference targets, canonical claims, and gold spans. Unchanged M2 achieved
+96.25% complete evidence@3, 97.25% Evidence Recall@5, 100% boundary accuracy,
+and 23.23 ms p95 latency. The deterministic marginal-coverage selector was
+worse at 94.50% complete evidence@3 and is not selected. The run used 15 direct
+OpenAI embedding calls, zero retries, and USD 0.00057628. M2 over atomic
+evidence is selected for one actual-product 500+100 development checkpoint;
+the sealed 10,000+1,000 execution remains closed until that checkpoint passes.
+
+AFQC-106 separates the true-visual supplement from the main text/OCR factual
+track. Visual attempt 001 stopped before inference when OpenAI rejected an
+unsupported structured-output keyword. The sole corrective attempt completed
+all 30 public/synthetic visual-description calls with zero retries for USD
+0.0259673, but three assets violated the frozen deterministic semantic-list
+uniqueness contract before retrieval scoring. The visual branch is therefore
+terminal `invalid-execution`: no visual-quality estimate, third attempt,
+multimodal selection, or broad multimodal claim follows. This supplementary
+30-asset/60-case path does not block or substantiate the text-first R1 or the
+actual-product factual evaluation.
+
+AFQC-107 records the independent 12-case synthetic C0-C2 profile diagnostic as
+valid `completed-refine`. All 36 GPT-5.4 mini calls completed with zero retries
+for USD 0.03447. C2 changed all 12 paired C1 responses and produced zero
+unsupported releases, but reached only 66.7% action accuracy, 33.3% boundary
+accuracy, 38.3% fact recall, and 91.7% profile-contract accuracy. No profile
+method is selected. This uses a draft synthetic profile and oracle evidence;
+it is not professor-fidelity or product-retrieval evidence. C3 remains closed
+until the actual-product factual checkpoint passes, and a real professor must
+approve the profile before fidelity evaluation.
+
+AFQC-108 freezes the next actual-product checkpoint without opening the sealed
+10,000-case set. It runs the real T0 `StudentTutoringService` on all 500 fresh
+atomic-M2 development cases and compares its structured evidence gate with an
+any-hit control on a fixed 100-case/four-course subset. Both conditions use the
+same immutable API-built BM25 plus OpenAI-small hybrid index, cached public
+question vectors, exact GPT-5.4 mini snapshot, policy, persistence, citations,
+and atomic-claim validator; only the release gate differs. The response process
+can load neither hidden gold nor a scorer. Gold may open only after both response
+ledgers are durable. The finite checkpoint permits at most 600 product calls,
+zero retries, and USD 7 under the existing program-level authority. A valid
+quality failure stops factual scaling; a pass advances once to final
+construction. The separate terminal visual diagnostic cannot block this
+text/OCR track, and the synthetic-profile Refine result cannot support a
+professor-fidelity claim.
+
+AFQC-109 records that checkpoint as valid `completed-refine`. All 500 candidate
+and 100 control responses completed through 572 exact GPT-5.4 mini calls with
+zero failed calls or retries for USD 0.71722575. Candidate retrieval retained
+96.25% complete evidence@3 and 97.25% Recall@5, but the actual product reached
+only 44.25% fully grounded factual success, 71.5% answerable action accuracy,
+89% boundary action accuracy, 50.85% claim precision, and 55.65% citation
+precision. It released answers to five ambiguity cases that required
+clarification. Direct audit confirmed those five as genuine product defects;
+it also found that strict target precision penalizes some source-supported
+extra context and that several markup-oriented references are weak usability
+proxies. The valid failure terminates this factual branch and revokes the
+program authority. The sealed 10,000+1,000 set remains unopened. The next
+method-level decision is a deterministic boundary/action router plus
+question-targeted generation on a fresh tranche, not another run over these
+known cases.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
@@ -436,11 +537,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 649 executable or execution-affecting
-files, including the retrieval-index lifecycle. All are audited with zero pending files and
+the current branch now extends it to 739 executable or execution-affecting
+files. All are audited with zero pending files and
 zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 97 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 111 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek

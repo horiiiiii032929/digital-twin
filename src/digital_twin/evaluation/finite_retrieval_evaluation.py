@@ -19,7 +19,7 @@ from src.digital_twin.grounding.hierarchical_retrieval import (
     deterministic_boundary_action,
     p95,
 )
-from src.digital_twin.grounding.models import RetrievalHit
+from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.protocols import Retriever
 
 
@@ -55,6 +55,55 @@ class RetrievalMethodSummary:
     latency_p95_ms: float
     reranked_case_count: int
     passed: bool
+
+
+def validate_exact_reference_matchability(
+    *,
+    gold: list[EvaluationGoldV1],
+    chunks: list[DocumentChunk],
+) -> dict[str, int]:
+    """Fail before ranking unless every answerable reference exists exactly."""
+
+    references = {
+        (
+            chunk.source_artifact_id or chunk.document_id,
+            chunk.source_version,
+            chunk.source_checksum,
+            int(chunk.metadata.get("char_start", -1)),
+            int(chunk.metadata.get("char_end", -1)),
+            chunk.region_id,
+        )
+        for chunk in chunks
+    }
+    required = [
+        reference
+        for row in gold
+        if row.expected_action == EvaluationAction.ANSWER
+        for claim in row.claims
+        for reference in claim.evidence_refs
+    ]
+    missing = [
+        reference
+        for reference in required
+        if (
+            reference.source_artifact_id,
+            reference.source_version,
+            reference.source_sha256,
+            reference.char_start,
+            reference.char_end,
+            reference.region_id,
+        )
+        not in references
+    ]
+    if missing:
+        raise FiniteRetrievalEvaluationError(
+            f"registered corpus cannot exactly match {len(missing)} gold references"
+        )
+    return {
+        "required_reference_count": len(required),
+        "matched_reference_count": len(required),
+        "missing_reference_count": 0,
+    }
 
 
 def select_untouched_retrieval_cases(

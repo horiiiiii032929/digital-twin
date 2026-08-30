@@ -892,6 +892,55 @@ Current utilities:
   professor approval gate, and the empty 8-12-case calibration template. It
   opens no held-out content and makes no model call; run `npm run
   verify:professor-digital-twin-transition`.
+- `build_academic_factual_qa_source_aligned_confirmation.py`: builds the fresh
+  source-family-disjoint 500-case AFQC-101 package. Canonical evidence is
+  registered as source-derived exact regions before ranking, so validation
+  fails unless every answerable gold reference exists in the runtime corpus.
+  The committed build uses public sources only and makes no provider call. Run
+  `npm run verify:academic-factual-qa-source-aligned-confirmation` for the
+  network-free reconstruction and matchability check.
+- `run_academic_factual_qa_source_aligned_wording.py`: runs AFQC-101 stage one
+  under the finite non-human program. GPT-5.4 nano proposes context-complete
+  wording and GPT-5.6 Terra performs target-blind advisory recovery. Models
+  cannot alter source truth; rejected or unavailable wording is replaced by a
+  unique deterministic fallback. Use the `verify:`, `simulate:`, `preflight:`,
+  `preflight-live:`, `execute:`, and `resume:` package commands with the
+  `academic-factual-qa-source-aligned-wording` suffix.
+- `run_academic_factual_qa_source_aligned_retrieval.py`: compares the fresh
+  source-aligned package across BM25, direct OpenAI small/large dense and
+  hybrid retrieval, and deterministic hierarchy. It persists every public
+  ranking before opening hidden gold, enforces exact source-range
+  matchability, checkpoints API embeddings, supports bound resume, and selects
+  only the simplest method within two percentage points of the best passing
+  result. Use `npm run verify:academic-factual-qa-source-aligned-retrieval`,
+  `npm run simulate:academic-factual-qa-source-aligned-retrieval`,
+  `npm run preflight:academic-factual-qa-source-aligned-retrieval`, or the
+  execute/resume commands. AFQC-101 program authority removes a separate
+  administrative approval; its USD 2 stage stop and all quality/privacy gates
+  remain active.
+- `build_academic_factual_qa_atomic_m2_confirmation.py` and
+  `run_academic_factual_qa_atomic_m2_confirmation.py`: implement the single
+  prospective correction to AFQC-103's parent/child evidence-granularity
+  defect. The builder freezes 100 fresh source-family-disjoint clusters as 300
+  non-overlapping authoritative atoms and 500 unique cases. The runner compares
+  unchanged small hybrid M2 with one deterministic question-only marginal
+  coverage selector, persists public rankings before opening hidden gold, and
+  stops factual scaling if neither method passes the original evidence,
+  boundary, isolation, and latency gates. The existing non-human program is the
+  only paid authority; execution is capped at 20 calls, zero retries, and USD 1.
+  Use the `verify:`, `simulate:`, `preflight:`, `execute:`, and `resume:` package
+  commands ending in `academic-factual-qa-atomic-m2-confirmation`.
+- `run_course_digital_twin_nonhuman_supplements.py`: executes the two independent
+  non-human supplements under program 002 without reusing the terminated
+  program-001 dispatcher. Stage A compares text fallback with course-scoped
+  GPT-5.4 nano visual descriptions over 30 public visual clusters and 60 cases;
+  original region lineage remains authoritative and a visual quality failure is
+  recorded as Refine. Stage B runs an explicitly synthetic C0-C2 profile
+  diagnostic over 12 cases with GPT-5.4 mini; C3, real professor fidelity, and
+  human claims remain closed. The runner uses exclusive SQLite ledgers, exact
+  identity checks, zero retries, safe resume, 66 calls maximum, and separate USD
+  2/USD 1.5 stage stops. Use package commands ending in
+  `nonhuman-evaluation-supplements`.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "academic-factual-qa-atomic-m2-confirmation-001",
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "decision_id": "AFQC-104",
+  "owner_issue": 127,
+  "status": "frozen-authorized-by-program",
+  "provider_execution_authorized_by_program": true,
+  "paid_execution_authorized_by_program": true,
+  "private_data_authorized": false,
+  "automatic_progression_on_pass": true,
+  "source_package": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-sources.json",
+    "file_sha256": "8a426f6e22f242033874a18c53375dd4d896a02cd79849bb6390aed76c906e51",
+    "content_sha256": "a2cd2ec36b5d3134710caac5bf544f046420416a176ec8f846c66d44a5062456",
+    "cluster_count": 100,
+    "registered_region_count": 300
+  },
+  "public_cases": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-cases.json",
+    "file_sha256": "2ac2c76f5f32b3a0b5e406629de227e0d323437d50188cecf94dc5ac30fa87e8",
+    "content_sha256": "c5829f528d5e8380575e92044a538eecd3d5c78efa559ccf19272efd768f5c18",
+    "case_count": 500
+  },
+  "hidden_gold": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-gold.json",
+    "file_sha256": "eb630148d6fb662cfae3388ee521f8354307bbd5451ee9f1ee54aef5cfac4e66",
+    "content_sha256": "0623a2ad74c45e343cd3294b1d1be4c282b8eead69d6c10a66c56f21c6481a9e",
+    "loaded_only_after_all_public_rankings_are_durable": true
+  },
+  "embedding": {
+    "provider": "openai",
+    "endpoint": "https://api.openai.com/v1/embeddings",
+    "model": "text-embedding-3-small",
+    "dimensions": 1536,
+    "input_price_usd_per_million": 0.02,
+    "batch_size": 64,
+    "request_token_limit": 50000,
+    "exact_returned_identity_required": true
+  },
+  "methods": [
+    {
+      "method_id": "M2",
+      "implementation": "atomic-bm25-openai-small-rrf-v1",
+      "provider_required": true
+    },
+    {
+      "method_id": "M2C",
+      "implementation": "atomic-m2-question-coverage-selector-v1",
+      "provider_required": true
+    }
+  ],
+  "execution_limits": {
+    "maximum_embedding_and_query_calls": 20,
+    "maximum_transport_retries": 0,
+    "emergency_stop_usd": 1.0,
+    "atomic_batch_checkpoints": true,
+    "safe_resume_required": true
+  },
+  "hard_gates": {
+    "complete_evidence_at_3_minimum": 0.9,
+    "evidence_recall_at_5_minimum": 0.95,
+    "boundary_accuracy_minimum": 0.98,
+    "retrieval_p95_seconds_maximum": 2.0,
+    "source_course_version_violations_maximum": 0,
+    "severe_unsupported_releases_maximum": 0,
+    "gold_leakage_maximum": 0,
+    "private_data_calls_maximum": 0
+  },
+  "selection_rule": "Score exact minimal, non-overlapping authoritative atoms. Select unchanged M2 when it passes; otherwise select M2C only when it passes. Stop factual scaling if neither prospectively scored method passes.",
+  "metadata": {
+    "verified_at": "2026-08-30T18:26:45+08:00",
+    "freshness_hours": 24,
+    "embedding_api_application_state_retention": "none",
+    "standard_abuse_monitoring_retention": "up-to-30-days",
+    "api_training_default": "disabled-unless-opted-in",
+    "official_sources": [
+      "https://developers.openai.com/api/reference/resources/embeddings/methods/create",
+      "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "https://developers.openai.com/api/docs/guides/your-data"
+    ]
+  },
+  "result_states": [
+    "invalid-execution",
+    "completed-refine",
+    "completed-keep"
+  ],
+  "content_sha256": "29e1b1d620f7bcf1e2591748cc12922bf5206e2ced1fa92bff6a89a6995135cc"
+}

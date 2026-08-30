@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-source-aligned-wording-002",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-source-aligned-confirmation-001",
+  "corpus_id": "academic-factual-qa-source-aligned-public-100-clusters",
+  "code_revision": "e60a20a82d5948189a888c999b8ccd6fd68c70df",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "deterministic-context-complete-fallback-v1",
+        "version": "control",
+        "configuration": {
+          "case_count": 500,
+          "provider_calls": 0,
+          "truth_authority": "deterministic"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "case-package-completion",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-rate",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "truth-mutation-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-operational-output",
+          "passed": true,
+          "evidence": "Deterministic context-complete wording is available for every case."
+        },
+        {
+          "name": "deterministic-truth-authority",
+          "passed": true,
+          "evidence": "Action, answer, claims, evidence, citations, and lineage remain code-owned."
+        },
+        {
+          "name": "public-nonhuman-data-boundary",
+          "passed": true,
+          "evidence": "Only public sources were used; no human participant or final split was opened."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "source-aligned-reviewed-mixed-wording-v1",
+        "version": "attempt-002",
+        "configuration": {
+          "model_wording_count": 148,
+          "fallback_wording_count": 352,
+          "provider_calls": 50,
+          "input_tokens": 131524,
+          "output_tokens": 87049,
+          "reported_cost_usd": 0.8352885,
+          "output_cases_sha256": "7563e6d9af3371e33f2046af23bf99ce626c1a5b7ac3839533eacb4c45e636aa"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "case-package-completion",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "normalized-duplicate-rate",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "truth-mutation-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-operational-output",
+          "passed": true,
+          "evidence": "All 50 calls completed; malformed semantic batches were quarantined to deterministic fallbacks."
+        },
+        {
+          "name": "deterministic-truth-authority",
+          "passed": true,
+          "evidence": "Zero authoritative truth mutations and zero normalized duplicates were observed."
+        },
+        {
+          "name": "public-nonhuman-data-boundary",
+          "passed": true,
+          "evidence": "Only public sources were processed; private, final-split, and human data remained closed."
+        }
+      ],
+      "failures_by_category": {
+        "quarantined-semantic-batch": 2,
+        "fallback-wording": 352
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "source-aligned-reviewed-mixed-wording-v1",
+    "rationale": "The corrected stage produced a complete, unique, source-aligned question package without changing deterministic truth, so it may advance to fresh retrieval confirmation.",
+    "limitations": [
+      "Only 148 of 500 questions use accepted model wording; 352 are explicit deterministic fallbacks.",
+      "OpenAI-family review is correlated agent assistance, not independent human ground truth.",
+      "This result evaluates question-package integrity, not retrieval or product answer quality."
+    ]
+  }
+}

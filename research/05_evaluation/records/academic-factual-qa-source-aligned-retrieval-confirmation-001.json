@@ -1,0 +1,449 @@
+{
+  "candidates": [
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 57,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": false
+        },
+        "implementation_id": "source-aligned-bm25-v1",
+        "version": "M0"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.8575
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 0.7590420136693865
+        }
+      ],
+      "role": "control"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 43,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": true
+        },
+        "implementation_id": "source-aligned-openai-small-dense-v1",
+        "version": "M1"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.8925
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.985
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 8.615375001681969
+        }
+      ],
+      "role": "candidate"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 41,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": true
+        },
+        "implementation_id": "source-aligned-bm25-openai-small-rrf-v1",
+        "version": "M2"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.8975
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.9925
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 8.417542005190626
+        }
+      ],
+      "role": "candidate"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 41,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": true
+        },
+        "implementation_id": "source-aligned-openai-large-dense-v1",
+        "version": "M3"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.8975
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.9925
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 17.1789999876637
+        }
+      ],
+      "role": "candidate"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 43,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": true
+        },
+        "implementation_id": "source-aligned-bm25-openai-large-rrf-v1",
+        "version": "M4"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.8925
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.9975
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 17.064084007870406
+        }
+      ],
+      "role": "candidate"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 1,
+        "course-violation": 0,
+        "incomplete-all-evidence-at-3": 99,
+        "severe-unsupported-release": 0,
+        "source-version-violation": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe unsupported boundary releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Observed 0 course and 0 source-version violations.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "All 500 rankings completed with durable public output before hidden gold opened.",
+          "name": "method-operationally-complete",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "case_count": 500,
+          "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+          "provider_required": true
+        },
+        "implementation_id": "source-aligned-large-hybrid-hierarchy-v1",
+        "version": "M5"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": false,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.7525
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.95375
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 0.99
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 19.640875019831583
+        }
+      ],
+      "role": "candidate"
+    }
+  ],
+  "code_revision": "55837d0c371c52658b8d4e6d5b67fc3f31cd4c4b",
+  "component": "retriever",
+  "corpus_id": "academic-factual-qa-source-aligned-public-100-clusters",
+  "dataset_id": "academic-factual-qa-source-aligned-wording-002",
+  "decision": {
+    "limitations": [
+      "This development comparison evaluates retrieval and boundary actions, not product answer quality.",
+      "The benchmark uses public educational sources and no human participants.",
+      "OpenAI embedding methods share one provider family; deterministic source truth remains authoritative."
+    ],
+    "outcome": "refine",
+    "rationale": "No source-aligned method passed every frozen retrieval gate; the factual scaling branch stops for a method-level decision.",
+    "selected_implementation_id": null
+  },
+  "operational_summary": {
+    "hidden_gold_loaded_only_after_rankings_persisted": true,
+    "human_participants": 0,
+    "private_data_used": false,
+    "provider_calls": 32,
+    "rankings_content_sha256": "bfec3b9f87d5797f523b19034c63b743d869f3075fc0a65ca57148d8c6eb2318",
+    "rankings_file_sha256": "4a13414cf08bebcb83e974f22395c1383a3e72fddd268ebbb0275cb3d11cae16",
+    "reported_cost_usd": 0.00717285
+  },
+  "run_id": "academic-factual-qa-source-aligned-retrieval-confirmation-001",
+  "schema_version": 1
+}

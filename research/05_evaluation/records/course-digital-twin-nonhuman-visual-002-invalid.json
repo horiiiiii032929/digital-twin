@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-nonhuman-visual-002-invalid",
+  "component": "figure-description",
+  "dataset_id": "academic-factual-qa-visual-supplement-001",
+  "corpus_id": "academic-factual-qa-public-visual-supplement-001",
+  "code_revision": "e91a2f62a8e77da8afc1ac1748298bf31ec28b46",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "visual-supplement-network-free-contract-control",
+        "version": "v1",
+        "configuration": {
+          "visual_assets": 30,
+          "visual_cases": 60,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "completed-visual-descriptions",
+          "value": 30.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-semantic-list-assets",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 2.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "public-source-only",
+          "passed": true,
+          "evidence": "All assets are pinned public/open or deterministic synthetic visual fixtures."
+        },
+        {
+          "name": "original-region-lineage",
+          "passed": true,
+          "evidence": "The contract preserves the original asset, region, version, and render hashes."
+        },
+        {
+          "name": "complete-provider-portfolio",
+          "passed": true,
+          "evidence": "The network-free control deterministically supplies one valid description contract per visual asset."
+        },
+        {
+          "name": "valid-semantic-output",
+          "passed": true,
+          "evidence": "The deterministic control contains no duplicate entity, relationship, or uncertainty values."
+        },
+        {
+          "name": "no-private-data",
+          "passed": true,
+          "evidence": "No private source or participant data is present."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-nano-visual-description-attempt-002",
+        "version": "v2-invalid",
+        "configuration": {
+          "provider_model": "gpt-5.4-nano-2026-03-17",
+          "provider_calls": 30,
+          "provider_attempts": 30,
+          "input_tokens": 54749,
+          "output_tokens": 12014,
+          "zero_retries": true,
+          "reported-cost-usd": 0.0259673
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "completed-visual-descriptions",
+          "value": 30.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-semantic-list-assets",
+          "value": 3.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0259673,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 2.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "public-source-only",
+          "passed": true,
+          "evidence": "All 30 transmitted inputs were pinned public/open or deterministic synthetic visual fixtures."
+        },
+        {
+          "name": "original-region-lineage",
+          "passed": true,
+          "evidence": "Every transmitted raster was deterministically derived from and hash-bound to its pinned original asset."
+        },
+        {
+          "name": "complete-provider-portfolio",
+          "passed": true,
+          "evidence": "All 30 exact-model calls completed with zero retries."
+        },
+        {
+          "name": "valid-semantic-output",
+          "passed": false,
+          "evidence": "Three responses repeated values in frozen uniqueness-constrained semantic lists."
+        },
+        {
+          "name": "no-private-data",
+          "passed": true,
+          "evidence": "No private source, participant record, or student data was processed."
+        }
+      ],
+      "failures_by_category": {
+        "duplicate-semantic-list": 3
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The final corrective attempt completed all provider calls but failed the frozen deterministic semantic-output contract. Stop the visual branch without scoring retrieval quality or retrying again.",
+    "limitations": [
+      "No visual retrieval-quality estimate is reported because deterministic semantic validation failed before scoring.",
+      "This small public/synthetic supplement would remain Go Deeper even after a pass and cannot support a broad multimodal claim.",
+      "The visual branch is separate from the text/OCR factual and whole-product evaluations."
+    ]
+  }
+}

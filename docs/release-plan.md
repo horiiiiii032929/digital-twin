@@ -87,6 +87,32 @@ a fresh source-disjoint tranche. Only that pass may reopen 500+100 and sealed
 10,000+1,000 execution. Visual, C0-C3, and provider T0/T1 stages retain their
 existing boundaries.
 
+AFQC-101 removes the repeated administrative authorization pauses from those
+non-human stages. One USD 50 program authority now advances each passing stage
+automatically while preserving all quality, privacy, leakage, identity,
+security, accounting, and finite-correction stops. The newly identified
+AFQC-100 corpus/gold region-binding defect is corrected prospectively; the
+historical unfavorable result remains immutable. Real professor/student
+participation is still outside this authority.
+
+AFQC-102 completes the corrected question-wording stage: 500/500 cases are
+unique and source-linked, 148 use accepted model wording, and 352 use explicit
+deterministic context-complete fallbacks. All 50 provider calls completed at
+USD 0.8352885. This advances automatically to fresh multi-method retrieval;
+it does not itself reopen product or final-set claims.
+
+AFQC-103 validly stops the fresh factual branch before product generation. M2
+small hybrid and M3 large dense each reached 89.75% exact-region evidence@3
+versus the 90% gate, with 99.25% Recall@5, 99% boundary accuracy, zero severe
+releases, and zero course/version violations. AFQC-104 corrects the diagnosis:
+37 of M2's 41 failures contained equivalent nested evidence, so the post-hoc
+supporting-evidence diagnostic is 99.00% with four genuine misses. That
+diagnostic cannot select M2. One prospective successor must freeze unique
+non-overlapping evidence atoms, add deterministic coverage selection, and
+confirm on new source-disjoint data. Independent visual, synthetic-profile,
+and local product checks may continue without reopening the factual or final
+split.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

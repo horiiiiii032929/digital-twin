@@ -291,8 +291,8 @@ class DocumentChunk(BaseModel):
         for checksum in (self.source_checksum, self.region_checksum):
             if checksum is not None and not _SHA256_PATTERN.fullmatch(checksum):
                 raise ValueError("chunk lineage checksums must be SHA-256 digests")
-        if self.region_id and not self.crop_ref:
-            raise ValueError("region chunks require an original crop reference")
+        if self.bounding_box is not None and self.region_id and not self.crop_ref:
+            raise ValueError("spatial region chunks require an original crop reference")
         return self
 
 

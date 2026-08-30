@@ -26,6 +26,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
     EvaluationClaimV1,
     EvaluationGoldV1,
 )
+from src.digital_twin.grounding.source_registration import canonical_region_id
 
 
 ReferenceModality = Literal[
@@ -375,27 +376,59 @@ _CUE_STOPWORDS = frozenset(
         "was",
         "were",
         "with",
+        "after",
+        "another",
+        "detail",
+        "does",
+        "doing",
+        "fact",
+        "gives",
+        "next",
+        "point",
+        "returns",
+        "selected",
+        "source",
+        "state",
+        "states",
+        "statement",
+        "them",
+        "then",
+        "there",
+        "these",
+        "they",
+        "those",
+        "uses",
+        "using",
+        "what",
+        "when",
+        "where",
+        "which",
     }
 )
 
 
 def _cue(value: str) -> str:
-    tokens = [
-        row.casefold()
-        for row in re.findall(r"[A-Za-z][A-Za-z0-9_-]*", value)
-        if row.casefold() not in _CUE_STOPWORDS
-    ]
-    unique: list[str] = []
-    for token in reversed(tokens):
-        if token not in unique:
-            unique.append(token)
-        if len(unique) == 3:
-            break
-    if not unique:
+    candidates: list[tuple[int, int, str]] = []
+    seen: set[str] = set()
+    for ordinal, row in enumerate(re.findall(r"[A-Za-z][A-Za-z0-9_-]*", value)):
+        token = row.casefold()
+        if token in _CUE_STOPWORDS or token in seen or len(token) < 2:
+            continue
+        seen.add(token)
+        identifier_like = (
+            "_" in row
+            or "-" in row
+            or any(character.isdigit() for character in row)
+            or any(character.isupper() for character in row[1:])
+        )
+        specificity = 3 if identifier_like else 2 if len(token) >= 7 else 1
+        candidates.append((-specificity, ordinal, row))
+    anchors = [row[2] for row in sorted(candidates)[:3]]
+    if not anchors:
         return "the selected source detail"
-    if len(unique) <= 2:
-        return unique[0]
-    return " ".join(reversed(unique[:2]))
+    if len(anchors) <= 2:
+        return anchors[0]
+    return " ".join(anchors[:2])
 
 
 def _other_course(course_id: str, course_ids: list[str]) -> str:
@@ -435,6 +468,7 @@ def build_reference_cluster_rows(
     cluster: SourceClusterV2,
     *,
     course_ids: list[str],
+    source_derived_region_ids: bool = False,
 ) -> tuple[list[EvaluationCaseV1], list[EvaluationGoldV1]]:
     """Build public cases and hidden gold from the prospective references."""
 
@@ -460,10 +494,26 @@ def build_reference_cluster_rows(
                             + span.relative_char_start,
                             char_end=cluster.char_start + span.relative_char_end,
                             region_id=(
-                                f"{cluster.cluster_id}-{target.slice}-region-"
-                                f"{claim_index}"
-                                if target.modality != "text"
-                                else None
+                                canonical_region_id(
+                                    source_artifact_id=cluster.source_artifact_id,
+                                    source_version=cluster.source_version,
+                                    source_sha256=cluster.source_sha256,
+                                    char_start=(
+                                        cluster.char_start
+                                        + span.relative_char_start
+                                    ),
+                                    char_end=(
+                                        cluster.char_start + span.relative_char_end
+                                    ),
+                                    modality=target.modality,
+                                )
+                                if source_derived_region_ids
+                                else (
+                                    f"{cluster.cluster_id}-{target.slice}-region-"
+                                    f"{claim_index}"
+                                    if target.modality != "text"
+                                    else None
+                                )
                             ),
                         )
                     ],

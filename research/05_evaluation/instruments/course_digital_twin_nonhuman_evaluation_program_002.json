@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "decision_id": "AFQC-101",
+  "owner_issue": 127,
+  "status": "frozen-authorized",
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
+  "automatic_stage_progression": true,
+  "stage_by_stage_user_approval_required": false,
+  "authorization_scope": "All public-source and synthetic non-human evaluation stages may advance automatically under the frozen program; real professor and student participation is excluded.",
+  "authorization_recorded_at": "2026-08-30T17:20:00+08:00",
+  "global_budget_usd": 50.0,
+  "private_data_authorized": false,
+  "human_participant_execution_authorized": false,
+  "deterministic_truth_authoritative": true,
+  "llm_or_agent_reviews_authoritative": false,
+  "models": [
+    {"role": "routine-semantic-screen-and-question-authoring", "model": "gpt-5.4-nano-2026-03-17", "input_price_usd_per_million": 0.2, "output_price_usd_per_million": 1.25},
+    {"role": "product-answer-generator", "model": "gpt-5.4-mini-2026-03-17", "input_price_usd_per_million": 0.75, "output_price_usd_per_million": 4.5},
+    {"role": "blinded-semantic-critic", "model": "gpt-5.6-terra", "input_price_usd_per_million": 2.0, "output_price_usd_per_million": 12.0},
+    {"role": "critical-source-truth-escalation", "model": "gpt-5.4-2026-03-05", "input_price_usd_per_million": 2.5, "output_price_usd_per_million": 15.0, "maximum_cases": 20}
+  ],
+  "review_panel": [
+    {"layer": "D0", "reviewer": "deterministic-source-action-claim-citation-policy-graders", "authority": "authoritative"},
+    {"layer": "L1", "reviewer": "gpt-5.4-nano-2026-03-17", "authority": "advisory-screen"},
+    {"layer": "L2", "reviewer": "gpt-5.6-terra", "authority": "advisory-critic"},
+    {"layer": "A3", "reviewer": "fresh-codex-audit", "authority": "proposed-disposition-only"}
+  ],
+  "stages": [
+    {"order": 1, "stage": "context-complete-question-and-source-registration", "automatic_on_success": true, "budget_usd": 4.0},
+    {"order": 2, "stage": "fresh-retrieval-evidence-confirmation", "automatic_on_success": true, "budget_usd": 4.0},
+    {"order": 3, "stage": "actual-product-500-plus-100", "automatic_on_success": true, "budget_usd": 7.0},
+    {"order": 4, "stage": "final-construction-10000", "automatic_on_success": true, "budget_usd": 7.0},
+    {"order": 5, "stage": "sealed-product-10000-plus-1000", "automatic_on_success": true, "budget_usd": 22.0},
+    {"order": 6, "stage": "true-visual-30-plus-60", "automatic_on_success": true, "budget_usd": 2.0, "independent_after_factual_failure": true},
+    {"order": 7, "stage": "synthetic-profile-c0-c3", "automatic_on_success": true, "budget_usd": 1.5, "independent_after_factual_failure": true},
+    {"order": 8, "stage": "provider-backed-t0-t1", "automatic_on_success": true, "budget_usd": 2.0},
+    {"order": 9, "stage": "local-r1-regression-and-professor-package", "automatic_on_success": false, "budget_usd": 0.5}
+  ],
+  "hard_stops": [
+    "private-data-exposure",
+    "gold-leakage",
+    "provider-model-identity-drift",
+    "corrupted-ledger-hash-or-accounting",
+    "security-or-policy-boundary-failure",
+    "global-cost-ceiling-exhausted",
+    "second-invalid-execution-in-one-stage",
+    "valid-stage-quality-failure"
+  ],
+  "human_stop_boundary": [
+    "real-professor-profile-approval",
+    "external-professor-or-student-recruitment-consent",
+    "human-usability-or-learning-outcome-study"
+  ],
+  "historical_results_immutable": [
+    "course-digital-twin-evaluation-program-001-invalid",
+    "academic-factual-qa-api-retrieval-selection-001"
+  ],
+  "content_sha256": "7ff5927caa72c313b73157e3951e2681d503e1288b57abf84d458155214d8d3f"
+}

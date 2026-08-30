@@ -33,6 +33,10 @@ _DEICTIC = re.compile(
     r"\b(?:it|this|that|these|those|there|the former|the latter)\b",
     re.IGNORECASE,
 )
+_DEICTIC_ACTION_QUESTION = re.compile(
+    r"\bwhat\s+does\s+[\"'“”]?(?:it|this|that|these|those)[\"'“”]?\s+do\b",
+    re.IGNORECASE,
+)
 _EXPLICIT_REFERENT = re.compile(
     r"\b(?:algorithm|equation|table|figure|function|method|protocol|process|"
     r"system|statement|step|variable|concept|section|cache|network|tree|graph)\b",
@@ -77,7 +81,9 @@ def concept_tokens(value: str) -> set[str]:
 def requires_clarification(question: str) -> bool:
     """Fail closed for unresolved deictic questions before generation."""
 
-    return bool(_DEICTIC.search(question)) and not bool(
+    return bool(_DEICTIC_ACTION_QUESTION.search(question)) or bool(
+        _DEICTIC.search(question)
+    ) and not bool(
         _EXPLICIT_REFERENT.search(question)
     )
 

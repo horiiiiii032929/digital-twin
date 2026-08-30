@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 717
+    "audited": 748
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 166,
-    "active_runtime": 125,
+    "active_or_unclassified_tooling": 175,
+    "active_runtime": 127,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 176,
+    "evaluation_configuration": 186,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 151
+    "verification": 161
   },
-  "file_count": 717,
+  "file_count": 748,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "f7316ca5917bdee30342aa27fafe7d71a89200cd9203d0377b1e3e7310735256",
+  "record_sha256": "0d64b54d13e4eaacd1ddd15c962fdce27d7d6b8609e767110a50181959b20a0f",
   "records": [
     {
       "audit": {
@@ -408,7 +408,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Focused domain tests, network-free simulations, source-aligned AFQC-101 validation command, execution-freeze validation, and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -871,8 +871,8 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Command review adds deterministic package validation, terminal pass/fail simulations, no-call preflight, bounded execute/resume entrypoints, and retains the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -920,7 +920,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, explicit independent profile-supplement command coverage, and the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "ae7d39d0cbe812be37d3ac903d727f768e109d4d5a7d92eb0da7ba6a60e9601c"
+      "sha256": "f983580e424a73c13dbf724519f9972ee8242de622c6d37097536e96a93250a5"
     },
     {
       "audit": {
@@ -1620,6 +1620,102 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
       "risk": "high",
       "sha256": "8928a07b48a03da917d6836b5db3384c46c181521575e08db5cbf0c5aa561082"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Prospective instrument review verifies exact hashes for the 100-cluster/500-case atomic package, unchanged M2 plus one deterministic selector, original hard gates, public-ranking-before-gold ordering, zero retries, USD 1 stop, and finite progression.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_confirmation_001.json",
+      "risk": "high",
+      "sha256": "f89208cabc9f52791fbfe9144b47bc29b2824cc935ee99a831a0932872a85913"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Manifest review verifies the actual T0 candidate uses selected atomic-M2 retrieval, exact GPT-5.4 mini, grounded policy, atomic claim validation, and the structured evidence gate; the exact executable revision is ledger-bound.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_candidate_manifest_001.json",
+      "risk": "high",
+      "sha256": "d6cd451485c9084e53dcacf8554d790d74bb315ef587dce93d3c129d8dd72794"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Instrument review verifies fixed 500+100 inputs, response-before-gold ordering, 600-call and zero-retry bounds, USD 7 stop, unchanged hard gates, finite progression, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_checkpoint_001.json",
+      "risk": "high",
+      "sha256": "14ffe25715aa8939bba1fa4b8409e47835f29460927fe157fe145cfef165f71b"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Control-manifest review confirms that retriever, generator, policy, profile, model bindings, and claim validation match the candidate and only the any-hit evidence gate differs.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_control_manifest_001.json",
+      "risk": "high",
+      "sha256": "e9ebfdfb83bfda3bdcfa36fb329fbf2d8b33c91416e7a682a8a25f6888ddb149"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Provider-binding review verifies direct OpenAI Responses API, exact dated model identity, store false, zero transport retries, official recorded pricing, 24-hour freshness, and program-scoped authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_openai_binding_001.json",
+      "risk": "high",
+      "sha256": "9311384de423a9ae3228a5c666aa577289ba574322f142572b14ff55e2856921"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Runtime-manifest review binds public source atoms, immutable per-course indexes, cached public question vectors, exact hashes, and explicitly contains no hidden-gold path.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_retrieval_runtime_001.json",
+      "risk": "high",
+      "sha256": "81911c0d35ad9422fe34ef72902997ae04ffe32d1845260bb919df5943413b8f"
     },
     {
       "audit": {
@@ -2519,6 +2615,54 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-retrieval-confirmation",
+        "evidence": "Instrument review verifies six frozen methods, exact source/case/gold hashes, 450/450 pre-ranking matchability, durable public rankings before hidden gold, zero retries, USD 2 stop, and automatic progression only on a valid pass.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_retrieval_confirmation_001.json",
+      "risk": "high",
+      "sha256": "3047704cac61b495496d2eee28479d1d5879bc9385fddef2af09711c21d77498"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Binding review verifies direct OpenAI-only exact models, store=false, fixed 50-call and USD 4 bounds, two transport retries globally, public-source scope, no product/final execution, and correlated-agent-review disclosure.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_001.json",
+      "risk": "high",
+      "sha256": "a80357999f98344925b624a180af4c6fe5d7159635dc697f2c138642fac582d8"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Attempt-002 binding review preserves cases, prompts, models, gates, batching, retry cap, and USD 4 ceiling while increasing only output-token reservation after the recorded non-completed provider response.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_002.json",
+      "risk": "high",
+      "sha256": "683cb103c9c1ef48cfd608685f1d9c8319a75db6678a2b800209bc7b836ef06a"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Binding review confirms the exact DeepSeek V4 Flash model and revision, current official limits and peak pricing, account-linked retention disclosure, 24-hour freshness, no fallback, and separate authorization for the bounded T0 confirmation.",
         "findings": [],
@@ -2628,6 +2772,22 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json",
       "risk": "high",
       "sha256": "c9c678e9eeb39990499c1d71019e16011ba8c3bf01ca17a6c6ff7b0a2cd60f1f"
+    },
+    {
+      "audit": {
+        "domain": "nonhuman-evaluation-program",
+        "evidence": "Program review verifies one bounded USD 50 authority, automatic non-human stage progression, deterministic authority, advisory agent roles, finite failure stops, immutable unfavorable history, and explicit exclusion of human participants and private data.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_nonhuman_evaluation_program_002.json",
+      "risk": "high",
+      "sha256": "f9fe80349fe6ae4ff73aba7980a2f5c5e0a6c6d5cc63589ac9b0c6e761b39cb1"
     },
     {
       "audit": {
@@ -4311,6 +4471,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case conversation isolation, bounded provider accounting, and no gold or scorer dependency.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
+      "risk": "high",
+      "sha256": "58eca6d0eea39f082890fdc74172970cc4bacfc49c8743790893527f0f967c4e"
+    },
+    {
+      "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Adapter review verified precomputed hierarchical retrieval is public-question-only, hash-bound, source-authorized, and evaluated through the existing flow-independent response contract.",
         "findings": [],
@@ -4714,6 +4890,42 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Builder review and focused tests verify exactly 100 fresh source-family-disjoint clusters, 300 non-overlapping atoms, 500 unique cases, 451 uniquely mapped references, byte stability, and exclusive bounded writes without provider access.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-atomic-m2-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "high",
+      "sha256": "cf4556091c6767d5842f716ae8cd4abf830ef61a1c5a674582c49a3430d152c3"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Builder review verifies deterministic 500-case reuse, fixed 20-cluster/four-course control selection, public/gold separation, exact manifests, immutable retrieval binding, and byte-stable generated artifacts.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-atomic-m2-product-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "fff0e59d78be1a4a7d575525ce8f04f13bc5f2832aafe194ac21c450a6dcf38d"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual implementation review and focused tests verify deterministic commit-pinned public-source parsing, non-overlapping exact evidence spans, modality checks, stable allocation, duplicate rejection, and freeze-guarded writes.",
         "findings": [],
@@ -4847,6 +5059,24 @@
       "path": "scripts/build_academic_factual_qa_open_source_plan_v2.py",
       "risk": "high",
       "sha256": "ee93bad386183476af927558fe01d30a67898583e622167af39e9bdab334ca76"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-retrieval-successor",
+        "evidence": "Builder review verifies source-family-disjoint balanced selection, exact source-derived region registration, shared source hashes across cases/gold/corpus, 450/450 pre-ranking matchability, exclusive outputs, and zero provider or final-set access.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-source-aligned-confirmation"
+      ],
+      "path": "scripts/build_academic_factual_qa_source_aligned_confirmation.py",
+      "risk": "high",
+      "sha256": "0fb83f9053168b7c3caec05b361156a164f22efc7a57da7ad86361e27acd6927"
     },
     {
       "audit": {
@@ -5793,6 +6023,50 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Runner review verifies direct first-party small embeddings, streamed per-course indexes, cached queries, exact atomic-region scoring, public ranking persistence before hidden gold, bound resume, complete accounting, and finite M2/M2C selection.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-atomic-m2-confirmation",
+        "preflight:academic-factual-qa-atomic-m2-confirmation",
+        "resume:academic-factual-qa-atomic-m2-confirmation",
+        "simulate:academic-factual-qa-atomic-m2-confirmation",
+        "verify:academic-factual-qa-atomic-m2-confirmation"
+      ],
+      "path": "scripts/run_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "high",
+      "sha256": "4c138bae76f6075b7488d038de517dbdb8d0e0b1295b849015e1bc079d13597a"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Runner review verifies finite candidate/control ordering, exact resume and revision binding, exclusive outputs, gold opening only after both response ledgers, deterministic scoring, paired decision, and complete call/token/latency/cost accounting.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-atomic-m2-product",
+        "preflight:academic-factual-qa-atomic-m2-product",
+        "resume:academic-factual-qa-atomic-m2-product",
+        "simulate:academic-factual-qa-atomic-m2-product",
+        "verify:academic-factual-qa-atomic-m2-product"
+      ],
+      "path": "scripts/run_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "bee446bebce02cd891c8d7454603bb250717444f05cdfae37c59c46d188dabb2"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Code review and focused execution confirm ProductCaseInput contains no gold fields, both diagnostics traverse StudentTutoringService and persistence, cluster-bootstrap uncertainty is reproducible, output creation is exclusive, and all non-simulation execution is freeze-guarded.",
         "findings": [],
@@ -6180,6 +6454,56 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-retrieval-confirmation",
+        "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-source-aligned-retrieval",
+        "preflight:academic-factual-qa-source-aligned-retrieval",
+        "resume:academic-factual-qa-source-aligned-retrieval",
+        "simulate:academic-factual-qa-source-aligned-retrieval",
+        "verify:academic-factual-qa-source-aligned-retrieval"
+      ],
+      "path": "scripts/run_academic_factual_qa_source_aligned_retrieval.py",
+      "risk": "high",
+      "sha256": "ca2f61d36d8212c72eaf8b3642f3f0a4bf7d9c8f553eebbbda362f23c6bdd3d2"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Runner review verifies target-blind advisory input, ID-set parsing independent of provider order, atomic exclusive ledger/resume, exact identity and cost accounting, deterministic fallback, and automatic execution under the finite program authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-source-aligned-wording",
+        "execute:academic-factual-qa-source-aligned-wording-002",
+        "preflight-live:academic-factual-qa-source-aligned-wording",
+        "preflight-live:academic-factual-qa-source-aligned-wording-002",
+        "preflight:academic-factual-qa-source-aligned-wording",
+        "resume:academic-factual-qa-source-aligned-wording",
+        "resume:academic-factual-qa-source-aligned-wording-002",
+        "simulate:academic-factual-qa-source-aligned-wording",
+        "simulate:academic-factual-qa-source-aligned-wording-002",
+        "verify:academic-factual-qa-source-aligned-wording",
+        "verify:academic-factual-qa-source-aligned-wording-002"
+      ],
+      "path": "scripts/run_academic_factual_qa_source_aligned_wording.py",
+      "risk": "high",
+      "sha256": "4f5e7878d03b3e8013bf44be5959a64d8095a42fb29a0f3aa7c2272ebb723a33"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Runner review and full network-free service simulation verify course-and-question-only product input, full-corpus source reconstruction, shared atomic drafts, delayed gold join, authoritative claim/citation scoring, cluster-paired uncertainty, persistence, cost/call ceilings, and explicit non-academic simulation labeling.",
         "findings": [],
@@ -6326,6 +6650,29 @@
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
       "sha256": "e215a6ef7064828a96f18ad3e3d51a8ef97551d9dbf53e03d0cf25e4674300a5"
+    },
+    {
+      "audit": {
+        "domain": "nonhuman-evaluation-supplements",
+        "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, bounded deterministic SVG rasterization, transmitted-raster hashes, terminal invalid visual evidence, independent profile-only continuation, original-region authority, explicit C0-C2-only claims, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:nonhuman-evaluation-supplements",
+        "execute:nonhuman-profile-supplement",
+        "preflight:nonhuman-evaluation-supplements",
+        "resume:nonhuman-evaluation-supplements",
+        "simulate:nonhuman-evaluation-supplements",
+        "verify:nonhuman-evaluation-supplements"
+      ],
+      "path": "scripts/run_course_digital_twin_nonhuman_supplements.py",
+      "risk": "high",
+      "sha256": "9046b5e3b0f9a0318aabe17de4771d16f56a96ac5c24cc0c4cfae18ffa039fa9"
     },
     {
       "audit": {
@@ -8301,10 +8648,10 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual reference-contract review verifies exact quote/range validation, short deterministic claims, complete text and structured extraction, modality/target invariants, stable source-region IDs, separate boundary construction, and provider-independent public/gold assembly.",
+        "evidence": "Successor review verifies exact quote/range validation, complete text and structured extraction, source-derived region IDs shared by runtime and gold, context-bearing cue selection, separate boundary construction, and provider-independent public/gold assembly.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8312,7 +8659,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_references.py",
       "risk": "high",
-      "sha256": "d780da3d1e2a8777dc7ff18a9d63f616d4cc071a469d7e4c89ebf6d3a1e0c4fe"
+      "sha256": "6b8aaaa355aab3baf75a9cf54f4c10ae9dda20aaa787fdab6b1adb9acdb776c6"
     },
     {
       "audit": {
@@ -8429,10 +8776,10 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Retrieval evaluator review verified untouched 300-case selection, public-question execution before hidden-gold joining, source-range evidence metrics, boundary safety, latency gates, and deterministic preference within the frozen two-point margin.",
+        "evidence": "Retrieval evaluator review verifies ranking-before-gold ordering, exact pre-ranking corpus/gold matchability, source-range and region-ID evidence metrics, boundary safety, latency gates, and deterministic selection rules.",
         "findings": [],
         "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8440,7 +8787,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_retrieval_evaluation.py",
       "risk": "high",
-      "sha256": "d91f251b70f4a28abfc11b83fcfb2e40a2cb8d09a108e9bf01ab557a8638a462"
+      "sha256": "a6ef7cfa0600f7bc6dc4f92634e753c12f9d96774a62093f794420ea4a22b1ab"
     },
     {
       "audit": {
@@ -8585,6 +8932,22 @@
       "path": "src/digital_twin/evaluation/retrieval_runtime.py",
       "risk": "high",
       "sha256": "301f4d768b89482e92c41f3bb89b7de39fd28e4ce6ed38fd5510e61082d7e89c"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Assembly review verifies models cannot mutate authoritative truth, accepted wording retains semantic anchors and blind-review agreement, canonical-answer leakage fails, duplicates fall back deterministically, and every final question remains unique.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/source_aligned_wording.py",
+      "risk": "high",
+      "sha256": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49"
     },
     {
       "audit": {
@@ -8813,10 +9176,10 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Hierarchical retrieval review verified structured token preservation, top-30 expansion, parent/adjacent regions, deterministic concept coverage, question-only rerank eligibility, bounded external IDs, ambiguous-question clarification, and fail-closed evidence release.",
+        "evidence": "Hierarchical retrieval review verifies structured token preservation, bounded expansion and reranking, and fail-closed evidence release; deictic action questions now clarify even when preceding context names a generic network or process referent.",
         "findings": [],
         "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8824,7 +9187,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/hierarchical_retrieval.py",
       "risk": "high",
-      "sha256": "5e3ca81eb98df19c9dc53cea53dea3462269f01050a05696f28073d51e74d9d1"
+      "sha256": "59f88fbd1d8ed988cfb7faa1544e7268e0f5ab2ebc1045a4589e7ca235fb3770"
     },
     {
       "audit": {
@@ -8845,10 +9208,10 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Grounding review verifies text-range region IDs need no visual crop while spatial regions still require original crop lineage; existing ingestion, multimodal, retrieval, and provenance invariants remain covered by focused tests.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8856,7 +9219,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/models.py",
       "risk": "high",
-      "sha256": "b997afc17c588a53a59d37f0646bf9a6ea46bed2ba3f91de7285e140ac5635a4"
+      "sha256": "13e063328311eee93aafd392477cb93b368e6dce6348d79173473c42cbd3f4b2"
     },
     {
       "audit": {
@@ -9001,6 +9364,22 @@
       "path": "src/digital_twin/grounding/retrieval_runtime.py",
       "risk": "high",
       "sha256": "b085b85c329b5948be7a30d9ef414c030225c578848c904a8fc3319c304d0b82"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-retrieval-successor",
+        "evidence": "Source-registration review verifies stable source-derived IDs independent of cases/questions, exact citable spans, contextual non-authoritative search metadata, structured identifiers, parent lineage, and deterministic ordering.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/source_registration.py",
+      "risk": "high",
+      "sha256": "c20f6e2fc28a1194b29f673a63d42991c8d522e392b7a548a526a85bb0aa8036"
     },
     {
       "audit": {
@@ -9340,11 +9719,11 @@
     },
     {
       "audit": {
-        "domain": "finite-evaluation-program",
-        "evidence": "Freeze review verifies AFQC-100 revoked the API-first retrieval instrument and leaves dataset, held-out, private, product, provider, and final execution blocked.",
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Freeze review registers the atomic package builder and confirmation runner under the existing finite non-human program while preserving the repository-wide freeze and excluding private or human-participant execution.",
         "findings": [],
         "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9352,7 +9731,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
+      "sha256": "9a49d5ed2904d0c5e1ef4a20848d88448f8b03626ae50250b443daef8a9d8546"
     },
     {
       "audit": {
@@ -9933,10 +10312,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify the completed API-first retrieval instrument no longer has external-model or method authority and all unrelated execution remains rejected.",
+        "evidence": "Focused freeze-policy tests verify AFQC-100 remains revoked, the exact non-human successor receives only its four frozen execution capabilities, and unrelated instruments remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-authorization-review"
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -9944,7 +10323,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "9851e13de9a70c2451083a67c56d9271bd22c57c035a81d9a34c8fdc1f4ce9c4"
+      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
     },
     {
       "audit": {
@@ -10041,6 +10420,22 @@
       "path": "tests/digital_twin/test_retrieval_v3_instruments.py",
       "risk": "medium",
       "sha256": "6778e506e755afb1901122a71aa11a07cebdbb85c30f9463c92a344e4d1bf6e2"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-retrieval-verification",
+        "evidence": "Focused tests verify section/modality/identifier registration, non-authoritative search context, stable semantic anchors and region IDs, exact span lineage, and deictic clarification.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_source_registration.py",
+      "risk": "medium",
+      "sha256": "d989cefb6b23bfbef9bf401c3a7b23f156c9c590d718766d50024eefb07dffc3"
     },
     {
       "audit": {
@@ -10265,6 +10660,22 @@
       "path": "tests/services/test_runtime_lifecycle.py",
       "risk": "medium",
       "sha256": "581ccab0577597cdb0d2d2c2280154d80a5c706ed3311bcf1d4259c1d65207ca"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint-verification",
+        "evidence": "Focused tests verify finite bounds, public input gold exclusion, one-variable candidate/control comparison, adapter dependency isolation, terminal outcomes, and no-call resume simulation.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "medium",
+      "sha256": "0f1ffa38600926ab9657cac03a0ba084945ba7118abaacbb86909f854577a72e"
     },
     {
       "audit": {
@@ -10572,6 +10983,22 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-retrieval-verification",
+        "evidence": "Focused tests verify the 100-cluster/500-case balanced fresh package, source-family disjointness, corpus/cases/gold hash identity, runtime/gold region-ID equality, 450/450 matchability, and fail-before-ranking mutation behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_source_aligned_confirmation.py",
+      "risk": "medium",
+      "sha256": "c028c571006c54840e2f7d05cd49c35018997b42a2798ebe8fcfaee80ce4c875"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Self-contained regression fixtures plus focused tests and the complete repository gate.",
         "findings": [],
@@ -10732,6 +11159,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation-verification",
+        "evidence": "Focused tests cover instrument/public validation, question-only coverage selection, hidden-gold opening order, and clean program-authorized preflight behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_atomic_m2_confirmation_runner.py",
+      "risk": "medium",
+      "sha256": "1cd75b5828b627ec3fe880c762dbf2023c48401b75b164ba1f2aa6e22102b169"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
         "findings": [],
@@ -10809,6 +11252,22 @@
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
       "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-confirmation-verification",
+        "evidence": "Focused tests verify fresh allocation, disjoint source families, non-overlap, exact mapping, package byte stability, exclusive writes, and private/final-data exclusion.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "medium",
+      "sha256": "f083b055f1551d873ee47158495c78bd88ac4d2859e6a638513d94bf3785f24b"
     },
     {
       "audit": {
@@ -10937,6 +11396,22 @@
       "path": "tests/test_build_repository_correctness_inventory.py",
       "risk": "medium",
       "sha256": "e8fd26680f0b7dceef66998b517fe00d1a63e14c3e32dd2d64fe3bff50e71630"
+    },
+    {
+      "audit": {
+        "domain": "nonhuman-evaluation-supplements-verification",
+        "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, terminal semantic-output invalidation, independent profile-only execution, safe output roots, identity and ledger checks, simulated pass/failure propagation, C0-C2 condition handling, resume rejection for corrupted or exclusive outputs, and explicit test-only authorization substitution after the real program authority was revoked.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
+      "risk": "medium",
+      "sha256": "58276fda315aa6e75b548eef49b5d009312ececcac0afd9004f63dd7aa702c3d"
     },
     {
       "audit": {
@@ -11452,6 +11927,22 @@
     },
     {
       "audit": {
+        "domain": "nonhuman-evaluation-program-verification",
+        "evidence": "Focused tests verify the manifest hash, finite USD 50 stage allocation, one program authority, automatic progression policy, human exclusion, and exact repository-freeze capabilities.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-three-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_nonhuman_evaluation_program.py",
+      "risk": "medium",
+      "sha256": "6974e6dafa505e25b84f3541b0149e93bd039002fb2aabd7c9d875a8e5411f45"
+    },
+    {
+      "audit": {
         "domain": "evaluation-verification",
         "evidence": "Focused regressions prove historical, revoked, unauthorized, and synthetic authorized-state handling; packet binding, answer-key separation, clean/defect controls, semantic-drift rejection, strict judgment accounting, metadata-expiry blocking, and freeze-guarded writes.",
         "findings": [],
@@ -11708,6 +12199,22 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-wording-verification",
+        "evidence": "Focused runner tests verify program/model/cost bounds, reordered complete ID acceptance, duplicate and unknown-ID quarantine, clean exclusive preflight, and reviewer gold isolation.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_run_source_aligned_wording.py",
+      "risk": "medium",
+      "sha256": "415a0fd69d7fb6b2b1b1f3243848976d83db129703fbbca0ad086edc3186ecb5"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -11801,6 +12308,38 @@
       "path": "tests/test_second_review_multimodal_benchmark.py",
       "risk": "medium",
       "sha256": "c3d38b67bd5fa787f7634a6e046386fcca753eeaae2eac1a02e189d9db75c304"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-retrieval-verification",
+        "evidence": "Focused tests verify exact package matchability, terminal pass/fail simulations, simplest-near-best selection, a clean program-authorized preflight with no repeated approval blocker, and that preflight/execution cannot open hidden gold before public rankings are durable.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_source_aligned_retrieval_runner.py",
+      "risk": "medium",
+      "sha256": "689e071f96d4643f39be9707311fa1ffc5111a5939e55f28bcdc073fd6f2fdf6"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording-verification",
+        "evidence": "Focused assembly tests verify 500 deterministic truth-preserving fallbacks are complete and unique and that semantic anchor loss forces fallback despite a nominally favorable advisory vote.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_source_aligned_wording.py",
+      "risk": "medium",
+      "sha256": "d0c9146b0097ea0fae85f9e510d1979ca0b962e2bb520ace8efc85f768f9ebef"
     },
     {
       "audit": {
@@ -11980,8 +12519,8 @@
     }
   ],
   "risk_counts": {
-    "high": 552,
-    "medium": 165
+    "high": 573,
+    "medium": 175
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

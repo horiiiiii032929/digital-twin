@@ -49,6 +49,15 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_open_source_plan_v2.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_source_aligned_confirmation.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_atomic_m2_confirmation.py": (
+            "dataset_generation",
+        ),
+        "scripts/build_academic_factual_qa_atomic_m2_product_checkpoint.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -156,6 +165,23 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "dataset_generation",
             "external_model_evaluation",
             "local_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_source_aligned_wording.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_source_aligned_retrieval.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_atomic_m2_confirmation.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_course_digital_twin_nonhuman_supplements.py": (
+            "dataset_generation",
+            "external_model_evaluation",
             "method_evaluation_execution",
         ),
         "scripts/run_autonomous_tutoring_graph_development.py": (
@@ -341,6 +367,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_professor_fidelity_experiment.py": ("heldout_execution",),
+        "scripts/run_academic_factual_qa_atomic_m2_product_checkpoint.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/sample_multimodal_pdf_pages.py": ("dataset_generation",),
         "scripts/seal_course_tutor_anchor.py": ("dataset_generation",),
         "scripts/seal_course_tutor_splits.py": ("dataset_generation",),
