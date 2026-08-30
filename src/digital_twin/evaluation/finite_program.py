@@ -134,6 +134,8 @@ class ProgramManifestV1(BaseModel):
     deterministic_truth_authoritative: Literal[True] = True
     llm_reviews_authoritative: Literal[False] = False
     private_data_authorized: Literal[False] = False
+    retrieval_execution_device: Literal["cpu"] = "cpu"
+    retrieval_execution_dtype: Literal["float16"] = "float16"
     models: list[ProgramModelBindingV1] = Field(min_length=4, max_length=4)
     stages: list[ProgramStageV1] = Field(min_length=9, max_length=9)
     metadata_verified_at: datetime

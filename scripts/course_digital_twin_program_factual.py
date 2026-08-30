@@ -119,7 +119,7 @@ def _profile_retriever_selection():
     return next(row for row in profile.components if row.component.value == "retriever")
 
 
-def _qwen_embedder(selection):
+def _qwen_embedder(selection, *, execution_device: str, execution_dtype: str):
     implementation = selection.implementation
     if implementation is None:
         raise FactualStageError("selected hybrid retriever is unavailable")
@@ -138,18 +138,22 @@ def _qwen_embedder(selection):
     return Qwen3TextEmbedder(
         model_root / revision,
         instruction=str(configuration["query_instruction"]),
-        device=str(configuration["device"]),
-        dtype=str(configuration["dtype"]),
+        device=execution_device,
+        dtype=execution_dtype,
         batch_size=int(configuration["embedding_batch_size"]),
         max_length=int(configuration["embedding_max_length"]),
         model_revision=revision,
     )
 
 
-def _retrievers():
+def _retrievers(context: StageExecutionContext):
     chunks_by_course, _ = _chunks_by_course()
     selection = _profile_retriever_selection()
-    embedder = _qwen_embedder(selection)
+    embedder = _qwen_embedder(
+        selection,
+        execution_device=context.manifest.retrieval_execution_device,
+        execution_dtype=context.manifest.retrieval_execution_dtype,
+    )
     profile_payload = load_json_object(PROFILE_PATH)
     model_root = Path(
         os.getenv(
@@ -399,7 +403,7 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
     selected_cases = select_untouched_retrieval_cases(cases)
     selected_ids = {row.case_id for row in selected_cases}
     gold = {row.case_id: row for row in references if row.case_id in selected_ids}
-    _, bm25, hybrid, hierarchical = _retrievers()
+    _, bm25, hybrid, hierarchical = _retrievers(context)
     nano_rankings, nano_snapshot = asyncio.run(
         _nano_rankings(
             context=context,
@@ -1405,7 +1409,7 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
     control_cases = _read_public_cases(construction / "control-public-cases.json")
     # Final rankings are generated from public questions only. Hidden gold remains
     # unopened by the product response process.
-    _, bm25, hybrid, hierarchical = _retrievers()
+    _, bm25, hybrid, hierarchical = _retrievers(context)
     nano_rankings, nano_snapshot = asyncio.run(
         _nano_rankings(
             context=context,

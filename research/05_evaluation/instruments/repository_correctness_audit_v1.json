@@ -7661,12 +7661,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Manifest authorization review verified nine finite stages, exact direct-OpenAI model roles, current official pricing, $50 summed reserves, $44.60 p99 projection, privacy and hard-stop declarations, refreshed hash binding, and the exact one-time paid authority.",
+      "evidence": "Manifest authorization and harness-correction review verified nine finite stages, exact direct-OpenAI model roles, current official pricing, $50 summed reserves, $44.60 p99 projection, privacy and hard-stop declarations, the CPU/float16 execution device, refreshed hash binding, and the exact one-time paid authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "ecb8f41abfa4d28752980b97a01f4d77f74d70ccd5636191e39eade689a7c589"
+      "sha256": "050e3efc09aa75e85e3dfb12fca76165c1e7b958a95c01636943843f06f4b42f"
     },
     {
       "audit_status": "audited",
@@ -7683,12 +7683,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Factual-stage review verified question-only retrieval, bounded reranking, physically delayed gold opening, deterministic scoring, labelled canonical fallback, fixed paired control, advisory-only review, and atomic provider/product ledgers.",
+      "evidence": "Factual-stage review verified question-only retrieval, manifest-bound CPU/float16 embedding execution after the MPS stall, bounded reranking, physically delayed gold opening, deterministic scoring, labelled canonical fallback, fixed paired control, advisory-only review, and atomic provider/product ledgers.",
       "findings": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "9ae41ee572df75caf271477dba29455fdb8412235901d917811a15d1fb2d85ac"
+      "sha256": "86f780ad3710699cb59ffdaf2981dbb368107eb21a69d6aa2532b3712883ab2d"
     },
     {
       "audit_status": "audited",
@@ -7738,12 +7738,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Control-plane review verified immutable manifest validation, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
+      "evidence": "Control-plane review verified immutable manifest validation including the frozen retrieval execution device/dtype, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
       "findings": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "88ca0b791cb1930e6ef55440e73c915dbc7025ad43faf0bdb46bbc3f5469596b"
+      "sha256": "810e4966213626c81949e32d209f94827be1ca140b1628ba00979181317e4fa5"
     },
     {
       "audit_status": "audited",
@@ -7815,12 +7815,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Program regressions cover the exact bounded authority, manifest/budget/p99 controls, complete progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
+      "evidence": "Program regressions cover the exact bounded authority, manifest/budget/p99 and retrieval-device controls, complete progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
       "findings": [],
       "path": "tests/test_finite_evaluation_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "3d25e5711276185cd08d409d0500b10fc74841eabb710d615736d8380162e643"
+      "sha256": "bdf213a83b62719e8158459a171de2d36db82c84bfa19afd0e215ea5dbb2713b"
     }
   ],
   "schema_version": 1

@@ -13,6 +13,8 @@
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
   "private_data_authorized": false,
+  "retrieval_execution_device": "cpu",
+  "retrieval_execution_dtype": "float16",
   "models": [
     {
       "role": "bounded-evidence-ranker-wording-visual-audit",
@@ -166,5 +168,5 @@
     "global-cost-ceiling-exhausted",
     "second-invalid-execution-in-one-stage"
   ],
-  "content_sha256": "d22fc60bd40b483fca6a0f1a437dca467d753815ce77a629a9022fe2a2a14e07"
+  "content_sha256": "6d612e2154199b1ced73d846ca2e7fb8c8acd615d218bc73faec8d518cb2ffd6"
 }

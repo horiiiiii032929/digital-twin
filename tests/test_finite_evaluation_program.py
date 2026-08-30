@@ -76,6 +76,8 @@ def test_manifest_is_finite_hash_bound_and_authorized() -> None:
     )
     assert manifest.stage(ProgramStageName.RELEASE_REGRESSION).budget_usd == 0
     assert manifest.stage(ProgramStageName.REPORTING).budget_usd == 2
+    assert manifest.retrieval_execution_device == "cpu"
+    assert manifest.retrieval_execution_dtype == "float16"
     assert manifest.provider_execution_authorized is True
     assert manifest.paid_execution_authorized is True
     for operation in (
