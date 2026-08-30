@@ -80,6 +80,13 @@ reranking. Only a passing, separately authorized comparison may reopen 500+100
 and then sealed 10,000+1,000 execution. Visual, C0-C3, and provider T0/T1
 stages did not execute and retain their existing evidence boundaries.
 
+AFQC-096 completes the build-only successor on draft PR #149. The implementation
+now has exact OpenAI small/large adapters, streamed hash-bound index artifacts,
+durable query caches, M0–M6 ranking, hidden-gold separation, and finite
+network-free terminal simulations. The only next gate is a separately
+authorized 300-case method-selection run under the USD 2 emergency ceiling.
+No product profile changes unless that result is `completed-keep`.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

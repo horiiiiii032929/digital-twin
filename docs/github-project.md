@@ -49,12 +49,14 @@ as operationally invalid before case execution: Apple MPS stalled, and the one
 permitted CPU/float16 correction exceeded the practical memory envelope. The
 program made zero provider calls, spent USD 0, scored zero cases, and opened no
 hidden gold. Its authority is revoked and it cannot be retried. AFQC-095 makes
-#127 `In Progress / Refine / priority:p0` with one concrete API-first method
+#127 `In Progress / Go Deeper / priority:p0` with one concrete API-first method
 boundary: direct OpenAI small/large embeddings and optional bounded reranking,
 with repository-owned source registration, BM25, immutable vectors, citations,
-gold, and scoring. A new instrument must select among the finite retrieval
-methods on the untouched 300 development cases before 500+100 or sealed
-10,000+1,000 execution can reopen. #105 and #131 remain blocked evidence
+gold, and scoring. AFQC-096 completes that build on draft PR #149: the direct
+adapter, streamed v2 index, M0–M6 instrument, finite simulations, and no-call
+preflight are ready. The paid comparison over the untouched 300 development
+cases remains unauthorized. It is the single next research checkpoint before
+500+100 or sealed 10,000+1,000 execution can reopen. #105 and #131 remain blocked evidence
 consumers; #24 and #10 retain their professor-approval and external-human
 boundaries. The qualified local R1 remains unchanged.
 
@@ -77,15 +79,17 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must replace the failed finite-program local retrieval materializer
-   with the AFQC-095 API-first successor. The terminated
+1. #127 must execute the now-built AFQC-095/096 API-first successor once under
+   separate authority. The terminated
    program is immutable invalid evidence: two operational attempts, one exact
    harness correction, zero provider calls, USD 0, and no scored cases. Its
-   successor must register direct OpenAI embedding candidates, atomically
-   checkpoint bounded API batches, persist immutable local vector artifacts,
-   and compare the preregistered methods on the untouched 300 development
-   cases before restoring the flow-independent 500+100 and 10,000+1,000
-   evaluation path. The successor will retain the flow-independent
+   successor already registers direct OpenAI embedding candidates, atomically
+   checkpoints bounded API batches, persists immutable local vector artifacts,
+   and freezes comparison of the preregistered methods on the untouched 300
+   development cases. The next action is one authorized execution, not another
+   implementation or local-model correction. A pass restores the
+   flow-independent 500+100 and 10,000+1,000 evaluation path. The successor
+   retains the flow-independent
    10,000-case product contract and #105 evidence-decision boundary. Terminated
    build revision `f267fb0` remains reproducible historical evidence for the
    nine-stage control plane, USD 44.60 p99 projection, USD 50 absolute stop,

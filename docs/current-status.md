@@ -29,6 +29,17 @@ development cases. Historical Qwen3 evidence is preserved but the local model
 leaves the active path. No embedding call, method selection, 500+100 execution,
 or sealed 10,000+1,000 execution is currently authorized.
 
+AFQC-096 implements and freezes that build-only successor on draft PR #149.
+Direct OpenAI small/large embedding adapters now fail closed on identity,
+index, dimension, finite-value, per-input, per-request, and budget drift. A
+separate v2 index lifecycle checkpoints bounded batches in SQLite, streams the
+final float32 artifact, verifies hashes, and resumes without loading a local
+model. The M0–M6 instrument binds the exact public 2,100-region corpus and
+untouched 300-case split; all rankings must be persisted before hidden gold
+opens. Network-free pass, quality-failure, and identity-drift paths are
+implemented. The live preflight remains blocked by authority only after a clean
+checkout; no API call or selection has occurred.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

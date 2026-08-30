@@ -154,14 +154,16 @@ The next 300-case development decision compares methods, not model brands:
 | M2 | BM25 + small dense RRF | Low-cost hybrid candidate |
 | M3 | `text-embedding-3-large` dense | Higher-capability dense candidate |
 | M4 | BM25 + large dense RRF | Higher-capability hybrid candidate |
-| M5 | Best passing hybrid + deterministic section/adjacent expansion | Structured hierarchical candidate |
+| M5 | Large-model hybrid + deterministic section/adjacent expansion | Pre-frozen structured hierarchical candidate |
 | M6 | M5 + bounded GPT-5.4 nano reranking on eligible difficult cases | Optional API reranking candidate |
 
 Every method receives the same question-only inputs, source corpus, canonical
-range scoring, and preregistered gates. Prefer the simpler deterministic
-candidate when it is within two percentage points of the best result. If no
-method passes, stop for one method-level decision; do not tune and rerun the
-same 300 cases.
+range scoring, and preregistered gates. M5 is bound prospectively to M4 rather
+than selected after scoring, and every M0–M6 ranking must be durable before
+hidden gold opens. This avoids adapting a candidate to the same cases used to
+measure it. Prefer the simpler deterministic candidate when it is within two
+percentage points of the best result. If no method passes, stop for one
+method-level decision; do not tune and rerun the same 300 cases.
 
 ## Privacy and authority boundary
 

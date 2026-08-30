@@ -113,6 +113,12 @@ from src.digital_twin.grounding.retrieval_index import (
     build_retrieval_index_binding,
     source_set_sha256,
 )
+from src.digital_twin.grounding.api_retrieval_index import (
+    ApiRetrievalIndexBindingV2,
+    ApiRetrievalIndexManifestV2,
+    LoadedApiRetrievalIndexV2,
+    StreamingRetrievalIndexMaterializerV2,
+)
 from src.digital_twin.grounding.region_retrieval import (
     ModalityAwareRegionRetriever,
     RegionRoute,
@@ -153,6 +159,8 @@ from src.digital_twin.grounding.hierarchical_retrieval import (
 
 __all__ = [
     "AnyHitEvidenceGate",
+    "ApiRetrievalIndexBindingV2",
+    "ApiRetrievalIndexManifestV2",
     "AtomicAnswerClaim",
     "AtomicClaimEvidenceValidator",
     "AtomicClaimSupportSignal",
@@ -203,6 +211,7 @@ __all__ = [
     "LocalCrossEncoderBackend",
     "LocalNliCrossEncoderBackend",
     "LoadedRetrievalIndexV1",
+    "LoadedApiRetrievalIndexV2",
     "LexicalCoverageEvidenceGate",
     "MinimumRawScoreEvidenceGate",
     "ModalityAwareRegionRetriever",
@@ -251,6 +260,7 @@ __all__ = [
     "SourcePermissions",
     "SourceSensitivity",
     "StructuredLexicalCoverageEvidenceGate",
+    "StreamingRetrievalIndexMaterializerV2",
     "StructuredHierarchicalCoverageEvidenceGate",
     "StructuredHierarchicalRetriever",
     "TutorAnswer",

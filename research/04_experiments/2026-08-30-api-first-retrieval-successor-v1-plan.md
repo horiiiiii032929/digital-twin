@@ -30,7 +30,9 @@ smaller index.
    provider vectors in Python object graphs.
 4. Register small and large OpenAI embedding candidates as prospective and
    preserve Qwen3 as historical selected evidence only.
-5. Add retrieval methods M0-M6 from the API-first decision memo.
+5. Add retrieval methods M0-M6 from the API-first decision memo, with M5
+   prospectively bound to the large-model hybrid so all rankings remain
+   independent of hidden-gold scoring.
 6. Add no-call simulation, stale metadata, wrong identity, malformed vector,
    duplicate/missing index, budget, interruption/resume, and corruption tests.
 7. Freeze a new instrument and stop before provider execution.

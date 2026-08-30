@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-29-v7"
+POLICY_ID = "current-model-policy-2026-08-30-v8"
 OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
 OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
 OPENAI_ROUTINE_REVIEW_MODEL = "gpt-5.4-nano-2026-03-17"
@@ -23,6 +23,12 @@ OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL = f"openai/{OPENAI_SEMANTIC_REVIEW_MODEL}"
 OPENAI_GPT_5_6_LUNA_MODEL = "gpt-5.6-luna"
 OPENAI_GPT_5_6_TERRA_MODEL = "gpt-5.6-terra"
 OPENAI_GPT_5_6_SOL_MODEL = "gpt-5.6-sol"
+OPENAI_TEXT_EMBEDDING_SMALL_MODEL = "text-embedding-3-small"
+OPENAI_TEXT_EMBEDDING_LARGE_MODEL = "text-embedding-3-large"
+OPENAI_EMBEDDING_PRICING_USD_PER_MILLION: dict[str, float] = {
+    OPENAI_TEXT_EMBEDDING_SMALL_MODEL: 0.02,
+    OPENAI_TEXT_EMBEDDING_LARGE_MODEL: 0.13,
+}
 OPENAI_PRODUCT_CANDIDATE_MODELS = (
     OPENAI_HIGH_VOLUME_MODEL,
     OPENAI_GPT_5_6_LUNA_MODEL,
@@ -143,7 +149,17 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="selected-text-embedding",
         provider_model="Qwen/Qwen3-Embedding-0.6B",
-        status="selected",
+        status="historical-selected-control-not-active-for-successor",
+    ),
+    CurrentModelBinding(
+        role="prospective-api-text-embedding-low-cost",
+        provider_model=OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
+        status="afqc-095-prospective-not-selected",
+    ),
+    CurrentModelBinding(
+        role="prospective-api-text-embedding-high-capability",
+        provider_model=OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
+        status="afqc-095-prospective-not-selected",
     ),
     CurrentModelBinding(
         role="prospective-text-reranker",
@@ -181,6 +197,8 @@ CURRENT_MODEL_IDS = frozenset(
         OPENAI_GPT_5_6_LUNA_MODEL,
         OPENAI_GPT_5_6_TERRA_MODEL,
         OPENAI_GPT_5_6_SOL_MODEL,
+        OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
+        OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
         f"ollama/{LOCAL_GENERAL_MODEL}",
     }
 )

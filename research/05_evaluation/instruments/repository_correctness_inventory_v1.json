@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 711
+    "audited": 717
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 165,
-    "active_runtime": 123,
+    "active_or_unclassified_tooling": 166,
+    "active_runtime": 125,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 175,
+    "evaluation_configuration": 176,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 149
+    "verification": 151
   },
-  "file_count": 711,
+  "file_count": 717,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bb14fdbe4c5e11f1d8b929377774678971167b420cc6c0e4089b9573ff1ac165",
+  "record_sha256": "080199bdd1127f41295add65812816c349b79195156c37d3414f0ce716bb6c5f",
   "records": [
     {
       "audit": {
@@ -392,7 +392,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Command-surface review verified the API-first retrieval validator, finite simulations, blocked no-call preflight, authority-gated execution/resume commands, and all retained repository gates.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "fa01771a57552bc7e69d80785bceb6041e020e9d5f922b3e41811ac39dc7e56d"
+      "sha256": "ae7d39d0cbe812be37d3ac903d727f768e109d4d5a7d92eb0da7ba6a60e9601c"
     },
     {
       "audit": {
@@ -1604,6 +1604,22 @@
       "path": "research/05_evaluation/instruments/README.md",
       "risk": "high",
       "sha256": "6b93f9d4050fede40f3df3bcf3f9255c76ae743e9dc965af935179c7dc291654"
+    },
+    {
+      "audit": {
+        "domain": "api-first-retrieval-successor",
+        "evidence": "Instrument review verified exact public source/package hashes, the untouched 300-case split, prospective small/large bindings, M0-M6 methods, hidden-gold order, finite gates, call bounds, and provider/paid authorization false.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
+      "risk": "high",
+      "sha256": "dbd3605bef8458a208e166c0a749c0f392a3345aac190a20ecfeb39dba8b1fa1"
     },
     {
       "audit": {
@@ -5755,6 +5771,28 @@
     },
     {
       "audit": {
+        "domain": "api-first-retrieval-successor",
+        "evidence": "Entrypoint review verified package/hash validation, clean no-call preflight, streamed index and query checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, cost/call stops, deterministic selection, and repository-freeze guards.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:api-retrieval-selection",
+        "preflight:api-retrieval-selection",
+        "resume:api-retrieval-selection",
+        "simulate:api-retrieval-selection",
+        "verify:api-retrieval-selection"
+      ],
+      "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
+      "risk": "high",
+      "sha256": "231c3912df0968af678801621eb75d9a5eff91a044163931a42bdd15f05be8f1"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Code review and focused execution confirm ProductCaseInput contains no gold fields, both diagnostics traverse StudentTutoringService and persistence, cluster-bootstrap uncertainty is reproducible, output creation is exclusive, and all non-simulation execution is freeze-guarded.",
         "findings": [],
@@ -7326,7 +7364,7 @@
       ],
       "path": "scripts/validate_model_policy.py",
       "risk": "high",
-      "sha256": "bfc52b19bf61b5fb30eba266c46bf1c61b0e26cf6b7a91a323547e69dc0b83cf"
+      "sha256": "2134c5674f758eb8b6c0d768cd3212b78cfbe5b5ee32395867ad7028a04d7fdb"
     },
     {
       "audit": {
@@ -7794,7 +7832,7 @@
       "package_commands": [],
       "path": "services/embeddings/__init__.py",
       "risk": "high",
-      "sha256": "1e245c3d8d36f199c29c8f3912edc26cc4901ba5b53388a99fa0afb2d289c5fd"
+      "sha256": "ce99f17d2858d4b9700a2cb805d73a1c31f54eb8b4292cdf3ad6ef064393f57f"
     },
     {
       "audit": {
@@ -7827,6 +7865,22 @@
       "path": "services/embeddings/jina_client.py",
       "risk": "high",
       "sha256": "60ddaf5f6efb82563822927f6b186661f284c0bce3e6a2d053e67ac68a0be31a"
+    },
+    {
+      "audit": {
+        "domain": "api-first-retrieval-successor",
+        "evidence": "Adapter review verified direct HTTPS-only OpenAI embeddings, model registration, exact returned identity and indexes, dimensions, finite vectors, per-input/request limits, usage accounting, and fail-before-budget behavior with zero internal retries.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "services/embeddings/openai_client.py",
+      "risk": "high",
+      "sha256": "8c6a9d8fe8bd35fd6aa17263f519aef318400c43113edab67b6944342347edc5"
     },
     {
       "audit": {
@@ -8674,7 +8728,23 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "b6ccf624da95f7693b41c7f3b96c4f63d4e2909d86997d04d281e6c0e66ca266"
+      "sha256": "55c8c182509b82b91ffce028814f6a64a39577cfd729f02f73d72878c7ded72b"
+    },
+    {
+      "audit": {
+        "domain": "api-first-retrieval-successor",
+        "evidence": "Index-lifecycle review verified prospective v2 bindings, course/source/version isolation, bounded vector retention, SQLite batch checkpoints, resume binding checks, streamed dense publication, immutable hashes, idempotent pointers, corruption rejection, and query-only runtime loading.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/api_retrieval_index.py",
+      "risk": "high",
+      "sha256": "fb7542e0194e858bc575b50b43a8f50f5c083fe2e7baff3edc2c02c410d89eff"
     },
     {
       "audit": {
@@ -9015,7 +9085,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Policy v7 records all four screened product generators as quality-failed/not-selected, preserves unexecuted advisory roles, and retains deterministic generation for release without enabling provider execution.",
+        "evidence": "Policy v8 preserves deterministic release selection and historical bindings while registering OpenAI small/large embeddings only as AFQC-095 prospective, not-selected candidates.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -9026,7 +9096,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "223106a7ab0bddefcf103a006c8b36bcec62be18cc885a4b40463a23c1741bc2"
+      "sha256": "4623fc6e956d5eabb500b59c2facf8874c3e2061539a5696aff7e181531f68d7"
     },
     {
       "audit": {
@@ -9271,7 +9341,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Revocation review verified the terminated finite program is absent from bounded authorizations while the repository-wide freeze remains active. The unrelated deterministic development authorization is unchanged.",
+        "evidence": "Freeze review registered the API-first retrieval entrypoint for external-model and method execution while intentionally withholding its bounded authorization; validation, simulation, and preflight remain no-call.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -9282,7 +9352,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1d7c26a45971597852d9d562af0904ce0f6f8017a3a9a523a02a7c58c4c4e946"
+      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
     },
     {
       "audit": {
@@ -9603,6 +9673,22 @@
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
       "sha256": "3ff5aea4f923cf4675c447406c669541073cca209c21cd762c4cf651852cb6c6"
+    },
+    {
+      "audit": {
+        "domain": "api-first-retrieval-successor-verification",
+        "evidence": "Focused tests cover bounded immutable materialization, idempotency, runtime loading, interruption/resume, resume binding drift, embedder drift, and artifact checksum corruption.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_api_retrieval_index.py",
+      "risk": "medium",
+      "sha256": "904062b91242755eb9b9ee5932ad798d9f4d8ea0a38edf83600e9607c72072e8"
     },
     {
       "audit": {
@@ -10146,7 +10232,7 @@
       "package_commands": [],
       "path": "tests/services/test_retrieval_provider.py",
       "risk": "medium",
-      "sha256": "c132ef54ecc2680f478c61998926f45aa499e5ce1badfbc7e822d5e46dee73d0"
+      "sha256": "6d13cf2a6739cd16bb6d950cbcbf2768ad3c0e63b2a13ea9904d71d02a2c8369"
     },
     {
       "audit": {
@@ -10579,6 +10665,22 @@
       "path": "tests/test_analyze_it5002_rapid_result.py",
       "risk": "medium",
       "sha256": "706a4a6872b05d668f430ad3a961cb9bae2bcbb3c6dd448b29f47bf9b17476b6"
+    },
+    {
+      "audit": {
+        "domain": "api-first-retrieval-successor-verification",
+        "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, authority-only clean preflight, execution-freeze denial, and hash-bound query-cache replay without provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-retrieval-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_api_retrieval_selection.py",
+      "risk": "medium",
+      "sha256": "f29b61ca0979e3b3ca7b9db8bec591fa29e62727be586b76e04765d6229b5f59"
     },
     {
       "audit": {
@@ -11346,7 +11448,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "267a54c6006f97553e21e307c1143cde8559f895636012632884a70047151897"
+      "sha256": "e5b722137d3ecc880aa9a0256c18e3f79d1bd1ea801f1b237201acdda6522f92"
     },
     {
       "audit": {
@@ -11878,8 +11980,8 @@
     }
   ],
   "risk_counts": {
-    "high": 548,
-    "medium": 163
+    "high": 552,
+    "medium": 165
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

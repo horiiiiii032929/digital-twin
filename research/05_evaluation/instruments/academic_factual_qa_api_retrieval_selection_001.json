@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "academic-factual-qa-api-retrieval-selection-001",
+  "status": "reviewed-provider-unauthorized",
+  "owner_issue": 127,
+  "decision_id": "AFQC-095",
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "private_data_authorized": false,
+  "automatic_product_progression": false,
+  "source_plan": {
+    "path": "data/processed/academic_factual_qa_open_10000_v1_sources.json",
+    "file_sha256": "a1bc0211cfdfc4f22adb87b989454bd019065b1662df96dbaa23064db6a53f92",
+    "content_sha256": "7fec6dec698231453d29a06220f7434833f32ecfd7e77913ab6500aee885453b",
+    "cluster_count": 2100,
+    "public_open_licensed_only": true
+  },
+  "development_cases": {
+    "path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
+    "file_sha256": "17f7bc805c7839590704395f193c5c729ce2edcc1cb694031fb55bf9c997912c",
+    "content_sha256": "ad323a8b6a633ccd10570027cdd71ce49dc0a6b1ea7d7481175b224d6a1af3b2",
+    "total_case_count": 500,
+    "known_diagnostic_count": 200,
+    "selected_case_count": 300,
+    "selected_case_ids_sha256": "932d8ad2d245cb18078918f3579fb526e2bfdb9c7bbee095ffb09d2008d2afcc"
+  },
+  "hidden_gold": {
+    "path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+    "file_sha256": "84fd9b50547af309e526863c19c0c52c9d7ab6f86a62d9e96375b70a77950fb7",
+    "content_sha256": "e3ff66722500fb45401c2d9bd690d8ef96d7bf1c84218c1bdfffba6756c9b0d2",
+    "loaded_only_after_rankings_persisted": true
+  },
+  "embedding_candidates": [
+    {
+      "provider": "openai",
+      "endpoint": "https://api.openai.com/v1/embeddings",
+      "model": "text-embedding-3-small",
+      "dimensions": 1536,
+      "input_price_usd_per_million": 0.02,
+      "batch_size": 64,
+      "request_token_limit": 50000,
+      "provider_maximum_inputs": 2048,
+      "provider_maximum_tokens_per_input": 8192,
+      "provider_maximum_tokens_per_request": 300000,
+      "exact_returned_identity_required": true,
+      "status": "prospective-not-selected"
+    },
+    {
+      "provider": "openai",
+      "endpoint": "https://api.openai.com/v1/embeddings",
+      "model": "text-embedding-3-large",
+      "dimensions": 3072,
+      "input_price_usd_per_million": 0.13,
+      "batch_size": 64,
+      "request_token_limit": 50000,
+      "provider_maximum_inputs": 2048,
+      "provider_maximum_tokens_per_input": 8192,
+      "provider_maximum_tokens_per_request": 300000,
+      "exact_returned_identity_required": true,
+      "status": "prospective-not-selected"
+    }
+  ],
+  "methods": [
+    {"method_id": "M0", "implementation": "bm25-v1", "provider_required": false},
+    {"method_id": "M1", "implementation": "openai-small-dense-v1", "provider_required": true},
+    {"method_id": "M2", "implementation": "bm25-openai-small-rrf-v1", "provider_required": true},
+    {"method_id": "M3", "implementation": "openai-large-dense-v1", "provider_required": true},
+    {"method_id": "M4", "implementation": "bm25-openai-large-rrf-v1", "provider_required": true},
+    {"method_id": "M5", "implementation": "openai-large-hybrid-hierarchy-v1", "provider_required": true},
+    {"method_id": "M6", "implementation": "M5-bounded-gpt-5.4-nano-rerank-v1", "provider_required": true}
+  ],
+  "reranker": {
+    "provider": "openai",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "maximum_case_share": 0.4,
+    "maximum_batch_size": 10,
+    "maximum_output_tokens": 1400,
+    "zero_semantic_retries": true
+  },
+  "execution_limits": {
+    "maximum_embedding_and_query_calls": 90,
+    "maximum_reranking_calls": 12,
+    "maximum_transport_retries": 2,
+    "maximum_total_calls": 104,
+    "embedding_emergency_stop_usd": 1.0,
+    "global_emergency_stop_usd": 2.0,
+    "atomic_batch_checkpoints": true,
+    "safe_resume_required": true
+  },
+  "hard_gates": {
+    "complete_evidence_at_3_minimum": 0.9,
+    "evidence_recall_at_5_minimum": 0.95,
+    "boundary_accuracy_minimum": 0.98,
+    "retrieval_p95_seconds_maximum": 2.0,
+    "source_course_version_violations_maximum": 0,
+    "severe_unsupported_releases_maximum": 0,
+    "gold_leakage_maximum": 0,
+    "private_data_calls_maximum": 0
+  },
+  "selection_rule": "Persist all M0-M6 rankings before opening hidden gold. Select the simplest passing method within two percentage points of the best complete-evidence@3 result, then use recall@5 and latency as tie-breakers. Stop if no method passes.",
+  "metadata": {
+    "verified_at": "2026-08-30T13:02:27+08:00",
+    "freshness_hours": 24,
+    "embedding_api_application_state_retention": "none",
+    "standard_abuse_monitoring_retention": "up-to-30-days",
+    "api_training_default": "disabled-unless-opted-in",
+    "official_sources": [
+      "https://developers.openai.com/api/reference/ruby/resources/embeddings/methods/create",
+      "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "https://developers.openai.com/api/docs/models/text-embedding-3-large",
+      "https://developers.openai.com/api/docs/guides/your-data"
+    ]
+  },
+  "result_states": ["invalid-execution", "completed-refine", "completed-keep"],
+  "content_sha256": "6d63deccf94dabef4f2c720bb171ad3dd8b6474904a4571e1c4b20e969dbbb91"
+}

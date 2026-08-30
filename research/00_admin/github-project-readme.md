@@ -2,6 +2,12 @@
 
 Status date: 2026-08-30
 
+Issue #127 is the active P0 research item. AFQC-096 has completed the build-only
+API-first retrieval successor in draft PR #149. The exact M0–M6 comparison is
+validated and simulated, but provider and paid execution remain unauthorized.
+The next Project transition is one bounded 300-case run: Keep reopens 500+100;
+Refine stops for a method-level decision. The qualified local R1 is unchanged.
+
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
 citation-grounded tutoring. Benchmarks and component experiments are supporting
@@ -27,7 +33,7 @@ evidence, not competing end goals.
   external Discord delivery and real-student use remain disabled.
 - Repository: PRs #130, #133, and #135 are merged. The correctness inventory
   and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  the retrieval-index successor now covers 649/649 audited files and 97/97
+  the retrieval-index successor now covers 717/717 audited files and 105/105
   frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free actual-product evaluation. AFQC-094 preserves the finite
