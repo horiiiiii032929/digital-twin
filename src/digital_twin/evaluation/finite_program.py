@@ -184,6 +184,8 @@ class ProgramManifestV1(BaseModel):
     product_candidate_generator: str | None = None
     product_candidate_evidence_gate: str | None = None
     product_candidate_model_role: str | None = None
+    final_construction_verifier_role: str | None = None
+    provider_concurrency: int | None = Field(default=None, ge=1, le=8)
     visual_dataset_path: str = Field(min_length=1)
     global_hard_stops: list[str] = Field(min_length=6)
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -210,6 +212,11 @@ class ProgramManifestV1(BaseModel):
         roles = [row.role for row in self.models]
         if len(roles) != len(set(roles)):
             raise ValueError("program model roles must be unique")
+        if (
+            self.final_construction_verifier_role is not None
+            and self.final_construction_verifier_role not in roles
+        ):
+            raise ValueError("final construction verifier role is not bound")
         orders = [row.order for row in self.stages]
         names = [row.name for row in self.stages]
         if orders != list(range(1, len(self.stages) + 1)):

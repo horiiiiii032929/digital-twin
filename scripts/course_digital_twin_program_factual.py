@@ -895,7 +895,11 @@ async def _product_arm(
     )
     try:
         await execute_cases(
-            cases=cases, adapter=adapter, manifest=manifest, ledger=ledger
+            cases=cases,
+            adapter=adapter,
+            manifest=manifest,
+            ledger=ledger,
+            maximum_concurrency=context.manifest.provider_concurrency or 1,
         )
     finally:
         ledger.close()
@@ -1440,8 +1444,9 @@ async def _construct_wording(
     nano_binding = model_binding(
         context.manifest, role=NANO_ROLE, maximum_output_tokens=4_000
     )
+    verifier_role = context.manifest.final_construction_verifier_role or LUNA_ROLE
     luna_binding = model_binding(
-        context.manifest, role=LUNA_ROLE, maximum_output_tokens=8_000
+        context.manifest, role=verifier_role, maximum_output_tokens=8_000
     )
     half = context.remaining_stage_budget_usd / 2
     nano_path = context.output_root / "wording-provider.sqlite3"
@@ -1514,9 +1519,13 @@ async def _construct_wording(
     authored: dict[str, str] = {}
     verified: dict[str, dict[str, Any]] = {}
     gold_by_id = {row.case_id: row for row in gold}
-    try:
-        for number, batch in enumerate(batches, start=1):
+    async def process_batch(
+        number: int, batch: list[EvaluationCaseV1]
+    ) -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
+        async with semaphore:
             ids = [row.case_id for row in batch]
+            batch_authored: dict[str, str] = {}
+            batch_verified: dict[str, dict[str, Any]] = {}
             try:
                 response = await nano.call_with_ledger(
                     ledger=nano_ledger,
@@ -1547,7 +1556,9 @@ async def _construct_wording(
             else:
                 rows = response.content["items"]
                 if {row["case_id"] for row in rows} == set(ids):
-                    authored.update({row["case_id"]: row["question"] for row in rows})
+                    batch_authored.update(
+                        {row["case_id"]: row["question"] for row in rows}
+                    )
 
             verification_prompt = []
             for case in batch:
@@ -1555,7 +1566,7 @@ async def _construct_wording(
                 verification_prompt.append(
                     {
                         "case_id": case.case_id,
-                        "question": authored.get(case.case_id, case.question),
+                        "question": batch_authored.get(case.case_id, case.question),
                         "source_excerpt": "\n".join(
                             claim.answer_span for claim in reference.claims
                         ),
@@ -1585,7 +1596,17 @@ async def _construct_wording(
             else:
                 rows = response.content["items"]
                 if {row["case_id"] for row in rows} == set(ids):
-                    verified.update({row["case_id"]: row for row in rows})
+                    batch_verified.update({row["case_id"]: row for row in rows})
+            return batch_authored, batch_verified
+
+    semaphore = asyncio.Semaphore(context.manifest.provider_concurrency or 1)
+    try:
+        outcomes = await asyncio.gather(
+            *(process_batch(number, batch) for number, batch in enumerate(batches, start=1))
+        )
+        for batch_authored, batch_verified in outcomes:
+            authored.update(batch_authored)
+            verified.update(batch_verified)
         if nano_ledger.snapshot()["status"] == "running":
             nano_ledger.mark_complete()
         if luna_ledger.snapshot()["status"] == "running":

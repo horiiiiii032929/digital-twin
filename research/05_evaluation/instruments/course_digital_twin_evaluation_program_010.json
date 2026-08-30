@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
-  "program_id": "course-digital-twin-evaluation-program-009",
-  "status": "terminated",
+  "program_id": "course-digital-twin-evaluation-program-010",
+  "status": "frozen-authorized",
   "owner_issue": 127,
-  "total_budget_usd": 49.95,
+  "total_budget_usd": 47.3,
   "credential_environment_variable": "OPENAI_API_KEY",
   "provider_api": "responses",
   "provider_endpoint": "https://api.openai.com/v1/responses",
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
   "automatic_stage_progression": true,
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
@@ -66,7 +66,7 @@
     {
       "name": "retrieval-decision",
       "order": 1,
-      "budget_usd": 0.5,
+      "budget_usd": 0.2,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
       "independent_after_factual_failure": true,
@@ -76,8 +76,8 @@
     {
       "name": "product-development-500-plus-100",
       "order": 2,
-      "budget_usd": 4.0,
-      "projected_p99_cost_usd": 2.5,
+      "budget_usd": 2.2,
+      "projected_p99_cost_usd": 1.8,
       "dependencies": ["retrieval-decision"],
       "independent_after_factual_failure": true,
       "valid_keep_statuses": ["completed-keep", "completed-refine"],
@@ -86,8 +86,8 @@
     {
       "name": "final-construction-10000",
       "order": 3,
-      "budget_usd": 5.0,
-      "projected_p99_cost_usd": 4.5,
+      "budget_usd": 6.0,
+      "projected_p99_cost_usd": 5.2,
       "dependencies": ["product-development-500-plus-100"],
       "independent_after_factual_failure": true,
       "valid_keep_statuses": ["completed-keep", "completed-refine"],
@@ -96,8 +96,8 @@
     {
       "name": "final-product-10000-plus-1000",
       "order": 4,
-      "budget_usd": 35.0,
-      "projected_p99_cost_usd": 33.0,
+      "budget_usd": 36.0,
+      "projected_p99_cost_usd": 34.0,
       "dependencies": ["final-construction-10000"],
       "independent_after_factual_failure": true,
       "valid_keep_statuses": ["completed-keep", "completed-refine"],
@@ -106,7 +106,7 @@
     {
       "name": "true-visual-30-plus-60",
       "order": 5,
-      "budget_usd": 0.25,
+      "budget_usd": 0.2,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
       "independent_after_factual_failure": true,
@@ -116,7 +116,7 @@
     {
       "name": "synthetic-profile-c0-c3",
       "order": 6,
-      "budget_usd": 0.25,
+      "budget_usd": 0.2,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
       "independent_after_factual_failure": true,
@@ -126,8 +126,8 @@
     {
       "name": "provider-t0-t1-50-trajectories",
       "order": 7,
-      "budget_usd": 2.0,
-      "projected_p99_cost_usd": 1.5,
+      "budget_usd": 1.5,
+      "projected_p99_cost_usd": 1.2,
       "dependencies": ["final-product-10000-plus-1000"],
       "independent_after_factual_failure": true,
       "valid_keep_statuses": ["completed-keep", "completed-refine"],
@@ -146,15 +146,15 @@
     {
       "name": "professor-reporting",
       "order": 9,
-      "budget_usd": 2.95,
-      "projected_p99_cost_usd": 1.2,
+      "budget_usd": 1.0,
+      "projected_p99_cost_usd": 0.2,
       "dependencies": [],
       "independent_after_factual_failure": true,
       "valid_keep_statuses": ["completed-keep"],
       "maximum_invalid_corrections": 1
     }
   ],
-  "metadata_verified_at": "2026-08-31T04:36:13+08:00",
+  "metadata_verified_at": "2026-08-31T05:50:59+08:00",
   "metadata_freshness_hours": 24,
   "source_plan_path": "data/processed/academic_factual_qa_open_10000_v1_sources.json",
   "development_source_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_reference_aggregate_007_sources.json",
@@ -186,5 +186,7 @@
   "product_candidate_generator": "openai-gpt-5.4-question-targeted-extraction-v2",
   "product_candidate_evidence_gate": "any-hit-evidence-gate-v1",
   "product_candidate_model_role": "independent-question-action-verifier",
-  "content_sha256": "d2408f2dde8f816bcdcb1860d05cb2abe03cc6a6f2ec1b5c46530ba2e1a33465"
+  "final_construction_verifier_role": "product-answer-generator",
+  "provider_concurrency": 4,
+  "content_sha256": "18ee8028bee200a77b9b0e89319a606ec6ca462bb6a1c7fd086408c7155a102c"
 }

@@ -403,6 +403,18 @@ diagnostics automatically. Quality failures remain visible in every report;
 only privacy exposure, gold leakage, model-identity drift, corrupted ledgers,
 security failure, or the cumulative cost ceiling can stop execution.
 
+AFQC-134 records program 009 as `Refine` development evidence plus an
+interrupted final-construction attempt. The 500-case candidate reached 59.75%
+fully grounded success and 100% boundary action accuracy but failed the factual,
+claim, citation, completion, version, and paired-retention gates. Construction
+was stopped after 37 wording and 36 verification batches because measured
+strong-verifier usage projected USD 14–15 against a USD 5 reserve. Program 010
+is the sole active correction: it uses GPT-5.4 mini for bulk verification,
+preserves GPT-5.4 for the product candidate and critical review, runs at most
+four course streams concurrently, and retains unchanged truth, cases, gates,
+and descriptive interpretation. Its USD 47.30 ceiling keeps cumulative program
+spend within the user's existing USD 50 authority.
+
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
 screen as valid unfavorable evidence. GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6
