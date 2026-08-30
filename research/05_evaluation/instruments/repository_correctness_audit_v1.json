@@ -5901,12 +5901,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Freeze review registered the API-first retrieval entrypoint for external-model and method execution while intentionally withholding its bounded authorization; validation, simulation, and preflight remain no-call.",
+      "evidence": "Freeze review registers exactly the API-first retrieval selection instrument for bounded external-model and method execution after AFQC-097, while unrelated dataset, held-out, private, product, and final execution remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
+      "sha256": "0a49733ebfb7271d4f29e0aacd533244815509065476b6cc3a0957d660e4f7d6"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the terminated finite program is rejected for every former operation class while held-out, private-source, external-delivery, promotion, and unrelated execution remain rejected.",
+      "evidence": "Focused freeze-policy tests verify exact external-model and method authority for the API-first retrieval selection instrument while dataset generation and every unrelated execution remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-authorization-review",
-      "sha256": "9b962874c319469bfba232fbb3f59cf5eed745bb193dd23b6e7235c398b033be"
+      "sha256": "136c1442791f1fb8910291145860c922fc832180d536a8050f3c53871be52fb6"
     },
     {
       "audit_status": "audited",
@@ -7826,12 +7826,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "api-first-retrieval-successor",
-      "evidence": "Instrument review verified exact public source/package hashes, the untouched 300-case split, prospective small/large bindings, M0-M6 methods, hidden-gold order, finite gates, call bounds, and provider/paid authorization false.",
+      "evidence": "Instrument review verified exact public source/package hashes, the untouched 300-case split, prospective small/large bindings, M0-M6 methods, hidden-gold order, finite gates, 104-call/USD 2 bounds, fresh official metadata, and one-time AFQC-097 provider/paid authorization.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
-      "sha256": "dbd3605bef8458a208e166c0a749c0f392a3345aac190a20ecfeb39dba8b1fa1"
+      "sha256": "297348cda4774de10c038bfc4277280e1e606e2ce0d9841d444b2eae601a085f"
     },
     {
       "audit_status": "audited",
@@ -7881,12 +7881,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "api-first-retrieval-successor-verification",
-      "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, authority-only clean preflight, execution-freeze denial, and hash-bound query-cache replay without provider calls.",
+      "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, a clean authorized ready preflight, exact bounded execution authority, rejected dataset authority, and hash-bound query-cache replay without provider calls.",
       "findings": [],
       "path": "tests/test_api_retrieval_selection.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
-      "sha256": "f29b61ca0979e3b3ca7b9db8bec591fa29e62727be586b76e04765d6229b5f59"
+      "sha256": "635184e388fef7a1f6beb5eab6555ccb2a5b8a77dd0d6a7b97512266df3683cf"
     }
   ],
   "schema_version": 1

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "academic-factual-qa-api-retrieval-selection-001",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 127,
   "decision_id": "AFQC-095",
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
   "private_data_authorized": false,
   "automatic_product_progression": false,
   "source_plan": {
@@ -99,18 +99,18 @@
   },
   "selection_rule": "Persist all M0-M6 rankings before opening hidden gold. Select the simplest passing method within two percentage points of the best complete-evidence@3 result, then use recall@5 and latency as tie-breakers. Stop if no method passes.",
   "metadata": {
-    "verified_at": "2026-08-30T13:02:27+08:00",
+    "verified_at": "2026-08-30T13:46:17+08:00",
     "freshness_hours": 24,
     "embedding_api_application_state_retention": "none",
     "standard_abuse_monitoring_retention": "up-to-30-days",
     "api_training_default": "disabled-unless-opted-in",
     "official_sources": [
-      "https://developers.openai.com/api/reference/ruby/resources/embeddings/methods/create",
+      "https://developers.openai.com/api/reference/resources/embeddings/methods/create",
       "https://developers.openai.com/api/docs/models/text-embedding-3-small",
       "https://developers.openai.com/api/docs/models/text-embedding-3-large",
       "https://developers.openai.com/api/docs/guides/your-data"
     ]
   },
   "result_states": ["invalid-execution", "completed-refine", "completed-keep"],
-  "content_sha256": "6d63deccf94dabef4f2c720bb171ad3dd8b6474904a4571e1c4b20e969dbbb91"
+  "content_sha256": "ab7372e1148a2e362e22303cfa2bf8dd8205549f5c771a88496eff2d2d322364"
 }

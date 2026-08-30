@@ -40,6 +40,15 @@ opens. Network-free pass, quality-failure, and identity-drift paths are
 implemented. The live preflight remains blocked by authority only after a clean
 checkout; no API call or selection has occurred.
 
+AFQC-097 records the researcher's one-time paid authorization for exactly
+`academic-factual-qa-api-retrieval-selection-001`. Official OpenAI model,
+endpoint, request-limit, pricing, and retention documentation was refreshed on
+2026-08-30 before freezing the authorization. The bounded allowlist exposes
+only external-model and method-evaluation execution for this instrument under
+104 calls and a USD 2 emergency stop. The global freeze remains active; private
+data, product execution, 500+100, and sealed 10,000+1,000 execution remain
+unauthorized.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
