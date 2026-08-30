@@ -61,19 +61,20 @@ hosting and the sealed 10,000-case academic run remain open.
 
 ## Active finite academic program
 
-AFQC-092 replaces the fragmented post-release evaluation queue with one
-prospective, finite, provider-unauthorized program owned by #127. It preserves
-the qualified local R1 until a successor method passes, compares retrieval on
-the untouched 300 development cases, evaluates the actual product on 500+100,
-constructs and seals 10,000 questions, evaluates 10,000 candidate plus 1,000
-paired control responses, and then produces visual, synthetic C0-C3, and
-conditional provider-backed T0/T1 diagnostics. It does not alter hosted-release,
-professor-approval, or external-human boundaries.
+AFQC-092 built the finite post-release evaluation program and AFQC-093
+authorized it under the USD 50 ceiling. AFQC-094 terminated the exact program
+as `invalid-execution` before any paid or academic stage completed. The first
+retrieval-index materialization stalled on Apple MPS; its one allowed harness
+correction pinned CPU/float16 and then exceeded the practical memory envelope
+in the first long-context batch. Both ledgers record zero provider calls, zero
+tokens, USD 0, zero scored cases, and no hidden-gold access.
 
-The program has nine automatic stages, one harness-only correction per stage,
-no valid-result tuning loop, a USD 44.60 p99 projection, and a USD 50 absolute
-stop. Build revision `f267fb0` passes the complete local gate. Provider and paid
-authority remain false, so no execution result is claimed yet.
+Program authority is revoked and the instrument cannot be retried. The
+qualified local R1 remains selected. The academic critical path is one new
+memory-bounded, checkpointed retrieval-materialization instrument under #127;
+only after its network-free resource envelope passes may the 500+100 and sealed
+10,000+1,000 factual path be reopened. Visual, C0-C3, and provider T0/T1 stages
+did not execute and retain their existing evidence boundaries.
 
 ## Release stages
 

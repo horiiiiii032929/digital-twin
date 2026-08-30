@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
   "program_id": "course-digital-twin-evaluation-program-001",
-  "status": "frozen-authorized",
+  "status": "terminated",
   "owner_issue": 127,
   "total_budget_usd": 50.0,
   "credential_environment_variable": "OPENAI_API_KEY",
   "provider_api": "responses",
   "provider_endpoint": "https://api.openai.com/v1/responses",
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
   "automatic_stage_progression": true,
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
@@ -168,5 +168,5 @@
     "global-cost-ceiling-exhausted",
     "second-invalid-execution-in-one-stage"
   ],
-  "content_sha256": "6d612e2154199b1ced73d846ca2e7fb8c8acd615d218bc73faec8d518cb2ffd6"
+  "content_sha256": "421f1c109ca6d45f91ebb9f91fe4d7ad1dba230cdb10e7752cad9bf968333bd2"
 }

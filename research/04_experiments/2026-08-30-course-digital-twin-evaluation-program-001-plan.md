@@ -6,7 +6,7 @@ Program ID: `course-digital-twin-evaluation-program-001`
 
 Owner: issue #127
 
-Status: reviewed, built, and provider-unauthorized
+Status: terminated as invalid execution; authority revoked
 
 ## Decision question
 
@@ -120,10 +120,19 @@ npm run simulate:finite-evaluation-program
 npm run preflight:finite-evaluation-program
 ```
 
-Paid execution remains impossible until the manifest and repository freeze are
-separately changed after the exact authorization:
+The researcher authorized the exact program on 2026-08-30. Execution stopped
+inside stage 1 before any provider call. Attempt 001 stalled while materializing
+the Qwen3 retrieval index on Apple MPS. The one permitted harness-only
+correction pinned retrieval to CPU/float16. Attempt 002 then exceeded the
+practical memory envelope while processing the first frozen long-context batch.
+The second operational failure activated the preregistered global hard stop.
 
-`Authorize course-digital-twin-evaluation-program-001 up to USD 50.`
+The durable outcome is `invalid-execution`: zero provider calls, zero tokens,
+USD 0 cost, and no academic quality result. Authorization is revoked. The raw
+SQLite ledgers remain ignored under `reports/generated/`; the sanitized result
+is registered in the evaluation registry. This instrument cannot be resumed or
+retried. A future memory-bounded materialization method requires a new
+instrument and prospective evidence.
 
 ## Claim limits
 

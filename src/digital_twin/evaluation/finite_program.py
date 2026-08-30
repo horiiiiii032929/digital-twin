@@ -160,6 +160,10 @@ class ProgramManifestV1(BaseModel):
             self.provider_execution_authorized or self.paid_execution_authorized
         ):
             raise ValueError("reviewed program cannot already carry paid authority")
+        if self.status in {"completed", "terminated"} and (
+            self.provider_execution_authorized or self.paid_execution_authorized
+        ):
+            raise ValueError("terminal program cannot retain paid authority")
         if self.provider_execution_authorized != self.paid_execution_authorized:
             raise ValueError("program provider and paid authorization must agree")
         roles = [row.role for row in self.models]

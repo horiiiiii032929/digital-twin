@@ -5901,12 +5901,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Authorization review verified the exact finite program is the sole paid program admitted for dataset generation, external and local evaluation, and method execution while the repository-wide freeze remains active for every other run.",
+      "evidence": "Revocation review verified the terminated finite program is absent from bounded authorizations while the repository-wide freeze remains active. The unrelated deterministic development authorization is unchanged.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "321a9861c9a50aca4db50627754e8b6d180887856c0be93848b7205bb82e63d2"
+      "sha256": "1d7c26a45971597852d9d562af0904ce0f6f8017a3a9a523a02a7c58c4c4e946"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the named finite program has only its four reviewed operation classes while held-out, private-source, external-delivery, promotion, and unrelated execution remain rejected.",
+      "evidence": "Focused freeze-policy tests verify the terminated finite program is rejected for every former operation class while held-out, private-source, external-delivery, promotion, and unrelated execution remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-authorization-review",
-      "sha256": "c1c26246efe15cba76eef3732b2952d35f76e3b3945084c540e19673f5229638"
+      "sha256": "9b962874c319469bfba232fbb3f59cf5eed745bb193dd23b6e7235c398b033be"
     },
     {
       "audit_status": "audited",
@@ -7661,12 +7661,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Manifest authorization and harness-correction review verified nine finite stages, exact direct-OpenAI model roles, current official pricing, $50 summed reserves, $44.60 p99 projection, privacy and hard-stop declarations, the CPU/float16 execution device, refreshed hash binding, and the exact one-time paid authority.",
+      "evidence": "Terminal-manifest review verified nine historical stages, exact model and budget bindings, the sole CPU/float16 correction, refreshed content hash, false provider/paid flags, and revoked one-time authority after the second operational failure.",
       "findings": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "050e3efc09aa75e85e3dfb12fca76165c1e7b958a95c01636943843f06f4b42f"
+      "sha256": "c9c678e9eeb39990499c1d71019e16011ba8c3bf01ca17a6c6ff7b0a2cd60f1f"
     },
     {
       "audit_status": "audited",
@@ -7738,12 +7738,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Control-plane review verified immutable manifest validation including the frozen retrieval execution device/dtype, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
+      "evidence": "Control-plane review verified immutable manifest validation including terminal authority revocation, the frozen retrieval execution device/dtype, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
       "findings": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "810e4966213626c81949e32d209f94827be1ca140b1628ba00979181317e4fa5"
+      "sha256": "2570b287f111178e8b3278b18e0865b6400e5edb4f90cefcdecf91a80baa0d57"
     },
     {
       "audit_status": "audited",
@@ -7815,12 +7815,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Program regressions cover the exact bounded authority, manifest/budget/p99 and retrieval-device controls, complete progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
+      "evidence": "Program regressions cover terminal authority revocation, manifest/budget/p99 and retrieval-device controls, complete simulated progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
       "findings": [],
       "path": "tests/test_finite_evaluation_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "bdf213a83b62719e8158459a171de2d36db82c84bfa19afd0e215ea5dbb2713b"
+      "sha256": "547a0a71ee85f8769f4a5969ded19e051e5eb01704654d687898a9ab2c3462b1"
     }
   ],
   "schema_version": 1

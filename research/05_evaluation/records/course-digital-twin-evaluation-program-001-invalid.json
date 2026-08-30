@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-001-invalid",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-retrieval-decision",
+  "corpus_id": "four-public-open-educational-source-families",
+  "code_revision": "164e934ab84948154571e1d6b3106b62b1f2b94e",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "qwen3-index-materialization-mps",
+        "version": "program-001-attempt-001",
+        "configuration": {
+          "code_revision": "c9213eaeb69b304e973338087f98442007c6a44c",
+          "manifest_sha256": "d22fc60bd40b483fca6a0f1a437dca467d753815ce77a629a9022fe2a2a14e07",
+          "execution_device": "mps",
+          "provider_calls": 0,
+          "reported_tokens": 0,
+          "cost_usd": 0.0,
+          "scored_cases": 0
+        }
+      },
+      "metrics": [
+        {
+          "name": "materialization-completion-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "scored-case-count",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "viable-retrieval-materialization-envelope",
+          "passed": false,
+          "evidence": "The first Apple MPS materialization made no durable progress for about five minutes and was interrupted; no index artifact was created."
+        },
+        {
+          "name": "zero-provider-spend-before-retrieval-readiness",
+          "passed": true,
+          "evidence": "The atomic ledger records zero provider calls, tokens, and cost."
+        },
+        {
+          "name": "hidden-gold-remained-closed",
+          "passed": true,
+          "evidence": "Execution stopped in retrieval materialization before scoring or hidden-gold access."
+        }
+      ],
+      "failures_by_category": {
+        "harness-operational-stall": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "qwen3-index-materialization-cpu-float16",
+        "version": "program-001-attempt-002",
+        "configuration": {
+          "code_revision": "164e934ab84948154571e1d6b3106b62b1f2b94e",
+          "manifest_sha256": "6d612e2154199b1ced73d846ca2e7fb8c8acd615d218bc73faec8d518cb2ffd6",
+          "execution_device": "cpu",
+          "execution_dtype": "float16",
+          "frozen_batch_size": 16,
+          "frozen_max_tokens": 2048,
+          "observed_resident_memory_gb_approx": 8.0,
+          "provider_calls": 0,
+          "reported_tokens": 0,
+          "cost_usd": 0.0,
+          "scored_cases": 0
+        }
+      },
+      "metrics": [
+        {
+          "name": "materialization-completion-rate",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "scored-case-count",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "provider-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "viable-retrieval-materialization-envelope",
+          "passed": false,
+          "evidence": "The sole CPU/float16 correction reached approximately 8 GB resident memory in its first frozen long-context batch and ceased useful progress; no index artifact was created."
+        },
+        {
+          "name": "zero-provider-spend-before-retrieval-readiness",
+          "passed": true,
+          "evidence": "The atomic ledger records zero provider calls, tokens, and cost."
+        },
+        {
+          "name": "hidden-gold-remained-closed",
+          "passed": true,
+          "evidence": "Execution stopped in retrieval materialization before scoring or hidden-gold access."
+        }
+      ],
+      "failures_by_category": {
+        "resource-envelope-memory-pressure": 1,
+        "second-invalid-hard-stop": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The sole permitted harness correction did not produce a viable retrieval-index materialization envelope. The frozen second-invalid hard stop terminates the program before paid or academic execution.",
+    "limitations": [
+      "No retrieval or product quality metric was measured.",
+      "The second attempt was interrupted under observed memory pressure rather than terminated by the operating system.",
+      "No provider call, hidden-gold access, final-set construction, visual evaluation, profile diagnostic, or provider-backed T0/T1 run occurred.",
+      "The qualified local R1 remains unchanged."
+    ]
+  }
+}

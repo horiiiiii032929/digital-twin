@@ -6,22 +6,24 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-AFQC-092 establishes the only active academic execution package:
-`course-digital-twin-evaluation-program-001`. The qualified local R1 remains
-unchanged while this prospective program compares fresh retrieval/evidence
-methods, runs a gated 500+100 actual-product development checkpoint, constructs
-and evaluates the sealed 10,000+1,000 factual benchmark only after a pass, and
-continues independent true-visual and synthetic-profile diagnostics. A final
-factual pass conditionally opens one provider-backed T0/T1 confirmation; T0
-remains rollback. Nine stages, one harness-only correction per stage, no prompt
-tuning against a valid result, physically separated public/gold/response/review
-artifacts, and a USD 50 absolute stop are hash-bound in the program manifest.
-The preregistered p99 projection is USD 44.60. Build revision `f267fb0` passes
-six terminal simulations, 1,235 Python tests, 47 frontend tests, the production
-build, 104/104 execution-freeze coverage, and 711/711 repository audits. The
-program remains provider- and paid-execution unauthorized; no call, token, or
-cost has occurred. The next and only authority checkpoint is the exact program
-authorization recorded in the experiment plan.
+AFQC-093 authorized the exact finite academic package
+`course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094
+then terminated it as `invalid-execution` in stage 1. Attempt 001 stalled while
+materializing the Qwen3 retrieval index on Apple MPS. The sole permitted
+harness correction pinned retrieval to CPU/float16; attempt 002 then exceeded
+the practical memory envelope in the first frozen 2,048-token batch. The
+preregistered second-invalid hard stop therefore applied. Both atomic ledgers
+record zero provider calls, zero tokens, USD 0, zero scored cases, and no
+hidden-gold or final-set access. Authorization is revoked, this instrument
+cannot be retried, and no factual, visual, synthetic-profile, or provider-backed
+T0/T1 quality claim follows from it.
+
+The qualified local R1 remains unchanged. Issue #127 stays the P0 academic
+track but now requires one new, prospectively frozen memory-bounded retrieval
+materialization successor before 500+100 or 10,000+1,000 product evaluation can
+resume. The successor must prove its resource envelope on public development
+data before any paid or sealed execution. This is a finite method-level action,
+not permission to reopen repeated prompt, model, or evaluator tuning.
 
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR

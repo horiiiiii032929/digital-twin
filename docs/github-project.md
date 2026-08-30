@@ -44,15 +44,16 @@ and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
-checkpoint. AFQC-092 now consolidates that work and its prerequisite retrieval,
-500+100 product, visual, synthetic-profile, and conditional T0/T1 evaluations
-into one finite program under #127. The build is complete and no paid stage is
-authorized. After one program-level authorization, passing stages advance
-automatically; a valid quality failure stops the dependent branch, and a stage
-may receive at most one harness-only correction. #127 is therefore the active
-`In Progress / Go Deeper / priority:p0` research package. #105 and #131 are
-cross-linked evidence consumers; #24 and #10 retain their professor-approval
-and external-human boundaries.
+checkpoint. AFQC-093 authorized the finite program, but AFQC-094 terminated it
+as operationally invalid before case execution: Apple MPS stalled, and the one
+permitted CPU/float16 correction exceeded the practical memory envelope. The
+program made zero provider calls, spent USD 0, scored zero cases, and opened no
+hidden gold. Its authority is revoked and it cannot be retried. #127 is now
+`In Progress / Refine / priority:p0`, with one concrete next method boundary:
+build and network-free qualify a memory-bounded, checkpointed retrieval-index
+materializer in a new prospective instrument. #105 and #131 remain blocked
+evidence consumers; #24 and #10 retain their professor-approval and
+external-human boundaries. The qualified local R1 remains unchanged.
 
 ## Release stages and product gates
 
@@ -73,11 +74,17 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 finite evaluation program reuses the #139 persisted retrieval indexes
-   and owns the flow-independent 10,000-case product evaluation plus #105
-   evidence decision. Build revision `f267fb0` binds nine stages, a USD 44.60
-   p99 projection, a USD 50 absolute stop, one correction maximum per stage,
-   and automatic progression after one program-level authorization. Preserve the
+1. #127 must replace the failed finite-program retrieval materializer before it
+   can reuse or rebuild the #139 persisted retrieval indexes. The terminated
+   program is immutable invalid evidence: two operational attempts, one exact
+   harness correction, zero provider calls, USD 0, and no scored cases. Its
+   successor must stream or checkpoint index construction within a proven
+   memory envelope before restoring the flow-independent 500+100 and 10,000+
+   1,000 evaluation path. The successor will retain the flow-independent
+   10,000-case product contract and #105 evidence-decision boundary. Terminated
+   build revision `f267fb0` remains reproducible historical evidence for the
+   nine-stage control plane, USD 44.60 p99 projection, USD 50 absolute stop,
+   and one-correction limit. Preserve the
    120-row NLI result as provisional development evidence and the completed
    10,000-row pipeline as engineering history. The active successor binds
    public-case, hidden-gold, adapter, system-manifest, atomic response-ledger,
