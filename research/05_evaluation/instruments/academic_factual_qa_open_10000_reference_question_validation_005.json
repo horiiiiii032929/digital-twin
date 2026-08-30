@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-005",
   "owner_issue": 127,
-  "status": "frozen-authorized",
+  "status": "invalid-execution-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-reference-question-validation-004",
   "decision_question": "Can three independently worded candidates per answerable target yield 100 complete source-linked clusters while duplicate candidates are recorded as quality failures and deterministic policy templates own boundary questions?",
   "dataset": {
@@ -92,11 +92,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "8b77490330329f76b4517cbc69c12e41a95ea43539d67ca175a98d214b54a7f2"
+  "content_sha256": "5316c9915e2ea63e24df55231acd3fb2c4f38431abcc25c38b224e1e8c529a02"
 }

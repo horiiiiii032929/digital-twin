@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 773
+    "audited": 775
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 202,
+    "evaluation_configuration": 204,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 166
   },
-  "file_count": 773,
+  "file_count": 775,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6f48f3b5db3ea29ac73e119e033cea5d5eb58bdc957c633689a7a37af20aecaa",
+  "record_sha256": "639cb84cc3249c11e0374f0b4ae260097013f95f94f9d459f5d293a009065e13",
   "records": [
     {
       "audit": {
@@ -1384,7 +1384,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Command review confirms attempts 004/005 validate, simulate, preflight, execute, resume, score, and materialize entrypoints are included in the complete repository precheck/check surfaces.",
+        "evidence": "Command review confirms attempts 004-006 validate, simulate, preflight, execute, resume, score, and materialize entrypoints are included in the complete repository precheck/check surfaces.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "555d5495f44846b2daa70595066f44228d406256ab304d377e44b8bbf2dd81f5"
+      "sha256": "2bebc1a25266db8c9f8b1369fe9b8b849782f562ead35567fad9836c61746f25"
     },
     {
       "audit": {
@@ -2344,7 +2344,7 @@
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Attempt 005 binding review verifies unchanged exact OpenAI snapshots, direct routing, store=false public inputs, strict schemas, zero retries, fresh metadata, and bounded cost.",
+        "evidence": "Terminal attempt 005 binding review preserves exact OpenAI snapshots and completed-call accounting while revoking authority after the non-completed provider response.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -2355,7 +2355,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_005.json",
       "risk": "high",
-      "sha256": "709638f2f7d90d867a55fb0e9d70007426792cd000f982c6ccbb7fb8310a4d7c"
+      "sha256": "f482d509dffe1e07248b89ea6bd5cb227e30e1867ebc3d3105752144ff29a2d6"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Attempt 006 binding review verifies unchanged exact OpenAI snapshots, smaller public-only batches, direct store=false routing, strict schemas, zero retries, fresh metadata, and bounded cost.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_006.json",
+      "risk": "high",
+      "sha256": "0573434894f592fb39f0b5cb0f48c0978c7f3643195925bd22a122519a60a567"
     },
     {
       "audit": {
@@ -2424,7 +2440,7 @@
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Attempt 005 instrument review verifies the sole harness-only duplicate-accounting correction, unchanged source/case/prompt/model/gold/quota/gates, deterministic boundaries, and closed product/final stages.",
+        "evidence": "Terminal attempt 005 instrument review preserves the duplicate-accounting correction and records the non-completed provider response with all execution authority revoked.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -2435,7 +2451,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_005.json",
       "risk": "high",
-      "sha256": "f0e97b93189037ab10e516cb312fd5fda08c26db144a1aec2f8f21ae2695c27d"
+      "sha256": "e2699ca1bd82ae3bc1cd70328cb16ae93f756c6f52cb6ea1afee4ad440f6418b"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Attempt 006 instrument review verifies unchanged selected-package truth, smaller batches, per-batch non-identity quarantine, strict global identity/credential/binding/budget stops, frozen quotas, and closed product/final stages.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_006.json",
+      "risk": "high",
+      "sha256": "e575e271541e5e248222f56a29fa712f0b8816f0674de848d6985fa45dd823e0"
     },
     {
       "audit": {
@@ -5331,7 +5363,8 @@
         "verify:academic-factual-qa-reference-validation-002",
         "verify:academic-factual-qa-reference-validation-003",
         "verify:academic-factual-qa-reference-validation-004",
-        "verify:academic-factual-qa-reference-validation-005"
+        "verify:academic-factual-qa-reference-validation-005",
+        "verify:academic-factual-qa-reference-validation-006"
       ],
       "path": "scripts/build_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
@@ -6608,40 +6641,47 @@
         "execute:academic-factual-qa-reference-validation-003",
         "execute:academic-factual-qa-reference-validation-004",
         "execute:academic-factual-qa-reference-validation-005",
+        "execute:academic-factual-qa-reference-validation-006",
         "materialize:academic-factual-qa-reference-validation",
         "materialize:academic-factual-qa-reference-validation-002",
         "materialize:academic-factual-qa-reference-validation-003",
         "materialize:academic-factual-qa-reference-validation-004",
         "materialize:academic-factual-qa-reference-validation-005",
+        "materialize:academic-factual-qa-reference-validation-006",
         "preflight:academic-factual-qa-reference-validation",
         "preflight:academic-factual-qa-reference-validation-002",
         "preflight:academic-factual-qa-reference-validation-003",
         "preflight:academic-factual-qa-reference-validation-004",
         "preflight:academic-factual-qa-reference-validation-005",
+        "preflight:academic-factual-qa-reference-validation-006",
         "resume:academic-factual-qa-reference-validation",
         "resume:academic-factual-qa-reference-validation-002",
         "resume:academic-factual-qa-reference-validation-003",
         "resume:academic-factual-qa-reference-validation-004",
         "resume:academic-factual-qa-reference-validation-005",
+        "resume:academic-factual-qa-reference-validation-006",
         "score:academic-factual-qa-reference-validation",
         "score:academic-factual-qa-reference-validation-002",
         "score:academic-factual-qa-reference-validation-003",
         "score:academic-factual-qa-reference-validation-004",
         "score:academic-factual-qa-reference-validation-005",
+        "score:academic-factual-qa-reference-validation-006",
         "simulate:academic-factual-qa-reference-validation",
         "simulate:academic-factual-qa-reference-validation-002",
         "simulate:academic-factual-qa-reference-validation-003",
         "simulate:academic-factual-qa-reference-validation-004",
         "simulate:academic-factual-qa-reference-validation-005",
+        "simulate:academic-factual-qa-reference-validation-006",
         "verify:academic-factual-qa-reference-validation",
         "verify:academic-factual-qa-reference-validation-002",
         "verify:academic-factual-qa-reference-validation-003",
         "verify:academic-factual-qa-reference-validation-004",
-        "verify:academic-factual-qa-reference-validation-005"
+        "verify:academic-factual-qa-reference-validation-005",
+        "verify:academic-factual-qa-reference-validation-006"
       ],
       "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
-      "sha256": "bcd82cec1cd7e9e7cef378ba8b16fd8d784435fcdae3497e82410c6147729a70"
+      "sha256": "633e4a087e7f36f96d53550eda43952a723f3e47289e23ef63949ff64fe04842"
     },
     {
       "audit": {
@@ -9027,7 +9067,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_reference_questions.py",
       "risk": "high",
-      "sha256": "8aaa2a229870987bbb4f90edc32a309b597dd8b7ce7d0a49e8b831cc8f4a2415"
+      "sha256": "1d4b0c5b6a2d1342844849b658502d843ec1f76c01a32a6361b7dfd3e2eae4a2"
     },
     {
       "audit": {
@@ -10115,7 +10155,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "97de79857fca8d059146c54306244f2195fac1fdc723903679add59c40e96697"
+      "sha256": "5f427559cbcc286b37adc22e4a83a150025fd08b62b5d4e437f8862564118afa"
     },
     {
       "audit": {
@@ -10707,7 +10747,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "684504f76f051702ba94061d7903d5d5d86fbadfd37ba3e57a53b700879c5cbe"
+      "sha256": "35f9d26752ff5f9efad9e1902940cb56dc850d31714f87212e6f58338b4dd8ba"
     },
     {
       "audit": {
@@ -11288,7 +11328,7 @@
     {
       "audit": {
         "domain": "reference-question-validation-verification",
-        "evidence": "Focused tests cover historical ID invariants, three-candidate schema and simulation, later-candidate selection, per-candidate duplicate rejection, quotas, and revoked preflight.",
+        "evidence": "Focused tests cover historical ID invariants, three-candidate schema and simulation, later-candidate selection, duplicate rejection, missing-batch reserve behavior, quarantine classification, quotas, and revoked preflight.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -11299,7 +11339,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_reference_validation.py",
       "risk": "medium",
-      "sha256": "854bf802053c7dc7892f451790b617aaa4c35ba66e9b92f3e1108d735ede9d0e"
+      "sha256": "3e422a9c67cb2d5af6f604602f98d5627766c17c61f9cb264d75e30222db0b53"
     },
     {
       "audit": {
@@ -12983,7 +13023,7 @@
     }
   ],
   "risk_counts": {
-    "high": 593,
+    "high": 595,
     "medium": 180
   },
   "schema_version": 1,

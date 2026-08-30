@@ -303,8 +303,10 @@ def score_multi_candidate_reference_questions(
     author_by_id = {row.case_id: row for row in authors}
     if len(case_by_id) != len(gold_by_id) or set(gold_by_id) != set(case_by_id):
         raise ValueError("multi-candidate public and gold identities differ")
-    if len(author_by_id) != len(answerable_ids) or set(author_by_id) != answerable_ids:
-        raise ValueError("multi-candidate author coverage is incomplete")
+    if len(author_by_id) != len(authors) or not set(author_by_id).issubset(
+        answerable_ids
+    ):
+        raise ValueError("multi-candidate author identities are invalid")
 
     expected_candidate_ids = {
         f"{case_id}-candidate-{ordinal}"
@@ -312,23 +314,36 @@ def score_multi_candidate_reference_questions(
         for ordinal in range(1, 4)
     }
     reviewer_by_id = {row.candidate_id: row for row in reviewers}
-    if (
-        len(reviewer_by_id) != len(expected_candidate_ids)
-        or set(reviewer_by_id) != expected_candidate_ids
+    if len(reviewer_by_id) != len(reviewers) or not set(reviewer_by_id).issubset(
+        expected_candidate_ids
     ):
-        raise ValueError("multi-candidate reviewer coverage is incomplete")
+        raise ValueError("multi-candidate reviewer identities are invalid")
 
     candidate_decisions: list[dict[str, Any]] = []
     passing_by_case: dict[str, list[tuple[int, str]]] = {}
     for case_id in sorted(answerable_ids):
+        authored = author_by_id.get(case_id)
+        if authored is None:
+            continue
         expected = gold_by_id[case_id]
         expected_spans = [row.answer_span for row in expected.claims]
         normalized_counts = Counter(
-            normalize_question(question) for question in author_by_id[case_id].questions
+            normalize_question(question) for question in authored.questions
         )
-        for ordinal, question in enumerate(author_by_id[case_id].questions, start=1):
+        for ordinal, question in enumerate(authored.questions, start=1):
             candidate_id = f"{case_id}-candidate-{ordinal}"
-            reviewed = reviewer_by_id[candidate_id]
+            reviewed = reviewer_by_id.get(candidate_id)
+            if reviewed is None:
+                candidate_decisions.append(
+                    {
+                        "candidate_id": candidate_id,
+                        "case_id": case_id,
+                        "cluster_id": case_by_id[case_id].cluster_id,
+                        "passed": False,
+                        "reasons": ["missing-review"],
+                    }
+                )
+                continue
             span_match = [
                 normalize_question(row) for row in reviewed.recovered_answer_spans
             ] == [normalize_question(row) for row in expected_spans]
@@ -447,6 +462,7 @@ def score_multi_candidate_reference_questions(
         "candidate_case_count": len(canonical_cases),
         "candidate_cluster_count": len(cluster_answerable_ids),
         "authored_answerable_case_count": len(answerable_ids),
+        "completed_authored_answerable_case_count": len(author_by_id),
         "authored_question_candidate_count": len(expected_candidate_ids),
         "passed_question_candidate_count": sum(
             bool(row["passed"]) for row in candidate_decisions

@@ -378,3 +378,40 @@ def test_duplicate_candidates_are_recorded_as_quality_failures() -> None:
         "duplicate-candidate" in duplicated[f"{first.case_id}-candidate-2"]["reasons"]
     )
     assert result["status"] == "completed-go-deeper"
+
+
+def test_attempt_006_quarantines_nonidentity_batch_failures() -> None:
+    result = runner.validate(require_unauthorized=False, attempt=runner.ATTEMPT_006)
+    simulation = runner.simulate(attempt=runner.ATTEMPT_006)
+
+    assert result["batch_count"] == 54
+    assert simulation["decision"] == "completed-go-deeper"
+    assert runner._quarantinable_batch_failure(  # noqa: SLF001
+        RuntimeError("OpenAI response did not complete")
+    )
+    assert not runner._quarantinable_batch_failure(  # noqa: SLF001
+        RuntimeError("direct provider model identity drifted")
+    )
+
+
+def test_multi_candidate_reserve_tolerates_one_missing_author_case() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    missing_case_id = authors[0].case_id
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=authors[1:],
+        reviewers=[
+            row
+            for row in reviewers
+            if not row.candidate_id.startswith(f"{missing_case_id}-candidate-")
+        ],
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    assert result["completed_authored_answerable_case_count"] == 639
+    assert result["status"] == "completed-go-deeper"
+    assert result["selected_case_count"] == 500

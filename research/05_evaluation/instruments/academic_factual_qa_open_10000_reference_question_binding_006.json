@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "binding_id": "academic-factual-qa-open-10000-reference-question-binding-005",
-  "status": "invalid-execution-authorization-revoked",
-  "verified_at": "2026-08-31T03:32:00+08:00",
+  "binding_id": "academic-factual-qa-open-10000-reference-question-binding-006",
+  "status": "frozen-authorized",
+  "verified_at": "2026-08-31T04:05:00+08:00",
   "maximum_age_hours_for_execution": 24,
   "data_boundary": "pinned-public-open-educational-development-inputs-only",
   "routing_policy": "direct-openai-responses-api-only-no-router-no-fallback",
@@ -18,7 +18,7 @@
   },
   "providers": {
     "source-visible-question-author": {
-      "binding_id": "academic-reference-openai-gpt-5.4-mini-author-005",
+      "binding_id": "academic-reference-openai-gpt-5.4-mini-author-006",
       "provider": "openai",
       "provider_display_name": "OpenAI",
       "first_party_endpoint": true,
@@ -29,7 +29,7 @@
       "roles": "source-visible-three-candidate-reference-question-authoring-only",
       "context_window_tokens": 400000,
       "maximum_model_output_tokens": 128000,
-      "max_output_tokens": 10000,
+      "max_output_tokens": 16000,
       "reasoning_effort": "none",
       "timeout_seconds": 120,
       "maximum_transport_retries": 0,
@@ -42,7 +42,7 @@
       "background_mode": false
     },
     "target-blind-answer-reviewer": {
-      "binding_id": "academic-reference-openai-gpt-5.4-reviewer-005",
+      "binding_id": "academic-reference-openai-gpt-5.4-reviewer-006",
       "provider": "openai",
       "provider_display_name": "OpenAI",
       "first_party_endpoint": true,
@@ -74,11 +74,11 @@
     "production_private_data_authorized": false
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "reference_question_validation_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "reference_question_validation_authorized": true,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "defd46f1607378df6f1186e38b30b2435bd00f75e845b3a48f6d0011e6ad037a"
+  "content_sha256": "206f919b45e9d04a3483400c91af9485aab2e1942d6423894cbac779943e0e40"
 }

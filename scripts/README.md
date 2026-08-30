@@ -842,7 +842,13 @@ Current utilities:
   duplicate candidates are recorded as deterministic quality failures while the
   remaining batches continue unchanged. Use the
   `*:academic-factual-qa-reference-validation-005` commands; live execution is
-  restricted to that exact bounded authorization.
+  restricted to that exact bounded authorization. Attempt 005 then completed 32
+  calls before one non-completed OpenAI author response caused an operational
+  invalidity. Attempt 006 is the finite provider-resilient successor: it uses
+  three-cluster batches and quarantines isolated non-identity provider failures,
+  making affected reserve clusters ineligible while identity, credential,
+  binding, request, and budget drift remain terminal. Use the
+  `*:academic-factual-qa-reference-validation-006` commands.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

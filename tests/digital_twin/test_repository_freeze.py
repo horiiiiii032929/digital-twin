@@ -35,7 +35,7 @@ def test_repository_freeze_status_is_explicit() -> None:
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
-        "academic-factual-qa-open-10000-reference-question-validation-005",
+        "academic-factual-qa-open-10000-reference-question-validation-006",
     }
 
     for pilot_id in pilot_ids:
@@ -46,7 +46,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "academic-factual-qa-open-10000-reference-question-validation-005"
+        "academic-factual-qa-open-10000-reference-question-validation-006"
     ] == (
         "external_model_evaluation",
         "method_evaluation_execution",

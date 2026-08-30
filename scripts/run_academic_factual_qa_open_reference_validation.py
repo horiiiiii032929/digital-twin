@@ -77,6 +77,7 @@ class ReferenceQuestionAttempt:
     sources_path: Path
     author_question_pattern: str | None = None
     multi_candidate_answerable: bool = False
+    quarantine_batch_failures: bool = False
 
 
 def _attempt(
@@ -84,6 +85,7 @@ def _attempt(
     suffix: str,
     question_pattern: str | None,
     multi_candidate_answerable: bool = False,
+    quarantine_batch_failures: bool = False,
 ) -> ReferenceQuestionAttempt:
     return ReferenceQuestionAttempt(
         instrument_id=(
@@ -139,6 +141,7 @@ def _attempt(
         ),
         author_question_pattern=question_pattern,
         multi_candidate_answerable=multi_candidate_answerable,
+        quarantine_batch_failures=quarantine_batch_failures,
     )
 
 
@@ -155,12 +158,19 @@ ATTEMPT_005 = _attempt(
     question_pattern=r"\?$",
     multi_candidate_answerable=True,
 )
+ATTEMPT_006 = _attempt(
+    suffix="006",
+    question_pattern=r"\?$",
+    multi_candidate_answerable=True,
+    quarantine_batch_failures=True,
+)
 ATTEMPTS = {
     ATTEMPT_001.instrument_id: ATTEMPT_001,
     ATTEMPT_002.instrument_id: ATTEMPT_002,
     ATTEMPT_003.instrument_id: ATTEMPT_003,
     ATTEMPT_004.instrument_id: ATTEMPT_004,
     ATTEMPT_005.instrument_id: ATTEMPT_005,
+    ATTEMPT_006.instrument_id: ATTEMPT_006,
 }
 
 
@@ -509,6 +519,19 @@ def _git_revision() -> str:
         capture_output=True,
         text=True,
     ).stdout.strip()
+
+
+def _quarantinable_batch_failure(error: Exception) -> bool:
+    detail = str(error).lower()
+    fail_closed_markers = (
+        "identity drifted",
+        "credential missing",
+        "cost limit",
+        "call limit",
+        "binding drifted",
+        "request drifted",
+    )
+    return not any(marker in detail for marker in fail_closed_markers)
 
 
 def _repo_dirty() -> bool:
@@ -926,15 +949,24 @@ async def execute(
             author_transport = DirectProviderJsonTransport(
                 binding["providers"][AUTHOR_ROLE]
             )
-            authored = await author_transport.call_with_ledger(
-                ledger=ledger,
-                request_key=f"author-{batch_number:03d}",
-                provider_role=AUTHOR_ROLE,
-                system=author_system,
-                prompt=author_prompt,
-                task="academic-reference-question-authoring",
-                schema=author_schema,
-            )
+            try:
+                authored = await author_transport.call_with_ledger(
+                    ledger=ledger,
+                    request_key=f"author-{batch_number:03d}",
+                    provider_role=AUTHOR_ROLE,
+                    system=author_system,
+                    prompt=author_prompt,
+                    task="academic-reference-question-authoring",
+                    schema=author_schema,
+                    quarantine_failures=attempt.quarantine_batch_failures,
+                )
+            except Exception as error:
+                if (
+                    not attempt.quarantine_batch_failures
+                    or not _quarantinable_batch_failure(error)
+                ):
+                    raise
+                continue
             request_by_id = {row["case_id"]: row for row in batch_requests}
             if attempt.multi_candidate_answerable:
                 candidate_authors = _parse_candidate_authors(
@@ -977,21 +1009,30 @@ async def execute(
             reviewer_transport = DirectProviderJsonTransport(
                 binding["providers"][REVIEWER_ROLE]
             )
-            reviewed = await reviewer_transport.call_with_ledger(
-                ledger=ledger,
-                request_key=f"review-{batch_number:03d}",
-                provider_role=REVIEWER_ROLE,
-                system=review_system,
-                prompt=review_prompt,
-                task=review_task,
-                schema=review_schema,
-            )
+            try:
+                reviewed = await reviewer_transport.call_with_ledger(
+                    ledger=ledger,
+                    request_key=f"review-{batch_number:03d}",
+                    provider_role=REVIEWER_ROLE,
+                    system=review_system,
+                    prompt=review_prompt,
+                    task=review_task,
+                    schema=review_schema,
+                    quarantine_failures=attempt.quarantine_batch_failures,
+                )
+            except Exception as error:
+                if (
+                    not attempt.quarantine_batch_failures
+                    or not _quarantinable_batch_failure(error)
+                ):
+                    raise
+                continue
             if attempt.multi_candidate_answerable:
                 _parse_candidate_reviews(reviewed.content, review_ids)
             else:
                 _parse_reviews(reviewed.content, review_ids)
         snapshot = ledger.snapshot()
-        if (
+        if not attempt.quarantine_batch_failures and (
             snapshot["provider_calls"]
             != instrument["operational_bounds"]["maximum_logical_calls"]
         ):
@@ -1021,6 +1062,14 @@ def _ledger_rows(
             "SELECT provider_role, response_json FROM calls "
             "WHERE status = 'completed' ORDER BY sequence"
         ).fetchall()
+        metadata["total_call_count"] = str(
+            connection.execute("SELECT COUNT(*) FROM calls").fetchone()[0]
+        )
+        metadata["failed_call_count"] = str(
+            connection.execute(
+                "SELECT COUNT(*) FROM calls WHERE status = 'failed'"
+            ).fetchone()[0]
+        )
     finally:
         connection.close()
     return metadata, [
@@ -1037,7 +1086,10 @@ def score(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
     metadata, rows = _ledger_rows(attempt)
     if metadata.get("status") != "completed":
         raise ReferenceQuestionCheckpointError("reference ledger is not complete")
-    if len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]:
+    if (
+        not attempt.quarantine_batch_failures
+        and len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]
+    ):
         raise ReferenceQuestionCheckpointError("reference ledger coverage drifted")
     pool = build_reference_pool()
     if attempt.multi_candidate_answerable:
@@ -1105,11 +1157,22 @@ def score(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
         "binding_id": attempt.binding_id,
         "source_pool_sha256": pool["content_sha256"],
         **scored,
-        "provider_calls": len(rows),
+        "provider_calls": int(metadata.get("total_call_count", len(rows))),
+        "completed_provider_calls": len(rows),
+        "failed_provider_calls": int(metadata.get("failed_call_count", 0)),
         "product_calls": 0,
         "private_data_used": False,
         "final_split_opened": False,
     }
+    payload["provider_completion_rate"] = (
+        payload["completed_provider_calls"]
+        / instrument["operational_bounds"]["maximum_logical_calls"]
+    )
+    required_completion = instrument["acceptance"].get(
+        "provider_completion_rate_required", 1.0
+    )
+    if payload["provider_completion_rate"] < required_completion:
+        payload["status"] = "completed-refine"
     payload["content_sha256"] = canonical_json_sha256(payload)
     if attempt.result_path.exists():
         raise ReferenceQuestionCheckpointError("reference result path already exists")

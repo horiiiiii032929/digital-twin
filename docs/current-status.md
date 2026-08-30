@@ -339,6 +339,22 @@ the remaining batches continue. A valid pass advances automatically to the
 fresh 500+100 product confirmation; a valid quality failure terminates this
 reference branch without another authoring attempt.
 
+AFQC-127 records attempt 005 as `invalid-execution`. The duplicate-candidate
+correction worked and 32 calls completed with exact identity, but author batch
+17 returned a non-completed OpenAI response under the frozen zero-retry policy.
+Completed calls reported 116,096 input tokens, 86,645 output tokens, and USD
+1.291204. The failed response is preserved; no selected package, product,
+private data, hidden gold, or final case opened.
+
+AFQC-128 freezes the finite provider-resilient attempt 006 under the existing
+program authority. It retains the same three-candidate truth method, reduces
+batches from four to three clusters, and quarantines isolated non-identity
+provider failures. Every affected cluster is ineligible; selected clusters
+still require exact action/span recovery, natural unambiguous wording, no
+leakage or duplicate, valid lineage, and all frozen quotas. Identity,
+credential, request, binding, and budget drift remain terminal. A valid result
+ends reference construction and either advances to 500+100 or stops scaling.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

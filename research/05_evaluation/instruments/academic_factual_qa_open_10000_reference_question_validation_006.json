@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-006",
+  "owner_issue": 127,
+  "status": "frozen-authorized",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-005",
+  "decision_question": "Can the unchanged three-candidate method produce 100 complete source-linked clusters when isolated non-completed provider batches are quarantined rather than terminating all valid evidence?",
+  "dataset": {
+    "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
+    "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
+    "candidate_cluster_count": 160,
+    "candidate_case_count": 800,
+    "answerable_case_count": 640,
+    "authored_question_candidate_count": 1920,
+    "deterministic_boundary_case_count": 160,
+    "selected_cluster_count": 100,
+    "selected_case_count": 500,
+    "clusters_per_batch": 3,
+    "batch_count": 54,
+    "source_disjoint_from_checkpoint_007": true,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-006",
+    "method_change": "Retain three-candidate blind validation, reduce each batch from four to three clusters, quarantine isolated non-identity provider failures, and reject every affected cluster without weakening selected-package truth.",
+    "author_role": "source-visible-question-author",
+    "reviewer_role": "target-blind-answer-reviewer",
+    "boundary_authority": "Versioned deterministic policy templates own all abstain, clarify, and refuse cases.",
+    "deterministic_authority": "Only candidates with exact source-span and action recovery, unambiguous natural wording, no leakage, unique wording, valid lineage, and complete cluster coverage can enter the selected package.",
+    "quarantine_policy": "Incomplete, malformed, refused, or schema-invalid model batches remain durable failed calls and make their affected clusters ineligible; identity, credential, binding, request, call-limit, or cost drift remains globally terminal.",
+    "complete_cluster_selection": true,
+    "quota_relaxation_allowed": false,
+    "canonical_fallback_allowed": false,
+    "automatic_product_execution_allowed": false
+  },
+  "prospective_rationale": {
+    "attempt_005_result": "Thirty-two calls completed before author batch 17 returned a non-completed OpenAI response; this was operational, not a reference-quality result.",
+    "finite_operational_correction": "Smaller batches and per-batch quarantine preserve valid completed evidence while rejecting affected clusters from the 60-cluster reserve.",
+    "quality_method_changed": false,
+    "prompts_changed": false,
+    "cases_changed": false,
+    "gold_changed": false,
+    "selected_package_gates_changed": false,
+    "historical_results_preserved": true
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 108,
+    "maximum_physical_attempts": 108,
+    "maximum_global_transport_retries": 0,
+    "maximum_cost_usd": 20.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "selected_case_count_required": 500,
+    "selected_cluster_count_required": 100,
+    "selected_answerable_case_action_recovery_required": 1.0,
+    "selected_answerable_case_answer_span_recovery_required": 1.0,
+    "selected_answerable_case_unambiguous_required": 1.0,
+    "selected_answerable_case_naturalness_required": 1.0,
+    "selected_case_gold_hint_leak_count_max": 0,
+    "selected_case_normalized_duplicate_count_max": 0,
+    "allocation_shortfall_count_max": 0,
+    "provider_completion_rate_required": 0.95,
+    "identity_drift_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "reference_question_validation_authorized": true,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "9856201c6dca6ccf7d0d4404a17d7ba941e767588d2c7a669d168335a3ae4d6c"
+}
