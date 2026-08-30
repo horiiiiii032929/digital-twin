@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
   "program_id": "course-digital-twin-evaluation-program-001",
-  "status": "reviewed-pending-authorization",
+  "status": "frozen-authorized",
   "owner_issue": 127,
   "total_budget_usd": 50.0,
   "credential_environment_variable": "OPENAI_API_KEY",
   "provider_api": "responses",
   "provider_endpoint": "https://api.openai.com/v1/responses",
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
   "automatic_stage_progression": true,
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
@@ -151,7 +151,7 @@
       "maximum_invalid_corrections": 1
     }
   ],
-  "metadata_verified_at": "2026-08-30T00:19:59+08:00",
+  "metadata_verified_at": "2026-08-30T11:34:38+08:00",
   "metadata_freshness_hours": 24,
   "source_plan_path": "data/processed/academic_factual_qa_open_10000_v1_sources.json",
   "development_cases_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
@@ -166,5 +166,5 @@
     "global-cost-ceiling-exhausted",
     "second-invalid-execution-in-one-stage"
   ],
-  "content_sha256": "405c1cbf898a928eb005e09361fd01c920a1026ef97d729aff45c4e7f91be527"
+  "content_sha256": "d22fc60bd40b483fca6a0f1a437dca467d753815ce77a629a9022fe2a2a14e07"
 }

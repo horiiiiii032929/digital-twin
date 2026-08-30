@@ -5901,12 +5901,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Freeze review verified all finite-program commands are execution-relevant while the program itself remains absent from the bounded authorization registry until the exact user authority checkpoint.",
+      "evidence": "Authorization review verified the exact finite program is the sole paid program admitted for dataset generation, external and local evaluation, and method execution while the repository-wide freeze remains active for every other run.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "1d7c26a45971597852d9d562af0904ce0f6f8017a3a9a523a02a7c58c4c4e946"
+      "sha256": "321a9861c9a50aca4db50627754e8b6d180887856c0be93848b7205bb82e63d2"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the completed R1 cascade has no bounded authority and every held-out, final, private-source, external-delivery, promotion, and unrelated operation remains rejected.",
+      "evidence": "Focused freeze-policy tests verify the named finite program has only its four reviewed operation classes while held-out, private-source, external-delivery, promotion, and unrelated execution remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-08-29",
-      "reviewer": "codex-primary-review",
-      "sha256": "85a5fe9ba6be0d581457369db948ef51e95f2e144b6ea911150f087be0419751"
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-finite-program-authorization-review",
+      "sha256": "c1c26246efe15cba76eef3732b2952d35f76e3b3945084c540e19673f5229638"
     },
     {
       "audit_status": "audited",
@@ -7661,12 +7661,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Manifest review verified nine finite stages, exact direct-OpenAI model roles, $50 summed reserves, $44.60 p99 projection, privacy and hard-stop declarations, hash binding, automatic progression, and all execution authority false.",
+      "evidence": "Manifest authorization review verified nine finite stages, exact direct-OpenAI model roles, current official pricing, $50 summed reserves, $44.60 p99 projection, privacy and hard-stop declarations, refreshed hash binding, and the exact one-time paid authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "444816e93bf6efc52983efbf4e23dbaa63812bcce780788d23137c3263031d20"
+      "sha256": "ecb8f41abfa4d28752980b97a01f4d77f74d70ccd5636191e39eade689a7c589"
     },
     {
       "audit_status": "audited",
@@ -7815,12 +7815,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Program regressions cover manifest/budget/p99 authority, complete progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
+      "evidence": "Program regressions cover the exact bounded authority, manifest/budget/p99 controls, complete progression, factual failure, independent branches, one invalid correction, budget and resume drift, seeded advisory selection, and critical-review prioritization.",
       "findings": [],
       "path": "tests/test_finite_evaluation_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "44ca72ac7812ef96c00d1912ed9ad0adb3d2ebd03c43eb5f95e64107ce7899da"
+      "sha256": "3d25e5711276185cd08d409d0500b10fc74841eabb710d615736d8380162e643"
     }
   ],
   "schema_version": 1

@@ -62,7 +62,7 @@ def _executors(manifest, *, failing_stage=None, invalid_twice=False):
     return {row.name: executor for row in manifest.stages}, attempts
 
 
-def test_manifest_is_finite_hash_bound_and_not_authorized() -> None:
+def test_manifest_is_finite_hash_bound_and_authorized() -> None:
     manifest = _manifest()
 
     assert manifest.program_id == PROGRAM_ID
@@ -76,10 +76,15 @@ def test_manifest_is_finite_hash_bound_and_not_authorized() -> None:
     )
     assert manifest.stage(ProgramStageName.RELEASE_REGRESSION).budget_usd == 0
     assert manifest.stage(ProgramStageName.REPORTING).budget_usd == 2
-    assert manifest.provider_execution_authorized is False
-    assert manifest.paid_execution_authorized is False
-    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
-        require_bounded_pilot_operation_allowed(PROGRAM_ID)
+    assert manifest.provider_execution_authorized is True
+    assert manifest.paid_execution_authorized is True
+    for operation in (
+        "dataset_generation",
+        "external_model_evaluation",
+        "local_model_evaluation",
+        "method_evaluation_execution",
+    ):
+        require_bounded_pilot_operation_allowed(PROGRAM_ID, operation)
 
 
 def test_full_pass_advances_once_and_completes(tmp_path: Path) -> None:
