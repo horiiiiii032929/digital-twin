@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-question-validation-003",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-reference-validation-pool-001",
+  "corpus_id": "four-public-open-educational-source-families-fresh-complete-regions-003",
+  "code_revision": "971f377bac0b5e91063c73ee73d3fca71b7d9051",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "reference-validation-network-free-build-control",
+        "version": "reference-question-validation-003-build",
+        "configuration": {
+          "candidate_clusters": 160,
+          "candidate_cases": 800,
+          "simulated_selected_clusters": 100,
+          "simulated_selected_cases": 500,
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "individual-question-pass-rate",
+          "value": 0.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "complete-cluster-count",
+          "value": 0.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": false
+        },
+        {
+          "name": "selected-case-count",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "provider-completion-rate",
+          "value": 0.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 12.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-100-cluster-reference-package",
+          "passed": false,
+          "evidence": "The network-free control validates orchestration only and cannot measure live question quality."
+        },
+        {
+          "name": "zero-allocation-shortfalls",
+          "passed": false,
+          "evidence": "The network-free control does not produce a live selected package."
+        },
+        {
+          "name": "operational-validity",
+          "passed": true,
+          "evidence": "The network-free control completed without provider or harness execution."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product, private-data, or sealed final-set access occurred."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "source-visible-author-target-blind-reviewer",
+        "version": "reference-question-validation-003",
+        "configuration": {
+          "author_model": "gpt-5.4-mini-2026-03-17",
+          "reviewer_model": "gpt-5.4-2026-03-05",
+          "candidate_clusters": 160,
+          "candidate_cases": 800,
+          "required_selected_clusters": 100,
+          "required_selected_cases": 500,
+          "completed_calls": 80,
+          "input_tokens": 201739,
+          "output_tokens": 95743,
+          "reported_cost_usd": 1.4173615,
+          "total_latency_ms": 550178.472,
+          "ignored_ledger_sha256": "2031fd8bf85b87ffada38b6a3a0221ae66f2b636780d9707d9a85e9467ddc77d",
+          "ignored_result_sha256": "26704da0da5e3f7bafeb8bc913b1e3d29d268b4801033402f268eedad3d2dc42"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "individual-question-pass-rate",
+          "value": 0.56,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "complete-cluster-count",
+          "value": 8.0,
+          "unit": "clusters",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": false
+        },
+        {
+          "name": "selected-case-count",
+          "value": 40.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "provider-completion-rate",
+          "value": 1.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 1.4173615,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 12.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-100-cluster-reference-package",
+          "passed": false,
+          "evidence": "Only 8 complete clusters and 40 selected cases survived; 100 clusters and 500 cases were required."
+        },
+        {
+          "name": "zero-allocation-shortfalls",
+          "passed": false,
+          "evidence": "Every frozen course/modality quota had a shortfall."
+        },
+        {
+          "name": "operational-validity",
+          "passed": true,
+          "evidence": "All 80 calls completed with exact identity, zero retries, complete accounting, and no malformed accepted response."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product, private-data, or sealed final-set access occurred."
+        }
+      ],
+      "failures_by_category": {
+        "answer-span-mismatch": 234,
+        "unnatural": 89,
+        "action-mismatch": 86,
+        "ambiguous": 38,
+        "gold-hint-leak": 24,
+        "exact-duplicate": 22
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The execution was valid but one question per target produced only 8 complete clusters. Use one finite multi-candidate successor and deterministic boundary templates; do not open product or final stages from this result.",
+    "limitations": [
+      "Model-assisted review uses one provider family and no external human annotator.",
+      "Exact span recovery may reject semantically equivalent responses.",
+      "The result validates question construction only, not product quality.",
+      "The final 10,000-case split remained unopened."
+    ]
+  }
+}

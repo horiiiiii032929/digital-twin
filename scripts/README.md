@@ -831,8 +831,13 @@ Current utilities:
   restores frozen request order deterministically; it does not change source,
   prompt, model, gold, quota, or quality gates. Use the
   `*:academic-factual-qa-reference-validation-003` package commands. Validation,
-  simulation, and preflight are network-free; live execution is restricted to
-  the exact bounded attempt-003 authorization.
+  simulation, and preflight are network-free. Attempt 003 completed Refine with
+  448/800 passing individual questions but only 8/160 complete clusters. Attempt
+  004 is the finite method successor: it authors three variants for each
+  answerable target, blind-reviews all variants, and keeps deterministic policy
+  templates for boundary cases. Use the
+  `*:academic-factual-qa-reference-validation-004` commands; live execution is
+  restricted to that exact bounded authorization.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

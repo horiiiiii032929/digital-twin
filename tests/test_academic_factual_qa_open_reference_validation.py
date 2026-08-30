@@ -18,7 +18,9 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.factual_qa_reference_questions import (
     ReferenceQuestionAuthorResponseV1,
+    ReferenceQuestionCandidateReviewResponseV1,
     ReferenceQuestionReviewerResponseV1,
+    score_multi_candidate_reference_questions,
     score_reference_questions,
 )
 
@@ -273,11 +275,66 @@ def test_attempt_003_rejects_duplicate_or_unknown_response_ids() -> None:
             {
                 "items": [
                     {"case_id": "case-a", "question": "What does source A establish?"},
-                    {"case_id": "case-a", "question": "What else does source A establish?"},
+                    {
+                        "case_id": "case-a",
+                        "question": "What else does source A establish?",
+                    },
                 ]
             },
             ["case-a", "case-b"],
         )
+
+
+def test_attempt_004_uses_three_candidates_and_deterministic_boundaries() -> None:
+    result = runner.validate(
+        require_unauthorized=False,
+        attempt=runner.ATTEMPT_004,
+    )
+    simulation = runner.simulate(attempt=runner.ATTEMPT_004)
+    author_schema = runner._candidate_author_schema(16)  # noqa: SLF001
+
+    assert result["multi_candidate_answerable"] is True
+    assert (
+        author_schema["properties"]["items"]["items"]["properties"]["questions"][
+            "minItems"
+        ]
+        == 3
+    )
+    assert simulation["decision"] == "completed-go-deeper"
+    assert simulation["selected_cluster_count"] == 100
+    assert simulation["selected_case_count"] == 500
+
+
+def test_attempt_004_can_select_a_later_blind_validated_candidate() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    first_case_id = authors[0].case_id
+    mutated = [
+        ReferenceQuestionCandidateReviewResponseV1(
+            **{
+                **row.model_dump(),
+                "predicted_action": "abstain",
+                "recovered_answer_spans": [],
+                "rationale": "Injected first-candidate failure.",
+            }
+        )
+        if row.candidate_id == f"{first_case_id}-candidate-1"
+        else row
+        for row in reviewers
+    ]
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=authors,
+        reviewers=mutated,
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    assert result["status"] == "completed-go-deeper"
+    selected = {row["case_id"]: row for row in result["selected_cases"]}
+    assert selected[first_case_id]["question"].endswith("form 2?")
     with pytest.raises(runner.ReferenceQuestionCheckpointError, match="set drifted"):
         runner._parse_authors(  # noqa: SLF001
             {

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-004",
+  "owner_issue": 127,
+  "status": "frozen-authorized",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-003",
+  "decision_question": "Can three independently worded candidates per answerable target yield 100 complete source-linked clusters while deterministic policy templates own boundary questions?",
+  "dataset": {
+    "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
+    "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
+    "candidate_cluster_count": 160,
+    "candidate_case_count": 800,
+    "answerable_case_count": 640,
+    "authored_question_candidate_count": 1920,
+    "deterministic_boundary_case_count": 160,
+    "selected_cluster_count": 100,
+    "selected_case_count": 500,
+    "clusters_per_batch": 4,
+    "batch_count": 40,
+    "source_disjoint_from_checkpoint_007": true,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-004",
+    "method_change": "Generate three distinct candidates for each answerable target and select the first independently recoverable wording; deterministic templates own all boundary probes.",
+    "author_role": "source-visible-question-author",
+    "reviewer_role": "target-blind-answer-reviewer",
+    "author_receives": [
+      "public source context",
+      "course and section identity",
+      "canonical answer and exact spans for answerable construction cases"
+    ],
+    "reviewer_receives": [
+      "public source context",
+      "course and section identity",
+      "candidate question"
+    ],
+    "reviewer_never_receives": [
+      "expected action",
+      "canonical answer",
+      "required evidence spans",
+      "author rationale"
+    ],
+    "boundary_authority": "Versioned deterministic policy templates for abstain, clarify, and refuse cases; no model may mutate the expected action or empty evidence lineage.",
+    "deterministic_authority": "Exact source-span recovery, action recovery, ambiguity, naturalness, leakage, uniqueness, source lineage, and quota checks are applied locally after every response is durable.",
+    "response_identity_policy": "Require exact unique case/candidate ID sets and restore frozen request order locally.",
+    "complete_cluster_selection": true,
+    "quota_relaxation_allowed": false,
+    "canonical_fallback_allowed": false,
+    "automatic_product_execution_allowed": false
+  },
+  "prospective_rationale": {
+    "attempt_003_result": "448/800 individual questions passed, but only 8/160 complete clusters survived because one candidate per case was insufficient and model-authored boundary wording was unstable.",
+    "single_method_level_change": true,
+    "prompt_only_retry": false,
+    "historical_results_preserved": true
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 80,
+    "maximum_physical_attempts": 80,
+    "maximum_global_transport_retries": 0,
+    "maximum_cost_usd": 18.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "selected_case_count_required": 500,
+    "selected_cluster_count_required": 100,
+    "selected_answerable_case_action_recovery_required": 1.0,
+    "selected_answerable_case_answer_span_recovery_required": 1.0,
+    "selected_answerable_case_unambiguous_required": 1.0,
+    "selected_answerable_case_naturalness_required": 1.0,
+    "selected_case_gold_hint_leak_count_max": 0,
+    "selected_case_normalized_duplicate_count_max": 0,
+    "allocation_shortfall_count_max": 0,
+    "provider_completion_rate_required": 1.0,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "reference_question_validation_authorized": true,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "f6063b0c84b7631039f8a2bf926a166b5f1436fd86576a47e9fb41c58ff2e657"
+}

@@ -304,6 +304,26 @@ It may produce one fresh 500-case package; the sealed 10,000+1,000 execution
 remains contingent on a valid reference and product-development pass rather
 than on another approval message.
 
+AFQC-123 records reference validation 003 as valid `completed-refine` evidence.
+All 80 direct OpenAI calls completed with exact identities, zero retries, and
+USD 1.4173615 reported cost. The method passed 448/800 individual questions,
+but only 8/160 complete five-question clusters survived, yielding 40/500
+required selected cases. Overlapping defects included 234 answer-span
+mismatches, 89 unnatural questions, 86 action mismatches, 38 ambiguous
+questions, 24 gold-hint leaks, and 22 duplicate-question findings. Attempt 003
+authority is revoked; it supports no product-quality or final-set claim.
+
+AFQC-124 freezes one method-level successor under the existing program-level
+authority. For each answerable source target, GPT-5.4 mini proposes three
+distinct questions and target-blind GPT-5.4 independently recovers the action
+and exact source spans for every candidate. Code selects the first unique
+candidate passing every invariant. Versioned deterministic templates own the
+160 boundary probes so a wording model cannot mutate policy actions or evidence
+lineage. The same fresh 160-cluster source reserve and frozen 100-cluster quota
+are retained. The successor is bounded to 80 calls and USD 18; product and
+sealed 10,000+1,000 execution remain closed until it produces a complete
+reference package.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

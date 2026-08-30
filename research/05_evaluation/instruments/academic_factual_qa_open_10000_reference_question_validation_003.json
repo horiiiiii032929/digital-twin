@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-003",
   "owner_issue": 127,
-  "status": "frozen-authorized",
+  "status": "completed-refine-authorization-revoked",
   "successor_of": "academic-factual-qa-open-10000-reference-question-validation-002",
   "decision_question": "Can the unchanged source-visible author and target-blind reviewer method produce a fresh 500-case reference package when responses are matched by exact unique case ID rather than array position?",
   "dataset": {
@@ -90,11 +90,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "reference_question_validation_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "reference_question_validation_authorized": false,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "67696090f453bb05db1322a4996f73c14f1be7d0dabda53cc3a8ae6690b93ea8"
+  "content_sha256": "18cbc0ee6fa66b7333f1c3313705d10c468cd1848db26f54b2b86e39a33110d4"
 }
