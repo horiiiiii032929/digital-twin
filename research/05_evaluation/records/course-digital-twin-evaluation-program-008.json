@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-008",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-reference-aggregate-007",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+  "code_revision": "1c7ee98ee3312623492d2cb1ba01adad4363ed52",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "openai-small-hybrid-v2",
+        "version": "program-008",
+        "configuration": {
+          "retrieval_case_count": 300,
+          "required_reference_count": 450,
+          "embedding_model": "text-embedding-3-small",
+          "nano_reranking": false,
+          "provider_calls": 17,
+          "reported_cost_usd": 0.00091176
+        }
+      },
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.8974358974358975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.9551282051282052, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "retrieval-p95-ms", "value": 8.138457997119986, "unit": "ms", "direction": "lower-is-better", "threshold": 2000, "passed": true},
+        {"name": "course-violation-count", "value": 0, "unit": "count", "direction": "lower-is-better", "threshold": 0, "passed": true},
+        {"name": "source-version-violation-count", "value": 0, "unit": "count", "direction": "lower-is-better", "threshold": 0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "retrieval-quality", "passed": false, "evidence": "OpenAI-small hybrid reached 89.74% complete evidence@3 against the frozen 90% gate."},
+        {"name": "zero-severe-unsupported-releases", "passed": true, "evidence": "All three retrieval methods produced zero severe releases and zero course/version violations."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "The 500+100 product stage and final 10,000+1,000 package were not executed or opened."}
+      ],
+      "failures_by_category": {
+        "retrieval-gate-miss": 1
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "bm25-v1",
+        "version": "program-008",
+        "configuration": {
+          "retrieval_case_count": 300,
+          "required_reference_count": 450,
+          "provider_calls": 0,
+          "reported_cost_usd": 0
+        }
+      },
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.8418803418803419, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.8974358974358975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "retrieval-p95-ms", "value": 0.44545799755724147, "unit": "ms", "direction": "lower-is-better", "threshold": 2000, "passed": true},
+        {"name": "course-violation-count", "value": 0, "unit": "count", "direction": "lower-is-better", "threshold": 0, "passed": true},
+        {"name": "source-version-violation-count", "value": 0, "unit": "count", "direction": "lower-is-better", "threshold": 0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "retrieval-quality", "passed": false, "evidence": "BM25 reached 84.19% complete evidence@3 and 89.74% Evidence Recall@5."},
+        {"name": "zero-severe-unsupported-releases", "passed": true, "evidence": "BM25 produced zero severe releases and zero course/version violations."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "The 500+100 product stage and final 10,000+1,000 package were not executed or opened."}
+      ],
+      "failures_by_category": {
+        "retrieval-gate-miss": 2
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "No retrieval method passed every preregistered gate; preserve the result and continue only as an explicitly descriptive downstream measurement.",
+    "limitations": [
+      "Development retrieval cases are known after this run.",
+      "Open educational sources do not establish private-course performance.",
+      "Supplementary model review is advisory and uses one provider family.",
+      "No professor-fidelity, human-usability, learning-outcome, or hosted-production claim follows."
+    ]
+  },
+  "ignored_artifacts": {
+    "program_ledger_sha256": "4b38edb9c60fa2b1f35fde5ecb99020ce4eef64a9cfa784e8e193e84b34ab5d8",
+    "retrieval_result_sha256": "a815d025bd4a2bad34da51eb1b1f5c3b3447d6391eebbb9f7c16cab07a37a831",
+    "visual_result_sha256": "c18edb46ca2ecff79978ec699edb2d2c1700369194a24034301c417fbd0570aa",
+    "synthetic_profile_result_sha256": "f87a9e95968bb4c7283cd4b5edfc644d443eaaecef6df3344d2783707c9cb9fc"
+  }
+}

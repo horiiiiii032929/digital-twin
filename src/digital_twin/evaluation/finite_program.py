@@ -154,7 +154,7 @@ class ProgramManifestV1(BaseModel):
         "terminated",
     ]
     owner_issue: Literal[127] = 127
-    total_budget_usd: Literal[50.0] = 50.0
+    total_budget_usd: float = Field(default=50.0, gt=0, le=50.0)
     credential_environment_variable: Literal["OPENAI_API_KEY"] = "OPENAI_API_KEY"
     provider_api: Literal["responses"] = "responses"
     provider_endpoint: Literal["https://api.openai.com/v1/responses"] = (
@@ -170,6 +170,7 @@ class ProgramManifestV1(BaseModel):
     retrieval_execution_dtype: Literal["float16"] = "float16"
     retrieval_embedding: ProgramEmbeddingBindingV1 | None = None
     retrieval_nano_reranking_enabled: bool | None = None
+    descriptive_factual_continuation: bool | None = None
     models: list[ProgramModelBindingV1] = Field(min_length=4, max_length=4)
     stages: list[ProgramStageV1] = Field(min_length=9, max_length=9)
     metadata_verified_at: datetime

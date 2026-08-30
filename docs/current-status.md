@@ -385,6 +385,24 @@ frozen development gate passes. Repeated approval pauses are removed; privacy,
 gold isolation, exact model identity, ledger integrity, valid-quality stops, and
 the global emergency ceiling remain fail-closed.
 
+AFQC-132 records program 008 as a valid `completed-refine` result. The fresh
+300-case retrieval decision exactly matched all 450 required references. The
+best method, OpenAI-small hybrid, reached 89.74% complete evidence@3, 95.51%
+Evidence Recall@5, 100% boundary accuracy, and zero course/version/severe
+violations; it missed the frozen 90% gate by one answerable case. Independent
+visual evidence reached 18/30 complete clusters with 76.31% atomic recall and
+zero boundary releases; synthetic C0-C2 completed but is not professor-fidelity
+evidence. Program 008 used 83 calls and USD 0.04600311; its authority is revoked.
+
+AFQC-133 freezes `course-digital-twin-evaluation-program-009` as the single
+descriptive completion under the remaining USD 49.95 program ceiling. It does
+not reinterpret program 008 as a pass or select the hybrid for release. It
+freezes the strongest observed hybrid solely to measure the actual 500+100 and
+sealed 10,000+1,000 product behavior, then runs the remaining non-human product
+diagnostics automatically. Quality failures remain visible in every report;
+only privacy exposure, gold leakage, model-identity drift, corrupted ledgers,
+security failure, or the cumulative cost ceiling can stop execution.
+
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
 screen as valid unfavorable evidence. GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6

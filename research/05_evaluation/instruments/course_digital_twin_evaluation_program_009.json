@@ -1,20 +1,21 @@
 {
   "schema_version": "1.0.0",
-  "program_id": "course-digital-twin-evaluation-program-008",
-  "status": "completed",
+  "program_id": "course-digital-twin-evaluation-program-009",
+  "status": "frozen-authorized",
   "owner_issue": 127,
-  "total_budget_usd": 50.0,
+  "total_budget_usd": 49.95,
   "credential_environment_variable": "OPENAI_API_KEY",
   "provider_api": "responses",
   "provider_endpoint": "https://api.openai.com/v1/responses",
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
   "automatic_stage_progression": true,
   "deterministic_truth_authoritative": true,
   "llm_reviews_authoritative": false,
   "private_data_authorized": false,
   "retrieval_execution_device": "cpu",
   "retrieval_execution_dtype": "float16",
+  "descriptive_factual_continuation": true,
   "models": [
     {
       "role": "bounded-evidence-ranker-wording-visual-audit",
@@ -68,8 +69,8 @@
       "budget_usd": 0.5,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
@@ -78,8 +79,8 @@
       "budget_usd": 4.0,
       "projected_p99_cost_usd": 2.5,
       "dependencies": ["retrieval-decision"],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
@@ -88,8 +89,8 @@
       "budget_usd": 5.0,
       "projected_p99_cost_usd": 4.5,
       "dependencies": ["product-development-500-plus-100"],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
@@ -98,28 +99,28 @@
       "budget_usd": 35.0,
       "projected_p99_cost_usd": 33.0,
       "dependencies": ["final-construction-10000"],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
       "name": "true-visual-30-plus-60",
       "order": 5,
-      "budget_usd": 0.5,
+      "budget_usd": 0.25,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
       "independent_after_factual_failure": true,
-      "valid_keep_statuses": ["completed-go-deeper"],
+      "valid_keep_statuses": ["completed-go-deeper", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
       "name": "synthetic-profile-c0-c3",
       "order": 6,
-      "budget_usd": 0.5,
+      "budget_usd": 0.25,
       "projected_p99_cost_usd": 0.1,
       "dependencies": [],
       "independent_after_factual_failure": true,
-      "valid_keep_statuses": ["completed-go-deeper"],
+      "valid_keep_statuses": ["completed-go-deeper", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
@@ -128,8 +129,8 @@
       "budget_usd": 2.0,
       "projected_p99_cost_usd": 1.5,
       "dependencies": ["final-product-10000-plus-1000"],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
@@ -138,14 +139,14 @@
       "budget_usd": 0.0,
       "projected_p99_cost_usd": 0.0,
       "dependencies": ["provider-t0-t1-50-trajectories"],
-      "independent_after_factual_failure": false,
-      "valid_keep_statuses": ["completed-keep"],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep", "completed-refine"],
       "maximum_invalid_corrections": 1
     },
     {
       "name": "professor-reporting",
       "order": 9,
-      "budget_usd": 2.5,
+      "budget_usd": 2.95,
       "projected_p99_cost_usd": 1.2,
       "dependencies": [],
       "independent_after_factual_failure": true,
@@ -185,5 +186,5 @@
   "product_candidate_generator": "openai-gpt-5.4-question-targeted-extraction-v2",
   "product_candidate_evidence_gate": "any-hit-evidence-gate-v1",
   "product_candidate_model_role": "independent-question-action-verifier",
-  "content_sha256": "5a2c6088b2c9b24db4f12544845db8e3d5c92ca534039e951fc8ee57219a4fdc"
+  "content_sha256": "b73fb56f5f7e1f7654b7dbd2f14bd424749a4556521f4567dbc7ff7b2c91e82a"
 }

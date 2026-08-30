@@ -3,6 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from scripts import run_course_digital_twin_evaluation_program as runner
+from scripts.course_digital_twin_program_factual import (
+    select_descriptive_retrieval_candidate,
+)
 from scripts.academic_factual_qa_open_10000_t0_adapter import (
     LiveT0AdapterError,
     _ManagedAdapter,
@@ -10,6 +13,7 @@ from scripts.academic_factual_qa_open_10000_t0_adapter import (
 from src.digital_twin.evaluation import build_atomic_final_rows
 from src.digital_twin.evaluation.finite_program import load_program_manifest
 from src.digital_twin.evaluation.finite_retrieval_evaluation import (
+    RetrievalMethodSummary,
     validate_exact_reference_matchability,
 )
 
@@ -23,6 +27,9 @@ INSTRUMENT_007 = ROOT / (
 )
 INSTRUMENT_008 = ROOT / (
     "research/05_evaluation/instruments/course_digital_twin_evaluation_program_008.json"
+)
+INSTRUMENT_009 = ROOT / (
+    "research/05_evaluation/instruments/course_digital_twin_evaluation_program_009.json"
 )
 
 
@@ -72,14 +79,14 @@ def test_question_targeted_successor_adapter_smoke_is_network_free() -> None:
     }
 
 
-def test_question_stratified_program_008_is_frozen_and_exactly_matchable() -> None:
+def test_question_stratified_program_008_is_completed_and_exactly_matchable() -> None:
     manifest = load_program_manifest(INSTRUMENT_008)
     result = runner.validate(INSTRUMENT_008)
 
     assert manifest.program_id == "course-digital-twin-evaluation-program-008"
-    assert manifest.status == "frozen-authorized"
-    assert manifest.provider_execution_authorized is True
-    assert manifest.paid_execution_authorized is True
+    assert manifest.status == "completed"
+    assert manifest.provider_execution_authorized is False
+    assert manifest.paid_execution_authorized is False
     assert "reference_aggregate_007_cases" in manifest.development_cases_path
     assert result["status"] == "passed-build-only"
     assert result["development_required_reference_count"] == 450
@@ -98,6 +105,51 @@ def test_question_stratified_program_008_adapter_smoke_is_network_free() -> None
         "network_calls": 0,
         "gold_loaded_after_response_persistence": True,
     }
+
+
+def test_program_009_freezes_descriptive_continuation_without_claiming_keep() -> None:
+    manifest = load_program_manifest(INSTRUMENT_009)
+    result = runner.validate(INSTRUMENT_009)
+
+    assert manifest.program_id == "course-digital-twin-evaluation-program-009"
+    assert manifest.descriptive_factual_continuation is True
+    assert manifest.total_budget_usd == 49.95
+    assert all(row.independent_after_factual_failure for row in manifest.stages)
+    assert result["status"] == "passed-build-only"
+    assert result["development_missing_reference_count"] == 0
+
+
+def test_descriptive_continuation_uses_best_observed_retriever() -> None:
+    def summary(
+        method_id: str,
+        *,
+        complete: float,
+        recall: float,
+    ) -> RetrievalMethodSummary:
+        return RetrievalMethodSummary(
+            method_id=method_id,
+            case_count=100,
+            complete_evidence_at_3=complete,
+            evidence_recall_at_5=recall,
+            boundary_accuracy=1.0,
+            severe_release_count=0,
+            course_violation_count=0,
+            source_version_violation_count=0,
+            latency_p95_ms=10.0,
+            reranked_case_count=0,
+            passed=False,
+        )
+
+    selected = select_descriptive_retrieval_candidate(
+        [
+            summary("bm25-v1", complete=0.84, recall=0.90),
+            summary("openai-small-hybrid-v2", complete=0.8974, recall=0.9551),
+            summary("hierarchical-deterministic-v1", complete=0.71, recall=0.86),
+        ]
+    )
+
+    assert selected is not None
+    assert selected.method_id == "openai-small-hybrid-v2"
 
 
 def test_evaluation_v2_scores_per_case_provider_failures() -> None:

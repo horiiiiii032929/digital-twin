@@ -61,6 +61,7 @@ from src.digital_twin.evaluation.finite_program_runner import (
     build_stage_result,
 )
 from src.digital_twin.evaluation.finite_retrieval_evaluation import (
+    RetrievalMethodSummary,
     evaluate_retrieval_method,
     select_retrieval_successor,
     select_untouched_retrieval_cases,
@@ -543,6 +544,25 @@ def _rank_all_cases(
     return output
 
 
+def select_descriptive_retrieval_candidate(
+    methods: list[RetrievalMethodSummary],
+) -> RetrievalMethodSummary | None:
+    """Return the strongest observed method without claiming that it passed."""
+
+    if not methods:
+        return None
+    return max(
+        methods,
+        key=lambda row: (
+            row.complete_evidence_at_3,
+            row.evidence_recall_at_5,
+            row.boundary_accuracy,
+            -row.severe_release_count,
+            -row.latency_p95_ms,
+        ),
+    )
+
+
 def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelopeV1:
     context.output_root.mkdir(parents=True, exist_ok=True)
     cases, references = _rows(context.root, context)
@@ -619,12 +639,23 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
         methods.append(summary)
         observations[method_id] = [row.__dict__ for row in rows]
     selected = select_retrieval_successor(methods)
+    descriptive_continuation = (
+        context.manifest.descriptive_factual_continuation is True
+    )
+    observed_best = selected
+    if observed_best is None and descriptive_continuation:
+        # A descriptive continuation never converts a failed gate into a pass.
+        # It freezes the strongest observed method so later product stages can
+        # measure the actual consequence at scale instead of ending with only a
+        # component result.  The stage remains COMPLETED_REFINE and downstream
+        # reports must retain that limitation.
+        observed_best = select_descriptive_retrieval_candidate(methods)
     status = (
         ProgramStageStatus.COMPLETED_KEEP
         if selected is not None
         else ProgramStageStatus.COMPLETED_REFINE
     )
-    selected_method = selected.method_id if selected is not None else "none"
+    selected_method = observed_best.method_id if observed_best is not None else "none"
     rankings = (
         _rank_all_cases(
             cases,
@@ -634,7 +665,7 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
             hierarchical=hierarchical,
             nano_rankings=nano_rankings,
         )
-        if selected is not None
+        if observed_best is not None
         else {}
     )
     ranking_payload: dict[str, Any] = {
@@ -642,6 +673,8 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
         "program_id": context.manifest.program_id,
         "program_manifest_sha256": context.manifest.content_sha256,
         "selected_method": selected_method,
+        "quality_gate_passed": selected is not None,
+        "descriptive_continuation": descriptive_continuation and selected is None,
         "case_count": len(rankings),
         "ranked_chunk_ids": rankings,
         "gold_loaded_by_product": False,
@@ -676,14 +709,16 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
         metrics={
             "selected_method": selected_method,
             "selected_complete_evidence_at_3": (
-                selected.complete_evidence_at_3 if selected else 0.0
+                observed_best.complete_evidence_at_3 if observed_best else 0.0
             ),
             "selected_evidence_recall_at_5": (
-                selected.evidence_recall_at_5 if selected else 0.0
+                observed_best.evidence_recall_at_5 if observed_best else 0.0
             ),
             "selected_boundary_accuracy": (
-                selected.boundary_accuracy if selected else 0.0
+                observed_best.boundary_accuracy if observed_best else 0.0
             ),
+            "retrieval_quality_gate_passed": selected is not None,
+            "descriptive_continuation": descriptive_continuation and selected is None,
             "required_reference_count": matchability["required_reference_count"],
             "missing_reference_count": matchability["missing_reference_count"],
         },
@@ -700,6 +735,16 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
                 "remain compared under unchanged cases, gold, and gates."
             ]
             if not nano_enabled
+            else []
+        )
+        + (
+            [
+                "No retrieval candidate passed every preregistered gate. The best "
+                "observed method is frozen only for descriptive downstream "
+                "measurement; it is not selected for release and the retrieval "
+                "decision remains Refine."
+            ]
+            if descriptive_continuation and selected is None
             else []
         ),
     )
