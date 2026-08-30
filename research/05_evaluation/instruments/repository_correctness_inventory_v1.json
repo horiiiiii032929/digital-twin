@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "639cb84cc3249c11e0374f0b4ae260097013f95f94f9d459f5d293a009065e13",
+  "record_sha256": "5b8b3615597dd9c87dca8d37fd6ab0d06fd5b4ba9efe90d6db80e924d3c38511",
   "records": [
     {
       "audit": {
@@ -2371,7 +2371,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_006.json",
       "risk": "high",
-      "sha256": "0573434894f592fb39f0b5cb0f48c0978c7f3643195925bd22a122519a60a567"
+      "sha256": "8de51ecc8ac5c2c2c952d8a75fa80aad223c01e546092c5321b996e94c5f5f15"
     },
     {
       "audit": {

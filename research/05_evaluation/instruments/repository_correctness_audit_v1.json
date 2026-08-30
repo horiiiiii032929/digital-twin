@@ -1616,7 +1616,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_006.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-reference-truth-review",
-      "sha256": "0573434894f592fb39f0b5cb0f48c0978c7f3643195925bd22a122519a60a567"
+      "sha256": "8de51ecc8ac5c2c2c952d8a75fa80aad223c01e546092c5321b996e94c5f5f15"
     },
     {
       "audit_status": "audited",
