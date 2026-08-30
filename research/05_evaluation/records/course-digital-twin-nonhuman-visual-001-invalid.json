@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-nonhuman-visual-001-invalid",
+  "component": "figure-description",
+  "dataset_id": "academic-factual-qa-visual-supplement-001",
+  "corpus_id": "academic-factual-qa-public-visual-supplement-001",
+  "code_revision": "9a37d51851033e9eea73e4b4ad1e998f2c1b8711",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "visual-supplement-network-free-contract-control",
+        "version": "v1",
+        "configuration": {
+          "visual_assets": 30,
+          "visual_cases": 60,
+          "provider_calls": 0
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "validated-visual-assets",
+          "value": 30.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": true
+        },
+        {
+          "name": "completed-visual-descriptions",
+          "value": 30.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": true
+        },
+        {
+          "name": "provider-schema-rejections",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 2.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "public-source-only",
+          "passed": true,
+          "evidence": "All 30 assets are pinned public/open or deterministic synthetic visual fixtures."
+        },
+        {
+          "name": "original-region-lineage",
+          "passed": true,
+          "evidence": "The network-free contract validates original asset and region lineage before provider execution."
+        },
+        {
+          "name": "complete-provider-portfolio",
+          "passed": true,
+          "evidence": "The network-free control deterministically materializes one valid description contract per asset without provider transport."
+        },
+        {
+          "name": "stable-model-identity",
+          "passed": true,
+          "evidence": "The network-free control uses no external model and therefore cannot experience provider identity drift."
+        },
+        {
+          "name": "no-private-data",
+          "passed": true,
+          "evidence": "The control uses only the frozen public and deterministic synthetic visual fixtures."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-nano-visual-description-attempt-001",
+        "version": "v1-invalid",
+        "configuration": {
+          "provider_model": "gpt-5.4-nano-2026-03-17",
+          "attempted_calls": 1,
+          "completed_provider_responses": 0,
+          "maximum_calls": 30,
+          "zero_retries": true,
+          "reported-cost-usd": 0.0
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "validated-visual-assets",
+          "value": 30.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": true
+        },
+        {
+          "name": "completed-visual-descriptions",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 30.0,
+          "passed": false
+        },
+        {
+          "name": "provider-schema-rejections",
+          "value": 1.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 2.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "public-source-only",
+          "passed": true,
+          "evidence": "Only the first public synthetic table asset was transmitted."
+        },
+        {
+          "name": "original-region-lineage",
+          "passed": true,
+          "evidence": "The transmitted raster was deterministically derived from and hash-bound to its pinned original visual asset."
+        },
+        {
+          "name": "complete-provider-portfolio",
+          "passed": false,
+          "evidence": "OpenAI rejected the first response schema before inference because uniqueItems is unsupported in the selected structured-output subset."
+        },
+        {
+          "name": "stable-model-identity",
+          "passed": false,
+          "evidence": "No provider response completed, so returned model identity could not be observed."
+        },
+        {
+          "name": "no-private-data",
+          "passed": true,
+          "evidence": "Only the first public synthetic table asset was transmitted; no private source or participant data was used."
+        }
+      ],
+      "failures_by_category": {
+        "unsupported-provider-schema-keyword": 1,
+        "incomplete-provider-portfolio": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid and provides no visual-quality estimate. Preserve the failed provider request, remove only the unsupported provider-side uniqueness keyword, retain deterministic uniqueness checks, and permit one final corrective visual attempt.",
+    "limitations": [
+      "No visual description completed, so retrieval or visual-fact quality is not estimable.",
+      "The failure occurred before model identity, token usage, or visual-quality measurements were available.",
+      "This supplementary visual branch is separate from the text/OCR factual and whole-product evaluations."
+    ]
+  }
+}

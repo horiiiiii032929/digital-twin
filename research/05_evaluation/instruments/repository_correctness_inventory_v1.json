@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5896def582aef517e34cfd7513a247a21a42e35da8582eb6ab0226094de30e67",
+  "record_sha256": "35718c5864a0ba93627cbca4577178055580ff444f1fc164dcc1bcddb7ace48b",
   "records": [
     {
       "audit": {
@@ -6535,7 +6535,7 @@
       ],
       "path": "scripts/run_course_digital_twin_nonhuman_supplements.py",
       "risk": "high",
-      "sha256": "47c36cdafb867f29ff7f81d5652a4715dcce5f520b27345812aaaf37a86b3934"
+      "sha256": "09fd9df1d22d7e2e695824194909e3a16aa043fe523fa90bb316d10a4a4baa87"
     },
     {
       "audit": {
@@ -11258,7 +11258,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
       "risk": "medium",
-      "sha256": "ce7be8e58a72d323682769dc05e5c4c2f635b5cbe9777da2d5178a45b974a985"
+      "sha256": "ca8feb4f75eb6dffe22a997806072e2f727540ddc0fb1500b31beeed7c5ddc57"
     },
     {
       "audit": {

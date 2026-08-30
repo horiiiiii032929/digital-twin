@@ -59,15 +59,15 @@ SYNTHETIC_PROFILE_PATH = ROOT / (
     "professor_digital_twin_profile_v1_synthetic.json"
 )
 DEFAULT_OUTPUT_ROOT = ROOT / (
-    "reports/generated/course-digital-twin-nonhuman-supplements-001"
+    "reports/generated/course-digital-twin-nonhuman-supplements-002"
 )
 GENERATED_ROOT = (ROOT / "reports/generated").resolve()
 
 VISUAL_STAGE = "true-visual-30-plus-60"
 PROFILE_STAGE = "synthetic-profile-c0-c2"
-VISUAL_RUN_ID = "course-digital-twin-nonhuman-visual-001"
-PROFILE_RUN_ID = "course-digital-twin-synthetic-profile-c0-c2-001"
-COMBINED_RUN_ID = "course-digital-twin-nonhuman-supplements-001"
+VISUAL_RUN_ID = "course-digital-twin-nonhuman-visual-002"
+PROFILE_RUN_ID = "course-digital-twin-synthetic-profile-c0-c2-002"
+COMBINED_RUN_ID = "course-digital-twin-nonhuman-supplements-002"
 VISUAL_LEDGER_NAME = "stage-a-visual-provider.sqlite3"
 PROFILE_LEDGER_NAME = "stage-b-profile-provider.sqlite3"
 VISUAL_EVIDENCE_NAME = "stage-a-visual-evidence.json"
@@ -342,19 +342,16 @@ def _visual_schema() -> dict[str, Any]:
             "entities": {
                 "type": "array",
                 "maxItems": 40,
-                "uniqueItems": True,
                 "items": {"type": "string", "minLength": 1, "maxLength": 200},
             },
             "relationships": {
                 "type": "array",
                 "maxItems": 40,
-                "uniqueItems": True,
                 "items": {"type": "string", "minLength": 1, "maxLength": 300},
             },
             "uncertainty": {
                 "type": "array",
                 "maxItems": 20,
-                "uniqueItems": True,
                 "items": {"type": "string", "minLength": 1, "maxLength": 300},
             },
         },
@@ -384,13 +381,11 @@ def _profile_schema(case_id: str, condition: str) -> dict[str, Any]:
             "evidence_region_ids": {
                 "type": "array",
                 "maxItems": 4,
-                "uniqueItems": True,
                 "items": {"type": "string", "minLength": 1, "maxLength": 200},
             },
             "applied_profile_features": {
                 "type": "array",
                 "maxItems": 8,
-                "uniqueItems": True,
                 "items": {"type": "string", "minLength": 1, "maxLength": 200},
             },
         },
@@ -401,6 +396,17 @@ def _tokens(value: str) -> set[str]:
     return {
         token for token in _TOKEN_PATTERN.findall(value.casefold()) if len(token) > 1
     }
+
+
+def _require_unique_string_lists(
+    content: dict[str, Any], field_names: tuple[str, ...]
+) -> None:
+    for field_name in field_names:
+        values = [str(value) for value in content[field_name]]
+        if len(values) != len(set(values)):
+            raise SupplementaryEvaluationError(
+                f"provider response contains duplicate {field_name}"
+            )
 
 
 def _recall(required: str, observed: str) -> float:
@@ -684,6 +690,9 @@ def _description_record(
     if response.provider_model != VISUAL_MODEL or response.attempt_count != 1:
         raise SupplementaryEvaluationError("visual provider identity or retry drifted")
     content = response.content
+    _require_unique_string_lists(
+        content, ("entities", "relationships", "uncertainty")
+    )
     segments = [
         str(content["transcription"]),
         *[str(value) for value in content["entities"]],
@@ -1735,7 +1744,11 @@ async def _execute_profile_stage(
                 raise SupplementaryEvaluationError(
                     "profile provider identity or retry drifted"
                 )
-            outputs.append(dict(response.content))
+            content = dict(response.content)
+            _require_unique_string_lists(
+                content, ("evidence_region_ids", "applied_profile_features")
+            )
+            outputs.append(content)
     payload = _profile_evidence_payload(
         program=program,
         dataset=dataset,

@@ -89,6 +89,23 @@ def test_direct_openai_bindings_enforce_store_identity_retries_and_caps() -> Non
     )
     assert payload["model"] == runner.VISUAL_MODEL
     assert payload["store"] is False
+    assert "uniqueItems" not in json.dumps(runner._visual_schema())
+    assert "uniqueItems" not in json.dumps(runner._profile_schema("case", "C2"))
+
+
+def test_provider_side_unique_lists_are_enforced_deterministically() -> None:
+    with pytest.raises(
+        runner.SupplementaryEvaluationError,
+        match="duplicate entities",
+    ):
+        runner._require_unique_string_lists(
+            {
+                "entities": ["duplicate", "duplicate"],
+                "relationships": [],
+                "uncertainty": [],
+            },
+            ("entities", "relationships", "uncertainty"),
+        )
 
 
 def test_visual_prompt_is_question_independent_and_profile_inputs_are_separated() -> (
