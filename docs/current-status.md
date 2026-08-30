@@ -96,6 +96,16 @@ family-disjoint confirmation. Deterministic graders remain authoritative;
 GPT-5.4 nano, GPT-5.6 Terra, and fresh Codex audits are advisory. Real
 professor/student participation and professor-profile approval remain excluded.
 
+AFQC-102 records the successful source-aligned wording checkpoint. Attempt 002
+completed 50/50 direct OpenAI calls at USD 0.8352885 and assembled all 500
+fresh questions without duplicate wording or mutation of deterministic truth.
+GPT-5.4 nano wording was accepted for 148 cases; the other 352 use explicit
+context-complete deterministic fallbacks after advisory or batch-level
+rejection. The high fallback share is disclosed and does not establish natural-
+language quality. It does provide a complete, source-linked package for the
+automatic fresh retrieval confirmation. Product, final-set, private-data, and
+human-participant execution remain unopened at this checkpoint.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

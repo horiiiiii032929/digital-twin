@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "f5b9993e3c4dcfe4b03dab645984bc9fcafb2ace273233c2d85295ba531f429b"
+      "sha256": "82108000cacea41c9e19670ab40b09456e9e2d8a2434153f190b192160247a48"
     },
     {
       "audit_status": "audited",
@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "5483874f32be264fdd18b65676d4a74bc17f4c5a4d732ebcbbd53dfeff9e2384"
+      "sha256": "bc8bb0ad655751ada8b0228850bb224c6ed452e0647e7fd026b215c4de3cce7d"
     },
     {
       "audit_status": "audited",
@@ -8019,6 +8019,39 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-review",
       "sha256": "683cb103c9c1ef48cfd608685f1d9c8319a75db6678a2b800209bc7b836ef06a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-confirmation",
+      "evidence": "Instrument review verifies six frozen methods, exact source/case/gold hashes, 450/450 pre-ranking matchability, durable public rankings before hidden gold, zero retries, USD 2 stop, and automatic progression only on a valid pass.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_retrieval_confirmation_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "3047704cac61b495496d2eee28479d1d5879bc9385fddef2af09711c21d77498"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-confirmation",
+      "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_source_aligned_retrieval.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "ca2f61d36d8212c72eaf8b3642f3f0a4bf7d9c8f553eebbbda362f23c6bdd3d2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-verification",
+      "evidence": "Focused tests verify exact package matchability, terminal pass/fail simulations, simplest-near-best selection, a clean program-authorized preflight with no repeated approval blocker, and that preflight/execution cannot open hidden gold before public rankings are durable.",
+      "findings": [],
+      "path": "tests/test_source_aligned_retrieval_runner.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "689e071f96d4643f39be9707311fa1ffc5111a5939e55f28bcdc073fd6f2fdf6"
     }
   ],
   "schema_version": 1

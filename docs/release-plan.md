@@ -95,6 +95,12 @@ AFQC-100 corpus/gold region-binding defect is corrected prospectively; the
 historical unfavorable result remains immutable. Real professor/student
 participation is still outside this authority.
 
+AFQC-102 completes the corrected question-wording stage: 500/500 cases are
+unique and source-linked, 148 use accepted model wording, and 352 use explicit
+deterministic context-complete fallbacks. All 50 provider calls completed at
+USD 0.8352885. This advances automatically to fresh multi-method retrieval;
+it does not itself reopen product or final-set claims.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

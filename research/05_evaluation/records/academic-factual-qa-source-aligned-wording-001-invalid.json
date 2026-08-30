@@ -1,30 +1,110 @@
 {
   "schema_version": 1,
-  "instrument_id": "academic-factual-qa-source-aligned-wording-001",
-  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
-  "status": "invalid-execution",
-  "decision": "no-academic-interpretation",
+  "run_id": "academic-factual-qa-source-aligned-wording-001-invalid",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-source-aligned-confirmation-001",
+  "corpus_id": "academic-factual-qa-source-aligned-public-100-clusters",
   "code_revision": "347769e23ca945d0e71dd9aef7fb02d45c08c635",
-  "binding_sha256": "c03bcbcda835dcb85026452e325b0c849096bd7f1d43b1d709f21c95e903f6b5",
-  "failure_stage": "source-visible-question-author-batch-023",
-  "failure_type": "ProviderJsonError",
-  "failure_detail": "OpenAI response status was not completed; no model identity, privacy, gold, or accounting drift was observed before the stop.",
-  "correction_class": "one-permitted-harness-transport-correction",
-  "correction": "Attempt 002 changes only the provider output-token reservation and uses a new exclusive ledger. Cases, prompts, truth, gates, models, batching, and cost ceiling are unchanged.",
-  "provider_accounting": {
-    "provider_calls": 45,
-    "provider_attempts": 45,
-    "completed_calls": 44,
-    "failed_calls": 1,
-    "input_tokens": 117184,
-    "output_tokens": 76006,
-    "reported_cost_usd": 0.73804025,
-    "maximum_latency_ms": 35461.511792003876
-  },
-  "raw_ledger_committed": false,
-  "raw_ledger_location": "reports/generated/academic-factual-qa-source-aligned-wording-001.sqlite3",
-  "private_data_used": false,
-  "human_participants": 0,
-  "final_split_opened": false,
-  "content_sha256": "c768f313b30b6111570207064c4187bc13733ca05655cdfec0ea45c5d0f051d8"
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "deterministic-context-complete-fallback-v1",
+        "version": "control",
+        "configuration": {
+          "provider_calls": 0,
+          "truth_authority": "deterministic"
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-response-completion",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "final-case-package-completion",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "valid-execution",
+          "passed": true,
+          "evidence": "The deterministic fallback requires no provider transport."
+        },
+        {
+          "name": "deterministic-truth-preserved",
+          "passed": true,
+          "evidence": "The control cannot mutate action, answer, claim, evidence, or lineage."
+        }
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-nano-terra-source-aligned-wording-attempt-001",
+        "version": "attempt-001",
+        "configuration": {
+          "completed_calls": 44,
+          "failed_calls": 1,
+          "input_tokens": 117184,
+          "output_tokens": 76006,
+          "reported_cost_usd": 0.73804025,
+          "binding_sha256": "c03bcbcda835dcb85026452e325b0c849096bd7f1d43b1d709f21c95e903f6b5"
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-response-completion",
+          "value": 0.9777777778,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "final-case-package-completion",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "valid-execution",
+          "passed": false,
+          "evidence": "The 45th logical call returned a non-completed provider response."
+        },
+        {
+          "name": "deterministic-truth-preserved",
+          "passed": true,
+          "evidence": "The run stopped before using the failed batch and changed no source truth."
+        }
+      ],
+      "failures_by_category": {
+        "provider-non-completed-response": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid and has no academic quality interpretation. Use the program's one transport-only correction with unchanged cases, prompts, truth, gates, models, and budget.",
+    "limitations": [
+      "Only 44 of 50 planned calls completed, so no complete question package exists for this attempt.",
+      "The unrestricted provider ledger remains ignored and is referenced by the readable result summary.",
+      "No private, product, final-split, or human-participant execution occurred."
+    ]
+  }
 }

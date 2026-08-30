@@ -906,6 +906,18 @@ Current utilities:
   unique deterministic fallback. Use the `verify:`, `simulate:`, `preflight:`,
   `preflight-live:`, `execute:`, and `resume:` package commands with the
   `academic-factual-qa-source-aligned-wording` suffix.
+- `run_academic_factual_qa_source_aligned_retrieval.py`: compares the fresh
+  source-aligned package across BM25, direct OpenAI small/large dense and
+  hybrid retrieval, and deterministic hierarchy. It persists every public
+  ranking before opening hidden gold, enforces exact source-range
+  matchability, checkpoints API embeddings, supports bound resume, and selects
+  only the simplest method within two percentage points of the best passing
+  result. Use `npm run verify:academic-factual-qa-source-aligned-retrieval`,
+  `npm run simulate:academic-factual-qa-source-aligned-retrieval`,
+  `npm run preflight:academic-factual-qa-source-aligned-retrieval`, or the
+  execute/resume commands. AFQC-101 program authority removes a separate
+  administrative approval; its USD 2 stage stop and all quality/privacy gates
+  remain active.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

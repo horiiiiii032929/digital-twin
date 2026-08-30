@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 729
+    "audited": 732
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 168,
+    "active_or_unclassified_tooling": 169,
     "active_runtime": 127,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 179,
+    "evaluation_configuration": 180,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 156
+    "verification": 157
   },
-  "file_count": 729,
+  "file_count": 732,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7d284e1eddaf1f0e78563a528416c5ec18ac9392c4da73a3873e7fd293d04aa0",
+  "record_sha256": "20a5150612752b2b73d8a47e204f6578bac23276a98471e3a1ac99cced93dff9",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "f5b9993e3c4dcfe4b03dab645984bc9fcafb2ace273233c2d85295ba531f429b"
+      "sha256": "82108000cacea41c9e19670ab40b09456e9e2d8a2434153f190b192160247a48"
     },
     {
       "audit": {
@@ -2516,6 +2516,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
       "risk": "high",
       "sha256": "4535feeb4636f72b030c52b836a6a22c7a864336acadeee6f5fb923b5a6a6a90"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-retrieval-confirmation",
+        "evidence": "Instrument review verifies six frozen methods, exact source/case/gold hashes, 450/450 pre-ranking matchability, durable public rankings before hidden gold, zero retries, USD 2 stop, and automatic progression only on a valid pass.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_retrieval_confirmation_001.json",
+      "risk": "high",
+      "sha256": "3047704cac61b495496d2eee28479d1d5879bc9385fddef2af09711c21d77498"
     },
     {
       "audit": {
@@ -6246,6 +6262,28 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-retrieval-confirmation",
+        "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-source-aligned-retrieval",
+        "preflight:academic-factual-qa-source-aligned-retrieval",
+        "resume:academic-factual-qa-source-aligned-retrieval",
+        "simulate:academic-factual-qa-source-aligned-retrieval",
+        "verify:academic-factual-qa-source-aligned-retrieval"
+      ],
+      "path": "scripts/run_academic_factual_qa_source_aligned_retrieval.py",
+      "risk": "high",
+      "sha256": "ca2f61d36d8212c72eaf8b3642f3f0a4bf7d9c8f553eebbbda362f23c6bdd3d2"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-wording",
         "evidence": "Runner review verifies target-blind advisory input, ID-set parsing independent of provider order, atomic exclusive ledger/resume, exact identity and cost accounting, deterministic fallback, and automatic execution under the finite program authority.",
         "findings": [],
@@ -9478,7 +9516,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "5483874f32be264fdd18b65676d4a74bc17f4c5a4d732ebcbbd53dfeff9e2384"
+      "sha256": "bc8bb0ad655751ada8b0228850bb224c6ed452e0647e7fd026b215c4de3cce7d"
     },
     {
       "audit": {
@@ -11994,6 +12032,22 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-retrieval-verification",
+        "evidence": "Focused tests verify exact package matchability, terminal pass/fail simulations, simplest-near-best selection, a clean program-authorized preflight with no repeated approval blocker, and that preflight/execution cannot open hidden gold before public rankings are durable.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_source_aligned_retrieval_runner.py",
+      "risk": "medium",
+      "sha256": "689e071f96d4643f39be9707311fa1ffc5111a5939e55f28bcdc073fd6f2fdf6"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-wording-verification",
         "evidence": "Focused assembly tests verify 500 deterministic truth-preserving fallbacks are complete and unique and that semantic anchor loss forces fallback despite a nominally favorable advisory vote.",
         "findings": [],
@@ -12186,8 +12240,8 @@
     }
   ],
   "risk_counts": {
-    "high": 559,
-    "medium": 170
+    "high": 561,
+    "medium": 171
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
