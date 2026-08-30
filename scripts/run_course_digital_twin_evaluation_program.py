@@ -146,6 +146,34 @@ def validate(
     gold_ids = {str(row["case_id"]) for row in gold["gold"]}
     if public_ids != gold_ids or len(public_ids) != 500:
         raise ProgramError("development public/gold identities drifted")
+    development_source_path = ROOT / (
+        manifest.development_source_path or manifest.source_plan_path
+    )
+    from scripts.academic_factual_qa_open_10000_t0_adapter import _chunks_by_course
+    from src.digital_twin.evaluation import EvaluationGoldV1
+    from src.digital_twin.evaluation.finite_retrieval_evaluation import (
+        FiniteRetrievalEvaluationError,
+        validate_exact_reference_matchability,
+    )
+
+    try:
+        chunks_by_course, _ = _chunks_by_course(development_source_path)
+        matchability = validate_exact_reference_matchability(
+            gold=[EvaluationGoldV1.model_validate(row) for row in gold["gold"]],
+            chunks=[
+                chunk for rows in chunks_by_course.values() for chunk in rows
+            ],
+        )
+    except (FiniteRetrievalEvaluationError, OSError, ValueError) as error:
+        raise ProgramError(
+            "development gold is not exactly matchable by the runtime corpus"
+        ) from error
+    for path_value, key, count in (
+        (manifest.development_control_cases_path, "cases", 100),
+        (manifest.development_control_gold_path, "gold", 100),
+    ):
+        if path_value is not None:
+            _validate_package(ROOT / path_value, key=key, count=count)
     visual = _load_object(ROOT / manifest.visual_dataset_path)
     visual_expected_hash = canonical_json_sha256(
         {name: value for name, value in visual.items() if name != "content_sha256"}
@@ -228,6 +256,12 @@ def validate(
         ),
         "stage_count": len(manifest.stages),
         "development_case_count": 500,
+        "development_required_reference_count": matchability[
+            "required_reference_count"
+        ],
+        "development_missing_reference_count": matchability[
+            "missing_reference_count"
+        ],
         "final_cluster_count": 2_000,
         "final_case_target": 10_000,
         "visual_asset_count": 30,
@@ -280,7 +314,10 @@ def smoke(
         str(row["case_id"]): EvaluationGoldV1.model_validate(row)
         for row in hidden["gold"]
     }
-    chunks_by_course, _ = _chunks_by_course()
+    source_path = ROOT / (
+        manifest.development_source_path or manifest.source_plan_path
+    )
+    chunks_by_course, _ = _chunks_by_course(source_path)
     ranked_ids = [
         row.id for row in chunks_by_course[case.course_id][:5]
     ]
@@ -368,6 +405,7 @@ def smoke(
                         "maximum_calls": 1,
                         "maximum_cost_usd": 0.10,
                         "precomputed_retrieval_path": str(ranking_path),
+                        "source_package_path": str(source_path),
                         "model_candidate_manifest": {
                             "candidate_id": "finite-program-smoke-mini",
                             "provider_model": mini.model,

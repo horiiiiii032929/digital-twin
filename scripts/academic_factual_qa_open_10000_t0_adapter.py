@@ -192,8 +192,25 @@ def _evaluation_citation(chunk: DocumentChunk) -> EvaluationCitationV1:
     )
 
 
-def _chunks_by_course() -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
-    plan = _load(SOURCE_PLAN_PATH)
+def _chunks_by_course(
+    source_path: Path | None = None,
+) -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
+    plan = _load(source_path or SOURCE_PLAN_PATH)
+    if "chunks" in plan:
+        chunks = [DocumentChunk.model_validate(row) for row in plan["chunks"]]
+        grouped: dict[str, list[DocumentChunk]] = {}
+        by_id: dict[str, DocumentChunk] = {}
+        for chunk in chunks:
+            course_id = str(chunk.metadata.get("course_id", ""))
+            if not course_id:
+                raise LiveT0AdapterError("registered chunk lacks course identity")
+            if chunk.id in by_id:
+                raise LiveT0AdapterError("registered chunk identity is duplicated")
+            grouped.setdefault(course_id, []).append(chunk)
+            by_id[chunk.id] = chunk
+        if len(grouped) != 4 or not chunks:
+            raise LiveT0AdapterError("registered source package has invalid coverage")
+        return grouped, by_id
     grouped: dict[str, list[DocumentChunk]] = {}
     by_id: dict[str, DocumentChunk] = {}
     ordinals: dict[str, int] = {}
@@ -741,7 +758,9 @@ def build_live_t0_adapter(
         if condition == "candidate"
         else AnyHitEvidenceGate()
     )
-    chunks_by_course, chunks_by_id = _chunks_by_course()
+    source_path_value = runtime.get("source_package_path")
+    source_path = Path(str(source_path_value)) if source_path_value else None
+    chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
     state_path = Path(runtime["state_path"])
     tutoring_mode = str(runtime.get("tutoring_mode", "grounded-assistant"))
     conversation_scope = str(runtime.get("conversation_scope", "course"))

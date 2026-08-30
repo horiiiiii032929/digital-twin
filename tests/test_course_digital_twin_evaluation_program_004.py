@@ -3,9 +3,11 @@ from __future__ import annotations
 import sqlite3
 from pathlib import Path
 
+import pytest
+
 from scripts import course_digital_twin_evaluation_live_stages as live_stages
 from scripts import run_course_digital_twin_evaluation_program as runner
-from src.digital_twin.evaluation.finite_program import load_program_manifest
+from src.digital_twin.evaluation.finite_program import ProgramError, load_program_manifest
 from src.digital_twin.evaluation.finite_program_runner import StageExecutionContext
 from src.digital_twin.repository_freeze import (
     require_bounded_pilot_operation_allowed,
@@ -19,14 +21,14 @@ INSTRUMENT = ROOT / (
 )
 
 
-def test_stable_successor_is_one_authorized_finite_program() -> None:
+def test_stable_successor_is_terminal_and_authority_is_revoked() -> None:
     manifest = load_program_manifest(INSTRUMENT)
 
     assert manifest.program_id == "course-digital-twin-evaluation-program-004"
-    assert manifest.status == "frozen-authorized"
+    assert manifest.status == "completed"
     assert manifest.automatic_stage_progression is True
-    assert manifest.provider_execution_authorized is True
-    assert manifest.paid_execution_authorized is True
+    assert manifest.provider_execution_authorized is False
+    assert manifest.paid_execution_authorized is False
     assert manifest.total_budget_usd == 50
     assert manifest.retrieval_embedding is not None
     assert manifest.retrieval_embedding.model == "text-embedding-3-small"
@@ -44,29 +46,20 @@ def test_stable_successor_is_one_authorized_finite_program() -> None:
         "external_model_evaluation",
         "method_evaluation_execution",
     ):
-        require_bounded_pilot_operation_allowed(manifest.program_id, operation)
+        try:
+            require_bounded_pilot_operation_allowed(manifest.program_id, operation)
+        except Exception as error:
+            assert "not a bounded authorization" in str(error)
+        else:
+            raise AssertionError("terminal program retained execution authority")
 
 
-def test_stable_successor_validates_without_local_qwen() -> None:
-    result = runner.validate(INSTRUMENT)
-
-    assert result["program_id"] == "course-digital-twin-evaluation-program-004"
-    assert result["status"] == "passed-build-only"
-    assert result["final_case_target"] == 10_000
-
-
-def test_adapter_smoke_persists_then_scores_without_network() -> None:
-    result = runner.smoke(INSTRUMENT)
-
-    assert result == {
-        "program_id": "course-digital-twin-evaluation-program-004",
-        "status": "passed-network-free-smoke",
-        "response_count": 1,
-        "scored_case_count": 1,
-        "provider_calls": 0,
-        "network_calls": 0,
-        "gold_loaded_after_response_persistence": True,
-    }
+def test_stable_successor_is_reclassified_when_gold_cannot_match_corpus() -> None:
+    with pytest.raises(
+        ProgramError,
+        match="development gold is not exactly matchable by the runtime corpus",
+    ):
+        runner.validate(INSTRUMENT)
 
 
 def test_failure_accounting_includes_embedding_batches(tmp_path: Path) -> None:

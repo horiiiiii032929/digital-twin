@@ -177,6 +177,9 @@ class ProgramManifestV1(BaseModel):
     source_plan_path: str = Field(min_length=1)
     development_cases_path: str = Field(min_length=1)
     development_gold_path: str = Field(min_length=1)
+    development_source_path: str | None = None
+    development_control_cases_path: str | None = None
+    development_control_gold_path: str | None = None
     visual_dataset_path: str = Field(min_length=1)
     global_hard_stops: list[str] = Field(min_length=6)
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")

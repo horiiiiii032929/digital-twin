@@ -956,6 +956,21 @@ Current utilities:
   identity checks, zero retries, safe resume, 66 calls maximum, and separate USD
   2/USD 1.5 stage stops. Use package commands ending in
   `nonhuman-evaluation-supplements`.
+- `run_course_digital_twin_evaluation_program.py`: owns the finite factual,
+  visual, synthetic-profile, and autonomous-tutoring evaluation dispatcher.
+  Historical programs 002 and 003 are immutable invalid executions. Program
+  004 is also invalid for academic interpretation because its parent-section
+  runtime corpus did not contain the development gold ranges exactly; its
+  visual and synthetic-profile diagnostics remain recorded separately.
+  Program 005 binds the validated 500-case action-router package to its exact
+  300-atom source corpus, checks every gold range before any provider call, and
+  automatically advances from fresh retrieval through 500+100 product
+  development and then the sealed 10,000+1,000 evaluation only when the frozen
+  gates pass. One program-level USD 50 authority replaces per-stage approval
+  pauses. Privacy, gold isolation, identity, ledger integrity, and the global
+  budget remain fail-closed. Use package commands ending in
+  `finite-evaluation-program-005`; a stopped run resumes with
+  `npm run resume:finite-evaluation-program-005`.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

@@ -32,7 +32,7 @@ from src.digital_twin.evaluation import (
     EvaluationResponseV1,
     ProgramStageStatus,
     SystemUnderTestManifestV1,
-    build_canonical_final_rows,
+    build_atomic_final_rows,
     load_release_profile,
     package_rows,
     paired_control_subset,
@@ -64,6 +64,7 @@ from src.digital_twin.evaluation.finite_retrieval_evaluation import (
     evaluate_retrieval_method,
     select_retrieval_successor,
     select_untouched_retrieval_cases,
+    validate_exact_reference_matchability,
 )
 from src.digital_twin.evaluation.provider_json import (
     DirectProviderJsonTransport,
@@ -124,6 +125,13 @@ def _rows(root: Path, context: StageExecutionContext):
     return cases, references
 
 
+def _development_source_path(context: StageExecutionContext) -> Path:
+    return context.root / (
+        context.manifest.development_source_path
+        or context.manifest.source_plan_path
+    )
+
+
 def _profile_retriever_selection():
     profile = load_release_profile(PROFILE_PATH)
     return next(row for row in profile.components if row.component.value == "retriever")
@@ -156,8 +164,8 @@ def _qwen_embedder(selection, *, execution_device: str, execution_dtype: str):
     )
 
 
-def _local_retrievers(context: StageExecutionContext):
-    chunks_by_course, _ = _chunks_by_course()
+def _local_retrievers(context: StageExecutionContext, *, source_path: Path):
+    chunks_by_course, _ = _chunks_by_course(source_path)
     selection = _profile_retriever_selection()
     embedder = _qwen_embedder(
         selection,
@@ -221,11 +229,13 @@ def _local_retrievers(context: StageExecutionContext):
 def _api_retrievers(
     context: StageExecutionContext,
     cases: list[EvaluationCaseV1],
+    *,
+    source_path: Path,
 ):
     embedding = context.manifest.retrieval_embedding
     if embedding is None:
         raise FactualStageError("API retrieval binding is unavailable")
-    chunks_by_course, _ = _chunks_by_course()
+    chunks_by_course, _ = _chunks_by_course(source_path)
     ledger = RetrievalUsageLedger(
         max_cost_usd=max(0.01, context.remaining_stage_budget_usd),
         price_per_million_input_tokens_usd=(
@@ -328,10 +338,12 @@ def _api_retrievers(
 def _retrievers(
     context: StageExecutionContext,
     cases: list[EvaluationCaseV1],
+    *,
+    source_path: Path,
 ):
     if context.manifest.retrieval_embedding is not None:
-        return _api_retrievers(context, cases)
-    return _local_retrievers(context)
+        return _api_retrievers(context, cases, source_path=source_path)
+    return _local_retrievers(context, source_path=source_path)
 
 
 def _rerank_schema(expected: dict[str, list[str]]) -> dict[str, Any]:
@@ -530,11 +542,17 @@ def _rank_all_cases(
 def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelopeV1:
     context.output_root.mkdir(parents=True, exist_ok=True)
     cases, references = _rows(context.root, context)
+    source_path = _development_source_path(context)
+    chunks_by_course, _ = _chunks_by_course(source_path)
+    matchability = validate_exact_reference_matchability(
+        gold=references,
+        chunks=[chunk for rows in chunks_by_course.values() for chunk in rows],
+    )
     selected_cases = select_untouched_retrieval_cases(cases)
     selected_ids = {row.case_id for row in selected_cases}
     gold = {row.case_id: row for row in references if row.case_id in selected_ids}
     _, bm25, hybrid, hierarchical, embedding_snapshot = _retrievers(
-        context, cases
+        context, cases, source_path=source_path
     )
     nano_enabled = context.manifest.retrieval_nano_reranking_enabled is not False
     if nano_enabled:
@@ -633,6 +651,7 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
         "selected_method": selected_method,
         "summaries": [row.__dict__ for row in methods],
         "observations": observations,
+        "exact_reference_matchability": matchability,
         "nano_ledger": nano_snapshot,
     }
     result_path = context.output_root / "retrieval-result.json"
@@ -661,6 +680,8 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
             "selected_boundary_accuracy": (
                 selected.boundary_accuracy if selected else 0.0
             ),
+            "required_reference_count": matchability["required_reference_count"],
+            "missing_reference_count": matchability["missing_reference_count"],
         },
         artifacts={
             "result": str(result_path.relative_to(context.root)),
@@ -724,6 +745,7 @@ async def _product_arm(
     evidence_gate: str,
     maximum_cost_usd: float,
     precomputed_retrieval_path: Path | None,
+    source_package_path: Path,
     tutoring_mode: str = "grounded-assistant",
     conversation_scope: str = "course",
     forced_failure_case_ids: set[str] | None = None,
@@ -796,6 +818,7 @@ async def _product_arm(
                 if precomputed_retrieval_path is not None
                 else None
             ),
+            "source_package_path": str(source_package_path),
             "model_candidate_manifest": {
                 "candidate_id": "finite-program-gpt-5.4-mini",
                 "provider_model": model.model,
@@ -1110,6 +1133,7 @@ def _run_product_stage(
     gold_path: Path,
     control_gold_path: Path,
     rankings_path: Path,
+    source_package_path: Path,
     final: bool,
 ) -> StageResultEnvelopeV1:
     context.output_root.mkdir(parents=True, exist_ok=True)
@@ -1152,6 +1176,7 @@ def _run_product_stage(
             ),
             maximum_cost_usd=candidate_budget,
             precomputed_retrieval_path=rankings_path,
+            source_package_path=source_package_path,
             maximum_output_tokens=400,
         )
     )
@@ -1163,6 +1188,7 @@ def _run_product_stage(
             evidence_gate="any-hit-evidence-gate-v1",
             maximum_cost_usd=control_budget,
             precomputed_retrieval_path=control_rankings_path,
+            source_package_path=source_package_path,
             maximum_output_tokens=400,
         )
     )
@@ -1254,7 +1280,13 @@ def _run_product_stage(
 
 def run_product_development(context: StageExecutionContext) -> StageResultEnvelopeV1:
     cases = _read_public_cases(context.root / context.manifest.development_cases_path)
-    control_cases = _read_public_cases(context.root / CONTROL_CASES)
+    control_cases_path = context.root / (
+        context.manifest.development_control_cases_path or CONTROL_CASES
+    )
+    control_gold_path = context.root / (
+        context.manifest.development_control_gold_path or CONTROL_GOLD
+    )
+    control_cases = _read_public_cases(control_cases_path)
     rankings_path = (
         context.output_root.parent
         / ProgramStageName.RETRIEVAL_DECISION.value
@@ -1265,8 +1297,9 @@ def run_product_development(context: StageExecutionContext) -> StageResultEnvelo
         cases=cases,
         control_cases=control_cases,
         gold_path=context.root / context.manifest.development_gold_path,
-        control_gold_path=context.root / CONTROL_GOLD,
+        control_gold_path=control_gold_path,
         rankings_path=rankings_path,
+        source_package_path=_development_source_path(context),
         final=False,
     )
 
@@ -1509,8 +1542,9 @@ async def _construct_wording(
 
 def run_final_construction(context: StageExecutionContext) -> StageResultEnvelopeV1:
     context.output_root.mkdir(parents=True, exist_ok=True)
-    canonical_cases, gold, diagnostics = build_canonical_final_rows(
-        context.root / context.manifest.source_plan_path
+    canonical_cases, gold, diagnostics, source_payload = build_atomic_final_rows(
+        context.root / context.manifest.source_plan_path,
+        program_id=context.manifest.program_id,
     )
     authored, verified, nano, luna = asyncio.run(
         _construct_wording(context, canonical_cases, gold)
@@ -1563,6 +1597,7 @@ def run_final_construction(context: StageExecutionContext) -> StageResultEnvelop
         program_id=context.manifest.program_id,
     )
     paths = {
+        "source_corpus": context.output_root / "final-source-corpus.json",
         "public_cases": context.output_root / "final-public-cases.json",
         "hidden_gold": context.output_root / "final-hidden-gold.json",
         "control_cases": context.output_root / "control-public-cases.json",
@@ -1570,7 +1605,13 @@ def run_final_construction(context: StageExecutionContext) -> StageResultEnvelop
     }
     for path, payload in zip(
         paths.values(),
-        (public_payload, gold_payload, control_public, control_hidden),
+        (
+            source_payload,
+            public_payload,
+            gold_payload,
+            control_public,
+            control_hidden,
+        ),
         strict=True,
     ):
         atomic_write_json(path, payload)
@@ -1623,21 +1664,30 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
     )
     cases = _read_public_cases(construction / "final-public-cases.json")
     control_cases = _read_public_cases(construction / "control-public-cases.json")
+    source_path = construction / "final-source-corpus.json"
     # Final rankings are generated from public questions only. Hidden gold remains
     # unopened by the product response process.
     _, bm25, hybrid, hierarchical, embedding_snapshot = _retrievers(
-        context, cases
+        context, cases, source_path=source_path
     )
-    nano_rankings, nano_snapshot = asyncio.run(
-        _nano_rankings(
-            context=context,
-            cases=cases,
-            hierarchical=hierarchical,
-            ledger_path=context.output_root / "final-nano-reranking-provider.sqlite3",
-            maximum_cost_usd=context.remaining_stage_budget_usd * 0.10,
-            resume=context.resume,
+    if context.manifest.retrieval_nano_reranking_enabled is False:
+        nano_rankings = {}
+        nano_snapshot = {
+            "provider_calls": 0,
+            "reported_cost_usd": 0.0,
+            "status": "disabled-by-frozen-program",
+        }
+    else:
+        nano_rankings, nano_snapshot = asyncio.run(
+            _nano_rankings(
+                context=context,
+                cases=cases,
+                hierarchical=hierarchical,
+                ledger_path=context.output_root / "final-nano-reranking-provider.sqlite3",
+                maximum_cost_usd=context.remaining_stage_budget_usd * 0.10,
+                resume=context.resume,
+            )
         )
-    )
     retrieval_result = load_json_object(
         context.output_root.parent
         / ProgramStageName.RETRIEVAL_DECISION.value
@@ -1685,6 +1735,7 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
         gold_path=construction / "final-hidden-gold.json",
         control_gold_path=construction / "control-hidden-gold.json",
         rankings_path=rankings_path,
+        source_package_path=source_path,
         final=True,
     )
     payload = product.model_dump(mode="json", exclude={"result_sha256"})

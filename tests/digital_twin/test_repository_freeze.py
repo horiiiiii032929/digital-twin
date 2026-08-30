@@ -35,7 +35,7 @@ def test_repository_freeze_status_is_explicit() -> None:
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
-        "course-digital-twin-evaluation-program-004",
+        "course-digital-twin-evaluation-program-005",
     }
 
     for pilot_id in pilot_ids:
@@ -46,12 +46,17 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "course-digital-twin-evaluation-program-004"
+        "course-digital-twin-evaluation-program-005"
     ] == (
         "dataset_generation",
         "external_model_evaluation",
         "method_evaluation_execution",
     )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-004",
+            "external_model_evaluation",
+        )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "course-digital-twin-evaluation-program-003",

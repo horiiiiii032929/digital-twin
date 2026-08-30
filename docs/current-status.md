@@ -214,6 +214,37 @@ Because this is the second operationally invalid attempt, no further correction
 or retry is authorized. The checkpoint supports no product-quality conclusion;
 #127 remains `Refine` and now requires an explicit harness/method decision.
 
+AFQC-113/114 preserve two API-first finite-program operational failures. Program
+002 successfully materialized four reusable public-course indexes and 500 query
+vectors in 44 embedding batches for USD 0.00755274, then stopped before scoring
+because its cached-query token limit did not match the persisted index binding.
+Program 003 corrected that binding and reused the paid indexes, but its first
+optional GPT-5.4 nano reranking request returned an incomplete response; the
+automatic correction reproduced the stop. Program 003 made nine calls for USD
+0.00016134. Neither run produced product responses, hidden-gold scores, final-
+set access, or a quality estimate. Both authorities are revoked.
+
+AFQC-115 corrects `course-digital-twin-evaluation-program-004` to
+`invalid-execution`. Its runtime corpus exactly matched 0/456 required gold
+references; 393 references were contained only by broader parent sections and
+63 were absent from every runtime unit. The reported retrieval percentages are
+therefore non-interpretable and support no method or product decision. The
+500+100 and sealed 10,000+1,000 product stages did not run. Independent
+supplements remain diagnostic evidence: true visual reached 17/30 complete
+evidence@3, 76.13% Recall@5, zero boundary releases, and 30/30 original-region
+lineage, while 36/36 synthetic C0-C2 calls completed without establishing
+professor fidelity. Program 004 used 74 calls/batches and USD 0.05216944; its
+authority is revoked.
+
+AFQC-116 freezes the one harness-only successor as
+`course-digital-twin-evaluation-program-005`. Before any provider call, its
+mandatory matchability gate proves all 452 action-router development references
+map exactly to 300 non-overlapping authoritative source atoms. The program uses
+the previously reviewed 500 candidate and 100 control cases, retains automatic
+stage progression under the single USD 50 authority, and atomizes overlapping
+final source ranges before a possible 10,000+1,000 run. No prompt, model,
+quality gate, or hidden answer is changed by this correction.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
@@ -1268,7 +1299,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Valid 200-case product Refine / final closed | The earlier 10,000 correlated template rows remain engineering evidence. Evaluation-v2 produced a valid leakage-free four-model product screen, selected no model, and stopped before 500/control/advisory stages | Preserve the result, keep the sealed 10,000 cases closed, and make one prospective retrieval/evidence method decision before another academic execution |
+| Large factual QA | Program 004 invalid; program 005 frozen and authorized | Program 004 used mismatched parent-section runtime units and exact gold ranges, so its retrieval percentages are non-interpretable. Program 005 proves 452/452 development references exactly match 300 non-overlapping source atoms before calls. The earlier 10,000 correlated template rows remain engineering evidence | Run program 005 once; a development pass advances automatically to the sealed 10,000+1,000 evaluation, while a valid quality failure stops without another tuning loop |
 
 ## Release readiness and critical path
 
@@ -1289,7 +1320,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
 | 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
-| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Refine | Preserve the cascade result and design one prospective retrieval/evidence successor after the operational release; keep the sealed 10,000 run closed |
+| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Execute the exactly matchable program 005 automatically through 500+100 and, only on pass, sealed 10,000+1,000 plus supplementary stages |
 | 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 

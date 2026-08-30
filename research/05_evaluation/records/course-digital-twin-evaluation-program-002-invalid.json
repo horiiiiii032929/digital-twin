@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-002-invalid",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-retrieval-decision",
+  "corpus_id": "four-public-open-educational-source-families",
+  "code_revision": "c857f739ef96f10e7afc391a234bfab7c740d8ea",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "api-first-finite-program-002",
+        "version": "invalid-binding",
+        "configuration": {
+          "manifest_sha256": "d32623ccc01bf86961f9505d9b52a9461b5f8ba471cdf03bc2ecc6bc88d7007a",
+          "embedding_model": "text-embedding-3-small",
+          "embedding_calls": 44,
+          "reported_cost_usd": 0.00755274,
+          "product_calls": 0,
+          "hidden_gold_loaded": false,
+          "final_10000_opened": false
+        }
+      },
+      "metrics": [
+        {"name": "embedding-call-count", "value": 44.0, "unit": "count", "direction": "lower-is-better", "threshold": 104.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.00755274, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true},
+        {"name": "scored-case-count", "value": 0.0, "unit": "cases", "direction": "higher-is-better", "threshold": 300.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "exact-index-binding", "passed": false, "evidence": "Cached query request_token_limit 50000 did not match persisted index binding 250000."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "No scoring, product response, or final case was opened."}
+      ],
+      "failures_by_category": {"runtime-binding-contract-defect": 1}
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-execution-control",
+        "version": "program-002-invalid",
+        "configuration": {"provider_calls": 0, "reported_cost_usd": 0.0, "hidden_gold_loaded": false}
+      },
+      "metrics": [
+        {"name": "embedding-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 104.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.0, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true},
+        {"name": "scored-case-count", "value": 0.0, "unit": "cases", "direction": "higher-is-better", "threshold": 300.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "exact-index-binding", "passed": false, "evidence": "The control was not executable after the shared binding defect."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "The invalid stop prevented scoring and final access."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The execution was operationally invalid before retrieval scoring; preserve its index artifacts for a hash-bound successor and draw no quality conclusion.",
+    "limitations": ["No retrieval or product quality metric was measured.", "Embedding usage was reconstructed from durable batch ledgers."]
+  }
+}

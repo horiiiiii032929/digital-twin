@@ -9,11 +9,18 @@ from pathlib import Path
 from typing import Any, Iterable, Protocol
 
 from src.digital_twin.evaluation.factual_qa_contract import (
+    CanonicalEvidenceRefV1,
     EvaluationAction,
     EvaluationCaseV1,
     EvaluationGoldV1,
     EvaluationSplit,
 )
+from src.digital_twin.grounding import DocumentChunk
+from src.digital_twin.grounding.source_registration import (
+    canonical_region_id,
+    registered_search_description,
+)
+from src.digital_twin.tutor_policy import SourceLabel
 from src.digital_twin.evaluation.factual_qa_dataset import (
     AuthoredClusterVariantsV1,
     ClusterDraftV1,
@@ -21,6 +28,7 @@ from src.digital_twin.evaluation.factual_qa_dataset import (
     assemble_deterministic_verified_cluster,
     build_deterministic_cluster_truth_v2,
     normalize_question,
+    normalized_token_sequence_contains,
 )
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
 
@@ -31,6 +39,22 @@ COURSE_IDS = (
     "data-structures",
     "python-programming",
 )
+_QUESTION_CUE_STOPWORDS = {
+    "about",
+    "after",
+    "course",
+    "detail",
+    "does",
+    "example",
+    "following",
+    "provide",
+    "section",
+    "source",
+    "state",
+    "this",
+    "what",
+    "which",
+}
 
 
 class BaseModelLike(Protocol):
@@ -63,17 +87,58 @@ def _unique_canonical_question(
     if normalized not in seen:
         seen.add(normalized)
         return case
-    source_name = Path(cluster.source_path).stem.replace("_", " ").replace("-", " ")
     suffix = hashlib.sha256(case.case_id.encode("utf-8")).hexdigest()[:8]
-    question = (
-        f"{case.question.rstrip('?.!')} in the source section "
-        f'"{source_name}: {cluster.section_heading}" (source example {suffix})?'
-    )
+    question = f"{case.question.rstrip('?.!')} (source example {suffix})?"
     normalized = normalize_question(question)
     if normalized in seen:
         raise FiniteProgramDatasetError("canonical fallback cannot be made unique")
     seen.add(normalized)
     return case.model_copy(update={"question": question})
+
+
+def _safe_canonical_question(
+    *, question: str, answer: str, cluster: SourceClusterV1, slice_name: str
+) -> str:
+    """Replace a rare answer-bearing template with a deterministic safe cue."""
+
+    if not normalized_token_sequence_contains(question, answer):
+        return question
+    answer_tokens = set(normalize_question(answer).split())
+    cue_tokens: list[str] = []
+    for token in normalize_question(cluster.text).split():
+        if (
+            token in answer_tokens
+            or token in _QUESTION_CUE_STOPWORDS
+            or len(token) < 3
+            or token in cue_tokens
+        ):
+            continue
+        cue_tokens.append(token)
+        if len(cue_tokens) == 4:
+            break
+    cue = " ".join(cue_tokens) or f"source example {cluster.cluster_id[-8:]}"
+    detail = (
+        "code or command detail"
+        if slice_name == "structured-code"
+        else "equation detail"
+        if slice_name == "structured-equation"
+        else "table detail"
+        if slice_name == "structured-table"
+        else "fact"
+    )
+    question_role = slice_name.replace("-", " ")
+    replacement = (
+        f"What {detail} is stated for the {question_role} case in the context "
+        f"of {cue}?"
+    )
+    if normalized_token_sequence_contains(replacement, answer):
+        replacement = (
+            f"What {detail} is requested for the {question_role} case by source "
+            f"example {cluster.cluster_id[-8:]}?"
+        )
+    if normalized_token_sequence_contains(replacement, answer):
+        raise FiniteProgramDatasetError("safe canonical wording still leaks answer")
+    return replacement
 
 
 def build_canonical_final_rows(
@@ -105,8 +170,20 @@ def build_canonical_final_rows(
         authored = AuthoredClusterVariantsV1(
             cluster_id=cluster.cluster_id,
             questions=[
-                {"case_id": row.case_id, "question": row.canonical_question}
-                for row in truth.questions
+                {
+                    "case_id": row.case_id,
+                    "question": _safe_canonical_question(
+                        question=row.canonical_question,
+                        answer=row.canonical_answer,
+                        cluster=cluster,
+                        slice_name=(
+                            cluster.answerable_slices[index]
+                            if index < 4
+                            else cluster.boundary_slice
+                        ),
+                    ),
+                }
+                for index, row in enumerate(truth.questions)
             ],
         )
         verifier = ClusterDraftV1(
@@ -165,6 +242,195 @@ def build_canonical_final_rows(
     return ordered_cases, ordered_gold, diagnostics
 
 
+def build_atomic_final_rows(
+    source_plan_path: Path,
+    *,
+    program_id: str,
+) -> tuple[
+    list[EvaluationCaseV1],
+    list[EvaluationGoldV1],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    """Create one non-overlapping authoritative retrieval corpus for final gold."""
+
+    cases, gold, diagnostics = build_canonical_final_rows(source_plan_path)
+    plan = _load_object(source_plan_path)
+    clusters = [
+        SourceClusterV1.model_validate(row)
+        for row in plan.get("clusters", [])
+        if row.get("split") == "final"
+    ]
+    clusters_by_source: dict[tuple[str, int, str], list[SourceClusterV1]] = {}
+    for cluster in clusters:
+        key = (
+            cluster.source_artifact_id,
+            cluster.source_version,
+            cluster.source_sha256,
+        )
+        clusters_by_source.setdefault(key, []).append(cluster)
+
+    reference_ranges: dict[
+        tuple[str, int, str], set[tuple[int, int]]
+    ] = {}
+    for row in gold:
+        if row.expected_action != EvaluationAction.ANSWER:
+            continue
+        for claim in row.claims:
+            for reference in claim.evidence_refs:
+                key = (
+                    reference.source_artifact_id,
+                    reference.source_version,
+                    reference.source_sha256,
+                )
+                reference_ranges.setdefault(key, set()).add(
+                    (reference.char_start, reference.char_end)
+                )
+
+    merged_ranges: dict[
+        tuple[str, int, str], list[tuple[int, int]]
+    ] = {}
+    for key, values in reference_ranges.items():
+        merged: list[list[int]] = []
+        for start, end in sorted(values):
+            if merged and start < merged[-1][1]:
+                merged[-1][1] = max(merged[-1][1], end)
+            else:
+                merged.append([start, end])
+        merged_ranges[key] = [(start, end) for start, end in merged]
+
+    replacement: dict[
+        tuple[str, int, str, int, int], CanonicalEvidenceRefV1
+    ] = {}
+    chunks: list[DocumentChunk] = []
+    ordinals: dict[str, int] = {}
+    for key, ranges in sorted(merged_ranges.items()):
+        source_id, source_version, source_sha256 = key
+        for start, end in ranges:
+            containing = [
+                cluster
+                for cluster in clusters_by_source.get(key, [])
+                if cluster.char_start <= start and cluster.char_end >= end
+            ]
+            if len(containing) != 1:
+                raise FiniteProgramDatasetError(
+                    "final authoritative range does not map to one source cluster"
+                )
+            cluster = containing[0]
+            relative_start = start - cluster.char_start
+            relative_end = end - cluster.char_start
+            quote = cluster.text[relative_start:relative_end]
+            if not quote.strip():
+                raise FiniteProgramDatasetError("final authoritative range is empty")
+            modality = cluster.source_modality
+            region_id = canonical_region_id(
+                source_artifact_id=source_id,
+                source_version=source_version,
+                source_sha256=source_sha256,
+                char_start=start,
+                char_end=end,
+                modality=modality,
+            )
+            course_id = cluster.course_id
+            ordinal = ordinals.get(course_id, 0)
+            ordinals[course_id] = ordinal + 1
+            chunks.append(
+                DocumentChunk(
+                    id=region_id,
+                    document_id=source_id,
+                    text=quote,
+                    ordinal=ordinal,
+                    source_artifact_id=source_id,
+                    source_version=source_version,
+                    source_label=SourceLabel.COURSE_APPROVED,
+                    locator=f"{cluster.source_path} characters {start}–{end}",
+                    region_id=region_id,
+                    source_checksum=source_sha256,
+                    retrieval_allowed=True,
+                    display_allowed=True,
+                    metadata={
+                        "title": cluster.section_heading,
+                        "course_id": course_id,
+                        "char_start": str(start),
+                        "char_end": str(end),
+                        "source_path": cluster.source_path,
+                        "source_family_id": cluster.source_family_id,
+                        "parent_cluster_id": cluster.cluster_id,
+                        "modality": modality,
+                        "search_description": registered_search_description(
+                            course_id=course_id,
+                            section_heading=cluster.section_heading,
+                            source_path=cluster.source_path,
+                            modality=modality,
+                            text=cluster.text,
+                        ),
+                    },
+                )
+            )
+            for original_start, original_end in reference_ranges[key]:
+                if start <= original_start and end >= original_end:
+                    replacement[
+                        (source_id, source_version, source_sha256, original_start, original_end)
+                    ] = CanonicalEvidenceRefV1(
+                        source_artifact_id=source_id,
+                        source_version=source_version,
+                        source_sha256=source_sha256,
+                        char_start=start,
+                        char_end=end,
+                        region_id=region_id,
+                    )
+
+    rewritten_gold: list[EvaluationGoldV1] = []
+    for row in gold:
+        claims = []
+        for claim in row.claims:
+            refs = []
+            for reference in claim.evidence_refs:
+                key = (
+                    reference.source_artifact_id,
+                    reference.source_version,
+                    reference.source_sha256,
+                    reference.char_start,
+                    reference.char_end,
+                )
+                if key not in replacement:
+                    raise FiniteProgramDatasetError(
+                        "final evidence reference was not atomized"
+                    )
+                refs.append(replacement[key])
+            claims.append(claim.model_copy(update={"evidence_refs": refs}))
+        rewritten_gold.append(row.model_copy(update={"claims": claims}))
+
+    validate_final_rows(cases, rewritten_gold)
+    source_payload: dict[str, Any] = {
+        "schema_version": 1,
+        "program_id": program_id,
+        "construction_method": "merged-non-overlapping-authoritative-atoms-v1",
+        "split": "final-retrieval-corpus",
+        "cluster_count": len(clusters),
+        "case_count": len(cases),
+        "registered_region_count": len(chunks),
+        "source_plan_sha256": diagnostics["source_plan_sha256"],
+        "chunks": [row.model_dump(mode="json") for row in chunks],
+        "authoritative_regions_non_overlapping": True,
+        "provider_calls": 0,
+        "private_data_used": False,
+    }
+    source_payload["content_sha256"] = canonical_json_sha256(source_payload)
+    diagnostics = {
+        **diagnostics,
+        "original_unique_reference_count": sum(
+            len(values) for values in reference_ranges.values()
+        ),
+        "registered_region_count": len(chunks),
+        "merged_overlap_count": sum(
+            len(reference_ranges[key]) - len(merged_ranges[key])
+            for key in reference_ranges
+        ),
+    }
+    return cases, rewritten_gold, diagnostics, source_payload
+
+
 def validate_final_rows(
     cases: list[EvaluationCaseV1], gold: list[EvaluationGoldV1]
 ) -> None:
@@ -187,8 +453,9 @@ def validate_final_rows(
     for case in cases:
         reference = gold_by_id[case.case_id]
         if reference.expected_action == EvaluationAction.ANSWER:
-            normalized_answer = normalize_question(reference.canonical_answer)
-            if normalized_answer and normalized_answer in normalize_question(case.question):
+            if normalized_token_sequence_contains(
+                case.question, reference.canonical_answer
+            ):
                 raise FiniteProgramDatasetError(
                     f"public question leaks its canonical answer: {case.case_id}"
                 )
@@ -236,8 +503,9 @@ def apply_reviewed_wording(
                         and not evidence_quotes
                     )
                 )
-                and normalize_question(reference.canonical_answer)
-                not in normalize_question(candidate)
+                and not normalized_token_sequence_contains(
+                    candidate, reference.canonical_answer
+                )
             )
             reason = "accepted-model-wording" if accepted else "verifier-disagreement"
         normalized = normalize_question(candidate) if accepted else ""

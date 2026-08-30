@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-003-invalid",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-retrieval-decision",
+  "corpus_id": "four-public-open-educational-source-families",
+  "code_revision": "e9164becc68a0a8273d8aa490569d8f3f97d8929",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "api-first-finite-program-003",
+        "version": "invalid-nano-transport",
+        "configuration": {
+          "manifest_sha256": "8aee50a8fd0d2de020c524ed6e73b2a8a08889dad46901baa2a47b741edeb8df",
+          "embedding_calls": 8,
+          "nano_calls": 1,
+          "reported_cost_usd": 0.00016134,
+          "product_calls": 0,
+          "hidden_gold_loaded": false,
+          "final_10000_opened": false
+        }
+      },
+      "metrics": [
+        {"name": "provider-call-count", "value": 9.0, "unit": "count", "direction": "lower-is-better", "threshold": 104.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.00016134, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true},
+        {"name": "scored-case-count", "value": 0.0, "unit": "cases", "direction": "higher-is-better", "threshold": 300.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "stable-optional-reranker-response", "passed": false, "evidence": "The first nano request returned a non-completed OpenAI response and the automatic correction reproduced the stop."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "No retrieval scoring, product response, or final case was opened."}
+      ],
+      "failures_by_category": {"provider-incomplete-response": 1}
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-reranker-execution-control",
+        "version": "program-003-invalid",
+        "configuration": {"nano_calls": 0, "reported_cost_usd": 0.0, "hidden_gold_loaded": false}
+      },
+      "metrics": [
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 104.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.0, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true},
+        {"name": "scored-case-count", "value": 0.0, "unit": "cases", "direction": "higher-is-better", "threshold": 300.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "stable-optional-reranker-response", "passed": false, "evidence": "The shared optional reranker did not produce a completed response."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "The invalid stop prevented scoring and final access."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The run was operationally invalid. Exclude the optional unstable reranker and retain the deterministic comparisons under unchanged truth and gates.",
+    "limitations": ["No retrieval or product quality metric was measured.", "The complete provider-side incomplete reason was not persisted."]
+  }
+}

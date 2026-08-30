@@ -109,6 +109,7 @@ from src.digital_twin.evaluation.finite_program import (
 from src.digital_twin.evaluation.finite_program_dataset import (
     FiniteProgramDatasetError,
     apply_reviewed_wording,
+    build_atomic_final_rows,
     build_canonical_final_rows,
     package_rows,
     paired_control_subset,
@@ -185,6 +186,7 @@ __all__ = [
     "assemble_deterministic_verified_cluster",
     "assemble_verified_cluster",
     "assign_boundary_courses",
+    "build_atomic_final_rows",
     "build_course_scoped_ladders",
     "build_canonical_final_rows",
     "build_deterministic_cluster_truth",

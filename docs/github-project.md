@@ -44,18 +44,15 @@ and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
 The sealed 10,000-case execution stays in #127 as the first post-demo academic
-goal. AFQC-105 selected the unchanged small hybrid retriever over unique atomic
-evidence, but AFQC-109 then validly showed that the actual T0 product was not
-usable: 44.25% fully grounded success, 75% overall action accuracy, 89%
-boundary accuracy, and five unsafe ambiguity releases. That authority is
-revoked and the consumed 500 cases cannot be tuned or rerun. AFQC-110 built one
-finite successor with deterministic action routing and question-targeted atomic
-generation over fresh source ranges. AFQC-111/112 preserve its two permitted
-execution attempts as operationally invalid: attempt 001 stopped before calls
-on an embedding batch/client mismatch; attempt 002 completed 15 embedding calls
-for USD 0.00057488, then stopped before product case 1 on a missing `binding_id`
-runtime contract. Authorization is revoked, no quality result exists, and the
-sealed 10,000 cases remain unopened. #127 stays In Progress / Refine /
+goal. AFQC-113/114 preserve two operationally invalid API-first successors.
+AFQC-115 corrects program 004 to invalid because 0/456 gold references exactly
+matched its parent-section runtime corpus; its retrieval percentages cannot
+support a decision. AFQC-116 freezes program 005 as the single harness-only
+successor. It binds the reviewed action-router 500+100 package to 300
+non-overlapping source atoms, proves 452/452 exact reference matchability before
+network access, and atomizes the final corpus before any 10,000+1,000 stage.
+The visual supplement remains `Go Deeper`; the synthetic C0-C2 diagnostic is
+not professor-fidelity evidence. #127 stays In Progress / Go Deeper /
 priority:p0. #105 and #131 remain evidence
 consumers; #24 and #10 retain their professor-approval and external-human
 boundaries. The qualified local R1 remains unchanged.
@@ -79,13 +76,12 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must preserve AFQC-109 as valid unfavorable quality evidence and
-   AFQC-111/112 as terminal invalid execution evidence. Do not retry AFQC-110.
-   Make one explicit harness/method decision before any new factual checkpoint;
-   the qualified local R1 and deterministic rollback remain unchanged.
+1. #127 must preserve AFQC-109 as unfavorable quality evidence and AFQC-111–115
+   as invalid operational evidence. Execute program 005 once against its fresh,
+   exactly matchable action-router package; do not reuse program 004 metrics.
 
-2. Keep #105 and sealed 10,000+1,000 execution closed until a new prospective
-   checkpoint produces a valid leakage-free actual-product result.
+2. Program 005 automatically opens 500+100 after retrieval passes and opens the
+   sealed 10,000+1,000 stage only after the leakage-free product result passes.
 3. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 4. #131 — retain the terminal visual diagnostic and design a separate true-
