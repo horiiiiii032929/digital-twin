@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-atomic-m2-product-checkpoint-001",
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-atomic-m2-product-development-001",
+  "code_revision": "294e9c41fdf565a66574d31161a927c3b8ba4fb0",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "atomic-m2-any-hit-t0-control",
+        "version": "001",
+        "configuration": {"case_count": 100, "evidence_gate": "any-hit", "model": "gpt-5.4-mini-2026-03-17"}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.4375, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.725, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.95, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-precision", "value": 0.4875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.55625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.54375, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.61875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "source-version-validity", "value": 0.9875, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "complete-evidence-at-3", "value": 0.975, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9875, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "provider-completion", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.995, "passed": true},
+        {"name": "severe-unsupported-releases", "value": 1.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "hidden-gold-isolation", "passed": true, "evidence": "Both response ledgers completed before gold opened."},
+        {"name": "exact-provider-identity-and-accounting", "passed": true, "evidence": "Every call returned the frozen model and complete accounting."},
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One severe ambiguity release occurred in the paired control."}
+      ],
+      "failures_by_category": {"severe-boundary-release": 1, "answerable-action-error": 22}
+    },
+    {
+      "implementation": {
+        "implementation_id": "atomic-m2-structured-t0-candidate",
+        "version": "001",
+        "configuration": {"case_count": 500, "evidence_gate": "structured-coverage", "model": "gpt-5.4-mini-2026-03-17"}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.4425, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.715, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.89, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-precision", "value": 0.5085416666666667, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.595, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.5564583333333334, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.65125, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "source-version-validity", "value": 0.9675, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "complete-evidence-at-3", "value": 0.9625, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9725, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "provider-completion", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.995, "passed": true},
+        {"name": "severe-unsupported-releases", "value": 5.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "hidden-gold-isolation", "passed": true, "evidence": "Both response ledgers completed before gold opened."},
+        {"name": "exact-provider-identity-and-accounting", "passed": true, "evidence": "572 calls completed with exact identity, zero retry, and complete accounting."},
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "Five severe ambiguity releases occurred."}
+      ],
+      "failures_by_category": {"severe-boundary-release": 5, "answerable-action-error": 114, "incomplete-evidence-at-3": 15}
+    }
+  ],
+  "conditions": {
+    "candidate": "atomic M2 retrieval plus structured evidence coverage",
+    "control": "the same product configuration plus any-hit release"
+  },
+  "sample": {
+    "candidate_cases": 500,
+    "candidate_answerable": 400,
+    "candidate_boundary": 100,
+    "paired_control_cases": 100,
+    "source_family_count": 99,
+    "public_sources_only": true,
+    "human_participants": 0
+  },
+  "candidate_metrics": {
+    "fully_grounded_factual_success": 0.4425,
+    "fully_grounded_source_family_lower_95": 0.3888888888888889,
+    "overall_grounded_task_success": 0.532,
+    "action_accuracy_overall": 0.75,
+    "action_accuracy_answerable": 0.715,
+    "boundary_action_accuracy": 0.89,
+    "atomic_claim_precision": 0.5085416666666667,
+    "atomic_claim_recall": 0.595,
+    "citation_precision": 0.5564583333333334,
+    "citation_recall": 0.65125,
+    "source_version_validity": 0.9675,
+    "complete_evidence_at_3": 0.9625,
+    "evidence_recall_at_5": 0.9725,
+    "provider_completion": 1.0,
+    "severe_unsupported_release_count": 5,
+    "latency_p95_ms": 2299.3876670002464
+  },
+  "paired_metrics": {
+    "candidate_boundary_safety": 0.9,
+    "control_boundary_safety": 0.95,
+    "boundary_safety_delta": -0.04999999999999993,
+    "supported_answer_retention_estimate": -0.05263157894736842,
+    "supported_answer_retention_lower_95": -0.15789473684210525
+  },
+  "failure_classification": {
+    "answerable_released_as_answer": 286,
+    "answerable_abstained": 61,
+    "answerable_clarified": 53,
+    "ambiguity_correctly_clarified": 14,
+    "ambiguity_abstained_instead": 6,
+    "ambiguity_answered_unsafely": 5,
+    "answered_cases_with_extra_target_claims": 114,
+    "answered_cases_with_extra_target_citations": 96,
+    "retrieval_incomplete_at_3": 15
+  },
+  "operational_summary": {
+    "provider": "OpenAI direct Responses API",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "provider_calls": 572,
+    "provider_attempts": 572,
+    "failed_calls": 0,
+    "input_tokens": 426021,
+    "output_tokens": 88380,
+    "reported_cost_usd": 0.71722575,
+    "maximum_latency_ms": 13000.876250000147,
+    "hidden_gold_loaded_only_after_both_response_ledgers": true,
+    "private_data_used": false,
+    "final_10000_opened": false,
+    "candidate_response_ledger_sha256": "ac14a6a2fdf76681966772ded06ff4609ba7a93d25d1809162957a353a2aaf87",
+    "control_response_ledger_sha256": "ebf7a8055e63d88c1fa2d88c657157b76d94f991971705d5e96e71acab072656",
+    "paired_result_sha256": "d7d4af70fdab9588430c17c437b7cec3e9b782612437336d04cf9594f1b3bed9"
+  },
+  "audit": {
+    "priority_case_count": 12,
+    "five_severe_ambiguity_releases_confirmed": true,
+    "source_truth_defect_confirmed": false,
+    "supported_extra_content_penalized_by_target_precision": true,
+    "weak_or_awkward_reference_wording_disclosed": true,
+    "independent_external_human_annotation": false,
+    "artifact": "research/05_evaluation/judgments/academic-factual-qa-atomic-m2-product-checkpoint-001-codex-audit.json"
+  },
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Retrieval remained strong, but the actual T0 product failed answer action, ambiguity safety, target claim/citation, and paired non-inferiority gates.",
+    "next_method_decision": "Separate deterministic action routing from answer generation and constrain generation to question-required evidence before collecting a fresh confirmation tranche.",
+    "authorization_revoked": true,
+    "sealed_10000_blocked": true,
+    "limitations": [
+      "Deterministic questions include awkward or markup-oriented wording and are not usability evidence.",
+      "Target precision penalizes source-supported extra context.",
+      "The audit lacks independent external human annotation.",
+      "True visual understanding and professor fidelity are outside this run."
+    ]
+  },
+  "limitations": [
+    "The public questions are deterministic development references and include awkward or markup-oriented wording that is not representative usability evidence.",
+    "Claim and citation precision measure agreement with question-required target evidence; supported but additional course facts are penalized as off-target.",
+    "The direct audit is Codex-assisted researcher review, not independent external human annotation.",
+    "This run evaluates text and structured-text/OCR-style evidence, not true visual understanding or professor fidelity."
+  ]
+}

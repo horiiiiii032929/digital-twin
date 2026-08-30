@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "00f3e6535f8159180e6585640bc5261e12965955ef8479d678acda7d49a9e542"
+      "sha256": "9a49d5ed2904d0c5e1ef4a20848d88448f8b03626ae50250b443daef8a9d8546"
     },
     {
       "audit_status": "audited",
@@ -6291,7 +6291,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "535a9ab4aecc7488c8f77cbc653df6deeacf0ef470482eff7c7871841fbf4315"
+      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
     },
     {
       "audit_status": "audited",
@@ -7952,7 +7952,7 @@
       "path": "tests/test_nonhuman_evaluation_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "2b77665cd9109e40cc3e8709c7f97ce8d4f3d2035375f9f54da8dad66d33dbab"
+      "sha256": "6974e6dafa505e25b84f3541b0149e93bd039002fb2aabd7c9d875a8e5411f45"
     },
     {
       "audit_status": "audited",
@@ -8123,12 +8123,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "nonhuman-evaluation-supplements-verification",
-      "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, terminal semantic-output invalidation, independent profile-only execution, safe output roots, identity and ledger checks, simulated pass/failure propagation, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
+      "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, terminal semantic-output invalidation, independent profile-only execution, safe output roots, identity and ledger checks, simulated pass/failure propagation, C0-C2 condition handling, resume rejection for corrupted or exclusive outputs, and explicit test-only authorization substitution after the real program authority was revoked.",
       "findings": [],
       "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-agent-cross-review",
-      "sha256": "3623c7c3f84ff5efb30bcdb26b4e022e2be17173117ac2a0a85fed3ffb77fa0e"
+      "sha256": "58276fda315aa6e75b548eef49b5d009312ececcac0afd9004f63dd7aa702c3d"
     },
     {
       "audit_status": "audited",

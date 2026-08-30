@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "audit_id": "academic-factual-qa-atomic-m2-product-checkpoint-001-codex-audit",
+  "run_id": "academic-factual-qa-atomic-m2-product-checkpoint-001",
+  "reviewer": "codex-assisted-researcher-audit",
+  "case_count": 12,
+  "independent_external_human_annotation": false,
+  "authoritative_source_truth_changed": false,
+  "cases": [
+    {"case_id": "academic-atomic-m2-dev-0007-q5", "category": "critical-boundary-release", "disposition": "confirmed-product-defect", "reason": "A deictic ambiguity required clarification, but the product released adjacent protocol steps."},
+    {"case_id": "academic-atomic-m2-dev-0023-q5", "category": "critical-boundary-release", "disposition": "confirmed-product-defect", "reason": "A deictic ambiguity required clarification, but the product selected an unrelated nearby JSON-RPC example."},
+    {"case_id": "academic-atomic-m2-dev-0031-q5", "category": "critical-boundary-release", "disposition": "confirmed-product-defect", "reason": "A deictic ambiguity required clarification, but the product answered with nearby ArrayStack text."},
+    {"case_id": "academic-atomic-m2-dev-0035-q5", "category": "critical-boundary-release", "disposition": "confirmed-product-defect", "reason": "The product answered the phrase 'what it does next' from coincidental wording rather than clarifying the referent."},
+    {"case_id": "academic-atomic-m2-dev-0039-q5", "category": "critical-boundary-release", "disposition": "confirmed-product-defect", "reason": "A deictic ambiguity required clarification, but the product released a nearby linear-hashing example."},
+    {"case_id": "academic-atomic-m2-dev-0001-q2", "category": "answerable-false-negative", "disposition": "confirmed-with-wording-limitation", "reason": "Required evidence was retrieved, but the model abstained; the deterministic question is awkward and this limits generalization."},
+    {"case_id": "academic-atomic-m2-dev-0002-q1", "category": "answerable-false-negative", "disposition": "confirmed-product-defect", "reason": "The direct source-title question and exact evidence were present, but the product abstained."},
+    {"case_id": "academic-atomic-m2-dev-0003-q3", "category": "answerable-false-negative", "disposition": "confirmed-with-reference-limitation", "reason": "The table label is exactly source-linked, but the target is pedagogically weak and markup-oriented."},
+    {"case_id": "academic-atomic-m2-dev-0002-q3", "category": "off-target-expansion", "disposition": "supported-extra-content", "reason": "The answer contained the required source fact plus another source-supported sentence; target precision penalizes the expansion, not a hallucination."},
+    {"case_id": "academic-atomic-m2-dev-0005-q3", "category": "off-target-expansion", "disposition": "supported-extra-content", "reason": "The answer contained the required sentence plus two source-supported contextual statements, lowering strict target precision."},
+    {"case_id": "academic-atomic-m2-dev-0003-q4", "category": "structured-table-false-negative", "disposition": "confirmed-with-reference-limitation", "reason": "The exact table label was retrieved, but the product abstained; the question tests markup recovery more than natural tutoring."},
+    {"case_id": "academic-atomic-m2-dev-0034-q4", "category": "structured-table-false-negative", "disposition": "confirmed-with-reference-limitation", "reason": "The exact LaTeX table entry was source-linked, but the product abstained and the target is not representative student wording."}
+  ],
+  "conclusion": "The Refine decision is robust because the five severe ambiguity releases and broad action failures are genuine product defects. Strict claim/citation precision is additionally affected by supported extra facts, while some deterministic questions are weak usability proxies."
+}

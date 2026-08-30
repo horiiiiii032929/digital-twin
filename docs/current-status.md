@@ -167,6 +167,22 @@ construction. The separate terminal visual diagnostic cannot block this
 text/OCR track, and the synthetic-profile Refine result cannot support a
 professor-fidelity claim.
 
+AFQC-109 records that checkpoint as valid `completed-refine`. All 500 candidate
+and 100 control responses completed through 572 exact GPT-5.4 mini calls with
+zero failed calls or retries for USD 0.71722575. Candidate retrieval retained
+96.25% complete evidence@3 and 97.25% Recall@5, but the actual product reached
+only 44.25% fully grounded factual success, 71.5% answerable action accuracy,
+89% boundary action accuracy, 50.85% claim precision, and 55.65% citation
+precision. It released answers to five ambiguity cases that required
+clarification. Direct audit confirmed those five as genuine product defects;
+it also found that strict target precision penalizes some source-supported
+extra context and that several markup-oriented references are weak usability
+proxies. The valid failure terminates this factual branch and revokes the
+program authority. The sealed 10,000+1,000 set remains unopened. The next
+method-level decision is a deterministic boundary/action router plus
+question-targeted generation on a fresh tranche, not another run over these
+known cases.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

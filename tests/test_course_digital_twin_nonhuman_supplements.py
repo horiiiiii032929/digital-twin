@@ -355,6 +355,11 @@ def test_public_preflight_enforces_exclusive_and_resume_outputs(
     monkeypatch.setattr(runner, "GENERATED_ROOT", tmp_path.resolve())
     monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
     monkeypatch.setattr(runner.shutil, "which", lambda _: "/usr/bin/rsvg-convert")
+    monkeypatch.setattr(
+        runner,
+        "require_bounded_pilot_operation_allowed",
+        lambda *_args, **_kwargs: None,
+    )
     monkeypatch.setenv("OPENAI_API_KEY", "test-only")
 
     ready = runner.preflight(output_root=output, resume=False)
@@ -386,6 +391,11 @@ def test_interrupted_execution_resumes_atomically_and_corrupt_ledger_stops(
     profile_by_id = {case["case_id"]: case for case in profile_cases}
     monkeypatch.setattr(runner, "GENERATED_ROOT", tmp_path.resolve())
     monkeypatch.setattr(runner, "_repo_revision", lambda: "b" * 40)
+    monkeypatch.setattr(
+        runner,
+        "require_bounded_pilot_operation_allowed",
+        lambda *_args, **_kwargs: None,
+    )
     monkeypatch.setattr(
         runner.visual_builder,
         "build_dataset",

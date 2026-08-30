@@ -3,8 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
-from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
+from src.digital_twin.repository_freeze import (
+    RepositoryFreezeError,
+    require_bounded_pilot_operation_allowed,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,11 +34,12 @@ def test_nonhuman_program_has_one_authority_and_finite_budget() -> None:
     assert payload["human_participant_execution_authorized"] is False
 
 
-def test_program_authority_covers_nonhuman_operations_only() -> None:
+def test_completed_program_authority_is_revoked() -> None:
     for operation in (
         "dataset_generation",
         "external_model_evaluation",
         "heldout_execution",
         "method_evaluation_execution",
     ):
-        require_bounded_pilot_operation_allowed(PROGRAM_ID, operation)
+        with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+            require_bounded_pilot_operation_allowed(PROGRAM_ID, operation)
