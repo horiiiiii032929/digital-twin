@@ -73,6 +73,8 @@ PROFILE_LEDGER_NAME = "stage-b-profile-provider.sqlite3"
 VISUAL_EVIDENCE_NAME = "stage-a-visual-evidence.json"
 PROFILE_EVIDENCE_NAME = "stage-b-profile-evidence.json"
 COMBINED_EVIDENCE_NAME = "supplementary-result.json"
+VISUAL_RASTER_MAX_WIDTH = 1600
+VISUAL_RASTER_MAX_HEIGHT = 1600
 
 VISUAL_MODEL = "gpt-5.4-nano-2026-03-17"
 PROFILE_MODEL = "gpt-5.4-mini-2026-03-17"
@@ -617,7 +619,17 @@ def _image_data_url(asset: dict[str, Any], output_root: Path) -> str:
             rendered = Path(directory) / "asset.png"
             try:
                 subprocess.run(
-                    ["rsvg-convert", "-o", str(rendered), str(path)],
+                    [
+                        "rsvg-convert",
+                        "--keep-aspect-ratio",
+                        "--width",
+                        str(VISUAL_RASTER_MAX_WIDTH),
+                        "--height",
+                        str(VISUAL_RASTER_MAX_HEIGHT),
+                        "--output",
+                        str(rendered),
+                        str(path),
+                    ],
                     check=True,
                     capture_output=True,
                 )

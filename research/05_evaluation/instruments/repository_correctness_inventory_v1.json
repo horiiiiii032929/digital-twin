@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "df91dd44106dedb447398dfc6a9b02a8a6fdf394cd13e20dc76f3e44b3d1a1bd",
+  "record_sha256": "5896def582aef517e34cfd7513a247a21a42e35da8582eb6ab0226094de30e67",
   "records": [
     {
       "audit": {
@@ -6518,7 +6518,7 @@
     {
       "audit": {
         "domain": "nonhuman-evaluation-supplements",
-        "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, original-region authority, explicit C0-C2-only claims, independent stage outcomes, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
+        "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, bounded deterministic SVG rasterization, transmitted-raster hashes, original-region authority, explicit C0-C2-only claims, independent stage outcomes, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-agent-cross-review"
@@ -6535,7 +6535,7 @@
       ],
       "path": "scripts/run_course_digital_twin_nonhuman_supplements.py",
       "risk": "high",
-      "sha256": "7a6773aca12be2009b4cc3df279c2291bc63a893a710b530546b5238893f4431"
+      "sha256": "47c36cdafb867f29ff7f81d5652a4715dcce5f520b27345812aaaf37a86b3934"
     },
     {
       "audit": {
@@ -11247,7 +11247,7 @@
     {
       "audit": {
         "domain": "nonhuman-evaluation-supplements-verification",
-        "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, safe output roots, identity and ledger checks, simulated pass/failure propagation, visual scoring, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
+        "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, safe output roots, identity and ledger checks, simulated pass/failure propagation, visual scoring, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-agent-cross-review"
@@ -11258,7 +11258,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
       "risk": "medium",
-      "sha256": "c615a26ee6ec80589207698188bd1b4c754e118f086c47983f3d71bf01706274"
+      "sha256": "ce7be8e58a72d323682769dc05e5c4c2f635b5cbe9777da2d5178a45b974a985"
     },
     {
       "audit": {

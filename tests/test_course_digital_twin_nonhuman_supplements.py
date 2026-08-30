@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import hashlib
 import inspect
 import json
 from pathlib import Path
 import sqlite3
+import struct
 
 import pytest
 
@@ -243,6 +245,24 @@ def test_visual_candidate_rejects_unsupported_segments_and_raster_drift() -> Non
         code_revision="a" * 40,
     )
     assert drifted["stage_status"] == "completed-refine"
+
+
+def test_oversized_svg_is_rasterized_within_memory_bound(tmp_path: Path) -> None:
+    dataset = runner._visual_dataset()
+    oversized = next(
+        asset
+        for asset in dataset["assets"]
+        if asset["asset_id"] == "afqv001-asset-029"
+    )
+
+    data_url = runner._image_data_url(oversized, tmp_path)
+    raw = base64.b64decode(data_url.split(",", 1)[1], validate=True)
+    assert raw[:8] == b"\x89PNG\r\n\x1a\n"
+    width, height = struct.unpack(">II", raw[16:24])
+    assert width <= runner.VISUAL_RASTER_MAX_WIDTH
+    assert height <= runner.VISUAL_RASTER_MAX_HEIGHT
+    assert width > 0
+    assert height > 0
 
 
 def test_profile_candidate_requires_real_feature_names_and_paired_effect() -> None:
