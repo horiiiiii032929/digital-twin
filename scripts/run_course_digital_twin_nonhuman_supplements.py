@@ -26,6 +26,8 @@ import subprocess
 import tempfile
 from typing import Any, Callable
 
+from dotenv import load_dotenv
+
 from scripts import build_academic_factual_qa_visual_supplement as visual_builder
 from src.digital_twin.evaluation.finite_program_io import atomic_write_json
 from src.digital_twin.evaluation.provider_json import (
@@ -83,6 +85,28 @@ CONDITIONS = ("C0", "C1", "C2")
 SKIPPED_CONDITION = "C3"
 
 _TOKEN_PATTERN = re.compile(r"[a-z0-9_+.-]+")
+_SUPPORT_STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "that",
+    "the",
+    "to",
+    "with",
+}
 _ALLOWED_ASSET_ROOTS = (
     (ROOT / "data/external/academic_factual_qa_confirmation_002").resolve(),
     (ROOT / "reports/generated/academic-factual-qa-visual-supplement-001").resolve(),
@@ -384,6 +408,14 @@ def _recall(required: str, observed: str) -> float:
     return len(required_tokens & _tokens(observed)) / len(required_tokens)
 
 
+def _supported_precision(required: str, observed: str) -> float:
+    required_tokens = _tokens(required) - _SUPPORT_STOPWORDS
+    observed_tokens = _tokens(observed) - _SUPPORT_STOPWORDS
+    if not observed_tokens:
+        return 0.0
+    return len(required_tokens & observed_tokens) / len(observed_tokens)
+
+
 def _repo_revision() -> str:
     return subprocess.run(
         ["git", "rev-parse", "HEAD"],
@@ -598,6 +630,17 @@ def _image_data_url(asset: dict[str, Any], output_root: Path) -> str:
     return f"data:{mime_type};base64," + base64.b64encode(image).decode("ascii")
 
 
+def _image_data_sha256(data_url: str) -> str:
+    try:
+        header, encoded = data_url.split(",", 1)
+        if not header.startswith("data:image/") or ";base64" not in header:
+            raise ValueError
+        payload = base64.b64decode(encoded, validate=True)
+    except (ValueError, TypeError) as error:
+        raise SupplementaryEvaluationError("visual image payload is malformed") from error
+    return hashlib.sha256(payload).hexdigest()
+
+
 def _visual_prompt(asset: dict[str, Any]) -> tuple[str, str]:
     system = (
         "Describe only facts visibly present in this educational image. "
@@ -620,26 +663,32 @@ def _visual_prompt(asset: dict[str, Any]) -> tuple[str, str]:
 
 
 def _description_record(
-    asset: dict[str, Any], response: ProviderJsonResponse
+    asset: dict[str, Any],
+    response: ProviderJsonResponse,
+    *,
+    transmitted_image_sha256: str,
+    expected_transmitted_image_sha256: str,
 ) -> dict[str, Any]:
     if response.provider_model != VISUAL_MODEL or response.attempt_count != 1:
         raise SupplementaryEvaluationError("visual provider identity or retry drifted")
     content = response.content
-    text = "\n".join(
-        [
-            str(content["transcription"]),
-            *[str(value) for value in content["entities"]],
-            *[str(value) for value in content["relationships"]],
-        ]
-    )
+    segments = [
+        str(content["transcription"]),
+        *[str(value) for value in content["entities"]],
+        *[str(value) for value in content["relationships"]],
+    ]
+    text = "\n".join(segments)
     return {
         "asset_id": asset["asset_id"],
         "course_id": asset["course_id"],
         "modality": asset["modality"],
         "source_document_path": asset["source_document_path"],
         "source_image_sha256": asset["render_sha256"],
+        "transmitted_image_sha256": transmitted_image_sha256,
+        "expected_transmitted_image_sha256": expected_transmitted_image_sha256,
         "region_ids": [row["region_id"] for row in asset["region_lineage"]],
         "description_text": text,
+        "description_segments": segments,
     }
 
 
@@ -687,6 +736,7 @@ def _visual_retrieval_metrics(
                     " ".join(
                         [
                             row["description_text"] if generated else "",
+                            row.get("retrieval_alias", "") if generated else "",
                             row["modality"],
                             row["source_document_path"],
                         ]
@@ -718,6 +768,20 @@ def _visual_retrieval_metrics(
             if generated and target is not None
             else 0.0
         )
+        fact_precision = (
+            _supported_precision(case["canonical_answer"], target["description_text"])
+            if generated and target is not None
+            else 0.0
+        )
+        unsupported_segments = (
+            [
+                segment
+                for segment in target.get("description_segments", [])
+                if _supported_precision(case["canonical_answer"], segment) < 0.50
+            ]
+            if generated and target is not None
+            else []
+        )
         answerable_evidence.append(
             {
                 "case_id": case["case_id"],
@@ -726,6 +790,8 @@ def _visual_retrieval_metrics(
                 "asset_retrieved_at_3": asset_at_three,
                 "required_region_lineage_at_3": lineage_at_three,
                 "visual_fact_recall": fact_recall,
+                "visual_fact_precision": fact_precision,
+                "unsupported_segment_count": len(unsupported_segments),
             }
         )
     complete = sum(
@@ -738,19 +804,29 @@ def _visual_retrieval_metrics(
     fact_recall = sum(
         float(row["visual_fact_recall"]) for row in answerable_evidence
     ) / len(answerable_evidence)
+    fact_precision = sum(
+        float(row["visual_fact_precision"]) for row in answerable_evidence
+    ) / len(answerable_evidence)
+    unsupported_visual_facts = sum(
+        int(row["unsupported_segment_count"]) for row in answerable_evidence
+    )
     boundary_correct = sum(row["action_correct"] for row in boundary_evidence)
     boundary_releases = sum(row["answer_released"] for row in boundary_evidence)
     lineage_count = sum(
         set(row["region_ids"])
         == {value["region_id"] for value in assets[row["asset_id"]]["region_lineage"]}
         and row["source_image_sha256"] == assets[row["asset_id"]]["render_sha256"]
+        and row["transmitted_image_sha256"]
+        == row["expected_transmitted_image_sha256"]
         for row in descriptions
     )
     return {
         "complete_evidence_at_3": complete / len(answerable_evidence),
         "complete_evidence_at_3_count": complete,
         "answerable_visual_fact_recall": fact_recall,
+        "answerable_visual_fact_precision": fact_precision,
         "answerable_fact_complete_count": fact_complete,
+        "unsupported_visual_fact_count": unsupported_visual_facts,
         "boundary_policy_accuracy": boundary_correct / len(boundary_evidence),
         "boundary_release_count": boundary_releases,
         "original_region_lineage_rate": lineage_count / len(descriptions),
@@ -791,6 +867,9 @@ def _visual_evidence_payload(
     quality_passed = (
         candidate["complete_evidence_at_3"] >= 0.90
         and candidate["answerable_fact_complete_count"] >= 29
+        and candidate["answerable_visual_fact_recall"] >= 29 / 30
+        and candidate["answerable_visual_fact_precision"] >= 0.90
+        and candidate["unsupported_visual_fact_count"] == 0
         and candidate["boundary_policy_accuracy"] == 1.0
         and candidate["boundary_release_count"] == 0
         and candidate["original_region_lineage_rate"] == 1.0
@@ -823,6 +902,11 @@ def _visual_evidence_payload(
                     29 / 30,
                 ),
                 _metric(
+                    "answerable-visual-fact-precision",
+                    float(metrics["answerable_visual_fact_precision"]),
+                    0.90,
+                ),
+                _metric(
                     "boundary-policy-accuracy",
                     float(metrics["boundary_policy_accuracy"]),
                     1.0,
@@ -840,6 +924,11 @@ def _visual_evidence_payload(
                 ),
             ],
             "hard_gates": [
+                {
+                    "name": "zero-unsupported-visual-facts",
+                    "passed": metrics["unsupported_visual_fact_count"] == 0,
+                    "evidence": "Every accepted transcription, entity, and relationship segment must be deterministically supported by the canonical visual fact.",
+                },
                 {
                     "name": "public-only-inputs",
                     "passed": dataset["private_data_used"] is False,
@@ -874,6 +963,9 @@ def _visual_evidence_payload(
                 - int(round(float(metrics["boundary_policy_accuracy"]) * 30)),
                 "boundary-release": int(metrics["boundary_release_count"]),
                 "lineage-error": 30 - int(metrics["original_region_lineage_count"]),
+                "unsupported-visual-fact": int(
+                    metrics["unsupported_visual_fact_count"]
+                ),
             },
         }
 
@@ -993,7 +1085,11 @@ def _expected_profile_action(case: dict[str, Any], condition: str) -> str:
 
 
 def _profile_metrics(
-    cases: list[dict[str, Any]], outputs: list[dict[str, Any]], condition: str
+    cases: list[dict[str, Any]],
+    outputs: list[dict[str, Any]],
+    condition: str,
+    *,
+    allowed_profile_features: set[str],
 ) -> dict[str, Any]:
     selected = [row for row in outputs if row["condition"] == condition]
     if len(selected) != len(cases):
@@ -1020,10 +1116,12 @@ def _profile_metrics(
             if case["expected_action"] == "answer"
             else 1.0
         )
+        applied_features = set(row["applied_profile_features"])
         profile_contract = (
-            bool(row["applied_profile_features"])
+            bool(applied_features)
+            and applied_features <= allowed_profile_features
             if condition == "C2"
-            else not row["applied_profile_features"]
+            else not applied_features
         )
         unsupported_release = row["action"] == "answer" and (
             condition == "C0" or case["expected_action"] != "answer"
@@ -1090,10 +1188,27 @@ def _profile_evidence_payload(
     code_revision: str,
 ) -> dict[str, Any]:
     metrics = {
-        condition: _profile_metrics(cases, outputs, condition)
+        condition: _profile_metrics(
+            cases,
+            outputs,
+            condition,
+            allowed_profile_features=set(profile["dimensions"]),
+        )
         for condition in CONDITIONS
     }
     candidate = metrics["C2"]
+    c1_by_id = {
+        row["case_id"]: row for row in outputs if row["condition"] == "C1"
+    }
+    c2_by_id = {
+        row["case_id"]: row for row in outputs if row["condition"] == "C2"
+    }
+    paired_profile_effect_count = sum(
+        c1_by_id[case["case_id"]]["response"].strip()
+        != c2_by_id[case["case_id"]]["response"].strip()
+        for case in cases
+    )
+    paired_profile_effect_rate = paired_profile_effect_count / len(cases)
     quality_passed = (
         candidate["action_accuracy"] >= 0.95
         and candidate["boundary_policy_accuracy"] == 1.0
@@ -1101,6 +1216,7 @@ def _profile_evidence_payload(
         and candidate["lineage_accuracy"] == 1.0
         and candidate["condition_contract_accuracy"] == 1.0
         and candidate["unsupported_release_count"] == 0
+        and paired_profile_effect_rate >= 0.75
     )
 
     def condition_record(condition: str) -> dict[str, Any]:
@@ -1146,6 +1262,11 @@ def _profile_evidence_payload(
                     0.0,
                     lower_is_better=True,
                 ),
+                _metric(
+                    "paired-profile-effect-rate",
+                    paired_profile_effect_rate,
+                    0.75,
+                ),
             ],
             "hard_gates": [
                 {
@@ -1167,6 +1288,11 @@ def _profile_evidence_payload(
                     ),
                     "evidence": "Thirty-six exact-model calls, zero retries, and the USD 1.5 stage stop are required.",
                 },
+                {
+                    "name": "paired-profile-effect",
+                    "passed": paired_profile_effect_rate >= 0.75,
+                    "evidence": "C2 must differ from paired C1 on at least nine of twelve responses while retaining identical truth and evidence gates.",
+                },
             ],
             "failures_by_category": {
                 "action-error": 12 - int(round(float(values["action_accuracy"]) * 12)),
@@ -1177,6 +1303,9 @@ def _profile_evidence_payload(
                 "condition-contract-error": 12
                 - int(round(float(values["condition_contract_accuracy"]) * 12)),
                 "unsupported-release": int(values["unsupported_release_count"]),
+                "missing-paired-profile-effect": (
+                    12 - paired_profile_effect_count if condition == "C2" else 0
+                ),
             },
         }
 
@@ -1189,6 +1318,8 @@ def _profile_evidence_payload(
         "program_manifest_stage": "synthetic-profile-c0-c3",
         "stage_status": "completed-go-deeper" if quality_passed else "completed-refine",
         "quality_gates_passed": quality_passed,
+        "paired_profile_effect_count": paired_profile_effect_count,
+        "paired_profile_effect_rate": paired_profile_effect_rate,
         "component": "tutor-policy",
         "dataset_id": "academic-factual-qa-visual-supplement-001-profile-stratified-12",
         "corpus_id": "public-and-synthetic-visual-facts-only",
@@ -1209,7 +1340,7 @@ def _profile_evidence_payload(
                 else None
             ),
             "rationale": (
-                "C2 passed the frozen synthetic diagnostic gates; this selects only the diagnostic condition for further non-human work."
+                "C2 passed the frozen synthetic diagnostic gates and demonstrated a paired response effect over C1; this supports further calibration but selects no professor profile."
                 if quality_passed
                 else "C2 completed validly but failed at least one frozen synthetic diagnostic gate."
             ),
@@ -1378,6 +1509,21 @@ async def _execute_visual_stage(
             run_id=VISUAL_RUN_ID,
             program_sha256=program["content_sha256"],
         )
+    image_payloads: dict[str, str] = {}
+    transmitted_image_hashes: dict[str, str] = {}
+    expected_image_hashes: dict[str, str] = {}
+    for asset in sorted(dataset["assets"], key=lambda row: row["asset_id"]):
+        actual = image_data_url_factory(asset, output_root)
+        expected = _image_data_url(asset, output_root)
+        actual_sha256 = _image_data_sha256(actual)
+        expected_sha256 = _image_data_sha256(expected)
+        if actual_sha256 != expected_sha256:
+            raise SupplementaryEvaluationError(
+                "transmitted visual raster does not match the pinned source render"
+            )
+        image_payloads[asset["asset_id"]] = actual
+        transmitted_image_hashes[asset["asset_id"]] = actual_sha256
+        expected_image_hashes[asset["asset_id"]] = expected_sha256
     existing_status = (
         _ledger_metadata(ledger_path).get("status") if ledger_path.exists() else None
     )
@@ -1412,7 +1558,7 @@ async def _execute_visual_stage(
                     prompt=prompt,
                     task="program-002-question-independent-visual-description",
                     schema=_visual_schema(),
-                    image_data_urls=[image_data_url_factory(asset, output_root)],
+                    image_data_urls=[image_payloads[asset["asset_id"]]],
                 )
                 responses[f"visual-{asset['asset_id']}"] = response
             snapshot = ledger.snapshot()
@@ -1442,7 +1588,16 @@ async def _execute_visual_stage(
             raise SupplementaryEvaluationError(
                 "visual response portfolio is incomplete"
             )
-        descriptions.append(_description_record(asset, responses[key]))
+        descriptions.append(
+            _description_record(
+                asset,
+                responses[key],
+                transmitted_image_sha256=transmitted_image_hashes[asset["asset_id"]],
+                expected_transmitted_image_sha256=expected_image_hashes[
+                    asset["asset_id"]
+                ],
+            )
+        )
     payload = _visual_evidence_payload(
         program=program,
         dataset=dataset,
@@ -1719,10 +1874,7 @@ def _simulated_description(
 ) -> dict[str, Any]:
     case = case_by_asset[asset["asset_id"]]
     text = (
-        # Simulation-only exact query text makes the positive control exercise
-        # every retrieval gate. Live provider prompts never receive questions.
-        f"{case['question']} {case['canonical_answer']} "
-        f"{asset['source_document_path']} {asset['modality']}"
+        case["canonical_answer"]
         if passing
         else "Unrelated visual content with no source-linked fact."
     )
@@ -1732,8 +1884,12 @@ def _simulated_description(
         "modality": asset["modality"],
         "source_document_path": asset["source_document_path"],
         "source_image_sha256": asset["render_sha256"],
+        "transmitted_image_sha256": asset["render_sha256"],
+        "expected_transmitted_image_sha256": asset["render_sha256"],
         "region_ids": [row["region_id"] for row in asset["region_lineage"]],
         "description_text": text,
+        "description_segments": [text],
+        "retrieval_alias": case["question"] if passing else "",
     }
 
 
@@ -1755,9 +1911,18 @@ def _simulated_profile_outputs(
                     "condition": condition,
                     "action": action,
                     "response": (
-                        case["canonical_answer"]
+                        (
+                            "Profile-guided explanation: "
+                            + case["canonical_answer"]
+                            if condition == "C2"
+                            else case["canonical_answer"]
+                        )
                         if answerable_with_evidence
-                        else "I cannot answer from authorized evidence."
+                        else (
+                            "Profile-guided boundary: I cannot answer from authorized evidence."
+                            if condition == "C2"
+                            else "I cannot answer from authorized evidence."
+                        )
                     ),
                     "evidence_region_ids": (
                         case["required_region_ids"]
@@ -1851,7 +2016,15 @@ def _arguments() -> argparse.Namespace:
 
 
 def main() -> int:
+    load_dotenv(ROOT / ".env")
     arguments = _arguments()
+    if arguments.execute:
+        require_bounded_pilot_operation_allowed(
+            PROGRAM_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            PROGRAM_ID, "method_evaluation_execution"
+        )
     if arguments.validate:
         result = validate()
     elif arguments.simulate:

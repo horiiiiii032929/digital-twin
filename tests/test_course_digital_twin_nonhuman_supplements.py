@@ -205,6 +205,75 @@ def test_profile_is_explicitly_c0_c2_and_discloses_c3_skip() -> None:
     assert all(row["condition"] != "C3" for row in payload["case_evidence"])
 
 
+def test_visual_candidate_rejects_unsupported_segments_and_raster_drift() -> None:
+    program = runner._load_program()
+    dataset = runner._visual_dataset()
+    case_by_asset = {
+        case["required_asset_ids"][0]: case
+        for case in dataset["cases"]
+        if case["expected_action"] == "answer"
+    }
+    descriptions = [
+        runner._simulated_description(asset, case_by_asset, passing=True)
+        for asset in dataset["assets"]
+    ]
+    descriptions[0]["description_text"] += "\nA private student failed this course."
+    descriptions[0]["description_segments"].append(
+        "A private student failed this course."
+    )
+    unsupported = runner._visual_evidence_payload(
+        program=program,
+        dataset=dataset,
+        descriptions=descriptions,
+        provider=_provider_snapshot(calls=30),
+        code_revision="a" * 40,
+    )
+    assert unsupported["stage_status"] == "completed-refine"
+
+    descriptions = [
+        runner._simulated_description(asset, case_by_asset, passing=True)
+        for asset in dataset["assets"]
+    ]
+    descriptions[0]["transmitted_image_sha256"] = "0" * 64
+    drifted = runner._visual_evidence_payload(
+        program=program,
+        dataset=dataset,
+        descriptions=descriptions,
+        provider=_provider_snapshot(calls=30),
+        code_revision="a" * 40,
+    )
+    assert drifted["stage_status"] == "completed-refine"
+
+
+def test_profile_candidate_requires_real_feature_names_and_paired_effect() -> None:
+    program = runner._load_program()
+    dataset = runner._visual_dataset()
+    profile = runner._synthetic_profile()
+    cases = runner._stratified_profile_cases(dataset)
+    outputs = runner._simulated_profile_outputs(cases, profile, passing=True)
+    for row in outputs:
+        if row["condition"] == "C2":
+            paired = next(
+                value
+                for value in outputs
+                if value["condition"] == "C1" and value["case_id"] == row["case_id"]
+            )
+            row["response"] = paired["response"]
+            row["applied_profile_features"] = ["not-a-real-profile-dimension"]
+    payload = runner._profile_evidence_payload(
+        program=program,
+        dataset=dataset,
+        profile=profile,
+        cases=cases,
+        outputs=outputs,
+        provider=_provider_snapshot(calls=36),
+        code_revision="a" * 40,
+    )
+    assert payload["stage_status"] == "completed-refine"
+    assert payload["paired_profile_effect_rate"] == 0.0
+    assert payload["decision"]["selected_implementation_id"] is None
+
+
 def test_simulation_is_provider_free_and_exercises_independent_failures() -> None:
     result = runner.simulate(visual_quality_pass=False, profile_quality_pass=False)
 
@@ -291,9 +360,17 @@ def test_interrupted_execution_resumes_atomically_and_corrupt_ledger_stops(
                 "condition": condition,
                 "action": action,
                 "response": (
-                    case["canonical_answer"]
+                    (
+                        "Profile-guided explanation: " + case["canonical_answer"]
+                        if condition == "C2"
+                        else case["canonical_answer"]
+                    )
                     if answerable
-                    else "I cannot answer from authorized evidence."
+                    else (
+                        "Profile-guided boundary: I cannot answer from authorized evidence."
+                        if condition == "C2"
+                        else "I cannot answer from authorized evidence."
+                    )
                 ),
                 "evidence_region_ids": case["required_region_ids"]
                 if answerable
@@ -318,6 +395,8 @@ def test_interrupted_execution_resumes_atomically_and_corrupt_ledger_stops(
 
     def image(_asset: dict[str, object], _root: Path) -> str:
         return "data:image/png;base64,AA=="
+
+    monkeypatch.setattr(runner, "_image_data_url", image)
 
     with pytest.raises(KeyboardInterrupt):
         asyncio.run(

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+import json
 
 import pytest
 
@@ -46,6 +47,11 @@ def test_atomic_m2_allocation_and_package_bounds(result) -> None:
     assert dict(observed) == expected
     assert source["target_allocation"] == TARGET_ALLOCATION
     assert source["registered_region_count"] == 300
+    assert all("reference_targets" not in row for row in source["clusters"])
+    assert all("text" not in row for row in source["clusters"])
+    serialized_source = json.dumps(source, sort_keys=True)
+    assert "canonical_claims" not in serialized_source
+    assert "evidence_spans" not in serialized_source
     assert source["public_sources_only"] is True
     assert source["private_data_read"] is False
     assert source["final_split_opened"] is False

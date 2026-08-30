@@ -918,6 +918,29 @@ Current utilities:
   execute/resume commands. AFQC-101 program authority removes a separate
   administrative approval; its USD 2 stage stop and all quality/privacy gates
   remain active.
+- `build_academic_factual_qa_atomic_m2_confirmation.py` and
+  `run_academic_factual_qa_atomic_m2_confirmation.py`: implement the single
+  prospective correction to AFQC-103's parent/child evidence-granularity
+  defect. The builder freezes 100 fresh source-family-disjoint clusters as 300
+  non-overlapping authoritative atoms and 500 unique cases. The runner compares
+  unchanged small hybrid M2 with one deterministic question-only marginal
+  coverage selector, persists public rankings before opening hidden gold, and
+  stops factual scaling if neither method passes the original evidence,
+  boundary, isolation, and latency gates. The existing non-human program is the
+  only paid authority; execution is capped at 20 calls, zero retries, and USD 1.
+  Use the `verify:`, `simulate:`, `preflight:`, `execute:`, and `resume:` package
+  commands ending in `academic-factual-qa-atomic-m2-confirmation`.
+- `run_course_digital_twin_nonhuman_supplements.py`: executes the two independent
+  non-human supplements under program 002 without reusing the terminated
+  program-001 dispatcher. Stage A compares text fallback with course-scoped
+  GPT-5.4 nano visual descriptions over 30 public visual clusters and 60 cases;
+  original region lineage remains authoritative and a visual quality failure is
+  recorded as Refine. Stage B runs an explicitly synthetic C0-C2 profile
+  diagnostic over 12 cases with GPT-5.4 mini; C3, real professor fidelity, and
+  human claims remain closed. The runner uses exclusive SQLite ledgers, exact
+  identity checks, zero retries, safe resume, 66 calls maximum, and separate USD
+  2/USD 1.5 stage stops. Use package commands ending in
+  `nonhuman-evaluation-supplements`.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 732
+    "audited": 739
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 169,
+    "active_or_unclassified_tooling": 172,
     "active_runtime": 127,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 180,
+    "evaluation_configuration": 181,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 157
+    "verification": 160
   },
-  "file_count": 732,
+  "file_count": 739,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "20a5150612752b2b73d8a47e204f6578bac23276a98471e3a1ac99cced93dff9",
+  "record_sha256": "df91dd44106dedb447398dfc6a9b02a8a6fdf394cd13e20dc76f3e44b3d1a1bd",
   "records": [
     {
       "audit": {
@@ -871,8 +871,8 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Command review adds deterministic package validation, terminal pass/fail simulations, no-call preflight, bounded execute/resume entrypoints, and retains the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "82108000cacea41c9e19670ab40b09456e9e2d8a2434153f190b192160247a48"
+      "sha256": "cc61aef37b3a8131a18892fd2f0c819d1d9dd6796793f7913c31a8918333c01e"
     },
     {
       "audit": {
@@ -1620,6 +1620,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
       "risk": "high",
       "sha256": "8928a07b48a03da917d6836b5db3384c46c181521575e08db5cbf0c5aa561082"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Prospective instrument review verifies exact hashes for the 100-cluster/500-case atomic package, unchanged M2 plus one deterministic selector, original hard gates, public-ranking-before-gold ordering, zero retries, USD 1 stop, and finite progression.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_confirmation_001.json",
+      "risk": "high",
+      "sha256": "f89208cabc9f52791fbfe9144b47bc29b2824cc935ee99a831a0932872a85913"
     },
     {
       "audit": {
@@ -4778,6 +4794,24 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Builder review and focused tests verify exactly 100 fresh source-family-disjoint clusters, 300 non-overlapping atoms, 500 unique cases, 451 uniquely mapped references, byte stability, and exclusive bounded writes without provider access.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-atomic-m2-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "high",
+      "sha256": "cf4556091c6767d5842f716ae8cd4abf830ef61a1c5a674582c49a3430d152c3"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Manual implementation review and focused tests verify deterministic commit-pinned public-source parsing, non-overlapping exact evidence spans, modality checks, stable allocation, duplicate rejection, and freeze-guarded writes.",
         "findings": [],
@@ -5875,6 +5909,28 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Runner review verifies direct first-party small embeddings, streamed per-course indexes, cached queries, exact atomic-region scoring, public ranking persistence before hidden gold, bound resume, complete accounting, and finite M2/M2C selection.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-atomic-m2-confirmation",
+        "preflight:academic-factual-qa-atomic-m2-confirmation",
+        "resume:academic-factual-qa-atomic-m2-confirmation",
+        "simulate:academic-factual-qa-atomic-m2-confirmation",
+        "verify:academic-factual-qa-atomic-m2-confirmation"
+      ],
+      "path": "scripts/run_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "high",
+      "sha256": "4c138bae76f6075b7488d038de517dbdb8d0e0b1295b849015e1bc079d13597a"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-evaluation",
         "evidence": "Code review and focused execution confirm ProductCaseInput contains no gold fields, both diagnostics traverse StudentTutoringService and persistence, cluster-bootstrap uncertainty is reproducible, output creation is exclusive, and all non-simulation execution is freeze-guarded.",
         "findings": [],
@@ -6458,6 +6514,28 @@
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
       "sha256": "e215a6ef7064828a96f18ad3e3d51a8ef97551d9dbf53e03d0cf25e4674300a5"
+    },
+    {
+      "audit": {
+        "domain": "nonhuman-evaluation-supplements",
+        "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, original-region authority, explicit C0-C2-only claims, independent stage outcomes, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:nonhuman-evaluation-supplements",
+        "preflight:nonhuman-evaluation-supplements",
+        "resume:nonhuman-evaluation-supplements",
+        "simulate:nonhuman-evaluation-supplements",
+        "verify:nonhuman-evaluation-supplements"
+      ],
+      "path": "scripts/run_course_digital_twin_nonhuman_supplements.py",
+      "risk": "high",
+      "sha256": "7a6773aca12be2009b4cc3df279c2291bc63a893a710b530546b5238893f4431"
     },
     {
       "audit": {
@@ -9504,8 +9582,8 @@
     },
     {
       "audit": {
-        "domain": "finite-evaluation-program",
-        "evidence": "Freeze review preserves AFQC-100 revocation, registers the source-aligned AFQC-101 builder centrally, and authorizes only the finite non-human successor for dataset, external-model, held-out, and method execution; private/human participation remains excluded by its instrument.",
+        "domain": "atomic-m2-confirmation",
+        "evidence": "Freeze review registers the atomic package builder and confirmation runner under the existing finite non-human program while preserving the repository-wide freeze and excluding private or human-participant execution.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-plus-three-agent-cross-review"
@@ -9516,7 +9594,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "bc8bb0ad655751ada8b0228850bb224c6ed452e0647e7fd026b215c4de3cce7d"
+      "sha256": "e57e4ad0662c99519483636f8d112d3faf3473e2f9f56acf46faf6e133ad0f9c"
     },
     {
       "audit": {
@@ -10928,6 +11006,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-confirmation-verification",
+        "evidence": "Focused tests cover instrument/public validation, question-only coverage selection, hidden-gold opening order, and clean program-authorized preflight behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_atomic_m2_confirmation_runner.py",
+      "risk": "medium",
+      "sha256": "1cd75b5828b627ec3fe880c762dbf2023c48401b75b164ba1f2aa6e22102b169"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
         "findings": [],
@@ -11005,6 +11099,22 @@
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
       "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-confirmation-verification",
+        "evidence": "Focused tests verify fresh allocation, disjoint source families, non-overlap, exact mapping, package byte stability, exclusive writes, and private/final-data exclusion.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_atomic_m2_confirmation.py",
+      "risk": "medium",
+      "sha256": "f083b055f1551d873ee47158495c78bd88ac4d2859e6a638513d94bf3785f24b"
     },
     {
       "audit": {
@@ -11133,6 +11243,22 @@
       "path": "tests/test_build_repository_correctness_inventory.py",
       "risk": "medium",
       "sha256": "e8fd26680f0b7dceef66998b517fe00d1a63e14c3e32dd2d64fe3bff50e71630"
+    },
+    {
+      "audit": {
+        "domain": "nonhuman-evaluation-supplements-verification",
+        "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, safe output roots, identity and ledger checks, simulated pass/failure propagation, visual scoring, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-plus-agent-cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
+      "risk": "medium",
+      "sha256": "c615a26ee6ec80589207698188bd1b4c754e118f086c47983f3d71bf01706274"
     },
     {
       "audit": {
@@ -12240,8 +12366,8 @@
     }
   ],
   "risk_counts": {
-    "high": 561,
-    "medium": 171
+    "high": 565,
+    "medium": 174
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

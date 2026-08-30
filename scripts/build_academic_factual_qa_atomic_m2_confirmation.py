@@ -391,7 +391,25 @@ def build_packages() -> dict[str, Any]:
         "cluster_count": len(clusters),
         "case_count": len(cases),
         "registered_region_count": len(chunks),
-        "clusters": [row.model_dump(mode="json") for row in clusters],
+        # Public retrieval input may expose corpus identity and source metadata,
+        # but never the reference targets, canonical claims, or gold spans that
+        # are serialized only in the hidden package below.
+        "clusters": [
+            {
+                "cluster_id": row.cluster_id,
+                "course_id": row.course_id,
+                "source_family_id": row.source_family_id,
+                "source_artifact_id": row.source_artifact_id,
+                "source_version": row.source_version,
+                "source_sha256": row.source_sha256,
+                "source_modality": row.source_modality,
+                "source_path": row.source_path,
+                "license_spdx": row.license_spdx,
+                "repository_url": row.repository_url,
+                "repository_commit": row.repository_commit,
+            }
+            for row in clusters
+        ],
         "chunks": [row.model_dump(mode="json") for row in chunks],
         "target_allocation": TARGET_ALLOCATION,
         "historical_build_source_plan_family_count": len(
