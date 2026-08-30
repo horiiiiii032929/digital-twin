@@ -269,7 +269,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Focused domain tests, network-free simulations, source-aligned AFQC-101 validation command, execution-freeze validation, and the complete repository gate.",
       "findings": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "reviewed_at": "2026-08-29",
@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "ae7d39d0cbe812be37d3ac903d727f768e109d4d5a7d92eb0da7ba6a60e9601c"
+      "sha256": "48e959a573c75ad7b2b79350b3c3082ae1a8787bb46f568b80bb3cb2a842ef61"
     },
     {
       "audit_status": "audited",
@@ -5263,12 +5263,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual reference-contract review verifies exact quote/range validation, short deterministic claims, complete text and structured extraction, modality/target invariants, stable source-region IDs, separate boundary construction, and provider-independent public/gold assembly.",
+      "evidence": "Successor review verifies exact quote/range validation, complete text and structured extraction, source-derived region IDs shared by runtime and gold, context-bearing cue selection, separate boundary construction, and provider-independent public/gold assembly.",
       "findings": [],
       "path": "src/digital_twin/evaluation/factual_qa_references.py",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "d780da3d1e2a8777dc7ff18a9d63f616d4cc071a469d7e4c89ebf6d3a1e0c4fe"
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "6b8aaaa355aab3baf75a9cf54f4c10ae9dda20aaa787fdab6b1adb9acdb776c6"
     },
     {
       "audit_status": "audited",
@@ -5549,12 +5549,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Manual ingestion, chunking, provenance, multimodal metadata, retrieval, reranking, fallback, and evidence-sufficiency review plus adversarial numeric/lineage tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+      "evidence": "Grounding review verifies text-range region IDs need no visual crop while spatial regions still require original crop lineage; existing ingestion, multimodal, retrieval, and provenance invariants remain covered by focused tests.",
       "findings": [],
       "path": "src/digital_twin/grounding/models.py",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "b997afc17c588a53a59d37f0646bf9a6ea46bed2ba3f91de7285e140ac5635a4"
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "13e063328311eee93aafd392477cb93b368e6dce6348d79173473c42cbd3f4b2"
     },
     {
       "audit_status": "audited",
@@ -5901,12 +5901,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Freeze review verifies AFQC-100 revoked the API-first retrieval instrument and leaves dataset, held-out, private, product, provider, and final execution blocked.",
+      "evidence": "Freeze review preserves AFQC-100 revocation, registers the source-aligned AFQC-101 builder centrally, and authorizes only the finite non-human successor for dataset, external-model, held-out, and method execution; private/human participation remains excluded by its instrument.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-review",
-      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "2fd61824d15a91def1f27fae32927b3e9556b046858a3b7d6f51a6601bef4350"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify the completed API-first retrieval instrument no longer has external-model or method authority and all unrelated execution remains rejected.",
+      "evidence": "Focused freeze-policy tests verify AFQC-100 remains revoked, the exact non-human successor receives only its four frozen execution capabilities, and unrelated instruments remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-authorization-review",
-      "sha256": "9851e13de9a70c2451083a67c56d9271bd22c57c035a81d9a34c8fdc1f4ce9c4"
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "535a9ab4aecc7488c8f77cbc653df6deeacf0ef470482eff7c7871841fbf4315"
     },
     {
       "audit_status": "audited",
@@ -7782,23 +7782,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Retrieval evaluator review verified untouched 300-case selection, public-question execution before hidden-gold joining, source-range evidence metrics, boundary safety, latency gates, and deterministic preference within the frozen two-point margin.",
+      "evidence": "Retrieval evaluator review verifies ranking-before-gold ordering, exact pre-ranking corpus/gold matchability, source-range and region-ID evidence metrics, boundary safety, latency gates, and deterministic selection rules.",
       "findings": [],
       "path": "src/digital_twin/evaluation/finite_retrieval_evaluation.py",
       "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-review",
-      "sha256": "d91f251b70f4a28abfc11b83fcfb2e40a2cb8d09a108e9bf01ab557a8638a462"
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "a6ef7cfa0600f7bc6dc4f92634e753c12f9d96774a62093f794420ea4a22b1ab"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
-      "evidence": "Hierarchical retrieval review verified structured token preservation, top-30 expansion, parent/adjacent regions, deterministic concept coverage, question-only rerank eligibility, bounded external IDs, ambiguous-question clarification, and fail-closed evidence release.",
+      "evidence": "Hierarchical retrieval review verifies structured token preservation, bounded expansion and reranking, and fail-closed evidence release; deictic action questions now clarify even when preceding context names a generic network or process referent.",
       "findings": [],
       "path": "src/digital_twin/grounding/hierarchical_retrieval.py",
       "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-review",
-      "sha256": "5e3ca81eb98df19c9dc53cea53dea3462269f01050a05696f28073d51e74d9d1"
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "59f88fbd1d8ed988cfb7faa1544e7268e0f5ab2ebc1045a4589e7ca235fb3770"
     },
     {
       "audit_status": "audited",
@@ -7887,6 +7887,72 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
       "sha256": "a8c42f4ba3fbb07c6610b5856c17a2ac5657a976bb2f3f7b8c6843f253a1ab40"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "nonhuman-evaluation-program",
+      "evidence": "Program review verifies one bounded USD 50 authority, automatic non-human stage progression, deterministic authority, advisory agent roles, finite failure stops, immutable unfavorable history, and explicit exclusion of human participants and private data.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_nonhuman_evaluation_program_002.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "f9fe80349fe6ae4ff73aba7980a2f5c5e0a6c6d5cc63589ac9b0c6e761b39cb1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-successor",
+      "evidence": "Builder review verifies source-family-disjoint balanced selection, exact source-derived region registration, shared source hashes across cases/gold/corpus, 450/450 pre-ranking matchability, exclusive outputs, and zero provider or final-set access.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_source_aligned_confirmation.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "0fb83f9053168b7c3caec05b361156a164f22efc7a57da7ad86361e27acd6927"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-successor",
+      "evidence": "Source-registration review verifies stable source-derived IDs independent of cases/questions, exact citable spans, contextual non-authoritative search metadata, structured identifiers, parent lineage, and deterministic ordering.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/source_registration.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "c20f6e2fc28a1194b29f673a63d42991c8d522e392b7a548a526a85bb0aa8036"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-verification",
+      "evidence": "Focused tests verify section/modality/identifier registration, non-authoritative search context, stable semantic anchors and region IDs, exact span lineage, and deictic clarification.",
+      "findings": [],
+      "path": "tests/digital_twin/test_source_registration.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "d989cefb6b23bfbef9bf401c3a7b23f156c9c590d718766d50024eefb07dffc3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-retrieval-verification",
+      "evidence": "Focused tests verify the 100-cluster/500-case balanced fresh package, source-family disjointness, corpus/cases/gold hash identity, runtime/gold region-ID equality, 450/450 matchability, and fail-before-ranking mutation behavior.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_source_aligned_confirmation.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "c028c571006c54840e2f7d05cd49c35018997b42a2798ebe8fcfaee80ce4c875"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "nonhuman-evaluation-program-verification",
+      "evidence": "Focused tests verify the manifest hash, finite USD 50 stage allocation, one program authority, automatic progression policy, human exclusion, and exact repository-freeze capabilities.",
+      "findings": [],
+      "path": "tests/test_nonhuman_evaluation_program.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-plus-three-agent-cross-review",
+      "sha256": "2b77665cd9109e40cc3e8709c7f97ce8d4f3d2035375f9f54da8dad66d33dbab"
     }
   ],
   "schema_version": 1

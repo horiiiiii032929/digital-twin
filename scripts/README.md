@@ -892,6 +892,13 @@ Current utilities:
   professor approval gate, and the empty 8-12-case calibration template. It
   opens no held-out content and makes no model call; run `npm run
   verify:professor-digital-twin-transition`.
+- `build_academic_factual_qa_source_aligned_confirmation.py`: builds the fresh
+  source-family-disjoint 500-case AFQC-101 package. Canonical evidence is
+  registered as source-derived exact regions before ranking, so validation
+  fails unless every answerable gold reference exists in the runtime corpus.
+  The committed build uses public sources only and makes no provider call. Run
+  `npm run verify:academic-factual-qa-source-aligned-confirmation` for the
+  network-free reconstruction and matchability check.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

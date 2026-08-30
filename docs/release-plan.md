@@ -87,6 +87,14 @@ a fresh source-disjoint tranche. Only that pass may reopen 500+100 and sealed
 10,000+1,000 execution. Visual, C0-C3, and provider T0/T1 stages retain their
 existing boundaries.
 
+AFQC-101 removes the repeated administrative authorization pauses from those
+non-human stages. One USD 50 program authority now advances each passing stage
+automatically while preserving all quality, privacy, leakage, identity,
+security, accounting, and finite-correction stops. The newly identified
+AFQC-100 corpus/gold region-binding defect is corrected prospectively; the
+historical unfavorable result remains immutable. Real professor/student
+participation is still outside this authority.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

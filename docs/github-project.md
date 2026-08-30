@@ -93,6 +93,14 @@ professor-communication track.
    successor
    retains the flow-independent
    10,000-case product contract and #105 evidence-decision boundary. Terminated
+
+   AFQC-101 now owns the successor as one automatically progressing non-human
+   program. Passing stages require no additional researcher approval; only the
+   frozen quality/safety/budget stops and the later real-human boundary can stop
+   it. The immediate correction is shared source-derived region identity,
+   corpus/gold hash alignment, context-complete questions, and fresh
+   source-family-disjoint retrieval confirmation—not another embedding-only
+   swap.
    build revision `f267fb0` remains reproducible historical evidence for the
    nine-stage control plane, USD 44.60 p99 projection, USD 50 absolute stop,
    and one-correction limit. Preserve the

@@ -82,6 +82,20 @@ structured source registration, context-complete reference questions, and
 retrieval matching on a fresh source-disjoint tranche. A model-only swap or a
 rerun of these known 300 cases is not justified.
 
+AFQC-101 freezes
+`course-digital-twin-nonhuman-evaluation-program-002` as the finite successor.
+The researcher authorized all public-source and synthetic non-human stages once
+under a USD 50 global ceiling, so passing stages no longer pause for separate
+approval. Quality, privacy, leakage, identity, accounting, security, and one-
+correction hard stops remain active. Cross-review also identified the decisive
+AFQC-100 binding defect: 101/235 answerable cases required region IDs absent
+from runtime chunks, and corpus and gold used different source-plan hashes. The
+successor now uses source-derived region IDs shared by runtime and gold, exact
+pre-ranking matchability, contextual search-only metadata, and a fresh source-
+family-disjoint confirmation. Deterministic graders remain authoritative;
+GPT-5.4 nano, GPT-5.6 Terra, and fresh Codex audits are advisory. Real
+professor/student participation and professor-profile approval remain excluded.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
