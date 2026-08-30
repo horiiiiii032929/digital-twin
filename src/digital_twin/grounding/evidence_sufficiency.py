@@ -8,6 +8,7 @@ from typing import Protocol
 from pydantic import BaseModel, Field, field_validator
 
 from src.digital_twin.grounding.models import RetrievalHit
+from src.digital_twin.action_router import required_atomic_claim_count
 from src.digital_twin.grounding.retrieval import lexical_tokens
 from src.digital_twin.grounding.retrieval_evaluation import (
     RetrievalCaseCategory,
@@ -524,6 +525,104 @@ class StructuredLexicalCoverageEvidenceGate:
                 "alias_match_count": len(alias_selected),
                 "minimum_content_matching_terms": self.minimum_content_matching_terms,
                 "evidence_limit": self.evidence_limit,
+            },
+            selected_hit_ids=[hit.chunk.id for hit in selected],
+        )
+
+
+class QuestionTargetedAtomicEvidenceGate:
+    """Narrow supported evidence to the one or two facts requested by the question.
+
+    The wrapped structured gate remains the answerability control. This successor
+    changes only which already-approved atoms reach generation. It uses public
+    question terms, immutable source text/search aliases, and retrieval scores;
+    it cannot inspect evaluation labels or hidden gold.
+    """
+
+    implementation_id = "question-targeted-atomic-evidence-gate-v1"
+
+    def __init__(
+        self,
+        *,
+        base_gate: StructuredLexicalCoverageEvidenceGate | None = None,
+    ) -> None:
+        self.base_gate = base_gate or StructuredLexicalCoverageEvidenceGate()
+
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSufficiencyDecision:
+        decision = self.base_gate.assess(query, hits)
+        if not decision.sufficient:
+            return decision.model_copy(
+                update={
+                    "reason": "structured support failed before target selection",
+                    "features": {
+                        **decision.features,
+                        "target_claim_count": required_atomic_claim_count(query),
+                        "target_selection_applied": False,
+                    },
+                }
+            )
+        allowed = set(decision.selected_hit_ids)
+        candidates = [
+            (index, hit)
+            for index, hit in enumerate(hits)
+            if not allowed or hit.chunk.id in allowed
+        ]
+        query_terms = {
+            token
+            for token in lexical_tokens(query)
+            if token not in _STOP_WORDS and token not in _QUESTION_CONTEXT_WORDS
+        }
+
+        def ranking_terms(value: str) -> set[str]:
+            terms: set[str] = set()
+            for token in lexical_tokens(value):
+                normalized = token
+                if len(normalized) > 4 and normalized.endswith("s"):
+                    normalized = normalized[:-1]
+                if len(normalized) > 4 and normalized.endswith("e"):
+                    normalized = normalized[:-1]
+                terms.add(normalized)
+            return terms
+
+        query_ranking_terms = ranking_terms(" ".join(sorted(query_terms)))
+
+        def rank_key(row: tuple[int, RetrievalHit]) -> tuple[int, int, float, int, str]:
+            index, hit = row
+            content_overlap = len(
+                query_ranking_terms & ranking_terms(hit.chunk.text)
+            )
+            alias_overlap = len(
+                query_ranking_terms
+                & ranking_terms(hit.chunk.metadata.get("search_description", ""))
+            )
+            return (
+                -content_overlap,
+                -alias_overlap,
+                -hit.relevance_score,
+                index,
+                hit.chunk.id,
+            )
+
+        target_count = required_atomic_claim_count(query)
+        selected = [hit for _, hit in sorted(candidates, key=rank_key)[:target_count]]
+        sufficient = len(selected) == target_count
+        return EvidenceSufficiencyDecision(
+            sufficient=sufficient,
+            score=decision.score if sufficient else 0.0,
+            reason=(
+                "question-targeted authoritative atoms selected"
+                if sufficient
+                else "insufficient distinct authoritative atoms for the requested answer"
+            ),
+            features={
+                **decision.features,
+                "target_claim_count": target_count,
+                "target_selected_hit_count": len(selected),
+                "target_selection_applied": True,
             },
             selected_hit_ids=[hit.chunk.id for hit in selected],
         )

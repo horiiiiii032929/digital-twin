@@ -302,6 +302,7 @@ def _generator_transport(
     if manifest.generator in {
         "openai-gpt-5.4-mini-live-atomic",
         "openai-gpt-5.4-mini-live-extractive-boundary",
+        "openai-gpt-5.4-mini-question-targeted-atomic-v1",
         "openai-responses-live-atomic-v2",
     }:
         candidate = runtime.get("model_candidate_manifest")

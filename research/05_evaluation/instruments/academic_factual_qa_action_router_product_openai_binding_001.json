@@ -1,0 +1,44 @@
+{
+  "authorization": {
+    "final_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "provider_execution_authorized": false
+  },
+  "binding_id": "academic-factual-qa-action-router-product-openai-binding-001",
+  "content_sha256": "67b8c31fae586d9c32d448ec369675ab02a0f4ecc7399a89fa9b8c360790788a",
+  "freshness_hours": 24,
+  "instrument_id": "academic-factual-qa-action-router-product-checkpoint-001",
+  "metadata_status": "refresh-required",
+  "official_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+    "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+    "https://developers.openai.com/api/reference/resources/responses/methods/create"
+  ],
+  "providers": {
+    "embedding": {
+      "batch_size": 128,
+      "dimensions": 1536,
+      "input_price_usd_per_million": 0.02,
+      "maximum_transport_retries": 0,
+      "provider": "openai",
+      "provider_model": "text-embedding-3-small",
+      "request_token_limit": 250000
+    },
+    "high-volume-generator": {
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "documented_revision": "gpt-5.4-mini-2026-03-17",
+      "max_output_tokens": 600,
+      "maximum_transport_retries": 0,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5,
+      "provider": "openai",
+      "provider_model": "gpt-5.4-mini-2026-03-17",
+      "reasoning_effort": "low",
+      "request_store": false,
+      "timeout_seconds": 60
+    }
+  },
+  "schema_version": 1,
+  "verified_at": null
+}

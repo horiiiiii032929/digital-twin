@@ -1,0 +1,2135 @@
+{
+  "case_count": 100,
+  "content_sha256": "9f3d9f41a4377418474d702a0fa9a873b0420a7350678803477fcd01842be151",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001-control",
+  "gold": [
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Using names solves these problems and provides additional benefits.",
+      "case_id": "academic-action-router-dev-0003-q1",
+      "claims": [
+        {
+          "answer_span": "Using names solves these problems and provides additional benefits.",
+          "claim_id": "academic-action-router-dev-0003-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15294,
+              "char_start": 15227,
+              "region_id": "source-region-83090ade8ddfa7d0ec75361542fce96cbb85f94b1d0adc0508071bd5ff998b13",
+              "source_artifact_id": "computer-networking:principles/naming.rst",
+              "source_sha256": "f63f4a5e34ce6a58a1e829136136c5da47717469a0ca9f6adeb76456282823ef",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If the clients are configured with the name of the server, they will query the name service before contacting the server.",
+      "case_id": "academic-action-router-dev-0003-q2",
+      "claims": [
+        {
+          "answer_span": "If the clients are configured with the name of the server, they will query the name service before contacting the server.",
+          "claim_id": "academic-action-router-dev-0003-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15416,
+              "char_start": 15295,
+              "region_id": "source-region-87abe9f15cddd37748fbce9e49af0b840c12cbfbc9a14d4953c63f49ba8ff6a6",
+              "source_artifact_id": "computer-networking:principles/naming.rst",
+              "source_sha256": "f63f4a5e34ce6a58a1e829136136c5da47717469a0ca9f6adeb76456282823ef",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The name service will resolve the name into the corresponding address.",
+      "case_id": "academic-action-router-dev-0003-q3",
+      "claims": [
+        {
+          "answer_span": "The name service will resolve the name into the corresponding address.",
+          "claim_id": "academic-action-router-dev-0003-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15487,
+              "char_start": 15417,
+              "region_id": "source-region-4a0725e2765bad4c3259a17ffb3e0a7a31115beff3962e9a30f7884c1b433163",
+              "source_artifact_id": "computer-networking:principles/naming.rst",
+              "source_sha256": "f63f4a5e34ce6a58a1e829136136c5da47717469a0ca9f6adeb76456282823ef",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Using names solves these problems and provides additional benefits. If the clients are configured with the name of the server, they will query the name service before contacting the server.",
+      "case_id": "academic-action-router-dev-0003-q4",
+      "claims": [
+        {
+          "answer_span": "Using names solves these problems and provides additional benefits.",
+          "claim_id": "academic-action-router-dev-0003-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15294,
+              "char_start": 15227,
+              "region_id": "source-region-83090ade8ddfa7d0ec75361542fce96cbb85f94b1d0adc0508071bd5ff998b13",
+              "source_artifact_id": "computer-networking:principles/naming.rst",
+              "source_sha256": "f63f4a5e34ce6a58a1e829136136c5da47717469a0ca9f6adeb76456282823ef",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "If the clients are configured with the name of the server, they will query the name service before contacting the server.",
+          "claim_id": "academic-action-router-dev-0003-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 15416,
+              "char_start": 15295,
+              "region_id": "source-region-87abe9f15cddd37748fbce9e49af0b840c12cbfbc9a14d4953c63f49ba8ff6a6",
+              "source_artifact_id": "computer-networking:principles/naming.rst",
+              "source_sha256": "f63f4a5e34ce6a58a1e829136136c5da47717469a0ca9f6adeb76456282823ef",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0003-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Routing table \\\\",
+      "case_id": "academic-action-router-dev-0004-q1",
+      "claims": [
+        {
+          "answer_span": "Routing table \\\\",
+          "claim_id": "academic-action-router-dev-0004-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10675,
+              "char_start": 10659,
+              "region_id": "source-region-5667af30cd0210420ac08d1f0757512fd510e86aa6c622d337bafa62b30179d7",
+              "source_artifact_id": "computer-networking:principles/network.rst",
+              "source_sha256": "f36f8edf5c02bdbe48c3a6a15e0ba7b69db7d04141b9f54d3923458b6226adc0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "{\\color{red} A via West} \\\\",
+      "case_id": "academic-action-router-dev-0004-q2",
+      "claims": [
+        {
+          "answer_span": "{\\color{red} A via West} \\\\",
+          "claim_id": "academic-action-router-dev-0004-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10746,
+              "char_start": 10719,
+              "region_id": "source-region-49b131a3c35b5d422114c3c5fa718026b26beb2cfbdad5fb797a18ead794c4ab",
+              "source_artifact_id": "computer-networking:principles/network.rst",
+              "source_sha256": "f36f8edf5c02bdbe48c3a6a15e0ba7b69db7d04141b9f54d3923458b6226adc0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "I via East \\\\",
+      "case_id": "academic-action-router-dev-0004-q3",
+      "claims": [
+        {
+          "answer_span": "I via East \\\\",
+          "claim_id": "academic-action-router-dev-0004-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10803,
+              "char_start": 10790,
+              "region_id": "source-region-856bffc305861ba8a92f7862ae8ee6d78e023dfcbdad9cbe82cfe10864de2e15",
+              "source_artifact_id": "computer-networking:principles/network.rst",
+              "source_sha256": "f36f8edf5c02bdbe48c3a6a15e0ba7b69db7d04141b9f54d3923458b6226adc0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Routing table \\\\",
+      "case_id": "academic-action-router-dev-0004-q4",
+      "claims": [
+        {
+          "answer_span": "Routing table \\\\",
+          "claim_id": "academic-action-router-dev-0004-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10675,
+              "char_start": 10659,
+              "region_id": "source-region-5667af30cd0210420ac08d1f0757512fd510e86aa6c622d337bafa62b30179d7",
+              "source_artifact_id": "computer-networking:principles/network.rst",
+              "source_sha256": "f36f8edf5c02bdbe48c3a6a15e0ba7b69db7d04141b9f54d3923458b6226adc0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-action-router-dev-0004-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The network layer enables hosts to reach each others.",
+      "case_id": "academic-action-router-dev-0007-q1",
+      "claims": [
+        {
+          "answer_span": "The network layer enables hosts to reach each others.",
+          "claim_id": "academic-action-router-dev-0007-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7454,
+              "char_start": 7401,
+              "region_id": "source-region-ff733dffe3f6d653ab14d6113093709bbe7a81889f8eb05ce009c312cdb06065",
+              "source_artifact_id": "computer-networking:principles/referencemodels.rst",
+              "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "However, different communication flows can take place between the same hosts.",
+      "case_id": "academic-action-router-dev-0007-q2",
+      "claims": [
+        {
+          "answer_span": "However, different communication flows can take place between the same hosts.",
+          "claim_id": "academic-action-router-dev-0007-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7532,
+              "char_start": 7455,
+              "region_id": "source-region-dd4d61a56efd1412626887b486b0b0b3f25ab097eac1e95cd96765b44a4fc814",
+              "source_artifact_id": "computer-networking:principles/referencemodels.rst",
+              "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished.",
+      "case_id": "academic-action-router-dev-0007-q3",
+      "claims": [
+        {
+          "answer_span": "These communication flows might have different needs (some require reliable delivery, other not) and need to be distinguished.",
+          "claim_id": "academic-action-router-dev-0007-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7659,
+              "char_start": 7533,
+              "region_id": "source-region-a10bdf20c541c28db678dc7742ef110deb4f9566f60efd8ba209efe6eaf5ee17",
+              "source_artifact_id": "computer-networking:principles/referencemodels.rst",
+              "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The network layer enables hosts to reach each others. However, different communication flows can take place between the same hosts.",
+      "case_id": "academic-action-router-dev-0007-q4",
+      "claims": [
+        {
+          "answer_span": "The network layer enables hosts to reach each others.",
+          "claim_id": "academic-action-router-dev-0007-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7454,
+              "char_start": 7401,
+              "region_id": "source-region-ff733dffe3f6d653ab14d6113093709bbe7a81889f8eb05ce009c312cdb06065",
+              "source_artifact_id": "computer-networking:principles/referencemodels.rst",
+              "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "However, different communication flows can take place between the same hosts.",
+          "claim_id": "academic-action-router-dev-0007-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 7532,
+              "char_start": 7455,
+              "region_id": "source-region-dd4d61a56efd1412626887b486b0b0b3f25ab097eac1e95cd96765b44a4fc814",
+              "source_artifact_id": "computer-networking:principles/referencemodels.rst",
+              "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0007-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this section, we develop a reliable datalink protocol running above the physical layer service.",
+      "case_id": "academic-action-router-dev-0009-q1",
+      "claims": [
+        {
+          "answer_span": "In this section, we develop a reliable datalink protocol running above the physical layer service.",
+          "claim_id": "academic-action-router-dev-0009-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 28343,
+              "char_start": 28245,
+              "region_id": "source-region-67bd4237e6b3141b81797e9a3ff4ac684993f7a7d612bd37c87b4f51494ee6b1",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "To design this protocol, we first assume that the physical layer provides a perfect service.",
+      "case_id": "academic-action-router-dev-0009-q2",
+      "claims": [
+        {
+          "answer_span": "To design this protocol, we first assume that the physical layer provides a perfect service.",
+          "claim_id": "academic-action-router-dev-0009-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 28436,
+              "char_start": 28344,
+              "region_id": "source-region-8041a49ac9cf586129fa4af32e8e1056d3f22836328fd99a209d4baed1e33f8e",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We will then develop solutions to recover from the transmission errors.",
+      "case_id": "academic-action-router-dev-0009-q3",
+      "claims": [
+        {
+          "answer_span": "We will then develop solutions to recover from the transmission errors.",
+          "claim_id": "academic-action-router-dev-0009-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 28508,
+              "char_start": 28437,
+              "region_id": "source-region-e3a6ac45b74713f709a0ecb9a536f1b4c93f73992a64899dc2dc473d7bc7713a",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this section, we develop a reliable datalink protocol running above the physical layer service. To design this protocol, we first assume that the physical layer provides a perfect service.",
+      "case_id": "academic-action-router-dev-0009-q4",
+      "claims": [
+        {
+          "answer_span": "In this section, we develop a reliable datalink protocol running above the physical layer service.",
+          "claim_id": "academic-action-router-dev-0009-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 28343,
+              "char_start": 28245,
+              "region_id": "source-region-67bd4237e6b3141b81797e9a3ff4ac684993f7a7d612bd37c87b4f51494ee6b1",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "To design this protocol, we first assume that the physical layer provides a perfect service.",
+          "claim_id": "academic-action-router-dev-0009-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 28436,
+              "char_start": 28344,
+              "region_id": "source-region-8041a49ac9cf586129fa4af32e8e1056d3f22836328fd99a209d4baed1e33f8e",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-action-router-dev-0009-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Let us consider that host A uses a window of three segments.",
+      "case_id": "academic-action-router-dev-0015-q1",
+      "claims": [
+        {
+          "answer_span": "Let us consider that host A uses a window of three segments.",
+          "claim_id": "academic-action-router-dev-0015-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 91761,
+              "char_start": 91699,
+              "region_id": "source-region-a1d27d079c24796f796f796fea07dd92e55913b9ddcf93afd71e2fb457f5a81c",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "It thus sends three back-to-back segments at 10 Mbps and then waits for an acknowledgment.",
+      "case_id": "academic-action-router-dev-0015-q2",
+      "claims": [
+        {
+          "answer_span": "It thus sends three back-to-back segments at 10 Mbps and then waits for an acknowledgment.",
+          "claim_id": "academic-action-router-dev-0015-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 91854,
+              "char_start": 91762,
+              "region_id": "source-region-9cefd6b4fa907ed874910ce3af8aeeaf87ced1cb4efa5b1261faf482d355b80f",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Host A stops sending segments when its window is full.",
+      "case_id": "academic-action-router-dev-0015-q3",
+      "claims": [
+        {
+          "answer_span": "Host A stops sending segments when its window is full.",
+          "claim_id": "academic-action-router-dev-0015-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 91911,
+              "char_start": 91855,
+              "region_id": "source-region-d7af8e2bb50f55cf530a1070368f0bb1a32a1873ab29b916652f51de0643bb73",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Let us consider that host A uses a window of three segments. It thus sends three back-to-back segments at 10 Mbps and then waits for an acknowledgment.",
+      "case_id": "academic-action-router-dev-0015-q4",
+      "claims": [
+        {
+          "answer_span": "Let us consider that host A uses a window of three segments.",
+          "claim_id": "academic-action-router-dev-0015-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 91761,
+              "char_start": 91699,
+              "region_id": "source-region-a1d27d079c24796f796f796fea07dd92e55913b9ddcf93afd71e2fb457f5a81c",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "It thus sends three back-to-back segments at 10 Mbps and then waits for an acknowledgment.",
+          "claim_id": "academic-action-router-dev-0015-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 91854,
+              "char_start": 91762,
+              "region_id": "source-region-9cefd6b4fa907ed874910ce3af8aeeaf87ced1cb4efa5b1261faf482d355b80f",
+              "source_artifact_id": "computer-networking:principles/sharing.rst",
+              "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0015-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "if rcv.wnd >= MSS and len(data) >= MSS:",
+      "case_id": "academic-action-router-dev-0029-q1",
+      "claims": [
+        {
+          "answer_span": "if rcv.wnd >= MSS and len(data) >= MSS:",
+          "claim_id": "academic-action-router-dev-0029-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29496,
+              "char_start": 29457,
+              "region_id": "source-region-3fa778b1796caab3d83c4c1776a19bf450b286a4237d1ab0b90acdfcd82819b9",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "send one MSS-sized segment",
+      "case_id": "academic-action-router-dev-0029-q2",
+      "claims": [
+        {
+          "answer_span": "send one MSS-sized segment",
+          "claim_id": "academic-action-router-dev-0029-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29531,
+              "char_start": 29505,
+              "region_id": "source-region-7d4d0326879083a76e75423f182f8c207dd837d968ef93253e9ad2793124c2e5",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "if there are unacknowledged data:",
+      "case_id": "academic-action-router-dev-0029-q3",
+      "claims": [
+        {
+          "answer_span": "if there are unacknowledged data:",
+          "claim_id": "academic-action-router-dev-0029-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29583,
+              "char_start": 29550,
+              "region_id": "source-region-fc704255a07255050cf8f95ce5ab0700f55cbca9c128c4e896e51ed72b1befe6",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "if rcv.wnd >= MSS and len(data) >= MSS:",
+      "case_id": "academic-action-router-dev-0029-q4",
+      "claims": [
+        {
+          "answer_span": "if rcv.wnd >= MSS and len(data) >= MSS:",
+          "claim_id": "academic-action-router-dev-0029-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29496,
+              "char_start": 29457,
+              "region_id": "source-region-3fa778b1796caab3d83c4c1776a19bf450b286a4237d1ab0b90acdfcd82819b9",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-action-router-dev-0029-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Finally, we return the stored value of a[j].",
+      "case_id": "academic-action-router-dev-0033-q1",
+      "claims": [
+        {
+          "answer_span": "Finally, we return the stored value of a[j].",
+          "claim_id": "academic-action-router-dev-0033-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16181,
+              "char_start": 16135,
+              "region_id": "source-region-c68cd1994a02198e5baf02393fa07bb7b757ddc4ccd9d92d5ab50f240dba376a",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If necessary, we may call resize() to decrease the size of a.",
+      "case_id": "academic-action-router-dev-0033-q2",
+      "claims": [
+        {
+          "answer_span": "If necessary, we may call resize() to decrease the size of a.",
+          "claim_id": "academic-action-router-dev-0033-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16247,
+              "char_start": 16182,
+              "region_id": "source-region-2f7b168d46c35ca20617f32bbd937142107a7a414acfd26c1c72f79db842d6b2",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#a[j]#,#a[(j+1)%a.length]#,\\ldots,#a[(j+n-1)%a.length]#",
+      "case_id": "academic-action-router-dev-0033-q3",
+      "claims": [
+        {
+          "answer_span": "#a[j]#,#a[(j+1)%a.length]#,\\ldots,#a[(j+n-1)%a.length]#",
+          "claim_id": "academic-action-router-dev-0033-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16501,
+              "char_start": 16446,
+              "region_id": "source-region-0203bd5d9dce2048e9f0e68cef55a93f7e48e0a3e911874044e28e4f05f848cf",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#a[j]#,#a[(j+1)%a.length]#,\\ldots,#a[(j+n-1)%a.length]#",
+      "case_id": "academic-action-router-dev-0033-q4",
+      "claims": [
+        {
+          "answer_span": "#a[j]#,#a[(j+1)%a.length]#,\\ldots,#a[(j+n-1)%a.length]#",
+          "claim_id": "academic-action-router-dev-0033-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16501,
+              "char_start": 16446,
+              "region_id": "source-region-0203bd5d9dce2048e9f0e68cef55a93f7e48e0a3e911874044e28e4f05f848cf",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-action-router-dev-0033-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "R & \\ge #a.length#/2 - 1 - #a.length#/3 \\\\",
+      "case_id": "academic-action-router-dev-0034-q1",
+      "claims": [
+        {
+          "answer_span": "R & \\ge #a.length#/2 - 1 - #a.length#/3 \\\\",
+          "claim_id": "academic-action-router-dev-0034-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 9070,
+              "char_start": 9028,
+              "region_id": "source-region-26168bc71d6eb4265c5559edc23bc40a523f11b1a6b767c70a1fd4383d219f0d",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "& = #a.length#/6 - 1 \\\\",
+      "case_id": "academic-action-router-dev-0034-q2",
+      "claims": [
+        {
+          "answer_span": "& = #a.length#/6 - 1 \\\\",
+          "claim_id": "academic-action-router-dev-0034-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 9102,
+              "char_start": 9079,
+              "region_id": "source-region-1ef74968dec53b256cc1345ad9bc1e57fb59e76b707325a5f68d9f24ff75c420",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "& = (#a.length#/3)/2 - 1 \\\\",
+      "case_id": "academic-action-router-dev-0034-q3",
+      "claims": [
+        {
+          "answer_span": "& = (#a.length#/3)/2 - 1 \\\\",
+          "claim_id": "academic-action-router-dev-0034-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 9138,
+              "char_start": 9111,
+              "region_id": "source-region-cd08d293704b331d487f4479c1af11d854311c60a0f6982f592715c060a4c7db",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "R & \\ge #a.length#/2 - 1 - #a.length#/3 \\\\",
+      "case_id": "academic-action-router-dev-0034-q4",
+      "claims": [
+        {
+          "answer_span": "R & \\ge #a.length#/2 - 1 - #a.length#/3 \\\\",
+          "claim_id": "academic-action-router-dev-0034-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 9070,
+              "char_start": 9028,
+              "region_id": "source-region-26168bc71d6eb4265c5559edc23bc40a523f11b1a6b767c70a1fd4383d219f0d",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0034-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Therefore, these data structures waste at most $O(\\sqrt{n})$ space when storing n elements.",
+      "case_id": "academic-action-router-dev-0035-q1",
+      "claims": [
+        {
+          "answer_span": "Therefore, these data structures waste at most $O(\\sqrt{n})$ space when storing n elements.",
+          "claim_id": "academic-action-router-dev-0035-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29394,
+              "char_start": 29299,
+              "region_id": "source-region-cadf714e2cc37833e735056463a2d578bb4d71fcbcc1b4d9f2c3041c5e9ae659",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A RootishArrayStack stores its elements in a list of r arrays called blocks that are numbered $0,1,...,r-1$.",
+      "case_id": "academic-action-router-dev-0035-q2",
+      "claims": [
+        {
+          "answer_span": "A RootishArrayStack stores its elements in a list of r arrays called blocks that are numbered $0,1,...,r-1$.",
+          "claim_id": "academic-action-router-dev-0035-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29520,
+              "char_start": 29396,
+              "region_id": "source-region-783cc048912811998e99e547ca12670d6161a4afe7662a56454ef67c877e0c4c",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Block $b$ contains $b+1$ elements.",
+      "case_id": "academic-action-router-dev-0035-q3",
+      "claims": [
+        {
+          "answer_span": "Block $b$ contains $b+1$ elements.",
+          "claim_id": "academic-action-router-dev-0035-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29588,
+              "char_start": 29554,
+              "region_id": "source-region-7260e333bb5852f957f0bd693a0eee5fb211d3745dc6436be0ff9eb53c63154d",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Therefore, these data structures waste at most $O(\\sqrt{n})$ space when storing n elements. A RootishArrayStack stores its elements in a list of r arrays called blocks that are numbered $0,1,...,r-1$.",
+      "case_id": "academic-action-router-dev-0035-q4",
+      "claims": [
+        {
+          "answer_span": "Therefore, these data structures waste at most $O(\\sqrt{n})$ space when storing n elements.",
+          "claim_id": "academic-action-router-dev-0035-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 29394,
+              "char_start": 29299,
+              "region_id": "source-region-cadf714e2cc37833e735056463a2d578bb4d71fcbcc1b4d9f2c3041c5e9ae659",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "A RootishArrayStack stores its elements in a list of r arrays called blocks that are numbered $0,1,...,r-1$.",
+          "claim_id": "academic-action-router-dev-0035-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 29520,
+              "char_start": 29396,
+              "region_id": "source-region-783cc048912811998e99e547ca12670d6161a4afe7662a56454ef67c877e0c4c",
+              "source_artifact_id": "data-structures:latex/arrays.tex",
+              "source_sha256": "cec924047be127bd03db3e287860825e6d9e3e46e0ac308d58eabfb73e6ff274",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0035-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "\\[ I_{#r#} = \\left\\{\\begin{array}{ll}",
+      "case_id": "academic-action-router-dev-0055-q1",
+      "claims": [
+        {
+          "answer_span": "\\[ I_{#r#} = \\left\\{\\begin{array}{ll}",
+          "claim_id": "academic-action-router-dev-0055-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15535,
+              "char_start": 15498,
+              "region_id": "source-region-73c95960c8e94102eda9278f81af31c051512d2a3d8ec174567988f7ff5d3a93",
+              "source_artifact_id": "data-structures:latex/skiplists.tex",
+              "source_sha256": "b225211127f1d56d444965da39f66d3b606d78a7c2e5dc1db64eaaa835014441",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "0 & \\mbox{if $L_{#r#}$ is empty} \\\\",
+      "case_id": "academic-action-router-dev-0055-q2",
+      "claims": [
+        {
+          "answer_span": "0 & \\mbox{if $L_{#r#}$ is empty} \\\\",
+          "claim_id": "academic-action-router-dev-0055-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15576,
+              "char_start": 15541,
+              "region_id": "source-region-353f83b745e8efad304d0791896e4e628e4f481b4af205469beb9507dfb81122",
+              "source_artifact_id": "data-structures:latex/skiplists.tex",
+              "source_sha256": "b225211127f1d56d444965da39f66d3b606d78a7c2e5dc1db64eaaa835014441",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "1 & \\mbox{if $L_{#r#}$ is non-empty}",
+      "case_id": "academic-action-router-dev-0055-q3",
+      "claims": [
+        {
+          "answer_span": "1 & \\mbox{if $L_{#r#}$ is non-empty}",
+          "claim_id": "academic-action-router-dev-0055-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15618,
+              "char_start": 15582,
+              "region_id": "source-region-519d54c43747482d44ed2cfc8f0ad96d4fc2d5c511674487d1a41b1b5cb1c7d7",
+              "source_artifact_id": "data-structures:latex/skiplists.tex",
+              "source_sha256": "b225211127f1d56d444965da39f66d3b606d78a7c2e5dc1db64eaaa835014441",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "\\[ I_{#r#} = \\left\\{\\begin{array}{ll}",
+      "case_id": "academic-action-router-dev-0055-q4",
+      "claims": [
+        {
+          "answer_span": "\\[ I_{#r#} = \\left\\{\\begin{array}{ll}",
+          "claim_id": "academic-action-router-dev-0055-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 15535,
+              "char_start": 15498,
+              "region_id": "source-region-73c95960c8e94102eda9278f81af31c051512d2a3d8ec174567988f7ff5d3a93",
+              "source_artifact_id": "data-structures:latex/skiplists.tex",
+              "source_sha256": "b225211127f1d56d444965da39f66d3b606d78a7c2e5dc1db64eaaa835014441",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0055-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Since all input elements are distinct, this first comparison has only two possible outcomes.",
+      "case_id": "academic-action-router-dev-0057-q1",
+      "claims": [
+        {
+          "answer_span": "Since all input elements are distinct, this first comparison has only two possible outcomes.",
+          "claim_id": "academic-action-router-dev-0057-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 18447,
+              "char_start": 18355,
+              "region_id": "source-region-3efe5203ee7d13bacb18ac35bd3f04a51178ceeea6e0e30def307bca7618087c",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The second comparison done by the algorithm may depend on the outcome of the first comparison.",
+      "case_id": "academic-action-router-dev-0057-q2",
+      "claims": [
+        {
+          "answer_span": "The second comparison done by the algorithm may depend on the outcome of the first comparison.",
+          "claim_id": "academic-action-router-dev-0057-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 18543,
+              "char_start": 18449,
+              "region_id": "source-region-a6ee53579949dc7e18c45413da179589a91de77dee43a81e043cf10aea90d41f",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The third comparison may depend on the results of the first two, and so on.",
+      "case_id": "academic-action-router-dev-0057-q3",
+      "claims": [
+        {
+          "answer_span": "The third comparison may depend on the results of the first two, and so on.",
+          "claim_id": "academic-action-router-dev-0057-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 18620,
+              "char_start": 18545,
+              "region_id": "source-region-7cddd317201273143980e4fa4063965d25860aaece5d1e59bfcb1788ddd9e5a4",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Since all input elements are distinct, this first comparison has only two possible outcomes. The second comparison done by the algorithm may depend on the outcome of the first comparison.",
+      "case_id": "academic-action-router-dev-0057-q4",
+      "claims": [
+        {
+          "answer_span": "Since all input elements are distinct, this first comparison has only two possible outcomes.",
+          "claim_id": "academic-action-router-dev-0057-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 18447,
+              "char_start": 18355,
+              "region_id": "source-region-3efe5203ee7d13bacb18ac35bd3f04a51178ceeea6e0e30def307bca7618087c",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The second comparison done by the algorithm may depend on the outcome of the first comparison.",
+          "claim_id": "academic-action-router-dev-0057-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 18543,
+              "char_start": 18449,
+              "region_id": "source-region-a6ee53579949dc7e18c45413da179589a91de77dee43a81e043cf10aea90d41f",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-action-router-dev-0057-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Finally, the algorithm scans a backwards to place its elements, in order, into an output array b.",
+      "case_id": "academic-action-router-dev-0058-q1",
+      "claims": [
+        {
+          "answer_span": "Finally, the algorithm scans a backwards to place its elements, in order, into an output array b.",
+          "claim_id": "academic-action-router-dev-0058-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 27143,
+              "char_start": 27042,
+              "region_id": "source-region-75ed6378728168c10676d88def33c704d78e33bd814c2a2b24075cfca1d4502a",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When scanning, the element a[i]=j is placed at location b[c[j]-1] and the value c[j] is decremented.",
+      "case_id": "academic-action-router-dev-0058-q2",
+      "claims": [
+        {
+          "answer_span": "When scanning, the element a[i]=j is placed at location b[c[j]-1] and the value c[j] is decremented.",
+          "claim_id": "academic-action-router-dev-0058-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 27251,
+              "char_start": 27145,
+              "region_id": "source-region-582209d4d73d58b320fe0017039d38fc68ad6dba57d7bad6c1be3b4925256b3b",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#b[c[i-1]]#=#b[c[i-1]+1]=#\\cdots=#b[c[i]-1]#=#i# \\enspace .",
+      "case_id": "academic-action-router-dev-0058-q3",
+      "claims": [
+        {
+          "answer_span": "#b[c[i-1]]#=#b[c[i-1]+1]=#\\cdots=#b[c[i]-1]#=#i# \\enspace .",
+          "claim_id": "academic-action-router-dev-0058-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 27038,
+              "char_start": 26979,
+              "region_id": "source-region-79df662dfdcf9c6cf1b3ee4e443983e7bac941601ee917c804eadc6018400e30",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#b[c[i-1]]#=#b[c[i-1]+1]=#\\cdots=#b[c[i]-1]#=#i# \\enspace .",
+      "case_id": "academic-action-router-dev-0058-q4",
+      "claims": [
+        {
+          "answer_span": "#b[c[i-1]]#=#b[c[i-1]+1]=#\\cdots=#b[c[i]-1]#=#i# \\enspace .",
+          "claim_id": "academic-action-router-dev-0058-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 27038,
+              "char_start": 26979,
+              "region_id": "source-region-79df662dfdcf9c6cf1b3ee4e443983e7bac941601ee917c804eadc6018400e30",
+              "source_artifact_id": "data-structures:latex/sorting.tex",
+              "source_sha256": "0763dcaabf075fb03e0edb89cf0595eb1ea903e4d4408ae70d5d00a45e110773",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0058-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "After first fork: PID = 8667; PPID = 6579",
+      "case_id": "academic-action-router-dev-0062-q1",
+      "claims": [
+        {
+          "answer_span": "After first fork: PID = 8667; PPID = 6579",
+          "claim_id": "academic-action-router-dev-0062-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1815,
+              "char_start": 1774,
+              "region_id": "source-region-b0efe605e4411184c7a9b3b5266ff94e83d59eec17f19d7ce0bd0d7c82dbbc66",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "* first fork()",
+      "case_id": "academic-action-router-dev-0062-q2",
+      "claims": [
+        {
+          "answer_span": "* first fork()",
+          "claim_id": "academic-action-router-dev-0062-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1831,
+              "char_start": 1817,
+              "region_id": "source-region-9d17b2c4bb4354a4fec217e5ec76063d84d6af451235f89fef6174fa5773013f",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "-- Press ENTER to continue ...",
+      "case_id": "academic-action-router-dev-0062-q3",
+      "claims": [
+        {
+          "answer_span": "-- Press ENTER to continue ...",
+          "claim_id": "academic-action-router-dev-0062-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1863,
+              "char_start": 1833,
+              "region_id": "source-region-0dc6dd19a7fbe18abdba543ab992f71cc97e90fd3ea6dd8d987b300420d80c03",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "After first fork: PID = 8667; PPID = 6579",
+      "case_id": "academic-action-router-dev-0062-q4",
+      "claims": [
+        {
+          "answer_span": "After first fork: PID = 8667; PPID = 6579",
+          "claim_id": "academic-action-router-dev-0062-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1815,
+              "char_start": 1774,
+              "region_id": "source-region-b0efe605e4411184c7a9b3b5266ff94e83d59eec17f19d7ce0bd0d7c82dbbc66",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0062-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~/.../demo/optimizations$ strace --trace=write ./stdout-vs-stderr",
+      "case_id": "academic-action-router-dev-0068-q1",
+      "claims": [
+        {
+          "answer_span": "student@os:~/.../demo/optimizations$ strace --trace=write ./stdout-vs-stderr",
+          "claim_id": "academic-action-router-dev-0068-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1177,
+              "char_start": 1101,
+              "region_id": "source-region-d12497dea332d87d1fead23432809febdb73b112b0bee6ccd99e8d57fabd4f67",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "write(1, \"Hello \", 6Hello ) = 6",
+      "case_id": "academic-action-router-dev-0068-q2",
+      "claims": [
+        {
+          "answer_span": "write(1, \"Hello \", 6Hello ) = 6",
+          "claim_id": "academic-action-router-dev-0068-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1227,
+              "char_start": 1178,
+              "region_id": "source-region-712b1476badad62a7567e985b8f574a4d5668a4d7b43a5254112efc9b2aef40e",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "write(1, \"from \", 5from ) = 5",
+      "case_id": "academic-action-router-dev-0068-q3",
+      "claims": [
+        {
+          "answer_span": "write(1, \"from \", 5from ) = 5",
+          "claim_id": "academic-action-router-dev-0068-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1276,
+              "char_start": 1228,
+              "region_id": "source-region-7af01a88b4ec774173e9f30095d7a6c8fb77002f697f42143329fd2eaa03ac4b",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~/.../demo/optimizations$ strace --trace=write ./stdout-vs-stderr",
+      "case_id": "academic-action-router-dev-0068-q4",
+      "claims": [
+        {
+          "answer_span": "student@os:~/.../demo/optimizations$ strace --trace=write ./stdout-vs-stderr",
+          "claim_id": "academic-action-router-dev-0068-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1177,
+              "char_start": 1101,
+              "region_id": "source-region-d12497dea332d87d1fead23432809febdb73b112b0bee6ccd99e8d57fabd4f67",
+              "source_artifact_id": "operating-systems:content/io/lecture/demo/optimizations/README.md",
+              "source_sha256": "80e37a4708af522ed6e1cfcc0cfce16deefd7f775b4c288884189308479b5688",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-action-router-dev-0068-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If it finds one that appears in letters, it returns True immediately.",
+      "case_id": "academic-action-router-dev-0082-q1",
+      "claims": [
+        {
+          "answer_span": "If it finds one that appears in letters, it returns True immediately.",
+          "claim_id": "academic-action-router-dev-0082-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10420,
+              "char_start": 10347,
+              "region_id": "source-region-d76301f960dfc48325e736f2401b7e55c3067b165eecd8577170122854576625",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If it gets all the way through the loop without finding any, it returns False.",
+      "case_id": "academic-action-router-dev-0082-q2",
+      "claims": [
+        {
+          "answer_span": "If it gets all the way through the loop without finding any, it returns False.",
+          "claim_id": "academic-action-router-dev-0082-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10501,
+              "char_start": 10421,
+              "region_id": "source-region-cf1ad49f75294bb0846fb7427c76d722bec073ed371902585245ce6509e113af",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This pattern is called a **linear search**.",
+      "case_id": "academic-action-router-dev-0082-q3",
+      "claims": [
+        {
+          "answer_span": "This pattern is called a **linear search**.",
+          "claim_id": "academic-action-router-dev-0082-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10546,
+              "char_start": 10503,
+              "region_id": "source-region-5a6100e7aadea14ed2b03c1ae631dcb22fb402d4fed379ca2e3749842f2fd3e0",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If it finds one that appears in letters, it returns True immediately. If it gets all the way through the loop without finding any, it returns False.",
+      "case_id": "academic-action-router-dev-0082-q4",
+      "claims": [
+        {
+          "answer_span": "If it finds one that appears in letters, it returns True immediately.",
+          "claim_id": "academic-action-router-dev-0082-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10420,
+              "char_start": 10347,
+              "region_id": "source-region-d76301f960dfc48325e736f2401b7e55c3067b165eecd8577170122854576625",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "If it gets all the way through the loop without finding any, it returns False.",
+          "claim_id": "academic-action-router-dev-0082-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 10501,
+              "char_start": 10421,
+              "region_id": "source-region-cf1ad49f75294bb0846fb7427c76d722bec073ed371902585245ce6509e113af",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0082-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Inside the loop, if word is a palindrome, we increment count.",
+      "case_id": "academic-action-router-dev-0085-q1",
+      "claims": [
+        {
+          "answer_span": "Inside the loop, if word is a palindrome, we increment count.",
+          "claim_id": "academic-action-router-dev-0085-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11828,
+              "char_start": 11763,
+              "region_id": "source-region-020fb1584e08fd7461a3944cba401353b4e71b96a4df2fcd7f7487efa8fedd74",
+              "source_artifact_id": "python-programming:chapters/chap10.ipynb",
+              "source_sha256": "ac53c3198556435a63d77d709a35124b902f267fac1e1f0e5aec8f255388ee54",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When the loop ends, count contains the total number of palindromes.",
+      "case_id": "academic-action-router-dev-0085-q2",
+      "claims": [
+        {
+          "answer_span": "When the loop ends, count contains the total number of palindromes.",
+          "claim_id": "academic-action-router-dev-0085-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11901,
+              "char_start": 11832,
+              "region_id": "source-region-bb716c88ea7d904d079a4ef61c9aaac3ffe55b7f25cc9fda2d981a89df944abb",
+              "source_artifact_id": "python-programming:chapters/chap10.ipynb",
+              "source_sha256": "ac53c3198556435a63d77d709a35124b902f267fac1e1f0e5aec8f255388ee54",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We can use a similar pattern to make a list of palindromes.",
+      "case_id": "academic-action-router-dev-0085-q3",
+      "claims": [
+        {
+          "answer_span": "We can use a similar pattern to make a list of palindromes.",
+          "claim_id": "academic-action-router-dev-0085-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11962,
+              "char_start": 11903,
+              "region_id": "source-region-88d12f796ced2c96f5d9056387b771c17d6fc1b2de8f5f89ff889b2e48977d6b",
+              "source_artifact_id": "python-programming:chapters/chap10.ipynb",
+              "source_sha256": "ac53c3198556435a63d77d709a35124b902f267fac1e1f0e5aec8f255388ee54",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Inside the loop, if word is a palindrome, we increment count. When the loop ends, count contains the total number of palindromes.",
+      "case_id": "academic-action-router-dev-0085-q4",
+      "claims": [
+        {
+          "answer_span": "Inside the loop, if word is a palindrome, we increment count.",
+          "claim_id": "academic-action-router-dev-0085-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11828,
+              "char_start": 11763,
+              "region_id": "source-region-020fb1584e08fd7461a3944cba401353b4e71b96a4df2fcd7f7487efa8fedd74",
+              "source_artifact_id": "python-programming:chapters/chap10.ipynb",
+              "source_sha256": "ac53c3198556435a63d77d709a35124b902f267fac1e1f0e5aec8f255388ee54",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "When the loop ends, count contains the total number of palindromes.",
+          "claim_id": "academic-action-router-dev-0085-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 11901,
+              "char_start": 11832,
+              "region_id": "source-region-bb716c88ea7d904d079a4ef61c9aaac3ffe55b7f25cc9fda2d981a89df944abb",
+              "source_artifact_id": "python-programming:chapters/chap10.ipynb",
+              "source_sha256": "ac53c3198556435a63d77d709a35124b902f267fac1e1f0e5aec8f255388ee54",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-action-router-dev-0085-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "path1 = 'photos/jan-2023/photo1.jpg'",
+      "case_id": "academic-action-router-dev-0090-q1",
+      "claims": [
+        {
+          "answer_span": "path1 = 'photos/jan-2023/photo1.jpg'",
+          "claim_id": "academic-action-router-dev-0090-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16399,
+              "char_start": 16363,
+              "region_id": "source-region-d30330ed36d891be420f839322b8522af68fe3fdae3653a070e4cb3d4c891ef9",
+              "source_artifact_id": "python-programming:chapters/chap13.ipynb",
+              "source_sha256": "87bac0acc6447f6d0323a88e4245fe6cb2fe261488480b141eae66c5e93cca46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "data1 = open(path1, 'rb').read()",
+      "case_id": "academic-action-router-dev-0090-q2",
+      "claims": [
+        {
+          "answer_span": "data1 = open(path1, 'rb').read()",
+          "claim_id": "academic-action-router-dev-0090-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16432,
+              "char_start": 16400,
+              "region_id": "source-region-f65aef98739da6ee34ac58f49a1068f0148e211a9f435b63d4e3ac163d4601d1",
+              "source_artifact_id": "python-programming:chapters/chap13.ipynb",
+              "source_sha256": "87bac0acc6447f6d0323a88e4245fe6cb2fe261488480b141eae66c5e93cca46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "type(data1)",
+      "case_id": "academic-action-router-dev-0090-q3",
+      "claims": [
+        {
+          "answer_span": "type(data1)",
+          "claim_id": "academic-action-router-dev-0090-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16444,
+              "char_start": 16433,
+              "region_id": "source-region-9f91556d7c92fa76acfa48eb6fd947aa17f7b87688b44886a0fc5fe725d1fc54",
+              "source_artifact_id": "python-programming:chapters/chap13.ipynb",
+              "source_sha256": "87bac0acc6447f6d0323a88e4245fe6cb2fe261488480b141eae66c5e93cca46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "path1 = 'photos/jan-2023/photo1.jpg'",
+      "case_id": "academic-action-router-dev-0090-q4",
+      "claims": [
+        {
+          "answer_span": "path1 = 'photos/jan-2023/photo1.jpg'",
+          "claim_id": "academic-action-router-dev-0090-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 16399,
+              "char_start": 16363,
+              "region_id": "source-region-d30330ed36d891be420f839322b8522af68fe3fdae3653a070e4cb3d4c891ef9",
+              "source_artifact_id": "python-programming:chapters/chap13.ipynb",
+              "source_sha256": "87bac0acc6447f6d0323a88e4245fe6cb2fe261488480b141eae66c5e93cca46",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0090-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def print_time(time):",
+      "case_id": "academic-action-router-dev-0091-q1",
+      "claims": [
+        {
+          "answer_span": "def print_time(time):",
+          "claim_id": "academic-action-router-dev-0091-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4770,
+              "char_start": 4749,
+              "region_id": "source-region-14dbbe29e36fd0f6f5d44b2c4378773c99a75a7ea9f5bf3252a5bece17bc364f",
+              "source_artifact_id": "python-programming:chapters/chap14.ipynb",
+              "source_sha256": "cfacb4c7a7268267ac9a79b98a0082a5abbcf0bb6aff5d08eba358ab19bc70f0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "s = f'{time.hour:02d}:{time.minute:02d}:{time.second:02d}'",
+      "case_id": "academic-action-router-dev-0091-q2",
+      "claims": [
+        {
+          "answer_span": "s = f'{time.hour:02d}:{time.minute:02d}:{time.second:02d}'",
+          "claim_id": "academic-action-router-dev-0091-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4833,
+              "char_start": 4775,
+              "region_id": "source-region-51e30cee3afb09a58654a5f6fc173cda206cf7f66eb1f6fc21307d2744bf9355",
+              "source_artifact_id": "python-programming:chapters/chap14.ipynb",
+              "source_sha256": "cfacb4c7a7268267ac9a79b98a0082a5abbcf0bb6aff5d08eba358ab19bc70f0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "print(s)",
+      "case_id": "academic-action-router-dev-0091-q3",
+      "claims": [
+        {
+          "answer_span": "print(s)",
+          "claim_id": "academic-action-router-dev-0091-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4846,
+              "char_start": 4838,
+              "region_id": "source-region-cba0877177d04802f566da60f76b19c30f0fd59d9a3dcb4ceed2cde2908d7226",
+              "source_artifact_id": "python-programming:chapters/chap14.ipynb",
+              "source_sha256": "cfacb4c7a7268267ac9a79b98a0082a5abbcf0bb6aff5d08eba358ab19bc70f0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def print_time(time):",
+      "case_id": "academic-action-router-dev-0091-q4",
+      "claims": [
+        {
+          "answer_span": "def print_time(time):",
+          "claim_id": "academic-action-router-dev-0091-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4770,
+              "char_start": 4749,
+              "region_id": "source-region-14dbbe29e36fd0f6f5d44b2c4378773c99a75a7ea9f5bf3252a5bece17bc364f",
+              "source_artifact_id": "python-programming:chapters/chap14.ipynb",
+              "source_sha256": "cfacb4c7a7268267ac9a79b98a0082a5abbcf0bb6aff5d08eba358ab19bc70f0",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-action-router-dev-0091-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def translate(self, dx, dy):",
+      "case_id": "academic-action-router-dev-0096-q1",
+      "claims": [
+        {
+          "answer_span": "def translate(self, dx, dy):",
+          "claim_id": "academic-action-router-dev-0096-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3673,
+              "char_start": 3645,
+              "region_id": "source-region-6ad2c550a15041508ed504ea8541301c39d8c7e40e354c9f6bafb7b578ee545e",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "self.x += dx",
+      "case_id": "academic-action-router-dev-0096-q2",
+      "claims": [
+        {
+          "answer_span": "self.x += dx",
+          "claim_id": "academic-action-router-dev-0096-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3694,
+              "char_start": 3682,
+              "region_id": "source-region-169212236ea78ebc5e6cfe360778aaba44108a372049afac41974e16d360831c",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "self.y += dy",
+      "case_id": "academic-action-router-dev-0096-q3",
+      "claims": [
+        {
+          "answer_span": "self.y += dy",
+          "claim_id": "academic-action-router-dev-0096-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3715,
+              "char_start": 3703,
+              "region_id": "source-region-fd672873130f2c4a517b2545901ff6c04cef7d805c72140673e433a989b30026",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def translate(self, dx, dy):",
+      "case_id": "academic-action-router-dev-0096-q4",
+      "claims": [
+        {
+          "answer_span": "def translate(self, dx, dy):",
+          "claim_id": "academic-action-router-dev-0096-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3673,
+              "char_start": 3645,
+              "region_id": "source-region-6ad2c550a15041508ed504ea8541301c39d8c7e40e354c9f6bafb7b578ee545e",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-action-router-dev-0096-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This statement checks whether x is positive.",
+      "case_id": "academic-action-router-dev-0098-q1",
+      "claims": [
+        {
+          "answer_span": "This statement checks whether x is positive.",
+          "claim_id": "academic-action-router-dev-0098-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11031,
+              "char_start": 10985,
+              "region_id": "source-region-01081684731e989469f21164eb73e4be58abe62f74b1d51e4141706be3c4c668",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If so, it computes its logarithm.",
+      "case_id": "academic-action-router-dev-0098-q2",
+      "claims": [
+        {
+          "answer_span": "If so, it computes its logarithm.",
+          "claim_id": "academic-action-router-dev-0098-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11065,
+              "char_start": 11032,
+              "region_id": "source-region-64ed0e220311cb7d0f8a341359632f34a4d946b2803422c07c1880725ce99073",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If not, math.log would raise a ValueError.",
+      "case_id": "academic-action-router-dev-0098-q3",
+      "claims": [
+        {
+          "answer_span": "If not, math.log would raise a ValueError.",
+          "claim_id": "academic-action-router-dev-0098-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11111,
+              "char_start": 11067,
+              "region_id": "source-region-24fc9a43345db1f6798fde49fa74070658ba7a26dbaf466d28db93f5863eb62f",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This statement checks whether x is positive. If so, it computes its logarithm.",
+      "case_id": "academic-action-router-dev-0098-q4",
+      "claims": [
+        {
+          "answer_span": "This statement checks whether x is positive.",
+          "claim_id": "academic-action-router-dev-0098-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11031,
+              "char_start": 10985,
+              "region_id": "source-region-01081684731e989469f21164eb73e4be58abe62f74b1d51e4141706be3c4c668",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "If so, it computes its logarithm.",
+          "claim_id": "academic-action-router-dev-0098-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 11065,
+              "char_start": 11032,
+              "region_id": "source-region-64ed0e220311cb7d0f8a341359632f34a4d946b2803422c07c1880725ce99073",
+              "source_artifact_id": "python-programming:chapters/chap18.ipynb",
+              "source_sha256": "160393d35609b9e82fef338eaa098a5925a0e8b0419984b5b721101044aa116b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-action-router-dev-0098-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    }
+  ],
+  "schema_version": 1,
+  "split": "development-confirmation"
+}

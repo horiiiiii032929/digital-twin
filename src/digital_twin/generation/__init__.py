@@ -10,6 +10,14 @@ from src.digital_twin.generation.generator import (
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
     LiveGroundedGenerator,
+    LiveQuestionTargetedAtomicGroundedGenerator,
+)
+from src.digital_twin.action_router import (
+    ActionRouteV1,
+    DeterministicActionRouterV1,
+    deterministic_boundary_action,
+    required_atomic_claim_count,
+    requires_clarification,
 )
 from src.digital_twin.generation.evaluation import (
     GenerationEvaluationCase,
@@ -37,6 +45,7 @@ from src.digital_twin.generation.prompt import (
     ExtractiveBoundaryGroundedPromptBuilder,
     GroundedPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
+    QuestionTargetedAtomicPromptBuilder,
 )
 
 
@@ -46,6 +55,7 @@ __all__ = [
     "ClarificationFirstGroundedPromptBuilder",
     "ConservativeGroundedPromptBuilder",
     "DeterministicCitationValidator",
+    "DeterministicActionRouterV1",
     "DeterministicGroundedGenerator",
     "LiveAtomicGroundedGenerator",
     "LiveExtractiveBoundaryGroundedGenerator",
@@ -56,6 +66,7 @@ __all__ = [
     "GenerationEvaluationSummary",
     "GroundedPromptBuilder",
     "LiveGroundedGenerator",
+    "LiveQuestionTargetedAtomicGroundedGenerator",
     "ModelTutorOutput",
     "ModelBoundaryAction",
     "ModelAtomicClaimOutput",
@@ -65,10 +76,15 @@ __all__ = [
     "PolicyDecision",
     "PromptPackage",
     "StrictEvidenceGroundedPromptBuilder",
+    "QuestionTargetedAtomicPromptBuilder",
     "ExtractiveBoundaryGroundedPromptBuilder",
     "authoritative_citation_for_chunk",
     "citation_matches_chunk",
     "resolve_atomic_claim_lineage",
     "evaluate_generator",
     "load_generation_evaluation_set",
+    "ActionRouteV1",
+    "deterministic_boundary_action",
+    "required_atomic_claim_count",
+    "requires_clarification",
 ]

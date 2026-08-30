@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 748
+    "audited": 758
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 175,
-    "active_runtime": 127,
+    "active_or_unclassified_tooling": 178,
+    "active_runtime": 128,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 186,
+    "evaluation_configuration": 190,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 161
+    "verification": 163
   },
-  "file_count": 748,
+  "file_count": 758,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0d64b54d13e4eaacd1ddd15c962fdce27d7d6b8609e767110a50181959b20a0f",
+  "record_sha256": "6469ce69e45928340c1d1f8a2c0a3b1b4195ae015613f98239a76b646cd7de9a",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "f983580e424a73c13dbf724519f9972ee8242de622c6d37097536e96a93250a5"
+      "sha256": "b2adaa15978bdf697ae956bbefbc0c08092f6dea215864789528430f53b54fe2"
     },
     {
       "audit": {
@@ -1604,6 +1604,70 @@
       "path": "research/05_evaluation/instruments/README.md",
       "risk": "high",
       "sha256": "6b93f9d4050fede40f3df3bcf3f9255c76ae743e9dc965af935179c7dc291654"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Manifest review binds the finite candidate to deterministic action routing, question-targeted evidence, exact atomic claims, fresh source ranges, direct OpenAI snapshots, hidden-gold isolation, and provider-unauthorized execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_candidate_manifest_001.json",
+      "risk": "high",
+      "sha256": "ca44f09002bcadc95f669bf5a8b743221a642d562a8dad9e4fc0e1f328ab2e93"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Instrument review verifies one finite method-level decision, 500 candidate and 100 paired control cases, 620-call and USD 8 ceilings, zero retries, atomic resume, exact hard gates, and unopened final data.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_checkpoint_001.json",
+      "risk": "high",
+      "sha256": "6e43121c60aac006a5426dd56bb8e10fee25725fe57ac5db124cd9cb49fd45e0"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Control-manifest review retains the historical structured evidence gate and extractive generator over the same retriever and model for an inspectable method-level comparison.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_control_manifest_001.json",
+      "risk": "high",
+      "sha256": "27bd2aedf31435c583167a6011314a92210b5787f339bb5ae5c29e0408b40ff9"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Provider-binding review requires direct OpenAI models, store false, exact identities, zero fallback/retries, a 24-hour refresh, and separate paid authorization before calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
+      "risk": "high",
+      "sha256": "58f30843802eb2a21a623ddd5b7fccd09f700fadf04536bf89b5462339bcc4a9"
     },
     {
       "audit": {
@@ -4483,7 +4547,7 @@
       "package_commands": [],
       "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
       "risk": "high",
-      "sha256": "58eca6d0eea39f082890fdc74172970cc4bacfc49c8743790893527f0f967c4e"
+      "sha256": "2413be9dcddcc826c06955209ca6e5581ea9e2d5d85b3c0badd2f02e3fdc2f08"
     },
     {
       "audit": {
@@ -4502,7 +4566,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "f61d41018d1abaeaa5d66507e42a26ecf6538d104828aef411522b574347f335"
+      "sha256": "cfeb2f7376e57923926f7f3a59c429d674f810850261a4983916e888a1d3e8f6"
     },
     {
       "audit": {
@@ -4887,6 +4951,42 @@
       "path": "scripts/bootstrap_admin.py",
       "risk": "high",
       "sha256": "f5c4d5232466648ae65c374c6448141b5986fe6fce9d84dc0955dffef357fae9"
+    },
+    {
+      "audit": {
+        "domain": "action-router-fresh-dataset",
+        "evidence": "Builder tests prove byte stability, 100 clusters, 500 unique questions, 300 non-overlapping atoms, 452/452 reference matchability, balanced boundaries, prior-range exclusion, and no final/private/provider access.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-action-router-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_action_router_confirmation.py",
+      "risk": "high",
+      "sha256": "3ba9c7ffd285fb7072948dfe7818210fa60cd07839a31da2507e454d15abf289"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, immutable hashes, and provider-unauthorized defaults.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-action-router-product-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "fff5896ba6d4276ed04ee90b10cf5784adef25d43c93f349fcc4ad59cad81128"
     },
     {
       "audit": {
@@ -5998,6 +6098,28 @@
       "path": "scripts/review_generator_qualification_v2.py",
       "risk": "high",
       "sha256": "dffad8cd3b51f98c286ef81102b810eecc27388d56e04c8179bdc86528333074"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint",
+        "evidence": "Runner review verifies bounded streamed index materialization, exact bindings, atomic resume, exclusive outputs, hidden-gold opening after both ledgers, terminal simulations, accounting, and fail-closed authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-action-router-product",
+        "preflight:academic-factual-qa-action-router-product",
+        "resume:academic-factual-qa-action-router-product",
+        "simulate:academic-factual-qa-action-router-product",
+        "verify:academic-factual-qa-action-router-product"
+      ],
+      "path": "scripts/run_academic_factual_qa_action_router_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "aae73b367718af97ac344459a4db77a7e00a57dd0016b195c27ed96744c4a515"
     },
     {
       "audit": {
@@ -8535,6 +8657,22 @@
     },
     {
       "audit": {
+        "domain": "action-router-runtime",
+        "evidence": "Focused tests verify explicit ambiguity, cross-course, future, and direct graded-work routing; ordinary conceptual questions remain answerable and multi-evidence claim count is public-question-derived.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/action_router.py",
+      "risk": "high",
+      "sha256": "1444440f6ed07dc093c44a2de466d1430948225d3183ab068d9da930491955a5"
+    },
+    {
+      "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
@@ -8979,7 +9117,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "48432e2fd4ae42673dc869e35ab564ec8b61861bac570b317ce66075b5695c87"
+      "sha256": "a3ebfb17dae9dfebaa93f494a5d251194da0f368bbfaee2f4e3d70a6a3f5c581"
     },
     {
       "audit": {
@@ -9027,7 +9165,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "ce028ead9df1f9b0e0956ac13608c623b1bf54dd59c0c4fafce83f56d7eb2d0d"
+      "sha256": "9a10714a779a122914888acfeb2a3c0a83c63b2aed1d45b4fc90a15b0dfb8fc2"
     },
     {
       "audit": {
@@ -9059,7 +9197,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/policy.py",
       "risk": "high",
-      "sha256": "0e3f12bb9eddad05a9864834ac6db809f18bcc3a23623685335eb89b63c01650"
+      "sha256": "8456766ecc9dc613a7d861ca7d998c99b6bcea6b83d57274c3c42fd196c817f5"
     },
     {
       "audit": {
@@ -9075,7 +9213,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "7f4e6d417c57f01fea5c86acf1b1ee73186d680a213dab2245d586d97a960f44"
+      "sha256": "205e81b0742c3000d646eb3502076cf63b1fa18e0bd0472f9e881c1c47cdf05c"
     },
     {
       "audit": {
@@ -9091,7 +9229,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "55c8c182509b82b91ffce028814f6a64a39577cfd729f02f73d72878c7ded72b"
+      "sha256": "22db9d6c349d094217e01ccc541fe368c74714efb2722058bae327e1f2e9a91b"
     },
     {
       "audit": {
@@ -9107,7 +9245,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/api_retrieval_index.py",
       "risk": "high",
-      "sha256": "1bc4c036fe975225942dc5224918e9fd25dab3cca786952fdaffa79e9b55d781"
+      "sha256": "d04cf11be306d294f38ed9217672c8a1b0418dc6654959f58062394cca97889d"
     },
     {
       "audit": {
@@ -9155,7 +9293,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "e4c6c518fd138b10480c10644c7396d3ea18d15524bcca50e56faa031930af5c"
+      "sha256": "40f17ea942d6508451293e1b725fd0d42e43deceb357f1ec902cef60d38a49fd"
     },
     {
       "audit": {
@@ -9187,7 +9325,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/hierarchical_retrieval.py",
       "risk": "high",
-      "sha256": "59f88fbd1d8ed988cfb7faa1544e7268e0f5ab2ebc1045a4589e7ca235fb3770"
+      "sha256": "15488b215b82e4e5041d5f8aa099131156ec1e05e21a534070bf0a5ad9b3e227"
     },
     {
       "audit": {
@@ -9731,7 +9869,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9a49d5ed2904d0c5e1ef4a20848d88448f8b03626ae50250b443daef8a9d8546"
+      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
     },
     {
       "audit": {
@@ -10147,7 +10285,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "3cc6136f72916bb31532936c622f9a525818cef95e49ec1443addd6c860d580c"
+      "sha256": "fcc66d9d15b976b6608da59c07e5828802cf90a9ad56aae0b0ec20776beaf85d"
     },
     {
       "audit": {
@@ -10355,7 +10493,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_retrieval.py",
       "risk": "medium",
-      "sha256": "8f7b81ceeecf4a72ad1554e03ded90943d5312a5d4bc4339a63e8cb14cb125be"
+      "sha256": "26744b79b71919688d3ab42329a99904e9d45a01c66bdcb7d250fe8d2ee01ff4"
     },
     {
       "audit": {
@@ -10660,6 +10798,22 @@
       "path": "tests/services/test_runtime_lifecycle.py",
       "risk": "medium",
       "sha256": "581ccab0577597cdb0d2d2c2280154d80a5c706ed3311bcf1d4259c1d65207ca"
+    },
+    {
+      "audit": {
+        "domain": "action-router-product-checkpoint-verification",
+        "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, all terminal simulations, and blocked preflight before metadata and paid authorization.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
+      "risk": "medium",
+      "sha256": "94040e6b290869ccb5defdf5cb72aa6b8367808bcf1250fba96f27c955a6a94b"
     },
     {
       "audit": {
@@ -11252,6 +11406,22 @@
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
       "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
+    },
+    {
+      "audit": {
+        "domain": "action-router-fresh-dataset-verification",
+        "evidence": "Tests independently recompute prior-range exclusion, allocation, boundary balance, atom non-overlap, normalized uniqueness, exact reference matchability, byte stability, and no-call boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-action-router-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_action_router_confirmation.py",
+      "risk": "medium",
+      "sha256": "49350a9f471009ce0b17fe822dacebc705bbb33ef5ab52004429fad4e6dd2f5e"
     },
     {
       "audit": {
@@ -12519,8 +12689,8 @@
     }
   ],
   "risk_counts": {
-    "high": 573,
-    "medium": 175
+    "high": 581,
+    "medium": 177
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

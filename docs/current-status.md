@@ -183,6 +183,20 @@ method-level decision is a deterministic boundary/action router plus
 question-targeted generation on a fresh tranche, not another run over these
 known cases.
 
+AFQC-110 implements that one finite method-level successor. A deterministic
+pre-generation router now handles explicit ambiguity, cross-course, unsupported
+future, and direct graded-work requests before any model call. The candidate
+then narrows already-approved evidence to the one or two atomic facts requested
+by the public question and requires the exact corresponding claim/citation
+count. Its fresh package contains 100 clusters, 500 candidate cases, and a
+fixed 100-case control; all selected character ranges are disjoint from every
+prior development package, all 452 required references map exactly, and the
+sealed 10,000 set remains unopened. The pinned repositories cannot provide
+another fully source-family-disjoint 100-cluster portfolio, so family overlap
+is an explicit limitation. The build and terminal network-free simulations
+pass, but OpenAI metadata refresh, repository authorization, and paid execution
+remain deliberately unfrozen. No new quality result exists yet.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
