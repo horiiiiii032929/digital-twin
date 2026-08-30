@@ -61,6 +61,9 @@ SYNTHETIC_PROFILE_PATH = ROOT / (
 DEFAULT_OUTPUT_ROOT = ROOT / (
     "reports/generated/course-digital-twin-nonhuman-supplements-002"
 )
+DEFAULT_PROFILE_ONLY_OUTPUT_ROOT = ROOT / (
+    "reports/generated/course-digital-twin-synthetic-profile-c0-c2-002"
+)
 GENERATED_ROOT = (ROOT / "reports/generated").resolve()
 
 VISUAL_STAGE = "true-visual-30-plus-60"
@@ -1052,6 +1055,128 @@ def _visual_evidence_payload(
     }
 
 
+def _visual_invalid_semantic_payload(
+    *,
+    program: dict[str, Any],
+    dataset: dict[str, Any],
+    provider: dict[str, Any],
+    code_revision: str,
+    duplicate_asset_count: int,
+) -> dict[str, Any]:
+    def candidate_record(
+        *, role: str, implementation_id: str, complete: int, duplicates: int
+    ) -> dict[str, Any]:
+        return {
+            "role": role,
+            "implementation": {
+                "implementation_id": implementation_id,
+                "version": "v1",
+                "configuration": {
+                    "visual_assets": 30,
+                    "provider_model": VISUAL_MODEL if role == "candidate" else "none",
+                    "program_sha256": program["content_sha256"],
+                },
+            },
+            "metrics": [
+                _metric("complete-visual-description-count", float(complete), 30.0),
+                _metric(
+                    "duplicate-semantic-list-asset-count",
+                    float(duplicates),
+                    0.0,
+                    lower_is_better=True,
+                ),
+                _metric(
+                    "reported-cost-usd",
+                    float(provider["reported_cost_usd"] if role == "candidate" else 0),
+                    VISUAL_MAXIMUM_COST_USD,
+                    lower_is_better=True,
+                ),
+            ],
+            "hard_gates": [
+                {
+                    "name": "public-only-inputs",
+                    "passed": True,
+                    "evidence": "All visual inputs are pinned public/open or deterministic synthetic fixtures.",
+                },
+                {
+                    "name": "original-region-lineage",
+                    "passed": True,
+                    "evidence": "Every transmitted raster was deterministically derived from and hash-bound to its pinned source asset.",
+                },
+                {
+                    "name": "complete-provider-portfolio",
+                    "passed": complete == 30,
+                    "evidence": f"Observed {complete}/30 completed visual-description responses.",
+                },
+                {
+                    "name": "valid-semantic-output",
+                    "passed": duplicates == 0,
+                    "evidence": f"Observed duplicate semantic-list values for {duplicates} visual assets.",
+                },
+                {
+                    "name": "no-private-data",
+                    "passed": True,
+                    "evidence": "No private source, participant record, or student data was processed.",
+                },
+            ],
+            "failures_by_category": {
+                "duplicate-semantic-list": duplicates,
+                "incomplete-visual-description": 30 - complete,
+            },
+        }
+
+    return {
+        "schema_version": 1,
+        "run_id": VISUAL_RUN_ID,
+        "program_id": PROGRAM_ID,
+        "program_sha256": program["content_sha256"],
+        "stage": VISUAL_STAGE,
+        "stage_status": "invalid-execution",
+        "quality_gates_passed": False,
+        "component": "figure-description",
+        "dataset_id": dataset["dataset_id"],
+        "corpus_id": "academic-factual-qa-public-visual-supplement-001",
+        "code_revision": code_revision,
+        "candidates": [
+            candidate_record(
+                role="control",
+                implementation_id="course-scoped-visual-metadata-control",
+                complete=30,
+                duplicates=0,
+            ),
+            candidate_record(
+                role="candidate",
+                implementation_id="course-scoped-openai-visual-description-retrieval",
+                complete=int(provider["provider_calls"]),
+                duplicates=duplicate_asset_count,
+            ),
+        ],
+        "decision": {
+            "outcome": "refine",
+            "selected_implementation_id": None,
+            "rationale": "The final corrective visual attempt completed all provider calls but violated the frozen deterministic uniqueness contract. The visual branch stops without a quality estimate or another retry.",
+            "limitations": [
+                "No retrieval-quality estimate is reported because semantic output validation failed before scoring.",
+                "The complete provider ledger remains available for cost and operational accounting.",
+                "This supplementary branch does not affect the text/OCR factual evaluation or R1 release decision.",
+            ],
+        },
+        "operational_summary": {
+            "provider_model": VISUAL_MODEL,
+            "provider_calls": int(provider["provider_calls"]),
+            "provider_attempts": int(provider["provider_attempts"]),
+            "maximum_calls": VISUAL_MAXIMUM_CALLS,
+            "maximum_cost_usd": VISUAL_MAXIMUM_COST_USD,
+            "reported_cost_usd": float(provider["reported_cost_usd"]),
+            "raw_output_path": VISUAL_LEDGER_NAME,
+            "request_store": False,
+            "private_data_used": False,
+            "hidden_data_opened": False,
+            "human_participants": 0,
+        },
+    }
+
+
 def _profile_prompt(
     case: dict[str, Any], condition: str, profile: dict[str, Any]
 ) -> tuple[str, str]:
@@ -1857,16 +1982,61 @@ async def execute(
     if materialized != dataset:
         raise SupplementaryEvaluationError("materialized visual supplement drifted")
 
-    visual = await _execute_visual_stage(
-        program=program,
-        dataset=dataset,
-        binding=bindings["visual"],
-        output_root=output_root,
-        resume=resume,
-        code_revision=code_revision,
-        transport_factory=transport_factory,
-        image_data_url_factory=image_data_url_factory,
-    )
+    try:
+        visual = await _execute_visual_stage(
+            program=program,
+            dataset=dataset,
+            binding=bindings["visual"],
+            output_root=output_root,
+            resume=resume,
+            code_revision=code_revision,
+            transport_factory=transport_factory,
+            image_data_url_factory=image_data_url_factory,
+        )
+    except SupplementaryEvaluationError as error:
+        visual_ledger = output_root / VISUAL_LEDGER_NAME
+        visual_evidence = output_root / VISUAL_EVIDENCE_NAME
+        if (
+            not str(error).startswith("provider response contains duplicate ")
+            or not visual_ledger.is_file()
+            or visual_evidence.exists()
+        ):
+            raise
+        run_binding = _run_binding(
+            program=program,
+            stage=VISUAL_STAGE,
+            binding=bindings["visual"],
+            dataset=dataset,
+            code_revision=code_revision,
+        )
+        responses, provider = _completed_ledger(
+            visual_ledger,
+            run_binding=run_binding,
+            maximum_calls=VISUAL_MAXIMUM_CALLS,
+            maximum_cost_usd=VISUAL_MAXIMUM_COST_USD,
+        )
+        duplicate_assets = 0
+        for response in responses.values():
+            content = response.content
+            if any(
+                len(values := [str(value) for value in content[field_name]])
+                != len(set(values))
+                for field_name in ("entities", "relationships", "uncertainty")
+            ):
+                duplicate_assets += 1
+        payload = _visual_invalid_semantic_payload(
+            program=program,
+            dataset=dataset,
+            provider=provider,
+            code_revision=code_revision,
+            duplicate_asset_count=duplicate_assets,
+        )
+        _write_exclusive_json(visual_evidence, payload)
+        visual = _load_sanitized(
+            visual_evidence,
+            run_id=VISUAL_RUN_ID,
+            program_sha256=program["content_sha256"],
+        )
     # A valid visual Refine is a terminal visual result, not a program-level
     # safety failure. Stage B is independently authorized and still executes.
     profile_result = await _execute_profile_stage(
@@ -1891,6 +2061,42 @@ async def execute(
         combined_path,
         run_id=COMBINED_RUN_ID,
         program_sha256=program["content_sha256"],
+    )
+
+
+async def execute_profile_only(
+    *,
+    output_root: Path = DEFAULT_PROFILE_ONLY_OUTPUT_ROOT,
+    transport_factory: Callable[[dict[str, Any]], Any] = DirectProviderJsonTransport,
+) -> dict[str, Any]:
+    if not _output_root_is_safe(output_root):
+        raise SupplementaryEvaluationError(
+            "raw output must remain under reports/generated"
+        )
+    require_bounded_pilot_operation_allowed(PROGRAM_ID, "external_model_evaluation")
+    require_bounded_pilot_operation_allowed(PROGRAM_ID, "method_evaluation_execution")
+    readiness = preflight(output_root=output_root, resume=False)
+    if readiness["status"] != "ready":
+        raise SupplementaryEvaluationError(
+            "profile-only preflight blocked: " + ", ".join(readiness["blockers"])
+        )
+    program = _load_program()
+    dataset = _visual_dataset()
+    profile = _synthetic_profile()
+    cases = _stratified_profile_cases(dataset)
+    bindings = _bindings(program)
+    _validate_provider_contracts(bindings)
+    output_root.mkdir(parents=True, exist_ok=False)
+    return await _execute_profile_stage(
+        program=program,
+        dataset=dataset,
+        profile=profile,
+        cases=cases,
+        binding=bindings["profile"],
+        output_root=output_root,
+        resume=False,
+        code_revision=_repo_revision(),
+        transport_factory=transport_factory,
     )
 
 
@@ -2032,8 +2238,9 @@ def _arguments() -> argparse.Namespace:
     action.add_argument("--simulate", action="store_true")
     action.add_argument("--preflight", action="store_true")
     action.add_argument("--execute", action="store_true")
+    action.add_argument("--execute-profile-only", action="store_true")
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
+    parser.add_argument("--output-root", type=Path)
     arguments = parser.parse_args()
     if arguments.resume and not arguments.execute:
         parser.error("--resume is valid only with --execute")
@@ -2043,7 +2250,12 @@ def _arguments() -> argparse.Namespace:
 def main() -> int:
     load_dotenv(ROOT / ".env")
     arguments = _arguments()
-    if arguments.execute:
+    output_root = arguments.output_root or (
+        DEFAULT_PROFILE_ONLY_OUTPUT_ROOT
+        if arguments.execute_profile_only
+        else DEFAULT_OUTPUT_ROOT
+    )
+    if arguments.execute or arguments.execute_profile_only:
         require_bounded_pilot_operation_allowed(
             PROGRAM_ID, "external_model_evaluation"
         )
@@ -2055,10 +2267,12 @@ def main() -> int:
     elif arguments.simulate:
         result = simulate()
     elif arguments.preflight:
-        result = preflight(output_root=arguments.output_root, resume=False)
+        result = preflight(output_root=output_root, resume=False)
+    elif arguments.execute_profile_only:
+        result = asyncio.run(execute_profile_only(output_root=output_root))
     else:
         result = asyncio.run(
-            execute(output_root=arguments.output_root, resume=arguments.resume)
+            execute(output_root=output_root, resume=arguments.resume)
         )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

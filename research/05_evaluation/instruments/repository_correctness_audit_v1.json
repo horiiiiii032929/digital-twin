@@ -621,7 +621,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, explicit independent profile-supplement command coverage, and the complete repository gate.",
       "findings": [],
       "path": "apps/web/src/lib/api/types.ts",
       "reviewed_at": "2026-08-29",
@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "cc61aef37b3a8131a18892fd2f0c819d1d9dd6796793f7913c31a8918333c01e"
+      "sha256": "2f128c14a6fbfa13b1be9cfe653e0c6b5c7398161c180dde54323da270d2760b"
     },
     {
       "audit_status": "audited",
@@ -8090,12 +8090,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "nonhuman-evaluation-supplements",
-      "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, bounded deterministic SVG rasterization, transmitted-raster hashes, original-region authority, explicit C0-C2-only claims, independent stage outcomes, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
+      "evidence": "Runner and focused test review verify direct OpenAI-only visual and synthetic-profile stages, exact program/model bindings, bounded deterministic SVG rasterization, transmitted-raster hashes, terminal invalid visual evidence, independent profile-only continuation, original-region authority, explicit C0-C2-only claims, exclusive SQLite ledgers, safe resume, zero retries, and separate cost stops.",
       "findings": [],
       "path": "scripts/run_course_digital_twin_nonhuman_supplements.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-agent-cross-review",
-      "sha256": "09fd9df1d22d7e2e695824194909e3a16aa043fe523fa90bb316d10a4a4baa87"
+      "sha256": "9046b5e3b0f9a0318aabe17de4771d16f56a96ac5c24cc0c4cfae18ffa039fa9"
     },
     {
       "audit_status": "audited",
@@ -8123,12 +8123,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "nonhuman-evaluation-supplements-verification",
-      "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, safe output roots, identity and ledger checks, simulated pass/failure propagation, visual scoring, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
+      "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, terminal semantic-output invalidation, independent profile-only execution, safe output roots, identity and ledger checks, simulated pass/failure propagation, C0-C2 condition handling, and resume rejection for corrupted or exclusive outputs.",
       "findings": [],
       "path": "tests/test_course_digital_twin_nonhuman_supplements.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-agent-cross-review",
-      "sha256": "ca8feb4f75eb6dffe22a997806072e2f727540ddc0fb1500b31beeed7c5ddc57"
+      "sha256": "3623c7c3f84ff5efb30bcdb26b4e022e2be17173117ac2a0a85fed3ffb77fa0e"
     }
   ],
   "schema_version": 1

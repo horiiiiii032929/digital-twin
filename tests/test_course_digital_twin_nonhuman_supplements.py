@@ -194,6 +194,27 @@ def test_visual_failure_is_terminal_refine_without_skipping_profile_stage() -> N
     ]
 
 
+def test_final_visual_semantic_failure_is_invalid_and_accounted() -> None:
+    program = runner._load_program()
+    dataset = runner._visual_dataset()
+    payload = runner._visual_invalid_semantic_payload(
+        program=program,
+        dataset=dataset,
+        provider=_provider_snapshot(calls=30, cost=0.025),
+        code_revision="a" * 40,
+        duplicate_asset_count=3,
+    )
+
+    assert payload["stage_status"] == "invalid-execution"
+    assert payload["quality_gates_passed"] is False
+    assert payload["decision"]["outcome"] == "refine"
+    assert payload["operational_summary"]["provider_calls"] == 30
+    assert payload["candidates"][1]["failures_by_category"] == {
+        "duplicate-semantic-list": 3,
+        "incomplete-visual-description": 0,
+    }
+
+
 def test_profile_is_explicitly_c0_c2_and_discloses_c3_skip() -> None:
     program = runner._load_program()
     dataset = runner._visual_dataset()
@@ -490,6 +511,64 @@ def test_interrupted_execution_resumes_atomically_and_corrupt_ledger_stops(
                 enforce_preflight=False,
             )
         )
+
+
+def test_profile_only_execution_is_independent_of_terminal_visual_branch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "profile-only"
+    dataset = runner._visual_dataset()
+    profile = runner._synthetic_profile()
+    cases = runner._stratified_profile_cases(dataset)
+    case_by_id = {case["case_id"]: case for case in cases}
+    feature = next(iter(profile["dimensions"]))
+    monkeypatch.setattr(runner, "GENERATED_ROOT", tmp_path.resolve())
+    monkeypatch.setattr(runner, "_repo_revision", lambda: "c" * 40)
+    monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
+    monkeypatch.setattr(runner.shutil, "which", lambda _: "/usr/bin/rsvg-convert")
+    monkeypatch.setattr(
+        runner,
+        "require_bounded_pilot_operation_allowed",
+        lambda *_: None,
+    )
+    monkeypatch.setenv("OPENAI_API_KEY", "test-only")
+
+    async def fake_call(self, *, prompt: str, **_: object):
+        request = json.loads(prompt)
+        case = case_by_id[request["case_id"]]
+        condition = request["condition"]
+        answerable = condition in {"C1", "C2"} and case["expected_action"] == "answer"
+        return ProviderJsonResponse(
+            content={
+                "case_id": case["case_id"],
+                "condition": condition,
+                "action": runner._expected_profile_action(case, condition),
+                "response": (
+                    ("Profile: " if condition == "C2" else "")
+                    + case["canonical_answer"]
+                    if answerable
+                    else "I cannot answer from authorized evidence."
+                ),
+                "evidence_region_ids": case["required_region_ids"] if answerable else [],
+                "applied_profile_features": [feature] if condition == "C2" else [],
+            },
+            provider_model=runner.PROFILE_MODEL,
+            provider_revision=runner.PROFILE_MODEL,
+            endpoint_provider="OpenAI",
+            input_tokens=10,
+            output_tokens=10,
+            cost_usd=0.001,
+            latency_ms=1.0,
+            attempt_count=1,
+        )
+
+    monkeypatch.setattr(runner.DirectProviderJsonTransport, "call", fake_call)
+    result = asyncio.run(runner.execute_profile_only(output_root=output))
+
+    assert result["run_id"] == runner.PROFILE_RUN_ID
+    assert result["operational_summary"]["provider_calls"] == 36
+    assert not (output / runner.VISUAL_LEDGER_NAME).exists()
+    assert (output / runner.PROFILE_LEDGER_NAME).exists()
 
 
 def test_sanitized_payload_hashes_are_stable() -> None:
