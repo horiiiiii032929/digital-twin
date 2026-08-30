@@ -1,18 +1,26 @@
 {
   "authorization": {
     "final_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "provider_execution_authorized": false
+    "paid_execution_authorized": true,
+    "provider_execution_authorized": true
   },
   "binding_id": "academic-factual-qa-action-router-product-openai-binding-001",
-  "content_sha256": "67b8c31fae586d9c32d448ec369675ab02a0f4ecc7399a89fa9b8c360790788a",
+  "content_sha256": "2685214626d9caf909088ccb336adbd20b3120f49a24f697e2a29735c21ad473",
+  "data_controls": {
+    "abuse_monitoring_retention_days_max": 30,
+    "api_training_default": "not-used-unless-explicitly-opted-in",
+    "embeddings_application_state": "none",
+    "responses_application_state_with_store_false": "none",
+    "responses_store": false
+  },
   "freshness_hours": 24,
   "instrument_id": "academic-factual-qa-action-router-product-checkpoint-001",
-  "metadata_status": "refresh-required",
+  "metadata_status": "fresh",
   "official_sources": [
     "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
     "https://developers.openai.com/api/docs/models/text-embedding-3-small",
-    "https://developers.openai.com/api/reference/resources/responses/methods/create"
+    "https://developers.openai.com/api/reference/resources/responses/methods/create",
+    "https://developers.openai.com/api/docs/guides/your-data"
   ],
   "providers": {
     "embedding": {
@@ -40,5 +48,5 @@
     }
   },
   "schema_version": 1,
-  "verified_at": null
+  "verified_at": "2026-08-30T14:09:26+00:00"
 }

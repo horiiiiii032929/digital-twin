@@ -14,7 +14,7 @@
     "generator": "openai-gpt-5.4-mini-question-targeted-atomic-v1",
     "retriever": "atomic-bm25-openai-small-rrf-v1"
   },
-  "content_sha256": "229881b99235ef210093e7167b67971e15c23ef4dd42e5f4e92e8df8cca7e086",
+  "content_sha256": "5667676981aba1b641cf472f952d1f170d7fa919cf532248981ed8d31c60a67c",
   "control_method": {
     "action_router": "none-historical-control",
     "evidence_gate": "atomic-structured-coverage-control-v1",
@@ -76,7 +76,7 @@
   "instrument_id": "academic-factual-qa-action-router-product-checkpoint-001",
   "owner_issue": 127,
   "provider_binding": {
-    "content_sha256": "67b8c31fae586d9c32d448ec369675ab02a0f4ecc7399a89fa9b8c360790788a",
+    "content_sha256": "2685214626d9caf909088ccb336adbd20b3120f49a24f697e2a29735c21ad473",
     "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json"
   },
   "schema_version": 1,
@@ -87,5 +87,5 @@
     "source_family_disjoint_from_prior_development": false,
     "source_range_disjoint_from_all_prior_development": true
   },
-  "status": "reviewed-provider-unauthorized"
+  "status": "frozen-pending-execution"
 }

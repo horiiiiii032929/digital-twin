@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
+      "sha256": "dec3f45c59df17d36c73f2da80ce293e479f012218bb3bbe7d559fc0227e12ac"
     },
     {
       "audit_status": "audited",
@@ -6291,7 +6291,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
+      "sha256": "8f2dfb38c557753a86b85a1cd4a5204b8f3cbb9b8298ac9e99eb65c2ee09beb7"
     },
     {
       "audit_status": "audited",
@@ -8249,7 +8249,7 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_checkpoint_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-action-router-review",
-      "sha256": "6e43121c60aac006a5426dd56bb8e10fee25725fe57ac5db124cd9cb49fd45e0"
+      "sha256": "bd0b44b9bc7a4d30f68444cf18a7845b30d7145048b8059602693ad6e4f98bc2"
     },
     {
       "audit_status": "audited",
@@ -8266,12 +8266,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "action-router-product-checkpoint",
-      "evidence": "Provider-binding review requires direct OpenAI models, store false, exact identities, zero fallback/retries, a 24-hour refresh, and separate paid authorization before calls.",
+      "evidence": "Provider-binding review records the fresh official OpenAI prices and data controls, direct exact models, store false, zero fallback/retries, a 24-hour freshness limit, and the users one-time bounded paid authorization.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-action-router-review",
-      "sha256": "58f30843802eb2a21a623ddd5b7fccd09f700fadf04536bf89b5462339bcc4a9"
+      "sha256": "e2e92e35e0c789ca56b02853ee3ef29e9ff2ce31bea783341a35e8b79ad99555"
     },
     {
       "audit_status": "audited",
@@ -8288,12 +8288,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "action-router-product-checkpoint",
-      "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, immutable hashes, and provider-unauthorized defaults.",
+      "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, immutable hashes, and a one-time bounded authorization that leaves final execution closed.",
       "findings": [],
       "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-action-router-review",
-      "sha256": "fff5896ba6d4276ed04ee90b10cf5784adef25d43c93f349fcc4ad59cad81128"
+      "sha256": "7132abadfb3869799077849a85e1f9f7b0eddc23e6f207bce2980a48322adfa6"
     },
     {
       "audit_status": "audited",
@@ -8321,12 +8321,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "action-router-product-checkpoint-verification",
-      "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, all terminal simulations, and blocked preflight before metadata and paid authorization.",
+      "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, all terminal simulations, fresh provider metadata, and exact bounded preflight authorization.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-action-router-review",
-      "sha256": "94040e6b290869ccb5defdf5cb72aa6b8367808bcf1250fba96f27c955a6a94b"
+      "sha256": "b9efb39810f81d5b4cbc0b9557829d21737bfe9f5d1d96e9ef87096de73c1a70"
     },
     {
       "audit_status": "audited",

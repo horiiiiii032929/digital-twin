@@ -31,6 +31,9 @@ CANDIDATE_MANIFEST = INSTRUMENT_ROOT / "academic_factual_qa_action_router_produc
 CONTROL_MANIFEST = INSTRUMENT_ROOT / "academic_factual_qa_action_router_product_control_manifest_001.json"
 PROFILE = ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 RETRIEVAL_RUNTIME = ROOT / "reports/generated/academic-factual-qa-action-router-product-checkpoint-001/retrieval-runtime.json"
+METADATA_VERIFIED_AT = "2026-08-30T14:09:26+00:00"
+PROVIDER_EXECUTION_AUTHORIZED = True
+PAID_EXECUTION_AUTHORIZED = True
 
 
 class ActionRouterCheckpointBuildError(RuntimeError):
@@ -179,7 +182,11 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
         generator="openai-gpt-5.4-mini-live-extractive-boundary",
         action_router="none-historical-control",
     )
-    checked_at = metadata_verified_at
+    checked_at = (
+        metadata_verified_at
+        if metadata_verified_at is not None
+        else METADATA_VERIFIED_AT
+    )
     binding = _hashed(
         {
             "schema_version": 1,
@@ -194,7 +201,15 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
                 "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
                 "https://developers.openai.com/api/docs/models/text-embedding-3-small",
                 "https://developers.openai.com/api/reference/resources/responses/methods/create",
+                "https://developers.openai.com/api/docs/guides/your-data",
             ],
+            "data_controls": {
+                "api_training_default": "not-used-unless-explicitly-opted-in",
+                "abuse_monitoring_retention_days_max": 30,
+                "responses_store": False,
+                "responses_application_state_with_store_false": "none",
+                "embeddings_application_state": "none",
+            },
             "providers": {
                 "embedding": {
                     "provider": "openai",
@@ -221,8 +236,8 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
                 },
             },
             "authorization": {
-                "provider_execution_authorized": False,
-                "paid_execution_authorized": False,
+                "provider_execution_authorized": PROVIDER_EXECUTION_AUTHORIZED,
+                "paid_execution_authorized": PAID_EXECUTION_AUTHORIZED,
                 "final_execution_authorized": False,
             },
         }
@@ -231,7 +246,11 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
         {
             "schema_version": 1,
             "instrument_id": INSTRUMENT_ID,
-            "status": "reviewed-provider-unauthorized",
+            "status": (
+                "frozen-pending-execution"
+                if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
+                else "reviewed-provider-unauthorized"
+            ),
             "owner_issue": 127,
             "decision_id": "AFQC-110",
             "decision_question": (
@@ -335,16 +354,20 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
 
 
 def check() -> dict[str, Any]:
-    expected = build(metadata_verified_at=None)
+    expected = build(metadata_verified_at=METADATA_VERIFIED_AT)
     for path, payload in expected.items():
         if not path.is_file() or json.loads(path.read_text(encoding="utf-8")) != payload:
             raise ActionRouterCheckpointBuildError(f"checkpoint artifact drifted: {path.name}")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-build-only",
+        "status": (
+            "frozen-pending-execution"
+            if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
+            else "passed-build-only"
+        ),
         "candidate_case_count": 500,
         "control_case_count": 100,
-        "provider_execution_authorized": False,
+        "provider_execution_authorized": PROVIDER_EXECUTION_AUTHORIZED,
         "provider_calls": 0,
         "final_10000_opened": False,
     }
@@ -365,13 +388,17 @@ def main() -> int:
     arguments = parser.parse_args()
     if arguments.write:
         require_bounded_pilot_operation_allowed(
-            dataset.INSTRUMENT_ID, "dataset_generation"
+            INSTRUMENT_ID, "method_evaluation_execution"
         )
         _write(build(metadata_verified_at=arguments.metadata_verified_at))
         result = {
             "instrument_id": INSTRUMENT_ID,
-            "status": "completed-build-only",
-            "provider_execution_authorized": False,
+            "status": (
+                "frozen-pending-execution"
+                if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
+                else "completed-build-only"
+            ),
+            "provider_execution_authorized": PROVIDER_EXECUTION_AUTHORIZED,
             "provider_calls": 0,
         }
     else:
