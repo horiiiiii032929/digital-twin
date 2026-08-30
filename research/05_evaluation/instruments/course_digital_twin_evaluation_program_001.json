@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0.0",
+  "program_id": "course-digital-twin-evaluation-program-001",
+  "status": "terminated",
+  "owner_issue": 127,
+  "total_budget_usd": 50.0,
+  "credential_environment_variable": "OPENAI_API_KEY",
+  "provider_api": "responses",
+  "provider_endpoint": "https://api.openai.com/v1/responses",
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "automatic_stage_progression": true,
+  "deterministic_truth_authoritative": true,
+  "llm_reviews_authoritative": false,
+  "private_data_authorized": false,
+  "retrieval_execution_device": "cpu",
+  "retrieval_execution_dtype": "float16",
+  "models": [
+    {
+      "role": "bounded-evidence-ranker-wording-visual-audit",
+      "provider": "openai",
+      "model": "gpt-5.4-nano-2026-03-17",
+      "documented_revision": "gpt-5.4-nano-2026-03-17",
+      "exact_identity_required": true,
+      "request_store": false,
+      "structured_output": true,
+      "input_price_usd_per_million": 0.2,
+      "output_price_usd_per_million": 1.25
+    },
+    {
+      "role": "product-answer-generator",
+      "provider": "openai",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "documented_revision": "gpt-5.4-mini-2026-03-17",
+      "exact_identity_required": true,
+      "request_store": false,
+      "structured_output": true,
+      "input_price_usd_per_million": 0.75,
+      "output_price_usd_per_million": 4.5
+    },
+    {
+      "role": "independent-question-action-verifier",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "documented_revision": "gpt-5.6-luna",
+      "exact_identity_required": true,
+      "request_store": false,
+      "structured_output": true,
+      "input_price_usd_per_million": 0.2,
+      "output_price_usd_per_million": 1.2
+    },
+    {
+      "role": "critical-source-truth-escalation",
+      "provider": "openai",
+      "model": "gpt-5.4-2026-03-05",
+      "documented_revision": "gpt-5.4-2026-03-05",
+      "exact_identity_required": true,
+      "request_store": false,
+      "structured_output": true,
+      "input_price_usd_per_million": 2.5,
+      "output_price_usd_per_million": 15.0
+    }
+  ],
+  "stages": [
+    {
+      "name": "retrieval-decision",
+      "order": 1,
+      "budget_usd": 2.0,
+      "projected_p99_cost_usd": 0.5,
+      "dependencies": [],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "product-development-500-plus-100",
+      "order": 2,
+      "budget_usd": 4.0,
+      "projected_p99_cost_usd": 3.5,
+      "dependencies": ["retrieval-decision"],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "final-construction-10000",
+      "order": 3,
+      "budget_usd": 8.0,
+      "projected_p99_cost_usd": 7.5,
+      "dependencies": ["product-development-500-plus-100"],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "final-product-10000-plus-1000",
+      "order": 4,
+      "budget_usd": 31.0,
+      "projected_p99_cost_usd": 29.0,
+      "dependencies": ["final-construction-10000"],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "true-visual-30-plus-60",
+      "order": 5,
+      "budget_usd": 0.5,
+      "projected_p99_cost_usd": 0.35,
+      "dependencies": [],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-go-deeper"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "synthetic-profile-c0-c3",
+      "order": 6,
+      "budget_usd": 0.5,
+      "projected_p99_cost_usd": 0.35,
+      "dependencies": [],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-go-deeper"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "provider-t0-t1-50-trajectories",
+      "order": 7,
+      "budget_usd": 2.0,
+      "projected_p99_cost_usd": 1.7,
+      "dependencies": ["final-product-10000-plus-1000"],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "local-release-regression",
+      "order": 8,
+      "budget_usd": 0.0,
+      "projected_p99_cost_usd": 0.0,
+      "dependencies": ["provider-t0-t1-50-trajectories"],
+      "independent_after_factual_failure": false,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    },
+    {
+      "name": "professor-reporting",
+      "order": 9,
+      "budget_usd": 2.0,
+      "projected_p99_cost_usd": 1.7,
+      "dependencies": [],
+      "independent_after_factual_failure": true,
+      "valid_keep_statuses": ["completed-keep"],
+      "maximum_invalid_corrections": 1
+    }
+  ],
+  "metadata_verified_at": "2026-08-30T11:34:38+08:00",
+  "metadata_freshness_hours": 24,
+  "source_plan_path": "data/processed/academic_factual_qa_open_10000_v1_sources.json",
+  "development_cases_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_mixed_wording_005_cases.json",
+  "development_gold_path": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+  "visual_dataset_path": "research/05_evaluation/datasets/academic_factual_qa_visual_supplement_001.json",
+  "global_hard_stops": [
+    "private-data-exposure",
+    "gold-leakage",
+    "provider-model-identity-drift",
+    "corrupted-ledger-or-hash",
+    "security-boundary-failure",
+    "global-cost-ceiling-exhausted",
+    "second-invalid-execution-in-one-stage"
+  ],
+  "content_sha256": "421f1c109ca6d45f91ebb9f91fe4d7ad1dba230cdb10e7752cad9bf968333bd2"
+}

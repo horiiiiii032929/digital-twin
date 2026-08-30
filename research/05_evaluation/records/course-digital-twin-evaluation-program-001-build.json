@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-001-build",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-and-final-program-build",
+  "corpus_id": "four-public-open-educational-source-families-and-public-visual-supplement",
+  "code_revision": "f267fb0e018db608ecafea0280982f3ac86a906b",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "fragmented-evaluation-checkpoint-control",
+        "version": "historical-control",
+        "configuration": {
+          "automatic_stage_progression": false,
+          "program_budget_usd": 0.0,
+          "maximum_invalid_corrections_per_stage": 0,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "finite-stage-count",
+          "value": 0.0,
+          "unit": "stages",
+          "direction": "higher-is-better",
+          "threshold": 9.0,
+          "passed": false
+        },
+        {
+          "name": "terminal-simulation-count",
+          "value": 0.0,
+          "unit": "scenarios",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": false
+        },
+        {
+          "name": "p99-budget-headroom-usd",
+          "value": -1.0,
+          "unit": "usd",
+          "direction": "higher-is-better",
+          "threshold": 0.0,
+          "passed": false
+        },
+        {
+          "name": "build-provider-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "single-program-authority-boundary",
+          "passed": false,
+          "evidence": "Historical checkpoints required separate authority and did not form one autonomous finite program."
+        },
+        {
+          "name": "finite-correction-policy",
+          "passed": false,
+          "evidence": "The historical collection did not enforce one shared per-stage invalid-correction limit."
+        },
+        {
+          "name": "physically-separated-evaluation-artifacts",
+          "passed": false,
+          "evidence": "The historical collection did not share one program-level isolation and hash contract."
+        },
+        {
+          "name": "provider-and-paid-execution-closed",
+          "passed": true,
+          "evidence": "Historical authorities relevant to this successor are revoked."
+        }
+      ],
+      "failures_by_category": {
+        "fragmented-control-plane": 1,
+        "repeated-authorization-boundary": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "autonomous-finite-evaluation-program",
+        "version": "001-build",
+        "configuration": {
+          "automatic_stage_progression": true,
+          "program_budget_usd": 50.0,
+          "projected_p99_cost_usd": 44.6,
+          "maximum_invalid_corrections_per_stage": 1,
+          "provider_execution_authorized": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "finite-stage-count",
+          "value": 9.0,
+          "unit": "stages",
+          "direction": "higher-is-better",
+          "threshold": 9.0,
+          "passed": true
+        },
+        {
+          "name": "terminal-simulation-count",
+          "value": 6.0,
+          "unit": "scenarios",
+          "direction": "higher-is-better",
+          "threshold": 6.0,
+          "passed": true
+        },
+        {
+          "name": "p99-budget-headroom-usd",
+          "value": 5.4,
+          "unit": "usd",
+          "direction": "higher-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "build-provider-calls",
+          "value": 0.0,
+          "unit": "calls",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "single-program-authority-boundary",
+          "passed": true,
+          "evidence": "The manifest exposes one authority state and automatic progression for all nine stages."
+        },
+        {
+          "name": "finite-correction-policy",
+          "passed": true,
+          "evidence": "Each stage permits at most one harness-only correction and every valid quality result is terminal."
+        },
+        {
+          "name": "physically-separated-evaluation-artifacts",
+          "passed": true,
+          "evidence": "Public cases, hidden gold, responses, reviewer output, provider accounting, and the program ledger use separate hash-bound stores."
+        },
+        {
+          "name": "provider-and-paid-execution-closed",
+          "passed": true,
+          "evidence": "Manifest and repository freeze authority are false; build verification made zero provider calls."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "autonomous-finite-evaluation-program",
+    "rationale": "The finite program unifies the academically required factual, visual, tutoring-flow, and reporting checkpoints while preserving deterministic truth, qualified rollback, explicit cost control, and a terminal no-tuning policy.",
+    "limitations": [
+      "This is build-only evidence and does not measure product or model quality.",
+      "The benchmark uses open educational sources and synthetic users rather than the private Academia Vault or real students.",
+      "OpenAI model configurations are one provider family and their reviews remain advisory.",
+      "Synthetic C0-C3 diagnostics do not establish professor fidelity.",
+      "External human evaluation, student outcomes, and durable hosting remain outside this program."
+    ]
+  }
+}

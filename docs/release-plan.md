@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-29
+Status date: 2026-08-30
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -58,6 +58,23 @@ passed 24/24 clean live HTTPS checks, 6/6 after restart, 6/6 after clean
 backup/restore, and 3/3 checks in both T0 rollback and restored T1 modes. The
 complete repository gate passed 1,221 Python and 47 frontend tests. Durable
 hosting and the sealed 10,000-case academic run remain open.
+
+## Active finite academic program
+
+AFQC-092 built the finite post-release evaluation program and AFQC-093
+authorized it under the USD 50 ceiling. AFQC-094 terminated the exact program
+as `invalid-execution` before any paid or academic stage completed. The first
+retrieval-index materialization stalled on Apple MPS; its one allowed harness
+correction pinned CPU/float16 and then exceeded the practical memory envelope
+in the first long-context batch. Both ledgers record zero provider calls, zero
+tokens, USD 0, zero scored cases, and no hidden-gold access.
+
+Program authority is revoked and the instrument cannot be retried. The
+qualified local R1 remains selected. The academic critical path is one new
+memory-bounded, checkpointed retrieval-materialization instrument under #127;
+only after its network-free resource envelope passes may the 500+100 and sealed
+10,000+1,000 factual path be reopened. Visual, C0-C3, and provider T0/T1 stages
+did not execute and retain their existing evidence boundaries.
 
 ## Release stages
 

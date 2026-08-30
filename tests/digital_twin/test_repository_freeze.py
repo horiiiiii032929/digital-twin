@@ -46,6 +46,11 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     ] == ("dataset_generation",)
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-001",
+            "method_evaluation_execution",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
             "academic-factual-qa-r1-model-cascade-001",
             "external_model_evaluation",
         )
