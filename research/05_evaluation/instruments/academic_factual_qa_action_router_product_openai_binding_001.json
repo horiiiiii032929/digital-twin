@@ -1,11 +1,11 @@
 {
   "authorization": {
     "final_execution_authorized": false,
-    "paid_execution_authorized": true,
-    "provider_execution_authorized": true
+    "paid_execution_authorized": false,
+    "provider_execution_authorized": false
   },
   "binding_id": "academic-factual-qa-action-router-product-openai-binding-001",
-  "content_sha256": "35ee8ba31dee942cdba4af2bc6ead355025d502a267767904dde9f51f6342974",
+  "content_sha256": "c4a7ab3f587d97d1956123022b4c3ef1b8d073003c7f6161a9e736a1aace166e",
   "data_controls": {
     "abuse_monitoring_retention_days_max": 30,
     "api_training_default": "not-used-unless-explicitly-opted-in",

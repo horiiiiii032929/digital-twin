@@ -48,14 +48,15 @@ goal. AFQC-105 selected the unchanged small hybrid retriever over unique atomic
 evidence, but AFQC-109 then validly showed that the actual T0 product was not
 usable: 44.25% fully grounded success, 75% overall action accuracy, 89%
 boundary accuracy, and five unsafe ambiguity releases. That authority is
-revoked and the consumed 500 cases cannot be tuned or rerun. AFQC-110 now makes
-#127 `In Progress / Refine / priority:p0` with one finite method-level
-successor: deterministic action routing plus question-targeted atomic evidence
-and answer construction. Its 500 candidate and 100 control cases use source
-ranges disjoint from every earlier development package; unavoidable source-
-family overlap is disclosed. The build and network-free simulations pass, but
-provider metadata, paid execution, and the repository allowlist remain
-unfrozen. The sealed 10,000 cases are unopened. #105 and #131 remain evidence
+revoked and the consumed 500 cases cannot be tuned or rerun. AFQC-110 built one
+finite successor with deterministic action routing and question-targeted atomic
+generation over fresh source ranges. AFQC-111/112 preserve its two permitted
+execution attempts as operationally invalid: attempt 001 stopped before calls
+on an embedding batch/client mismatch; attempt 002 completed 15 embedding calls
+for USD 0.00057488, then stopped before product case 1 on a missing `binding_id`
+runtime contract. Authorization is revoked, no quality result exists, and the
+sealed 10,000 cases remain unopened. #127 stays In Progress / Refine /
+priority:p0. #105 and #131 remain evidence
 consumers; #24 and #10 retain their professor-approval and external-human
 boundaries. The qualified local R1 remains unchanged.
 
@@ -78,17 +79,13 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must preserve AFQC-109 as valid unfavorable evidence and execute only
-   the AFQC-110 method-level successor once. It is not another model swap or
-   prompt-tuning attempt: deterministic routing owns explicit boundaries,
-   question-targeted selection limits evidence to the requested atom(s), and
-   generation must return the exact public-question-implied claim count. A pass
-   may prepare the sealed 10,000+1,000 path; a valid failure stops factual
-   scaling. The qualified local R1 and its deterministic rollback remain
-   unchanged.
+1. #127 must preserve AFQC-109 as valid unfavorable quality evidence and
+   AFQC-111/112 as terminal invalid execution evidence. Do not retry AFQC-110.
+   Make one explicit harness/method decision before any new factual checkpoint;
+   the qualified local R1 and deterministic rollback remain unchanged.
 
-2. If AFQC-110 passes, use its leakage-free result to decide #105 and freeze a
-   separate final 10,000+1,000 checkpoint. Do not authorize it automatically.
+2. Keep #105 and sealed 10,000+1,000 execution closed until a new prospective
+   checkpoint produces a valid leakage-free actual-product result.
 3. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 4. #131 — retain the terminal visual diagnostic and design a separate true-

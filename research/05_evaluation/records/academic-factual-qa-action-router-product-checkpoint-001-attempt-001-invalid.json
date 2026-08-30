@@ -70,6 +70,63 @@
         "embedding-batch-contract-defect": 1,
         "incomplete-product-execution": 1
       }
+    },
+    {
+      "implementation": {
+        "implementation_id": "terminal-no-execution-control",
+        "version": "attempt-001-invalid",
+        "configuration": {
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0,
+          "hidden_gold_loaded": false,
+          "final_10000_opened": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-inference-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 8.0,
+          "passed": true
+        },
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "embedding-client-contract",
+          "passed": false,
+          "evidence": "The shared invalid setup stopped before either condition could execute."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "No provider request was made."
+        },
+        {
+          "name": "gold-and-final-closure",
+          "passed": true,
+          "evidence": "Hidden gold and final data remained closed."
+        }
+      ],
+      "failures_by_category": {}
     }
   ],
   "decision": {

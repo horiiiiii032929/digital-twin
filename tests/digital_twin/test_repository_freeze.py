@@ -34,7 +34,6 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
-        "academic-factual-qa-action-router-product-checkpoint-001",
         "academic-factual-qa-open-10000-deterministic-development-001",
     }
 

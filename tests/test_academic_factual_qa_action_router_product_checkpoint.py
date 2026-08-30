@@ -7,7 +7,7 @@ from scripts import build_academic_factual_qa_action_router_product_checkpoint a
 from scripts import run_academic_factual_qa_action_router_product_checkpoint as runner
 
 
-def test_action_router_checkpoint_is_finite_and_bounded_authorized() -> None:
+def test_action_router_checkpoint_is_finite_and_authorization_revoked() -> None:
     outputs = builder.build(metadata_verified_at=None)
     instrument = outputs[builder.INSTRUMENT]
     binding = outputs[builder.BINDING]
@@ -20,8 +20,8 @@ def test_action_router_checkpoint_is_finite_and_bounded_authorized() -> None:
     assert instrument["execution"]["maximum_transport_retries"] == 0
     assert instrument["execution"]["maximum_cost_usd"] == 8.0
     assert instrument["boundaries"]["final_10000_opened"] is False
-    assert binding["authorization"]["paid_execution_authorized"] is True
-    assert binding["authorization"]["provider_execution_authorized"] is True
+    assert binding["authorization"]["paid_execution_authorized"] is False
+    assert binding["authorization"]["provider_execution_authorized"] is False
     assert binding["authorization"]["final_execution_authorized"] is False
     assert binding["metadata_status"] == "fresh"
     assert binding["data_controls"]["responses_store"] is False
@@ -68,7 +68,7 @@ def test_action_router_checkpoint_has_terminal_network_free_simulations() -> Non
     assert runner.simulate(scenario="resume")["gold_opened_before_responses"] is False
 
 
-def test_action_router_preflight_is_ready_after_bounded_authorization(
+def test_action_router_preflight_is_blocked_after_terminal_revocation(
     monkeypatch,
 ) -> None:
     monkeypatch.setattr(runner, "_dirty", lambda: False)
@@ -76,7 +76,10 @@ def test_action_router_preflight_is_ready_after_bounded_authorization(
 
     result = runner.preflight()
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
+    assert "provider-metadata-refresh-required" not in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["final_10000_opened"] is False

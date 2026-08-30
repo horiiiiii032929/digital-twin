@@ -32,8 +32,9 @@ CONTROL_MANIFEST = INSTRUMENT_ROOT / "academic_factual_qa_action_router_product_
 PROFILE = ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 RETRIEVAL_RUNTIME = ROOT / "reports/generated/academic-factual-qa-action-router-product-checkpoint-001/retrieval-runtime.json"
 METADATA_VERIFIED_AT = "2026-08-30T14:09:26+00:00"
-PROVIDER_EXECUTION_AUTHORIZED = True
-PAID_EXECUTION_AUTHORIZED = True
+PROVIDER_EXECUTION_AUTHORIZED = False
+PAID_EXECUTION_AUTHORIZED = False
+TERMINAL_EXECUTION_STATUS = "invalid-execution-authorization-revoked"
 
 
 class ActionRouterCheckpointBuildError(RuntimeError):
@@ -249,7 +250,7 @@ def build(*, metadata_verified_at: str | None = None) -> dict[Path, dict[str, An
             "status": (
                 "frozen-pending-execution"
                 if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
-                else "reviewed-provider-unauthorized"
+                else TERMINAL_EXECUTION_STATUS
             ),
             "owner_issue": 127,
             "decision_id": "AFQC-110",
@@ -373,7 +374,7 @@ def check() -> dict[str, Any]:
         "status": (
             "frozen-pending-execution"
             if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
-            else "passed-build-only"
+            else "passed-terminal-authorization-revoked"
         ),
         "candidate_case_count": 500,
         "control_case_count": 100,
@@ -406,7 +407,7 @@ def main() -> int:
             "status": (
                 "frozen-pending-execution"
                 if PROVIDER_EXECUTION_AUTHORIZED and PAID_EXECUTION_AUTHORIZED
-                else "completed-build-only"
+                else "completed-terminal-authorization-revoked"
             ),
             "provider_execution_authorized": PROVIDER_EXECUTION_AUTHORIZED,
             "provider_calls": 0,

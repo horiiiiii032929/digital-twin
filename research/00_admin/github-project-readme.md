@@ -5,10 +5,11 @@ Status date: 2026-08-30
 Issue #127 is the active P0 research item at `In Progress / Refine`. AFQC-105
 selected atomic M2 retrieval, but AFQC-109's actual-product 500+100 run validly
 failed with 44.25% fully grounded success, 89% boundary accuracy, and five
-unsafe ambiguity releases. AFQC-110 is the single finite successor: a
-deterministic action router plus question-targeted atomic evidence and answer
-construction over 500 source-range-disjoint candidate cases and a fixed
-100-case control. Its build is complete and provider-unauthorized. The sealed
+unsafe ambiguity releases. AFQC-110 built the single finite action-router and
+targeted-atomic successor, but AFQC-111/112 exhausted its two permitted
+execution attempts without reaching product case 1. Attempt 001 made zero
+calls; attempt 002 completed 15 embeddings for USD 0.00057488 and then failed a
+missing `binding_id` runtime contract. Authorization is revoked. The sealed
 10,000 cases remain unopened and the qualified local R1 is unchanged.
 
 This Project tracks one parent outcome: release an invite-only Course Digital
@@ -40,9 +41,9 @@ evidence, not competing end goals.
   frozen entrypoints.
 - Factual quality: #110 remains engineering-scale history. #127 is the active
   leakage-free actual-product evaluation. Atomic retrieval passed
-  prospectively, but its first T0 product run validly failed. AFQC-110 is
-  build-complete on new source ranges, with deterministic truth authoritative
-  and paid execution still closed. The final 10,000+1,000 set is unopened.
+  prospectively, but its first T0 product run validly failed. AFQC-110 has now
+  terminated operationally invalid after its sole correction. No new quality
+  estimate exists; authority is revoked and final 10,000+1,000 is unopened.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -55,9 +56,8 @@ evidence, not competing end goals.
 
 1. Keep release goal #8 `In Progress` as the parent.
 2. Preserve #127's completed retrieval Keep and actual-product Refine evidence.
-3. Refresh and authorize AFQC-110 once, then execute its 500+100 confirmation.
-   Only a complete pass may prepare sealed 10,000+1,000 execution; a valid
-   failure stops the factual branch.
+3. Preserve AFQC-111/112 and make one explicit harness/method decision. Do not
+   retry AFQC-110 or open sealed 10,000+1,000 execution.
 4. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
@@ -75,7 +75,7 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Fresh OpenAI metadata and one paid AFQC-110 authorization | #127 T0 500+100 successor execution |
+| Explicit post-AFQC-112 harness/method decision | A new valid #127 actual-product checkpoint |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

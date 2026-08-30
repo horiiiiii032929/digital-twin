@@ -205,6 +205,15 @@ The one permitted harness-only correction changes only that batch size to 64;
 models, methods, prompts, cases, gold, gates, call limits, and budget remain
 unchanged. Attempt 002 is the final permitted execution attempt.
 
+AFQC-112 terminates attempt 002 as `invalid-execution`. The corrected public
+embedding materialization completed in 15 calls for USD 0.00057488, with four
+immutable course indexes and 500 query vectors. Candidate execution then
+stopped before case 1 on a missing `binding_id` runtime contract. No GPT product
+response, control response, hidden-gold score, or final-10,000 access occurred.
+Because this is the second operationally invalid attempt, no further correction
+or retry is authorized. The checkpoint supports no product-quality conclusion;
+#127 remains `Refine` and now requires an explicit harness/method decision.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

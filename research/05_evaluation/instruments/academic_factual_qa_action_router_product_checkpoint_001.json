@@ -14,7 +14,7 @@
     "generator": "openai-gpt-5.4-mini-question-targeted-atomic-v1",
     "retriever": "atomic-bm25-openai-small-rrf-v1"
   },
-  "content_sha256": "103802963a9dc2cb33645dfc456e462a2791ee33abc0819a5ea7189130ac432f",
+  "content_sha256": "6d4cb7c79fdfb88ef57034b65400176d495649a4a2cd413cc580c23f6a330305",
   "control_method": {
     "action_router": "none-historical-control",
     "evidence_gate": "atomic-structured-coverage-control-v1",
@@ -80,7 +80,7 @@
   "instrument_id": "academic-factual-qa-action-router-product-checkpoint-001",
   "owner_issue": 127,
   "provider_binding": {
-    "content_sha256": "35ee8ba31dee942cdba4af2bc6ead355025d502a267767904dde9f51f6342974",
+    "content_sha256": "c4a7ab3f587d97d1956123022b4c3ef1b8d073003c7f6161a9e736a1aace166e",
     "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json"
   },
   "schema_version": 1,
@@ -91,5 +91,5 @@
     "source_family_disjoint_from_prior_development": false,
     "source_range_disjoint_from_all_prior_development": true
   },
-  "status": "frozen-pending-execution"
+  "status": "invalid-execution-authorization-revoked"
 }

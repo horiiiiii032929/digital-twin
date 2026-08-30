@@ -123,6 +123,15 @@ question. Its fresh 500+100 package is source-range-disjoint from prior
 development, while unavoidable source-family overlap is disclosed. It remains
 provider-unauthorized; the final 10,000 cases remain unopened.
 
+AFQC-111/112 subsequently exhausted the two permitted executions without a
+quality estimate. Attempt 001 stopped before calls because embedding batch 128
+exceeded the client maximum 64. The sole correction completed 15 embedding
+calls for USD 0.00057488, then attempt 002 stopped before product case 1 on a
+missing `binding_id` runtime contract. Authorization is revoked and the sealed
+10,000 cases remain unopened. A new checkpoint requires an explicit
+harness/method decision; this terminal invalid result does not alter the
+qualified local R1.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

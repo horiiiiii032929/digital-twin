@@ -396,10 +396,6 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # successor instrument requires a new code review and an explicit entry here.
 BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
-        "academic-factual-qa-action-router-product-checkpoint-001": (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
         "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
         ),

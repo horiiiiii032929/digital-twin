@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "85e99e6cb6bde03eba5bc7283bd1d2f33548e9fcb14ad5d258ac54d15be95c1d",
+  "record_sha256": "1dc43e58da005935e49e65637f76f425596aaaf8705cc0e3c0a2d216075fdd41",
   "records": [
     {
       "audit": {
@@ -1635,7 +1635,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_checkpoint_001.json",
       "risk": "high",
-      "sha256": "64dedd7742ecb8b0d4572f2b9598f5a708bf95cda57c54d84de10f65e83f6396"
+      "sha256": "a47debe0cdc6c5cbb71386ecf1024a73aa637851e3b6aba8d8a44dee212b1bcc"
     },
     {
       "audit": {
@@ -1656,7 +1656,7 @@
     {
       "audit": {
         "domain": "action-router-product-checkpoint",
-        "evidence": "Provider-binding review records the fresh official OpenAI prices and data controls, direct exact models, store false, zero fallback/retries, a 24-hour freshness limit, and the users one-time bounded paid authorization.",
+        "evidence": "Provider-binding review preserves fresh official OpenAI prices and data controls, exact models, store false, zero fallback/retries, and terminal revocation after the second invalid attempt.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-action-router-review"
@@ -1667,7 +1667,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
       "risk": "high",
-      "sha256": "5f49b50045c3caa5e90e6b281fa57060aaf05ccbd79f229f87f7904793e0fd14"
+      "sha256": "5b78489eb6dd70c4c83f57d11293a53a397ce7da2074bd1aea4532e3da096f4c"
     },
     {
       "audit": {
@@ -4973,7 +4973,7 @@
     {
       "audit": {
         "domain": "action-router-product-checkpoint",
-        "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, immutable hashes, and a one-time bounded authorization that leaves final execution closed.",
+        "evidence": "Checkpoint builder review verifies fixed control selection, public/gold separation, exact system manifests, source-range freshness, the sole batch-size correction, immutable hashes, and terminal authorization revocation.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-action-router-review"
@@ -4986,7 +4986,7 @@
       ],
       "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "high",
-      "sha256": "8c309a049c9d835685a60c37741c1eda43cb7aefda295f530f1cc7942842ac0d"
+      "sha256": "7cbc69d5a6ec23a9171cd358c67478edc60bf0eb21034a9d6fdcb9decc4a06a5"
     },
     {
       "audit": {
@@ -9869,7 +9869,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "dec3f45c59df17d36c73f2da80ce293e479f012218bb3bbe7d559fc0227e12ac"
+      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
     },
     {
       "audit": {
@@ -10461,7 +10461,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "8f2dfb38c557753a86b85a1cd4a5204b8f3cbb9b8298ac9e99eb65c2ee09beb7"
+      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
     },
     {
       "audit": {
@@ -10802,7 +10802,7 @@
     {
       "audit": {
         "domain": "action-router-product-checkpoint-verification",
-        "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, all terminal simulations, fresh provider metadata, and exact bounded preflight authorization.",
+        "evidence": "Tests cover finite bounds, candidate/control manifests, hidden-gold dependency exclusion, terminal simulations, the sole batch-size correction, and blocked preflight after terminal revocation.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-action-router-review"
@@ -10813,7 +10813,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "medium",
-      "sha256": "c0780ac2a79ea861e6f0da4dc8eb6e81824181d3b4d816d5fba337d80a4e0934"
+      "sha256": "3ff7330b05fcf99f5389777ba3ab3a335e14d3501c084f47215eb5caff5a558c"
     },
     {
       "audit": {
