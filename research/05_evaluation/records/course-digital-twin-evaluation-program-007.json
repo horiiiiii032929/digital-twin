@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-007",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001",
+  "corpus_id": "academic-action-router-confirmation-001-atomic-regions",
+  "code_revision": "d2742899c18f70f2dbf875538755d814ed916012",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "question-targeted-extraction-v2",
+        "version": "program-007",
+        "configuration": {
+          "case_count": 500,
+          "answerable_count": 400,
+          "boundary_count": 100,
+          "generator": "gpt-5.4-2026-03-05",
+          "retrieval": "openai-small-hybrid-atomic-evidence",
+          "gold_opened_after_responses": true,
+          "provider_calls": 400,
+          "reported_cost_usd": 1.3955825,
+          "source_truth_concerns_directly_audited": 16,
+          "source_truth_defects_confirmed": 16
+        }
+      },
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.6425, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "overall-action-accuracy", "value": 0.992, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "atomic-claim-precision", "value": 0.655, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.655, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.8075, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.8075, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "source-version-validity", "value": 0.975, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "complete-evidence-at-3", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "provider-completion", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.995, "passed": true},
+        {"name": "reported-cost-usd", "value": 1.3955825, "unit": "usd", "direction": "lower-is-better", "threshold": 4.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": true, "evidence": "The 500-case candidate released zero severe unsupported answers."},
+        {"name": "reference-package-validity", "passed": false, "evidence": "Direct source inspection confirmed a question, answer, uniqueness, or source-alignment defect in all 16 advisory-flagged references."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "Development gold opened only after all responses were durable; the sealed 10,000+1,000 stage remained unopened."}
+      ],
+      "failures_by_category": {
+        "fully-grounded-answer-failure": 143,
+        "source-truth-reference-defect-confirmed": 16
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-evidence-control",
+        "version": "program-007",
+        "configuration": {
+          "case_count": 100,
+          "answerable_count": 80,
+          "boundary_count": 20,
+          "generator": "gpt-5.4-mini-2026-03-17",
+          "retrieval": "openai-small-hybrid-atomic-evidence",
+          "gold_opened_after_responses": true,
+          "provider_calls": 98,
+          "reported_cost_usd": 0.1197825,
+          "operational_failures": 2,
+          "severe_unsupported_releases": 1
+        }
+      },
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.4625, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "overall-action-accuracy", "value": 0.73, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-precision", "value": 0.5229166666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.6, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.5229166666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.6, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "source-version-validity", "value": 0.9875, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "complete-evidence-at-3", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "provider-completion", "value": 0.98, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.995, "passed": false},
+        {"name": "reported-cost-usd", "value": 0.1197825, "unit": "usd", "direction": "lower-is-better", "threshold": 4.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "The any-hit control produced one severe unsupported release."},
+        {"name": "reference-package-validity", "passed": false, "evidence": "The paired control shares the development reference package whose direct audit confirmed defects."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "Development gold opened only after all responses were durable; the sealed 10,000+1,000 stage remained unopened."}
+      ],
+      "failures_by_category": {
+        "fully-grounded-answer-failure": 43,
+        "operational-failure": 2,
+        "severe-unsupported-release": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The action router materially improves safety and retention, but factual, claim, citation, source-version, and reference-validity gates fail. Revoke program 007 and validate a fresh source-disjoint reference package before another product confirmation or the sealed 10,000+1,000 run.",
+    "limitations": [
+      "The 500 development cases are now known diagnostic evidence.",
+      "Direct source inspection covered all 16 flagged references but not an independent random human sample of all 500.",
+      "Model-assisted review used OpenAI configurations from one provider family.",
+      "No professor-fidelity, human-usability, learning-outcome, private-course, or durable-hosting claim follows."
+    ]
+  }
+}

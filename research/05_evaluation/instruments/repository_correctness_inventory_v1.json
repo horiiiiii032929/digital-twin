@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 767
+    "audited": 769
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 196,
+    "evaluation_configuration": 198,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 166
   },
-  "file_count": 767,
+  "file_count": 769,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1959546adc18ba7c67b985021a787c414f2200bafce4e944abb1c13d188726ba",
+  "record_sha256": "ae967d0e3d244d551d2fb6742aac637b0bc4876fe23799f53de6c21474ab7971",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "0b8dc9547bd0678d27701a1b978c44f188eed646758e2907ead8c533b4691e4f"
+      "sha256": "e096a0f8248b3b241ed97d249e85d81122346bcc97ad4144ccd7eda32c7ac9f9"
     },
     {
       "audit": {
@@ -2312,6 +2312,22 @@
     {
       "audit": {
         "domain": "reference-question-validation",
+        "evidence": "Prospective binding review verifies direct OpenAI exact snapshots, store=false, no routing fallback, public-only inputs, strict unique ID-set matching, fresh metadata, bounded calls and cost, and no product or final execution authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_003.json",
+      "risk": "high",
+      "sha256": "b1f3d13e5ee4fd13fcd7e7259da522c93c39d40cded1c1e0fd230981c01b6963"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
         "evidence": "Instrument review preserves the 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, and deterministic authority while recording invalid execution and revoked provider, paid, validation, product, and final authority.",
         "findings": [],
         "reviewed_at": "2026-08-29",
@@ -2340,6 +2356,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_002.json",
       "risk": "high",
       "sha256": "46378f4ee1cbbb16a93ae9d867184674201937cb00676651a67c310146478434"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Instrument review confirms the fresh 160-cluster reserve, exact 500-case complete-cluster target, unchanged author/reviewer method and gates, exact unique ID-set validation, deterministic ordering, no fallback or quota relaxation, and closed product/final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_003.json",
+      "risk": "high",
+      "sha256": "9211a0462dfd6a7b8507a08e9cf5273763233cb24b9600fcdde754ac5104bd65"
     },
     {
       "audit": {
@@ -2931,7 +2963,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_007.json",
       "risk": "high",
-      "sha256": "eccfdde69c5c073cd9cc10202771c10e5277809b074a40687b872d1d72d58f91"
+      "sha256": "c6902a719761c10c0d4c0a643bf4a538feb7b51e3bc0524b071a28908e94003d"
     },
     {
       "audit": {
@@ -5232,7 +5264,8 @@
       "disposition": "active_audited",
       "package_commands": [
         "verify:academic-factual-qa-reference-validation",
-        "verify:academic-factual-qa-reference-validation-002"
+        "verify:academic-factual-qa-reference-validation-002",
+        "verify:academic-factual-qa-reference-validation-003"
       ],
       "path": "scripts/build_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
@@ -5626,7 +5659,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_release.py",
       "risk": "high",
-      "sha256": "7cfbbc2c955c1992038e3f261771039b1abee069bcfb04c61d0a07d1518e41ad"
+      "sha256": "f215deb8efb7af93af631e9d6b7fffc648f238009c8053a75e765a907d22a74b"
     },
     {
       "audit": {
@@ -6506,22 +6539,29 @@
       "package_commands": [
         "execute:academic-factual-qa-reference-validation",
         "execute:academic-factual-qa-reference-validation-002",
+        "execute:academic-factual-qa-reference-validation-003",
         "materialize:academic-factual-qa-reference-validation",
         "materialize:academic-factual-qa-reference-validation-002",
+        "materialize:academic-factual-qa-reference-validation-003",
         "preflight:academic-factual-qa-reference-validation",
         "preflight:academic-factual-qa-reference-validation-002",
+        "preflight:academic-factual-qa-reference-validation-003",
         "resume:academic-factual-qa-reference-validation",
         "resume:academic-factual-qa-reference-validation-002",
+        "resume:academic-factual-qa-reference-validation-003",
         "score:academic-factual-qa-reference-validation",
         "score:academic-factual-qa-reference-validation-002",
+        "score:academic-factual-qa-reference-validation-003",
         "simulate:academic-factual-qa-reference-validation",
         "simulate:academic-factual-qa-reference-validation-002",
+        "simulate:academic-factual-qa-reference-validation-003",
         "verify:academic-factual-qa-reference-validation",
-        "verify:academic-factual-qa-reference-validation-002"
+        "verify:academic-factual-qa-reference-validation-002",
+        "verify:academic-factual-qa-reference-validation-003"
       ],
       "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
-      "sha256": "273dd050548253ac5168cf6fb30704ffab662f02448d4fb703a5de27c1f38b37"
+      "sha256": "c42b72734608c831478d988aa982442ef0dfeb25a5a56885e0db9787bda26e11"
     },
     {
       "audit": {
@@ -9995,7 +10035,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2895dcb2cf1aeb41fe7ee94902bcf3501355cbb7a4c5936da2d2b0e15697df01"
+      "sha256": "cf24ff818f26011e5b0824412d8a72fb0fc820d493e255151b36053ad88ef5b9"
     },
     {
       "audit": {
@@ -10587,7 +10627,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "aa11836e35f3b6c06dd02121d5f0797666bbc8335f531195b294ce3d92394554"
+      "sha256": "8f2b061f47d75facac7bc304310b97d2b6596fc63a6d1d1ebac728dad4e8d55b"
     },
     {
       "audit": {
@@ -11179,7 +11219,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_reference_validation.py",
       "risk": "medium",
-      "sha256": "49a92e456f87cb5ea1a8f8dd2f6448cf43e2f84d62ed9f898e2c32e8e5a99472"
+      "sha256": "ca15fd6e2ce2b34cdcba9e5cc94940e6d42b3067baf7cd3b6d586518f8658d0f"
     },
     {
       "audit": {
@@ -11739,7 +11779,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
       "risk": "medium",
-      "sha256": "511a55ae0f94a0d1319efaaa4397315c0e00d752aba093a7109ffe1da8b72915"
+      "sha256": "7427d4d662255035b87cbe7b73bd7ac0dcb9e6a734d5993ac1846e464a9aa071"
     },
     {
       "audit": {
@@ -12863,7 +12903,7 @@
     }
   ],
   "risk_counts": {
-    "high": 587,
+    "high": 589,
     "medium": 180
   },
   "schema_version": 1,

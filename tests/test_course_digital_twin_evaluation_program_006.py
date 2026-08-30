@@ -34,14 +34,14 @@ def test_program_006_is_terminal_and_preserved() -> None:
     assert result["status"] == "passed-build-only"
 
 
-def test_question_targeted_successor_is_frozen_and_exactly_matchable() -> None:
+def test_question_targeted_successor_is_completed_and_exactly_matchable() -> None:
     manifest = load_program_manifest(INSTRUMENT_007)
     result = runner.validate(INSTRUMENT_007)
 
     assert manifest.program_id == "course-digital-twin-evaluation-program-007"
-    assert manifest.status == "frozen-authorized"
-    assert manifest.provider_execution_authorized is True
-    assert manifest.paid_execution_authorized is True
+    assert manifest.status == "completed"
+    assert manifest.provider_execution_authorized is False
+    assert manifest.paid_execution_authorized is False
     assert (
         manifest.product_candidate_generator
         == "openai-gpt-5.4-question-targeted-extraction-v2"

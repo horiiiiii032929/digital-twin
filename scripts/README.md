@@ -826,8 +826,13 @@ Current utilities:
   or the `*:academic-factual-qa-reference-validation-002` package commands. It
   adds only the provider-side terminal-question pattern required by the local
   validator and uses distinct ledger, result, and materialized-package paths.
-  Validation, simulation, and preflight are network-free; execute and score
-  remain freeze blocked until attempt 002 receives separate authorization.
+  Attempt 003 is the finite order-insensitive successor. It requires every
+  expected case ID exactly once, rejects duplicate/missing/unknown IDs, and
+  restores frozen request order deterministically; it does not change source,
+  prompt, model, gold, quota, or quality gates. Use the
+  `*:academic-factual-qa-reference-validation-003` package commands. Validation,
+  simulation, and preflight are network-free; live execution is restricted to
+  the exact bounded attempt-003 authorization.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report

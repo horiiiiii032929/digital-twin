@@ -122,9 +122,11 @@ def _attempt(*, suffix: str, question_pattern: str | None) -> ReferenceQuestionA
 
 ATTEMPT_001 = _attempt(suffix="001", question_pattern=None)
 ATTEMPT_002 = _attempt(suffix="002", question_pattern=r"\?$")
+ATTEMPT_003 = _attempt(suffix="003", question_pattern=r"\?$")
 ATTEMPTS = {
     ATTEMPT_001.instrument_id: ATTEMPT_001,
     ATTEMPT_002.instrument_id: ATTEMPT_002,
+    ATTEMPT_003.instrument_id: ATTEMPT_003,
 }
 
 
@@ -314,9 +316,13 @@ def _parse_authors(
         ReferenceQuestionAuthorResponseV1.model_validate(row)
         for row in content.get("items", [])
     ]
-    if [row.case_id for row in rows] != expected_ids:
-        raise ReferenceQuestionCheckpointError("author response IDs or order drifted")
-    return rows
+    observed_ids = [row.case_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("author response IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("author response ID set drifted")
+    by_id = {row.case_id: row for row in rows}
+    return [by_id[case_id] for case_id in expected_ids]
 
 
 def _parse_reviews(
@@ -326,9 +332,13 @@ def _parse_reviews(
         ReferenceQuestionReviewerResponseV1.model_validate(row)
         for row in content.get("items", [])
     ]
-    if [row.case_id for row in rows] != expected_ids:
-        raise ReferenceQuestionCheckpointError("review response IDs or order drifted")
-    return rows
+    observed_ids = [row.case_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("review response IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("review response ID set drifted")
+    by_id = {row.case_id: row for row in rows}
+    return [by_id[case_id] for case_id in expected_ids]
 
 
 def _git_revision() -> str:
@@ -873,6 +883,7 @@ def main() -> int:
         default=ATTEMPT_001.instrument_id,
     )
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--allow-authorized-validation", action="store_true")
     arguments = parser.parse_args()
     attempt = ATTEMPTS[arguments.attempt]
     if arguments.execute:
@@ -884,7 +895,10 @@ def main() -> int:
             attempt.instrument_id, "method_evaluation_execution"
         )
     if arguments.validate:
-        result = validate(attempt=attempt)
+        result = validate(
+            require_unauthorized=not arguments.allow_authorized_validation,
+            attempt=attempt,
+        )
     elif arguments.simulate:
         result = simulate(attempt=attempt)
     elif arguments.preflight:

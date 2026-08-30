@@ -277,11 +277,39 @@ Valid stages advance automatically without further approval; only privacy,
 gold leakage, identity, ledger/security integrity, and the global USD 50 hard
 stop remain blocking controls.
 
+AFQC-121 records program 007 as valid `completed-refine` development evidence.
+The 500-case candidate reached 64.25% fully grounded factual success, 99.2%
+overall action accuracy, 100% boundary accuracy, 65.5% claim precision/recall,
+80.75% citation precision/recall, 95% complete evidence@3, and 97.5% Evidence
+Recall@5, with zero severe unsupported releases. On the paired 100 cases it
+improved supported-answer retention by 25 points and boundary safety from 90%
+to 100%. The factual, claim, citation, and source-version gates still failed,
+so the sealed 10,000+1,000 stages remained unopened. The visual supplement
+reached 17/30 complete evidence@3 and 76.64% Recall@5 with zero boundary
+releases; C0-C2 completed as synthetic diagnostic evidence only. Across all
+stages, program 007 used 614 calls or batches and USD 1.82048188.
+
+AFQC-122 records the direct audit correction. All 16 references flagged by the
+advisory review have a confirmed benchmark-quality defect: five are non-unique
+or underspecified, nine use malformed/truncated/non-responsive code, equation,
+or table answers, and two are not natural or semantically well-formed. The two
+cases previously marked for human resolution are decisively non-unique from
+their pinned source regions, so no user adjudication is needed. Program 007
+authority is revoked. One finite successor now reuses the fresh
+160-cluster/800-case reference reserve from attempts 001/002 and fixes only the
+demonstrated response-order defect: it requires the exact unique case-ID set
+and restores frozen order deterministically. The author/reviewer roles, source
+pool, hidden truth, prompts, models, quotas, and quality gates remain unchanged.
+It may produce one fresh 500-case package; the sealed 10,000+1,000 execution
+remains contingent on a valid reference and product-development pass rather
+than on another approval message.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
-closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
-produced a valid product-quality estimate.
+closed #139. Checkpoint 006 is terminal invalid evidence; program 007 is a valid
+development `Refine` result whose estimate is explicitly limited by confirmed
+reference-package defects.
 
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model

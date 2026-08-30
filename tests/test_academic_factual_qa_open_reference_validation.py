@@ -224,3 +224,67 @@ def test_attempt_002_has_fresh_outputs_and_revoked_authority(
     assert preflight["provider_calls"] == 0
     assert preflight["product_calls"] == 0
     assert preflight["final_split_opened"] is False
+
+
+def test_attempt_003_matches_unique_response_ids_without_array_order() -> None:
+    expected_ids = ["case-a", "case-b"]
+    authors = runner._parse_authors(  # noqa: SLF001
+        {
+            "items": [
+                {"case_id": "case-b", "question": "What does source B establish?"},
+                {"case_id": "case-a", "question": "What does source A establish?"},
+            ]
+        },
+        expected_ids,
+    )
+    reviews = runner._parse_reviews(  # noqa: SLF001
+        {
+            "items": [
+                {
+                    "case_id": "case-b",
+                    "predicted_action": "abstain",
+                    "recovered_answer_spans": [],
+                    "unambiguous": True,
+                    "natural_student_question": True,
+                    "gold_hint_leak": False,
+                    "rationale": "Source B has no answer.",
+                },
+                {
+                    "case_id": "case-a",
+                    "predicted_action": "answer",
+                    "recovered_answer_spans": ["Source A answer."],
+                    "unambiguous": True,
+                    "natural_student_question": True,
+                    "gold_hint_leak": False,
+                    "rationale": "Source A uniquely supports the answer.",
+                },
+            ]
+        },
+        expected_ids,
+    )
+
+    assert [row.case_id for row in authors] == expected_ids
+    assert [row.case_id for row in reviews] == expected_ids
+
+
+def test_attempt_003_rejects_duplicate_or_unknown_response_ids() -> None:
+    with pytest.raises(runner.ReferenceQuestionCheckpointError, match="duplicated"):
+        runner._parse_authors(  # noqa: SLF001
+            {
+                "items": [
+                    {"case_id": "case-a", "question": "What does source A establish?"},
+                    {"case_id": "case-a", "question": "What else does source A establish?"},
+                ]
+            },
+            ["case-a", "case-b"],
+        )
+    with pytest.raises(runner.ReferenceQuestionCheckpointError, match="set drifted"):
+        runner._parse_authors(  # noqa: SLF001
+            {
+                "items": [
+                    {"case_id": "case-a", "question": "What does source A establish?"},
+                    {"case_id": "case-c", "question": "What does source C establish?"},
+                ]
+            },
+            ["case-a", "case-b"],
+        )

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-003",
+  "owner_issue": 127,
+  "status": "frozen-authorized",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-002",
+  "decision_question": "Can the unchanged source-visible author and target-blind reviewer method produce a fresh 500-case reference package when responses are matched by exact unique case ID rather than array position?",
+  "dataset": {
+    "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
+    "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
+    "candidate_cluster_count": 160,
+    "candidate_case_count": 800,
+    "selected_cluster_count": 100,
+    "selected_case_count": 500,
+    "clusters_per_batch": 4,
+    "batch_count": 40,
+    "source_disjoint_from_checkpoint_007": true,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "method": {
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-003",
+    "author_role": "source-visible-question-author",
+    "reviewer_role": "target-blind-answer-reviewer",
+    "author_receives": [
+      "public source context",
+      "course and section identity",
+      "expected action",
+      "canonical answer and exact spans for answerable construction cases",
+      "boundary reason for boundary construction cases"
+    ],
+    "reviewer_receives": [
+      "public source context",
+      "course and section identity",
+      "candidate question"
+    ],
+    "reviewer_never_receives": [
+      "expected action",
+      "canonical answer",
+      "required evidence spans",
+      "author rationale"
+    ],
+    "deterministic_authority": "Compare the blind recovered action and exact answer spans with pinned source-linked gold after all votes are durable.",
+    "response_identity_policy": "Require the exact unique case-ID set, reject missing, duplicate, and unknown IDs, then restore frozen request order deterministically.",
+    "complete_cluster_selection": true,
+    "quota_relaxation_allowed": false,
+    "canonical_fallback_allowed": false,
+    "automatic_product_execution_allowed": false
+  },
+  "harness_correction": {
+    "historical_failure": "Attempt 002 required provider array order even though every expected ID was returned exactly once.",
+    "provider_array_order_authoritative": false,
+    "exact_unique_id_set_required": true,
+    "deterministic_reordering_after_validation": true,
+    "prompt_changed": false,
+    "source_pool_changed": false,
+    "cases_or_gold_changed": false,
+    "models_changed": false,
+    "quality_gates_changed": false
+  },
+  "operational_bounds": {
+    "maximum_logical_calls": 80,
+    "maximum_physical_attempts": 80,
+    "maximum_global_transport_retries": 0,
+    "maximum_cost_usd": 12.0,
+    "exclusive_ledger_required": true,
+    "atomic_checkpoints_required": true,
+    "resume_binding_required": true,
+    "exact_model_identity_required": true
+  },
+  "acceptance": {
+    "selected_case_count_required": 500,
+    "selected_cluster_count_required": 100,
+    "selected_case_action_recovery_required": 1.0,
+    "selected_case_answer_span_recovery_required": 1.0,
+    "selected_case_unambiguous_required": 1.0,
+    "selected_case_naturalness_required": 1.0,
+    "selected_case_gold_hint_leak_count_max": 0,
+    "selected_case_normalized_duplicate_count_max": 0,
+    "allocation_shortfall_count_max": 0,
+    "provider_completion_rate_required": 1.0,
+    "malformed_response_count_max": 0,
+    "identity_drift_count_max": 0
+  },
+  "result_states": [
+    "preflight-blocked",
+    "running",
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ],
+  "authorization": {
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "reference_question_validation_authorized": true,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "67696090f453bb05db1322a4996f73c14f1be7d0dabda53cc3a8ae6690b93ea8"
+}
