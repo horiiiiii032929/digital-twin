@@ -7837,12 +7837,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "api-first-retrieval-successor",
-      "evidence": "Entrypoint review verified package/hash validation, clean no-call preflight, streamed index and query checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, cost/call stops, deterministic selection, and repository-freeze guards.",
+      "evidence": "Entrypoint review verified package/hash validation, clean preflight, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, per-method fail isolation for semantically invalid optional reranking, cost/call stops, deterministic selection, and freeze guards.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
-      "sha256": "231c3912df0968af678801621eb75d9a5eff91a044163931a42bdd15f05be8f1"
+      "sha256": "4a3a89493fe4db04cde6a1495341963ded0d235036dddd2ae483567a15af778d"
     },
     {
       "audit_status": "audited",
@@ -7881,12 +7881,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "api-first-retrieval-successor-verification",
-      "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, a clean authorized ready preflight, exact bounded execution authority, rejected dataset authority, and hash-bound query-cache replay without provider calls.",
+      "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, clean authorized preflight, exact bounded authority, rejected dataset authority, hash-bound query replay, and no-retry isolation of optional reranker semantic failure.",
       "findings": [],
       "path": "tests/test_api_retrieval_selection.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-api-retrieval-review",
-      "sha256": "635184e388fef7a1f6beb5eab6555ccb2a5b8a77dd0d6a7b97512266df3683cf"
+      "sha256": "a135dd43ef1d6a0e58101549dcb510520e87438b8f366160951b133bdb59feb6"
     }
   ],
   "schema_version": 1

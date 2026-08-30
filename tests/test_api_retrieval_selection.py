@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import asyncio
+import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -11,6 +14,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.retrieval_qualification import ProviderUsage
 from src.digital_twin.repository_freeze import RepositoryFreezeError
+from src.digital_twin.grounding import DocumentChunk
 
 
 def test_api_retrieval_selection_validates_frozen_packages() -> None:
@@ -65,6 +69,82 @@ def test_api_retrieval_execution_has_exact_bounded_authority() -> None:
             selection.INSTRUMENT_ID,
             "dataset_generation",
         )
+
+
+def test_optional_reranker_semantic_failure_is_isolated_without_retry(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    cases = [
+        EvaluationCaseV1(
+            case_id=f"case-{index}",
+            cluster_id=f"cluster-{index}",
+            source_family_id=f"source-{index}",
+            course_id="course-a",
+            question=f"Which evidence supports concept {index}?",
+            split=EvaluationSplit.DEVELOPMENT,
+            slice="paraphrase",
+            author_family="synthetic-test",
+        )
+        for index in range(3)
+    ]
+    chunks = {
+        identifier: DocumentChunk(
+            id=identifier,
+            document_id=identifier,
+            text=f"Evidence from {identifier}.",
+            ordinal=index,
+            source_artifact_id=identifier,
+            source_version=1,
+            retrieval_allowed=True,
+            metadata={"course_id": "course-a"},
+        )
+        for index, identifier in enumerate(("chunk-0", "chunk-1"))
+    }
+
+    class FakeTransport:
+        calls = 0
+
+        def __init__(self, _binding) -> None:
+            pass
+
+        async def call_with_ledger(self, **kwargs):
+            self.calls += 1
+            case_id = json.loads(kwargs["prompt"])[0]["case_id"]
+            return SimpleNamespace(
+                content={
+                    "items": [
+                        {
+                            "case_id": case_id,
+                            "ranked_chunk_ids": ["chunk-0"],
+                        }
+                    ]
+                }
+            )
+
+    monkeypatch.setattr(selection, "DirectProviderJsonTransport", FakeTransport)
+    monkeypatch.setattr(selection, "should_use_semantic_reranking", lambda *_args, **_kwargs: True)
+
+    output, usage = asyncio.run(
+        selection._nano_rerank(
+            cases=cases,
+            rankings={
+                "M5": {
+                    case.case_id: ["chunk-0", "chunk-1"] for case in cases
+                }
+            },
+            score_margins={case.case_id: 0.0 for case in cases},
+            chunks_by_id=chunks,
+            output_root=tmp_path,
+            resume=False,
+        )
+    )
+
+    assert output == {
+        case.case_id: ["chunk-0", "chunk-1"] for case in cases
+    }
+    assert usage["method_status"] == "failed-semantic-output"
+    assert usage["semantic_failure"]["reason"] == "chunk-id-set-drift"
 
 
 def test_query_vector_cache_is_hash_bound_and_resume_safe(tmp_path: Path) -> None:

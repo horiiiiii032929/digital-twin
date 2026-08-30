@@ -702,6 +702,7 @@ async def _nano_rerank(
     )
     transport = DirectProviderJsonTransport(binding)
     try:
+        semantic_failure: dict[str, Any] | None = None
         for number, start in enumerate(range(0, len(selected), 10), start=1):
             batch_ids = selected[start : start + 10]
             expected = {case_id: rankings["M5"][case_id] for case_id in batch_ids}
@@ -733,18 +734,40 @@ async def _nano_rerank(
             )
             rows = response.content["items"]
             if {row["case_id"] for row in rows} != set(batch_ids):
-                raise ApiRetrievalSelectionError("nano reranker case IDs drifted")
+                semantic_failure = {
+                    "request_key": f"rerank-{number:03d}",
+                    "reason": "case-id-set-drift",
+                }
+                break
             for row in rows:
                 identifiers = list(row["ranked_chunk_ids"])
                 if (
                     len(identifiers) != len(set(identifiers))
                     or set(identifiers) != set(expected[row["case_id"]])
                 ):
-                    raise ApiRetrievalSelectionError("nano reranker chunk IDs drifted")
+                    semantic_failure = {
+                        "request_key": f"rerank-{number:03d}",
+                        "case_id": row["case_id"],
+                        "reason": "chunk-id-set-drift",
+                    }
+                    break
                 output[row["case_id"]] = identifiers
+            if semantic_failure is not None:
+                # The optional M6 method fails closed after its first semantic
+                # defect. Preserve its response, make no retry or later M6 call,
+                # and retain M5 rankings only as diagnostic placeholders.
+                output = {
+                    case_id: list(values)
+                    for case_id, values in rankings["M5"].items()
+                }
+                break
         ledger.mark_complete()
         snapshot = ledger.snapshot()
         snapshot["reranked_case_ids"] = selected
+        snapshot["method_status"] = (
+            "failed-semantic-output" if semantic_failure else "completed"
+        )
+        snapshot["semantic_failure"] = semantic_failure
         return output, snapshot
     except BaseException:
         if ledger.snapshot()["status"] == "running":
@@ -781,7 +804,9 @@ def _score(
     rankings: dict[str, dict[str, list[str]]],
     latencies: dict[str, dict[str, float]],
     chunks_by_id: dict[str, DocumentChunk],
+    unavailable_methods: set[str] | None = None,
 ) -> list[dict[str, Any]]:
+    unavailable_methods = unavailable_methods or set()
     summaries = []
     for method_id in EXPECTED_METHODS:
         observations = []
@@ -835,8 +860,10 @@ def _score(
                 "course_violation_count": course,
                 "source_version_violation_count": version,
                 "latency_p95_ms": latency,
+                "operational_failure_count": int(method_id in unavailable_methods),
                 "passed": (
-                    complete >= 0.90
+                    method_id not in unavailable_methods
+                    and complete >= 0.90
                     and recall >= 0.95
                     and boundary_accuracy >= 0.98
                     and severe == 0
@@ -990,6 +1017,9 @@ def execute(*, output_root: Path, resume: bool) -> dict[str, Any]:
         )
     )
     rankings["M6"] = reranked
+    unavailable_methods = (
+        {"M6"} if rerank_usage.get("method_status") != "completed" else set()
+    )
     latencies["M6"] = dict(latencies["M5"])
     for case_id in rerank_usage.get("reranked_case_ids", []):
         latencies["M6"][case_id] += float(
@@ -1019,6 +1049,14 @@ def execute(*, output_root: Path, resume: bool) -> dict[str, Any]:
         "methods": rankings,
         "latencies_ms": latencies,
         "m5_score_margins": score_margins,
+        "method_statuses": {
+            method_id: (
+                rerank_usage.get("method_status")
+                if method_id == "M6"
+                else "completed"
+            )
+            for method_id in EXPECTED_METHODS
+        },
         "gold_loaded": False,
     }
     ranking_path = output_root / "public-rankings.json"
@@ -1039,6 +1077,7 @@ def execute(*, output_root: Path, resume: bool) -> dict[str, Any]:
         rankings=rankings,
         latencies=latencies,
         chunks_by_id=chunks_by_id,
+        unavailable_methods=unavailable_methods,
     )
     selected = _select_summary(summaries)
     result = {

@@ -59,6 +59,16 @@ the unchanged 64-item and 50,000-token limits. It changes no source, case,
 model, method, prompt, gold, gate, or budget and permits an atomic resume from
 the six durable batches.
 
+AFQC-099 records the optional M6 reranker failure without discarding the
+completed retrieval methods. Its first and only GPT-5.4 nano call returned all
+ten case IDs but omitted one or more supplied chunk IDs for several cases. The
+strict semantic invariant rejected that output; the ledger records one call,
+10,748 input tokens, 826 output tokens, USD 0.0031821, exact identity, and zero
+retry. M6 is therefore failed and non-selectable. The fail-isolated completion
+path makes no further M6 call, preserves the response, retains M5 rankings only
+as diagnostic placeholders for M6, and proceeds to score M0-M5 after all
+rankings are durable.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
