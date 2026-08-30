@@ -131,6 +131,27 @@ OpenAI embedding calls, zero retries, and USD 0.00057628. M2 over atomic
 evidence is selected for one actual-product 500+100 development checkpoint;
 the sealed 10,000+1,000 execution remains closed until that checkpoint passes.
 
+AFQC-106 separates the true-visual supplement from the main text/OCR factual
+track. Visual attempt 001 stopped before inference when OpenAI rejected an
+unsupported structured-output keyword. The sole corrective attempt completed
+all 30 public/synthetic visual-description calls with zero retries for USD
+0.0259673, but three assets violated the frozen deterministic semantic-list
+uniqueness contract before retrieval scoring. The visual branch is therefore
+terminal `invalid-execution`: no visual-quality estimate, third attempt,
+multimodal selection, or broad multimodal claim follows. This supplementary
+30-asset/60-case path does not block or substantiate the text-first R1 or the
+actual-product factual evaluation.
+
+AFQC-107 records the independent 12-case synthetic C0-C2 profile diagnostic as
+valid `completed-refine`. All 36 GPT-5.4 mini calls completed with zero retries
+for USD 0.03447. C2 changed all 12 paired C1 responses and produced zero
+unsupported releases, but reached only 66.7% action accuracy, 33.3% boundary
+accuracy, 38.3% fact recall, and 91.7% profile-contract accuracy. No profile
+method is selected. This uses a draft synthetic profile and oracle evidence;
+it is not professor-fidelity or product-retrieval evidence. C3 remains closed
+until the actual-product factual checkpoint passes, and a real professor must
+approve the profile before fidelity evaluation.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
@@ -485,11 +506,11 @@ remain unauthorized.
 The repository-wide correctness baseline was completed on `main` at merge revision
 `db2f5e9` through PR
 [#98](https://github.com/horiiiiii032929/digital-twin/pull/98):
-the current branch now extends it to 649 executable or execution-affecting
-files, including the retrieval-index lifecycle. All are audited with zero pending files and
+the current branch now extends it to 739 executable or execution-affecting
+files. All are audited with zero pending files and
 zero open findings. The canonical verification gate
 now fails if pending or open records reappear. The execution freeze remains
-active for all general evaluation actions across 97 protected entrypoints. It protects the corrected deterministic
+active for all general evaluation actions across 111 protected entrypoints. It protects the corrected deterministic
 reference-package builders; no
 provider, paid, method-evaluation, held-out, or final execution is active. The first open-benchmark
 construction attempt is preserved as operationally invalid: its first DeepSeek
