@@ -13,7 +13,12 @@ The prospective visual study-material comparison is defined in
 It is independent of the sealed text benchmark and does not authorize a model
 run by itself.
 
-The current next research plans are:
+The active factual-evaluation plan is
+[`2026-08-30-api-first-retrieval-successor-v1-plan.md`](2026-08-30-api-first-retrieval-successor-v1-plan.md).
+It replaces local retrieval-model execution with a finite direct-API method
+comparison while preserving deterministic source truth and scoring.
+
+Other research plans include:
 
 - [`2026-08-03-professor-fidelity-v1-plan.md`](2026-08-03-professor-fidelity-v1-plan.md)
   for the frozen R2 policy/evidence comparison; and
