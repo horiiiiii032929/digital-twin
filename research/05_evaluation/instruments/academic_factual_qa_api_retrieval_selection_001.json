@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "academic-factual-qa-api-retrieval-selection-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine",
   "owner_issue": 127,
   "decision_id": "AFQC-095",
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
   "private_data_authorized": false,
   "automatic_product_progression": false,
   "source_plan": {
@@ -112,5 +112,5 @@
     ]
   },
   "result_states": ["invalid-execution", "completed-refine", "completed-keep"],
-  "content_sha256": "ab7372e1148a2e362e22303cfa2bf8dd8205549f5c771a88496eff2d2d322364"
+  "content_sha256": "a338284cd434e675434c514b66771bb7dcc269e5fa49da5304ffcb4ea61ffaff"
 }

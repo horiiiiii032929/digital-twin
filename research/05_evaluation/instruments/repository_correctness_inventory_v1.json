@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0ab23d797cd686492331eac188529e0ecf28a55c108c7a2c8b6de7a4ca461110",
+  "record_sha256": "f7316ca5917bdee30342aa27fafe7d71a89200cd9203d0377b1e3e7310735256",
   "records": [
     {
       "audit": {
@@ -1608,7 +1608,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor",
-        "evidence": "Instrument review verified exact public source/package hashes, the untouched 300-case split, prospective small/large bindings, M0-M6 methods, hidden-gold order, finite gates, 104-call/USD 2 bounds, fresh official metadata, and one-time AFQC-097 provider/paid authorization.",
+        "evidence": "Terminal instrument review verifies the immutable public source/package hashes, completed 300-case M0-M6 comparison, hidden-gold order, AFQC-100 Refine state, and revoked provider/paid authority.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -1619,7 +1619,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_api_retrieval_selection_001.json",
       "risk": "high",
-      "sha256": "297348cda4774de10c038bfc4277280e1e606e2ce0d9841d444b2eae601a085f"
+      "sha256": "8928a07b48a03da917d6836b5db3384c46c181521575e08db5cbf0c5aa561082"
     },
     {
       "audit": {
@@ -5772,7 +5772,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor",
-        "evidence": "Entrypoint review verified package/hash validation, clean preflight, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, per-method fail isolation for semantically invalid optional reranking, cost/call stops, deterministic selection, and freeze guards.",
+        "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, optional-method fail isolation, and fail-closed terminal validation after authority revocation.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -5789,7 +5789,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
       "risk": "high",
-      "sha256": "4a3a89493fe4db04cde6a1495341963ded0d235036dddd2ae483567a15af778d"
+      "sha256": "e3c66e01fd3e6fdb6fb87decd191549c75354ed215fd3aa39b284850a13aa12f"
     },
     {
       "audit": {
@@ -9085,9 +9085,9 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Policy v8 preserves deterministic release selection and historical bindings while registering OpenAI small/large embeddings only as AFQC-095 prospective, not-selected candidates.",
+        "evidence": "Policy v9 preserves deterministic release selection and historical bindings while marking both OpenAI embedding candidates AFQC-100 quality-failed/not-selected after the valid comparison.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
+        "reviewed_at": "2026-08-30",
         "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
@@ -9096,7 +9096,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "4623fc6e956d5eabb500b59c2facf8874c3e2061539a5696aff7e181531f68d7"
+      "sha256": "0cf8966fe10be462bc39cb27142c58ca65ed590e60f0962aa2ae3ee9099bb34d"
     },
     {
       "audit": {
@@ -9341,7 +9341,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Freeze review registers exactly the API-first retrieval selection instrument for bounded external-model and method execution after AFQC-097, while unrelated dataset, held-out, private, product, and final execution remain blocked.",
+        "evidence": "Freeze review verifies AFQC-100 revoked the API-first retrieval instrument and leaves dataset, held-out, private, product, provider, and final execution blocked.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -9352,7 +9352,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "0a49733ebfb7271d4f29e0aacd533244815509065476b6cc3a0957d660e4f7d6"
+      "sha256": "08f20b208e164765481a17a5b51ccc60dba941999b33490edaf2cb70f38806f6"
     },
     {
       "audit": {
@@ -9933,7 +9933,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify exact external-model and method authority for the API-first retrieval selection instrument while dataset generation and every unrelated execution remain rejected.",
+        "evidence": "Focused freeze-policy tests verify the completed API-first retrieval instrument no longer has external-model or method authority and all unrelated execution remains rejected.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-authorization-review"
@@ -9944,7 +9944,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "136c1442791f1fb8910291145860c922fc832180d536a8050f3c53871be52fb6"
+      "sha256": "9851e13de9a70c2451083a67c56d9271bd22c57c035a81d9a34c8fdc1f4ce9c4"
     },
     {
       "audit": {
@@ -10669,7 +10669,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor-verification",
-        "evidence": "Focused tests cover frozen package validation, finite Keep/Refine/invalid simulations, clean authorized preflight, exact bounded authority, rejected dataset authority, hash-bound query replay, and no-retry isolation of optional reranker semantic failure.",
+        "evidence": "Focused tests cover terminal validation, blocked post-run preflight, revoked authority, finite simulations, hash-bound query replay, and no-retry isolation of optional reranker semantic failure.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -10680,7 +10680,7 @@
       "package_commands": [],
       "path": "tests/test_api_retrieval_selection.py",
       "risk": "medium",
-      "sha256": "a135dd43ef1d6a0e58101549dcb510520e87438b8f366160951b133bdb59feb6"
+      "sha256": "a8c42f4ba3fbb07c6610b5856c17a2ac5657a976bb2f3f7b8c6843f253a1ab40"
     },
     {
       "audit": {

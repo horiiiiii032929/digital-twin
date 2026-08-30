@@ -1,7 +1,7 @@
-# Current model policy v8
+# Current model policy v9
 
-Status: local R1 retained; API-first retrieval successor build-only and provider
-execution unauthorized
+Status: local R1 retained; API-first retrieval selection completed Refine and
+provider execution revoked
 Verified: 2026-08-30 (Asia/Singapore)
 
 ## Decision
@@ -22,11 +22,11 @@ DeepSeek, Gemini, Mistral, OpenRouter, Codex review, and local general models
 remain visible only in immutable historical evidence or separately closed
 experiments. They cannot be selected by the active R1 evaluation checkpoint.
 
-The AFQC-095 retrieval successor additionally registers direct OpenAI
-`text-embedding-3-small` and `text-embedding-3-large` as prospective candidates.
-They are not selected release components. Historical local Qwen3 remains the
-reproducible control, but no local embedding or reranking model is allowed in
-the successor execution path.
+The AFQC-095 retrieval successor additionally registered direct OpenAI
+`text-embedding-3-small` and `text-embedding-3-large`. AFQC-100 evaluated their
+dense and BM25-hybrid configurations on 300 development cases; none passed and
+neither model is selected as a release component. Historical local Qwen3
+remains reproducible control evidence, while the active local R1 is unchanged.
 
 ## Provider boundary
 
@@ -56,7 +56,7 @@ privacy review explicitly permits another data boundary.
 - [GPT-5.4 nano model](https://developers.openai.com/api/docs/models/gpt-5.4-nano)
 - [GPT-5.4 model](https://developers.openai.com/api/docs/models/gpt-5.4)
 - [OpenAI API data controls](https://platform.openai.com/docs/models/default-usage-policies-by-endpoint)
-- [Create embeddings API](https://developers.openai.com/api/reference/ruby/resources/embeddings/methods/create)
+- [Create embeddings API](https://developers.openai.com/api/reference/resources/embeddings/methods/create)
 - [text-embedding-3-small](https://developers.openai.com/api/docs/models/text-embedding-3-small)
 - [text-embedding-3-large](https://developers.openai.com/api/docs/models/text-embedding-3-large)
 

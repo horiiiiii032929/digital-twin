@@ -179,6 +179,23 @@ This decision authorizes build-only implementation and documentation. It does
 not authorize an embedding API call, the 300-case comparison, 500+100 product
 execution, or the sealed 10,000+1,000 run.
 
+## Recorded outcome
+
+The separately authorized comparison completed as
+`academic-factual-qa-api-retrieval-selection-001` with a valid `Refine`
+decision. M4, BM25 plus `text-embedding-3-large`, was best descriptively at
+38.7% complete evidence@3 and 44.7% Evidence Recall@5; boundary accuracy was
+96.9% with one severe unsupported ambiguity release. M6 failed its semantic
+output contract and was not selectable. The execution used 83 exact provider
+calls, zero retries, USD 0.0593379, and no private data. No method was selected
+and the one-time authority was revoked.
+
+The cross-method pattern and zero-result structured slices do not justify
+another embedding-model swap. The prospective successor must treat source
+registration, structured code/equation/table representation, context-complete
+reference questions, and retrieval matching as one method decision, then use a
+fresh source-disjoint confirmation tranche.
+
 ## Consequences
 
 - The local R1 and all historical results remain unchanged.

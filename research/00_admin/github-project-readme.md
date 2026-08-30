@@ -2,11 +2,13 @@
 
 Status date: 2026-08-30
 
-Issue #127 is the active P0 research item. AFQC-096 has completed the build-only
-API-first retrieval successor in draft PR #149. The exact M0–M6 comparison is
-validated and simulated, but provider and paid execution remain unauthorized.
-The next Project transition is one bounded 300-case run: Keep reopens 500+100;
-Refine stops for a method-level decision. The qualified local R1 is unchanged.
+Issue #127 is the active P0 research item at `In Progress / Refine`. AFQC-100
+completed the exact API-first M0–M6 comparison on 300 cases. No method passed:
+the best result was 38.7% complete evidence@3 and 44.7% Recall@5, boundary
+accuracy was 96.9%, and one severe ambiguity release occurred. The 83-call,
+USD 0.0593379 authority is revoked. The next Project transition is one joint
+source-registration, reference-question, and retrieval-matching redesign on a
+fresh source-disjoint tranche. The qualified local R1 is unchanged.
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -39,11 +41,11 @@ evidence, not competing end goals.
   leakage-free actual-product evaluation. AFQC-094 preserves the finite
   program as invalid after local Qwen3 materialization failed twice before any
   provider or product call. AFQC-095 now selects an API-first retrieval
-  successor: compare BM25, direct OpenAI small/large dense and hybrid retrieval,
-  deterministic hierarchy, and bounded API reranking on the untouched 300
+  successor: BM25, direct OpenAI small/large dense and hybrid retrieval,
+  deterministic hierarchy, and bounded API reranking were compared on 300
   development cases. Source registration, vectors, citation ranges, hidden
-  gold, and scoring stay repository-owned. No API call, method selection,
-  500+100 execution, or sealed 10,000+1,000 execution is authorized.
+  gold, and scoring stayed repository-owned. The result is valid `Refine`, no
+  method is selected, and 500+100 plus sealed 10,000+1,000 remain closed.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -55,11 +57,11 @@ evidence, not competing end goals.
 ## Release-critical order
 
 1. Keep release goal #8 `In Progress` as the parent.
-2. Build and freeze #127's direct-OpenAI embedding adapters, atomic vector
-   materializer, and finite M0-M6 retrieval comparison.
-3. Separately authorize the 2,100-source materialization and untouched 300-case
-   method selection. Only its pass may prepare 500+100; only a complete
-   development pass may prepare sealed 10,000+1,000 execution.
+2. Preserve #127's completed API-first comparison and its unfavorable result.
+3. Build one joint structured-source, context-complete question, and retrieval
+   successor, then confirm it on a fresh source-disjoint tranche. Only its pass
+   may prepare 500+100; only a complete development pass may prepare sealed
+   10,000+1,000 execution.
 4. Complete #105 from that leakage-free evidence and select the production
    grounding gate.
 5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
@@ -77,8 +79,8 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| API-first retrieval successor build and separate authorization | Untouched 300-case retrieval-method decision |
-| Passing #127 retrieval result plus successor authorization | #127 T0 500+100 development execution |
+| Joint source/question/indexing successor and fresh confirmation | Passing #127 retrieval-method decision |
+| Passing fresh #127 result plus successor authorization | #127 T0 500+100 development execution |
 | Professor profile-authoring response | Fidelity calibration |
 | Leakage-free #127 development/final result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |

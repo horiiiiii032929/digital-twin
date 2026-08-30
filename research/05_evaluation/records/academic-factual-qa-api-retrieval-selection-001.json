@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-api-retrieval-selection-001",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-selected-development-300",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-source-clusters",
+  "code_revision": "88af8ed87e5fd408d32435ffbd051d01e89ba3b8",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "bm25-v1",
+        "version": "M0",
+        "configuration": {"embedding_model": "none", "fusion": false, "hierarchy": false, "reranking": false}
+      },
+      "role": "control",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3659574468, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.4063829787, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 3.8510840095, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 BM25 rankings completed deterministically."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 149, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-small-dense-v1",
+        "version": "M1",
+        "configuration": {"embedding_model": "text-embedding-3-small", "dimensions": 1536, "fusion": false, "hierarchy": false, "reranking": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3361702128, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.3638297872, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 57.7951250016, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 small-dense rankings completed with exact embedding identity."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 156, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "bm25-openai-small-rrf-v1",
+        "version": "M2",
+        "configuration": {"embedding_model": "text-embedding-3-small", "dimensions": 1536, "fusion": true, "hierarchy": false, "reranking": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3829787234, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.4319148936, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 54.2373750068, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 small-hybrid rankings completed with exact embedding identity."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 145, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-large-dense-v1",
+        "version": "M3",
+        "configuration": {"embedding_model": "text-embedding-3-large", "dimensions": 3072, "fusion": false, "hierarchy": false, "reranking": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3234042553, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.3680851064, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 108.0059579981, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 large-dense rankings completed with exact embedding identity."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 159, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "bm25-openai-large-rrf-v1",
+        "version": "M4",
+        "configuration": {"embedding_model": "text-embedding-3-large", "dimensions": 3072, "fusion": true, "hierarchy": false, "reranking": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3872340426, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.4468085106, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 102.2423749964, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 large-hybrid rankings completed with exact embedding identity."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 144, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "openai-large-hybrid-hierarchy-v1",
+        "version": "M5",
+        "configuration": {"embedding_model": "text-embedding-3-large", "dimensions": 3072, "fusion": true, "hierarchy": true, "reranking": false}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3829787234, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.4404255319, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 128.856958996, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One ambiguity case was released as an answer."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "Zero source, course, or version violations."},
+        {"name": "method-operationally-complete", "passed": true, "evidence": "All 300 hierarchical rankings completed deterministically."}
+      ],
+      "failures_by_category": {"incomplete-all-evidence-at-3": 145, "boundary-action-error": 2, "severe-unsupported-release": 1}
+    },
+    {
+      "implementation": {
+        "implementation_id": "m5-bounded-gpt-5-4-nano-rerank-v1",
+        "version": "M6",
+        "configuration": {"embedding_model": "text-embedding-3-large", "dimensions": 3072, "fusion": true, "hierarchy": true, "reranking": "gpt-5.4-nano-2026-03-17"}
+      },
+      "role": "candidate",
+      "metrics": [
+        {"name": "complete-evidence-at-3", "value": 0.3829787234, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.4404255319, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-accuracy", "value": 0.9692307692, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "retrieval-latency-p95", "value": 6664.2138330208, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2000.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "Diagnostic M5 placeholder rankings include one ambiguity release."},
+        {"name": "source-course-version-isolation", "passed": true, "evidence": "The rejected output introduced no unknown ID; diagnostic placeholders retained valid lineage."},
+        {"name": "method-operationally-complete", "passed": false, "evidence": "The first nano response returned incomplete candidate-ID sets; zero retries and no later M6 calls were made."}
+      ],
+      "failures_by_category": {"optional-reranker-semantic-output": 1, "incomplete-all-evidence-at-3-diagnostic": 145, "boundary-action-error-diagnostic": 2}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "No retrieval method passed the frozen 300-case gates. M4 was descriptively best at 38.7% complete evidence@3 and 44.7% Evidence Recall@5, far below 90% and 95%; boundary accuracy was 96.9% with one severe ambiguity release. The failure is shared across lexical, small/large dense, hybrid, and hierarchical methods, so changing only the embedding model is not supported.",
+    "limitations": [
+      "This is a development method decision, not the sealed 10,000-case product result.",
+      "Several failed questions contain deictic fragments or weak lexical anchors; reference-question and source-registration quality require joint diagnosis before attributing every miss to ranking.",
+      "Structured code, equation, and table slices had zero complete evidence@3 under M4, while the multi-evidence slice reached 80%; aggregate failure is strongly heterogeneous.",
+      "M6 is operationally failed and its displayed metrics are diagnostic M5 placeholders, not a valid reranker result.",
+      "The benchmark uses public educational sources and does not establish private-course, true-visual, professor-fidelity, usability, or learning-outcome performance."
+    ],
+    "retained_fallback": "qualified-local-r1-unchanged-and-historical-qwen3-control-evidence"
+  },
+  "operational_summary": {
+    "case_count": 300,
+    "answerable_case_count": 235,
+    "boundary_case_count": 65,
+    "source_cluster_count": 2100,
+    "provider_calls": 83,
+    "transport_retries": 0,
+    "embedding_input_tokens_per_model": 374372,
+    "reranker_input_tokens": 10748,
+    "reranker_output_tokens": 826,
+    "reported_cost_usd": 0.0593379,
+    "result_sha256": "688eaa9e34c0ef72d1312a2aef734c0ac62fed5cc9072365f869a336092ebc9a",
+    "rankings_sha256": "1b61a5cd6d5f88f5232dde4a568ca8f0763b34fed097de1d42d15c536487d197",
+    "reranker_ledger_sha256": "029203e40f7848a35ced416fe60dff8dd0438eb008c47b0bf8b6f68714cbd42e",
+    "hidden_gold_loaded_only_after_rankings_persisted": true,
+    "private_data_used": false,
+    "authority_revoked": true
+  }
+}

@@ -20,7 +20,7 @@ from src.digital_twin.grounding import DocumentChunk
 def test_api_retrieval_selection_validates_frozen_packages() -> None:
     result = selection.validate()
 
-    assert result["status"] == "passed-build-only"
+    assert result["status"] == "passed-terminal"
     assert result["source_cluster_count"] == 2_100
     assert result["selected_development_case_count"] == 300
     assert result["method_count"] == 7
@@ -40,7 +40,7 @@ def test_api_retrieval_selection_is_finite_across_simulations() -> None:
     assert all(result["provider_calls"] == 0 for result in (passed, failed, invalid))
 
 
-def test_api_retrieval_preflight_is_ready_when_clean_and_authorized(
+def test_api_retrieval_preflight_is_blocked_after_authority_revocation(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
@@ -49,25 +49,20 @@ def test_api_retrieval_preflight_is_ready_when_clean_and_authorized(
 
     result = selection.preflight(output_root=tmp_path / "unused")
 
-    assert result["status"] == "ready"
+    assert result["status"] == "blocked-not-authorized"
     assert result["technical_blockers"] == []
-    assert result["authority_blockers"] == []
+    assert result["authority_blockers"] == [
+        "provider-execution-not-authorized",
+        "paid-execution-not-authorized",
+    ]
     assert result["model_or_provider_called"] is False
 
 
-def test_api_retrieval_execution_has_exact_bounded_authority() -> None:
-    selection.require_bounded_pilot_operation_allowed(
-        selection.INSTRUMENT_ID,
-        "external_model_evaluation",
-    )
-    selection.require_bounded_pilot_operation_allowed(
-        selection.INSTRUMENT_ID,
-        "method_evaluation_execution",
-    )
-    with pytest.raises(RepositoryFreezeError, match="not authorized"):
+def test_api_retrieval_execution_authority_is_revoked() -> None:
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         selection.require_bounded_pilot_operation_allowed(
             selection.INSTRUMENT_ID,
-            "dataset_generation",
+            "external_model_evaluation",
         )
 
 

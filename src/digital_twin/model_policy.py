@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any
 
 
-POLICY_ID = "current-model-policy-2026-08-30-v8"
+POLICY_ID = "current-model-policy-2026-08-30-v9"
 OPENAI_HIGH_VOLUME_MODEL = "gpt-5.4-mini-2026-03-17"
 OPENAI_HIGH_VOLUME_LITELLM_MODEL = f"openai/{OPENAI_HIGH_VOLUME_MODEL}"
 OPENAI_ROUTINE_REVIEW_MODEL = "gpt-5.4-nano-2026-03-17"
@@ -154,12 +154,12 @@ CURRENT_MODEL_BINDINGS = (
     CurrentModelBinding(
         role="prospective-api-text-embedding-low-cost",
         provider_model=OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
-        status="afqc-095-prospective-not-selected",
+        status="afqc-100-retrieval-methods-failed-not-selected",
     ),
     CurrentModelBinding(
         role="prospective-api-text-embedding-high-capability",
         provider_model=OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
-        status="afqc-095-prospective-not-selected",
+        status="afqc-100-retrieval-methods-failed-not-selected",
     ),
     CurrentModelBinding(
         role="prospective-text-reranker",

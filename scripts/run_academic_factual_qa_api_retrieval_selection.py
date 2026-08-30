@@ -155,6 +155,7 @@ def validate() -> dict[str, Any]:
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise ApiRetrievalSelectionError("API retrieval instrument identity drifted")
     if instrument.get("status") not in {
+        "completed-refine",
         "reviewed-provider-unauthorized",
         "frozen-pending-execution",
     }:
@@ -208,7 +209,11 @@ def validate() -> dict[str, Any]:
         raise ApiRetrievalSelectionError("API retrieval execution bounds drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-build-only",
+        "status": (
+            "passed-terminal"
+            if instrument["status"] == "completed-refine"
+            else "passed-build-only"
+        ),
         "source_cluster_count": 2_100,
         "selected_development_case_count": 300,
         "method_count": 7,
