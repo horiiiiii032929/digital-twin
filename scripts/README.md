@@ -899,6 +899,13 @@ Current utilities:
   The committed build uses public sources only and makes no provider call. Run
   `npm run verify:academic-factual-qa-source-aligned-confirmation` for the
   network-free reconstruction and matchability check.
+- `run_academic_factual_qa_source_aligned_wording.py`: runs AFQC-101 stage one
+  under the finite non-human program. GPT-5.4 nano proposes context-complete
+  wording and GPT-5.6 Terra performs target-blind advisory recovery. Models
+  cannot alter source truth; rejected or unavailable wording is replaced by a
+  unique deterministic fallback. Use the `verify:`, `simulate:`, `preflight:`,
+  `preflight-live:`, `execute:`, and `resume:` package commands with the
+  `academic-factual-qa-source-aligned-wording` suffix.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

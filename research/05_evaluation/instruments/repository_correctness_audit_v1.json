@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "48e959a573c75ad7b2b79350b3c3082ae1a8787bb46f568b80bb3cb2a842ef61"
+      "sha256": "21def72b38ed139af46b9f1283e314469bc682417fcce31ae70da13910f57b64"
     },
     {
       "audit_status": "audited",
@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "2fd61824d15a91def1f27fae32927b3e9556b046858a3b7d6f51a6601bef4350"
+      "sha256": "5483874f32be264fdd18b65676d4a74bc17f4c5a4d732ebcbbd53dfeff9e2384"
     },
     {
       "audit_status": "audited",
@@ -7953,6 +7953,61 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
       "sha256": "2b77665cd9109e40cc3e8709c7f97ce8d4f3d2035375f9f54da8dad66d33dbab"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording",
+      "evidence": "Binding review verifies direct OpenAI-only exact models, store=false, fixed 50-call and USD 4 bounds, two transport retries globally, public-source scope, no product/final execution, and correlated-agent-review disclosure.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_001.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "a80357999f98344925b624a180af4c6fe5d7159635dc697f2c138642fac582d8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording",
+      "evidence": "Runner review verifies target-blind advisory input, ID-set parsing independent of provider order, atomic exclusive ledger/resume, exact identity and cost accounting, deterministic fallback, and automatic execution under the finite program authority.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_source_aligned_wording.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "018cb7ac83892ce11ecf393834790f29eca408c466f2043c63f781e1bcde06eb"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording",
+      "evidence": "Assembly review verifies models cannot mutate authoritative truth, accepted wording retains semantic anchors and blind-review agreement, canonical-answer leakage fails, duplicates fall back deterministically, and every final question remains unique.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/source_aligned_wording.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording-verification",
+      "evidence": "Focused runner tests verify program/model/cost bounds, reordered complete ID acceptance, duplicate and unknown-ID quarantine, clean exclusive preflight, and reviewer gold isolation.",
+      "findings": [],
+      "path": "tests/test_run_source_aligned_wording.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "f800a83ad7836556ea63d29aeed6174f5e581a7227ab48cf04eb632d0c73f841"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording-verification",
+      "evidence": "Focused assembly tests verify 500 deterministic truth-preserving fallbacks are complete and unique and that semantic anchor loss forces fallback despite a nominally favorable advisory vote.",
+      "findings": [],
+      "path": "tests/test_source_aligned_wording.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "d0c9146b0097ea0fae85f9e510d1979ca0b962e2bb520ace8efc85f768f9ebef"
     }
   ],
   "schema_version": 1

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 723
+    "audited": 728
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 167,
-    "active_runtime": 126,
+    "active_or_unclassified_tooling": 168,
+    "active_runtime": 127,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 177,
+    "evaluation_configuration": 178,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 154
+    "verification": 156
   },
-  "file_count": 723,
+  "file_count": 728,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "37aa0bbb56e445de78c4bf1a82fbcc032753e49225f9ecb3b479b472053bbe48",
+  "record_sha256": "dd520ade4f103b1b18cbd39ff5e5d8fe4f5c16f17761ad0d0b9179794eb5d543",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "48e959a573c75ad7b2b79350b3c3082ae1a8787bb46f568b80bb3cb2a842ef61"
+      "sha256": "21def72b38ed139af46b9f1283e314469bc682417fcce31ae70da13910f57b64"
     },
     {
       "audit": {
@@ -2516,6 +2516,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_r1_model_cascade_001.json",
       "risk": "high",
       "sha256": "4535feeb4636f72b030c52b836a6a22c7a864336acadeee6f5fb923b5a6a6a90"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Binding review verifies direct OpenAI-only exact models, store=false, fixed 50-call and USD 4 bounds, two transport retries globally, public-source scope, no product/final execution, and correlated-agent-review disclosure.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_001.json",
+      "risk": "high",
+      "sha256": "a80357999f98344925b624a180af4c6fe5d7159635dc697f2c138642fac582d8"
     },
     {
       "audit": {
@@ -6214,6 +6230,29 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Runner review verifies target-blind advisory input, ID-set parsing independent of provider order, atomic exclusive ledger/resume, exact identity and cost accounting, deterministic fallback, and automatic execution under the finite program authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-source-aligned-wording",
+        "preflight-live:academic-factual-qa-source-aligned-wording",
+        "preflight:academic-factual-qa-source-aligned-wording",
+        "resume:academic-factual-qa-source-aligned-wording",
+        "simulate:academic-factual-qa-source-aligned-wording",
+        "verify:academic-factual-qa-source-aligned-wording"
+      ],
+      "path": "scripts/run_academic_factual_qa_source_aligned_wording.py",
+      "risk": "high",
+      "sha256": "018cb7ac83892ce11ecf393834790f29eca408c466f2043c63f781e1bcde06eb"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Runner review and full network-free service simulation verify course-and-question-only product input, full-corpus source reconstruction, shared atomic drafts, delayed gold join, authoritative claim/citation scoring, cluster-paired uncertainty, persistence, cost/call ceilings, and explicit non-academic simulation labeling.",
         "findings": [],
@@ -8622,6 +8661,22 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Assembly review verifies models cannot mutate authoritative truth, accepted wording retains semantic anchors and blind-review agreement, canonical-answer leakage fails, duplicates fall back deterministically, and every final question remains unique.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/source_aligned_wording.py",
+      "risk": "high",
+      "sha256": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49"
+    },
+    {
+      "audit": {
         "domain": "professor-ready-factual-and-visual-evaluation",
         "evidence": "Contract review and tests enforce provider-neutral question-independent descriptions, stable provider identity, unique entities/relationships, source-image hashes, normalized original-region lineage, and non-authoritative retrieval text.",
         "findings": [],
@@ -9402,7 +9457,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2fd61824d15a91def1f27fae32927b3e9556b046858a3b7d6f51a6601bef4350"
+      "sha256": "5483874f32be264fdd18b65676d4a74bc17f4c5a4d732ebcbbd53dfeff9e2384"
     },
     {
       "audit": {
@@ -11806,6 +11861,22 @@
     },
     {
       "audit": {
+        "domain": "source-aligned-wording-verification",
+        "evidence": "Focused runner tests verify program/model/cost bounds, reordered complete ID acceptance, duplicate and unknown-ID quarantine, clean exclusive preflight, and reviewer gold isolation.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_run_source_aligned_wording.py",
+      "risk": "medium",
+      "sha256": "f800a83ad7836556ea63d29aeed6174f5e581a7227ab48cf04eb632d0c73f841"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -11899,6 +11970,22 @@
       "path": "tests/test_second_review_multimodal_benchmark.py",
       "risk": "medium",
       "sha256": "c3d38b67bd5fa787f7634a6e046386fcca753eeaae2eac1a02e189d9db75c304"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording-verification",
+        "evidence": "Focused assembly tests verify 500 deterministic truth-preserving fallbacks are complete and unique and that semantic anchor loss forces fallback despite a nominally favorable advisory vote.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_source_aligned_wording.py",
+      "risk": "medium",
+      "sha256": "d0c9146b0097ea0fae85f9e510d1979ca0b962e2bb520ace8efc85f768f9ebef"
     },
     {
       "audit": {
@@ -12078,8 +12165,8 @@
     }
   ],
   "risk_counts": {
-    "high": 555,
-    "medium": 168
+    "high": 558,
+    "medium": 170
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
