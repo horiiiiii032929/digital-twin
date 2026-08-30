@@ -34,6 +34,9 @@ INSTRUMENT_009 = ROOT / (
 INSTRUMENT_010 = ROOT / (
     "research/05_evaluation/instruments/course_digital_twin_evaluation_program_010.json"
 )
+INSTRUMENT_011 = ROOT / (
+    "research/05_evaluation/instruments/course_digital_twin_evaluation_program_011.json"
+)
 
 
 def test_program_006_is_terminal_and_preserved() -> None:
@@ -130,11 +133,27 @@ def test_program_010_corrects_bulk_cost_and_latency_without_changing_truth() -> 
     result = runner.validate(INSTRUMENT_010)
 
     assert manifest.program_id == "course-digital-twin-evaluation-program-010"
-    assert manifest.status == "frozen-authorized"
+    assert manifest.status == "terminated"
+    assert manifest.provider_execution_authorized is False
+    assert manifest.paid_execution_authorized is False
     assert manifest.total_budget_usd == 47.3
     assert manifest.final_construction_verifier_role == "product-answer-generator"
     assert manifest.provider_concurrency == 4
     assert manifest.descriptive_factual_continuation is True
+    assert result["status"] == "passed-build-only"
+    assert result["development_missing_reference_count"] == 0
+
+
+def test_program_011_corrects_only_the_measured_construction_budget_split() -> None:
+    manifest = load_program_manifest(INSTRUMENT_011)
+    result = runner.validate(INSTRUMENT_011)
+
+    assert manifest.program_id == "course-digital-twin-evaluation-program-011"
+    assert manifest.status == "frozen-authorized"
+    assert manifest.total_budget_usd == 45.7
+    assert manifest.final_construction_verifier_role == "product-answer-generator"
+    assert manifest.final_construction_wording_budget_fraction == 0.15
+    assert manifest.provider_concurrency == 4
     assert result["status"] == "passed-build-only"
     assert result["development_missing_reference_count"] == 0
 

@@ -415,6 +415,15 @@ four course streams concurrently, and retains unchanged truth, cases, gates,
 and descriptive interpretation. Its USD 47.30 ceiling keeps cumulative program
 spend within the user's existing USD 50 authority.
 
+AFQC-135 records program 010 as another valid development `Refine` plus an
+interrupted construction attempt. Four-course concurrency passed its focused
+and complete repository gates, but measured mini-verifier usage exposed that
+the USD 6 construction reserve was still divided 50/50 despite wording needing
+about USD 0.6 and verification about USD 4.3. Program 011 is the final
+harness-only correction: it changes that split to 15/85 and uses a USD 45.70
+ceiling so cumulative spend across programs 008-011 remains below the existing
+USD 50 authorization. No cases, truth, prompts, product method, or gates change.
+
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
 screen as valid unfavorable evidence. GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6

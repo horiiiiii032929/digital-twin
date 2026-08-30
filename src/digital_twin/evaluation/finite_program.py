@@ -185,6 +185,9 @@ class ProgramManifestV1(BaseModel):
     product_candidate_evidence_gate: str | None = None
     product_candidate_model_role: str | None = None
     final_construction_verifier_role: str | None = None
+    final_construction_wording_budget_fraction: float | None = Field(
+        default=None, gt=0, lt=1
+    )
     provider_concurrency: int | None = Field(default=None, ge=1, le=8)
     visual_dataset_path: str = Field(min_length=1)
     global_hard_stops: list[str] = Field(min_length=6)

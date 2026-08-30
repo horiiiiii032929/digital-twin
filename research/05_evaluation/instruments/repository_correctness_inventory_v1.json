@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 781
+    "audited": 782
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 208,
+    "evaluation_configuration": 209,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 167
   },
-  "file_count": 781,
+  "file_count": 782,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "8702f2b2d0ee494b2e92c69b0e83b5a527bcfbea1b53709b97c036175a5492c4",
+  "record_sha256": "3b5c80df5b8005a3b186f373ee3fddacfa09efee67ab22b1c4cd4aeb14b57a2b",
   "records": [
     {
       "audit": {
@@ -1384,7 +1384,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Command review confirms historical attempts remain verifiable, programs 009/010 expose validate, smoke, preflight, execute, and resume entrypoints, and the default finite command targets the sole authorized corrected descriptive completion.",
+        "evidence": "Command review confirms historical attempts remain verifiable, programs 010/011 expose validate, smoke, preflight, execute, and resume entrypoints, and the default finite command targets the sole authorized final budget-split correction.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "fd4f3136a52b44a41ce7e1e8f714b0308ea059cc2f94d8e0dc4ebf992d1f3188"
+      "sha256": "2989a2b8eb3d70d589cfbce5442de4cb9e46bda692cdbeedb521ace4dc35ce53"
     },
     {
       "audit": {
@@ -3112,7 +3112,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Program review verifies the sole active successor preserves all truth, cases, gates, and descriptive interpretation while using GPT-5.4 mini for bulk verification, four-way course concurrency, measured stage reserves, and a cumulative ceiling within the existing USD 50 authority.",
+        "evidence": "Terminal instrument review preserves the development Refine result, revokes authority, and records the interrupted 50/50 construction reserve split without creating a final package or opening final gold.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
@@ -3123,7 +3123,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_010.json",
       "risk": "high",
-      "sha256": "9881242cc7e2af9c579ba19bc6f1d07089dbe930176bc849ea769297825a46c6"
+      "sha256": "199897b6d0990649e4d3ba932ed5c98e30f8e5f4ef7c9e57504f6dfab05c6b7f"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Program review verifies the sole active successor preserves all truth, cases, gates, models, and descriptive interpretation while changing only construction's measured reserve split to 15/85 under four-course concurrency and the remaining cumulative authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_011.json",
+      "risk": "high",
+      "sha256": "7dc7a4dedb7596a2ac99478b91bf6bfd586a908a2ce24705def8ff79846138e0"
     },
     {
       "audit": {
@@ -5813,7 +5829,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Factual-stage review verifies question-only retrieval, delayed gold opening, deterministic scoring, atomic ledgers, explicit descriptive continuation, a configurable bulk-verifier binding, and bounded four-course concurrency without changing failed gates or within-course order.",
+        "evidence": "Factual-stage review verifies question-only retrieval, delayed gold opening, deterministic scoring, atomic ledgers, explicit descriptive continuation, configurable bulk-verifier and budget-allocation bindings, and bounded four-course concurrency without changing failed gates or within-course order.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
@@ -5824,7 +5840,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "e331e28cbbb7f3b3757b1df8bf16b6469afb09fcb48fa1b849f553fc98e422a2"
+      "sha256": "893cbc5b6842e455b7629ef15cb5e915c1de52c41871e57988c600fd9182ef98"
     },
     {
       "audit": {
@@ -7111,6 +7127,7 @@
         "execute:finite-evaluation-program-008",
         "execute:finite-evaluation-program-009",
         "execute:finite-evaluation-program-010",
+        "execute:finite-evaluation-program-011",
         "preflight:finite-evaluation-program",
         "preflight:finite-evaluation-program-002",
         "preflight:finite-evaluation-program-003",
@@ -7121,6 +7138,7 @@
         "preflight:finite-evaluation-program-008",
         "preflight:finite-evaluation-program-009",
         "preflight:finite-evaluation-program-010",
+        "preflight:finite-evaluation-program-011",
         "resume:finite-evaluation-program",
         "resume:finite-evaluation-program-002",
         "resume:finite-evaluation-program-003",
@@ -7131,6 +7149,7 @@
         "resume:finite-evaluation-program-008",
         "resume:finite-evaluation-program-009",
         "resume:finite-evaluation-program-010",
+        "resume:finite-evaluation-program-011",
         "simulate:finite-evaluation-program",
         "smoke:finite-evaluation-program-002",
         "smoke:finite-evaluation-program-003",
@@ -7141,6 +7160,7 @@
         "smoke:finite-evaluation-program-008",
         "smoke:finite-evaluation-program-009",
         "smoke:finite-evaluation-program-010",
+        "smoke:finite-evaluation-program-011",
         "verify:finite-evaluation-program",
         "verify:finite-evaluation-program-002",
         "verify:finite-evaluation-program-003",
@@ -7150,7 +7170,8 @@
         "verify:finite-evaluation-program-007",
         "verify:finite-evaluation-program-008",
         "verify:finite-evaluation-program-009",
-        "verify:finite-evaluation-program-010"
+        "verify:finite-evaluation-program-010",
+        "verify:finite-evaluation-program-011"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
@@ -9233,7 +9254,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Control-plane review verifies immutable manifest validation, a cumulative ceiling at or below USD 50, backward-compatible optional descriptive continuation, explicit verifier/concurrency bindings, exact stage budgets, exclusive outputs, revision/hash-bound resume, and global termination.",
+        "evidence": "Control-plane review verifies immutable manifest validation, a cumulative ceiling at or below USD 50, backward-compatible optional descriptive continuation, explicit verifier/concurrency/budget-split bindings, exact stage budgets, exclusive outputs, revision/hash-bound resume, and global termination.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -9244,7 +9265,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "risk": "high",
-      "sha256": "dc652e179d0f99ba167ad2757f949dae20ff85eaa9f3c2f93caae60bf2b74489"
+      "sha256": "cfcca5ff78051fb93b6a0d93ba7e5f7d95c68da146b9c018f15ca9c7907e0336"
     },
     {
       "audit": {
@@ -10241,7 +10262,7 @@
     {
       "audit": {
         "domain": "atomic-m2-confirmation",
-        "evidence": "Freeze review revokes programs 008/009 and authorizes only deterministic aggregate construction plus the exact program-010 descriptive dataset/model/method operations.",
+        "evidence": "Freeze review revokes programs 008-010 and authorizes only deterministic aggregate construction plus the exact program-011 descriptive dataset/model/method operations.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -10252,7 +10273,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "c720f127de852535623b08d408a4af6db6c438184a2ced5b54bbc07f873a4b0e"
+      "sha256": "7fe499822b0f899958dc09f0c89258f0ea286c991521f83e35cbf7825fa91b98"
     },
     {
       "audit": {
@@ -10833,7 +10854,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Freeze regression verifies the exact deterministic builders and program-010 operations while terminated program 009, completed program 008, and other historical programs remain rejected.",
+        "evidence": "Freeze regression verifies the exact deterministic builders and program-011 operations while terminated programs 009/010, completed program 008, and other historical programs remain rejected.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-reference-truth-review"
@@ -10844,7 +10865,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "93cf0944e7b56942e1bb083396e36b0620642ff6d69560801ef71e2190c44597"
+      "sha256": "85dc2cf784be1bff32a4d67cdaf142b601093b0d8719e5d44c7120bbaf1555c7"
     },
     {
       "audit": {
@@ -12001,7 +12022,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program-verification",
-        "evidence": "Tests preserve programs 006-009, prove program 010 binds the exact balanced package, corrected verifier and concurrency settings, and 450 matchable references, and ensure descriptive retrieval cannot be reported as a passed gate.",
+        "evidence": "Tests preserve programs 006-010, prove program 011 binds the exact balanced package, corrected verifier, concurrency, and 15/85 reserve settings, and 450 matchable references, and ensure descriptive retrieval cannot be reported as a passed gate.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
@@ -12012,7 +12033,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
       "risk": "medium",
-      "sha256": "3a6714ec394b850aafd627df9b5e2edfc897e917985b6142136a351d96681754"
+      "sha256": "52c9f959f112d8cbe0dac0c41f0db100b6b2aa610f3c94bae7487ab6f3619c0d"
     },
     {
       "audit": {
@@ -13136,7 +13157,7 @@
     }
   ],
   "risk_counts": {
-    "high": 600,
+    "high": 601,
     "medium": 181
   },
   "schema_version": 1,

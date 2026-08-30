@@ -1448,7 +1448,11 @@ async def _construct_wording(
     luna_binding = model_binding(
         context.manifest, role=verifier_role, maximum_output_tokens=8_000
     )
-    half = context.remaining_stage_budget_usd / 2
+    wording_fraction = (
+        context.manifest.final_construction_wording_budget_fraction or 0.5
+    )
+    wording_budget = context.remaining_stage_budget_usd * wording_fraction
+    verification_budget = context.remaining_stage_budget_usd - wording_budget
     nano_path = context.output_root / "wording-provider.sqlite3"
     luna_path = context.output_root / "verification-provider.sqlite3"
     if nano_path.is_file() and luna_path.is_file():
@@ -1499,7 +1503,7 @@ async def _construct_wording(
             "binding": nano_binding,
         },
         maximum_calls=len(batches),
-        maximum_cost_usd=half,
+        maximum_cost_usd=wording_budget,
         resume=context.resume and nano_path.exists(),
     )
     luna_ledger = ProviderCallLedgerV1(
@@ -1511,7 +1515,7 @@ async def _construct_wording(
             "binding": luna_binding,
         },
         maximum_calls=len(batches),
-        maximum_cost_usd=half,
+        maximum_cost_usd=verification_budget,
         resume=context.resume and luna_path.exists(),
     )
     nano = DirectProviderJsonTransport(nano_binding)
