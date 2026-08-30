@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0917afb9958b42c5fffd77161ec49603ced4954e95a00792ae98b29d7c4f1c47",
+  "record_sha256": "d1efc96624977f1db08e0756504c3402ba58a68c1e360be39852a36279a20611",
   "records": [
     {
       "audit": {
@@ -8733,7 +8733,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor",
-        "evidence": "Index-lifecycle review verified prospective v2 bindings, course/source/version isolation, bounded vector retention, SQLite batch checkpoints, resume binding checks, streamed dense publication, immutable hashes, idempotent pointers, corruption rejection, and query-only runtime loading.",
+        "evidence": "Index-lifecycle review verified prospective v2 bindings, course/source/version isolation, item-and-token-bounded vector batches, SQLite checkpoints, stable resume partitioning, streamed dense publication, immutable hashes, corruption rejection, and query-only runtime loading.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -8744,7 +8744,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/api_retrieval_index.py",
       "risk": "high",
-      "sha256": "fb7542e0194e858bc575b50b43a8f50f5c083fe2e7baff3edc2c02c410d89eff"
+      "sha256": "1bc4c036fe975225942dc5224918e9fd25dab3cca786952fdaffa79e9b55d781"
     },
     {
       "audit": {
@@ -9677,7 +9677,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor-verification",
-        "evidence": "Focused tests cover bounded immutable materialization, idempotency, runtime loading, interruption/resume, resume binding drift, embedder drift, and artifact checksum corruption.",
+        "evidence": "Focused tests cover item-and-token-bounded immutable materialization, idempotency, runtime loading, interruption/resume, resume binding drift, embedder drift, and artifact checksum corruption.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -9688,7 +9688,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_api_retrieval_index.py",
       "risk": "medium",
-      "sha256": "904062b91242755eb9b9ee5932ad798d9f4d8ea0a38edf83600e9607c72072e8"
+      "sha256": "e12cde40a7f0e3f563b441808e7d480d56a0c2606366884a933bac1d4a164e9c"
     },
     {
       "audit": {

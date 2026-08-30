@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import array
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import datetime
 import hashlib
@@ -96,6 +96,42 @@ def _write_bytes(path: Path, content: bytes) -> None:
         stream.write(content)
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def _estimated_input_tokens(text: str) -> int:
+    """Match the direct embedding adapter's conservative request estimate."""
+
+    return max(1, math.ceil(len(text) / 3))
+
+
+def _bounded_embedding_batches(
+    chunks: Sequence[DocumentChunk],
+    *,
+    maximum_items: int,
+    maximum_tokens: int,
+) -> Iterator[tuple[int, list[DocumentChunk]]]:
+    """Yield stable batches bounded by both provider items and estimated tokens."""
+
+    start = 0
+    batch: list[DocumentChunk] = []
+    tokens = 0
+    for chunk in chunks:
+        chunk_tokens = _estimated_input_tokens(retrieval_text(chunk))
+        if chunk_tokens > maximum_tokens:
+            raise RetrievalIndexBindingError(
+                "one retrieval chunk exceeds the embedding request token limit"
+            )
+        if batch and (
+            len(batch) >= maximum_items or tokens + chunk_tokens > maximum_tokens
+        ):
+            yield start, batch
+            start += len(batch)
+            batch = []
+            tokens = 0
+        batch.append(chunk)
+        tokens += chunk_tokens
+    if batch:
+        yield start, batch
 
 
 class ApiRetrievalIndexBindingV2(BaseModel):
@@ -246,10 +282,13 @@ class StreamingRetrievalIndexMaterializerV2:
         )
         started = time.perf_counter()
         try:
-            for batch_index, start in enumerate(
-                range(0, len(ordered), binding.embedding_batch_size)
+            for batch_index, (start, batch) in enumerate(
+                _bounded_embedding_batches(
+                    ordered,
+                    maximum_items=binding.embedding_batch_size,
+                    maximum_tokens=binding.embedding_request_token_limit,
+                )
             ):
-                batch = ordered[start : start + binding.embedding_batch_size]
                 if self._batch_complete(
                     connection,
                     batch_index=batch_index,

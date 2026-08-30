@@ -49,6 +49,16 @@ only external-model and method-evaluation execution for this instrument under
 data, product execution, 500+100, and sealed 10,000+1,000 execution remain
 unauthorized.
 
+AFQC-098 records a recoverable first-execution interruption after six successful
+small-embedding batches. The ledger contains 384 vectors, 158,555 reported
+input tokens, and USD 0.0031711; no rankings, hidden gold, result, reranking,
+product, private, or final data was opened. The seventh local materializer batch
+exceeded the stricter frozen 50,000-token request cap and was rejected before
+that request was sent. The harness correction partitions source batches by both
+the unchanged 64-item and 50,000-token limits. It changes no source, case,
+model, method, prompt, gold, gate, or budget and permits an atomic resume from
+the six durable batches.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

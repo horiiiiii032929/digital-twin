@@ -36,7 +36,12 @@ def _chunks(count: int = 5) -> list[DocumentChunk]:
     ]
 
 
-def _binding(chunks: list[DocumentChunk], *, batch_size: int = 2):
+def _binding(
+    chunks: list[DocumentChunk],
+    *,
+    batch_size: int = 2,
+    request_token_limit: int = 50_000,
+):
     return ApiRetrievalIndexBindingV2(
         instrument_id="api-first-retrieval-selection-001",
         course_id="course-a",
@@ -50,7 +55,7 @@ def _binding(chunks: list[DocumentChunk], *, batch_size: int = 2):
         embedding_model="text-embedding-3-small",
         embedding_dimensions=DIMENSION,
         embedding_batch_size=batch_size,
-        embedding_request_token_limit=50_000,
+        embedding_request_token_limit=request_token_limit,
         input_price_usd_per_million=0.02,
         metadata_verified_at=datetime(2026, 8, 30, tzinfo=UTC),
         bm25_k1=1.2,
@@ -146,6 +151,24 @@ def test_streamed_materialization_resumes_after_completed_batch(tmp_path: Path):
 
     assert resumed.calls == 2
     assert manifest.materialization["batch_count"] == 3
+
+
+def test_streamed_materialization_splits_batches_by_token_limit(tmp_path: Path):
+    chunks = _chunks(4)
+    chunks = [
+        chunk.model_copy(update={"text": "x" * 30})
+        for chunk in chunks
+    ]
+    binding = _binding(chunks, batch_size=4, request_token_limit=15)
+    store = StreamingRetrievalIndexMaterializerV2(tmp_path / "indexes")
+    embedder = FakeApiEmbedder()
+    embedder.batch_size = 4
+    embedder.request_token_limit = 15
+
+    manifest = store.materialize(binding, chunks, embedder)
+
+    assert embedder.calls == 4
+    assert manifest.materialization["batch_count"] == 4
 
 
 def test_streamed_materialization_rejects_resume_binding_drift(tmp_path: Path):
