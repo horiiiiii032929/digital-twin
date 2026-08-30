@@ -20,6 +20,18 @@ def test_validate_binds_one_finite_nonhuman_stage() -> None:
     assert result["human_participants"] == 0
 
 
+def test_attempt_002_uses_a_fresh_binding_and_exclusive_paths() -> None:
+    try:
+        runner._select_attempt("002")  # noqa: SLF001
+        result = runner.validate()
+        assert result["stage_id"].endswith("-002")
+        assert runner.BINDING_ID.endswith("-002")
+        assert runner.LEDGER_PATH.name.endswith("-002.sqlite3")
+        assert runner.RESULT_PATH.name.endswith("-002.json")
+    finally:
+        runner._select_attempt("001")  # noqa: SLF001
+
+
 def test_parser_accepts_reordered_complete_id_set() -> None:
     content = {
         "items": [

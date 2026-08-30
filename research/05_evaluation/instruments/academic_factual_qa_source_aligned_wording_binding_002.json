@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "binding_id": "academic-factual-qa-source-aligned-wording-binding-002",
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "status": "frozen-authorized-by-program-harness-correction",
+  "verified_at": "2026-08-30T16:33:47+08:00",
+  "maximum_age_hours_for_execution": 24,
+  "data_boundary": "pinned-public-open-educational-development-inputs-only",
+  "routing_policy": "direct-openai-responses-api-only-no-router-no-fallback",
+  "review_independence_disclosure": "separate-openai-model-configurations-and-codex-audit-are-correlated-agent-review-not-independent-human-ground-truth",
+  "correction_from": "academic-factual-qa-source-aligned-wording-001",
+  "correction_scope": "increase-provider-output-reservation-only-after-attempt-001-returned-incomplete-at-23rd-author-batch",
+  "providers": {
+    "source-visible-question-author": {
+      "binding_id": "source-aligned-openai-gpt-5.4-nano-author-002",
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "first_party_endpoint": true,
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "provider_model": "gpt-5.4-nano-2026-03-17",
+      "documented_revision": "gpt-5.4-nano-2026-03-17",
+      "max_output_tokens": 10000,
+      "reasoning_effort": "low",
+      "timeout_seconds": 120,
+      "maximum_transport_retries": 1,
+      "pricing_usd_per_million_input_tokens": 0.2,
+      "pricing_usd_per_million_output_tokens": 1.25,
+      "model_source": "https://developers.openai.com/api/docs/models/gpt-5.4-nano",
+      "request_store": false
+    },
+    "target-blind-answer-reviewer": {
+      "binding_id": "source-aligned-openai-gpt-5.6-terra-reviewer-002",
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "first_party_endpoint": true,
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "provider_model": "gpt-5.6-terra",
+      "documented_revision": "gpt-5.6-terra",
+      "max_output_tokens": 12000,
+      "reasoning_effort": "low",
+      "timeout_seconds": 120,
+      "maximum_transport_retries": 1,
+      "pricing_usd_per_million_input_tokens": 2.0,
+      "pricing_usd_per_million_output_tokens": 12.0,
+      "model_source": "https://developers.openai.com/api/docs/guides/latest-model",
+      "request_store": false
+    }
+  },
+  "operational_bounds": {
+    "clusters_per_batch": 4,
+    "logical_call_count": 50,
+    "maximum_transport_retries_total": 2,
+    "maximum_cost_usd": 4.0,
+    "product_calls": 0,
+    "final_split_opened": false
+  },
+  "retention": {
+    "source": "https://developers.openai.com/api/docs/guides/your-data",
+    "training_default": "api-data-not-used-for-training-unless-opted-in",
+    "responses_application_state": "store-false",
+    "private_data_authorized": false
+  },
+  "content_sha256": "c0042e8165b42aea4b83cb9061953bf9b39cf8cb38b5927c4e36ec6cc6517d4f"
+}

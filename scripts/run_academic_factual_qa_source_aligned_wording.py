@@ -51,6 +51,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 
 PROGRAM_ID = "course-digital-twin-nonhuman-evaluation-program-002"
+ATTEMPT_SUFFIXES = ("001", "002")
 STAGE_ID = "academic-factual-qa-source-aligned-wording-001"
 BINDING_ID = "academic-factual-qa-source-aligned-wording-binding-001"
 AUTHOR_ROLE = "source-visible-question-author"
@@ -75,6 +76,22 @@ EXPECTED_MODELS = {
 
 class SourceAlignedWordingError(RuntimeError):
     """Raised when the bounded wording stage is not reproducible."""
+
+
+def _select_attempt(suffix: str) -> None:
+    """Bind one immutable attempt without changing its cases, prompts, or gates."""
+
+    if suffix not in ATTEMPT_SUFFIXES:
+        raise SourceAlignedWordingError(f"unknown source-aligned wording attempt: {suffix}")
+    global STAGE_ID, BINDING_ID, BINDING_PATH, OUTPUT_CASES_PATH, RESULT_PATH, LEDGER_PATH
+    STAGE_ID = f"academic-factual-qa-source-aligned-wording-{suffix}"
+    BINDING_ID = f"academic-factual-qa-source-aligned-wording-binding-{suffix}"
+    BINDING_PATH = INSTRUMENT_ROOT / (
+        f"academic_factual_qa_source_aligned_wording_binding_{suffix}.json"
+    )
+    OUTPUT_CASES_PATH = DATASET_ROOT / f"{STAGE_ID}-cases.json"
+    RESULT_PATH = RECORD_ROOT / f"{STAGE_ID}.json"
+    LEDGER_PATH = GENERATED_ROOT / f"{STAGE_ID}.sqlite3"
 
 
 def _load_object(path: Path) -> dict[str, Any]:
@@ -711,8 +728,10 @@ def main() -> int:
     mode.add_argument("--preflight", action="store_true")
     mode.add_argument("--preflight-live", action="store_true")
     mode.add_argument("--execute", action="store_true")
+    parser.add_argument("--attempt", choices=ATTEMPT_SUFFIXES, default="001")
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
+    _select_attempt(arguments.attempt)
     if arguments.execute:
         require_bounded_pilot_operation_allowed(
             PROGRAM_ID, "external_model_evaluation"

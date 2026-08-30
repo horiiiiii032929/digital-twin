@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 728
+    "audited": 729
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 178,
+    "evaluation_configuration": 179,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 156
   },
-  "file_count": 728,
+  "file_count": 729,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "dd520ade4f103b1b18cbd39ff5e5d8fe4f5c16f17761ad0d0b9179794eb5d543",
+  "record_sha256": "7d284e1eddaf1f0e78563a528416c5ec18ac9392c4da73a3873e7fd293d04aa0",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "21def72b38ed139af46b9f1283e314469bc682417fcce31ae70da13910f57b64"
+      "sha256": "f5b9993e3c4dcfe4b03dab645984bc9fcafb2ace273233c2d85295ba531f429b"
     },
     {
       "audit": {
@@ -2532,6 +2532,22 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_001.json",
       "risk": "high",
       "sha256": "a80357999f98344925b624a180af4c6fe5d7159635dc697f2c138642fac582d8"
+    },
+    {
+      "audit": {
+        "domain": "source-aligned-wording",
+        "evidence": "Attempt-002 binding review preserves cases, prompts, models, gates, batching, retry cap, and USD 4 ceiling while increasing only output-token reservation after the recorded non-completed provider response.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_002.json",
+      "risk": "high",
+      "sha256": "683cb103c9c1ef48cfd608685f1d9c8319a75db6678a2b800209bc7b836ef06a"
     },
     {
       "audit": {
@@ -6241,15 +6257,20 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:academic-factual-qa-source-aligned-wording",
+        "execute:academic-factual-qa-source-aligned-wording-002",
         "preflight-live:academic-factual-qa-source-aligned-wording",
+        "preflight-live:academic-factual-qa-source-aligned-wording-002",
         "preflight:academic-factual-qa-source-aligned-wording",
         "resume:academic-factual-qa-source-aligned-wording",
+        "resume:academic-factual-qa-source-aligned-wording-002",
         "simulate:academic-factual-qa-source-aligned-wording",
-        "verify:academic-factual-qa-source-aligned-wording"
+        "simulate:academic-factual-qa-source-aligned-wording-002",
+        "verify:academic-factual-qa-source-aligned-wording",
+        "verify:academic-factual-qa-source-aligned-wording-002"
       ],
       "path": "scripts/run_academic_factual_qa_source_aligned_wording.py",
       "risk": "high",
-      "sha256": "018cb7ac83892ce11ecf393834790f29eca408c466f2043c63f781e1bcde06eb"
+      "sha256": "4f5e7878d03b3e8013bf44be5959a64d8095a42fb29a0f3aa7c2272ebb723a33"
     },
     {
       "audit": {
@@ -11873,7 +11894,7 @@
       "package_commands": [],
       "path": "tests/test_run_source_aligned_wording.py",
       "risk": "medium",
-      "sha256": "f800a83ad7836556ea63d29aeed6174f5e581a7227ab48cf04eb632d0c73f841"
+      "sha256": "415a0fd69d7fb6b2b1b1f3243848976d83db129703fbbca0ad086edc3186ecb5"
     },
     {
       "audit": {
@@ -12165,7 +12186,7 @@
     }
   ],
   "risk_counts": {
-    "high": 558,
+    "high": 559,
     "medium": 170
   },
   "schema_version": 1,

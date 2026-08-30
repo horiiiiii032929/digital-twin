@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-source-aligned-wording-001",
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "status": "invalid-execution",
+  "decision": "no-academic-interpretation",
+  "code_revision": "347769e23ca945d0e71dd9aef7fb02d45c08c635",
+  "binding_sha256": "c03bcbcda835dcb85026452e325b0c849096bd7f1d43b1d709f21c95e903f6b5",
+  "failure_stage": "source-visible-question-author-batch-023",
+  "failure_type": "ProviderJsonError",
+  "failure_detail": "OpenAI response status was not completed; no model identity, privacy, gold, or accounting drift was observed before the stop.",
+  "correction_class": "one-permitted-harness-transport-correction",
+  "correction": "Attempt 002 changes only the provider output-token reservation and uses a new exclusive ledger. Cases, prompts, truth, gates, models, batching, and cost ceiling are unchanged.",
+  "provider_accounting": {
+    "provider_calls": 45,
+    "provider_attempts": 45,
+    "completed_calls": 44,
+    "failed_calls": 1,
+    "input_tokens": 117184,
+    "output_tokens": 76006,
+    "reported_cost_usd": 0.73804025,
+    "maximum_latency_ms": 35461.511792003876
+  },
+  "raw_ledger_committed": false,
+  "raw_ledger_location": "reports/generated/academic-factual-qa-source-aligned-wording-001.sqlite3",
+  "private_data_used": false,
+  "human_participants": 0,
+  "final_split_opened": false,
+  "content_sha256": "c768f313b30b6111570207064c4187bc13733ca05655cdfec0ea45c5d0f051d8"
+}

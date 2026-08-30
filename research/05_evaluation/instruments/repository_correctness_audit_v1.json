@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "21def72b38ed139af46b9f1283e314469bc682417fcce31ae70da13910f57b64"
+      "sha256": "f5b9993e3c4dcfe4b03dab645984bc9fcafb2ace273233c2d85295ba531f429b"
     },
     {
       "audit_status": "audited",
@@ -7974,7 +7974,7 @@
       "path": "scripts/run_academic_factual_qa_source_aligned_wording.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-review",
-      "sha256": "018cb7ac83892ce11ecf393834790f29eca408c466f2043c63f781e1bcde06eb"
+      "sha256": "4f5e7878d03b3e8013bf44be5959a64d8095a42fb29a0f3aa7c2272ebb723a33"
     },
     {
       "audit_status": "audited",
@@ -7996,7 +7996,7 @@
       "path": "tests/test_run_source_aligned_wording.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-review",
-      "sha256": "f800a83ad7836556ea63d29aeed6174f5e581a7227ab48cf04eb632d0c73f841"
+      "sha256": "415a0fd69d7fb6b2b1b1f3243848976d83db129703fbbca0ad086edc3186ecb5"
     },
     {
       "audit_status": "audited",
@@ -8008,6 +8008,17 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-review",
       "sha256": "d0c9146b0097ea0fae85f9e510d1979ca0b962e2bb520ace8efc85f768f9ebef"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-aligned-wording",
+      "evidence": "Attempt-002 binding review preserves cases, prompts, models, gates, batching, retry cap, and USD 4 ceiling while increasing only output-token reservation after the recorded non-completed provider response.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_aligned_wording_binding_002.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-review",
+      "sha256": "683cb103c9c1ef48cfd608685f1d9c8319a75db6678a2b800209bc7b836ef06a"
     }
   ],
   "schema_version": 1
