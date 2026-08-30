@@ -750,11 +750,13 @@ async def _product_arm(
     conversation_scope: str = "course",
     forced_failure_case_ids: set[str] | None = None,
     maximum_output_tokens: int = 600,
+    generator_id: str | None = None,
+    model_role: str = MINI_ROLE,
 ) -> tuple[list[EvaluationResponseV1], dict[str, Any], SystemUnderTestManifestV1]:
     output = context.output_root / name
     output.mkdir(parents=True, exist_ok=True)
     revision = _revision(context.root)
-    model = next(row for row in context.manifest.models if row.role == MINI_ROLE)
+    model = next(row for row in context.manifest.models if row.role == model_role)
     manifest = SystemUnderTestManifestV1(
         flow_id=f"{context.manifest.program_id}-{context.stage.value}-{name}",
         adapter_version="v1",
@@ -767,7 +769,7 @@ async def _product_arm(
             if precomputed_retrieval_path is not None
             else "qwen3-hybrid-v1"
         ),
-        generator=(
+        generator=generator_id or (
             "openai-gpt-5.4-mini-question-targeted-atomic-v1"
             if context.manifest.retrieval_embedding is not None
             and name == "candidate"
@@ -820,7 +822,7 @@ async def _product_arm(
             ),
             "source_package_path": str(source_package_path),
             "model_candidate_manifest": {
-                "candidate_id": "finite-program-gpt-5.4-mini",
+                "candidate_id": f"finite-program-{model.model}",
                 "provider_model": model.model,
                 "reasoning_effort": "low",
                 "max_output_tokens": maximum_output_tokens,
@@ -1170,14 +1172,21 @@ def _run_product_stage(
             name="candidate",
             cases=cases,
             evidence_gate=(
-                "question-targeted-atomic-evidence-gate-v1"
-                if context.manifest.retrieval_embedding is not None
-                else "structured-hierarchical-coverage-evidence-gate-v1"
+                context.manifest.product_candidate_evidence_gate
+                or (
+                    "question-targeted-atomic-evidence-gate-v1"
+                    if context.manifest.retrieval_embedding is not None
+                    else "structured-hierarchical-coverage-evidence-gate-v1"
+                )
             ),
             maximum_cost_usd=candidate_budget,
             precomputed_retrieval_path=rankings_path,
             source_package_path=source_package_path,
             maximum_output_tokens=400,
+            generator_id=context.manifest.product_candidate_generator,
+            model_role=(
+                context.manifest.product_candidate_model_role or MINI_ROLE
+            ),
         )
     )
     control_responses, control_provider, control_manifest = asyncio.run(

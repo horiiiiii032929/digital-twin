@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 764
+    "audited": 766
   },
   "category_counts": {
     "active_frontend": 69,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 194,
+    "evaluation_configuration": 195,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 165
+    "verification": 166
   },
-  "file_count": 764,
+  "file_count": 766,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "242255f80d620313337c7b36c6a385c4b2b78196b53f8a8e69b6ef8fe47b32b8",
+  "record_sha256": "d403b6543c7e6115e3e6b14afd307ceabd04ddfd49c1d0227a9b2b4d71b3a55d",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "8df7d062a57d3b02536c2048c183a210823db277c42667fd564da83548754bcb"
+      "sha256": "1c286ba1caa3ce2765cdbd15a1caa86ffbcd88f1b799af4c2f268dc268e862e8"
     },
     {
       "audit": {
@@ -2899,7 +2899,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_005.json",
       "risk": "high",
-      "sha256": "0fe5b0f9e2ffc8e98891827afc0ebb32e25ab440a63ed241cf57f3605d87377a"
+      "sha256": "85212954a8cfab61963d7b42b71814680c7be9d49f441f330a9ef037336d39fc"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Manifest review verifies the code-owned action and exact-span extraction successor, exact source matchability, automatic finite progression, final-set isolation, and the unchanged USD 50 ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_006.json",
+      "risk": "high",
+      "sha256": "ffaa53015316c651479679ee4560a083a78a3843df2c29f83ba5e1ab7c212472"
     },
     {
       "audit": {
@@ -4630,7 +4646,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "4007f068ead54cceb9f8b1b7fd0207d4be0950ed929edcab46703be63cefe465"
+      "sha256": "f888525e0ccaa0a35eba8d82cc6e9c0c584323eedb2790590eb31bb80891170a"
     },
     {
       "audit": {
@@ -5578,7 +5594,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "f83d3ac0a81a032b4e6d1eb11f96e179929e68d3ee74f009c09f9243fa13b573"
+      "sha256": "09c4b973bb3152ffbb1adc740f0e9e562274382cf384d3900400cf9b6547d717"
     },
     {
       "audit": {
@@ -6832,30 +6848,35 @@
         "execute:finite-evaluation-program-003",
         "execute:finite-evaluation-program-004",
         "execute:finite-evaluation-program-005",
+        "execute:finite-evaluation-program-006",
         "preflight:finite-evaluation-program",
         "preflight:finite-evaluation-program-002",
         "preflight:finite-evaluation-program-003",
         "preflight:finite-evaluation-program-004",
         "preflight:finite-evaluation-program-005",
+        "preflight:finite-evaluation-program-006",
         "resume:finite-evaluation-program",
         "resume:finite-evaluation-program-002",
         "resume:finite-evaluation-program-003",
         "resume:finite-evaluation-program-004",
         "resume:finite-evaluation-program-005",
+        "resume:finite-evaluation-program-006",
         "simulate:finite-evaluation-program",
         "smoke:finite-evaluation-program-002",
         "smoke:finite-evaluation-program-003",
         "smoke:finite-evaluation-program-004",
         "smoke:finite-evaluation-program-005",
+        "smoke:finite-evaluation-program-006",
         "verify:finite-evaluation-program",
         "verify:finite-evaluation-program-002",
         "verify:finite-evaluation-program-003",
         "verify:finite-evaluation-program-004",
-        "verify:finite-evaluation-program-005"
+        "verify:finite-evaluation-program-005",
+        "verify:finite-evaluation-program-006"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
-      "sha256": "64a4aee0bc1595a4ed2237017bce099254d460723998ce5835a9d636c8f00e09"
+      "sha256": "5674493df817c65e1b67ce4053fbea19659ea202d6464a27ba18dff7c9c7f71d"
     },
     {
       "audit": {
@@ -8945,7 +8966,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "risk": "high",
-      "sha256": "ae8da1ee013a4e80adaf1c1e43b977c962f4424f420700850ac84e97c5c9bc41"
+      "sha256": "61ad5adf5fe66b968297580709f5c37827e02115294ccae6aafd25cd8fe66b4c"
     },
     {
       "audit": {
@@ -9201,7 +9222,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "a3ebfb17dae9dfebaa93f494a5d251194da0f368bbfaee2f4e3d70a6a3f5c581"
+      "sha256": "67b62b629e3fbd984ee8391bfd9d6b83c48188219180d45810a117e1c030ce8f"
     },
     {
       "audit": {
@@ -9249,7 +9270,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "9a10714a779a122914888acfeb2a3c0a83c63b2aed1d45b4fc90a15b0dfb8fc2"
+      "sha256": "7d8bef079c45bd6f154705394bf1c35a2d9fce5a5b2f81e8b2c8d05153f726c5"
     },
     {
       "audit": {
@@ -9297,7 +9318,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "205e81b0742c3000d646eb3502076cf63b1fa18e0bd0472f9e881c1c47cdf05c"
+      "sha256": "7d00d260f7fd4d95487808308a1af34d99acab52638f4965f70c408a8181f896"
     },
     {
       "audit": {
@@ -9953,7 +9974,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "7d79f553ec9e618b69aed1c67410450b6cee6e1fd974f65d1b94a6f7a0b61911"
+      "sha256": "09acbc4d45bbdae755a471a1eb01ccec97917955bcb517ac5b53e5fca0a28d48"
     },
     {
       "audit": {
@@ -10369,7 +10390,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "fcc66d9d15b976b6608da59c07e5828802cf90a9ad56aae0b0ec20776beaf85d"
+      "sha256": "3a117060c990d24e8951a64b7e1ea012c4e486c02029071e547af2422adc6bad"
     },
     {
       "audit": {
@@ -10545,7 +10566,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "cfcd165749e3e63788402f7a958c819179844071efbe6f52120cdae5ef90feb2"
+      "sha256": "08dd4f022b751f16dce42554ff11da2ea561c3b02d5978a8935993a06d0c684f"
     },
     {
       "audit": {
@@ -11681,7 +11702,23 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_evaluation_program_005.py",
       "risk": "medium",
-      "sha256": "cb7c5c0c4f1145b6713fbb8c8df231bb251ea754459a204c7a1f07d03c476dc0"
+      "sha256": "c6a547a462efac3c0002849d37299503bbd626978dc24f14ae4745c5f5d7c393"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program-verification",
+        "evidence": "Tests prove the successor selects exact GPT-5.4 extraction, code-owned action, an exactly matchable 500-case corpus, an isolated deterministic 10,000-case package, and network-free adapter behavior.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_evaluation_program_006.py",
+      "risk": "medium",
+      "sha256": "117fa8de84eb5473caead0f9b0a470902d91f4c6956c6e4099f24651bedad25c"
     },
     {
       "audit": {
@@ -12805,8 +12842,8 @@
     }
   ],
   "risk_counts": {
-    "high": 585,
-    "medium": 179
+    "high": 586,
+    "medium": 180
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

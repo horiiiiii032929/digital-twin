@@ -31,7 +31,9 @@ from src.digital_twin.generation import (
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
     LiveQuestionTargetedAtomicGroundedGenerator,
+    LiveQuestionTargetedExtractionGroundedGenerator,
     QuestionTargetedAtomicPromptBuilder,
+    QuestionTargetedExtractionPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.action_router import DeterministicActionRouterV1
@@ -69,6 +71,7 @@ from src.digital_twin.tutor_policy import SourceLabel
 from src.digital_twin.model_policy import (
     OPENAI_MODEL_PRICING_USD_PER_MILLION,
     OPENAI_PRODUCT_CANDIDATE_MODELS,
+    OPENAI_SEMANTIC_REVIEW_MODEL,
 )
 
 
@@ -83,8 +86,7 @@ RETRIEVAL_INDEX_ROOT = Path(
     )
 )
 PROFILE_PATH = (
-    ROOT
-    / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+    ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 )
 SOURCE_PLAN_PATH = Path(
     os.getenv(
@@ -97,8 +99,7 @@ HISTORICAL_BINDING_PATH = (
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
 )
 OPENAI_BINDING_PATH = (
-    ROOT
-    / "research/05_evaluation/instruments/"
+    ROOT / "research/05_evaluation/instruments/"
     "academic_factual_qa_open_10000_openai_binding_002.json"
 )
 PRODUCT_MAXIMUM_CALLS = {"candidate": 500, "control": 100}
@@ -181,7 +182,9 @@ def _evaluation_citation(chunk: DocumentChunk) -> EvaluationCitationV1:
         char_start = int(chunk.metadata["char_start"])
         char_end = int(chunk.metadata["char_end"])
     except (KeyError, TypeError, ValueError) as error:
-        raise LiveT0AdapterError("retrieved chunk lacks canonical character lineage") from error
+        raise LiveT0AdapterError(
+            "retrieved chunk lacks canonical character lineage"
+        ) from error
     return EvaluationCitationV1(
         source_artifact_id=chunk.source_artifact_id or chunk.document_id,
         source_version=chunk.source_version,
@@ -270,12 +273,11 @@ class _BoundedProductLlmClient:
             raise LiveT0AdapterError("provider call escaped the active evaluation case")
         if case_id in self.forced_failure_case_ids:
             raise LlmUnavailableError("frozen provider-failure injection")
-        system = "\n\n".join(
-            row.content for row in messages if row.role == "system"
-        ) or "Return only the requested grounded JSON object."
-        prompt = "\n\n".join(
-            row.content for row in messages if row.role != "system"
+        system = (
+            "\n\n".join(row.content for row in messages if row.role == "system")
+            or "Return only the requested grounded JSON object."
         )
+        prompt = "\n\n".join(row.content for row in messages if row.role != "system")
         response = await self.transport.call_with_ledger(
             ledger=self.ledger,
             request_key=f"{self.flow_id}:{case_id}:generator",
@@ -325,19 +327,21 @@ def _generator_transport(
         "openai-gpt-5.4-mini-live-atomic",
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-gpt-5.4-mini-question-targeted-atomic-v1",
+        "openai-gpt-5.4-question-targeted-extraction-v2",
         "openai-responses-live-atomic-v2",
     }:
         candidate = runtime.get("model_candidate_manifest")
         if candidate is None:
             provider_binding = _load(OPENAI_BINDING_PATH)
-            binding = deepcopy(
-                provider_binding["providers"]["high-volume-generator"]
-            )
+            binding = deepcopy(provider_binding["providers"]["high-volume-generator"])
         else:
             if not isinstance(candidate, dict):
                 raise LiveT0AdapterError("model candidate manifest is invalid")
             provider_model = str(candidate.get("provider_model", ""))
-            if provider_model not in OPENAI_PRODUCT_CANDIDATE_MODELS:
+            allowed_models = OPENAI_PRODUCT_CANDIDATE_MODELS
+            if manifest.generator == "openai-gpt-5.4-question-targeted-extraction-v2":
+                allowed_models = (*allowed_models, OPENAI_SEMANTIC_REVIEW_MODEL)
+            if provider_model not in allowed_models:
                 raise LiveT0AdapterError("model candidate is not allowlisted")
             input_price, output_price = OPENAI_MODEL_PRICING_USD_PER_MILLION[
                 provider_model
@@ -360,9 +364,10 @@ def _generator_transport(
                 "pricing_usd_per_million_input_tokens": input_price,
                 "pricing_usd_per_million_output_tokens": output_price,
             }
-        if not isinstance(binding.get("binding_id"), str) or not binding[
-            "binding_id"
-        ].strip():
+        if (
+            not isinstance(binding.get("binding_id"), str)
+            or not binding["binding_id"].strip()
+        ):
             raise LiveT0AdapterError(
                 "OpenAI generator binding lacks a nested binding_id"
             )
@@ -398,7 +403,9 @@ class _RecordingGenerator:
         self.generator = generator
         self.answers_by_case: dict[str, TutorAnswer] = {}
 
-    async def generate(self, question: str, hits: list[RetrievalHit], policy: Any) -> TutorAnswer:
+    async def generate(
+        self, question: str, hits: list[RetrievalHit], policy: Any
+    ) -> TutorAnswer:
         answer = await self.generator.generate(question, hits, policy)
         case_id = _CURRENT_CASE_ID.get()
         if case_id:
@@ -449,10 +456,13 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
 
     def validate_completion(self) -> None:
         snapshot = self.provider_ledger.snapshot()
-        if snapshot.get("status") != "running" or int(
-            snapshot.get("failed_calls", 0)
-        ) > self.maximum_quarantined_failures:
-            raise LiveT0AdapterError("product provider ledger is not valid for completion")
+        if (
+            snapshot.get("status") != "running"
+            or int(snapshot.get("failed_calls", 0)) > self.maximum_quarantined_failures
+        ):
+            raise LiveT0AdapterError(
+                "product provider ledger is not valid for completion"
+            )
 
     def finalize(self) -> None:
         self.provider_ledger.mark_complete()
@@ -549,8 +559,7 @@ def _setup_service(
         os.getenv(
             "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
             str(
-                ROOT
-                / "data/external/huggingface/hub/"
+                ROOT / "data/external/huggingface/hub/"
                 "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
             ),
         )
@@ -676,7 +685,21 @@ def build_live_t0_adapter(
     targeted_generator = manifest.generator == (
         "openai-gpt-5.4-mini-question-targeted-atomic-v1"
     )
-    if targeted_generator or manifest.generator in {
+    extraction_generator = manifest.generator == (
+        "openai-gpt-5.4-question-targeted-extraction-v2"
+    )
+    if extraction_generator:
+        response_schema = ATOMIC_RESPONSE_SCHEMA
+        live_generator = LiveQuestionTargetedExtractionGroundedGenerator
+        prompt_builder = QuestionTargetedExtractionPromptBuilder()
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            ContiguousQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
+    elif targeted_generator or manifest.generator in {
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-responses-live-atomic-v2",
     }:
@@ -732,7 +755,15 @@ def build_live_t0_adapter(
         quarantine_failures=cascade_v2,
         forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
     )
-    if targeted_generator:
+    if extraction_generator:
+        generator_impl = LiveQuestionTargetedExtractionGroundedGenerator(
+            client,
+            prompt_builder=QuestionTargetedExtractionPromptBuilder(),
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV1()
+            ),
+        )
+    elif targeted_generator:
         generator_impl = LiveQuestionTargetedAtomicGroundedGenerator(
             client,
             prompt_builder=QuestionTargetedAtomicPromptBuilder(),
@@ -746,8 +777,7 @@ def build_live_t0_adapter(
     gate = _RecordingGate(
         (
             QuestionTargetedAtomicEvidenceGate()
-            if manifest.evidence_gate
-            == "question-targeted-atomic-evidence-gate-v1"
+            if manifest.evidence_gate == "question-targeted-atomic-evidence-gate-v1"
             else (
                 StructuredHierarchicalCoverageEvidenceGate()
                 if manifest.evidence_gate
@@ -862,10 +892,17 @@ def build_live_t0_adapter(
             raise LiveT0AdapterError("released citation cannot map to one source range")
         return _evaluation_citation(matching[0])
 
-    def resolve_retrieved(case: EvaluationCaseV1, _turn: Any) -> list[EvaluationCitationV1]:
-        return [_evaluation_citation(hit.chunk) for hit in gate.hits_by_case.get(case.case_id, [])]
+    def resolve_retrieved(
+        case: EvaluationCaseV1, _turn: Any
+    ) -> list[EvaluationCitationV1]:
+        return [
+            _evaluation_citation(hit.chunk)
+            for hit in gate.hits_by_case.get(case.case_id, [])
+        ]
 
-    def resolve_claims(case: EvaluationCaseV1, turn: Any) -> list[EvaluationAtomicClaimV1]:
+    def resolve_claims(
+        case: EvaluationCaseV1, turn: Any
+    ) -> list[EvaluationAtomicClaimV1]:
         if turn.tutor_message.action != "answer":
             return []
         answer = recording_generator.answers_by_case.get(case.case_id)
@@ -874,7 +911,10 @@ def build_live_t0_adapter(
         return [
             EvaluationAtomicClaimV1(
                 text=claim.text,
-                citations=[_evaluation_citation(chunks_by_id[hit_id]) for hit_id in claim.evidence_hit_ids],
+                citations=[
+                    _evaluation_citation(chunks_by_id[hit_id])
+                    for hit_id in claim.evidence_hit_ids
+                ],
             )
             for claim in answer.atomic_claims
         ]

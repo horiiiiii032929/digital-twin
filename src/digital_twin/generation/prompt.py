@@ -261,6 +261,41 @@ class QuestionTargetedAtomicPromptBuilder(ExtractiveBoundaryGroundedPromptBuilde
         return package
 
 
+class QuestionTargetedExtractionPromptBuilder(GroundedPromptBuilder):
+    """Extract claims after code has already selected the release action."""
+
+    implementation_id = "question-targeted-extraction-prompt"
+    version = "v7-code-owned-action"
+
+    def build(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+    ) -> PromptPackage:
+        package = super().build(question, hits, policy)
+        claim_count = required_atomic_claim_count(question)
+        package.version = self.version
+        package.messages[0] = LlmMessage(
+            role="system",
+            content=(
+                "You are an evidence-span selector behind code-owned action, policy, "
+                "and citation gates. The application has already decided that this "
+                "request is answerable and supplied the five best approved evidence "
+                "atoms. Do not abstain, clarify, answer from memory, or add prose. "
+                f"Return exactly {claim_count} atomic claim"
+                f"{'s' if claim_count != 1 else ''}. Each claim must be the shortest "
+                "complete contiguous span that directly answers the question, copied "
+                "exactly from one evidence item and citing exactly that evidence ID. "
+                "For a two-claim question, select two distinct requested facts. Claim "
+                "IDs must match claim-[a-z0-9-]+. Return JSON only with exact shape "
+                '{"claims":[{"claim_id":"claim-1","text":"exact evidence '
+                'span","citation_ids":["S1"]}]}'
+            ),
+        )
+        return package
+
+
 class BoundedPedagogicalPromptBuilder(GroundedPromptBuilder):
     """T1-only prompt that binds generation to a code-selected tutoring move."""
 

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-005",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001",
+  "corpus_id": "academic-factual-qa-action-router-confirmation-001-atomic",
+  "code_revision": "c268d50b44c48e432474a0d3397a9bdfc6707c68",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "action-router-question-targeted-t0-v1",
+        "version": "program-005",
+        "configuration": {"case_count": 500, "retriever": "bm25-v1", "generator": "gpt-5.4-mini-2026-03-17", "evidence_gate": "question-targeted-atomic-evidence-gate-v1", "final_10000_opened": false}
+      },
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.5175, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.705, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.75, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-precision", "value": 0.5275, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.5275, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.6175, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.6175, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "all-evidence-at-3", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.381981, "unit": "usd", "direction": "lower-is-better", "threshold": 4.1, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "exact-reference-matchability", "passed": true, "evidence": "452/452 references exactly matched the runtime atomic corpus."},
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "Nine severe unsupported releases occurred."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "Gold opened after response persistence; final stages did not execute."}
+      ],
+      "failures_by_category": {"action-routing": 25, "claim-or-citation-selection": 193, "severe-unsupported-release": 9, "operational": 2}
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-t0-control-v1",
+        "version": "program-005",
+        "configuration": {"case_count": 100, "retriever": "bm25-v1", "generator": "gpt-5.4-mini-2026-03-17", "evidence_gate": "any-hit-evidence-gate-v1", "final_10000_opened": false}
+      },
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.5125, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.7375, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 0.9, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-precision", "value": 0.5666666666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.65, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.5854166666666667, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.675, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "all-evidence-at-3", "value": 0.95, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.975, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.1204125, "unit": "usd", "direction": "lower-is-better", "threshold": 0.5, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "exact-reference-matchability", "passed": true, "evidence": "The control used the same exactly matchable corpus."},
+        {"name": "zero-severe-unsupported-releases", "passed": false, "evidence": "One severe unsupported release occurred."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "Gold opened after response persistence; final stages did not execute."}
+      ],
+      "failures_by_category": {"severe-unsupported-release": 1, "operational": 1}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Retrieval passed, but action handling and claim/citation selection failed the actual-product gates. Use one code-owned-action, exact-span successor before opening the sealed final set.",
+    "limitations": ["The development set is now known.", "No independent external human annotation was used.", "The sealed 10,000+1,000 evaluation was not executed."]
+  }
+}

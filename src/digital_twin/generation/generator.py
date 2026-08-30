@@ -587,6 +587,80 @@ class LiveQuestionTargetedAtomicGroundedGenerator(LiveGroundedGenerator):
         )
 
 
+class LiveQuestionTargetedExtractionGroundedGenerator(LiveGroundedGenerator):
+    """Select exact evidence spans after deterministic action/evidence approval."""
+
+    implementation_id = "live-question-targeted-extraction-grounded-generator"
+    version = "v2"
+
+    async def generate(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+    ) -> TutorAnswer:
+        started = self.clock()
+        approved_hits = _approved_hits(hits)
+        decision = self.policy_enforcer.evaluate(question, approved_hits, policy)
+        short_circuit = _policy_answer(
+            decision.action,
+            generator_id=self.implementation_id,
+            started=started,
+            clock=self.clock,
+        )
+        if short_circuit is not None:
+            return short_circuit
+
+        prompt = self.prompt_builder.build(question, approved_hits, policy)
+        try:
+            response = await self.client.chat(
+                prompt.messages,
+                task="grounded_tutor_question_targeted_extraction",
+            )
+        except LlmError as error:
+            return _provider_failure(error, started=started, clock=self.clock)
+
+        try:
+            output = ModelTutorOutputV2.model_validate_json(response.content)
+            if len(output.claims) != required_atomic_claim_count(question):
+                raise ValueError("model returned the wrong targeted claim count")
+            if any(len(claim.citation_ids) != 1 for claim in output.claims):
+                raise ValueError("targeted claims require exactly one citation")
+            citation_ids = list(
+                dict.fromkeys(
+                    citation_id
+                    for claim in output.claims
+                    for citation_id in claim.citation_ids
+                )
+            )
+            citations = self.citation_validator.validate(citation_ids, prompt.evidence)
+            claims = resolve_atomic_claim_lineage(output, prompt.evidence)
+        except (ValidationError, ValueError):
+            return _provider_failure(
+                LlmMalformedResponseError(),
+                started=started,
+                clock=self.clock,
+                provider_model=response.provider_model,
+                usage=response.usage,
+            )
+
+        return TutorAnswer(
+            content=" ".join(claim.text for claim in claims),
+            citations=citations,
+            atomic_claims=claims,
+            trace=_trace(
+                generator_id=self.implementation_id,
+                provider_model=response.provider_model,
+                provider_revision=response.provider_revision,
+                prompt_version=prompt.version,
+                policy_action=PolicyAction.ANSWER,
+                started=started,
+                clock=self.clock,
+                usage=response.usage,
+            ),
+        )
+
+
 def _approved_hits(hits: list[RetrievalHit]) -> list[RetrievalHit]:
     return [hit for hit in hits if hit.chunk.retrieval_allowed]
 
@@ -672,6 +746,19 @@ def _policy_answer(
                 "and I can offer a hint or explain the underlying concept."
             ),
             warnings=["Academic-integrity policy redirected this request."],
+            trace=_trace(
+                generator_id=generator_id,
+                provider_model="not-called",
+                prompt_version="not-built",
+                policy_action=action,
+                started=started,
+                clock=clock,
+            ),
+        )
+    if action == PolicyAction.CLARIFY:
+        return TutorAnswer(
+            content="Which concept or referent do you mean?",
+            warnings=["The request requires clarification before evidence use."],
             trace=_trace(
                 generator_id=generator_id,
                 provider_model="not-called",

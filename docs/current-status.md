@@ -245,6 +245,22 @@ stage progression under the single USD 50 authority, and atomizes overlapping
 final source ranges before a possible 10,000+1,000 run. No prompt, model,
 quality gate, or hidden answer is changed by this correction.
 
+AFQC-117 records program 005 as a valid `completed-refine` result. Retrieval
+passed (95.0% all-evidence@3 and 97.5% Recall@5), but the 500-case T0 candidate
+reached only 51.75% fully grounded success, 70.5% answerable action accuracy,
+and 75.0% boundary accuracy, with nine severe unsupported releases. The paired
+control was safer on boundaries (90.0% versus 70.0%). The sealed 10,000+1,000
+stages remained unopened. Program 005 used 649 calls/batches and USD
+0.85525693; its authority is revoked.
+
+AFQC-118 freezes program 006 as the finite method-level successor under the
+existing program authority. Code owns answer/abstain/clarify/refuse policy,
+including ambiguity clarification; exact GPT-5.4 may return only one or two
+contiguous claims with original citations. It cannot author actions, source
+truth, or citation lineage. This reruns the now-known development checkpoint
+once. A pass automatically opens the untouched 10,000+1,000 confirmation; a
+valid failure terminates the factual branch.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

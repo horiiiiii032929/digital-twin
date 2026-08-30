@@ -24,9 +24,11 @@ from src.digital_twin.generation import (
     LiveExtractiveBoundaryGroundedGenerator,
     LiveGroundedGenerator,
     LiveQuestionTargetedAtomicGroundedGenerator,
+    LiveQuestionTargetedExtractionGroundedGenerator,
     PolicyAction,
     ExtractiveBoundaryGroundedPromptBuilder,
     QuestionTargetedAtomicPromptBuilder,
+    QuestionTargetedExtractionPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
     authoritative_citation_for_chunk,
     citation_matches_chunk,
@@ -672,6 +674,62 @@ async def test_question_targeted_generator_fails_closed_on_extra_claim():
 
     assert answer.trace is not None
     assert answer.trace.policy_action == "safe-provider-failure"
+    assert answer.atomic_claims == []
+
+
+@pytest.mark.asyncio
+async def test_question_targeted_extraction_uses_code_owned_answer_action():
+    response = LlmResponse(
+        content=json.dumps(
+            {
+                "claims": [
+                    {
+                        "claim_id": "claim-csrf-session",
+                        "text": "CSRF abuses an authenticated browser session.",
+                        "citation_ids": ["S1"],
+                    }
+                ]
+            }
+        ),
+        provider_model="fixture-live/v1",
+    )
+    answer = await LiveQuestionTargetedExtractionGroundedGenerator(
+        RecordingClient(response),
+        prompt_builder=QuestionTargetedExtractionPromptBuilder(),
+        policy_enforcer=DeterministicPolicyEnforcer(
+            action_router=DeterministicActionRouterV1()
+        ),
+    ).generate(
+        "What does CSRF abuse?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "answer"
+    assert [claim.text for claim in answer.atomic_claims] == [
+        "CSRF abuses an authenticated browser session."
+    ]
+
+
+@pytest.mark.asyncio
+async def test_question_targeted_extraction_short_circuits_ambiguity():
+    client = RecordingClient(live_response())
+    answer = await LiveQuestionTargetedExtractionGroundedGenerator(
+        client,
+        prompt_builder=QuestionTargetedExtractionPromptBuilder(),
+        policy_enforcer=DeterministicPolicyEnforcer(
+            action_router=DeterministicActionRouterV1()
+        ),
+    ).generate(
+        'After the discussion, what does "it" do next?',
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert client.calls == []
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "clarify"
     assert answer.atomic_claims == []
 
 

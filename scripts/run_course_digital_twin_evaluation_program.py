@@ -50,8 +50,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 
 DEFAULT_INSTRUMENT_PATH = ROOT / (
-    "research/05_evaluation/instruments/"
-    "course_digital_twin_evaluation_program_001.json"
+    "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json"
 )
 PROGRAM_LEDGER_NAME = "program-ledger.sqlite3"
 EXPECTED_MODELS = {
@@ -160,9 +159,7 @@ def validate(
         chunks_by_course, _ = _chunks_by_course(development_source_path)
         matchability = validate_exact_reference_matchability(
             gold=[EvaluationGoldV1.model_validate(row) for row in gold["gold"]],
-            chunks=[
-                chunk for rows in chunks_by_course.values() for chunk in rows
-            ],
+            chunks=[chunk for rows in chunks_by_course.values() for chunk in rows],
         )
     except (FiniteRetrievalEvaluationError, OSError, ValueError) as error:
         raise ProgramError(
@@ -191,11 +188,7 @@ def validate(
     if not isinstance(clusters, list):
         raise ProgramError("source plan clusters are unavailable")
     expected_source_hash = canonical_json_sha256(
-        {
-            name: value
-            for name, value in source_plan.items()
-            if name != "content_sha256"
-        }
+        {name: value for name, value in source_plan.items() if name != "content_sha256"}
     )
     if (
         source_plan.get("content_sha256") != expected_source_hash
@@ -218,7 +211,8 @@ def validate(
             or ".." in source_path.parts
             or repository_url.startswith("https://github.com/") is False
             or row.get("license_spdx") not in allowed_licenses
-            or row.get("source_modality") not in {
+            or row.get("source_modality")
+            not in {
                 "text",
                 "structured-code",
                 "structured-equation",
@@ -232,10 +226,7 @@ def validate(
             raise ProgramError("source plan contains an invalid source range")
         key = (str(row.get("course_id", "")), str(source_path))
         candidate = (start, end)
-        if any(
-            max(start, left) < min(end, right)
-            for left, right in ranges[key]
-        ):
+        if any(max(start, left) < min(end, right) for left, right in ranges[key]):
             raise ProgramError("source plan source ranges overlap")
         ranges[key].append(candidate)
     if max(Counter(row["source_family_id"] for row in clusters).values()) > 5:
@@ -259,9 +250,7 @@ def validate(
         "development_required_reference_count": matchability[
             "required_reference_count"
         ],
-        "development_missing_reference_count": matchability[
-            "missing_reference_count"
-        ],
+        "development_missing_reference_count": matchability["missing_reference_count"],
         "final_cluster_count": 2_000,
         "final_case_target": 10_000,
         "visual_asset_count": 30,
@@ -314,13 +303,20 @@ def smoke(
         str(row["case_id"]): EvaluationGoldV1.model_validate(row)
         for row in hidden["gold"]
     }
-    source_path = ROOT / (
-        manifest.development_source_path or manifest.source_plan_path
-    )
-    chunks_by_course, _ = _chunks_by_course(source_path)
-    ranked_ids = [
-        row.id for row in chunks_by_course[case.course_id][:5]
+    source_path = ROOT / (manifest.development_source_path or manifest.source_plan_path)
+    chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
+    gold = gold_by_id[case.case_id]
+    required_ids = [
+        reference.region_id
+        for claim in gold.claims
+        for reference in claim.evidence_refs
+        if reference.region_id in chunks_by_id
     ]
+    ranked_ids = list(
+        dict.fromkeys(
+            required_ids + [row.id for row in chunks_by_course[case.course_id][:5]]
+        )
+    )[:5]
     if not ranked_ids:
         raise ProgramError("adapter smoke corpus is empty")
 
@@ -340,7 +336,18 @@ def smoke(
                             {
                                 "type": "output_text",
                                 "text": json.dumps(
-                                    {"action": "abstain", "claims": []}
+                                    {
+                                        "claims": [
+                                            {
+                                                "claim_id": "claim-1",
+                                                "text": gold.canonical_answer,
+                                                "citation_ids": [required_ids[0]],
+                                            }
+                                        ]
+                                    }
+                                    if manifest.product_candidate_generator
+                                    == "openai-gpt-5.4-question-targeted-extraction-v2"
+                                    else {"action": "abstain", "claims": []}
                                 ),
                             }
                         ],
@@ -367,8 +374,11 @@ def smoke(
             json.dumps(rankings, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        mini = next(
-            row for row in manifest.models if row.role == "product-answer-generator"
+        product_model = next(
+            row
+            for row in manifest.models
+            if row.role
+            == (manifest.product_candidate_model_role or "product-answer-generator")
         )
         system = SystemUnderTestManifestV1(
             flow_id=f"{manifest.program_id}-adapter-smoke",
@@ -376,10 +386,16 @@ def smoke(
             code_revision=_git_revision(),
             profile_sha256=file_sha256(PROFILE_PATH),
             retriever="selected-api-program-retrieval-v2",
-            generator="openai-gpt-5.4-mini-question-targeted-atomic-v1",
+            generator=(
+                manifest.product_candidate_generator
+                or "openai-gpt-5.4-mini-question-targeted-atomic-v1"
+            ),
             policy="structured-professor-policy-v1",
-            evidence_gate="question-targeted-atomic-evidence-gate-v1",
-            model_bindings={"product-generator": mini.model},
+            evidence_gate=(
+                manifest.product_candidate_evidence_gate
+                or "question-targeted-atomic-evidence-gate-v1"
+            ),
+            model_bindings={"product-generator": product_model.model},
             known_benchmark=False,
         )
         rows_hash = canonical_json_sha256([case.model_dump(mode="json")])
@@ -407,8 +423,8 @@ def smoke(
                         "precomputed_retrieval_path": str(ranking_path),
                         "source_package_path": str(source_path),
                         "model_candidate_manifest": {
-                            "candidate_id": "finite-program-smoke-mini",
-                            "provider_model": mini.model,
+                            "candidate_id": "finite-program-smoke-product",
+                            "provider_model": product_model.model,
                             "reasoning_effort": "low",
                             "max_output_tokens": 600,
                         },
@@ -473,7 +489,9 @@ def preflight(
         technical.append("projected-p99-cost-exceeds-global-budget")
     for stage in manifest.stages:
         if stage.projected_p99_cost_usd > stage.budget_usd:
-            technical.append(f"projected-p99-cost-exceeds-stage-budget:{stage.name.value}")
+            technical.append(
+                f"projected-p99-cost-exceeds-stage-budget:{stage.name.value}"
+            )
     try:
         age = manifest.metadata_age_hours(now=datetime.now(UTC))
     except ProgramError as error:
@@ -490,8 +508,7 @@ def preflight(
             os.getenv(
                 "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
                 str(
-                    ROOT
-                    / "data/external/huggingface/hub/"
+                    ROOT / "data/external/huggingface/hub/"
                     "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
                 ),
             )
@@ -533,7 +550,11 @@ def preflight(
     if technical:
         status = "blocked-not-ready"
     elif authority:
-        status = "blocked-not-authorized" if require_authorized else "ready-pending-authorization"
+        status = (
+            "blocked-not-authorized"
+            if require_authorized
+            else "ready-pending-authorization"
+        )
     return {
         **result,
         "status": status,
@@ -553,19 +574,40 @@ def _simulation_executors(manifest, scenario: str):
 
     def execute(context):
         calls[context.stage] = calls.get(context.stage, 0) + 1
-        if scenario == "second-invalid" and context.stage == ProgramStageName.RETRIEVAL_DECISION:
+        if (
+            scenario == "second-invalid"
+            and context.stage == ProgramStageName.RETRIEVAL_DECISION
+        ):
             status = ProgramStageStatus.INVALID_EXECUTION
-        elif scenario == "retrieval-quality-failure" and context.stage == ProgramStageName.RETRIEVAL_DECISION:
+        elif (
+            scenario == "retrieval-quality-failure"
+            and context.stage == ProgramStageName.RETRIEVAL_DECISION
+        ):
             status = ProgramStageStatus.COMPLETED_REFINE
-        elif scenario == "product-quality-failure" and context.stage == ProgramStageName.PRODUCT_DEVELOPMENT:
+        elif (
+            scenario == "product-quality-failure"
+            and context.stage == ProgramStageName.PRODUCT_DEVELOPMENT
+        ):
             status = ProgramStageStatus.COMPLETED_REFINE
-        elif scenario == "interrupted-resume" and context.stage == ProgramStageName.PRODUCT_DEVELOPMENT and calls[context.stage] == 1:
+        elif (
+            scenario == "interrupted-resume"
+            and context.stage == ProgramStageName.PRODUCT_DEVELOPMENT
+            and calls[context.stage] == 1
+        ):
             status = ProgramStageStatus.INVALID_EXECUTION
-        elif context.stage in {ProgramStageName.TRUE_VISUAL, ProgramStageName.SYNTHETIC_PROFILE}:
+        elif context.stage in {
+            ProgramStageName.TRUE_VISUAL,
+            ProgramStageName.SYNTHETIC_PROFILE,
+        }:
             status = ProgramStageStatus.COMPLETED_GO_DEEPER
         else:
             status = ProgramStageStatus.COMPLETED_KEEP
-        cost = 51.0 if scenario == "budget-stop" and context.stage == ProgramStageName.RETRIEVAL_DECISION else 0.0
+        cost = (
+            51.0
+            if scenario == "budget-stop"
+            and context.stage == ProgramStageName.RETRIEVAL_DECISION
+            else 0.0
+        )
         return build_stage_result(
             manifest=manifest,
             stage=context.stage,
@@ -627,7 +669,10 @@ def execute(
             for row in readiness["technical_blockers"]
             if not row.startswith("exclusive-program-output-used")
         ]
-        if not readiness["technical_blockers"] and not readiness["authorization_blockers"]:
+        if (
+            not readiness["technical_blockers"]
+            and not readiness["authorization_blockers"]
+        ):
             readiness["status"] = "ready"
     if readiness["status"] != "ready":
         raise ProgramError(f"program preflight blocked: {readiness['status']}")
@@ -682,9 +727,7 @@ def _arguments() -> argparse.Namespace:
 def main() -> int:
     args = _arguments()
     manifest = load_program_manifest(args.instrument)
-    output_root = args.output_root or (
-        ROOT / "reports/generated" / manifest.program_id
-    )
+    output_root = args.output_root or (ROOT / "reports/generated" / manifest.program_id)
     if args.execute:
         require_bounded_pilot_operation_allowed(manifest.program_id)
     load_dotenv(ROOT / ".env", override=False)

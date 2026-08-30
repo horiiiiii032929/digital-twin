@@ -180,6 +180,9 @@ class ProgramManifestV1(BaseModel):
     development_source_path: str | None = None
     development_control_cases_path: str | None = None
     development_control_gold_path: str | None = None
+    product_candidate_generator: str | None = None
+    product_candidate_evidence_gate: str | None = None
+    product_candidate_model_role: str | None = None
     visual_dataset_path: str = Field(min_length=1)
     global_hard_stops: list[str] = Field(min_length=6)
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
