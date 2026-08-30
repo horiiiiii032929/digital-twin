@@ -324,6 +324,21 @@ are retained. The successor is bounded to 80 calls and USD 18; product and
 sealed 10,000+1,000 execution remain closed until it produces a complete
 reference package.
 
+AFQC-125 records attempt 004 as `invalid-execution`, not a quality result. Seven
+direct OpenAI calls completed with exact identities, zero retries, 23,040 input
+tokens, 17,375 output tokens, and USD 0.2426915 before duplicate candidate
+wording triggered an overly strict whole-run parser termination. The duplicate
+is preserved in the ignored ledger. No selected package, product response,
+private source, hidden final gold, or sealed 10,000+1,000 case opened.
+
+AFQC-126 freezes the sole harness-only correction as attempt 005 under the
+existing program-level authority. It changes no source, case, prompt, model,
+gold, quota, call limit, retry rule, or acceptance gate. Duplicate candidates
+are now durably recorded and rejected as candidate-level quality failures while
+the remaining batches continue. A valid pass advances automatically to the
+fresh 500+100 product confirmation; a valid quality failure terminates this
+reference branch without another authoring attempt.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

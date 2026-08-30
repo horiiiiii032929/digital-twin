@@ -150,11 +150,17 @@ ATTEMPT_004 = _attempt(
     question_pattern=r"\?$",
     multi_candidate_answerable=True,
 )
+ATTEMPT_005 = _attempt(
+    suffix="005",
+    question_pattern=r"\?$",
+    multi_candidate_answerable=True,
+)
 ATTEMPTS = {
     ATTEMPT_001.instrument_id: ATTEMPT_001,
     ATTEMPT_002.instrument_id: ATTEMPT_002,
     ATTEMPT_003.instrument_id: ATTEMPT_003,
     ATTEMPT_004.instrument_id: ATTEMPT_004,
+    ATTEMPT_005.instrument_id: ATTEMPT_005,
 }
 
 

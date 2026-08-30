@@ -69,9 +69,7 @@ class ReferenceQuestionCandidateAuthorResponseV1(BaseModel):
 
     @field_validator("questions")
     @classmethod
-    def questions_must_be_distinct_and_interrogative(
-        cls, value: list[str]
-    ) -> list[str]:
+    def questions_must_be_interrogative(cls, value: list[str]) -> list[str]:
         normalized = [" ".join(row.split()) for row in value]
         if any(
             len(row) < 12 or len(row) > 500 or not row.endswith("?")
@@ -80,8 +78,6 @@ class ReferenceQuestionCandidateAuthorResponseV1(BaseModel):
             raise ValueError(
                 "candidate questions must be 12-500 characters and end in ?"
             )
-        if len({normalize_question(row) for row in normalized}) != 3:
-            raise ValueError("candidate questions must be normalized-distinct")
         return normalized
 
 
@@ -327,6 +323,9 @@ def score_multi_candidate_reference_questions(
     for case_id in sorted(answerable_ids):
         expected = gold_by_id[case_id]
         expected_spans = [row.answer_span for row in expected.claims]
+        normalized_counts = Counter(
+            normalize_question(question) for question in author_by_id[case_id].questions
+        )
         for ordinal, question in enumerate(author_by_id[case_id].questions, start=1):
             candidate_id = f"{case_id}-candidate-{ordinal}"
             reviewed = reviewer_by_id[candidate_id]
@@ -337,6 +336,7 @@ def score_multi_candidate_reference_questions(
                 needle=expected.canonical_answer,
                 haystack=question,
             )
+            duplicate_candidate = normalized_counts[normalize_question(question)] > 1
             passed = all(
                 (
                     reviewed.predicted_action == EvaluationAction.ANSWER,
@@ -345,6 +345,7 @@ def score_multi_candidate_reference_questions(
                     reviewed.natural_student_question,
                     not reviewed.gold_hint_leak,
                     not canonical_leak,
+                    not duplicate_candidate,
                 )
             )
             reasons: list[str] = []
@@ -358,6 +359,8 @@ def score_multi_candidate_reference_questions(
                 reasons.append("unnatural")
             if reviewed.gold_hint_leak or canonical_leak:
                 reasons.append("gold-hint-leak")
+            if duplicate_candidate:
+                reasons.append("duplicate-candidate")
             candidate_decisions.append(
                 {
                     "candidate_id": candidate_id,

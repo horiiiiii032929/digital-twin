@@ -399,7 +399,7 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
         ),
-        "academic-factual-qa-open-10000-reference-question-validation-004": (
+        "academic-factual-qa-open-10000-reference-question-validation-005": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),

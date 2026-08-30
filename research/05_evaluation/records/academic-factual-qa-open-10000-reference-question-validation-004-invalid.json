@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-open-10000-reference-question-validation-004-invalid",
+  "component": "prompt",
+  "dataset_id": "academic-factual-qa-open-10000-reference-validation-pool-001",
+  "corpus_id": "four-public-open-educational-source-families-fresh-complete-regions-004",
+  "code_revision": "de282e13c7d8b69e6408c99e5fe2d5cf37be3be1",
+  "candidates": [
+    {
+      "implementation": {
+        "implementation_id": "three-candidate-reference-validation",
+        "version": "reference-question-validation-004-invalid",
+        "configuration": {
+          "planned_calls": 80,
+          "completed_calls": 7,
+          "input_tokens": 23040,
+          "output_tokens": 17375,
+          "reported_cost_usd": 0.2426915,
+          "total_latency_ms": 103864.032,
+          "ignored_ledger_sha256": "086266e9da815fb58e1f470c5268dc9bd42db8c01a8aade97224901e3a5719b2",
+          "private_data_used": false,
+          "final_split_opened": false
+        }
+      },
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "provider-completion-rate",
+          "value": 0.0875,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "selected-case-count",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.2426915,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 18.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-100-cluster-reference-package",
+          "passed": false,
+          "evidence": "Execution stopped after seven calls, before scoring or package selection."
+        },
+        {
+          "name": "operational-validity",
+          "passed": false,
+          "evidence": "A duplicate candidate response triggered a whole-run local parser exception instead of a per-candidate quality rejection."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product, private-data, hidden-gold, or sealed final-set access occurred."
+        }
+      ],
+      "failures_by_category": {
+        "duplicate-candidate-parser-termination": 1,
+        "incomplete-provider-execution": 1
+      }
+    },
+    {
+      "implementation": {
+        "implementation_id": "terminal-no-result-control",
+        "version": "reference-question-validation-004-invalid",
+        "configuration": {
+          "planned_calls": 0,
+          "completed_calls": 0,
+          "reported_cost_usd": 0.0,
+          "private_data_used": false,
+          "final_split_opened": false
+        }
+      },
+      "role": "control",
+      "metrics": [
+        {
+          "name": "provider-completion-rate",
+          "value": 0.0,
+          "unit": "proportion",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "selected-case-count",
+          "value": 0.0,
+          "unit": "cases",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 18.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "complete-100-cluster-reference-package",
+          "passed": false,
+          "evidence": "The no-result control cannot produce a selected reference package."
+        },
+        {
+          "name": "operational-validity",
+          "passed": true,
+          "evidence": "The control made no provider call and therefore encountered no runtime parser path."
+        },
+        {
+          "name": "product-and-final-stage-closure",
+          "passed": true,
+          "evidence": "No product, private-data, hidden-gold, or sealed final-set access occurred."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 004 is operationally invalid because duplicate candidate wording was misclassified as a terminal parser defect. Preserve the run and apply the single harness-only correction in attempt 005.",
+    "limitations": [
+      "No reference-question quality metric is interpretable from the incomplete execution.",
+      "The seven completed calls and USD 0.2426915 remain in cumulative accounting.",
+      "Attempt 005 may change only duplicate-candidate failure handling."
+    ]
+  }
+}

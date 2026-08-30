@@ -18,6 +18,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.factual_qa_reference_questions import (
     ReferenceQuestionAuthorResponseV1,
+    ReferenceQuestionCandidateAuthorResponseV1,
     ReferenceQuestionCandidateReviewResponseV1,
     ReferenceQuestionReviewerResponseV1,
     score_multi_candidate_reference_questions,
@@ -345,3 +346,35 @@ def test_attempt_004_can_select_a_later_blind_validated_candidate() -> None:
             },
             ["case-a", "case-b"],
         )
+
+
+def test_duplicate_candidates_are_recorded_as_quality_failures() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    first = authors[0]
+    duplicate = ReferenceQuestionCandidateAuthorResponseV1(
+        case_id=first.case_id,
+        questions=[first.questions[0], first.questions[0], first.questions[2]],
+    )
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=[duplicate, *authors[1:]],
+        reviewers=reviewers,
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    duplicated = {
+        row["candidate_id"]: row
+        for row in result["decisions"]
+        if row["case_id"] == first.case_id
+    }
+    assert (
+        "duplicate-candidate" in duplicated[f"{first.case_id}-candidate-1"]["reasons"]
+    )
+    assert (
+        "duplicate-candidate" in duplicated[f"{first.case_id}-candidate-2"]["reasons"]
+    )
+    assert result["status"] == "completed-go-deeper"

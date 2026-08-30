@@ -836,7 +836,12 @@ Current utilities:
   004 is the finite method successor: it authors three variants for each
   answerable target, blind-reviews all variants, and keeps deterministic policy
   templates for boundary cases. Use the
-  `*:academic-factual-qa-reference-validation-004` commands; live execution is
+  `*:academic-factual-qa-reference-validation-004` commands. Attempt 004 made
+  seven durable calls before duplicate author candidates triggered an invalid
+  whole-run parser termination. Attempt 005 is the sole harness-only correction:
+  duplicate candidates are recorded as deterministic quality failures while the
+  remaining batches continue unchanged. Use the
+  `*:academic-factual-qa-reference-validation-005` commands; live execution is
   restricted to that exact bounded authorization.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and

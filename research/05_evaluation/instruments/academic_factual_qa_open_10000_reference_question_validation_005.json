@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-004",
+  "instrument_id": "academic-factual-qa-open-10000-reference-question-validation-005",
   "owner_issue": 127,
-  "status": "invalid-execution-authorization-revoked",
-  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-003",
-  "decision_question": "Can three independently worded candidates per answerable target yield 100 complete source-linked clusters while deterministic policy templates own boundary questions?",
+  "status": "frozen-authorized",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-004",
+  "decision_question": "Can three independently worded candidates per answerable target yield 100 complete source-linked clusters while duplicate candidates are recorded as quality failures and deterministic policy templates own boundary questions?",
   "dataset": {
     "source_pool_builder": "scripts/build_academic_factual_qa_open_reference_validation.py",
     "source_pool_sha256": "43c6fa56340bec03bf17a1430ceaa2f4da250c2c60e7d753e730ce784ec7b190",
@@ -22,8 +22,8 @@
     "final_split_opened": false
   },
   "method": {
-    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-004",
-    "method_change": "Generate three distinct candidates for each answerable target and select the first independently recoverable wording; deterministic templates own all boundary probes.",
+    "binding_id": "academic-factual-qa-open-10000-reference-question-binding-005",
+    "method_change": "Generate three candidates for each answerable target, deterministically reject duplicate candidates, and select the first independently recoverable wording; deterministic templates own all boundary probes.",
     "author_role": "source-visible-question-author",
     "reviewer_role": "target-blind-answer-reviewer",
     "author_receives": [
@@ -43,7 +43,7 @@
       "author rationale"
     ],
     "boundary_authority": "Versioned deterministic policy templates for abstain, clarify, and refuse cases; no model may mutate the expected action or empty evidence lineage.",
-    "deterministic_authority": "Exact source-span recovery, action recovery, ambiguity, naturalness, leakage, uniqueness, source lineage, and quota checks are applied locally after every response is durable.",
+    "deterministic_authority": "Exact source-span recovery, action recovery, ambiguity, naturalness, leakage, duplicate candidates, selected-question uniqueness, source lineage, and quota checks are applied locally after every response is durable.",
     "response_identity_policy": "Require exact unique case/candidate ID sets and restore frozen request order locally.",
     "complete_cluster_selection": true,
     "quota_relaxation_allowed": false,
@@ -51,9 +51,13 @@
     "automatic_product_execution_allowed": false
   },
   "prospective_rationale": {
-    "attempt_003_result": "448/800 individual questions passed, but only 8/160 complete clusters survived because one candidate per case was insufficient and model-authored boundary wording was unstable.",
-    "single_method_level_change": true,
-    "prompt_only_retry": false,
+    "attempt_004_result": "Seven provider calls completed before a duplicate candidate list triggered a whole-run parser termination; no source, case, prompt, model, gold, quota, or acceptance gate caused the stop.",
+    "harness_only_correction": "Duplicate candidates remain durable and are rejected as per-candidate quality failures instead of terminating execution.",
+    "method_changed": false,
+    "prompts_changed": false,
+    "cases_changed": false,
+    "gold_changed": false,
+    "gates_changed": false,
     "historical_results_preserved": true
   },
   "operational_bounds": {
@@ -88,11 +92,11 @@
     "completed-go-deeper"
   ],
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "reference_question_validation_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "reference_question_validation_authorized": true,
     "product_development_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "808d28a73f96e528d1d32195ca5a5e67aac146884cbbb4828350e860a6095b08"
+  "content_sha256": "8b77490330329f76b4517cbc69c12e41a95ea43539d67ca175a98d214b54a7f2"
 }
