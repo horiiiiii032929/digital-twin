@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from datetime import UTC
 import hashlib
 import json
 import math
@@ -13,6 +14,12 @@ import subprocess
 from typing import Any
 
 from services.embeddings import Qwen3TextEmbedder
+from services.embeddings import OpenAITextEmbedder
+from services.retrieval_provider import RetrievalUsageLedger
+from scripts.run_academic_factual_qa_api_retrieval_selection import (
+    _CachedQueryEmbedder,
+    _query_vectors,
+)
 from scripts.academic_factual_qa_open_10000_t0_adapter import (
     PROFILE_PATH,
     RETRIEVAL_INDEX_ROOT,
@@ -67,11 +74,14 @@ from src.digital_twin.evaluation.retrieval_materialization import (
     materialize_retrieval_indexes,
 )
 from src.digital_twin.grounding import (
+    ApiRetrievalIndexBindingV2,
     BM25Retriever,
     RetrievalIndexStoreV1,
+    StreamingRetrievalIndexMaterializerV2,
     StructuredHierarchicalRetriever,
     build_retrieval_index_binding,
     should_use_semantic_reranking,
+    source_set_sha256,
 )
 
 
@@ -146,7 +156,7 @@ def _qwen_embedder(selection, *, execution_device: str, execution_dtype: str):
     )
 
 
-def _retrievers(context: StageExecutionContext):
+def _local_retrievers(context: StageExecutionContext):
     chunks_by_course, _ = _chunks_by_course()
     selection = _profile_retriever_selection()
     embedder = _qwen_embedder(
@@ -201,7 +211,118 @@ def _retrievers(context: StageExecutionContext):
         course_id: StructuredHierarchicalRetriever(hybrid[course_id], chunks)
         for course_id, chunks in chunks_by_course.items()
     }
-    return chunks_by_course, bm25, hybrid, hierarchical
+    return chunks_by_course, bm25, hybrid, hierarchical, {
+        "provider_calls": 0,
+        "reported_cost_usd": 0.0,
+        "input_tokens": 0,
+    }
+
+
+def _api_retrievers(
+    context: StageExecutionContext,
+    cases: list[EvaluationCaseV1],
+):
+    embedding = context.manifest.retrieval_embedding
+    if embedding is None:
+        raise FactualStageError("API retrieval binding is unavailable")
+    chunks_by_course, _ = _chunks_by_course()
+    ledger = RetrievalUsageLedger(
+        max_cost_usd=max(0.01, context.remaining_stage_budget_usd),
+        price_per_million_input_tokens_usd=(
+            embedding.input_price_usd_per_million
+        ),
+    )
+    embedder = OpenAITextEmbedder(
+        os.environ[context.manifest.credential_environment_variable],
+        ledger=ledger,
+        model=embedding.model,
+        dimensions=embedding.dimensions,
+        batch_size=embedding.batch_size,
+        request_token_limit=embedding.request_token_limit,
+    )
+    shared_root = context.output_root.parent / "_shared-api-retrieval-index-v2"
+    store = StreamingRetrievalIndexMaterializerV2(shared_root)
+    bindings: dict[str, ApiRetrievalIndexBindingV2] = {}
+    artifact_ids: dict[str, str] = {}
+    for course_id, chunks in sorted(chunks_by_course.items()):
+        binding = ApiRetrievalIndexBindingV2(
+            instrument_id=context.manifest.program_id,
+            course_id=course_id,
+            release_id=f"{course_id}-academic-open-release-api-v2",
+            profile_id="course-digital-twin-api-retrieval-v2",
+            profile_version="v2",
+            chunker_id="source-range-clusterer",
+            chunker_version="v1",
+            source_set_sha256=source_set_sha256(chunks),
+            chunk_count=len(chunks),
+            embedding_model=embedding.model,
+            embedding_dimensions=embedding.dimensions,
+            embedding_batch_size=embedding.batch_size,
+            embedding_request_token_limit=embedding.request_token_limit,
+            input_price_usd_per_million=embedding.input_price_usd_per_million,
+            metadata_verified_at=context.manifest.metadata_verified_at.astimezone(UTC),
+            bm25_k1=1.2,
+            bm25_b=0.75,
+            fusion_rank_constant=60,
+            fusion_candidate_limit=30,
+        )
+        work_path = store.work_root / f"{binding.binding_sha256}.sqlite3"
+        manifest = store.materialize(
+            binding,
+            chunks,
+            embedder,
+            resume=work_path.exists(),
+        )
+        bindings[course_id] = binding
+        artifact_ids[course_id] = manifest.artifact_id
+
+    query_path = context.output_root / "api-query-vectors.sqlite3"
+    vectors, _ = _query_vectors(
+        path=query_path,
+        cases=cases,
+        embedder=embedder,
+        model=embedding.model,
+        dimensions=embedding.dimensions,
+        instrument_sha256=context.manifest.content_sha256,
+        resume=query_path.exists(),
+    )
+    cached = _CachedQueryEmbedder(
+        model=embedding.model,
+        dimensions=embedding.dimensions,
+        vectors=vectors,
+    )
+    bm25 = {
+        course_id: BM25Retriever(chunks)
+        for course_id, chunks in chunks_by_course.items()
+    }
+    hybrid = {
+        course_id: store.load(
+            artifact_ids[course_id],
+            expected_binding=bindings[course_id],
+            embedder=cached,
+        ).retriever
+        for course_id in chunks_by_course
+    }
+    hierarchical = {
+        course_id: StructuredHierarchicalRetriever(hybrid[course_id], chunks)
+        for course_id, chunks in chunks_by_course.items()
+    }
+    usage = ledger.usage_snapshot()
+    return chunks_by_course, bm25, hybrid, hierarchical, {
+        "provider_calls": usage.request_count,
+        "reported_cost_usd": usage.approximate_cost_usd,
+        "input_tokens": usage.input_tokens,
+        "failure_count": usage.failure_count,
+    }
+
+
+def _retrievers(
+    context: StageExecutionContext,
+    cases: list[EvaluationCaseV1],
+):
+    if context.manifest.retrieval_embedding is not None:
+        return _api_retrievers(context, cases)
+    return _local_retrievers(context)
 
 
 def _rerank_schema(expected: dict[str, list[str]]) -> dict[str, Any]:
@@ -379,7 +500,7 @@ def _rank_all_cases(
     for case in cases:
         if method_id == "bm25-v1":
             hits = bm25[case.course_id].retrieve(case.question, limit=5)
-        elif method_id == "qwen3-hybrid-v1":
+        elif method_id in {"qwen3-hybrid-v1", "openai-small-hybrid-v2"}:
             hits = hybrid[case.course_id].retrieve(case.question, limit=5)
         else:
             ranked_ids = nano_rankings.get(case.case_id)
@@ -403,7 +524,9 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
     selected_cases = select_untouched_retrieval_cases(cases)
     selected_ids = {row.case_id for row in selected_cases}
     gold = {row.case_id: row for row in references if row.case_id in selected_ids}
-    _, bm25, hybrid, hierarchical = _retrievers(context)
+    _, bm25, hybrid, hierarchical, embedding_snapshot = _retrievers(
+        context, cases
+    )
     nano_rankings, nano_snapshot = asyncio.run(
         _nano_rankings(
             context=context,
@@ -418,7 +541,14 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
     observations: dict[str, list[dict[str, Any]]] = {}
     for method_id, retrievers, use_hierarchy, rerank in (
         ("bm25-v1", bm25, False, None),
-        ("qwen3-hybrid-v1", hybrid, False, None),
+        (
+            "openai-small-hybrid-v2"
+            if context.manifest.retrieval_embedding is not None
+            else "qwen3-hybrid-v1",
+            hybrid,
+            False,
+            None,
+        ),
         ("hierarchical-deterministic-v1", hierarchical, True, None),
         (
             "hierarchical-nano-rerank-v1",
@@ -489,8 +619,14 @@ def run_retrieval_decision(context: StageExecutionContext) -> StageResultEnvelop
         manifest=context.manifest,
         stage=context.stage,
         status=status,
-        provider_calls=int(nano_snapshot.get("provider_calls", 0)),
-        cost_usd=float(nano_snapshot.get("reported_cost_usd", 0.0)),
+        provider_calls=(
+            int(embedding_snapshot.get("provider_calls", 0))
+            + int(nano_snapshot.get("provider_calls", 0))
+        ),
+        cost_usd=(
+            float(embedding_snapshot.get("reported_cost_usd", 0.0))
+            + float(nano_snapshot.get("reported_cost_usd", 0.0))
+        ),
         severe_release_count=sum(row.severe_release_count for row in methods),
         metrics={
             "selected_method": selected_method,
@@ -572,11 +708,20 @@ async def _product_arm(
         code_revision=revision,
         profile_sha256=file_sha256(PROFILE_PATH),
         retriever=(
-            "selected-program-retrieval-v1"
+            "selected-api-program-retrieval-v2"
+            if context.manifest.retrieval_embedding is not None
+            else "selected-program-retrieval-v1"
             if precomputed_retrieval_path is not None
             else "qwen3-hybrid-v1"
         ),
-        generator="openai-responses-live-atomic-v2",
+        generator=(
+            "openai-gpt-5.4-mini-question-targeted-atomic-v1"
+            if context.manifest.retrieval_embedding is not None
+            and name == "candidate"
+            else "openai-gpt-5.4-mini-live-extractive-boundary"
+            if context.manifest.retrieval_embedding is not None
+            else "openai-responses-live-atomic-v2"
+        ),
         policy="structured-professor-policy-v1",
         evidence_gate=evidence_gate,
         model_bindings={"product-generator": model.model},
@@ -940,12 +1085,40 @@ def _run_product_stage(
     candidate_budget = context.remaining_stage_budget_usd * 0.82
     control_budget = context.remaining_stage_budget_usd * 0.10
     advisory_budget = context.remaining_stage_budget_usd * 0.08
+    ranking_payload = load_json_object(rankings_path)
+    all_rankings = ranking_payload.get("ranked_chunk_ids")
+    if not isinstance(all_rankings, dict):
+        raise FactualStageError("selected retrieval rankings are malformed")
+    control_ids = {row.case_id for row in control_cases}
+    if not control_ids <= set(all_rankings):
+        raise FactualStageError("control cases are absent from selected rankings")
+    control_ranking_payload = {
+        **{
+            key: value
+            for key, value in ranking_payload.items()
+            if key not in {"ranked_chunk_ids", "case_count", "content_sha256"}
+        },
+        "case_count": len(control_ids),
+        "ranked_chunk_ids": {
+            case_id: all_rankings[case_id] for case_id in sorted(control_ids)
+        },
+    }
+    control_ranking_payload["content_sha256"] = canonical_json_sha256(
+        control_ranking_payload
+    )
+    control_rankings_path = context.output_root / "control-rankings.json"
+    atomic_write_json(control_rankings_path, control_ranking_payload)
+
     candidate_responses, candidate_provider, candidate_manifest = asyncio.run(
         _product_arm(
             context=context,
             name="candidate",
             cases=cases,
-            evidence_gate="structured-hierarchical-coverage-evidence-gate-v1",
+            evidence_gate=(
+                "question-targeted-atomic-evidence-gate-v1"
+                if context.manifest.retrieval_embedding is not None
+                else "structured-hierarchical-coverage-evidence-gate-v1"
+            ),
             maximum_cost_usd=candidate_budget,
             precomputed_retrieval_path=rankings_path,
             maximum_output_tokens=400,
@@ -958,7 +1131,7 @@ def _run_product_stage(
             cases=control_cases,
             evidence_gate="any-hit-evidence-gate-v1",
             maximum_cost_usd=control_budget,
-            precomputed_retrieval_path=None,
+            precomputed_retrieval_path=control_rankings_path,
             maximum_output_tokens=400,
         )
     )
@@ -1319,32 +1492,44 @@ def run_final_construction(context: StageExecutionContext) -> StageResultEnvelop
     )
     control_cases, control_gold = paired_control_subset(cases, gold)
     public_payload = package_rows(
-        dataset_id="academic-factual-qa-open-10000-v1-final-program-001",
+        dataset_id=(
+            f"academic-factual-qa-open-10000-v1-final-{context.manifest.program_id}"
+        ),
         split="final",
         rows_key="cases",
         rows=cases,
         source_plan_sha256=diagnostics["source_plan_sha256"],
+        program_id=context.manifest.program_id,
     )
     gold_payload = package_rows(
-        dataset_id="academic-factual-qa-open-10000-v1-final-program-001-gold",
+        dataset_id=(
+            f"academic-factual-qa-open-10000-v1-final-{context.manifest.program_id}-gold"
+        ),
         split="final-hidden",
         rows_key="gold",
         rows=gold,
         source_plan_sha256=diagnostics["source_plan_sha256"],
+        program_id=context.manifest.program_id,
     )
     control_public = package_rows(
-        dataset_id="academic-factual-qa-open-10000-v1-control-program-001",
+        dataset_id=(
+            f"academic-factual-qa-open-10000-v1-control-{context.manifest.program_id}"
+        ),
         split="final-control",
         rows_key="cases",
         rows=control_cases,
         source_plan_sha256=diagnostics["source_plan_sha256"],
+        program_id=context.manifest.program_id,
     )
     control_hidden = package_rows(
-        dataset_id="academic-factual-qa-open-10000-v1-control-program-001-gold",
+        dataset_id=(
+            f"academic-factual-qa-open-10000-v1-control-{context.manifest.program_id}-gold"
+        ),
         split="final-control-hidden",
         rows_key="gold",
         rows=control_gold,
         source_plan_sha256=diagnostics["source_plan_sha256"],
+        program_id=context.manifest.program_id,
     )
     paths = {
         "public_cases": context.output_root / "final-public-cases.json",
@@ -1409,7 +1594,9 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
     control_cases = _read_public_cases(construction / "control-public-cases.json")
     # Final rankings are generated from public questions only. Hidden gold remains
     # unopened by the product response process.
-    _, bm25, hybrid, hierarchical = _retrievers(context)
+    _, bm25, hybrid, hierarchical, embedding_snapshot = _retrievers(
+        context, cases
+    )
     nano_rankings, nano_snapshot = asyncio.run(
         _nano_rankings(
             context=context,
@@ -1470,11 +1657,15 @@ def run_final_product(context: StageExecutionContext) -> StageResultEnvelopeV1:
         final=True,
     )
     payload = product.model_dump(mode="json", exclude={"result_sha256"})
-    payload["provider_calls"] = product.provider_calls + int(
-        nano_snapshot.get("provider_calls", 0)
+    payload["provider_calls"] = (
+        product.provider_calls
+        + int(embedding_snapshot.get("provider_calls", 0))
+        + int(nano_snapshot.get("provider_calls", 0))
     )
-    payload["cost_usd"] = product.cost_usd + float(
-        nano_snapshot.get("reported_cost_usd", 0.0)
+    payload["cost_usd"] = (
+        product.cost_usd
+        + float(embedding_snapshot.get("reported_cost_usd", 0.0))
+        + float(nano_snapshot.get("reported_cost_usd", 0.0))
     )
     payload["artifacts"]["final_rankings"] = str(
         rankings_path.relative_to(context.root)

@@ -30,7 +30,9 @@ class StageResultEnvelopeV1(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     schema_version: Literal["1.0.0"] = "1.0.0"
-    program_id: Literal["course-digital-twin-evaluation-program-001"]
+    program_id: str = Field(
+        pattern=r"^course-digital-twin-evaluation-program-[0-9]{3}$"
+    )
     program_manifest_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     stage: ProgramStageName
     status: ProgramStageStatus

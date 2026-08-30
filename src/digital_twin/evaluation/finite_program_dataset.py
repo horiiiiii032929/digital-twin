@@ -299,12 +299,13 @@ def package_rows(
     rows_key: str,
     rows: Iterable[BaseModelLike],
     source_plan_sha256: str,
+    program_id: str = "course-digital-twin-evaluation-program-001",
 ) -> dict[str, Any]:
     values = [row.model_dump(mode="json") for row in rows]
     payload: dict[str, Any] = {
         "schema_version": 1,
         "dataset_id": dataset_id,
-        "program_id": "course-digital-twin-evaluation-program-001",
+        "program_id": program_id,
         "split": split,
         "case_count": len(values),
         "source_plan_sha256": source_plan_sha256,

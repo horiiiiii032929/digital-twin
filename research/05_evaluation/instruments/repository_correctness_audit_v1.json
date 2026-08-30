@@ -945,7 +945,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "b2adaa15978bdf697ae956bbefbc0c08092f6dea215864789528430f53b54fe2"
+      "sha256": "30d076850bd07f67dfe8baab1070bf1b948af0c61c8f075351949c487b842d15"
     },
     {
       "audit_status": "audited",
@@ -2936,7 +2936,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "cfeb2f7376e57923926f7f3a59c429d674f810850261a4983916e888a1d3e8f6"
+      "sha256": "31ce2f32e79d062e4aa3ebcea089f7ad54a45662dd9486e07f3a2e1c9fb47e98"
     },
     {
       "audit_status": "audited",
@@ -5906,7 +5906,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
+      "sha256": "11af3d64dd1b34171755fa9ac8ddc1da904dcfe585ced338c500ae7146d18e3b"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Focused freeze-policy tests verify AFQC-100 remains revoked, the exact non-human successor receives only its four frozen execution capabilities, and unrelated instruments remain rejected.",
+      "evidence": "Focused freeze-policy tests verify historical authorities remain revoked, program 002 receives only dataset, external-model, and method-evaluation capabilities, and unrelated instruments remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-plus-three-agent-cross-review",
-      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
+      "sha256": "85d1bfc189992a524106da4e4bdbb1e72c42a3e130522353da0b67224ca3e5b0"
     },
     {
       "audit_status": "audited",
@@ -7688,7 +7688,7 @@
       "path": "scripts/course_digital_twin_program_factual.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "86f780ad3710699cb59ffdaf2981dbb368107eb21a69d6aa2532b3712883ab2d"
+      "sha256": "246fec9f74f7395eec7f8b56de026404f3c02b6b6f6b275d599baaed3ce6e0a4"
     },
     {
       "audit_status": "audited",
@@ -7721,7 +7721,7 @@
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "e215a6ef7064828a96f18ad3e3d51a8ef97551d9dbf53e03d0cf25e4674300a5"
+      "sha256": "e35ff3d0a57dae8e37361d6166f3f1ef5b7e219c912dc9ff2a799663e6ad617c"
     },
     {
       "audit_status": "audited",
@@ -7743,7 +7743,7 @@
       "path": "src/digital_twin/evaluation/finite_program.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "2570b287f111178e8b3278b18e0865b6400e5edb4f90cefcdecf91a80baa0d57"
+      "sha256": "755203b4fab205efbec197943d3972383b42cec12585e1f08ae54eff1d7771c8"
     },
     {
       "audit_status": "audited",
@@ -7754,7 +7754,7 @@
       "path": "src/digital_twin/evaluation/finite_program_dataset.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "49b198b224fbe23670c89aa97a9d0a3dcc2661fb641a66c71eef7538cae5b995"
+      "sha256": "e7a5d7c8a718027af6df37a5b0d683e3cf341048842dc2c59ce5d705603b3495"
     },
     {
       "audit_status": "audited",
@@ -7776,7 +7776,7 @@
       "path": "src/digital_twin/evaluation/finite_program_runner.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "20a1ae65a4262151b010dcef41755f42864999e8dcdecb14554e1437701aaad3"
+      "sha256": "860ccfa2158568bf7cb72dc38a3dbc84d841e7fd867091e109b829ead46240c8"
     },
     {
       "audit_status": "audited",
@@ -8338,6 +8338,28 @@
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-action-router-review",
       "sha256": "49350a9f471009ce0b17fe822dacebc705bbb33ef5ab52004429fad4e6dd2f5e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-finite-evaluation-program",
+      "evidence": "Manifest review verifies one program-level authorization, exact OpenAI model and embedding bindings, automatic nine-stage progression, hidden-gold separation, and the retained USD 50 emergency ceiling.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_002.json",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-first-program-review",
+      "sha256": "e20b592f985b78970ac1b9d6a7962138b1bae1b377ca8f5256b29954eb57a839"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "api-first-finite-evaluation-program-verification",
+      "evidence": "Tests validate the exact bounded authority, API-only retrieval binding, reusable successor schema, and a complete fake-provider adapter, response-ledger, hidden-gold scoring round trip with zero network calls.",
+      "findings": [],
+      "path": "tests/test_course_digital_twin_evaluation_program_002.py",
+      "reviewed_at": "2026-08-30",
+      "reviewer": "codex-primary-api-first-program-review",
+      "sha256": "5afa8c19e1c0682acedc2f8a6e8cf258590012bb085b9ceb14413e3f779698dd"
     }
   ],
   "schema_version": 1

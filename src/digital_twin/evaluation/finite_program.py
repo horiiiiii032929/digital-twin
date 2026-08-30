@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 
 PROGRAM_ID = "course-digital-twin-evaluation-program-001"
+PROGRAM_ID_PATTERN = r"^course-digital-twin-evaluation-program-[0-9]{3}$"
 
 
 def canonical_sha256(value: Any) -> str:
@@ -86,6 +87,21 @@ class ProgramModelBindingV1(BaseModel):
     output_price_usd_per_million: float = Field(ge=0, allow_inf_nan=False)
 
 
+class ProgramEmbeddingBindingV1(BaseModel):
+    """Exact hosted embedding contract used by an API-first program."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    provider: Literal["openai"] = "openai"
+    model: str = Field(min_length=1)
+    documented_revision: str = Field(min_length=1)
+    dimensions: int = Field(ge=1)
+    batch_size: int = Field(ge=1, le=64)
+    request_token_limit: int = Field(ge=1, le=300_000)
+    input_price_usd_per_million: float = Field(ge=0, allow_inf_nan=False)
+    exact_identity_required: Literal[True] = True
+
+
 class ProgramStageV1(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -114,7 +130,7 @@ class ProgramManifestV1(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     schema_version: Literal["1.0.0"] = "1.0.0"
-    program_id: Literal[PROGRAM_ID] = PROGRAM_ID
+    program_id: str = Field(default=PROGRAM_ID, pattern=PROGRAM_ID_PATTERN)
     status: Literal[
         "reviewed-pending-authorization",
         "frozen-authorized",
@@ -136,6 +152,7 @@ class ProgramManifestV1(BaseModel):
     private_data_authorized: Literal[False] = False
     retrieval_execution_device: Literal["cpu"] = "cpu"
     retrieval_execution_dtype: Literal["float16"] = "float16"
+    retrieval_embedding: ProgramEmbeddingBindingV1 | None = None
     models: list[ProgramModelBindingV1] = Field(min_length=4, max_length=4)
     stages: list[ProgramStageV1] = Field(min_length=9, max_length=9)
     metadata_verified_at: datetime
@@ -192,7 +209,11 @@ class ProgramManifestV1(BaseModel):
                 raise ValueError("program stage dependency must precede the stage")
             seen.add(stage.name)
         expected_hash = canonical_sha256(
-            self.model_dump(mode="json", exclude={"content_sha256"})
+            self.model_dump(
+                mode="json",
+                exclude={"content_sha256"},
+                exclude_none=True,
+            )
         )
         if self.content_sha256 != expected_hash:
             raise ValueError("program manifest content hash drifted")

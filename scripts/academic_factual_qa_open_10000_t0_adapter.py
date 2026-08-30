@@ -26,11 +26,15 @@ from src.digital_twin.evaluation.provider_json import (
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
+    DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
+    LiveQuestionTargetedAtomicGroundedGenerator,
+    QuestionTargetedAtomicPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
 )
+from src.digital_twin.action_router import DeterministicActionRouterV1
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
@@ -39,6 +43,7 @@ from src.digital_twin.grounding import (
     DocumentChunk,
     LocalNliCrossEncoderBackend,
     NliAtomicClaimVerifier,
+    QuestionTargetedAtomicEvidenceGate,
     RetrievalHit,
     RetrievalIndexStoreV1,
     StructuredHierarchicalCoverageEvidenceGate,
@@ -338,6 +343,12 @@ def _generator_transport(
                 "pricing_usd_per_million_input_tokens": input_price,
                 "pricing_usd_per_million_output_tokens": output_price,
             }
+        if not isinstance(binding.get("binding_id"), str) or not binding[
+            "binding_id"
+        ].strip():
+            raise LiveT0AdapterError(
+                "OpenAI generator binding lacks a nested binding_id"
+            )
         binding.update(
             {
                 "binding_id": f"{binding['binding_id']}-product",
@@ -558,6 +569,70 @@ def _setup_service(
     return repository, service, conversations
 
 
+def _setup_precomputed_service(
+    *,
+    chunks_by_course: dict[str, list[DocumentChunk]],
+    generator: _RecordingGenerator,
+    gate: _RecordingGate,
+    database_path: Path,
+    claim_evidence_validator: Any,
+    tutoring_mode: str,
+    conversation_courses: dict[str, str] | None,
+) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
+    """Build a product service that consumes only precomputed retrieval rows."""
+
+    repository = SQLiteStudentRepository(database_path)
+    profile = _load(PROFILE_PATH)
+    professor_id = "academic-open-professor"
+    student_id = "academic-open-student"
+    repository.save_account(Account(id=professor_id, role=AccountRole.PROFESSOR))
+    repository.save_account(Account(id=student_id, role=AccountRole.STUDENT))
+    for course_id, chunks in chunks_by_course.items():
+        repository.save_course(
+            Course(
+                id=course_id,
+                title=course_id.replace("-", " ").title(),
+                owner_professor_id=professor_id,
+            )
+        )
+        for account_id, role in (
+            (professor_id, MembershipRole.PROFESSOR),
+            (student_id, MembershipRole.STUDENT),
+        ):
+            repository.save_membership(
+                CourseMembership(account_id=account_id, course_id=course_id, role=role)
+            )
+        repository.save_release(
+            DigitalTwinRelease(
+                id=f"{course_id}-academic-open-release",
+                course_id=course_id,
+                profile_id=str(profile["profile_id"]),
+                profile_version=str(profile["profile_version"]),
+                policy_version=1,
+                policy=approved_synthetic_policy(),
+                chunks=chunks,
+                status=StudentReleaseStatus.PUBLISHED,
+                evaluation_status=ReleaseEvaluationStatus.PASSED,
+            )
+        )
+    service = StudentTutoringService(
+        repository,
+        profile_path=PROFILE_PATH,
+        generator=generator,
+        evidence_gate=gate,
+        claim_evidence_validator=claim_evidence_validator,
+        tutoring_mode=tutoring_mode,
+    )
+    requested = conversation_courses or {
+        course_id: course_id for course_id in chunks_by_course
+    }
+    conversations = {
+        key: service.create_conversation(student_id, course_id).id
+        for key, course_id in sorted(requested.items())
+    }
+    return repository, service, conversations
+
+
 def build_live_t0_adapter(
     *,
     manifest: SystemUnderTestManifestV1,
@@ -569,6 +644,7 @@ def build_live_t0_adapter(
     if manifest.evidence_gate in {
         "structured-lexical-coverage-evidence-gate-v1",
         "structured-hierarchical-coverage-evidence-gate-v1",
+        "question-targeted-atomic-evidence-gate-v1",
     }:
         condition = "candidate"
     elif manifest.evidence_gate == "any-hit-evidence-gate-v1":
@@ -580,7 +656,10 @@ def build_live_t0_adapter(
         runtime.get("maximum_cost_usd", PRODUCT_MAXIMUM_COST_USD[condition])
     )
     cascade_v2 = runtime.get("model_candidate_manifest") is not None
-    if manifest.generator in {
+    targeted_generator = manifest.generator == (
+        "openai-gpt-5.4-mini-question-targeted-atomic-v1"
+    )
+    if targeted_generator or manifest.generator in {
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-responses-live-atomic-v2",
     }:
@@ -636,18 +715,28 @@ def build_live_t0_adapter(
         quarantine_failures=cascade_v2,
         forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
     )
-    recording_generator = _RecordingGenerator(
-        live_generator(
+    if targeted_generator:
+        generator_impl = LiveQuestionTargetedAtomicGroundedGenerator(
             client,
-            prompt_builder=prompt_builder,
+            prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV1()
+            ),
         )
-    )
+    else:
+        generator_impl = live_generator(client, prompt_builder=prompt_builder)
+    recording_generator = _RecordingGenerator(generator_impl)
     gate = _RecordingGate(
         (
-            StructuredHierarchicalCoverageEvidenceGate()
+            QuestionTargetedAtomicEvidenceGate()
             if manifest.evidence_gate
-            == "structured-hierarchical-coverage-evidence-gate-v1"
-            else StructuredLexicalCoverageEvidenceGate()
+            == "question-targeted-atomic-evidence-gate-v1"
+            else (
+                StructuredHierarchicalCoverageEvidenceGate()
+                if manifest.evidence_gate
+                == "structured-hierarchical-coverage-evidence-gate-v1"
+                else StructuredLexicalCoverageEvidenceGate()
+            )
         )
         if condition == "candidate"
         else AnyHitEvidenceGate()
@@ -663,25 +752,35 @@ def build_live_t0_adapter(
         if conversation_scope == "cluster"
         else None
     )
-    repository, service, conversations = _setup_service(
-        chunks_by_course=chunks_by_course,
-        generator=recording_generator,
-        gate=gate,
-        database_path=state_path,
-        index_root=RETRIEVAL_INDEX_ROOT,
-        claim_evidence_validator=claim_evidence_validator,
-        tutoring_mode=tutoring_mode,
-        conversation_courses=conversation_courses,
-    )
     precomputed_path_value = runtime.get("precomputed_retrieval_path")
+    if precomputed_path_value is not None:
+        repository, service, conversations = _setup_precomputed_service(
+            chunks_by_course=chunks_by_course,
+            generator=recording_generator,
+            gate=gate,
+            database_path=state_path,
+            claim_evidence_validator=claim_evidence_validator,
+            tutoring_mode=tutoring_mode,
+            conversation_courses=conversation_courses,
+        )
+    else:
+        repository, service, conversations = _setup_service(
+            chunks_by_course=chunks_by_course,
+            generator=recording_generator,
+            gate=gate,
+            database_path=state_path,
+            index_root=RETRIEVAL_INDEX_ROOT,
+            claim_evidence_validator=claim_evidence_validator,
+            tutoring_mode=tutoring_mode,
+            conversation_courses=conversation_courses,
+        )
     if precomputed_path_value is not None:
         precomputed_path = Path(str(precomputed_path_value))
         payload = _load(precomputed_path)
         rankings = payload.get("ranked_chunk_ids")
         if (
             payload.get("schema_version") != 1
-            or payload.get("program_id")
-            != "course-digital-twin-evaluation-program-001"
+            or payload.get("program_id") != runtime["instrument_id"]
             or not isinstance(rankings, dict)
             or payload.get("content_sha256")
             != canonical_json_sha256(
