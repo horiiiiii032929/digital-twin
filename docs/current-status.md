@@ -120,6 +120,17 @@ and sealed 10,000+1,000 stages remain closed while one fresh successor freezes
 unique non-overlapping evidence atoms and confirms deterministic coverage
 selection on new source-disjoint data.
 
+AFQC-105 records that one prospective successor as `completed-keep`. The fresh
+package contains 100 source-family-disjoint clusters, 500 cases, and 300 unique
+non-overlapping authoritative evidence atoms; its public source payload excludes
+reference targets, canonical claims, and gold spans. Unchanged M2 achieved
+96.25% complete evidence@3, 97.25% Evidence Recall@5, 100% boundary accuracy,
+and 23.23 ms p95 latency. The deterministic marginal-coverage selector was
+worse at 94.50% complete evidence@3 and is not selected. The run used 15 direct
+OpenAI embedding calls, zero retries, and USD 0.00057628. M2 over atomic
+evidence is selected for one actual-product 500+100 development checkpoint;
+the sealed 10,000+1,000 execution remains closed until that checkpoint passes.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

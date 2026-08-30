@@ -1,0 +1,164 @@
+{
+  "candidates": [
+    {
+      "failures_by_category": {
+        "boundary-action-error": 0,
+        "incomplete-all-evidence-at-3": 15,
+        "severe-unsupported-release": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Course-scoped immutable indexes returned only current registered atoms.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "Every answer span maps to exactly one non-overlapping authoritative atom.",
+          "name": "unique-atomic-evidence-semantics",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "atomic_authoritative_regions": true,
+          "candidate_pool": 5,
+          "case_count": 500
+        },
+        "implementation_id": "atomic-bm25-openai-small-rrf-v1",
+        "version": "M2"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": true,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.9625
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.9725
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 1.0
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 23.226582998177037
+        }
+      ],
+      "role": "control"
+    },
+    {
+      "failures_by_category": {
+        "boundary-action-error": 0,
+        "incomplete-all-evidence-at-3": 22,
+        "severe-unsupported-release": 0
+      },
+      "hard_gates": [
+        {
+          "evidence": "Observed 0 severe releases.",
+          "name": "zero-severe-unsupported-releases",
+          "passed": true
+        },
+        {
+          "evidence": "Course-scoped immutable indexes returned only current registered atoms.",
+          "name": "source-course-version-isolation",
+          "passed": true
+        },
+        {
+          "evidence": "Every answer span maps to exactly one non-overlapping authoritative atom.",
+          "name": "unique-atomic-evidence-semantics",
+          "passed": true
+        }
+      ],
+      "implementation": {
+        "configuration": {
+          "atomic_authoritative_regions": true,
+          "candidate_pool": 12,
+          "case_count": 500
+        },
+        "implementation_id": "atomic-m2-question-coverage-selector-v1",
+        "version": "M2C"
+      },
+      "metrics": [
+        {
+          "direction": "higher-is-better",
+          "name": "complete-evidence-at-3",
+          "passed": true,
+          "threshold": 0.9,
+          "unit": "rate",
+          "value": 0.945
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "evidence-recall-at-5",
+          "passed": true,
+          "threshold": 0.95,
+          "unit": "rate",
+          "value": 0.9725
+        },
+        {
+          "direction": "higher-is-better",
+          "name": "boundary-accuracy",
+          "passed": true,
+          "threshold": 0.98,
+          "unit": "rate",
+          "value": 1.0
+        },
+        {
+          "direction": "lower-is-better",
+          "name": "retrieval-latency-p95",
+          "passed": true,
+          "threshold": 2000.0,
+          "unit": "milliseconds",
+          "value": 27.770666987635195
+        }
+      ],
+      "role": "candidate"
+    }
+  ],
+  "code_revision": "fa388201be7ad2e9086ccb5661a4b60ca1b81b29",
+  "component": "retriever",
+  "corpus_id": "academic-factual-qa-atomic-m2-public-100-clusters",
+  "dataset_id": "academic-factual-qa-atomic-m2-confirmation-001",
+  "decision": {
+    "limitations": [
+      "This fresh development run evaluates retrieval, not generated product answers.",
+      "The benchmark uses public educational sources and no human participants.",
+      "Final 10,000-case data remains unopened."
+    ],
+    "outcome": "go-deeper",
+    "rationale": "A prospectively scored atomic-evidence method passed and may advance once to actual-product development.",
+    "selected_implementation_id": "atomic-bm25-openai-small-rrf-v1"
+  },
+  "operational_summary": {
+    "hidden_gold_loaded_only_after_rankings_persisted": true,
+    "human_participants": 0,
+    "private_data_used": false,
+    "provider_calls": 15,
+    "rankings_file_sha256": "0dd3664301287523496457022b5dbd558827f36c7475f524d8103ba76b4e394e",
+    "reported_cost_usd": 0.00057628
+  },
+  "run_id": "academic-factual-qa-atomic-m2-confirmation-001",
+  "schema_version": 1
+}
